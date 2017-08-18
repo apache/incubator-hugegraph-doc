@@ -1,0 +1,761 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>3. Load data With HugeLoader · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="hugeclient.html" />
+    
+    
+    <link rel="prev" href="hugestudio.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../download.html">
+            
+                <a href="../download.html">
+            
+                    
+                    Download
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">changelog</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../changelog/hugegraph-0.2-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.2-release-notes.html">
+            
+                    
+                    0.2 Release Notes
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Quick Start</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="hugeserver.html">
+            
+                <a href="hugeserver.html">
+            
+                    
+                    1. Install HugeGraph
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="hugestudio.html">
+            
+                <a href="hugestudio.html">
+            
+                    
+                    2. Query with HugeStudio
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="3.3" data-path="hugeloader.html">
+            
+                <a href="hugeloader.html">
+            
+                    
+                    3. Load data With HugeLoader
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="hugeclient.html">
+            
+                <a href="hugeclient.html">
+            
+                    
+                    4. Develop With HugeClient
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.5" data-path="hugespark.html">
+            
+                <a href="hugespark.html">
+            
+                    
+                    5. Analysis With HugeSpark
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Guides</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../guides/hugegraph-gremlin.html">
+            
+                <a href="../guides/hugegraph-gremlin.html">
+            
+                    
+                    HugeGraph Gremlin
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" >
+            
+                <span>
+            
+                    
+                    HugeGraph Api
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="4.2.1" data-path="../guides/hugeclient-doc.html">
+            
+                <a href="../guides/hugeclient-doc.html">
+            
+                    
+                    Java Client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2.2" data-path="../guides/hugegraph-api.html">
+            
+                <a href="../guides/hugegraph-api.html">
+            
+                    
+                    Restful Api
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Performance</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="../performance/hugegraph-api.html">
+            
+                <a href="../performance/hugegraph-api.html">
+            
+                    
+                    HugeGraph Api
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >3. Load data With HugeLoader</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="hugeloader-quick-start">HugeLoader Quick Start</h1>
+<h1 id="1-hugeloader&#x6982;&#x8FF0;">1. HugeLoader&#x6982;&#x8FF0;</h1>
+<p>HugeLoader &#x662F; Hugegragh &#x7684;&#x4E00;&#x4E2A;&#x6A21;&#x5757;&#xFF0C;&#x8D1F;&#x8D23;&#x5C06;&#x666E;&#x901A;&#x6587;&#x672C;&#x6570;&#x636E;&#x8F6C;&#x5316;&#x4E3A;&#x56FE;&#x5F62;&#x7684;&#x9876;&#x70B9;&#x548C;&#x8FB9;&#x5E76;&#x63D2;&#x5165;&#x56FE;&#x5F62;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x3002;</p>
+<h1 id="2-&#x9879;&#x76EE;&#x4F9D;&#x8D56;">2. &#x9879;&#x76EE;&#x4F9D;&#x8D56;</h1>
+<p>&#x4F7F;&#x7528; HugeLoader &#x9700;&#x8981;&#x4F9D;&#x8D56; Hugegraph Server&#xFF0C;&#x4E0B;&#x8F7D;&#x548C;&#x542F;&#x52A8; Server &#x8BE6;&#x89C1;&#xFF1A;<a href="http://hugegraph.baidu.com/quickstart/hugeserver.html" target="_blank">HugeServer Quick Start</a></p>
+<h1 id="3-&#x83B7;&#x53D6;-hugeloader">3. &#x83B7;&#x53D6; HugeLoader</h1>
+<p>&#x6709;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x53EF;&#x4EE5;&#x83B7;&#x53D6; HugeLoader&#xFF1A;</p>
+<ul>
+<li>&#x4E0B;&#x8F7D;&#x4E8C;&#x8FDB;&#x5236;tar&#x5305;</li>
+<li>&#x4E0B;&#x8F7D;&#x6E90;&#x7801;&#x7F16;&#x8BD1;&#x5B89;&#x88C5;</li>
+</ul>
+<h2 id="31-&#x4E0B;&#x8F7D;&#x4E8C;&#x8FDB;&#x5236;tar&#x5305;">3.1 &#x4E0B;&#x8F7D;&#x4E8C;&#x8FDB;&#x5236;tar&#x5305;</h2>
+<ul>
+<li>&#x4E0B;&#x8F7D;&#x6700;&#x65B0;&#x7248;&#x672C;&#x7684;HugeLoader bin&#x5305;&#xFF1A;</li>
+</ul>
+<pre class="language-"><code>wget http://api.xdata.baidu.com/hdfs/yqns01/hugegraph/hugegraph-loader-bin.tar.gz
+tar zxvf hugegraph-loader-bin.tar.gz
+</code></pre><h2 id="32-&#x4E0B;&#x8F7D;&#x6E90;&#x7801;&#x7F16;&#x8BD1;&#x5B89;&#x88C5;">3.2 &#x4E0B;&#x8F7D;&#x6E90;&#x7801;&#x7F16;&#x8BD1;&#x5B89;&#x88C5;</h2>
+<ul>
+<li>&#x4E0B;&#x8F7D;&#x6700;&#x65B0;&#x7248;&#x672C;&#x7684;HugeLoader &#x6E90;&#x7801;&#x5305;&#xFF1A;</li>
+</ul>
+<pre class="language-"><code>git clone ssh://username@icode.baidu.com:8235/baidu/xbu-data/hugegraph-loader
+</code></pre><ul>
+<li>&#x7F16;&#x8BD1;&#x751F;&#x6210;tar&#x5305;:</li>
+</ul>
+<pre class="language-"><code>cd hugegraph-loader
+mvn package -DskipTests
+</code></pre><h1 id="4&#x4F7F;&#x7528;&#x6D41;&#x7A0B;">4.&#x4F7F;&#x7528;&#x6D41;&#x7A0B;</h1>
+<p>&#x4F7F;&#x7528; HugeLoader &#x7684;&#x57FA;&#x672C;&#x6D41;&#x7A0B;&#x5206;&#x4E3A;&#x4EE5;&#x4E0B;&#x51E0;&#x6B65;&#xFF1A;</p>
+<ul>
+<li>&#x7F16;&#x5199;&#x914D;&#x7F6E;&#x811A;&#x672C;</li>
+<li>&#x51C6;&#x5907;&#x6587;&#x672C;&#x6570;&#x636E;</li>
+<li>&#x6267;&#x884C;&#x5BFC;&#x5165;&#x8FC7;&#x7A0B;</li>
+</ul>
+<h2 id="41-&#x7F16;&#x5199;&#x914D;&#x7F6E;&#x811A;&#x672C;">4.1 &#x7F16;&#x5199;&#x914D;&#x7F6E;&#x811A;&#x672C;</h2>
+<p>&#x914D;&#x7F6E;&#x811A;&#x672C;&#x91C7;&#x7528; groovy &#x8BED;&#x8A00;&#x7F16;&#x5199;&#xFF0C;&#x811A;&#x672C;&#x5B9A;&#x4E49;&#x6570;&#x636E;&#x6587;&#x4EF6;&#x7684;&#x8DEF;&#x5F84;&#xFF0C;&#x6587;&#x4EF6;&#x7684;&#x7C7B;&#x578B;&#xFF0C;&#x4EE5;&#x53CA;&#x9876;&#x70B9;&#x548C;&#x8FB9;&#x7684; label &#x548C; keys&#x3002;</p>
+<h3 id="411-&#x83B7;&#x53D6;&#x6570;&#x636E;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;">4.1.1 &#x83B7;&#x53D6;&#x6570;&#x636E;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;</h3>
+<ul>
+<li>&#x6839;&#x636E; inputpath &#x8FDB;&#x884C;&#x62FC;&#x63A5;</li>
+</ul>
+<pre class="language-"><code>//&#x793A;&#x4F8B;
+inputfileV = inputpath + &apos;/vertices/&apos;
+inputfileE = inputpath + &apos;/edges/&apos;
+</code></pre><blockquote>
+<p>inputpath &#x7684;&#x83B7;&#x53D6;&#xFF1A;</p>
+<ol>
+<li>&#x5982;&#x679C;&#x7528;&#x6237;&#x6267;&#x884C;&#x5BFC;&#x5165;&#x65F6;&#x8F93;&#x5165; -p&#xFF0C;inputpath &#x4E3A;&#x7528;&#x6237;&#x8F93;&#x5165;&#x7684;&#x8DEF;&#x5F84;</li>
+<li>&#x5982;&#x679C;&#x7528;&#x6237;&#x6CA1;&#x6709;&#x8F93;&#x5165;&#xFF0C;inputpath &#x53D6; path&#xFF0C;&#x800C; path &#x9996;&#x5148;&#x6765;&#x81EA;&#x7528;&#x6237;&#x73AF;&#x5883;&#x53D8;&#x91CF; LOADER_HOME&#xFF0C;&#x82E5;&#x65E0;&#x6B64;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x5219;&#x53D6;&#x5F53;&#x524D;&#x5DE5;&#x4F5C;&#x76EE;&#x5F55;</li>
+</ol>
+</blockquote>
+<ul>
+<li>&#x7528;&#x6237;&#x4F7F;&#x7528;&#x7EDD;&#x5BF9;&#x8DEF;&#x5F84;</li>
+</ul>
+<pre class="language-"><code>//&#x793A;&#x4F8B;
+inputfileV = &apos;/Users/lizhigang/mycode/hugegraph-loader/data/JSON/data/vertices/&apos;
+inputfileE = &apos;/Users/lizhigang/mycode/hugegraph-loader/data/JSON/data/edges/&apos;
+</code></pre><h3 id="412-&#x5B9A;&#x4E49;&#x6587;&#x4EF6;&#x7684;&#x7C7B;&#x578B;">4.1.2 &#x5B9A;&#x4E49;&#x6587;&#x4EF6;&#x7684;&#x7C7B;&#x578B;</h3>
+<p>&#x4E0D;&#x540C;&#x7684;&#x6587;&#x4EF6;&#x7C7B;&#x578B;&#xFF0C;&#x8BFB;&#x53D6;&#x6587;&#x4EF6;&#x65F6;&#x7684;&#x8BED;&#x6CD5;&#x4E0D;&#x540C;&#xFF0C;&#x6240;&#x4EE5;&#x8BF7;&#x6309;&#x7167;&#x89C4;&#x8303;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x7C7B;&#x578B;&#x3002;</p>
+<ul>
+<li>JSON</li>
+</ul>
+<pre class="language-"><code>//&#x793A;&#x4F8B;
+authorInput = File.json(inputfileV + &apos;author.json&apos;)
+bookInput = File.json(inputfileV + &apos;book.json&apos;)
+authorBookInput = File.json(inputfileE + &apos;authorBook.json&apos;)
+</code></pre><ul>
+<li>CSV</li>
+</ul>
+<pre class="language-"><code>//&#x793A;&#x4F8B;
+authorInput = File.csv(inputfileV + &quot;author.csv&quot;).delimiter(&apos;|&apos;)
+bookInput = File.csv(inputfileV + &quot;book.csv&quot;).delimiter(&apos;|&apos;)
+authorBookInput = File.csv(inputfileE + &quot;authorBook.csv&quot;).delimiter(&apos;|&apos;)
+</code></pre><blockquote>
+<p>&#x7528;&#x6237;&#x53EF;&#x81EA;&#x884C;&#x5236;&#x5B9A; CSV &#x6587;&#x4EF6;&#x7684;&#x5217;&#x5206;&#x9694;&#x7B26;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;&#x9017;&#x53F7;&#x3002;</p>
+</blockquote>
+<h3 id="413-&#x5B9A;&#x4E49;-label-&#x548C;-keys">4.1.3 &#x5B9A;&#x4E49; label &#x548C; keys</h3>
+<p>&#x914D;&#x7F6E;&#x811A;&#x672C;&#x4E2D;&#x4EC5;&#x9700;&#x8981;&#x4E3A;&#x9876;&#x70B9;&#x548C;&#x8FB9;&#x5B9A;&#x4E49; label &#x548C; keys&#xFF0C;properties &#x53EF;&#x4EE5;&#x4ECE;&#x6570;&#x636E;&#x6587;&#x4EF6;&#x7684;&#x5217;&#x540D;&#x4E2D;&#x83B7;&#x53D6;,&#x76EE;&#x524D;&#x4EC5;&#x652F;&#x6301;&#x5355; key&#x3002;</p>
+<p> <strong>&#x4EE5;&#x4E0B;&#x914D;&#x7F6E;&#x5B9E;&#x9645;&#x662F; groovy &#x8C03;&#x7528; java &#x76F8;&#x5E94;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x8BF7;&#x4E25;&#x683C;&#x6309;&#x7167;&#x793A;&#x4F8B;&#x683C;&#x5F0F;&#x914D;&#x7F6E;.</strong></p>
+<ul>
+<li>&#x914D;&#x7F6E;&#x9876;&#x70B9;&#x7684; label &#x548C; keys</li>
+</ul>
+<pre class="language-"><code>//&#x793A;&#x4F8B;
+load(authorInput).asVertices {
+    label &quot;author&quot;
+    key &quot;name&quot;
+}
+
+load(bookInput).asVertices {
+    label &quot;book&quot;
+    key &quot;name&quot;
+}
+</code></pre><ul>
+<li>&#x914D;&#x7F6E;&#x8FB9;&#x7684; label &#x548C; keys</li>
+</ul>
+<pre class="language-"><code>load(authorBookInput).asEdges {
+    label &quot;authored&quot;
+    //&#x5B9A;&#x4E49;&#x8FB9;&#x7684;&#x8D77;&#x59CB;&#x9876;&#x70B9;
+    outV &quot;aname&quot;, { //&#x6B64;&#x5904;&#x6807;&#x8BC6;&#x53EF;&#x968F;&#x610F;&#x5B9A;&#x4E49;&#xFF0C;&#x4E0E; inV &#x7684;&#x6807;&#x8BC6;&#x533A;&#x5206;&#x5373;&#x53EF;&#xFF0C;&#x4E0D;&#x5165;&#x6570;&#x636E;&#x5E93;
+        label &quot;author&quot;
+        key &quot;aname&quot; //&#x8D77;&#x59CB;&#x9876;&#x70B9;&#x7684; key&#xFF0C;&#x5FC5;&#x987B;&#x4E0E;&#x6570;&#x636E;&#x6587;&#x4EF6;&#x4E2D;&#x4E00;&#x81F4;&#xFF0C;&#x4E14;&#x4E0E; inV &#x4E2D; key &#x76F8;&#x533A;&#x5206;
+    }
+    //&#x5B9A;&#x4E49;&#x8FB9;&#x7684;&#x7EC8;&#x6B62;&#x9876;&#x70B9;
+    inV &quot;bname&quot;, { //&#x6B64;&#x5904;&#x6807;&#x8BC6;&#x53EF;&#x968F;&#x610F;&#x5B9A;&#x4E49;&#xFF0C;&#x4E0E; outV &#x7684;&#x6807;&#x8BC6;&#x533A;&#x5206;&#x5373;&#x53EF;&#xFF0C;&#x4E0D;&#x5165;&#x6570;&#x636E;&#x5E93;
+        label &quot;book&quot;
+        key &quot;bname&quot; //&#x7EC8;&#x6B62;&#x9876;&#x70B9;&#x7684; key&#xFF0C;&#x5FC5;&#x987B;&#x4E0E;&#x6570;&#x636E;&#x6587;&#x4EF6;&#x4E2D;&#x4E00;&#x81F4;&#xFF0C;&#x4E14;&#x4E0E; outV &#x4E2D; key &#x76F8;&#x533A;&#x5206;
+    }
+}
+</code></pre><h2 id="42-&#x51C6;&#x5907;&#x6587;&#x672C;&#x6570;&#x636E;">4.2 &#x51C6;&#x5907;&#x6587;&#x672C;&#x6570;&#x636E;</h2>
+<p>&#x76EE;&#x524D;&#x652F;&#x6301; JSON&#x3001;CSV &#x7B49;&#x6570;&#x636E;&#x683C;&#x5F0F;&#xFF0C;&#x6570;&#x636E;&#x6BCF;&#x884C;&#x7684;&#x7ED3;&#x6784;&#x9700;&#x8981;&#x5B8C;&#x5168;&#x4E00;&#x81F4;&#x3002;</p>
+<h3 id="421-&#x51C6;&#x5907;&#x9876;&#x70B9;&#x6570;&#x636E;">4.2.1 &#x51C6;&#x5907;&#x9876;&#x70B9;&#x6570;&#x636E;</h3>
+<blockquote>
+<p>&#x9876;&#x70B9;&#x6570;&#x636E;&#x4E2D;&#x7684;&#x5217;&#x90FD;&#x5C06;&#x4F5C;&#x4E3A;&#x9876;&#x70B9;&#x7684;&#x5C5E;&#x6027;&#x5B58;&#x5728;
+&#x9876;&#x70B9;&#x6570;&#x636E;&#x4E2D;&#x7684;&#x5217;&#x5FC5;&#x987B;&#x5305;&#x542B;&#x914D;&#x7F6E;&#x811A;&#x672C;&#x4E2D;&#x7684; key &#x5B57;&#x6BB5;</p>
+</blockquote>
+<ul>
+<li>JSON</li>
+</ul>
+<pre class="language-"><code>//&#x793A;&#x4F8B;
+//author.json
+{&quot;name&quot;:&quot;Julia Child&quot;,&quot;gender&quot;:&quot;F&quot;}
+{&quot;name&quot;:&quot;Simone Beck&quot;,&quot;gender&quot;:&quot;F&quot;}
+{&quot;name&quot;:&quot;Louisette Bertholie&quot;,&quot;gender&quot;:&quot;F&quot;}
+
+//book.json
+{&quot;name&quot;:&quot;The Art of French Cooking, Vol. 1&quot;,&quot;year&quot;:&quot;1961&quot;,&quot;ISBN&quot;:&quot;none&quot;}
+{&quot;name&quot;:&quot;Simca&apos;s Cuisine: 100 Classic French Recipes for Every Occasion&quot;,&quot;year&quot;:&quot;1972&quot;,&quot;ISBN&quot;:&quot;0-394-40152-2&quot;}
+{&quot;name&quot;:&quot;The French Chef Cookbook&quot;,&quot;year&quot;:&quot;1968&quot;,&quot;ISBN&quot;:&quot;0-394-40135-2&quot;}
+</code></pre><ul>
+<li>CSV</li>
+</ul>
+<pre class="language-"><code>//&#x793A;&#x4F8B;
+//author.csv
+name|gender
+Julia Child|F
+Simone Beck|F
+Louisette Bertholie|F
+
+//book.csv
+name|year|ISBN
+The Art of French Cooking, Vol. 1|1961|none
+Simca&apos;s Cuisine: 100 Classic French Recipes for Every Occasion|1972|0-394-40152-2
+The French Chef Cookbook|1968|0-394-40135-2
+</code></pre><h3 id="422-&#x51C6;&#x5907;&#x8FB9;&#x6570;&#x636E;">4.2.2 &#x51C6;&#x5907;&#x8FB9;&#x6570;&#x636E;</h3>
+<blockquote>
+<p>&#x8FB9;&#x6570;&#x636E;&#x5FC5;&#x987B;&#x5305;&#x542B;&#x914D;&#x7F6E;&#x811A;&#x672C;&#x4E2D; inV &#x7684;key &#x4EE5;&#x53CA; outV &#x7684; key
+&#x8FB9;&#x6570;&#x636E;&#x4E2D;&#x7684;&#x5176;&#x5B83;&#x5217;&#x5C06;&#x4F5C;&#x4E3A;&#x8FB9;&#x7684;&#x5C5E;&#x6027;</p>
+</blockquote>
+<ul>
+<li>JSON</li>
+</ul>
+<pre class="language-"><code>//&#x793A;&#x4F8B;
+//authorBook.json
+{&quot;bname&quot;:&quot;The Art of French Cooking, Vol. 1&quot;,&quot;aname&quot;:&quot;Julia Child&quot;,&quot;test&quot;:&quot;test&quot;}
+{&quot;bname&quot;:&quot;The Art of French Cooking, Vol. 1&quot;,&quot;aname&quot;:&quot;Simone Beck&quot;,&quot;test&quot;:&quot;test&quot;}
+{&quot;bname&quot;:&quot;The Art of French Cooking, Vol. 1&quot;,&quot;aname&quot;:&quot;Louisette Bertholie&quot;,&quot;test&quot;:&quot;test&quot;}
+</code></pre><ul>
+<li>CSV</li>
+</ul>
+<pre class="language-"><code>//&#x793A;&#x4F8B;
+//authorBook.csv
+bname|aname
+The Art of French Cooking, Vol. 1|Julia Child
+The Art of French Cooking, Vol. 1|Simone Beck
+The Art of French Cooking, Vol. 1|Louisette Bertholie
+</code></pre><h2 id="43-&#x6267;&#x884C;&#x5BFC;&#x5165;&#x8FC7;&#x7A0B;">4.3 &#x6267;&#x884C;&#x5BFC;&#x5165;&#x8FC7;&#x7A0B;</h2>
+<p>&#x5BFC;&#x5165;&#x8FC7;&#x7A0B;&#x7531;&#x7528;&#x6237;&#x63D0;&#x4EA4;&#x7684;&#x547D;&#x4EE4;&#x63A7;&#x5236;&#xFF0C;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4E0D;&#x540C;&#x7684;&#x53C2;&#x6570;&#x63A7;&#x5236;&#x6267;&#x884C;&#x7684;&#x5177;&#x4F53;&#x6D41;&#x7A0B;&#x3002;</p>
+<h3 id="431-&#x53C2;&#x6570;&#x8BF4;&#x660E;">4.3.1 &#x53C2;&#x6570;&#x8BF4;&#x660E;</h3>
+<table>
+<thead>
+<tr>
+<th>&#x77ED;&#x547D;&#x4EE4;</th>
+<th>&#x957F;&#x547D;&#x4EE4;</th>
+<th>&#x662F;&#x5426;&#x6709;&#x53C2;</th>
+<th>&#x53C2;&#x6570;&#x8BF4;&#x660E;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>h</td>
+<td>help</td>
+<td>false</td>
+<td>&#x6253;&#x5370;&#x5E2E;&#x52A9;&#x4FE1;&#x606F;&#x548C;&#x6240;&#x6709;&#x53EF;&#x7528;&#x547D;&#x4EE4;&#x4FE1;&#x606F;</td>
+</tr>
+<tr>
+<td>f</td>
+<td>file</td>
+<td>true</td>
+<td>&#x914D;&#x7F6E;&#x811A;&#x672C;&#x7684;&#x8DEF;&#x5F84;</td>
+</tr>
+<tr>
+<td>g</td>
+<td>gragh</td>
+<td>true</td>
+<td>&#x56FE;&#x5F62;&#x6570;&#x636E;&#x5E93;&#x7A7A;&#x95F4;</td>
+</tr>
+<tr>
+<td>d</td>
+<td>address</td>
+<td>true</td>
+<td>&#x56FE;&#x5F62;&#x6570;&#x636E;&#x5E93;&#x670D;&#x52A1;&#x7AEF;&#x7684; ip:port</td>
+</tr>
+<tr>
+<td>p</td>
+<td>path</td>
+<td>true</td>
+<td>&#x8F93;&#x5165;&#x6570;&#x636E;&#x8DEF;&#x5F84;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;&#x5F53;&#x524D; classpath</td>
+</tr>
+<tr>
+<td>NULL</td>
+<td>dryrun</td>
+<td>false</td>
+<td>&#x53EA;&#x751F;&#x6210; schema &#x800C;&#x4E0D;&#x5199;&#x6570;&#x636E;&#x5E93;,&#x9ED8;&#x8BA4; False</td>
+</tr>
+<tr>
+<td>NULL</td>
+<td>create_schema</td>
+<td>false</td>
+<td>&#x521B;&#x5EFA;&#x6216;&#x66F4;&#x65B0; schema&#xFF0C;&#x9ED8;&#x8BA4; False</td>
+</tr>
+<tr>
+<td>NULL</td>
+<td>schema_output</td>
+<td>true</td>
+<td>&#x4FDD;&#x5B58; schema &#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x9ED8;&#x8BA4; proposed_schemas.groovy</td>
+</tr>
+<tr>
+<td>NULL</td>
+<td>load_new</td>
+<td>false</td>
+<td>&#x4E0D;&#x68C0;&#x67E5;&#x6570;&#x636E;&#x5E93;&#x5DF2;&#x6709;&#x6570;&#x636E;&#xFF0C;&#x76F4;&#x63A5;&#x63D2;&#x5165;&#x6570;&#x636E;&#xFF0C;&#x9ED8;&#x8BA4; False</td>
+</tr>
+<tr>
+<td>NULL</td>
+<td>reporting_interval</td>
+<td>false</td>
+<td>&#x65E5;&#x5FD7;&#x62A5;&#x544A;&#x95F4;&#x9694;&#x65F6;&#x95F4;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="432-&#x53C2;&#x6570;&#x4F7F;&#x7528;">4.3.2 &#x53C2;&#x6570;&#x4F7F;&#x7528;</h3>
+<h4 id="&#x5FC5;&#x586B;&#x53C2;&#x6570;">&#x5FC5;&#x586B;&#x53C2;&#x6570;:</h4>
+<ul>
+<li><strong>-f</strong>: &#x6307;&#x5B9A;&#x914D;&#x7F6E;&#x811A;&#x672C;&#xFF08;&#x5EFA;&#x8BAE;&#x7EDD;&#x5BF9;&#x8DEF;&#x5F84;&#xFF09;</li>
+<li><strong>-d</strong>: &#x6307;&#x5B9A;Hugegragh Server &#x7684; ip:port</li>
+<li><strong>-g</strong>: &#x6307;&#x5B9A;&#x56FE;&#x5F62;&#x6570;&#x636E;&#x7A7A;&#x7A7A;&#x95F4;&#xFF0C;&#x4E5F;&#x5373;&#x56FE;&#x7684;&#x540D;&#x79F0;</li>
+</ul>
+<h4 id="&#x53EF;&#x9009;&#x53C2;&#x6570;&#xFF1A;">&#x53EF;&#x9009;&#x53C2;&#x6570;&#xFF1A;</h4>
+<ul>
+<li><strong>-p:</strong> &#x6570;&#x636E;&#x6587;&#x4EF6;&#x7684;&#x8DEF;&#x5F84;&#x540D;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; path&#xFF0C;&#x800C; path &#x9ED8;&#x8BA4;&#x4E3A;&#x73AF;&#x5883;&#x53D8;&#x91CF; LOADER_HOME &#x6216;&#x8005;System.getProperty(&quot;user.dir&quot;)</li>
+<li><strong>-dryrun:</strong> &#x53EA;&#x751F;&#x6210; schema &#x5B58;&#x50A8;&#x5230;&#x6587;&#x4EF6;&#xFF0C;&#x4E0D;&#x6267;&#x884C;&#x5728;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x521B;&#x5EFA; schema &#x548C;&#x63D2;&#x5165;&#x6570;&#x636E;&#x7684;&#x64CD;&#x4F5C;&#x3002;</li>
+<li><strong>-schema_output:</strong> &#x914D;&#x5408; dryrun &#x4F7F;&#x7528;&#xFF0C;&#x6307;&#x5B9A; schema &#x5B58;&#x50A8;&#x7684;&#x6587;&#x4EF6;&#x540D;&#xFF0C;&#x82E5;&#x4E0D;&#x6307;&#x5B9A;&#x5219;&#x9ED8;&#x8BA4;&#x4E3A; proposed_schemas.groovy</li>
+<li><strong>-create_schema:</strong> &#x63D2;&#x5165;&#x6570;&#x636E;&#x524D;&#x5148;&#x68C0;&#x67E5;&#x548C;&#x66F4;&#x65B0; schema&#x3002;&#x82E5;&#x4E0D;&#x6307;&#x5B9A;&#x8BE5;&#x53C2;&#x6570;&#xFF0C;&#x5F53;&#x6570;&#x636E; schema &#x4E0E;&#x6570;&#x636E;&#x5E93; schema &#x4E0D;&#x4E00;&#x81F4;&#x65F6;&#x62A5;&#x9519;&#x3002;</li>
+<li><strong>-load_new:</strong> &#x63D2;&#x5165;&#x8FB9;&#x65F6;&#x68C0;&#x67E5;&#x8FB9;&#x94FE;&#x63A5;&#x7684;&#x4E24;&#x4E2A;&#x9876;&#x70B9;&#x662F;&#x5426;&#x5B58;&#x5728;&#xFF0C;&#x82E5;&#x4E0D;&#x6307;&#x5B9A;&#x5219;&#x76F4;&#x63A5;&#x63D2;&#x5165;&#x6570;&#x636E;&#xFF0C;&#x5F53;&#x9876;&#x70B9;&#x4E0D;&#x5B58;&#x5728;&#x65F6;&#x62A5;&#x9519;&#x3002;</li>
+</ul>
+<h4 id="&#x5F85;&#x5B9E;&#x73B0;&#x53C2;&#x6570;">&#x5F85;&#x5B9E;&#x73B0;&#x53C2;&#x6570;</h4>
+<ul>
+<li><strong>-reporting_interval</strong></li>
+</ul>
+<h3 id="433-&#x6267;&#x884C;&#x547D;&#x4EE4;">4.3.3 &#x6267;&#x884C;&#x547D;&#x4EE4;</h3>
+<p>&#x8FD0;&#x884C; bin/graphloader &#x5E76;&#x4F20;&#x5165;&#x53C2;&#x6570;</p>
+<pre class="language-"><code># &#x793A;&#x4F8B;
+bin/graphloader -f /Users/lizhigang/mycode/hugegraph-loader/data/JSON/authorBookMap_JSON.groovy -dlocalhost:8080 -g hugegraph -p /Users/lizhigang/mycode/hugegraph-loader/data/JSON/data -create_schema -schema_output schema.groovy
+</code></pre><h1 id="5-&#x5F3A;&#x5236;&#x6027;&#x7EA6;&#x675F;">5. &#x5F3A;&#x5236;&#x6027;&#x7EA6;&#x675F;</h1>
+<p>&#x76EE;&#x524D;&#x4E3A;&#x9879;&#x76EE;&#x4E00;&#x671F;&#xFF0C;&#x529F;&#x80FD;&#x5C1A;&#x4E0D;&#x5B8C;&#x5907;&#xFF0C;&#x4EC5;&#x652F;&#x6301;&#x5728;&#x4EE5;&#x4E0B;&#x7EA6;&#x675F;&#x6761;&#x4EF6;&#x4E0B;&#x4F7F;&#x7528;</p>
+<ul>
+<li>&#x5404;&#x9879;&#x6570;&#x636E;&#x7684;&#x7C7B;&#x578B;&#x5747;&#x4E3A; String</li>
+<li>&#x9876;&#x70B9;&#x7684; key &#x53EA;&#x652F;&#x6301;&#x5355;&#x4E2A;</li>
+<li>&#x8FB9;&#x7684;&#x6570;&#x636E;&#x9664;&#x9876;&#x70B9;&#x7684; key &#x4E4B;&#x5916;&#xFF0C;&#x9700;&#x5305;&#x542B;&#x81F3;&#x5C11;&#x4E00;&#x4E2A;&#x8FB9;&#x7684;&#x5C5E;&#x6027;</li>
+</ul>
+<h1 id="6-&#x5B8C;&#x6574;&#x4F8B;&#x5B50;">6. &#x5B8C;&#x6574;&#x4F8B;&#x5B50;</h1>
+<p>&#x672C;&#x4F8B;&#x4E2D;&#x9876;&#x70B9;&#x7C7B;&#x578B;&#x4E3A; author &#x548C; book, &#x8FB9;&#x4E3A; authored &#x5C06; author &#x548C; book &#x7684;&#x5173;&#x7CFB;&#x5EFA;&#x7ACB;&#x8D77;&#x6765;&#x3002;</p>
+<h2 id="61-&#x7F16;&#x5199;&#x914D;&#x7F6E;&#x811A;&#x672C;">6.1 &#x7F16;&#x5199;&#x914D;&#x7F6E;&#x811A;&#x672C;</h2>
+<pre class="language-"><code>inputfileV = inputpath + &apos;/vertices/&apos;
+inputfileE = inputpath + &apos;/edges/&apos;
+
+authorInput = File.json(inputfileV + &apos;author.json&apos;)
+bookInput = File.json(inputfileV + &apos;book.json&apos;)
+authorBookInput = File.json(inputfileE + &apos;authorBook.json&apos;)
+
+load(authorInput).asVertices {
+    label &quot;author&quot;
+    key &quot;name&quot;
+}
+
+load(bookInput).asVertices {
+    label &quot;book&quot;
+    key &quot;name&quot;
+}
+
+load(authorBookInput).asEdges {
+    label &quot;authored&quot;
+    outV &quot;aname&quot;, {
+        label &quot;author&quot;
+        key &quot;aname&quot;
+    }
+    inV &quot;bname&quot;, {
+        label &quot;book&quot;
+        key &quot;bname&quot;
+    }
+}
+</code></pre><h2 id="62-&#x51C6;&#x5907;&#x6587;&#x672C;&#x6570;&#x636E;">6.2 &#x51C6;&#x5907;&#x6587;&#x672C;&#x6570;&#x636E;</h2>
+<h3 id="&#x9876;&#x70B9;&#x6570;&#x636E;">&#x9876;&#x70B9;&#x6570;&#x636E;</h3>
+<p>author.json</p>
+<pre class="language-"><code>{&quot;name&quot;:&quot;Julia Child&quot;,&quot;gender&quot;:&quot;F&quot;}
+{&quot;name&quot;:&quot;Simone Beck&quot;,&quot;gender&quot;:&quot;F&quot;}
+{&quot;name&quot;:&quot;Louisette Bertholie&quot;,&quot;gender&quot;:&quot;F&quot;}
+{&quot;name&quot;:&quot;Patricia Simon&quot;,&quot;gender&quot;:&quot;F&quot;}
+{&quot;name&quot;:&quot;Alice Waters&quot;,&quot;gender&quot;:&quot;F&quot;}
+{&quot;name&quot;:&quot;Patricia Curtan&quot;,&quot;gender&quot;:&quot;F&quot;}
+{&quot;name&quot;:&quot;Kelsie Kerr&quot;,&quot;gender&quot;:&quot;F&quot;}
+{&quot;name&quot;:&quot;Fritz Streiff&quot;,&quot;gender&quot;:&quot;M&quot;}
+{&quot;name&quot;:&quot;Emeril Lagasse&quot;,&quot;gender&quot;:&quot;M&quot;}
+{&quot;name&quot;:&quot;James Beard&quot;,&quot;gender&quot;:&quot;M&quot;}
+</code></pre><p>book.json</p>
+<pre class="language-"><code>{&quot;name&quot;:&quot;The Art of French Cooking, Vol. 1&quot;,&quot;year&quot;:&quot;1961&quot;,&quot;ISBN&quot;:&quot;none&quot;}
+{&quot;name&quot;:&quot;Simca&apos;s Cuisine: 100 Classic French Recipes for Every Occasion&quot;,&quot;year&quot;:&quot;1972&quot;,&quot;ISBN&quot;:&quot;0-394-40152-2&quot;}
+{&quot;name&quot;:&quot;The French Chef Cookbook&quot;,&quot;year&quot;:&quot;1968&quot;,&quot;ISBN&quot;:&quot;0-394-40135-2&quot;}
+{&quot;name&quot;:&quot;The Art of Simple Food: Notes, Lessons, and Recipes from a Delicious Revolution&quot;,&quot;year&quot;:&quot;2007&quot;,&quot;ISBN&quot;:&quot;0-307-33679-4&quot;}
+</code></pre><h3 id="&#x8FB9;&#x6570;&#x636E;">&#x8FB9;&#x6570;&#x636E;</h3>
+<p>authorBook.json</p>
+<pre class="language-"><code>{&quot;bname&quot;:&quot;The Art of French Cooking, Vol. 1&quot;,&quot;aname&quot;:&quot;Julia Child&quot;,&quot;test&quot;:&quot;test&quot;}
+{&quot;bname&quot;:&quot;The Art of French Cooking, Vol. 1&quot;,&quot;aname&quot;:&quot;Simone Beck&quot;,&quot;test&quot;:&quot;test&quot;}
+{&quot;bname&quot;:&quot;The Art of French Cooking, Vol. 1&quot;,&quot;aname&quot;:&quot;Louisette Bertholie&quot;,&quot;test&quot;:&quot;test&quot;}
+{&quot;bname&quot;:&quot;Simca&apos;s Cuisine: 100 Classic French Recipes for Every Occasion&quot;,&quot;aname&quot;:&quot;Simone Beck&quot;,&quot;test&quot;:&quot;test&quot;}
+{&quot;bname&quot;:&quot;Simca&apos;s Cuisine: 100 Classic French Recipes for Every Occasion&quot;,&quot;aname&quot;:&quot;Patricia Simon&quot;,&quot;test&quot;:&quot;test&quot;}
+{&quot;bname&quot;:&quot;The French Chef Cookbook&quot;,&quot;aname&quot;:&quot;Julia Child&quot;,&quot;test&quot;:&quot;test&quot;}
+{&quot;bname&quot;:&quot;The Art of Simple Food: Notes, Lessons, and Recipes from a Delicious Revolution&quot;,&quot;aname&quot;:&quot;Alice Waters&quot;,&quot;test&quot;:&quot;test&quot;}
+{&quot;bname&quot;:&quot;The Art of Simple Food: Notes, Lessons, and Recipes from a Delicious Revolution&quot;,&quot;aname&quot;:&quot;Patricia Curtan&quot;,&quot;test&quot;:&quot;test&quot;}
+{&quot;bname&quot;:&quot;The Art of Simple Food: Notes, Lessons, and Recipes from a Delicious Revolution&quot;,&quot;aname&quot;:&quot;Kelsie Kerr&quot;,&quot;test&quot;:&quot;test&quot;}
+{&quot;bname&quot;:&quot;The Art of Simple Food: Notes, Lessons, and Recipes from a Delicious Revolution&quot;,&quot;aname&quot;:&quot;Fritz Streiff&quot;,&quot;test&quot;:&quot;test&quot;}
+</code></pre><h3 id="63-&#x6267;&#x884C;&#x547D;&#x4EE4;">6.3 &#x6267;&#x884C;&#x547D;&#x4EE4;</h3>
+<p>&#x8FD0;&#x884C; bin/graphloader &#x5E76;&#x4F20;&#x5165;&#x53C2;&#x6570;</p>
+<pre class="language-"><code># &#x793A;&#x4F8B;
+bin/graphloader -f /Users/lizhigang/mycode/hugegraph-loader/data/JSON/authorBookMap_JSON.groovy -dlocalhost:8080 -g hugegraph -p /Users/lizhigang/mycode/hugegraph-loader/data/JSON/data -create_schema -schema_output schema.groovy
+</code></pre>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="hugestudio.html" class="navigation navigation-prev " aria-label="Previous page: 2. Query with HugeStudio">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="hugeclient.html" class="navigation navigation-next " aria-label="Next page: 4. Develop With HugeClient">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"3. Load data With HugeLoader","level":"3.3","depth":1,"next":{"title":"4. Develop With HugeClient","level":"3.4","depth":1,"path":"quickstart/hugeclient.md","ref":"quickstart/hugeclient.md","articles":[]},"previous":{"title":"2. Query with HugeStudio","level":"3.2","depth":1,"path":"quickstart/hugestudio.md","ref":"quickstart/hugestudio.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","toggle-chapters"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"toggle-chapters":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*","theme-default":{"showLevel":true}},"file":{"path":"quickstart/hugeloader.md","mtime":"2017-08-17T06:35:34.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-08-18T03:23:11.371Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,17 @@
+{
+    "plugins": [
+        "prism",
+        "-highlight",
+        "toggle-chapters"
+    ],
+    "pluginsConfig": {
+        "prism": {
+            "lang": {
+                "flow": "typescript"
+            }
+        }
+    },
+    "theme-default": {
+        "showLevel": true
+    }
+}
