@@ -1,17 +1,31 @@
 {
-    "plugins": [
-        "prism",
-        "-highlight",
-        "toggle-chapters"
-    ],
-    "pluginsConfig": {
-        "prism": {
-            "lang": {
-                "flow": "typescript"
-            }
-        }
+  "plugins": [
+    "prism",
+    "-highlight",
+    "toggle-chapters",
+    "theme-cuav"
+  ],
+  "pluginsConfig": {
+    "prism": {
+      "lang": {
+        "flow": "typescript"
+      }
     },
-    "theme-default": {
-        "showLevel": true
+    "theme-cuav": {
+      "useGitbookIcon": false,
+      "iconPath": "../images/favicon.ico",
+      "showGitBookLink": false,
+      "navbar": {
+        "brand": {
+          "logo": {
+            "alt": "图片信息",
+            "path": "../images/logo.png"
+          }
+        }
+      }
     }
+  },
+  "styles": {
+    "website": "styles/website.css"
+  }
 }

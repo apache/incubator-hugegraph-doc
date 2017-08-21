@@ -1,0 +1,60 @@
+// Copyright 2017 CUAV.
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//    http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+// 新增 _fontsettings.scss
+
+// 覆盖 fontsettings 的样式
+.book {
+  &.font-size-0 {
+    .book-body .page-inner section {
+      font-size: .75rem;
+    }
+  }
+  &.font-size-1 {
+    .book-body .page-inner section {
+      font-size: .875rem;
+    }
+  }
+  &.font-size-2 {
+    .book-body .page-inner section {
+      font-size: 1rem;
+    }
+  }
+  &.font-size-3 {
+    .book-body .page-inner section {
+      font-size: 1.125rem;
+    }
+  }
+  &.font-size-4 {
+    .book-body .page-inner section {
+      font-size: 1.25rem;
+    }
+  }
+
+  &.color-theme-1 {
+    .book-header {
+      background: rgba(243, 234, 203, 0.8);
+    }
+  }
+
+  &.color-theme-2 {
+    .book-header {
+      background: rgba(28, 31, 43, 0.95);
+
+      .btn {
+        color: #c1c6d7;
+      }
+    }
+  }
+}
