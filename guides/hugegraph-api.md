@@ -1,15 +1,11 @@
 
-## 1. HugeGraph-Api Intro
-
+## 1. HugeGraph-API Intro
 
 HugeGraph Server通过HugeGraph-Api基于HTTP协议为Client提供操作图的接口，主要包括元数据和图数据增删改查。
 
-
 ## 2. 元数据
 
-
 ### 2.1 PropertyKey
-
 
 #### 2.1.1 Post
 
@@ -23,10 +19,10 @@ localhost:8080/graphs/hugegraph/schema/propertykeys
 ##### Request Body
 ```
 {
-"dataType": "INT",
-"name": "price",
-"cardinality": "SINGLE",
-"properties":[]
+    "name": "id",
+    "dataType": "TEXT",
+    "cardinality": "SINGLE",
+    "properties": []
 }
 ```
 
@@ -37,14 +33,14 @@ localhost:8080/graphs/hugegraph/schema/propertykeys
 ```
 
 ##### Response Body
+
 ```
 {
-    "id": "3price",
-    "dataType": "INT",
-    "name": "price",
+    "id": "3id",
+    "dataType": "TEXT",
+    "name": "id",
     "cardinality": "SINGLE",
-    "properties": [
-    ]
+    "properties": []
 }
 ```
         
@@ -53,6 +49,7 @@ localhost:8080/graphs/hugegraph/schema/propertykeys
 功能：获取所有的 PropertyKey
 
 ##### Url
+
 ```
 localhost:8080/graphs/hugegraph/schema/propertykeys
 ```
@@ -64,6 +61,7 @@ localhost:8080/graphs/hugegraph/schema/propertykeys
 ```
 
 ##### Response Body
+
 ```
 {
     "propertykeys": [
@@ -72,40 +70,35 @@ localhost:8080/graphs/hugegraph/schema/propertykeys
             "dataType": "INT",
             "name": "age",
             "cardinality": "SINGLE",
-            "properties": [
-            ]
-        },
-        {
-            "id": "3lang",
-            "dataType": "TEXT",
-            "name": "lang",
-            "cardinality": "SINGLE",
-            "properties": [
-            ]
+            "properties": []
         },
         {
             "id": "3date",
             "dataType": "TEXT",
             "name": "date",
             "cardinality": "SINGLE",
-            "properties": [
-            ]
+            "properties": []
         },
+        {
+            "id": "3id",
+            "dataType": "TEXT",
+            "name": "id",
+            "cardinality": "SINGLE",
+            "properties":[]
+        }
         {
             "id": "3name",
             "dataType": "TEXT",
             "name": "name",
             "cardinality": "SINGLE",
-            "properties": [
-            ]
+            "properties": []
         },
         {
             "id": "3price",
             "dataType": "INT",
             "name": "price",
             "cardinality": "SINGLE",
-            "properties": [
-            ]
+            "properties": []
         }
     ]
 }
@@ -118,10 +111,10 @@ localhost:8080/graphs/hugegraph/schema/propertykeys
 ##### Url
 
 ```
-localhost:8080/graphs/hugegraph/schema/propertykeys/price
+localhost:8080/graphs/hugegraph/schema/propertykeys/id
 ```
 
-其中，`price`为要获取的PropertyKey的名字
+其中，`id`为要获取的PropertyKey的名字
 
 ##### Response Status
 
@@ -130,14 +123,14 @@ localhost:8080/graphs/hugegraph/schema/propertykeys/price
 ```
 
 ##### Response Body
+
 ```
 {
-    "id": "3price",
-    "dataType": "INT",
-    "name": "price",
+    "id": "3id",
+    "dataType": "TEXT",
+    "name": "id",
     "cardinality": "SINGLE",
-    "properties": [
-    ]
+    "properties": []
 }
 ```
 
@@ -148,10 +141,10 @@ localhost:8080/graphs/hugegraph/schema/propertykeys/price
 ##### Url
 
 ```
-localhost:8080/graphs/hugegraph/schema/propertykeys/price
+localhost:8080/graphs/hugegraph/schema/propertykeys/id
 ```
 
-其中，`price`为要获取的PropertyKey的名字
+其中，`id`为要获取的PropertyKey的名字
 
 ##### Response Status
 
@@ -160,7 +153,6 @@ localhost:8080/graphs/hugegraph/schema/propertykeys/price
 ```
 
 ### 2.2 VertexLabel
-
 
 #### 2.2.1 Post
 
@@ -176,18 +168,17 @@ localhost:8080/graphs/hugegraph/schema/vertexlabels
 
 ```
 {
-"primaryKeys":[
-"name"
-],
-"indexNames":[
-"softwareByPrice"
-],
-"name": "software",
-"properties":[
-"price",
-"name",
-"lang"
-]
+    "name": "software",
+    "idStrategy": "PRIMARY_KEY",
+    "properties": [
+        "price",
+        "name",
+        "lang"
+    ],
+    "primaryKeys": [
+        "name"
+    ],
+    "indexNames": []
 }
 ```
 
@@ -205,10 +196,9 @@ localhost:8080/graphs/hugegraph/schema/vertexlabels
     "primaryKeys": [
         "name"
     ],
-    "indexNames": [
-        "softwareByPrice"
-    ],
+    "indexNames": [],
     "name": "software",
+    "idStrategy": "PRIMARY_KEY",
     "properties": [
         "price",
         "name",
@@ -219,26 +209,27 @@ localhost:8080/graphs/hugegraph/schema/vertexlabels
 
 #### 2.2.2 Put
 
-功能：为已存在的VertexLabel添加属性
+功能：为已存在的VertexLabel添加属性，目前不支持移除属性
 
 ##### Url
 
 ```
-localhost:8080/graphs/hugegraph/schema/vertexlabels
+localhost:8080/graphs/hugegraph/schema/vertexlabels?action=append
 ```
+
+注意：这个url是带有参数的
 
 ##### Request Body
 
 ```
 {
-"primaryKeys":[
-],
-"indexNames":[
-],
-"name": "software",
-"properties":[
-"lang"
-]
+    "name": "software",
+    "idStrategy": "DEFAULT",
+    "primaryKeys": [],
+    "indexNames": [],
+    "properties": [
+        "city"
+    ]
 }
 ```
 
@@ -254,11 +245,15 @@ localhost:8080/graphs/hugegraph/schema/vertexlabels
 {
     "id": "1software",
     "primaryKeys": [
+        "name"
     ],
-    "indexNames": [
-    ],
+    "indexNames": [],
     "name": "software",
+    "idStrategy": "PRIMARY_KEY",
     "properties": [
+        "city",
+        "price",
+        "name",
         "lang"
     ]
 }
@@ -290,14 +285,13 @@ localhost:8080/graphs/hugegraph/schema/vertexlabels
             "primaryKeys": [
                 "name"
             ],
-            "indexNames": [
-                "personByName"
-            ],
+            "indexNames": [],
             "name": "person",
+            "idStrategy": "PRIMARY_KEY",
             "properties": [
+                "city",
                 "name",
-                "age",
-                "price"
+                "age"
             ]
         },
         {
@@ -305,11 +299,11 @@ localhost:8080/graphs/hugegraph/schema/vertexlabels
             "primaryKeys": [
                 "name"
             ],
-            "indexNames": [
-                "softwareByPrice"
-            ],
+            "indexNames": [],
             "name": "software",
+            "idStrategy": "PRIMARY_KEY",
             "properties": [
+                "city",
                 "price",
                 "name",
                 "lang"
@@ -343,14 +337,13 @@ localhost:8080/graphs/hugegraph/schema/vertexlabels/person
     "primaryKeys": [
         "name"
     ],
-    "indexNames": [
-        "personByName"
-    ],
+    "indexNames": [],
     "name": "person",
+    "idStrategy": "PRIMARY_KEY",
     "properties": [
+        "city",
         "name",
-        "age",
-        "price"
+        "age"
     ]
 }
 ```
@@ -373,7 +366,6 @@ localhost:8080/graphs/hugegraph/schema/vertexlabels/person
 
 ### 2.3 EdgeLabel
 
-
 #### 2.3.1 Post
 
 功能：创建一个EdgeLabel
@@ -388,21 +380,15 @@ localhost:8080/graphs/hugegraph/schema/edgelabels
 
 ```
 {
-"indexNames":[
-"createdByDate"
-],
-"name": "created",
-"links":[
-{
-"source": "person",
-"target": "software"
-}
-],
-"sortKeys":["date"],
-"properties":[
-"date"
-],
-"frequency": "MULTIPLE"
+    "name": "created",
+    "sourceLabel": "person",
+    "targetLabel": "software",
+    "frequency": "SINGLE",
+    "properties": [
+        "date"
+    ],
+    "indexNames": [],
+    "sortKeys": []
 }
 ```
 
@@ -417,54 +403,43 @@ localhost:8080/graphs/hugegraph/schema/edgelabels
 ```
 {
     "id": "2created",
+    "sourceLabel": "person",
     "indexNames": [
         "createdByDate"
     ],
     "name": "created",
-    "links": [
-        {
-            "source": "person",
-            "target": "software"
-        }
-    ],
-    "sortKeys": [
-        "date"
-    ],
+    "targetLabel": "software",
+    "sortKeys": [],
     "properties": [
         "date"
     ],
-    "frequency": "MULTIPLE"
+    "frequency": "SINGLE"
 }
 ```
 
 #### 2.3.2 Put
 
-功能：为已存在的EdgeLabel添加properties和link
+功能：为已存在的EdgeLabel添加properties
 
 ##### Url
 
 ```
-localhost:8080/graphs/hugegraph/schema/edgelabels
+localhost:8080/graphs/hugegraph/schema/edgelabels?action=append
 ```
 
 ##### Request Body
 
 ```
 {
-"indexNames":[
-],
-"name": "created",
-"links":[
-{
-"source": "person",
-"target": "person"
-}
-],
-"sortKeys":[],
-"properties":[
-"date"
-],
-"frequency": "MULTIPLE"
+    "name": "created",
+    "sourceLabel": null,
+    "targetLabel": null,
+    "frequency": "DEFAULT",
+    "properties": [
+        "city"
+    ],
+    "indexNames": [],
+    "sortKeys": []
 }
 ```
 
@@ -479,21 +454,18 @@ localhost:8080/graphs/hugegraph/schema/edgelabels
 ```
 {
     "id": "2created",
+    "sourceLabel": "person",
     "indexNames": [
+        "createdByDate"
     ],
     "name": "created",
-    "links": [
-        {
-            "source": "person",
-            "target": "person"
-        }
-    ],
-    "sortKeys": [
-    ],
+    "targetLabel": "software",
+    "sortKeys": [],
     "properties": [
-        "date"
+        "date",
+        "city"
     ],
-    "frequency": "MULTIPLE"
+    "frequency": "SINGLE"
 }
 ```
 
@@ -520,41 +492,27 @@ localhost:8080/graphs/hugegraph/schema/edgelabels
     "edgelabels": [
         {
             "id": "2created",
+            "sourceLabel": "person",
             "indexNames": [
-                "createdByDate"
+                "createdByDate",
+                "createdByCity"
             ],
             "name": "created",
-            "links": [
-                {
-                    "source": "person",
-                    "target": "software"
-                }
-            ],
-            "sortKeys": [
-                "date"
-            ],
+            "targetLabel": "software",
+            "sortKeys": [],
             "properties": [
-                "date"
+                "date",
+                "city"
             ],
-            "frequency": "MULTIPLE"
+            "frequency": "SINGLE"
         },
         {
             "id": "2knows",
-            "indexNames": [
-            ],
+            "sourceLabel": "person",
+            "indexNames": [],
             "name": "knows",
-            "links": [
-                {
-                    "source": "person",
-                    "target": "person"
-                },
-                {
-                    "source": "software",
-                    "target": "software"
-                }
-            ],
-            "sortKeys": [
-            ],
+            "targetLabel": "person",
+            "sortKeys": [],
             "properties": [
                 "date",
                 "price"
@@ -586,23 +544,16 @@ localhost:8080/graphs/hugegraph/schema/edgelabels/created
 ```
 {
     "id": "2created",
-    "indexNames": [
-        "createdByDate"
-    ],
+    "sourceLabel": "person",
+    "indexNames": [],
     "name": "created",
-    "links": [
-        {
-            "source": "person",
-            "target": "software"
-        }
-    ],
-    "sortKeys": [
-        "date"
-    ],
+    "targetLabel": "software",
+    "sortKeys": [],
     "properties": [
-        "date"
+        "date",
+        "city"
     ],
-    "frequency": "MULTIPLE"
+    "frequency": "SINGLE"
 }
 ```
 
@@ -624,7 +575,6 @@ localhost:8080/graphs/hugegraph/schema/edgelabels/created
 
 ### 2.4 IndexLabel
 
-
 #### 2.3.1 Post
 
 功能：创建一个IndexLabel
@@ -639,11 +589,13 @@ localhost:8080/graphs/hugegraph/schema/indexlabels
 
 ```
 {
-"indexType": "SEARCH",
-"baseValue": "software",
-"name": "softwareByPrice",
-"fields":["price"],
-"baseType": "VERTEX_LABEL"
+    "name": "softwareByPrice",
+    "baseType": "VERTEX_LABEL",
+    "baseValue": "software",
+    "indexType": "SEARCH",
+    "fields": [
+        "price"
+    ]
 }
 ```
 
@@ -698,16 +650,6 @@ localhost:8080/graphs/hugegraph/schema/indexlabels
                 "price"
             ],
             "baseType": "VERTEX_LABEL"
-        },
-        {
-            "id": "4createdByDate",
-            "indexType": "SECONDARY",
-            "baseValue": "created",
-            "name": "createdByDate",
-            "fields": [
-                "date"
-            ],
-            "baseType": "EDGE_LABEL"
         },
         {
             "id": "4personByName",
@@ -772,10 +714,9 @@ localhost:8080/graphs/hugegraph/schema/indexlabels/softwareByPrice
 
 ## 3. 图数据
 
-
 ### 3.1 Vertex
 
-#### 3.1.1 Post
+#### 3.1.1 Post(Single)
 
 功能：创建一个顶点
 
@@ -789,10 +730,10 @@ localhost:8080/graphs/hugegraph/graph/vertices
 
 ```
 {
-  "label":"person",
-  "properties":{
-    "name":"test-lzm"
-  }
+    "label": "person",
+    "properties": {
+        "name": "marko"
+    }
 }
 ```
 
@@ -806,28 +747,72 @@ localhost:8080/graphs/hugegraph/graph/vertices
 
 ```
 {
-    "id": "person\u0002test-lzm",
+    "id": "person:marko",
     "label": "person",
     "type": "vertex",
     "properties": {
         "name": [
             {
-                "id": "name",
-                "value": "test-lzm"
+                "id": "person:marko>name",
+                "value": "marko"
             }
         ]
     }
 }
 ```
 
-#### 3.1.2 Get(List)
+#### 3.1.2 Post(Batch)
+
+功能：创建多个顶点
+
+##### Url
+
+```
+localhost:8080/graphs/hugegraph/graph/vertices/batch
+```
+
+##### Request Body
+
+```
+[
+    {
+        "label": "person",
+        "properties": {
+            "name": "marko"
+        }
+    },
+    {
+        "label": "software",
+        "properties": {
+            "name": "idea"
+        }
+    }
+]
+```
+
+##### Response Status
+
+```
+201
+```
+
+##### Response Body
+
+```
+[
+    "person:marko",
+    "software:idea"
+]
+```
+
+#### 3.1.3 Get(List)
 
 功能：获取所有顶点
 
 ##### Url
 
 ```
-localhost:8080/graphs/hugegraph/graph/vertices?limit=10
+localhost:8080/graphs/hugegraph/graph/vertices
 ```
 
 ##### Response Status
@@ -842,140 +827,76 @@ localhost:8080/graphs/hugegraph/graph/vertices?limit=10
 {
     "vertices": [
         {
-            "id": "software\u0002lop",
-            "label": "software",
-            "type": "vertex",
-            "properties": {
-                "price": [
-                    {
-                        "id": "price",
-                        "value": 328
-                    }
-                ],
-                "name": [
-                    {
-                        "id": "name",
-                        "value": "lop"
-                    }
-                ],
-                "lang": [
-                    {
-                        "id": "lang",
-                        "value": "java"
-                    }
-                ]
-            }
-        },
-        {
-            "id": "person\u0002josh",
+            "id": "person:marko",
             "label": "person",
             "type": "vertex",
             "properties": {
-                "name": [
+                "city": [
                     {
-                        "id": "name",
-                        "value": "josh"
+                        "id": "person:marko>city",
+                        "value": "Beijing"
                     }
                 ],
-                "age": [
-                    {
-                        "id": "age",
-                        "value": 32
-                    }
-                ]
-            }
-        },
-        {
-            "id": "person\u0002marko",
-            "label": "person",
-            "type": "vertex",
-            "properties": {
                 "name": [
                     {
-                        "id": "name",
+                        "id": "person:marko>name",
                         "value": "marko"
                     }
                 ],
                 "age": [
                     {
-                        "id": "age",
+                        "id": "person:marko>age",
                         "value": 29
                     }
                 ]
             }
         },
         {
-            "id": "person\u0002peter",
-            "label": "person",
-            "type": "vertex",
-            "properties": {
-                "name": [
-                    {
-                        "id": "name",
-                        "value": "peter"
-                    }
-                ],
-                "age": [
-                    {
-                        "id": "age",
-                        "value": 35
-                    }
-                ]
-            }
-        },
-        {
-            "id": "person\u0002test-lzm",
-            "label": "person",
-            "type": "vertex",
-            "properties": {
-                "name": [
-                    {
-                        "id": "name",
-                        "value": "test-lzm"
-                    }
-                ]
-            }
-        },
-        {
-            "id": "person\u0002vadas",
-            "label": "person",
-            "type": "vertex",
-            "properties": {
-                "name": [
-                    {
-                        "id": "name",
-                        "value": "vadas"
-                    }
-                ],
-                "age": [
-                    {
-                        "id": "age",
-                        "value": 27
-                    }
-                ]
-            }
-        },
-        {
-            "id": "software\u0002ripple",
+            "id": "software:lop",
             "label": "software",
             "type": "vertex",
             "properties": {
                 "price": [
                     {
-                        "id": "price",
-                        "value": 199
+                        "id": "software:lop>price",
+                        "value": 328
                     }
                 ],
                 "name": [
                     {
-                        "id": "name",
-                        "value": "ripple"
+                        "id": "software:lop>name",
+                        "value": "lop"
                     }
                 ],
                 "lang": [
                     {
-                        "id": "lang",
+                        "id": "software:lop>lang",
                         "value": "java"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "person:peter",
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "city": [
+                    {
+                        "id": "person:peter>city",
+                        "value": "Shanghai"
+                    }
+                ],
+                "name": [
+                    {
+                        "id": "person:peter>name",
+                        "value": "peter"
+                    }
+                ],
+                "age": [
+                    {
+                        "id": "person:peter>age",
+                        "value": 29
                     }
                 ]
             }
@@ -984,14 +905,14 @@ localhost:8080/graphs/hugegraph/graph/vertices?limit=10
 }
 ```
 
-#### 3.1.3 Get
+#### 3.1.4 Get
 
 功能：根据Id获取顶点
 
 ##### Url
 
 ```
-localhost:8080/graphs/hugegraph/graph/vertices/software%02lop
+localhost:8080/graphs/hugegraph/graph/vertices/software:lop
 ```
 
 ##### Response Status
@@ -1004,25 +925,25 @@ localhost:8080/graphs/hugegraph/graph/vertices/software%02lop
 
 ```
 {
-    "id": "software\u0002lop",
+    "id": "software:lop",
     "label": "software",
     "type": "vertex",
     "properties": {
         "price": [
             {
-                "id": "price",
+                "id": "software:lop>price",
                 "value": 328
             }
         ],
         "name": [
             {
-                "id": "name",
+                "id": "software:lop>name",
                 "value": "lop"
             }
         ],
         "lang": [
             {
-                "id": "lang",
+                "id": "software:lop>lang",
                 "value": "java"
             }
         ]
@@ -1030,14 +951,14 @@ localhost:8080/graphs/hugegraph/graph/vertices/software%02lop
 }
 ```
 
-#### 3.1.4 Delete
+#### 3.1.5 Delete
 
 功能：根据Id删除顶点
 
 ##### Url
 
 ```
-localhost:8080/graphs/hugegraph/graph/vertices/software%02lop
+localhost:8080/graphs/hugegraph/graph/vertices/software:lop
 ```
 
 ##### Response Status
@@ -1048,7 +969,7 @@ localhost:8080/graphs/hugegraph/graph/vertices/software%02lop
 
 ### 3.2 Edge
 
-#### 3.2.1 Post
+#### 3.2.1 Post(Single)
 
 功能：创建一条边
 
@@ -1062,12 +983,15 @@ localhost:8080/graphs/hugegraph/graph/edges
 
 ```
 {
-  "label":"knows",
-  "source":"person\u0002marko",
-  "target":"person\u0002vadas",
-  "properties":{
-    "date": "2017-5-18"
-  }
+    "label":"created",
+    "outV":"person:peter",
+    "inV":"software:lop",
+    "outVLabel":"person",
+    "inVLabel":"software",
+    "properties":{
+        "city": "Hongkong",
+        "date": "2017-5-18"
+    }
 }
 ```
 
@@ -1081,20 +1005,74 @@ localhost:8080/graphs/hugegraph/graph/edges
 
 ```
 {
-    "id": "person\u0002marko\u0001knows\u0001\u0001person\u0002vadas",
-    "label": "knows",
+    "id": "person:peter>created>>software:lop",
+    "label": "created",
     "type": "edge",
-    "inVLabel": "person",
+    "inVLabel": "software",
     "outVLabel": "person",
-    "inV": "person\u0002vadas",
-    "outV": "person\u0002marko",
+    "inV": "software:lop",
+    "outV": "person:peter",
     "properties": {
-        "date": "2017-5-18"
+        "date": "2017-5-18",
+        "city": "Hongkong"
     }
 }
 ```
 
-#### 3.2.2 Get(List)
+#### 3.2.2 Post(Batch)
+
+功能：创建多条边
+
+##### Url
+
+```
+localhost:8080/graphs/hugegraph/graph/edges/batch
+```
+
+##### Request Body
+
+```
+[
+    {
+        "label": "created",
+        "outV": "person:peter",
+        "inV": "software:lop",
+        "outVLabel": "person",
+        "inVLabel": "software",
+        "properties": {
+            "city": "Hongkong",
+            "date": "2017-5-18"
+        }
+    },
+    {
+        "label": "knows",
+        "outV": "person:peter",
+        "inV": "person:marko",
+        "outVLabel": "person",
+        "inVLabel": "person",
+        "properties": {
+            "date": "2016-10-18"
+        }
+    }
+]
+```
+
+##### Response Status
+
+```
+201
+```
+
+##### Response Body
+
+```
+[
+    "person:peter>created>>software:lop",
+    "person:peter>knows>>person:marko"
+]
+```
+
+#### 3.2.3 Get(List)
 
 功能：获取所有边
 
@@ -1116,39 +1094,28 @@ localhost:8080/graphs/hugegraph/graph/edges
 {
     "edges": [
         {
-            "id": "person\u0002marko\u0001knows\u0001\u0001person\u0002josh",
-            "label": "knows",
-            "type": "edge",
-            "inVLabel": "person",
-            "outVLabel": "person",
-            "inV": "person\u0002josh",
-            "outV": "person\u0002marko",
-            "properties": {
-                "date": "20130220"
-            }
-        },
-        {
-            "id": "person\u0002marko\u0001knows\u0001\u0001person\u0002vadas",
-            "label": "knows",
-            "type": "edge",
-            "inVLabel": "person",
-            "outVLabel": "person",
-            "inV": "person\u0002vadas",
-            "outV": "person\u0002marko",
-            "properties": {
-                "date": "2017-5-18"
-            }
-        },
-        {
-            "id": "person\u0002josh\u0001created\u0001\u0001software\u0002ripple",
+            "id": "person:peter>created>>software:lop",
             "label": "created",
             "type": "edge",
             "inVLabel": "software",
             "outVLabel": "person",
-            "inV": "software\u0002ripple",
-            "outV": "person\u0002josh",
+            "inV": "software:lop",
+            "outV": "person:peter",
             "properties": {
-                "date": "20171210"
+                "date": "2017-5-18",
+                "city": "Hongkong"
+            }
+        },
+        {
+            "id": "person:peter>knows>>person:marko",
+            "label": "knows",
+            "type": "edge",
+            "inVLabel": "person",
+            "outVLabel": "person",
+            "inV": "person:marko",
+            "outV": "person:peter",
+            "properties": {
+                "date": "2016-10-18"
             }
         }
     ]
@@ -1162,7 +1129,7 @@ localhost:8080/graphs/hugegraph/graph/edges
 ##### Url
 
 ```
-localhost:8080/graphs/hugegraph/graph/edges/person%02marko%01knows%01%01person%02josh
+localhost:8080/graphs/hugegraph/graph/edges/person:peter>created>>software:lop
 ```
 
 ##### Response Status
@@ -1175,15 +1142,16 @@ localhost:8080/graphs/hugegraph/graph/edges/person%02marko%01knows%01%01person%0
 
 ```
 {
-    "id": "person\u0002marko\u0001knows\u0001\u0001person\u0002josh",
-    "label": "knows",
+    "id": "person:peter>created>>software:lop",
+    "label": "created",
     "type": "edge",
-    "inVLabel": "person",
+    "inVLabel": "software",
     "outVLabel": "person",
-    "inV": "person\u0002josh",
-    "outV": "person\u0002marko",
+    "inV": "software:lop",
+    "outV": "person:peter",
     "properties": {
-        "date": "20130220"
+        "date": "2017-5-18",
+        "city": "Hongkong"
     }
 }
 ```
@@ -1195,7 +1163,7 @@ localhost:8080/graphs/hugegraph/graph/edges/person%02marko%01knows%01%01person%0
 ##### Url
 
 ```
-localhost:8080/graphs/hugegraph/graph/edges/person%02marko%01knows%01%01person%02josh
+localhost:8080/graphs/hugegraph/graph/edges/person:peter>created>>software:lop
 ```
 
 ##### Response Status
