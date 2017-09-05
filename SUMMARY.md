@@ -17,9 +17,10 @@
 ### Guides
 
 * [HugeGraph Gremlin](guides/hugegraph-gremlin.md)
-* [HugeGraph Api]()
-    - [Java Client](guides/hugeclient-doc.md)
-    - [Restful API](guides/hugegraph-api.md)
+
+### [HugeGraph Api]()
+* [Java Client](guides/hugeclient-doc.md)
+* [Restful API](guides/hugegraph-api.md)
 
 ### Performance
 
