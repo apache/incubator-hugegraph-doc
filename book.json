@@ -1,7 +1,5 @@
 {
   "plugins": [
-    "prism",
-    "-highlight",
     "toggle-chapters",
     "theme-cuav"
   ],
