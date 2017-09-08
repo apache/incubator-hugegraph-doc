@@ -116,7 +116,7 @@ HugeGraph-Client目前只提供了Java版，用户可以使用HugeGraph-Client�
     <dependency>
         <groupId>com.baidu.hugegraph</groupId>
         <artifactId>hugegraph-client</artifactId>
-        <version>1.3.0-SNAPSHOT</version>
+        <version>1.4.0-SNAPSHOT</version>
     </dependency>    
 </dependencies>
 ```
