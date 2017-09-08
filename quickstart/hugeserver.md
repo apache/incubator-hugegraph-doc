@@ -1,7 +1,7 @@
-## HugeServer Quick Start
+## HugeGraphServer Quick Start
 
 
-### 1. HugeServer 概述
+### 1. HugeGraphServer 概述
 
 
 HugeGraph Server为HugeGraph项目的核心部分，包含Core、Backend、Api等子模块，Server基于HTTP协议为各种Client提供操作图的接口。
@@ -72,62 +72,39 @@ $ git checkout master2
 [INFO] ------------------------------------------------------------------------
 ```
 
-* 执行成功后,在hugegraph目录下生成hugegraph-bin.tar.gz 文件，即为编译生成的tar包。
+* 执行成功后,在hugegraph目录下生成hugegraph-release-*.tar.gz 文件，即为编译生成的tar包。
 
 #### 2.2 下载二进制tar包
 
 
-* 可通过以下方式下载HugeGraph-bin包
+* 可通过以下方式下载HugeGraph-release包
 
 ```
-$ wget http://api.xdata.baidu.com/hdfs/yqns01/hugegraph/latest/hugegraph-bin.tar.gz
-$ tar zxvf hugegraph-latest-bin.tar.gz
+$ wget http://api.xdata.baidu.com/hdfs/yqns02/hugegraph/hugegraph-release-${version}-SNAPSHOT.tar.gz
+$ tar zxvf hugegraph-release-${version}-SNAPSHOT.tar.gz
 ```
 
 
 ###  3. 启动Server
 
  
-启动HugeGraphServer需要分别启动Cassandra、GremlinServer、HugeServer三个服务，启动过程如下：
+启动HugeGraphServer需要分别启动Cassandra、HugeGremlinServer、HugeServer三个服务，启动过程如下：
 
-* 启动Cassandra（用户无需安装Cassandra）；
+* 启动Cassandra（用户自行安装配置Cassandra）；
 
 * 初始化数据库（只初次使用时，执行一次即可）
 
 * 一键启动GremlinServer、HugeServer两个服务；
 
 
-#### 3.1 启动Cassandra
-
-启动命令如下：
-
-```
-$ cd hugegraph-bin
-$ bin/start-cassandra.sh 
-```
-
-启动成功结果如下：
-
-```
-Forking Cassandra...
-Running `nodetool statusbinary`...OK
-```
-
-通过jps命令检查：
-
-```
-$ jps
-2232 CassandraDaemon
-```
-
 **注：只有启动cassandra成功后才能执行后续步骤**
 
-#### 3.2 初始化数据库
+#### 3.1 初始化数据库
 
-在启动Cassandra后，首次执行时需要进行创建数据库操作，如下：
+首次执行时需要进行创建数据库操作，如下：
 
 ```
-$ cd hugegraph-bin
+$ cd hugegraph-release
 $ bin/init-store.sh 
 ```
 
@@ -144,7 +121,7 @@ $ bin/init-store.sh
 ...
 ```
 
-#### 3.3 启动GremlinServer和HugeServer
+#### 3.2 启动GremlinServer和HugeServer
 
 有两种方法启动GremlinServer和HugeServer：
 
@@ -155,41 +132,36 @@ $ bin/init-store.sh
 ##### 一键启动
 
 ```
-$ cd hugegraph-bin
+$ cd hugegraph-release
 $ bin/start-hugegraph.sh
 ```
 
 ##### 分步骤启动
 
 ```
-$ cd hugegraph-bin
+$ cd hugegraph-release
 $ bin/start-gremlinserver.sh 
 $ bin/start-hugeserver.sh 
 ```
 
-
-以上三个步骤分别启动了Cassandra、GremlinServer以及HugeServer三种服务。
+以上三个步骤分别启动了Cassandra、GremlinServer以及HugeServer三种服务，下面对它们作一个简单的介绍
  
-    注：启动过程中，HugeGraphServer启动内嵌的Cassandra和GremlinServer，用户不需要下载Cassandra,GremlinServer。
-    HugeGraphServer中包含 Cassandra、GremlineServer、HugeServer，其中
+1. Cassandra是一个高可用性、高扩展性的数据库，为HugeGraphServer提供数据存储；
     
-    1. Cassandra是一个高可用性、高扩展性的数据库，为HugeGraphServer提供数据存储；
+2. HugeGremlinServer提供了一种远程执行Gremlin脚本的方式，它作为独立服务支持任何Gremlin Structure的图形，从而使多个客户端能够与同一个图形数据库进行通信。
     
-    2. GremlinServer提供了一种远程执行Gremlin脚本的方式，它作为独立服务支持任何Gremlin Structure的图形，从而使多个客户端能够与同一个图形数据库进行通信。
-    
-    3. HugeServer 提供HTTP服务，将HTTP请求转化为HugeGraph中对Core API的调用，实现对图形数据的操作。
+3. HugeGraphServer提供HTTP服务，将HTTP请求转化为HugeGraph中对Core API的调用，实现对图形数据的操作。
 
 目前以上三种服务采用单机模式部署，后续会支持分布式部署，Cassandra部署方式参考[Cassandra官网](http://cassandra.apache.org/doc/latest/)，GremlinServer的部署方式参考[gremlin server](http://tinkerpop.apache.org/docs/3.2.3/reference/#gremlin-server)。
 
-#### 3.4 启动结果查询
+#### 3.3 启动结果查询
 
 可以通过以下两种方式来检测服务启动结果：
 
 * jps命令查看服务进程
 
 ```
-localhost:hugegraph-bin xxx$ jps
-6217 CassandraDaemon
+localhost:hugegraph-release xxx$ jps
 6475 HugeGraphServer
 6414 HugeGremlinServer
 ```
@@ -213,7 +185,7 @@ $ echo `curl -o /dev/null -s -w %{http_code} "http://localhost:8080/graphs/hugeg
 ### 4. 访问Server
 
 
-HugeServer包括三种类型的资源，分别是graph、schema、gremlin，
+HugeGraphServer包括三种类型的资源，分别是graph、schema、gremlin，
 
 > * `graph`包含`edges`、`vertices`; 
 > * `schema` 包含`vertexlabels`、  `propertykeys`、 `edgelabels`、`indexlabels`四种属性
@@ -449,7 +421,6 @@ $ curl http://localhost:8080/graphs/hugegraph/graph/vertices
 }
 ```
  
- 
 ### 5. 停止server
 
  
@@ -468,7 +439,7 @@ $ curl http://localhost:8080/graphs/hugegraph/graph/vertices
 一键停止server关闭HugeGremlinServer、HugeGraphServer两个服务，关闭操作如下：
 
 ```
-$cd hugegraph-bin
+$cd hugegraph-release
 $bin/stop-hugegraph.sh
 ```
 
@@ -484,5 +455,3 @@ $cd hugegraph-bin
 $bin/stop-hugeserver.sh
 $bin/stop-gremlinserver.sh
 ```
-
-        
