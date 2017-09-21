@@ -44,27 +44,18 @@ mvn package -DskipTests
 配置脚本采用 groovy 语言编写，脚本定义数据文件的路径，文件的类型，以及顶点和边的 label 和 keys。
 
 ### 4.1.1 获取数据文件路径
-- 根据 inputpath 进行拼接
+- 用户定义数据文件的路径
 ```groovy
 //示例
+inputPath = '/home/work/data'
 inputfileV = inputPath + '/vertices/'
 inputfileE = inputPath + '/edges/'
-```
-
-> inputPath 的获取：
-> 1. 如果用户执行导入时输入 -p，inputPath 为用户输入的路径
-> 2. 如果用户没有输入，inputPath 取 path，而 path 首先来自用户环境变量 LOADER_HOME，若无此环境变量则取当前工作目录
-
-- 用户使用绝对路径
-```groovy
-//示例
-inputfileV = '/Users/lizhigang/mycode/hugegraph-loader/data/JSON/data/vertices/'
-inputfileE = '/Users/lizhigang/mycode/hugegraph-loader/data/JSON/data/edges/'
 ```
 
 ### 4.1.2 定义文件的类型
 不同的文件类型，读取文件时的语法不同，所以请按照规范配置文件的类型。
 
+#### (1) 常用文件格式示例
 - JSON
 ```groovy
 //示例
@@ -76,15 +67,50 @@ authorBookInput = File.json(inputfileE + 'authorBook.json')
 - CSV
 ```groovy
 //示例
-authorInput = File.csv(inputfileV + "author.csv").delimiter('|')
-bookInput = File.csv(inputfileV + "book.csv").delimiter('|')
-authorBookInput = File.csv(inputfileE + "authorBook.csv").delimiter('|')
+authorInput = File.csv(inputfileV + "author.csv")
+bookInput = File.csv(inputfileV + "book.csv")
+authorBookInput = File.csv(inputfileE + "authorBook.csv")
 ```
 
-> 用户可自行制定 CSV 文件的列分隔符，默认为逗号。
+- TEXT
+```groovy
+//示例
+authorInput = File.text(inputfileV + "author.txt").delimiter('|')
+bookInput = File.text(inputfileV + "book.txt").delimiter('|')
+authorBookInput = File.text(inputfileE + "authorBook.txt").delimiter('|')
+```
+
+> 用户可自行制定 TEXT 文件的列分隔符，默认为制表符。
+
+#### (2) 文件的 header
+文件的 header 用于表示文件每一列内容的名称，也即默认生成图后的 properties。
+- JSON 格式的文件 key 为 header，value 为数据内容。
+- CSV 和 TEXT 格式的文件默认第一行为 header，如果文件没有 header，则需要用户指定 header
+
+```
+// CSV 指定 header
+authorInput = File.csv(inputfileV + "author.csv").header("name", "gender")
+bookInput = File.csv(inputfileV + "book.csv").header("name", "year", "ISBN")
+authorBookInput = File.csv(inputfileE + "authorBook.csv").header("auther_name", "book_name")
+
+// TEXT 指定 header
+authorInput = File.text(inputfileV + "author.txt").delimiter('|').header("name", "gender")
+bookInput = File.text(inputfileV + "book.txt").delimiter('|').header("name", "year", "ISBN")
+authorBookInput = File.text(inputfileE + "authorBook.txt").delimiter('|').header("auther_name", "book_name")
+```
+
+#### (3) 压缩文件的读取
+HugeLoader 支持压缩文件的处理和导入，目前仅支持.gzip 文件（后续将支持更多压缩格式）
+
+```groovy
+// 示例：
+authorInput = File.csv(inputfileV + "author.csv").gzip()
+bookInput = File.csv(inputfileV + "book.csv").gzip()
+authorBookInput = File.csv(inputfileE + "authorBook.csv").gzip()
+```
 
 ### 4.1.3 定义 label 和 keys
-配置脚本中仅需要为顶点和边定义 label 和 keys，properties 可以从数据文件的列名中获取,目前仅支持单 key。
+配置脚本中仅需要为顶点和边定义 label 和 keys，properties 可以从数据文件的列名中获取。
 
 > 以下配置实际是 groovy 调用 java 相应的方法，请严格按照示例格式配置。
 
@@ -93,8 +119,8 @@ authorBookInput = File.csv(inputfileE + "authorBook.csv").delimiter('|')
 ```groovy
 //示例
 load(authorInput).asVertices {
-    label "author"
-    keys "name"
+    label "author" // label 为顶点的名称
+    keys "name"    // keys 可以定义多个，相当于联合主键
 }
 
 load(bookInput).asVertices {
@@ -102,11 +128,13 @@ load(bookInput).asVertices {
     keys "name"
 }
 ```
+
 - 配置边的 label 和 keys
+
 
 ```grvvoy
 load(authorBookInput).asEdges {
-    label "authored"
+    label "authored" // label 为边的名称
     //定义边的起始顶点
     outV { 
         label "author"
@@ -120,8 +148,24 @@ load(authorBookInput).asEdges {
 }
 ```
 
+- 特殊配置
+    1. mapping : 将文件中 header 的名称进行替换，也即对数据入库进行重命名
+    2. ignores : 忽略文件中的某些列，也即不解析这些列
+
+```groovy
+//示例
+load(authorInput).asVertices {
+    label "author" 
+    keys "name"   
+    mapping "name","mappingName" // 第一个参数为源名称，第二个参数为映射名称
+    ignores "gender","age" // 可以跟多个参数
+}
+```
+
+
+
 ## 4.2 准备文本数据
-目前支持 JSON、CSV 等数据格式，数据每行的结构需要完全一致。
+目前支持 JSON、CSV、TEXT 的文件格式，数据每行的结构需要完全一致。
 
 ### 4.2.1 准备顶点数据
 > 顶点数据中的列都将作为顶点的属性存在
@@ -187,47 +231,55 @@ The Art of French Cooking, Vol. 1|Louisette Bertholie
 导入过程由用户提交的命令控制，用户可以通过不同的参数控制执行的具体流程。
 
 ### 4.3.1 参数说明
-短命令|长命令|是否有参|参数说明
- --- | --- | --- | ---
-h | help | false | 打印帮助信息和所有可用命令信息
-f | file | true | 配置脚本的路径
-g | gragh | true | 图形数据库空间
-d | address | true | 图形数据库服务端的 ip:port
-p | inputpath | true | 输入数据路径，默认为当前 classpath
-dryrun | NULL | false | 只生成 schema 而不写数据库,默认 False
-createSchema | NULL | false | 创建或更新 schema，默认 False
-schemaOutputFile | NULL | true |保存 schema 的文件，默认 proposed_schemas.groovy
-loadNew | NULL | false | 不检查数据库已有数据，直接插入数据，默认 False
+必要参数(Y/N) | 参数 | 默认值 | 描述信息
+ --- | --- | --- | --- | ---
+Y | -f | NONE | 配置脚本的路径
+Y | -g | NONE | 图形数据库空间
+N | -h | localhost | HugeServer 的地址
+N | -p | 8080 |  Hugeserver 的端口号
+N | -createSchema | true | 是否允许程序自动创建和更新图形 schema
+N | -dryRun | false | 为 true时，仅生成 schema 而不执行数据导入过程
+N | -schemaOutputFile | schema.groovy | 生成 schema 文件的名称
+N | -numThreads | availableProcessors()| 导入过程中线程池大小
+N | -batchSize | 500 | 导入数据时每个批次包含的数据条数
+N | -numFutures | 100 | 最多允许多少个任务同时提交
+N | -terminateTimeout | 10 | 多线程停止的等待时间（秒）
+N | -maxParseErrors | 1 | 最多允许多少行数据解析错误，达到该值则程序退出
+N | -maxInsertErrors | BATCH_SIZE | 最多允许多少行数据插入错误，达到该值则程序退出
+N | -loadNew         | flase | 插入边时是否检查边链接的顶点是否存在
 
-### 4.3.2 参数使用
-#### 必填参数:
-- **-f**: 指定配置脚本（建议绝对路径）
-- **-d**: 指定Hugegragh Server 的 ip:port
-- **-g**: 指定图形数据空空间，也即图的名称
+> -help 可以打印参数及其描述信息。
 
-#### 可选参数：
-- **-p:** 数据文件的路径名，默认为 path，而 path 默认为环境变量 LOADER_HOME 或者System.getProperty("user.dir")
-- **-dryrun:** 只生成 schema 存储到文件，不执行在数据库中创建 schema 和插入数据的操作。
-- **-schemaOutputFile:** 配合 dryrun 使用，指定 schema 存储的文件名，若不指定则默认为 proposed_schemas.groovy
-- **-createSchema:** 插入数据前先检查和更新 schema。若不指定该参数，当数据 schema 与数据库 schema 不一致时报错。
-- **-loadNew:** 插入边时检查边链接的两个顶点是否存在，若不指定则直接插入数据，当顶点不存在时报错。
+### 4.3.2 logs 目录文件说明
+程序执行过程中各日志及错误数据会写入 logs 相关文件中。
+
+- hugegraph-loader.log 程序运行过程中的 log 和 error 信息 (追加写)
+- parseError.data 解析错误的数据（覆盖写）
+- insertError.data 插入错误的数据（覆盖写）
+- schema.groovy 生成的图形schema 信息（覆盖写）
+
+> 用户可通过schemaOutputFile参数修改schema.groovy文件名称
 
 ### 4.3.3 执行命令
 运行 bin/hugeloader 并传入参数
-```shell
-# 示例
-bin/hugeloader -f /Users/lizhigang/mycode/hugegraph-loader/data/JSON/authorBookMap_JSON.groovy -dlocalhost:8080 -g hugegraph -p /Users/lizhigang/mycode/hugegraph-loader/data/JSON/data -createSchema -schemaOutputFile schema.groovy
+```text
+使用: bin/hugeloader [[-option value]...]
+            (通过各个参数运行程序解析数据并将数据导入指定的图形数据空间中)
+      bin/hugeloader -help
+            (打印帮助信息和所有可用参数的说明信息)
+示例: bin/hugeloader -g hugegraph -f example/example.groovy
 ```
 # 五、强制性约束
-目前为项目一期，功能尚不完备，仅支持在以下约束条件下使用
+目前为项目持续开发期，功能尚不完备，仅支持在以下约束条件下使用
 - 各项数据的类型均为 String
+- 中小数据量的导入
 
 # 六、完整例子
 本例中顶点类型为 author 和 book, 边为 authored 将 author 和 book 的关系建立起来。
 
 ## 6.1 编写配置脚本
 ```groovy
-
+inputPath = /home/work/data
 inputfileV = inputPath + '/vertices/'
 inputfileE = inputPath + '/edges/'
 
@@ -259,8 +311,10 @@ load(authorBookInput).asEdges {
 ```
 
 ## 6.2 准备文本数据
-### 顶点数据
+### 6.2.1 顶点数据
+
 author.json
+
 ```json
 {"name":"Julia Child","gender":"F"}
 {"name":"Simone Beck","gender":"F"}
@@ -274,14 +328,16 @@ author.json
 {"name":"James Beard","gender":"M"}
 ```
 book.json
+
 ```json
 {"name":"The Art of French Cooking, Vol. 1","year":"1961","ISBN":"none"}
 {"name":"Simca's Cuisine: 100 Classic French Recipes for Every Occasion","year":"1972","ISBN":"0-394-40152-2"}
 {"name":"The French Chef Cookbook","year":"1968","ISBN":"0-394-40135-2"}
 {"name":"The Art of Simple Food: Notes, Lessons, and Recipes from a Delicious Revolution","year":"2007","ISBN":"0-307-33679-4"}
 ```
-### 边数据
+### 6.2.2 边数据
 authorBook.json
+
 ```json
 {"bname":"The Art of French Cooking, Vol. 1","aname":"Julia Child","test":"test"}
 {"bname":"The Art of French Cooking, Vol. 1","aname":"Simone Beck","test":"test"}
@@ -297,7 +353,8 @@ authorBook.json
 
 ### 6.3 执行命令
 运行 bin/hugeloader 并传入参数
+
 ```shell
 # 示例
-bin/hugeloader -f /Users/lizhigang/mycode/hugegraph-loader/data/JSON/authorBookMap_JSON.groovy -d localhost:8080 -g hugegraph -p /Users/lizhigang/mycode/hugegraph-loader/data/JSON/data -createSchema -schemaOutputFile schema.groovy
+bin/hugeloader -f /home/work/data/authorBookMap_JSON.groovy -g hugegraph 
 ```
