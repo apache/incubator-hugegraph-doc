@@ -275,7 +275,7 @@ $ curl http://localhost:8080/graphs/hugegraph/graph/vertices
 }
 ```
  
-详细的API参考 Restful-API 文档(http://hugegraph.baidu.com/guides/hugegraph-api.html) 
+详细的API参考[Restful-API](http://hugegraph.baidu.com/guides/hugegraph-api.html)文档
  
 ### 5. 停止server
 

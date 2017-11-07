@@ -284,8 +284,8 @@ public class SingleExample {
 
 ## 4.4 运行Example
 
-运行Example之前需要启动Sever,启动过程见[HugeServer Quick Start](http://hugegraph.baidu.com/quickstart/hugeserver.html)
+运行Example之前需要启动Sever, 启动过程见[HugeServer Quick Start](http://hugegraph.baidu.com/quickstart/hugeserver.html)
 
 ## 4.5 Example示例说明
 
-示例说明见[HugeClient基本概念介绍](http://hugegraph.baidu.com/document/hugeclient-doc.html)
+示例说明见[HugeClient基本概念介绍](http://hugegraph.baidu.com/document/hugegraph-client.html)

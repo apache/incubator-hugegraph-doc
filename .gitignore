@@ -10,7 +10,8 @@
 *.swp
 *.log
 *.pyc
-.idea/*
+.idea
+.idea/workspace.xml
 .svn
 .classpath
 .project
@@ -18,3 +19,4 @@
 target
 gen-java
 build
+_book
