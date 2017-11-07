@@ -4,7 +4,7 @@
 ### Latest version
 
 
-The latest HugeGraph: **0.3.3** ,released on *2017-11-06*.  
+The latest HugeGraph: **0.3.3**, released on *2017-11-06*.  
 
 组件|描述|下载
 -----|----|----

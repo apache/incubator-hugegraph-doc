@@ -116,7 +116,7 @@ HugeGraph-Client目前只提供了Java版，用户可以使用HugeGraph-Client�
     <dependency>
         <groupId>com.baidu.hugegraph</groupId>
         <artifactId>hugegraph-client</artifactId>
-        <version>1.4.0-SNAPSHOT</version>
+        <version>1.4.4-SNAPSHOT</version>
     </dependency>    
 </dependencies>
 ```
@@ -135,112 +135,129 @@ import com.baidu.hugegraph.driver.GraphManager;
 import com.baidu.hugegraph.driver.GremlinManager;
 import com.baidu.hugegraph.driver.HugeClient;
 import com.baidu.hugegraph.driver.SchemaManager;
-import com.baidu.hugegraph.structure.GraphElement;
 import com.baidu.hugegraph.structure.constant.T;
 import com.baidu.hugegraph.structure.graph.Edge;
 import com.baidu.hugegraph.structure.graph.Path;
 import com.baidu.hugegraph.structure.graph.Vertex;
 import com.baidu.hugegraph.structure.gremlin.Result;
 import com.baidu.hugegraph.structure.gremlin.ResultSet;
-import com.baidu.hugegraph.structure.schema.EdgeLabel;
-import com.baidu.hugegraph.structure.schema.VertexLabel;
 
 public class SingleExample {
 
     public static void main(String[] args) throws IOException {
         // If connect failed will throw a exception.
-        HugeClient hugeClient = HugeClient.open("http://localhost:8080", "hugegraph");
+        HugeClient hugeClient = new HugeClient("http://localhost:8080",
+                                               "hugegraph");
 
         SchemaManager schema = hugeClient.schema();
-
+        
         schema.propertyKey("name").asText().ifNotExist().create();
         schema.propertyKey("age").asInt().ifNotExist().create();
+        schema.propertyKey("city").asText().ifNotExist().create();
+        schema.propertyKey("weight").asDouble().ifNotExist().create();
         schema.propertyKey("lang").asText().ifNotExist().create();
         schema.propertyKey("date").asText().ifNotExist().create();
         schema.propertyKey("price").asInt().ifNotExist().create();
 
-        VertexLabel person = schema.vertexLabel("person")
-                .properties("name", "age")
-                .primaryKeys("name")
-                .ifNotExist()
-                .create();
-
         schema.vertexLabel("person")
-                .properties("price")
-                .append();
+              .properties("name", "age", "city")
+              .primaryKeys("name")
+              .ifNotExist()
+              .create();
 
-        VertexLabel software = schema.vertexLabel("software")
-                .useCustomizeId()
-                .properties("name", "lang", "price")
-                .ifNotExist()
-                .create();
+        schema.vertexLabel("software")
+              .properties("name", "lang", "price")
+              .primaryKeys("name")
+              .ifNotExist()
+              .create();
 
         schema.indexLabel("personByName")
-                .on(person).by("name")
-                .secondary()
-                .ifNotExist()
-                .create();
+              .onV("person")
+              .by("name")
+              .secondary()
+              .ifNotExist()
+              .create();
+
+        schema.indexLabel("personByCity")
+              .onV("person")
+              .by("city")
+              .secondary()
+              .ifNotExist()
+              .create();
+
+        schema.indexLabel("personByAgeAndCity")
+              .onV("person")
+              .by("age", "city")
+              .secondary()
+              .ifNotExist()
+              .create();
 
         schema.indexLabel("softwareByPrice")
-                .on(software).by("price")
-                .search()
-                .ifNotExist()
-                .create();
+              .onV("software")
+              .by("price")
+              .search()
+              .ifNotExist()
+              .create();
 
-        EdgeLabel knows = schema.edgeLabel("knows")
-                .link("person", "person")
-                .properties("date")
-                .ifNotExist()
-                .create();
+        schema.edgeLabel("knows")
+              .sourceLabel("person")
+              .targetLabel("person")
+              .properties("date", "weight")
+              .ifNotExist()
+              .create();
 
-        EdgeLabel created = schema.edgeLabel("created")
-                .link("person", "software")
-                .properties("date")
-                .ifNotExist()
-                .create();
+        schema.edgeLabel("created")
+              .sourceLabel("person").targetLabel("software")
+              .properties("date", "weight")
+              .ifNotExist()
+              .create();
 
         schema.indexLabel("createdByDate")
-                .on(created).by("date")
-                .secondary()
-                .ifNotExist()
-                .create();
+              .onE("created")
+              .by("date")
+              .secondary()
+              .ifNotExist()
+              .create();
 
-        // get schema object by name
-        System.out.println(schema.getPropertyKey("name"));
-        System.out.println(schema.getVertexLabel("person"));
-        System.out.println(schema.getEdgeLabel("knows"));
-        System.out.println(schema.getIndexLabel("createdByDate"));
+        schema.indexLabel("createdByWeight")
+              .onE("created")
+              .by("weight")
+              .search()
+              .ifNotExist()
+              .create();
 
-        // list all schema objects
-        System.out.println(schema.getPropertyKeys());
-        System.out.println(schema.getVertexLabels());
-        System.out.println(schema.getEdgeLabels());
-        System.out.println(schema.getIndexLabels());
+        schema.indexLabel("knowsByWeight")
+              .onE("knows")
+              .by("weight")
+              .search()
+              .ifNotExist()
+              .create();
+
 
         GraphManager graph = hugeClient.graph();
+        Vertex marko = graph.addVertex(T.label, "person", "name", "marko",
+                                       "age", 29, "city", "Beijing");
+        Vertex vadas = graph.addVertex(T.label, "person", "name", "vadas",
+                                       "age", 27, "city", "Hongkong");
+        Vertex lop = graph.addVertex(T.label, "software", "name", "lop",
+                                       "lang", "java", "price", 328);
+        Vertex josh = graph.addVertex(T.label, "person", "name", "josh",
+                                       "age", 32, "city", "Beijing");
+        Vertex ripple = graph.addVertex(T.label, "software", "name", "ripple",
+                                       "lang", "java", "price", 199);
+        Vertex peter = graph.addVertex(T.label, "person", "name", "peter",
+                                       "age", 35, "city", "Shanghai");
 
-        Vertex marko = graph.addVertex(T.label, "person",
-                "name", "marko", "age", 29);
-        Vertex vadas = graph.addVertex(T.label, "person",
-                "name", "vadas", "age", 27);
-        Vertex lop = graph.addVertex(T.label, "software", T.id, "software-lop",
-                "name", "lop", "lang", "java", "price", 328);
-        Vertex josh = graph.addVertex(T.label, "person",
-                "name", "josh", "age", 32);
-        Vertex ripple = graph.addVertex(T.label, "software", T.id, "123456",
-                "name", "ripple", "lang", "java", "price", 199);
-        Vertex peter = graph.addVertex(T.label, "person",
-                "name", "peter", "age", 35);
+        marko.addEdge("knows", vadas, "date", "20160110", "weight", 0.5);
+        marko.addEdge("knows", josh, "date", "20130220", "weight", 1.0);
+        marko.addEdge("created", lop, "date", "20171210", "weight", 0.4);
+        josh.addEdge("created", lop, "date", "20091111", "weight", 0.4);
+        josh.addEdge("created", ripple, "date", "20171210", "weight", 1.0);
+        peter.addEdge("created", lop, "date", "20170324", "weight", 0.2);
 
-        marko.addEdge("knows", vadas, "date", "20160110");
-        marko.addEdge("knows", josh, "date", "20130220");
-        marko.addEdge("created", lop, "date", "20171210");
-        josh.addEdge("created", ripple, "date", "20171210");
-        josh.addEdge("created", lop, "date", "20091111");
-        peter.addEdge("created", lop, "date", "20170324");
 
         GremlinManager gremlin = hugeClient.gremlin();
-        System.out.println("==== Vertex ====");
+        System.out.println("==== Path ====");
         ResultSet resultSet = gremlin.gremlin("g.V().outE().path()").execute();
         Iterator<Result> results = resultSet.iterator();
         results.forEachRemaining(result -> {
@@ -251,8 +268,8 @@ public class SingleExample {
             } else if (object instanceof Edge) {
                 System.out.println(((Edge) object).id());
             } else if (object instanceof Path) {
-                List<GraphElement> elements = ((Path) object).objects();
-                elements.stream().forEach(element -> {
+                List<Object> elements = ((Path) object).objects();
+                elements.forEach(element -> {
                     System.out.println(element.getClass());
                     System.out.println(element);
                 });

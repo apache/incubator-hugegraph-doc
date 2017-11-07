@@ -10,7 +10,7 @@
 *.swp
 *.log
 *.pyc
-.idea
+.idea/*
 .svn
 .classpath
 .project

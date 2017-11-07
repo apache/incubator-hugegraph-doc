@@ -87,17 +87,27 @@ $ tar zxvf hugegraph-release-${version}-SNAPSHOT.tar.gz
 
 ###  3. 启动Server
 
- 
-启动HugeGraphServer需要分别启动Cassandra、HugeGremlinServer、HugeServer三个服务，启动过程如下：
+目前HugeGraphServer仅支持Cassandra作为后端存储，用户需自行下载安装Cassandra（版本 3.0 以上）,参考[Cassandra官网](http://cassandra.apache.org/doc/latest/)
 
-* 启动Cassandra（用户自行安装配置Cassandra）；
+HugeGraphServer内部集成了GremlinServer和RestServer：
+
+1. GremlinServer(http://tinkerpop.apache.org/docs/3.2.3/reference/#gremlin-server)，GremlinServer提供了一种远程执行Gremlin脚本的方式，它作为独立服务支持任何Gremlin Structure的图形，从而使多个客户端能够与同一个图形数据库进行通信。
+    
+2. RestServer提供HTTP服务，将HTTP请求转化为HugeGraph中对Core API的调用，实现对图形数据的操作。
+
+目前HugeGraphServer仅支持单机模式部署，后续会支持分布式。
+
+ 
+启动HugeGraphServer的步骤如下：
+
+* 启动Cassandra；
 
 * 初始化数据库（只初次使用时，执行一次即可）
 
-* 一键启动GremlinServer、HugeServer两个服务；
+* 启动HugeGraphServer服务；
 
 
-**注：只有启动cassandra成功后才能执行后续步骤**
+**只有启动cassandra成功后才能执行后续步骤**
 
 #### 3.1 初始化数据库
 
@@ -121,38 +131,12 @@ $ bin/init-store.sh
 ...
 ```
 
-#### 3.2 启动GremlinServer和HugeServer
-
-有两种方法启动GremlinServer和HugeServer：
-
-* 一键启动GremlinServer和HugeServer
-
-* 分步骤有序启动GremlinServer和HugeServer
-
-##### 一键启动
+#### 3.2 启动HugeGraphServer
 
 ```
 $ cd hugegraph-release
 $ bin/start-hugegraph.sh
 ```
-
-##### 分步骤启动
-
-```
-$ cd hugegraph-release
-$ bin/start-gremlinserver.sh 
-$ bin/start-hugeserver.sh 
-```
-
-以上三个步骤分别启动了Cassandra、GremlinServer以及HugeServer三种服务，下面对它们作一个简单的介绍
- 
-1. Cassandra是一个高可用性、高扩展性的数据库，为HugeGraphServer提供数据存储；
-    
-2. HugeGremlinServer提供了一种远程执行Gremlin脚本的方式，它作为独立服务支持任何Gremlin Structure的图形，从而使多个客户端能够与同一个图形数据库进行通信。
-    
-3. HugeGraphServer提供HTTP服务，将HTTP请求转化为HugeGraph中对Core API的调用，实现对图形数据的操作。
-
-目前以上三种服务采用单机模式部署，后续会支持分布式部署，Cassandra部署方式参考[Cassandra官网](http://cassandra.apache.org/doc/latest/)，GremlinServer的部署方式参考[gremlin server](http://tinkerpop.apache.org/docs/3.2.3/reference/#gremlin-server)。
 
 #### 3.3 启动结果查询
 
@@ -227,54 +211,6 @@ $ curl  http://localhost:8080/graphs/hugegraph/graph/edges
             "properties": {
                 "date": "20130220"
             }
-        }, 
-        {
-            "id": "person\u0002marko\u0001created\u0001\u0001software\u0002lop", 
-            "label": "created", 
-            "type": "edge", 
-            "inVLabel": "software", 
-            "outVLabel": "person", 
-            "inV": "softwarelop", 
-            "outV": "personmarko", 
-            "properties": {
-                "date": "20171210"
-            }
-        }, 
-        {
-            "id": "person\u0002josh\u0001created\u0001\u0001software\u0002lop", 
-            "label": "created", 
-            "type": "edge", 
-            "inVLabel": "software", 
-            "outVLabel": "person", 
-            "inV": "softwarelop", 
-            "outV": "personjosh", 
-            "properties": {
-                "date": "20091111"
-            }
-        }, 
-        {
-            "id": "person\u0002marko\u0001knows\u0001\u0001person\u0002vadas", 
-            "label": "knows", 
-            "type": "edge", 
-            "inVLabel": "person", 
-            "outVLabel": "person", 
-            "inV": "personvadas", 
-            "outV": "personmarko", 
-            "properties": {
-                "date": "20160110"
-            }
-        }, 
-        {
-            "id": "person\u0002josh\u0001created\u0001\u0001software\u0002ripple", 
-            "label": "created", 
-            "type": "edge", 
-            "inVLabel": "software", 
-            "outVLabel": "person", 
-            "inV": "softwareripple", 
-            "outV": "personjosh", 
-            "properties": {
-                "date": "20171210"
-            }
         }
     ]
 }
@@ -334,109 +270,14 @@ $ curl http://localhost:8080/graphs/hugegraph/graph/vertices
                     }
                 ]
             }
-        }, 
-        {
-            "id": "personmarko", 
-            "label": "person", 
-            "type": "vertex", 
-            "properties": {
-                "name": [
-                    {
-                        "id": "name", 
-                        "value": "marko"
-                    }
-                ], 
-                "age": [
-                    {
-                        "id": "age", 
-                        "value": 29
-                    }
-                ]
-            }
-        }, 
-        {
-            "id": "personpeter", 
-            "label": "person", 
-            "type": "vertex", 
-            "properties": {
-                "name": [
-                    {
-                        "id": "name", 
-                        "value": "peter"
-                    }
-                ], 
-                "age": [
-                    {
-                        "id": "age", 
-                        "value": 35
-                    }
-                ]
-            }
-        }, 
-        {
-            "id": "personvadas", 
-            "label": "person", 
-            "type": "vertex", 
-            "properties": {
-                "name": [
-                    {
-                        "id": "name", 
-                        "value": "vadas"
-                    }
-                ], 
-                "age": [
-                    {
-                        "id": "age", 
-                        "value": 27
-                    }
-                ]
-            }
-        }, 
-        {
-            "id": "softwareripple", 
-            "label": "software", 
-            "type": "vertex", 
-            "properties": {
-                "price": [
-                    {
-                        "id": "price", 
-                        "value": 199
-                    }
-                ], 
-                "name": [
-                    {
-                        "id": "name", 
-                        "value": "ripple"
-                    }
-                ], 
-                "lang": [
-                    {
-                        "id": "lang", 
-                        "value": "java"
-                    }
-                ]
-            }
         }
     ]
 }
 ```
  
-### 5. 停止server
-
+详细的API参考 Restful-API 文档(http://hugegraph.baidu.com/guides/hugegraph-api.html) 
  
-提供两种方式停止Server（不包含Cassandra服务）：
-
-* 一键停止Server
-
-* 分步停止Server
-
-**注：cassandra服务需用户手动停止**
-
-
-#### 5.1 一键停止
-
-
-一键停止server关闭HugeGremlinServer、HugeGraphServer两个服务，关闭操作如下：
+### 5. 停止server
 
 ```
 $cd hugegraph-release
@@ -444,14 +285,3 @@ $bin/stop-hugegraph.sh
 ```
 
 通过jps命令，检查服务停止结果
-
-#### 5.2 分步停止
-
-
-类似分步启动，我们可以分步骤停止HugeGremlinServer、HugeGraphServer两个服务，停止命令如下：
-
-```
-$cd hugegraph-bin
-$bin/stop-hugeserver.sh
-$bin/stop-gremlinserver.sh
-```
