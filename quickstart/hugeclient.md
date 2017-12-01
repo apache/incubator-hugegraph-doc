@@ -2,103 +2,37 @@
 
 ##  1. HugeClient 概述
 
-
-HugeGraph-Client目前只提供了Java版，用户可以使用HugeGraph-Client连接HugeGraph-Server，并编写Java代码操作HugeGraph，比如元数据和图数据的增删改查，或者执行gremlin语句。
-
+HugeGraph-Client向HugeGraph-Server发出HTTP请求，获取并解析Server的执行结果。目前仅提供了Java版，用户可以使用HugeGraph-Client编写Java代码操作HugeGraph，比如元数据和图数据的增删改查，或者执行gremlin语句。
 
 ##  2. 环境要求
 
-
 * jdk1.8
 * maven-3.3.9
- 
-**注：HugeClient只依赖于JDK，maven环境只提供更方便快捷的下载HugeClient jar包，也可换其他依赖管理工具，例如Gradle。暂时HugeClient jar包只部署在maven私服**
-
 
 ## 3.使用流程
 
-
 使用HugeClient的基本步骤如下:
     
-   1. 新建Eclipse/ IDEA Maven项目；
-   2. 在pom文件中添加HugeClient依赖；
-   3. 创建类，调用HugeClient接口；
+- 新建Eclipse/ IDEA Maven项目；
+
+- 在pom文件中添加HugeClient依赖；
+
+- 创建类，调用HugeClient接口；
 
 详细使用过程见下节完整示例。
 
-
 ## 4. 完整示例
 
-
 ### 4.1 新建Maven工程
-
 
 可以选择Eclipse或者Intellij Idea创建工程：
 
 * [Eclipse新建Maven工程](http://www.vogella.com/tutorials/EclipseMaven/article.html)
 * [Intellij Idea 创建maven工程](https://vaadin.com/docs/-/part/framework/getting-started/getting-started-idea.html)
  
-### 4.2 引入hugegraph-client依赖
-目前有以下两种方式在项目中引入hugegraph-client.jar包，如下：
+### 4.2 添加hugegraph-client依赖
 
-(1)修改本地Maven的setting.xml文件，添加百度profile，如下：
-
-
-```
-  <profile>
-      <id>baidu</id>
-      <repositories>
-        <repository>
-          <id>baidu-nexus</id>
-          <url>http://maven.scm.baidu.com:8081/nexus/content/groups/public</url>
-          <releases>
-            <enabled>true</enabled>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-          </snapshots>
-        </repository>
-        <repository>
-          <id>Baidu_Local</id>
-          <url>http://maven.scm.baidu.com:8081/nexus/content/repositories/Baidu_Local</url>
-          <releases>
-            <enabled>true</enabled>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-          </snapshots>
-        </repository>
-        <repository>
-          <id>Baidu_Local_Snapshots</id>
-          <url>http://maven.scm.baidu.com:8081/nexus/content/repositories/Baidu_Local_Snapshots</url>
-          <releases>
-            <enabled>true</enabled>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-          </snapshots>
-        </repository>
-      </repositories>
-      <pluginRepositories>
-        <pluginRepository>
-          <id>baidu-nexus</id>
-          <url>http://maven.scm.baidu.com:8081/nexus/content/groups/public</url>
-          <releases>
-            <enabled>true</enabled>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-          </snapshots>
-        </pluginRepository>
-      </pluginRepositories>
-  </profile>
-  <activeProfiles>
-           <activeProfile>baidu</activeProfile>
-  </activeProfiles>
-```
- 
-(2)在项目pom文件中引入百度私服仓库：
-
+- 在项目pom文件中引入百度私服仓库：
 
 ```
 <repositories>
@@ -109,7 +43,7 @@ HugeGraph-Client目前只提供了Java版，用户可以使用HugeGraph-Client�
 </repositories>
 ```
 
-使用方式（1）或（2）添加百度仓库地址后，在pom文件中添加依赖，即可引入jar包：
+- 添加hugegraph-client依赖
 
 ```
 <dependencies>
@@ -120,11 +54,10 @@ HugeGraph-Client目前只提供了Java版，用户可以使用HugeGraph-Client�
     </dependency>    
 </dependencies>
 ```
-其中，`com.baidu.hugegraph.hugegraph-client` 为hugegraph-client的相关依赖。
 
+### 4.3 Example
 
-### 4.3 新建Example类，如下：
-
+#### 4.3.1 SingleExample
 
 ```
 import java.io.IOException;
@@ -257,7 +190,6 @@ public class SingleExample {
 
 
         GremlinManager gremlin = hugeClient.gremlin();
-        System.out.println("==== Path ====");
         ResultSet resultSet = gremlin.gremlin("g.V().outE().path()").execute();
         Iterator<Result> results = resultSet.iterator();
         results.forEachRemaining(result -> {
@@ -281,6 +213,132 @@ public class SingleExample {
 }
 ```
 
+#### 4.3.2 BatchExample
+
+```
+import java.util.LinkedList;
+import java.util.List;
+
+import com.baidu.hugegraph.driver.GraphManager;
+import com.baidu.hugegraph.driver.HugeClient;
+import com.baidu.hugegraph.driver.SchemaManager;
+import com.baidu.hugegraph.structure.graph.Edge;
+import com.baidu.hugegraph.structure.graph.Vertex;
+
+public class BatchExample {
+
+    public static void main(String[] args) {
+        // If connect failed will throw a exception.
+        HugeClient hugeClient = new HugeClient("http://localhost:8080",
+                                               "hugegraph");
+
+        SchemaManager schema = hugeClient.schema();
+
+        schema.propertyKey("name").asText().ifNotExist().create();
+        schema.propertyKey("age").asInt().ifNotExist().create();
+        schema.propertyKey("lang").asText().ifNotExist().create();
+        schema.propertyKey("date").asText().ifNotExist().create();
+        schema.propertyKey("price").asInt().ifNotExist().create();
+
+        schema.vertexLabel("person")
+              .properties("name", "age")
+              .primaryKeys("name")
+              .ifNotExist()
+              .create();
+
+        schema.vertexLabel("person")
+              .properties("price")
+              .nullableKeys("price")
+              .append();
+
+        schema.vertexLabel("software")
+              .properties("name", "lang", "price")
+              .primaryKeys("name")
+              .ifNotExist()
+              .create();
+
+        schema.indexLabel("softwareByPrice")
+              .onV("software").by("price")
+              .search()
+              .ifNotExist()
+              .create();
+
+        schema.edgeLabel("knows")
+              .link("person", "person")
+              .properties("date")
+              .ifNotExist()
+              .create();
+
+        schema.edgeLabel("created")
+              .link("person", "software")
+              .properties("date")
+              .ifNotExist()
+              .create();
+
+        schema.indexLabel("createdByDate")
+              .onE("created").by("date")
+              .secondary()
+              .ifNotExist()
+              .create();
+
+        GraphManager graph = hugeClient.graph();
+
+        Vertex marko = new Vertex("person").property("name", "marko")
+                                           .property("age", 29);
+        Vertex vadas = new Vertex("person").property("name", "vadas")
+                                           .property("age", 27);
+        Vertex lop = new Vertex("software").property("name", "lop")
+                                           .property("lang", "java")
+                                           .property("price", 328);
+        Vertex josh = new Vertex("person").property("name", "josh")
+                                          .property("age", 32);
+        Vertex ripple = new Vertex("software").property("name", "ripple")
+                                              .property("lang", "java")
+                                              .property("price", 199);
+        Vertex peter = new Vertex("person").property("name", "peter")
+                                           .property("age", 35);
+
+        // Create a list to put vertex(Default max size is 500)
+        List<Vertex> vertices = new LinkedList<>();
+        vertices.add(marko);
+        vertices.add(vadas);
+        vertices.add(lop);
+        vertices.add(josh);
+        vertices.add(ripple);
+        vertices.add(peter);
+
+        // Post a vertex list to server
+        vertices = graph.addVertices(vertices);
+        vertices.forEach(vertex -> System.out.println(vertex));
+
+        Edge markoKnowsVadas = new Edge("knows").source(marko).target(vadas)
+                                                .property("date", "20160110");
+        Edge markoKnowsJosh = new Edge("knows").source(marko).target(josh)
+                                               .property("date", "20130220");
+        Edge markoCreateLop = new Edge("created").source(marko).target(lop)
+                                                 .property("date", "20171210");
+        Edge joshCreateRipple = new Edge("created").source(josh).target(ripple)
+                                                   .property("date", "20171210");
+        Edge joshCreateLop = new Edge("created").source(josh).target(lop)
+                                                .property("date", "20091111");
+        Edge peterCreateLop = new Edge("created").source(peter).target(lop)
+                                                 .property("date", "20170324");
+
+        // Create a list to put edge(Default max size is 500)
+        List<Edge> edges = new LinkedList<>();
+        edges.add(markoKnowsVadas);
+        edges.add(markoKnowsJosh);
+        edges.add(markoCreateLop);
+        edges.add(joshCreateRipple);
+        edges.add(joshCreateLop);
+        edges.add(peterCreateLop);
+
+        // Post a edge list to server
+        edges = graph.addEdges(edges, false);
+        edges.forEach(edge -> System.out.println(edge));
+    }
+}
+```
 
 ## 4.4 运行Example
 
@@ -288,4 +346,4 @@ public class SingleExample {
 
 ## 4.5 Example示例说明
 
-示例说明见[HugeClient基本概念介绍](http://hugegraph.baidu.com/document/hugegraph-client.html)
+示例说明见[HugeClient基本API介绍](http://hugegraph.baidu.com/guides/hugegraph-client.html)

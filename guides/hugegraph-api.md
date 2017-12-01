@@ -1,4 +1,3 @@
-
 ## 1. HugeGraph-API Intro
 
 HugeGraph Server通过HugeGraph-Api基于HTTP协议为Client提供操作图的接口，主要包括元数据和图数据增删改查。
@@ -19,10 +18,9 @@ localhost:8080/graphs/hugegraph/schema/propertykeys
 ##### Request Body
 ```
 {
-    "name": "id",
-    "dataType": "TEXT",
-    "cardinality": "SINGLE",
-    "properties": []
+    "name": "age",
+    "dataType": "INT",
+    "cardinality": "SINGLE"
 }
 ```
 
@@ -36,9 +34,9 @@ localhost:8080/graphs/hugegraph/schema/propertykeys
 
 ```
 {
-    "id": "3id",
-    "dataType": "TEXT",
-    "name": "id",
+    "id": "3age",
+    "name": "age",
+    "dataType": "INT",
     "cardinality": "SINGLE",
     "properties": []
 }
@@ -66,37 +64,51 @@ localhost:8080/graphs/hugegraph/schema/propertykeys
 {
     "propertykeys": [
         {
+            "id": "3city",
+            "name": "city",
+            "data_type": "TEXT",
+            "cardinality": "SINGLE",
+            "properties": []
+        },
+        {
             "id": "3age",
-            "dataType": "INT",
             "name": "age",
+            "data_type": "INT",
+            "cardinality": "SINGLE",
+            "properties": []
+        },
+        {
+            "id": "3lang",
+            "name": "lang",
+            "data_type": "TEXT",
+            "cardinality": "SINGLE",
+            "properties": []
+        },
+        {
+            "id": "3weight",
+            "name": "weight",
+            "data_type": "DOUBLE",
             "cardinality": "SINGLE",
             "properties": []
         },
         {
             "id": "3date",
-            "dataType": "TEXT",
             "name": "date",
+            "data_type": "TEXT",
             "cardinality": "SINGLE",
             "properties": []
         },
         {
-            "id": "3id",
-            "dataType": "TEXT",
-            "name": "id",
-            "cardinality": "SINGLE",
-            "properties":[]
-        }
-        {
             "id": "3name",
-            "dataType": "TEXT",
             "name": "name",
+            "data_type": "TEXT",
             "cardinality": "SINGLE",
             "properties": []
         },
         {
             "id": "3price",
-            "dataType": "INT",
             "name": "price",
+            "data_type": "INT",
             "cardinality": "SINGLE",
             "properties": []
         }
@@ -111,7 +123,7 @@ localhost:8080/graphs/hugegraph/schema/propertykeys
 ##### Url
 
 ```
-localhost:8080/graphs/hugegraph/schema/propertykeys/id
+localhost:8080/graphs/hugegraph/schema/propertykeys/age
 ```
 
 其中，`id`为要获取的PropertyKey的名字
@@ -126,9 +138,9 @@ localhost:8080/graphs/hugegraph/schema/propertykeys/id
 
 ```
 {
-    "id": "3id",
-    "dataType": "TEXT",
-    "name": "id",
+    "id": "3age",
+    "name": "age",
+    "dataType": "INT",
     "cardinality": "SINGLE",
     "properties": []
 }
@@ -141,7 +153,7 @@ localhost:8080/graphs/hugegraph/schema/propertykeys/id
 ##### Url
 
 ```
-localhost:8080/graphs/hugegraph/schema/propertykeys/id
+localhost:8080/graphs/hugegraph/schema/propertykeys/age
 ```
 
 其中，`id`为要获取的PropertyKey的名字
@@ -153,6 +165,8 @@ localhost:8080/graphs/hugegraph/schema/propertykeys/id
 ```
 
 ### 2.2 VertexLabel
+
+假设已经创建好了2.1.2中列出来的那些 PropertyKeys
 
 #### 2.2.1 Post
 
@@ -168,17 +182,16 @@ localhost:8080/graphs/hugegraph/schema/vertexlabels
 
 ```
 {
-    "name": "software",
-    "idStrategy": "PRIMARY_KEY",
+    "name": "person",
+    "id_strategy": "DEFAULT",
     "properties": [
-        "price",
         "name",
-        "lang"
+        "age"
     ],
-    "primaryKeys": [
+    "primary_keys": [
         "name"
     ],
-    "indexNames": []
+    "nullable_keys": []
 }
 ```
 
@@ -192,17 +205,19 @@ localhost:8080/graphs/hugegraph/schema/vertexlabels
 
 ```
 {
-    "id": "1software",
-    "primaryKeys": [
+    "id": "1person",
+    "primary_keys": [
         "name"
     ],
-    "indexNames": [],
-    "name": "software",
-    "idStrategy": "PRIMARY_KEY",
+    "id_strategy": "PRIMARY_KEY",
+    "name": "person2",
+    "index_names": [
+    ],
     "properties": [
-        "price",
         "name",
-        "lang"
+        "age"
+    ],
+    "nullable_keys": [
     ]
 }
 ```
@@ -214,7 +229,7 @@ localhost:8080/graphs/hugegraph/schema/vertexlabels
 ##### Url
 
 ```
-localhost:8080/graphs/hugegraph/schema/vertexlabels?action=append
+http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person?action=append
 ```
 
 注意：这个url是带有参数的
@@ -223,13 +238,11 @@ localhost:8080/graphs/hugegraph/schema/vertexlabels?action=append
 
 ```
 {
-    "name": "software",
-    "idStrategy": "DEFAULT",
-    "primaryKeys": [],
-    "indexNames": [],
+    "name": "person",
     "properties": [
         "city"
-    ]
+    ],
+    "nullable_keys": ["city"]
 }
 ```
 
@@ -243,18 +256,21 @@ localhost:8080/graphs/hugegraph/schema/vertexlabels?action=append
 
 ```
 {
-    "id": "1software",
-    "primaryKeys": [
+    "id": "1person",
+    "primary_keys": [
         "name"
     ],
-    "indexNames": [],
-    "name": "software",
-    "idStrategy": "PRIMARY_KEY",
+    "id_strategy": "PRIMARY_KEY",
+    "name": "person",
+    "index_names": [
+    ],
     "properties": [
         "city",
-        "price",
         "name",
-        "lang"
+        "age"
+    ],
+    "nullable_keys": [
+        "city"
     ]
 }
 ```
@@ -282,31 +298,38 @@ localhost:8080/graphs/hugegraph/schema/vertexlabels
     "vertexlabels": [
         {
             "id": "1person",
-            "primaryKeys": [
+            "primary_keys": [
                 "name"
             ],
-            "indexNames": [],
+            "id_strategy": "PRIMARY_KEY",
             "name": "person",
-            "idStrategy": "PRIMARY_KEY",
+            "index_names": [
+            ],
             "properties": [
                 "city",
                 "name",
                 "age"
+            ],
+            "nullable_keys": [
+                "city"
             ]
         },
         {
             "id": "1software",
-            "primaryKeys": [
+            "primary_keys": [
                 "name"
             ],
-            "indexNames": [],
+            "id_strategy": "PRIMARY_KEY",
             "name": "software",
-            "idStrategy": "PRIMARY_KEY",
+            "index_names": [
+            ],
             "properties": [
-                "city",
                 "price",
                 "name",
                 "lang"
+            ],
+            "nullable_keys": [
+                "price"
             ]
         }
     ]
@@ -334,16 +357,20 @@ localhost:8080/graphs/hugegraph/schema/vertexlabels/person
 ```
 {
     "id": "1person",
-    "primaryKeys": [
+    "primary_keys": [
         "name"
     ],
-    "indexNames": [],
+    "id_strategy": "PRIMARY_KEY",
     "name": "person",
-    "idStrategy": "PRIMARY_KEY",
+    "index_names": [
+    ],
     "properties": [
         "city",
         "name",
         "age"
+    ],
+    "nullable_keys": [
+        "city"
     ]
 }
 ```
@@ -366,6 +393,8 @@ localhost:8080/graphs/hugegraph/schema/vertexlabels/person
 
 ### 2.3 EdgeLabel
 
+假设已经创建好了2.1.2中的 PropertyKeys 和 2.2.2中的 VertexLabels
+
 #### 2.3.1 Post
 
 功能：创建一个EdgeLabel
@@ -381,14 +410,14 @@ localhost:8080/graphs/hugegraph/schema/edgelabels
 ```
 {
     "name": "created",
-    "sourceLabel": "person",
-    "targetLabel": "software",
+    "source_label": "person",
+    "target_label": "software",
     "frequency": "SINGLE",
     "properties": [
         "date"
     ],
-    "indexNames": [],
-    "sortKeys": []
+    "sort_keys": [],
+    "nullable_keys": []
 }
 ```
 
@@ -403,17 +432,19 @@ localhost:8080/graphs/hugegraph/schema/edgelabels
 ```
 {
     "id": "2created",
-    "sourceLabel": "person",
-    "indexNames": [
-        "createdByDate"
+    "sort_keys": [
     ],
+    "source_label": "person",
     "name": "created",
-    "targetLabel": "software",
-    "sortKeys": [],
+    "index_names": [
+    ],
     "properties": [
         "date"
     ],
-    "frequency": "SINGLE"
+    "target_label": "software",
+    "frequency": "SINGLE",
+    "nullable_keys": [
+    ]
 }
 ```
 
@@ -432,14 +463,12 @@ localhost:8080/graphs/hugegraph/schema/edgelabels?action=append
 ```
 {
     "name": "created",
-    "sourceLabel": null,
-    "targetLabel": null,
-    "frequency": "DEFAULT",
     "properties": [
-        "city"
+        "weight"
     ],
-    "indexNames": [],
-    "sortKeys": []
+	"nullable_keys": [
+        "weight"
+    ]
 }
 ```
 
@@ -454,19 +483,23 @@ localhost:8080/graphs/hugegraph/schema/edgelabels?action=append
 ```
 {
     "id": "2created",
-    "sourceLabel": "person",
-    "indexNames": [
-        "createdByDate"
+    "sort_keys": [
     ],
+    "source_label": "person",
     "name": "created",
-    "targetLabel": "software",
-    "sortKeys": [],
+    "index_names": [
+    ],
     "properties": [
         "date",
-        "city"
+        "weight"
     ],
-    "frequency": "SINGLE"
+    "target_label": "software",
+    "frequency": "SINGLE",
+    "nullable_keys": [
+        "weight"
+    ]
 }
+
 ```
 
 #### 2.3.3 Get(List)
@@ -492,32 +525,38 @@ localhost:8080/graphs/hugegraph/schema/edgelabels
     "edgelabels": [
         {
             "id": "2created",
-            "sourceLabel": "person",
-            "indexNames": [
-                "createdByDate",
-                "createdByCity"
+            "sort_keys": [
             ],
+            "source_label": "person",
             "name": "created",
-            "targetLabel": "software",
-            "sortKeys": [],
+            "index_names": [
+            ],
             "properties": [
                 "date",
-                "city"
+                "weight"
             ],
-            "frequency": "SINGLE"
+            "target_label": "software",
+            "frequency": "SINGLE",
+            "nullable_keys": [
+                "weight"
+            ]
         },
         {
             "id": "2knows",
-            "sourceLabel": "person",
-            "indexNames": [],
+            "sort_keys": [
+            ],
+            "source_label": "person",
             "name": "knows",
-            "targetLabel": "person",
-            "sortKeys": [],
+            "index_names": [
+            ],
             "properties": [
                 "date",
-                "price"
+                "weight"
             ],
-            "frequency": "SINGLE"
+            "target_label": "person",
+            "frequency": "SINGLE",
+            "nullable_keys": [
+            ]
         }
     ]
 }
@@ -544,16 +583,23 @@ localhost:8080/graphs/hugegraph/schema/edgelabels/created
 ```
 {
     "id": "2created",
-    "sourceLabel": "person",
-    "indexNames": [],
+    "sort_keys": [
+    ],
+    "source_label": "person",
     "name": "created",
-    "targetLabel": "software",
-    "sortKeys": [],
+    "index_names": [
+    ],
     "properties": [
         "date",
-        "city"
+        "city",
+        "weight"
     ],
-    "frequency": "SINGLE"
+    "target_label": "software",
+    "frequency": "SINGLE",
+    "nullable_keys": [
+        "city",
+        "weight"
+    ]
 }
 ```
 
@@ -575,6 +621,8 @@ localhost:8080/graphs/hugegraph/schema/edgelabels/created
 
 ### 2.4 IndexLabel
 
+假设已经创建好了2.1.2中的 PropertyKeys 、2.2.2中的 VertexLabels 以及 2.3.2中的 EdgeLabels
+
 #### 2.3.1 Post
 
 功能：创建一个IndexLabel
@@ -589,12 +637,12 @@ localhost:8080/graphs/hugegraph/schema/indexlabels
 
 ```
 {
-    "name": "softwareByPrice",
-    "baseType": "VERTEX_LABEL",
-    "baseValue": "software",
-    "indexType": "SEARCH",
+    "name": "personByCity",
+    "base_type": "VERTEX_LABEL",
+    "base_value": "person",
+    "index_type": "SECONDARY",
     "fields": [
-        "price"
+        "city"
     ]
 }
 ```
@@ -609,14 +657,14 @@ localhost:8080/graphs/hugegraph/schema/indexlabels
 
 ```
 {
-    "id": "4softwareByPrice",
-    "indexType": "SEARCH",
-    "baseValue": "software",
-    "name": "softwareByPrice",
+    "id": "4personByCity",
+    "base_type": "VERTEX_LABEL",
+    "base_value": "person",
+    "name": "personByCity",
     "fields": [
-        "price"
+        "city"
     ],
-    "baseType": "VERTEX_LABEL"
+    "index_type": "SECONDARY"
 }
 ```
 
@@ -643,23 +691,44 @@ localhost:8080/graphs/hugegraph/schema/indexlabels
     "indexlabels": [
         {
             "id": "4softwareByPrice",
-            "indexType": "SEARCH",
-            "baseValue": "software",
+            "base_type": "VERTEX_LABEL",
+            "base_value": "software",
             "name": "softwareByPrice",
             "fields": [
                 "price"
             ],
-            "baseType": "VERTEX_LABEL"
+            "index_type": "SEARCH"
         },
         {
-            "id": "4personByName",
-            "indexType": "SECONDARY",
-            "baseValue": "person",
-            "name": "personByName",
+            "id": "4createdByDate",
+            "base_type": "EDGE_LABEL",
+            "base_value": "created",
+            "name": "createdByDate",
             "fields": [
-                "name"
+                "date"
             ],
-            "baseType": "VERTEX_LABEL"
+            "index_type": "SECONDARY"
+        },
+        {
+            "id": "4personByCity",
+            "base_type": "VERTEX_LABEL",
+            "base_value": "person",
+            "name": "personByCity",
+            "fields": [
+                "city"
+            ],
+            "index_type": "SECONDARY"
+        },
+        {
+            "id": "4personByAgeAndCity",
+            "base_type": "VERTEX_LABEL",
+            "base_value": "person",
+            "name": "personByAgeAndCity",
+            "fields": [
+                "age",
+                "city"
+            ],
+            "index_type": "SECONDARY"
         }
     ]
 }
@@ -672,7 +741,7 @@ localhost:8080/graphs/hugegraph/schema/indexlabels
 ##### Url
 
 ```
-localhost:8080/graphs/hugegraph/schema/indexlabels/softwareByPrice
+localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
 ```
 
 ##### Response Status
@@ -685,14 +754,14 @@ localhost:8080/graphs/hugegraph/schema/indexlabels/softwareByPrice
 
 ```
 {
-    "id": "4softwareByPrice",
-    "indexType": "SEARCH",
-    "baseValue": "software",
-    "name": "softwareByPrice",
+    "id": "4personByCity",
+    "base_type": "VERTEX_LABEL",
+    "base_value": "person",
+    "name": "personByCity",
     "fields": [
-        "price"
+        "city"
     ],
-    "baseType": "VERTEX_LABEL"
+    "index_type": "SECONDARY"
 }
 ```
 
@@ -703,7 +772,7 @@ localhost:8080/graphs/hugegraph/schema/indexlabels/softwareByPrice
 ##### Url
 
 ```
-localhost:8080/graphs/hugegraph/schema/indexlabels/softwareByPrice
+localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
 ```
 
 ##### Response Status
@@ -715,6 +784,8 @@ localhost:8080/graphs/hugegraph/schema/indexlabels/softwareByPrice
 ## 3. 图数据
 
 ### 3.1 Vertex
+
+假设已经创建好了上述的各种schema
 
 #### 3.1.1 Post(Single)
 
@@ -732,7 +803,8 @@ localhost:8080/graphs/hugegraph/graph/vertices
 {
     "label": "person",
     "properties": {
-        "name": "marko"
+        "name": "marko",
+        "age": 29
     }
 }
 ```
@@ -756,6 +828,12 @@ localhost:8080/graphs/hugegraph/graph/vertices
                 "id": "person:marko>name",
                 "value": "marko"
             }
+        ],
+        "age": [
+            {
+                "id": "person:marko>age",
+                "value": 29
+            }
         ]
     }
 }
@@ -778,13 +856,16 @@ localhost:8080/graphs/hugegraph/graph/vertices/batch
     {
         "label": "person",
         "properties": {
-            "name": "marko"
+            "name": "marko",
+            "age": 29
         }
     },
     {
         "label": "software",
         "properties": {
-            "name": "idea"
+            "name": "ripple",
+            "lang": "java",
+            "price": 199
         }
     }
 ]
@@ -801,18 +882,138 @@ localhost:8080/graphs/hugegraph/graph/vertices/batch
 ```
 [
     "person:marko",
-    "software:idea"
+    "software:ripple"
 ]
 ```
 
-#### 3.1.3 Get(List)
+#### 3.1.3 PUT(Vertex property update)
 
-功能：获取所有顶点
+功能：更新顶点属性
 
 ##### Url
 
 ```
-localhost:8080/graphs/hugegraph/graph/vertices
+http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/person:marko?action=append
+```
+
+##### Request Body
+
+```
+{
+    "label": "person",
+    "properties": {
+        "age": 30,
+        "city": "Beijing"
+    }
+}
+```
+
+##### Response Status
+
+```
+200
+```
+
+##### Response Body
+
+```
+{
+    "id": "person:marko",
+    "label": "person",
+    "type": "vertex",
+    "properties": {
+        "city": [
+            {
+                "id": "person:marko>city",
+                "value": "Beijing"
+            }
+        ],
+        "name": [
+            {
+                "id": "person:marko>name",
+                "value": "marko"
+            }
+        ],
+        "age": [
+            {
+                "id": "person:marko>age",
+                "value": 30
+            }
+        ]
+    }
+}
+```
+
+#### 3.1.4 PUT(Vertex property delete)
+
+功能：删除顶点属性
+
+##### Url
+
+```
+http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/person:marko?action=eliminate
+```
+
+##### Request Body
+
+```
+{
+    "label": "person",
+    "properties": {
+        "city": "Beijing"
+    }
+}
+```
+
+##### Response Status
+
+```
+200
+```
+
+##### Response Body
+
+```
+{
+    "id": "person:marko",
+    "label": "person",
+    "type": "vertex",
+    "properties": {
+        "name": [
+            {
+                "id": "person:marko>name",
+                "value": "marko"
+            }
+        ],
+        "age": [
+            {
+                "id": "person:marko>age",
+                "value": 30
+            }
+        ]
+    }
+}
+```
+
+#### 3.1.5 Get(List)
+
+功能：获取符合条件的顶点
+
+查询参数包括:
+
+- label: 顶点标签
+
+- properties: 属性键值对(必须是建了索引的)
+
+- limit: 查询数目
+
+以上参数都是可选的，且可以任意组合
+
+##### Url
+
+```
+查询所有 age 为 20 的 person 顶点
+http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&properties={"age":29}limit=1
 ```
 
 ##### Response Status
@@ -850,69 +1051,19 @@ localhost:8080/graphs/hugegraph/graph/vertices
                     }
                 ]
             }
-        },
-        {
-            "id": "software:lop",
-            "label": "software",
-            "type": "vertex",
-            "properties": {
-                "price": [
-                    {
-                        "id": "software:lop>price",
-                        "value": 328
-                    }
-                ],
-                "name": [
-                    {
-                        "id": "software:lop>name",
-                        "value": "lop"
-                    }
-                ],
-                "lang": [
-                    {
-                        "id": "software:lop>lang",
-                        "value": "java"
-                    }
-                ]
-            }
-        },
-        {
-            "id": "person:peter",
-            "label": "person",
-            "type": "vertex",
-            "properties": {
-                "city": [
-                    {
-                        "id": "person:peter>city",
-                        "value": "Shanghai"
-                    }
-                ],
-                "name": [
-                    {
-                        "id": "person:peter>name",
-                        "value": "peter"
-                    }
-                ],
-                "age": [
-                    {
-                        "id": "person:peter>age",
-                        "value": 29
-                    }
-                ]
-            }
         }
     ]
 }
 ```
 
-#### 3.1.4 Get
+#### 3.1.6 Get
 
 功能：根据Id获取顶点
 
 ##### Url
 
 ```
-localhost:8080/graphs/hugegraph/graph/vertices/software:lop
+localhost:8080/graphs/hugegraph/graph/vertices/person:marko
 ```
 
 ##### Response Status
@@ -925,40 +1076,34 @@ localhost:8080/graphs/hugegraph/graph/vertices/software:lop
 
 ```
 {
-    "id": "software:lop",
-    "label": "software",
+    "id": "person:marko",
+    "label": "person",
     "type": "vertex",
     "properties": {
-        "price": [
-            {
-                "id": "software:lop>price",
-                "value": 328
-            }
-        ],
         "name": [
             {
-                "id": "software:lop>name",
-                "value": "lop"
+                "id": "person:marko>name",
+                "value": "marko"
             }
         ],
-        "lang": [
+        "age": [
             {
-                "id": "software:lop>lang",
-                "value": "java"
+                "id": "person:marko>age",
+                "value": 29
             }
         ]
     }
 }
 ```
 
-#### 3.1.5 Delete
+#### 3.1.7 Delete
 
 功能：根据Id删除顶点
 
 ##### Url
 
 ```
-localhost:8080/graphs/hugegraph/graph/vertices/software:lop
+localhost:8080/graphs/hugegraph/graph/vertices/person:marko
 ```
 
 ##### Response Status
@@ -968,6 +1113,8 @@ localhost:8080/graphs/hugegraph/graph/vertices/software:lop
 ```
 
 ### 3.2 Edge
+
+假设已经创建好了上述的各种schema和vertex
 
 #### 3.2.1 Post(Single)
 
@@ -983,15 +1130,15 @@ localhost:8080/graphs/hugegraph/graph/edges
 
 ```
 {
-    "label":"created",
-    "outV":"person:peter",
-    "inV":"software:lop",
-    "outVLabel":"person",
-    "inVLabel":"software",
-    "properties":{
-        "city": "Hongkong",
-        "date": "2017-5-18"
-    }
+  "label":"created",
+  "outV":"person:peter",
+  "inV":"software:lop",
+  "outVLabel":"person",
+  "inVLabel":"software",
+  "properties":{
+    "date": "2017-5-18",
+    "weight": 0.2
+  }
 }
 ```
 
@@ -1014,7 +1161,7 @@ localhost:8080/graphs/hugegraph/graph/edges
     "outV": "person:peter",
     "properties": {
         "date": "2017-5-18",
-        "city": "Hongkong"
+        "weight": 0.2
     }
 }
 ```
@@ -1040,18 +1187,19 @@ localhost:8080/graphs/hugegraph/graph/edges/batch
         "outVLabel": "person",
         "inVLabel": "software",
         "properties": {
-            "city": "Hongkong",
-            "date": "2017-5-18"
+            "date": "2017-5-18",
+            "weight": 0.2
         }
     },
     {
         "label": "knows",
-        "outV": "person:peter",
-        "inV": "person:marko",
+        "outV": "person:marko",
+        "inV": "person:vadas",
         "outVLabel": "person",
         "inVLabel": "person",
         "properties": {
-            "date": "2016-10-18"
+            "date": "2016-01-10",
+            "weight": 0.5
         }
     }
 ]
@@ -1068,68 +1216,28 @@ localhost:8080/graphs/hugegraph/graph/edges/batch
 ```
 [
     "person:peter>created>>software:lop",
-    "person:peter>knows>>person:marko"
+    "person:marko>knows>>person:vadas"
 ]
 ```
 
-#### 3.2.3 Get(List)
+#### 3.2.3 PUT(Edge property update)
 
-功能：获取所有边
+功能：更新边属性
 
 ##### Url
 
 ```
-localhost:8080/graphs/hugegraph/graph/edges
+http://localhost:8080/graphs/hugegraph/graph/edges/person:peter>created>>software:lop?action=append
 ```
 
-##### Response Status
-
-```
-200
-```
-
-##### Response Body
+##### Request Body
 
 ```
 {
-    "edges": [
-        {
-            "id": "person:peter>created>>software:lop",
-            "label": "created",
-            "type": "edge",
-            "inVLabel": "software",
-            "outVLabel": "person",
-            "inV": "software:lop",
-            "outV": "person:peter",
-            "properties": {
-                "date": "2017-5-18",
-                "city": "Hongkong"
-            }
-        },
-        {
-            "id": "person:peter>knows>>person:marko",
-            "label": "knows",
-            "type": "edge",
-            "inVLabel": "person",
-            "outVLabel": "person",
-            "inV": "person:marko",
-            "outV": "person:peter",
-            "properties": {
-                "date": "2016-10-18"
-            }
-        }
-    ]
+    "properties":{
+        "weight": 1.0
+    }
 }
-```
-
-#### 3.2.3 Get
-
-功能：根据Id获取边
-
-##### Url
-
-```
-localhost:8080/graphs/hugegraph/graph/edges/person:peter>created>>software:lop
 ```
 
 ##### Response Status
@@ -1151,7 +1259,150 @@ localhost:8080/graphs/hugegraph/graph/edges/person:peter>created>>software:lop
     "outV": "person:peter",
     "properties": {
         "date": "2017-5-18",
-        "city": "Hongkong"
+        "weight": 1
+    }
+}
+```
+
+#### 3.1.4 PUT(Edge property delete)
+
+功能：删除边属性
+
+##### Url
+
+```
+http://localhost:8080/graphs/hugegraph/graph/edges/person:peter>created>>software:lop?action=eliminate
+```
+
+##### Request Body
+
+```
+{
+    "properties":{
+        "weight": 1.0
+    }
+}
+```
+
+##### Response Status
+
+```
+200
+```
+
+##### Response Body
+
+```
+{
+    "id": "person:peter>created>>software:lop",
+    "label": "created",
+    "type": "edge",
+    "inVLabel": "software",
+    "outVLabel": "person",
+    "inV": "software:lop",
+    "outV": "person:peter",
+    "properties": {
+        "date": "20170324"
+    }
+}
+```
+
+#### 3.2.3 Get(List)
+
+功能：获取符合条件的边
+
+查询参数包括:
+
+- vertex_id: 顶点id
+
+- direction: 边的方向(OUT | IN | BOTH)
+
+- label: 边的标签
+
+- properties: 属性键值对(必须是建了索引的)
+
+- limit: 查询数目
+
+其中vertex_id和direction如果要出现，则必须同时出现
+
+##### Url
+
+```
+查询顶点 person:josh 的所有 created 边
+http://127.0.0.1:8080/graphs/hugegraph/graph/edges?vertex_id=person:josh&direction=BOTH&label=created&properties={}
+```
+
+##### Response Status
+
+```
+200
+```
+
+##### Response Body
+
+```
+{
+    "edges": [
+        {
+            "id": "person:josh>created>>software:lop",
+            "label": "created",
+            "type": "edge",
+            "inVLabel": "software",
+            "outVLabel": "person",
+            "inV": "software:lop",
+            "outV": "person:josh",
+            "properties": {
+                "date": "20091111",
+                "weight": 0.4
+            }
+        },
+        {
+            "id": "person:josh>created>>software:ripple",
+            "label": "created",
+            "type": "edge",
+            "inVLabel": "software",
+            "outVLabel": "person",
+            "inV": "software:ripple",
+            "outV": "person:josh",
+            "properties": {
+                "date": "20171210",
+                "weight": 1
+            }
+        }
+    ]
+}
+```
+
+#### 3.2.3 Get
+
+功能：根据Id获取边
+
+##### Url
+
+```
+http://localhost:8080/graphs/hugegraph/graph/edges/person:peter>created>>software:lop
+```
+
+##### Response Status
+
+```
+200
+```
+
+##### Response Body
+
+```
+{
+    "id": "person:peter>created>>software:lop",
+    "label": "created",
+    "type": "edge",
+    "inVLabel": "software",
+    "outVLabel": "person",
+    "inV": "software:lop",
+    "outV": "person:peter",
+    "properties": {
+        "date": "2017-5-18",
+        "weight": 0.2
     }
 }
 ```
