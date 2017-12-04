@@ -16,7 +16,7 @@ HugeLoader 是 Hugegragh 的一个模块，负责将普通文本数据转化为�
 - 下载最新版本的HugeLoader bin包：
 
 ```shell
-wget http://api.xdata.baidu.com/hdfs/yqns01/hugegraph/latest/hugegraph-loader-latest-bin.tar.gz
+wget http://api.xdata.baidu.com/hdfs/yqns02/hugegraph/hugeloader/hugegraph-loader-latest-bin.tar.gz
 tar zxvf hugegraph-loader-latest-bin.tar.gz
 ```
 
