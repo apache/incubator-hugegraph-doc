@@ -16,6 +16,7 @@
 * [5. Analysis With HugeSpark](quickstart/hugespark.md)
 
 ## Guides
+* [Getting Started](quickstart/getting-started.md)
 * [HugeGraph Gremlin](guides/hugegraph-gremlin.md)
 * [Java Client](guides/hugegraph-client.md)
 * [Restful API](guides/hugegraph-api.md)
