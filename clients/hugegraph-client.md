@@ -1,4 +1,4 @@
-# HugeClient Guides
+# HugeGraph Java Client
 
 版本：1.4.4-SNAPSHOT
 

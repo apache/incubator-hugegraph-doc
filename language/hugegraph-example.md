@@ -1,4 +1,4 @@
-# HugeGraph Getting Started
+# HugeGraph Examples
 
 ## 1. 概述
 

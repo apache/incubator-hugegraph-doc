@@ -1,4 +1,4 @@
-## 1. HugeGraph-API Intro
+## 1. HugeGraph Restful API
 
 HugeGraph Server通过HugeGraph-Api基于HTTP协议为Client提供操作图的接口，主要包括元数据和图数据增删改查。
 
