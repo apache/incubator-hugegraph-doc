@@ -1,6 +1,5 @@
 {
   "plugins": [
-    "multipart",
     "toggle-chapters",
     "theme-cuav"
   ],
