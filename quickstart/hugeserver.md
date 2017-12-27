@@ -6,6 +6,8 @@ Core模块是Tinkerpop接口的实现，Backend模块用于管理数据存储，
 
 ## 2\. 下载
 
+**环境依赖：JDK1.8，用户自行安装配置**
+
 有两种方式可以获取HugeGraph Server：
 
 - 下载tar包（推荐）
