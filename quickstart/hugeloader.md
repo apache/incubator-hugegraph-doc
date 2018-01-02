@@ -247,6 +247,12 @@ N | -terminateTimeout | 10 | 多线程停止的等待时间（秒）
 N | -maxParseErrors | 1 | 最多允许多少行数据解析错误，达到该值则程序退出
 N | -maxInsertErrors | BATCH_SIZE | 最多允许多少行数据插入错误，达到该值则程序退出
 N | -loadNew         | flase | 插入边时是否检查边链接的顶点是否存在
+N | -idStrategy      | primary_key | 顶点id生成策略(primary_key/customize)
+
+#### 关于idStrategy
+- 顶点的id生成策略默认为primary_key，即利用groovy脚本中配置的keys生成id
+- 如果顶点数据中已有id，可以采用自定义策略customize
+- 当使用策略customize时，必须保证顶点数据中有一列的header为id（或mapping为id）,且不需要在groovy脚本中配置keys
 
 > -help 可以打印参数及其描述信息。
 
@@ -279,7 +285,7 @@ N | -loadNew         | flase | 插入边时是否检查边链接的顶点是否�
 
 ## 6.1 编写配置脚本
 ```groovy
-inputPath = /home/work/data
+inputPath = '/home/work/data'
 inputfileV = inputPath + '/vertices/'
 inputfileE = inputPath + '/edges/'
 
