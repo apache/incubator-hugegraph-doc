@@ -240,12 +240,16 @@ N | -p | 8080 |  Hugeserver 的端口号
 N | -createSchema | true | 是否允许程序自动创建和更新图形 schema
 N | -dryRun | false | 为 true时，仅生成 schema 而不执行数据导入过程
 N | -schemaOutputFile | schema.groovy | 生成 schema 文件的名称
-N | -numThreads | availableProcessors()| 导入过程中线程池大小
+N | -numThreads | availableProcessors() *2 -1| 导入过程中线程池大小
 N | -batchSize | 500 | 导入数据时每个批次包含的数据条数
 N | -numFutures | 100 | 最多允许多少个任务同时提交
 N | -terminateTimeout | 10 | 多线程停止的等待时间（秒）
 N | -maxParseErrors | 1 | 最多允许多少行数据解析错误，达到该值则程序退出
 N | -maxInsertErrors | BATCH_SIZE | 最多允许多少行数据插入错误，达到该值则程序退出
+N | -timeout | 100 | 插入结果返回的超时时间（秒）
+N | -retryExceptions | java.net.SocketTimeoutException | 需要重试的异常（多个异常时用','分隔）
+N | -retryTimes | 10 | 发生特定异常时的重试次数
+N | -retryIntervalTime | 10 | 重试之前的间隔时间（秒）
 N | -loadNew         | flase | 插入边时是否检查边链接的顶点是否存在
 N | -idStrategy      | primary_key | 顶点id生成策略(primary_key/customize)
 
