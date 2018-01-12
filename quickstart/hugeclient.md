@@ -50,7 +50,7 @@ HugeGraph-Client向HugeGraph-Server发出HTTP请求，获取并解析Server的�
     <dependency>
         <groupId>com.baidu.hugegraph</groupId>
         <artifactId>hugegraph-client</artifactId>
-        <version>1.4.4-SNAPSHOT</version>
+        <version>1.4.7-SNAPSHOT</version>
     </dependency>    
 </dependencies>
 ```
@@ -128,7 +128,7 @@ public class SingleExample {
         schema.indexLabel("softwareByPrice")
               .onV("software")
               .by("price")
-              .search()
+              .range()
               .ifNotExist()
               .create();
 
@@ -155,14 +155,14 @@ public class SingleExample {
         schema.indexLabel("createdByWeight")
               .onE("created")
               .by("weight")
-              .search()
+              .range()
               .ifNotExist()
               .create();
 
         schema.indexLabel("knowsByWeight")
               .onE("knows")
               .by("weight")
-              .search()
+              .range()
               .ifNotExist()
               .create();
 
@@ -259,7 +259,7 @@ public class BatchExample {
 
         schema.indexLabel("softwareByPrice")
               .onV("software").by("price")
-              .search()
+              .range()
               .ifNotExist()
               .create();
 

@@ -61,7 +61,7 @@
 - 增加BackendMutation的测试（HugeGraph-801）
 - 多线程操作图时可能抛出NoHostAvailableException异常（HugeGraph-883）
  
-## 内部修改
+### 内部修改
 - 调整HugeGraphServer和HugeGremlinServer启动时JVM的堆内存初始为256M，最大为2048M（HugeGraph-218）
 - 创建Cassandra Table时，使用schemaBuilder代替字符串拼接（hugegraph-773）
 - 运行测试用例时如果初始化图失败（比如数据库连接不上），clear()报错（HugeGraph-910）

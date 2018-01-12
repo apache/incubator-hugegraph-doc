@@ -1,8 +1,8 @@
 # HugeGraph Java Client
 
-版本：1.4.4-SNAPSHOT
+版本：1.4.7-SNAPSHOT
 
-发布时间：2017-11-06
+发布时间：2018-01-12
 
 ## 1. HugeClient
 
