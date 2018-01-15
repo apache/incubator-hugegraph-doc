@@ -18,8 +18,9 @@
 * [2. HugeGraph Examples](language/hugegraph-example.md)
 
 ## Clients
-* [1. Java Client](clients/hugegraph-client.md)
-* [2. Restful API](clients/hugegraph-api.md)
+* [1. Gremlin Console](clients/gremlin-console.md)
+* [2. Java Client](clients/hugegraph-client.md)
+* [3. Restful API](clients/hugegraph-api.md)
 
 ## Performance
 * [Performance](performance/hugegraph-api.md)
