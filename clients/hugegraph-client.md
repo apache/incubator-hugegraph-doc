@@ -38,7 +38,7 @@ schema = hugeClient.schema()
 
 PropertyKey 用来规范顶点和边的属性的约束，暂不支持定义属性的属性。
 
-PropertyKey 允许定义的约束信息包括：name、datatype、cardinality，下面逐一介绍。
+PropertyKey 允许定义的约束信息包括：name、datatype、cardinality、userData，下面逐一介绍。
 
 - name: 属性的名字，用来区分不同的 PropertyKey，不允许有同名的属性；
 
@@ -52,7 +52,7 @@ interface     | Java Class
 ------------- | ----------
 asText()      | String
 asInt()       | Integer
-asTimestamp() | Timestamp
+asDate()      | Date
 asUuid()      | UUID
 asBoolean()   | Boolean
 asByte()      | Byte
@@ -68,6 +68,13 @@ interface     | cardinality | description
 valueSingle() | single      | single value
 valueList()   | list        | multi-values that allow duplicate value
 valueSet()    | set         | multi-values that not allow duplicate value
+
+- userData：用户可以自己添加一些约束或额外信息，然后自行检查传入的属性是否满足约束，或者必要的时候提取出额外信息
+
+interface                          | description
+---------------------------------- | ----------------------------------------------
+userData(String key, Object value) | The same key, the latter will cover the former
+
 
 #### 2.2.2 创建 PropertyKey
 
@@ -133,6 +140,12 @@ nullableKeys(String... properties) | allow to pass multi props
 
 注意：primaryKeys 和 nullableKeys 不能有交集，因为一个属性不能既作为主属性，又是可空的。
 
+- userData：用户可以自己添加一些约束或额外信息，然后自行检查传入的属性是否满足约束，或者必要的时候提取出额外信息
+
+interface                          | description
+---------------------------------- | ----------------------------------------------
+userData(String key, Object value) | The same key, the latter will cover the former
+
 #### 2.3.2 创建 VertexLabel
 
 ```
@@ -140,8 +153,10 @@ nullableKeys(String... properties) | allow to pass multi props
 schema.vertexLabel("person").properties("name", "age").ifNotExist().create();
 schema.vertexLabel("person").useAutomaticId().properties("name", "age").primaryKeys("name").ifNotExist().create();
 
-// 使用 Customize 的 Id 策略
-schema.vertexLabel("person").useCustomizeId().properties("name", "age").ifNotExist().create();
+// 使用 Customize_String 的 Id 策略
+schema.vertexLabel("person").useCustomizeStringId().properties("name", "age").ifNotExist().create();
+// 使用 Customize_Number 的 Id 策略
+schema.vertexLabel("person").useCustomizeNumberId().properties("name", "age").ifNotExist().create();
 
 // 使用 PrimaryKey 的 Id 策略
 schema.vertexLabel("person").properties("name", "age").primaryKeys("name").ifNotExist().create();
@@ -208,6 +223,12 @@ sortKeys(String... keys) | allow to choose multi prop as sortKeys
 
 注意：sortKeys 和 nullableKeys也不能有交集。
 
+- userData：用户可以自己添加一些约束或额外信息，然后自行检查传入的属性是否满足约束，或者必要的时候提取出额外信息
+
+interface                          | description
+---------------------------------- | ----------------------------------------------
+userData(String key, Object value) | The same key, the latter will cover the former
+
 #### 2.4.2 创建 EdgeLabel
 
 ```
@@ -261,12 +282,12 @@ by(String... fields) | files | allow to build index for multi fields for seconda
 interface   | indexType | description
 ----------- | --------- | ---------------------------------------
 secondary() | Secondary | support prefix search
-search()    | Search    | supports range search for numeric types
+range()     | Range     | supports range search for numeric types
 
 #### 2.5.2 创建 IndexLabel
 
 ```
-schema.indexLabel("personByAge").onV("person").by("age").search().ifNotExist().create();
+schema.indexLabel("personByAge").onV("person").by("age").range().ifNotExist().create();
 schema.indexLabel("createdByDate").onE("created").by("date").secondary().ifNotExist().create();
 ```
 
@@ -293,7 +314,9 @@ Vertex lop = graph.addVertex(T.label, "software", "name", "lop", "lang", "java",
 
 - 如果顶点类型的 Id 策略为 Automatic，则不允许用户传入 id 键值对。
 
-- 如果顶点类型的 Id 策略为 Customize，则用户需要自己传入 id 的值，键值对形如：`"T.id", "123456"`。
+- 如果顶点类型的 Id 策略为 Customize_String，则用户需要自己传入 String 类型 id 的值，键值对形如：`"T.id", "123456"`。
+
+- 如果顶点类型的 Id 策略为 Customize_String，则用户需要自己传入 Number 类型 id 的值，键值对形如：`"T.id", 123456`。
 
 - 如果顶点类型的 Id 策略为 PrimaryKey，参数还必须全部包含该`primaryKeys`对应属性的名和值，如果不设置会抛出异常。比如之前`person`的`primaryKeys`是`name`，例子中就设置了`name`的值为`marko`。
 

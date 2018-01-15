@@ -29,10 +29,12 @@ HugeGraph对应的存储概念模型也是参考Property Graph而设计的，具
 HugeGraph目前采用EdgeCut的分区方案。
 
 ## 3. VertexId 策略
+
 HugeGraph的Vertex支持三种ID策略，在同一个图数据库中不同的VertexLabel可以使用不同的Id策略，目前HugeGraph支持的Id策略分别是：
-* AUTOMATIC：使用Snowflake算法自动生成全局唯一Id
-* CUSTOMIZE：用户自定义Id，需自己保障Id的唯一性
-* PRIMARY_KEY：通过VertexLabel+PrimaryKeyValues生成Id
+* AUTOMATIC：使用Snowflake算法自动生成全局唯一Id，Long类型
+* PRIMARY_KEY：通过VertexLabel+PrimaryKeyValues生成Id，String类型
+* CUSTOMIZE_STRING：用户自定义Id，需自己保障Id的唯一性，String类型
+* CUSTOMIZE_NUMBER：用户自定义Id，需自己保障Id的唯一性，Long类型
 
 默认的Id策略是AUTOMATIC，如果用户调用primaryKeys()方法并设置了正确的PrimaryKeys，则自动启用PRIMARY_KEY策略。
 启用PRIMARY_KEY策略后HugeGraph能根据PrimaryKeys实现数据去重。
@@ -56,20 +58,29 @@ HugeGraph的Vertex支持三种ID策略，在同一个图数据库中不同的Ver
   graph.addVertex(T.label, "person","name", "marko", "age", 18, "city", "Beijing");
  ```
 
- 3. CUSTOMIZE ID策略
+ 3. CUSTOMIZE_STRING ID策略
  ```
  schema.vertexLabel("person")
-               .useCustomizeId()
+               .useCustomizeStringId()
                .properties("name", "age", "city")
                .create();
  graph.addVertex(T.label, "person", T.id, "123456", "name", "marko","age", 18, "city", "Beijing");
+ ```
+
+ 4. CUSTOMIZE_NUMBER ID策略
+ ```
+ schema.vertexLabel("person")
+               .useCustomizeNumberId()
+               .properties("name", "age", "city")
+               .create();
+ graph.addVertex(T.label, "person", T.id, 123456, "name", "marko","age", 18, "city", "Beijing");
  ```
 
 如果用户需要Vertex去重，有三种方案分别是：
 
 1. 采用PRIMARY_KEY策略，自动覆盖，适合大数据量批量插入，用户无法知道是否发生了覆盖行为
 2. 采用AUTOMATIC策略，read-and-modify，适合小数据量插入，用户可以明确知道是否发生覆盖
-3. 采用CUSTOMIZE策略，用户自己保证唯一
+3. 采用CUSTOMIZE_STRING或CUSTOMIZE_NUMBER策略，用户自己保证唯一
 
 
 ## 3. EdgeId 策略

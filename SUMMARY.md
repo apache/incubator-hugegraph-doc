@@ -28,4 +28,5 @@
 * [0.2 Release Notes](changelog/hugegraph-0.2-release-notes.md)
 * [0.2.4 Release Notes](changelog/hugegraph-0.2.4-release-notes.md)
 * [0.3.3 Release Notes](changelog/hugegraph-0.3.3-release-notes.md)
+* [0.4.4 Release Notes](changelog/hugegraph-0.4.4-release-notes.md)
 

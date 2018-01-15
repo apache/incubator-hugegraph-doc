@@ -346,4 +346,4 @@ public class BatchExample {
 
 ## 4.5 Example示例说明
 
-示例说明见[HugeClient基本API介绍](http://hugegraph.baidu.com/guides/hugegraph-client.html)
+示例说明见[HugeClient基本API介绍](http://hugegraph.baidu.com/clients/hugegraph-client.html)

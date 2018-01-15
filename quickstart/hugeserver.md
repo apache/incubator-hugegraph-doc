@@ -61,6 +61,7 @@ $ mvn package -DskipTests
 [INFO] hugegraph-cassandra ................................ SUCCESS [  0.886 s]
 [INFO] hugegraph-api ...................................... SUCCESS [  0.992 s]
 [INFO] hugegraph-scylladb ................................. SUCCESS [  0.320 s]
+[INFO] hugegraph-rocksdb .................................. SUCCESS [  0.326 s]
 [INFO] hugegraph-dist: Tar and Distribute Archives ........ SUCCESS [  7.402 s]
 [INFO] hugegraph-example .................................. SUCCESS [  0.391 s]
 [INFO] hugegraph-test ..................................... SUCCESS [  1.047 s]
@@ -77,7 +78,7 @@ $ mvn package -DskipTests
 
 ## 3\. 配置
 
-解压 hugegraph-release-_.tar.gz，进入 hugegraph-release-_ 目录，适当修改conf下的几个配置文件后，就能启动服务了。
+解压 hugegraph-release-*.tar.gz，进入 hugegraph-release-* 目录，适当修改conf下的几个配置文件后，就能启动服务了。
 
 主要的配置文件包括：gremlin-server.yaml、rest-server.properties 和 hugegraph.properties
 
@@ -95,53 +96,61 @@ gremlin-server.yaml 文件默认的内容如下：
 host: 127.0.0.1
 port: 8182
 scriptEvaluationTimeout: 30000
+# If you want to start gremlin-server for gremlin-console(web-socket),
+# please change `HttpChannelizer` to `WebSocketChannelizer` or comment this line.
 channelizer: org.apache.tinkerpop.gremlin.server.channel.HttpChannelizer
 graphs: {
   hugegraph: conf/hugegraph.properties,
-  hugegraph1: conf/hugegraph1.properties}
+  hugegraph1: conf/hugegraph1.properties
+}
 plugins:
   - com.baidu.hugegraph
 scriptEngines: {
   gremlin-groovy: {
     imports: [java.lang.Math],
     staticImports: [java.lang.Math.PI],
-    scripts: [scripts/empty-sample.groovy]}}
+    scripts: [scripts/empty-sample.groovy]
+  }
+}
 serializers:
-  - { className: org.apache.tinkerpop.gremlin.driver.ser.GryoMessageSerializerV1d0,
-      config: {
-      }
-    }
   - { className: org.apache.tinkerpop.gremlin.driver.ser.GryoLiteMessageSerializerV1d0,
-      config: {
-      }
-    }
-  - { className: org.apache.tinkerpop.gremlin.driver.ser.GryoMessageSerializerV1d0,
       config: {
         serializeResultToString: false,
         ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
       }
     }
+  - { className: org.apache.tinkerpop.gremlin.driver.ser.GryoMessageSerializerV1d0,
+      config: {
+        serializeResultToString: true,
+        ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
+      }
+    }
   - { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerGremlinV1d0,
       config: {
-        ioRegistries: [org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerIoRegistryV1d0]
+        serializeResultToString: false,
+        ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
       }
     }
   - { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerGremlinV2d0,
       config: {
-        ioRegistries: [org.apache.tinkerpop.gremlin.tinkergraph.structure.TinkerIoRegistryV2d0],
+        serializeResultToString: false,
+        ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
       }
     }
   - { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV1d0,
       config: {
+        serializeResultToString: false,
+        ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
       }
     }
 metrics: {
-  consoleReporter: {enabled: true, interval: 180000},
+  consoleReporter: {enabled: false, interval: 180000},
   csvReporter: {enabled: true, interval: 180000, fileName: /tmp/gremlin-server-metrics.csv},
-  jmxReporter: {enabled: true},
-  slf4jReporter: {enabled: true, interval: 180000},
+  jmxReporter: {enabled: false},
+  slf4jReporter: {enabled: false, interval: 180000},
   gangliaReporter: {enabled: false, interval: 180000, addressingMode: MULTICAST},
-  graphiteReporter: {enabled: false, interval: 180000}}
+  graphiteReporter: {enabled: false, interval: 180000}
+}
 maxInitialLineLength: 4096
 maxHeaderSize: 8192
 maxChunkSize: 8192
@@ -151,7 +160,8 @@ resultIterationBatchSize: 64
 writeBufferLowWaterMark: 32768
 writeBufferHighWaterMark: 65536
 ssl: {
-  enabled: false}
+  enabled: false
+}
 ```
 
 作为快速开始部分，用户仅需关注：host、port 和 graphs。
@@ -193,7 +203,6 @@ gremlin.graph=com.baidu.hugegraph.HugeFactory
 
 # cache config
 #schema.cache_capacity=1048576
-#schema.cache_expire=1800
 #graph.cache_capacity=10485760
 #graph.cache_expire=600
 
@@ -210,10 +219,15 @@ store=hugegraph
 #store.graph=huge_graph
 #store.index=huge_index
 
+# rocksdb backend config
+rocksdb.data_path=.
+rocksdb.wal_path=.
+
 # cassandra backend config
 cassandra.host=localhost
 cassandra.port=9042
-
+cassandra.username=
+cassandra.password=
 #cassandra.connect_timeout=5
 #cassandra.read_timeout=20
 
@@ -249,7 +263,6 @@ gremlin.graph=com.baidu.hugegraph.HugeFactory
 
 # cache config
 #schema.cache_capacity=1048576
-#schema.cache_expire=1800
 #graph.cache_capacity=10485760
 #graph.cache_expire=600
 
@@ -289,7 +302,6 @@ gremlin.graph=com.baidu.hugegraph.HugeFactory
 
 # cache config
 #schema.cache_capacity=1048576
-#schema.cache_expire=1800
 #graph.cache_capacity=10485760
 #graph.cache_expire=600
 
@@ -309,7 +321,8 @@ store=hugegraph
 # cassandra backend config
 cassandra.host=localhost
 cassandra.port=9042
-
+cassandra.username=
+cassandra.password=
 #cassandra.connect_timeout=5
 #cassandra.read_timeout=20
 
@@ -359,7 +372,6 @@ gremlin.graph=com.baidu.hugegraph.HugeFactory
 
 # cache config
 #schema.cache_capacity=1048576
-#schema.cache_expire=1800
 #graph.cache_capacity=10485760
 #graph.cache_expire=600
 
@@ -379,7 +391,8 @@ store=hugegraph
 # cassandra backend config
 cassandra.host=localhost
 cassandra.port=9042
-
+cassandra.username=
+cassandra.password=
 #cassandra.connect_timeout=5
 #cassandra.read_timeout=20
 
@@ -416,7 +429,6 @@ gremlin.graph=com.baidu.hugegraph.HugeFactory
 
 # cache config
 #schema.cache_capacity=1048576
-#schema.cache_expire=1800
 #graph.cache_capacity=10485760
 #graph.cache_expire=600
 
