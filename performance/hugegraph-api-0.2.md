@@ -16,6 +16,8 @@ CPU                                          | Memory | 网卡
 ## 1.2 服务配置
 
 
+- HugeGraph版本：0.2
+
 - 后端存储：使用服务内嵌的cassandra-3.10，单点部署；
 
 - 后端配置修改：修改了cassandra.yaml文件中的以下两个属性，其余选项均保持默认

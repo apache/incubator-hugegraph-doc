@@ -23,7 +23,8 @@
 * [3. Restful API](clients/hugegraph-api.md)
 
 ## Performance
-* [Performance](performance/hugegraph-api.md)
+* [1. HugeGraph Benchmark Performance](performance/hugegraph-benchmark-0.4.4.md)
+* [2. HugeGraph API Performance](performance/hugegraph-api-0.2.md)
 
 ## ChangeLog
 * [0.2 Release Notes](changelog/hugegraph-0.2-release-notes.md)
