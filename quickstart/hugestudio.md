@@ -75,17 +75,17 @@ hugestudio-release-0.X-SNAPSHOT.tar.gz文件，即为编译生成的tar包。
 可以从以下地址下载:
 
 ```
-wget http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugestudio/hugestudio-release-0.3-SNAPSHOT.tar.gz
+wget http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugestudio/hugestudio-release-0.4-SNAPSHOT.tar.gz
 ```
 下载完成后解压缩：
 
 ```
-$ tar zxvf hugestudio-release-0.3-SNAPSHOT.tar.gz
+$ tar zxvf hugestudio-release-0.4-SNAPSHOT.tar.gz
 ```
 
 注：如果在服务器部署，执行解压命令后，还需修改配置文件如下所示：
 ```
-$ cd hugestudio-release-0.3-SNAPSHOT
+$ cd hugestudio-release-0.4-SNAPSHOT
 $ vim conf/hugestudio.properties
 ```
 将"server.httpBindAddress=localhost" 中的 localhost 修改成服务器地址，再进行下一步操作。
@@ -99,7 +99,7 @@ $ vim conf/hugestudio.properties
 * 启动命令如下:
 
 ```
-$ cd hugestudio-release-0.3-SNAPSHOT
+$ cd hugestudio-release-0.4-SNAPSHOT
 $ bin/hugestudio.sh
 ```
 
