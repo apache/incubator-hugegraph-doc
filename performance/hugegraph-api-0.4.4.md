@@ -4,10 +4,8 @@
 
 机器IP            | CPU       | Memory | 网卡     | 磁盘
 ---------------- | --------- | ------ | ------- | ------ 
-sh01-dx-offline06.sh01.baidu.com | 24 Intel(R) Xeon(R) CPU E5-2620 v2 @ 2
-.10GHz | 61G | 1000Mbps | 1.4T HDD
-yq01-sw-scylladb01.yq01.baidu.com | 48 Intel(R) Xeon(R) CPU E5-2650 v4 @ 2
-.20GHz | 128G | 10000Mbps | 750GB SSD,2.7T HDD
+sh01-dx-offline06.sh01.baidu.com | 24 Intel(R) Xeon(R) CPU E5-2620 v2 @ 2.10GHz | 61G | 1000Mbps | 1.4T HDD
+yq01-sw-scylladb01.yq01.baidu.com | 48 Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz | 128G | 10000Mbps | 750GB SSD,2.7T HDD
 
 
 - 起压力机器信息：sh01-dx-offline07.sh01.baidu.com
@@ -40,17 +38,17 @@ yq01-sw-scylladb01.yq01.baidu.com | 48 Intel(R) Xeon(R) CPU E5-2650 v4 @ 2
 
 ## 2.2 底层存储
 
-RocksDB，HugeGraph与RocksDB都在同一机器上启动，server相关的配置文件除主机和端口有修改外，其余均保持默认。
+后端存储使用RocksDB，HugeGraph与RocksDB都在同一机器上启动，server相关的配置文件除主机和端口有修改外，其余均保持默认。
 
 # 3. 性能结果总结
 
 1. HugeGraph每秒能够处理的请求数目上限是7000
 
-2. 批量插入速度远大于单条插入，在服务器上测试结果达到22w边/s，37w顶点/s
+2. 批量插入速度远大于单条插入，在服务器上测试结果达到22w edges/s，37w vertices/s
 
-3. 后端是RocksDB，增大处理器数目和内存大小可以增大批量插入的性能，扩大一倍，性能增加45%-60%
+3. 后端是RocksDB，增大CPU数目和内存大小可以增大批量插入的性能。CPU和内存扩大一倍，性能增加45%-60%
 
-4. 批量插入场景，使用SSD替代HDD，提升较小，只有3%-5%
+4. 批量插入场景，使用SSD替代HDD，性能提升较小，只有3%-5%
 
 # 4. 测试结果及分析
 
@@ -98,7 +96,7 @@ RocksDB，HugeGraph与RocksDB都在同一机器上启动，server相关的配置
 
     - 边：使用SSD吞吐量451.7,使用HDD吞吐量426.6，性能提升5%
 
-    - 顶点：使用SSD吞吐量1842.4，使用HDD吞吐量1794.性能提升约3%
+    - 顶点：使用SSD吞吐量1842.4，使用HDD吞吐量1794，性能提升约3%
 
 
 4. 不同并发线程数对插入性能的影响（普通服务器，使用HDD存储RocksDB数据）：
@@ -140,6 +138,6 @@ RocksDB，HugeGraph与RocksDB都在同一机器上启动，server相关的配置
 
     - 边：
 
-        - 4000并发：响应时间1ms，6000并发无任何异常，平均响应时间8ms，主要差异在于 IO network rec和send以及CPU）；
+        - 4000并发：响应时间1ms，6000并发无任何异常，平均响应时间8ms，主要差异在于 IO network recv和send以及CPU）；
 
         - 8000并发：存在0.01%的错误率，平均耗15ms，拐点应该在7000左右，跟顶点结果匹配；

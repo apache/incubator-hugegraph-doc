@@ -24,8 +24,8 @@
 
 ## Performance
 * [1. HugeGraph Benchmark Performance](performance/hugegraph-benchmark-0.4.4.md)
-* [2. HugeGraph API Performance(0.4.4)](performance/hugegraph-api-0.4.4.md)
-* [3. HugeGraph API Performance(0.2)](performance/hugegraph-api-0.2.md)
+* [2. HugeGraph API Performance v0.4.4](performance/hugegraph-api-0.4.4.md)
+* [3. HugeGraph API Performance v0.2](performance/hugegraph-api-0.2.md)
 
 ## ChangeLog
 * [0.2 Release Notes](changelog/hugegraph-0.2-release-notes.md)
