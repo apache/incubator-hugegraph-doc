@@ -90,6 +90,19 @@ schema.propertyKey("name").asText().valueSet().ifNotExist().create()
 schema.propertyKey("name").remove()
 ```
 
+#### 2.2.4 查询 PropertyKey
+
+```
+// 获取PropertyKey对象
+schema.getPropertyKey("name")
+
+// 获取PropertyKey属性
+schema.getPropertyKey("name").cardinality()
+schema.getPropertyKey("name").dataType()
+schema.getPropertyKey("name").name()
+schema.getPropertyKey("name").userData()
+```
+
 ### 2.3 VertexLabel
 
 #### 2.3.1 接口及参数介绍
@@ -177,6 +190,21 @@ schema.vertexLabel("person").properties("price").nullableKeys("price").append();
 schema.vertexLabel("person").remove();
 ```
 
+#### 2.3.5 查询 VertexLabel
+
+```
+// 获取VertexLabel对象
+schema.getVertexLabel("name")
+
+// 获取property key属性
+schema.getVertexLabel("person").idStrategy()
+schema.getVertexLabel("person").primaryKeys()
+schema.getVertexLabel("person").name()
+schema.getVertexLabel("person").properties()
+schema.getVertexLabel("person").nullableKeys()
+schema.getVertexLabel("person").userData()
+```
+
 ### 2.4 EdgeLabel
 
 #### 2.4.1 接口及参数介绍
@@ -242,10 +270,27 @@ schema.edgeLabel("created").multiTimes().link("person", "software").properties("
 schema.edgeLabel("knows").properties("price").nullableKeys("price").append();
 ```
 
-#### 删除 EdgeLabel
+#### 2.4.4 删除 EdgeLabel
 
 ```
 schema.edgeLabel("knows").remove();
+```
+
+#### 2.4.5 查询 EdgeLabel
+
+```
+// 获取EdgeLabel对象
+schema.getEdgeLabel("knows")
+
+// 获取property key属性
+schema.getEdgeLabel("knows").frequency()
+schema.getEdgeLabel("knows").sourceLabel()
+schema.getEdgeLabel("knows").targetLabel()
+schema.getEdgeLabel("knows").sortKeys()
+schema.getEdgeLabel("knows").name()
+schema.getEdgeLabel("knows").properties()
+schema.getEdgeLabel("knows").nullableKeys()
+schema.getEdgeLabel("knows").userData()
 ```
 
 ### 2.5 IndexLabel
@@ -295,6 +340,20 @@ schema.indexLabel("createdByDate").onE("created").by("date").secondary().ifNotEx
 
 ```
 schema.indexLabel("personByAge").remove()
+```
+
+#### 2.5.4 查询 IndexLabel
+
+```
+// 获取IndexLabel对象
+schema.getIndexLabel("personByAge")
+
+// 获取property key属性
+schema.getIndexLabel("personByAge").baseType()
+schema.getIndexLabel("personByAge").baseValue()
+schema.getIndexLabel("personByAge").indexFields()
+schema.getIndexLabel("personByAge").indexType()
+schema.getIndexLabel("personByAge").name()
 ```
 
 ## 3. 图数据
