@@ -22,12 +22,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="hugegraph-benchmark-0.4.4.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="hugegraph-benchmark-0.4.4.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/performance/hugegraph-benchmark-0.4.4.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="2052">
-                <caret line="108" column="33" lean-forward="false" selection-start-line="108" selection-start-column="33" selection-end-line="108" selection-end-column="33" />
+              <first_editor relative-caret-position="433">
+                <caret line="203" column="74" lean-forward="false" selection-start-line="203" selection-start-column="74" selection-end-line="203" selection-end-column="74" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hugestudio.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quickstart/hugestudio.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="377">
+                <caret line="20" column="87" lean-forward="false" selection-start-line="20" selection-start-column="87" selection-end-line="20" selection-end-column="87" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -111,7 +124,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>hugegraph-api</find>
       <find>design1</find>
       <find>design</find>
       <find>desig</find>
@@ -141,6 +153,7 @@
       <find>api-0.4</find>
       <find>api-0.4.</find>
       <find>api-0.4.4</find>
+      <find>HugeGraphServer</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -171,7 +184,6 @@
         <option value="$PROJECT_DIR$/book.json" />
         <option value="$PROJECT_DIR$/quickstart/getting-started.md" />
         <option value="$PROJECT_DIR$/performance/hugegraph-api.md" />
-        <option value="$PROJECT_DIR$/performance/hugegraph-benchmark-0.4.4.md" />
         <option value="$PROJECT_DIR$/performance/hugegraph-api-0.2.md" />
         <option value="$PROJECT_DIR$/SUMMARY.md" />
         <option value="$PROJECT_DIR$/performance/hugegraph-api-0.4.4.md" />
@@ -1060,13 +1072,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/quickstart/hugestudio.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/quickstart/hugeclient.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1185,6 +1190,27 @@
             <folding />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/performance/hugegraph-benchmark-0.4.4.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="433">
+            <caret line="203" column="74" lean-forward="false" selection-start-line="203" selection-start-column="74" selection-end-line="203" selection-end-column="74" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>

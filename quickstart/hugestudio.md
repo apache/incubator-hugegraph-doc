@@ -18,8 +18,7 @@ HugeStudio是HugeGraph的前端展示工具，是基于Web的图形化IDE环境�
 
 ##### 注意：
 
-- HugeStudio需要依赖HugeGraph Server，在安装和使用HugeStudio之前，请通过jps命令检查Cassandra，HugeGraphServer 
-和HugeGremlinServer三个服务已经启动，如果没有启动这三个服务，请参考[HugeServer安装配置](http://hugegraph.baidu.com/quickstart/hugeserver.html)。
+- HugeStudio需要依赖HugeGraph Server，在安装和使用HugeStudio之前，请通过jps命令检查Cassandra和HugeGraphServer两个服务已经启动，如果没有启动这两个服务，请参考[HugeServer安装配置](http://hugegraph.baidu.com/quickstart/hugeserver.html)。
 
 
 ## 2.安装和运行HugeStudio

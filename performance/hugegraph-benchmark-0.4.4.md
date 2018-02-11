@@ -1,15 +1,50 @@
 # 1. 测试环境
 
 
-## 1.1 软硬件信息
+## 1.1 硬件信息
 
 
 CPU                                          | Memory | 网卡       | 磁盘
 -------------------------------------------- | ------ | --------- | ---------
 48 Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz | 128G   | 10000Mbps | 750GB SSD
 
+## 1.2 软件信息
 
-## 1.2 服务配置
+### 1.2.1 测试用例
+
+测试使用[graphdb-benchmark](https://github.com/socialsensor/graphdb-benchmarks)，一个图数据库测试集。该测试集主要包含4类测试：
+
+- Massive Insertion，批量插入顶点和边，一定数量的顶点或边一次性提交
+
+- Single Insertion，单条插入，每个顶点或者每条边立即提交
+
+- Query，主要是图数据库的基本查询操作：
+
+    - Find Neighbors，查询所有顶点的邻居
+    
+    - Find Adjacent Nodes，查询所有边的邻接顶点
+    
+    - Find Shortest Path，查询第一个顶点到100个随机顶点的最短路径
+
+- Clustering，基于Louvain Method的社区发现算法
+                                    
+### 1.2.2 测试数据集
+
+测试使用人造数据和真实数据
+
+- MIW、SIW和QW使用SNAP数据集
+
+    - [Enron Dataset](http://snap.stanford.edu/data/email-Enron.html)
+    
+    - [Amazon dataset](http://snap.stanford.edu/data/amazon0601.html)
+    
+    - [Youtube dataset](http://snap.stanford.edu/data/com-Youtube.html)
+    
+    - [LiveJournal dataset](http://snap.stanford.edu/data/com-LiveJournal.html)
+
+- CW使用[LFR-Benchmark generator](https://sites.google.com/site/andrealancichinetti/files)生成的人造数据
+
+## 1.3 服务配置
 
 - HugeGraph版本：0.4.4，RestServer和Gremlin Server和backends都在同一台服务器上
 
@@ -19,6 +54,7 @@ CPU                                          | Memory | 网卡       | 磁盘
 
 - Titan版本：0.5.4, 使用thrift+Cassandra模式
 
+> graphdb-benchmark适配的Titan版本为0.5.4
 
 # 2. 测试结果
 
@@ -33,6 +69,7 @@ RocksDB    | 2.345            | 14.076           | 16.636
 Cassandra  | 11.930           | 108.709          | 101.959
 Memory     | 3.077            | 15.204           | 13.841
 
+> 表头"（）"中数据是数据规模，以边为单位；表中数据是批量插入的时间，单位是s
 
 ### 结论
 
@@ -63,6 +100,7 @@ RocksDB    | 8.876            | 65.852           | 63.388
 Cassandra  | 13.125           | 126.959          | 102.580
 Memory     | 22.309           | 207.411          | 165.609
 
+> 表头"（）"中数据是数据规模，以边为单位；表中数据是批量插入的时间，单位是s
 
 ### 2.2.3 FA性能
 
@@ -74,6 +112,7 @@ RocksDB    | 6.032            | 64.526           | 52.721
 Cassandra  | 9.410            | 102.766          | 94.197
 Memory     | 12.340           | 195.444          | 140.89
 
+> 表头"（）"中数据是数据规模，以边为单位；表中数据是批量插入的时间，单位是s
 
 ### 结论
 
@@ -103,6 +142,8 @@ Titan      | 11.333           | 0.313            | 376.06
 RocksDB    | 44.391           | 2.221            | 268.792     
 Cassandra  | 39.845           | 3.337            | 331.113
 Memory     | 35.638           | 2.059            | 388.987
+
+> 表头"（）"中数据是数据规模，以边为单位；表中数据是批量插入的时间，单位是s
 
 - 在数据规模小或者顶点关联关系少的场景下，Titan最短路径性能优于HugeGraph
 
@@ -142,3 +183,24 @@ v1111 | 时间  | 0.039s | 0.045s | 0.053s | 1.10s  | 2.92s      | OOM
 - FS场景，HugeGraph性能优于Titan
 
 - K-neighbor和K-out场景，HugeGraph能够实现在5度范围内秒级返回结果
+
+## 2.4 图综合性能测试-CW
+
+数据库 | 规模1000 | 规模5000 | 规模10000 | 规模20000
+----- | ------- | ------- | --------- | --------
+Titan | 45.943 | 849.168 | 2737.117 | 9791.46
+Memory(core) | 41.077 | 1825.905 | * | *		
+Cassandra（core）| 39.783 | 862.744 | 2423.136 | 6564.191
+RcoksDB（core） | 33.383 | 199.894 | 763.869 | 1677.813
+
+> "规模"以顶点为单位；表中数据是社区发现完成需要的时间，单位是s；"*"表示超过10000s未完成
+
+- CW测试是CRUD的综合评估
+
+- 后三者分别是HugeGraph的不同后端，该测试中HugeGraph跟Titan一样，没有通过client，直接对core操作
+
+### 结论
+
+- HugeGraph在使用Cassandra后端时，性能略优于Titan，随着数据规模的增大，优势越来越明显，数据规模20000时，比Titan快30%
+
+- HugeGraph在使用RocksDB后端时，性能远高于Titan和HugeGraph的Cassandra后端，分别比两者快了6倍和4倍
