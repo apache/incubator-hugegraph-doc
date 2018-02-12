@@ -457,7 +457,7 @@ $ cd hugegraph-release
 $ bin/init-store.sh
 ```
 
-- RocksDB是一个嵌入式的数据库，直接将数据写磁盘上，不需要安装部署, 但对glibcxx版本有要求，必须高于GLIBCXX_3.4.10，否则需要提前升级
+- RocksDB是一个嵌入式的数据库，直接将数据写磁盘上，不需要安装部署, 但要求编译器版本 >= GCC 4.3.0（GLIBCXX_3.4.10），如不满足，需要提前升级
 
 - 启动server
 
