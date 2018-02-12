@@ -78,7 +78,7 @@ $ mvn package -DskipTests
 
 ## 3\. 配置
 
-解压 hugegraph-release-*.tar.gz，进入 hugegraph-release-* 目录，适当修改conf下的几个配置文件后，就能启动服务了。
+解压 hugegraph-release-X.Y.Z-SNAPSHOT.tar.gz，进入 hugegraph-release-X.Y.Z-SNAPSHOT 目录，适当修改conf下的几个配置文件后，就能启动服务了。
 
 主要的配置文件包括：gremlin-server.yaml、rest-server.properties 和 hugegraph.properties
 
@@ -187,7 +187,7 @@ max_edges_per_batch=500
 
 RestServer是直接处理用户请求的Server，可能会直接调用Core API，也可能将请求转发至GremlinServer再调用Core API。
 
-- restserver.url：RestServer提供服务的url，必须修改；
+- restserver.url：RestServer提供服务的url，根据实际环境修改；
 
 - gremlinserver.url：GremlinServer为RestServer提供服务的url，该配置项与gremlin-server.yaml中的host和port相匹配，默认可以不修改；
 
@@ -239,9 +239,9 @@ cassandra.password=
 
 - gremlin.graph：GremlinServer启动时需要通过此项配置的工厂类打开图，用户不要修改此项；
 
-- backend：使用的后端存储，可选值有memory、cassandra、scylladb和RocksDB（下一版支持）
+- backend：使用的后端存储，可选值有memory、cassandra、scylladb和rocksdb(0.4.4版开始支持)
 
-- serializer：主要为内部使用，用于将schema、vertex和edge序列化到后端的序列化器，对应的可选值为text、cassandra、scylladb和binary（下一版支持）
+- serializer：主要为内部使用，用于将schema、vertex和edge序列化到后端，对应的可选值为text、cassandra、scylladb和binary（0.4.4版开始支持）
 
 - store：图存储到后端使用的数据库名，在cassandra和scylladb中就是keyspace名，此项的值与GremlinServer和RestServer中的图名并无关系，但是出于直观考虑，建议仍然使用相同的名字；
 
@@ -249,7 +249,7 @@ cassandra.password=
 
 - cassandra.port：backend为cassandra或scylladb时此项才有意义，cassandra集群的native port
 
-## 4\. 启动
+## 4. 启动
 
 由于各种后端所需的配置（hugegraph.properties）及启动步骤略有不同，下面逐一介绍。
 
@@ -419,7 +419,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 ### 4.4 RocksDB
 
-RocksDB在release-0.3.3版中不支持，下一版将会支持，这里仍然将配置列出：
+RocksDB在release-0.4.4版本开始支持：
 
 - 修改 hugegraph.properties
 
@@ -439,8 +439,8 @@ gremlin.graph=com.baidu.hugegraph.HugeFactory
 
 backend=rocksdb
 serializer=binary
-rocksdb.data_path=./rocksdb
-rocksdb.wal_path=./rocksdb
+rocksdb.data_path=.
+rocksdb.wal_path=.
 
 store=hugegraph
 #store.schema=huge_schema
@@ -448,7 +448,16 @@ store=hugegraph
 #store.index=huge_index
 ```
 
-rocksdb是一个嵌入式的数据库，直接将数据写磁盘上，不需要安装部署，配置数据目录和日志目录即可。
+> RocksDB需要配置数据目录和日志目录，目录必须提前建立!
+
+- 初始化数据库（仅第一次启动时需要）
+
+```
+$ cd hugegraph-release
+$ bin/init-store.sh
+```
+
+- RocksDB是一个嵌入式的数据库，直接将数据写磁盘上，不需要安装部署, 但对glibcxx版本有要求，必须高于GLIBCXX_3.4.10，否则需要提前升级
 
 - 启动server
 
