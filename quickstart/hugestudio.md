@@ -263,5 +263,52 @@ HugeStudio不仅支持通过graph的方式展示数据，还支持table和格式
                                       ![image](/images/images-stdio/cell-json.png)
     　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 图 4-12 Formative-Json展示数据
 
+#### 4.4 HugeGraph-Studio 样式自定义
+
+##### 4.4.1 自定义VertexLabel 样式
+
+|属性|默认值 |类型|说明 |
+|:------------|:-------|:-------|:-------|
+|`vis.size`| `25` | number | 顶点大小 |
+|`vis.scaling.min`| `10` | number | 根据标签内容调整节点大小，优先级比vis.size高 |
+|`vis.scaling.max`| `30` | number | 根据标签内容调整节点大小，优先级比vis.size高 |
+|`vis.shape`| dot | string | 形状，包括ellipse, circle, database, box, text，diamond, dot, star, triangle, triangleDown, hexagon, square and icon. |
+|`vis.border`| #00ccff | string | 顶点边框颜色 |
+|`vis.background`| #00ccff | string | 顶点背景颜色 |
+|`vis.hover.border`| #00ccff | string | 鼠标悬浮时，顶点边框颜色 |
+|`vis.hover.background`| #ec3112 | string |  鼠标悬浮时，顶点背景颜色 |
+|`vis.highlight.border`| #fb6a02 | string | 选中时，顶点边框颜色 |
+|`vis.highlight.background`| #fb6a02 | string | 选中时，顶点背景颜色 |
+|`vis.font.color`| #343434 | string | 顶点标签字体颜色 |
+|`vis.font.size`| `12` | string | 顶点标签字体大小 |
+|`vis.icon.code`| `\uf111` | string | FontAwesome 图标编码，目前支持4.7.5版本的图标 |
+|`vis.icon.color`| `#2B7CE9` | string | 图标颜色，优先级比vis.background高 |
+|`vis.icon.size`| 50 | string | icon大小，优先级比vis.size高 |
 
 
+
+
+
+
+案例：
+
+```
+graph.schema().vertexLabel("software")
+.userData("vis.size",25)
+.userData("vis.scaling.min",1)
+.userData("vis.scaling.max",10)
+.userData("vis.shape","icon")
+.userData("vis.border","#66ff33")
+.userData("vis.background","#3366ff")
+.userData("vis.hover.background","#FFB90F")
+.userData("vis.hover.border","#00EE00")
+.userData("vis.highlight.background","#7A67EE")
+.userData("vis.highlight.border","#4F4F4F")
+.userData("vis.font.color","#1C86EE")
+.userData("vis.font.size",12)
+.userData("vis.icon.code","\uf1b9")
+.userData("vis.icon.color","#8EE5EE")
+.userData("vis.icon.size",25)
+.append()
+
+```
