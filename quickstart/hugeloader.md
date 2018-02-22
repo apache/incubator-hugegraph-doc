@@ -251,13 +251,13 @@ N | -retryExceptions | java.net.SocketTimeoutException | 需要重试的异常�
 N | -retryTimes | 10 | 发生特定异常时的重试次数
 N | -retryIntervalTime | 10 | 重试之前的间隔时间（秒）
 N | -loadNew         | flase | 插入边时是否检查边链接的顶点是否存在
-N | -idStrategy      | primary_key | 顶点id生成策略(primary_key/customize)
+N | -idStrategy      | primary_key | 顶点id生成策略(primary_key/customize_string)
 N | -invalidKeyRegex | null | 过滤掉用户配置的正则表达式匹配到的key，默认过滤掉keys 全为 null 或 '' 的数据
 
 #### 关于idStrategy
 - 顶点的id生成策略默认为primary_key，即利用groovy脚本中配置的keys生成id
-- 如果顶点数据中已有id，可以采用自定义策略customize
-- 当使用策略customize时，必须保证顶点数据中有一列的header为id（或mapping为id）,且不需要在groovy脚本中配置keys
+- 如果顶点数据中已有id，可以采用自定义策略customize_string
+- 当使用策略customize_string时，必须保证顶点数据中有一列的header为id（或mapping为id）,且不需要在groovy脚本中配置keys
 
 > -help 可以打印参数及其描述信息。
 
