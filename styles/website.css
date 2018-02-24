@@ -1,11 +1,7 @@
-
-.navigation {
-    min-width: 30px !important;
-}
 .page-inner {
     position: relative;
     margin: 0 auto;
-    max-width: 100% !important;
+    max-width: 80% !important;
     padding: 20px 50px 40px 50px !important;
 }
 

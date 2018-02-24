@@ -371,13 +371,13 @@ Vertex lop = graph.addVertex(T.label, "software", "name", "lop", "lang", "java",
 
 - 参数中必须包含一对特殊的键值对，就是`T.label -> "val"`，用来定义该顶点的类别，以便于程序从缓存或后端获取到该VertexLabel的schema定义，然后做后续的约束检查。例子中的label定义为person。
 
-- 如果顶点类型的 Id 策略为 Automatic，则不允许用户传入 id 键值对。
+- 如果顶点类型的 Id 策略为 `AUTOMATIC`，则不允许用户传入 id 键值对。
 
-- 如果顶点类型的 Id 策略为 Customize_String，则用户需要自己传入 String 类型 id 的值，键值对形如：`"T.id", "123456"`。
+- 如果顶点类型的 Id 策略为 `CUSTOMIZE_STRING`，则用户需要自己传入 String 类型 id 的值，键值对形如：`"T.id", "123456"`。
 
-- 如果顶点类型的 Id 策略为 Customize_String，则用户需要自己传入 Number 类型 id 的值，键值对形如：`"T.id", 123456`。
+- 如果顶点类型的 Id 策略为 `CUSTOMIZE_NUMBER`，则用户需要自己传入 Number 类型 id 的值，键值对形如：`"T.id", 123456`。
 
-- 如果顶点类型的 Id 策略为 PrimaryKey，参数还必须全部包含该`primaryKeys`对应属性的名和值，如果不设置会抛出异常。比如之前`person`的`primaryKeys`是`name`，例子中就设置了`name`的值为`marko`。
+- 如果顶点类型的 Id 策略为 `PRIMARY_KEY`，参数还必须全部包含该`primaryKeys`对应属性的名和值，如果不设置会抛出异常。比如之前`person`的`primaryKeys`是`name`，例子中就设置了`name`的值为`marko`。
 
 - 对于非 nullableKeys 的属性，必须要赋值。
 
