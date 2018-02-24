@@ -1,3 +1,7 @@
+
+.navigation {
+    min-width: 30px !important;
+}
 .page-inner {
     position: relative;
     margin: 0 auto;
