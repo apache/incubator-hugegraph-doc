@@ -312,3 +312,58 @@ graph.schema().vertexLabel("software")
 .append()
 
 ```
+
+<br/>
+<DIV align=center>
+<TABLE style="BORDER-COLLAPSE: collapse" borderColor=#111111 cellPadding=2 
+width=740 border=0>
+颜色代码示例：
+  <TBODY>
+    <TR>
+        <TD align=middle width="10%" bgColor=#fffff height=16>
+        <FONT face="MS Sans Serif" size=2 color=#000000>#ffffff </FONT></TD>
+        <TD align=middle width="10%" bgColor=#ffffcc height=16>
+        <FONT face="MS Sans Serif" size=2 color=#000000>#ffffcc </FONT></TD>  
+        <TD align=middle width="10%" bgColor=#cccccc height=16>
+        <FONT face="MS Sans Serif" size=2 color=#000000>#cccccc </FONT></TD>  
+        <TD align=middle width="10%" bgColor=#999999 height=16>
+        <FONT face="MS Sans Serif" size=2 color=#000000>#999999 </FONT></TD> 
+        <TD align=middle width="10%" bgColor=#000000 height=16>
+        <FONT face="MS Sans Serif" color=#ffffff size=2>#000000 </FONT></TD>
+        <TD align=middle width="10%" bgColor=#fc363b height=16>
+        <FONT face="MS Sans Serif" color=#ffffff size=2>#fc363b </FONT></TD> 
+        <TD align=middle width="10%" bgColor=#fb157e height=16>
+        <FONT face="MS Sans Serif" color=#ffffff size=2>#fb157e </FONT></TD> 
+        <TD align=middle width="10%" bgColor=#fec96e height=16>
+        <FONT face="MS Sans Serif" color=#ffffff size=2>#fec96e </FONT></TD>
+        <TD align=middle width="10%" bgColor=#b80711 height=16>
+        <FONT face="MS Sans Serif" color=#ffffff size=2>#b80711</FONT></TD> 
+        <TD align=middle width="10%" bgColor=#e981f2 height=16>
+        <FONT face="MS Sans Serif" color=#ffffff size=2>#e981f2 </FONT></TD> 
+    </TR>
+    <TR>
+        <TD align=middle width="10%" bgColor=#fb6120 height=16>
+        <FONT face="MS Sans Serif" size=2 color=#000000>#fb6120 </FONT></TD>
+        <TD align=middle width="10%" bgColor=#9b9dfa height=16>
+        <FONT face="MS Sans Serif" size=2 color=#000000>#9b9dfa </FONT></TD>  
+        <TD align=middle width="10%" bgColor=#98c2f9 height=16>
+        <FONT face="MS Sans Serif" size=2 color=#000000>#98c2f9 </FONT></TD>  
+        <TD align=middle width="10%" bgColor=#3e71ef height=16>
+        <FONT face="MS Sans Serif" size=2 color=#000000>#3e71ef </FONT></TD> 
+        <TD align=middle width="10%" bgColor=#fecec8 height=16>
+        <FONT face="MS Sans Serif" color=#00000 size=2>#fecec8 </FONT></TD>
+        <TD align=middle width="10%" bgColor=#77d46f height=16>
+        <FONT face="MS Sans Serif" color=#00000 size=2>#77d46f </FONT></TD> 
+        <TD align=middle width="10%" bgColor=#fefc38 height=16>
+        <FONT face="MS Sans Serif" color=#00000 size=2>#fefc38 </FONT></TD> 
+        <TD align=middle width="10%" bgColor=#7ede4d height=16>
+        <FONT face="MS Sans Serif" color=#ffffff size=2>#7ede4d </FONT></TD>
+        <TD align=middle width="10%" bgColor=#c3f9be height=16>
+        <FONT face="MS Sans Serif" color=#00000 size=2>#c3f9be</FONT></TD> 
+        <TD align=middle width="10%" bgColor=#f95c79 height=16>
+        <FONT face="MS Sans Serif" color=#ffffff size=2>#f95c79 </FONT></TD> 
+    </TR>
+  
+  </TBODY>
+  </TABLE>
+  </DIV>
