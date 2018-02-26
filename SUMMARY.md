@@ -9,6 +9,7 @@
 * [Load data With HugeLoader](quickstart/hugeloader.md)
 * [Develop With HugeClient](quickstart/hugeclient.md)
 * [Analysis With HugeSpark](quickstart/hugespark.md)
+* [FAQ](quickstart/faq.md)
 
 ## Guides
 * [Architecture Overview](guides/hugegraph-architectural.md)
