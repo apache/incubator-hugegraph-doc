@@ -16,7 +16,7 @@
       "navbar": {
         "brand": {
           "logo": {
-            "alt": "图片信息",
+            "alt": "HugeGraph Database",
             "path": "../images/logo.png"
           }
         }

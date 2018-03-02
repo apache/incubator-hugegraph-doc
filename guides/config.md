@@ -1,5 +1,6 @@
-## 配置
+# HugeGraph 配置
 
+## 1. 概述
 配置文件的目录为 hugegraph-release/conf，所有关于服务和图本身的配置都在此目录下。
 
 主要的配置文件包括：gremlin-server.yaml、rest-server.properties 和 hugegraph.properties
@@ -12,7 +13,7 @@ HugeGraphServer 内部集成了 GremlinServer 和 RestServer，而 gremlin-serve
 
 下面对这三个配置文件逐一介绍。
 
-### gremlin-server.yaml
+## 2. gremlin-server.yaml
 
 gremlin-server.yaml 文件默认的内容如下：
 
@@ -97,7 +98,7 @@ ssl: {
 
 - graphs：GremlinServer 启动时需要打开的图，该项是一个 map 结构，key 是图的名字，value 是该图的配置文件路径；
 
-### rest-server.properties
+## 3. rest-server.properties
 
 rest-server.properties 文件的默认内容如下：
 
@@ -118,7 +119,7 @@ max_edges_per_batch=500
 
 > 注意：gremlin-server.yaml 和 rest-server.properties 都包含 graphs 配置项，而 `init-store` 命令是根据 gremlin-server.yaml 的 graphs 下的图进行初始化的。
 
-### hugegraph.properties
+## 4. hugegraph.properties
 
 hugegraph.properties 是一类文件，因为如果系统存在多个图，则会有多个相似的文件。该文件用来配置与图存储和查询相关的参数，文件的默认内容如下：
 
@@ -158,6 +159,9 @@ cassandra.password=
 
 #cassandra.keyspace.strategy=SimpleStrategy
 #cassandra.keyspace.replication=3
+
+# hugespark
+admin.token=162f7848-0b6d-4faf-b557-3a0797869c55
 ```
 
 重点关注未注释的几项：
@@ -178,7 +182,9 @@ cassandra.password=
 
 - rocksdb.wal_path：backend 为 rocksdb 时此项才有意义，rocksdb 的日志目录
 
-### 3.4 多图配置
+- admin.token: 通过一个token来获取服务器的配置信息，例如：http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55
+
+## 5. 多图配置
 
 我们的系统是可以存在多个图的，并且各个图的后端可以不一样，比如图 hugegraph 和 hugegraph1，其中 hugegraph 以 cassandra 作为后端，hugegraph1 以 rocksdb作为后端。
 
