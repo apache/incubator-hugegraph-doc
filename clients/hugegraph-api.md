@@ -200,7 +200,8 @@ localhost:8080/graphs/hugegraph/schema/vertexlabels
     "primary_keys": [
         "name"
     ],
-    "nullable_keys": []
+    "nullable_keys": [],
+    "enable_label_index": true
 }
 ```
 
@@ -228,6 +229,7 @@ localhost:8080/graphs/hugegraph/schema/vertexlabels
     ],
     "nullable_keys": [
     ],
+    "enable_label_index": true,
     "user_data":{}
 }
 ```
@@ -285,6 +287,7 @@ http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person?action=append
     "nullable_keys": [
         "city"
     ],
+    "enable_label_index": true,
     "user_data":{
         "super": "animal"
     }
@@ -329,6 +332,7 @@ localhost:8080/graphs/hugegraph/schema/vertexlabels
             "nullable_keys": [
                 "city"
             ],
+            "enable_label_index": true,
             "user_data":{
                 "super": "animal"
             }
@@ -350,6 +354,7 @@ localhost:8080/graphs/hugegraph/schema/vertexlabels
             "nullable_keys": [
                 "price"
             ],
+            "enable_label_index": false,
             "user_data":{}
         }
     ]
@@ -392,6 +397,7 @@ localhost:8080/graphs/hugegraph/schema/vertexlabels/person
     "nullable_keys": [
         "city"
     ],
+    "enable_label_index": true,
     "user_data":{
         "super": "animal"
     }
@@ -440,7 +446,8 @@ localhost:8080/graphs/hugegraph/schema/edgelabels
         "date"
     ],
     "sort_keys": [],
-    "nullable_keys": []
+    "nullable_keys": [],
+    "enable_label_index": true,
 }
 ```
 
@@ -468,6 +475,7 @@ localhost:8080/graphs/hugegraph/schema/edgelabels
     "frequency": "SINGLE",
     "nullable_keys": [
     ],
+    "enable_label_index": true,
     "user_data":{}
 }
 ```
@@ -522,6 +530,7 @@ localhost:8080/graphs/hugegraph/schema/edgelabels?action=append
     "nullable_keys": [
         "weight"
     ],
+    "enable_label_index": true,
     "user_data":{}
 }
 
@@ -565,6 +574,7 @@ localhost:8080/graphs/hugegraph/schema/edgelabels
             "nullable_keys": [
                 "weight"
             ],
+            "enable_label_index": true,
             "user_data":{}
         },
         {
@@ -583,6 +593,7 @@ localhost:8080/graphs/hugegraph/schema/edgelabels
             "frequency": "SINGLE",
             "nullable_keys": [
             ],
+            "enable_label_index": false,
             "user_data":{}
         }
     ]
@@ -627,6 +638,7 @@ localhost:8080/graphs/hugegraph/schema/edgelabels/created
         "city",
         "weight"
     ],
+    "enable_label_index": true,
     "user_data":{}
 }
 ```
