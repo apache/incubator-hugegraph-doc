@@ -153,6 +153,13 @@ nullableKeys(String... properties) | allow to pass multi props
 
 注意：primaryKeys 和 nullableKeys 不能有交集，因为一个属性不能既作为主属性，又是可空的。
 
+- enableLabelIndex：用户可以指定是否需要为label创建索引。不创建则无法全局搜索指定label的顶点和边，创建则可以全局搜索，做类似于`g.V().hasLabel('person'), g.E().has('label', 'person')`这样的查询，
+但是插入数据时性能上会更加慢，并且需要占用更多的存储空间。此项默认为 true。
+
+interface                          | description
+---------------------------------- | -------------------------------
+enableLabelIndex(boolean enable)   | Whether to create a label index
+
 - userData：用户可以自己添加一些约束或额外信息，然后自行检查传入的属性是否满足约束，或者必要的时候提取出额外信息
 
 interface                          | description
@@ -250,6 +257,8 @@ sortKeys(String... keys) | allow to choose multi prop as sortKeys
 - nullableKeys: 与顶点中的 nullableKeys 概念一致，不再赘述
 
 注意：sortKeys 和 nullableKeys也不能有交集。
+
+- enableLabelIndex：与顶点中的 enableLabelIndex 概念一致，不再赘述
 
 - userData：用户可以自己添加一些约束或额外信息，然后自行检查传入的属性是否满足约束，或者必要的时候提取出额外信息
 
