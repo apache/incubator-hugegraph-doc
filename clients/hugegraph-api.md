@@ -1519,7 +1519,10 @@ localhost:8080/graphs/hugegraph/traversers/shortestpath?source=1&target=12345&ma
 
 ### 4.2 K-out
 
-功能：根据起始顶点、方向、边的类型（可选）和深度depth，查找从起始顶点出发恰好depth步可达的顶点
+功能：根据起始顶点、方向、边的类型（可选）和深度depth，查找从起始顶点出发恰好depth步可达的顶点.
+
+> 参数nearest，默认为true，代表起始顶点到达结果顶点的最短路径长度为depth，不存在更短的路径；
+nearest为false时，代表起始顶点到结果顶点有一条长度为depth的路径（未必最短且可以有环）
 
 #### 方法
 
@@ -1606,6 +1609,42 @@ localhost:8080/graphs/hugegraph/traversers/kneighbor?source=1&depth=5&direction=
         20,
         21,
         ......
+    ]
+}
+```
+
+### 4.4 批量查询顶点
+
+功能：根据顶点的id列表，批量查询顶点
+
+#### 方法
+
+```
+GET
+```
+
+#### Url
+
+```
+localhost:8080/graphs/hugegraph/traversers/vertices?ids="5:java-1"&ids="5:java-2"&ids="5:java-3"&ids="5:java-4"&ids="5:java-5"
+```
+
+##### Response Status
+
+```
+200
+```
+
+##### Response Body
+
+```
+{
+    "vertices":[
+        {"id": "5:java-1", "label": "book", "type": "vertex", "properties":{"name":[{"id": "5:java-1>name",…},
+        {"id": "5:java-2", "label": "book", "type": "vertex", "properties":{"name":[{"id": "5:java-2>name",…},
+        {"id": "5:java-3", "label": "book", "type": "vertex", "properties":{"name":[{"id": "5:java-3>name",…},
+        {"id": "5:java-4", "label": "book", "type": "vertex", "properties":{"name":[{"id": "5:java-4>name",…},
+        {"id": "5:java-5", "label": "book", "type": "vertex", "properties":{"name":[{"id": "5:java-5>name",…}
     ]
 }
 ```
