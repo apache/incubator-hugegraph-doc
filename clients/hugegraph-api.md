@@ -651,7 +651,7 @@ localhost:8080/graphs/hugegraph/schema/edgelabels/created
 
 假设已经创建好了2.1.2中的 PropertyKeys 、2.2.2中的 VertexLabels 以及 2.3.2中的 EdgeLabels
 
-#### 2.3.1 Post
+#### 2.4.1 Post
 
 功能：创建一个IndexLabel
 
@@ -696,7 +696,7 @@ localhost:8080/graphs/hugegraph/schema/indexlabels
 }
 ```
 
-#### 2.3.2 Get(List)
+#### 2.4.2 Get(List)
 
 功能：获取所有的IndexLabel
 
@@ -762,7 +762,7 @@ localhost:8080/graphs/hugegraph/schema/indexlabels
 }
 ```
 
-#### 2.3.3 Get
+#### 2.4.3 Get
 
 功能：根据name获取IndexLabel
 
@@ -793,7 +793,7 @@ localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
 }
 ```
 
-#### 2.3.4 Delete
+#### 2.4.4 Delete
 
 功能：根据name删除IndexLabel
 
@@ -1320,7 +1320,7 @@ http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action=app
 }
 ```
 
-#### 3.1.4 PUT(Edge property delete)
+#### 3.2.4 PUT(Edge property delete)
 
 功能：删除边属性
 
@@ -1363,7 +1363,7 @@ http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action=eli
 }
 ```
 
-#### 3.2.3 Get(List)
+#### 3.2.5 Get(List)
 
 功能：获取符合条件的边
 
@@ -1429,7 +1429,7 @@ http://127.0.0.1:8080/graphs/hugegraph/graph/edges?vertex_id="1:josh"&direction=
 }
 ```
 
-#### 3.2.3 Get
+#### 3.2.6 Get
 
 功能：根据Id获取边
 
@@ -1463,7 +1463,7 @@ http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
 }
 ```
 
-#### 3.2.4 Delete
+#### 3.2.7 Delete
 
 功能：根据Id删除顶点
 
@@ -1477,4 +1477,135 @@ localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
 
 ```
 204
+```
+
+## 4. 遍历
+
+### 4.1 Shortest Path
+
+功能：根据起始顶点、目的顶点、方向、边的类型（可选）和最大深度，查找一条最短路径
+
+#### 方法
+
+```
+GET
+```
+
+#### Url
+
+```
+localhost:8080/graphs/hugegraph/traversers/shortestpath?source=1&target=12345&max_depth=5&direction=OUT
+```
+
+##### Response Status
+
+```
+200
+```
+
+##### Response Body
+
+```
+{
+    "path":[
+        1,
+        27,
+        76,
+        582,
+        12345
+    ]
+}
+```
+
+### 4.2 K-out
+
+功能：根据起始顶点、方向、边的类型（可选）和深度depth，查找从起始顶点出发恰好depth步可达的顶点
+
+#### 方法
+
+```
+GET
+```
+
+#### Url
+
+```
+localhost:8080/graphs/hugegraph/traversers/kout?source=1&depth=5&direction=OUT
+```
+
+##### Response Status
+
+```
+200
+```
+
+##### Response Body
+
+```
+{
+    "vertices":[
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        2,
+        20,
+        21,
+        ......
+    ]
+}
+```
+
+### 4.3 K-neighbor
+
+功能：根据起始顶点、方向、边的类型（可选）和深度depth，查找包括起始顶点在内、depth步之内可达的所有顶点。
+
+> 相当于：起始顶点、K-out(1)、K-out(2)、... 、K-out(depth)的并集
+
+#### 方法
+
+```
+GET
+```
+
+#### Url
+
+```
+localhost:8080/graphs/hugegraph/traversers/kneighbor?source=1&depth=5&direction=OUT
+```
+
+##### Response Status
+
+```
+200
+```
+
+##### Response Body
+
+```
+{
+    "vertices":[
+        1,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        2,
+        20,
+        21,
+        ......
+    ]
+}
 ```
