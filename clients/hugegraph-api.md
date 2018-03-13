@@ -1660,3 +1660,272 @@ localhost:8080/graphs/hugegraph/traversers/vertices?ids="5:java-1"&ids="5:java-2
     ]
 }
 ```
+## 5 Variables
+
+Variables可以用来存储有关整个图的数据，数据按照键值对的方式存取
+
+### 5.1 PUT(Create or Update)
+
+功能：创建或者更新某个键值对
+
+#### 方法
+
+```
+PUT
+```
+
+#### Url
+
+```
+http://localhost:8080/graphs/hugegraph/variables/name
+```
+
+##### Request Body
+
+```
+{
+  "data":"tom"
+}
+```
+
+##### Response Status
+
+```
+200
+```
+
+##### Response Body
+
+```
+{
+    "name": "tom"
+}
+```
+
+### 5.2 GET(List)
+
+功能：列出全部键值对
+
+#### 方法
+
+```
+GET
+```
+
+#### Url
+
+```
+http://localhost:8080/graphs/hugegraph/variables
+```
+
+##### Response Status
+
+```
+200
+```
+
+##### Response Body
+
+```
+{
+    "name": "tom"
+}
+```
+
+### 5.3 GET
+
+功能：列出某个键值对
+
+#### 方法
+
+```
+GET
+```
+
+#### Url
+
+```
+http://localhost:8080/graphs/hugegraph/variables/name
+```
+
+##### Response Status
+
+```
+200
+```
+
+##### Response Body
+
+```
+{
+    "name": "tom"
+}
+```
+
+### 5.4 DELETE
+
+功能：删除某个键值对
+
+#### 方法
+
+```
+DELETE
+```
+
+#### Url
+
+```
+http://localhost:8080/graphs/hugegraph/variables/name
+```
+
+##### Response Status
+
+```
+204
+```
+
+## 6 图操作
+
+### 6.1 列举图
+
+功能：列出数据库中全部的图
+
+#### 方法
+
+```
+GET
+```
+
+#### Url
+
+```
+http://localhost:8080/graphs
+```
+
+##### Response Status
+
+```
+200
+```
+
+##### Response Body
+
+```
+{
+    "graphs":[
+        "hugegraph",
+        "hugegraph1"
+    ]
+}
+```
+
+### 6.2 Conf
+
+功能：查看某个图的配置，**该操作需要管理员权限**
+
+#### 方法
+
+```
+GET
+```
+
+#### Url
+
+```
+http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55
+```
+
+##### Response Status
+
+```
+200
+```
+
+##### Response Body
+
+```
+# gremlin entrence to create graph
+gremlin.graph=com.baidu.hugegraph.HugeFactory
+
+# cache config
+#schema.cache_capacity=1048576
+#graph.cache_capacity=10485760
+#graph.cache_expire=600
+
+# schema illegal name template
+#schema.illegal_name_regex=\s+|~.*
+
+#vertex.default_label=vertex
+
+backend=cassandra
+serializer=cassandra
+
+store=hugegraph
+#store.schema=huge_schema
+#store.graph=huge_graph
+#store.index=huge_index
+
+# rocksdb backend config
+rocksdb.data_path=.
+rocksdb.wal_path=.
+......
+```
+
+### 6.3 清空图
+
+功能：清空某个图的全部数据，包括schema、vertex、edge和索引等，**该操作需要管理员权限**
+
+#### 方法
+
+```
+DELETE
+```
+
+#### Url
+
+```
+http://localhost:8080/graphs/hugegraph/clear?token=162f7848-0b6d-4faf-b557-3a0797869c55&confirm_message=I%27m+sure+to+delete+all+data
+```
+
+##### Response Status
+
+```
+204
+```
+
+## 7 其他
+
+### 7.1 版本
+
+功能：查看HugeGraph的版本信息
+
+#### 方法
+
+```
+GET
+```
+
+#### Url
+
+```
+http://localhost:8080/versions
+```
+
+##### Response Status
+
+```
+200
+```
+
+##### Response Body
+
+```
+{
+    "versions":{
+        "version": "v1",
+        "core": "0.4.5.1",
+        "gremlin": "3.2.5",
+        "api": "0.13.2.0"
+    }
+}
+```
