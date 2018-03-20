@@ -128,7 +128,7 @@ store|用于遍历返回的非阻塞聚合|[store step](http://tinkerpop.apache.
 tree|将顶点中的路径聚合到树中|[tree step](http://tinkerpop.apache.org/docs/current/reference/#tree-step)
 unfold|将迭代器作为步骤展开|[unfold step](http://tinkerpop.apache.org/docs/current/reference/#unfold-step)
 union|合并多个遍历返回的结果|[union step](http://tinkerpop.apache.org/docs/current/reference/#union-step)
-V|包括顶点与边缘之间的遍历所需的步骤：`V`、`E`、`out`、`in`、`both`、`outE`、`inE`、`bothE`、`outV`、`inV`、`bothV` 和 `otherV`	|[order step](http://tinkerpop.apache.org/docs/current/reference/#vertex-steps)
+V|包括顶点与边之间的遍历所需的步骤：`V`、`E`、`out`、`in`、`both`、`outE`、`inE`、`bothE`、`outV`、`inV`、`bothV` 和 `otherV`	|[order step](http://tinkerpop.apache.org/docs/current/reference/#vertex-steps)
 where|用于筛选遍历返回的结果。 支持 `eq`、`neq`、`lt`、`lte`、`gt`、`gte` 和 `between` 运算符|[where step](http://tinkerpop.apache.org/docs/current/reference/#where-step)
 
 

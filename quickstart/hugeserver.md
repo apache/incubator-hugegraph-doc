@@ -257,7 +257,7 @@ HugeGraphServer的RestAPI包括三种类型的资源，分别是graph、schema�
 
 - `schema` 包含`vertexlabels`、 `propertykeys`、 `edgelabels`、`indexlabels`
 
-- `gremlin`包含各种`gremlin`语句，如`g.v()`
+- `gremlin`包含各种`Gremlin`语句，如`g.v()`
 
 #### 5.2.1 获取`hugegraph`的顶点及相关属性
 

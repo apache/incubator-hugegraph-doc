@@ -49,7 +49,7 @@
 
   由于属于某一label的数据量可能比较多，请加上limit限制。
 
-- 通过`Restful API`操作图是可以的，但是发送`gremlin`语句就报错：`Request Failed(500)`
+- 通过`Restful API`操作图是可以的，但是发送`Gremlin`语句就报错：`Request Failed(500)`
 
   可能是`GremlinServer`的配置有误，检查`gremlin-server.yaml`的`host`、`port`是否与`rest-server.properties`的`gremlinserver.url`匹配，如不匹配则修改，然后重启服务。
 
@@ -61,7 +61,7 @@
 
   目前确实没有好办法删除全部的数据，用户如果是自己部署的`Server`和后端，可以直接清空数据库，重启`Server`。后续版本会加入分页机制支持该功能。
 
-- 清空了数据库，并且执行了`init-store`，但是添加`schema`时提示"xxx has exised"
+- 清空了数据库，并且执行了`init-store`，但是添加`schema`时提示"xxx has existed"
 
   `HugeGraph Server`内是有缓存的，清空数据库的同时是需要重启`Server`的，否则残留的缓存会产生不一致。
 

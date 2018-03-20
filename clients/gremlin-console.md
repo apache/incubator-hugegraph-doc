@@ -109,7 +109,7 @@ gremlin> g.E()
 ==>e[S1:marko>2>>S2:lop][1:marko-created->2:lop]
 ```
 
-更多的gremlin语句请参考[Tinkerpop官网](http://tinkerpop.apache.org/docs/current/reference/)
+更多的Gremlin语句请参考[Tinkerpop官网](http://tinkerpop.apache.org/docs/current/reference/)
 
 ### 2、Client/Server请求模式
 

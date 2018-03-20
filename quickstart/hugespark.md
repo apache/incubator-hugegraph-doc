@@ -158,5 +158,5 @@ $ cp baidu/xbu-data/hugegraph-spark/target/hugegraph-spark-0.1.0-SNAPSHOT-jar-wi
 
 ## 5.限制
 
-- 一个分区的的元素个数需要小于4 亿(1<<32)
-- 分区的个数需要小于2亿(1<< 31).
+- 一个分区的的元素个数需要小于40 亿(1<<32)
+- 分区的个数需要小于20亿(1<< 31).

@@ -2,30 +2,28 @@
 
 ## 1. 概述
 
-本示例将[Titandb Getting Started](http://s3.thinkaurelius.com/docs/titan/1.0.0/getting-started.html)
-为模板来演示HugeGraph的使用方法。通过对比HugeGraph和
-[Titandb Getting Started](http://s3.thinkaurelius.com/docs/titan/1.0.0/getting-started.html)
-可以了解HugeGraph和Titandb的差异。
+本示例将[TitanDB Getting Started](http://s3.thinkaurelius.com/docs/titan/1.0.0/getting-started.html)
+为模板来演示HugeGraph的使用方法。通过对比HugeGraph和TitanDB，了解HugeGraph和TitanDB的差异。
 
-## 1.1 HugeGraph与Titandb的异同
+## 1.1 HugeGraph与TitanDB的异同
 
-HugeGraph和Titandb都是基于[Apache TinkerPop 3](https://tinkerpop.apache.org)框架的图数据库，均支持[Gremlin](https://tinkerpop.apache
+HugeGraph和TitanDB都是基于[Apache TinkerPop 3](https://tinkerpop.apache.org)框架的图数据库，均支持[Gremlin](https://tinkerpop.apache
 .org/gremlin.html)图查询语言，在使用方法和接口方面具有很多相似的地方。然而HugeGraph是全新设计开发的，其代码结构清晰，功能较为丰富，接口更为友好等特点。
 
-HugeGraph相对于Titandb而言，其主要特点如下：
+HugeGraph相对于TitanDB而言，其主要特点如下：
 
 * HugeGraph拥有较为完善的工具组件。HugeGraph目前有HugeApi、HugeClient、HugeLoader、HugeStudio、HugeSpark等完善的工具组件，可以完成系统集成、数据载入、图可视化查询、Spark
 连接等功能；
 
-* HugeGraph具有Server和Client的概念，第三方系统可以通过jar引用、client、api等多种方式接入，而Titandb仅支持jar引用方式接入。
+* HugeGraph具有Server和Client的概念，第三方系统可以通过jar引用、client、api等多种方式接入，而TitanDB仅支持jar引用方式接入。
 
 * HugeGraph的Schema需要显式定义，所有的插入和查询均需要通过严格的schema校验，目前暂不支持schema的隐式创建。
 
-* HugeGraph充分利用后端存储系统的特点来实现数据高效存取，而Titandb以统一的Kv结构无视后端的差异性。
+* HugeGraph充分利用后端存储系统的特点来实现数据高效存取，而TitanDB以统一的Kv结构无视后端的差异性。
 
-* HugeGraph的更新操作可以实现按需操作（例如：更新某个属性）性能更好。Titandb的更新是read and update方式。
+* HugeGraph的更新操作可以实现按需操作（例如：更新某个属性）性能更好。TitanDB的更新是read and update方式。
 
-* HugeGraph的VertexId和EdgeId均支持拼接，可实现自动去重，同时查询性能更好。Titandb的所有Id均是自动生成，查询需要经索引。
+* HugeGraph的VertexId和EdgeId均支持拼接，可实现自动去重，同时查询性能更好。TitanDB的所有Id均是自动生成，查询需要经索引。
 
 
 ## 1.1 人物关系图谱
@@ -71,8 +69,8 @@ label`中的Id策略配置才能正确解析`vertexId`。
 在`edge label` 满足 " 相同的一组`source vertex label`和`target vertex label`只能有一个唯一的`edge label` "约束的前提下，
 可以通过`edge label`获取唯一的`src vertex label`和`tgt vertex label`，而不需要冗余存储`src vertex label`和`tgt vertex label`信息。
 
-因此本例子将原Titandb中的monster, god, human, demigod均使用相同的`vertex label: character`来表示, 同时增加属性type来标识人物的类型。
-`edge label`与原Titandb保持一致。当然为了满足`edge label`约束，也可以通过调整`edge label`的`name`来实现。
+因此本例子将原TitanDB中的monster, god, human, demigod均使用相同的`vertex label: character`来表示, 同时增加属性type来标识人物的类型。
+`edge label`与原TitanDB保持一致。当然为了满足`edge label`约束，也可以通过调整`edge label`的`name`来实现。
 
 ## 2. Graph Schema and Data Ingest Examples
 HugeGraph需要显示创建Schema，因此需要依次创建PropertyKey、VertexLabel、EdgeLabel，如果有需要索引还需要创建IndexLabel。
@@ -213,7 +211,7 @@ g.V(pluto).out('brother').as('god').out('lives').as('place').select('god','place
 ### 3.2 总结
 
 HugeGraph目前支持Gremlin的语法，用户可以通过Gremlin语句实现各种查询需求，但是目前HugeGraph的暂不支持'Or'类型查询和全文检索功能，因此也不支持多label查询。
-和Titandb相比HugeGraph不支持的查询语句包括：
+和TitanDB相比HugeGraph不支持的查询语句包括：
 
 1. `g.V(hercules).out('father', 'mother')`
 

@@ -233,8 +233,9 @@ The Art of French Cooking, Vol. 1|Louisette Bertholie
 导入过程由用户提交的命令控制，用户可以通过不同的参数控制执行的具体流程。
 
 #### 4.3.1 参数说明
+
 必要参数(Y/N) | 参数 | 默认值 | 描述信息
- --- | --- | --- | --- | ---
+ --- | --- | --- | --- 
 Y | -f | NONE | 配置脚本的路径
 Y | -g | NONE | 图形数据库空间
 N | -h | localhost | HugeServer 的地址
