@@ -12,7 +12,8 @@
 ## Guides
 * [Architecture Overview](guides/hugegraph-architectural.md)
 * [Design Concepts](guides/hugegraph-desgin.md)
-* [Configuration Guide](guides/config.md)
+* [Configuration Guide](guides/config-guide.md)
+* [Config Options](guides/config-option.md)
 * [FAQ](guides/faq.md)
 
 ## Query Language
