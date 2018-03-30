@@ -1,26 +1,26 @@
-# HugeGraph Java Client
+## HugeGraph Java Client
 
-版本：1.4.7-SNAPSHOT
+版本：1.5.0-SNAPSHOT
 
-发布时间：2018-01-12
+发布时间：2018-03-29
 
-## 1. HugeClient
+### 1. HugeClient
 
-HugeClient 是操作 graph 的总入口，用户必须先创建出 HugeClient 对象，与 Huge-Server 建立连接（伪连接）后，才能获取到 schema、graph 以及 gremlin 的操作入口对象。
+HugeClient 是操作 graph 的总入口，用户必须先创建出 HugeClient 对象，与 HugeGraph Server 建立连接（伪连接）后，才能获取到 schema、graph 以及 gremlin 的操作入口对象。
 
 目前 HugeClient 只允许连接服务端已存在的图，无法自定义图进行创建。其创建方法如下：
 
 ```
-// server地址："http://localhost:8080"
-// 图名："hugegraph"
+// HugeGraph Server地址："http://localhost:8080"
+// 图的名称："hugegraph"
 HugeClient hugeClient = new HugeClient("http://localhost:8080", "hugegraph");
 ```
 
 上述创建 HugeClient 的过程如果失败会抛出异常，用户需要try-catch。如果成功则继续获取 schema、graph 以及 gremlin 的 manager。
 
-## 2. 元数据
+### 2. 元数据
 
-### 2.1 SchemaManager
+#### 2.1 SchemaManager
 
 SchemaManager 用于管理 HugeGraph 中的四种元数据，分别是PropertyKey（属性键）、VertexLabel（顶点标签）、EdgeLabel（边标签）和 IndexLabel（索引标签）。在定义元数据信息之前必须先创建 SchemaManager 对象。
 
@@ -32,9 +32,9 @@ schema = hugeClient.schema()
 
 下面分别对三种元数据的定义过程进行介绍。
 
-### 2.2 PropertyKey
+#### 2.2 PropertyKey
 
-#### 2.2.1 接口及参数介绍
+##### 2.2.1 接口及参数介绍
 
 PropertyKey 用来规范顶点和边的属性的约束，暂不支持定义属性的属性。
 
@@ -76,7 +76,7 @@ interface                          | description
 userData(String key, Object value) | The same key, the latter will cover the former
 
 
-#### 2.2.2 创建 PropertyKey
+##### 2.2.2 创建 PropertyKey
 
 ```
 schema.propertyKey("name").asText().valueSet().ifNotExist().create()
@@ -84,13 +84,13 @@ schema.propertyKey("name").asText().valueSet().ifNotExist().create()
 
 - ifNotExist()：为 create 添加判断机制，若当前 PropertyKey 已经存在则不再创建，否则创建该属性。若不添加判断，在 properkey 已存在的情况下会抛出异常信息，下同，不再赘述。
 
-#### 2.2.3 删除 PropertyKey
+##### 2.2.3 删除 PropertyKey
 
 ```
 schema.propertyKey("name").remove()
 ```
 
-#### 2.2.4 查询 PropertyKey
+##### 2.2.4 查询 PropertyKey
 
 ```
 // 获取PropertyKey对象
@@ -103,9 +103,9 @@ schema.getPropertyKey("name").name()
 schema.getPropertyKey("name").userData()
 ```
 
-### 2.3 VertexLabel
+#### 2.3 VertexLabel
 
-#### 2.3.1 接口及参数介绍
+##### 2.3.1 接口及参数介绍
 
 VertexLabel 用来定义顶点类型，描述顶点的约束信息：
 
@@ -166,7 +166,7 @@ interface                          | description
 ---------------------------------- | ----------------------------------------------
 userData(String key, Object value) | The same key, the latter will cover the former
 
-#### 2.3.2 创建 VertexLabel
+##### 2.3.2 创建 VertexLabel
 
 ```
 // 使用 Automatic 的 Id 策略
@@ -183,7 +183,7 @@ schema.vertexLabel("person").properties("name", "age").primaryKeys("name").ifNot
 schema.vertexLabel("person").usePrimaryKeyId().properties("name", "age").primaryKeys("name").ifNotExist().create();
 ```
 
-#### 2.3.3 追加 VertexLabel
+##### 2.3.3 追加 VertexLabel
 
 VertexLabel 是可以追加约束的，不过仅限 properties 和 nullableKeys，而且追加的属性也必须添加到 nullableKeys 集合中。
 
@@ -191,13 +191,13 @@ VertexLabel 是可以追加约束的，不过仅限 properties 和 nullableKeys�
 schema.vertexLabel("person").properties("price").nullableKeys("price").append();
 ```
 
-#### 2.3.4 删除 VertexLabel
+##### 2.3.4 删除 VertexLabel
 
 ```
 schema.vertexLabel("person").remove();
 ```
 
-#### 2.3.5 查询 VertexLabel
+##### 2.3.5 查询 VertexLabel
 
 ```
 // 获取VertexLabel对象
@@ -212,9 +212,9 @@ schema.getVertexLabel("person").nullableKeys()
 schema.getVertexLabel("person").userData()
 ```
 
-### 2.4 EdgeLabel
+#### 2.4 EdgeLabel
 
-#### 2.4.1 接口及参数介绍
+##### 2.4.1 接口及参数介绍
 
 EdgeLabel 用来定义边类型，描述边的约束信息。
 
@@ -266,26 +266,26 @@ interface                          | description
 ---------------------------------- | ----------------------------------------------
 userData(String key, Object value) | The same key, the latter will cover the former
 
-#### 2.4.2 创建 EdgeLabel
+##### 2.4.2 创建 EdgeLabel
 
 ```
 schema.edgeLabel("knows").link("person", "person").properties("date").ifNotExist().create();
 schema.edgeLabel("created").multiTimes().link("person", "software").properties("date").sortKeys("date").ifNotExist().create();
 ```
 
-#### 2.4.3 追加 EdgeLabel
+##### 2.4.3 追加 EdgeLabel
 
 ```
 schema.edgeLabel("knows").properties("price").nullableKeys("price").append();
 ```
 
-#### 2.4.4 删除 EdgeLabel
+##### 2.4.4 删除 EdgeLabel
 
 ```
 schema.edgeLabel("knows").remove();
 ```
 
-#### 2.4.5 查询 EdgeLabel
+##### 2.4.5 查询 EdgeLabel
 
 ```
 // 获取EdgeLabel对象
@@ -302,9 +302,9 @@ schema.getEdgeLabel("knows").nullableKeys()
 schema.getEdgeLabel("knows").userData()
 ```
 
-### 2.5 IndexLabel
+#### 2.5 IndexLabel
 
-#### 2.5.1 接口及参数介绍
+##### 2.5.1 接口及参数介绍
 
 IndexLabel 用来定义索引类型，描述索引的约束信息，主要是为了方便查询。
 
@@ -338,20 +338,20 @@ interface   | indexType | description
 secondary() | Secondary | support prefix search
 range()     | Range     | supports range search for numeric types
 
-#### 2.5.2 创建 IndexLabel
+##### 2.5.2 创建 IndexLabel
 
 ```
 schema.indexLabel("personByAge").onV("person").by("age").range().ifNotExist().create();
 schema.indexLabel("createdByDate").onE("created").by("date").secondary().ifNotExist().create();
 ```
 
-#### 2.5.3 删除 IndexLabel
+##### 2.5.3 删除 IndexLabel
 
 ```
 schema.indexLabel("personByAge").remove()
 ```
 
-#### 2.5.4 查询 IndexLabel
+##### 2.5.4 查询 IndexLabel
 
 ```
 // 获取IndexLabel对象
@@ -365,9 +365,9 @@ schema.getIndexLabel("personByAge").indexType()
 schema.getIndexLabel("personByAge").name()
 ```
 
-## 3. 图数据
+### 3. 图数据
 
-### 3.1 Vertex
+#### 3.1 Vertex
 
 顶点是构成图的最基本元素，一个图中可以有非常多的顶点。下面给出一个添加顶点的例子：
 
@@ -394,7 +394,7 @@ Vertex lop = graph.addVertex(T.label, "software", "name", "lop", "lang", "java",
 
 - 调用`addVertex`方法后，顶点会立刻被插入到后端存储系统中。
 
-### 3.2 Edge
+#### 3.2 Edge
 
 有了点，还需要边才能构成完整的图。下面给出一个添加边的例子：
 
@@ -410,6 +410,6 @@ Edge knows1 = marko.addEdge("knows", vadas, "city", "Beijing");
 
 **注意：当frequency为multiple时必须要设置sortKeys对应属性键的值。**
 
-### 4. 简单示例
+#### 4. 简单示例
 
 简单示例见[HugeClient](http://hugegraph.baidu.com/quickstart/hugeclient.html)
