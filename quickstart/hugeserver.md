@@ -67,7 +67,7 @@ $ mvn package -DskipTests
 
 ## 3. 配置
 
-快速开始部分以 Cassandra 作为后端，不需要用户做额外的配置，使用默认配置即可。详细的配置介绍请参考[配置](http://hugegraph.baidu.com/guides/config.html)
+快速开始部分以 Cassandra 作为后端，不需要用户做额外的配置，使用默认配置即可。详细的配置介绍请参考[配置](http://hugegraph.baidu.com/guides/config-guide.html)
 
 ## 4. 启动
 
