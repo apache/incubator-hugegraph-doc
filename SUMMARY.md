@@ -31,6 +31,7 @@
 * [HugeGraph API Performance v0.2](performance/hugegraph-api-0.2.md)
 
 ## ChangeLogs
+* [Release-0.5.6](changelog/hugegraph-0.5.6-release-notes.md)
 * [Release-0.4.4](changelog/hugegraph-0.4.4-release-notes.md)
 * [Release-0.3.3](changelog/hugegraph-0.3.3-release-notes.md)
 * [Release-0.2.4](changelog/hugegraph-0.2.4-release-notes.md)
