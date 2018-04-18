@@ -16,7 +16,7 @@
 ### Core
 
 #### 功能更新
-- RocksRocksDB支持常用配置项（HugeGraph-1068）
+- RocksDB支持常用配置项（HugeGraph-1068）
 - 支持插入、删除、更新等操作的限速（HugeGraph-1071）
 - 支持RocksDB导入sst文件方案（HugeGraph-1077）
 - 增加MySQL后端存储（HugeGraph-1091）
