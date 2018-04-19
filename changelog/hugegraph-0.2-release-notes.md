@@ -1,11 +1,8 @@
 ## HugeGraph 0.2 Release Notes
 
-
 0.2版实现了图数据库基本功能，提供如下功能：
 
-
 ### 元数据（Schema）
-
 
 #### 顶点类型（Vertex Label）
 

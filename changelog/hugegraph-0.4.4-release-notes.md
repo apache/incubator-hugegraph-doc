@@ -17,7 +17,6 @@
 - HugeClient适配：PropertyKey的DateType中Timestamp替换成Date（HugeGraph-1059）
 - 创建IndexLabel时baseValue为空会报出500错误（HugeGraph-1061）
  
- 
 ### Core
 
 #### 功能更新

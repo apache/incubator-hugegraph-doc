@@ -1,4 +1,8 @@
-## FAQ
+### FAQ
+
+- 启动服务时提示：`xxx (core dumped) xxx`
+
+  请检查JDK版本是否为1.8  
 
 - 启动服务成功了，但是操作图时有类似于"无法连接到后端或连接未打开"的提示
 
@@ -72,3 +76,7 @@
 - 一个`EdgeLabel`是否可以连接多对`VertexLabel`，比如"投资"关系，可以是"个人"投资"企业"，也可以是"企业"投资"企业"
 
   一个`EdgeLabel`不支持连接多对`VertexLabel`，需要用户将`EdgeLabel`拆分得更细一点，如："个人投资"，"企业投资"。
+
+- 通过`RestAPI`发送请求时提示`HTTP 415 Unsupported Media Type`
+
+  请求头中需要指定`Content-Type:application/json`

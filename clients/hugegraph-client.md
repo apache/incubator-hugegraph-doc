@@ -4,7 +4,7 @@
 
 发布时间：2018-03-29
 
-### 1. HugeClient
+### 1 HugeClient
 
 HugeClient 是操作 graph 的总入口，用户必须先创建出 HugeClient 对象，与 HugeGraph Server 建立连接（伪连接）后，才能获取到 schema、graph 以及 gremlin 的操作入口对象。
 
@@ -18,7 +18,7 @@ HugeClient hugeClient = new HugeClient("http://localhost:8080", "hugegraph");
 
 上述创建 HugeClient 的过程如果失败会抛出异常，用户需要try-catch。如果成功则继续获取 schema、graph 以及 gremlin 的 manager。
 
-### 2. 元数据
+### 2 元数据
 
 #### 2.1 SchemaManager
 
@@ -38,7 +38,7 @@ schema = hugeClient.schema()
 
 PropertyKey 用来规范顶点和边的属性的约束，暂不支持定义属性的属性。
 
-PropertyKey 允许定义的约束信息包括：name、datatype、cardinality、userData，下面逐一介绍。
+PropertyKey 允许定义的约束信息包括：name、datatype、cardinality、userdata，下面逐一介绍。
 
 - name: 属性的名字，用来区分不同的 PropertyKey，不允许有同名的属性；
 
@@ -69,11 +69,11 @@ valueSingle() | single      | single value
 valueList()   | list        | multi-values that allow duplicate value
 valueSet()    | set         | multi-values that not allow duplicate value
 
-- userData：用户可以自己添加一些约束或额外信息，然后自行检查传入的属性是否满足约束，或者必要的时候提取出额外信息
+- userdata：用户可以自己添加一些约束或额外信息，然后自行检查传入的属性是否满足约束，或者必要的时候提取出额外信息
 
 interface                          | description
 ---------------------------------- | ----------------------------------------------
-userData(String key, Object value) | The same key, the latter will cover the former
+userdata(String key, Object value) | The same key, the latter will cover the former
 
 
 ##### 2.2.2 创建 PropertyKey
@@ -160,7 +160,7 @@ interface                          | description
 ---------------------------------- | -------------------------------
 enableLabelIndex(boolean enable)   | Whether to create a label index
 
-- userData：用户可以自己添加一些约束或额外信息，然后自行检查传入的属性是否满足约束，或者必要的时候提取出额外信息
+- userdata：用户可以自己添加一些约束或额外信息，然后自行检查传入的属性是否满足约束，或者必要的时候提取出额外信息
 
 interface                          | description
 ---------------------------------- | ----------------------------------------------
@@ -260,7 +260,7 @@ sortKeys(String... keys) | allow to choose multi prop as sortKeys
 
 - enableLabelIndex：与顶点中的 enableLabelIndex 概念一致，不再赘述
 
-- userData：用户可以自己添加一些约束或额外信息，然后自行检查传入的属性是否满足约束，或者必要的时候提取出额外信息
+- userdata：用户可以自己添加一些约束或额外信息，然后自行检查传入的属性是否满足约束，或者必要的时候提取出额外信息
 
 interface                          | description
 ---------------------------------- | ----------------------------------------------
@@ -365,7 +365,7 @@ schema.getIndexLabel("personByAge").indexType()
 schema.getIndexLabel("personByAge").name()
 ```
 
-### 3. 图数据
+### 3 图数据
 
 #### 3.1 Vertex
 
@@ -377,21 +377,13 @@ Vertex lop = graph.addVertex(T.label, "software", "name", "lop", "lang", "java",
 ```
 
 - 添加顶点的关键是顶点属性，添加顶点函数的参数个数必须为偶数，且满足`key1 -> val1, key2 -> val2 ···`的顺序排列，键值对之间的顺序是自由的。
-
 - 参数中必须包含一对特殊的键值对，就是`T.label -> "val"`，用来定义该顶点的类别，以便于程序从缓存或后端获取到该VertexLabel的schema定义，然后做后续的约束检查。例子中的label定义为person。
-
 - 如果顶点类型的 Id 策略为 `AUTOMATIC`，则不允许用户传入 id 键值对。
-
 - 如果顶点类型的 Id 策略为 `CUSTOMIZE_STRING`，则用户需要自己传入 String 类型 id 的值，键值对形如：`"T.id", "123456"`。
-
 - 如果顶点类型的 Id 策略为 `CUSTOMIZE_NUMBER`，则用户需要自己传入 Number 类型 id 的值，键值对形如：`"T.id", 123456`。
-
 - 如果顶点类型的 Id 策略为 `PRIMARY_KEY`，参数还必须全部包含该`primaryKeys`对应属性的名和值，如果不设置会抛出异常。比如之前`person`的`primaryKeys`是`name`，例子中就设置了`name`的值为`marko`。
-
 - 对于非 nullableKeys 的属性，必须要赋值。
-
 - 剩下的参数就是顶点其他属性的设置，但并非必须。
-
 - 调用`addVertex`方法后，顶点会立刻被插入到后端存储系统中。
 
 #### 3.2 Edge
@@ -403,13 +395,11 @@ Edge knows1 = marko.addEdge("knows", vadas, "city", "Beijing");
 ```
 
 - 由（源）顶点来调用添加边的函数，函数第一个参数为边的label，第二个参数是目标顶点，这两个参数的位置和顺序是固定的。后续的参数就是`key1 -> val1, key2 -> val2 ···`的顺序排列，设置边的属性，键值对顺序自由。
-
 - 源顶点和目标顶点必须符合 EdgeLabel 中 sourcelabel 和 targetlabel 的定义，不能随意添加。
-
 - 对于非 nullableKeys 的属性，必须要赋值。
 
 **注意：当frequency为multiple时必须要设置sortKeys对应属性键的值。**
 
-#### 4. 简单示例
+### 4 简单示例
 
 简单示例见[HugeClient](http://hugegraph.baidu.com/quickstart/hugeclient.html)

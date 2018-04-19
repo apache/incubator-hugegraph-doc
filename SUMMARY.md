@@ -4,14 +4,14 @@
 
 ## Quickstart
 * [Install HugeGraph](quickstart/hugeserver.md)
-* [Query with HugeStudio](quickstart/hugestudio.md)
 * [Load data With HugeLoader](quickstart/hugeloader.md)
+* [Display with HugeStudio](quickstart/hugestudio.md)
 * [Develop With HugeClient](quickstart/hugeclient.md)
 * [Analysis With HugeSpark](quickstart/hugespark.md)
 
 ## Guides
-* [Architecture Overview](guides/hugegraph-architectural.md)
-* [Design Concepts](guides/hugegraph-desgin.md)
+* [Architecture Overview](guides/architectural.md)
+* [Design Concepts](guides/desgin-concept.md)
 * [Configuration Guide](guides/config-guide.md)
 * [Config Options](guides/config-option.md)
 * [FAQ](guides/faq.md)
@@ -21,9 +21,19 @@
 * [HugeGraph Examples](language/hugegraph-example.md)
 
 ## Clients
-* [Gremlin Console](clients/gremlin-console.md)
-* [Java Client](clients/hugegraph-client.md)
 * [Restful API](clients/hugegraph-api.md)
+    * [PropertyKey](clients/restful-api/propertykey.md)
+    * [VertexLabel](clients/restful-api/vertexlabel.md)
+    * [EdgeLabel](clients/restful-api/edgelabel.md)
+    * [IndexLabel](clients/restful-api/indexlabel.md)
+    * [Vertex](clients/restful-api/vertex.md)
+    * [Edge](clients/restful-api/edge.md)
+    * [Traverser](clients/restful-api/traverser.md)
+    * [Variable](clients/restful-api/variable.md)
+    * [Graph](clients/restful-api/graph.md)
+    * [Other](clients/restful-api/other.md)
+* [Java Client](clients/hugegraph-client.md)
+* [Gremlin Console](clients/gremlin-console.md)
 
 ## Performance
 * [HugeGraph Benchmark Performance](performance/hugegraph-benchmark-0.4.4.md)

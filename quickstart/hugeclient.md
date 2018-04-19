@@ -1,38 +1,36 @@
-# HugeClient Quick Start
+## HugeClient Quick Start
 
-##  1. HugeClient 概述
+### 1 概述
 
 HugeGraph-Client向HugeGraph-Server发出HTTP请求，获取并解析Server的执行结果。目前仅提供了Java版，用户可以使用HugeGraph-Client编写Java代码操作HugeGraph，比如元数据和图数据的增删改查，或者执行gremlin语句。
 
-##  2. 环境要求
+### 2 环境要求
 
-* jdk1.8
-* maven-3.3.9
+- jdk1.8
+- maven-3.3.9
 
-## 3.使用流程
+### 3 使用流程
 
 使用HugeClient的基本步骤如下:
-    
+
 - 新建Eclipse/ IDEA Maven项目；
-
 - 在pom文件中添加HugeClient依赖；
-
 - 创建类，调用HugeClient接口；
 
 详细使用过程见下节完整示例。
 
-## 4. 完整示例
+### 4 完整示例
 
-### 4.1 新建Maven工程
+#### 4.1 新建Maven工程
 
 可以选择Eclipse或者Intellij Idea创建工程：
 
-* [Eclipse新建Maven工程](http://www.vogella.com/tutorials/EclipseMaven/article.html)
-* [Intellij Idea 创建maven工程](https://vaadin.com/docs/-/part/framework/getting-started/getting-started-idea.html)
- 
-### 4.2 添加hugegraph-client依赖
+- [Eclipse新建Maven工程](http://www.vogella.com/tutorials/EclipseMaven/article.html)
+- [Intellij Idea 创建maven工程](https://vaadin.com/docs/-/part/framework/getting-started/getting-started-idea.html)
 
-- 在项目pom文件中引入百度私服仓库：
+#### 4.2 添加hugegraph-client依赖
+
+在项目pom文件中引入百度私服仓库：
 
 ```
 <repositories>
@@ -43,7 +41,7 @@ HugeGraph-Client向HugeGraph-Server发出HTTP请求，获取并解析Server的�
 </repositories>
 ```
 
-- 添加hugegraph-client依赖
+添加hugegraph-client依赖
 
 ```
 <dependencies>
@@ -55,9 +53,9 @@ HugeGraph-Client向HugeGraph-Server发出HTTP请求，获取并解析Server的�
 </dependencies>
 ```
 
-### 4.3 Example
+#### 4.3 Example
 
-#### 4.3.1 SingleExample
+##### 4.3.1 SingleExample
 
 ```
 import java.io.IOException;
@@ -83,7 +81,7 @@ public class SingleExample {
                                                "hugegraph");
 
         SchemaManager schema = hugeClient.schema();
-        
+
         schema.propertyKey("name").asText().ifNotExist().create();
         schema.propertyKey("age").asInt().ifNotExist().create();
         schema.propertyKey("city").asText().ifNotExist().create();
@@ -213,7 +211,7 @@ public class SingleExample {
 }
 ```
 
-#### 4.3.2 BatchExample
+##### 4.3.2 BatchExample
 
 ```
 import java.util.LinkedList;
@@ -340,10 +338,10 @@ public class BatchExample {
 }
 ```
 
-## 4.4 运行Example
+### 4.4 运行Example
 
 运行Example之前需要启动Sever, 启动过程见[HugeServer Quick Start](http://hugegraph.baidu.com/quickstart/hugeserver.html)
 
-## 4.5 Example示例说明
+### 4.5 Example示例说明
 
 示例说明见[HugeClient基本API介绍](http://hugegraph.baidu.com/clients/hugegraph-client.html)

@@ -3,10 +3,9 @@
 Gremlin-Console是由Tinkerpop自己开发的一个交互式客户端，用户可以使用该客户端对Graph做各种操作，主要有两种使用模式：
 
 - 单机离线调用模式；
-
 - Client/Server请求模式；
 
-### 1、单机离线调用模式
+### 1 单机离线调用模式
 
 由于lib目录下已经包含了HugeCore的jar包，且HugeGraph已经作为插件注册到Console中，用户可以直接写groovy脚本调用HugeGraph-Core的代码，然后交由Gremlin-Console内的解析引擎执行，就能在不启动Server的情况下操作图。
 
@@ -111,7 +110,7 @@ gremlin> g.E()
 
 更多的Gremlin语句请参考[Tinkerpop官网](http://tinkerpop.apache.org/docs/current/reference/)
 
-### 2、Client/Server请求模式
+### 2 Client/Server请求模式
 
 因为Gremlin-Console只能通过WebSocket连接HugeGraph-Server，默认HugeGraph-Server是对外提供HTTP连接的，所以先修改gremlin-server的配置。
 
