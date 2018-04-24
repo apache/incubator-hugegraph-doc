@@ -177,7 +177,7 @@ $ bin/hugestudio.sh
 
 首先在notebook的cell中创建PropertyKey，将以下语句输入到cell中：
 
-```
+```java
 graph.schema().propertyKey("name").asText().ifNotExist().create()
 graph.schema().propertyKey("age").asInt().ifNotExist().create()
 graph.schema().propertyKey("city").asText().ifNotExist().create()
@@ -195,15 +195,13 @@ graph.schema().propertyKey("price").asInt().ifNotExist().create()
 
 接下来进行顶点类型（VertexLabel）和 边类型 （EdgeLabel）的创建：
 
-```
+```java
 person = graph.schema().vertexLabel("person").properties("name", "age", "city").primaryKeys("name").ifNotExist().create()
-
 software = graph.schema().vertexLabel("software").properties("name", "lang", "price").primaryKeys("name").ifNotExist().create()
 ```
 
-```
+```java
 knows = graph.schema().edgeLabel("knows").sourceLabel("person").targetLabel("person").properties("date").ifNotExist().create()
-
 created = graph.schema().edgeLabel("created").sourceLabel("person").targetLabel("software").properties("date", "city").ifNotExist().create()
 ```
 
@@ -218,10 +216,9 @@ created = graph.schema().edgeLabel("created").sourceLabel("person").targetLabel(
 
 有了schema后，就可以根据schema创建特定的顶点和边了，这里我们定义两个person类型的顶点实例：marko 和 vadas，在定义两者之间的关系knows：
 
-```
+```java
 marko = graph.addVertex(T.label, "person", "name", "marko", "age", 29, "city", "Beijing")
 vadas = graph.addVertex(T.label, "person", "name", "vadas", "age", 27, "city", "Hongkong")
-
 marko.addEdge("knows", vadas, "date", "20160110")
 ```
 
@@ -234,7 +231,7 @@ marko.addEdge("knows", vadas, "date", "20160110")
 
 ##### 4.3.3 向graph添加更多数据
 
-```
+```java
 marko = graph.addVertex(T.label, "person", "name", "marko", "age", 29, "city", "Beijing")
 vadas = graph.addVertex(T.label, "person", "name", "vadas", "age", 27, "city", "Hongkong")
 lop = graph.addVertex(T.label, "software", "name", "lop", "lang", "java", "price", 328)
@@ -298,24 +295,24 @@ HugeStudio不仅支持通过graph的方式展示数据，还支持table和格式
 
 案例：
 
-```
+```java
 graph.schema().vertexLabel("software")
-.userData("vis.size",25)
-.userData("vis.scaling.min",1)
-.userData("vis.scaling.max",10)
-.userData("vis.shape","icon")
-.userData("vis.border","#66ff33")
-.userData("vis.background","#3366ff")
-.userData("vis.hover.background","#FFB90F")
-.userData("vis.hover.border","#00EE00")
-.userData("vis.highlight.background","#7A67EE")
-.userData("vis.highlight.border","#4F4F4F")
-.userData("vis.font.color","#1C86EE")
-.userData("vis.font.size",12)
-.userData("vis.icon.code","\uf1b9")
-.userData("vis.icon.color","#8EE5EE")
-.userData("vis.icon.size",25)
-.append()
+     .userData("vis.size",25)
+     .userData("vis.scaling.min",1)
+     .userData("vis.scaling.max",10)
+     .userData("vis.shape","icon")
+     .userData("vis.border","#66ff33")
+     .userData("vis.background","#3366ff")
+     .userData("vis.hover.background","#FFB90F")
+     .userData("vis.hover.border","#00EE00")
+     .userData("vis.highlight.background","#7A67EE")
+     .userData("vis.highlight.border","#4F4F4F")
+     .userData("vis.font.color","#1C86EE")
+     .userData("vis.font.size",12)
+     .userData("vis.icon.code","\uf1b9")
+     .userData("vis.icon.color","#8EE5EE")
+     .userData("vis.icon.size",25)
+     .append()
 ```
 
 <div align="center">

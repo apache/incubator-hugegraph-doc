@@ -40,39 +40,39 @@ HugeGraph的Vertex支持三种ID策略，在同一个图数据库中不同的Ver
 启用PRIMARY_KEY策略后HugeGraph能根据PrimaryKeys实现数据去重。
  
  1. AUTOMATIC ID策略
- ```
+ ```java
  schema.vertexLabel("person")
-               .useAutomaticId()
-               .properties("name", "age", "city")
-               .create();
+       .useAutomaticId()
+       .properties("name", "age", "city")
+       .create();
   graph.addVertex(T.label, "person","name", "marko", "age", 18, "city", "Beijing");
  ```
  
  2. PRIMARY_KEY ID策略
- ```
+ ```java
  schema.vertexLabel("person")
-               .usePrimaryKeyId()
-               .properties("name", "age", "city")
-               .primaryKeys("name", "age")
-               .create();
+       .usePrimaryKeyId()
+       .properties("name", "age", "city")
+       .primaryKeys("name", "age")
+       .create();
   graph.addVertex(T.label, "person","name", "marko", "age", 18, "city", "Beijing");
  ```
 
  3. CUSTOMIZE_STRING ID策略
- ```
+ ```java
  schema.vertexLabel("person")
-               .useCustomizeStringId()
-               .properties("name", "age", "city")
-               .create();
+       .useCustomizeStringId()
+       .properties("name", "age", "city")
+       .create();
  graph.addVertex(T.label, "person", T.id, "123456", "name", "marko","age", 18, "city", "Beijing");
  ```
 
  4. CUSTOMIZE_NUMBER ID策略
- ```
+ ```java
  schema.vertexLabel("person")
-               .useCustomizeNumberId()
-               .properties("name", "age", "city")
-               .create();
+       .useCustomizeNumberId()
+       .properties("name", "age", "city")
+       .create();
  graph.addVertex(T.label, "person", T.id, 123456, "name", "marko","age", 18, "city", "Beijing");
  ```
 
@@ -97,4 +97,106 @@ HugeGraph的EdgeId是由`srcVertexId`+`edgeLabel`+`sortKey`+`tgtVertexId`四部�
 ）则会认为该图存在两条边。
 
 > HugeGraph的边仅支持有向边，无向边可以创建Out和In两条边来实现。
-  
+
+## 4. HugeGraph transaction overview
+
+### TinkerPop事务概述
+TinkerPop transaction事务是指对数据库执行操作的工作单元，一个事务内的一组操作要么执行成功，要么全部失败。
+详细介绍请参考TinkerPop官方文档：http://tinkerpop.apache.org/docs/current/reference/#transactions
+
+### TinkerPop事务操作接口
+- open 打开事务
+- commit 提交事务
+- rollback 回滚事务
+- close 关闭事务 
+
+### TinkerPop事务规范
+- 事务必须显示提交后才可生效（未提交时修改操作只有本事务内查询可看到）
+- 事务必须打开之后才可提交或回滚
+- 如果事务设置自动打开则无需显示打开（默认方式），如果设置手动打开则必须显示打开
+- 可设置事务关闭时：自动提交、自动回滚（默认方式）、手动（禁止显示关闭）等3种模式
+- 事务在提交或回滚后必须是关闭状态
+- 事务在查询后必须是打开状态
+- 事务（非threaded tx）必须线程隔离，多线程操作同一事务互不影响
+
+更多事务规范用例见：[Transaction Test](https://github.com/apache/tinkerpop/blob/master/gremlin-test/src/main/java/org/apache/tinkerpop/gremlin/structure/TransactionTest.java)
+
+### HugeGraph事务实现
+- 一个事务中所有的操作要么成功要么失败
+- 一个事务只能读取到另外一个事务已提交的内容（Read committed）
+- 所有未提交的操作均能在本事务中查询出来，包括：
+  - 增加顶点能够查询出该顶点
+  - 删除顶点能够过滤掉该顶点
+  - 删除顶点能够过滤掉该顶点相关边
+  - 增加边能够查询出该边
+  - 删除边能够过滤掉该边
+  - 增加/修改（顶点、边）属性能够在查询时生效
+  - 删除（顶点、边）属性能够在查询时生效
+- 所有未提交的操作在事务回滚后均失效，包括：
+  - 顶点、边的增加、删除
+  - 属性的增加/修改、删除
+
+示例：一个事务无法读取另一个事务未提交的内容
+```java
+    static void testUncommittedTx(final HugeGraph graph) throws InterruptedException {
+
+        final CountDownLatch latchUncommit = new CountDownLatch(1);
+        final CountDownLatch latchRollback = new CountDownLatch(1);
+
+        Thread thread = new Thread(() -> {
+            // this is a new transaction in the new thread
+            graph.tx().open();
+
+            System.out.println("current transaction operations");
+
+            Vertex james = graph.addVertex(T.label, "author",
+                                           "id", 1, "name", "James Gosling",
+                                           "age", 62, "lived", "Canadian");
+            Vertex java = graph.addVertex(T.label, "language", "name", "java",
+                                          "versions", Arrays.asList(6, 7, 8));
+            james.addEdge("created", java);
+
+            // we can query the uncommitted records in the current transaction
+            System.out.println("current transaction assert");
+            assert graph.vertices().hasNext() == true;
+            assert graph.edges().hasNext() == true;
+
+            latchUncommit.countDown();
+
+            try {
+                latchRollback.await();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            System.out.println("current transaction rollback");
+            graph.tx().rollback();
+        });
+
+        thread.start();
+
+        // query none result in other transaction when not commit()
+        latchUncommit.await();
+        System.out.println("other transaction assert for uncommitted");
+        assert !graph.vertices().hasNext();
+        assert !graph.edges().hasNext();
+
+        latchRollback.countDown();
+        thread.join();
+
+        // query none result in other transaction after rollback()
+        System.out.println("other transaction assert for rollback");
+        assert !graph.vertices().hasNext();
+        assert !graph.edges().hasNext();
+    }
+```
+
+### 事务实现原理
+- 服务端内部通过将事务与线程绑定实现隔离（ThreadLocal）
+- 本事务未提交的内容按照时间顺序覆盖老数据以供本事务查询最新版本数据
+- 底层依赖后端数据库保证事务原子性操作（如Cassandra/RocksDB的batch接口均保证原子性）
+
+#### 注意
+> Restful API暂时未暴露事务接口
+> TinkerPop API允许打开事务，请求完成时会自动关闭(Gremlin Server强制关闭)
+
