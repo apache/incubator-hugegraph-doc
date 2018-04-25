@@ -244,8 +244,9 @@ peter = graph.addVertex(T.label, "person","name", "peter", "age", 29, "city", "S
 marko.addEdge("knows", vadas, "date", "20160110")
 marko.addEdge("knows", josh, "date", "20130220")
 marko.addEdge("created", lop, "date", "20171210", "city", "Shanghai")
-josh.addEdge("created", ripple, "date", "20171210", "city", "Beijing")
-josh.addEdge("created", lop, "date", "20091111", "city", "Beijing")
+josh.addEdge("created", ripple, "date", "20151010", "city", "Beijing")
+josh.addEdge("created", lop, "date", "20171210", "city", "Beijing")
+peter.addEdge("created", lop, "date", "20171210", "city", "Beijing")
 
 g.V()
 ```
