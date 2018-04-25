@@ -193,12 +193,14 @@ graph.schema().propertyKey("price").asInt().ifNotExist().create()
   <p>图 4-7 创建schema</p>
 </center>
 
-接下来进行顶点类型（VertexLabel）和 边类型 （EdgeLabel）的创建：
+顶点类型（VertexLabel）的创建：
 
 ```java
 person = graph.schema().vertexLabel("person").properties("name", "age", "city").primaryKeys("name").ifNotExist().create()
 software = graph.schema().vertexLabel("software").properties("name", "lang", "price").primaryKeys("name").ifNotExist().create()
 ```
+
+边类型（EdgeLabel）的创建：
 
 ```java
 knows = graph.schema().edgeLabel("knows").sourceLabel("person").targetLabel("person").properties("date").ifNotExist().create()
