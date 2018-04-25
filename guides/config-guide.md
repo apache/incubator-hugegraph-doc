@@ -17,7 +17,7 @@ HugeGraphServer 内部集成了 GremlinServer 和 RestServer，而 gremlin-serve
 
 gremlin-server.yaml 文件默认的内容如下：
 
-```
+```yaml
 host: 127.0.0.1
 port: 8182
 scriptEvaluationTimeout: 30000
@@ -99,7 +99,7 @@ ssl: {
 
 rest-server.properties 文件的默认内容如下：
 
-```
+```properties
 restserver.url=http://127.0.0.1:8080
 gremlinserver.url=http://127.0.0.1:8182
 graphs=[hugegraph:conf/hugegraph.properties]
@@ -118,7 +118,7 @@ max_edges_per_batch=500
 
 hugegraph.properties 是一类文件，因为如果系统存在多个图，则会有多个相似的文件。该文件用来配置与图存储和查询相关的参数，文件的默认内容如下：
 
-```
+```properties
 # gremlin entrence to create graph
 gremlin.graph=com.baidu.hugegraph.HugeFactory
 
@@ -181,7 +181,7 @@ admin.token=162f7848-0b6d-4faf-b557-3a0797869c55
 
 在 gremlin-server.yaml 的 graphs 域中添加一个键值对，键为图的名字，值为图的配置文件路径，比如：
 
-```
+```yaml
 graphs: {
   hugegraph: conf/hugegraph.properties,
   hugegraph1: conf/hugegraph1.properties
@@ -192,7 +192,7 @@ graphs: {
 
 在 rest-server.properties 的 graphs 域中添加一个键值对，键为图的名字，值为图的配置文件路径，比如：
 
-```
+```properties
 graphs=[hugegraph:conf/hugegraph.properties, hugegraph1:conf/hugegraph1.properties]
 ```
 
@@ -200,7 +200,7 @@ graphs=[hugegraph:conf/hugegraph.properties, hugegraph1:conf/hugegraph1.properti
 
 拷贝 hugegraph.properties，命名为 hugegraph1.properties，修改图对应的数据库名以及关于后端部分的参数，比如：
 
-```
+```properties
 store=hugegraph1
 
 ...
@@ -211,7 +211,7 @@ serializer=binary
 
 **停止 Server，初始化执行 init-store.sh（为新的图创建数据库），重新启动 Server**
 
-```
+```bash
 $ bin/stop-hugegraph.sh
 $ bin/init-store.sh
 $ bin/start-hugegraph.sh

@@ -12,13 +12,13 @@ PUT
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/variables/name
 ```
 
 ##### Request Body
 
-```
+```json
 {
   "data":"tom"
 }
@@ -32,7 +32,7 @@ http://localhost:8080/graphs/hugegraph/variables/name
 
 ##### Response Body
 
-```
+```json
 {
     "name": "tom"
 }
@@ -48,7 +48,7 @@ GET
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/variables
 ```
 
@@ -60,7 +60,7 @@ http://localhost:8080/graphs/hugegraph/variables
 
 ##### Response Body
 
-```
+```json
 {
     "name": "tom"
 }
@@ -76,7 +76,7 @@ GET
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/variables/name
 ```
 
@@ -88,7 +88,7 @@ http://localhost:8080/graphs/hugegraph/variables/name
 
 ##### Response Body
 
-```
+```json
 {
     "name": "tom"
 }
@@ -104,7 +104,7 @@ DELETE
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/variables/name
 ```
 

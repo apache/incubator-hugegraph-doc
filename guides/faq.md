@@ -26,7 +26,7 @@
 
 - 服务启动成功后，使用`curl`查询所有顶点时返回乱码
 
-  服务端返回的批量顶点/边是压缩（gzip）过的，可以用`Firefox`或者`Chrome`浏览器的`_restlet_`插件发请求，会自动解压缩响应数据。
+  服务端返回的批量顶点/边是压缩（gzip）过的，可以使用管道重定向至gunzip进行解压（curl http://example | gunzip），也可以用`Firefox`或者`Chrome`浏览器的`_restlet_`插件发请求，会自动解压缩响应数据。
 
 - 使用顶点Id通过`Restful API`查询顶点时返回空，但是顶点确实是存在的
 
@@ -63,7 +63,7 @@
 
 - 如何删除全部的顶点和边，Restful API中没有这样的接口，调用`gremlin`的`g.V().drop()`会报错`Vertices in transaction have reached capacity xxx`
 
-  目前确实没有好办法删除全部的数据，用户如果是自己部署的`Server`和后端，可以直接清空数据库，重启`Server`。后续版本会加入分页机制支持该功能。
+  目前确实没有好办法删除全部的数据，用户如果是自己部署的`Server`和后端，可以直接清空数据库，重启`Server`。可以使用paging API或scan API先获取所有数据，再逐条删除。
 
 - 清空了数据库，并且执行了`init-store`，但是添加`schema`时提示"xxx has existed"
 

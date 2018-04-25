@@ -12,13 +12,13 @@ POST
 
 ##### Url
 
-```
-localhost:8080/graphs/hugegraph/schema/indexlabels
+```http request
+http://localhost:8080/graphs/hugegraph/schema/indexlabels
 ```
 
 ##### Request Body
 
-```
+```json
 {
     "name": "personByCity",
     "base_type": "VERTEX_LABEL",
@@ -38,7 +38,7 @@ localhost:8080/graphs/hugegraph/schema/indexlabels
 
 ##### Response Body
 
-```
+```json
 {
     "id": 1,
     "base_type": "VERTEX_LABEL",
@@ -61,8 +61,8 @@ GET
 
 ##### Url
 
-```
-localhost:8080/graphs/hugegraph/schema/indexlabels
+```http request
+http://localhost:8080/graphs/hugegraph/schema/indexlabels
 ```
 
 ##### Response Status
@@ -73,7 +73,7 @@ localhost:8080/graphs/hugegraph/schema/indexlabels
 
 ##### Response Body
 
-```
+```json
 {
     "indexlabels": [
         {
@@ -131,8 +131,8 @@ GET
 
 ##### Url
 
-```
-localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
+```http request
+http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
 ```
 
 ##### Response Status
@@ -143,7 +143,7 @@ localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
 
 ##### Response Body
 
-```
+```json
 {
     "id": 1,
     "base_type": "VERTEX_LABEL",
@@ -166,7 +166,7 @@ DELETE
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
 ```
 

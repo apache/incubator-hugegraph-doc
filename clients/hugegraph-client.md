@@ -10,7 +10,7 @@ HugeClient 是操作 graph 的总入口，用户必须先创建出 HugeClient �
 
 目前 HugeClient 只允许连接服务端已存在的图，无法自定义图进行创建。其创建方法如下：
 
-```
+```java
 // HugeGraph Server地址："http://localhost:8080"
 // 图的名称："hugegraph"
 HugeClient hugeClient = new HugeClient("http://localhost:8080", "hugegraph");
@@ -26,8 +26,8 @@ SchemaManager 用于管理 HugeGraph 中的四种元数据，分别是PropertyKe
 
 用户可使用如下方法获得SchemaManager对象：
 
-```
-schema = hugeClient.schema()
+```java
+SchemaManager schema = hugeClient.schema()
 ```
 
 下面分别对三种元数据的定义过程进行介绍。
@@ -78,7 +78,7 @@ userdata(String key, Object value) | The same key, the latter will cover the for
 
 ##### 2.2.2 创建 PropertyKey
 
-```
+```java
 schema.propertyKey("name").asText().valueSet().ifNotExist().create()
 ```
 
@@ -86,13 +86,13 @@ schema.propertyKey("name").asText().valueSet().ifNotExist().create()
 
 ##### 2.2.3 删除 PropertyKey
 
-```
+```java
 schema.propertyKey("name").remove()
 ```
 
 ##### 2.2.4 查询 PropertyKey
 
-```
+```java
 // 获取PropertyKey对象
 schema.getPropertyKey("name")
 
@@ -168,7 +168,7 @@ userData(String key, Object value) | The same key, the latter will cover the for
 
 ##### 2.3.2 创建 VertexLabel
 
-```
+```java
 // 使用 Automatic 的 Id 策略
 schema.vertexLabel("person").properties("name", "age").ifNotExist().create();
 schema.vertexLabel("person").useAutomaticId().properties("name", "age").primaryKeys("name").ifNotExist().create();
@@ -187,19 +187,19 @@ schema.vertexLabel("person").usePrimaryKeyId().properties("name", "age").primary
 
 VertexLabel 是可以追加约束的，不过仅限 properties 和 nullableKeys，而且追加的属性也必须添加到 nullableKeys 集合中。
 
-```
+```java
 schema.vertexLabel("person").properties("price").nullableKeys("price").append();
 ```
 
 ##### 2.3.4 删除 VertexLabel
 
-```
+```java
 schema.vertexLabel("person").remove();
 ```
 
 ##### 2.3.5 查询 VertexLabel
 
-```
+```java
 // 获取VertexLabel对象
 schema.getVertexLabel("name")
 
@@ -268,26 +268,26 @@ userData(String key, Object value) | The same key, the latter will cover the for
 
 ##### 2.4.2 创建 EdgeLabel
 
-```
+```java
 schema.edgeLabel("knows").link("person", "person").properties("date").ifNotExist().create();
 schema.edgeLabel("created").multiTimes().link("person", "software").properties("date").sortKeys("date").ifNotExist().create();
 ```
 
 ##### 2.4.3 追加 EdgeLabel
 
-```
+```java
 schema.edgeLabel("knows").properties("price").nullableKeys("price").append();
 ```
 
 ##### 2.4.4 删除 EdgeLabel
 
-```
+```java
 schema.edgeLabel("knows").remove();
 ```
 
 ##### 2.4.5 查询 EdgeLabel
 
-```
+```java
 // 获取EdgeLabel对象
 schema.getEdgeLabel("knows")
 
@@ -340,20 +340,20 @@ range()     | Range     | supports range search for numeric types
 
 ##### 2.5.2 创建 IndexLabel
 
-```
+```java
 schema.indexLabel("personByAge").onV("person").by("age").range().ifNotExist().create();
 schema.indexLabel("createdByDate").onE("created").by("date").secondary().ifNotExist().create();
 ```
 
 ##### 2.5.3 删除 IndexLabel
 
-```
+```java
 schema.indexLabel("personByAge").remove()
 ```
 
 ##### 2.5.4 查询 IndexLabel
 
-```
+```java
 // 获取IndexLabel对象
 schema.getIndexLabel("personByAge")
 
@@ -371,7 +371,7 @@ schema.getIndexLabel("personByAge").name()
 
 顶点是构成图的最基本元素，一个图中可以有非常多的顶点。下面给出一个添加顶点的例子：
 
-```
+```java
 Vertex marko = graph.addVertex(T.label, "person", "name", "marko", "age", 29);
 Vertex lop = graph.addVertex(T.label, "software", "name", "lop", "lang", "java", "price", 328);
 ```
@@ -390,7 +390,7 @@ Vertex lop = graph.addVertex(T.label, "software", "name", "lop", "lang", "java",
 
 有了点，还需要边才能构成完整的图。下面给出一个添加边的例子：
 
-```
+```java
 Edge knows1 = marko.addEdge("knows", vadas, "city", "Beijing");
 ```
 

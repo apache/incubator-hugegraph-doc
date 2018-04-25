@@ -12,13 +12,13 @@ POST
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 ```
 
 ##### Request Body
 
-```
+```json
 {
     "name": "person",
     "id_strategy": "DEFAULT",
@@ -42,7 +42,7 @@ http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 
 ##### Response Body
 
-```
+```json
 {
     "id": 1,
     "primary_keys": [
@@ -77,13 +77,13 @@ PUT
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person?action=append
 ```
 
 ##### Request Body
 
-```
+```json
 {
     "name": "person",
     "properties": [
@@ -104,7 +104,7 @@ http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person?action=append
 
 ##### Response Body
 
-```
+```json
 {
     "id": 1,
     "primary_keys": [
@@ -139,7 +139,7 @@ GET
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 ```
 
@@ -151,7 +151,7 @@ http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 
 ##### Response Body
 
-```
+```json
 {
     "vertexlabels": [
         {
@@ -210,7 +210,7 @@ GET
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person
 ```
 
@@ -222,7 +222,7 @@ http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person
 
 ##### Response Body
 
-```
+```json
 {
     "id": 1,
     "primary_keys": [
@@ -257,7 +257,7 @@ DELETE
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person
 ```
 

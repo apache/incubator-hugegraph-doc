@@ -61,7 +61,7 @@ HugeGraph需要显示创建Schema，因此需要依次创建PropertyKey、Vertex
 
 #### 2.1 Graph Schema
 
-```
+```groovy
 schema = hugegraph.schema()
 
 schema.propertyKey("name").asText().ifNotExist().create()
@@ -83,7 +83,7 @@ schema.edgeLabel("brother").link("character", "character").ifNotExist().create()
 
 #### 2.2 Graph Data
 
-```
+```groovy
 // add vertices
 Vertex saturn = graph.addVertex(T.label, "character", "name", "saturn", "age", 10000, "type", "titan")
 Vertex sky = graph.addVertex(T.label, "location", "name", "sky")
@@ -130,37 +130,37 @@ HugeGraph默认是自动生成Id，如果用户通过`primaryKeys`指定`VertexL
 
 **1\. Find the grand father of hercules**
 
-```
+```groovy
 g.V().hasLabel('character').has('name','hercules').out('father').out('father')
 ```
 
 也可以通过`repeat`方式：
 
-```
+```groovy
 g.V().hasLabel('character').has('name','hercules').repeat(__.out('father')).times(2)
 ```
 
 **2\. Find the name of hercules's father**
 
-```
+```groovy
 g.V().hasLabel('character').has('name','hercules').out('father').value('name')
 ```
 
 **3\. Find the characters with age > 100**
 
-```
+```groovy
 g.V().hasLabel('character').has('age',gt(100))
 ```
 
 **4\. Find who are pluto's cohabitants**
 
-```
+```groovy
 g.V().hasLabel('character').has('name','pluto').out('lives').in('lives').values('name')
 ```
 
 **5\. Find pluto can't be his own cohabitant**
 
-```
+```groovy
 pluto = g.V().hasLabel('character').has('name', 'pluto')
 g.V(pluto).out('lives').in('lives').where(is(neq(pluto)).values('name')
 
@@ -170,7 +170,7 @@ g.V().hasLabel('character').has('name', 'pluto').as('x').out('lives').in('lives'
 
 **6\. Pluto's Brothers**
 
-```
+```groovy
 pluto = g.V().hasLabel('character').has('name', 'pluto').next()
 // where do pluto's brothers live?
 g.V(pluto).out('brother').out('lives').values('name')

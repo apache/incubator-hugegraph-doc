@@ -32,7 +32,7 @@ HugeGraph-Client向HugeGraph-Server发出HTTP请求，获取并解析Server的�
 
 在项目pom文件中引入百度私服仓库：
 
-```
+```xml
 <repositories>
     <repository>
         <id>Baidu_Local_Snapshots</id>
@@ -43,7 +43,7 @@ HugeGraph-Client向HugeGraph-Server发出HTTP请求，获取并解析Server的�
 
 添加hugegraph-client依赖
 
-```
+```xml
 <dependencies>
     <dependency>
         <groupId>com.baidu.hugegraph</groupId>
@@ -57,7 +57,7 @@ HugeGraph-Client向HugeGraph-Server发出HTTP请求，获取并解析Server的�
 
 ##### 4.3.1 SingleExample
 
-```
+```java
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
@@ -213,7 +213,7 @@ public class SingleExample {
 
 ##### 4.3.2 BatchExample
 
-```
+```java
 import java.util.LinkedList;
 import java.util.List;
 

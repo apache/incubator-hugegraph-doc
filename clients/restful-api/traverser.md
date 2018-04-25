@@ -18,7 +18,7 @@ GET
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/traversers/shortestpath?source=1&target=12345&max_depth=5&direction=OUT
 ```
 
@@ -30,7 +30,7 @@ http://localhost:8080/graphs/hugegraph/traversers/shortestpath?source=1&target=1
 
 ##### Response Body
 
-```
+```json
 {
     "path":[
         1,
@@ -60,7 +60,7 @@ GET
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/traversers/kout?source=1&depth=5&direction=OUT
 ```
 
@@ -72,7 +72,7 @@ http://localhost:8080/graphs/hugegraph/traversers/kout?source=1&depth=5&directio
 
 ##### Response Body
 
-```
+```json
 {
     "vertices":[
         10,
@@ -112,7 +112,7 @@ GET
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/traversers/kneighbor?source=1&depth=5&direction=OUT
 ```
 
@@ -124,7 +124,7 @@ http://localhost:8080/graphs/hugegraph/traversers/kneighbor?source=1&depth=5&dir
 
 ##### Response Body
 
-```
+```json
 {
     "vertices":[
         1,
@@ -162,7 +162,7 @@ GET
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/traversers/vertices?ids="5:java-1"&ids="5:java-2"&ids="5:java-3"&ids="5:java-4"&ids="5:java-5"
 ```
 
@@ -174,7 +174,7 @@ http://localhost:8080/graphs/hugegraph/traversers/vertices?ids="5:java-1"&ids="5
 
 ##### Response Body
 
-```
+```json
 {
     "vertices":[
         {"id": "5:java-1", "label": "book", "type": "vertex", "properties":{"name":[{"id": "5:java-1>name",…},

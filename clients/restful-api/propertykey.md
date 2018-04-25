@@ -10,13 +10,13 @@ POST
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/schema/propertykeys
 ```
 
 ##### Request Body
 
-```
+```json
 {
     "name": "age",
     "dataType": "INT",
@@ -32,7 +32,7 @@ http://localhost:8080/graphs/hugegraph/schema/propertykeys
 
 ##### Response Body
 
-```
+```json
 {
     "id": 2,
     "name": "age",
@@ -57,13 +57,13 @@ PUT
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/schema/propertykeys/age?action=append
 ```
 
 ##### Request Body
 
-```
+```json
 {
     "name": "age",
     "user_data": {
@@ -81,7 +81,7 @@ http://localhost:8080/graphs/hugegraph/schema/propertykeys/age?action=append
 
 ##### Response Body
 
-```
+```json
 {
     "id": 2,
     "name": "age",
@@ -105,7 +105,7 @@ GET
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/schema/propertykeys
 ```
 
@@ -117,7 +117,7 @@ http://localhost:8080/graphs/hugegraph/schema/propertykeys
 
 ##### Response Body
 
-```
+```json
 {
     "propertykeys": [
         {
@@ -190,7 +190,7 @@ GET
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
 ```
 
@@ -204,7 +204,7 @@ http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
 
 ##### Response Body
 
-```
+```json
 {
     "id": 2,
     "name": "age",
@@ -225,7 +225,7 @@ DELETE
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
 ```
 

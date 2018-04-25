@@ -12,13 +12,13 @@ POST
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/schema/edgelabels
 ```
 
 ##### Request Body
 
-```
+```json
 {
     "name": "created",
     "source_label": "person",
@@ -41,7 +41,7 @@ http://localhost:8080/graphs/hugegraph/schema/edgelabels
 
 ##### Response Body
 
-```
+```json
 {
     "id": 1,
     "sort_keys": [
@@ -76,13 +76,13 @@ PUT
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/schema/edgelabels?action=append
 ```
 
 ##### Request Body
 
-```
+```json
 {
     "name": "created",
     "properties": [
@@ -102,7 +102,7 @@ http://localhost:8080/graphs/hugegraph/schema/edgelabels?action=append
 
 ##### Response Body
 
-```
+```json
 {
     "id": 2,
     "sort_keys": [
@@ -135,7 +135,7 @@ GET
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/schema/edgelabels
 ```
 
@@ -147,7 +147,7 @@ http://localhost:8080/graphs/hugegraph/schema/edgelabels
 
 ##### Response Body
 
-```
+```json
 {
     "edgelabels": [
         {
@@ -203,7 +203,7 @@ GET
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
 ```
 
@@ -215,7 +215,7 @@ http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
 
 ##### Response Body
 
-```
+```json
 {
     "id": 1,
     "sort_keys": [
@@ -250,7 +250,7 @@ DELETE
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
 ```
 

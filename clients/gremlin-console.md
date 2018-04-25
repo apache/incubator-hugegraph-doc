@@ -13,7 +13,7 @@ Gremlin-Console是由Tinkerpop自己开发的一个交互式客户端，用户�
 
 在script目录下有一个示例脚本：example.groovy
 
-```
+```groovy
 import com.baidu.hugegraph.HugeFactory
 import com.baidu.hugegraph.dist.RegisterUtil
 import org.apache.tinkerpop.gremlin.structure.T
@@ -71,7 +71,7 @@ System.out.println(">>>> query all edges: size=" + g.E().toList().size());
 
 下面进入gremlin-console，并传入该脚本令其执行：
 
-```
+```bash
 bin/gremlin-console.sh scripts/example.groovy
 objc[5038]: Class JavaLaunchHelper is implemented in both /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/bin/java (0x10137a4c0) and /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/libinstrument.dylib (0x102bbb4e0). One of the two will be used. Which one is undefined.
 
@@ -91,7 +91,7 @@ plugin activated: tinkerpop.tinkergraph
 
 可以看到，插入了6个顶点、6条边，并查询出来了。进入console之后，还可继续输入groovy语句对图做操作：
 
-```
+```groovy
 gremlin> g.V()
 ==>v[2:ripple]
 ==>v[1:vadas]
@@ -116,7 +116,7 @@ gremlin> g.E()
 
 *注意：将连接方式修改为WebSocket后，HugeClient、HugeLoader、HugeStudio等配套工具都不能使用了。*
 
-```
+```yaml
 # vim conf/gremlin-server.yaml
 host: 127.0.0.1
 port: 8182
@@ -193,7 +193,7 @@ ssl: {
 
 然后进入gremlin-console
 
-```
+```bash
 bin/gremlin-console.sh 
 objc[5761]: Class JavaLaunchHelper is implemented in both /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/bin/java (0x10ec584c0) and /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/libinstrument.dylib (0x10ecdc4e0). One of the two will be used. Which one is undefined.
 
@@ -208,7 +208,7 @@ plugin activated: tinkerpop.tinkergraph
 
 连接server，需在配置文件中指定连接参数，在conf目录下有一个默认的remote.yaml
 
-```
+```yaml
 # cat conf/remote.yaml
 hosts: [localhost]
 port: 8182
@@ -221,7 +221,7 @@ serializer: {
 }
 ```
 
-```
+```groovy
 gremlin> :remote connect tinkerpop.server conf/remote.yaml
 2018-01-15 15:30:31 11528 [main] [INFO ] org.apache.tinkerpop.gremlin.driver.Connection [] - Created new connection for ws://localhost:8182/gremlin
 2018-01-15 15:30:31 11538 [main] [INFO ] org.apache.tinkerpop.gremlin.driver.Connection [] - Created new connection for ws://localhost:8182/gremlin
@@ -230,7 +230,8 @@ gremlin> :remote connect tinkerpop.server conf/remote.yaml
 ```
 
 连接成功之后，在console的上下文中能使用的变量只有hugegraph和hugegraph1两个图对象（在gremlin-server.yaml中配置），如果想拥有更多的变量，可以在`scripts/empty-sample.groovy`中添加，如:
-```
+
+```groovy
 import org.apache.tinkerpop.gremlin.server.util.LifeCycleHook
 
 // an init script that returns a Map allows explicit setting of global bindings.
@@ -256,7 +257,8 @@ g = hugegraph.traversal()
 这样在console中便可以直接使用schema和g这两个对象，做元数据的管理和图的查询了。
 
 不定义了也没关系，因为所有的对象都可以通过graph获得，例如：
-```
+
+```groovy
 gremlin> :> hugegraph.traversal().V()
 ==>v[2:ripple]
 ==>v[1:vadas]
@@ -270,7 +272,7 @@ gremlin> :> hugegraph.traversal().V()
 
 还可以把多条语句放在一个字符串变量中，然后一次性发给server：
 
-```
+```groovy
 gremlin> script = """
 graph = hugegraph;
 marko = graph.addVertex(T.label, "person", "name", "marko", "age", 29, "city", "Beijing");
