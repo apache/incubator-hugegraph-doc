@@ -1,4 +1,4 @@
-### 6.1 Version
+### 6.1 Other
 
 #### 6.1.1 查看HugeGraph的版本信息
 
@@ -10,7 +10,7 @@ GET
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/versions
 ```
 
@@ -22,7 +22,7 @@ http://localhost:8080/versions
 
 ##### Response Body
 
-```
+```json
 {
     "versions":{
         "version": "v1",

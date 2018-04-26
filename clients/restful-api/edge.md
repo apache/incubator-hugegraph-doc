@@ -3,7 +3,7 @@
 顶点 id 格式的修改也影响到了边的 Id 以及源顶点和目标顶点 id 的格式。
 
 EdgeId是由 `src-vertex-id + direction + label + sort-values + tgt-vertex-id` 拼接而成，
-但是这里的顶点id不是通过带不带引号区分的，而是通过前缀区分：
+但是这里的顶点id类型不是通过引号区分的，而是根据前缀区分：
 
 - 当 id 类型为 number 时，EdgeId 的顶点 id 前有一个前缀`L` ，形如 "L123456>1>>L987654"
 - 当 id 类型为 string 时，EdgeId 的顶点 id 前有一个前缀`S` ，形如 "S1:peter>1>>S2:lop"
@@ -22,13 +22,13 @@ POST
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/graph/edges
 ```
 
 ##### Request Body
 
-```
+```json
 {
     "label":"created",
     "outV":"1:peter",
@@ -50,7 +50,7 @@ http://localhost:8080/graphs/hugegraph/graph/edges
 
 ##### Response Body
 
-```
+```json
 {
     "id": "S1:peter>1>>S2:lop",
     "label": "created",
@@ -76,13 +76,13 @@ POST
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/graph/edges/batch
 ```
 
 ##### Request Body
 
-```
+```json
 [
     {
         "label": "created",
@@ -117,7 +117,7 @@ http://localhost:8080/graphs/hugegraph/graph/edges/batch
 
 ##### Response Body
 
-```
+```json
 [
     "S1:peter>1>>S2:lop",
     "S1:marko>2>>S1:vadas"
@@ -134,13 +134,13 @@ PUT
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action=append
 ```
 
 ##### Request Body
 
-```
+```json
 {
     "properties":{
         "weight": 1.0
@@ -156,7 +156,7 @@ http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action=app
 
 ##### Response Body
 
-```
+```json
 {
     "id": "S1:peter>1>>S2:lop",
     "label": "created",
@@ -182,13 +182,13 @@ PUT
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action=eliminate
 ```
 
 ##### Request Body
 
-```
+```json
 {
     "properties":{
         "weight": 1.0
@@ -204,7 +204,7 @@ http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action=eli
 
 ##### Response Body
 
-```
+```json
 {
     "id": "S1:peter>1>>S2:lop",
     "label": "created",
@@ -232,15 +232,15 @@ GET
 - vertex_id: 顶点id
 - direction: 边的方向(OUT | IN | BOTH)
 - label: 边的标签
-- properties: 属性键值对(必须是建了索引的)
+- properties: 属性键值对(根据属性查询的前提是建立了索引)
 - limit: 查询数目
 
-其中vertex_id和direction如果要出现，则必须同时出现
+vertex_id为可选参数，如果提供参数vertex_id则必须同时提供参数direction。无vertex_id参数时表示获取所有边，可通过limit限制查询数目。
 
 ##### Url
 
-```
-查询顶点 person:josh 的所有 created 边
+```http request
+# 查询与顶点 person:josh(vertex_id="1:josh") 相连且 label 为 created 的边
 http://127.0.0.1:8080/graphs/hugegraph/graph/edges?vertex_id="1:josh"&direction=BOTH&label=created&properties={}
 ```
 
@@ -252,7 +252,7 @@ http://127.0.0.1:8080/graphs/hugegraph/graph/edges?vertex_id="1:josh"&direction=
 
 ##### Response Body
 
-```
+```json
 {
     "edges": [
         {
@@ -295,7 +295,7 @@ GET
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
 ```
 
@@ -307,7 +307,7 @@ http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
 
 ##### Response Body
 
-```
+```json
 {
     "id": "S1:peter>1>>S2:lop",
     "label": "created",
@@ -333,7 +333,7 @@ DELETE
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
 ```
 

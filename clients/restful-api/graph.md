@@ -10,7 +10,7 @@ GET
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs
 ```
 
@@ -22,7 +22,7 @@ http://localhost:8080/graphs
 
 ##### Response Body
 
-```
+```json
 {
     "graphs":[
         "hugegraph",
@@ -48,7 +48,7 @@ DELETE
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/clear?token=162f7848-0b6d-4faf-b557-3a0797869c55&confirm_message=I%27m+sure+to+delete+all+data
 ```
 
@@ -74,7 +74,7 @@ GET
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55
 ```
 
@@ -86,7 +86,7 @@ http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797
 
 ##### Response Body
 
-```
+```properties
 # gremlin entrence to create graph
 gremlin.graph=com.baidu.hugegraph.HugeFactory
 

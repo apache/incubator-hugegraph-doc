@@ -21,20 +21,20 @@ HugeStudio是HugeGraph的前端展示工具，是基于Web的图形化IDE环境�
 
 下载HugeStudio源码包：(暂时从icode上clone)
 
-```
+```bash
 $ git clone ssh://liunanke@icode.baidu.com:8235/baidu/xbu-data/hugegraph-studio baidu/xbu-data/hugegraph-studio && scp -p -P 8235 liunanke@icode.baidu.com:hooks/commit-msg baidu/xbu-data/hugegraph-studio/.git/hooks/
 ```
 
 编译生成tar包:
 
-```
+```bash
 $ cd hugegraph-studio
 $ mvn package -DskipTests
 ```
 
 执行结果如下：
 
-```
+```bash
 [INFO] ------------------------------------------------------------------------
 [INFO] Reactor Summary:
 [INFO]
@@ -57,19 +57,19 @@ $ mvn package -DskipTests
 
 可以从以下地址下载:
 
-```
+```bash
 wget http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugestudio/hugestudio-release-0.4-SNAPSHOT.tar.gz
 ```
 
 下载完成后解压缩：
 
-```
+```bash
 $ tar zxvf hugestudio-release-0.4-SNAPSHOT.tar.gz
 ```
 
 注：如果在服务器部署，执行解压命令后，还需修改配置文件如下所示：
 
-```
+```bash
 $ cd hugestudio-release-0.4-SNAPSHOT
 $ vim conf/hugestudio.properties
 ```
@@ -80,14 +80,14 @@ $ vim conf/hugestudio.properties
 
 启动命令如下:
 
-```
+```bash
 $ cd hugestudio-release-0.4-SNAPSHOT
 $ bin/hugestudio.sh
 ```
 
 启动成功结果如下：
 
-```
+```bash
 19:05:12.779 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader ID:  TS: - Root WebApplicationContext: initialization started
 19:05:12.910 [localhost-startStop-1] INFO  org.springframework.web.context.support.XmlWebApplicationContext ID:  TS: - Refreshing Root WebApplicationContext: startup date [Thu Jul 27 19:05:12 CST 2017]; root of context hierarchy
 19:05:12.973 [localhost-startStop-1] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader ID:  TS: - Loading XML bean definitions from class path resource [applicationContext.xml]
@@ -177,7 +177,7 @@ $ bin/hugestudio.sh
 
 首先在notebook的cell中创建PropertyKey，将以下语句输入到cell中：
 
-```java
+```groovy
 graph.schema().propertyKey("name").asText().ifNotExist().create()
 graph.schema().propertyKey("age").asInt().ifNotExist().create()
 graph.schema().propertyKey("city").asText().ifNotExist().create()
@@ -195,14 +195,14 @@ graph.schema().propertyKey("price").asInt().ifNotExist().create()
 
 顶点类型（VertexLabel）的创建：
 
-```java
+```groovy
 person = graph.schema().vertexLabel("person").properties("name", "age", "city").primaryKeys("name").ifNotExist().create()
 software = graph.schema().vertexLabel("software").properties("name", "lang", "price").primaryKeys("name").ifNotExist().create()
 ```
 
 边类型（EdgeLabel）的创建：
 
-```java
+```groovy
 knows = graph.schema().edgeLabel("knows").sourceLabel("person").targetLabel("person").properties("date").ifNotExist().create()
 created = graph.schema().edgeLabel("created").sourceLabel("person").targetLabel("software").properties("date", "city").ifNotExist().create()
 ```
@@ -218,7 +218,7 @@ created = graph.schema().edgeLabel("created").sourceLabel("person").targetLabel(
 
 有了schema后，就可以根据schema创建特定的顶点和边了，这里我们定义两个person类型的顶点实例：marko 和 vadas，在定义两者之间的关系knows：
 
-```java
+```groovy
 marko = graph.addVertex(T.label, "person", "name", "marko", "age", 29, "city", "Beijing")
 vadas = graph.addVertex(T.label, "person", "name", "vadas", "age", 27, "city", "Hongkong")
 marko.addEdge("knows", vadas, "date", "20160110")
@@ -233,7 +233,7 @@ marko.addEdge("knows", vadas, "date", "20160110")
 
 ##### 4.3.3 向graph添加更多数据
 
-```java
+```groovy
 marko = graph.addVertex(T.label, "person", "name", "marko", "age", 29, "city", "Beijing")
 vadas = graph.addVertex(T.label, "person", "name", "vadas", "age", 27, "city", "Hongkong")
 lop = graph.addVertex(T.label, "software", "name", "lop", "lang", "java", "price", 328)
@@ -298,7 +298,7 @@ HugeStudio不仅支持通过graph的方式展示数据，还支持table和格式
 
 案例：
 
-```java
+```groovy
 graph.schema().vertexLabel("software")
      .userData("vis.size",25)
      .userData("vis.scaling.min",1)

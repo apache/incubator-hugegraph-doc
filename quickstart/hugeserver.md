@@ -17,7 +17,7 @@ Core模块是Tinkerpop接口的实现，Backend模块用于管理数据存储，
 
 #### 2.1 下载tar包
 
-```
+```bash
 $ wget http://api.xdata.baidu.com/hdfs/yqns02/hugegraph/hugegraph-release-${version}-SNAPSHOT.tar.gz
 $ tar -zxvf hugegraph-release-${version}-SNAPSHOT.tar.gz
 ```
@@ -28,13 +28,13 @@ _注：${version}为版本号，最新版本号可参考[Download](../download.m
 
 下载HugeGraph源代码（目前仅支持从icode上clone）
 
-```
+```bash
 $ git clone ssh://username@icode.baidu.com:8235/baidu/xbu-data/hugegraph baidu/xbu-data/hugegraph && scp -p -P 8235 username@icode.baidu.com:hooks/commit-msg baidu/xbu-data/hugegraph/.git/hooks/
 ```
 
 编译打包生成tar包（编译前检查分支，并切换至master2）:
 
-```
+```bash
 $ git checkout master2
 $ cd hugegraph
 $ mvn package -DskipTests
@@ -42,7 +42,7 @@ $ mvn package -DskipTests
 
 执行日志如下：
 
-```
+```bash
 ......
 [INFO] Reactor Summary:
 [INFO]
@@ -74,7 +74,7 @@ $ mvn package -DskipTests
 
 初始化数据库
 
-```
+```bash
 $ cd hugegraph-release
 $ bin/init-store.sh
 ```
@@ -83,7 +83,7 @@ HugeGraphServer的启动不会创建数据库，所以用户必须在启动Serve
 
 启动server
 
-```
+```bash
 $ bin/start-hugegraph.sh
 Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
@@ -95,14 +95,14 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 修改 hugegraph.properties
 
-```
+```properties
 backend=memory
 serializer=text
 ```
 
 直接启动 server 即可
 
-```
+```bash
 $ bin/start-hugegraph.sh
 Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
@@ -116,7 +116,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 修改 hugegraph.properties
 
-```
+```properties
 backend=cassandra
 serializer=cassandra
 
@@ -134,7 +134,7 @@ cassandra.password=
 
 初始化数据库（仅第一次启动时需要）
 
-```
+```bash
 $ cd hugegraph-release
 $ bin/init-store.sh
 Initing HugeGraph Store...
@@ -158,7 +158,7 @@ Initing HugeGraph Store...
 
 启动server
 
-```
+```bash
 $ bin/start-hugegraph.sh
 Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
@@ -168,7 +168,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 修改 hugegraph.properties
 
-```
+```properties
 backend=scylladb
 serializer=scylladb
 
@@ -188,14 +188,14 @@ cassandra.password=
 
 初始化数据库（仅第一次启动时需要）
 
-```
+```bash
 $ cd hugegraph-release
 $ bin/init-store.sh
 ```
 
 启动server
 
-```
+```bash
 $ bin/start-hugegraph.sh
 Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
@@ -205,7 +205,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 修改 hugegraph.properties
 
-```
+```properties
 backend=rocksdb
 serializer=binary
 rocksdb.data_path=.
@@ -216,14 +216,14 @@ rocksdb.wal_path=.
 
 初始化数据库（仅第一次启动时需要）
 
-```
+```bash
 $ cd hugegraph-release
 $ bin/init-store.sh
 ```
 
 启动server
 
-```
+```bash
 $ bin/start-hugegraph.sh
 Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
@@ -235,14 +235,14 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 `jps`查看服务进程
 
-```
+```bash
 $ jps
 6475 HugeGraphServer
 ```
 
 `curl`请求`RestfulAPI`
 
-```
+```bash
 $ echo `curl -o /dev/null -s -w %{http_code} "http://localhost:8080/graphs/hugegraph/graph/vertices"`
 ```
 
@@ -258,7 +258,7 @@ HugeGraphServer的RestAPI包括三种类型的资源，分别是graph、schema�
 
 ##### 5.2.1 获取`hugegraph`的顶点及相关属性
 
-```
+```bash
 $ curl http://localhost:8080/graphs/hugegraph/graph/vertices 
 ```
 
@@ -281,7 +281,7 @@ _说明_
 
 响应体如下：
 
-```
+```json
 {
     "vertices": [
         {
@@ -337,7 +337,7 @@ _说明_
 
 ### 6 停止Server
 
-```
+```bash
 $cd hugegraph-release
 $bin/stop-hugegraph.sh
 ```

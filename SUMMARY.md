@@ -4,10 +4,10 @@
 
 ## Quickstart
 * [Install HugeGraph](quickstart/hugeserver.md)
-* [Load data With HugeLoader](quickstart/hugeloader.md)
+* [Load data with HugeLoader](quickstart/hugeloader.md)
 * [Display with HugeStudio](quickstart/hugestudio.md)
-* [Develop With HugeClient](quickstart/hugeclient.md)
-* [Analysis With HugeSpark](quickstart/hugespark.md)
+* [Develop with HugeClient](quickstart/hugeclient.md)
+* [Analysis with HugeSpark](quickstart/hugespark.md)
 
 ## Guides
 * [Architecture Overview](guides/architectural.md)

@@ -28,13 +28,13 @@ POST
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/graph/vertices
 ```
 
 ##### Request Body
 
-```
+```json
 {
     "label": "person",
     "properties": {
@@ -52,7 +52,7 @@ http://localhost:8080/graphs/hugegraph/graph/vertices
 
 ##### Response Body
 
-```
+```json
 {
     "id": "1:marko",
     "label": "person",
@@ -84,13 +84,13 @@ POST
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/graph/vertices/batch
 ```
 
 ##### Request Body
 
-```
+```json
 [
     {
         "label": "person",
@@ -118,7 +118,7 @@ http://localhost:8080/graphs/hugegraph/graph/vertices/batch
 
 ##### Response Body
 
-```
+```json
 [
     "1:marko",
     "2:ripple"
@@ -135,13 +135,13 @@ PUT
 
 ##### Url
 
-```
+```http request
 http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=append
 ```
 
 ##### Request Body
 
-```
+```json
 {
     "label": "person",
     "properties": {
@@ -159,7 +159,7 @@ http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=append
 
 ##### Response Body
 
-```
+```json
 {
     "id": "1:marko",
     "label": "person",
@@ -197,13 +197,13 @@ PUT
 
 ##### Url
 
-```
+```http request
 http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=eliminate
 ```
 
 ##### Request Body
 
-```
+```json
 {
     "label": "person",
     "properties": {
@@ -220,7 +220,7 @@ http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=eliminate
 
 ##### Response Body
 
-```
+```json
 {
     "id": "1:marko",
     "label": "person",
@@ -253,16 +253,16 @@ GET
 ##### Params
 
 - label: 顶点标签
-- properties: 属性键值对(必须是建了索引的)
+- properties: 属性键值对(根据属性查询的前提是建立了索引)
 - limit: 查询数目
 
 以上参数都是可选的，且可以任意组合
 
 ##### Url
 
-```
-查询所有 age 为 20 的 person 顶点
-http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&properties={"age":29}limit=1
+```http request
+# 查询所有 age 为 20 且 label 为 person 的顶点
+http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&properties={"age":29}&limit=1
 ```
 
 ##### Response Status
@@ -273,7 +273,7 @@ http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&properties={"
 
 ##### Response Body
 
-```
+```json
 {
     "vertices": [
         {
@@ -315,7 +315,7 @@ GET
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
 ```
 
@@ -327,7 +327,7 @@ http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
 
 ##### Response Body
 
-```
+```json
 {
     "id": "1:marko",
     "label": "person",
@@ -359,7 +359,7 @@ DELETE
 
 ##### Url
 
-```
+```http request
 http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
 ```
 

@@ -17,7 +17,7 @@ HugeLoader 是 Hugegragh 的一个模块，负责将普通文本数据转化为�
 
 下载最新版本的 HugeLoader bin包：
 
-```shell
+```bash
 wget http://api.xdata.baidu.com/hdfs/yqns02/hugegraph/hugeloader/hugegraph-loader-latest-bin.tar.gz
 tar zxvf hugegraph-loader-latest-bin.tar.gz
 ```
@@ -26,13 +26,13 @@ tar zxvf hugegraph-loader-latest-bin.tar.gz
 
 下载最新版本的HugeLoader 源码包：
 
-```shell
+```bash
 git clone ssh://username@icode.baidu.com:8235/baidu/xbu-data/hugegraph-loader
 ```
 
 编译生成tar包:
 
-```shell
+```bash
 cd hugegraph-loader
 mvn package -DskipTests
 ```
@@ -102,7 +102,7 @@ inputfileE = inputPath + '/edges/'
 - JSON 格式的文件 key 为 header，value 为数据内容。
 - CSV 和 TEXT 格式的文件默认第一行为 header，如果文件没有 header，则需要用户指定 header
 
-```
+```groovy
 // CSV 指定 header
 authorInput = File.csv(inputfileV + "author.csv").header("name", "gender")
 bookInput = File.csv(inputfileV + "book.csv").header("name", "year", "ISBN")
@@ -148,7 +148,7 @@ load(bookInput).asVertices {
 
 配置边的 label 和 keys
 
-```grvvoy
+```groovy
 load(authorBookInput).asEdges {
     label "authored" // label 为边的名称
     //定义边的起始顶点
@@ -398,7 +398,7 @@ load(authorBookInput).asEdges {
 
 运行 `bin/hugeloader` 并传入参数
 
-```shell
+```bash
 # 示例
 bin/hugeloader -f /home/work/data/authorBookMap_JSON.groovy -g hugegraph
 ```

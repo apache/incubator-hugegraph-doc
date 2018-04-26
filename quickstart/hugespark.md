@@ -17,7 +17,7 @@ HugeSpark依赖hugegraph 和 spark-2.1.1，需要添加相关项目依赖：
 
   下载完成后解压即可：
 
-  ```
+  ```bash
     $ tar -zxvf Spark-2.1.1-Hugespark.tar.gz
   ```
 
@@ -27,7 +27,7 @@ HugeSpark依赖hugegraph 和 spark-2.1.1，需要添加相关项目依赖：
 
 下载spark-2.1.1,解压spark（[Spark文档参考](http://spark.apache.org)），删除过期的guava.jar包
 
-```
+```bash
 rm -rf  jars/guava-14.0.1.jar
 rm -rf  jars/jackson-module-scala_2.11-2.6.5.jar
 rm -rf  jars/jackson-annotations-2.6.5.jar
@@ -38,20 +38,20 @@ rm -rf  jars/jackson-core-2.6.5.jar
 
 hugespark源码下载（暂时从icode上clone）
 
-```
+```bash
 $ git clone ssh://${username}@icode.baidu.com:8235/baidu/xbu-data/hugegraph-spark baidu/xbu-data/hugegraph-spark && scp -p -P 8235 ${username}@icode.baidu.com:hooks/commit-msg baidu/xbu-data/hugegraph-spark/.git/hooks/
 ```
 
 使用[Apache Maven](http://maven.apache.org/)构建，示例如下：
 
-```
+```bash
 $ git checkout develop
 $ mvn -DskipTests clean assembly:assembly
 ```
 
 将编译完成的jar包拷贝到spark安装目录下
 
-```
+```bash
 $ cp baidu/xbu-data/hugegraph-spark/target/hugegraph-spark-0.1.0-SNAPSHOT-jar-with-dependencies.jar ${spark-dir}/spark-2.1.1/jars/
 ```
 
@@ -73,7 +73,7 @@ $ cp baidu/xbu-data/hugegraph-spark/target/hugegraph-spark-0.1.0-SNAPSHOT-jar-wi
 
   首次安装的用户需要将spark-defaults.conf.default文件拷贝一份，如下：
 
-  ```
+  ```bash
     $ cd spark-2.1.1/conf
     $ cp spark-defaults.conf.default spark-defaults.conf
   ```
@@ -82,7 +82,7 @@ $ cp baidu/xbu-data/hugegraph-spark/target/hugegraph-spark-0.1.0-SNAPSHOT-jar-wi
 
 - 命令行修改配置示例：
 
-  ```
+  ```bash
     $ spark-shell --conf spark.hugegraph.snapshot.dir=/tmp/hugesnapshot2
   ```
 
@@ -90,19 +90,19 @@ $ cp baidu/xbu-data/hugegraph-spark/target/hugegraph-spark-0.1.0-SNAPSHOT-jar-wi
 
 启动Scala shell ：
 
-```
+```bash
 ./bin/spark-shell
 ```
 
 导入hugegraph相关类
 
-```
+```scala
 import com.baidu.hugegraph.spark._
 ```
 
 初始化graph对象，并创建snapshot
 
-```
+```scala
 val graph = sc.hugeGraph("test","${spark.hugegraph.conf.url}")
 ```
 
@@ -114,19 +114,19 @@ val graph = sc.hugeGraph("test","${spark.hugegraph.conf.url}")
 
 获取边的个数
 
-```
+```scala
 graph.vertices.count()
 ```
 
 获取边的个数
 
-```
+```scala
 graph.edges.count()
 ```
 
 出度top 100
 
-```
+```scala
 val top100 = graph.outDegrees.top(100)
 val top100HugeGraphID = sc.makeRDD(top100).join(graph.vertices).collect
 top100HugeGraphID.map(e=> (e._2._2.vertexIdString,e._2._1)).foreach(println)
@@ -134,7 +134,7 @@ top100HugeGraphID.map(e=> (e._2._2.vertexIdString,e._2._1)).foreach(println)
 
 或使用隐式方法：
 
-```
+```scala
 implicit val degreeTop = new Ordering[(Long,Int)]{
     override def compare(a: (Long,Int), b: (Long,Int)) =a._2.compare(b._2)
 }
@@ -144,13 +144,13 @@ PageRank
 
 PageRank的结果仍未一个图，包含`vertices` and `edges`。
 
-```
+```scala
 val ranks = graph.pageRank(0.0001)
 ```
 
 获取 PageRank的top100的顶点 访问vertices的PageRank的过程中会隐式调用myOrd方法，每个vertices包含 (Long,Double)对，comapares方法中仅依据double值比较。
 
-```
+```scala
 val top100 = ranks.vertices.top(100)
 ```
 

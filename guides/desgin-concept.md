@@ -41,39 +41,39 @@ HugeGraph的Vertex支持三种ID策略，在同一个图数据库中不同的Ver
  
  1. AUTOMATIC ID策略
  ```java
- schema.vertexLabel("person")
-       .useAutomaticId()
-       .properties("name", "age", "city")
-       .create();
-  graph.addVertex(T.label, "person","name", "marko", "age", 18, "city", "Beijing");
+schema.vertexLabel("person")
+      .useAutomaticId()
+      .properties("name", "age", "city")
+      .create();
+graph.addVertex(T.label, "person","name", "marko", "age", 18, "city", "Beijing");
  ```
  
  2. PRIMARY_KEY ID策略
  ```java
- schema.vertexLabel("person")
-       .usePrimaryKeyId()
-       .properties("name", "age", "city")
-       .primaryKeys("name", "age")
-       .create();
-  graph.addVertex(T.label, "person","name", "marko", "age", 18, "city", "Beijing");
+schema.vertexLabel("person")
+      .usePrimaryKeyId()
+      .properties("name", "age", "city")
+      .primaryKeys("name", "age")
+      .create();
+graph.addVertex(T.label, "person","name", "marko", "age", 18, "city", "Beijing");
  ```
 
  3. CUSTOMIZE_STRING ID策略
  ```java
- schema.vertexLabel("person")
-       .useCustomizeStringId()
-       .properties("name", "age", "city")
-       .create();
- graph.addVertex(T.label, "person", T.id, "123456", "name", "marko","age", 18, "city", "Beijing");
+schema.vertexLabel("person")
+      .useCustomizeStringId()
+      .properties("name", "age", "city")
+      .create();
+graph.addVertex(T.label, "person", T.id, "123456", "name", "marko","age", 18, "city", "Beijing");
  ```
 
  4. CUSTOMIZE_NUMBER ID策略
  ```java
- schema.vertexLabel("person")
-       .useCustomizeNumberId()
-       .properties("name", "age", "city")
-       .create();
- graph.addVertex(T.label, "person", T.id, 123456, "name", "marko","age", 18, "city", "Beijing");
+schema.vertexLabel("person")
+      .useCustomizeNumberId()
+      .properties("name", "age", "city")
+      .create();
+graph.addVertex(T.label, "person", T.id, 123456, "name", "marko","age", 18, "city", "Beijing");
  ```
 
 如果用户需要Vertex去重，有三种方案分别是：
@@ -82,8 +82,8 @@ HugeGraph的Vertex支持三种ID策略，在同一个图数据库中不同的Ver
 2. 采用AUTOMATIC策略，read-and-modify，适合小数据量插入，用户可以明确知道是否发生覆盖
 3. 采用CUSTOMIZE_STRING或CUSTOMIZE_NUMBER策略，用户自己保证唯一
 
-
 ### 4. EdgeId 策略
+
 HugeGraph的EdgeId是由`srcVertexId`+`edgeLabel`+`sortKey`+`tgtVertexId`四部分组合而成。其中`sortKey`是HugeGraph的一个重要概念。
 在Edge中加入`sortKey`作为Edge的唯一标识的原因有两个：
 
@@ -101,16 +101,19 @@ HugeGraph的EdgeId是由`srcVertexId`+`edgeLabel`+`sortKey`+`tgtVertexId`四部�
 ### 5. HugeGraph transaction overview
 
 ##### TinkerPop事务概述
+
 TinkerPop transaction事务是指对数据库执行操作的工作单元，一个事务内的一组操作要么执行成功，要么全部失败。
 详细介绍请参考TinkerPop官方文档：http://tinkerpop.apache.org/docs/current/reference/#transactions
 
 ##### TinkerPop事务操作接口
+
 - open 打开事务
 - commit 提交事务
 - rollback 回滚事务
 - close 关闭事务 
 
 ##### TinkerPop事务规范
+
 - 事务必须显示提交后才可生效（未提交时修改操作只有本事务内查询可看到）
 - 事务必须打开之后才可提交或回滚
 - 如果事务设置自动打开则无需显示打开（默认方式），如果设置手动打开则必须显示打开
@@ -122,6 +125,7 @@ TinkerPop transaction事务是指对数据库执行操作的工作单元，一�
 更多事务规范用例见：[Transaction Test](https://github.com/apache/tinkerpop/blob/master/gremlin-test/src/main/java/org/apache/tinkerpop/gremlin/structure/TransactionTest.java)
 
 ##### HugeGraph事务实现
+
 - 一个事务中所有的操作要么成功要么失败
 - 一个事务只能读取到另外一个事务已提交的内容（Read committed）
 - 所有未提交的操作均能在本事务中查询出来，包括：
@@ -192,11 +196,13 @@ TinkerPop transaction事务是指对数据库执行操作的工作单元，一�
 ```
 
 ##### 事务实现原理
+
 - 服务端内部通过将事务与线程绑定实现隔离（ThreadLocal）
 - 本事务未提交的内容按照时间顺序覆盖老数据以供本事务查询最新版本数据
 - 底层依赖后端数据库保证事务原子性操作（如Cassandra/RocksDB的batch接口均保证原子性）
 
 ###### *注意*
+
 > Restful API暂时未暴露事务接口
 
 > TinkerPop API允许打开事务，请求完成时会自动关闭(Gremlin Server强制关闭)
