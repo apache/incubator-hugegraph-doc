@@ -39,7 +39,7 @@ http://localhost:8080/graphs/hugegraph/schema/propertykeys
     "data_type": "INT",
     "cardinality": "SINGLE",
     "properties": [],
-    "user_data":{}
+    "user_data": {}
 }
 ```
 

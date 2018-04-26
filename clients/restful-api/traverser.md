@@ -32,7 +32,7 @@ http://localhost:8080/graphs/hugegraph/traversers/shortestpath?source=1&target=1
 
 ```json
 {
-    "path":[
+    "path": [
         1,
         27,
         76,
@@ -74,7 +74,7 @@ http://localhost:8080/graphs/hugegraph/traversers/kout?source=1&depth=5&directio
 
 ```json
 {
-    "vertices":[
+    "vertices": [
         10,
         11,
         12,
@@ -126,7 +126,7 @@ http://localhost:8080/graphs/hugegraph/traversers/kneighbor?source=1&depth=5&dir
 
 ```json
 {
-    "vertices":[
+    "vertices": [
         1,
         10,
         11,
@@ -176,7 +176,7 @@ http://localhost:8080/graphs/hugegraph/traversers/vertices?ids="5:java-1"&ids="5
 
 ```json
 {
-    "vertices":[
+    "vertices": [
         {"id": "5:java-1", "label": "book", "type": "vertex", "properties":{"name":[{"id": "5:java-1>name",…},
         {"id": "5:java-2", "label": "book", "type": "vertex", "properties":{"name":[{"id": "5:java-2>name",…},
         {"id": "5:java-3", "label": "book", "type": "vertex", "properties":{"name":[{"id": "5:java-3>name",…},

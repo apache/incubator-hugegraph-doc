@@ -58,7 +58,7 @@ http://localhost:8080/graphs/hugegraph/schema/edgelabels
     "nullable_keys": [
     ],
     "enable_label_index": true,
-    "user_data":{}
+    "user_data": {}
 }
 ```
 
@@ -121,7 +121,7 @@ http://localhost:8080/graphs/hugegraph/schema/edgelabels?action=append
         "weight"
     ],
     "enable_label_index": true,
-    "user_data":{}
+    "user_data": {}
 }
 ```
 
@@ -168,7 +168,7 @@ http://localhost:8080/graphs/hugegraph/schema/edgelabels
                 "weight"
             ],
             "enable_label_index": true,
-            "user_data":{}
+            "user_data": {}
         },
         {
             "id": 2,
@@ -187,7 +187,7 @@ http://localhost:8080/graphs/hugegraph/schema/edgelabels
             "nullable_keys": [
             ],
             "enable_label_index": false,
-            "user_data":{}
+            "user_data": {}
         }
     ]
 }
@@ -236,7 +236,7 @@ http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
         "weight"
     ],
     "enable_label_index": true,
-    "user_data":{}
+    "user_data": {}
 }
 ```
 

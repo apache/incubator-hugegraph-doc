@@ -24,7 +24,7 @@ http://localhost:8080/versions
 
 ```json
 {
-    "versions":{
+    "versions": {
         "version": "v1",
         "core": "0.4.5.1",
         "gremlin": "3.2.5",

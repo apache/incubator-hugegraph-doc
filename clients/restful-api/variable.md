@@ -20,7 +20,7 @@ http://localhost:8080/graphs/hugegraph/variables/name
 
 ```json
 {
-  "data":"tom"
+  "data": "tom"
 }
 ```
 

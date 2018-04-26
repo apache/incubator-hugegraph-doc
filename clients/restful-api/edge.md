@@ -30,14 +30,14 @@ http://localhost:8080/graphs/hugegraph/graph/edges
 
 ```json
 {
-    "label":"created",
-    "outV":"1:peter",
-    "inV":"2:lop",
-    "outVLabel":"person",
-    "inVLabel":"software",
-    "properties":{
-    "date": "2017-5-18",
-    "weight": 0.2
+    "label": "created",
+    "outV": "1:peter",
+    "inV": "2:lop",
+    "outVLabel": "person",
+    "inVLabel": "software",
+    "properties": {
+        "date": "2017-5-18",
+        "weight": 0.2
     }
 }
 ```
@@ -142,7 +142,7 @@ http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action=app
 
 ```json
 {
-    "properties":{
+    "properties": {
         "weight": 1.0
     }
 }
@@ -190,7 +190,7 @@ http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action=eli
 
 ```json
 {
-    "properties":{
+    "properties": {
         "weight": 1.0
     }
 }

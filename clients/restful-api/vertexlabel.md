@@ -59,7 +59,7 @@ http://localhost:8080/graphs/hugegraph/schema/vertexlabels
     "nullable_keys": [
     ],
     "enable_label_index": true,
-    "user_data":{}
+    "user_data": {}
 }
 ```
 
@@ -90,7 +90,7 @@ http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person?action=append
         "city"
     ],
     "nullable_keys": ["city"],
-    "user_data":{
+    "user_data": {
         "super": "animal"
     }
 }
@@ -123,7 +123,7 @@ http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person?action=append
         "city"
     ],
     "enable_label_index": true,
-    "user_data":{
+    "user_data": {
         "super": "animal"
     }
 }
@@ -172,7 +172,7 @@ http://localhost:8080/graphs/hugegraph/schema/vertexlabels
                 "city"
             ],
             "enable_label_index": true,
-            "user_data":{
+            "user_data": {
                 "super": "animal"
             }
         },
@@ -194,7 +194,7 @@ http://localhost:8080/graphs/hugegraph/schema/vertexlabels
                 "price"
             ],
             "enable_label_index": false,
-            "user_data":{}
+            "user_data": {}
         }
     ]
 }
@@ -241,7 +241,7 @@ http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person
         "city"
     ],
     "enable_label_index": true,
-    "user_data":{
+    "user_data": {
         "super": "animal"
     }
 }

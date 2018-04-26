@@ -24,7 +24,7 @@ http://localhost:8080/graphs
 
 ```json
 {
-    "graphs":[
+    "graphs": [
         "hugegraph",
         "hugegraph1"
     ]
