@@ -12,7 +12,7 @@ POST
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/schema/indexlabels
 ```
 
@@ -32,7 +32,7 @@ http://localhost:8080/graphs/hugegraph/schema/indexlabels
 
 ##### Response Status
 
-```
+```json
 201
 ```
 
@@ -61,13 +61,13 @@ GET
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/schema/indexlabels
 ```
 
 ##### Response Status
 
-```
+```json
 200
 ```
 
@@ -131,13 +131,13 @@ GET
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
 ```
 
 ##### Response Status
 
-```
+```json
 200
 ```
 
@@ -166,12 +166,12 @@ DELETE
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
 ```
 
 ##### Response Status
 
-```
+```json
 204
 ```

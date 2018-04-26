@@ -22,7 +22,7 @@ POST
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/graph/edges
 ```
 
@@ -44,7 +44,7 @@ http://localhost:8080/graphs/hugegraph/graph/edges
 
 ##### Response Status
 
-```
+```json
 201
 ```
 
@@ -76,7 +76,7 @@ POST
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/graph/edges/batch
 ```
 
@@ -111,7 +111,7 @@ http://localhost:8080/graphs/hugegraph/graph/edges/batch
 
 ##### Response Status
 
-```
+```json
 201
 ```
 
@@ -134,7 +134,7 @@ PUT
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action=append
 ```
 
@@ -150,7 +150,7 @@ http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action=app
 
 ##### Response Status
 
-```
+```json
 200
 ```
 
@@ -182,7 +182,7 @@ PUT
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action=eliminate
 ```
 
@@ -198,7 +198,7 @@ http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action=eli
 
 ##### Response Status
 
-```
+```json
 200
 ```
 
@@ -239,14 +239,14 @@ vertex_id为可选参数，如果提供参数vertex_id则必须同时提供参�
 
 ##### Url
 
-```http request
+```
 # 查询与顶点 person:josh(vertex_id="1:josh") 相连且 label 为 created 的边
 http://127.0.0.1:8080/graphs/hugegraph/graph/edges?vertex_id="1:josh"&direction=BOTH&label=created&properties={}
 ```
 
 ##### Response Status
 
-```
+```json
 200
 ```
 
@@ -295,13 +295,13 @@ GET
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
 ```
 
 ##### Response Status
 
-```
+```json
 200
 ```
 
@@ -333,12 +333,12 @@ DELETE
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
 ```
 
 ##### Response Status
 
-```
+```json
 204
 ```

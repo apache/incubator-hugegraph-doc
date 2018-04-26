@@ -10,13 +10,13 @@ GET
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs
 ```
 
 ##### Response Status
 
-```
+```json
 200
 ```
 
@@ -48,13 +48,13 @@ DELETE
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/clear?token=162f7848-0b6d-4faf-b557-3a0797869c55&confirm_message=I%27m+sure+to+delete+all+data
 ```
 
 ##### Response Status
 
-```
+```json
 204
 ```
 
@@ -74,13 +74,13 @@ GET
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55
 ```
 
 ##### Response Status
 
-```
+```json
 200
 ```
 

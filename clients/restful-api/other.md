@@ -10,13 +10,13 @@ GET
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/versions
 ```
 
 ##### Response Status
 
-```
+```json
 200
 ```
 

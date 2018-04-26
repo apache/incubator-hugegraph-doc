@@ -12,7 +12,7 @@ POST
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 ```
 
@@ -36,7 +36,7 @@ http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 
 ##### Response Status
 
-```
+```json
 201
 ```
 
@@ -77,7 +77,7 @@ PUT
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person?action=append
 ```
 
@@ -98,7 +98,7 @@ http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person?action=append
 
 ##### Response Status
 
-```
+```json
 200
 ```
 
@@ -139,13 +139,13 @@ GET
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 ```
 
 ##### Response Status
 
-```
+```json
 200
 ```
 
@@ -210,13 +210,13 @@ GET
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person
 ```
 
 ##### Response Status
 
-```
+```json
 200
 ```
 
@@ -257,12 +257,12 @@ DELETE
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person
 ```
 
 ##### Response Status
 
-```
+```json
 204
 ```

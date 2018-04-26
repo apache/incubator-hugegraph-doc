@@ -12,7 +12,7 @@ PUT
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/variables/name
 ```
 
@@ -26,7 +26,7 @@ http://localhost:8080/graphs/hugegraph/variables/name
 
 ##### Response Status
 
-```
+```json
 200
 ```
 
@@ -48,13 +48,13 @@ GET
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/variables
 ```
 
 ##### Response Status
 
-```
+```json
 200
 ```
 
@@ -76,13 +76,13 @@ GET
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/variables/name
 ```
 
 ##### Response Status
 
-```
+```json
 200
 ```
 
@@ -104,12 +104,12 @@ DELETE
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/variables/name
 ```
 
 ##### Response Status
 
-```
+```json
 204
 ```

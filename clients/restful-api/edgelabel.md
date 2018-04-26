@@ -12,7 +12,7 @@ POST
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/schema/edgelabels
 ```
 
@@ -35,7 +35,7 @@ http://localhost:8080/graphs/hugegraph/schema/edgelabels
 
 ##### Response Status
 
-```
+```json
 201
 ```
 
@@ -76,7 +76,7 @@ PUT
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/schema/edgelabels?action=append
 ```
 
@@ -96,7 +96,7 @@ http://localhost:8080/graphs/hugegraph/schema/edgelabels?action=append
 
 ##### Response Status
 
-```
+```json
 200
 ```
 
@@ -135,13 +135,13 @@ GET
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/schema/edgelabels
 ```
 
 ##### Response Status
 
-```
+```json
 200
 ```
 
@@ -203,13 +203,13 @@ GET
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
 ```
 
 ##### Response Status
 
-```
+```json
 200
 ```
 
@@ -250,12 +250,12 @@ DELETE
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
 ```
 
 ##### Response Status
 
-```
+```json
 204
 ```

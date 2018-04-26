@@ -10,7 +10,7 @@ POST
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/schema/propertykeys
 ```
 
@@ -26,7 +26,7 @@ http://localhost:8080/graphs/hugegraph/schema/propertykeys
 
 ##### Response Status
 
-```
+```json
 201
 ```
 
@@ -57,7 +57,7 @@ PUT
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/schema/propertykeys/age?action=append
 ```
 
@@ -75,7 +75,7 @@ http://localhost:8080/graphs/hugegraph/schema/propertykeys/age?action=append
 
 ##### Response Status
 
-```
+```json
 201
 ```
 
@@ -105,13 +105,13 @@ GET
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/schema/propertykeys
 ```
 
 ##### Response Status
 
-```
+```json
 200
 ```
 
@@ -190,7 +190,7 @@ GET
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
 ```
 
@@ -198,7 +198,7 @@ http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
 
 ##### Response Status
 
-```
+```json
 200
 ```
 
@@ -225,7 +225,7 @@ DELETE
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
 ```
 
@@ -233,6 +233,6 @@ http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
 
 ##### Response Status
 
-```
+```json
 204
 ```

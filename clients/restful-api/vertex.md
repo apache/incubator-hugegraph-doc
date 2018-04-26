@@ -28,7 +28,7 @@ POST
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/graph/vertices
 ```
 
@@ -46,7 +46,7 @@ http://localhost:8080/graphs/hugegraph/graph/vertices
 
 ##### Response Status
 
-```
+```json
 201
 ```
 
@@ -84,7 +84,7 @@ POST
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/graph/vertices/batch
 ```
 
@@ -112,7 +112,7 @@ http://localhost:8080/graphs/hugegraph/graph/vertices/batch
 
 ##### Response Status
 
-```
+```json
 201
 ```
 
@@ -135,7 +135,7 @@ PUT
 
 ##### Url
 
-```http request
+```
 http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=append
 ```
 
@@ -153,7 +153,7 @@ http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=append
 
 ##### Response Status
 
-```
+```json
 200
 ```
 
@@ -197,7 +197,7 @@ PUT
 
 ##### Url
 
-```http request
+```
 http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=eliminate
 ```
 
@@ -214,7 +214,7 @@ http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=eliminate
 
 ##### Response Status
 
-```
+```json
 200
 ```
 
@@ -260,14 +260,14 @@ GET
 
 ##### Url
 
-```http request
+```
 # 查询所有 age 为 20 且 label 为 person 的顶点
 http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&properties={"age":29}&limit=1
 ```
 
 ##### Response Status
 
-```
+```json
 200
 ```
 
@@ -315,13 +315,13 @@ GET
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
 ```
 
 ##### Response Status
 
-```
+```json
 200
 ```
 
@@ -359,12 +359,12 @@ DELETE
 
 ##### Url
 
-```http request
+```
 http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
 ```
 
 ##### Response Status
 
-```
+```json
 204
 ```
