@@ -35,6 +35,6 @@ HugeGraph是一款离线环境下，面向分析型，支持批量操作的图�
 
 ### Contact Us
 
-- 负责人：[刘杰](mailto:liujie23@baidu.com), [季石磊](mailto:jishilei@baidu.com)
-- 接口人：[王建奎](mailto:wangjiankui@baidu.com)，[李章梅](mailto:lizhangmei@baidu.com)，[张义](mailto:zhangyi51@baidu.com)，[李凝瑞](liningrui@baidu.com)
+- 负责人：[刘杰](mailto:liujie23@baidu.com), [李章梅](mailto:lizhangmei@baidu.com)
+- 接口人：[王建奎](mailto:wangjiankui@baidu.com)，[张义](mailto:zhangyi51@baidu.com)，[李凝瑞](liningrui@baidu.com)
 - 反馈邮箱：[hugegraph@baidu.com](mailto:hugegraph@baidu.com)
