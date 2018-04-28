@@ -18,8 +18,8 @@ HugeLoader 是 Hugegragh 的一个模块，负责将普通文本数据转化为�
 下载最新版本的 HugeLoader bin包：
 
 ```bash
-wget http://api.xdata.baidu.com/hdfs/yqns02/hugegraph/hugeloader/hugegraph-loader-latest-bin.tar.gz
-tar zxvf hugegraph-loader-latest-bin.tar.gz
+wget http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugeloader/hugegraph-loader-${version}-bin.tar.gz
+tar zxvf hugegraph-loader-${version}-bin.tar.gz
 ```
 
 #### 2.2 下载源码编译安装
@@ -27,7 +27,7 @@ tar zxvf hugegraph-loader-latest-bin.tar.gz
 下载最新版本的HugeLoader 源码包：
 
 ```bash
-git clone ssh://username@icode.baidu.com:8235/baidu/xbu-data/hugegraph-loader
+git clone ssh://${username}@icode.baidu.com:8235/baidu/xbu-data/hugegraph-loader
 ```
 
 编译生成tar包:
