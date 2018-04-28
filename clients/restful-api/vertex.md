@@ -254,14 +254,16 @@ GET
 
 - label: 顶点标签
 - properties: 属性键值对(根据属性查询的前提是建立了索引)
-- limit: 查询数目
+- limit: 查询最大数目
+- page: 页号
 
-以上参数都是可选的，且可以任意组合
+以上参数都是可选的，如果提供page参数，必须提供limit参数，不允许带其他参数。`label, properties`和`limit`可以任意组合。
+
+**查询所有 age 为 20 且 label 为 person 的顶点**
 
 ##### Url
 
 ```
-# 查询所有 age 为 20 且 label 为 person 的顶点
 http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&properties={"age":29}&limit=1
 ```
 
@@ -304,6 +306,171 @@ http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&properties={"
     ]
 }
 ```
+
+**分页查询所有顶点，获取第一页（page不带参数值），限定3条**
+
+##### Url
+
+```
+http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+	"vertices": [{
+			"id": "2:ripple",
+			"label": "software",
+			"type": "vertex",
+			"properties": {
+				"price": [{
+					"id": "2:ripple>price",
+					"value": 199
+				}],
+				"name": [{
+					"id": "2:ripple>name",
+					"value": "ripple"
+				}],
+				"lang": [{
+					"id": "2:ripple>lang",
+					"value": "java"
+				}]
+			}
+		},
+		{
+			"id": "1:vadas",
+			"label": "person",
+			"type": "vertex",
+			"properties": {
+				"city": [{
+					"id": "1:vadas>city",
+					"value": "Hongkong"
+				}],
+				"name": [{
+					"id": "1:vadas>name",
+					"value": "vadas"
+				}],
+				"age": [{
+					"id": "1:vadas>age",
+					"value": 27
+				}]
+			}
+		},
+		{
+			"id": "1:peter",
+			"label": "person",
+			"type": "vertex",
+			"properties": {
+				"city": [{
+					"id": "1:peter>city",
+					"value": "Shanghai"
+				}],
+				"name": [{
+					"id": "1:peter>name",
+					"value": "peter"
+				}],
+				"age": [{
+					"id": "1:peter>age",
+					"value": 35
+				}]
+			}
+		}
+	],
+	"page": "001000100853313a706574657200f07ffffffc00e797c6349be736fffc8699e8a502efe10004"
+}
+```
+
+返回的body里面是带有下一页的页号信息的，`"page": "001000100853313a706574657200f07ffffffc00e797c6349be736fffc8699e8a502efe10004"`，
+在查询下一页的时候将该值赋给page参数。
+
+**分页查询所有顶点，获取下一页（page带上上一页返回的page值），限定3条**
+
+##### Url
+
+```
+http://localhost:8080/graphs/hugegraph/graph/vertices?page=001000100853313a706574657200f07ffffffc00e797c6349be736fffc8699e8a502efe10004&limit=3
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+	"vertices": [{
+			"id": "1:josh",
+			"label": "person",
+			"type": "vertex",
+			"properties": {
+				"city": [{
+					"id": "1:josh>city",
+					"value": "Beijing"
+				}],
+				"name": [{
+					"id": "1:josh>name",
+					"value": "josh"
+				}],
+				"age": [{
+					"id": "1:josh>age",
+					"value": 32
+				}]
+			}
+		},
+		{
+			"id": "1:marko",
+			"label": "person",
+			"type": "vertex",
+			"properties": {
+				"city": [{
+					"id": "1:marko>city",
+					"value": "Beijing"
+				}],
+				"name": [{
+					"id": "1:marko>name",
+					"value": "marko"
+				}],
+				"age": [{
+					"id": "1:marko>age",
+					"value": 29
+				}]
+			}
+		},
+		{
+			"id": "2:lop",
+			"label": "software",
+			"type": "vertex",
+			"properties": {
+				"price": [{
+					"id": "2:lop>price",
+					"value": 328
+				}],
+				"name": [{
+					"id": "2:lop>name",
+					"value": "lop"
+				}],
+				"lang": [{
+					"id": "2:lop>lang",
+					"value": "java"
+				}]
+			}
+		}
+	],
+	"page": "null"
+}
+```
+
+此时`"page": "null"`表示已经没有下一页了。
 
 #### 2.1.6 根据Id获取顶点
 
