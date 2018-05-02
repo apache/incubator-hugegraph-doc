@@ -36,7 +36,7 @@
 * [Gremlin Console](clients/gremlin-console.md)
 
 ## Performance
-* [HugeGraph Benchmark Performance](performance/hugegraph-benchmark-0.4.4.md)
+* [HugeGraph Benchmark Performance](performance/hugegraph-benchmark-0.5.6.md)
 * [HugeGraph API Performance v0.4.4](performance/hugegraph-api-0.4.4.md)
 * [HugeGraph API Performance v0.2](performance/hugegraph-api-0.2.md)
 
