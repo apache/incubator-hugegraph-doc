@@ -58,30 +58,30 @@ $ mvn package -DskipTests
 可以从以下地址下载:
 
 ```bash
-wget http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugestudio/hugestudio-release-0.4-SNAPSHOT.tar.gz
+wget http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugestudio/hugestudio-release-${version}-SNAPSHOT.tar.gz
 ```
 
 下载完成后解压缩：
 
 ```bash
-$ tar zxvf hugestudio-release-0.4-SNAPSHOT.tar.gz
+$ tar zxvf hugestudio-release-${version}-SNAPSHOT.tar.gz
 ```
 
-注：如果在服务器部署，执行解压命令后，还需修改配置文件如下所示：
+### 3 启动HugeStudio
+
+修改配置文件：
 
 ```bash
-$ cd hugestudio-release-0.4-SNAPSHOT
+$ cd hugestudio-release-${version}-SNAPSHOT
 $ vim conf/hugestudio.properties
 ```
 
-将`"server.httpBindAddress=localhost"`中的`localhost`修改成服务器地址，再进行下一步操作。
-
-### 3 启动HugeStudio
+将`"server.httpBindAddress=localhost"`中的`localhost`修改成机器名或IP，再进行下一步操作。
 
 启动命令如下:
 
 ```bash
-$ cd hugestudio-release-0.4-SNAPSHOT
+$ cd hugestudio-release-${version}-SNAPSHOT
 $ bin/hugestudio.sh
 ```
 
@@ -104,10 +104,10 @@ $ bin/hugestudio.sh
 19:05:13.745 [localhost-startStop-1] INFO  com.baidu.hugegraph.studio.notebook.repository.FileNotebookRepository ID:  TS: - notebooksDataDirectory is /Users/liunanke/.hugestudio/notebooks
 19:05:13.753 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader ID:  TS: - Root WebApplicationContext: initialization completed in 968 ms
 ····
-19:05:14.873 [main] INFO  com.baidu.hugegraph.studio.HugeStudio ID:  TS: - HugeStudio is now running on: http://localhost:8080
+19:05:14.873 [main] INFO  com.baidu.hugegraph.studio.HugeStudio ID:  TS: - HugeStudio is now running on: http://localhost:8088
 ```
 
-接下来，打开浏览器访问 <http://localhost:8080> 即可使用HugeStudio，首页如下图：
+接下来，打开浏览器访问 <http://localhost:8088> 即可使用HugeStudio，首页如下图：
 
 <center>
   <img src="/images/images-stdio/home-page.png" alt="image">
@@ -136,8 +136,8 @@ $ bin/hugestudio.sh
 
 - Name: 当前连接本身的名字，可任意取
 - Graph: 本次连接想要操作的图的名字，用户可以先通过[Graph API](http://hugegraph.baidu.com/clients/restful-api/graph.html)查看有哪些图
-- Host: HugeGraphServer的 IP 或 hostname
-- Port: HugeGraphServer的 port
+- Host: HugeGraphServer的 IP 或 hostname（**注意：不是Studio的IP或hostname**）
+- Port: HugeGraphServer的 port（**注意：不是Studio的端口**）
 
 完成后可以看到创建成功的connection
 

@@ -24,14 +24,14 @@ HugeGraph是一款离线环境下，面向分析型，支持批量操作的图�
 
 ### Modules
 
-- [HugeGraph-Server](./quickstart/hugeserver.md): HugeGraph-Server是HugeGraph项目的核心部分，包含Core、Backend、API等子模块；
+- [HugeGraph-Server](quickstart/hugegraph-server.md): HugeGraph-Server是HugeGraph项目的核心部分，包含Core、Backend、API等子模块；
   - Core：是TinkerPop接口的实现，元数据管理，事务处理，序列化/反序列化，向下连接Backend模块，向上连接API模块；
   - Backend：实现将图数据存储到后端，支持的后端包括：Memory、Cassandra、ScyllaDB、RocksDB以及MySQL（0.5版本开始支持），用户根据实际情况选择一种即可；
   - API：内置Rest-Server，向用户提供Restful API，同时可兼容Gremlin查询，将客户端的HTTP请求转化为对Core代码的调用。
-- [HugeGraph-Client](./quickstart/hugeclient.md)：HugeGraph-Client提供了RestAPI的客户端，用于连接HugeGraph-Server，目前仅实现Java版，其他语言用户可自行实现；
-- [HugeGraph-Loader](./quickstart/hugeloader.md)：HugeGraph-Loader是基于HugeGraph-Client的数据导入工具，将普通文本数据转化为图形的顶点和边并插入图形数据库中；
-- [HugeGraph-Spark](./quickstart/hugespark.md)：HugeGraph-Spark能在图上做并行计算，例如PageRank算法等；
-- [HugeGraph-Studio](./quickstart/hugestudio.md)：HugeStudio是HugeGraph的Web可视化工具，可用于执行Gremlin语句及展示图。
+- [HugeGraph-Client](quickstart/hugegraph-client.md)：HugeGraph-Client提供了RestAPI的客户端，用于连接HugeGraph-Server，目前仅实现Java版，其他语言用户可自行实现；
+- [HugeGraph-Loader](quickstart/hugegraph-loader.md)：HugeGraph-Loader是基于HugeGraph-Client的数据导入工具，将普通文本数据转化为图形的顶点和边并插入图形数据库中；
+- [HugeGraph-Spark](quickstart/hugegraph-spark.md)：HugeGraph-Spark能在图上做并行计算，例如PageRank算法等；
+- [HugeGraph-Studio](quickstart/hugegraph-studio.md)：HugeStudio是HugeGraph的Web可视化工具，可用于执行Gremlin语句及展示图。
 
 ### Contact Us
 

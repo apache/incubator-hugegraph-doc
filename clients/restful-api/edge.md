@@ -234,13 +234,15 @@ GET
 - label: 边的标签
 - properties: 属性键值对(根据属性查询的前提是建立了索引)
 - limit: 查询数目
+- page: 页号
 
-vertex_id为可选参数，如果提供参数vertex_id则必须同时提供参数direction。无vertex_id参数时表示获取所有边，可通过limit限制查询数目。
+vertex_id为可选参数，如果提供参数vertex_id则必须同时提供参数direction。无vertex_id参数时表示获取所有边，可通过limit限制查询数目。与顶点查询类似，如果提供page参数，必须提供limit参数，不允许带其他参数。
+
+**查询与顶点 person:josh(vertex_id="1:josh") 相连且 label 为 created 的边**
 
 ##### Url
 
 ```
-# 查询与顶点 person:josh(vertex_id="1:josh") 相连且 label 为 created 的边
 http://127.0.0.1:8080/graphs/hugegraph/graph/edges?vertex_id="1:josh"&direction=BOTH&label=created&properties={}
 ```
 
@@ -284,6 +286,135 @@ http://127.0.0.1:8080/graphs/hugegraph/graph/edges?vertex_id="1:josh"&direction=
     ]
 }
 ```
+
+**分页查询所有边，获取第一页（page不带参数值），限定3条**
+
+##### Url
+
+```
+http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page&limit=3
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+	"edges": [{
+			"id": "S1:peter>2>>S2:lop",
+			"label": "created",
+			"type": "edge",
+			"inVLabel": "software",
+			"outVLabel": "person",
+			"inV": "2:lop",
+			"outV": "1:peter",
+			"properties": {
+				"weight": 0.2,
+				"date": "20170324"
+			}
+		},
+		{
+			"id": "S1:josh>2>>S2:lop",
+			"label": "created",
+			"type": "edge",
+			"inVLabel": "software",
+			"outVLabel": "person",
+			"inV": "2:lop",
+			"outV": "1:josh",
+			"properties": {
+				"weight": 0.4,
+				"date": "20091111"
+			}
+		},
+		{
+			"id": "S1:josh>2>>S2:ripple",
+			"label": "created",
+			"type": "edge",
+			"inVLabel": "software",
+			"outVLabel": "person",
+			"inV": "2:ripple",
+			"outV": "1:josh",
+			"properties": {
+				"weight": 1,
+				"date": "20171210"
+			}
+		}
+	],
+	"page": "002500100753313a6a6f73681210010004000000020953323a726970706c65f07ffffffcf07ffffffd8460d63f4b398dd2721ed4fdb7716b420004"
+}
+```
+
+返回的body里面是带有下一页的页号信息的，`"page": "002500100753313a6a6f73681210010004000000020953323a726970706c65f07ffffffcf07ffffffd8460d63f4b398dd2721ed4fdb7716b420004"`，
+在查询下一页的时候将该值赋给page参数。
+
+**分页查询所有边，获取下一页（page带上上一页返回的page值），限定3条**
+
+##### Url
+
+```
+http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page=002500100753313a6a6f73681210010004000000020953323a726970706c65f07ffffffcf07ffffffd8460d63f4b398dd2721ed4fdb7716b420004&limit=3
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+	"edges": [{
+			"id": "S1:marko>1>20130220>S1:josh",
+			"label": "knows",
+			"type": "edge",
+			"inVLabel": "person",
+			"outVLabel": "person",
+			"inV": "1:josh",
+			"outV": "1:marko",
+			"properties": {
+				"weight": 1,
+				"date": "20130220"
+			}
+		},
+		{
+			"id": "S1:marko>1>20160110>S1:vadas",
+			"label": "knows",
+			"type": "edge",
+			"inVLabel": "person",
+			"outVLabel": "person",
+			"inV": "1:vadas",
+			"outV": "1:marko",
+			"properties": {
+				"weight": 0.5,
+				"date": "20160110"
+			}
+		},
+		{
+			"id": "S1:marko>2>>S2:lop",
+			"label": "created",
+			"type": "edge",
+			"inVLabel": "software",
+			"outVLabel": "person",
+			"inV": "2:lop",
+			"outV": "1:marko",
+			"properties": {
+				"weight": 0.4,
+				"date": "20171210"
+			}
+		}
+	],
+	"page": "null"
+}
+```
+
+此时`"page": "null"`表示已经没有下一页了。
 
 #### 2.2.6 根据Id获取边
 

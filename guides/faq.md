@@ -16,6 +16,10 @@
 
   RocksDB需要 gcc 4.3.0 (GLIBCXX_3.4.10) 及以上版本
 
+- 执行`init-store.sh`时报错：`NoHostAvailableException`
+
+  `NoHostAvailableException` 是指无法连接到`Cassandra`服务，如果确定是要使用`cassandra`后端，请先安装并启动这个服务。至于这个提示本身可能不够直白，我们会更新到文档进行说明的。
+
 - `bin`目录下包含`start-hugegraph.sh`、`start-restserver.sh`和`start-gremlinserver.sh`三个似乎与启动有关的脚本，到底该使用哪个
 
   自0.3.3版本以来，已经把 GremlinServer 和 RestServer 合并为 HugeGraphServer 了，使用`start-hugegraph.sh`启动即可，后两个在后续版本会被删掉。
@@ -26,7 +30,7 @@
 
 - 服务启动成功后，使用`curl`查询所有顶点时返回乱码
 
-  服务端返回的批量顶点/边是压缩（gzip）过的，可以使用管道重定向至gunzip进行解压（curl http://example | gunzip），也可以用`Firefox`或者`Chrome`浏览器的`_restlet_`插件发请求，会自动解压缩响应数据。
+  服务端返回的批量顶点/边是压缩（gzip）过的，可以使用管道重定向至gunzip进行解压（curl http://example | gunzip），也可以用`Firefox`的`postman`或者`Chrome`浏览器的`restlet`插件发请求，会自动解压缩响应数据。
 
 - 使用顶点Id通过`Restful API`查询顶点时返回空，但是顶点确实是存在的
 
