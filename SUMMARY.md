@@ -37,8 +37,12 @@
 
 ## Performance
 * [HugeGraph Benchmark Performance](performance/hugegraph-benchmark-0.5.6.md)
-* [HugeGraph API Performance v0.4.4](performance/hugegraph-api-0.4.4.md)
-* [HugeGraph API Performance v0.2](performance/hugegraph-api-0.2.md)
+* [HugeGraph API Performance](performance/hugegraph-api-performance.md)
+    * [v0.5.6 Stand-alone(RocksDB)](performance/hugegraph-api-0.5.6-RocksDB.md)
+    * [v0.5.6 Cluster(Cassandra)](performance/hugegraph-api-0.5.6-Cassandra.md)
+    * [v0.4.4](performance/hugegraph-api-0.4.4.md)
+    * [v0.2](performance/hugegraph-api-0.2.md)
+* [HugeGraph-Loader Performance](performance/hugegraph-loader-performance.md)
 
 ## ChangeLogs
 * [Release-0.5.6](changelog/hugegraph-0.5.6-release-notes.md)
