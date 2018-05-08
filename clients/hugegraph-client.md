@@ -4,6 +4,10 @@
 
 发布时间：2018-03-29
 
+本文的代码都是`java`语言写的，但其风格与`gremlin(groovy)`是非常类似的。用户只需要把代码中的变量声明替换成`def`或直接去掉，
+就能将`java`代码转变为`groovy`；另外就是每一行语句最后可以不加分号，`groovy`认为一行就是一条语句。
+用户在`HugeGraph-Studio`中编写的`gremlin(groovy)`可以参考本文的`java`代码，下面会举出几个例子。
+
 ### 1 HugeClient
 
 HugeClient 是操作 graph 的总入口，用户必须先创建出 HugeClient 对象，与 HugeGraph Server 建立连接（伪连接）后，才能获取到 schema、graph 以及 gremlin 的操作入口对象。
@@ -18,6 +22,8 @@ HugeClient hugeClient = new HugeClient("http://localhost:8080", "hugegraph");
 
 上述创建 HugeClient 的过程如果失败会抛出异常，用户需要try-catch。如果成功则继续获取 schema、graph 以及 gremlin 的 manager。
 
+在`HugeGraph-Studio`中通过`gremlin`来操作时，不需要使用`HugeClient`，这里可以忽略。
+
 ### 2 元数据
 
 #### 2.1 SchemaManager
@@ -28,6 +34,12 @@ SchemaManager 用于管理 HugeGraph 中的四种元数据，分别是PropertyKe
 
 ```java
 SchemaManager schema = hugeClient.schema()
+```
+
+在`HugeGraph-Studio`中通过`gremlin`创建`schema`对象：
+
+```groovy
+schema = graph.schema()
 ```
 
 下面分别对三种元数据的定义过程进行介绍。
@@ -81,6 +93,14 @@ userdata(String key, Object value) | The same key, the latter will cover the for
 ```java
 schema.propertyKey("name").asText().valueSet().ifNotExist().create()
 ```
+
+在`HugeGraph-Studio`中通过`gremlin`创建上述`PropertyKey`对象的语法完全一致，如果用户没有定义出`schema`变量，应该这样写：
+
+```groovy
+graph.schema().propertyKey("name").asText().valueSet().ifNotExist().create()
+```
+
+以下的示例中，`gremlin`与`java`的语法完全一致，不再赘述。
 
 - ifNotExist()：为 create 添加判断机制，若当前 PropertyKey 已经存在则不再创建，否则创建该属性。若不添加判断，在 properkey 已存在的情况下会抛出异常信息，下同，不再赘述。
 

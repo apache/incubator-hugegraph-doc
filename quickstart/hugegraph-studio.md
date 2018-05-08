@@ -186,6 +186,19 @@ graph.schema().propertyKey("date").asText().ifNotExist().create()
 graph.schema().propertyKey("price").asInt().ifNotExist().create()
 ```
 
+**在这里有几点需要说明**
+
+1、上述语句是`groovy`语言形式（类似但不是`java`）的`gremlin`语句，这些`gremlin`语句会被发送到`HugeGraphServer`上执行。
+关于`gremlin`本身可以参考[Gremlin Query Language](http://hugegraph.baidu.com/language/hugegraph-gremlin.html)或[Tinkerpop官网](http://tinkerpop.apache.org/)；
+
+2、上述语句是通过`graph.schema()`获取到`SchemaManager`对象后操作元数据，通过`gremlin`语句操作schema可参考文档[HugeGraph-Client](http://hugegraph.baidu.com/clients/hugegraph-client.html)，
+需要注意的是`HugeGraph-Client`是`java`语法，大体上与`gremlin`风格是一致的,具体的差异见文档`HugeGraph-Client`中的说明。
+
+3、在`HugeGraph-Studio`的`NoteBook`中，用户可以直接使用两个变量`graph`和`g`，`graph`就是当前Notebook连接的图对象，可使用该对象对图做各种增删改查操作;
+`g`是用于遍历图的一个对象，其本质就是`graph.traversal()`，用户可以使用该对象做各种遍历操作；
+
+4、`HugeGraph-Studio`作为一个展示图的工具，主要用于做查询或遍历，而不宜做太多增删改的操作。
+
 执行完成后，可以得到返回的数据，表明执行成功。如图所示
 
 <center>
