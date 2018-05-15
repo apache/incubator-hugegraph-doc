@@ -120,7 +120,7 @@ schema.getPropertyKey("name")
 schema.getPropertyKey("name").cardinality()
 schema.getPropertyKey("name").dataType()
 schema.getPropertyKey("name").name()
-schema.getPropertyKey("name").userData()
+schema.getPropertyKey("name").userdata()
 ```
 
 #### 2.3 VertexLabel
@@ -139,11 +139,12 @@ vertexLabel(String name) | name  | y
 
 - idStrategy: 每一个 VertexLabel 都可以选择自己的 Id 策略，目前有三种策略供选择，即 Automatic（自动生成）、Customize（用户传入）和 PrimaryKey（主属性键）。其中 Automatic 使用 Snowflake 算法生成 Id，Customize 需要用户自行传入字符串或数字类型的 Id，PrimaryKey 则允许用户从 VertexLabel 的属性中选择若干主属性作为区分的依据，HugeGraph 内部会根据主属性的值拼接生成 Id。idStrategy 默认使用 Automatic的，但如果用户没有显式设置 idStrategy 又调用了 primaryKeys(...) 方法设置了主属性，则 idStrategy 将自动使用 PrimaryKey；
 
-interface       | idStrategy | description
---------------- | ---------- | ------------------------------------------------------
-useAutomaticId  | Automatic  | generate id automaticly by Snowflake algorithom
-useCustomizeId  | Customize  | passed id by user
-usePrimaryKeyId | PrimaryKey | choose some important prop as primary key to splice id
+interface             | idStrategy        | description
+--------------------- | ----------------- | ------------------------------------------------------
+useAutomaticId        | AUTOMATIC         | generate id automaticly by Snowflake algorithom
+useCustomizeStringId  | CUSTOMIZE_STRING  | passed id by user, must be string type
+useCustomizeNumberId  | CUSTOMIZE_NUMBER  | passed id by user, must be number type
+usePrimaryKeyId       | PRIMARY_KEY       | choose some important prop as primary key to splice id
 
 - properties: 定义顶点的属性，传入的参数是 PropertyKey 的 name
 
@@ -159,10 +160,10 @@ primaryKeys(String... keys) | allow to choose multi prop as primaryKeys
 
 需要注意的是，Id 策略的选择与 primaryKeys 的设置有一些相互约束，不能随意调用，约束关系见下表：
 
-|                   | useAutomaticId | useCustomizeId | usePrimaryKeyId
-| ----------------- | -------------- | -------------- | ---------------
-| unset primaryKeys | Automatic      | Customize      | ERROR
-| set primaryKeys   | ERROR          | ERROR          | PrimaryKey
+|                   | useAutomaticId | useCustomizeStringId | useCustomizeNumberId | usePrimaryKeyId
+| ----------------- | -------------- | -------------------- | -------------------- | ---------------
+| unset primaryKeys | AUTOMATIC      | CUSTOMIZE_STRING     | CUSTOMIZE_NUMBER     | ERROR
+| set primaryKeys   | ERROR          | ERROR                | ERROR                | PRIMARY_KEY
 
 - nullableKeys: 对于通过 properties(...) 方法设置过的属性，默认全都是不可为空的，也就是在创建顶点时该属性必须赋值，这样可能对用户数据提出了太过严格的完整性要求。为避免这样的强约束，用户可以通过
 本方法设置若干属性为可空的，这样添加顶点时该属性可以不赋值。
@@ -184,7 +185,7 @@ enableLabelIndex(boolean enable)   | Whether to create a label index
 
 interface                          | description
 ---------------------------------- | ----------------------------------------------
-userData(String key, Object value) | The same key, the latter will cover the former
+userdata(String key, Object value) | The same key, the latter will cover the former
 
 ##### 2.3.2 创建 VertexLabel
 
@@ -229,7 +230,7 @@ schema.getVertexLabel("person").primaryKeys()
 schema.getVertexLabel("person").name()
 schema.getVertexLabel("person").properties()
 schema.getVertexLabel("person").nullableKeys()
-schema.getVertexLabel("person").userData()
+schema.getVertexLabel("person").userdata()
 ```
 
 #### 2.4 EdgeLabel
@@ -284,7 +285,7 @@ sortKeys(String... keys) | allow to choose multi prop as sortKeys
 
 interface                          | description
 ---------------------------------- | ----------------------------------------------
-userData(String key, Object value) | The same key, the latter will cover the former
+userdata(String key, Object value) | The same key, the latter will cover the former
 
 ##### 2.4.2 创建 EdgeLabel
 
@@ -319,7 +320,7 @@ schema.getEdgeLabel("knows").sortKeys()
 schema.getEdgeLabel("knows").name()
 schema.getEdgeLabel("knows").properties()
 schema.getEdgeLabel("knows").nullableKeys()
-schema.getEdgeLabel("knows").userData()
+schema.getEdgeLabel("knows").userdata()
 ```
 
 #### 2.5 IndexLabel
