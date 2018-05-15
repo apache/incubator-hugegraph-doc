@@ -151,6 +151,8 @@ http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=append
 }
 ```
 
+> 注意：属性的取值是有三种类别的，分别是single、set和list。如果是single，表示增加或更新属性值；如果是set或list，则表示追加属性值。
+
 ##### Response Status
 
 ```json
@@ -211,6 +213,8 @@ http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=eliminate
     }
 }
 ```
+
+> 注意：这里会直接删除属性（删除key和所有value），无论其属性的取值是single、set或list。
 
 ##### Response Status
 

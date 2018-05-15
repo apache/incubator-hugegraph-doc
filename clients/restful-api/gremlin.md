@@ -1,0 +1,193 @@
+### 6.1 Gremlin
+
+#### 6.1.1 向HugeGraphServer发送gremlin语句（GET）
+
+##### Method
+
+```
+GET
+```
+
+##### Params
+
+- gremlin: 要发送给`HugeGraphServer`执行的`gremlin`语句
+- bindings: 可以给`gremlin`语句中的变量绑定值
+- language: 发送语句的语言类型，默认为`gremlin-groovy`
+- aliases: 为存在于图空间的已有变量添加别名
+
+**查询顶点**
+
+##### Url
+
+```
+http://127.0.0.1:8080/gremlin?gremlin=hugegraph.traversal().V('1:marko')
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+	"requestId": "c6ef47a8-b634-4b07-9d38-6b3b69a3a556",
+	"status": {
+		"message": "",
+		"code": 200,
+		"attributes": {}
+	},
+	"result": {
+		"data": [{
+			"id": "1:marko",
+			"label": "person",
+			"type": "vertex",
+			"properties": {
+				"city": [{
+					"id": "1:marko>city",
+					"value": "Beijing"
+				}],
+				"name": [{
+					"id": "1:marko>name",
+					"value": "marko"
+				}],
+				"age": [{
+					"id": "1:marko>age",
+					"value": 29
+				}]
+			}
+		}],
+		"meta": {}
+	}
+}
+```
+
+#### 6.1.2 向HugeGraphServer发送gremlin语句（POST）
+
+##### Method
+
+```
+POST
+```
+
+##### Url
+
+```
+http://localhost:8080/gremlin
+```
+
+**查询顶点**
+
+##### Request Body
+
+```json
+{
+	"gremlin": "hugegraph.traversal().V('1:marko')",
+	"bindings": {},
+	"language": "gremlin-groovy",
+	"aliases": {}
+}
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+	"requestId": "c6ef47a8-b634-4b07-9d38-6b3b69a3a556",
+	"status": {
+		"message": "",
+		"code": 200,
+		"attributes": {}
+	},
+	"result": {
+		"data": [{
+			"id": "1:marko",
+			"label": "person",
+			"type": "vertex",
+			"properties": {
+				"city": [{
+					"id": "1:marko>city",
+					"value": "Beijing"
+				}],
+				"name": [{
+					"id": "1:marko>name",
+					"value": "marko"
+				}],
+				"age": [{
+					"id": "1:marko>age",
+					"value": 29
+				}]
+			}
+		}],
+		"meta": {}
+	}
+}
+```
+
+注意：
+
+> 这里是直接使用图对象（hugegraph），先获取其遍历器（traversal()），再获取顶点。
+不能直接写成`graph.traversal().V()`或`g.V()`，可以通过`"aliases": {"graph": "hugegraph", "g": "__g_hugegraph"}`
+为图和遍历器添加别名后使用别名操作。其中，`hugegraph`是原生存在的变量，`__g_hugegraph`是`HugeGraphServer`额外添加的变量，
+每个图都会存在一个对应的这样格式（__g_${graph}）的遍历器对象。
+
+> 响应体的结构与其他 Vertex 或 Edge 的 Restful API的结构有区别，用户可能需要自行解析。
+
+**查询边**
+
+##### Request Body
+
+```json
+{
+	"gremlin": "g.E('S1:marko>2>>S2:lop')",
+	"bindings": {},
+	"language": "gremlin-groovy",
+	"aliases": {
+		"graph": "hugegraph", 
+		"g": "__g_hugegraph"
+	}
+}
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+	"requestId": "3f117cd4-eedc-4e08-a106-ee01d7bb8249",
+	"status": {
+		"message": "",
+		"code": 200,
+		"attributes": {}
+	},
+	"result": {
+		"data": [{
+			"id": "S1:marko>2>>S2:lop",
+			"label": "created",
+			"type": "edge",
+			"inVLabel": "software",
+			"outVLabel": "person",
+			"inV": "2:lop",
+			"outV": "1:marko",
+			"properties": {
+				"weight": 0.4,
+				"date": "20171210"
+			}
+		}],
+		"meta": {}
+	}
+}
+```

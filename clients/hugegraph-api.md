@@ -14,4 +14,5 @@ HugeGraph Server通过HugeGraph-API基于HTTP协议为Client提供操作图的�
 - 遍历
 - 变量
 - 图操作
+- Gremlin
 - 其他
