@@ -31,6 +31,7 @@
     * [Traverser](clients/restful-api/traverser.md)
     * [Variable](clients/restful-api/variable.md)
     * [Graph](clients/restful-api/graph.md)
+    * [Gremlin](clients/restful-api/gremlin.md)
     * [Other](clients/restful-api/other.md)
 * [Java Client](clients/hugegraph-client.md)
 * [Gremlin Console](clients/gremlin-console.md)
