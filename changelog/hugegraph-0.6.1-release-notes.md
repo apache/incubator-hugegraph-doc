@@ -8,6 +8,7 @@
 - 为顶点及边的list API添加offset参数（HugeGraph-1261）
 - Restful API的顶点/边的list不允许同时传入page 和 [label，属性]（HugeGraph-1262）
 - k-out、K-neighbor、paths、shortestpath等API增加degree、capacity和limit（HugeGraph-1176）
+- 增加restore status的set/get/clear接口（HugeGraph-1272）
 
 #### BUG修复
 - 使 RestClient的basic auth使用Preemptive模式（HugeGraph-1257）
@@ -29,7 +30,7 @@
 - init-store在CentOS上依赖通用的io.netty有时会卡住，改为使用netty-transport-native-epoll（HugeGraph-1255）
 - Cassandra后端in语句（按id查询）元素个数最大65535（HugeGraph-1239）
 - 主键加索引(或普通属性)作为查询条件时报错（HugeGraph-1276）
- 
+- init-store.sh在Centos平台上初始化失败或者卡住（HugeGraph-1255）
  
 ### 测试
 无
@@ -45,6 +46,7 @@
 - 修改默认配置项，后端使用RocksDB，注释重要的配置项（HugeGraph-1240）
 - 重命名userData为userdata（HugeGraph-1249）
 - centos 4.3系统HugeGraphServer进程使用jps命令查不到
+- 增加配置项ALLOW_TRACE，允许设置是否返回exception stack trace（HugeGraph-81）
 
 ### Tools
  
@@ -52,6 +54,8 @@
 - 增加自动化部署工具以安装所有组件（HugeGraph-1267）
 - 增加clear的脚本，并拆分deploy和start-all（HugeGraph-1274）
 - 对hugegraph服务进行监控以提高可用性（HugeGraph-1266）
+- 增加backup/restore功能和命令（HugeGraph-1272）
+- 增加graphs API对应的命令（HugeGraph-1272）
  
 #### BUG修复 
 
