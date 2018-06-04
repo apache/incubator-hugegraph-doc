@@ -125,6 +125,28 @@ bookInput = File.csv(inputfileV + "book.csv").gzip()
 authorBookInput = File.csv(inputfileE + "authorBook.csv").gzip()
 ```
 
+**非UTF-8编码文件的读取**
+
+默认情况下，HugeLoader认为数据源文件是UTF-8编码的，如果文件不是UTF-8的而直接导入，可能会产生乱码，解决办法有两种：
+
+- 全局指定编码字符集，通过命令行选项`-charset`设置
+
+```bash
+# 示例：
+bin/hugeloader -f /home/work/data/authorBookMap_JSON.groovy -g hugegraph -charset GBK
+```
+
+- 为每个文件单独指定编码字符集，通过方法`charset(String)`设置
+
+```groovy
+// 示例：
+authorInput = File.csv(inputfileV + "author.csv").charset("GBK")
+bookInput = File.csv(inputfileV + "book.csv").charset("UTF-16")
+authorBookInput = File.csv(inputfileE + "authorBook.csv").charset("UTF-8")
+```
+
+注意：如果同时通过两种方式设置了编码方式，后者（为文件单独指定）会覆盖前者（全局指定）。
+
 ##### 3.1.3 定义 label 和 keys
 
 配置脚本中仅需要为顶点和边定义 label 和 keys，properties 可以从数据文件的列名中获取。
@@ -272,6 +294,7 @@ N         | -retryIntervalTime | 10                              | 重试之前�
 N         | -loadNew           | flase                           | 插入边时是否检查边链接的顶点是否存在
 N         | -idStrategy        | primary_key                     | 顶点id生成策略(primary_key/customize_string)
 N         | -invalidKeyRegex   | null                            | 过滤掉用户配置的正则表达式匹配到的key，默认过滤掉keys 全为 null 或 '' 的数据
+N         | -charset           | UTF-8                           | 数据源文件的编码字符集
 
 关于idStrategy
 
