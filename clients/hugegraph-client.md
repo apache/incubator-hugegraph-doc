@@ -352,7 +352,7 @@ interface            | param | description
 -------------------- | ----- | ---------------------------------------------------------
 by(String... fields) | files | allow to build index for multi fields for secondary index
 
-- indexType: 建立的索引类型，目前支持两种，即 Secondary 和 Search。Secondary 允许建立联合索引，支持前缀搜索，Search 支持数值类型的范围查询；
+- indexType: 建立的索引类型，目前支持两种，即 Secondary 和 Range。Secondary 允许建立联合索引，支持索引前缀搜索，Range 支持数值类型的范围查询；
 
 interface   | indexType | description
 ----------- | --------- | ---------------------------------------

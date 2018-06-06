@@ -186,7 +186,4 @@ g.V(pluto).out('brother').as('god').out('lives').as('place').select('god','place
 
 #### 3.2 总结
 
-HugeGraph目前支持Gremlin的语法，用户可以通过Gremlin语句实现各种查询需求，但是目前HugeGraph的暂不支持'Or'类型查询和全文检索功能，因此也不支持多label查询。 和TitanDB相比HugeGraph不支持的查询语句包括：
-
-1. `g.V(hercules).out('father', 'mother')`
-2. `g.E().has('reason', textContains('loves'))`
+HugeGraph目前支持Gremlin的语法，用户可以通过Gremlin语句实现各种查询需求，但是目前HugeGraph暂不支持全文检索功能。
