@@ -41,7 +41,7 @@ Copyright (C) 2010 Free Software Foundation, Inc.
 #### 3.1 下载tar包
 
 ```bash
-$ wget http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugegraph-release-${version}-SNAPSHOT.tar.gz
+$ wget https://hugegraph.github.io/hugegraph-doc/downloads/hugegraph-release-${version}-SNAPSHOT.tar.gz
 $ tar -zxvf hugegraph-release-${version}-SNAPSHOT.tar.gz
 ```
 

@@ -58,7 +58,7 @@ $ mvn package -DskipTests
 可以从以下地址下载:
 
 ```bash
-wget http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugestudio/hugestudio-release-${version}-SNAPSHOT.tar.gz
+wget https://hugegraph.github.io/hugegraph-doc/downloads/hugestudio/hugestudio-release-${version}-SNAPSHOT.tar.gz
 ```
 
 下载完成后解压缩：

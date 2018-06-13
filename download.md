@@ -6,19 +6,19 @@ The latest HugeGraph: **0.6.1**, released on _2018-06-01_.
 
 components | description               | download
 ---------- | ------------------------  | ------------------------------------------------------------------------------------------------------------------------------------------------
-HugeServer | HugeGraph的主程序          | [0.6.1](http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugegraph-release-0.6.1-SNAPSHOT.tar.gz)
-HugeStudio | 基于Web的图形化IDE环境       | [0.6.1](http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugestudio/hugestudio-release-0.6.1-SNAPSHOT.tar.gz)
-HugeSpark  | 基于Spark GraphX的图分析工具 | [0.6.1](http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugespark/hugespark-0.6.1.tar.gz)
-HugeLoader | 数据导入工具                | [0.6.1](http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugeloader/hugegraph-loader-0.6.1-bin.tar.gz)
-HugeTools  | 命令行工具集                | [1.0.0](http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugetools/hugegraph-tools-1.0.0-SNAPSHOT.tar.gz)
+HugeServer | HugeGraph的主程序          | [0.6.1](https://hugegraph.github.io/hugegraph-doc/downloads/hugegraph-release-0.6.1-SNAPSHOT.tar.gz)
+HugeStudio | 基于Web的图形化IDE环境       | [0.6.1](https://hugegraph.github.io/hugegraph-doc/downloads/hugestudio/hugestudio-release-0.6.1-SNAPSHOT.tar.gz)
+HugeSpark  | 基于Spark GraphX的图分析工具 | [0.6.1](https://hugegraph.github.io/hugegraph-doc/downloads/hugespark/hugespark-0.6.1.tar.gz)
+HugeLoader | 数据导入工具                | [0.6.1](https://hugegraph.github.io/hugegraph-doc/downloads/hugeloader/hugegraph-loader-0.6.1-bin.tar.gz)
+HugeTools  | 命令行工具集                | [1.0.0](https://hugegraph.github.io/hugegraph-doc/downloads/hugetools/hugegraph-tools-1.0.0-SNAPSHOT.tar.gz)
 
 ### Versions mapping
 
 server | client | loader | studio | spark | common | tools
 ------ | ------ | ------ | ------ | ----- | ------ | -----
-[0.6.1](http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugegraph-release-0.6.1-SNAPSHOT.tar.gz) | 1.5.6  | [0.6.1](http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugeloader/hugegraph-loader-0.6.1-bin.tar.gz)  | [0.6.1](http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugestudio/hugestudio-release-0.6.1-SNAPSHOT.tar.gz)  | [0.6.1](http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugespark/hugespark-0.6.1.tar.gz) | 1.4.3 | [1.0.0](http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugetools/hugegraph-tools-1.0.0-SNAPSHOT.tar.gz)
-[0.5.6](http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugegraph-release-0.5.6-SNAPSHOT.tar.gz) | 1.5.0  | [0.5.6](http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugeloader/hugegraph-loader-0.5.6-bin.tar.gz)  | [0.5.0](http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugestudio/hugestudio-release-0.5.0-SNAPSHOT.tar.gz)  | [0.5.6](http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugespark/hugespark-0.5.6.tar.gz) | 1.4.0 | 
-[0.4.5](http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugegraph-release-0.4.5-SNAPSHOT.tar.gz) | 1.4.7  | [0.2.2](http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugeloader/hugegraph-loader-0.2.2-bin.tar.gz)  | [0.4.1](http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugestudio/hugestudio-release-0.4.1-SNAPSHOT.tar.gz)  | [0.2.1](http://yq01-sw-hdsserver16.yq01.baidu.com:8080/hadoop-web-proxy/yqns02/hugegraph/hugespark/hugespark-0.2.1.tar.gz) | 1.3.12 | 
+[0.6.1](https://hugegraph.github.io/hugegraph-doc/downloads/hugegraph-release-0.6.1-SNAPSHOT.tar.gz) | 1.5.6  | [0.6.1](https://hugegraph.github.io/hugegraph-doc/downloads/hugeloader/hugegraph-loader-0.6.1-bin.tar.gz)  | [0.6.1](https://hugegraph.github.io/hugegraph-doc/downloads/hugestudio/hugestudio-release-0.6.1-SNAPSHOT.tar.gz)  | [0.6.1](https://hugegraph.github.io/hugegraph-doc/downloads/hugespark/hugespark-0.6.1.tar.gz) | 1.4.3 | [1.0.0](https://hugegraph.github.io/hugegraph-doc/downloads/hugetools/hugegraph-tools-1.0.0-SNAPSHOT.tar.gz)
+[0.5.6](https://hugegraph.github.io/hugegraph-doc/downloads/hugegraph-release-0.5.6-SNAPSHOT.tar.gz) | 1.5.0  | [0.5.6](https://hugegraph.github.io/hugegraph-doc/downloads/hugeloader/hugegraph-loader-0.5.6-bin.tar.gz)  | [0.5.0](https://hugegraph.github.io/hugegraph-doc/downloads/hugestudio/hugestudio-release-0.5.0-SNAPSHOT.tar.gz)  | [0.5.6](https://hugegraph.github.io/hugegraph-doc/downloads/hugespark/hugespark-0.5.6.tar.gz) | 1.4.0 | 
+[0.4.5](https://hugegraph.github.io/hugegraph-doc/downloads/hugegraph-release-0.4.5-SNAPSHOT.tar.gz) | 1.4.7  | [0.2.2](https://hugegraph.github.io/hugegraph-doc/downloads/hugeloader/hugegraph-loader-0.2.2-bin.tar.gz)  | [0.4.1](https://hugegraph.github.io/hugegraph-doc/downloads/hugestudio/hugestudio-release-0.4.1-SNAPSHOT.tar.gz)  | [0.2.1](https://hugegraph.github.io/hugegraph-doc/downloads/hugespark/hugespark-0.2.1.tar.gz) | 1.3.12 | 
 
 ### Release Notes
 
