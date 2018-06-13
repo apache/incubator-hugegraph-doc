@@ -1,0 +1,1074 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Design Concepts · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+
+    
+        <link rel="stylesheet" 
+            href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+    
+
+    
+        <link rel="stylesheet" href="../gitbook/cuav-style.css">
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    
+    
+        <link rel="shortcut icon" 
+            href="../images/favicon.ico" type="image/x-icon">
+    
+
+    
+    <link rel="next" href="config-guide.html" />
+    
+    
+    <link rel="prev" href="architectural.html" />
+    
+
+    </head>
+    <body>
+        
+
+
+
+	
+	
+	
+	<nav
+			class="navbar fixed-top navbar-inverse background-inverse navbar-toggleable-md">
+		
+
+		<a class="navbar-brand" href="javascript:;">
+			
+			
+				<img src="../images/logo.png" 
+					height="32" class="d-inline-block align-top" 
+					alt="HugeGraph Database" />
+			
+		</a>
+
+		
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<span class="mr-auto"></span>
+				<ul id="cuav-nav" class="navbar-nav text-center text-lg-left">
+					
+				</ul>
+				<span style="width: 6rem"></span>
+			</div>
+			
+		
+	</nav>
+
+
+<div class="book">
+    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Design Concepts</a>
+    </h1>
+</div>
+
+
+
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../download.html">
+            
+                <a href="../download.html">
+            
+                    
+                    Download
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Quickstart</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../quickstart/hugegraph-server.html">
+            
+                <a href="../quickstart/hugegraph-server.html">
+            
+                    
+                    Install HugeGraph-Server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../quickstart/hugegraph-loader.html">
+            
+                <a href="../quickstart/hugegraph-loader.html">
+            
+                    
+                    Load data with HugeGraph-Loader
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../quickstart/hugegraph-tools.html">
+            
+                <a href="../quickstart/hugegraph-tools.html">
+            
+                    
+                    Manage with HugeGraph-Tools
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../quickstart/hugegraph-studio.html">
+            
+                <a href="../quickstart/hugegraph-studio.html">
+            
+                    
+                    Display with HugeGraph-Studio
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../quickstart/hugegraph-client.html">
+            
+                <a href="../quickstart/hugegraph-client.html">
+            
+                    
+                    Develop with HugeGraph-Client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" data-path="../quickstart/hugegraph-spark.html">
+            
+                <a href="../quickstart/hugegraph-spark.html">
+            
+                    
+                    Analysis with HugeGraph-Spark
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Guides</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="architectural.html">
+            
+                <a href="architectural.html">
+            
+                    
+                    Architecture Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="3.2" data-path="desgin-concept.html">
+            
+                <a href="desgin-concept.html">
+            
+                    
+                    Design Concepts
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="config-guide.html">
+            
+                <a href="config-guide.html">
+            
+                    
+                    Configuration Guide
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="config-option.html">
+            
+                <a href="config-option.html">
+            
+                    
+                    Config Options
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.5" data-path="custom-plugin.html">
+            
+                <a href="custom-plugin.html">
+            
+                    
+                    Custom Plugins
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.6" data-path="faq.html">
+            
+                <a href="faq.html">
+            
+                    
+                    FAQ
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Query Language</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../language/hugegraph-gremlin.html">
+            
+                <a href="../language/hugegraph-gremlin.html">
+            
+                    
+                    Gremlin Query Language
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="../language/hugegraph-example.html">
+            
+                <a href="../language/hugegraph-example.html">
+            
+                    
+                    HugeGraph Examples
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Clients</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="../clients/hugegraph-api.html">
+            
+                <a href="../clients/hugegraph-api.html">
+            
+                    
+                    Restful API
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.1.1" data-path="../clients/restful-api/propertykey.html">
+            
+                <a href="../clients/restful-api/propertykey.html">
+            
+                    
+                    PropertyKey
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.2" data-path="../clients/restful-api/vertexlabel.html">
+            
+                <a href="../clients/restful-api/vertexlabel.html">
+            
+                    
+                    VertexLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.3" data-path="../clients/restful-api/edgelabel.html">
+            
+                <a href="../clients/restful-api/edgelabel.html">
+            
+                    
+                    EdgeLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.4" data-path="../clients/restful-api/indexlabel.html">
+            
+                <a href="../clients/restful-api/indexlabel.html">
+            
+                    
+                    IndexLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.5" data-path="../clients/restful-api/vertex.html">
+            
+                <a href="../clients/restful-api/vertex.html">
+            
+                    
+                    Vertex
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.6" data-path="../clients/restful-api/edge.html">
+            
+                <a href="../clients/restful-api/edge.html">
+            
+                    
+                    Edge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.7" data-path="../clients/restful-api/traverser.html">
+            
+                <a href="../clients/restful-api/traverser.html">
+            
+                    
+                    Traverser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.8" data-path="../clients/restful-api/variable.html">
+            
+                <a href="../clients/restful-api/variable.html">
+            
+                    
+                    Variable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.9" data-path="../clients/restful-api/graph.html">
+            
+                <a href="../clients/restful-api/graph.html">
+            
+                    
+                    Graph
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.10" data-path="../clients/restful-api/gremlin.html">
+            
+                <a href="../clients/restful-api/gremlin.html">
+            
+                    
+                    Gremlin
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.11" data-path="../clients/restful-api/other.html">
+            
+                <a href="../clients/restful-api/other.html">
+            
+                    
+                    Other
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="../clients/hugegraph-client.html">
+            
+                <a href="../clients/hugegraph-client.html">
+            
+                    
+                    Java Client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="../clients/gremlin-console.html">
+            
+                <a href="../clients/gremlin-console.html">
+            
+                    
+                    Gremlin Console
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Performance</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="../performance/hugegraph-benchmark-0.5.6.html">
+            
+                <a href="../performance/hugegraph-benchmark-0.5.6.html">
+            
+                    
+                    HugeGraph Benchmark Performance
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="../performance/hugegraph-api-performance.html">
+            
+                <a href="../performance/hugegraph-api-performance.html">
+            
+                    
+                    HugeGraph API Performance
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="6.2.1" data-path="../performance/hugegraph-api-0.5.6-RocksDB.html">
+            
+                <a href="../performance/hugegraph-api-0.5.6-RocksDB.html">
+            
+                    
+                    v0.5.6 Stand-alone(RocksDB)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.2" data-path="../performance/hugegraph-api-0.5.6-Cassandra.html">
+            
+                <a href="../performance/hugegraph-api-0.5.6-Cassandra.html">
+            
+                    
+                    v0.5.6 Cluster(Cassandra)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.3" data-path="../performance/hugegraph-api-0.4.4.html">
+            
+                <a href="../performance/hugegraph-api-0.4.4.html">
+            
+                    
+                    v0.4.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.4" data-path="../performance/hugegraph-api-0.2.html">
+            
+                <a href="../performance/hugegraph-api-0.2.html">
+            
+                    
+                    v0.2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="../performance/hugegraph-loader-performance.html">
+            
+                <a href="../performance/hugegraph-loader-performance.html">
+            
+                    
+                    HugeGraph-Loader Performance
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">ChangeLogs</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="../changelog/hugegraph-0.6.1-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.6.1-release-notes.html">
+            
+                    
+                    Release-0.6.1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="../changelog/hugegraph-0.5.6-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.5.6-release-notes.html">
+            
+                    
+                    Release-0.5.6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="../changelog/hugegraph-0.4.4-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.4.4-release-notes.html">
+            
+                    
+                    Release-0.4.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.4" data-path="../changelog/hugegraph-0.3.3-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.3.3-release-notes.html">
+            
+                    
+                    Release-0.3.3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5" data-path="../changelog/hugegraph-0.2.4-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.2.4-release-notes.html">
+            
+                    
+                    Release-0.2.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.6" data-path="../changelog/hugegraph-0.2-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.2-release-notes.html">
+            
+                    
+                    Release-0.2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="hugegraph-design-concepts">HugeGraph Design Concepts</h2>
+<h3 id="1-property-graph">1. Property Graph</h3>
+<p>&#x5E38;&#x89C1;&#x7684;&#x56FE;&#x6570;&#x636E;&#x8868;&#x793A;&#x6A21;&#x578B;&#x6709;&#x4E24;&#x79CD;&#xFF0C;&#x5206;&#x522B;&#x662F;RDF&#xFF08;Resource Description Framework&#xFF09;&#x6A21;&#x578B;&#x548C;&#x5C5E;&#x6027;&#x56FE;&#xFF08;Property Graph&#xFF09;&#x6A21;&#x578B;&#x3002;
+RDF&#x548C;Property Graph&#x90FD;&#x662F;&#x6700;&#x57FA;&#x7840;&#x3001;&#x6700;&#x6709;&#x540D;&#x7684;&#x56FE;&#x8868;&#x793A;&#x6A21;&#x5F0F;&#xFF0C;&#x90FD;&#x80FD;&#x591F;&#x8868;&#x793A;&#x5404;&#x79CD;&#x56FE;&#x7684;&#x5B9E;&#x4F53;&#x5173;&#x7CFB;&#x5EFA;&#x6A21;&#x3002;
+RDF&#x662F;W3C&#x6807;&#x51C6;&#xFF0C;&#x800C;Property Graph&#x662F;&#x5DE5;&#x4E1A;&#x6807;&#x51C6;&#xFF0C;&#x53D7;&#x5230;&#x5E7F;&#x5927;&#x56FE;&#x6570;&#x636E;&#x5E93;&#x5382;&#x5546;&#x7684;&#x5E7F;&#x6CDB;&#x652F;&#x6301;&#x3002;HugeGraph&#x76EE;&#x524D;&#x91C7;&#x7528;Property Graph&#x3002;</p>
+<p>HugeGraph&#x5BF9;&#x5E94;&#x7684;&#x5B58;&#x50A8;&#x6982;&#x5FF5;&#x6A21;&#x578B;&#x4E5F;&#x662F;&#x53C2;&#x8003;Property Graph&#x800C;&#x8BBE;&#x8BA1;&#x7684;&#xFF0C;&#x5177;&#x4F53;&#x793A;&#x4F8B;&#x8BE6;&#x89C1;&#x4E0B;&#x56FE;&#xFF1A;</p>
+<p><img src="../images/design/PropertyGraph.png" alt="image"></p>
+<p>&#x5728;HugeGraph&#x5185;&#x90E8;&#xFF0C;&#x9876;&#x70B9;&#x4EC5;&#x5B58;&#x50A8;Id&#x4E0D;&#x5305;&#x542B;&#x4EFB;&#x4F55;&#x5C5E;&#x6027;&#x4FE1;&#x606F;&#xFF0C;&#x9876;&#x70B9;&#x6240;&#x6709;&#x7684;&#x5C5E;&#x6027;&#x548C;Label&#x90FD;&#x901A;&#x8FC7;&#x8FB9;&#x6765;&#x5B58;&#x50A8;&#x3002;&#x5982;&#x56FE;&#x6240;&#x793A;&#x9876;&#x70B9;&#xFF08;Id=1&#xFF09;&#x6709;3&#x4E2A;&#x5C5E;&#x6027;&#x5206;&#x522B;&#x662F;name&#x3001;age&#x548C;lives
+&#xFF0C;&#x5219;&#x7531;&#x4E09;&#x6761;&#x5BF9;&#x5E94;&#x7684;&#x8FB9;&#x6307;&#x5411;&#x5176;&#x5177;&#x4F53;&#x7684;&#x5C5E;&#x6027;&#x503C;&#xFF0C;&#x8FD9;&#x4E09;&#x6761;&#x8FB9;&#x7684;Label&#x548C;&#x9876;&#x70B9;&#x5C5E;&#x6027;&#x540D;&#x76F8;&#x540C;&#x5206;&#x522B;&#x662F;name&#x3001;age&#x548C;lives&#x3002;</p>
+<p>&#x5728;HugeGraph&#x5185;&#x90E8;&#xFF0C;&#x9876;&#x70B9;&#x4E0E;&#x9876;&#x70B9;&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;&#x4E5F;&#x901A;&#x8FC7;&#x8FB9;&#x6765;&#x5B58;&#x50A8;&#x7684;&#x3002;&#x4F46;&#x5173;&#x7CFB;&#x7684;&#x5C5E;&#x6027;&#x5E76;&#x6CA1;&#x6709;&#x50CF;&#x9876;&#x70B9;&#x4E00;&#x6837;&#x5206;&#x6765;&#x5B58;&#x50A8;&#xFF0C;&#x800C;&#x662F;&#x548C;&#x5173;&#x7CFB;&#x5B58;&#x50A8;&#x5728;&#x4E00;&#x8D77;&#x3002;</p>
+<p>&#x9876;&#x70B9;&#x5C5E;&#x6027;&#x503C;&#x901A;&#x8FC7;&#x8FB9;&#x6307;&#x9488;&#x65B9;&#x5F0F;&#x5B58;&#x50A8;&#x65F6;&#xFF0C;&#x5982;&#x679C;&#x8981;&#x66F4;&#x65B0;&#x4E00;&#x4E2A;&#x9876;&#x70B9;&#x7279;&#x5B9A;&#x7684;&#x5C5E;&#x6027;&#x503C;&#x76F4;&#x63A5;&#x901A;&#x8FC7;&#x8986;&#x76D6;&#x5199;&#x5165;&#x5373;&#x53EF;&#xFF0C;&#x5176;&#x5F0A;&#x7AEF;&#x662F;&#x5197;&#x4F59;&#x5B58;&#x50A8;&#x4E86;VertexId&#xFF1B;
+&#x5982;&#x679C;&#x8981;&#x66F4;&#x65B0;&#x5173;&#x7CFB;&#x7684;&#x5C5E;&#x6027;&#x9700;&#x8981;&#x901A;&#x8FC7;read-and-modify&#x65B9;&#x5F0F;&#xFF0C;&#x5148;&#x8BFB;&#x53D6;&#x6240;&#x6709;&#x5C5E;&#x6027;&#xFF0C;&#x4FEE;&#x6539;&#x90E8;&#x5206;&#x5C5E;&#x6027;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x5199;&#x5165;&#x5B58;&#x50A8;&#x7CFB;&#x7EDF;&#xFF0C;&#x66F4;&#x65B0;&#x6548;&#x7387;&#x8F83;&#x4F4E;&#x3002;
+&#x4ECE;&#x7ECF;&#x9A8C;&#x6765;&#x770B;&#x9876;&#x70B9;&#x5C5E;&#x6027;&#x7684;&#x4FEE;&#x6539;&#x9700;&#x6C42;&#x8F83;&#x591A;&#xFF0C;&#x800C;&#x8FB9;&#x7684;&#x5C5E;&#x6027;&#x4FEE;&#x6539;&#x9700;&#x6C42;&#x8F83;&#x5C11;&#xFF0C;&#x4F8B;&#x5982;PageRank&#x548C;Graph Cluster&#x7B49;&#x8BA1;&#x7B97;&#x90FD;&#x9700;&#x8981;&#x9891;&#x7E41;&#x4FEE;&#x6539;&#x9876;&#x70B9;&#x7684;&#x5C5E;&#x6027;&#x503C;&#x3002;</p>
+<h3 id="2-&#x56FE;&#x5206;&#x533A;&#x65B9;&#x6848;">2. &#x56FE;&#x5206;&#x533A;&#x65B9;&#x6848;</h3>
+<p>&#x5BF9;&#x4E8E;&#x5206;&#x5E03;&#x5F0F;&#x56FE;&#x6570;&#x636E;&#x5E93;&#x800C;&#x8A00;&#xFF0C;&#x56FE;&#x7684;&#x5206;&#x533A;&#x5B58;&#x50A8;&#x65B9;&#x5F0F;&#x6709;&#x4E24;&#x79CD;&#xFF1A;&#x5206;&#x522B;&#x662F;&#x8FB9;&#x5206;&#x5272;&#x5B58;&#x50A8;&#xFF08;Edge Cut&#xFF09;&#x548C;&#x70B9;&#x5206;&#x5272;&#x5B58;&#x50A8;&#xFF08;Vertex Cut&#xFF09;&#xFF0C;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#x3002;
+&#x4F7F;&#x7528;Edge Cut&#x65B9;&#x5F0F;&#x5B58;&#x50A8;&#x56FE;&#x65F6;&#xFF0C;&#x4EFB;&#x4F55;&#x4E00;&#x4E2A;&#x9876;&#x70B9;&#x53EA;&#x4F1A;&#x51FA;&#x73B0;&#x5728;&#x4E00;&#x53F0;&#x673A;&#x5668;&#x4E0A;&#xFF0C;&#x800C;&#x8FB9;&#x53EF;&#x80FD;&#x5206;&#x5E03;&#x5728;&#x4E0D;&#x540C;&#x673A;&#x5668;&#x4E0A;&#xFF0C;&#x8FD9;&#x79CD;&#x5B58;&#x50A8;&#x65B9;&#x5F0F;&#x6709;&#x53EF;&#x80FD;&#x5BFC;&#x81F4;&#x8FB9;&#x591A;&#x6B21;&#x5B58;&#x50A8;&#x3002;
+&#x4F7F;&#x7528;Vertex Cut&#x65B9;&#x5F0F;&#x5B58;&#x50A8;&#x56FE;&#x65F6;&#xFF0C;&#x4EFB;&#x4F55;&#x4E00;&#x6761;&#x8FB9;&#x53EA;&#x4F1A;&#x51FA;&#x73B0;&#x5728;&#x4E00;&#x53F0;&#x673A;&#x5668;&#x4E0A;&#xFF0C;&#x800C;&#x6BCF;&#x76F8;&#x540C;&#x7684;&#x4E00;&#x4E2A;&#x70B9;&#x53EF;&#x80FD;&#x5206;&#x5E03;&#x5230;&#x4E0D;&#x540C;&#x673A;&#x5668;&#x4E0A;&#xFF0C;&#x8FD9;&#x79CD;&#x5B58;&#x50A8;&#x65B9;&#x5F0F;&#x53EF;&#x80FD;&#x4F1A;&#x5BFC;&#x81F4;&#x9876;&#x70B9;&#x591A;&#x6B21;&#x5B58;&#x50A8;&#x3002;</p>
+<p><img src="../images/design/GraphCut.png" alt="image"></p>
+<p>&#x91C7;&#x7528;EdgeCut&#x5206;&#x533A;&#x65B9;&#x6848;&#x53EF;&#x4EE5;&#x652F;&#x6301;&#x9AD8;&#x6027;&#x80FD;&#x7684;&#x63D2;&#x5165;&#x548C;&#x66F4;&#x65B0;&#x64CD;&#x4F5C;&#xFF0C;&#x800C;VertexCut&#x5206;&#x533A;&#x65B9;&#x6848;&#x66F4;&#x9002;&#x5408;&#x9759;&#x6001;&#x56FE;&#x67E5;&#x8BE2;&#x5206;&#x6790;&#xFF0C;&#x56E0;&#x6B64;EdgeCut&#x9002;&#x5408;OLTP&#x56FE;&#x67E5;&#x8BE2;&#xFF0C;VertexCut&#x66F4;&#x9002;&#x5408;OLAP&#x7684;&#x56FE;&#x67E5;&#x8BE2;&#x3002;
+HugeGraph&#x76EE;&#x524D;&#x91C7;&#x7528;EdgeCut&#x7684;&#x5206;&#x533A;&#x65B9;&#x6848;&#x3002;</p>
+<h3 id="3-vertexid-&#x7B56;&#x7565;">3. VertexId &#x7B56;&#x7565;</h3>
+<p>HugeGraph&#x7684;Vertex&#x652F;&#x6301;&#x4E09;&#x79CD;ID&#x7B56;&#x7565;&#xFF0C;&#x5728;&#x540C;&#x4E00;&#x4E2A;&#x56FE;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x4E0D;&#x540C;&#x7684;VertexLabel&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E0D;&#x540C;&#x7684;Id&#x7B56;&#x7565;&#xFF0C;&#x76EE;&#x524D;HugeGraph&#x652F;&#x6301;&#x7684;Id&#x7B56;&#x7565;&#x5206;&#x522B;&#x662F;&#xFF1A;</p>
+<ul>
+<li>AUTOMATIC&#xFF1A;&#x4F7F;&#x7528;Snowflake&#x7B97;&#x6CD5;&#x81EA;&#x52A8;&#x751F;&#x6210;&#x5168;&#x5C40;&#x552F;&#x4E00;Id&#xFF0C;Long&#x7C7B;&#x578B;</li>
+<li>PRIMARY_KEY&#xFF1A;&#x901A;&#x8FC7;VertexLabel+PrimaryKeyValues&#x751F;&#x6210;Id&#xFF0C;String&#x7C7B;&#x578B;</li>
+<li>CUSTOMIZE_STRING&#xFF1A;&#x7528;&#x6237;&#x81EA;&#x5B9A;&#x4E49;Id&#xFF0C;&#x9700;&#x81EA;&#x5DF1;&#x4FDD;&#x969C;Id&#x7684;&#x552F;&#x4E00;&#x6027;&#xFF0C;String&#x7C7B;&#x578B;</li>
+<li>CUSTOMIZE_NUMBER&#xFF1A;&#x7528;&#x6237;&#x81EA;&#x5B9A;&#x4E49;Id&#xFF0C;&#x9700;&#x81EA;&#x5DF1;&#x4FDD;&#x969C;Id&#x7684;&#x552F;&#x4E00;&#x6027;&#xFF0C;Long&#x7C7B;&#x578B;</li>
+</ul>
+<p>&#x9ED8;&#x8BA4;&#x7684;Id&#x7B56;&#x7565;&#x662F;AUTOMATIC&#xFF0C;&#x5982;&#x679C;&#x7528;&#x6237;&#x8C03;&#x7528;primaryKeys()&#x65B9;&#x6CD5;&#x5E76;&#x8BBE;&#x7F6E;&#x4E86;&#x6B63;&#x786E;&#x7684;PrimaryKeys&#xFF0C;&#x5219;&#x81EA;&#x52A8;&#x542F;&#x7528;PRIMARY_KEY&#x7B56;&#x7565;&#x3002;
+&#x542F;&#x7528;PRIMARY_KEY&#x7B56;&#x7565;&#x540E;HugeGraph&#x80FD;&#x6839;&#x636E;PrimaryKeys&#x5B9E;&#x73B0;&#x6570;&#x636E;&#x53BB;&#x91CD;&#x3002;</p>
+<ol>
+<li><p>AUTOMATIC ID&#x7B56;&#x7565;</p>
+<pre><code class="lang-java">schema.vertexLabel(<span class="hljs-string">&quot;person&quot;</span>)
+  .useAutomaticId()
+  .properties(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;city&quot;</span>)
+  .create();
+graph.addVertex(T.label, <span class="hljs-string">&quot;person&quot;</span>,<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;marko&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-number">18</span>, <span class="hljs-string">&quot;city&quot;</span>, <span class="hljs-string">&quot;Beijing&quot;</span>);
+</code></pre>
+</li>
+<li><p>PRIMARY_KEY ID&#x7B56;&#x7565;</p>
+<pre><code class="lang-java">schema.vertexLabel(<span class="hljs-string">&quot;person&quot;</span>)
+  .usePrimaryKeyId()
+  .properties(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;city&quot;</span>)
+  .primaryKeys(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>)
+  .create();
+graph.addVertex(T.label, <span class="hljs-string">&quot;person&quot;</span>,<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;marko&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-number">18</span>, <span class="hljs-string">&quot;city&quot;</span>, <span class="hljs-string">&quot;Beijing&quot;</span>);
+</code></pre>
+</li>
+<li><p>CUSTOMIZE_STRING ID&#x7B56;&#x7565;</p>
+<pre><code class="lang-java">schema.vertexLabel(<span class="hljs-string">&quot;person&quot;</span>)
+  .useCustomizeStringId()
+  .properties(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;city&quot;</span>)
+  .create();
+graph.addVertex(T.label, <span class="hljs-string">&quot;person&quot;</span>, T.id, <span class="hljs-string">&quot;123456&quot;</span>, <span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;marko&quot;</span>,<span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-number">18</span>, <span class="hljs-string">&quot;city&quot;</span>, <span class="hljs-string">&quot;Beijing&quot;</span>);
+</code></pre>
+</li>
+<li><p>CUSTOMIZE_NUMBER ID&#x7B56;&#x7565;</p>
+<pre><code class="lang-java">schema.vertexLabel(<span class="hljs-string">&quot;person&quot;</span>)
+  .useCustomizeNumberId()
+  .properties(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;city&quot;</span>)
+  .create();
+graph.addVertex(T.label, <span class="hljs-string">&quot;person&quot;</span>, T.id, <span class="hljs-number">123456</span>, <span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;marko&quot;</span>,<span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-number">18</span>, <span class="hljs-string">&quot;city&quot;</span>, <span class="hljs-string">&quot;Beijing&quot;</span>);
+</code></pre>
+</li>
+</ol>
+<p>&#x5982;&#x679C;&#x7528;&#x6237;&#x9700;&#x8981;Vertex&#x53BB;&#x91CD;&#xFF0C;&#x6709;&#x4E09;&#x79CD;&#x65B9;&#x6848;&#x5206;&#x522B;&#x662F;&#xFF1A;</p>
+<ol>
+<li>&#x91C7;&#x7528;PRIMARY_KEY&#x7B56;&#x7565;&#xFF0C;&#x81EA;&#x52A8;&#x8986;&#x76D6;&#xFF0C;&#x9002;&#x5408;&#x5927;&#x6570;&#x636E;&#x91CF;&#x6279;&#x91CF;&#x63D2;&#x5165;&#xFF0C;&#x7528;&#x6237;&#x65E0;&#x6CD5;&#x77E5;&#x9053;&#x662F;&#x5426;&#x53D1;&#x751F;&#x4E86;&#x8986;&#x76D6;&#x884C;&#x4E3A;</li>
+<li>&#x91C7;&#x7528;AUTOMATIC&#x7B56;&#x7565;&#xFF0C;read-and-modify&#xFF0C;&#x9002;&#x5408;&#x5C0F;&#x6570;&#x636E;&#x91CF;&#x63D2;&#x5165;&#xFF0C;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x660E;&#x786E;&#x77E5;&#x9053;&#x662F;&#x5426;&#x53D1;&#x751F;&#x8986;&#x76D6;</li>
+<li>&#x91C7;&#x7528;CUSTOMIZE_STRING&#x6216;CUSTOMIZE_NUMBER&#x7B56;&#x7565;&#xFF0C;&#x7528;&#x6237;&#x81EA;&#x5DF1;&#x4FDD;&#x8BC1;&#x552F;&#x4E00;</li>
+</ol>
+<h3 id="4-edgeid-&#x7B56;&#x7565;">4. EdgeId &#x7B56;&#x7565;</h3>
+<p>HugeGraph&#x7684;EdgeId&#x662F;&#x7531;<code>srcVertexId</code>+<code>edgeLabel</code>+<code>sortKey</code>+<code>tgtVertexId</code>&#x56DB;&#x90E8;&#x5206;&#x7EC4;&#x5408;&#x800C;&#x6210;&#x3002;&#x5176;&#x4E2D;<code>sortKey</code>&#x662F;HugeGraph&#x7684;&#x4E00;&#x4E2A;&#x91CD;&#x8981;&#x6982;&#x5FF5;&#x3002;
+&#x5728;Edge&#x4E2D;&#x52A0;&#x5165;<code>sortKey</code>&#x4F5C;&#x4E3A;Edge&#x7684;&#x552F;&#x4E00;&#x6807;&#x8BC6;&#x7684;&#x539F;&#x56E0;&#x6709;&#x4E24;&#x4E2A;&#xFF1A;</p>
+<ol>
+<li>&#x5982;&#x679C;&#x4E24;&#x4E2A;&#x9876;&#x70B9;&#x4E4B;&#x95F4;&#x5B58;&#x5728;&#x591A;&#x6761;&#x76F8;&#x540C;Label&#x7684;&#x8FB9;&#x53EF;&#x901A;&#x8FC7;<code>sortKey</code>&#x6765;&#x533A;&#x5206;</li>
+<li>&#x5BF9;&#x4E8E;SuperNode&#x7684;&#x8282;&#x70B9;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;<code>sortKey</code>&#x6765;&#x6392;&#x5E8F;&#x622A;&#x65AD;&#x3002;</li>
+</ol>
+<p>&#x7531;&#x4E8E;EdgeId&#x662F;&#x7531;<code>srcVertexId</code>+<code>edgeLabel</code>+<code>sortKey</code>+<code>tgtVertexId</code>&#x56DB;&#x90E8;&#x5206;&#x7EC4;&#x5408;&#xFF0C;&#x591A;&#x6B21;&#x63D2;&#x5165;&#x76F8;&#x540C;&#x7684;Edge&#x65F6;HugeGraph&#x4F1A;&#x81EA;&#x52A8;&#x8986;&#x76D6;&#x4EE5;&#x5B9E;&#x73B0;&#x53BB;&#x91CD;&#x3002;
+&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#x5982;&#x679C;&#x6279;&#x91CF;&#x63D2;&#x5165;&#x6A21;&#x5F0F;&#x4E0B;Edge&#x7684;&#x5C5E;&#x6027;&#x4E5F;&#x5C06;&#x4F1A;&#x8986;&#x76D6;&#x3002;</p>
+<p>&#x53E6;&#x5916;&#x7531;&#x4E8E;HugeGraph&#x7684;EdgeId&#x91C7;&#x7528;&#x81EA;&#x52A8;&#x53BB;&#x91CD;&#x7B56;&#x7565;&#xFF0C;&#x5BF9;&#x4E8E;self-loop&#xFF08;&#x4E00;&#x4E2A;&#x9876;&#x70B9;&#x5B58;&#x5728;&#x4E00;&#x6761;&#x6307;&#x5411;&#x81EA;&#x8EAB;&#x7684;&#x8FB9;&#xFF09;&#x7684;&#x60C5;&#x51B5;&#x4E0B;HugeGraph&#x8BA4;&#x4E3A;&#x4EC5;&#x6709;&#x4E00;&#x6761;&#x8FB9;&#xFF0C;&#x5BF9;&#x4E8E;&#x91C7;&#x7528;AUTOMATIC&#x7B56;&#x7565;&#x7684;&#x56FE;&#x6570;&#x636E;&#x5E93;&#xFF08;&#x4F8B;&#x5982;TitianDB
+&#xFF09;&#x5219;&#x4F1A;&#x8BA4;&#x4E3A;&#x8BE5;&#x56FE;&#x5B58;&#x5728;&#x4E24;&#x6761;&#x8FB9;&#x3002;</p>
+<blockquote>
+<p>HugeGraph&#x7684;&#x8FB9;&#x4EC5;&#x652F;&#x6301;&#x6709;&#x5411;&#x8FB9;&#xFF0C;&#x65E0;&#x5411;&#x8FB9;&#x53EF;&#x4EE5;&#x521B;&#x5EFA;Out&#x548C;In&#x4E24;&#x6761;&#x8FB9;&#x6765;&#x5B9E;&#x73B0;&#x3002;</p>
+</blockquote>
+<h3 id="5-hugegraph-transaction-overview">5. HugeGraph transaction overview</h3>
+<h5 id="tinkerpop&#x4E8B;&#x52A1;&#x6982;&#x8FF0;">TinkerPop&#x4E8B;&#x52A1;&#x6982;&#x8FF0;</h5>
+<p>TinkerPop transaction&#x4E8B;&#x52A1;&#x662F;&#x6307;&#x5BF9;&#x6570;&#x636E;&#x5E93;&#x6267;&#x884C;&#x64CD;&#x4F5C;&#x7684;&#x5DE5;&#x4F5C;&#x5355;&#x5143;&#xFF0C;&#x4E00;&#x4E2A;&#x4E8B;&#x52A1;&#x5185;&#x7684;&#x4E00;&#x7EC4;&#x64CD;&#x4F5C;&#x8981;&#x4E48;&#x6267;&#x884C;&#x6210;&#x529F;&#xFF0C;&#x8981;&#x4E48;&#x5168;&#x90E8;&#x5931;&#x8D25;&#x3002;
+&#x8BE6;&#x7EC6;&#x4ECB;&#x7ECD;&#x8BF7;&#x53C2;&#x8003;TinkerPop&#x5B98;&#x65B9;&#x6587;&#x6863;&#xFF1A;<a href="http://tinkerpop.apache.org/docs/current/reference/#transactions" target="_blank">http://tinkerpop.apache.org/docs/current/reference/#transactions</a></p>
+<h5 id="tinkerpop&#x4E8B;&#x52A1;&#x64CD;&#x4F5C;&#x63A5;&#x53E3;">TinkerPop&#x4E8B;&#x52A1;&#x64CD;&#x4F5C;&#x63A5;&#x53E3;</h5>
+<ul>
+<li>open &#x6253;&#x5F00;&#x4E8B;&#x52A1;</li>
+<li>commit &#x63D0;&#x4EA4;&#x4E8B;&#x52A1;</li>
+<li>rollback &#x56DE;&#x6EDA;&#x4E8B;&#x52A1;</li>
+<li>close &#x5173;&#x95ED;&#x4E8B;&#x52A1; </li>
+</ul>
+<h5 id="tinkerpop&#x4E8B;&#x52A1;&#x89C4;&#x8303;">TinkerPop&#x4E8B;&#x52A1;&#x89C4;&#x8303;</h5>
+<ul>
+<li>&#x4E8B;&#x52A1;&#x5FC5;&#x987B;&#x663E;&#x793A;&#x63D0;&#x4EA4;&#x540E;&#x624D;&#x53EF;&#x751F;&#x6548;&#xFF08;&#x672A;&#x63D0;&#x4EA4;&#x65F6;&#x4FEE;&#x6539;&#x64CD;&#x4F5C;&#x53EA;&#x6709;&#x672C;&#x4E8B;&#x52A1;&#x5185;&#x67E5;&#x8BE2;&#x53EF;&#x770B;&#x5230;&#xFF09;</li>
+<li>&#x4E8B;&#x52A1;&#x5FC5;&#x987B;&#x6253;&#x5F00;&#x4E4B;&#x540E;&#x624D;&#x53EF;&#x63D0;&#x4EA4;&#x6216;&#x56DE;&#x6EDA;</li>
+<li>&#x5982;&#x679C;&#x4E8B;&#x52A1;&#x8BBE;&#x7F6E;&#x81EA;&#x52A8;&#x6253;&#x5F00;&#x5219;&#x65E0;&#x9700;&#x663E;&#x793A;&#x6253;&#x5F00;&#xFF08;&#x9ED8;&#x8BA4;&#x65B9;&#x5F0F;&#xFF09;&#xFF0C;&#x5982;&#x679C;&#x8BBE;&#x7F6E;&#x624B;&#x52A8;&#x6253;&#x5F00;&#x5219;&#x5FC5;&#x987B;&#x663E;&#x793A;&#x6253;&#x5F00;</li>
+<li>&#x53EF;&#x8BBE;&#x7F6E;&#x4E8B;&#x52A1;&#x5173;&#x95ED;&#x65F6;&#xFF1A;&#x81EA;&#x52A8;&#x63D0;&#x4EA4;&#x3001;&#x81EA;&#x52A8;&#x56DE;&#x6EDA;&#xFF08;&#x9ED8;&#x8BA4;&#x65B9;&#x5F0F;&#xFF09;&#x3001;&#x624B;&#x52A8;&#xFF08;&#x7981;&#x6B62;&#x663E;&#x793A;&#x5173;&#x95ED;&#xFF09;&#x7B49;3&#x79CD;&#x6A21;&#x5F0F;</li>
+<li>&#x4E8B;&#x52A1;&#x5728;&#x63D0;&#x4EA4;&#x6216;&#x56DE;&#x6EDA;&#x540E;&#x5FC5;&#x987B;&#x662F;&#x5173;&#x95ED;&#x72B6;&#x6001;</li>
+<li>&#x4E8B;&#x52A1;&#x5728;&#x67E5;&#x8BE2;&#x540E;&#x5FC5;&#x987B;&#x662F;&#x6253;&#x5F00;&#x72B6;&#x6001;</li>
+<li>&#x4E8B;&#x52A1;&#xFF08;&#x975E;threaded tx&#xFF09;&#x5FC5;&#x987B;&#x7EBF;&#x7A0B;&#x9694;&#x79BB;&#xFF0C;&#x591A;&#x7EBF;&#x7A0B;&#x64CD;&#x4F5C;&#x540C;&#x4E00;&#x4E8B;&#x52A1;&#x4E92;&#x4E0D;&#x5F71;&#x54CD;</li>
+</ul>
+<p>&#x66F4;&#x591A;&#x4E8B;&#x52A1;&#x89C4;&#x8303;&#x7528;&#x4F8B;&#x89C1;&#xFF1A;<a href="https://github.com/apache/tinkerpop/blob/master/gremlin-test/src/main/java/org/apache/tinkerpop/gremlin/structure/TransactionTest.java" target="_blank">Transaction Test</a></p>
+<h5 id="hugegraph&#x4E8B;&#x52A1;&#x5B9E;&#x73B0;">HugeGraph&#x4E8B;&#x52A1;&#x5B9E;&#x73B0;</h5>
+<ul>
+<li>&#x4E00;&#x4E2A;&#x4E8B;&#x52A1;&#x4E2D;&#x6240;&#x6709;&#x7684;&#x64CD;&#x4F5C;&#x8981;&#x4E48;&#x6210;&#x529F;&#x8981;&#x4E48;&#x5931;&#x8D25;</li>
+<li>&#x4E00;&#x4E2A;&#x4E8B;&#x52A1;&#x53EA;&#x80FD;&#x8BFB;&#x53D6;&#x5230;&#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x4E8B;&#x52A1;&#x5DF2;&#x63D0;&#x4EA4;&#x7684;&#x5185;&#x5BB9;&#xFF08;Read committed&#xFF09;</li>
+<li>&#x6240;&#x6709;&#x672A;&#x63D0;&#x4EA4;&#x7684;&#x64CD;&#x4F5C;&#x5747;&#x80FD;&#x5728;&#x672C;&#x4E8B;&#x52A1;&#x4E2D;&#x67E5;&#x8BE2;&#x51FA;&#x6765;&#xFF0C;&#x5305;&#x62EC;&#xFF1A;<ul>
+<li>&#x589E;&#x52A0;&#x9876;&#x70B9;&#x80FD;&#x591F;&#x67E5;&#x8BE2;&#x51FA;&#x8BE5;&#x9876;&#x70B9;</li>
+<li>&#x5220;&#x9664;&#x9876;&#x70B9;&#x80FD;&#x591F;&#x8FC7;&#x6EE4;&#x6389;&#x8BE5;&#x9876;&#x70B9;</li>
+<li>&#x5220;&#x9664;&#x9876;&#x70B9;&#x80FD;&#x591F;&#x8FC7;&#x6EE4;&#x6389;&#x8BE5;&#x9876;&#x70B9;&#x76F8;&#x5173;&#x8FB9;</li>
+<li>&#x589E;&#x52A0;&#x8FB9;&#x80FD;&#x591F;&#x67E5;&#x8BE2;&#x51FA;&#x8BE5;&#x8FB9;</li>
+<li>&#x5220;&#x9664;&#x8FB9;&#x80FD;&#x591F;&#x8FC7;&#x6EE4;&#x6389;&#x8BE5;&#x8FB9;</li>
+<li>&#x589E;&#x52A0;/&#x4FEE;&#x6539;&#xFF08;&#x9876;&#x70B9;&#x3001;&#x8FB9;&#xFF09;&#x5C5E;&#x6027;&#x80FD;&#x591F;&#x5728;&#x67E5;&#x8BE2;&#x65F6;&#x751F;&#x6548;</li>
+<li>&#x5220;&#x9664;&#xFF08;&#x9876;&#x70B9;&#x3001;&#x8FB9;&#xFF09;&#x5C5E;&#x6027;&#x80FD;&#x591F;&#x5728;&#x67E5;&#x8BE2;&#x65F6;&#x751F;&#x6548;</li>
+</ul>
+</li>
+<li>&#x6240;&#x6709;&#x672A;&#x63D0;&#x4EA4;&#x7684;&#x64CD;&#x4F5C;&#x5728;&#x4E8B;&#x52A1;&#x56DE;&#x6EDA;&#x540E;&#x5747;&#x5931;&#x6548;&#xFF0C;&#x5305;&#x62EC;&#xFF1A;<ul>
+<li>&#x9876;&#x70B9;&#x3001;&#x8FB9;&#x7684;&#x589E;&#x52A0;&#x3001;&#x5220;&#x9664;</li>
+<li>&#x5C5E;&#x6027;&#x7684;&#x589E;&#x52A0;/&#x4FEE;&#x6539;&#x3001;&#x5220;&#x9664;</li>
+</ul>
+</li>
+</ul>
+<p>&#x793A;&#x4F8B;&#xFF1A;&#x4E00;&#x4E2A;&#x4E8B;&#x52A1;&#x65E0;&#x6CD5;&#x8BFB;&#x53D6;&#x53E6;&#x4E00;&#x4E2A;&#x4E8B;&#x52A1;&#x672A;&#x63D0;&#x4EA4;&#x7684;&#x5185;&#x5BB9;</p>
+<pre><code class="lang-java">    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testUncommittedTx</span><span class="hljs-params">(<span class="hljs-keyword">final</span> HugeGraph graph)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>{
+
+        <span class="hljs-keyword">final</span> CountDownLatch latchUncommit = <span class="hljs-keyword">new</span> CountDownLatch(<span class="hljs-number">1</span>);
+        <span class="hljs-keyword">final</span> CountDownLatch latchRollback = <span class="hljs-keyword">new</span> CountDownLatch(<span class="hljs-number">1</span>);
+
+        Thread thread = <span class="hljs-keyword">new</span> Thread(() -&gt; {
+            <span class="hljs-comment">// this is a new transaction in the new thread</span>
+            graph.tx().open();
+
+            System.out.println(<span class="hljs-string">&quot;current transaction operations&quot;</span>);
+
+            Vertex james = graph.addVertex(T.label, <span class="hljs-string">&quot;author&quot;</span>,
+                                           <span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">1</span>, <span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;James Gosling&quot;</span>,
+                                           <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-number">62</span>, <span class="hljs-string">&quot;lived&quot;</span>, <span class="hljs-string">&quot;Canadian&quot;</span>);
+            Vertex java = graph.addVertex(T.label, <span class="hljs-string">&quot;language&quot;</span>, <span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;java&quot;</span>,
+                                          <span class="hljs-string">&quot;versions&quot;</span>, Arrays.asList(<span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>));
+            james.addEdge(<span class="hljs-string">&quot;created&quot;</span>, java);
+
+            <span class="hljs-comment">// we can query the uncommitted records in the current transaction</span>
+            System.out.println(<span class="hljs-string">&quot;current transaction assert&quot;</span>);
+            <span class="hljs-keyword">assert</span> graph.vertices().hasNext() == <span class="hljs-keyword">true</span>;
+            <span class="hljs-keyword">assert</span> graph.edges().hasNext() == <span class="hljs-keyword">true</span>;
+
+            latchUncommit.countDown();
+
+            <span class="hljs-keyword">try</span> {
+                latchRollback.await();
+            } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(e);
+            }
+
+            System.out.println(<span class="hljs-string">&quot;current transaction rollback&quot;</span>);
+            graph.tx().rollback();
+        });
+
+        thread.start();
+
+        <span class="hljs-comment">// query none result in other transaction when not commit()</span>
+        latchUncommit.await();
+        System.out.println(<span class="hljs-string">&quot;other transaction assert for uncommitted&quot;</span>);
+        <span class="hljs-keyword">assert</span> !graph.vertices().hasNext();
+        <span class="hljs-keyword">assert</span> !graph.edges().hasNext();
+
+        latchRollback.countDown();
+        thread.join();
+
+        <span class="hljs-comment">// query none result in other transaction after rollback()</span>
+        System.out.println(<span class="hljs-string">&quot;other transaction assert for rollback&quot;</span>);
+        <span class="hljs-keyword">assert</span> !graph.vertices().hasNext();
+        <span class="hljs-keyword">assert</span> !graph.edges().hasNext();
+    }
+</code></pre>
+<h5 id="&#x4E8B;&#x52A1;&#x5B9E;&#x73B0;&#x539F;&#x7406;">&#x4E8B;&#x52A1;&#x5B9E;&#x73B0;&#x539F;&#x7406;</h5>
+<ul>
+<li>&#x670D;&#x52A1;&#x7AEF;&#x5185;&#x90E8;&#x901A;&#x8FC7;&#x5C06;&#x4E8B;&#x52A1;&#x4E0E;&#x7EBF;&#x7A0B;&#x7ED1;&#x5B9A;&#x5B9E;&#x73B0;&#x9694;&#x79BB;&#xFF08;ThreadLocal&#xFF09;</li>
+<li>&#x672C;&#x4E8B;&#x52A1;&#x672A;&#x63D0;&#x4EA4;&#x7684;&#x5185;&#x5BB9;&#x6309;&#x7167;&#x65F6;&#x95F4;&#x987A;&#x5E8F;&#x8986;&#x76D6;&#x8001;&#x6570;&#x636E;&#x4EE5;&#x4F9B;&#x672C;&#x4E8B;&#x52A1;&#x67E5;&#x8BE2;&#x6700;&#x65B0;&#x7248;&#x672C;&#x6570;&#x636E;</li>
+<li>&#x5E95;&#x5C42;&#x4F9D;&#x8D56;&#x540E;&#x7AEF;&#x6570;&#x636E;&#x5E93;&#x4FDD;&#x8BC1;&#x4E8B;&#x52A1;&#x539F;&#x5B50;&#x6027;&#x64CD;&#x4F5C;&#xFF08;&#x5982;Cassandra/RocksDB&#x7684;batch&#x63A5;&#x53E3;&#x5747;&#x4FDD;&#x8BC1;&#x539F;&#x5B50;&#x6027;&#xFF09;</li>
+</ul>
+<h6 id="&#x6CE8;&#x610F;"><em>&#x6CE8;&#x610F;</em></h6>
+<blockquote>
+<p>Restful API&#x6682;&#x65F6;&#x672A;&#x66B4;&#x9732;&#x4E8B;&#x52A1;&#x63A5;&#x53E3;</p>
+<p>TinkerPop API&#x5141;&#x8BB8;&#x6253;&#x5F00;&#x4E8B;&#x52A1;&#xFF0C;&#x8BF7;&#x6C42;&#x5B8C;&#x6210;&#x65F6;&#x4F1A;&#x81EA;&#x52A8;&#x5173;&#x95ED;(Gremlin Server&#x5F3A;&#x5236;&#x5173;&#x95ED;)</p>
+</blockquote>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+                
+
+
+  
+	<footer>
+
+	</footer>
+
+
+            </div>
+
+            
+                
+                <a href="architectural.html" class="navigation navigation-prev " aria-label="Previous page: Architecture Overview">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="config-guide.html" class="navigation navigation-next " aria-label="Next page: Configuration Guide">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Design Concepts","level":"3.2","depth":1,"next":{"title":"Configuration Guide","level":"3.3","depth":1,"path":"guides/config-guide.md","ref":"guides/config-guide.md","articles":[]},"previous":{"title":"Architecture Overview","level":"3.1","depth":1,"path":"guides/architectural.md","ref":"guides/architectural.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"guides/desgin-concept.md","mtime":"2018-07-28T06:56:34.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-28T07:00:54.802Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    
+        <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.slim.min.js"></script>
+        <script src="//cdn.bootcss.com/tether/1.4.0/js/tether.min.js"></script>
+        <script src="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+    
+
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

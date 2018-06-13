@@ -1,0 +1,1293 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Config Options · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+
+    
+        <link rel="stylesheet" 
+            href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+    
+
+    
+        <link rel="stylesheet" href="../gitbook/cuav-style.css">
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    
+    
+        <link rel="shortcut icon" 
+            href="../images/favicon.ico" type="image/x-icon">
+    
+
+    
+    <link rel="next" href="custom-plugin.html" />
+    
+    
+    <link rel="prev" href="config-guide.html" />
+    
+
+    </head>
+    <body>
+        
+
+
+
+	
+	
+	
+	<nav
+			class="navbar fixed-top navbar-inverse background-inverse navbar-toggleable-md">
+		
+
+		<a class="navbar-brand" href="javascript:;">
+			
+			
+				<img src="../images/logo.png" 
+					height="32" class="d-inline-block align-top" 
+					alt="HugeGraph Database" />
+			
+		</a>
+
+		
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<span class="mr-auto"></span>
+				<ul id="cuav-nav" class="navbar-nav text-center text-lg-left">
+					
+				</ul>
+				<span style="width: 6rem"></span>
+			</div>
+			
+		
+	</nav>
+
+
+<div class="book">
+    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Config Options</a>
+    </h1>
+</div>
+
+
+
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../download.html">
+            
+                <a href="../download.html">
+            
+                    
+                    Download
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Quickstart</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../quickstart/hugegraph-server.html">
+            
+                <a href="../quickstart/hugegraph-server.html">
+            
+                    
+                    Install HugeGraph-Server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../quickstart/hugegraph-loader.html">
+            
+                <a href="../quickstart/hugegraph-loader.html">
+            
+                    
+                    Load data with HugeGraph-Loader
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../quickstart/hugegraph-tools.html">
+            
+                <a href="../quickstart/hugegraph-tools.html">
+            
+                    
+                    Manage with HugeGraph-Tools
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../quickstart/hugegraph-studio.html">
+            
+                <a href="../quickstart/hugegraph-studio.html">
+            
+                    
+                    Display with HugeGraph-Studio
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../quickstart/hugegraph-client.html">
+            
+                <a href="../quickstart/hugegraph-client.html">
+            
+                    
+                    Develop with HugeGraph-Client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" data-path="../quickstart/hugegraph-spark.html">
+            
+                <a href="../quickstart/hugegraph-spark.html">
+            
+                    
+                    Analysis with HugeGraph-Spark
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Guides</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="architectural.html">
+            
+                <a href="architectural.html">
+            
+                    
+                    Architecture Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="desgin-concept.html">
+            
+                <a href="desgin-concept.html">
+            
+                    
+                    Design Concepts
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="config-guide.html">
+            
+                <a href="config-guide.html">
+            
+                    
+                    Configuration Guide
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="3.4" data-path="config-option.html">
+            
+                <a href="config-option.html">
+            
+                    
+                    Config Options
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.5" data-path="custom-plugin.html">
+            
+                <a href="custom-plugin.html">
+            
+                    
+                    Custom Plugins
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.6" data-path="faq.html">
+            
+                <a href="faq.html">
+            
+                    
+                    FAQ
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Query Language</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../language/hugegraph-gremlin.html">
+            
+                <a href="../language/hugegraph-gremlin.html">
+            
+                    
+                    Gremlin Query Language
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="../language/hugegraph-example.html">
+            
+                <a href="../language/hugegraph-example.html">
+            
+                    
+                    HugeGraph Examples
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Clients</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="../clients/hugegraph-api.html">
+            
+                <a href="../clients/hugegraph-api.html">
+            
+                    
+                    Restful API
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.1.1" data-path="../clients/restful-api/propertykey.html">
+            
+                <a href="../clients/restful-api/propertykey.html">
+            
+                    
+                    PropertyKey
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.2" data-path="../clients/restful-api/vertexlabel.html">
+            
+                <a href="../clients/restful-api/vertexlabel.html">
+            
+                    
+                    VertexLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.3" data-path="../clients/restful-api/edgelabel.html">
+            
+                <a href="../clients/restful-api/edgelabel.html">
+            
+                    
+                    EdgeLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.4" data-path="../clients/restful-api/indexlabel.html">
+            
+                <a href="../clients/restful-api/indexlabel.html">
+            
+                    
+                    IndexLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.5" data-path="../clients/restful-api/vertex.html">
+            
+                <a href="../clients/restful-api/vertex.html">
+            
+                    
+                    Vertex
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.6" data-path="../clients/restful-api/edge.html">
+            
+                <a href="../clients/restful-api/edge.html">
+            
+                    
+                    Edge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.7" data-path="../clients/restful-api/traverser.html">
+            
+                <a href="../clients/restful-api/traverser.html">
+            
+                    
+                    Traverser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.8" data-path="../clients/restful-api/variable.html">
+            
+                <a href="../clients/restful-api/variable.html">
+            
+                    
+                    Variable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.9" data-path="../clients/restful-api/graph.html">
+            
+                <a href="../clients/restful-api/graph.html">
+            
+                    
+                    Graph
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.10" data-path="../clients/restful-api/gremlin.html">
+            
+                <a href="../clients/restful-api/gremlin.html">
+            
+                    
+                    Gremlin
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.11" data-path="../clients/restful-api/other.html">
+            
+                <a href="../clients/restful-api/other.html">
+            
+                    
+                    Other
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="../clients/hugegraph-client.html">
+            
+                <a href="../clients/hugegraph-client.html">
+            
+                    
+                    Java Client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="../clients/gremlin-console.html">
+            
+                <a href="../clients/gremlin-console.html">
+            
+                    
+                    Gremlin Console
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Performance</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="../performance/hugegraph-benchmark-0.5.6.html">
+            
+                <a href="../performance/hugegraph-benchmark-0.5.6.html">
+            
+                    
+                    HugeGraph Benchmark Performance
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="../performance/hugegraph-api-performance.html">
+            
+                <a href="../performance/hugegraph-api-performance.html">
+            
+                    
+                    HugeGraph API Performance
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="6.2.1" data-path="../performance/hugegraph-api-0.5.6-RocksDB.html">
+            
+                <a href="../performance/hugegraph-api-0.5.6-RocksDB.html">
+            
+                    
+                    v0.5.6 Stand-alone(RocksDB)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.2" data-path="../performance/hugegraph-api-0.5.6-Cassandra.html">
+            
+                <a href="../performance/hugegraph-api-0.5.6-Cassandra.html">
+            
+                    
+                    v0.5.6 Cluster(Cassandra)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.3" data-path="../performance/hugegraph-api-0.4.4.html">
+            
+                <a href="../performance/hugegraph-api-0.4.4.html">
+            
+                    
+                    v0.4.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.4" data-path="../performance/hugegraph-api-0.2.html">
+            
+                <a href="../performance/hugegraph-api-0.2.html">
+            
+                    
+                    v0.2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="../performance/hugegraph-loader-performance.html">
+            
+                <a href="../performance/hugegraph-loader-performance.html">
+            
+                    
+                    HugeGraph-Loader Performance
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">ChangeLogs</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="../changelog/hugegraph-0.6.1-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.6.1-release-notes.html">
+            
+                    
+                    Release-0.6.1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="../changelog/hugegraph-0.5.6-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.5.6-release-notes.html">
+            
+                    
+                    Release-0.5.6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="../changelog/hugegraph-0.4.4-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.4.4-release-notes.html">
+            
+                    
+                    Release-0.4.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.4" data-path="../changelog/hugegraph-0.3.3-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.3.3-release-notes.html">
+            
+                    
+                    Release-0.3.3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5" data-path="../changelog/hugegraph-0.2.4-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.2.4-release-notes.html">
+            
+                    
+                    Release-0.2.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.6" data-path="../changelog/hugegraph-0.2-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.2-release-notes.html">
+            
+                    
+                    Release-0.2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h3 id="&#x57FA;&#x672C;&#x914D;&#x7F6E;&#x9879;">&#x57FA;&#x672C;&#x914D;&#x7F6E;&#x9879;</h3>
+<table>
+<thead>
+<tr>
+<th>config option</th>
+<th>default value</th>
+<th>descrition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>backend</td>
+<td>rocksdb</td>
+<td>The data store type, available values are [memory, rocksdb, cassandra, scylladb, mysql]</td>
+</tr>
+<tr>
+<td>serializer</td>
+<td>binary</td>
+<td>The serializer for backend store, available values are [text, binary, cassandra, mysql]</td>
+</tr>
+<tr>
+<td>store</td>
+<td>hugegraph</td>
+<td>The database name like Cassandra Keyspace.</td>
+</tr>
+<tr>
+<td>store.graph</td>
+<td>graph</td>
+<td>The graph table name, which store vertex, edge and property.</td>
+</tr>
+<tr>
+<td>store.schema</td>
+<td>schema</td>
+<td>The schema table name, which store meta data.</td>
+</tr>
+<tr>
+<td>vertex.default_label</td>
+<td>vertex</td>
+<td>The default vertex label.</td>
+</tr>
+<tr>
+<td>vertex.tx_capacity</td>
+<td>10000</td>
+<td>The max size(items) of vertices(uncommitted) in transaction.</td>
+</tr>
+<tr>
+<td>edge.tx_capacity</td>
+<td>10000</td>
+<td>The max size(items) of edges(uncommitted) in transaction.</td>
+</tr>
+<tr>
+<td>graph.cache_capacity</td>
+<td>10485760</td>
+<td>The max cache size(items) of graph data(vertex/edge).</td>
+</tr>
+<tr>
+<td>graph.cache_expire</td>
+<td>600</td>
+<td>The expire time in seconds of graph data(vertex/edge).</td>
+</tr>
+<tr>
+<td>gremlin.graph</td>
+<td>com.baidu.hugegraph.HugeFactory</td>
+<td>Gremlin entrence to create graph.</td>
+</tr>
+<tr>
+<td>schema.cache_capacity</td>
+<td>1048576</td>
+<td>The max cache size(items) of schema data.</td>
+</tr>
+<tr>
+<td>schema.illegal_name_regex</td>
+<td>.<em>\s+$|~.</em></td>
+<td>The regex specified the illegal format for schema name.</td>
+</tr>
+<tr>
+<td>snowflake.datecenter_id</td>
+<td>0</td>
+<td>The datacenter id of snowflake id generator.</td>
+</tr>
+<tr>
+<td>snowflake.force_string</td>
+<td>false</td>
+<td>Whether to force the snowflake long id to be a string.</td>
+</tr>
+<tr>
+<td>snowflake.worker_id</td>
+<td>0</td>
+<td>The worker id of snowflake id generator.</td>
+</tr>
+<tr>
+<td>rate_limit</td>
+<td>0</td>
+<td>The max rate(items/s) to add/update/delete vertices/edges.</td>
+</tr>
+<tr>
+<td>auth.admin_token</td>
+<td>162f7848-0b6d-4faf-b557-3a0797869c55</td>
+<td>Token for administrator operations.</td>
+</tr>
+<tr>
+<td>auth.require_authentication</td>
+<td>false</td>
+<td>Whether to enable authentication.</td>
+</tr>
+<tr>
+<td>auth.user_tokens</td>
+<td>[hugegraph:9fd95c9c-711b-415b-b85f-d4df46ba5c31]</td>
+<td>The map of user tokens with name and password.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="api-&#x914D;&#x7F6E;&#x9879;">API &#x914D;&#x7F6E;&#x9879;</h3>
+<table>
+<thead>
+<tr>
+<th>config option</th>
+<th>default value</th>
+<th>descrition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>restserver.url</td>
+<td><a href="http://127.0.0.1:8080" target="_blank">http://127.0.0.1:8080</a></td>
+<td>The url for listening of rest-api server.</td>
+</tr>
+<tr>
+<td>graphs</td>
+<td>[hugegraph:conf/hugegraph.properties]</td>
+<td>The map of graphs&apos; name and config file.</td>
+</tr>
+<tr>
+<td>gremlinserver.url</td>
+<td><a href="http://127.0.0.1:8182" target="_blank">http://127.0.0.1:8182</a></td>
+<td>The url of gremlin server.</td>
+</tr>
+<tr>
+<td>batch.max_edges_per_batch</td>
+<td>500</td>
+<td>The maximum number of edges submitted per batch.</td>
+</tr>
+<tr>
+<td>batch.max_vertices_per_batch</td>
+<td>500</td>
+<td>The maximum number of vertices submitted per batch.</td>
+</tr>
+<tr>
+<td>batch.max_write_ratio</td>
+<td>50</td>
+<td>The maximum thread ratio for batch writing, only take effect if the batch.max_write_threads is 0.</td>
+</tr>
+<tr>
+<td>batch.max_write_threads</td>
+<td>0</td>
+<td>The maximum threads for batch writing, if the value is 0, the actual value will be set to batch.max_write_ratio * total-rest-threads.</td>
+</tr>
+<tr>
+<td>exception.allow_trace</td>
+<td>false</td>
+<td>Whether to allow exception trace stack.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cassandra--scylladb-&#x540E;&#x7AEF;&#x914D;&#x7F6E;&#x9879;">Cassandra &amp; ScyllaDB &#x540E;&#x7AEF;&#x914D;&#x7F6E;&#x9879;</h3>
+<table>
+<thead>
+<tr>
+<th>config option</th>
+<th>default value</th>
+<th>descrition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cassandra.host</td>
+<td>localhost</td>
+<td>The seeds hostname or ip address of cassandra cluster.</td>
+</tr>
+<tr>
+<td>cassandra.port</td>
+<td>9042</td>
+<td>The seeds port address of cassandra cluster.</td>
+</tr>
+<tr>
+<td>cassandra.connect_timeout</td>
+<td>5</td>
+<td>The cassandra driver connect server timeout(seconds).</td>
+</tr>
+<tr>
+<td>cassandra.read_timeout</td>
+<td>20</td>
+<td>The cassandra driver read from server timeout(seconds).</td>
+</tr>
+<tr>
+<td>cassandra.keyspace.strategy</td>
+<td>SimpleStrategy</td>
+<td>The keyspace strategy.</td>
+</tr>
+<tr>
+<td>cassandra.keyspace.replication</td>
+<td>3</td>
+<td>The keyspace replication factor.</td>
+</tr>
+<tr>
+<td>cassandra.username</td>
+<td></td>
+<td>The username to use to login to cassandra cluster.</td>
+</tr>
+<tr>
+<td>cassandra.password</td>
+<td></td>
+<td>The password corresponding to cassandra.username.</td>
+</tr>
+<tr>
+<td>cassandra.compression_type</td>
+<td>none</td>
+<td>The compression algorithm of cassandra transport: none/snappy/lz4.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="rocksdb-&#x540E;&#x7AEF;&#x914D;&#x7F6E;&#x9879;">RocksDB &#x540E;&#x7AEF;&#x914D;&#x7F6E;&#x9879;</h3>
+<table>
+<thead>
+<tr>
+<th>config option</th>
+<th>default value</th>
+<th>descrition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rocksdb.allow_mmap_reads</td>
+<td>false</td>
+<td>Allow the OS to mmap file for reading sst tables.</td>
+</tr>
+<tr>
+<td>rocksdb.allow_mmap_writes</td>
+<td>false</td>
+<td>Allow the OS to mmap file for writing.</td>
+</tr>
+<tr>
+<td>rocksdb.bulkload_mode</td>
+<td>false</td>
+<td>Switch to the mode to bulk load data into RocksDB.</td>
+</tr>
+<tr>
+<td>rocksdb.compaction_style</td>
+<td>LEVEL</td>
+<td>Set compaction style for RocksDB: LEVEL/UNIVERSAL/FIFO.</td>
+</tr>
+<tr>
+<td>rocksdb.compression_type</td>
+<td>snappy</td>
+<td>The compression algorithm of RocksDB: snappy/z/bzip2/lz4/lz4hc/xpress/zstd.</td>
+</tr>
+<tr>
+<td>rocksdb.data_disks</td>
+<td>[]</td>
+<td>The optimized disks for storing data of RocksDB. The format of each element: <code>STORE/TABLE: /path/to/disk</code>.Allowed keys are [graph/vertex, graph/edge_out, graph/edge_in, graph/secondary_index, graph/range_index]</td>
+</tr>
+<tr>
+<td>rocksdb.data_path</td>
+<td>rocksdb-data</td>
+<td>The path for storing data of RocksDB.</td>
+</tr>
+<tr>
+<td>rocksdb.delayed_write_rate</td>
+<td>16777216</td>
+<td>The rate limit in bytes/s of user write requests when need to slow down if the compaction gets behind.</td>
+</tr>
+<tr>
+<td>rocksdb.log_level</td>
+<td>INFO</td>
+<td>The info log level of RocksDB.</td>
+</tr>
+<tr>
+<td>rocksdb.max_background_compactions</td>
+<td>4</td>
+<td>The maximum number of concurrent background compaction jobs.</td>
+</tr>
+<tr>
+<td>rocksdb.max_background_flushes</td>
+<td>4</td>
+<td>The maximum number of concurrent background flush jobs.</td>
+</tr>
+<tr>
+<td>rocksdb.max_bytes_for_level_base</td>
+<td>536870912</td>
+<td>The upper-bound of the total size of level-1 files in bytes.</td>
+</tr>
+<tr>
+<td>rocksdb.max_bytes_for_level_multiplier</td>
+<td>10.0</td>
+<td>The ratio between the total size of level (L+1) files and the total size of level L files for all L.</td>
+</tr>
+<tr>
+<td>rocksdb.max_open_files</td>
+<td>-1</td>
+<td>The maximum number of open files that can be cached by RocksDB.</td>
+</tr>
+<tr>
+<td>rocksdb.max_subcompactions</td>
+<td>4</td>
+<td>The value represents the maximum number of threads per compaction job.</td>
+</tr>
+<tr>
+<td>rocksdb.max_write_buffer_number</td>
+<td>6</td>
+<td>The maximum number of write buffers that are built up in memory.</td>
+</tr>
+<tr>
+<td>rocksdb.max_write_buffer_number_to_maintain</td>
+<td>0</td>
+<td>The total maximum number of write buffers to maintain in memory.</td>
+</tr>
+<tr>
+<td>rocksdb.min_write_buffer_number_to_merge</td>
+<td>2</td>
+<td>The minimum number of write buffers that will be merged together.</td>
+</tr>
+<tr>
+<td>rocksdb.num_levels</td>
+<td>7</td>
+<td>Set the number of levels for this database.</td>
+</tr>
+<tr>
+<td>rocksdb.optimize_mode</td>
+<td>true</td>
+<td>Optimize for heavy workloads and big datasets.</td>
+</tr>
+<tr>
+<td>rocksdb.sst_path</td>
+<td></td>
+<td>The path for ingesting SST file into RocksDB.</td>
+</tr>
+<tr>
+<td>rocksdb.target_file_size_base</td>
+<td>67108864</td>
+<td>The target file size for compaction in bytes.</td>
+</tr>
+<tr>
+<td>rocksdb.target_file_size_multiplier</td>
+<td>1</td>
+<td>The size ratio between a level L file and a level (L+1) file.</td>
+</tr>
+<tr>
+<td>rocksdb.use_direct_io_for_flush_and_compaction</td>
+<td>false</td>
+<td>Enable the OS to use direct reads and writes in flush and compaction.</td>
+</tr>
+<tr>
+<td>rocksdb.use_direct_reads</td>
+<td>false</td>
+<td>Enable the OS to use direct I/O for reading sst tables.</td>
+</tr>
+<tr>
+<td>rocksdb.wal_path</td>
+<td>rocksdb-data</td>
+<td>The path for storing WAL of RocksDB.</td>
+</tr>
+<tr>
+<td>rocksdb.write_buffer_size</td>
+<td>134217728</td>
+<td>Amount of data in bytes to build up in memory.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mysql-&#x540E;&#x7AEF;&#x914D;&#x7F6E;&#x9879;">MySQL &#x540E;&#x7AEF;&#x914D;&#x7F6E;&#x9879;</h3>
+<table>
+<thead>
+<tr>
+<th>config option</th>
+<th>default value</th>
+<th>descrition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>jdbc.driver</td>
+<td>com.mysql.jdbc.Driver</td>
+<td>The JDBC driver class to connect database.</td>
+</tr>
+<tr>
+<td>jdbc.url</td>
+<td>jdbc:mysql://127.0.0.1:3306</td>
+<td>The url of database in JDBC format.</td>
+</tr>
+<tr>
+<td>jdbc.username</td>
+<td>root</td>
+<td>The username to login database.</td>
+</tr>
+<tr>
+<td>jdbc.password</td>
+<td></td>
+<td>The password corresponding to jdbc.username.</td>
+</tr>
+<tr>
+<td>jdbc.reconnect_interval</td>
+<td>3</td>
+<td>The interval(seconds) between reconnections when the database connection fails.</td>
+</tr>
+<tr>
+<td>jdbc.reconnect_max_times</td>
+<td>3</td>
+<td>The reconnect times when the database connection fails.</td>
+</tr>
+</tbody>
+</table>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+                
+
+
+  
+	<footer>
+
+	</footer>
+
+
+            </div>
+
+            
+                
+                <a href="config-guide.html" class="navigation navigation-prev " aria-label="Previous page: Configuration Guide">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="custom-plugin.html" class="navigation navigation-next " aria-label="Next page: Custom Plugins">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Config Options","level":"3.4","depth":1,"next":{"title":"Custom Plugins","level":"3.5","depth":1,"path":"guides/custom-plugin.md","ref":"guides/custom-plugin.md","articles":[]},"previous":{"title":"Configuration Guide","level":"3.3","depth":1,"path":"guides/config-guide.md","ref":"guides/config-guide.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"guides/config-option.md","mtime":"2018-07-28T06:56:34.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-28T07:00:54.802Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    
+        <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.slim.min.js"></script>
+        <script src="//cdn.bootcss.com/tether/1.4.0/js/tether.min.js"></script>
+        <script src="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+    
+
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

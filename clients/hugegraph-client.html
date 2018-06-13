@@ -1,0 +1,1555 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Java Client · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+
+    
+        <link rel="stylesheet" 
+            href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+    
+
+    
+        <link rel="stylesheet" href="../gitbook/cuav-style.css">
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    
+    
+        <link rel="shortcut icon" 
+            href="../images/favicon.ico" type="image/x-icon">
+    
+
+    
+    <link rel="next" href="gremlin-console.html" />
+    
+    
+    <link rel="prev" href="restful-api/other.html" />
+    
+
+    </head>
+    <body>
+        
+
+
+
+	
+	
+	
+	<nav
+			class="navbar fixed-top navbar-inverse background-inverse navbar-toggleable-md">
+		
+
+		<a class="navbar-brand" href="javascript:;">
+			
+			
+				<img src="../images/logo.png" 
+					height="32" class="d-inline-block align-top" 
+					alt="HugeGraph Database" />
+			
+		</a>
+
+		
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<span class="mr-auto"></span>
+				<ul id="cuav-nav" class="navbar-nav text-center text-lg-left">
+					
+				</ul>
+				<span style="width: 6rem"></span>
+			</div>
+			
+		
+	</nav>
+
+
+<div class="book">
+    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Java Client</a>
+    </h1>
+</div>
+
+
+
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../download.html">
+            
+                <a href="../download.html">
+            
+                    
+                    Download
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Quickstart</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../quickstart/hugegraph-server.html">
+            
+                <a href="../quickstart/hugegraph-server.html">
+            
+                    
+                    Install HugeGraph-Server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../quickstart/hugegraph-loader.html">
+            
+                <a href="../quickstart/hugegraph-loader.html">
+            
+                    
+                    Load data with HugeGraph-Loader
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../quickstart/hugegraph-tools.html">
+            
+                <a href="../quickstart/hugegraph-tools.html">
+            
+                    
+                    Manage with HugeGraph-Tools
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../quickstart/hugegraph-studio.html">
+            
+                <a href="../quickstart/hugegraph-studio.html">
+            
+                    
+                    Display with HugeGraph-Studio
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../quickstart/hugegraph-client.html">
+            
+                <a href="../quickstart/hugegraph-client.html">
+            
+                    
+                    Develop with HugeGraph-Client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" data-path="../quickstart/hugegraph-spark.html">
+            
+                <a href="../quickstart/hugegraph-spark.html">
+            
+                    
+                    Analysis with HugeGraph-Spark
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Guides</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../guides/architectural.html">
+            
+                <a href="../guides/architectural.html">
+            
+                    
+                    Architecture Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../guides/desgin-concept.html">
+            
+                <a href="../guides/desgin-concept.html">
+            
+                    
+                    Design Concepts
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../guides/config-guide.html">
+            
+                <a href="../guides/config-guide.html">
+            
+                    
+                    Configuration Guide
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="../guides/config-option.html">
+            
+                <a href="../guides/config-option.html">
+            
+                    
+                    Config Options
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.5" data-path="../guides/custom-plugin.html">
+            
+                <a href="../guides/custom-plugin.html">
+            
+                    
+                    Custom Plugins
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.6" data-path="../guides/faq.html">
+            
+                <a href="../guides/faq.html">
+            
+                    
+                    FAQ
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Query Language</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../language/hugegraph-gremlin.html">
+            
+                <a href="../language/hugegraph-gremlin.html">
+            
+                    
+                    Gremlin Query Language
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="../language/hugegraph-example.html">
+            
+                <a href="../language/hugegraph-example.html">
+            
+                    
+                    HugeGraph Examples
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Clients</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="hugegraph-api.html">
+            
+                <a href="hugegraph-api.html">
+            
+                    
+                    Restful API
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.1.1" data-path="restful-api/propertykey.html">
+            
+                <a href="restful-api/propertykey.html">
+            
+                    
+                    PropertyKey
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.2" data-path="restful-api/vertexlabel.html">
+            
+                <a href="restful-api/vertexlabel.html">
+            
+                    
+                    VertexLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.3" data-path="restful-api/edgelabel.html">
+            
+                <a href="restful-api/edgelabel.html">
+            
+                    
+                    EdgeLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.4" data-path="restful-api/indexlabel.html">
+            
+                <a href="restful-api/indexlabel.html">
+            
+                    
+                    IndexLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.5" data-path="restful-api/vertex.html">
+            
+                <a href="restful-api/vertex.html">
+            
+                    
+                    Vertex
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.6" data-path="restful-api/edge.html">
+            
+                <a href="restful-api/edge.html">
+            
+                    
+                    Edge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.7" data-path="restful-api/traverser.html">
+            
+                <a href="restful-api/traverser.html">
+            
+                    
+                    Traverser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.8" data-path="restful-api/variable.html">
+            
+                <a href="restful-api/variable.html">
+            
+                    
+                    Variable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.9" data-path="restful-api/graph.html">
+            
+                <a href="restful-api/graph.html">
+            
+                    
+                    Graph
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.10" data-path="restful-api/gremlin.html">
+            
+                <a href="restful-api/gremlin.html">
+            
+                    
+                    Gremlin
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.11" data-path="restful-api/other.html">
+            
+                <a href="restful-api/other.html">
+            
+                    
+                    Other
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter active" data-level="5.2" data-path="hugegraph-client.html">
+            
+                <a href="hugegraph-client.html">
+            
+                    
+                    Java Client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="gremlin-console.html">
+            
+                <a href="gremlin-console.html">
+            
+                    
+                    Gremlin Console
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Performance</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="../performance/hugegraph-benchmark-0.5.6.html">
+            
+                <a href="../performance/hugegraph-benchmark-0.5.6.html">
+            
+                    
+                    HugeGraph Benchmark Performance
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="../performance/hugegraph-api-performance.html">
+            
+                <a href="../performance/hugegraph-api-performance.html">
+            
+                    
+                    HugeGraph API Performance
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="6.2.1" data-path="../performance/hugegraph-api-0.5.6-RocksDB.html">
+            
+                <a href="../performance/hugegraph-api-0.5.6-RocksDB.html">
+            
+                    
+                    v0.5.6 Stand-alone(RocksDB)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.2" data-path="../performance/hugegraph-api-0.5.6-Cassandra.html">
+            
+                <a href="../performance/hugegraph-api-0.5.6-Cassandra.html">
+            
+                    
+                    v0.5.6 Cluster(Cassandra)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.3" data-path="../performance/hugegraph-api-0.4.4.html">
+            
+                <a href="../performance/hugegraph-api-0.4.4.html">
+            
+                    
+                    v0.4.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.4" data-path="../performance/hugegraph-api-0.2.html">
+            
+                <a href="../performance/hugegraph-api-0.2.html">
+            
+                    
+                    v0.2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="../performance/hugegraph-loader-performance.html">
+            
+                <a href="../performance/hugegraph-loader-performance.html">
+            
+                    
+                    HugeGraph-Loader Performance
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">ChangeLogs</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="../changelog/hugegraph-0.6.1-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.6.1-release-notes.html">
+            
+                    
+                    Release-0.6.1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="../changelog/hugegraph-0.5.6-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.5.6-release-notes.html">
+            
+                    
+                    Release-0.5.6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="../changelog/hugegraph-0.4.4-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.4.4-release-notes.html">
+            
+                    
+                    Release-0.4.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.4" data-path="../changelog/hugegraph-0.3.3-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.3.3-release-notes.html">
+            
+                    
+                    Release-0.3.3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5" data-path="../changelog/hugegraph-0.2.4-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.2.4-release-notes.html">
+            
+                    
+                    Release-0.2.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.6" data-path="../changelog/hugegraph-0.2-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.2-release-notes.html">
+            
+                    
+                    Release-0.2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="hugegraph-java-client">HugeGraph Java Client</h2>
+<p>&#x7248;&#x672C;&#xFF1A;1.5.0-SNAPSHOT</p>
+<p>&#x53D1;&#x5E03;&#x65F6;&#x95F4;&#xFF1A;2018-03-29</p>
+<p>&#x672C;&#x6587;&#x7684;&#x4EE3;&#x7801;&#x90FD;&#x662F;<code>java</code>&#x8BED;&#x8A00;&#x5199;&#x7684;&#xFF0C;&#x4F46;&#x5176;&#x98CE;&#x683C;&#x4E0E;<code>gremlin(groovy)</code>&#x662F;&#x975E;&#x5E38;&#x7C7B;&#x4F3C;&#x7684;&#x3002;&#x7528;&#x6237;&#x53EA;&#x9700;&#x8981;&#x628A;&#x4EE3;&#x7801;&#x4E2D;&#x7684;&#x53D8;&#x91CF;&#x58F0;&#x660E;&#x66FF;&#x6362;&#x6210;<code>def</code>&#x6216;&#x76F4;&#x63A5;&#x53BB;&#x6389;&#xFF0C;
+&#x5C31;&#x80FD;&#x5C06;<code>java</code>&#x4EE3;&#x7801;&#x8F6C;&#x53D8;&#x4E3A;<code>groovy</code>&#xFF1B;&#x53E6;&#x5916;&#x5C31;&#x662F;&#x6BCF;&#x4E00;&#x884C;&#x8BED;&#x53E5;&#x6700;&#x540E;&#x53EF;&#x4EE5;&#x4E0D;&#x52A0;&#x5206;&#x53F7;&#xFF0C;<code>groovy</code>&#x8BA4;&#x4E3A;&#x4E00;&#x884C;&#x5C31;&#x662F;&#x4E00;&#x6761;&#x8BED;&#x53E5;&#x3002;
+&#x7528;&#x6237;&#x5728;<code>HugeGraph-Studio</code>&#x4E2D;&#x7F16;&#x5199;&#x7684;<code>gremlin(groovy)</code>&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#x672C;&#x6587;&#x7684;<code>java</code>&#x4EE3;&#x7801;&#xFF0C;&#x4E0B;&#x9762;&#x4F1A;&#x4E3E;&#x51FA;&#x51E0;&#x4E2A;&#x4F8B;&#x5B50;&#x3002;</p>
+<h3 id="1-hugegraph-client">1 HugeGraph-Client</h3>
+<p>HugeGraph-Client &#x662F;&#x64CD;&#x4F5C; graph &#x7684;&#x603B;&#x5165;&#x53E3;&#xFF0C;&#x7528;&#x6237;&#x5FC5;&#x987B;&#x5148;&#x521B;&#x5EFA;&#x51FA; HugeGraph-Client &#x5BF9;&#x8C61;&#xFF0C;&#x4E0E; HugeGraph-Server &#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;&#xFF08;&#x4F2A;&#x8FDE;&#x63A5;&#xFF09;&#x540E;&#xFF0C;&#x624D;&#x80FD;&#x83B7;&#x53D6;&#x5230; schema&#x3001;graph &#x4EE5;&#x53CA; gremlin &#x7684;&#x64CD;&#x4F5C;&#x5165;&#x53E3;&#x5BF9;&#x8C61;&#x3002;</p>
+<p>&#x76EE;&#x524D; HugeGraph-Client &#x53EA;&#x5141;&#x8BB8;&#x8FDE;&#x63A5;&#x670D;&#x52A1;&#x7AEF;&#x5DF2;&#x5B58;&#x5728;&#x7684;&#x56FE;&#xFF0C;&#x65E0;&#x6CD5;&#x81EA;&#x5B9A;&#x4E49;&#x56FE;&#x8FDB;&#x884C;&#x521B;&#x5EFA;&#x3002;&#x5176;&#x521B;&#x5EFA;&#x65B9;&#x6CD5;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-comment">// HugeGraphServer&#x5730;&#x5740;&#xFF1A;&quot;http://localhost:8080&quot;</span>
+<span class="hljs-comment">// &#x56FE;&#x7684;&#x540D;&#x79F0;&#xFF1A;&quot;hugegraph&quot;</span>
+HugeClient hugeClient = <span class="hljs-keyword">new</span> HugeClient(<span class="hljs-string">&quot;http://localhost:8080&quot;</span>, <span class="hljs-string">&quot;hugegraph&quot;</span>);
+</code></pre>
+<p>&#x4E0A;&#x8FF0;&#x521B;&#x5EFA; HugeClient &#x7684;&#x8FC7;&#x7A0B;&#x5982;&#x679C;&#x5931;&#x8D25;&#x4F1A;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#xFF0C;&#x7528;&#x6237;&#x9700;&#x8981;try-catch&#x3002;&#x5982;&#x679C;&#x6210;&#x529F;&#x5219;&#x7EE7;&#x7EED;&#x83B7;&#x53D6; schema&#x3001;graph &#x4EE5;&#x53CA; gremlin &#x7684; manager&#x3002;</p>
+<p>&#x5728;<code>HugeGraph-Studio</code>&#x4E2D;&#x901A;&#x8FC7;<code>gremlin</code>&#x6765;&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x4F7F;&#x7528;<code>HugeClient</code>&#xFF0C;&#x8FD9;&#x91CC;&#x53EF;&#x4EE5;&#x5FFD;&#x7565;&#x3002;</p>
+<h3 id="2-&#x5143;&#x6570;&#x636E;">2 &#x5143;&#x6570;&#x636E;</h3>
+<h4 id="21-schemamanager">2.1 SchemaManager</h4>
+<p>SchemaManager &#x7528;&#x4E8E;&#x7BA1;&#x7406; HugeGraph &#x4E2D;&#x7684;&#x56DB;&#x79CD;&#x5143;&#x6570;&#x636E;&#xFF0C;&#x5206;&#x522B;&#x662F;PropertyKey&#xFF08;&#x5C5E;&#x6027;&#x952E;&#xFF09;&#x3001;VertexLabel&#xFF08;&#x9876;&#x70B9;&#x6807;&#x7B7E;&#xFF09;&#x3001;EdgeLabel&#xFF08;&#x8FB9;&#x6807;&#x7B7E;&#xFF09;&#x548C; IndexLabel&#xFF08;&#x7D22;&#x5F15;&#x6807;&#x7B7E;&#xFF09;&#x3002;&#x5728;&#x5B9A;&#x4E49;&#x5143;&#x6570;&#x636E;&#x4FE1;&#x606F;&#x4E4B;&#x524D;&#x5FC5;&#x987B;&#x5148;&#x521B;&#x5EFA; SchemaManager &#x5BF9;&#x8C61;&#x3002;</p>
+<p>&#x7528;&#x6237;&#x53EF;&#x4F7F;&#x7528;&#x5982;&#x4E0B;&#x65B9;&#x6CD5;&#x83B7;&#x5F97;SchemaManager&#x5BF9;&#x8C61;&#xFF1A;</p>
+<pre><code class="lang-java">SchemaManager schema = hugeClient.schema()
+</code></pre>
+<p>&#x5728;<code>HugeGraph-Studio</code>&#x4E2D;&#x901A;&#x8FC7;<code>gremlin</code>&#x521B;&#x5EFA;<code>schema</code>&#x5BF9;&#x8C61;&#xFF1A;</p>
+<pre><code class="lang-groovy">schema = graph.schema()
+</code></pre>
+<p>&#x4E0B;&#x9762;&#x5206;&#x522B;&#x5BF9;&#x4E09;&#x79CD;&#x5143;&#x6570;&#x636E;&#x7684;&#x5B9A;&#x4E49;&#x8FC7;&#x7A0B;&#x8FDB;&#x884C;&#x4ECB;&#x7ECD;&#x3002;</p>
+<h4 id="22-propertykey">2.2 PropertyKey</h4>
+<h5 id="221-&#x63A5;&#x53E3;&#x53CA;&#x53C2;&#x6570;&#x4ECB;&#x7ECD;">2.2.1 &#x63A5;&#x53E3;&#x53CA;&#x53C2;&#x6570;&#x4ECB;&#x7ECD;</h5>
+<p>PropertyKey &#x7528;&#x6765;&#x89C4;&#x8303;&#x9876;&#x70B9;&#x548C;&#x8FB9;&#x7684;&#x5C5E;&#x6027;&#x7684;&#x7EA6;&#x675F;&#xFF0C;&#x6682;&#x4E0D;&#x652F;&#x6301;&#x5B9A;&#x4E49;&#x5C5E;&#x6027;&#x7684;&#x5C5E;&#x6027;&#x3002;</p>
+<p>PropertyKey &#x5141;&#x8BB8;&#x5B9A;&#x4E49;&#x7684;&#x7EA6;&#x675F;&#x4FE1;&#x606F;&#x5305;&#x62EC;&#xFF1A;name&#x3001;datatype&#x3001;cardinality&#x3001;userdata&#xFF0C;&#x4E0B;&#x9762;&#x9010;&#x4E00;&#x4ECB;&#x7ECD;&#x3002;</p>
+<ul>
+<li>name: &#x5C5E;&#x6027;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x7528;&#x6765;&#x533A;&#x5206;&#x4E0D;&#x540C;&#x7684; PropertyKey&#xFF0C;&#x4E0D;&#x5141;&#x8BB8;&#x6709;&#x540C;&#x540D;&#x7684;&#x5C5E;&#x6027;&#xFF1B;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>interface</th>
+<th>param</th>
+<th>must set</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>propertyKey(String name)</td>
+<td>name</td>
+<td>y</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>datatype&#xFF1A;&#x5C5E;&#x6027;&#x503C;&#x7C7B;&#x578B;&#xFF0C;&#x5FC5;&#x987B;&#x4ECE;&#x4E0B;&#x8868;&#x4E2D;&#x9009;&#x62E9;&#x7B26;&#x5408;&#x5177;&#x4F53;&#x4E1A;&#x52A1;&#x573A;&#x666F;&#x7684;&#x4E00;&#x9879;&#x663E;&#x5F0F;&#x8BBE;&#x7F6E;&#xFF1B;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>interface</th>
+<th>Java Class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>asText()</td>
+<td>String</td>
+</tr>
+<tr>
+<td>asInt()</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>asDate()</td>
+<td>Date</td>
+</tr>
+<tr>
+<td>asUuid()</td>
+<td>UUID</td>
+</tr>
+<tr>
+<td>asBoolean()</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>asByte()</td>
+<td>Byte</td>
+</tr>
+<tr>
+<td>asBlob()</td>
+<td>Byte[]</td>
+</tr>
+<tr>
+<td>asDouble()</td>
+<td>Double</td>
+</tr>
+<tr>
+<td>asFloat()</td>
+<td>Float</td>
+</tr>
+<tr>
+<td>asLong()</td>
+<td>Long</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>cardinality&#xFF1A;&#x5C5E;&#x6027;&#x503C;&#x662F;&#x5355;&#x503C;&#x8FD8;&#x662F;&#x591A;&#x503C;&#xFF0C;&#x591A;&#x503C;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x53C8;&#x5206;&#x4E3A;&#x5141;&#x8BB8;&#x6709;&#x91CD;&#x590D;&#x503C;&#x548C;&#x4E0D;&#x5141;&#x8BB8;&#x6709;&#x91CD;&#x590D;&#x503C;&#xFF0C;&#x8BE5;&#x9879;&#x9ED8;&#x8BA4;&#x4E3A; single&#xFF0C;&#x5982;&#x6709;&#x5FC5;&#x8981;&#x53EF;&#x4ECE;&#x4E0B;&#x8868;&#x4E2D;&#x9009;&#x62E9;&#x4E00;&#x9879;&#x8BBE;&#x7F6E;&#xFF1B;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>interface</th>
+<th>cardinality</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>valueSingle()</td>
+<td>single</td>
+<td>single value</td>
+</tr>
+<tr>
+<td>valueList()</td>
+<td>list</td>
+<td>multi-values that allow duplicate value</td>
+</tr>
+<tr>
+<td>valueSet()</td>
+<td>set</td>
+<td>multi-values that not allow duplicate value</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>userdata&#xFF1A;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x81EA;&#x5DF1;&#x6DFB;&#x52A0;&#x4E00;&#x4E9B;&#x7EA6;&#x675F;&#x6216;&#x989D;&#x5916;&#x4FE1;&#x606F;&#xFF0C;&#x7136;&#x540E;&#x81EA;&#x884C;&#x68C0;&#x67E5;&#x4F20;&#x5165;&#x7684;&#x5C5E;&#x6027;&#x662F;&#x5426;&#x6EE1;&#x8DB3;&#x7EA6;&#x675F;&#xFF0C;&#x6216;&#x8005;&#x5FC5;&#x8981;&#x7684;&#x65F6;&#x5019;&#x63D0;&#x53D6;&#x51FA;&#x989D;&#x5916;&#x4FE1;&#x606F;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>interface</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>userdata(String key, Object value)</td>
+<td>The same key, the latter will cover the former</td>
+</tr>
+</tbody>
+</table>
+<h5 id="222-&#x521B;&#x5EFA;-propertykey">2.2.2 &#x521B;&#x5EFA; PropertyKey</h5>
+<pre><code class="lang-java">schema.propertyKey(<span class="hljs-string">&quot;name&quot;</span>).asText().valueSet().ifNotExist().create()
+</code></pre>
+<p>&#x5728;<code>HugeGraph-Studio</code>&#x4E2D;&#x901A;&#x8FC7;<code>gremlin</code>&#x521B;&#x5EFA;&#x4E0A;&#x8FF0;<code>PropertyKey</code>&#x5BF9;&#x8C61;&#x7684;&#x8BED;&#x6CD5;&#x5B8C;&#x5168;&#x4E00;&#x81F4;&#xFF0C;&#x5982;&#x679C;&#x7528;&#x6237;&#x6CA1;&#x6709;&#x5B9A;&#x4E49;&#x51FA;<code>schema</code>&#x53D8;&#x91CF;&#xFF0C;&#x5E94;&#x8BE5;&#x8FD9;&#x6837;&#x5199;&#xFF1A;</p>
+<pre><code class="lang-groovy">graph.schema().propertyKey(<span class="hljs-string">&quot;name&quot;</span>).asText().valueSet().ifNotExist().create()
+</code></pre>
+<p>&#x4EE5;&#x4E0B;&#x7684;&#x793A;&#x4F8B;&#x4E2D;&#xFF0C;<code>gremlin</code>&#x4E0E;<code>java</code>&#x7684;&#x8BED;&#x6CD5;&#x5B8C;&#x5168;&#x4E00;&#x81F4;&#xFF0C;&#x4E0D;&#x518D;&#x8D58;&#x8FF0;&#x3002;</p>
+<ul>
+<li>ifNotExist()&#xFF1A;&#x4E3A; create &#x6DFB;&#x52A0;&#x5224;&#x65AD;&#x673A;&#x5236;&#xFF0C;&#x82E5;&#x5F53;&#x524D; PropertyKey &#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x5219;&#x4E0D;&#x518D;&#x521B;&#x5EFA;&#xFF0C;&#x5426;&#x5219;&#x521B;&#x5EFA;&#x8BE5;&#x5C5E;&#x6027;&#x3002;&#x82E5;&#x4E0D;&#x6DFB;&#x52A0;&#x5224;&#x65AD;&#xFF0C;&#x5728; properkey &#x5DF2;&#x5B58;&#x5728;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x4F1A;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x4FE1;&#x606F;&#xFF0C;&#x4E0B;&#x540C;&#xFF0C;&#x4E0D;&#x518D;&#x8D58;&#x8FF0;&#x3002;</li>
+</ul>
+<h5 id="223-&#x5220;&#x9664;-propertykey">2.2.3 &#x5220;&#x9664; PropertyKey</h5>
+<pre><code class="lang-java">schema.propertyKey(<span class="hljs-string">&quot;name&quot;</span>).remove()
+</code></pre>
+<h5 id="224-&#x67E5;&#x8BE2;-propertykey">2.2.4 &#x67E5;&#x8BE2; PropertyKey</h5>
+<pre><code class="lang-java"><span class="hljs-comment">// &#x83B7;&#x53D6;PropertyKey&#x5BF9;&#x8C61;</span>
+schema.getPropertyKey(<span class="hljs-string">&quot;name&quot;</span>)
+
+<span class="hljs-comment">// &#x83B7;&#x53D6;PropertyKey&#x5C5E;&#x6027;</span>
+schema.getPropertyKey(<span class="hljs-string">&quot;name&quot;</span>).cardinality()
+schema.getPropertyKey(<span class="hljs-string">&quot;name&quot;</span>).dataType()
+schema.getPropertyKey(<span class="hljs-string">&quot;name&quot;</span>).name()
+schema.getPropertyKey(<span class="hljs-string">&quot;name&quot;</span>).userdata()
+</code></pre>
+<h4 id="23-vertexlabel">2.3 VertexLabel</h4>
+<h5 id="231-&#x63A5;&#x53E3;&#x53CA;&#x53C2;&#x6570;&#x4ECB;&#x7ECD;">2.3.1 &#x63A5;&#x53E3;&#x53CA;&#x53C2;&#x6570;&#x4ECB;&#x7ECD;</h5>
+<p>VertexLabel &#x7528;&#x6765;&#x5B9A;&#x4E49;&#x9876;&#x70B9;&#x7C7B;&#x578B;&#xFF0C;&#x63CF;&#x8FF0;&#x9876;&#x70B9;&#x7684;&#x7EA6;&#x675F;&#x4FE1;&#x606F;&#xFF1A;</p>
+<p>VertexLabel &#x5141;&#x8BB8;&#x5B9A;&#x4E49;&#x7684;&#x7EA6;&#x675F;&#x4FE1;&#x606F;&#x5305;&#x62EC;&#xFF1A;name&#x3001;idStrategy&#x3001;properties&#x3001;primaryKeys&#x548C; nullableKeys&#xFF0C;&#x4E0B;&#x9762;&#x9010;&#x4E00;&#x4ECB;&#x7ECD;&#x3002;</p>
+<ul>
+<li>name: &#x5C5E;&#x6027;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x7528;&#x6765;&#x533A;&#x5206;&#x4E0D;&#x540C;&#x7684; VertexLabel&#xFF0C;&#x4E0D;&#x5141;&#x8BB8;&#x6709;&#x540C;&#x540D;&#x7684;&#x5C5E;&#x6027;&#xFF1B;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>interface</th>
+<th>param</th>
+<th>must set</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>vertexLabel(String name)</td>
+<td>name</td>
+<td>y</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>idStrategy: &#x6BCF;&#x4E00;&#x4E2A; VertexLabel &#x90FD;&#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x81EA;&#x5DF1;&#x7684; Id &#x7B56;&#x7565;&#xFF0C;&#x76EE;&#x524D;&#x6709;&#x4E09;&#x79CD;&#x7B56;&#x7565;&#x4F9B;&#x9009;&#x62E9;&#xFF0C;&#x5373; Automatic&#xFF08;&#x81EA;&#x52A8;&#x751F;&#x6210;&#xFF09;&#x3001;Customize&#xFF08;&#x7528;&#x6237;&#x4F20;&#x5165;&#xFF09;&#x548C; PrimaryKey&#xFF08;&#x4E3B;&#x5C5E;&#x6027;&#x952E;&#xFF09;&#x3002;&#x5176;&#x4E2D; Automatic &#x4F7F;&#x7528; Snowflake &#x7B97;&#x6CD5;&#x751F;&#x6210; Id&#xFF0C;Customize &#x9700;&#x8981;&#x7528;&#x6237;&#x81EA;&#x884C;&#x4F20;&#x5165;&#x5B57;&#x7B26;&#x4E32;&#x6216;&#x6570;&#x5B57;&#x7C7B;&#x578B;&#x7684; Id&#xFF0C;PrimaryKey &#x5219;&#x5141;&#x8BB8;&#x7528;&#x6237;&#x4ECE; VertexLabel &#x7684;&#x5C5E;&#x6027;&#x4E2D;&#x9009;&#x62E9;&#x82E5;&#x5E72;&#x4E3B;&#x5C5E;&#x6027;&#x4F5C;&#x4E3A;&#x533A;&#x5206;&#x7684;&#x4F9D;&#x636E;&#xFF0C;HugeGraph &#x5185;&#x90E8;&#x4F1A;&#x6839;&#x636E;&#x4E3B;&#x5C5E;&#x6027;&#x7684;&#x503C;&#x62FC;&#x63A5;&#x751F;&#x6210; Id&#x3002;idStrategy &#x9ED8;&#x8BA4;&#x4F7F;&#x7528; Automatic&#x7684;&#xFF0C;&#x4F46;&#x5982;&#x679C;&#x7528;&#x6237;&#x6CA1;&#x6709;&#x663E;&#x5F0F;&#x8BBE;&#x7F6E; idStrategy &#x53C8;&#x8C03;&#x7528;&#x4E86; primaryKeys(...) &#x65B9;&#x6CD5;&#x8BBE;&#x7F6E;&#x4E86;&#x4E3B;&#x5C5E;&#x6027;&#xFF0C;&#x5219; idStrategy &#x5C06;&#x81EA;&#x52A8;&#x4F7F;&#x7528; PrimaryKey&#xFF1B;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>interface</th>
+<th>idStrategy</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>useAutomaticId</td>
+<td>AUTOMATIC</td>
+<td>generate id automaticly by Snowflake algorithom</td>
+</tr>
+<tr>
+<td>useCustomizeStringId</td>
+<td>CUSTOMIZE_STRING</td>
+<td>passed id by user, must be string type</td>
+</tr>
+<tr>
+<td>useCustomizeNumberId</td>
+<td>CUSTOMIZE_NUMBER</td>
+<td>passed id by user, must be number type</td>
+</tr>
+<tr>
+<td>usePrimaryKeyId</td>
+<td>PRIMARY_KEY</td>
+<td>choose some important prop as primary key to splice id</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>properties: &#x5B9A;&#x4E49;&#x9876;&#x70B9;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x4F20;&#x5165;&#x7684;&#x53C2;&#x6570;&#x662F; PropertyKey &#x7684; name</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>interface</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>properties(String... properties)</td>
+<td>allow to pass multi props</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>primaryKeys: &#x5F53;&#x7528;&#x6237;&#x9009;&#x62E9;&#x4E86; PrimaryKey &#x7684; Id &#x7B56;&#x7565;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x4ECE; VertexLabel &#x7684;&#x5C5E;&#x6027;&#x4E2D;&#x9009;&#x62E9;&#x82E5;&#x5E72;&#x4E3B;&#x5C5E;&#x6027;&#x4F5C;&#x4E3A;&#x533A;&#x5206;&#x7684;&#x4F9D;&#x636E;&#xFF1B;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>interface</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>primaryKeys(String... keys)</td>
+<td>allow to choose multi prop as primaryKeys</td>
+</tr>
+</tbody>
+</table>
+<p>&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;Id &#x7B56;&#x7565;&#x7684;&#x9009;&#x62E9;&#x4E0E; primaryKeys &#x7684;&#x8BBE;&#x7F6E;&#x6709;&#x4E00;&#x4E9B;&#x76F8;&#x4E92;&#x7EA6;&#x675F;&#xFF0C;&#x4E0D;&#x80FD;&#x968F;&#x610F;&#x8C03;&#x7528;&#xFF0C;&#x7EA6;&#x675F;&#x5173;&#x7CFB;&#x89C1;&#x4E0B;&#x8868;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>useAutomaticId</th>
+<th>useCustomizeStringId</th>
+<th>useCustomizeNumberId</th>
+<th>usePrimaryKeyId</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unset primaryKeys</td>
+<td>AUTOMATIC</td>
+<td>CUSTOMIZE_STRING</td>
+<td>CUSTOMIZE_NUMBER</td>
+<td>ERROR</td>
+</tr>
+<tr>
+<td>set primaryKeys</td>
+<td>ERROR</td>
+<td>ERROR</td>
+<td>ERROR</td>
+<td>PRIMARY_KEY</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>nullableKeys: &#x5BF9;&#x4E8E;&#x901A;&#x8FC7; properties(...) &#x65B9;&#x6CD5;&#x8BBE;&#x7F6E;&#x8FC7;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x9ED8;&#x8BA4;&#x5168;&#x90FD;&#x662F;&#x4E0D;&#x53EF;&#x4E3A;&#x7A7A;&#x7684;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x5728;&#x521B;&#x5EFA;&#x9876;&#x70B9;&#x65F6;&#x8BE5;&#x5C5E;&#x6027;&#x5FC5;&#x987B;&#x8D4B;&#x503C;&#xFF0C;&#x8FD9;&#x6837;&#x53EF;&#x80FD;&#x5BF9;&#x7528;&#x6237;&#x6570;&#x636E;&#x63D0;&#x51FA;&#x4E86;&#x592A;&#x8FC7;&#x4E25;&#x683C;&#x7684;&#x5B8C;&#x6574;&#x6027;&#x8981;&#x6C42;&#x3002;&#x4E3A;&#x907F;&#x514D;&#x8FD9;&#x6837;&#x7684;&#x5F3A;&#x7EA6;&#x675F;&#xFF0C;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;
+&#x672C;&#x65B9;&#x6CD5;&#x8BBE;&#x7F6E;&#x82E5;&#x5E72;&#x5C5E;&#x6027;&#x4E3A;&#x53EF;&#x7A7A;&#x7684;&#xFF0C;&#x8FD9;&#x6837;&#x6DFB;&#x52A0;&#x9876;&#x70B9;&#x65F6;&#x8BE5;&#x5C5E;&#x6027;&#x53EF;&#x4EE5;&#x4E0D;&#x8D4B;&#x503C;&#x3002;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>interface</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nullableKeys(String... properties)</td>
+<td>allow to pass multi props</td>
+</tr>
+</tbody>
+</table>
+<p>&#x6CE8;&#x610F;&#xFF1A;primaryKeys &#x548C; nullableKeys &#x4E0D;&#x80FD;&#x6709;&#x4EA4;&#x96C6;&#xFF0C;&#x56E0;&#x4E3A;&#x4E00;&#x4E2A;&#x5C5E;&#x6027;&#x4E0D;&#x80FD;&#x65E2;&#x4F5C;&#x4E3A;&#x4E3B;&#x5C5E;&#x6027;&#xFF0C;&#x53C8;&#x662F;&#x53EF;&#x7A7A;&#x7684;&#x3002;</p>
+<ul>
+<li>enableLabelIndex&#xFF1A;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x662F;&#x5426;&#x9700;&#x8981;&#x4E3A;label&#x521B;&#x5EFA;&#x7D22;&#x5F15;&#x3002;&#x4E0D;&#x521B;&#x5EFA;&#x5219;&#x65E0;&#x6CD5;&#x5168;&#x5C40;&#x641C;&#x7D22;&#x6307;&#x5B9A;label&#x7684;&#x9876;&#x70B9;&#x548C;&#x8FB9;&#xFF0C;&#x521B;&#x5EFA;&#x5219;&#x53EF;&#x4EE5;&#x5168;&#x5C40;&#x641C;&#x7D22;&#xFF0C;&#x505A;&#x7C7B;&#x4F3C;&#x4E8E;<code>g.V().hasLabel(&apos;person&apos;), g.E().has(&apos;label&apos;, &apos;person&apos;)</code>&#x8FD9;&#x6837;&#x7684;&#x67E5;&#x8BE2;&#xFF0C;
+&#x4F46;&#x662F;&#x63D2;&#x5165;&#x6570;&#x636E;&#x65F6;&#x6027;&#x80FD;&#x4E0A;&#x4F1A;&#x66F4;&#x52A0;&#x6162;&#xFF0C;&#x5E76;&#x4E14;&#x9700;&#x8981;&#x5360;&#x7528;&#x66F4;&#x591A;&#x7684;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#x3002;&#x6B64;&#x9879;&#x9ED8;&#x8BA4;&#x4E3A; true&#x3002;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>interface</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enableLabelIndex(boolean enable)</td>
+<td>Whether to create a label index</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>userdata&#xFF1A;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x81EA;&#x5DF1;&#x6DFB;&#x52A0;&#x4E00;&#x4E9B;&#x7EA6;&#x675F;&#x6216;&#x989D;&#x5916;&#x4FE1;&#x606F;&#xFF0C;&#x7136;&#x540E;&#x81EA;&#x884C;&#x68C0;&#x67E5;&#x4F20;&#x5165;&#x7684;&#x5C5E;&#x6027;&#x662F;&#x5426;&#x6EE1;&#x8DB3;&#x7EA6;&#x675F;&#xFF0C;&#x6216;&#x8005;&#x5FC5;&#x8981;&#x7684;&#x65F6;&#x5019;&#x63D0;&#x53D6;&#x51FA;&#x989D;&#x5916;&#x4FE1;&#x606F;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>interface</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>userdata(String key, Object value)</td>
+<td>The same key, the latter will cover the former</td>
+</tr>
+</tbody>
+</table>
+<h5 id="232-&#x521B;&#x5EFA;-vertexlabel">2.3.2 &#x521B;&#x5EFA; VertexLabel</h5>
+<pre><code class="lang-java"><span class="hljs-comment">// &#x4F7F;&#x7528; Automatic &#x7684; Id &#x7B56;&#x7565;</span>
+schema.vertexLabel(<span class="hljs-string">&quot;person&quot;</span>).properties(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>).ifNotExist().create();
+schema.vertexLabel(<span class="hljs-string">&quot;person&quot;</span>).useAutomaticId().properties(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>).primaryKeys(<span class="hljs-string">&quot;name&quot;</span>).ifNotExist().create();
+
+<span class="hljs-comment">// &#x4F7F;&#x7528; Customize_String &#x7684; Id &#x7B56;&#x7565;</span>
+schema.vertexLabel(<span class="hljs-string">&quot;person&quot;</span>).useCustomizeStringId().properties(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>).ifNotExist().create();
+<span class="hljs-comment">// &#x4F7F;&#x7528; Customize_Number &#x7684; Id &#x7B56;&#x7565;</span>
+schema.vertexLabel(<span class="hljs-string">&quot;person&quot;</span>).useCustomizeNumberId().properties(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>).ifNotExist().create();
+
+<span class="hljs-comment">// &#x4F7F;&#x7528; PrimaryKey &#x7684; Id &#x7B56;&#x7565;</span>
+schema.vertexLabel(<span class="hljs-string">&quot;person&quot;</span>).properties(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>).primaryKeys(<span class="hljs-string">&quot;name&quot;</span>).ifNotExist().create();
+schema.vertexLabel(<span class="hljs-string">&quot;person&quot;</span>).usePrimaryKeyId().properties(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>).primaryKeys(<span class="hljs-string">&quot;name&quot;</span>).ifNotExist().create();
+</code></pre>
+<h5 id="233-&#x8FFD;&#x52A0;-vertexlabel">2.3.3 &#x8FFD;&#x52A0; VertexLabel</h5>
+<p>VertexLabel &#x662F;&#x53EF;&#x4EE5;&#x8FFD;&#x52A0;&#x7EA6;&#x675F;&#x7684;&#xFF0C;&#x4E0D;&#x8FC7;&#x4EC5;&#x9650; properties &#x548C; nullableKeys&#xFF0C;&#x800C;&#x4E14;&#x8FFD;&#x52A0;&#x7684;&#x5C5E;&#x6027;&#x4E5F;&#x5FC5;&#x987B;&#x6DFB;&#x52A0;&#x5230; nullableKeys &#x96C6;&#x5408;&#x4E2D;&#x3002;</p>
+<pre><code class="lang-java">schema.vertexLabel(<span class="hljs-string">&quot;person&quot;</span>).properties(<span class="hljs-string">&quot;price&quot;</span>).nullableKeys(<span class="hljs-string">&quot;price&quot;</span>).append();
+</code></pre>
+<h5 id="234-&#x5220;&#x9664;-vertexlabel">2.3.4 &#x5220;&#x9664; VertexLabel</h5>
+<pre><code class="lang-java">schema.vertexLabel(<span class="hljs-string">&quot;person&quot;</span>).remove();
+</code></pre>
+<h5 id="235-&#x67E5;&#x8BE2;-vertexlabel">2.3.5 &#x67E5;&#x8BE2; VertexLabel</h5>
+<pre><code class="lang-java"><span class="hljs-comment">// &#x83B7;&#x53D6;VertexLabel&#x5BF9;&#x8C61;</span>
+schema.getVertexLabel(<span class="hljs-string">&quot;name&quot;</span>)
+
+<span class="hljs-comment">// &#x83B7;&#x53D6;property key&#x5C5E;&#x6027;</span>
+schema.getVertexLabel(<span class="hljs-string">&quot;person&quot;</span>).idStrategy()
+schema.getVertexLabel(<span class="hljs-string">&quot;person&quot;</span>).primaryKeys()
+schema.getVertexLabel(<span class="hljs-string">&quot;person&quot;</span>).name()
+schema.getVertexLabel(<span class="hljs-string">&quot;person&quot;</span>).properties()
+schema.getVertexLabel(<span class="hljs-string">&quot;person&quot;</span>).nullableKeys()
+schema.getVertexLabel(<span class="hljs-string">&quot;person&quot;</span>).userdata()
+</code></pre>
+<h4 id="24-edgelabel">2.4 EdgeLabel</h4>
+<h5 id="241-&#x63A5;&#x53E3;&#x53CA;&#x53C2;&#x6570;&#x4ECB;&#x7ECD;">2.4.1 &#x63A5;&#x53E3;&#x53CA;&#x53C2;&#x6570;&#x4ECB;&#x7ECD;</h5>
+<p>EdgeLabel &#x7528;&#x6765;&#x5B9A;&#x4E49;&#x8FB9;&#x7C7B;&#x578B;&#xFF0C;&#x63CF;&#x8FF0;&#x8FB9;&#x7684;&#x7EA6;&#x675F;&#x4FE1;&#x606F;&#x3002;</p>
+<p>EdgeLabel &#x5141;&#x8BB8;&#x5B9A;&#x4E49;&#x7684;&#x7EA6;&#x675F;&#x4FE1;&#x606F;&#x5305;&#x62EC;&#xFF1A;name&#x3001;sourceLabel&#x3001;targetLabel&#x3001;frequency&#x3001;properties&#x3001;sortKeys &#x548C; nullableKeys&#xFF0C;&#x4E0B;&#x9762;&#x9010;&#x4E00;&#x4ECB;&#x7ECD;&#x3002;</p>
+<ul>
+<li>name: &#x5C5E;&#x6027;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x7528;&#x6765;&#x533A;&#x5206;&#x4E0D;&#x540C;&#x7684; EdgeLabel&#xFF0C;&#x4E0D;&#x5141;&#x8BB8;&#x6709;&#x540C;&#x540D;&#x7684;&#x5C5E;&#x6027;&#xFF1B;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>interface</th>
+<th>param</th>
+<th>must set</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>edgeLabel(String name)</td>
+<td>name</td>
+<td>y</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>sourceLabel: &#x8FB9;&#x8FDE;&#x63A5;&#x7684;&#x6E90;&#x9876;&#x70B9;&#x6807;&#x7B7E;&#x540D;&#xFF0C;&#x53EA;&#x5141;&#x8BB8;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#xFF1B;</p>
+</li>
+<li><p>targetLabel: &#x8FB9;&#x8FDE;&#x63A5;&#x7684;&#x76EE;&#x6807;&#x9876;&#x70B9;&#x6807;&#x7B7E;&#x540D;&#xFF0C;&#x53EA;&#x5141;&#x8BB8;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#xFF1B;</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>interface</th>
+<th>param</th>
+<th>must set</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sourceLabel(String label)</td>
+<td>label</td>
+<td>y</td>
+</tr>
+<tr>
+<td>targetLabel(String label)</td>
+<td>label</td>
+<td>y</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>frequency: &#x5B57;&#x9762;&#x610F;&#x601D;&#x662F;&#x9891;&#x7387;&#xFF0C;&#x8868;&#x793A;&#x5728;&#x4E24;&#x4E2A;&#x5177;&#x4F53;&#x7684;&#x9876;&#x70B9;&#x95F4;&#x67D0;&#x4E2A;&#x5173;&#x7CFB;&#x51FA;&#x73B0;&#x7684;&#x6B21;&#x6570;&#xFF0C;&#x53EF;&#x4EE5;&#x662F;&#x5355;&#x6B21;&#xFF08;single&#xFF09;&#x6216;&#x591A;&#x6B21;&#xFF08;frequency&#xFF09;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;single&#xFF1B;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>interface</th>
+<th>frequency</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>singleTime()</td>
+<td>single</td>
+<td>a relationship can only occur once</td>
+</tr>
+<tr>
+<td>multiTimes()</td>
+<td>multiple</td>
+<td>a relationship can occur many times</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>properties: &#x5B9A;&#x4E49;&#x8FB9;&#x7684;&#x5C5E;&#x6027;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>interface</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>properties(String... properties)</td>
+<td>allow to pass multi props</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>sortKeys: &#x5F53; EdgeLabel &#x7684; frequency &#x4E3A; multiple &#x65F6;&#xFF0C;&#x9700;&#x8981;&#x67D0;&#x4E9B;&#x5C5E;&#x6027;&#x6765;&#x533A;&#x5206;&#x8FD9;&#x591A;&#x6B21;&#x7684;&#x5173;&#x7CFB;&#xFF0C;&#x6545;&#x5F15;&#x5165;&#x4E86; sortKeys&#xFF08;&#x6392;&#x5E8F;&#x952E;&#xFF09;&#xFF1B;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>interface</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sortKeys(String... keys)</td>
+<td>allow to choose multi prop as sortKeys</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>nullableKeys: &#x4E0E;&#x9876;&#x70B9;&#x4E2D;&#x7684; nullableKeys &#x6982;&#x5FF5;&#x4E00;&#x81F4;&#xFF0C;&#x4E0D;&#x518D;&#x8D58;&#x8FF0;</li>
+</ul>
+<p>&#x6CE8;&#x610F;&#xFF1A;sortKeys &#x548C; nullableKeys&#x4E5F;&#x4E0D;&#x80FD;&#x6709;&#x4EA4;&#x96C6;&#x3002;</p>
+<ul>
+<li><p>enableLabelIndex&#xFF1A;&#x4E0E;&#x9876;&#x70B9;&#x4E2D;&#x7684; enableLabelIndex &#x6982;&#x5FF5;&#x4E00;&#x81F4;&#xFF0C;&#x4E0D;&#x518D;&#x8D58;&#x8FF0;</p>
+</li>
+<li><p>userdata&#xFF1A;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x81EA;&#x5DF1;&#x6DFB;&#x52A0;&#x4E00;&#x4E9B;&#x7EA6;&#x675F;&#x6216;&#x989D;&#x5916;&#x4FE1;&#x606F;&#xFF0C;&#x7136;&#x540E;&#x81EA;&#x884C;&#x68C0;&#x67E5;&#x4F20;&#x5165;&#x7684;&#x5C5E;&#x6027;&#x662F;&#x5426;&#x6EE1;&#x8DB3;&#x7EA6;&#x675F;&#xFF0C;&#x6216;&#x8005;&#x5FC5;&#x8981;&#x7684;&#x65F6;&#x5019;&#x63D0;&#x53D6;&#x51FA;&#x989D;&#x5916;&#x4FE1;&#x606F;</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>interface</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>userdata(String key, Object value)</td>
+<td>The same key, the latter will cover the former</td>
+</tr>
+</tbody>
+</table>
+<h5 id="242-&#x521B;&#x5EFA;-edgelabel">2.4.2 &#x521B;&#x5EFA; EdgeLabel</h5>
+<pre><code class="lang-java">schema.edgeLabel(<span class="hljs-string">&quot;knows&quot;</span>).link(<span class="hljs-string">&quot;person&quot;</span>, <span class="hljs-string">&quot;person&quot;</span>).properties(<span class="hljs-string">&quot;date&quot;</span>).ifNotExist().create();
+schema.edgeLabel(<span class="hljs-string">&quot;created&quot;</span>).multiTimes().link(<span class="hljs-string">&quot;person&quot;</span>, <span class="hljs-string">&quot;software&quot;</span>).properties(<span class="hljs-string">&quot;date&quot;</span>).sortKeys(<span class="hljs-string">&quot;date&quot;</span>).ifNotExist().create();
+</code></pre>
+<h5 id="243-&#x8FFD;&#x52A0;-edgelabel">2.4.3 &#x8FFD;&#x52A0; EdgeLabel</h5>
+<pre><code class="lang-java">schema.edgeLabel(<span class="hljs-string">&quot;knows&quot;</span>).properties(<span class="hljs-string">&quot;price&quot;</span>).nullableKeys(<span class="hljs-string">&quot;price&quot;</span>).append();
+</code></pre>
+<h5 id="244-&#x5220;&#x9664;-edgelabel">2.4.4 &#x5220;&#x9664; EdgeLabel</h5>
+<pre><code class="lang-java">schema.edgeLabel(<span class="hljs-string">&quot;knows&quot;</span>).remove();
+</code></pre>
+<h5 id="245-&#x67E5;&#x8BE2;-edgelabel">2.4.5 &#x67E5;&#x8BE2; EdgeLabel</h5>
+<pre><code class="lang-java"><span class="hljs-comment">// &#x83B7;&#x53D6;EdgeLabel&#x5BF9;&#x8C61;</span>
+schema.getEdgeLabel(<span class="hljs-string">&quot;knows&quot;</span>)
+
+<span class="hljs-comment">// &#x83B7;&#x53D6;property key&#x5C5E;&#x6027;</span>
+schema.getEdgeLabel(<span class="hljs-string">&quot;knows&quot;</span>).frequency()
+schema.getEdgeLabel(<span class="hljs-string">&quot;knows&quot;</span>).sourceLabel()
+schema.getEdgeLabel(<span class="hljs-string">&quot;knows&quot;</span>).targetLabel()
+schema.getEdgeLabel(<span class="hljs-string">&quot;knows&quot;</span>).sortKeys()
+schema.getEdgeLabel(<span class="hljs-string">&quot;knows&quot;</span>).name()
+schema.getEdgeLabel(<span class="hljs-string">&quot;knows&quot;</span>).properties()
+schema.getEdgeLabel(<span class="hljs-string">&quot;knows&quot;</span>).nullableKeys()
+schema.getEdgeLabel(<span class="hljs-string">&quot;knows&quot;</span>).userdata()
+</code></pre>
+<h4 id="25-indexlabel">2.5 IndexLabel</h4>
+<h5 id="251-&#x63A5;&#x53E3;&#x53CA;&#x53C2;&#x6570;&#x4ECB;&#x7ECD;">2.5.1 &#x63A5;&#x53E3;&#x53CA;&#x53C2;&#x6570;&#x4ECB;&#x7ECD;</h5>
+<p>IndexLabel &#x7528;&#x6765;&#x5B9A;&#x4E49;&#x7D22;&#x5F15;&#x7C7B;&#x578B;&#xFF0C;&#x63CF;&#x8FF0;&#x7D22;&#x5F15;&#x7684;&#x7EA6;&#x675F;&#x4FE1;&#x606F;&#xFF0C;&#x4E3B;&#x8981;&#x662F;&#x4E3A;&#x4E86;&#x65B9;&#x4FBF;&#x67E5;&#x8BE2;&#x3002;</p>
+<p>IndexLabel &#x5141;&#x8BB8;&#x5B9A;&#x4E49;&#x7684;&#x7EA6;&#x675F;&#x4FE1;&#x606F;&#x5305;&#x62EC;&#xFF1A;name&#x3001;baseType&#x3001;baseValue&#x3001;indexFeilds&#x3001;indexType&#xFF0C;&#x4E0B;&#x9762;&#x9010;&#x4E00;&#x4ECB;&#x7ECD;&#x3002;</p>
+<ul>
+<li>name: &#x5C5E;&#x6027;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x7528;&#x6765;&#x533A;&#x5206;&#x4E0D;&#x540C;&#x7684; IndexLabel&#xFF0C;&#x4E0D;&#x5141;&#x8BB8;&#x6709;&#x540C;&#x540D;&#x7684;&#x5C5E;&#x6027;&#xFF1B;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>interface</th>
+<th>param</th>
+<th>must set</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>indexLabel(String name)</td>
+<td>name</td>
+<td>y</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>baseType: &#x8868;&#x793A;&#x8981;&#x4E3A; VertexLabel &#x8FD8;&#x662F; EdgeLabel &#x5EFA;&#x7ACB;&#x7D22;&#x5F15;, &#x4E0E;&#x4E0B;&#x9762;&#x7684; baseValue &#x914D;&#x5408;&#x4F7F;&#x7528;&#xFF1B;</p>
+</li>
+<li><p>baseValue: &#x6307;&#x5B9A;&#x8981;&#x5EFA;&#x7ACB;&#x7D22;&#x5F15;&#x7684; VertexLabel &#x6216; EdgeLabel &#x7684;&#x540D;&#x79F0;&#xFF1B;</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>interface</th>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>onV(String baseValue)</td>
+<td>baseValue</td>
+<td>build index for VertexLabel: &apos;baseValue&apos;</td>
+</tr>
+<tr>
+<td>onE(String baseValue)</td>
+<td>baseValue</td>
+<td>build index for EdgeLabel: &apos;baseValue&apos;</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>indexFeilds: &#x8981;&#x5728;&#x54EA;&#x4E9B;&#x5C5E;&#x6027;&#x4E0A;&#x5EFA;&#x7ACB;&#x7D22;&#x5F15;&#xFF0C;&#x53EF;&#x4EE5;&#x662F;&#x4E3A;&#x591A;&#x5217;&#x5EFA;&#x7ACB;&#x8054;&#x5408;&#x7D22;&#x5F15;&#xFF1B;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>interface</th>
+<th>param</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>by(String... fields)</td>
+<td>files</td>
+<td>allow to build index for multi fields for secondary index</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>indexType: &#x5EFA;&#x7ACB;&#x7684;&#x7D22;&#x5F15;&#x7C7B;&#x578B;&#xFF0C;&#x76EE;&#x524D;&#x652F;&#x6301;&#x4E24;&#x79CD;&#xFF0C;&#x5373; Secondary &#x548C; Range&#x3002;Secondary &#x5141;&#x8BB8;&#x5EFA;&#x7ACB;&#x8054;&#x5408;&#x7D22;&#x5F15;&#xFF0C;&#x652F;&#x6301;&#x7D22;&#x5F15;&#x524D;&#x7F00;&#x641C;&#x7D22;&#xFF0C;Range &#x652F;&#x6301;&#x6570;&#x503C;&#x7C7B;&#x578B;&#x7684;&#x8303;&#x56F4;&#x67E5;&#x8BE2;&#xFF1B;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>interface</th>
+<th>indexType</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>secondary()</td>
+<td>Secondary</td>
+<td>support prefix search</td>
+</tr>
+<tr>
+<td>range()</td>
+<td>Range</td>
+<td>supports range search for numeric types</td>
+</tr>
+</tbody>
+</table>
+<h5 id="252-&#x521B;&#x5EFA;-indexlabel">2.5.2 &#x521B;&#x5EFA; IndexLabel</h5>
+<pre><code class="lang-java">schema.indexLabel(<span class="hljs-string">&quot;personByAge&quot;</span>).onV(<span class="hljs-string">&quot;person&quot;</span>).by(<span class="hljs-string">&quot;age&quot;</span>).range().ifNotExist().create();
+schema.indexLabel(<span class="hljs-string">&quot;createdByDate&quot;</span>).onE(<span class="hljs-string">&quot;created&quot;</span>).by(<span class="hljs-string">&quot;date&quot;</span>).secondary().ifNotExist().create();
+</code></pre>
+<h5 id="253-&#x5220;&#x9664;-indexlabel">2.5.3 &#x5220;&#x9664; IndexLabel</h5>
+<pre><code class="lang-java">schema.indexLabel(<span class="hljs-string">&quot;personByAge&quot;</span>).remove()
+</code></pre>
+<h5 id="254-&#x67E5;&#x8BE2;-indexlabel">2.5.4 &#x67E5;&#x8BE2; IndexLabel</h5>
+<pre><code class="lang-java"><span class="hljs-comment">// &#x83B7;&#x53D6;IndexLabel&#x5BF9;&#x8C61;</span>
+schema.getIndexLabel(<span class="hljs-string">&quot;personByAge&quot;</span>)
+
+<span class="hljs-comment">// &#x83B7;&#x53D6;property key&#x5C5E;&#x6027;</span>
+schema.getIndexLabel(<span class="hljs-string">&quot;personByAge&quot;</span>).baseType()
+schema.getIndexLabel(<span class="hljs-string">&quot;personByAge&quot;</span>).baseValue()
+schema.getIndexLabel(<span class="hljs-string">&quot;personByAge&quot;</span>).indexFields()
+schema.getIndexLabel(<span class="hljs-string">&quot;personByAge&quot;</span>).indexType()
+schema.getIndexLabel(<span class="hljs-string">&quot;personByAge&quot;</span>).name()
+</code></pre>
+<h3 id="3-&#x56FE;&#x6570;&#x636E;">3 &#x56FE;&#x6570;&#x636E;</h3>
+<h4 id="31-vertex">3.1 Vertex</h4>
+<p>&#x9876;&#x70B9;&#x662F;&#x6784;&#x6210;&#x56FE;&#x7684;&#x6700;&#x57FA;&#x672C;&#x5143;&#x7D20;&#xFF0C;&#x4E00;&#x4E2A;&#x56FE;&#x4E2D;&#x53EF;&#x4EE5;&#x6709;&#x975E;&#x5E38;&#x591A;&#x7684;&#x9876;&#x70B9;&#x3002;&#x4E0B;&#x9762;&#x7ED9;&#x51FA;&#x4E00;&#x4E2A;&#x6DFB;&#x52A0;&#x9876;&#x70B9;&#x7684;&#x4F8B;&#x5B50;&#xFF1A;</p>
+<pre><code class="lang-java">Vertex marko = graph.addVertex(T.label, <span class="hljs-string">&quot;person&quot;</span>, <span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;marko&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-number">29</span>);
+Vertex lop = graph.addVertex(T.label, <span class="hljs-string">&quot;software&quot;</span>, <span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;lop&quot;</span>, <span class="hljs-string">&quot;lang&quot;</span>, <span class="hljs-string">&quot;java&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-number">328</span>);
+</code></pre>
+<ul>
+<li>&#x6DFB;&#x52A0;&#x9876;&#x70B9;&#x7684;&#x5173;&#x952E;&#x662F;&#x9876;&#x70B9;&#x5C5E;&#x6027;&#xFF0C;&#x6DFB;&#x52A0;&#x9876;&#x70B9;&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;&#x4E2A;&#x6570;&#x5FC5;&#x987B;&#x4E3A;&#x5076;&#x6570;&#xFF0C;&#x4E14;&#x6EE1;&#x8DB3;<code>key1 -&gt; val1, key2 -&gt; val2 &#xB7;&#xB7;&#xB7;</code>&#x7684;&#x987A;&#x5E8F;&#x6392;&#x5217;&#xFF0C;&#x952E;&#x503C;&#x5BF9;&#x4E4B;&#x95F4;&#x7684;&#x987A;&#x5E8F;&#x662F;&#x81EA;&#x7531;&#x7684;&#x3002;</li>
+<li>&#x53C2;&#x6570;&#x4E2D;&#x5FC5;&#x987B;&#x5305;&#x542B;&#x4E00;&#x5BF9;&#x7279;&#x6B8A;&#x7684;&#x952E;&#x503C;&#x5BF9;&#xFF0C;&#x5C31;&#x662F;<code>T.label -&gt; &quot;val&quot;</code>&#xFF0C;&#x7528;&#x6765;&#x5B9A;&#x4E49;&#x8BE5;&#x9876;&#x70B9;&#x7684;&#x7C7B;&#x522B;&#xFF0C;&#x4EE5;&#x4FBF;&#x4E8E;&#x7A0B;&#x5E8F;&#x4ECE;&#x7F13;&#x5B58;&#x6216;&#x540E;&#x7AEF;&#x83B7;&#x53D6;&#x5230;&#x8BE5;VertexLabel&#x7684;schema&#x5B9A;&#x4E49;&#xFF0C;&#x7136;&#x540E;&#x505A;&#x540E;&#x7EED;&#x7684;&#x7EA6;&#x675F;&#x68C0;&#x67E5;&#x3002;&#x4F8B;&#x5B50;&#x4E2D;&#x7684;label&#x5B9A;&#x4E49;&#x4E3A;person&#x3002;</li>
+<li>&#x5982;&#x679C;&#x9876;&#x70B9;&#x7C7B;&#x578B;&#x7684; Id &#x7B56;&#x7565;&#x4E3A; <code>AUTOMATIC</code>&#xFF0C;&#x5219;&#x4E0D;&#x5141;&#x8BB8;&#x7528;&#x6237;&#x4F20;&#x5165; id &#x952E;&#x503C;&#x5BF9;&#x3002;</li>
+<li>&#x5982;&#x679C;&#x9876;&#x70B9;&#x7C7B;&#x578B;&#x7684; Id &#x7B56;&#x7565;&#x4E3A; <code>CUSTOMIZE_STRING</code>&#xFF0C;&#x5219;&#x7528;&#x6237;&#x9700;&#x8981;&#x81EA;&#x5DF1;&#x4F20;&#x5165; String &#x7C7B;&#x578B; id &#x7684;&#x503C;&#xFF0C;&#x952E;&#x503C;&#x5BF9;&#x5F62;&#x5982;&#xFF1A;<code>&quot;T.id&quot;, &quot;123456&quot;</code>&#x3002;</li>
+<li>&#x5982;&#x679C;&#x9876;&#x70B9;&#x7C7B;&#x578B;&#x7684; Id &#x7B56;&#x7565;&#x4E3A; <code>CUSTOMIZE_NUMBER</code>&#xFF0C;&#x5219;&#x7528;&#x6237;&#x9700;&#x8981;&#x81EA;&#x5DF1;&#x4F20;&#x5165; Number &#x7C7B;&#x578B; id &#x7684;&#x503C;&#xFF0C;&#x952E;&#x503C;&#x5BF9;&#x5F62;&#x5982;&#xFF1A;<code>&quot;T.id&quot;, 123456</code>&#x3002;</li>
+<li>&#x5982;&#x679C;&#x9876;&#x70B9;&#x7C7B;&#x578B;&#x7684; Id &#x7B56;&#x7565;&#x4E3A; <code>PRIMARY_KEY</code>&#xFF0C;&#x53C2;&#x6570;&#x8FD8;&#x5FC5;&#x987B;&#x5168;&#x90E8;&#x5305;&#x542B;&#x8BE5;<code>primaryKeys</code>&#x5BF9;&#x5E94;&#x5C5E;&#x6027;&#x7684;&#x540D;&#x548C;&#x503C;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x8BBE;&#x7F6E;&#x4F1A;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x3002;&#x6BD4;&#x5982;&#x4E4B;&#x524D;<code>person</code>&#x7684;<code>primaryKeys</code>&#x662F;<code>name</code>&#xFF0C;&#x4F8B;&#x5B50;&#x4E2D;&#x5C31;&#x8BBE;&#x7F6E;&#x4E86;<code>name</code>&#x7684;&#x503C;&#x4E3A;<code>marko</code>&#x3002;</li>
+<li>&#x5BF9;&#x4E8E;&#x975E; nullableKeys &#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x5FC5;&#x987B;&#x8981;&#x8D4B;&#x503C;&#x3002;</li>
+<li>&#x5269;&#x4E0B;&#x7684;&#x53C2;&#x6570;&#x5C31;&#x662F;&#x9876;&#x70B9;&#x5176;&#x4ED6;&#x5C5E;&#x6027;&#x7684;&#x8BBE;&#x7F6E;&#xFF0C;&#x4F46;&#x5E76;&#x975E;&#x5FC5;&#x987B;&#x3002;</li>
+<li>&#x8C03;&#x7528;<code>addVertex</code>&#x65B9;&#x6CD5;&#x540E;&#xFF0C;&#x9876;&#x70B9;&#x4F1A;&#x7ACB;&#x523B;&#x88AB;&#x63D2;&#x5165;&#x5230;&#x540E;&#x7AEF;&#x5B58;&#x50A8;&#x7CFB;&#x7EDF;&#x4E2D;&#x3002;</li>
+</ul>
+<h4 id="32-edge">3.2 Edge</h4>
+<p>&#x6709;&#x4E86;&#x70B9;&#xFF0C;&#x8FD8;&#x9700;&#x8981;&#x8FB9;&#x624D;&#x80FD;&#x6784;&#x6210;&#x5B8C;&#x6574;&#x7684;&#x56FE;&#x3002;&#x4E0B;&#x9762;&#x7ED9;&#x51FA;&#x4E00;&#x4E2A;&#x6DFB;&#x52A0;&#x8FB9;&#x7684;&#x4F8B;&#x5B50;&#xFF1A;</p>
+<pre><code class="lang-java">Edge knows1 = marko.addEdge(<span class="hljs-string">&quot;knows&quot;</span>, vadas, <span class="hljs-string">&quot;city&quot;</span>, <span class="hljs-string">&quot;Beijing&quot;</span>);
+</code></pre>
+<ul>
+<li>&#x7531;&#xFF08;&#x6E90;&#xFF09;&#x9876;&#x70B9;&#x6765;&#x8C03;&#x7528;&#x6DFB;&#x52A0;&#x8FB9;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x51FD;&#x6570;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x4E3A;&#x8FB9;&#x7684;label&#xFF0C;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x76EE;&#x6807;&#x9876;&#x70B9;&#xFF0C;&#x8FD9;&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x4F4D;&#x7F6E;&#x548C;&#x987A;&#x5E8F;&#x662F;&#x56FA;&#x5B9A;&#x7684;&#x3002;&#x540E;&#x7EED;&#x7684;&#x53C2;&#x6570;&#x5C31;&#x662F;<code>key1 -&gt; val1, key2 -&gt; val2 &#xB7;&#xB7;&#xB7;</code>&#x7684;&#x987A;&#x5E8F;&#x6392;&#x5217;&#xFF0C;&#x8BBE;&#x7F6E;&#x8FB9;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x952E;&#x503C;&#x5BF9;&#x987A;&#x5E8F;&#x81EA;&#x7531;&#x3002;</li>
+<li>&#x6E90;&#x9876;&#x70B9;&#x548C;&#x76EE;&#x6807;&#x9876;&#x70B9;&#x5FC5;&#x987B;&#x7B26;&#x5408; EdgeLabel &#x4E2D; sourcelabel &#x548C; targetlabel &#x7684;&#x5B9A;&#x4E49;&#xFF0C;&#x4E0D;&#x80FD;&#x968F;&#x610F;&#x6DFB;&#x52A0;&#x3002;</li>
+<li>&#x5BF9;&#x4E8E;&#x975E; nullableKeys &#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x5FC5;&#x987B;&#x8981;&#x8D4B;&#x503C;&#x3002;</li>
+</ul>
+<p><strong>&#x6CE8;&#x610F;&#xFF1A;&#x5F53;frequency&#x4E3A;multiple&#x65F6;&#x5FC5;&#x987B;&#x8981;&#x8BBE;&#x7F6E;sortKeys&#x5BF9;&#x5E94;&#x5C5E;&#x6027;&#x952E;&#x7684;&#x503C;&#x3002;</strong></p>
+<h3 id="4-&#x7B80;&#x5355;&#x793A;&#x4F8B;">4 &#x7B80;&#x5355;&#x793A;&#x4F8B;</h3>
+<p>&#x7B80;&#x5355;&#x793A;&#x4F8B;&#x89C1;<a href="../quickstart/hugegraph-client.html">HugeGraph-Client</a></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+                
+
+
+  
+	<footer>
+
+	</footer>
+
+
+            </div>
+
+            
+                
+                <a href="restful-api/other.html" class="navigation navigation-prev " aria-label="Previous page: Other">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="gremlin-console.html" class="navigation navigation-next " aria-label="Next page: Gremlin Console">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Java Client","level":"5.2","depth":1,"next":{"title":"Gremlin Console","level":"5.3","depth":1,"path":"clients/gremlin-console.md","ref":"clients/gremlin-console.md","articles":[]},"previous":{"title":"Other","level":"5.1.11","depth":2,"path":"clients/restful-api/other.md","ref":"clients/restful-api/other.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"clients/hugegraph-client.md","mtime":"2018-07-28T06:56:34.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-28T07:00:54.802Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    
+        <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.slim.min.js"></script>
+        <script src="//cdn.bootcss.com/tether/1.4.0/js/tether.min.js"></script>
+        <script src="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+    
+
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

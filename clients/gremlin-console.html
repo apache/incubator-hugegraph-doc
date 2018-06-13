@@ -1,0 +1,1145 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Gremlin Console · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+
+    
+        <link rel="stylesheet" 
+            href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+    
+
+    
+        <link rel="stylesheet" href="../gitbook/cuav-style.css">
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    
+    
+        <link rel="shortcut icon" 
+            href="../images/favicon.ico" type="image/x-icon">
+    
+
+    
+    <link rel="next" href="../performance/hugegraph-benchmark-0.5.6.html" />
+    
+    
+    <link rel="prev" href="hugegraph-client.html" />
+    
+
+    </head>
+    <body>
+        
+
+
+
+	
+	
+	
+	<nav
+			class="navbar fixed-top navbar-inverse background-inverse navbar-toggleable-md">
+		
+
+		<a class="navbar-brand" href="javascript:;">
+			
+			
+				<img src="../images/logo.png" 
+					height="32" class="d-inline-block align-top" 
+					alt="HugeGraph Database" />
+			
+		</a>
+
+		
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<span class="mr-auto"></span>
+				<ul id="cuav-nav" class="navbar-nav text-center text-lg-left">
+					
+				</ul>
+				<span style="width: 6rem"></span>
+			</div>
+			
+		
+	</nav>
+
+
+<div class="book">
+    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Gremlin Console</a>
+    </h1>
+</div>
+
+
+
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../download.html">
+            
+                <a href="../download.html">
+            
+                    
+                    Download
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Quickstart</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../quickstart/hugegraph-server.html">
+            
+                <a href="../quickstart/hugegraph-server.html">
+            
+                    
+                    Install HugeGraph-Server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../quickstart/hugegraph-loader.html">
+            
+                <a href="../quickstart/hugegraph-loader.html">
+            
+                    
+                    Load data with HugeGraph-Loader
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../quickstart/hugegraph-tools.html">
+            
+                <a href="../quickstart/hugegraph-tools.html">
+            
+                    
+                    Manage with HugeGraph-Tools
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../quickstart/hugegraph-studio.html">
+            
+                <a href="../quickstart/hugegraph-studio.html">
+            
+                    
+                    Display with HugeGraph-Studio
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../quickstart/hugegraph-client.html">
+            
+                <a href="../quickstart/hugegraph-client.html">
+            
+                    
+                    Develop with HugeGraph-Client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" data-path="../quickstart/hugegraph-spark.html">
+            
+                <a href="../quickstart/hugegraph-spark.html">
+            
+                    
+                    Analysis with HugeGraph-Spark
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Guides</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../guides/architectural.html">
+            
+                <a href="../guides/architectural.html">
+            
+                    
+                    Architecture Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../guides/desgin-concept.html">
+            
+                <a href="../guides/desgin-concept.html">
+            
+                    
+                    Design Concepts
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../guides/config-guide.html">
+            
+                <a href="../guides/config-guide.html">
+            
+                    
+                    Configuration Guide
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="../guides/config-option.html">
+            
+                <a href="../guides/config-option.html">
+            
+                    
+                    Config Options
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.5" data-path="../guides/custom-plugin.html">
+            
+                <a href="../guides/custom-plugin.html">
+            
+                    
+                    Custom Plugins
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.6" data-path="../guides/faq.html">
+            
+                <a href="../guides/faq.html">
+            
+                    
+                    FAQ
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Query Language</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../language/hugegraph-gremlin.html">
+            
+                <a href="../language/hugegraph-gremlin.html">
+            
+                    
+                    Gremlin Query Language
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="../language/hugegraph-example.html">
+            
+                <a href="../language/hugegraph-example.html">
+            
+                    
+                    HugeGraph Examples
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Clients</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="hugegraph-api.html">
+            
+                <a href="hugegraph-api.html">
+            
+                    
+                    Restful API
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.1.1" data-path="restful-api/propertykey.html">
+            
+                <a href="restful-api/propertykey.html">
+            
+                    
+                    PropertyKey
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.2" data-path="restful-api/vertexlabel.html">
+            
+                <a href="restful-api/vertexlabel.html">
+            
+                    
+                    VertexLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.3" data-path="restful-api/edgelabel.html">
+            
+                <a href="restful-api/edgelabel.html">
+            
+                    
+                    EdgeLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.4" data-path="restful-api/indexlabel.html">
+            
+                <a href="restful-api/indexlabel.html">
+            
+                    
+                    IndexLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.5" data-path="restful-api/vertex.html">
+            
+                <a href="restful-api/vertex.html">
+            
+                    
+                    Vertex
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.6" data-path="restful-api/edge.html">
+            
+                <a href="restful-api/edge.html">
+            
+                    
+                    Edge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.7" data-path="restful-api/traverser.html">
+            
+                <a href="restful-api/traverser.html">
+            
+                    
+                    Traverser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.8" data-path="restful-api/variable.html">
+            
+                <a href="restful-api/variable.html">
+            
+                    
+                    Variable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.9" data-path="restful-api/graph.html">
+            
+                <a href="restful-api/graph.html">
+            
+                    
+                    Graph
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.10" data-path="restful-api/gremlin.html">
+            
+                <a href="restful-api/gremlin.html">
+            
+                    
+                    Gremlin
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.11" data-path="restful-api/other.html">
+            
+                <a href="restful-api/other.html">
+            
+                    
+                    Other
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="hugegraph-client.html">
+            
+                <a href="hugegraph-client.html">
+            
+                    
+                    Java Client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="5.3" data-path="gremlin-console.html">
+            
+                <a href="gremlin-console.html">
+            
+                    
+                    Gremlin Console
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Performance</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="../performance/hugegraph-benchmark-0.5.6.html">
+            
+                <a href="../performance/hugegraph-benchmark-0.5.6.html">
+            
+                    
+                    HugeGraph Benchmark Performance
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="../performance/hugegraph-api-performance.html">
+            
+                <a href="../performance/hugegraph-api-performance.html">
+            
+                    
+                    HugeGraph API Performance
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="6.2.1" data-path="../performance/hugegraph-api-0.5.6-RocksDB.html">
+            
+                <a href="../performance/hugegraph-api-0.5.6-RocksDB.html">
+            
+                    
+                    v0.5.6 Stand-alone(RocksDB)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.2" data-path="../performance/hugegraph-api-0.5.6-Cassandra.html">
+            
+                <a href="../performance/hugegraph-api-0.5.6-Cassandra.html">
+            
+                    
+                    v0.5.6 Cluster(Cassandra)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.3" data-path="../performance/hugegraph-api-0.4.4.html">
+            
+                <a href="../performance/hugegraph-api-0.4.4.html">
+            
+                    
+                    v0.4.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.4" data-path="../performance/hugegraph-api-0.2.html">
+            
+                <a href="../performance/hugegraph-api-0.2.html">
+            
+                    
+                    v0.2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="../performance/hugegraph-loader-performance.html">
+            
+                <a href="../performance/hugegraph-loader-performance.html">
+            
+                    
+                    HugeGraph-Loader Performance
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">ChangeLogs</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="../changelog/hugegraph-0.6.1-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.6.1-release-notes.html">
+            
+                    
+                    Release-0.6.1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="../changelog/hugegraph-0.5.6-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.5.6-release-notes.html">
+            
+                    
+                    Release-0.5.6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="../changelog/hugegraph-0.4.4-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.4.4-release-notes.html">
+            
+                    
+                    Release-0.4.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.4" data-path="../changelog/hugegraph-0.3.3-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.3.3-release-notes.html">
+            
+                    
+                    Release-0.3.3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5" data-path="../changelog/hugegraph-0.2.4-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.2.4-release-notes.html">
+            
+                    
+                    Release-0.2.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.6" data-path="../changelog/hugegraph-0.2-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.2-release-notes.html">
+            
+                    
+                    Release-0.2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="gremlin-console">Gremlin-Console</h2>
+<p>Gremlin-Console&#x662F;&#x7531;Tinkerpop&#x81EA;&#x5DF1;&#x5F00;&#x53D1;&#x7684;&#x4E00;&#x4E2A;&#x4EA4;&#x4E92;&#x5F0F;&#x5BA2;&#x6237;&#x7AEF;&#xFF0C;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8BE5;&#x5BA2;&#x6237;&#x7AEF;&#x5BF9;Graph&#x505A;&#x5404;&#x79CD;&#x64CD;&#x4F5C;&#xFF0C;&#x4E3B;&#x8981;&#x6709;&#x4E24;&#x79CD;&#x4F7F;&#x7528;&#x6A21;&#x5F0F;&#xFF1A;</p>
+<ul>
+<li>&#x5355;&#x673A;&#x79BB;&#x7EBF;&#x8C03;&#x7528;&#x6A21;&#x5F0F;&#xFF1B;</li>
+<li>Client/Server&#x8BF7;&#x6C42;&#x6A21;&#x5F0F;&#xFF1B;</li>
+</ul>
+<h3 id="1-&#x5355;&#x673A;&#x79BB;&#x7EBF;&#x8C03;&#x7528;&#x6A21;&#x5F0F;">1 &#x5355;&#x673A;&#x79BB;&#x7EBF;&#x8C03;&#x7528;&#x6A21;&#x5F0F;</h3>
+<p>&#x7531;&#x4E8E;lib&#x76EE;&#x5F55;&#x4E0B;&#x5DF2;&#x7ECF;&#x5305;&#x542B;&#x4E86;HugeCore&#x7684;jar&#x5305;&#xFF0C;&#x4E14;HugeGraph&#x5DF2;&#x7ECF;&#x4F5C;&#x4E3A;&#x63D2;&#x4EF6;&#x6CE8;&#x518C;&#x5230;Console&#x4E2D;&#xFF0C;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x5199;groovy&#x811A;&#x672C;&#x8C03;&#x7528;HugeGraph-Core&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x7136;&#x540E;&#x4EA4;&#x7531;Gremlin-Console&#x5185;&#x7684;&#x89E3;&#x6790;&#x5F15;&#x64CE;&#x6267;&#x884C;&#xFF0C;&#x5C31;&#x80FD;&#x5728;&#x4E0D;&#x542F;&#x52A8;Server&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x64CD;&#x4F5C;&#x56FE;&#x3002;</p>
+<p>&#x8FD9;&#x79CD;&#x6A21;&#x5F0F;&#x4FBF;&#x4E8E;&#x7528;&#x6237;&#x5FEB;&#x901F;&#x4E0A;&#x624B;&#x4F53;&#x9A8C;&#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x9002;&#x5408;&#x5927;&#x91CF;&#x6570;&#x636E;&#x63D2;&#x5165;&#x548C;&#x67E5;&#x8BE2;&#x7684;&#x573A;&#x666F;&#x3002;&#x4E0B;&#x9762;&#x7ED9;&#x4E00;&#x4E2A;&#x793A;&#x4F8B;&#xFF1A;</p>
+<p>&#x5728;script&#x76EE;&#x5F55;&#x4E0B;&#x6709;&#x4E00;&#x4E2A;&#x793A;&#x4F8B;&#x811A;&#x672C;&#xFF1A;example.groovy</p>
+<pre><code class="lang-groovy"><span class="hljs-keyword">import</span> com.baidu.hugegraph.HugeFactory
+<span class="hljs-keyword">import</span> com.baidu.hugegraph.dist.RegisterUtil
+<span class="hljs-keyword">import</span> org.apache.tinkerpop.gremlin.structure.T
+
+RegisterUtil.registerCassandra();
+RegisterUtil.registerScyllaDB();
+
+conf = <span class="hljs-string">&quot;conf/hugegraph.properties&quot;</span>
+graph = HugeFactory.open(conf);
+schema = graph.schema();
+
+schema.propertyKey(<span class="hljs-string">&quot;name&quot;</span>).asText().ifNotExist().create();
+schema.propertyKey(<span class="hljs-string">&quot;age&quot;</span>).asInt().ifNotExist().create();
+schema.propertyKey(<span class="hljs-string">&quot;city&quot;</span>).asText().ifNotExist().create();
+schema.propertyKey(<span class="hljs-string">&quot;weight&quot;</span>).asDouble().ifNotExist().create();
+schema.propertyKey(<span class="hljs-string">&quot;lang&quot;</span>).asText().ifNotExist().create();
+schema.propertyKey(<span class="hljs-string">&quot;date&quot;</span>).asText().ifNotExist().create();
+schema.propertyKey(<span class="hljs-string">&quot;price&quot;</span>).asInt().ifNotExist().create();
+
+schema.vertexLabel(<span class="hljs-string">&quot;person&quot;</span>).properties(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;city&quot;</span>).primaryKeys(<span class="hljs-string">&quot;name&quot;</span>).ifNotExist().create();
+schema.vertexLabel(<span class="hljs-string">&quot;software&quot;</span>).properties(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;lang&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>).primaryKeys(<span class="hljs-string">&quot;name&quot;</span>).ifNotExist().create();
+schema.indexLabel(<span class="hljs-string">&quot;personByName&quot;</span>).onV(<span class="hljs-string">&quot;person&quot;</span>).by(<span class="hljs-string">&quot;name&quot;</span>).secondary().ifNotExist().create();
+schema.indexLabel(<span class="hljs-string">&quot;personByCity&quot;</span>).onV(<span class="hljs-string">&quot;person&quot;</span>).by(<span class="hljs-string">&quot;city&quot;</span>).secondary().ifNotExist().create();
+schema.indexLabel(<span class="hljs-string">&quot;personByAgeAndCity&quot;</span>).onV(<span class="hljs-string">&quot;person&quot;</span>).by(<span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-string">&quot;city&quot;</span>).secondary().ifNotExist().create();
+schema.indexLabel(<span class="hljs-string">&quot;softwareByPrice&quot;</span>).onV(<span class="hljs-string">&quot;software&quot;</span>).by(<span class="hljs-string">&quot;price&quot;</span>).range().ifNotExist().create();
+schema.edgeLabel(<span class="hljs-string">&quot;knows&quot;</span>).sourceLabel(<span class="hljs-string">&quot;person&quot;</span>).targetLabel(<span class="hljs-string">&quot;person&quot;</span>).properties(<span class="hljs-string">&quot;date&quot;</span>, <span class="hljs-string">&quot;weight&quot;</span>).ifNotExist().create();
+schema.edgeLabel(<span class="hljs-string">&quot;created&quot;</span>).sourceLabel(<span class="hljs-string">&quot;person&quot;</span>).targetLabel(<span class="hljs-string">&quot;software&quot;</span>).properties(<span class="hljs-string">&quot;date&quot;</span>, <span class="hljs-string">&quot;weight&quot;</span>).ifNotExist().create();
+schema.indexLabel(<span class="hljs-string">&quot;createdByDate&quot;</span>).onE(<span class="hljs-string">&quot;created&quot;</span>).by(<span class="hljs-string">&quot;date&quot;</span>).secondary().ifNotExist().create();
+schema.indexLabel(<span class="hljs-string">&quot;createdByWeight&quot;</span>).onE(<span class="hljs-string">&quot;created&quot;</span>).by(<span class="hljs-string">&quot;weight&quot;</span>).range().ifNotExist().create();
+schema.indexLabel(<span class="hljs-string">&quot;knowsByWeight&quot;</span>).onE(<span class="hljs-string">&quot;knows&quot;</span>).by(<span class="hljs-string">&quot;weight&quot;</span>).range().ifNotExist().create();
+
+marko = graph.addVertex(T.label, <span class="hljs-string">&quot;person&quot;</span>, <span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;marko&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-number">29</span>, <span class="hljs-string">&quot;city&quot;</span>, <span class="hljs-string">&quot;Beijing&quot;</span>);
+vadas = graph.addVertex(T.label, <span class="hljs-string">&quot;person&quot;</span>, <span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;vadas&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-number">27</span>, <span class="hljs-string">&quot;city&quot;</span>, <span class="hljs-string">&quot;Hongkong&quot;</span>);
+lop = graph.addVertex(T.label, <span class="hljs-string">&quot;software&quot;</span>, <span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;lop&quot;</span>, <span class="hljs-string">&quot;lang&quot;</span>, <span class="hljs-string">&quot;java&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-number">328</span>);
+josh = graph.addVertex(T.label, <span class="hljs-string">&quot;person&quot;</span>, <span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;josh&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-number">32</span>, <span class="hljs-string">&quot;city&quot;</span>, <span class="hljs-string">&quot;Beijing&quot;</span>);
+ripple = graph.addVertex(T.label, <span class="hljs-string">&quot;software&quot;</span>, <span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;ripple&quot;</span>, <span class="hljs-string">&quot;lang&quot;</span>, <span class="hljs-string">&quot;java&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-number">199</span>);
+peter = graph.addVertex(T.label, <span class="hljs-string">&quot;person&quot;</span>, <span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;peter&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>, <span class="hljs-number">35</span>, <span class="hljs-string">&quot;city&quot;</span>, <span class="hljs-string">&quot;Shanghai&quot;</span>);
+
+marko.addEdge(<span class="hljs-string">&quot;knows&quot;</span>, vadas, <span class="hljs-string">&quot;date&quot;</span>, <span class="hljs-string">&quot;20160110&quot;</span>, <span class="hljs-string">&quot;weight&quot;</span>, <span class="hljs-number">0.5</span>);
+marko.addEdge(<span class="hljs-string">&quot;knows&quot;</span>, josh, <span class="hljs-string">&quot;date&quot;</span>, <span class="hljs-string">&quot;20130220&quot;</span>, <span class="hljs-string">&quot;weight&quot;</span>, <span class="hljs-number">1.0</span>);
+marko.addEdge(<span class="hljs-string">&quot;created&quot;</span>, lop, <span class="hljs-string">&quot;date&quot;</span>, <span class="hljs-string">&quot;20171210&quot;</span>, <span class="hljs-string">&quot;weight&quot;</span>, <span class="hljs-number">0.4</span>);
+josh.addEdge(<span class="hljs-string">&quot;created&quot;</span>, lop, <span class="hljs-string">&quot;date&quot;</span>, <span class="hljs-string">&quot;20091111&quot;</span>, <span class="hljs-string">&quot;weight&quot;</span>, <span class="hljs-number">0.4</span>);
+josh.addEdge(<span class="hljs-string">&quot;created&quot;</span>, ripple, <span class="hljs-string">&quot;date&quot;</span>, <span class="hljs-string">&quot;20171210&quot;</span>, <span class="hljs-string">&quot;weight&quot;</span>, <span class="hljs-number">1.0</span>);
+peter.addEdge(<span class="hljs-string">&quot;created&quot;</span>, lop, <span class="hljs-string">&quot;date&quot;</span>, <span class="hljs-string">&quot;20170324&quot;</span>, <span class="hljs-string">&quot;weight&quot;</span>, <span class="hljs-number">0.2</span>);
+
+graph.tx().commit();
+
+g = graph.traversal();
+
+System.out.println(<span class="hljs-string">&quot;&gt;&gt;&gt;&gt; query all vertices: size=&quot;</span> + g.V().toList().size());
+System.out.println(<span class="hljs-string">&quot;&gt;&gt;&gt;&gt; query all edges: size=&quot;</span> + g.E().toList().size());
+</code></pre>
+<p>&#x5176;&#x5B9E;&#x8FD9;&#x4E00;&#x6BB5;groovy&#x811A;&#x672C;&#x51E0;&#x4E4E;&#x5C31;&#x662F;Java&#x4EE3;&#x7801;&#xFF0C;&#x4E0D;&#x540C;&#x4E4B;&#x5904;&#x4EC5;&#x5728;&#x4E8E;&#x53D8;&#x91CF;&#x7684;&#x5B9A;&#x4E49;&#x53EF;&#x4EE5;&#x4E0D;&#x5199;&#x7C7B;&#x578B;&#x58F0;&#x660E;&#xFF0C;&#x4EE5;&#x53CA;&#x6BCF;&#x4E00;&#x884C;&#x672B;&#x5C3E;&#x7684;&#x5206;&#x53F7;&#x53EF;&#x4EE5;&#x53BB;&#x6389;&#x3002;</p>
+<p>&#x4E0B;&#x9762;&#x8FDB;&#x5165;gremlin-console&#xFF0C;&#x5E76;&#x4F20;&#x5165;&#x8BE5;&#x811A;&#x672C;&#x4EE4;&#x5176;&#x6267;&#x884C;&#xFF1A;</p>
+<pre><code class="lang-bash">bin/gremlin-console.sh scripts/example.groovy
+objc[5038]: Class JavaLaunchHelper is implemented <span class="hljs-keyword">in</span> both /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/bin/java (0x10137a4c0) and /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/libinstrument.dylib (0x102bbb4e0). One of the two will be used. Which one is undefined.
+
+         \,,,/
+         (o o)
+-----oOOo-(3)-oOOo-----
+plugin activated: com.baidu.hugegraph
+plugin activated: tinkerpop.server
+plugin activated: tinkerpop.utilities
+plugin activated: tinkerpop.tinkergraph
+2018-01-15 14:36:19 7516  [main] [WARN ] com.baidu.hugegraph.config.HugeConfig [] - The config option <span class="hljs-string">&apos;rocksdb.data_path&apos;</span> is redundant, please ensure it has been registered
+2018-01-15 14:36:19 7523  [main] [WARN ] com.baidu.hugegraph.config.HugeConfig [] - The config option <span class="hljs-string">&apos;rocksdb.wal_path&apos;</span> is redundant, please ensure it has been registered
+2018-01-15 14:36:19 7604  [main] [INFO ] com.baidu.hugegraph.HugeGraph [] - Opening backend store <span class="hljs-string">&apos;cassandra&apos;</span> <span class="hljs-keyword">for</span> graph <span class="hljs-string">&apos;hugegraph&apos;</span>
+&gt;&gt;&gt;&gt; query all vertices: size=6
+&gt;&gt;&gt;&gt; query all edges: size=6
+</code></pre>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x63D2;&#x5165;&#x4E86;6&#x4E2A;&#x9876;&#x70B9;&#x3001;6&#x6761;&#x8FB9;&#xFF0C;&#x5E76;&#x67E5;&#x8BE2;&#x51FA;&#x6765;&#x4E86;&#x3002;&#x8FDB;&#x5165;console&#x4E4B;&#x540E;&#xFF0C;&#x8FD8;&#x53EF;&#x7EE7;&#x7EED;&#x8F93;&#x5165;groovy&#x8BED;&#x53E5;&#x5BF9;&#x56FE;&#x505A;&#x64CD;&#x4F5C;&#xFF1A;</p>
+<pre><code class="lang-groovy">gremlin&gt; g.V()
+==&gt;v[<span class="hljs-number">2</span>:ripple]
+==&gt;v[<span class="hljs-number">1</span>:vadas]
+==&gt;v[<span class="hljs-number">1</span>:peter]
+==&gt;v[<span class="hljs-number">1</span>:josh]
+==&gt;v[<span class="hljs-number">1</span>:marko]
+==&gt;v[<span class="hljs-number">2</span>:lop]
+gremlin&gt; g.E()
+==&gt;e[<span class="hljs-string">S1:</span>josh&gt;<span class="hljs-number">2</span>&gt;&gt;<span class="hljs-string">S2:</span>ripple][<span class="hljs-number">1</span>:josh-created-&gt;<span class="hljs-number">2</span>:ripple]
+==&gt;e[<span class="hljs-string">S1:</span>marko&gt;<span class="hljs-number">1</span>&gt;<span class="hljs-number">20160110</span>&gt;<span class="hljs-string">S1:</span>vadas][<span class="hljs-number">1</span>:marko-knows-&gt;<span class="hljs-number">1</span>:vadas]
+==&gt;e[<span class="hljs-string">S1:</span>peter&gt;<span class="hljs-number">2</span>&gt;&gt;<span class="hljs-string">S2:</span>lop][<span class="hljs-number">1</span>:peter-created-&gt;<span class="hljs-number">2</span>:lop]
+==&gt;e[<span class="hljs-string">S1:</span>josh&gt;<span class="hljs-number">2</span>&gt;&gt;<span class="hljs-string">S2:</span>lop][<span class="hljs-number">1</span>:josh-created-&gt;<span class="hljs-number">2</span>:lop]
+==&gt;e[<span class="hljs-string">S1:</span>marko&gt;<span class="hljs-number">1</span>&gt;<span class="hljs-number">20130220</span>&gt;<span class="hljs-string">S1:</span>josh][<span class="hljs-number">1</span>:marko-knows-&gt;<span class="hljs-number">1</span>:josh]
+==&gt;e[<span class="hljs-string">S1:</span>marko&gt;<span class="hljs-number">2</span>&gt;&gt;<span class="hljs-string">S2:</span>lop][<span class="hljs-number">1</span>:marko-created-&gt;<span class="hljs-number">2</span>:lop]
+</code></pre>
+<p>&#x66F4;&#x591A;&#x7684;Gremlin&#x8BED;&#x53E5;&#x8BF7;&#x53C2;&#x8003;<a href="http://tinkerpop.apache.org/docs/current/reference/" target="_blank">Tinkerpop&#x5B98;&#x7F51;</a></p>
+<h3 id="2-clientserver&#x8BF7;&#x6C42;&#x6A21;&#x5F0F;">2 Client/Server&#x8BF7;&#x6C42;&#x6A21;&#x5F0F;</h3>
+<p>&#x56E0;&#x4E3A;Gremlin-Console&#x53EA;&#x80FD;&#x901A;&#x8FC7;WebSocket&#x8FDE;&#x63A5;HugeGraph-Server&#xFF0C;&#x9ED8;&#x8BA4;HugeGraph-Server&#x662F;&#x5BF9;&#x5916;&#x63D0;&#x4F9B;HTTP&#x8FDE;&#x63A5;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x5148;&#x4FEE;&#x6539;gremlin-server&#x7684;&#x914D;&#x7F6E;&#x3002;</p>
+<p><em>&#x6CE8;&#x610F;&#xFF1A;&#x5C06;&#x8FDE;&#x63A5;&#x65B9;&#x5F0F;&#x4FEE;&#x6539;&#x4E3A;WebSocket&#x540E;&#xFF0C;HugeGraph-Client&#x3001;HugeGraph-Loader&#x3001;HugeGraph-Studio&#x7B49;&#x914D;&#x5957;&#x5DE5;&#x5177;&#x90FD;&#x4E0D;&#x80FD;&#x4F7F;&#x7528;&#x4E86;&#x3002;</em></p>
+<pre><code class="lang-yaml"><span class="hljs-comment"># vim conf/gremlin-server.yaml</span>
+<span class="hljs-attr">host:</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>
+<span class="hljs-attr">port:</span> <span class="hljs-number">8182</span>
+<span class="hljs-attr">scriptEvaluationTimeout:</span> <span class="hljs-number">30000</span>
+<span class="hljs-comment"># If you want to start gremlin-server for gremlin-console(web-socket),</span>
+<span class="hljs-comment"># please change `HttpChannelizer` to `WebSocketChannelizer` or comment this line.</span>
+<span class="hljs-attr">channelizer:</span> org.apache.tinkerpop.gremlin.server.channel.HttpChannelizer
+<span class="hljs-attr">graphs:</span> {
+<span class="hljs-attr">  hugegraph:</span> conf/hugegraph.properties,
+<span class="hljs-attr">  hugegraph1:</span> conf/hugegraph1.properties
+}
+<span class="hljs-attr">plugins:</span>
+<span class="hljs-bullet">  -</span> com.baidu.hugegraph
+<span class="hljs-attr">scriptEngines:</span> {
+<span class="hljs-attr">  gremlin-groovy:</span> {
+<span class="hljs-attr">    imports:</span> [java.lang.Math],
+<span class="hljs-attr">    staticImports:</span> [java.lang.Math.PI],
+<span class="hljs-attr">    scripts:</span> [scripts/empty-sample.groovy]
+  }
+}
+<span class="hljs-attr">serializers:</span>
+<span class="hljs-bullet">  -</span> { className: org.apache.tinkerpop.gremlin.driver.ser.GryoLiteMessageSerializerV1d0,
+<span class="hljs-attr">      config:</span> {
+<span class="hljs-attr">        serializeResultToString:</span> <span class="hljs-literal">false</span>,
+<span class="hljs-attr">        ioRegistries:</span> [com.baidu.hugegraph.io.HugeGraphIoRegistry]
+      }
+    }
+<span class="hljs-bullet">  -</span> { className: org.apache.tinkerpop.gremlin.driver.ser.GryoMessageSerializerV1d0,
+<span class="hljs-attr">      config:</span> {
+<span class="hljs-attr">        serializeResultToString:</span> <span class="hljs-literal">true</span>,
+<span class="hljs-attr">        ioRegistries:</span> [com.baidu.hugegraph.io.HugeGraphIoRegistry]
+      }
+    }
+<span class="hljs-bullet">  -</span> { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerGremlinV1d0,
+<span class="hljs-attr">      config:</span> {
+<span class="hljs-attr">        serializeResultToString:</span> <span class="hljs-literal">false</span>,
+<span class="hljs-attr">        ioRegistries:</span> [com.baidu.hugegraph.io.HugeGraphIoRegistry]
+      }
+    }
+<span class="hljs-bullet">  -</span> { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerGremlinV2d0,
+<span class="hljs-attr">      config:</span> {
+<span class="hljs-attr">        serializeResultToString:</span> <span class="hljs-literal">false</span>,
+<span class="hljs-attr">        ioRegistries:</span> [com.baidu.hugegraph.io.HugeGraphIoRegistry]
+      }
+    }
+<span class="hljs-bullet">  -</span> { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV1d0,
+<span class="hljs-attr">      config:</span> {
+<span class="hljs-attr">        serializeResultToString:</span> <span class="hljs-literal">false</span>,
+<span class="hljs-attr">        ioRegistries:</span> [com.baidu.hugegraph.io.HugeGraphIoRegistry]
+      }
+    }
+<span class="hljs-attr">metrics:</span> {
+<span class="hljs-attr">  consoleReporter:</span> {enabled: <span class="hljs-literal">false</span>, interval: <span class="hljs-number">180000</span>},
+<span class="hljs-attr">  csvReporter:</span> {enabled: <span class="hljs-literal">true</span>, interval: <span class="hljs-number">180000</span>, fileName: /tmp/gremlin-server-metrics.csv},
+<span class="hljs-attr">  jmxReporter:</span> {enabled: <span class="hljs-literal">false</span>},
+<span class="hljs-attr">  slf4jReporter:</span> {enabled: <span class="hljs-literal">false</span>, interval: <span class="hljs-number">180000</span>},
+<span class="hljs-attr">  gangliaReporter:</span> {enabled: <span class="hljs-literal">false</span>, interval: <span class="hljs-number">180000</span>, addressingMode: MULTICAST},
+<span class="hljs-attr">  graphiteReporter:</span> {enabled: <span class="hljs-literal">false</span>, interval: <span class="hljs-number">180000</span>}
+}
+<span class="hljs-attr">maxInitialLineLength:</span> <span class="hljs-number">4096</span>
+<span class="hljs-attr">maxHeaderSize:</span> <span class="hljs-number">8192</span>
+<span class="hljs-attr">maxChunkSize:</span> <span class="hljs-number">8192</span>
+<span class="hljs-attr">maxContentLength:</span> <span class="hljs-number">65536</span>
+<span class="hljs-attr">maxAccumulationBufferComponents:</span> <span class="hljs-number">1024</span>
+<span class="hljs-attr">resultIterationBatchSize:</span> <span class="hljs-number">64</span>
+<span class="hljs-attr">writeBufferLowWaterMark:</span> <span class="hljs-number">32768</span>
+<span class="hljs-attr">writeBufferHighWaterMark:</span> <span class="hljs-number">65536</span>
+<span class="hljs-attr">ssl:</span> {
+<span class="hljs-attr">  enabled:</span> <span class="hljs-literal">false</span>
+}
+</code></pre>
+<p>&#x5C06;<code>channelizer: org.apache.tinkerpop.gremlin.server.channel.HttpChannelizer</code>&#x4FEE;&#x6539;&#x6210;<code>channelizer: org.apache.tinkerpop.gremlin.server.channel.WebSocketChannelizer</code>&#x6216;&#x76F4;&#x63A5;&#x6CE8;&#x91CA;&#xFF0C;&#x7136;&#x540E;&#x6309;&#x7167;&#x6B65;&#x9AA4;&#x542F;&#x52A8;Server&#x3002;</p>
+<p>&#x7136;&#x540E;&#x8FDB;&#x5165;gremlin-console</p>
+<pre><code class="lang-bash">bin/gremlin-console.sh 
+objc[5761]: Class JavaLaunchHelper is implemented <span class="hljs-keyword">in</span> both /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/bin/java (0x10ec584c0) and /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/libinstrument.dylib (0x10ecdc4e0). One of the two will be used. Which one is undefined.
+
+         \,,,/
+         (o o)
+-----oOOo-(3)-oOOo-----
+plugin activated: com.baidu.hugegraph
+plugin activated: tinkerpop.server
+plugin activated: tinkerpop.utilities
+plugin activated: tinkerpop.tinkergraph
+</code></pre>
+<p>&#x8FDE;&#x63A5;server&#xFF0C;&#x9700;&#x5728;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x6307;&#x5B9A;&#x8FDE;&#x63A5;&#x53C2;&#x6570;&#xFF0C;&#x5728;conf&#x76EE;&#x5F55;&#x4E0B;&#x6709;&#x4E00;&#x4E2A;&#x9ED8;&#x8BA4;&#x7684;remote.yaml</p>
+<pre><code class="lang-yaml"><span class="hljs-comment"># cat conf/remote.yaml</span>
+<span class="hljs-attr">hosts:</span> [localhost]
+<span class="hljs-attr">port:</span> <span class="hljs-number">8182</span>
+<span class="hljs-attr">serializer:</span> {
+<span class="hljs-attr">  className:</span> org.apache.tinkerpop.gremlin.driver.ser.GryoMessageSerializerV1d0,
+<span class="hljs-attr">  config:</span> {
+<span class="hljs-attr">    serializeResultToString:</span> <span class="hljs-literal">true</span>,
+<span class="hljs-attr">    ioRegistries:</span> [com.baidu.hugegraph.io.HugeGraphIoRegistry]
+  }
+}
+</code></pre>
+<pre><code class="lang-groovy">gremlin&gt; :remote connect tinkerpop.server conf/remote.yaml
+<span class="hljs-number">2018</span><span class="hljs-number">-01</span><span class="hljs-number">-15</span> <span class="hljs-number">15</span>:<span class="hljs-number">30</span>:<span class="hljs-number">31</span> <span class="hljs-number">11528</span> [main] [INFO ] org.apache.tinkerpop.gremlin.driver.Connection [] - Created <span class="hljs-keyword">new</span> connection <span class="hljs-keyword">for</span> <span class="hljs-string">ws:</span><span class="hljs-comment">//localhost:8182/gremlin</span>
+<span class="hljs-number">2018</span><span class="hljs-number">-01</span><span class="hljs-number">-15</span> <span class="hljs-number">15</span>:<span class="hljs-number">30</span>:<span class="hljs-number">31</span> <span class="hljs-number">11538</span> [main] [INFO ] org.apache.tinkerpop.gremlin.driver.Connection [] - Created <span class="hljs-keyword">new</span> connection <span class="hljs-keyword">for</span> <span class="hljs-string">ws:</span><span class="hljs-comment">//localhost:8182/gremlin</span>
+<span class="hljs-number">2018</span><span class="hljs-number">-01</span><span class="hljs-number">-15</span> <span class="hljs-number">15</span>:<span class="hljs-number">30</span>:<span class="hljs-number">31</span> <span class="hljs-number">11538</span> [main] [INFO ] org.apache.tinkerpop.gremlin.driver.ConnectionPool [] - Opening connection pool on Host{address=localhost<span class="hljs-regexp">/127.0.0.1:8182, hostUri=ws:/</span><span class="hljs-regexp">/localhost:8182/</span>gremlin} with core size of <span class="hljs-number">2</span>
+==&gt;Configured localhost/<span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">8182</span>
+</code></pre>
+<p>&#x8FDE;&#x63A5;&#x6210;&#x529F;&#x4E4B;&#x540E;&#xFF0C;&#x5728;console&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x4E2D;&#x80FD;&#x4F7F;&#x7528;&#x7684;&#x53D8;&#x91CF;&#x53EA;&#x6709;hugegraph&#x548C;hugegraph1&#x4E24;&#x4E2A;&#x56FE;&#x5BF9;&#x8C61;&#xFF08;&#x5728;gremlin-server.yaml&#x4E2D;&#x914D;&#x7F6E;&#xFF09;&#xFF0C;&#x5982;&#x679C;&#x60F3;&#x62E5;&#x6709;&#x66F4;&#x591A;&#x7684;&#x53D8;&#x91CF;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;<code>scripts/empty-sample.groovy</code>&#x4E2D;&#x6DFB;&#x52A0;&#xFF0C;&#x5982;:</p>
+<pre><code class="lang-groovy"><span class="hljs-keyword">import</span> org.apache.tinkerpop.gremlin.server.util.LifeCycleHook
+
+<span class="hljs-comment">// an init script that returns a Map allows explicit setting of global bindings.</span>
+<span class="hljs-keyword">def</span> globals = [:]
+
+<span class="hljs-comment">// defines a sample LifeCycleHook that prints some output to the Gremlin Server console.</span>
+<span class="hljs-comment">// note that the name of the key in the &quot;global&quot; map is unimportant.</span>
+globals &lt;&lt; [<span class="hljs-string">hook:</span> [
+        <span class="hljs-string">onStartUp :</span> { ctx -&gt;
+            ctx.logger.info(<span class="hljs-string">&quot;Executed once at startup of Gremlin Server.&quot;</span>)
+        },
+<span class="hljs-symbol">        onShutDown:</span> { ctx -&gt;
+            ctx.logger.info(<span class="hljs-string">&quot;Executed once at shutdown of Gremlin Server.&quot;</span>)
+        }
+] <span class="hljs-keyword">as</span> LifeCycleHook]
+
+<span class="hljs-comment">// define schema manger for hugegraph</span>
+schema = hugegraph.schema()
+<span class="hljs-comment">// define the default TraversalSource to bind queries to - this one will be named &quot;g&quot;.</span>
+g = hugegraph.traversal()
+</code></pre>
+<p>&#x8FD9;&#x6837;&#x5728;console&#x4E2D;&#x4FBF;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528;schema&#x548C;g&#x8FD9;&#x4E24;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x505A;&#x5143;&#x6570;&#x636E;&#x7684;&#x7BA1;&#x7406;&#x548C;&#x56FE;&#x7684;&#x67E5;&#x8BE2;&#x4E86;&#x3002;</p>
+<p>&#x4E0D;&#x5B9A;&#x4E49;&#x4E86;&#x4E5F;&#x6CA1;&#x5173;&#x7CFB;&#xFF0C;&#x56E0;&#x4E3A;&#x6240;&#x6709;&#x7684;&#x5BF9;&#x8C61;&#x90FD;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;graph&#x83B7;&#x5F97;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</p>
+<pre><code class="lang-groovy">gremlin&gt; :&gt; hugegraph.traversal().V()
+==&gt;v[<span class="hljs-number">2</span>:ripple]
+==&gt;v[<span class="hljs-number">1</span>:vadas]
+==&gt;v[<span class="hljs-number">1</span>:peter]
+==&gt;v[<span class="hljs-number">1</span>:josh]
+==&gt;v[<span class="hljs-number">1</span>:marko]
+==&gt;v[<span class="hljs-number">2</span>:lop]
+</code></pre>
+<p>&#x5728;Client/Server&#x6A21;&#x5F0F;&#x4E0B;&#xFF0C;&#x6240;&#x6709;&#x8DDF;Server&#x6709;&#x5173;&#x7684;&#x64CD;&#x4F5C;&#x90FD;&#x8981;&#x52A0;&#x4E0A;<code>:&gt;</code>&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x52A0;&#xFF0C;&#x8868;&#x793A;&#x5728;console&#x672C;&#x5730;&#x64CD;&#x4F5C;&#x3002;</p>
+<p>&#x8FD8;&#x53EF;&#x4EE5;&#x628A;&#x591A;&#x6761;&#x8BED;&#x53E5;&#x653E;&#x5728;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x53D8;&#x91CF;&#x4E2D;&#xFF0C;&#x7136;&#x540E;&#x4E00;&#x6B21;&#x6027;&#x53D1;&#x7ED9;server&#xFF1A;</p>
+<pre><code class="lang-groovy">gremlin&gt; script = <span class="hljs-string">&quot;&quot;&quot;
+graph = hugegraph;
+marko = graph.addVertex(T.label, &quot;person&quot;, &quot;name&quot;, &quot;marko&quot;, &quot;age&quot;, 29, &quot;city&quot;, &quot;Beijing&quot;);
+vadas = graph.addVertex(T.label, &quot;person&quot;, &quot;name&quot;, &quot;vadas&quot;, &quot;age&quot;, 27, &quot;city&quot;, &quot;Hongkong&quot;);
+lop = graph.addVertex(T.label, &quot;software&quot;, &quot;name&quot;, &quot;lop&quot;, &quot;lang&quot;, &quot;java&quot;, &quot;price&quot;, 328);
+josh = graph.addVertex(T.label, &quot;person&quot;, &quot;name&quot;, &quot;josh&quot;, &quot;age&quot;, 32, &quot;city&quot;, &quot;Beijing&quot;);
+ripple = graph.addVertex(T.label, &quot;software&quot;, &quot;name&quot;, &quot;ripple&quot;, &quot;lang&quot;, &quot;java&quot;, &quot;price&quot;, 199);
+peter = graph.addVertex(T.label, &quot;person&quot;, &quot;name&quot;, &quot;peter&quot;, &quot;age&quot;, 35, &quot;city&quot;, &quot;Shanghai&quot;);
+
+marko.addEdge(&quot;knows&quot;, vadas, &quot;date&quot;, &quot;20160110&quot;, &quot;weight&quot;, 0.5);
+marko.addEdge(&quot;knows&quot;, josh, &quot;date&quot;, &quot;20130220&quot;, &quot;weight&quot;, 1.0);
+marko.addEdge(&quot;created&quot;, lop, &quot;date&quot;, &quot;20171210&quot;, &quot;weight&quot;, 0.4);
+josh.addEdge(&quot;created&quot;, lop, &quot;date&quot;, &quot;20091111&quot;, &quot;weight&quot;, 0.4);
+josh.addEdge(&quot;created&quot;, ripple, &quot;date&quot;, &quot;20171210&quot;, &quot;weight&quot;, 1.0);
+peter.addEdge(&quot;created&quot;, lop, &quot;date&quot;, &quot;20170324&quot;, &quot;weight&quot;, 0.2);
+
+graph.tx().commit();
+
+g = graph.traversal();
+g.V().toList().size();
+&quot;&quot;&quot;</span>
+
+gremlin&gt; :&gt; <span class="hljs-meta">@script</span>
+==&gt;<span class="hljs-number">6</span>
+</code></pre>
+<p>&#x66F4;&#x591A;&#x5173;&#x4E8E;gremlin-console&#x7684;&#x4F7F;&#x7528;&#xFF0C;&#x8BF7;&#x53C2;&#x8003;<a href="http://tinkerpop.apache.org/docs/current/reference/" target="_blank">Tinkerpop&#x5B98;&#x7F51;</a></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+                
+
+
+  
+	<footer>
+
+	</footer>
+
+
+            </div>
+
+            
+                
+                <a href="hugegraph-client.html" class="navigation navigation-prev " aria-label="Previous page: Java Client">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../performance/hugegraph-benchmark-0.5.6.html" class="navigation navigation-next " aria-label="Next page: HugeGraph Benchmark Performance">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Gremlin Console","level":"5.3","depth":1,"next":{"title":"HugeGraph Benchmark Performance","level":"6.1","depth":1,"path":"performance/hugegraph-benchmark-0.5.6.md","ref":"performance/hugegraph-benchmark-0.5.6.md","articles":[]},"previous":{"title":"Java Client","level":"5.2","depth":1,"path":"clients/hugegraph-client.md","ref":"clients/hugegraph-client.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"clients/gremlin-console.md","mtime":"2018-07-28T06:56:34.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-28T07:00:54.802Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    
+        <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.slim.min.js"></script>
+        <script src="//cdn.bootcss.com/tether/1.4.0/js/tether.min.js"></script>
+        <script src="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+    
+
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

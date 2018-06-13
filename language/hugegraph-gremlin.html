@@ -1,0 +1,1350 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Gremlin Query Language · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+
+    
+        <link rel="stylesheet" 
+            href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+    
+
+    
+        <link rel="stylesheet" href="../gitbook/cuav-style.css">
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    
+    
+        <link rel="shortcut icon" 
+            href="../images/favicon.ico" type="image/x-icon">
+    
+
+    
+    <link rel="next" href="hugegraph-example.html" />
+    
+    
+    <link rel="prev" href="../guides/faq.html" />
+    
+
+    </head>
+    <body>
+        
+
+
+
+	
+	
+	
+	<nav
+			class="navbar fixed-top navbar-inverse background-inverse navbar-toggleable-md">
+		
+
+		<a class="navbar-brand" href="javascript:;">
+			
+			
+				<img src="../images/logo.png" 
+					height="32" class="d-inline-block align-top" 
+					alt="HugeGraph Database" />
+			
+		</a>
+
+		
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<span class="mr-auto"></span>
+				<ul id="cuav-nav" class="navbar-nav text-center text-lg-left">
+					
+				</ul>
+				<span style="width: 6rem"></span>
+			</div>
+			
+		
+	</nav>
+
+
+<div class="book">
+    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Gremlin Query Language</a>
+    </h1>
+</div>
+
+
+
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../download.html">
+            
+                <a href="../download.html">
+            
+                    
+                    Download
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Quickstart</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../quickstart/hugegraph-server.html">
+            
+                <a href="../quickstart/hugegraph-server.html">
+            
+                    
+                    Install HugeGraph-Server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../quickstart/hugegraph-loader.html">
+            
+                <a href="../quickstart/hugegraph-loader.html">
+            
+                    
+                    Load data with HugeGraph-Loader
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../quickstart/hugegraph-tools.html">
+            
+                <a href="../quickstart/hugegraph-tools.html">
+            
+                    
+                    Manage with HugeGraph-Tools
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../quickstart/hugegraph-studio.html">
+            
+                <a href="../quickstart/hugegraph-studio.html">
+            
+                    
+                    Display with HugeGraph-Studio
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../quickstart/hugegraph-client.html">
+            
+                <a href="../quickstart/hugegraph-client.html">
+            
+                    
+                    Develop with HugeGraph-Client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" data-path="../quickstart/hugegraph-spark.html">
+            
+                <a href="../quickstart/hugegraph-spark.html">
+            
+                    
+                    Analysis with HugeGraph-Spark
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Guides</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../guides/architectural.html">
+            
+                <a href="../guides/architectural.html">
+            
+                    
+                    Architecture Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../guides/desgin-concept.html">
+            
+                <a href="../guides/desgin-concept.html">
+            
+                    
+                    Design Concepts
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../guides/config-guide.html">
+            
+                <a href="../guides/config-guide.html">
+            
+                    
+                    Configuration Guide
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="../guides/config-option.html">
+            
+                <a href="../guides/config-option.html">
+            
+                    
+                    Config Options
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.5" data-path="../guides/custom-plugin.html">
+            
+                <a href="../guides/custom-plugin.html">
+            
+                    
+                    Custom Plugins
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.6" data-path="../guides/faq.html">
+            
+                <a href="../guides/faq.html">
+            
+                    
+                    FAQ
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Query Language</li>
+        
+        
+    
+        <li class="chapter active" data-level="4.1" data-path="hugegraph-gremlin.html">
+            
+                <a href="hugegraph-gremlin.html">
+            
+                    
+                    Gremlin Query Language
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="hugegraph-example.html">
+            
+                <a href="hugegraph-example.html">
+            
+                    
+                    HugeGraph Examples
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Clients</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="../clients/hugegraph-api.html">
+            
+                <a href="../clients/hugegraph-api.html">
+            
+                    
+                    Restful API
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.1.1" data-path="../clients/restful-api/propertykey.html">
+            
+                <a href="../clients/restful-api/propertykey.html">
+            
+                    
+                    PropertyKey
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.2" data-path="../clients/restful-api/vertexlabel.html">
+            
+                <a href="../clients/restful-api/vertexlabel.html">
+            
+                    
+                    VertexLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.3" data-path="../clients/restful-api/edgelabel.html">
+            
+                <a href="../clients/restful-api/edgelabel.html">
+            
+                    
+                    EdgeLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.4" data-path="../clients/restful-api/indexlabel.html">
+            
+                <a href="../clients/restful-api/indexlabel.html">
+            
+                    
+                    IndexLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.5" data-path="../clients/restful-api/vertex.html">
+            
+                <a href="../clients/restful-api/vertex.html">
+            
+                    
+                    Vertex
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.6" data-path="../clients/restful-api/edge.html">
+            
+                <a href="../clients/restful-api/edge.html">
+            
+                    
+                    Edge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.7" data-path="../clients/restful-api/traverser.html">
+            
+                <a href="../clients/restful-api/traverser.html">
+            
+                    
+                    Traverser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.8" data-path="../clients/restful-api/variable.html">
+            
+                <a href="../clients/restful-api/variable.html">
+            
+                    
+                    Variable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.9" data-path="../clients/restful-api/graph.html">
+            
+                <a href="../clients/restful-api/graph.html">
+            
+                    
+                    Graph
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.10" data-path="../clients/restful-api/gremlin.html">
+            
+                <a href="../clients/restful-api/gremlin.html">
+            
+                    
+                    Gremlin
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.11" data-path="../clients/restful-api/other.html">
+            
+                <a href="../clients/restful-api/other.html">
+            
+                    
+                    Other
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="../clients/hugegraph-client.html">
+            
+                <a href="../clients/hugegraph-client.html">
+            
+                    
+                    Java Client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="../clients/gremlin-console.html">
+            
+                <a href="../clients/gremlin-console.html">
+            
+                    
+                    Gremlin Console
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Performance</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="../performance/hugegraph-benchmark-0.5.6.html">
+            
+                <a href="../performance/hugegraph-benchmark-0.5.6.html">
+            
+                    
+                    HugeGraph Benchmark Performance
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="../performance/hugegraph-api-performance.html">
+            
+                <a href="../performance/hugegraph-api-performance.html">
+            
+                    
+                    HugeGraph API Performance
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="6.2.1" data-path="../performance/hugegraph-api-0.5.6-RocksDB.html">
+            
+                <a href="../performance/hugegraph-api-0.5.6-RocksDB.html">
+            
+                    
+                    v0.5.6 Stand-alone(RocksDB)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.2" data-path="../performance/hugegraph-api-0.5.6-Cassandra.html">
+            
+                <a href="../performance/hugegraph-api-0.5.6-Cassandra.html">
+            
+                    
+                    v0.5.6 Cluster(Cassandra)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.3" data-path="../performance/hugegraph-api-0.4.4.html">
+            
+                <a href="../performance/hugegraph-api-0.4.4.html">
+            
+                    
+                    v0.4.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.4" data-path="../performance/hugegraph-api-0.2.html">
+            
+                <a href="../performance/hugegraph-api-0.2.html">
+            
+                    
+                    v0.2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="../performance/hugegraph-loader-performance.html">
+            
+                <a href="../performance/hugegraph-loader-performance.html">
+            
+                    
+                    HugeGraph-Loader Performance
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">ChangeLogs</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="../changelog/hugegraph-0.6.1-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.6.1-release-notes.html">
+            
+                    
+                    Release-0.6.1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="../changelog/hugegraph-0.5.6-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.5.6-release-notes.html">
+            
+                    
+                    Release-0.5.6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="../changelog/hugegraph-0.4.4-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.4.4-release-notes.html">
+            
+                    
+                    Release-0.4.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.4" data-path="../changelog/hugegraph-0.3.3-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.3.3-release-notes.html">
+            
+                    
+                    Release-0.3.3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5" data-path="../changelog/hugegraph-0.2.4-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.2.4-release-notes.html">
+            
+                    
+                    Release-0.2.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.6" data-path="../changelog/hugegraph-0.2-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.2-release-notes.html">
+            
+                    
+                    Release-0.2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="hugegraph-gremlin">HugeGraph Gremlin</h2>
+<p>HugeGraph&#x652F;&#x6301;<a href="https://tinkerpop.apache.org" target="_blank">Apache TinkerPop 3</a>&#x7684;&#x56FE;&#x5F62;&#x904D;&#x5386;&#x67E5;&#x8BE2;&#x8BED;&#x8A00;<a href="https://tinkerpop.apache.org/gremlin.html" target="_blank">Gremlin</a>&#x3002; SQL&#x662F;&#x5173;&#x7CFB;&#x578B;&#x6570;&#x636E;&#x5E93;&#x67E5;&#x8BE2;&#x8BED;&#x8A00;&#xFF0C;&#x800C;Gremlin&#x662F;&#x4E00;&#x79CD;&#x901A;&#x7528;&#x7684;&#x56FE;&#x6570;&#x636E;&#x5E93;&#x67E5;&#x8BE2;&#x8BED;&#x8A00;&#xFF0C;Gremlin&#x53EF;&#x7528;&#x4E8E;&#x521B;&#x5EFA;&#x56FE;&#x7684;&#x5B9E;&#x4F53;&#xFF08;Vertex&#x548C;Edge&#xFF09;&#x3001;&#x4FEE;&#x6539;&#x5B9E;&#x4F53;&#x5185;&#x90E8;&#x5C5E;&#x6027;&#x3001;&#x5220;&#x9664;&#x5B9E;&#x4F53;&#xFF0C;&#x4E5F;&#x53EF;&#x6267;&#x884C;&#x56FE;&#x7684;&#x67E5;&#x8BE2;&#x64CD;&#x4F5C;&#x3002;</p>
+<p>&#x5EFA;&#x8BAE;&#x901A;&#x8FC7;Gremlin&#x6267;&#x884C;&#x56FE;&#x7684;&#x67E5;&#x8BE2;&#x548C;&#x904D;&#x5386;&#xFF0C;&#x800C;&#x5173;&#x4E8E;&#x56FE;&#x7684;&#x589E;&#x52A0;&#x3001;&#x4FEE;&#x6539;&#x548C;&#x5220;&#x9664;&#x7B49;&#x66F4;&#x65B0;&#x64CD;&#x4F5C;&#x5219;&#x901A;&#x8FC7;HugeGraph&#x7684;Graph Api&#x63A5;&#x53E3;&#x8FDB;&#x884C;&#x3002;&#x56E0;&#x4E3A;Graph Api&#x5BF9;&#x589E;&#x52A0;&#x3001;&#x4FEE;&#x6539;&#x548C;&#x5220;&#x9664;&#x64CD;&#x4F5C;&#x505A;&#x4E86;&#x5F88;&#x591A;&#x4F18;&#x5316;&#xFF0C;&#x6267;&#x884C;&#x6548;&#x7387;&#x6BD4;Gremlin&#x66F4;&#x52A0;&#x9AD8;&#x6548;&#x3002;</p>
+<h3 id="tinkerpop-features">TinkerPop Features</h3>
+<p>HugeGraph&#x5B9E;&#x73B0;&#x4E86;TinkerPop&#x6846;&#x67B6;&#xFF0C;&#x4F46;&#x662F;&#x5E76;&#x6CA1;&#x6709;&#x5B9E;&#x73B0;TinkerPop&#x6240;&#x6709;&#x7684;&#x7279;&#x6027;&#x3002;</p>
+<p>&#x4E0B;&#x8868;&#x5217;&#x51FA;HugeGraph&#x5BF9;TinkerPop&#x5404;&#x79CD;&#x7279;&#x6027;&#x7684;&#x652F;&#x6301;&#x60C5;&#x51B5;&#xFF1A;</p>
+<h3 id="graph-features">Graph Features</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Computer</td>
+<td>Determines if the {@code Graph} implementation supports {@link GraphComputer} based processing</td>
+<td>false</td>
+</tr>
+<tr>
+<td>Transactions</td>
+<td>Determines if the {@code Graph} implementations supports transactions.</td>
+<td>true</td>
+</tr>
+<tr>
+<td>Persistence</td>
+<td>Determines if the {@code Graph} implementation supports persisting it&apos;s contents natively to disk.This feature does not refer to every graph&apos;s ability to write to disk via the Gremlin IO packages(.e.g. GraphML), unless the graph natively persists to disk via those options somehow. For example,TinkerGraph does not support this feature as it is a pure in-sideEffects graph.</td>
+<td>true</td>
+</tr>
+<tr>
+<td>ThreadedTransactions</td>
+<td>Determines if the {@code Graph} implementation supports threaded transactions which allow a transactionto be executed across multiple threads via {@link Transaction#createThreadedTx()}.</td>
+<td>false</td>
+</tr>
+<tr>
+<td>ConcurrentAccess</td>
+<td>Determines if the {@code Graph} implementation supports more than one connection to the same instance at the same time. For example, Neo4j embedded does not support this feature because concurrent access to the same database files by multiple instances is not possible. However, Neo4j HA could support this feature as each new {@code Graph} instance coordinates with the Neo4j cluster allowing multiple instances to operate on the same database.</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<h3 id="vertex-features">Vertex Features</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UserSuppliedIds</td>
+<td>Determines if an {@link Element} can have a user defined identifier. Implementation that do not support this feature will be expected to auto-generate unique identifiers. In other words, if the {@link Graph} allows {@code graph.addVertex(id,x)} to work and thus set the identifier of the newly added {@link Vertex} to the value of {@code x} then this feature should return true. In this case, {@code x} is assumed to be an identifier datat ype that the {@link Graph} will accept.</td>
+<td>false</td>
+</tr>
+<tr>
+<td>NumericIds</td>
+<td>Determines if an {@link Element} has numeric identifiers as their internal representation. In other words,if the value returned from {@link Element#id()} is a numeric value then this method should be return {@code true}. Note that this feature is most generally used for determining the appropriate tests to execute in the Gremlin Test Suite.</td>
+<td>false</td>
+</tr>
+<tr>
+<td>StringIds</td>
+<td>Determines if an {@link Element} has string identifiers as their internal representation. In other words, if the value returned from {@link Element#id()} is a string value then this method should be return {@code true}. Note that this feature is most generally used for determining the appropriate tests to execute in the Gremlin Test Suite.</td>
+<td>false</td>
+</tr>
+<tr>
+<td>UuidIds</td>
+<td>Determines if an {@link Element} has UUID identifiers as their internal representation. In other words,if the value returned from {@link Element#id()} is a {@link UUID} value then this method should be return {@code true}.Note that this feature is most generally used for determining the appropriate tests to execute in the Gremlin Test Suite.</td>
+<td>false</td>
+</tr>
+<tr>
+<td>CustomIds</td>
+<td>Determines if an {@link Element} has a specific custom object as their internal representation.In other words, if the value returned from {@link Element#id()} is a type defined by the graph implementations, such as OrientDB&apos;s {@code Rid}, then this method should be return {@code true}.Note that this feature is most generally used for determining the appropriate tests to execute in the Gremlin Test Suite.</td>
+<td>false</td>
+</tr>
+<tr>
+<td>AnyIds</td>
+<td>Determines if an {@link Element} any Java object is a suitable identifier. TinkerGraph is a good example of a {@link Graph} that can support this feature, as it can use any {@link Object} as a value for the identifier. Note that this feature is most generally used for determining the appropriate tests to execute in the Gremlin Test Suite. This setting should only return {@code true} if {@link #supportsUserSuppliedIds()} is {@code true}.</td>
+<td>false</td>
+</tr>
+<tr>
+<td>AddProperty</td>
+<td>Determines if an {@link Element} allows properties to be added. This feature is set independently from supporting &quot;data types&quot; and refers to support of calls to {@link Element#property(String, Object)}.</td>
+<td>true</td>
+</tr>
+<tr>
+<td>RemoveProperty</td>
+<td>Determines if an {@link Element} allows properties to be removed.</td>
+<td>true</td>
+</tr>
+<tr>
+<td>AddVertices</td>
+<td>Determines if a {@link Vertex} can be added to the {@code Graph}.</td>
+<td>true</td>
+</tr>
+<tr>
+<td>MultiProperties</td>
+<td>Determines if a {@link Vertex} can support multiple properties with the same key.</td>
+<td>false</td>
+</tr>
+<tr>
+<td>DuplicateMultiProperties</td>
+<td>Determines if a {@link Vertex} can support non-unique values on the same key. For this valueto be {@code true}, then {@link #supportsMetaProperties()} must also return true. By default this method, just returns what {@link #supportsMultiProperties()} returns.</td>
+<td>false</td>
+</tr>
+<tr>
+<td>MetaProperties</td>
+<td>Determines if a {@link Vertex} can support properties on vertex properties. It is assumed that a graph will support all the same data types for meta-properties that are supported for regular properties.</td>
+<td>false</td>
+</tr>
+<tr>
+<td>RemoveVertices</td>
+<td>Determines if a {@link Vertex} can be removed from the {@code Graph}.</td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+<h3 id="edge-features">Edge Features</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UserSuppliedIds</td>
+<td>Determines if an {@link Element} can have a user defined identifier. Implementation that do not support this feature will be expected to auto-generate unique identifiers. In other words, if the {@link Graph} allows {@code graph.addVertex(id,x)} to work and thus set the identifier of the newly added {@link Vertex} to the value of {@code x} then this feature should return true. In this case, {@code x} is assumed to be an identifier datat ype that the {@link Graph} will accept.</td>
+<td>false</td>
+</tr>
+<tr>
+<td>NumericIds</td>
+<td>Determines if an {@link Element} has numeric identifiers as their internal representation. In other words,if the value returned from {@link Element#id()} is a numeric value then this method should be return {@code true}. Note that this feature is most generally used for determining the appropriate tests to execute in the Gremlin Test Suite.</td>
+<td>false</td>
+</tr>
+<tr>
+<td>StringIds</td>
+<td>Determines if an {@link Element} has string identifiers as their internal representation. In other words, if the value returned from {@link Element#id()} is a string value then this method should be return {@code true}. Note that this feature is most generally used for determining the appropriate tests to execute in the Gremlin Test Suite.</td>
+<td>false</td>
+</tr>
+<tr>
+<td>UuidIds</td>
+<td>Determines if an {@link Element} has UUID identifiers as their internal representation. In other words,if the value returned from {@link Element#id()} is a {@link UUID} value then this method should be return {@code true}.Note that this feature is most generally used for determining the appropriate tests to execute in the Gremlin Test Suite.</td>
+<td>false</td>
+</tr>
+<tr>
+<td>CustomIds</td>
+<td>Determines if an {@link Element} has a specific custom object as their internal representation.In other words, if the value returned from {@link Element#id()} is a type defined by the graph implementations, such as OrientDB&apos;s {@code Rid}, then this method should be return {@code true}.Note that this feature is most generally used for determining the appropriate tests to execute in the Gremlin Test Suite.</td>
+<td>false</td>
+</tr>
+<tr>
+<td>AnyIds</td>
+<td>Determines if an {@link Element} any Java object is a suitable identifier. TinkerGraph is a good example of a {@link Graph} that can support this feature, as it can use any {@link Object} as a value for the identifier. Note that this feature is most generally used for determining the appropriate tests to execute in the Gremlin Test Suite. This setting should only return {@code true} if {@link #supportsUserSuppliedIds()} is {@code true}.</td>
+<td>false</td>
+</tr>
+<tr>
+<td>AddProperty</td>
+<td>Determines if an {@link Element} allows properties to be added. This feature is set independently from supporting &quot;data types&quot; and refers to support of calls to {@link Element#property(String, Object)}.</td>
+<td>true</td>
+</tr>
+<tr>
+<td>RemoveProperty</td>
+<td>Determines if an {@link Element} allows properties to be removed.</td>
+<td>true</td>
+</tr>
+<tr>
+<td>AddEdges</td>
+<td>Determines if an {@link Edge} can be added to a {@code Vertex}.</td>
+<td>true</td>
+</tr>
+<tr>
+<td>RemoveEdges</td>
+<td>Determines if an {@link Edge} can be removed from a {@code Vertex}.</td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+<h3 id="data-type-features">Data Type Features</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BooleanValues</td>
+<td></td>
+<td>true</td>
+</tr>
+<tr>
+<td>ByteValues</td>
+<td></td>
+<td>true</td>
+</tr>
+<tr>
+<td>DoubleValues</td>
+<td></td>
+<td>true</td>
+</tr>
+<tr>
+<td>FloatValues</td>
+<td></td>
+<td>true</td>
+</tr>
+<tr>
+<td>IntegerValues</td>
+<td></td>
+<td>true</td>
+</tr>
+<tr>
+<td>LongValues</td>
+<td></td>
+<td>true</td>
+</tr>
+<tr>
+<td>MapValues</td>
+<td>Supports setting of a {@code Map} value. The assumption is that the {@code Map} can containarbitrary serializable values that may or may not be defined as a feature itself</td>
+<td>false</td>
+</tr>
+<tr>
+<td>MixedListValues</td>
+<td>Supports setting of a {@code List} value. The assumption is that the {@code List} can containarbitrary serializable values that may or may not be defined as a feature itself. As this{@code List} is &quot;mixed&quot; it does not need to contain objects of the same type.</td>
+<td>false</td>
+</tr>
+<tr>
+<td>BooleanArrayValues</td>
+<td></td>
+<td>false</td>
+</tr>
+<tr>
+<td>ByteArrayValues</td>
+<td></td>
+<td>true</td>
+</tr>
+<tr>
+<td>DoubleArrayValues</td>
+<td></td>
+<td>false</td>
+</tr>
+<tr>
+<td>FloatArrayValues</td>
+<td></td>
+<td>false</td>
+</tr>
+<tr>
+<td>IntegerArrayValues</td>
+<td></td>
+<td>false</td>
+</tr>
+<tr>
+<td>LongArrayValues</td>
+<td></td>
+<td>false</td>
+</tr>
+<tr>
+<td>SerializableValues</td>
+<td></td>
+<td>false</td>
+</tr>
+<tr>
+<td>StringArrayValues</td>
+<td></td>
+<td>false</td>
+</tr>
+<tr>
+<td>StringValues</td>
+<td></td>
+<td>true</td>
+</tr>
+<tr>
+<td>UniformListValues</td>
+<td>Supports setting of a {@code List} value. The assumption is that the {@code List} can containarbitrary serializable values that may or may not be defined as a feature itself. As this{@code List} is &quot;uniform&quot; it must contain objects of the same type.</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<h3 id="gremlin&#x7684;&#x6B65;&#x9AA4;">Gremlin&#x7684;&#x6B65;&#x9AA4;</h3>
+<p>HugeGraph&#x652F;&#x6301;Gremlin&#x7684;&#x6240;&#x6709;&#x6B65;&#x9AA4;&#x3002;&#x6709;&#x5173;Gremlin&#x7684;&#x5B8C;&#x6574;&#x53C2;&#x8003;&#x4FE1;&#x606F;&#xFF0C;&#x8BF7;&#x53C2;&#x4E0E;<a href="http://tinkerpop.apache.org/docs/current/reference/" target="_blank">Gremlin&#x5B98;&#x7F51;</a>&#x3002;</p>
+<table>
+<thead>
+<tr>
+<th>&#x6B65;&#x9AA4;</th>
+<th>&#x8BF4;&#x660E;</th>
+<th>&#x6587;&#x6863;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>addE</td>
+<td>&#x5728;&#x4E24;&#x4E2A;&#x9876;&#x70B9;&#x4E4B;&#x95F4;&#x6DFB;&#x52A0;&#x8FB9;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#addedge-step" target="_blank">addE step</a></td>
+</tr>
+<tr>
+<td>addV</td>
+<td>&#x5C06;&#x9876;&#x70B9;&#x6DFB;&#x52A0;&#x5230;&#x56FE;&#x5F62;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#addvertex-step" target="_blank">addV step</a></td>
+</tr>
+<tr>
+<td>and</td>
+<td>&#x786E;&#x4FDD;&#x6240;&#x6709;&#x904D;&#x5386;&#x90FD;&#x8FD4;&#x56DE;&#x503C;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#add-step" target="_blank">and step</a></td>
+</tr>
+<tr>
+<td>as</td>
+<td>&#x7528;&#x4E8E;&#x5411;&#x6B65;&#x9AA4;&#x7684;&#x8F93;&#x51FA;&#x5206;&#x914D;&#x53D8;&#x91CF;&#x7684;&#x6B65;&#x9AA4;&#x8C03;&#x5236;&#x5668;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#as-step" target="_blank">as step</a></td>
+</tr>
+<tr>
+<td>by</td>
+<td>&#x4E0E;<code>group</code>&#x548C;<code>order</code>&#x914D;&#x5408;&#x4F7F;&#x7528;&#x7684;&#x6B65;&#x9AA4;&#x8C03;&#x5236;&#x5668;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#by-step" target="_blank">by step</a></td>
+</tr>
+<tr>
+<td>coalesce</td>
+<td>&#x8FD4;&#x56DE;&#x7B2C;&#x4E00;&#x4E2A;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x7684;&#x904D;&#x5386;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#coalesce-step" target="_blank">coalesce step</a></td>
+</tr>
+<tr>
+<td>constant</td>
+<td>&#x8FD4;&#x56DE;&#x5E38;&#x91CF;&#x503C;&#x3002; &#x4E0E;<code>coalesce</code>&#x914D;&#x5408;&#x4F7F;&#x7528;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#constant-step" target="_blank">constant step</a></td>
+</tr>
+<tr>
+<td>count</td>
+<td>&#x4ECE;&#x904D;&#x5386;&#x8FD4;&#x56DE;&#x8BA1;&#x6570;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#addedge-step" target="_blank">count step</a></td>
+</tr>
+<tr>
+<td>dedup</td>
+<td>&#x8FD4;&#x56DE;&#x5DF2;&#x5220;&#x9664;&#x91CD;&#x590D;&#x5185;&#x5BB9;&#x7684;&#x503C;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#dedup-step" target="_blank">dedup step</a></td>
+</tr>
+<tr>
+<td>drop</td>
+<td>&#x4E22;&#x5F03;&#x503C;&#xFF08;&#x9876;&#x70B9;/&#x8FB9;&#x7F18;&#xFF09;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#drop-step" target="_blank">drop step</a></td>
+</tr>
+<tr>
+<td>fold</td>
+<td>&#x5145;&#x5F53;&#x7528;&#x4E8E;&#x8BA1;&#x7B97;&#x7ED3;&#x679C;&#x805A;&#x5408;&#x503C;&#x7684;&#x5C4F;&#x969C;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#fold-step" target="_blank">fold step</a></td>
+</tr>
+<tr>
+<td>group</td>
+<td>&#x6839;&#x636E;&#x6307;&#x5B9A;&#x7684;&#x6807;&#x7B7E;&#x5C06;&#x503C;&#x5206;&#x7EC4;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#group-step" target="_blank">group step</a></td>
+</tr>
+<tr>
+<td>has</td>
+<td>&#x7528;&#x4E8E;&#x7B5B;&#x9009;&#x5C5E;&#x6027;&#x3001;&#x9876;&#x70B9;&#x548C;&#x8FB9;&#x7F18;&#x3002; &#x652F;&#x6301;<code>hasLabel</code>&#x3001;<code>hasId</code>&#x3001;<code>hasNot</code> &#x548C; <code>has</code> &#x53D8;&#x4F53;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#has-step" target="_blank">has step</a></td>
+</tr>
+<tr>
+<td>inject</td>
+<td>&#x5C06;&#x503C;&#x6CE8;&#x5165;&#x6D41;&#x4E2D;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#inject-step" target="_blank">inject step</a></td>
+</tr>
+<tr>
+<td>is</td>
+<td>&#x7528;&#x4E8E;&#x901A;&#x8FC7;&#x5E03;&#x5C14;&#x8868;&#x8FBE;&#x5F0F;&#x6267;&#x884C;&#x7B5B;&#x9009;&#x5668;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#is-step" target="_blank">is step</a></td>
+</tr>
+<tr>
+<td>limit</td>
+<td>&#x7528;&#x4E8E;&#x9650;&#x5236;&#x904D;&#x5386;&#x4E2D;&#x7684;&#x9879;&#x6570;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#limit-step" target="_blank">limit step</a></td>
+</tr>
+<tr>
+<td>local</td>
+<td>&#x672C;&#x5730;&#x5305;&#x88C5;&#x904D;&#x5386;&#x7684;&#x67D0;&#x4E2A;&#x90E8;&#x5206;&#xFF0C;&#x7C7B;&#x4F3C;&#x4E8E;&#x5B50;&#x67E5;&#x8BE2;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#local-step" target="_blank">local step</a></td>
+</tr>
+<tr>
+<td>not</td>
+<td>&#x7528;&#x4E8E;&#x751F;&#x6210;&#x7B5B;&#x9009;&#x5668;&#x7684;&#x6C42;&#x53CD;&#x7ED3;&#x679C;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#not-step" target="_blank">not step</a></td>
+</tr>
+<tr>
+<td>optional</td>
+<td>&#x5982;&#x679C;&#x751F;&#x6210;&#x4E86;&#x67D0;&#x4E2A;&#x7ED3;&#x679C;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;&#x6307;&#x5B9A;&#x904D;&#x5386;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x5426;&#x5219;&#x8FD4;&#x56DE;&#x8C03;&#x7528;&#x5143;&#x7D20;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#optional-step" target="_blank">optional step</a></td>
+</tr>
+<tr>
+<td>or</td>
+<td>&#x786E;&#x4FDD;&#x81F3;&#x5C11;&#x6709;&#x4E00;&#x4E2A;&#x904D;&#x5386;&#x4F1A;&#x8FD4;&#x56DE;&#x503C;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#or-step" target="_blank">or step</a></td>
+</tr>
+<tr>
+<td>order</td>
+<td>&#x6309;&#x6307;&#x5B9A;&#x7684;&#x6392;&#x5E8F;&#x987A;&#x5E8F;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#order-step" target="_blank">order step</a></td>
+</tr>
+<tr>
+<td>path</td>
+<td>&#x8FD4;&#x56DE;&#x904D;&#x5386;&#x7684;&#x5B8C;&#x6574;&#x8DEF;&#x5F84;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#addedge-step" target="_blank">path step</a></td>
+</tr>
+<tr>
+<td>project</td>
+<td>&#x5C06;&#x5C5E;&#x6027;&#x6295;&#x5F71;&#x4E3A;&#x6620;&#x5C04;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#project-step" target="_blank">project step</a></td>
+</tr>
+<tr>
+<td>properties</td>
+<td>&#x8FD4;&#x56DE;&#x6307;&#x5B9A;&#x6807;&#x7B7E;&#x7684;&#x5C5E;&#x6027;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#properties-step" target="_blank">properties step</a></td>
+</tr>
+<tr>
+<td>range</td>
+<td>&#x6839;&#x636E;&#x6307;&#x5B9A;&#x7684;&#x503C;&#x8303;&#x56F4;&#x8FDB;&#x884C;&#x7B5B;&#x9009;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#range-step" target="_blank">range step</a></td>
+</tr>
+<tr>
+<td>repeat</td>
+<td>&#x5C06;&#x6B65;&#x9AA4;&#x91CD;&#x590D;&#x6307;&#x5B9A;&#x7684;&#x6B21;&#x6570;&#x3002; &#x7528;&#x4E8E;&#x5FAA;&#x73AF;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#repeat-step" target="_blank">repeat step</a></td>
+</tr>
+<tr>
+<td>sample</td>
+<td>&#x7528;&#x4E8E;&#x5BF9;&#x904D;&#x5386;&#x8FD4;&#x56DE;&#x7684;&#x7ED3;&#x679C;&#x91C7;&#x6837;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#sample-step" target="_blank">sample step</a></td>
+</tr>
+<tr>
+<td>select</td>
+<td>&#x7528;&#x4E8E;&#x6295;&#x5F71;&#x904D;&#x5386;&#x8FD4;&#x56DE;&#x7684;&#x7ED3;&#x679C;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#select-step" target="_blank">select step</a></td>
+</tr>
+<tr>
+<td>store</td>
+<td>&#x7528;&#x4E8E;&#x904D;&#x5386;&#x8FD4;&#x56DE;&#x7684;&#x975E;&#x963B;&#x585E;&#x805A;&#x5408;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#store-step" target="_blank">store step</a></td>
+</tr>
+<tr>
+<td>tree</td>
+<td>&#x5C06;&#x9876;&#x70B9;&#x4E2D;&#x7684;&#x8DEF;&#x5F84;&#x805A;&#x5408;&#x5230;&#x6811;&#x4E2D;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#tree-step" target="_blank">tree step</a></td>
+</tr>
+<tr>
+<td>unfold</td>
+<td>&#x5C06;&#x8FED;&#x4EE3;&#x5668;&#x4F5C;&#x4E3A;&#x6B65;&#x9AA4;&#x5C55;&#x5F00;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#unfold-step" target="_blank">unfold step</a></td>
+</tr>
+<tr>
+<td>union</td>
+<td>&#x5408;&#x5E76;&#x591A;&#x4E2A;&#x904D;&#x5386;&#x8FD4;&#x56DE;&#x7684;&#x7ED3;&#x679C;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#union-step" target="_blank">union step</a></td>
+</tr>
+<tr>
+<td>V</td>
+<td>&#x5305;&#x62EC;&#x9876;&#x70B9;&#x4E0E;&#x8FB9;&#x4E4B;&#x95F4;&#x7684;&#x904D;&#x5386;&#x6240;&#x9700;&#x7684;&#x6B65;&#x9AA4;&#xFF1A;<code>V</code>&#x3001;<code>E</code>&#x3001;<code>out</code>&#x3001;<code>in</code>&#x3001;<code>both</code>&#x3001;<code>outE</code>&#x3001;<code>inE</code>&#x3001;<code>bothE</code>&#x3001;<code>outV</code>&#x3001;<code>inV</code>&#x3001;<code>bothV</code> &#x548C; <code>otherV</code></td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#vertex-steps" target="_blank">order step</a></td>
+</tr>
+<tr>
+<td>where</td>
+<td>&#x7528;&#x4E8E;&#x7B5B;&#x9009;&#x904D;&#x5386;&#x8FD4;&#x56DE;&#x7684;&#x7ED3;&#x679C;&#x3002; &#x652F;&#x6301; <code>eq</code>&#x3001;<code>neq</code>&#x3001;<code>lt</code>&#x3001;<code>lte</code>&#x3001;<code>gt</code>&#x3001;<code>gte</code> &#x548C; <code>between</code> &#x8FD0;&#x7B97;&#x7B26;</td>
+<td><a href="http://tinkerpop.apache.org/docs/current/reference/#where-step" target="_blank">where step</a></td>
+</tr>
+</tbody>
+</table>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+                
+
+
+  
+	<footer>
+
+	</footer>
+
+
+            </div>
+
+            
+                
+                <a href="../guides/faq.html" class="navigation navigation-prev " aria-label="Previous page: FAQ">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="hugegraph-example.html" class="navigation navigation-next " aria-label="Next page: HugeGraph Examples">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Gremlin Query Language","level":"4.1","depth":1,"next":{"title":"HugeGraph Examples","level":"4.2","depth":1,"path":"language/hugegraph-example.md","ref":"language/hugegraph-example.md","articles":[]},"previous":{"title":"FAQ","level":"3.6","depth":1,"path":"guides/faq.md","ref":"guides/faq.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"language/hugegraph-gremlin.md","mtime":"2018-07-28T06:56:34.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-28T07:00:54.802Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    
+        <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.slim.min.js"></script>
+        <script src="//cdn.bootcss.com/tether/1.4.0/js/tether.min.js"></script>
+        <script src="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+    
+
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

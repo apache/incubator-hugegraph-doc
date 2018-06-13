@@ -1,0 +1,1366 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>HugeGraph Benchmark Performance · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+
+    
+        <link rel="stylesheet" 
+            href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+    
+
+    
+        <link rel="stylesheet" href="../gitbook/cuav-style.css">
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    
+    
+        <link rel="shortcut icon" 
+            href="../images/favicon.ico" type="image/x-icon">
+    
+
+    
+    <link rel="next" href="hugegraph-api-performance.html" />
+    
+    
+    <link rel="prev" href="../clients/gremlin-console.html" />
+    
+
+    </head>
+    <body>
+        
+
+
+
+	
+	
+	
+	<nav
+			class="navbar fixed-top navbar-inverse background-inverse navbar-toggleable-md">
+		
+
+		<a class="navbar-brand" href="javascript:;">
+			
+			
+				<img src="../images/logo.png" 
+					height="32" class="d-inline-block align-top" 
+					alt="HugeGraph Database" />
+			
+		</a>
+
+		
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<span class="mr-auto"></span>
+				<ul id="cuav-nav" class="navbar-nav text-center text-lg-left">
+					
+				</ul>
+				<span style="width: 6rem"></span>
+			</div>
+			
+		
+	</nav>
+
+
+<div class="book">
+    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >HugeGraph Benchmark Performance</a>
+    </h1>
+</div>
+
+
+
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../download.html">
+            
+                <a href="../download.html">
+            
+                    
+                    Download
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Quickstart</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../quickstart/hugegraph-server.html">
+            
+                <a href="../quickstart/hugegraph-server.html">
+            
+                    
+                    Install HugeGraph-Server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../quickstart/hugegraph-loader.html">
+            
+                <a href="../quickstart/hugegraph-loader.html">
+            
+                    
+                    Load data with HugeGraph-Loader
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../quickstart/hugegraph-tools.html">
+            
+                <a href="../quickstart/hugegraph-tools.html">
+            
+                    
+                    Manage with HugeGraph-Tools
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../quickstart/hugegraph-studio.html">
+            
+                <a href="../quickstart/hugegraph-studio.html">
+            
+                    
+                    Display with HugeGraph-Studio
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../quickstart/hugegraph-client.html">
+            
+                <a href="../quickstart/hugegraph-client.html">
+            
+                    
+                    Develop with HugeGraph-Client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" data-path="../quickstart/hugegraph-spark.html">
+            
+                <a href="../quickstart/hugegraph-spark.html">
+            
+                    
+                    Analysis with HugeGraph-Spark
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Guides</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../guides/architectural.html">
+            
+                <a href="../guides/architectural.html">
+            
+                    
+                    Architecture Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../guides/desgin-concept.html">
+            
+                <a href="../guides/desgin-concept.html">
+            
+                    
+                    Design Concepts
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../guides/config-guide.html">
+            
+                <a href="../guides/config-guide.html">
+            
+                    
+                    Configuration Guide
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="../guides/config-option.html">
+            
+                <a href="../guides/config-option.html">
+            
+                    
+                    Config Options
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.5" data-path="../guides/custom-plugin.html">
+            
+                <a href="../guides/custom-plugin.html">
+            
+                    
+                    Custom Plugins
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.6" data-path="../guides/faq.html">
+            
+                <a href="../guides/faq.html">
+            
+                    
+                    FAQ
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Query Language</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../language/hugegraph-gremlin.html">
+            
+                <a href="../language/hugegraph-gremlin.html">
+            
+                    
+                    Gremlin Query Language
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="../language/hugegraph-example.html">
+            
+                <a href="../language/hugegraph-example.html">
+            
+                    
+                    HugeGraph Examples
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Clients</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="../clients/hugegraph-api.html">
+            
+                <a href="../clients/hugegraph-api.html">
+            
+                    
+                    Restful API
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.1.1" data-path="../clients/restful-api/propertykey.html">
+            
+                <a href="../clients/restful-api/propertykey.html">
+            
+                    
+                    PropertyKey
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.2" data-path="../clients/restful-api/vertexlabel.html">
+            
+                <a href="../clients/restful-api/vertexlabel.html">
+            
+                    
+                    VertexLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.3" data-path="../clients/restful-api/edgelabel.html">
+            
+                <a href="../clients/restful-api/edgelabel.html">
+            
+                    
+                    EdgeLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.4" data-path="../clients/restful-api/indexlabel.html">
+            
+                <a href="../clients/restful-api/indexlabel.html">
+            
+                    
+                    IndexLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.5" data-path="../clients/restful-api/vertex.html">
+            
+                <a href="../clients/restful-api/vertex.html">
+            
+                    
+                    Vertex
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.6" data-path="../clients/restful-api/edge.html">
+            
+                <a href="../clients/restful-api/edge.html">
+            
+                    
+                    Edge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.7" data-path="../clients/restful-api/traverser.html">
+            
+                <a href="../clients/restful-api/traverser.html">
+            
+                    
+                    Traverser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.8" data-path="../clients/restful-api/variable.html">
+            
+                <a href="../clients/restful-api/variable.html">
+            
+                    
+                    Variable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.9" data-path="../clients/restful-api/graph.html">
+            
+                <a href="../clients/restful-api/graph.html">
+            
+                    
+                    Graph
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.10" data-path="../clients/restful-api/gremlin.html">
+            
+                <a href="../clients/restful-api/gremlin.html">
+            
+                    
+                    Gremlin
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.11" data-path="../clients/restful-api/other.html">
+            
+                <a href="../clients/restful-api/other.html">
+            
+                    
+                    Other
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="../clients/hugegraph-client.html">
+            
+                <a href="../clients/hugegraph-client.html">
+            
+                    
+                    Java Client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="../clients/gremlin-console.html">
+            
+                <a href="../clients/gremlin-console.html">
+            
+                    
+                    Gremlin Console
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Performance</li>
+        
+        
+    
+        <li class="chapter active" data-level="6.1" data-path="hugegraph-benchmark-0.5.6.html">
+            
+                <a href="hugegraph-benchmark-0.5.6.html">
+            
+                    
+                    HugeGraph Benchmark Performance
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="hugegraph-api-performance.html">
+            
+                <a href="hugegraph-api-performance.html">
+            
+                    
+                    HugeGraph API Performance
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="6.2.1" data-path="hugegraph-api-0.5.6-RocksDB.html">
+            
+                <a href="hugegraph-api-0.5.6-RocksDB.html">
+            
+                    
+                    v0.5.6 Stand-alone(RocksDB)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.2" data-path="hugegraph-api-0.5.6-Cassandra.html">
+            
+                <a href="hugegraph-api-0.5.6-Cassandra.html">
+            
+                    
+                    v0.5.6 Cluster(Cassandra)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.3" data-path="hugegraph-api-0.4.4.html">
+            
+                <a href="hugegraph-api-0.4.4.html">
+            
+                    
+                    v0.4.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.4" data-path="hugegraph-api-0.2.html">
+            
+                <a href="hugegraph-api-0.2.html">
+            
+                    
+                    v0.2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="hugegraph-loader-performance.html">
+            
+                <a href="hugegraph-loader-performance.html">
+            
+                    
+                    HugeGraph-Loader Performance
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">ChangeLogs</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="../changelog/hugegraph-0.6.1-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.6.1-release-notes.html">
+            
+                    
+                    Release-0.6.1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="../changelog/hugegraph-0.5.6-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.5.6-release-notes.html">
+            
+                    
+                    Release-0.5.6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="../changelog/hugegraph-0.4.4-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.4.4-release-notes.html">
+            
+                    
+                    Release-0.4.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.4" data-path="../changelog/hugegraph-0.3.3-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.3.3-release-notes.html">
+            
+                    
+                    Release-0.3.3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5" data-path="../changelog/hugegraph-0.2.4-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.2.4-release-notes.html">
+            
+                    
+                    Release-0.2.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.6" data-path="../changelog/hugegraph-0.2-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.2-release-notes.html">
+            
+                    
+                    Release-0.2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h3 id="1-&#x6D4B;&#x8BD5;&#x73AF;&#x5883;">1 &#x6D4B;&#x8BD5;&#x73AF;&#x5883;</h3>
+<h4 id="11-&#x786C;&#x4EF6;&#x4FE1;&#x606F;">1.1 &#x786C;&#x4EF6;&#x4FE1;&#x606F;</h4>
+<table>
+<thead>
+<tr>
+<th>CPU</th>
+<th>Memory</th>
+<th>&#x7F51;&#x5361;</th>
+<th>&#x78C1;&#x76D8;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>48 Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz</td>
+<td>128G</td>
+<td>10000Mbps</td>
+<td>750GB SSD</td>
+</tr>
+</tbody>
+</table>
+<h4 id="12-&#x8F6F;&#x4EF6;&#x4FE1;&#x606F;">1.2 &#x8F6F;&#x4EF6;&#x4FE1;&#x606F;</h4>
+<h5 id="121-&#x6D4B;&#x8BD5;&#x7528;&#x4F8B;">1.2.1 &#x6D4B;&#x8BD5;&#x7528;&#x4F8B;</h5>
+<p>&#x6D4B;&#x8BD5;&#x4F7F;&#x7528;<a href="https://github.com/socialsensor/graphdb-benchmarks" target="_blank">graphdb-benchmark</a>&#xFF0C;&#x4E00;&#x4E2A;&#x56FE;&#x6570;&#x636E;&#x5E93;&#x6D4B;&#x8BD5;&#x96C6;&#x3002;&#x8BE5;&#x6D4B;&#x8BD5;&#x96C6;&#x4E3B;&#x8981;&#x5305;&#x542B;4&#x7C7B;&#x6D4B;&#x8BD5;&#xFF1A;</p>
+<ul>
+<li>Massive Insertion&#xFF0C;&#x6279;&#x91CF;&#x63D2;&#x5165;&#x9876;&#x70B9;&#x548C;&#x8FB9;&#xFF0C;&#x4E00;&#x5B9A;&#x6570;&#x91CF;&#x7684;&#x9876;&#x70B9;&#x6216;&#x8FB9;&#x4E00;&#x6B21;&#x6027;&#x63D0;&#x4EA4;</li>
+<li>Single Insertion&#xFF0C;&#x5355;&#x6761;&#x63D2;&#x5165;&#xFF0C;&#x6BCF;&#x4E2A;&#x9876;&#x70B9;&#x6216;&#x8005;&#x6BCF;&#x6761;&#x8FB9;&#x7ACB;&#x5373;&#x63D0;&#x4EA4;</li>
+<li><p>Query&#xFF0C;&#x4E3B;&#x8981;&#x662F;&#x56FE;&#x6570;&#x636E;&#x5E93;&#x7684;&#x57FA;&#x672C;&#x67E5;&#x8BE2;&#x64CD;&#x4F5C;&#xFF1A;</p>
+<ul>
+<li>Find Neighbors&#xFF0C;&#x67E5;&#x8BE2;&#x6240;&#x6709;&#x9876;&#x70B9;&#x7684;&#x90BB;&#x5C45;</li>
+<li>Find Adjacent Nodes&#xFF0C;&#x67E5;&#x8BE2;&#x6240;&#x6709;&#x8FB9;&#x7684;&#x90BB;&#x63A5;&#x9876;&#x70B9;</li>
+<li>Find Shortest Path&#xFF0C;&#x67E5;&#x8BE2;&#x7B2C;&#x4E00;&#x4E2A;&#x9876;&#x70B9;&#x5230;100&#x4E2A;&#x968F;&#x673A;&#x9876;&#x70B9;&#x7684;&#x6700;&#x77ED;&#x8DEF;&#x5F84;</li>
+</ul>
+</li>
+<li><p>Clustering&#xFF0C;&#x57FA;&#x4E8E;Louvain Method&#x7684;&#x793E;&#x533A;&#x53D1;&#x73B0;&#x7B97;&#x6CD5;</p>
+</li>
+</ul>
+<h5 id="122-&#x6D4B;&#x8BD5;&#x6570;&#x636E;&#x96C6;">1.2.2 &#x6D4B;&#x8BD5;&#x6570;&#x636E;&#x96C6;</h5>
+<p>&#x6D4B;&#x8BD5;&#x4F7F;&#x7528;&#x4EBA;&#x9020;&#x6570;&#x636E;&#x548C;&#x771F;&#x5B9E;&#x6570;&#x636E;</p>
+<ul>
+<li><p>MIW&#x3001;SIW&#x548C;QW&#x4F7F;&#x7528;SNAP&#x6570;&#x636E;&#x96C6;</p>
+<ul>
+<li><p><a href="http://snap.stanford.edu/data/email-Enron.html" target="_blank">Enron Dataset</a></p>
+</li>
+<li><p><a href="http://snap.stanford.edu/data/amazon0601.html" target="_blank">Amazon dataset</a></p>
+</li>
+<li><p><a href="http://snap.stanford.edu/data/com-Youtube.html" target="_blank">Youtube dataset</a></p>
+</li>
+<li><p><a href="http://snap.stanford.edu/data/com-LiveJournal.html" target="_blank">LiveJournal dataset</a></p>
+</li>
+</ul>
+</li>
+<li><p>CW&#x4F7F;&#x7528;<a href="https://sites.google.com/site/andrealancichinetti/files" target="_blank">LFR-Benchmark generator</a>&#x751F;&#x6210;&#x7684;&#x4EBA;&#x9020;&#x6570;&#x636E;</p>
+</li>
+</ul>
+<h6 id="&#x672C;&#x6D4B;&#x8BD5;&#x7528;&#x5230;&#x7684;&#x6570;&#x636E;&#x96C6;&#x89C4;&#x6A21;">&#x672C;&#x6D4B;&#x8BD5;&#x7528;&#x5230;&#x7684;&#x6570;&#x636E;&#x96C6;&#x89C4;&#x6A21;</h6>
+<table>
+<thead>
+<tr>
+<th>&#x540D;&#x79F0;</th>
+<th>vertex&#x6570;&#x76EE;</th>
+<th>edge&#x6570;&#x76EE;</th>
+<th>&#x6587;&#x4EF6;&#x5927;&#x5C0F;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>email-enron.txt</td>
+<td>36,691</td>
+<td>367,661</td>
+<td>4MB</td>
+</tr>
+<tr>
+<td>com-youtube.ungraph.txt</td>
+<td>1,157,806</td>
+<td>2,987,624</td>
+<td>38.7MB</td>
+</tr>
+<tr>
+<td>amazon0601.txt</td>
+<td>403,393</td>
+<td>3,387,388</td>
+<td>47.9MB</td>
+</tr>
+<tr>
+<td>com-lj.ungraph.txt</td>
+<td>3997961</td>
+<td>34681189</td>
+<td>479MB</td>
+</tr>
+</tbody>
+</table>
+<h4 id="13-&#x670D;&#x52A1;&#x914D;&#x7F6E;">1.3 &#x670D;&#x52A1;&#x914D;&#x7F6E;</h4>
+<ul>
+<li><p>HugeGraph&#x7248;&#x672C;&#xFF1A;0.5.6&#xFF0C;RestServer&#x548C;Gremlin Server&#x548C;backends&#x90FD;&#x5728;&#x540C;&#x4E00;&#x53F0;&#x670D;&#x52A1;&#x5668;&#x4E0A;</p>
+<ul>
+<li>RocksDB&#x7248;&#x672C;&#xFF1A;rocksdbjni-5.8.6</li>
+</ul>
+</li>
+<li><p>Titan&#x7248;&#x672C;&#xFF1A;0.5.4, &#x4F7F;&#x7528;thrift+Cassandra&#x6A21;&#x5F0F;</p>
+<ul>
+<li>Cassandra&#x7248;&#x672C;&#xFF1A;cassandra-3.10&#xFF0C;commitlog&#x548C;data&#x5171;&#x7528;SSD</li>
+</ul>
+</li>
+<li><p>Neo4j&#x7248;&#x672C;&#xFF1A;2.0.1</p>
+</li>
+</ul>
+<blockquote>
+<p>graphdb-benchmark&#x9002;&#x914D;&#x7684;Titan&#x7248;&#x672C;&#x4E3A;0.5.4</p>
+</blockquote>
+<h3 id="2-&#x6D4B;&#x8BD5;&#x7ED3;&#x679C;">2 &#x6D4B;&#x8BD5;&#x7ED3;&#x679C;</h3>
+<h4 id="21-batch&#x63D2;&#x5165;&#x6027;&#x80FD;">2.1 Batch&#x63D2;&#x5165;&#x6027;&#x80FD;</h4>
+<table>
+<thead>
+<tr>
+<th>Backend</th>
+<th>email-enron(30w)</th>
+<th>amazon0601(300w)</th>
+<th>com-youtube.ungraph(300w)</th>
+<th>com-lj.ungraph(3000w)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HugeGraph</td>
+<td>0.629</td>
+<td>5.711</td>
+<td>5.243</td>
+<td>67.033</td>
+</tr>
+<tr>
+<td>Titan</td>
+<td>10.15</td>
+<td>108.569</td>
+<td>150.266</td>
+<td>1217.944</td>
+</tr>
+<tr>
+<td>Neo4j</td>
+<td>3.884</td>
+<td>18.938</td>
+<td>24.890</td>
+<td>281.537</td>
+</tr>
+</tbody>
+</table>
+<p><em>&#x8BF4;&#x660E;</em></p>
+<ul>
+<li>&#x8868;&#x5934;&quot;&#xFF08;&#xFF09;&quot;&#x4E2D;&#x6570;&#x636E;&#x662F;&#x6570;&#x636E;&#x89C4;&#x6A21;&#xFF0C;&#x4EE5;&#x8FB9;&#x4E3A;&#x5355;&#x4F4D;</li>
+<li>&#x8868;&#x4E2D;&#x6570;&#x636E;&#x662F;&#x6279;&#x91CF;&#x63D2;&#x5165;&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x5355;&#x4F4D;&#x662F;s</li>
+<li>&#x4F8B;&#x5982;&#xFF0C;HugeGraph&#x4F7F;&#x7528;RocksDB&#x63D2;&#x5165;amazon0601&#x6570;&#x636E;&#x96C6;&#x7684;300w&#x6761;&#x8FB9;&#xFF0C;&#x82B1;&#x8D39;5.711s</li>
+</ul>
+<h5 id="&#x7ED3;&#x8BBA;">&#x7ED3;&#x8BBA;</h5>
+<ul>
+<li>&#x6279;&#x91CF;&#x63D2;&#x5165;&#x6027;&#x80FD; HugeGraph(RocksDB) &gt; Neo4j &gt; Titan(thrift+Cassandra)</li>
+</ul>
+<h4 id="22-&#x904D;&#x5386;&#x6027;&#x80FD;">2.2 &#x904D;&#x5386;&#x6027;&#x80FD;</h4>
+<h5 id="221-&#x672F;&#x8BED;&#x8BF4;&#x660E;">2.2.1 &#x672F;&#x8BED;&#x8BF4;&#x660E;</h5>
+<ul>
+<li>FN(Find Neighbor), &#x904D;&#x5386;&#x6240;&#x6709;vertex, &#x6839;&#x636E;vertex&#x67E5;&#x90BB;&#x63A5;edge, &#x901A;&#x8FC7;edge&#x548C;vertex&#x67E5;other vertex</li>
+<li>FA(Find Adjacent), &#x904D;&#x5386;&#x6240;&#x6709;edge&#xFF0C;&#x6839;&#x636E;edge&#x83B7;&#x5F97;source vertex&#x548C;target vertex</li>
+</ul>
+<h5 id="222-fn&#x6027;&#x80FD;">2.2.2 FN&#x6027;&#x80FD;</h5>
+<table>
+<thead>
+<tr>
+<th>Backend</th>
+<th>email-enron(3.6w)</th>
+<th>amazon0601(40w)</th>
+<th>com-youtube.ungraph(120w)</th>
+<th>com-lj.ungraph(400w)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HugeGraph</td>
+<td>4.072</td>
+<td>45.118</td>
+<td>66.006</td>
+<td>609.083</td>
+</tr>
+<tr>
+<td>Titan</td>
+<td>8.084</td>
+<td>92.507</td>
+<td>184.543</td>
+<td>1099.371</td>
+</tr>
+<tr>
+<td>Neo4j</td>
+<td>2.424</td>
+<td>10.537</td>
+<td>11.609</td>
+<td>106.919</td>
+</tr>
+</tbody>
+</table>
+<p><em>&#x8BF4;&#x660E;</em></p>
+<ul>
+<li>&#x8868;&#x5934;&quot;&#xFF08;&#xFF09;&quot;&#x4E2D;&#x6570;&#x636E;&#x662F;&#x6570;&#x636E;&#x89C4;&#x6A21;&#xFF0C;&#x4EE5;&#x9876;&#x70B9;&#x4E3A;&#x5355;&#x4F4D;</li>
+<li>&#x8868;&#x4E2D;&#x6570;&#x636E;&#x662F;&#x904D;&#x5386;&#x9876;&#x70B9;&#x82B1;&#x8D39;&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x5355;&#x4F4D;&#x662F;s</li>
+<li>&#x4F8B;&#x5982;&#xFF0C;HugeGraph&#x4F7F;&#x7528;RocksDB&#x540E;&#x7AEF;&#x904D;&#x5386;amazon0601&#x7684;&#x6240;&#x6709;&#x9876;&#x70B9;&#xFF0C;&#x5E76;&#x67E5;&#x627E;&#x90BB;&#x63A5;&#x8FB9;&#x548C;&#x53E6;&#x4E00;&#x9876;&#x70B9;&#xFF0C;&#x603B;&#x5171;&#x8017;&#x65F6;45.118s</li>
+</ul>
+<h5 id="223-fa&#x6027;&#x80FD;">2.2.3 FA&#x6027;&#x80FD;</h5>
+<table>
+<thead>
+<tr>
+<th>Backend</th>
+<th>email-enron(30w)</th>
+<th>amazon0601(300w)</th>
+<th>com-youtube.ungraph(300w)</th>
+<th>com-lj.ungraph(3000w)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HugeGraph</td>
+<td>1.540</td>
+<td>10.764</td>
+<td>11.243</td>
+<td>151.271</td>
+</tr>
+<tr>
+<td>Titan</td>
+<td>7.361</td>
+<td>93.344</td>
+<td>169.218</td>
+<td>1085.235</td>
+</tr>
+<tr>
+<td>Neo4j</td>
+<td>1.673</td>
+<td>4.775</td>
+<td>4.284</td>
+<td>40.507</td>
+</tr>
+</tbody>
+</table>
+<p><em>&#x8BF4;&#x660E;</em></p>
+<ul>
+<li>&#x8868;&#x5934;&quot;&#xFF08;&#xFF09;&quot;&#x4E2D;&#x6570;&#x636E;&#x662F;&#x6570;&#x636E;&#x89C4;&#x6A21;&#xFF0C;&#x4EE5;&#x8FB9;&#x4E3A;&#x5355;&#x4F4D;</li>
+<li>&#x8868;&#x4E2D;&#x6570;&#x636E;&#x662F;&#x904D;&#x5386;&#x8FB9;&#x82B1;&#x8D39;&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x5355;&#x4F4D;&#x662F;s</li>
+<li>&#x4F8B;&#x5982;&#xFF0C;HugeGraph&#x4F7F;&#x7528;RocksDB&#x540E;&#x7AEF;&#x904D;&#x5386;amazon0601&#x7684;&#x6240;&#x6709;&#x8FB9;&#xFF0C;&#x5E76;&#x67E5;&#x8BE2;&#x6BCF;&#x6761;&#x8FB9;&#x7684;&#x4E24;&#x4E2A;&#x9876;&#x70B9;&#xFF0C;&#x603B;&#x5171;&#x8017;&#x65F6;10.764s</li>
+</ul>
+<h6 id="&#x7ED3;&#x8BBA;">&#x7ED3;&#x8BBA;</h6>
+<ul>
+<li>&#x904D;&#x5386;&#x6027;&#x80FD; Neo4j &gt; HugeGraph(RocksDB) &gt; Titan(thrift+Cassandra)</li>
+</ul>
+<h4 id="23-hugegraph-&#x56FE;&#x5E38;&#x7528;&#x5206;&#x6790;&#x65B9;&#x6CD5;&#x6027;&#x80FD;">2.3 HugeGraph-&#x56FE;&#x5E38;&#x7528;&#x5206;&#x6790;&#x65B9;&#x6CD5;&#x6027;&#x80FD;</h4>
+<h5 id="&#x672F;&#x8BED;&#x8BF4;&#x660E;">&#x672F;&#x8BED;&#x8BF4;&#x660E;</h5>
+<ul>
+<li>FS(Find Shortest Path), &#x5BFB;&#x627E;&#x6700;&#x77ED;&#x8DEF;&#x5F84;</li>
+<li>K-neighbor&#xFF0C;&#x4ECE;&#x8D77;&#x59CB;vertex&#x51FA;&#x53D1;&#xFF0C;&#x901A;&#x8FC7;K&#x8DF3;&#x8FB9;&#x80FD;&#x591F;&#x5230;&#x8FBE;&#x7684;&#x6240;&#x6709;&#x9876;&#x70B9;, &#x5305;&#x62EC;1, 2, 3...(K-1), K&#x8DF3;&#x8FB9;&#x53EF;&#x8FBE;vertex</li>
+<li>K-out, &#x4ECE;&#x8D77;&#x59CB;vertex&#x51FA;&#x53D1;&#xFF0C;&#x6070;&#x597D;&#x7ECF;&#x8FC7;K&#x8DF3;out&#x8FB9;&#x80FD;&#x591F;&#x5230;&#x8FBE;&#x7684;&#x9876;&#x70B9;</li>
+</ul>
+<h5 id="fs&#x6027;&#x80FD;">FS&#x6027;&#x80FD;</h5>
+<table>
+<thead>
+<tr>
+<th>Backend</th>
+<th>email-enron(30w)</th>
+<th>amazon0601(300w)</th>
+<th>com-youtube.ungraph(300w)</th>
+<th>com-lj.ungraph(3000w)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HugeGraph</td>
+<td>0.494</td>
+<td>0.103</td>
+<td>3.364</td>
+<td>8.155</td>
+</tr>
+<tr>
+<td>Titan</td>
+<td>11.818</td>
+<td>0.239</td>
+<td>377.709</td>
+<td>575.678</td>
+</tr>
+<tr>
+<td>Neo4j</td>
+<td>1.719</td>
+<td>1.800</td>
+<td>1.956</td>
+<td>8.530</td>
+</tr>
+</tbody>
+</table>
+<p><em>&#x8BF4;&#x660E;</em></p>
+<ul>
+<li>&#x8868;&#x5934;&quot;&#xFF08;&#xFF09;&quot;&#x4E2D;&#x6570;&#x636E;&#x662F;&#x6570;&#x636E;&#x89C4;&#x6A21;&#xFF0C;&#x4EE5;&#x8FB9;&#x4E3A;&#x5355;&#x4F4D;</li>
+<li>&#x8868;&#x4E2D;&#x6570;&#x636E;&#x662F;&#x627E;&#x5230;<strong>&#x4ECE;&#x7B2C;&#x4E00;&#x4E2A;&#x9876;&#x70B9;&#x51FA;&#x53D1;&#x5230;&#x8FBE;&#x968F;&#x673A;&#x9009;&#x62E9;&#x7684;100&#x4E2A;&#x9876;&#x70B9;&#x7684;&#x6700;&#x77ED;&#x8DEF;&#x5F84;</strong>&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x5355;&#x4F4D;&#x662F;s</li>
+<li>&#x4F8B;&#x5982;&#xFF0C;HugeGraph&#x4F7F;&#x7528;RocksDB&#x540E;&#x7AEF;&#x5728;&#x56FE;amazon0601&#x4E2D;&#x67E5;&#x627E;&#x7B2C;&#x4E00;&#x4E2A;&#x9876;&#x70B9;&#x5230;100&#x4E2A;&#x968F;&#x673A;&#x9876;&#x70B9;&#x7684;&#x6700;&#x77ED;&#x8DEF;&#x5F84;&#xFF0C;&#x603B;&#x5171;&#x8017;&#x65F6;0.103s</li>
+</ul>
+<h6 id="&#x7ED3;&#x8BBA;">&#x7ED3;&#x8BBA;</h6>
+<ul>
+<li>&#x5728;&#x6570;&#x636E;&#x89C4;&#x6A21;&#x5C0F;&#x6216;&#x8005;&#x9876;&#x70B9;&#x5173;&#x8054;&#x5173;&#x7CFB;&#x5C11;&#x7684;&#x573A;&#x666F;&#x4E0B;&#xFF0C;HugeGraph&#x6027;&#x80FD;&#x4F18;&#x4E8E;Neo4j&#x548C;Titan</li>
+<li>&#x968F;&#x7740;&#x6570;&#x636E;&#x89C4;&#x6A21;&#x589E;&#x5927;&#x4E14;&#x9876;&#x70B9;&#x7684;&#x5173;&#x8054;&#x5EA6;&#x589E;&#x9AD8;&#xFF0C;HugeGraph&#x4E0E;Neo4j&#x6027;&#x80FD;&#x8D8B;&#x8FD1;&#xFF0C;&#x90FD;&#x8FDC;&#x9AD8;&#x4E8E;Titan</li>
+</ul>
+<h5 id="k-neighbor&#x6027;&#x80FD;">K-neighbor&#x6027;&#x80FD;</h5>
+<table>
+<thead>
+<tr>
+<th>&#x9876;&#x70B9;</th>
+<th>&#x6DF1;&#x5EA6;</th>
+<th>&#x4E00;&#x5EA6;</th>
+<th>&#x4E8C;&#x5EA6;</th>
+<th>&#x4E09;&#x5EA6;</th>
+<th>&#x56DB;&#x5EA6;</th>
+<th>&#x4E94;&#x5EA6;</th>
+<th>&#x516D;&#x5EA6;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>v1</td>
+<td>&#x65F6;&#x95F4;</td>
+<td>0.031s</td>
+<td>0.033s</td>
+<td>0.048s</td>
+<td>0.500s</td>
+<td>11.27s</td>
+<td>OOM</td>
+</tr>
+<tr>
+<td>v111</td>
+<td>&#x65F6;&#x95F4;</td>
+<td>0.027s</td>
+<td>0.034s</td>
+<td>0.115</td>
+<td>1.36s</td>
+<td>OOM</td>
+<td>--</td>
+</tr>
+<tr>
+<td>v1111</td>
+<td>&#x65F6;&#x95F4;</td>
+<td>0.039s</td>
+<td>0.027s</td>
+<td>0.052s</td>
+<td>0.511s</td>
+<td>10.96s</td>
+<td>OOM</td>
+</tr>
+</tbody>
+</table>
+<p><em>&#x8BF4;&#x660E;</em></p>
+<ul>
+<li>HugeGraph-Server&#x7684;JVM&#x5185;&#x5B58;&#x8BBE;&#x7F6E;&#x4E3A;32GB&#xFF0C;&#x6570;&#x636E;&#x91CF;&#x8FC7;&#x5927;&#x65F6;&#x4F1A;&#x51FA;&#x73B0;OOM</li>
+</ul>
+<h5 id="k-out&#x6027;&#x80FD;">K-out&#x6027;&#x80FD;</h5>
+<table>
+<thead>
+<tr>
+<th>&#x9876;&#x70B9;</th>
+<th>&#x6DF1;&#x5EA6;</th>
+<th>&#x4E00;&#x5EA6;</th>
+<th>&#x4E8C;&#x5EA6;</th>
+<th>&#x4E09;&#x5EA6;</th>
+<th>&#x56DB;&#x5EA6;</th>
+<th>&#x4E94;&#x5EA6;</th>
+<th>&#x516D;&#x5EA6;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>v1</td>
+<td>&#x65F6;&#x95F4;</td>
+<td>0.054s</td>
+<td>0.057s</td>
+<td>0.109s</td>
+<td>0.526s</td>
+<td>3.77s</td>
+<td>OOM</td>
+</tr>
+<tr>
+<td></td>
+<td>&#x5EA6;</td>
+<td>10</td>
+<td>133</td>
+<td>2453</td>
+<td>50,830</td>
+<td>1,128,688</td>
+<td></td>
+</tr>
+<tr>
+<td>v111</td>
+<td>&#x65F6;&#x95F4;</td>
+<td>0.032s</td>
+<td>0.042s</td>
+<td>0.136s</td>
+<td>1.25s</td>
+<td>20.62s</td>
+<td>OOM</td>
+</tr>
+<tr>
+<td></td>
+<td>&#x5EA6;</td>
+<td>10</td>
+<td>211</td>
+<td>4944</td>
+<td>113150</td>
+<td>2,629,970</td>
+<td></td>
+</tr>
+<tr>
+<td>v1111</td>
+<td>&#x65F6;&#x95F4;</td>
+<td>0.039s</td>
+<td>0.045s</td>
+<td>0.053s</td>
+<td>1.10s</td>
+<td>2.92s</td>
+<td>OOM</td>
+</tr>
+<tr>
+<td></td>
+<td>&#x5EA6;</td>
+<td>10</td>
+<td>140</td>
+<td>2555</td>
+<td>50825</td>
+<td>1,070,230</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><em>&#x8BF4;&#x660E;</em></p>
+<ul>
+<li>HugeGraph-Server&#x7684;JVM&#x5185;&#x5B58;&#x8BBE;&#x7F6E;&#x4E3A;32GB&#xFF0C;&#x6570;&#x636E;&#x91CF;&#x8FC7;&#x5927;&#x65F6;&#x4F1A;&#x51FA;&#x73B0;OOM</li>
+</ul>
+<h6 id="&#x7ED3;&#x8BBA;">&#x7ED3;&#x8BBA;</h6>
+<ul>
+<li>FS&#x573A;&#x666F;&#xFF0C;HugeGraph&#x6027;&#x80FD;&#x4F18;&#x4E8E;Neo4j&#x548C;Titan</li>
+<li>K-neighbor&#x548C;K-out&#x573A;&#x666F;&#xFF0C;HugeGraph&#x80FD;&#x591F;&#x5B9E;&#x73B0;&#x5728;5&#x5EA6;&#x8303;&#x56F4;&#x5185;&#x79D2;&#x7EA7;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;</li>
+</ul>
+<h4 id="24-&#x56FE;&#x7EFC;&#x5408;&#x6027;&#x80FD;&#x6D4B;&#x8BD5;-cw">2.4 &#x56FE;&#x7EFC;&#x5408;&#x6027;&#x80FD;&#x6D4B;&#x8BD5;-CW</h4>
+<table>
+<thead>
+<tr>
+<th>&#x6570;&#x636E;&#x5E93;</th>
+<th>&#x89C4;&#x6A21;1000</th>
+<th>&#x89C4;&#x6A21;5000</th>
+<th>&#x89C4;&#x6A21;10000</th>
+<th>&#x89C4;&#x6A21;20000</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HugeGraph(core)</td>
+<td>20.804</td>
+<td>242.099</td>
+<td>744.780</td>
+<td>1700.547</td>
+</tr>
+<tr>
+<td>Titan</td>
+<td>45.790</td>
+<td>820.633</td>
+<td>2652.235</td>
+<td>9568.623</td>
+</tr>
+<tr>
+<td>Neo4j</td>
+<td>5.913</td>
+<td>50.267</td>
+<td>142.354</td>
+<td>460.880</td>
+</tr>
+</tbody>
+</table>
+<p><em>&#x8BF4;&#x660E;</em></p>
+<ul>
+<li>&quot;&#x89C4;&#x6A21;&quot;&#x4EE5;&#x9876;&#x70B9;&#x4E3A;&#x5355;&#x4F4D;</li>
+<li>&#x8868;&#x4E2D;&#x6570;&#x636E;&#x662F;&#x793E;&#x533A;&#x53D1;&#x73B0;&#x5B8C;&#x6210;&#x9700;&#x8981;&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x5355;&#x4F4D;&#x662F;s&#xFF0C;&#x4F8B;&#x5982;HugeGraph&#x4F7F;&#x7528;RocksDB&#x540E;&#x7AEF;&#x5728;&#x89C4;&#x6A21;10000&#x7684;&#x6570;&#x636E;&#x96C6;&#xFF0C;&#x793E;&#x533A;&#x805A;&#x5408;&#x4E0D;&#x518D;&#x53D8;&#x5316;&#xFF0C;&#x9700;&#x8981;&#x8017;&#x65F6;744.780s</li>
+<li>CW&#x6D4B;&#x8BD5;&#x662F;CRUD&#x7684;&#x7EFC;&#x5408;&#x8BC4;&#x4F30;</li>
+<li>&#x8BE5;&#x6D4B;&#x8BD5;&#x4E2D;HugeGraph&#x8DDF;Titan&#x4E00;&#x6837;&#xFF0C;&#x6CA1;&#x6709;&#x901A;&#x8FC7;client&#xFF0C;&#x76F4;&#x63A5;&#x5BF9;core&#x64CD;&#x4F5C;</li>
+</ul>
+<h5 id="&#x7ED3;&#x8BBA;">&#x7ED3;&#x8BBA;</h5>
+<ul>
+<li>&#x793E;&#x533A;&#x805A;&#x7C7B;&#x7B97;&#x6CD5;&#x6027;&#x80FD; Neo4j &gt; HugeGraph &gt; Titan</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+                
+
+
+  
+	<footer>
+
+	</footer>
+
+
+            </div>
+
+            
+                
+                <a href="../clients/gremlin-console.html" class="navigation navigation-prev " aria-label="Previous page: Gremlin Console">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="hugegraph-api-performance.html" class="navigation navigation-next " aria-label="Next page: HugeGraph API Performance">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"HugeGraph Benchmark Performance","level":"6.1","depth":1,"next":{"title":"HugeGraph API Performance","level":"6.2","depth":1,"path":"performance/hugegraph-api-performance.md","ref":"performance/hugegraph-api-performance.md","articles":[{"title":"v0.5.6 Stand-alone(RocksDB)","level":"6.2.1","depth":2,"path":"performance/hugegraph-api-0.5.6-RocksDB.md","ref":"performance/hugegraph-api-0.5.6-RocksDB.md","articles":[]},{"title":"v0.5.6 Cluster(Cassandra)","level":"6.2.2","depth":2,"path":"performance/hugegraph-api-0.5.6-Cassandra.md","ref":"performance/hugegraph-api-0.5.6-Cassandra.md","articles":[]},{"title":"v0.4.4","level":"6.2.3","depth":2,"path":"performance/hugegraph-api-0.4.4.md","ref":"performance/hugegraph-api-0.4.4.md","articles":[]},{"title":"v0.2","level":"6.2.4","depth":2,"path":"performance/hugegraph-api-0.2.md","ref":"performance/hugegraph-api-0.2.md","articles":[]}]},"previous":{"title":"Gremlin Console","level":"5.3","depth":1,"path":"clients/gremlin-console.md","ref":"clients/gremlin-console.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"performance/hugegraph-benchmark-0.5.6.md","mtime":"2018-07-28T06:56:34.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-28T07:00:54.802Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    
+        <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.slim.min.js"></script>
+        <script src="//cdn.bootcss.com/tether/1.4.0/js/tether.min.js"></script>
+        <script src="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+    
+
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,1155 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Custom Plugins · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+
+    
+        <link rel="stylesheet" 
+            href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+    
+
+    
+        <link rel="stylesheet" href="../gitbook/cuav-style.css">
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    
+    
+        <link rel="shortcut icon" 
+            href="../images/favicon.ico" type="image/x-icon">
+    
+
+    
+    <link rel="next" href="faq.html" />
+    
+    
+    <link rel="prev" href="config-option.html" />
+    
+
+    </head>
+    <body>
+        
+
+
+
+	
+	
+	
+	<nav
+			class="navbar fixed-top navbar-inverse background-inverse navbar-toggleable-md">
+		
+
+		<a class="navbar-brand" href="javascript:;">
+			
+			
+				<img src="../images/logo.png" 
+					height="32" class="d-inline-block align-top" 
+					alt="HugeGraph Database" />
+			
+		</a>
+
+		
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<span class="mr-auto"></span>
+				<ul id="cuav-nav" class="navbar-nav text-center text-lg-left">
+					
+				</ul>
+				<span style="width: 6rem"></span>
+			</div>
+			
+		
+	</nav>
+
+
+<div class="book">
+    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Custom Plugins</a>
+    </h1>
+</div>
+
+
+
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../download.html">
+            
+                <a href="../download.html">
+            
+                    
+                    Download
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Quickstart</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../quickstart/hugegraph-server.html">
+            
+                <a href="../quickstart/hugegraph-server.html">
+            
+                    
+                    Install HugeGraph-Server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../quickstart/hugegraph-loader.html">
+            
+                <a href="../quickstart/hugegraph-loader.html">
+            
+                    
+                    Load data with HugeGraph-Loader
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../quickstart/hugegraph-tools.html">
+            
+                <a href="../quickstart/hugegraph-tools.html">
+            
+                    
+                    Manage with HugeGraph-Tools
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../quickstart/hugegraph-studio.html">
+            
+                <a href="../quickstart/hugegraph-studio.html">
+            
+                    
+                    Display with HugeGraph-Studio
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../quickstart/hugegraph-client.html">
+            
+                <a href="../quickstart/hugegraph-client.html">
+            
+                    
+                    Develop with HugeGraph-Client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" data-path="../quickstart/hugegraph-spark.html">
+            
+                <a href="../quickstart/hugegraph-spark.html">
+            
+                    
+                    Analysis with HugeGraph-Spark
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Guides</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="architectural.html">
+            
+                <a href="architectural.html">
+            
+                    
+                    Architecture Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="desgin-concept.html">
+            
+                <a href="desgin-concept.html">
+            
+                    
+                    Design Concepts
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="config-guide.html">
+            
+                <a href="config-guide.html">
+            
+                    
+                    Configuration Guide
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="config-option.html">
+            
+                <a href="config-option.html">
+            
+                    
+                    Config Options
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="3.5" data-path="custom-plugin.html">
+            
+                <a href="custom-plugin.html">
+            
+                    
+                    Custom Plugins
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.6" data-path="faq.html">
+            
+                <a href="faq.html">
+            
+                    
+                    FAQ
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Query Language</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../language/hugegraph-gremlin.html">
+            
+                <a href="../language/hugegraph-gremlin.html">
+            
+                    
+                    Gremlin Query Language
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="../language/hugegraph-example.html">
+            
+                <a href="../language/hugegraph-example.html">
+            
+                    
+                    HugeGraph Examples
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Clients</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="../clients/hugegraph-api.html">
+            
+                <a href="../clients/hugegraph-api.html">
+            
+                    
+                    Restful API
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.1.1" data-path="../clients/restful-api/propertykey.html">
+            
+                <a href="../clients/restful-api/propertykey.html">
+            
+                    
+                    PropertyKey
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.2" data-path="../clients/restful-api/vertexlabel.html">
+            
+                <a href="../clients/restful-api/vertexlabel.html">
+            
+                    
+                    VertexLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.3" data-path="../clients/restful-api/edgelabel.html">
+            
+                <a href="../clients/restful-api/edgelabel.html">
+            
+                    
+                    EdgeLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.4" data-path="../clients/restful-api/indexlabel.html">
+            
+                <a href="../clients/restful-api/indexlabel.html">
+            
+                    
+                    IndexLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.5" data-path="../clients/restful-api/vertex.html">
+            
+                <a href="../clients/restful-api/vertex.html">
+            
+                    
+                    Vertex
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.6" data-path="../clients/restful-api/edge.html">
+            
+                <a href="../clients/restful-api/edge.html">
+            
+                    
+                    Edge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.7" data-path="../clients/restful-api/traverser.html">
+            
+                <a href="../clients/restful-api/traverser.html">
+            
+                    
+                    Traverser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.8" data-path="../clients/restful-api/variable.html">
+            
+                <a href="../clients/restful-api/variable.html">
+            
+                    
+                    Variable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.9" data-path="../clients/restful-api/graph.html">
+            
+                <a href="../clients/restful-api/graph.html">
+            
+                    
+                    Graph
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.10" data-path="../clients/restful-api/gremlin.html">
+            
+                <a href="../clients/restful-api/gremlin.html">
+            
+                    
+                    Gremlin
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.11" data-path="../clients/restful-api/other.html">
+            
+                <a href="../clients/restful-api/other.html">
+            
+                    
+                    Other
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="../clients/hugegraph-client.html">
+            
+                <a href="../clients/hugegraph-client.html">
+            
+                    
+                    Java Client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="../clients/gremlin-console.html">
+            
+                <a href="../clients/gremlin-console.html">
+            
+                    
+                    Gremlin Console
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Performance</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="../performance/hugegraph-benchmark-0.5.6.html">
+            
+                <a href="../performance/hugegraph-benchmark-0.5.6.html">
+            
+                    
+                    HugeGraph Benchmark Performance
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="../performance/hugegraph-api-performance.html">
+            
+                <a href="../performance/hugegraph-api-performance.html">
+            
+                    
+                    HugeGraph API Performance
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="6.2.1" data-path="../performance/hugegraph-api-0.5.6-RocksDB.html">
+            
+                <a href="../performance/hugegraph-api-0.5.6-RocksDB.html">
+            
+                    
+                    v0.5.6 Stand-alone(RocksDB)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.2" data-path="../performance/hugegraph-api-0.5.6-Cassandra.html">
+            
+                <a href="../performance/hugegraph-api-0.5.6-Cassandra.html">
+            
+                    
+                    v0.5.6 Cluster(Cassandra)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.3" data-path="../performance/hugegraph-api-0.4.4.html">
+            
+                <a href="../performance/hugegraph-api-0.4.4.html">
+            
+                    
+                    v0.4.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.4" data-path="../performance/hugegraph-api-0.2.html">
+            
+                <a href="../performance/hugegraph-api-0.2.html">
+            
+                    
+                    v0.2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="../performance/hugegraph-loader-performance.html">
+            
+                <a href="../performance/hugegraph-loader-performance.html">
+            
+                    
+                    HugeGraph-Loader Performance
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">ChangeLogs</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="../changelog/hugegraph-0.6.1-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.6.1-release-notes.html">
+            
+                    
+                    Release-0.6.1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="../changelog/hugegraph-0.5.6-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.5.6-release-notes.html">
+            
+                    
+                    Release-0.5.6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="../changelog/hugegraph-0.4.4-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.4.4-release-notes.html">
+            
+                    
+                    Release-0.4.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.4" data-path="../changelog/hugegraph-0.3.3-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.3.3-release-notes.html">
+            
+                    
+                    Release-0.3.3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5" data-path="../changelog/hugegraph-0.2.4-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.2.4-release-notes.html">
+            
+                    
+                    Release-0.2.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.6" data-path="../changelog/hugegraph-0.2-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.2-release-notes.html">
+            
+                    
+                    Release-0.2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="hugegraph-plugin&#x673A;&#x5236;&#x53CA;&#x63D2;&#x4EF6;&#x6269;&#x5C55;&#x6D41;&#x7A0B;">HugeGraph Plugin&#x673A;&#x5236;&#x53CA;&#x63D2;&#x4EF6;&#x6269;&#x5C55;&#x6D41;&#x7A0B;</h2>
+<h3 id="&#x80CC;&#x666F;">&#x80CC;&#x666F;</h3>
+<ol>
+<li>HugeGraph&#x4E0D;&#x4EC5;&#x5F00;&#x6E90;&#x5F00;&#x653E;&#xFF0C;&#x800C;&#x4E14;&#x8981;&#x505A;&#x5230;&#x7B80;&#x5355;&#x6613;&#x7528;&#xFF0C;&#x4E00;&#x822C;&#x7528;&#x6237;&#x65E0;&#x9700;&#x66F4;&#x6539;&#x6E90;&#x7801;&#x4E5F;&#x80FD;&#x8F7B;&#x677E;&#x589E;&#x52A0;&#x63D2;&#x4EF6;&#x6269;&#x5C55;&#x529F;&#x80FD;&#x3002;</li>
+<li>HugeGraph&#x652F;&#x6301;&#x591A;&#x79CD;&#x5185;&#x7F6E;&#x5B58;&#x50A8;&#x540E;&#x7AEF;&#xFF0C;&#x4E5F;&#x5141;&#x8BB8;&#x7528;&#x6237;&#x65E0;&#x9700;&#x66F4;&#x6539;&#x73B0;&#x6709;&#x6E90;&#x7801;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x6269;&#x5C55;&#x81EA;&#x5B9A;&#x4E49;&#x540E;&#x7AEF;&#x3002;</li>
+<li>HugeGraph&#x652F;&#x6301;&#x5168;&#x6587;&#x68C0;&#x7D22;&#xFF0C;&#x5168;&#x6587;&#x68C0;&#x7D22;&#x529F;&#x80FD;&#x6D89;&#x53CA;&#x5230;&#x5404;&#x8BED;&#x8A00;&#x5206;&#x8BCD;&#xFF0C;&#x76EE;&#x524D;&#x5DF2;&#x5185;&#x7F6E;8&#x79CD;&#x4E2D;&#x6587;&#x5206;&#x8BCD;&#x5668;&#xFF0C;&#x4E5F;&#x5141;&#x8BB8;&#x7528;&#x6237;&#x65E0;&#x9700;&#x66F4;&#x6539;&#x73B0;&#x6709;&#x6E90;&#x7801;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x6269;&#x5C55;&#x81EA;&#x5B9A;&#x4E49;&#x5206;&#x8BCD;&#x5668;&#x3002;</li>
+</ol>
+<h3 id="&#x53EF;&#x6269;&#x5C55;&#x7EF4;&#x5EA6;">&#x53EF;&#x6269;&#x5C55;&#x7EF4;&#x5EA6;</h3>
+<p>&#x76EE;&#x524D;&#x63D2;&#x4EF6;&#x65B9;&#x5F0F;&#x63D0;&#x4F9B;&#x5982;&#x4E0B;&#x51E0;&#x4E2A;&#x7EF4;&#x5EA6;&#x7684;&#x6269;&#x5C55;&#x9879;&#xFF1A;</p>
+<ul>
+<li>&#x540E;&#x7AEF;&#x5B58;&#x50A8;</li>
+<li>&#x5E8F;&#x5217;&#x5316;&#x5668;</li>
+<li>&#x81EA;&#x5B9A;&#x4E49;&#x914D;&#x7F6E;&#x9879;</li>
+<li>&#x5206;&#x8BCD;&#x5668;</li>
+</ul>
+<h3 id="&#x63D2;&#x4EF6;&#x5B9E;&#x73B0;&#x673A;&#x5236;">&#x63D2;&#x4EF6;&#x5B9E;&#x73B0;&#x673A;&#x5236;</h3>
+<ol>
+<li>HugeGraph&#x63D0;&#x4F9B;&#x63D2;&#x4EF6;&#x63A5;&#x53E3;HugeGraphPlugin&#xFF0C;&#x901A;&#x8FC7;Java SPI&#x673A;&#x5236;&#x652F;&#x6301;&#x63D2;&#x4EF6;&#x5316;</li>
+<li>HugeGraph&#x63D0;&#x4F9B;&#x4E86;4&#x4E2A;&#x6269;&#x5C55;&#x9879;&#x6CE8;&#x518C;&#x51FD;&#x6570;&#xFF1A;<code>registerOptions()</code>&#x3001;<code>registerBackend()</code>&#x3001;<code>registerSerializer()</code>&#x3001;<code>registerAnalyzer()</code></li>
+<li>&#x63D2;&#x4EF6;&#x5B9E;&#x73B0;&#x8005;&#x5B9E;&#x73B0;&#x76F8;&#x5E94;&#x7684;Options&#x3001;Backend&#x3001;Serializer&#x6216;Analyzer&#x7684;&#x63A5;&#x53E3;</li>
+<li>&#x63D2;&#x4EF6;&#x5B9E;&#x73B0;&#x8005;&#x5B9E;&#x73B0;HugeGraphPlugin&#x63A5;&#x53E3;&#x7684;<code>register()</code>&#x65B9;&#x6CD5;&#xFF0C;&#x5728;&#x8BE5;&#x65B9;&#x6CD5;&#x4E2D;&#x6CE8;&#x518C;&#x4E0A;&#x8FF0;&#x7B2C;3&#x70B9;&#x6240;&#x5217;&#x7684;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#x7C7B;&#xFF0C;&#x5E76;&#x6253;&#x6210;jar&#x5305;</li>
+<li>&#x63D2;&#x4EF6;&#x4F7F;&#x7528;&#x8005;&#x5C06;jar&#x5305;&#x653E;&#x5728;HugeGraph Server&#x5B89;&#x88C5;&#x76EE;&#x5F55;&#x7684;<code>plugins</code>&#x76EE;&#x5F55;&#x4E0B;&#xFF0C;&#x4FEE;&#x6539;&#x76F8;&#x5173;&#x914D;&#x7F6E;&#x9879;&#x4E3A;&#x63D2;&#x4EF6;&#x81EA;&#x5B9A;&#x4E49;&#x503C;&#xFF0C;&#x91CD;&#x542F;&#x5373;&#x53EF;&#x751F;&#x6548;</li>
+</ol>
+<h3 id="&#x63D2;&#x4EF6;&#x5B9E;&#x73B0;&#x6D41;&#x7A0B;&#x5B9E;&#x4F8B;">&#x63D2;&#x4EF6;&#x5B9E;&#x73B0;&#x6D41;&#x7A0B;&#x5B9E;&#x4F8B;</h3>
+<h4 id="1-&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;maven&#x9879;&#x76EE;">1 &#x65B0;&#x5EFA;&#x4E00;&#x4E2A;maven&#x9879;&#x76EE;</h4>
+<h5 id="11-&#x9879;&#x76EE;&#x540D;&#x79F0;&#x53D6;&#x540D;&#xFF1A;hugegraph-plugin-demo">1.1 &#x9879;&#x76EE;&#x540D;&#x79F0;&#x53D6;&#x540D;&#xFF1A;hugegraph-plugin-demo</h5>
+<h5 id="12-&#x6DFB;&#x52A0;hugegraph-core-jar&#x5305;&#x4F9D;&#x8D56;">1.2 &#x6DFB;&#x52A0;<code>hugegraph-core</code> Jar&#x5305;&#x4F9D;&#x8D56;</h5>
+<p>maven pom.xml&#x8BE6;&#x7EC6;&#x5185;&#x5BB9;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-xml"><span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span><span class="hljs-meta">?&gt;</span></span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">project</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span>
+         <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+         <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">modelVersion</span>&gt;</span>4.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">modelVersion</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.baidu.hugegraph<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>hugegraph-plugin-demo<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">packaging</span>&gt;</span>jar<span class="hljs-tag">&lt;/<span class="hljs-name">packaging</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>hugegraph-plugin-demo<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.baidu.hugegraph<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>hugegraph-core<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>${project.version}<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">project</span>&gt;</span>
+</code></pre>
+<h4 id="2-&#x5B9E;&#x73B0;&#x6269;&#x5C55;&#x529F;&#x80FD;">2 &#x5B9E;&#x73B0;&#x6269;&#x5C55;&#x529F;&#x80FD;</h4>
+<h5 id="21-&#x6269;&#x5C55;&#x81EA;&#x5B9A;&#x4E49;&#x540E;&#x7AEF;">2.1 &#x6269;&#x5C55;&#x81EA;&#x5B9A;&#x4E49;&#x540E;&#x7AEF;</h5>
+<h6 id="211-&#x5B9E;&#x73B0;&#x63A5;&#x53E3;backendstoreprovider">2.1.1 &#x5B9E;&#x73B0;&#x63A5;&#x53E3;BackendStoreProvider</h6>
+<ul>
+<li>&#x53EF;&#x5B9E;&#x73B0;&#x63A5;&#x53E3;&#xFF1A;<code>com.baidu.hugegraph.backend.store.BackendStoreProvider</code></li>
+<li>&#x6216;&#x8005;&#x7EE7;&#x627F;&#x62BD;&#x8C61;&#x7C7B;&#xFF1A;<code>com.baidu.hugegraph.backend.store.AbstractBackendStoreProvider</code></li>
+</ul>
+<p>&#x4EE5;RocksDB&#x540E;&#x7AEF;RocksDBStoreProvider&#x4E3A;&#x4F8B;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RocksDBStoreProvider</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractBackendStoreProvider</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> String <span class="hljs-title">database</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.graph().toLowerCase();
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> BackendStore <span class="hljs-title">newSchemaStore</span><span class="hljs-params">(String store)</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> RocksDBSchemaStore(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">this</span>.database(), store);
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> BackendStore <span class="hljs-title">newGraphStore</span><span class="hljs-params">(String store)</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> RocksDBGraphStore(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">this</span>.database(), store);
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">type</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;rocksdb&quot;</span>;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">version</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;1.0&quot;</span>;
+    }
+}
+</code></pre>
+<h6 id="212-&#x5B9E;&#x73B0;&#x63A5;&#x53E3;backendstore">2.1.2 &#x5B9E;&#x73B0;&#x63A5;&#x53E3;BackendStore</h6>
+<p>BackendStore&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">BackendStore</span> </span>{
+    <span class="hljs-comment">// Store name</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">store</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment">// Database name</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">database</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment">// Get the parent provider</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> BackendStoreProvider <span class="hljs-title">provider</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment">// Open/close database</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">open</span><span class="hljs-params">(HugeConfig config)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">close</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment">// Initialize/clear database</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">clear</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment">// Add/delete data</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">mutate</span><span class="hljs-params">(BackendMutation mutation)</span></span>;
+
+    <span class="hljs-comment">// Query data</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Iterator&lt;BackendEntry&gt; <span class="hljs-title">query</span><span class="hljs-params">(Query query)</span></span>;
+
+    <span class="hljs-comment">// Transaction</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">beginTx</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">commitTx</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">rollbackTx</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment">// Get metadata by key</span>
+    <span class="hljs-keyword">public</span> &lt;R&gt; <span class="hljs-function">R <span class="hljs-title">metadata</span><span class="hljs-params">(HugeType type, String meta, Object[] args)</span></span>;
+
+    <span class="hljs-comment">// Backend features</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> BackendFeatures <span class="hljs-title">features</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment">// Generate an id for a specific type</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Id <span class="hljs-title">nextId</span><span class="hljs-params">(HugeType type)</span></span>;
+}
+</code></pre>
+<h6 id="213-&#x6269;&#x5C55;&#x81EA;&#x5B9A;&#x4E49;&#x5E8F;&#x5217;&#x5316;&#x5668;">2.1.3 &#x6269;&#x5C55;&#x81EA;&#x5B9A;&#x4E49;&#x5E8F;&#x5217;&#x5316;&#x5668;</h6>
+<p>&#x5E8F;&#x5217;&#x5316;&#x5668;&#x5FC5;&#x987B;&#x7EE7;&#x627F;&#x62BD;&#x8C61;&#x7C7B;&#xFF1A;<code>com.baidu.hugegraph.backend.serializer.AbstractSerializer</code>(<code>implements GraphSerializer, SchemaSerializer</code>)
+&#x4E3B;&#x8981;&#x63A5;&#x53E3;&#x7684;&#x5B9A;&#x4E49;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">GraphSerializer</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> BackendEntry <span class="hljs-title">writeVertex</span><span class="hljs-params">(HugeVertex vertex)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> BackendEntry <span class="hljs-title">writeVertexProperty</span><span class="hljs-params">(HugeVertexProperty&lt;?&gt; prop)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> HugeVertex <span class="hljs-title">readVertex</span><span class="hljs-params">(HugeGraph graph, BackendEntry entry)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> BackendEntry <span class="hljs-title">writeEdge</span><span class="hljs-params">(HugeEdge edge)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> BackendEntry <span class="hljs-title">writeEdgeProperty</span><span class="hljs-params">(HugeEdgeProperty&lt;?&gt; prop)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> HugeEdge <span class="hljs-title">readEdge</span><span class="hljs-params">(HugeGraph graph, BackendEntry entry)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> BackendEntry <span class="hljs-title">writeIndex</span><span class="hljs-params">(HugeIndex index)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> HugeIndex <span class="hljs-title">readIndex</span><span class="hljs-params">(HugeGraph graph, ConditionQuery query, BackendEntry entry)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> BackendEntry <span class="hljs-title">writeId</span><span class="hljs-params">(HugeType type, Id id)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Query <span class="hljs-title">writeQuery</span><span class="hljs-params">(Query query)</span></span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">SchemaSerializer</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> BackendEntry <span class="hljs-title">writeVertexLabel</span><span class="hljs-params">(VertexLabel vertexLabel)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> VertexLabel <span class="hljs-title">readVertexLabel</span><span class="hljs-params">(HugeGraph graph, BackendEntry entry)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> BackendEntry <span class="hljs-title">writeEdgeLabel</span><span class="hljs-params">(EdgeLabel edgeLabel)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> EdgeLabel <span class="hljs-title">readEdgeLabel</span><span class="hljs-params">(HugeGraph graph, BackendEntry entry)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> BackendEntry <span class="hljs-title">writePropertyKey</span><span class="hljs-params">(PropertyKey propertyKey)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> PropertyKey <span class="hljs-title">readPropertyKey</span><span class="hljs-params">(HugeGraph graph, BackendEntry entry)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> BackendEntry <span class="hljs-title">writeIndexLabel</span><span class="hljs-params">(IndexLabel indexLabel)</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> IndexLabel <span class="hljs-title">readIndexLabel</span><span class="hljs-params">(HugeGraph graph, BackendEntry entry)</span></span>;
+}
+</code></pre>
+<h6 id="214-&#x6269;&#x5C55;&#x81EA;&#x5B9A;&#x4E49;&#x914D;&#x7F6E;&#x9879;">2.1.4 &#x6269;&#x5C55;&#x81EA;&#x5B9A;&#x4E49;&#x914D;&#x7F6E;&#x9879;</h6>
+<p>&#x589E;&#x52A0;&#x81EA;&#x5B9A;&#x4E49;&#x540E;&#x7AEF;&#x65F6;&#xFF0C;&#x53EF;&#x80FD;&#x9700;&#x8981;&#x589E;&#x52A0;&#x65B0;&#x7684;&#x914D;&#x7F6E;&#x9879;&#xFF0C;&#x5B9E;&#x73B0;&#x6D41;&#x7A0B;&#x4E3B;&#x8981;&#x5305;&#x62EC;&#xFF1A;</p>
+<ul>
+<li>&#x589E;&#x52A0;&#x914D;&#x7F6E;&#x9879;&#x5BB9;&#x5668;&#x7C7B;&#xFF0C;&#x5E76;&#x5B9E;&#x73B0;&#x63A5;&#x53E3;<code>com.baidu.hugegraph.config.OptionHolder</code></li>
+<li>&#x63D0;&#x4F9B;&#x5355;&#x4F8B;&#x65B9;&#x6CD5;<code>public static OptionHolder instance()</code>&#xFF0C;&#x5E76;&#x5728;&#x5BF9;&#x8C61;&#x521D;&#x59CB;&#x5316;&#x65F6;&#x8C03;&#x7528;&#x65B9;&#x6CD5;<code>OptionHolder.registerOptions()</code></li>
+<li>&#x589E;&#x52A0;&#x914D;&#x7F6E;&#x9879;&#x58F0;&#x660E;&#xFF0C;&#x5355;&#x503C;&#x914D;&#x7F6E;&#x9879;&#x7C7B;&#x578B;&#x4E3A;<code>ConfigOption</code>&#x3001;&#x591A;&#x503C;&#x914D;&#x7F6E;&#x9879;&#x7C7B;&#x578B;&#x4E3A;<code>ConfigListOption</code></li>
+</ul>
+<p>&#x4EE5;RocksDB&#x914D;&#x7F6E;&#x9879;&#x5B9A;&#x4E49;&#x4E3A;&#x4F8B;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RocksDBOptions</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">OptionHolder</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">RocksDBOptions</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">super</span>();
+    }
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">volatile</span> RocksDBOptions instance;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">synchronized</span> RocksDBOptions <span class="hljs-title">instance</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">if</span> (instance == <span class="hljs-keyword">null</span>) {
+            instance = <span class="hljs-keyword">new</span> RocksDBOptions();
+            instance.registerOptions();
+        }
+        <span class="hljs-keyword">return</span> instance;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> ConfigOption&lt;String&gt; DATA_PATH =
+            <span class="hljs-keyword">new</span> ConfigOption&lt;&gt;(
+                    <span class="hljs-string">&quot;rocksdb.data_path&quot;</span>,
+                    <span class="hljs-string">&quot;The path for storing data of RocksDB.&quot;</span>,
+                    disallowEmpty(),
+                    <span class="hljs-string">&quot;rocksdb-data&quot;</span>
+            );
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> ConfigOption&lt;String&gt; WAL_PATH =
+            <span class="hljs-keyword">new</span> ConfigOption&lt;&gt;(
+                    <span class="hljs-string">&quot;rocksdb.wal_path&quot;</span>,
+                    <span class="hljs-string">&quot;The path for storing WAL of RocksDB.&quot;</span>,
+                    disallowEmpty(),
+                    <span class="hljs-string">&quot;rocksdb-data&quot;</span>
+            );
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> ConfigListOption&lt;String&gt; DATA_DISKS =
+            <span class="hljs-keyword">new</span> ConfigListOption&lt;&gt;(
+                    <span class="hljs-string">&quot;rocksdb.data_disks&quot;</span>,
+                    <span class="hljs-keyword">false</span>,
+                    <span class="hljs-string">&quot;The optimized disks for storing data of RocksDB. &quot;</span> +
+                    <span class="hljs-string">&quot;The format of each element: `STORE/TABLE: /path/to/disk`.&quot;</span> +
+                    <span class="hljs-string">&quot;Allowed keys are [graph/vertex, graph/edge_out, graph/edge_in, &quot;</span> +
+                    <span class="hljs-string">&quot;graph/secondary_index, graph/range_index]&quot;</span>,
+                    <span class="hljs-keyword">null</span>,
+                    String.class,
+                    ImmutableList.of()
+            );
+}
+</code></pre>
+<h5 id="22-&#x6269;&#x5C55;&#x81EA;&#x5B9A;&#x4E49;&#x5206;&#x8BCD;&#x5668;">2.2 &#x6269;&#x5C55;&#x81EA;&#x5B9A;&#x4E49;&#x5206;&#x8BCD;&#x5668;</h5>
+<p>&#x5206;&#x8BCD;&#x5668;&#x9700;&#x8981;&#x5B9E;&#x73B0;&#x63A5;&#x53E3;<code>com.baidu.hugegraph.analyzer.Analyzer</code>&#xFF0C;&#x4EE5;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;SpaceAnalyzer&#x7A7A;&#x683C;&#x5206;&#x8BCD;&#x5668;&#x4E3A;&#x4F8B;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> com.baidu.hugegraph.plugin;
+
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.HashSet;
+<span class="hljs-keyword">import</span> java.util.Set;
+
+<span class="hljs-keyword">import</span> com.baidu.hugegraph.analyzer.Analyzer;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SpaceAnalyzer</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Analyzer</span> </span>{
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Set&lt;String&gt; <span class="hljs-title">segment</span><span class="hljs-params">(String text)</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> HashSet&lt;&gt;(Arrays.asList(text.split(<span class="hljs-string">&quot; &quot;</span>)));
+    }
+}
+</code></pre>
+<h4 id="3-&#x5B9E;&#x73B0;&#x63D2;&#x4EF6;&#x63A5;&#x53E3;&#xFF0C;&#x5E76;&#x8FDB;&#x884C;&#x6CE8;&#x518C;">3 &#x5B9E;&#x73B0;&#x63D2;&#x4EF6;&#x63A5;&#x53E3;&#xFF0C;&#x5E76;&#x8FDB;&#x884C;&#x6CE8;&#x518C;</h4>
+<p>&#x63D2;&#x4EF6;&#x6CE8;&#x518C;&#x5165;&#x53E3;&#x4E3A;<code>HugeGraphPlugin.register()</code>&#xFF0C;&#x81EA;&#x5B9A;&#x4E49;&#x63D2;&#x4EF6;&#x5FC5;&#x987B;&#x5B9E;&#x73B0;&#x8BE5;&#x63A5;&#x53E3;&#x65B9;&#x6CD5;&#xFF0C;&#x5728;&#x5176;&#x5185;&#x90E8;&#x6CE8;&#x518C;&#x4E0A;&#x8FF0;&#x5B9A;&#x4E49;&#x597D;&#x7684;&#x6269;&#x5C55;&#x9879;&#x3002;
+&#x63A5;&#x53E3;<code>com.baidu.hugegraph.plugin.HugeGraphPlugin</code>&#x5B9A;&#x4E49;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">HugeGraphPlugin</span> </span>{
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">name</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">register</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">supportsMinVersion</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">supportsMaxVersion</span><span class="hljs-params">()</span></span>;
+}
+</code></pre>
+<p>&#x5E76;&#x4E14;HugeGraphPlugin&#x63D0;&#x4F9B;&#x4E86;4&#x4E2A;&#x9759;&#x6001;&#x65B9;&#x6CD5;&#x7528;&#x4E8E;&#x6CE8;&#x518C;&#x6269;&#x5C55;&#x9879;&#xFF1A;</p>
+<ul>
+<li>registerOptions(String name, String classPath)&#xFF1A;&#x6CE8;&#x518C;&#x914D;&#x7F6E;&#x9879;</li>
+<li>registerBackend(String name, String classPath)&#xFF1A;&#x6CE8;&#x518C;&#x540E;&#x7AEF;&#xFF08;BackendStoreProvider&#xFF09;</li>
+<li>registerSerializer(String name, String classPath)&#xFF1A;&#x6CE8;&#x518C;&#x5E8F;&#x5217;&#x5316;&#x5668;</li>
+<li>registerAnalyzer(String name, String classPath)&#xFF1A;&#x6CE8;&#x518C;&#x5206;&#x8BCD;&#x5668;</li>
+</ul>
+<p>&#x4E0B;&#x9762;&#x4EE5;&#x6CE8;&#x518C;SpaceAnalyzer&#x5206;&#x8BCD;&#x5668;&#x4E3A;&#x4F8B;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> com.baidu.hugegraph.plugin;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoPlugin</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">HugeGraphPlugin</span> </span>{
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">name</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;demo&quot;</span>;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">register</span><span class="hljs-params">()</span> </span>{
+        HugeGraphPlugin.registerAnalyzer(<span class="hljs-string">&quot;demo&quot;</span>, SpaceAnalyzer.class.getName());
+    }
+}
+</code></pre>
+<h4 id="4-&#x914D;&#x7F6E;spi&#x5165;&#x53E3;">4 &#x914D;&#x7F6E;SPI&#x5165;&#x53E3;</h4>
+<ol>
+<li>&#x786E;&#x4FDD;services&#x76EE;&#x5F55;&#x5B58;&#x5728;&#xFF1A;hugegraph-plugin-demo/resources/META-INF/services</li>
+<li>&#x5728;services&#x76EE;&#x5F55;&#x4E0B;&#x5EFA;&#x7ACB;&#x6587;&#x672C;&#x6587;&#x4EF6;&#xFF1A;com.baidu.hugegraph.plugin.HugeGraphPlugin</li>
+<li>&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x5982;&#x4E0B;&#xFF1A;com.baidu.hugegraph.plugin.DemoPlugin</li>
+</ol>
+<h4 id="5-&#x6253;jar&#x5305;">5 &#x6253;Jar&#x5305;</h4>
+<p>&#x901A;&#x8FC7;maven&#x6253;&#x5305;&#xFF0C;&#x5728;&#x9879;&#x76EE;&#x76EE;&#x5F55;&#x4E0B;&#x6267;&#x884C;&#x547D;&#x4EE4;<code>mvn package</code>&#xFF0C;&#x5728;target&#x76EE;&#x5F55;&#x4E0B;&#x4F1A;&#x751F;&#x6210;Jar&#x5305;&#x6587;&#x4EF6;&#x3002;
+&#x4F7F;&#x7528;&#x65F6;&#x5C06;&#x8BE5;Jar&#x5305;&#x62F7;&#x5230;<code>plugins</code>&#x76EE;&#x5F55;&#xFF0C;&#x91CD;&#x542F;&#x670D;&#x52A1;&#x5373;&#x53EF;&#x751F;&#x6548;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+                
+
+
+  
+	<footer>
+
+	</footer>
+
+
+            </div>
+
+            
+                
+                <a href="config-option.html" class="navigation navigation-prev " aria-label="Previous page: Config Options">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="faq.html" class="navigation navigation-next " aria-label="Next page: FAQ">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Custom Plugins","level":"3.5","depth":1,"next":{"title":"FAQ","level":"3.6","depth":1,"path":"guides/faq.md","ref":"guides/faq.md","articles":[]},"previous":{"title":"Config Options","level":"3.4","depth":1,"path":"guides/config-option.md","ref":"guides/config-option.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"guides/custom-plugin.md","mtime":"2018-07-28T06:56:34.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-28T07:00:54.802Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    
+        <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.slim.min.js"></script>
+        <script src="//cdn.bootcss.com/tether/1.4.0/js/tether.min.js"></script>
+        <script src="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+    
+
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

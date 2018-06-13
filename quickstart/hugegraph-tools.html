@@ -1,0 +1,1100 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Manage with HugeGraph-Tools · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+
+    
+        <link rel="stylesheet" 
+            href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+    
+
+    
+        <link rel="stylesheet" href="../gitbook/cuav-style.css">
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    
+    
+        <link rel="shortcut icon" 
+            href="../images/favicon.ico" type="image/x-icon">
+    
+
+    
+    <link rel="next" href="hugegraph-studio.html" />
+    
+    
+    <link rel="prev" href="hugegraph-loader.html" />
+    
+
+    </head>
+    <body>
+        
+
+
+
+	
+	
+	
+	<nav
+			class="navbar fixed-top navbar-inverse background-inverse navbar-toggleable-md">
+		
+
+		<a class="navbar-brand" href="javascript:;">
+			
+			
+				<img src="../images/logo.png" 
+					height="32" class="d-inline-block align-top" 
+					alt="HugeGraph Database" />
+			
+		</a>
+
+		
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<span class="mr-auto"></span>
+				<ul id="cuav-nav" class="navbar-nav text-center text-lg-left">
+					
+				</ul>
+				<span style="width: 6rem"></span>
+			</div>
+			
+		
+	</nav>
+
+
+<div class="book">
+    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Manage with HugeGraph-Tools</a>
+    </h1>
+</div>
+
+
+
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../download.html">
+            
+                <a href="../download.html">
+            
+                    
+                    Download
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Quickstart</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="hugegraph-server.html">
+            
+                <a href="hugegraph-server.html">
+            
+                    
+                    Install HugeGraph-Server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="hugegraph-loader.html">
+            
+                <a href="hugegraph-loader.html">
+            
+                    
+                    Load data with HugeGraph-Loader
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.3" data-path="hugegraph-tools.html">
+            
+                <a href="hugegraph-tools.html">
+            
+                    
+                    Manage with HugeGraph-Tools
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="hugegraph-studio.html">
+            
+                <a href="hugegraph-studio.html">
+            
+                    
+                    Display with HugeGraph-Studio
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="hugegraph-client.html">
+            
+                <a href="hugegraph-client.html">
+            
+                    
+                    Develop with HugeGraph-Client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" data-path="hugegraph-spark.html">
+            
+                <a href="hugegraph-spark.html">
+            
+                    
+                    Analysis with HugeGraph-Spark
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Guides</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../guides/architectural.html">
+            
+                <a href="../guides/architectural.html">
+            
+                    
+                    Architecture Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../guides/desgin-concept.html">
+            
+                <a href="../guides/desgin-concept.html">
+            
+                    
+                    Design Concepts
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../guides/config-guide.html">
+            
+                <a href="../guides/config-guide.html">
+            
+                    
+                    Configuration Guide
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="../guides/config-option.html">
+            
+                <a href="../guides/config-option.html">
+            
+                    
+                    Config Options
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.5" data-path="../guides/custom-plugin.html">
+            
+                <a href="../guides/custom-plugin.html">
+            
+                    
+                    Custom Plugins
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.6" data-path="../guides/faq.html">
+            
+                <a href="../guides/faq.html">
+            
+                    
+                    FAQ
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Query Language</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../language/hugegraph-gremlin.html">
+            
+                <a href="../language/hugegraph-gremlin.html">
+            
+                    
+                    Gremlin Query Language
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="../language/hugegraph-example.html">
+            
+                <a href="../language/hugegraph-example.html">
+            
+                    
+                    HugeGraph Examples
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Clients</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="../clients/hugegraph-api.html">
+            
+                <a href="../clients/hugegraph-api.html">
+            
+                    
+                    Restful API
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.1.1" data-path="../clients/restful-api/propertykey.html">
+            
+                <a href="../clients/restful-api/propertykey.html">
+            
+                    
+                    PropertyKey
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.2" data-path="../clients/restful-api/vertexlabel.html">
+            
+                <a href="../clients/restful-api/vertexlabel.html">
+            
+                    
+                    VertexLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.3" data-path="../clients/restful-api/edgelabel.html">
+            
+                <a href="../clients/restful-api/edgelabel.html">
+            
+                    
+                    EdgeLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.4" data-path="../clients/restful-api/indexlabel.html">
+            
+                <a href="../clients/restful-api/indexlabel.html">
+            
+                    
+                    IndexLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.5" data-path="../clients/restful-api/vertex.html">
+            
+                <a href="../clients/restful-api/vertex.html">
+            
+                    
+                    Vertex
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.6" data-path="../clients/restful-api/edge.html">
+            
+                <a href="../clients/restful-api/edge.html">
+            
+                    
+                    Edge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.7" data-path="../clients/restful-api/traverser.html">
+            
+                <a href="../clients/restful-api/traverser.html">
+            
+                    
+                    Traverser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.8" data-path="../clients/restful-api/variable.html">
+            
+                <a href="../clients/restful-api/variable.html">
+            
+                    
+                    Variable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.9" data-path="../clients/restful-api/graph.html">
+            
+                <a href="../clients/restful-api/graph.html">
+            
+                    
+                    Graph
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.10" data-path="../clients/restful-api/gremlin.html">
+            
+                <a href="../clients/restful-api/gremlin.html">
+            
+                    
+                    Gremlin
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.11" data-path="../clients/restful-api/other.html">
+            
+                <a href="../clients/restful-api/other.html">
+            
+                    
+                    Other
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="../clients/hugegraph-client.html">
+            
+                <a href="../clients/hugegraph-client.html">
+            
+                    
+                    Java Client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="../clients/gremlin-console.html">
+            
+                <a href="../clients/gremlin-console.html">
+            
+                    
+                    Gremlin Console
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Performance</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="../performance/hugegraph-benchmark-0.5.6.html">
+            
+                <a href="../performance/hugegraph-benchmark-0.5.6.html">
+            
+                    
+                    HugeGraph Benchmark Performance
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="../performance/hugegraph-api-performance.html">
+            
+                <a href="../performance/hugegraph-api-performance.html">
+            
+                    
+                    HugeGraph API Performance
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="6.2.1" data-path="../performance/hugegraph-api-0.5.6-RocksDB.html">
+            
+                <a href="../performance/hugegraph-api-0.5.6-RocksDB.html">
+            
+                    
+                    v0.5.6 Stand-alone(RocksDB)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.2" data-path="../performance/hugegraph-api-0.5.6-Cassandra.html">
+            
+                <a href="../performance/hugegraph-api-0.5.6-Cassandra.html">
+            
+                    
+                    v0.5.6 Cluster(Cassandra)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.3" data-path="../performance/hugegraph-api-0.4.4.html">
+            
+                <a href="../performance/hugegraph-api-0.4.4.html">
+            
+                    
+                    v0.4.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2.4" data-path="../performance/hugegraph-api-0.2.html">
+            
+                <a href="../performance/hugegraph-api-0.2.html">
+            
+                    
+                    v0.2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="../performance/hugegraph-loader-performance.html">
+            
+                <a href="../performance/hugegraph-loader-performance.html">
+            
+                    
+                    HugeGraph-Loader Performance
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">ChangeLogs</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="../changelog/hugegraph-0.6.1-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.6.1-release-notes.html">
+            
+                    
+                    Release-0.6.1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="../changelog/hugegraph-0.5.6-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.5.6-release-notes.html">
+            
+                    
+                    Release-0.5.6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="../changelog/hugegraph-0.4.4-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.4.4-release-notes.html">
+            
+                    
+                    Release-0.4.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.4" data-path="../changelog/hugegraph-0.3.3-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.3.3-release-notes.html">
+            
+                    
+                    Release-0.3.3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5" data-path="../changelog/hugegraph-0.2.4-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.2.4-release-notes.html">
+            
+                    
+                    Release-0.2.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.6" data-path="../changelog/hugegraph-0.2-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.2-release-notes.html">
+            
+                    
+                    Release-0.2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="hugegraph-tools-quick-start">HugeGraph-Tools Quick Start</h2>
+<h3 id="1-&#x6982;&#x8FF0;">1 &#x6982;&#x8FF0;</h3>
+<p>HugeGraph-Tools &#x662F; HugeGragh &#x7684;&#x81EA;&#x52A8;&#x5316;&#x90E8;&#x7F72;&#x3001;&#x7BA1;&#x7406;&#x548C;&#x5907;&#x4EFD;/&#x8FD8;&#x539F;&#x7EC4;&#x4EF6;&#x3002;</p>
+<h3 id="2-&#x83B7;&#x53D6;-hugegraph-tools">2 &#x83B7;&#x53D6; HugeGraph-Tools</h3>
+<p>&#x6709;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x53EF;&#x4EE5;&#x83B7;&#x53D6; HugeGraph-Tools&#xFF1A;</p>
+<ul>
+<li>&#x4E0B;&#x8F7D;&#x4E8C;&#x8FDB;&#x5236;tar&#x5305;</li>
+<li>&#x4E0B;&#x8F7D;&#x6E90;&#x7801;&#x7F16;&#x8BD1;&#x5B89;&#x88C5;</li>
+</ul>
+<h4 id="21-&#x4E0B;&#x8F7D;&#x4E8C;&#x8FDB;&#x5236;tar&#x5305;">2.1 &#x4E0B;&#x8F7D;&#x4E8C;&#x8FDB;&#x5236;tar&#x5305;</h4>
+<p>&#x4E0B;&#x8F7D;&#x6700;&#x65B0;&#x7248;&#x672C;&#x7684; HugeGraph-Tools &#x5305;&#xFF1A;</p>
+<pre><code class="lang-bash">wget https://hugegraph.github.io/hugegraph-doc/downloads/hugetools/hugegraph-tools-<span class="hljs-variable">${version}</span>.tar.gz
+tar zxvf hugegraph-tools-<span class="hljs-variable">${version}</span>.tar.gz
+</code></pre>
+<h4 id="22-&#x4E0B;&#x8F7D;&#x6E90;&#x7801;&#x7F16;&#x8BD1;&#x5B89;&#x88C5;">2.2 &#x4E0B;&#x8F7D;&#x6E90;&#x7801;&#x7F16;&#x8BD1;&#x5B89;&#x88C5;</h4>
+<p>&#x4E0B;&#x8F7D;&#x6700;&#x65B0;&#x7248;&#x672C;&#x7684; HugeGraph-Tools &#x6E90;&#x7801;&#x5305;&#xFF1A;</p>
+<pre><code class="lang-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/hugegraph/hugegraph-tools.git
+</code></pre>
+<p>&#x7F16;&#x8BD1;&#x751F;&#x6210;tar&#x5305;:</p>
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> hugegraph-tools
+mvn package -DskipTests
+</code></pre>
+<h3 id="3-&#x4F7F;&#x7528;">3 &#x4F7F;&#x7528;</h3>
+<h4 id="31-&#x529F;&#x80FD;&#x6982;&#x89C8;">3.1 &#x529F;&#x80FD;&#x6982;&#x89C8;</h4>
+<p>&#x89E3;&#x538B;&#x540E;&#xFF0C;&#x8FDB;&#x5165;hugegraph-tools&#x76EE;&#x5F55;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>bin/hugegraph</code>&#x6765;&#x67E5;&#x770B; usage &#x4FE1;&#x606F;&#x3002;&#x4E3B;&#x8981;&#x5206;&#x4E3A;&#xFF1A;</p>
+<ul>
+<li>&#x5B89;&#x88C5;&#x90E8;&#x7F72;&#x7C7B;&#xFF0C;deploy&#x3001;clear&#x3001;start-all&#x548C;stop-all</li>
+<li>&#x5907;&#x4EFD;/&#x6062;&#x590D;&#x7C7B;&#xFF0C;backup&#x3001;restore&#x3001;schedule-backup&#x3001;dump</li>
+<li>&#x7BA1;&#x7406;&#x7C7B;&#xFF0C;graph-mode-set&#x3001;graph-mode-get&#x3001;graph-list&#x3001;graph-get&#x548C;graph-clear</li>
+<li>Gremlin&#x7C7B;&#xFF0C;gremlin</li>
+</ul>
+<pre><code class="lang-bash">Usage: hugegraph [options] [<span class="hljs-built_in">command</span>] [<span class="hljs-built_in">command</span> options]
+</code></pre>
+<h5 id="32-options-&#x5168;&#x5C40;&#x53D8;&#x91CF;">3.2 [options]-&#x5168;&#x5C40;&#x53D8;&#x91CF;</h5>
+<p><code>options</code>&#x662F; HugeGraph-Tools &#x7684;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;hugegraph-tools/bin/hugegraph&#x4E2D;&#x914D;&#x7F6E;,&#x5305;&#x62EC;&#xFF1A;</p>
+<ul>
+<li>--graph&#xFF0C;HugeGraph-Tools&#x64CD;&#x4F5C;&#x7684;&#x56FE;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x9ED8;&#x8BA4;&#x503C;&#x662F;hugegraph</li>
+<li>--url&#xFF0C;HugeGraph-Server &#x7684;&#x670D;&#x52A1;&#x5730;&#x5740;&#xFF0C;&#x9ED8;&#x8BA4;&#x662F;<a href="http://127.0.0.1:8080" target="_blank">http://127.0.0.1:8080</a></li>
+<li>--user&#xFF0C;&#x5F53; HugeGraph-Server &#x5F00;&#x542F;&#x8BA4;&#x8BC1;&#x65F6;&#xFF0C;&#x4F20;&#x9012;&#x7528;&#x6237;&#x540D;</li>
+<li>--password&#xFF0C;&#x5F53; HugeGraph-Server &#x5F00;&#x542F;&#x8BA4;&#x8BC1;&#x65F6;&#xFF0C;&#x4F20;&#x9012;&#x7528;&#x6237;&#x7684;&#x5BC6;&#x7801;</li>
+</ul>
+<h5 id="33-&#x5B89;&#x88C5;&#x90E8;&#x7F72;&#x7C7B;">3.3 &#x5B89;&#x88C5;&#x90E8;&#x7F72;&#x7C7B;</h5>
+<ul>
+<li>deploy&#xFF0C;&#x4E00;&#x952E;&#x4E0B;&#x8F7D;&#x3001;&#x5B89;&#x88C5;&#x548C;&#x542F;&#x52A8; HugeGraph-Server &#x548C; HugeGraph-Studio</li>
+<li>clear&#xFF0C;&#x6E05;&#x7406; HugeGraph-Server &#x548C; HugeGraph-Studio &#x76EE;&#x5F55;&#x548C;tar&#x5305;</li>
+<li>start-all&#xFF0C;&#x4E00;&#x952E;&#x542F;&#x52A8; HugeGraph-Server &#x548C; HugeGraph-Studio&#xFF0C;&#x5E76;&#x542F;&#x52A8;&#x76D1;&#x63A7;&#xFF0C;&#x670D;&#x52A1;&#x6B7B;&#x6389;&#x65F6;&#x81EA;&#x52A8;&#x62C9;&#x8D77;&#x670D;&#x52A1;</li>
+<li>stop-all&#xFF0C;&#x4E00;&#x952E;&#x5173;&#x95ED; HugeGraph-Server &#x548C; HugeGraph-Studio</li>
+</ul>
+<h5 id="34-&#x5907;&#x4EFD;&#x6062;&#x590D;&#x7C7B;">3.4 &#x5907;&#x4EFD;/&#x6062;&#x590D;&#x7C7B;</h5>
+<ul>
+<li>backup&#xFF0C;&#x5C06;&#x67D0;&#x5F20;&#x56FE;&#x4E2D;&#x7684; schema &#x6216;&#x8005; data &#x5907;&#x4EFD;&#x5230; HugeGraph &#x7CFB;&#x7EDF;&#x4E4B;&#x5916;&#xFF0C;&#x4EE5; JSON &#x5F62;&#x5F0F;&#x5B58;&#x5728;&#x672C;&#x5730;&#x78C1;&#x76D8;</li>
+<li>restore&#xFF0C;&#x5C06; JSON &#x683C;&#x5F0F;&#x5B58;&#x50A8;&#x7684; schema &#x6216;&#x8005; data &#x6062;&#x590D;&#x5230;&#x539F;&#x7CFB;&#x7EDF;&#x6216;&#x8005;&#x521B;&#x5EFA;&#x65B0;&#x56FE;</li>
+<li>schedule-backup&#xFF0C;&#x5468;&#x671F;&#x6027;&#x5BF9;&#x56FE;&#x6267;&#x884C;&#x5907;&#x4EFD;&#x64CD;&#x4F5C;&#xFF0C;&#x5E76;&#x4FDD;&#x7559;&#x4E00;&#x5B9A;&#x6570;&#x76EE;&#x7684;&#x6700;&#x65B0;&#x5907;&#x4EFD;</li>
+<li>dump&#xFF0C;&#x628A;&#x6574;&#x5F20;&#x56FE;&#x7684;&#x9876;&#x70B9;&#x548C;&#x8FB9;&#x5168;&#x90E8;&#x5BFC;&#x51FA;&#xFF0C;&#x4EE5;<code>vertex vertex-edge1 vertex-edge2...</code>&#x683C;&#x5F0F;&#x5B58;&#x50A8;</li>
+</ul>
+<h5 id="35-&#x7BA1;&#x7406;&#x7C7B;&#xFF0C;graph-mode-set&#x3001;graph-mode-get&#x3001;graph-list&#x3001;graph-get&#x548C;graph-clear">3.5 &#x7BA1;&#x7406;&#x7C7B;&#xFF0C;graph-mode-set&#x3001;graph-mode-get&#x3001;graph-list&#x3001;graph-get&#x548C;graph-clear</h5>
+<ul>
+<li>graph-mode-set&#xFF0C;&#x8BBE;&#x7F6E;&#x56FE;&#x7684; restore mode</li>
+<li>graph-mode-get&#xFF0C;&#x83B7;&#x53D6;&#x56FE;&#x7684; restore mode</li>
+<li>graph-list&#xFF0C;&#x5217;&#x51FA;&#x67D0;&#x4E2A; HugeGraph-Server &#x4E2D;&#x5168;&#x90E8;&#x7684;&#x56FE;</li>
+<li>graph-get&#xFF0C;&#x83B7;&#x53D6;&#x67D0;&#x4E2A;&#x56FE;</li>
+<li>graph-clear&#xFF0C;&#x6E05;&#x9664;&#x67D0;&#x4E2A;&#x56FE;&#x7684;&#x5168;&#x90E8; schema &#x548C; data</li>
+</ul>
+<blockquote>
+<p>&#x5F53;&#x56FE;&#x4E2D;&#x542B;&#x6709; Automatic Id Strategy&#x7684; vertex label &#x65F6;&#xFF0C;restore &#x524D;&#x9700;&#x8981;&#x5C06;&#x56FE; restoring &#x6A21;&#x5F0F;&#x8BBE;&#x7F6E;&#x4E3A; TRUE&#xFF0C;restore &#x7ED3;&#x675F;&#x540E;&#x6062;&#x590D; restoring &#x6A21;&#x5F0F;&#x4E3A; FALSE</p>
+</blockquote>
+<h5 id="36-gremlin&#x7C7B;&#xFF0C;gremlin">3.6 Gremlin&#x7C7B;&#xFF0C;gremlin</h5>
+<ul>
+<li>gremlin&#xFF0C;&#x53D1;&#x9001; Gremlin &#x8BED;&#x53E5;&#x5230; HugeGraph-Server &#x6765;&#x6267;&#x884C;&#x67E5;&#x8BE2;&#x6216;&#x4FEE;&#x6539;&#x64CD;&#x4F5C;</li>
+</ul>
+<h5 id="37-&#x5177;&#x4F53;&#x547D;&#x4EE4;&#x53C2;&#x6570;">3.7 &#x5177;&#x4F53;&#x547D;&#x4EE4;&#x53C2;&#x6570;</h5>
+<p>&#x5404;&#x5B50;&#x547D;&#x4EE4;&#x7684;&#x5177;&#x4F53;&#x53C2;&#x6570;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-bash">Usage: hugegraph [options] [<span class="hljs-built_in">command</span>] [<span class="hljs-built_in">command</span> options]
+  Options:
+    --graph
+      Name of graph
+      Default: hugegraph
+    --password
+      Password of user
+    --url
+      The URL of HugeGraph-Server url
+      Default: http://127.0.0.1:8080
+    --user
+      User Name
+  Commands:
+    backup      Backup graph schema/data to files
+      Usage: backup [options]
+        Options:
+          --directory, <span class="hljs-_">-d</span>
+            Directory to store graph schema/data
+            Default: ./
+        * --huge-types, -t
+            Type of schema/data. Concat with <span class="hljs-string">&apos;,&apos;</span> <span class="hljs-keyword">if</span> more than one. <span class="hljs-string">&apos;all&apos;</span> means 
+            <span class="hljs-string">&apos;vertex,edge,vertex_label,edge_label,property_key,index_label&apos;</span> 
+          --retry
+            Retry <span class="hljs-built_in">times</span>, default is 3
+            Default: 3
+
+    schedule-backup      Schedule backup task
+      Usage: schedule-backup [options]
+        Options:
+          --backup-num
+            The number of latest backups to keep
+            Default: 3
+        * --directory, <span class="hljs-_">-d</span>
+            The directory of backups stored
+          --interval
+            The interval of backup, format is: <span class="hljs-string">&quot;a b c d e&quot;</span>. <span class="hljs-string">&apos;a&apos;</span> means minute 
+            (0 - 59), <span class="hljs-string">&apos;b&apos;</span> means hour (0 - 23), <span class="hljs-string">&apos;c&apos;</span> means day of month (1 - 
+            31), <span class="hljs-string">&apos;d&apos;</span> means month (1 - 12), <span class="hljs-string">&apos;e&apos;</span> means day of week (0 - 6) 
+            (Sunday=0), <span class="hljs-string">&quot;*&quot;</span> means all
+            Default: 0,0,*,*,*
+
+    restore      Restore graph schema/data from files
+      Usage: restore [options]
+        Options:
+          --directory, <span class="hljs-_">-d</span>
+            Directory of graph schema/data
+            Default: ./
+        * --huge-types, -t
+            Type of schema/data. Concat with <span class="hljs-string">&apos;,&apos;</span> <span class="hljs-keyword">if</span> more than one. <span class="hljs-string">&apos;all&apos;</span> means 
+            <span class="hljs-string">&apos;vertex,edge,vertex_label,edge_label,property_key,index_label&apos;</span> 
+          --retry
+            Retry <span class="hljs-built_in">times</span>, default is 3
+            Default: 3
+
+    graph-mode-get      Get graph mode
+      Usage: graph-mode-get [options]
+        Options:
+          --graph-name
+            Name of graph
+            Default: hugegraph
+
+    clear      Clear HugeGraph-Server and HugeGraph-Studio
+      Usage: clear [options]
+        Options:
+        * -p
+            Install path of HugeGraph-Server and HugeGraph-Studio
+
+    graph-list      List all graphs
+      Usage: graph-list
+
+    graph-get      Get graph info
+      Usage: graph-get [options]
+        Options:
+          --graph-name
+            Name of graph
+            Default: hugegraph
+
+    graph-clear      Clear graph schema and data
+      Usage: graph-clear [options]
+        Options:
+        * --confirm-message, -c
+            Confirm message of graph clear
+          --graph-name
+            Name of graph
+            Default: hugegraph
+
+    deploy      Install HugeGraph-Server and HugeGraph-Studio
+      Usage: deploy [options]
+        Options:
+        * -p
+            Install path of HugeGraph-Server and HugeGraph-Studio
+          -u
+            Download url prefix path of HugeGraph-Server and HugeGraph-Studio
+        * -v
+            Version of HugeGraph-Server and HugeGraph-Studio
+
+    <span class="hljs-built_in">help</span>      Print usage
+      Usage: <span class="hljs-built_in">help</span>
+
+    gremlin      Execute Gremlin statements
+      Usage: gremlin [options]
+        Options:
+          --aliases, <span class="hljs-_">-a</span>
+            Gremlin aliases, valid format is: <span class="hljs-string">&apos;key1=value1,key2=value2...&apos;</span>
+            Default: {}
+          --bindings, -b
+            Gremlin bindings, valid format is: <span class="hljs-string">&apos;key1=value1,key2=value2...&apos;</span>
+            Default: {}
+          --language, <span class="hljs-_">-l</span>
+            Gremlin script language
+            Default: gremlin-groovy
+        * --script, <span class="hljs-_">-s</span>
+            Script to be executed
+
+    stop-all      Stop HugeGraph-Server and HugeGraph-Studio
+      Usage: stop-all
+
+    start-all      Start HugeGraph-Server and HugeGraph-Studio
+      Usage: start-all [options]
+        Options:
+        * -p
+            Install path of HugeGraph-Server and HugeGraph-Studio
+        * -v
+            Version of HugeGraph-Server and HugeGraph-Studio
+
+    graph-mode-set      Set graph mode
+      Usage: graph-mode-set [options]
+        Options:
+          --graph-name
+            Name of graph
+            Default: hugegraph
+        * --restore, -r
+            Restore flag
+            Default: <span class="hljs-literal">false</span>
+
+    dump      Dump graph to files
+      Usage: dump [options]
+        Options:
+          --directory, <span class="hljs-_">-d</span>
+            Directory to store graph data
+            Default: ./
+          --retry
+            Retry <span class="hljs-built_in">times</span>, default is 3
+            Default: 3
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+                
+
+
+  
+	<footer>
+
+	</footer>
+
+
+            </div>
+
+            
+                
+                <a href="hugegraph-loader.html" class="navigation navigation-prev " aria-label="Previous page: Load data with HugeGraph-Loader">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="hugegraph-studio.html" class="navigation navigation-next " aria-label="Next page: Display with HugeGraph-Studio">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Manage with HugeGraph-Tools","level":"2.3","depth":1,"next":{"title":"Display with HugeGraph-Studio","level":"2.4","depth":1,"path":"quickstart/hugegraph-studio.md","ref":"quickstart/hugegraph-studio.md","articles":[]},"previous":{"title":"Load data with HugeGraph-Loader","level":"2.2","depth":1,"path":"quickstart/hugegraph-loader.md","ref":"quickstart/hugegraph-loader.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"quickstart/hugegraph-tools.md","mtime":"2018-07-28T06:56:34.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-28T07:00:54.802Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    
+        <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.slim.min.js"></script>
+        <script src="//cdn.bootcss.com/tether/1.4.0/js/tether.min.js"></script>
+        <script src="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+    
+
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
