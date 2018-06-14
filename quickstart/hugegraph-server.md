@@ -349,7 +349,7 @@ _说明_
 }
 ```
 
-详细的API请参考[Restful-API](/clients/restful-api/hugegraph-api.html)文档
+详细的API请参考[Restful-API](/clients/hugegraph-api.html)文档
 
 ### 7 停止Server
 

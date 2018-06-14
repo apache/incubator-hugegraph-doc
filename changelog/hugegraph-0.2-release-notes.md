@@ -140,7 +140,7 @@
 - 图数据接口
 - Gremlin接口
 
-更多细节详见[API文档](/clients/restful-api/hugegraph-api.html)
+更多细节详见[API文档](/clients/hugegraph-api.html)
 
 ### 后端支持
 

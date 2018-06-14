@@ -2,9 +2,9 @@
 
 ### 1 概述
 
-HugeLoader 是 Hugegragh 的一个模块，负责将普通文本数据转化为图形的顶点和边并插入图形数据库中。
+HugeLoader 是 Hugegragh 的数据导入模块，负责将普通文本数据转化为图形的顶点和边并插入图形数据库中。
 
-> 注意：使用 HugeLoader 需要依赖 Hugegraph Server，下载和启动 Server 详见：[HugeServer Quick Start](/quickstart/hugegraph-server.html)
+> 注意：使用 HugeLoader 需要依赖 Hugegraph Server 服务，下载和启动 Server 详见：[HugeServer Quick Start](/quickstart/hugegraph-server.html)
 
 ### 2 获取 HugeLoader
 
@@ -69,28 +69,31 @@ inputfileE = inputPath + '/edges/'
 - JSON
 
   ```groovy
-    //示例
-    authorInput = File.json(inputfileV + 'author.json')
-    bookInput = File.json(inputfileV + 'book.json')
-    authorBookInput = File.json(inputfileE + 'authorBook.json')
+    // 示例
+    personInput = File.json(inputfiledir + "vertex_person.json")
+    softwareInput = File.json(inputfiledir + "vertex_software.json")
+    knowsInput = File.json(inputfiledir + "edge_knows.json")
+    createdInput = File.json(inputfiledir + "edge_created.json")
   ```
 
 - CSV
 
   ```groovy
-    //示例
-    authorInput = File.csv(inputfileV + "author.csv")
-    bookInput = File.csv(inputfileV + "book.csv")
-    authorBookInput = File.csv(inputfileE + "authorBook.csv")
+    // 示例
+    personInput = File.csv(inputfiledir + "vertex_person.csv")
+    softwareInput = File.csv(inputfiledir + "vertex_software.csv")
+    knowsInput = File.csv(inputfiledir + "edge_knows.csv")
+    createdInput = File.csv(inputfiledir + "edge_created.csv")
   ```
 
 - TEXT
 
   ```groovy
-    //示例
-    authorInput = File.text(inputfileV + "author.txt").delimiter('|')
-    bookInput = File.text(inputfileV + "book.txt").delimiter('|')
-    authorBookInput = File.text(inputfileE + "authorBook.txt").delimiter('|')
+    // 示例
+    personInput = File.text(inputfiledir + "vertex_person.text").delimiter('|')
+    softwareInput = File.text(inputfiledir + "vertex_software.text").delimiter('|')
+    knowsInput = File.text(inputfiledir + "edge_knows.text").delimiter('|')
+    createdInput = File.text(inputfiledir + "edge_created.text").delimiter('|')
   ```
 
 > 用户可自行制定 TEXT 文件的列分隔符，默认为制表符。
@@ -104,14 +107,16 @@ inputfileE = inputPath + '/edges/'
 
 ```groovy
 // CSV 指定 header
-authorInput = File.csv(inputfileV + "author.csv").header("name", "gender")
-bookInput = File.csv(inputfileV + "book.csv").header("name", "year", "ISBN")
-authorBookInput = File.csv(inputfileE + "authorBook.csv").header("auther_name", "book_name")
+personInput = File.csv(inputfiledir + "vertex_person.csv").header("name", "age", "city")
+softwareInput = File.csv(inputfiledir + "vertex_software.csv").header("name", "lang", "price")
+knowsInput = File.csv(inputfiledir + "edge_knows.csv").header("aname", "bname", "date", "weight")
+createdInput = File.csv(inputfiledir + "edge_created.csv").header("aname", "bname", "date", "weight")
 
 // TEXT 指定 header
-authorInput = File.text(inputfileV + "author.txt").delimiter('|').header("name", "gender")
-bookInput = File.text(inputfileV + "book.txt").delimiter('|').header("name", "year", "ISBN")
-authorBookInput = File.text(inputfileE + "authorBook.txt").delimiter('|').header("auther_name", "book_name")
+personInput = File.csv(inputfiledir + "vertex_person.csv").delimiter('|').header("name", "age", "city")
+softwareInput = File.csv(inputfiledir + "vertex_software.csv").delimiter('|').header("name", "lang", "price")
+knowsInput = File.csv(inputfiledir + "edge_knows.csv").delimiter('|').header("aname", "bname", "date", "weight")
+createdInput = File.csv(inputfiledir + "edge_created.csv").delimiter('|').header("aname", "bname", "date", "weight")
 ```
 
 **压缩文件的读取**
@@ -120,9 +125,10 @@ HugeLoader 支持压缩文件的处理和导入，目前仅支持.gzip 文件（
 
 ```groovy
 // 示例：
-authorInput = File.csv(inputfileV + "author.csv").gzip()
-bookInput = File.csv(inputfileV + "book.csv").gzip()
-authorBookInput = File.csv(inputfileE + "authorBook.csv").gzip()
+personInput = File.csv(inputfiledir + "vertex_person.csv").gzip()
+softwareInput = File.csv(inputfiledir + "vertex_software.csv").gzip()
+knowsInput = File.csv(inputfiledir + "edge_knows.csv").gzip()
+createdInput = File.csv(inputfiledir + "edge_created.csv").gzip()
 ```
 
 **非UTF-8编码文件的读取**
@@ -132,17 +138,18 @@ authorBookInput = File.csv(inputfileE + "authorBook.csv").gzip()
 - 全局指定编码字符集，通过命令行选项`-charset`设置
 
 ```bash
-# 示例：
-bin/hugeloader -f /home/work/data/authorBookMap_JSON.groovy -g hugegraph -charset GBK
+# 示例
+bin/hugeloader -f example/json/example.groovy -g hugegraph -charset GBK
 ```
 
 - 为每个文件单独指定编码字符集，通过方法`charset(String)`设置
 
 ```groovy
-// 示例：
-authorInput = File.csv(inputfileV + "author.csv").charset("GBK")
-bookInput = File.csv(inputfileV + "book.csv").charset("UTF-16")
-authorBookInput = File.csv(inputfileE + "authorBook.csv").charset("UTF-8")
+// 示例
+personInput = File.json(inputfiledir + "vertex_person.json").charset("GBK")
+softwareInput = File.json(inputfiledir + "vertex_software.json").charset("UTF-16")
+knowsInput = File.json(inputfiledir + "edge_knows.json").charset("UTF-8")
+createdInput = File.json(inputfiledir + "edge_created.json").charset("GBK")
 ```
 
 注意：如果同时通过两种方式设置了编码方式，后者（为文件单独指定）会覆盖前者（全局指定）。
@@ -156,14 +163,15 @@ authorBookInput = File.csv(inputfileE + "authorBook.csv").charset("UTF-8")
 配置顶点的 label 和 keys
 
 ```groovy
-//示例
-load(authorInput).asVertices {
-    label "author" // label 为顶点的名称
-    keys "name"    // keys 可以定义多个，相当于联合主键
+// 示例
+load(personInput).asVertices {
+    label "person"          // label 为顶点的名称
+    keys "name"             // keys 可以定义多个，相当于联合主键
+    enableLabelIndex false  // 是否创建label索引，默认为true
 }
 
-load(bookInput).asVertices {
-    label "book"
+load(softwareInput).asVertices {
+    label "software"
     keys "name"
 }
 ```
@@ -171,17 +179,30 @@ load(bookInput).asVertices {
 配置边的 label 和 keys
 
 ```groovy
-load(authorBookInput).asEdges {
-    label "authored" // label 为边的名称
-    //定义边的起始顶点
+load(knowsInput).asEdges {
+    label "knows"           // label 为边的名称
+    // 定义边的起始顶点
     outV {
-        label "author"
-        keys "aname" //起始顶点的 keys，必须与数据文件中一致，且与 inV 中 keys 相区分
+        label "person"
+        keys "aname"        // 起始顶点的 keys，必须与数据文件中一致，且与 inV 中 keys 相区分
     }
-    //定义边的终止顶点
+    // 定义边的终止顶点
     inV {
-        label "book"
-        keys "bname" //终止顶点的 keys，必须与数据文件中一致，且与 outV 中 keys 相区分
+        label "person"
+        keys "bname"        // 终止顶点的 keys，必须与数据文件中一致，且与 outV 中 keys 相区分
+    }
+    enableLabelIndex false  // 是否创建label索引，默认为true
+}
+
+load(createdInput).asEdges {
+    label "created"
+    outV {
+        label "person"
+        keys "aname"
+    }
+    inV {
+        label "software"
+        keys "bname"
     }
 }
 ```
@@ -192,15 +213,27 @@ load(authorBookInput).asEdges {
 - ignores: 忽略文件中的某些列，也即不解析这些列
 
 ```groovy
-//示例
-load(authorInput).asVertices {
-    label "author"
-    keys "name"   
+// 示例
+load(personInput).asVertices {
+    label "person"          
+    keys "name"             
+    enableLabelIndex false  
     mapping "name","mappingName" // 第一个参数为源名称，第二个参数为映射名称
-    ignores "gender","age" // 可以跟多个参数
+    ignores "age","city"         // 可以跟多个参数
 }
 ```
 
+##### 3.1.3 编写自定义的 schema
+
+由于 HugeGraph 的图形数据是需要 schema 的，HugeLoader 支持不创建 schema、自动创建 schema 以及手动创建 schema 三种操作模式，由`-autoCreateSchema`和`-schema` 两个选项设置。
+
+- `-autoCreateSchema`表示是否自动创建 schema，默认为`false`；
+- `-schema`指定手动创建 schema 文件的路径。
+
+如果通过`-schema ${file}`选项指定了 schema 文件的路径，HugeLoader 会先执行文件中的语句（groovy）创建schema。不允许在传入了`-schema`选项的同时将`-autoCreateSchema`设置为`true`。
+
+如果设置`-autoCreateSchema`选项为`true`，HugeLoader 会自动创建 schema，自动创建的 schema 将所有顶点和边的属性都作为`text`看待；如果设置`-autoCreateSchema`选项为`false`，HugeLoader 不会创建 schema，此时用户必须保证数据库中已经存在了 schema，这种情况下 HugeLoader 也会把属性都当作`text`看待。
+ 
 #### 3.2 准备文本数据
 
 目前支持 JSON、CSV、TEXT 的文件格式，数据每行的结构需要完全一致。
@@ -212,34 +245,51 @@ load(authorInput).asVertices {
 - JSON
 
 ```json
-//示例
-//author.json
-{"name":"Julia Child","gender":"F"}
-{"name":"Simone Beck","gender":"F"}
-{"name":"Louisette Bertholie","gender":"F"}
+// 示例
+// vertex_person.json
+{"name": "marko", "age": 29, "city": "Beijing"}
+{"name": "vadas", "age": 27, "city": "Hongkong"}
+{"name": "josh", "age": 32, "city": "Beijing"}
+{"name": "peter", "age": 35, "city": "Shanghai"}
 
-//book.json
-{"name":"The Art of French Cooking, Vol. 1","year":"1961","ISBN":"none"}
-{"name":"Simca's Cuisine: 100 Classic French Recipes for Every Occasion","year":"1972","ISBN":"0-394-40152-2"}
-{"name":"The French Chef Cookbook","year":"1968","ISBN":"0-394-40135-2"}
+// vertex_software.json
+{"name": "lop", "lang": "java", "price": 328}
+{"name": "ripple", "lang": "java", "price": 199}
 ```
 
 - CSV
 
 ```csv
-//示例
-//author.csv
-name|gender
-Julia Child|F
-Simone Beck|F
-Louisette Bertholie|F
+// 示例
+// vertex_person.csv
+name,age,city
+marko,29,Beijing
+vadas,27,Hongkong
+josh,32,Beijing
+peter,35,Shanghai
 
-//book.csv
-name|year|ISBN
-The Art of French Cooking, Vol. 1|1961|none
-Simca's Cuisine: 100 Classic French Recipes for Every Occasion|1972|0-394-40152-2
-The French Chef Cookbook|1968|0-394-40135-2
+// vertex_software.csv
+name,lang,price
+lop,java,328
+ripple,java,199
 ```
+
+- TEXT
+
+```csv
+// 示例
+// vertex_person.text
+name|age|city
+marko|29|Beijing
+vadas|27|Hongkong
+josh|32|Beijing
+peter|35|Shanghai
+
+// vertex_software.text
+name|lang|price
+lop|java|328
+ripple|java|199
+``` 
 
 ##### 3.2.2 准备边数据
 
@@ -248,22 +298,50 @@ The French Chef Cookbook|1968|0-394-40135-2
 - JSON
 
 ```json
-//示例
-//authorBook.json
-{"bname":"The Art of French Cooking, Vol. 1","aname":"Julia Child","test":"test"}
-{"bname":"The Art of French Cooking, Vol. 1","aname":"Simone Beck","test":"test"}
-{"bname":"The Art of French Cooking, Vol. 1","aname":"Louisette Bertholie","test":"test"}
+// 示例
+// edge_knows.json
+{"aname": "marko", "bname": "vadas", "date": "20160110", "weight": 0.5}
+{"aname": "marko", "bname": "josh", "date": "20130220", "weight": 1.0}
+
+// edge_created.json
+{"aname": "marko", "bname": "lop", "date": "20171210", "weight": 0.4}
+{"aname": "josh", "bname": "lop", "date": "20091111", "weight": 0.4}
+{"aname": "josh", "bname": "ripple", "date": "20171210", "weight": 1.0}
+{"aname": "peter", "bname": "lop", "date": "20170324", "weight": 0.2}
 ```
 
 - CSV
 
 ```csv
-//示例
-//authorBook.csv
-bname|aname
-The Art of French Cooking, Vol. 1|Julia Child
-The Art of French Cooking, Vol. 1|Simone Beck
-The Art of French Cooking, Vol. 1|Louisette Bertholie
+// 示例
+// edge_knows.csv
+aname,bname,date,weight
+marko,vadas,20160110,0.5
+marko,josh,20130220,1.0
+
+// edge_created.csv
+aname,bname,date,weight
+marko,lop,20171210,0.4
+josh,lop,20091111,0.4
+josh,ripple,20171210,1.0
+peter,lop,20170324,0.2
+```
+
+- TEXT
+
+```
+// 示例
+// edge_knows.text
+aname|bname|date|weight
+marko|vadas|20160110|0.5
+marko|josh|20130220|1.0
+
+// edge_created.text
+aname|bname|date|weight
+marko|lop|20171210|0.4
+josh|lop|20091111|0.4
+josh|ripple|20171210|1.0
+peter|lop|20170324|0.2
 ```
 
 #### 3.3 执行导入过程
@@ -278,7 +356,8 @@ Y         | -f                 | NONE                            | 配置脚本�
 Y         | -g                 | NONE                            | 图形数据库空间
 N         | -h                 | localhost                       | HugeServer 的地址
 N         | -p                 | 8080                            | Hugeserver 的端口号
-N         | -createSchema      | true                            | 是否允许程序自动创建和更新图形 schema
+N         | -schema            | -                               | schema的创建脚本文件路径
+N         | -autoCreateSchema  | true                            | 是否允许程序自动创建和更新图形 schema
 N         | -dryRun            | false                           | 为 true时，仅生成 schema 而不执行数据导入过程
 N         | -schemaOutputFile  | schema.groovy                   | 生成 schema 文件的名称
 N         | -numThreads        | availableProcessors() *2 -1     | 导入过程中线程池大小
@@ -341,34 +420,52 @@ N         | -charset           | UTF-8                           | 数据源文�
 #### 5.1 编写配置脚本
 
 ```groovy
-inputPath = '/home/work/data'
-inputfileV = inputPath + '/vertices/'
-inputfileE = inputPath + '/edges/'
+inputfiledir = "example/json/"
+personInput = File.json(inputfiledir + "vertex_person.json")
+softwareInput = File.json(inputfiledir + "vertex_software.json")
+knowsInput = File.json(inputfiledir + "edge_knows.json")
+createdInput = File.json(inputfiledir + "edge_created.json")
 
-authorInput = File.json(inputfileV + 'author.json')
-bookInput = File.json(inputfileV + 'book.json')
-authorBookInput = File.json(inputfileE + 'authorBook.json')
+//Specifies what data source to load using which mapper (as defined inline)
 
-load(authorInput).asVertices {
-    label "author"
+load(personInput).asVertices {
+    label "person"
+    keys "name"
+    enableLabelIndex false
+}
+
+load(softwareInput).asVertices {
+    label "software"
     keys "name"
 }
 
-load(bookInput).asVertices {
-    label "book"
-    keys "name"
-}
-
-load(authorBookInput).asEdges {
-    label "authored"
+load(knowsInput).asEdges {
+    label "knows"
     outV {
-        label "author"
-        key "aname"
+        label "person"
+        keys "aname"
     }
     inV {
-        label "book"
-        key "bname"
+        label "person"
+        keys "bname"
     }
+    mapping "aname", "name"
+    mapping "bname", "name"
+}
+
+load(createdInput).asEdges {
+    label "created"
+    outV {
+        label "person"
+        keys "aname"
+    }
+    inV {
+        label "software"
+        keys "bname"
+    }
+    enableLabelIndex false
+    mapping "aname", "name"
+    mapping "bname", "name"
 }
 ```
 
@@ -376,45 +473,38 @@ load(authorBookInput).asEdges {
 
 ##### 5.2.1 顶点数据
 
-`author.json`
+`vertex_person.json`
 
-```json
-{"name":"Julia Child","gender":"F"}
-{"name":"Simone Beck","gender":"F"}
-{"name":"Louisette Bertholie","gender":"F"}
-{"name":"Patricia Simon","gender":"F"}
-{"name":"Alice Waters","gender":"F"}
-{"name":"Patricia Curtan","gender":"F"}
-{"name":"Kelsie Kerr","gender":"F"}
-{"name":"Fritz Streiff","gender":"M"}
-{"name":"Emeril Lagasse","gender":"M"}
-{"name":"James Beard","gender":"M"}
+```
+{"name": "marko", "age": 29, "city": "Beijing"}
+{"name": "vadas", "age": 27, "city": "Hongkong"}
+{"name": "josh", "age": 32, "city": "Beijing"}
+{"name": "peter", "age": 35, "city": "Shanghai"}
 ```
 
-`book.json`
+`vertex_software.json`
 
-```json
-{"name":"The Art of French Cooking, Vol. 1","year":"1961","ISBN":"none"}
-{"name":"Simca's Cuisine: 100 Classic French Recipes for Every Occasion","year":"1972","ISBN":"0-394-40152-2"}
-{"name":"The French Chef Cookbook","year":"1968","ISBN":"0-394-40135-2"}
-{"name":"The Art of Simple Food: Notes, Lessons, and Recipes from a Delicious Revolution","year":"2007","ISBN":"0-307-33679-4"}
+```
+{"name": "lop", "lang": "java", "price": 328}
+{"name": "ripple", "lang": "java", "price": 199}
 ```
 
 ##### 5.2.2 边数据
 
-`authorBook.json`
+` edge_knows.json`
 
-```json
-{"bname":"The Art of French Cooking, Vol. 1","aname":"Julia Child","test":"test"}
-{"bname":"The Art of French Cooking, Vol. 1","aname":"Simone Beck","test":"test"}
-{"bname":"The Art of French Cooking, Vol. 1","aname":"Louisette Bertholie","test":"test"}
-{"bname":"Simca's Cuisine: 100 Classic French Recipes for Every Occasion","aname":"Simone Beck","test":"test"}
-{"bname":"Simca's Cuisine: 100 Classic French Recipes for Every Occasion","aname":"Patricia Simon","test":"test"}
-{"bname":"The French Chef Cookbook","aname":"Julia Child","test":"test"}
-{"bname":"The Art of Simple Food: Notes, Lessons, and Recipes from a Delicious Revolution","aname":"Alice Waters","test":"test"}
-{"bname":"The Art of Simple Food: Notes, Lessons, and Recipes from a Delicious Revolution","aname":"Patricia Curtan","test":"test"}
-{"bname":"The Art of Simple Food: Notes, Lessons, and Recipes from a Delicious Revolution","aname":"Kelsie Kerr","test":"test"}
-{"bname":"The Art of Simple Food: Notes, Lessons, and Recipes from a Delicious Revolution","aname":"Fritz Streiff","test":"test"}
+```
+{"aname": "marko", "bname": "vadas", "date": "20160110", "weight": 0.5}
+{"aname": "marko", "bname": "josh", "date": "20130220", "weight": 1.0}
+```
+
+`edge_created.json`
+
+```
+{"aname": "marko", "bname": "lop", "date": "20171210", "weight": 0.4}
+{"aname": "josh", "bname": "lop", "date": "20091111", "weight": 0.4}
+{"aname": "josh", "bname": "ripple", "date": "20171210", "weight": 1.0}
+{"aname": "peter", "bname": "lop", "date": "20170324", "weight": 0.2}
 ```
 
 ##### 5.3 执行命令
@@ -423,5 +513,31 @@ load(authorBookInput).asEdges {
 
 ```bash
 # 示例
-bin/hugeloader -f /home/work/data/authorBookMap_JSON.groovy -g hugegraph
+bin/hugeloader -f example/json/example.groovy -schema example/json/schema.groovy -g hugegraph
+```
+
+`schema.groovy`脚本内容：
+
+```
+// Define schema
+schema.propertyKey("name").asText().ifNotExist().create();
+schema.propertyKey("age").asInt().ifNotExist().create();
+schema.propertyKey("city").asText().ifNotExist().create();
+schema.propertyKey("weight").asDouble().ifNotExist().create();
+schema.propertyKey("lang").asText().ifNotExist().create();
+schema.propertyKey("date").asText().ifNotExist().create();
+schema.propertyKey("price").asDouble().ifNotExist().create();
+
+schema.vertexLabel("person").properties("name", "age", "city").primaryKeys("name").ifNotExist().create();
+schema.vertexLabel("software").properties("name", "lang", "price").primaryKeys("name").ifNotExist().create();
+schema.indexLabel("personByName").onV("person").by("name").secondary().ifNotExist().create();
+schema.indexLabel("personByAge").onV("person").by("age").range().ifNotExist().create();
+schema.indexLabel("personByCity").onV("person").by("city").secondary().ifNotExist().create();
+schema.indexLabel("personByAgeAndCity").onV("person").by("age", "city").secondary().ifNotExist().create();
+schema.indexLabel("softwareByPrice").onV("software").by("price").range().ifNotExist().create();
+schema.edgeLabel("knows").sourceLabel("person").targetLabel("person").properties("date", "weight").ifNotExist().create();
+schema.edgeLabel("created").sourceLabel("person").targetLabel("software").properties("date", "weight").ifNotExist().create();
+schema.indexLabel("createdByDate").onE("created").by("date").secondary().ifNotExist().create();
+schema.indexLabel("createdByWeight").onE("created").by("weight").range().ifNotExist().create();
+schema.indexLabel("knowsByWeight").onE("knows").by("weight").range().ifNotExist().create();
 ```
