@@ -2,12 +2,12 @@
 
 被压机器信息
 
-机器IP                              | CPU                                          | Memory | 网卡        | 磁盘
+机器编号                              | CPU                                          | Memory | 网卡        | 磁盘
 --------------------------------- | -------------------------------------------- | ------ | --------- | ------------------
-sh01-dx-offline06.sh01.baidu.com  | 24 Intel(R) Xeon(R) CPU E5-2620 v2 @ 2.10GHz | 61G    | 1000Mbps  | 1.4T HDD
-yq01-sw-scylladb01.yq01.baidu.com | 48 Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz | 128G   | 10000Mbps | 750GB SSD,2.7T HDD
+1 | 24 Intel(R) Xeon(R) CPU E5-2620 v2 @ 2.10GHz | 61G    | 1000Mbps  | 1.4T HDD
+2 | 48 Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz | 128G   | 10000Mbps | 750GB SSD,2.7T HDD
 
-- 起压力机器信息：sh01-dx-offline07.sh01.baidu.com
+- 起压力机器信息：与编号 1 机器同配置
 - 测试工具：apache-Jmeter-2.5.1
 
 注：起压机器和被压机器在同一机房

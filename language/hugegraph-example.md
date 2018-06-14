@@ -122,8 +122,6 @@ cerberus.addEdge("lives", tartarus)
 
 HugeGraph默认是自动生成Id，如果用户通过`primaryKeys`指定`VertexLabel`的`primaryKeys`字段列表后，`VertexLabel`的Id策略将会自动切换到`primaryKeys`策略。 启用`primaryKeys`策略后,HugeGraph通过`vertexLabel+primaryKeys`拼接生成`VertexId` ，可实现自动去重，同时无需额外创建索引即可以使用`primaryKeys`中的属性进行快速查询。 例如 "character" 和 "location" 都有`primaryKeys("name")`属性，因此在不额外创建索引的情况下可以通过`g.V().hasLabel('character') .has('name','hercules')`查询vertex 。
 
-> 注： 推荐使用[HugeStudio](http://hugegraph.baidu.com/quickstart/hugestudio.html) 通过可视化的方式来执行上述代码。另外也可以通过HugeClient、HugeApi、GremlinConsole和GremlinDriver等多种方式执行上述代码。
-
 ### 3 Graph Traversal Examples
 
 #### 3.1 Traversal Query
@@ -182,7 +180,7 @@ g.V(pluto).out('brother').as('god').out('lives').as('place').select('god','place
 g.V(pluto).out('brother').as('god').out('lives').as('place').select('god','place').by('name')
 ```
 
-推荐使用[HugeStudio](http://hugegraph.baidu.com/quickstart/hugestudio.html) 通过可视化的方式来执行上述代码。另外也可以通过HugeClient、HugeApi、GremlinConsole和GremlinDriver等多种方式执行上述代码。
+推荐使用[HugeStudio](/quickstart/hugegraph-studio.html) 通过可视化的方式来执行上述代码。另外也可以通过HugeClient、HugeApi、GremlinConsole和GremlinDriver等多种方式执行上述代码。
 
 #### 3.2 总结
 

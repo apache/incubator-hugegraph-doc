@@ -92,7 +92,7 @@ ssl: {
 
 - host：部署 GremlinServer 机器的机器名或 IP，目前 HugeGraphServer 不支持分布式部署，且GremlinServer不直接暴露给用户，此项可以不修改；
 - port：部署 GremlinServer 机器的端口，同 host，可以不修改；
-- channelizer：GremlinServer 与客户端有两种通信方式，分别是 WebSocket 和 HTTP（默认）。如果选择 WebSocket，用户可以通过 [Gremlin-Console](http://hugegraph.baidu.com/clients/gremlin-console.html) 快速体验 HugeGraph 的特性，但是不支持大规模数据导入，推荐使用 HTTP 的通信方式，我们的一些外围组件都是基于 HTTP 实现的；
+- channelizer：GremlinServer 与客户端有两种通信方式，分别是 WebSocket 和 HTTP（默认）。如果选择 WebSocket，用户可以通过 [Gremlin-Console](/clients/gremlin-console.html) 快速体验 HugeGraph 的特性，但是不支持大规模数据导入，推荐使用 HTTP 的通信方式，我们的一些外围组件都是基于 HTTP 实现的；
 - graphs：GremlinServer 启动时需要打开的图，该项是一个 map 结构，key 是图的名字，value 是该图的配置文件路径；
 
 ### 3 rest-server.properties

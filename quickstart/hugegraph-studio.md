@@ -8,7 +8,7 @@ HugeStudio是HugeGraph的前端展示工具，是基于Web的图形化IDE环境�
 - 图数据的展示
 - 图数据的分析
 
-> 注意：HugeStudio需要依赖HugeGraph Server，在安装和使用HugeStudio之前，请通过jps命令检查Cassandra和HugeGraphServer两个服务已经启动，如果没有启动这两个服务，请参考[HugeServer安装配置](http://hugegraph.baidu.com/quickstart/hugeserver.html)。
+> 注意：HugeStudio需要依赖HugeGraph Server，在安装和使用HugeStudio之前，请通过jps命令检查Cassandra和HugeGraphServer两个服务已经启动，如果没有启动这两个服务，请参考[HugeServer安装配置](/quickstart/hugegraph-server.html)。
 
 ### 2 安装和运行HugeStudio
 
@@ -19,10 +19,10 @@ HugeStudio是HugeGraph的前端展示工具，是基于Web的图形化IDE环境�
 
 #### 2.1 下载源码编译生成tar包
 
-下载HugeStudio源码包：(暂时从icode上clone)
+下载HugeStudio源码包
 
 ```bash
-$ git clone ssh://liunanke@icode.baidu.com:8235/baidu/xbu-data/hugegraph-studio baidu/xbu-data/hugegraph-studio && scp -p -P 8235 liunanke@icode.baidu.com:hooks/commit-msg baidu/xbu-data/hugegraph-studio/.git/hooks/
+$ git clone https://github.com/hugegraph/hugegraph-studio.git
 ```
 
 编译生成tar包:
@@ -135,7 +135,7 @@ $ bin/hugestudio.sh
 **参数说明**
 
 - Name: 当前连接本身的名字，可任意取
-- Graph: 本次连接想要操作的图的名字，用户可以先通过[Graph API](http://hugegraph.baidu.com/clients/restful-api/graph.html)查看有哪些图
+- Graph: 本次连接想要操作的图的名字，用户可以先通过[Graph API](/clients/restful-api/graph.html)查看有哪些图
 - Host: HugeGraphServer的 IP 或 hostname（**注意：不是Studio的IP或hostname**）
 - Port: HugeGraphServer的 port（**注意：不是Studio的端口**）
 
@@ -189,9 +189,9 @@ graph.schema().propertyKey("price").asInt().ifNotExist().create()
 **在这里有几点需要说明**
 
 1、上述语句是`groovy`语言形式（类似但不是`java`）的`gremlin`语句，这些`gremlin`语句会被发送到`HugeGraphServer`上执行。
-关于`gremlin`本身可以参考[Gremlin Query Language](http://hugegraph.baidu.com/language/hugegraph-gremlin.html)或[Tinkerpop官网](http://tinkerpop.apache.org/)；
+关于`gremlin`本身可以参考[Gremlin Query Language](/language/hugegraph-gremlin.html)或[Tinkerpop官网](http://tinkerpop.apache.org/)；
 
-2、上述语句是通过`graph.schema()`获取到`SchemaManager`对象后操作元数据，通过`gremlin`语句操作schema可参考文档[HugeGraph-Client](http://hugegraph.baidu.com/clients/hugegraph-client.html)，
+2、上述语句是通过`graph.schema()`获取到`SchemaManager`对象后操作元数据，通过`gremlin`语句操作schema可参考文档[HugeGraph-Client](/clients/hugegraph-client.html)，
 需要注意的是`HugeGraph-Client`是`java`语法，大体上与`gremlin`风格是一致的,具体的差异见文档`HugeGraph-Client`中的说明。
 
 3、在`HugeGraph-Studio`的`NoteBook`中，用户可以直接使用两个变量`graph`和`g`，`graph`就是当前Notebook连接的图对象，可使用该对象对图做各种增删改查操作;

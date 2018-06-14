@@ -30,17 +30,6 @@ HugeGraph-Client向HugeGraph-Server发出HTTP请求，获取并解析Server的�
 
 #### 4.2 添加hugegraph-client依赖
 
-在项目pom文件中引入百度私服仓库：
-
-```xml
-<repositories>
-    <repository>
-        <id>Baidu_Local_Snapshots</id>
-        <url>http://maven.scm.baidu.com:8081/nexus/content/repositories/Baidu_Local_Snapshots</url>
-    </repository>
-</repositories>
-```
-
 添加hugegraph-client依赖
 
 ```xml
@@ -48,7 +37,7 @@ HugeGraph-Client向HugeGraph-Server发出HTTP请求，获取并解析Server的�
     <dependency>
         <groupId>com.baidu.hugegraph</groupId>
         <artifactId>hugegraph-client</artifactId>
-        <version>1.5.0-SNAPSHOT</version>
+        <version>1.5.6-SNAPSHOT</version>
     </dependency>    
 </dependencies>
 ```
@@ -340,8 +329,8 @@ public class BatchExample {
 
 ### 4.4 运行Example
 
-运行Example之前需要启动Sever, 启动过程见[HugeServer Quick Start](http://hugegraph.baidu.com/quickstart/hugeserver.html)
+运行Example之前需要启动Sever, 启动过程见[HugeServer Quick Start](/quickstart/hugegraph-server.html)
 
 ### 4.5 Example示例说明
 
-示例说明见[HugeClient基本API介绍](http://hugegraph.baidu.com/clients/hugegraph-client.html)
+示例说明见[HugeClient基本API介绍](/clients/hugegraph-client.html)

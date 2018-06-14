@@ -5,7 +5,7 @@
 HugeSpark依赖hugegraph 和 spark-2.1.1，需要添加相关项目依赖：
 
 - 下载spark-2.1.1
-- [启动hugeserver](http://hugegraph.baidu.com/quickstart/hugeserver.html)
+- [启动hugeserver](/quickstart/hugegraph-server.html)
 
 ### 2 下载 HugeSpark
 
@@ -36,16 +36,16 @@ rm -rf  jars/jackson-databind-2.6.5.jar
 rm -rf  jars/jackson-core-2.6.5.jar
 ```
 
-hugespark源码下载（暂时从icode上clone）
+hugespark源码下载
 
 ```bash
-$ git clone ssh://${username}@icode.baidu.com:8235/baidu/xbu-data/hugegraph-spark baidu/xbu-data/hugegraph-spark && scp -p -P 8235 ${username}@icode.baidu.com:hooks/commit-msg baidu/xbu-data/hugegraph-spark/.git/hooks/
+$ git clone https://github.com/hugegraph/hugegraph-spark.git
 ```
 
 使用[Apache Maven](http://maven.apache.org/)构建，示例如下：
 
 ```bash
-$ git checkout develop
+$ cd hugegraph-spark
 $ mvn -DskipTests clean assembly:assembly
 ```
 

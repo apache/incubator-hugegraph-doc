@@ -4,7 +4,7 @@
 
 HugeLoader 是 Hugegragh 的一个模块，负责将普通文本数据转化为图形的顶点和边并插入图形数据库中。
 
-> 注意：使用 HugeLoader 需要依赖 Hugegraph Server，下载和启动 Server 详见：[HugeServer Quick Start](http://hugegraph.baidu.com/quickstart/hugeserver.html)
+> 注意：使用 HugeLoader 需要依赖 Hugegraph Server，下载和启动 Server 详见：[HugeServer Quick Start](/quickstart/hugegraph-server.html)
 
 ### 2 获取 HugeLoader
 
@@ -27,7 +27,7 @@ tar zxvf hugegraph-loader-${version}-bin.tar.gz
 下载最新版本的HugeLoader 源码包：
 
 ```bash
-git clone ssh://${username}@icode.baidu.com:8235/baidu/xbu-data/hugegraph-loader
+$ git clone https://github.com/hugegraph/hugegraph-loader.git
 ```
 
 编译生成tar包:
