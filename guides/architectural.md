@@ -10,7 +10,7 @@
 
 ### 2 组件
 
-HugeGraph的主要功能分为HugeCore、ApiServer、HugeClient、HugeLoader和HugeStudio等组件构成，各组件之间的通信关系如下图所示。
+HugeGraph的主要功能分为HugeCore、ApiServer、HugeGraph-Client、HugeGraph-Loader和HugeGraph-Studio等组件构成，各组件之间的通信关系如下图所示。
 
 <center>
   <img src="/images/design/architectural-component.png" alt="image">
@@ -18,6 +18,6 @@ HugeGraph的主要功能分为HugeCore、ApiServer、HugeClient、HugeLoader和H
 
 - HugeCore ：HugeGraph的核心模块，TinkerPop的接口主要在该模块中实现。HugeCore的功能涵盖包括OLTP和OLAP两个部分。
 - ApiServer ：提供RESTFul Api接口，对外提供Graph Api、Schema Api和Gremlin Api等接口服务。
-- HugeClient：基于Java客户端驱动程序。HugeClient是Java版本客户端驱动程序，后续可根据需要提供Python、Go、C++等多语言支持。
-- HugeLoader：数据导入模块。HugeLoader可以扫描并分析现有数据，自动生成Graph Schema创建语言，通过批量方式快速导入数据。
-- HugeStudio：基于Web的可视化IDE环境。以Notebook方式记录Gremlin查询，可视化展示Graph的关联关系。HugeStudio也是本系统推荐的工具。
+- HugeGraph-Client：基于Java客户端驱动程序。HugeGraph-Client是Java版本客户端驱动程序，后续可根据需要提供Python、Go、C++等多语言支持。
+- HugeGraph-Loader：数据导入模块。HugeGraph-Loader可以扫描并分析现有数据，自动生成Graph Schema创建语言，通过批量方式快速导入数据。
+- HugeGraph-Studio：基于Web的可视化IDE环境。以Notebook方式记录Gremlin查询，可视化展示Graph的关联关系。HugeGraph-Studio也是本系统推荐的工具。

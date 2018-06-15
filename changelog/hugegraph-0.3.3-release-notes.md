@@ -21,9 +21,9 @@
 - 给edge-label追加属性，source-label为“null”，提示信息有误（HugeGraph-863）
 - 查询时的StringId如果为空字符串应该抛出异常（HugeGraph-868）
 - 通Rest API创建两个顶点之间的边，在studio中通过g.V()则刚新创建的边则不显示，g.E()则能够显示新创建的边（HugeGraph-869）
-- HugeServer的内部错误500，不应该将stack trace返回给Client（HugeGraph-879）
+- HugeGraph-Server的内部错误500，不应该将stack trace返回给Client（HugeGraph-879）
 - addEdge传入空的id字符串时会抛出非法参数异常（HugeGraph-885）
-- HugeClient 的 Gremlin 查询结果在解析 Path 时，如果不包含Vertex／Edge会反序列化异常（HugeGraph-891）
+- HugeGraph-Client 的 Gremlin 查询结果在解析 Path 时，如果不包含Vertex／Edge会反序列化异常（HugeGraph-891）
 - 枚举HugeKeys的字符串变成小写字母加下划线，导致API序列化时字段名与类中变量名不一致，进而序列化失败（HugeGraph-896）
 - 增加边到不存在的顶点时返回404（期望400）（HugeGraph-922）
 

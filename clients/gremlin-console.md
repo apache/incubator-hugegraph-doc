@@ -114,7 +114,7 @@ gremlin> g.E()
 
 因为Gremlin-Console只能通过WebSocket连接HugeGraph-Server，默认HugeGraph-Server是对外提供HTTP连接的，所以先修改gremlin-server的配置。
 
-*注意：将连接方式修改为WebSocket后，HugeClient、HugeLoader、HugeStudio等配套工具都不能使用了。*
+*注意：将连接方式修改为WebSocket后，HugeGraph-Client、HugeGraph-Loader、HugeGraph-Studio等配套工具都不能使用了。*
 
 ```yaml
 # vim conf/gremlin-server.yaml

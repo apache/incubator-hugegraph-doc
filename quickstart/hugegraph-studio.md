@@ -1,25 +1,25 @@
-## HugeStudio Quick Start
+## HugeGraph-Studio Quick Start
 
-### 1 HugeStudio概述
+### 1 HugeGraph-Studio概述
 
-HugeStudio是HugeGraph的前端展示工具，是基于Web的图形化IDE环境，包括studio-api，studio-server，studio-dist和studio-ui四个功能模块。HugeStudio是为用户提供图形数据库实践的最佳工具，功能包括：
+HugeGraph-Studio是HugeGraph的前端展示工具，是基于Web的图形化IDE环境，包括studio-api，studio-server，studio-dist和studio-ui四个功能模块。HugeGraph-Studio是为用户提供图形数据库实践的最佳工具，功能包括：
 
 - 图数据的输入
 - 图数据的展示
 - 图数据的分析
 
-> 注意：HugeStudio需要依赖HugeGraph Server，在安装和使用HugeStudio之前，请通过jps命令检查Cassandra和HugeGraphServer两个服务已经启动，如果没有启动这两个服务，请参考[HugeServer安装配置](/quickstart/hugegraph-server.html)。
+> 注意：HugeGraph-Studio需要依赖HugeGraph-Server，在安装和使用HugeGraph-Studio之前，请通过jps命令检查Cassandra和HugeGraphServer两个服务已经启动，如果没有启动这两个服务，请参考[HugeGraph-Server安装配置](/quickstart/hugegraph-server.html)。
 
-### 2 安装和运行HugeStudio
+### 2 安装和运行HugeGraph-Studio
 
-有两种方式可以获取HugeStudio：
+有两种方式可以获取HugeGraph-Studio：
 
 - 下载源码包编译安装
 - 下载二进制tar包
 
 #### 2.1 下载源码编译生成tar包
 
-下载HugeStudio源码包
+下载HugeGraph-Studio源码包
 
 ```bash
 $ git clone https://github.com/hugegraph/hugegraph-studio.git
@@ -51,7 +51,7 @@ $ mvn package -DskipTests
 [INFO] ------------------------------------------------------------------------
 ```
 
-执行成功后,在hugegraph-studio目录下生成hugestudio-release-0.X-SNAPSHOT文件夹以及 hugestudio-release-0.X-SNAPSHOT.tar.gz文件，即为编译生成的tar包。
+执行成功后,在hugegraph-studio目录下生成hugestudio-release-${version}-SNAPSHOT文件夹以及 hugestudio-release-${version}-SNAPSHOT.tar.gz文件，即为编译生成的tar包。
 
 #### 2.2 下载二进制tar包
 
@@ -67,7 +67,7 @@ wget https://hugegraph.github.io/hugegraph-doc/downloads/hugestudio/hugestudio-r
 $ tar zxvf hugestudio-release-${version}-SNAPSHOT.tar.gz
 ```
 
-### 3 启动HugeStudio
+### 3 启动HugeGraph-Studio
 
 修改配置文件：
 
@@ -107,14 +107,14 @@ $ bin/hugestudio.sh
 19:05:14.873 [main] INFO  com.baidu.hugegraph.studio.HugeStudio ID:  TS: - HugeStudio is now running on: http://localhost:8088
 ```
 
-接下来，打开浏览器访问 <http://localhost:8088> 即可使用HugeStudio，首页如下图：
+接下来，打开浏览器访问 <http://localhost:8088> 即可使用HugeGraph-Studio，首页如下图：
 
 <center>
   <img src="/images/images-stdio/home-page.png" alt="image">
-  <p>图 3-1 HugeStudio首页</p>
+  <p>图 3-1 HugeGraph-Studio首页</p>
 </center>
 
-### 4 HugeStudio 操作指南
+### 4 HugeGraph-Studio 操作指南
 
 #### 4.1 创建一个新的 connection
 
@@ -271,7 +271,7 @@ g.V()
   <p>图 4-10 插入更多数据</p>
 </center>
 
-HugeStudio不仅支持通过graph的方式展示数据，还支持table和格式化json两种数据展示形式
+HugeGraph-Studio不仅支持通过graph的方式展示数据，还支持table和格式化json两种数据展示形式
 
 **Table:**
 

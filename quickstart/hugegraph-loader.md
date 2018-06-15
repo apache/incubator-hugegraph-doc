@@ -1,21 +1,21 @@
-## HugeLoader Quick Start
+## HugeGraph-Loader Quick Start
 
 ### 1 概述
 
-HugeLoader 是 Hugegragh 的数据导入模块，负责将普通文本数据转化为图形的顶点和边并插入图形数据库中。
+HugeGraph-Loader 是 Hugegragh 的数据导入模块，负责将普通文本数据转化为图形的顶点和边并插入图形数据库中。
 
-> 注意：使用 HugeLoader 需要依赖 Hugegraph Server 服务，下载和启动 Server 详见：[HugeServer Quick Start](/quickstart/hugegraph-server.html)
+> 注意：使用 HugeGraph-Loader 需要依赖 Hugegraph Server 服务，下载和启动 Server 详见：[HugeGraph-Server Quick Start](/quickstart/hugegraph-server.html)
 
-### 2 获取 HugeLoader
+### 2 获取 HugeGraph-Loader
 
-有两种方式可以获取 HugeLoader：
+有两种方式可以获取 HugeGraph-Loader：
 
 - 下载二进制tar包
 - 下载源码编译安装
 
 #### 2.1 下载二进制tar包
 
-下载最新版本的 HugeLoader bin包：
+下载最新版本的 HugeGraph-Loader bin包：
 
 ```bash
 wget https://hugegraph.github.io/hugegraph-doc/downloads/hugeloader/hugegraph-loader-${version}-bin.tar.gz
@@ -24,7 +24,7 @@ tar zxvf hugegraph-loader-${version}-bin.tar.gz
 
 #### 2.2 下载源码编译安装
 
-下载最新版本的HugeLoader 源码包：
+下载最新版本的HugeGraph-Loader 源码包：
 
 ```bash
 $ git clone https://github.com/hugegraph/hugegraph-loader.git
@@ -39,7 +39,7 @@ mvn package -DskipTests
 
 ### 3 使用流程
 
-使用 HugeLoader 的基本流程分为以下几步：
+使用 HugeGraph-Loader 的基本流程分为以下几步：
 
 - 编写配置脚本
 - 准备文本数据
@@ -121,7 +121,7 @@ createdInput = File.csv(inputfiledir + "edge_created.csv").delimiter('|').header
 
 **压缩文件的读取**
 
-HugeLoader 支持压缩文件的处理和导入，目前仅支持.gzip 文件（后续将支持更多压缩格式）
+HugeGraph-Loader 支持压缩文件的处理和导入，目前仅支持.gzip 文件（后续将支持更多压缩格式）
 
 ```groovy
 // 示例：
@@ -133,7 +133,7 @@ createdInput = File.csv(inputfiledir + "edge_created.csv").gzip()
 
 **非UTF-8编码文件的读取**
 
-默认情况下，HugeLoader认为数据源文件是UTF-8编码的，如果文件不是UTF-8的而直接导入，可能会产生乱码，解决办法有两种：
+默认情况下，HugeGraph-Loader认为数据源文件是UTF-8编码的，如果文件不是UTF-8的而直接导入，可能会产生乱码，解决办法有两种：
 
 - 全局指定编码字符集，通过命令行选项`-charset`设置
 
@@ -225,14 +225,14 @@ load(personInput).asVertices {
 
 ##### 3.1.3 编写自定义的 schema
 
-由于 HugeGraph 的图形数据是需要 schema 的，HugeLoader 支持不创建 schema、自动创建 schema 以及手动创建 schema 三种操作模式，由`-autoCreateSchema`和`-schema` 两个选项设置。
+由于 HugeGraph 的图形数据是需要 schema 的，HugeGraph-Loader 支持不创建 schema、自动创建 schema 以及手动创建 schema 三种操作模式，由`-autoCreateSchema`和`-schema` 两个选项设置。
 
 - `-autoCreateSchema`表示是否自动创建 schema，默认为`false`；
 - `-schema`指定手动创建 schema 文件的路径。
 
-如果通过`-schema ${file}`选项指定了 schema 文件的路径，HugeLoader 会先执行文件中的语句（groovy）创建schema。不允许在传入了`-schema`选项的同时将`-autoCreateSchema`设置为`true`。
+如果通过`-schema ${file}`选项指定了 schema 文件的路径，HugeGraph-Loader 会先执行文件中的语句（groovy）创建schema。不允许在传入了`-schema`选项的同时将`-autoCreateSchema`设置为`true`。
 
-如果设置`-autoCreateSchema`选项为`true`，HugeLoader 会自动创建 schema，自动创建的 schema 将所有顶点和边的属性都作为`text`看待；如果设置`-autoCreateSchema`选项为`false`，HugeLoader 不会创建 schema，此时用户必须保证数据库中已经存在了 schema，这种情况下 HugeLoader 也会把属性都当作`text`看待。
+如果设置`-autoCreateSchema`选项为`true`，HugeGraph-Loader 会自动创建 schema，自动创建的 schema 将所有顶点和边的属性都作为`text`看待；如果设置`-autoCreateSchema`选项为`false`，HugeGraph-Loader 不会创建 schema，此时用户必须保证数据库中已经存在了 schema，这种情况下 HugeGraph-Loader 也会把属性都当作`text`看待。
  
 #### 3.2 准备文本数据
 
@@ -354,8 +354,8 @@ peter|lop|20170324|0.2
 --------- | ------------------ | ------------------------------- | -----------------------------------------------
 Y         | -f                 | NONE                            | 配置脚本的路径
 Y         | -g                 | NONE                            | 图形数据库空间
-N         | -h                 | localhost                       | HugeServer 的地址
-N         | -p                 | 8080                            | Hugeserver 的端口号
+N         | -h                 | localhost                       | HugeGraphServer 的地址
+N         | -p                 | 8080                            | HugeGraphServer 的端口号
 N         | -schema            | -                               | schema的创建脚本文件路径
 N         | -autoCreateSchema  | true                            | 是否允许程序自动创建和更新图形 schema
 N         | -dryRun            | false                           | 为 true时，仅生成 schema 而不执行数据导入过程

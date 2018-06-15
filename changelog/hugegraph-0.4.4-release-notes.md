@@ -3,18 +3,18 @@
 ### API & Java Client
 
 #### 功能更新
-- HugeServer支持WebSocket，能用Gremlin-Console连接使用；并支持直接编写groovy脚本调用Core的代码（HugeGraph-977）
+- HugeGraph-Server支持WebSocket，能用Gremlin-Console连接使用；并支持直接编写groovy脚本调用Core的代码（HugeGraph-977）
 - 适配Schema-id（HugeGraph-1038）
  
 #### BUG修复
 - hugegraph-0.3.3：删除vertex的属性，body中properties=null，返回500，空指针（HugeGraph-950）
 - hugegraph-0.3.3： graph.schema().getVertexLabel()  空指针（HugeGraph-955）
-- HugeClient 中顶点和边的属性集合不是线程安全的（HugeGraph-1013）
+- HugeGraph-Client 中顶点和边的属性集合不是线程安全的（HugeGraph-1013）
 - 批量操作的异常信息无法打印（HugeGraph-1013）
 - 异常message提示可读性太差，都是用propertyKey的id显示，对于用户来说无法立即识别（HugeGraph-1055） 
 - 批量新增vertex实体，有一个body体为null，返回500，空指针（HugeGraph-1056）
 - 追加属性body体中只包含properties，功能出现回退，抛出异常The label of vertex can't be null（HugeGraph-1057）
-- HugeClient适配：PropertyKey的DateType中Timestamp替换成Date（HugeGraph-1059）
+- HugeGraph-Client适配：PropertyKey的DateType中Timestamp替换成Date（HugeGraph-1059）
 - 创建IndexLabel时baseValue为空会报出500错误（HugeGraph-1061）
  
 ### Core

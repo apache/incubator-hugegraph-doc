@@ -71,7 +71,11 @@
 
 - 清空了数据库，并且执行了`init-store`，但是添加`schema`时提示"xxx has existed"
 
-  `HugeGraph Server`内是有缓存的，清空数据库的同时是需要重启`Server`的，否则残留的缓存会产生不一致。
+  `HugeGraphServer`内是有缓存的，清空数据库的同时是需要重启`Server`的，否则残留的缓存会产生不一致。
+
+- 插入顶点或边的过程中报错：`Id max length is 128, but got xxx {yyy}` 或 `Big id max length is 32768, but got xxx`
+
+  为了保证查询性能，目前的后端存储对id列的长度做了限制，顶点id不能超过128字节，边id长度不能超过32768字节，索引id不能超过128字节。
 
 - 是否支持嵌套属性，如果不支持，是否有什么替代方案
 

@@ -156,7 +156,7 @@ v1111 | 时间 | 0.039s | 0.027s | 0.052s | 0.511s | 10.96s | OOM
 
 _说明_
 
-- HugeGraph Server的JVM内存设置为32GB，数据量过大时会出现OOM
+- HugeGraph-Server的JVM内存设置为32GB，数据量过大时会出现OOM
 
 ##### K-out性能
 
@@ -171,7 +171,7 @@ v1111 | 时间 | 0.039s | 0.045s | 0.053s | 1.10s  | 2.92s     | OOM
 
 _说明_
 
-- HugeGraph Server的JVM内存设置为32GB，数据量过大时会出现OOM
+- HugeGraph-Server的JVM内存设置为32GB，数据量过大时会出现OOM
 
 ###### 结论
 

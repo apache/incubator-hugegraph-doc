@@ -2,23 +2,22 @@
 
 ### 1 概述
 
-HugeGraph Server 是 HugeGraph 项目的核心部分，包含Core、Backend、API等子模块。
+HugeGraph-Server 是 HugeGraph 项目的核心部分，包含Core、Backend、API等子模块。
 
 Core模块是Tinkerpop接口的实现，Backend模块用于管理数据存储，目前支持的后端包括：Memory、Cassandra、ScyllaDB以及RocksDB，API模块提供HTTP Server，将Client的HTTP请求转化为对Core的调用。
+
+> 文档中会大量出现`HugeGraph-Server`及`HugeGraphServer`这两种写法，其他组件也类似。这两种写法含义上并无大的差异，可以这么区分：`HugeGraph-Server`表示服务端相关组件代码，`HugeGraphServer`表示服务进程。
 
 ### 2 依赖
 
 #### 2.1 安装JDK-1.8
 
-HugeGraph Server 是基于jdk-1.8编写的，代码用到了较多jdk-1.8中的类和方法，请用户自行安装配置。
+HugeGraph-Server 基于jdk-1.8开发，代码用到了较多jdk-1.8中的类和方法，请用户自行安装配置。
 
 **在往下阅读之前务必执行`java -version`命令查看jdk版本**
 
 ```bash
-$ java -version
-java version "1.8.0_121"
-Java(TM) SE Runtime Environment (build 1.8.0_121-b13)
-Java HotSpot(TM) 64-Bit Server VM (build 25.121-b13, mixed mode)
+java -version
 ```
 
 #### 2.2 安装GCC-4.3.0(GLIBCXX_3.4.10)或更新版本（可选）
@@ -26,40 +25,59 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.121-b13, mixed mode)
 如果使用的是RocksDB后端，请务必执行`gcc --version`命令查看gcc版本；若使用其他后端，则不需要。
 
 ```bash
-$ gcc --version
-gcc (GCC) 4.4.6 20120305 (Red Hat 4.4.6-4)
-Copyright (C) 2010 Free Software Foundation, Inc.
+gcc --version
 ```
 
 ### 3 下载
 
-有两种方式可以获取HugeGraph Server：
+有三种方式可以获取HugeGraph-Server组件：
 
-- 下载tar包（推荐）
-- 源码编译
+方式1：一键部署
+方式2：下载tar包
+方式3：源码编译
 
-#### 3.1 下载tar包
+#### 3.1 一键部署
+
+HugeGraph-Tools提供了一键部署的命令行工具，用户可以使用该工具快速地一键下载、解压、配置并启动HugeGraphServer和HugeGraphStudio。
+当然，还是得先下载HugeGraph-Tools的tar包。
 
 ```bash
-$ wget https://hugegraph.github.io/hugegraph-doc/downloads/hugegraph-release-${version}-SNAPSHOT.tar.gz
-$ tar -zxvf hugegraph-release-${version}-SNAPSHOT.tar.gz
+wget https://hugegraph.github.io/hugegraph-doc/downloads/hugegraph-tools-${version}-SNAPSHOT.tar.gz
+tar -zxvf hugegraph-tools-${version}-SNAPSHOT.tar.gz
+cd hugegraph-tools-${version}-SNAPSHOT
 ```
 
-_注：${version}为版本号，最新版本号可参考[Download](../download.md)页面，或直接从Download页面点击链接下载_
+> 注：${version}为版本号，最新版本号可参考[Download页面](../download.md)，或直接从Download页面点击链接下载
 
-#### 3.2 源码编译
+HugeGraph-Tools 的总入口脚本是`bin/hugegraph`，用户可以使用`-h`选项查看其用法，这里只介绍一键部署的命令。
+
+```bash
+bin/hugegraph deploy ${version}
+```
+
+`{version}`表示要部署的HugeGraphServer及HugeGraphStudio的版本，用户可查看`conf/version-mapping.yaml`文件获取版本信息，
+比如要启动 0.6 版本的HugeGraph-Server及HugeGraphStudio将上述命令写为`bin/hugegraph deploy 0.6`即可。
+
+#### 3.2 下载tar包
+
+```bash
+wget https://hugegraph.github.io/hugegraph-doc/downloads/hugegraph-release-${version}-SNAPSHOT.tar.gz
+tar -zxvf hugegraph-release-${version}-SNAPSHOT.tar.gz
+```
+
+#### 3.3 源码编译
 
 下载HugeGraph源代码
 
 ```bash
-$ git clone https://github.com/hugegraph/hugegraph.git
+git clone https://github.com/hugegraph/hugegraph.git
 ```
 
-编译打包生成tar包（编译前检查分支，并切换至master2）:
+编译打包生成tar包
 
 ```bash
-$ cd hugegraph
-$ mvn package -DskipTests
+cd hugegraph
+mvn package -DskipTests
 ```
 
 执行日志如下：
@@ -119,7 +137,7 @@ serializer=text
 启动 server
 
 ```bash
-$ bin/start-hugegraph.sh
+bin/start-hugegraph.sh
 Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 ```
@@ -142,14 +160,14 @@ rocksdb.wal_path=.
 初始化数据库（仅第一次启动时需要）
 
 ```bash
-$ cd hugegraph-release
-$ bin/init-store.sh
+cd hugegraph-release
+bin/init-store.sh
 ```
 
 启动server
 
 ```bash
-$ bin/start-hugegraph.sh
+bin/start-hugegraph.sh
 Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 ```
@@ -179,8 +197,8 @@ cassandra.password=
 初始化数据库（仅第一次启动时需要）
 
 ```bash
-$ cd hugegraph-release
-$ bin/init-store.sh
+cd hugegraph-release
+bin/init-store.sh
 Initing HugeGraph Store...
 2017-12-01 11:26:51 1424  [main] [INFO ] com.baidu.hugegraph.HugeGraph [] - Opening backend store: 'cassandra'
 2017-12-01 11:26:52 2389  [main] [INFO ] com.baidu.hugegraph.backend.store.cassandra.CassandraStore [] - Failed to connect keyspace: hugegraph, try init keyspace later
@@ -203,7 +221,7 @@ Initing HugeGraph Store...
 启动server
 
 ```bash
-$ bin/start-hugegraph.sh
+bin/start-hugegraph.sh
 Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 ```
@@ -233,14 +251,14 @@ cassandra.password=
 初始化数据库（仅第一次启动时需要）
 
 ```bash
-$ cd hugegraph-release
-$ bin/init-store.sh
+cd hugegraph-release
+bin/init-store.sh
 ```
 
 启动server
 
 ```bash
-$ bin/start-hugegraph.sh
+bin/start-hugegraph.sh
 Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 ```
@@ -252,14 +270,14 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 `jps`查看服务进程
 
 ```bash
-$ jps
+jps
 6475 HugeGraphServer
 ```
 
 `curl`请求`RestfulAPI`
 
 ```bash
-$ echo `curl -o /dev/null -s -w %{http_code} "http://localhost:8080/graphs/hugegraph/graph/vertices"`
+echo `curl -o /dev/null -s -w %{http_code} "http://localhost:8080/graphs/hugegraph/graph/vertices"`
 ```
 
 返回结果200，代表server启动正常
@@ -275,7 +293,7 @@ HugeGraphServer的RestAPI包括三种类型的资源，分别是graph、schema�
 ##### 5.2.1 获取`hugegraph`的顶点及相关属性
 
 ```bash
-$ curl http://localhost:8080/graphs/hugegraph/graph/vertices 
+curl http://localhost:8080/graphs/hugegraph/graph/vertices 
 ```
 
 _说明_
@@ -290,7 +308,7 @@ _说明_
 2. 当前HugeGraphServer的默认配置只能是本机访问，可以修改配置，使其能在其他机器访问。
 
     ```
-    $ vim conf/rest-server.properties
+    vim conf/rest-server.properties
     
     restserver.url=http://0.0.0.0:8080
     ```

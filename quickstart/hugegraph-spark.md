@@ -1,13 +1,13 @@
-## HugeSpark Quick Start
+## HugeGraph-Spark Quick Start
 
 ### 1 项目依赖
 
-HugeSpark依赖hugegraph 和 spark-2.1.1，需要添加相关项目依赖：
+HugeGraph-Spark依赖hugegraph 和 spark-2.1.1，需要添加相关项目依赖：
 
 - 下载spark-2.1.1
-- [启动hugeserver](/quickstart/hugegraph-server.html)
+- [启动HugeGraph-Server](/quickstart/hugegraph-server.html)
 
-### 2 下载 HugeSpark
+### 2 下载 HugeGraph-Spark
 
 提供两种方式下载hugespark：
 
@@ -86,7 +86,7 @@ $ cp baidu/xbu-data/hugegraph-spark/target/hugegraph-spark-0.1.0-SNAPSHOT-jar-wi
     $ spark-shell --conf spark.hugegraph.snapshot.dir=/tmp/hugesnapshot2
   ```
 
-### 4 HugeSpark Shell 使用
+### 4 HugeGraph-Spark Shell 使用
 
 启动Scala shell ：
 

@@ -1,4 +1,4 @@
-## HugeClient Quick Start
+## HugeGraph-Client Quick Start
 
 ### 1 概述
 
@@ -11,11 +11,11 @@ HugeGraph-Client向HugeGraph-Server发出HTTP请求，获取并解析Server的�
 
 ### 3 使用流程
 
-使用HugeClient的基本步骤如下:
+使用HugeGraph-Client的基本步骤如下:
 
 - 新建Eclipse/ IDEA Maven项目；
-- 在pom文件中添加HugeClient依赖；
-- 创建类，调用HugeClient接口；
+- 在pom文件中添加HugeGraph-Client依赖；
+- 创建类，调用HugeGraph-Client接口；
 
 详细使用过程见下节完整示例。
 
@@ -66,8 +66,7 @@ public class SingleExample {
 
     public static void main(String[] args) throws IOException {
         // If connect failed will throw a exception.
-        HugeClient hugeClient = new HugeClient("http://localhost:8080",
-                                               "hugegraph");
+        HugeClient hugeClient = new HugeClient("http://localhost:8080", "hugegraph");
 
         SchemaManager schema = hugeClient.schema();
 
@@ -175,7 +174,6 @@ public class SingleExample {
         josh.addEdge("created", ripple, "date", "20171210", "weight", 1.0);
         peter.addEdge("created", lop, "date", "20170324", "weight", 0.2);
 
-
         GremlinManager gremlin = hugeClient.gremlin();
         ResultSet resultSet = gremlin.gremlin("g.V().outE().path()").execute();
         Iterator<Result> results = resultSet.iterator();
@@ -216,8 +214,7 @@ public class BatchExample {
 
     public static void main(String[] args) {
         // If connect failed will throw a exception.
-        HugeClient hugeClient = new HugeClient("http://localhost:8080",
-                                               "hugegraph");
+        HugeClient hugeClient = new HugeClient("http://localhost:8080", "hugegraph");
 
         SchemaManager schema = hugeClient.schema();
 
@@ -329,8 +326,8 @@ public class BatchExample {
 
 ### 4.4 运行Example
 
-运行Example之前需要启动Sever, 启动过程见[HugeServer Quick Start](/quickstart/hugegraph-server.html)
+运行Example之前需要启动Sever, 启动过程见[HugeGraph-Server Quick Start](/quickstart/hugegraph-server.html)
 
 ### 4.5 Example示例说明
 
-示例说明见[HugeClient基本API介绍](/clients/hugegraph-client.html)
+示例说明见[HugeGraph-Client基本API介绍](/clients/hugegraph-client.html)

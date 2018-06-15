@@ -1,6 +1,6 @@
 ## 使用场景
 
-当要批量插入的图数据（包括顶点和边）条数为billion级别及以下，或者总数据量小于TB时，可以采用[HugeLoader](../quickstart/hugeloader.md)工具持续、高速导入图数据
+当要批量插入的图数据（包括顶点和边）条数为billion级别及以下，或者总数据量小于TB时，可以采用[HugeGraph-Loader](../quickstart/hugegraph-loader.md)工具持续、高速导入图数据
 
 ## 性能
 

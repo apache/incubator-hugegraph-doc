@@ -1,6 +1,6 @@
 ## HugeGraph API Performance
 
-HugeGraph API性能测试主要测试HugeGraph Server对RESTful API请求的并发处理能力，包括：
+HugeGraph API性能测试主要测试HugeGraph-Server对RESTful API请求的并发处理能力，包括：
 
 - 顶点/边的单条插入
 - 顶点/边的批量插入

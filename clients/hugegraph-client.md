@@ -8,14 +8,14 @@
 就能将`java`代码转变为`groovy`；另外就是每一行语句最后可以不加分号，`groovy`认为一行就是一条语句。
 用户在`HugeGraph-Studio`中编写的`gremlin(groovy)`可以参考本文的`java`代码，下面会举出几个例子。
 
-### 1 HugeClient
+### 1 HugeGraph-Client
 
-HugeClient 是操作 graph 的总入口，用户必须先创建出 HugeClient 对象，与 HugeGraph Server 建立连接（伪连接）后，才能获取到 schema、graph 以及 gremlin 的操作入口对象。
+HugeGraph-Client 是操作 graph 的总入口，用户必须先创建出 HugeGraph-Client 对象，与 HugeGraph-Server 建立连接（伪连接）后，才能获取到 schema、graph 以及 gremlin 的操作入口对象。
 
-目前 HugeClient 只允许连接服务端已存在的图，无法自定义图进行创建。其创建方法如下：
+目前 HugeGraph-Client 只允许连接服务端已存在的图，无法自定义图进行创建。其创建方法如下：
 
 ```java
-// HugeGraph Server地址："http://localhost:8080"
+// HugeGraphServer地址："http://localhost:8080"
 // 图的名称："hugegraph"
 HugeClient hugeClient = new HugeClient("http://localhost:8080", "hugegraph");
 ```
@@ -423,4 +423,4 @@ Edge knows1 = marko.addEdge("knows", vadas, "city", "Beijing");
 
 ### 4 简单示例
 
-简单示例见[HugeClient](/quickstart/hugegraph-client.html)
+简单示例见[HugeGraph-Client](/quickstart/hugegraph-client.html)

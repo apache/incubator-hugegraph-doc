@@ -11,7 +11,7 @@ HugeGraph和TitanDB都是基于[Apache TinkerPop 3](https://tinkerpop.apache.org
 
 HugeGraph相对于TitanDB而言，其主要特点如下：
 
-- HugeGraph拥有较为完善的工具组件。HugeGraph目前有HugeApi、HugeClient、HugeLoader、HugeStudio、HugeSpark等完善的工具组件，可以完成系统集成、数据载入、图可视化查询、Spark 连接等功能；
+- HugeGraph拥有较为完善的工具组件。HugeGraph目前有HugeApi、HugeGraph-Client、HugeGraph-Loader、HugeGraph-Studio、HugeGraph-Spark等完善的工具组件，可以完成系统集成、数据载入、图可视化查询、Spark 连接等功能；
 - HugeGraph具有Server和Client的概念，第三方系统可以通过jar引用、client、api等多种方式接入，而TitanDB仅支持jar引用方式接入。
 - HugeGraph的Schema需要显式定义，所有的插入和查询均需要通过严格的schema校验，目前暂不支持schema的隐式创建。
 - HugeGraph充分利用后端存储系统的特点来实现数据高效存取，而TitanDB以统一的Kv结构无视后端的差异性。
@@ -180,7 +180,7 @@ g.V(pluto).out('brother').as('god').out('lives').as('place').select('god','place
 g.V(pluto).out('brother').as('god').out('lives').as('place').select('god','place').by('name')
 ```
 
-推荐使用[HugeStudio](/quickstart/hugegraph-studio.html) 通过可视化的方式来执行上述代码。另外也可以通过HugeClient、HugeApi、GremlinConsole和GremlinDriver等多种方式执行上述代码。
+推荐使用[HugeGraph-Studio](/quickstart/hugegraph-studio.html) 通过可视化的方式来执行上述代码。另外也可以通过HugeGraph-Client、HugeApi、GremlinConsole和GremlinDriver等多种方式执行上述代码。
 
 #### 3.2 总结
 

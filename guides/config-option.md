@@ -27,7 +27,7 @@ auth.user_tokens            | [hugegraph:9fd95c9c-711b-415b-b85f-d4df46ba5c31] |
 
 config option                | default value                         | descrition
 ---------------------------- | ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------
-restserver.url               | http://127.0.0.1:8080                 | The url for listening of hugeserver.
+restserver.url               | http://127.0.0.1:8080                 | The url for listening of rest-api server.
 graphs                       | [hugegraph:conf/hugegraph.properties] | The map of graphs' name and config file.
 gremlinserver.url            | http://127.0.0.1:8182                 | The url of gremlin server.
 batch.max_edges_per_batch    | 500                                   | The maximum number of edges submitted per batch.

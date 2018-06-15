@@ -1,3 +1,5 @@
+## HugeGraph 0.6 Release Notes
+
 ### API & Java Client
 
 #### 功能更新
@@ -12,7 +14,7 @@
 
 #### BUG修复
 - 使 RestClient的basic auth使用Preemptive模式（HugeGraph-1257）
-- HugeClient中由ResultSet获取多次迭代器，除第一次外其他的无法迭代（HugeGraph-1278）
+- HugeGraph-Client中由ResultSet获取多次迭代器，除第一次外其他的无法迭代（HugeGraph-1278）
 
 ### Core
 

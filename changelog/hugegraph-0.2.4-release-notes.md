@@ -20,7 +20,7 @@
 #### BUG修复
 - HugeGraph-API的VertexLabel/EdgeLabel API未提供eliminate接口（HugeGraph-614）
 - 增加非primary-key id策略的顶点时，如果属性为空无法插入到数据库中（HugeGraph-652）
-- 使用HugeClient的gremlin发送无返回值groovy请求时，由于gremlin-server将无返回值序列化为null，导致前端迭代结果集时出现空指针异常（HugeGraph-664） 
+- 使用HugeGraph-Client的gremlin发送无返回值groovy请求时，由于gremlin-server将无返回值序列化为null，导致前端迭代结果集时出现空指针异常（HugeGraph-664） 
 - Restful API在没有找到对应id的vertex/edge时返回500（HugeGraph-734）
 - HugeElement/HugeProperty的equals()与tinkerpop不兼容（HugeGraph-653）
 - HugeEdgeProperty的property的equals函数与tinkerpop兼容 （HugeGraph-740）
@@ -32,12 +32,12 @@
 - vertex.addEdge()时，assignId调用时机太晚，导致vertex的Set<Edge>中有重复的edge（HugeGraph-666）
 - 查询时包含大于等于三层逻辑嵌套时，会抛出ClassCastException，现改成抛出非法参数异常（HugeGraph-481）
 - 边查询如果同时包含source-vertex/direction和property作为条件，查询结果错误（HugeGraph-749）
-- HugeServer 在运行时如果 cassandra 宕掉，插入或查询操作时会抛出DataStax的异常以及详细的调用栈（HugeGraph-771）
+- HugeGraph-Server 在运行时如果 cassandra 宕掉，插入或查询操作时会抛出DataStax的异常以及详细的调用栈（HugeGraph-771）
 - 删除不存在的 indexLabel 时会抛出异常，而删除其他三种元数据（不存在的）则不会（HugeGraph-782）
 - 当传给EdgeApi的源顶点或目标顶点的id非法时，会因为查询不到该顶点向客户端返回404状态码（HugeGraph-784）
 - 提供内部使用获取元数据的接口，使SchemaManager仅为外部使用，当获取不存在的schema时抛出NotFoundException异常（HugeGraph-743）
-- HugeClient 创建／添加／移除 元数据都应该返回来自服务端的结果（HugeGraph-760）
-- 创建HugeClient时如果输入了错误的主机会导致进程阻塞，无法响应（HugeGraph-718） 
+- HugeGraph-Client 创建／添加／移除 元数据都应该返回来自服务端的结果（HugeGraph-760）
+- 创建HugeGraph-Client时如果输入了错误的主机会导致进程阻塞，无法响应（HugeGraph-718） 
  
 ### 查询、索引、缓存相关
 
@@ -69,8 +69,8 @@
  
 #### 单元测试
 - 增加Cache及Event的单元测试（HugeGraph-659）
-- HugeClient 增加API的测试（99个）
-- HugeClient 增加单元测试，包括RestResult反序列化的单测（12个）
+- HugeGraph-Client 增加API的测试（99个）
+- HugeGraph-Client 增加单元测试，包括RestResult反序列化的单测（12个）
  
 ### 内部修改
  
