@@ -35,6 +35,6 @@ HugeGraph是一款在线和离线环境下，面向分析型，支持批量操�
 
 ### Contact Us
 
-- 负责人：[刘杰](mailto:liujie23@baidu.com)，[李章梅](mailto:lizhangmei@baidu.com)
-- 接口人：[王建奎](mailto:wangjiankui@baidu.com)，[张义](mailto:zhangyi51@baidu.com)，[李凝瑞](mailto:liningrui@baidu.com)
-- 反馈邮箱：[hugegraph@baidu.com](mailto:hugegraph@baidu.com)
+- 负责人：[刘杰]()，[李章梅](https://github.com/javeme)
+- 接口人：[王建奎](https://github.com/Jerrick)，[张义](https://github.com/zhoney)，[李凝瑞](https://github.com/Linary)
+- 反馈邮箱：[hugegraph@googlegroups.com](mailto:hugegraph@googlegroups.com)
