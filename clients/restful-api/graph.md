@@ -31,7 +31,36 @@ http://localhost:8080/graphs
 }
 ```
 
-#### 5.1.2 清空某个图的全部数据，包括schema、vertex、edge和索引等，**该操作需要管理员权限**
+#### 5.1.2 查看某个图的信息
+
+##### Method
+
+```
+GET
+```
+
+##### Url
+
+```
+http://localhost:8080/graphs/hugegraph
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "name": "hugegraph",
+    "backend": "cassandra"
+}
+```
+
+#### 5.1.3 清空某个图的全部数据，包括schema、vertex、edge和索引等，**该操作需要管理员权限**
 
 ##### Method
 
@@ -104,12 +133,5 @@ backend=cassandra
 serializer=cassandra
 
 store=hugegraph
-#store.schema=huge_schema
-#store.graph=huge_graph
-#store.index=huge_index
-
-# rocksdb backend config
-rocksdb.data_path=.
-rocksdb.wal_path=.
-......
+...
 ```
