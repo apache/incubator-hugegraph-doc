@@ -14,6 +14,7 @@
 * [Design Concepts](guides/desgin-concept.md)
 * [Configuration Guide](guides/config-guide.md)
 * [Config Options](guides/config-option.md)
+* [Custom Plugins](guides/custom-plugin.md)
 * [FAQ](guides/faq.md)
 
 ## Query Language
