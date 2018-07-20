@@ -24,7 +24,7 @@ tar zxvf hugegraph-loader-${version}-bin.tar.gz
 
 #### 2.2 下载源码编译安装
 
-下载最新版本的HugeGraph-Loader 源码包：
+下载最新版本的 HugeGraph-Loader 源码包：
 
 ```bash
 $ git clone https://github.com/hugegraph/hugegraph-loader.git
@@ -133,7 +133,7 @@ createdInput = File.csv(inputfiledir + "edge_created.csv").gzip()
 
 **非UTF-8编码文件的读取**
 
-默认情况下，HugeGraph-Loader认为数据源文件是UTF-8编码的，如果文件不是UTF-8的而直接导入，可能会产生乱码，解决办法有两种：
+默认情况下，HugeGraph-Loader 认为数据源文件是UTF-8编码的，如果文件不是UTF-8的而直接导入，可能会产生乱码，解决办法有两种：
 
 - 全局指定编码字符集，通过命令行选项`-charset`设置
 
