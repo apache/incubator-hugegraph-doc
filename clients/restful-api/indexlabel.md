@@ -158,6 +158,8 @@ http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
 
 #### 1.4.4 根据name删除IndexLabel
 
+删除 IndexLabel 会导致删除相关的索引数据，会产生一个异步任务
+
 ##### Method
 
 ```
@@ -173,5 +175,17 @@ http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
 ##### Response Status
 
 ```json
-204
+202
 ```
+
+##### Response Body
+
+```json
+{
+    "task_id": 1
+}
+```
+
+注：
+
+> 可以通过`GET http://localhost:8080/graphs/hugegraph/tasks/1`（其中"1"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](task.md)

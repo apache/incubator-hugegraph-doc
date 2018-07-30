@@ -1,6 +1,6 @@
-### 7.1 Other
+### 8.1 Other
 
-#### 7.1.1 查看HugeGraph的版本信息
+#### 8.1.1 查看HugeGraph的版本信息
 
 ##### Method
 

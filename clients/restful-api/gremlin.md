@@ -1,6 +1,6 @@
-### 6.1 Gremlin
+### 7.1 Gremlin
 
-#### 6.1.1 向HugeGraphServer发送gremlin语句（GET）
+#### 7.1.1 向HugeGraphServer发送gremlin语句（GET），同步执行
 
 ##### Method
 
@@ -64,7 +64,7 @@ http://127.0.0.1:8080/gremlin?gremlin=hugegraph.traversal().V('1:marko')
 }
 ```
 
-#### 6.1.2 向HugeGraphServer发送gremlin语句（POST）
+#### 7.1.2 向HugeGraphServer发送gremlin语句（POST），同步执行
 
 ##### Method
 
@@ -191,3 +191,84 @@ http://localhost:8080/gremlin
 	}
 }
 ```
+
+#### 7.1.3 向HugeGraphServer发送gremlin语句（POST），异步执行
+
+##### Method
+
+```
+POST
+```
+
+##### Url
+
+```
+http://localhost:8080/graphs/hugegraph/jobs/gremlin
+```
+
+**查询顶点**
+
+##### Request Body
+
+```json
+{
+	"gremlin": "g.V('1:marko')",
+	"bindings": {},
+	"language": "gremlin-groovy",
+	"aliases": {}
+}
+```
+
+注意：
+
+> 异步执行Gremlin语句暂不支持aliases，可以使用 `graph` 代表要操作的图，也可以直接使用图的名字， 例如 `hugegraph`;
+另外`g`代表 traversal，等价于 `graph.traversal()` 或者 `hugegraph.traversal()`
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+	"task_id": 1
+}
+```
+
+注：
+
+> 可以通过`GET http://localhost:8080/graphs/hugegraph/tasks/1`（其中"1"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](task.md)
+
+**查询边**
+
+##### Request Body
+
+```json
+{
+	"gremlin": "g.E('S1:marko>2>>S2:lop')",
+	"bindings": {},
+	"language": "gremlin-groovy",
+	"aliases": {}
+}
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+	"task_id": 2
+}
+```
+
+注：
+
+> 可以通过`GET http://localhost:8080/graphs/hugegraph/tasks/2`（其中"2"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](task.md)

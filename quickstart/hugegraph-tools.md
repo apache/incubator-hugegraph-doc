@@ -35,6 +35,9 @@ cd hugegraph-tools
 mvn package -DskipTests
 ```
 
+生成 tar 包 hugegraph-tools-${version}.tar.gz
+
+
 ### 3 使用
 
 #### 3.1 功能概览
@@ -43,8 +46,9 @@ mvn package -DskipTests
 
 - 安装部署类，deploy、clear、start-all和stop-all
 - 备份/恢复类，backup、restore、schedule-backup、dump
-- 管理类，graph-mode-set、graph-mode-get、graph-list、graph-get和graph-clear
-- Gremlin类，gremlin
+- 图管理类，graph-mode-set、graph-mode-get、graph-list、graph-get和graph-clear
+- 异步任务管理类，task-delete、task-get和task-delete
+- Gremlin类，gremlin-execute和gremlin-schedule
 
 ```bash
 Usage: hugegraph [options] [command] [command options]
@@ -65,6 +69,8 @@ Usage: hugegraph [options] [command] [command options]
 - start-all，一键启动 HugeGraph-Server 和 HugeGraph-Studio，并启动监控，服务死掉时自动拉起服务
 - stop-all，一键关闭 HugeGraph-Server 和 HugeGraph-Studio
 
+> deploy命令中有可选参数 -u，提供时会使用指定的下载地址替代默认下载地址下载 tar 包，并且将地址写入`~/hugegraph-download-url-prefix`文件中；之后如果不指定地址时，会优先从`~/hugegraph-download-url-prefix`指定的地址下载 tar 包；如果 -u 和`~/hugegraph-download-url-prefix`都没有时，会从默认下载地址进行下载
+
 ##### 3.4 备份/恢复类
 
 - backup，将某张图中的 schema 或者 data 备份到 HugeGraph 系统之外，以 JSON 形式存在本地磁盘
@@ -72,7 +78,7 @@ Usage: hugegraph [options] [command] [command options]
 - schedule-backup，周期性对图执行备份操作，并保留一定数目的最新备份
 - dump，把整张图的顶点和边全部导出，以`vertex vertex-edge1 vertex-edge2...`格式存储
 
-##### 3.5 管理类，graph-mode-set、graph-mode-get、graph-list、graph-get和graph-clear
+##### 3.5 图管理类，graph-mode-set、graph-mode-get、graph-list、graph-get和graph-clear
 
 - graph-mode-set，设置图的 restore mode
 - graph-mode-get，获取图的 restore mode
@@ -82,11 +88,18 @@ Usage: hugegraph [options] [command] [command options]
 
 > 当图中含有 Automatic Id Strategy的 vertex label 时，restore 前需要将图 restoring 模式设置为 TRUE，restore 结束后恢复 restoring 模式为 FALSE
 
-##### 3.6 Gremlin类，gremlin
+##### 3.6 异步任务管理类，task-list、task-get和task-delete
 
-- gremlin，发送 Gremlin 语句到 HugeGraph-Server 来执行查询或修改操作
+- task-list，列出某个图中的异步任务，可以根据任务的状态过滤
+- task-get，获取某个异步任务的详细信息
+- task-delete，删除某个异步任务的信息
 
-##### 3.7 具体命令参数
+##### 3.7 Gremlin类，gremlin-execute和gremlin-schedule
+
+- gremlin-execute，发送 Gremlin 语句到 HugeGraph-Server 来执行查询或修改操作，同步执行，结束后返回结果
+- gremlin-schedule，发送 Gremlin 语句到 HugeGraph-Server 来执行查询或修改操作，异步执行，任务提交后立刻返回异步任务id
+
+##### 3.8 具体命令参数
 
 各子命令的具体参数如下：
 
@@ -116,6 +129,15 @@ Usage: hugegraph [options] [command] [command options]
           --retry
             Retry times, default is 3
             Default: 3
+
+    task-list      List tasks
+      Usage: task-list [options]
+        Options:
+          --limit
+            Limit number, no limit if not provided
+            Default: -1
+          --status
+            Status of task
 
     schedule-backup      Schedule backup task
       Usage: schedule-backup [options]
@@ -161,6 +183,18 @@ Usage: hugegraph [options] [command] [command options]
     graph-list      List all graphs
       Usage: graph-list
 
+    gremlin-schedule      Execute Gremlin statements as asynchronous job
+      Usage: gremlin-schedule [options]
+        Options:
+          --bindings, -b
+            Gremlin bindings, valid format is: 'key1=value1,key2=value2...'
+            Default: {}
+          --language, -l
+            Gremlin script language
+            Default: gremlin-groovy
+        * --script, -s
+            Script to be executed
+
     graph-get      Get graph info
       Usage: graph-get [options]
         Options:
@@ -190,8 +224,26 @@ Usage: hugegraph [options] [command] [command options]
     help      Print usage
       Usage: help
 
-    gremlin      Execute Gremlin statements
-      Usage: gremlin [options]
+    stop-all      Stop HugeGraph-Server and HugeGraph-Studio
+      Usage: stop-all
+
+    task-get      Get task info
+      Usage: task-get [options]
+        Options:
+        * --task-id
+            Task id
+            Default: 0
+
+    start-all      Start HugeGraph-Server and HugeGraph-Studio
+      Usage: start-all [options]
+        Options:
+        * -p
+            Install path of HugeGraph-Server and HugeGraph-Studio
+        * -v
+            Version of HugeGraph-Server and HugeGraph-Studio
+
+    gremlin-execute      Execute Gremlin statements
+      Usage: gremlin-execute [options]
         Options:
           --aliases, -a
             Gremlin aliases, valid format is: 'key1=value1,key2=value2...'
@@ -204,17 +256,6 @@ Usage: hugegraph [options] [command] [command options]
             Default: gremlin-groovy
         * --script, -s
             Script to be executed
-
-    stop-all      Stop HugeGraph-Server and HugeGraph-Studio
-      Usage: stop-all
-
-    start-all      Start HugeGraph-Server and HugeGraph-Studio
-      Usage: start-all [options]
-        Options:
-        * -p
-            Install path of HugeGraph-Server and HugeGraph-Studio
-        * -v
-            Version of HugeGraph-Server and HugeGraph-Studio
 
     graph-mode-set      Set graph mode
       Usage: graph-mode-set [options]
@@ -236,4 +277,10 @@ Usage: hugegraph [options] [command] [command options]
             Retry times, default is 3
             Default: 3
 
+    task-delete      Delete task
+      Usage: task-delete [options]
+        Options:
+        * --task-id
+            Task id
+            Default: 0
 ```
