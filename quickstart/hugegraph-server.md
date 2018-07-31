@@ -42,9 +42,9 @@ HugeGraph-Tools提供了一键部署的命令行工具，用户可以使用该�
 当然，还是得先下载HugeGraph-Tools的tar包。
 
 ```bash
-wget https://hugegraph.github.io/hugegraph-doc/downloads/hugegraph-tools-${version}-SNAPSHOT.tar.gz
-tar -zxvf hugegraph-tools-${version}-SNAPSHOT.tar.gz
-cd hugegraph-tools-${version}-SNAPSHOT
+wget https://github.com/hugegraph/hugegraph-tools/releases/download/v${version}/hugegraph-tools-${version}.tar.gz
+tar -zxvf hugegraph-tools-${version}.tar.gz
+cd hugegraph-tools-${version}
 ```
 
 > 注：${version}为版本号，最新版本号可参考[Download页面](../download.md)，或直接从Download页面点击链接下载
@@ -60,8 +60,8 @@ bin/hugegraph deploy -v {hugegraph-version} -p {install-path} [-u {download-path
 #### 3.2 下载tar包
 
 ```bash
-wget https://hugegraph.github.io/hugegraph-doc/downloads/hugegraph-release-${version}-SNAPSHOT.tar.gz
-tar -zxvf hugegraph-release-${version}-SNAPSHOT.tar.gz
+wget https://github.com/hugegraph/hugegraph/releases/download/v${version}/hugegraph-${version}.tar.gz
+tar -zxvf hugegraph-${version}.tar.gz
 ```
 
 #### 3.3 源码编译

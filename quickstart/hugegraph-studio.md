@@ -51,20 +51,20 @@ $ mvn package -DskipTests
 [INFO] ------------------------------------------------------------------------
 ```
 
-执行成功后,在hugegraph-studio目录下生成hugestudio-release-${version}-SNAPSHOT文件夹以及 hugestudio-release-${version}-SNAPSHOT.tar.gz文件，即为编译生成的tar包。
+执行成功后,在hugegraph-studio目录下生成hugegraph-studio-release-${version}文件夹以及hugegraph-studio-${version}.tar.gz文件，即为编译生成的tar包。
 
 #### 2.2 下载二进制tar包
 
 可以从以下地址下载:
 
 ```bash
-wget https://hugegraph.github.io/hugegraph-doc/downloads/hugestudio/hugestudio-release-${version}-SNAPSHOT.tar.gz
+wget https://github.com/hugegraph/hugegraph-studio/releases/download/v${version}/hugegraph-studio-${version}.tar.gz
 ```
 
 下载完成后解压缩：
 
 ```bash
-$ tar zxvf hugestudio-release-${version}-SNAPSHOT.tar.gz
+$ tar zxvf hugegraph-studio-${version}.tar.gz
 ```
 
 ### 3 启动HugeGraph-Studio
@@ -72,7 +72,7 @@ $ tar zxvf hugestudio-release-${version}-SNAPSHOT.tar.gz
 修改配置文件：
 
 ```bash
-$ cd hugestudio-release-${version}-SNAPSHOT
+$ cd hugegraph-studio-${version}
 $ vim conf/hugestudio.properties
 ```
 
@@ -81,7 +81,7 @@ $ vim conf/hugestudio.properties
 启动命令如下:
 
 ```bash
-$ cd hugestudio-release-${version}-SNAPSHOT
+$ cd hugegraph-studio-${version}
 $ bin/hugestudio.sh
 ```
 

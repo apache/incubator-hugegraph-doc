@@ -1,9 +1,5 @@
 ## HugeGraph Java Client
 
-版本：1.5.0-SNAPSHOT
-
-发布时间：2018-03-29
-
 本文的代码都是`java`语言写的，但其风格与`gremlin(groovy)`是非常类似的。用户只需要把代码中的变量声明替换成`def`或直接去掉，
 就能将`java`代码转变为`groovy`；另外就是每一行语句最后可以不加分号，`groovy`认为一行就是一条语句。
 用户在`HugeGraph-Studio`中编写的`gremlin(groovy)`可以参考本文的`java`代码，下面会举出几个例子。

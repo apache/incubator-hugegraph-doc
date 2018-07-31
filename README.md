@@ -35,7 +35,7 @@ HugeGraph支持在线及离线环境下的图操作，支持批量导入数据�
 - [HugeGraph-Loader](quickstart/hugegraph-loader.md)：HugeGraph-Loader是基于HugeGraph-Client的数据导入工具，将普通文本数据转化为图形的顶点和边并插入图形数据库中；
 - [HugeGraph-Spark](quickstart/hugegraph-spark.md)：HugeGraph-Spark能在图上做并行计算，例如PageRank算法等；
 - [HugeGraph-Studio](quickstart/hugegraph-studio.md)：HugeGraph-Studio是HugeGraph的Web可视化工具，可用于执行Gremlin语句及展示图；
-- [HugeGraph-Tools](quickstart/hugegraph-tools.md): HugeGraph-Tools是HugeGraph的部署和管理工具，包括管理图、备份/恢复、Gremlin执行等功能。
+- [HugeGraph-Tools](quickstart/hugegraph-tools.md)：HugeGraph-Tools是HugeGraph的部署和管理工具，包括管理图、备份/恢复、Gremlin执行等功能。
 
 ### Contact Us
 

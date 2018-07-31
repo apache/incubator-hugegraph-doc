@@ -18,7 +18,7 @@ HugeGraph-Loader 是 Hugegragh 的数据导入模块，负责将普通文本数�
 下载最新版本的 HugeGraph-Loader bin包：
 
 ```bash
-wget https://hugegraph.github.io/hugegraph-doc/downloads/hugeloader/hugegraph-loader-${version}-bin.tar.gz
+wget https://github.com/hugegraph/hugegraph-loader/releases/download/v${version}/hugegraph-loader-${version}.tar.gz
 tar zxvf hugegraph-loader-${version}-bin.tar.gz
 ```
 
@@ -370,7 +370,7 @@ N         | -timeout           | 100                             | 插入结果�
 N         | -retryExceptions   | java.net.SocketTimeoutException | 需要重试的异常（多个异常时用','分隔）
 N         | -retryTimes        | 10                              | 发生特定异常时的重试次数
 N         | -retryIntervalTime | 10                              | 重试之前的间隔时间（秒）
-N         | -loadNew           | flase                           | 插入边时是否检查边链接的顶点是否存在
+N         | -checkVertex       | false                           | 插入边时是否检查边链接的顶点是否存在
 N         | -idStrategy        | primary_key                     | 顶点id生成策略(primary_key/customize_string)
 N         | -invalidKeyRegex   | null                            | 过滤掉用户配置的正则表达式匹配到的key，默认过滤掉keys 全为 null 或 '' 的数据
 N         | -charset           | UTF-8                           | 数据源文件的编码字符集

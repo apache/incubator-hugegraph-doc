@@ -37,7 +37,7 @@ HugeGraph-Client向HugeGraph-Server发出HTTP请求，获取并解析Server的�
     <dependency>
         <groupId>com.baidu.hugegraph</groupId>
         <artifactId>hugegraph-client</artifactId>
-        <version>1.5.6-SNAPSHOT</version>
+        <version>${version}</version>
     </dependency>    
 </dependencies>
 ```

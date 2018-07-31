@@ -11,15 +11,11 @@ HugeGraph-Spark依赖hugegraph 和 spark-2.1.1，需要添加相关项目依赖�
 
 提供两种方式下载hugespark：
 
-- 直接下载具有hugespark功能的spark安装包：
-
-  [Spark-2.1.1-Hugespark下载地址](https://hugegraph.github.io/hugegraph-doc/downloads/hugespark/hugespark-${version}.tar.gz)
-
-  下载完成后解压即可：
-
-  ```bash
-    $ tar -zxvf hugespark-${version}.tar.gz
-  ```
+- 直接下载具有hugespark功能的spark安装包，然后解压
+```bash
+wget https://github.com/hugegraph/hugegraph-spark/releases/download/v${version}/hugegraph-spark-${version}.tar.gz
+tar -zxvf hugegraph-spark-${version}.tar.gz
+```
 
 - 下载源码，编译hugespark jar包，配置本机spark；
 
