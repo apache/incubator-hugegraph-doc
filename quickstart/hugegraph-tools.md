@@ -76,7 +76,10 @@ Usage: hugegraph [options] [command] [command options]
 - backup，将某张图中的 schema 或者 data 备份到 HugeGraph 系统之外，以 JSON 形式存在本地磁盘
 - restore，将 JSON 格式存储的 schema 或者 data 恢复到原系统或者创建新图
 - schedule-backup，周期性对图执行备份操作，并保留一定数目的最新备份
-- dump，把整张图的顶点和边全部导出，以`vertex vertex-edge1 vertex-edge2...`格式存储
+- dump，把整张图的顶点和边全部导出，默认以`vertex vertex-edge1 vertex-edge2..
+.`JSON格式存储。用户也可以自定义存储格式，只需要在`hugegraph-tools/src/main/java/com/baidu/hugegraph
+/formatter`目录下实现一个继承自`Formatter`的类，例如`CustomFormatter`，使用时指定该类为formatter即可，例如
+`bin/hugegraph dump -f CustomFormatter`
 
 ##### 3.5 图管理类，graph-mode-set、graph-mode-get、graph-list、graph-get和graph-clear
 
@@ -273,6 +276,9 @@ Usage: hugegraph [options] [command] [command options]
           --directory, -d
             Directory to store graph data
             Default: ./
+          --formatter, -f
+            Formatter to customize format of vertex/edge
+            Default: JsonFormatter
           --retry
             Retry times, default is 3
             Default: 3
@@ -283,4 +289,5 @@ Usage: hugegraph [options] [command] [command options]
         * --task-id
             Task id
             Default: 0
+
 ```

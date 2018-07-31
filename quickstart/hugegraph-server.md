@@ -28,13 +28,13 @@ java -version
 gcc --version
 ```
 
-### 3 下载
+### 3 部署
 
-有三种方式可以获取HugeGraph-Server组件：
+有三种方式可以部署HugeGraph-Server组件：
 
-方式1：一键部署
-方式2：下载tar包
-方式3：源码编译
+- 方式1：一键部署
+- 方式2：下载tar包
+- 方式3：源码编译
 
 #### 3.1 一键部署
 
@@ -49,14 +49,13 @@ cd hugegraph-tools-${version}-SNAPSHOT
 
 > 注：${version}为版本号，最新版本号可参考[Download页面](../download.md)，或直接从Download页面点击链接下载
 
-HugeGraph-Tools 的总入口脚本是`bin/hugegraph`，用户可以使用`-h`选项查看其用法，这里只介绍一键部署的命令。
+HugeGraph-Tools 的总入口脚本是`bin/hugegraph`，用户可以使用`help`子命令查看其用法，这里只介绍一键部署的命令。
 
 ```bash
-bin/hugegraph deploy ${version}
+bin/hugegraph deploy -v {hugegraph-version} -p {install-path} [-u {download-path-prefix}]
 ```
 
-`{version}`表示要部署的HugeGraphServer及HugeGraphStudio的版本，用户可查看`conf/version-mapping.yaml`文件获取版本信息，
-比如要启动 0.6 版本的HugeGraph-Server及HugeGraphStudio将上述命令写为`bin/hugegraph deploy 0.6`即可。
+`{hugegraph-version}`表示要部署的HugeGraphServer及HugeGraphStudio的版本，用户可查看`conf/version-mapping.yaml`文件获取版本信息，`{install-path}`指定HugeGraphServer及HugeGraphStudio的安装目录，`{download-path-prefix}`可选，指定HugeGraphServer及HugeGraphStudio tar包的下载地址，不提供时使用默认下载地址，比如要启动 0.6 版本的HugeGraph-Server及HugeGraphStudio将上述命令写为`bin/hugegraph deploy -v 0.6 -p services`即可。
 
 #### 3.2 下载tar包
 
@@ -107,16 +106,14 @@ mvn package -DskipTests
 
 ### 4 配置
 
-如果需要快速启动HugeGraph仅用于测试，那么只需要进行少数几个配置项的修改即可。详细的配置介绍请
-参考[配置文档](/guides/config-guide.html)及[配置项](/guides/config-option.html)
+如果需要快速启动HugeGraph仅用于测试，那么只需要进行少数几个配置项的修改即可。详细的配置介绍请参考[配置文档](/guides/config-guide.html)及[配置项](/guides/config-option.html)
 
 ### 5 启动
 
 启动分为"首次启动"和"非首次启动"，这么区分是因为在第一次启动前需要初始化后端数据库，然后启动服务。
 而在人为停掉服务后，或者其他原因需要再次启动服务时，因为后端数据库是持久化存在的，直接启动服务即可。
 
-如果在第一次没有初始化过数据库就直接启动服务了，HugeGraphServer也不会报错，这是因为
-HugeGraphServer不依赖于后端存储启动（特别是多后端存储时），只有在具体操作后端存储时才给出错误。
+HugeGraphServer启动时会连接后端存储并尝试检查后端存储版本号，如果没有初始化过后端或者后端初始化版本不对（旧版本初始化过）时，HugeGraphServer会启动失败，并给出错误信息。
 
 如果需要外部访问HugeGraphServer，请修改`rest-server.properties`的`restserver.url`配置项
 （默认为`http://127.0.0.1:8080`），修改成机器名或IP地址。
@@ -284,13 +281,15 @@ echo `curl -o /dev/null -s -w %{http_code} "http://localhost:8080/graphs/hugegra
 
 #### 6.2 请求Server
 
-HugeGraphServer的RestAPI包括三种类型的资源，分别是graph、schema、gremlin，
+HugeGraphServer的RESTful API包括多种类型的资源，典型的包括graph、schema、gremlin、traverser和task，
 
 - `graph`包含`vertices`、`edges`
 - `schema` 包含`vertexlabels`、 `propertykeys`、 `edgelabels`、`indexlabels`
-- `gremlin`包含各种`Gremlin`语句，如`g.v()`
+- `gremlin`包含各种`Gremlin`语句，如`g.v()`，可以同步或者异步执行
+- `traverser`包含各种高级查询，包括最短路径、交叉点、N步可达邻居等
+- `task`包含异步任务的查询和删除
 
-##### 5.2.1 获取`hugegraph`的顶点及相关属性
+##### 6.2.1 获取`hugegraph`的顶点及相关属性
 
 ```bash
 curl http://localhost:8080/graphs/hugegraph/graph/vertices 

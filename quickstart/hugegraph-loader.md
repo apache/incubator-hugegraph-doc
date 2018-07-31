@@ -507,7 +507,7 @@ load(createdInput).asEdges {
 {"aname": "peter", "bname": "lop", "date": "20170324", "weight": 0.2}
 ```
 
-##### 5.3 执行命令
+#### 5.3 执行命令
 
 运行 `bin/hugeloader` 并传入参数
 
@@ -541,3 +541,14 @@ schema.indexLabel("createdByDate").onE("created").by("date").secondary().ifNotEx
 schema.indexLabel("createdByWeight").onE("created").by("weight").range().ifNotExist().create();
 schema.indexLabel("knowsByWeight").onE("knows").by("weight").range().ifNotExist().create();
 ```
+
+### 6 日志文件
+
+HugeGraph-Loader在导入图数据时，会记录导入的过程信息以及错误信息
+
+- `schema.groovy`，采用自动生成schema时，该文件中会记录生成的schema信息
+- `hugegraph-loader.log`，数据导入过程中的全部日志信息
+- `parse_error.data`，解析数据文件时发生的错误信息
+- `vertex_insert_error.data`，顶点导入时，请求发送到HugeGraphServer后，由于无法完成插入由HugeGraphServer返回的错误信息
+- `edge_insert_error.data`，边导入时，请求发送到HugeGraphServer后，由于无法完成插入由HugeGraphServer返回的错误信息
+
