@@ -512,7 +512,33 @@
             
         </li>
     
-        <li class="chapter " data-level="5.1.10" data-path="../clients/restful-api/gremlin.html">
+        <li class="chapter " data-level="5.1.10" data-path="../clients/restful-api/task.html">
+            
+                <a href="../clients/restful-api/task.html">
+            
+                    
+                    Task
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.11" data-path="../clients/restful-api/rebuild.html">
+            
+                <a href="../clients/restful-api/rebuild.html">
+            
+                    
+                    Rebuild
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.1.12" data-path="../clients/restful-api/gremlin.html">
             
                 <a href="../clients/restful-api/gremlin.html">
             
@@ -525,7 +551,7 @@
             
         </li>
     
-        <li class="chapter " data-level="5.1.11" data-path="../clients/restful-api/other.html">
+        <li class="chapter " data-level="5.1.13" data-path="../clients/restful-api/other.html">
             
                 <a href="../clients/restful-api/other.html">
             
@@ -680,7 +706,20 @@
         
         
     
-        <li class="chapter " data-level="7.1" data-path="../changelog/hugegraph-0.6.1-release-notes.html">
+        <li class="chapter " data-level="7.1" data-path="../changelog/hugegraph-0.7.4-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.7.4-release-notes.html">
+            
+                    
+                    Release-0.7.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="../changelog/hugegraph-0.6.1-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.6.1-release-notes.html">
             
@@ -693,7 +732,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.2" data-path="../changelog/hugegraph-0.5.6-release-notes.html">
+        <li class="chapter " data-level="7.3" data-path="../changelog/hugegraph-0.5.6-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.5.6-release-notes.html">
             
@@ -706,7 +745,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.3" data-path="../changelog/hugegraph-0.4.4-release-notes.html">
+        <li class="chapter " data-level="7.4" data-path="../changelog/hugegraph-0.4.4-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.4.4-release-notes.html">
             
@@ -719,7 +758,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.4" data-path="../changelog/hugegraph-0.3.3-release-notes.html">
+        <li class="chapter " data-level="7.5" data-path="../changelog/hugegraph-0.3.3-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.3.3-release-notes.html">
             
@@ -732,7 +771,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.5" data-path="../changelog/hugegraph-0.2.4-release-notes.html">
+        <li class="chapter " data-level="7.6" data-path="../changelog/hugegraph-0.2.4-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.2.4-release-notes.html">
             
@@ -745,7 +784,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.6" data-path="../changelog/hugegraph-0.2-release-notes.html">
+        <li class="chapter " data-level="7.7" data-path="../changelog/hugegraph-0.2-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.2-release-notes.html">
             
@@ -796,7 +835,7 @@
 </ul>
 <h4 id="21-&#x4E0B;&#x8F7D;&#x4E8C;&#x8FDB;&#x5236;tar&#x5305;">2.1 &#x4E0B;&#x8F7D;&#x4E8C;&#x8FDB;&#x5236;tar&#x5305;</h4>
 <p>&#x4E0B;&#x8F7D;&#x6700;&#x65B0;&#x7248;&#x672C;&#x7684; HugeGraph-Loader bin&#x5305;&#xFF1A;</p>
-<pre><code class="lang-bash">wget https://hugegraph.github.io/hugegraph-doc/downloads/hugeloader/hugegraph-loader-<span class="hljs-variable">${version}</span>-bin.tar.gz
+<pre><code class="lang-bash">wget https://github.com/hugegraph/hugegraph-loader/releases/download/v<span class="hljs-variable">${version}</span>/hugegraph-loader-<span class="hljs-variable">${version}</span>.tar.gz
 tar zxvf hugegraph-loader-<span class="hljs-variable">${version}</span>-bin.tar.gz
 </code></pre>
 <h4 id="22-&#x4E0B;&#x8F7D;&#x6E90;&#x7801;&#x7F16;&#x8BD1;&#x5B89;&#x88C5;">2.2 &#x4E0B;&#x8F7D;&#x6E90;&#x7801;&#x7F16;&#x8BD1;&#x5B89;&#x88C5;</h4>
@@ -1191,8 +1230,8 @@ peter|lop|20170324|0.2
 </tr>
 <tr>
 <td>N</td>
-<td>-loadNew</td>
-<td>flase</td>
+<td>-checkVertex</td>
+<td>false</td>
 <td>&#x63D2;&#x5165;&#x8FB9;&#x65F6;&#x662F;&#x5426;&#x68C0;&#x67E5;&#x8FB9;&#x94FE;&#x63A5;&#x7684;&#x9876;&#x70B9;&#x662F;&#x5426;&#x5B58;&#x5728;</td>
 </tr>
 <tr>
@@ -1319,7 +1358,7 @@ load(createdInput).asEdges {
 {&quot;aname&quot;: &quot;josh&quot;, &quot;bname&quot;: &quot;lop&quot;, &quot;date&quot;: &quot;20091111&quot;, &quot;weight&quot;: 0.4}
 {&quot;aname&quot;: &quot;josh&quot;, &quot;bname&quot;: &quot;ripple&quot;, &quot;date&quot;: &quot;20171210&quot;, &quot;weight&quot;: 1.0}
 {&quot;aname&quot;: &quot;peter&quot;, &quot;bname&quot;: &quot;lop&quot;, &quot;date&quot;: &quot;20170324&quot;, &quot;weight&quot;: 0.2}
-</code></pre><h5 id="53-&#x6267;&#x884C;&#x547D;&#x4EE4;">5.3 &#x6267;&#x884C;&#x547D;&#x4EE4;</h5>
+</code></pre><h4 id="53-&#x6267;&#x884C;&#x547D;&#x4EE4;">5.3 &#x6267;&#x884C;&#x547D;&#x4EE4;</h4>
 <p>&#x8FD0;&#x884C; <code>bin/hugeloader</code> &#x5E76;&#x4F20;&#x5165;&#x53C2;&#x6570;</p>
 <pre><code class="lang-bash"><span class="hljs-comment"># &#x793A;&#x4F8B;</span>
 bin/hugeloader <span class="hljs-_">-f</span> example/json/example.groovy -schema example/json/schema.groovy -g hugegraph
@@ -1346,7 +1385,16 @@ schema.edgeLabel(&quot;created&quot;).sourceLabel(&quot;person&quot;).targetLabe
 schema.indexLabel(&quot;createdByDate&quot;).onE(&quot;created&quot;).by(&quot;date&quot;).secondary().ifNotExist().create();
 schema.indexLabel(&quot;createdByWeight&quot;).onE(&quot;created&quot;).by(&quot;weight&quot;).range().ifNotExist().create();
 schema.indexLabel(&quot;knowsByWeight&quot;).onE(&quot;knows&quot;).by(&quot;weight&quot;).range().ifNotExist().create();
-</code></pre>
+</code></pre><h3 id="6-&#x65E5;&#x5FD7;&#x6587;&#x4EF6;">6 &#x65E5;&#x5FD7;&#x6587;&#x4EF6;</h3>
+<p>HugeGraph-Loader&#x5728;&#x5BFC;&#x5165;&#x56FE;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x4F1A;&#x8BB0;&#x5F55;&#x5BFC;&#x5165;&#x7684;&#x8FC7;&#x7A0B;&#x4FE1;&#x606F;&#x4EE5;&#x53CA;&#x9519;&#x8BEF;&#x4FE1;&#x606F;</p>
+<ul>
+<li><code>schema.groovy</code>&#xFF0C;&#x91C7;&#x7528;&#x81EA;&#x52A8;&#x751F;&#x6210;schema&#x65F6;&#xFF0C;&#x8BE5;&#x6587;&#x4EF6;&#x4E2D;&#x4F1A;&#x8BB0;&#x5F55;&#x751F;&#x6210;&#x7684;schema&#x4FE1;&#x606F;</li>
+<li><code>hugegraph-loader.log</code>&#xFF0C;&#x6570;&#x636E;&#x5BFC;&#x5165;&#x8FC7;&#x7A0B;&#x4E2D;&#x7684;&#x5168;&#x90E8;&#x65E5;&#x5FD7;&#x4FE1;&#x606F;</li>
+<li><code>parse_error.data</code>&#xFF0C;&#x89E3;&#x6790;&#x6570;&#x636E;&#x6587;&#x4EF6;&#x65F6;&#x53D1;&#x751F;&#x7684;&#x9519;&#x8BEF;&#x4FE1;&#x606F;</li>
+<li><code>vertex_insert_error.data</code>&#xFF0C;&#x9876;&#x70B9;&#x5BFC;&#x5165;&#x65F6;&#xFF0C;&#x8BF7;&#x6C42;&#x53D1;&#x9001;&#x5230;HugeGraphServer&#x540E;&#xFF0C;&#x7531;&#x4E8E;&#x65E0;&#x6CD5;&#x5B8C;&#x6210;&#x63D2;&#x5165;&#x7531;HugeGraphServer&#x8FD4;&#x56DE;&#x7684;&#x9519;&#x8BEF;&#x4FE1;&#x606F;</li>
+<li><code>edge_insert_error.data</code>&#xFF0C;&#x8FB9;&#x5BFC;&#x5165;&#x65F6;&#xFF0C;&#x8BF7;&#x6C42;&#x53D1;&#x9001;&#x5230;HugeGraphServer&#x540E;&#xFF0C;&#x7531;&#x4E8E;&#x65E0;&#x6CD5;&#x5B8C;&#x6210;&#x63D2;&#x5165;&#x7531;HugeGraphServer&#x8FD4;&#x56DE;&#x7684;&#x9519;&#x8BEF;&#x4FE1;&#x606F;</li>
+</ul>
+
                                 
                                 </section>
                             
@@ -1398,7 +1446,7 @@ schema.indexLabel(&quot;knowsByWeight&quot;).onE(&quot;knows&quot;).by(&quot;wei
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Load data with HugeGraph-Loader","level":"2.2","depth":1,"next":{"title":"Manage with HugeGraph-Tools","level":"2.3","depth":1,"path":"quickstart/hugegraph-tools.md","ref":"quickstart/hugegraph-tools.md","articles":[]},"previous":{"title":"Install HugeGraph-Server","level":"2.1","depth":1,"path":"quickstart/hugegraph-server.md","ref":"quickstart/hugegraph-server.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"quickstart/hugegraph-loader.md","mtime":"2018-07-28T06:56:34.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-28T07:00:54.802Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Load data with HugeGraph-Loader","level":"2.2","depth":1,"next":{"title":"Manage with HugeGraph-Tools","level":"2.3","depth":1,"path":"quickstart/hugegraph-tools.md","ref":"quickstart/hugegraph-tools.md","articles":[]},"previous":{"title":"Install HugeGraph-Server","level":"2.1","depth":1,"path":"quickstart/hugegraph-server.md","ref":"quickstart/hugegraph-server.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"quickstart/hugegraph-loader.md","mtime":"2018-08-03T08:05:25.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-03T08:05:39.753Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
