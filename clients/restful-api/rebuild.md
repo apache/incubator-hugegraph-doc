@@ -2,16 +2,10 @@
 
 #### 6.2.1 重建IndexLabel
 
-##### Method
+##### Method & Url
 
 ```
-PUT
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/jobs/rebuild/indexlabels/personByCity
+PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/indexlabels/personByCity
 ```
 
 ##### Response Status
@@ -34,16 +28,10 @@ http://localhost:8080/graphs/hugegraph/jobs/rebuild/indexlabels/personByCity
 
 #### 6.2.2 重建VertexLabel索引
 
-##### Method
+##### Method & Url
 
 ```
-PUT
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/jobs/rebuild/vertexlabels/person
+PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/vertexlabels/person
 ```
 
 ##### Response Status
@@ -66,16 +54,10 @@ http://localhost:8080/graphs/hugegraph/jobs/rebuild/vertexlabels/person
 
 #### 6.2.3 重建EdgeLabel索引
 
-##### Method
+##### Method & Url
 
 ```
-PUT
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/jobs/rebuild/edgelabels/softwareByPrice
+PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/edgelabels/softwareByPrice
 ```
 
 ##### Response Status

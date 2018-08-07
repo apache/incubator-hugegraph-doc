@@ -4,16 +4,10 @@ Variables可以用来存储有关整个图的数据，数据按照键值对的�
 
 #### 4.1.1 创建或者更新某个键值对
 
-##### Method
+##### Method & Url
 
 ```
-PUT
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/variables/name
+PUT http://localhost:8080/graphs/hugegraph/variables/name
 ```
 
 ##### Request Body
@@ -40,16 +34,10 @@ http://localhost:8080/graphs/hugegraph/variables/name
 
 #### 4.1.2 列出全部键值对
 
-##### Method 
+##### Method & Url
 
 ```
-GET
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/variables
+GET http://localhost:8080/graphs/hugegraph/variables
 ```
 
 ##### Response Status
@@ -68,16 +56,10 @@ http://localhost:8080/graphs/hugegraph/variables
 
 #### 4.1.3 列出某个键值对
 
-##### 方法
+##### Method & Url
 
 ```
-GET
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/variables/name
+GET http://localhost:8080/graphs/hugegraph/variables/name
 ```
 
 ##### Response Status
@@ -96,16 +78,10 @@ http://localhost:8080/graphs/hugegraph/variables/name
 
 #### 4.1.4 删除某个键值对
 
-##### Method
+##### Method & Url
 
 ```
-DELETE
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/variables/name
+DELETE http://localhost:8080/graphs/hugegraph/variables/name
 ```
 
 ##### Response Status

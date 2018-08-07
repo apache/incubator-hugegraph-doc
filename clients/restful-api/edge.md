@@ -14,16 +14,10 @@ EdgeId是由 `src-vertex-id + direction + label + sort-values + tgt-vertex-id` �
 
 #### 2.2.1 创建一条边
 
-##### Method
+##### Method & Url
 
 ```
-POST
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/graph/edges
+POST http://localhost:8080/graphs/hugegraph/graph/edges
 ```
 
 ##### Request Body
@@ -68,16 +62,10 @@ http://localhost:8080/graphs/hugegraph/graph/edges
 
 #### 2.2.2 创建多条边
 
-##### Method
+##### Method & Url
 
 ```
-POST
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/graph/edges/batch
+POST http://localhost:8080/graphs/hugegraph/graph/edges/batch
 ```
 
 ##### Request Body
@@ -126,16 +114,10 @@ http://localhost:8080/graphs/hugegraph/graph/edges/batch
 
 #### 2.2.3 更新边属性
 
-##### Method
+##### Method & Url
 
 ```
-PUT
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action=append
+PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action=append
 ```
 
 ##### Request Body
@@ -176,16 +158,10 @@ http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action=app
 
 #### 2.2.4 删除边属性
 
-##### Method
+##### Method & Url
 
 ```
-PUT
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action=eliminate
+PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action=eliminate
 ```
 
 ##### Request Body
@@ -225,12 +201,6 @@ http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action=eli
 
 #### 2.2.5 获取符合条件的边
 
-##### Method
-
-```
-GET
-```
-
 ##### Params
 
 - vertex_id: 顶点id
@@ -244,10 +214,10 @@ vertex_id为可选参数，如果提供参数vertex_id则必须同时提供参�
 
 **查询与顶点 person:josh(vertex_id="1:josh") 相连且 label 为 created 的边**
 
-##### Url
+##### Method & Url
 
 ```
-http://127.0.0.1:8080/graphs/hugegraph/graph/edges?vertex_id="1:josh"&direction=BOTH&label=created&properties={}
+GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?vertex_id="1:josh"&direction=BOTH&label=created&properties={}
 ```
 
 ##### Response Status
@@ -358,10 +328,10 @@ http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page&limit=3
 
 **分页查询所有边，获取下一页（page带上上一页返回的page值），限定3条**
 
-##### Url
+##### Method & Url
 
 ```
-http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page=002500100753313a6a6f73681210010004000000020953323a726970706c65f07ffffffcf07ffffffd8460d63f4b398dd2721ed4fdb7716b420004&limit=3
+GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page=002500100753313a6a6f73681210010004000000020953323a726970706c65f07ffffffcf07ffffffd8460d63f4b398dd2721ed4fdb7716b420004&limit=3
 ```
 
 ##### Response Status
@@ -422,16 +392,10 @@ http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page=002500100753313a6a6f7368
 
 #### 2.2.6 根据Id获取边
 
-##### Method
+##### Method & Url
 
 ```
-GET
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
+GET http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
 ```
 
 ##### Response Status
@@ -460,16 +424,10 @@ http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
 
 #### 2.2.7 根据Id删除边
 
-##### Method
+##### Method & Url
 
 ```
-DELETE
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
+DELETE http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
 ```
 
 ##### Response Status

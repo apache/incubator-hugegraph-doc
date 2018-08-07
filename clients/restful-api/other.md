@@ -2,16 +2,10 @@
 
 #### 8.1.1 查看HugeGraph的版本信息
 
-##### Method
+##### Method & Url
 
 ```
-GET
-```
-
-##### Url
-
-```
-http://localhost:8080/versions
+GET http://localhost:8080/versions
 ```
 
 ##### Response Status

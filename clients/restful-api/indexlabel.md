@@ -4,16 +4,10 @@
 
 #### 1.4.1 创建一个IndexLabel
 
-##### Method
+##### Method & Url
 
 ```
-POST
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/schema/indexlabels
+POST http://localhost:8080/graphs/hugegraph/schema/indexlabels
 ```
 
 ##### Request Body
@@ -53,16 +47,10 @@ http://localhost:8080/graphs/hugegraph/schema/indexlabels
 
 #### 1.4.2 获取所有的IndexLabel
 
-##### Method
+##### Method & Url
 
 ```
-GET
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/schema/indexlabels
+GET http://localhost:8080/graphs/hugegraph/schema/indexlabels
 ```
 
 ##### Response Status
@@ -123,16 +111,10 @@ http://localhost:8080/graphs/hugegraph/schema/indexlabels
 
 #### 1.4.3 根据name获取IndexLabel
 
-##### Method
+##### Method & Url
 
 ```
-GET
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
+GET http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
 ```
 
 ##### Response Status
@@ -160,16 +142,10 @@ http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
 
 删除 IndexLabel 会导致删除相关的索引数据，会产生一个异步任务
 
-##### Method
+##### Method & Url
 
 ```
-DELETE
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
+DELETE http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
 ```
 
 ##### Response Status

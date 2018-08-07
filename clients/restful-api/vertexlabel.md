@@ -4,16 +4,10 @@
 
 #### 1.2.1 创建一个VertexLabel
 
-##### Method
+##### Method & Url
 
 ```
-POST
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/schema/vertexlabels
+POST http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 ```
 
 ##### Request Body
@@ -65,20 +59,14 @@ http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 
 #### 1.2.2 为已存在的VertexLabel添加properties或userdata，或者移除userdata（目前不支持移除properties）
 
-##### Method
-
-```
-PUT
-```
-
 ##### Params
 
 - action: 表示当前行为是添加还是移除，取值为`append`（添加）和`eliminate`（移除）
 
-##### Url
+##### Method & Url
 
 ```
-http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person?action=append
+PUT http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person?action=append
 ```
 
 ##### Request Body
@@ -131,16 +119,10 @@ http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person?action=append
 
 #### 1.2.3 获取所有的VertexLabel
 
-##### Method
+##### Method & Url
 
 ```
-GET
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/schema/vertexlabels
+GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 ```
 
 ##### Response Status
@@ -202,16 +184,10 @@ http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 
 #### 1.2.4 根据name获取VertexLabel
 
-##### Method
+##### Method & Url
 
 ```
-GET
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person
+GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person
 ```
 
 ##### Response Status
@@ -251,16 +227,10 @@ http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person
 
 删除 VertexLabel 会导致删除对应的顶点以及相关的索引数据，会产生一个异步任务
 
-##### Method
+##### Method & Url
 
 ```
-DELETE
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person
+DELETE http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person
 ```
 
 ##### Response Status

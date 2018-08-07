@@ -102,7 +102,7 @@ mvn package -DskipTests
 ......
 ```
 
-执行成功后，在hugegraph目录下生成 hugegraph-release-*.tar.gz 文件，就是编译生成的tar包。
+执行成功后，在hugegraph目录下生成 hugegraph-*.tar.gz 文件，就是编译生成的tar包。
 
 ### 4 配置
 
@@ -157,7 +157,7 @@ rocksdb.wal_path=.
 初始化数据库（仅第一次启动时需要）
 
 ```bash
-cd hugegraph-release
+cd hugegraph-${version}
 bin/init-store.sh
 ```
 
@@ -194,7 +194,7 @@ cassandra.password=
 初始化数据库（仅第一次启动时需要）
 
 ```bash
-cd hugegraph-release
+cd hugegraph-${version}
 bin/init-store.sh
 Initing HugeGraph Store...
 2017-12-01 11:26:51 1424  [main] [INFO ] com.baidu.hugegraph.HugeGraph [] - Opening backend store: 'cassandra'
@@ -248,7 +248,35 @@ cassandra.password=
 初始化数据库（仅第一次启动时需要）
 
 ```bash
-cd hugegraph-release
+cd hugegraph-${version}
+bin/init-store.sh
+```
+
+启动server
+
+```bash
+bin/start-hugegraph.sh
+Starting HugeGraphServer...
+Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
+```
+
+#### 5.5 HBase
+
+修改 hugegraph.properties
+
+```properties
+backend=hbase
+serializer=hbase
+
+# hbase backend config
+hbase.hosts=localhost
+hbase.port=2181
+```
+
+初始化数据库（仅第一次启动时需要）
+
+```bash
+cd hugegraph-${version}
 bin/init-store.sh
 ```
 
@@ -371,6 +399,6 @@ _说明_
 ### 7 停止Server
 
 ```bash
-$cd hugegraph-release
+$cd hugegraph-${version}
 $bin/stop-hugegraph.sh
 ```

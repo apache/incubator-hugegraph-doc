@@ -2,12 +2,6 @@
 
 #### 7.1.1 向HugeGraphServer发送gremlin语句（GET），同步执行
 
-##### Method
-
-```
-GET
-```
-
 ##### Params
 
 - gremlin: 要发送给`HugeGraphServer`执行的`gremlin`语句
@@ -17,10 +11,10 @@ GET
 
 **查询顶点**
 
-##### Url
+##### Method & Url
 
 ```
-http://127.0.0.1:8080/gremlin?gremlin=hugegraph.traversal().V('1:marko')
+GET http://127.0.0.1:8080/gremlin?gremlin=hugegraph.traversal().V('1:marko')
 ```
 
 ##### Response Status
@@ -66,16 +60,10 @@ http://127.0.0.1:8080/gremlin?gremlin=hugegraph.traversal().V('1:marko')
 
 #### 7.1.2 向HugeGraphServer发送gremlin语句（POST），同步执行
 
-##### Method
+##### Method & Url
 
 ```
-POST
-```
-
-##### Url
-
-```
-http://localhost:8080/gremlin
+POST http://localhost:8080/gremlin
 ```
 
 **查询顶点**
@@ -194,16 +182,10 @@ http://localhost:8080/gremlin
 
 #### 7.1.3 向HugeGraphServer发送gremlin语句（POST），异步执行
 
-##### Method
+##### Method & Url
 
 ```
-POST
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/jobs/gremlin
+POST http://localhost:8080/graphs/hugegraph/jobs/gremlin
 ```
 
 **查询顶点**

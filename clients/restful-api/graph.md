@@ -2,16 +2,10 @@
 
 #### 5.1.1 列出数据库中全部的图
 
-##### Method
+##### Method & Url
 
 ```
-GET
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs
+GET http://localhost:8080/graphs
 ```
 
 ##### Response Status
@@ -33,16 +27,10 @@ http://localhost:8080/graphs
 
 #### 5.1.2 查看某个图的信息
 
-##### Method
+##### Method & Url
 
 ```
-GET
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph
+GET http://localhost:8080/graphs/hugegraph
 ```
 
 ##### Response Status
@@ -62,12 +50,6 @@ http://localhost:8080/graphs/hugegraph
 
 #### 5.1.3 清空某个图的全部数据，包括schema、vertex、edge和索引等，**该操作需要管理员权限**
 
-##### Method
-
-```
-DELETE
-```
-
 ##### Params
 
 由于清空图是一个比较危险的操作，为避免用户误调用，我们给API添加了一些用于确认的参数，目前有两个：
@@ -75,10 +57,10 @@ DELETE
 - token: 默认为`162f7848-0b6d-4faf-b557-3a0797869c55`
 - confirm_message: 默认为`I'm sure to delete all data`
 
-##### Url
+##### Method & Url
 
 ```
-http://localhost:8080/graphs/hugegraph/clear?token=162f7848-0b6d-4faf-b557-3a0797869c55&confirm_message=I%27m+sure+to+delete+all+data
+DELETE http://localhost:8080/graphs/hugegraph/clear?token=162f7848-0b6d-4faf-b557-3a0797869c55&confirm_message=I%27m+sure+to+delete+all+data
 ```
 
 ##### Response Status
@@ -91,20 +73,14 @@ http://localhost:8080/graphs/hugegraph/clear?token=162f7848-0b6d-4faf-b557-3a079
 
 #### 5.2.1 查看某个图的配置，**该操作需要管理员权限**
 
-##### Method
-
-```
-GET
-```
-
 ##### Params
 
 - token: 默认为`162f7848-0b6d-4faf-b557-3a0797869c55`
 
-##### Url
+##### Method & Url
 
 ```
-http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55
+GET http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55
 ```
 
 ##### Response Status

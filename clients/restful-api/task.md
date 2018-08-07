@@ -2,21 +2,17 @@
 
 #### 6.1.1 列出某个图中全部的异步任务
 
-##### Method
 
-```
-GET
-```
 
 ##### Params
 
 - status: 异步任务的状态
 - limit：返回异步任务数目上限
 
-##### Url
+##### Method & Url
 
 ```
-http://localhost:8080/graphs/hugegraph/tasks?status=success
+GET http://localhost:8080/graphs/hugegraph/tasks?status=success
 ```
 
 ##### Response Status
@@ -47,16 +43,10 @@ http://localhost:8080/graphs/hugegraph/tasks?status=success
 
 #### 6.1.2 查看某个异步任务的信息
 
-##### Method
+##### Method & Url
 
 ```
-GET
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/tasks/2
+GET http://localhost:8080/graphs/hugegraph/tasks/2
 ```
 
 ##### Response Status
@@ -85,16 +75,10 @@ http://localhost:8080/graphs/hugegraph/tasks/2
 
 #### 6.1.3 删除某个异步任务信息，**不删除异步任务本身**
 
-##### Method
+##### Method & Url
 
 ```
-DELETE
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/tasks/2
+DELETE http://localhost:8080/graphs/hugegraph/tasks/2
 ```
 
 ##### Response Status

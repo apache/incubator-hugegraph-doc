@@ -31,10 +31,10 @@ HugeGraph目前采用EdgeCut的分区方案。
 ### 3. VertexId 策略
 
 HugeGraph的Vertex支持三种ID策略，在同一个图数据库中不同的VertexLabel可以使用不同的Id策略，目前HugeGraph支持的Id策略分别是：
-* AUTOMATIC：使用Snowflake算法自动生成全局唯一Id，Long类型
-* PRIMARY_KEY：通过VertexLabel+PrimaryKeyValues生成Id，String类型
-* CUSTOMIZE_STRING：用户自定义Id，需自己保障Id的唯一性，String类型
-* CUSTOMIZE_NUMBER：用户自定义Id，需自己保障Id的唯一性，Long类型
+
+- 自动生成（AUTOMATIC）：使用Snowflake算法自动生成全局唯一Id，Long类型；
+- 主键（PRIMARY_KEY）：通过VertexLabel+PrimaryKeyValues生成Id，String类型；
+- 自定义（CUSTOMIZE_STRING|CUSTOMIZE_NUMBER）：用户自定义Id，分为String和Long类型两种，需自己保证Id的唯一性；
 
 默认的Id策略是AUTOMATIC，如果用户调用primaryKeys()方法并设置了正确的PrimaryKeys，则自动启用PRIMARY_KEY策略。
 启用PRIMARY_KEY策略后HugeGraph能根据PrimaryKeys实现数据去重。

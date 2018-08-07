@@ -138,7 +138,7 @@ implicit val degreeTop = new Ordering[(Long,Int)]{
 
 PageRank
 
-PageRank的结果仍未一个图，包含`vertices` and `edges`。
+PageRank的结果仍为一个图，包含`vertices` 与 `edges`。
 
 ```scala
 val ranks = graph.pageRank(0.0001)

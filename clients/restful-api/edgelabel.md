@@ -4,16 +4,10 @@
 
 #### 1.3.1 创建一个EdgeLabel
 
-##### Method
+##### Method & Url
 
 ```
-POST
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/schema/edgelabels
+POST http://localhost:8080/graphs/hugegraph/schema/edgelabels
 ```
 
 ##### Request Body
@@ -64,20 +58,14 @@ http://localhost:8080/graphs/hugegraph/schema/edgelabels
 
 #### 1.3.2 为已存在的EdgeLabel添加properties或userdata，或者移除userdata（目前不支持移除properties）
 
-##### Method
-
-```
-PUT
-```
-
 ##### Params
 
 - action: 表示当前行为是添加还是移除，取值为`append`（添加）和`eliminate`（移除）
 
-##### Url
+##### Method & Url
 
 ```
-http://localhost:8080/graphs/hugegraph/schema/edgelabels?action=append
+PUT http://localhost:8080/graphs/hugegraph/schema/edgelabels?action=append
 ```
 
 ##### Request Body
@@ -127,16 +115,10 @@ http://localhost:8080/graphs/hugegraph/schema/edgelabels?action=append
 
 #### 1.3.3 获取所有的EdgeLabel
 
-##### Method
+##### Method & Url
 
 ```
-GET
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/schema/edgelabels
+GET http://localhost:8080/graphs/hugegraph/schema/edgelabels
 ```
 
 ##### Response Status
@@ -195,16 +177,10 @@ http://localhost:8080/graphs/hugegraph/schema/edgelabels
 
 #### 1.3.4 根据name获取EdgeLabel
 
-##### Method
+##### Method & Url
 
 ```
-GET
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
+GET http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
 ```
 
 ##### Response Status
@@ -244,16 +220,10 @@ http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
 
 删除 EdgeLabel 会导致删除对应的边以及相关的索引数据，会产生一个异步任务
 
-##### Method
+##### Method & Url
 
 ```
-DELETE
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
+DELETE http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
 ```
 
 ##### Response Status

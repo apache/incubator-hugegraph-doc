@@ -2,16 +2,10 @@
 
 #### 1.1.1 创建一个 PropertyKey
 
-##### Method
+##### Method & Url
 
 ```
-POST
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/schema/propertykeys
+POST http://localhost:8080/graphs/hugegraph/schema/propertykeys
 ```
 
 ##### Request Body
@@ -45,20 +39,14 @@ http://localhost:8080/graphs/hugegraph/schema/propertykeys
 
 #### 1.1.2 为已存在的 PropertyKey 添加或移除 userdata
 
-##### Method
-
-```
-PUT
-```
-
 ##### Params
 
 - action: 表示当前行为是添加还是移除，取值为`append`（添加）和`eliminate`（移除）
 
-##### Url
+##### Method & Url
 
 ```
-http://localhost:8080/graphs/hugegraph/schema/propertykeys/age?action=append
+PUT http://localhost:8080/graphs/hugegraph/schema/propertykeys/age?action=append
 ```
 
 ##### Request Body
@@ -97,16 +85,10 @@ http://localhost:8080/graphs/hugegraph/schema/propertykeys/age?action=append
 
 #### 1.1.3 获取所有的 PropertyKey
 
-##### Method
+##### Method & Url
 
 ```
-GET
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/schema/propertykeys
+GET http://localhost:8080/graphs/hugegraph/schema/propertykeys
 ```
 
 ##### Response Status
@@ -182,16 +164,10 @@ http://localhost:8080/graphs/hugegraph/schema/propertykeys
 
 #### 1.1.4 根据name获取PropertyKey
 
-##### Method
+##### Method & Url
 
 ```
-GET
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
+GET http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
 ```
 
 其中，`age`为要获取的PropertyKey的名字
@@ -217,16 +193,10 @@ http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
 
 #### 1.1.5 根据name删除PropertyKey
 
-##### Method
+##### Method & Url
 
 ```
-DELETE
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
+DELETE http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
 ```
 
 其中，`age`为要获取的PropertyKey的名字

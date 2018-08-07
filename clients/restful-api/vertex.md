@@ -20,16 +20,10 @@ CUSTOMIZE_NUMBER | number
 
 #### 2.1.1 创建一个顶点
 
-##### Method
+##### Method & Url
 
 ```
-POST
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/graph/vertices
+POST http://localhost:8080/graphs/hugegraph/graph/vertices
 ```
 
 ##### Request Body
@@ -76,16 +70,10 @@ http://localhost:8080/graphs/hugegraph/graph/vertices
 
 #### 2.1.2 创建多个顶点
 
-##### Method
+##### Method & Url
 
 ```
-POST
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/graph/vertices/batch
+POST http://localhost:8080/graphs/hugegraph/graph/vertices/batch
 ```
 
 ##### Request Body
@@ -127,16 +115,10 @@ http://localhost:8080/graphs/hugegraph/graph/vertices/batch
 
 #### 2.1.3 更新顶点属性
 
-##### Method
+##### Method & Url
 
 ```
-PUT
-```
-
-##### Url
-
-```
-http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=append
+PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=append
 ```
 
 ##### Request Body
@@ -191,16 +173,10 @@ http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=append
 
 #### 2.1.4 删除顶点属性
 
-##### Method
+##### Method & Url
 
 ```
-PUT
-```
-
-##### Url
-
-```
-http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=eliminate
+PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=eliminate
 ```
 
 ##### Request Body
@@ -248,12 +224,6 @@ http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=eliminate
 
 #### 2.1.5 获取符合条件的顶点
 
-##### Method
-
-```
-GET
-```
-
 ##### Params
 
 - label: 顶点标签
@@ -265,10 +235,10 @@ GET
 
 **查询所有 age 为 20 且 label 为 person 的顶点**
 
-##### Url
+##### Method & Url
 
 ```
-http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&properties={"age":29}&limit=1
+GET http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&properties={"age":29}&limit=1
 ```
 
 ##### Response Status
@@ -313,10 +283,10 @@ http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&properties={"
 
 **分页查询所有顶点，获取第一页（page不带参数值），限定3条**
 
-##### Url
+##### Method & Url
 
 ```
-http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3
+GET http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3
 ```
 
 ##### Response Status
@@ -396,10 +366,10 @@ http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3
 
 **分页查询所有顶点，获取下一页（page带上上一页返回的page值），限定3条**
 
-##### Url
+##### Method & Url
 
 ```
-http://localhost:8080/graphs/hugegraph/graph/vertices?page=001000100853313a706574657200f07ffffffc00e797c6349be736fffc8699e8a502efe10004&limit=3
+GET http://localhost:8080/graphs/hugegraph/graph/vertices?page=001000100853313a706574657200f07ffffffc00e797c6349be736fffc8699e8a502efe10004&limit=3
 ```
 
 ##### Response Status
@@ -478,16 +448,10 @@ http://localhost:8080/graphs/hugegraph/graph/vertices?page=001000100853313a70657
 
 #### 2.1.6 根据Id获取顶点
 
-##### Method
+##### Method & Url
 
 ```
-GET
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
+GET http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
 ```
 
 ##### Response Status
@@ -522,16 +486,10 @@ http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
 
 #### 2.1.7 根据Id删除顶点
 
-##### Method
+##### Method & Url
 
 ```
-DELETE
-```
-
-##### Url
-
-```
-http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
+DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
 ```
 
 ##### Response Status
