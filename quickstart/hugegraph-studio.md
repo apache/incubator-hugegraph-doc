@@ -2,13 +2,15 @@
 
 ### 1 HugeGraph-Studio概述
 
-HugeGraph-Studio是HugeGraph的前端展示工具，是基于Web的图形化IDE环境，包括studio-api，studio-server，studio-dist和studio-ui四个功能模块。HugeGraph-Studio是为用户提供图形数据库实践的最佳工具，功能包括：
+HugeGraph-Studio是HugeGraph的前端展示工具，是基于Web的图形化IDE环境。
+通过HugeGraph-Studio，用户可以执行Gremlin语句，并及时获得图形化的展示结果。
+功能包括：
 
 - 图数据的输入
 - 图数据的展示
 - 图数据的分析
 
-> 注意：HugeGraph-Studio需要依赖HugeGraph-Server，在安装和使用HugeGraph-Studio之前，请通过jps命令检查Cassandra和HugeGraphServer两个服务已经启动，如果没有启动这两个服务，请参考[HugeGraph-Server安装配置](/quickstart/hugegraph-server.html)。
+> 注意：HugeGraph-Studio需要依赖HugeGraph-Server，在安装和使用HugeGraph-Studio之前，请通过jps命令检查HugeGraphServer服务是否已经启动，如果没有启动，请参考[HugeGraph-Server安装配置](/quickstart/hugegraph-server.html)启动HugeGraphServer。
 
 ### 2 安装和运行HugeGraph-Studio
 
@@ -51,7 +53,7 @@ $ mvn package -DskipTests
 [INFO] ------------------------------------------------------------------------
 ```
 
-执行成功后,在hugegraph-studio目录下生成hugegraph-studio-release-${version}文件夹以及hugegraph-studio-${version}.tar.gz文件，即为编译生成的tar包。
+执行成功后,在hugegraph-studio目录下生成hugegraph-studio-${version}文件夹以及hugegraph-studio-${version}.tar.gz文件，即为编译生成的tar包。
 
 #### 2.2 下载二进制tar包
 
@@ -73,16 +75,20 @@ $ tar zxvf hugegraph-studio-${version}.tar.gz
 
 ```bash
 $ cd hugegraph-studio-${version}
-$ vim conf/hugestudio.properties
+$ vim conf/hugegraph-studio.properties
 ```
 
-将`"server.httpBindAddress=localhost"`中的`localhost`修改成机器名或IP，再进行下一步操作。
+- 将配置项`studio.server.host`的值`localhost`修改成机器名或 IP，这是 HugeGraphStudio 对外提供服务的`host`，如果只需要本地访问则保持不变即可；
+- 将配置项`studio.server.port`的值`8088`修改成想要的端口，这是 HugeGraphStudio 对外提供服务的`port`；
+- 将配置项`graph.server.host`的值`localhost`修改成 HugeGraphServer 的`host`，HugeGraphStudio 通过此项和`graph.server.port`与 HugeGraphServer 建立连接；
+- 将配置项`graph.server.port`的值`8080`修改成 HugeGraphServer 的`port`，HugeGraphStudio 通过`graph.server.host`和此项与 HugeGraphServer 建立连接；
+- 将配置项`graph.name`的值`hugegraph`修改成要连接的 HugeGraphServer 的图名，目前只允许连接一个图。
 
-启动命令如下:
+修改完上述配置后，即可启动 HugeGraphStudio:
 
 ```bash
 $ cd hugegraph-studio-${version}
-$ bin/hugestudio.sh
+$ bin/hugegraph-studio.sh
 ```
 
 启动成功结果如下：
@@ -92,90 +98,33 @@ $ bin/hugestudio.sh
 19:05:12.910 [localhost-startStop-1] INFO  org.springframework.web.context.support.XmlWebApplicationContext ID:  TS: - Refreshing Root WebApplicationContext: startup date [Thu Jul 27 19:05:12 CST 2017]; root of context hierarchy
 19:05:12.973 [localhost-startStop-1] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader ID:  TS: - Loading XML bean definitions from class path resource [applicationContext.xml]
 19:05:13.402 [localhost-startStop-1] INFO  org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor ID:  TS: - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-19:05:13.710 [localhost-startStop-1] WARN  com.baidu.hugegraph.config.HugeConfig ID:  TS: - The option: 'server.httpPort' is redundant
-19:05:13.711 [localhost-startStop-1] WARN  com.baidu.hugegraph.config.HugeConfig ID:  TS: - The option: 'server.httpBindAddress' is redundant
-19:05:13.712 [localhost-startStop-1] WARN  com.baidu.hugegraph.config.HugeConfig ID:  TS: - The option: 'server.ui' is redundant
-19:05:13.712 [localhost-startStop-1] WARN  com.baidu.hugegraph.config.HugeConfig ID:  TS: - The option: 'server.api.war' is redundant
-19:05:13.719 [localhost-startStop-1] INFO  com.baidu.hugegraph.studio.connections.repository.FileConnectionRepository ID:  TS: - connectionsDataDirectory=/Users/liunanke/.hugestudio/connections
-19:05:13.744 [localhost-startStop-1] WARN  com.baidu.hugegraph.config.HugeConfig ID:  TS: - The option: 'server.httpPort' is redundant
-19:05:13.744 [localhost-startStop-1] WARN  com.baidu.hugegraph.config.HugeConfig ID:  TS: - The option: 'server.httpBindAddress' is redundant
-19:05:13.744 [localhost-startStop-1] WARN  com.baidu.hugegraph.config.HugeConfig ID:  TS: - The option: 'server.ui' is redundant
-19:05:13.744 [localhost-startStop-1] WARN  com.baidu.hugegraph.config.HugeConfig ID:  TS: - The option: 'server.api.war' is redundant
-19:05:13.745 [localhost-startStop-1] INFO  com.baidu.hugegraph.studio.notebook.repository.FileNotebookRepository ID:  TS: - notebooksDataDirectory is /Users/liunanke/.hugestudio/notebooks
-19:05:13.753 [localhost-startStop-1] INFO  org.springframework.web.context.ContextLoader ID:  TS: - Root WebApplicationContext: initialization completed in 968 ms
+19:05:13.710 [localhost-startStop-1] WARN  com.baidu.hugegraph.config.HugeConfig ID:  TS: - The option: 'studio.server.port' is redundant
+19:05:13.711 [localhost-startStop-1] WARN  com.baidu.hugegraph.config.HugeConfig ID:  TS: - The option: 'studio.server.host' is redundant
+19:05:13.712 [localhost-startStop-1] WARN  com.baidu.hugegraph.config.HugeConfig ID:  TS: - The option: 'studio.server.ui' is redundant
+19:05:13.712 [localhost-startStop-1] WARN  com.baidu.hugegraph.config.HugeConfig ID:  TS: - The option: 'studio.server.api.war' is redundant
 ····
-19:05:14.873 [main] INFO  com.baidu.hugegraph.studio.HugeStudio ID:  TS: - HugeStudio is now running on: http://localhost:8088
+19:05:14.873 [main] INFO   com.baidu.hugegraph.studio.HugeGraphStudio ID:  TS: - HugeGraphStudio is now running on: http://localhost:8088
 ```
 
 接下来，打开浏览器访问 <http://localhost:8088> 即可使用HugeGraph-Studio，首页如下图：
 
 <center>
-  <img src="/images/images-stdio/home-page.png" alt="image">
-  <p>图 3-1 HugeGraph-Studio首页</p>
+  <img src="/images/images-studio/home-page.png" alt="image">
 </center>
+
+这里以"一些人与相关软件关系图"为例子，内容包括元数据（Schema）和数据（Vertex/Edge）两部分。
 
 ### 4 HugeGraph-Studio 操作指南
 
-#### 4.1 创建一个新的 connection
+#### 4.1 使用Gremlin语言创建一个图
 
-在创建notebook之前，首先要创建一个connection，用来绑定一个特定的graph。点击页面右上角setting 选择connections，进入 connections page，点击add按钮进行添加，如下图所示
+##### 4.1.1 创建Schema
 
-<center>
-  <img src="/images/images-stdio/goto-connections.png" alt="image">
-  <p>图 4-1 跳转到Connections-Page</p>
-</center>
+这个例子涉及的Schema有三类，分别是：PropertyKey，VertexLabel和EdgeLabel。下面依次创建这些Schema。
 
-按要求填写信息，创建connection
+###### 4.1.1.1 创建属性类型（PropertyKey）
 
-<center>
-  <img src="/images/images-stdio/add-connection.png" alt="image">
-  <p>图 4-2 创建connection</p>
-</center>
-
-**参数说明**
-
-- Name: 当前连接本身的名字，可任意取
-- Graph: 本次连接想要操作的图的名字，用户可以先通过[Graph API](/clients/restful-api/graph.html)查看有哪些图
-- Host: HugeGraphServer的 IP 或 hostname（**注意：不是Studio的IP或hostname**）
-- Port: HugeGraphServer的 port（**注意：不是Studio的端口**）
-
-完成后可以看到创建成功的connection
-
-<center>
-  <img src="/images/images-stdio/broswer-connection.png" alt="image">
-  <p>图 4-3 浏览connection</p>
-</center>
-
-#### 4.2 创建一个Notebook
-
-创建完connection后，返回Notebooks page，选择添加notebook，在弹出框填入相应信息，选择一个connection，点击create，如下图所示
-
-<center>
-  <img src="/images/images-stdio/add-notebook.png" alt="image">
-  <p>图 4-4 创建notebook</p>
-</center>
-
-完成后可以看到创建成功的notebook
-
-<center>
-  <img src="/images/images-stdio/broswer-notebooks.png" alt="image">
-  <p>图 4-5 浏览notebook</p>
-</center>
-
-点击创建的notebook，进入notebook界面，notebook默认有一个cell，更改drop-down 选择Markdown，添加一些文字，点击cell右上角run 按钮既可展示出添加的内容，如下图所示
-
-<center>
-  <img src="/images/images-stdio/cell-example-markdown.png" alt="image">
-  <p>图 4-6 编辑markdown</p>
-</center>
-
-#### 4.3 使用Gremlin语言创建一个Graph
-
-##### 4.3.1 创建schema
-
-这里以Software-graph为例子，数据中schema分为三类分别是：PropertyKey，VertexLabel和EdgeLabel。
-
-首先在notebook的cell中创建PropertyKey，将以下语句输入到cell中：
+将下面的语句输入到 Studio 的输入框中：
 
 ```groovy
 graph.schema().propertyKey("name").asText().ifNotExist().create()
@@ -191,10 +140,10 @@ graph.schema().propertyKey("price").asInt().ifNotExist().create()
 1、上述语句是`groovy`语言形式（类似但不是`java`）的`gremlin`语句，这些`gremlin`语句会被发送到`HugeGraphServer`上执行。
 关于`gremlin`本身可以参考[Gremlin Query Language](/language/hugegraph-gremlin.html)或[Tinkerpop官网](http://tinkerpop.apache.org/)；
 
-2、上述语句是通过`graph.schema()`获取到`SchemaManager`对象后操作元数据，通过`gremlin`语句操作schema可参考文档[HugeGraph-Client](/clients/hugegraph-client.html)，
-需要注意的是`HugeGraph-Client`是`java`语法，大体上与`gremlin`风格是一致的,具体的差异见文档`HugeGraph-Client`中的说明。
+2、上述语句是通过`graph.schema()`获取到`SchemaManager`对象后操作元数据，通过`gremlin`语句操作Schema可参考文档[HugeGraph-Client](/clients/hugegraph-client.html)，
+需要注意的是`HugeGraph-Client`是`java`语法，大体上与`gremlin`风格是一致的，具体的差异见文档`HugeGraph-Client`中的说明。
 
-3、在`HugeGraph-Studio`的`NoteBook`中，用户可以直接使用两个变量`graph`和`g`，`graph`就是当前Notebook连接的图对象，可使用该对象对图做各种增删改查操作;
+3、在`HugeGraph-Studio`的输入框中，用户可以直接使用两个变量`graph`和`g`，其中`graph`就是当前连接的图对象，可使用该对象对图做各种增删改查操作;
 `g`是用于遍历图的一个对象，其本质就是`graph.traversal()`，用户可以使用该对象做各种遍历操作；
 
 4、`HugeGraph-Studio`作为一个展示图的工具，主要用于做查询或遍历，而不宜做太多增删改的操作。
@@ -202,34 +151,26 @@ graph.schema().propertyKey("price").asInt().ifNotExist().create()
 执行完成后，可以得到返回的数据，表明执行成功。如图所示
 
 <center>
-  <img src="/images/images-stdio/add-schema.png" alt="image">
-  <p>图 4-7 创建schema</p>
+  <img src="/images/images-studio/add-schema.png" alt="image">
 </center>
 
-顶点类型（VertexLabel）的创建：
+###### 4.1.1.2 创建顶点类型（VertexLabel）
 
 ```groovy
 person = graph.schema().vertexLabel("person").properties("name", "age", "city").primaryKeys("name").ifNotExist().create()
 software = graph.schema().vertexLabel("software").properties("name", "lang", "price").primaryKeys("name").ifNotExist().create()
 ```
 
-边类型（EdgeLabel）的创建：
+###### 4.1.1.2 创建边类型（EdgeLabel）
 
 ```groovy
 knows = graph.schema().edgeLabel("knows").sourceLabel("person").targetLabel("person").properties("date").ifNotExist().create()
 created = graph.schema().edgeLabel("created").sourceLabel("person").targetLabel("software").properties("date", "city").ifNotExist().create()
 ```
 
-创建完成后，可以点击页面右上方的schema按钮，查看创建的schema内容的分类展示，如图
+##### 4.1.2 创建顶点（Vertex）和边（Edge）
 
-<center>
-  <img src="/images/images-stdio/schema-view.png" alt="image">
-  <p>图 4-8 展示schema-view</p>
-</center>
-
-##### 4.3.2 创建顶点（vertices）和边 （edges）
-
-有了schema后，就可以根据schema创建特定的顶点和边了，这里我们定义两个person类型的顶点实例：marko 和 vadas，在定义两者之间的关系knows：
+有了Schema后，就可以根据Schema创建特定的顶点和边了，这里我们定义两个person类型的顶点实例：marko 和 vadas，再定义两者之间的关系knows：
 
 ```groovy
 marko = graph.addVertex(T.label, "person", "name", "marko", "age", 29, "city", "Beijing")
@@ -240,11 +181,10 @@ marko.addEdge("knows", vadas, "date", "20160110")
 在页面中输入语句，这样我们就创建了两个顶点一条边，点击执行，结果如下图所示
 
 <center>
-  <img src="/images/images-stdio/cell-example-2V-1E.png" alt="image">
-  <p>图 4-9 插入两个顶点一条边</p>
+  <img src="/images/images-studio/example-2V-1E.png" alt="image">
 </center>
 
-##### 4.3.3 向graph添加更多数据
+##### 4.1.3 添加更多数据到图中
 
 ```groovy
 marko = graph.addVertex(T.label, "person", "name", "marko", "age", 29, "city", "Beijing")
@@ -267,8 +207,7 @@ g.V()
 如下图所示
 
 <center>
-  <img src="/images/images-stdio/add-connection.png" alt="image">
-  <p>图 4-10 插入更多数据</p>
+  <img src="/images/images-studio/show-graph.png" alt="image">
 </center>
 
 HugeGraph-Studio不仅支持通过graph的方式展示数据，还支持table和格式化json两种数据展示形式
@@ -276,15 +215,13 @@ HugeGraph-Studio不仅支持通过graph的方式展示数据，还支持table和
 **Table:**
 
 <center>
-  <img src="/images/images-stdio/cell-table.png" alt="image">
-  <p>图 4-11 Table展示数据</p>
+  <img src="/images/images-studio/show-table.png" alt="image">
 </center>
 
 **Formative-Json:**
 
 <center>
-  <img src="/images/images-stdio/cell-json.png" alt="image">
-  <p>图 4-12 Formative-Json展示数据</p>
+  <img src="/images/images-studio/show-json.png" alt="image">
 </center>
 
 #### 4.4 HugeGraph-Studio 样式自定义
@@ -303,13 +240,13 @@ HugeGraph-Studio不仅支持通过graph的方式展示数据，还支持table和
 `vis.hover.background`     | #ec3112   | string | 鼠标悬浮时，顶点背景颜色
 `vis.highlight.border`     | #fb6a02   | string | 选中时，顶点边框颜色
 `vis.highlight.background` | #fb6a02   | string | 选中时，顶点背景颜色
-`vis.font.color`           | #343434   | string | 顶点标签字体颜色
-`vis.font.size`            | `12`      | string | 顶点标签字体大小
+`vis.font.color`           | #343434   | string | 顶点类型字体颜色
+`vis.font.size`            | `12`      | string | 顶点类型字体大小
 `vis.icon.code`            | `\uf111`  | string | FontAwesome 图标编码，目前支持4.7.5版本的图标
 `vis.icon.color`           | `#2B7CE9` | string | 图标颜色，优先级比vis.background高
 `vis.icon.size`            | 50        | string | icon大小，优先级比vis.size高
 
-案例：
+示例：
 
 ```groovy
 graph.schema().vertexLabel("software")

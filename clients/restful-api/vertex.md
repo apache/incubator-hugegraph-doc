@@ -226,7 +226,7 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=elimi
 
 ##### Params
 
-- label: 顶点标签
+- label: 顶点类型
 - properties: 属性键值对(根据属性查询的前提是建立了索引)
 - limit: 查询最大数目
 - page: 页号

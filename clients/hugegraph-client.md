@@ -24,7 +24,7 @@ HugeClient hugeClient = new HugeClient("http://localhost:8080", "hugegraph");
 
 #### 2.1 SchemaManager
 
-SchemaManager 用于管理 HugeGraph 中的四种元数据，分别是PropertyKey（属性键）、VertexLabel（顶点标签）、EdgeLabel（边标签）和 IndexLabel（索引标签）。在定义元数据信息之前必须先创建 SchemaManager 对象。
+SchemaManager 用于管理 HugeGraph 中的四种元数据，分别是PropertyKey（属性类型）、VertexLabel（顶点类型）、EdgeLabel（边类型）和 IndexLabel（索引标签）。在定义元数据信息之前必须先创建 SchemaManager 对象。
 
 用户可使用如下方法获得SchemaManager对象：
 
@@ -243,9 +243,9 @@ interface              | param | must set
 ---------------------- | ----- | --------
 edgeLabel(String name) | name  | y
 
-- sourceLabel: 边连接的源顶点标签名，只允许设置一个；
+- sourceLabel: 边连接的源顶点类型名，只允许设置一个；
 
-- targetLabel: 边连接的目标顶点标签名，只允许设置一个；
+- targetLabel: 边连接的目标顶点类型名，只允许设置一个；
 
 interface                 | param | must set
 ------------------------- | ----- | --------
@@ -415,7 +415,7 @@ Edge knows1 = marko.addEdge("knows", vadas, "city", "Beijing");
 - 源顶点和目标顶点必须符合 EdgeLabel 中 sourcelabel 和 targetlabel 的定义，不能随意添加。
 - 对于非 nullableKeys 的属性，必须要赋值。
 
-**注意：当frequency为multiple时必须要设置sortKeys对应属性键的值。**
+**注意：当frequency为multiple时必须要设置sortKeys对应属性类型的值。**
 
 ### 4 简单示例
 

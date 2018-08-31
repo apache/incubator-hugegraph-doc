@@ -68,14 +68,14 @@ schema.propertyKey("city").asText().ifNotExist().create();
 schema.propertyKey("date").asText().ifNotExist().create();
 schema.propertyKey("price").asDouble().ifNotExist().create();
 
-// 创建 person 顶点标签，其拥有三个属性：name, age, city，主键是 name
+// 创建 person 顶点类型，其拥有三个属性：name, age, city，主键是 name
 schema.vertexLabel("person").properties("name", "age", "city").primaryKeys("name").ifNotExist().create();
-// 创建 software 顶点标签，其拥有两个属性：name, price，主键是 name
+// 创建 software 顶点类型，其拥有两个属性：name, price，主键是 name
 schema.vertexLabel("software").properties("name", "price").primaryKeys("name").ifNotExist().create();
 
-// 创建 knows 边标签，这类边是从 person 指向 person 的
+// 创建 knows 边类型，这类边是从 person 指向 person 的
 schema.edgeLabel("knows").sourceLabel("person").targetLabel("person").ifNotExist().create();
-// 创建 created 边标签，这类边是从 person 指向 software 的
+// 创建 created 边类型，这类边是从 person 指向 software 的
 schema.edgeLabel("created").sourceLabel("person").targetLabel("software").ifNotExist().create();
 ```
 
@@ -216,7 +216,7 @@ type      | 输入源类型     | 是    | 必须填 file 或 FILE              
 path      | 本地文件的绝对路径 | 是    |                                               | 绝对路径
 format    | 本地文件的格式   | 是    | 可选值为 CSV、TEXT 及 JSON                          | 必须大写
 header    | 文件各列的列名   | 否    |                                               | 如不指定则会以数据文件第一行作为 header；当文件本身有标题且又指定了 header，文件的第一行会被当作普通的数据行；JSON 文件不需要指定 header
-delimiter | 文件行的列分隔符  | 否    | `TEXT`文件默认以`\t`作为分隔符，`CSV`文件不需要指定，默认以`,`作为分隔符 | `JSON`文件不需要指定
+delimiter | 文件行的列分隔符  | 否    | `TEXT`文件默认以制表符`"\t"`作为分隔符；`CSV`文件不需要指定，默认以逗号`","`作为分隔符 | `JSON`文件不需要指定
 charset   | 文件的编码字符集  | 否    | 默认`UTF-8`                                     |
 
 #### 3.4 执行导入
@@ -227,22 +227,22 @@ charset   | 文件的编码字符集  | 否    | 默认`UTF-8`                  
 
 ##### 3.4.1 参数说明
 
-必要 | 参数                | 默认值                      | 描述信息
----- | ------------------- | --------------------------- | -----------------------
-Y    | -f &#124; --file    | NONE                        | 配置脚本的路径
-Y    | -g &#124; --graph   | NONE                        | 图形数据库空间
-Y    | -s &#124; --schema  | NONE                        | schema文件路径
-N    | -h &#124; --host    | localhost                   | HugeGraphServer 的地址
-N    | -p &#124; --port    | 8080                        | HugeGraphServer 的端口号
-N    | --num-threads       | availableProcessors() *2 -1 | 导入过程中线程池大小
-N    | --batch-size        | 500                         | 导入数据时每个批次包含的数据条数
-N    | --max-parse-errors  | 1                           | 最多允许多少行数据解析错误，达到该值则程序退出
-N    | --max-insert-errors | BATCH_SIZE                  | 最多允许多少行数据插入错误，达到该值则程序退出
-N    | --timeout           | 100                         | 插入结果返回的超时时间（秒）
-N    | --shutdown-timeout  | 10                          | 多线程停止的等待时间（秒）
-N    | --retry-times       | 10                          | 发生特定异常时的重试次数
-N    | --retry-interval    | 10                          | 重试之前的间隔时间（秒）
-N    | --check-vertex      | false                       | 插入边时是否检查边链接的顶点是否存在
+参数                 | 默认值        | 是否必传 | 描述信息
+------------------- | ------------ | ------- | -----------------------
+-f &#124; --file    |              |    Y    | 配置脚本的路径
+-g &#124; --graph   |              |    Y    | 图形数据库空间
+-s &#124; --schema  |              |    Y    | schema文件路径
+-h &#124; --host    | localhost    |         | HugeGraphServer 的地址
+-p &#124; --port    | 8080         |         | HugeGraphServer 的端口号
+--num-threads       | cpus * 2 - 1 |         | 导入过程中线程池大小
+--batch-size        | 500          |         | 导入数据时每个批次包含的数据条数
+--max-parse-errors  | 1            |         | 最多允许多少行数据解析错误，达到该值则程序退出
+--max-insert-errors | 500          |         | 最多允许多少行数据插入错误，达到该值则程序退出
+--timeout           | 100          |         | 插入结果返回的超时时间（秒）
+--shutdown-timeout  | 10           |         | 多线程停止的等待时间（秒）
+--retry-times       | 10           |         | 发生特定异常时的重试次数
+--retry-interval    | 10           |         | 重试之前的间隔时间（秒）
+--check-vertex      | false        |         | 插入边时是否检查边所连接的顶点是否存在
 
 ##### 3.4.2 logs 目录文件说明
 
