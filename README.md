@@ -39,6 +39,9 @@ HugeGraph支持在线及离线环境下的图操作，支持批量导入数据�
 
 ### Contact Us
 
-- 负责人：[刘杰]()，[李章梅](https://github.com/javeme)
-- 接口人：[王建奎](https://github.com/Jerrick)，[张义](https://github.com/zhoney)，[李凝瑞](https://github.com/Linary)
+- 项目创始人：刘杰
+- 项目负责人：韩祖利
+- 技术负责人：[李章梅](https://github.com/javeme)
+- 接口人：[张义](https://github.com/zhoney)，[李凝瑞](https://github.com/Linary)
 - 反馈邮箱：[hugegraph@googlegroups.com](mailto:hugegraph@googlegroups.com)
+- 微信公众号：HugeGraph
