@@ -891,7 +891,7 @@ mvn package -DskipTests
 [INFO] ------------------------------------------------------------------------
 ......
 </code></pre>
-<p>&#x6267;&#x884C;&#x6210;&#x529F;&#x540E;&#xFF0C;&#x5728;hugegraph&#x76EE;&#x5F55;&#x4E0B;&#x751F;&#x6210; hugegraph-release-*.tar.gz &#x6587;&#x4EF6;&#xFF0C;&#x5C31;&#x662F;&#x7F16;&#x8BD1;&#x751F;&#x6210;&#x7684;tar&#x5305;&#x3002;</p>
+<p>&#x6267;&#x884C;&#x6210;&#x529F;&#x540E;&#xFF0C;&#x5728;hugegraph&#x76EE;&#x5F55;&#x4E0B;&#x751F;&#x6210; hugegraph-*.tar.gz &#x6587;&#x4EF6;&#xFF0C;&#x5C31;&#x662F;&#x7F16;&#x8BD1;&#x751F;&#x6210;&#x7684;tar&#x5305;&#x3002;</p>
 <h3 id="4-&#x914D;&#x7F6E;">4 &#x914D;&#x7F6E;</h3>
 <p>&#x5982;&#x679C;&#x9700;&#x8981;&#x5FEB;&#x901F;&#x542F;&#x52A8;HugeGraph&#x4EC5;&#x7528;&#x4E8E;&#x6D4B;&#x8BD5;&#xFF0C;&#x90A3;&#x4E48;&#x53EA;&#x9700;&#x8981;&#x8FDB;&#x884C;&#x5C11;&#x6570;&#x51E0;&#x4E2A;&#x914D;&#x7F6E;&#x9879;&#x7684;&#x4FEE;&#x6539;&#x5373;&#x53EF;&#x3002;&#x8BE6;&#x7EC6;&#x7684;&#x914D;&#x7F6E;&#x4ECB;&#x7ECD;&#x8BF7;&#x53C2;&#x8003;<a href="../guides/config-guide.html">&#x914D;&#x7F6E;&#x6587;&#x6863;</a>&#x53CA;<a href="../guides/config-option.html">&#x914D;&#x7F6E;&#x9879;</a></p>
 <h3 id="5-&#x542F;&#x52A8;">5 &#x542F;&#x52A8;</h3>
@@ -926,7 +926,7 @@ rocksdb.wal_path=.
 <p>RocksDB&#x662F;&#x4E00;&#x4E2A;&#x5D4C;&#x5165;&#x5F0F;&#x7684;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x76F4;&#x63A5;&#x5C06;&#x6570;&#x636E;&#x5199;&#x78C1;&#x76D8;&#x4E0A;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x5B89;&#x88C5;&#x90E8;&#x7F72;, &#x4F46;&#x8981;&#x6C42;&#x7F16;&#x8BD1;&#x5668;&#x7248;&#x672C; &gt;= GCC 4.3.0&#xFF08;GLIBCXX_3.4.10&#xFF09;&#xFF0C;&#x5982;&#x4E0D;&#x6EE1;&#x8DB3;&#xFF0C;&#x9700;&#x8981;&#x63D0;&#x524D;&#x5347;&#x7EA7;</p>
 </blockquote>
 <p>&#x521D;&#x59CB;&#x5316;&#x6570;&#x636E;&#x5E93;&#xFF08;&#x4EC5;&#x7B2C;&#x4E00;&#x6B21;&#x542F;&#x52A8;&#x65F6;&#x9700;&#x8981;&#xFF09;</p>
-<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> hugegraph-release
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> hugegraph-<span class="hljs-variable">${version}</span>
 bin/init-store.sh
 </code></pre>
 <p>&#x542F;&#x52A8;server</p>
@@ -954,7 +954,7 @@ cassandra.password=
 #cassandra.keyspace.replication=3
 </code></pre>
 <p>&#x521D;&#x59CB;&#x5316;&#x6570;&#x636E;&#x5E93;&#xFF08;&#x4EC5;&#x7B2C;&#x4E00;&#x6B21;&#x542F;&#x52A8;&#x65F6;&#x9700;&#x8981;&#xFF09;</p>
-<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> hugegraph-release
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> hugegraph-<span class="hljs-variable">${version}</span>
 bin/init-store.sh
 Initing HugeGraph Store...
 2017-12-01 11:26:51 1424  [main] [INFO ] com.baidu.hugegraph.HugeGraph [] - Opening backend store: <span class="hljs-string">&apos;cassandra&apos;</span>
@@ -997,7 +997,25 @@ cassandra.password=
 </code></pre>
 <p>&#x7531;&#x4E8E; scylladb &#x6570;&#x636E;&#x5E93;&#x672C;&#x8EAB;&#x5C31;&#x662F;&#x57FA;&#x4E8E; cassandra &#x7684;&quot;&#x4F18;&#x5316;&#x7248;&quot;&#xFF0C;&#x5982;&#x679C;&#x7528;&#x6237;&#x672A;&#x5B89;&#x88C5; scylladb &#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528; cassandra &#x4F5C;&#x4E3A;&#x540E;&#x7AEF;&#x5B58;&#x50A8;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x628A; backend &#x548C; serializer &#x4FEE;&#x6539;&#x4E3A; scylladb&#xFF0C;host &#x548C; post &#x6307;&#x5411; cassandra &#x96C6;&#x7FA4;&#x7684; seeds &#x548C; port &#x5373;&#x53EF;&#xFF0C;&#x4F46;&#x662F;&#x5E76;&#x4E0D;&#x5EFA;&#x8BAE;&#x8FD9;&#x6837;&#x505A;&#xFF0C;&#x8FD9;&#x6837;&#x53D1;&#x6325;&#x4E0D;&#x51FA; scylladb &#x672C;&#x8EAB;&#x7684;&#x4F18;&#x52BF;&#x4E86;&#x3002;</p>
 <p>&#x521D;&#x59CB;&#x5316;&#x6570;&#x636E;&#x5E93;&#xFF08;&#x4EC5;&#x7B2C;&#x4E00;&#x6B21;&#x542F;&#x52A8;&#x65F6;&#x9700;&#x8981;&#xFF09;</p>
-<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> hugegraph-release
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> hugegraph-<span class="hljs-variable">${version}</span>
+bin/init-store.sh
+</code></pre>
+<p>&#x542F;&#x52A8;server</p>
+<pre><code class="lang-bash">bin/start-hugegraph.sh
+Starting HugeGraphServer...
+Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
+</code></pre>
+<h4 id="55-hbase">5.5 HBase</h4>
+<p>&#x4FEE;&#x6539; hugegraph.properties</p>
+<pre><code class="lang-properties">backend=hbase
+serializer=hbase
+
+# hbase backend config
+hbase.hosts=localhost
+hbase.port=2181
+</code></pre>
+<p>&#x521D;&#x59CB;&#x5316;&#x6570;&#x636E;&#x5E93;&#xFF08;&#x4EC5;&#x7B2C;&#x4E00;&#x6B21;&#x542F;&#x52A8;&#x65F6;&#x9700;&#x8981;&#xFF09;</p>
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> hugegraph-<span class="hljs-variable">${version}</span>
 bin/init-store.sh
 </code></pre>
 <p>&#x542F;&#x52A8;server</p>
@@ -1092,7 +1110,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 </code></pre>
 <p>&#x8BE6;&#x7EC6;&#x7684;API&#x8BF7;&#x53C2;&#x8003;<a href="../clients/hugegraph-api.html">Restful-API</a>&#x6587;&#x6863;</p>
 <h3 id="7-&#x505C;&#x6B62;server">7 &#x505C;&#x6B62;Server</h3>
-<pre><code class="lang-bash"><span class="hljs-variable">$cd</span> hugegraph-release
+<pre><code class="lang-bash"><span class="hljs-variable">$cd</span> hugegraph-<span class="hljs-variable">${version}</span>
 <span class="hljs-variable">$bin</span>/stop-hugegraph.sh
 </code></pre>
 
@@ -1147,7 +1165,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Install HugeGraph-Server","level":"2.1","depth":1,"next":{"title":"Load data with HugeGraph-Loader","level":"2.2","depth":1,"path":"quickstart/hugegraph-loader.md","ref":"quickstart/hugegraph-loader.md","articles":[]},"previous":{"title":"Download","level":"1.2","depth":1,"path":"download.md","ref":"download.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"quickstart/hugegraph-server.md","mtime":"2018-08-03T08:05:25.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-03T08:05:39.753Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Install HugeGraph-Server","level":"2.1","depth":1,"next":{"title":"Load data with HugeGraph-Loader","level":"2.2","depth":1,"path":"quickstart/hugegraph-loader.md","ref":"quickstart/hugegraph-loader.md","articles":[]},"previous":{"title":"Download","level":"1.2","depth":1,"path":"download.md","ref":"download.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"quickstart/hugegraph-server.md","mtime":"2018-09-11T12:47:23.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-12T09:54:38.688Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -823,9 +823,7 @@
                                 
                                 <h3 id="31-&#x904D;&#x5386;&#x7B97;&#x6CD5;">3.1 &#x904D;&#x5386;&#x7B97;&#x6CD5;</h3>
 <h4 id="311-shortest-path&#xFF08;&#x6839;&#x636E;&#x8D77;&#x59CB;&#x9876;&#x70B9;&#x3001;&#x76EE;&#x7684;&#x9876;&#x70B9;&#x3001;&#x65B9;&#x5411;&#x3001;&#x8FB9;&#x7684;&#x7C7B;&#x578B;&#xFF08;&#x53EF;&#x9009;&#xFF09;&#x548C;&#x6700;&#x5927;&#x6DF1;&#x5EA6;&#xFF0C;&#x67E5;&#x627E;&#x4E00;&#x6761;&#x6700;&#x77ED;&#x8DEF;&#x5F84;&#xFF09;">3.1.1 Shortest Path&#xFF08;&#x6839;&#x636E;&#x8D77;&#x59CB;&#x9876;&#x70B9;&#x3001;&#x76EE;&#x7684;&#x9876;&#x70B9;&#x3001;&#x65B9;&#x5411;&#x3001;&#x8FB9;&#x7684;&#x7C7B;&#x578B;&#xFF08;&#x53EF;&#x9009;&#xFF09;&#x548C;&#x6700;&#x5927;&#x6DF1;&#x5EA6;&#xFF0C;&#x67E5;&#x627E;&#x4E00;&#x6761;&#x6700;&#x77ED;&#x8DEF;&#x5F84;&#xFF09;</h4>
-<h5 id="method">Method</h5>
-<pre><code>GET
-</code></pre><h5 id="params">Params</h5>
+<h5 id="params">Params</h5>
 <ul>
 <li>source: &#x8D77;&#x59CB;&#x9876;&#x70B9;id</li>
 <li>target: &#x76EE;&#x7684;&#x9876;&#x70B9;id</li>
@@ -833,8 +831,8 @@
 <li>max_depth: &#x6700;&#x5927;&#x6DF1;&#x5EA6;</li>
 <li>label: &#x8FB9;&#x7684;&#x7C7B;&#x578B;</li>
 </ul>
-<h5 id="url">Url</h5>
-<pre><code>http://localhost:8080/graphs/hugegraph/traversers/shortestpath?source=1&amp;target=12345&amp;max_depth=5&amp;direction=OUT
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>GET http://localhost:8080/graphs/hugegraph/traversers/shortestpath?source=1&amp;target=12345&amp;max_depth=5&amp;direction=OUT
 </code></pre><h5 id="response-status">Response Status</h5>
 <pre><code class="lang-json"><span class="hljs-number">200</span>
 </code></pre>
@@ -850,9 +848,7 @@
 }
 </code></pre>
 <h4 id="312-k-out&#xFF08;&#x6839;&#x636E;&#x8D77;&#x59CB;&#x9876;&#x70B9;&#x3001;&#x65B9;&#x5411;&#x3001;&#x8FB9;&#x7684;&#x7C7B;&#x578B;&#xFF08;&#x53EF;&#x9009;&#xFF09;&#x548C;&#x6DF1;&#x5EA6;depth&#xFF0C;&#x67E5;&#x627E;&#x4ECE;&#x8D77;&#x59CB;&#x9876;&#x70B9;&#x51FA;&#x53D1;&#x6070;&#x597D;depth&#x6B65;&#x53EF;&#x8FBE;&#x7684;&#x9876;&#x70B9;&#xFF09;">3.1.2 K-out&#xFF08;&#x6839;&#x636E;&#x8D77;&#x59CB;&#x9876;&#x70B9;&#x3001;&#x65B9;&#x5411;&#x3001;&#x8FB9;&#x7684;&#x7C7B;&#x578B;&#xFF08;&#x53EF;&#x9009;&#xFF09;&#x548C;&#x6DF1;&#x5EA6;depth&#xFF0C;&#x67E5;&#x627E;&#x4ECE;&#x8D77;&#x59CB;&#x9876;&#x70B9;&#x51FA;&#x53D1;&#x6070;&#x597D;depth&#x6B65;&#x53EF;&#x8FBE;&#x7684;&#x9876;&#x70B9;&#xFF09;</h4>
-<h5 id="method">Method</h5>
-<pre><code>GET
-</code></pre><h5 id="params">Params</h5>
+<h5 id="params">Params</h5>
 <ul>
 <li>source: &#x8D77;&#x59CB;&#x9876;&#x70B9;id</li>
 <li>direction: &#x8D77;&#x59CB;&#x9876;&#x70B9;&#x5411;&#x5916;&#x53D1;&#x6563;&#x7684;&#x65B9;&#x5411;&#xFF08;OUT,IN,BOTH&#xFF09;</li>
@@ -860,8 +856,8 @@
 <li>label: &#x8FB9;&#x7684;&#x7C7B;&#x578B;</li>
 <li>nearest: &#x9ED8;&#x8BA4;&#x4E3A;true&#xFF0C;&#x4EE3;&#x8868;&#x8D77;&#x59CB;&#x9876;&#x70B9;&#x5230;&#x8FBE;&#x7ED3;&#x679C;&#x9876;&#x70B9;&#x7684;&#x6700;&#x77ED;&#x8DEF;&#x5F84;&#x957F;&#x5EA6;&#x4E3A;depth&#xFF0C;&#x4E0D;&#x5B58;&#x5728;&#x66F4;&#x77ED;&#x7684;&#x8DEF;&#x5F84;&#xFF1B;nearest&#x4E3A;false&#x65F6;&#xFF0C;&#x4EE3;&#x8868;&#x8D77;&#x59CB;&#x9876;&#x70B9;&#x5230;&#x7ED3;&#x679C;&#x9876;&#x70B9;&#x6709;&#x4E00;&#x6761;&#x957F;&#x5EA6;&#x4E3A;depth&#x7684;&#x8DEF;&#x5F84;&#xFF08;&#x672A;&#x5FC5;&#x6700;&#x77ED;&#x4E14;&#x53EF;&#x4EE5;&#x6709;&#x73AF;&#xFF09;</li>
 </ul>
-<h5 id="url">Url</h5>
-<pre><code>http://localhost:8080/graphs/hugegraph/traversers/kout?source=1&amp;depth=5&amp;direction=OUT
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>GET http://localhost:8080/graphs/hugegraph/traversers/kout?source=1&amp;depth=5&amp;direction=OUT
 </code></pre><h5 id="response-status">Response Status</h5>
 <pre><code class="lang-json"><span class="hljs-number">200</span>
 </code></pre>
@@ -889,17 +885,15 @@
 <blockquote>
 <p>&#x76F8;&#x5F53;&#x4E8E;&#xFF1A;&#x8D77;&#x59CB;&#x9876;&#x70B9;&#x3001;K-out(1)&#x3001;K-out(2)&#x3001;... &#x3001;K-out(depth)&#x7684;&#x5E76;&#x96C6;</p>
 </blockquote>
-<h5 id="method">Method</h5>
-<pre><code>GET
-</code></pre><h5 id="params">Params</h5>
+<h5 id="params">Params</h5>
 <ul>
 <li>source: &#x8D77;&#x59CB;&#x9876;&#x70B9;id</li>
 <li>direction: &#x8D77;&#x59CB;&#x9876;&#x70B9;&#x5411;&#x5916;&#x53D1;&#x6563;&#x7684;&#x65B9;&#x5411;&#xFF08;OUT,IN,BOTH&#xFF09;</li>
 <li>depth: &#x6B65;&#x6570;</li>
 <li>label: &#x8FB9;&#x7684;&#x7C7B;&#x578B;</li>
 </ul>
-<h5 id="url">Url</h5>
-<pre><code>http://localhost:8080/graphs/hugegraph/traversers/kneighbor?source=1&amp;depth=5&amp;direction=OUT
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>GET http://localhost:8080/graphs/hugegraph/traversers/kneighbor?source=1&amp;depth=5&amp;direction=OUT
 </code></pre><h5 id="response-status">Response Status</h5>
 <pre><code class="lang-json"><span class="hljs-number">200</span>
 </code></pre>
@@ -1000,7 +994,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Traverser","level":"5.1.7","depth":2,"next":{"title":"Variable","level":"5.1.8","depth":2,"path":"clients/restful-api/variable.md","ref":"clients/restful-api/variable.md","articles":[]},"previous":{"title":"Edge","level":"5.1.6","depth":2,"path":"clients/restful-api/edge.md","ref":"clients/restful-api/edge.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"clients/restful-api/traverser.md","mtime":"2018-08-03T08:05:25.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-03T08:05:39.753Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Traverser","level":"5.1.7","depth":2,"next":{"title":"Variable","level":"5.1.8","depth":2,"path":"clients/restful-api/variable.md","ref":"clients/restful-api/variable.md","articles":[]},"previous":{"title":"Edge","level":"5.1.6","depth":2,"path":"clients/restful-api/edge.md","ref":"clients/restful-api/edge.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"clients/restful-api/traverser.md","mtime":"2018-09-11T12:47:22.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-12T09:54:38.688Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
