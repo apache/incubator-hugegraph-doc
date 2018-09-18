@@ -200,7 +200,11 @@ marko.addEdge("created", lop, "date", "20171210", "city", "Shanghai")
 josh.addEdge("created", ripple, "date", "20151010", "city", "Beijing")
 josh.addEdge("created", lop, "date", "20171210", "city", "Beijing")
 peter.addEdge("created", lop, "date", "20171210", "city", "Beijing")
+```
 
+##### 4.1.4 展示图
+
+```groovy
 g.V()
 ```
 
@@ -210,15 +214,15 @@ g.V()
   <img src="/images/images-studio/show-graph.png" alt="image">
 </center>
 
-HugeGraph-Studio不仅支持通过graph的方式展示数据，还支持table和格式化json两种数据展示形式
+HugeGraph-Studio不仅支持通过graph的方式展示数据，还支持表格和Json两种数据展示形式
 
-**Table:**
+**表格展示形式**
 
 <center>
   <img src="/images/images-studio/show-table.png" alt="image">
 </center>
 
-**Formative-Json:**
+**Json展示形式**
 
 <center>
   <img src="/images/images-studio/show-json.png" alt="image">

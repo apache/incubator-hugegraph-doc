@@ -1,3 +1,5 @@
+## HugeGraph 配置项
+
 ### 基本配置项
 
 config option               | default value                                    | descrition
