@@ -52,15 +52,14 @@ GET http://localhost:8080/graphs/hugegraph
 
 ##### Params
 
-由于清空图是一个比较危险的操作，为避免用户误调用，我们给API添加了一些用于确认的参数，目前有两个：
+由于清空图是一个比较危险的操作，为避免用户误调用，我们给API添加了用于确认的参数：
 
-- token: 默认为`162f7848-0b6d-4faf-b557-3a0797869c55`
 - confirm_message: 默认为`I'm sure to delete all data`
 
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/clear?token=162f7848-0b6d-4faf-b557-3a0797869c55&confirm_message=I%27m+sure+to+delete+all+data
+DELETE http://localhost:8080/graphs/hugegraph/clear?confirm_message=I%27m+sure+to+delete+all+data
 ```
 
 ##### Response Status
@@ -73,14 +72,10 @@ DELETE http://localhost:8080/graphs/hugegraph/clear?token=162f7848-0b6d-4faf-b55
 
 #### 5.2.1 查看某个图的配置，**该操作需要管理员权限**
 
-##### Params
-
-- token: 默认为`162f7848-0b6d-4faf-b557-3a0797869c55`
-
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55
+GET http://localhost:8080/graphs/hugegraph/conf
 ```
 
 ##### Response Status
@@ -110,4 +105,64 @@ serializer=cassandra
 
 store=hugegraph
 ...
+```
+
+### 5.3 Mode
+
+#### 5.3.1 查看某个图的模式. **该操作需要管理员权限**
+
+##### Method & Url
+
+```
+GET http://localhost:8080/graphs/hugegraph/mode
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "mode": "NONE"
+}
+```
+
+> 合法的图模式包括：NONE，RESTORING，MERGING
+
+#### 5.3.2 设置某个图的模式. **该操作需要管理员权限**
+
+##### Params
+
+- token: 默认为`162f7848-0b6d-4faf-b557-3a0797869c55`
+
+##### Method & Url
+
+```
+PUT http://localhost:8080/graphs/hugegraph/mode
+```
+
+##### Response Body
+
+```
+"RESTORING"
+```
+
+> 合法的图模式包括：NONE，RESTORING，MERGING
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "mode": "RESTORING"
+}
 ```
