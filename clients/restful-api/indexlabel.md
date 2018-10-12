@@ -21,6 +21,7 @@ POST http://localhost:8080/graphs/hugegraph/schema/indexlabels
     "fields": [
         "city"
     ]
+
 }
 ```
 
@@ -34,14 +35,17 @@ POST http://localhost:8080/graphs/hugegraph/schema/indexlabels
 
 ```json
 {
-    "id": 1,
-    "base_type": "VERTEX_LABEL",
-    "base_value": "person",
-    "name": "personByCity",
-    "fields": [
-        "city"
-    ],
-    "index_type": "SECONDARY"
+    "index_label": {
+        "id": 1,
+        "base_type": "VERTEX_LABEL",
+        "base_value": "person",
+        "name": "personByCity",
+        "fields": [
+            "city"
+        ],
+        "index_type": "SECONDARY"
+    },
+    "task_id": 2
 }
 ```
 
