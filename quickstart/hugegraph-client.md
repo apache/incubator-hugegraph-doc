@@ -330,4 +330,4 @@ public class BatchExample {
 
 ### 4.5 Example示例说明
 
-示例说明见[HugeGraph-Client基本API介绍](/clients/hugegraph-client.html)
+示例说明见[HugeGraph-Client基本API介绍](/clients/hugegraph-client.md)

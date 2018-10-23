@@ -69,6 +69,8 @@ System.out.println(">>>> query all edges: size=" + g.E().toList().size());
 
 其实这一段groovy脚本几乎就是Java代码，不同之处仅在于变量的定义可以不写类型声明，以及每一行末尾的分号可以去掉。
 
+> g.V() 是获取所有的顶点，g.E() 是获取所有的边，toList() 是把结果存到一个 List 中，参考[TinkerPop Terminal Steps](http://tinkerpop.apache.org/docs/current/reference/#terminal-steps)。
+
 下面进入gremlin-console，并传入该脚本令其执行：
 
 ```bash
