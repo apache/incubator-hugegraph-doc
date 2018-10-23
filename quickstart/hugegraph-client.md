@@ -326,8 +326,8 @@ public class BatchExample {
 
 ### 4.4 运行Example
 
-运行Example之前需要启动Sever, 启动过程见[HugeGraph-Server Quick Start](/quickstart/hugegraph-server.html)
+运行Example之前需要启动Sever, 启动过程见[HugeGraph-Server Quick Start](/quickstart/hugegraph-server.md)
 
 ### 4.5 Example示例说明
 
-示例说明见[HugeGraph-Client基本API介绍](/clients/hugegraph-client.html)
+示例说明见[HugeGraph-Client基本API介绍](/clients/hugegraph-client.md)
