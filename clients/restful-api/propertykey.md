@@ -13,7 +13,7 @@ POST http://localhost:8080/graphs/hugegraph/schema/propertykeys
 ```json
 {
     "name": "age",
-    "dataType": "INT",
+    "data_type": "INT",
     "cardinality": "SINGLE"
 }
 ```
