@@ -106,7 +106,7 @@ mvn package -DskipTests
 
 ### 4 配置
 
-如果需要快速启动HugeGraph仅用于测试，那么只需要进行少数几个配置项的修改即可。详细的配置介绍请参考[配置文档](/guides/config-guide.html)及[配置项](/guides/config-option.html)
+如果需要快速启动HugeGraph仅用于测试，那么只需要进行少数几个配置项的修改即可。详细的配置介绍请参考[配置文档](/guides/config-guide.md)及[配置项](/guides/config-option.md)
 
 ### 5 启动
 
@@ -394,7 +394,7 @@ _说明_
 }
 ```
 
-详细的API请参考[Restful-API](/clients/hugegraph-api.html)文档
+详细的API请参考[Restful-API](/clients/hugegraph-api.md)文档
 
 ### 7 停止Server
 
