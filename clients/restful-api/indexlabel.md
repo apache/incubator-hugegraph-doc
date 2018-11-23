@@ -21,14 +21,13 @@ POST http://localhost:8080/graphs/hugegraph/schema/indexlabels
     "fields": [
         "city"
     ]
-
 }
 ```
 
 ##### Response Status
 
 ```json
-201
+202
 ```
 
 ##### Response Body

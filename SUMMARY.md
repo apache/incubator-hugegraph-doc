@@ -13,10 +13,14 @@
 ## Guides
 * [Architecture Overview](guides/architectural.md)
 * [Design Concepts](guides/desgin-concept.md)
-* [Configuration Guide](guides/config-guide.md)
-* [Config Options](guides/config-option.md)
 * [Custom Plugins](guides/custom-plugin.md)
+* [Backup Restore](guides/backup-restore.md)
 * [FAQ](guides/faq.md)
+
+## Config
+* [Config Guide](config/config-guide.md)
+* [Config Options](config/config-option.md)
+* [Config Authentication](config/config-authentication.md)
 
 ## Query Language
 * [Gremlin Query Language](language/hugegraph-gremlin.md)
@@ -50,6 +54,7 @@
 * [HugeGraph-Loader Performance](performance/hugegraph-loader-performance.md)
 
 ## ChangeLogs
+* [Release-0.8.0](changelog/hugegraph-0.8.0-release-notes.md)
 * [Release-0.7.4](changelog/hugegraph-0.7.4-release-notes.md)
 * [Release-0.6.1](changelog/hugegraph-0.6.1-release-notes.md)
 * [Release-0.5.6](changelog/hugegraph-0.5.6-release-notes.md)

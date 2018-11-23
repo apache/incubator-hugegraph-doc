@@ -106,7 +106,7 @@ mvn package -DskipTests
 
 ### 4 配置
 
-如果需要快速启动HugeGraph仅用于测试，那么只需要进行少数几个配置项的修改即可。详细的配置介绍请参考[配置文档](/guides/config-guide.md)及[配置项](/guides/config-option.md)
+如果需要快速启动HugeGraph仅用于测试，那么只需要进行少数几个配置项的修改即可。详细的配置介绍请参考[配置文档](/config/config-guide.md)及[配置项](/config/config-option.md)
 
 ### 5 启动
 
