@@ -2,8 +2,6 @@
 
 #### 6.1.1 列出某个图中全部的异步任务
 
-
-
 ##### Params
 
 - status: 异步任务的状态
@@ -86,3 +84,43 @@ DELETE http://localhost:8080/graphs/hugegraph/tasks/2
 ```json
 204
 ```
+
+#### 6.1.4 取消某个异步任务，**该异步任务必须具有处理中断的能力**
+
+假设已经通过[Gremlin API](gremlin.md)创建了一个异步任务如下：
+
+```groovy
+"for (int i = 0; i < 10; i++) {" +
+    "hugegraph.addVertex(T.label, 'man');" +
+    "hugegraph.tx().commit();" +
+    "try {" +
+        "sleep(1000);" +
+    "} catch (InterruptedException e) {" +
+        "break;" +
+    "}" +
+"}"
+```
+
+##### Method & Url
+
+```
+PUT http://localhost:8080/graphs/hugegraph/tasks/2?action=cancel
+```
+
+> 请保证在10秒内发送该请求，如果超过10秒发送，任务可能已经执行完成，无法取消。
+
+##### Response Status
+
+```json
+202
+```
+
+##### Response Body
+
+```json
+{
+    "cancelled": true
+}
+```
+
+此时查询 label 为 man 的顶点数目，一定是小于 10 的。
