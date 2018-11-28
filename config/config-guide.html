@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Architecture Overview · GitBook</title>
+        <title>Config Guide · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -66,10 +66,10 @@
     
 
     
-    <link rel="next" href="desgin-concept.html" />
+    <link rel="next" href="config-option.html" />
     
     
-    <link rel="prev" href="../quickstart/hugegraph-spark.html" />
+    <link rel="prev" href="../guides/faq.html" />
     
 
     </head>
@@ -116,7 +116,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Architecture Overview</a>
+        <a href=".." >Config Guide</a>
     </h1>
 </div>
 
@@ -263,9 +263,9 @@
         
         
     
-        <li class="chapter active" data-level="3.1" data-path="architectural.html">
+        <li class="chapter " data-level="3.1" data-path="../guides/architectural.html">
             
-                <a href="architectural.html">
+                <a href="../guides/architectural.html">
             
                     
                     Architecture Overview
@@ -276,9 +276,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2" data-path="desgin-concept.html">
+        <li class="chapter " data-level="3.2" data-path="../guides/desgin-concept.html">
             
-                <a href="desgin-concept.html">
+                <a href="../guides/desgin-concept.html">
             
                     
                     Design Concepts
@@ -289,9 +289,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.3" data-path="custom-plugin.html">
+        <li class="chapter " data-level="3.3" data-path="../guides/custom-plugin.html">
             
-                <a href="custom-plugin.html">
+                <a href="../guides/custom-plugin.html">
             
                     
                     Custom Plugins
@@ -302,9 +302,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.4" data-path="backup-restore.html">
+        <li class="chapter " data-level="3.4" data-path="../guides/backup-restore.html">
             
-                <a href="backup-restore.html">
+                <a href="../guides/backup-restore.html">
             
                     
                     Backup Restore
@@ -315,9 +315,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.5" data-path="faq.html">
+        <li class="chapter " data-level="3.5" data-path="../guides/faq.html">
             
-                <a href="faq.html">
+                <a href="../guides/faq.html">
             
                     
                     FAQ
@@ -335,9 +335,9 @@
         
         
     
-        <li class="chapter " data-level="4.1" data-path="../config/config-guide.html">
+        <li class="chapter active" data-level="4.1" data-path="config-guide.html">
             
-                <a href="../config/config-guide.html">
+                <a href="config-guide.html">
             
                     
                     Config Guide
@@ -348,9 +348,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2" data-path="../config/config-option.html">
+        <li class="chapter " data-level="4.2" data-path="config-option.html">
             
-                <a href="../config/config-option.html">
+                <a href="config-option.html">
             
                     
                     Config Options
@@ -361,9 +361,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.3" data-path="../config/config-authentication.html">
+        <li class="chapter " data-level="4.3" data-path="config-authentication.html">
             
-                <a href="../config/config-authentication.html">
+                <a href="config-authentication.html">
             
                     
                     Config Authentication
@@ -867,26 +867,192 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="hugegraph-architecture-overview">HugeGraph Architecture Overview</h2>
+                                <h2 id="hugegraph-&#x914D;&#x7F6E;">HugeGraph &#x914D;&#x7F6E;</h2>
 <h3 id="1-&#x6982;&#x8FF0;">1 &#x6982;&#x8FF0;</h3>
-<p>&#x4F5C;&#x4E3A;&#x4E00;&#x6B3E;&#x901A;&#x7528;&#x7684;&#x56FE;&#x6570;&#x636E;&#x5E93;&#x4EA7;&#x54C1;&#xFF0C;HugeGraph&#x9700;&#x5177;&#x5907;&#x56FE;&#x6570;&#x636E;&#x7684;&#x57FA;&#x672C;&#x529F;&#x80FD;&#xFF0C;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#x3002;HugeGraph&#x5305;&#x62EC;&#x4E09;&#x4E2A;&#x5C42;&#x6B21;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x5206;&#x522B;&#x662F;&#x5B58;&#x50A8;&#x5C42;&#x3001;&#x8BA1;&#x7B97;&#x5C42;&#x548C;&#x7528;&#x6237;&#x63A5;&#x53E3;&#x5C42;&#x3002; HugeGraph&#x652F;&#x6301;OLTP&#x548C;OLAP&#x4E24;&#x79CD;&#x56FE;&#x8BA1;&#x7B97;&#x7C7B;&#x578B;&#xFF0C;&#x5176;&#x4E2D;OLTP&#x5B9E;&#x73B0;&#x4E86;<a href="https://tinkerpop.apache.org" target="_blank">Apache TinkerPop 3</a>&#x6846;&#x67B6;&#xFF0C;&#x5E76;&#x652F;&#x6301;<a href="https://tinkerpop.apache.org/gremlin.html" target="_blank">Gremlin</a>&#x67E5;&#x8BE2;&#x8BED;&#x8A00;&#x3002; OLAP&#x8BA1;&#x7B97;&#x662F;&#x57FA;&#x4E8E;SparkGraphX&#x5B9E;&#x73B0;&#x3002;</p>
-<center>
-  <img src="../images/design/architectural-overview.png" alt="image">
-</center>
-
-<h3 id="2-&#x7EC4;&#x4EF6;">2 &#x7EC4;&#x4EF6;</h3>
-<p>HugeGraph&#x7684;&#x4E3B;&#x8981;&#x529F;&#x80FD;&#x5206;&#x4E3A;HugeCore&#x3001;ApiServer&#x3001;HugeGraph-Client&#x3001;HugeGraph-Loader&#x548C;HugeGraph-Studio&#x7B49;&#x7EC4;&#x4EF6;&#x6784;&#x6210;&#xFF0C;&#x5404;&#x7EC4;&#x4EF6;&#x4E4B;&#x95F4;&#x7684;&#x901A;&#x4FE1;&#x5173;&#x7CFB;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#x3002;</p>
-<center>
-  <img src="../images/design/architectural-component.png" alt="image">
-</center>
-
+<p>&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x76EE;&#x5F55;&#x4E3A; hugegraph-release/conf&#xFF0C;&#x6240;&#x6709;&#x5173;&#x4E8E;&#x670D;&#x52A1;&#x548C;&#x56FE;&#x672C;&#x8EAB;&#x7684;&#x914D;&#x7F6E;&#x90FD;&#x5728;&#x6B64;&#x76EE;&#x5F55;&#x4E0B;&#x3002;</p>
+<p>&#x4E3B;&#x8981;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x5305;&#x62EC;&#xFF1A;gremlin-server.yaml&#x3001;rest-server.properties &#x548C; hugegraph.properties</p>
+<p>HugeGraphServer &#x5185;&#x90E8;&#x96C6;&#x6210;&#x4E86; GremlinServer &#x548C; RestServer&#xFF0C;&#x800C; gremlin-server.yaml &#x548C; rest-server.properties &#x5C31;&#x662F;&#x7528;&#x6765;&#x914D;&#x7F6E;&#x8FD9;&#x4E24;&#x4E2A;Server&#x7684;&#x3002;</p>
 <ul>
-<li>HugeCore &#xFF1A;HugeGraph&#x7684;&#x6838;&#x5FC3;&#x6A21;&#x5757;&#xFF0C;TinkerPop&#x7684;&#x63A5;&#x53E3;&#x4E3B;&#x8981;&#x5728;&#x8BE5;&#x6A21;&#x5757;&#x4E2D;&#x5B9E;&#x73B0;&#x3002;HugeCore&#x7684;&#x529F;&#x80FD;&#x6DB5;&#x76D6;&#x5305;&#x62EC;OLTP&#x548C;OLAP&#x4E24;&#x4E2A;&#x90E8;&#x5206;&#x3002;</li>
-<li>ApiServer &#xFF1A;&#x63D0;&#x4F9B;RESTFul Api&#x63A5;&#x53E3;&#xFF0C;&#x5BF9;&#x5916;&#x63D0;&#x4F9B;Graph Api&#x3001;Schema Api&#x548C;Gremlin Api&#x7B49;&#x63A5;&#x53E3;&#x670D;&#x52A1;&#x3002;</li>
-<li>HugeGraph-Client&#xFF1A;&#x57FA;&#x4E8E;Java&#x5BA2;&#x6237;&#x7AEF;&#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#x3002;HugeGraph-Client&#x662F;Java&#x7248;&#x672C;&#x5BA2;&#x6237;&#x7AEF;&#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#xFF0C;&#x540E;&#x7EED;&#x53EF;&#x6839;&#x636E;&#x9700;&#x8981;&#x63D0;&#x4F9B;Python&#x3001;Go&#x3001;C++&#x7B49;&#x591A;&#x8BED;&#x8A00;&#x652F;&#x6301;&#x3002;</li>
-<li>HugeGraph-Loader&#xFF1A;&#x6570;&#x636E;&#x5BFC;&#x5165;&#x6A21;&#x5757;&#x3002;HugeGraph-Loader&#x53EF;&#x4EE5;&#x626B;&#x63CF;&#x5E76;&#x5206;&#x6790;&#x73B0;&#x6709;&#x6570;&#x636E;&#xFF0C;&#x81EA;&#x52A8;&#x751F;&#x6210;Graph Schema&#x521B;&#x5EFA;&#x8BED;&#x8A00;&#xFF0C;&#x901A;&#x8FC7;&#x6279;&#x91CF;&#x65B9;&#x5F0F;&#x5FEB;&#x901F;&#x5BFC;&#x5165;&#x6570;&#x636E;&#x3002;</li>
-<li>HugeGraph-Studio&#xFF1A;&#x57FA;&#x4E8E;Web&#x7684;&#x53EF;&#x89C6;&#x5316;IDE&#x73AF;&#x5883;&#x3002;&#x4EE5;Notebook&#x65B9;&#x5F0F;&#x8BB0;&#x5F55;Gremlin&#x67E5;&#x8BE2;&#xFF0C;&#x53EF;&#x89C6;&#x5316;&#x5C55;&#x793A;Graph&#x7684;&#x5173;&#x8054;&#x5173;&#x7CFB;&#x3002;HugeGraph-Studio&#x4E5F;&#x662F;&#x672C;&#x7CFB;&#x7EDF;&#x63A8;&#x8350;&#x7684;&#x5DE5;&#x5177;&#x3002;</li>
+<li><a href="http://tinkerpop.apache.org/docs/3.2.3/reference/#gremlin-server" target="_blank">GremlinServer</a>&#xFF1A;GremlinServer&#x63A5;&#x53D7;&#x7528;&#x6237;&#x7684;gremlin&#x8BED;&#x53E5;&#xFF0C;&#x89E3;&#x6790;&#x540E;&#x8F6C;&#x800C;&#x8C03;&#x7528;Core&#x7684;&#x4EE3;&#x7801;&#x3002;</li>
+<li>RestServer&#xFF1A;&#x63D0;&#x4F9B;Restful API&#xFF0C;&#x6839;&#x636E;&#x4E0D;&#x540C;&#x7684;HTTP&#x8BF7;&#x6C42;&#xFF0C;&#x8C03;&#x7528;&#x5BF9;&#x5E94;&#x7684;Core API&#xFF0C;&#x5982;&#x679C;&#x7528;&#x6237;&#x8BF7;&#x6C42;&#x4F53;&#x662F;gremlin&#x8BED;&#x53E5;&#xFF0C;&#x5219;&#x4F1A;&#x8F6C;&#x53D1;&#x7ED9;GremlinServer&#xFF0C;&#x5B9E;&#x73B0;&#x5BF9;&#x56FE;&#x6570;&#x636E;&#x7684;&#x64CD;&#x4F5C;&#x3002;</li>
 </ul>
+<p>&#x4E0B;&#x9762;&#x5BF9;&#x8FD9;&#x4E09;&#x4E2A;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x9010;&#x4E00;&#x4ECB;&#x7ECD;&#x3002;</p>
+<h3 id="2-gremlin-serveryaml">2 gremlin-server.yaml</h3>
+<p>gremlin-server.yaml &#x6587;&#x4EF6;&#x9ED8;&#x8BA4;&#x7684;&#x5185;&#x5BB9;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-yaml"><span class="hljs-attr">host:</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>
+<span class="hljs-attr">port:</span> <span class="hljs-number">8182</span>
+<span class="hljs-attr">scriptEvaluationTimeout:</span> <span class="hljs-number">30000</span>
+<span class="hljs-comment"># If you want to start gremlin-server for gremlin-console(web-socket),</span>
+<span class="hljs-comment"># please change `HttpChannelizer` to `WebSocketChannelizer` or comment this line.</span>
+<span class="hljs-attr">channelizer:</span> org.apache.tinkerpop.gremlin.server.channel.HttpChannelizer
+<span class="hljs-attr">graphs:</span> {
+<span class="hljs-attr">  hugegraph:</span> conf/hugegraph.properties
+}
+<span class="hljs-attr">plugins:</span>
+<span class="hljs-bullet">  -</span> com.baidu.hugegraph
+<span class="hljs-attr">scriptEngines:</span> {
+<span class="hljs-attr">  gremlin-groovy:</span> {
+<span class="hljs-attr">    imports:</span> [java.lang.Math],
+<span class="hljs-attr">    staticImports:</span> [java.lang.Math.PI],
+<span class="hljs-attr">    scripts:</span> [scripts/empty-sample.groovy]
+  }
+}
+<span class="hljs-attr">serializers:</span>
+<span class="hljs-bullet">  -</span> { className: org.apache.tinkerpop.gremlin.driver.ser.GryoLiteMessageSerializerV1d0,
+<span class="hljs-attr">      config:</span> {
+<span class="hljs-attr">        serializeResultToString:</span> <span class="hljs-literal">false</span>,
+<span class="hljs-attr">        ioRegistries:</span> [com.baidu.hugegraph.io.HugeGraphIoRegistry]
+      }
+    }
+<span class="hljs-bullet">  -</span> { className: org.apache.tinkerpop.gremlin.driver.ser.GryoMessageSerializerV1d0,
+<span class="hljs-attr">      config:</span> {
+<span class="hljs-attr">        serializeResultToString:</span> <span class="hljs-literal">true</span>,
+<span class="hljs-attr">        ioRegistries:</span> [com.baidu.hugegraph.io.HugeGraphIoRegistry]
+      }
+    }
+<span class="hljs-bullet">  -</span> { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerGremlinV1d0,
+<span class="hljs-attr">      config:</span> {
+<span class="hljs-attr">        serializeResultToString:</span> <span class="hljs-literal">false</span>,
+<span class="hljs-attr">        ioRegistries:</span> [com.baidu.hugegraph.io.HugeGraphIoRegistry]
+      }
+    }
+<span class="hljs-bullet">  -</span> { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerGremlinV2d0,
+<span class="hljs-attr">      config:</span> {
+<span class="hljs-attr">        serializeResultToString:</span> <span class="hljs-literal">false</span>,
+<span class="hljs-attr">        ioRegistries:</span> [com.baidu.hugegraph.io.HugeGraphIoRegistry]
+      }
+    }
+<span class="hljs-bullet">  -</span> { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV1d0,
+<span class="hljs-attr">      config:</span> {
+<span class="hljs-attr">        serializeResultToString:</span> <span class="hljs-literal">false</span>,
+<span class="hljs-attr">        ioRegistries:</span> [com.baidu.hugegraph.io.HugeGraphIoRegistry]
+      }
+    }
+<span class="hljs-attr">metrics:</span> {
+<span class="hljs-attr">  consoleReporter:</span> {enabled: <span class="hljs-literal">false</span>, interval: <span class="hljs-number">180000</span>},
+<span class="hljs-attr">  csvReporter:</span> {enabled: <span class="hljs-literal">true</span>, interval: <span class="hljs-number">180000</span>, fileName: /tmp/gremlin-server-metrics.csv},
+<span class="hljs-attr">  jmxReporter:</span> {enabled: <span class="hljs-literal">false</span>},
+<span class="hljs-attr">  slf4jReporter:</span> {enabled: <span class="hljs-literal">false</span>, interval: <span class="hljs-number">180000</span>},
+<span class="hljs-attr">  gangliaReporter:</span> {enabled: <span class="hljs-literal">false</span>, interval: <span class="hljs-number">180000</span>, addressingMode: MULTICAST},
+<span class="hljs-attr">  graphiteReporter:</span> {enabled: <span class="hljs-literal">false</span>, interval: <span class="hljs-number">180000</span>}
+}
+<span class="hljs-attr">maxInitialLineLength:</span> <span class="hljs-number">4096</span>
+<span class="hljs-attr">maxHeaderSize:</span> <span class="hljs-number">8192</span>
+<span class="hljs-attr">maxChunkSize:</span> <span class="hljs-number">8192</span>
+<span class="hljs-attr">maxContentLength:</span> <span class="hljs-number">65536</span>
+<span class="hljs-attr">maxAccumulationBufferComponents:</span> <span class="hljs-number">1024</span>
+<span class="hljs-attr">resultIterationBatchSize:</span> <span class="hljs-number">64</span>
+<span class="hljs-attr">writeBufferLowWaterMark:</span> <span class="hljs-number">32768</span>
+<span class="hljs-attr">writeBufferHighWaterMark:</span> <span class="hljs-number">65536</span>
+<span class="hljs-attr">ssl:</span> {
+<span class="hljs-attr">  enabled:</span> <span class="hljs-literal">false</span>
+}
+</code></pre>
+<p>&#x4E0A;&#x9762;&#x7684;&#x914D;&#x7F6E;&#x9879;&#x5F88;&#x591A;&#xFF0C;&#x4F46;&#x76EE;&#x524D;&#x53EA;&#x9700;&#x8981;&#x5173;&#x6CE8;&#x5982;&#x4E0B;&#x51E0;&#x4E2A;&#x914D;&#x7F6E;&#x9879;&#xFF1A;host&#x3001;port&#x3001;channelizer &#x548C; graphs&#x3002;</p>
+<ul>
+<li>host&#xFF1A;&#x90E8;&#x7F72; GremlinServer &#x673A;&#x5668;&#x7684;&#x673A;&#x5668;&#x540D;&#x6216; IP&#xFF0C;&#x76EE;&#x524D; HugeGraphServer &#x4E0D;&#x652F;&#x6301;&#x5206;&#x5E03;&#x5F0F;&#x90E8;&#x7F72;&#xFF0C;&#x4E14;GremlinServer&#x4E0D;&#x76F4;&#x63A5;&#x66B4;&#x9732;&#x7ED9;&#x7528;&#x6237;&#xFF0C;&#x6B64;&#x9879;&#x53EF;&#x4EE5;&#x4E0D;&#x4FEE;&#x6539;&#xFF1B;</li>
+<li>port&#xFF1A;&#x90E8;&#x7F72; GremlinServer &#x673A;&#x5668;&#x7684;&#x7AEF;&#x53E3;&#xFF0C;&#x540C; host&#xFF0C;&#x53EF;&#x4EE5;&#x4E0D;&#x4FEE;&#x6539;&#xFF1B;</li>
+<li>channelizer&#xFF1A;GremlinServer &#x4E0E;&#x5BA2;&#x6237;&#x7AEF;&#x6709;&#x4E24;&#x79CD;&#x901A;&#x4FE1;&#x65B9;&#x5F0F;&#xFF0C;&#x5206;&#x522B;&#x662F; WebSocket &#x548C; HTTP&#xFF08;&#x9ED8;&#x8BA4;&#xFF09;&#x3002;&#x5982;&#x679C;&#x9009;&#x62E9; WebSocket&#xFF0C;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; <a href="../clients/gremlin-console.html">Gremlin-Console</a> &#x5FEB;&#x901F;&#x4F53;&#x9A8C; HugeGraph &#x7684;&#x7279;&#x6027;&#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x652F;&#x6301;&#x5927;&#x89C4;&#x6A21;&#x6570;&#x636E;&#x5BFC;&#x5165;&#xFF0C;&#x63A8;&#x8350;&#x4F7F;&#x7528; HTTP &#x7684;&#x901A;&#x4FE1;&#x65B9;&#x5F0F;&#xFF0C;&#x6211;&#x4EEC;&#x7684;&#x4E00;&#x4E9B;&#x5916;&#x56F4;&#x7EC4;&#x4EF6;&#x90FD;&#x662F;&#x57FA;&#x4E8E; HTTP &#x5B9E;&#x73B0;&#x7684;&#xFF1B;</li>
+<li>graphs&#xFF1A;GremlinServer &#x542F;&#x52A8;&#x65F6;&#x9700;&#x8981;&#x6253;&#x5F00;&#x7684;&#x56FE;&#xFF0C;&#x8BE5;&#x9879;&#x662F;&#x4E00;&#x4E2A; map &#x7ED3;&#x6784;&#xFF0C;key &#x662F;&#x56FE;&#x7684;&#x540D;&#x5B57;&#xFF0C;value &#x662F;&#x8BE5;&#x56FE;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#xFF1B;</li>
+</ul>
+<h3 id="3-rest-serverproperties">3 rest-server.properties</h3>
+<p>rest-server.properties &#x6587;&#x4EF6;&#x7684;&#x9ED8;&#x8BA4;&#x5185;&#x5BB9;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-properties">restserver.url=http://127.0.0.1:8080
+gremlinserver.url=http://127.0.0.1:8182
+graphs=[hugegraph:conf/hugegraph.properties]
+
+max_vertices_per_batch=500
+max_edges_per_batch=500
+</code></pre>
+<ul>
+<li>restserver.url&#xFF1A;RestServer &#x63D0;&#x4F9B;&#x670D;&#x52A1;&#x7684; url&#xFF0C;&#x6839;&#x636E;&#x5B9E;&#x9645;&#x73AF;&#x5883;&#x4FEE;&#x6539;&#xFF1B;</li>
+<li>gremlinserver.url&#xFF1A;GremlinServer &#x4E3A; RestServer &#x63D0;&#x4F9B;&#x670D;&#x52A1;&#x7684; url&#xFF0C;&#x8BE5;&#x914D;&#x7F6E;&#x9879;&#x4E0E; gremlin-server.yaml &#x4E2D;&#x7684; host &#x548C; port &#x76F8;&#x5339;&#x914D;&#xFF0C;&#x9ED8;&#x8BA4;&#x53EF;&#x4EE5;&#x4E0D;&#x4FEE;&#x6539;&#xFF1B;</li>
+<li>graphs&#xFF1A;RestServer &#x542F;&#x52A8;&#x65F6;&#x4E5F;&#x9700;&#x8981;&#x6253;&#x5F00;&#x56FE;&#xFF0C;&#x8BE5;&#x9879;&#x4E3A; map &#x7ED3;&#x6784;&#xFF0C;key &#x662F;&#x56FE;&#x7684;&#x540D;&#x5B57;&#xFF0C;value &#x662F;&#x8BE5;&#x56FE;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#xFF1B;</li>
+</ul>
+<blockquote>
+<p>&#x6CE8;&#x610F;&#xFF1A;gremlin-server.yaml &#x548C; rest-server.properties &#x90FD;&#x5305;&#x542B; graphs &#x914D;&#x7F6E;&#x9879;&#xFF0C;&#x800C; <code>init-store</code> &#x547D;&#x4EE4;&#x662F;&#x6839;&#x636E; gremlin-server.yaml &#x7684; graphs &#x4E0B;&#x7684;&#x56FE;&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#x7684;&#x3002;</p>
+</blockquote>
+<h3 id="4-hugegraphproperties">4 hugegraph.properties</h3>
+<p>hugegraph.properties &#x662F;&#x4E00;&#x7C7B;&#x6587;&#x4EF6;&#xFF0C;&#x56E0;&#x4E3A;&#x5982;&#x679C;&#x7CFB;&#x7EDF;&#x5B58;&#x5728;&#x591A;&#x4E2A;&#x56FE;&#xFF0C;&#x5219;&#x4F1A;&#x6709;&#x591A;&#x4E2A;&#x76F8;&#x4F3C;&#x7684;&#x6587;&#x4EF6;&#x3002;&#x8BE5;&#x6587;&#x4EF6;&#x7528;&#x6765;&#x914D;&#x7F6E;&#x4E0E;&#x56FE;&#x5B58;&#x50A8;&#x548C;&#x67E5;&#x8BE2;&#x76F8;&#x5173;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x6587;&#x4EF6;&#x7684;&#x9ED8;&#x8BA4;&#x5185;&#x5BB9;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code class="lang-properties"># gremlin entrence to create graph
+gremlin.graph=com.baidu.hugegraph.HugeFactory
+
+# cache config
+#schema.cache_capacity=1048576
+#graph.cache_capacity=10485760
+#graph.cache_expire=600
+
+# schema illegal name template
+#schema.illegal_name_regex=\s+|~.*
+
+#vertex.default_label=vertex
+
+backend=cassandra
+serializer=cassandra
+
+store=hugegraph
+#store.schema=huge_schema
+#store.graph=huge_graph
+#store.index=huge_index
+
+# rocksdb backend config
+rocksdb.data_path=.
+rocksdb.wal_path=.
+
+# cassandra backend config
+cassandra.host=localhost
+cassandra.port=9042
+cassandra.username=
+cassandra.password=
+#cassandra.connect_timeout=5
+#cassandra.read_timeout=20
+
+#cassandra.keyspace.strategy=SimpleStrategy
+#cassandra.keyspace.replication=3
+
+# hugespark
+admin.token=162f7848-0b6d-4faf-b557-3a0797869c55
+</code></pre>
+<p>&#x91CD;&#x70B9;&#x5173;&#x6CE8;&#x672A;&#x6CE8;&#x91CA;&#x7684;&#x51E0;&#x9879;&#xFF1A;</p>
+<ul>
+<li>gremlin.graph&#xFF1A;GremlinServer &#x7684;&#x542F;&#x52A8;&#x5165;&#x53E3;&#xFF0C;&#x7528;&#x6237;&#x4E0D;&#x8981;&#x4FEE;&#x6539;&#x6B64;&#x9879;&#xFF1B;</li>
+<li>backend&#xFF1A;&#x4F7F;&#x7528;&#x7684;&#x540E;&#x7AEF;&#x5B58;&#x50A8;&#xFF0C;&#x53EF;&#x9009;&#x503C;&#x6709; memory&#x3001;cassandra&#x3001;scylladb &#x548C; rocksdb&#xFF1B;</li>
+<li>serializer&#xFF1A;&#x4E3B;&#x8981;&#x4E3A;&#x5185;&#x90E8;&#x4F7F;&#x7528;&#xFF0C;&#x7528;&#x4E8E;&#x5C06; schema&#x3001;vertex &#x548C; edge &#x5E8F;&#x5217;&#x5316;&#x5230;&#x540E;&#x7AEF;&#xFF0C;&#x5BF9;&#x5E94;&#x7684;&#x53EF;&#x9009;&#x503C;&#x4E3A; text&#x3001;cassandra&#x3001;scylladb &#x548C; binary&#xFF1B;</li>
+<li>store&#xFF1A;&#x56FE;&#x5B58;&#x50A8;&#x5230;&#x540E;&#x7AEF;&#x4F7F;&#x7528;&#x7684;&#x6570;&#x636E;&#x5E93;&#x540D;&#xFF0C;&#x5728; cassandra &#x548C; scylladb &#x4E2D;&#x5C31;&#x662F; keyspace &#x540D;&#xFF0C;&#x6B64;&#x9879;&#x7684;&#x503C;&#x4E0E; GremlinServer &#x548C; RestServer &#x4E2D;&#x7684;&#x56FE;&#x540D;&#x5E76;&#x65E0;&#x5173;&#x7CFB;&#xFF0C;&#x4F46;&#x662F;&#x51FA;&#x4E8E;&#x76F4;&#x89C2;&#x8003;&#x8651;&#xFF0C;&#x5EFA;&#x8BAE;&#x4ECD;&#x7136;&#x4F7F;&#x7528;&#x76F8;&#x540C;&#x7684;&#x540D;&#x5B57;&#xFF1B;</li>
+<li>cassandra.host&#xFF1A;backend &#x4E3A; cassandra &#x6216; scylladb &#x65F6;&#x6B64;&#x9879;&#x624D;&#x6709;&#x610F;&#x4E49;&#xFF0C;cassandra/scylladb &#x96C6;&#x7FA4;&#x7684; seeds&#xFF1B;</li>
+<li>cassandra.port&#xFF1A;backend &#x4E3A; cassandra &#x6216; scylladb &#x65F6;&#x6B64;&#x9879;&#x624D;&#x6709;&#x610F;&#x4E49;&#xFF0C;cassandra/scylladb &#x96C6;&#x7FA4;&#x7684; native port&#xFF1B;</li>
+<li>rocksdb.data_path&#xFF1A;backend &#x4E3A; rocksdb &#x65F6;&#x6B64;&#x9879;&#x624D;&#x6709;&#x610F;&#x4E49;&#xFF0C;rocksdb &#x7684;&#x6570;&#x636E;&#x76EE;&#x5F55;</li>
+<li>rocksdb.wal_path&#xFF1A;backend &#x4E3A; rocksdb &#x65F6;&#x6B64;&#x9879;&#x624D;&#x6709;&#x610F;&#x4E49;&#xFF0C;rocksdb &#x7684;&#x65E5;&#x5FD7;&#x76EE;&#x5F55;</li>
+<li>admin.token: &#x901A;&#x8FC7;&#x4E00;&#x4E2A;token&#x6765;&#x83B7;&#x53D6;&#x670D;&#x52A1;&#x5668;&#x7684;&#x914D;&#x7F6E;&#x4FE1;&#x606F;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;<a href="http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55" target="_blank">http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55</a></li>
+</ul>
+<h3 id="5-&#x591A;&#x56FE;&#x914D;&#x7F6E;">5 &#x591A;&#x56FE;&#x914D;&#x7F6E;</h3>
+<p>&#x6211;&#x4EEC;&#x7684;&#x7CFB;&#x7EDF;&#x662F;&#x53EF;&#x4EE5;&#x5B58;&#x5728;&#x591A;&#x4E2A;&#x56FE;&#x7684;&#xFF0C;&#x5E76;&#x4E14;&#x5404;&#x4E2A;&#x56FE;&#x7684;&#x540E;&#x7AEF;&#x53EF;&#x4EE5;&#x4E0D;&#x4E00;&#x6837;&#xFF0C;&#x6BD4;&#x5982;&#x56FE; hugegraph &#x548C; hugegraph1&#xFF0C;&#x5176;&#x4E2D; hugegraph &#x4EE5; cassandra &#x4F5C;&#x4E3A;&#x540E;&#x7AEF;&#xFF0C;hugegraph1 &#x4EE5; rocksdb&#x4F5C;&#x4E3A;&#x540E;&#x7AEF;&#x3002;</p>
+<p>&#x914D;&#x7F6E;&#x65B9;&#x6CD5;&#x4E5F;&#x5F88;&#x7B80;&#x5355;&#xFF1A;</p>
+<p><strong>&#x4FEE;&#x6539; gremlin-server.yaml</strong></p>
+<p>&#x5728; gremlin-server.yaml &#x7684; graphs &#x57DF;&#x4E2D;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x952E;&#x503C;&#x5BF9;&#xFF0C;&#x952E;&#x4E3A;&#x56FE;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x503C;&#x4E3A;&#x56FE;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;</p>
+<pre><code class="lang-yaml"><span class="hljs-attr">graphs:</span> {
+<span class="hljs-attr">  hugegraph:</span> conf/hugegraph.properties,
+<span class="hljs-attr">  hugegraph1:</span> conf/hugegraph1.properties
+}
+</code></pre>
+<p><strong>&#x4FEE;&#x6539; rest-server.properties</strong></p>
+<p>&#x5728; rest-server.properties &#x7684; graphs &#x57DF;&#x4E2D;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x952E;&#x503C;&#x5BF9;&#xFF0C;&#x952E;&#x4E3A;&#x56FE;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x503C;&#x4E3A;&#x56FE;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;</p>
+<pre><code class="lang-properties">graphs=[hugegraph:conf/hugegraph.properties, hugegraph1:conf/hugegraph1.properties]
+</code></pre>
+<p><strong>&#x6DFB;&#x52A0; hugegraph1.properties</strong></p>
+<p>&#x62F7;&#x8D1D; hugegraph.properties&#xFF0C;&#x547D;&#x540D;&#x4E3A; hugegraph1.properties&#xFF0C;&#x4FEE;&#x6539;&#x56FE;&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x636E;&#x5E93;&#x540D;&#x4EE5;&#x53CA;&#x5173;&#x4E8E;&#x540E;&#x7AEF;&#x90E8;&#x5206;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;</p>
+<pre><code class="lang-properties">store=hugegraph1
+
+...
+
+backend=rocksdb
+serializer=binary
+</code></pre>
+<p><strong>&#x505C;&#x6B62; Server&#xFF0C;&#x521D;&#x59CB;&#x5316;&#x6267;&#x884C; init-store.sh&#xFF08;&#x4E3A;&#x65B0;&#x7684;&#x56FE;&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;&#xFF09;&#xFF0C;&#x91CD;&#x65B0;&#x542F;&#x52A8; Server</strong></p>
+<pre><code class="lang-bash">$ bin/stop-hugegraph.sh
+$ bin/init-store.sh
+$ bin/start-hugegraph.sh
+</code></pre>
 
                                 
                                 </section>
@@ -923,12 +1089,12 @@
 
             
                 
-                <a href="../quickstart/hugegraph-spark.html" class="navigation navigation-prev " aria-label="Previous page: Analysis with HugeGraph-Spark">
+                <a href="../guides/faq.html" class="navigation navigation-prev " aria-label="Previous page: FAQ">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="desgin-concept.html" class="navigation navigation-next " aria-label="Next page: Design Concepts">
+                <a href="config-option.html" class="navigation navigation-next " aria-label="Next page: Config Options">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -939,7 +1105,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Architecture Overview","level":"3.1","depth":1,"next":{"title":"Design Concepts","level":"3.2","depth":1,"path":"guides/desgin-concept.md","ref":"guides/desgin-concept.md","articles":[]},"previous":{"title":"Analysis with HugeGraph-Spark","level":"2.6","depth":1,"path":"quickstart/hugegraph-spark.md","ref":"quickstart/hugegraph-spark.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"guides/architectural.md","mtime":"2018-09-13T16:42:54.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-28T02:51:11.436Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Config Guide","level":"4.1","depth":1,"next":{"title":"Config Options","level":"4.2","depth":1,"path":"config/config-option.md","ref":"config/config-option.md","articles":[]},"previous":{"title":"FAQ","level":"3.5","depth":1,"path":"guides/faq.md","ref":"guides/faq.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"config/config-guide.md","mtime":"2018-11-23T13:54:02.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-28T02:51:11.436Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

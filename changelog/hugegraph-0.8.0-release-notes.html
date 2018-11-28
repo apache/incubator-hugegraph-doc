@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Release-0.7.4 · GitBook</title>
+        <title>Release-0.8.0 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -66,10 +66,10 @@
     
 
     
-    <link rel="next" href="hugegraph-0.6.1-release-notes.html" />
+    <link rel="next" href="hugegraph-0.7.4-release-notes.html" />
     
     
-    <link rel="prev" href="hugegraph-0.8.0-release-notes.html" />
+    <link rel="prev" href="../performance/hugegraph-loader-performance.html" />
     
 
     </head>
@@ -116,7 +116,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Release-0.7.4</a>
+        <a href=".." >Release-0.8.0</a>
     </h1>
 </div>
 
@@ -739,7 +739,7 @@
         
         
     
-        <li class="chapter " data-level="8.1" data-path="hugegraph-0.8.0-release-notes.html">
+        <li class="chapter active" data-level="8.1" data-path="hugegraph-0.8.0-release-notes.html">
             
                 <a href="hugegraph-0.8.0-release-notes.html">
             
@@ -752,7 +752,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="8.2" data-path="hugegraph-0.7.4-release-notes.html">
+        <li class="chapter " data-level="8.2" data-path="hugegraph-0.7.4-release-notes.html">
             
                 <a href="hugegraph-0.7.4-release-notes.html">
             
@@ -867,95 +867,107 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="hugegraph-07-release-notes">HugeGraph 0.7 Release Notes</h2>
-<h3 id="api--java-client">API &amp; Java Client</h3>
+                                <h2 id="hugegraph-08-release-notes">HugeGraph 0.8 Release Notes</h2>
+<h3 id="api--client">API &amp; Client</h3>
 <h4 id="&#x529F;&#x80FD;&#x66F4;&#x65B0;">&#x529F;&#x80FD;&#x66F4;&#x65B0;</h4>
 <ul>
-<li>&#x652F;&#x6301;&#x5F02;&#x6B65;&#x5220;&#x9664;&#x5143;&#x6570;&#x636E;&#x548C;&#x91CD;&#x5EFA;&#x7D22;&#x5F15;&#xFF08;HugeGraph-889&#xFF09;</li>
-<li>&#x52A0;&#x5165;&#x76D1;&#x63A7;API&#xFF0C;&#x5E76;&#x4E0E;Gremlin&#x7684;&#x76D1;&#x63A7;&#x6846;&#x67B6;&#x96C6;&#x6210;&#xFF08;HugeGraph-1273&#xFF09;</li>
+<li>&#x670D;&#x52A1;&#x7AEF;&#x589E;&#x52A0; rays &#x548C; rings &#x7684; RESTful API&#xFF08;hugegraph #45&#xFF09;</li>
+<li>&#x4F7F;&#x521B;&#x5EFA; IndexLabel &#x8FD4;&#x56DE;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#xFF08;hugegraph #95&#xFF0C;hugegraph-client #9&#xFF09;</li>
+<li>&#x5BA2;&#x6237;&#x7AEF;&#x589E;&#x52A0;&#x6062;&#x590D;&#x6A21;&#x5F0F;&#x76F8;&#x5173;&#x7684; API&#xFF08;hugegraph-client #10&#xFF09;</li>
+<li>&#x8BA9; task-list API &#x4E0D;&#x8FD4;&#x56DE; task_input &#x548C; task_result&#xFF08;hugegraph #143&#xFF09;</li>
+<li>&#x589E;&#x52A0;&#x53D6;&#x6D88;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x7684;API&#xFF08;hugegraph #167&#xFF0C;hugegraph-client #15&#xFF09;</li>
+<li>&#x589E;&#x52A0;&#x83B7;&#x53D6;&#x540E;&#x7AEF; metrics &#x7684; API&#xFF08;hugegraph #155&#xFF09;</li>
 </ul>
 <h4 id="bug&#x4FEE;&#x590D;">BUG&#x4FEE;&#x590D;</h4>
 <ul>
-<li>EdgeAPI&#x66F4;&#x65B0;&#x5C5E;&#x6027;&#x65F6;&#x4F1A;&#x5C06;&#x5C5E;&#x6027;&#x503C;&#x4E5F;&#x7F6E;&#x4E3A;&#x5C5E;&#x6027;&#x952E;&#xFF08;HugeGraph-81&#xFF09;</li>
-<li>&#x5F53;&#x5220;&#x9664;&#x9876;&#x70B9;&#x6216;&#x8FB9;&#x65F6;&#xFF0C;&#x5982;&#x679C;id&#x975E;&#x6CD5;&#x5E94;&#x8BE5;&#x8FD4;&#x56DE;400&#x9519;&#x8BEF;&#x800C;&#x975E;404&#xFF08;HugeGraph-1337&#xFF09;</li>
+<li>&#x5206;&#x9875;&#x83B7;&#x53D6;&#x65F6;&#x6700;&#x540E;&#x4E00;&#x9875;&#x7684; page &#x5E94;&#x8BE5;&#x4E3A; null &#x800C;&#x975E; &quot;null&quot;&#xFF08;hugegraph #168&#xFF09;</li>
+<li>&#x5206;&#x9875;&#x8FED;&#x4EE3;&#x83B7;&#x53D6;&#x670D;&#x52A1;&#x7AEF;&#x5DF2;&#x7ECF;&#x6CA1;&#x6709;&#x4E0B;&#x4E00;&#x9875;&#x4E86;&#x5E94;&#x8BE5;&#x505C;&#x6B62;&#x83B7;&#x53D6;&#xFF08;hugegraph-client #16&#xFF09;</li>
+<li>&#x6DFB;&#x52A0;&#x9876;&#x70B9;&#x4F7F;&#x7528;&#x81EA;&#x5B9A;&#x4E49; Number Id &#x65F6;&#x62A5;&#x7C7B;&#x578B;&#x65E0;&#x6CD5;&#x8F6C;&#x6362;&#xFF08;hugegraph-client #21&#xFF09;</li>
+</ul>
+<h4 id="&#x5185;&#x90E8;&#x4FEE;&#x6539;">&#x5185;&#x90E8;&#x4FEE;&#x6539;</h4>
+<ul>
+<li>&#x589E;&#x52A0;&#x6301;&#x7EED;&#x96C6;&#x6210;&#x6D4B;&#x8BD5;&#xFF08;hugegraph-client #19&#xFF09;</li>
 </ul>
 <h3 id="core">Core</h3>
 <h4 id="&#x529F;&#x80FD;&#x66F4;&#x65B0;">&#x529F;&#x80FD;&#x66F4;&#x65B0;</h4>
 <ul>
-<li>&#x652F;&#x6301;HBase&#x540E;&#x7AEF;&#x5B58;&#x50A8;&#xFF08;HugeGraph-1280&#xFF09;</li>
-<li>&#x589E;&#x52A0;&#x5F02;&#x6B65;API&#x6846;&#x67B6;&#xFF0C;&#x8017;&#x65F6;&#x64CD;&#x4F5C;&#x53EF;&#x901A;&#x8FC7;&#x8C03;&#x7528;&#x5F02;&#x6B65;API&#x5B9E;&#x73B0;&#xFF08;HugeGraph-387&#xFF09;</li>
-<li>&#x652F;&#x6301;&#x5BF9;&#x957F;&#x5C5E;&#x6027;&#x5217;&#x5EFA;&#x7ACB;&#x4E8C;&#x7EA7;&#x7D22;&#x5F15;&#xFF0C;&#x53D6;&#x6D88;&#x76EE;&#x524D;&#x7D22;&#x5F15;&#x5217;&#x957F;&#x5EA6;256&#x5B57;&#x8282;&#x7684;&#x9650;&#x5236;&#xFF08;HugeGraph-1314&#xFF09;</li>
-<li>&#x652F;&#x6301;&#x9876;&#x70B9;&#x5C5E;&#x6027;&#x7684;&#x201C;&#x521B;&#x5EFA;&#x6216;&#x66F4;&#x65B0;&#x201D;&#x64CD;&#x4F5C;&#xFF08;HugeGraph-1303&#xFF09;</li>
-<li>&#x652F;&#x6301;&#x5168;&#x6587;&#x68C0;&#x7D22;&#x529F;&#x80FD;&#xFF08;HugeGraph-1322&#xFF09;</li>
-<li>&#x652F;&#x6301;&#x6570;&#x636E;&#x5E93;&#x8868;&#x7684;&#x7248;&#x672C;&#x53F7;&#x68C0;&#x67E5;&#xFF08;HugeGraph-1328&#xFF09;</li>
-<li>&#x5220;&#x9664;&#x9876;&#x70B9;&#x65F6;&#xFF0C;&#x5982;&#x679C;&#x9047;&#x5230;&#x8D85;&#x7EA7;&#x70B9;&#x7684;&#x65F6;&#x5019;&#x62A5;&#x9519;&quot;Batch too large&quot;&#x6216;&#x201C;Batch 65535 statements&#x201D;&#xFF08;HugeGraph-1354&#xFF09;</li>
-<li>&#x652F;&#x6301;&#x5F02;&#x6B65;&#x5220;&#x9664;&#x5143;&#x6570;&#x636E;&#x548C;&#x91CD;&#x5EFA;&#x7D22;&#x5F15;&#xFF08;HugeGraph-889&#xFF09;</li>
-<li>&#x652F;&#x6301;&#x5F02;&#x6B65;&#x957F;&#x65F6;&#x95F4;&#x6267;&#x884C;Gremlin&#x4EFB;&#x52A1;&#xFF08;HugeGraph-889&#xFF09;</li>
+<li>&#x53D6;&#x6D88;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x901A;&#x8FC7; label &#x67E5;&#x8BE2;&#x65F6; 80w &#x7684;&#x9650;&#x5236;&#xFF08;hugegraph #93&#xFF09;</li>
+<li>&#x5141;&#x8BB8; cardinality &#x4E3A; set &#x65F6;&#x4F20;&#x5165; Json List &#x5F62;&#x5F0F;&#x7684;&#x5C5E;&#x6027;&#x503C;&#xFF08;hugegraph #109&#xFF09;</li>
+<li>&#x652F;&#x6301;&#x5728;&#x6062;&#x590D;&#x6A21;&#x5F0F;&#x548C;&#x5408;&#x5E76;&#x6A21;&#x5F0F;&#x6765;&#x6062;&#x590D;&#x56FE;&#xFF08;hugegraph #114&#xFF09;</li>
+<li>RocksDB &#x540E;&#x7AEF;&#x652F;&#x6301;&#x591A;&#x4E2A;&#x56FE;&#x6307;&#x5B9A;&#x4E3A;&#x540C;&#x4E00;&#x4E2A;&#x5B58;&#x50A8;&#x76EE;&#x5F55;&#xFF08;hugegraph #123&#xFF09;</li>
+<li>&#x652F;&#x6301;&#x7528;&#x6237;&#x81EA;&#x5B9A;&#x4E49;&#x6743;&#x9650;&#x8BA4;&#x8BC1;&#x5668;&#xFF08;hugegraph-loader #133&#xFF09;</li>
+<li>&#x5F53;&#x670D;&#x52A1;&#x91CD;&#x542F;&#x540E;&#x91CD;&#x65B0;&#x5F00;&#x59CB;&#x672A;&#x5B8C;&#x6210;&#x7684;&#x4EFB;&#x52A1;&#xFF08;hugegraph #188&#xFF09;</li>
+<li>&#x5F53;&#x9876;&#x70B9;&#x7684; Id &#x7B56;&#x7565;&#x4E3A;&#x81EA;&#x5B9A;&#x4E49;&#x65F6;&#xFF0C;&#x68C0;&#x67E5;&#x662F;&#x5426;&#x5DF2;&#x5B58;&#x5728;&#x76F8;&#x540C; Id &#x7684;&#x9876;&#x70B9;&#xFF08;hugegraph #189&#xFF09;</li>
 </ul>
 <h4 id="bug&#x4FEE;&#x590D;">BUG&#x4FEE;&#x590D;</h4>
 <ul>
-<li>&#x9632;&#x6B62;&#x8D85;&#x7EA7;&#x70B9;&#x8BBF;&#x95EE;&#x65F6;&#x67E5;&#x8BE2;&#x8FC7;&#x591A;&#x4E0B;&#x4E00;&#x5C42;&#x9876;&#x70B9;&#x800C;&#x963B;&#x585E;&#x670D;&#x52A1;&#xFF08;HugeGraph-1302&#xFF09;</li>
-<li>HBase&#x521D;&#x59CB;&#x5316;&#x65F6;&#x62A5;&#x9519;&#x8FDE;&#x63A5;&#x5DF2;&#x7ECF;&#x5173;&#x95ED;&#xFF08;HugeGraph-1318&#xFF09;</li>
-<li>&#x6309;&#x7167;date&#x5C5E;&#x6027;&#x8FC7;&#x6EE4;&#x9876;&#x70B9;&#x62A5;&#x9519;String&#x65E0;&#x6CD5;&#x8F6C;&#x4E3A;Date&#xFF08;HugeGraph-1319&#xFF09;</li>
-<li>&#x6B8B;&#x7559;&#x7D22;&#x5F15;&#x5220;&#x9664;&#xFF0C;&#x5BF9;range&#x7D22;&#x5F15;&#x7684;&#x5224;&#x65AD;&#x5B58;&#x5728;&#x9519;&#x8BEF;&#xFF08;HugeGraph-1291&#xFF09;</li>
-<li>&#x652F;&#x6301;&#x7EC4;&#x5408;&#x7D22;&#x5F15;&#x540E;&#xFF0C;&#x6B8B;&#x7559;&#x7D22;&#x5F15;&#x6E05;&#x7406;&#x6CA1;&#x6709;&#x8003;&#x8651;&#x7D22;&#x5F15;&#x7EC4;&#x5408;&#x7684;&#x60C5;&#x51B5;&#xFF08;HugeGraph-1311&#xFF09;</li>
-<li>&#x6839;&#x636E;otherV&#x7684;&#x6761;&#x4EF6;&#x6765;&#x5220;&#x9664;&#x8FB9;&#x65F6;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x56E0;&#x4E3A;&#x8FB9;&#x7684;&#x9876;&#x70B9;&#x4E0D;&#x5B58;&#x5728;&#x5BFC;&#x81F4;&#x9519;&#x8BEF;&#xFF08;HugeGraph-1347&#xFF09;</li>
-<li>label&#x7D22;&#x5F15;&#x5BF9;offset&#x548C;limit&#x7ED3;&#x679C;&#x9519;&#x8BEF;&#xFF08;HugeGraph-1329&#xFF09;</li>
-<li>vertex label&#x6216;&#x8005;edge label&#x6CA1;&#x6709;&#x5F00;&#x542F;label index&#xFF0C;&#x5220;&#x9664;label&#x4F1A;&#x5BFC;&#x81F4;&#x6570;&#x636E;&#x65E0;&#x6CD5;&#x5220;&#x9664;&#xFF08;HugeGraph-1355&#xFF09;</li>
+<li>&#x589E;&#x52A0;&#x5BF9; HasContainer &#x7684; predicate &#x4E0D;&#x4E3A; null &#x7684;&#x68C0;&#x67E5;&#xFF08;hugegraph #16&#xFF09;</li>
+<li>RocksDB &#x540E;&#x7AEF;&#x7531;&#x4E8E;&#x6570;&#x636E;&#x76EE;&#x5F55;&#x548C;&#x65E5;&#x5FD7;&#x76EE;&#x5F55;&#x9519;&#x8BEF;&#x5BFC;&#x81F4; init-store &#x5931;&#x8D25;&#xFF08;hugegraph #25&#xFF09;</li>
+<li>&#x542F;&#x52A8; hugegraph &#x65F6;&#x7531;&#x4E8E; logs &#x76EE;&#x5F55;&#x4E0D;&#x5B58;&#x5728;&#x5BFC;&#x81F4;&#x63D0;&#x793A;&#x8D85;&#x65F6;&#x4F46;&#x5B9E;&#x9645;&#x53EF;&#x8BBF;&#x95EE;&#xFF08;hugegraph #38&#xFF09;</li>
+<li>ScyllaDB &#x540E;&#x7AEF;&#x9057;&#x6F0F;&#x6CE8;&#x518C;&#x9876;&#x70B9;&#x8868;&#xFF08;hugegraph #47&#xFF09;</li>
+<li>&#x4F7F;&#x7528; hasLabel &#x67E5;&#x8BE2;&#x4F20;&#x5165;&#x591A;&#x4E2A; label &#x65F6;&#x5931;&#x8D25;&#xFF08;hugegraph #50&#xFF09;</li>
+<li>Memory &#x540E;&#x7AEF;&#x672A;&#x521D;&#x59CB;&#x5316; task &#x76F8;&#x5173;&#x7684; schema&#xFF08;hugegraph #100&#xFF09;</li>
+<li>&#x5F53;&#x4F7F;&#x7528; hasLabel &#x67E5;&#x8BE2;&#x65F6;&#xFF0C;&#x5982;&#x679C;&#x5143;&#x7D20;&#x6570;&#x91CF;&#x8D85;&#x8FC7; 80w&#xFF0C;&#x5373;&#x4F7F;&#x52A0;&#x4E0A; limit &#x4E5F;&#x4F1A;&#x62A5;&#x9519;&#xFF08;hugegraph #104&#xFF09;</li>
+<li>&#x4EFB;&#x52A1;&#x7684;&#x5728;&#x8FD0;&#x884C;&#x4E4B;&#x540E;&#x6CA1;&#x6709;&#x4FDD;&#x5B58;&#x8FC7;&#x72B6;&#x6001;&#xFF08;hugegraph #113&#xFF09;</li>
+<li>&#x68C0;&#x67E5;&#x540E;&#x7AEF;&#x7248;&#x672C;&#x4FE1;&#x606F;&#x65F6;&#x76F4;&#x63A5;&#x5F3A;&#x8F6C; HugeGraphAuthProxy &#x4E3A; HugeGraph&#xFF08;hugegraph #127&#xFF09;</li>
+<li>&#x914D;&#x7F6E;&#x9879; batch.max_vertices_per_batch &#x672A;&#x751F;&#x6548;&#xFF08;hugegraph #130&#xFF09;</li>
+<li>&#x914D;&#x7F6E;&#x6587;&#x4EF6; rest-server.properties &#x6709;&#x9519;&#x8BEF;&#x65F6; HugeGraphServer &#x542F;&#x52A8;&#x4E0D;&#x62A5;&#x9519;&#xFF0C;&#x4F46;&#x662F;&#x65E0;&#x6CD5;&#x8BBF;&#x95EE;&#xFF08;hugegraph #131&#xFF09;</li>
+<li>MySQL &#x540E;&#x7AEF;&#x67D0;&#x4E2A;&#x7EBF;&#x7A0B;&#x7684;&#x63D0;&#x4EA4;&#x5BF9;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x4E0D;&#x53EF;&#x89C1;&#xFF08;hugegraph #163&#xFF09;</li>
+<li>&#x4F7F;&#x7528; union(branch) + has(date) &#x67E5;&#x8BE2;&#x65F6;&#x63D0;&#x793A; String &#x65E0;&#x6CD5;&#x8F6C;&#x6362;&#x4E3A; Date&#xFF08;hugegraph #181&#xFF09;</li>
+<li>&#x4F7F;&#x7528; RocksDB &#x540E;&#x7AEF;&#x5E26; limit &#x67E5;&#x8BE2;&#x9876;&#x70B9;&#x65F6;&#x4F1A;&#x8FD4;&#x56DE;&#x4E0D;&#x5B8C;&#x6574;&#x7684;&#x7ED3;&#x679C;&#xFF08;hugegraph #197&#xFF09;</li>
+<li>&#x63D0;&#x793A;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x65E0;&#x6CD5;&#x64CD;&#x4F5C; tx&#xFF08;hugegraph #204&#xFF09;</li>
 </ul>
 <h4 id="&#x5185;&#x90E8;&#x4FEE;&#x6539;">&#x5185;&#x90E8;&#x4FEE;&#x6539;</h4>
 <ul>
-<li>hbase&#x540E;&#x7AEF;&#x4EE3;&#x7801;&#x5F15;&#x5165;&#x8F83;&#x65B0;&#x7248;&#x672C;&#x7684;Jackson-databind&#x5305;&#xFF0C;&#x5BFC;&#x81F4;HugeGraphServer&#x542F;&#x52A8;&#x5F02;&#x5E38;&#xFF08;HugeGraph-1306&#xFF09;</li>
-<li>Core&#x548C;Client&#x90FD;&#x81EA;&#x5DF1;&#x6301;&#x6709;&#x4E00;&#x4E2A;shard&#x7C7B;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x4F9D;&#x8D56;&#x4E8E;common&#x6A21;&#x5757;&#xFF08;HugeGraph-1316&#xFF09;</li>
-<li>&#x53BB;&#x6389;rebuild index&#x548C;&#x5220;&#x9664;vertex label&#x548C;edge label&#x65F6;&#x7684;80w&#x7684;capacity&#x9650;&#x5236;&#xFF08;HugeGraph-1297&#xFF09;</li>
-<li>&#x6240;&#x6709;schema&#x64CD;&#x4F5C;&#x9700;&#x8981;&#x8003;&#x8651;&#x540C;&#x6B65;&#x95EE;&#x9898;&#xFF08;HugeGraph-1279&#xFF09;</li>
-<li>&#x62C6;&#x5206;Cassandra&#x7684;&#x7D22;&#x5F15;&#x8868;&#xFF0C;&#x628A;element id&#x6BCF;&#x6761;&#x4E00;&#x884C;&#xFF0C;&#x907F;&#x514D;&#x805A;&#x5408;&#x9AD8;&#x65F6;&#xFF0C;&#x5BFC;&#x5165;&#x901F;&#x5EA6;&#x975E;&#x5E38;&#x6162;&#x751A;&#x81F3;&#x5361;&#x4F4F;&#xFF08;HugeGraph-1304&#xFF09;</li>
-<li>&#x5C06;hugegraph-test&#x4E2D;&#x5173;&#x4E8E;common&#x7684;&#x6D4B;&#x8BD5;&#x7528;&#x4F8B;&#x79FB;&#x52A8;&#x5230;hugegraph-common&#x4E2D;&#xFF08;HugeGraph-1297&#xFF09;</li>
-<li>&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x652F;&#x6301;&#x4FDD;&#x5B58;&#x4EFB;&#x52A1;&#x53C2;&#x6570;&#xFF0C;&#x4EE5;&#x652F;&#x6301;&#x4EFB;&#x52A1;&#x6062;&#x590D;&#xFF08;HugeGraph-1344&#xFF09;</li>
-<li>&#x652F;&#x6301;&#x901A;&#x8FC7;&#x811A;&#x672C;&#x90E8;&#x7F72;&#x6587;&#x6863;&#x5230;GitHub&#xFF08;HugeGraph-1351&#xFF09;</li>
-<li>RocksDB&#x548C;Hbase&#x540E;&#x7AEF;&#x7D22;&#x5F15;&#x5220;&#x9664;&#x5B9E;&#x73B0;&#xFF08;HugeGraph-1317&#xFF09;</li>
+<li>&#x62C6;&#x5206; graph.cache_xx &#x914D;&#x7F6E;&#x9879;&#x4E3A; vertex.cache_xx &#x548C; edge.cache_xx &#x4E24;&#x7C7B;&#xFF08;hugegraph #56&#xFF09;</li>
+<li>&#x53BB;&#x9664; hugegraph-dist &#x5BF9; hugegraph-api &#x7684;&#x4F9D;&#x8D56;&#xFF08;hugegraph #61&#xFF09;</li>
+<li>&#x4F18;&#x5316;&#x96C6;&#x5408;&#x53D6;&#x4EA4;&#x96C6;&#x548C;&#x53D6;&#x5DEE;&#x96C6;&#x7684;&#x64CD;&#x4F5C;&#xFF08;hugegraph #85&#xFF09;</li>
+<li>&#x4F18;&#x5316; transaction &#x7684;&#x7F13;&#x5B58;&#x5904;&#x7406;&#x548C;&#x7D22;&#x5F15;&#x53CA; Id &#x67E5;&#x8BE2;&#xFF08;hugegraph #105&#xFF09;</li>
+<li>&#x7ED9;&#x5404;&#x7EBF;&#x7A0B;&#x6C60;&#x7684;&#x7EBF;&#x7A0B;&#x547D;&#x540D;&#xFF08;hugegraph #124&#xFF09;</li>
+<li>&#x589E;&#x52A0;&#x5E76;&#x4F18;&#x5316;&#x4E86;&#x4E00;&#x4E9B; metrics &#x7EDF;&#x8BA1;&#xFF08;hugegraph #138&#xFF09;</li>
+<li>&#x589E;&#x52A0;&#x4E86;&#x5BF9;&#x672A;&#x5B8C;&#x6210;&#x4EFB;&#x52A1;&#x7684; metrics &#x8BB0;&#x5F55;&#xFF08;hugegraph #141&#xFF09;</li>
+<li>&#x8BA9;&#x7D22;&#x5F15;&#x66F4;&#x65B0;&#x4EE5;&#x5206;&#x6279;&#x65B9;&#x5F0F;&#x63D0;&#x4EA4;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5168;&#x91CF;&#x63D0;&#x4EA4;&#xFF08;hugegraph #150&#xFF09;</li>
+<li>&#x5728;&#x6DFB;&#x52A0;&#x9876;&#x70B9;/&#x8FB9;&#x65F6;&#x4E00;&#x76F4;&#x6301;&#x6709; schema &#x7684;&#x8BFB;&#x9501;&#xFF0C;&#x76F4;&#x5230;&#x63D0;&#x4EA4;/&#x56DE;&#x6EDA;&#x5B8C;&#x6210;&#xFF08;hugegraph #180&#xFF09;</li>
+<li>&#x52A0;&#x901F; Tinkerpop &#x6D4B;&#x8BD5;&#xFF08;hugegraph #19&#xFF09;</li>
+<li>&#x4FEE;&#x590D; Tinkerpop &#x6D4B;&#x8BD5;&#x5728; resource &#x76EE;&#x5F55;&#x4E0B;&#x627E;&#x4E0D;&#x5230; filter &#x6587;&#x4EF6;&#x7684; BUG&#xFF08;hugegraph #26&#xFF09;</li>
+<li>&#x5F00;&#x542F; Tinkerpop &#x6D4B;&#x8BD5;&#x4E2D; supportCustomIds &#x7279;&#x6027;&#xFF08;hugegraph #69&#xFF09;</li>
+<li>&#x6301;&#x7EED;&#x96C6;&#x6210;&#x4E2D;&#x6DFB;&#x52A0; HBase &#x540E;&#x7AEF;&#x7684;&#x6D4B;&#x8BD5;&#xFF08;hugegraph #41&#xFF09;</li>
+<li>&#x907F;&#x514D;&#x6301;&#x7EED;&#x96C6;&#x6210;&#x7684; deploy &#x811A;&#x672C;&#x8FD0;&#x884C;&#x591A;&#x6B21;&#xFF08;hugegraph #170&#xFF09;</li>
+<li>&#x4FEE;&#x590D; cache &#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x8DD1;&#x4E0D;&#x8FC7;&#x7684;&#x95EE;&#x9898;&#xFF08;hugegraph #177&#xFF09;</li>
+<li>&#x6301;&#x7EED;&#x96C6;&#x6210;&#x4E2D;&#x4FEE;&#x6539;&#x90E8;&#x5206;&#x540E;&#x7AEF;&#x7684;&#x5B58;&#x50A8;&#x4E3A; tmpfs &#x4EE5;&#x52A0;&#x5FEB;&#x6D4B;&#x8BD5;&#x901F;&#x5EA6;&#xFF08;hugegraph #206&#xFF09;</li>
+</ul>
+<h4 id="&#x5176;&#x5B83;">&#x5176;&#x5B83;</h4>
+<ul>
+<li>&#x589E;&#x52A0; issue &#x6A21;&#x7248;&#xFF08;hugegraph #42&#xFF09;</li>
+<li>&#x589E;&#x52A0; CONTRIBUTING &#x6587;&#x4EF6;&#xFF08;hugegraph #59&#xFF09;</li>
 </ul>
 <h3 id="loader">Loader</h3>
 <h4 id="&#x529F;&#x80FD;&#x66F4;&#x65B0;">&#x529F;&#x80FD;&#x66F4;&#x65B0;</h4>
 <ul>
-<li>HugeLoader&#x652F;&#x6301;&#x7528;&#x6237;&#x624B;&#x52A8;&#x521B;&#x5EFA;schema&#xFF0C;&#x4EE5;&#x6587;&#x4EF6;&#x7684;&#x65B9;&#x5F0F;&#x4F20;&#x5165;&#xFF08;HugeGraph-1295&#xFF09;</li>
+<li>&#x652F;&#x6301;&#x5FFD;&#x7565;&#x6E90;&#x6587;&#x4EF6;&#x67D0;&#x4E9B;&#x7279;&#x5B9A;&#x5217;&#xFF08;hugegraph-loader #2&#xFF09;</li>
+<li>&#x652F;&#x6301;&#x5BFC;&#x5165; cardinality &#x4E3A; Set &#x7684;&#x5C5E;&#x6027;&#x6570;&#x636E;&#xFF08;hugegraph-loader #10&#xFF09;</li>
+<li>&#x5355;&#x6761;&#x63D2;&#x5165;&#x4E5F;&#x4F7F;&#x7528;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#xFF0C;&#x89E3;&#x51B3;&#x4E86;&#x9519;&#x8BEF;&#x591A;&#x65F6;&#x6700;&#x540E;&#x5355;&#x6761;&#x5BFC;&#x5165;&#x6162;&#x7684;&#x95EE;&#x9898;&#xFF08;hugegraph-loader #12&#xFF09;</li>
 </ul>
 <h4 id="bug&#x4FEE;&#x590D;">BUG&#x4FEE;&#x590D;</h4>
 <ul>
-<li>HugeLoader&#x5BFC;&#x6570;&#x636E;&#x65F6;&#x672A;&#x533A;&#x5206;&#x8F93;&#x5165;&#x6587;&#x4EF6;&#x7684;&#x7F16;&#x7801;&#xFF0C;&#x5BFC;&#x81F4;&#x53EF;&#x80FD;&#x4EA7;&#x751F;&#x4E71;&#x7801;&#xFF08;HugeGraph-1288&#xFF09;</li>
-<li>HugeLoader&#x6253;&#x5305;&#x7684;example&#x76EE;&#x5F55;&#x7684;&#x4E09;&#x4E2A;&#x5B50;&#x76EE;&#x5F55;&#x4E0B;&#x6CA1;&#x6709;&#x6587;&#x4EF6;&#xFF08;HugeGraph-1288&#xFF09;</li>
-<li>&#x5BFC;&#x5165;&#x7684;CSV&#x6587;&#x4EF6;&#x4E2D;&#x5982;&#x679C;&#x6570;&#x636E;&#x5217;&#x672C;&#x8EAB;&#x5305;&#x542B;&#x9017;&#x53F7;&#x4F1A;&#x89E3;&#x6790;&#x51FA;&#x9519;&#xFF08;HugeGraph-1320&#xFF09;</li>
-<li>&#x6279;&#x91CF;&#x63D2;&#x5165;&#x907F;&#x514D;&#x5355;&#x6761;&#x5931;&#x8D25;&#x5BFC;&#x81F4;&#x6574;&#x4E2A;batch&#x90FD;&#x65E0;&#x6CD5;&#x63D2;&#x5165;&#xFF08;HugeGraph-1336&#xFF09;</li>
-<li>&#x5F02;&#x5E38;&#x4FE1;&#x606F;&#x4F5C;&#x4E3A;&#x6A21;&#x677F;&#x6253;&#x5370;&#x5F02;&#x5E38;&#xFF08;HugeGraph-1345&#xFF09;</li>
-<li>&#x5BFC;&#x5165;&#x8FB9;&#x6570;&#x636E;&#xFF0C;&#x5F53;&#x5217;&#x6570;&#x4E0D;&#x5BF9;&#x65F6;&#x5BFC;&#x81F4;&#x7A0B;&#x5E8F;&#x9000;&#x51FA;&#xFF08;HugeGraph-1346&#xFF09;</li>
-<li>HugeLoader&#x7684;&#x81EA;&#x52A8;&#x521B;&#x5EFA;schema&#x5931;&#x8D25;&#xFF08;HugeGraph-1363&#xFF09;</li>
-<li>ID&#x957F;&#x5EA6;&#x68C0;&#x67E5;&#x5E94;&#x8BE5;&#x68C0;&#x67E5;&#x5B57;&#x8282;&#x957F;&#x5EA6;&#x800C;&#x975E;&#x5B57;&#x7B26;&#x4E32;&#x957F;&#x5EA6;&#xFF08;HugeGraph-1374&#xFF09;</li>
+<li>&#x5BFC;&#x5165;&#x8FC7;&#x7A0B;&#x53EF;&#x80FD;&#x7EDF;&#x8BA1;&#x51FA;&#x9519;&#xFF08;hugegraph-loader #4&#xFF09;</li>
+<li>&#x9876;&#x70B9;&#x4F7F;&#x7528;&#x81EA;&#x5B9A;&#x4E49; Number Id &#x5BFC;&#x5165;&#x51FA;&#x9519;&#xFF08;hugegraph-loader #6&#xFF09;</li>
+<li>&#x9876;&#x70B9;&#x4F7F;&#x7528;&#x8054;&#x5408;&#x4E3B;&#x952E;&#x65F6;&#x5BFC;&#x5165;&#x51FA;&#x9519;&#xFF08;hugegraph-loader #18&#xFF09;</li>
 </ul>
 <h4 id="&#x5185;&#x90E8;&#x4FEE;&#x6539;">&#x5185;&#x90E8;&#x4FEE;&#x6539;</h4>
 <ul>
-<li>&#x6DFB;&#x52A0;&#x6D4B;&#x8BD5;&#x7528;&#x4F8B;&#xFF08;HugeGraph-1361&#xFF09;</li>
+<li>&#x589E;&#x52A0;&#x6301;&#x7EED;&#x96C6;&#x6210;&#x6D4B;&#x8BD5;&#xFF08;hugegraph-loader #8&#xFF09;</li>
+<li>&#x4F18;&#x5316;&#x68C0;&#x6D4B;&#x5230;&#x6587;&#x4EF6;&#x4E0D;&#x5B58;&#x5728;&#x65F6;&#x7684;&#x63D0;&#x793A;&#x4FE1;&#x606F;&#xFF08;hugegraph-loader #16&#xFF09;</li>
 </ul>
 <h3 id="tools">Tools</h3>
 <h4 id="&#x529F;&#x80FD;&#x66F4;&#x65B0;">&#x529F;&#x80FD;&#x66F4;&#x65B0;</h4>
 <ul>
-<li>backup/restore&#x4F7F;&#x7528;&#x591A;&#x7EBF;&#x7A0B;&#x52A0;&#x901F;&#xFF0C;&#x5E76;&#x589E;&#x52A0;retry&#x673A;&#x5236;&#xFF08;HugeGraph-1307&#xFF09;</li>
-<li>&#x4E00;&#x952E;&#x90E8;&#x7F72;&#x652F;&#x6301;&#x4F20;&#x5165;&#x8DEF;&#x5F84;&#x4EE5;&#x5B58;&#x653E;&#x5305;&#xFF08;HugeGraph-1325&#xFF09;</li>
-<li>&#x5B9E;&#x73B0;dump&#x56FE;&#x529F;&#x80FD;&#xFF08;&#x5185;&#x5B58;&#x6784;&#x5EFA;&#x9876;&#x70B9;&#x53CA;&#x5173;&#x8054;&#x8FB9;&#xFF09;&#xFF08;HugeGraph-1339&#xFF09;</li>
-<li>&#x589E;&#x52A0;backup-scheduler&#x529F;&#x80FD;&#xFF0C;&#x652F;&#x6301;&#x5B9A;&#x65F6;&#x5907;&#x4EFD;&#x4E14;&#x4FDD;&#x7559;&#x4E00;&#x5B9A;&#x6570;&#x76EE;&#x6700;&#x65B0;&#x5907;&#x4EFD;&#xFF08;HugeGraph-1326&#xFF09;</li>
-<li>&#x589E;&#x52A0;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x67E5;&#x8BE2;&#x548C;&#x5F02;&#x6B65;&#x6267;&#x884C;Gremlin&#x7684;&#x529F;&#x80FD;&#xFF08;HugeGraph-1357&#xFF09;</li>
+<li>&#x589E;&#x52A0; KgDumper &#xFF08;hugegraph-tools #6&#xFF09;</li>
+<li>&#x652F;&#x6301;&#x5728;&#x6062;&#x590D;&#x6A21;&#x5F0F;&#x548C;&#x5408;&#x5E76;&#x6A21;&#x5F0F;&#x4E2D;&#x6062;&#x590D;&#x56FE;&#xFF08;hugegraph-tools #9&#xFF09;</li>
 </ul>
 <h4 id="bug&#x4FEE;&#x590D;">BUG&#x4FEE;&#x590D;</h4>
 <ul>
-<li>hugegraph-tools&#x7684;backup&#x548C;restore&#x7F16;&#x7801;&#x4E3A;UTF-8&#xFF08;HugeGraph-1321&#xFF09;</li>
-<li>hugegraph-tools&#x8BBE;&#x7F6E;&#x9ED8;&#x8BA4;JVM&#x5806;&#x5927;&#x5C0F;&#x548C;&#x53D1;&#x5E03;&#x7248;&#x672C;&#x53F7;&#xFF08;HugeGraph-1340&#xFF09;</li>
-</ul>
-<h3 id="studio">Studio</h3>
-<h4 id="bug&#x4FEE;&#x590D;">BUG&#x4FEE;&#x590D;</h4>
-<ul>
-<li>HugeStudio&#x4E2D;&#x9876;&#x70B9;id&#x5305;&#x542B;&#x6362;&#x884C;&#x7B26;&#x65F6;g.V()&#x4F1A;&#x5BFC;&#x81F4;groovy&#x89E3;&#x6790;&#x51FA;&#x9519;&#xFF08;HugeGraph-1292&#xFF09;</li>
-<li>&#x9650;&#x5236;&#x8FD4;&#x56DE;&#x7684;&#x9876;&#x70B9;&#x53CA;&#x8FB9;&#x7684;&#x6570;&#x91CF;&#xFF08;HugeGraph-1333&#xFF09;</li>
-<li>&#x52A0;&#x8F7D;note&#x51FA;&#x73B0;&#x6D88;&#x5931;&#x6216;&#x8005;&#x5361;&#x4F4F;&#x60C5;&#x51B5;&#xFF08;HugeGraph-1353&#xFF09;</li>
-<li>HugeStudio&#x6253;&#x5305;&#x65F6;&#xFF0C;&#x7F16;&#x8BD1;&#x5931;&#x8D25;&#x4F46;&#x6CA1;&#x6709;&#x62A5;&#x9519;&#xFF0C;&#x5BFC;&#x81F4;&#x53D1;&#x5E03;&#x5305;&#x65E0;&#x6CD5;&#x542F;&#x52A8;&#xFF08;HugeGraph-1368&#xFF09;</li>
+<li>&#x811A;&#x672C;&#x4E2D;&#x7684;&#x5DE5;&#x5177;&#x51FD;&#x6570; get_ip &#x5728;&#x7CFB;&#x7EDF;&#x672A;&#x5B89;&#x88C5; ifconfig &#x65F6;&#x62A5;&#x9519;&#xFF08;hugegraph-tools #13&#xFF09;</li>
 </ul>
 
                                 
@@ -993,12 +1005,12 @@
 
             
                 
-                <a href="hugegraph-0.8.0-release-notes.html" class="navigation navigation-prev " aria-label="Previous page: Release-0.8.0">
+                <a href="../performance/hugegraph-loader-performance.html" class="navigation navigation-prev " aria-label="Previous page: HugeGraph-Loader Performance">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="hugegraph-0.6.1-release-notes.html" class="navigation navigation-next " aria-label="Next page: Release-0.6.1">
+                <a href="hugegraph-0.7.4-release-notes.html" class="navigation navigation-next " aria-label="Next page: Release-0.7.4">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1009,7 +1021,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Release-0.7.4","level":"8.2","depth":1,"next":{"title":"Release-0.6.1","level":"8.3","depth":1,"path":"changelog/hugegraph-0.6.1-release-notes.md","ref":"changelog/hugegraph-0.6.1-release-notes.md","articles":[]},"previous":{"title":"Release-0.8.0","level":"8.1","depth":1,"path":"changelog/hugegraph-0.8.0-release-notes.md","ref":"changelog/hugegraph-0.8.0-release-notes.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"changelog/hugegraph-0.7.4-release-notes.md","mtime":"2018-09-13T16:42:54.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-28T02:51:11.436Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Release-0.8.0","level":"8.1","depth":1,"next":{"title":"Release-0.7.4","level":"8.2","depth":1,"path":"changelog/hugegraph-0.7.4-release-notes.md","ref":"changelog/hugegraph-0.7.4-release-notes.md","articles":[]},"previous":{"title":"HugeGraph-Loader Performance","level":"7.3","depth":1,"path":"performance/hugegraph-loader-performance.md","ref":"performance/hugegraph-loader-performance.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"changelog/hugegraph-0.8.0-release-notes.md","mtime":"2018-11-23T13:54:02.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-28T02:51:11.436Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
