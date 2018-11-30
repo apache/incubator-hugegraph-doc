@@ -244,7 +244,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/crosspoints?source=1&target=
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/rings?source=1&direction=OUT&max_depth=5
+GET http://localhost:8080/graphs/{graph}/traversers/rings?source=1&direction=OUT&depth=5
 ```
 
 ##### Response Status
@@ -283,7 +283,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/rings?source=1&direction=OUT
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/rays?source=1&direction=OUT&max_depth=5
+GET http://localhost:8080/graphs/{graph}/traversers/rays?source=1&direction=OUT&depth=5
 ```
 
 ##### Response Status
