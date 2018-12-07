@@ -143,6 +143,8 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 #### 5.2 RocksDB
 
+> RocksDB是一个嵌入式的数据库，不需要手动安装部署, 要求 GCC 版本 >= 4.3.0（GLIBCXX_3.4.10），如不满足，需要提前升级 GCC
+
 修改 hugegraph.properties
 
 ```properties
@@ -151,8 +153,6 @@ serializer=binary
 rocksdb.data_path=.
 rocksdb.wal_path=.
 ```
-
-> RocksDB是一个嵌入式的数据库，直接将数据写磁盘上，不需要安装部署, 但要求编译器版本 >= GCC 4.3.0（GLIBCXX_3.4.10），如不满足，需要提前升级
 
 初始化数据库（仅第一次启动时需要）
 
@@ -171,7 +171,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 #### 5.3 Cassandra
 
-> 使用 cassandra 之前，用户需自行安装[cassandra](http://cassandra.apache.org/doc/latest/)（版本 3.0 以上）
+> 用户需自行安装 Cassandra，要求版本 3.0 以上，[下载地址](http://cassandra.apache.org/download/)
 
 修改 hugegraph.properties
 
@@ -225,6 +225,8 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 #### 5.4 ScyllaDB
 
+> 用户需自行安装 ScyllaDB，推荐版本 2.1 以上，[下载地址](https://docs.scylladb.com/getting-started/)
+
 修改 hugegraph.properties
 
 ```properties
@@ -261,6 +263,8 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 ```
 
 #### 5.5 HBase
+
+> 用户需自行安装 HBase，要求版本 2.0 以上，[下载地址](https://hbase.apache.org/downloads.html)
 
 修改 hugegraph.properties
 
