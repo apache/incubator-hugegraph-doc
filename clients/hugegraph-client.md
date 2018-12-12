@@ -348,18 +348,20 @@ interface            | param | description
 -------------------- | ----- | ---------------------------------------------------------
 by(String... fields) | files | allow to build index for multi fields for secondary index
 
-- indexType: 建立的索引类型，目前支持两种，即 Secondary 和 Range。Secondary 允许建立联合索引，支持索引前缀搜索，Range 支持数值类型的范围查询；
+- indexType: 建立的索引类型，目前支持三种，即 Secondary、Range 和 Search。Secondary 允许建立联合索引，支持索引前缀搜索，Range 支持数值类型的范围查询，Search 支持全文检索；
 
 interface   | indexType | description
 ----------- | --------- | ---------------------------------------
 secondary() | Secondary | support prefix search
-range()     | Range     | supports range search for numeric types
+range()     | Range     | support range search for numeric types and date type
+search()    | Search    | support full text search
 
 ##### 2.5.2 创建 IndexLabel
 
 ```java
 schema.indexLabel("personByAge").onV("person").by("age").range().ifNotExist().create();
 schema.indexLabel("createdByDate").onE("created").by("date").secondary().ifNotExist().create();
+schema.indexLabel("personByLived").onE("person").by("lived").search().ifNotExist().create();
 ```
 
 ##### 2.5.3 删除 IndexLabel

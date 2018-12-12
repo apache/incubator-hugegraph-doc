@@ -62,6 +62,10 @@ POST http://localhost:8080/graphs/hugegraph/graph/edges
 
 #### 2.2.2 创建多条边
 
+##### Params
+
+- check_vertex: 是否检查顶点存在(true | false)，当设置为 true 而待插入边的源顶点或目标顶点不存在时会报错。
+
 ##### Method & Url
 
 ```
