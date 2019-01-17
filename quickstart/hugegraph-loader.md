@@ -103,7 +103,7 @@ Jerry,36,Shanghai
 ```csv
 name,price
 Photoshop,999
-office,388
+Office,388
 ```
 
 ##### 3.2.2 准备边数据
@@ -170,7 +170,7 @@ office,388
     {
       "label": "created",
       "source": ["source_name"],
-      "target": ["source_name"],
+      "target": ["target_name"],
       "input": {
         "type": "file",
         "path": "edge_created.json",
