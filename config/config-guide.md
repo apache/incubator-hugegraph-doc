@@ -18,8 +18,6 @@ HugeGraphServer 内部集成了 GremlinServer 和 RestServer，而 gremlin-serve
 gremlin-server.yaml 文件默认的内容如下：
 
 ```yaml
-host: 127.0.0.1
-port: 8182
 scriptEvaluationTimeout: 30000
 # If you want to start gremlin-server for gremlin-console(web-socket),
 # please change `HttpChannelizer` to `WebSocketChannelizer` or comment this line.
@@ -88,12 +86,17 @@ ssl: {
 }
 ```
 
-上面的配置项很多，但目前只需要关注如下几个配置项：host、port、channelizer 和 graphs。
+上面的配置项很多，但目前只需要关注如下几个配置项：channelizer 和 graphs。
 
-- host：部署 GremlinServer 机器的机器名或 IP，目前 HugeGraphServer 不支持分布式部署，且GremlinServer不直接暴露给用户，此项可以不修改；
-- port：部署 GremlinServer 机器的端口，同 host，可以不修改；
 - channelizer：GremlinServer 与客户端有两种通信方式，分别是 WebSocket 和 HTTP（默认）。如果选择 WebSocket，用户可以通过 [Gremlin-Console](/clients/gremlin-console.html) 快速体验 HugeGraph 的特性，但是不支持大规模数据导入，推荐使用 HTTP 的通信方式，我们的一些外围组件都是基于 HTTP 实现的；
 - graphs：GremlinServer 启动时需要打开的图，该项是一个 map 结构，key 是图的名字，value 是该图的配置文件路径；
+
+默认GremlinServer是服务在 localhost:8182，如果需要修改，配置 host、port 即可
+
+- host：部署 GremlinServer 机器的机器名或 IP，目前 HugeGraphServer 不支持分布式部署，且GremlinServer不直接暴露给用户;
+- port：部署 GremlinServer 机器的端口；
+
+同时需要在 rest-server.properties 中增加对应的配置项 gremlinserver.url=http://host:port
 
 ### 3 rest-server.properties
 
@@ -101,7 +104,6 @@ rest-server.properties 文件的默认内容如下：
 
 ```properties
 restserver.url=http://127.0.0.1:8080
-gremlinserver.url=http://127.0.0.1:8182
 graphs=[hugegraph:conf/hugegraph.properties]
 
 max_vertices_per_batch=500
@@ -109,10 +111,11 @@ max_edges_per_batch=500
 ```
 
 - restserver.url：RestServer 提供服务的 url，根据实际环境修改；
-- gremlinserver.url：GremlinServer 为 RestServer 提供服务的 url，该配置项与 gremlin-server.yaml 中的 host 和 port 相匹配，默认可以不修改；
 - graphs：RestServer 启动时也需要打开图，该项为 map 结构，key 是图的名字，value 是该图的配置文件路径；
 
 > 注意：gremlin-server.yaml 和 rest-server.properties 都包含 graphs 配置项，而 `init-store` 命令是根据 gremlin-server.yaml 的 graphs 下的图进行初始化的。
+
+> 配置项 gremlinserver.url 是 GremlinServer 为 RestServer 提供服务的 url，该配置项默认为 http://localhost:8182，如需修改，需要和 gremlin-server.yaml 中的 host 和 port 相匹配；
 
 ### 4 hugegraph.properties
 
