@@ -1,8 +1,8 @@
 ## HugeGraph Gremlin
 
-HugeGraph支持[Apache TinkerPop 3](https://tinkerpop.apache.org)的图形遍历查询语言[Gremlin](https://tinkerpop.apache.org/gremlin.html)。 SQL是关系型数据库查询语言，而Gremlin是一种通用的图数据库查询语言，Gremlin可用于创建图的实体（Vertex和Edge）、修改实体内部属性、删除实体，也可执行图的查询操作。
+HugeGraph支持[Apache TinkerPop3](https://tinkerpop.apache.org)的图形遍历查询语言[Gremlin](https://tinkerpop.apache.org/gremlin.html)。 SQL是关系型数据库查询语言，而Gremlin是一种通用的图数据库查询语言，Gremlin可用于创建图的实体（Vertex和Edge）、修改实体内部属性、删除实体，也可执行图的查询操作。
 
-建议通过Gremlin执行图的查询和遍历，而关于图的增加、修改和删除等更新操作则通过HugeGraph的Graph Api接口进行。因为Graph Api对增加、修改和删除操作做了很多优化，执行效率比Gremlin更加高效。
+Gremlin可用于创建图的实体（Vertex和Edge）、修改实体内部属性、删除实体，更主要的是可用于执行图的查询及分析操作。
 
 ### TinkerPop Features
 
