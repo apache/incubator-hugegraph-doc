@@ -6,12 +6,12 @@
 
 #### 1.1 HugeGraph与TitanDB的异同
 
-HugeGraph和TitanDB都是基于[Apache TinkerPop 3](https://tinkerpop.apache.org)框架的图数据库，均支持[Gremlin](https://tinkerpop.apache
+HugeGraph和TitanDB都是基于[Apache TinkerPop3](https://tinkerpop.apache.org)框架的图数据库，均支持[Gremlin](https://tinkerpop.apache
 .org/gremlin.html)图查询语言，在使用方法和接口方面具有很多相似的地方。然而HugeGraph是全新设计开发的，其代码结构清晰，功能较为丰富，接口更为友好等特点。
 
 HugeGraph相对于TitanDB而言，其主要特点如下：
 
-- HugeGraph拥有较为完善的工具组件。HugeGraph目前有HugeApi、HugeGraph-Client、HugeGraph-Loader、HugeGraph-Studio、HugeGraph-Spark等完善的工具组件，可以完成系统集成、数据载入、图可视化查询、Spark 连接等功能；
+- HugeGraph目前有HugeGraph-API、HugeGraph-Client、HugeGraph-Loader、HugeGraph-Studio、HugeGraph-Spark等完善的工具组件，可以完成系统集成、数据载入、图可视化查询、Spark 连接等功能；
 - HugeGraph具有Server和Client的概念，第三方系统可以通过jar引用、client、api等多种方式接入，而TitanDB仅支持jar引用方式接入。
 - HugeGraph的Schema需要显式定义，所有的插入和查询均需要通过严格的schema校验，目前暂不支持schema的隐式创建。
 - HugeGraph充分利用后端存储系统的特点来实现数据高效存取，而TitanDB以统一的Kv结构无视后端的差异性。
@@ -45,15 +45,9 @@ brother | edge | character           | character           | -
 pet     | edge | character           | character           | -
 lives   | edge | character           | location            | reason
 
-HugeGraph需要进行严格的schema校验，对于edge label而言需要明确每一个edge label的source vertex label和target vertex label， 且相同的一组source vertex label和target vertex label只能有一个唯一的edge label。 因此，如果character和character有一种关系为father，在同一个图内部god和human之间的边就不能叫father。
+在HugeGraph中，每个edge label只能作用于一对source vertex label和target vertex label。也就是说，如果一个图内定义了一种关系father连接character和character，那farther就不能再连接其他的vertex labels。
 
-关于`Edge Label` 强约束 "相同的一组`src vertex label` 和`tgt vertex label`只能有一个唯一的`edge label`" 的原因有2个：
-
-1. 如果`source`和`target`有多种`edge label`, 同时每一种`edge label`拥有不同的属性，那么`edge label`的属性就可能产生歧义，无法区分属性到底是属于哪条`edge`的。
-
-2. HugeGraph的`edgeId`是通过`src+label+tgt`拼接而成，同时HugeGraph支持多种Id生成策略，在解析`edgeId`的时候需要获取`vertex label`中的Id策略配置才能正确解析`vertexId`。 在`edge label` 满足 " 相同的一组`source vertex label`和`target vertex label`只能有一个唯一的`edge label` "约束的前提下， 可以通过`edge label`获取唯一的`src vertex label`和`tgt vertex label`，而不需要冗余存储`src vertex label`和`tgt vertex label`信息。
-
-因此本例子将原TitanDB中的monster, god, human, demigod均使用相同的`vertex label: character`来表示, 同时增加属性type来标识人物的类型。 `edge label`与原TitanDB保持一致。当然为了满足`edge label`约束，也可以通过调整`edge label`的`name`来实现。
+因此本例子将原TitanDB中的monster, god, human, demigod均使用相同的`vertex label: character`来表示, 同时增加属性type来标识人物的类型。`edge label`与原TitanDB保持一致。当然为了满足`edge label`约束，也可以通过调整`edge label`的`name`来实现。
 
 ### 2 Graph Schema and Data Ingest Examples
 
