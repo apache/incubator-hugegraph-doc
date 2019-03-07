@@ -65,7 +65,8 @@ POST http://localhost:8080/graphs/hugegraph/schema/edgelabels
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/schema/edgelabels?action=append
+PUT http://localhost:8080/graphs/hugegraph/schema/edgelabels/created?action
+=append
 ```
 
 ##### Request Body
