@@ -24,6 +24,7 @@ server                                                                          
 
 ### Release Notes
 
+- 2019-04-17: Release HugeGraph 0.9.2，see [HugeGraph 0.9.2 Release Notes](changelog/hugegraph-0.9.2-release-notes.md)
 - 2018-11-23: Release HugeGraph 0.8.0，see [HugeGraph 0.8.0 Release Notes](changelog/hugegraph-0.8.0-release-notes.md)
 - 2018-07-30: Release HugeGraph 0.7.4，see [HugeGraph 0.7.4 Release Notes](changelog/hugegraph-0.7.4-release-notes.md)
 - 2018-06-01: Release HugeGraph 0.6.1，see [HugeGraph 0.6.1 Release Notes](changelog/hugegraph-0.6.1-release-notes.md)
