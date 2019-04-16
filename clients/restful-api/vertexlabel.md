@@ -1,6 +1,6 @@
 ### 1.2 VertexLabel
 
-假设已经创建好了1.1.2中列出来的那些 PropertyKeys
+假设已经创建好了1.1.3中列出来的 PropertyKeys
 
 #### 1.2.1 创建一个VertexLabel
 

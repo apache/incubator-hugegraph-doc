@@ -36,7 +36,7 @@
     * [Edge](clients/restful-api/edge.md)
     * [Traverser](clients/restful-api/traverser.md)
     * [Variable](clients/restful-api/variable.md)
-    * [Graph](clients/restful-api/graph.md)
+    * [Graphs](clients/restful-api/graphs.md)
     * [Task](clients/restful-api/task.md)
     * [Rebuild](clients/restful-api/rebuild.md)
     * [Gremlin](clients/restful-api/gremlin.md)

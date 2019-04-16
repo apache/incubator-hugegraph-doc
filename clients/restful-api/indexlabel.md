@@ -1,6 +1,6 @@
 ### 1.4 IndexLabel
 
-假设已经创建好了1.1.2中的 PropertyKeys 、1.2.2中的 VertexLabels 以及 1.3.2中的 EdgeLabels
+假设已经创建好了1.1.3中的 PropertyKeys 、1.2.3中的 VertexLabels 以及 1.3.3中的 EdgeLabels
 
 #### 1.4.1 创建一个IndexLabel
 
