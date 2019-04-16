@@ -1,6 +1,6 @@
 ### 1.3 EdgeLabel
 
-假设已经创建好了1.1.2中的 PropertyKeys 和 1.2.2中的 VertexLabels
+假设已经创建好了1.1.3中的 PropertyKeys 和 1.2.3中的 VertexLabels
 
 #### 1.3.1 创建一个EdgeLabel
 

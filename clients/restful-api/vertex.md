@@ -16,7 +16,7 @@ CUSTOMIZE_NUMBER | number
 
 -------------------------------------------------------------------
 
-假设已经创建好了上述的各种schema
+接下来的示例均假设已经创建好了前述的各种schema信息
 
 #### 2.1.1 创建一个顶点
 
@@ -440,11 +440,11 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?page=001000100853313a7
 			}
 		}
 	],
-	"page": "null"
+	"page": null
 }
 ```
 
-此时`"page": "null"`表示已经没有下一页了。
+此时`"page": null`表示已经没有下一页了。
 
 #### 2.1.6 根据Id获取顶点
 

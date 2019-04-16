@@ -1,4 +1,4 @@
-### 5.1 Graph
+### 5.1 Graphs
 
 #### 5.1.1 列出数据库中全部的图
 
@@ -48,7 +48,7 @@ GET http://localhost:8080/graphs/hugegraph
 }
 ```
 
-#### 5.1.3 清空某个图的全部数据，包括schema、vertex、edge和索引等，**该操作需要管理员权限**
+#### 5.1.3 清空某个图的全部数据，包括schema、vertex、edge和index等，**该操作需要管理员权限**
 
 ##### Params
 
@@ -145,7 +145,7 @@ GET http://localhost:8080/graphs/hugegraph/mode
 PUT http://localhost:8080/graphs/hugegraph/mode
 ```
 
-##### Response Body
+##### Request Body
 
 ```
 "RESTORING"

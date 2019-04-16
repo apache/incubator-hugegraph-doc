@@ -13,7 +13,7 @@ HugeGraph-Server通过HugeGraph-API基于HTTP协议为Client提供操作图的�
   - [Edge](restful-api/edge.md)
 - [Traverser](restful-api/traverser.md)
 - [Variable](restful-api/variable.md)
-- [Graphs Operation](restful-api/graph.md)
+- [Graphs](restful-api/graphs.md)
 - [Task](restful-api/task.md)
 - [Gremlin](restful-api/gremlin.md)
 - [Other](restful-api/other.md)

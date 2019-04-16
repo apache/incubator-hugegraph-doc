@@ -587,7 +587,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/rays?source="1:marko"&max_de
 		- labels：顶点的类型列表
 		- properties：通过属性的值查询起始顶点
 		> 注意：properties中的属性值可以是列表，表示只要key对应的value在列表中就可以
-		
+
 - steps: 表示从起始顶点走过的路径规则，是一组Step的列表。必填项。每个Step的结构如下：
 	- direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
 	- labels：边的类型列表
@@ -775,7 +775,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/customizedpaths
 		- labels：顶点的类型列表
 		- properties：通过属性的值查询起始顶点
 		> 注意：properties中的属性值可以是列表，表示只要key对应的value在列表中就可以
-		
+
 - path_patterns: 表示从起始顶点走过的路径规则，是一组规则的列表。必填项。每个规则是一个PathPattern
 	- 每个PathPattern是一组Step列表，每个Step结构如下：
 		- direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
@@ -1255,7 +1255,7 @@ GET http://localhost:8080/graphs/hugegraph/traversers/vertices/scan?start=0&end=
 
 ##### 3.2.10.4 适用场景
 
-- 按id列表查询顶点可用于批量查询顶点，比如在path查询到多条路径之后，可以进一步查询某条路径的所有顶点属性。
+- 按id列表查询顶点，可用于批量查询顶点，比如在path查询到多条路径之后，可以进一步查询某条路径的所有顶点属性。
 - 获取分片和按分片查询顶点，可以用来遍历全部顶点
 
 #### 3.2.11 Edges
@@ -1479,5 +1479,5 @@ GET http://localhost:8080/graphs/hugegraph/traversers/edges/scan?start=0&end=322
 
 ##### 3.2.11.4 适用场景
 
-- 按id列表查询边可用于批量查询边
+- 按id列表查询边，可用于批量查询边
 - 获取分片和按分片查询边，可以用来遍历全部边
