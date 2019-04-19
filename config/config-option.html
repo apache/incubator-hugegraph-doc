@@ -532,12 +532,12 @@
             
         </li>
     
-        <li class="chapter " data-level="6.1.9" data-path="../clients/restful-api/graph.html">
+        <li class="chapter " data-level="6.1.9" data-path="../clients/restful-api/graphs.html">
             
-                <a href="../clients/restful-api/graph.html">
+                <a href="../clients/restful-api/graphs.html">
             
                     
-                    Graph
+                    Graphs
             
                 </a>
             
@@ -739,7 +739,20 @@
         
         
     
-        <li class="chapter " data-level="8.1" data-path="../changelog/hugegraph-0.8.0-release-notes.html">
+        <li class="chapter " data-level="8.1" data-path="../changelog/hugegraph-0.9.2-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.9.2-release-notes.html">
+            
+                    
+                    Release-0.9.2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.2" data-path="../changelog/hugegraph-0.8.0-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.8.0-release-notes.html">
             
@@ -752,7 +765,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.2" data-path="../changelog/hugegraph-0.7.4-release-notes.html">
+        <li class="chapter " data-level="8.3" data-path="../changelog/hugegraph-0.7.4-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.7.4-release-notes.html">
             
@@ -765,7 +778,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.3" data-path="../changelog/hugegraph-0.6.1-release-notes.html">
+        <li class="chapter " data-level="8.4" data-path="../changelog/hugegraph-0.6.1-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.6.1-release-notes.html">
             
@@ -778,7 +791,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.4" data-path="../changelog/hugegraph-0.5.6-release-notes.html">
+        <li class="chapter " data-level="8.5" data-path="../changelog/hugegraph-0.5.6-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.5.6-release-notes.html">
             
@@ -791,7 +804,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.5" data-path="../changelog/hugegraph-0.4.4-release-notes.html">
+        <li class="chapter " data-level="8.6" data-path="../changelog/hugegraph-0.4.4-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.4.4-release-notes.html">
             
@@ -804,7 +817,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.6" data-path="../changelog/hugegraph-0.3.3-release-notes.html">
+        <li class="chapter " data-level="8.7" data-path="../changelog/hugegraph-0.3.3-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.3.3-release-notes.html">
             
@@ -817,7 +830,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.7" data-path="../changelog/hugegraph-0.2.4-release-notes.html">
+        <li class="chapter " data-level="8.8" data-path="../changelog/hugegraph-0.2.4-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.2.4-release-notes.html">
             
@@ -830,7 +843,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.8" data-path="../changelog/hugegraph-0.2-release-notes.html">
+        <li class="chapter " data-level="8.9" data-path="../changelog/hugegraph-0.2-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.2-release-notes.html">
             
@@ -906,7 +919,7 @@
 <tr>
 <td>authentication</td>
 <td>authenticator: com.baidu.hugegraph.auth.StandardAuthenticator, config: {tokens: conf/rest-server.properties}</td>
-<td>The authenticator and config(contains tokens path) of authentication mechanism</td>
+<td>The authenticator and config(contains tokens path) of authentication mechanism.</td>
 </tr>
 </tbody>
 </table>
@@ -924,14 +937,19 @@
 </thead>
 <tbody>
 <tr>
+<td>graphs</td>
+<td>[hugegraph:conf/hugegraph.properties]</td>
+<td>The map of graphs&apos; name and config file.</td>
+</tr>
+<tr>
 <td>restserver.url</td>
 <td><a href="http://127.0.0.1:8080" target="_blank">http://127.0.0.1:8080</a></td>
 <td>The url for listening of rest-api server.</td>
 </tr>
 <tr>
-<td>graphs</td>
-<td>[hugegraph:conf/hugegraph.properties]</td>
-<td>The map of graphs&apos; name and config file.</td>
+<td>restserver.max_worker_threads</td>
+<td>2 * CPUs</td>
+<td>The maximum worker threads of rest server.</td>
 </tr>
 <tr>
 <td>gremlinserver.url</td>
@@ -966,7 +984,7 @@
 <tr>
 <td>auth.authenticator</td>
 <td></td>
-<td>The class path of authenticator implemention. e.g., com.baidu.hugegraph.auth.StandardAuthenticator</td>
+<td>The class path of authenticator implemention. e.g., com.baidu.hugegraph.auth.StandardAuthenticator.</td>
 </tr>
 <tr>
 <td>auth.admin_token</td>
@@ -996,17 +1014,22 @@
 <tr>
 <td>backend</td>
 <td>rocksdb</td>
-<td>The data store type, available values are [memory, rocksdb, cassandra, scylladb, hbase, mysql]</td>
+<td>The data store type, available values are [memory, rocksdb, cassandra, scylladb, hbase, mysql].</td>
 </tr>
 <tr>
 <td>serializer</td>
 <td>binary</td>
-<td>The serializer for backend store, available values are [text, binary, cassandra, hbase, mysql]</td>
+<td>The serializer for backend store, available values are [text, binary, cassandra, hbase, mysql].</td>
 </tr>
 <tr>
 <td>store</td>
 <td>hugegraph</td>
 <td>The database name like Cassandra Keyspace.</td>
+</tr>
+<tr>
+<td>rate_limit</td>
+<td>0</td>
+<td>The max rate(items/s) to add/update/delete vertices/edges.</td>
 </tr>
 <tr>
 <td>store.graph</td>
@@ -1031,7 +1054,7 @@
 <tr>
 <td>vertex.check_customzied_id_exist</td>
 <td>true</td>
-<td>Whether to check the vertices exist for those using customized id strategy</td>
+<td>Whether to check the vertices exist for those using customized id strategy.</td>
 </tr>
 <tr>
 <td>vertex.tx_capacity</td>
@@ -1064,11 +1087,6 @@
 <td>The expire time in seconds of edge cache.</td>
 </tr>
 <tr>
-<td>gremlin.graph</td>
-<td>com.baidu.hugegraph.HugeFactory</td>
-<td>Gremlin entrence to create graph.</td>
-</tr>
-<tr>
 <td>schema.cache_capacity</td>
 <td>100000</td>
 <td>The max cache size(items) of schema data.</td>
@@ -1084,6 +1102,11 @@
 <td>Whether to delete schema synchronously.</td>
 </tr>
 <tr>
+<td>query.page_size</td>
+<td>500</td>
+<td>The size of each page when query using paging.</td>
+</tr>
+<tr>
 <td>task.wait_timeout</td>
 <td>10</td>
 <td>Timeout in seconds for waiting for the task to complete,such as when truncating or clearing the backend.</td>
@@ -1091,12 +1114,12 @@
 <tr>
 <td>search.text_analyzer</td>
 <td>ikanalyzer</td>
-<td>Choose a text analyzer for searching the vertex/edge properties, available type are [word, ansj, hanlp, smartcn, jieba, jcseg, mmseg4j, ikanalyzer]</td>
+<td>Choose a text analyzer for searching the vertex/edge properties, available type are [word, ansj, hanlp, smartcn, jieba, jcseg, mmseg4j, ikanalyzer].</td>
 </tr>
 <tr>
 <td>search.text_analyzer_mode</td>
 <td>smart</td>
-<td>Specify the mode for the text analyzer, the available mode of analyzer are {word: [MaximumMatching, ReverseMaximumMatching, MinimumMatching, ReverseMinimumMatching, BidirectionalMaximumMatching, BidirectionalMinimumMatching, BidirectionalMaximumMinimumMatching, FullSegmentation, MinimalWordCount, MaxNgramScore, PureEnglish], ansj: [BaseAnalysis, IndexAnalysis, ToAnalysis, NlpAnalysis], hanlp: [standard, nlp, index, nShort, shortest, speed], smartcn: [], jieba: [SEARCH, INDEX], jcseg: [Simple, Complex], mmseg4j: [Simple, Complex, MaxWord], ikanalyzer: [smart, max_word]}</td>
+<td>Specify the mode for the text analyzer, the available mode of analyzer are {word: [MaximumMatching, ReverseMaximumMatching, MinimumMatching, ReverseMinimumMatching, BidirectionalMaximumMatching, BidirectionalMinimumMatching, BidirectionalMaximumMinimumMatching, FullSegmentation, MinimalWordCount, MaxNgramScore, PureEnglish], ansj: [BaseAnalysis, IndexAnalysis, ToAnalysis, NlpAnalysis], hanlp: [standard, nlp, index, nShort, shortest, speed], smartcn: [], jieba: [SEARCH, INDEX], jcseg: [Simple, Complex], mmseg4j: [Simple, Complex, MaxWord], ikanalyzer: [smart, max_word]}.</td>
 </tr>
 <tr>
 <td>snowflake.datecenter_id</td>
@@ -1114,9 +1137,9 @@
 <td>The worker id of snowflake id generator.</td>
 </tr>
 <tr>
-<td>rate_limit</td>
-<td>0</td>
-<td>The max rate(items/s) to add/update/delete vertices/edges.</td>
+<td>gremlin.graph</td>
+<td>com.baidu.hugegraph.HugeFactory</td>
+<td>Gremlin entrence to create graph.</td>
 </tr>
 </tbody>
 </table>
@@ -1156,12 +1179,12 @@
 <tr>
 <td>cassandra.keyspace.strategy</td>
 <td>SimpleStrategy</td>
-<td>The keyspace strategy.</td>
+<td>The replication strategy of keyspace, valid value is SimpleStrategy or NetworkTopologyStrategy.</td>
 </tr>
 <tr>
 <td>cassandra.keyspace.replication</td>
-<td>3</td>
-<td>The keyspace replication factor.</td>
+<td>[3]</td>
+<td>The keyspace replication factor of SimpleStrategy, like &apos;[3]&apos;.Or replicas in each datacenter of NetworkTopologyStrategy, like &apos;[dc1:2,dc2:1]&apos;.</td>
 </tr>
 <tr>
 <td>cassandra.username</td>
@@ -1223,7 +1246,7 @@
 <tr>
 <td>rocksdb.data_disks</td>
 <td>[]</td>
-<td>The optimized disks for storing data of RocksDB. The format of each element: <code>STORE/TABLE: /path/to/disk</code>.Allowed keys are [graph/vertex, graph/edge_out, graph/edge_in, graph/secondary_index, graph/range_index]</td>
+<td>The optimized disks for storing data of RocksDB. The format of each element: <code>STORE/TABLE: /path/to/disk</code>.Allowed keys are [graph/vertex, graph/edge_out, graph/edge_in, graph/secondary_index, graph/range_index].</td>
 </tr>
 <tr>
 <td>rocksdb.data_path</td>
@@ -1350,7 +1373,17 @@
 <tr>
 <td>hbase.port</td>
 <td>2181</td>
-<td>The port address of HBase zookeeper.  </td>
+<td>The port address of HBase zookeeper.</td>
+</tr>
+<tr>
+<td>hbase.threads_max</td>
+<td>64</td>
+<td>The max threads num of hbase connections.</td>
+</tr>
+<tr>
+<td>hbase.znode_parent</td>
+<td>/hbase</td>
+<td>The znode parent path of HBase zookeeper.</td>
 </tr>
 </tbody>
 </table>
@@ -1448,7 +1481,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Config Options","level":"4.2","depth":1,"next":{"title":"Config Authentication","level":"4.3","depth":1,"path":"config/config-authentication.md","ref":"config/config-authentication.md","articles":[]},"previous":{"title":"Config Guide","level":"4.1","depth":1,"path":"config/config-guide.md","ref":"config/config-guide.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"config/config-option.md","mtime":"2018-11-28T02:52:29.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-12-03T03:39:02.779Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Config Options","level":"4.2","depth":1,"next":{"title":"Config Authentication","level":"4.3","depth":1,"path":"config/config-authentication.md","ref":"config/config-authentication.md","articles":[]},"previous":{"title":"Config Guide","level":"4.1","depth":1,"path":"config/config-guide.md","ref":"config/config-guide.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"config/config-option.md","mtime":"2019-04-19T10:14:11.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-04-19T10:32:05.917Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

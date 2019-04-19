@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Gremlin · GitBook</title>
+        <title>Graphs · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -66,10 +66,10 @@
     
 
     
-    <link rel="next" href="other.html" />
+    <link rel="next" href="task.html" />
     
     
-    <link rel="prev" href="rebuild.html" />
+    <link rel="prev" href="variable.html" />
     
 
     </head>
@@ -116,7 +116,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >Gremlin</a>
+        <a href="../.." >Graphs</a>
     </h1>
 </div>
 
@@ -532,7 +532,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.1.9" data-path="graphs.html">
+        <li class="chapter active" data-level="6.1.9" data-path="graphs.html">
             
                 <a href="graphs.html">
             
@@ -571,7 +571,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="6.1.12" data-path="gremlin.html">
+        <li class="chapter " data-level="6.1.12" data-path="gremlin.html">
             
                 <a href="gremlin.html">
             
@@ -880,199 +880,106 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h3 id="71-gremlin">7.1 Gremlin</h3>
-<h4 id="711-&#x5411;hugegraphserver&#x53D1;&#x9001;gremlin&#x8BED;&#x53E5;&#xFF08;get&#xFF09;&#xFF0C;&#x540C;&#x6B65;&#x6267;&#x884C;">7.1.1 &#x5411;HugeGraphServer&#x53D1;&#x9001;gremlin&#x8BED;&#x53E5;&#xFF08;GET&#xFF09;&#xFF0C;&#x540C;&#x6B65;&#x6267;&#x884C;</h4>
-<h5 id="params">Params</h5>
-<ul>
-<li>gremlin: &#x8981;&#x53D1;&#x9001;&#x7ED9;<code>HugeGraphServer</code>&#x6267;&#x884C;&#x7684;<code>gremlin</code>&#x8BED;&#x53E5;</li>
-<li>bindings: &#x53EF;&#x4EE5;&#x7ED9;<code>gremlin</code>&#x8BED;&#x53E5;&#x4E2D;&#x7684;&#x53D8;&#x91CF;&#x7ED1;&#x5B9A;&#x503C;</li>
-<li>language: &#x53D1;&#x9001;&#x8BED;&#x53E5;&#x7684;&#x8BED;&#x8A00;&#x7C7B;&#x578B;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;<code>gremlin-groovy</code></li>
-<li>aliases: &#x4E3A;&#x5B58;&#x5728;&#x4E8E;&#x56FE;&#x7A7A;&#x95F4;&#x7684;&#x5DF2;&#x6709;&#x53D8;&#x91CF;&#x6DFB;&#x52A0;&#x522B;&#x540D;</li>
-</ul>
-<p><strong>&#x67E5;&#x8BE2;&#x9876;&#x70B9;</strong></p>
+                                <h3 id="51-graphs">5.1 Graphs</h3>
+<h4 id="511-&#x5217;&#x51FA;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x5168;&#x90E8;&#x7684;&#x56FE;">5.1.1 &#x5217;&#x51FA;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x5168;&#x90E8;&#x7684;&#x56FE;</h4>
 <h5 id="method--url">Method &amp; Url</h5>
-<pre><code>GET http://127.0.0.1:8080/gremlin?gremlin=hugegraph.traversal().V(&apos;1:marko&apos;)
+<pre><code>GET http://localhost:8080/graphs
 </code></pre><h5 id="response-status">Response Status</h5>
 <pre><code class="lang-json"><span class="hljs-number">200</span>
 </code></pre>
 <h5 id="response-body">Response Body</h5>
 <pre><code class="lang-json">{
-    <span class="hljs-string">&quot;requestId&quot;</span>: <span class="hljs-string">&quot;c6ef47a8-b634-4b07-9d38-6b3b69a3a556&quot;</span>,
-    <span class="hljs-string">&quot;status&quot;</span>: {
-        <span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,
-        <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">200</span>,
-        <span class="hljs-string">&quot;attributes&quot;</span>: {}
-    },
-    <span class="hljs-string">&quot;result&quot;</span>: {
-        <span class="hljs-string">&quot;data&quot;</span>: [{
-            <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;1:marko&quot;</span>,
-            <span class="hljs-string">&quot;label&quot;</span>: <span class="hljs-string">&quot;person&quot;</span>,
-            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;vertex&quot;</span>,
-            <span class="hljs-string">&quot;properties&quot;</span>: {
-                <span class="hljs-string">&quot;city&quot;</span>: [{
-                    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;1:marko&gt;city&quot;</span>,
-                    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;Beijing&quot;</span>
-                }],
-                <span class="hljs-string">&quot;name&quot;</span>: [{
-                    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;1:marko&gt;name&quot;</span>,
-                    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;marko&quot;</span>
-                }],
-                <span class="hljs-string">&quot;age&quot;</span>: [{
-                    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;1:marko&gt;age&quot;</span>,
-                    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">29</span>
-                }]
-            }
-        }],
-        <span class="hljs-string">&quot;meta&quot;</span>: {}
-    }
+    <span class="hljs-string">&quot;graphs&quot;</span>: [
+        <span class="hljs-string">&quot;hugegraph&quot;</span>,
+        <span class="hljs-string">&quot;hugegraph1&quot;</span>
+    ]
 }
 </code></pre>
-<h4 id="712-&#x5411;hugegraphserver&#x53D1;&#x9001;gremlin&#x8BED;&#x53E5;&#xFF08;post&#xFF09;&#xFF0C;&#x540C;&#x6B65;&#x6267;&#x884C;">7.1.2 &#x5411;HugeGraphServer&#x53D1;&#x9001;gremlin&#x8BED;&#x53E5;&#xFF08;POST&#xFF09;&#xFF0C;&#x540C;&#x6B65;&#x6267;&#x884C;</h4>
+<h4 id="512-&#x67E5;&#x770B;&#x67D0;&#x4E2A;&#x56FE;&#x7684;&#x4FE1;&#x606F;">5.1.2 &#x67E5;&#x770B;&#x67D0;&#x4E2A;&#x56FE;&#x7684;&#x4FE1;&#x606F;</h4>
 <h5 id="method--url">Method &amp; Url</h5>
-<pre><code>POST http://localhost:8080/gremlin
-</code></pre><p><strong>&#x67E5;&#x8BE2;&#x9876;&#x70B9;</strong></p>
-<h5 id="request-body">Request Body</h5>
-<pre><code class="lang-json">{
-    <span class="hljs-string">&quot;gremlin&quot;</span>: <span class="hljs-string">&quot;hugegraph.traversal().V(&apos;1:marko&apos;)&quot;</span>,
-    <span class="hljs-string">&quot;bindings&quot;</span>: {},
-    <span class="hljs-string">&quot;language&quot;</span>: <span class="hljs-string">&quot;gremlin-groovy&quot;</span>,
-    <span class="hljs-string">&quot;aliases&quot;</span>: {}
-}
-</code></pre>
-<h5 id="response-status">Response Status</h5>
+<pre><code>GET http://localhost:8080/graphs/hugegraph
+</code></pre><h5 id="response-status">Response Status</h5>
 <pre><code class="lang-json"><span class="hljs-number">200</span>
 </code></pre>
 <h5 id="response-body">Response Body</h5>
 <pre><code class="lang-json">{
-    <span class="hljs-string">&quot;requestId&quot;</span>: <span class="hljs-string">&quot;c6ef47a8-b634-4b07-9d38-6b3b69a3a556&quot;</span>,
-    <span class="hljs-string">&quot;status&quot;</span>: {
-        <span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,
-        <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">200</span>,
-        <span class="hljs-string">&quot;attributes&quot;</span>: {}
-    },
-    <span class="hljs-string">&quot;result&quot;</span>: {
-        <span class="hljs-string">&quot;data&quot;</span>: [{
-            <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;1:marko&quot;</span>,
-            <span class="hljs-string">&quot;label&quot;</span>: <span class="hljs-string">&quot;person&quot;</span>,
-            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;vertex&quot;</span>,
-            <span class="hljs-string">&quot;properties&quot;</span>: {
-                <span class="hljs-string">&quot;city&quot;</span>: [{
-                    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;1:marko&gt;city&quot;</span>,
-                    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;Beijing&quot;</span>
-                }],
-                <span class="hljs-string">&quot;name&quot;</span>: [{
-                    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;1:marko&gt;name&quot;</span>,
-                    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;marko&quot;</span>
-                }],
-                <span class="hljs-string">&quot;age&quot;</span>: [{
-                    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;1:marko&gt;age&quot;</span>,
-                    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">29</span>
-                }]
-            }
-        }],
-        <span class="hljs-string">&quot;meta&quot;</span>: {}
-    }
+    <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;hugegraph&quot;</span>,
+    <span class="hljs-string">&quot;backend&quot;</span>: <span class="hljs-string">&quot;cassandra&quot;</span>
 }
 </code></pre>
-<p>&#x6CE8;&#x610F;&#xFF1A;</p>
-<blockquote>
-<p>&#x8FD9;&#x91CC;&#x662F;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x56FE;&#x5BF9;&#x8C61;&#xFF08;hugegraph&#xFF09;&#xFF0C;&#x5148;&#x83B7;&#x53D6;&#x5176;&#x904D;&#x5386;&#x5668;&#xFF08;traversal()&#xFF09;&#xFF0C;&#x518D;&#x83B7;&#x53D6;&#x9876;&#x70B9;&#x3002;
-&#x4E0D;&#x80FD;&#x76F4;&#x63A5;&#x5199;&#x6210;<code>graph.traversal().V()</code>&#x6216;<code>g.V()</code>&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;<code>&quot;aliases&quot;: {&quot;graph&quot;: &quot;hugegraph&quot;, &quot;g&quot;: &quot;__g_hugegraph&quot;}</code>
-&#x4E3A;&#x56FE;&#x548C;&#x904D;&#x5386;&#x5668;&#x6DFB;&#x52A0;&#x522B;&#x540D;&#x540E;&#x4F7F;&#x7528;&#x522B;&#x540D;&#x64CD;&#x4F5C;&#x3002;&#x5176;&#x4E2D;&#xFF0C;<code>hugegraph</code>&#x662F;&#x539F;&#x751F;&#x5B58;&#x5728;&#x7684;&#x53D8;&#x91CF;&#xFF0C;<code>__g_hugegraph</code>&#x662F;<code>HugeGraphServer</code>&#x989D;&#x5916;&#x6DFB;&#x52A0;&#x7684;&#x53D8;&#x91CF;&#xFF0C;
-&#x6BCF;&#x4E2A;&#x56FE;&#x90FD;&#x4F1A;&#x5B58;&#x5728;&#x4E00;&#x4E2A;&#x5BF9;&#x5E94;&#x7684;&#x8FD9;&#x6837;&#x683C;&#x5F0F;&#xFF08;<em>_g</em>${graph}&#xFF09;&#x7684;&#x904D;&#x5386;&#x5668;&#x5BF9;&#x8C61;&#x3002;</p>
-<p>&#x54CD;&#x5E94;&#x4F53;&#x7684;&#x7ED3;&#x6784;&#x4E0E;&#x5176;&#x4ED6; Vertex &#x6216; Edge &#x7684; Restful API&#x7684;&#x7ED3;&#x6784;&#x6709;&#x533A;&#x522B;&#xFF0C;&#x7528;&#x6237;&#x53EF;&#x80FD;&#x9700;&#x8981;&#x81EA;&#x884C;&#x89E3;&#x6790;&#x3002;</p>
-</blockquote>
-<p><strong>&#x67E5;&#x8BE2;&#x8FB9;</strong></p>
-<h5 id="request-body">Request Body</h5>
-<pre><code class="lang-json">{
-    <span class="hljs-string">&quot;gremlin&quot;</span>: <span class="hljs-string">&quot;g.E(&apos;S1:marko&gt;2&gt;&gt;S2:lop&apos;)&quot;</span>,
-    <span class="hljs-string">&quot;bindings&quot;</span>: {},
-    <span class="hljs-string">&quot;language&quot;</span>: <span class="hljs-string">&quot;gremlin-groovy&quot;</span>,
-    <span class="hljs-string">&quot;aliases&quot;</span>: {
-        <span class="hljs-string">&quot;graph&quot;</span>: <span class="hljs-string">&quot;hugegraph&quot;</span>, 
-        <span class="hljs-string">&quot;g&quot;</span>: <span class="hljs-string">&quot;__g_hugegraph&quot;</span>
-    }
-}
-</code></pre>
-<h5 id="response-status">Response Status</h5>
-<pre><code class="lang-json"><span class="hljs-number">200</span>
-</code></pre>
-<h5 id="response-body">Response Body</h5>
-<pre><code class="lang-json">{
-    <span class="hljs-string">&quot;requestId&quot;</span>: <span class="hljs-string">&quot;3f117cd4-eedc-4e08-a106-ee01d7bb8249&quot;</span>,
-    <span class="hljs-string">&quot;status&quot;</span>: {
-        <span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,
-        <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">200</span>,
-        <span class="hljs-string">&quot;attributes&quot;</span>: {}
-    },
-    <span class="hljs-string">&quot;result&quot;</span>: {
-        <span class="hljs-string">&quot;data&quot;</span>: [{
-            <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;S1:marko&gt;2&gt;&gt;S2:lop&quot;</span>,
-            <span class="hljs-string">&quot;label&quot;</span>: <span class="hljs-string">&quot;created&quot;</span>,
-            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;edge&quot;</span>,
-            <span class="hljs-string">&quot;inVLabel&quot;</span>: <span class="hljs-string">&quot;software&quot;</span>,
-            <span class="hljs-string">&quot;outVLabel&quot;</span>: <span class="hljs-string">&quot;person&quot;</span>,
-            <span class="hljs-string">&quot;inV&quot;</span>: <span class="hljs-string">&quot;2:lop&quot;</span>,
-            <span class="hljs-string">&quot;outV&quot;</span>: <span class="hljs-string">&quot;1:marko&quot;</span>,
-            <span class="hljs-string">&quot;properties&quot;</span>: {
-                <span class="hljs-string">&quot;weight&quot;</span>: <span class="hljs-number">0.4</span>,
-                <span class="hljs-string">&quot;date&quot;</span>: <span class="hljs-string">&quot;20171210&quot;</span>
-            }
-        }],
-        <span class="hljs-string">&quot;meta&quot;</span>: {}
-    }
-}
-</code></pre>
-<h4 id="713-&#x5411;hugegraphserver&#x53D1;&#x9001;gremlin&#x8BED;&#x53E5;&#xFF08;post&#xFF09;&#xFF0C;&#x5F02;&#x6B65;&#x6267;&#x884C;">7.1.3 &#x5411;HugeGraphServer&#x53D1;&#x9001;gremlin&#x8BED;&#x53E5;&#xFF08;POST&#xFF09;&#xFF0C;&#x5F02;&#x6B65;&#x6267;&#x884C;</h4>
+<h4 id="513-&#x6E05;&#x7A7A;&#x67D0;&#x4E2A;&#x56FE;&#x7684;&#x5168;&#x90E8;&#x6570;&#x636E;&#xFF0C;&#x5305;&#x62EC;schema&#x3001;vertex&#x3001;edge&#x548C;index&#x7B49;&#xFF0C;&#x8BE5;&#x64CD;&#x4F5C;&#x9700;&#x8981;&#x7BA1;&#x7406;&#x5458;&#x6743;&#x9650;">5.1.3 &#x6E05;&#x7A7A;&#x67D0;&#x4E2A;&#x56FE;&#x7684;&#x5168;&#x90E8;&#x6570;&#x636E;&#xFF0C;&#x5305;&#x62EC;schema&#x3001;vertex&#x3001;edge&#x548C;index&#x7B49;&#xFF0C;<strong>&#x8BE5;&#x64CD;&#x4F5C;&#x9700;&#x8981;&#x7BA1;&#x7406;&#x5458;&#x6743;&#x9650;</strong></h4>
+<h5 id="params">Params</h5>
+<p>&#x7531;&#x4E8E;&#x6E05;&#x7A7A;&#x56FE;&#x662F;&#x4E00;&#x4E2A;&#x6BD4;&#x8F83;&#x5371;&#x9669;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x4E3A;&#x907F;&#x514D;&#x7528;&#x6237;&#x8BEF;&#x8C03;&#x7528;&#xFF0C;&#x6211;&#x4EEC;&#x7ED9;API&#x6DFB;&#x52A0;&#x4E86;&#x7528;&#x4E8E;&#x786E;&#x8BA4;&#x7684;&#x53C2;&#x6570;&#xFF1A;</p>
+<ul>
+<li>confirm_message: &#x9ED8;&#x8BA4;&#x4E3A;<code>I&apos;m sure to delete all data</code></li>
+</ul>
 <h5 id="method--url">Method &amp; Url</h5>
-<pre><code>POST http://localhost:8080/graphs/hugegraph/jobs/gremlin
-</code></pre><p><strong>&#x67E5;&#x8BE2;&#x9876;&#x70B9;</strong></p>
-<h5 id="request-body">Request Body</h5>
+<pre><code>DELETE http://localhost:8080/graphs/hugegraph/clear?confirm_message=I%27m+sure+to+delete+all+data
+</code></pre><h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">204</span>
+</code></pre>
+<h3 id="52-conf">5.2 Conf</h3>
+<h4 id="521-&#x67E5;&#x770B;&#x67D0;&#x4E2A;&#x56FE;&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x8BE5;&#x64CD;&#x4F5C;&#x9700;&#x8981;&#x7BA1;&#x7406;&#x5458;&#x6743;&#x9650;">5.2.1 &#x67E5;&#x770B;&#x67D0;&#x4E2A;&#x56FE;&#x7684;&#x914D;&#x7F6E;&#xFF0C;<strong>&#x8BE5;&#x64CD;&#x4F5C;&#x9700;&#x8981;&#x7BA1;&#x7406;&#x5458;&#x6743;&#x9650;</strong></h4>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>GET http://localhost:8080/graphs/hugegraph/conf
+</code></pre><h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">200</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<pre><code class="lang-properties"># gremlin entrence to create graph
+gremlin.graph=com.baidu.hugegraph.HugeFactory
+
+# cache config
+#schema.cache_capacity=1048576
+#graph.cache_capacity=10485760
+#graph.cache_expire=600
+
+# schema illegal name template
+#schema.illegal_name_regex=\s+|~.*
+
+#vertex.default_label=vertex
+
+backend=cassandra
+serializer=cassandra
+
+store=hugegraph
+...
+</code></pre>
+<h3 id="53-mode">5.3 Mode</h3>
+<h4 id="531-&#x67E5;&#x770B;&#x67D0;&#x4E2A;&#x56FE;&#x7684;&#x6A21;&#x5F0F;-&#x8BE5;&#x64CD;&#x4F5C;&#x9700;&#x8981;&#x7BA1;&#x7406;&#x5458;&#x6743;&#x9650;">5.3.1 &#x67E5;&#x770B;&#x67D0;&#x4E2A;&#x56FE;&#x7684;&#x6A21;&#x5F0F;. <strong>&#x8BE5;&#x64CD;&#x4F5C;&#x9700;&#x8981;&#x7BA1;&#x7406;&#x5458;&#x6743;&#x9650;</strong></h4>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>GET http://localhost:8080/graphs/hugegraph/mode
+</code></pre><h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">200</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
 <pre><code class="lang-json">{
-    <span class="hljs-string">&quot;gremlin&quot;</span>: <span class="hljs-string">&quot;g.V(&apos;1:marko&apos;)&quot;</span>,
-    <span class="hljs-string">&quot;bindings&quot;</span>: {},
-    <span class="hljs-string">&quot;language&quot;</span>: <span class="hljs-string">&quot;gremlin-groovy&quot;</span>,
-    <span class="hljs-string">&quot;aliases&quot;</span>: {}
+    <span class="hljs-string">&quot;mode&quot;</span>: <span class="hljs-string">&quot;NONE&quot;</span>
 }
 </code></pre>
-<p>&#x6CE8;&#x610F;&#xFF1A;</p>
 <blockquote>
-<p>&#x5F02;&#x6B65;&#x6267;&#x884C;Gremlin&#x8BED;&#x53E5;&#x6682;&#x4E0D;&#x652F;&#x6301;aliases&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>graph</code> &#x4EE3;&#x8868;&#x8981;&#x64CD;&#x4F5C;&#x7684;&#x56FE;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x56FE;&#x7684;&#x540D;&#x5B57;&#xFF0C; &#x4F8B;&#x5982; <code>hugegraph</code>;
-&#x53E6;&#x5916;<code>g</code>&#x4EE3;&#x8868; traversal&#xFF0C;&#x7B49;&#x4EF7;&#x4E8E; <code>graph.traversal()</code> &#x6216;&#x8005; <code>hugegraph.traversal()</code></p>
+<p>&#x5408;&#x6CD5;&#x7684;&#x56FE;&#x6A21;&#x5F0F;&#x5305;&#x62EC;&#xFF1A;NONE&#xFF0C;RESTORING&#xFF0C;MERGING</p>
+</blockquote>
+<h4 id="532-&#x8BBE;&#x7F6E;&#x67D0;&#x4E2A;&#x56FE;&#x7684;&#x6A21;&#x5F0F;-&#x8BE5;&#x64CD;&#x4F5C;&#x9700;&#x8981;&#x7BA1;&#x7406;&#x5458;&#x6743;&#x9650;">5.3.2 &#x8BBE;&#x7F6E;&#x67D0;&#x4E2A;&#x56FE;&#x7684;&#x6A21;&#x5F0F;. <strong>&#x8BE5;&#x64CD;&#x4F5C;&#x9700;&#x8981;&#x7BA1;&#x7406;&#x5458;&#x6743;&#x9650;</strong></h4>
+<h5 id="params">Params</h5>
+<ul>
+<li>token: &#x9ED8;&#x8BA4;&#x4E3A;<code>162f7848-0b6d-4faf-b557-3a0797869c55</code></li>
+</ul>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>PUT http://localhost:8080/graphs/hugegraph/mode
+</code></pre><h5 id="request-body">Request Body</h5>
+<pre><code>&quot;RESTORING&quot;
+</code></pre><blockquote>
+<p>&#x5408;&#x6CD5;&#x7684;&#x56FE;&#x6A21;&#x5F0F;&#x5305;&#x62EC;&#xFF1A;NONE&#xFF0C;RESTORING&#xFF0C;MERGING</p>
 </blockquote>
 <h5 id="response-status">Response Status</h5>
 <pre><code class="lang-json"><span class="hljs-number">200</span>
 </code></pre>
 <h5 id="response-body">Response Body</h5>
 <pre><code class="lang-json">{
-    <span class="hljs-string">&quot;task_id&quot;</span>: <span class="hljs-number">1</span>
+    <span class="hljs-string">&quot;mode&quot;</span>: <span class="hljs-string">&quot;RESTORING&quot;</span>
 }
 </code></pre>
-<p>&#x6CE8;&#xFF1A;</p>
-<blockquote>
-<p>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;<code>GET http://localhost:8080/graphs/hugegraph/tasks/1</code>&#xFF08;&#x5176;&#x4E2D;&quot;1&quot;&#x662F;task_id&#xFF09;&#x6765;&#x67E5;&#x8BE2;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x7684;&#x6267;&#x884C;&#x72B6;&#x6001;&#xFF0C;&#x66F4;&#x591A;<a href="task.html">&#x5F02;&#x6B65;&#x4EFB;&#x52A1;RESTful API</a></p>
-</blockquote>
-<p><strong>&#x67E5;&#x8BE2;&#x8FB9;</strong></p>
-<h5 id="request-body">Request Body</h5>
-<pre><code class="lang-json">{
-    <span class="hljs-string">&quot;gremlin&quot;</span>: <span class="hljs-string">&quot;g.E(&apos;S1:marko&gt;2&gt;&gt;S2:lop&apos;)&quot;</span>,
-    <span class="hljs-string">&quot;bindings&quot;</span>: {},
-    <span class="hljs-string">&quot;language&quot;</span>: <span class="hljs-string">&quot;gremlin-groovy&quot;</span>,
-    <span class="hljs-string">&quot;aliases&quot;</span>: {}
-}
-</code></pre>
-<h5 id="response-status">Response Status</h5>
-<pre><code class="lang-json"><span class="hljs-number">200</span>
-</code></pre>
-<h5 id="response-body">Response Body</h5>
-<pre><code class="lang-json">{
-    <span class="hljs-string">&quot;task_id&quot;</span>: <span class="hljs-number">2</span>
-}
-</code></pre>
-<p>&#x6CE8;&#xFF1A;</p>
-<blockquote>
-<p>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;<code>GET http://localhost:8080/graphs/hugegraph/tasks/2</code>&#xFF08;&#x5176;&#x4E2D;&quot;2&quot;&#x662F;task_id&#xFF09;&#x6765;&#x67E5;&#x8BE2;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x7684;&#x6267;&#x884C;&#x72B6;&#x6001;&#xFF0C;&#x66F4;&#x591A;<a href="task.html">&#x5F02;&#x6B65;&#x4EFB;&#x52A1;RESTful API</a></p>
-</blockquote>
 
                                 
                                 </section>
@@ -1109,12 +1016,12 @@
 
             
                 
-                <a href="rebuild.html" class="navigation navigation-prev " aria-label="Previous page: Rebuild">
+                <a href="variable.html" class="navigation navigation-prev " aria-label="Previous page: Variable">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="other.html" class="navigation navigation-next " aria-label="Next page: Other">
+                <a href="task.html" class="navigation navigation-next " aria-label="Next page: Task">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1125,7 +1032,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Gremlin","level":"6.1.12","depth":2,"next":{"title":"Other","level":"6.1.13","depth":2,"path":"clients/restful-api/other.md","ref":"clients/restful-api/other.md","articles":[]},"previous":{"title":"Rebuild","level":"6.1.11","depth":2,"path":"clients/restful-api/rebuild.md","ref":"clients/restful-api/rebuild.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"clients/restful-api/gremlin.md","mtime":"2018-12-03T03:39:19.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-04-19T10:32:05.917Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Graphs","level":"6.1.9","depth":2,"next":{"title":"Task","level":"6.1.10","depth":2,"path":"clients/restful-api/task.md","ref":"clients/restful-api/task.md","articles":[]},"previous":{"title":"Variable","level":"6.1.8","depth":2,"path":"clients/restful-api/variable.md","ref":"clients/restful-api/variable.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"clients/restful-api/graphs.md","mtime":"2019-04-19T10:14:11.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-04-19T10:32:05.917Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

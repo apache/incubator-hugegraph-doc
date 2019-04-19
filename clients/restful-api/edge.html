@@ -532,12 +532,12 @@
             
         </li>
     
-        <li class="chapter " data-level="6.1.9" data-path="graph.html">
+        <li class="chapter " data-level="6.1.9" data-path="graphs.html">
             
-                <a href="graph.html">
+                <a href="graphs.html">
             
                     
-                    Graph
+                    Graphs
             
                 </a>
             
@@ -739,7 +739,20 @@
         
         
     
-        <li class="chapter " data-level="8.1" data-path="../../changelog/hugegraph-0.8.0-release-notes.html">
+        <li class="chapter " data-level="8.1" data-path="../../changelog/hugegraph-0.9.2-release-notes.html">
+            
+                <a href="../../changelog/hugegraph-0.9.2-release-notes.html">
+            
+                    
+                    Release-0.9.2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.2" data-path="../../changelog/hugegraph-0.8.0-release-notes.html">
             
                 <a href="../../changelog/hugegraph-0.8.0-release-notes.html">
             
@@ -752,7 +765,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.2" data-path="../../changelog/hugegraph-0.7.4-release-notes.html">
+        <li class="chapter " data-level="8.3" data-path="../../changelog/hugegraph-0.7.4-release-notes.html">
             
                 <a href="../../changelog/hugegraph-0.7.4-release-notes.html">
             
@@ -765,7 +778,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.3" data-path="../../changelog/hugegraph-0.6.1-release-notes.html">
+        <li class="chapter " data-level="8.4" data-path="../../changelog/hugegraph-0.6.1-release-notes.html">
             
                 <a href="../../changelog/hugegraph-0.6.1-release-notes.html">
             
@@ -778,7 +791,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.4" data-path="../../changelog/hugegraph-0.5.6-release-notes.html">
+        <li class="chapter " data-level="8.5" data-path="../../changelog/hugegraph-0.5.6-release-notes.html">
             
                 <a href="../../changelog/hugegraph-0.5.6-release-notes.html">
             
@@ -791,7 +804,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.5" data-path="../../changelog/hugegraph-0.4.4-release-notes.html">
+        <li class="chapter " data-level="8.6" data-path="../../changelog/hugegraph-0.4.4-release-notes.html">
             
                 <a href="../../changelog/hugegraph-0.4.4-release-notes.html">
             
@@ -804,7 +817,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.6" data-path="../../changelog/hugegraph-0.3.3-release-notes.html">
+        <li class="chapter " data-level="8.7" data-path="../../changelog/hugegraph-0.3.3-release-notes.html">
             
                 <a href="../../changelog/hugegraph-0.3.3-release-notes.html">
             
@@ -817,7 +830,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.7" data-path="../../changelog/hugegraph-0.2.4-release-notes.html">
+        <li class="chapter " data-level="8.8" data-path="../../changelog/hugegraph-0.2.4-release-notes.html">
             
                 <a href="../../changelog/hugegraph-0.2.4-release-notes.html">
             
@@ -830,7 +843,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.8" data-path="../../changelog/hugegraph-0.2-release-notes.html">
+        <li class="chapter " data-level="8.9" data-path="../../changelog/hugegraph-0.2-release-notes.html">
             
                 <a href="../../changelog/hugegraph-0.2-release-notes.html">
             
@@ -876,7 +889,7 @@
 <li>&#x5F53; id &#x7C7B;&#x578B;&#x4E3A; string &#x65F6;&#xFF0C;EdgeId &#x7684;&#x9876;&#x70B9; id &#x524D;&#x6709;&#x4E00;&#x4E2A;&#x524D;&#x7F00;<code>S</code> &#xFF0C;&#x5F62;&#x5982; &quot;S1:peter&gt;1&gt;&gt;S2:lop&quot;</li>
 </ul>
 <hr>
-<p>&#x5047;&#x8BBE;&#x5DF2;&#x7ECF;&#x521B;&#x5EFA;&#x597D;&#x4E86;&#x4E0A;&#x8FF0;&#x7684;&#x5404;&#x79CD;schema&#x548C;vertex</p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x7684;&#x793A;&#x4F8B;&#x5747;&#x5047;&#x8BBE;&#x5DF2;&#x7ECF;&#x521B;&#x5EFA;&#x597D;&#x4E86;&#x524D;&#x8FF0;&#x7684;&#x5404;&#x79CD;schema&#x548C;vertex&#x4FE1;&#x606F;</p>
 <h4 id="221-&#x521B;&#x5EFA;&#x4E00;&#x6761;&#x8FB9;">2.2.1 &#x521B;&#x5EFA;&#x4E00;&#x6761;&#x8FB9;</h4>
 <h5 id="method--url">Method &amp; Url</h5>
 <pre><code>POST http://localhost:8080/graphs/hugegraph/graph/edges
@@ -912,6 +925,10 @@
 }
 </code></pre>
 <h4 id="222-&#x521B;&#x5EFA;&#x591A;&#x6761;&#x8FB9;">2.2.2 &#x521B;&#x5EFA;&#x591A;&#x6761;&#x8FB9;</h4>
+<h5 id="params">Params</h5>
+<ul>
+<li>check_vertex: &#x662F;&#x5426;&#x68C0;&#x67E5;&#x9876;&#x70B9;&#x5B58;&#x5728;(true | false)&#xFF0C;&#x5F53;&#x8BBE;&#x7F6E;&#x4E3A; true &#x800C;&#x5F85;&#x63D2;&#x5165;&#x8FB9;&#x7684;&#x6E90;&#x9876;&#x70B9;&#x6216;&#x76EE;&#x6807;&#x9876;&#x70B9;&#x4E0D;&#x5B58;&#x5728;&#x65F6;&#x4F1A;&#x62A5;&#x9519;&#x3002;</li>
+</ul>
 <h5 id="method--url">Method &amp; Url</h5>
 <pre><code>POST http://localhost:8080/graphs/hugegraph/graph/edges/batch
 </code></pre><h5 id="request-body">Request Body</h5>
@@ -1160,10 +1177,10 @@
             }
         }
     ],
-    <span class="hljs-string">&quot;page&quot;</span>: <span class="hljs-string">&quot;null&quot;</span>
+    <span class="hljs-string">&quot;page&quot;</span>: <span class="hljs-literal">null</span>
 }
 </code></pre>
-<p>&#x6B64;&#x65F6;<code>&quot;page&quot;: &quot;null&quot;</code>&#x8868;&#x793A;&#x5DF2;&#x7ECF;&#x6CA1;&#x6709;&#x4E0B;&#x4E00;&#x9875;&#x4E86;&#x3002;</p>
+<p>&#x6B64;&#x65F6;<code>&quot;page&quot;: null</code>&#x8868;&#x793A;&#x5DF2;&#x7ECF;&#x6CA1;&#x6709;&#x4E0B;&#x4E00;&#x9875;&#x4E86;&#x3002;</p>
 <h4 id="226-&#x6839;&#x636E;id&#x83B7;&#x53D6;&#x8FB9;">2.2.6 &#x6839;&#x636E;Id&#x83B7;&#x53D6;&#x8FB9;</h4>
 <h5 id="method--url">Method &amp; Url</h5>
 <pre><code>GET http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter&gt;1&gt;&gt;S2:lop
@@ -1243,7 +1260,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Edge","level":"6.1.6","depth":2,"next":{"title":"Traverser","level":"6.1.7","depth":2,"path":"clients/restful-api/traverser.md","ref":"clients/restful-api/traverser.md","articles":[]},"previous":{"title":"Vertex","level":"6.1.5","depth":2,"path":"clients/restful-api/vertex.md","ref":"clients/restful-api/vertex.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"clients/restful-api/edge.md","mtime":"2018-11-28T02:52:29.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-12-03T03:39:02.779Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Edge","level":"6.1.6","depth":2,"next":{"title":"Traverser","level":"6.1.7","depth":2,"path":"clients/restful-api/traverser.md","ref":"clients/restful-api/traverser.md","articles":[]},"previous":{"title":"Vertex","level":"6.1.5","depth":2,"path":"clients/restful-api/vertex.md","ref":"clients/restful-api/vertex.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"clients/restful-api/edge.md","mtime":"2019-04-19T10:14:11.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-04-19T10:32:05.917Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
