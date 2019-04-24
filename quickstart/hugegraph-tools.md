@@ -81,15 +81,15 @@ Usage: hugegraph [options] [command] [command options]
 ##### 3.4 备份/恢复类
 
 - backup，将某张图中的 schema 或者 data 备份到 HugeGraph 系统之外，以 JSON 形式存在本地磁盘或者 HDFS
-    - --directory 或者 -d，存储 schema 或者 data 的目录，默认为当前目录
-    - --huge-types 或者 -t，要备份的数据类型，逗号分隔，可选值为 'all' 或者 一个或多个 [vertex,edge,vertex_label,edge_label,property_key,index_label] 的组合，'all' 代表全部6种类型
+    - --directory 或者 -d，存储 schema 或者 data 的目录，本地目录时，默认为'./{graphName}'，HDFS 时，默认为 '{fs.default.name}/{graphName}'
+    - --huge-types 或者 -t，要备份的数据类型，逗号分隔，可选值为 'all' 或者 一个或多个 [vertex,edge,vertex_label,edge_label,property_key,index_label] 的组合，'all' 代表全部6种类型，即顶点、边和所有schema
     - --log 或者 -l，指定日志目录，默认为当前目录
     - --retry，指定失败重试次数，默认为 3
     - --split-size 或者 -s，指定在备份时对顶点或者边分块的大小，默认为 1048576
     - -D，用 -Dkey=value 的模式指定动态参数，用来备份数据到 HDFS 时，指定 HDFS 的配置项，例如：-Dfs.default.name=hdfs://localhost:9000 
 - restore，将 JSON 格式存储的 schema 或者 data 恢复到一个新图中（RESTORING 模式）或者合并到已存在的图中（MERGING 模式）
-    - --directory 或者 -d，存储 schema 或者 data 的目录，默认为当前目录
-    - --huge-types 或者 -t，要恢复的数据类型，逗号分隔，可选值为 'all' 或者 一个或多个 [vertex,edge,vertex_label,edge_label,property_key,index_label] 的组合，'all' 代表全部6种类型
+    - --directory 或者 -d，存储 schema 或者 data 的目录，本地目录时，默认为'./{graphName}'，HDFS 时，默认为 '{fs.default.name}/{graphName}'
+    - --huge-types 或者 -t，要恢复的数据类型，逗号分隔，可选值为 'all' 或者 一个或多个 [vertex,edge,vertex_label,edge_label,property_key,index_label] 的组合，'all' 代表全部6种类型，即顶点、边和所有schema
     - --log 或者 -l，指定日志目录，默认为当前目录
     - --retry，指定失败重试次数，默认为 3
     - -D，用 -Dkey=value 的模式指定动态参数，用来从 HDFS 恢复图时，指定 HDFS 的配置项，例如：-Dfs.default.name=hdfs://localhost:9000 
@@ -186,15 +186,16 @@ Usage: hugegraph [options] [command] [command options]
       Usage: backup [options]
         Options:
           --directory, -d
-            Directory of graph schema/data
-            Default: ./
+            Directory of graph schema/data, default is './{graphname}' in 
+            local file system or '{fs.default.name}/{graphname}' in HDFS
           --huge-types, -t
             Type of schema/data. Concat with ',' if more than one. 'all' means 
+            all vertices, edges and schema, in other words, 'all' equals with 
             'vertex,edge,vertex_label,edge_label,property_key,index_label' 
             Default: [PROPERTY_KEY, VERTEX_LABEL, EDGE_LABEL, INDEX_LABEL, VERTEX, EDGE]
           --log, -l
             Directory of log
-            Default: ./
+            Default: ./backup-log
           --retry
             Retry times, default is 3
             Default: 3
@@ -244,15 +245,16 @@ Usage: hugegraph [options] [command] [command options]
       Usage: restore [options]
         Options:
           --directory, -d
-            Directory of graph schema/data
-            Default: ./
+            Directory of graph schema/data, default is './{graphname}' in 
+            local file system or '{fs.default.name}/{graphname}' in HDFS
           --huge-types, -t
             Type of schema/data. Concat with ',' if more than one. 'all' means 
+            all vertices, edges and schema, in other words, 'all' equals with 
             'vertex,edge,vertex_label,edge_label,property_key,index_label' 
             Default: [PROPERTY_KEY, VERTEX_LABEL, EDGE_LABEL, INDEX_LABEL, VERTEX, EDGE]
           --log, -l
             Directory of log
-            Default: ./
+            Default: ./backup-log
           --retry
             Retry times, default is 3
             Default: 3
@@ -358,18 +360,19 @@ Usage: hugegraph [options] [command] [command options]
       Usage: dump [options]
         Options:
           --directory, -d
-            Directory of graph schema/data
-            Default: ./
+            Directory of graph schema/data, default is './{graphname}' in 
+            local file system or '{fs.default.name}/{graphname}' in HDFS
           --formatter, -f
             Formatter to customize format of vertex/edge
             Default: JsonFormatter
           --huge-types, -t
             Type of schema/data. Concat with ',' if more than one. 'all' means 
+            all vertices, edges and schema, in other words, 'all' equals with 
             'vertex,edge,vertex_label,edge_label,property_key,index_label' 
             Default: [PROPERTY_KEY, VERTEX_LABEL, EDGE_LABEL, INDEX_LABEL, VERTEX, EDGE]
           --log, -l
             Directory of log
-            Default: ./
+            Default: ./backup-log
           --retry
             Retry times, default is 3
             Default: 3
