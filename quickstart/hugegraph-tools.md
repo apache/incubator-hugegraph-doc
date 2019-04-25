@@ -195,7 +195,7 @@ Usage: hugegraph [options] [command] [command options]
             Default: [PROPERTY_KEY, VERTEX_LABEL, EDGE_LABEL, INDEX_LABEL, VERTEX, EDGE]
           --log, -l
             Directory of log
-            Default: ./backup-log
+            Default: ./logs
           --retry
             Retry times, default is 3
             Default: 3
@@ -254,7 +254,7 @@ Usage: hugegraph [options] [command] [command options]
             Default: [PROPERTY_KEY, VERTEX_LABEL, EDGE_LABEL, INDEX_LABEL, VERTEX, EDGE]
           --log, -l
             Directory of log
-            Default: ./backup-log
+            Default: ./logs
           --retry
             Retry times, default is 3
             Default: 3
@@ -372,7 +372,7 @@ Usage: hugegraph [options] [command] [command options]
             Default: [PROPERTY_KEY, VERTEX_LABEL, EDGE_LABEL, INDEX_LABEL, VERTEX, EDGE]
           --log, -l
             Directory of log
-            Default: ./backup-log
+            Default: ./logs
           --retry
             Retry times, default is 3
             Default: 3
