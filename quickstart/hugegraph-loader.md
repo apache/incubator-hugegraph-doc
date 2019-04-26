@@ -2,7 +2,7 @@
 
 ### 1 概述
 
-HugeGraph-Loader 是 HugeGragh 的数据导入组件，能够将其他数据源的数据转化为图的顶点和边并批量导入到图形数据库中。
+HugeGraph-Loader 是 HugeGragh 的数据导入组件，能够将多种数据源的数据转化为图的顶点和边并批量导入到图数据库中。
 
 目前支持的数据源包括：
 
@@ -128,13 +128,13 @@ JSON 文件要求每一行都是一个 JSON 串，且每行的格式需保持一
 
 **HDFS 文件或目录**
 
-用户也可以指定 HDFS 文件或目录作为数据源，上面关于`本地磁盘文件或目录`的要求全部适用于这里。除此之外，HDFS 上通常存储的都是压缩文件，loader 也支持压缩文件的导入，并且`本地磁盘文件或目录`同样支持。
+用户也可以指定 HDFS 文件或目录作为数据源，上面关于`本地磁盘文件或目录`的要求全部适用于这里。除此之外，鉴于 HDFS 上通常存储的都是压缩文件，loader 也提供了对压缩文件的支持，并且`本地磁盘文件或目录`同样支持压缩文件。
 
 目前支持的压缩文件类型包括：GZIP、BZ2、XZ、LZMA、PACK200、SNAPPY_RAW、SNAPPY_FRAMED、Z、DEFLATE、LZ4_BLOCK 和 LZ4_FRAMED。
 
 **部分关系型数据库**
 
-loader 还支持以部分关系型数据库作为数据源，我们只测试过 MySQL，其他如：Oracle、PostgreSQL 等应该也支持。
+loader 还支持以部分关系型数据库作为数据源，我们只测试过 MySQL，其他如：Oracle、PostgreSQL 等也支持。
 
 但目前对表结构要求较为严格，如果导入过程中需要做关联查询，这样的表结构是不允许的。关联查询的意思是：在读到表的某行后，发现某列的值不能使用（比如外键），需要再去做一次查询才能确定该列的真实值。
 
@@ -155,7 +155,7 @@ id | name | lang | price
 id | p_id | s_id | date
 ```
 
-如果在建模（schema）时指定 person 或 software 的 id 策略是 PRIMARY_KEY 的，选择以 name 作为 primary keys（注意：这是 hugegraph 中 vertexlabel 的概念），那在导入边数据时，由于需要拼接出源顶点和目标顶点的 id，必须拿着 p_id/s_id 去 person/software 表中查到对应的 name，这种要再做一次查询的表结构目前的 loader 是不支持的。
+如果在建模（schema）时指定 person 或 software 的 id 策略是 PRIMARY_KEY 的，选择以 name 作为 primary keys（注意：这是 hugegraph 中 vertexlabel 的概念），在导入边数据时，由于需要拼接出源顶点和目标顶点的 id，必须拿着 p_id/s_id 去 person/software 表中查到对应的 name，这种需要做额外查询的表结构的情况，loader 暂时是不支持的。
 
 如果建模（schema）时指定 person 和 software 的 id 策略是 CUSTOMIZE 的，这样导入边 created 时可以直接使用 p_id 和 s_id 作为源顶点和目标顶点的 id，所以是支持的。
 
@@ -196,11 +196,11 @@ Office,388
 {"source_name": "Jerry", "target_name": "Office"}
 ```
 
-#### 3.3 编写输入源映射文件
+#### 3.3 编写输入源的映射文件
 
-输入源映射文件是`JSON`格式的，由多个`VertexSource`和`EdgeSource`块组成，`VertexSource`和`EdgeSource`分别对应某类顶点/边的输入源映射。每个`VertexSource`和`EdgeSource`块内部会包含一个`InputSource`块，这个`InputSource`块就对应上面介绍的`本地磁盘文件或目录`、`HDFS 文件或目录`和`部分关系型数据库`，负责描述数据源的基本信息。
+输入源的映射文件是`JSON`格式的，由多个`VertexSource`和`EdgeSource`块组成，`VertexSource`和`EdgeSource`分别对应某类顶点/边的输入源映射。每个`VertexSource`和`EdgeSource`块内部会包含一个`InputSource`块，这个`InputSource`块就对应上面介绍的`本地磁盘文件或目录`、`HDFS 文件或目录`和`部分关系型数据库`，负责描述数据源的基本信息。
 
-先给出上面图模型和数据文件的输入源映射文件：
+先给出上面图模型和数据文件的输入源的映射文件：
 
 ```json
 {
@@ -336,7 +336,7 @@ batch_size | 按页获取表数据时的一页的大小，默认为 500 | 否
 参数                 | 默认值        | 是否必传 | 描述信息
 ------------------- | ------------ | ------- | -----------------------
 -f &#124; --file    |              |    Y    | 配置脚本的路径
--g &#124; --graph   |              |    Y    | 图形数据库空间
+-g &#124; --graph   |              |    Y    | 图数据库空间
 -s &#124; --schema  |              |    Y    | schema文件路径
 -h &#124; --host    | localhost    |         | HugeGraphServer 的地址
 -p &#124; --port    | 8080         |         | HugeGraphServer 的端口号
@@ -436,7 +436,7 @@ schema.indexLabel("createdByWeight").onE("created").by("weight").range().ifNotEx
 schema.indexLabel("knowsByWeight").onE("knows").by("weight").range().ifNotExist().create();
 ```
 
-#### 4.3 编写输入源映射文件
+#### 4.3 编写输入源的映射文件
 
 ```json
 {
