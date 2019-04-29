@@ -279,7 +279,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/kneighbor?source=“1:marko�
 - max_depth: 最大步数，必填项
 - label: 边的类型，选填项，默认代表所有edge label
 - max_degree: 查询过程中，单个顶点最大边数目，选填项，默认为10000
-- skip_degree: 查询过程中需要跳过的顶点的最小的边数目，即当顶点的边数目大于 skip_degree 时，跳过该顶点，可用于规避超级点，默认为0，表示不跳过任何点
+- skip_degree: 查询过程中需要跳过的顶点的最小的边数目，即当顶点的边数目大于 skip_degree 时，跳过该顶点，可用于规避超级点，选填项，默认为0，表示不跳过任何点
 - capacity: 遍历过程中最大的访问的顶点数目，选填项，默认为10000000
 
 ##### 3.2.3.2 使用方法
