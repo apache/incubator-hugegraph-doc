@@ -57,11 +57,31 @@ Usage: hugegraph [options] [command] [command options]
 ##### 3.2 [options]-全局变量
 
 `options`是 HugeGraph-Tools 的全局变量，可以在 hugegraph-tools/bin/hugegraph 中配置,包括：
+
 - --graph，HugeGraph-Tools 操作的图的名字，默认值是 hugegraph
 - --url，HugeGraph-Server 的服务地址，默认是 http://127.0.0.1:8080
 - --timeout, 连接 HugeGraph-Server 时的超时时间，默认是 30s
 - --user，当 HugeGraph-Server 开启认证时，传递用户名
 - --password，当 HugeGraph-Server 开启认证时，传递用户的密码
+
+上述全局变量，也可以通过环境变量来设置。一种方式是在命令行使用 export 临时设置环境变量：
+
+- --url 对应的环境变量是 HUGEGRAPH_URL
+- --graph 对应的环境变量是 HUGEGRAPH_GRAPH
+- --user 对应的环境变量是 HUGEGRAPH_USERNAME
+- --password 对应的环境变量是 HUGEGRAPH_PASSWORD
+
+另一种方式是在 bin/hugegraph 脚本中设置环境变量：
+
+```
+#!/bin/bash
+
+# Set environment here if needed
+#export HUGEGRAPH_URL=
+#export HUGEGRAPH_GRAPH=
+#export HUGEGRAPH_USERNAME=
+#export HUGEGRAPH_PASSWORD=
+```
 
 ##### 3.3 图管理类，graph-mode-set、graph-mode-get、graph-list、graph-get和graph-clear
 
