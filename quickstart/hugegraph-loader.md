@@ -134,11 +134,11 @@ JSON 文件要求每一行都是一个 JSON 串，且每行的格式需保持一
 
 **部分关系型数据库**
 
-loader 还支持以部分关系型数据库作为数据源，我们只测试过 MySQL，其他如：Oracle、PostgreSQL 等也支持。
+loader 还支持以部分关系型数据库作为数据源，我们只测试过 MySQL，其他如：Oracle、PostgreSQL 等理论上也支持。
 
-但目前对表结构要求较为严格，如果导入过程中需要做关联查询，这样的表结构是不允许的。关联查询的意思是：在读到表的某行后，发现某列的值不能使用（比如外键），需要再去做一次查询才能确定该列的真实值。
+但目前对表结构要求较为严格，如果导入过程中需要做关联查询，这样的表结构是不允许的。关联查询的意思是：在读到表的某行后，发现某列的值不能直接使用（比如外键），需要再去做一次查询才能确定该列的真实值。
 
-举个例子：假设我有三张表，person、software 和 created
+举个例子：假设有三张表，person、software 和 created
 
 ```
 // person 表结构
@@ -198,7 +198,7 @@ Office,388
 
 #### 3.3 编写输入源的映射文件
 
-输入源的映射文件是`JSON`格式的，由多个`VertexSource`和`EdgeSource`块组成，`VertexSource`和`EdgeSource`分别对应某类顶点/边的输入源映射。每个`VertexSource`和`EdgeSource`块内部会包含一个`InputSource`块，这个`InputSource`块就对应上面介绍的`本地磁盘文件或目录`、`HDFS 文件或目录`和`部分关系型数据库`，负责描述数据源的基本信息。
+输入源的映射文件是`JSON`格式的，由多个`VertexSource`和`EdgeSource`块组成，`VertexSource`和`EdgeSource`分别对应某类顶点/边的输入源映射。每个`VertexSource`和`EdgeSource`块内部会包含一个`InputSource`块，这个`InputSource`块就对应上面介绍的`本地磁盘文件或目录`、`HDFS 文件或目录`和`关系型数据库`，负责描述数据源的基本信息。
 
 先给出上面图模型和数据文件的输入源的映射文件：
 
