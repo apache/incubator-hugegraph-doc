@@ -64,12 +64,15 @@ Usage: hugegraph [options] [command] [command options]
 - --user，当 HugeGraph-Server 开启认证时，传递用户名
 - --password，当 HugeGraph-Server 开启认证时，传递用户的密码
 
-上述全局变量，也可以通过环境变量来设置。一种方式是在命令行使用 export 临时设置环境变量：
+上述全局变量，也可以通过环境变量来设置。一种方式是在命令行使用 export 设置临时环境变量，在该命令行关闭之前均有效
 
-- --url 对应的环境变量是 HUGEGRAPH_URL
-- --graph 对应的环境变量是 HUGEGRAPH_GRAPH
-- --user 对应的环境变量是 HUGEGRAPH_USERNAME
-- --password 对应的环境变量是 HUGEGRAPH_PASSWORD
+
+全局变量      | 环境变量                | 示例                                           
+------------ | --------------------- | ------------------------------------------
+--url        | HUGEGRAPH_URL         | export HUGEGRAPH_URL=http://127.0.0.1:8080
+--graph      | HUGEGRAPH_GRAPH       | export HUGEGRAPH_GRAPH=hugegraph 
+--user       | HUGEGRAPH_USERNAME    | export HUGEGRAPH_USERNAME=admin
+--password   | HUGEGRAPH_PASSWORD    | export HUGEGRAPH_PASSWORD=test
 
 另一种方式是在 bin/hugegraph 脚本中设置环境变量：
 
