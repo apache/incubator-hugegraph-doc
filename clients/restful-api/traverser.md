@@ -226,8 +226,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/kout?source="1:marko"&max_de
 - max_depth: 步数，必填项
 - label: 边的类型，选填项，默认代表所有edge label
 - max_degree: 查询过程中，单个顶点最大边数目，选填项，默认为10000
-- capacity: 遍历过程中最大的访问的顶点数目，选填项，默认为10000000
-- limit: 返回的顶点的最大数目，选填项，默认为10000000
+- limit: 返回的顶点的最大数目，也即遍历过程中最大的访问的顶点数目，选填项，默认为10000000
 
 ##### 3.2.2.2 使用方法
 
