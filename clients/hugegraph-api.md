@@ -12,6 +12,7 @@ HugeGraph-Server通过HugeGraph-API基于HTTP协议为Client提供操作图的�
   - [Vertex](restful-api/vertex.md)
   - [Edge](restful-api/edge.md)
 - [Traverser](restful-api/traverser.md)
+- [Rank](restful-api/rank.md)
 - [Variable](restful-api/variable.md)
 - [Graphs](restful-api/graphs.md)
 - [Task](restful-api/task.md)
