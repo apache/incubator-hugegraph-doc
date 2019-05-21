@@ -116,7 +116,7 @@ rocksdb.write_buffer_size                      | 134217728     | Amount of data 
 
 config option            | default value               | descrition
 ------------------------ | --------------------------- | -------------------------------------------------------------------------------
-hbase.hosts              | localhost                   | The hostname or ip address of HBase zookeeper.
+hbase.hosts              | localhost                   | The hostnames or ip addresses of HBase zookeeper, separated with commas. 
 hbase.port               | 2181                        | The port address of HBase zookeeper.
 hbase.threads_max        | 64                          | The max threads num of hbase connections.
 hbase.znode_parent       | /hbase                      | The znode parent path of HBase zookeeper.
