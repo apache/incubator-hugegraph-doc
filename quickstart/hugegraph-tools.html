@@ -519,7 +519,20 @@
             
         </li>
     
-        <li class="chapter " data-level="6.1.8" data-path="../clients/restful-api/variable.html">
+        <li class="chapter " data-level="6.1.8" data-path="../clients/restful-api/rank.html">
+            
+                <a href="../clients/restful-api/rank.html">
+            
+                    
+                    Rank
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.1.9" data-path="../clients/restful-api/variable.html">
             
                 <a href="../clients/restful-api/variable.html">
             
@@ -532,7 +545,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.1.9" data-path="../clients/restful-api/graphs.html">
+        <li class="chapter " data-level="6.1.10" data-path="../clients/restful-api/graphs.html">
             
                 <a href="../clients/restful-api/graphs.html">
             
@@ -545,7 +558,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.1.10" data-path="../clients/restful-api/task.html">
+        <li class="chapter " data-level="6.1.11" data-path="../clients/restful-api/task.html">
             
                 <a href="../clients/restful-api/task.html">
             
@@ -558,7 +571,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.1.11" data-path="../clients/restful-api/rebuild.html">
+        <li class="chapter " data-level="6.1.12" data-path="../clients/restful-api/rebuild.html">
             
                 <a href="../clients/restful-api/rebuild.html">
             
@@ -571,7 +584,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.1.12" data-path="../clients/restful-api/gremlin.html">
+        <li class="chapter " data-level="6.1.13" data-path="../clients/restful-api/gremlin.html">
             
                 <a href="../clients/restful-api/gremlin.html">
             
@@ -584,7 +597,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.1.13" data-path="../clients/restful-api/other.html">
+        <li class="chapter " data-level="6.1.14" data-path="../clients/restful-api/other.html">
             
                 <a href="../clients/restful-api/other.html">
             
@@ -898,73 +911,198 @@ tar zxvf hugegraph-tools-<span class="hljs-variable">${version}</span>.tar.gz
 <p>&#x4E0B;&#x8F7D;&#x6700;&#x65B0;&#x7248;&#x672C;&#x7684; HugeGraph-Tools &#x6E90;&#x7801;&#x5305;&#xFF1A;</p>
 <pre><code class="lang-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/hugegraph/hugegraph-tools.git
 </code></pre>
-<p>&#x7F16;&#x8BD1;&#x751F;&#x6210;tar&#x5305;:</p>
+<p>&#x7F16;&#x8BD1;&#x751F;&#x6210; tar &#x5305;:</p>
 <pre><code class="lang-bash"><span class="hljs-built_in">cd</span> hugegraph-tools
 mvn package -DskipTests
 </code></pre>
 <p>&#x751F;&#x6210; tar &#x5305; hugegraph-tools-${version}.tar.gz</p>
 <h3 id="3-&#x4F7F;&#x7528;">3 &#x4F7F;&#x7528;</h3>
 <h4 id="31-&#x529F;&#x80FD;&#x6982;&#x89C8;">3.1 &#x529F;&#x80FD;&#x6982;&#x89C8;</h4>
-<p>&#x89E3;&#x538B;&#x540E;&#xFF0C;&#x8FDB;&#x5165;hugegraph-tools&#x76EE;&#x5F55;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>bin/hugegraph</code>&#x6765;&#x67E5;&#x770B; usage &#x4FE1;&#x606F;&#x3002;&#x4E3B;&#x8981;&#x5206;&#x4E3A;&#xFF1A;</p>
+<p>&#x89E3;&#x538B;&#x540E;&#xFF0C;&#x8FDB;&#x5165; hugegraph-tools &#x76EE;&#x5F55;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>bin/hugegraph</code>&#x6216;&#x8005;<code>bin/hugegraph help</code>&#x6765;&#x67E5;&#x770B; usage &#x4FE1;&#x606F;&#x3002;&#x4E3B;&#x8981;&#x5206;&#x4E3A;&#xFF1A;</p>
 <ul>
-<li>&#x5B89;&#x88C5;&#x90E8;&#x7F72;&#x7C7B;&#xFF0C;deploy&#x3001;clear&#x3001;start-all&#x548C;stop-all</li>
-<li>&#x5907;&#x4EFD;/&#x6062;&#x590D;&#x7C7B;&#xFF0C;backup&#x3001;restore&#x3001;schedule-backup&#x3001;dump</li>
-<li>&#x56FE;&#x7BA1;&#x7406;&#x7C7B;&#xFF0C;graph-mode-set&#x3001;graph-mode-get&#x3001;graph-list&#x3001;graph-get&#x548C;graph-clear</li>
-<li>&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x7BA1;&#x7406;&#x7C7B;&#xFF0C;task-delete&#x3001;task-get&#x548C;task-delete</li>
-<li>Gremlin&#x7C7B;&#xFF0C;gremlin-execute&#x548C;gremlin-schedule</li>
+<li>&#x56FE;&#x7BA1;&#x7406;&#x7C7B;&#xFF0C;graph-mode-set&#x3001;graph-mode-get&#x3001;graph-list&#x3001;graph-get &#x548C; graph-clear</li>
+<li>&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x7BA1;&#x7406;&#x7C7B;&#xFF0C;task-delete&#x3001;task-get &#x548C; task-delete</li>
+<li>Gremlin&#x7C7B;&#xFF0C;gremlin-execute &#x548C; gremlin-schedule</li>
+<li>&#x5907;&#x4EFD;/&#x6062;&#x590D;&#x7C7B;&#xFF0C;backup&#x3001;restore&#x3001;schedule-backup &#x548C; dump</li>
+<li>&#x5B89;&#x88C5;&#x90E8;&#x7F72;&#x7C7B;&#xFF0C;deploy&#x3001;clear&#x3001;start-all &#x548C; stop-all</li>
 </ul>
 <pre><code class="lang-bash">Usage: hugegraph [options] [<span class="hljs-built_in">command</span>] [<span class="hljs-built_in">command</span> options]
 </code></pre>
 <h5 id="32-options-&#x5168;&#x5C40;&#x53D8;&#x91CF;">3.2 [options]-&#x5168;&#x5C40;&#x53D8;&#x91CF;</h5>
-<p><code>options</code>&#x662F; HugeGraph-Tools &#x7684;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;hugegraph-tools/bin/hugegraph&#x4E2D;&#x914D;&#x7F6E;,&#x5305;&#x62EC;&#xFF1A;</p>
+<p><code>options</code>&#x662F; HugeGraph-Tools &#x7684;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#xFF0C;&#x53EF;&#x4EE5;&#x5728; hugegraph-tools/bin/hugegraph &#x4E2D;&#x914D;&#x7F6E;,&#x5305;&#x62EC;&#xFF1A;</p>
 <ul>
-<li>--graph&#xFF0C;HugeGraph-Tools&#x64CD;&#x4F5C;&#x7684;&#x56FE;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x9ED8;&#x8BA4;&#x503C;&#x662F;hugegraph</li>
-<li>--url&#xFF0C;HugeGraph-Server &#x7684;&#x670D;&#x52A1;&#x5730;&#x5740;&#xFF0C;&#x9ED8;&#x8BA4;&#x662F;<a href="http://127.0.0.1:8080" target="_blank">http://127.0.0.1:8080</a></li>
+<li>--graph&#xFF0C;HugeGraph-Tools &#x64CD;&#x4F5C;&#x7684;&#x56FE;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x9ED8;&#x8BA4;&#x503C;&#x662F; hugegraph</li>
+<li>--url&#xFF0C;HugeGraph-Server &#x7684;&#x670D;&#x52A1;&#x5730;&#x5740;&#xFF0C;&#x9ED8;&#x8BA4;&#x662F; <a href="http://127.0.0.1:8080" target="_blank">http://127.0.0.1:8080</a></li>
+<li>--timeout, &#x8FDE;&#x63A5; HugeGraph-Server &#x65F6;&#x7684;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#xFF0C;&#x9ED8;&#x8BA4;&#x662F; 30s</li>
 <li>--user&#xFF0C;&#x5F53; HugeGraph-Server &#x5F00;&#x542F;&#x8BA4;&#x8BC1;&#x65F6;&#xFF0C;&#x4F20;&#x9012;&#x7528;&#x6237;&#x540D;</li>
 <li>--password&#xFF0C;&#x5F53; HugeGraph-Server &#x5F00;&#x542F;&#x8BA4;&#x8BC1;&#x65F6;&#xFF0C;&#x4F20;&#x9012;&#x7528;&#x6237;&#x7684;&#x5BC6;&#x7801;</li>
 </ul>
-<h5 id="33-&#x5B89;&#x88C5;&#x90E8;&#x7F72;&#x7C7B;">3.3 &#x5B89;&#x88C5;&#x90E8;&#x7F72;&#x7C7B;</h5>
+<p>&#x4E0A;&#x8FF0;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x6765;&#x8BBE;&#x7F6E;&#x3002;&#x4E00;&#x79CD;&#x65B9;&#x5F0F;&#x662F;&#x5728;&#x547D;&#x4EE4;&#x884C;&#x4F7F;&#x7528; export &#x8BBE;&#x7F6E;&#x4E34;&#x65F6;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#xFF0C;&#x5728;&#x8BE5;&#x547D;&#x4EE4;&#x884C;&#x5173;&#x95ED;&#x4E4B;&#x524D;&#x5747;&#x6709;&#x6548;</p>
+<table>
+<thead>
+<tr>
+<th>&#x5168;&#x5C40;&#x53D8;&#x91CF;</th>
+<th>&#x73AF;&#x5883;&#x53D8;&#x91CF;</th>
+<th>&#x793A;&#x4F8B;                                           </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>--url</td>
+<td>HUGEGRAPH_URL</td>
+<td>export HUGEGRAPH_URL=<a href="http://127.0.0.1:8080" target="_blank">http://127.0.0.1:8080</a></td>
+</tr>
+<tr>
+<td>--graph</td>
+<td>HUGEGRAPH_GRAPH</td>
+<td>export HUGEGRAPH_GRAPH=hugegraph </td>
+</tr>
+<tr>
+<td>--user</td>
+<td>HUGEGRAPH_USERNAME</td>
+<td>export HUGEGRAPH_USERNAME=admin</td>
+</tr>
+<tr>
+<td>--password</td>
+<td>HUGEGRAPH_PASSWORD</td>
+<td>export HUGEGRAPH_PASSWORD=test</td>
+</tr>
+</tbody>
+</table>
+<p>&#x53E6;&#x4E00;&#x79CD;&#x65B9;&#x5F0F;&#x662F;&#x5728; bin/hugegraph &#x811A;&#x672C;&#x4E2D;&#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#xFF1A;</p>
+<pre><code>#!/bin/bash
+
+# Set environment here if needed
+#export HUGEGRAPH_URL=
+#export HUGEGRAPH_GRAPH=
+#export HUGEGRAPH_USERNAME=
+#export HUGEGRAPH_PASSWORD=
+</code></pre><h5 id="33-&#x56FE;&#x7BA1;&#x7406;&#x7C7B;&#xFF0C;graph-mode-set&#x3001;graph-mode-get&#x3001;graph-list&#x3001;graph-get&#x548C;graph-clear">3.3 &#x56FE;&#x7BA1;&#x7406;&#x7C7B;&#xFF0C;graph-mode-set&#x3001;graph-mode-get&#x3001;graph-list&#x3001;graph-get&#x548C;graph-clear</h5>
 <ul>
-<li>deploy&#xFF0C;&#x4E00;&#x952E;&#x4E0B;&#x8F7D;&#x3001;&#x5B89;&#x88C5;&#x548C;&#x542F;&#x52A8; HugeGraph-Server &#x548C; HugeGraph-Studio</li>
-<li>clear&#xFF0C;&#x6E05;&#x7406; HugeGraph-Server &#x548C; HugeGraph-Studio &#x76EE;&#x5F55;&#x548C;tar&#x5305;</li>
-<li>start-all&#xFF0C;&#x4E00;&#x952E;&#x542F;&#x52A8; HugeGraph-Server &#x548C; HugeGraph-Studio&#xFF0C;&#x5E76;&#x542F;&#x52A8;&#x76D1;&#x63A7;&#xFF0C;&#x670D;&#x52A1;&#x6B7B;&#x6389;&#x65F6;&#x81EA;&#x52A8;&#x62C9;&#x8D77;&#x670D;&#x52A1;</li>
+<li>graph-mode-set&#xFF0C;&#x8BBE;&#x7F6E;&#x56FE;&#x7684; restore mode<ul>
+<li>--graph-mode &#x6216;&#x8005; -m&#xFF0C;&#x5FC5;&#x586B;&#x9879;&#xFF0C;&#x6307;&#x5B9A;&#x5C06;&#x8981;&#x8BBE;&#x7F6E;&#x7684;&#x6A21;&#x5F0F;&#xFF0C;&#x5408;&#x6CD5;&#x503C;&#x5305;&#x62EC; [NONE, RESTORING, MERGING]</li>
+</ul>
+</li>
+<li>graph-mode-get&#xFF0C;&#x83B7;&#x53D6;&#x56FE;&#x7684; restore mode</li>
+<li>graph-list&#xFF0C;&#x5217;&#x51FA;&#x67D0;&#x4E2A; HugeGraph-Server &#x4E2D;&#x5168;&#x90E8;&#x7684;&#x56FE;</li>
+<li>graph-get&#xFF0C;&#x83B7;&#x53D6;&#x67D0;&#x4E2A;&#x56FE;&#x53CA;&#x5176;&#x5B58;&#x50A8;&#x540E;&#x7AEF;&#x7C7B;&#x578B;</li>
+<li>graph-clear&#xFF0C;&#x6E05;&#x9664;&#x67D0;&#x4E2A;&#x56FE;&#x7684;&#x5168;&#x90E8; schema &#x548C; data<ul>
+<li>--confirm-message &#x6216;&#x8005; -c&#xFF0C;&#x5FC5;&#x586B;&#x9879;&#xFF0C;&#x5220;&#x9664;&#x786E;&#x8BA4;&#x4FE1;&#x606F;&#xFF0C;&#x9700;&#x8981;&#x624B;&#x52A8;&#x8F93;&#x5165;&#xFF0C;&#x4E8C;&#x6B21;&#x786E;&#x8BA4;&#x9632;&#x6B62;&#x8BEF;&#x5220;&#xFF0C;&quot;I&apos;m sure to delete all data&quot;&#xFF0C;&#x5305;&#x62EC;&#x53CC;&#x5F15;&#x53F7;</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>&#x5F53;&#x9700;&#x8981;&#x628A;&#x5907;&#x4EFD;&#x7684;&#x56FE;&#x539F;&#x6837;&#x6062;&#x590D;&#x5230;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x56FE;&#x4E2D;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x9700;&#x8981;&#x5148;&#x5C06;&#x56FE;&#x6A21;&#x5F0F;&#x8BBE;&#x7F6E;&#x4E3A; RESTORING &#x6A21;&#x5F0F;&#xFF1B;&#x5F53;&#x9700;&#x8981;&#x5C06;&#x5907;&#x4EFD;&#x7684;&#x56FE;&#x5408;&#x5E76;&#x5230;&#x5DF2;&#x5B58;&#x5728;&#x7684;&#x56FE;&#x4E2D;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x5148;&#x5C06;&#x56FE;&#x6A21;&#x5F0F;&#x8BBE;&#x7F6E;&#x4E3A; MERGING &#x6A21;&#x5F0F;&#x3002;</p>
+</blockquote>
+<h5 id="34-&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x7BA1;&#x7406;&#x7C7B;&#xFF0C;task-list&#x3001;task-get&#x548C;task-delete">3.4 &#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x7BA1;&#x7406;&#x7C7B;&#xFF0C;task-list&#x3001;task-get&#x548C;task-delete</h5>
+<ul>
+<li>task-list&#xFF0C;&#x5217;&#x51FA;&#x67D0;&#x4E2A;&#x56FE;&#x4E2D;&#x7684;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#xFF0C;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x4EFB;&#x52A1;&#x7684;&#x72B6;&#x6001;&#x8FC7;&#x6EE4;<ul>
+<li>--status&#xFF0C;&#x9009;&#x586B;&#x9879;&#xFF0C;&#x6307;&#x5B9A;&#x8981;&#x67E5;&#x770B;&#x7684;&#x4EFB;&#x52A1;&#x7684;&#x72B6;&#x6001;&#xFF0C;&#x5373;&#x6309;&#x72B6;&#x6001;&#x8FC7;&#x6EE4;&#x4EFB;&#x52A1;</li>
+<li>--limit&#xFF0C;&#x9009;&#x586B;&#x9879;&#xFF0C;&#x6307;&#x5B9A;&#x8981;&#x83B7;&#x53D6;&#x7684;&#x4EFB;&#x52A1;&#x7684;&#x6570;&#x76EE;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; -1&#xFF0C;&#x610F;&#x601D;&#x4E3A;&#x83B7;&#x53D6;&#x5168;&#x90E8;&#x7B26;&#x5408;&#x6761;&#x4EF6;&#x7684;&#x4EFB;&#x52A1;</li>
+</ul>
+</li>
+<li>task-get&#xFF0C;&#x83B7;&#x53D6;&#x67D0;&#x4E2A;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x7684;&#x8BE6;&#x7EC6;&#x4FE1;&#x606F;<ul>
+<li>--task-id&#xFF0C;&#x5FC5;&#x586B;&#x9879;&#xFF0C;&#x6307;&#x5B9A;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x7684; ID</li>
+</ul>
+</li>
+<li>task-delete&#xFF0C;&#x5220;&#x9664;&#x67D0;&#x4E2A;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x7684;&#x4FE1;&#x606F;<ul>
+<li>--task-id&#xFF0C;&#x5FC5;&#x586B;&#x9879;&#xFF0C;&#x6307;&#x5B9A;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x7684; ID</li>
+</ul>
+</li>
+<li>task-cancel&#xFF0C;&#x53D6;&#x6D88;&#x67D0;&#x4E2A;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x7684;&#x6267;&#x884C;<ul>
+<li>--task-id&#xFF0C;&#x8981;&#x53D6;&#x6D88;&#x7684;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x7684; ID</li>
+</ul>
+</li>
+<li>task-clear&#xFF0C;&#x6E05;&#x7406;&#x5B8C;&#x6210;&#x7684;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;<ul>
+<li>--force&#xFF0C;&#x9009;&#x586B;&#x9879;&#xFF0C;&#x8BBE;&#x7F6E;&#x4E3A; true &#x65F6;&#xFF0C;&#x8868;&#x793A;&#x6E05;&#x7406;&#x5168;&#x90E8;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#xFF0C;&#x672A;&#x6267;&#x884C;&#x5B8C;&#x6210;&#x7684;&#x5148;&#x53D6;&#x6D88;&#xFF0C;&#x7136;&#x540E;&#x6E05;&#x9664;&#x6240;&#x6709;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x3002;&#x9ED8;&#x8BA4;&#x503C;&#x4E3A; false&#xFF0C;&#x53EA;&#x6E05;&#x7406;&#x5B8C;&#x6210;&#x7684;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;</li>
+</ul>
+</li>
+</ul>
+<h5 id="35-gremlin&#x7C7B;&#xFF0C;gremlin-execute&#x548C;gremlin-schedule">3.5 Gremlin&#x7C7B;&#xFF0C;gremlin-execute&#x548C;gremlin-schedule</h5>
+<ul>
+<li>gremlin-execute&#xFF0C;&#x53D1;&#x9001; Gremlin &#x8BED;&#x53E5;&#x5230; HugeGraph-Server &#x6765;&#x6267;&#x884C;&#x67E5;&#x8BE2;&#x6216;&#x4FEE;&#x6539;&#x64CD;&#x4F5C;&#xFF0C;&#x540C;&#x6B65;&#x6267;&#x884C;&#xFF0C;&#x7ED3;&#x675F;&#x540E;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;<ul>
+<li>--file &#x6216;&#x8005; -f&#xFF0C;&#x6307;&#x5B9A;&#x8981;&#x6267;&#x884C;&#x7684;&#x811A;&#x672C;&#x6587;&#x4EF6;&#xFF0C;UTF-8&#x7F16;&#x7801;&#xFF0C;&#x4E0E; --script &#x4E92;&#x65A5;</li>
+<li>--script &#x6216;&#x8005; -s&#xFF0C;&#x6307;&#x5B9A;&#x8981;&#x6267;&#x884C;&#x7684;&#x811A;&#x672C;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x4E0E; --file &#x4E92;&#x65A5;</li>
+<li>--aliases &#x6216;&#x8005; -a&#xFF0C;Gremlin &#x522B;&#x540D;&#x8BBE;&#x7F6E;&#xFF0C;&#x683C;&#x5F0F;&#x4E3A;&#xFF1A;key1=value1,key2=value2,...</li>
+<li>--bindings &#x6216;&#x8005; -b&#xFF0C;Gremlin &#x7ED1;&#x5B9A;&#x8BBE;&#x7F6E;&#xFF0C;&#x683C;&#x5F0F;&#x4E3A;&#xFF1A;key1=value1,key2=value2,...</li>
+<li>--language &#x6216;&#x8005; -l&#xFF0C;Gremlin &#x811A;&#x672C;&#x7684;&#x8BED;&#x8A00;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; gremlin-groovy<blockquote>
+<p>--file &#x548C; --script &#x4E8C;&#x8005;&#x4E92;&#x65A5;&#xFF0C;&#x5FC5;&#x987B;&#x8BBE;&#x7F6E;&#x5176;&#x4E2D;&#x4E4B;&#x4E00;</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>gremlin-schedule&#xFF0C;&#x53D1;&#x9001; Gremlin &#x8BED;&#x53E5;&#x5230; HugeGraph-Server &#x6765;&#x6267;&#x884C;&#x67E5;&#x8BE2;&#x6216;&#x4FEE;&#x6539;&#x64CD;&#x4F5C;&#xFF0C;&#x5F02;&#x6B65;&#x6267;&#x884C;&#xFF0C;&#x4EFB;&#x52A1;&#x63D0;&#x4EA4;&#x540E;&#x7ACB;&#x523B;&#x8FD4;&#x56DE;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;id<ul>
+<li>--file &#x6216;&#x8005; -f&#xFF0C;&#x6307;&#x5B9A;&#x8981;&#x6267;&#x884C;&#x7684;&#x811A;&#x672C;&#x6587;&#x4EF6;&#xFF0C;UTF-8&#x7F16;&#x7801;&#xFF0C;&#x4E0E; --script &#x4E92;&#x65A5;</li>
+<li>--script &#x6216;&#x8005; -s&#xFF0C;&#x6307;&#x5B9A;&#x8981;&#x6267;&#x884C;&#x7684;&#x811A;&#x672C;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x4E0E; --file &#x4E92;&#x65A5;</li>
+<li>--bindings &#x6216;&#x8005; -b&#xFF0C;Gremlin &#x7ED1;&#x5B9A;&#x8BBE;&#x7F6E;&#xFF0C;&#x683C;&#x5F0F;&#x4E3A;&#xFF1A;key1=value1,key2=value2,...</li>
+<li>--language &#x6216;&#x8005; -l&#xFF0C;Gremlin &#x811A;&#x672C;&#x7684;&#x8BED;&#x8A00;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; gremlin-groovy<blockquote>
+<p>--file &#x548C; --script &#x4E8C;&#x8005;&#x4E92;&#x65A5;&#xFF0C;&#x5FC5;&#x987B;&#x8BBE;&#x7F6E;&#x5176;&#x4E2D;&#x4E4B;&#x4E00;</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="36-&#x5907;&#x4EFD;&#x6062;&#x590D;&#x7C7B;">3.6 &#x5907;&#x4EFD;/&#x6062;&#x590D;&#x7C7B;</h5>
+<ul>
+<li>backup&#xFF0C;&#x5C06;&#x67D0;&#x5F20;&#x56FE;&#x4E2D;&#x7684; schema &#x6216;&#x8005; data &#x5907;&#x4EFD;&#x5230; HugeGraph &#x7CFB;&#x7EDF;&#x4E4B;&#x5916;&#xFF0C;&#x4EE5; JSON &#x5F62;&#x5F0F;&#x5B58;&#x5728;&#x672C;&#x5730;&#x78C1;&#x76D8;&#x6216;&#x8005; HDFS<ul>
+<li>--directory &#x6216;&#x8005; -d&#xFF0C;&#x5B58;&#x50A8; schema &#x6216;&#x8005; data &#x7684;&#x76EE;&#x5F55;&#xFF0C;&#x672C;&#x5730;&#x76EE;&#x5F55;&#x65F6;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;&apos;./{graphName}&apos;&#xFF0C;HDFS &#x65F6;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; &apos;{fs.default.name}/{graphName}&apos;</li>
+<li>--huge-types &#x6216;&#x8005; -t&#xFF0C;&#x8981;&#x5907;&#x4EFD;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF0C;&#x9017;&#x53F7;&#x5206;&#x9694;&#xFF0C;&#x53EF;&#x9009;&#x503C;&#x4E3A; &apos;all&apos; &#x6216;&#x8005; &#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A; [vertex,edge,vertex_label,edge_label,property_key,index_label] &#x7684;&#x7EC4;&#x5408;&#xFF0C;&apos;all&apos; &#x4EE3;&#x8868;&#x5168;&#x90E8;6&#x79CD;&#x7C7B;&#x578B;&#xFF0C;&#x5373;&#x9876;&#x70B9;&#x3001;&#x8FB9;&#x548C;&#x6240;&#x6709;schema</li>
+<li>--log &#x6216;&#x8005; -l&#xFF0C;&#x6307;&#x5B9A;&#x65E5;&#x5FD7;&#x76EE;&#x5F55;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;&#x5F53;&#x524D;&#x76EE;&#x5F55;</li>
+<li>--retry&#xFF0C;&#x6307;&#x5B9A;&#x5931;&#x8D25;&#x91CD;&#x8BD5;&#x6B21;&#x6570;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; 3</li>
+<li>--split-size &#x6216;&#x8005; -s&#xFF0C;&#x6307;&#x5B9A;&#x5728;&#x5907;&#x4EFD;&#x65F6;&#x5BF9;&#x9876;&#x70B9;&#x6216;&#x8005;&#x8FB9;&#x5206;&#x5757;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; 1048576</li>
+<li>-D&#xFF0C;&#x7528; -Dkey=value &#x7684;&#x6A21;&#x5F0F;&#x6307;&#x5B9A;&#x52A8;&#x6001;&#x53C2;&#x6570;&#xFF0C;&#x7528;&#x6765;&#x5907;&#x4EFD;&#x6570;&#x636E;&#x5230; HDFS &#x65F6;&#xFF0C;&#x6307;&#x5B9A; HDFS &#x7684;&#x914D;&#x7F6E;&#x9879;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;-Dfs.default.name=hdfs://localhost:9000 </li>
+</ul>
+</li>
+<li>restore&#xFF0C;&#x5C06; JSON &#x683C;&#x5F0F;&#x5B58;&#x50A8;&#x7684; schema &#x6216;&#x8005; data &#x6062;&#x590D;&#x5230;&#x4E00;&#x4E2A;&#x65B0;&#x56FE;&#x4E2D;&#xFF08;RESTORING &#x6A21;&#x5F0F;&#xFF09;&#x6216;&#x8005;&#x5408;&#x5E76;&#x5230;&#x5DF2;&#x5B58;&#x5728;&#x7684;&#x56FE;&#x4E2D;&#xFF08;MERGING &#x6A21;&#x5F0F;&#xFF09;<ul>
+<li>--directory &#x6216;&#x8005; -d&#xFF0C;&#x5B58;&#x50A8; schema &#x6216;&#x8005; data &#x7684;&#x76EE;&#x5F55;&#xFF0C;&#x672C;&#x5730;&#x76EE;&#x5F55;&#x65F6;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;&apos;./{graphName}&apos;&#xFF0C;HDFS &#x65F6;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; &apos;{fs.default.name}/{graphName}&apos;</li>
+<li>--huge-types &#x6216;&#x8005; -t&#xFF0C;&#x8981;&#x6062;&#x590D;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF0C;&#x9017;&#x53F7;&#x5206;&#x9694;&#xFF0C;&#x53EF;&#x9009;&#x503C;&#x4E3A; &apos;all&apos; &#x6216;&#x8005; &#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A; [vertex,edge,vertex_label,edge_label,property_key,index_label] &#x7684;&#x7EC4;&#x5408;&#xFF0C;&apos;all&apos; &#x4EE3;&#x8868;&#x5168;&#x90E8;6&#x79CD;&#x7C7B;&#x578B;&#xFF0C;&#x5373;&#x9876;&#x70B9;&#x3001;&#x8FB9;&#x548C;&#x6240;&#x6709;schema</li>
+<li>--log &#x6216;&#x8005; -l&#xFF0C;&#x6307;&#x5B9A;&#x65E5;&#x5FD7;&#x76EE;&#x5F55;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;&#x5F53;&#x524D;&#x76EE;&#x5F55;</li>
+<li>--retry&#xFF0C;&#x6307;&#x5B9A;&#x5931;&#x8D25;&#x91CD;&#x8BD5;&#x6B21;&#x6570;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; 3</li>
+<li>-D&#xFF0C;&#x7528; -Dkey=value &#x7684;&#x6A21;&#x5F0F;&#x6307;&#x5B9A;&#x52A8;&#x6001;&#x53C2;&#x6570;&#xFF0C;&#x7528;&#x6765;&#x4ECE; HDFS &#x6062;&#x590D;&#x56FE;&#x65F6;&#xFF0C;&#x6307;&#x5B9A; HDFS &#x7684;&#x914D;&#x7F6E;&#x9879;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;-Dfs.default.name=hdfs://localhost:9000 </li>
+</ul>
+</li>
+<li>schedule-backup&#xFF0C;&#x5468;&#x671F;&#x6027;&#x5BF9;&#x56FE;&#x6267;&#x884C;&#x5907;&#x4EFD;&#x64CD;&#x4F5C;&#xFF0C;&#x5E76;&#x4FDD;&#x7559;&#x4E00;&#x5B9A;&#x6570;&#x76EE;&#x7684;&#x6700;&#x65B0;&#x5907;&#x4EFD;&#xFF08;&#x76EE;&#x524D;&#x4EC5;&#x652F;&#x6301;&#x672C;&#x5730;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#xFF09;<ul>
+<li>--directory &#x6216;&#x8005; -d&#xFF0C;&#x5FC5;&#x586B;&#x9879;&#xFF0C;&#x6307;&#x5B9A;&#x5907;&#x4EFD;&#x6570;&#x636E;&#x7684;&#x76EE;&#x5F55;</li>
+<li>--backup-num&#xFF0C;&#x9009;&#x586B;&#x9879;&#xFF0C;&#x6307;&#x5B9A;&#x4FDD;&#x5B58;&#x7684;&#x6700;&#x65B0;&#x7684;&#x5907;&#x4EFD;&#x7684;&#x6570;&#x76EE;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; 3</li>
+<li>--interval&#xFF0C;&#x9009;&#x586B;&#x9879;&#xFF0C;&#x6307;&#x5B9A;&#x8FDB;&#x884C;&#x5907;&#x4EFD;&#x7684;&#x5468;&#x671F;&#xFF0C;&#x683C;&#x5F0F;&#x540C; Linux crontab &#x683C;&#x5F0F;</li>
+</ul>
+</li>
+<li>dump&#xFF0C;&#x628A;&#x6574;&#x5F20;&#x56FE;&#x7684;&#x9876;&#x70B9;&#x548C;&#x8FB9;&#x5168;&#x90E8;&#x5BFC;&#x51FA;&#xFF0C;&#x9ED8;&#x8BA4;&#x4EE5;<code>vertex vertex-edge1 vertex-edge2...</code>JSON&#x683C;&#x5F0F;&#x5B58;&#x50A8;&#x3002;
+&#x7528;&#x6237;&#x4E5F;&#x53EF;&#x4EE5;&#x81EA;&#x5B9A;&#x4E49;&#x5B58;&#x50A8;&#x683C;&#x5F0F;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x5728;<code>hugegraph-tools/src/main/java/com/baidu/hugegraph/formatter</code>
+&#x76EE;&#x5F55;&#x4E0B;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x7EE7;&#x627F;&#x81EA;<code>Formatter</code>&#x7684;&#x7C7B;&#xFF0C;&#x4F8B;&#x5982;<code>CustomFormatter</code>&#xFF0C;&#x4F7F;&#x7528;&#x65F6;&#x6307;&#x5B9A;&#x8BE5;&#x7C7B;&#x4E3A;formatter&#x5373;&#x53EF;&#xFF0C;&#x4F8B;&#x5982;
+<code>bin/hugegraph dump -f CustomFormatter</code><ul>
+<li>--formatter &#x6216;&#x8005; -f&#xFF0C;&#x6307;&#x5B9A;&#x4F7F;&#x7528;&#x7684; formatter&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; JsonFormatter</li>
+<li>--directory &#x6216;&#x8005; -d&#xFF0C;&#x5B58;&#x50A8; schema &#x6216;&#x8005; data &#x7684;&#x76EE;&#x5F55;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;&#x5F53;&#x524D;&#x76EE;&#x5F55;</li>
+<li>--huge-types &#x6216;&#x8005; -t&#xFF0C;&#x8981;&#x5907;&#x4EFD;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF0C;&#x9017;&#x53F7;&#x5206;&#x9694;&#xFF0C;&#x53EF;&#x9009;&#x503C;&#x4E3A; &apos;all&apos; &#x6216;&#x8005; &#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A; [vertex,edge,vertex_label,edge_label,property_key,index_label] &#x7684;&#x7EC4;&#x5408;&#xFF0C;&apos;all&apos; &#x4EE3;&#x8868;&#x5168;&#x90E8;6&#x79CD;&#x7C7B;&#x578B;</li>
+<li>--log &#x6216;&#x8005; -l&#xFF0C;&#x6307;&#x5B9A;&#x65E5;&#x5FD7;&#x76EE;&#x5F55;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;&#x5F53;&#x524D;&#x76EE;&#x5F55;</li>
+<li>--retry&#xFF0C;&#x6307;&#x5B9A;&#x5931;&#x8D25;&#x91CD;&#x8BD5;&#x6B21;&#x6570;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; 3</li>
+<li>--split-size &#x6216;&#x8005; -s&#xFF0C;&#x6307;&#x5B9A;&#x5728;&#x5907;&#x4EFD;&#x65F6;&#x5BF9;&#x9876;&#x70B9;&#x6216;&#x8005;&#x8FB9;&#x5206;&#x5757;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; 1048576</li>
+<li>-D&#xFF0C;&#x7528; -Dkey=value &#x7684;&#x6A21;&#x5F0F;&#x6307;&#x5B9A;&#x52A8;&#x6001;&#x53C2;&#x6570;&#xFF0C;&#x7528;&#x6765;&#x5907;&#x4EFD;&#x6570;&#x636E;&#x5230; HDFS &#x65F6;&#xFF0C;&#x6307;&#x5B9A; HDFS &#x7684;&#x914D;&#x7F6E;&#x9879;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;-Dfs.default.name=hdfs://localhost:9000 </li>
+</ul>
+</li>
+</ul>
+<h5 id="37-&#x5B89;&#x88C5;&#x90E8;&#x7F72;&#x7C7B;">3.7 &#x5B89;&#x88C5;&#x90E8;&#x7F72;&#x7C7B;</h5>
+<ul>
+<li>deploy&#xFF0C;&#x4E00;&#x952E;&#x4E0B;&#x8F7D;&#x3001;&#x5B89;&#x88C5;&#x548C;&#x542F;&#x52A8; HugeGraph-Server &#x548C; HugeGraph-Studio<ul>
+<li>-v&#xFF0C;&#x5FC5;&#x586B;&#x9879;&#xFF0C;&#x6307;&#x660E;&#x5B89;&#x88C5;&#x7684; HugeGraph-Server &#x548C; HugeGraph-Studio &#x7684;&#x7248;&#x672C;&#x53F7;&#xFF0C;&#x6700;&#x65B0;&#x7684;&#x662F; 0.9</li>
+<li>-p&#xFF0C;&#x5FC5;&#x586B;&#x9879;&#xFF0C;&#x6307;&#x5B9A;&#x5B89;&#x88C5;&#x7684; HugeGraph-Server &#x548C; HugeGraph-Studio &#x76EE;&#x5F55;</li>
+<li>-u&#xFF0C;&#x9009;&#x586B;&#x9879;&#xFF0C;&#x6307;&#x5B9A;&#x4E0B;&#x8F7D; HugeGraph-Server &#x548C; HugeGraph-Studio &#x538B;&#x7F29;&#x5305;&#x7684;&#x94FE;&#x63A5;</li>
+</ul>
+</li>
+<li>clear&#xFF0C;&#x6E05;&#x7406; HugeGraph-Server &#x548C; HugeGraph-Studio &#x76EE;&#x5F55;&#x548C;tar&#x5305;<ul>
+<li>-p&#xFF0C;&#x5FC5;&#x586B;&#x9879;&#xFF0C;&#x6307;&#x5B9A;&#x8981;&#x6E05;&#x7406;&#x7684; HugeGraph-Server &#x548C; HugeGraph-Studio &#x7684;&#x76EE;&#x5F55;</li>
+</ul>
+</li>
+<li>start-all&#xFF0C;&#x4E00;&#x952E;&#x542F;&#x52A8; HugeGraph-Server &#x548C; HugeGraph-Studio&#xFF0C;&#x5E76;&#x542F;&#x52A8;&#x76D1;&#x63A7;&#xFF0C;&#x670D;&#x52A1;&#x6B7B;&#x6389;&#x65F6;&#x81EA;&#x52A8;&#x62C9;&#x8D77;&#x670D;&#x52A1;<ul>
+<li>-v&#xFF0C;&#x5FC5;&#x586B;&#x9879;&#xFF0C;&#x6307;&#x660E;&#x8981;&#x542F;&#x52A8;&#x7684; HugeGraph-Server &#x548C; HugeGraph-Studio &#x7684;&#x7248;&#x672C;&#x53F7;&#xFF0C;&#x6700;&#x65B0;&#x7684;&#x662F; 0.9</li>
+<li>-p&#xFF0C;&#x5FC5;&#x586B;&#x9879;&#xFF0C;&#x6307;&#x5B9A;&#x5B89;&#x88C5;&#x4E86; HugeGraph-Server &#x548C; HugeGraph-Studio &#x7684;&#x76EE;&#x5F55;</li>
+</ul>
+</li>
 <li>stop-all&#xFF0C;&#x4E00;&#x952E;&#x5173;&#x95ED; HugeGraph-Server &#x548C; HugeGraph-Studio</li>
 </ul>
 <blockquote>
 <p>deploy&#x547D;&#x4EE4;&#x4E2D;&#x6709;&#x53EF;&#x9009;&#x53C2;&#x6570; -u&#xFF0C;&#x63D0;&#x4F9B;&#x65F6;&#x4F1A;&#x4F7F;&#x7528;&#x6307;&#x5B9A;&#x7684;&#x4E0B;&#x8F7D;&#x5730;&#x5740;&#x66FF;&#x4EE3;&#x9ED8;&#x8BA4;&#x4E0B;&#x8F7D;&#x5730;&#x5740;&#x4E0B;&#x8F7D; tar &#x5305;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;&#x5730;&#x5740;&#x5199;&#x5165;<code>~/hugegraph-download-url-prefix</code>&#x6587;&#x4EF6;&#x4E2D;&#xFF1B;&#x4E4B;&#x540E;&#x5982;&#x679C;&#x4E0D;&#x6307;&#x5B9A;&#x5730;&#x5740;&#x65F6;&#xFF0C;&#x4F1A;&#x4F18;&#x5148;&#x4ECE;<code>~/hugegraph-download-url-prefix</code>&#x6307;&#x5B9A;&#x7684;&#x5730;&#x5740;&#x4E0B;&#x8F7D; tar &#x5305;&#xFF1B;&#x5982;&#x679C; -u &#x548C;<code>~/hugegraph-download-url-prefix</code>&#x90FD;&#x6CA1;&#x6709;&#x65F6;&#xFF0C;&#x4F1A;&#x4ECE;&#x9ED8;&#x8BA4;&#x4E0B;&#x8F7D;&#x5730;&#x5740;&#x8FDB;&#x884C;&#x4E0B;&#x8F7D;</p>
 </blockquote>
-<h5 id="34-&#x5907;&#x4EFD;&#x6062;&#x590D;&#x7C7B;">3.4 &#x5907;&#x4EFD;/&#x6062;&#x590D;&#x7C7B;</h5>
-<ul>
-<li>backup&#xFF0C;&#x5C06;&#x67D0;&#x5F20;&#x56FE;&#x4E2D;&#x7684; schema &#x6216;&#x8005; data &#x5907;&#x4EFD;&#x5230; HugeGraph &#x7CFB;&#x7EDF;&#x4E4B;&#x5916;&#xFF0C;&#x4EE5; JSON &#x5F62;&#x5F0F;&#x5B58;&#x5728;&#x672C;&#x5730;&#x78C1;&#x76D8;</li>
-<li>restore&#xFF0C;&#x5C06; JSON &#x683C;&#x5F0F;&#x5B58;&#x50A8;&#x7684; schema &#x6216;&#x8005; data &#x6062;&#x590D;&#x5230;&#x539F;&#x7CFB;&#x7EDF;&#x6216;&#x8005;&#x521B;&#x5EFA;&#x65B0;&#x56FE;</li>
-<li>schedule-backup&#xFF0C;&#x5468;&#x671F;&#x6027;&#x5BF9;&#x56FE;&#x6267;&#x884C;&#x5907;&#x4EFD;&#x64CD;&#x4F5C;&#xFF0C;&#x5E76;&#x4FDD;&#x7559;&#x4E00;&#x5B9A;&#x6570;&#x76EE;&#x7684;&#x6700;&#x65B0;&#x5907;&#x4EFD;</li>
-<li>dump&#xFF0C;&#x628A;&#x6574;&#x5F20;&#x56FE;&#x7684;&#x9876;&#x70B9;&#x548C;&#x8FB9;&#x5168;&#x90E8;&#x5BFC;&#x51FA;&#xFF0C;&#x9ED8;&#x8BA4;&#x4EE5;<code>vertex vertex-edge1 vertex-edge2...</code>JSON&#x683C;&#x5F0F;&#x5B58;&#x50A8;&#x3002;
-&#x7528;&#x6237;&#x4E5F;&#x53EF;&#x4EE5;&#x81EA;&#x5B9A;&#x4E49;&#x5B58;&#x50A8;&#x683C;&#x5F0F;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x5728;<code>hugegraph-tools/src/main/java/com/baidu/hugegraph/formatter</code>
-&#x76EE;&#x5F55;&#x4E0B;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x7EE7;&#x627F;&#x81EA;<code>Formatter</code>&#x7684;&#x7C7B;&#xFF0C;&#x4F8B;&#x5982;<code>CustomFormatter</code>&#xFF0C;&#x4F7F;&#x7528;&#x65F6;&#x6307;&#x5B9A;&#x8BE5;&#x7C7B;&#x4E3A;formatter&#x5373;&#x53EF;&#xFF0C;&#x4F8B;&#x5982;
-<code>bin/hugegraph dump -f CustomFormatter</code></li>
-</ul>
-<h5 id="35-&#x56FE;&#x7BA1;&#x7406;&#x7C7B;&#xFF0C;graph-mode-set&#x3001;graph-mode-get&#x3001;graph-list&#x3001;graph-get&#x548C;graph-clear">3.5 &#x56FE;&#x7BA1;&#x7406;&#x7C7B;&#xFF0C;graph-mode-set&#x3001;graph-mode-get&#x3001;graph-list&#x3001;graph-get&#x548C;graph-clear</h5>
-<ul>
-<li>graph-mode-set&#xFF0C;&#x8BBE;&#x7F6E;&#x56FE;&#x7684; restore mode</li>
-<li>graph-mode-get&#xFF0C;&#x83B7;&#x53D6;&#x56FE;&#x7684; restore mode</li>
-<li>graph-list&#xFF0C;&#x5217;&#x51FA;&#x67D0;&#x4E2A; HugeGraph-Server &#x4E2D;&#x5168;&#x90E8;&#x7684;&#x56FE;</li>
-<li>graph-get&#xFF0C;&#x83B7;&#x53D6;&#x67D0;&#x4E2A;&#x56FE;</li>
-<li>graph-clear&#xFF0C;&#x6E05;&#x9664;&#x67D0;&#x4E2A;&#x56FE;&#x7684;&#x5168;&#x90E8; schema &#x548C; data</li>
-</ul>
-<blockquote>
-<p>&#x5F53;&#x56FE;&#x4E2D;&#x542B;&#x6709; Automatic Id Strategy&#x7684; vertex label &#x65F6;&#xFF0C;restore &#x524D;&#x9700;&#x8981;&#x5C06;&#x56FE; restoring &#x6A21;&#x5F0F;&#x8BBE;&#x7F6E;&#x4E3A; TRUE&#xFF0C;restore &#x7ED3;&#x675F;&#x540E;&#x6062;&#x590D; restoring &#x6A21;&#x5F0F;&#x4E3A; FALSE</p>
-</blockquote>
-<h5 id="36-&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x7BA1;&#x7406;&#x7C7B;&#xFF0C;task-list&#x3001;task-get&#x548C;task-delete">3.6 &#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x7BA1;&#x7406;&#x7C7B;&#xFF0C;task-list&#x3001;task-get&#x548C;task-delete</h5>
-<ul>
-<li>task-list&#xFF0C;&#x5217;&#x51FA;&#x67D0;&#x4E2A;&#x56FE;&#x4E2D;&#x7684;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#xFF0C;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x4EFB;&#x52A1;&#x7684;&#x72B6;&#x6001;&#x8FC7;&#x6EE4;</li>
-<li>task-get&#xFF0C;&#x83B7;&#x53D6;&#x67D0;&#x4E2A;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x7684;&#x8BE6;&#x7EC6;&#x4FE1;&#x606F;</li>
-<li>task-delete&#xFF0C;&#x5220;&#x9664;&#x67D0;&#x4E2A;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;&#x7684;&#x4FE1;&#x606F;</li>
-</ul>
-<h5 id="37-gremlin&#x7C7B;&#xFF0C;gremlin-execute&#x548C;gremlin-schedule">3.7 Gremlin&#x7C7B;&#xFF0C;gremlin-execute&#x548C;gremlin-schedule</h5>
-<ul>
-<li>gremlin-execute&#xFF0C;&#x53D1;&#x9001; Gremlin &#x8BED;&#x53E5;&#x5230; HugeGraph-Server &#x6765;&#x6267;&#x884C;&#x67E5;&#x8BE2;&#x6216;&#x4FEE;&#x6539;&#x64CD;&#x4F5C;&#xFF0C;&#x540C;&#x6B65;&#x6267;&#x884C;&#xFF0C;&#x7ED3;&#x675F;&#x540E;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;</li>
-<li>gremlin-schedule&#xFF0C;&#x53D1;&#x9001; Gremlin &#x8BED;&#x53E5;&#x5230; HugeGraph-Server &#x6765;&#x6267;&#x884C;&#x67E5;&#x8BE2;&#x6216;&#x4FEE;&#x6539;&#x64CD;&#x4F5C;&#xFF0C;&#x5F02;&#x6B65;&#x6267;&#x884C;&#xFF0C;&#x4EFB;&#x52A1;&#x63D0;&#x4EA4;&#x540E;&#x7ACB;&#x523B;&#x8FD4;&#x56DE;&#x5F02;&#x6B65;&#x4EFB;&#x52A1;id</li>
-</ul>
 <h5 id="38-&#x5177;&#x4F53;&#x547D;&#x4EE4;&#x53C2;&#x6570;">3.8 &#x5177;&#x4F53;&#x547D;&#x4EE4;&#x53C2;&#x6570;</h5>
 <p>&#x5404;&#x5B50;&#x547D;&#x4EE4;&#x7684;&#x5177;&#x4F53;&#x53C2;&#x6570;&#x5982;&#x4E0B;&#xFF1A;</p>
 <pre><code class="lang-bash">Usage: hugegraph [options] [<span class="hljs-built_in">command</span>] [<span class="hljs-built_in">command</span> options]
@@ -974,24 +1112,37 @@ mvn package -DskipTests
       Default: hugegraph
     --password
       Password of user
+    --timeout
+      Connection timeout
+      Default: 30
     --url
       The URL of HugeGraph-Server url
       Default: http://127.0.0.1:8080
     --user
       User Name
   Commands:
-    backup      Backup graph schema/data to files
-      Usage: backup [options]
+    graph-list      List all graphs
+      Usage: graph-list
+
+    graph-get      Get graph info
+      Usage: graph-get
+
+    graph-clear      Clear graph schema and data
+      Usage: graph-clear [options]
         Options:
-          --directory, <span class="hljs-_">-d</span>
-            Directory to store graph schema/data
-            Default: ./
-        * --huge-types, -t
-            Type of schema/data. Concat with <span class="hljs-string">&apos;,&apos;</span> <span class="hljs-keyword">if</span> more than one. <span class="hljs-string">&apos;all&apos;</span> means 
-            <span class="hljs-string">&apos;vertex,edge,vertex_label,edge_label,property_key,index_label&apos;</span> 
-          --retry
-            Retry <span class="hljs-built_in">times</span>, default is 3
-            Default: 3
+        * --confirm-message, -c
+            Confirm message of graph clear is <span class="hljs-string">&quot;I&apos;m sure to delete all data&quot;</span>. 
+            (Note: include <span class="hljs-string">&quot;&quot;</span>)
+
+    graph-mode-set      Set graph mode
+      Usage: graph-mode-set [options]
+        Options:
+        * --graph-mode, -m
+            Graph mode, include: [NONE, RESTORING, MERGING]
+            Possible Values: [NONE, RESTORING, MERGING]
+
+    graph-mode-get      Get graph mode
+      Usage: graph-mode-get
 
     task-list      List tasks
       Usage: task-list [options]
@@ -1001,6 +1152,95 @@ mvn package -DskipTests
             Default: -1
           --status
             Status of task
+
+    task-get      Get task info
+      Usage: task-get [options]
+        Options:
+        * --task-id
+            Task id
+            Default: 0
+
+    task-delete      Delete task
+      Usage: task-delete [options]
+        Options:
+        * --task-id
+            Task id
+            Default: 0
+
+    task-cancel      Cancel task
+      Usage: task-cancel [options]
+        Options:
+        * --task-id
+            Task id
+            Default: 0
+
+    task-clear      Clear completed tasks
+      Usage: task-clear [options]
+        Options:
+          --force
+            Force to clear all tasks, cancel all uncompleted tasks firstly, 
+            and delete all completed task
+            Default: <span class="hljs-literal">false</span>
+
+    gremlin-execute      Execute Gremlin statements
+      Usage: gremlin-execute [options]
+        Options:
+          --aliases, <span class="hljs-_">-a</span>
+            Gremlin aliases, valid format is: <span class="hljs-string">&apos;key1=value1,key2=value2...&apos;</span>
+            Default: {}
+          --bindings, -b
+            Gremlin bindings, valid format is: <span class="hljs-string">&apos;key1=value1,key2=value2...&apos;</span>
+            Default: {}
+          --file, <span class="hljs-_">-f</span>
+            Gremlin Script file to be executed, UTF-8encoded, exclusive to 
+            --script 
+          --language, <span class="hljs-_">-l</span>
+            Gremlin script language
+            Default: gremlin-groovy
+          --script, <span class="hljs-_">-s</span>
+            Gremlin script to be executed, exclusive to --file
+
+    gremlin-schedule      Execute Gremlin statements as asynchronous job
+      Usage: gremlin-schedule [options]
+        Options:
+          --bindings, -b
+            Gremlin bindings, valid format is: <span class="hljs-string">&apos;key1=value1,key2=value2...&apos;</span>
+            Default: {}
+          --file, <span class="hljs-_">-f</span>
+            Gremlin Script file to be executed, UTF-8encoded, exclusive to 
+            --script 
+          --language, <span class="hljs-_">-l</span>
+            Gremlin script language
+            Default: gremlin-groovy
+          --script, <span class="hljs-_">-s</span>
+            Gremlin script to be executed, exclusive to --file
+
+    backup      Backup graph schema/data. If directory is on HDFS, use -D to 
+            <span class="hljs-built_in">set</span> HDFS params <span class="hljs-keyword">if</span> needed. For 
+            exmaple:-Dfs.default.name=hdfs://localhost:9000 
+      Usage: backup [options]
+        Options:
+          --directory, <span class="hljs-_">-d</span>
+            Directory of graph schema/data, default is <span class="hljs-string">&apos;./{graphname}&apos;</span> <span class="hljs-keyword">in</span> 
+            <span class="hljs-built_in">local</span> file system or <span class="hljs-string">&apos;{fs.default.name}/{graphname}&apos;</span> <span class="hljs-keyword">in</span> HDFS
+          --huge-types, -t
+            Type of schema/data. Concat with <span class="hljs-string">&apos;,&apos;</span> <span class="hljs-keyword">if</span> more than one. <span class="hljs-string">&apos;all&apos;</span> means 
+            all vertices, edges and schema, <span class="hljs-keyword">in</span> other words, <span class="hljs-string">&apos;all&apos;</span> equals with 
+            <span class="hljs-string">&apos;vertex,edge,vertex_label,edge_label,property_key,index_label&apos;</span> 
+            Default: [PROPERTY_KEY, VERTEX_LABEL, EDGE_LABEL, INDEX_LABEL, VERTEX, EDGE]
+          --log, <span class="hljs-_">-l</span>
+            Directory of <span class="hljs-built_in">log</span>
+            Default: ./logs
+          --retry
+            Retry <span class="hljs-built_in">times</span>, default is 3
+            Default: 3
+          --split-size, <span class="hljs-_">-s</span>
+            Split size of shard
+            Default: 1048576
+          -D
+            HDFS config parameters
+            Syntax: -Dkey=value
+            Default: {}
 
     schedule-backup      Schedule backup task
       Usage: schedule-backup [options]
@@ -1017,62 +1257,57 @@ mvn package -DskipTests
             (Sunday=0), <span class="hljs-string">&quot;*&quot;</span> means all
             Default: 0,0,*,*,*
 
-    restore      Restore graph schema/data from files
-      Usage: restore [options]
+    dump      Dump graph to files
+      Usage: dump [options]
         Options:
           --directory, <span class="hljs-_">-d</span>
-            Directory of graph schema/data
-            Default: ./
-        * --huge-types, -t
+            Directory of graph schema/data, default is <span class="hljs-string">&apos;./{graphname}&apos;</span> <span class="hljs-keyword">in</span> 
+            <span class="hljs-built_in">local</span> file system or <span class="hljs-string">&apos;{fs.default.name}/{graphname}&apos;</span> <span class="hljs-keyword">in</span> HDFS
+          --formatter, <span class="hljs-_">-f</span>
+            Formatter to customize format of vertex/edge
+            Default: JsonFormatter
+          --huge-types, -t
             Type of schema/data. Concat with <span class="hljs-string">&apos;,&apos;</span> <span class="hljs-keyword">if</span> more than one. <span class="hljs-string">&apos;all&apos;</span> means 
+            all vertices, edges and schema, <span class="hljs-keyword">in</span> other words, <span class="hljs-string">&apos;all&apos;</span> equals with 
             <span class="hljs-string">&apos;vertex,edge,vertex_label,edge_label,property_key,index_label&apos;</span> 
+            Default: [PROPERTY_KEY, VERTEX_LABEL, EDGE_LABEL, INDEX_LABEL, VERTEX, EDGE]
+          --log, <span class="hljs-_">-l</span>
+            Directory of <span class="hljs-built_in">log</span>
+            Default: ./logs
           --retry
             Retry <span class="hljs-built_in">times</span>, default is 3
             Default: 3
-
-    graph-mode-get      Get graph mode
-      Usage: graph-mode-get [options]
-        Options:
-          --graph-name
-            Name of graph
-            Default: hugegraph
-
-    clear      Clear HugeGraph-Server and HugeGraph-Studio
-      Usage: clear [options]
-        Options:
-        * -p
-            Install path of HugeGraph-Server and HugeGraph-Studio
-
-    graph-list      List all graphs
-      Usage: graph-list
-
-    gremlin-schedule      Execute Gremlin statements as asynchronous job
-      Usage: gremlin-schedule [options]
-        Options:
-          --bindings, -b
-            Gremlin bindings, valid format is: <span class="hljs-string">&apos;key1=value1,key2=value2...&apos;</span>
+          --split-size, <span class="hljs-_">-s</span>
+            Split size of shard
+            Default: 1048576
+          -D
+            HDFS config parameters
+            Syntax: -Dkey=value
             Default: {}
-          --language, <span class="hljs-_">-l</span>
-            Gremlin script language
-            Default: gremlin-groovy
-        * --script, <span class="hljs-_">-s</span>
-            Script to be executed
 
-    graph-get      Get graph info
-      Usage: graph-get [options]
+    restore      Restore graph schema/data. If directory is on HDFS, use -D to 
+            <span class="hljs-built_in">set</span> HDFS params <span class="hljs-keyword">if</span> needed. For 
+            exmaple:-Dfs.default.name=hdfs://localhost:9000 
+      Usage: restore [options]
         Options:
-          --graph-name
-            Name of graph
-            Default: hugegraph
-
-    graph-clear      Clear graph schema and data
-      Usage: graph-clear [options]
-        Options:
-        * --confirm-message, -c
-            Confirm message of graph clear
-          --graph-name
-            Name of graph
-            Default: hugegraph
+          --directory, <span class="hljs-_">-d</span>
+            Directory of graph schema/data, default is <span class="hljs-string">&apos;./{graphname}&apos;</span> <span class="hljs-keyword">in</span> 
+            <span class="hljs-built_in">local</span> file system or <span class="hljs-string">&apos;{fs.default.name}/{graphname}&apos;</span> <span class="hljs-keyword">in</span> HDFS
+          --huge-types, -t
+            Type of schema/data. Concat with <span class="hljs-string">&apos;,&apos;</span> <span class="hljs-keyword">if</span> more than one. <span class="hljs-string">&apos;all&apos;</span> means 
+            all vertices, edges and schema, <span class="hljs-keyword">in</span> other words, <span class="hljs-string">&apos;all&apos;</span> equals with 
+            <span class="hljs-string">&apos;vertex,edge,vertex_label,edge_label,property_key,index_label&apos;</span> 
+            Default: [PROPERTY_KEY, VERTEX_LABEL, EDGE_LABEL, INDEX_LABEL, VERTEX, EDGE]
+          --log, <span class="hljs-_">-l</span>
+            Directory of <span class="hljs-built_in">log</span>
+            Default: ./logs
+          --retry
+            Retry <span class="hljs-built_in">times</span>, default is 3
+            Default: 3
+          -D
+            HDFS config parameters
+            Syntax: -Dkey=value
+            Default: {}
 
     deploy      Install HugeGraph-Server and HugeGraph-Studio
       Usage: deploy [options]
@@ -1084,19 +1319,6 @@ mvn package -DskipTests
         * -v
             Version of HugeGraph-Server and HugeGraph-Studio
 
-    <span class="hljs-built_in">help</span>      Print usage
-      Usage: <span class="hljs-built_in">help</span>
-
-    stop-all      Stop HugeGraph-Server and HugeGraph-Studio
-      Usage: stop-all
-
-    task-get      Get task info
-      Usage: task-get [options]
-        Options:
-        * --task-id
-            Task id
-            Default: 0
-
     start-all      Start HugeGraph-Server and HugeGraph-Studio
       Usage: start-all [options]
         Options:
@@ -1105,50 +1327,17 @@ mvn package -DskipTests
         * -v
             Version of HugeGraph-Server and HugeGraph-Studio
 
-    gremlin-execute      Execute Gremlin statements
-      Usage: gremlin-execute [options]
+    clear      Clear HugeGraph-Server and HugeGraph-Studio
+      Usage: clear [options]
         Options:
-          --aliases, <span class="hljs-_">-a</span>
-            Gremlin aliases, valid format is: <span class="hljs-string">&apos;key1=value1,key2=value2...&apos;</span>
-            Default: {}
-          --bindings, -b
-            Gremlin bindings, valid format is: <span class="hljs-string">&apos;key1=value1,key2=value2...&apos;</span>
-            Default: {}
-          --language, <span class="hljs-_">-l</span>
-            Gremlin script language
-            Default: gremlin-groovy
-        * --script, <span class="hljs-_">-s</span>
-            Script to be executed
+        * -p
+            Install path of HugeGraph-Server and HugeGraph-Studio
 
-    graph-mode-set      Set graph mode
-      Usage: graph-mode-set [options]
-        Options:
-          --graph-name
-            Name of graph
-            Default: hugegraph
-        * --restore, -r
-            Restore flag
-            Default: <span class="hljs-literal">false</span>
+    stop-all      Stop HugeGraph-Server and HugeGraph-Studio
+      Usage: stop-all
 
-    dump      Dump graph to files
-      Usage: dump [options]
-        Options:
-          --directory, <span class="hljs-_">-d</span>
-            Directory to store graph data
-            Default: ./
-          --formatter, <span class="hljs-_">-f</span>
-            Formatter to customize format of vertex/edge
-            Default: JsonFormatter
-          --retry
-            Retry <span class="hljs-built_in">times</span>, default is 3
-            Default: 3
-
-    task-delete      Delete task
-      Usage: task-delete [options]
-        Options:
-        * --task-id
-            Task id
-            Default: 0
+    <span class="hljs-built_in">help</span>      Print usage
+      Usage: <span class="hljs-built_in">help</span>
 </code></pre>
 
                                 
@@ -1202,7 +1391,7 @@ mvn package -DskipTests
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Manage with HugeGraph-Tools","level":"2.3","depth":1,"next":{"title":"Display with HugeGraph-Studio","level":"2.4","depth":1,"path":"quickstart/hugegraph-studio.md","ref":"quickstart/hugegraph-studio.md","articles":[]},"previous":{"title":"Load data with HugeGraph-Loader","level":"2.2","depth":1,"path":"quickstart/hugegraph-loader.md","ref":"quickstart/hugegraph-loader.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"quickstart/hugegraph-tools.md","mtime":"2018-12-03T03:39:19.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-04-19T10:32:05.917Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Manage with HugeGraph-Tools","level":"2.3","depth":1,"next":{"title":"Display with HugeGraph-Studio","level":"2.4","depth":1,"path":"quickstart/hugegraph-studio.md","ref":"quickstart/hugegraph-studio.md","articles":[]},"previous":{"title":"Load data with HugeGraph-Loader","level":"2.2","depth":1,"path":"quickstart/hugegraph-loader.md","ref":"quickstart/hugegraph-loader.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"quickstart/hugegraph-tools.md","mtime":"2019-05-22T13:34:28.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-23T04:05:03.927Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
