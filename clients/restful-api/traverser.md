@@ -286,7 +286,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/kneighbor?source=â€œ1:markoâ
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/shortestpathsource="1:marko"&target="2:ripple"&max_depth=3
+GET http://localhost:8080/graphs/{graph}/traversers/shortestpath?source="1:marko"&target="2:ripple"&max_depth=3
 ```
 
 ###### Response Status
