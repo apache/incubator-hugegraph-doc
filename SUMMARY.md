@@ -35,6 +35,7 @@
     * [Vertex](clients/restful-api/vertex.md)
     * [Edge](clients/restful-api/edge.md)
     * [Traverser](clients/restful-api/traverser.md)
+    * [Rank](clients/restful-api/rank.md)
     * [Variable](clients/restful-api/variable.md)
     * [Graphs](clients/restful-api/graphs.md)
     * [Task](clients/restful-api/task.md)
