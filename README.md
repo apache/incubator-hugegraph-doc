@@ -20,23 +20,24 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 本系统具备如下特点：  
 
 - 易用：HugeGraph支持Gremlin图查询语言与Restful API，同时提供图检索常用接口，具备功能齐全的周边工具，轻松实现基于图的各种查询分析运算。
-- 高效：HugeGraph在图存储和图计算方面做了深度优化，提供多种批量导入工具，轻松完成百亿数据快速导入，通过优化过的查询达到图检索的毫秒级响应。支持数千用户并发的在线实时操作。
+- 高效：HugeGraph在图存储和图计算方面做了深度优化，提供多种批量导入工具，轻松完成百亿级数据快速导入，通过优化过的查询达到图检索的毫秒级响应。支持数千用户并发的在线实时操作。
 - 通用：HugeGraph支持Apache Gremlin标准图查询语言和Property Graph标准图建模方法，支持基于图的OLTP和OLAP方案。集成Apache Hadoop及Apache Spark大数据平台。
 - 可扩展：支持分布式存储、数据多副本及横向扩容，内置多种后端存储引擎，也可插件式轻松扩展后端存储引擎。
 - 开放：HugeGraph代码开源（Apache 2 License），客户可自主修改定制，选择性回馈开源社区。
 
 本系统的功能包括但不限于：
 
-- 支持从TXT、CSV、JSON等格式的文件中批量导入数据
-- 具备可视化操作界面，降低用户使用门槛
-- 优化的图接口：最短路径(Shortest Path)、K步连通子图(K-neighbor)、K步到达邻接点(K-out)等
+- 支持从多数据源批量导入数据(包括本地文件、HDFS文件、MySQL数据库等数据源)，支持多种文件格式导入(包括TXT、CSV、JSON等格式)
+- 具备可视化操作界面，可用于操作、分析及展示图，降低用户使用门槛
+- 优化的图接口：最短路径(Shortest Path)、K步连通子图(K-neighbor)、K步到达邻接点(K-out)、个性化推荐算法PersonalRank等
 - 基于Apache TinkerPop3框架实现，支持Gremlin图查询语言
 - 支持属性图，顶点和边均可添加属性，支持丰富的属性类型
-- 具备独立的Schema元数据信息，方便第三方系统集成
+- 具备独立的Schema元数据信息，拥有强大的图建模能力，方便第三方系统集成
 - 支持多顶点ID策略：支持主键ID、支持自动生成ID、支持用户自定义字符串ID、支持用户自定义数字ID	
 - 可以对边和顶点的属性建立索引，支持精确查询、范围查询、全文检索	
-- 存储系统采用插件方式，支持RocksDB、Cassandra、ScyllaDB、HBase、Palo、MySQL以及InMemory等
+- 存储系统采用插件方式，支持RocksDB、Cassandra、ScyllaDB、HBase、MySQL、PostgreSQL、Palo以及InMemory等
 - 与Hadoop、Spark GraphX等大数据系统集成，支持Bulk Load操作
+- 支持高可用HA、数据多副本、备份恢复、监控等
 
 ### Modules
 

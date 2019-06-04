@@ -106,14 +106,15 @@ mvn package -DskipTests
 
 ### 4 配置
 
-如果需要快速启动HugeGraph仅用于测试，那么只需要进行少数几个配置项的修改即可。详细的配置介绍请参考[配置文档](/config/config-guide.md)及[配置项](/config/config-option.md)
+如果需要快速启动HugeGraph仅用于测试，那么只需要进行少数几个配置项的修改即可（见下一节）。
+详细的配置介绍请参考[配置文档](/config/config-guide.md)及[配置项介绍](/config/config-option.md)
 
 ### 5 启动
 
 启动分为"首次启动"和"非首次启动"，这么区分是因为在第一次启动前需要初始化后端数据库，然后启动服务。
 而在人为停掉服务后，或者其他原因需要再次启动服务时，因为后端数据库是持久化存在的，直接启动服务即可。
 
-HugeGraphServer启动时会连接后端存储并尝试检查后端存储版本号，如果没有初始化过后端或者后端初始化版本不对（旧版本初始化过）时，HugeGraphServer会启动失败，并给出错误信息。
+HugeGraphServer启动时会连接后端存储并尝试检查后端存储版本号，如果未初始化后端或者后端已初始化但版本不匹配时（旧版本数据），HugeGraphServer会启动失败，并给出错误信息。
 
 如果需要外部访问HugeGraphServer，请修改`rest-server.properties`的`restserver.url`配置项
 （默认为`http://127.0.0.1:8080`），修改成机器名或IP地址。
@@ -291,6 +292,8 @@ bin/start-hugegraph.sh
 Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 ```
+
+> 更多其它后端配置可参考[配置项介绍](/config/config-option.md)
 
 ### 6 访问Server
 
