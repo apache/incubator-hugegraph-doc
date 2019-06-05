@@ -68,7 +68,7 @@ bin/hugegraph graph-mode-set -m NONE
 
 备份和恢复命令的详细使用方式可以参考[hugegraph-tools文档](/quickstart/hugegraph-tools.md)。
 
-## Backup/Restore使用和实现的的API说明
+## Backup/Restore使用和实现的API说明
 
 #### Backup
 
