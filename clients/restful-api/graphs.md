@@ -135,10 +135,6 @@ GET http://localhost:8080/graphs/hugegraph/mode
 
 #### 5.3.2 设置某个图的模式. **该操作需要管理员权限**
 
-##### Params
-
-- token: 默认为`162f7848-0b6d-4faf-b557-3a0797869c55`
-
 ##### Method & Url
 
 ```
