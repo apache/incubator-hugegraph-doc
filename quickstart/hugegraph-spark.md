@@ -1,139 +1,111 @@
 ## HugeGraph-Spark Quick Start
 
-### 1 项目依赖
+### 1 概述
 
-HugeGraph-Spark依赖hugegraph 和 spark-2.1.1，需要添加相关项目依赖：
+HugeGraph-Spark 是一个连接 HugeGraph 和 Spark GraphX 的工具，能够读取 HugeGraph 中的数据并转换成 Spark GraphX 的 RDD，然后执行 GraphX 中的各种图算法。
 
-- 下载spark-2.1.1
-- [启动HugeGraph-Server](/quickstart/hugegraph-server.html)
+### 2 环境依赖
 
-### 2 下载 HugeGraph-Spark
+在使用 HugeGraph-Spark 前，需要依赖 HugeGraph Server 服务，下载和启动 Server 请参考 [HugeGraph-Server Quick Start](/quickstart/hugegraph-server.html)。另外，由于它需要使用 Spark GraphX，所以还需要下载 spark，本文的示例使用的是 apache-spark-2.1.1。
 
-提供两种方式下载hugespark：
-
-- 直接下载具有hugespark功能的spark安装包，然后解压
-```bash
-wget https://github.com/hugegraph/hugegraph-spark/releases/download/v${version}/hugegraph-spark-${version}.tar.gz
-tar -zxvf hugegraph-spark-${version}.tar.gz
+```
+wget https://archive.apache.org/dist/spark/spark-2.1.1/spark-2.1.1-bin-hadoop2.7.tgz
+tar -zxvf spark-2.1.1-bin-hadoop2.7.tgz
+cd spark-2.1.1-bin-hadoop2.7
 ```
 
-- 下载源码，编译hugespark jar包，配置本机spark；
+然后将 hugegraph-spark 的 jar 包拷贝到 spark 的 jars 目录下
 
-#### 2.1 源码编译
-
-下载spark-2.1.1,解压spark（[Spark文档参考](http://spark.apache.org)），删除过期的guava.jar包
-
-```bash
-rm -rf  jars/guava-14.0.1.jar
-rm -rf  jars/jackson-module-scala_2.11-2.6.5.jar
-rm -rf  jars/jackson-annotations-2.6.5.jar
-rm -rf  jars/jackson-module-paranamer-2.6.5.jar
-rm -rf  jars/jackson-databind-2.6.5.jar
-rm -rf  jars/jackson-core-2.6.5.jar
 ```
-
-hugespark源码下载
-
-```bash
-$ git clone https://github.com/hugegraph/hugegraph-spark.git
-```
-
-使用[Apache Maven](http://maven.apache.org/)构建，示例如下：
-
-```bash
-$ cd hugegraph-spark
-$ mvn -DskipTests clean assembly:assembly
-```
-
-将编译完成的jar包拷贝到spark安装目录下
-
-```bash
-$ cp baidu/xbu-data/hugegraph-spark/target/hugegraph-spark-0.1.0-SNAPSHOT-jar-with-dependencies.jar ${spark-dir}/spark-2.1.1/jars/
+cp {dir}/hugegraph-spark-0.9.0.jar jars
 ```
 
 ### 3 配置
 
-可以通过spark-default.properties或者命令行修改相关配置：
+#### 配置项
 
-配置项如下：
+可以通过 `spark-default.properties` 或者命令行修改相关配置：
 
-配置名称                           | 默认值                 | 说明
------------------------------- | ------------------- | --------------------------------------------------------------------------------------------------------------
-`spark.hugegraph.snapshot.dir` | `/tmp/hugesnapshot` | 首次加载hugegraph RDD 保存的位置
-`spark.hugegraph.conf.url`     |                     | 获得hugegraph 配置的url，例如，<http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55>
-`spark.hugegraph.split.size`   | 67108864            | 从hugegraph中获取顶点和边时数据分割的大小，默认64M
+- spark.hugegraph.snapshot.dir: 首次加载 hugegraph 数据生成 RDD 时，会将数据序列化保存到 spark 能访问到的介质上，以便于下次直接从该位置读取数据生成 RDD。默认值为 file:///tmp/hugegraph-snapshot，还可以配置为 HDFS 的路径；
+- spark.hugegraph.name: 要访问的图的名字；
+- spark.hugegraph.server.url: HugeGraphServer 的地址，默认值为 http://localhost:8080；
+- spark.hugegraph.read.timeout: HugeClient 从 HugeGraphServer 获取数据的超时时间，单位为秒，默认值为 120；
+- spark.hugegraph.split.size: 从 HugeGraphServer 中获取顶点和边时数据分片的大小，以字节为单位，默认值为 16M；
+- spark.hugegraph.shard.page.size: 获取分片数据时，每个分页的大小，默认值为 500 条。
 
-提供两种添加配置项的方法：
+#### 配置入口
 
-- 在conf/spark-defaults.conf中修改
+HugeGraph-Spark 提供了两种添加配置项的方法：
 
-  首次安装的用户需要将spark-defaults.conf.default文件拷贝一份，如下：
+1. 修改 conf/spark-defaults.conf
 
-  ```bash
-    $ cd spark-2.1.1/conf
-    $ cp spark-defaults.conf.default spark-defaults.conf
-  ```
-
-  然后将上表中的配置项按照示例添加即可。
-
-- 命令行修改配置示例：
+  首次安装的用户需要将 spark-defaults.conf.default 文件拷贝一份，如下：
 
   ```bash
-    $ spark-shell --conf spark.hugegraph.snapshot.dir=/tmp/hugesnapshot2
+  cp conf/spark-defaults.conf.default conf/spark-defaults.conf
   ```
 
-### 4 HugeGraph-Spark Shell 使用
+  然后将上面的配置项按需即可。
 
-启动Scala shell ：
+1. 在命令行中修改
+
+  ```bash
+  bin/spark-shell --conf spark.hugegraph.snapshot.dir=file:///tmp/hugegraph-snapshot2
+  ```
+
+### 4 使用
+
+#### 4.1 生成 GraphX Graph RDD
+
+启动 scala shell
 
 ```bash
 ./bin/spark-shell
 ```
 
-导入hugegraph相关类
+> 这种方式是以 local 模式启动，也支持 --master yarn 的模式运行。 
+
+导入 hugegraph 相关类
 
 ```scala
+scala> import com.baidu.hugegraph.spark._
 import com.baidu.hugegraph.spark._
 ```
 
-初始化graph对象，并创建snapshot
+初始化 graph 对象（GraphX RDD），并创建 snapshot
 
 ```scala
-val graph = sc.hugeGraph("test","${spark.hugegraph.conf.url}")
+scala> val graph = sc.hugeGraph("hugegraph", "http://localhost:8080")
+org.apache.spark.graphx.Graph[com.baidu.hugegraph.spark.structure.HugeSparkVertex,com.baidu.hugegraph.spark.structure.HugeSparkEdge] = org.apache.spark.graphx.impl.GraphImpl@1418a1bd
 ```
 
-其中`${spark.hugegraph.conf.url}`默认为`conf/spark-defaults.conf`中配置的参数，可以直接通过`val graph = sc.hugeGraph("test")`来调用。
+如果已经配置过`spark.hugegraph.server.url`参数，可以省略第二个参数，直接通过`val graph = sc.hugeGraph("hugegraph")`调用即可。
 
-#### 4.1 操作
+这一步通常很快，因为只是获取了 HugeGraph 数据的分片信息，还没有真正的去执行 action 操作。
 
-数据导入成功后可以对graph进行相关操作，示例如下：
+#### 4.2 使用 GraphX 进行图分析
 
-获取边的个数
+数据导入成功后可以对 graph 进行相关操作，示例如下：
+
+获取顶点个数
 
 ```scala
 graph.vertices.count()
 ```
 
-获取边的个数
+注意：第一次执行这一步可能会很耗时，因为这里才真正的读数据并保存。
+
+获取边个数
 
 ```scala
 graph.edges.count()
 ```
 
-出度top 100
+出度 top 10
 
 ```scala
-val top100 = graph.outDegrees.top(100)
-val top100HugeGraphID = sc.makeRDD(top100).join(graph.vertices).collect
-top100HugeGraphID.map(e=> (e._2._2.vertexIdString,e._2._1)).foreach(println)
-```
-
-或使用隐式方法：
-
-```scala
-implicit val degreeTop = new Ordering[(Long,Int)]{
-    override def compare(a: (Long,Int), b: (Long,Int)) =a._2.compare(b._2)
-}
+val top10 = graph.outDegrees.top(10)
+sc.makeRDD(top10).join(graph.vertices).collect().foreach(println)
 ```
 
 PageRank
@@ -144,13 +116,10 @@ PageRank的结果仍为一个图，包含`vertices` 与 `edges`。
 val ranks = graph.pageRank(0.0001)
 ```
 
-获取 PageRank的top100的顶点 访问vertices的PageRank的过程中会隐式调用myOrd方法，每个vertices包含 (Long,Double)对，comapares方法中仅依据double值比较。
+获取 PageRank 的 top 10 的顶点。
 
 ```scala
-val top100 = ranks.vertices.top(100)
+val top10 = ranks.vertices.top(10)
 ```
 
-### 5 限制
-
-- 一个分区的的元素个数需要小于40 亿(1<<32)
-- 分区的个数需要小于20亿(1<< 31).
+更多 GraphX 的 API 请参考 [spark graphx官网](http://spark.apache.org/graphx/)。

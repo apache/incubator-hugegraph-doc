@@ -6,11 +6,13 @@ HugeGraph-Loader 是 HugeGragh 的数据导入组件，能够将多种数据源�
 
 目前支持的数据源包括：
 
-- 本地磁盘文件或目录，支持压缩文件
+- 本地磁盘文件或目录，支持 TEXT、CSV 和 JSON 格式的文件，支持压缩文件
 - HDFS 文件或目录，支持压缩文件
-- 部分关系型数据库，如 MySQL、PostgreSQL、Oracle、SQL Server
+- 主流关系型数据库，如 MySQL、PostgreSQL、Oracle、SQL Server
 
-后面会说明数据源的具体要求。
+本地磁盘文件和 HDFS 文件支持断点续传。
+
+后面会具体说明。
 
 > 注意：使用 HugeGraph-Loader 需要依赖 HugeGraph Server 服务，下载和启动 Server 请参考 [HugeGraph-Server Quick Start](/quickstart/hugegraph-server.html)
 
@@ -141,7 +143,7 @@ JSON 文件要求每一行都是一个 JSON 串，且每行的格式需保持一
 
 目前支持的压缩文件类型包括：GZIP、BZ2、XZ、LZMA、PACK200、SNAPPY_RAW、SNAPPY_FRAMED、Z、DEFLATE、LZ4_BLOCK 和 LZ4_FRAMED。
 
-###### 3.2.1.3 部分关系型数据库
+###### 3.2.1.3 主流关系型数据库
 
 loader 还支持以部分关系型数据库作为数据源，目前支持 MySQL、PostgreSQL、Oracle 和 SQL Server。
 
@@ -278,13 +280,13 @@ Office,388
 **相同部分的节点**
 
 - label: 待导入的顶点/边数据所属的`label`，必填；                                                                                   
-- input: 顶点/边输入源的信息，是一个复合结构，必填；                                                                                    
-- field_mapping: 将输入源列的列名映射为顶点/边的属性名，非必填；
-- value_mapping: 将输入源的数据值映射为顶点/边的属性值，非必填；
-- selected: 选择某些列插入，其他未选中的不插入，不能与`ignored`同时存在，非必填；                                                                           
-- ignored: 忽略某些列，使其不参与插入，不能与`selected`同时存在，非必填；
-- null_values: 可以指定一些字符串代表空值，比如"NULL"，如果该列对应的顶点/边属性又是一个可空属性，那在构造顶点/边时不会填充该属性，非必填；
-- update_strategies: 如果数据需要按特定方式批量**更新**时可以对每个属性指定具体的更新策略 (具体见下)，非必填；
+- input: 顶点/边输入源的信息，是一个复合结构，必填；    
+- field_mapping: 将输入源列的列名映射为顶点/边的属性名，选填；
+- value_mapping: 将输入源的数据值映射为顶点/边的属性值，选填；
+- selected: 选择某些列插入，其他未选中的不插入，不能与`ignored`同时存在，选填；                                                                           
+- ignored: 忽略某些列，使其不参与插入，不能与`selected`同时存在，选填；
+- null_values: 可以指定一些字符串代表空值，比如"NULL"，如果该列对应的顶点/边属性又是一个可空属性，那在构造顶点/边时不会设置该属性的值，选填；                                                                                
+- update_strategies: 如果数据需要按特定方式批量**更新**时可以对每个属性指定具体的更新策略 (具体见下)，选填；
 
 **更新策略**支持8种 :  (需要全大写)
 
@@ -351,14 +353,14 @@ Office,388
 
 - type: 输入源类型，必须填 file 或 FILE； 
 - path: 本地文件或目录的路径，绝对路径或相对于映射文件的相对路径，建议使用绝对路径，必填；
-- file_filter: 从 path 中筛选复合条件的文件，复合结构，目前只支持配置扩展名，用节点`extensions`表示，默认为"*"，表示保留所有文件；
+- file_filter: 从`path`中筛选复合条件的文件，复合结构，目前只支持配置扩展名，用子节点`extensions`表示，默认为"*"，表示保留所有文件；
 - format: 本地文件的格式，可选值为 CSV、TEXT 及 JSON，必须大写，必填；               
-- header: 文件各列的列名，如不指定则会以数据文件第一行作为 header；当文件本身有标题且又指定了 header，文件的第一行会被当作普通的数据行；JSON 文件不需要指定 header，非必填；    
-- delimiter: 文件行的列分隔符，`TEXT`文件默认以制表符`"\t"`作为分隔符；`CSV`文件不需要指定，默认以逗号`","`作为分隔符，`JSON`文件不需要指定，非必填；     
-- charset: 文件的编码字符集，默认`UTF-8`，非必填；    
-- date_format: 自定义的日期格式，默认值为 yyyy-MM-dd HH:mm:ss，非必填； 
-- skipped_line: 想跳过的行，复合结构，目前只能配置要跳过的行的正则表达式，用节点`regex`描述，默认不跳过任何行，非必填；
-- compression: 文件的压缩格式，可选值为 NONE、GZIP、BZ2、XZ、LZMA、PACK200、SNAPPY_RAW、SNAPPY_FRAMED、Z、DEFLATE、LZ4_BLOCK 和 LZ4_FRAMED，默认为 NONE，表示不是压缩文件，非必填；
+- header: 文件各列的列名，如不指定则会以数据文件第一行作为 header；当文件本身有标题且又指定了 header，文件的第一行会被当作普通的数据行；JSON 文件不需要指定 header，选填；    
+- delimiter: 文件行的列分隔符，`TEXT`文件默认以制表符`"\t"`作为分隔符；`CSV`文件不需要指定，默认以逗号`","`作为分隔符，`JSON`文件不需要指定，选填；     
+- charset: 文件的编码字符集，默认`UTF-8`，选填；    
+- date_format: 自定义的日期格式，默认值为 yyyy-MM-dd HH:mm:ss，选填； 
+- skipped_line: 想跳过的行，复合结构，目前只能配置要跳过的行的正则表达式，用子节点`regex`描述，默认不跳过任何行，选填；
+- compression: 文件的压缩格式，可选值为 NONE、GZIP、BZ2、XZ、LZMA、PACK200、SNAPPY_RAW、SNAPPY_FRAMED、Z、DEFLATE、LZ4_BLOCK 和 LZ4_FRAMED，默认为 NONE，表示非压缩文件，选填；
 
 ###### 3.3.2.2 HDFS 输入源
 
@@ -366,14 +368,14 @@ Office,388
 
 - type: 输入源类型，必须填 hdfs 或 HDFS，必填； 
 - path: HDFS 文件或目录的路径，必须是 HDFS 的绝对路径，必填； 
-- fs_default_fs: HDFS 集群的 fs.defaultFS 值（namenode 节点信息），默认使用 fs.defaultFS 的默认值，非必填；
+- fs_default_fs: HDFS 集群的 fs.defaultFS 值（namenode 节点信息），默认使用 fs.defaultFS 的默认值，选填；
 
 ###### 3.3.2.3 JDBC 输入源
 
 前面说到过支持多种关系型数据库，但由于它们的映射结构非常相似，故统称为 JDBC 输入源，然后用`vendor`节点区分不同的数据库。
 
 - type: 输入源类型，必须填 jdbc 或 JDBC，必填；
-- vendor: 数据库类型，可选项为 [mysql 或 MYSQL、postgresql 或 POSTGRESQL、oracle 或 ORACLE、sqlserver 或 SQLSERVER]，必填；
+- vendor: 数据库类型，可选项为 [MySQL、PostgreSQL、Oracle、SQLServer]，不区分大小写，必填；
 - driver: jdbc 使用的 driver 类型，必填；
 - url: jdbc 要连接的数据库的 url，必填；
 - database: 要连接的数据库名，必填；
@@ -381,7 +383,7 @@ Office,388
 - table: 要连接的表名，必填；
 - username: 连接数据库的用户名，必填；
 - password: 连接数据库的密码，必填；
-- batch_size: 按页获取表数据时的一页的大小，默认为 500，非必填；
+- batch_size: 按页获取表数据时的一页的大小，默认为 500，选填；
 
 **MYSQL**
 
@@ -612,7 +614,7 @@ schema.indexLabel("knowsByWeight").onE("knows").by("weight").range().ifNotExist(
 bin/hugegraph-loader -g hugegraph -f example/file/struct.json -s example/file/schema.groovy
 ```
 
-导入结束后，会出现如下统计信息：
+导入结束后，会出现类似如下统计信息：
 
 ```
 vertices has been loaded           : 8
