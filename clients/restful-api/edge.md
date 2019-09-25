@@ -211,10 +211,17 @@ PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action
 - direction: 边的方向(OUT | IN | BOTH)
 - label: 边的标签
 - properties: 属性键值对(根据属性查询的前提是建立了索引)
-- limit: 查询数目
+- offset：偏移，默认为0
+- limit: 查询数目，默认为100
 - page: 页号
 
-vertex_id为可选参数，如果提供参数vertex_id则必须同时提供参数direction。无vertex_id参数时表示获取所有边，可通过limit限制查询数目。与顶点查询类似，如果提供page参数，必须提供limit参数，不允许带其他参数。
+支持的查询有以下几种：
+
+- 提供vertex_id参数时，不可以使用参数page，direction、label、properties可选，offset和limit可以
+限制结果范围
+- 不提供vertex_id参数时，label和properties可选
+    - 如果使用page参数，则offset参数不可用（不填或者为0），direction不可用，properties最多只能有一个
+    - 如果不使用page参数，则offset和limit可以用来限制结果范围，direction参数忽略
 
 **查询与顶点 person:josh(vertex_id="1:josh") 相连且 label 为 created 的边**
 
