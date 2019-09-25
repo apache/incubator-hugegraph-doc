@@ -286,7 +286,7 @@ update_strategies | 如果数据需要带按特定方式批量**更新**时可�
 
 > **注意**：`VertexSource`的 id 和`EdgeSource`的 source 和 target 填写的都是数据源的原列名，不是 mapping 后的属性名。
 
-**更新策略**支持8种 :  (目前需要全大写)
+**更新策略**支持8种 :  (需要全大写)
 
 1. 数值累加 : `SUM`
 2. 两个数字/日期取更大的: `BIGGER`
