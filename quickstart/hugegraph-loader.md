@@ -286,7 +286,7 @@ update_strategies | 如果数据需要带按特定方式批量**更新**时可�
 
 > **注意**：`VertexSource`的 id 和`EdgeSource`的 source 和 target 填写的都是数据源的原列名，不是 mapping 后的属性名。
 
-**更新策略**目前支持8种 :  (目前需要全大写)
+**更新策略**支持8种 :  (目前需要全大写)
 
 1. 数值累加 : `SUM`
 2. 两个数字/日期取更大的: `BIGGER`
@@ -297,7 +297,7 @@ update_strategies | 如果数据需要带按特定方式批量**更新**时可�
 7. **List/Set**属性删除元素: `ELIMINATE`
 8. 覆盖已有属性: `OVERRIDE`
 
-并且, 如果新导入的属性值为空, 会采用已有的旧数据而不会采用空值, 效果可以参考如下示例 :
+**注意:** 如果新导入的属性值为空, 会采用已有的旧数据而不会采用空值, 效果可以参考如下示例
 
 ```javascript
 // JSON文件中以如下方式指定更新策略
@@ -332,7 +332,7 @@ update_strategies | 如果数据需要带按特定方式批量**更新**时可�
 'null null c d'
 ```
 
-> **注意** : 采用了批量更新的策略后, 磁盘读请求数会大幅上升, 导入速度相比纯写覆盖会慢数倍 (此时传统HDD磁盘[IOPS](https://en.wikipedia.org/wiki/IOPS)会成为瓶颈, 建议采用SSD以保证速度)
+> **注意** : 采用了批量更新的策略后, 磁盘读请求数会大幅上升, 导入速度相比纯写覆盖会慢数倍 (此时HDD磁盘[IOPS](https://en.wikipedia.org/wiki/IOPS)会成为瓶颈, 建议采用SSD以保证速度)
 
 ##### 3.3.2 InputSource
 
@@ -391,9 +391,9 @@ batch_size | 按页获取表数据时的一页的大小，默认为 500 | 否
 -h &#124; --host    | localhost    |         | HugeGraphServer 的地址
 -p &#124; --port    | 8080         |         | HugeGraphServer 的端口号
 --token             | null         |         | 当 HugeGraphServer 开启了权限认证时，当前图的 token 
---num-threads       | cpus + 1 | N | 导入过程中线程池大小 (cpus是当前OS可用**逻辑核**个数) 
---max-conn-per-route | 2倍cpus | N | 单个目的ip的最大连接数, **调整线程**的时候建议同时调整此项 
---max-conn | 4倍cpus | N | 连接池总最大连接数 
+--num-threads       | CPUs + 1 | N | 导入过程中线程池大小 (CPUs是当前OS可用**逻辑核**个数) 
+--max-conn-per-route | 2倍CPUs | N | 单个目的ip的最大连接数, **调整线程**的时候建议同时调整此项 
+--max-conn | 4倍CPUs | N | 连接池总最大连接数 
 --batch-size        | 500          |         | 导入数据时每个批次包含的数据条数
 --max-parse-errors  | 1            |         | 最多允许多少行数据解析错误，达到该值则程序退出
 --max-insert-errors | 500          |         | 最多允许多少行数据插入错误，达到该值则程序退出
