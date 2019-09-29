@@ -269,6 +269,7 @@ id      | 指定某一列作为顶点的 Id 列   | 当 Id 策略为`CUSTOMIZE`�
 mapping | 将列的列名映射为顶点的属性名      | 否                                                                                    
 ignored | 忽略某些列，使其不参与插入   | 否
 null_values | 可以指定一些字符串代表空值，比如"NULL"，如果该列的属性又是一个可空属性，那在构造顶点时不会填充该属性 | 否
+update_strategies | 如果数据需要按特定方式批量**更新**时可以对每个属性指定具体的更新策略 (具体见下) | 否 
 
 `EdgeSource`的节点包括：
 
@@ -281,8 +282,57 @@ target  | 指定某几列作为目标顶点的 id 列        | 与 source 类似
 mapping | 将列的列名映射为顶点的属性名      | 否                                                                                                                                                           
 ignored | 忽略某些列，使其不参与插入   | 否
 null_values | 可以指定一些字符串代表空值，比如"NULL"，如果该列的属性又是一个可空属性，那在构造边时不会填充该属性 | 否
+update_strategies | 如果数据需要按特定方式批量**更新**时可以对每个属性指定具体的更新策略 (具体见下) | 否 
 
-> 注意：`VertexSource`的 id 和`EdgeSource`的 source 和 target 填写的都是数据源的原列名，不是 mapping 后的属性名。
+> **注意**：`VertexSource`的 id 和`EdgeSource`的 source 和 target 填写的都是数据源的原列名，不是 mapping 后的属性名。
+
+**更新策略**支持8种 :  (需要全大写)
+
+1. 数值累加 : `SUM`
+2. 两个数字/日期取更大的: `BIGGER`
+3. 两个数字/日期取更小: `SMALLER`
+4. **Set**属性取并集: `UNION`
+5. **Set**属性取交集: `INTERSECTION`
+6. **List**属性追加元素: `APPEND`
+7. **List/Set**属性删除元素: `ELIMINATE`
+8. 覆盖已有属性: `OVERRIDE`
+
+**注意:** 如果新导入的属性值为空, 会采用已有的旧数据而不会采用空值, 效果可以参考如下示例
+
+```javascript
+// JSON文件中以如下方式指定更新策略
+{
+  "vertices": [
+    {
+      "label": "person",
+      "update_strategies": {
+        "age": "SMALLER",
+        "set": "UNION"
+      },
+      "input": {
+        "type": "file",
+        "path": "vertex_person.txt",
+        "format": "TEXT",
+        "header": ["name", "age", "set"]
+      }
+    }
+  ]
+}
+
+// 1.写入一行带OVERRIDE更新策略的数据 (这里null代表空)
+'a b null null'
+
+// 2.再写一行
+'null null c d'
+
+// 3.最后可以得到
+'a b c d'   
+
+// 如果没有更新策略, 则会得到
+'null null c d'
+```
+
+> **注意** : 采用了批量更新的策略后, 磁盘读请求数会大幅上升, 导入速度相比纯写覆盖会慢数倍 (此时HDD磁盘[IOPS](https://en.wikipedia.org/wiki/IOPS)会成为瓶颈, 建议采用SSD以保证速度)
 
 ##### 3.3.2 InputSource
 
@@ -341,7 +391,9 @@ batch_size | 按页获取表数据时的一页的大小，默认为 500 | 否
 -h &#124; --host    | localhost    |         | HugeGraphServer 的地址
 -p &#124; --port    | 8080         |         | HugeGraphServer 的端口号
 --token             | null         |         | 当 HugeGraphServer 开启了权限认证时，当前图的 token 
---num-threads       | cpus * 2 - 1 |         | 导入过程中线程池大小
+--num-threads       | CPUs + 1 | N | 导入过程中线程池大小 (CPUs是当前OS可用**逻辑核**个数) 
+--max-conn-per-route | 2倍CPUs | N | 单个目的ip的最大连接数, **调整线程**的时候建议同时调整此项 
+--max-conn | 4倍CPUs | N | 连接池总最大连接数 
 --batch-size        | 500          |         | 导入数据时每个批次包含的数据条数
 --max-parse-errors  | 1            |         | 最多允许多少行数据解析错误，达到该值则程序退出
 --max-insert-errors | 500          |         | 最多允许多少行数据插入错误，达到该值则程序退出
@@ -359,7 +411,7 @@ batch_size | 按页获取表数据时的一页的大小，默认为 500 | 否
 - hugegraph-loader.log 程序运行过程中的 log 和 error 信息 (追加写)
 - parse_error.data 解析错误的数据（每次启动覆盖写）
 - insert_error.data 插入错误的数据（每次启动覆盖写）
- 
+
 ##### 3.4.3 执行命令
 
 运行 bin/hugeloader 并传入参数
