@@ -220,8 +220,8 @@ PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action
 - 提供vertex_id参数时，不可以使用参数page，direction、label、properties可选，offset和limit可以
 限制结果范围
 - 不提供vertex_id参数时，label和properties可选
-    - 如果使用page参数，则offset参数不可用（不填或者为0），direction不可用，properties最多只能有一个
-    - 如果不使用page参数，则offset和limit可以用来限制结果范围，direction参数忽略
+    - 如果使用page参数，则：offset参数不可用（不填或者为0），direction不可用，properties最多只能有一个
+    - 如果不使用page参数，则：offset和limit可以用来限制结果范围，direction参数忽略
 
 **查询与顶点 person:josh(vertex_id="1:josh") 相连且 label 为 created 的边**
 

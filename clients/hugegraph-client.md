@@ -349,7 +349,7 @@ interface            | param | description
 by(String... fields) | files | allow to build index for multi fields for secondary index
 
 - indexType: 建立的索引类型，目前支持五种，即 Secondary、Range、Search、Shard 和 Unique。
-    - Secondary 允许建立联合索引，支持索引前缀搜索
+    - Secondary 支持精确匹配的二级索引，允许建立联合索引，联合索引支持索引前缀搜索
         - 单个属性，支持相等查询，比如：person顶点的city属性的二级索引，可以用`g.V().has("city", "北京")
         `查询"city属性值是北京"的全部顶点
         - 联合索引，支持前缀查询和相等查询，比如：person顶点的city和street属性的联合索引，可以用`g.V().has
@@ -361,18 +361,18 @@ by(String... fields) | files | allow to build index for multi fields for seconda
         - 必须是单个数字或者日期属性，比如：person顶点的age属性的范围索引，可以用`g.V().has("age", P.gt(18))
         `查询"age属性值大于18"的顶点。除了`P.gt()`以外，还支持`P.gte()`, `P.lte()`, `P.lt()`,
         `P.eq()`, `P.between()`, `P.inside()`和`P.outside()`等
-    - Search 支持全文检索
+    - Search 支持全文检索的索引
         - 必须是单个文本属性，比如：person顶点的address属性的全文索引，可以用`g.V().has("address", Text
         .contains('大厦')`查询"address属性中包含大厦"的全部顶点
         > search index的查询是基于"是"或者"包含"的查询条件
-    - Shard 支持前缀 + 数字范围查询
+    - Shard 支持前缀匹配 + 数字范围查询的索引
         - N个属性的分片索引，支持前缀相等情况下的范围查询，比如：person顶点的city和age属性的分片索引，可以用`g.V().has
         ("city", "北京").has("age", P.between(18, 30))
         `查询"city属性是北京且年龄大于等于18小于30"的全部顶点
         - shard index N个属性全是文本属性时，等价于secondary index
         - shard index只有单个数字或者日期属性时，等价于range index
         > shard index可以有任意数字或者日期属性，但是查询时最多只能提供一个范围查找条件，且该范围查找条件的属性的前缀属性都是相等查询条件
-    - Unique 可以限定属性的值不重复，允许联合索引，但不支持查询
+    - Unique 支持属性值唯一性约束，即可以限定属性的值不重复，允许联合索引，但不支持查询
         - 单个或者多个属性的唯一性索引，不可用来查询，只可对属性的值进行限定，当出现重复值时将报错
 
 interface   | indexType | description
