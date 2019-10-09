@@ -45,7 +45,7 @@ mvn package -DskipTests
 解压后，进入 hugegraph-tools 目录，可以使用`bin/hugegraph`或者`bin/hugegraph help`来查看 usage 信息。主要分为：
 
 - 图管理类，graph-mode-set、graph-mode-get、graph-list、graph-get 和 graph-clear
-- 异步任务管理类，task-delete、task-get 和 task-delete
+- 异步任务管理类，task-list、task-get、task-delete、task-cancel 和 task-clear
 - Gremlin类，gremlin-execute 和 gremlin-schedule
 - 备份/恢复类，backup、restore、schedule-backup 和 dump
 - 安装部署类，deploy、clear、start-all 和 stop-all
@@ -60,9 +60,9 @@ Usage: hugegraph [options] [command] [command options]
 
 - --graph，HugeGraph-Tools 操作的图的名字，默认值是 hugegraph
 - --url，HugeGraph-Server 的服务地址，默认是 http://127.0.0.1:8080
-- --timeout, 连接 HugeGraph-Server 时的超时时间，默认是 30s
 - --user，当 HugeGraph-Server 开启认证时，传递用户名
 - --password，当 HugeGraph-Server 开启认证时，传递用户的密码
+- --timeout, 连接 HugeGraph-Server 时的超时时间，默认是 30s
 
 上述全局变量，也可以通过环境变量来设置。一种方式是在命令行使用 export 设置临时环境变量，在该命令行关闭之前均有效
 
@@ -73,6 +73,7 @@ Usage: hugegraph [options] [command] [command options]
 --graph      | HUGEGRAPH_GRAPH       | export HUGEGRAPH_GRAPH=hugegraph 
 --user       | HUGEGRAPH_USERNAME    | export HUGEGRAPH_USERNAME=admin
 --password   | HUGEGRAPH_PASSWORD    | export HUGEGRAPH_PASSWORD=test
+--timeout    | HUGEGRAPH_TIMEOUT     | export HUGEGRAPH_TIMEOUT=30
 
 另一种方式是在 bin/hugegraph 脚本中设置环境变量：
 
@@ -84,6 +85,7 @@ Usage: hugegraph [options] [command] [command options]
 #export HUGEGRAPH_GRAPH=
 #export HUGEGRAPH_USERNAME=
 #export HUGEGRAPH_PASSWORD=
+#export HUGEGRAPH_TIMEOUT=
 ```
 
 ##### 3.3 图管理类，graph-mode-set、graph-mode-get、graph-list、graph-get和graph-clear

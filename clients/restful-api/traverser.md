@@ -443,6 +443,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/crosspoints?source="2:lop"&t
 - direction: 起始顶点发出的边的方向（OUT,IN,BOTH），选填项，默认是BOTH
 - label: 边的类型，选填项，默认代表所有edge label
 - max_depth: 步数，必填项
+- source_in_ring: 环路是否包含起点，选填项，默认为true
 - max_degree: 查询过程中，单个顶点最大边数目，选填项，默认为10000
 - capacity: 遍历过程中最大的访问的顶点数目，选填项，默认为10000000
 - limit: 返回的可达环路的最大数目，选填项，默认为10

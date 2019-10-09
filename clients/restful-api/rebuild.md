@@ -57,7 +57,7 @@ PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/vertexlabels/person
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/edgelabels/softwareByPrice
+PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/edgelabels/created
 ```
 
 ##### Response Status
