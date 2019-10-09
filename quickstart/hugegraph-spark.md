@@ -45,7 +45,7 @@ HugeGraph-Spark 提供了两种添加配置项的方法：
   cp conf/spark-defaults.conf.default conf/spark-defaults.conf
   ```
 
-  然后将上面的配置项按需即可。
+  按需设置即可。
 
 1. 在命令行中修改
 
