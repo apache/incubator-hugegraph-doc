@@ -441,7 +441,7 @@ schema: 必填
 -h 或 --host    | localhost    |         | HugeGraphServer 的地址
 -p 或 --port    | 8080         |         | HugeGraphServer 的端口号
 --token             | null         |         | 当 HugeGraphServer 开启了权限认证时，当前图的 token 
---incremental-mode  | false        |         | 是否使用断点续导（或增量导入）模式，仅输入源为 FILE 和 HDFS 支持该模式，启用该模式能从上一次导入停止的地方开始导
+--incremental-mode  | false        |         | 是否使用断点续导模式，仅输入源为 FILE 和 HDFS 支持该模式，启用该模式能从上一次导入停止的地方开始导
 --reload-failure    | false        |         | 是否导入以前导入失败的那些记录，仅在断点续导（或增量导入）模式下才能开启
 --num-threads       | CPUs         |         | 导入过程中线程池大小 (CPUs是当前OS可用**逻辑核**个数) 
 --max-conn          | 4 * CPUs     |         | HugeClient 与 HugeGraphServer 的最大 HTTP 连接数，**调整线程**的时候建议同时调整此项 
@@ -459,11 +459,11 @@ schema: 必填
 
 ##### 3.4.2 断点续导模式
 
-通常情况下，loader 任务都需要较长时间执行，如果因为某些原因导致导入中断进程退出，下次希望能从上次的断点接着导，这就是断点续导发挥作用的时候。
+通常情况下，Loader 任务都需要较长时间执行，如果因为某些原因导致导入中断进程退出，而下次希望能从中断的点继续导，这就是使用断点续导的场景。
 
 用户设置命令行参数 --incremental-mode 为 true 即打开了断点续导模式。断点续导的关键在于进度文件，导入进程退出的时候，会把退出时刻的导入进度
 记录到进度文件中，进度文件位于 `${struct}` 目录下，文件名形如 `load-progress ${date}` ，${struct} 为映射文件的前缀，${date} 为导入开始
-的时刻，比如：在 `2019-10-10 12:30:30` 开始的一次导入任务，使用的映射文件为 `struct-example.json`，则进度文件的路径为与 struct-example.json 
+的时刻。比如：在 `2019-10-10 12:30:30` 开始的一次导入任务，使用的映射文件为 `struct-example.json`，则进度文件的路径为与 struct-example.json 
 同级的 `struct-example/load-progress 2019-10-10 12:30:30`。
 
 > 注意：进度文件的生成与 --incremental-mode 是否打开无关，每次导入结束都会生成一个进度文件。
@@ -476,17 +476,19 @@ schema: 必填
 当然如果修改后的数据行仍然有问题，则会被再次记录到失败文件中（不用担心会有重复行）。
 
 每个顶点映射或边映射又数据插入失败时都会产生自己的失败文件，失败文件又分为解析失败文件（后缀 .parse-error）和插入失败文件（后缀 .insert-error），
-它们被保存在 `${struct}/current` 目录下。
+它们被保存在 `${struct}/current` 目录下。比如映射文件中有一个顶点映射 person 和边映射 knows，它们各有一些错误行，当 Loader 退出后，在 
+`${struct}/current` 目录下会看到如下文件：
+
+- person-b4cd32ab.parse-error: 顶点映射 person 解析错误的数据
+- person-b4cd32ab.insert-error: 顶点映射 person 插入错误的数据
+- knows-eb6b2bac.parse-error: 边映射 knows 解析错误的数据
+- knows-eb6b2bac.insert-error: 边映射 knows 插入错误的数据
+
+> .parse-error 和 .insert-error 并不总是一起存在的，只有存在解析出错的行才会有 .parse-error 文件，只有存在插入出错的行才会有 .insert-error 文件。
 
 ##### 3.4.3 logs 目录文件说明
 
-程序执行过程中各日志及错误数据会写入 logs 相关文件中。
-
-- hugegraph-loader.log 程序运行过程中的 log 和 error 信息 (追加写)
-- vertex-parse-error.data 顶点解析错误的数据（每次启动覆盖写）
-- vertex-insert-error.data 顶点插入错误的数据（每次启动覆盖写）
-- edge-parse-error.data 边解析错误的数据（每次启动覆盖写）
-- edge-insert-error.data 边插入错误的数据（每次启动覆盖写）
+程序执行过程中各日志及错误数据会写入 hugegraph-loader.log 文件中。
 
 ##### 3.4.4 执行命令
 

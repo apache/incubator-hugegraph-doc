@@ -105,7 +105,9 @@ ssl: {
 上面的配置项很多，但目前只需要关注如下几个配置项：channelizer 和 graphs。
 
 - graphs：GremlinServer 启动时需要打开的图，该项是一个 map 结构，key 是图的名字，value 是该图的配置文件路径；
-- channelizer：GremlinServer 与客户端有两种通信方式，分别是 WebSocket 和 HTTP（默认）。如果选择 WebSocket，用户可以通过 [Gremlin-Console](/clients/gremlin-console.html) 快速体验 HugeGraph 的特性，但是不支持大规模数据导入，推荐使用 HTTP 的通信方式，我们的一些外围组件都是基于 HTTP 实现的；
+- channelizer：GremlinServer 与客户端有两种通信方式，分别是 WebSocket 和 HTTP（默认）。如果选择 WebSocket，
+用户可以通过 [Gremlin-Console](/clients/gremlin-console.html) 快速体验 HugeGraph 的特性，但是不支持大规模数据导入，
+推荐使用 HTTP 的通信方式，HugeGraph 的外围组件都是基于 HTTP 实现的；
 
 默认GremlinServer是服务在 localhost:8182，如果需要修改，配置 host、port 即可
 
