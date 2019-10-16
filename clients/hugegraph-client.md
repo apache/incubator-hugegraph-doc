@@ -188,7 +188,7 @@ userdata(String key, Object value) | The same key, the latter will cover the for
 ```java
 // 使用 Automatic 的 Id 策略
 schema.vertexLabel("person").properties("name", "age").ifNotExist().create();
-schema.vertexLabel("person").useAutomaticId().properties("name", "age").primaryKeys("name").ifNotExist().create();
+schema.vertexLabel("person").useAutomaticId().properties("name", "age").ifNotExist().create();
 
 // 使用 Customize_String 的 Id 策略
 schema.vertexLabel("person").useCustomizeStringId().properties("name", "age").ifNotExist().create();

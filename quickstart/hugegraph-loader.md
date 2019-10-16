@@ -141,7 +141,7 @@ JSON 文件要求每一行都是一个 JSON 串，且每行的格式需保持一
 
 用户也可以指定 HDFS 文件或目录作为数据源，上面关于`本地磁盘文件或目录`的要求全部适用于这里。除此之外，鉴于 HDFS 上通常存储的都是压缩文件，loader 也提供了对压缩文件的支持，并且`本地磁盘文件或目录`同样支持压缩文件。
 
-目前支持的压缩文件类型包括：GZIP、BZ2、XZ、LZMA、PACK200、SNAPPY_RAW、SNAPPY_FRAMED、Z、DEFLATE、LZ4_BLOCK 和 LZ4_FRAMED。
+目前支持的压缩文件类型包括：GZIP、BZ2、XZ、LZMA、SNAPPY_RAW、SNAPPY_FRAMED、Z、DEFLATE、LZ4_BLOCK 和 LZ4_FRAMED。
 
 ###### 3.2.1.3 主流关系型数据库
 
@@ -356,11 +356,11 @@ Office,388
 - file_filter: 从`path`中筛选复合条件的文件，复合结构，目前只支持配置扩展名，用子节点`extensions`表示，默认为"*"，表示保留所有文件；
 - format: 本地文件的格式，可选值为 CSV、TEXT 及 JSON，必须大写，必填；               
 - header: 文件各列的列名，如不指定则会以数据文件第一行作为 header；当文件本身有标题且又指定了 header，文件的第一行会被当作普通的数据行；JSON 文件不需要指定 header，选填；    
-- delimiter: 文件行的列分隔符，`TEXT`文件默认以制表符`"\t"`作为分隔符；`CSV`文件不需要指定，默认以逗号`","`作为分隔符，`JSON`文件不需要指定，选填；     
+- delimiter: 文件行的列分隔符，默认以逗号`","`作为分隔符，`JSON`文件不需要指定，选填；     
 - charset: 文件的编码字符集，默认`UTF-8`，选填；    
 - date_format: 自定义的日期格式，默认值为 yyyy-MM-dd HH:mm:ss，选填； 
 - skipped_line: 想跳过的行，复合结构，目前只能配置要跳过的行的正则表达式，用子节点`regex`描述，默认不跳过任何行，选填；
-- compression: 文件的压缩格式，可选值为 NONE、GZIP、BZ2、XZ、LZMA、PACK200、SNAPPY_RAW、SNAPPY_FRAMED、Z、DEFLATE、LZ4_BLOCK 和 LZ4_FRAMED，默认为 NONE，表示非压缩文件，选填；
+- compression: 文件的压缩格式，可选值为 NONE、GZIP、BZ2、XZ、LZMA、SNAPPY_RAW、SNAPPY_FRAMED、Z、DEFLATE、LZ4_BLOCK 和 LZ4_FRAMED，默认为 NONE，表示非压缩文件，选填；
 
 ###### 3.3.2.2 HDFS 输入源
 
@@ -442,6 +442,7 @@ schema: 必填
 -p 或 --port    | 8080         |         | HugeGraphServer 的端口号
 --token             | null         |         | 当 HugeGraphServer 开启了权限认证时，当前图的 token 
 --incremental-mode  | false        |         | 是否使用断点续导（或增量导入）模式，仅输入源为 FILE 和 HDFS 支持该模式，启用该模式能从上一次导入停止的地方开始导
+--reload-failure    | false        |         | 是否导入以前导入失败的那些记录，仅在断点续导（或增量导入）模式下才能开启
 --num-threads       | CPUs         |         | 导入过程中线程池大小 (CPUs是当前OS可用**逻辑核**个数) 
 --max-conn          | 4 * CPUs     |         | HugeClient 与 HugeGraphServer 的最大 HTTP 连接数，**调整线程**的时候建议同时调整此项 
 --max-conn-per-route| 2 * CPUs     |         | HugeClient 与 HugeGraphServer 每个路由的最大 HTTP 连接数，**调整线程**的时候建议同时调整此项 
@@ -456,9 +457,28 @@ schema: 必填
 --dry-run           | false        |         | 打开该模式，只解析不导入，通常用于测试
 --help              | false        |         | 打印帮助信息
 
-> 目前断点续导模式存在偏移量超前的问题，比如第一次记录导入了 1000 行，但实际只导入了800 行，第二次续导时从 1000 开始，会导致丢失 200 条数据，请慎重使用。
+##### 3.4.2 断点续导模式
 
-##### 3.4.2 logs 目录文件说明
+通常情况下，loader 任务都需要较长时间执行，如果因为某些原因导致导入中断进程退出，下次希望能从上次的断点接着导，这就是断点续导发挥作用的时候。
+
+用户设置命令行参数 --incremental-mode 为 true 即打开了断点续导模式。断点续导的关键在于进度文件，导入进程退出的时候，会把退出时刻的导入进度
+记录到进度文件中，进度文件位于 `${struct}` 目录下，文件名形如 `load-progress ${date}` ，${struct} 为映射文件的前缀，${date} 为导入开始
+的时刻，比如：在 `2019-10-10 12:30:30` 开始的一次导入任务，使用的映射文件为 `struct-example.json`，则进度文件的路径为与 struct-example.json 
+同级的 `struct-example/load-progress 2019-10-10 12:30:30`。
+
+> 注意：进度文件的生成与 --incremental-mode 是否打开无关，每次导入结束都会生成一个进度文件。
+
+如果数据文件格式都是合法的，是用户自己停止（CTRL + C 或 kill，kill -9 不支持）的导入任务，也就是说没有错误记录的情况下，下一次导入只需要设置
+为断点续导即可。
+
+但如果是因为太多数据不合法或者网络异常，达到了 --max-parse-errors 或 --max-insert-errors 的限制，loader 会把这些插入失败的原始行记录到
+失败文件中，用户对失败文件中的数据行修改后，设置 --reload-failure 为 true 即可把这些"失败文件"也当作输入源进行导入（不影响正常的文件的导入），
+当然如果修改后的数据行仍然有问题，则会被再次记录到失败文件中（不用担心会有重复行）。
+
+每个顶点映射或边映射又数据插入失败时都会产生自己的失败文件，失败文件又分为解析失败文件（后缀 .parse-error）和插入失败文件（后缀 .insert-error），
+它们被保存在 `${struct}/current` 目录下。
+
+##### 3.4.3 logs 目录文件说明
 
 程序执行过程中各日志及错误数据会写入 logs 相关文件中。
 
@@ -468,7 +488,7 @@ schema: 必填
 - edge-parse-error.data 边解析错误的数据（每次启动覆盖写）
 - edge-insert-error.data 边插入错误的数据（每次启动覆盖写）
 
-##### 3.4.3 执行命令
+##### 3.4.4 执行命令
 
 运行 bin/hugeloader 并传入参数
 
