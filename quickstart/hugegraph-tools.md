@@ -112,7 +112,7 @@ Usage: hugegraph [options] [command] [command options]
 - task-cancel，取消某个异步任务的执行
     - --task-id，要取消的异步任务的 ID
 - task-clear，清理完成的异步任务
-    - --force，选填项，设置为 true 时，表示清理全部异步任务，未执行完成的先取消，然后清除所有异步任务。默认值为 false，只清理完成的异步任务
+    - --force，选填项，设置时，表示清理全部异步任务，未执行完成的先取消，然后清除所有异步任务。默认只清理已完成的异步任务
 
 ##### 3.5 Gremlin类，gremlin-execute和gremlin-schedule
 
