@@ -6,7 +6,7 @@ HugeGraph-Spark 是一个连接 HugeGraph 和 Spark GraphX 的工具，能够读
 
 ### 2 环境依赖
 
-在使用 HugeGraph-Spark 前，需要依赖 HugeGraph Server 服务，下载和启动 Server 请参考 [HugeGraph-Server Quick Start](/quickstart/hugegraph-server.html)。另外，由于它需要使用 Spark GraphX，所以还需要下载 spark，本文的示例使用的是 apache-spark-2.1.1。
+在使用 HugeGraph-Spark 前，需要依赖 HugeGraph Server 服务，下载和启动 Server 请参考 [HugeGraph-Server Quick Start](/quickstart/hugegraph-server.html)。另外，由于 HugeGraph-Spark 需要使用 Spark GraphX，所以还需要下载 spark，本文的示例使用的是 apache-spark-2.1.1。
 
 ```
 wget https://archive.apache.org/dist/spark/spark-2.1.1/spark-2.1.1-bin-hadoop2.7.tgz
@@ -47,7 +47,7 @@ HugeGraph-Spark 提供了两种添加配置项的方法：
 
   按需设置即可。
 
-1. 在命令行中修改
+2. 在命令行中修改
 
   ```bash
   bin/spark-shell --conf spark.hugegraph.snapshot.dir=file:///tmp/hugegraph-snapshot2
