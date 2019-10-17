@@ -274,10 +274,10 @@ GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?vertex_id="1:josh"&direct
 
 **分页查询所有边，获取第一页（page不带参数值），限定3条**
 
-##### Url
+##### Method & Url
 
 ```
-http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page&limit=3
+GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page&limit=3
 ```
 
 ##### Response Status

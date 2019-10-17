@@ -18,20 +18,36 @@ HugeGraphServer 内部集成了 GremlinServer 和 RestServer，而 gremlin-serve
 gremlin-server.yaml 文件默认的内容如下：
 
 ```yaml
+# host and port of gremlin server
+#host: 127.0.0.1
+#port: 8182
+
+# timeout in ms of gremlin query
 scriptEvaluationTimeout: 30000
+
 # If you want to start gremlin-server for gremlin-console(web-socket),
 # please change `HttpChannelizer` to `WebSocketChannelizer` or comment this line.
 channelizer: org.apache.tinkerpop.gremlin.server.channel.HttpChannelizer
 graphs: {
   hugegraph: conf/hugegraph.properties
 }
-plugins:
-  - com.baidu.hugegraph
 scriptEngines: {
   gremlin-groovy: {
-    imports: [java.lang.Math],
-    staticImports: [java.lang.Math.PI],
-    scripts: [scripts/empty-sample.groovy]
+    plugins: {
+      com.baidu.hugegraph.plugin.HugeGraphGremlinPlugin: {},
+      org.apache.tinkerpop.gremlin.server.jsr223.GremlinServerGremlinPlugin: {},
+      org.apache.tinkerpop.gremlin.jsr223.ImportGremlinPlugin: {
+        classImports: [
+          java.lang.Math,
+          com.baidu.hugegraph.util.DateUtil,
+          com.baidu.hugegraph.traversal.optimize.Text
+        ],
+        methodImports: [java.lang.Math#*]
+      },
+      org.apache.tinkerpop.gremlin.jsr223.ScriptFileGremlinPlugin: {
+        files: [scripts/empty-sample.groovy]
+      }
+    }
   }
 }
 serializers:
@@ -40,31 +56,31 @@ serializers:
         serializeResultToString: false,
         ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
       }
-    }
-  - { className: org.apache.tinkerpop.gremlin.driver.ser.GryoMessageSerializerV1d0,
-      config: {
-        serializeResultToString: true,
-        ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
-      }
-    }
-  - { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerGremlinV1d0,
+  }
+  - { className: org.apache.tinkerpop.gremlin.driver.ser.GraphBinaryMessageSerializerV1,
       config: {
         serializeResultToString: false,
         ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
       }
-    }
-  - { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerGremlinV2d0,
-      config: {
-        serializeResultToString: false,
-        ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
-      }
-    }
+  }
   - { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV1d0,
       config: {
         serializeResultToString: false,
         ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
       }
-    }
+  }
+  - { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV2d0,
+      config: {
+        serializeResultToString: false,
+        ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
+      }
+  }
+  - { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV3d0,
+      config: {
+        serializeResultToString: false,
+        ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
+      }
+  }
 metrics: {
   consoleReporter: {enabled: false, interval: 180000},
   csvReporter: {enabled: true, interval: 180000, fileName: /tmp/gremlin-server-metrics.csv},
@@ -88,8 +104,10 @@ ssl: {
 
 上面的配置项很多，但目前只需要关注如下几个配置项：channelizer 和 graphs。
 
-- channelizer：GremlinServer 与客户端有两种通信方式，分别是 WebSocket 和 HTTP（默认）。如果选择 WebSocket，用户可以通过 [Gremlin-Console](/clients/gremlin-console.html) 快速体验 HugeGraph 的特性，但是不支持大规模数据导入，推荐使用 HTTP 的通信方式，我们的一些外围组件都是基于 HTTP 实现的；
 - graphs：GremlinServer 启动时需要打开的图，该项是一个 map 结构，key 是图的名字，value 是该图的配置文件路径；
+- channelizer：GremlinServer 与客户端有两种通信方式，分别是 WebSocket 和 HTTP（默认）。如果选择 WebSocket，
+用户可以通过 [Gremlin-Console](/clients/gremlin-console.html) 快速体验 HugeGraph 的特性，但是不支持大规模数据导入，
+推荐使用 HTTP 的通信方式，HugeGraph 的外围组件都是基于 HTTP 实现的；
 
 默认GremlinServer是服务在 localhost:8182，如果需要修改，配置 host、port 即可
 
