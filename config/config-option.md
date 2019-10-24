@@ -152,6 +152,7 @@ hbase.hosts              | localhost                   | The hostnames or ip add
 hbase.port               | 2181                        | The port address of HBase zookeeper.
 hbase.threads_max        | 64                          | The max threads num of hbase connections.
 hbase.znode_parent       | /hbase                      | The znode parent path of HBase zookeeper.
+hbase.zk_retry           | 3                           | The recovery retry times of HBase zookeeper.
 
 ### MySQL & PostgreSQL 后端配置项
 
