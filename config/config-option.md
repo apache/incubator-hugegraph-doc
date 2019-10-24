@@ -73,10 +73,12 @@ snowflake.force_string           | false                           | Whether to 
 snowflake.worker_id              | 0                               | The worker id of snowflake id generator.
 task.wait_timeout                | 10                              | Timeout in seconds for waiting for the task to complete,such as when truncating or clearing the backend.
 
-### Cassandra & ScyllaDB 后端配置项
+### Cassandra 后端配置项
 
 config option                  | default value  | descrition
 ------------------------------ | -------------- | ------------------------------------------------------------------
+backend                        |                | Must be set to `cassandra`
+serializer                     |                | Must be set to `cassandra`
 cassandra.host                 | localhost      | The seeds hostname or ip address of cassandra cluster.
 cassandra.port                 | 9042           | The seeds port address of cassandra cluster.
 cassandra.connect_timeout      | 5              | The cassandra driver connect server timeout(seconds).
@@ -88,10 +90,21 @@ cassandra.password             |                | The password corresponding to 
 cassandra.compression_type     | none           | The compression algorithm of cassandra transport: none/snappy/lz4.
 cassandra.jmx_port=7199        | 7199           | The port of JMX API service for cassandra.
 
+### ScyllaDB 后端配置项
+
+config option                  | default value | descrition
+------------------------------ | ------------- | ------------------------------------------------------------------------------------------------
+backend                        |               | Must be set to `scylladb`
+serializer                     |               | Must be set to `scylladb`
+
+其它与 Cassandra 后端一致。
+
 ### RocksDB 后端配置项
 
 config option                                   | default value                                                                                                                        | descrition
 ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+backend                                         |                                                                                                                                      | Must be set to `rocksdb`
+serializer                                      |                                                                                                                                      | Must be set to `binary`
 rocksdb.data_disks                              | []                                                                                                                                   | The optimized disks for storing data of RocksDB. The format of each element: `STORE/TABLE: /path/to/disk`.Allowed keys are [graph/vertex, graph/edge_out, graph/edge_in, graph/secondary_index, graph/range_index]
 rocksdb.data_path                               | rocksdb-data                                                                                                                         | The path for storing data of RocksDB.
 rocksdb.wal_path                                | rocksdb-data                                                                                                                         | The path for storing WAL of RocksDB.
@@ -133,6 +146,8 @@ rocksdb.write_buffer_size                       | 134217728                     
 
 config option            | default value               | descrition
 ------------------------ | --------------------------- | -------------------------------------------------------------------------------
+backend                  |                             | Must be set to `hbase`
+serializer               |                             | Must be set to `hbase`
 hbase.hosts              | localhost                   | The hostnames or ip addresses of HBase zookeeper, separated with commas. 
 hbase.port               | 2181                        | The port address of HBase zookeeper.
 hbase.threads_max        | 64                          | The max threads num of hbase connections.
@@ -142,6 +157,8 @@ hbase.znode_parent       | /hbase                      | The znode parent path o
 
 config option            | default value               | descrition
 ------------------------ | --------------------------- | -------------------------------------------------------------------------------
+backend                  |                             | Must be set to `mysql`
+serializer               |                             | Must be set to `mysql`
 jdbc.driver              | com.mysql.jdbc.Driver       | The JDBC driver class to connect database.
 jdbc.url                 | jdbc:mysql://127.0.0.1:3306 | The url of database in JDBC format.
 jdbc.username            | root                        | The username to login database.
@@ -150,3 +167,12 @@ jdbc.ssl_mode            | false                       | The SSL mode of connect
 jdbc.reconnect_interval  | 3                           | The interval(seconds) between reconnections when the database connection fails.
 jdbc.reconnect_max_times | 3                           | The reconnect times when the database connection fails.
 jdbc.storage_engine      | InnoDB                      | The storage engine of backend store database, like InnoDB/MyISAM/RocksDB for MySQL.
+
+### PostgreSQL 后端配置项
+
+config option            | default value               | descrition
+------------------------ | --------------------------- | -------------------------------------------------------------------------------
+backend                  |                             | Must be set to `postgresql`
+serializer               |                             | Must be set to `postgresql`
+
+其它与 MySQL 后端一致。
