@@ -4,13 +4,13 @@
 
 #### 功能更新
 
-- HugeGraphServer 端内存紧张时拒绝接受服务 （hugegraph #476）
+- 支持 HugeGraphServer 服务端内存紧张时返回错误拒绝请求 （hugegraph #476）
 - 增加 API 白名单和 HugeGraphServer GC 频率控制功能 （hugegraph #522）
 - Rings API 增加 source_in_ring 参数 （hugegraph #528，hugegraph-client #48）
 - 支持批量按策略更新属性接口 （hugegraph #493，hugegraph-client #46）
-- 支持 Shard Index （hugegraph #574，hugegraph-client #56）
+- 支持 Shard Index 前缀与范围检索索引 （hugegraph #574，hugegraph-client #56）
 - 支持顶点的 UUID ID 类型 （hugegraph #618，hugegraph-client #59）
-- 支持唯一索引（Unique Index） （hugegraph #636，hugegraph-client #60）
+- 支持唯一性约束索引（Unique Index） （hugegraph #636，hugegraph-client #60）
 - 支持 API 请求超时功能 （hugegraph #674）
 - 支持根据名称列表查询 schema （hugegraph #686，hugegraph-client #63）
 - 支持按分页方式获取异步任务 （hugegraph #720）
@@ -18,7 +18,7 @@
 #### 内部修改
 
 - 保持 traverser 的参数与 server 端一致 （hugegraph-client #44）
-- 增加通过 Shard + 分页方式遍历顶点和边的方法 （hugegraph-client #47）
+- 增加通过 Shard + 分页方式遍历顶点或者边的方法 （hugegraph-client #47）
 - 支持 Gremlin 查询结果持有 GraphManager （hugegraph-client #49）
 - 改进 RestClient 的连接参数 （hugegraph-client #52）
 - 增加 Date 类型属性的测试 （hugegraph-client #55）
@@ -35,7 +35,7 @@
 - 支持边的 Vertex + SortKeys 的前缀范围查询 （hugegraph #574）
 - 支持顶点的邻接边按分页方式查询 （hugegraph #659）
 - 禁止通过 Gremlin 进行敏感操作 （hugegraph #176）
-- 支持 License 校验功能 （hugegraph #645）
+- 支持 Lic 校验功能 （hugegraph #645）
 - 支持 Search Index 查询结果按匹配度排序的功能 （hugegraph #653）
 - 升级 tinkerpop 值版本 3.4.3 （hugegraph #648）
 
@@ -102,7 +102,7 @@
 - 支持定制化 List 元素之间的分隔符 （hugegraph-loader #66）
 - 支持值映射 （hugegraph-loader #67）
 - 支持通过文件后缀过滤文件 （hugegraph-loader #82）
-- 支持记录导入进度和断点续传 （hugegraph-loader #70，hugegraph-loader #87）
+- 支持对导入进度进行记录和断点续传 （hugegraph-loader #70，hugegraph-loader #87）
 - 支持从不同的关系型数据库中读取 Header 信息 （hugegraph-loader #79）
 - 支持属性为 Unsigned Long 类型值 （hugegraph-loader #91）
 - 支持顶点的 UUID ID 类型 （hugegraph-loader #98）
