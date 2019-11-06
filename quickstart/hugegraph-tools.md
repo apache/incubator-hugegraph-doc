@@ -47,7 +47,7 @@ mvn package -DskipTests
 - 图管理类，graph-mode-set、graph-mode-get、graph-list、graph-get 和 graph-clear
 - 异步任务管理类，task-list、task-get、task-delete、task-cancel 和 task-clear
 - Gremlin类，gremlin-execute 和 gremlin-schedule
-- 备份/恢复类，backup、restore、schedule-backup 和 dump
+- 备份/恢复类，backup、restore、migrate、schedule-backup 和 dump
 - 安装部署类，deploy、clear、start-all 和 stop-all
 
 ```bash
@@ -144,7 +144,20 @@ Usage: hugegraph [options] [command] [command options]
     - --huge-types 或者 -t，要恢复的数据类型，逗号分隔，可选值为 'all' 或者 一个或多个 [vertex,edge,vertex_label,edge_label,property_key,index_label] 的组合，'all' 代表全部6种类型，即顶点、边和所有schema
     - --log 或者 -l，指定日志目录，默认为当前目录
     - --retry，指定失败重试次数，默认为 3
-    - -D，用 -Dkey=value 的模式指定动态参数，用来从 HDFS 恢复图时，指定 HDFS 的配置项，例如：-Dfs.default.name=hdfs://localhost:9000 
+    - -D，用 -Dkey=value 的模式指定动态参数，用来从 HDFS 恢复图时，指定 HDFS 的配置项，例如：-Dfs.default.name=hdfs://localhost:9000
+- migrate, 将图从一个 HugeGraphServer 迁移至另一个 HugeGraphServer
+    - --source-graph，源图的名字
+    - --source-url，源图所在的 HugeGraphServer 的URL
+    - --target-graph，目标图的名字
+    - --target-url，目标图所在的 HugeGraphServer
+    - --directory 或者 -d，迁移过程中，存储源图的 schema 或者 data 的目录，本地目录时，默认为'./{graphName}'，HDFS 时，默认为 '{fs.default.name}/{graphName}'
+    - --huge-types 或者 -t，要迁移的数据类型，逗号分隔，可选值为 'all' 或者 一个或多个 [vertex,edge,vertex_label,edge_label,property_key,index_label] 的组合，'all' 代表全部6种类型，即顶点、边和所有schema
+    - --log 或者 -l，指定日志目录，默认为当前目录
+    - --retry，指定失败重试次数，默认为 3
+    - --split-size 或者 -s，指定迁移过程中对源图进行备份时顶点或者边分块的大小，默认为 1048576
+    - -D，用 -Dkey=value 的模式指定动态参数，用来在迁移图过程中需要备份数据到 HDFS 时，指定 HDFS 的配置项，例如：-Dfs.default.name=hdfs://localhost:9000
+    - --graph-mode 或者 -m，将源图恢复到目标图时将目标图设置的模式，合法值包括 [RESTORING, MERGING]
+    - --clean，是否删除在迁移图的过程中产生的源图的备份，默认为 true，即默认迁移图结束后清理产生的源图备份
 - schedule-backup，周期性对图执行备份操作，并保留一定数目的最新备份（目前仅支持本地文件系统）
     - --directory 或者 -d，必填项，指定备份数据的目录
     - --backup-num，选填项，指定保存的最新的备份的数目，默认为 3
@@ -192,7 +205,7 @@ Usage: hugegraph [options] [command] [command options]
       Connection timeout
       Default: 30
     --url
-      The URL of HugeGraph-Server url
+      The URL of HugeGraph-Server
       Default: http://127.0.0.1:8080
     --user
       User Name
@@ -255,7 +268,7 @@ Usage: hugegraph [options] [command] [command options]
         Options:
           --force
             Force to clear all tasks, cancel all uncompleted tasks firstly, 
-            and delete all completed task
+            and delete all completed tasks
             Default: false
 
     gremlin-execute      Execute Gremlin statements
@@ -268,7 +281,7 @@ Usage: hugegraph [options] [command] [command options]
             Gremlin bindings, valid format is: 'key1=value1,key2=value2...'
             Default: {}
           --file, -f
-            Gremlin Script file to be executed, UTF-8encoded, exclusive to 
+            Gremlin Script file to be executed, UTF-8 encoded, exclusive to 
             --script 
           --language, -l
             Gremlin script language
@@ -283,7 +296,7 @@ Usage: hugegraph [options] [command] [command options]
             Gremlin bindings, valid format is: 'key1=value1,key2=value2...'
             Default: {}
           --file, -f
-            Gremlin Script file to be executed, UTF-8encoded, exclusive to 
+            Gremlin Script file to be executed, UTF-8 encoded, exclusive to 
             --script 
           --language, -l
             Gremlin script language
@@ -292,8 +305,8 @@ Usage: hugegraph [options] [command] [command options]
             Gremlin script to be executed, exclusive to --file
 
     backup      Backup graph schema/data. If directory is on HDFS, use -D to 
-            set HDFS params if needed. For 
-            exmaple:-Dfs.default.name=hdfs://localhost:9000 
+            set HDFS params if needed. For exmaple: 
+            -Dfs.default.name=hdfs://localhost:9000 
       Usage: backup [options]
         Options:
           --directory, -d
@@ -331,7 +344,7 @@ Usage: hugegraph [options] [command] [command options]
             (0 - 59), 'b' means hour (0 - 23), 'c' means day of month (1 - 
             31), 'd' means month (1 - 12), 'e' means day of week (0 - 6) 
             (Sunday=0), "*" means all
-            Default: 0,0,*,*,*
+            Default: "0 0 * * *"
 
     dump      Dump graph to files
       Usage: dump [options]
@@ -366,6 +379,9 @@ Usage: hugegraph [options] [command] [command options]
             exmaple:-Dfs.default.name=hdfs://localhost:9000 
       Usage: restore [options]
         Options:
+          --clean
+            Whether to remove the directory of graph data after restored
+            Default: false
           --directory, -d
             Directory of graph schema/data, default is './{graphname}' in 
             local file system or '{fs.default.name}/{graphname}' in HDFS
@@ -380,6 +396,51 @@ Usage: hugegraph [options] [command] [command options]
           --retry
             Retry times, default is 3
             Default: 3
+          -D
+            HDFS config parameters
+            Syntax: -Dkey=value
+            Default: {}
+
+    migrate      Migrate graph
+      Usage: migrate [options]
+        Options:
+          --clean
+            Whether to remove the directory of graph data after restored
+            Default: true
+          --directory, -d
+            Directory of graph schema/data, default is './{graphname}' in 
+            local file system or '{fs.default.name}/{graphname}' in HDFS
+          --graph-mode, -m
+            Mode used when migrating to target graph, include: [RESTORING, 
+            MERGING] 
+            Default: RESTORING
+            Possible Values: [NONE, RESTORING, MERGING]
+          --huge-types, -t
+            Type of schema/data. Concat with ',' if more than one. 'all' means 
+            all vertices, edges and schema, in other words, 'all' equals with 
+            'vertex,edge,vertex_label,edge_label,property_key,index_label' 
+            Default: [PROPERTY_KEY, VERTEX_LABEL, EDGE_LABEL, INDEX_LABEL, VERTEX, EDGE]
+          --log, -l
+            Directory of log
+            Default: ./logs
+          --retry
+            Retry times, default is 3
+            Default: 3
+          --source-graph
+            The source graph to migrate
+            Default: hugegraph
+          --source-url
+            The source graph url to migrate
+            Default: http://127.0.0.1:8080
+          --split-size, -s
+            Split size of shard
+            Default: 1048576
+          --target-graph
+            The target graph to migrate
+            Default: hugegraph
+          --target-url
+            The target graph url to migrate
+            Default: http://127.0.0.1:8081
           -D
             HDFS config parameters
             Syntax: -Dkey=value
