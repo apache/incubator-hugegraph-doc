@@ -5,8 +5,8 @@
 #### 功能更新
 
 - 支持 HugeGraphServer 服务端内存紧张时返回错误拒绝请求 （hugegraph #476）
-- 增加 API 白名单和 HugeGraphServer GC 频率控制功能 （hugegraph #522）
-- Rings API 增加 source_in_ring 参数 （hugegraph #528，hugegraph-client #48）
+- 支持 API 白名单和 HugeGraphServer GC 频率控制功能 （hugegraph #522）
+- 支持 Rings API 的 source_in_ring 参数 （hugegraph #528，hugegraph-client #48）
 - 支持批量按策略更新属性接口 （hugegraph #493，hugegraph-client #46）
 - 支持 Shard Index 前缀与范围检索索引 （hugegraph #574，hugegraph-client #56）
 - 支持顶点的 UUID ID 类型 （hugegraph #618，hugegraph-client #59）
@@ -18,7 +18,7 @@
 #### 内部修改
 
 - 保持 traverser 的参数与 server 端一致 （hugegraph-client #44）
-- 增加通过 Shard + 分页方式遍历顶点或者边的方法 （hugegraph-client #47）
+- 支持在 Shard 内使用分页方式遍历顶点或者边的方法 （hugegraph-client #47）
 - 支持 Gremlin 查询结果持有 GraphManager （hugegraph-client #49）
 - 改进 RestClient 的连接参数 （hugegraph-client #52）
 - 增加 Date 类型属性的测试 （hugegraph-client #55）
@@ -37,7 +37,7 @@
 - 禁止通过 Gremlin 进行敏感操作 （hugegraph #176）
 - 支持 Lic 校验功能 （hugegraph #645）
 - 支持 Search Index 查询结果按匹配度排序的功能 （hugegraph #653）
-- 升级 tinkerpop 值版本 3.4.3 （hugegraph #648）
+- 升级 tinkerpop 至版本 3.4.3 （hugegraph #648）
 
 #### BUG修复
 
@@ -50,7 +50,7 @@
 - 修复从 Edge 中获取的 Vertex 没有属性的问题 （hugegraph #604）
 - 修复交叉关闭 RocksDB 的连接池问题 （hugegraph #598）
 - 修复在超级点查询时 limit 失效问题 （hugegraph #607）
-- 修复使用 Equal 条件和分页的情况下查询 Range Index只返回第一页的问题 （hugegraph #614）
+- 修复使用 Equal 条件和分页的情况下查询 Range Index 只返回第一页的问题 （hugegraph #614）
 - 修复查询 limit 在删除部分数据后失效的问题 （hugegraph #610）
 - 修复 Example1 的查询错误 （hugegraph #638）
 - 修复 HBase 的批量提交部分错误问题 （hugegraph #634）
@@ -73,20 +73,20 @@
 - 缩减 Variable 的字符串长度 （hugegraph #581）
 - 增加 RocksDB 后端的 cache 配置项 （hugegraph #567）
 - 改进异步任务的异常信息 （hugegraph #596）
-- 将Range Index拆分成 INT，LONG，FLOAT，DOUBLE 四个表存储 （hugegraph #574）
+- 将 Range Index 拆分成 INT，LONG，FLOAT，DOUBLE 四个表存储 （hugegraph #574）
 - 改进顶点和边 API 的 Metrics 名字 （hugegraph #631）
 - 增加 G1GC 和 GC Log 的配置项 （hugegraph #616）
 - 拆分顶点和边的 Label Index 表 （hugegraph #635）
 - 减少顶点和边的属性存储空间 （hugegraph #650）
 - 支持对 Secondary Index 和 Primary Key 中的数字进行编码 （hugegraph #676）
-- 减少顶点和边的ID存储空间 （hugegraph #661）
-- 支持Cassandra后端存储的二进制序列化存储 （hugegraph #680）
+- 减少顶点和边的 ID 存储空间 （hugegraph #661）
+- 支持 Cassandra 后端存储的二进制序列化存储 （hugegraph #680）
 - 放松对最小内存的限制 （hugegraph #689）
 - 修复 RocksDB 后端批量写时的 Invalid column family 问题 （hugegraph #701）
 - 更新异步任务状态时删除残留索引 （hugegraph #719）
 - 删除 ScyllaDB 的 Label Index 表 （hugegraph #717）
 - 启动时使用多线程方式打开 RocksDB 后端存储多个数据目录 （hugegraph #721）
-- RocksDB版本从v5.17.2升级至v6.3.6 （hugegraph #722）
+- RocksDB 版本从 v5.17.2 升级至 v6.3.6 （hugegraph #722）
 
 #### 其它
 
@@ -118,7 +118,7 @@
 
 #### 内部修改
 
-- 增加 HTTP 链接参数 （hugegraph-loader #81）
+- 增加 HTTP 连接参数 （hugegraph-loader #81）
 - 改进导入完成的总结信息 （hugegraph-loader #80）
 - 改进一行数据缺少列或者有多余列的处理逻辑 （hugegraph-loader #93）
 
@@ -126,7 +126,7 @@
 
 #### 功能更新
 
-- 支持0.8版本 server 备份的数据恢复至0.9版本的 server 中 （hugegraph-tools #34）
+- 支持 0.8 版本 server 备份的数据恢复至 0.9 版本的 server 中 （hugegraph-tools #34）
 - 增加 timeout 全局参数 （hugegraph-tools #44）
 - 增加 migrate 子命令支持迁移图 （hugegraph-tools #45）
 
