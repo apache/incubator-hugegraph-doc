@@ -752,7 +752,20 @@
         
         
     
-        <li class="chapter " data-level="8.1" data-path="../changelog/hugegraph-0.9.2-release-notes.html">
+        <li class="chapter " data-level="8.1" data-path="../changelog/hugegraph-0.10.4-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.10.4-release-notes.html">
+            
+                    
+                    Release-0.10.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.2" data-path="../changelog/hugegraph-0.9.2-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.9.2-release-notes.html">
             
@@ -765,7 +778,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.2" data-path="../changelog/hugegraph-0.8.0-release-notes.html">
+        <li class="chapter " data-level="8.3" data-path="../changelog/hugegraph-0.8.0-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.8.0-release-notes.html">
             
@@ -778,7 +791,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.3" data-path="../changelog/hugegraph-0.7.4-release-notes.html">
+        <li class="chapter " data-level="8.4" data-path="../changelog/hugegraph-0.7.4-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.7.4-release-notes.html">
             
@@ -791,7 +804,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.4" data-path="../changelog/hugegraph-0.6.1-release-notes.html">
+        <li class="chapter " data-level="8.5" data-path="../changelog/hugegraph-0.6.1-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.6.1-release-notes.html">
             
@@ -804,7 +817,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.5" data-path="../changelog/hugegraph-0.5.6-release-notes.html">
+        <li class="chapter " data-level="8.6" data-path="../changelog/hugegraph-0.5.6-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.5.6-release-notes.html">
             
@@ -817,7 +830,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.6" data-path="../changelog/hugegraph-0.4.4-release-notes.html">
+        <li class="chapter " data-level="8.7" data-path="../changelog/hugegraph-0.4.4-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.4.4-release-notes.html">
             
@@ -830,7 +843,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.7" data-path="../changelog/hugegraph-0.3.3-release-notes.html">
+        <li class="chapter " data-level="8.8" data-path="../changelog/hugegraph-0.3.3-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.3.3-release-notes.html">
             
@@ -843,7 +856,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.8" data-path="../changelog/hugegraph-0.2.4-release-notes.html">
+        <li class="chapter " data-level="8.9" data-path="../changelog/hugegraph-0.2.4-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.2.4-release-notes.html">
             
@@ -856,7 +869,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.9" data-path="../changelog/hugegraph-0.2-release-notes.html">
+        <li class="chapter " data-level="8.10" data-path="../changelog/hugegraph-0.2-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.2-release-notes.html">
             
@@ -895,6 +908,7 @@
                                 
                                 <h2 id="hugegraph-&#x914D;&#x7F6E;&#x9879;">HugeGraph &#x914D;&#x7F6E;&#x9879;</h2>
 <h3 id="gremlin-server-&#x914D;&#x7F6E;&#x9879;">Gremlin Server &#x914D;&#x7F6E;&#x9879;</h3>
+<p>&#x5BF9;&#x5E94;&#x914D;&#x7F6E;&#x6587;&#x4EF6;<code>gremlin-server.yaml</code></p>
 <table>
 <thead>
 <tr>
@@ -915,6 +929,11 @@
 <td>The listening port of Gremlin Server.</td>
 </tr>
 <tr>
+<td>graphs</td>
+<td>hugegraph: conf/hugegraph.properties</td>
+<td>The map of graphs with name and config file path.</td>
+</tr>
+<tr>
 <td>scriptEvaluationTimeout</td>
 <td>30000</td>
 <td>The timeout for gremlin script execution(millisecond).</td>
@@ -925,21 +944,14 @@
 <td>Indicates the protocol which the Gremlin Server provides service.</td>
 </tr>
 <tr>
-<td>graphs</td>
-<td>hugegraph: conf/hugegraph.properties</td>
-<td>The map of graphs with name and config file path.</td>
-</tr>
-<tr>
 <td>authentication</td>
 <td>authenticator: com.baidu.hugegraph.auth.StandardAuthenticator, config: {tokens: conf/rest-server.properties}</td>
 <td>The authenticator and config(contains tokens path) of authentication mechanism.</td>
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p>&#x5BF9;&#x5E94;&#x914D;&#x7F6E;&#x6587;&#x4EF6;<code>gremlin-server.yaml</code></p>
-</blockquote>
 <h3 id="rest-server--api-&#x914D;&#x7F6E;&#x9879;">Rest Server &amp; API &#x914D;&#x7F6E;&#x9879;</h3>
+<p>&#x5BF9;&#x5E94;&#x914D;&#x7F6E;&#x6587;&#x4EF6;<code>rest-server.properties</code></p>
 <table>
 <thead>
 <tr>
@@ -955,19 +967,54 @@
 <td>The map of graphs&apos; name and config file.</td>
 </tr>
 <tr>
+<td>server.id</td>
+<td>server-1</td>
+<td>The id of rest server, used for license verification.</td>
+</tr>
+<tr>
 <td>restserver.url</td>
 <td><a href="http://127.0.0.1:8080" target="_blank">http://127.0.0.1:8080</a></td>
-<td>The url for listening of rest-api server.</td>
+<td>The url for listening of rest server.</td>
 </tr>
 <tr>
 <td>restserver.max_worker_threads</td>
 <td>2 * CPUs</td>
-<td>The maximum worker threads of rest server.</td>
+<td>The maxmium worker threads of rest server.</td>
+</tr>
+<tr>
+<td>restserver.min_free_memory</td>
+<td>64</td>
+<td>The minmium free memory(MB) of rest server, requests will be rejected when the available memory of system is lower than this value.</td>
+</tr>
+<tr>
+<td>restserver.request_timeout</td>
+<td>30</td>
+<td>The time in seconds within which a request must complete, -1 means no timeout.</td>
+</tr>
+<tr>
+<td>restserver.connection_idle_timeout</td>
+<td>30</td>
+<td>The time in seconds to keep an inactive connection alive, -1 means no timeout.</td>
+</tr>
+<tr>
+<td>restserver.connection_max_requests</td>
+<td>256</td>
+<td>The max number of HTTP requests allowed to be processed on one keep-alive connection, -1 means unlimited.</td>
 </tr>
 <tr>
 <td>gremlinserver.url</td>
 <td><a href="http://127.0.0.1:8182" target="_blank">http://127.0.0.1:8182</a></td>
-<td>The url used to connect gremlin server from rest-api server.</td>
+<td>The url of gremlin server.</td>
+</tr>
+<tr>
+<td>gremlinserver.max_route</td>
+<td>8</td>
+<td>The max route number for gremlin server.</td>
+</tr>
+<tr>
+<td>gremlinserver.timeout</td>
+<td>30</td>
+<td>The timeout in seconds of waiting for gremlin server.</td>
 </tr>
 <tr>
 <td>batch.max_edges_per_batch</td>
@@ -990,14 +1037,9 @@
 <td>The maximum threads for batch writing, if the value is 0, the actual value will be set to batch.max_write_ratio * total-rest-threads.</td>
 </tr>
 <tr>
-<td>exception.allow_trace</td>
-<td>false</td>
-<td>Whether to allow exception trace stack.</td>
-</tr>
-<tr>
 <td>auth.authenticator</td>
 <td></td>
-<td>The class path of authenticator implemention. e.g., com.baidu.hugegraph.auth.StandardAuthenticator.</td>
+<td>The class path of authenticator implemention. e.g., com.baidu.hugegraph.auth.StandardAuthenticator</td>
 </tr>
 <tr>
 <td>auth.admin_token</td>
@@ -1009,12 +1051,15 @@
 <td>[hugegraph:9fd95c9c-711b-415b-b85f-d4df46ba5c31]</td>
 <td>The map of user tokens with name and password.</td>
 </tr>
+<tr>
+<td>exception.allow_trace</td>
+<td>false</td>
+<td>Whether to allow exception trace stack.</td>
+</tr>
 </tbody>
 </table>
-<blockquote>
-<p>&#x5BF9;&#x5E94;&#x914D;&#x7F6E;&#x6587;&#x4EF6;<code>rest-server.properties</code></p>
-</blockquote>
 <h3 id="&#x57FA;&#x672C;&#x914D;&#x7F6E;&#x9879;">&#x57FA;&#x672C;&#x914D;&#x7F6E;&#x9879;</h3>
+<p>&#x57FA;&#x672C;&#x914D;&#x7F6E;&#x9879;&#x53CA;&#x540E;&#x7AEF;&#x914D;&#x7F6E;&#x9879;&#x5BF9;&#x5E94;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF1A;{graph-name}.properties&#xFF0C;&#x5982;<code>hugegraph.properties</code></p>
 <table>
 <thead>
 <tr>
@@ -1024,6 +1069,11 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>gremlin.graph</td>
+<td>com.baidu.hugegraph.HugeFactory</td>
+<td>The entrence of gremlin server to create graph.</td>
+</tr>
 <tr>
 <td>backend</td>
 <td>rocksdb</td>
@@ -1040,39 +1090,39 @@
 <td>The database name like Cassandra Keyspace.</td>
 </tr>
 <tr>
-<td>rate_limit</td>
-<td>0</td>
-<td>The max rate(items/s) to add/update/delete vertices/edges.</td>
+<td>store.connection_detect_interval</td>
+<td>600</td>
+<td>The interval in seconds for detecting connections, if the idle time of a connection exceeds this value, detect it and reconnect if needed before using, value 0 means detecting every time.</td>
 </tr>
 <tr>
 <td>store.graph</td>
-<td>graph</td>
+<td>g</td>
 <td>The graph table name, which store vertex, edge and property.</td>
 </tr>
 <tr>
 <td>store.schema</td>
-<td>schema</td>
+<td>m</td>
 <td>The schema table name, which store meta data.</td>
 </tr>
 <tr>
 <td>store.system</td>
-<td>system</td>
+<td>s</td>
 <td>The system table name, which store system data.</td>
 </tr>
 <tr>
-<td>vertex.default_label</td>
-<td>vertex</td>
-<td>The default vertex label.</td>
+<td>schema.illegal_name_regex</td>
+<td>.<em>\s+$|~.</em></td>
+<td>The regex specified the illegal format for schema name.</td>
 </tr>
 <tr>
-<td>vertex.check_customzied_id_exist</td>
-<td>true</td>
-<td>Whether to check the vertices exist for those using customized id strategy.</td>
+<td>schema.cache_capacity</td>
+<td>100000</td>
+<td>The max cache size(items) of schema cache.</td>
 </tr>
 <tr>
-<td>vertex.tx_capacity</td>
-<td>10000</td>
-<td>The max size(items) of vertices(uncommitted) in transaction.</td>
+<td>schema.sync_deletion</td>
+<td>false</td>
+<td>Whether to delete schema synchronously.</td>
 </tr>
 <tr>
 <td>vertex.cache_capacity</td>
@@ -1085,9 +1135,19 @@
 <td>The expire time in seconds of vertex cache.</td>
 </tr>
 <tr>
-<td>edge.tx_capacity</td>
+<td>vertex.check_customized_id_exist</td>
+<td>true</td>
+<td>Whether to check the vertices exist for those using customized id strategy</td>
+</tr>
+<tr>
+<td>vertex.default_label</td>
+<td>vertex</td>
+<td>The default vertex label.</td>
+</tr>
+<tr>
+<td>vertex.tx_capacity</td>
 <td>10000</td>
-<td>The max size(items) of edges(uncommitted) in transaction.</td>
+<td>The max size(items) of vertices(uncommitted) in transaction.</td>
 </tr>
 <tr>
 <td>edge.cache_capacity</td>
@@ -1100,19 +1160,14 @@
 <td>The expire time in seconds of edge cache.</td>
 </tr>
 <tr>
-<td>schema.cache_capacity</td>
-<td>100000</td>
-<td>The max cache size(items) of schema data.</td>
+<td>edge.tx_capacity</td>
+<td>10000</td>
+<td>The max size(items) of edges(uncommitted) in transaction.</td>
 </tr>
 <tr>
-<td>schema.illegal_name_regex</td>
-<td>.<em>\s+$|~.</em></td>
-<td>The regex specified the illegal format for schema name.</td>
-</tr>
-<tr>
-<td>schema.sync_deletion</td>
-<td>false</td>
-<td>Whether to delete schema synchronously.</td>
+<td>rate_limit</td>
+<td>0</td>
+<td>The max rate(items/s) to add/update/delete vertices/edges.</td>
 </tr>
 <tr>
 <td>query.page_size</td>
@@ -1120,19 +1175,14 @@
 <td>The size of each page when query using paging.</td>
 </tr>
 <tr>
-<td>task.wait_timeout</td>
-<td>10</td>
-<td>Timeout in seconds for waiting for the task to complete,such as when truncating or clearing the backend.</td>
-</tr>
-<tr>
 <td>search.text_analyzer</td>
 <td>ikanalyzer</td>
-<td>Choose a text analyzer for searching the vertex/edge properties, available type are [word, ansj, hanlp, smartcn, jieba, jcseg, mmseg4j, ikanalyzer].</td>
+<td>Choose a text analyzer for searching the vertex/edge properties, available type are [word, ansj, hanlp, smartcn, jieba, jcseg, mmseg4j, ikanalyzer]</td>
 </tr>
 <tr>
 <td>search.text_analyzer_mode</td>
 <td>smart</td>
-<td>Specify the mode for the text analyzer, the available mode of analyzer are {word: [MaximumMatching, ReverseMaximumMatching, MinimumMatching, ReverseMinimumMatching, BidirectionalMaximumMatching, BidirectionalMinimumMatching, BidirectionalMaximumMinimumMatching, FullSegmentation, MinimalWordCount, MaxNgramScore, PureEnglish], ansj: [BaseAnalysis, IndexAnalysis, ToAnalysis, NlpAnalysis], hanlp: [standard, nlp, index, nShort, shortest, speed], smartcn: [], jieba: [SEARCH, INDEX], jcseg: [Simple, Complex], mmseg4j: [Simple, Complex, MaxWord], ikanalyzer: [smart, max_word]}.</td>
+<td>Specify the mode for the text analyzer, the available mode of analyzer are {word: [MaximumMatching, ReverseMaximumMatching, MinimumMatching, ReverseMinimumMatching, BidirectionalMaximumMatching, BidirectionalMinimumMatching, BidirectionalMaximumMinimumMatching, FullSegmentation, MinimalWordCount, MaxNgramScore, PureEnglish], ansj: [BaseAnalysis, IndexAnalysis, ToAnalysis, NlpAnalysis], hanlp: [standard, nlp, index, nShort, shortest, speed], smartcn: [], jieba: [SEARCH, INDEX], jcseg: [Simple, Complex], mmseg4j: [Simple, Complex, MaxWord], ikanalyzer: [smart, max_word]}</td>
 </tr>
 <tr>
 <td>snowflake.datecenter_id</td>
@@ -1150,16 +1200,13 @@
 <td>The worker id of snowflake id generator.</td>
 </tr>
 <tr>
-<td>gremlin.graph</td>
-<td>com.baidu.hugegraph.HugeFactory</td>
-<td>Gremlin entrence to create graph.</td>
+<td>task.wait_timeout</td>
+<td>10</td>
+<td>Timeout in seconds for waiting for the task to complete,such as when truncating or clearing the backend.</td>
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p>&#x57FA;&#x672C;&#x914D;&#x7F6E;&#x9879;&#x53CA;&#x540E;&#x7AEF;&#x914D;&#x7F6E;&#x9879;&#x5BF9;&#x5E94;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF1A;{graph-name}.properties&#xFF0C;&#x5982;<code>hugegraph.properties</code></p>
-</blockquote>
-<h3 id="cassandra--scylladb-&#x540E;&#x7AEF;&#x914D;&#x7F6E;&#x9879;">Cassandra &amp; ScyllaDB &#x540E;&#x7AEF;&#x914D;&#x7F6E;&#x9879;</h3>
+<h3 id="cassandra-&#x540E;&#x7AEF;&#x914D;&#x7F6E;&#x9879;">Cassandra &#x540E;&#x7AEF;&#x914D;&#x7F6E;&#x9879;</h3>
 <table>
 <thead>
 <tr>
@@ -1169,6 +1216,16 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>backend</td>
+<td></td>
+<td>Must be set to <code>cassandra</code></td>
+</tr>
+<tr>
+<td>serializer</td>
+<td></td>
+<td>Must be set to <code>cassandra</code></td>
+</tr>
 <tr>
 <td>cassandra.host</td>
 <td>localhost</td>
@@ -1221,6 +1278,29 @@
 </tr>
 </tbody>
 </table>
+<h3 id="scylladb-&#x540E;&#x7AEF;&#x914D;&#x7F6E;&#x9879;">ScyllaDB &#x540E;&#x7AEF;&#x914D;&#x7F6E;&#x9879;</h3>
+<table>
+<thead>
+<tr>
+<th>config option</th>
+<th>default value</th>
+<th>descrition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>backend</td>
+<td></td>
+<td>Must be set to <code>scylladb</code></td>
+</tr>
+<tr>
+<td>serializer</td>
+<td></td>
+<td>Must be set to <code>scylladb</code></td>
+</tr>
+</tbody>
+</table>
+<p>&#x5176;&#x5B83;&#x4E0E; Cassandra &#x540E;&#x7AEF;&#x4E00;&#x81F4;&#x3002;</p>
 <h3 id="rocksdb-&#x540E;&#x7AEF;&#x914D;&#x7F6E;&#x9879;">RocksDB &#x540E;&#x7AEF;&#x914D;&#x7F6E;&#x9879;</h3>
 <table>
 <thead>
@@ -1232,6 +1312,31 @@
 </thead>
 <tbody>
 <tr>
+<td>backend</td>
+<td></td>
+<td>Must be set to <code>rocksdb</code></td>
+</tr>
+<tr>
+<td>serializer</td>
+<td></td>
+<td>Must be set to <code>binary</code></td>
+</tr>
+<tr>
+<td>rocksdb.data_disks</td>
+<td>[]</td>
+<td>The optimized disks for storing data of RocksDB. The format of each element: <code>STORE/TABLE: /path/to/disk</code>.Allowed keys are [graph/vertex, graph/edge_out, graph/edge_in, graph/secondary_index, graph/range_index]</td>
+</tr>
+<tr>
+<td>rocksdb.data_path</td>
+<td>rocksdb-data</td>
+<td>The path for storing data of RocksDB.</td>
+</tr>
+<tr>
+<td>rocksdb.wal_path</td>
+<td>rocksdb-data</td>
+<td>The path for storing WAL of RocksDB.</td>
+</tr>
+<tr>
 <td>rocksdb.allow_mmap_reads</td>
 <td>false</td>
 <td>Allow the OS to mmap file for reading sst tables.</td>
@@ -1242,9 +1347,39 @@
 <td>Allow the OS to mmap file for writing.</td>
 </tr>
 <tr>
+<td>rocksdb.block_cache_capacity</td>
+<td>8388608</td>
+<td>The amount of block cache in bytes that will be used by RocksDB, 0 means no block cache.</td>
+</tr>
+<tr>
+<td>rocksdb.bloom_filter_bits_per_key</td>
+<td>-1</td>
+<td>The bits per key in bloom filter, a good value is 10, which yields a filter with ~ 1% false positive rate, -1 means no bloom filter.</td>
+</tr>
+<tr>
+<td>rocksdb.bloom_filter_block_based_mode</td>
+<td>false</td>
+<td>Use block based filter rather than full filter.</td>
+</tr>
+<tr>
+<td>rocksdb.bloom_filter_whole_key_filtering</td>
+<td>true</td>
+<td>True if place whole keys in the bloom filter, else place the prefix of keys.</td>
+</tr>
+<tr>
+<td>rocksdb.bottommost_compression</td>
+<td>NO_COMPRESSION</td>
+<td>The compression algorithm for the bottommost level of RocksDB, allowed values are none/snappy/z/bzip2/lz4/lz4hc/xpress/zstd.</td>
+</tr>
+<tr>
 <td>rocksdb.bulkload_mode</td>
 <td>false</td>
 <td>Switch to the mode to bulk load data into RocksDB.</td>
+</tr>
+<tr>
+<td>rocksdb.cache_index_and_filter_blocks</td>
+<td>false</td>
+<td>Indicating if we&apos;d put index/filter blocks to the block cache.</td>
 </tr>
 <tr>
 <td>rocksdb.compaction_style</td>
@@ -1252,19 +1387,14 @@
 <td>Set compaction style for RocksDB: LEVEL/UNIVERSAL/FIFO.</td>
 </tr>
 <tr>
-<td>rocksdb.compression_type</td>
-<td>snappy</td>
-<td>The compression algorithm of RocksDB: snappy/z/bzip2/lz4/lz4hc/xpress/zstd.</td>
+<td>rocksdb.compression</td>
+<td>SNAPPY_COMPRESSION</td>
+<td>The compression algorithm for compressing blocks of RocksDB, allowed values are none/snappy/z/bzip2/lz4/lz4hc/xpress/zstd.</td>
 </tr>
 <tr>
-<td>rocksdb.data_disks</td>
-<td>[]</td>
-<td>The optimized disks for storing data of RocksDB. The format of each element: <code>STORE/TABLE: /path/to/disk</code>.Allowed keys are [graph/vertex, graph/edge_out, graph/edge_in, graph/secondary_index, graph/range_index].</td>
-</tr>
-<tr>
-<td>rocksdb.data_path</td>
-<td>rocksdb-data</td>
-<td>The path for storing data of RocksDB.</td>
+<td>rocksdb.compression_per_level</td>
+<td>[NO_COMPRESSION, NO_COMPRESSION, SNAPPY_COMPRESSION, SNAPPY_COMPRESSION, SNAPPY_COMPRESSION, SNAPPY_COMPRESSION, SNAPPY_COMPRESSION]</td>
+<td>The compression algorithms for different levels of RocksDB, allowed values are none/snappy/z/bzip2/lz4/lz4hc/xpress/zstd.</td>
 </tr>
 <tr>
 <td>rocksdb.delayed_write_rate</td>
@@ -1277,14 +1407,9 @@
 <td>The info log level of RocksDB.</td>
 </tr>
 <tr>
-<td>rocksdb.max_background_compactions</td>
-<td>4</td>
-<td>The maximum number of concurrent background compaction jobs.</td>
-</tr>
-<tr>
-<td>rocksdb.max_background_flushes</td>
-<td>4</td>
-<td>The maximum number of concurrent background flush jobs.</td>
+<td>rocksdb.max_background_jobs</td>
+<td>8</td>
+<td>Maximum number of concurrent background jobs, including flushes and compactions.</td>
 </tr>
 <tr>
 <td>rocksdb.max_bytes_for_level_base</td>
@@ -1299,7 +1424,7 @@
 <tr>
 <td>rocksdb.max_open_files</td>
 <td>-1</td>
-<td>The maximum number of open files that can be cached by RocksDB.</td>
+<td>The maximum number of open files that can be cached by RocksDB, -1 means no limit.</td>
 </tr>
 <tr>
 <td>rocksdb.max_subcompactions</td>
@@ -1327,9 +1452,19 @@
 <td>Set the number of levels for this database.</td>
 </tr>
 <tr>
+<td>rocksdb.optimize_filters_for_hits</td>
+<td>false</td>
+<td>This flag allows us to not store filters for the last level.</td>
+</tr>
+<tr>
 <td>rocksdb.optimize_mode</td>
 <td>true</td>
 <td>Optimize for heavy workloads and big datasets.</td>
+</tr>
+<tr>
+<td>rocksdb.pin_l0_filter_and_index_blocks_in_cache</td>
+<td>false</td>
+<td>Indicating if we&apos;d put index/filter blocks to the block cache.</td>
 </tr>
 <tr>
 <td>rocksdb.sst_path</td>
@@ -1349,7 +1484,7 @@
 <tr>
 <td>rocksdb.use_direct_io_for_flush_and_compaction</td>
 <td>false</td>
-<td>Enable the OS to use direct reads and writes in flush and compaction.</td>
+<td>Enable the OS to use direct read/writes in flush and compaction.</td>
 </tr>
 <tr>
 <td>rocksdb.use_direct_reads</td>
@@ -1357,14 +1492,39 @@
 <td>Enable the OS to use direct I/O for reading sst tables.</td>
 </tr>
 <tr>
-<td>rocksdb.wal_path</td>
-<td>rocksdb-data</td>
-<td>The path for storing WAL of RocksDB.</td>
-</tr>
-<tr>
 <td>rocksdb.write_buffer_size</td>
 <td>134217728</td>
 <td>Amount of data in bytes to build up in memory.</td>
+</tr>
+<tr>
+<td>rocksdb.max_manifest_file_size</td>
+<td>104857600</td>
+<td>The max size of manifest file in bytes.</td>
+</tr>
+<tr>
+<td>rocksdb.skip_stats_update_on_db_open</td>
+<td>false</td>
+<td>Whether to skip statistics update when opening the database, setting this flag true allows us to not update statistics.</td>
+</tr>
+<tr>
+<td>rocksdb.max_file_opening_threads</td>
+<td>16</td>
+<td>The max number of threads used to open files.</td>
+</tr>
+<tr>
+<td>rocksdb.max_total_wal_size</td>
+<td>0</td>
+<td>Total size of WAL files in bytes. Once WALs exceed this size, we will start forcing the flush of column families related, 0 means no limit.</td>
+</tr>
+<tr>
+<td>rocksdb.db_write_buffer_size</td>
+<td>0</td>
+<td>Total size of write buffers in bytes across all column families, 0 means no limit.</td>
+</tr>
+<tr>
+<td>rocksdb.delete_obsolete_files_period</td>
+<td>21600</td>
+<td>The periodicity in seconds when obsolete files get deleted, 0 means always do full purge.</td>
 </tr>
 </tbody>
 </table>
@@ -1378,6 +1538,16 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>backend</td>
+<td></td>
+<td>Must be set to <code>hbase</code></td>
+</tr>
+<tr>
+<td>serializer</td>
+<td></td>
+<td>Must be set to <code>hbase</code></td>
+</tr>
 <tr>
 <td>hbase.hosts</td>
 <td>localhost</td>
@@ -1398,9 +1568,14 @@
 <td>/hbase</td>
 <td>The znode parent path of HBase zookeeper.</td>
 </tr>
+<tr>
+<td>hbase.zk_retry</td>
+<td>3</td>
+<td>The recovery retry times of HBase zookeeper.</td>
+</tr>
 </tbody>
 </table>
-<h3 id="mysql-&#x540E;&#x7AEF;&#x914D;&#x7F6E;&#x9879;">MySQL &#x540E;&#x7AEF;&#x914D;&#x7F6E;&#x9879;</h3>
+<h3 id="mysql--postgresql-&#x540E;&#x7AEF;&#x914D;&#x7F6E;&#x9879;">MySQL &amp; PostgreSQL &#x540E;&#x7AEF;&#x914D;&#x7F6E;&#x9879;</h3>
 <table>
 <thead>
 <tr>
@@ -1410,6 +1585,16 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>backend</td>
+<td></td>
+<td>Must be set to <code>mysql</code></td>
+</tr>
+<tr>
+<td>serializer</td>
+<td></td>
+<td>Must be set to <code>mysql</code></td>
+</tr>
 <tr>
 <td>jdbc.driver</td>
 <td>com.mysql.jdbc.Driver</td>
@@ -1431,6 +1616,11 @@
 <td>The password corresponding to jdbc.username.</td>
 </tr>
 <tr>
+<td>jdbc.ssl_mode</td>
+<td>false</td>
+<td>The SSL mode of connections with database.</td>
+</tr>
+<tr>
 <td>jdbc.reconnect_interval</td>
 <td>3</td>
 <td>The interval(seconds) between reconnections when the database connection fails.</td>
@@ -1440,8 +1630,36 @@
 <td>3</td>
 <td>The reconnect times when the database connection fails.</td>
 </tr>
+<tr>
+<td>jdbc.storage_engine</td>
+<td>InnoDB</td>
+<td>The storage engine of backend store database, like InnoDB/MyISAM/RocksDB for MySQL.</td>
+</tr>
 </tbody>
 </table>
+<h3 id="postgresql-&#x540E;&#x7AEF;&#x914D;&#x7F6E;&#x9879;">PostgreSQL &#x540E;&#x7AEF;&#x914D;&#x7F6E;&#x9879;</h3>
+<table>
+<thead>
+<tr>
+<th>config option</th>
+<th>default value</th>
+<th>descrition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>backend</td>
+<td></td>
+<td>Must be set to <code>postgresql</code></td>
+</tr>
+<tr>
+<td>serializer</td>
+<td></td>
+<td>Must be set to <code>postgresql</code></td>
+</tr>
+</tbody>
+</table>
+<p>&#x5176;&#x5B83;&#x4E0E; MySQL &#x540E;&#x7AEF;&#x4E00;&#x81F4;&#x3002;</p>
 
                                 
                                 </section>
@@ -1494,7 +1712,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Config Options","level":"4.2","depth":1,"next":{"title":"Config Authentication","level":"4.3","depth":1,"path":"config/config-authentication.md","ref":"config/config-authentication.md","articles":[]},"previous":{"title":"Config Guide","level":"4.1","depth":1,"path":"config/config-guide.md","ref":"config/config-guide.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"config/config-option.md","mtime":"2019-05-22T13:34:27.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-23T04:05:03.927Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Config Options","level":"4.2","depth":1,"next":{"title":"Config Authentication","level":"4.3","depth":1,"path":"config/config-authentication.md","ref":"config/config-authentication.md","articles":[]},"previous":{"title":"Config Guide","level":"4.1","depth":1,"path":"config/config-guide.md","ref":"config/config-guide.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"config/config-option.md","mtime":"2019-11-08T11:17:13.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-11-08T11:19:01.665Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

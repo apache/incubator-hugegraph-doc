@@ -752,7 +752,20 @@
         
         
     
-        <li class="chapter " data-level="8.1" data-path="../changelog/hugegraph-0.9.2-release-notes.html">
+        <li class="chapter " data-level="8.1" data-path="../changelog/hugegraph-0.10.4-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.10.4-release-notes.html">
+            
+                    
+                    Release-0.10.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.2" data-path="../changelog/hugegraph-0.9.2-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.9.2-release-notes.html">
             
@@ -765,7 +778,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.2" data-path="../changelog/hugegraph-0.8.0-release-notes.html">
+        <li class="chapter " data-level="8.3" data-path="../changelog/hugegraph-0.8.0-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.8.0-release-notes.html">
             
@@ -778,7 +791,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.3" data-path="../changelog/hugegraph-0.7.4-release-notes.html">
+        <li class="chapter " data-level="8.4" data-path="../changelog/hugegraph-0.7.4-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.7.4-release-notes.html">
             
@@ -791,7 +804,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.4" data-path="../changelog/hugegraph-0.6.1-release-notes.html">
+        <li class="chapter " data-level="8.5" data-path="../changelog/hugegraph-0.6.1-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.6.1-release-notes.html">
             
@@ -804,7 +817,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.5" data-path="../changelog/hugegraph-0.5.6-release-notes.html">
+        <li class="chapter " data-level="8.6" data-path="../changelog/hugegraph-0.5.6-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.5.6-release-notes.html">
             
@@ -817,7 +830,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.6" data-path="../changelog/hugegraph-0.4.4-release-notes.html">
+        <li class="chapter " data-level="8.7" data-path="../changelog/hugegraph-0.4.4-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.4.4-release-notes.html">
             
@@ -830,7 +843,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.7" data-path="../changelog/hugegraph-0.3.3-release-notes.html">
+        <li class="chapter " data-level="8.8" data-path="../changelog/hugegraph-0.3.3-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.3.3-release-notes.html">
             
@@ -843,7 +856,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.8" data-path="../changelog/hugegraph-0.2.4-release-notes.html">
+        <li class="chapter " data-level="8.9" data-path="../changelog/hugegraph-0.2.4-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.2.4-release-notes.html">
             
@@ -856,7 +869,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.9" data-path="../changelog/hugegraph-0.2-release-notes.html">
+        <li class="chapter " data-level="8.10" data-path="../changelog/hugegraph-0.2-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.2-release-notes.html">
             
@@ -1237,7 +1250,7 @@ schema.getPropertyKey(<span class="hljs-string">&quot;name&quot;</span>).userdat
 <h5 id="232-&#x521B;&#x5EFA;-vertexlabel">2.3.2 &#x521B;&#x5EFA; VertexLabel</h5>
 <pre><code class="lang-java"><span class="hljs-comment">// &#x4F7F;&#x7528; Automatic &#x7684; Id &#x7B56;&#x7565;</span>
 schema.vertexLabel(<span class="hljs-string">&quot;person&quot;</span>).properties(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>).ifNotExist().create();
-schema.vertexLabel(<span class="hljs-string">&quot;person&quot;</span>).useAutomaticId().properties(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>).primaryKeys(<span class="hljs-string">&quot;name&quot;</span>).ifNotExist().create();
+schema.vertexLabel(<span class="hljs-string">&quot;person&quot;</span>).useAutomaticId().properties(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>).ifNotExist().create();
 
 <span class="hljs-comment">// &#x4F7F;&#x7528; Customize_String &#x7684; Id &#x7B56;&#x7565;</span>
 schema.vertexLabel(<span class="hljs-string">&quot;person&quot;</span>).useCustomizeStringId().properties(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>).ifNotExist().create();
@@ -1493,7 +1506,46 @@ schema.getEdgeLabel(<span class="hljs-string">&quot;knows&quot;</span>).userdata
 </tbody>
 </table>
 <ul>
-<li>indexType: &#x5EFA;&#x7ACB;&#x7684;&#x7D22;&#x5F15;&#x7C7B;&#x578B;&#xFF0C;&#x76EE;&#x524D;&#x652F;&#x6301;&#x4E09;&#x79CD;&#xFF0C;&#x5373; Secondary&#x3001;Range &#x548C; Search&#x3002;Secondary &#x5141;&#x8BB8;&#x5EFA;&#x7ACB;&#x8054;&#x5408;&#x7D22;&#x5F15;&#xFF0C;&#x652F;&#x6301;&#x7D22;&#x5F15;&#x524D;&#x7F00;&#x641C;&#x7D22;&#xFF0C;Range &#x652F;&#x6301;&#x6570;&#x503C;&#x7C7B;&#x578B;&#x7684;&#x8303;&#x56F4;&#x67E5;&#x8BE2;&#xFF0C;Search &#x652F;&#x6301;&#x5168;&#x6587;&#x68C0;&#x7D22;&#xFF1B;</li>
+<li>indexType: &#x5EFA;&#x7ACB;&#x7684;&#x7D22;&#x5F15;&#x7C7B;&#x578B;&#xFF0C;&#x76EE;&#x524D;&#x652F;&#x6301;&#x4E94;&#x79CD;&#xFF0C;&#x5373; Secondary&#x3001;Range&#x3001;Search&#x3001;Shard &#x548C; Unique&#x3002;<ul>
+<li>Secondary &#x652F;&#x6301;&#x7CBE;&#x786E;&#x5339;&#x914D;&#x7684;&#x4E8C;&#x7EA7;&#x7D22;&#x5F15;&#xFF0C;&#x5141;&#x8BB8;&#x5EFA;&#x7ACB;&#x8054;&#x5408;&#x7D22;&#x5F15;&#xFF0C;&#x8054;&#x5408;&#x7D22;&#x5F15;&#x652F;&#x6301;&#x7D22;&#x5F15;&#x524D;&#x7F00;&#x641C;&#x7D22;<ul>
+<li>&#x5355;&#x4E2A;&#x5C5E;&#x6027;&#xFF0C;&#x652F;&#x6301;&#x76F8;&#x7B49;&#x67E5;&#x8BE2;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;person&#x9876;&#x70B9;&#x7684;city&#x5C5E;&#x6027;&#x7684;&#x4E8C;&#x7EA7;&#x7D22;&#x5F15;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;<code>g.V().has(&quot;city&quot;, &quot;&#x5317;&#x4EAC;&quot;)</code>&#x67E5;&#x8BE2;&quot;city&#x5C5E;&#x6027;&#x503C;&#x662F;&#x5317;&#x4EAC;&quot;&#x7684;&#x5168;&#x90E8;&#x9876;&#x70B9;</li>
+<li>&#x8054;&#x5408;&#x7D22;&#x5F15;&#xFF0C;&#x652F;&#x6301;&#x524D;&#x7F00;&#x67E5;&#x8BE2;&#x548C;&#x76F8;&#x7B49;&#x67E5;&#x8BE2;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;person&#x9876;&#x70B9;&#x7684;city&#x548C;street&#x5C5E;&#x6027;&#x7684;&#x8054;&#x5408;&#x7D22;&#x5F15;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;<code>g.V().has
+(&quot;city&quot;, &quot;&#x5317;&#x4EAC;&quot;).has(&apos;street&apos;, &apos;&#x4E2D;&#x5173;&#x6751;&#x8857;&#x9053;&apos;)</code>&#x67E5;&#x8BE2;&quot;city&#x5C5E;&#x6027;&#x503C;&#x662F;&#x5317;&#x4EAC;&#x4E14;street&#x5C5E;&#x6027;&#x503C;&#x662F;&#x4E2D;&#x5173;&#x6751;&quot;&#x7684;&#x5168;&#x90E8;&#x9876;&#x70B9;&#xFF0C;&#x6216;&#x8005;<code>g.V()
+.has(&quot;city&quot;, &quot;&#x5317;&#x4EAC;&quot;)</code>&#x67E5;&#x8BE2;&quot;city&#x5C5E;&#x6027;&#x503C;&#x662F;&#x5317;&#x4EAC;&quot;&#x7684;&#x5168;&#x90E8;&#x9876;&#x70B9;<blockquote>
+<p>secondary index&#x7684;&#x67E5;&#x8BE2;&#x90FD;&#x662F;&#x57FA;&#x4E8E;&quot;&#x662F;&quot;&#x6216;&#x8005;&quot;&#x76F8;&#x7B49;&quot;&#x7684;&#x67E5;&#x8BE2;&#x6761;&#x4EF6;&#xFF0C;&#x4E0D;&#x652F;&#x6301;&quot;&#x90E8;&#x5206;&#x5339;&#x914D;&quot;</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>Range &#x652F;&#x6301;&#x6570;&#x503C;&#x7C7B;&#x578B;&#x7684;&#x8303;&#x56F4;&#x67E5;&#x8BE2;<ul>
+<li>&#x5FC5;&#x987B;&#x662F;&#x5355;&#x4E2A;&#x6570;&#x5B57;&#x6216;&#x8005;&#x65E5;&#x671F;&#x5C5E;&#x6027;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;person&#x9876;&#x70B9;&#x7684;age&#x5C5E;&#x6027;&#x7684;&#x8303;&#x56F4;&#x7D22;&#x5F15;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;<code>g.V().has(&quot;age&quot;, P.gt(18))</code>&#x67E5;&#x8BE2;&quot;age&#x5C5E;&#x6027;&#x503C;&#x5927;&#x4E8E;18&quot;&#x7684;&#x9876;&#x70B9;&#x3002;&#x9664;&#x4E86;<code>P.gt()</code>&#x4EE5;&#x5916;&#xFF0C;&#x8FD8;&#x652F;&#x6301;<code>P.gte()</code>, <code>P.lte()</code>, <code>P.lt()</code>,
+<code>P.eq()</code>, <code>P.between()</code>, <code>P.inside()</code>&#x548C;<code>P.outside()</code>&#x7B49;</li>
+</ul>
+</li>
+<li>Search &#x652F;&#x6301;&#x5168;&#x6587;&#x68C0;&#x7D22;&#x7684;&#x7D22;&#x5F15;<ul>
+<li>&#x5FC5;&#x987B;&#x662F;&#x5355;&#x4E2A;&#x6587;&#x672C;&#x5C5E;&#x6027;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;person&#x9876;&#x70B9;&#x7684;address&#x5C5E;&#x6027;&#x7684;&#x5168;&#x6587;&#x7D22;&#x5F15;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;<code>g.V().has(&quot;address&quot;, Text
+.contains(&apos;&#x5927;&#x53A6;&apos;)</code>&#x67E5;&#x8BE2;&quot;address&#x5C5E;&#x6027;&#x4E2D;&#x5305;&#x542B;&#x5927;&#x53A6;&quot;&#x7684;&#x5168;&#x90E8;&#x9876;&#x70B9;<blockquote>
+<p>search index&#x7684;&#x67E5;&#x8BE2;&#x662F;&#x57FA;&#x4E8E;&quot;&#x662F;&quot;&#x6216;&#x8005;&quot;&#x5305;&#x542B;&quot;&#x7684;&#x67E5;&#x8BE2;&#x6761;&#x4EF6;</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>Shard &#x652F;&#x6301;&#x524D;&#x7F00;&#x5339;&#x914D; + &#x6570;&#x5B57;&#x8303;&#x56F4;&#x67E5;&#x8BE2;&#x7684;&#x7D22;&#x5F15;<ul>
+<li>N&#x4E2A;&#x5C5E;&#x6027;&#x7684;&#x5206;&#x7247;&#x7D22;&#x5F15;&#xFF0C;&#x652F;&#x6301;&#x524D;&#x7F00;&#x76F8;&#x7B49;&#x60C5;&#x51B5;&#x4E0B;&#x7684;&#x8303;&#x56F4;&#x67E5;&#x8BE2;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;person&#x9876;&#x70B9;&#x7684;city&#x548C;age&#x5C5E;&#x6027;&#x7684;&#x5206;&#x7247;&#x7D22;&#x5F15;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;<code>g.V().has
+(&quot;city&quot;, &quot;&#x5317;&#x4EAC;&quot;).has(&quot;age&quot;, P.between(18, 30))</code>&#x67E5;&#x8BE2;&quot;city&#x5C5E;&#x6027;&#x662F;&#x5317;&#x4EAC;&#x4E14;&#x5E74;&#x9F84;&#x5927;&#x4E8E;&#x7B49;&#x4E8E;18&#x5C0F;&#x4E8E;30&quot;&#x7684;&#x5168;&#x90E8;&#x9876;&#x70B9;</li>
+<li>shard index N&#x4E2A;&#x5C5E;&#x6027;&#x5168;&#x662F;&#x6587;&#x672C;&#x5C5E;&#x6027;&#x65F6;&#xFF0C;&#x7B49;&#x4EF7;&#x4E8E;secondary index</li>
+<li>shard index&#x53EA;&#x6709;&#x5355;&#x4E2A;&#x6570;&#x5B57;&#x6216;&#x8005;&#x65E5;&#x671F;&#x5C5E;&#x6027;&#x65F6;&#xFF0C;&#x7B49;&#x4EF7;&#x4E8E;range index<blockquote>
+<p>shard index&#x53EF;&#x4EE5;&#x6709;&#x4EFB;&#x610F;&#x6570;&#x5B57;&#x6216;&#x8005;&#x65E5;&#x671F;&#x5C5E;&#x6027;&#xFF0C;&#x4F46;&#x662F;&#x67E5;&#x8BE2;&#x65F6;&#x6700;&#x591A;&#x53EA;&#x80FD;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x8303;&#x56F4;&#x67E5;&#x627E;&#x6761;&#x4EF6;&#xFF0C;&#x4E14;&#x8BE5;&#x8303;&#x56F4;&#x67E5;&#x627E;&#x6761;&#x4EF6;&#x7684;&#x5C5E;&#x6027;&#x7684;&#x524D;&#x7F00;&#x5C5E;&#x6027;&#x90FD;&#x662F;&#x76F8;&#x7B49;&#x67E5;&#x8BE2;&#x6761;&#x4EF6;</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>Unique &#x652F;&#x6301;&#x5C5E;&#x6027;&#x503C;&#x552F;&#x4E00;&#x6027;&#x7EA6;&#x675F;&#xFF0C;&#x5373;&#x53EF;&#x4EE5;&#x9650;&#x5B9A;&#x5C5E;&#x6027;&#x7684;&#x503C;&#x4E0D;&#x91CD;&#x590D;&#xFF0C;&#x5141;&#x8BB8;&#x8054;&#x5408;&#x7D22;&#x5F15;&#xFF0C;&#x4F46;&#x4E0D;&#x652F;&#x6301;&#x67E5;&#x8BE2;<ul>
+<li>&#x5355;&#x4E2A;&#x6216;&#x8005;&#x591A;&#x4E2A;&#x5C5E;&#x6027;&#x7684;&#x552F;&#x4E00;&#x6027;&#x7D22;&#x5F15;&#xFF0C;&#x4E0D;&#x53EF;&#x7528;&#x6765;&#x67E5;&#x8BE2;&#xFF0C;&#x53EA;&#x53EF;&#x5BF9;&#x5C5E;&#x6027;&#x7684;&#x503C;&#x8FDB;&#x884C;&#x9650;&#x5B9A;&#xFF0C;&#x5F53;&#x51FA;&#x73B0;&#x91CD;&#x590D;&#x503C;&#x65F6;&#x5C06;&#x62A5;&#x9519;</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <table>
 <thead>
@@ -1512,12 +1564,22 @@ schema.getEdgeLabel(<span class="hljs-string">&quot;knows&quot;</span>).userdata
 <tr>
 <td>range()</td>
 <td>Range</td>
-<td>support range search for numeric types and date type</td>
+<td>support range(numeric or date type) search</td>
 </tr>
 <tr>
 <td>search()</td>
 <td>Search</td>
 <td>support full text search</td>
+</tr>
+<tr>
+<td>shard()</td>
+<td>Shard</td>
+<td>support prefix + range(numeric or date type) search</td>
+</tr>
+<tr>
+<td>unique()</td>
+<td>Unique</td>
+<td>support unique props value, not support search</td>
 </tr>
 </tbody>
 </table>
@@ -1525,6 +1587,8 @@ schema.getEdgeLabel(<span class="hljs-string">&quot;knows&quot;</span>).userdata
 <pre><code class="lang-java">schema.indexLabel(<span class="hljs-string">&quot;personByAge&quot;</span>).onV(<span class="hljs-string">&quot;person&quot;</span>).by(<span class="hljs-string">&quot;age&quot;</span>).range().ifNotExist().create();
 schema.indexLabel(<span class="hljs-string">&quot;createdByDate&quot;</span>).onE(<span class="hljs-string">&quot;created&quot;</span>).by(<span class="hljs-string">&quot;date&quot;</span>).secondary().ifNotExist().create();
 schema.indexLabel(<span class="hljs-string">&quot;personByLived&quot;</span>).onE(<span class="hljs-string">&quot;person&quot;</span>).by(<span class="hljs-string">&quot;lived&quot;</span>).search().ifNotExist().create();
+schema.indexLabel(<span class="hljs-string">&quot;personByCityAndAge&quot;</span>).onV(<span class="hljs-string">&quot;person&quot;</span>).by(<span class="hljs-string">&quot;city&quot;</span>, <span class="hljs-string">&quot;age&quot;</span>).shard().ifNotExist().create();
+schema.indexLabel(<span class="hljs-string">&quot;personById&quot;</span>).onV(<span class="hljs-string">&quot;person&quot;</span>).by(<span class="hljs-string">&quot;id&quot;</span>).unique().ifNotExist().create();
 </code></pre>
 <h5 id="253-&#x5220;&#x9664;-indexlabel">2.5.3 &#x5220;&#x9664; IndexLabel</h5>
 <pre><code class="lang-java">schema.indexLabel(<span class="hljs-string">&quot;personByAge&quot;</span>).remove()
@@ -1621,7 +1685,7 @@ Vertex lop = graph.addVertex(T.label, <span class="hljs-string">&quot;software&q
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Java Client","level":"6.2","depth":1,"next":{"title":"Gremlin Console","level":"6.3","depth":1,"path":"clients/gremlin-console.md","ref":"clients/gremlin-console.md","articles":[]},"previous":{"title":"Other","level":"6.1.14","depth":2,"path":"clients/restful-api/other.md","ref":"clients/restful-api/other.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"clients/hugegraph-client.md","mtime":"2019-05-22T13:34:27.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-23T04:05:03.927Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Java Client","level":"6.2","depth":1,"next":{"title":"Gremlin Console","level":"6.3","depth":1,"path":"clients/gremlin-console.md","ref":"clients/gremlin-console.md","articles":[]},"previous":{"title":"Other","level":"6.1.14","depth":2,"path":"clients/restful-api/other.md","ref":"clients/restful-api/other.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"clients/hugegraph-client.md","mtime":"2019-11-08T11:17:13.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-11-08T11:19:01.665Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

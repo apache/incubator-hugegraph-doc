@@ -752,7 +752,20 @@
         
         
     
-        <li class="chapter " data-level="8.1" data-path="../changelog/hugegraph-0.9.2-release-notes.html">
+        <li class="chapter " data-level="8.1" data-path="../changelog/hugegraph-0.10.4-release-notes.html">
+            
+                <a href="../changelog/hugegraph-0.10.4-release-notes.html">
+            
+                    
+                    Release-0.10.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.2" data-path="../changelog/hugegraph-0.9.2-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.9.2-release-notes.html">
             
@@ -765,7 +778,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.2" data-path="../changelog/hugegraph-0.8.0-release-notes.html">
+        <li class="chapter " data-level="8.3" data-path="../changelog/hugegraph-0.8.0-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.8.0-release-notes.html">
             
@@ -778,7 +791,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.3" data-path="../changelog/hugegraph-0.7.4-release-notes.html">
+        <li class="chapter " data-level="8.4" data-path="../changelog/hugegraph-0.7.4-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.7.4-release-notes.html">
             
@@ -791,7 +804,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.4" data-path="../changelog/hugegraph-0.6.1-release-notes.html">
+        <li class="chapter " data-level="8.5" data-path="../changelog/hugegraph-0.6.1-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.6.1-release-notes.html">
             
@@ -804,7 +817,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.5" data-path="../changelog/hugegraph-0.5.6-release-notes.html">
+        <li class="chapter " data-level="8.6" data-path="../changelog/hugegraph-0.5.6-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.5.6-release-notes.html">
             
@@ -817,7 +830,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.6" data-path="../changelog/hugegraph-0.4.4-release-notes.html">
+        <li class="chapter " data-level="8.7" data-path="../changelog/hugegraph-0.4.4-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.4.4-release-notes.html">
             
@@ -830,7 +843,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.7" data-path="../changelog/hugegraph-0.3.3-release-notes.html">
+        <li class="chapter " data-level="8.8" data-path="../changelog/hugegraph-0.3.3-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.3.3-release-notes.html">
             
@@ -843,7 +856,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.8" data-path="../changelog/hugegraph-0.2.4-release-notes.html">
+        <li class="chapter " data-level="8.9" data-path="../changelog/hugegraph-0.2.4-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.2.4-release-notes.html">
             
@@ -856,7 +869,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.9" data-path="../changelog/hugegraph-0.2-release-notes.html">
+        <li class="chapter " data-level="8.10" data-path="../changelog/hugegraph-0.2-release-notes.html">
             
                 <a href="../changelog/hugegraph-0.2-release-notes.html">
             
@@ -905,20 +918,36 @@
 <p>&#x4E0B;&#x9762;&#x5BF9;&#x8FD9;&#x4E09;&#x4E2A;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x9010;&#x4E00;&#x4ECB;&#x7ECD;&#x3002;</p>
 <h3 id="2-gremlin-serveryaml">2 gremlin-server.yaml</h3>
 <p>gremlin-server.yaml &#x6587;&#x4EF6;&#x9ED8;&#x8BA4;&#x7684;&#x5185;&#x5BB9;&#x5982;&#x4E0B;&#xFF1A;</p>
-<pre><code class="lang-yaml"><span class="hljs-attr">scriptEvaluationTimeout:</span> <span class="hljs-number">30000</span>
+<pre><code class="lang-yaml"><span class="hljs-comment"># host and port of gremlin server</span>
+<span class="hljs-comment">#host: 127.0.0.1</span>
+<span class="hljs-comment">#port: 8182</span>
+
+<span class="hljs-comment"># timeout in ms of gremlin query</span>
+<span class="hljs-attr">scriptEvaluationTimeout:</span> <span class="hljs-number">30000</span>
+
 <span class="hljs-comment"># If you want to start gremlin-server for gremlin-console(web-socket),</span>
 <span class="hljs-comment"># please change `HttpChannelizer` to `WebSocketChannelizer` or comment this line.</span>
 <span class="hljs-attr">channelizer:</span> org.apache.tinkerpop.gremlin.server.channel.HttpChannelizer
 <span class="hljs-attr">graphs:</span> {
 <span class="hljs-attr">  hugegraph:</span> conf/hugegraph.properties
 }
-<span class="hljs-attr">plugins:</span>
-<span class="hljs-bullet">  -</span> com.baidu.hugegraph
 <span class="hljs-attr">scriptEngines:</span> {
 <span class="hljs-attr">  gremlin-groovy:</span> {
-<span class="hljs-attr">    imports:</span> [java.lang.Math],
-<span class="hljs-attr">    staticImports:</span> [java.lang.Math.PI],
-<span class="hljs-attr">    scripts:</span> [scripts/empty-sample.groovy]
+<span class="hljs-attr">    plugins:</span> {
+      com.baidu.hugegraph.plugin.HugeGraphGremlinPlugin: {},
+      org.apache.tinkerpop.gremlin.server.jsr223.GremlinServerGremlinPlugin: {},
+      org.apache.tinkerpop.gremlin.jsr223.ImportGremlinPlugin: {
+<span class="hljs-attr">        classImports:</span> [
+          java.lang.Math,
+          com.baidu.hugegraph.util.DateUtil,
+          com.baidu.hugegraph.traversal.optimize.Text
+        ],
+<span class="hljs-attr">        methodImports:</span> [java.lang.Math<span class="hljs-comment">#*]</span>
+      },
+      org.apache.tinkerpop.gremlin.jsr223.ScriptFileGremlinPlugin: {
+<span class="hljs-attr">        files:</span> [scripts/empty-sample.groovy]
+      }
+    }
   }
 }
 <span class="hljs-attr">serializers:</span>
@@ -927,31 +956,31 @@
 <span class="hljs-attr">        serializeResultToString:</span> <span class="hljs-literal">false</span>,
 <span class="hljs-attr">        ioRegistries:</span> [com.baidu.hugegraph.io.HugeGraphIoRegistry]
       }
-    }
-<span class="hljs-bullet">  -</span> { className: org.apache.tinkerpop.gremlin.driver.ser.GryoMessageSerializerV1d0,
-<span class="hljs-attr">      config:</span> {
-<span class="hljs-attr">        serializeResultToString:</span> <span class="hljs-literal">true</span>,
-<span class="hljs-attr">        ioRegistries:</span> [com.baidu.hugegraph.io.HugeGraphIoRegistry]
-      }
-    }
-<span class="hljs-bullet">  -</span> { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerGremlinV1d0,
+  }
+<span class="hljs-bullet">  -</span> { className: org.apache.tinkerpop.gremlin.driver.ser.GraphBinaryMessageSerializerV1,
 <span class="hljs-attr">      config:</span> {
 <span class="hljs-attr">        serializeResultToString:</span> <span class="hljs-literal">false</span>,
 <span class="hljs-attr">        ioRegistries:</span> [com.baidu.hugegraph.io.HugeGraphIoRegistry]
       }
-    }
-<span class="hljs-bullet">  -</span> { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerGremlinV2d0,
-<span class="hljs-attr">      config:</span> {
-<span class="hljs-attr">        serializeResultToString:</span> <span class="hljs-literal">false</span>,
-<span class="hljs-attr">        ioRegistries:</span> [com.baidu.hugegraph.io.HugeGraphIoRegistry]
-      }
-    }
+  }
 <span class="hljs-bullet">  -</span> { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV1d0,
 <span class="hljs-attr">      config:</span> {
 <span class="hljs-attr">        serializeResultToString:</span> <span class="hljs-literal">false</span>,
 <span class="hljs-attr">        ioRegistries:</span> [com.baidu.hugegraph.io.HugeGraphIoRegistry]
       }
-    }
+  }
+<span class="hljs-bullet">  -</span> { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV2d0,
+<span class="hljs-attr">      config:</span> {
+<span class="hljs-attr">        serializeResultToString:</span> <span class="hljs-literal">false</span>,
+<span class="hljs-attr">        ioRegistries:</span> [com.baidu.hugegraph.io.HugeGraphIoRegistry]
+      }
+  }
+<span class="hljs-bullet">  -</span> { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV3d0,
+<span class="hljs-attr">      config:</span> {
+<span class="hljs-attr">        serializeResultToString:</span> <span class="hljs-literal">false</span>,
+<span class="hljs-attr">        ioRegistries:</span> [com.baidu.hugegraph.io.HugeGraphIoRegistry]
+      }
+  }
 <span class="hljs-attr">metrics:</span> {
 <span class="hljs-attr">  consoleReporter:</span> {enabled: <span class="hljs-literal">false</span>, interval: <span class="hljs-number">180000</span>},
 <span class="hljs-attr">  csvReporter:</span> {enabled: <span class="hljs-literal">true</span>, interval: <span class="hljs-number">180000</span>, fileName: /tmp/gremlin-server-metrics.csv},
@@ -974,8 +1003,10 @@
 </code></pre>
 <p>&#x4E0A;&#x9762;&#x7684;&#x914D;&#x7F6E;&#x9879;&#x5F88;&#x591A;&#xFF0C;&#x4F46;&#x76EE;&#x524D;&#x53EA;&#x9700;&#x8981;&#x5173;&#x6CE8;&#x5982;&#x4E0B;&#x51E0;&#x4E2A;&#x914D;&#x7F6E;&#x9879;&#xFF1A;channelizer &#x548C; graphs&#x3002;</p>
 <ul>
-<li>channelizer&#xFF1A;GremlinServer &#x4E0E;&#x5BA2;&#x6237;&#x7AEF;&#x6709;&#x4E24;&#x79CD;&#x901A;&#x4FE1;&#x65B9;&#x5F0F;&#xFF0C;&#x5206;&#x522B;&#x662F; WebSocket &#x548C; HTTP&#xFF08;&#x9ED8;&#x8BA4;&#xFF09;&#x3002;&#x5982;&#x679C;&#x9009;&#x62E9; WebSocket&#xFF0C;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; <a href="../clients/gremlin-console.html">Gremlin-Console</a> &#x5FEB;&#x901F;&#x4F53;&#x9A8C; HugeGraph &#x7684;&#x7279;&#x6027;&#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x652F;&#x6301;&#x5927;&#x89C4;&#x6A21;&#x6570;&#x636E;&#x5BFC;&#x5165;&#xFF0C;&#x63A8;&#x8350;&#x4F7F;&#x7528; HTTP &#x7684;&#x901A;&#x4FE1;&#x65B9;&#x5F0F;&#xFF0C;&#x6211;&#x4EEC;&#x7684;&#x4E00;&#x4E9B;&#x5916;&#x56F4;&#x7EC4;&#x4EF6;&#x90FD;&#x662F;&#x57FA;&#x4E8E; HTTP &#x5B9E;&#x73B0;&#x7684;&#xFF1B;</li>
 <li>graphs&#xFF1A;GremlinServer &#x542F;&#x52A8;&#x65F6;&#x9700;&#x8981;&#x6253;&#x5F00;&#x7684;&#x56FE;&#xFF0C;&#x8BE5;&#x9879;&#x662F;&#x4E00;&#x4E2A; map &#x7ED3;&#x6784;&#xFF0C;key &#x662F;&#x56FE;&#x7684;&#x540D;&#x5B57;&#xFF0C;value &#x662F;&#x8BE5;&#x56FE;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#xFF1B;</li>
+<li>channelizer&#xFF1A;GremlinServer &#x4E0E;&#x5BA2;&#x6237;&#x7AEF;&#x6709;&#x4E24;&#x79CD;&#x901A;&#x4FE1;&#x65B9;&#x5F0F;&#xFF0C;&#x5206;&#x522B;&#x662F; WebSocket &#x548C; HTTP&#xFF08;&#x9ED8;&#x8BA4;&#xFF09;&#x3002;&#x5982;&#x679C;&#x9009;&#x62E9; WebSocket&#xFF0C;
+&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; <a href="../clients/gremlin-console.html">Gremlin-Console</a> &#x5FEB;&#x901F;&#x4F53;&#x9A8C; HugeGraph &#x7684;&#x7279;&#x6027;&#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x652F;&#x6301;&#x5927;&#x89C4;&#x6A21;&#x6570;&#x636E;&#x5BFC;&#x5165;&#xFF0C;
+&#x63A8;&#x8350;&#x4F7F;&#x7528; HTTP &#x7684;&#x901A;&#x4FE1;&#x65B9;&#x5F0F;&#xFF0C;HugeGraph &#x7684;&#x5916;&#x56F4;&#x7EC4;&#x4EF6;&#x90FD;&#x662F;&#x57FA;&#x4E8E; HTTP &#x5B9E;&#x73B0;&#x7684;&#xFF1B;</li>
 </ul>
 <p>&#x9ED8;&#x8BA4;GremlinServer&#x662F;&#x670D;&#x52A1;&#x5728; localhost:8182&#xFF0C;&#x5982;&#x679C;&#x9700;&#x8981;&#x4FEE;&#x6539;&#xFF0C;&#x914D;&#x7F6E; host&#x3001;port &#x5373;&#x53EF;</p>
 <ul>
@@ -1132,7 +1163,7 @@ $ bin/start-hugegraph.sh
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Config Guide","level":"4.1","depth":1,"next":{"title":"Config Options","level":"4.2","depth":1,"path":"config/config-option.md","ref":"config/config-option.md","articles":[]},"previous":{"title":"FAQ","level":"3.5","depth":1,"path":"guides/faq.md","ref":"guides/faq.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"config/config-guide.md","mtime":"2019-05-22T13:34:27.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-05-23T04:05:03.927Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Config Guide","level":"4.1","depth":1,"next":{"title":"Config Options","level":"4.2","depth":1,"path":"config/config-option.md","ref":"config/config-option.md","articles":[]},"previous":{"title":"FAQ","level":"3.5","depth":1,"path":"guides/faq.md","ref":"guides/faq.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"config/config-guide.md","mtime":"2019-11-08T11:17:13.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-11-08T11:19:01.665Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
