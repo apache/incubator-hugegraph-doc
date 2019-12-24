@@ -171,7 +171,152 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=appen
 }
 ```
 
-#### 2.1.4 删除顶点属性
+#### 2.1.4 批量更新顶点属性
+
+##### 功能说明
+
+批量更新顶点的属性，并支持多种更新策略，包括
+
+- SUM: 数值累加
+- BIGGER: 两个数字/日期取更大的
+- SMALLER: 两个数字/日期取更小的
+- UNION: Set属性取并集
+- INTERSECTION: Set属性取交集
+- APPEND: List属性追加元素
+- ELIMINATE: List/Set属性删除元素
+- OVERRIDE: 覆盖已有属性，如果新属性为null，则仍然使用旧属性
+
+假设原顶点及属性为：
+
+```json
+{
+    "vertices":[
+        {
+            "id":"2:lop",
+            "label":"software",
+            "type":"vertex",
+            "properties":{
+                "name":"lop",
+                "lang":"java",
+                "price":328
+            }
+        },
+        {
+            "id":"1:josh",
+            "label":"person",
+            "type":"vertex",
+            "properties":{
+                "name":"josh",
+                "age":32,
+                "city":"Beijing",
+                "weight":0.1,
+                "hobby":[
+                    "reading",
+                    "football"
+                ]
+            }
+        }
+    ]
+}
+```
+
+##### Method & Url
+
+```
+PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
+```
+
+##### Request Body
+
+```json
+{
+    "vertices":[
+        {
+            "label":"software",
+            "type":"vertex",
+            "properties":{
+                "name":"lop",
+                "lang":"c++",
+                "price":299
+            }
+        },
+        {
+            "label":"person",
+            "type":"vertex",
+            "properties":{
+                "name":"josh",
+                "city":"Shanghai",
+                "weight":0.2,
+                "hobby":[
+                    "swiming"
+                ]
+            }
+        }
+    ],
+    "update_strategies":{
+        "price":"BIGGER",
+        "age":"OVERRIDE",
+        "city":"OVERRIDE",
+        "weight":"SUM",
+        "hobby":"UNION"
+    },
+    "create_if_not_exist":true
+}
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "vertices": [
+        {
+            "id": "2:lop",
+            "label": "software",
+            "type": "vertex",
+            "properties": {
+                "name": "lop",
+                "lang": "c++",
+                "price": 328
+            }
+        },
+        {
+            "id": "1:josh",
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "josh",
+                "age": 32,
+                "city": "Shanghai",
+                "weight": 0.3,
+                "hobby": [
+                    "swiming",
+                    "reading",
+                    "football"
+                ]
+            }
+        }
+    ]
+}
+```
+
+结果分析：
+
+- lang 属性未指定更新策略，直接用新值覆盖旧值，无论新值是否为null；
+- price 属性指定 BIGGER 的更新策略，旧属性值为328，新属性值为299，所以仍然保留了旧属性值328；
+- age 属性指定 OVERRIDE 更新策略，而新属性值中未传入age，相当于age为null，所以仍然保留了原属性值32；
+- city 属性也指定了 OVERRIDE 更新策略，且新属性值不为null，所以覆盖了旧值；
+- weight 属性指定了 SUM 更新策略，旧属性值为0.1，新属性值为0.2，最后的值为0.3；
+- hobby 属性（基数为Set）指定了 UNION 更新策略，所以新值与旧值取了并集；
+
+其他的更新策略使用方式可以类推，不再赘述。
+
+#### 2.1.5 删除顶点属性
 
 ##### Method & Url
 
@@ -222,7 +367,7 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=elimi
 }
 ```
 
-#### 2.1.5 获取符合条件的顶点
+#### 2.1.6 获取符合条件的顶点
 
 ##### Params
 
@@ -446,7 +591,7 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?page=001000100853313a7
 
 此时`"page": null`表示已经没有下一页了。
 
-#### 2.1.6 根据Id获取顶点
+#### 2.1.7 根据Id获取顶点
 
 ##### Method & Url
 
@@ -484,7 +629,7 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
 }
 ```
 
-#### 2.1.7 根据Id删除顶点
+#### 2.1.8 根据Id删除顶点
 
 ##### Method & Url
 
