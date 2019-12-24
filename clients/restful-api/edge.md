@@ -160,7 +160,7 @@ PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action
 }
 ```
 
-#### 2.1.4 批量更新边属性
+#### 2.2.4 批量更新边属性
 
 ##### 功能说明
 
