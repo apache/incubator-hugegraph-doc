@@ -160,7 +160,134 @@ PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action
 }
 ```
 
-#### 2.2.4 删除边属性
+#### 2.2.4 批量更新边属性
+
+##### 功能说明
+
+与批量更新顶点属性类似
+
+假设原边及属性为：
+
+```json
+{
+    "edges":[
+        {
+            "id":"S1:josh>2>>S2:ripple",
+            "label":"created",
+            "type":"edge",
+            "outV":"1:josh",
+            "outVLabel":"person",
+            "inV":"2:ripple",
+            "inVLabel":"software",
+            "properties":{
+                "weight":1,
+                "date":1512835200000
+            }
+        },
+        {
+            "id":"S1:marko>1>7JooBil0>S1:josh",
+            "label":"knows",
+            "type":"edge",
+            "outV":"1:marko",
+            "outVLabel":"person",
+            "inV":"1:josh",
+            "inVLabel":"person",
+            "properties":{
+                "weight":1,
+                "date":1361289600000
+            }
+        }
+    ]
+}
+```
+
+##### Method & Url
+
+```
+PUT http://127.0.0.1:8080/graphs/hugegraph/graph/edges/batch
+```
+
+##### Request Body
+
+```json
+{
+    "edges":[
+        {
+            "id":"S1:josh>2>>S2:ripple",
+            "label":"created",
+            "outV":"1:josh",
+            "outVLabel":"person",
+            "inV":"2:ripple",
+            "inVLabel":"software",
+            "properties":{
+                "weight":0.1,
+                "date":1522835200000
+            }
+        },
+        {
+            "id":"S1:marko>1>7JooBil0>S1:josh",
+            "label":"knows",
+            "outV":"1:marko",
+            "outVLabel":"person",
+            "inV":"1:josh",
+            "inVLabel":"person",
+            "properties":{
+                "weight":0.2,
+                "date":1301289600000
+            }
+        }
+    ],
+    "update_strategies":{
+        "weight":"SUM",
+        "date":"BIGGER"
+    },
+    "check_vertex": false,
+    "create_if_not_exist":true
+}
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "edges":[
+        {
+            "id":"S1:josh>2>>S2:ripple",
+            "label":"created",
+            "type":"edge",
+            "outV":"1:josh",
+            "outVLabel":"person",
+            "inV":"2:ripple",
+            "inVLabel":"software",
+            "properties":{
+                "weight":1.1,
+                "date":1522835200000
+            }
+        },
+        {
+            "id":"S1:marko>1>7JooBil0>S1:josh",
+            "label":"knows",
+            "type":"edge",
+            "outV":"1:marko",
+            "outVLabel":"person",
+            "inV":"1:josh",
+            "inVLabel":"person",
+            "properties":{
+                "weight":1.2,
+                "date":1301289600000
+            }
+        }
+    ]
+}
+```
+
+#### 2.2.5 删除边属性
 
 ##### Method & Url
 
@@ -203,7 +330,7 @@ PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action
 }
 ```
 
-#### 2.2.5 获取符合条件的边
+#### 2.2.6 获取符合条件的边
 
 ##### Params
 
@@ -401,7 +528,7 @@ GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page=002500100753313a6a6f
 
 此时`"page": null`表示已经没有下一页了。
 
-#### 2.2.6 根据Id获取边
+#### 2.2.7 根据Id获取边
 
 ##### Method & Url
 
@@ -433,7 +560,7 @@ GET http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
 }
 ```
 
-#### 2.2.7 根据Id删除边
+#### 2.2.8 根据Id删除边
 
 ##### Method & Url
 
