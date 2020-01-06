@@ -19,7 +19,7 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 
 本系统具备如下特点：  
 
-- 易用：HugeGraph支持Gremlin图查询语言与Restful API，同时提供图检索常用接口，具备功能齐全的周边工具，轻松实现基于图的各种查询分析运算。
+- 易用：HugeGraph支持Gremlin图查询语言与RESTful API，同时提供图检索常用接口，具备功能齐全的周边工具，轻松实现基于图的各种查询分析运算。
 - 高效：HugeGraph在图存储和图计算方面做了深度优化，提供多种批量导入工具，轻松完成百亿级数据快速导入，通过优化过的查询达到图检索的毫秒级响应。支持数千用户并发的在线实时操作。
 - 通用：HugeGraph支持Apache Gremlin标准图查询语言和Property Graph标准图建模方法，支持基于图的OLTP和OLAP方案。集成Apache Hadoop及Apache Spark大数据平台。
 - 可扩展：支持分布式存储、数据多副本及横向扩容，内置多种后端存储引擎，也可插件式轻松扩展后端存储引擎。
@@ -43,7 +43,7 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 
 - [HugeGraph-Server](quickstart/hugegraph-server.md): HugeGraph-Server是HugeGraph项目的核心部分，包含Core、Backend、API等子模块；
   - Core：图引擎实现，向下连接Backend模块，向上支持API模块；
-  - Backend：实现将图数据存储到后端，支持的后端包括：Memory、Cassandra、ScyllaDB、RocksDB、HBase及MySQL，用户根据实际情况选择一种即可；
+  - Backend：实现将图数据存储到后端，支持的后端包括：Memory、Cassandra、ScyllaDB、RocksDB、HBase、MySQL及PostgreSQL，用户根据实际情况选择一种即可；
   - API：内置REST Server，向用户提供RESTful API，同时完全兼容Gremlin查询。
 - [HugeGraph-Client](quickstart/hugegraph-client.md)：HugeGraph-Client提供了RESTful API的客户端，用于连接HugeGraph-Server，目前仅实现Java版，其他语言用户可自行实现；
 - [HugeGraph-Loader](quickstart/hugegraph-loader.md)：HugeGraph-Loader是基于HugeGraph-Client的数据导入工具，将普通文本数据转化为图形的顶点和边并插入图形数据库中；

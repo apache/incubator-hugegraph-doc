@@ -32,11 +32,11 @@
 
   服务端返回的批量顶点/边是压缩（gzip）过的，可以使用管道重定向至gunzip进行解压（curl http://example | gunzip），也可以用`Firefox`的`postman`或者`Chrome`浏览器的`restlet`插件发请求，会自动解压缩响应数据。
 
-- 使用顶点Id通过`Restful API`查询顶点时返回空，但是顶点确实是存在的
+- 使用顶点Id通过`RESTful API`查询顶点时返回空，但是顶点确实是存在的
 
   检查顶点Id的类型，如果是字符串类型，`API`的`url`中的id部分需要加上双引号，数字类型则不用加。
 
-- 已经根据需要给顶点Id加上了双引号，但是通过`Restful API`查询顶点时仍然返回空
+- 已经根据需要给顶点Id加上了双引号，但是通过`RESTful API`查询顶点时仍然返回空
   
   检查顶点id中是否包含`+`、`空格`、`/`、`?`、`%`、`&`和`=`这些URL的保留字符，如果存在则需要进行编码。下表给出了编码值：
   
@@ -57,7 +57,7 @@
 
   由于属于某一label的数据量可能比较多，请加上limit限制。
 
-- 通过`Restful API`操作图是可以的，但是发送`Gremlin`语句就报错：`Request Failed(500)`
+- 通过`RESTful API`操作图是可以的，但是发送`Gremlin`语句就报错：`Request Failed(500)`
 
   可能是`GremlinServer`的配置有误，检查`gremlin-server.yaml`的`host`、`port`是否与`rest-server.properties`的`gremlinserver.url`匹配，如不匹配则修改，然后重启服务。
 
@@ -65,7 +65,7 @@
 
   持续地导入数据会使`Server`的压力过大，然后导致有些请求超时。可以通过调整`Loader`的参数来适当缓解`Server`压力（如：重试次数，重试间隔，错误容忍数等），降低该问题出现频率。
 
-- 如何删除全部的顶点和边，Restful API中没有这样的接口，调用`gremlin`的`g.V().drop()`会报错`Vertices in transaction have reached capacity xxx`
+- 如何删除全部的顶点和边，RESTful API中没有这样的接口，调用`gremlin`的`g.V().drop()`会报错`Vertices in transaction have reached capacity xxx`
 
   目前确实没有好办法删除全部的数据，用户如果是自己部署的`Server`和后端，可以直接清空数据库，重启`Server`。可以使用paging API或scan API先获取所有数据，再逐条删除。
 

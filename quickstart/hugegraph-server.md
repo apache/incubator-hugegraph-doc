@@ -306,7 +306,7 @@ jps
 6475 HugeGraphServer
 ```
 
-`curl`请求`RestfulAPI`
+`curl`请求`RESTfulAPI`
 
 ```bash
 echo `curl -o /dev/null -s -w %{http_code} "http://localhost:8080/graphs/hugegraph/graph/vertices"`
@@ -401,7 +401,7 @@ _说明_
 }
 ```
 
-详细的API请参考[Restful-API](/clients/hugegraph-api.md)文档
+详细的API请参考[RESTful-API](/clients/hugegraph-api.md)文档
 
 ### 7 停止Server
 

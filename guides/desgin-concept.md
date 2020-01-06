@@ -203,7 +203,7 @@ TinkerPop transaction事务是指对数据库执行操作的工作单元，一�
 
 ###### *注意*
 
-> Restful API暂时未暴露事务接口
+> RESTful API暂时未暴露事务接口
 
 > TinkerPop API允许打开事务，请求完成时会自动关闭(Gremlin Server强制关闭)
 
