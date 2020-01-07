@@ -27,7 +27,7 @@
 * [HugeGraph Examples](language/hugegraph-example.md)
 
 ## Clients
-* [Restful API](clients/hugegraph-api.md)
+* [RESTful API](clients/hugegraph-api.md)
     * [PropertyKey](clients/restful-api/propertykey.md)
     * [VertexLabel](clients/restful-api/vertexlabel.md)
     * [EdgeLabel](clients/restful-api/edgelabel.md)

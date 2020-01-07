@@ -8,7 +8,7 @@
 - 增加scan-API，允许客户端并发地获取顶点和边（HugeGraph-1197）
 - Client支持传入用户名密码访问带权限控制的HugeGraph（HugeGraph-1256）
 - 为顶点及边的list API添加offset参数（HugeGraph-1261）
-- Restful API的顶点/边的list不允许同时传入page 和 [label，属性]（HugeGraph-1262）
+- RESTful API的顶点/边的list不允许同时传入page 和 [label，属性]（HugeGraph-1262）
 - k-out、K-neighbor、paths、shortestpath等API增加degree、capacity和limit（HugeGraph-1176）
 - 增加restore status的set/get/clear接口（HugeGraph-1272）
 

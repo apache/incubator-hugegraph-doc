@@ -50,7 +50,7 @@
 - common库OptionChecker增加allowValues()函数用于枚举值（HugeGraph-1075）
 - 清理无用、版本老旧的依赖包，减少打包的压缩包的大小（HugeGraph-1078）
 - HugeConfig通过文件路径构造时，无法检查多次配置的配置项的值（HugeGraph-1079）
-- Sever启动时可以支持智能分配最大内存（HugeGraph-1154）
+- Server启动时可以支持智能分配最大内存（HugeGraph-1154）
 - 修复Mac OS因为不支持free命令导致无法启动server的问题（HugeGraph-1154）
 - 修改配置项的注册方式为字符串式，避免直接依赖Backend包（HugeGraph-1171）
 - 增加StoreDumper工具以查看后端存储的数据内容（HugeGraph-1172）

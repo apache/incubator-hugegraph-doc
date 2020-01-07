@@ -22,7 +22,7 @@ cp {dir}/hugegraph-spark-0.9.0.jar jars
 
 ### 3 配置
 
-#### 配置项
+#### 3.1 配置项
 
 可以通过 `spark-default.properties` 或者命令行修改相关配置：
 
@@ -33,7 +33,7 @@ cp {dir}/hugegraph-spark-0.9.0.jar jars
 - spark.hugegraph.split.size: 从 HugeGraphServer 中获取顶点和边时数据分片的大小，以字节为单位，默认值为 16M；
 - spark.hugegraph.shard.page.size: 获取分片数据时，每个分页的大小，默认值为 500 条。
 
-#### 配置入口
+#### 3.2 配置入口
 
 HugeGraph-Spark 提供了两种添加配置项的方法：
 
@@ -87,7 +87,7 @@ org.apache.spark.graphx.Graph[com.baidu.hugegraph.spark.structure.HugeSparkVerte
 
 数据导入成功后可以对 graph 进行相关操作，示例如下：
 
-获取顶点个数
+##### 获取顶点个数
 
 ```scala
 graph.vertices.count()
@@ -95,20 +95,20 @@ graph.vertices.count()
 
 注意：第一次执行这一步可能会很耗时，因为这里才真正的读数据并保存。
 
-获取边个数
+##### 获取边个数
 
 ```scala
 graph.edges.count()
 ```
 
-出度 top 10
+##### 出度 top 10
 
 ```scala
 val top10 = graph.outDegrees.top(10)
 sc.makeRDD(top10).join(graph.vertices).collect().foreach(println)
 ```
 
-PageRank
+##### PageRank
 
 PageRank的结果仍为一个图，包含`vertices` 与 `edges`。
 

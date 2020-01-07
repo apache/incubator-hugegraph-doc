@@ -127,7 +127,7 @@ POST http://localhost:8080/gremlin
 为图和遍历器添加别名后使用别名操作。其中，`hugegraph`是原生存在的变量，`__g_hugegraph`是`HugeGraphServer`额外添加的变量，
 每个图都会存在一个对应的这样格式（__g_${graph}）的遍历器对象。
 
-> 响应体的结构与其他 Vertex 或 Edge 的 Restful API的结构有区别，用户可能需要自行解析。
+> 响应体的结构与其他 Vertex 或 Edge 的 RESTful API的结构有区别，用户可能需要自行解析。
 
 **查询边**
 

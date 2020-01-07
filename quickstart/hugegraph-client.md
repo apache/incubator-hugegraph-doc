@@ -319,7 +319,7 @@ public class BatchExample {
 
 ### 4.4 运行Example
 
-运行Example之前需要启动Sever, 启动过程见[HugeGraph-Server Quick Start](/quickstart/hugegraph-server.md)
+运行Example之前需要启动Server, 启动过程见[HugeGraph-Server Quick Start](/quickstart/hugegraph-server.md)
 
 ### 4.5 Example示例说明
 

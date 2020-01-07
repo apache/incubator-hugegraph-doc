@@ -21,7 +21,7 @@
 - HugeGraph-API的VertexLabel/EdgeLabel API未提供eliminate接口（HugeGraph-614）
 - 增加非primary-key id策略的顶点时，如果属性为空无法插入到数据库中（HugeGraph-652）
 - 使用HugeGraph-Client的gremlin发送无返回值groovy请求时，由于gremlin-server将无返回值序列化为null，导致前端迭代结果集时出现空指针异常（HugeGraph-664） 
-- Restful API在没有找到对应id的vertex/edge时返回500（HugeGraph-734）
+- RESTful API在没有找到对应id的vertex/edge时返回500（HugeGraph-734）
 - HugeElement/HugeProperty的equals()与tinkerpop不兼容（HugeGraph-653）
 - HugeEdgeProperty的property的equals函数与tinkerpop兼容 （HugeGraph-740）
 - HugeElement/HugeVertexProperty的hashcode函数与tinkerpop不兼容（HugeGraph-728）
