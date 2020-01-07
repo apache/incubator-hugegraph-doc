@@ -182,3 +182,7 @@ backend                  |                             | Must be set to `postgre
 serializer               |                             | Must be set to `postgresql`
 
 其它与 MySQL 后端一致。
+
+> PostgreSQL 后端的 driver 和 url 应该设置为:
+> - `jdbc.driver=org.postgresql.Driver`
+> - `jdbc.url=jdbc:postgresql://localhost:5432/`
