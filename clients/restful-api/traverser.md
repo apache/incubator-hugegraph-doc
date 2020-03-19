@@ -942,9 +942,141 @@ POST http://localhost:8080/graphs/{graph}/traversers/customizedcrosspoints
 
 - 在商品图谱中，多款手机、学习机、游戏机通过不同的低级别的类目路径，最终都属于一级类目的电子设备
 
-#### 3.2.10 Vertices
+#### 3.2.10 Fusiform Similarity
 
-##### 3.2.10.1 根据顶点的id列表，批量查询顶点
+##### 3.2.10.1 功能介绍
+
+按照条件查询一批顶点对应的"梭形相似点"。当两个顶点跟很多共同的顶点之间有某种关系的时候，我们认为这两个点为"梭形相似点"。举个例子说明"梭形相似点"："读者A"读了100本书，可以定义读过这100本书中的80本以上的读者，是"读者A"的"梭形相似点"
+
+###### Params
+
+- sources: 定义起始顶点，必填项，指定方式包括：
+	- ids：通过顶点id列表提供起始顶点
+	- labels和properties：如果没有指定ids，则使用label和properties的联合条件查询起始顶点
+		- labels：顶点的类型列表
+		- properties：通过属性的值查询起始顶点
+		> 注意：properties中的属性值可以是列表，表示只要key对应的value在列表中就可以
+
+- label: 边的类型，选填项，默认代表所有edge label
+- direction: 起始顶点向外发散的方向（OUT,IN,BOTH），选填项，默认是BOTH
+- min_neighbors: 最少邻居数目，邻居数目少于这个阈值时，认为起点不具备"梭形相似点"。比如想要找一个"读者A"读过的书的"梭形相似点"，那么`min_neighbors`为100时，表示"读者A"至少要读过100本书才可以有"梭形相似点"，必填项
+- alpha: 相似度，代表：起点与"梭形相似点"的共同邻居数目/起点的邻居数目，必填项
+- min_similars: "梭形相似点"的最少个数，只有当起点的"梭形相似点"数目大于或等于该值时，才会返回起点及其"梭形相似点"，选填项，默认值为1
+- top: 返回一个起点的"梭形相似点"中相似度最高的top个，必填项，0表示全部
+- group_property: 与`min_groups`一起使用，当起点跟其所有的"梭形相似点"某个属性的值有至少`min_groups`个不同值时，才会返回该起点及其"梭形相似点"。比如为"读者A"推荐"异地"书友时，需要设置`group_property`为读者的"城市"属性，`min_group`至少为2，选填项，不填代表不需要根据属性过滤
+- min_groups: 与`group_property`一起使用，只有`group_property`设置时才有意义
+- max_degree: 查询过程中，单个顶点最大边数目，选填项，默认为10000
+- capacity: 遍历过程中最大的访问的顶点数目，选填项，默认为10000000
+- limit: 返回的结果数目上限（一个起点及其"梭形相似点"算一个结果），选填项，默认为10
+- with_intermediary: 是否返回起点及其"梭形相似点"共同关联的中间点，默认为false
+- with_vertex，选填项，默认为 false：
+	- true表示返回结果包含完整的顶点信息
+	- false时表示只返回顶点id
+
+##### 3.2.10.2 使用方法
+
+###### Method & Url
+
+```
+POST http://localhost:8080/graphs/hugegraph/traversers/fusiformsimilarity
+```
+
+###### Request Body
+
+```json
+{
+    "sources":{
+        "ids":[],
+        "label": "person",
+        "properties": {
+            "name":"p1"
+        }
+    },
+    "label":"read",
+    "direction":"OUT",
+    "min_neighbors":8,
+    "alpha":0.75,
+    "min_similars":1,
+    "top":0,
+    "group_property":"city",
+    "min_group":2,
+    "degree": 10000,
+    "capacity": -1,
+    "limit": -1,
+    "with_intermediary": false,
+    "with_vertex":true
+}
+
+```
+
+###### Response Status
+
+```json
+201
+```
+
+###### Response Body
+
+```json
+{
+    "similars": {
+        "3:p1": [
+            {
+                "id": "3:p2",
+                "score": 0.8888888888888888,
+                "intermediaries": [
+                ]
+            },
+            {
+                "id": "3:p3",
+                "score": 0.7777777777777778,
+                "intermediaries": [
+                ]
+            }
+        ]
+    },
+    "vertices": [
+        {
+            "id": "3:p1",
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "p1",
+                "city": "Beijing"
+            }
+        },
+        {
+            "id": "3:p2",
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "p2",
+                "city": "Shanghai"
+            }
+        },
+        {
+            "id": "3:p3",
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "p3",
+                "city": "Beijing"
+            }
+        }
+    ]
+}
+```
+
+##### 3.2.10.3 适用场景
+
+查询一组顶点相似度很高的顶点。例如：
+
+- 跟一个读者有类似书单的读者
+- 跟一个玩家玩类似游戏的玩家
+
+#### 3.2.11 Vertices
+
+##### 3.2.11.1 根据顶点的id列表，批量查询顶点
 
 ###### Params
 
@@ -1021,7 +1153,7 @@ GET http://localhost:8080/graphs/hugegraph/traversers/vertices?ids="1:marko"&ids
 }
 ```
 
-##### 3.2.10.2 获取顶点 Shard 信息
+##### 3.2.11.2 获取顶点 Shard 信息
 
 通过指定的分片大小split_size，获取顶点分片信息（可以与 3.2.10.3 中的 Scan 配合使用来获取顶点）。
 
@@ -1071,7 +1203,7 @@ GET http://localhost:8080/graphs/hugegraph/traversers/vertices/shards?split_size
 }
 ```
 
-##### 3.2.10.3 根据Shard信息批量获取顶点
+##### 3.2.11.3 根据Shard信息批量获取顶点
 
 通过指定的分片信息批量查询顶点（Shard信息的获取参见 3.2.10.2 Shard）。
 
@@ -1253,14 +1385,14 @@ GET http://localhost:8080/graphs/hugegraph/traversers/vertices/scan?start=0&end=
 }
 ```
 
-##### 3.2.10.4 适用场景
+##### 3.2.11.4 适用场景
 
 - 按id列表查询顶点，可用于批量查询顶点，比如在path查询到多条路径之后，可以进一步查询某条路径的所有顶点属性。
 - 获取分片和按分片查询顶点，可以用来遍历全部顶点
 
-#### 3.2.11 Edges
+#### 3.2.12 Edges
 
-##### 3.2.11.1 根据边的id列表，批量查询边
+##### 3.2.12.1 根据边的id列表，批量查询边
 
 ###### Params
 
@@ -1313,7 +1445,7 @@ GET http://localhost:8080/graphs/hugegraph/traversers/edges?ids="S1:josh>1>>S2:l
 }
 ```
 
-##### 3.2.11.2 获取边 Shard 信息
+##### 3.2.12.2 获取边 Shard 信息
 
 通过指定的分片大小split_size，获取边分片信息（可以与 3.2.11.3 中的 Scan 配合使用来获取边）。
 
@@ -1367,7 +1499,7 @@ GET http://localhost:8080/graphs/hugegraph/traversers/edges/shards?split_size=42
 }
 ```
 
-##### 3.2.11.3 根据 Shard 信息批量获取边
+##### 3.2.12.3 根据 Shard 信息批量获取边
 
 通过指定的分片信息批量查询边（Shard信息的获取参见 3.2.11.2）。
 
@@ -1477,7 +1609,7 @@ GET http://localhost:8080/graphs/hugegraph/traversers/edges/scan?start=0&end=322
 }
 ```
 
-##### 3.2.11.4 适用场景
+##### 3.2.12.4 适用场景
 
 - 按id列表查询边，可用于批量查询边
 - 获取分片和按分片查询边，可以用来遍历全部边
