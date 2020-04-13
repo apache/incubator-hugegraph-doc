@@ -6,7 +6,12 @@ HugeGraph支持的traverser API包括：
 
 - K-out API，根据起始顶点，查找恰好N步可达的邻居
 - K-neighbor API，根据起始顶点，查找N步以内可达的所有邻居
+- Same Neighbors, 查询两个顶点的共同邻居
+- Jaccard Similarity，计算两个顶点的邻居的交并比
 - Shortest Path API，查找两个顶点之间的最短路径
+- All Shortest Paths，查找两个顶点间的全部最短路径
+- Weighted Shortest Path，查找起点到目标点的带权最短路径
+- Single Source Shortest Path，查找一个点到其他各个点的加权最短路径
 - Paths API，查找两个顶点间的全部路径
 - Customized Paths API，从一批顶点出发，按（一种）模式遍历经过的全部路径
 - Crosspoints API，查找两个顶点的交点（共同祖先或者共同子孙）
