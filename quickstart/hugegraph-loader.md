@@ -40,6 +40,16 @@ tar zxvf hugegraph-loader-${version}.tar.gz
 $ git clone https://github.com/hugegraph/hugegraph-loader.git
 ```
 
+由于Oracle ojdbc license的限制，需要手动安装ojdbc到本地maven仓库。
+访问[Oracle jdbc 下载](https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html)页面。选择Oracle Database 12c Release 2 (12.2.0.1) drivers，如下图所示。
+![在这里插入图片描述](images/oracle-download.png)
+打开链接后，选择“ojdbc8.jar”, 如下图所示。
+![在这里插入图片描述](images/ojdbc8.png)
+ 把ojdbc8安装到本地maven仓库，进入``ojdbc8.jar``所在目录，执行以下命令。
+```
+mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle   -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
+```
+
 编译生成 tar 包:
 
 ```bash
@@ -61,7 +71,7 @@ mvn clean package -DskipTests
 这一步是建模的过程，用户需要对自己已有的数据和想要创建的图模型有一个清晰的构想，然后编写 schema 建立图模型。
 
 比如想创建一个拥有两类顶点及两类边的图，顶点是"人"和"软件"，边是"人认识人"和"人创造软件"，并且这些顶点和边都带有一些属性，比如顶点"人"有："姓名"、"年龄"等属性，
-"软件"有："名字"、"售卖价格"等属性；边"认识"有："日期"属性等。
+"软件"有："名字"、"售卖价格"等属性；边"认识"有: "日期"属性等。
 
 <center>
   <img src="/images/demo-graph-model.png" alt="image">
@@ -166,7 +176,7 @@ id | name | lang | price
 id | p_id | s_id | date
 ```
 
-如果在建模（schema）时指定 person 或 software 的 id 策略是 PRIMARY_KEY 的，选择以 name 作为 primary keys（注意：这是 hugegraph 中 vertexlabel 的概念），在导入边数据时，由于需要拼接出源顶点和目标顶点的 id，必须拿着 p_id/s_id 去 person/software 表中查到对应的 name，这种需要做额外查询的表结构的情况，loader 暂时是不支持的。这时可以采用以下两种方式替代：
+如果在建模（schema）时指定 person 或 software 的 id 策略是 PRIMARY_KEY，选择以 name 作为 primary keys（注意：这是 hugegraph 中 vertexlabel 的概念），在导入边数据时，由于需要拼接出源顶点和目标顶点的 id，必须拿着 p_id/s_id 去 person/software 表中查到对应的 name，这种需要做额外查询的表结构的情况，loader 暂时是不支持的。这时可以采用以下两种方式替代：
 
 1. 仍然指定 person 和 software 的 id 策略为 PRIMARY_KEY，但是以 person 表和 software 表的 id 列作为顶点的主键属性，这样导入边时直接使用 p_id 和 s_id 和顶点的 label 拼接就能生成 id 了；
 2. 指定 person 和 software 的 id 策略为 CUSTOMIZE，然后直接以 person 表和 software 表的 id 列作为顶点 id，这样导入边时直接使用 p_id 和 s_id 即可；
@@ -216,7 +226,7 @@ Office,388
 
 输入源的映射文件是`JSON`格式的，由多个**顶点映射**和**边映射**块组成，顶点映射和边映射分别对应某类顶点/边的输入源映射。每个顶点映射和边映射块内部会包含一个**输入源**的块，这个输入源块就对应上面介绍的`本地磁盘文件或目录`、`HDFS 文件或目录`和`关系型数据库`，负责描述数据源的基本信息。
 
-先给出上面图模型和数据文件的输入源的映射文件：
+先给出上面图模型和数据文件的输入源的映射文件 mapping.json：
 
 ```json
 {
@@ -504,7 +514,7 @@ bin/hugegraph-loader -g {GRAPH_NAME} -f ${INPUT_DESC_FILE} -s ${SCHEMA_FILE} -h 
 
 #### 4.1 准备数据
 
-顶点文件：`vertex_person.csv`
+顶点文件：`example/file/vertex_person.csv`
 
 ```csv
 marko,29,Beijing
@@ -514,7 +524,7 @@ peter,35,Shanghai
 "li,nary",26,"Wu,han"
 ```
 
-顶点文件：`vertex_software.text`
+顶点文件：`example/file/vertex_software.txt`
 
 ```text
 name|lang|price
@@ -522,14 +532,14 @@ lop|java|328
 ripple|java|199
 ```
 
-边文件：`edge_knows.json`
+边文件：`example/file/edge_knows.json`
 
 ```
 {"source_name": "marko", "target_name": "vadas", "date": "20160110", "weight": 0.5}
 {"source_name": "marko", "target_name": "josh", "date": "20130220", "weight": 1.0}
 ```
 
-边文件：`edge_created.json`
+边文件：`example/file/edge_created.json`
 
 ```
 {"aname": "marko", "bname": "lop", "date": "20171210", "weight": 0.4}
@@ -539,6 +549,7 @@ ripple|java|199
 ```
 
 #### 4.2 编写schema
+schema文件：`example/file/schema.groovy`
 
 ```groovy
 schema.propertyKey("name").asText().ifNotExist().create();
@@ -566,7 +577,7 @@ schema.indexLabel("createdByWeight").onE("created").by("weight").range().ifNotEx
 schema.indexLabel("knowsByWeight").onE("knows").by("weight").range().ifNotExist().create();
 ```
 
-#### 4.3 编写输入源映射文件
+#### 4.3 编写输入源映射文件`example/file/struct.json`
 
 ```json
 {
@@ -633,7 +644,7 @@ schema.indexLabel("knowsByWeight").onE("knows").by("weight").range().ifNotExist(
 #### 4.4 执行命令导入
 
 ```bash
-bin/hugegraph-loader -g hugegraph -f example/file/struct.json -s example/file/schema.groovy
+sh bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy
 ```
 
 导入结束后，会出现类似如下统计信息：
