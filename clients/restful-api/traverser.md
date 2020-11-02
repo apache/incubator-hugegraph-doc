@@ -26,7 +26,7 @@ HugeGraph支持的traverser API包括：
 - Single Source Shortest Path，查找一个点到其他各个点的加权最短路径
 - Paths API，查找两个顶点间的全部路径，分为基础版和高级版：
     - 基础版使用GET方法，根据起点和终点，查找两个顶点间的全部路径
-    - 高级版使用POST方法，根据一组起点和一组终点，查找两个集合间复合条件的全部路径
+    - 高级版使用POST方法，根据一组起点和一组终点，查找两个集合间符合条件的全部路径
 - Customized Paths API，从一批顶点出发，按（一种）模式遍历经过的全部路径
 - Template Path API，指定起点和终点以及起点和终点间路径信息，查找符合的路径
 - Crosspoints API，查找两个顶点的交点（共同祖先或者共同子孙）
@@ -255,8 +255,8 @@ GET http://localhost:8080/graphs/{graph}/traversers/kout?source="1:marko"&max_de
 - max_depth: 步数，必填项
 - nearest: nearest为true时，代表起始顶点到达结果顶点的最短路径长度为depth，不存在更短的路径；nearest为false时，代表起始顶点到结果顶点有一条长度为depth的路径（未必最短且可以有环），选填项，默认为true
 - count_only: Boolean值，true表示只统计结果的数目，不返回具体结果；false表示返回具体的结果，默认为false
-- with_path：true表示返回起始点到每个邻居的最短路径，false表示不返回起始点到每个邻居的最短路径，选填项，默认为 false
-- with_vertex，选填项，默认为 false：
+- with_path：true表示返回起始点到每个邻居的最短路径，false表示不返回起始点到每个邻居的最短路径，选填项，默认为false
+- with_vertex，选填项，默认为false：
 	-  true表示返回结果包含完整的顶点信息（路径中的全部顶点）
 		- with_path为true时，返回所有路径中的顶点的完整信息
 		- with_path为false时，返回所有邻居的完整信息
@@ -456,8 +456,8 @@ GET http://localhost:8080/graphs/{graph}/traversers/kneighbor?source=“1:marko�
 	- skip_degree：查询过程中需要跳过的顶点的最小的边数目，即当顶点的边数目大于 skip_degree 时，跳过该顶点，可用于规避超级点，选填项，默认为0，表示不跳过任何点
 - max_depth: 步数，必填项
 - count_only: Boolean值，true表示只统计结果的数目，不返回具体结果；false表示返回具体的结果，默认为false
-- with_path：true表示返回起始点到每个邻居的最短路径，false表示不返回起始点到每个邻居的最短路径，选填项，默认为 false
-- with_vertex，选填项，默认为 false：
+- with_path：true表示返回起始点到每个邻居的最短路径，false表示不返回起始点到每个邻居的最短路径，选填项，默认为false
+- with_vertex，选填项，默认为false：
 	-  true表示返回结果包含完整的顶点信息（路径中的全部顶点）
 		- with_path为true时，返回所有路径中的顶点的完整信息
 		- with_path为false时，返回所有邻居的完整信息
@@ -897,7 +897,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/allshortestpaths?source="A"&
 - max_degree: 查询过程中，单个顶点最大边数目，选填项，默认为10000
 - skip_degree: 查询过程中需要跳过的顶点的最小的边数目，即当顶点的边数目大于 skip_degree 时，跳过该顶点，可用于规避超级点，选填项，默认为0，表示不跳过任何点
 - capacity: 遍历过程中最大的访问的顶点数目，选填项，默认为10000000
-- with_vertex: true表示返回结果包含完整的顶点信息（路径中的全部顶点），false时表示只返回顶点id，选填项，默认为 false
+- with_vertex: true表示返回结果包含完整的顶点信息（路径中的全部顶点），false时表示只返回顶点id，选填项，默认为false
 
 ##### 3.2.10.2 使用方法
 
@@ -982,7 +982,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/weightedshortestpath?source=
 - skip_degree: 查询过程中需要跳过的顶点的最小的边数目，即当顶点的边数目大于 skip_degree 时，跳过该顶点，可用于规避超级点，选填项，默认为0，表示不跳过任何点
 - capacity: 遍历过程中最大的访问的顶点数目，选填项，默认为10000000
 - limit: 查询到的目标顶点个数，也是返回的最短路径的条数，选填项，默认为10
-- with_vertex: true表示返回结果包含完整的顶点信息（路径中的全部顶点），false时表示只返回顶点id，选填项，默认为 false
+- with_vertex: true表示返回结果包含完整的顶点信息（路径中的全部顶点），false时表示只返回顶点id，选填项，默认为false
 
 ##### 3.2.11.2 使用方法
 
@@ -1203,7 +1203,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/paths?source="1:marko"&targe
 - nearest: nearest为true时，代表起始顶点到达结果顶点的最短路径长度为depth，不存在更短的路径；nearest为false时，代表起始顶点到结果顶点有一条长度为depth的路径（未必最短且可以有环），选填项，默认为true
 - capacity: 遍历过程中最大的访问的顶点数目，选填项，默认为10000000
 - limit: 返回的路径的最大数目，选填项，默认为10
-- with_vertex：true表示返回结果包含完整的顶点信息（路径中的全部顶点），false时表示只返回顶点id，选填项，默认为 false
+- with_vertex：true表示返回结果包含完整的顶点信息（路径中的全部顶点），false时表示只返回顶点id，选填项，默认为false
 
 
 ##### 3.2.13.2 使用方法
@@ -1297,13 +1297,13 @@ POST http://localhost:8080/graphs/{graph}/traversers/paths
 	- default_weight：当边没有属性作为权重计算值时，采取的默认权重，sort_by不为NONE时有效，与weight_by互斥
 	- degree：查询过程中，单个顶点最大边数目，默认为10000
 	- sample：当需要对某个step的符合条件的边进行采样时设置，-1表示不采样，默认为采样100
-- sort_by: 根据路径的权重排序，选填项，默认为 NONE：
+- sort_by: 根据路径的权重排序，选填项，默认为NONE：
 	- NONE表示不排序，默认值
 	- INCR表示按照路径权重的升序排序
 	- DECR表示按照路径权重的降序排序
 - capacity: 遍历过程中最大的访问的顶点数目，选填项，默认为10000000
 - limit: 返回的路径的最大数目，选填项，默认为10
-- with_vertex：true表示返回结果包含完整的顶点信息（路径中的全部顶点），false时表示只返回顶点id，选填项，默认为 false
+- with_vertex：true表示返回结果包含完整的顶点信息（路径中的全部顶点），false时表示只返回顶点id，选填项，默认为false
 
 ##### 3.2.14.2 使用方法
 
@@ -1492,7 +1492,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/customizedpaths
 - with_ring: Boolean值，true表示包含环路；false表示不包含环路，默认为false
 - capacity: 遍历过程中最大的访问的顶点数目，选填项，默认为10000000
 - limit: 返回的路径的最大数目，选填项，默认为10
-- with_vertex：true表示返回结果包含完整的顶点信息（路径中的全部顶点），false时表示只返回顶点id，选填项，默认为 false
+- with_vertex：true表示返回结果包含完整的顶点信息（路径中的全部顶点），false时表示只返回顶点id，选填项，默认为false
 
 ##### 3.2.15.2 使用方法
 
@@ -1719,8 +1719,8 @@ GET http://localhost:8080/graphs/{graph}/traversers/crosspoints?source="2:lop"&t
 		- degree：查询过程中，单个顶点最大边数目，默认为10000
 - capacity: 遍历过程中最大的访问的顶点数目，选填项，默认为10000000
 - limit: 返回的路径的最大数目，选填项，默认为10
-- with_path：true表示返回交点所在的路径，false表示不返回交点所在的路径，选填项，默认为 false
-- with_vertex，选填项，默认为 false：
+- with_path：true表示返回交点所在的路径，false表示不返回交点所在的路径，选填项，默认为false
+- with_vertex，选填项，默认为false：
 	-  true表示返回结果包含完整的顶点信息（路径中的全部顶点）
 		- with_path为true时，返回所有路径中的顶点的完整信息
 		- with_path为false时，返回所有交点的完整信息
@@ -2048,7 +2048,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/rays?source="1:marko"&max_de
 - capacity: 遍历过程中最大的访问的顶点数目，选填项，默认为10000000
 - limit: 返回的结果数目上限（一个起点及其"梭形相似点"算一个结果），选填项，默认为10
 - with_intermediary: 是否返回起点及其"梭形相似点"共同关联的中间点，默认为false
-- with_vertex，选填项，默认为 false：
+- with_vertex，选填项，默认为false：
 	- true表示返回结果包含完整的顶点信息
 	- false时表示只返回顶点id
 
@@ -2291,7 +2291,7 @@ GET http://localhost:8080/graphs/hugegraph/traversers/vertices/shards?split_size
 - start: 分片起始位置，必填项
 - end: 分片结束位置，必填项
 - page：分页位置，选填项，默认为null，不分页；当page为“”时表示分页的第一页，从start指示的位置开始
-- page_limit：分页获取顶点时，一页中顶点数目的上限，选填项，默认为 100000
+- page_limit：分页获取顶点时，一页中顶点数目的上限，选填项，默认为100000
 
 ###### Method & Url
 
@@ -2587,7 +2587,7 @@ GET http://localhost:8080/graphs/hugegraph/traversers/edges/shards?split_size=42
 - start: 分片起始位置，必填项
 - end: 分片结束位置，必填项
 - page：分页位置，选填项，默认为null，不分页；当page为“”时表示分页的第一页，从start指示的位置开始
-- page_limit：分页获取边时，一页中边数目的上限，选填项，默认为 100000
+- page_limit：分页获取边时，一页中边数目的上限，选填项，默认为100000
 
 ###### Method & Url
 
