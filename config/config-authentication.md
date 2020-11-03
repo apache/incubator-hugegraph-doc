@@ -36,7 +36,7 @@ authentication: {
 auth.authenticator=com.baidu.hugegraph.auth.StandardAuthenticator
 auth.graph_store=hugegraph
 ```
-其中，`graph_store`配置项是指使用哪一个图才存储用户信息，如果存在多个图的话，选取任意一个均可。
+其中，`graph_store`配置项是指使用哪一个图来存储用户信息，如果存在多个图的话，选取任意一个均可。
 
 在配置文件`hugegraph{n}.properties`中配置`gremlin.graph`信息：
 
