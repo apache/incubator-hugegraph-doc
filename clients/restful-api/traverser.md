@@ -2,7 +2,7 @@
 
 HugeGraphServer为HugeGraph图数据库提供了RESTful API接口。除了顶点和边的CRUD基本操作以外，还提供了一些遍历（traverser）方法，我们称为`traverser API`。这些遍历方法实现了一些复杂的图算法，方便用户对图进行分析和挖掘。
 
-HugeGraph支持的traverser API包括：
+HugeGraph支持的Traverser API包括：
 
 - K-out API，根据起始顶点，查找恰好N步可达的邻居，分为基础版和高级版：
     - 基础版使用GET方法，根据起始顶点，查找恰好N步可达的邻居
@@ -24,6 +24,7 @@ HugeGraph支持的traverser API包括：
 - All Shortest Paths，查找两个顶点间的全部最短路径
 - Weighted Shortest Path，查找起点到目标点的带权最短路径
 - Single Source Shortest Path，查找一个点到其他各个点的加权最短路径
+- Multi Node Shortest Path，查找指定顶点集之间两两最短路径
 - Paths API，查找两个顶点间的全部路径，分为基础版和高级版：
     - 基础版使用GET方法，根据起点和终点，查找两个顶点间的全部路径
     - 高级版使用POST方法，根据一组起点和一组终点，查找两个集合间符合条件的全部路径
@@ -1116,7 +1117,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/singlesourceshortestpath?sou
 
 ##### 3.2.12.1 功能介绍
 
-找到给定顶点两两之间的最短路径
+查找指定顶点集两两之间的最短路径
 
 ###### Params
 
