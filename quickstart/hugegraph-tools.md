@@ -62,7 +62,10 @@ Usage: hugegraph [options] [command] [command options]
 - --url，HugeGraph-Server 的服务地址，默认是 http://127.0.0.1:8080
 - --user，当 HugeGraph-Server 开启认证时，传递用户名
 - --password，当 HugeGraph-Server 开启认证时，传递用户的密码
-- --timeout, 连接 HugeGraph-Server 时的超时时间，默认是 30s
+- --timeout，连接 HugeGraph-Server 时的超时时间，默认是 30s
+- --protocol，连接 HugeGraph-Server 使用的协议，允许的值 [http, https]，默认为 http
+- --trust-store-file，当 --protocol 是 https 时，HugeGraph-Client 使用的 truststore 文件，默认为空
+- --trust-store-password，当 --protocol 是 https 时，HugeGraph-Client 使用的 truststore 的密码，默认为空
 
 上述全局变量，也可以通过环境变量来设置。一种方式是在命令行使用 export 设置临时环境变量，在该命令行关闭之前均有效
 
@@ -74,6 +77,9 @@ Usage: hugegraph [options] [command] [command options]
 --user       | HUGEGRAPH_USERNAME    | export HUGEGRAPH_USERNAME=admin
 --password   | HUGEGRAPH_PASSWORD    | export HUGEGRAPH_PASSWORD=test
 --timeout    | HUGEGRAPH_TIMEOUT     | export HUGEGRAPH_TIMEOUT=30
+--protocol   | HUGEGRAPH_PROTOCOL    | export HUGEGRAPH_PROTOCOL=http
+--trust-store-file | HUGEGRAPH_TRUST_STORE_FILE | export HUGEGRAPH_TRUST_STORE_FILE=/tmp/trust-store
+--trust-store-password | HUGEGRAPH_TRUST_STORE_PASSWORD | export HUGEGRAPH_TRUST_STORE_PASSWORD=xxxx
 
 另一种方式是在 bin/hugegraph 脚本中设置环境变量：
 
@@ -86,12 +92,15 @@ Usage: hugegraph [options] [command] [command options]
 #export HUGEGRAPH_USERNAME=
 #export HUGEGRAPH_PASSWORD=
 #export HUGEGRAPH_TIMEOUT=
+#export HUGEGRAPH_PROTOCOL=
+#export HUGEGRAPH_TRUST_STORE_FILE=
+#export HUGEGRAPH_TRUST_STORE_PASSWORD=
 ```
 
 ##### 3.3 图管理类，graph-mode-set、graph-mode-get、graph-list、graph-get和graph-clear
 
 - graph-mode-set，设置图的 restore mode
-    - --graph-mode 或者 -m，必填项，指定将要设置的模式，合法值包括 [NONE, RESTORING, MERGING]
+    - --graph-mode 或者 -m，必填项，指定将要设置的模式，合法值包括 [NONE, RESTORING, MERGING, LOADING]
 - graph-mode-get，获取图的 restore mode
 - graph-list，列出某个 HugeGraph-Server 中全部的图
 - graph-get，获取某个图及其存储后端类型
@@ -133,6 +142,11 @@ Usage: hugegraph [options] [command] [command options]
 ##### 3.6 备份/恢复类
 
 - backup，将某张图中的 schema 或者 data 备份到 HugeGraph 系统之外，以 JSON 形式存在本地磁盘或者 HDFS
+    - --format，备份的格式，可选值包括 [json, text]，默认为 json
+    - --all-properties，是否备份顶点/边全部的属性，仅在 --format 为 text 是有效，默认 false
+    - --label，要备份的顶点/边的类型，仅在 --format 为 text 是有效，只有备份顶点或者边的时候有效
+    - --properties，要备份的顶点/边的属性，仅在 --format 为 text 是有效，只有备份顶点或者边的时候有效
+    - --compress，备份时是否压缩数据，默认为 true
     - --directory 或者 -d，存储 schema 或者 data 的目录，本地目录时，默认为'./{graphName}'，HDFS 时，默认为 '{fs.default.name}/{graphName}'
     - --huge-types 或者 -t，要备份的数据类型，逗号分隔，可选值为 'all' 或者 一个或多个 [vertex,edge,vertex_label,edge_label,property_key,index_label] 的组合，'all' 代表全部6种类型，即顶点、边和所有schema
     - --log 或者 -l，指定日志目录，默认为当前目录
@@ -141,15 +155,17 @@ Usage: hugegraph [options] [command] [command options]
     - -D，用 -Dkey=value 的模式指定动态参数，用来备份数据到 HDFS 时，指定 HDFS 的配置项，例如：-Dfs.default.name=hdfs://localhost:9000 
 - restore，将 JSON 格式存储的 schema 或者 data 恢复到一个新图中（RESTORING 模式）或者合并到已存在的图中（MERGING 模式）
     - --directory 或者 -d，存储 schema 或者 data 的目录，本地目录时，默认为'./{graphName}'，HDFS 时，默认为 '{fs.default.name}/{graphName}'
+    - --clean，是否在恢复图完成后删除 --directory 指定的目录，默认为 true
     - --huge-types 或者 -t，要恢复的数据类型，逗号分隔，可选值为 'all' 或者 一个或多个 [vertex,edge,vertex_label,edge_label,property_key,index_label] 的组合，'all' 代表全部6种类型，即顶点、边和所有schema
     - --log 或者 -l，指定日志目录，默认为当前目录
     - --retry，指定失败重试次数，默认为 3
     - -D，用 -Dkey=value 的模式指定动态参数，用来从 HDFS 恢复图时，指定 HDFS 的配置项，例如：-Dfs.default.name=hdfs://localhost:9000
-- migrate, 将图从一个 HugeGraphServer 迁移至另一个 HugeGraphServer
-    - --source-graph，源图的名字
-    - --source-url，源图所在的 HugeGraphServer 的URL
+- migrate, 将当前连接的图迁移至另一个 HugeGraphServer 中
     - --target-graph，目标图的名字
     - --target-url，目标图所在的 HugeGraphServer
+    - --target-username，访问目标图的用户名
+    - --target-password，访问目标图的密码
+    - --target-timeout，访问目标图的超时时间
     - --directory 或者 -d，迁移过程中，存储源图的 schema 或者 data 的目录，本地目录时，默认为'./{graphName}'，HDFS 时，默认为 '{fs.default.name}/{graphName}'
     - --huge-types 或者 -t，要迁移的数据类型，逗号分隔，可选值为 'all' 或者 一个或多个 [vertex,edge,vertex_label,edge_label,property_key,index_label] 的组合，'all' 代表全部6种类型，即顶点、边和所有schema
     - --log 或者 -l，指定日志目录，默认为当前目录
@@ -201,9 +217,19 @@ Usage: hugegraph [options] [command] [command options]
       Default: hugegraph
     --password
       Password of user
+    --protocol
+      The Protocol of HugeGraph-Server, allowed values are: http or https
+      Default: http
     --timeout
       Connection timeout
       Default: 30
+    --trust-store-file
+      The path of client truststore file used when https protocol is enabled
+      Default: <empty string>
+    --trust-store-password
+      The password of the client truststore file used when the https protocol 
+      is enabled
+      Default: <empty string>
     --url
       The URL of HugeGraph-Server
       Default: http://127.0.0.1:8080
@@ -228,7 +254,7 @@ Usage: hugegraph [options] [command] [command options]
         Options:
         * --graph-mode, -m
             Graph mode, include: [NONE, RESTORING, MERGING]
-            Possible Values: [NONE, RESTORING, MERGING]
+            Possible Values: [NONE, RESTORING, MERGING, LOADING]
 
     graph-mode-get      Get graph mode
       Usage: graph-mode-get
@@ -309,17 +335,32 @@ Usage: hugegraph [options] [command] [command options]
             -Dfs.default.name=hdfs://localhost:9000 
       Usage: backup [options]
         Options:
+          --all-properties
+            All properties to be backup flag
+            Default: false
+          --compress
+            compress flag
+            Default: true
           --directory, -d
             Directory of graph schema/data, default is './{graphname}' in 
             local file system or '{fs.default.name}/{graphname}' in HDFS
+          --format
+            File format, valid is [json, text]
+            Default: json
           --huge-types, -t
             Type of schema/data. Concat with ',' if more than one. 'all' means 
             all vertices, edges and schema, in other words, 'all' equals with 
             'vertex,edge,vertex_label,edge_label,property_key,index_label' 
             Default: [PROPERTY_KEY, VERTEX_LABEL, EDGE_LABEL, INDEX_LABEL, VERTEX, EDGE]
+          --label
+            Vertex or edge label, only valid when type is vertex or edge
           --log, -l
             Directory of log
             Default: ./logs
+          --properties
+            Vertex or edge properties to backup, only valid when type is
+            vertex or edge
+            Default: []
           --retry
             Retry times, default is 3
             Default: 3
@@ -355,11 +396,6 @@ Usage: hugegraph [options] [command] [command options]
           --formatter, -f
             Formatter to customize format of vertex/edge
             Default: JsonFormatter
-          --huge-types, -t
-            Type of schema/data. Concat with ',' if more than one. 'all' means 
-            all vertices, edges and schema, in other words, 'all' equals with 
-            'vertex,edge,vertex_label,edge_label,property_key,index_label' 
-            Default: [PROPERTY_KEY, VERTEX_LABEL, EDGE_LABEL, INDEX_LABEL, VERTEX, EDGE]
           --log, -l
             Directory of log
             Default: ./logs
@@ -414,7 +450,7 @@ Usage: hugegraph [options] [command] [command options]
             Mode used when migrating to target graph, include: [RESTORING, 
             MERGING] 
             Default: RESTORING
-            Possible Values: [NONE, RESTORING, MERGING]
+            Possible Values: [NONE, RESTORING, MERGING, LOADING]
           --huge-types, -t
             Type of schema/data. Concat with ',' if more than one. 'all' means 
             all vertices, edges and schema, in other words, 'all' equals with 
@@ -426,21 +462,22 @@ Usage: hugegraph [options] [command] [command options]
           --retry
             Retry times, default is 3
             Default: 3
-          --source-graph
-            The source graph to migrate
-            Default: hugegraph
-          --source-url
-            The source graph url to migrate
-            Default: http://127.0.0.1:8080
           --split-size, -s
             Split size of shard
             Default: 1048576
           --target-graph
             The target graph to migrate
             Default: hugegraph
+          --target-password
+            The password of target graph
+          --target-timeout
+            The timeout to connect target graph
+            Default: 0
           --target-url
             The target graph url to migrate
             Default: http://127.0.0.1:8081
+          --target-username
+            The username of target graph
           -D
             HDFS config parameters
             Syntax: -Dkey=value
@@ -476,4 +513,75 @@ Usage: hugegraph [options] [command] [command options]
     help      Print usage
       Usage: help
 
+```
+
+##### 3.9 具体命令示例
+
+###### 1. gremlin语句
+
+```bash
+# 同步执行gremlin
+./bin/hugegraph --url  http://127.0.0.1:8080  --graph hugegraph gremlin-execute --script 'g.V().count()'
+
+# 异步执行gremlin
+./bin/hugegraph --url  http://127.0.0.1:8080  --graph hugegraph gremlin-schedule --script 'g.V().count()'
+```
+
+###### 2. 查看task情况
+
+```bash
+./bin/hugegraph --url  http://127.0.0.1:8080  --graph hugegraph task-list
+
+./bin/hugegraph --url  http://127.0.0.1:8080  --graph hugegraph  task-list --limit 5
+
+./bin/hugegraph --url  http://127.0.0.1:8080  --graph hugegraph  task-list --status success
+```
+
+###### 3. 图模式查看和设置
+
+```bash
+./bin/hugegraph --url  http://127.0.0.1:8080  --graph hugegraph  graph-mode-set -m RESTORING  MERGING NONE
+
+./bin/hugegraph --url  http://127.0.0.1:8080  --graph hugegraph graph-mode-set -m RESTORING
+
+./bin/hugegraph --url  http://127.0.0.1:8080  --graph hugegraph graph-mode-get
+
+./bin/hugegraph --url  http://127.0.0.1:8080  --graph hugegraph graph-list
+```
+
+###### 4. 清理图
+
+```bash
+./bin/hugegraph --url  http://127.0.0.1:8080  --graph hugegraph  graph-clear -c "I'm sure to delete all data"
+```
+
+###### 5. 图备份
+
+```bash
+./bin/hugegraph  --url  http://127.0.0.1:8080  --graph hugegraph backup  -t all --directory ./backup-test
+```
+
+###### 6. 周期性的备份
+
+```bash
+./bin/hugegraph --url  http://127.0.0.1:8080  --graph hugegraph  --interval  */2 * * * * schedule-backup -d ./backup-0.10.2-sa
+```
+
+###### 7. 图恢复
+
+```bash
+# 设置图模式
+./bin/hugegraph  --url  http://127.0.0.1:8080  --graph hugegraph graph-mode-set -m RESTORING
+
+# 恢复图
+./bin/hugegraph  --url  http://127.0.0.1:8080  --graph hugegraph restore  -t all --directory ./backup-test
+
+# 恢复图模式
+./bin/hugegraph  --url  http://127.0.0.1:8080  --graph hugegraph graph-mode-set -m NONE
+```
+
+###### 8. 图迁移
+
+```bash
+./bin/hugegraph --url http://127.0.0.1:8080  --graph hugegraph migrate  --target-url  http://127.0.0.1:8090 --target-graph hugegraph
 ```
