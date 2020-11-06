@@ -521,67 +521,67 @@ Usage: hugegraph [options] [command] [command options]
 
 ```bash
 # 同步执行gremlin
-./bin/hugegraph --url  http://127.0.0.1:8080  --graph hugegraph gremlin-execute --script 'g.V().count()'
+./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph gremlin-execute --script 'g.V().count()'
 
 # 异步执行gremlin
-./bin/hugegraph --url  http://127.0.0.1:8080  --graph hugegraph gremlin-schedule --script 'g.V().count()'
+./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph gremlin-schedule --script 'g.V().count()'
 ```
 
 ###### 2. 查看task情况
 
 ```bash
-./bin/hugegraph --url  http://127.0.0.1:8080  --graph hugegraph task-list
+./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph task-list
 
-./bin/hugegraph --url  http://127.0.0.1:8080  --graph hugegraph  task-list --limit 5
+./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph task-list --limit 5
 
-./bin/hugegraph --url  http://127.0.0.1:8080  --graph hugegraph  task-list --status success
+./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph task-list --status success
 ```
 
 ###### 3. 图模式查看和设置
 
 ```bash
-./bin/hugegraph --url  http://127.0.0.1:8080  --graph hugegraph  graph-mode-set -m RESTORING  MERGING NONE
+./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph graph-mode-set -m RESTORING MERGING NONE
 
-./bin/hugegraph --url  http://127.0.0.1:8080  --graph hugegraph graph-mode-set -m RESTORING
+./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph graph-mode-set -m RESTORING
 
-./bin/hugegraph --url  http://127.0.0.1:8080  --graph hugegraph graph-mode-get
+./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph graph-mode-get
 
-./bin/hugegraph --url  http://127.0.0.1:8080  --graph hugegraph graph-list
+./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph graph-list
 ```
 
 ###### 4. 清理图
 
 ```bash
-./bin/hugegraph --url  http://127.0.0.1:8080  --graph hugegraph  graph-clear -c "I'm sure to delete all data"
+./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph graph-clear -c "I'm sure to delete all data"
 ```
 
 ###### 5. 图备份
 
 ```bash
-./bin/hugegraph  --url  http://127.0.0.1:8080  --graph hugegraph backup  -t all --directory ./backup-test
+./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph backup -t all --directory ./backup-test
 ```
 
 ###### 6. 周期性的备份
 
 ```bash
-./bin/hugegraph --url  http://127.0.0.1:8080  --graph hugegraph  --interval  */2 * * * * schedule-backup -d ./backup-0.10.2-sa
+./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph --interval */2 * * * * schedule-backup -d ./backup-0.10.2
 ```
 
 ###### 7. 图恢复
 
 ```bash
 # 设置图模式
-./bin/hugegraph  --url  http://127.0.0.1:8080  --graph hugegraph graph-mode-set -m RESTORING
+./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph graph-mode-set -m RESTORING
 
 # 恢复图
-./bin/hugegraph  --url  http://127.0.0.1:8080  --graph hugegraph restore  -t all --directory ./backup-test
+./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph restore -t all --directory ./backup-test
 
 # 恢复图模式
-./bin/hugegraph  --url  http://127.0.0.1:8080  --graph hugegraph graph-mode-set -m NONE
+./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph graph-mode-set -m NONE
 ```
 
 ###### 8. 图迁移
 
 ```bash
-./bin/hugegraph --url http://127.0.0.1:8080  --graph hugegraph migrate  --target-url  http://127.0.0.1:8090 --target-graph hugegraph
+./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph migrate --target-url http://127.0.0.1:8090 --target-graph hugegraph
 ```
