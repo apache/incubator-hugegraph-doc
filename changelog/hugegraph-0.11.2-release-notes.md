@@ -17,7 +17,7 @@
 
 #### 内部修改
 
-- 启动HugeGraphServer 出现异常时快速失败（hugegraph #748）
+- 启动 HugeGraphServer 出现异常时快速失败（hugegraph #748）
 - 定义 LOADING 模式来加速导入（hugegraph-client #101）
 
 ### Core
@@ -146,7 +146,7 @@
 
 - 只打印一次插入错误信息，以避免过多的错误信息（hugegraph-loader #118）
 - 拆分批量插入和单条插入的线程（hugegraph-loader #120）
-- CSV的解析器改为 SimpleFlatMapper（hugegraph-loader #124）
+- CSV 的解析器改为 SimpleFlatMapper（hugegraph-loader #124）
 - 编码主键中的数字和日期字段（hugegraph-loader #136）
 - 确保主键列合法或者存在映射（hugegraph-loader #141）
 - 跳过主键属性全部为空的顶点（hugegraph-loader #166）
