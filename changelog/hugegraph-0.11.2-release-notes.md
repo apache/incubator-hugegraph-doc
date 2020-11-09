@@ -8,12 +8,12 @@
 - 支持创建 schema 时，记录创建的时间（hugegraph #746，hugegraph-client #69）
 - 支持 RESTful API 的顶点/边属性的范围查询（hugegraph #782，hugegraph-client #73）
 - 支持顶点和边的 TTL （hugegraph #794，hugegraph-client #83）
-- 支持共同邻居，Jaccard相似度，全部最短路径，带权最短路径和单源最短路径5种遍历算法（hugegraph #936，hugegraph-client #80）
+- 支持共同邻居，Jaccard 相似度，全部最短路径，带权最短路径和单源最短路径5种遍历算法（hugegraph #936，hugegraph-client #80）
 - 支持用户和细粒度权限控制（hugegraph #749，hugegraph #985，hugegraph-client #81）
 - 支持遍历顶点计数功能（hugegraph #995，hugegraph-client #84）
 - 支持 HTTPS 协议（hugegrap #1036，hugegraph-client #85）
 - 支持创建索引时控制是否重建（hugegraph #1106，hugegraph-client #91）
-- 支持定制的 kout/kneighbor，多点最短路径，最相似 jaccard 点和模板路径5种遍历算法（hugegraph #1174，hugegraph-client #100，hugegraph-client #106）
+- 支持定制的 kout/kneighbor，多点最短路径，最相似 Jaccard 点和模板路径5种遍历算法（hugegraph #1174，hugegraph-client #100，hugegraph-client #106）
 
 #### 内部修改
 
@@ -42,7 +42,7 @@
 #### BUG修复
 
 - 修复配置权限时 start-hugegraph.sh 的超时问题（hugegraph #761）
-- 修复在 studio 执行 gremlin 时的 MySQL 链接失败问题（hugegraph #765）
+- 修复在 studio 执行 gremlin 时的 MySQL 连接失败问题（hugegraph #765）
 - 修复 HBase 后端 truncate 时出现的 TableNotFoundException（hugegraph #771）
 - 修复限速配置未检查，必须为正数（hugegraph #773）
 - 修复唯一索引（Unique Index）的返回的异常信息不准确问题（hugegraph #797）
@@ -87,7 +87,7 @@
 - 编码字符类型索引中的类型 ID（hugegraph #894）
 - 安全模块允许 Cassandra 在执行 CQL 时按需创建线程（hugegraph #896）
 - 将 GremlinServer 的默认通道设置为 WsAndHttpChannelizer（hugegraph #903）
-- 将 Direction 和 遍历算法的类导出到 Gremlin 环境（hugegraph #904）
+- 将 Direction 和遍历算法的类导出到 Gremlin 环境（hugegraph #904）
 - 增加顶点属性缓存限制（hugegraph #941，hugegraph #942）
 - 优化列表属性的读（hugegraph #943）
 - 增加缓存的 L1 和 L2 配置（hugegraph #945）
