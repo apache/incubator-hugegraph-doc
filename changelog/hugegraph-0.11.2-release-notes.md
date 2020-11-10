@@ -5,13 +5,13 @@
 #### 功能更新
 
 - 支持梭形相似度算法（hugegraph #671，hugegraph-client #62）
-- 支持创建 schema 时，记录创建的时间（hugegraph #746，hugegraph-client #69）
+- 支持创建 Schema 时，记录创建的时间（hugegraph #746，hugegraph-client #69）
 - 支持 RESTful API 中基于属性的范围查询顶点/边（hugegraph #782，hugegraph-client #73）
 - 支持顶点和边的 TTL （hugegraph #794，hugegraph-client #83）
-- 统一 RESTful API server 和 Gremlin Server 的日期格式为字符串（hugegraph #1014，hugegraph-client #82）
+- 统一 RESTful API Server 和 Gremlin Server 的日期格式为字符串（hugegraph #1014，hugegraph-client #82）
 - 支持共同邻居，Jaccard 相似度，全部最短路径，带权最短路径和单源最短路径5种遍历算法（hugegraph #936，hugegraph-client #80）
-- 支持用户和细粒度权限控制（hugegraph #749，hugegraph #985，hugegraph-client #81）
-- 支持遍历顶点计数功能（hugegraph #995，hugegraph-client #84）
+- 支持用户认证和细粒度权限控制（hugegraph #749，hugegraph #985，hugegraph-client #81）
+- 支持遍历 API 的顶点计数功能（hugegraph #995，hugegraph-client #84）
 - 支持 HTTPS 协议（hugegrap #1036，hugegraph-client #85）
 - 支持创建索引时控制是否重建索引（hugegraph #1106，hugegraph-client #91）
 - 支持定制的 kout/kneighbor，多点最短路径，最相似 Jaccard 点和模板路径5种遍历算法（hugegraph #1174，hugegraph-client #100，hugegraph-client #106）
