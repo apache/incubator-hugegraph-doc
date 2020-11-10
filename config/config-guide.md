@@ -18,16 +18,14 @@ HugeGraphServer 内部集成了 GremlinServer 和 RestServer，而 gremlin-serve
 gremlin-server.yaml 文件默认的内容如下：
 
 ```yaml
-# host and port of gremlin server
+# host and port of gremlin server, need to be consistent with host and port in rest-server.properties
 #host: 127.0.0.1
 #port: 8182
 
 # timeout in ms of gremlin query
 scriptEvaluationTimeout: 30000
 
-# If you want to start gremlin-server for gremlin-console(web-socket),
-# please change `HttpChannelizer` to `WebSocketChannelizer` or comment this line.
-channelizer: org.apache.tinkerpop.gremlin.server.channel.HttpChannelizer
+channelizer: org.apache.tinkerpop.gremlin.server.channel.WsAndHttpChannelizer
 graphs: {
   hugegraph: conf/hugegraph.properties
 }
@@ -39,8 +37,21 @@ scriptEngines: {
       org.apache.tinkerpop.gremlin.jsr223.ImportGremlinPlugin: {
         classImports: [
           java.lang.Math,
-          com.baidu.hugegraph.util.DateUtil,
-          com.baidu.hugegraph.traversal.optimize.Text
+          com.baidu.hugegraph.backend.id.IdGenerator,
+          com.baidu.hugegraph.type.define.Directions,
+          com.baidu.hugegraph.type.define.NodeRole,
+          com.baidu.hugegraph.traversal.algorithm.CustomizePathsTraverser,
+          com.baidu.hugegraph.traversal.algorithm.CustomizedCrosspointsTraverser,
+          com.baidu.hugegraph.traversal.algorithm.FusiformSimilarityTraverser,
+          com.baidu.hugegraph.traversal.algorithm.HugeTraverser,
+          com.baidu.hugegraph.traversal.algorithm.NeighborRankTraverser,
+          com.baidu.hugegraph.traversal.algorithm.PathsTraverser,
+          com.baidu.hugegraph.traversal.algorithm.PersonalRankTraverser,
+          com.baidu.hugegraph.traversal.algorithm.ShortestPathTraverser,
+          com.baidu.hugegraph.traversal.algorithm.SubGraphTraverser,
+          com.baidu.hugegraph.traversal.optimize.Text,
+          com.baidu.hugegraph.traversal.optimize.TraversalUtil,
+          com.baidu.hugegraph.util.DateUtil
         ],
         methodImports: [java.lang.Math#*]
       },
@@ -51,12 +62,6 @@ scriptEngines: {
   }
 }
 serializers:
-  - { className: org.apache.tinkerpop.gremlin.driver.ser.GryoLiteMessageSerializerV1d0,
-      config: {
-        serializeResultToString: false,
-        ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
-      }
-  }
   - { className: org.apache.tinkerpop.gremlin.driver.ser.GraphBinaryMessageSerializerV1,
       config: {
         serializeResultToString: false,
@@ -83,7 +88,7 @@ serializers:
   }
 metrics: {
   consoleReporter: {enabled: false, interval: 180000},
-  csvReporter: {enabled: true, interval: 180000, fileName: /tmp/gremlin-server-metrics.csv},
+  csvReporter: {enabled: false, interval: 180000, fileName: ./metrics/gremlin-server-metrics.csv},
   jmxReporter: {enabled: false},
   slf4jReporter: {enabled: false, interval: 180000},
   gangliaReporter: {enabled: false, interval: 180000, addressingMode: MULTICAST},
@@ -121,11 +126,21 @@ ssl: {
 rest-server.properties 文件的默认内容如下：
 
 ```properties
+# bind url
 restserver.url=http://127.0.0.1:8080
+# gremlin server url, need to be consistent with host and port in gremlin-server.yaml
+#gremlinserver.url=http://127.0.0.1:8182
+
+# graphs list with pair NAME:CONF_PATH
 graphs=[hugegraph:conf/hugegraph.properties]
 
-max_vertices_per_batch=500
-max_edges_per_batch=500
+# authentication
+#auth.authenticator=
+#auth.admin_token=
+#auth.user_tokens=[]
+
+server.id=server-1
+server.role=master
 ```
 
 - restserver.url：RestServer 提供服务的 url，根据实际环境修改；
@@ -144,26 +159,50 @@ hugegraph.properties 是一类文件，因为如果系统存在多个图，则�
 gremlin.graph=com.baidu.hugegraph.HugeFactory
 
 # cache config
-#schema.cache_capacity=1048576
-#graph.cache_capacity=10485760
-#graph.cache_expire=600
+#schema.cache_capacity=100000
+# vertex-cache default is 1000w, 10min expired
+#vertex.cache_capacity=10000000
+#vertex.cache_expire=600
+# edge-cache default is 100w, 10min expired
+#edge.cache_capacity=1000000
+#edge.cache_expire=600
+
 
 # schema illegal name template
 #schema.illegal_name_regex=\s+|~.*
 
 #vertex.default_label=vertex
 
-backend=cassandra
-serializer=cassandra
+backend=rocksdb
+serializer=binary
 
 store=hugegraph
-#store.schema=huge_schema
-#store.graph=huge_graph
-#store.index=huge_index
+
+raft.mode=false
+raft.safe_read=false
+raft.use_snapshot=false
+raft.endpoint=127.0.0.1:8281
+raft.group_peers=127.0.0.1:8281,127.0.0.1:8282,127.0.0.1:8283
+raft.path=./raft-log
+raft.use_replicator_pipeline=true
+raft.election_timeout=10000
+raft.snapshot_interval=3600
+raft.backend_threads=48
+raft.read_index_threads=8
+raft.queue_size=16384
+raft.queue_publish_timeout=60
+raft.apply_batch=1
+raft.rpc_threads=80
+raft.rpc_connect_timeout=5000
+raft.rpc_timeout=60000
+
+search.text_analyzer=jieba
+search.text_analyzer_mode=INDEX
 
 # rocksdb backend config
-rocksdb.data_path=.
-rocksdb.wal_path=.
+#rocksdb.data_path=/path/to/disk
+#rocksdb.wal_path=/path/to/disk
+
 
 # cassandra backend config
 cassandra.host=localhost
@@ -172,12 +211,35 @@ cassandra.username=
 cassandra.password=
 #cassandra.connect_timeout=5
 #cassandra.read_timeout=20
-
 #cassandra.keyspace.strategy=SimpleStrategy
 #cassandra.keyspace.replication=3
 
-# hugespark
-admin.token=162f7848-0b6d-4faf-b557-3a0797869c55
+# hbase backend config
+#hbase.hosts=localhost
+#hbase.port=2181
+#hbase.znode_parent=/hbase
+#hbase.threads_max=64
+
+# mysql backend config
+#jdbc.driver=com.mysql.jdbc.Driver
+#jdbc.url=jdbc:mysql://127.0.0.1:3306
+#jdbc.username=root
+#jdbc.password=
+#jdbc.reconnect_max_times=3
+#jdbc.reconnect_interval=3
+#jdbc.sslmode=false
+
+# postgresql & cockroachdb backend config
+#jdbc.driver=org.postgresql.Driver
+#jdbc.url=jdbc:postgresql://localhost:5432/
+#jdbc.username=postgres
+#jdbc.password=
+
+# palo backend config
+#palo.host=127.0.0.1
+#palo.poll_interval=10
+#palo.temp_dir=./palo-data
+#palo.file_limit_size=32
 ```
 
 重点关注未注释的几项：
