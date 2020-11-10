@@ -25,7 +25,7 @@ server                                                                          
 [0.5.6](https://hugegraph.github.io/hugegraph-downloads/hugegraph-release-0.5.6-SNAPSHOT.tar.gz) | [1.5.0](https://mvnrepository.com/artifact/com.baidu.hugegraph/hugegraph-client/1.5.0)  | [0.5.6](https://hugegraph.github.io/hugegraph-downloads/hugegraph-loader/hugegraph-loader-0.5.6-bin.tar.gz)     | [0.5.0](https://hugegraph.github.io/hugegraph-downloads/hugegraph-studio/hugestudio-release-0.5.0-SNAPSHOT.tar.gz) |       | 1.4.0  |
 [0.4.5](https://hugegraph.github.io/hugegraph-downloads/hugegraph-release-0.4.5-SNAPSHOT.tar.gz) | [1.4.7](https://mvnrepository.com/artifact/com.baidu.hugegraph/hugegraph-client/1.4.7)  | [0.2.2](https://hugegraph.github.io/hugegraph-downloads/hugegraph-loader/hugegraph-loader-0.2.2-bin.tar.gz)     | [0.4.1](https://hugegraph.github.io/hugegraph-downloads/hugegraph-studio/hugestudio-release-0.4.1-SNAPSHOT.tar.gz) |       | 1.3.12 |
 
-> 说明：最新的图分析和展示平台为 hubble，server 0.10.x 以及之前的版本，图分析和展示平台为 studio。
+> 说明：最新的图分析和展示平台为 hubble，studio 虽然然进行了适配，但功能从 0.10 起不再更新，，server 0.10.x 以及之前的版本，图分析和展示平台为 studio。
 
 ### Release Notes
 
