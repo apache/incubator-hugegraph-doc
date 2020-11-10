@@ -100,7 +100,7 @@
 - 查询顶点和边后按需关闭事务（hugegraph #1039）
 - 当图关闭时清空缓存（hugegraph #1078）
 - 关闭图时加锁避免竞争问题（hugegraph #1104）
-- 优化顶点和边的删除效率，当提供Label+ID删除时免去查询（hugegraph #1150）
+- 优化顶点和边的删除效率，当提供 Label+ID 删除时免去查询（hugegraph #1150）
 - 使用 IntObjectMap 优化元数据缓存效率（hugegraph #1185）
 - 使用单个 Raft 节点管理目前的三个 store（hugegraph #1187）
 - 在重建索引时提前释放索引删除的锁（hugegraph #1193）
@@ -127,7 +127,7 @@
 - 支持从 ORC 压缩文件导入数据（hugegraph-loader #113）
 - 支持单条边插入时设置是否检查顶点（hugegraph-loader #117）
 - 支持从 Snappy-raw 压缩文件导入数据（hugegraph-loader #119）
-- 支持导入映射文件2.0版本（hugegraph-loader #121）
+- 支持导入映射文件 2.0 版本（hugegraph-loader #121）
 - 增加一个将 utf8-bom 转换为 utf8 的命令行工具（hugegraph-loader #128）
 - 支持导入任务开始前清理元数据信息的功能（hugegraph-loader #140）
 - 支持 id 列作为属性存储（hugegraph-loader #143）
