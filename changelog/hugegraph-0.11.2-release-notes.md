@@ -114,7 +114,7 @@
 - Jackson 升级到 2.10.2 版本（hugegraph #）
 - Thanks 信息中增加对 Titan 的感谢（hugegraph #906）
 - 适配 TinkerPop 测试（hugegraph #1048）
-- 修改默认日志等级为 TRACE（hugegraph #1050）
+- 修改允许输出的日志最低等级为 TRACE（hugegraph #1050）
 - 增加 IDEA 的格式配置文件（hugegraph #1060）
 - 修复 Travis CI 太多错误信息的问题（hugegraph #1098）
 
