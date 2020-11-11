@@ -63,10 +63,10 @@ schema.cache_capacity            | 10000                           | The max cac
 vertex.cache_type                | l1                              | The type of vertex cache, allowed values are [l1, l2].
 vertex.cache_capacity            | 10000000                        | The max cache size(items) of vertex cache.
 vertex.cache_expire              | 600                             | The expire time in seconds of vertex cache.
-vertex.check_customized_id_exist | false                           | Whether to check the vertices exist for those using customized id strategy
+vertex.check_customized_id_exist | false                           | Whether to check the vertices exist for those using customized id strategy.
 vertex.default_label             | vertex                          | The default vertex label.
 vertex.tx_capacity               | 10000                           | The max size(items) of vertices(uncommitted) in transaction.
-vertex.check_adjacent_vertex_exist | false                         | Whether to check the adjacent vertices of edges exist
+vertex.check_adjacent_vertex_exist | false                         | Whether to check the adjacent vertices of edges exist.
 vertex.lazy_load_adjacent_vertex | true                            | Whether to lazy load adjacent vertices of edges.
 vertex.part_edge_commit_size     | 5000                            | Whether to enable the mode to commit part of edges of vertex, enabled if commit size > 0, 0 means disabled.
 edge.cache_type                  | l1                              | The type of edge cache, allowed values are [l1, l2].
@@ -80,13 +80,21 @@ query.index_intersect_threshold  | 1000                            | The maximum
 query.ramtable_edges_capacity    | 20000000                        | The maximum number of edges in ramtable, include OUT and IN edges.
 query.ramtable_enable            | false                           | Whether to enable ramtable for query of adjacent edges.
 query.ramtable_vertices_capacity | 10000000                        | The maximum number of vertices in ramtable, generally the largest vertex id is used as capacity.
-search.text_analyzer             | ikanalyzer                      | Choose a text analyzer for searching the vertex/edge properties, available type are [word, ansj, hanlp, smartcn, jieba, jcseg, mmseg4j, ikanalyzer]
-search.text_analyzer_mode        | smart                           | Specify the mode for the text analyzer, the available mode of analyzer are {word: [MaximumMatching, ReverseMaximumMatching, MinimumMatching, ReverseMinimumMatching, BidirectionalMaximumMatching, BidirectionalMinimumMatching, BidirectionalMaximumMinimumMatching, FullSegmentation, MinimalWordCount, MaxNgramScore, PureEnglish], ansj: [BaseAnalysis, IndexAnalysis, ToAnalysis, NlpAnalysis], hanlp: [standard, nlp, index, nShort, shortest, speed], smartcn: [], jieba: [SEARCH, INDEX], jcseg: [Simple, Complex], mmseg4j: [Simple, Complex, MaxWord], ikanalyzer: [smart, max_word]}
+oltp.concurrent_depth            | 10                              | The min depth to enable concurrent oltp algorithm.
+oltp.concurrent_threads          | 10                              | Thread number to concurrently execute oltp algorithm.
+rate_limit.read                  | 0                               | The max rate(times/s) to execute query of vertices/edges.
+rate_limit.write                 | 0                               | The max rate(items/s) to add/update/delete vertices/edges.
+task.wait_timeout                | 10                              | Timeout in seconds for waiting for the task to complete,such as when truncating or clearing the backend.
+task.input_size_limit            | 16777216                        | The job input size limit in bytes.
+task.result_size_limit           | 16777216                        | The job result size limit in bytes.
+task.sync_deletion               | false                           | Whether to delete schema or expired data synchronously.
+task.ttl_delete_batch            | 1                               | The batch size used to delete expired data.
+computer.config                  | /conf/computer.yaml             | The config file path of computer job.
+search.text_analyzer             | ikanalyzer                      | Choose a text analyzer for searching the vertex/edge properties, available type are [word, ansj, hanlp, smartcn, jieba, jcseg, mmseg4j, ikanalyzer].
+search.text_analyzer_mode        | smart                           | Specify the mode for the text analyzer, the available mode of analyzer are {word: [MaximumMatching, ReverseMaximumMatching, MinimumMatching, ReverseMinimumMatching, BidirectionalMaximumMatching, BidirectionalMinimumMatching, BidirectionalMaximumMinimumMatching, FullSegmentation, MinimalWordCount, MaxNgramScore, PureEnglish], ansj: [BaseAnalysis, IndexAnalysis, ToAnalysis, NlpAnalysis], hanlp: [standard, nlp, index, nShort, shortest, speed], smartcn: [], jieba: [SEARCH, INDEX], jcseg: [Simple, Complex], mmseg4j: [Simple, Complex, MaxWord], ikanalyzer: [smart, max_word]}.
 snowflake.datecenter_id          | 0                               | The datacenter id of snowflake id generator.
 snowflake.force_string           | false                           | Whether to force the snowflake long id to be a string.
 snowflake.worker_id              | 0                               | The worker id of snowflake id generator.
-oltp.concurrent_depth            | 10                              | The min depth to enable concurrent oltp algorithm.
-oltp.concurrent_threads          | 10                              | Thread number to concurrently execute oltp algorithm.
 raft.mode                        | false                           | Whether the backend storage works in raft mode.
 raft.safe_read                   | false                           | Whether to use linearly consistent read.
 raft.use_snapshot                | false                           | Whether to use snapshot.
@@ -106,21 +114,13 @@ raft.rpc_connect_timeout         | 5000                            | The rpc con
 raft.rpc_timeout                 | 60000                           | The rpc timeout for jraft rpc.
 raft.rpc_buf_low_water_mark      | 10485760                        | The ChannelOutboundBuffer's low water mark of netty, when buffer size less than this size, the method ChannelOutboundBuffer.isWritable() will return true, it means that low downstream pressure or good network.
 raft.rpc_buf_high_water_mark     | 20971520                        | The ChannelOutboundBuffer's high water mark of netty, only when buffer size exceed this size, the method ChannelOutboundBuffer.isWritable() will return false, it means that the downstream pressure is too great to process the request or network is very congestion, upstream needs to limit rate at this time.
-rate_limit.read                  | 0                               | The max rate(times/s) to execute query of vertices/edges.
-rate_limit.write                 | 0                               | The max rate(items/s) to add/update/delete vertices/edges.
-task.wait_timeout                | 10                              | Timeout in seconds for waiting for the task to complete,such as when truncating or clearing the backend.
-task.input_size_limit            | 16777216                        | The job input size limit in bytes.
-task.result_size_limit           | 16777216                        | The job result size limit in bytes.
-task.sync_deletion               | false                           | Whether to delete schema or expired data synchronously.
-task.ttl_delete_batch            | 1                               | The batch size used to delete expired data.
-computer.config                  | /conf/computer.yaml             | The config file path of computer job.
 
 ### Cassandra 后端配置项
 
 config option                  | default value  | descrition
 ------------------------------ | -------------- | ------------------------------------------------------------------
-backend                        |                | Must be set to `cassandra`
-serializer                     |                | Must be set to `cassandra`
+backend                        |                | Must be set to `cassandra`.
+serializer                     |                | Must be set to `cassandra`.
 cassandra.host                 | localhost      | The seeds hostname or ip address of cassandra cluster.
 cassandra.port                 | 9042           | The seeds port address of cassandra cluster.
 cassandra.connect_timeout      | 5              | The cassandra driver connect server timeout(seconds).
@@ -137,8 +137,8 @@ cassandra.aggregation_timeout  | 43200          | The timeout in seconds of wait
 
 config option                  | default value | descrition
 ------------------------------ | ------------- | ------------------------------------------------------------------------------------------------
-backend                        |               | Must be set to `scylladb`
-serializer                     |               | Must be set to `scylladb`
+backend                        |               | Must be set to `scylladb`.
+serializer                     |               | Must be set to `scylladb`.
 
 其它与 Cassandra 后端一致。
 
@@ -146,8 +146,8 @@ serializer                     |               | Must be set to `scylladb`
 
 config option                                   | default value                                                                                                                        | descrition
 ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-backend                                         |                                                                                                                                      | Must be set to `rocksdb`
-serializer                                      |                                                                                                                                      | Must be set to `binary`
+backend                                         |                                                                                                                                      | Must be set to `rocksdb`.
+serializer                                      |                                                                                                                                      | Must be set to `binary`.
 rocksdb.data_disks                              | []                                                                                                                                   | The optimized disks for storing data of RocksDB. The format of each element: `STORE/TABLE: /path/to/disk`.Allowed keys are [graph/vertex, graph/edge_out, graph/edge_in, graph/secondary_index, graph/range_index]
 rocksdb.data_path                               | rocksdb-data                                                                                                                         | The path for storing data of RocksDB.
 rocksdb.wal_path                                | rocksdb-data                                                                                                                         | The path for storing WAL of RocksDB.
@@ -199,8 +199,8 @@ rocksdb.soft_pending_compaction_bytes_limit     | 68719476736                   
 
 config option            | default value               | descrition
 ------------------------ | --------------------------- | -------------------------------------------------------------------------------
-backend                  |                             | Must be set to `hbase`
-serializer               |                             | Must be set to `hbase`
+backend                  |                             | Must be set to `hbase`.
+serializer               |                             | Must be set to `hbase`.
 hbase.hosts              | localhost                   | The hostnames or ip addresses of HBase zookeeper, separated with commas. 
 hbase.port               | 2181                        | The port address of HBase zookeeper.
 hbase.threads_max        | 64                          | The max threads num of hbase connections.
@@ -216,8 +216,8 @@ hbase.krb5_conf          |  etc/krb5.conf              | Kerberos configuration 
 
 config option            | default value               | descrition
 ------------------------ | --------------------------- | -------------------------------------------------------------------------------
-backend                  |                             | Must be set to `mysql`
-serializer               |                             | Must be set to `mysql`
+backend                  |                             | Must be set to `mysql`.
+serializer               |                             | Must be set to `mysql`.
 jdbc.driver              | com.mysql.jdbc.Driver       | The JDBC driver class to connect database.
 jdbc.url                 | jdbc:mysql://127.0.0.1:3306 | The url of database in JDBC format.
 jdbc.username            | root                        | The username to login database.
@@ -231,8 +231,8 @@ jdbc.storage_engine      | InnoDB                      | The storage engine of b
 
 config option            | default value               | descrition
 ------------------------ | --------------------------- | -------------------------------------------------------------------------------
-backend                  |                             | Must be set to `postgresql`
-serializer               |                             | Must be set to `postgresql`
+backend                  |                             | Must be set to `postgresql`.
+serializer               |                             | Must be set to `postgresql`.
 
 其它与 MySQL 后端一致。
 
