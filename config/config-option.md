@@ -24,6 +24,10 @@ server.id                          | server-1                                   
 restserver.url                     | http://127.0.0.1:8080                            | The url for listening of rest server.
 restserver.max_worker_threads      | 2 * CPUs                                         | The maxmium worker threads of rest server.
 restserver.min_free_memory         | 64                                               | The minmium free memory(MB) of rest server, requests will be rejected when the available memory of system is lower than this value.
+server.protocol                    | http                                             | The protocol of rest-server, allowed values are: http or https.
+server.role                        | master                                           | The role of nodes in the cluster, available types are [master, worker, computer]
+ssl.server_keystore_file           | server.keystore                                  | The path of server keystore file used when https protocol is enabled.
+ssl.server_keystore_password       |                                                  | The password of the path of the server keystore file used when the https protocol is enabled.
 restserver.request_timeout         | 30                                               | The time in seconds within which a request must complete, -1 means no timeout.
 restserver.connection_idle_timeout | 30                                               | The time in seconds to keep an inactive connection alive, -1 means no timeout.
 restserver.connection_max_requests | 256                                              | The max number of HTTP requests allowed to be processed on one keep-alive connection, -1 means unlimited.
@@ -39,10 +43,6 @@ auth.admin_token                   | 162f7848-0b6d-4faf-b557-3a0797869c55       
 auth.graph_store                   | hugegraph                                        | The graph name used to store users, only for com.baidu.hugegraph.auth.StandardAuthenticator.
 auth.user_tokens                   | [hugegraph:9fd95c9c-711b-415b-b85f-d4df46ba5c31] | The map of user tokens with name and password, only for com.baidu.hugegraph.auth.ConfigAuthenticator.
 exception.allow_trace              | false                                            | Whether to allow exception trace stack.
-server.protocol                    | http                                             | The protocol of rest-server, allowed values are: http or https.
-server.role                        | master                                           | The role of nodes in the cluster, available types are [master, worker, computer]
-ssl.server_keystore_file           | server.keystore                                  | The path of server keystore file used when https protocol is enabled.
-ssl.server_keystore_password       |                                                  | The password of the path of the server keystore file used when the https protocol is enabled.
 
 ### 基本配置项
 
@@ -72,6 +72,7 @@ vertex.part_edge_commit_size     | 5000                            | Whether to 
 edge.cache_capacity              | 1000000                         | The max cache size(items) of edge cache.
 edge.cache_expire                | 600                             | The expire time in seconds of edge cache.
 edge.tx_capacity                 | 10000                           | The max size(items) of edges(uncommitted) in transaction.
+edge.cache_type                  | l1                              | The type of edge cache, allowed values are [l1, l2].
 query.page_size                  | 500                             | The size of each page when querying by paging.
 query.batch_size                 | 1000                            | The size of each batch when querying by batch.
 query.ignore_invalid_data        | true                            | Whether to ignore invalid data of vertex or edge.
@@ -82,7 +83,6 @@ snowflake.datecenter_id          | 0                               | The datacen
 snowflake.force_string           | false                           | Whether to force the snowflake long id to be a string.
 snowflake.worker_id              | 0                               | The worker id of snowflake id generator.
 task.wait_timeout                | 10                              | Timeout in seconds for waiting for the task to complete,such as when truncating or clearing the backend.
-edge.cache_type                  | l1                              | The type of edge cache, allowed values are [l1, l2].
 computer.config                  | /conf/computer.yaml             | The config file path of computer job.
 expired.delete_batch             | 1                               | The batch size used to delete expired data.
 oltp.concurrent_depth            | 10                              | The min depth to enable concurrent oltp algorithm.
