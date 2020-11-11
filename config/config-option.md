@@ -60,60 +60,60 @@ store.schema                     | m                               | The schema 
 store.system                     | s                               | The system table name, which store system data.
 schema.illegal_name_regex	     | .*\s+$&#124;~.*	               | The regex specified the illegal format for schema name.
 schema.cache_capacity            | 10000                           | The max cache size(items) of schema cache.
+vertex.cache_type                | l1                              | The type of vertex cache, allowed values are [l1, l2].
 vertex.cache_capacity            | 10000000                        | The max cache size(items) of vertex cache.
 vertex.cache_expire              | 600                             | The expire time in seconds of vertex cache.
 vertex.check_customized_id_exist | false                           | Whether to check the vertices exist for those using customized id strategy
 vertex.default_label             | vertex                          | The default vertex label.
 vertex.tx_capacity               | 10000                           | The max size(items) of vertices(uncommitted) in transaction.
-vertex.cache_type                | l1                              | The type of vertex cache, allowed values are [l1, l2].
 vertex.check_adjacent_vertex_exist | false                         | Whether to check the adjacent vertices of edges exist
 vertex.lazy_load_adjacent_vertex | true                            | Whether to lazy load adjacent vertices of edges.
 vertex.part_edge_commit_size     | 5000                            | Whether to enable the mode to commit part of edges of vertex, enabled if commit size > 0, 0 means disabled.
+edge.cache_type                  | l1                              | The type of edge cache, allowed values are [l1, l2].
 edge.cache_capacity              | 1000000                         | The max cache size(items) of edge cache.
 edge.cache_expire                | 600                             | The expire time in seconds of edge cache.
 edge.tx_capacity                 | 10000                           | The max size(items) of edges(uncommitted) in transaction.
-edge.cache_type                  | l1                              | The type of edge cache, allowed values are [l1, l2].
 query.page_size                  | 500                             | The size of each page when querying by paging.
 query.batch_size                 | 1000                            | The size of each batch when querying by batch.
 query.ignore_invalid_data        | true                            | Whether to ignore invalid data of vertex or edge.
 query.index_intersect_threshold  | 1000                            | The maximum number of intermediate results to intersect indexes when querying by multiple single index properties.
+query.ramtable_edges_capacity    | 20000000                        | The maximum number of edges in ramtable, include OUT and IN edges.
+query.ramtable_enable            | false                           | Whether to enable ramtable for query of adjacent edges.
+query.ramtable_vertices_capacity | 10000000                        | The maximum number of vertices in ramtable, generally the largest vertex id is used as capacity.
 search.text_analyzer             | ikanalyzer                      | Choose a text analyzer for searching the vertex/edge properties, available type are [word, ansj, hanlp, smartcn, jieba, jcseg, mmseg4j, ikanalyzer]
 search.text_analyzer_mode        | smart                           | Specify the mode for the text analyzer, the available mode of analyzer are {word: [MaximumMatching, ReverseMaximumMatching, MinimumMatching, ReverseMinimumMatching, BidirectionalMaximumMatching, BidirectionalMinimumMatching, BidirectionalMaximumMinimumMatching, FullSegmentation, MinimalWordCount, MaxNgramScore, PureEnglish], ansj: [BaseAnalysis, IndexAnalysis, ToAnalysis, NlpAnalysis], hanlp: [standard, nlp, index, nShort, shortest, speed], smartcn: [], jieba: [SEARCH, INDEX], jcseg: [Simple, Complex], mmseg4j: [Simple, Complex, MaxWord], ikanalyzer: [smart, max_word]}
 snowflake.datecenter_id          | 0                               | The datacenter id of snowflake id generator.
 snowflake.force_string           | false                           | Whether to force the snowflake long id to be a string.
 snowflake.worker_id              | 0                               | The worker id of snowflake id generator.
-task.wait_timeout                | 10                              | Timeout in seconds for waiting for the task to complete,such as when truncating or clearing the backend.
-computer.config                  | /conf/computer.yaml             | The config file path of computer job.
-expired.delete_batch             | 1                               | The batch size used to delete expired data.
 oltp.concurrent_depth            | 10                              | The min depth to enable concurrent oltp algorithm.
 oltp.concurrent_threads          | 10                              | Thread number to concurrently execute oltp algorithm.
-query.ramtable_edges_capacity    | 20000000                        | The maximum number of edges in ramtable, include OUT and IN edges.
-query.ramtable_enable            | false                           | Whether to enable ramtable for query of adjacent edges.
-query.ramtable_vertices_capacity | 10000000                        | The maximum number of vertices in ramtable, generally the largest vertex id is used as capacity.
-raft.apply_batch                 | 1                               | The apply batch size to trigger disruptor event handler.
-raft.backend_threads             | 48                              | The thread number used to apply task to bakcend.
-raft.election_timeout            | 10000                           | Timeout in milliseconds to launch a round of election.
+raft.mode                        | false                           | Whether the backend storage works in raft mode.
+raft.safe_read                   | false                           | Whether to use linearly consistent read.
+raft.use_snapshot                | false                           | Whether to use snapshot.
 raft.endpoint                    | 127.0.0.1:8281                  | The peerid of current raft node.
 raft.group_peers                 | 127.0.0.1:8281,127.0.0.1:8282,127.0.0.1:8283 | The peers of current raft group.
-raft.mode                        | false                           | Whether the backend storage works in raft mode.
 raft.path                        | ./raft-log                      | The log path of current raft node.
-raft.queue_publish_timeout       | 60                              | The timeout in second when publish event into disruptor.
-raft.queue_size                  | 16384                           | The disruptor buffers size for jraft RaftNode, StateMachine and LogManager.
-raft.read_index_threads          | 8                               | The thread number used to execute reading index.
-raft.rpc_buf_high_water_mark     | 20971520                        | The ChannelOutboundBuffer's high water mark of netty, only when buffer size exceed this size, the method ChannelOutboundBuffer.isWritable() will return false, it means that the downstream pressure is too great to process the request or network is very congestion, upstream needs to limit rate at this time.
-raft.rpc_buf_low_water_mark      | 10485760                        | The ChannelOutboundBuffer's low water mark of netty, when buffer size less than this size, the method ChannelOutboundBuffer.isWritable() will return true, it means that low downstream pressure or good network.
-raft.rpc_connect_timeout         | 5000                            | The rpc connect timeout for jraft rpc.
-raft.rpc_threads                 | 80                              | The rpc threads for jraft RPC layer.
-raft.rpc_timeout                 | 60000                           | The rpc timeout for jraft rpc.
-raft.safe_read                   | false                           | Whether to use linearly consistent read.
-raft.snapshot_interval           | 3600                            | The interval in seconds to trigger snapshot save.
 raft.use_replicator_pipeline     | true                            | Whether to use replicator line, when turned on it multiple logs can be sent in parallel, and the next log doesn't have to wait for the ack message of the current log to be sent.
-raft.use_snapshot                | false                           | Whether to use snapshot.
+raft.election_timeout            | 10000                           | Timeout in milliseconds to launch a round of election.
+raft.snapshot_interval           | 3600                            | The interval in seconds to trigger snapshot save.
+raft.backend_threads             | current CPU vcores              | The thread number used to apply task to bakcend.
+raft.read_index_threads          | 8                               | The thread number used to execute reading index.
+raft.apply_batch                 | 1                               | The apply batch size to trigger disruptor event handler.
+raft.queue_size                  | 16384                           | The disruptor buffers size for jraft RaftNode, StateMachine and LogManager.
+raft.queue_publish_timeout       | 60                              | The timeout in second when publish event into disruptor.
+raft.rpc_threads                 | 80                              | The rpc threads for jraft RPC layer.
+raft.rpc_connect_timeout         | 5000                            | The rpc connect timeout for jraft rpc.
+raft.rpc_timeout                 | 60000                           | The rpc timeout for jraft rpc.
+raft.rpc_buf_low_water_mark      | 10485760                        | The ChannelOutboundBuffer's low water mark of netty, when buffer size less than this size, the method ChannelOutboundBuffer.isWritable() will return true, it means that low downstream pressure or good network.
+raft.rpc_buf_high_water_mark     | 20971520                        | The ChannelOutboundBuffer's high water mark of netty, only when buffer size exceed this size, the method ChannelOutboundBuffer.isWritable() will return false, it means that the downstream pressure is too great to process the request or network is very congestion, upstream needs to limit rate at this time.
 rate_limit.read                  | 0                               | The max rate(times/s) to execute query of vertices/edges.
 rate_limit.write                 | 0                               | The max rate(items/s) to add/update/delete vertices/edges.
+task.wait_timeout                | 10                              | Timeout in seconds for waiting for the task to complete,such as when truncating or clearing the backend.
 task.input_size_limit            | 16777216                        | The job input size limit in bytes.
 task.result_size_limit           | 16777216                        | The job result size limit in bytes.
 task.sync_deletion               | false                           | Whether to delete schema or expired data synchronously.
+task.ttl_delete_batch            | 1                               | The batch size used to delete expired data.
+computer.config                  | /conf/computer.yaml             | The config file path of computer job.
 
 ### Cassandra 后端配置项
 
@@ -131,8 +131,6 @@ cassandra.username             |                | The username to use to login t
 cassandra.password             |                | The password corresponding to cassandra.username.
 cassandra.compression_type     | none           | The compression algorithm of cassandra transport: none/snappy/lz4.
 cassandra.jmx_port=7199        | 7199           | The port of JMX API service for cassandra.
-cassandra.aggregation_timeout  | 43200          | The timeout in seconds of waiting for aggregation.
-
 
 ### ScyllaDB 后端配置项
 
