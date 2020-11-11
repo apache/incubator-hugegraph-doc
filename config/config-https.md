@@ -65,61 +65,11 @@ HugeClient client = builder.build();
 --trust-store-password {password}
 ```
 
-> 注意：服务端没有对客户端证书内容做强制校验
+> 注意：服务端没有对客户端证书内容做强制校验，所以客户端可以自行生成证书文件。
 
-### 如何生成证书文件
+### 客户端如何生成证书文件
 
-本部分只是给出生成证书的简单示例，如果用户已经知晓如何生成，可跳过。若想了解更详细的生成步骤，请自行搜索相关内容。
-
-#### 服务端生成证书文件
-
-```java
-public class KeyStoreCreate {
-        
-    private static final String alias = "hugegraph";
-    private static final String city = "beijing";
-    private static final String commonName = "hugegraph.github.io";
-    private static final String country = "beijing";
-    private static final String filePath = "server.keystore";
-    private static final char[] keyPassword = "123456".toCharArray();
-    private static final int keysize = 1024;
-    private static final String organization = "hugegraph";
-    private static final String organizationalUnit = "IT";
-    private static final String state = "beijing";
-    private static final long validity = 1096;
-
-    public static void main(String[] args) throws GeneralSecurityException {
-        try {
-            KeyStore ks = KeyStore.getInstance("pkcs12");
-            ks.load(null, null);
-
-            CertAndKeyGen keypair = new CertAndKeyGen("RSA", "SHA1WithRSA", null);
-            X500Name x500Name = new X500Name(commonName, organizationalUnit, organization, city, state, country);
-            keypair.generate(keysize);
-
-            PrivateKey privateKey = keypair.getPrivateKey();
-            X509Certificate[] chain = new X509Certificate[1];
-            chain[0] = keypair.getSelfCertificate(x500Name, new Date(), (long) validity * 24 * 60 * 60);
-
-            FileOutputStream fos = new FileOutputStream(filePath);
-            ks.setKeyEntry(alias, privateKey, keyPassword, chain);
-            ks.store(fos, keyPassword);
-            fos.close();
-            System.out.println("create keystore Success");
-        } catch (KeyStoreException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (CertificateException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-}
-```
-
-#### 客户端生成证书文件
+这里只是给出生成证书的简单示例，如果用户已经知晓如何生成，可跳过。若想了解更详细的生成步骤，请自行搜索相关内容。
 
 可以使用 JRE 自带的 keytool 工具生成
 
