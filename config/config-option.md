@@ -68,7 +68,7 @@ vertex.tx_capacity               | 10000                           | The max siz
 vertex.cache_type                | l1                              | The type of vertex cache, allowed values are [l1, l2].
 vertex.check_adjacent_vertex_exist | false                         | Whether to check the adjacent vertices of edges exist
 vertex.lazy_load_adjacent_vertex | true                            | Whether to lazy load adjacent vertices of edges.
-vertex.part_edge_commit_size     | 5000                            | Whether to enable the mode to commit part of edges of vertex, enabled if commit size > 0, 0 meas disabled.
+vertex.part_edge_commit_size     | 5000                            | Whether to enable the mode to commit part of edges of vertex, enabled if commit size > 0, 0 means disabled.
 edge.cache_capacity              | 1000000                         | The max cache size(items) of edge cache.
 edge.cache_expire                | 600                             | The expire time in seconds of edge cache.
 edge.tx_capacity                 | 10000                           | The max size(items) of edges(uncommitted) in transaction.
