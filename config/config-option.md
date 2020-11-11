@@ -21,13 +21,13 @@ config option                      | default value                              
 ---------------------------------- | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------
 graphs                             | [hugegraph:conf/hugegraph.properties]            | The map of graphs' name and config file.
 server.id                          | server-1                                         | The id of rest server, used for license verification.
-restserver.url                     | http://127.0.0.1:8080                            | The url for listening of rest server.
-restserver.max_worker_threads      | 2 * CPUs                                         | The maxmium worker threads of rest server.
-restserver.min_free_memory         | 64                                               | The minmium free memory(MB) of rest server, requests will be rejected when the available memory of system is lower than this value.
 server.protocol                    | http                                             | The protocol of rest-server, allowed values are: http or https.
 server.role                        | master                                           | The role of nodes in the cluster, available types are [master, worker, computer]
 ssl.server_keystore_file           | server.keystore                                  | The path of server keystore file used when https protocol is enabled.
 ssl.server_keystore_password       |                                                  | The password of the path of the server keystore file used when the https protocol is enabled.
+restserver.url                     | http://127.0.0.1:8080                            | The url for listening of rest server.
+restserver.max_worker_threads      | 2 * CPUs                                         | The maxmium worker threads of rest server.
+restserver.min_free_memory         | 64                                               | The minmium free memory(MB) of rest server, requests will be rejected when the available memory of system is lower than this value.
 restserver.request_timeout         | 30                                               | The time in seconds within which a request must complete, -1 means no timeout.
 restserver.connection_idle_timeout | 30                                               | The time in seconds to keep an inactive connection alive, -1 means no timeout.
 restserver.connection_max_requests | 256                                              | The max number of HTTP requests allowed to be processed on one keep-alive connection, -1 means unlimited.
