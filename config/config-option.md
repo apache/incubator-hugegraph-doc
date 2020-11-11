@@ -131,6 +131,7 @@ cassandra.username             |                | The username to use to login t
 cassandra.password             |                | The password corresponding to cassandra.username.
 cassandra.compression_type     | none           | The compression algorithm of cassandra transport: none/snappy/lz4.
 cassandra.jmx_port=7199        | 7199           | The port of JMX API service for cassandra.
+cassandra.aggregation_timeout  | 43200          | The timeout in seconds of waiting for aggregation.
 
 ### ScyllaDB 后端配置项
 
