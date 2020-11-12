@@ -372,11 +372,26 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=elimi
 ##### Params
 
 - label: 顶点类型
-- properties: 属性键值对(根据属性查询的前提是建立了索引)
+- properties: 属性键值对(根据属性查询的前提是预先建立了索引)
 - limit: 查询最大数目
 - page: 页号
 
 以上参数都是可选的，如果提供page参数，必须提供limit参数，不允许带其他参数。`label, properties`和`limit`可以任意组合。
+
+属性键值对由JSON格式的属性名称和属性值组成，允许多个属性键值对作为查询条件，属性值支持精确匹配和范围匹配，精确匹配时形如`properties={"age":29}`，范围匹配时形如`properties={"age":"P.gt(29)"}`,范围匹配支持的表达式如下：
+
+表达式           | 说明
+---------------- | -------
+P.eq(number)     | 属性值等于number的顶点
+P.neq(number)    | 属性值不等于number的顶点
+P.lt(number)     | 属性值小于number的顶点
+P.lte(number)    | 属性值小于等于number的顶点
+P.gt(number)     | 属性值大于number的顶点
+P.gte(number)    | 属性值大于等于number的顶点
+P.between(number1,number2)            | 属性值大于等于number1且小于number2的顶点
+P.inside(number1,number2)             | 属性值大于number1且小于number2的顶点
+P.outside(number1,number2)            | 属性值小于number1且大于number2的顶点
+P.within(value1,value2,value3,...)    | 属性值等于任何一个给定value的顶点
 
 **查询所有 age 为 20 且 label 为 person 的顶点**
 
@@ -631,10 +646,32 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
 
 #### 2.1.8 根据Id删除顶点
 
+##### Params
+
+- label: 顶点类型，可选参数
+
+**仅根据Id删除顶点**
+
 ##### Method & Url
 
 ```
 DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
+```
+
+##### Response Status
+
+```json
+204
+```
+
+**根据Label+Id删除顶点**
+
+通过指定Label参数和Id来删除顶点时，一般来说其性能比仅根据Id删除会更好。
+
+##### Method & Url
+
+```
+DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"?label=person
 ```
 
 ##### Response Status
