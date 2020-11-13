@@ -1,8 +1,34 @@
 ### 9.1 Auth
 
-##### 权限管理：包括UserAPI、AccessAPI、BelongAPI、GroupAPI、TargetAPI
+##### 权限管理：
+包括UserAPI、AccessAPI、BelongAPI、GroupAPI、TargetAPI
+
+##### 总体设计：
+- user belong group，user和group由顶点表示，belong由边表示，user可以belong多个group。  
+- group access graph with action permission，graph使用Target顶点表示，permission作为access边的属性，permission具体包括：对元数据/顶点/边/任务的读/写/删除操作。
+
+##### 举例：
+user(name=boss) -belong-> group(name=all) -access(read)-> target(graph=graph1, resource={label: person,
+city: Beijing})
 
 #### 9.1.1 创建target
+
+##### Params
+
+- target_name: target名称
+- target_graph: target图
+- target_url: target地址
+- target_resources: target资源
+
+
+resource填值：
+
+- type：可选值 VERTEX, EDGE, 可填ALL，则表示可以是顶点或边；
+- label：可选值，⼀个顶点或边类型的名称，可填*，则表示任意类型；
+- properties：map类型，可包含多个属性的键值对，必须匹配所有属性值，属性值⽀持填条件范围（age:
+  P.gte(18)），properties如果为null表示任意属性均可，如果属性名和属性值均为‘*ʼ也表示任意属性均可。
+
+**如精细资源："target_resources": [{"type":"VERTEX","label":"person","properties":{"city":"Beijing","age":"P.gte(20)"}}]**
 
 ##### request body
 
@@ -56,6 +82,11 @@ POST http://localhost:8080/graphs/hugegraph/auth/targets
 
 #### 9.1.2 创建group
 
+##### Params
+
+- group_name: group名称
+- group_description: 描述
+
 ##### request body
 
 ```json
@@ -93,6 +124,21 @@ POST http://localhost:8080/graphs/hugegraph/auth/groups
 
 
 #### 9.1.3 创建access（group到target的连接）
+
+##### Params
+
+- group: group id
+- target: target id
+- access_permission: 权限许可  
+- access_description: access 描述
+
+access_permission：
+
+- READ：读操作，所有的查询，包括查询Schema、查顶点/边，查询顶点和边的数量VERTEX_AGGR/EDGE_AGGR，也包括读图的状态STATUS、变量VAR、任务TASK等；
+- WRITE：写操作，所有的创建、更新操作，包括给Schema增加property key，给顶点增加或更新属性等；
+- DELETE：删除操作，包括删除元数据、删除顶点/边；
+- EXECUTE：执⾏操作，包括执⾏Gremlin语句、执⾏Task、执⾏metadata函数；
+
 
 ##### request body
 
@@ -133,6 +179,15 @@ POST http://localhost:8080/graphs/hugegraph/auth/accesses
 
 #### 9.1.4 创建User
 
+##### Params
+
+- user_name: 用户名称
+- user_password: 用户密码
+- user_phone: 用户手机号
+- user_email: 用户邮箱  
+其中 user_name 和 user_password 为必填
+
+
 ##### request body
 
 ```json
@@ -170,6 +225,12 @@ POST http://localhost:8080/graphs/hugegraph/auth/users
 
 #### 9.1.5 创建User的belong授权
 
+##### Params
+
+- user: 用户id
+- group: 组id
+- belong_description: 描述
+
 ##### request body
 
 ```json
@@ -205,9 +266,6 @@ POST http://localhost:8080/graphs/hugegraph/auth/belongs
 }
 ```
 
-
-注意：
-> 上方9.1.*为创建权限流程，其中target、group、user为基础。access和belong为关联，access关联 target和group。belong是为user 添加 group。
 
 
 #### 9.2.1 删除target
