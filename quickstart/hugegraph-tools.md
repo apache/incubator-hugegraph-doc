@@ -145,7 +145,7 @@ Usage: hugegraph [options] [command] [command options]
     - --format，备份的格式，可选值包括 [json, text]，默认为 json
     - --all-properties，是否备份顶点/边全部的属性，仅在 --format 为 text 是有效，默认 false
     - --label，要备份的顶点/边的类型，仅在 --format 为 text 是有效，只有备份顶点或者边的时候有效
-    - --properties，要备份的顶点/边的属性，仅在 --format 为 text 是有效，只有备份顶点或者边的时候有效
+    - --properties，要备份的顶点/边的属性，逗号分隔，仅在 --format 为 text 是有效，只有备份顶点或者边的时候有效
     - --compress，备份时是否压缩数据，默认为 true
     - --directory 或者 -d，存储 schema 或者 data 的目录，本地目录时，默认为'./{graphName}'，HDFS 时，默认为 '{fs.default.name}/{graphName}'
     - --huge-types 或者 -t，要备份的数据类型，逗号分隔，可选值为 'all' 或者 一个或多个 [vertex,edge,vertex_label,edge_label,property_key,index_label] 的组合，'all' 代表全部6种类型，即顶点、边和所有schema
@@ -160,6 +160,7 @@ Usage: hugegraph [options] [command] [command options]
     - --log 或者 -l，指定日志目录，默认为当前目录
     - --retry，指定失败重试次数，默认为 3
     - -D，用 -Dkey=value 的模式指定动态参数，用来从 HDFS 恢复图时，指定 HDFS 的配置项，例如：-Dfs.default.name=hdfs://localhost:9000
+    > 只有当 --format 为 json 执行 backup 时，才可以使用 restore 命令恢复
 - migrate, 将当前连接的图迁移至另一个 HugeGraphServer 中
     - --target-graph，目标图的名字
     - --target-url，目标图所在的 HugeGraphServer
@@ -184,7 +185,6 @@ Usage: hugegraph [options] [command] [command options]
 `bin/hugegraph dump -f CustomFormatter`
     - --formatter 或者 -f，指定使用的 formatter，默认为 JsonFormatter
     - --directory 或者 -d，存储 schema 或者 data 的目录，默认为当前目录
-    - --huge-types 或者 -t，要备份的数据类型，逗号分隔，可选值为 'all' 或者 一个或多个 [vertex,edge,vertex_label,edge_label,property_key,index_label] 的组合，'all' 代表全部6种类型
     - --log 或者 -l，指定日志目录，默认为当前目录
     - --retry，指定失败重试次数，默认为 3
     - --split-size 或者 -s，指定在备份时对顶点或者边分块的大小，默认为 1048576
