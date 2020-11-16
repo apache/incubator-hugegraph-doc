@@ -63,9 +63,8 @@ Usage: hugegraph [options] [command] [command options]
 - --user，当 HugeGraph-Server 开启认证时，传递用户名
 - --password，当 HugeGraph-Server 开启认证时，传递用户的密码
 - --timeout，连接 HugeGraph-Server 时的超时时间，默认是 30s
-- --protocol，连接 HugeGraph-Server 使用的协议，允许的值 [http, https]，默认为 http
-- --trust-store-file，当 --protocol 是 https 时，HugeGraph-Client 使用的 truststore 文件，默认为空
-- --trust-store-password，当 --protocol 是 https 时，HugeGraph-Client 使用的 truststore 的密码，默认为空
+- --trust-store-file，当 --url 使用 https 时，HugeGraph-Client 使用的 truststore 文件，默认为空
+- --trust-store-password，当 --url 使用 https 时，HugeGraph-Client 使用的 truststore 的密码，默认为空
 
 上述全局变量，也可以通过环境变量来设置。一种方式是在命令行使用 export 设置临时环境变量，在该命令行关闭之前均有效
 
@@ -77,7 +76,6 @@ Usage: hugegraph [options] [command] [command options]
 --user       | HUGEGRAPH_USERNAME    | export HUGEGRAPH_USERNAME=admin
 --password   | HUGEGRAPH_PASSWORD    | export HUGEGRAPH_PASSWORD=test
 --timeout    | HUGEGRAPH_TIMEOUT     | export HUGEGRAPH_TIMEOUT=30
---protocol   | HUGEGRAPH_PROTOCOL    | export HUGEGRAPH_PROTOCOL=http
 --trust-store-file | HUGEGRAPH_TRUST_STORE_FILE | export HUGEGRAPH_TRUST_STORE_FILE=/tmp/trust-store
 --trust-store-password | HUGEGRAPH_TRUST_STORE_PASSWORD | export HUGEGRAPH_TRUST_STORE_PASSWORD=xxxx
 
@@ -92,7 +90,6 @@ Usage: hugegraph [options] [command] [command options]
 #export HUGEGRAPH_USERNAME=
 #export HUGEGRAPH_PASSWORD=
 #export HUGEGRAPH_TIMEOUT=
-#export HUGEGRAPH_PROTOCOL=
 #export HUGEGRAPH_TRUST_STORE_FILE=
 #export HUGEGRAPH_TRUST_STORE_PASSWORD=
 ```
@@ -167,6 +164,8 @@ Usage: hugegraph [options] [command] [command options]
     - --target-username，访问目标图的用户名
     - --target-password，访问目标图的密码
     - --target-timeout，访问目标图的超时时间
+    - --target-trust-store-file，访问目标图使用的 truststore 文件
+    - --target-trust-store-password，访问目标图使用的 truststore 的密码
     - --directory 或者 -d，迁移过程中，存储源图的 schema 或者 data 的目录，本地目录时，默认为'./{graphName}'，HDFS 时，默认为 '{fs.default.name}/{graphName}'
     - --huge-types 或者 -t，要迁移的数据类型，逗号分隔，可选值为 'all' 或者 一个或多个 [vertex,edge,vertex_label,edge_label,property_key,index_label] 的组合，'all' 代表全部6种类型，即顶点、边和所有schema
     - --log 或者 -l，指定日志目录，默认为当前目录
@@ -217,9 +216,6 @@ Usage: hugegraph [options] [command] [command options]
       Default: hugegraph
     --password
       Password of user
-    --protocol
-      The Protocol of HugeGraph-Server, allowed values are: http or https
-      Default: http
     --timeout
       Connection timeout
       Default: 30
@@ -358,7 +354,7 @@ Usage: hugegraph [options] [command] [command options]
             Directory of log
             Default: ./logs
           --properties
-            Vertex or edge properties to backup, only valid when type is
+            Vertex or edge properties to backup, only valid when type is 
             vertex or edge
             Default: []
           --retry
@@ -473,6 +469,12 @@ Usage: hugegraph [options] [command] [command options]
           --target-timeout
             The timeout to connect target graph
             Default: 0
+          --target-trust-store-file
+            The target graph trust store file to migrate
+            Default: <empty string>
+          --target-trust-store-password
+            The target graph trust store password to migrate
+            Default: <empty string>
           --target-url
             The target graph url to migrate
             Default: http://127.0.0.1:8081
