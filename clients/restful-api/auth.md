@@ -1,7 +1,4 @@
-### 9.1 Auth
-
-##### 权限管理：
-包括UserAPI、GroupAPI、TargetAPI、BelongAPI、AccessAPI
+### 9.1 用户认证与权限控制
 
 ##### 用户认证与权限控制概述：
 HugeGraph支持多用户认证、以及细粒度的权限访问控制，采用基于“用户-用户组-操作-资源”的4层设计，灵活控制用户角色与权限。 
@@ -13,10 +10,13 @@ HugeGraph支持多用户认证、以及细粒度的权限访问控制，采用�
 ##### 举例说明：
 user(name=boss) -belong-> group(name=all) -access(read)-> target(graph=graph1, resource={label: person,
 city: Beijing})  
-描述：用户boss拥有用户组all对资源graph1的读权限。
+描述：用户'boss'拥有对'graph1'图中北京人的读权限。
 
-#### 9.2 用户API
-包括：创建用户，删除用户，修改用户，和查询用户相关信息接口
+##### 接口说明：
+用户认证与权限控制接口包括5类：UserAPI、GroupAPI、TargetAPI、BelongAPI、AccessAPI
+
+#### 9.2 用户（User）API
+用户接口包括：创建用户，删除用户，修改用户，和查询用户相关信息接口
 
 #### 9.2.1 创建用户
 
@@ -26,8 +26,8 @@ city: Beijing})
 - user_password: 用户密码
 - user_phone: 用户手机号
 - user_email: 用户邮箱  
-其中 user_name 和 user_password 为必填
 
+其中 user_name 和 user_password 为必填
 
 ##### request body
 
@@ -106,7 +106,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/users/-63:test
 ```
 
 ##### request body
-修改了user_password 和 user_phone
+修改了user_name、user_password和user_phone
 ```json
 {
     "user_name": "test",
@@ -238,9 +238,9 @@ GET http://localhost:8080/graphs/hugegraph/auth/users/-63:boss/role
 }
 ```
 
-#### 9.3 用户组（group）API
+#### 9.3 用户组（Group）API
 用户组会赋予相应的资源权限，用户会被分配不同的用户组，即可拥有不同的资源权限。  
-包括：创建用户组，删除用户组，修改用户组，和查询用户组相关信息接口
+用户组接口包括：创建用户组，删除用户组，修改用户组，和查询用户组相关信息接口
 
 #### 9.3.1 创建用户组
 
@@ -415,8 +415,10 @@ GET http://localhost:8080/graphs/hugegraph/auth/groups/-69:all
 }
 ```
 
-#### 9.4 资源（target）API
-描述：需要用户组操作的资源，包括资源的创建、删除、修改和查询。
+#### 9.4 资源（Target）API
+资源描述了图数据库中的数据，比如符合某一类条件的顶点，每一个资源包括type、label、properties三个要素，共有18种type、
+任意label、任意properties的组合形成的资源，一个资源的内部条件是且关系，多个资源之间的条件是或关系。   
+资源接口包括：资源的创建、删除、修改和查询。
 
 #### 9.4.1 创建资源
 
@@ -661,9 +663,9 @@ GET http://localhost:8080/graphs/hugegraph/auth/targets/-77:grant
 }
 ```
 
-#### 9.5 关联角色（belong）API
+#### 9.5 关联角色（Belong）API
 关联用户和用户组的关系，一个用户可以关联一个或者多个用户组。用户组拥有相关资源的权限，不同用户组的资源权限可以理解为不同的角色。即给用户关联角色。  
-包括：用户关联角色的创建、删除、修改和查询。
+关联角色接口包括：用户关联角色的创建、删除、修改和查询。
 
 #### 9.5.1 创建用户的关联角色
 
@@ -839,9 +841,9 @@ GET http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:all
 }
 ```
 
-#### 9.6 赋权（access）API
+#### 9.6 赋权（Access）API
 给用户组赋予资源的权限，主要包含：读操作(READ)、写操作(WRITE)、删除操作(DELETE)、执行操作(EXECUTE)等  
-包括：赋权的创建、删除、修改和查询
+赋权接口包括：赋权的创建、删除、修改和查询
 
 #### 9.6.1 创建赋权(用户组赋予资源的权限)
 
