@@ -106,7 +106,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/users/-63:test
 ```
 
 ##### request body
-修改了user_name、user_password和user_phone
+修改user_name、user_password和user_phone
 ```json
 {
     "user_name": "test",
@@ -322,7 +322,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
 ```
 
 ##### request body
-修改了group_description
+修改group_description
 ```json
 {
     "group_name": "grant",
@@ -524,7 +524,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
 ```
 
 ##### request body
-修改了type
+修改type
 ```json
 {
     "target_name": "gremlin",
@@ -747,7 +747,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:gran
 ```
 
 ##### request body
-修改了belong_description
+修改belong_description
 ```json
 {
     "belong_description": "update test"
@@ -934,7 +934,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>12>S-77:al
 ```
 
 ##### request body
-修改了access_description
+修改access_description
 ```json
 {
     "group": "-69:all",
