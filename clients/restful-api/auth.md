@@ -1,183 +1,24 @@
 ### 9.1 Auth
 
 ##### 权限管理：
-包括UserAPI、AccessAPI、BelongAPI、GroupAPI、TargetAPI
+包括UserAPI、GroupAPI、TargetAPI、BelongAPI、AccessAPI
 
-##### 总体设计：
-- user belong group，user和group由顶点表示，belong由边表示，user可以belong多个group。  
-- group access graph with action permission，graph使用Target顶点表示，permission作为access边的属性，permission具体包括：对元数据/顶点/边/任务的读/写/删除操作。
+##### 用户认证与权限控制概述：
+HugeGraph支持多用户认证、以及细粒度的权限访问控制，采用基于“用户-用户组-操作-资源”的4层设计，灵活控制用户角色与权限。 
+资源描述了图数据库中的数据，比如符合某一类条件的顶点，每一个资源包括type、label、properties三个要素，共有18种type、
+任意label、任意properties的组合形成的资源，一个资源的内部条件是且关系，多个资源之间的条件是或关系。用户可以属于一个或多个用户组，
+每个用户组可以拥有对任意个资源的操作权限，操作类型包括：读、写、删除、执行等种类。 HugeGraph支持动态创建用户、用户组、资源，
+支持动态分配或取消权限。初始化数据库时超级管理员用户被创建，后续可通过超级管理员创建各类角色用户，新创建的用户如果被分配足够权限后，可以由其创建或管理更多的用户。
 
-##### 举例：
+##### 举例说明：
 user(name=boss) -belong-> group(name=all) -access(read)-> target(graph=graph1, resource={label: person,
-city: Beijing})
+city: Beijing})  
+描述：用户boss拥有用户组all对资源graph1的读权限。
 
-#### 9.1.1 创建target
+#### 9.1.1 用户API
+包括：创建用户，删除用户，修改用户，和查询用户相关信息接口
 
-##### Params
-
-- target_name: target名称
-- target_graph: target图
-- target_url: target地址
-- target_resources: target资源
-
-
-resource填值：
-
-- type：可选值 VERTEX, EDGE, 可填ALL，则表示可以是顶点或边；
-- label：可选值，⼀个顶点或边类型的名称，可填*，则表示任意类型；
-- properties：map类型，可包含多个属性的键值对，必须匹配所有属性值，属性值⽀持填条件范围（age:
-  P.gte(18)），properties如果为null表示任意属性均可，如果属性名和属性值均为‘*ʼ也表示任意属性均可。
-
-**如精细资源："target_resources": [{"type":"VERTEX","label":"person","properties":{"city":"Beijing","age":"P.gte(20)"}}]**
-
-##### request body
-
-```json
-{
-    "target_name": "all",
-    "target_graph": "hugegraph",
-    "target_url": "127.0.0.1:8080",
-    "target_resources": [
-        {
-            "type": "ALL"
-        }
-    ]
-}
-```
-
-
-##### Method & Url
-
-```
-POST http://localhost:8080/graphs/hugegraph/auth/targets
-```
-
-##### Response Status
-
-```json
-201 
-```
-
-##### Response Body
-
-```json
-{
-    "target_creator": "admin",
-    "target_name": "all",
-    "target_url": "127.0.0.1:8080",
-    "target_graph": "hugegraph",
-    "target_create": "2020-11-11 15:32:01.192",
-    "target_resources": [
-        {
-            "type": "ALL",
-            "label": "*",
-            "properties": null
-        }
-    ],
-    "id": "-77:all",
-    "target_update": "2020-11-11 15:32:01.192"
-}
-```
-
-
-#### 9.1.2 创建group
-
-##### Params
-
-- group_name: group名称
-- group_description: 描述
-
-##### request body
-
-```json
-{
-    "group_name": "all",
-    "group_description": "group can do anything"
-}
-```
-
-
-##### Method & Url
-
-```
-POST http://localhost:8080/graphs/hugegraph/auth/groups
-```
-
-##### Response Status
-
-```json
-201 
-```
-
-##### Response Body
-
-```json
-{
-    "group_creator": "admin",
-    "group_name": "all",
-    "group_create": "2020-11-11 15:46:08.791",
-    "group_update": "2020-11-11 15:46:08.791",
-    "id": "-69:all",
-    "group_description": "group can do anything"
-}
-```
-
-
-#### 9.1.3 创建access（group到target的连接）
-
-##### Params
-
-- group: group id
-- target: target id
-- access_permission: 权限许可  
-- access_description: access 描述
-
-access_permission：
-
-- READ：读操作，所有的查询，包括查询Schema、查顶点/边，查询顶点和边的数量VERTEX_AGGR/EDGE_AGGR，也包括读图的状态STATUS、变量VAR、任务TASK等；
-- WRITE：写操作，所有的创建、更新操作，包括给Schema增加property key，给顶点增加或更新属性等；
-- DELETE：删除操作，包括删除元数据、删除顶点/边；
-- EXECUTE：执⾏操作，包括执⾏Gremlin语句、执⾏Task、执⾏metadata函数；
-
-
-##### request body
-
-```json
-{
-    "group": "-69:all",
-    "target": "-77:all",
-    "access_permission": "READ"
-}
-```
-
-
-##### Method & Url
-
-```
-POST http://localhost:8080/graphs/hugegraph/auth/accesses
-```
-
-##### Response Status
-
-```json
-201 
-```
-
-##### Response Body
-
-```json
-{
-    "access_permission": "READ",
-    "access_create": "2020-11-11 15:54:54.008",
-    "id": "S-69:all>-88>11>S-77:all",
-    "access_update": "2020-11-11 15:54:54.008",
-    "access_creator": "admin",
-    "group": "-69:all",
-    "target": "-77:all"
-}
-```
-
-#### 9.1.4 创建User
+#### 9.1.2 创建用户
 
 ##### Params
 
@@ -223,131 +64,11 @@ POST http://localhost:8080/graphs/hugegraph/auth/users
 }
 ```
 
-#### 9.1.5 创建User的belong授权
+#### 9.1.3 删除用户
 
 ##### Params
 
-- user: 用户id
-- group: 组id
-- belong_description: 描述
-
-##### request body
-
-```json
-{
-    "user": "-63:boss",
-    "group": "-69:all"
-}
-```
-
-
-##### Method & Url
-
-```
-POST http://localhost:8080/graphs/hugegraph/auth/belongs
-```
-
-##### Response Status
-
-```json
-201 
-```
-
-##### Response Body
-
-```json
-{
-    "belong_create": "2020-11-11 16:19:35.422",
-    "belong_creator": "admin",
-    "belong_update": "2020-11-11 16:19:35.422",
-    "id": "S-63:boss>-82>>S-69:all",
-    "user": "-63:boss",
-    "group": "-69:all"
-}
-```
-
-
-
-#### 9.2.1 删除target
-
-##### Params
-
-- id:需要删除的target id
-
-
-##### Method & Url
-
-```
-DELETE http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
-```
-
-##### Response Status
-
-```json
-204
-```
-
-##### Response Body
-
-```json
-1
-```
-
-#### 9.2.2 删除group
-
-##### Params
-
-- id:需要删除的group id
-
-
-##### Method & Url
-
-```
-DELETE http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
-```
-
-##### Response Status
-
-```json
-204
-```
-
-##### Response Body
-
-```json
-1
-```
-
-#### 9.2.3 删除accesses
-
-##### Params
-
-- id:需要删除的accesses id
-
-
-##### Method & Url
-
-```
-DELETE http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>12>S-77:all
-```
-
-##### Response Status
-
-```json
-204
-```
-
-##### Response Body
-
-```json
-1
-```
-
-#### 9.2.4 删除user
-
-##### Params
-
-- id:需要删除的user id
+- id:需要删除的用户 Id
 
 
 ##### Method & Url
@@ -368,18 +89,208 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/users/-63:test
 1
 ```
 
-
-#### 9.2.5 删除belongs
+#### 9.1.4 修改用户
 
 ##### Params
 
-- id:需要删除的belongs id
+- id:需要修改的用户 Id
+
+##### Method & Url
+
+```
+PUT http://localhost:8080/graphs/hugegraph/auth/users/-63:test
+```
+
+##### request body
+修改了user_password 和 user_phone
+```json
+{
+    "user_name": "test",
+    "user_password": "pw",
+    "user_phone": "123456"
+}
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+返回结果会将修改过的全部内容都返回
+```json
+{
+    "user_password": "$2a$04$Homdfl6Ib2g7AtCE8SuZ5uerdIfePtiLJzO30dyF/peUH.HSXq8w2",
+    "user_update": "2020-11-12 10:29:30.455",
+    "user_name": "test",
+    "user_creator": "admin",
+    "user_phone": "123456",
+    "id": "-63:test",
+    "user_create": "2020-11-12 10:27:13.601"
+}
+```
+
+#### 9.1.5 查询用户列表
+
+##### Params
+
+- limit:返回结果条数的上限
 
 
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:grant
+GET http://localhost:8080/graphs/hugegraph/auth/users
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "users": [
+        {
+            "user_password": "$2a$04$1tl1IKTncjcmMojLdt2qO.EAJ1w0TGunAZ5IJXWwBgPLvTPk366Ly",
+            "user_update": "2020-11-11 11:41:12.254",
+            "user_name": "admin",
+            "user_creator": "system",
+            "id": "-63:admin",
+            "user_create": "2020-11-11 11:41:12.254"
+        }
+    ]
+}
+```
+
+#### 9.1.6 查询某个用户
+
+##### Params
+
+- id: 需要查询的用户 Id
+
+##### Method & Url
+
+```
+GET http://localhost:8080/graphs/hugegraph/auth/users/-63:admin
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "users": [
+        {
+            "user_password": "$2a$04$1tl1IKTncjcmMojLdt2qO.EAJ1w0TGunAZ5IJXWwBgPLvTPk366Ly",
+            "user_update": "2020-11-11 11:41:12.254",
+            "user_name": "admin",
+            "user_creator": "system",
+            "id": "-63:admin",
+            "user_create": "2020-11-11 11:41:12.254"
+        }
+    ]
+}
+```
+
+#### 9.1.7 查询某个用户的角色
+
+##### Method & Url
+
+```
+GET http://localhost:8080/graphs/hugegraph/auth/users/-63:boss/role
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "roles": {
+        "hugegraph": {
+            "READ": [
+                {
+                    "type": "ALL",
+                    "label": "*",
+                    "properties": null
+                }
+            ]
+        }
+    }
+}
+```
+
+#### 9.2.1 用户组(group)API
+用户组会赋予相应的资源权限，用户会被分配不同的用户组，即可拥有不同的资源权限。  
+包括：创建用户组，删除用户组，修改用户组，和查询用户组相关信息接口
+
+#### 9.2.2 创建用户组
+
+##### Params
+
+- group_name: 用户组名称
+- group_description: 用户组描述
+
+##### request body
+
+```json
+{
+    "group_name": "all",
+    "group_description": "group can do anything"
+}
+```
+
+
+##### Method & Url
+
+```
+POST http://localhost:8080/graphs/hugegraph/auth/groups
+```
+
+##### Response Status
+
+```json
+201 
+```
+
+##### Response Body
+
+```json
+{
+    "group_creator": "admin",
+    "group_name": "all",
+    "group_create": "2020-11-11 15:46:08.791",
+    "group_update": "2020-11-11 15:46:08.791",
+    "id": "-69:all",
+    "group_description": "group can do anything"
+}
+```
+
+#### 9.2.3 删除用户组
+
+##### Params
+
+- id:需要删除的用户组 Id
+
+
+##### Method & Url
+
+```
+DELETE http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
 ```
 
 ##### Response Status
@@ -394,13 +305,210 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:g
 1
 ```
 
-
-
-#### 9.3.1 修改target
+#### 9.2.4 修改用户组
 
 ##### Params
 
-- id:需要修改的target id
+- id:需要修改的用户组 Id
+
+##### Method & Url
+
+```
+PUT http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
+```
+
+##### request body
+修改了group_description
+```json
+{
+    "group_name": "grant",
+    "group_description": "grant"
+}
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+返回结果会将修改过的全部内容都返回
+```json
+{
+    "group_creator": "admin",
+    "group_name": "grant",
+    "group_create": "2020-11-12 09:50:58.458",
+    "group_update": "2020-11-12 09:57:59.155",
+    "id": "-69:grant",
+    "group_description": "grant"
+}
+```
+
+#### 9.2.5 查询用户组列表
+
+##### Params
+
+- limit:返回结果条数的上限
+
+##### Method & Url
+
+```
+GET http://localhost:8080/graphs/hugegraph/auth/groups
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "groups": [
+        {
+            "group_creator": "admin",
+            "group_name": "all",
+            "group_create": "2020-11-11 15:46:08.791",
+            "group_update": "2020-11-11 15:46:08.791",
+            "id": "-69:all",
+            "group_description": "group can do anything"
+        }
+    ]
+}
+```
+
+#### 9.2.6 查询某个用户组
+
+##### Params
+
+- id: 需要查询的用户组 Id
+
+##### Method & Url
+
+```
+GET http://localhost:8080/graphs/hugegraph/auth/groups/-69:all
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "group_creator": "admin",
+    "group_name": "all",
+    "group_create": "2020-11-11 15:46:08.791",
+    "group_update": "2020-11-11 15:46:08.791",
+    "id": "-69:all",
+    "group_description": "group can do anything"
+}
+```
+
+#### 9.3.1 资源(target)API
+描述：需要用户组操作的资源，包括资源的创建、删除、修改和查询。
+
+#### 9.3.2 创建资源
+
+##### Params
+- target_name: 资源名称
+- target_graph: 资源图
+- target_url: 资源地址
+- target_resources: 资源配置(列表)
+
+target_resources资源配置列表：
+- type：可选值 VERTEX, EDGE等, 可填ALL，则表示可以是顶点或边；
+- label：可选值，⼀个顶点或边类型的名称，可填*，则表示任意类型；
+- properties：map类型，可包含多个属性的键值对，必须匹配所有属性值，属性值⽀持填条件范围（age:
+  P.gte(18)），properties如果为null表示任意属性均可，如果属性名和属性值均为‘*ʼ也表示任意属性均可。
+
+**如精细资源："target_resources": [{"type":"VERTEX","label":"person","properties":{"city":"Beijing","age":"P.gte(20)"}}]**  
+资源配置：'person'的顶点，且城市属性是'Beijing'，年龄属性大于等于20。
+
+##### request body
+
+```json
+{
+    "target_name": "all",
+    "target_graph": "hugegraph",
+    "target_url": "127.0.0.1:8080",
+    "target_resources": [
+        {
+            "type": "ALL"
+        }
+    ]
+}
+```
+
+##### Method & Url
+
+```
+POST http://localhost:8080/graphs/hugegraph/auth/targets
+```
+
+##### Response Status
+
+```json
+201 
+```
+
+##### Response Body
+
+```json
+{
+    "target_creator": "admin",
+    "target_name": "all",
+    "target_url": "127.0.0.1:8080",
+    "target_graph": "hugegraph",
+    "target_create": "2020-11-11 15:32:01.192",
+    "target_resources": [
+        {
+            "type": "ALL",
+            "label": "*",
+            "properties": null
+        }
+    ],
+    "id": "-77:all",
+    "target_update": "2020-11-11 15:32:01.192"
+}
+```
+
+#### 9.3.3 删除资源
+
+##### Params
+
+- id:需要删除的资源 Id
+
+
+##### Method & Url
+
+```
+DELETE http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
+```
+
+##### Response Status
+
+```json
+204
+```
+
+##### Response Body
+
+```json
+1
+```
+
+#### 9.3.4 修改资源
+
+##### Params
+
+- id:需要修改的资源 Id
 
 
 ##### Method & Url
@@ -451,177 +559,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
 }
 ```
 
-#### 9.3.2 修改group
-
-##### Params
-
-- id:需要修改的group id
-
-##### Method & Url
-
-```
-PUT http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
-```
-
-##### request body
-修改了group_description
-```json
-{
-    "group_name": "grant",
-    "group_description": "grant"
-}
-```
-
-##### Response Status
-
-```json
-200
-```
-
-##### Response Body
-返回结果会将修改过的全部内容都返回
-```json
-{
-    "group_creator": "admin",
-    "group_name": "grant",
-    "group_create": "2020-11-12 09:50:58.458",
-    "group_update": "2020-11-12 09:57:59.155",
-    "id": "-69:grant",
-    "group_description": "grant"
-}
-```
-
-
-#### 9.3.3 修改accesses
-
-##### Params
-
-- id:需要修改的accesses id
-
-##### Method & Url
-
-```
-PUT http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>12>S-77:all
-```
-
-##### request body
-修改了access_description
-```json
-{
-    "group": "-69:all",
-    "target": "-77:all",
-    "access_permission": "WRITE",
-    "access_description": "test"
-}
-```
-
-##### Response Status
-
-```json
-200
-```
-
-##### Response Body
-返回结果会将修改过的全部内容都返回
-```json
-{
-    "access_description": "test",
-    "access_permission": "WRITE",
-    "access_create": "2020-11-12 10:12:03.074",
-    "id": "S-69:all>-88>12>S-77:all",
-    "access_update": "2020-11-12 10:16:19.637",
-    "access_creator": "admin",
-    "group": "-69:all",
-    "target": "-77:all"
-}
-```
-
-#### 9.3.4 修改user
-
-##### Params
-
-- id:需要修改的user id
-
-##### Method & Url
-
-```
-PUT http://localhost:8080/graphs/hugegraph/auth/users/-63:test
-```
-
-##### request body
-修改了user_password 和 user_phone
-```json
-{
-    "user_name": "test",
-    "user_password": "pw",
-    "user_phone": "123456"
-}
-```
-
-##### Response Status
-
-```json
-200
-```
-
-##### Response Body
-返回结果会将修改过的全部内容都返回
-```json
-{
-    "user_password": "$2a$04$Homdfl6Ib2g7AtCE8SuZ5uerdIfePtiLJzO30dyF/peUH.HSXq8w2",
-    "user_update": "2020-11-12 10:29:30.455",
-    "user_name": "test",
-    "user_creator": "admin",
-    "user_phone": "123456",
-    "id": "-63:test",
-    "user_create": "2020-11-12 10:27:13.601"
-}
-```
-
-
-#### 9.3.5 修改Belongs
-
-##### Params
-
-- id:需要修改的Belongs id
-
-##### Method & Url
-
-```
-PUT http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:grant
-```
-
-##### request body
-修改了belong_description
-```json
-{
-    "belong_description": "update test"
-}
-```
-
-##### Response Status
-
-```json
-200
-```
-
-##### Response Body
-返回结果会将修改过的全部内容都返回
-```json
-{
-    "belong_description": "update test",
-    "belong_create": "2020-11-12 10:40:21.720",
-    "belong_creator": "admin",
-    "belong_update": "2020-11-12 10:42:47.265",
-    "id": "S-63:boss>-82>>S-69:grant",
-    "user": "-63:boss",
-    "group": "-69:grant"
-}
-```
-
-
-
-#### 9.4.1 查询target list
+#### 9.3.5 查询资源列表
 
 ##### Params
 
@@ -680,11 +618,11 @@ GET http://localhost:8080/graphs/hugegraph/auth/targets
 }
 ```
 
-#### 9.4.2 查询某个target
+#### 9.3.6 查询某个资源
 
 ##### Params
 
-- id: 需要查询的target id
+- id: 需要查询的资源 Id
 
 ##### Method & Url
 
@@ -719,82 +657,95 @@ GET http://localhost:8080/graphs/hugegraph/auth/targets/-77:grant
 }
 ```
 
-#### 9.4.3 查询group list
+#### 9.4.1 关联角色(belong)API
+主要关联用户和用户组的关系，一个用户可以关联一个或者多个用户组。用户组拥有相关资源的权限，不同用户组的资源权限可以理解为不同的角色。即给用户关联角色。  
+包括：用户关联角色的创建、删除、修改和查询。
+
+#### 9.4.2 创建用户的关联角色
 
 ##### Params
 
-- limit:返回结果条数的上限
+- user: 用户 Id
+- group: 用户组 Id
+- belong_description: 描述
+
+##### request body
+
+```json
+{
+    "user": "-63:boss",
+    "group": "-69:all"
+}
+```
+
 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/auth/groups
+POST http://localhost:8080/graphs/hugegraph/auth/belongs
 ```
 
 ##### Response Status
 
 ```json
-200
+201 
 ```
 
 ##### Response Body
 
 ```json
 {
-    "groups": [
-        {
-            "group_creator": "admin",
-            "group_name": "all",
-            "group_create": "2020-11-11 15:46:08.791",
-            "group_update": "2020-11-11 15:46:08.791",
-            "id": "-69:all",
-            "group_description": "group can do anything"
-        }
-    ]
+    "belong_create": "2020-11-11 16:19:35.422",
+    "belong_creator": "admin",
+    "belong_update": "2020-11-11 16:19:35.422",
+    "id": "S-63:boss>-82>>S-69:all",
+    "user": "-63:boss",
+    "group": "-69:all"
 }
 ```
 
-#### 9.4.4 查询某个group
+#### 9.4.3 删除关联角色
 
 ##### Params
 
-- id: 需要查询的group id
+- id:需要删除的关联角色 Id
 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/auth/groups/-69:all
+DELETE http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:grant
 ```
 
 ##### Response Status
 
 ```json
-200
+204
 ```
 
 ##### Response Body
 
 ```json
-{
-    "group_creator": "admin",
-    "group_name": "all",
-    "group_create": "2020-11-11 15:46:08.791",
-    "group_update": "2020-11-11 15:46:08.791",
-    "id": "-69:all",
-    "group_description": "group can do anything"
-}
+1
 ```
 
-#### 9.4.5 查询accesses list
+#### 9.4.4 修改关联角色
 
 ##### Params
 
-- limit:返回结果条数的上限
+- id:需要修改的关联角色 Id
 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/auth/accesses
+PUT http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:grant
+```
+
+##### request body
+修改了belong_description
+```json
+{
+    "belong_description": "update test"
+}
 ```
 
 ##### Response Status
@@ -804,163 +755,20 @@ GET http://localhost:8080/graphs/hugegraph/auth/accesses
 ```
 
 ##### Response Body
-
+返回结果会将修改过的全部内容都返回
 ```json
 {
-    "accesses": [
-        {
-            "access_permission": "READ",
-            "access_create": "2020-11-11 15:54:54.008",
-            "id": "S-69:all>-88>11>S-77:all",
-            "access_update": "2020-11-11 15:54:54.008",
-            "access_creator": "admin",
-            "group": "-69:all",
-            "target": "-77:all"
-        }
-    ]
+    "belong_description": "update test",
+    "belong_create": "2020-11-12 10:40:21.720",
+    "belong_creator": "admin",
+    "belong_update": "2020-11-12 10:42:47.265",
+    "id": "S-63:boss>-82>>S-69:grant",
+    "user": "-63:boss",
+    "group": "-69:grant"
 }
 ```
 
-#### 9.4.6 查询某个accesses
-
-##### Params
-
-- id: 需要查询的accesses id
-
-##### Method & Url
-
-```
-GET http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>11>S-77:all
-```
-
-##### Response Status
-
-```json
-200
-```
-
-##### Response Body
-
-```json
-{
-    "access_permission": "READ",
-    "access_create": "2020-11-11 15:54:54.008",
-    "id": "S-69:all>-88>11>S-77:all",
-    "access_update": "2020-11-11 15:54:54.008",
-    "access_creator": "admin",
-    "group": "-69:all",
-    "target": "-77:all"
-}
-```
-
-
-
-
-#### 9.4.7 查询user list
-
-##### Params
-
-- limit:返回结果条数的上限
-
-
-##### Method & Url
-
-```
-GET http://localhost:8080/graphs/hugegraph/auth/users
-```
-
-##### Response Status
-
-```json
-200
-```
-
-##### Response Body
-
-```json
-{
-    "users": [
-        {
-            "user_password": "$2a$04$1tl1IKTncjcmMojLdt2qO.EAJ1w0TGunAZ5IJXWwBgPLvTPk366Ly",
-            "user_update": "2020-11-11 11:41:12.254",
-            "user_name": "admin",
-            "user_creator": "system",
-            "id": "-63:admin",
-            "user_create": "2020-11-11 11:41:12.254"
-        }
-    ]
-}
-```
-
-#### 9.4.8 查询某个user
-
-##### Params
-
-- id: 需要查询的user id
-
-##### Method & Url
-
-```
-GET http://localhost:8080/graphs/hugegraph/auth/users/-63:admin
-```
-
-##### Response Status
-
-```json
-200
-```
-
-##### Response Body
-
-```json
-{
-    "users": [
-        {
-            "user_password": "$2a$04$1tl1IKTncjcmMojLdt2qO.EAJ1w0TGunAZ5IJXWwBgPLvTPk366Ly",
-            "user_update": "2020-11-11 11:41:12.254",
-            "user_name": "admin",
-            "user_creator": "system",
-            "id": "-63:admin",
-            "user_create": "2020-11-11 11:41:12.254"
-        }
-    ]
-}
-```
-
-#### 9.4.9 查询某个用户的role
-
-##### Method & Url
-
-```
-GET http://localhost:8080/graphs/hugegraph/auth/users/-63:boss/role
-```
-
-##### Response Status
-
-```json
-200
-```
-
-##### Response Body
-
-```json
-{
-    "roles": {
-        "hugegraph": {
-            "READ": [
-                {
-                    "type": "ALL",
-                    "label": "*",
-                    "properties": null
-                }
-            ]
-        }
-    }
-}
-```
-
-
-#### 9.4.10 查询belongs list
+#### 9.4.5 查询关联角色列表
 
 ##### Params
 
@@ -996,11 +804,11 @@ GET http://localhost:8080/graphs/hugegraph/auth/belongs
 }
 ```
 
-#### 9.4.11 查看某个belongs
+#### 9.4.6 查看某个关联角色
 
 ##### Params
 
-- id: 需要查询的belongs id
+- id: 需要查询的关联角色 Id
 
 ##### Method & Url
 
@@ -1027,6 +835,194 @@ GET http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:all
 }
 ```
 
+#### 9.5.1 赋权(access)API
+给用户组赋予资源的权限，主要包含：读操作(READ)、写操作(WRITE)、删除操作(DELETE)、执行操作(EXECUTE)等  
+包括：赋权的创建、删除、修改和查询
+
+#### 9.5.2 创建赋权(用户组赋予资源的权限)
+
+##### Params
+
+- group: 用户组 Id
+- target: 资源 Id
+- access_permission: 权限许可  
+- access_description: 赋权描述
+
+access_permission：
+- READ：读操作，所有的查询，包括查询Schema、查顶点/边，查询顶点和边的数量VERTEX_AGGR/EDGE_AGGR，也包括读图的状态STATUS、变量VAR、任务TASK等；
+- WRITE：写操作，所有的创建、更新操作，包括给Schema增加property key，给顶点增加或更新属性等；
+- DELETE：删除操作，包括删除元数据、删除顶点/边；
+- EXECUTE：执⾏操作，包括执⾏Gremlin语句、执⾏Task、执⾏metadata函数；
+
+##### request body
+
+```json
+{
+    "group": "-69:all",
+    "target": "-77:all",
+    "access_permission": "READ"
+}
+```
+
+##### Method & Url
+
+```
+POST http://localhost:8080/graphs/hugegraph/auth/accesses
+```
+
+##### Response Status
+
+```json
+201 
+```
+
+##### Response Body
+
+```json
+{
+    "access_permission": "READ",
+    "access_create": "2020-11-11 15:54:54.008",
+    "id": "S-69:all>-88>11>S-77:all",
+    "access_update": "2020-11-11 15:54:54.008",
+    "access_creator": "admin",
+    "group": "-69:all",
+    "target": "-77:all"
+}
+```
+
+#### 9.5.3 删除赋权
+
+##### Params
+
+- id:需要删除的赋权 Id
 
 
+##### Method & Url
 
+```
+DELETE http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>12>S-77:all
+```
+
+##### Response Status
+
+```json
+204
+```
+
+##### Response Body
+
+```json
+1
+```
+
+#### 9.5.4 修改赋权
+
+##### Params
+
+- id:需要修改的赋权 Id
+
+##### Method & Url
+
+```
+PUT http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>12>S-77:all
+```
+
+##### request body
+修改了access_description
+```json
+{
+    "group": "-69:all",
+    "target": "-77:all",
+    "access_permission": "WRITE",
+    "access_description": "test"
+}
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+返回结果会将修改过的全部内容都返回
+```json
+{
+    "access_description": "test",
+    "access_permission": "WRITE",
+    "access_create": "2020-11-12 10:12:03.074",
+    "id": "S-69:all>-88>12>S-77:all",
+    "access_update": "2020-11-12 10:16:19.637",
+    "access_creator": "admin",
+    "group": "-69:all",
+    "target": "-77:all"
+}
+```
+
+#### 9.5.5 查询赋权列表
+
+##### Params
+
+- limit:返回结果条数的上限
+
+##### Method & Url
+
+```
+GET http://localhost:8080/graphs/hugegraph/auth/accesses
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "accesses": [
+        {
+            "access_permission": "READ",
+            "access_create": "2020-11-11 15:54:54.008",
+            "id": "S-69:all>-88>11>S-77:all",
+            "access_update": "2020-11-11 15:54:54.008",
+            "access_creator": "admin",
+            "group": "-69:all",
+            "target": "-77:all"
+        }
+    ]
+}
+```
+
+#### 9.5.6 查询某个赋权
+
+##### Params
+
+- id: 需要查询的赋权 Id
+
+##### Method & Url
+
+```
+GET http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>11>S-77:all
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "access_permission": "READ",
+    "access_create": "2020-11-11 15:54:54.008",
+    "id": "S-69:all>-88>11>S-77:all",
+    "access_update": "2020-11-11 15:54:54.008",
+    "access_creator": "admin",
+    "group": "-69:all",
+    "target": "-77:all"
+}
+```
