@@ -203,7 +203,6 @@ search.text_analyzer_mode=INDEX
 #rocksdb.data_path=/path/to/disk
 #rocksdb.wal_path=/path/to/disk
 
-
 # cassandra backend config
 cassandra.host=localhost
 cassandra.port=9042
