@@ -167,7 +167,6 @@ gremlin.graph=com.baidu.hugegraph.HugeFactory
 #edge.cache_capacity=1000000
 #edge.cache_expire=600
 
-
 # schema illegal name template
 #schema.illegal_name_regex=\s+|~.*
 
