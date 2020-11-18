@@ -63,8 +63,8 @@ Usage: hugegraph [options] [command] [command options]
 - --user，当 HugeGraph-Server 开启认证时，传递用户名
 - --password，当 HugeGraph-Server 开启认证时，传递用户的密码
 - --timeout，连接 HugeGraph-Server 时的超时时间，默认是 30s
-- --trust-store-file，当 --url 使用 https 时，HugeGraph-Client 使用的 truststore 文件，默认为空
-- --trust-store-password，当 --url 使用 https 时，HugeGraph-Client 使用的 truststore 的密码，默认为空
+- --trust-store-file，当 --url 使用 https 时，HugeGraph-Client 使用的 truststore 文件，默认为空，代表使用 hugegraph-tools 内置的 truststore 文件 conf/hugegraph.truststore
+- --trust-store-password，当 --url 使用 https 时，HugeGraph-Client 使用的 truststore 的密码，默认为空，代表使用 hugegraph-tools 内置的 truststore 文件的密码 hugegraph
 
 上述全局变量，也可以通过环境变量来设置。一种方式是在命令行使用 export 设置临时环境变量，在该命令行关闭之前均有效
 
@@ -354,7 +354,7 @@ Usage: hugegraph [options] [command] [command options]
             Directory of log
             Default: ./logs
           --properties
-            Vertex or edge properties to backup, only valid when type is 
+            Vertex or edge properties to backup, only valid when type is
             vertex or edge
             Default: []
           --retry
