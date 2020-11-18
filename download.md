@@ -7,7 +7,7 @@ The latest HugeGraph: **0.11.2**, released on _2019-11-20_.
 components       | description          | download
 ---------------- | -------------------- | ----------------------------------------------------------------------------------------------------------------
 HugeGraph-Server | HugeGraph的主程序      | [0.11.2](https://github.com/hugegraph/hugegraph/releases/download/v0.11.2/hugegraph-0.11.2.tar.gz)
-HugeGraph-Hubble | 基于Web的图形化分析和展示工具  | [1.5.0](https://github.com/hugegraph/hugegraph-hubble/releases/download/v1.5.0/hugegraph-hubble-1.5.0.tar.gz)
+HugeGraph-Hubble | 基于Web的可视化图形界面  | [1.5.0](https://github.com/hugegraph/hugegraph-hubble/releases/download/v1.5.0/hugegraph-hubble-1.5.0.tar.gz)
 HugeGraph-Loader | 数据导入工具            | [0.11.0](https://github.com/hugegraph/hugegraph-loader/releases/download/v0.11.0/hugegraph-loader-0.11.0.tar.gz)
 HugeGraph-Tools  | 命令行工具集            | [1.5.0](https://github.com/hugegraph/hugegraph-tools/releases/download/v1.5.0/hugegraph-tools-1.5.0.tar.gz)
 HugeGraph-Spark  | 基于Spark GraphX的图分析工具 | 
@@ -25,7 +25,7 @@ server                                                                          
 [0.5.6](https://hugegraph.github.io/hugegraph-downloads/hugegraph-release-0.5.6-SNAPSHOT.tar.gz) | [1.5.0](https://mvnrepository.com/artifact/com.baidu.hugegraph/hugegraph-client/1.5.0)  | [0.5.6](https://hugegraph.github.io/hugegraph-downloads/hugegraph-loader/hugegraph-loader-0.5.6-bin.tar.gz)     | [0.5.0](https://hugegraph.github.io/hugegraph-downloads/hugegraph-studio/hugestudio-release-0.5.0-SNAPSHOT.tar.gz) |       | 1.4.0  |
 [0.4.5](https://hugegraph.github.io/hugegraph-downloads/hugegraph-release-0.4.5-SNAPSHOT.tar.gz) | [1.4.7](https://mvnrepository.com/artifact/com.baidu.hugegraph/hugegraph-client/1.4.7)  | [0.2.2](https://hugegraph.github.io/hugegraph-downloads/hugegraph-loader/hugegraph-loader-0.2.2-bin.tar.gz)     | [0.4.1](https://hugegraph.github.io/hugegraph-downloads/hugegraph-studio/hugestudio-release-0.4.1-SNAPSHOT.tar.gz) |       | 1.3.12 |
 
-> 说明：最新的图分析和展示平台为 hubble，studio 虽然也持续发版，但其功能从 0.10 起不再更新，server 0.10.x 以及之前的版本，图分析和展示平台为 studio。
+> 说明：最新的图分析和展示平台为 hubble，支持 0.10 及之后的 server 版本；studio 为 server 0.10.x 以及之前的版本的图分析和展示平台，其功能从 0.10 起不再更新。
 
 ### Release Notes
 
