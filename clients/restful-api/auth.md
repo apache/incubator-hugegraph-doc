@@ -13,10 +13,10 @@ city: Beijing})
 描述：用户'boss'拥有对'graph1'图中北京人的读权限。
 
 ##### 接口说明：
-用户认证与权限控制接口包括5类：UserAPI、GroupAPI、TargetAPI、BelongAPI、AccessAPI
+用户认证与权限控制接口包括5类：UserAPI、GroupAPI、TargetAPI、BelongAPI、AccessAPI。
 
 ### 9.2 用户（User）API
-用户接口包括：创建用户，删除用户，修改用户，和查询用户相关信息接口
+用户接口包括：创建用户，删除用户，修改用户，和查询用户相关信息接口。
 
 #### 9.2.1 创建用户
 
@@ -27,9 +27,9 @@ city: Beijing})
 - user_phone: 用户手机号
 - user_email: 用户邮箱  
 
-其中 user_name 和 user_password 为必填
+其中 user_name 和 user_password 为必填。
 
-##### request body
+##### Request Body
 
 ```json
 {
@@ -105,7 +105,7 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/users/-63:test
 PUT http://localhost:8080/graphs/hugegraph/auth/users/-63:test
 ```
 
-##### request body
+##### Request Body
 修改user_name、user_password和user_phone
 ```json
 {
@@ -240,7 +240,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/users/-63:boss/role
 
 ### 9.3 用户组（Group）API
 用户组会赋予相应的资源权限，用户会被分配不同的用户组，即可拥有不同的资源权限。  
-用户组接口包括：创建用户组，删除用户组，修改用户组，和查询用户组相关信息接口
+用户组接口包括：创建用户组，删除用户组，修改用户组，和查询用户组相关信息接口。
 
 #### 9.3.1 创建用户组
 
@@ -249,7 +249,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/users/-63:boss/role
 - group_name: 用户组名称
 - group_description: 用户组描述
 
-##### request body
+##### Request Body
 
 ```json
 {
@@ -321,7 +321,7 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
 PUT http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
 ```
 
-##### request body
+##### Request Body
 修改group_description
 ```json
 {
@@ -353,7 +353,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
 
 ##### Params
 
-- limit:返回结果条数的上限
+- limit: 返回结果条数的上限
 
 ##### Method & Url
 
@@ -426,18 +426,19 @@ GET http://localhost:8080/graphs/hugegraph/auth/groups/-69:all
 - target_name: 资源名称
 - target_graph: 资源图
 - target_url: 资源地址
-- target_resources: 资源配置(列表)
+- target_resources: 资源定义(列表)
 
-target_resources资源配置列表：
+target_resources可以包括多个target_resource，以列表的形式存储。  
+每个target_resource包含：
 - type：可选值 VERTEX, EDGE等, 可填ALL，则表示可以是顶点或边；
 - label：可选值，⼀个顶点或边类型的名称，可填*，则表示任意类型；
 - properties：map类型，可包含多个属性的键值对，必须匹配所有属性值，属性值⽀持填条件范围（age:
   P.gte(18)），properties如果为null表示任意属性均可，如果属性名和属性值均为‘*ʼ也表示任意属性均可。
 
-**如精细资源："target_resources": [{"type":"VERTEX","label":"person","properties":{"city":"Beijing","age":"P.gte(20)"}}]**  
-资源配置：类型是'person'的顶点，且城市属性是'Beijing'，年龄属性大于等于20。
+如精细资源："target_resources": [{"type":"VERTEX","label":"person","properties":{"city":"Beijing","age":"P.gte(20)"}}]**  
+资源定义含义：类型是'person'的顶点，且城市属性是'Beijing'，年龄属性大于等于20。
 
-##### request body
+##### Request Body
 
 ```json
 {
@@ -523,8 +524,8 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
 PUT http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
 ```
 
-##### request body
-修改type
+##### Request Body
+修改资源定义中的type
 ```json
 {
     "target_name": "gremlin",
@@ -675,7 +676,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/targets/-77:grant
 - group: 用户组 Id
 - belong_description: 描述
 
-##### request body
+##### Request Body
 
 ```json
 {
@@ -735,6 +736,7 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:g
 ```
 
 #### 9.5.3 修改关联角色
+关联角色只能修改描述，不能修改user 和 group 属性，如果需要修改关联角色，需要删除原来关联关系，新增关联角色。
 
 ##### Params
 
@@ -746,7 +748,7 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:g
 PUT http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:grant
 ```
 
-##### request body
+##### Request Body
 修改belong_description
 ```json
 {
@@ -842,8 +844,8 @@ GET http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:all
 ```
 
 ### 9.6 赋权（Access）API
-给用户组赋予资源的权限，主要包含：读操作(READ)、写操作(WRITE)、删除操作(DELETE)、执行操作(EXECUTE)等  
-赋权接口包括：赋权的创建、删除、修改和查询
+给用户组赋予资源的权限，主要包含：读操作(READ)、写操作(WRITE)、删除操作(DELETE)、执行操作(EXECUTE)等。  
+赋权接口包括：赋权的创建、删除、修改和查询。
 
 #### 9.6.1 创建赋权(用户组赋予资源的权限)
 
@@ -860,7 +862,7 @@ access_permission：
 - DELETE：删除操作，包括删除元数据、删除顶点/边；
 - EXECUTE：执⾏操作，包括执⾏Gremlin语句、执⾏Task、执⾏metadata函数；
 
-##### request body
+##### Request Body
 
 ```json
 {
@@ -922,6 +924,7 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>12>S-77
 ```
 
 #### 9.6.3 修改赋权
+赋权只能修改描述，不能修改用户组、资源和权限许可，如果需要修改赋权的关系，可以删除原来的赋权关系，新增赋权。
 
 ##### Params
 
@@ -933,13 +936,10 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>12>S-77
 PUT http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>12>S-77:all
 ```
 
-##### request body
+##### Request Body
 修改access_description
 ```json
 {
-    "group": "-69:all",
-    "target": "-77:all",
-    "access_permission": "WRITE",
     "access_description": "test"
 }
 ```
