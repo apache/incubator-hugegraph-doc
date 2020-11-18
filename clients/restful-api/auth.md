@@ -736,7 +736,7 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:g
 ```
 
 #### 9.5.3 修改关联角色
-关联角色只能修改描述，不能修改user 和 group 属性，如果需要修改关联角色，需要删除原来关联关系，新增关联角色。
+关联角色只能修改描述，不能修改 user 和 group 属性，如果需要修改关联角色，需要删除原来关联关系，新增关联角色。
 
 ##### Params
 
