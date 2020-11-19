@@ -23,7 +23,6 @@ graphs                             | [hugegraph:conf/hugegraph.properties]      
 server.id                          | server-1                                         | The id of rest server, used for license verification.
 server.role                        | master                                           | The role of nodes in the cluster, available types are [master, worker, computer]
 restserver.url                     | http://127.0.0.1:8080                            | The url for listening of rest server.
-restserver.protocol                | http                                             | The protocol of rest-server, allowed values are: http or https.
 ssl.keystore_file                  | server.keystore                                  | The path of server keystore file used when https protocol is enabled.
 ssl.keystore_password              |                                                  | The password of the path of the server keystore file used when the https protocol is enabled.
 restserver.max_worker_threads      | 2 * CPUs                                         | The maxmium worker threads of rest server.
