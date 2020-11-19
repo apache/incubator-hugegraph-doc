@@ -17,7 +17,7 @@ ssl.keystore_file=conf/hugegraph-server.keystore
 ssl.keystore_password=hugegraph
 ```
 
-服务端的 conf 目录下已经给出了一个的 keystore 文件`hugegraph-server.keystore`，该文件的密码为`hugegraph`，
+服务端的 conf 目录下已经给出了一个 keystore 文件`hugegraph-server.keystore`，该文件的密码为`hugegraph`，
 这两项都是在开启了 https 协议时的默认值，用户可以生成自己的 keystore 文件及密码，然后修改`ssl.keystore_file`和`ssl.keystore_password`的值。
 
 ### 客户端配置
