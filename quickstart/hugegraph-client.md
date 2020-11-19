@@ -66,7 +66,9 @@ public class SingleExample {
 
     public static void main(String[] args) throws IOException {
         // If connect failed will throw a exception.
-        HugeClient hugeClient = new HugeClient("http://localhost:8080", "hugegraph");
+        HugeClient hugeClient = HugeClient.builder("http://localhost:8080",
+                                                   "hugegraph")
+                                          .build();
 
         SchemaManager schema = hugeClient.schema();
 
@@ -75,7 +77,7 @@ public class SingleExample {
         schema.propertyKey("city").asText().ifNotExist().create();
         schema.propertyKey("weight").asDouble().ifNotExist().create();
         schema.propertyKey("lang").asText().ifNotExist().create();
-        schema.propertyKey("date").asText().ifNotExist().create();
+        schema.propertyKey("date").asDate().ifNotExist().create();
         schema.propertyKey("price").asInt().ifNotExist().create();
 
         schema.vertexLabel("person")
@@ -145,29 +147,29 @@ public class SingleExample {
               .ifNotExist()
               .create();
 
-
         GraphManager graph = hugeClient.graph();
         Vertex marko = graph.addVertex(T.label, "person", "name", "marko",
                                        "age", 29, "city", "Beijing");
         Vertex vadas = graph.addVertex(T.label, "person", "name", "vadas",
                                        "age", 27, "city", "Hongkong");
         Vertex lop = graph.addVertex(T.label, "software", "name", "lop",
-                                       "lang", "java", "price", 328);
+                                     "lang", "java", "price", 328);
         Vertex josh = graph.addVertex(T.label, "person", "name", "josh",
-                                       "age", 32, "city", "Beijing");
+                                      "age", 32, "city", "Beijing");
         Vertex ripple = graph.addVertex(T.label, "software", "name", "ripple",
-                                       "lang", "java", "price", 199);
+                                        "lang", "java", "price", 199);
         Vertex peter = graph.addVertex(T.label, "person", "name", "peter",
                                        "age", 35, "city", "Shanghai");
 
-        marko.addEdge("knows", vadas, "date", "20160110", "weight", 0.5);
-        marko.addEdge("knows", josh, "date", "20130220", "weight", 1.0);
-        marko.addEdge("created", lop, "date", "20171210", "weight", 0.4);
-        josh.addEdge("created", lop, "date", "20091111", "weight", 0.4);
-        josh.addEdge("created", ripple, "date", "20171210", "weight", 1.0);
-        peter.addEdge("created", lop, "date", "20170324", "weight", 0.2);
+        marko.addEdge("knows", vadas, "date", "2016-01-10", "weight", 0.5);
+        marko.addEdge("knows", josh, "date", "2013-02-20", "weight", 1.0);
+        marko.addEdge("created", lop, "date", "2017-12-10", "weight", 0.4);
+        josh.addEdge("created", lop, "date", "2009-11-11", "weight", 0.4);
+        josh.addEdge("created", ripple, "date", "2017-12-10", "weight", 1.0);
+        peter.addEdge("created", lop, "date", "2017-03-24", "weight", 0.2);
 
         GremlinManager gremlin = hugeClient.gremlin();
+        System.out.println("==== Path ====");
         ResultSet resultSet = gremlin.gremlin("g.V().outE().path()").execute();
         Iterator<Result> results = resultSet.iterator();
         results.forEachRemaining(result -> {
@@ -187,6 +189,8 @@ public class SingleExample {
                 System.out.println(object);
             }
         });
+
+        hugeClient.close();
     }
 }
 ```
@@ -194,7 +198,7 @@ public class SingleExample {
 ##### 4.3.2 BatchExample
 
 ```java
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.baidu.hugegraph.driver.GraphManager;
@@ -207,14 +211,16 @@ public class BatchExample {
 
     public static void main(String[] args) {
         // If connect failed will throw a exception.
-        HugeClient hugeClient = new HugeClient("http://localhost:8080", "hugegraph");
+        HugeClient hugeClient = HugeClient.builder("http://localhost:8080",
+                                                   "hugegraph")
+                                          .build();
 
         SchemaManager schema = hugeClient.schema();
 
         schema.propertyKey("name").asText().ifNotExist().create();
         schema.propertyKey("age").asInt().ifNotExist().create();
         schema.propertyKey("lang").asText().ifNotExist().create();
-        schema.propertyKey("date").asText().ifNotExist().create();
+        schema.propertyKey("date").asDate().ifNotExist().create();
         schema.propertyKey("price").asInt().ifNotExist().create();
 
         schema.vertexLabel("person")
@@ -258,6 +264,18 @@ public class BatchExample {
               .ifNotExist()
               .create();
 
+        // get schema object by name
+        System.out.println(schema.getPropertyKey("name"));
+        System.out.println(schema.getVertexLabel("person"));
+        System.out.println(schema.getEdgeLabel("knows"));
+        System.out.println(schema.getIndexLabel("createdByDate"));
+
+        // list all schema objects
+        System.out.println(schema.getPropertyKeys());
+        System.out.println(schema.getVertexLabels());
+        System.out.println(schema.getEdgeLabels());
+        System.out.println(schema.getIndexLabels());
+
         GraphManager graph = hugeClient.graph();
 
         Vertex marko = new Vertex("person").property("name", "marko")
@@ -275,8 +293,23 @@ public class BatchExample {
         Vertex peter = new Vertex("person").property("name", "peter")
                                            .property("age", 35);
 
-        // Create a list to put vertex(Default max size is 500)
-        List<Vertex> vertices = new LinkedList<>();
+        Edge markoKnowsVadas = new Edge("knows").source(marko).target(vadas)
+                                                .property("date", "2016-01-10");
+        Edge markoKnowsJosh = new Edge("knows").source(marko).target(josh)
+                                               .property("date", "2013-02-20");
+        Edge markoCreateLop = new Edge("created").source(marko).target(lop)
+                                                 .property("date",
+                                                           "2017-12-10");
+        Edge joshCreateRipple = new Edge("created").source(josh).target(ripple)
+                                                   .property("date",
+                                                             "2017-12-10");
+        Edge joshCreateLop = new Edge("created").source(josh).target(lop)
+                                                .property("date", "2009-11-11");
+        Edge peterCreateLop = new Edge("created").source(peter).target(lop)
+                                                 .property("date",
+                                                           "2017-03-24");
+
+        List<Vertex> vertices = new ArrayList<>();
         vertices.add(marko);
         vertices.add(vadas);
         vertices.add(lop);
@@ -284,25 +317,7 @@ public class BatchExample {
         vertices.add(ripple);
         vertices.add(peter);
 
-        // Post a vertex list to server
-        vertices = graph.addVertices(vertices);
-        vertices.forEach(vertex -> System.out.println(vertex));
-
-        Edge markoKnowsVadas = new Edge("knows").source(marko).target(vadas)
-                                                .property("date", "20160110");
-        Edge markoKnowsJosh = new Edge("knows").source(marko).target(josh)
-                                               .property("date", "20130220");
-        Edge markoCreateLop = new Edge("created").source(marko).target(lop)
-                                                 .property("date", "20171210");
-        Edge joshCreateRipple = new Edge("created").source(josh).target(ripple)
-                                                   .property("date", "20171210");
-        Edge joshCreateLop = new Edge("created").source(josh).target(lop)
-                                                .property("date", "20091111");
-        Edge peterCreateLop = new Edge("created").source(peter).target(lop)
-                                                 .property("date", "20170324");
-
-        // Create a list to put edge(Default max size is 500)
-        List<Edge> edges = new LinkedList<>();
+        List<Edge> edges = new ArrayList<>();
         edges.add(markoKnowsVadas);
         edges.add(markoKnowsJosh);
         edges.add(markoCreateLop);
@@ -310,9 +325,13 @@ public class BatchExample {
         edges.add(joshCreateLop);
         edges.add(peterCreateLop);
 
-        // Post a edge list to server
+        vertices = graph.addVertices(vertices);
+        vertices.forEach(vertex -> System.out.println(vertex));
+
         edges = graph.addEdges(edges, false);
         edges.forEach(edge -> System.out.println(edge));
+
+        hugeClient.close();
     }
 }
 ```

@@ -21,6 +21,7 @@
 * [Config Guide](config/config-guide.md)
 * [Config Options](config/config-option.md)
 * [Config Authentication](config/config-authentication.md)
+* [Config HTTPS](config/config-https.md)
 
 ## Query Language
 * [Gremlin Query Language](language/hugegraph-gremlin.md)
