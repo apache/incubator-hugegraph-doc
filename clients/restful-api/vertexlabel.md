@@ -57,7 +57,7 @@ POST http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 }
 ```
 
-从 server 0.11 版本开始支持顶点的 TTL 功能。顶点的 TTL 是通过 VertexLabel 来设置的。比如希望 person 类型的顶点存活时间为一天，需要在创建 person VertexLabel 的时候将 TTL 字段设置为 86400000，即单位为毫秒。
+从 hugegraph-server v0.11.2 版本开始支持顶点的 TTL 功能。顶点的 TTL 是通过 VertexLabel 来设置的。比如希望 person 类型的顶点存活时间为一天，需要在创建 person VertexLabel 的时候将 TTL 字段设置为 86400000，即单位为毫秒。
 
 ```json
 {
@@ -76,7 +76,7 @@ POST http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 }
 ```
 
-另外，当顶点中带有"创建时间"的属性且希望以"创建时间"属性作为计算顶点存活时间的起点时，可以设置 VertexLabel 中的 ttl_start_time 字段。比如 person VertexLabel 有 createdTime 属性，且 createdTime 是 Date 类型的参数，希望 person 类型的顶点从创建开始存活一天的时间，那么创建 person VertexLabel 的 request body 如下：
+另外，当顶点中带有"创建时间"的属性且希望以"创建时间"属性作为计算顶点存活时间的起点时，可以设置 VertexLabel 中的 ttl_start_time 字段。比如 person VertexLabel 有 createdTime 属性，且 createdTime 是 Date 类型的参数，希望 person 类型的顶点从创建开始存活一天的时间，那么创建 person VertexLabel 的 Request Body 如下：
 
 ```json
 {
