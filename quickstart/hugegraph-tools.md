@@ -63,8 +63,8 @@ Usage: hugegraph [options] [command] [command options]
 - --user，当 HugeGraph-Server 开启认证时，传递用户名
 - --password，当 HugeGraph-Server 开启认证时，传递用户的密码
 - --timeout，连接 HugeGraph-Server 时的超时时间，默认是 30s
-- --trust-store-file，当 --url 使用 https 时，HugeGraph-Client 使用的 truststore 文件，默认为空，代表使用 hugegraph-tools 内置的 truststore 文件 conf/hugegraph.truststore
-- --trust-store-password，当 --url 使用 https 时，HugeGraph-Client 使用的 truststore 的密码，默认为空，代表使用 hugegraph-tools 内置的 truststore 文件的密码 hugegraph
+- --trust-store-file，证书文件的路径，当 --url 使用 https 时，HugeGraph-Client 使用的 truststore 文件，默认为空，代表使用 hugegraph-tools 内置的 truststore 文件 conf/hugegraph.truststore
+- --trust-store-password，证书文件的密码，当 --url 使用 https 时，HugeGraph-Client 使用的 truststore 的密码，默认为空，代表使用 hugegraph-tools 内置的 truststore 文件的密码 hugegraph
 
 上述全局变量，也可以通过环境变量来设置。一种方式是在命令行使用 export 设置临时环境变量，在该命令行关闭之前均有效
 
@@ -230,7 +230,7 @@ Usage: hugegraph [options] [command] [command options]
       The URL of HugeGraph-Server
       Default: http://127.0.0.1:8080
     --user
-      User Name
+      Name of user
   Commands:
     graph-list      List all graphs
       Usage: graph-list
@@ -327,7 +327,7 @@ Usage: hugegraph [options] [command] [command options]
             Gremlin script to be executed, exclusive to --file
 
     backup      Backup graph schema/data. If directory is on HDFS, use -D to 
-            set HDFS params if needed. For exmaple: 
+            set HDFS params. For exmaple:
             -Dfs.default.name=hdfs://localhost:9000 
       Usage: backup [options]
         Options:
@@ -462,24 +462,24 @@ Usage: hugegraph [options] [command] [command options]
             Split size of shard
             Default: 1048576
           --target-graph
-            The target graph to migrate
+            The name of target graph to migrate
             Default: hugegraph
           --target-password
-            The password of target graph
+            The password of target graph to migrate
           --target-timeout
-            The timeout to connect target graph
+            The timeout to connect target graph to migrate
             Default: 0
           --target-trust-store-file
-            The target graph trust store file to migrate
+            The trust store file of target graph to migrate
             Default: <empty string>
           --target-trust-store-password
-            The target graph trust store password to migrate
+            The trust store password of target graph to migrate
             Default: <empty string>
           --target-url
-            The target graph url to migrate
+            The url of target graph to migrate
             Default: http://127.0.0.1:8081
           --target-username
-            The username of target graph
+            The username of target graph to migrate
           -D
             HDFS config parameters
             Syntax: -Dkey=value
