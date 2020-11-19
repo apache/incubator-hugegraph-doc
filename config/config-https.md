@@ -4,18 +4,21 @@
 
 HugeGraphServer 默认使用的是 http 协议，如果用户对请求的安全性有要求，可以配置成 https。
 
-### 服务端配置协议
+### 服务端配置
 
 在 conf/rest-server.properties 配置文件中设置启用 https，默认配置文件中未写出该项，用户添加并修改即可，默认值是 http。
 
 ```ini
-# http 或者 https 默认https
-server.protocol=https
-# 服务端证书文件路径
-ssl.server_keystore_file=server.keystore
-# 服务端证书文件密码
-ssl.server_keystore_password=123456
+# http 或者 https，默认 http
+restserver.protocol=https
+# 服务端 keystore 文件路径，restserver.protocol=https 时该默认值自动生效，可按需修改此项
+ssl.keystore_file=conf/hugegraph-server.keystore
+# 服务端 keystore 文件密码，restserver.protocol=https 时该默认值自动生效，可按需修改此项
+ssl.keystore_password=hugegraph
 ```
+
+服务端的 conf 目录下已经给出了一个的 keystore 文件`hugegraph-server.keystore`，该文件的密码为`hugegraph`，
+这两项都是在开启了 https 协议时的默认值，用户可以生成自己的 keystore 文件及密码，然后修改`ssl.keystore_file`和`ssl.keystore_password`的值。
 
 ### 客户端配置
 
@@ -24,17 +27,15 @@ ssl.server_keystore_password=123456
 在构造 HugeClient 时传入 https 相关的配置，代码示例：
 
 ```java
-HugeClientBuilder builder = HugeClient.builder(address, graph)
-                                      .configTimeout(options.timeout);
-// https 协议
-String protocol = "https";
-// 客户端证书文件路径
-String trustStoreFilePath = "client.keystore"
-// 客户端证书密码
-String trustStorePassword = "123456";
-builder.configSSL(protocol, trustStoreFilePath, trustStorePassword);
-
-HugeClient client = builder.build();
+String url = "https://localhost:8080";
+String graphName = "hugegraph";
+HugeClientBuilder builder = HugeClient.builder(url, graphName);
+// 客户端 keystore 文件路径
+String trustStoreFilePath = "hugegraph.truststore";
+// 客户端 keystore 密码
+String trustStorePassword = "hugegraph";
+builder.configSSL(trustStoreFilePath, trustStorePassword);
+HugeClient hugeClient = builder.build();
 ```
 
 > 注意：HugeGraph-Client 在 1.9.0 版本以前是直接以 new 的方式创建，并且不支持 https 协议，在 1.9.0 版本以后改成以 builder 的方式创建，并支持配置 https 协议。
@@ -46,33 +47,66 @@ HugeClient client = builder.build();
 ```bash
 # https
 --protocol https
-# 客户端证书路径
+# 客户端证书文件路径，默认为 conf/hugegraph.truststore，当指定 --protocol=https 时该默认值自动生效
 --trust-store-file {file}
-# 客户端证书密码
+# 客户端证书文件密码，默认为 hugegraph，当指定 --protocol=https 时该默认值自动生效
 --trust-store-password {password}
 ```
+
+hugegraph-loader 的 conf 目录下已经放了一个默认的客户端证书文件 hugegraph.truststore，其密码是 hugegraph。
 
 #### 在 HugeGraph-Tools 中使用 https
 
 执行命令时，在命令行中添加如下选项：
 
 ```bash
-# https
---protocol https
-# 客户端证书路径
+# 客户端证书文件路径，默认为 conf/hugegraph.truststore，当 url 中使用 https 协议时该默认值自动生效
 --trust-store-file {file}
-# 客户端证书密码
+# 客户端证书文件密码，默认为 hugegraph，当 url 中使用 https 协议时该默认值自动生效
 --trust-store-password {password}
+# 执行迁移命令时，当 --target-url 中使用 https 协议时，目标 Server 所需的客户端证书文件的路径，必须显式指定
+--target-trust-store-file {target-file}
+# 执行迁移命令时，当 --target-url 中使用 https 协议时，目标 Server 所需的客户端证书文件的密码，必须显式指定
+--target-trust-store-password {target-password}
 ```
 
-> 注意：服务端没有对客户端证书内容做强制校验，所以客户端可以自行生成证书文件。
+hugegraph-tools 的 conf 目录下已经放了一个默认的客户端证书文件 hugegraph.truststore，其密码是 hugegraph。
 
-### 客户端如何生成证书文件
+### 如何生成证书文件
 
-这里只是给出生成证书的简单示例，如果用户已经知晓如何生成，可跳过。若想了解更详细的生成步骤，请自行搜索相关内容。
+本部分给出生成证书的示例，如果默认的证书已经够用，或者已经知晓如何生成，可跳过。
 
-可以使用 JRE 自带的 keytool 工具生成
+#### 服务端
+
+1. ⽣成服务端私钥，并且导⼊到服务端 keystore ⽂件中，server.keystore 是给服务端⽤的，其中保存着⾃⼰的私钥
 
 ```bash
-keytool -genkeypair -alias certificatekey -keyalg RSA -validity 7 -keystore keystore.jks
+keytool -genkey -alias serverkey -keyalg RSA -keystore server.keystore
 ```
+
+过程中根据需求填写描述信息，默认证书的描述信息如下：
+
+```
+名字和姓⽒：hugegraph
+组织单位名称：hugegraph
+组织名称：hugegraph
+城市或区域名称：BJ
+州或省份名称：BJ
+国家代码：CN
+```
+
+2. 根据服务端私钥，导出服务端证书
+
+```bash
+keytool -export -alias serverkey -keystore server.keystore -file server.crt
+```
+
+server.crt 就是服务端的证书
+
+#### 客户端
+
+```bash
+keytool -import -alias serverkey -file server.crt -keystore client.jks
+```
+
+client.jks 是给客户端⽤的，其中保存着受信任的证书
