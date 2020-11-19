@@ -6,14 +6,14 @@ HugeGraphServer 默认使用的是 http 协议，如果用户对请求的安全�
 
 ### 服务端配置
 
-在 conf/rest-server.properties 配置文件中设置启用 https，默认配置文件中未写出该项，用户添加并修改即可，默认值是 http。
+修改 conf/rest-server.properties 配置文件，将 restserver.url 的 schema 部分改为 https。
 
 ```ini
-# http 或者 https，默认 http
-restserver.protocol=https
-# 服务端 keystore 文件路径，restserver.protocol=https 时该默认值自动生效，可按需修改此项
+# 将协议设置为 https
+restserver.url=https://127.0.0.1:8080
+# 服务端 keystore 文件路径，当协议为 https 时该默认值自动生效，可按需修改此项
 ssl.keystore_file=conf/hugegraph-server.keystore
-# 服务端 keystore 文件密码，restserver.protocol=https 时该默认值自动生效，可按需修改此项
+# 服务端 keystore 文件密码，当协议为 https 时该默认值自动生效，可按需修改此项
 ssl.keystore_password=hugegraph
 ```
 
@@ -47,9 +47,9 @@ HugeClient hugeClient = builder.build();
 ```bash
 # https
 --protocol https
-# 客户端证书文件路径，默认为 conf/hugegraph.truststore，当指定 --protocol=https 时该默认值自动生效
+# 客户端证书文件路径，当指定 --protocol 为 https 时，默认值 conf/hugegraph.truststore 自动生效，可按需修改
 --trust-store-file {file}
-# 客户端证书文件密码，默认为 hugegraph，当指定 --protocol=https 时该默认值自动生效
+# 客户端证书文件密码，当指定 --protocol 为 https 时，默认值 hugegraph 自动生效，可按需修改
 --trust-store-password {password}
 ```
 
@@ -60,13 +60,13 @@ hugegraph-loader 的 conf 目录下已经放了一个默认的客户端证书文
 执行命令时，在命令行中添加如下选项：
 
 ```bash
-# 客户端证书文件路径，默认为 conf/hugegraph.truststore，当 url 中使用 https 协议时该默认值自动生效
+# 客户端证书文件路径，当 url 中使用 https 协议时，默认值 conf/hugegraph.truststore 自动生效，可按需修改
 --trust-store-file {file}
-# 客户端证书文件密码，默认为 hugegraph，当 url 中使用 https 协议时该默认值自动生效
+# 客户端证书文件密码，当 url 中使用 https 协议时，默认值 hugegraph 自动生效，可按需修改
 --trust-store-password {password}
-# 执行迁移命令时，当 --target-url 中使用 https 协议时，目标 Server 所需的客户端证书文件的路径，必须显式指定
+# 执行迁移命令时，当 --target-url 中使用 https 协议时，默认值 conf/hugegraph.truststore 自动生效，可按需修改
 --target-trust-store-file {target-file}
-# 执行迁移命令时，当 --target-url 中使用 https 协议时，目标 Server 所需的客户端证书文件的密码，必须显式指定
+# 执行迁移命令时，当 --target-url 中使用 https 协议时，默认值 hugegraph 自动生效，可按需修改
 --target-trust-store-password {target-password}
 ```
 
@@ -106,7 +106,7 @@ server.crt 就是服务端的证书
 #### 客户端
 
 ```bash
-keytool -import -alias serverkey -file server.crt -keystore client.jks
+keytool -import -alias serverkey -file server.crt -keystore client.truststore
 ```
 
-client.jks 是给客户端⽤的，其中保存着受信任的证书
+client.truststore 是给客户端⽤的，其中保存着受信任的证书
