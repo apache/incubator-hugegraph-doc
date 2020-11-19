@@ -56,6 +56,57 @@ POST http://localhost:8080/graphs/hugegraph/schema/edgelabels
 }
 ```
 
+从 hugegraph-server v0.11.2 版本开始支持边的 TTL 功能。边的 TTL 是通过 EdgeLabel 来设置的。比如希望 knows 类型的边存活时间为一天，需要在创建 knows EdgeLabel 的时候将 TTL 字段设置为 86400000，即单位为毫秒。
+
+```json
+{
+    "id": 1,
+    "sort_keys": [
+    ],
+    "source_label": "person",
+    "name": "knows",
+    "index_names": [
+    ],
+    "properties": [
+        "date",
+        "createdTime"
+    ],
+    "target_label": "person",
+    "frequency": "SINGLE",
+    "nullable_keys": [
+    ],
+    "enable_label_index": true,
+    "ttl": 86400000,
+    "user_data": {}
+}
+```
+
+另外，当边中带有"创建时间"的属性且希望以"创建时间"属性作为计算边存活时间的起点时，可以设置 EdgeLabel 中的 ttl_start_time 字段。比如 knows EdgeLabel 有 createdTime 属性，且 createdTime 是 Date 类型的参数，希望 knows 类型的边从创建开始存活一天的时间，那么创建 knows EdgeLabel 的 Request Body 如下：
+
+```json
+{
+    "id": 1,
+    "sort_keys": [
+    ],
+    "source_label": "person",
+    "name": "knows",
+    "index_names": [
+    ],
+    "properties": [
+        "date",
+        "createdTime"
+    ],
+    "target_label": "person",
+    "frequency": "SINGLE",
+    "nullable_keys": [
+    ],
+    "enable_label_index": true,
+    "ttl": 86400000,
+    "ttl_start_time": "createdTime",
+    "user_data": {}
+}
+```
+
 #### 1.3.2 为已存在的EdgeLabel添加properties或userdata，或者移除userdata（目前不支持移除properties）
 
 ##### Params
