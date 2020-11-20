@@ -152,7 +152,7 @@ Usage: hugegraph [options] [command] [command options]
     - -D，用 -Dkey=value 的模式指定动态参数，用来备份数据到 HDFS 时，指定 HDFS 的配置项，例如：-Dfs.default.name=hdfs://localhost:9000 
 - restore，将 JSON 格式存储的 schema 或者 data 恢复到一个新图中（RESTORING 模式）或者合并到已存在的图中（MERGING 模式）
     - --directory 或者 -d，存储 schema 或者 data 的目录，本地目录时，默认为'./{graphName}'，HDFS 时，默认为 '{fs.default.name}/{graphName}'
-    - --clean，是否在恢复图完成后删除 --directory 指定的目录，默认为 true
+    - --clean，是否在恢复图完成后删除 --directory 指定的目录，默认为 false
     - --huge-types 或者 -t，要恢复的数据类型，逗号分隔，可选值为 'all' 或者 一个或多个 [vertex,edge,vertex_label,edge_label,property_key,index_label] 的组合，'all' 代表全部6种类型，即顶点、边和所有schema
     - --log 或者 -l，指定日志目录，默认为当前目录
     - --retry，指定失败重试次数，默认为 3
@@ -173,7 +173,7 @@ Usage: hugegraph [options] [command] [command options]
     - --split-size 或者 -s，指定迁移过程中对源图进行备份时顶点或者边分块的大小，默认为 1048576
     - -D，用 -Dkey=value 的模式指定动态参数，用来在迁移图过程中需要备份数据到 HDFS 时，指定 HDFS 的配置项，例如：-Dfs.default.name=hdfs://localhost:9000
     - --graph-mode 或者 -m，将源图恢复到目标图时将目标图设置的模式，合法值包括 [RESTORING, MERGING]
-    - --clean，是否删除在迁移图的过程中产生的源图的备份，默认为 true，即默认迁移图结束后清理产生的源图备份
+    - --keep-local-data，是否保留在迁移图的过程中产生的源图的备份，默认为 false，即默认迁移图结束后不保留产生的源图备份
 - schedule-backup，周期性对图执行备份操作，并保留一定数目的最新备份（目前仅支持本地文件系统）
     - --directory 或者 -d，必填项，指定备份数据的目录
     - --backup-num，选填项，指定保存的最新的备份的数目，默认为 3
@@ -221,11 +221,9 @@ Usage: hugegraph [options] [command] [command options]
       Default: 30
     --trust-store-file
       The path of client truststore file used when https protocol is enabled
-      Default: <empty string>
     --trust-store-password
       The password of the client truststore file used when the https protocol 
       is enabled
-      Default: <empty string>
     --url
       The URL of HugeGraph-Server
       Default: http://127.0.0.1:8080
@@ -436,9 +434,6 @@ Usage: hugegraph [options] [command] [command options]
     migrate      Migrate graph
       Usage: migrate [options]
         Options:
-          --clean
-            Whether to remove the directory of graph data after restored
-            Default: true
           --directory, -d
             Directory of graph schema/data, default is './{graphname}' in 
             local file system or '{fs.default.name}/{graphname}' in HDFS
@@ -452,6 +447,9 @@ Usage: hugegraph [options] [command] [command options]
             all vertices, edges and schema, in other words, 'all' equals with 
             'vertex,edge,vertex_label,edge_label,property_key,index_label' 
             Default: [PROPERTY_KEY, VERTEX_LABEL, EDGE_LABEL, INDEX_LABEL, VERTEX, EDGE]
+          --keep-local-data
+            Whether to keep the local directory of graph data after restored
+            Default: false
           --log, -l
             Directory of log
             Default: ./logs
@@ -471,14 +469,12 @@ Usage: hugegraph [options] [command] [command options]
             Default: 0
           --target-trust-store-file
             The trust store file of target graph to migrate
-            Default: <empty string>
           --target-trust-store-password
             The trust store password of target graph to migrate
-            Default: <empty string>
           --target-url
             The url of target graph to migrate
             Default: http://127.0.0.1:8081
-          --target-username
+          --target-user
             The username of target graph to migrate
           -D
             HDFS config parameters
