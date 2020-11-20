@@ -41,10 +41,18 @@ $ git clone https://github.com/hugegraph/hugegraph-loader.git
 ```
 
 由于Oracle ojdbc license的限制，需要手动安装ojdbc到本地maven仓库。
-访问[Oracle jdbc 下载](https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html)页面。选择Oracle Database 12c Release 2 (12.2.0.1) drivers，如下图所示。
-![在这里插入图片描述](images/oracle-download.png)
+访问[Oracle jdbc 下载](https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html) 页面。选择Oracle Database 12c Release 2 (12.2.0.1) drivers，如下图所示。
+
+<center>
+  <img src="/images/oracle-download.png" alt="image">
+</center>
+
 打开链接后，选择“ojdbc8.jar”, 如下图所示。
-![在这里插入图片描述](images/ojdbc8.png)
+
+<center>
+  <img src="/images/ojdbc8.png" alt="image">
+</center>
+
  把ojdbc8安装到本地maven仓库，进入``ojdbc8.jar``所在目录，执行以下命令。
 ```
 mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
@@ -512,7 +520,7 @@ Office,388
 }
 ```                                                                                                                         
 
-1.0 版本的映射文件是以顶点和边为中心，设置输入源；而 2.0 版本是以输入源为中心，设置顶点和边映射。有些输入源（比如一个文件）既能生成顶点，也能生成边，如果用 1.0 版的格式写，就需要在 vertex 和 egde 映射块中各写一次 input 块，这两次的 input 块是完全一样的；而 2.0 版本只需要写一次 input。所以 2.0 版相比于 1.0 版，能省掉一些 input 的重复书写。
+映射文件 1.0 版本是以顶点和边为中心，设置输入源；而 2.0 版本是以输入源为中心，设置顶点和边映射。有些输入源（比如一个文件）既能生成顶点，也能生成边，如果用 1.0 版的格式写，就需要在 vertex 和 egde 映射块中各写一次 input 块，这两次的 input 块是完全一样的；而 2.0 版本只需要写一次 input。所以 2.0 版相比于 1.0 版，能省掉一些 input 的重复书写。
 
 在 hugegraph-loader-{version} 的 bin 目录下，有一个脚本工具 `mapping-convert.sh` 能直接将 1.0 版本的映射文件转换为 2.0 版本的，使用方式如下：
 
@@ -638,7 +646,7 @@ schema: 必填
 
 **注意:** 如果新导入的属性值为空, 会采用已有的旧数据而不会采用空值, 效果可以参考如下示例
 
-```javascript
+```json
 // JSON文件中以如下方式指定更新策略
 {
   "vertices": [
