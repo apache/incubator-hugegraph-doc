@@ -6,7 +6,7 @@
 * [Install HugeGraph-Server](quickstart/hugegraph-server.md)
 * [HugeGraph-Loader Quick Start](quickstart/hugegraph-loader.md)
 * [Manage with HugeGraph-Tools](quickstart/hugegraph-tools.md)
-* [Visual graph analysis with HugeGraph-Hubble](quickstart/hugegraph-hubble.md)
+* [Visual with HugeGraph-Hubble](quickstart/hugegraph-hubble.md)
 * [Display with HugeGraph-Studio](quickstart/hugegraph-studio.md)
 * [Develop with HugeGraph-Client](quickstart/hugegraph-client.md)
 * [Analysis with HugeGraph-Spark](quickstart/hugegraph-spark.md)
