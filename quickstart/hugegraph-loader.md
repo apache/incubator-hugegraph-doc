@@ -41,13 +41,21 @@ $ git clone https://github.com/hugegraph/hugegraph-loader.git
 ```
 
 由于Oracle ojdbc license的限制，需要手动安装ojdbc到本地maven仓库。
-访问[Oracle jdbc 下载](https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html)页面。选择Oracle Database 12c Release 2 (12.2.0.1) drivers，如下图所示。
-![在这里插入图片描述](images/oracle-download.png)
+访问[Oracle jdbc 下载](https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html) 页面。选择Oracle Database 12c Release 2 (12.2.0.1) drivers，如下图所示。
+
+<center>
+  <img src="/images/oracle-download.png" alt="image">
+</center>
+
 打开链接后，选择“ojdbc8.jar”, 如下图所示。
-![在这里插入图片描述](images/ojdbc8.png)
+
+<center>
+  <img src="/images/ojdbc8.png" alt="image">
+</center>
+
  把ojdbc8安装到本地maven仓库，进入``ojdbc8.jar``所在目录，执行以下命令。
 ```
-mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle   -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
+mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
 ```
 
 编译生成 tar 包:
@@ -151,7 +159,7 @@ JSON 文件要求每一行都是一个 JSON 串，且每行的格式需保持一
 
 用户也可以指定 HDFS 文件或目录作为数据源，上面关于`本地磁盘文件或目录`的要求全部适用于这里。除此之外，鉴于 HDFS 上通常存储的都是压缩文件，loader 也提供了对压缩文件的支持，并且`本地磁盘文件或目录`同样支持压缩文件。
 
-目前支持的压缩文件类型包括：GZIP、BZ2、XZ、LZMA、SNAPPY_RAW、SNAPPY_FRAMED、Z、DEFLATE、LZ4_BLOCK 和 LZ4_FRAMED。
+目前支持的压缩文件类型包括：GZIP、BZ2、XZ、LZMA、SNAPPY_RAW、SNAPPY_FRAMED、Z、DEFLATE、LZ4_BLOCK、LZ4_FRAMED、ORC 和 PARQUET。
 
 ###### 3.2.1.3 主流关系型数据库
 
@@ -224,9 +232,238 @@ Office,388
 
 #### 3.3 编写数据源映射文件
 
-输入源的映射文件是`JSON`格式的，由多个**顶点映射**和**边映射**块组成，顶点映射和边映射分别对应某类顶点/边的输入源映射。每个顶点映射和边映射块内部会包含一个**输入源**的块，这个输入源块就对应上面介绍的`本地磁盘文件或目录`、`HDFS 文件或目录`和`关系型数据库`，负责描述数据源的基本信息。
+##### 3.3.1 映射文件概述
 
-先给出上面图模型和数据文件的输入源的映射文件 mapping.json：
+输入源的映射文件用于描述如何将输入源数据与图的顶点类型/边类型建立映射关系，以`JSON`格式组织，由多个映射块组成，其中每一个映射块都负责将一个输入源映射为顶点和边。
+
+具体而言，每个映射块包含**一个输入源**和多个**顶点映射**与**边映射**块，输入源块对应上面介绍的`本地磁盘文件或目录`、`HDFS 文件或目录`和`关系型数据库`，负责描述数据源的基本信息，比如数据在哪，是什么格式的，分隔符是什么等。顶点映射/边映射与该输入源绑定，可以选择输入源的哪些列，哪些列作为id、哪些列作为属性，以及每一列映射成什么属性，列的值映射成属性的什么值等等。
+
+以最通俗的话讲，每一个映射块描述了：要导入的文件在哪，文件的每一行要作为哪一类顶点/边，文件的哪些列是需要导入的，以及这些列对应顶点/边的什么属性等。
+
+> 注意：0.11.0 版本以前的映射文件与 0.11.0 以后的格式变化较大，为表述方便，下面称 0.11.0 以前的映射文件（格式）为 1.0 版本，0.11.0 以后的为 2.0 版本。并且若无特殊说明，“映射文件”表示的是 2.0 版本的。
+
+2.0 版本的映射文件的框架为：
+
+```json
+{
+  "version": "2.0",
+  "structs": [
+    {
+      "id": "1",
+      "input": {
+      },
+      "vertices": [
+        {},
+        {}
+      ],
+      "edges": [
+        {},
+        {}
+      ]
+    }
+  ]
+}
+```
+
+这里直接给出两个版本的映射文件（描述了上面图模型和数据文件）
+
+2.0 版本的映射文件：
+
+```json
+{
+  "version": "2.0",
+  "structs": [
+    {
+      "id": "1",
+      "skip": false,
+      "input": {
+        "type": "FILE",
+        "path": "vertex_person.csv",
+        "file_filter": {
+          "extensions": [
+            "*"
+          ]
+        },
+        "format": "CSV",
+        "delimiter": ",",
+        "date_format": "yyyy-MM-dd HH:mm:ss",
+        "time_zone": "GMT+8",
+        "skipped_line": {
+          "regex": "(^#|^//).*|"
+        },
+        "compression": "NONE",
+        "header": [
+          "name",
+          "age",
+          "city"
+        ],
+        "charset": "UTF-8",
+        "list_format": null
+      },
+      "vertices": [
+        {
+          "label": "person",
+          "skip": false,
+          "id": null,
+          "unfold": false,
+          "field_mapping": {},
+          "value_mapping": {},
+          "selected": [],
+          "ignored": [],
+          "null_values": [
+            ""
+          ],
+          "update_strategies": {}
+        }
+      ],
+      "edges": []
+    },
+    {
+      "id": "2",
+      "skip": false,
+      "input": {
+        "type": "FILE",
+        "path": "vertex_software.csv",
+        "file_filter": {
+          "extensions": [
+            "*"
+          ]
+        },
+        "format": "CSV",
+        "delimiter": ",",
+        "date_format": "yyyy-MM-dd HH:mm:ss",
+        "time_zone": "GMT+8",
+        "skipped_line": {
+          "regex": "(^#|^//).*|"
+        },
+        "compression": "NONE",
+        "header": null,
+        "charset": "UTF-8",
+        "list_format": null
+      },
+      "vertices": [
+        {
+          "label": "software",
+          "skip": false,
+          "id": null,
+          "unfold": false,
+          "field_mapping": {},
+          "value_mapping": {},
+          "selected": [],
+          "ignored": [],
+          "null_values": [
+            ""
+          ],
+          "update_strategies": {}
+        }
+      ],
+      "edges": []
+    },
+    {
+      "id": "3",
+      "skip": false,
+      "input": {
+        "type": "FILE",
+        "path": "edge_knows.json",
+        "file_filter": {
+          "extensions": [
+            "*"
+          ]
+        },
+        "format": "JSON",
+        "delimiter": null,
+        "date_format": "yyyy-MM-dd HH:mm:ss",
+        "time_zone": "GMT+8",
+        "skipped_line": {
+          "regex": "(^#|^//).*|"
+        },
+        "compression": "NONE",
+        "header": null,
+        "charset": "UTF-8",
+        "list_format": null
+      },
+      "vertices": [],
+      "edges": [
+        {
+          "label": "knows",
+          "skip": false,
+          "source": [
+            "source_name"
+          ],
+          "unfold_source": false,
+          "target": [
+            "target_name"
+          ],
+          "unfold_target": false,
+          "field_mapping": {
+            "source_name": "name",
+            "target_name": "name"
+          },
+          "value_mapping": {},
+          "selected": [],
+          "ignored": [],
+          "null_values": [
+            ""
+          ],
+          "update_strategies": {}
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "skip": false,
+      "input": {
+        "type": "FILE",
+        "path": "edge_created.json",
+        "file_filter": {
+          "extensions": [
+            "*"
+          ]
+        },
+        "format": "JSON",
+        "delimiter": null,
+        "date_format": "yyyy-MM-dd HH:mm:ss",
+        "time_zone": "GMT+8",
+        "skipped_line": {
+          "regex": "(^#|^//).*|"
+        },
+        "compression": "NONE",
+        "header": null,
+        "charset": "UTF-8",
+        "list_format": null
+      },
+      "vertices": [],
+      "edges": [
+        {
+          "label": "created",
+          "skip": false,
+          "source": [
+            "source_name"
+          ],
+          "unfold_source": false,
+          "target": [
+            "target_name"
+          ],
+          "unfold_target": false,
+          "field_mapping": {
+            "source_name": "name",
+            "target_name": "name"
+          },
+          "value_mapping": {},
+          "selected": [],
+          "ignored": [],
+          "null_values": [
+            ""
+          ],
+          "update_strategies": {}
+        }
+      ]
+    }
+  ]
+}
+```
+
+1.0 版本的映射文件：
 
 ```json
 {
@@ -281,96 +518,42 @@ Office,388
     }
   ]
 }
+```                                                                                                                         
+
+映射文件 1.0 版本是以顶点和边为中心，设置输入源；而 2.0 版本是以输入源为中心，设置顶点和边映射。有些输入源（比如一个文件）既能生成顶点，也能生成边，如果用 1.0 版的格式写，就需要在 vertex 和 egde 映射块中各写一次 input 块，这两次的 input 块是完全一样的；而 2.0 版本只需要写一次 input。所以 2.0 版相比于 1.0 版，能省掉一些 input 的重复书写。
+
+在 hugegraph-loader-{version} 的 bin 目录下，有一个脚本工具 `mapping-convert.sh` 能直接将 1.0 版本的映射文件转换为 2.0 版本的，使用方式如下：
+
+```bash
+bin/mapping-convert.sh struct.json
 ```
 
-##### 3.3.1 顶点和边映射
+会在 struct.json 的同级目录下生成一个 struct-v2.json。
 
-顶点和边映射的节点（JSON 文件中的一个 key）有很多相同的部分，下面先介绍相同部分，再分别介绍`顶点映射`和`边映射`的特有节点。
-
-**相同部分的节点**
-
-- label: 待导入的顶点/边数据所属的`label`，必填；                                                                                   
-- input: 顶点/边输入源的信息，是一个复合结构，必填；    
-- field_mapping: 将输入源列的列名映射为顶点/边的属性名，选填；
-- value_mapping: 将输入源的数据值映射为顶点/边的属性值，选填；
-- selected: 选择某些列插入，其他未选中的不插入，不能与`ignored`同时存在，选填；                                                                           
-- ignored: 忽略某些列，使其不参与插入，不能与`selected`同时存在，选填；
-- null_values: 可以指定一些字符串代表空值，比如"NULL"，如果该列对应的顶点/边属性又是一个可空属性，那在构造顶点/边时不会设置该属性的值，选填；                                                                                
-- update_strategies: 如果数据需要按特定方式批量**更新**时可以对每个属性指定具体的更新策略 (具体见下)，选填；
-
-**更新策略**支持8种 :  (需要全大写)
-
-1. 数值累加 : `SUM`
-2. 两个数字/日期取更大的: `BIGGER`
-3. 两个数字/日期取更小: `SMALLER`
-4. **Set**属性取并集: `UNION`
-5. **Set**属性取交集: `INTERSECTION`
-6. **List**属性追加元素: `APPEND`
-7. **List/Set**属性删除元素: `ELIMINATE`
-8. 覆盖已有属性: `OVERRIDE`
-
-**注意:** 如果新导入的属性值为空, 会采用已有的旧数据而不会采用空值, 效果可以参考如下示例
-
-```javascript
-// JSON文件中以如下方式指定更新策略
-{
-  "vertices": [
-    {
-      "label": "person",
-      "update_strategies": {
-        "age": "SMALLER",
-        "set": "UNION"
-      },
-      "input": {
-        "type": "file",
-        "path": "vertex_person.txt",
-        "format": "TEXT",
-        "header": ["name", "age", "set"]
-      }
-    }
-  ]
-}
-
-// 1.写入一行带OVERRIDE更新策略的数据 (这里null代表空)
-'a b null null'
-
-// 2.再写一行
-'null null c d'
-
-// 3.最后可以得到
-'a b c d'   
-
-// 如果没有更新策略, 则会得到
-'null null c d'
-```
-
-> **注意** : 采用了批量更新的策略后, 磁盘读请求数会大幅上升, 导入速度相比纯写覆盖会慢数倍 (此时HDD磁盘[IOPS](https://en.wikipedia.org/wiki/IOPS)会成为瓶颈, 建议采用SSD以保证速度)
-
-**顶点映射的特有节点**
-
-- id: 指定某一列作为顶点的 id 列，当顶点 id 策略为`CUSTOMIZE`时，必填；当 id 策略为`PRIMARY_KEY`时，必须为空；
-
-**边映射的特有节点**
-                                                                                                                                                         
-- source: 选择输入源某几列作为**源顶点**的 id 列，当源顶点的 id 策略为 `CUSTOMIZE`时，必须指定某一列作为顶点的 id 列；当源顶点的 id 策略为 `PRIMARY_KEY`时，必须指定一列或多列用于拼接生成顶点的 id，也就是说，不管是哪种 id 策略，此项必填； 
-- target: 指定某几列作为**目标顶点**的 id 列，与 source 类似，不再赘述；                                                                                                                           
-
-##### 3.3.2 输入源映射
+##### 3.3.2 输入源
 
 输入源目前分为三类：FILE、HDFS、JDBC，由`type`节点区分，我们称为本地文件输入源、HDFS 输入源和 JDBC 输入源，下面分别介绍。
 
 ###### 3.3.2.1 本地文件输入源
 
-- type: 输入源类型，必须填 file 或 FILE； 
-- path: 本地文件或目录的路径，绝对路径或相对于映射文件的相对路径，建议使用绝对路径，必填；
-- file_filter: 从`path`中筛选复合条件的文件，复合结构，目前只支持配置扩展名，用子节点`extensions`表示，默认为"*"，表示保留所有文件；
-- format: 本地文件的格式，可选值为 CSV、TEXT 及 JSON，必须大写，必填；               
-- header: 文件各列的列名，如不指定则会以数据文件第一行作为 header；当文件本身有标题且又指定了 header，文件的第一行会被当作普通的数据行；JSON 文件不需要指定 header，选填；    
-- delimiter: 文件行的列分隔符，默认以逗号`","`作为分隔符，`JSON`文件不需要指定，选填；     
-- charset: 文件的编码字符集，默认`UTF-8`，选填；    
-- date_format: 自定义的日期格式，默认值为 yyyy-MM-dd HH:mm:ss，选填； 
-- skipped_line: 想跳过的行，复合结构，目前只能配置要跳过的行的正则表达式，用子节点`regex`描述，默认不跳过任何行，选填；
-- compression: 文件的压缩格式，可选值为 NONE、GZIP、BZ2、XZ、LZMA、SNAPPY_RAW、SNAPPY_FRAMED、Z、DEFLATE、LZ4_BLOCK 和 LZ4_FRAMED，默认为 NONE，表示非压缩文件，选填；
+- id: 输入源的 id，该字段用于支持一些内部功能，非必填（未填时会自动生成），强烈建议写上，对于调试大有裨益；
+- skip: 是否跳过该输入源，由于 JSON 文件无法添加注释，如果某次导入时不想导入某个输入源，但又不想删除该输入源的配置，则可以设置为 true 将其跳过，默认为 false，非必填；
+- input: 输入源映射块，复合结构
+    - type: 输入源类型，必须填 file 或 FILE； 
+    - path: 本地文件或目录的路径，绝对路径或相对于映射文件的相对路径，建议使用绝对路径，必填；
+    - file_filter: 从`path`中筛选复合条件的文件，复合结构，目前只支持配置扩展名，用子节点`extensions`表示，默认为"*"，表示保留所有文件；
+    - format: 本地文件的格式，可选值为 CSV、TEXT 及 JSON，必须大写，必填；               
+    - header: 文件各列的列名，如不指定则会以数据文件第一行作为 header；当文件本身有标题且又指定了 header，文件的第一行会被当作普通的数据行；JSON 文件不需要指定 header，选填；    
+    - delimiter: 文件行的列分隔符，默认以逗号`","`作为分隔符，`JSON`文件不需要指定，选填；     
+    - charset: 文件的编码字符集，默认`UTF-8`，选填；    
+    - date_format: 自定义的日期格式，默认值为 yyyy-MM-dd HH:mm:ss，选填；如果日期是以时间戳的形式呈现的，此项须写为`timestamp`（固定写法）； 
+    - time_zone: 设置日期数据是处于哪个时区的，默认值为`GMT+8`，选填；
+    - skipped_line: 想跳过的行，复合结构，目前只能配置要跳过的行的正则表达式，用子节点`regex`描述，默认不跳过任何行，选填；
+    - compression: 文件的压缩格式，可选值为 NONE、GZIP、BZ2、XZ、LZMA、SNAPPY_RAW、SNAPPY_FRAMED、Z、DEFLATE、LZ4_BLOCK、LZ4_FRAMED、ORC 和 PARQUET，默认为 NONE，表示非压缩文件，选填；
+    - list_format: 当文件的某列是集合结构时（对应图中的 PropertyKey 的 Cardinality 为 Set 或 List），可以用此项设置该列的起始符、分隔符、结束符，复合结构: 
+        - start_symbol: 集合结构列的起始符；
+        - elem_delimiter: 集合结构列的分隔符；
+        - end_symbol: 集合结构列的结束符；
 
 ###### 3.3.2.2 HDFS 输入源
 
@@ -378,7 +561,7 @@ Office,388
 
 - type: 输入源类型，必须填 hdfs 或 HDFS，必填； 
 - path: HDFS 文件或目录的路径，必须是 HDFS 的绝对路径，必填； 
-- fs_default_fs: HDFS 集群的 fs.defaultFS 值（namenode 节点信息），默认使用 fs.defaultFS 的默认值，选填；
+- core_site_path: HDFS 集群的 core-site.xml 文件路径，重点要指明 namenode 的地址（fs.default.name），以及文件系统的实现（fs.hdfs.impl）；
 
 ###### 3.3.2.3 JDBC 输入源
 
@@ -435,6 +618,80 @@ schema: 可空，默认值与用户名相同
 
 schema: 必填
 
+##### 3.3.1 顶点和边映射
+
+顶点和边映射的节点（JSON 文件中的一个 key）有很多相同的部分，下面先介绍相同部分，再分别介绍`顶点映射`和`边映射`的特有节点。
+
+**相同部分的节点**
+
+- label: 待导入的顶点/边数据所属的`label`，必填；                                                                                   
+- field_mapping: 将输入源列的列名映射为顶点/边的属性名，选填；
+- value_mapping: 将输入源的数据值映射为顶点/边的属性值，选填；
+- selected: 选择某些列插入，其他未选中的不插入，不能与`ignored`同时存在，选填；                                                                           
+- ignored: 忽略某些列，使其不参与插入，不能与`selected`同时存在，选填；
+- null_values: 可以指定一些字符串代表空值，比如"NULL"，如果该列对应的顶点/边属性又是一个可空属性，那在构造顶点/边时不会设置该属性的值，选填；                                                                                
+- update_strategies: 如果数据需要按特定方式批量**更新**时可以对每个属性指定具体的更新策略 (具体见下)，选填；
+- unfold: 是否将列展开，展开的每一列都会与其他列一起组成一行，相当于是展开成了多行；比如文件的某一列（id 列）的值是`[1,2,3]`，其他列的值是`18,Beijing`，当设置了 unfold 之后，这一行就会变成 3 行，分别是：`1,18,Beijing`，`2,18,Beijing`和`3,18,Beijing`。需要注意的是此项只会展开被选作为 id 的列。默认 false，选填；
+
+**更新策略**支持8种 :  (需要全大写)
+
+1. 数值累加 : `SUM`
+2. 两个数字/日期取更大的: `BIGGER`
+3. 两个数字/日期取更小: `SMALLER`
+4. **Set**属性取并集: `UNION`
+5. **Set**属性取交集: `INTERSECTION`
+6. **List**属性追加元素: `APPEND`
+7. **List/Set**属性删除元素: `ELIMINATE`
+8. 覆盖已有属性: `OVERRIDE`
+
+**注意:** 如果新导入的属性值为空, 会采用已有的旧数据而不会采用空值, 效果可以参考如下示例
+
+```json
+// JSON文件中以如下方式指定更新策略
+{
+  "vertices": [
+    {
+      "label": "person",
+      "update_strategies": {
+        "age": "SMALLER",
+        "set": "UNION"
+      },
+      "input": {
+        "type": "file",
+        "path": "vertex_person.txt",
+        "format": "TEXT",
+        "header": ["name", "age", "set"]
+      }
+    }
+  ]
+}
+
+// 1.写入一行带OVERRIDE更新策略的数据 (这里null代表空)
+'a b null null'
+
+// 2.再写一行
+'null null c d'
+
+// 3.最后可以得到
+'a b c d'   
+
+// 如果没有更新策略, 则会得到
+'null null c d'
+```
+
+> **注意** : 采用了批量更新的策略后, 磁盘读请求数会大幅上升, 导入速度相比纯写覆盖会慢数倍 (此时HDD磁盘[IOPS](https://en.wikipedia.org/wiki/IOPS)会成为瓶颈, 建议采用SSD以保证速度)
+
+**顶点映射的特有节点**
+
+- id: 指定某一列作为顶点的 id 列，当顶点 id 策略为`CUSTOMIZE`时，必填；当 id 策略为`PRIMARY_KEY`时，必须为空；
+
+**边映射的特有节点**
+                                                                                                                                                         
+- source: 选择输入源某几列作为**源顶点**的 id 列，当源顶点的 id 策略为 `CUSTOMIZE`时，必须指定某一列作为顶点的 id 列；当源顶点的 id 策略为 `PRIMARY_KEY`时，必须指定一列或多列用于拼接生成顶点的 id，也就是说，不管是哪种 id 策略，此项必填； 
+- target: 指定某几列作为**目标顶点**的 id 列，与 source 类似，不再赘述；
+- unfold_source: 是否展开文件的 source 列，效果与顶点映射中的类似，不再赘述； 
+- unfold_target: 是否展开文件的 target 列，效果与顶点映射中的类似，不再赘述；
+
 #### 3.4 执行命令导入
 
 准备好图模型、数据文件以及输入源映射关系文件后，接下来就可以将数据文件导入到图数据库中。
@@ -450,10 +707,17 @@ schema: 必填
 -s 或 --schema  |              |    Y    | schema文件路径
 -h 或 --host    | localhost    |         | HugeGraphServer 的地址
 -p 或 --port    | 8080         |         | HugeGraphServer 的端口号
+--username          | null         |         | 当 HugeGraphServer 开启了权限认证时，当前图的 username
 --token             | null         |         | 当 HugeGraphServer 开启了权限认证时，当前图的 token 
+--protocol          | http         |         | 向服务端发请求的协议，可选 http 或 https
+--trust-store-file  |              |         | 请求协议为 https 时，客户端的证书文件路径
+--trust-store-password |           |         | 请求协议为 https 时，客户端证书密码
+--clear-all-data    | false        |         | 导入数据前是否清除服务端的原有数据
+--clear-timeout     | 240          |         | 导入数据前清除服务端的原有数据的超时时间
 --incremental-mode  | false        |         | 是否使用断点续导模式，仅输入源为 FILE 和 HDFS 支持该模式，启用该模式能从上一次导入停止的地方开始导
---reload-failure    | false        |         | 是否导入以前导入失败的那些记录，仅在断点续导（或增量导入）模式下才能开启
---num-threads       | CPUs         |         | 导入过程中线程池大小 (CPUs是当前OS可用**逻辑核**个数) 
+--failure-mode      | false        |         | 失败模式为 true 时，会导入之前失败了的数据，一般来说失败数据文件需要在人工更正编辑好后，再次进行导入
+--batch-insert-threads | CPUs      |         | 批量插入线程池大小 (CPUs是当前OS可用**逻辑核**个数) 
+--single-insert-threads | 8        |         | 单条插入线程池的大小
 --max-conn          | 4 * CPUs     |         | HugeClient 与 HugeGraphServer 的最大 HTTP 连接数，**调整线程**的时候建议同时调整此项 
 --max-conn-per-route| 2 * CPUs     |         | HugeClient 与 HugeGraphServer 每个路由的最大 HTTP 连接数，**调整线程**的时候建议同时调整此项 
 --batch-size        | 500          |         | 导入数据时每个批次包含的数据条数
@@ -464,6 +728,7 @@ schema: 必填
 --retry-times       | 0            |         | 发生特定异常时的重试次数
 --retry-interval    | 10           |         | 重试之前的间隔时间（秒）
 --check-vertex      | false        |         | 插入边时是否检查边所连接的顶点是否存在
+--print-progress    | true         |         | 是否在控制台实时打印导入条数
 --dry-run           | false        |         | 打开该模式，只解析不导入，通常用于测试
 --help              | false        |         | 打印帮助信息
 
@@ -549,6 +814,7 @@ ripple|java|199
 ```
 
 #### 4.2 编写schema
+
 schema文件：`example/file/schema.groovy`
 
 ```groovy
@@ -650,30 +916,18 @@ sh bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/f
 导入结束后，会出现类似如下统计信息：
 
 ```
-vertices has been loaded           : 8
-edges has been loaded           : 6
+vertices/edges has been loaded this time : 8/6
 --------------------------------------------------
-total vertex metrics
-parse:
-    parse success           : 8
-    parse failure           : 0
-    parse time              : 0.043s
-    parse rate              : 186(vertices/s)
-load:
-    load success            : 8
-    load failure            : 0
-    load time               : 0.131s
-    load rate               : 61(vertices/s)
---------------------------------------------------
-total edge metrics
-parse:
-    parse success           : 6
-    parse failure           : 0
-    parse time              : 0.026s
-    parse rate              : 230(edges/s)
-load:
-    load success            : 6
-    load failure            : 0
-    load time               : 0.071s
-    load rate               : 84(edges/s)
+count metrics
+     input read success            : 14
+     input read failure            : 0
+     vertex parse success          : 8
+     vertex parse failure          : 0
+     vertex insert success         : 8
+     vertex insert failure         : 0
+     edge parse success            : 6
+     edge parse failure            : 0
+     edge insert success           : 6
+     edge insert failure           : 0
 ```
+
