@@ -111,7 +111,7 @@
 #### 其它
 
 - cherry-pick 0.10.4 版本的 bug 修复代码（hugegraph #785，hugegraph #1047）
-- Jackson 升级到 2.10.2 版本（hugegraph #）
+- Jackson 升级到 2.10.2 版本（hugegraph #859）
 - Thanks 信息中增加对 Titan 的感谢（hugegraph #906）
 - 适配 TinkerPop 测试（hugegraph #1048）
 - 修改允许输出的日志最低等级为 TRACE（hugegraph #1050）
