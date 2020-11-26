@@ -159,8 +159,8 @@ Usage: hugegraph [options] [command] [command options]
     - -D，用 -Dkey=value 的模式指定动态参数，用来从 HDFS 恢复图时，指定 HDFS 的配置项，例如：-Dfs.default.name=hdfs://localhost:9000
     > 只有当 --format 为 json 执行 backup 时，才可以使用 restore 命令恢复
 - migrate, 将当前连接的图迁移至另一个 HugeGraphServer 中
-    - --target-graph，目标图的名字
-    - --target-url，目标图所在的 HugeGraphServer
+    - --target-graph，目标图的名字，默认为 hugegraph
+    - --target-url，目标图所在的 HugeGraphServer，默认为 http://127.0.0.1:8081
     - --target-username，访问目标图的用户名
     - --target-password，访问目标图的密码
     - --target-timeout，访问目标图的超时时间
