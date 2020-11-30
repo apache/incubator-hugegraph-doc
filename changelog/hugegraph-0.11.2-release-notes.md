@@ -26,7 +26,7 @@
 #### 功能更新
 
 - 支持多属性顶点/边的分页查询（hugegraph #759）
-- 改进聚合运算（hugegraph #813）
+- 支持聚合运算的性能优化（hugegraph #813）
 - 支持堆外缓存（hugegraph #846）
 - 支持属性权限管理（hugegraph #971）
 - 支持 MySQL 和 Memory 后端分片，并改进 HBase 分片方法（hugegraph #974）
