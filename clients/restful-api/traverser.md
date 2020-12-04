@@ -247,7 +247,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/kout?source="1:marko"&max_de
 ###### Params
 
 - source：起始顶点id，必填项
-- 从起始点出发的Step，结构如下：
+- 从起始点出发的Step，必填项，结构如下：
 	- direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
 	- labels：边的类型列表
 	- properties：通过属性的值过滤边
@@ -265,7 +265,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/kout?source="1:marko"&max_de
 - capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
 - limit：返回的顶点的最大数目，选填项，默认为10000000
 
-##### 3.2.1.2 使用方法
+##### 3.2.2.2 使用方法
 
 ###### Method & Url
 
@@ -449,7 +449,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/kneighbor?source=“1:marko�
 ###### Params
 
 - source：起始顶点id，必填项
-- 从起始点出发的Step，结构如下：
+- 从起始点出发的Step，必填项，结构如下：
 	- direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
 	- labels：边的类型列表
 	- properties：通过属性的值过滤边
@@ -717,7 +717,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/jaccardsimilarity?vertex="1:
 ###### Params
 
 - vertex：一个顶点id，必填项
-- 从起始点出发的Step，结构如下：
+- 从起始点出发的Step，必填项，结构如下：
 	- direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
 	- labels：边的类型列表
 	- properties：通过属性的值过滤边
@@ -1123,8 +1123,8 @@ GET http://localhost:8080/graphs/{graph}/traversers/singlesourceshortestpath?sou
 
 - vertices：定义起始顶点，必填项，指定方式包括：
 	- ids：通过顶点id列表提供起始顶点
-	- labels和properties：如果没有指定ids，则使用label和properties的联合条件查询起始顶点
-		- labels：顶点的类型列表
+	- label和properties：如果没有指定ids，则使用label和properties的联合条件查询起始顶点
+		- label：顶点的类型
 		- properties：通过属性的值查询起始顶点
 		> 注意：properties中的属性值可以是列表，表示只要key对应的value在列表中就可以
 - step：表示从起始顶点到终止顶点走过的路径，必填项，Step的结构如下：
@@ -1418,14 +1418,14 @@ GET http://localhost:8080/graphs/{graph}/traversers/paths?source="1:marko"&targe
 
 - sources：定义起始顶点，必填项，指定方式包括：
 	- ids：通过顶点id列表提供起始顶点
-	- labels和properties：如果没有指定ids，则使用label和properties的联合条件查询起始顶点
-		- labels：顶点的类型列表
+	- label和properties：如果没有指定ids，则使用label和properties的联合条件查询起始顶点
+		- label：顶点的类型
 		- properties：通过属性的值查询起始顶点
 		> 注意：properties中的属性值可以是列表，表示只要key对应的value在列表中就可以
 - targets：定义终止顶点，必填项，指定方式包括：
 	- ids：通过顶点id列表提供终止顶点
-	- labels和properties：如果没有指定ids，则使用label和properties的联合条件查询终止顶点
-		- labels：顶点的类型列表
+	- label和properties：如果没有指定ids，则使用label和properties的联合条件查询终止顶点
+		- label：顶点的类型
 		- properties：通过属性的值查询终止顶点
 		> 注意：properties中的属性值可以是列表，表示只要key对应的value在列表中就可以
 - step：表示从起始顶点到终止顶点走过的路径，必填项，Step的结构如下：
@@ -1520,8 +1520,8 @@ POST http://localhost:8080/graphs/{graph}/traversers/paths
 
 - sources：定义起始顶点，必填项，指定方式包括：
 	- ids：通过顶点id列表提供起始顶点
-	- labels和properties：如果没有指定ids，则使用label和properties的联合条件查询起始顶点
-		- labels：顶点的类型列表
+	- label和properties：如果没有指定ids，则使用label和properties的联合条件查询起始顶点
+		- label：顶点的类型
 		- properties：通过属性的值查询起始顶点
 		> 注意：properties中的属性值可以是列表，表示只要key对应的value在列表中就可以
 - steps：表示从起始顶点走过的路径规则，是一组Step的列表。必填项。每个Step的结构如下：
@@ -1707,14 +1707,14 @@ POST http://localhost:8080/graphs/{graph}/traversers/customizedpaths
 
 - sources：定义起始顶点，必填项，指定方式包括：
 	- ids：通过顶点id列表提供起始顶点
-	- labels和properties：如果没有指定ids，则使用label和properties的联合条件查询起始顶点
-		- labels：顶点的类型列表
+	- label和properties：如果没有指定ids，则使用label和properties的联合条件查询起始顶点
+		- label：顶点的类型
 		- properties：通过属性的值查询起始顶点
 		> 注意：properties中的属性值可以是列表，表示只要key对应的value在列表中就可以
 - targets：定义终止顶点，必填项，指定方式包括：
 	- ids：通过顶点id列表提供终止顶点
-	- labels和properties：如果没有指定ids，则使用label和properties的联合条件查询终止顶点
-		- labels：顶点的类型列表
+	- label和properties：如果没有指定ids，则使用label和properties的联合条件查询终止顶点
+		- label：顶点的类型
 		- properties：通过属性的值查询终止顶点
 		> 注意：properties中的属性值可以是列表，表示只要key对应的value在列表中就可以
 - steps：表示从起始顶点走过的路径规则，是一组Step的列表。必填项。每个Step的结构如下：
@@ -1941,8 +1941,8 @@ GET http://localhost:8080/graphs/{graph}/traversers/crosspoints?source="2:lop"&t
 
 - sources：定义起始顶点，必填项，指定方式包括：
 	- ids：通过顶点id列表提供起始顶点
-	- labels和properties：如果没有指定ids，则使用label和properties的联合条件查询起始顶点
-		- labels：顶点的类型列表
+	- label和properties：如果没有指定ids，则使用label和properties的联合条件查询起始顶点
+		- label：顶点的类型
 		- properties：通过属性的值查询起始顶点
 		> 注意：properties中的属性值可以是列表，表示只要key对应的value在列表中就可以
 
@@ -1952,6 +1952,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/crosspoints?source="2:lop"&t
 		- labels：边的类型列表
 		- properties：通过属性的值过滤边
 		- degree：查询过程中，单个顶点最大边数目，默认为10000
+		- skip_degree：查询过程中需要跳过的顶点的最小的边数目，即当顶点的边数目大于 skip_degree 时，跳过该顶点，可用于规避超级点，选填项，默认为0，表示不跳过任何点
 - capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
 - limit：返回的路径的最大数目，选填项，默认为10
 - with_path：true表示返回交点所在的路径，false表示不返回交点所在的路径，选填项，默认为false
@@ -2266,8 +2267,8 @@ GET http://localhost:8080/graphs/{graph}/traversers/rays?source="1:marko"&max_de
 
 - sources：定义起始顶点，必填项，指定方式包括：
 	- ids：通过顶点id列表提供起始顶点
-	- labels和properties：如果没有指定ids，则使用label和properties的联合条件查询起始顶点
-		- labels：顶点的类型列表
+	- label和properties：如果没有指定ids，则使用label和properties的联合条件查询起始顶点
+		- label：顶点的类型
 		- properties：通过属性的值查询起始顶点
 		> 注意：properties中的属性值可以是列表，表示只要key对应的value在列表中就可以
 
