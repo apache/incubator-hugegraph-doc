@@ -44,6 +44,7 @@
     * [Task](clients/restful-api/task.md)
     * [Rebuild](clients/restful-api/rebuild.md)
     * [Gremlin](clients/restful-api/gremlin.md)
+    * [Authentication](clients/restful-api/auth.md)
     * [Other](clients/restful-api/other.md)
 * [Java Client](clients/hugegraph-client.md)
 * [Gremlin Console](clients/gremlin-console.md)
