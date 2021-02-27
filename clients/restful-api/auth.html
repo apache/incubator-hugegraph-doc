@@ -1,0 +1,1764 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Authentication · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../../styles/website.css">
+        
+    
+
+    
+        <link rel="stylesheet" 
+            href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+    
+
+    
+        <link rel="stylesheet" href="../../gitbook/cuav-style.css">
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    
+    
+        <link rel="shortcut icon" 
+            href="../../images/favicon.ico" type="image/x-icon">
+    
+
+    
+    <link rel="next" href="other.html" />
+    
+    
+    <link rel="prev" href="gremlin.html" />
+    
+
+    </head>
+    <body>
+        
+
+
+
+	
+	
+	
+	<nav
+			class="navbar fixed-top navbar-inverse background-inverse navbar-toggleable-md">
+		
+
+		<a class="navbar-brand" href="javascript:;">
+			
+			
+				<img src="../../images/logo.png" 
+					height="32" class="d-inline-block align-top" 
+					alt="HugeGraph Database" />
+			
+		</a>
+
+		
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<span class="mr-auto"></span>
+				<ul id="cuav-nav" class="navbar-nav text-center text-lg-left">
+					
+				</ul>
+				<span style="width: 6rem"></span>
+			</div>
+			
+		
+	</nav>
+
+
+<div class="book">
+    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >Authentication</a>
+    </h1>
+</div>
+
+
+
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../download.html">
+            
+                <a href="../../download.html">
+            
+                    
+                    Download
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Quickstart</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../../quickstart/hugegraph-server.html">
+            
+                <a href="../../quickstart/hugegraph-server.html">
+            
+                    
+                    Install HugeGraph-Server
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../../quickstart/hugegraph-loader.html">
+            
+                <a href="../../quickstart/hugegraph-loader.html">
+            
+                    
+                    Load data with HugeGraph-Loader
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../../quickstart/hugegraph-tools.html">
+            
+                <a href="../../quickstart/hugegraph-tools.html">
+            
+                    
+                    Manage with HugeGraph-Tools
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../../quickstart/hugegraph-hubble.html">
+            
+                <a href="../../quickstart/hugegraph-hubble.html">
+            
+                    
+                    Visual with HugeGraph-Hubble
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../../quickstart/hugegraph-studio.html">
+            
+                <a href="../../quickstart/hugegraph-studio.html">
+            
+                    
+                    Display with HugeGraph-Studio
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" data-path="../../quickstart/hugegraph-client.html">
+            
+                <a href="../../quickstart/hugegraph-client.html">
+            
+                    
+                    Develop with HugeGraph-Client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.7" data-path="../../quickstart/hugegraph-spark.html">
+            
+                <a href="../../quickstart/hugegraph-spark.html">
+            
+                    
+                    Analysis with HugeGraph-Spark
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Guides</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../../guides/architectural.html">
+            
+                <a href="../../guides/architectural.html">
+            
+                    
+                    Architecture Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../../guides/desgin-concept.html">
+            
+                <a href="../../guides/desgin-concept.html">
+            
+                    
+                    Design Concepts
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../../guides/custom-plugin.html">
+            
+                <a href="../../guides/custom-plugin.html">
+            
+                    
+                    Custom Plugins
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="../../guides/backup-restore.html">
+            
+                <a href="../../guides/backup-restore.html">
+            
+                    
+                    Backup Restore
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.5" data-path="../../guides/faq.html">
+            
+                <a href="../../guides/faq.html">
+            
+                    
+                    FAQ
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Config</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../../config/config-guide.html">
+            
+                <a href="../../config/config-guide.html">
+            
+                    
+                    Config Guide
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="../../config/config-option.html">
+            
+                <a href="../../config/config-option.html">
+            
+                    
+                    Config Options
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="../../config/config-authentication.html">
+            
+                <a href="../../config/config-authentication.html">
+            
+                    
+                    Config Authentication
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.4" data-path="../../config/config-https.html">
+            
+                <a href="../../config/config-https.html">
+            
+                    
+                    Config HTTPS
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Query Language</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="../../language/hugegraph-gremlin.html">
+            
+                <a href="../../language/hugegraph-gremlin.html">
+            
+                    
+                    Gremlin Query Language
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="../../language/hugegraph-example.html">
+            
+                <a href="../../language/hugegraph-example.html">
+            
+                    
+                    HugeGraph Examples
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Clients</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="../hugegraph-api.html">
+            
+                <a href="../hugegraph-api.html">
+            
+                    
+                    RESTful API
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="6.1.1" data-path="propertykey.html">
+            
+                <a href="propertykey.html">
+            
+                    
+                    PropertyKey
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.1.2" data-path="vertexlabel.html">
+            
+                <a href="vertexlabel.html">
+            
+                    
+                    VertexLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.1.3" data-path="edgelabel.html">
+            
+                <a href="edgelabel.html">
+            
+                    
+                    EdgeLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.1.4" data-path="indexlabel.html">
+            
+                <a href="indexlabel.html">
+            
+                    
+                    IndexLabel
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.1.5" data-path="vertex.html">
+            
+                <a href="vertex.html">
+            
+                    
+                    Vertex
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.1.6" data-path="edge.html">
+            
+                <a href="edge.html">
+            
+                    
+                    Edge
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.1.7" data-path="traverser.html">
+            
+                <a href="traverser.html">
+            
+                    
+                    Traverser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.1.8" data-path="rank.html">
+            
+                <a href="rank.html">
+            
+                    
+                    Rank
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.1.9" data-path="variable.html">
+            
+                <a href="variable.html">
+            
+                    
+                    Variable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.1.10" data-path="graphs.html">
+            
+                <a href="graphs.html">
+            
+                    
+                    Graphs
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.1.11" data-path="task.html">
+            
+                <a href="task.html">
+            
+                    
+                    Task
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.1.12" data-path="rebuild.html">
+            
+                <a href="rebuild.html">
+            
+                    
+                    Rebuild
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.1.13" data-path="gremlin.html">
+            
+                <a href="gremlin.html">
+            
+                    
+                    Gremlin
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="6.1.14" data-path="auth.html">
+            
+                <a href="auth.html">
+            
+                    
+                    Authentication
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.1.15" data-path="other.html">
+            
+                <a href="other.html">
+            
+                    
+                    Other
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="../hugegraph-client.html">
+            
+                <a href="../hugegraph-client.html">
+            
+                    
+                    Java Client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="../gremlin-console.html">
+            
+                <a href="../gremlin-console.html">
+            
+                    
+                    Gremlin Console
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Performance</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="../../performance/hugegraph-benchmark-0.5.6.html">
+            
+                <a href="../../performance/hugegraph-benchmark-0.5.6.html">
+            
+                    
+                    HugeGraph Benchmark Performance
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="../../performance/hugegraph-api-performance.html">
+            
+                <a href="../../performance/hugegraph-api-performance.html">
+            
+                    
+                    HugeGraph API Performance
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="7.2.1" data-path="../../performance/hugegraph-api-0.5.6-RocksDB.html">
+            
+                <a href="../../performance/hugegraph-api-0.5.6-RocksDB.html">
+            
+                    
+                    v0.5.6 Stand-alone(RocksDB)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2.2" data-path="../../performance/hugegraph-api-0.5.6-Cassandra.html">
+            
+                <a href="../../performance/hugegraph-api-0.5.6-Cassandra.html">
+            
+                    
+                    v0.5.6 Cluster(Cassandra)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2.3" data-path="../../performance/hugegraph-api-0.4.4.html">
+            
+                <a href="../../performance/hugegraph-api-0.4.4.html">
+            
+                    
+                    v0.4.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2.4" data-path="../../performance/hugegraph-api-0.2.html">
+            
+                <a href="../../performance/hugegraph-api-0.2.html">
+            
+                    
+                    v0.2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="../../performance/hugegraph-loader-performance.html">
+            
+                <a href="../../performance/hugegraph-loader-performance.html">
+            
+                    
+                    HugeGraph-Loader Performance
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">ChangeLogs</li>
+        
+        
+    
+        <li class="chapter " data-level="8.1" data-path="../../changelog/hugegraph-0.11.2-release-notes.html">
+            
+                <a href="../../changelog/hugegraph-0.11.2-release-notes.html">
+            
+                    
+                    Release-0.11.2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.2" data-path="../../changelog/hugegraph-0.10.4-release-notes.html">
+            
+                <a href="../../changelog/hugegraph-0.10.4-release-notes.html">
+            
+                    
+                    Release-0.10.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.3" data-path="../../changelog/hugegraph-0.9.2-release-notes.html">
+            
+                <a href="../../changelog/hugegraph-0.9.2-release-notes.html">
+            
+                    
+                    Release-0.9.2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.4" data-path="../../changelog/hugegraph-0.8.0-release-notes.html">
+            
+                <a href="../../changelog/hugegraph-0.8.0-release-notes.html">
+            
+                    
+                    Release-0.8.0
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.5" data-path="../../changelog/hugegraph-0.7.4-release-notes.html">
+            
+                <a href="../../changelog/hugegraph-0.7.4-release-notes.html">
+            
+                    
+                    Release-0.7.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.6" data-path="../../changelog/hugegraph-0.6.1-release-notes.html">
+            
+                <a href="../../changelog/hugegraph-0.6.1-release-notes.html">
+            
+                    
+                    Release-0.6.1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.7" data-path="../../changelog/hugegraph-0.5.6-release-notes.html">
+            
+                <a href="../../changelog/hugegraph-0.5.6-release-notes.html">
+            
+                    
+                    Release-0.5.6
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.8" data-path="../../changelog/hugegraph-0.4.4-release-notes.html">
+            
+                <a href="../../changelog/hugegraph-0.4.4-release-notes.html">
+            
+                    
+                    Release-0.4.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.9" data-path="../../changelog/hugegraph-0.3.3-release-notes.html">
+            
+                <a href="../../changelog/hugegraph-0.3.3-release-notes.html">
+            
+                    
+                    Release-0.3.3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.10" data-path="../../changelog/hugegraph-0.2.4-release-notes.html">
+            
+                <a href="../../changelog/hugegraph-0.2.4-release-notes.html">
+            
+                    
+                    Release-0.2.4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.11" data-path="../../changelog/hugegraph-0.2-release-notes.html">
+            
+                <a href="../../changelog/hugegraph-0.2-release-notes.html">
+            
+                    
+                    Release-0.2
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h3 id="81-&#x7528;&#x6237;&#x8BA4;&#x8BC1;&#x4E0E;&#x6743;&#x9650;&#x63A7;&#x5236;">8.1 &#x7528;&#x6237;&#x8BA4;&#x8BC1;&#x4E0E;&#x6743;&#x9650;&#x63A7;&#x5236;</h3>
+<h5 id="&#x7528;&#x6237;&#x8BA4;&#x8BC1;&#x4E0E;&#x6743;&#x9650;&#x63A7;&#x5236;&#x6982;&#x8FF0;&#xFF1A;">&#x7528;&#x6237;&#x8BA4;&#x8BC1;&#x4E0E;&#x6743;&#x9650;&#x63A7;&#x5236;&#x6982;&#x8FF0;&#xFF1A;</h5>
+<p>HugeGraph&#x652F;&#x6301;&#x591A;&#x7528;&#x6237;&#x8BA4;&#x8BC1;&#x3001;&#x4EE5;&#x53CA;&#x7EC6;&#x7C92;&#x5EA6;&#x7684;&#x6743;&#x9650;&#x8BBF;&#x95EE;&#x63A7;&#x5236;&#xFF0C;&#x91C7;&#x7528;&#x57FA;&#x4E8E;&#x201C;&#x7528;&#x6237;-&#x7528;&#x6237;&#x7EC4;-&#x64CD;&#x4F5C;-&#x8D44;&#x6E90;&#x201D;&#x7684;4&#x5C42;&#x8BBE;&#x8BA1;&#xFF0C;&#x7075;&#x6D3B;&#x63A7;&#x5236;&#x7528;&#x6237;&#x89D2;&#x8272;&#x4E0E;&#x6743;&#x9650;&#x3002; 
+&#x8D44;&#x6E90;&#x63CF;&#x8FF0;&#x4E86;&#x56FE;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x6BD4;&#x5982;&#x7B26;&#x5408;&#x67D0;&#x4E00;&#x7C7B;&#x6761;&#x4EF6;&#x7684;&#x9876;&#x70B9;&#xFF0C;&#x6BCF;&#x4E00;&#x4E2A;&#x8D44;&#x6E90;&#x5305;&#x62EC;type&#x3001;label&#x3001;properties&#x4E09;&#x4E2A;&#x8981;&#x7D20;&#xFF0C;&#x5171;&#x6709;18&#x79CD;type&#x3001;
+&#x4EFB;&#x610F;label&#x3001;&#x4EFB;&#x610F;properties&#x7684;&#x7EC4;&#x5408;&#x5F62;&#x6210;&#x7684;&#x8D44;&#x6E90;&#xFF0C;&#x4E00;&#x4E2A;&#x8D44;&#x6E90;&#x7684;&#x5185;&#x90E8;&#x6761;&#x4EF6;&#x662F;&#x4E14;&#x5173;&#x7CFB;&#xFF0C;&#x591A;&#x4E2A;&#x8D44;&#x6E90;&#x4E4B;&#x95F4;&#x7684;&#x6761;&#x4EF6;&#x662F;&#x6216;&#x5173;&#x7CFB;&#x3002;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x5C5E;&#x4E8E;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x7528;&#x6237;&#x7EC4;&#xFF0C;
+&#x6BCF;&#x4E2A;&#x7528;&#x6237;&#x7EC4;&#x53EF;&#x4EE5;&#x62E5;&#x6709;&#x5BF9;&#x4EFB;&#x610F;&#x4E2A;&#x8D44;&#x6E90;&#x7684;&#x64CD;&#x4F5C;&#x6743;&#x9650;&#xFF0C;&#x64CD;&#x4F5C;&#x7C7B;&#x578B;&#x5305;&#x62EC;&#xFF1A;&#x8BFB;&#x3001;&#x5199;&#x3001;&#x5220;&#x9664;&#x3001;&#x6267;&#x884C;&#x7B49;&#x79CD;&#x7C7B;&#x3002; HugeGraph&#x652F;&#x6301;&#x52A8;&#x6001;&#x521B;&#x5EFA;&#x7528;&#x6237;&#x3001;&#x7528;&#x6237;&#x7EC4;&#x3001;&#x8D44;&#x6E90;&#xFF0C;
+&#x652F;&#x6301;&#x52A8;&#x6001;&#x5206;&#x914D;&#x6216;&#x53D6;&#x6D88;&#x6743;&#x9650;&#x3002;&#x521D;&#x59CB;&#x5316;&#x6570;&#x636E;&#x5E93;&#x65F6;&#x8D85;&#x7EA7;&#x7BA1;&#x7406;&#x5458;&#x7528;&#x6237;&#x88AB;&#x521B;&#x5EFA;&#xFF0C;&#x540E;&#x7EED;&#x53EF;&#x901A;&#x8FC7;&#x8D85;&#x7EA7;&#x7BA1;&#x7406;&#x5458;&#x521B;&#x5EFA;&#x5404;&#x7C7B;&#x89D2;&#x8272;&#x7528;&#x6237;&#xFF0C;&#x65B0;&#x521B;&#x5EFA;&#x7684;&#x7528;&#x6237;&#x5982;&#x679C;&#x88AB;&#x5206;&#x914D;&#x8DB3;&#x591F;&#x6743;&#x9650;&#x540E;&#xFF0C;&#x53EF;&#x4EE5;&#x7531;&#x5176;&#x521B;&#x5EFA;&#x6216;&#x7BA1;&#x7406;&#x66F4;&#x591A;&#x7684;&#x7528;&#x6237;&#x3002;</p>
+<h5 id="&#x4E3E;&#x4F8B;&#x8BF4;&#x660E;&#xFF1A;">&#x4E3E;&#x4F8B;&#x8BF4;&#x660E;&#xFF1A;</h5>
+<p>user(name=boss) -belong-&gt; group(name=all) -access(read)-&gt; target(graph=graph1, resource={label: person,
+city: Beijing})<br>&#x63CF;&#x8FF0;&#xFF1A;&#x7528;&#x6237;&apos;boss&apos;&#x62E5;&#x6709;&#x5BF9;&apos;graph1&apos;&#x56FE;&#x4E2D;&#x5317;&#x4EAC;&#x4EBA;&#x7684;&#x8BFB;&#x6743;&#x9650;&#x3002;</p>
+<h5 id="&#x63A5;&#x53E3;&#x8BF4;&#x660E;&#xFF1A;">&#x63A5;&#x53E3;&#x8BF4;&#x660E;&#xFF1A;</h5>
+<p>&#x7528;&#x6237;&#x8BA4;&#x8BC1;&#x4E0E;&#x6743;&#x9650;&#x63A7;&#x5236;&#x63A5;&#x53E3;&#x5305;&#x62EC;5&#x7C7B;&#xFF1A;UserAPI&#x3001;GroupAPI&#x3001;TargetAPI&#x3001;BelongAPI&#x3001;AccessAPI&#x3002;</p>
+<h3 id="82-&#x7528;&#x6237;&#xFF08;user&#xFF09;api">8.2 &#x7528;&#x6237;&#xFF08;User&#xFF09;API</h3>
+<p>&#x7528;&#x6237;&#x63A5;&#x53E3;&#x5305;&#x62EC;&#xFF1A;&#x521B;&#x5EFA;&#x7528;&#x6237;&#xFF0C;&#x5220;&#x9664;&#x7528;&#x6237;&#xFF0C;&#x4FEE;&#x6539;&#x7528;&#x6237;&#xFF0C;&#x548C;&#x67E5;&#x8BE2;&#x7528;&#x6237;&#x76F8;&#x5173;&#x4FE1;&#x606F;&#x63A5;&#x53E3;&#x3002;</p>
+<h4 id="821-&#x521B;&#x5EFA;&#x7528;&#x6237;">8.2.1 &#x521B;&#x5EFA;&#x7528;&#x6237;</h4>
+<h5 id="params">Params</h5>
+<ul>
+<li>user_name: &#x7528;&#x6237;&#x540D;&#x79F0;</li>
+<li>user_password: &#x7528;&#x6237;&#x5BC6;&#x7801;</li>
+<li>user_phone: &#x7528;&#x6237;&#x624B;&#x673A;&#x53F7;</li>
+<li>user_email: &#x7528;&#x6237;&#x90AE;&#x7BB1;  </li>
+</ul>
+<p>&#x5176;&#x4E2D; user_name &#x548C; user_password &#x4E3A;&#x5FC5;&#x586B;&#x3002;</p>
+<h5 id="request-body">Request Body</h5>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;user_name&quot;</span>: <span class="hljs-string">&quot;boss&quot;</span>,
+    <span class="hljs-string">&quot;user_password&quot;</span>: <span class="hljs-string">&quot;123456&quot;</span>,
+    <span class="hljs-string">&quot;user_phone&quot;</span>: <span class="hljs-string">&quot;18244349088&quot;</span>,
+    <span class="hljs-string">&quot;user_email&quot;</span>: <span class="hljs-string">&quot;123@xx.com&quot;</span>
+}
+</code></pre>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>POST http://localhost:8080/graphs/hugegraph/auth/users
+</code></pre><h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">201</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<p>&#x8FD4;&#x56DE;&#x62A5;&#x6587;&#x4E2D;&#xFF0C;&#x5BC6;&#x7801;&#x4E3A;&#x52A0;&#x5BC6;&#x540E;&#x7684;&#x5BC6;&#x6587;</p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;user_password&quot;</span>: <span class="hljs-string">&quot;$2a$04$3CMnk2qlzMKxRdFYBNOaVuGNYf11dTAk9aGqBvpZINXU985uEvrYy&quot;</span>,
+    <span class="hljs-string">&quot;user_email&quot;</span>: <span class="hljs-string">&quot;123@xx.com&quot;</span>,
+    <span class="hljs-string">&quot;user_update&quot;</span>: <span class="hljs-string">&quot;2020-11-17 14:31:07.833&quot;</span>,
+    <span class="hljs-string">&quot;user_name&quot;</span>: <span class="hljs-string">&quot;boss&quot;</span>,
+    <span class="hljs-string">&quot;user_creator&quot;</span>: <span class="hljs-string">&quot;admin&quot;</span>,
+    <span class="hljs-string">&quot;user_phone&quot;</span>: <span class="hljs-string">&quot;18244349088&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;-63:boss&quot;</span>,
+    <span class="hljs-string">&quot;user_create&quot;</span>: <span class="hljs-string">&quot;2020-11-17 14:31:07.833&quot;</span>
+}
+</code></pre>
+<h4 id="822-&#x5220;&#x9664;&#x7528;&#x6237;">8.2.2 &#x5220;&#x9664;&#x7528;&#x6237;</h4>
+<h5 id="params">Params</h5>
+<ul>
+<li>id: &#x9700;&#x8981;&#x5220;&#x9664;&#x7684;&#x7528;&#x6237; Id</li>
+</ul>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>DELETE http://localhost:8080/graphs/hugegraph/auth/users/-63:test
+</code></pre><h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">204</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<pre><code class="lang-json"><span class="hljs-number">1</span>
+</code></pre>
+<h4 id="823-&#x4FEE;&#x6539;&#x7528;&#x6237;">8.2.3 &#x4FEE;&#x6539;&#x7528;&#x6237;</h4>
+<h5 id="params">Params</h5>
+<ul>
+<li>id: &#x9700;&#x8981;&#x4FEE;&#x6539;&#x7684;&#x7528;&#x6237; Id</li>
+</ul>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>PUT http://localhost:8080/graphs/hugegraph/auth/users/-63:test
+</code></pre><h5 id="request-body">Request Body</h5>
+<p>&#x4FEE;&#x6539;user_name&#x3001;user_password&#x548C;user_phone</p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;user_name&quot;</span>: <span class="hljs-string">&quot;test&quot;</span>,
+    <span class="hljs-string">&quot;user_password&quot;</span>: <span class="hljs-string">&quot;123123&quot;</span>,
+    <span class="hljs-string">&quot;user_phone&quot;</span>: <span class="hljs-string">&quot;18311349266&quot;</span>
+}
+</code></pre>
+<h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">200</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<p>&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x662F;&#x5305;&#x542B;&#x4FEE;&#x6539;&#x8FC7;&#x7684;&#x5185;&#x5BB9;&#x5728;&#x5185;&#x7684;&#x6574;&#x4E2A;&#x7528;&#x6237;&#x7EC4;&#x5BF9;&#x8C61;</p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;user_password&quot;</span>: <span class="hljs-string">&quot;$2a$04$Homdfl6Ib2g7AtCE8SuZ5uerdIfePtiLJzO30dyF/peUH.HSXq8w2&quot;</span>,
+    <span class="hljs-string">&quot;user_update&quot;</span>: <span class="hljs-string">&quot;2020-11-12 10:29:30.455&quot;</span>,
+    <span class="hljs-string">&quot;user_name&quot;</span>: <span class="hljs-string">&quot;test&quot;</span>,
+    <span class="hljs-string">&quot;user_creator&quot;</span>: <span class="hljs-string">&quot;admin&quot;</span>,
+    <span class="hljs-string">&quot;user_phone&quot;</span>: <span class="hljs-string">&quot;18311349266&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;-63:test&quot;</span>,
+    <span class="hljs-string">&quot;user_create&quot;</span>: <span class="hljs-string">&quot;2020-11-12 10:27:13.601&quot;</span>
+}
+</code></pre>
+<h4 id="824-&#x67E5;&#x8BE2;&#x7528;&#x6237;&#x5217;&#x8868;">8.2.4 &#x67E5;&#x8BE2;&#x7528;&#x6237;&#x5217;&#x8868;</h4>
+<h5 id="params">Params</h5>
+<ul>
+<li>limit: &#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x6761;&#x6570;&#x7684;&#x4E0A;&#x9650;</li>
+</ul>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>GET http://localhost:8080/graphs/hugegraph/auth/users
+</code></pre><h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">200</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;users&quot;</span>: [
+        {
+            <span class="hljs-string">&quot;user_password&quot;</span>: <span class="hljs-string">&quot;$2a$04$1tl1IKTncjcmMojLdt2qO.EAJ1w0TGunAZ5IJXWwBgPLvTPk366Ly&quot;</span>,
+            <span class="hljs-string">&quot;user_update&quot;</span>: <span class="hljs-string">&quot;2020-11-11 11:41:12.254&quot;</span>,
+            <span class="hljs-string">&quot;user_name&quot;</span>: <span class="hljs-string">&quot;admin&quot;</span>,
+            <span class="hljs-string">&quot;user_creator&quot;</span>: <span class="hljs-string">&quot;system&quot;</span>,
+            <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;-63:admin&quot;</span>,
+            <span class="hljs-string">&quot;user_create&quot;</span>: <span class="hljs-string">&quot;2020-11-11 11:41:12.254&quot;</span>
+        }
+    ]
+}
+</code></pre>
+<h4 id="825-&#x67E5;&#x8BE2;&#x67D0;&#x4E2A;&#x7528;&#x6237;">8.2.5 &#x67E5;&#x8BE2;&#x67D0;&#x4E2A;&#x7528;&#x6237;</h4>
+<h5 id="params">Params</h5>
+<ul>
+<li>id: &#x9700;&#x8981;&#x67E5;&#x8BE2;&#x7684;&#x7528;&#x6237; Id</li>
+</ul>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>GET http://localhost:8080/graphs/hugegraph/auth/users/-63:admin
+</code></pre><h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">200</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;users&quot;</span>: [
+        {
+            <span class="hljs-string">&quot;user_password&quot;</span>: <span class="hljs-string">&quot;$2a$04$1tl1IKTncjcmMojLdt2qO.EAJ1w0TGunAZ5IJXWwBgPLvTPk366Ly&quot;</span>,
+            <span class="hljs-string">&quot;user_update&quot;</span>: <span class="hljs-string">&quot;2020-11-11 11:41:12.254&quot;</span>,
+            <span class="hljs-string">&quot;user_name&quot;</span>: <span class="hljs-string">&quot;admin&quot;</span>,
+            <span class="hljs-string">&quot;user_creator&quot;</span>: <span class="hljs-string">&quot;system&quot;</span>,
+            <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;-63:admin&quot;</span>,
+            <span class="hljs-string">&quot;user_create&quot;</span>: <span class="hljs-string">&quot;2020-11-11 11:41:12.254&quot;</span>
+        }
+    ]
+}
+</code></pre>
+<h4 id="826-&#x67E5;&#x8BE2;&#x67D0;&#x4E2A;&#x7528;&#x6237;&#x7684;&#x89D2;&#x8272;">8.2.6 &#x67E5;&#x8BE2;&#x67D0;&#x4E2A;&#x7528;&#x6237;&#x7684;&#x89D2;&#x8272;</h4>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>GET http://localhost:8080/graphs/hugegraph/auth/users/-63:boss/role
+</code></pre><h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">200</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;roles&quot;</span>: {
+        <span class="hljs-string">&quot;hugegraph&quot;</span>: {
+            <span class="hljs-string">&quot;READ&quot;</span>: [
+                {
+                    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;ALL&quot;</span>,
+                    <span class="hljs-string">&quot;label&quot;</span>: <span class="hljs-string">&quot;*&quot;</span>,
+                    <span class="hljs-string">&quot;properties&quot;</span>: <span class="hljs-literal">null</span>
+                }
+            ]
+        }
+    }
+}
+</code></pre>
+<h3 id="83-&#x7528;&#x6237;&#x7EC4;&#xFF08;group&#xFF09;api">8.3 &#x7528;&#x6237;&#x7EC4;&#xFF08;Group&#xFF09;API</h3>
+<p>&#x7528;&#x6237;&#x7EC4;&#x4F1A;&#x8D4B;&#x4E88;&#x76F8;&#x5E94;&#x7684;&#x8D44;&#x6E90;&#x6743;&#x9650;&#xFF0C;&#x7528;&#x6237;&#x4F1A;&#x88AB;&#x5206;&#x914D;&#x4E0D;&#x540C;&#x7684;&#x7528;&#x6237;&#x7EC4;&#xFF0C;&#x5373;&#x53EF;&#x62E5;&#x6709;&#x4E0D;&#x540C;&#x7684;&#x8D44;&#x6E90;&#x6743;&#x9650;&#x3002;<br>&#x7528;&#x6237;&#x7EC4;&#x63A5;&#x53E3;&#x5305;&#x62EC;&#xFF1A;&#x521B;&#x5EFA;&#x7528;&#x6237;&#x7EC4;&#xFF0C;&#x5220;&#x9664;&#x7528;&#x6237;&#x7EC4;&#xFF0C;&#x4FEE;&#x6539;&#x7528;&#x6237;&#x7EC4;&#xFF0C;&#x548C;&#x67E5;&#x8BE2;&#x7528;&#x6237;&#x7EC4;&#x76F8;&#x5173;&#x4FE1;&#x606F;&#x63A5;&#x53E3;&#x3002;</p>
+<h4 id="831-&#x521B;&#x5EFA;&#x7528;&#x6237;&#x7EC4;">8.3.1 &#x521B;&#x5EFA;&#x7528;&#x6237;&#x7EC4;</h4>
+<h5 id="params">Params</h5>
+<ul>
+<li>group_name: &#x7528;&#x6237;&#x7EC4;&#x540D;&#x79F0;</li>
+<li>group_description: &#x7528;&#x6237;&#x7EC4;&#x63CF;&#x8FF0;</li>
+</ul>
+<h5 id="request-body">Request Body</h5>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;group_name&quot;</span>: <span class="hljs-string">&quot;all&quot;</span>,
+    <span class="hljs-string">&quot;group_description&quot;</span>: <span class="hljs-string">&quot;group can do anything&quot;</span>
+}
+</code></pre>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>POST http://localhost:8080/graphs/hugegraph/auth/groups
+</code></pre><h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">201</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;group_creator&quot;</span>: <span class="hljs-string">&quot;admin&quot;</span>,
+    <span class="hljs-string">&quot;group_name&quot;</span>: <span class="hljs-string">&quot;all&quot;</span>,
+    <span class="hljs-string">&quot;group_create&quot;</span>: <span class="hljs-string">&quot;2020-11-11 15:46:08.791&quot;</span>,
+    <span class="hljs-string">&quot;group_update&quot;</span>: <span class="hljs-string">&quot;2020-11-11 15:46:08.791&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;-69:all&quot;</span>,
+    <span class="hljs-string">&quot;group_description&quot;</span>: <span class="hljs-string">&quot;group can do anything&quot;</span>
+}
+</code></pre>
+<h4 id="832-&#x5220;&#x9664;&#x7528;&#x6237;&#x7EC4;">8.3.2 &#x5220;&#x9664;&#x7528;&#x6237;&#x7EC4;</h4>
+<h5 id="params">Params</h5>
+<ul>
+<li>id: &#x9700;&#x8981;&#x5220;&#x9664;&#x7684;&#x7528;&#x6237;&#x7EC4; Id</li>
+</ul>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>DELETE http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
+</code></pre><h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">204</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<pre><code class="lang-json"><span class="hljs-number">1</span>
+</code></pre>
+<h4 id="833-&#x4FEE;&#x6539;&#x7528;&#x6237;&#x7EC4;">8.3.3 &#x4FEE;&#x6539;&#x7528;&#x6237;&#x7EC4;</h4>
+<h5 id="params">Params</h5>
+<ul>
+<li>id: &#x9700;&#x8981;&#x4FEE;&#x6539;&#x7684;&#x7528;&#x6237;&#x7EC4; Id</li>
+</ul>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>PUT http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
+</code></pre><h5 id="request-body">Request Body</h5>
+<p>&#x4FEE;&#x6539;group_description</p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;group_name&quot;</span>: <span class="hljs-string">&quot;grant&quot;</span>,
+    <span class="hljs-string">&quot;group_description&quot;</span>: <span class="hljs-string">&quot;grant&quot;</span>
+}
+</code></pre>
+<h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">200</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<p>&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x662F;&#x5305;&#x542B;&#x4FEE;&#x6539;&#x8FC7;&#x7684;&#x5185;&#x5BB9;&#x5728;&#x5185;&#x7684;&#x6574;&#x4E2A;&#x7528;&#x6237;&#x7EC4;&#x5BF9;&#x8C61;</p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;group_creator&quot;</span>: <span class="hljs-string">&quot;admin&quot;</span>,
+    <span class="hljs-string">&quot;group_name&quot;</span>: <span class="hljs-string">&quot;grant&quot;</span>,
+    <span class="hljs-string">&quot;group_create&quot;</span>: <span class="hljs-string">&quot;2020-11-12 09:50:58.458&quot;</span>,
+    <span class="hljs-string">&quot;group_update&quot;</span>: <span class="hljs-string">&quot;2020-11-12 09:57:58.155&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;-69:grant&quot;</span>,
+    <span class="hljs-string">&quot;group_description&quot;</span>: <span class="hljs-string">&quot;grant&quot;</span>
+}
+</code></pre>
+<h4 id="834-&#x67E5;&#x8BE2;&#x7528;&#x6237;&#x7EC4;&#x5217;&#x8868;">8.3.4 &#x67E5;&#x8BE2;&#x7528;&#x6237;&#x7EC4;&#x5217;&#x8868;</h4>
+<h5 id="params">Params</h5>
+<ul>
+<li>limit: &#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x6761;&#x6570;&#x7684;&#x4E0A;&#x9650;</li>
+</ul>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>GET http://localhost:8080/graphs/hugegraph/auth/groups
+</code></pre><h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">200</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;groups&quot;</span>: [
+        {
+            <span class="hljs-string">&quot;group_creator&quot;</span>: <span class="hljs-string">&quot;admin&quot;</span>,
+            <span class="hljs-string">&quot;group_name&quot;</span>: <span class="hljs-string">&quot;all&quot;</span>,
+            <span class="hljs-string">&quot;group_create&quot;</span>: <span class="hljs-string">&quot;2020-11-11 15:46:08.791&quot;</span>,
+            <span class="hljs-string">&quot;group_update&quot;</span>: <span class="hljs-string">&quot;2020-11-11 15:46:08.791&quot;</span>,
+            <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;-69:all&quot;</span>,
+            <span class="hljs-string">&quot;group_description&quot;</span>: <span class="hljs-string">&quot;group can do anything&quot;</span>
+        }
+    ]
+}
+</code></pre>
+<h4 id="835-&#x67E5;&#x8BE2;&#x67D0;&#x4E2A;&#x7528;&#x6237;&#x7EC4;">8.3.5 &#x67E5;&#x8BE2;&#x67D0;&#x4E2A;&#x7528;&#x6237;&#x7EC4;</h4>
+<h5 id="params">Params</h5>
+<ul>
+<li>id: &#x9700;&#x8981;&#x67E5;&#x8BE2;&#x7684;&#x7528;&#x6237;&#x7EC4; Id</li>
+</ul>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>GET http://localhost:8080/graphs/hugegraph/auth/groups/-69:all
+</code></pre><h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">200</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;group_creator&quot;</span>: <span class="hljs-string">&quot;admin&quot;</span>,
+    <span class="hljs-string">&quot;group_name&quot;</span>: <span class="hljs-string">&quot;all&quot;</span>,
+    <span class="hljs-string">&quot;group_create&quot;</span>: <span class="hljs-string">&quot;2020-11-11 15:46:08.791&quot;</span>,
+    <span class="hljs-string">&quot;group_update&quot;</span>: <span class="hljs-string">&quot;2020-11-11 15:46:08.791&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;-69:all&quot;</span>,
+    <span class="hljs-string">&quot;group_description&quot;</span>: <span class="hljs-string">&quot;group can do anything&quot;</span>
+}
+</code></pre>
+<h3 id="84-&#x8D44;&#x6E90;&#xFF08;target&#xFF09;api">8.4 &#x8D44;&#x6E90;&#xFF08;Target&#xFF09;API</h3>
+<p>&#x8D44;&#x6E90;&#x63CF;&#x8FF0;&#x4E86;&#x56FE;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x6BD4;&#x5982;&#x7B26;&#x5408;&#x67D0;&#x4E00;&#x7C7B;&#x6761;&#x4EF6;&#x7684;&#x9876;&#x70B9;&#xFF0C;&#x6BCF;&#x4E00;&#x4E2A;&#x8D44;&#x6E90;&#x5305;&#x62EC;type&#x3001;label&#x3001;properties&#x4E09;&#x4E2A;&#x8981;&#x7D20;&#xFF0C;&#x5171;&#x6709;18&#x79CD;type&#x3001;
+&#x4EFB;&#x610F;label&#x3001;&#x4EFB;&#x610F;properties&#x7684;&#x7EC4;&#x5408;&#x5F62;&#x6210;&#x7684;&#x8D44;&#x6E90;&#xFF0C;&#x4E00;&#x4E2A;&#x8D44;&#x6E90;&#x7684;&#x5185;&#x90E8;&#x6761;&#x4EF6;&#x662F;&#x4E14;&#x5173;&#x7CFB;&#xFF0C;&#x591A;&#x4E2A;&#x8D44;&#x6E90;&#x4E4B;&#x95F4;&#x7684;&#x6761;&#x4EF6;&#x662F;&#x6216;&#x5173;&#x7CFB;&#x3002;<br>&#x8D44;&#x6E90;&#x63A5;&#x53E3;&#x5305;&#x62EC;&#xFF1A;&#x8D44;&#x6E90;&#x7684;&#x521B;&#x5EFA;&#x3001;&#x5220;&#x9664;&#x3001;&#x4FEE;&#x6539;&#x548C;&#x67E5;&#x8BE2;&#x3002;</p>
+<h4 id="841-&#x521B;&#x5EFA;&#x8D44;&#x6E90;">8.4.1 &#x521B;&#x5EFA;&#x8D44;&#x6E90;</h4>
+<h5 id="params">Params</h5>
+<ul>
+<li>target_name: &#x8D44;&#x6E90;&#x540D;&#x79F0;</li>
+<li>target_graph: &#x8D44;&#x6E90;&#x56FE;</li>
+<li>target_url: &#x8D44;&#x6E90;&#x5730;&#x5740;</li>
+<li>target_resources: &#x8D44;&#x6E90;&#x5B9A;&#x4E49;(&#x5217;&#x8868;)</li>
+</ul>
+<p>target_resources&#x53EF;&#x4EE5;&#x5305;&#x62EC;&#x591A;&#x4E2A;target_resource&#xFF0C;&#x4EE5;&#x5217;&#x8868;&#x7684;&#x5F62;&#x5F0F;&#x5B58;&#x50A8;&#x3002;<br>&#x6BCF;&#x4E2A;target_resource&#x5305;&#x542B;&#xFF1A;</p>
+<ul>
+<li>type&#xFF1A;&#x53EF;&#x9009;&#x503C; VERTEX, EDGE&#x7B49;, &#x53EF;&#x586B;ALL&#xFF0C;&#x5219;&#x8868;&#x793A;&#x53EF;&#x4EE5;&#x662F;&#x9876;&#x70B9;&#x6216;&#x8FB9;&#xFF1B;</li>
+<li>label&#xFF1A;&#x53EF;&#x9009;&#x503C;&#xFF0C;&#x2F00;&#x4E2A;&#x9876;&#x70B9;&#x6216;&#x8FB9;&#x7C7B;&#x578B;&#x7684;&#x540D;&#x79F0;&#xFF0C;&#x53EF;&#x586B;*&#xFF0C;&#x5219;&#x8868;&#x793A;&#x4EFB;&#x610F;&#x7C7B;&#x578B;&#xFF1B;</li>
+<li>properties&#xFF1A;map&#x7C7B;&#x578B;&#xFF0C;&#x53EF;&#x5305;&#x542B;&#x591A;&#x4E2A;&#x5C5E;&#x6027;&#x7684;&#x952E;&#x503C;&#x5BF9;&#xFF0C;&#x5FC5;&#x987B;&#x5339;&#x914D;&#x6240;&#x6709;&#x5C5E;&#x6027;&#x503C;&#xFF0C;&#x5C5E;&#x6027;&#x503C;&#x2F40;&#x6301;&#x586B;&#x6761;&#x4EF6;&#x8303;&#x56F4;&#xFF08;age:
+P.gte(18)&#xFF09;&#xFF0C;properties&#x5982;&#x679C;&#x4E3A;null&#x8868;&#x793A;&#x4EFB;&#x610F;&#x5C5E;&#x6027;&#x5747;&#x53EF;&#xFF0C;&#x5982;&#x679C;&#x5C5E;&#x6027;&#x540D;&#x548C;&#x5C5E;&#x6027;&#x503C;&#x5747;&#x4E3A;&#x2018;*&#x2BC;&#x4E5F;&#x8868;&#x793A;&#x4EFB;&#x610F;&#x5C5E;&#x6027;&#x5747;&#x53EF;&#x3002;</li>
+</ul>
+<p>&#x5982;&#x7CBE;&#x7EC6;&#x8D44;&#x6E90;&#xFF1A;&quot;target_resources&quot;: [{&quot;type&quot;:&quot;VERTEX&quot;,&quot;label&quot;:&quot;person&quot;,&quot;properties&quot;:{&quot;city&quot;:&quot;Beijing&quot;,&quot;age&quot;:&quot;P.gte(20)&quot;}}]**<br>&#x8D44;&#x6E90;&#x5B9A;&#x4E49;&#x542B;&#x4E49;&#xFF1A;&#x7C7B;&#x578B;&#x662F;&apos;person&apos;&#x7684;&#x9876;&#x70B9;&#xFF0C;&#x4E14;&#x57CE;&#x5E02;&#x5C5E;&#x6027;&#x662F;&apos;Beijing&apos;&#xFF0C;&#x5E74;&#x9F84;&#x5C5E;&#x6027;&#x5927;&#x4E8E;&#x7B49;&#x4E8E;20&#x3002;</p>
+<h5 id="request-body">Request Body</h5>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;target_name&quot;</span>: <span class="hljs-string">&quot;all&quot;</span>,
+    <span class="hljs-string">&quot;target_graph&quot;</span>: <span class="hljs-string">&quot;hugegraph&quot;</span>,
+    <span class="hljs-string">&quot;target_url&quot;</span>: <span class="hljs-string">&quot;127.0.0.1:8080&quot;</span>,
+    <span class="hljs-string">&quot;target_resources&quot;</span>: [
+        {
+            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;ALL&quot;</span>
+        }
+    ]
+}
+</code></pre>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>POST http://localhost:8080/graphs/hugegraph/auth/targets
+</code></pre><h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">201</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;target_creator&quot;</span>: <span class="hljs-string">&quot;admin&quot;</span>,
+    <span class="hljs-string">&quot;target_name&quot;</span>: <span class="hljs-string">&quot;all&quot;</span>,
+    <span class="hljs-string">&quot;target_url&quot;</span>: <span class="hljs-string">&quot;127.0.0.1:8080&quot;</span>,
+    <span class="hljs-string">&quot;target_graph&quot;</span>: <span class="hljs-string">&quot;hugegraph&quot;</span>,
+    <span class="hljs-string">&quot;target_create&quot;</span>: <span class="hljs-string">&quot;2020-11-11 15:32:01.192&quot;</span>,
+    <span class="hljs-string">&quot;target_resources&quot;</span>: [
+        {
+            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;ALL&quot;</span>,
+            <span class="hljs-string">&quot;label&quot;</span>: <span class="hljs-string">&quot;*&quot;</span>,
+            <span class="hljs-string">&quot;properties&quot;</span>: <span class="hljs-literal">null</span>
+        }
+    ],
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;-77:all&quot;</span>,
+    <span class="hljs-string">&quot;target_update&quot;</span>: <span class="hljs-string">&quot;2020-11-11 15:32:01.192&quot;</span>
+}
+</code></pre>
+<h4 id="842-&#x5220;&#x9664;&#x8D44;&#x6E90;">8.4.2 &#x5220;&#x9664;&#x8D44;&#x6E90;</h4>
+<h5 id="params">Params</h5>
+<ul>
+<li>id: &#x9700;&#x8981;&#x5220;&#x9664;&#x7684;&#x8D44;&#x6E90; Id</li>
+</ul>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>DELETE http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
+</code></pre><h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">204</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<pre><code class="lang-json"><span class="hljs-number">1</span>
+</code></pre>
+<h4 id="843-&#x4FEE;&#x6539;&#x8D44;&#x6E90;">8.4.3 &#x4FEE;&#x6539;&#x8D44;&#x6E90;</h4>
+<h5 id="params">Params</h5>
+<ul>
+<li>id: &#x9700;&#x8981;&#x4FEE;&#x6539;&#x7684;&#x8D44;&#x6E90; Id</li>
+</ul>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>PUT http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
+</code></pre><h5 id="request-body">Request Body</h5>
+<p>&#x4FEE;&#x6539;&#x8D44;&#x6E90;&#x5B9A;&#x4E49;&#x4E2D;&#x7684;type</p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;target_name&quot;</span>: <span class="hljs-string">&quot;gremlin&quot;</span>,
+    <span class="hljs-string">&quot;target_graph&quot;</span>: <span class="hljs-string">&quot;hugegraph&quot;</span>,
+    <span class="hljs-string">&quot;target_url&quot;</span>: <span class="hljs-string">&quot;127.0.0.1:8080&quot;</span>,
+    <span class="hljs-string">&quot;target_resources&quot;</span>: [
+        {
+            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;NONE&quot;</span>
+        }
+    ]
+}
+</code></pre>
+<h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">200</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<p>&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x662F;&#x5305;&#x542B;&#x4FEE;&#x6539;&#x8FC7;&#x7684;&#x5185;&#x5BB9;&#x5728;&#x5185;&#x7684;&#x6574;&#x4E2A;&#x7528;&#x6237;&#x7EC4;&#x5BF9;&#x8C61;</p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;target_creator&quot;</span>: <span class="hljs-string">&quot;admin&quot;</span>,
+    <span class="hljs-string">&quot;target_name&quot;</span>: <span class="hljs-string">&quot;gremlin&quot;</span>,
+    <span class="hljs-string">&quot;target_url&quot;</span>: <span class="hljs-string">&quot;127.0.0.1:8080&quot;</span>,
+    <span class="hljs-string">&quot;target_graph&quot;</span>: <span class="hljs-string">&quot;hugegraph&quot;</span>,
+    <span class="hljs-string">&quot;target_create&quot;</span>: <span class="hljs-string">&quot;2020-11-12 09:34:13.848&quot;</span>,
+    <span class="hljs-string">&quot;target_resources&quot;</span>: [
+        {
+            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;NONE&quot;</span>,
+            <span class="hljs-string">&quot;label&quot;</span>: <span class="hljs-string">&quot;*&quot;</span>,
+            <span class="hljs-string">&quot;properties&quot;</span>: <span class="hljs-literal">null</span>
+        }
+    ],
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;-77:gremlin&quot;</span>,
+    <span class="hljs-string">&quot;target_update&quot;</span>: <span class="hljs-string">&quot;2020-11-12 09:37:12.780&quot;</span>
+}
+</code></pre>
+<h4 id="844-&#x67E5;&#x8BE2;&#x8D44;&#x6E90;&#x5217;&#x8868;">8.4.4 &#x67E5;&#x8BE2;&#x8D44;&#x6E90;&#x5217;&#x8868;</h4>
+<h5 id="params">Params</h5>
+<ul>
+<li>limit: &#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x6761;&#x6570;&#x7684;&#x4E0A;&#x9650;</li>
+</ul>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>GET http://localhost:8080/graphs/hugegraph/auth/targets
+</code></pre><h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">200</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;targets&quot;</span>: [
+        {
+            <span class="hljs-string">&quot;target_creator&quot;</span>: <span class="hljs-string">&quot;admin&quot;</span>,
+            <span class="hljs-string">&quot;target_name&quot;</span>: <span class="hljs-string">&quot;all&quot;</span>,
+            <span class="hljs-string">&quot;target_url&quot;</span>: <span class="hljs-string">&quot;127.0.0.1:8080&quot;</span>,
+            <span class="hljs-string">&quot;target_graph&quot;</span>: <span class="hljs-string">&quot;hugegraph&quot;</span>,
+            <span class="hljs-string">&quot;target_create&quot;</span>: <span class="hljs-string">&quot;2020-11-11 15:32:01.192&quot;</span>,
+            <span class="hljs-string">&quot;target_resources&quot;</span>: [
+                {
+                    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;ALL&quot;</span>,
+                    <span class="hljs-string">&quot;label&quot;</span>: <span class="hljs-string">&quot;*&quot;</span>,
+                    <span class="hljs-string">&quot;properties&quot;</span>: <span class="hljs-literal">null</span>
+                }
+            ],
+            <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;-77:all&quot;</span>,
+            <span class="hljs-string">&quot;target_update&quot;</span>: <span class="hljs-string">&quot;2020-11-11 15:32:01.192&quot;</span>
+        },
+        {
+            <span class="hljs-string">&quot;target_creator&quot;</span>: <span class="hljs-string">&quot;admin&quot;</span>,
+            <span class="hljs-string">&quot;target_name&quot;</span>: <span class="hljs-string">&quot;grant&quot;</span>,
+            <span class="hljs-string">&quot;target_url&quot;</span>: <span class="hljs-string">&quot;127.0.0.1:8080&quot;</span>,
+            <span class="hljs-string">&quot;target_graph&quot;</span>: <span class="hljs-string">&quot;hugegraph&quot;</span>,
+            <span class="hljs-string">&quot;target_create&quot;</span>: <span class="hljs-string">&quot;2020-11-11 15:43:24.841&quot;</span>,
+            <span class="hljs-string">&quot;target_resources&quot;</span>: [
+                {
+                    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;GRANT&quot;</span>,
+                    <span class="hljs-string">&quot;label&quot;</span>: <span class="hljs-string">&quot;*&quot;</span>,
+                    <span class="hljs-string">&quot;properties&quot;</span>: <span class="hljs-literal">null</span>
+                }
+            ],
+            <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;-77:grant&quot;</span>,
+            <span class="hljs-string">&quot;target_update&quot;</span>: <span class="hljs-string">&quot;2020-11-11 15:43:24.841&quot;</span>
+        }
+    ]
+}
+</code></pre>
+<h4 id="845-&#x67E5;&#x8BE2;&#x67D0;&#x4E2A;&#x8D44;&#x6E90;">8.4.5 &#x67E5;&#x8BE2;&#x67D0;&#x4E2A;&#x8D44;&#x6E90;</h4>
+<h5 id="params">Params</h5>
+<ul>
+<li>id: &#x9700;&#x8981;&#x67E5;&#x8BE2;&#x7684;&#x8D44;&#x6E90; Id</li>
+</ul>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>GET http://localhost:8080/graphs/hugegraph/auth/targets/-77:grant
+</code></pre><h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">200</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;target_creator&quot;</span>: <span class="hljs-string">&quot;admin&quot;</span>,
+    <span class="hljs-string">&quot;target_name&quot;</span>: <span class="hljs-string">&quot;grant&quot;</span>,
+    <span class="hljs-string">&quot;target_url&quot;</span>: <span class="hljs-string">&quot;127.0.0.1:8080&quot;</span>,
+    <span class="hljs-string">&quot;target_graph&quot;</span>: <span class="hljs-string">&quot;hugegraph&quot;</span>,
+    <span class="hljs-string">&quot;target_create&quot;</span>: <span class="hljs-string">&quot;2020-11-11 15:43:24.841&quot;</span>,
+    <span class="hljs-string">&quot;target_resources&quot;</span>: [
+        {
+            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;GRANT&quot;</span>,
+            <span class="hljs-string">&quot;label&quot;</span>: <span class="hljs-string">&quot;*&quot;</span>,
+            <span class="hljs-string">&quot;properties&quot;</span>: <span class="hljs-literal">null</span>
+        }
+    ],
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;-77:grant&quot;</span>,
+    <span class="hljs-string">&quot;target_update&quot;</span>: <span class="hljs-string">&quot;2020-11-11 15:43:24.841&quot;</span>
+}
+</code></pre>
+<h3 id="85-&#x5173;&#x8054;&#x89D2;&#x8272;&#xFF08;belong&#xFF09;api">8.5 &#x5173;&#x8054;&#x89D2;&#x8272;&#xFF08;Belong&#xFF09;API</h3>
+<p>&#x5173;&#x8054;&#x7528;&#x6237;&#x548C;&#x7528;&#x6237;&#x7EC4;&#x7684;&#x5173;&#x7CFB;&#xFF0C;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x5173;&#x8054;&#x4E00;&#x4E2A;&#x6216;&#x8005;&#x591A;&#x4E2A;&#x7528;&#x6237;&#x7EC4;&#x3002;&#x7528;&#x6237;&#x7EC4;&#x62E5;&#x6709;&#x76F8;&#x5173;&#x8D44;&#x6E90;&#x7684;&#x6743;&#x9650;&#xFF0C;&#x4E0D;&#x540C;&#x7528;&#x6237;&#x7EC4;&#x7684;&#x8D44;&#x6E90;&#x6743;&#x9650;&#x53EF;&#x4EE5;&#x7406;&#x89E3;&#x4E3A;&#x4E0D;&#x540C;&#x7684;&#x89D2;&#x8272;&#x3002;&#x5373;&#x7ED9;&#x7528;&#x6237;&#x5173;&#x8054;&#x89D2;&#x8272;&#x3002;<br>&#x5173;&#x8054;&#x89D2;&#x8272;&#x63A5;&#x53E3;&#x5305;&#x62EC;&#xFF1A;&#x7528;&#x6237;&#x5173;&#x8054;&#x89D2;&#x8272;&#x7684;&#x521B;&#x5EFA;&#x3001;&#x5220;&#x9664;&#x3001;&#x4FEE;&#x6539;&#x548C;&#x67E5;&#x8BE2;&#x3002;</p>
+<h4 id="851-&#x521B;&#x5EFA;&#x7528;&#x6237;&#x7684;&#x5173;&#x8054;&#x89D2;&#x8272;">8.5.1 &#x521B;&#x5EFA;&#x7528;&#x6237;&#x7684;&#x5173;&#x8054;&#x89D2;&#x8272;</h4>
+<h5 id="params">Params</h5>
+<ul>
+<li>user: &#x7528;&#x6237; Id</li>
+<li>group: &#x7528;&#x6237;&#x7EC4; Id</li>
+<li>belong_description: &#x63CF;&#x8FF0;</li>
+</ul>
+<h5 id="request-body">Request Body</h5>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;user&quot;</span>: <span class="hljs-string">&quot;-63:boss&quot;</span>,
+    <span class="hljs-string">&quot;group&quot;</span>: <span class="hljs-string">&quot;-69:all&quot;</span>
+}
+</code></pre>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>POST http://localhost:8080/graphs/hugegraph/auth/belongs
+</code></pre><h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">201</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;belong_create&quot;</span>: <span class="hljs-string">&quot;2020-11-11 16:19:35.422&quot;</span>,
+    <span class="hljs-string">&quot;belong_creator&quot;</span>: <span class="hljs-string">&quot;admin&quot;</span>,
+    <span class="hljs-string">&quot;belong_update&quot;</span>: <span class="hljs-string">&quot;2020-11-11 16:19:35.422&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;S-63:boss&gt;-82&gt;&gt;S-69:all&quot;</span>,
+    <span class="hljs-string">&quot;user&quot;</span>: <span class="hljs-string">&quot;-63:boss&quot;</span>,
+    <span class="hljs-string">&quot;group&quot;</span>: <span class="hljs-string">&quot;-69:all&quot;</span>
+}
+</code></pre>
+<h4 id="852-&#x5220;&#x9664;&#x5173;&#x8054;&#x89D2;&#x8272;">8.5.2 &#x5220;&#x9664;&#x5173;&#x8054;&#x89D2;&#x8272;</h4>
+<h5 id="params">Params</h5>
+<ul>
+<li>id: &#x9700;&#x8981;&#x5220;&#x9664;&#x7684;&#x5173;&#x8054;&#x89D2;&#x8272; Id</li>
+</ul>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>DELETE http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss&gt;-82&gt;&gt;S-69:grant
+</code></pre><h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">204</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<pre><code class="lang-json"><span class="hljs-number">1</span>
+</code></pre>
+<h4 id="853-&#x4FEE;&#x6539;&#x5173;&#x8054;&#x89D2;&#x8272;">8.5.3 &#x4FEE;&#x6539;&#x5173;&#x8054;&#x89D2;&#x8272;</h4>
+<p>&#x5173;&#x8054;&#x89D2;&#x8272;&#x53EA;&#x80FD;&#x4FEE;&#x6539;&#x63CF;&#x8FF0;&#xFF0C;&#x4E0D;&#x80FD;&#x4FEE;&#x6539; user &#x548C; group &#x5C5E;&#x6027;&#xFF0C;&#x5982;&#x679C;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x5173;&#x8054;&#x89D2;&#x8272;&#xFF0C;&#x9700;&#x8981;&#x5220;&#x9664;&#x539F;&#x6765;&#x5173;&#x8054;&#x5173;&#x7CFB;&#xFF0C;&#x65B0;&#x589E;&#x5173;&#x8054;&#x89D2;&#x8272;&#x3002;</p>
+<h5 id="params">Params</h5>
+<ul>
+<li>id: &#x9700;&#x8981;&#x4FEE;&#x6539;&#x7684;&#x5173;&#x8054;&#x89D2;&#x8272; Id</li>
+</ul>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>PUT http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss&gt;-82&gt;&gt;S-69:grant
+</code></pre><h5 id="request-body">Request Body</h5>
+<p>&#x4FEE;&#x6539;belong_description</p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;belong_description&quot;</span>: <span class="hljs-string">&quot;update test&quot;</span>
+}
+</code></pre>
+<h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">200</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<p>&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x662F;&#x5305;&#x542B;&#x4FEE;&#x6539;&#x8FC7;&#x7684;&#x5185;&#x5BB9;&#x5728;&#x5185;&#x7684;&#x6574;&#x4E2A;&#x7528;&#x6237;&#x7EC4;&#x5BF9;&#x8C61;</p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;belong_description&quot;</span>: <span class="hljs-string">&quot;update test&quot;</span>,
+    <span class="hljs-string">&quot;belong_create&quot;</span>: <span class="hljs-string">&quot;2020-11-12 10:40:21.720&quot;</span>,
+    <span class="hljs-string">&quot;belong_creator&quot;</span>: <span class="hljs-string">&quot;admin&quot;</span>,
+    <span class="hljs-string">&quot;belong_update&quot;</span>: <span class="hljs-string">&quot;2020-11-12 10:42:47.265&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;S-63:boss&gt;-82&gt;&gt;S-69:grant&quot;</span>,
+    <span class="hljs-string">&quot;user&quot;</span>: <span class="hljs-string">&quot;-63:boss&quot;</span>,
+    <span class="hljs-string">&quot;group&quot;</span>: <span class="hljs-string">&quot;-69:grant&quot;</span>
+}
+</code></pre>
+<h4 id="854-&#x67E5;&#x8BE2;&#x5173;&#x8054;&#x89D2;&#x8272;&#x5217;&#x8868;">8.5.4 &#x67E5;&#x8BE2;&#x5173;&#x8054;&#x89D2;&#x8272;&#x5217;&#x8868;</h4>
+<h5 id="params">Params</h5>
+<ul>
+<li>limit: &#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x6761;&#x6570;&#x7684;&#x4E0A;&#x9650;</li>
+</ul>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>GET http://localhost:8080/graphs/hugegraph/auth/belongs
+</code></pre><h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">200</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;belongs&quot;</span>: [
+        {
+            <span class="hljs-string">&quot;belong_create&quot;</span>: <span class="hljs-string">&quot;2020-11-11 16:19:35.422&quot;</span>,
+            <span class="hljs-string">&quot;belong_creator&quot;</span>: <span class="hljs-string">&quot;admin&quot;</span>,
+            <span class="hljs-string">&quot;belong_update&quot;</span>: <span class="hljs-string">&quot;2020-11-11 16:19:35.422&quot;</span>,
+            <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;S-63:boss&gt;-82&gt;&gt;S-69:all&quot;</span>,
+            <span class="hljs-string">&quot;user&quot;</span>: <span class="hljs-string">&quot;-63:boss&quot;</span>,
+            <span class="hljs-string">&quot;group&quot;</span>: <span class="hljs-string">&quot;-69:all&quot;</span>
+        }
+    ]
+}
+</code></pre>
+<h4 id="855-&#x67E5;&#x770B;&#x67D0;&#x4E2A;&#x5173;&#x8054;&#x89D2;&#x8272;">8.5.5 &#x67E5;&#x770B;&#x67D0;&#x4E2A;&#x5173;&#x8054;&#x89D2;&#x8272;</h4>
+<h5 id="params">Params</h5>
+<ul>
+<li>id: &#x9700;&#x8981;&#x67E5;&#x8BE2;&#x7684;&#x5173;&#x8054;&#x89D2;&#x8272; Id</li>
+</ul>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>GET http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss&gt;-82&gt;&gt;S-69:all
+</code></pre><h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">200</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;belong_create&quot;</span>: <span class="hljs-string">&quot;2020-11-11 16:19:35.422&quot;</span>,
+    <span class="hljs-string">&quot;belong_creator&quot;</span>: <span class="hljs-string">&quot;admin&quot;</span>,
+    <span class="hljs-string">&quot;belong_update&quot;</span>: <span class="hljs-string">&quot;2020-11-11 16:19:35.422&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;S-63:boss&gt;-82&gt;&gt;S-69:all&quot;</span>,
+    <span class="hljs-string">&quot;user&quot;</span>: <span class="hljs-string">&quot;-63:boss&quot;</span>,
+    <span class="hljs-string">&quot;group&quot;</span>: <span class="hljs-string">&quot;-69:all&quot;</span>
+}
+</code></pre>
+<h3 id="86-&#x8D4B;&#x6743;&#xFF08;access&#xFF09;api">8.6 &#x8D4B;&#x6743;&#xFF08;Access&#xFF09;API</h3>
+<p>&#x7ED9;&#x7528;&#x6237;&#x7EC4;&#x8D4B;&#x4E88;&#x8D44;&#x6E90;&#x7684;&#x6743;&#x9650;&#xFF0C;&#x4E3B;&#x8981;&#x5305;&#x542B;&#xFF1A;&#x8BFB;&#x64CD;&#x4F5C;(READ)&#x3001;&#x5199;&#x64CD;&#x4F5C;(WRITE)&#x3001;&#x5220;&#x9664;&#x64CD;&#x4F5C;(DELETE)&#x3001;&#x6267;&#x884C;&#x64CD;&#x4F5C;(EXECUTE)&#x7B49;&#x3002;<br>&#x8D4B;&#x6743;&#x63A5;&#x53E3;&#x5305;&#x62EC;&#xFF1A;&#x8D4B;&#x6743;&#x7684;&#x521B;&#x5EFA;&#x3001;&#x5220;&#x9664;&#x3001;&#x4FEE;&#x6539;&#x548C;&#x67E5;&#x8BE2;&#x3002;</p>
+<h4 id="861-&#x521B;&#x5EFA;&#x8D4B;&#x6743;&#x7528;&#x6237;&#x7EC4;&#x8D4B;&#x4E88;&#x8D44;&#x6E90;&#x7684;&#x6743;&#x9650;">8.6.1 &#x521B;&#x5EFA;&#x8D4B;&#x6743;(&#x7528;&#x6237;&#x7EC4;&#x8D4B;&#x4E88;&#x8D44;&#x6E90;&#x7684;&#x6743;&#x9650;)</h4>
+<h5 id="params">Params</h5>
+<ul>
+<li>group: &#x7528;&#x6237;&#x7EC4; Id</li>
+<li>target: &#x8D44;&#x6E90; Id</li>
+<li>access_permission: &#x6743;&#x9650;&#x8BB8;&#x53EF;  </li>
+<li>access_description: &#x8D4B;&#x6743;&#x63CF;&#x8FF0;</li>
+</ul>
+<p>access_permission&#xFF1A;</p>
+<ul>
+<li>READ&#xFF1A;&#x8BFB;&#x64CD;&#x4F5C;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x67E5;&#x8BE2;&#xFF0C;&#x5305;&#x62EC;&#x67E5;&#x8BE2;Schema&#x3001;&#x67E5;&#x9876;&#x70B9;/&#x8FB9;&#xFF0C;&#x67E5;&#x8BE2;&#x9876;&#x70B9;&#x548C;&#x8FB9;&#x7684;&#x6570;&#x91CF;VERTEX_AGGR/EDGE_AGGR&#xFF0C;&#x4E5F;&#x5305;&#x62EC;&#x8BFB;&#x56FE;&#x7684;&#x72B6;&#x6001;STATUS&#x3001;&#x53D8;&#x91CF;VAR&#x3001;&#x4EFB;&#x52A1;TASK&#x7B49;&#xFF1B;</li>
+<li>WRITE&#xFF1A;&#x5199;&#x64CD;&#x4F5C;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x521B;&#x5EFA;&#x3001;&#x66F4;&#x65B0;&#x64CD;&#x4F5C;&#xFF0C;&#x5305;&#x62EC;&#x7ED9;Schema&#x589E;&#x52A0;property key&#xFF0C;&#x7ED9;&#x9876;&#x70B9;&#x589E;&#x52A0;&#x6216;&#x66F4;&#x65B0;&#x5C5E;&#x6027;&#x7B49;&#xFF1B;</li>
+<li>DELETE&#xFF1A;&#x5220;&#x9664;&#x64CD;&#x4F5C;&#xFF0C;&#x5305;&#x62EC;&#x5220;&#x9664;&#x5143;&#x6570;&#x636E;&#x3001;&#x5220;&#x9664;&#x9876;&#x70B9;/&#x8FB9;&#xFF1B;</li>
+<li>EXECUTE&#xFF1A;&#x6267;&#x2F8F;&#x64CD;&#x4F5C;&#xFF0C;&#x5305;&#x62EC;&#x6267;&#x2F8F;Gremlin&#x8BED;&#x53E5;&#x3001;&#x6267;&#x2F8F;Task&#x3001;&#x6267;&#x2F8F;metadata&#x51FD;&#x6570;&#xFF1B;</li>
+</ul>
+<h5 id="request-body">Request Body</h5>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;group&quot;</span>: <span class="hljs-string">&quot;-69:all&quot;</span>,
+    <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-string">&quot;-77:all&quot;</span>,
+    <span class="hljs-string">&quot;access_permission&quot;</span>: <span class="hljs-string">&quot;READ&quot;</span>
+}
+</code></pre>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>POST http://localhost:8080/graphs/hugegraph/auth/accesses
+</code></pre><h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">201</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;access_permission&quot;</span>: <span class="hljs-string">&quot;READ&quot;</span>,
+    <span class="hljs-string">&quot;access_create&quot;</span>: <span class="hljs-string">&quot;2020-11-11 15:54:54.008&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;S-69:all&gt;-88&gt;11&gt;S-77:all&quot;</span>,
+    <span class="hljs-string">&quot;access_update&quot;</span>: <span class="hljs-string">&quot;2020-11-11 15:54:54.008&quot;</span>,
+    <span class="hljs-string">&quot;access_creator&quot;</span>: <span class="hljs-string">&quot;admin&quot;</span>,
+    <span class="hljs-string">&quot;group&quot;</span>: <span class="hljs-string">&quot;-69:all&quot;</span>,
+    <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-string">&quot;-77:all&quot;</span>
+}
+</code></pre>
+<h4 id="862-&#x5220;&#x9664;&#x8D4B;&#x6743;">8.6.2 &#x5220;&#x9664;&#x8D4B;&#x6743;</h4>
+<h5 id="params">Params</h5>
+<ul>
+<li>id: &#x9700;&#x8981;&#x5220;&#x9664;&#x7684;&#x8D4B;&#x6743; Id</li>
+</ul>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>DELETE http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all&gt;-88&gt;12&gt;S-77:all
+</code></pre><h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">204</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<pre><code class="lang-json"><span class="hljs-number">1</span>
+</code></pre>
+<h4 id="863-&#x4FEE;&#x6539;&#x8D4B;&#x6743;">8.6.3 &#x4FEE;&#x6539;&#x8D4B;&#x6743;</h4>
+<p>&#x8D4B;&#x6743;&#x53EA;&#x80FD;&#x4FEE;&#x6539;&#x63CF;&#x8FF0;&#xFF0C;&#x4E0D;&#x80FD;&#x4FEE;&#x6539;&#x7528;&#x6237;&#x7EC4;&#x3001;&#x8D44;&#x6E90;&#x548C;&#x6743;&#x9650;&#x8BB8;&#x53EF;&#xFF0C;&#x5982;&#x679C;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x8D4B;&#x6743;&#x7684;&#x5173;&#x7CFB;&#xFF0C;&#x53EF;&#x4EE5;&#x5220;&#x9664;&#x539F;&#x6765;&#x7684;&#x8D4B;&#x6743;&#x5173;&#x7CFB;&#xFF0C;&#x65B0;&#x589E;&#x8D4B;&#x6743;&#x3002;</p>
+<h5 id="params">Params</h5>
+<ul>
+<li>id: &#x9700;&#x8981;&#x4FEE;&#x6539;&#x7684;&#x8D4B;&#x6743; Id</li>
+</ul>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>PUT http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all&gt;-88&gt;12&gt;S-77:all
+</code></pre><h5 id="request-body">Request Body</h5>
+<p>&#x4FEE;&#x6539;access_description</p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;access_description&quot;</span>: <span class="hljs-string">&quot;test&quot;</span>
+}
+</code></pre>
+<h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">200</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<p>&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x662F;&#x5305;&#x542B;&#x4FEE;&#x6539;&#x8FC7;&#x7684;&#x5185;&#x5BB9;&#x5728;&#x5185;&#x7684;&#x6574;&#x4E2A;&#x7528;&#x6237;&#x7EC4;&#x5BF9;&#x8C61;</p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;access_description&quot;</span>: <span class="hljs-string">&quot;test&quot;</span>,
+    <span class="hljs-string">&quot;access_permission&quot;</span>: <span class="hljs-string">&quot;WRITE&quot;</span>,
+    <span class="hljs-string">&quot;access_create&quot;</span>: <span class="hljs-string">&quot;2020-11-12 10:12:03.074&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;S-69:all&gt;-88&gt;12&gt;S-77:all&quot;</span>,
+    <span class="hljs-string">&quot;access_update&quot;</span>: <span class="hljs-string">&quot;2020-11-12 10:16:18.637&quot;</span>,
+    <span class="hljs-string">&quot;access_creator&quot;</span>: <span class="hljs-string">&quot;admin&quot;</span>,
+    <span class="hljs-string">&quot;group&quot;</span>: <span class="hljs-string">&quot;-69:all&quot;</span>,
+    <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-string">&quot;-77:all&quot;</span>
+}
+</code></pre>
+<h4 id="864-&#x67E5;&#x8BE2;&#x8D4B;&#x6743;&#x5217;&#x8868;">8.6.4 &#x67E5;&#x8BE2;&#x8D4B;&#x6743;&#x5217;&#x8868;</h4>
+<h5 id="params">Params</h5>
+<ul>
+<li>limit: &#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x6761;&#x6570;&#x7684;&#x4E0A;&#x9650;</li>
+</ul>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>GET http://localhost:8080/graphs/hugegraph/auth/accesses
+</code></pre><h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">200</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;accesses&quot;</span>: [
+        {
+            <span class="hljs-string">&quot;access_permission&quot;</span>: <span class="hljs-string">&quot;READ&quot;</span>,
+            <span class="hljs-string">&quot;access_create&quot;</span>: <span class="hljs-string">&quot;2020-11-11 15:54:54.008&quot;</span>,
+            <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;S-69:all&gt;-88&gt;11&gt;S-77:all&quot;</span>,
+            <span class="hljs-string">&quot;access_update&quot;</span>: <span class="hljs-string">&quot;2020-11-11 15:54:54.008&quot;</span>,
+            <span class="hljs-string">&quot;access_creator&quot;</span>: <span class="hljs-string">&quot;admin&quot;</span>,
+            <span class="hljs-string">&quot;group&quot;</span>: <span class="hljs-string">&quot;-69:all&quot;</span>,
+            <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-string">&quot;-77:all&quot;</span>
+        }
+    ]
+}
+</code></pre>
+<h4 id="865-&#x67E5;&#x8BE2;&#x67D0;&#x4E2A;&#x8D4B;&#x6743;">8.6.5 &#x67E5;&#x8BE2;&#x67D0;&#x4E2A;&#x8D4B;&#x6743;</h4>
+<h5 id="params">Params</h5>
+<ul>
+<li>id: &#x9700;&#x8981;&#x67E5;&#x8BE2;&#x7684;&#x8D4B;&#x6743; Id</li>
+</ul>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre><code>GET http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all&gt;-88&gt;11&gt;S-77:all
+</code></pre><h5 id="response-status">Response Status</h5>
+<pre><code class="lang-json"><span class="hljs-number">200</span>
+</code></pre>
+<h5 id="response-body">Response Body</h5>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;access_permission&quot;</span>: <span class="hljs-string">&quot;READ&quot;</span>,
+    <span class="hljs-string">&quot;access_create&quot;</span>: <span class="hljs-string">&quot;2020-11-11 15:54:54.008&quot;</span>,
+    <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;S-69:all&gt;-88&gt;11&gt;S-77:all&quot;</span>,
+    <span class="hljs-string">&quot;access_update&quot;</span>: <span class="hljs-string">&quot;2020-11-11 15:54:54.008&quot;</span>,
+    <span class="hljs-string">&quot;access_creator&quot;</span>: <span class="hljs-string">&quot;admin&quot;</span>,
+    <span class="hljs-string">&quot;group&quot;</span>: <span class="hljs-string">&quot;-69:all&quot;</span>,
+    <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-string">&quot;-77:all&quot;</span>
+}
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+                
+
+
+  
+	<footer>
+
+	</footer>
+
+
+            </div>
+
+            
+                
+                <a href="gremlin.html" class="navigation navigation-prev " aria-label="Previous page: Gremlin">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="other.html" class="navigation navigation-next " aria-label="Next page: Other">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Authentication","level":"6.1.14","depth":2,"next":{"title":"Other","level":"6.1.15","depth":2,"path":"clients/restful-api/other.md","ref":"clients/restful-api/other.md","articles":[]},"previous":{"title":"Gremlin","level":"6.1.13","depth":2,"path":"clients/restful-api/gremlin.md","ref":"clients/restful-api/gremlin.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","theme-cuav"],"pluginsConfig":{"prism":{"lang":{"flow":"typescript"}},"search":{},"theme-cuav":{"navbar":{"brand":{"logo":{"alt":"HugeGraph Database","path":"../images/logo.png"},"url":"javascript:;"},"nav":{"items":[]}},"showGitBookLink":false,"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"useGitbookIcon":false,"iconPath":"../images/favicon.ico"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"clients/restful-api/auth.md","mtime":"2021-02-27T12:23:43.272Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-02-27T12:24:30.598Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    
+        <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.slim.min.js"></script>
+        <script src="//cdn.bootcss.com/tether/1.4.0/js/tether.min.js"></script>
+        <script src="//cdn.bootcss.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+    
+
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
