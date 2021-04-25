@@ -14,7 +14,7 @@ restserver.url=https://127.0.0.1:8080
 # 服务端 keystore 文件路径，当协议为 https 时该默认值自动生效，可按需修改此项
 ssl.keystore_file=conf/hugegraph-server.keystore
 # 服务端 keystore 文件密码，当协议为 https 时该默认值自动生效，可按需修改此项
-ssl.keystore_password=hugegraph
+ssl.keystore_password=******
 ```
 
 服务端的 conf 目录下已经给出了一个 keystore 文件`hugegraph-server.keystore`，该文件的密码为`hugegraph`，
@@ -33,7 +33,7 @@ HugeClientBuilder builder = HugeClient.builder(url, graphName);
 // 客户端 keystore 文件路径
 String trustStoreFilePath = "hugegraph.truststore";
 // 客户端 keystore 密码
-String trustStorePassword = "hugegraph";
+String trustStorePassword = "******";
 builder.configSSL(trustStoreFilePath, trustStorePassword);
 HugeClient hugeClient = builder.build();
 ```

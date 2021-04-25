@@ -57,7 +57,7 @@ POST http://localhost:8080/graphs/hugegraph/auth/users
 返回报文中，密码为加密后的密文
 ```json
 {
-    "user_password": "$2a$04$3CMnk2qlzMKxRdFYBNOaVuGNYf11dTAk9aGqBvpZINXU985uEvrYy",
+    "user_password": "******",
     "user_email": "123@xx.com",
     "user_update": "2020-11-17 14:31:07.833",
     "user_name": "boss",
