@@ -109,6 +109,26 @@ store=hugegraph
 
 ### 5.3 Mode
 
+合法的图模式包括：NONE，RESTORING，MERGING，LOADING
+    
+- None 模式（默认），元数据和图数据的写入属于正常状态。特别的：
+    - 元数据（schema）创建时不允许指定 ID
+    - 图数据（vertex）在 id strategy 为 Automatic 时，不允许指定 ID
+- LOADING：批量导入数据时自动启用，特别的：
+    - 添加顶点/边时，不会检查必填属性是否传入
+
+Restore 时存在两种不同的模式： Restoring 和 Merging
+
+- Restoring 模式，恢复到一个新图中，特别的：
+    - 元数据（schema）创建时允许指定 ID
+    - 图数据（vertex）在 id strategy 为 Automatic 时，允许指定 ID
+- Merging 模式，合并到一个已存在元数据和图数据的图中，特别的：
+    - 元数据（schema）创建时不允许指定 ID
+    - 图数据（vertex）在 id strategy 为 Automatic 时，允许指定 ID
+
+正常情况下，图模式为 None，当需要 Restore 图时，需要根据需要临时修改图模式为 Restoring 模式或者 Merging 模式，并在完成 Restore 时，恢复图模式为 None。
+
+
 #### 5.3.1 查看某个图的模式. **该操作需要管理员权限**
 
 ##### Method & Url

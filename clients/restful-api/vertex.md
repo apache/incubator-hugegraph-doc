@@ -1,6 +1,6 @@
 ### 2.1 Vertex
 
-0.4 版本对顶点 Id 做了比较大的改动，VertexLabel 中的 Id 策略决定了顶点的 Id 类型，其对应关系如下：
+顶点类型中的 Id 策略决定了顶点的 Id类型，其对应关系如下：
 
 Id_Strategy      | id type
 ---------------- | -------
@@ -8,6 +8,7 @@ AUTOMATIC        | number
 PRIMARY_KEY      | string
 CUSTOMIZE_STRING | string
 CUSTOMIZE_NUMBER | number
+CUSTOMIZE_UUID   | uuid
 
 顶点的GET/PUT/DELETE API中url的 id 部分传入的应是带有类型信息的id值，这个类型信息用 json 串是否带引号表示，也就是说：
 
@@ -675,7 +676,6 @@ DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"?label=per
 ```
 
 ##### Response Status
-
 ```json
 204
 ```

@@ -1,5 +1,18 @@
 ### 1.1 PropertyKey
 
+Params说明：
+
+- name：属性类型名称，必填
+- data_type：属性类型数据类型，包括：bool、byte、int、long、float、double、string、date、uuid、blob，默认string类型
+- cardinality：属性类型基数，包括：single、list、set，默认single
+
+请求体字段说明：
+
+- id：属性类型id值
+- properties：属性的属性，对于属性而言，此项为空
+- user_data：设置属性类型的通用信息，比如可设置age属性的取值范围，最小为0，最大为100；目前此项不做任何校验，只为后期拓展提供预留入口
+
+
 #### 1.1.1 创建一个 PropertyKey
 
 ##### Method & Url
