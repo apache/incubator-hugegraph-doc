@@ -35,7 +35,7 @@ city: Beijing})
 {
     "user_name": "boss",
     "user_password": "******",
-    "user_phone": "18244349088",
+    "user_phone": "182****9088",
     "user_email": "123@xx.com"
 }
 ```
@@ -62,7 +62,7 @@ POST http://localhost:8080/graphs/hugegraph/auth/users
     "user_update": "2020-11-17 14:31:07.833",
     "user_name": "boss",
     "user_creator": "admin",
-    "user_phone": "18244349088",
+    "user_phone": "182****9088",
     "id": "-63:boss",
     "user_create": "2020-11-17 14:31:07.833"
 }
@@ -111,7 +111,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/users/-63:test
 {
     "user_name": "test",
     "user_password": "******",
-    "user_phone": "18311349266"
+    "user_phone": "183****9266"
 }
 ```
 
@@ -129,7 +129,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/users/-63:test
     "user_update": "2020-11-12 10:29:30.455",
     "user_name": "test",
     "user_creator": "admin",
-    "user_phone": "18311349266",
+    "user_phone": "183****9266",
     "id": "-63:test",
     "user_create": "2020-11-12 10:27:13.601"
 }
