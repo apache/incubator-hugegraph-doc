@@ -121,7 +121,7 @@ schema.edgeLabel("rating")
 - source: 源顶点 id，必填项
 - label: 边的类型，必须是连接两类不同顶点的边，必填项
 - alpha：每轮迭代时从某个点往外走的概率，与 PageRank 算法中的 alpha 类似，必填项，取值区间为 (0, 1] 
-- max_degree: 查询过程中，单个顶点最大边数目，选填项，默认为 10000
+- max_degree: 查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为 10000
 - max_depth: 迭代次数，必填项，取值区间为 (0, 50] 
 - with_label：筛选结果中保留哪些结果，选填项，可选值为 [SAME_LABEL, OTHER_LABEL, BOTH_LABEL], 默认为 BOTH_LABEL
     - SAME_LABEL：保留与源顶点相同类别的顶点
@@ -279,7 +279,7 @@ public class Loader {
 - steps: 表示从起始顶点走过的路径规则，是一组 Step 的列表，每个 Step 对应结果中的一层，必填项。每个 Step 的结构如下：
 	- direction：表示边的方向（OUT, IN, BOTH），默认是 BOTH
 	- labels：边的类型列表，多个边类型取并集
-	- max_degree：查询过程中，单个顶点最大边数目，默认为 10000
+	- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000
 	- top：在结果中每一层只保留权重最高的前 N 个结果，默认为 100，最大值为 1000
 - capacity: 遍历过程中最大的访问的顶点数目，选填项，默认为10000000
 
