@@ -125,7 +125,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/users/-63:test
 返回结果是包含修改过的内容在内的整个用户组对象
 ```json
 {
-    "user_password": "$2a$04$Homdfl6Ib2g7AtCE8SuZ5uerdIfePtiLJzO30dyF/peUH.HSXq8w2",
+    "user_password": "******",
     "user_update": "2020-11-12 10:29:30.455",
     "user_name": "test",
     "user_creator": "admin",
