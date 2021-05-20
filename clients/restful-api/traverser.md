@@ -197,7 +197,7 @@ public class Loader {
 - max_depth：步数，必填项
 - label：边的类型，选填项，默认代表所有edge label
 - nearest：nearest为true时，代表起始顶点到达结果顶点的最短路径长度为depth，不存在更短的路径；nearest为false时，代表起始顶点到结果顶点有一条长度为depth的路径（未必最短且可以有环），选填项，默认为true
-- max_degree：查询过程中，单个顶点最大边数目，选填项，默认为10000
+- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
 - capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
 - limit：返回的顶点的最大数目，选填项，默认为10000000
 
@@ -251,7 +251,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/kout?source="1:marko"&max_de
 	- direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
 	- labels：边的类型列表
 	- properties：通过属性的值过滤边
-	- degree：查询过程中，单个顶点最大边数目，默认为10000
+	- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)
 	- skip_degree：查询过程中需要跳过的顶点的最小的边数目，即当顶点的边数目大于 skip_degree 时，跳过该顶点，可用于规避超级点，选填项，默认为0，表示不跳过任何点
 - max_depth：步数，必填项
 - nearest：nearest为true时，代表起始顶点到达结果顶点的最短路径长度为depth，不存在更短的路径；nearest为false时，代表起始顶点到结果顶点有一条长度为depth的路径（未必最短且可以有环），选填项，默认为true
@@ -284,7 +284,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/kout
     "properties": {
       "weight": "P.gt(0.1)"
     },
-    "degree": 10000,
+    "max_degree": 10000,
     "skip_degree": 100000
   },
   "max_depth": 1,
@@ -395,7 +395,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/kout
 - direction：起始顶点向外发散的方向（OUT,IN,BOTH），选填项，默认是BOTH
 - max_depth：步数，必填项
 - label：边的类型，选填项，默认代表所有edge label
-- max_degree：查询过程中，单个顶点最大边数目，选填项，默认为10000
+- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
 - limit：返回的顶点的最大数目，也即遍历过程中最大的访问的顶点数目，选填项，默认为10000000
 
 ##### 3.2.3.2 使用方法
@@ -453,7 +453,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/kneighbor?source=“1:marko�
 	- direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
 	- labels：边的类型列表
 	- properties：通过属性的值过滤边
-	- degree：查询过程中，单个顶点最大边数目，默认为10000
+	- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)
 	- skip_degree：查询过程中需要跳过的顶点的最小的边数目，即当顶点的边数目大于 skip_degree 时，跳过该顶点，可用于规避超级点，选填项，默认为0，表示不跳过任何点
 - max_depth：步数，必填项
 - count_only：Boolean值，true表示只统计结果的数目，不返回具体结果；false表示返回具体的结果，默认为false
@@ -484,7 +484,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/kneighbor
     "properties": {
       "weight": "P.gt(0.1)"
     },
-    "degree": 10000,
+    "max_degree": 10000,
     "skip_degree": 100000
   },
   "max_depth": 3,
@@ -633,7 +633,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/kneighbor
 - other：另一个顶点id，必填项
 - direction：顶点向外发散的方向（OUT,IN,BOTH），选填项，默认是BOTH
 - label：边的类型，选填项，默认代表所有edge label
-- max_degree：查询过程中，单个顶点最大边数目，选填项，默认为10000
+- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
 - limit：返回的共同邻居的最大数目，选填项，默认为10000000
 
 ##### 3.2.5.2 使用方法
@@ -678,7 +678,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/sameneighbors?vertex=“1:ma
 - other：另一个顶点id，必填项
 - direction：顶点向外发散的方向（OUT,IN,BOTH），选填项，默认是BOTH
 - label：边的类型，选填项，默认代表所有edge label
-- max_degree：查询过程中，单个顶点最大边数目，选填项，默认为10000
+- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
 
 ##### 3.2.6.2 使用方法
 
@@ -721,7 +721,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/jaccardsimilarity?vertex="1:
 	- direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
 	- labels：边的类型列表
 	- properties：通过属性的值过滤边
-	- degree：查询过程中，单个顶点最大边数目，默认为10000
+	- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)
 	- skip_degree：查询过程中需要跳过的顶点的最小的边数目，即当顶点的边数目大于 skip_degree 时，跳过该顶点，可用于规避超级点，选填项，默认为0，表示不跳过任何点
 - top：返回一个起点的jaccard similarity中最大的top个，选填项，默认为100
 - capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
@@ -742,7 +742,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/jaccardsimilarity
   "step": {
     "direction": "BOTH",
     "labels": [],
-    "degree": 10000,
+    "max_degree": 10000,
     "skip_degree": 100000
   },
   "top": 3
@@ -782,7 +782,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/jaccardsimilarity
 - direction：起始顶点向外发散的方向（OUT,IN,BOTH），选填项，默认是BOTH
 - max_depth：最大步数，必填项
 - label：边的类型，选填项，默认代表所有edge label
-- max_degree：查询过程中，单个顶点最大边数目，选填项，默认为10000
+- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
 - skip_degree：查询过程中需要跳过的顶点的最小的边数目，即当顶点的边数目大于 skip_degree 时，跳过该顶点，可用于规避超级点，选填项，默认为0，表示不跳过任何点
 - capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
 
@@ -832,7 +832,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/shortestpath?source="1:marko
 - direction：起始顶点向外发散的方向（OUT,IN,BOTH），选填项，默认是BOTH
 - max_depth：最大步数，必填项
 - label：边的类型，选填项，默认代表所有edge label
-- max_degree：查询过程中，单个顶点最大边数目，选填项，默认为10000
+- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
 - skip_degree：查询过程中需要跳过的顶点的最小的边数目，即当顶点的边数目大于 skip_degree 时，跳过该顶点，可用于规避超级点，选填项，默认为0，表示不跳过任何点
 - capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
 
@@ -895,7 +895,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/allshortestpaths?source="A"&
 - direction：起始顶点向外发散的方向（OUT,IN,BOTH），选填项，默认是BOTH
 - label：边的类型，选填项，默认代表所有edge label
 - weight：边的权重属性，必填项，必须是数字类型的属性
-- max_degree：查询过程中，单个顶点最大边数目，选填项，默认为10000
+- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
 - skip_degree：查询过程中需要跳过的顶点的最小的边数目，即当顶点的边数目大于 skip_degree 时，跳过该顶点，可用于规避超级点，选填项，默认为0，表示不跳过任何点
 - capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
 - with_vertex：true表示返回结果包含完整的顶点信息（路径中的全部顶点），false时表示只返回顶点id，选填项，默认为false
@@ -979,7 +979,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/weightedshortestpath?source=
 - direction：起始顶点向外发散的方向（OUT,IN,BOTH），选填项，默认是BOTH
 - label：边的类型，选填项，默认代表所有edge label
 - weight：边的权重属性，选填项，必须是数字类型的属性，如果不填或者虽然填了但是边没有该属性，则权重为1.0
-- max_degree：查询过程中，单个顶点最大边数目，选填项，默认为10000
+- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
 - skip_degree：查询过程中需要跳过的顶点的最小的边数目，即当顶点的边数目大于 skip_degree 时，跳过该顶点，可用于规避超级点，选填项，默认为0，表示不跳过任何点
 - capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
 - limit：查询到的目标顶点个数，也是返回的最短路径的条数，选填项，默认为10
@@ -1131,7 +1131,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/singlesourceshortestpath?sou
 	- direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
 	- labels：边的类型列表
 	- properties：通过属性的值过滤边
-	- degree：查询过程中，单个顶点最大边数目，默认为10000
+	- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)
 	- skip_degree：查询过程中需要跳过的顶点的最小的边数目，即当顶点的边数目大于 skip_degree 时，跳过该顶点，可用于规避超级点，选填项，默认为0，表示不跳过任何点
 - max_depth：步数，必填项
 - capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
@@ -1361,7 +1361,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/multinodeshortestpath
 - direction：起始顶点向外发散的方向（OUT,IN,BOTH），选填项，默认是BOTH
 - label：边的类型，选填项，默认代表所有edge label
 - max_depth：步数，必填项
-- max_degree：查询过程中，单个顶点最大边数目，选填项，默认为10000
+- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
 - capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
 - limit：返回的路径的最大数目，选填项，默认为10
 
@@ -1432,7 +1432,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/paths?source="1:marko"&targe
 	- direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
 	- labels：边的类型列表
 	- properties：通过属性的值过滤边
-	- degree：查询过程中，单个顶点最大边数目，默认为10000
+	- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)
 	- skip_degree：查询过程中需要跳过的顶点的最小的边数目，即当顶点的边数目大于 skip_degree 时，跳过该顶点，可用于规避超级点，选填项，默认为0，表示不跳过任何点
 - max_depth：步数，必填项
 - nearest：nearest为true时，代表起始顶点到达结果顶点的最短路径长度为depth，不存在更短的路径；nearest为false时，代表起始顶点到结果顶点有一条长度为depth的路径（未必最短且可以有环），选填项，默认为true
@@ -1530,7 +1530,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/paths
 	- properties：通过属性的值过滤边
 	- weight_by：根据指定的属性计算边的权重，sort_by不为NONE时有效，与default_weight互斥
 	- default_weight：当边没有属性作为权重计算值时，采取的默认权重，sort_by不为NONE时有效，与weight_by互斥
-	- degree：查询过程中，单个顶点最大边数目，默认为10000
+	- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)
 	- sample：当需要对某个step的符合条件的边进行采样时设置，-1表示不采样，默认为采样100
 - sort_by：根据路径的权重排序，选填项，默认为NONE：
 	- NONE表示不排序，默认值
@@ -1568,7 +1568,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/customizedpaths
                 "knows"
             ],
             "weight_by":"weight",
-            "degree":-1
+            "max_degree":-1
         },
         {
             "direction":"OUT",
@@ -1576,7 +1576,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/customizedpaths
                 "created"
             ],
             "default_weight":8,
-            "degree":-1,
+            "max_degree":-1,
             "sample":1
         }
     ],
@@ -1722,7 +1722,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/customizedpaths
 	- labels：边的类型列表
 	- properties：通过属性的值过滤边
 	- max_times：当前step可以重复的次数，当为N时，表示从起始顶点可以经过当前step 1-N 次
-	- degree：查询过程中，单个顶点最大边数目，默认为10000
+	- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)
 	- skip_degree：查询过程中需要跳过的顶点的最小的边数目，即当顶点的边数目大于 skip_degree 时，跳过该顶点，可用于规避超级点，选填项，默认为0，表示不跳过任何点
 - with_ring：Boolean值，true表示包含环路；false表示不包含环路，默认为false
 - capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
@@ -1761,7 +1761,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/templatepaths
       "labels": ["knows"],
       "properties": {
       },
-      "degree": 10000,
+      "max_degree": 10000,
       "skip_degree": 100000
     },
     {
@@ -1769,7 +1769,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/templatepaths
       "labels": ["created"],
       "properties": {
       },
-      "degree": 10000,
+      "max_degree": 10000,
       "skip_degree": 100000
     },
     {
@@ -1777,7 +1777,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/templatepaths
       "labels": ["created"],
       "properties": {
       },
-      "degree": 10000,
+      "max_degree": 10000,
       "skip_degree": 100000
     },
     {
@@ -1785,7 +1785,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/templatepaths
       "labels": ["created"],
       "properties": {
       },
-      "degree": 10000,
+      "max_degree": 10000,
       "skip_degree": 100000
     }
   ],
@@ -1889,7 +1889,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/templatepaths
 - direction：起始顶点到目的顶点的方向, 目的点到起始点是反方向，BOTH时不考虑方向（OUT,IN,BOTH），选填项，默认是BOTH
 - label：边的类型，选填项，默认代表所有edge label
 - max_depth：步数，必填项
-- max_degree：查询过程中，单个顶点最大边数目，选填项，默认为10000
+- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
 - capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
 - limit：返回的交点的最大数目，选填项，默认为10
 
@@ -1951,7 +1951,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/crosspoints?source="2:lop"&t
 		- direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
 		- labels：边的类型列表
 		- properties：通过属性的值过滤边
-		- degree：查询过程中，单个顶点最大边数目，默认为10000
+		- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)
 		- skip_degree：查询过程中需要跳过的顶点的最小的边数目，即当顶点的边数目大于 skip_degree 时，跳过该顶点，可用于规避超级点，选填项，默认为0，表示不跳过任何点
 - capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
 - limit：返回的路径的最大数目，选填项，默认为10
@@ -1988,7 +1988,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/customizedcrosspoints
                     "labels":[
                         "created"
                     ],
-                    "degree":-1
+                    "max_degree":-1
                 }
             ]
         }
@@ -2128,7 +2128,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/customizedcrosspoints
 - label：边的类型，选填项，默认代表所有edge label
 - max_depth：步数，必填项
 - source_in_ring：环路是否包含起点，选填项，默认为true
-- max_degree：查询过程中，单个顶点最大边数目，选填项，默认为10000
+- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
 - capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
 - limit：返回的可达环路的最大数目，选填项，默认为10
 
@@ -2197,7 +2197,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/rings?source="1:marko"&max_d
 - direction：起始顶点发出的边的方向（OUT,IN,BOTH），选填项，默认是BOTH
 - label：边的类型，选填项，默认代表所有edge label
 - max_depth：步数，必填项
-- max_degree：查询过程中，单个顶点最大边数目，选填项，默认为10000
+- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
 - capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
 - limit：返回的非环路的最大数目，选填项，默认为10
 
@@ -2280,7 +2280,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/rays?source="1:marko"&max_de
 - top：返回一个起点的"梭形相似点"中相似度最高的top个，必填项，0表示全部
 - group_property：与`min_groups`一起使用，当起点跟其所有的"梭形相似点"某个属性的值有至少`min_groups`个不同值时，才会返回该起点及其"梭形相似点"。比如为"读者A"推荐"异地"书友时，需要设置`group_property`为读者的"城市"属性，`min_group`至少为2，选填项，不填代表不需要根据属性过滤
 - min_groups：与`group_property`一起使用，只有`group_property`设置时才有意义
-- max_degree：查询过程中，单个顶点最大边数目，选填项，默认为10000
+- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
 - capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
 - limit：返回的结果数目上限（一个起点及其"梭形相似点"算一个结果），选填项，默认为10
 - with_intermediary：是否返回起点及其"梭形相似点"共同关联的中间点，默认为false
@@ -2315,7 +2315,7 @@ POST http://localhost:8080/graphs/hugegraph/traversers/fusiformsimilarity
     "top":0,
     "group_property":"city",
     "min_group":2,
-    "degree": 10000,
+    "max_degree": 10000,
     "capacity": -1,
     "limit": -1,
     "with_intermediary": false,
