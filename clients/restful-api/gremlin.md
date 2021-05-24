@@ -209,7 +209,7 @@ POST http://localhost:8080/graphs/hugegraph/jobs/gremlin
 ##### Response Status
 
 ```json
-200
+201
 ```
 
 ##### Response Body

@@ -19,7 +19,7 @@ HugeGraph默认不启用用户认证功能，可通过修改配置文件来启�
 
 ```http
 GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels
-Authorization: Basic admin 123456
+Authorization: Basic admin xxxx
 ```
 
 #### StandardAuthenticator模式

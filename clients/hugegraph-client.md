@@ -14,9 +14,9 @@ HugeGraph-Client 是操作 graph 的总入口，用户必须先创建出 HugeGra
 // HugeGraphServer地址："http://localhost:8080"
 // 图的名称："hugegraph"
 HugeClient hugeClient = HugeClient.builder("http://localhost:8080", "hugegraph")
-                               .configTimeout(20) // 默认 20s
-                               .configUser("", "") // 默认未开启用户权限
-                               .build();
+                                  .configTimeout(20) // 默认 20s
+                                  .configUser("", "") // 默认未开启用户权限
+                                  .build();
 ```
 
 上述创建 HugeClient 的过程如果失败会抛出异常，用户需要try-catch。如果成功则继续获取 schema、graph 以及 gremlin 的 manager。

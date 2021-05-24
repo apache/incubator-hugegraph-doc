@@ -178,4 +178,4 @@ g.V(pluto).out('brother').as('god').out('lives').as('place').select('god','place
 
 #### 3.2 总结
 
-HugeGraph目前支持Gremlin的语法，用户可以通过Gremlin语句实现各种查询需求，但是目前HugeGraph暂不支持全文检索功能。
+HugeGraph 目前支持 `Gremlin` 的语法，用户可以通过 `Gremlin / REST-API` 实现各种查询需求。
