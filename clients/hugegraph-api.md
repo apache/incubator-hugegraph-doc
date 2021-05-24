@@ -3,12 +3,12 @@
 HugeGraph-Server通过HugeGraph-API基于HTTP协议为Client提供操作图的接口，主要包括元数据和
 图数据的增删改查，遍历算法，变量，图操作及其他操作。
 
-- Schema
+- Graph Schema
   - [PropertyKey](restful-api/propertykey.md)
   - [VertexLabel](restful-api/vertexlabel.md)
   - [EdgeLabel](restful-api/edgelabel.md)
   - [IndexLabel](restful-api/indexlabel.md)
-- Graph
+- Graph Data
   - [Vertex](restful-api/vertex.md)
   - [Edge](restful-api/edge.md)
 - [Traverser](restful-api/traverser.md)
@@ -17,4 +17,5 @@ HugeGraph-Server通过HugeGraph-API基于HTTP协议为Client提供操作图的�
 - [Graphs](restful-api/graphs.md)
 - [Task](restful-api/task.md)
 - [Gremlin](restful-api/gremlin.md)
+- [Authentication](restful-api/auth.md)
 - [Other](restful-api/other.md)

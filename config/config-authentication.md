@@ -7,7 +7,7 @@ HugeGraph支持动态创建用户、用户组、资源，支持动态分配或�
 
 举例说明：
 ```java
-# 场景：某用户只有北京地区的数据读取权限
+// 场景：某用户只有北京地区的数据读取权限
 user(name=xx) -belong-> group(name=xx) -access(read)-> target(graph=graph1, resource={label: person, city: Beijing})
 ```
 
@@ -15,7 +15,12 @@ user(name=xx) -belong-> group(name=xx) -access(read)-> target(graph=graph1, reso
 
 HugeGraph默认不启用用户认证功能，可通过修改配置文件来启用该功能。内置实现了`StandardAuthenticator`和`ConfigAuthenticator`两种模式，`StandardAuthenticator`模式支持多用户认证与细粒度权限控制，`ConfigAuthenticator`模式支持简单的用户权限认证。此外，开发者可以自定义实现`HugeAuthenticator`接口来对接自身的权限系统。
 
-用户认证方式均采用 [HTTP Basic Authentication](https://zh.wikipedia.org/wiki/HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81)。
+用户认证方式均采用 [HTTP Basic Authentication](https://zh.wikipedia.org/wiki/HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81) ，简单说就是在发送 HTTP 请求时在 `Authentication` 设置选择 `Basic` 然后输入对应的用户名和密码，对应 HTTP 明文如下所示 :
+
+```http
+GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels
+Authorization: Basic admin 123456
+```
 
 #### StandardAuthenticator模式
 `StandardAuthenticator`模式是通过在数据库后端存储用户信息来支持用户认证和权限控制，该实现基于数据库存储的用户的名称与密码进行认证（密码已被加密），基于用户的角色来细粒度控制用户权限。下面是具体的配置流程（重启服务生效）：
@@ -32,7 +37,7 @@ authentication: {
 
 在配置文件`rest-server.properties`中配置`authenticator`及其`graph_store`信息：
 
-```ini
+```properties
 auth.authenticator=com.baidu.hugegraph.auth.StandardAuthenticator
 auth.graph_store=hugegraph
 ```
@@ -40,9 +45,11 @@ auth.graph_store=hugegraph
 
 在配置文件`hugegraph{n}.properties`中配置`gremlin.graph`信息：
 
-```ini
+```properties
 gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
 ```
+
+然后详细的权限 API 调用和说明请参考 [Authentication-API](../clients/restful-api/auth.md) 文档 
 
 #### ConfigAuthenticator模式
 
@@ -60,7 +67,7 @@ authentication: {
 
 在配置文件`rest-server.properties`中配置`authenticator`及其`tokens`信息：
 
-```ini
+```properties
 auth.authenticator=com.baidu.hugegraph.auth.ConfigAuthenticator
 auth.admin_token=token-value-a
 auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
@@ -68,7 +75,7 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 
 在配置文件`hugegraph{n}.properties`中配置`gremlin.graph`信息：
 
-```ini
+```properties
 gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
 ```
 

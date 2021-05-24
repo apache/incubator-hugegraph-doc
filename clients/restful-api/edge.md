@@ -541,7 +541,7 @@ GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page=002500100753313a6a6f
 }
 ```
 
-此时`"page": null`表示已经没有下一页了。
+此时`"page": null`表示已经没有下一页了 (注: 后端为 Cassandra 时，为了优化性能，直接访问最后一条数据时 page 仍不会显示为 null，其他情况一致)
 
 #### 2.2.7 根据Id获取边
 
