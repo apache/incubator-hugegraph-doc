@@ -604,7 +604,7 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?page=001000100853313a7
 }
 ```
 
-此时`"page": null`表示已经没有下一页了 (注: 后端为 Cassandra 时，为了优化性能，直接访问最后一条数据时 page 仍不会显示为 null，其他情况一致)
+此时`"page": null`表示已经没有下一页了 (注: 后端为 Cassandra 时，为了性能考虑，返回页恰好为最后一页时，返回 `page` 值可能非空，通过该 `page` 再请求下一页数据时则返回 `空数据` 及 `page = null`，其他情况类似)
 
 #### 2.1.7 根据Id获取顶点
 

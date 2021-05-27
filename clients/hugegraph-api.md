@@ -8,7 +8,7 @@ HugeGraph-Server通过HugeGraph-API基于HTTP协议为Client提供操作图的�
   - [VertexLabel](restful-api/vertexlabel.md)
   - [EdgeLabel](restful-api/edgelabel.md)
   - [IndexLabel](restful-api/indexlabel.md)
-- Graph Data
+- Graph Vertex & Edge
   - [Vertex](restful-api/vertex.md)
   - [Edge](restful-api/edge.md)
 - [Traverser](restful-api/traverser.md)
