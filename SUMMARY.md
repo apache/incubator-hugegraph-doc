@@ -11,25 +11,14 @@
 * [Develop with HugeGraph-Client](quickstart/hugegraph-client.md)
 * [Analysis with HugeGraph-Spark](quickstart/hugegraph-spark.md)
 
-
-## Guides
-* [Architecture Overview](guides/architectural.md)
-* [Design Concepts](guides/desgin-concept.md)
-* [Custom Plugins](guides/custom-plugin.md)
-* [Backup Restore](guides/backup-restore.md)
-* [FAQ](guides/faq.md)
-
 ## Config
 * [Config Guide](config/config-guide.md)
 * [Config Options](config/config-option.md)
 * [Config Authentication](config/config-authentication.md)
 * [Config HTTPS](config/config-https.md)
 
-## Query Language
-* [Gremlin Query Language](language/hugegraph-gremlin.md)
-* [HugeGraph Examples](language/hugegraph-example.md)
 
-## Clients
+## API
 * [RESTful API](clients/hugegraph-api.md)
     * [PropertyKey](clients/restful-api/propertykey.md)
     * [VertexLabel](clients/restful-api/vertexlabel.md)
@@ -48,6 +37,17 @@
     * [Other](clients/restful-api/other.md)
 * [Java Client](clients/hugegraph-client.md)
 * [Gremlin Console](clients/gremlin-console.md)
+
+## Guides
+* [Architecture Overview](guides/architectural.md)
+* [Design Concepts](guides/desgin-concept.md)
+* [Custom Plugins](guides/custom-plugin.md)
+* [Backup Restore](guides/backup-restore.md)
+* [FAQ](guides/faq.md)
+
+## Query Language
+* [Gremlin Query Language](language/hugegraph-gremlin.md)
+* [HugeGraph Examples](language/hugegraph-example.md)
 
 ## Performance
 * [HugeGraph Benchmark Performance](performance/hugegraph-benchmark-0.5.6.md)
