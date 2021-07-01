@@ -1,0 +1,34 @@
+name: Ask question (提问)
+description: Question about usage or configs in HugeGraph
+title: '[Question] describe your problem'
+
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        ### Note (特别注意) :
+
+        > 1. Issue 标题请保持原有模板分类(例如:`[Bug]`), 长段描述之间可以增加`空行`或使用`序号`标记, 保持排版清晰
+
+        > 2. 请在对应的模块提交 issue, 缺乏有效信息 / 长时间 (> 14 天) 没有回复的 issue 可能会被 **关闭**
+        (更新时会再开启)
+  
+  - type: dropdown
+    attributes:
+      label: Problem Type (问题类型)
+      options:
+        - lack info (文档描述缺失)
+        - typo (错别字和描述优化)
+        - struct / logic (架构 / 逻辑问题)
+        - others (please edit later)
+
+  - type: textarea
+    attributes:
+      label: Your Question (问题描述)
+      description: |
+        > 图使用 / 配置相关问题，请优先参考 [REST-API 文档](https://hugegraph.github.io/hugegraph-doc/clients/hugegraph-api.html), 以及 [Server 配置文档](https://hugegraph.github.io/hugegraph-doc/config/config-option.html)
+        > if possible, please provide screenshots (请提供清晰的截图, 标注有疑问的地方)
+      placeholder: |        
+        type the main problem here (include module's version)
+    validations:
+      required: true
