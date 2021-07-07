@@ -14,6 +14,18 @@ EdgeId是由 `src-vertex-id + direction + label + sort-values + tgt-vertex-id` �
 
 #### 2.2.1 创建一条边
 
+Params说明
+
+- label：边类型名称，必填
+- outV：源顶点id，必填
+- inV：目标顶点id，必填
+- outVLabel：源顶点类型。必填
+- inVLabel：目标顶点类型。必填
+- properties: 边关联的属性，对象内部结构为：
+- name：属性名称
+- value：属性值
+
+
 ##### Method & Url
 
 ```
@@ -609,3 +621,4 @@ DELETE http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?lab
 
 ```json
 204
+```

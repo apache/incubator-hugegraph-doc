@@ -2,6 +2,18 @@
 
 假设已经创建好了1.1.3中的 PropertyKeys 和 1.2.3中的 VertexLabels
 
+Params说明
+
+- name：顶点类型名称，必填
+- source_label: 源顶点类型的名称，必填
+- target_label: 目标顶点类型的名称，必填
+- frequency：两个点之间是否可以有多条边，可以取值SINGLE和MULTIPLE，非必填，默认值SINGLE
+- properties: 边类型关联的属性类型，选填
+- sort_keys: 当允许关联多次时，指定区分键属性列表
+- nullable_keys：可为空的属性，选填，默认可为空
+- enable_label_index： 是否开启类型索引，默认关闭
+
+
 #### 1.3.1 创建一个EdgeLabel
 
 ##### Method & Url
@@ -292,5 +304,4 @@ DELETE http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
 ```
 
 注：
-
 > 可以通过`GET http://localhost:8080/graphs/hugegraph/tasks/1`（其中"1"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](task.md)

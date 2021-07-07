@@ -2,6 +2,19 @@
 
 假设已经创建好了1.1.3中列出来的 PropertyKeys
 
+Params说明
+
+- id：顶点类型id值
+- name：顶点类型名称，必填
+- id_strategy: 顶点类型的ID策略，主键ID、自动生成、自定义字符串、自定义数字、自定义UUID，默认主键ID
+- properties: 顶点类型关联的属性类型
+- primary_keys: 主键属性，当ID策略为PRIMARY_KEY时必须有值，其他ID策略时必须为空；
+- enable_label_index： 是否开启类型索引，默认关闭
+- index_names：顶点类型创建的索引，详情见3.4 
+- nullable_keys：可为空的属性
+- user_data：设置顶点类型的通用信息，作用同属性类型
+
+
 #### 1.2.1 创建一个VertexLabel
 
 ##### Method & Url
