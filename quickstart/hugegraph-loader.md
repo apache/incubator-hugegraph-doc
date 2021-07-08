@@ -298,7 +298,11 @@ Office,388
           "city"
         ],
         "charset": "UTF-8",
-        "list_format": null
+        "list_format": {
+          "start_symbol": "[",
+          "elem_delimiter": "|",
+          "end_symbol": "]"
+        }
       },
       "vertices": [
         {
@@ -339,7 +343,11 @@ Office,388
         "compression": "NONE",
         "header": null,
         "charset": "UTF-8",
-        "list_format": null
+        "list_format": {
+          "start_symbol": "",
+          "elem_delimiter": ",",
+          "end_symbol": ""
+        }
       },
       "vertices": [
         {
@@ -550,10 +558,10 @@ bin/mapping-convert.sh struct.json
     - time_zone: 设置日期数据是处于哪个时区的，默认值为`GMT+8`，选填；
     - skipped_line: 想跳过的行，复合结构，目前只能配置要跳过的行的正则表达式，用子节点`regex`描述，默认不跳过任何行，选填；
     - compression: 文件的压缩格式，可选值为 NONE、GZIP、BZ2、XZ、LZMA、SNAPPY_RAW、SNAPPY_FRAMED、Z、DEFLATE、LZ4_BLOCK、LZ4_FRAMED、ORC 和 PARQUET，默认为 NONE，表示非压缩文件，选填；
-    - list_format: 当文件的某列是集合结构时（对应图中的 PropertyKey 的 Cardinality 为 Set 或 List），可以用此项设置该列的起始符、分隔符、结束符，复合结构: 
-        - start_symbol: 集合结构列的起始符；
-        - elem_delimiter: 集合结构列的分隔符；
-        - end_symbol: 集合结构列的结束符；
+    - list_format: 当文件(非 JSON )的某列是集合结构时（对应图中的 PropertyKey 的 Cardinality 为 Set 或 List），可以用此项设置该列的起始符、分隔符、结束符，复合结构: 
+        - start_symbol: 集合结构列的起始符 (默认值是 `[`, JSON 格式目前不支持指定)
+        - elem_delimiter: 集合结构列的分隔符 (默认值是 `|`, JSON 格式目前只支持原生`,`分隔)
+        - end_symbol: 集合结构列的结束符 (默认值是 `]`, JSON 格式目前不支持指定)
 
 ###### 3.3.2.2 HDFS 输入源
 

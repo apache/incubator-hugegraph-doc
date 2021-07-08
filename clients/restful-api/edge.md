@@ -22,8 +22,8 @@ Params说明
 - outVLabel：源顶点类型。必填
 - inVLabel：目标顶点类型。必填
 - properties: 边关联的属性，对象内部结构为：
-- name：属性名称
-- value：属性值
+  1. name：属性名称
+  2. value：属性值
 
 
 ##### Method & Url

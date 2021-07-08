@@ -1,5 +1,9 @@
 ### FAQ
 
+- 如何选择后端存储? 选 RocksDB 还是 Cassandra 还是 Hbase 还是 Mysql?
+
+  根据你的具体需要来判断, 一般单机或数据量 < 100 亿推荐 RocksDB, 其他推荐使用分布式存储的后端集群
+
 - 启动服务时提示：`xxx (core dumped) xxx`
 
   请检查JDK版本是否为1.8  
@@ -8,9 +12,9 @@
 
   第一次启动服务前，需要先使用`init-store`初始化后端，后续版本会将提示得更清晰直接。
 
-- 所有的后端在使用前都需要执行`init-store`吗
-
-  除了`memory`不需要，其他后端均需要，如：`cassandra`、`scylladb`和`rocksdb`等。
+- 所有的后端在使用前都需要执行`init-store`吗，序列化的选择可以随意填写么?
+  
+  除了`memory`不需要，其他后端均需要，如：`cassandra`、`hbase`和`rocksdb`等，序列化需一一对应不可随意填写。
 
 - 执行`init-store`报错：```Exception in thread "main" java.lang.UnsatisfiedLinkError: /tmp/librocksdbjni3226083071221514754.so: /usr/lib64/libstdc++.so.6: version `GLIBCXX_3.4.10' not found (required by /tmp/librocksdbjni3226083071221514754.so)```
 
