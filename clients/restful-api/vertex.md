@@ -1,6 +1,6 @@
 ### 2.1 Vertex
 
-顶点类型中的 Id 策略决定了顶点的 Id类型，其对应关系如下：
+顶点类型中的 Id 策略决定了顶点的 Id 类型，其对应关系如下：
 
 Id_Strategy      | id type
 ---------------- | -------
@@ -10,14 +10,14 @@ CUSTOMIZE_STRING | string
 CUSTOMIZE_NUMBER | number
 CUSTOMIZE_UUID   | uuid
 
-顶点的GET/PUT/DELETE API中url的 id 部分传入的应是带有类型信息的id值，这个类型信息用 json 串是否带引号表示，也就是说：
+顶点的 `GET/PUT/DELETE` API 中 url 的 id 部分传入的应是带有类型信息的 id 值，这个类型信息用 json 串是否带引号表示，也就是说：
 
 - 当 id 类型为 number 时，url 中的 id 不带引号，形如 xxx/vertices/123456
 - 当 id 类型为 string 时，url 中的 id 带引号，形如 xxx/vertices/"123456"
 
 -------------------------------------------------------------------
 
-接下来的示例均假设已经创建好了前述的各种schema信息
+接下来的示例均假设已经创建好了前述的各种 schema 信息
 
 #### 2.1.1 创建一个顶点
 

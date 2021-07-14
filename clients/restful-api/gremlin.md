@@ -5,7 +5,7 @@
 ##### Params
 
 - gremlin: 要发送给`HugeGraphServer`执行的`gremlin`语句
-- bindings: 用来绑定参数，key是字符串，value是绑定的值（只能是字符串或者数字），功能类似于MySQL的preparedstatement，即预编译和缓存语句，加速运行
+- bindings: 用来绑定参数，key是字符串，value是绑定的值（只能是字符串或者数字），功能类似于MySQL的 Prepared Statement，用于加速语句执行
 - language: 发送语句的语言类型，默认为`gremlin-groovy`
 - aliases: 为存在于图空间的已有变量添加别名
 
