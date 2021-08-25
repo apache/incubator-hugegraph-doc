@@ -25,16 +25,19 @@ POST http://localhost:8080/graphs/hugegraph/schema/propertykeys
 
 ```json
 {
-    "name": "age",
-    "data_type": "INT",
-    "cardinality": "SINGLE"
+    "property_key" : {
+        "name": "age",
+        "data_type": "INT",
+        "cardinality": "SINGLE"
+    },
+    "task_id": 0
 }
 ```
 
 ##### Response Status
 
 ```json
-201
+202
 ```
 
 ##### Response Body
@@ -66,18 +69,21 @@ PUT http://localhost:8080/graphs/hugegraph/schema/propertykeys/age?action=append
 
 ```json
 {
-    "name": "age",
-    "user_data": {
-        "min": 0,
-        "max": 100
-    }
+    "property_key" : {
+        "name": "age",
+        "user_data": {
+            "min": 0,
+            "max": 100
+        }
+    },
+    "task_id" : 0
 }
 ```
 
 ##### Response Status
 
 ```json
-201
+202
 ```
 
 ##### Response Body
@@ -217,5 +223,21 @@ DELETE http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
 ##### Response Status
 
 ```json
-204
+202
+```
+
+##### Response Body
+
+```json
+{
+    "property_key" : {
+        "id": 2,
+        "name": "age",
+        "data_type": "INT",
+        "cardinality": "SINGLE",
+        "properties": [],
+        "user_data": {}
+    },
+    "task_id" : 0
+}
 ```
