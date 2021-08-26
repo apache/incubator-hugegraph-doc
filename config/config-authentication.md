@@ -47,7 +47,7 @@ Graph Server 和 Auth Server使用同一套hugegraph-xx.xx.xx.gz安装包，需�
 └── system.properties
 ```
 
-#### 配置 Graph Server
+#### 配置 Auth Server
 
 * 配置 gremlin-server.yaml
 
@@ -136,15 +136,12 @@ sh ./bin/start-hugegraph.sh
 ......
 graphs: {
   hugegraph: conf/hugegraph.properties,
-  # 新增 system: conf/system.properties
   system: conf/system.properties
 }
 
-# 需要添加此段配置 (默认⽆)
 authentication: {
   authenticator: com.baidu.hugegraph.auth.StandardAuthenticator,
   authenticationHandler: com.baidu.hugegraph.auth.WsAndHttpBasicAuthHandler,
-  # 下⾯需改为具体的rest-server路径名
   config: {tokens: conf/rest-server.properties}
 }
 
