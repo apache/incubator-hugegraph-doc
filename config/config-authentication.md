@@ -17,6 +17,7 @@ HugeGraph 为了方便不同用户场景下的鉴权使用，目前内置了两�
 // 场景：某用户只有北京地区的数据读取权限
 user(name=xx) -belong-> group(name=xx) -access(read)-> target(graph=graph1, resource={label: person, city: Beijing})
 ```
+
 备注：下面重点针对`StandardAuthenticator`（即`Graph Server + Auth Server`）模式部署流程进行介绍
 
 ### `StandardAuthenticator`（`Graph Server + Auth Server`）模式下部署流程
@@ -29,6 +30,7 @@ Authorization: Basic username xxxxxx
 ```
 
 Graph Server 和 Auth Server使用同一套hugegraph-xx.xx.xx.gz安装包，需要配置的文件如下所示：
+
 ```
 # ls /path/hugegraph-xx.xx.xx/conf
 
@@ -41,25 +43,23 @@ Graph Server 和 Auth Server使用同一套hugegraph-xx.xx.xx.gz安装包，需�
 ├── log4j2.xml
 ├── remote-objects.yaml
 ├── remote.yaml
-└── rest-server.properties 			# Modify
+├── rest-server.properties 			# Modify
 └── system.properties
 ```
 
 #### 配置 Graph Server
+
 * 配置 gremlin-server.yaml
+
 ```yaml
 ......
 graphs: {
-  # 删除 hugegraph: conf/hugegraph.properties
-  # 新增 system: conf/system.properties
   system: conf/system.properties
 }
 
-# 需要添加此段配置 (默认⽆)
 authentication: {
   authenticator: com.baidu.hugegraph.auth.StandardAuthenticator,
   authenticationHandler: com.baidu.hugegraph.auth.WsAndHttpBasicAuthHandler,
-  # 下⾯需改为具体的rest-server路径名
   config: {tokens: conf/rest-server.properties}
 }
 
@@ -67,6 +67,7 @@ scriptEngines: {......
 ```
 
 * 配置 rest-server.properties （重点关注序号标记）
+
 ```properties
 # bind url
 # ①. 此处需要修改为当前机器具体的 ip/域名
@@ -120,18 +121,17 @@ server.role=master
 ```
 
 * 启动 Auth Server
+
 ```bash
 cd /path/to/hugegraph-xx.xx.xx
-
-# init-store过程中需要输入admin密码，注意 6-18位字符，只能包含字母、数字和下划线
 sh ./bin/init-store.sh
-
-# 启动 Auth Server
 sh ./bin/start-hugegraph.sh
 ```
 
 #### 配置 Graph Server
+
 * 配置 gremlin-server.yaml
+
 ```yaml
 ......
 graphs: {
@@ -152,12 +152,14 @@ scriptEngines: {......
 ```
 
 * 配置 hugegraph.properties
+
 ```properties
 # 将开头默认的 "com.baidu.hugegraph.HugeFactory" 替换为下⾯的
 gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
 ```
 
 * 配置 rest-server.properties
+
 ```properties
 # bind url
 # ①. 此处需要修改为当前机器具体的 ip/域名
@@ -210,6 +212,7 @@ server.role=master
 ```
 
 * 启动 Graph Server
+
 ```bash
 cd /path/to/hugegraph-xx.xx.xx
 sh ./bin/init-store.sh
