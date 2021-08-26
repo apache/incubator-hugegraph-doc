@@ -1,9 +1,9 @@
-## HugeGraph 内置用户权限与扩展权限配置及使用
+## HugeGraph 用户鉴权配置及使用
 
 ### 概述
 HugeGraph 为了方便不同用户场景下的鉴权使用，目前内置了两套权限模式：
 1. 简单的`ConfigAuthenticator`模式，通过本地配置文件存储用户名和密码 (仅支持单 GraphServer)
-2. 完备的`StandardAuthenticator`模式，支持多用户认证、以及细粒度的权限访问控制，采用基于 “用户-用户组-操作-资源” 的 4 层设计，灵活控制用户角色与权限 (支持多 GraphServer)
+2. 完备的`StandardAuthenticator`（即 `Graph Server + Auth Server`）模式，支持多用户认证、以及细粒度的权限访问控制，采用基于 “用户-用户组-操作-资源” 的 4 层设计，灵活控制用户角色与权限 (支持多 GraphServer)
 
 其中 `StandardAuthenticator` 模式的几个核心设计：
 - 初始化时创建超级管理员 (`admin`) 用户，后续通过超级管理员创建其它用户，新创建的用户被分配足够权限后，可以创建或管理更多的用户
@@ -17,77 +17,203 @@ HugeGraph 为了方便不同用户场景下的鉴权使用，目前内置了两�
 // 场景：某用户只有北京地区的数据读取权限
 user(name=xx) -belong-> group(name=xx) -access(read)-> target(graph=graph1, resource={label: person, city: Beijing})
 ```
+备注：下面重点针对`StandardAuthenticator`（即`Graph Server + Auth Server`）模式部署流程进行介绍
 
-### 配置用户认证
-
-HugeGraph 默认**不启用**用户认证功能，需通过修改配置文件来启用该功能。内置实现了`StandardAuthenticator`和`ConfigAuthenticator`两种模式，`StandardAuthenticator`模式支持多用户认证与细粒度权限控制，`ConfigAuthenticator`模式支持简单的用户权限认证。此外，开发者可以自定义实现`HugeAuthenticator`接口来对接自身的权限系统。
+### `StandardAuthenticator`（`Graph Server + Auth Server`）模式下部署流程
 
 用户认证方式均采用 [HTTP Basic Authentication](https://zh.wikipedia.org/wiki/HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81) ，简单说就是在发送 HTTP 请求时在 `Authentication` 设置选择 `Basic` 然后输入对应的用户名和密码，对应 HTTP 明文如下所示 :
 
 ```http
 GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels
-Authorization: Basic admin xxxx
+Authorization: Basic username xxxxxx
 ```
 
-#### StandardAuthenticator模式
-`StandardAuthenticator`模式是通过在数据库后端存储用户信息来支持用户认证和权限控制，该实现基于数据库存储的用户的名称与密码进行认证（密码已被加密），基于用户的角色来细粒度控制用户权限。下面是具体的配置流程（重启服务生效）：
+Graph Server 和 Auth Server使用同一套hugegraph-xx.xx.xx.gz安装包，需要配置的文件如下所示：
+```
+# ls /path/hugegraph-xx.xx.xx/conf
 
-在配置文件`gremlin-server.yaml`中配置`authenticator`及其`rest-server`文件路径：
+├── computer.yaml
+├── gremlin-driver-settings.yaml
+├── gremlin-server.yaml 			# Modify
+├── hugegraph-community.license
+├── hugegraph.properties 			# Modify just for Graph Server 
+├── hugegraph-server.keystore
+├── log4j2.xml
+├── remote-objects.yaml
+├── remote.yaml
+└── rest-server.properties 			# Modify
+└── system.properties
+```
 
+#### 配置 Graph Server
+* 配置 gremlin-server.yaml
 ```yaml
+......
+graphs: {
+  # 删除 hugegraph: conf/hugegraph.properties
+  # 新增 system: conf/system.properties
+  system: conf/system.properties
+}
+
+# 需要添加此段配置 (默认⽆)
 authentication: {
   authenticator: com.baidu.hugegraph.auth.StandardAuthenticator,
   authenticationHandler: com.baidu.hugegraph.auth.WsAndHttpBasicAuthHandler,
+  # 下⾯需改为具体的rest-server路径名
   config: {tokens: conf/rest-server.properties}
 }
+
+scriptEngines: {......
 ```
 
-在配置文件`rest-server.properties`中配置`authenticator`及其`graph_store`信息：
-
+* 配置 rest-server.properties （重点关注序号标记）
 ```properties
+# bind url
+# ①. 此处需要修改为当前机器具体的 ip/域名
+restserver.url=http://127.0.0.1:8080
+# gremlin server url, need to be consistent with host and port in gremlin-server.yaml
+#gremlinserver.url=http://127.0.0.1:8182
+
+# graphs list with pair NAME:CONF_PATH
+# ②. 此处修改为如下
+# graphs=[hugegraph:conf/hugegraph.properties]
+graphs=[system:conf/system.properties]
+
+# The maximum thread ratio for batch writing, only take effect if the batch.max_write_threads is 0
+batch.max_write_ratio=80
+batch.max_write_threads=0
+
+# authentication configs
+# choose 'com.baidu.hugegraph.auth.StandardAuthenticator' or 'com.baidu.hugegraph.auth.ConfigAuthenticator'
+# ③. 此处需要取消注释, 修改为如下
 auth.authenticator=com.baidu.hugegraph.auth.StandardAuthenticator
-auth.graph_store=hugegraph
 
+# for StandardAuthenticator mode
+# ④. 此处需要取消注释, 名字需与上⾯ "graphs" 值保持⼀致
+auth.graph_store=system
 # auth client config
-# 如果是分开部署 GraphServer 和 AuthServer, 还需要指定下面的配置, 地址填写 AuthServer 的 IP:RPC 端口
 #auth.remote_url=127.0.0.1:8899,127.0.0.1:8898,127.0.0.1:8897
+
+# for ConfigAuthenticator mode
+#auth.admin_token=
+#auth.user_tokens=[]
+
+# rpc group configs of multi graph servers
+# rpc server configs
+# ⑤. 此处需要修改为当前机器具体的 ip 和域名
+rpc.server_host=127.0.0.1
+rpc.server_port=8090
+#rpc.server_timeout=30
+
+# rpc client configs (like enable to keep cache consistency)
+# ⑥. 此处需要注释(关闭)
+#rpc.remote_url=127.0.0.1:8090
+#rpc.client_connect_timeout=20
+#rpc.client_reconnect_period=10
+#rpc.client_read_timeout=40
+#rpc.client_retries=3
+#rpc.client_load_balancer=consistentHash
+
+# lightweight load balancing (beta)
+server.id=server-1
+server.role=master
 ```
-其中，`graph_store`配置项是指使用哪一个图来存储用户信息，如果存在多个图的话，选取任意一个均可。
 
-在配置文件`hugegraph{n}.properties`中配置`gremlin.graph`信息：
+* 启动 Auth Server
+```bash
+cd /path/to/hugegraph-xx.xx.xx
 
-```properties
-gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
+# init-store过程中需要输入admin密码，注意 6-18位字符，只能包含字母、数字和下划线
+sh ./bin/init-store.sh
+
+# 启动 Auth Server
+sh ./bin/start-hugegraph.sh
 ```
 
-然后详细的权限 API 调用和说明请参考 [Authentication-API](../clients/restful-api/auth.md) 文档 
-
-#### ConfigAuthenticator模式
-
-`ConfigAuthenticator`模式是通过预先在配置文件中设置用户信息来支持用户认证，该实现是基于配置好的静态`tokens`来验证用户是否合法。下面是具体的配置流程（重启服务生效）：
-
-在配置文件`gremlin-server.yaml`中配置`authenticator`及其`rest-server`文件路径：
-
+#### 配置 Graph Server
+* 配置 gremlin-server.yaml
 ```yaml
+......
+graphs: {
+  hugegraph: conf/hugegraph.properties,
+  # 新增 system: conf/system.properties
+  system: conf/system.properties
+}
+
+# 需要添加此段配置 (默认⽆)
 authentication: {
-  authenticator: com.baidu.hugegraph.auth.ConfigAuthenticator,
+  authenticator: com.baidu.hugegraph.auth.StandardAuthenticator,
   authenticationHandler: com.baidu.hugegraph.auth.WsAndHttpBasicAuthHandler,
+  # 下⾯需改为具体的rest-server路径名
   config: {tokens: conf/rest-server.properties}
 }
+
+scriptEngines: {......
 ```
 
-在配置文件`rest-server.properties`中配置`authenticator`及其`tokens`信息：
-
+* 配置 hugegraph.properties
 ```properties
-auth.authenticator=com.baidu.hugegraph.auth.ConfigAuthenticator
-auth.admin_token=token-value-a
-auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
-```
-
-在配置文件`hugegraph{n}.properties`中配置`gremlin.graph`信息：
-
-```properties
+# 将开头默认的 "com.baidu.hugegraph.HugeFactory" 替换为下⾯的
 gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
+```
+
+* 配置 rest-server.properties
+```properties
+# bind url
+# ①. 此处需要修改为当前机器具体的 ip/域名
+restserver.url=http://127.0.0.1:8080
+# gremlin server url, need to be consistent with host and port in gremlin-server.yaml
+#gremlinserver.url=http://127.0.0.1:8182
+
+# graphs list with pair NAME:CONF_PATH
+# ②. 新增 system: conf/system.properties
+graphs=[hugegraph:conf/hugegraph.properties, system: conf/system.properties]
+
+# The maximum thread ratio for batch writing, only take effect if the batch.max_write_threads is 0
+batch.max_write_ratio=80
+batch.max_write_threads=0
+
+# authentication configs
+# choose 'com.baidu.hugegraph.auth.StandardAuthenticator' or 'com.baidu.hugegraph.auth.ConfigAuthenticator'
+# ③. 此处需要取消注释, 修改为如下
+auth.authenticator=com.baidu.hugegraph.auth.StandardAuthenticator
+
+# for StandardAuthenticator mode
+#auth.graph_store=hugegraph
+# auth client config
+# ④. 此处需要取消注释, 填写 AuthServer RPC 设置的 IP 和端⼝ (重点)
+auth.remote_url=AuthServerIP:8090
+
+# for ConfigAuthenticator mode
+#auth.admin_token=
+#auth.user_tokens=[]
+
+# rpc group configs of multi graph servers
+# rpc server configs
+# ⑤. 此处需要注释(关闭)
+#rpc.server_host=127.0.0.1
+#rpc.server_port=8090
+#rpc.server_timeout=30
+
+# rpc client configs (like enable to keep cache consistency)
+# ⑥. 此处需要注释(关闭)
+#rpc.remote_url=127.0.0.1:8090
+#rpc.client_connect_timeout=20
+#rpc.client_reconnect_period=10
+#rpc.client_read_timeout=40
+#rpc.client_retries=3
+#rpc.client_load_balancer=consistentHash
+
+# lightweight load balancing (beta)
+server.id=server-1
+server.role=master
+```
+
+* 启动 Graph Server
+```bash
+cd /path/to/hugegraph-xx.xx.xx
+sh ./bin/init-store.sh
+sh ./bin/start-hugegraph.sh
 ```
 
 ### 自定义用户认证系统
