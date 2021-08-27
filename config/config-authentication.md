@@ -177,10 +177,10 @@ batch.max_write_threads=0
 # ③. 此处需要取消注释, 修改为如下
 auth.authenticator=com.baidu.hugegraph.auth.StandardAuthenticator
 
+# ④. auth.graph_store 和 auth.remote_url 需要取消注释, auth.remote_url 填写 AuthServer RPC 设置的 IP 和端⼝ (重点)
 # for StandardAuthenticator mode
-#auth.graph_store=hugegraph
+auth.graph_store=system
 # auth client config
-# ④. 此处需要取消注释, 填写 AuthServer RPC 设置的 IP 和端⼝ (重点)
 auth.remote_url=AuthServerIP:8090
 
 # for ConfigAuthenticator mode
