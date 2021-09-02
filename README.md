@@ -2,7 +2,7 @@
 
 ### Summary
 
-HugeGraph是一款易用、高效、通用的开源图数据库系统（Graph Database，[GitHub项目地址](https://github.com/hugegraph/hugegraph)），
+HugeGraph是一款易用、高效、通用的开源图数据库系统（Graph Database，[GitHub项目地址](https://github.com/starhugegraph/hugegraph)），
 实现了[Apache TinkerPop3](https://tinkerpop.apache.org)框架及完全兼容[Gremlin](https://tinkerpop.apache.org/gremlin.html)查询语言，
 具备完善的工具链组件，助力用户轻松构建基于图数据库之上的应用和产品。HugeGraph支持百亿以上的顶点和边快速导入，并提供毫秒级的关联关系查询能力（OLTP），
 并可与Hadoop、Spark等大数据平台集成以进行离线分析（OLAP）。
