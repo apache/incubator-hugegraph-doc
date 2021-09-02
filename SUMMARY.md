@@ -32,7 +32,7 @@
     * [Graphs](clients/restful-api/graphs.md)
     * [Task](clients/restful-api/task.md)
     * [Rebuild](clients/restful-api/rebuild.md)
-    * [K8sTask](clients/restful-api/k8s-task.md)
+    * [K8sTask](clients/restful-api/k8stask.md)
     * [Gremlin](clients/restful-api/gremlin.md)
     * [Authentication](clients/restful-api/auth.md)
     * [Other](clients/restful-api/other.md)

@@ -16,6 +16,7 @@ HugeGraph-Server通过HugeGraph-API基于HTTP协议为Client提供操作图的�
 - [Variable](restful-api/variable.md)
 - [Graphs](restful-api/graphs.md)
 - [Task](restful-api/task.md)
+- [K8sTask](restful-api/k8stask.md)
 - [Gremlin](restful-api/gremlin.md)
 - [Authentication](restful-api/auth.md)
 - [Other](restful-api/other.md)
