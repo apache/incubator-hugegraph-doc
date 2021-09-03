@@ -1,6 +1,6 @@
-### 6.2 Rebuild
+### 1.6 Rebuild
 
-#### 6.2.1 重建IndexLabel
+#### 1.6.1 重建IndexLabel
 
 ##### Method & Url
 
@@ -26,7 +26,7 @@ PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/indexlabels/personByCity
 
 > 可以通过`GET http://localhost:8080/graphs/hugegraph/tasks/1`（其中"1"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](task.md)
 
-#### 6.2.2 VertexLabel对应的全部索引重建
+#### 1.6.2 VertexLabel对应的全部索引重建
 
 ##### Method & Url
 
@@ -52,7 +52,7 @@ PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/vertexlabels/person
 
 > 可以通过`GET http://localhost:8080/graphs/hugegraph/tasks/2`（其中"2"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](task.md)
 
-#### 6.2.3 EdgeLabel对应的全部索引重建
+#### 1.6.3 EdgeLabel对应的全部索引重建
 
 ##### Method & Url
 

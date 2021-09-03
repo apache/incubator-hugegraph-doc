@@ -1,4 +1,4 @@
-### 1.1 PropertyKey
+### 1.2 PropertyKey
 
 Params说明：
 
@@ -13,7 +13,7 @@ Params说明：
 - user_data：设置属性类型的通用信息，比如可设置age属性的取值范围，最小为0，最大为100；目前此项不做任何校验，只为后期拓展提供预留入口
 
 
-#### 1.1.1 创建一个 PropertyKey
+#### 1.2.1 创建一个 PropertyKey
 
 ##### Method & Url
 
@@ -53,7 +53,7 @@ POST http://localhost:8080/graphs/hugegraph/schema/propertykeys
 }
 ```
 
-#### 1.1.2 为已存在的 PropertyKey 添加或移除 userdata
+#### 1.2.2 为已存在的 PropertyKey 添加或移除 userdata
 
 ##### Params
 
@@ -102,7 +102,7 @@ PUT http://localhost:8080/graphs/hugegraph/schema/propertykeys/age?action=append
 }
 ```
 
-#### 1.1.3 获取所有的 PropertyKey
+#### 1.2.3 获取所有的 PropertyKey
 
 ##### Method & Url
 
@@ -181,7 +181,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/propertykeys
 }
 ```
 
-#### 1.1.4 根据name获取PropertyKey
+#### 1.2.4 根据name获取PropertyKey
 
 ##### Method & Url
 
@@ -210,7 +210,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
 }
 ```
 
-#### 1.1.5 根据name删除PropertyKey
+#### 1.2.5 根据name删除PropertyKey
 
 ##### Method & Url
 

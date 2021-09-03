@@ -1,6 +1,6 @@
-### 1.3 EdgeLabel
+### 1.4 EdgeLabel
 
-假设已经创建好了1.1.3中的 PropertyKeys 和 1.2.3中的 VertexLabels
+假设已经创建好了1.2.3中的 PropertyKeys 和 1.3.3中的 VertexLabels
 
 Params说明
 
@@ -14,7 +14,7 @@ Params说明
 - enable_label_index： 是否开启类型索引，默认关闭
 
 
-#### 1.3.1 创建一个EdgeLabel
+#### 1.4.1 创建一个EdgeLabel
 
 ##### Method & Url
 
@@ -119,7 +119,7 @@ POST http://localhost:8080/graphs/hugegraph/schema/edgelabels
 }
 ```
 
-#### 1.3.2 为已存在的EdgeLabel添加properties或userdata，或者移除userdata（目前不支持移除properties）
+#### 1.4.2 为已存在的EdgeLabel添加properties或userdata，或者移除userdata（目前不支持移除properties）
 
 ##### Params
 
@@ -176,7 +176,7 @@ PUT http://localhost:8080/graphs/hugegraph/schema/edgelabels/created?action=appe
 }
 ```
 
-#### 1.3.3 获取所有的EdgeLabel
+#### 1.4.3 获取所有的EdgeLabel
 
 ##### Method & Url
 
@@ -238,7 +238,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/edgelabels
 }
 ```
 
-#### 1.3.4 根据name获取EdgeLabel
+#### 1.4.4 根据name获取EdgeLabel
 
 ##### Method & Url
 
@@ -279,7 +279,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
 }
 ```
 
-#### 1.3.5 根据name删除EdgeLabel
+#### 1.4.5 根据name删除EdgeLabel
 
 删除 EdgeLabel 会导致删除对应的边以及相关的索引数据，会产生一个异步任务
 

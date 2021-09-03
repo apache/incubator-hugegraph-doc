@@ -1,4 +1,4 @@
-### 1.2 VertexLabel
+### 1.3 VertexLabel
 
 假设已经创建好了1.1.3中列出来的 PropertyKeys
 
@@ -15,7 +15,7 @@ Params说明
 - user_data：设置顶点类型的通用信息，作用同属性类型
 
 
-#### 1.2.1 创建一个VertexLabel
+#### 1.3.1 创建一个VertexLabel
 
 ##### Method & Url
 
@@ -110,7 +110,7 @@ POST http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 }
 ```
 
-#### 1.2.2 为已存在的VertexLabel添加properties或userdata，或者移除userdata（目前不支持移除properties）
+#### 1.3.2 为已存在的VertexLabel添加properties或userdata，或者移除userdata（目前不支持移除properties）
 
 ##### Params
 
@@ -170,7 +170,7 @@ PUT http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person?action=app
 }
 ```
 
-#### 1.2.3 获取所有的VertexLabel
+#### 1.3.3 获取所有的VertexLabel
 
 ##### Method & Url
 
@@ -235,7 +235,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 }
 ```
 
-#### 1.2.4 根据name获取VertexLabel
+#### 1.3.4 根据name获取VertexLabel
 
 ##### Method & Url
 
@@ -276,7 +276,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person
 }
 ```
 
-#### 1.2.5 根据name删除VertexLabel
+#### 1.3.5 根据name删除VertexLabel
 
 删除 VertexLabel 会导致删除对应的顶点以及相关的索引数据，会产生一个异步任务
 
