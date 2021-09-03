@@ -77,7 +77,7 @@ PUT http://localhost:8080/graphs/hugegraph/schema/propertykeys/age?action=append
 ##### Response Status
 
 ```json
-201
+202
 ```
 
 ##### Response Body
