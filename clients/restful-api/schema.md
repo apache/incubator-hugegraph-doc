@@ -1,6 +1,6 @@
 ### 1.1 Schema
 
-HugeGraph 提供单一接口获取某个图的全部 schema 信息，包括：PropertyKey、VertexLabel、EdgeLabel 和 IndexLabel。
+HugeGraph 提供单一接口获取某个图的全部 Schema 信息，包括：PropertyKey、VertexLabel、EdgeLabel 和 IndexLabel。
 
 ##### Method & Url
 
