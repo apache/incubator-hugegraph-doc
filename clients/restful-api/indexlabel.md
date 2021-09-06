@@ -1,8 +1,8 @@
-### 1.4 IndexLabel
+### 1.5 IndexLabel
 
 假设已经创建好了1.1.3中的 PropertyKeys 、1.2.3中的 VertexLabels 以及 1.3.3中的 EdgeLabels
 
-#### 1.4.1 创建一个IndexLabel
+#### 1.5.1 创建一个IndexLabel
 
 ##### Method & Url
 
@@ -48,7 +48,7 @@ POST http://localhost:8080/graphs/hugegraph/schema/indexlabels
 }
 ```
 
-#### 1.4.2 获取所有的IndexLabel
+#### 1.5.2 获取所有的IndexLabel
 
 ##### Method & Url
 
@@ -112,7 +112,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/indexlabels
 }
 ```
 
-#### 1.4.3 根据name获取IndexLabel
+#### 1.5.3 根据name获取IndexLabel
 
 ##### Method & Url
 
@@ -141,7 +141,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
 }
 ```
 
-#### 1.4.4 根据name删除IndexLabel
+#### 1.5.4 根据name删除IndexLabel
 
 删除 IndexLabel 会导致删除相关的索引数据，会产生一个异步任务
 

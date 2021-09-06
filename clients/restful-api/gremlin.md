@@ -1,6 +1,6 @@
-### 7.1 Gremlin
+### 8.1 Gremlin
 
-#### 7.1.1 向HugeGraphServer发送gremlin语句（GET），同步执行
+#### 8.1.1 向HugeGraphServer发送gremlin语句（GET），同步执行
 
 ##### Params
 
@@ -58,7 +58,7 @@ GET http://127.0.0.1:8080/gremlin?gremlin=hugegraph.traversal().V('1:marko')
 }
 ```
 
-#### 7.1.2 向HugeGraphServer发送gremlin语句（POST），同步执行
+#### 8.1.2 向HugeGraphServer发送gremlin语句（POST），同步执行
 
 ##### Method & Url
 
@@ -180,7 +180,7 @@ POST http://localhost:8080/gremlin
 }
 ```
 
-#### 7.1.3 向HugeGraphServer发送gremlin语句（POST），异步执行
+#### 8.1.3 向HugeGraphServer发送gremlin语句（POST），异步执行
 
 ##### Method & Url
 

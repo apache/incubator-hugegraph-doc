@@ -1,6 +1,6 @@
-### 5.1 Graphs
+### 6.1 Graphs
 
-#### 5.1.1 列出数据库中全部的图
+#### 6.1.1 列出数据库中全部的图
 
 ##### Method & Url
 
@@ -25,7 +25,7 @@ GET http://localhost:8080/graphs
 }
 ```
 
-#### 5.1.2 查看某个图的信息
+#### 6.1.2 查看某个图的信息
 
 ##### Method & Url
 
@@ -48,7 +48,7 @@ GET http://localhost:8080/graphs/hugegraph
 }
 ```
 
-#### 5.1.3 清空某个图的全部数据，包括schema、vertex、edge和index等，**该操作需要管理员权限**
+#### 6.1.3 清空某个图的全部数据，包括schema、vertex、edge和index等，**该操作需要管理员权限**
 
 ##### Params
 
@@ -68,9 +68,9 @@ DELETE http://localhost:8080/graphs/hugegraph/clear?confirm_message=I%27m+sure+t
 204
 ```
 
-### 5.2 Conf
+### 6.2 Conf
 
-#### 5.2.1 查看某个图的配置，**该操作需要管理员权限**
+#### 6.2.1 查看某个图的配置，**该操作需要管理员权限**
 
 ##### Method & Url
 
@@ -107,7 +107,7 @@ store=hugegraph
 ...
 ```
 
-### 5.3 Mode
+### 6.3 Mode
 
 合法的图模式包括：NONE，RESTORING，MERGING，LOADING
     
@@ -129,7 +129,7 @@ Restore 时存在两种不同的模式： Restoring 和 Merging
 正常情况下，图模式为 None，当需要 Restore 图时，需要根据需要临时修改图模式为 Restoring 模式或者 Merging 模式，并在完成 Restore 时，恢复图模式为 None。
 
 
-#### 5.3.1 查看某个图的模式. **该操作需要管理员权限**
+#### 6.3.1 查看某个图的模式. **该操作需要管理员权限**
 
 ##### Method & Url
 
@@ -153,7 +153,7 @@ GET http://localhost:8080/graphs/hugegraph/mode
 
 > 合法的图模式包括：NONE，RESTORING，MERGING
 
-#### 5.3.2 设置某个图的模式. **该操作需要管理员权限**
+#### 6.3.2 设置某个图的模式. **该操作需要管理员权限**
 
 ##### Method & Url
 
