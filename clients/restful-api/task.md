@@ -1,6 +1,6 @@
-### 6.1 Task
+### 7.1 Task
 
-#### 6.1.1 列出某个图中全部的异步任务
+#### 7.1.1 列出某个图中全部的异步任务
 
 ##### Params
 
@@ -39,7 +39,7 @@ GET http://localhost:8080/graphs/hugegraph/tasks?status=success
 }
 ```
 
-#### 6.1.2 查看某个异步任务的信息
+#### 7.1.2 查看某个异步任务的信息
 
 ##### Method & Url
 
@@ -71,7 +71,7 @@ GET http://localhost:8080/graphs/hugegraph/tasks/2
 }
 ```
 
-#### 6.1.3 删除某个异步任务信息，**不删除异步任务本身**
+#### 7.1.3 删除某个异步任务信息，**不删除异步任务本身**
 
 ##### Method & Url
 
@@ -85,7 +85,7 @@ DELETE http://localhost:8080/graphs/hugegraph/tasks/2
 204
 ```
 
-#### 6.1.4 取消某个异步任务，**该异步任务必须具有处理中断的能力**
+#### 7.1.4 取消某个异步任务，**该异步任务必须具有处理中断的能力**
 
 假设已经通过[Gremlin API](gremlin.md)创建了一个异步任务如下：
 

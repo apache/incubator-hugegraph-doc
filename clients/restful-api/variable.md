@@ -1,8 +1,8 @@
-### 4.1 Variables
+### 5.1 Variables
 
 Variables可以用来存储有关整个图的数据，数据按照键值对的方式存取
 
-#### 4.1.1 创建或者更新某个键值对
+#### 5.1.1 创建或者更新某个键值对
 
 ##### Method & Url
 
@@ -32,7 +32,7 @@ PUT http://localhost:8080/graphs/hugegraph/variables/name
 }
 ```
 
-#### 4.1.2 列出全部键值对
+#### 5.1.2 列出全部键值对
 
 ##### Method & Url
 
@@ -54,7 +54,7 @@ GET http://localhost:8080/graphs/hugegraph/variables
 }
 ```
 
-#### 4.1.3 列出某个键值对
+#### 5.1.3 列出某个键值对
 
 ##### Method & Url
 
@@ -76,7 +76,7 @@ GET http://localhost:8080/graphs/hugegraph/variables/name
 }
 ```
 
-#### 4.1.4 删除某个键值对
+#### 5.1.4 删除某个键值对
 
 ##### Method & Url
 
