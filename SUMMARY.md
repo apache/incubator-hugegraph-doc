@@ -20,10 +20,12 @@
 
 ## API
 * [RESTful API](clients/hugegraph-api.md)
+    * [Schema](clients/restful-api/schema.md)
     * [PropertyKey](clients/restful-api/propertykey.md)
     * [VertexLabel](clients/restful-api/vertexlabel.md)
     * [EdgeLabel](clients/restful-api/edgelabel.md)
     * [IndexLabel](clients/restful-api/indexlabel.md)
+    * [Rebuild](clients/restful-api/rebuild.md)
     * [Vertex](clients/restful-api/vertex.md)
     * [Edge](clients/restful-api/edge.md)
     * [Traverser](clients/restful-api/traverser.md)
@@ -31,7 +33,6 @@
     * [Variable](clients/restful-api/variable.md)
     * [Graphs](clients/restful-api/graphs.md)
     * [Task](clients/restful-api/task.md)
-    * [Rebuild](clients/restful-api/rebuild.md)
     * [K8sTask](clients/restful-api/k8stask.md)
     * [Gremlin](clients/restful-api/gremlin.md)
     * [Authentication](clients/restful-api/auth.md)
