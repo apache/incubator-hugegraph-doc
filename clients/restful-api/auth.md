@@ -10,9 +10,9 @@ HugeGraph支持多用户认证、以及细粒度的权限访问控制，采用�
 支持动态分配或取消权限。初始化数据库时超级管理员用户被创建，后续可通过超级管理员创建各类角色用户，新创建的用户如果被分配足够权限后，可以由其创建或管理更多的用户。
 
 ##### 举例说明：
-user(name=boss) -belong-> group(name=all) -access(read)-> target(graph=graph1, resource={label: person,
+user(name=tester) -belong-> group(name=all) -access(read)-> target(graph=graph1, resource={label: person,
 city: Beijing})  
-描述：用户'boss'拥有对'graph1'图中北京人的读权限。
+描述：用户'tester'拥有对'graph1'图中北京人的读权限。
 
 ##### 接口说明：
 用户认证与权限控制接口包括5类：UserAPI、GroupAPI、TargetAPI、BelongAPI、AccessAPI。
@@ -35,7 +35,7 @@ city: Beijing})
 
 ```json
 {
-    "user_name": "boss",
+    "user_name": "tester",
     "user_password": "******",
     "user_phone": "182****9088",
     "user_email": "123@xx.com"
@@ -62,10 +62,10 @@ POST http://localhost:8080/graphs/auth/users
     "user_password": "******",
     "user_email": "123@xx.com",
     "user_update": "2020-11-17 14:31:07.833",
-    "user_name": "boss",
+    "user_name": "tester",
     "user_creator": "admin",
     "user_phone": "182****9088",
-    "id": "-63:boss",
+    "id": "-63:tester",
     "user_create": "2020-11-17 14:31:07.833"
 }
 ```
@@ -80,7 +80,7 @@ POST http://localhost:8080/graphs/auth/users
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/auth/users/-63:test
+DELETE http://localhost:8080/graphs/auth/users/-63:tester
 ```
 
 ##### Response Status
@@ -104,14 +104,14 @@ DELETE http://localhost:8080/graphs/auth/users/-63:test
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/auth/users/-63:test
+PUT http://localhost:8080/graphs/auth/users/-63:tester
 ```
 
 ##### Request Body
 修改user_name、user_password和user_phone
 ```json
 {
-    "user_name": "test",
+    "user_name": "tester",
     "user_password": "******",
     "user_phone": "183****9266"
 }
@@ -129,10 +129,10 @@ PUT http://localhost:8080/graphs/auth/users/-63:test
 {
     "user_password": "******",
     "user_update": "2020-11-12 10:29:30.455",
-    "user_name": "test",
+    "user_name": "tester",
     "user_creator": "admin",
     "user_phone": "183****9266",
-    "id": "-63:test",
+    "id": "-63:tester",
     "user_create": "2020-11-12 10:27:13.601"
 }
 ```
@@ -213,7 +213,7 @@ GET http://localhost:8080/graphs/auth/users/-63:admin
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/auth/users/-63:boss/role
+GET http://localhost:8080/graphs/auth/users/-63:tester/role
 ```
 
 ##### Response Status
@@ -682,7 +682,7 @@ GET http://localhost:8080/graphs/auth/targets/-77:grant
 
 ```json
 {
-    "user": "-63:boss",
+    "user": "-63:tester",
     "group": "-69:all"
 }
 ```
@@ -707,8 +707,8 @@ POST http://localhost:8080/graphs/auth/belongs
     "belong_create": "2020-11-11 16:19:35.422",
     "belong_creator": "admin",
     "belong_update": "2020-11-11 16:19:35.422",
-    "id": "S-63:boss>-82>>S-69:all",
-    "user": "-63:boss",
+    "id": "S-63:tester>-82>>S-69:all",
+    "user": "-63:tester",
     "group": "-69:all"
 }
 ```
@@ -722,7 +722,7 @@ POST http://localhost:8080/graphs/auth/belongs
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/auth/belongs/S-63:boss>-82>>S-69:grant
+DELETE http://localhost:8080/graphs/auth/belongs/S-63:tester>-82>>S-69:grant
 ```
 
 ##### Response Status
@@ -747,7 +747,7 @@ DELETE http://localhost:8080/graphs/auth/belongs/S-63:boss>-82>>S-69:grant
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/auth/belongs/S-63:boss>-82>>S-69:grant
+PUT http://localhost:8080/graphs/auth/belongs/S-63:tester>-82>>S-69:grant
 ```
 
 ##### Request Body
@@ -772,8 +772,8 @@ PUT http://localhost:8080/graphs/auth/belongs/S-63:boss>-82>>S-69:grant
     "belong_create": "2020-11-12 10:40:21.720",
     "belong_creator": "admin",
     "belong_update": "2020-11-12 10:42:47.265",
-    "id": "S-63:boss>-82>>S-69:grant",
-    "user": "-63:boss",
+    "id": "S-63:tester>-82>>S-69:grant",
+    "user": "-63:tester",
     "group": "-69:grant"
 }
 ```
@@ -806,8 +806,8 @@ GET http://localhost:8080/graphs/auth/belongs
             "belong_create": "2020-11-11 16:19:35.422",
             "belong_creator": "admin",
             "belong_update": "2020-11-11 16:19:35.422",
-            "id": "S-63:boss>-82>>S-69:all",
-            "user": "-63:boss",
+            "id": "S-63:tester>-82>>S-69:all",
+            "user": "-63:tester",
             "group": "-69:all"
         }
     ]
@@ -823,7 +823,7 @@ GET http://localhost:8080/graphs/auth/belongs
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/auth/belongs/S-63:boss>-82>>S-69:all
+GET http://localhost:8080/graphs/auth/belongs/S-63:tester>-82>>S-69:all
 ```
 
 ##### Response Status
@@ -839,8 +839,8 @@ GET http://localhost:8080/graphs/auth/belongs/S-63:boss>-82>>S-69:all
     "belong_create": "2020-11-11 16:19:35.422",
     "belong_creator": "admin",
     "belong_update": "2020-11-11 16:19:35.422",
-    "id": "S-63:boss>-82>>S-69:all",
-    "user": "-63:boss",
+    "id": "S-63:tester>-82>>S-69:all",
+    "user": "-63:tester",
     "group": "-69:all"
 }
 ```
