@@ -440,6 +440,20 @@ target_resources可以包括多个target_resource，以列表的形式存储。
 如精细资源："target_resources": [{"type":"VERTEX","label":"person","properties":{"city":"Beijing","age":"P.gte(20)"}}]**  
 资源定义含义：类型是'person'的顶点，且城市属性是'Beijing'，年龄属性大于等于20。
 
+type取值范围如下：
+```
+enum ResourceType { NONE STATUS, VERTEX, EDGE, VERTEX_AGGR, EDGE_AGGR, VAR, GREMLIN, TASK, PROPERTY_KEY, VERTEX_LABEL, EDGE_LABEL, INDEX_LABEL, SCHEMA, META, ALL, GRANT, USER_GROUP, PROJECT, TARGET, METRICS, ROOT }
+```
+
+这些类型按照影响的范围是基本有序的，范围从小到大。比如：NONE 是最低级别，表示没有资源；ALL 属于比较高的级别，表示所有的图数据（顶点和边）和元数据（schema）；ROOT是最高级别，表示根资源。另外有一些“综合性“的类型，比如：
+- SCHEMA，表示全部元数据，即PROPERTY_KEY、VERTEX_LABEL、EDGELABEL 和 INDEXLABEL
+- ALL，表示全部图数据和元数据，即VERTEX、EDGE 和 SCHEMA等 
+- ROOT，表示根，包括 ALL 和权限相关的资源
+
+注：根据访问资源的依赖属性，选择合适的类型值。 例如：
+
+在查询一个 VERTEX 的时候，这个过程中，任何涉及到的 VertexLabel、INDEXLABEL 和 PROPERTY_KEY，都必须有读权限。 在比如查询USER的时候，应该对 VERTEX、VertexLabel、INDEXLABEL 和 PROPERTY_KEY 都有读权限才行。
+
 ##### Request Body
 
 ```json
