@@ -249,15 +249,15 @@ GET http://localhost:8080/graphs/{graph}/traversers/kout?source="1:marko"&max_de
 
 - source：起始顶点id，必填项
 - 从起始点出发的Step集合，必填项，结构如下：
-	- direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
-	- edge_steps：边Step集合，单个结构如下：
-		- label：边的类型
-		- properties：通过属性的值过滤边
-	- vertex_steps：顶点Step集合，单个结构如下：
-		- label：边的类型
-		- properties：通过属性的值过滤边
-  	- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)
-	- skip_degree：用于设置查询过程中舍弃超级顶点的最小边数，即当某个顶点的邻接边数目大于 skip_degree 时，完全舍弃该顶点。选填项，如果开启时，需满足 `skip_degree >= max_degree` 约束，默认为0 (不启用)，表示不跳过任何点 (注意:  开启此配置后，遍历时会尝试访问一个顶点的 skip_degree 条边，而不仅仅是 max_degree 条边，这样有额外的遍历开销，对查询性能影响可能有较大影响，请确认理解后再开启)
+  - direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
+  - edge_steps：边Step集合，单个结构如下：
+    - label：边的类型
+    - properties：通过属性的值过滤边
+  - vertex_steps：顶点Step集合，单个结构如下：
+    - label：边的类型
+    - properties：通过属性的值过滤边
+  - max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)
+  - skip_degree：用于设置查询过程中舍弃超级顶点的最小边数，即当某个顶点的邻接边数目大于 skip_degree 时，完全舍弃该顶点。选填项，如果开启时，需满足 `skip_degree >= max_degree` 约束，默认为0 (不启用)，表示不跳过任何点 (注意:  开启此配置后，遍历时会尝试访问一个顶点的 skip_degree 条边，而不仅仅是 max_degree 条边，这样有额外的遍历开销，对查询性能影响可能有较大影响，请确认理解后再开启)
 - max_depth：步数，必填项
 - nearest：nearest为true时，代表起始顶点到达结果顶点的最短路径长度为depth，不存在更短的路径；nearest为false时，代表起始顶点到结果顶点有一条长度为depth的路径（未必最短且可以有环），选填项，默认为true
 - count_only：Boolean值，true表示只统计结果的数目，不返回具体结果；false表示返回具体的结果，默认为false
