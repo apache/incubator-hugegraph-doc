@@ -1048,3 +1048,51 @@ GET http://localhost:8080/graphs/auth/accesses/S-69:all>-88>11>S-77:all
     "target": "-77:all"
 }
 ```
+
+### 9.7 Token API
+获取用户Token，主要包含：登录(login)、验证Token(verify)。
+
+#### 9.7.1 登录(login)
+
+##### Method & Url
+
+```
+POST http://localhost:8080/graphs/auth/login
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX25hbWUiOiJneWcxMjM0IiwidXNlcl9pZCI6Ii02MzpneWcxMjM0IiwiZXhwIjoxNjMyNjUzOTE2fQ.T4psT797RIaPqvkqtgVug1qIZQ2djKBLI5yOxQRjuZU"
+}
+```
+
+#### 9.7.2 验证Token(verify)
+
+##### Method & Url
+
+```
+POST http://localhost:8080/graphs/auth/verify
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "user_name": "admin",
+    "user_id": "-63:admin"
+}
+```
