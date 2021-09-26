@@ -576,7 +576,7 @@ bin/mapping-convert.sh struct.json
 前面说到过支持多种关系型数据库，但由于它们的映射结构非常相似，故统称为 JDBC 输入源，然后用`vendor`节点区分不同的数据库。
 
 - type: 输入源类型，必须填 jdbc 或 JDBC，必填；
-- vendor: 数据库类型，可选项为 [MySQL、PostgreSQL、Oracle、SQLServer]，不区分大小写，必填；
+- vendor: 数据库类型，可选项为 [MySQL、PostgreSQL、Oracle、SQLServer、HIVE]，不区分大小写，必填；
 - driver: jdbc 使用的 driver 类型，必填；
 - url: jdbc 要连接的数据库的 url，必填；
 - database: 要连接的数据库名，必填；
@@ -623,6 +623,16 @@ schema: 可空，默认值与用户名相同
 | vendor | SQLSERVER |
 | driver | com.microsoft.sqlserver.jdbc.SQLServerDriver |
 | url | jdbc:sqlserver://127.0.0.1:1433 |
+
+schema: 必填
+
+**HIVE**
+
+| 节点 | 固定值或常见值 |
+| --- | --- |
+| vendor | HIVE |
+| driver | org.apache.hive.jdbc.HiveDriver |
+| url | jdbc:hive2://127.0.0.1:10000 |
 
 schema: 必填
 
