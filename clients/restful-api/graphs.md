@@ -1,6 +1,52 @@
 ### 6.1 Graphs
 
-#### 6.1.1 列出数据库中全部的图
+#### 6.1.1 创建一个新图
+
+##### Method & Url
+
+```
+POST http://localhost:8080/graphs/hugegraph2
+```
+
+##### Request Body
+
+```
+# gremlin entrence to create graph
+gremlin.graph=com.baidu.hugegraph.HugeFactory
+
+# cache config
+#schema.cache_capacity=1048576
+#graph.cache_capacity=10485760
+#graph.cache_expire=600
+
+# schema illegal name template
+#schema.illegal_name_regex=\s+|~.*
+
+#vertex.default_label=vertex
+
+backend=cassandra
+serializer=cassandra
+
+store=hugegraph2
+...
+```
+
+##### Response Status
+
+```json
+201
+```
+
+##### Response Body
+
+```json
+{
+    "name": "hugegraph2",
+    "backend": "cassandra"
+}
+```
+
+#### 6.1.2 列出数据库中全部的图
 
 ##### Method & Url
 
@@ -20,12 +66,12 @@ GET http://localhost:8080/graphs
 {
     "graphs": [
         "hugegraph",
-        "hugegraph1"
+        "hugegraph2"
     ]
 }
 ```
 
-#### 6.1.2 查看某个图的信息
+#### 6.1.3 查看某个图的信息
 
 ##### Method & Url
 
@@ -48,18 +94,41 @@ GET http://localhost:8080/graphs/hugegraph
 }
 ```
 
-#### 6.1.3 清空某个图的全部数据，包括schema、vertex、edge和index等，**该操作需要管理员权限**
-
-##### Params
-
-由于清空图是一个比较危险的操作，为避免用户误调用，我们给API添加了用于确认的参数：
-
-- confirm_message: 默认为`I'm sure to delete all data`
+#### 6.1.4 清空某个图的全部数据，包括schema、vertex、edge和index等，**该操作需要管理员权限**
 
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/clear?confirm_message=I%27m+sure+to+delete+all+data
+PUT http://localhost:8080/graphs/hugegraph
+```
+
+##### Request Body
+
+```json
+{
+  "action": "clear",
+  "confirm_message": "I'm sure to delete all data"
+}
+```
+
+##### Response Status
+
+```json
+200
+```
+
+#### 6.1.5 删除某个图，**该操作需要管理员权限**
+
+##### Params
+
+由于删除图是一个比较危险的操作，为避免用户误调用，我们给API添加了用于确认的参数：
+
+- confirm_message: 默认为`I'm sure to drop the graph`
+
+##### Method & Url
+
+```
+DELETE http://localhost:8080/graphs/hugegraph?confirm_message=I%27m+sure+to+drop+the+graph
 ```
 
 ##### Response Status
