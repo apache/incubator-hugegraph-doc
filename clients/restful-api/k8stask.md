@@ -1,6 +1,6 @@
-### 6.3 图计算任务
+### 7.2 图计算任务
 
-#### 6.3.1 创建图计算任务
+#### 7.2.1 创建图计算任务
 
 ##### Params
 
@@ -39,7 +39,7 @@ POST http://localhost:8080/graphs/{hugegraph}/jobs/computerdis/{algorithm}
 }
 ```
 
-#### 6.3.2 删除图计算任务
+#### 7.2.2 删除图计算任务
 
 ##### Method & Url
 
@@ -62,7 +62,7 @@ DELETE http://localhost:8080/graphs/{hugegraph}/jobs/computerdis/{task_id}
 }
 ```
 
-#### 6.3.3 取消图计算任务
+#### 7.2.3 取消图计算任务
 
 ##### Method & Url
 
@@ -85,7 +85,7 @@ PUT http://localhost:8080/graphs/{hugegraph}/jobs/computerdis/{task_id}
 }
 ```
 
-#### 6.3.4 查看图计算任务列表
+#### 7.2.4 查看图计算任务列表
 
 ##### Params
 
@@ -145,7 +145,7 @@ GET http://localhost:8080/graphs/{hugegraph}/jobs/computerdis?limit=100
 }
 ```
 
-#### 6.3.5 更新图计算任务状态
+#### 7.2.5 更新图计算任务状态
 
 ##### Params
 
