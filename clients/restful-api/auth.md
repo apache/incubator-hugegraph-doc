@@ -1054,10 +1054,23 @@ GET http://localhost:8080/graphs/auth/accesses/S-69:all>-88>11>S-77:all
 
 #### 9.7.1 登录(login)
 
+##### Params
+
+- user_name： 用户名
+- user_password：用户密码
+
 ##### Method & Url
 
 ```
 POST http://localhost:8080/graphs/auth/login
+```
+##### Request Body
+
+```json
+{
+  "user_name": "admin",
+  "user_password": "admin"
+}
 ```
 
 ##### Response Status
