@@ -24,8 +24,8 @@ city: Beijing})
 
 ##### Params
 
-- user_name: 用户名称
-- user_password: 用户密码
+- user_name: 用户名称，长度5-16个字符，可以为字母（区分大小写）、数字、下划线。
+- user_password: 用户密码，长度5-16个字符，可以为字母、数字和特殊符号，其中特殊符号：~!@#$%^&*()_+|<>,.?/:;'`"\[\]{}\\。
 - user_phone: 用户手机号
 - user_email: 用户邮箱  
 
