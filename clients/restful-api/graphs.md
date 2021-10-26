@@ -251,3 +251,64 @@ PUT http://localhost:8080/graphs/hugegraph/mode
     "mode": "RESTORING"
 }
 ```
+
+
+### 6.4 Graph Read Mode
+
+合法的图的读模式包括：OLTP_ONLY, ALL
+    
+- OLTP 模式（默认），图的查询结果只包含OLTP类型的属性，不包含OLAP属性
+- ALL 模式，图的查询结果既包含OLTP类型的属性，又包含OLAP属性（如果有）
+
+#### 6.4.1 查看某个图的读模式
+
+##### Method & Url
+
+```
+GET http://localhost:8080/graphs/hugegraph/graph_read_mode
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "graph_read_mode": "OLTP_ONLY"
+}
+```
+
+
+#### 6.4.2 设置某个图的读模式. **该操作需要管理员权限**
+
+##### Method & Url
+
+```
+PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
+```
+
+##### Request Body
+
+```
+"ALL"
+```
+
+> 合法的图模式包括：OLTP_ONLY，ALL
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "graph_read_mode": "ALL"
+}
+```
