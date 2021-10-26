@@ -49,7 +49,7 @@ page-rank
 }
 ```
 
-示例3：rings_with_filter
+示例3：rings-with-filter
 
 ```json
 {
