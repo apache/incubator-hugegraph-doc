@@ -43,6 +43,7 @@ HugeGraph支持的Traverser API包括：
 	- 按ID批量查询边；
 	- 获取边的分区；
 	- 按分区查询边；
+- Same Neighbors Batch, 批量查询两个点的共同邻居
 
 ### 3.2. traverser API详解
 
@@ -2974,3 +2975,62 @@ GET http://localhost:8080/graphs/hugegraph/traversers/edges/scan?start=0&end=322
 
 - 按id列表查询边，可用于批量查询边
 - 获取分片和按分片查询边，可以用来遍历全部边
+
+#### 3.2.24 Same Neighbors Batch
+
+##### 3.2.24.1 功能介绍
+
+批量查询两个点的共同邻居
+
+###### Params
+
+- vertex_list：点ID对列表，如：[["0000000001","0000376440"],["0000000001","0001822679"]]
+- direction：顶点向外发散的方向（OUT,IN,BOTH），选填项，默认是BOTH
+- label：边的类型，选填项，默认代表所有edge label
+- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
+- limit：返回的共同邻居的最大数目，选填项，默认为10000000
+
+##### 3.2.24.2 使用方法
+
+###### Method & Url
+
+```
+POST http://localhost:8080/graphs/{graph}/traversers/sameneighborsbatch
+```
+
+###### Request Body
+
+```json
+{
+    "vertex_list: [["0000000001","0000376440"],["0000000001","0001822679"]],
+    "direction": "OUT"
+}
+```
+
+
+###### Response Status
+
+```json
+200
+```
+
+###### Response Body
+
+```json
+{
+    "same_neighbors": [
+        [
+            "0001222009"
+        ],
+        [
+            "0001397143"
+        ]
+    ]
+}
+```
+
+##### 3.2.24.3 适用场景
+
+查找一批顶点对的共同邻居：
+
+- 社交关系中发现两个用户的共同粉丝或者共同关注用户
