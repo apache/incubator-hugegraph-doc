@@ -35,6 +35,8 @@ HugeGraph支持的Traverser API包括：
 - Rings API，从起始顶点出发，可到达的环路路径
 - Rays API，从起始顶点出发，可到达边界的路径（即无环路径）
 - Fusiform Similarity API，查找一个顶点的梭形相似点
+- Adamic-Adar API，查找两顶点间的紧密度系数, 会忽略超级顶点的权值影响
+- Resource Allocation API，查找两顶点间的紧密度系数, 会算入超级顶点的权值影响  
 - Vertices API
 	- 按ID批量查询顶点；
 	- 获取顶点的分区；
@@ -2435,6 +2437,101 @@ POST http://localhost:8080/graphs/hugegraph/traversers/fusiformsimilarity
 
 - 跟一个读者有类似书单的读者
 - 跟一个玩家玩类似游戏的玩家
+
+#### 3.2.22 Adamic Adar
+
+AdamicAdar, 一般简称 AA 算法
+
+##### 3.2.22.1 功能介绍
+
+主要用于社交网络中判断**两点**紧密度的算法, 用来求两点间共同邻居密集度的一个**系数表示** (>0)
+
+###### Params
+
+- vertex：定义起始顶点，必项
+- other：定义终点顶点，必项
+- label：边的类型，选填项，默认代表所有edge label
+- direction：起始顶点向外发散的方向（OUT,IN,BOTH），选填项，默认是BOTH
+- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
+- limit：返回的结果数目上限，默认为10000
+
+##### 3.2.22.2 使用方法
+
+###### Method & Url
+
+```http
+GET http://localhost:8080/graphs/{graph}/traversers/adamicadar?vertex="1:marko"&other="1:josh"
+```
+
+###### Request Body
+
+可选
+
+###### Response Status
+
+```json
+200
+```
+
+###### Response Body
+
+```json
+{
+  "adamic_adar": 0.3
+}
+```
+
+##### 3.2.22.3 适用场景
+
+判断两个银行账户的关系紧密程度, 是共同邻居的改进系数版, 并且可以减少超级顶点在其中的权重影响
+
+
+#### 3.2.22 Resource Allocation
+
+ResourceAllocation(RA), 一般称为资源分配算法
+
+##### 3.2.22.1 功能介绍
+
+主要用于社交网络中判断**两点**紧密度的算法, 用来求两点间共同邻居密集度的一个**系数表示** (>0), 与 AA 算法比较类似
+
+###### Params
+
+- vertex：定义起始顶点，必项
+- other：定义终点顶点，必项
+- label：边的类型，选填项，默认代表所有edge label
+- direction：起始顶点向外发散的方向（OUT,IN,BOTH），选填项，默认是BOTH
+- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
+- limit：返回的结果数目上限，默认为10000
+
+##### 3.2.22.2 使用方法
+
+###### Method & Url
+
+```http
+GET http://localhost:8080/graphs/{graph}/traversers/resourceallocation?vertex="1:marko"&other="1:josh"
+```
+
+###### Request Body
+
+可选
+
+###### Response Status
+
+```json
+200
+```
+
+###### Response Body
+
+```json
+{
+  "resource_allocation": 2.0
+}
+```
+
+##### 3.2.22.3 适用场景
+
+判断两个银行账户的关系紧密程度, 是共同邻居的改进系数版, 和 AA 算法不同的是, 它不忽略超级顶点在其中的权重影响
 
 #### 3.2.22 Vertices
 
