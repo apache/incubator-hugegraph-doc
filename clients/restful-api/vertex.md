@@ -679,3 +679,319 @@ DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"?label=per
 ```json
 204
 ```
+
+#### 2.1.9 Vertices
+
+##### 2.1.9.1 根据顶点的id列表，批量查询顶点
+
+###### Params
+
+- ids：要查询的顶点id列表
+
+###### Method & Url
+
+```
+GET http://localhost:8080/graphs/hugegraph/traversers/vertices?ids="1:marko"&ids="2:lop"
+```
+
+###### Response Status
+
+```json
+200
+```
+
+###### Response Body
+
+```json
+{
+    "vertices":[
+        {
+            "id":"1:marko",
+            "label":"person",
+            "type":"vertex",
+            "properties":{
+                "city":[
+                    {
+                        "id":"1:marko>city",
+                        "value":"Beijing"
+                    }
+                ],
+                "name":[
+                    {
+                        "id":"1:marko>name",
+                        "value":"marko"
+                    }
+                ],
+                "age":[
+                    {
+                        "id":"1:marko>age",
+                        "value":29
+                    }
+                ]
+            }
+        },
+        {
+            "id":"2:lop",
+            "label":"software",
+            "type":"vertex",
+            "properties":{
+                "price":[
+                    {
+                        "id":"2:lop>price",
+                        "value":328
+                    }
+                ],
+                "name":[
+                    {
+                        "id":"2:lop>name",
+                        "value":"lop"
+                    }
+                ],
+                "lang":[
+                    {
+                        "id":"2:lop>lang",
+                        "value":"java"
+                    }
+                ]
+            }
+        }
+    ]
+}
+```
+
+##### 2.1.9.2 获取顶点 Shard 信息
+
+通过指定的分片大小split_size，获取顶点分片信息（可以与 3.2.21.3 中的 Scan 配合使用来获取顶点）。
+
+###### Params
+
+- split_size：分片大小，必填项
+
+###### Method & Url
+
+```
+GET http://localhost:8080/graphs/hugegraph/traversers/vertices/shards?split_size=67108864
+```
+
+###### Response Status
+
+```json
+200
+```
+
+###### Response Body
+
+```json
+{
+    "shards":[
+        {
+            "start": "0",
+            "end": "2165893",
+            "length": 0
+        },
+        {
+            "start": "2165893",
+            "end": "4331786",
+            "length": 0
+        },
+        {
+            "start": "4331786",
+            "end": "6497679",
+            "length": 0
+        },
+        {
+            "start": "6497679",
+            "end": "8663572",
+            "length": 0
+        },
+        ......
+    ]
+}
+```
+
+##### 2.1.9.3 根据Shard信息批量获取顶点
+
+通过指定的分片信息批量查询顶点（Shard信息的获取参见 3.2.21.2 Shard）。
+
+###### Params
+
+- start：分片起始位置，必填项
+- end：分片结束位置，必填项
+- page：分页位置，选填项，默认为null，不分页；当page为“”时表示分页的第一页，从start指示的位置开始
+- page_limit：分页获取顶点时，一页中顶点数目的上限，选填项，默认为100000
+
+###### Method & Url
+
+```
+GET http://localhost:8080/graphs/hugegraph/traversers/vertices/scan?start=0&end=4294967295
+```
+
+###### Response Status
+
+```json
+200
+```
+
+###### Response Body
+
+```json
+{
+    "vertices":[
+        {
+            "id":"2:ripple",
+            "label":"software",
+            "type":"vertex",
+            "properties":{
+                "price":[
+                    {
+                        "id":"2:ripple>price",
+                        "value":199
+                    }
+                ],
+                "name":[
+                    {
+                        "id":"2:ripple>name",
+                        "value":"ripple"
+                    }
+                ],
+                "lang":[
+                    {
+                        "id":"2:ripple>lang",
+                        "value":"java"
+                    }
+                ]
+            }
+        },
+        {
+            "id":"1:vadas",
+            "label":"person",
+            "type":"vertex",
+            "properties":{
+                "city":[
+                    {
+                        "id":"1:vadas>city",
+                        "value":"Hongkong"
+                    }
+                ],
+                "name":[
+                    {
+                        "id":"1:vadas>name",
+                        "value":"vadas"
+                    }
+                ],
+                "age":[
+                    {
+                        "id":"1:vadas>age",
+                        "value":27
+                    }
+                ]
+            }
+        },
+        {
+            "id":"1:peter",
+            "label":"person",
+            "type":"vertex",
+            "properties":{
+                "city":[
+                    {
+                        "id":"1:peter>city",
+                        "value":"Shanghai"
+                    }
+                ],
+                "name":[
+                    {
+                        "id":"1:peter>name",
+                        "value":"peter"
+                    }
+                ],
+                "age":[
+                    {
+                        "id":"1:peter>age",
+                        "value":35
+                    }
+                ]
+            }
+        },
+        {
+            "id":"1:josh",
+            "label":"person",
+            "type":"vertex",
+            "properties":{
+                "city":[
+                    {
+                        "id":"1:josh>city",
+                        "value":"Beijing"
+                    }
+                ],
+                "name":[
+                    {
+                        "id":"1:josh>name",
+                        "value":"josh"
+                    }
+                ],
+                "age":[
+                    {
+                        "id":"1:josh>age",
+                        "value":32
+                    }
+                ]
+            }
+        },
+        {
+            "id":"1:marko",
+            "label":"person",
+            "type":"vertex",
+            "properties":{
+                "city":[
+                    {
+                        "id":"1:marko>city",
+                        "value":"Beijing"
+                    }
+                ],
+                "name":[
+                    {
+                        "id":"1:marko>name",
+                        "value":"marko"
+                    }
+                ],
+                "age":[
+                    {
+                        "id":"1:marko>age",
+                        "value":29
+                    }
+                ]
+            }
+        },
+        {
+            "id":"2:lop",
+            "label":"software",
+            "type":"vertex",
+            "properties":{
+                "price":[
+                    {
+                        "id":"2:lop>price",
+                        "value":328
+                    }
+                ],
+                "name":[
+                    {
+                        "id":"2:lop>name",
+                        "value":"lop"
+                    }
+                ],
+                "lang":[
+                    {
+                        "id":"2:lop>lang",
+                        "value":"java"
+                    }
+                ]
+            }
+        }
+    ]
+}
+```
+
+##### 2.1.9.4 适用场景
+
+- 按id列表查询顶点，可用于批量查询顶点，比如在path查询到多条路径之后，可以进一步查询某条路径的所有顶点属性。
+- 获取分片和按分片查询顶点，可以用来遍历全部顶点

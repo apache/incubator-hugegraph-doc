@@ -622,3 +622,227 @@ DELETE http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?lab
 ```json
 204
 ```
+
+#### 2.2.9 Edges
+
+##### 2.2.9.1 根据边的id列表，批量查询边
+
+###### Params
+
+- ids：要查询的边id列表
+
+###### Method & Url
+
+```
+GET http://localhost:8080/graphs/hugegraph/traversers/edges?ids="S1:josh>1>>S2:lop"&ids="S1:josh>1>>S2:ripple"
+```
+
+###### Response Status
+
+```json
+200
+```
+
+###### Response Body
+
+```json
+{
+    "edges": [
+        {
+            "id": "S1:josh>1>>S2:lop",
+            "label": "created",
+            "type": "edge",
+            "inVLabel": "software",
+            "outVLabel": "person",
+            "inV": "2:lop",
+            "outV": "1:josh",
+            "properties": {
+                "date": "20091111",
+                "weight": 0.4
+            }
+        },
+        {
+            "id": "S1:josh>1>>S2:ripple",
+            "label": "created",
+            "type": "edge",
+            "inVLabel": "software",
+            "outVLabel": "person",
+            "inV": "2:ripple",
+            "outV": "1:josh",
+            "properties": {
+                "date": "20171210",
+                "weight": 1
+            }
+        }
+    ]
+}
+```
+
+##### 2.2.9.2 获取边 Shard 信息
+
+通过指定的分片大小split_size，获取边分片信息（可以与 3.2.22.3 中的 Scan 配合使用来获取边）。
+
+###### Params
+
+- split_size：分片大小，必填项
+
+###### Method & Url
+
+```
+GET http://localhost:8080/graphs/hugegraph/traversers/edges/shards?split_size=4294967295
+```
+
+###### Response Status
+
+```json
+200
+```
+
+###### Response Body
+
+```json
+{
+    "shards":[
+        {
+            "start": "0",
+            "end": "1073741823",
+            "length": 0
+        },
+        {
+            "start": "1073741823",
+            "end": "2147483646",
+            "length": 0
+        },
+        {
+            "start": "2147483646",
+            "end": "3221225469",
+            "length": 0
+        },
+        {
+            "start": "3221225469",
+            "end": "4294967292",
+            "length": 0
+        },
+        {
+            "start": "4294967292",
+            "end": "4294967295",
+            "length": 0
+        }
+    ]
+}
+```
+
+##### 2.2.9.3 根据 Shard 信息批量获取边
+
+通过指定的分片信息批量查询边（Shard信息的获取参见 3.2.22.2）。
+
+###### Params
+
+- start：分片起始位置，必填项
+- end：分片结束位置，必填项
+- page：分页位置，选填项，默认为null，不分页；当page为“”时表示分页的第一页，从start指示的位置开始
+- page_limit：分页获取边时，一页中边数目的上限，选填项，默认为100000
+
+###### Method & Url
+
+```
+GET http://localhost:8080/graphs/hugegraph/traversers/edges/scan?start=0&end=3221225469
+```
+
+###### Response Status
+
+```json
+200
+```
+
+###### Response Body
+
+```json
+{
+    "edges":[
+        {
+            "id":"S1:peter>2>>S2:lop",
+            "label":"created",
+            "type":"edge",
+            "inVLabel":"software",
+            "outVLabel":"person",
+            "inV":"2:lop",
+            "outV":"1:peter",
+            "properties":{
+                "weight":0.2,
+                "date":"20170324"
+            }
+        },
+        {
+            "id":"S1:josh>2>>S2:lop",
+            "label":"created",
+            "type":"edge",
+            "inVLabel":"software",
+            "outVLabel":"person",
+            "inV":"2:lop",
+            "outV":"1:josh",
+            "properties":{
+                "weight":0.4,
+                "date":"20091111"
+            }
+        },
+        {
+            "id":"S1:josh>2>>S2:ripple",
+            "label":"created",
+            "type":"edge",
+            "inVLabel":"software",
+            "outVLabel":"person",
+            "inV":"2:ripple",
+            "outV":"1:josh",
+            "properties":{
+                "weight":1,
+                "date":"20171210"
+            }
+        },
+        {
+            "id":"S1:marko>1>20130220>S1:josh",
+            "label":"knows",
+            "type":"edge",
+            "inVLabel":"person",
+            "outVLabel":"person",
+            "inV":"1:josh",
+            "outV":"1:marko",
+            "properties":{
+                "weight":1,
+                "date":"20130220"
+            }
+        },
+        {
+            "id":"S1:marko>1>20160110>S1:vadas",
+            "label":"knows",
+            "type":"edge",
+            "inVLabel":"person",
+            "outVLabel":"person",
+            "inV":"1:vadas",
+            "outV":"1:marko",
+            "properties":{
+                "weight":0.5,
+                "date":"20160110"
+            }
+        },
+        {
+            "id":"S1:marko>2>>S2:lop",
+            "label":"created",
+            "type":"edge",
+            "inVLabel":"software",
+            "outVLabel":"person",
+            "inV":"2:lop",
+            "outV":"1:marko",
+            "properties":{
+                "weight":0.4,
+                "date":"20171210"
+            }
+        }
+    ]
+}
+```
+
+##### 2.2.9.4 适用场景
+
+- 按id列表查询边，可用于批量查询边
+- 获取分片和按分片查询边，可以用来遍历全部边
