@@ -73,10 +73,18 @@ GET http://localhost:8080/graphs/hugegraph/tasks/2
 
 #### 7.1.3 删除某个异步任务信息，**不删除异步任务本身**
 
+##### Params
+
+- force: 是否强制删除，默认为 false。当设置为 true 时，不论异步任务处于何种状态，都将删除异步任务信息
+
 ##### Method & Url
 
 ```
 DELETE http://localhost:8080/graphs/hugegraph/tasks/2
+```
+或者：
+```
+DELETE http://localhost:8080/graphs/hugegraph/tasks/2?force=true
 ```
 
 ##### Response Status

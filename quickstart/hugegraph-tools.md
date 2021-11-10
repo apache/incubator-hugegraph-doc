@@ -120,6 +120,7 @@ Usage: hugegraph [options] [command] [command options]
     - --task-id，必填项，指定异步任务的 ID
 - task-delete，删除某个异步任务的信息
     - --task-id，必填项，指定异步任务的 ID
+    - --force, 选填项，是否强制删除异步任务，默认为 false。设置为 true 时，表示不论异步任务处于何种状态，都删除该异步任务信息
 - task-cancel，取消某个异步任务的执行
     - --task-id，要取消的异步任务的 ID
 - task-clear，清理完成的异步任务
@@ -296,6 +297,9 @@ Usage: hugegraph [options] [command] [command options]
     task-delete      Delete task
       Usage: task-delete [options]
         Options:
+          --force
+            Force to delete task
+            Default: false
         * --task-id
             Task id
             Default: 0
