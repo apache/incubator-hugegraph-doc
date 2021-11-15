@@ -736,7 +736,7 @@ schema: 必填
 --failure-mode      | false        |         | 失败模式为 true 时，会导入之前失败了的数据，一般来说失败数据文件需要在人工更正编辑好后，再次进行导入
 --batch-insert-threads | CPUs      |         | 批量插入线程池大小 (CPUs是当前OS可用**逻辑核**个数) ，建议不超过服务器CPU数的0.8倍。
 --single-insert-threads | 8        |         | 单条插入线程池的大小
---parallel-count    | 1            |         | 数据源解析并发数，参见下面的优化说明
+--parallel-count    | 1            |         | 数据源解析并发数
 --scatter-sources   | false        |         | 对多数据源并发分散读取，以充分利用多数据源的IO能力
 --start-file        | 0            |         | 设定部分装入时数据源的起始文件数索引。
 --end-file          | -1           |         | 设定部分装入时数据源的结束文件数索引上限，-1表示到最尾部。
