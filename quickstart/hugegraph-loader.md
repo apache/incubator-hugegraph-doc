@@ -734,8 +734,12 @@ schema: 必填
 --clear-timeout     | 240          |         | 导入数据前清除服务端的原有数据的超时时间
 --incremental-mode  | false        |         | 是否使用断点续导模式，仅输入源为 FILE 和 HDFS 支持该模式，启用该模式能从上一次导入停止的地方开始导
 --failure-mode      | false        |         | 失败模式为 true 时，会导入之前失败了的数据，一般来说失败数据文件需要在人工更正编辑好后，再次进行导入
---batch-insert-threads | CPUs      |         | 批量插入线程池大小 (CPUs是当前OS可用**逻辑核**个数) 
+--batch-insert-threads | CPUs      |         | 批量插入线程池大小 (CPUs是当前OS可用**逻辑核**个数) ，建议不超过服务器CPU数的0.8倍。
 --single-insert-threads | 8        |         | 单条插入线程池的大小
+--parallel-count    | 1            |         | 数据源解析并发数
+--scatter-sources   | false        |         | 对多数据源并发分散读取，以充分利用多数据源的IO能力
+--start-file        | 0            |         | 设定部分装入时数据源的起始文件数索引。
+--end-file          | -1           |         | 设定部分装入时数据源的结束文件数索引上限，-1表示到最尾部。
 --max-conn          | 4 * CPUs     |         | HugeClient 与 HugeGraphServer 的最大 HTTP 连接数，**调整线程**的时候建议同时调整此项 
 --max-conn-per-route| 2 * CPUs     |         | HugeClient 与 HugeGraphServer 每个路由的最大 HTTP 连接数，**调整线程**的时候建议同时调整此项 
 --batch-size        | 500          |         | 导入数据时每个批次包含的数据条数
@@ -779,11 +783,17 @@ schema: 必填
 
 > .parse-error 和 .insert-error 并不总是一起存在的，只有存在解析出错的行才会有 .parse-error 文件，只有存在插入出错的行才会有 .insert-error 文件。
 
-##### 3.4.3 logs 目录文件说明
+###### 3.4.3 部分装入
+- 可通过命令行给定 start-file/end-file，来控制本次装入的数据（文件）顺序范围
+- 多个数据源（struct结构）解析获得多个文件，全局有序，规则为：不同数据源，按数据源的定义顺序；单个数据源内的多个文件，按其名称字母顺序
+- 指定的范围中，包括start-file，但不包括 end-file (即区间为左闭右开) 
+- start-file默认值为0， end-file默认值为 -1，对应无上限
+
+##### 3.4.4 logs 目录文件说明
 
 程序执行过程中各日志及错误数据会写入 hugegraph-loader.log 文件中。
 
-##### 3.4.4 执行命令
+##### 3.4.5 执行命令
 
 运行 bin/hugeloader 并传入参数
 
