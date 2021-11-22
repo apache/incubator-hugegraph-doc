@@ -550,7 +550,8 @@ bin/mapping-convert.sh struct.json
     - type: 输入源类型，必须填 file 或 FILE； 
     - path: 本地文件或目录的路径，绝对路径或相对于映射文件的相对路径，建议使用绝对路径，必填；
     - file_filter: 从`path`中筛选复合条件的文件，复合结构，目前只支持配置扩展名，用子节点`extensions`表示，默认为"*"，表示保留所有文件；
-    - format: 本地文件的格式，可选值为 CSV、TEXT 及 JSON，必须大写，必填；               
+    - dir_filter: 当`path`是目录路径时，递归遍历该路径下所有文件，遍历过程中对目录名进行正则匹配，包括子节点`include_regex`和`exclude_regex`，默认为空，表示遍历过程中，不对目录名进行匹配过滤；
+    - forma t: 本地文件的格式，可选值为 CSV、TEXT 及 JSON，必须大写，必填；               
     - header: 文件各列的列名，如不指定则会以数据文件第一行作为 header；当文件本身有标题且又指定了 header，文件的第一行会被当作普通的数据行；JSON 文件不需要指定 header，选填；    
     - delimiter: 文件行的列分隔符，默认以逗号`","`作为分隔符，`JSON`文件不需要指定，选填；     
     - charset: 文件的编码字符集，默认`UTF-8`，选填；    
