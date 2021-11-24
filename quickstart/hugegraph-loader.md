@@ -284,6 +284,10 @@ Office,388
             "*"
           ]
         },
+        "dir_filter": {
+          "include_regex": "",
+          "exclude_regex": ""
+        },
         "format": "CSV",
         "delimiter": ",",
         "date_format": "yyyy-MM-dd HH:mm:ss",
@@ -333,6 +337,10 @@ Office,388
             "*"
           ]
         },
+        "dir_filter": {
+          "include_regex": "",
+          "exclude_regex": ""
+        },
         "format": "CSV",
         "delimiter": ",",
         "date_format": "yyyy-MM-dd HH:mm:ss",
@@ -377,6 +385,10 @@ Office,388
           "extensions": [
             "*"
           ]
+        },
+        "dir_filter": {
+          "include_regex": "",
+          "exclude_regex": ""
         },
         "format": "JSON",
         "delimiter": null,
@@ -427,6 +439,10 @@ Office,388
           "extensions": [
             "*"
           ]
+        },
+        "dir_filter": {
+          "include_regex": "",
+          "exclude_regex": ""
         },
         "format": "JSON",
         "delimiter": null,
