@@ -46,9 +46,13 @@ city: Beijing})
 ##### Method & Url
 
 ```
+# 旧版
 POST http://localhost:8080/graphs/auth/users
 ```
-
+```
+# 新版
+POST http://localhost:8080/auth/users
+```
 ##### Response Status
 
 ```json
@@ -80,9 +84,13 @@ POST http://localhost:8080/graphs/auth/users
 ##### Method & Url
 
 ```
+# 旧版
 DELETE http://localhost:8080/graphs/auth/users/-63:tester
 ```
-
+```
+# 新版
+DELETE http://localhost:8080/auth/users/tester
+```
 ##### Response Status
 
 ```json
@@ -104,9 +112,13 @@ DELETE http://localhost:8080/graphs/auth/users/-63:tester
 ##### Method & Url
 
 ```
+# 旧版
 PUT http://localhost:8080/graphs/auth/users/-63:tester
 ```
-
+```
+# 新版
+PUT http://localhost:8080/auth/users/tester
+```
 ##### Request Body
 修改user_name、user_password和user_phone
 ```json
@@ -147,9 +159,13 @@ PUT http://localhost:8080/graphs/auth/users/-63:tester
 ##### Method & Url
 
 ```
+# 旧版
 GET http://localhost:8080/graphs/auth/users
 ```
-
+```
+# 新版
+GET http://localhost:8080/auth/users
+```
 ##### Response Status
 
 ```json
@@ -182,9 +198,13 @@ GET http://localhost:8080/graphs/auth/users
 ##### Method & Url
 
 ```
+# 旧版
 GET http://localhost:8080/graphs/auth/users/-63:admin
 ```
-
+```
+# 新版
+GET http://localhost:8080/auth/users/admin
+```
 ##### Response Status
 
 ```json
@@ -213,7 +233,12 @@ GET http://localhost:8080/graphs/auth/users/-63:admin
 ##### Method & Url
 
 ```
+# 旧版
 GET http://localhost:8080/graphs/auth/users/-63:tester/role
+```
+```
+# 新版
+GET http://localhost:8080/auth/users/tester/role
 ```
 
 ##### Response Status
@@ -264,7 +289,12 @@ GET http://localhost:8080/graphs/auth/users/-63:tester/role
 ##### Method & Url
 
 ```
+# 旧版
 POST http://localhost:8080/graphs/auth/groups
+```
+```
+# 新版
+POST http://localhost:8080/graphspaces/{graphspace}/auth/groups
 ```
 
 ##### Response Status
@@ -296,9 +326,13 @@ POST http://localhost:8080/graphs/auth/groups
 ##### Method & Url
 
 ```
+# 旧版
 DELETE http://localhost:8080/graphs/auth/groups/-69:grant
 ```
-
+```
+# 新版
+DELETE http://localhost:8080/graphspaces/{graphspace}/auth/groups/grant
+```
 ##### Response Status
 
 ```json
@@ -320,7 +354,12 @@ DELETE http://localhost:8080/graphs/auth/groups/-69:grant
 ##### Method & Url
 
 ```
+# 旧版
 PUT http://localhost:8080/graphs/auth/groups/-69:grant
+```
+```
+# 新版
+PUT http://localhost:8080/graphspaces/{graphspace}/auth/groups/grant
 ```
 
 ##### Request Body
@@ -360,9 +399,13 @@ PUT http://localhost:8080/graphs/auth/groups/-69:grant
 ##### Method & Url
 
 ```
+# 旧版
 GET http://localhost:8080/graphs/auth/groups
 ```
-
+```
+# 新版
+GET http://localhost:8080/graphspaces/{graphspace}/auth/groups
+```
 ##### Response Status
 
 ```json
@@ -395,9 +438,13 @@ GET http://localhost:8080/graphs/auth/groups
 ##### Method & Url
 
 ```
+# 旧版
 GET http://localhost:8080/graphs/auth/groups/-69:all
 ```
-
+```
+# 新版
+GET http://localhost:8080/graphspaces/{graphspace}/auth/groups/all
+```
 ##### Response Status
 
 ```json
@@ -472,7 +519,12 @@ enum ResourceType { NONE STATUS, VERTEX, EDGE, VERTEX_AGGR, EDGE_AGGR, VAR, GREM
 ##### Method & Url
 
 ```
+# 旧版
 POST http://localhost:8080/graphs/auth/targets
+```
+```
+# 新版
+POST http://localhost:8080/graphspaces/{graphspace}/auth/targets
 ```
 
 ##### Response Status
@@ -512,9 +564,13 @@ POST http://localhost:8080/graphs/auth/targets
 ##### Method & Url
 
 ```
+# 旧版
 DELETE http://localhost:8080/graphs/auth/targets/-77:gremlin
 ```
-
+```
+# 新版
+DELETE http://localhost:8080/graphspaces/{graphspace}/auth/targets/gremlin
+```
 ##### Response Status
 
 ```json
@@ -537,7 +593,12 @@ DELETE http://localhost:8080/graphs/auth/targets/-77:gremlin
 ##### Method & Url
 
 ```
+# 旧版
 PUT http://localhost:8080/graphs/auth/targets/-77:gremlin
+```
+```
+# 新版
+PUT http://localhost:8080/graphspaces/{graphspace}/auth/targets/gremlin
 ```
 
 ##### Request Body
@@ -591,9 +652,13 @@ PUT http://localhost:8080/graphs/auth/targets/-77:gremlin
 ##### Method & Url
 
 ```
+# 旧版
 GET http://localhost:8080/graphs/auth/targets
 ```
-
+```
+# 新版
+GET http://localhost:8080/graphspaces/{graphspace}/auth/targets
+```
 ##### Response Status
 
 ```json
@@ -650,7 +715,12 @@ GET http://localhost:8080/graphs/auth/targets
 ##### Method & Url
 
 ```
+# 旧版
 GET http://localhost:8080/graphs/auth/targets/-77:grant
+```
+```
+# 新版
+GET http://localhost:8080/graphspaces/{graphspace}/auth/targets/grant
 ```
 
 ##### Response Status
@@ -705,9 +775,13 @@ GET http://localhost:8080/graphs/auth/targets/-77:grant
 ##### Method & Url
 
 ```
+# 旧版
 POST http://localhost:8080/graphs/auth/belongs
 ```
-
+```
+# 新版
+POST http://localhost:8080/graphspaces/{graphspace}/auth/belongs
+```
 ##### Response Status
 
 ```json
@@ -736,9 +810,13 @@ POST http://localhost:8080/graphs/auth/belongs
 ##### Method & Url
 
 ```
+# 旧版
 DELETE http://localhost:8080/graphs/auth/belongs/S-63:tester>-82>>S-69:grant
 ```
-
+```
+# 新版
+DELETE http://localhost:8080/graphspaces/{graphspace}/auth/belongs/tester>8>grant
+```
 ##### Response Status
 
 ```json
@@ -761,7 +839,12 @@ DELETE http://localhost:8080/graphs/auth/belongs/S-63:tester>-82>>S-69:grant
 ##### Method & Url
 
 ```
+# 旧版
 PUT http://localhost:8080/graphs/auth/belongs/S-63:tester>-82>>S-69:grant
+```
+```
+# 新版
+PUT http://localhost:8080/graphspaces/{graphspace}/auth/belongs/tester>8>grant
 ```
 
 ##### Request Body
@@ -802,7 +885,12 @@ PUT http://localhost:8080/graphs/auth/belongs/S-63:tester>-82>>S-69:grant
 ##### Method & Url
 
 ```
+# 旧版
 GET http://localhost:8080/graphs/auth/belongs
+```
+```
+# 新版
+GET http://localhost:8080/graphspaces/{graphspace}/auth/belongs
 ```
 
 ##### Response Status
@@ -837,7 +925,12 @@ GET http://localhost:8080/graphs/auth/belongs
 ##### Method & Url
 
 ```
+# 旧版
 GET http://localhost:8080/graphs/auth/belongs/S-63:tester>-82>>S-69:all
+```
+```
+# 新版
+GET http://localhost:8080/graphspaces/{graphspace}/auth/belongs/tester>2>all
 ```
 
 ##### Response Status
@@ -891,7 +984,12 @@ access_permission：
 ##### Method & Url
 
 ```
+# 旧版
 POST http://localhost:8080/graphs/auth/accesses
+```
+```
+# 新版
+POST http://localhost:8080/graphspaces/{graphspace}/auth/accesses
 ```
 
 ##### Response Status
@@ -924,7 +1022,12 @@ POST http://localhost:8080/graphs/auth/accesses
 ##### Method & Url
 
 ```
+# 旧版
 DELETE http://localhost:8080/graphs/auth/accesses/S-69:all>-88>12>S-77:all
+```
+```
+# 新版
+DELETE http://localhost:8080/graphspaces/{graphspace}/auth/accesses/all>8>all
 ```
 
 ##### Response Status
@@ -949,7 +1052,12 @@ DELETE http://localhost:8080/graphs/auth/accesses/S-69:all>-88>12>S-77:all
 ##### Method & Url
 
 ```
+# 旧版
 PUT http://localhost:8080/graphs/auth/accesses/S-69:all>-88>12>S-77:all
+```
+```
+# 新版
+PUT http://localhost:8080/graphspaces/{graphspace}/auth/accesses/all>8>all
 ```
 
 ##### Request Body
@@ -990,7 +1098,12 @@ PUT http://localhost:8080/graphs/auth/accesses/S-69:all>-88>12>S-77:all
 ##### Method & Url
 
 ```
+# 旧版
 GET http://localhost:8080/graphs/auth/accesses
+```
+```
+# 新版
+GET http://localhost:8080/graphspaces/{graphspace}/auth/accesses
 ```
 
 ##### Response Status
@@ -1026,7 +1139,12 @@ GET http://localhost:8080/graphs/auth/accesses
 ##### Method & Url
 
 ```
+# 旧版
 GET http://localhost:8080/graphs/auth/accesses/S-69:all>-88>11>S-77:all
+```
+```
+# 新版
+GET http://localhost:8080/graphspaces/{graphspace}/auth/accesses/all>8>all
 ```
 
 ##### Response Status
@@ -1063,8 +1181,14 @@ GET http://localhost:8080/graphs/auth/accesses/S-69:all>-88>11>S-77:all
 ##### Method & Url
 
 ```
+# 旧版
 POST http://localhost:8080/graphs/auth/login
 ```
+```
+# 新版
+POST http://localhost:8080/auth/login
+```
+
 ##### Request Body
 
 ```json
@@ -1094,7 +1218,12 @@ POST http://localhost:8080/graphs/auth/login
 ##### Method & Url
 
 ```
+# 旧版
 POST http://localhost:8080/graphs/auth/verify
+```
+```
+# 新版
+POST http://localhost:8080/auth/verify
 ```
 
 ##### Response Status
