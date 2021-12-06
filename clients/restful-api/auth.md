@@ -18,7 +18,7 @@ city: Beijing})
 用户认证与权限控制接口包括5类：UserAPI、GroupAPI、TargetAPI、BelongAPI、AccessAPI。
 
 ### 9.2 用户（User）API
-用户接口包括：创建用户，删除用户，修改用户，和查询用户相关信息接口。
+用户接口包括：创建用户（需要超级管理员admin权限），删除用户（需要超级管理员admin权限），修改用户（需要超级管理员admin权限或用户自己），和查询用户相关信息接口。
 
 #### 9.2.1 创建用户
 
@@ -269,6 +269,8 @@ GET http://localhost:8080/auth/users/tester/role
 用户组会赋予相应的资源权限，用户会被分配不同的用户组，即可拥有不同的资源权限。  
 用户组接口包括：创建用户组，删除用户组，修改用户组，和查询用户组相关信息接口。
 
+注意：需要图空间管理员或者超级管理员权限
+
 #### 9.3.1 创建用户组
 
 ##### Params
@@ -468,6 +470,8 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/groups/all
 资源描述了图数据库中的数据，比如符合某一类条件的顶点，每一个资源包括type、label、properties三个要素，共有18种type、
 任意label、任意properties的组合形成的资源，一个资源的内部条件是且关系，多个资源之间的条件是或关系。   
 资源接口包括：资源的创建、删除、修改和查询。
+
+注意：需要图空间管理员或者超级管理员权限
 
 #### 9.4.1 创建资源
 
@@ -754,6 +758,8 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/targets/grant
 关联用户和用户组的关系，一个用户可以关联一个或者多个用户组。用户组拥有相关资源的权限，不同用户组的资源权限可以理解为不同的角色。即给用户关联角色。  
 关联角色接口包括：用户关联角色的创建、删除、修改和查询。
 
+注意：需要图空间管理员或者超级管理员权限
+
 #### 9.5.1 创建用户的关联角色
 
 ##### Params
@@ -956,6 +962,8 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/belongs/tester>2>all
 给用户组赋予资源的权限，主要包含：读操作(READ)、写操作(WRITE)、删除操作(DELETE)、执行操作(EXECUTE)等。  
 赋权接口包括：赋权的创建、删除、修改和查询。
 
+注意：需要图空间管理员或者超级管理员权限
+
 #### 9.6.1 创建赋权(用户组赋予资源的权限)
 
 ##### Params
@@ -970,6 +978,8 @@ access_permission：
 - WRITE：写操作，所有的创建、更新操作，包括给Schema增加property key，给顶点增加或更新属性等；
 - DELETE：删除操作，包括删除元数据、删除顶点/边；
 - EXECUTE：执⾏操作，包括执⾏Gremlin语句、执⾏Task、执⾏metadata函数；
+- SPACE：图空间权限，包括动态管理图（增删改查）、图空间权限管理等；
+- OP：运维管理权限，可以设置图空间运维管理员和全局运维管理员；
 
 ##### Request Body
 
