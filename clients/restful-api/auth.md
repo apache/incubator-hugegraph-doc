@@ -18,7 +18,7 @@ city: Beijing})
 用户认证与权限控制接口包括5类：UserAPI、GroupAPI、TargetAPI、BelongAPI、AccessAPI。
 
 ### 9.2 用户（User）API
-用户接口包括：创建用户（需要超级管理员admin权限），删除用户（需要超级管理员admin权限），修改用户（需要超级管理员admin权限或用户自己），和查询用户相关信息接口。
+用户接口包括：创建用户，删除用户，修改用户，和查询用户相关信息接口。
 
 #### 9.2.1 创建用户
 
@@ -46,13 +46,9 @@ city: Beijing})
 ##### Method & Url
 
 ```
-# 旧版
 POST http://localhost:8080/graphs/auth/users
 ```
-```
-# 新版
-POST http://localhost:8080/auth/users
-```
+
 ##### Response Status
 
 ```json
@@ -84,13 +80,9 @@ POST http://localhost:8080/auth/users
 ##### Method & Url
 
 ```
-# 旧版
 DELETE http://localhost:8080/graphs/auth/users/-63:tester
 ```
-```
-# 新版
-DELETE http://localhost:8080/auth/users/tester
-```
+
 ##### Response Status
 
 ```json
@@ -112,13 +104,9 @@ DELETE http://localhost:8080/auth/users/tester
 ##### Method & Url
 
 ```
-# 旧版
 PUT http://localhost:8080/graphs/auth/users/-63:tester
 ```
-```
-# 新版
-PUT http://localhost:8080/auth/users/tester
-```
+
 ##### Request Body
 修改user_name、user_password和user_phone
 ```json
@@ -159,13 +147,9 @@ PUT http://localhost:8080/auth/users/tester
 ##### Method & Url
 
 ```
-# 旧版
 GET http://localhost:8080/graphs/auth/users
 ```
-```
-# 新版
-GET http://localhost:8080/auth/users
-```
+
 ##### Response Status
 
 ```json
@@ -198,13 +182,9 @@ GET http://localhost:8080/auth/users
 ##### Method & Url
 
 ```
-# 旧版
 GET http://localhost:8080/graphs/auth/users/-63:admin
 ```
-```
-# 新版
-GET http://localhost:8080/auth/users/admin
-```
+
 ##### Response Status
 
 ```json
@@ -233,12 +213,7 @@ GET http://localhost:8080/auth/users/admin
 ##### Method & Url
 
 ```
-# 旧版
 GET http://localhost:8080/graphs/auth/users/-63:tester/role
-```
-```
-# 新版
-GET http://localhost:8080/auth/users/tester/role
 ```
 
 ##### Response Status
@@ -269,8 +244,6 @@ GET http://localhost:8080/auth/users/tester/role
 用户组会赋予相应的资源权限，用户会被分配不同的用户组，即可拥有不同的资源权限。  
 用户组接口包括：创建用户组，删除用户组，修改用户组，和查询用户组相关信息接口。
 
-注意：需要图空间管理员或者超级管理员权限
-
 #### 9.3.1 创建用户组
 
 ##### Params
@@ -291,12 +264,7 @@ GET http://localhost:8080/auth/users/tester/role
 ##### Method & Url
 
 ```
-# 旧版
 POST http://localhost:8080/graphs/auth/groups
-```
-```
-# 新版
-POST http://localhost:8080/graphspaces/{graphspace}/auth/groups
 ```
 
 ##### Response Status
@@ -328,13 +296,9 @@ POST http://localhost:8080/graphspaces/{graphspace}/auth/groups
 ##### Method & Url
 
 ```
-# 旧版
 DELETE http://localhost:8080/graphs/auth/groups/-69:grant
 ```
-```
-# 新版
-DELETE http://localhost:8080/graphspaces/{graphspace}/auth/groups/grant
-```
+
 ##### Response Status
 
 ```json
@@ -356,12 +320,7 @@ DELETE http://localhost:8080/graphspaces/{graphspace}/auth/groups/grant
 ##### Method & Url
 
 ```
-# 旧版
 PUT http://localhost:8080/graphs/auth/groups/-69:grant
-```
-```
-# 新版
-PUT http://localhost:8080/graphspaces/{graphspace}/auth/groups/grant
 ```
 
 ##### Request Body
@@ -401,13 +360,9 @@ PUT http://localhost:8080/graphspaces/{graphspace}/auth/groups/grant
 ##### Method & Url
 
 ```
-# 旧版
 GET http://localhost:8080/graphs/auth/groups
 ```
-```
-# 新版
-GET http://localhost:8080/graphspaces/{graphspace}/auth/groups
-```
+
 ##### Response Status
 
 ```json
@@ -440,13 +395,9 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/groups
 ##### Method & Url
 
 ```
-# 旧版
 GET http://localhost:8080/graphs/auth/groups/-69:all
 ```
-```
-# 新版
-GET http://localhost:8080/graphspaces/{graphspace}/auth/groups/all
-```
+
 ##### Response Status
 
 ```json
@@ -470,8 +421,6 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/groups/all
 资源描述了图数据库中的数据，比如符合某一类条件的顶点，每一个资源包括type、label、properties三个要素，共有18种type、
 任意label、任意properties的组合形成的资源，一个资源的内部条件是且关系，多个资源之间的条件是或关系。   
 资源接口包括：资源的创建、删除、修改和查询。
-
-注意：需要图空间管理员或者超级管理员权限
 
 #### 9.4.1 创建资源
 
@@ -523,12 +472,7 @@ enum ResourceType { NONE STATUS, VERTEX, EDGE, VERTEX_AGGR, EDGE_AGGR, VAR, GREM
 ##### Method & Url
 
 ```
-# 旧版
 POST http://localhost:8080/graphs/auth/targets
-```
-```
-# 新版
-POST http://localhost:8080/graphspaces/{graphspace}/auth/targets
 ```
 
 ##### Response Status
@@ -568,13 +512,9 @@ POST http://localhost:8080/graphspaces/{graphspace}/auth/targets
 ##### Method & Url
 
 ```
-# 旧版
 DELETE http://localhost:8080/graphs/auth/targets/-77:gremlin
 ```
-```
-# 新版
-DELETE http://localhost:8080/graphspaces/{graphspace}/auth/targets/gremlin
-```
+
 ##### Response Status
 
 ```json
@@ -597,12 +537,7 @@ DELETE http://localhost:8080/graphspaces/{graphspace}/auth/targets/gremlin
 ##### Method & Url
 
 ```
-# 旧版
 PUT http://localhost:8080/graphs/auth/targets/-77:gremlin
-```
-```
-# 新版
-PUT http://localhost:8080/graphspaces/{graphspace}/auth/targets/gremlin
 ```
 
 ##### Request Body
@@ -656,13 +591,9 @@ PUT http://localhost:8080/graphspaces/{graphspace}/auth/targets/gremlin
 ##### Method & Url
 
 ```
-# 旧版
 GET http://localhost:8080/graphs/auth/targets
 ```
-```
-# 新版
-GET http://localhost:8080/graphspaces/{graphspace}/auth/targets
-```
+
 ##### Response Status
 
 ```json
@@ -719,12 +650,7 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/targets
 ##### Method & Url
 
 ```
-# 旧版
 GET http://localhost:8080/graphs/auth/targets/-77:grant
-```
-```
-# 新版
-GET http://localhost:8080/graphspaces/{graphspace}/auth/targets/grant
 ```
 
 ##### Response Status
@@ -758,8 +684,6 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/targets/grant
 关联用户和用户组的关系，一个用户可以关联一个或者多个用户组。用户组拥有相关资源的权限，不同用户组的资源权限可以理解为不同的角色。即给用户关联角色。  
 关联角色接口包括：用户关联角色的创建、删除、修改和查询。
 
-注意：需要图空间管理员或者超级管理员权限
-
 #### 9.5.1 创建用户的关联角色
 
 ##### Params
@@ -781,13 +705,9 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/targets/grant
 ##### Method & Url
 
 ```
-# 旧版
 POST http://localhost:8080/graphs/auth/belongs
 ```
-```
-# 新版
-POST http://localhost:8080/graphspaces/{graphspace}/auth/belongs
-```
+
 ##### Response Status
 
 ```json
@@ -816,13 +736,9 @@ POST http://localhost:8080/graphspaces/{graphspace}/auth/belongs
 ##### Method & Url
 
 ```
-# 旧版
 DELETE http://localhost:8080/graphs/auth/belongs/S-63:tester>-82>>S-69:grant
 ```
-```
-# 新版
-DELETE http://localhost:8080/graphspaces/{graphspace}/auth/belongs/tester>8>grant
-```
+
 ##### Response Status
 
 ```json
@@ -845,12 +761,7 @@ DELETE http://localhost:8080/graphspaces/{graphspace}/auth/belongs/tester>8>gran
 ##### Method & Url
 
 ```
-# 旧版
 PUT http://localhost:8080/graphs/auth/belongs/S-63:tester>-82>>S-69:grant
-```
-```
-# 新版
-PUT http://localhost:8080/graphspaces/{graphspace}/auth/belongs/tester>8>grant
 ```
 
 ##### Request Body
@@ -891,12 +802,7 @@ PUT http://localhost:8080/graphspaces/{graphspace}/auth/belongs/tester>8>grant
 ##### Method & Url
 
 ```
-# 旧版
 GET http://localhost:8080/graphs/auth/belongs
-```
-```
-# 新版
-GET http://localhost:8080/graphspaces/{graphspace}/auth/belongs
 ```
 
 ##### Response Status
@@ -931,12 +837,7 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/belongs
 ##### Method & Url
 
 ```
-# 旧版
 GET http://localhost:8080/graphs/auth/belongs/S-63:tester>-82>>S-69:all
-```
-```
-# 新版
-GET http://localhost:8080/graphspaces/{graphspace}/auth/belongs/tester>2>all
 ```
 
 ##### Response Status
@@ -961,8 +862,6 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/belongs/tester>2>all
 ### 9.6 赋权（Access）API
 给用户组赋予资源的权限，主要包含：读操作(READ)、写操作(WRITE)、删除操作(DELETE)、执行操作(EXECUTE)等。  
 赋权接口包括：赋权的创建、删除、修改和查询。
-
-注意：需要图空间管理员或者超级管理员权限
 
 #### 9.6.1 创建赋权(用户组赋予资源的权限)
 
@@ -994,12 +893,7 @@ access_permission：
 ##### Method & Url
 
 ```
-# 旧版
 POST http://localhost:8080/graphs/auth/accesses
-```
-```
-# 新版
-POST http://localhost:8080/graphspaces/{graphspace}/auth/accesses
 ```
 
 ##### Response Status
@@ -1032,12 +926,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/auth/accesses
 ##### Method & Url
 
 ```
-# 旧版
 DELETE http://localhost:8080/graphs/auth/accesses/S-69:all>-88>12>S-77:all
-```
-```
-# 新版
-DELETE http://localhost:8080/graphspaces/{graphspace}/auth/accesses/all>8>all
 ```
 
 ##### Response Status
@@ -1062,12 +951,7 @@ DELETE http://localhost:8080/graphspaces/{graphspace}/auth/accesses/all>8>all
 ##### Method & Url
 
 ```
-# 旧版
 PUT http://localhost:8080/graphs/auth/accesses/S-69:all>-88>12>S-77:all
-```
-```
-# 新版
-PUT http://localhost:8080/graphspaces/{graphspace}/auth/accesses/all>8>all
 ```
 
 ##### Request Body
@@ -1108,12 +992,7 @@ PUT http://localhost:8080/graphspaces/{graphspace}/auth/accesses/all>8>all
 ##### Method & Url
 
 ```
-# 旧版
 GET http://localhost:8080/graphs/auth/accesses
-```
-```
-# 新版
-GET http://localhost:8080/graphspaces/{graphspace}/auth/accesses
 ```
 
 ##### Response Status
@@ -1149,12 +1028,7 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/accesses
 ##### Method & Url
 
 ```
-# 旧版
 GET http://localhost:8080/graphs/auth/accesses/S-69:all>-88>11>S-77:all
-```
-```
-# 新版
-GET http://localhost:8080/graphspaces/{graphspace}/auth/accesses/all>8>all
 ```
 
 ##### Response Status
@@ -1191,12 +1065,7 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/accesses/all>8>all
 ##### Method & Url
 
 ```
-# 旧版
 POST http://localhost:8080/graphs/auth/login
-```
-```
-# 新版
-POST http://localhost:8080/auth/login
 ```
 
 ##### Request Body
@@ -1228,12 +1097,7 @@ POST http://localhost:8080/auth/login
 ##### Method & Url
 
 ```
-# 旧版
 POST http://localhost:8080/graphs/auth/verify
-```
-```
-# 新版
-POST http://localhost:8080/auth/verify
 ```
 
 ##### Response Status

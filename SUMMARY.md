@@ -15,6 +15,7 @@
 * [Config Guide](config/config-guide.md)
 * [Config Options](config/config-option.md)
 * [Config Authentication](config/config-authentication.md)
+* [Config Authentication V3](config/config-authentication-v3.md)
 * [Config HTTPS](config/config-https.md)
 
 

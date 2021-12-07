@@ -1,6 +1,6 @@
-### 9.1 用户认证与权限控制
+### 9.1 用户认证与权限控制 V3
 
-> 开启权限及相关配置请先参考 [权限配置](../../config/config-authentication.md) 文档
+> 开启权限及相关配置请先参考 [权限配置](../../config/config-authentication-v3.md) 文档
 
 ##### 用户认证与权限控制概述：
 HugeGraph支持多用户认证、以及细粒度的权限访问控制，采用基于“用户-用户组-操作-资源”的4层设计，灵活控制用户角色与权限。 
@@ -35,10 +35,10 @@ city: Beijing})
 
 ```json
 {
-    "user_name": "tester",
-    "user_password": "******",
-    "user_phone": "182****9088",
-    "user_email": "123@xx.com"
+  "user_name": "tester",
+  "user_password": "password1",
+  "user_phone": "182****9088",
+  "user_email": "123@xx.com"
 }
 ```
 
@@ -46,11 +46,6 @@ city: Beijing})
 ##### Method & Url
 
 ```
-# 旧版
-POST http://localhost:8080/graphs/auth/users
-```
-```
-# 新版
 POST http://localhost:8080/auth/users
 ```
 ##### Response Status
@@ -63,14 +58,14 @@ POST http://localhost:8080/auth/users
 返回报文中，密码为加密后的密文
 ```json
 {
-    "user_password": "******",
-    "user_email": "123@xx.com",
-    "user_update": "2020-11-17 14:31:07.833",
-    "user_name": "tester",
-    "user_creator": "admin",
-    "user_phone": "182****9088",
-    "id": "-63:tester",
-    "user_create": "2020-11-17 14:31:07.833"
+  "user_password": "$2a$04$GlhAj4yVVrvXunC5eVVBfOOG1dtHTKu4K5q.AFBQ0mZpg5mZIwTC.",
+  "user_email": "123@xx.com",
+  "user_update": "2021-12-06 18:47:45",
+  "user_name": "tester",
+  "user_creator": "admin",
+  "user_phone": "182****9088",
+  "id": "tester",
+  "user_create": "2021-12-06 18:47:45"
 }
 ```
 
@@ -80,15 +75,9 @@ POST http://localhost:8080/auth/users
 
 - id: 需要删除的用户 Id
 
-
 ##### Method & Url
 
 ```
-# 旧版
-DELETE http://localhost:8080/graphs/auth/users/-63:tester
-```
-```
-# 新版
 DELETE http://localhost:8080/auth/users/tester
 ```
 ##### Response Status
@@ -112,19 +101,15 @@ DELETE http://localhost:8080/auth/users/tester
 ##### Method & Url
 
 ```
-# 旧版
-PUT http://localhost:8080/graphs/auth/users/-63:tester
-```
-```
-# 新版
 PUT http://localhost:8080/auth/users/tester
 ```
+
 ##### Request Body
 修改user_name、user_password和user_phone
 ```json
 {
     "user_name": "tester",
-    "user_password": "******",
+    "user_password": "password2",
     "user_phone": "183****9266"
 }
 ```
@@ -139,13 +124,14 @@ PUT http://localhost:8080/auth/users/tester
 返回结果是包含修改过的内容在内的整个用户组对象
 ```json
 {
-    "user_password": "******",
-    "user_update": "2020-11-12 10:29:30.455",
-    "user_name": "tester",
-    "user_creator": "admin",
-    "user_phone": "183****9266",
-    "id": "-63:tester",
-    "user_create": "2020-11-12 10:27:13.601"
+  "user_password": "$2a$04$FrFCRuHZUcPMR8qqxmKHdOlmEcHKkPgQVDdOI1rP8NhbK4pRAwvXG",
+  "user_email": "123@xx.com",
+  "user_update": "2021-12-06 18:48:45",
+  "user_name": "tester",
+  "user_creator": "admin",
+  "user_phone": "183****9266",
+  "id": "tester",
+  "user_create": "2021-12-06 18:47:45"
 }
 ```
 
@@ -159,13 +145,9 @@ PUT http://localhost:8080/auth/users/tester
 ##### Method & Url
 
 ```
-# 旧版
-GET http://localhost:8080/graphs/auth/users
-```
-```
-# 新版
 GET http://localhost:8080/auth/users
 ```
+
 ##### Response Status
 
 ```json
@@ -176,16 +158,29 @@ GET http://localhost:8080/auth/users
 
 ```json
 {
-    "users": [
-        {
-            "user_password": "******",
-            "user_update": "2020-11-11 11:41:12.254",
-            "user_name": "admin",
-            "user_creator": "system",
-            "id": "-63:admin",
-            "user_create": "2020-11-11 11:41:12.254"
-        }
-    ]
+  "users": [
+    {
+      "user_avatar": "user/as/image.png",
+      "user_password": "$2a$04$3gKUvlO51o4o/YfuUkknNOINaLlZqd454ZjU4sQ4r.y1FqT7HyUu6",
+      "user_email": "admin@baidu.com",
+      "user_update": "2021-10-25 19:50:50",
+      "user_name": "admin",
+      "user_creator": "system",
+      "user_phone": "23423525",
+      "id": "admin",
+      "user_create": "2021-10-25 19:50:50"
+    },
+    {
+      "user_password": "$2a$04$FrFCRuHZUcPMR8qqxmKHdOlmEcHKkPgQVDdOI1rP8NhbK4pRAwvXG",
+      "user_email": "123@xx.com",
+      "user_update": "2021-12-06 18:48:45",
+      "user_name": "tester",
+      "user_creator": "admin",
+      "user_phone": "183****9266",
+      "id": "tester",
+      "user_create": "2021-12-06 18:47:45"
+    }
+  ]
 }
 ```
 
@@ -198,12 +193,7 @@ GET http://localhost:8080/auth/users
 ##### Method & Url
 
 ```
-# 旧版
-GET http://localhost:8080/graphs/auth/users/-63:admin
-```
-```
-# 新版
-GET http://localhost:8080/auth/users/admin
+GET http://localhost:8080/auth/users/tester
 ```
 ##### Response Status
 
@@ -215,16 +205,14 @@ GET http://localhost:8080/auth/users/admin
 
 ```json
 {
-    "users": [
-        {
-            "user_password": "******",
-            "user_update": "2020-11-11 11:41:12.254",
-            "user_name": "admin",
-            "user_creator": "system",
-            "id": "-63:admin",
-            "user_create": "2020-11-11 11:41:12.254"
-        }
-    ]
+  "user_password": "$2a$04$FrFCRuHZUcPMR8qqxmKHdOlmEcHKkPgQVDdOI1rP8NhbK4pRAwvXG",
+  "user_email": "123@xx.com",
+  "user_update": "2021-12-06 18:48:45",
+  "user_name": "tester",
+  "user_creator": "admin",
+  "user_phone": "183****9266",
+  "id": "tester",
+  "user_create": "2021-12-06 18:47:45"
 }
 ```
 
@@ -233,11 +221,6 @@ GET http://localhost:8080/auth/users/admin
 ##### Method & Url
 
 ```
-# 旧版
-GET http://localhost:8080/graphs/auth/users/-63:tester/role
-```
-```
-# 新版
 GET http://localhost:8080/auth/users/tester/role
 ```
 
@@ -287,15 +270,9 @@ GET http://localhost:8080/auth/users/tester/role
 }
 ```
 
-
 ##### Method & Url
 
 ```
-# 旧版
-POST http://localhost:8080/graphs/auth/groups
-```
-```
-# 新版
 POST http://localhost:8080/graphspaces/{graphspace}/auth/groups
 ```
 
@@ -309,12 +286,13 @@ POST http://localhost:8080/graphspaces/{graphspace}/auth/groups
 
 ```json
 {
-    "group_creator": "admin",
-    "group_name": "all",
-    "group_create": "2020-11-11 15:46:08.791",
-    "group_update": "2020-11-11 15:46:08.791",
-    "id": "-69:all",
-    "group_description": "group can do anything"
+  "group_creator": "admin",
+  "group_name": "all",
+  "group_create": "2021-12-06 18:56:32",
+  "graphspace": "DEFAULT",
+  "group_update": "2021-12-06 18:56:32",
+  "id": "all",
+  "group_description": "group can do anything"
 }
 ```
 
@@ -328,11 +306,6 @@ POST http://localhost:8080/graphspaces/{graphspace}/auth/groups
 ##### Method & Url
 
 ```
-# 旧版
-DELETE http://localhost:8080/graphs/auth/groups/-69:grant
-```
-```
-# 新版
 DELETE http://localhost:8080/graphspaces/{graphspace}/auth/groups/grant
 ```
 ##### Response Status
@@ -356,11 +329,6 @@ DELETE http://localhost:8080/graphspaces/{graphspace}/auth/groups/grant
 ##### Method & Url
 
 ```
-# 旧版
-PUT http://localhost:8080/graphs/auth/groups/-69:grant
-```
-```
-# 新版
 PUT http://localhost:8080/graphspaces/{graphspace}/auth/groups/grant
 ```
 
@@ -368,8 +336,8 @@ PUT http://localhost:8080/graphspaces/{graphspace}/auth/groups/grant
 修改group_description
 ```json
 {
-    "group_name": "grant",
-    "group_description": "grant"
+  "group_name": "all",
+  "group_description": "modify description"
 }
 ```
 
@@ -383,12 +351,13 @@ PUT http://localhost:8080/graphspaces/{graphspace}/auth/groups/grant
 返回结果是包含修改过的内容在内的整个用户组对象
 ```json
 {
-    "group_creator": "admin",
-    "group_name": "grant",
-    "group_create": "2020-11-12 09:50:58.458",
-    "group_update": "2020-11-12 09:57:58.155",
-    "id": "-69:grant",
-    "group_description": "grant"
+  "group_creator": "admin",
+  "group_name": "all",
+  "group_create": "2021-12-06 18:58:36",
+  "graphspace": "DEFAULT",
+  "group_update": "2021-12-06 18:59:12",
+  "id": "all",
+  "group_description": "modify description"
 }
 ```
 
@@ -401,11 +370,6 @@ PUT http://localhost:8080/graphspaces/{graphspace}/auth/groups/grant
 ##### Method & Url
 
 ```
-# 旧版
-GET http://localhost:8080/graphs/auth/groups
-```
-```
-# 新版
 GET http://localhost:8080/graphspaces/{graphspace}/auth/groups
 ```
 ##### Response Status
@@ -418,16 +382,17 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/groups
 
 ```json
 {
-    "groups": [
-        {
-            "group_creator": "admin",
-            "group_name": "all",
-            "group_create": "2020-11-11 15:46:08.791",
-            "group_update": "2020-11-11 15:46:08.791",
-            "id": "-69:all",
-            "group_description": "group can do anything"
-        }
-    ]
+  "groups": [
+    {
+      "group_creator": "admin",
+      "group_name": "all",
+      "group_create": "2021-12-06 18:58:36",
+      "graphspace": "DEFAULT",
+      "group_update": "2021-12-06 18:59:12",
+      "id": "all",
+      "group_description": "modify description"
+    }
+  ]
 }
 ```
 
@@ -440,11 +405,6 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/groups
 ##### Method & Url
 
 ```
-# 旧版
-GET http://localhost:8080/graphs/auth/groups/-69:all
-```
-```
-# 新版
 GET http://localhost:8080/graphspaces/{graphspace}/auth/groups/all
 ```
 ##### Response Status
@@ -457,12 +417,13 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/groups/all
 
 ```json
 {
-    "group_creator": "admin",
-    "group_name": "all",
-    "group_create": "2020-11-11 15:46:08.791",
-    "group_update": "2020-11-11 15:46:08.791",
-    "id": "-69:all",
-    "group_description": "group can do anything"
+  "group_creator": "admin",
+  "group_name": "all",
+  "group_create": "2021-12-06 18:58:36",
+  "graphspace": "DEFAULT",
+  "group_update": "2021-12-06 18:59:12",
+  "id": "all",
+  "group_description": "modify description"
 }
 ```
 
@@ -499,7 +460,7 @@ enum ResourceType { NONE STATUS, VERTEX, EDGE, VERTEX_AGGR, EDGE_AGGR, VAR, GREM
 这些类型按照影响的范围是基本有序的，范围从小到大。比如：NONE 是最低级别，表示没有资源；ALL 属于比较高的级别，表示所有的图数据（顶点和边）和元数据（schema）；ROOT是最高级别，表示根资源。另外有一些“综合性“的类型，比如：
 - SCHEMA，表示全部元数据，即PROPERTY_KEY、VERTEX_LABEL、EDGELABEL 和 INDEXLABEL
 - ALL，表示全部图数据和元数据，即VERTEX、EDGE 和 SCHEMA等 
-- ROOT，表示根，包括 ALL 和权限相关的资源
+- ROOT，表示根，包括ALL相关的资源
 
 注：根据访问资源的依赖属性，选择合适的类型值。 例如：
 
@@ -509,25 +470,20 @@ enum ResourceType { NONE STATUS, VERTEX, EDGE, VERTEX_AGGR, EDGE_AGGR, VAR, GREM
 
 ```json
 {
-    "target_name": "all",
-    "target_graph": "hugegraph",
-    "target_url": "127.0.0.1:8080",
-    "target_resources": [
-        {
-            "type": "ALL"
-        }
-    ]
+  "target_name":"all_targets",
+  "target_graph": "hugegraph",
+  "target_url": "127.0.0.1:8080",
+  "target_resources": [
+    {
+      "type": "ALL"
+    }
+  ]
 }
 ```
 
 ##### Method & Url
 
 ```
-# 旧版
-POST http://localhost:8080/graphs/auth/targets
-```
-```
-# 新版
 POST http://localhost:8080/graphspaces/{graphspace}/auth/targets
 ```
 
@@ -541,20 +497,21 @@ POST http://localhost:8080/graphspaces/{graphspace}/auth/targets
 
 ```json
 {
-    "target_creator": "admin",
-    "target_name": "all",
-    "target_url": "127.0.0.1:8080",
-    "target_graph": "hugegraph",
-    "target_create": "2020-11-11 15:32:01.192",
-    "target_resources": [
-        {
-            "type": "ALL",
-            "label": "*",
-            "properties": null
-        }
-    ],
-    "id": "-77:all",
-    "target_update": "2020-11-11 15:32:01.192"
+  "target_creator": "admin",
+  "target_name": "all_targets",
+  "target_url": "127.0.0.1:8080",
+  "graphspace": "DEFAULT",
+  "target_graph": "hugegraph",
+  "target_create": "2021-12-06 19:45:28",
+  "target_resources": [
+    {
+      "type": "ALL",
+      "label": "*",
+      "properties": null
+    }
+  ],
+  "id": "all_targets",
+  "target_update": "2021-12-06 19:45:28"
 }
 ```
 
@@ -568,12 +525,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/auth/targets
 ##### Method & Url
 
 ```
-# 旧版
-DELETE http://localhost:8080/graphs/auth/targets/-77:gremlin
-```
-```
-# 新版
-DELETE http://localhost:8080/graphspaces/{graphspace}/auth/targets/gremlin
+DELETE http://localhost:8080/graphspaces/{graphspace}/auth/targets/all_targets
 ```
 ##### Response Status
 
@@ -597,26 +549,21 @@ DELETE http://localhost:8080/graphspaces/{graphspace}/auth/targets/gremlin
 ##### Method & Url
 
 ```
-# 旧版
-PUT http://localhost:8080/graphs/auth/targets/-77:gremlin
-```
-```
-# 新版
-PUT http://localhost:8080/graphspaces/{graphspace}/auth/targets/gremlin
+PUT http://localhost:8080/graphspaces/{graphspace}/auth/targets/all_targets
 ```
 
 ##### Request Body
 修改资源定义中的type
 ```json
 {
-    "target_name": "gremlin",
-    "target_graph": "hugegraph",
-    "target_url": "127.0.0.1:8080",
-    "target_resources": [
-        {
-            "type": "NONE"
-        }
-    ]
+  "target_name":"all_targets",
+  "target_graph": "hugegraph",
+  "target_url": "127.0.0.1:8080",
+  "target_resources": [
+    {
+      "type": "NONE"
+    }
+  ]
 }
 ```
 
@@ -630,20 +577,21 @@ PUT http://localhost:8080/graphspaces/{graphspace}/auth/targets/gremlin
 返回结果是包含修改过的内容在内的整个用户组对象
 ```json
 {
-    "target_creator": "admin",
-    "target_name": "gremlin",
-    "target_url": "127.0.0.1:8080",
-    "target_graph": "hugegraph",
-    "target_create": "2020-11-12 09:34:13.848",
-    "target_resources": [
-        {
-            "type": "NONE",
-            "label": "*",
-            "properties": null
-        }
-    ],
-    "id": "-77:gremlin",
-    "target_update": "2020-11-12 09:37:12.780"
+  "target_creator": "admin",
+  "target_name": "all_targets",
+  "target_url": "127.0.0.1:8080",
+  "graphspace": "DEFAULT",
+  "target_graph": "hugegraph",
+  "target_create": "2021-12-06 19:45:28",
+  "target_resources": [
+    {
+      "type": "NONE",
+      "label": "*",
+      "properties": null
+    }
+  ],
+  "id": "all_targets",
+  "target_update": "2021-12-06 19:47:03"
 }
 ```
 
@@ -656,11 +604,6 @@ PUT http://localhost:8080/graphspaces/{graphspace}/auth/targets/gremlin
 ##### Method & Url
 
 ```
-# 旧版
-GET http://localhost:8080/graphs/auth/targets
-```
-```
-# 新版
 GET http://localhost:8080/graphspaces/{graphspace}/auth/targets
 ```
 ##### Response Status
@@ -673,40 +616,25 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/targets
 
 ```json
 {
-    "targets": [
+  "targets": [
+    {
+      "target_creator": "admin",
+      "target_name": "all_targets",
+      "target_url": "127.0.0.1:8080",
+      "graphspace": "DEFAULT",
+      "target_graph": "hugegraph",
+      "target_create": "2021-12-06 19:45:28",
+      "target_resources": [
         {
-            "target_creator": "admin",
-            "target_name": "all",
-            "target_url": "127.0.0.1:8080",
-            "target_graph": "hugegraph",
-            "target_create": "2020-11-11 15:32:01.192",
-            "target_resources": [
-                {
-                    "type": "ALL",
-                    "label": "*",
-                    "properties": null
-                }
-            ],
-            "id": "-77:all",
-            "target_update": "2020-11-11 15:32:01.192"
-        },
-        {
-            "target_creator": "admin",
-            "target_name": "grant",
-            "target_url": "127.0.0.1:8080",
-            "target_graph": "hugegraph",
-            "target_create": "2020-11-11 15:43:24.841",
-            "target_resources": [
-                {
-                    "type": "GRANT",
-                    "label": "*",
-                    "properties": null
-                }
-            ],
-            "id": "-77:grant",
-            "target_update": "2020-11-11 15:43:24.841"
+          "type": "NONE",
+          "label": "*",
+          "properties": null
         }
-    ]
+      ],
+      "id": "all_targets",
+      "target_update": "2021-12-06 19:47:03"
+    }
+  ]
 }
 ```
 
@@ -719,12 +647,8 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/targets
 ##### Method & Url
 
 ```
-# 旧版
-GET http://localhost:8080/graphs/auth/targets/-77:grant
-```
-```
 # 新版
-GET http://localhost:8080/graphspaces/{graphspace}/auth/targets/grant
+GET http://localhost:8080/graphspaces/{graphspace}/auth/targets/all_targets
 ```
 
 ##### Response Status
@@ -737,20 +661,21 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/targets/grant
 
 ```json
 {
-    "target_creator": "admin",
-    "target_name": "grant",
-    "target_url": "127.0.0.1:8080",
-    "target_graph": "hugegraph",
-    "target_create": "2020-11-11 15:43:24.841",
-    "target_resources": [
-        {
-            "type": "GRANT",
-            "label": "*",
-            "properties": null
-        }
-    ],
-    "id": "-77:grant",
-    "target_update": "2020-11-11 15:43:24.841"
+  "target_creator": "admin",
+  "target_name": "all_targets",
+  "target_url": "127.0.0.1:8080",
+  "graphspace": "DEFAULT",
+  "target_graph": "hugegraph",
+  "target_create": "2021-12-06 19:45:28",
+  "target_resources": [
+    {
+      "type": "NONE",
+      "label": "*",
+      "properties": null
+    }
+  ],
+  "id": "all_targets",
+  "target_update": "2021-12-06 19:47:03"
 }
 ```
 
@@ -772,8 +697,9 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/targets/grant
 
 ```json
 {
-    "user": "-63:tester",
-    "group": "-69:all"
+  "user": "tester",
+  "group": "all",
+  "belong_description": "none description"
 }
 ```
 
@@ -781,11 +707,6 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/targets/grant
 ##### Method & Url
 
 ```
-# 旧版
-POST http://localhost:8080/graphs/auth/belongs
-```
-```
-# 新版
 POST http://localhost:8080/graphspaces/{graphspace}/auth/belongs
 ```
 ##### Response Status
@@ -798,12 +719,14 @@ POST http://localhost:8080/graphspaces/{graphspace}/auth/belongs
 
 ```json
 {
-    "belong_create": "2020-11-11 16:19:35.422",
-    "belong_creator": "admin",
-    "belong_update": "2020-11-11 16:19:35.422",
-    "id": "S-63:tester>-82>>S-69:all",
-    "user": "-63:tester",
-    "group": "-69:all"
+  "belong_description": "none description",
+  "belong_create": "2021-12-06 19:51:14",
+  "belong_creator": "admin",
+  "graphspace": "DEFAULT",
+  "belong_update": "2021-12-06 19:51:14",
+  "id": "tester->all",
+  "user": "tester",
+  "group": "all"
 }
 ```
 
@@ -816,12 +739,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/auth/belongs
 ##### Method & Url
 
 ```
-# 旧版
-DELETE http://localhost:8080/graphs/auth/belongs/S-63:tester>-82>>S-69:grant
-```
-```
-# 新版
-DELETE http://localhost:8080/graphspaces/{graphspace}/auth/belongs/tester>8>grant
+DELETE http://localhost:8080/graphspaces/{graphspace}/auth/belongs/tester->all
 ```
 ##### Response Status
 
@@ -845,19 +763,15 @@ DELETE http://localhost:8080/graphspaces/{graphspace}/auth/belongs/tester>8>gran
 ##### Method & Url
 
 ```
-# 旧版
-PUT http://localhost:8080/graphs/auth/belongs/S-63:tester>-82>>S-69:grant
-```
-```
 # 新版
-PUT http://localhost:8080/graphspaces/{graphspace}/auth/belongs/tester>8>grant
+PUT http://localhost:8080/graphspaces/{graphspace}/auth/belongs/tester->all
 ```
 
 ##### Request Body
 修改belong_description
 ```json
 {
-    "belong_description": "update test"
+  "belong_description": "modify description"
 }
 ```
 
@@ -871,13 +785,14 @@ PUT http://localhost:8080/graphspaces/{graphspace}/auth/belongs/tester>8>grant
 返回结果是包含修改过的内容在内的整个用户组对象
 ```json
 {
-    "belong_description": "update test",
-    "belong_create": "2020-11-12 10:40:21.720",
-    "belong_creator": "admin",
-    "belong_update": "2020-11-12 10:42:47.265",
-    "id": "S-63:tester>-82>>S-69:grant",
-    "user": "-63:tester",
-    "group": "-69:grant"
+  "belong_description": "modify description",
+  "belong_create": "2021-12-06 19:51:14",
+  "belong_creator": "admin",
+  "graphspace": "DEFAULT",
+  "belong_update": "2021-12-07 09:58:56",
+  "id": "tester->all",
+  "user": "tester",
+  "group": "all"
 }
 ```
 
@@ -891,11 +806,6 @@ PUT http://localhost:8080/graphspaces/{graphspace}/auth/belongs/tester>8>grant
 ##### Method & Url
 
 ```
-# 旧版
-GET http://localhost:8080/graphs/auth/belongs
-```
-```
-# 新版
 GET http://localhost:8080/graphspaces/{graphspace}/auth/belongs
 ```
 
@@ -909,16 +819,18 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/belongs
 
 ```json
 {
-    "belongs": [
-        {
-            "belong_create": "2020-11-11 16:19:35.422",
-            "belong_creator": "admin",
-            "belong_update": "2020-11-11 16:19:35.422",
-            "id": "S-63:tester>-82>>S-69:all",
-            "user": "-63:tester",
-            "group": "-69:all"
-        }
-    ]
+  "belongs": [
+    {
+      "belong_description": "modify description",
+      "belong_create": "2021-12-06 19:51:14",
+      "belong_creator": "admin",
+      "graphspace": "DEFAULT",
+      "belong_update": "2021-12-07 09:58:56",
+      "id": "tester->all",
+      "user": "tester",
+      "group": "all"
+    }
+  ]
 }
 ```
 
@@ -931,12 +843,7 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/belongs
 ##### Method & Url
 
 ```
-# 旧版
-GET http://localhost:8080/graphs/auth/belongs/S-63:tester>-82>>S-69:all
-```
-```
-# 新版
-GET http://localhost:8080/graphspaces/{graphspace}/auth/belongs/tester>2>all
+GET http://localhost:8080/graphspaces/{graphspace}/auth/belongs/tester->all
 ```
 
 ##### Response Status
@@ -949,17 +856,19 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/belongs/tester>2>all
 
 ```json
 {
-    "belong_create": "2020-11-11 16:19:35.422",
-    "belong_creator": "admin",
-    "belong_update": "2020-11-11 16:19:35.422",
-    "id": "S-63:tester>-82>>S-69:all",
-    "user": "-63:tester",
-    "group": "-69:all"
+  "belong_description": "modify description",
+  "belong_create": "2021-12-06 19:51:14",
+  "belong_creator": "admin",
+  "graphspace": "DEFAULT",
+  "belong_update": "2021-12-07 09:58:56",
+  "id": "tester->all",
+  "user": "tester",
+  "group": "all"
 }
 ```
 
 ### 9.6 赋权（Access）API
-给用户组赋予资源的权限，主要包含：读操作(READ)、写操作(WRITE)、删除操作(DELETE)、执行操作(EXECUTE)等。  
+给用户组赋予资源的权限，主要包含：读操作(READ)、写操作(WRITE)、删除操作(DELETE)、执行操作(EXECUTE)、图空间管理(SPACE)、运维管理(OP)等。  
 赋权接口包括：赋权的创建、删除、修改和查询。
 
 注意：需要图空间管理员或者超级管理员权限
@@ -985,20 +894,15 @@ access_permission：
 
 ```json
 {
-    "group": "-69:all",
-    "target": "-77:all",
-    "access_permission": "READ"
+  "group": "all",
+  "target": "all_targets",
+  "access_permission": "READ"
 }
 ```
 
 ##### Method & Url
 
 ```
-# 旧版
-POST http://localhost:8080/graphs/auth/accesses
-```
-```
-# 新版
 POST http://localhost:8080/graphspaces/{graphspace}/auth/accesses
 ```
 
@@ -1012,13 +916,14 @@ POST http://localhost:8080/graphspaces/{graphspace}/auth/accesses
 
 ```json
 {
-    "access_permission": "READ",
-    "access_create": "2020-11-11 15:54:54.008",
-    "id": "S-69:all>-88>11>S-77:all",
-    "access_update": "2020-11-11 15:54:54.008",
-    "access_creator": "admin",
-    "group": "-69:all",
-    "target": "-77:all"
+  "access_permission": "READ",
+  "graphspace": "DEFAULT",
+  "access_create": "2021-12-07 10:08:44",
+  "id": "all->1->all_targets",
+  "access_update": "2021-12-07 10:08:44",
+  "access_creator": "admin",
+  "group": "all",
+  "target": "all_targets"
 }
 ```
 
@@ -1032,12 +937,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/auth/accesses
 ##### Method & Url
 
 ```
-# 旧版
-DELETE http://localhost:8080/graphs/auth/accesses/S-69:all>-88>12>S-77:all
-```
-```
-# 新版
-DELETE http://localhost:8080/graphspaces/{graphspace}/auth/accesses/all>8>all
+DELETE http://localhost:8080/graphspaces/{graphspace}/auth/accesses/all->1->all_targets
 ```
 
 ##### Response Status
@@ -1062,19 +962,14 @@ DELETE http://localhost:8080/graphspaces/{graphspace}/auth/accesses/all>8>all
 ##### Method & Url
 
 ```
-# 旧版
-PUT http://localhost:8080/graphs/auth/accesses/S-69:all>-88>12>S-77:all
-```
-```
-# 新版
-PUT http://localhost:8080/graphspaces/{graphspace}/auth/accesses/all>8>all
+PUT http://localhost:8080/graphspaces/{graphspace}/auth/accesses/all->1->all_targets
 ```
 
 ##### Request Body
 修改access_description
 ```json
 {
-    "access_description": "test"
+  "access_description": "update"
 }
 ```
 
@@ -1088,14 +983,15 @@ PUT http://localhost:8080/graphspaces/{graphspace}/auth/accesses/all>8>all
 返回结果是包含修改过的内容在内的整个用户组对象
 ```json
 {
-    "access_description": "test",
-    "access_permission": "WRITE",
-    "access_create": "2020-11-12 10:12:03.074",
-    "id": "S-69:all>-88>12>S-77:all",
-    "access_update": "2020-11-12 10:16:18.637",
-    "access_creator": "admin",
-    "group": "-69:all",
-    "target": "-77:all"
+  "access_description": "update",
+  "access_permission": "READ",
+  "graphspace": "DEFAULT",
+  "access_create": "2021-12-07 10:08:44",
+  "id": "all->1->all_targets",
+  "access_update": "2021-12-07 10:10:48",
+  "access_creator": "admin",
+  "group": "all",
+  "target": "all_targets"
 }
 ```
 
@@ -1108,11 +1004,6 @@ PUT http://localhost:8080/graphspaces/{graphspace}/auth/accesses/all>8>all
 ##### Method & Url
 
 ```
-# 旧版
-GET http://localhost:8080/graphs/auth/accesses
-```
-```
-# 新版
 GET http://localhost:8080/graphspaces/{graphspace}/auth/accesses
 ```
 
@@ -1126,17 +1017,19 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/accesses
 
 ```json
 {
-    "accesses": [
-        {
-            "access_permission": "READ",
-            "access_create": "2020-11-11 15:54:54.008",
-            "id": "S-69:all>-88>11>S-77:all",
-            "access_update": "2020-11-11 15:54:54.008",
-            "access_creator": "admin",
-            "group": "-69:all",
-            "target": "-77:all"
-        }
-    ]
+  "accesses": [
+    {
+      "access_description": "update",
+      "access_permission": "READ",
+      "graphspace": "DEFAULT",
+      "access_create": "2021-12-07 10:08:44",
+      "id": "all->1->all_targets",
+      "access_update": "2021-12-07 10:10:48",
+      "access_creator": "admin",
+      "group": "all",
+      "target": "all_targets"
+    }
+  ]
 }
 ```
 
@@ -1149,12 +1042,7 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/accesses
 ##### Method & Url
 
 ```
-# 旧版
-GET http://localhost:8080/graphs/auth/accesses/S-69:all>-88>11>S-77:all
-```
-```
-# 新版
-GET http://localhost:8080/graphspaces/{graphspace}/auth/accesses/all>8>all
+GET http://localhost:8080/graphspaces/{graphspace}/auth/accesses/all->1->all_targets
 ```
 
 ##### Response Status
@@ -1167,13 +1055,15 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/accesses/all>8>all
 
 ```json
 {
-    "access_permission": "READ",
-    "access_create": "2020-11-11 15:54:54.008",
-    "id": "S-69:all>-88>11>S-77:all",
-    "access_update": "2020-11-11 15:54:54.008",
-    "access_creator": "admin",
-    "group": "-69:all",
-    "target": "-77:all"
+  "access_description": "update",
+  "access_permission": "READ",
+  "graphspace": "DEFAULT",
+  "access_create": "2021-12-07 10:08:44",
+  "id": "all->1->all_targets",
+  "access_update": "2021-12-07 10:10:48",
+  "access_creator": "admin",
+  "group": "all",
+  "target": "all_targets"
 }
 ```
 
@@ -1191,11 +1081,6 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/accesses/all>8>all
 ##### Method & Url
 
 ```
-# 旧版
-POST http://localhost:8080/graphs/auth/login
-```
-```
-# 新版
 POST http://localhost:8080/auth/login
 ```
 
@@ -1219,7 +1104,7 @@ POST http://localhost:8080/auth/login
 
 ```json
 {
-  "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX25hbWUiOiJneWcxMjM0IiwidXNlcl9pZCI6Ii02MzpneWcxMjM0IiwiZXhwIjoxNjMyNjUzOTE2fQ.T4psT797RIaPqvkqtgVug1qIZQ2djKBLI5yOxQRjuZU"
+  "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInVzZXJfaWQiOiJhZG1pbiIsImV4cCI6MTYzODg1NDA0M30.2zOSTC98Z-UMo-QblTdPVTGsnFMN4G5dZeTV0-PCuD8"
 }
 ```
 
@@ -1228,11 +1113,6 @@ POST http://localhost:8080/auth/login
 ##### Method & Url
 
 ```
-# 旧版
-POST http://localhost:8080/graphs/auth/verify
-```
-```
-# 新版
 POST http://localhost:8080/auth/verify
 ```
 
@@ -1246,7 +1126,7 @@ POST http://localhost:8080/auth/verify
 
 ```json
 {
-    "user_name": "admin",
-    "user_id": "-63:admin"
+  "user_name": "admin",
+  "user_id": "admin"
 }
 ```
