@@ -2,13 +2,13 @@
 
 ### Latest version
 
-The latest HugeGraph: **0.11.2**, released on _2019-11-20_.
+The latest HugeGraph: **0.12.0**, released on _2022-12-24_.
 
 components       | description          | download
 ---------------- | -------------------- | ----------------------------------------------------------------------------------------------------------------
-HugeGraph-Server | HugeGraph的主程序      | [0.11.2](https://github.com/hugegraph/hugegraph/releases/download/v0.11.2/hugegraph-0.11.2.tar.gz)
+HugeGraph-Server | HugeGraph的主程序      | [0.12.0](https://github.com/hugegraph/hugegraph/releases/download/v0.12.0/hugegraph-0.12.0.tar.gz)
 HugeGraph-Hubble | 基于Web的可视化图形界面  | [1.5.0](https://github.com/hugegraph/hugegraph-hubble/releases/download/v1.5.0/hugegraph-hubble-1.5.0.tar.gz)
-HugeGraph-Loader | 数据导入工具            | [0.11.1](https://github.com/hugegraph/hugegraph-loader/releases/download/v0.11.1/hugegraph-loader-0.11.1.tar.gz)
+HugeGraph-Loader | 数据导入工具            | [0.11.3](https://github.com/hugegraph/hugegraph-loader/releases/download/v0.11.3/hugegraph-loader-0.11.3.tar.gz)
 HugeGraph-Tools  | 命令行工具集            | [1.5.0](https://github.com/hugegraph/hugegraph-tools/releases/download/v1.5.0/hugegraph-tools-1.5.0.tar.gz)
 HugeGraph-Spark  | 基于Spark GraphX的图分析工具 | 
 
@@ -16,6 +16,7 @@ HugeGraph-Spark  | 基于Spark GraphX的图分析工具 |
 
 server                                                                                           | client | loader                                                                                                                                                                      | studio &#124; hubble                                                                                                             | spark | common | tools
 ------------------------------------------------------------------------------------------------ | ------ | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ----- | ------ | -----------------------------------------------------------------------------------------------------------
+[0.12.0](https://github.com/hugegraph/hugegraph/releases/download/v0.12.0/hugegraph-0.12.0.tar.gz)  | [1.9.6](https://mvnrepository.com/artifact/com.baidu.hugegraph/hugegraph-client/1.9.6)  | [0.11.3](https://github.com/hugegraph/hugegraph-loader/releases/download/v0.11.1/hugegraph-loader-0.11.3.tar.gz)   | [0.11.0](https://github.com/hugegraph/hugegraph-studio/releases/download/v0.11.0/hugegraph-studio-0.11.0.tar.gz) &#124; [1.5.0](https://github.com/hugegraph/hugegraph-hubble/releases/download/v1.5.0/hugegraph-hubble-1.5.0.tar.gz)      |       | [2.0.1](https://mvnrepository.com/artifact/com.baidu.hugegraph/hugegraph-common/2.0.1)  | [1.5.0](https://github.com/hugegraph/hugegraph-tools/releases/download/v1.5.0/hugegraph-tools-1.5.0.tar.gz)
 [0.11.2](https://github.com/hugegraph/hugegraph/releases/download/v0.11.2/hugegraph-0.11.2.tar.gz)  | [1.9.1](https://mvnrepository.com/artifact/com.baidu.hugegraph/hugegraph-client/1.9.1)  | [0.11.1](https://github.com/hugegraph/hugegraph-loader/releases/download/v0.11.1/hugegraph-loader-0.11.1.tar.gz)   | [0.11.0](https://github.com/hugegraph/hugegraph-studio/releases/download/v0.11.0/hugegraph-studio-0.11.0.tar.gz) &#124; [1.5.0](https://github.com/hugegraph/hugegraph-hubble/releases/download/v1.5.0/hugegraph-hubble-1.5.0.tar.gz)      |       | [1.8.1](https://mvnrepository.com/artifact/com.baidu.hugegraph/hugegraph-common/1.8.1)  | [1.5.0](https://github.com/hugegraph/hugegraph-tools/releases/download/v1.5.0/hugegraph-tools-1.5.0.tar.gz)
 [0.10.4](https://github.com/hugegraph/hugegraph/releases/download/v0.10.4/hugegraph-0.10.4.tar.gz)  | [1.8.0](https://mvnrepository.com/artifact/com.baidu.hugegraph/hugegraph-client/1.8.0)  | [0.10.1](https://github.com/hugegraph/hugegraph-loader/releases/download/v0.10.1/hugegraph-loader-0.10.1.tar.gz)   | [0.10.0](https://github.com/hugegraph/hugegraph-studio/releases/download/v0.10.0/hugegraph-studio-0.10.0.tar.gz)      |       | [1.6.16](https://mvnrepository.com/artifact/com.baidu.hugegraph/hugegraph-common/1.6.16)  | [1.4.0](https://github.com/hugegraph/hugegraph-tools/releases/download/v1.4.0/hugegraph-tools-1.4.0.tar.gz)
 [0.9.2](https://github.com/hugegraph/hugegraph/releases/download/v0.9.2/hugegraph-0.9.2.tar.gz)  | [1.7.0](https://mvnrepository.com/artifact/com.baidu.hugegraph/hugegraph-client/1.7.0)  | [0.9.0](https://github.com/hugegraph/hugegraph-loader/releases/download/v0.9.0/hugegraph-loader-0.9.0.tar.gz)   | [0.9.0](https://github.com/hugegraph/hugegraph-studio/releases/download/v0.9.0/hugegraph-studio-0.9.0.tar.gz)      |       | [1.6.0](https://mvnrepository.com/artifact/com.baidu.hugegraph/hugegraph-common/1.6.0)  | [1.3.0](https://github.com/hugegraph/hugegraph-tools/releases/download/v1.3.0/hugegraph-tools-1.3.0.tar.gz)
@@ -29,6 +30,7 @@ server                                                                          
 
 ### Release Notes
 
+- 2022-12-24: Release HugeGraph 0.12.0，see [HugeGraph 0.12.0 Release Notes](changelog/hugegraph-0.12.0-release-notes.md)
 - 2020-11-20: Release HugeGraph 0.11.2，see [HugeGraph 0.11.2 Release Notes](changelog/hugegraph-0.11.2-release-notes.md)
 - 2019-11-08: Release HugeGraph 0.10.4，see [HugeGraph 0.10.4 Release Notes](changelog/hugegraph-0.10.4-release-notes.md)
 - 2019-04-19: Release HugeGraph 0.9.2，see [HugeGraph 0.9.2 Release Notes](changelog/hugegraph-0.9.2-release-notes.md)
