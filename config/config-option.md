@@ -25,8 +25,8 @@ server.role                        | master                                     
 restserver.url                     | http://127.0.0.1:8080                            | The url for listening of rest server.
 ssl.keystore_file                  | server.keystore                                  | The path of server keystore file used when https protocol is enabled.
 ssl.keystore_password              |                                                  | The password of the path of the server keystore file used when the https protocol is enabled.
-restserver.max_worker_threads      | 2 * CPUs                                         | The maxmium worker threads of rest server.
-restserver.min_free_memory         | 64                                               | The minmium free memory(MB) of rest server, requests will be rejected when the available memory of system is lower than this value.
+restserver.max_worker_threads      | 2 * CPUs                                         | The maximum worker threads of rest server.
+restserver.min_free_memory         | 64                                               | The minimum free memory(MB) of rest server, requests will be rejected when the available memory of system is lower than this value.
 restserver.request_timeout         | 30                                               | The time in seconds within which a request must complete, -1 means no timeout.
 restserver.connection_idle_timeout | 30                                               | The time in seconds to keep an inactive connection alive, -1 means no timeout.
 restserver.connection_max_requests | 256                                              | The max number of HTTP requests allowed to be processed on one keep-alive connection, -1 means unlimited.
@@ -36,11 +36,17 @@ gremlinserver.timeout              | 30                                         
 batch.max_edges_per_batch          | 500                                              | The maximum number of edges submitted per batch.
 batch.max_vertices_per_batch       | 500                                              | The maximum number of vertices submitted per batch.
 batch.max_write_ratio              | 50                                               | The maximum thread ratio for batch writing, only take effect if the batch.max_write_threads is 0.
-batch.max_write_threads            | 0                                                | The maximum threads for batch writing, if the value is 0, the actual value will be set to batch.max_write_ratio * total-rest-threads.
+batch.max_write_threads            | 0                                                | The maximum threads for batch writing, if the value is 0, the actual value will be set to batch.max_write_ratio * restserver.max_worker_threads.
 auth.authenticator                 |                                                  | The class path of authenticator implemention. e.g., com.baidu.hugegraph.auth.StandardAuthenticator, or com.baidu.hugegraph.auth.ConfigAuthenticator.
 auth.admin_token                   | 162f7848-0b6d-4faf-b557-3a0797869c55             | Token for administrator operations, only for com.baidu.hugegraph.auth.ConfigAuthenticator.
-auth.graph_store                   | hugegraph                                        | The graph name used to store users, only for com.baidu.hugegraph.auth.StandardAuthenticator.
+auth.graph_store                   | hugegraph                                        | The name of graph used to store authentication information, like users, only for com.baidu.hugegraph.auth.StandardAuthenticator.
 auth.user_tokens                   | [hugegraph:9fd95c9c-711b-415b-b85f-d4df46ba5c31] | The map of user tokens with name and password, only for com.baidu.hugegraph.auth.ConfigAuthenticator.
+auth.audit_log_rate                | 1000.0                                           | The max rate of audit log output per user, default value is 1000 records per second.
+auth.cache_capacity                | 10240                                            | The max cache capacity of each auth cache item.
+auth.cache_expire                  | 600                                              | The expiration time in seconds of vertex cache.
+auth.remote_url                    |                                                  | If the address is empty, it provide auth service, otherwise it is auth client and also provide auth service through rpc forwarding. The remote url can be set to multiple addresses, which are concat by ','.
+auth.token_expire                  | 86400                                            | The expiration time in seconds after token created
+auth.token_secret                  | FXQXbJtbCLxODc6tGci732pkH1cyf8Qg                 | Secret key of HS256 algorithm.
 exception.allow_trace              | false                                            | Whether to allow exception trace stack.
 
 ### 基本配置项
@@ -49,7 +55,7 @@ exception.allow_trace              | false                                      
 
 config option                    | default value                   | descrition
 -------------------------------- | ------------------------------- | -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-gremlin.graph	                 | com.baidu.hugegraph.HugeFactory | The entrence of gremlin server to create graph.
+gremlin.graph	                 | com.baidu.hugegraph.HugeFactory | Gremlin entrance to create graph.
 backend                          | rocksdb                         | The data store type, available values are [memory, rocksdb, cassandra, scylladb, hbase, mysql].
 serializer                       | binary                          | The serializer for backend store, available values are [text, binary, cassandra, hbase, mysql].
 store                            | hugegraph                       | The database name like Cassandra Keyspace.
@@ -59,7 +65,7 @@ store.schema                     | m                               | The schema 
 store.system                     | s                               | The system table name, which store system data.
 schema.illegal_name_regex	     | .*\s+$&#124;~.*	               | The regex specified the illegal format for schema name.
 schema.cache_capacity            | 10000                           | The max cache size(items) of schema cache.
-vertex.cache_type                | l1                              | The type of vertex cache, allowed values are [l1, l2].
+vertex.cache_type                | l2                              | The type of vertex cache, allowed values are [l1, l2].
 vertex.cache_capacity            | 10000000                        | The max cache size(items) of vertex cache.
 vertex.cache_expire              | 600                             | The expire time in seconds of vertex cache.
 vertex.check_customized_id_exist | false                           | Whether to check the vertices exist for those using customized id strategy.
@@ -68,9 +74,11 @@ vertex.tx_capacity               | 10000                           | The max siz
 vertex.check_adjacent_vertex_exist | false                         | Whether to check the adjacent vertices of edges exist.
 vertex.lazy_load_adjacent_vertex | true                            | Whether to lazy load adjacent vertices of edges.
 vertex.part_edge_commit_size     | 5000                            | Whether to enable the mode to commit part of edges of vertex, enabled if commit size > 0, 0 means disabled.
-edge.cache_type                  | l1                              | The type of edge cache, allowed values are [l1, l2].
+vertex.encode_primary_key_number | true                            | Whether to encode number value of primary key in vertex id.
+vertex.remove_left_index_at_overwrite | false                      | Whether remove left index at overwrite.
+edge.cache_type                  | l2                              | The type of edge cache, allowed values are [l1, l2].
 edge.cache_capacity              | 1000000                         | The max cache size(items) of edge cache.
-edge.cache_expire                | 600                             | The expire time in seconds of edge cache.
+edge.cache_expire                | 600                             | The expiration time in seconds of edge cache.
 edge.tx_capacity                 | 10000                           | The max size(items) of edges(uncommitted) in transaction.
 query.page_size                  | 500                             | The size of each page when querying by paging.
 query.batch_size                 | 1000                            | The size of each batch when querying by batch.
@@ -79,8 +87,10 @@ query.index_intersect_threshold  | 1000                            | The maximum
 query.ramtable_edges_capacity    | 20000000                        | The maximum number of edges in ramtable, include OUT and IN edges.
 query.ramtable_enable            | false                           | Whether to enable ramtable for query of adjacent edges.
 query.ramtable_vertices_capacity | 10000000                        | The maximum number of vertices in ramtable, generally the largest vertex id is used as capacity.
+query.optimize_aggregate_by_index| false                           | Whether to optimize aggregate query(like count) by index.
 oltp.concurrent_depth            | 10                              | The min depth to enable concurrent oltp algorithm.
 oltp.concurrent_threads          | 10                              | Thread number to concurrently execute oltp algorithm.
+oltp.collection_type             | EC                              | The implementation type of collections used in oltp algorithm.
 rate_limit.read                  | 0                               | The max rate(times/s) to execute query of vertices/edges.
 rate_limit.write                 | 0                               | The max rate(items/s) to add/update/delete vertices/edges.
 task.wait_timeout                | 10                              | Timeout in seconds for waiting for the task to complete,such as when truncating or clearing the backend.
@@ -113,6 +123,25 @@ raft.rpc_connect_timeout         | 5000                            | The rpc con
 raft.rpc_timeout                 | 60000                           | The rpc timeout for jraft rpc.
 raft.rpc_buf_low_water_mark      | 10485760                        | The ChannelOutboundBuffer's low water mark of netty, when buffer size less than this size, the method ChannelOutboundBuffer.isWritable() will return true, it means that low downstream pressure or good network.
 raft.rpc_buf_high_water_mark     | 20971520                        | The ChannelOutboundBuffer's high water mark of netty, only when buffer size exceed this size, the method ChannelOutboundBuffer.isWritable() will return false, it means that the downstream pressure is too great to process the request or network is very congestion, upstream needs to limit rate at this time.
+raft.read_strategy               | ReadOnlyLeaseBased              | The linearizability of read strategy.
+
+### RPC server 配置
+
+config option                  | default value  | descrition
+------------------------------ | -------------- | ------------------------------------------------------------------
+rpc.client_connect_timeout     | 20             | The timeout(in seconds) of rpc client connect to rpc server.
+rpc.client_load_balancer       | consistentHash | The rpc client uses a load-balancing algorithm to access multiple rpc servers in one cluster. Default value is 'consistentHash', means forwording by request parameters.
+rpc.client_read_timeout        | 40             | The timeout(in seconds) of rpc client read from rpc server.
+rpc.client_reconnect_period    | 10             | The period(in seconds) of rpc client reconnect to rpc server.
+rpc.client_retries             | 3              | Failed retry number of rpc client calls to rpc server.
+rpc.config_order               | 999            | Sofa rpc configuration file loading order, the larger the more later loading.
+rpc.logger_impl                | com.alipay.sofa.rpc.log.SLF4JLoggerImpl | Sofa rpc log implementation class.
+rpc.protocol                   | bolt           | Rpc communication protocol, client and server need to be specified the same value.
+rpc.remote_url                 |                | The remote urls of rpc peers, it can be set to multiple addresses, which are concat by ',', empty value means not enabled.
+rpc.server_adaptive_port       | false          | Whether the bound port is adaptive, if it's enabled, when the port is in use, automatically +1 to detect the next available port. Note that this process is not atomic, so there may still be port conflicts.
+rpc.server_host                |                | The hosts/ips bound by rpc server to provide services, empty value means not enabled.
+rpc.server_port                | 8090           | The port bound by rpc server to provide services.
+rpc.server_timeout             | 30             | The timeout(in seconds) of rpc server execution.
 
 ### Cassandra 后端配置项
 
@@ -147,7 +176,7 @@ config option                                   | default value                 
 ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 backend                                         |                                                                                                                                      | Must be set to `rocksdb`.
 serializer                                      |                                                                                                                                      | Must be set to `binary`.
-rocksdb.data_disks                              | []                                                                                                                                   | The optimized disks for storing data of RocksDB. The format of each element: `STORE/TABLE: /path/to/disk`.Allowed keys are [graph/vertex, graph/edge_out, graph/edge_in, graph/secondary_index, graph/range_index]
+rocksdb.data_disks                              | []                                                                                                                                   | The optimized disks for storing data of RocksDB. The format of each element: `STORE/TABLE: /path/disk`.Allowed keys are [g/vertex, g/edge_out, g/edge_in, g/vertex_label_index, g/edge_label_index, g/range_int_index, g/range_float_index, g/range_long_index, g/range_double_index, g/secondary_index, g/search_index, g/shard_index, g/unique_index, g/olap]
 rocksdb.data_path                               | rocksdb-data                                                                                                                         | The path for storing data of RocksDB.
 rocksdb.wal_path                                | rocksdb-data                                                                                                                         | The path for storing WAL of RocksDB.
 rocksdb.allow_mmap_reads                        | false                                                                                                                                | Allow the OS to mmap file for reading sst tables.
@@ -211,6 +240,7 @@ hbase.kerberos_enable    |  false                      | Is Kerberos authenticat
 hbase.kerberos_keytab    |                             | The HBase's key tab file for kerberos authentication.
 hbase.kerberos_principal |                             | The HBase's principal for kerberos authentication.
 hbase.krb5_conf          |  etc/krb5.conf              | Kerberos configuration file, including KDC IP, default realm, etc.
+hbase.hbase_site         | /etc/hbase/conf/hbase-site.xml| The HBase's configuration file
 
 ### MySQL & PostgreSQL 后端配置项
 
@@ -221,11 +251,12 @@ serializer               |                             | Must be set to `mysql`.
 jdbc.driver              | com.mysql.jdbc.Driver       | The JDBC driver class to connect database.
 jdbc.url                 | jdbc:mysql://127.0.0.1:3306 | The url of database in JDBC format.
 jdbc.username            | root                        | The username to login database.
-jdbc.password            |                             | The password corresponding to jdbc.username.
+jdbc.password            | ******                      | The password corresponding to jdbc.username.
 jdbc.ssl_mode            | false                       | The SSL mode of connections with database.
 jdbc.reconnect_interval  | 3                           | The interval(seconds) between reconnections when the database connection fails.
 jdbc.reconnect_max_times | 3                           | The reconnect times when the database connection fails.
 jdbc.storage_engine      | InnoDB                      | The storage engine of backend store database, like InnoDB/MyISAM/RocksDB for MySQL.
+jdbc.postgresql.connect_database | template1           | The database used to connect when init store, drop store or check store exist.
 
 ### PostgreSQL 后端配置项
 
