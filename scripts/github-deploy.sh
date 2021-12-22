@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -x
 # this script is for developers to manually deploy doc to GitHub Pages
 REMOTE="github"
 REMOTE_URL="https://github.com/hugegraph/hugegraph-doc"
