@@ -10,7 +10,6 @@ HugeGraph-Server | HugeGraph的主程序      | [0.12.0](https://github.com/huge
 HugeGraph-Hubble | 基于Web的可视化图形界面  | [1.6.0](https://github.com/hugegraph/hugegraph-hubble/releases/download/v1.6.0/hugegraph-hubble-1.6.0.tar.gz)
 HugeGraph-Loader | 数据导入工具            | [0.12.0](https://github.com/hugegraph/hugegraph-loader/releases/download/v0.12.0/hugegraph-loader-0.12.0.tar.gz)
 HugeGraph-Tools  | 命令行工具集            | [1.6.0](https://github.com/hugegraph/hugegraph-tools/releases/download/v1.6.0/hugegraph-tools-1.6.0.tar.gz)
-HugeGraph-Spark  | 基于Spark GraphX的图分析工具 | 
 
 ### Versions mapping
 
