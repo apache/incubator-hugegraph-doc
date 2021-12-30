@@ -54,7 +54,7 @@
 - 解决 HBase 后端当启用 Kerberos 时初始化失败的问题（hugegraph #1294）
 - 解决 HBase/RocksDB 后端 shard 结束判断错误问题（hugegraph #1306）
 - 解决带权最短路径算法（weighted shortest path）未检查目标顶点存在的问题（hugegraph #1307）
-- 解决 personalrank / neighborrank 算法中非 String 类型 id  的问题（hugegraph #1310）
+- 解决 personalrank/neighborrank 算法中非 String 类型 id  的问题（hugegraph #1310）
 - 检查必须是 master 节点才允许调度 gremlin job（hugegraph #1314）
 - 解决 g.V().hasLabel().limit(n)  因为索引覆盖导致的部分结果不准确问题（hugegraph #1316）
 - 解决 jaccardsimilarity 算法当并集为空时报 NaN 错误的问题（hugegraph #1324）
@@ -94,9 +94,9 @@
 - 解决 sameneighbor 的 limit 参数默认值 10 为 10000000（hugegraph #1530）
 - 解决 clear API 不应该所有后端都调用 create snapshot 的问题（hugegraph #1532）
 - 解决当 loading 模式时创建 Index Label 阻塞问题（hugegraph #1548）
-- 解决增加/移除图到/从 project 的问题（hugegraph #1562）
+- 解决增加图到 project 或从 project 移除图的问题（hugegraph #1562）
 - 改进权限操作的一些错误提示信息（hugegraph #1563）
-- 支持浮点属性设置为Infinity / NaN 的值（hugegraph #1578)
+- 支持浮点属性设置为 Infinity/NaN 的值（hugegraph #1578)
 - 解决 Raft 启用 safe_read 时的 quorum read 问题（hugegraph #1618)
 - 解决 token 过期时间配置的单位问题（hugegraph #1625）
 - 解决 MySQL Statement 资源泄露问题（hugegraph #1627）
@@ -117,7 +117,7 @@
 
 #### 配置项修改：
 
-- 共享 SSL 配置项命名（hugegraph #1260） 
+- 共享 SSL 相关配置项命名（hugegraph #1260）
 - 支持 RocksDB 配置项 rocksdb.level_compaction_dynamic_level_bytes（hugegraph #1262） 
 - 去除 RESFful Server 服务协议配置项 restserver.protocol，自动提取 URL 中的 Schema（hugegraph #1272） 
 - 增加 PostgreSQL 配置项 jdbc.postgresql.connect_database（hugegraph #1293）
@@ -128,8 +128,6 @@
 
 #### 其它修改
 
-- 统一 TinkerPop 的拼写（hugegraph #1252）
-- 重命名 EXPIRED_DELETE_BATCH 为 TASK_TTL_DELETE_BATCH（hugegraph #1253）
 - 增加默认的 SSL Certificate 文件（hugegraph #1254）
 - OLTP 并行请求共享线程池，而非每个请求使用单独的线程池（hugegraph #1258） 
 - 修复 Example 的问题（hugegraph #1308）
@@ -139,7 +137,6 @@
 - 升级存储的版本号（store version），因为 property key 增加了 read frequency（hugegraph #1341）
 - 顶点/边 vertex/edge 的 Get API 使用 queryVertex/queryEdge 方法来替代 iterator 方法（hugegraph #1345）
 - 支持 BFS 优化的多度查询（hugegraph #1359)
-- 重命名 UserManager 为 AuthManager（hugegraph #1363）
 - 改进 RocksDB deleteRange() 带来的查询性能问题（hugegraph #1375）
 - 解决 travis-ci cannot find symbol Namifiable 问题（hugegraph #1376）
 - 确保 RocksDB 快照的磁盘与 data path 指定的一致（hugegraph #1392）
@@ -148,74 +145,53 @@
 - 升级 netty-all 版本 4.1.13.Final 到 4.1.42.Final（hugegraph #1403）
 - 支持 TaskScheduler 暂停当设置为 loading 模式时（hugegraph #1414）
 - 解决 raft-tools 脚本的问题（hugegraph #1416）
-- 解决敏感邮件地址问题（hugegraph #1419）
 - 解决 license params 问题（hugegraph #1420）
-- 支持 travis-ci 安装运行 ScyllaDB 测试（hugegraph #1422）
 - 提升写权限日志的性能，通过 batch flush & async write 方式改进（hugegraph #1448）
 - 增加 MySQL 连接 URL 的日志记录（hugegraph #1451）
-- 增加社区 Issues 模板（hugegraph #1453）
-- 增加 user-api 测试用例（hugegraph #1456）
 - 提升用户信息校验性能（hugegraph# 1460）
-- 增加自动化的 Issue/PR 的 stale/close 流程（hugegraph #1471)
-- 解决 TTL 测试时因为起始时间问题导致的错误（hugegraph #1478）
-- 增加 traversers 接口的测试用例（hugegraph #1489）
+- 解决 TTL 因为起始时间问题导致的错误（hugegraph #1478）
 - 支持日志配置的热加载及对审计日志的压缩（hugegraph #1492）
 - 支持针对用户级别的审计日志的限速（hugegraph #1493）
 - 缓存 RamCache 支持用户自定义的过期时间（hugegraph #1494）
-- 缓存 login role 在 auth client 端以避免反复的 RPC 调用（hugegraph #1507）
+- 在 auth client 端缓存 login role 以避免重复的 RPC 调用（hugegraph #1507）
 - 解决 IdSet.contains() 未复写 AbstractCollection.contains() 问题（hugegraph #1511）
 - 解决当 commitPartOfEdgeDeletions() 失败时，未回滚 rollback 的问题（hugegraph #1513）
-- 使用 GitHub action 来运行 CI（hugegraph #1514）
 - 提升 Cache metrics 性能（hugegraph #1515）
 - 当发生 license 操作错误时，增加打印异常日志（hugegraph #1522）
 - 改进 SimilarsMap 实现（hugegraph #1523）
 - 使用 tokenless 方式来更新 coverage（hugegraph #1529）
-- 改进 Issue 模板使用 forum struct (yaml format)（hugegraph #1531）
 - 改进 project update 接口的代码（hugegraph #1537）
 - 允许从 option() 访问 GRAPH_STORE（hugegraph #1546）
 - 优化 kout/kneighbor 的 count 查询以避免拷贝集合（hugegraph #1550）
 - 优化 shortestpath 遍历方式，以数据量少的一端优先遍历（hugegraph #1569）
 - 完善 rocksdb.data_disks 配置项的 allowed keys 提示信息（hugegraph #1585）
-- 使用 zulu JDK 替代 adopt JDK 运行 CI（hugegraph #1604）
-- 使用 Ubuntu 20.04 环境运行 CI（hugegraph #1613）
 - 为 number id 优化 OLTP 遍历中的 id2code 方法性能（hugegraph #1623）
 - 优化 HugeElement.getProperties() 返回 Collection\<Property>（hugegraph #1624）
-- 解决 MySQL & PostgreSQL 后端 CI 环境问题（hugegraph #1641）
 - 增加 APACHE PROPOSAL 文件（hugegraph #1644）
 - 改进 close tx 的流程（hugegraph #1655）
-- 当 reset()  时为 MySQL close 捕获任何异常（hugegraph #1661）
-- 增加 GitHub downloads 徽标（hugegraph #1666）
-- 增加 license-maven-plugin（hugegraph #1667）
-- 支持通过 GitHub action 来发布 maven package（hugegraph #1669）
-- 解决 resource not closed 的警告（hugegraph #1673）
+- 当 reset() 时为 MySQL close 捕获所有类型异常（hugegraph #1661）
 - 改进 OLAP property 模块代码（hugegraph #1675）
-- 改进查询对象性能（hugegraph #1711）
+- 改进查询模块的执行性能（hugegraph #1711）
 
 ### Loader
 
 - 支持导入 Parquet 格式文件（hugegraph-loader #174）
-- 支持HDFS Krberos 权限验证（hugegraph-loader #176）
+- 支持 HDFS Kerberos 权限验证（hugegraph-loader #176）
 - 支持 HTTPS 协议连接到服务端导入数据（hugegraph-loader #183）
 - 解决 trust store file 路径问题（hugegraph-loader #186）
 - 处理 loading mode 重置的异常（hugegraph-loader #187）
 - 增加在插入数据时对非空属性的检查（hugegraph-loader #190）
-- 使用源码测试代替下载二进制包（hugegraph-loader #191）
 - 解决客户端与服务端时区不同导致的时间判断问题（hugegraph-loader #192）
-- 增加 checkstyle 插件（hugegraph-loader #193）
 - 优化数据解析性能（hugegraph-loader #194）
 - 当用户指定了文件头时，检查其必须不为空（hugegraph-loader #195）
 - 修复示例程序中 MySQL struct.json 格式问题（hugegraph-loader #198）
 - 解决顶点边导入速度不精确的问题（hugegraph-loader #200 #205）
-- 改进配置项和测试的命名（hugegraph-loader #204）
 - 当导入启用 check-vertex 时，确保先导入顶点再导入边（hugegraph-loader #206）
 - 解决边 Json 数据导入格式不统一时数组溢出的问题（hugegraph-loader #211）
 - 解决因边 mapping 文件不存在导致的 NPE 问题（hugegraph-loader #213）
 - 解决读取时间可能出现负数的问题（hugegraph-loader #215)
-- 使用 GitHub Action 运行 CI（hugegraph-loader #217)
-- 增加 Issue 模板和过期 Issue 的自动化处理（hugegraph-loader #219)
 - 改进目录文件的日志打印（hugegraph-loader #223)
 - 改进 loader 的的 Schema 处理流程（hugegraph-loader #230)
-- 改进 CI 流程（hugegraph-loader #231 #232 #234）
 
 ### Tools
 
@@ -227,6 +203,5 @@
 - 支持无参数的 Printer 打印（hugegraph-tools #79）
 - 解决 MacOS free_memory 计算问题（hugegraph-tools #82）
 - 支持备份恢复时指定线程数hugegraph-tools #83）
-- 增加 Issue 模板和过期 Issue 的自动化处理（hugegraph-tools #92)
 - 支持动态创建图、克隆图、删除图等命令（hugegraph-tools #95)
 
