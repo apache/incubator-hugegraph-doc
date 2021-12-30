@@ -749,6 +749,7 @@ schema: 必填
 --trust-store-password |           |         | 请求协议为 https 时，客户端证书密码
 --clear-all-data    | false        |         | 导入数据前是否清除服务端的原有数据
 --clear-timeout     | 240          |         | 导入数据前清除服务端的原有数据的超时时间
+--flush-timeout     | 240          |         | 导入数据后，flush服务端数据的超时时间
 --incremental-mode  | false        |         | 是否使用断点续导模式，仅输入源为 FILE 和 HDFS 支持该模式，启用该模式能从上一次导入停止的地方开始导
 --failure-mode      | false        |         | 失败模式为 true 时，会导入之前失败了的数据，一般来说失败数据文件需要在人工更正编辑好后，再次进行导入
 --batch-insert-threads | CPUs      |         | 批量插入线程池大小 (CPUs是当前OS可用**逻辑核**个数) ，建议不超过服务器CPU数的0.8倍。
