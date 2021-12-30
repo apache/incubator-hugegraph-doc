@@ -2625,7 +2625,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/kneighbors
 
 ```json
 {
-	"sources": "[1:marko, 1:vadas]",
+	"sources": ["1:marko", "1:vadas"],
 	"steps": {
 		"direction": "BOTH",
 		"edge_steps": [
