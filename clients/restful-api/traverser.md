@@ -38,6 +38,7 @@ HugeGraph支持的Traverser API包括：
 - Adamic-Adar API，查找两顶点间的紧密度系数, 会忽略超级顶点的权值影响
 - Resource Allocation API，查找两顶点间的紧密度系数, 会算入超级顶点的权值影响
 - Same Neighbors Batch
+- Kneighbors API，允许传入多个起始点和多种点边过滤条件, 查找N步以内可达的所有邻居的并集 (并会保留起始点)
 
 PS: Vertices API & Edges API 移动至 [Vertex](./vertex.md) 与 [Edge](./edge.md) 页面中
 
@@ -2584,5 +2585,125 @@ POST http://localhost:8080/graphs/{graph}/traversers/sameneighborsbatch
 
 查找一批顶点对的共同邻居：
 
-- 社交关系中发现两个用户的共同粉丝或者共同关注用户
+#### 3.2.25 Kneighbors
+
+##### 3.2.25.1 功能介绍
+
+查找一批顶点的 K 层邻居, 并支持针对不同点 / 边 Label 的过滤条件, 结果中会包含起始顶点 (原单点 Kneighbor-API 不包含)
+
+###### Params
+
+- sources：起始顶点 id 集合，支持传入多个不同顶点, 必填项
+- 从起始点出发的Step，必填项，结构如下：
+  - direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
+  - edge_steps：边Step集合，单个结构如下：
+	- label：边的类型
+	- properties：通过属性的值过滤边
+  - vertex_steps：顶点Step集合，单个结构如下：
+	- label：顶点的类型
+	- properties：通过属性的值过滤顶点
+  - max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)
+  - skip_degree：用于设置查询过程中舍弃超级顶点的最小边数，即当某个顶点的邻接边数目大于 skip_degree 时，完全舍弃该顶点。选填项，如果开启时，需满足 `skip_degree >= max_degree` 约束，默认为0 (不启用)，表示不跳过任何点 (注意:  开启此配置后，遍历时会尝试访问一个顶点的 skip_degree 条边，而不仅仅是 max_degree 条边，这样有额外的遍历开销，对查询性能影响可能有较大影响，请确认理解后再开启)
+- max_depth：步数，必填项
+- count_only：Boolean值，true表示只统计结果的数目，不返回具体结果；false表示返回具体的结果，默认为false
+- with_path：true表示返回起始点到每个邻居的最短路径，false表示不返回起始点到每个邻居的最短路径，选填项，默认为false
+- with_edge：选填项，默认为false。仅在count_only为false，且此值为true时，返回结果会包含完整的边信息
+- with_vertex，选填项，默认为false：
+  - true表示返回结果包含完整的顶点信息（路径中的全部顶点）
+    - with_path为true时，返回所有路径中的顶点的完整信息
+    - with_path为false时，返回所有邻居的完整信息
+  - false时表示只返回顶点id
+- limit：返回的顶点的最大数目，选填项，默认为 10000000
+
+##### 3.2.25.2 使用方法
+
+```
+POST http://localhost:8080/graphs/{graph}/traversers/kneighbors
+```
+
+###### Request Body
+
+```json
+{
+	"sources": "[1:marko, 1:vadas]",
+	"steps": {
+		"direction": "BOTH",
+		"edge_steps": [
+			{
+				"label": "knows"
+			},
+			{
+				"label": "created",
+				"properties": {}
+			}
+		],
+		"vertex_steps": [
+			{
+				"label": "person",
+				"properties": {
+					"age": "P.lt(15)"
+				}
+			},
+			{
+				"label": "software",
+				"properties": {}
+			}
+		],
+		"max_degree": 100,
+		"skip_degree": 1000
+	},
+	"max_depth": 3,
+	"limit": 1000,
+	"with_vertex": true
+}
+```
+
+###### Response Status
+
+```json
+200
+```
+
+###### Response Body
+
+```json
+{
+    "kneighbors": [
+        "1:marko",
+        "1:vadas",
+        "2:lop"
+    ],
+    "size": 2,
+    "paths": [
+    ],
+    "vertices": [
+        {
+            "id": "1:vadas",
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "vadas",
+                "age": 27,
+                "city": "Hongkong"
+            }
+        },
+        {
+            "id": "2:lop",
+            "label": "software",
+            "type": "vertex",
+            "properties": {
+                "lang": "java",
+                "price": 328,
+                "name": "lop"
+            }
+        }
+    ],
+    "edges": [
+    ]
+}
+```
+
+##### 3.2.25.3 适用场景
+
+查找一批点集 N 步以内可达的所有邻居点，场景细节同 Kneighbor-API
 
