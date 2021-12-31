@@ -1,11 +1,17 @@
 ### 1.1 Schema
 
-HugeGraph 提供单一接口获取某个图的全部 Schema 信息，包括：PropertyKey、VertexLabel、EdgeLabel 和 IndexLabel。
+HugeGraph 提供单一接口获取和更新某个图的全部 Schema 信息，包括：PropertyKey、VertexLabel、EdgeLabel 和 IndexLabel。
+
+#### 1.1.1 获取全部schema信息
+
+##### Params
+
+- format: 返回 schema 的格式，默认为 json，可选值为 [json, groovy]
 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/schema
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema
 ```
 
 ##### Response Status
@@ -312,5 +318,56 @@ GET http://localhost:8080/graphs/hugegraph/schema
             }
         }
     ]
+}
+```
+
+
+**以 groovy 形式查询 schema**
+
+##### Method & Url
+
+```
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{"schema":"graph.schema().propertyKey(\"price\").asInt().ifNotExist().create();\ngraph.schema().propertyKey(\"date\").asText().ifNotExist().create();\ngraph.schema().propertyKey(\"city\").asText().ifNotExist().create();\ngraph.schema().propertyKey(\"age\").asInt().ifNotExist().create();\ngraph.schema().propertyKey(\"lang\").asText().ifNotExist().create();\ngraph.schema().propertyKey(\"weight\").asDouble().ifNotExist().create();\ngraph.schema().propertyKey(\"name\").asText().ifNotExist().create();\n\ngraph.schema().vertexLabel(\"person\").properties(\"name\",\"age\",\"city\").primaryKeys(\"name\").nullableKeys(\"age\").enableLabelIndex(true).ifNotExist().create();\ngraph.schema().vertexLabel(\"software\").properties(\"name\",\"lang\",\"price\").primaryKeys(\"name\").nullableKeys(\"price\").enableLabelIndex(true).ifNotExist().create();\n\ngraph.schema().edgeLabel(\"knows\").sourceLabel(\"person\").targetLabel(\"person\").properties(\"weight\",\"date\").multiTimes().sortKeys(\"date\").nullableKeys(\"weight\").enableLabelIndex(true).ifNotExist().create();\ngraph.schema().edgeLabel(\"created\").sourceLabel(\"person\").targetLabel(\"software\").properties(\"weight\",\"date\").nullableKeys(\"weight\").enableLabelIndex(true).ifNotExist().create();\n\ngraph.schema().indexLabel(\"personByCity\").onV(\"person\").by(\"city\").secondary().ifNotExist().create();\ngraph.schema().indexLabel(\"personByAge\").onV(\"person\").by(\"age\").range().ifNotExist().create();\ngraph.schema().indexLabel(\"softwareByPrice\").onV(\"software\").by(\"price\").range().ifNotExist().create();\ngraph.schema().indexLabel(\"createdByDate\").onE(\"created\").by(\"date\").secondary().ifNotExist().create();\ngraph.schema().indexLabel(\"createdByWeight\").onE(\"created\").by(\"weight\").range().ifNotExist().create();\ngraph.schema().indexLabel(\"knowsByWeight\").onE(\"knows\").by(\"weight\").range().ifNotExist().create();\n"}
+```
+
+#### 1.1.2 以 groovy 形式更新schema信息
+
+##### Method & Url
+
+```
+PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema
+```
+
+##### Request body
+
+```json
+{
+  "schema": "graph.schema().propertyKey('name').asText().ifNotExist().create();graph.schema().propertyKey('age').asInt().ifNotExist().create();graph.schema().propertyKey('city').asText().ifNotExist().create();graph.schema().propertyKey('lang').asText().ifNotExist().create();graph.schema().propertyKey('date').asText().ifNotExist().create();graph.schema().propertyKey('price').asInt().ifNotExist().create();person=graph.schema().vertexLabel('person').properties('name','age','city').primaryKeys('name').ifNotExist().create();knows=graph.schema().edgeLabel('knows').sourceLabel('person').targetLabel('person').properties('date').ifNotExist().create();"
+}
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "schema":"inited"
 }
 ```
