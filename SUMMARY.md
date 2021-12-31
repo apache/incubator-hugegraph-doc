@@ -60,6 +60,7 @@
 * [HugeGraph-Loader Performance](performance/hugegraph-loader-performance.md)
 
 ## ChangeLogs
+* [Release-0.12.0](changelog/hugegraph-0.12.0-release-notes.md)
 * [Release-0.11.2](changelog/hugegraph-0.11.2-release-notes.md)
 * [Release-0.10.4](changelog/hugegraph-0.10.4-release-notes.md)
 * [Release-0.9.2](changelog/hugegraph-0.9.2-release-notes.md)

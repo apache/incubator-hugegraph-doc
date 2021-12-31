@@ -2,7 +2,7 @@
 
 ### Latest version
 
-The latest HugeGraph: **0.12.0**, released on _2022-12-24_.
+The latest HugeGraph: **0.12.0**, released on _2021-12-31_.
 
 components       | description          | download
 ---------------- | -------------------- | ----------------------------------------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ server                                                                          
 
 ### Release Notes
 
-- 2022-12-24: Release HugeGraph 0.12.0，see [HugeGraph 0.12.0 Release Notes](changelog/hugegraph-0.12.0-release-notes.md)
+- 2021-12-31: Release HugeGraph 0.12.0，see [HugeGraph 0.12.0 Release Notes](changelog/hugegraph-0.12.0-release-notes.md)
 - 2020-11-20: Release HugeGraph 0.11.2，see [HugeGraph 0.11.2 Release Notes](changelog/hugegraph-0.11.2-release-notes.md)
 - 2019-11-08: Release HugeGraph 0.10.4，see [HugeGraph 0.10.4 Release Notes](changelog/hugegraph-0.10.4-release-notes.md)
 - 2019-04-19: Release HugeGraph 0.9.2，see [HugeGraph 0.9.2 Release Notes](changelog/hugegraph-0.9.2-release-notes.md)
