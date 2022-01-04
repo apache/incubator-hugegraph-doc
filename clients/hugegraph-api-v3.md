@@ -23,4 +23,5 @@ HugeGraph-Server通过HugeGraph-API基于HTTP协议为Client提供操作图的�
 - [Authentication](restful-api-v3/auth.md)
 - [GraphSpace](restful-api-v3/graphspace.md)
 - [Service](restful-api-v3/service.md)
+- [SchemaTemplate](restful-api-v3/schematemplate.md)
 - [Other](restful-api-v3/other.md)
