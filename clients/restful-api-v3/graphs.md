@@ -5,30 +5,21 @@
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph2
+POST http://localhost:8080/graphs/hg1
 ```
 
 ##### Request Body
 
 ```
-# gremlin entrence to create graph
-gremlin.graph=com.baidu.hugegraph.HugeFactory
-
-# cache config
-#schema.cache_capacity=1048576
-#graph.cache_capacity=10485760
-#graph.cache_expire=600
-
-# schema illegal name template
-#schema.illegal_name_regex=\s+|~.*
-
-#vertex.default_label=vertex
-
-backend=cassandra
-serializer=cassandra
-
-store=hugegraph2
-...
+{
+  "gremlin.graph": "com.baidu.hugegraph.HugeFactory",
+  "backend": "rocksdb",
+  "serializer": "binary",
+  "store": "hg1",
+  "schema.init_template": "s1",
+  "rocksdb.data_path": "./hg1",
+  "rocksdb.wal_path": "./hg1"
+}
 ```
 
 ##### Response Status
@@ -41,8 +32,8 @@ store=hugegraph2
 
 ```json
 {
-    "name": "hugegraph2",
-    "backend": "cassandra"
+    "name": "hg1",
+    "backend": "rocksdb"
 }
 ```
 
@@ -66,7 +57,7 @@ GET http://localhost:8080/graphs
 {
     "graphs": [
         "hugegraph",
-        "hugegraph2"
+        "hg1"
     ]
 }
 ```
@@ -107,9 +98,11 @@ PUT http://localhost:8080/graphs/hugegraph
 ```json
 {
   "action": "clear",
-  "confirm_message": "I'm sure to delete all data"
+  "clear_schema": true
 }
 ```
+
+其中 clear_schema 为 true 时，不仅删除图数据（顶点和边），同时删除元数据（schema）；clear_schema 为 false 时，只删除图数据（顶点和边），保留元数据（schema）
 
 ##### Response Status
 
@@ -310,5 +303,27 @@ PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
 ```json
 {
     "graph_read_mode": "ALL"
+}
+```
+
+### 6.5 刷新某个图内存中的数据到磁盘（仅支持rocksdb后端）
+
+##### Method & Url
+
+```
+PUT http://localhost:8080/graphs/hugegraph/flush
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "hugegraph": "flushed"
 }
 ```
