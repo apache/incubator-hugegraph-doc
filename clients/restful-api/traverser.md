@@ -38,7 +38,7 @@ HugeGraph支持的Traverser API包括：
 - Adamic-Adar API，查找两顶点间的紧密度系数, 会忽略超级顶点的权值影响
 - Resource Allocation API，查找两顶点间的紧密度系数, 会算入超级顶点的权值影响
 - Same Neighbors Batch
-- Kneighbors API，允许传入多个起始点和多种点边过滤条件, 查找N步以内可达的所有邻居的并集 (并会保留起始点)
+- Egonet API，允许传入多个起始点和多种点边过滤条件, 查找N步以内可达的所有邻居的并集 (并会保留起始点)
 
 PS: Vertices API & Edges API 移动至 [Vertex](./vertex.md) 与 [Edge](./edge.md) 页面中
 
@@ -2585,11 +2585,11 @@ POST http://localhost:8080/graphs/{graph}/traversers/sameneighborsbatch
 
 查找一批顶点对的共同邻居：
 
-#### 3.2.25 Kneighbors
+#### 3.2.25 Egonet
 
 ##### 3.2.25.1 功能介绍
 
-查找一批顶点的 K 层邻居, 并支持针对不同点 / 边 Label 的过滤条件, 结果中会包含起始顶点 (原单点 Kneighbor-API 不包含)
+查找一批顶点出发的 K 层邻居, 并支持针对不同点 / 边 Label 的过滤条件, 结果中会包含起始顶点
 
 ###### Params
 
@@ -2598,10 +2598,10 @@ POST http://localhost:8080/graphs/{graph}/traversers/sameneighborsbatch
   - direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
   - edge_steps：边Step集合，单个结构如下：
 	- label：边的类型
-	- properties：通过属性的值过滤边
+	- properties：通过属性的值过滤边 (过滤条件写法见后)
   - vertex_steps：顶点Step集合，单个结构如下：
 	- label：顶点的类型
-	- properties：通过属性的值过滤顶点
+	- properties：通过属性的值过滤顶点 (过滤条件写法见后)
   - max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)
   - skip_degree：用于设置查询过程中舍弃超级顶点的最小边数，即当某个顶点的邻接边数目大于 skip_degree 时，完全舍弃该顶点。选填项，如果开启时，需满足 `skip_degree >= max_degree` 约束，默认为0 (不启用)，表示不跳过任何点 (注意:  开启此配置后，遍历时会尝试访问一个顶点的 skip_degree 条边，而不仅仅是 max_degree 条边，这样有额外的遍历开销，对查询性能影响可能有较大影响，请确认理解后再开启)
 - max_depth：步数，必填项
@@ -2615,10 +2615,24 @@ POST http://localhost:8080/graphs/{graph}/traversers/sameneighborsbatch
   - false时表示只返回顶点id
 - limit：返回的顶点的最大数目，选填项，默认为 10000000
 
+以下是当前可支持的过滤条件及其写法:
+1. `P.eq()` 代表过滤出数值相等的元素
+2. `P.neq()` 代表过滤出数值不相等的元素
+3. `P.lt()` 代表过滤出数值小于 (<) 某数的元素
+4. `P.lte()` 代表过滤出数值小于相等 (≤) 某数的元素
+5. `P.gt()` 代表过滤出数值大于 (>) 某数的元素
+6. `P.gte()` 代表过滤出数值大于相等 (≥) 的元素
+7. `P.between(a, b)` 代表过滤出数值在`(a, b)`范围内的元素
+8. `P.inside(a, b)` 代表过滤出数值在`> a`且`< b`范围内的元素
+9. `P.outside(a, b)` 代表过滤出数值在`< a`且`> b`范围内的元素
+10. `P.textcontains(str)` 代表过滤出包含 str **子串**的元素
+11. `P.contains(str)` 代表从集合中过滤出包含 str 字符串的元素
+12. `P.within(a, b, c)` 代表过滤出包含**给定集合**中任一子元素的元素
+
 ##### 3.2.25.2 使用方法
 
 ```
-POST http://localhost:8080/graphs/{graph}/traversers/kneighbors
+POST http://localhost:8080/graphs/{graph}/traversers/egonet
 ```
 
 ###### Request Body
@@ -2668,7 +2682,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/kneighbors
 
 ```json
 {
-    "kneighbors": [
+    "egonet": [
         "1:marko",
         "1:vadas",
         "2:lop"
@@ -2705,5 +2719,5 @@ POST http://localhost:8080/graphs/{graph}/traversers/kneighbors
 
 ##### 3.2.25.3 适用场景
 
-查找一批点集 N 步以内可达的所有邻居点，场景细节同 Kneighbor-API
+查找一批点集 N 步以内可达的所有邻居点
 
