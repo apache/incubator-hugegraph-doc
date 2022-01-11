@@ -19,7 +19,7 @@ Params说明
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/schema/edgelabels
+POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/edgelabels
 ```
 
 ##### Request Body
@@ -128,7 +128,7 @@ POST http://localhost:8080/graphs/hugegraph/schema/edgelabels
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/schema/edgelabels/created?action=append
+PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/edgelabels/created?action=append
 ```
 
 ##### Request Body
@@ -181,7 +181,7 @@ PUT http://localhost:8080/graphs/hugegraph/schema/edgelabels/created?action=appe
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/schema/edgelabels
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/edgelabels
 ```
 
 ##### Response Status
@@ -243,7 +243,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/edgelabels
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/edgelabels/created
 ```
 
 ##### Response Status
@@ -286,7 +286,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
+DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/edgelabels/created
 ```
 
 ##### Response Status
@@ -304,4 +304,4 @@ DELETE http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
 ```
 
 注：
-> 可以通过`GET http://localhost:8080/graphs/hugegraph/tasks/1`（其中"1"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](task.md)
+> 可以通过`GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/tasks/1`（其中"1"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](task.md)

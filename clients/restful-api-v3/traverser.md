@@ -204,7 +204,7 @@ public class Loader {
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/kout?source="1:marko"&max_depth=2
+GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/kout?source="1:marko"&max_depth=2
 ```
 
 ###### Response Status
@@ -274,7 +274,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/kout?source="1:marko"&max_de
 ###### Method & Url
 
 ```
-POST http://localhost:8080/graphs/{graph}/traversers/kout
+POST http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/kout
 ```
 
 ###### Request Body
@@ -424,7 +424,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/kout
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/kneighbor?source=“1:marko”&max_depth=2
+GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/kneighbor?source=“1:marko”&max_depth=2
 ```
 
 ###### Response Status
@@ -496,7 +496,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/kneighbor?source=“1:marko�
 ###### Method & Url
 
 ```
-POST http://localhost:8080/graphs/{graph}/traversers/kneighbor
+POST http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/kneighbor
 ```
 
 ###### Request Body
@@ -684,7 +684,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/kneighbor
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/sameneighbors?vertex=“1:marko”&other="1:josh"
+GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/sameneighbors?vertex=“1:marko”&other="1:josh"
 ```
 
 ###### Response Status
@@ -728,7 +728,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/sameneighbors?vertex=“1:ma
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/jaccardsimilarity?vertex="1:marko"&other="1:josh"
+GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/jaccardsimilarity?vertex="1:marko"&other="1:josh"
 ```
 
 ###### Response Status
@@ -774,7 +774,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/jaccardsimilarity?vertex="1:
 ###### Method & Url
 
 ```
-POST http://localhost:8080/graphs/{graph}/traversers/jaccardsimilarity
+POST http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/jaccardsimilarity
 ```
 
 ###### Request Body
@@ -834,7 +834,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/jaccardsimilarity
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/shortestpath?source="1:marko"&target="2:ripple"&max_depth=3
+GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/shortestpath?source="1:marko"&target="2:ripple"&max_depth=3
 ```
 
 ###### Response Status
@@ -884,7 +884,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/shortestpath?source="1:marko
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/allshortestpaths?source="A"&target="Z"&max_depth=10
+GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/allshortestpaths?source="A"&target="Z"&max_depth=10
 ```
 
 ###### Response Status
@@ -948,7 +948,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/allshortestpaths?source="A"&
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/weightedshortestpath?source="1:marko"&target="2:ripple"&weight="weight"&with_vertex=true
+GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/weightedshortestpath?source="1:marko"&target="2:ripple"&weight="weight"&with_vertex=true
 ```
 
 ###### Response Status
@@ -1033,7 +1033,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/weightedshortestpath?source=
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/singlesourceshortestpath?source="1:marko"&with_vertex=true
+GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/singlesourceshortestpath?source="1:marko"&with_vertex=true
 ```
 
 ###### Response Status
@@ -1185,7 +1185,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/singlesourceshortestpath?sou
 ###### Method & Url
 
 ```
-POST http://localhost:8080/graphs/{graph}/traversers/multinodeshortestpath
+POST http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/multinodeshortestpath
 ```
 
 ###### Request Body
@@ -1413,7 +1413,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/multinodeshortestpath
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/paths?source="1:marko"&target="1:josh"&max_depth=5
+GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/paths?source="1:marko"&target="1:josh"&max_depth=5
 ```
 
 ###### Response Status
@@ -1489,7 +1489,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/paths?source="1:marko"&targe
 ###### Method & Url
 
 ```
-POST http://localhost:8080/graphs/{graph}/traversers/paths
+POST http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/paths
 ```
 
 ###### Request Body
@@ -1588,7 +1588,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/paths
 ###### Method & Url
 
 ```
-POST http://localhost:8080/graphs/{graph}/traversers/customizedpaths
+POST http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/customizedpaths
 ```
 
 ###### Request Body
@@ -1777,7 +1777,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/customizedpaths
 ###### Method & Url
 
 ```
-POST http://localhost:8080/graphs/{graph}/traversers/templatepaths
+POST http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/templatepaths
 ```
 
 ###### Request Body
@@ -1941,7 +1941,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/templatepaths
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/crosspoints?source="2:lop"&target="2:ripple"&max_depth=5&direction=IN
+GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/crosspoints?source="2:lop"&target="2:ripple"&max_depth=5&direction=IN
 ```
 
 ###### Response Status
@@ -2010,7 +2010,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/crosspoints?source="2:lop"&t
 ###### Method & Url
 
 ```
-POST http://localhost:8080/graphs/{graph}/traversers/customizedcrosspoints
+POST http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/customizedcrosspoints
 ```
 
 ###### Request Body
@@ -2180,7 +2180,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/customizedcrosspoints
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/rings?source="1:marko"&max_depth=2
+GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/rings?source="1:marko"&max_depth=2
 ```
 
 ###### Response Status
@@ -2249,7 +2249,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/rings?source="1:marko"&max_d
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/rays?source="1:marko"&max_depth=2&direction=OUT
+GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/rays?source="1:marko"&max_depth=2&direction=OUT
 ```
 
 ###### Response Status
@@ -2336,7 +2336,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/rays?source="1:marko"&max_de
 ###### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/traversers/fusiformsimilarity
+POST http://localhost:8080/graphspaces/{graphspace}/graphs/hugegraph/traversers/fusiformsimilarity
 ```
 
 ###### Request Body
@@ -2454,7 +2454,7 @@ AdamicAdar, 一般简称 AA 算法
 ###### Method & Url
 
 ```http
-GET http://localhost:8080/graphs/{graph}/traversers/adamicadar?vertex="1:marko"&other="1:josh"
+GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/adamicadar?vertex="1:marko"&other="1:josh"
 ```
 
 ###### Request Body
@@ -2502,7 +2502,7 @@ ResourceAllocation(RA), 一般称为资源分配算法
 ###### Method & Url
 
 ```http
-GET http://localhost:8080/graphs/{graph}/traversers/resourceallocation?vertex="1:marko"&other="1:josh"
+GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/resourceallocation?vertex="1:marko"&other="1:josh"
 ```
 
 ###### Request Body
@@ -2546,7 +2546,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/resourceallocation?vertex="1
 ###### Method & Url
 
 ```
-POST http://localhost:8080/graphs/{graph}/traversers/sameneighborsbatch
+POST http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/sameneighborsbatch
 ```
 
 ###### Request Body

@@ -1,64 +1,6 @@
 ### 8.1 Gremlin
 
-#### 8.1.1 向HugeGraphServer发送gremlin语句（GET），同步执行
-
-##### Params
-
-- gremlin: 要发送给`HugeGraphServer`执行的`gremlin`语句
-- bindings: 用来绑定参数，key是字符串，value是绑定的值（只能是字符串或者数字），功能类似于MySQL的 Prepared Statement，用于加速语句执行
-- language: 发送语句的语言类型，默认为`gremlin-groovy`
-- aliases: 为存在于图空间的已有变量添加别名
-
-**查询顶点**
-
-##### Method & Url
-
-```
-GET http://127.0.0.1:8080/gremlin?gremlin=hugegraph.traversal().V('1:marko')
-```
-
-##### Response Status
-
-```json
-200
-```
-
-##### Response Body
-
-```json
-{
-	"requestId": "c6ef47a8-b634-4b07-9d38-6b3b69a3a556",
-	"status": {
-		"message": "",
-		"code": 200,
-		"attributes": {}
-	},
-	"result": {
-		"data": [{
-			"id": "1:marko",
-			"label": "person",
-			"type": "vertex",
-			"properties": {
-				"city": [{
-					"id": "1:marko>city",
-					"value": "Beijing"
-				}],
-				"name": [{
-					"id": "1:marko>name",
-					"value": "marko"
-				}],
-				"age": [{
-					"id": "1:marko>age",
-					"value": 29
-				}]
-			}
-		}],
-		"meta": {}
-	}
-}
-```
-
-#### 8.1.2 向HugeGraphServer发送gremlin语句（POST），同步执行
+#### 8.1.1 向HugeGraphServer发送gremlin语句，同步执行
 
 ##### Method & Url
 
@@ -75,7 +17,7 @@ POST http://localhost:8080/gremlin
 	"gremlin": "hugegraph.traversal().V('1:marko')",
 	"bindings": {},
 	"language": "gremlin-groovy",
-	"aliases": {}
+	"aliases": {"graph":"gs1-hugegraph", "g":"__g_gs1-hugegraph"}
 }
 ```
 
@@ -139,8 +81,8 @@ POST http://localhost:8080/gremlin
 	"bindings": {},
 	"language": "gremlin-groovy",
 	"aliases": {
-		"graph": "hugegraph", 
-		"g": "__g_hugegraph"
+		"graph": "gs1-hugegraph", 
+		"g": "__g_gs1-hugegraph"
 	}
 }
 ```
@@ -185,7 +127,7 @@ POST http://localhost:8080/gremlin
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/jobs/gremlin
+POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/jobs/gremlin
 ```
 
 **查询顶点**
@@ -222,7 +164,7 @@ POST http://localhost:8080/graphs/hugegraph/jobs/gremlin
 
 注：
 
-> 可以通过`GET http://localhost:8080/graphs/hugegraph/tasks/1`（其中"1"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](task.md)
+> 可以通过`GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/tasks/1`（其中"1"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](task.md)
 
 **查询边**
 
@@ -253,4 +195,4 @@ POST http://localhost:8080/graphs/hugegraph/jobs/gremlin
 
 注：
 
-> 可以通过`GET http://localhost:8080/graphs/hugegraph/tasks/2`（其中"2"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](task.md)
+> 可以通过`GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/tasks/2`（其中"2"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](task.md)

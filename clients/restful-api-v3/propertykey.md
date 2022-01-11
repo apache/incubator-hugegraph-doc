@@ -18,7 +18,7 @@ Params说明：
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/schema/propertykeys
+POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/propertykeys
 ```
 
 ##### Request Body
@@ -62,7 +62,7 @@ POST http://localhost:8080/graphs/hugegraph/schema/propertykeys
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/schema/propertykeys/age?action=append
+PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/propertykeys/age?action=append
 ```
 
 ##### Request Body
@@ -107,7 +107,7 @@ PUT http://localhost:8080/graphs/hugegraph/schema/propertykeys/age?action=append
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/schema/propertykeys
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/propertykeys
 ```
 
 ##### Response Status
@@ -186,7 +186,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/propertykeys
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/propertykeys/age
 ```
 
 其中，`age`为要获取的PropertyKey的名字
@@ -215,7 +215,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
+DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/propertykeys/age
 ```
 
 其中，`age`为要获取的PropertyKey的名字

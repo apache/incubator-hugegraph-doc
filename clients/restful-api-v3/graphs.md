@@ -5,7 +5,7 @@
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hg1
+POST http://localhost:8080/graphspaces/gs1/graphs/hg1
 ```
 
 ##### Request Body
@@ -42,7 +42,7 @@ POST http://localhost:8080/graphs/hg1
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs
+GET http://localhost:8080/graphspaces/gs1/graphs
 ```
 
 ##### Response Status
@@ -67,7 +67,7 @@ GET http://localhost:8080/graphs
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph
 ```
 
 ##### Response Status
@@ -90,7 +90,7 @@ GET http://localhost:8080/graphs/hugegraph
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph
+PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph
 ```
 
 ##### Request Body
@@ -121,7 +121,7 @@ PUT http://localhost:8080/graphs/hugegraph
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph?confirm_message=I%27m+sure+to+drop+the+graph
+DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph?confirm_message=I%27m+sure+to+drop+the+graph
 ```
 
 ##### Response Status
@@ -137,7 +137,7 @@ DELETE http://localhost:8080/graphs/hugegraph?confirm_message=I%27m+sure+to+drop
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/conf
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/conf
 ```
 
 ##### Response Status
@@ -196,7 +196,7 @@ Restore 时存在两种不同的模式： Restoring 和 Merging
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/mode
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/mode
 ```
 
 ##### Response Status
@@ -220,7 +220,7 @@ GET http://localhost:8080/graphs/hugegraph/mode
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/mode
+PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/mode
 ```
 
 ##### Request Body
@@ -258,7 +258,7 @@ PUT http://localhost:8080/graphs/hugegraph/mode
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph_read_mode
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph_read_mode
 ```
 
 ##### Response Status
@@ -281,7 +281,7 @@ GET http://localhost:8080/graphs/hugegraph/graph_read_mode
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
+PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph_read_mode
 ```
 
 ##### Request Body
@@ -311,7 +311,7 @@ PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/flush
+PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/flush
 ```
 
 ##### Response Status

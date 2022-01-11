@@ -10,7 +10,7 @@
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/tasks?status=success
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/tasks?status=success
 ```
 
 ##### Response Status
@@ -44,7 +44,7 @@ GET http://localhost:8080/graphs/hugegraph/tasks?status=success
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/tasks/2
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/tasks/2
 ```
 
 ##### Response Status
@@ -80,11 +80,11 @@ GET http://localhost:8080/graphs/hugegraph/tasks/2
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/tasks/2
+DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/tasks/2
 ```
 或者：
 ```
-DELETE http://localhost:8080/graphs/hugegraph/tasks/2?force=true
+DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/tasks/2?force=true
 ```
 
 ##### Response Status
@@ -112,7 +112,7 @@ DELETE http://localhost:8080/graphs/hugegraph/tasks/2?force=true
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/tasks/2?action=cancel
+PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/tasks/2?action=cancel
 ```
 
 > 请保证在10秒内发送该请求，如果超过10秒发送，任务可能已经执行完成，无法取消。

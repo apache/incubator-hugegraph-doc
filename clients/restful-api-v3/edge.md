@@ -29,7 +29,7 @@ Params说明
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/graph/edges
+POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/edges
 ```
 
 ##### Request Body
@@ -81,7 +81,7 @@ POST http://localhost:8080/graphs/hugegraph/graph/edges
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/graph/edges/batch
+POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/edges/batch
 ```
 
 ##### Request Body
@@ -133,7 +133,7 @@ POST http://localhost:8080/graphs/hugegraph/graph/edges/batch
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action=append
+PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action=append
 ```
 
 ##### Request Body
@@ -216,7 +216,7 @@ PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action
 ##### Method & Url
 
 ```
-PUT http://127.0.0.1:8080/graphs/hugegraph/graph/edges/batch
+PUT http://127.0.0.1:8080/graphspaces/gs1/graphs/hugegraph/graph/edges/batch
 ```
 
 ##### Request Body
@@ -304,7 +304,7 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/edges/batch
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action=eliminate
+PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action=eliminate
 ```
 
 ##### Request Body
@@ -382,7 +382,7 @@ P.within(value1,value2,value3,...)    | 属性值等于任何一个给定value�
 ##### Method & Url
 
 ```
-GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?vertex_id="1:josh"&direction=BOTH&label=created&properties={}
+GET http://127.0.0.1:8080/graphspaces/gs1/graphs/hugegraph/graph/edges?vertex_id="1:josh"&direction=BOTH&label=created&properties={}
 ```
 
 ##### Response Status
@@ -431,7 +431,7 @@ GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?vertex_id="1:josh"&direct
 ##### Method & Url
 
 ```
-GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page&limit=3
+GET http://127.0.0.1:8080/graphspaces/gs1/graphs/hugegraph/graph/edges?page&limit=3
 ```
 
 ##### Response Status
@@ -496,7 +496,7 @@ GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page&limit=3
 ##### Method & Url
 
 ```
-GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page=002500100753313a6a6f73681210010004000000020953323a726970706c65f07ffffffcf07ffffffd8460d63f4b398dd2721ed4fdb7716b420004&limit=3
+GET http://127.0.0.1:8080/graphspaces/gs1/graphs/hugegraph/graph/edges?page=002500100753313a6a6f73681210010004000000020953323a726970706c65f07ffffffcf07ffffffd8460d63f4b398dd2721ed4fdb7716b420004&limit=3
 ```
 
 ##### Response Status
@@ -560,7 +560,7 @@ GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page=002500100753313a6a6f
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
 ```
 
 ##### Response Status
@@ -598,7 +598,7 @@ GET http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
+DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
 ```
 
 ##### Response Status
@@ -614,7 +614,7 @@ DELETE http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?label=person
+DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?label=person
 ```
 
 ##### Response Status
@@ -634,7 +634,7 @@ DELETE http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?lab
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/traversers/edges?ids="S1:josh>1>>S2:lop"&ids="S1:josh>1>>S2:ripple"
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/traversers/edges?ids="S1:josh>1>>S2:lop"&ids="S1:josh>1>>S2:ripple"
 ```
 
 ###### Response Status
@@ -689,7 +689,7 @@ GET http://localhost:8080/graphs/hugegraph/traversers/edges?ids="S1:josh>1>>S2:l
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/traversers/edges/shards?split_size=4294967295
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/traversers/edges/shards?split_size=4294967295
 ```
 
 ###### Response Status
@@ -746,7 +746,7 @@ GET http://localhost:8080/graphs/hugegraph/traversers/edges/shards?split_size=42
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/traversers/edges/scan?start=0&end=3221225469
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/traversers/edges/scan?start=0&end=3221225469
 ```
 
 ###### Response Status

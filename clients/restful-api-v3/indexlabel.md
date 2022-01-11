@@ -7,7 +7,7 @@
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/schema/indexlabels
+POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/indexlabels
 ```
 
 ##### Request Body
@@ -53,7 +53,7 @@ POST http://localhost:8080/graphs/hugegraph/schema/indexlabels
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/schema/indexlabels
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/indexlabels
 ```
 
 ##### Response Status
@@ -117,7 +117,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/indexlabels
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/indexlabels/personByCity
 ```
 
 ##### Response Status
@@ -148,7 +148,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
+DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/indexlabels/personByCity
 ```
 
 ##### Response Status
@@ -167,4 +167,4 @@ DELETE http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
 
 注：
 
-> 可以通过`GET http://localhost:8080/graphs/hugegraph/tasks/1`（其中"1"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](task.md)
+> 可以通过`GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/tasks/1`（其中"1"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](task.md)

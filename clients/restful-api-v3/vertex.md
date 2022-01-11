@@ -24,7 +24,7 @@ CUSTOMIZE_UUID   | uuid
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/graph/vertices
+POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices
 ```
 
 ##### Request Body
@@ -74,7 +74,7 @@ POST http://localhost:8080/graphs/hugegraph/graph/vertices
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/graph/vertices/batch
+POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/batch
 ```
 
 ##### Request Body
@@ -119,7 +119,7 @@ POST http://localhost:8080/graphs/hugegraph/graph/vertices/batch
 ##### Method & Url
 
 ```
-PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=append
+PUT http://127.0.0.1:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/"1:marko"?action=append
 ```
 
 ##### Request Body
@@ -224,7 +224,7 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=appen
 ##### Method & Url
 
 ```
-PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
+PUT http://127.0.0.1:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/batch
 ```
 
 ##### Request Body
@@ -322,7 +322,7 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
 ##### Method & Url
 
 ```
-PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=eliminate
+PUT http://127.0.0.1:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/"1:marko"?action=eliminate
 ```
 
 ##### Request Body
@@ -399,7 +399,7 @@ P.within(value1,value2,value3,...)    | 属性值等于任何一个给定value�
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&properties={"age":29}&limit=1
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices?label=person&properties={"age":29}&limit=1
 ```
 
 ##### Response Status
@@ -447,7 +447,7 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&propertie
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices?page&limit=3
 ```
 
 ##### Response Status
@@ -530,7 +530,7 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph/vertices?page=001000100853313a706574657200f07ffffffc00e797c6349be736fffc8699e8a502efe10004&limit=3
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices?page=001000100853313a706574657200f07ffffffc00e797c6349be736fffc8699e8a502efe10004&limit=3
 ```
 
 ##### Response Status
@@ -612,7 +612,7 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?page=001000100853313a7
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/"1:marko"
 ```
 
 ##### Response Status
@@ -656,7 +656,7 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
+DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/"1:marko"
 ```
 
 ##### Response Status
@@ -672,7 +672,7 @@ DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"?label=person
+DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/"1:marko"?label=person
 ```
 
 ##### Response Status
@@ -691,7 +691,7 @@ DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"?label=per
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/traversers/vertices?ids="1:marko"&ids="2:lop"
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/traversers/vertices?ids="1:marko"&ids="2:lop"
 ```
 
 ###### Response Status
@@ -770,7 +770,7 @@ GET http://localhost:8080/graphs/hugegraph/traversers/vertices?ids="1:marko"&ids
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/traversers/vertices/shards?split_size=67108864
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/traversers/vertices/shards?split_size=67108864
 ```
 
 ###### Response Status
@@ -823,7 +823,7 @@ GET http://localhost:8080/graphs/hugegraph/traversers/vertices/shards?split_size
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/traversers/vertices/scan?start=0&end=4294967295
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/traversers/vertices/scan?start=0&end=4294967295
 ```
 
 ###### Response Status
