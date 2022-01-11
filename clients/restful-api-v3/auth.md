@@ -1067,10 +1067,72 @@ GET http://localhost:8080/graphspaces/{graphspace}/auth/accesses/all->1->all_tar
 }
 ```
 
-### 9.7 Token API
+### 9.7 Manager API
+图空间管理员、图空间运维管理员，主要包含：创建、删除。
+
+#### 9.7.1 创建 manager
+
+##### Params
+
+- user： 用户名
+- type：管理员类型，类型包含OP、SPACE，分别代表图空间运维管理员、图空间管理员
+- graphspace：图空间
+
+##### Method & Url
+
+```
+POST http://localhost:8080/auth/managers
+```
+
+##### Request Body
+
+```json
+{
+  "user": "boss",
+  "type": "SPACE",
+  "graphspace": "graphspace1"
+}
+```
+
+##### Response Status
+
+```json
+201
+```
+
+##### Response Body
+
+```json
+{
+  "user": "boss",
+  "type": "SPACE",
+  "graphspace": "graphspace1"
+}
+```
+
+#### 9.7.2 删除 manager
+
+##### Method & Url
+
+```
+POST http://localhost:8080/auth/managers?user=boss&type=SPACE&graphspace=graphspace1
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+```
+
+### 9.8 Token API
 获取用户Token，主要包含：登录(login)、验证Token(verify)。
 
-#### 9.7.1 登录(login)
+#### 9.8.1 登录(login)
 
 ##### Params
 
@@ -1108,7 +1170,7 @@ POST http://localhost:8080/auth/login
 }
 ```
 
-#### 9.7.2 验证Token(verify)
+#### 9.8.2 验证Token(verify)
 
 ##### Method & Url
 
