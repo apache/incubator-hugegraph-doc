@@ -1112,6 +1112,12 @@ POST http://localhost:8080/auth/managers
 
 #### 9.7.2 删除 manager
 
+##### Params
+
+- user： 用户名
+- type：管理员类型，类型包含OP、SPACE，分别代表图空间运维管理员、图空间管理员
+- graphspace：图空间
+
 ##### Method & Url
 
 ```
