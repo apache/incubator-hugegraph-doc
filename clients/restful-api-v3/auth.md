@@ -1124,11 +1124,6 @@ POST http://localhost:8080/auth/managers?user=boss&type=SPACE&graphspace=graphsp
 200
 ```
 
-##### Response Body
-
-```json
-```
-
 ### 9.8 Token API
 获取用户Token，主要包含：登录(login)、验证Token(verify)。
 
