@@ -13,12 +13,10 @@ POST http://localhost:8080/graphspaces/gs1/graphs/hg1
 ```
 {
   "gremlin.graph": "com.baidu.hugegraph.HugeFactory",
-  "backend": "rocksdb",
+  "backend": "hstore",
   "serializer": "binary",
-  "store": "hg1",
-  "schema.init_template": "s1",
-  "rocksdb.data_path": "./hg1",
-  "rocksdb.wal_path": "./hg1"
+  "store": "hugegraph",
+  "pd.peers":"ip:port"
 }
 ```
 
