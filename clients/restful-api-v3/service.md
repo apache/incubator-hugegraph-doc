@@ -21,7 +21,7 @@ POST http://localhost:8080/graphspaces/gs1/services
   "cpu_limit": 2,
   "memory_limit": 4,
   "storage_limit": 10,
-  "route_type": "ClusterIP",
+  "route_type": "NodePort",
   "deployment_type": "K8S"
 }
 ```
@@ -55,10 +55,10 @@ POST http://localhost:8080/graphspaces/gs1/services
     "cpu_limit": 2,
     "memory_limit": 4,
     "storage_limit": 10,
-    "route_type": "ClusterIP",
+    "route_type": "NodePort",
     "port": 8080,
     "urls": [
-        "10.254.222.85:8080"
+        "10.254.222.85:32357"
     ]
 }
 
@@ -113,10 +113,10 @@ GET http://127.0.0.1:8080/graphspaces/gs1/services/sv1
     "cpu_limit": 2,
     "memory_limit": 4,
     "storage_limit": 10,
-    "route_type": "ClusterIP",
+    "route_type": "NodePort",
     "port": 8080,
     "urls": [
-        "10.254.222.85:8080"
+        "10.254.222.85:32357"
     ]
 }
 
