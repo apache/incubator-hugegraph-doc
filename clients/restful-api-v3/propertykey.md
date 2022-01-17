@@ -25,12 +25,9 @@ POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/propertykeys
 
 ```json
 {
-    "property_key" : {
-        "name": "age",
-        "data_type": "INT",
-        "cardinality": "SINGLE"
-    },
-    "task_id": 0
+    "name": "age",
+    "data_type": "INT",
+    "cardinality": "SINGLE"
 }
 ```
 

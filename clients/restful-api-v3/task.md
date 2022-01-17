@@ -4,13 +4,13 @@
 
 ##### Params
 
-- status: 异步任务的状态
+- status: 异步任务的状态，状态可以为 UNKNOWN、NEW、SCHEDULING、SCHEDULED、QUEUED、RESTORING、RUNNING、SUCCESS、CANCELLING、CANCELLED、FAILED
 - limit：返回异步任务数目上限
 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/tasks?status=success
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/tasks?status=SUCCESS
 ```
 
 ##### Response Status

@@ -14,7 +14,7 @@ POST http://localhost:8080/gremlin
 
 ```json
 {
-	"gremlin": "hugegraph.traversal().V('1:marko')",
+	"gremlin": "graph.traversal().V('1:marko')",
 	"bindings": {},
 	"language": "gremlin-groovy",
 	"aliases": {"graph":"gs1-hugegraph", "g":"__g_gs1-hugegraph"}
