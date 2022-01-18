@@ -19,7 +19,6 @@
   "params": {
     "pagerank.alpha": "0.15",
     "pagerank.l1DiffThreshold": "0.00001",
-    "pagerank.max_iterations": "1000",
     "bsp.max_super_step": "10"
   }
 }
@@ -28,7 +27,6 @@
 | :----------------------- | :------- | :--------------------- | :----- | :-------------- | :------ |
 | pagerank.alpha           | 否       | 权重系数(又称阻尼系数) | Double | 0~1，不包括0和1 | 0.15    |
 | pagerank.l1DiffThreshold | 否       | 收敛精度               | Double | 0~1，不包括0和1 | 0.00001 |
-| pagerank.max_iterations  | 否       | 最大迭代次数           | Int    | 1~2000          | 1000    |
 | bsp.max_super_step       | 否       | 最大迭代次数           | Int    | 1~2000          | 10      |
 
 示例2: degree-centrality
