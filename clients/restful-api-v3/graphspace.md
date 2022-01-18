@@ -24,6 +24,7 @@ POST http://localhost:8080/graphspaces
   "storage_namespace": "hugegraph-server",
   "max_graph_number": 100,
   "max_role_number": 10,
+  "auth": false,
   "configs": {}
 }
 ```
@@ -52,7 +53,8 @@ POST http://localhost:8080/graphspaces
     "memory_used": 0,
     "storage_used": 0,
     "graph_number_used": 0,
-    "role_number_used": 0
+    "role_number_used": 0,
+    "auth": false
 }
 ```
 
@@ -113,11 +115,14 @@ GET http://127.0.0.1:8080/graphspaces/gs1
     "memory_used": 0,
     "storage_used": 0,
     "graph_number_used": 0,
-    "role_number_used": 0
+    "role_number_used": 0,
+    "auth": false
 }
 ```
 
 #### 10.1.4 更新某个图空间
+
+注意：auth鉴权配置，在创建图空间的过程一旦确定下来，不允许更新
 
 ##### Method & Url
 
@@ -174,7 +179,8 @@ PUT http://127.0.0.1:8080/graphspaces/gs1
     "memory_used": 0,
     "storage_used": 0,
     "graph_number_used": 0,
-    "role_number_used": 0
+    "role_number_used": 0,
+    "auth": false
 }
 ```
 
@@ -183,7 +189,7 @@ PUT http://127.0.0.1:8080/graphspaces/gs1
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphspaces/gs1?confirm_message=I%27m+sure+to+drop+the+graph+space
+DELETE http://localhost:8080/graphspaces/gs1
 ```
 
 > 注意：删除图空间，会导致图空间的全部资源被释放。

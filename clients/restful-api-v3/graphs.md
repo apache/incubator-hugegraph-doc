@@ -5,18 +5,19 @@
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphspaces/gs1/graphs/hg1
+POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph
 ```
 
 ##### Request Body
 
-```
+```json
 {
   "gremlin.graph": "com.baidu.hugegraph.HugeFactory",
   "backend": "hstore",
   "serializer": "binary",
   "store": "hugegraph",
-  "pd.peers":"ip:port"
+  "search.text_analyzer": "jieba",
+  "search.text_analyzer_mode": "INDEX"
 }
 ```
 
@@ -30,8 +31,9 @@ POST http://localhost:8080/graphspaces/gs1/graphs/hg1
 
 ```json
 {
-    "name": "hg1",
-    "backend": "rocksdb"
+  "name": "hugegraph",
+  "backend": "hstore",
+  "description": ""
 }
 ```
 
@@ -78,8 +80,9 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph
 
 ```json
 {
-    "name": "hugegraph",
-    "backend": "cassandra"
+  "name": "hugegraph",
+  "backend": "hstore",
+  "description": ""
 }
 ```
 
@@ -110,16 +113,10 @@ PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph
 
 #### 6.1.5 删除某个图，**该操作需要管理员权限**
 
-##### Params
-
-由于删除图是一个比较危险的操作，为避免用户误调用，我们给API添加了用于确认的参数：
-
-- confirm_message: 默认为`I'm sure to drop the graph`
-
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph?confirm_message=I%27m+sure+to+drop+the+graph
+DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph
 ```
 
 ##### Response Status
@@ -146,25 +143,16 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/conf
 
 ##### Response Body
 
-```properties
-# gremlin entrence to create graph
-gremlin.graph=com.baidu.hugegraph.HugeFactory
-
-# cache config
-#schema.cache_capacity=1048576
-#graph.cache_capacity=10485760
-#graph.cache_expire=600
-
-# schema illegal name template
-#schema.illegal_name_regex=\s+|~.*
-
-#vertex.default_label=vertex
-
-backend=cassandra
-serializer=cassandra
-
-store=hugegraph
-...
+```json
+{
+  "search.text_analyzer": "jieba",
+  "gremlin.graph": "com.baidu.hugegraph.HugeFactory",
+  "search.text_analyzer_mode": "INDEX",
+  "serializer": "binary",
+  "backend": "hstore",
+  "store": "hugegraph1",
+  "pd.peers": "127.0.0.1:8686"
+}
 ```
 
 ### 6.3 Mode
