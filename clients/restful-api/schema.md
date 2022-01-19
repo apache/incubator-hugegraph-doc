@@ -2,10 +2,14 @@
 
 HugeGraph 提供单一接口获取某个图的全部 Schema 信息，包括：PropertyKey、VertexLabel、EdgeLabel 和 IndexLabel。
 
+##### Params
+
+- format: 返回 schema 的格式，默认为 json，可选值为 [json, groovy]
+
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/schema
+GET http://localhost:8080/graphs/hugegraph/schema?format=json
 ```
 
 ##### Response Status

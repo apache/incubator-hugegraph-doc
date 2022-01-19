@@ -11,7 +11,7 @@ HugeGraph 提供单一接口获取和更新某个图的全部 Schema 信息，�
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema?format=json
 ```
 
 ##### Response Status
