@@ -48,7 +48,6 @@ mvn package -DskipTests
 - 异步任务管理类，task-list、task-get、task-delete、task-cancel 和 task-clear
 - Gremlin类，gremlin-execute 和 gremlin-schedule
 - 备份/恢复类，backup、restore、migrate、schedule-backup 和 dump
-- 安装部署类，deploy、clear、start-all 和 stop-all
 
 ```bash
 Usage: hugegraph [options] [command] [command options]
@@ -108,9 +107,7 @@ Usage: hugegraph [options] [command] [command options]
 - graph-list，列出某个 HugeGraph-Server 中全部的图
 - graph-get，获取某个图及其存储后端类型
 - graph-clear，清除某个图的全部 schema 和 data
-    - --confirm-message 或者 -c，必填项，清空确认信息，需要手动输入，二次确认防止误操作，"I'm sure to delete all data"，包括双引号
 - graph-drop，删除一个图
-    - --confirm-message 或者 -c，必填项，删除确认信息，需要手动输入，二次确认防止误操作，"I'm sure to drop the graph"，包括双引号
 
 > 当需要把备份的图原样恢复到一个新的图中的时候，需要先将图模式设置为 RESTORING 模式；当需要将备份的图合并到已存在的图中时，需要先将图模式设置为 MERGING 模式。
 
@@ -196,31 +193,18 @@ Usage: hugegraph [options] [command] [command options]
     - --log 或者 -l，指定日志目录，默认为当前目录
     - --retry，指定失败重试次数，默认为 3
     - --split-size 或者 -s，指定在备份时对顶点或者边分块的大小，默认为 1048576
-    - -D，用 -Dkey=value 的模式指定动态参数，用来备份数据到 HDFS 时，指定 HDFS 的配置项，例如：-Dfs.default.name=hdfs://localhost:9000 
-
-##### 3.7 安装部署类
-
-- deploy，一键下载、安装和启动 HugeGraph-Server 和 HugeGraph-Studio
-    - -v，必填项，指明安装的 HugeGraph-Server 和 HugeGraph-Studio 的版本号，最新的是 0.9
-    - -p，必填项，指定安装的 HugeGraph-Server 和 HugeGraph-Studio 目录
-    - -u，选填项，指定下载 HugeGraph-Server 和 HugeGraph-Studio 压缩包的链接
-- clear，清理 HugeGraph-Server 和 HugeGraph-Studio 目录和tar包
-    - -p，必填项，指定要清理的 HugeGraph-Server 和 HugeGraph-Studio 的目录
-- start-all，一键启动 HugeGraph-Server 和 HugeGraph-Studio，并启动监控，服务死掉时自动拉起服务
-    - -v，必填项，指明要启动的 HugeGraph-Server 和 HugeGraph-Studio 的版本号，最新的是 0.9
-    - -p，必填项，指定安装了 HugeGraph-Server 和 HugeGraph-Studio 的目录
-- stop-all，一键关闭 HugeGraph-Server 和 HugeGraph-Studio
+    - -D，用 -Dkey=value 的模式指定动态参数，用来备份数据到 HDFS 时，指定 HDFS 的配置项，例如：-Dfs.default.name=hdfs://localhost:9000
 
 > deploy命令中有可选参数 -u，提供时会使用指定的下载地址替代默认下载地址下载 tar 包，并且将地址写入`~/hugegraph-download-url-prefix`文件中；之后如果不指定地址时，会优先从`~/hugegraph-download-url-prefix`指定的地址下载 tar 包；如果 -u 和`~/hugegraph-download-url-prefix`都没有时，会从默认下载地址进行下载
 
-##### 3.8 具体命令参数
+##### 3.7 具体命令参数
 
 各子命令的具体参数如下：
 
 ```bash
 Usage: hugegraph [options] [command] [command options]
   Options:
-    --graphspace
+    --space
       Name of graph space
       Default: DEFAULT
     --graph
@@ -627,7 +611,7 @@ Usage: hugegraph [options] [command] [command options]
 
 ```
 
-##### 3.9 具体命令示例
+##### 3.8 具体命令示例
 
 ###### 1. gremlin语句
 
@@ -670,13 +654,13 @@ Usage: hugegraph [options] [command] [command options]
 ###### 5. 清空图
 
 ```bash
-./bin/hugegraph --url http://127.0.0.1:8080 --space gs1 --graph hugegraph graph-clear -c "I'm sure to delete all data"
+./bin/hugegraph --url http://127.0.0.1:8080 --space gs1 --graph hugegraph graph-clear
 ```
 
 ###### 6. 删除图
 
 ```bash
-./bin/hugegraph --url http://127.0.0.1:8080 --space gs1 --graph hugegraph graph-drop -c "I'm sure to drop the graph"
+./bin/hugegraph --url http://127.0.0.1:8080 --space gs1 --graph hugegraph graph-drop
 ```
 
 ###### 7. 图备份
