@@ -521,33 +521,6 @@ Usage: hugegraph [options] [command] [command options]
             Syntax: -Dkey=value
             Default: {}
 
-    deploy      Install HugeGraph-Server and HugeGraph-Studio
-      Usage: deploy [options]
-        Options:
-        * -p
-            Install path of HugeGraph-Server and HugeGraph-Studio
-          -u
-            Download url prefix path of HugeGraph-Server and HugeGraph-Studio
-        * -v
-            Version of HugeGraph-Server and HugeGraph-Studio
-
-    start-all      Start HugeGraph-Server and HugeGraph-Studio
-      Usage: start-all [options]
-        Options:
-        * -p
-            Install path of HugeGraph-Server and HugeGraph-Studio
-        * -v
-            Version of HugeGraph-Server and HugeGraph-Studio
-
-    clear      Clear HugeGraph-Server and HugeGraph-Studio
-      Usage: clear [options]
-        Options:
-        * -p
-            Install path of HugeGraph-Server and HugeGraph-Studio
-
-    stop-all      Stop HugeGraph-Server and HugeGraph-Studio
-      Usage: stop-all
-
     auth-backup      null
       Usage: auth-backup [options]
         Options:
