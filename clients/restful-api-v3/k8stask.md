@@ -2,11 +2,31 @@
 
 #### 7.2.1 创建图计算任务
 
-##### Params
+##### 功能介绍
 
-- algorithm: 算法名称，可以为 page-rank， degree-centrality， wcc， triangle-count， rings， rings-with-filter， betweenness-centrality， closeness-centrality， lpa， links， kcore， louvain， clustering-coefficient 
-- worker: worker数量，数量限制[1, 100]
-- params:参数，见请求体示例
+根据算法名称创建不同算法任务
+
+##### URI
+
+```
+POST /graphspaces/${graphspace}/graphs/${graph}/jobs/computerdis
+```
+
+##### URI参数
+ 
+|  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
+|  ----  | ----  | ----  | ----  | ----  | ---- |
+| graphspace  | 是 | String  |   |   | 图空间名称  |
+| graph  | 是 | String  |   |   | 图名称  |
+
+##### Body参数
+
+|  名称   | 是否必填  | 类型  | 默认值  | 取值范围  | 说明  |
+|  ----  | ----  | ----  | ----  | ----  | ----  |
+| algorithm  | 是 | String  |   | page-rank， degree-centrality， wcc， triangle-count， rings， rings-with-filter， betweenness-centrality， closeness-centrality， lpa， links， kcore， louvain， clustering-coefficient  | 算法类型  |
+| worker  | 是 | Int  |   | [1, 100]  | 并行运行数量  |
+| params  | 是 | String  |   |   | 每种算法具体的参数，见请求体示例  |
+
 
 ##### Request Body
 
@@ -23,7 +43,7 @@
   }
 }
 ```
-| 参数                     | 是否必选 | 说明                   | 类型   | 取值范围        | 默认值  |
+| 名称                     | 是否必填 | 说明                   | 类型   | 取值范围        | 默认值  |
 | :----------------------- | :------- | :--------------------- | :----- | :-------------- | :------ |
 | pagerank.alpha           | 否       | 权重系数(又称阻尼系数) | Double | 0~1，不包括0和1 | 0.15    |
 | pagerank.l1DiffThreshold | 否       | 收敛精度               | Double | 0~1，不包括0和1 | 0.00001 |
@@ -40,7 +60,7 @@
   }
 }
 ```
-| 参数                              | 是否必选 | 说明       | 类型   | 取值范围 | 默认值             |
+| 名称                              | 是否必填 | 说明       | 类型   | 取值范围 | 默认值             |
 | :-------------------------------- | :------- | :--------- | :----- | :------- | :----------------- |
 | degree_centrality.weight_property | 否       | 权重属性名 | String |          | "",为空时边权重为1 |
 
@@ -55,7 +75,7 @@
 }
 }
 ```
-| 参数               | 是否必选 | 说明         | 类型 | 取值范围 | 默认值 |
+| 名称               | 是否必填 | 说明         | 类型 | 取值范围 | 默认值 |
 | :----------------- | :------- | :----------- | :--- | :------- | :----- |
 | bsp.max_super_step | 否       | 最大迭代次数 | Int  | 1~2000   | 10     |
 
@@ -71,7 +91,7 @@
   }
 }
 ```
-| 参数                  | 是否必选 | 说明             | 类型   | 取值范围 | 默认值 |
+| 名称                  | 是否必填 | 说明             | 类型   | 取值范围 | 默认值 |
 | :-------------------- | :------- | :--------------- | :----- | :------- | :----- |
 | bsp.max_super_step    | 否       | 最大迭代次数     | Int    | 1~2000   | 10     |
 | rings.property_filter | 否       | 点边属性过滤条件 | String |          | {}     |
@@ -88,7 +108,7 @@
   }
 }
 ```
-| 参数                                 | 是否必选 | 说明       | 类型   | 取值范围 | 默认值              |
+| 名称                                 | 是否必填 | 说明       | 类型   | 取值范围 | 默认值              |
 | :----------------------------------- | :------- | :--------- | :----- | :------- | :------------------ |
 | closeness_centrality.weight_property | 否       | 权重属性名 | String |          | ""，为空时边权重为1 |
 | closeness_centrality.sample_rate     | 否       | 边的采样率 | Double | (0, 1.0] | 1.0  
@@ -104,7 +124,7 @@
   }
 }
 ```
-| 参数                                 | 是否必选 | 说明       | 类型   | 取值范围 | 默认值              |
+| 名称                                 | 是否必填 | 说明       | 类型   | 取值范围 | 默认值              |
 | :----------------------------------- | :------- | :--------- | :----- | :------- | :------------------ |
 | closeness_centrality.sample_rate     | 否       | 边的采样率 | Double | (0, 1.0] | 1.0  
 
@@ -120,7 +140,7 @@
   }
 }
 ```
-| 参数                 | 是否必选 | 说明             | 类型   | 取值范围 | 默认值 |
+| 名称                 | 是否必填 | 说明             | 类型   | 取值范围 | 默认值 |
 | :------------------- | :------- | :--------------- | :----- | :------- | :----- |
 | bsp.max_super_step   | 否       | 最大迭代次数     | Int    | 1~2000   | 10     |
 | links.analyze_config | 是       | 链路传播条件配置 | String |          | {}     |
@@ -129,7 +149,7 @@
 
 ##### Hdfs 输出参数
 
-| 参数                         | 是否必选 | 说明                         | 默认值                                                   |
+| 名称                         | 是否必填 | 说明                         | 默认值                                                   |
 | ---------------------------- | -------- | ---------------------------- | -------------------------------------------------------- |
 | output.output_class          | 是       | 输出类                       | com.baidu.hugegraph.computer.core.output.hdfs.HdfsOutput |
 | output.hdfs_url              | 是       | Hdfs地址                     | hdfs://127.0.0.1:9000                                    |
@@ -151,19 +171,40 @@
 }
 ```
 
-##### Method & Url
+##### Response
 
-```
-POST http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/jobs/computerdis
-```
+|  名称   | 类型  |  说明  |
+|  ----  | ----  | ----  |
+| task_id  | String | 返回创建的任务id  |
 
-##### Response Status
+##### 使用示例 
+ 
+###### Method & Url
+ 
+```
+POST http://localhost:8080/graphspaces/${graphspace}/graphs/${graph}/jobs/computerdis
+``` 
+ 
+###### Request Body 
+ 
+```json
+{
+  "algorithm": "page-rank",
+  "worker": 5,
+  "params": {
+    "pagerank.alpha": "0.15",
+    "pagerank.l1DiffThreshold": "0.00001",
+    "bsp.max_super_step": "10"
+  }
+}
+```
+ 
+###### Response Status
 
 ```json
 201
 ```
-
-##### Response Body
+###### Response Body 
 
 ```json
 {
@@ -173,20 +214,42 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/jobs/computer
 
 #### 7.2.2 删除图计算任务
 
-##### Method & Url
+##### URI
 
 ```
-DELETE http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/jobs/computerdis/{task_id}
+DELETE /graphspaces/${graphspace}/graphs/${graph}/jobs/computerdis/${task_id}
 ```
+##### URI参数
+ 
+|  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
+|  ----  | ----  | ----  | ----  | ----  | ---- |
+| graphspace  | 是 | String  |   |   | 图空间名称  |
+| graph  | 是 | String  |   |   | 图名称  |
+| task_id  | 是 | String  |   |   | 创建图计算任务中返回的task_id  |
 
-##### Response Status
+##### Response
+
+|  名称   | 类型  |  说明  |
+|  ----  | ----  | ----  |
+| task_id  | String | 删除的任务id  |
+| message  | String | 执行状态  |
+ 
+
+##### 使用示例 
+ 
+###### Method & Url
+ 
+```
+DELETE http://localhost:8080/graphspaces/${graphspace}/graphs/${graph}/jobs/computerdis/${task_id}
+```
+ 
+###### Response Status
 
 ```json
 200
-```
+``` 
 
-##### Response Body
-
+###### Response Body
 ```json
 {
   "task_id": "7",
@@ -196,20 +259,41 @@ DELETE http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/jobs/comput
 
 #### 7.2.3 取消图计算任务
 
-##### Method & Url
+##### URI
 
 ```
-PUT http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/jobs/computerdis/{task_id}
+PUT /graphspaces/${graphspace}/graphs/${graph}/jobs/computerdis/${task_id}
 ```
+##### URI参数说明
+ 
+|  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
+|  ----  | ----  | ----  | ----  | ----  | ---- |
+| graphspace  | 是 | String  |   |   | 图空间名称  |
+| graph  | 是 | String  |   |   | 图名称  |
+| task_id  | 是 | String  |   |   | 创建图计算任务中返回的task_id  |
 
-##### Response Status
+##### Response
+
+|  名称   | 类型  |  说明  |
+|  ----  | ----  | ----  |
+| task_id  | String | 取消的任务id  |
+ 
+##### 使用示例
+ 
+ 
+###### Method & Url
+ 
+```
+PUT http://localhost:8080/graphspaces/${graphspace}/graphs/${graph}/jobs/computerdis/${task_id}
+```
+ 
+###### Response Status
 
 ```json
 202
 ```
 
-##### Response Body
-
+###### Response Body
 ```json
 {
   "task_id": "8"
@@ -218,13 +302,46 @@ PUT http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/jobs/computerd
 
 #### 7.2.4 查看图计算任务
 
-##### Method & Url
+##### URI
 
 ```
-GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/jobs/computerdis/{task_id}
+GET /graphspaces/${graphspace}/graphs/${graph}/jobs/computerdis/${task_id}
+```
+##### URI参数
+ 
+|  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
+|  ----  | ----  | ----  | ----  | ----  | ---- |
+| graphspace  | 是 | String  |   |   | 图空间名称  |
+| graph  | 是 | String  |   |   | 图名称  |
+| task_id  | 是 | String  |   |   | 创建图计算任务中返回的task_id  |
+
+##### Response
+
+|  名称   | 类型 |  说明  |
+|  ----  | ---|  ----  |
+| task_name  |String| 任务名 |
+| task_progress  |Int| 任务执行进度 |
+| task_create  |Long| 任务创建时间戳 |
+| task_status  |String| 任务状态 |
+| task_update  |Long| 任务状态更新时间戳 |
+| task_retries  |Int| 任务重试次数 |
+| id  |Int| 任务id |
+| task_type  |String| 任务类型 |
+| task_callable  |String| 任务回调函数 |
+| task_input  |String| 任务输入参数 |
+| task_server  |String| 任务执行server |
+
+ 
+##### 使用示例
+ 
+ 
+###### Method & Url
+ 
+```
+GET http://localhost:8080/graphspaces/${graphspace}/graphs/${graph}/jobs/computerdis/${task_id}
 ```
 
-##### Response Status
+###### Response Status
 
 ```json
 200
@@ -250,17 +367,45 @@ GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/jobs/computerd
 
 #### 7.2.5 查看图计算任务列表
 
-##### Params
-
-- limit: 100
-
-##### Method & Url
+##### URI
 
 ```
-GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/jobs/computerdis?limit=100
+GET /graphspaces/${graphspace}/graphs/${graph}/jobs/computerdis?limit=${limit}
+```
+##### URI参数
+ 
+|  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
+|  ----  | ----  | ----  | ----  | ----  | ---- |
+| graphspace  | 是 | String  |   |   | 图空间名称  |
+| graph  | 是 | String  |   |   | 图名称  |
+| limit  | 否 | Int  |   |   | 返回结果最大条数  |
+
+##### body参数
+ 无
+
+##### Response
+|  名称   | 类型 |  说明  |
+|  ----  | ---|  ----  |
+| task_name  |String| 任务名 |
+| task_progress  |Int| 任务执行进度 |
+| task_create  |Long| 任务创建时间戳 |
+| task_status  |String| 任务状态 |
+| task_update  |Long| 任务状态更新时间戳 |
+| task_retries  |Int| 任务重试次数 |
+| id  |Int| 任务id |
+| task_type  |String| 任务类型 |
+| task_server  |String| 任务执行server |
+ 
+##### 使用示例
+ 
+ 
+###### Method & Url
+ 
+```
+GET http://localhost:8080/graphspaces/${graphspace}/graphs/${graph}/jobs/computerdis?limit=100
 ```
 
-##### Response Status
+###### Response Status
 
 ```json
 200
