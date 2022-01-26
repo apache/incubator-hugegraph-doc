@@ -289,6 +289,7 @@ POST /graphspaces/${graphspace}/graphs/${graph}/traversers/kout
 | with_vertex       | 否       |  Bool    |  false  |true,false   | false时表示只返回顶点id，true表示返回结果包含完整的顶点信息（路径中的全部顶点）,为true时with_path为true，返回所有路径中的顶点的完整信息，with_path为false，返回所有邻居的完整信息     |
 
 表1 Steps 对象
+
 | 名称                     | 是否必填 |  类型   | 默认值  |取值范围        |  说明                   |
 | :----------------------- | :------- | :--------------------- | :----- | :-------------- | :------ |
 | direction | 否       |  String |  BOTH | OUT,IN,BOTH（出，入，双向） |起始顶点向外发散的方向 |
@@ -298,6 +299,7 @@ POST /graphspaces/${graphspace}/graphs/${graph}/traversers/kout
 | vertex_steps       | 否       |  List    | -          |   -    |点Step集合，详情见表2 点边Step           |
 
 表2 点边Step
+
 | 名称       | 是否必填 |  类型   | 默认值  |取值范围        |  说明                   |
 | :------| :------- | :----------- | :----- | :-------------- | :---------------------- |
 | label       | 否       |  String    | -          |   -    |点边类型           |
@@ -551,6 +553,7 @@ POST /graphspaces/${graphspace}/graphs/${graph}/traversers/kneighbor
 | with_vertex       | 否       |  Bool    |  false  |true,false   | false时表示只返回顶点id，true表示返回结果包含完整的顶点信息（路径中的全部顶点）,为true时with_path为true，返回所有路径中的顶点的完整信息，with_path为false，返回所有邻居的完整信息     |
 
 表1 Steps 对象
+
 | 名称                     | 是否必填 |  类型   | 默认值  |取值范围        |  说明                   |
 | :----------------------- | :------- | :--------------------- | :----- | :-------------- | :------ |
 | direction | 否       |  String |  BOTH | OUT,IN,BOTH（出，入，双向） |起始顶点向外发散的方向 |
@@ -560,6 +563,7 @@ POST /graphspaces/${graphspace}/graphs/${graph}/traversers/kneighbor
 | vertex_steps       | 否       |  List    | -          |   -    |点Step集合，详情见表2 点边Steps           |
 
 表2 点边Steps
+
 | 名称       | 是否必填 |  类型   | 默认值  |取值范围        |  说明                   |
 | :------| :------- | :----------- | :----- | :-------------- | :---------------------- |
 | label       | 否       |  String    | -          |   -    |点边类型           |
@@ -897,6 +901,7 @@ POST /graphspaces/${graphspace}/graphs/${graph}/traversers/kneighbor
 | steps       | 是       |  Json    |  -  |-          | 从起始点出发的Step集合，详情见表1 Steps 对象          |
 
 表1 Steps 对象
+
 | 名称                     | 是否必填 |  类型   | 默认值  |取值范围        |  说明                   |
 | :----------------------- | :------- | :--------------------- | :----- | :-------------- | :------ |
 | direction | 否       |  String |  BOTH | OUT,IN,BOTH（出，入，双向） |起始顶点向外发散的方向 |
@@ -906,6 +911,7 @@ POST /graphspaces/${graphspace}/graphs/${graph}/traversers/kneighbor
 | properties       | 否       |  Json    | -          |   -    |通过属性的值过滤边           |
 
 表2 点边Steps
+
 | 名称       | 是否必填 |  类型   | 默认值  |取值范围        |  说明                   |
 | :------| :------- | :----------- | :----- | :-------------- | :---------------------- |
 | label       | 否       |  String    | -          |   -    |点边类型           |
