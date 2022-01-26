@@ -73,7 +73,7 @@ PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/variables/name
 ##### URI
 
 ```
-GET /graphspaces/${graphspace}/graphs/${hugegraph}/variables
+GET /graphspaces/${graphspace}/graphs/${graph}/variables
 ```
 
 ##### URI参数
@@ -81,7 +81,7 @@ GET /graphspaces/${graphspace}/graphs/${hugegraph}/variables
 |  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
 |  ----  | ----  | ----  | ----  | ----  | ---- |
 | graphspace  | 是 | String  |   |   | 图空间名称  |
-| hugegraph  | 是 | String  |   |   | 图名称  |
+| graph  | 是 | String  |   |   | 图名称  |
 
 ##### Body参数
 
@@ -130,7 +130,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/variables
 ##### URI
 
 ```
-GET /graphspaces/${graphspace}/graphs/${hugegraph}/variables/${key}
+GET /graphspaces/${graphspace}/graphs/${graph}/variables/${key}
 ```
 
 ##### URI参数
@@ -138,7 +138,7 @@ GET /graphspaces/${graphspace}/graphs/${hugegraph}/variables/${key}
 |  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
 |  ----  | ----  | ----  | ----  | ----  | ---- |
 | graphspace  | 是 | String  |   |   | 图空间名称  |
-| hugegraph  | 是 | String  |   |   | 图名称  |
+| graph  | 是 | String  |   |   | 图名称  |
 | key  | 是 | String  |   |   | 键值对key  |
 
 ##### Body参数
@@ -186,7 +186,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/variables/name
 ##### URI
 
 ```
-DELETE /graphspaces/${graphspace}/graphs/${hugegraph}/variables/${key}
+DELETE /graphspaces/${graphspace}/graphs/${graph}/variables/${key}
 
 ```
 
@@ -195,7 +195,7 @@ DELETE /graphspaces/${graphspace}/graphs/${hugegraph}/variables/${key}
 |  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
 |  ----  | ----  | ----  | ----  | ----  | ---- |
 | graphspace  | 是 | String  |   |   | 图空间名称  |
-| hugegraph  | 是 | String  |   |   | 图名称  |
+| graph  | 是 | String  |   |   | 图名称  |
 | key  | 是 | String  |   |   | 键值对key  |
 
 ##### Body参数

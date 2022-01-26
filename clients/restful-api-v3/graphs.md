@@ -9,7 +9,7 @@
 ##### URI
 
 ```
-POST /graphspaces/${graphspace}/graphs/${hugegraph}
+POST /graphspaces/${graphspace}/graphs/${graph}
 ```
 
 ##### URI参数
@@ -17,7 +17,7 @@ POST /graphspaces/${graphspace}/graphs/${hugegraph}
 |  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
 |  ----  | ----  | ----  | ----  | ----  | ---- |
 | graphspace  | 是 | String  |   |  | 图空间  |
-| hugegraph  | 是 | String  |   |  | 图  |
+| graph  | 是 | String  |   |  | 图  |
 
 ##### Body参数
 
@@ -152,7 +152,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs
 ##### URI
 
 ```
-GET /graphspaces/${graphspace}/graphs/${hugegraph}
+GET /graphspaces/${graphspace}/graphs/${graph}
 ```
 
 ##### URI参数
@@ -160,7 +160,7 @@ GET /graphspaces/${graphspace}/graphs/${hugegraph}
 |  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
 |  ----  | ----  | ----  | ----  | ----  | ---- |
 | graphspace  | 是 | String  |   |  | 图空间  |
-| hugegraph  | 是 | String  |   |  | 图  |
+| graph  | 是 | String  |   |  | 图  |
 
 ##### Body参数
 
@@ -211,7 +211,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph
 ##### URI
 
 ```
-PUT /graphspaces/${graphspace}/graphs/${hugegraph}
+PUT /graphspaces/${graphspace}/graphs/${graph}
 ```
 
 ##### URI参数
@@ -219,7 +219,7 @@ PUT /graphspaces/${graphspace}/graphs/${hugegraph}
 |  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
 |  ----  | ----  | ----  | ----  | ----  | ---- |
 | graphspace  | 是 | String  |   |  | 图空间  |
-| hugegraph  | 是 | String  |   |  | 图  |
+| graph  | 是 | String  |   |  | 图  |
 
 ##### Body参数
 
@@ -268,7 +268,7 @@ PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph
 ##### URI
 
 ```
-DELETE /graphspaces/${graphspace}/graphs/${hugegraph}
+DELETE /graphspaces/${graphspace}/graphs/${graph}
 ```
 
 ##### URI参数
@@ -276,7 +276,7 @@ DELETE /graphspaces/${graphspace}/graphs/${hugegraph}
 |  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
 |  ----  | ----  | ----  | ----  | ----  | ---- |
 | graphspace  | 是 | String  |   |  | 图空间  |
-| hugegraph  | 是 | String  |   |  | 图  |
+| graph  | 是 | String  |   |  | 图  |
 
 ##### Body参数
 
@@ -319,7 +319,7 @@ DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph
 ##### URI
 
 ```
-GET /graphspaces/${graphspace}/graphs/${hugegraph}/conf
+GET /graphspaces/${graphspace}/graphs/${graph}/conf
 ```
 
 ##### URI参数
@@ -327,7 +327,7 @@ GET /graphspaces/${graphspace}/graphs/${hugegraph}/conf
 |  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
 |  ----  | ----  | ----  | ----  | ----  | ---- |
 | graphspace  | 是 | String  |   |  | 图空间  |
-| hugegraph  | 是 | String  |   |  | 图  |
+| graph  | 是 | String  |   |  | 图  |
 
 ##### Body参数
 
@@ -408,7 +408,7 @@ Restore 时存在两种不同的模式： Restoring 和 Merging
 ##### URI
 
 ```
-GET /graphspaces/${graphspace}/graphs/${hugegraph}/mode
+GET /graphspaces/${graphspace}/graphs/${graph}/mode
 ```
 
 ##### URI参数
@@ -416,7 +416,7 @@ GET /graphspaces/${graphspace}/graphs/${hugegraph}/mode
 |  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
 |  ----  | ----  | ----  | ----  | ----  | ---- |
 | graphspace  | 是 | String  |   |  | 图空间  |
-| hugegraph  | 是 | String  |   |  | 图  |
+| graph  | 是 | String  |   |  | 图  |
 
 ##### Body参数
 
@@ -466,7 +466,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/mode
 ##### URI
 
 ```
-PUT /graphspaces/${graphspace}/graphs/${hugegraph}/mode
+PUT /graphspaces/${graphspace}/graphs/${graph}/mode
 ```
 
 ##### URI参数
@@ -474,7 +474,7 @@ PUT /graphspaces/${graphspace}/graphs/${hugegraph}/mode
 |  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
 |  ----  | ----  | ----  | ----  | ----  | ---- |
 | graphspace  | 是 | String  |   |  | 图空间  |
-| hugegraph  | 是 | String  |   |  | 图  |
+| graph  | 是 | String  |   |  | 图  |
 
 ##### Body参数
 
@@ -534,7 +534,7 @@ PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/mode
 ##### URI
 
 ```
-GET /graphspaces/${graphspace}/graphs/${hugegraph}/graph_read_mode
+GET /graphspaces/${graphspace}/graphs/${graph}/graph_read_mode
 ```
 
 ##### URI参数
@@ -542,7 +542,7 @@ GET /graphspaces/${graphspace}/graphs/${hugegraph}/graph_read_mode
 |  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
 |  ----  | ----  | ----  | ----  | ----  | ---- |
 | graphspace  | 是 | String  |   |  | 图空间  |
-| hugegraph  | 是 | String  |   |  | 图  |
+| graph  | 是 | String  |   |  | 图  |
 
 ##### Body参数
 
@@ -589,7 +589,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph_read_mode
 ##### URI
 
 ```
-PUT /graphspaces/${graphspace}/graphs/${hugegraph}/graph_read_mode
+PUT /graphspaces/${graphspace}/graphs/${graph}/graph_read_mode
 ```
 
 ##### URI参数
@@ -597,7 +597,7 @@ PUT /graphspaces/${graphspace}/graphs/${hugegraph}/graph_read_mode
 |  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
 |  ----  | ----  | ----  | ----  | ----  | ---- |
 | graphspace  | 是 | String  |   |  | 图空间  |
-| hugegraph  | 是 | String  |   |  | 图  |
+| graph  | 是 | String  |   |  | 图  |
 
 ##### Body参数
 

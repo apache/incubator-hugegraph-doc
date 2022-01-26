@@ -239,7 +239,7 @@ POST http://localhost:8080/gremlin
 ##### URI
 
 ```
-POST /graphspaces/${graphspace}/graphs/${hugegraph}/jobs/gremlin
+POST /graphspaces/${graphspace}/graphs/${graph}/jobs/gremlin
 ```
 
 ##### URI参数
@@ -247,7 +247,7 @@ POST /graphspaces/${graphspace}/graphs/${hugegraph}/jobs/gremlin
 |  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
 |  ----  | ----  | ----  | ----  | ----  | ---- |
 | graphspace  | 是 | String  |   |  | 图空间  |
-| hugegraph  | 是 | String  |   |  | 图  |
+| graph  | 是 | String  |   |  | 图  |
 
 ##### Body参数
 
@@ -300,7 +300,7 @@ POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/jobs/gremlin
 注意：
 
 > 异步执行Gremlin语句暂不支持aliases，可以使用 `graph` 代表要操作的图，也可以直接使用图的名字， 例如 `hugegraph`;
-另外`g`代表 traversal，等价于 `graph.traversal()` 或者 `gs1-hugegraph.traversal()`
+另外`g`代表 traversal，等价于 `graph.traversal()` 或者 `hugegraph.traversal()`
 
 注：
 
