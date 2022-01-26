@@ -1,10 +1,10 @@
 ### 6.1 Graphs
 
-#### 6.1.1 创建一个新图
+#### 6.1.1 创建图
 
 ##### 功能介绍
 
-创建一个新图
+创建一个新图，该操作需要图空间管理员或者超级管理员权限
 
 ##### URI
 
@@ -86,11 +86,11 @@ POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph
 }
 ```
 
-#### 6.1.2 列出数据库中全部的图
+#### 6.1.2 列出图空间中全部的图
 
 ##### 功能介绍
 
-列出数据库中全部的图
+列出图空间下中全部的图
 
 ##### URI
 
@@ -147,7 +147,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs
 
 ##### 功能介绍
 
-查看某个图的信息
+查看图空间下某个图的信息
 
 ##### URI
 
@@ -202,11 +202,11 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph
 }
 ```
 
-#### 6.1.4 清空某个图的全部数据，包括schema、vertex、edge和index等，**该操作需要管理员权限**
+#### 6.1.4 清空图数据，包括schema、vertex、edge和index等
 
 ##### 功能介绍
 
-清空某个图的全部数据，包括schema、vertex、edge和index等，**该操作需要管理员权限**
+清空某个图的全部数据，包括schema、vertex、edge和index等，该操作需要图空间管理员或者超级管理员权限
 
 ##### URI
 
@@ -259,16 +259,16 @@ PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph
 
 无
 
-#### 6.1.5 删除某个图，**该操作需要管理员权限**
+#### 6.1.5 删除图
 
 ##### 功能介绍
 
-删除某个图，**该操作需要管理员权限**
+删除某个图，该操作需要图空间管理员权限或者超级管理员权限
 
 ##### URI
 
 ```
-DELETE http://localhost:8080/graphspaces/${graphspace}/graphs/${hugegraph}
+DELETE /graphspaces/${graphspace}/graphs/${hugegraph}
 ```
 
 ##### URI参数
@@ -306,12 +306,11 @@ DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph
 
 ###### Response Body
 
-```json
-```
+无
 
 ### 6.2 Conf
 
-#### 6.2.1 查看某个图的配置，**该操作需要管理员权限**
+#### 6.2.1 查看图的配置
 
 ##### 功能介绍
 
@@ -320,7 +319,7 @@ DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph
 ##### URI
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/conf
+GET /graphspaces/${graphspace}/graphs/${hugegraph}/conf
 ```
 
 ##### URI参数
@@ -400,11 +399,11 @@ Restore 时存在两种不同的模式： Restoring 和 Merging
 正常情况下，图模式为 None，当需要 Restore 图时，需要根据需要临时修改图模式为 Restoring 模式或者 Merging 模式，并在完成 Restore 时，恢复图模式为 None。
 
 
-#### 6.3.1 查看某个图的模式. **该操作需要管理员权限**
+#### 6.3.1 查看图模式
 
 ##### 功能介绍
 
-查看某个图的模式. **该操作需要管理员权限**
+查看某个图的模式
 
 ##### URI
 
@@ -458,11 +457,11 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/mode
 > 合法的图模式包括：NONE，RESTORING，MERGING
 
 
-#### 6.3.2 设置某个图的模式. **该操作需要管理员权限**
+#### 6.3.2 设置图模式
 
 ##### 功能介绍
 
-设置某个图的模式. **该操作需要管理员权限**
+设置某个图的模式
 
 ##### URI
 
@@ -519,18 +518,18 @@ PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/mode
 }
 ```
 
-### 6.4 Graph Read Mode
+### 6.4 图的读模式（Graph Read Mode）
 
 合法的图的读模式包括：OLTP_ONLY, ALL
     
 - OLTP 模式（默认），图的查询结果只包含OLTP类型的属性，不包含OLAP属性
 - ALL 模式，图的查询结果既包含OLTP类型的属性，又包含OLAP属性（如果有）
 
-#### 6.4.1 查看某个图的读模式
+#### 6.4.1 查看图的读模式
 
 ##### 功能介绍
 
-
+查看图的读模式
 
 ##### URI
 
@@ -581,7 +580,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph_read_mode
 }
 ```
 
-#### 6.4.2 设置某个图的读模式. **该操作需要管理员权限**
+#### 6.4.2 设置图的读模式
 
 ##### 功能介绍
 
