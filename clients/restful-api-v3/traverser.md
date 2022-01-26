@@ -216,7 +216,7 @@ GET /graphspaces/${graphspace}/graphs/${graph}/traversers/kout
 | :----------------------- | :----- | :-------------- |
 | vertices | List | 点Id列表 |
 
-##### 3.2.1.2 使用示例
+##### 使用示例
 
 ###### Method & Url
 
@@ -2348,7 +2348,7 @@ POST http://localhost:8080/graphspaces/${graphspace}/graphs/${graph}/traversers/
 GET graphspaces/${graphspace}/graphs/${graph}/traversers/crosspoints
 ```
 
-###### URI参数
+##### URI参数
 |  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
 |  ----  | ----  | ----  | ----  | ----  | ---- |
 | source  | 是 | String |   |   | 起始顶点id |
@@ -2612,7 +2612,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/cu
 GET graphspaces/${graphspace}/graphs/${graph}/traversers/rings
 ```
 
-###### URI参数
+##### URI参数
 
 | 名称       | 是否必填 | 类型   | 默认值   | 取值范围    | 说明                                                         |
 | ---------- | -------- | ------ | -------- | ----------- | ------------------------------------------------------------ |
@@ -2699,7 +2699,7 @@ GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/rin
 GET graphspaces/${graphspace}/graphs/${graph}/traversers/rays
 ```
 
-###### URI参数
+##### URI参数
 | 名称       | 是否必填 | 类型   | 默认值   | 取值范围    | 说明                                                         |
 | ---------- | -------- | ------ | -------- | ----------- | ------------------------------------------------------------ |
 | source     | 是       | Id     |          |             | 起始顶点id                                                   |
@@ -2790,7 +2790,7 @@ GET graphspaces/${graphspace}/graphs/${graph}/traversers/rays?source="1:marko"&m
 POST graphspaces/${graphspace}/graphs/${graph}/traversers/fusiformsimilarity
 ```
 
-###### URI参数
+##### URI参数
 
 无
 
@@ -2935,7 +2935,7 @@ AdamicAdar, 一般简称 AA 算法
 GET graphspaces/${graphspace}/graphs/${graph}/traversers/adamicadar
 ```
 
-###### URI参数
+##### URI参数
 | 名称       | 是否必填 | 类型   | 默认值 | 取值范围    | 说明                                                         |
 | ---------- | -------- | ------ | ------ | ----------- | ------------------------------------------------------------ |
 | vertex     | 是       | String |        |             | 定义起始顶点                                                 |
@@ -2993,8 +2993,7 @@ ResourceAllocation(RA), 一般称为资源分配算法
 ```
 GET graphspaces/${graphspace}/graphs/${graph}/traversers/resourceallocation}
 ```
-###### URI参数
-###### URI参数
+##### URI参数
 | 名称       | 是否必填 | 类型   | 默认值 | 取值范围    | 说明                                                         |
 | ---------- | -------- | ------ | ------ | ----------- | ------------------------------------------------------------ |
 | vertex     | 是       | String |        |             | 定义起始顶点                                                 |
@@ -3003,6 +3002,9 @@ GET graphspaces/${graphspace}/graphs/${graph}/traversers/resourceallocation}
 | label      | 否       | String |        |             | 默认代表所有edge label                                       |
 | max_degree | 否       | Int    | 10000  |             | 查询过程中，单个顶点遍历的最大邻接边数目                     |
 | limit      | 否       | Int    | 10000  |             | 返回的交点的最大数目                                         |
+
+##### Body参数
+无
 
 ##### Response
 
@@ -3053,7 +3055,7 @@ GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/res
 POST graphspaces/${graphspace}/graphs/${graph}/traversers/sameneighborsbatch
 ```
 
-###### URI参数
+##### URI参数
 
 无
 
