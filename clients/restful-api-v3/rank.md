@@ -127,13 +127,13 @@ Loader 导入数据的映射文件问下:
    3. 重复步骤2；
 3. 达到一定步数或达到精度后收敛，得到推荐列表。
 
-###### URI
+##### URI
 
 ```javascript
 POST /graphspaces/${graphspace}/graphs/${graph}/traversers/personalrank
 ```
 
-###### URI 参数
+##### URI 参数
 
 无
 
@@ -159,6 +159,7 @@ POST /graphspaces/${graphspace}/graphs/${graph}/traversers/personalrank
 | ---- | --------------- | ---------------------------------- |
 | 无   | IdList | 推荐列表的顶点 ID 与对应的 rank 值 |
 
+##### 使用示例
 ###### Method & Url
 
 ```javascript
@@ -301,13 +302,13 @@ public class Loader {
 在一般图结构中，找出每一层与给定起点相关性最高的前 N 个顶点及其相关度，用图的语义理解就是：从起点往外走，
 走到各层各个顶点的概率。
 
-###### URI
+##### URI
 
 ```javascript
 POST /graphspaces/${graphspace}/graphs/${graph}/traversers/neighborrank
 ```
 
-###### URI 参数
+##### URI 参数
 
 无
 
