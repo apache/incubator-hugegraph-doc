@@ -241,7 +241,7 @@ GET http://localhost:8080/graphspaces/graphspace/graphs/graph/traversers/kout?so
 }
 ```
 
-##### 3.2.1.3 适用场景
+##### 适用场景
 
 查找恰好N步关系可达的顶点。两个例子：
 
@@ -440,7 +440,7 @@ POST http://localhost:8080/graphspaces/graphspace/graphs/graph/traversers/kout
 
 ```
 
-##### 3.2.2.3 适用场景
+##### 适用场景
 
 参见 kout
 
@@ -863,7 +863,7 @@ GET http://localhost:8080/graphspaces/graphspace/graphs/graph/traversers/jaccard
 }
 ```
 
-##### 3.2.6.3 适用场景
+##### 适用场景
 
 用于评估两个点的相似性或者紧密度
 
