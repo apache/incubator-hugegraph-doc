@@ -779,15 +779,6 @@ GET /graphspaces/${graphspace}/graphs/${graph}/traversers/sameneighbors
 | :----------------------- | :----- | :-------------- |
 | same_neighbors | List | 共同邻居点Id列表 |
 
-##### Params
-
-- vertex：一个顶点id，必填项
-- other：另一个顶点id，必填项
-- direction：顶点向外发散的方向（OUT,IN,BOTH），选填项，默认是BOTH
-- label：边的类型，选填项，默认代表所有edge label
-- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
-- limit：返回的共同邻居的最大数目，选填项，默认为10000000
-
 ##### 使用示例
 
 ###### Method & Url
