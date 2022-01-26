@@ -4,37 +4,67 @@
 
 #### 11.1.1 创建一个服务
 
-##### Method & Url
+##### 功能介绍
+
+创建一个服务
+
+##### URI
+
+```
+POST /graphspaces/${graphspace}/services
+```
+
+
+##### URI参数
+
+|  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
+|  ----  | ----  | ----  | ----  | ----  | ---- |
+| graphspace  | 是 | String  |   |   | 图空间名称  |
+
+##### Body参数
+
+|  名称   | 是否必填  | 类型  | 默认值  | 取值范围  | 说明  |
+|  ----  | ----  | ----  | ----  | ----  | ----  |
+| name  | 是 | String  |   | 小写字母、数字和下划线组成，首字符必须是小写字母，长度不超过48  |  service 的名字 |
+| description  | 是 | String  |   |   |  service 的描述信息 |
+| count  | 是 | Int |   | > 0  |  HugeGraphServer 的数目 |
+| cpu_limit  | 是 | String  |   | > 0  |  HugeGraphServer 的 CPU 核数 |
+| memory_limit  | 是 | String  |   | > 0  |  HugeGraphServer 的内存大小，单位 GB |
+| deployment_type  | 是 | String  |   | K8S、MANUAL  |  service 的部署类型，K8S 指通过K8S集群启动服务，MANUAL 指通过手动部署的方式启动服务 |
+
+##### Response
+
+|  名称   | 类型 |  说明  |
+|  ----  | ---|  ----  |
+| name  | String | service 的名字 |
+| description  | String |  service 的描述信息 |
+| count  | Int |  HugeGraphServer 的总数目 |
+| running | Int | 运行的 HugeGraphServer 的数目
+| cpu_limit  | Int  |  HugeGraphServer 的 CPU 核数 |
+| memory_limit  | Int  |  HugeGraphServer 的内存大小，单位 GB |
+| deployment_type  | String  |  service 的部署类型 |
+| urls | Array | service 地址列表 |
+
+##### 使用示例
+
+###### Method & Url
 
 ```
 POST http://localhost:8080/graphspaces/gs1/services
 ```
 
-##### Request Body
+###### Request Body
 
 ```json
 {
   "name": "sv1",
-  "type": "OLTP",
   "description": "test oltp service",
   "count": 1,
   "cpu_limit": 2,
   "memory_limit": 4,
-  "storage_limit": 10,
-  "route_type": "NodePort",
   "deployment_type": "K8S"
 }
 ```
-
-其中：
-- type 指服务类型，可选值包括：OLTP、OLAP 和 STORAGE，目前仅支持 OLTP
-- deployment_type 指部署类型，可选值包括：K8S 和 MANUAL。
-    - K8S，指通过K8S集群启动服务
-    - MANUAL，指通过手动部署的方式启动服务
-- route_type 指服务的路由类型，可选值包括：ClusterIP、NodePort 和 LoadBalancer.
-    - ClusterIP，指服务使用 K8S 内部 IP
-    - NodePort，指服务使用 K8S 节点的 IP
-    - LoadBalancer，指服务使用外部 LoadBalancer 提供的 IP
 
 ##### Response Status
 
@@ -47,16 +77,12 @@ POST http://localhost:8080/graphspaces/gs1/services
 ```json
 {
     "name": "sv1",
-    "type": "OLTP",
     "deployment_type": "K8S",
     "description": "test oltp service",
     "count": 1,
     "running": 0,
     "cpu_limit": 2,
     "memory_limit": 4,
-    "storage_limit": 10,
-    "route_type": "NodePort",
-    "port": 8080,
     "urls": [
         "10.254.222.85:32357"
     ]
@@ -66,11 +92,45 @@ POST http://localhost:8080/graphspaces/gs1/services
 
 #### 11.1.2 列出某个图空间的所有服务
 
-##### Method & Url
+##### 功能介绍
+
+列出某个图空间的所有服务
+
+##### URI
+
+```
+GET /graphspaces/${graphspace}/services
+```
+
+##### URI参数
+
+|  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
+|  ----  | ----  | ----  | ----  | ----  | ---- |
+| graphspace  | 是 | String  |   |   | 图空间名称  |
+
+##### Body参数
+
+无
+
+##### Response
+
+|  名称   | 类型 |  说明  |
+|  ----  | ---|  ----  |
+| services  |Array| service 的名字列表 |
+
+##### 使用示例
+
+
+###### Method & Url
 
 ```
 GET http://localhost:8080/graphspaces/gs1/services
 ```
+
+
+###### Request Body
+
+无
 
 ##### Response Status
 
@@ -88,11 +148,51 @@ GET http://localhost:8080/graphspaces/gs1/services
 
 #### 11.1.3 查看某个服务
 
-##### Method & Url
+##### 功能介绍
+
+查看某个服务
+
+##### URI
+
+```
+GET /graphspaces/${graphspace}/services/${service}
+```
+
+##### URI参数
+
+|  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
+|  ----  | ----  | ----  | ----  | ----  | ---- |
+| graphspace  | 是 | String  |   |   | 图空间名称  |
+| service  | 是 | String  |   |   | 服务名称  |
+
+##### Body参数
+
+无
+
+##### Response
+
+|  名称   | 类型 |  说明  |
+|  ----  | ---|  ----  |
+| name  | String | service 的名字 |
+| description  | String |  service 的描述信息 |
+| count  | Int |  HugeGraphServer 的总数目 |
+| running | Int | 运行的 HugeGraphServer 的数目
+| cpu_limit  | Int  |  HugeGraphServer 的 CPU 核数 |
+| memory_limit  | Int  |  HugeGraphServer 的内存大小，单位 GB |
+| deployment_type  | String  |  service 的部署类型 |
+| urls | Array | service 地址列表 |
+
+##### 使用示例
+
+###### Method & Url
 
 ```
 GET http://127.0.0.1:8080/graphspaces/gs1/services/sv1
 ```
+
+###### Request Body
+
+无
 
 ##### Response Status
 
@@ -104,36 +204,64 @@ GET http://127.0.0.1:8080/graphspaces/gs1/services/sv1
 
 ```json
 {
-    "name": "sv2",
-    "type": "OLTP",
+    "name": "sv1",
     "deployment_type": "K8S",
     "description": "test oltp service",
     "count": 1,
-    "running": 0,
+    "running": 1,
     "cpu_limit": 2,
     "memory_limit": 4,
-    "storage_limit": 10,
-    "route_type": "NodePort",
-    "port": 8080,
     "urls": [
         "10.254.222.85:32357"
     ]
 }
-
 ```
 
 #### 11.1.4 删除某个服务
 
-##### Method & Url
+##### 功能介绍
+
+删除某个服务
+
+##### URI
 
 ```
-DELETE http://localhost:8080/graphspaces/gs1/services/sv1?confirm_message=I%27m+sure+to+delete+the+service
+DELETE /graphspaces/${graphspace}/services/${service}
 ```
 
-> 注意：删除图空间，会导致图空间的全部资源被释放。
+
+##### URI参数
+
+|  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
+|  ----  | ----  | ----  | ----  | ----  | ---- |
+| graphspace  | 是 | String  |   |   | 图空间名称  |
+| service  | 是 | String  |   |   | 服务名称  |
+
+##### Body参数
+
+无
+
+##### Response
+
+无
+
+##### 使用示例
+
+###### Method & Url
+
+```
+DELETE http://localhost:8080/graphspaces/gs1/services/sv1
+```
+
+
+###### Request Body
+
+无
 
 ##### Response Status
 
 ```json
 204
 ```
+
+> 注意：删除图空间，会导致图空间的全部资源被释放。

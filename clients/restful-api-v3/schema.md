@@ -11,42 +11,41 @@ HugeGraph 提供单一接口获取和更新某个图的全部 Schema 信息，�
 ##### URI
 
 ```
-GET /graphspaces/${graphspace}/graphs/${hugegraph}/schema?format=${format}
+GET /graphspaces/${graphspace}/graphs/${graph}/schema?format=${format}
 ```
 
 ##### URI参数
 
-| 名称       | 是否必填 | 类型   | 默认值 | 取值范围       | 说明             |
-| ---------- | -------- | ------ | ------ | -------------- | ---------------- |
-| graphspace | 是       | String |        |                | 图空间名称       |
-| hugegraph  | 是       | String |        |                | 图名称           |
-| format     | 否       | String | json   | [json, groovy] | 返回的schema格式 |
+|  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
+|  ----  | ----  | ----  | ----  | ----  | ---- |
+| graphspace  | 是 | String  |   |   | 图空间名称  |
+| graph  | 是 | String  |   |   | 图名称  |
+| format  | 是 | String  | json  |  json, groovy | schema 返回的格式  |
 
 ##### Body参数
+
 无
 
 ##### Response
-###### json格式请求
-| 名称         | 类型      | 说明                         |
-| ------------ | --------- | ---------------------------- |
-| propertyKeys | List[Map] | 图shcmea的property列表      |
-| vertexlabels | List[Map] | 图shcmea的vertex label列表   |
-| edgelabels   | List[Map] | 图shcmea的edge label属性列表 |
-| indexlabels  | List[Map] | 图shcmea的property index列表 |
 
-###### groovy格式请求
-| 名称   | 类型   | 说明                 |
-| ------ | ------ | -------------------- |
-| schema | String | 图shcmea的groovy脚本 |
+|  名称   | 类型 |  说明  |
+|  ----  | ---|  ----  |
+| propertykeys  |Array| propertykey 的列表 |
+| vertexlabels  |Array| vertexlabel 的列表 |
+| edgelabels  |Array| edgelabel 的列表 |
+| indexlabels  |Array| indexlabel 的列表 |
 
-
-##### 使用示例一：以json格式请求
+##### 使用示例1
 
 ###### Method & Url
 
 ```
 GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema?format=json
 ```
+
+###### Request Body
+
+无
 
 ###### Response Status
 
@@ -355,6 +354,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema?format=json
 }
 ```
 
+##### 使用示例2
 
 ##### 使用示例二：以groovy格式请求
 
@@ -364,7 +364,11 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema?format=json
 GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema?format=groovy
 ```
 
-###### Response Status
+###### Request Body
+
+无
+
+##### Response Status
 
 ```json
 200
@@ -373,7 +377,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema?format=groovy
 ###### Response Body
 
 ```json
-{"schema":"graph.schema().propertyKey(\"price\").asInt().ifNotExist().create();\ngraph.schema().propertyKey(\"date\").asText().ifNotExist().create();\ngraph.schema().propertyKey(\"city\").asText().ifNotExist().create();\ngraph.schema().propertyKey(\"age\").asInt().ifNotExist().create();\ngraph.schema().propertyKey(\"lang\").asText().ifNotExist().create();\ngraph.schema().propertyKey(\"weight\").asDouble().ifNotExist().create();\ngraph.schema().propertyKey(\"name\").asText().ifNotExist().create();\n\ngraph.schema().vertexLabel(\"person\").properties(\"name\",\"age\",\"city\").primaryKeys(\"name\").nullableKeys(\"age\").enableLabelIndex(true).ifNotExist().create();\ngraph.schema().vertexLabel(\"software\").properties(\"name\",\"lang\",\"price\").primaryKeys(\"name\").nullableKeys(\"price\").enableLabelIndex(true).ifNotExist().create();\n\ngraph.schema().edgeLabel(\"knows\").sourceLabel(\"person\").targetLabel(\"person\").properties(\"weight\",\"date\").multiTimes().sortKeys(\"date\").nullableKeys(\"weight\").enableLabelIndex(true).ifNotExist().create();\ngraph.schema().edgeLabel(\"created\").sourceLabel(\"person\").targetLabel(\"software\").properties(\"weight\",\"date\").nullableKeys(\"weight\").enableLabelIndex(true).ifNotExist().create();\n\ngraph.schema().indexLabel(\"personByCity\").onV(\"person\").by(\"city\").secondary().ifNotExist().create();\ngraph.schema().indexLabel(\"personByAge\").onV(\"person\").by(\"age\").range().ifNotExist().create();\ngraph.schema().indexLabel(\"softwareByPrice\").onV(\"software\").by(\"price\").range().ifNotExist().create();\ngraph.schema().indexLabel(\"createdByDate\").onE(\"created\").by(\"date\").secondary().ifNotExist().create();\ngraph.schema().indexLabel(\"createdByWeight\").onE(\"created\").by(\"weight\").range().ifNotExist().create();\ngraph.schema().indexLabel(\"knowsByWeight\").onE(\"knows\").by(\"weight\").range().ifNotExist().create();\n"}
+{"schema":"graph.schema().propertyKey('price').asInt().ifNotExist().create();\ngraph.schema().propertyKey('date').asText().ifNotExist().create();\ngraph.schema().propertyKey('city').asText().ifNotExist().create();\ngraph.schema().propertyKey('age').asInt().ifNotExist().create();\ngraph.schema().propertyKey('lang').asText().ifNotExist().create();\ngraph.schema().propertyKey('weight').asDouble().ifNotExist().create();\ngraph.schema().propertyKey('name').asText().ifNotExist().create();\n\ngraph.schema().vertexLabel('person').properties('name','age','city').primaryKeys('name').nullableKeys('age').enableLabelIndex(true).ifNotExist().create();\ngraph.schema().vertexLabel('software').properties('name','lang','price').primaryKeys('name').nullableKeys('price').enableLabelIndex(true).ifNotExist().create();\n\ngraph.schema().edgeLabel('knows').sourceLabel('person').targetLabel('person').properties('weight','date').multiTimes().sortKeys('date').nullableKeys('weight').enableLabelIndex(true).ifNotExist().create();\ngraph.schema().edgeLabel('created').sourceLabel('person').targetLabel('software').properties('weight','date').nullableKeys('weight').enableLabelIndex(true).ifNotExist().create();\n\ngraph.schema().indexLabel('personByCity').onV('person').by('city').secondary().ifNotExist().create();\ngraph.schema().indexLabel('personByAge').onV('person').by('age').range().ifNotExist().create();\ngraph.schema().indexLabel('softwareByPrice').onV('software').by('price').range().ifNotExist().create();\ngraph.schema().indexLabel('createdByDate').onE('created').by('date').secondary().ifNotExist().create();\ngraph.schema().indexLabel('createdByWeight').onE('created').by('weight').range().ifNotExist().create();\ngraph.schema().indexLabel('knowsByWeight').onE('knows').by('weight').range().ifNotExist().create();\n"}
 ```
 
 #### 1.1.2 更新schema信息
@@ -384,20 +388,21 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema?format=groovy
 
 ##### URI
 ```
-PUT /graphspaces/${graphspace}/graphs/${hugegraph}/schema
+PUT /graphspaces/${graphspace}/graphs/${graph}/schema
 ```
 
 ##### URI参数
 
-| 名称       | 是否必填 | 类型   | 默认值 | 取值范围 | 说明       |
-| ---------- | -------- | ------ | ------ | -------- | ---------- |
-| graphspace | 是       | String |        |          | 图空间名称 |
-| hugegraph  | 是       | String |        |          | 图名称     |
+|  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
+|  ----  | ----  | ----  | ----  | ----  | ---- |
+| graphspace  | 是 | String  |   |   | 图空间名称  |
+| graph  | 是 | String  |   |   | 图名称  |
 
 ##### Body参数
-| 名称   | 是否必填 | 类型   | 默认值 | 取值范围 | 说明           |
-| ------ | -------- | ------ | ------ | -------- | -------------- |
-| schema | 是       | String |        |          | 图的schema脚本 |
+
+|  名称   | 是否必填  | 类型  | 默认值  | 取值范围  | 说明  |
+|  ----  | ----  | ----  | ----  | ----  | ----  |
+| schema  | 是 | String  |   |   | groovy 形式的 schema 信息  |
 
 
 ##### Response
@@ -425,7 +430,7 @@ PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema
 ###### Response Status
 
 ```json
-200
+202
 ```
 
 ###### Response Body
