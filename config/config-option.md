@@ -88,6 +88,7 @@ task.input_size_limit            | 16777216                        | The job inp
 task.result_size_limit           | 16777216                        | The job result size limit in bytes.
 task.sync_deletion               | false                           | Whether to delete schema or expired data synchronously.
 task.ttl_delete_batch            | 1                               | The batch size used to delete expired data.
+task.scheduler_type              | local                           | The sheduler type of asynchronous tasks, available type are [local, etcd].
 computer.config                  | /conf/computer.yaml             | The config file path of computer job.
 search.text_analyzer             | ikanalyzer                      | Choose a text analyzer for searching the vertex/edge properties, available type are [word, ansj, hanlp, smartcn, jieba, jcseg, mmseg4j, ikanalyzer].
 search.text_analyzer_mode        | smart                           | Specify the mode for the text analyzer, the available mode of analyzer are {word: [MaximumMatching, ReverseMaximumMatching, MinimumMatching, ReverseMinimumMatching, BidirectionalMaximumMatching, BidirectionalMinimumMatching, BidirectionalMaximumMinimumMatching, FullSegmentation, MinimalWordCount, MaxNgramScore, PureEnglish], ansj: [BaseAnalysis, IndexAnalysis, ToAnalysis, NlpAnalysis], hanlp: [standard, nlp, index, nShort, shortest, speed], smartcn: [], jieba: [SEARCH, INDEX], jcseg: [Simple, Complex], mmseg4j: [Simple, Complex, MaxWord], ikanalyzer: [smart, max_word]}.

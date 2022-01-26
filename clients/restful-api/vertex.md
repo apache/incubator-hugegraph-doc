@@ -19,14 +19,36 @@ CUSTOMIZE_UUID   | uuid
 
 接下来的示例均假设已经创建好了前述的各种 schema 信息
 
-#### 2.1.1 创建一个顶点
+#### 2.1.1 创建
+
+#### 功能介绍
+创建一个vertex
 
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/graph/vertices
+POST http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices
 ```
 
+##### URI参数
+| 名称       | 是否必填 | 类型   | 默认值 | 取值范围 | 说明       |
+| ---------- | -------- | ------ | ------ | -------- | ---------- |
+| graphspace | 是       | String |        |          | 图空间名称 |
+| graph      | 是       | String |        |          | 图名称     |
+
+##### Body参数
+| 名称               | 是否必填  | 类型         | 默认值  | 取值范围               | 说明                       |
+| ------------------ | -------- | ------------ | ------- | --------------------- | -------------------------- |
+| label              | 是       | String       |         |                       | 顶点的标签名            |
+| properties         | 是       | Map          | {}      |                       | 顶点关联的属性类       |
+
+##### Response
+| 名称               | 类型         | 说明                   |
+| ------------------ | ------------ | ---------------------- |
+| id                 | Int          | 顶点id                       |
+| label              | String       | 顶点的标签                   |
+| type               | String       | 创建的类型，这里固定为vertex  |
+| properties         | Map          | 顶点类型关联的属性类型 |
 ##### Request Body
 
 ```json
@@ -69,14 +91,34 @@ POST http://localhost:8080/graphs/hugegraph/graph/vertices
 }
 ```
 
-#### 2.1.2 创建多个顶点
+#### 2.1.2 批量创建
+
+#### 功能介绍
+创建多个顶点
 
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/graph/vertices/batch
+POST http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices/batch
 ```
 
+##### URI参数
+| 名称       | 是否必填 | 类型   | 默认值 | 取值范围 | 说明       |
+| ---------- | -------- | ------ | ------ | -------- | ---------- |
+| graphspace | 是       | String |        |          | 图空间名称 |
+| graph      | 是       | String |        |          | 图名称     |
+
+##### Body参数
+| 名称               | 是否必填  | 类型         | 默认值  | 取值范围               | 说明                            |
+| ------------------ | -------- | ------------ | ------- | --------------------- | --------------------------     |  
+|                    | 是       | List[Map]    |         |                       | 每个顶点的标签及关联属性类     |
+| label              | String   |              |         |                       | 顶点的标签值                 |
+| properties         | 是       | Map          | {}      |                       | 顶点关联的属性类       |
+
+##### Response
+| 名称               | 类型         | 说明                    |
+| ------------------ | ------------ | ---------------------- |
+|                    |  List[String]| 顶点id的列表   |
 ##### Request Body
 
 ```json
@@ -114,14 +156,36 @@ POST http://localhost:8080/graphs/hugegraph/graph/vertices/batch
 ]
 ```
 
-#### 2.1.3 更新顶点属性
+#### 2.1.3 更新
+
+#### 功能介绍
+ 更新顶点属性
 
 ##### Method & Url
 
 ```
-PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=append
+PUT http://127.0.0.1:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices/{vertexId}?action=append
 ```
+##### URI参数
+| 名称        | 是否必填 | 类型   | 默认值 | 取值范围   | 说明                       |
+| ---------- | -------- | ------ | ------ | -------- | ----------                |
+| graphspace | 是       | String |        |          | 图空间名称                 |
+| graph      | 是       | String |        |          | 图名称                     |
+| vertexId   | 是       | String |        |          | 需要包含引号，例如"1:marko" |
 
+##### Body参数
+| 名称               | 是否必填  | 类型         | 默认值  | 取值范围               | 说明                       |
+| ------------------ | -------- | ------------ | ------- | --------------------- | -------------------------- |
+| label              | 是       | String       |         |                       | 顶点的标签名            |
+| properties         | 否       | List[String] | []      |                       | 顶点关联的属性类       |
+
+##### Response
+| 名称               | 类型         | 说明                   |
+| ------------------ | ------------ | ---------------------- |
+| id                 | Int          | 顶点id                       |
+| label              | String       | 顶点的标签                   |
+| type               | String       | 创建的类型，这里固定为vertex  |
+| properties         | Map          | 顶点类型关联的属性类型 |
 ##### Request Body
 
 ```json
@@ -174,7 +238,7 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=appen
 
 #### 2.1.4 批量更新顶点属性
 
-##### 功能说明
+##### 功能介绍
 
 批量更新顶点的属性，并支持多种更新策略，包括
 
@@ -224,9 +288,31 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=appen
 ##### Method & Url
 
 ```
-PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
+PUT http://127.0.0.1:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices/batch
 ```
+##### URI参数
+| 名称        | 是否必填 | 类型   | 默认值 | 取值范围   | 说明                       |
+| ---------- | -------- | ------ | ------ | -------- | ----------                |
+| graphspace | 是       | String |        |          | 图空间名称                 |
+| graph      | 是       | String |        |          | 图名称                     |
 
+##### Body参数
+| 名称               | 是否必填  | 类型         | 默认值  | 取值范围               | 说明                       |
+| ------------------ | -------- | ------------ | ------- | --------------------- | -------------------------- |
+| vertices           | 是       | List[Map]    |         |                       | 待更新的顶点列表   |
+| label              | String   |              |         |                       | 顶点的标签值                 |
+| properties         | 是       | Map          | {}      |                       | 顶点关联的属性类       |
+| update_strategies  | 是       | Map          | {}      |                       | 针对不同属性的更新策略 |
+| create_if_not_exist| 否       | Boolean      | true    | true, false           | 自动创建             |
+
+##### Response
+| 名称               | 类型         | 说明                   |
+| ------------------ | ------------ | ---------------------- |
+| vertices           | List[Map]    | 更新的顶点列表
+| id                 | Int          | 顶点id                       |
+| label              | String       | 顶点的标签                   |
+| type               | String       | 创建的类型，这里固定为vertex  |
+| properties         | Map          | 顶点类型关联的属性类型 |
 ##### Request Body
 
 ```json
@@ -319,12 +405,36 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
 
 #### 2.1.5 删除顶点属性
 
+#### 功能介绍
+删除顶点属性
+
 ##### Method & Url
 
 ```
-PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=eliminate
+PUT http://127.0.0.1:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices/{vertexId}?action=eliminate
 ```
 
+##### URI参数
+| 名称        | 是否必填 | 类型   | 默认值 | 取值范围   | 说明                       |
+| ---------- | -------- | ------ | ------ | -------- | ----------                |
+| graphspace | 是       | String |        |          | 图空间名称                 |
+| graph      | 是       | String |        |          | 图名称                     |
+| vertexId   | 是       | String |        |          | 顶点的Id, 注意需要包含引号，例如"1:marko"   |
+
+##### Body参数
+| 名称               | 是否必填  | 类型         | 默认值  | 取值范围               | 说明                       |
+| ------------------ | -------- | ------------ | ------- | --------------------- | -------------------------- |
+| label              | String   |              |         |                       | 顶点的标签值                |
+| properties         | 是       | Map          | {}      |                       | 顶点待删除的属性类       |
+
+
+##### Response
+| 名称               | 类型         | 说明                   |
+| ------------------ | ------------ | ---------------------- |
+| id                 | Int          | 顶点id                       |
+| label              | String       | 顶点的标签                   |
+| type               | String       | 创建的类型，这里固定为vertex  |
+| properties         | Map          | 顶点类型关联的属性类型 |
 ##### Request Body
 
 ```json
@@ -370,6 +480,9 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=elimi
 
 #### 2.1.6 获取符合条件的顶点
 
+#### 功能介绍
+根据条件查询并获取所有符合条件的顶点
+
 ##### Params
 
 - label: 顶点类型
@@ -399,8 +512,30 @@ P.within(value1,value2,value3,...)    | 属性值等于任何一个给定value�
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&properties={"age":29}&limit=1
+GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices?label=person&properties={"age":29}&limit=1
 ```
+
+
+##### URI参数
+| 名称        | 是否必填 | 类型   | 默认值 | 取值范围   | 说明                                     |
+| ---------- | -------- | ------ | ------ | -------- | ----------                               |
+| graphspace | 是       | String |        |          | 图空间名称                                |
+| graph      | 是       | String |        |          | 图名称                                    |
+| label        | 否       | String |        |          | 顶点的标签值   |
+| properties   | 否       | String |        |          | 顶点的属性的Json格式   |
+| limit        | 否       | Int    | 100    | 1 - 2^64 | 限制获取的顶点的数量 |
+
+##### Body参数
+无
+
+##### Response
+| 名称               | 类型         | 说明                   |
+| ------------------ | ------------ | ---------------------- |
+| vertices           | List[Map]    | 获取到的顶点列表         |
+| id                 | Int          | 顶点id                       |
+| label              | String       | 顶点的标签                   |
+| type               | String       | 创建的类型，这里固定为vertex  |
+| properties         | Map          | 顶点类型关联的属性类型 |
 
 ##### Response Status
 
@@ -447,8 +582,29 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&propertie
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3
+GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices?page&limit=3
 ```
+
+
+##### URI参数
+| 名称        | 是否必填 | 类型   | 默认值 | 取值范围   | 说明                                     |
+| ---------- | -------- | ------ | ------ | -------- | ----------                               |
+| graphspace | 是       | String |        |          | 图空间名称                                |
+| graph      | 是       | String |        |          | 图名称                                    |
+| limit        | 否       | Int    | 100    | 1 - 2^64 | 限制获取的顶点的数量                      |
+
+##### Body参数
+无
+
+##### Response
+| 名称               | 类型         | 说明                   |
+| ------------------ | ------------ | ---------------------- |
+| vertices           | List[Map]    | 获取到的顶点列表         |
+| id                 | Int          | 顶点id                       |
+| label              | String       | 顶点的标签                   |
+| type               | String       | 创建的类型，这里固定为vertex  |
+| properties         | Map          | 顶点类型关联的属性类型                  |
+| page               | String       | 分页值，用于下次查询时从当前分页点继续查询。null则表示没有下一页了| 
 
 ##### Response Status
 
@@ -530,9 +686,29 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph/vertices?page=001000100853313a706574657200f07ffffffc00e797c6349be736fffc8699e8a502efe10004&limit=3
+GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices?page=001000100853313a706574657200f07ffffffc00e797c6349be736fffc8699e8a502efe10004&limit=3
 ```
 
+##### URI参数
+| 名称        | 是否必填 | 类型   | 默认值 | 取值范围   | 说明                                     |
+| ---------- | -------- | ------ | ------ | -------- | ----------                               |
+| graphspace | 是       | String |        |          | 图空间名称                                |
+| graph      | 是       | String |        |          | 图名称                                    |
+| page       | 是       | String |        |          | 上一次使用page查询时，Response返回的page值  |
+| limit        | 否       | Int    | 100    | 1 - 2^64 | 限制获取的顶点的数量                      |
+
+##### Body参数
+无
+
+##### Response
+| 名称               | 类型         | 说明                   |
+| ------------------ | ------------ | ---------------------- |
+| vertices           | List[Map]    | 获取到的顶点列表        |
+| id                 | Int          | 顶点id                       |
+| label              | String       | 顶点的标签                   |
+| type               | String       | 创建的类型，这里固定为vertex  |
+| properties         | Map          | 顶点类型关联的属性类型 |
+| page               | String       | 分页值，用于下次查询时从当前分页点继续查询，null则表示没有下一页了| 
 ##### Response Status
 
 ```json
@@ -609,11 +785,35 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?page=001000100853313a7
 
 #### 2.1.7 根据Id获取顶点
 
+#### 功能介绍
+根据Id获取顶点
+
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
+GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices/{vertexId}
 ```
+
+
+##### URI参数
+| 名称        | 是否必填 | 类型   | 默认值 | 取值范围   | 说明                                     |
+| ---------- | -------- | ------ | ------ | -------- | ----------                               |
+| graphspace | 是       | String |        |          | 图空间名称                                |
+| graph      | 是       | String |        |          | 图名称                                    |
+| vertexId   | 是       | String |        |          | 需要包含引号，例如"1:marko" |
+
+##### Body参数
+无
+
+
+##### Response
+| 名称               | 类型         | 说明                   |
+| ------------------ | ------------ | ---------------------- |
+| id                 | Int          | 顶点id                       |
+| label              | String       | 顶点的标签                   |
+| type               | String       | 创建的类型，这里固定为vertex  |
+| properties         | Map          | 顶点类型关联的属性类型 |
+| page               | String       | 分页值，用于下次查询时从当前分页点继续查询| 
 
 ##### Response Status
 
@@ -645,19 +845,31 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
 }
 ```
 
-#### 2.1.8 根据Id删除顶点
+#### 2.1.8 删除顶点
 
-##### Params
-
-- label: 顶点类型，可选参数
+#### 功能介绍
 
 **仅根据Id删除顶点**
 
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
+DELETE http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices/{vertexId}
 ```
+
+
+##### URI参数
+| 名称        | 是否必填 | 类型   | 默认值 | 取值范围   | 说明                                     |
+| ---------- | -------- | ------ | ------ | -------- | ----------                               |
+| graphspace | 是       | String |        |          | 图空间名称                                |
+| graph      | 是       | String |        |          | 图名称                                    |
+| vertexId   | 是       | String |        |          | 需要包含引号，例如"1:marko" |
+
+##### Body参数
+无
+
+##### Response
+无
 
 ##### Response Status
 
@@ -672,8 +884,23 @@ DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"?label=person
+DELETE http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices/{vertexId}?label=person
 ```
+
+
+##### URI参数
+| 名称        | 是否必填 | 类型   | 默认值 | 取值范围   | 说明                                     |
+| ---------- | -------- | ------ | ------ | -------- | ----------                               |
+| graphspace | 是       | String |        |          | 图空间名称                                |
+| graph      | 是       | String |        |          | 图名称                                    |
+| vertexId   | 是       | String |        |          | 需要包含引号，例如"1:marko"               |
+| label      | 是       | String |        |           | 顶点的标签名                           |
+
+##### Body参数
+无
+
+##### Response
+无
 
 ##### Response Status
 ```json
@@ -684,15 +911,36 @@ DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"?label=per
 
 ##### 2.1.9.1 根据顶点的id列表，批量查询顶点
 
-###### Params
+#### 功能介绍
+根据顶点的Id列表,批量查询顶点
 
-- ids：要查询的顶点id列表
 
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/traversers/vertices?ids="1:marko"&ids="2:lop"
+GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices?ids="1:marko"&ids="2:lop"
 ```
+
+
+##### URI参数
+| 名称        | 是否必填 | 类型   | 默认值 | 取值范围   | 说明                                     |
+| ---------- | -------- | ------ | ------ | -------- | ----------                               |
+| graphspace | 是       | String |        |          | 图空间名称                                |
+| graph      | 是       | String |        |          | 图名称                                    |
+| ids        | 是       | String |        |          | 待查询的顶点Id列表，需要包含引号，例如"1:marko"。通过多次输入来进行批量查询 |
+
+##### Body参数
+无
+
+
+##### Response
+| 名称               | 类型         | 说明                   |
+| ------------------ | ------------ | ---------------------- |
+| vertices           | List[Map]    | 获取到的顶点列表         |
+| id                 | Int          | 顶点id                       |
+| label              | String       | 顶点的标签                   |
+| type               | String       | 创建的类型，这里固定为vertex  |
+| properties         | Map          | 顶点类型关联的属性类型 |
 
 ###### Response Status
 
@@ -761,17 +1009,34 @@ GET http://localhost:8080/graphs/hugegraph/traversers/vertices?ids="1:marko"&ids
 
 ##### 2.1.9.2 获取顶点 Shard 信息
 
+#### 功能介绍
 通过指定的分片大小split_size，获取顶点分片信息（可以与 3.2.21.3 中的 Scan 配合使用来获取顶点）。
-
-###### Params
-
-- split_size：分片大小，必填项
 
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/traversers/vertices/shards?split_size=67108864
+GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices/shards?split_size=67108864
+
 ```
+
+##### URI参数
+| 名称        | 是否必填 | 类型   | 默认值 | 取值范围   | 说明                                     |
+| ---------- | -------- | ------ | ------ | -------- | ----------                               |
+| graphspace | 是       | String |        |          | 图空间名称                                |
+| graph      | 是       | String |        |          | 图名称                                    |
+| split_size | 是       | Int   |        |           | 分片的大小 |
+
+##### Body参数
+无
+
+
+##### Response
+| 名称               | 类型         | 说明                   |
+| ------------------ | ------------ | ---------------------- |
+| shard              | List[Map]    | 分片信息的类表         |
+| start              | String       | 分片起始位置                       |
+| end                | String       | 分片结束位置（不包含）                   |
+| length             | Int          | 分片的长度  |
 
 ###### Response Status
 
@@ -811,21 +1076,38 @@ GET http://localhost:8080/graphs/hugegraph/traversers/vertices/shards?split_size
 
 ##### 2.1.9.3 根据Shard信息批量获取顶点
 
+#### 功能介绍
 通过指定的分片信息批量查询顶点（Shard信息的获取参见 3.2.21.2 Shard）。
-
-###### Params
-
-- start：分片起始位置，必填项
-- end：分片结束位置，必填项
-- page：分页位置，选填项，默认为null，不分页；当page为“”时表示分页的第一页，从start指示的位置开始
-- page_limit：分页获取顶点时，一页中顶点数目的上限，选填项，默认为100000
 
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/traversers/vertices/scan?start=0&end=4294967295
+GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices/scan?start=0&end=4294967295&page={page}&page_limit={page_limit}
 ```
 
+
+##### URI参数
+| 名称        | 是否必填 | 类型   | 默认值 | 取值范围   | 说明                                     |
+| ---------- | -------- | ------ | ------ | -------- | ----------                               |
+| graphspace | 是       | String |        |          | 图空间名称                                |
+| graph      | 是       | String |        |          | 图名称                                    |
+| start        | 是       | String |        |          |   分片起始位置           |
+| end        | 是       | String |        |          |   分片结束位置           |
+| page        | 否       | String |  null      |          |   分页位置           |
+| page_limit  | 否       | Int |   1000     |          |   分页获取顶点时，一页中顶点数目的上限          |
+
+##### Body参数
+无
+
+
+##### Response
+| 名称               | 类型         | 说明                   |
+| ------------------ | ------------ | ---------------------- |
+| vertices           | List[Map]    | 获取到的顶点列表         |
+| id                 | Int          | 顶点id                       |
+| label              | String       | 顶点的标签                   |
+| type               | String       | 创建的类型，这里固定为vertex  |
+| properties         | Map          | 顶点类型关联的属性类型 |
 ###### Response Status
 
 ```json
