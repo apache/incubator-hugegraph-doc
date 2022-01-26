@@ -651,7 +651,16 @@ schema: 必填
 | driver | org.apache.hive.jdbc.HiveDriver |
 | url | jdbc:hive2://127.0.0.1:10000 |
 
-schema: 必填
+- schema: 必填
+- principals 选填，应用于启用Kerberos的场景，参数项配置如下：
+  - "auth": "KERBEROS"
+  - "krb5.conf": "/etc/krb5.conf"
+  - "principal": "hive/xxxxx.com"
+  - "serviceDiscoveryMode": "zooKeeper"
+  - "zooKeeperNamespace": "hiveserver2"
+  - "user.keytab": "/etc/security/keytabs/***.keytab"
+  - "user.name": "xxx/xxxxxx"
+  - "zk.quorum": "master1:2181,master2:2181,core1:2181"
 
 ##### 3.3.1 顶点和边映射
 
