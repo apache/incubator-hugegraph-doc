@@ -104,7 +104,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/huegraph/tasks?status=SUCCESS
 
 #### 7.1.2 查看某个异步任务的信息
 
-##### RUI
+##### URI
 
 ```
 GET /graphspaces/{graphspace}/graphs/{hugegraph}/tasks/{id}
@@ -206,6 +206,7 @@ DELETE /graphspaces/{graphspace}/graphs/{hugegraph}/tasks/{id}?force={force}
 | task_input          | String          | 异步任务的输入值 |
 
 ##### 使用示例
+
 强制删除id为2的任务的信息
 ##### Method & Url
 
