@@ -21,10 +21,10 @@ CUSTOMIZE_UUID   | uuid
 
 #### 2.1.1 创建一个顶点
 
-##### Method & Url
+##### URI
 
 ```
-POST http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices
+POST /graphspaces/{graphspace}/graphs/{graph}/graph/vertices
 ```
 
 ##### URI参数
@@ -46,6 +46,15 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertice
 | label              | String       | 顶点的标签                   |
 | type               | String       | 创建的类型，这里固定为vertex  |
 | properties         | Map          | 顶点类型关联的属性类型 |
+
+##### 使用示例
+创建一个标签为person的顶点
+
+##### Method & Url
+
+```
+POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices
+```
 
 ##### Request Body
 
@@ -94,10 +103,10 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertice
 #####  功能介绍
 创建多个顶点
 
-##### Method & Url
+##### URI
 
 ```
-POST http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices/batch
+POST /graphspaces/{graphspace}/graphs/{graph}/graph/vertices/batch
 ```
 
 ##### URI参数
@@ -117,6 +126,16 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertice
 | 名称               | 类型         | 说明                    |
 | ------------------ | ------------ | ---------------------- |
 |                    |  List[String]| 顶点id的列表   |
+
+##### 使用示例
+
+创建多个顶点，注意使用数组的方式传入每个顶点的信息
+##### Method & Url
+
+```
+POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/batch
+```
+
 ##### Request Body
 
 ```json
@@ -159,10 +178,10 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertice
 #####  功能介绍
  更新顶点属性
 
-##### Method & Url
+##### URI
 
 ```
-PUT http://127.0.0.1:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices/{vertexId}?action=append
+PUT /graphspaces/{graphspace}/graphs/{graph}/graph/vertices/{vertexId}?action=append
 ```
 ##### URI参数
 | 名称        | 是否必填 | 类型   | 默认值 | 取值范围   | 说明                       |
@@ -184,6 +203,14 @@ PUT http://127.0.0.1:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices
 | label              | String       | 顶点的标签                   |
 | type               | String       | 创建的类型，这里固定为vertex  |
 | properties         | Map          | 顶点类型关联的属性类型 |
+
+##### 使用示例
+更新顶点，注意顶点id里面需要包含引号
+##### Method & Url
+
+```
+PUT http://127.0.0.1:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices/"1:marko"?action=append
+```
 
 ##### Request Body
 
@@ -284,10 +311,10 @@ PUT http://127.0.0.1:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices
 }
 ```
 
-##### Method & Url
+##### URI
 
 ```
-PUT http://127.0.0.1:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices/batch
+PUT /graphspaces/{graphspace}/graphs/{graph}/graph/vertices/batch
 ```
 ##### URI参数
 | 名称        | 是否必填 | 类型   | 默认值 | 取值范围   | 说明                       |
@@ -312,6 +339,15 @@ PUT http://127.0.0.1:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices
 | label              | String       | 顶点的标签                   |
 | type               | String       | 创建的类型，这里固定为vertex  |
 | properties         | Map          | 顶点类型关联的属性类型 |
+
+
+##### 使用示例
+批量更新一批顶点的信息，注意传入的顶点需要放在vertices下，而不是在最外层直接传入数组
+##### Method & Url
+
+```
+PUT http://127.0.0.1:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices/batch
+```
 
 ##### Request Body
 
@@ -408,10 +444,10 @@ PUT http://127.0.0.1:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices
 #####  功能介绍
 删除顶点属性
 
-##### Method & Url
+##### URI
 
 ```
-PUT http://127.0.0.1:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices/{vertexId}?action=eliminate
+PUT /graphspaces/{graphspace}/graphs/{graph}/graph/vertices/{vertexId}?action=eliminate
 ```
 
 ##### URI参数
@@ -435,6 +471,15 @@ PUT http://127.0.0.1:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices
 | label              | String       | 顶点的标签                   |
 | type               | String       | 创建的类型，这里固定为vertex  |
 | properties         | Map          | 顶点类型关联的属性类型 |
+
+##### 使用示例
+删除顶点的city属性
+
+##### Method & Url
+
+```
+PUT http://127.0.0.1:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices/"1:marko"?action=eliminate
+```
 
 
 ##### Request Body
@@ -482,12 +527,23 @@ PUT http://127.0.0.1:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices
 
 #### 2.1.6 获取符合条件的顶点
 
-##### Params
+##### URI
 
-- label: 顶点类型
-- properties: 属性键值对(根据属性查询的前提是预先建立了索引)
-- limit: 查询最大数目
-- page: 页号
+```
+GET /graphspaces/{graphspace}/graphs/{graph}/graph/vertices?label=person&properties={properties}&limit={limit}&page={page}
+```
+
+
+##### URI参数
+| 名称        | 是否必填 | 类型   | 默认值 | 取值范围   | 说明                                     |
+| ---------- | -------- | ------ | ------ | -------- | ----------                               |
+| graphspace | 是       | String |        |          | 图空间名称                                |
+| graph      | 是       | String |        |          | 图名称                                    |
+| label      | 否       | String |        |          | 顶点的标签                                |
+| properties | 否       | String |        |          | 顶点的属性的Json格式                      |
+| limit      | 否       | Int    | 100    | 1 - 2^64 | 限制获取的顶点的数量                      |
+| page       | 否       | String | null   |          | 页号，在分页查询的时候由上一次查询结果返回   |
+
 
 以上参数都是可选的，如果提供page参数，必须提供limit参数，不允许带其他参数。`label, properties`和`limit`可以任意组合。
 
@@ -506,24 +562,6 @@ P.inside(number1,number2)             | 属性值大于number1且小于number2�
 P.outside(number1,number2)            | 属性值小于number1且大于number2的顶点
 P.within(value1,value2,value3,...)    | 属性值等于任何一个给定value的顶点
 
-**查询所有 age 为 20 且 label 为 person 的顶点**
-
-##### Method & Url
-
-```
-GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices?label=person&properties={"age":29}&limit=1
-```
-
-
-##### URI参数
-| 名称        | 是否必填 | 类型   | 默认值 | 取值范围   | 说明                                     |
-| ---------- | -------- | ------ | ------ | -------- | ----------                               |
-| graphspace | 是       | String |        |          | 图空间名称                                |
-| graph      | 是       | String |        |          | 图名称                                    |
-| label        | 否       | String |        |          | 顶点的标签值   |
-| properties   | 否       | String |        |          | 顶点的属性的Json格式   |
-| limit        | 否       | Int    | 100    | 1 - 2^64 | 限制获取的顶点的数量 |
-
 ##### Body参数
 无
 
@@ -535,6 +573,17 @@ GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices
 | label              | String       | 顶点的标签                   |
 | type               | String       | 创建的类型，这里固定为vertex  |
 | properties         | Map          | 顶点类型关联的属性类型 |
+
+----
+##### 使用示例
+
+**查询所有 age 为 20 且 label 为 person 的顶点，限定1个**
+
+##### Method & Url
+
+```
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices?label=person&properties={"age":29}&limit=1
+```
 
 ##### Response Status
 
@@ -575,35 +624,16 @@ GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices
     ]
 }
 ```
-
+----
+##### 使用示例
 **分页查询所有顶点，获取第一页（page不带参数值），限定3条**
 
 #### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices?page&limit=3
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices?page&limit=3
 ```
 
-
-##### URI参数
-| 名称        | 是否必填 | 类型   | 默认值 | 取值范围   | 说明                                     |
-| ---------- | -------- | ------ | ------ | -------- | ----------                               |
-| graphspace | 是       | String |        |          | 图空间名称                                |
-| graph      | 是       | String |        |          | 图名称                                    |
-| limit        | 否       | Int    | 100    | 1 - 2^64 | 限制获取的顶点的数量                      |
-
-##### Body参数
-无
-
-##### Response
-| 名称               | 类型         | 说明                   |
-| ------------------ | ------------ | ---------------------- |
-| vertices           | List[Map]    | 获取到的顶点列表         |
-| id                 | Int          | 顶点id                       |
-| label              | String       | 顶点的标签                   |
-| type               | String       | 创建的类型，这里固定为vertex  |
-| properties         | Map          | 顶点类型关联的属性类型                  |
-| page               | String       | 分页值，用于下次查询时从当前分页点继续查询。null则表示没有下一页了| 
 
 ##### Response Status
 
@@ -680,34 +710,15 @@ GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices
 返回的body里面是带有下一页的页号信息的，`"page": "001000100853313a706574657200f07ffffffc00e797c6349be736fffc8699e8a502efe10004"`，
 在查询下一页的时候将该值赋给page参数。
 
+----
+##### 使用示例
 **分页查询所有顶点，获取下一页（page带上上一页返回的page值），限定3条**
 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices?page=001000100853313a706574657200f07ffffffc00e797c6349be736fffc8699e8a502efe10004&limit=3
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices?page=001000100853313a706574657200f07ffffffc00e797c6349be736fffc8699e8a502efe10004&limit=3
 ```
-
-##### URI参数
-| 名称        | 是否必填 | 类型   | 默认值 | 取值范围   | 说明                                     |
-| ---------- | -------- | ------ | ------ | -------- | ----------                               |
-| graphspace | 是       | String |        |          | 图空间名称                                |
-| graph      | 是       | String |        |          | 图名称                                    |
-| page       | 是       | String |        |          | 上一次使用page查询时，Response返回的page值  |
-| limit        | 否       | Int    | 100    | 1 - 2^64 | 限制获取的顶点的数量                      |
-
-##### Body参数
-无
-
-##### Response
-| 名称               | 类型         | 说明                   |
-| ------------------ | ------------ | ---------------------- |
-| vertices           | List[Map]    | 获取到的顶点列表        |
-| id                 | Int          | 顶点id                       |
-| label              | String       | 顶点的标签                   |
-| type               | String       | 创建的类型，这里固定为vertex  |
-| properties         | Map          | 顶点类型关联的属性类型 |
-| page               | String       | 分页值，用于下次查询时从当前分页点继续查询，null则表示没有下一页了| 
 
 ##### Response Status
 
@@ -788,10 +799,10 @@ GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices
 #####  功能介绍
 根据Id获取顶点
 
-##### Method & Url
+##### URI
 
 ```
-GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices/{vertexId}
+GET /graphspaces/{graphspace}/graphs/{graph}/graph/vertices/{vertexId}
 ```
 
 
@@ -814,6 +825,16 @@ GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices
 | type               | String       | 创建的类型，这里固定为vertex  |
 | properties         | Map          | 顶点类型关联的属性类型 |
 | page               | String       | 分页值，用于下次查询时从当前分页点继续查询| 
+
+
+##### 使用示例
+获取ID为"1:marko"的顶点
+
+##### Method & Url
+
+```
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/"1:marko"
+```
 
 ##### Response Status
 
@@ -848,15 +869,13 @@ GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices
 #### 2.1.8 删除顶点
 
 #####  功能介绍
+根据条件删除指定的顶点
 
-**仅根据Id删除顶点**
-
-##### Method & Url
+##### URI
 
 ```
-DELETE http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices/{vertexId}
+DELETE /graphspaces/{graphspace}/graphs/{graph}/graph/vertices/{vertexId}
 ```
-
 
 ##### URI参数
 | 名称        | 是否必填 | 类型   | 默认值 | 取值范围   | 说明                                     |
@@ -871,13 +890,25 @@ DELETE http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/verti
 ##### Response
 无
 
+##### 使用示例
+**仅根据Id删除顶点**
+
+##### Method & Url
+
+```
+DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/{vertexId}
+```
+
+
 ##### Response Status
 
 ```json
 204
 ```
 
-#####  功能介绍
+----
+
+##### 使用示例
 **根据Label+Id删除顶点**
 
 通过指定Label参数和Id来删除顶点时，一般来说其性能比仅根据Id删除会更好。
@@ -885,23 +916,9 @@ DELETE http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/verti
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices/{vertexId}?label=person
+DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/{vertexId}?label=person
 ```
 
-
-##### URI参数
-| 名称        | 是否必填 | 类型   | 默认值 | 取值范围   | 说明                                     |
-| ---------- | -------- | ------ | ------ | -------- | ----------                               |
-| graphspace | 是       | String |        |          | 图空间名称                                |
-| graph      | 是       | String |        |          | 图名称                                    |
-| vertexId   | 是       | String |        |          | 需要包含引号，例如"1:marko"               |
-| label      | 是       | String |        |           | 顶点的标签名                           |
-
-##### Body参数
-无
-
-##### Response
-无
 
 ##### Response Status
 ```json
@@ -915,10 +932,10 @@ DELETE http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/verti
 #####  功能介绍
 根据顶点的Id列表,批量查询顶点
 
-###### Method & Url
+###### URI
 
 ```
-GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices?ids="1:marko"&ids="2:lop"
+GET /graphspaces/{graphspace}/graphs/{graph}/graph/vertices?ids={ids#1}&ids={ids#2}
 ```
 
 ##### URI参数
@@ -939,6 +956,16 @@ GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices
 | label              | String       | 顶点的标签                   |
 | type               | String       | 创建的类型，这里固定为vertex  |
 | properties         | Map          | 顶点类型关联的属性类型 |
+
+
+##### 使用示例
+删除id分别为"1:marko"和"2:lop"的顶点
+
+###### Method & Url
+
+```
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices?ids="1:marko"&ids="2:lop"
+```
 
 ###### Response Status
 
@@ -1010,10 +1037,10 @@ GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices
 #####  功能介绍
 通过指定的分片大小split_size，获取顶点分片信息（可以与 3.2.21.3 中的 Scan 配合使用来获取顶点）。
 
-###### Method & Url
+###### URI
 
 ```
-GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices/shards?split_size=67108864
+GET /graphspaces/{graphspace}/graphs/{graph}/graph/vertices/shards?split_size={splitSize}
 
 ```
 
@@ -1022,7 +1049,7 @@ GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices
 | ---------- | -------- | ------ | ------ | -------- | ----------                               |
 | graphspace | 是       | String |        |          | 图空间名称                                |
 | graph      | 是       | String |        |          | 图名称                                    |
-| split_size | 是       | Int   |        |           | 分片的大小 |
+| splitSize  | 是       | Int    |        |           | 分片的大小 |
 
 ##### Body参数
 无
@@ -1035,6 +1062,16 @@ GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices
 | start              | String       | 分片起始位置                       |
 | end                | String       | 分片结束位置（不包含）                   |
 | length             | Int          | 分片的长度  |
+
+##### 使用示例
+获取分片大小为67108864的顶点分片信息，用于进一步的Scan查询
+
+###### Method & Url
+
+```
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/shards?split_size=67108864
+
+```
 ###### Response Status
 
 ```json
@@ -1076,10 +1113,10 @@ GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices
 #####  功能介绍
 通过指定的分片信息批量查询顶点（Shard信息的获取参见 3.2.21.2 Shard）。
 
-###### Method & Url
+###### URI
 
 ```
-GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices/scan?start=0&end=4294967295&page={page}&page_limit={page_limit}
+GET /graphspaces/{graphspace}/graphs/{graph}/graph/vertices/scan?start=0&end=4294967295&page={page}&page_limit={pageLimit}
 ```
 
 
@@ -1088,11 +1125,10 @@ GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices
 | ---------- | -------- | ------ | ------ | -------- | ----------                               |
 | graphspace | 是       | String |        |          | 图空间名称                                |
 | graph      | 是       | String |        |          | 图名称                                    |
-| start        | 是       | String |        |          |   分片起始位置           |
+| start      | 是       | String |        |          |   分片起始位置           |
 | end        | 是       | String |        |          |   分片结束位置           |
-| page        | 否       | String |  null      |          |   分页位置           |
-| page_limit  | 否       | Int |   1000     |          |   分页获取顶点时，一页中顶点数目的上限          |
-
+| page       | 否       | String | null   |          |   分页位置           |
+| pageLimit  | 否       | Int    | 1000   |          |   分页获取顶点时，一页中顶点数目的上限          |
 ##### Body参数
 无
 
@@ -1105,6 +1141,16 @@ GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices
 | label              | String       | 顶点的标签                   |
 | type               | String       | 创建的类型，这里固定为vertex  |
 | properties         | Map          | 顶点类型关联的属性类型 |
+
+##### 使用示例
+
+根据分片信息start=0与end=4294967295扫描顶点
+###### Method & Url
+
+```
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/scan?start=0&end=4294967295&page=&page_limit=100
+```
+
 ###### Response Status
 
 ```json
