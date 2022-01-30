@@ -1,27 +1,27 @@
-### 11.1 Service
+## 4.2.Service
 
 在 HugeGraph 中，在线计算（OLTP）、离线计算（OLAP）和存储都是作为服务（service）存在的。目前仅支持在线计算服务的动态创建。
 
-#### 11.1.1 创建一个服务
+### 4.2.1.创建一个服务
 
-##### 功能介绍
+#### 功能介绍
 
 创建一个服务
 
-##### URI
+#### URI
 
 ```
 POST /graphspaces/${graphspace}/services
 ```
 
 
-##### URI参数
+#### URI参数
 
 |  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
 |  ----  | ----  | ----  | ----  | ----  | ---- |
 | graphspace  | 是 | String  |   |   | 图空间名称  |
 
-##### Body参数
+#### Body参数
 
 |  名称   | 是否必填  | 类型  | 默认值  | 取值范围  | 说明  |
 |  ----  | ----  | ----  | ----  | ----  | ----  |
@@ -32,7 +32,7 @@ POST /graphspaces/${graphspace}/services
 | memory_limit  | 是 | String  |   | > 0  |  HugeGraphServer 的内存大小，单位 GB |
 | deployment_type  | 是 | String  |   | K8S、MANUAL  |  service 的部署类型，K8S 指通过K8S集群启动服务，MANUAL 指通过手动部署的方式启动服务 |
 
-##### Response
+#### Response
 
 |  名称   | 类型 |  说明  |
 |  ----  | ---|  ----  |
@@ -45,15 +45,15 @@ POST /graphspaces/${graphspace}/services
 | deployment_type  | String  |  service 的部署类型 |
 | urls | Array | service 地址列表 |
 
-##### 使用示例
+#### 使用示例
 
-###### Method & Url
+##### Method & Url
 
 ```
 POST http://localhost:8080/graphspaces/gs1/services
 ```
 
-###### Request Body
+##### Request Body
 
 ```json
 {
@@ -90,45 +90,45 @@ POST http://localhost:8080/graphspaces/gs1/services
 
 ```
 
-#### 11.1.2 列出某个图空间的所有服务
+### 4.2.2.列出某个图空间的所有服务
 
-##### 功能介绍
+#### 功能介绍
 
 列出某个图空间的所有服务
 
-##### URI
+#### URI
 
 ```
 GET /graphspaces/${graphspace}/services
 ```
 
-##### URI参数
+#### URI参数
 
 |  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
 |  ----  | ----  | ----  | ----  | ----  | ---- |
 | graphspace  | 是 | String  |   |   | 图空间名称  |
 
-##### Body参数
+#### Body参数
 
 无
 
-##### Response
+#### Response
 
 |  名称   | 类型 |  说明  |
 |  ----  | ---|  ----  |
 | services  |Array| service 的名字列表 |
 
-##### 使用示例
+#### 使用示例
 
 
-###### Method & Url
+##### Method & Url
 
 ```
 GET http://localhost:8080/graphspaces/gs1/services
 ```
 
 
-###### Request Body
+##### Request Body
 
 无
 
@@ -146,30 +146,30 @@ GET http://localhost:8080/graphspaces/gs1/services
 }
 ```
 
-#### 11.1.3 查看某个服务
+### 4.2.3.查看某个服务
 
-##### 功能介绍
+#### 功能介绍
 
 查看某个服务
 
-##### URI
+#### URI
 
 ```
 GET /graphspaces/${graphspace}/services/${service}
 ```
 
-##### URI参数
+#### URI参数
 
 |  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
 |  ----  | ----  | ----  | ----  | ----  | ---- |
 | graphspace  | 是 | String  |   |   | 图空间名称  |
 | service  | 是 | String  |   |   | 服务名称  |
 
-##### Body参数
+#### Body参数
 
 无
 
-##### Response
+#### Response
 
 |  名称   | 类型 |  说明  |
 |  ----  | ---|  ----  |
@@ -182,15 +182,15 @@ GET /graphspaces/${graphspace}/services/${service}
 | deployment_type  | String  |  service 的部署类型 |
 | urls | Array | service 地址列表 |
 
-##### 使用示例
+#### 使用示例
 
-###### Method & Url
+##### Method & Url
 
 ```
 GET http://127.0.0.1:8080/graphspaces/gs1/services/sv1
 ```
 
-###### Request Body
+##### Request Body
 
 无
 
@@ -217,44 +217,44 @@ GET http://127.0.0.1:8080/graphspaces/gs1/services/sv1
 }
 ```
 
-#### 11.1.4 删除某个服务
+### 4.2.4.删除某个服务
 
-##### 功能介绍
+#### 功能介绍
 
 删除某个服务
 
-##### URI
+#### URI
 
 ```
 DELETE /graphspaces/${graphspace}/services/${service}
 ```
 
 
-##### URI参数
+#### URI参数
 
 |  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
 |  ----  | ----  | ----  | ----  | ----  | ---- |
 | graphspace  | 是 | String  |   |   | 图空间名称  |
 | service  | 是 | String  |   |   | 服务名称  |
 
-##### Body参数
+#### Body参数
 
 无
 
-##### Response
+#### Response
 
 无
 
-##### 使用示例
+#### 使用示例
 
-###### Method & Url
+##### Method & Url
 
 ```
 DELETE http://localhost:8080/graphspaces/gs1/services/sv1
 ```
 
 
-###### Request Body
+##### Request Body
 
 无
 
