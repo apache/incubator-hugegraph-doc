@@ -213,8 +213,9 @@ GET /graphspaces/${graphspace}/graphs/${graph}/traversers/kout
 
 ##### Body参数
 无
+
 ##### Response
-| 名称                     |  类型     |  说明                   |
+| 名称                     | 类型     | 说明                   |
 | :----------------------- | :----- | :-------------- |
 | vertices | List | 点Id列表 |
 
