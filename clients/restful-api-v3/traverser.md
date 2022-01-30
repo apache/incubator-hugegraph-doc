@@ -1,4 +1,6 @@
-### 3.1 traverser API概述
+## 4.7.联机算法
+
+### 4.7.1.traverser API概述
 
 HugeGraphServer为HugeGraph图数据库提供了RESTful API接口。除了顶点和边的CRUD基本操作以外，还提供了一些遍历（traverser）方法，我们称为`traverser API`。这些遍历方法实现了一些复杂的图算法，方便用户对图进行分析和挖掘。
 
@@ -41,7 +43,7 @@ HugeGraph支持的Traverser API包括：
 
 PS: Vertices API & Edges API 移动至 [Vertex](./vertex.md) 与 [Edge](./edge.md) 页面中
 
-### 3.2. traverser API详解
+### 4.7.2.traverser API详解
 
 使用示例中的例子，都是基于TinkerPop官网给出的图：
 
@@ -181,7 +183,7 @@ public class Loader {
 "S1:marko>2>>S2:lop"
 ```
 
-#### 3.2.1 K-out API（GET，基础版）
+#### 4.7.2.1.K-out API（GET，基础版）
 
 ##### 功能介绍
 
@@ -248,7 +250,7 @@ GET http://localhost:8080/graphspaces/graphspace/graphs/graph/traversers/kout?so
 - 家族关系中，查找一个人的所有孙子，person A通过连续的两条“儿子”边到达的顶点集合。
 - 社交关系中发现潜在好友，例如：与目标用户相隔两层朋友关系的用户，可以通过连续两条“朋友”边到达的顶点。
 
-#### 3.2.2 K-out API（POST，高级版）
+#### 4.7.2.2.K-out API（POST，高级版）
 
 ##### 功能介绍
 
@@ -446,7 +448,7 @@ POST http://localhost:8080/graphspaces/graphspace/graphs/graph/traversers/kout
 
 参见 kout
 
-#### 3.2.3 K-neighbor（GET，基础版）
+#### 4.7.2.3.K-neighbor（GET，基础版）
 
 ##### 功能介绍
 
@@ -516,7 +518,7 @@ GET http://localhost:8080/graphspaces/graphspace/graphs/graph/traversers/kneighb
 - 社交关系中发现好友圈子，例如目标用户通过1条、2条、3条“朋友”边可到达的用户可以组成目标用户的朋友圈子
 
 
-#### 3.2.4 K-neighbor API（POST，高级版）
+#### 4.7.2.4.K-neighbor API（POST，高级版）
 
 ##### 功能介绍
 
@@ -750,7 +752,7 @@ POST http://localhost:8080/graphspaces/graphspace/graphs/graph/traversers/kneigh
 
 参见K-neighbor
 
-#### 3.2.5 Same Neighbors
+#### 4.7.2.5.Same Neighbors
 
 ##### 功能介绍
 
@@ -813,7 +815,7 @@ GET http://localhost:8080/graphspaces/graphspace/graphs/graph/traversers/samenei
 
 - 社交关系中发现两个用户的共同粉丝或者共同关注用户
 
-#### 3.2.6 Jaccard Similarity（GET）
+#### 4.7.2.6.Jaccard Similarity（GET）
 
 ##### 功能介绍
 
@@ -871,7 +873,7 @@ GET http://localhost:8080/graphspaces/graphspace/graphs/graph/traversers/jaccard
 
 用于评估两个点的相似性或者紧密度
 
-#### 3.2.7 Jaccard Similarity（POST）
+#### 4.7.2.7.Jaccard Similarity（POST）
 
 ##### 功能介绍
 
@@ -1033,7 +1035,7 @@ GET http://localhost:8080/graphspaces/graphspace/graphs/graph/traversers/shortes
 - 社交关系网中，查找两个用户有关系的最短路径，即最近的朋友关系链
 - 设备关联网络中，查找两个设备最短的关联关系
 
-#### 3.2.9 查找最短路径
+#### 4.7.2.9.查找最短路径
 
 ##### 功能介绍
 
@@ -1123,7 +1125,7 @@ GET http://localhost:8080/graphspaces/${graphspace}/graphs/${graph}/traversers/a
 - 社交关系网中，查找两个用户有关系的全部最短路径，即最近的朋友关系链
 - 设备关联网络中，查找两个设备全部的最短关联关系
 
-#### 3.2.10 查找带权重的最短路径
+#### 4.7.2.10.查找带权重的最短路径
 
 ##### 功能介绍
 
@@ -1430,7 +1432,7 @@ GET http://localhost:8080/graphspaces/${graphspace}/graphs/${graph}/traversers/s
 
 - 查找从北京出发到全国其他所有城市的耗时最短的乘车方案
 
-#### 3.2.12 (指定顶点集)查找最短路径
+#### 4.7.2.12.(指定顶点集)查找最短路径
 
 ##### 功能介绍
 
@@ -1711,7 +1713,7 @@ POST http://localhost:8080/graphspaces/${graphspace}/graphs/${graph}/traversers/
 
 - 查找多个公司和法人之间的最短路径
 
-#### 3.2.13 查找所有路径（GET，基础版）
+#### 4.7.2.13.查找所有路径（GET，基础版）
 
 ##### 功能介绍
 
@@ -1798,7 +1800,7 @@ GET http://localhost:8080/graphspaces/${graphspace}/graphs/{$graph}/traversers/p
 - 社交网络中，查找两个用户所有可能的关系路径
 - 设备关联网络中，查找两个设备之间所有的关联路径
 
-#### 3.2.14 查找所有路径（POST，高级版）
+#### 4.7.2.14.查找所有路径（POST，高级版）
 
 ##### 功能介绍
 
@@ -2113,7 +2115,7 @@ POST http://localhost:8080/graphspaces/${graphspace}/graphs/${graph}/traversers/
 - 社交网络中，查找看过张艺谋所导演的电影的用户关注的大V的路径（张艺谋--->电影---->用户--->大V）
 - 风控网络中，查找多个高风险用户的直系亲属的朋友的路径（高风险用户--->直系亲属--->朋友）
 
-#### 3.2.16 模版路径查询
+#### 4.7.2.16.模版路径查询
 
 ##### 功能介绍
 
@@ -2333,7 +2335,7 @@ POST http://localhost:8080/graphspaces/${graphspace}/graphs/${graph}/traversers/
 
 适合查找各种复杂的模板路径，比如personA -(朋友)-> personB -(同学)-> personC，其中"朋友"和"同学"边可以分别是最多3层和4层的情况
 
-#### 3.2.17 Crosspoints
+#### 4.7.2.17.Crosspoints
 
 ##### 功能介绍
 
@@ -2407,7 +2409,7 @@ GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/cro
 - 社交网络中，查找两个用户共同关注的话题或者大V
 - 家族关系中，查找共同的祖先
 
-#### 3.2.18 Customized Crosspoints
+#### 4.7.2.18.Customized Crosspoints
 
 ##### 功能介绍
 
@@ -2595,7 +2597,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/cu
 
 - 在商品图谱中，多款手机、学习机、游戏机通过不同的低级别的类目路径，最终都属于一级类目的电子设备
 
-#### 3.2.19 Rings
+#### 4.7.2.19.Rings
 
 ##### 功能介绍
 
@@ -2683,7 +2685,7 @@ GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/rin
 - 风控项目中，查询一个用户可达的循环担保的人或者设备
 - 设备关联网络中，发现一个设备周围的循环引用的设备
 
-#### 3.2.20 Rays
+#### 4.7.2.20.Rays
 
 ##### 功能介绍
 
@@ -2775,7 +2777,7 @@ GET graphspaces/${graphspace}/graphs/${graph}/traversers/rays?source="1:marko"&m
 - 家族关系中，查找一个人到所有还没有孩子的子孙的路径
 - 设备关联网络中，找到某个设备到终端设备的路径
 
-#### 3.2.21 Fusiform Similarity
+#### 4.7.2.21.Fusiform Similarity
 
 ##### 功能介绍
 
@@ -2919,7 +2921,7 @@ POST http://localhost:8080/graphspaces/${graphspace}/graphs/hugegraph/traversers
 - 跟一个读者有类似书单的读者
 - 跟一个玩家玩类似游戏的玩家
 
-#### 3.2.22 Adamic Adar
+#### 4.7.2.22.Adamic Adar
 
 AdamicAdar, 一般简称 AA 算法
 
@@ -2978,7 +2980,7 @@ GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/ada
 判断两个银行账户的关系紧密程度, 是共同邻居的改进系数版, 并且可以减少超级顶点在其中的权重影响
 
 
-#### 3.2.23 Resource Allocation
+#### 4.7.2.23.Resource Allocation
 
 ResourceAllocation(RA), 一般称为资源分配算法
 
@@ -3040,7 +3042,7 @@ GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph}/traversers/res
 
 判断两个银行账户的关系紧密程度, 是共同邻居的改进系数版, 和 AA 算法不同的是, 它不忽略超级顶点在其中的权重影响
 
-#### 3.2.24 Same Neighbors Batch
+#### 4.7.2.24.Same Neighbors Batch
 
 ##### 功能介绍
 
