@@ -1,4 +1,5 @@
-### 1.3 VertexLabel
+## 4.5.图数据
+### 4.5.1.顶点
 VertextLabel的描述字段详细说明
 
 | 字段               | 说明                                                                                                                  |
@@ -28,7 +29,7 @@ id_strategy可选值:
 
 另外，当顶点中带有"创建时间"的属性且希望以"创建时间"属性作为计算顶点存活时间的起点时，可以设置 VertexLabel 中的 ttl_start_time 字段。
 
-#### 1.3.1 创建
+#### 4.5.1.1.创建顶点
 
 ##### 功能介绍
 创建一个VertexLabel
@@ -133,7 +134,7 @@ POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/vertexlabels
 }
 ```
 
-#### 1.3.2 更新VertexLabel
+#### 4.5.1.2.更新VertexLabel
 
 ##### 功能介绍
 为已存在的VertexLabel添加properties或userdata，或者移除userdata（目前不支持移除properties）
@@ -225,7 +226,7 @@ PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/vertexlabels/p
 }
 ```
 
-#### 1.3.3 获取所有的VertexLabel
+#### 4.5.1.3.获取所有的VertexLabel
 
 ##### 功能介绍
 获取所有的VertexLabel列表
@@ -310,7 +311,7 @@ GET http://localhost:8080/graphspaces/${graphspace}/graphs/${hugegraph}/schema/v
 }
 ```
 
-#### 1.3.4 获取单个VertexLabel
+#### 4.5.1.4.获取单个VertexLabel
 
 ##### 功能介绍
 根据name获取VertexLabel
@@ -369,7 +370,7 @@ GET http://localhost:8080/graphspaces/${grphspace}/graphs/${hugegraph}/schema/ve
 }
 ```
 
-#### 1.3.5 删除VertexLabel
+#### 8.5.1.5.删除VertexLabel
 
 ##### 功能介绍
 根据name删除VertexLabel
