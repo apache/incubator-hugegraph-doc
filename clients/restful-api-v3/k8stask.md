@@ -1,6 +1,6 @@
-### 7.2 图计算任务
+## 4.6.图计算任务
 
-#### 7.2.1 创建图计算任务
+#### 4.6.1.创建图计算任务
 
 ##### 功能介绍
 
@@ -212,7 +212,7 @@ POST http://localhost:8080/graphspaces/${graphspace}/graphs/${graph}/jobs/comput
 }
 ```
 
-#### 7.2.2 删除图计算任务
+#### 4.6.2.删除图计算任务
 
 ##### URI
 
@@ -257,7 +257,7 @@ DELETE http://localhost:8080/graphspaces/${graphspace}/graphs/${graph}/jobs/comp
 }
 ```
 
-#### 7.2.3 取消图计算任务
+#### 4.6.3.取消图计算任务
 
 ##### URI
 
@@ -300,7 +300,7 @@ PUT http://localhost:8080/graphspaces/${graphspace}/graphs/${graph}/jobs/compute
 }
 ```
 
-#### 7.2.4 查看图计算任务
+#### 4.6.4.查看图计算任务
 
 ##### URI
 
@@ -365,7 +365,7 @@ GET http://localhost:8080/graphspaces/${graphspace}/graphs/${graph}/jobs/compute
 }
 ```
 
-#### 7.2.5 查看图计算任务列表
+#### 4.6.5.查看图计算任务列表
 
 ##### URI
 
