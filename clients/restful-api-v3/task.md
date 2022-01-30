@@ -1,4 +1,4 @@
-### 7.1 Task
+## 4.8.异步任务
 Task的描述字段详细说明
 
 | 字段             | 说明                    |
@@ -29,7 +29,7 @@ task_status字段的可选值:
  - CANCELLED: 异步任务已经取消成功
  - FAILED: 异步任务执行失败
 
-#### 7.1.1 列出某个图中全部的异步任务
+#### 4.8.1.列出某个图中全部的异步任务
 
 ##### URI
 
@@ -102,7 +102,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/huegraph/tasks?status=SUCCESS
 }
 ```
 
-#### 7.1.2 查看某个异步任务的信息
+#### 4.8.2.查看某个异步任务的信息
 
 ##### URI
 
@@ -169,7 +169,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/tasks/2
 }
 ```
 
-#### 7.1.3 删除某个异步任务信息，**不删除异步任务本身**
+#### 4.8.3.删除某个异步任务信息，**不删除异步任务本身**
 
 
 ##### URI
@@ -219,7 +219,7 @@ DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/tasks/2?force=true
 204
 ```
 
-#### 7.1.4 取消某个异步任务，**该异步任务必须具有处理中断的能力**
+#### 4.8.4.取消某个异步任务，**该异步任务必须具有处理中断的能力**
 
 假设已经通过[Gremlin API](gremlin.md)创建了一个异步任务如下：
 
