@@ -1,4 +1,5 @@
-### 1.2 PropertyKey
+## 4.4.元数据
+### 4.4.1.属性
 
 属性类型的描述字段详细说明:
 
@@ -12,7 +13,7 @@
 | user_data  | 设置属性类型的通用信息，比如可设置age属性的取值范围，最小为0，最大为100；目前此项不做任何校验，只为后期拓展提供预留入口 |
 
 
-#### 1.2.1 创建
+#### 4.4.1.1.创建属性
 
 ##### 功能介绍
 创建一个PropertyKey
@@ -81,7 +82,7 @@ POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/propertykeys
 }
 ```
 
-#### 1.2.2 更新PropertyKey
+#### 4.4.1.2.更新PropertyKey
 
 ##### 功能介绍
 仅允许为已存在的 PropertyKey 添加或移除 userdata
@@ -159,7 +160,7 @@ PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/propertykeys/a
 }
 ```
 
-#### 1.2.3 获取所有的 PropertyKey
+#### 4.4.1.3.获取所有的 PropertyKey
 
 ##### 功能介绍
 
@@ -263,7 +264,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/propertykeys
 }
 ```
 
-#### 1.2.4 获取单个PropertyKey
+#### 4.4.1.4.获取单个PropertyKey
 
 ##### 功能介绍
 根据name获取PropertyKey
@@ -320,7 +321,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/propertykeys/a
 }
 ```
 
-#### 1.2.5 删除单个PropertyKey
+#### 4.4.1.5.删除单个PropertyKey
 
 ##### 功能介绍
 根据name删除PropertyKey
