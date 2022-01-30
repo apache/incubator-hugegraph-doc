@@ -1,6 +1,7 @@
 ### 4.4.6.批量创建元数据
 
 批量创建元数据的方式有两种，包括：
+
 1. 可在Hubble的gremlin输入框内，编写gremlin语句，实现批量建立元数据；schema示例如下：
 // 创建一些属性
 schema.propertyKey("name").asText().ifNotExist().create();
@@ -18,6 +19,7 @@ schema.vertexLabel("software").properties("name", "price").primaryKeys("name").i
 schema.edgeLabel("knows").sourceLabel("person").targetLabel("person").ifNotExist().create();
 // 创建 created 边类型，这类边是从 person 指向 software 的
 schema.edgeLabel("created").sourceLabel("person").targetLabel("software").ifNotExist().create();
+
 2. 可使用HugeGraph- Loader批量导入。
 
 ### 4.4.7.元数据模板
