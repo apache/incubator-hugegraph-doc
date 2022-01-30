@@ -1,24 +1,24 @@
-## 4.1.Graph Space
+## 4.1.图空间
 
 在 HugeGraph 中，多租户是通过图空间（graph space）来实现的，资源的分配和隔离可以通过图空间进行。
 
 ### 4.1.1.创建一个图空间
 
-#### 功能介绍
+##### 功能介绍
 
 创建一个图空间
 
-#### URI
+##### URI
 
 ```
 POST /graphspaces
 ```
 
-#### URI参数
+##### URI参数
 
 无
 
-#### Body参数
+##### Body参数
 
 |  名称   | 是否必填  | 类型  | 默认值  | 取值范围  | 说明  |
 |  ----  | ----  | ----  | ----  | ----  | ----  |
@@ -35,7 +35,7 @@ POST /graphspaces
 | max_role_number | 是 | Int | | > 0 | 图空间的角色数目的上限 |
 | auth | 否 | Boolean | false | true, false | 图空间是否支持权限认证 |
 
-#### Response
+##### Response
 
 |  名称   | 类型  | 说明  |
 | ------ | ---- | ----- |
@@ -59,13 +59,13 @@ POST /graphspaces
 
 ##### 使用示例
 
-##### Method & Url
+###### Method & Url
 
 ```
 POST http://localhost:8080/graphspaces
 ```
 
-##### Request Body
+###### Request Body
 
 ```json
 {
@@ -84,13 +84,13 @@ POST http://localhost:8080/graphspaces
 }
 ```
 
-##### Response Status
+###### Response Status
 
 ```json
 201
 ```
 
-##### Response Body
+###### Response Body
 
 ```json
 {
@@ -116,50 +116,50 @@ POST http://localhost:8080/graphspaces
 
 ### 4.1.2.列出系统所有图空间
 
-#### 功能介绍
+##### 功能介绍
 
 列出系统所有图空间
 
-#### URI
+##### URI
 
 ```
 GET /graphspaces
 ```
 
 
-#### URI参数
+##### URI参数
 
 无
 
-#### Body参数
+##### Body参数
 
 无
 
-#### Response
+##### Response
 
 |  名称   | 类型 |  说明  |
 |  ----  | ---|  ----  |
 | graphspaces  |Array| 图空间的名字列表 |
 
-#### 使用示例
+##### 使用示例
 
-##### Method & Url
+###### Method & Url
 
 ```
 GET http://localhost:8080/graphspaces
 ```
 
-##### Request Body
+###### Request Body
 
 无
 
-##### Response Status
+###### Response Status
 
 ```json
 200
 ```
 
-##### Response Body
+###### Response Body
 
 ```json
 {
@@ -172,27 +172,27 @@ GET http://localhost:8080/graphspaces
 
 ### 4.1.3.查看某个图空间
 
-#### 功能介绍
+##### 功能介绍
 
 查看某个图空间
 
-#### URI
+##### URI
 
 ```
 GET /graphspaces/${graphspace}
 ```
 
-#### URI参数
+##### URI参数
 
 |  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
 |  ----  | ----  | ----  | ----  | ----  | ---- |
 | graphspace  | 是 | String  |   |   | 图空间名称  |
 
-#### Body参数
+##### Body参数
 
 无
 
-#### Response
+##### Response
 
 |  名称   | 类型  | 说明  |
 | ------ | ---- | ----- |
@@ -214,26 +214,26 @@ GET /graphspaces/${graphspace}
 | role_number_used | Int | 图空间的角色数目 |
 | auth | Boolean | 图空间是否支持权限认证 |
 
-#### 使用示例
+##### 使用示例
 
-##### Method & Url
+###### Method & Url
 
 ```
 GET http://127.0.0.1:8080/graphspaces/gs1
 ```
 
 
-##### Request Body
+###### Request Body
 
 无
 
-##### Response Status
+###### Response Status
 
 ```json
 200
 ```
 
-##### Response Body
+###### Response Body
 
 ```json
 {
@@ -261,23 +261,23 @@ GET http://127.0.0.1:8080/graphspaces/gs1
 
 注意：auth鉴权配置，在创建图空间的过程一旦确定下来，不允许更新
 
-#### 功能介绍
+##### 功能介绍
 
 更新某个图空间
 
-#### URI
+##### URI
 
 ```
 PUT /graphspaces/${graphspace}
 ```
 
-#### URI参数
+##### URI参数
 
 |  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
 |  ----  | ----  | ----  | ----  | ----  | ---- |
 | graphspace  | 是 | String  |   |   | 图空间名称  |
 
-#### Body参数
+##### Body参数
 
 |  名称   | 是否必填  | 类型  | 默认值  | 取值范围  | 说明  |
 |  ----  | ----  | ----  | ----  | ----  | ----  |
@@ -292,7 +292,7 @@ PUT /graphspaces/${graphspace}
 | max_graph_number | 是 | Int | | > 0 | 图空间的图数目的上限 |
 | max_role_number | 是 | Int | | > 0 | 图空间的角色数目的上限 |
 
-#### Response
+##### Response
 
 |  名称   | 类型  | 说明  |
 | ------ | ---- | ----- |
@@ -314,15 +314,15 @@ PUT /graphspaces/${graphspace}
 | role_number_used | Int | 图空间的角色数目 |
 | auth | Boolean | 图空间是否支持权限认证 |
 
-#### 使用示例
+##### 使用示例
 
-##### Method & Url
+###### Method & Url
 
 ```
 PUT http://127.0.0.1:8080/graphspaces/gs1
 ```
 
-##### Request Body
+###### Request Body
 
 ```json
 {
@@ -337,13 +337,13 @@ PUT http://127.0.0.1:8080/graphspaces/gs1
 }
 ```
 
-##### Response Status
+###### Response Status
 
 ```json
 200
 ```
 
-##### Response Body
+###### Response Body
 
 ```json
 {
@@ -369,43 +369,43 @@ PUT http://127.0.0.1:8080/graphspaces/gs1
 
 ### 4.1.5 删除某个图空间
 
-#### 功能介绍
+##### 功能介绍
 
 删除某个图空间
 
-#### URI
+##### URI
 
 ```
 DELETE /graphspaces/${graphspace}
 ```
 
-#### URI参数
+##### URI参数
 
 |  名称   | 是否必填  | 类型  | 默认值 | 取值范围 | 说明  |
 |  ----  | ----  | ----  | ----  | ----  | ---- |
 | graphspace  | 是 | String  |   |   | 图空间名称  |
 
-#### Body参数
+##### Body参数
 
 无
 
-#### Response
+##### Response
 
 无
 
-#### 使用示例
+##### 使用示例
 
-##### Method & Url
+###### Method & Url
 
 ```
 DELETE http://localhost:8080/graphspaces/gs1
 ```
 
-##### Request Body
+###### Request Body
 
 无
 
-##### Response Status
+###### Response Status
 
 ```json
 204
