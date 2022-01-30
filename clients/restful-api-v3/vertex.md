@@ -1,4 +1,6 @@
-### 2.1 Vertex
+## 4.5.图数据
+
+### 4.5.1.顶点
 
 顶点类型中的 Id 策略决定了顶点的 Id 类型，其对应关系如下：
 
@@ -19,7 +21,7 @@ CUSTOMIZE_UUID   | uuid
 
 接下来的示例均假设已经创建好了前述的各种 schema 信息
 
-#### 2.1.1 创建一个顶点
+#### 4.5.1.1创建一个顶点
 
 ##### URI
 
@@ -98,7 +100,7 @@ POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices
 }
 ```
 
-#### 2.1.2 创建多个顶点
+#### 4.5.1.2.创建多个顶点
 
 #####  功能介绍
 创建多个顶点
@@ -173,7 +175,7 @@ POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/batch
 ]
 ```
 
-#### 2.1.3 更新顶点属性
+#### 4.5.1.3.更新顶点属性
 
 #####  功能介绍
  更新顶点属性
@@ -262,7 +264,7 @@ PUT http://127.0.0.1:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices
 }
 ```
 
-#### 2.1.4 批量更新顶点属性
+#### 4.5.1.4.批量更新顶点属性
 
 ##### 功能说明
 
@@ -439,7 +441,7 @@ PUT http://127.0.0.1:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices
 
 其他的更新策略使用方式可以类推，不再赘述。
 
-#### 2.1.5 删除顶点属性
+#### 4.5.1.5.删除顶点属性
 
 #####  功能介绍
 删除顶点属性
@@ -525,7 +527,7 @@ PUT http://127.0.0.1:8080/graphspaces/{graphspace}/graphs/{graph}/graph/vertices
 }
 ```
 
-#### 2.1.6 获取符合条件的顶点
+#### 4.5.1.6.获取符合条件的顶点
 
 ##### URI
 
@@ -794,7 +796,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices?page=0
 
 此时`"page": null`表示已经没有下一页了 (注: 后端为 Cassandra 时，为了性能考虑，返回页恰好为最后一页时，返回 `page` 值可能非空，通过该 `page` 再请求下一页数据时则返回 `空数据` 及 `page = null`，其他情况类似)
 
-#### 2.1.7 根据Id获取顶点
+#### 4.5.1.7.根据Id获取顶点
 
 #####  功能介绍
 根据Id获取顶点
@@ -866,7 +868,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/"1:mar
 }
 ```
 
-#### 2.1.8 删除顶点
+#### 4.5.1.8.删除顶点
 
 #####  功能介绍
 根据条件删除指定的顶点
@@ -925,9 +927,9 @@ DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/{ve
 204
 ```
 
-#### 2.1.9 Vertices
+#### 4.5.1.9.Vertices
 
-##### 2.1.9.1 根据顶点的id列表，批量查询顶点
+##### 4.5.1.9.1.根据顶点的id列表，批量查询顶点
 
 #####  功能介绍
 根据顶点的Id列表,批量查询顶点
@@ -1032,7 +1034,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices?ids="1
 }
 ```
 
-##### 2.1.9.2 获取顶点 Shard 信息
+##### 4.5.1.9.2.获取顶点 Shard 信息
 
 #####  功能介绍
 通过指定的分片大小split_size，获取顶点分片信息（可以与 3.2.21.3 中的 Scan 配合使用来获取顶点）。
@@ -1108,7 +1110,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/shards
 }
 ```
 
-##### 2.1.9.3 根据Shard信息批量获取顶点
+##### 4.5.1.9.3.根据Shard信息批量获取顶点
 
 #####  功能介绍
 通过指定的分片信息批量查询顶点（Shard信息的获取参见 3.2.21.2 Shard）。
@@ -1316,7 +1318,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/scan?s
 }
 ```
 
-##### 2.1.9.4 适用场景
+##### 4.5.1.9.4.适用场景
 
 - 按id列表查询顶点，可用于批量查询顶点，比如在path查询到多条路径之后，可以进一步查询某条路径的所有顶点属性。
 - 获取分片和按分片查询顶点，可以用来遍历全部顶点
