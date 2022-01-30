@@ -1,4 +1,4 @@
-### 1.4 EdgeLabel
+### 4.4.3.边类型
 
 EdgeLabel的描述字段详细说明
 
@@ -20,7 +20,7 @@ EdgeLabel的描述字段详细说明
 
 另外，当边中带有"创建时间"的属性且希望以"创建时间"属性作为计算边存活时间的起点时，可以设置 EdgeLabel 中的 ttl_start_time 字段。
 
-#### 1.4.1 创建
+#### 4.4.3.1.建边类型
 
 ##### 功能介绍
 创建一个EdgeLabel
@@ -175,7 +175,7 @@ POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/edgelabels
 }
 ```
 
-#### 1.4.2 更新EdgeLabel
+#### 4.4.3.2.更新EdgeLabel
 ##### 功能介绍
 为已存在的EdgeLabel添加properties或userdata，或者移除userdata（目前不支持移除properties）
 
@@ -270,7 +270,7 @@ PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/edgelabels/cre
 }
 ```
 
-#### 1.4.3 获取所有的EdgeLabel
+#### 4.4.3.3.获取所有的EdgeLabel
 
 ##### 功能介绍
 
@@ -355,7 +355,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/edgelabels
 }
 ```
 
-#### 1.4.4 获取一个EdgeLabel
+#### 4.4.3.4.获取一个EdgeLabel
 
 ##### 功能介绍
 根据name获取EdgeLabel
@@ -432,7 +432,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/edgelabels/cre
 }
 ```
 
-#### 1.4.5  删除EdgeLabel
+#### 4.4.3.5.删除EdgeLabel
 
 ##### 功能介绍
 根据name删除EdgeLabel
