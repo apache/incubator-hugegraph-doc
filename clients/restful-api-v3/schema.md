@@ -1,8 +1,8 @@
-### 1.1 Schema
+### 4.4.5.Schema信息
 
 HugeGraph 提供单一接口获取和更新某个图的全部 Schema 信息，包括：PropertyKey、VertexLabel、EdgeLabel 和 IndexLabel。
 
-#### 1.1.1 获取全部schema信息
+#### 4.4.5.1.获取全部schema信息
 
 ##### 功能介绍
 
@@ -380,7 +380,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema?format=groovy
 {"schema":"graph.schema().propertyKey('price').asInt().ifNotExist().create();\ngraph.schema().propertyKey('date').asText().ifNotExist().create();\ngraph.schema().propertyKey('city').asText().ifNotExist().create();\ngraph.schema().propertyKey('age').asInt().ifNotExist().create();\ngraph.schema().propertyKey('lang').asText().ifNotExist().create();\ngraph.schema().propertyKey('weight').asDouble().ifNotExist().create();\ngraph.schema().propertyKey('name').asText().ifNotExist().create();\n\ngraph.schema().vertexLabel('person').properties('name','age','city').primaryKeys('name').nullableKeys('age').enableLabelIndex(true).ifNotExist().create();\ngraph.schema().vertexLabel('software').properties('name','lang','price').primaryKeys('name').nullableKeys('price').enableLabelIndex(true).ifNotExist().create();\n\ngraph.schema().edgeLabel('knows').sourceLabel('person').targetLabel('person').properties('weight','date').multiTimes().sortKeys('date').nullableKeys('weight').enableLabelIndex(true).ifNotExist().create();\ngraph.schema().edgeLabel('created').sourceLabel('person').targetLabel('software').properties('weight','date').nullableKeys('weight').enableLabelIndex(true).ifNotExist().create();\n\ngraph.schema().indexLabel('personByCity').onV('person').by('city').secondary().ifNotExist().create();\ngraph.schema().indexLabel('personByAge').onV('person').by('age').range().ifNotExist().create();\ngraph.schema().indexLabel('softwareByPrice').onV('software').by('price').range().ifNotExist().create();\ngraph.schema().indexLabel('createdByDate').onE('created').by('date').secondary().ifNotExist().create();\ngraph.schema().indexLabel('createdByWeight').onE('created').by('weight').range().ifNotExist().create();\ngraph.schema().indexLabel('knowsByWeight').onE('knows').by('weight').range().ifNotExist().create();\n"}
 ```
 
-#### 1.1.2 更新schema信息
+#### 4.4.5.2.更新schema信息
 
 ##### 功能介绍
 
