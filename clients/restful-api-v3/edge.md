@@ -560,7 +560,6 @@ GET /graphspaces/{graphspace}/graphs/{hugegraph}/graph/edges?vertex_id={vertexId
 | intVLabel          | String       | 目标顶点类型                        |
 | properties         | Map          | 边关联的属性，可以有多组             |
 
-----
 ##### 使用示例
 
 **查询与顶点 person:josh(vertex_id="1:josh") 相连且 label 为 created 的边**
@@ -612,7 +611,6 @@ GET http://127.0.0.1:8080/graphspaces/{graphspace}/graphs/{hugegraph}/graph/edge
 }
 ```
 
-----
 ##### 使用示例
 
 **分页查询所有边，获取第一页（page不带参数值），限定3条**
@@ -680,7 +678,6 @@ GET http://127.0.0.1:8080/graphspaces/{graphspace}/graphs/{hugegraph}/graph/edge
 返回的body里面是带有下一页的页号信息的，`"page": "002500100753313a6a6f73681210010004000000020953323a726970706c65f07ffffffcf07ffffffd8460d63f4b398dd2721ed4fdb7716b420004"`，
 在查询下一页的时候将该值赋给page参数。
 
-----
 ##### 使用示例
 
 **分页查询所有边，获取下一页（page带上上一页返回的page值），限定3条**
@@ -848,7 +845,6 @@ DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/edges/S1:pet
 204
 ```
 
-----
 ##### 使用示例
 
 **根据Label+Id删除边**
