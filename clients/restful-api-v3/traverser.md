@@ -967,7 +967,7 @@ POST http://localhost:8080/graphspaces/${graphspace}/graphs/${graph}/traversers/
 
 用于在图中找出与指定顶点相似性最高的顶点
 
-#### 3.2.8 Shortest Path
+#### 4.7.2.8.Shortest Path
 
 ##### 功能介绍
 
@@ -1248,7 +1248,7 @@ GET http://localhost:8080/graphspaces/${graphspace}/graphs/${graph}/traversers/w
 
 - 交通线路中查找从A城市到B城市花钱最少的交通方式
 
-#### 3.2.11 (从一个顶点出发)查找最短路径
+#### 4.7.2.11.(从一个顶点出发)查找最短路径
 
 ##### 功能介绍
 
@@ -1932,7 +1932,7 @@ POST http://localhost:8080/graphspaces/${graphspace}/graphs/${graph}/traversers/
 - 社交网络中，查找两个用户所有可能的关系路径
 - 设备关联网络中，查找两个设备之间所有的关联路径
 
-#### 3.2.15 自定义路径查询
+#### 4.7.2.15.自定义路径查询
 
 ##### 功能介绍
 
