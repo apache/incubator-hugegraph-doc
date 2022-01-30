@@ -1,6 +1,6 @@
-### 1.6 Rebuild
+### 4.9.重构
 
-#### 1.6.1 重建IndexLabel
+#### 4.9.1.重建IndexLabel
 
 ##### 功能介绍
 
@@ -64,7 +64,7 @@ PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/jobs/rebuild/indexlab
 
 > 可以通过`GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/tasks/1`（其中"1"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](task.md)
 
-#### 1.6.2 VertexLabel对应的全部索引重建
+#### 4.9.2.VertexLabel对应的全部索引重建
 
 ##### 功能介绍
 
@@ -126,7 +126,7 @@ PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/jobs/rebuild/vertexla
 
 > 可以通过`GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/tasks/2`（其中"2"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](task.md)
 
-#### 1.6.3 EdgeLabel对应的全部索引重建
+#### 4.9.3.EdgeLabel对应的全部索引重建
 
 ##### 功能介绍
 
