@@ -1,6 +1,6 @@
-### 8.1 Gremlin
+## 4.10.Gremlin
 
-#### 8.1.1 向HugeGraphServer发送gremlin语句（GET），同步执行
+#### 4.10.1.向HugeGraphServer发送gremlin语句（GET），同步执行
 
 ##### 功能介绍
 
@@ -107,7 +107,7 @@ GET http://localhost:8080/gremlin?gremlin=gs1-hugegraph.traversal().V()
 }
 ```
 
-#### 8.1.2 向HugeGraphServer发送gremlin语句（POST），同步执行
+#### 4.10.2.向HugeGraphServer发送gremlin语句（POST），同步执行
 
 ##### 功能介绍
 
@@ -230,7 +230,7 @@ POST http://localhost:8080/gremlin
 
 > 响应体的结构与其他 Vertex 或 Edge 的 RESTful API的结构有区别，用户可能需要自行解析。
 
-#### 8.1.3 向HugeGraphServer发送gremlin语句（POST），异步执行
+#### 4.10.3.向HugeGraphServer发送gremlin语句（POST），异步执行
 
 ##### 功能介绍
 
