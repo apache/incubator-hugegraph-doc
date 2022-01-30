@@ -86,7 +86,7 @@ POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph
 }
 ```
 
-#### 4.4.1.2.列出图空间中全部的图
+#### 4.3.1.2.列出图空间中全部的图
 
 #### 功能介绍
 
