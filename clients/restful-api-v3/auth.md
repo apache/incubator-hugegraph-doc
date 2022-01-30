@@ -1,8 +1,8 @@
-### 9.1 用户认证与权限控制 V3
+## 4.12.用户认证与权限控制
 
 > 开启权限及相关配置请先参考 [权限配置](../../config/config-authentication-v3.md) 文档
 
-##### 用户认证与权限控制概述：
+### 4.12.1.用户认证与权限控制概述：
 HugeGraph支持多用户认证、以及细粒度的权限访问控制，采用基于“用户-用户组-操作-资源”的4层设计，灵活控制用户角色与权限。 
 资源描述了图数据库中的数据，比如符合某一类条件的顶点，每一个资源包括type、label、properties三个要素，共有18种type、
 任意label、任意properties的组合形成的资源，一个资源的内部条件是且关系，多个资源之间的条件是或关系。用户可以属于一个或多个用户组，
@@ -17,10 +17,10 @@ city: Beijing})
 ##### 接口说明：
 用户认证与权限控制接口包括5类：UserAPI、GroupAPI、TargetAPI、BelongAPI、AccessAPI。
 
-### 9.2 用户（User）API
+### 4.12.2.用户（User）API
 用户接口包括：创建用户（需要超级管理员admin权限），删除用户（需要超级管理员admin权限），修改用户（需要超级管理员admin权限或用户自己），和查询用户相关信息接口。
 
-#### 9.2.1 创建用户
+#### 4.12.2.1.创建用户
 
 ##### 功能介绍
 
@@ -98,7 +98,7 @@ POST http://localhost:8080/auth/users
 }
 ```
 
-#### 9.2.2 删除用户
+#### 4.12.2.2.删除用户
 
 ##### 功能介绍
 
@@ -147,7 +147,7 @@ DELETE http://localhost:8080/auth/users/tester
 
 无
 
-#### 9.2.3 修改用户
+#### 4.12.2.3.修改用户
 
 ##### 功能介绍
 
@@ -226,7 +226,7 @@ PUT http://localhost:8080/auth/users/tester
 }
 ```
 
-#### 9.2.4 查询用户列表
+#### 4.12.2.4.查询用户列表
 
 ##### 功能介绍
 
@@ -317,7 +317,7 @@ GET http://localhost:8080/auth/users?limit=100
 }
 ```
 
-#### 9.2.5 查询某个用户
+#### 4.12.2.5.查询某个用户
 
 ##### 功能介绍
 
@@ -385,7 +385,7 @@ GET http://localhost:8080/auth/users/tester
 }
 ```
 
-#### 9.2.6 查询某个用户的角色
+#### 4.12.2.6.查询某个用户的角色
 
 ##### 功能介绍
 
@@ -483,13 +483,13 @@ GET http://localhost:8080/auth/users/tester/role
 }
 ```
 
-### 9.3 用户组（Group）API
+### 4.12.3.用户组（Group）API
 用户组会赋予相应的资源权限，用户会被分配不同的用户组，即可拥有不同的资源权限。  
 用户组接口包括：创建用户组，删除用户组，修改用户组，和查询用户组相关信息接口。
 
 注意：需要图空间管理员或者超级管理员权限
 
-#### 9.3.1 创建用户组
+#### 4.12.3.1.创建用户组
 
 ##### 功能介绍
 
@@ -563,7 +563,7 @@ POST http://localhost:8080/graphspaces/gs1/auth/groups
 }
 ```
 
-#### 9.3.2 删除用户组
+#### 4.12.3.2.删除用户组
 
 ##### 功能介绍
 
@@ -613,7 +613,7 @@ DELETE http://localhost:8080/graphspaces/gs1/auth/groups/all
 无
 
 
-#### 9.3.3 修改用户组
+#### 4.12.3.3.修改用户组
 
 ##### 功能介绍
 
@@ -689,7 +689,7 @@ PUT http://localhost:8080/graphspaces/gs1/auth/groups/all
 }
 ```
 
-#### 9.3.4 查询用户组列表
+#### 4.12.3.4.查询用户组列表
 
 ##### 功能介绍
 
@@ -767,7 +767,7 @@ GET http://localhost:8080/graphspaces/gs1/auth/groups
 }
 ```
 
-#### 9.3.5 查询某个用户组
+#### 4.12.3.5.查询某个用户组
 
 ##### 功能介绍
 
@@ -836,14 +836,14 @@ GET http://localhost:8080/graphspaces/gs1/auth/groups/all
 }
 ```
 
-### 9.4 资源（Target）API
+### 4.12.4.资源（Target）API
 资源描述了图数据库中的数据，比如符合某一类条件的顶点，每一个资源包括type、label、properties三个要素，共有18种type、
 任意label、任意properties的组合形成的资源，一个资源的内部条件是且关系，多个资源之间的条件是或关系。   
 资源接口包括：资源的创建、删除、修改和查询。
 
 注意：需要图空间管理员或者超级管理员权限
 
-#### 9.4.1 创建资源
+#### 4.12.4.1.创建资源
 
 ##### 功能介绍
 
@@ -965,7 +965,7 @@ POST http://localhost:8080/graphspaces/gs1/auth/targets
 }
 ```
 
-#### 9.4.2 删除资源
+#### 4.12.4.2.删除资源
 
 ##### 功能介绍
 
@@ -1015,7 +1015,7 @@ DELETE http://localhost:8080/graphspaces/gs1/auth/targets/all_targets
 
 无
 
-#### 9.4.3 修改资源
+#### 4.12.4.3.修改资源
 
 ##### 功能介绍
 
@@ -1121,7 +1121,7 @@ PUT http://localhost:8080/graphspaces/gs1/auth/targets/all_targets
 }
 ```
 
-#### 9.4.4 查询资源列表
+#### 4.12.4.4.查询资源列表
 
 ##### 功能介绍
 
@@ -1214,7 +1214,7 @@ GET http://localhost:8080/graphspaces/gs1/auth/targets
 }
 ```
 
-#### 9.4.5 查询某个资源
+#### 4.12.4.5.查询某个资源
 
 ##### 功能介绍
 
@@ -1298,13 +1298,13 @@ GET http://localhost:8080/graphspaces/gs1/auth/targets/all_targets
 }
 ```
 
-### 9.5 关联角色（Belong）API
+### 4.12.5.关联角色（Belong）API
 关联用户和用户组的关系，一个用户可以关联一个或者多个用户组。用户组拥有相关资源的权限，不同用户组的资源权限可以理解为不同的角色。即给用户关联角色。  
 关联角色接口包括：用户关联角色的创建、删除、修改和查询。
 
 注意：需要图空间管理员或者超级管理员权限
 
-#### 9.5.1 创建用户的关联角色
+#### 4.12.5.1.创建用户的关联角色
 
 ##### 功能介绍
 
@@ -1382,7 +1382,7 @@ POST http://localhost:8080/graphspaces/gs1/auth/belongs
 }
 ```
 
-#### 9.5.2 删除关联角色
+#### 4.12.5.2.删除关联角色
 
 ##### 功能介绍
 
@@ -1432,7 +1432,7 @@ DELETE http://localhost:8080/graphspaces/gs1/auth/belongs/tester->all
 
 无
 
-#### 9.5.3 修改关联角色
+#### 4.12.5.3.修改关联角色
 
 ##### 功能介绍
 
@@ -1507,7 +1507,7 @@ PUT http://localhost:8080/graphspaces/gs1/auth/belongs/tester->all
 }
 ```
 
-#### 9.5.4 查询关联角色列表
+#### 4.12.5.4.查询关联角色列表
 
 ##### 功能介绍
 
@@ -1586,7 +1586,7 @@ GET http://localhost:8080/graphspaces/gs1/auth/belongs
 }
 ```
 
-#### 9.5.5 查看某个关联角色
+#### 4.12.5.5.查看某个关联角色
 
 ##### 功能介绍
 
@@ -1656,13 +1656,13 @@ GET http://localhost:8080/graphspaces/gs1/auth/belongs/tester->all
 }
 ```
 
-### 9.6 赋权（Access）API
+### 4.12.6.赋权（Access）API
 给用户组赋予资源的权限，主要包含：读操作(READ)、写操作(WRITE)、删除操作(DELETE)、执行操作(EXECUTE)、图空间管理(SPACE)、运维管理(OP)等。  
 赋权接口包括：赋权的创建、删除、修改和查询。
 
 注意：需要图空间管理员或者超级管理员权限
 
-#### 9.6.1 创建赋权(用户组赋予资源的权限)
+#### 4.12.6.1.创建赋权(用户组赋予资源的权限)
 
 ##### 功能介绍
 
@@ -1749,7 +1749,7 @@ POST http://localhost:8080/graphspaces/gs1/auth/accesses
 }
 ```
 
-#### 9.6.2 删除赋权
+#### 4.12.6.2.删除赋权
 
 ##### 功能介绍
 
@@ -1799,7 +1799,7 @@ DELETE http://localhost:8080/graphspaces/gs1/auth/accesses/all->1->all_targets
 
 无
 
-#### 9.6.3 修改赋权
+#### 4.12.6.3.修改赋权
 
 ##### 功能介绍
 
@@ -1875,7 +1875,7 @@ PUT http://localhost:8080/graphspaces/gs1/auth/accesses/all->1->all_targets
 }
 ```
 
-#### 9.6.4 查询赋权列表
+#### 4.12.6.4.查询赋权列表
 
 ##### 功能介绍
 
@@ -1955,7 +1955,7 @@ GET http://localhost:8080/graphspaces/gs1/auth/accesses
 }
 ```
 
-#### 9.6.5 查询某个赋权
+#### 4.12.6.5.查询某个赋权
 
 ##### 功能介绍
 
@@ -2025,10 +2025,10 @@ GET http://localhost:8080/graphspaces/gs1/auth/accesses/all->1->all_targets
 }
 ```
 
-### 9.7 Manager API
+### 4.12.7.Manager API
 管理超级管理员、图空间管理员，主要包含：创建、删除。
 
-#### 9.7.1 创建 manager
+#### 4.12.7.1.创建 manager
 
 ##### 功能介绍
 
@@ -2095,7 +2095,7 @@ POST http://localhost:8080/auth/managers
 }
 ```
 
-#### 9.7.2 删除 manager
+#### 4.12.7.2.删除 manager
 
 ##### 功能介绍
 
@@ -2146,10 +2146,10 @@ DELETE http://localhost:8080/auth/managers?user=boss&type=SPACE&graphspace=graph
 
 无
 
-### 9.8 Token API
+## 4.13.Token API
 获取用户Token，主要包含：登录(login)、验证Token(verify)。
 
-#### 9.8.1 登录(login)
+#### 4.13.1.登录(login)
 
 ##### 功能介绍
 
@@ -2211,7 +2211,7 @@ POST http://localhost:8080/auth/login
 }
 ```
 
-#### 9.8.2 验证Token(verify)
+#### 4.13.2.验证Token(verify)
 
 ##### 功能介绍
 
