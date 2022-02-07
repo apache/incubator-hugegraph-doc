@@ -18,6 +18,7 @@
 * [Config Authentication](config/config-authentication.md)
 * [Config Authentication V3](config/config-authentication-v3.md)
 * [Config HTTPS](config/config-https.md)
+* [Config Encrypting Data](config/config-encrypt-data.md)
 
 
 ## API
