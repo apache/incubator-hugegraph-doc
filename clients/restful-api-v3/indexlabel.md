@@ -113,6 +113,7 @@ GET /graphspaces/${graphspace}/graphs/${hugegraph}/schema/indexlabels
 
 ##### Body参数
 无
+
 ##### Response
 | 名称        | 类型      | 说明         |
 | ----------- | --------- | ------------ |
