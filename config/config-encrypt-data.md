@@ -41,65 +41,57 @@ HugeGraph支持与行业标准方法集成，以便在存储在磁盘中时对�
 - 设置环境变量，如下所示
 
 ```bash
-# The username for HugeGraph Database System
-export USER_NAME='<username>'
+# The encrypted file path
+export ENCRYPTED_FILE='/home/crypt-data/encryptfs'
+ 
+# The encrypted file size
+export ENCRYPTED_FILE_SIZE=5G
 
-# The path of encrypted file to be created for HugeGraph storage
-export ENCRYPTED_FILE_PATH='<path-to-encrypted-file>'
-
-# The size of encrypted file to be created, for example: 60G
-export ENCRYPTED_FILE_SIZE=<storage-size>
-
-# The password for the encrypted file, for example: MataAtRe5tPa55w0rd
-export ENCRYPTED_PASSWORD='<password>'
-
-# The root directory for hugegraph, for example: $HOME/hugegraph
-export HUGEGRAPH_DATA_ROOT="<hugegraph-data-root>"
-
-# Set the first available loop device for encrypted file mapping
+# Choose the first available loop device
 export LOOP_DEVICE=$(losetup -f)
+ 
+# The mapper file name
+export MAPPER_FILE='hstorage'
+ 
+# The mount path
+export MOUNT_PATH='/mnt/encryptfs'
 ```
 
 - 创建数据存储的文件
 
 ```bash
-dd of=$ENCRYPTED_FILE_PATH bs=$ENCRYPTED_FILE_SIZE count=0 seek=1
-```
-
-- 更改文件访问权限
-
-```bash
-chmod 600 $ENCRYPTED_FILE_PATH
+dd of=$ENCRYPTED_FILE bs=$ENCRYPTED_FILE_SIZE count=0 seek=1
 ```
 
 - 关联文件与设备
 
 ```bash
-sudo losetup $LOOP_DEVICE $ENCRYPTED_FILE_PATH
+sudo losetup $LOOP_DEVICE $ENCRYPTED_FILE
 ```
 
-- 加密设备中的存储
+- 加密设备中的存储，注意输入'YES'，并牢记输入的密码
 
 ```bash
-echo "$ENCRYPTED_PASSWORD" | cryptsetup -y luksFormat $LOOP_DEVICE
+sudo cryptsetup -y luksFormat $LOOP_DEVICE
 ```
 
-- 打开分区，创建到$ENCRYPTED_FILE_PATH的映射
+- 打开分区，创建到$ENCRYPTED_FILE的映射
 
 ```bash
-echo "$ENCRYPTED_PASSWORD" | cryptsetup luksOpen $LOOP_DEVICE hugegraph_hstore
+sudo cryptsetup open $LOOP_DEVICE $MAPPER_FILE
 ```
 
 - 创建文件系统
 
 ```bash
-sudo mke2fs -j -O dir_index /dev/mapper/hugegraph_hstore
+sudo mke2fs -j -O dir_index /dev/mapper/$MAPPER_FILE
 ```
 
-- 挂载文件系统到指定位置 /mnt/hstore
+- 挂载文件系统
 
 ```bash
-sudo mount /dev/mapper/hugegraph_hstore /mnt/hstore
+sudo mkdir -p $MOUNT_PATH
+sudo mount /dev/mapper/$MAPPER_FILE $MOUNT_PATH
 ```
 
 #### 例子2：使用eCryptfs进行文件系统加密
@@ -113,13 +105,13 @@ sudo mount /dev/mapper/hugegraph_hstore /mnt/hstore
 export ENCRYPTED_HSTORE_PATH='<path-to-encrypted-directory>'
 
 # The mount directory
-export MOUNT_DIRECTORY='<path-to-mount-directory>'
+export MOUNT_PATH='<path-to-mount-directory>'
 ```
 
-- 挂载，并将Hstore的存储目录指向$MOUNT_DIRECTORY
+- 挂载，并将Hstore的存储目录指向$MOUNT_PATH
 
 注意：挂在口上过程中需要输入密码
 
 ```bash
-sudo mount -t ecryptfs $ENCRYPTED_HSTORE_PATH $MOUNT_DIRECTORY
+sudo mount -t ecryptfs $ENCRYPTED_HSTORE_PATH $MOUNT_PATH
 ```
