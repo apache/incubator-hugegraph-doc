@@ -12,6 +12,8 @@ HugeGraph-Loader 是 HugeGragh 的数据导入组件，能够将多种数据源�
 
 本地磁盘文件和 HDFS 文件支持断点续传。
 
+Loader v3版本新增支持 **图空间**，必须指定，默认图空间为DEFAULT。
+
 后面会具体说明。
 
 > 注意：使用 HugeGraph-Loader 需要依赖 HugeGraph Server 服务，下载和启动 Server 请参考 [HugeGraph-Server Quick Start](/quickstart/hugegraph-server.html)
@@ -742,16 +744,30 @@ schema: 必填
 
 导入过程由用户提交的命令控制，用户可以通过不同的参数控制执行的具体流程。
 
+数据导入HugeGraphServer的选择有两种方式，既可以直接指定HugeGraphServer的地址，也可以通过配置meta server地址自动获取HugeGraphServer的地址。
+
+默认方式为直连HugeGraphServer的地址, 通过参数--host、--port指定，进行数据的导入。
+
+当采用meta server方式时，需要通过--meta-urls指定meta server地址，这样loader会自动获取相关HugeGraphServer信息，并进行数据的导入。
+
 ##### 3.4.1 参数说明
 
 参数                 | 默认值        | 是否必传 | 描述信息
 ------------------- | ------------ | ------- | -----------------------
 -f 或 --file    |              |    Y    | 配置脚本的路径
+--graphspace    |  DEFAULT     |         | 图数据库所属namespace
 -g 或 --graph   |              |    Y    | 图数据库空间
 -s 或 --schema  |              |    Y    | schema文件路径
 -h 或 --host    | localhost    |         | HugeGraphServer 的地址
 -p 或 --port    | 8080         |         | HugeGraphServer 的端口号
+-t 或 --meta-type   | etcd         |         | meta server类型，etcd/pd。 
+-m 或 --meta-urls   |              |         | meta server地址
+--cluster           |  hg          |         | 图数据库所属集群，当启用meta server，且--meta-type为etcd时有效
+--meta-ca           |              |         | 双向认证ca根证书，当meta server开启 SSL双向认证时使用
+--meta-client-ca    |              |         | loader双向认证就的证书，当meta server开启 SSL双向认证时使用
+--meta-client-key   |              |         | loader双向认证的私钥，当meta server开启 SSL双向认证时使用
 --username          | null         |         | 当 HugeGraphServer 开启了权限认证时，当前图的 username
+--password          | null         |         | 当 HugeGraphServer 开启了权限认证时，当前图的 password
 --token             | null         |         | 当 HugeGraphServer 开启了权限认证时，当前图的 token 
 --protocol          | http         |         | 向服务端发请求的协议，可选 http 或 https
 --trust-store-file  |              |         | 请求协议为 https 时，客户端的证书文件路径
