@@ -5,6 +5,7 @@
 ## Quickstart
 * [Install HugeGraph-Server](quickstart/hugegraph-server.md)
 * [Load data with HugeGraph-Loader](quickstart/hugegraph-loader.md)
+* [Load data with HugeGraph-Loader-V3](quickstart/hugegraph-loader-v3.md)
 * [Manage with HugeGraph-Tools](quickstart/hugegraph-tools.md)
 * [Manage with HugeGraph-Tools-V3](quickstart/hugegraph-tools-v3.md)
 * [Visual with HugeGraph-Hubble](quickstart/hugegraph-hubble.md)
