@@ -133,7 +133,6 @@ server.role=master
 
 ```bash
 cd /path/to/hugegraph-xx.xx.xx
-sh ./bin/init-store.sh
 sh ./bin/start-hugegraph.sh
 ```
 
