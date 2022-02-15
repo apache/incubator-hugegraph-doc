@@ -23,27 +23,38 @@ POST /graphspaces/${graphspace}/services
 
 ##### Body参数
 
-|  名称   | 是否必填  | 类型  | 默认值  | 取值范围  | 说明  |
-|  ----  | ----  | ----  | ----  | ----  | ----  |
-| name  | 是 | String  |   | 小写字母、数字和下划线组成，首字符必须是小写字母，长度不超过48  |  service 的名字 |
-| description  | 是 | String  |   |   |  service 的描述信息 |
-| count  | 是 | Int |   | > 0  |  HugeGraphServer 的数目 |
-| cpu_limit  | 是 | String  |   | > 0  |  HugeGraphServer 的 CPU 核数 |
-| memory_limit  | 是 | String  |   | > 0  |  HugeGraphServer 的内存大小，单位 GB |
-| deployment_type  | 是 | String  |   | K8S、MANUAL  |  service 的部署类型，K8S 指通过K8S集群启动服务，MANUAL 指通过手动部署的方式启动服务 |
+|  名称            | 是否必填  | 类型    | 默认值  | 取值范围                                                   | 说明            |
+|  ----            | ----     | ----    | ----   | ----                                                      | ----            |
+| name             | 是       | String  |        | 小写字母、数字和下划线组成，首字符必须是小写字母，长度不超过48  |  service 的名字 |
+| type             | 是       | String  |        | OLTP, OLAP, STORAGE                                       | 服务类型         |
+| description      | 是       | String  |        |                                                           |  service 的描述信息 |
+| count            | 否       | Int     |  1     | > 0                                                       |  HugeGraphServer 的数目 |
+| cpu_limit        | 否       | Int     |  1     | > 0                                                       |  HugeGraphServer 的 CPU 核数 |
+| memory_limit     | 否       | Int     |  4     | > 0                                                       |  HugeGraphServer 的内存大小，单位 GB |
+| storage_limit    | 否       | Int     |  100   | > 0                                                       |  HStore的磁盘大小，单位GB |
+| route_type       | 否       | String  |        | ClusterIP, LoadBalancer, NodePort                         | 当deployment_type为K8S时必须填写，反之不可填写 |
+| port             | 否       | Int     |        | > 0                                                       | 当deployment_type为MANUAL时必须填写，反之不可填写 |
+| urls             | 否       | [String]|        | 字符串数组                                                 | 当deployment_type为MANUAL时必须填写，反之不可填写 |
+| deployment_type  | 是       | String  |        | K8S、MANUAL                                               |  service 的部署类型，K8S 指通过K8S集群启动服务，MANUAL 指通过手动部署的方式启动服务 |
+
 
 ##### Response
 
 |  名称   | 类型 |  说明  |
 |  ----  | ---|  ----  |
 | name  | String | service 的名字 |
+| type  | String | 服务类型         |
 | description  | String |  service 的描述信息 |
 | count  | Int |  HugeGraphServer 的总数目 |
 | running | Int | 运行的 HugeGraphServer 的数目
 | cpu_limit  | Int  |  HugeGraphServer 的 CPU 核数 |
 | memory_limit  | Int  |  HugeGraphServer 的内存大小，单位 GB |
+| storage_limit | Int  |  HStore的磁盘大小，单位GB |
+| route_type    | String  | 路由类型 |
+| port          | Int | 服务端口 |
 | deployment_type  | String  |  service 的部署类型 |
 | urls | Array | service 地址列表 |
+| pd_service_id | String | 该服务在pd注册的id信息 |
 
 ##### 使用示例
 
@@ -58,11 +69,15 @@ POST http://localhost:8080/graphspaces/gs1/services
 ```json
 {
   "name": "sv1",
+  "type": "OLTP",
   "description": "test oltp service",
   "count": 1,
   "cpu_limit": 2,
   "memory_limit": 4,
-  "deployment_type": "K8S"
+  "storage_limit": 16,
+  "deployment_type": "K8S",
+  "route_type": "LoadBalancer",
+  "urls": []
 }
 ```
 
@@ -77,15 +92,20 @@ POST http://localhost:8080/graphspaces/gs1/services
 ```json
 {
     "name": "sv1",
+    "type": "OLTP",
     "deployment_type": "K8S",
     "description": "test oltp service",
     "count": 1,
     "running": 0,
     "cpu_limit": 2,
     "memory_limit": 4,
+    "storage_limit": 16,
+    "route_type": "LoadBalancer",
+    "port": 0,
     "urls": [
         "10.254.222.85:32357"
-    ]
+    ],
+    "pd_service_id": "73e32e8a274b9ab8940e068c6242e0fb"
 }
 
 ```
@@ -174,13 +194,18 @@ GET /graphspaces/${graphspace}/services/${service}
 |  名称   | 类型 |  说明  |
 |  ----  | ---|  ----  |
 | name  | String | service 的名字 |
+| type  | String | 服务类型         |
 | description  | String |  service 的描述信息 |
 | count  | Int |  HugeGraphServer 的总数目 |
 | running | Int | 运行的 HugeGraphServer 的数目
 | cpu_limit  | Int  |  HugeGraphServer 的 CPU 核数 |
 | memory_limit  | Int  |  HugeGraphServer 的内存大小，单位 GB |
+| storage_limit | Int  |  HStore的磁盘大小，单位GB |
+| route_type    | String  | 路由类型 |
+| port          | Int | 服务端口 |
 | deployment_type  | String  |  service 的部署类型 |
 | urls | Array | service 地址列表 |
+| pd_service_id | String | 该服务在pd注册的id信息 |
 
 ##### 使用示例
 
@@ -205,15 +230,20 @@ GET http://127.0.0.1:8080/graphspaces/gs1/services/sv1
 ```json
 {
     "name": "sv1",
+    "type": "OLTP",
     "deployment_type": "K8S",
     "description": "test oltp service",
     "count": 1,
-    "running": 1,
+    "running": 0,
     "cpu_limit": 2,
     "memory_limit": 4,
+    "storage_limit": 16,
+    "route_type": "LoadBalancer",
+    "port": 0,
     "urls": [
         "10.254.222.85:32357"
-    ]
+    ],
+    "pd_service_id": "73e32e8a274b9ab8940e068c6242e0fb"
 }
 ```
 
