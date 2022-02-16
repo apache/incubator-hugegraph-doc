@@ -37,7 +37,6 @@ POST /graphspaces/${graphspace}/services
 | urls             | 否       | [String]|        | 字符串数组                                                 | 当deployment_type为MANUAL时必须填写，反之不可填写 |
 | deployment_type  | 是       | String  |        | K8S、MANUAL                                               |  service 的部署类型，K8S 指通过K8S集群启动服务，MANUAL 指通过手动部署的方式启动服务 |
 
-
 ##### Response
 
 |  名称   | 类型 |  说明  |
@@ -107,7 +106,6 @@ POST http://localhost:8080/graphspaces/gs1/services
     ],
     "pd_service_id": "73e32e8a274b9ab8940e068c6242e0fb"
 }
-
 ```
 
 #### 4.2.2.列出某个图空间的所有服务

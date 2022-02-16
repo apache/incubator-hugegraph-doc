@@ -24,16 +24,16 @@ POST /graphspaces
 |  ----  | ----  | ----  | ----  | ----  | ----  |
 | name  | 是 | String  |   | 小写字母、数字和下划线组成，首字符必须是小写字母，长度不超过48  |  图空间的名字 |
 | description  | 是 | String  |   |   |  图空间的描述信息 |
-| oltp_namespace  | 是 | String  |   |   |  OLTP 的k8s命名空间 |
-| oltp_cpu_limit  | 是 | Int  |   | > 0  |  OLTP HugeGraphServer 的 CPU 核数 |
-| oltp_memory_limit  | 是 | Int  |   | > 0  |  OLTP HugeGraphServer 的内存大小，单位 GB |
-| olap_namespace  | 是 | String  |   |   |  OLAP 的k8s命名空间 |
-| olap_cpu_limit  | 是 | Int  |   | > 0  |  OLAP 任务的 CPU 核数 |
-| olap_memory_limit  | 是 | Int  |   | > 0  |  OLAP 任务的内存大小，单位 GB |
+| cpu_limit  | 是 | Int  |   | > 0  |  CPU 核数 |
+| memory_limit  | 是 | Int  |   | > 0  |  内存大小，单位 GB |
 | storage_limit  | 是 | Int  |   | > 0  |  图空间的数据占据的磁盘空间上限 |
+| oltp_namespace  | 是 | String  |   |   |  OLTP 的k8s命名空间 |
+| olap_namespace  | 是 | String  |   |   |  OLAP 的k8s命名空间 |
+| storage_namespace  | 是 | String  |   |   |  存储 的k8s命名空间 |
 | max_graph_number | 是 | Int | | > 0 | 图空间的图数目的上限 |
 | max_role_number | 是 | Int | | > 0 | 图空间的角色数目的上限 |
 | auth | 否 | Boolean | false | true, false | 图空间是否支持权限认证 |
+| configs | 否 | Map |  |  | 其他配置信息 |
 
 ##### Response
 
@@ -41,18 +41,17 @@ POST /graphspaces
 | ------ | ---- | ----- |
 | name  | String |  图空间的名字 |
 | description  | String |  图空间的描述信息 |
-| oltp_namespace  | String |  OLTP 的k8s命名空间 |
-| oltp_cpu_limit  | Int |  OLTP HugeGraphServer 的 CPU 核数上限 |
-| oltp_memory_limit  | Int |  OLTP HugeGraphServer 的内存大小上限，单位 GB |
-| oltp_cpu_used  | Int |  OLTP HugeGraphServer 已使用的 CPU 核数 |
-| oltp_memory_used  | Int |  OLTP HugeGraphServer 已使用的内存大小，单位 GB |
-| olap_namespace  | String |  OLAP 的k8s命名空间 |
-| olap_cpu_limit  | Int |  OLAP 任务的 CPU 核数 |
-| olap_memory_limit  | Int |  OLAP 任务的内存大小，单位 GB |
+| cpu_limit  | Int |  CPU 核数上限 |
+| memory_limit  | Int |  内存大小上限，单位 GB |
 | storage_limit  | Int |  图空间的数据占据的磁盘空间上限 |
-| storage_used  | Int |  图空间的数据已占据的磁盘空间 |
+| oltp_namespace  | String |  OLTP 的k8s命名空间 |
+| olap_namespace  | String |  OLAP 的k8s命名空间 |
+| storage_namespace  | String |  存储的k8s命名空间 |
 | max_graph_number | Int | 图空间的图数目的上限 |
 | max_role_number | Int | 图空间的角色数目的上限 |
+| cpu_used  | Int |  已使用的 CPU 核数 |
+| memory_used  | Int |  已使用的内存大小，单位 GB |
+| storage_used  | Int |  图空间的数据已占据的磁盘空间 |
 | graph_number_used | Int | 图空间的图数目 |
 | role_number_used | Int | 图空间的角色数目 |
 | auth | Boolean | 图空间是否支持权限认证 |
@@ -69,18 +68,18 @@ POST http://localhost:8080/graphspaces
 
 ```json
 {
-    "name": "gs1",
-    "description": "1st graph space",
-    "oltp_namespace": "hugegraph-server",
-    "oltp_cpu_limit": 1000,
-    "oltp_memory_limit": 1024,
-    "olap_namespace": "hugegraph-server",
-    "olap_cpu_limit": 1000,
-    "olap_memory_limit": 1024,
-    "storage_limit": 1000,
-    "max_graph_number": 100,
-    "max_role_number": 10,
-    "auth": false
+  "name": "gs1",
+  "description": "1st graph space",
+  "cpu_limit": 1000,
+  "memory_limit": 1024,
+  "storage_limit": 1000,
+  "oltp_namespace": "hugegraph-server",
+  "olap_namespace": "hugegraph-server",
+  "storage_namespace": "hugegraph-server",
+  "max_graph_number": 100,
+  "max_role_number": 10,
+  "auth": false,
+  "configs": {}
 }
 ```
 
@@ -94,23 +93,22 @@ POST http://localhost:8080/graphspaces
 
 ```json
 {
-    "name": "gs1",
-    "description": "1st graph space",
-    "oltp_namespace": "hugegraph-server",
-    "oltp_cpu_limit": 1000,
-    "oltp_memory_limit": 1024,
-    "oltp_cpu_used": 0,
-    "oltp_memory_used": 0,
-    "olap_namespace": "hugegraph-server",
-    "olap_cpu_limit": 1000,
-    "olap_memory_limit": 1024,
-    "storage_limit": 1000,
-    "storage_used": 0,
-    "max_graph_number": 100,
-    "max_role_number": 10,
-    "graph_number_used": 0,
-    "role_number_used": 0,
-    "auth": false
+  "name": "gs1",
+  "description": "1st graph space",
+  "cpu_limit": 1000,
+  "memory_limit": 1024,
+  "storage_limit": 1000,
+  "oltp_namespace": "hugegraph-server",
+  "olap_namespace": "hugegraph-server",
+  "storage_namespace": "hugegraph-server",
+  "max_graph_number": 100,
+  "max_role_number": 10,
+  "cpu_used": 0,
+  "memory_used": 0,
+  "storage_used": 0,
+  "graph_number_used": 0,
+  "role_number_used": 0,
+  "auth": true
 }
 ```
 
@@ -198,18 +196,17 @@ GET /graphspaces/${graphspace}
 | ------ | ---- | ----- |
 | name  | String |  图空间的名字 |
 | description  | String |  图空间的描述信息 |
-| oltp_namespace  | String |  OLTP 的k8s命名空间 |
-| oltp_cpu_limit  | Int |  OLTP HugeGraphServer 的 CPU 核数上限 |
-| oltp_memory_limit  | Int |  OLTP HugeGraphServer 的内存大小上限，单位 GB |
-| oltp_cpu_used  | Int |  OLTP HugeGraphServer 已使用的 CPU 核数 |
-| oltp_memory_used  | Int |  OLTP HugeGraphServer 已使用的内存大小，单位 GB |
-| olap_namespace  | String |  OLAP 的k8s命名空间 |
-| olap_cpu_limit  | Int |  OLAP 任务的 CPU 核数 |
-| olap_memory_limit  | Int |  OLAP 任务的内存大小，单位 GB |
+| cpu_limit  | Int |  CPU 核数上限 |
+| memory_limit  | Int |  内存大小上限，单位 GB |
 | storage_limit  | Int |  图空间的数据占据的磁盘空间上限 |
-| storage_used  | Int |  图空间的数据已占据的磁盘空间 |
+| oltp_namespace  | String |  OLTP 的k8s命名空间 |
+| olap_namespace  | String |  OLAP 的k8s命名空间 |
+| storage_namespace  | String |  存储的k8s命名空间 |
 | max_graph_number | Int | 图空间的图数目的上限 |
 | max_role_number | Int | 图空间的角色数目的上限 |
+| cpu_used  | Int |  已使用的 CPU 核数 |
+| memory_used  | Int |  已使用的内存大小，单位 GB |
+| storage_used  | Int |  图空间的数据已占据的磁盘空间 |
 | graph_number_used | Int | 图空间的图数目 |
 | role_number_used | Int | 图空间的角色数目 |
 | auth | Boolean | 图空间是否支持权限认证 |
@@ -237,23 +234,22 @@ GET http://127.0.0.1:8080/graphspaces/gs1
 
 ```json
 {
-    "name": "gs1",
-    "description": "1st graph space",
-    "oltp_namespace": "hugegraph-server",
-    "oltp_cpu_limit": 1000,
-    "oltp_memory_limit": 1024,
-    "oltp_cpu_used": 0,
-    "oltp_memory_used": 0,
-    "olap_namespace": "hugegraph-server",
-    "olap_cpu_limit": 1000,
-    "olap_memory_limit": 1024,
-    "storage_limit": 1000,
-    "storage_used": 0,
-    "max_graph_number": 100,
-    "max_role_number": 10,
-    "graph_number_used": 0,
-    "role_number_used": 0,
-    "auth": false
+  "name": "gs1",
+  "description": "1st graph space",
+  "cpu_limit": 1000,
+  "memory_limit": 1024,
+  "storage_limit": 1000,
+  "oltp_namespace": "hugegraph-server",
+  "olap_namespace": "hugegraph-server",
+  "storage_namespace": "hugegraph-server",
+  "max_graph_number": 100,
+  "max_role_number": 10,
+  "cpu_used": 0,
+  "memory_used": 0,
+  "storage_used": 0,
+  "graph_number_used": 0,
+  "role_number_used": 0,
+  "auth": true
 }
 ```
 
@@ -282,13 +278,12 @@ PUT /graphspaces/${graphspace}
 |  名称   | 是否必填  | 类型  | 默认值  | 取值范围  | 说明  |
 |  ----  | ----  | ----  | ----  | ----  | ----  |
 | description  | 是 | String  |   |   |  图空间的描述信息 |
-| oltp_namespace  | 是 | String  |   |   |  OLTP 的k8s命名空间 |
-| oltp_cpu_limit  | 是 | Int  |   | > 0  |  OLTP HugeGraphServer 的 CPU 核数 |
-| oltp_memory_limit  | 是 | Int  |   | > 0  |  OLTP HugeGraphServer 的内存大小，单位 GB |
-| olap_namespace  | 是 | String  |   |   |  OLAP 的k8s命名空间 |
-| olap_cpu_limit  | 是 | Int  |   | > 0  |  OLAP 任务的 CPU 核数 |
-| olap_memory_limit  | 是 | Int  |   | > 0  |  OLAP 任务的内存大小，单位 GB |
+| cpu_limit  | 是 | Int  |   | > 0  |  OLTP HugeGraphServer 的 CPU 核数 |
+| memory_limit  | 是 | Int  |   | > 0  |  OLTP HugeGraphServer 的内存大小，单位 GB |
 | storage_limit  | 是 | Int  |   | > 0  |  图空间的数据占据的磁盘空间上限 |
+| oltp_namespace  | 是 | String  |   |   |  OLTP 的k8s命名空间 |
+| olap_namespace  | 是 | String  |   |   |  OLAP 的k8s命名空间 |
+| storage_namespace  | 是 | String  |   |   |  存储的k8s命名空间 |
 | max_graph_number | 是 | Int | | > 0 | 图空间的图数目的上限 |
 | max_role_number | 是 | Int | | > 0 | 图空间的角色数目的上限 |
 
@@ -298,18 +293,17 @@ PUT /graphspaces/${graphspace}
 | ------ | ---- | ----- |
 | name  | String |  图空间的名字 |
 | description  | String |  图空间的描述信息 |
-| oltp_namespace  | String |  OLTP 的k8s命名空间 |
-| oltp_cpu_limit  | Int |  OLTP HugeGraphServer 的 CPU 核数上限 |
-| oltp_memory_limit  | Int |  OLTP HugeGraphServer 的内存大小上限，单位 GB |
-| oltp_cpu_used  | Int |  OLTP HugeGraphServer 已使用的 CPU 核数 |
-| oltp_memory_used  | Int |  OLTP HugeGraphServer 已使用的内存大小，单位 GB |
-| olap_namespace  | String |  OLAP 的k8s命名空间 |
-| olap_cpu_limit  | Int |  OLAP 任务的 CPU 核数 |
-| olap_memory_limit  | Int |  OLAP 任务的内存大小，单位 GB |
+| cpu_limit  | Int |  CPU 核数上限 |
+| memory_limit  | Int |  内存大小上限，单位 GB |
 | storage_limit  | Int |  图空间的数据占据的磁盘空间上限 |
-| storage_used  | Int |  图空间的数据已占据的磁盘空间 |
+| oltp_namespace  | String |  OLTP 的k8s命名空间 |
+| olap_namespace  | String |  OLAP 的k8s命名空间 |
+| storage_namespace  | String |  存储的k8s命名空间 |
 | max_graph_number | Int | 图空间的图数目的上限 |
 | max_role_number | Int | 图空间的角色数目的上限 |
+| cpu_used  | Int |  已使用的 CPU 核数 |
+| memory_used  | Int |  已使用的内存大小，单位 GB |
+| storage_used  | Int |  图空间的数据已占据的磁盘空间 |
 | graph_number_used | Int | 图空间的图数目 |
 | role_number_used | Int | 图空间的角色数目 |
 | auth | Boolean | 图空间是否支持权限认证 |
@@ -347,23 +341,22 @@ PUT http://127.0.0.1:8080/graphspaces/gs1
 
 ```json
 {
-    "name": "gs1",
-    "description": "1st graph space",
-    "oltp_namespace": "hugegraph-server",
-    "oltp_cpu_limit": 2000,
-    "oltp_memory_limit": 40960,
-    "oltp_cpu_used": 0,
-    "oltp_memory_used": 0,
-    "olap_namespace": "hugegraph-server",
-    "olap_cpu_limit": 1000,
-    "olap_memory_limit": 1024,
-    "storage_limit": 2048,
-    "storage_used": 0,
-    "max_graph_number": 1000,
-    "max_role_number": 100,
-    "graph_number_used": 0,
-    "role_number_used": 0,
-    "auth": false
+  "name": "gs1",
+  "description": "1st graph space",
+  "cpu_limit": 1000,
+  "memory_limit": 1024,
+  "storage_limit": 1000,
+  "oltp_namespace": "hugegraph-server",
+  "olap_namespace": "hugegraph-server",
+  "storage_namespace": "hugegraph-server",
+  "max_graph_number": 100,
+  "max_role_number": 10,
+  "cpu_used": 0,
+  "memory_used": 0,
+  "storage_used": 0,
+  "graph_number_used": 0,
+  "role_number_used": 0,
+  "auth": true
 }
 ```
 
