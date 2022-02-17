@@ -2026,7 +2026,7 @@ GET http://localhost:8080/graphspaces/gs1/auth/accesses/all->1->all_targets
 ```
 
 ### 4.12.7.Manager API
-管理超级管理员、图空间管理员，主要包含：创建、删除。
+管理超级管理员、图空间管理员，主要包含：创建、删除、查看。
 
 #### 4.12.7.1.创建 manager
 
@@ -2145,6 +2145,62 @@ DELETE http://localhost:8080/auth/managers?user=boss&type=SPACE&graphspace=graph
 ###### Response Body
 
 无
+
+#### 4.12.7.3.查看 manager 列表
+
+##### 功能介绍
+
+查看超级管理员或者图空间管理员立标
+
+##### URI
+
+```
+GET /auth/managers?type=${type}&graphspace=${graphspace}
+```
+
+##### URI参数
+
+|  名称   | 是否必填  | 类型  | 默认值  | 取值范围  | 说明  |
+|  ----  | ----  | ----  | ----  | ----  | ----  |
+| type  | 是 | String  |   | ADMIN、SPACE  | ADMIN、SPACE，分别代表超级管理员、图空间管理员  |
+| graphspace  | 否 | String  |   |   | 如果type选择SPACE，那么graphspace是必填项；如果type选择ADMIN，那么graphspace忽略|
+
+
+##### Body参数
+
+无
+
+##### Response
+
+|  名称   | 类型 |  说明  |
+|  ----  | ---|  ----  |
+| admins |List[String]| 管理员列表|
+
+##### 使用示例
+
+###### Method & Url
+
+```
+GET http://localhost:8080/auth/managers?type=SPACE&graphspace=graphspace1
+```
+
+###### Request Body
+
+无
+
+###### Response Status
+
+```json
+200
+```
+
+###### Response Body
+
+```
+{
+  "admins": ["boss"]
+}
+```
 
 ## 4.13.Token API
 获取用户Token，主要包含：登录(login)、验证Token(verify)。
