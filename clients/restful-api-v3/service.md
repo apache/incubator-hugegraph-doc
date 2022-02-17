@@ -33,7 +33,7 @@ POST /graphspaces/${graphspace}/services
 | memory_limit     | 否       | Int     |  4     | > 0                                                       |  HugeGraphServer 的内存大小，单位 GB |
 | storage_limit    | 否       | Int     |  100   | > 0                                                       |  HStore的磁盘大小，单位GB |
 | route_type       | 否       | String  |        | ClusterIP, LoadBalancer, NodePort                         | 当deployment_type为K8S时必须填写，反之不可填写 |
-| port             | 否       | Int     |        | > 0                                                       | 当deployment_type为MANUAL时必须填写，反之不可填写 |
+| port             | 否       | Int     |        | > 0                                                       | 当deployment_type为K8S时必须填写，反之不必填写（无效） |
 | urls             | 否       | [String]|        | 字符串数组                                                 | 当deployment_type为MANUAL时必须填写，反之不可填写 |
 | deployment_type  | 是       | String  |        | K8S、MANUAL                                               |  service 的部署类型，K8S 指通过K8S集群启动服务，MANUAL 指通过手动部署的方式启动服务 |
 
