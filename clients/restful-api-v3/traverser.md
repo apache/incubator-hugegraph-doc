@@ -221,6 +221,7 @@ GET /graphspaces/${graphspace}/graphs/${graph}/traversers/kout
 | measure | Object | 统计信息，详情见表1 Measure 对象 |
 
 表1
+
 | 名称                     | 类型     | 说明                   |
 | :----------------------- | :----- | :-------------- |
 | cost | Long | 耗时(毫秒) |
@@ -331,6 +332,7 @@ POST /graphspaces/${graphspace}/graphs/${graph}/traversers/kout
 | measure | Object | 统计信息，详情见表1 Measure 对象 |
 
 表1
+
 | 名称                     | 类型     | 说明                   |
 | :----------------------- | :----- | :-------------- |
 | cost | Long | 耗时(毫秒) |
@@ -510,6 +512,7 @@ GET /graphspaces/${graphspace}/graphs/${graph}/traversers/kneighbor
 | measure | Object | 统计信息，详情见表1 Measure 对象 |
 
 表1
+
 | 名称                     | 类型     | 说明                   |
 | :----------------------- | :----- | :-------------- |
 | cost | Long | 耗时(毫秒) |
@@ -621,6 +624,7 @@ POST /graphspaces/${graphspace}/graphs/${graph}/traversers/kneighbor
 | measure | Object | 统计信息，详情见表1 Measure 对象 |
 
 表1
+
 | 名称                     | 类型     | 说明                   |
 | :----------------------- | :----- | :-------------- |
 | cost | Long | 耗时(毫秒) |
