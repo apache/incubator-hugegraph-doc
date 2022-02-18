@@ -987,8 +987,8 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 
 ###### 过滤条件示例
 
-```json
 //需要将这个json压缩并转译之后，贴到上面的subgraph.query_graph_config上
+```json
 [
     {
         "id": "A",
