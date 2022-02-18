@@ -400,7 +400,7 @@ spec:
     job.partitions_count: "20" # 分区数
     pd.peers: "127.0.0.1:8686"  # pd 地址
     hugegraph.name: "default/hugegraph" # 图空间/图名
-	input.edge_freq: "MULTIPLE" # 默认是MULTIPLE，可选范围"SINGLE", "SINGLE_PER_LABEL", "MULTIPLE"。分别代表两点之间只允许有一条边、两点之间同label多条边、两点之间多条边。
+    input.edge_freq: "MULTIPLE" # 默认是MULTIPLE，可选范围"SINGLE", "SINGLE_PER_LABEL", "MULTIPLE"。分别代表两点之间只允许有一条边、两点之间同label多条边、两点之间多条边。
 EOF
 ```
 
@@ -610,7 +610,7 @@ spec:
     job.partitions_count: "20" # 分区数
     pd.peers: "127.0.0.1:8686"  # pd 地址
     hugegraph.name: "default/hugegraph" # 图空间/图名
-	links.analyze_config: "{\"start_vertexes\":[\"A\",\"B\",\"C\",\"D\",\"E\"],\"vertex_end_condition\":{\"label\":\"user\",\"property_filter\":\"$element.age <= 90\"},\"edge_end_condition\":{\"label\":\"pay\",\"property_filter\":\"double($out.money) >= 4\"},\"edge_compare_condition\":{\"label\":\"pay\",\"property_filter\":\"$out.money > $in.money\"}}"
+    links.analyze_config: "{\"start_vertexes\":[\"A\",\"B\",\"C\",\"D\",\"E\"],\"vertex_end_condition\":{\"label\":\"user\",\"property_filter\":\"$element.age <= 90\"},\"edge_end_condition\":{\"label\":\"pay\",\"property_filter\":\"double($out.money) >= 4\"},\"edge_compare_condition\":{\"label\":\"pay\",\"property_filter\":\"$out.money > $in.money\"}}"
 EOF
 
 ```
@@ -1734,7 +1734,7 @@ kubectl create secret generic kerberos-secret --from-file=/etc/krb5.conf --from-
 
 算法执行示例
 
-```json
+```yaml
 cat <<EOF | kubectl apply --filename -
 
 apiVersion: hugegraph.baidu.com/v1
@@ -2068,7 +2068,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 
 
 
-#### 5.2.5. 自定义算法输出参数
+#### 5.2.5.自定义算法输出参数
 
 算法可以自定义输出结果的参数，通过 output.output_property_name 参数来指定算法的输出属性。此参数并不是必须的，每个算法都有默认的输出属性。未设置该属性将使用算法默认输出属性，如果设置了将使用用户设置的输出属性。
 
@@ -2266,7 +2266,7 @@ spec:
     pd.peers: "127.0.0.1:8686"  # pd 地址
     hugegraph.name: "default/hugegraph" # 图空间/图名
     job.partitions_count: "20" # 分区数
-	job.partitions_thread_nums: "5"
+    job.partitions_thread_nums: "5"
 EOF
 ```
 
@@ -2368,7 +2368,7 @@ spec:
     pd.peers: "127.0.0.1:8686"  # pd 地址
     hugegraph.name: "default/hugegraph" # 图空间/图名
     job.partitions_count: "20" # 分区数
-	  input.parallel_num: "5"
+    input.parallel_num: "5"
 EOF
 ```
 
