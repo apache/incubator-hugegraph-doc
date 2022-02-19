@@ -264,6 +264,7 @@ DELETE /graphspaces/${graphspace}/services/${service}
 |  ----  | ----  | ----  | ----  | ----  | ---- |
 | graphspace  | 是 | String  |   |   | 图空间名称  |
 | service  | 是 | String  |   |   | 服务名称  |
+| confirm_message | 是 | String |  |I'm sure to delete the service | 需固定填写 confirm_message=I'm sure to delete the service  |
 
 ##### Body参数
 
@@ -278,7 +279,7 @@ DELETE /graphspaces/${graphspace}/services/${service}
 ###### Method & Url
 
 ```
-DELETE http://localhost:8080/graphspaces/gs1/services/sv1
+DELETE http://localhost:8080/graphspaces/gs1/services/sv1?confirm_message=I'm sure to delete the service
 ```
 
 
