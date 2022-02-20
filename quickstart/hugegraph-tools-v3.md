@@ -135,7 +135,7 @@ Gremlin类包括gremlin-execute和gremlin-schedule。具体描述如下：
 - migrate, 将当前连接的图迁移至另一个 HugeGraphServer 中
   - --target-graph，目标图的名字，默认为 hugegraph
   - --target-url，目标图所在的 HugeGraphServer，默认为 http://127.0.0.1:8081
-  - --target-username，访问目标图的用户名
+  - --target-user，访问目标图的用户名
   - --target-password，访问目标图的密码
   - --target-timeout，访问目标图的超时时间
   - --target-trust-store-file，访问目标图使用的 truststore 文件
@@ -558,79 +558,79 @@ Usage: hugegraph [options] [command] [command options]
 
 ```bash
 # 同步执行gremlin
-./bin/hugegraph --url http://127.0.0.1:8080 --space gs1 --graph hugegraph gremlin-execute --script 'g.V().count()'
+./bin/hugegraph --url http://127.0.0.1:8080 --user admin --password admin --space gs1 --graph hugegraph gremlin-execute --script 'g.V().count()'
 
 # 异步执行gremlin
-./bin/hugegraph --url http://127.0.0.1:8080 --space gs1 --graph hugegraph gremlin-schedule --script 'g.V().count()'
+./bin/hugegraph --url http://127.0.0.1:8080 --user admin --password admin --space gs1 --graph hugegraph gremlin-schedule --script 'g.V().count()'
 ```
 
 ### 3.8.2.查看task情况
 
 ```bash
-./bin/hugegraph --url http://127.0.0.1:8080 --space gs1 --graph hugegraph task-list
+./bin/hugegraph --url http://127.0.0.1:8080 --user admin --password admin --space gs1 --graph hugegraph task-list
 
-./bin/hugegraph --url http://127.0.0.1:8080 --space gs1 --graph hugegraph task-list --limit 5
+./bin/hugegraph --url http://127.0.0.1:8080 --user admin --password admin --space gs1 --graph hugegraph task-list --limit 5
 
-./bin/hugegraph --url http://127.0.0.1:8080 --space gs1 --graph hugegraph task-list --status success
+./bin/hugegraph --url http://127.0.0.1:8080 --user admin --password admin --space gs1 --graph hugegraph task-list --status success
 ```
 
 ### 3.8.3.图模式查看和设置
 
 ```bash
-./bin/hugegraph --url http://127.0.0.1:8080 --space gs1 --graph hugegraph graph-mode-set -m RESTORING MERGING NONE
+./bin/hugegraph --url http://127.0.0.1:8080 --user admin --password admin --space gs1 --graph hugegraph graph-mode-set -m RESTORING MERGING NONE
 
-./bin/hugegraph --url http://127.0.0.1:8080 --space gs1 --graph hugegraph graph-mode-set -m RESTORING
+./bin/hugegraph --url http://127.0.0.1:8080 --user admin --password admin --space gs1 --graph hugegraph graph-mode-set -m RESTORING
 
-./bin/hugegraph --url http://127.0.0.1:8080 --space gs1 --graph hugegraph graph-mode-get
+./bin/hugegraph --url http://127.0.0.1:8080 --user admin --password admin --space gs1 --graph hugegraph graph-mode-get
 
-./bin/hugegraph --url http://127.0.0.1:8080 --space gs1 --graph hugegraph graph-list
+./bin/hugegraph --url http://127.0.0.1:8080 --user admin --password admin --space gs1 --graph hugegraph graph-list
 ```
 
 ### 3.8.4.创建图
 
 ```bash
-./bin/hugegraph --url http://127.0.0.1:8080 --space gs1 graph-create -n hugegraph2 -f ./hugegraph2.properties
+./bin/hugegraph --url http://127.0.0.1:8080 --user admin --password admin --space gs1 graph-create -n hugegraph2 -f ./hugegraph2.properties
 ```
 
 ### 3.8.5.清空图
 
 ```bash
-./bin/hugegraph --url http://127.0.0.1:8080 --space gs1 --graph hugegraph graph-clear
+./bin/hugegraph --url http://127.0.0.1:8080 --user admin --password admin --space gs1 --graph hugegraph graph-clear
 ```
 
 ### 3.8.6.删除图
 
 ```bash
-./bin/hugegraph --url http://127.0.0.1:8080 --space gs1 --graph hugegraph graph-drop
+./bin/hugegraph --url http://127.0.0.1:8080 --user admin --password admin --space gs1 --graph hugegraph graph-drop
 ```
 
 ### 3.8.7.图备份
 
 ```bash
-./bin/hugegraph --url http://127.0.0.1:8080 --space gs1 --graph hugegraph backup -t all --directory ./backup-test
+./bin/hugegraph --url http://127.0.0.1:8080 --user admin --password admin --space gs1 --graph hugegraph backup -t all --directory ./backup-test
 ```
 
 ### 3.8.8.周期性的备份
 
 ```bash
-./bin/hugegraph --url http://127.0.0.1:8080 --space gs1 --graph hugegraph --interval */2 * * * * schedule-backup -d ./backup-0.10.2
+./bin/hugegraph --url http://127.0.0.1:8080 --user admin --password admin --space gs1 --graph hugegraph --interval */2 * * * * schedule-backup -d ./backup-0.10.2
 ```
 
 ### 3.8.9.图恢复
 
 ```bash
 # 设置图模式
-./bin/hugegraph --url http://127.0.0.1:8080 --space gs1 --graph hugegraph graph-mode-set -m RESTORING
+./bin/hugegraph --url http://127.0.0.1:8080 --user admin --password admin --space gs1 --graph hugegraph graph-mode-set -m RESTORING
 
 # 恢复图
-./bin/hugegraph --url http://127.0.0.1:8080 --space gs1 --graph hugegraph restore -t all --directory ./backup-test
+./bin/hugegraph --url http://127.0.0.1:8080 --user admin --password admin --space gs1 --graph hugegraph restore -t all --directory ./backup-test
 
 # 恢复图模式
-./bin/hugegraph --url http://127.0.0.1:8080 --space gs1 --graph hugegraph graph-mode-set -m NONE
+./bin/hugegraph --url http://127.0.0.1:8080 --user admin --password admin --space gs1 --graph hugegraph graph-mode-set -m NONE
 ```
 
 ### 3.8.10.图迁移
 
 ```bash
-./bin/hugegraph --url http://127.0.0.1:8080 --space gs1 --graph hugegraph migrate --target-url http://127.0.0.1:8090 --target-graph hugegraph
+./bin/hugegraph --url http://127.0.0.1:8080 --user admin --password admin --space gs1 --graph hugegraph migrate --target-url http://127.0.0.1:8090 --target-graph hugegraph
 ```
