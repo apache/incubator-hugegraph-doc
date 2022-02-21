@@ -62,6 +62,7 @@
     * [Service](clients/restful-api-v3/service.md)
     * [SchemaTemplate](clients/restful-api-v3/schematemplate.md)
     * [Other](clients/restful-api-v3/other.md)
+* [Computer API V3](computer-v3/algorithm.md)
 * [Java Client](clients/hugegraph-client.md)
 * [Gremlin Console](clients/gremlin-console.md)
 
