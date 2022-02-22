@@ -2409,6 +2409,8 @@ EOF
 | k8s.master_memory | 否  | String | - | - | master最大内存，超过最大内存则会被k8s中止 |
 | k8s.worker_memory | 否  | String | - | - | worker最大内存，超过最大内存则会被k8s中止 |
 
+##### 使用示例
+
 ```yaml
 cat <<EOF | kubectl apply --filename -
 apiVersion: hugegraph.baidu.com/v1
