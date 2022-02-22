@@ -1,20 +1,20 @@
-## 5.Hugegraph-Computer 使用说明
+# 5.Hugegraph-Computer 使用说明
 
-### 5.1.OLAP 算法
+## 5.1.OLAP 算法
 
-#### 5.1.1.PageRank 算法
+### 5.1.1.PageRank 算法
 
-#### 功能介绍
+##### 功能介绍
 
 PageRank算法又称网页排名算法，是一种由搜索引擎根据网页（节点）之间相互的超链接进行计算的技术，用来体现网页（节点）的相关性和重要性。
 - 如果一个网页被很多其他网页链接到，说明这个网页比较重要，也就是其PageRank值会相对较高。
 - 如果一个PageRank值很高的网页链接到其他网页，那么被链接到的网页的PageRank值会相应地提高。
 
-#### 适用场景
+##### 适用场景
 
 PageRank算法适用于网页排序、社交网络重点人物发掘等场景。
 
-#### 参数说明
+##### 参数说明
 
 | 名称                     | 是否必填 |  类型   | 默认值  |取值范围        |  说明                   |
 | :----------------------- | :------- | :--------------------- | :----- | :-------------- | :------ |
@@ -22,7 +22,7 @@ PageRank算法适用于网页排序、社交网络重点人物发掘等场景。
 | pagerank.l1DiffThreshold  | 否 |  Double   | 0.00001  |0~1，不包括0和1        |  收敛精度,为每次迭代各个点相较于上次迭代变化的绝对值累加和上限，当小于这个值时认为计算收敛，算法停止。         |
 | bsp.max_super_step  | 否 |  Int   | 10  |1~2000        |  最大迭代次数         |
 
-#### k8s示例
+##### k8s示例
 
 ```yaml
 cat <<EOF | kubectl apply --filename -
@@ -45,12 +45,12 @@ spec:
 EOF
 ```
 
-#### rest-api 示例
+##### rest-api 示例
 
-##### Method & Url
+###### Method & Url
 POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/computerdis
 
-##### Request Body
+###### Request Body
 
 ```json
 {
@@ -64,7 +64,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 }
 ```
 
-##### Response Body
+###### Response Body
 
 ```json
 {
@@ -72,25 +72,25 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 }
 ```
 
-#### 输出
+##### 输出
 
 输出每个顶点的PageRank值，结果类型为浮点数。
 
-#### 5.1.2.Weakly Connected Component
+### 5.1.2.Weakly Connected Component
 
-#### 功能介绍
+##### 功能介绍
 
 弱连通分量，计算无向图中所有联通的子图，输出各顶点所属的弱联通子图id
 
-#### 适用场景
+##### 适用场景
 
 表明各个点之间的连通性，区分不同的连通社区
 
-#### 参数说明
+##### 参数说明
 
 无
 
-#### k8s示例
+##### k8s示例
 
 ```yaml
 cat <<EOF | kubectl apply --filename -
@@ -113,12 +113,12 @@ spec:
 EOF
 ```
 
-#### rest-api 示例
+##### rest-api 示例
 
-##### Method & Url
+###### Method & Url
 POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/computerdis
 
-##### Request Body
+###### Request Body
 
 ```json
 {
@@ -128,7 +128,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 }
 ```
 
-##### Response Body
+###### Response Body
 
 ```json
 {
@@ -136,27 +136,27 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 }
 ```
 
-#### 输出
+##### 输出
 
 输出每个顶点的弱联通子图id值，结果类型为字符串。
 
-#### 5.1.3.Degree Centrality
+### 5.1.3.Degree Centrality
 
-#### 功能介绍
+##### 功能介绍
 
 度中心性算法，算法用于计算图中每个节点的度中心性值，支持无向图和有向图。度中心性是衡量节点重要性的重要指标，节点与其它节点的边越多，则节点的度中心性值越大，节点在图中的重要性也就越高。在无向图中，度中心性的计算是基于边信息统计节点出现次数，得出节点的度中心性的值，在有向图中则基于边的方向进行筛选，基于输入边或输出边信息统计节点出现次数，得到节点的入度值或出度值。
 
-#### 适用场景
+##### 适用场景
 
 表明各个点的重要性，一般越重要的点度数越高。
 
-#### 参数说明
+##### 参数说明
 
 | 名称                     | 是否必填 |  类型   | 默认值  |取值范围        |  说明                   |
 | :----------------------- | :------- | :--------------------- | :----- | :-------------- | :------ |
 | degree_centrality.weight_property  | 否 |  String   | "",为空时边权重为1  | -      |  权重属性名         |
 
-#### k8s示例
+##### k8s示例
 
 ```yaml
 cat <<EOF | kubectl apply --filename -
@@ -179,12 +179,12 @@ spec:
 EOF
 ```
 
-#### rest-api 示例
+##### rest-api 示例
 
-##### Method & Url
+###### Method & Url
 POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/computerdis
 
-##### Request Body
+###### Request Body
 
 ```json
 {
@@ -196,7 +196,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 }
 ```
 
-##### Response Body
+###### Response Body
 
 ```json
 {
@@ -204,25 +204,25 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 }
 ```
 
-#### 输出
+##### 输出
 
 输出每个顶点的度中心性的值，结果类型为浮点数。
 
-#### 5.1.4.Closeness Centrality
+### 5.1.4.Closeness Centrality
 
-#### 功能介绍
+##### 功能介绍
 
 紧密中心度算法（Closeness Centrality）计算一个节点到所有其他可达节点的最短距离的倒数，进行累积后归一化的值。紧密中心度可以用来衡量信息从该节点传输到其他节点的时间长短。节点的 “Closeness Centrality” 越大，其在所在图中的位置越靠近中心。
 
-#### 适用场景
+##### 适用场景
 
 紧密中心度算法（Closeness Centrality）适用于社交网络中关键节点发掘等场景。
 
-#### 性能说明
+##### 性能说明
 
 由于中心性算法属于指数膨胀算法，如果不作限制是跑不下去的，根据硬件资源的情况可调整 sample_rate （采样率）和 limit_edges_in_one_vertex （最大出边限制），以免跑不下去。因为采样能一定程度的表征定点的中心性，所以小采样率不仅可以减少计算量，还可能对最终结果影响比较小。
 
-#### 参数说明
+##### 参数说明
 
 | 名称                     | 是否必填 |  类型   | 默认值  |取值范围        |  说明                   |
 | :----------------------- | :------- | :--------------------- | :----- | :-------------- | :------ |
@@ -230,7 +230,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 | closeness_centrality.sample_rate  | 否 |  Double   | 1.0  | (0, 1.0]        |  边的采样率  |
 | input.limit_edges_in_one_vertex  | 否 |  Int   | -1  | -        |  最大出边限制         |
 
-#### k8s示例
+##### k8s示例
 
 ```yaml
 cat <<EOF | kubectl apply --filename -
@@ -256,12 +256,12 @@ spec:
 EOF
 ```
 
-#### rest-api 示例
+##### rest-api 示例
 
-##### Method & Url
+###### Method & Url
 POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/computerdis
 
-##### Request Body
+###### Request Body
 
 ```json
 {
@@ -276,7 +276,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 }
 ```
 
-##### Response Body
+###### Response Body
 
 ```json
 {
@@ -284,31 +284,31 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 }
 ```
 
-#### 输出
+##### 输出
 
 输出每个顶点的紧密中心性的值，结果类型为浮点数。
 
-#### 5.1.5.Triangle Count
+### 5.1.5.Triangle Count
 
-#### 功能介绍
+##### 功能介绍
 
 三角形计数算法，用于计算通过每个顶点的三角形个数。
 
-#### 适用场景
+##### 适用场景
 
 计算用户之间的关系，关联性是不是成三角形。
 
-#### 性能说明
+##### 性能说明
 
 在三角形计数中，超级点会产生大量的消息，导致磁盘和算力需求非常高，但实际应用中超级点的三角形特别多，求出来没有多少实际意义，所以建议设置限制出边的参数来减少资源和算力消耗。详情见 5.2.4.限制每个点的最大边数。
 
-#### 参数说明
+##### 参数说明
 
 | 名称                     | 是否必填 |  类型   | 默认值  |取值范围        |  说明                   |
 | :----------------------- | :------- | :--------------------- | :----- | :-------------- | :------ |
 | input.limit_edges_in_one_vertex  | 否 |  Int   | -1  | -        |  最大出边限制         |
 
-#### k8s示例
+##### k8s示例
 
 ```yaml
 cat <<EOF | kubectl apply --filename -
@@ -332,12 +332,12 @@ spec:
 EOF
 ```
 
-#### rest-api 示例
+##### rest-api 示例
 
-##### Method & Url
+###### Method & Url
 POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/computerdis
 
-##### Request Body
+###### Request Body
 
 ```json
 {
@@ -348,7 +348,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 }
 ```
 
-##### Response Body
+###### Response Body
 
 ```json
 {
@@ -356,31 +356,31 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 }
 ```
 
-#### 输出
+##### 输出
 
 输出每个顶点所属的三角形个值，结果类型为整形。
 
-#### 5.1.6.Rings Detection
+### 5.1.6.Rings Detection
 
-#### 功能介绍
+##### 功能介绍
 
 环路检测算法（Rings Detection），用于检测图中的环路，环路的路径由环路中最小id的顶点来记录。
 
-#### 适用场景
+##### 适用场景
 
 检测有没有循环转账等。
 
-#### 性能说明
+##### 性能说明
 
 由于环路检测算法是一个指数增长的算法，不带条件的环路检测只能跑很小的数据（几十万边），要在大数据集上跑环路检测，请参见带条件的环路检测，用条件把不需要的数据过滤掉。
 
-#### 参数说明
+##### 参数说明
 
 | 名称                     | 是否必填 |  类型   | 默认值  |取值范围        |  说明                   |
 | :----------------------- | :------- | :--------------------- | :----- | :-------------- | :------ |
 | bsp.max_super_step  | 否 |  Int   | 10  |1~2000        |  最大迭代次数         |
 
-#### k8s示例
+##### k8s示例
 
 ```yaml
 cat <<EOF | kubectl apply --filename -
@@ -404,12 +404,12 @@ spec:
 EOF
 ```
 
-#### rest-api 示例
+##### rest-api 示例
 
-##### Method & Url
+###### Method & Url
 POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/computerdis
 
-##### Request Body
+###### Request Body
 
 ```json
 {
@@ -421,7 +421,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 }
 ```
 
-##### Response Body
+###### Response Body
 
 ```json
 {
@@ -429,32 +429,32 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 }
 ```
 
-#### 输出
+##### 输出
 
 结果类型为字符串集合，集合中每一个元素是一个环路。一个环路只会被记录在环路中id最小的顶点上。
 
-#### 5.1.7.Filtered Rings Detection
+### 5.1.7.Filtered Rings Detection
 
-#### 功能介绍
+##### 功能介绍
 
 带过滤条件的环路检测算法（Filtered Rings Detection）用于检测图中的环路，环路的路径由环路中最小id的顶点来记录。可通过指定点、边属性过滤规则让算法选择性的做路径传播。
 
-#### 适用场景
+##### 适用场景
 
 检测有没有循环转账等。
 
-#### 性能说明
+##### 性能说明
 
 此算法为指数增长的算法，要用条件限制点和边的数量，不然跑不出来。
 
-#### 参数说明
+##### 参数说明
 
 | 名称                     | 是否必填 |  类型   | 默认值  |取值范围        |  说明                   |
 | :----------------------- | :------- | :--------------------- | :----- | :-------------- | :------ |
 | bsp.max_super_step  | 否 |  Int   | 10  |1~2000        |  最大迭代次数         |
 | rings.property_filter  | 否 |  String   | {}  |  -        |  点边属性过滤条件         |
 
-#### 额外说明
+##### 额外说明
 
 - vertex_filter和edge_filter分别表示点和边的过滤条件，可以为不同label的点边配置不同的过滤规则。相同label的点或边的过滤条件只会保留最后一个。
 - vertex_filter和edge_filter可以是非必选的。对于vertex_filter和edge_filter任何一个单独来看，如果没有指定过滤条件的话将对所有对应的元素放行，如果指定了的话，那么只会对label相同并且属性满足条件的放行，未配置label的元素将直接被过滤掉。
@@ -462,7 +462,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 - $element、$out、$in可以理解为内置变量。$element在vertex_filter中表示当前点的属性对象。在edge_filter中$in和$out分别代表表示当前顶点的入边属性和出边属性对象。$element.xxx、$in.xxx、$out.xxx的方式获取到对应名称的属性的值。
 - property_filter使用的是Aviator规则引擎。可以支持正常的条件判断和数值计算。高级操作具体查看Aviator规则引擎文档。
 
-#### 过滤条件参数说明
+##### 过滤条件参数说明
 
 ```java
 // 需要将这个json进行序列话并转译之后，贴到上面的过滤条件配置中
@@ -510,7 +510,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 }
 ```
 
-#### k8s示例
+##### k8s示例
 
 ```yaml
 cat <<EOF | kubectl apply --filename -
@@ -535,12 +535,12 @@ spec:
 EOF
 ```
 
-#### rest-api 示例
+##### rest-api 示例
 
-##### Method & Url
+###### Method & Url
 POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/computerdis
 
-##### Request Body
+###### Request Body
 
 ```json
 {
@@ -553,7 +553,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 }
 ```
 
-##### Response Body
+###### Response Body
 
 ```json
 {
@@ -561,11 +561,11 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 }
 ```
 
-#### 输出
+##### 输出
 
 结果类型为字符串集合，集合中每一个元素是一个环路。一个环路只会被记录在环路中id最小的顶点上。
 
-#### 5.1.8. Links
+### 5.1.8. Links
 
 ##### 功能介绍
 
@@ -648,7 +648,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 
 图中顶点的会添加名为rings_with_filter的属性，该属性记录是链路信息。结果类型为字符串集合，集合中每一个元素是一个链路。链路会被记录到链路结束的那个顶点上。
 
-#### 5.1.9. Cluster Coefficient
+### 5.1.9. Cluster Coefficient
 
 ##### 概述
 
@@ -716,7 +716,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 
 图中顶点的会添加名为clustering_coefficient的属性，该属性的值是顶点的聚集系数的值。结果类型为浮点数。
 
-#### 5.1.10. Betweenness Centrality
+### 5.1.10. Betweenness Centrality
 
 ##### 概述
 
@@ -791,7 +791,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 
 图中顶点的会添加名为betweenness_centrality的属性，该属性的值是顶点的中介中心性的值。结果类型为浮点数。
 
-#### 5.1.11 Label Propagation Algorithm
+### 5.1.11 Label Propagation Algorithm
 
 ##### 概述
 
@@ -858,7 +858,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 
  图中顶点的会添加名为lpa的属性，该属性的值是顶点所属的标签。结果类型为字符串。
 
-#### 5.1.12 louvain
+### 5.1.12 louvain
 
 ##### 概述
 
@@ -919,7 +919,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 
 输出为每个顶点的社区编号
 
-#### 5.1.13. Filter SubGraph Matching
+### 5.1.13. Filter SubGraph Matching
 
 ##### 概述
 
@@ -1062,7 +1062,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 
 算法会从查询图中找出一个中心点，子图结果会在匹配中心点的顶点上输出，输出结果是一个顶点id的列表，表示哪些顶点是一个匹配的子图。
 
-#### 5.1.14. K-Core
+### 5.1.14. K-Core
 
 ##### 概述
 
@@ -1103,7 +1103,7 @@ spec:
 
 ###### Method & Url
 
-```http
+```
 POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/computerdis
 ```
 
@@ -1123,7 +1123,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 
 算法会给所有符合条件的顶点标记上对应的core值，core值小于k的顶点的结果为0。
 
-#### 5.1.15. PersonalPageRank
+### 5.1.15. PersonalPageRank
 
 ##### 概述
 
@@ -1205,9 +1205,9 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 
 顶点的 personal page rank 值
 
-### 5.2.全局配置
+## 5.2.全局配置
 
-#### 5.2.1.Hdfs 输出配置
+### 5.2.1.Hdfs 输出配置
 
 ##### 参数说明
 
@@ -1302,7 +1302,7 @@ spec:
 EOF
 ```
 
-#### rest-api 示例
+##### rest-api 示例
 
 **Method & Url**
 
@@ -1361,7 +1361,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 - 算法参数中指定配置文件路径,相关配置 output.hdfs_krb5_conf。
 所以只要把不同用户的配置创建成不同的configmap，并映射成容器内的不同文件，就能在请求中指定相应的配置文件和用户名进行认证。
 
-#### 5.2.2.Hdfs 输入配
+### 5.2.2.Hdfs 输入配
 
 HDFS 数据输入是基于 hugegraph loader 的格式，点边文件的格式请参见 loader 的操作文档
 
@@ -1811,7 +1811,7 @@ spec:
 EOF
 ```
 
-#### rest-api 示例
+##### rest-api 示例
 
 **Method & Url**
 
@@ -1859,7 +1859,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 
 
 
-#### 5.2.3. docker 中 host 解析问题
+### 5.2.3. docker 中 host 解析问题
 
 如果 hdfs 中使用到域名解析时，需要单独在 docker 中单独指定 hosts 解析域名。
 
@@ -1952,7 +1952,7 @@ EOF
 
 
 
-#### rest-api 示例
+##### rest-api 示例
 
 **Method & Url**
 
@@ -1992,7 +1992,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 
  
 
-#### 5.2.4.限制每个点的最大边数 (可选)
+### 5.2.4.限制每个点的最大边数 (可选)
 
 算法提交时, 可以通过附加 input.limit_edges_in_one_vertex 参数来限制当前算法每个点的最大出边数, 默认值 -1 代表不限制, 需要设置为正整数, 例如
 
@@ -2037,7 +2037,7 @@ EOF
 
 
 
-#### rest-api 示例
+##### rest-api 示例
 
 **Method & Url**
 
@@ -2079,7 +2079,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 
 
 
-#### 5.2.5.自定义算法输出参数
+### 5.2.5.自定义算法输出参数
 
 算法可以自定义输出结果的参数，通过 output.output_property_name 参数来指定算法的输出属性。此参数并不是必须的，每个算法都有默认的输出属性。未设置该属性将使用算法默认输出属性，如果设置了将使用用户设置的输出属性。
 
@@ -2125,7 +2125,7 @@ EOF
 
  
 
-#### rest-api 示例
+##### rest-api 示例
 
 **Method & Url**
 
@@ -2169,7 +2169,7 @@ POST [http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/com
 
  
 
-#### 5.2.6.worker平均分配的问题
+### 5.2.6.worker平均分配的问题
 
 由于k8s pod 分配策略比较复杂，会综合各种因素算分最终确定pod分配，所以在某些环境下，worker全都分配到一台机器上，严重影响性能。目前根据 k8s 版本的不同有两种解决方法：
 
@@ -2251,7 +2251,7 @@ rest 示例
 
 此版本的 k8s 支持亲和性策略，我们在程序中内置了亲和性策略，默认就可以平均分配。
 
-#### 5.2.7.partition并行计算
+### 5.2.7.partition并行计算
 
 ##### 功能介绍
 
@@ -2296,7 +2296,7 @@ EOF
 }
 ```
 
-#### 5.2.8.configmap/secret 挂载配置说明
+### 5.2.8.configmap/secret 挂载配置说明
 
 ##### configmap配置说明
 
@@ -2346,7 +2346,7 @@ secret 概念请参考 k8s 官方文档。
 
 创建 secret 的方法请参考 k8s 官方文档
 
-#### 5.2.9.并行导入数据
+### 5.2.9.并行导入数据
 
 ##### 功能介绍
 
@@ -2398,7 +2398,7 @@ EOF
 }
 ```
 
-#### 5.2.10.内存资源限制
+### 5.2.10.内存资源限制
 
 ##### 参数说明
 
@@ -2452,7 +2452,7 @@ EOF
 }
 ```
 
-### 5.3.参数列表
+## 5.3.参数列表
 
 下表为图计算可设置的参数列表。参数类型为内部类型，rest api 上都需要传字符串。
 
@@ -2541,22 +2541,22 @@ EOF
 | 81   | hugegraph.passwd                        | ""                             | string       | hugegraph用户密码                                            |
 
 
-### 5.4.算法支持数量级
+## 5.4.算法支持数量级
 
-| 算法名                   | 支持数量级   |     内存开销 
-|---------------------|------------|---------------
-|    PageRank   |   100亿   |   每个 worker 5G 以下  
-|    Weakly Connected Component   |   100亿   |   每个 worker 5G 以下  
-|    Degree Centrality   |   100亿   |   每个 worker 5G 以下  
-|    Closeness Centrality   |   10亿   |   每个 worker 5G 以下  
-|    Betweenness Centrality   |   10亿   |   每个 worker 5G 以下  
-|    Triangle Count   |   10亿   |   twitter 14亿边，5台机器，每台100G  
-|    Cluster Coefficient   |   10亿   |   twitter 14亿边，5台机器，每台100G  
-|    Rings Detection   |   10万   |   每个 worker 5G 以下  
-|    Filtered Rings Detection   |   1亿   |   每个 worker 5G 以下  
-|    Links   |   1亿   |   每个 worker 5G 以下  
-|    Label Propagation Algorithm   |   100亿   |   每个 worker 5G 以下  
-|    Louvain   |   10亿   |   twitter 14亿边，需要一台120G以上的机器
-|    Filter SubGraph Matching   |   10亿   |   每个 worker 5G 以下  
-|    K-Core   |   100亿   |   每个 worker 5G 以下  
-|    Personal PageRank   |   100亿   |   每个 worker 5G 以下  
+| 算法名                   | 支持数量级   |     内存开销  |
+|:---------------------|:------------|:---------------     |
+|    PageRank   |   100亿   |   每个 worker 5G 以下  |
+|    Weakly Connected Component   |   100亿   |   每个 worker 5G 以下  |
+|    Degree Centrality   |   100亿   |   每个 worker 5G 以下  |
+|    Closeness Centrality   |   10亿   |   每个 worker 5G 以下  |
+|    Betweenness Centrality   |   10亿   |   每个 worker 5G 以下  |
+|    Triangle Count   |   10亿   |   twitter 14亿边，5台机器，每台100G  |
+|    Cluster Coefficient   |   10亿   |   twitter 14亿边，5台机器，每台100G  |
+|    Rings Detection   |   10万   |   每个 worker 5G 以下  |
+|    Filtered Rings Detection   |   1亿   |   每个 worker 5G 以下  |
+|    Links   |   1亿   |   每个 worker 5G 以下  |
+|    Label Propagation Algorithm   |   100亿   |   每个 worker 5G 以下  |
+|    Louvain   |   10亿   |   twitter 14亿边，需要一台120G以上的机器  |
+|    Filter SubGraph Matching   |   10亿   |   每个 worker 5G 以下  |
+|    K-Core   |   100亿   |   每个 worker 5G 以下  |
+|    Personal PageRank   |   100亿   |   每个 worker 5G 以下  |
