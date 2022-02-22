@@ -1205,7 +1205,11 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 
 顶点的 personal page rank 值
 
+### 5.2.全局配置
+
 #### 5.2.1.Hdfs 输出配置
+
+##### 参数说明
 
 | **参数**                       | **是否必选** | **说明**                                     | **默认值**                                               |
 | ------------------------------ | ------------ | -------------------------------------------- | -------------------------------------------------------- |
@@ -1349,6 +1353,13 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 
 }
 ```
+
+##### 关于支持HDFS多用户的问题
+访问HDFS需要HDFS的配置和认证文件，k8s 容器内也需要相关配置，容器内获取配置需要三步
+- 把宿主机的配置文件通过创建 k8s configmap 放到 k8s 中，相关命令 kubectl create configmap。
+- 把 configmap 映射到容器的磁盘中使用，相关配置 k8s.secret_paths。
+- 算法参数中指定配置文件路径,相关配置 output.hdfs_krb5_conf。
+所以只要把不同用户的配置创建成不同的configmap，并映射成容器内的不同文件，就能在请求中指定相应的配置文件和用户名进行认证。
 
 #### 5.2.2.Hdfs 输入配
 
@@ -2083,13 +2094,13 @@ metadata:
 
  namespace: hugegraph-computer-system
 
- name: &jobId closeness-centrality-beta6 # 任务ID
+ name: &jobId pagerank-beta6 # 任务ID
 
 spec:
 
  jobId: *jobId
 
- algorithmName: closeness-centrality # 算法名
+ algorithmName: pagerank # 算法名
 
  image: xxxxx/xxxxx:latest # 算法镜像地址
 
@@ -2254,10 +2265,10 @@ apiVersion: hugegraph.baidu.com/v1
 kind: HugeGraphComputerJob
 metadata:
   namespace: hugegraph-computer-system
-  name: &jobId closeness-centrality-beta6 # 任务ID
+  name: &jobId pagerank-beta6 # 任务ID
 spec:
   jobId: *jobId
-  algorithmName: closeness-centrality # 算法名
+  algorithmName: pagerank # 算法名
   image: xxxxx/xxxxx:latest # 算法镜像地址
   pullPolicy: Always # 是否重新拉取镜像
   workerInstances: 10 # worker 实例数
@@ -2356,10 +2367,10 @@ apiVersion: hugegraph.baidu.com/v1
 kind: HugeGraphComputerJob
 metadata:
   namespace: hugegraph-computer-system
-  name: &jobId closeness-centrality-beta6 # 任务ID
+  name: &jobId pagerank-beta6 # 任务ID
 spec:
   jobId: *jobId
-  algorithmName: closeness-centrality # 算法名
+  algorithmName: pagerank # 算法名
   image: xxxxx/xxxxx:latest # 算法镜像地址
   pullPolicy: Always # 是否重新拉取镜像
   workerInstances: 10 # worker 实例数
@@ -2383,6 +2394,60 @@ EOF
     "pagerank.l1DiffThreshold": "0.00001",
     "bsp.max_super_step": "10",
     "input.parallel_num": "5"
+  }
+}
+```
+
+#### 5.2.10.内存资源限制
+
+##### 参数说明
+
+| 名称                   | 是否必填 | 类型    | 默认值  | 取值范围          | 说明                       |
+| ---------------------- | -------- | ------- | ------- | ----------------- | -------------------------- |
+| k8s.master_request_memory | 否  | String | - | - | master最小内存，不满足最小内存则分配不成功 |
+| k8s.worker_request_memory | 否  | String | - | - | worker最小内存，不满足最小内存则分配不成功 |
+| k8s.master_memory | 否  | String | - | - | master最大内存，超过最大内存则会被k8s中止 |
+| k8s.worker_memory | 否  | String | - | - | worker最大内存，超过最大内存则会被k8s中止 |
+
+```yaml
+cat <<EOF | kubectl apply --filename -
+apiVersion: hugegraph.baidu.com/v1
+kind: HugeGraphComputerJob
+metadata:
+  namespace: hugegraph-computer-system
+  name: &jobId pagerank-beta6 # 任务ID
+spec:
+  jobId: *jobId
+  algorithmName: pagerank # 算法名
+  image: xxxxx/xxxxx:latest # 算法镜像地址
+  pullPolicy: Always # 是否重新拉取镜像
+  workerInstances: 5 # worker 实例数
+  computerConf:
+    algorithm.params_class: com.baidu.hugegraph.computer.algorithm.centrality.pagerank.PageRankParams # 算法配置类
+    pd.peers: "127.0.0.1:8686"  # pd 地址
+    hugegraph.name: "default/hugegraph" # 图空间/图名
+    job.partitions_count: "50" # 分区数
+    k8s.master_request_memory: "100Mi"
+    k8s.worker_request_memory: "5Gi"
+    k8s.master_memory: "500Mi"
+    k8s.worker_memory: "50Gi"
+EOF
+```
+
+##### rest 示例
+
+```json
+{
+  "algorithm": "page-rank",
+  "worker": 5,
+  "params": {
+    "pagerank.alpha": "0.15",
+    "pagerank.l1DiffThreshold": "0.00001",
+    "bsp.max_super_step": "10",
+    "k8s.master_request_memory": "100Mi",
+    "k8s.worker_request_memory": "5Gi",
+    "k8s.master_memory": "500Mi",
+    "k8s.worker_memory": "50Gi",
   }
 }
 ```
@@ -2474,3 +2539,24 @@ EOF
 | 79   | hugegraph.token                         | ""                             | string       | hugegraph端的认证信息                                        |
 | 80   | hugegraph.usrname                       | ""                             | string       | hugegraph用户名                                              |
 | 81   | hugegraph.passwd                        | ""                             | string       | hugegraph用户密码                                            |
+
+
+### 5.4.算法支持数量级
+
+| 算法名                   | 支持数量级   |     内存开销 
+|---------------------|------------|---------------
+|    PageRank   |   100亿   |   每个 worker 5G 以下  
+|    Weakly Connected Component   |   100亿   |   每个 worker 5G 以下  
+|    Degree Centrality   |   100亿   |   每个 worker 5G 以下  
+|    Closeness Centrality   |   10亿   |   每个 worker 5G 以下  
+|    Betweenness Centrality   |   10亿   |   每个 worker 5G 以下  
+|    Triangle Count   |   10亿   |   twitter 14亿边，5台机器，每台100G  
+|    Cluster Coefficient   |   10亿   |   twitter 14亿边，5台机器，每台100G  
+|    Rings Detection   |   10万   |   每个 worker 5G 以下  
+|    Filtered Rings Detection   |   1亿   |   每个 worker 5G 以下  
+|    Links   |   1亿   |   每个 worker 5G 以下  
+|    Label Propagation Algorithm   |   100亿   |   每个 worker 5G 以下  
+|    Louvain   |   10亿   |   twitter 14亿边，需要一台120G以上的机器
+|    Filter SubGraph Matching   |   10亿   |   每个 worker 5G 以下  
+|    K-Core   |   100亿   |   每个 worker 5G 以下  
+|    Personal PageRank   |   100亿   |   每个 worker 5G 以下  
