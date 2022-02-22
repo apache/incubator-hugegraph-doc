@@ -6,7 +6,7 @@
 
 Thank you for your interest in contributing to HugeGraph's all projects ("We" or "Us").
 
-The purpose of this contributor agreement ("Agreement") is to clarify and document the rights granted by contributors to Us. To make this document effective, please follow the comment of `GitHub CLA-Assistant` when submit a new pull request.
+The purpose of this contributor agreement ("Agreement") is to clarify and document the rights granted by contributors to Us. To make this document effective, please follow the comment of GitHub CLA-Assistant when submitting a new pull request.
 
 ### How to use this Contributor Agreement
 
