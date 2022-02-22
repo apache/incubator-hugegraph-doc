@@ -1361,7 +1361,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 - 算法参数中指定配置文件路径,相关配置 output.hdfs_krb5_conf。
 所以只要把不同用户的配置创建成不同的configmap，并映射成容器内的不同文件，就能在请求中指定相应的配置文件和用户名进行认证。
 
-### 5.2.2.Hdfs 输入配
+### 5.2.2.Hdfs 输入配置
 
 HDFS 数据输入是基于 hugegraph loader 的格式，点边文件的格式请参见 loader 的操作文档
 
