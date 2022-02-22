@@ -275,17 +275,19 @@ PUT /graphspaces/${graphspace}
 
 ##### Body参数
 
-|  名称   | 是否必填  | 类型  | 默认值  | 取值范围  | 说明  |
-|  ----  | ----  | ----  | ----  | ----  | ----  |
-| description  | 是 | String  |   |   |  图空间的描述信息 |
-| cpu_limit  | 是 | Int  |   | > 0  |  OLTP HugeGraphServer 的 CPU 核数 |
-| memory_limit  | 是 | Int  |   | > 0  |  OLTP HugeGraphServer 的内存大小，单位 GB |
-| storage_limit  | 是 | Int  |   | > 0  |  图空间的数据占据的磁盘空间上限 |
-| oltp_namespace  | 是 | String  |   |   |  OLTP 的k8s命名空间 |
-| olap_namespace  | 是 | String  |   |   |  OLAP 的k8s命名空间 |
-| storage_namespace  | 是 | String  |   |   |  存储的k8s命名空间 |
-| max_graph_number | 是 | Int | | > 0 | 图空间的图数目的上限 |
-| max_role_number | 是 | Int | | > 0 | 图空间的角色数目的上限 |
+|  名称             | 是否必填  | 类型  | 默认值  | 取值范围  | 说明                                    |
+|  ----             | ----     | ----   | ----  | ----     | ----                                    |
+| action            | 是       | String |       | update   | 标记本次操作为Update动作，取值固定         |
+| update            | 是       | Map    |       |          | 即将更新的值，**下述参数都应置于update中**|
+| description       | 是       | String |       |          | 图空间的描述信息                          |
+| cpu_limit         | 是       | Int    |       | > 0      | OLTP HugeGraphServer 的 CPU 核数         |
+| memory_limit      | 是       | Int    |       | > 0      | OLTP HugeGraphServer 的内存大小，单位 GB  |
+| storage_limit     | 是       | Int    |       | > 0      | 图空间的数据占据的磁盘空间上限             |
+| oltp_namespace    | 是       | String |       |          | OLTP 的k8s命名空间                       |
+| olap_namespace    | 是       | String |       |          | OLAP 的k8s命名空间                       | 
+| storage_namespace | 是       | String |       |          | 存储的k8s命名空间                        |
+| max_graph_number  | 是       | Int    |       | > 0      | 图空间的图数目的上限                      |
+| max_role_number   | 是       | Int    |       | > 0      | 图空间的角色数目的上限                    |
 
 ##### Response
 
@@ -320,14 +322,17 @@ PUT http://127.0.0.1:8080/graphspaces/gs1
 
 ```json
 {
-    "description": "1st graph space",
-    "cpu_limit": 2000,
-    "memory_limit": 40960,
-    "storage_limit": 2048,
-    "oltp_namespace": "hugegraph-server",
-    "olap_namespace": "hugegraph-server",
-    "max_graph_number": 1000,
-    "max_role_number": 100
+    "action": "update",
+    "update": {
+      "description": "1st graph space",
+      "cpu_limit": 2000,
+      "memory_limit": 40960,
+      "storage_limit": 2048,
+      "oltp_namespace": "hugegraph-server",
+      "olap_namespace": "hugegraph-server",
+      "max_graph_number": 1000,
+      "max_role_number": 100
+    }
 }
 ```
 
