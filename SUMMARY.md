@@ -75,6 +75,7 @@
 
 ## Query Language
 * [Gremlin Query Language](language/hugegraph-gremlin.md)
+* [Gremlin Query Language V3](language/hugegraph-gremlin-v3.md)
 * [HugeGraph Examples](language/hugegraph-example.md)
 
 ## Performance
