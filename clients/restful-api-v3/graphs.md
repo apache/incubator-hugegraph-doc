@@ -28,6 +28,7 @@ POST /graphspaces/${graphspace}/graphs/${graph}
 | store  | 是 | String  |   |  | 与图名保持一致  |
 | search.text_analyzer  | 否 | String  | jieba  | [word, ansj, hanlp, smartcn, jieba, jcseg, mmseg4j, ikanalyzer] |   |
 | search.text_analyzer_mode  | 否 | String  | INDEX  |  |   |
+| task.scheduler_type | 否 | String | local | [local, etcd] | 使用何种调度器进行异步任务调度，默认为local。 调度器类型不可修改 |
 
 ```
 search.text_analyzer_mode:
