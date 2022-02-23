@@ -858,11 +858,11 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 
  图中顶点的会添加名为lpa的属性，该属性的值是顶点所属的标签。结果类型为字符串。
 
-### 5.1.12 louvain
+### 5.1.12 Louvain
 
 ##### 概述
 
- Louvain 算法是基于模块度的社区发现算法。由于louvain算法的特殊性，只用一个worker instance运行。
+ Louvain 算法是基于模块度的社区发现算法。由于Louvain算法的特殊性，只用一个worker instance运行。
 
 ##### 适用场景
 
