@@ -2550,8 +2550,8 @@ EOF
 |    PageRank   |   100亿   |   每个 worker 5G 以下  |
 |    Weakly Connected Component   |   100亿   |   每个 worker 5G 以下  |
 |    Degree Centrality   |   100亿   |   每个 worker 5G 以下  |
-|    Closeness Centrality   |   10亿   |   每个 worker 5G 以下  |
-|    Betweenness Centrality   |   10亿   |   每个 worker 5G 以下  |
+|    Closeness Centrality   |   1亿   |   每个 worker 5G 以下  |
+|    Betweenness Centrality   |   1亿   |   每个 worker 5G 以下  |
 |    Triangle Count   |   10亿   |   twitter 14亿边，5台机器，每台100G  |
 |    Cluster Coefficient   |   10亿   |   twitter 14亿边，5台机器，每台100G  |
 |    Rings Detection   |   10万   |   每个 worker 5G 以下  |
