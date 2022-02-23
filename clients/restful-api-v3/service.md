@@ -26,7 +26,7 @@ POST /graphspaces/${graphspace}/services
 |  名称            | 是否必填  | 类型    | 默认值  | 取值范围                                                   | 说明            |
 |  ----            | ----     | ----    | ----   | ----                                                      | ----            |
 | name             | 是       | String  |        | 小写字母、数字和下划线组成，首字符必须是小写字母，长度不超过48  |  service 的名字 |
-| type             | 是       | String  |        | OLTP, OLAP, STORAGE                                       | 服务类型         |
+| type             | 是       | String  |        | OLTP                                                      | 服务类型，目前只允许OLTP        |
 | description      | 是       | String  |        |                                                           |  service 的描述信息 |
 | count            | 否       | Int     |  1     | > 0                                                       |  HugeGraphServer 的数目 |
 | cpu_limit        | 否       | Int     |  1     | > 0                                                       |  HugeGraphServer 的 CPU 核数 |
