@@ -632,5 +632,5 @@ Usage: hugegraph [options] [command] [command options]
 ### 3.8.10.图迁移
 
 ```bash
-./bin/hugegraph --url http://127.0.0.1:8080 --user admin --password admin --space gs1 --graph hugegraph migrate --target-url http://127.0.0.1:8090 --target-graph hugegraph
+./bin/hugegraph --url http://127.0.0.1:8080 --user admin --password admin --space gs1 --graph hugegraph migrate --target-url http://127.0.0.1:8090 --target-space DEFAULT --target-graph hugegraph
 ```
