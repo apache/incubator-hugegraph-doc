@@ -1212,19 +1212,19 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 ##### 参数说明
 
 | **参数**                       | **是否必选** | **说明**                                     | **默认值**                                               |
-| ------------------------------ | ------------ | -------------------------------------------- | -------------------------------------------------------- |
-| output.output_class            | 是           | 输出类                                       | com.baidu.hugegraph.computer.core.output.hdfs.HdfsOutput |
-| output.hdfs_core_site_path     | 否           | hdfs core-site.xml 路径                      |                                                          |
-| output.hdfs_site_path          | 是           | hdfs hdfs-site.xml 路径可覆盖output.hdfs_url |                                                          |
-| output.hdfs_url                | 否           | Hdfs地址                                     | hdfs://127.0.0.1:9000                                    |
-| output.hdfs_user               | 否           | Hdfs用户                                     | hadoop                                                   |
-| output.hdfs_path_prefix        | 否           | Hdfs结果文件夹前缀                           | /hugegraph-computer/results                              |
-| output.hdfs_delimiter          | 否           | Hdfs结果文件分割符                           | ,                                                        |
-| output.hdfs_merge_partitions   | 否           | 是否将输出结果合并成一个文件                 | true                                                     |
-| output.hdfs_kerberos_enable    | 否           | 是否开启kerbero认证                          | false                                                    |
-| output.hdfs_krb5_conf          | 否           | krb5_conf 文件路径                           | /etc/krb5.conf                                           |
-| output.hdfs_kerberos_principal | 否           | kerberos_principal                           |                                                          |
-| output.hdfs_kerberos_keytab    | 否           | keytab 文件路径                              |                                                          |
+| -------------- | ------------ | ------------------- | ---------------------- |
+| output.output_class  | 是    | 输出类   | com.baidu.hugegraph.computer.core.output.hdfs.HdfsOutput |
+| output.hdfs_core_site_path  | 否   | hdfs core-site.xml 路径                      |     -         |
+| output.hdfs_site_path    | 是 | hdfs hdfs-site.xml 路径可覆盖output.hdfs_url |   -   |
+| output.hdfs_url    | 否  | Hdfs地址 | hdfs://127.0.0.1:9000      |
+| output.hdfs_user   | 否  | Hdfs用户  | hadoop    |
+| output.hdfs_path_prefix | 否   | Hdfs结果文件夹前缀  | /hugegraph-computer/results   |
+| output.hdfs_delimiter   | 否  | Hdfs结果文件分割符   | ,    |
+| output.hdfs_merge_partitions   | 否  | 是否将输出结果合并成一个文件 | true    |
+| output.hdfs_kerberos_enable    | 否   | 是否开启kerbero认证    | false  |
+| output.hdfs_krb5_conf          | 否    | krb5_conf 文件路径   | /etc/krb5.conf   |
+| output.hdfs_kerberos_principal | 否  | kerberos_principal   |   -  |
+| output.hdfs_kerberos_keytab    | 否  | keytab 文件路径   |      -   |
 
 **以 pagerank为例**
 
@@ -1368,8 +1368,8 @@ HDFS 数据输入是基于 hugegraph loader 的格式，点边文件的格式请
 | **参数**                 | **是否必选** | **说明**                                                     | **默认值** |
 | ------------------------ | ------------ | ------------------------------------------------------------ | ---------- |
 | input.source_type        | 是           | 输入源类型 (hugegraph/loader) hdfs输入选择loader             | hugegraph  |
-| input.loader_struct_path | 是           | loader struct 文件地址, 该文件复用loader struct.json，但需要点、边分开配置 |            |
-| input.loader_schema_path | 是           | loader schema 文件地址，结构请参考  http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/schema |            |
+| input.loader_struct_path | 是           | loader struct 文件地址, 该文件复用loader struct.json，但需要点、边分开配置 |    -    |
+| input.loader_schema_path | 是           | loader schema 文件地址，结构请参考  http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/schema |  - |
 
 **以** **pagerank为例**
 
