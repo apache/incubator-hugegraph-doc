@@ -929,7 +929,6 @@ POST http://localhost:8080/graphspaces/gs1/auth/targets
 {
   "target_name":"all_targets",
   "target_graph": "hugegraph",
-  "target_url": "127.0.0.1:8080",
   "target_resources": [
     {
       "type": "ALL"
