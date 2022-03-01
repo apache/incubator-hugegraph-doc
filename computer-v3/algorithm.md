@@ -456,6 +456,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 
 ##### 额外说明
 
+- start_vertex_filter用于进行初始顶点的过滤，适用于筛选顶点的。
 - vertex_filter和edge_filter分别表示点和边的过滤条件，可以为不同label的点边配置不同的过滤规则。相同label的点或边的过滤条件只会保留最后一个。
 - vertex_filter和edge_filter可以是非必选的。对于vertex_filter和edge_filter任何一个单独来看，如果没有指定过滤条件的话将对所有对应的元素放行，如果指定了的话，那么只会对label相同并且属性满足条件的放行，未配置label的元素将直接被过滤掉。
 - property_filter用于规定属性的过滤规则，在vertex_filter中符合条件的点才会继续向下传播路径，在edge_filter中符合条件的出边才能传播，还可以用入边跟出边之间做属性比较判断过滤。不同label之间是或的关系。
@@ -467,6 +468,12 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 ```java
 // 需要将这个json进行序列话并转译之后，贴到上面的过滤条件配置中
 {
+    "start_vertex_filter": [
+        {
+        "label": "person",
+        "property_filter": "$element.weight>=4"
+        }
+    ],
     "vertex_filter": [
         {
             "label": "user",
