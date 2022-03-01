@@ -670,7 +670,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 
 | 名称                     | 是否必填 |  类型   | 默认值  |取值范围        |  说明                   |
 | :----------------------- | :------- | :--------------------- | :----- | :-------------- | :------ |
-| input.minimum_edges_use_superedge_cache | 否 | Int | 100 | 1 - 100000 | 利用内存减少消息量，如果内存不够，可以从100改成1000，但三角计数可能计算不完 |
+| input.minimum_edges_use_superedge_cache | 否 | Int | 100 | 1 - 100000 | 利用内存减少消息量，如果内存不够，可以从100改成1000，但聚集系数可能计算不完 |
 
 ##### k8s示例
 
