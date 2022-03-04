@@ -1796,9 +1796,9 @@ GET /graphspaces/${graphspace}/graphs/${graph}/traversers/paths
 | source | 是 | Id  |   | | 起始顶点id  |
 | target | 是 | Id  |   | | 目的顶点id  |
 | direction | 否 | String  | BOTH | OUT,IN,BOTH | 起始顶点向外发散的方向(出边，入边，双边) |
-| max_depth  | 是 | Int  |   | | 最大步数  |
+| max_depth  | 是 | Int  |   | (0, 5000] | 最大步数  |
 | label  | 否 | String  |   | | 边的类型, 默认代表所有edge label |
-| max_degree  | 否 | Long  | 10000 | | 查询过程中，单个顶点遍历的最大邻接边数目  |
+| max_degree  | 否 | Long  | 10000 | (0, 800000) | 查询过程中，单个顶点遍历的最大邻接边数目  |
 | capacity  | 否 | Long  | 10000000 | | 遍历过程中最大的访问的顶点数目  |
 | limit  | 否 | Long  |  10 | | 查询到的目标顶点个数，也是返回的最短路径的条数  |
 
@@ -1883,7 +1883,7 @@ POST /graphspaces/${graphspace}/graphs/${graph}/traversers/paths
 | sources | 是 | Object 详见表1 vertices对象  |   | | 定义起始顶点  |
 | targets | 是 | Object 详见表1 vertices对象  |   | | 定义终止顶点  |
 | step | 是 | Object 详见表2 step对象  | | | 表示从起始顶点到终止顶点走过的路径 |
-| max_depth  | 是 | Int  |  | | 步数  |
+| max_depth  | 是 | Int  |  | (0, 5000]  | 步数  |
 | nearest  | 否| Boolean | true | | nearest为true时，代表起始顶点到达结果顶点的最短路径长度为depth，不存在更短的路径；nearest为false时，代表起始顶点到结果顶点有一条长度为depth的路径（未必最短且可以有环） |
 | capacity  | 否 | Long  | 10000000 | | 遍历过程中最大的访问的顶点数目  |
 | limit  | 否 | Long  |  10 | | 返回的路径的最大条数  |
@@ -2411,8 +2411,8 @@ GET graphspaces/${graphspace}/graphs/${graph}/traversers/crosspoints
 | target  | 是 | String |   |   | 目的顶点id |
 | direction  | 否 | Enum | BOTH | OUT,IN,BOTH | 起始顶点到目的顶点的方向, 目的点到起始点是反方向，BOTH时不考虑方向  |
 | label  | 否 | String  |   |   | 默认代表所有edge label |
-| max_depth  | 是 | Int  |   |   | 步数 |
-| max_degree | 否 | Int  | 10000 |   | 查询过程中，单个顶点遍历的最大邻接边数目 |
+| max_depth  | 是 | Int  |   | (0, 5000]  | 步数 |
+| max_degree | 否 | Int  | 10000 | (0, 800000) | 查询过程中，单个顶点遍历的最大邻接边数目 |
 | capacity  | 否 | Int  | 10000000 |   | 遍历过程中最大的访问的顶点数目 |
 | limit  | 否 | Int  | 10 |   | 返回的交点的最大数目 |
 
