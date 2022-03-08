@@ -879,8 +879,10 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 社区发现。
 
 ##### 参数说明
+| 名称                     | 是否必填 |  类型   | 默认值  |取值范围        |  说明                   |
+| :----------------------- | :------- | :--------------------- | :----- | :-------------- | :------ |
+| louvain.weightkey  | 否 |  String   | "",为空时边权重为1  | -      |  权重属性名         |
 
-无
 
 ##### k8s示例
 
@@ -919,7 +921,9 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 {
   "algorithm": "louvain",
   "worker": 1,
-  "params": {}
+  "params": {
+    "louvain.weightkey": ""
+  }
 }
 ```
 
