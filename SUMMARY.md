@@ -61,6 +61,7 @@
     * [GraphSpace](clients/restful-api-v3/graphspace.md)
     * [Service](clients/restful-api-v3/service.md)
     * [SchemaTemplate](clients/restful-api-v3/schematemplate.md)
+    * [Config](clients/restful-api-v3/config.md)
     * [Other](clients/restful-api-v3/other.md)
 * [Computer API V3](computer-v3/algorithm.md)
 * [Java Client](clients/hugegraph-client.md)
