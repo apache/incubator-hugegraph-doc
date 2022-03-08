@@ -26,9 +26,24 @@ POST /graphspaces/${graphspace}/graphs/${graph}
 | backend  | 是 | String  |   |  | 存储类型，目前仅支持hstore  |
 | serializer  | 是 | String  |   |  | 序列化类型，目前仅支持binary  |
 | store  | 是 | String  |   |  | 与图名保持一致  |
+| rate_limit.write | 否 | Integer | 0 | [0, Integer.MAX_VALUE) | 每秒写入/更新/删除的请求数上限，0表示不限制 |
+| rate_limit.read | 否 | Integer | 0 | [0, Integer.MAX_VALUE) | 每秒读请求数上限，0表示不限制 |
+| task.wait_timeout | 否 | Long | 10L | [0, Long.MAX_VALUE) | 异步任务的等待时间 |
+| task.input_size_limit | 否 | Integer | 10*1024*1024 | [0, 1024*1024*1024) | 任务的输入大小限制，单位字节 |
+| task.result_size_limit | 否 | Integer | 10*1024*1024 | [0, 1024*1024*1024) | 任务的结果大小限制，单位字节 |
+| task.scheduler_type | 否 | String | local | [local, etcd] | 使用何种调度器进行异步任务调度，默认为local。 调度器类型不可修改 |
+| vertex.check_customized_id_exist | 否 | Boolean | false | | 是否检查指定的顶点或边的ID是否存在 |
+| vertex.tx_capacity | 否 | Integer | 10000 | [500, 1000000) | 事务里未提交的顶点数目限制 |
+| edge.tx_capacity | 否 | Integer | 10000 | [500, 1000000) | 事务里未提交的边数目限制 |
+| schema.init_template | 否 | String | | | 创建图时用来初始化的元数据模板 |
+| schema.illegal_name_regex | 否 | String | ".*\s+$|~.*" |   | 非法的元数据名字的正则表达式 | 
+| schema.cache_capacity | 否 | Long | 10000 | [0, Long.MAX_VALUE) | 元数据缓存数目上限 |
+| vertex.cache_capacity | 否 | Long | 10*1000*1000L | [0, Long.MAX_VALUE) | 顶点缓存数目上限 |
+| vertex.cache_expire | 否 | Integer | 600 | [0, Integer.MAX_VALUE) | 顶点在缓存中过期的期限 |
+| edge.cache_capacity | 否 | Long | 1000*1000L | [0, Long.MAX_VALUE) | 边缓存数目上限 |
+| edge.cache_expire | 否 | Integer | 600 | [0, Integer.MAX_VALUE) | 边在缓存中过期的期限 |
 | search.text_analyzer  | 否 | String  | jieba  | [word, ansj, hanlp, smartcn, jieba, jcseg, mmseg4j, ikanalyzer] |   |
 | search.text_analyzer_mode  | 否 | String  | INDEX  |  |   |
-| task.scheduler_type | 否 | String | local | [local, etcd] | 使用何种调度器进行异步任务调度，默认为local。 调度器类型不可修改 |
 
 ```
 search.text_analyzer_mode:
