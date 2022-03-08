@@ -935,7 +935,7 @@ DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/{ve
 ###### URI
 
 ```
-GET /graphspaces/{graphspace}/graphs/{graph}/graph/vertices?ids={ids#1}&ids={ids#2}
+GET /graphspaces/{graphspace}/graphs/{graph}/traversers/vertices?ids={ids#1}&ids={ids#2}
 ```
 
 ##### URI参数
@@ -964,7 +964,7 @@ GET /graphspaces/{graphspace}/graphs/{graph}/graph/vertices?ids={ids#1}&ids={ids
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices?ids="1:marko"&ids="2:lop"
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/traversers/vertices?ids="1:marko"&ids="2:lop"
 ```
 
 ###### Response Status
@@ -1040,7 +1040,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices?ids="1
 ###### URI
 
 ```
-GET /graphspaces/{graphspace}/graphs/{graph}/graph/vertices/shards?split_size={splitSize}
+GET /graphspaces/{graphspace}/graphs/{graph}/traversers/vertices/shards?split_size={splitSize}
 
 ```
 
@@ -1069,7 +1069,7 @@ GET /graphspaces/{graphspace}/graphs/{graph}/graph/vertices/shards?split_size={s
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/shards?split_size=67108864
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/traversers/vertices/shards?split_size=67108864
 
 ```
 ###### Response Status
@@ -1116,7 +1116,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/shards
 ###### URI
 
 ```
-GET /graphspaces/{graphspace}/graphs/{graph}/graph/vertices/scan?start=0&end=4294967295&page={page}&page_limit={pageLimit}
+GET /graphspaces/{graphspace}/graphs/{graph}/traversers/vertices/scan?start=0&end=4294967295&page={page}&page_limit={pageLimit}
 ```
 
 
@@ -1148,7 +1148,7 @@ GET /graphspaces/{graphspace}/graphs/{graph}/graph/vertices/scan?start=0&end=429
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/scan?start=0&end=4294967295&page=&page_limit=100
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/traversers/vertices/scan?start=0&end=4294967295&page=&page_limit=100
 ```
 
 ###### Response Status
