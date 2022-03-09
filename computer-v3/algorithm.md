@@ -454,6 +454,8 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 | :----------------------- | :------- | :--------------------- | :----- | :-------------- | :------ |
 | bsp.max_super_step  | 否 |  Int   | 10  |1~2000        |  最大迭代次数         |
 | rings.property_filter  | 否 |  String   | {}  |  -        |  点边属性过滤条件         |
+| rings.min_ring_length  | 否 |  Int   | 0  |  -        |  输出环路的最小长度         |
+| rings.max_ring_length  | 否 |  Int   | Integer.MAX_VALUE  |  -        |  输出环路的最大长度         |
 
 ##### 额外说明
 
@@ -462,7 +464,7 @@ POST http://localhost:8080/graphspaces/{graphspace}/graphs/{hugegraph}/jobs/comp
 - vertex_filter和edge_filter可以是非必选的。对于vertex_filter和edge_filter任何一个单独来看，如果没有指定过滤条件的话将对所有对应的元素放行，如果指定了的话，那么只会对label相同并且属性满足条件的放行，未配置label的元素将直接被过滤掉。
 - property_filter用于规定属性的过滤规则，在vertex_filter中符合条件的点才会继续向下传播路径，在edge_filter中符合条件的出边才能传播，还可以用入边跟出边之间做属性比较判断过滤。不同label之间是或的关系。
 - $element、$out、$in可以理解为内置变量。$element在vertex_filter中表示当前点的属性对象。在edge_filter中$in和$out分别代表表示当前顶点的入边属性和出边属性对象。$element.xxx、$in.xxx、$out.xxx的方式获取到对应名称的属性的值。
-- property_filter使用的是Aviator规则引擎。可以支持正常的条件判断和数值计算。高级操作具体查看Aviator规则引擎文档。
+- property_filter使用的是Aviator规则引擎。可以支持正常的条件判断和数值计算。高级操作具体查看Aviator规则引擎文档。sy
 
 ##### 过滤条件参数说明
 
