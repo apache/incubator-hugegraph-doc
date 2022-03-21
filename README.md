@@ -7,21 +7,22 @@ U should ensure NPM & Hugo binary [download url](https://github.com/gohugoio/hug
 ```bash
 # 0. install npm & hugo if you don't have it
 
-# 注: 使用最新版的 hugo_extend (必须选带 extend 的"扩展版", 否则无法使用), 下面是 Linux 为例
+# Note: must download hugo_extend version, example in Linux
 wget https://github.do/https://github.com/gohugoio/hugo/releases/download/v0.95.0/hugo_extended_0.95.0_Linux-64bit.tar.gz
 # 解压后 hugo 是单二进制文件可直接放 /usr/bin 下
 sudo install hugo /usr/bin
 
 # 1. download source code & cd it
 git clone -b website https://github.com/hugegraph/hugegraph-doc.git
-# if download slow or failed, try
+
+# if download slowly or failed, try the proxy url
 git clone -b website https://api.mtr.pub/hugegraph/hugegraph-doc.git # or https://github.do/https://github.com/hugegraph/hugegraph-doc.git
 
 # 2. we need install npm dependencies in project root dir
 npm install
 
 # 3. we could just start hugo server in localhost now (u don't need do anything else)
-hugeo server
+hugo server
 
 # (optional) if you want modify ip or port, try like this
 hugo server -b http://127.0.0.1 -p  80 --bind=0.0.0.0
