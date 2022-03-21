@@ -1,101 +1,40 @@
-# Docsy Example
+# How to install the website (hugo)
 
-[Docsy][] is a [Hugo theme][] for technical documentation sites, providing easy
-site navigation, structure, and more. This **Docsy Example Project** uses the
-Docsy theme and provides a skeleton documentation structure for you to use. You
-can clone/copy this project and edit it with your own content, or use it as an
-example.
+Only 3 steps u can easily to get start~
 
-In this project, the Docsy theme is included as a Git submodule:
+U should ensure NPM & Hugo binary [download url](https://github.com/gohugoio/hugo/releases) before start, hugo binary must end with "**extended**" suffix
 
 ```bash
-$ git submodule
-...<hash>... themes/docsy (remotes/origin/HEAD)
-```
+# 0. install npm & hugo if you don't have it
 
-You can find detailed theme instructions in the [Docsy user guide][].
+# 注: 使用最新版的 hugo_extend (必须选带 extend 的"扩展版", 否则无法使用), 下面是 Linux 为例
+wget https://github.do/https://github.com/gohugoio/hugo/releases/download/v0.95.0/hugo_extended_0.95.0_Linux-64bit.tar.gz
+# 解压后 hugo 是单二进制文件可直接放 /usr/bin 下
+sudo install hugo /usr/bin
 
-This Docsy Example Project is hosted on [Netlify][] at [example.docsy.dev][].
-You can view deploy logs from the [deploy section of the project's Netlify
-dashboard][deploys], or this [alternate dashboard][].
+# 1. download source code & cd it
+git clone -b website https://github.com/hugegraph/hugegraph-doc.git
+# if download slow or failed, try
+git clone -b website https://api.mtr.pub/hugegraph/hugegraph-doc.git # or https://github.do/https://github.com/hugegraph/hugegraph-doc.git
 
-This is not an officially supported Google product. This project is currently maintained.
-
-## Using the Docsy Example Project as a template
-
-A simple way to get started is to use this project as a template, which gives you a site project that is set up and ready to use. To do this: 
-
-1. Click **Use this template**.
-
-2. Select a name for your new project and click **Create repository from template**.
-
-3. Make your own local working copy of your new repo using git clone, replacing https://github.com/me/example.git with your repo’s web URL:
-
-```bash
-git clone --recurse-submodules --depth 1 https://github.com/me/example.git
-```
-
-You can now edit your own versions of the site’s source files.
-
-If you want to do SCSS edits and want to publish these, you need to install `PostCSS`
-
-```bash
+# 2. we need install npm dependencies in project root dir
 npm install
-```
 
-## Running the website locally
+# 3. we could just start hugo server in localhost now (u don't need do anything else)
+hugeo server
 
-Building and running the site locally requires a recent `extended` version of [Hugo](https://gohugo.io).
-You can find out more about how to install Hugo for your environment in our
-[Getting started](https://www.docsy.dev/docs/getting-started/#prerequisites-and-installation) guide.
-
-Once you've made your working copy of the site repo, from the repo root folder, run:
+# (optional) if you want modify ip or port, try like this
+hugo server -b http://127.0.0.1 -p  80 --bind=0.0.0.0
 
 ```
-hugo server
-```
 
-## Running a container locally
+# How to modify the docsy theme
 
-You can run docsy-example inside a [Docker](https://docs.docker.com/)
-container, the container runs with a volume bound to the `docsy-example`
-folder. This approach doesn't require you to install any dependencies other
-than [Docker Desktop](https://www.docker.com/products/docker-desktop) on
-Windows and Mac, and [Docker Compose](https://docs.docker.com/compose/install/)
-on Linux.
+You can find detailed **theme instructions** in the [Docsy user guide][].
 
-1. Build the docker image 
-
-   ```bash
-   docker-compose build
-   ```
-
-1. Run the built image
-
-   ```bash
-   docker-compose up
-   ```
-
-   > NOTE: You can run both commands at once with `docker-compose up --build`.
-
-1. Verify that the service is working. 
-
-   Open your web browser and type `http://localhost:1313` in your navigation bar,
-   This opens a local instance of the docsy-example homepage. You can now make
-   changes to the docsy example and those changes will immediately show up in your
-   browser after you save.
-
-### Cleanup
-
-To stop Docker Compose, on your terminal window, press **Ctrl + C**. 
-
-To remove the produced images run:
-
-```console
-docker-compose rm
-```
-For more information see the [Docker Compose
-documentation](https://docs.docker.com/compose/gettingstarted/).
+1. `config.toml` in the **root dir** is global config
+2. `config.toml` in the `./themes/docsy` is theme config
+3. `content` dir contains multi language contens (docs/index-html/blog/about/bg-imgage), it's the most important dir
 
 ## Troubleshooting
 
@@ -110,13 +49,8 @@ Built in 288 ms
 Error: Error building site: TOCSS: failed to transform "scss/main.scss" (text/x-scss): resource "scss/scss/main.scss_9fadf33d895a46083cdd64396b57ef68" not found in file cache
 ```
 
-This error occurs if you have not installed the extended version of Hugo.
-See our [user guide](https://www.docsy.dev/docs/getting-started/) for instructions on how to install Hugo.
+This error occurs if you have not installed the extended version of [Hugo](https://github.com/gohugoio/hugo/releases).
 
-[alternate dashboard]: https://app.netlify.com/sites/goldydocs/deploys
-[deploys]: https://app.netlify.com/sites/docsy-example/deploys
 [Docsy user guide]: https://docsy.dev/docs
 [Docsy]: https://github.com/google/docsy
 [example.docsy.dev]: https://example.docsy.dev
-[Hugo theme]: https://www.mikedane.com/static-site-generators/hugo/installing-using-themes/
-[Netlify]: https://netlify.com
