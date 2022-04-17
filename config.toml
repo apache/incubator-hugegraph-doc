@@ -73,8 +73,14 @@ id = "UA-00000000-0"
 title = "HugeGraph"
 description = "Apache HugeGraph site"
 languageName ="中文"
+contentDir = "content/cn"
 # Weight used for sorting.
 weight = 1
+[languages.en]
+title = "HugeGraph"
+description = "Apache HugeGraph site"
+languageName ="English"
+contentDir = "content/en"
 
 [markup]
   [markup.goldmark]
