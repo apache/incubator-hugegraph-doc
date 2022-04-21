@@ -13,13 +13,13 @@ wget https://github.do/https://github.com/gohugoio/hugo/releases/download/v0.95.
 sudo install hugo /usr/bin
 
 # 1. download source code & cd it
-git clone -b website https://github.com/hugegraph/hugegraph-doc.git
+git clone -b website https://github.com/hugegraph/hugegraph-doc.git website
 
 # if download slowly or failed, try the proxy url
-git clone -b website https://api.mtr.pub/hugegraph/hugegraph-doc.git # or https://github.do/https://github.com/hugegraph/hugegraph-doc.git
+git clone -b website https://api.mtr.pub/hugegraph/hugegraph-doc.git website # or https://github.do/https://github.com/hugegraph/hugegraph-doc.git
 
 # 2. we need install npm dependencies in project root dir
-npm install
+cd website && npm install
 
 # 3. we could just start hugo server in localhost now (u don't need do anything else)
 hugo server
