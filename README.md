@@ -2,12 +2,15 @@
 
 Only 3 steps u can easily to get start~
 
-U should ensure NPM & Hugo binary [download url](https://github.com/gohugoio/hugo/releases) before start, hugo binary must end with "**extended**" suffix
+U should ensure NPM & Hugo binary [download url](https://github.com/gohugoio/hugo/releases) before start, hugo binary must end with "**extended**" suffix, and we don't need install go env, just download hugo binary is fine
 
 ```bash
 # 0. install npm & hugo if you don't have it
 
-# Note: must download hugo_extend version, example in Linux
+# Mac version (0.95 extend)
+wget https://github.do/https://github.com/gohugoio/hugo/releases/download/v0.95.0/hugo_extended_0.95.0_macOS-64bit.tar.gz
+
+# Linux version (0.95 extend)
 wget https://github.do/https://github.com/gohugoio/hugo/releases/download/v0.95.0/hugo_extended_0.95.0_Linux-64bit.tar.gz
 # 解压后 hugo 是单二进制文件可直接放 /usr/bin 下
 sudo install hugo /usr/bin
