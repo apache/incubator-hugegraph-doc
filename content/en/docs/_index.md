@@ -7,4 +7,5 @@ menu:
   main:
     weight: 20
 ---
-欢迎阅读HugeGraph文档
+
+Welcome to HugeGraph docs
