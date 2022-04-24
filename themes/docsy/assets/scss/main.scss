@@ -39,6 +39,13 @@ footer {
     @include media-breakpoint-down(md) {
         min-height: 200px;
     }
+    a.white {
+        color: #ddd;
+    }
+    a.white:hover {
+        color: #fff;
+        text-decoration: underline;
+    }
 }
 
 // Adjust anchors vs the fixed menu.
