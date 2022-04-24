@@ -2,7 +2,9 @@
 1. 参考后续文档, 在本地 3 步快速构建官网环境, 启动起来看下目前效果
 2. 检查目前官网的 UI/内容/图标等是否合理 / 美观, 然后阅读 `docsy` 文档了解如何修改
 3. 根据文档, 以及样例网站源码, 修改我们的网站 (或者提供**中/英文**翻译, 这个基本是 markdown 文档)
-4. 先 fork 仓库, 然后基于 `website` 创建一个**新的**分支, 修改完成后提交 PR ✅ (请在 PR 内截图对比一下修改签后的效果和简要说明, 感谢)
+4. 先 fork 仓库, 然后基于 `website` 创建一个**新的**分支, 修改完成后提交 PR ✅ (请在 PR 内**截图**对比一下修改**前后**的效果 & 简要说明, 感谢)
+
+Refer: 不熟悉 **github-pr** 流程的同学, 可以参考[贡献流程](https://github.com/apache/incubator-hugegraph/blob/master/CONTRIBUTING.md)文档, 最简单的方式是下 [github 桌面](https://desktop.github.com/)应用, 会简单方便许多~
 
 **PS:** 可以参考其他官网的[源码](https://www.docsy.dev/docs/examples), 方便快速了解 docsy 主题结构.
 
