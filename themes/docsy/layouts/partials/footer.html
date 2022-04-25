@@ -1,8 +1,13 @@
 {{ $links := .Site.Params.links }}
 <footer class="bg-dark py-5 row d-print-none">
-  <div class="container-fluid mx-sm-5">
+  <div class="container">
     <div class="row">
-      <div class="col-12 text-white text-center">
+      <div class="col-3">
+          <a href="https://www.apache.org">
+            <img class="footer-apache-logo" src="https://cdn.jsdelivr.net/gh/apache/echarts-website@asf-site/zh/images/asf_logo.svg?_v_=20220425_1" />
+          </a>
+      </div>
+      <div class="col-9 text-white text-center">
         <p>Copyright &copy; {{ now.Year}} The Apache Software Foundation, Licensed under the <a class="white" href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.</p>
         <p>Apache and the Apache feather logo are trademarks of The Apache Software Foundation. </p>
       </div>
