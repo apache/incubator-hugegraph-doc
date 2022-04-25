@@ -4,7 +4,9 @@
     <div class="row">
       <div class="col-3">
           <a href="https://www.apache.org">
-            <img class="footer-apache-logo" src="https://cdn.jsdelivr.net/gh/apache/echarts-website@asf-site/zh/images/asf_logo.svg?_v_=20220425_1" />
+            <div class="footer-apache-logo">
+              {{ if .Site.Params.ui.footer_logo }}{{ with resources.Get "icons/apache_logo.svg" }}{{ ( . | minify).Content | safeHTML }}{{ end }}{{ end }}
+            </div>
           </a>
       </div>
       <div class="col-9 text-white text-center">
