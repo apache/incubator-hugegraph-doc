@@ -15,7 +15,7 @@ Currently supported data sources include:
 
 Local disk files and HDFS files support resumable uploads.
 
-It will be explained in detail later.
+It will be explained in detail below.
 
 > Note: HugeGraph-Loader requires HugeGraph Server service, please refer to [HugeGraph-Server Quick Start](/docs/quickstart/hugegraph-server) to download and start Server
 
@@ -24,7 +24,7 @@ It will be explained in detail later.
 There are two ways to get HugeGraph-Loader:
 
 - Download the compiled tarball
-- Clone source code to compile and install
+- Clone source code then compile and install
 
 #### 2.1 Download the compiled archive
 
@@ -72,7 +72,7 @@ mvn clean package -DskipTests
 
 ### 3 How to use
 The basic process of using HugeGraph-Loader is divided into the following steps:
-- Write graph models
+- Write graph schema
 - Prepare data files
 - Write input source map files
 - Execute command import
