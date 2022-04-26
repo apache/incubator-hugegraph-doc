@@ -337,14 +337,13 @@ curl http://localhost:8080/graphs/hugegraph/graph/vertices
 
 _explanation_
 
-1. 由于图的点和边很多，对于 list 型的请求，比如获取所有顶点，获取所有边等，Server 会将数据压缩再返回，
-所以使用 curl 时得到一堆乱码，可以重定向至 gunzip 进行解压。推荐使用 Chrome 浏览器 + Restlet 插件发送 HTTP 请求进行测试。
+1. Since there are many points and edges in the graph, for list-type requests, such as getting all vertices, getting all edges, etc., the server will compress the data and return it，so when use curl, you get a bunch of garbled characters, you can redirect to gunzip for decompression。It is recommended to use Chrome browser + Restlet plugin to send HTTP requests for testing。
 
     ```
     curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
     ```
 
-2. 当前HugeGraphServer的默认配置只能是本机访问，可以修改配置，使其能在其他机器访问。
+2. The current default configuration of HugeGraphServer can only be accessed locally, and the configuration can be modified so that it can be accessed on other machines。
 
     ```
     vim conf/rest-server.properties
@@ -352,7 +351,7 @@ _explanation_
     restserver.url=http://0.0.0.0:8080
     ```
 
-响应体如下：
+response body：
 
 ```json
 {
@@ -406,9 +405,9 @@ _explanation_
 }
 ```
 
-详细的API请参考[RESTful-API](/dcos/clients/restful-api)文档
+for detailed API, please refer to[RESTful-API](/dcos/clients/restful-api)
 
-### 7 停止Server
+### 7 Stop Server
 
 ```bash
 $cd hugegraph-${version}
