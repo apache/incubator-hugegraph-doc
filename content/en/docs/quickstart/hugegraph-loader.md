@@ -4,7 +4,7 @@ linkTitle: "Load data with HugeGraph-Loader"
 weight: 2
 ---
 
-### 1 HugeGraph-Loader overview
+### 1 HugeGraph-Loader Overview
 
 HugeGraph-Loader is the data import component of HugeGragh, which can convert data from various data sources into graph vertices and edges and import them into the graph database in batches.
 
@@ -43,7 +43,7 @@ Clone the latest version of HugeGraph-Loader source package:
 $ git clone https://github.com/hugegraph/hugegraph-loader.git
 ```
 
-Due to the limitation of the Oracle ojdbc license, you need to manually install ojdbc to the local maven repository.
+Due to the license limitation of the `Oracle OJDBC`, you need to manually install ojdbc to the local maven repository.
 Visit the [Oracle jdbc downloads](https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html) page. Select Oracle Database 12c Release 2 (12.2.0.1) drivers, as shown in the following figure.
 
 <center>
@@ -70,16 +70,14 @@ cd hugegraph-loader
 mvn clean package -DskipTests
 ```
 
-### 3 Use the process
-
+### 3 How to use
 The basic process of using HugeGraph-Loader is divided into the following steps:
-
 - Write graph models
 - Prepare data files
 - Write input source map files
 - Execute command import
 
-#### 3.1 Writing a graph model
+#### 3.1 Construct graph schema
 
 This step is the modeling process. Users need to have a clear idea of ​​their existing data and the graph model they want to create, and then write the schema to build the graph model.
 
@@ -95,7 +93,7 @@ For example, if you want to create a graph with two types of vertices and two ty
 After designing the graph model, we can use `groovy` to write the definition of `schema` and save it to a file, here named `schema.groovy`.
 
 ```groovy
-// create some properties
+// Create some properties
 schema.propertyKey("name").asText().ifNotExist().create();
 schema.propertyKey("age").asInt().ifNotExist().create();
 schema.propertyKey("city").asText().ifNotExist().create();
@@ -660,7 +658,7 @@ The nodes of vertex and edge mapping (a key in the JSON file) have a lot of the 
 
 **Note:** If the newly imported attribute value is empty, the existing old data will be used instead of the empty value. For the effect, please refer to the following example
 
-```json
+```javascript
 // The update strategy is specified in the JSON file as follows
 {
   "vertices": [
@@ -921,7 +919,7 @@ schema.indexLabel("knowsByWeight").onE("knows").by("weight").range().ifNotExist(
 }
 ```
 
-#### 4.4 Execute command import
+#### 4.4 Command to import
 
 ```bash
 sh bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy
