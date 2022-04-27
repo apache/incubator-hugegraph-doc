@@ -6,18 +6,18 @@ weight: 6
 
 ### 1 Overview Of Hugegraph
 
-HugeGraph-Client sends HTTP request to HugeGraph-Server to obtain and parse the execution result of Server. Currently only the Java version is provided. You can use HugeGraph-Client to write Java code to operate HugeGraph, such as adding, deleting, modifying, and querying metadata and graph data, or executing gremlin statements.
+HugeGraph-Client sends HTTP request to HugeGraph-Server to obtain and parse the execution result of Server. Currently only the HugeGraph-Client for Java is provided. You can use HugeGraph-Client to write Java code to operate HugeGraph, such as adding, deleting, modifying, and querying schema and graph data, or executing gremlin statements.
 
 ### 2 What You Need
 
-- jdk1.8
-- maven-3.3.9
+- JDK1.8
+- Maven-3.3.9
 
 ### 3 How To Use
 
 The basic steps to use HugeGraph-Client are as follows:
 
-- Build a new maven project by IDEA or eclipse
+- Build a new Maven project by IDEA or Eclipse
 - Add HugeGraph-Client dependency in pom file;
 - Create a object to invoke the interface of HugeGraph-Client
 
@@ -29,7 +29,7 @@ See the complete example in the following section for the detail.
 
 Using IDEA or Eclipse to create the project:
 
-- [Build by eclipse](http://www.vogella.com/tutorials/EclipseMaven/article.html)
+- [Build by Eclipse](http://www.vogella.com/tutorials/EclipseMaven/article.html)
 - [Build by Intellij Idea](https://vaadin.com/docs/-/part/framework/getting-started/getting-started-idea.html)
 
 #### 4.2 Add Hugegraph-Client Dependency In POM
