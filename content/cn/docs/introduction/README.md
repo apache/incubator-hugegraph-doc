@@ -14,7 +14,7 @@ HugeGraph是一款易用、高效、通用的开源图数据库系统（Graph Da
 HugeGraph典型应用场景包括深度关系探索、关联分析、路径搜索、特征抽取、数据聚类、社区检测、
 知识图谱等，适用业务领域有如网络安全、电信诈骗、金融风控、广告推荐、社交网络和智能机器人等。
 
-本系统的主要应用场景是解决百度安全事业部所面对的反欺诈、威胁情报、黑产打击等业务的图数据存储和建模分析需求，在此基础上逐步扩展及支持了更多的通用图应用。
+本系统的主要应用场景是解决反欺诈、威胁情报、黑产打击等业务的图数据存储和建模分析需求，在此基础上逐步扩展及支持了更多的通用图应用。
 
 ### Features
 
@@ -57,9 +57,6 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 
 ### Contact Us
 
-- 项目发起人：刘杰
-- 项目负责人：韩祖利
-- 技术负责人：[李章梅](https://github.com/javeme)
-- 接口人：[张义](https://github.com/zhoney)，[李凝瑞](https://github.com/Linary)
+- [Github Issues](https://github.com/apache/incubator-hugegraph/issues): 反馈使用问题与功能需求 (优先使用)
 - 反馈邮箱：[hugegraph@googlegroups.com](mailto:hugegraph@googlegroups.com)
 - 微信公众号：HugeGraph

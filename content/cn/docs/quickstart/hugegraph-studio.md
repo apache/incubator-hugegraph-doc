@@ -1,8 +1,11 @@
 ---
 title: "HugeGraph-Studio Quick Start"
-linkTitle: "Display with HugeGraph-Studio"
+linkTitle: "(Deprecated) Display with HugeGraph-Studio"
+draft: true
 weight: 5
 ---
+
+> Note: Studio 已经停止维护, 不再更新, 请转向使用 hubble, 感谢理解
 
 ### 1 HugeGraph-Studio概述
 

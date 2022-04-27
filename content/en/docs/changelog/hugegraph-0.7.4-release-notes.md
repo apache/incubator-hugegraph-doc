@@ -1,6 +1,7 @@
 ---
 title: "HugeGraph 0.7 Release Notes"
 linkTitle: "Release-0.7.4"
+draft: true
 weight: 6
 ---
 
