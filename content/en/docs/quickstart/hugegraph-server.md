@@ -14,7 +14,7 @@ The Core Module is an implementation of the Tinkerpop interface; Backend Module 
 
 ### 2 Dependency
 
-#### 2.1 install JDK-1.8
+#### 2.1 Install JDK-1.8
 
 HugeGraph-Server developed based on jdk-1.8，project's code uses many classes and methods in jdk-1.8, please install and configure by yourself。
 
@@ -24,7 +24,7 @@ HugeGraph-Server developed based on jdk-1.8，project's code uses many classes a
 java -version
 ```
 
-#### 2.2 install GCC-4.3.0(GLIBCXX_3.4.10) or update version (optional)
+#### 2.2 Install GCC-4.3.0(GLIBCXX_3.4.10) or update version (optional)
 
 if you are using the RocksDB backend, be sure to execute the `gcc --version` command to check the gcc version; if you are using other backends, this is not required。
 
@@ -40,7 +40,7 @@ There are three ways to deploy HugeGraph-Server components:
 - Method 2: Download the tar package
 - Method 3: Source code compilation
 
-#### 3.1 one-click deployment
+#### 3.1 One-click deployment
 
 HugeGraph-Tools provides a command-line tool for one-click deployment，users can use this tool to quickly download、decompress、 configure and start HugeGraphServer and HugeGraphStudio with one click。
 of course, you still have to download the tar package of HugeGraph-Tools first.。
@@ -302,7 +302,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 ### 6 Access server
 
-#### 6.1 service startup status check
+#### 6.1 Service startup status check
 
 use `jps` to see service process
 
@@ -329,7 +329,7 @@ The RESTful API of HugeGraphServer includes various types of resources, typicall
 - `traverser` contains various advanced queries including shortest paths, intersections, N-step reachable neighbors, etc.
 - `task` contains query and delete with asynchronous tasks
 
-##### 6.2.1 get vertices and related properties of `hugegraph`
+##### 6.2.1 Get vertices and related properties of `hugegraph`
 
 ```bash
 curl http://localhost:8080/graphs/hugegraph/graph/vertices 
