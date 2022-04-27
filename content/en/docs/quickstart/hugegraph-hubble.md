@@ -363,7 +363,7 @@ Right-click a vertex in the graph result to add the outgoing or incoming edge of
 ##### 3.5.1 Module entry
 Left navigation:
 <center>
-   <img src="/docs/images/images-hubble/351task management portal.png" alt="image">
+   <img src="/docs/images/images-hubble/351任务管理入口.png" alt="image">
 </center>
 
 
