@@ -1,8 +1,10 @@
 ---
 title: "HugeGraph-Spark Quick Start"
-linkTitle: "Analysis with HugeGraph-Spark"
+linkTitle: "(Deprecated) Analysis with HugeGraph-Spark"
 weight: 7
 ---
+
+> Note: This project is archived now, consider use hugegraph-computer instead
 
 ### 1 HugeGraph-Spark概述
 
