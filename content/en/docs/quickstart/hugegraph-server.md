@@ -6,17 +6,17 @@ weight: 1
 
 ### 1 HugeGraph-Server Overview
 
-HugeGraph-Server is the core part of the HugeGraph Project, contains submodules such as Core、Backend、API。
+HugeGraph-Server is the core part of the HugeGraph Project, contains submodules such as Core、Backend、API.
 
-The Core Module is an implementation of the Tinkerpop interface; Backend Module for managing data storage, Currently supported backends include：Memory、Cassandra、ScyllaDB、RocksDB; The API Module provides HTTP Server, which converts Client's HTTP request into a call to Core Moudle。
+The Core Module is an implementation of the Tinkerpop interface; The Backend module is used to save the graph data to the data store, currently supported backends include：Memory、Cassandra、ScyllaDB、RocksDB; The API Module provides HTTP Server, which converts Client's HTTP request into a call to Core Moudle.
 
-> There will be a large number of `HugeGraph-Server` and `HugeGraphServer` in the document, and other modules are similar。There is no big difference in the meaning of these two ways of writing, which can be distinguished as follows: `HugeGraph-Server` represents the code of server-related components, `HugeGraphServer` represents the service process。
+> There will be two spellings HugeGraph-Server and HugeGraphServer in the document, and other modules are similar. There is no big difference in the meaning of these two ways of writing, which can be distinguished as follows: `HugeGraph-Server` represents the code of server-related components, `HugeGraphServer` represents the service process.
 
 ### 2 Dependency
 
 #### 2.1 Install JDK-1.8
 
-HugeGraph-Server developed based on jdk-1.8，project's code uses many classes and methods in jdk-1.8, please install and configure by yourself。
+HugeGraph-Server developed based on jdk-1.8，project's code uses many classes and methods in jdk-1.8, please install and configure by yourself.
 
 **Be sure to execute the `java -version` command to check the jdk version before reading**
 
@@ -26,7 +26,7 @@ java -version
 
 #### 2.2 Install GCC-4.3.0(GLIBCXX_3.4.10) or update version (optional)
 
-if you are using the RocksDB backend, be sure to execute the `gcc --version` command to check the gcc version; if you are using other backends, this is not required。
+if you are using the RocksDB backend, be sure to execute the `gcc --version` command to check the gcc version; if you are using other backends, this is not required.
 
 ```bash
 gcc --version
@@ -42,8 +42,8 @@ There are three ways to deploy HugeGraph-Server components:
 
 #### 3.1 One-click deployment
 
-HugeGraph-Tools provides a command-line tool for one-click deployment，users can use this tool to quickly download、decompress、 configure and start HugeGraphServer and HugeGraphStudio with one click。
-of course, you still have to download the tar package of HugeGraph-Tools first.。
+HugeGraph-Tools provides a command-line tool for one-click deployment，users can use this tool to quickly download、decompress、configure and start HugeGraphServer and HugeGraphStudio with one click.
+of course, you still have to download the tar package of HugeGraph-Tools first.
 
 ```bash
 wget https://github.com/hugegraph/hugegraph-tools/releases/download/v${version}/hugegraph-tools-${version}.tar.gz
@@ -53,15 +53,15 @@ cd hugegraph-tools-${version}
 
 > note：${version} is the version，The latest version can refer to [Download Page](/docs/download/download)，Or click the link to download directly from the Download page
 
-The general entry script for HugeGraph-Tools is `bin/hugegraph`，Users can use the `help` command to view its usage, here only the commands for one-click deployment are introduced。
+The general entry script for HugeGraph-Tools is `bin/hugegraph`，Users can use the `help` command to view its usage, here only the commands for one-click deployment are introduced.
 
 ```bash
 bin/hugegraph deploy -v {hugegraph-version} -p {install-path} [-u {download-path-prefix}]
 ```
 
-`{hugegraph-version}` indicates the version of HugeGraphServer and HugeGraphStudio to be deployed，users can view the `conf/version-mapping.yaml` file for version information，`{install-path}` specify the installation directory of HugeGraphServer and HugeGraphStudio，`{download-path-prefix}` optional，specify the download address of HugeGraphServer and HugeGraphStudio tar package，use default download URL if not provided，for example, to start HugeGraph-Server and HugeGraphStudio version 0.6, write the above command as `bin/hugegraph deploy -v 0.6 -p services`。
+`{hugegraph-version}` indicates the version of HugeGraphServer and HugeGraphStudio to be deployed，users can view the `conf/version-mapping.yaml` file for version information，`{install-path}` specify the installation directory of HugeGraphServer and HugeGraphStudio，`{download-path-prefix}` optional，specify the download address of HugeGraphServer and HugeGraphStudio tar package，use default download URL if not provided，for example, to start HugeGraph-Server and HugeGraphStudio version 0.6, write the above command as `bin/hugegraph deploy -v 0.6 -p services`.
 
-#### 3.2 Download the tar package
+#### 3.2 Download the tar tarball
 
 ```bash
 wget https://github.com/hugegraph/hugegraph/releases/download/v${version}/hugegraph-${version}.tar.gz
@@ -70,13 +70,13 @@ tar -zxvf hugegraph-${version}.tar.gz
 
 #### 3.3 Source code compilation
 
-download HugeGraph source code
+Download HugeGraph source code
 
 ```bash
 git clone https://github.com/hugegraph/hugegraph.git
 ```
 
-compile and package to generate tar package
+Compile and generate tarball
 
 ```bash
 cd hugegraph
@@ -106,37 +106,37 @@ The execution log is as follows:
 ......
 ```
 
-after successful execution，generate hugegraph-*.tar.gz files in the hugegraph directory, which is the tar package generated by compilation。
+After successful execution, hugegraph-*.tar.gz files will be generated in the hugegraph directory, which is the tarball generated by compilation.
 
 ### 4 Config
 
-if you need to quickly start HugeGraph just for testing, then you only need to modify a few configuration items (see next section)。
-for detailed configuration introduction, please refer to[configuration document](/docs/config/config-guide)及[introduction to configuration items](/docs/config/config-option)
+If you need to quickly start HugeGraph just for testing, then you only need to modify a few configuration items (see next section).
+for detailed configuration introduction, please refer to [configuration document](/docs/config/config-guide) and [introduction to configuration items](/docs/config/config-option)
 
 ### 5 Startup
 
-The startup is divided into "first startup" and "non-first startup". This distinction is because the back-end database needs to be initialized before the first startup, and then the service is started。
-after the service is stopped artificially, or when the service needs to be started again for other reasons, because the back-end database is persistent, you can start the service directly。
+The startup is divided into "first startup" and "non-first startup". This distinction is because the back-end database needs to be initialized before the first startup, and then the service is started.
+after the service is stopped artificially, or when the service needs to be started again for other reasons, because the backend database is persistent, you can start the service directly.
 
-When HugeGraphServer starts, it will connect to the backend storage and try to check the version number of the backend storage. If the backend is not initialized or the backend has been initialized but the version does not match (old version data), HugeGraphServer will fail to start and give an error message。
+When HugeGraphServer starts, it will connect to the backend storage and try to check the version number of the backend storage. If the backend is not initialized or the backend has been initialized but the version does not match (old version data), HugeGraphServer will fail to start and give an error message.
 
 If you need to access HugeGraphServer externally, please modify the `restserver.url` configuration item of `rest-server.properties`
-（default is `http://127.0.0.1:8080`），change to machine name or IP address。
+（default is `http://127.0.0.1:8080`），change to machine name or IP address.
 
-Since the configuration (hugegraph.properties) and startup steps required by various backends are slightly different, the following will introduce the configuration and startup of each backend one by one。
+Since the configuration (hugegraph.properties) and startup steps required by various backends are slightly different, the following will introduce the configuration and startup of each backend one by one.
 
 #### 5.1 Memory
 
-update hugegraph.properties
+Update hugegraph.properties
 
 ```properties
 backend=memory
 serializer=text
 ```
 
-> The data of the Memory backend is stored in memory and cannot be persisted. It does not need to initialize the backend. This is the only backend that does not require initialization。
+> The data of the Memory backend is stored in memory and cannot be persisted. It does not need to initialize the backend. This is the only backend that does not require initialization.
 
-start server
+Start server
 
 ```bash
 bin/start-hugegraph.sh
@@ -144,13 +144,13 @@ Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 ```
 
-the prompted url is the same as the restserver.url configured in rest-server.properties
+The prompted url is the same as the restserver.url configured in rest-server.properties
 
 #### 5.2 RocksDB
 
 > RocksDB is an embedded database that does not require manual installation and deployment. GCC version >= 4.3.0 (GLIBCXX_3.4.10) is required. If not, GCC needs to be upgraded in advance
 
-update hugegraph.properties
+Update hugegraph.properties
 
 ```properties
 backend=rocksdb
@@ -159,14 +159,14 @@ rocksdb.data_path=.
 rocksdb.wal_path=.
 ```
 
-initialize the database (required only on first startup)
+Initialize the database (required only on first startup)
 
 ```bash
 cd hugegraph-${version}
 bin/init-store.sh
 ```
 
-start server
+Start server
 
 ```bash
 bin/start-hugegraph.sh
@@ -178,7 +178,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 > users need to install Cassandra by themselves, requiring version 3.0 or above，[download link](http://cassandra.apache.org/download/)
 
-update hugegraph.properties
+Update hugegraph.properties
 
 ```properties
 backend=cassandra
@@ -196,7 +196,7 @@ cassandra.password=
 #cassandra.keyspace.replication=3
 ```
 
-initialize the database (required only on first startup)
+Initialize the database (required only on first startup)
 
 
 ```bash
@@ -221,7 +221,7 @@ Initing HugeGraph Store...
 2017-12-01 11:27:00 10413 [pool-3-thread-1] [INFO ] com.baidu.hugegraph.backend.Transaction [] - Clear cache on event 'store.init'
 ```
 
-start server
+Start server
 
 ```bash
 bin/start-hugegraph.sh
@@ -233,7 +233,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 > users need to install ScyllaDB by themselves, version 2.1 or above is recommended，[download link](https://docs.scylladb.com/getting-started/)
 
-update hugegraph.properties
+Update hugegraph.properties
 
 ```properties
 backend=scylladb
@@ -251,16 +251,16 @@ cassandra.password=
 #cassandra.keyspace.replication=3
 ```
 
-since the scylladb database itself is an "optimized version" based on cassandra, if the user does not have scylladb installed, they can also use cassandra as the backend storage directly. They only need to change the backend and serializer to scylladb, and the host and post point to the seeds and port of the cassandra cluster. Yes, but it is not recommended to do so, it will not take advantage of scylladb itself。
+Since the scylladb database itself is an "optimized version" based on cassandra, if the user does not have scylladb installed, they can also use cassandra as the backend storage directly. They only need to change the backend and serializer to scylladb, and the host and post point to the seeds and port of the cassandra cluster. Yes, but it is not recommended to do so, it will not take advantage of scylladb itself.
 
-initialize the database (required only on first startup)
+Initialize the database (required only on first startup)
 
 ```bash
 cd hugegraph-${version}
 bin/init-store.sh
 ```
 
-start server
+Start server
 
 ```bash
 bin/start-hugegraph.sh
@@ -272,7 +272,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 > users need to install HBase by themselves, requiring version 2.0 or above，[download link](https://hbase.apache.org/downloads.html)
 
-update hugegraph.properties
+Update hugegraph.properties
 
 ```properties
 backend=hbase
@@ -283,14 +283,14 @@ hbase.hosts=localhost
 hbase.port=2181
 ```
 
-initialize the database (required only on first startup)
+Initialize the database (required only on first startup)
 
 ```bash
 cd hugegraph-${version}
 bin/init-store.sh
 ```
 
-start server
+Start server
 
 ```bash
 bin/start-hugegraph.sh
@@ -304,7 +304,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 #### 6.1 Service startup status check
 
-use `jps` to see service process
+Use `jps` to see service process
 
 ```bash
 jps
@@ -317,7 +317,7 @@ jps
 echo `curl -o /dev/null -s -w %{http_code} "http://localhost:8080/graphs/hugegraph/graph/vertices"`
 ```
 
-return 200, which means the server starts normally.
+Return 200, which means the server starts normally.
 
 #### 6.2 Request Server
 
@@ -329,7 +329,7 @@ The RESTful API of HugeGraphServer includes various types of resources, typicall
 - `traverser` contains various advanced queries including shortest paths, intersections, N-step reachable neighbors, etc.
 - `task` contains query and delete with asynchronous tasks
 
-##### 6.2.1 Get vertices and related properties of `hugegraph`
+##### 6.2.1 Get vertices and its related properties in `hugegraph`
 
 ```bash
 curl http://localhost:8080/graphs/hugegraph/graph/vertices 
@@ -337,13 +337,13 @@ curl http://localhost:8080/graphs/hugegraph/graph/vertices
 
 _explanation_
 
-1. Since there are many points and edges in the graph, for list-type requests, such as getting all vertices, getting all edges, etc., the server will compress the data and return it，so when use curl, you get a bunch of garbled characters, you can redirect to gunzip for decompression。It is recommended to use Chrome browser + Restlet plugin to send HTTP requests for testing。
+1. Since there are many vertices and edges in the graph, for list-type requests, such as getting all vertices, getting all edges, etc., the server will compress the data and return it，so when use curl, you get a bunch of garbled characters, you can redirect to gunzip for decompression. It is recommended to use Chrome browser + Restlet plugin to send HTTP requests for testing.
 
     ```
     curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
     ```
 
-2. The current default configuration of HugeGraphServer can only be accessed locally, and the configuration can be modified so that it can be accessed on other machines。
+2. The current default configuration of HugeGraphServer can only be accessed locally, and the configuration can be modified so that it can be accessed on other machines.
 
     ```
     vim conf/rest-server.properties
@@ -405,7 +405,7 @@ response body：
 }
 ```
 
-for detailed API, please refer to[RESTful-API](/dcos/clients/restful-api)
+For detailed API, please refer to[RESTful-API](/dcos/clients/restful-api)
 
 ### 7 Stop Server
 
