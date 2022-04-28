@@ -37,13 +37,13 @@ gcc --version
 There are three ways to deploy HugeGraph-Server components:
 
 - Method 1: One-click deployment
-- Method 2: Download the tar package
+- Method 2: Download the tarball
 - Method 3: Source code compilation
 
 #### 3.1 One-click deployment
 
 HugeGraph-Tools provides a command-line tool for one-click deployment,users can use this tool to quickly download、decompress、configure and start HugeGraphServer and HugeGraphStudio with one click.
-of course, you still have to download the tar package of HugeGraph-Tools first.
+of course, you still have to download the tarball of HugeGraph-Tools first.
 
 ```bash
 wget https://github.com/hugegraph/hugegraph-tools/releases/download/v${version}/hugegraph-tools-${version}.tar.gz
@@ -59,7 +59,7 @@ The general entry script for HugeGraph-Tools is `bin/hugegraph`,Users can use th
 bin/hugegraph deploy -v {hugegraph-version} -p {install-path} [-u {download-path-prefix}]
 ```
 
-`{hugegraph-version}` indicates the version of HugeGraphServer and HugeGraphStudio to be deployed,users can view the `conf/version-mapping.yaml` file for version information,`{install-path}` specify the installation directory of HugeGraphServer and HugeGraphStudio,`{download-path-prefix}` optional,specify the download address of HugeGraphServer and HugeGraphStudio tar package,use default download URL if not provided,for example, to start HugeGraph-Server and HugeGraphStudio version 0.6, write the above command as `bin/hugegraph deploy -v 0.6 -p services`.
+`{hugegraph-version}` indicates the version of HugeGraphServer and HugeGraphStudio to be deployed,users can view the `conf/version-mapping.yaml` file for version information,`{install-path}` specify the installation directory of HugeGraphServer and HugeGraphStudio,`{download-path-prefix}` optional,specify the download address of HugeGraphServer and HugeGraphStudio tarball,use default download URL if not provided,for example, to start HugeGraph-Server and HugeGraphStudio version 0.6, write the above command as `bin/hugegraph deploy -v 0.6 -p services`.
 
 #### 3.2 Download the tar tarball
 
