@@ -16,7 +16,7 @@ The Core Module is an implementation of the Tinkerpop interface; The Backend mod
 
 #### 2.1 Install JDK-1.8
 
-HugeGraph-Server developed based on jdk-1.8,project's code uses many classes and methods in jdk-1.8, please install and configure by yourself.
+HugeGraph-Server developed based on jdk-1.8, project's code uses many classes and methods in jdk-1.8, please install and configure by yourself.
 
 **Be sure to execute the `java -version` command to check the jdk version before reading**
 
@@ -42,7 +42,7 @@ There are three ways to deploy HugeGraph-Server components:
 
 #### 3.1 One-click deployment
 
-HugeGraph-Tools provides a command-line tool for one-click deployment,users can use this tool to quickly download、decompress、configure and start HugeGraphServer and HugeGraphStudio with one click.
+HugeGraph-Tools provides a command-line tool for one-click deployment, users can use this tool to quickly download、decompress、configure and start HugeGraphServer and HugeGraphStudio with one click.
 of course, you still have to download the tarball of HugeGraph-Tools first.
 
 ```bash
@@ -51,15 +51,15 @@ tar -zxvf hugegraph-tools-${version}.tar.gz
 cd hugegraph-tools-${version}
 ```
 
-> note：${version} is the version,The latest version can refer to [Download Page](/docs/download/download),Or click the link to download directly from the Download page
+> note：${version} is the version, The latest version can refer to [Download Page](/docs/download/download), Or click the link to download directly from the Download page
 
-The general entry script for HugeGraph-Tools is `bin/hugegraph`,Users can use the `help` command to view its usage, here only the commands for one-click deployment are introduced.
+The general entry script for HugeGraph-Tools is `bin/hugegraph`, Users can use the `help` command to view its usage, here only the commands for one-click deployment are introduced.
 
 ```bash
 bin/hugegraph deploy -v {hugegraph-version} -p {install-path} [-u {download-path-prefix}]
 ```
 
-`{hugegraph-version}` indicates the version of HugeGraphServer and HugeGraphStudio to be deployed,users can view the `conf/version-mapping.yaml` file for version information,`{install-path}` specify the installation directory of HugeGraphServer and HugeGraphStudio,`{download-path-prefix}` optional,specify the download address of HugeGraphServer and HugeGraphStudio tarball,use default download URL if not provided,for example, to start HugeGraph-Server and HugeGraphStudio version 0.6, write the above command as `bin/hugegraph deploy -v 0.6 -p services`.
+`{hugegraph-version}` indicates the version of HugeGraphServer and HugeGraphStudio to be deployed, users can view the `conf/version-mapping.yaml` file for version information, `{install-path}` specify the installation directory of HugeGraphServer and HugeGraphStudio, `{download-path-prefix}` optional, specify the download address of HugeGraphServer and HugeGraphStudio tarball, use default download URL if not provided, for example, to start HugeGraph-Server and HugeGraphStudio version 0.6, write the above command as `bin/hugegraph deploy -v 0.6 -p services`.
 
 #### 3.2 Download the tar tarball
 
@@ -121,7 +121,7 @@ after the service is stopped artificially, or when the service needs to be start
 When HugeGraphServer starts, it will connect to the backend storage and try to check the version number of the backend storage. If the backend is not initialized or the backend has been initialized but the version does not match (old version data), HugeGraphServer will fail to start and give an error message.
 
 If you need to access HugeGraphServer externally, please modify the `restserver.url` configuration item of `rest-server.properties`
-（default is `http://127.0.0.1:8080`）,change to machine name or IP address.
+（default is `http://127.0.0.1:8080`）, change to machine name or IP address.
 
 Since the configuration (hugegraph.properties) and startup steps required by various backends are slightly different, the following will introduce the configuration and startup of each backend one by one.
 
@@ -176,7 +176,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 #### 5.3 Cassandra
 
-> users need to install Cassandra by themselves, requiring version 3.0 or above,[download link](http://cassandra.apache.org/download/)
+> users need to install Cassandra by themselves, requiring version 3.0 or above, [download link](http://cassandra.apache.org/download/)
 
 Update hugegraph.properties
 
@@ -231,7 +231,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 #### 5.4 ScyllaDB
 
-> users need to install ScyllaDB by themselves, version 2.1 or above is recommended,[download link](https://docs.scylladb.com/getting-started/)
+> users need to install ScyllaDB by themselves, version 2.1 or above is recommended, [download link](https://docs.scylladb.com/getting-started/)
 
 Update hugegraph.properties
 
@@ -321,7 +321,7 @@ Return 200, which means the server starts normally.
 
 #### 6.2 Request Server
 
-The RESTful API of HugeGraphServer includes various types of resources, typically including graph, schema, gremlin, traverser and task,
+The RESTful API of HugeGraphServer includes various types of resources, typically including graph, schema, gremlin, traverser and task.
 
 - `graph` contains `vertices`、`edges`
 - `schema`  contains `vertexlabels`、 `propertykeys`、 `edgelabels`、`indexlabels`
@@ -337,7 +337,7 @@ curl http://localhost:8080/graphs/hugegraph/graph/vertices
 
 _explanation_
 
-1. Since there are many vertices and edges in the graph, for list-type requests, such as getting all vertices, getting all edges, etc., the server will compress the data and return it,so when use curl, you get a bunch of garbled characters, you can redirect to gunzip for decompression. It is recommended to use Chrome browser + Restlet plugin to send HTTP requests for testing.
+1. Since there are many vertices and edges in the graph, for list-type requests, such as getting all vertices, getting all edges, etc., the server will compress the data and return it, so when use curl, you get a bunch of garbled characters, you can redirect to gunzip for decompression. It is recommended to use Chrome browser + Restlet plugin to send HTTP requests for testing.
 
     ```
     curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
