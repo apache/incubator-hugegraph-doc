@@ -340,9 +340,9 @@ public class BatchExample {
 
 ### 4.4 Run The Example
 
-Before running Example, you need to start the Server. For the startup process, see[HugeGraph-Server Quick Start](/docs/quickstart/hugegraph-server)
+Before running Example, you need to start the Server. For the startup process, see[HugeGraph-Server Quick Start](/docs/quickstart/hugegraph-server).
 
 ### 4.5 More Information About Example
 
-See[Introduce basic api of HugeGraph-Client](/docs/clients/hugegraph-client)
+See[Introduce basic API of HugeGraph-Client](/docs/clients/hugegraph-client).
 
