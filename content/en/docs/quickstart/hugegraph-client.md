@@ -4,37 +4,35 @@ linkTitle: "Develop with HugeGraph-Client"
 weight: 6
 ---
 
-### 1 HugeGraph-Client概述
+### 1 Overview Of Hugegraph
 
-HugeGraph-Client向HugeGraph-Server发出HTTP请求，获取并解析Server的执行结果。目前仅提供了Java版，用户可以使用HugeGraph-Client编写Java代码操作HugeGraph，比如元数据和图数据的增删改查，或者执行gremlin语句。
+HugeGraph-Client sends HTTP request to HugeGraph-Server to obtain and parse the execution result of Server. Currently only the HugeGraph-Client for Java is provided. You can use HugeGraph-Client to write Java code to operate HugeGraph, such as adding, deleting, modifying, and querying schema and graph data, or executing gremlin statements.
 
-### 2 环境要求
+### 2 What You Need
 
-- jdk1.8
-- maven-3.3.9
+- JDK1.8
+- Maven-3.3.9
 
-### 3 使用流程
+### 3 How To Use
 
-使用HugeGraph-Client的基本步骤如下:
+The basic steps to use HugeGraph-Client are as follows:
 
-- 新建Eclipse/ IDEA Maven项目；
-- 在pom文件中添加HugeGraph-Client依赖；
-- 创建类，调用HugeGraph-Client接口；
+- Build a new Maven project by IDEA or Eclipse
+- Add HugeGraph-Client dependency in pom file;
+- Create a object to invoke the interface of HugeGraph-Client
 
-详细使用过程见下节完整示例。
+See the complete example in the following section for the detail.
 
-### 4 完整示例
+### 4 Complete Example 
 
-#### 4.1 新建Maven工程
+#### 4.1 Build New Maven Project
 
-可以选择Eclipse或者Intellij Idea创建工程：
+Using IDEA or Eclipse to create the project:
 
-- [Eclipse新建Maven工程](http://www.vogella.com/tutorials/EclipseMaven/article.html)
-- [Intellij Idea 创建maven工程](https://vaadin.com/docs/-/part/framework/getting-started/getting-started-idea.html)
+- [Build by Eclipse](http://www.vogella.com/tutorials/EclipseMaven/article.html)
+- [Build by Intellij Idea](https://vaadin.com/docs/-/part/framework/getting-started/getting-started-idea.html)
 
-#### 4.2 添加hugegraph-client依赖
-
-添加hugegraph-client依赖
+#### 4.2 Add Hugegraph-Client Dependency In POM
 
 ```xml
 <dependencies>
@@ -340,11 +338,11 @@ public class BatchExample {
 }
 ```
 
-### 4.4 运行Example
+### 4.4 Run The Example
 
-运行Example之前需要启动Server, 启动过程见[HugeGraph-Server Quick Start](/docs/quickstart/hugegraph-server)
+Before running Example, you need to start the Server. For the startup process, see[HugeGraph-Server Quick Start](/docs/quickstart/hugegraph-server).
 
-### 4.5 Example示例说明
+### 4.5 More Information About Example
 
-示例说明见[HugeGraph-Client基本API介绍](/docs/clients/hugegraph-client)
+See[Introduce basic API of HugeGraph-Client](/docs/clients/hugegraph-client).
 
