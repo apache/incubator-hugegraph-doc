@@ -8,7 +8,8 @@ weight: 1
 
 HugeGraph is an easy-to-use, efficient, general-purpose open source graph database system(Graph Database, [GitHub project address](https://github.com/hugegraph/hugegraph)),
 implemented the [Apache TinkerPop3](https://tinkerpop.apache.org) framework and is fully compatible with the [Gremlin](https://tinkerpop.apache.org/gremlin.html) query language,
-With complete toolchain components, it helps users to easily build applications and products based on graph databases. HugeGraph supports fast import of more than 10 billion vertices and edges, and provides millisecond-level relational query capability (OLTP). It can be integrated with big data platforms such as Hadoop and Spark for offline analysis (OLAP).
+With complete toolchain components, it helps users to easily build applications and products based on graph databases. HugeGraph supports fast import of more than 10 billion vertices and edges, and provides millisecond-level relational query capability (OLTP). 
+It can be integrated with big data platforms such as Hadoop and Spark for offline analysis (OLAP).
 
 Typical application scenarios of HugeGraph include deep relationship exploration, association analysis, path search, feature extraction, data clustering, community detection, knowledge graph, etc., and are applicable to business fields such as network security, telecommunication fraud, financial risk control, advertising recommendation, social network and intelligence Robots etc.
 
@@ -54,7 +55,9 @@ The functions of this system include but are not limited to:
 - [HugeGraph-Tools](/docs/quickstart/hugegraph-tools): HugeGraph-Tools is HugeGraph's deployment and management tools, including functions such as managing graphs, backup/restore, Gremlin execution, etc.
 
 ### Contact Us
-
-- [Github Issues](https://github.com/apache/incubator-hugegraph/issues): Feedback on usage issues and functional requirements (priority)
+- Project sponsor: Liu Jie
+- Project leader: Han Zuli
+- Technical person in charge: [Li Zhangmei](https://github.com/javeme)
+- Interface person: [Zhang Yi](https://github.com/zhoney), [Li Ningrui](https://github.com/Linary)
 - Feedback Email: [hugegraph@googlegroups.com](mailto:hugegraph@googlegroups.com)
 - WeChat public account: HugeGraph
