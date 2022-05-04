@@ -17,7 +17,7 @@ $td-enable-google-fonts: true !default;
 
 // Theme colors
 
-$primary: #30638E !default;
+$primary: #502ec5 !default;
 $primary-light: lighten($primary, 75%) !default;
 $secondary: #FFA630 !default;
 $success: #3772FF !default;
@@ -28,7 +28,9 @@ $white: #fff !default;
 $light: #D3F3EE !default;
 
 $dark: #403F4C !default;
+$blue-light: #1dd9ff !default;
 $blue: #72A1E5 !default;
+$blue-deep: #26a3ff !default;
 $orange: #BA5A31 !default;
 $gray-100: #f8f9fa !default;
 $gray-200: #eee !default;

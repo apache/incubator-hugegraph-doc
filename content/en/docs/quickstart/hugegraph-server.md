@@ -4,46 +4,46 @@ linkTitle: "Install HugeGraph-Server"
 weight: 1
 ---
 
-### 1 HugeGraph-Server概述
+### 1 HugeGraph-Server Overview
 
-HugeGraph-Server 是 HugeGraph 项目的核心部分，包含Core、Backend、API等子模块。
+HugeGraph-Server is the core part of the HugeGraph Project, contains submodules such as Core、Backend、API.
 
-Core模块是Tinkerpop接口的实现，Backend模块用于管理数据存储，目前支持的后端包括：Memory、Cassandra、ScyllaDB以及RocksDB，API模块提供HTTP Server，将Client的HTTP请求转化为对Core的调用。
+The Core Module is an implementation of the Tinkerpop interface; The Backend module is used to save the graph data to the data store, currently supported backends include：Memory、Cassandra、ScyllaDB、RocksDB; The API Module provides HTTP Server, which converts Client's HTTP request into a call to Core Moudle.
 
-> 文档中会大量出现`HugeGraph-Server`及`HugeGraphServer`这两种写法，其他组件也类似。这两种写法含义上并无大的差异，可以这么区分：`HugeGraph-Server`表示服务端相关组件代码，`HugeGraphServer`表示服务进程。
+> There will be two spellings HugeGraph-Server and HugeGraphServer in the document, and other modules are similar. There is no big difference in the meaning of these two ways of writing, which can be distinguished as follows: `HugeGraph-Server` represents the code of server-related components, `HugeGraphServer` represents the service process.
 
-### 2 依赖
+### 2 Dependency
 
-#### 2.1 安装JDK-1.8
+#### 2.1 Install JDK-1.8
 
-HugeGraph-Server 基于jdk-1.8开发，代码用到了较多jdk-1.8中的类和方法，请用户自行安装配置。
+HugeGraph-Server developed based on jdk-1.8, project's code uses many classes and methods in jdk-1.8, please install and configure by yourself.
 
-**在往下阅读之前务必执行`java -version`命令查看jdk版本**
+**Be sure to execute the `java -version` command to check the jdk version before reading**
 
 ```bash
 java -version
 ```
 
-#### 2.2 安装GCC-4.3.0(GLIBCXX_3.4.10)或更新版本（可选）
+#### 2.2 Install GCC-4.3.0(GLIBCXX_3.4.10) or update version (optional)
 
-如果使用的是RocksDB后端，请务必执行`gcc --version`命令查看gcc版本；若使用其他后端，则不需要。
+If you are using the RocksDB backend, be sure to execute the `gcc --version` command to check the gcc version; if you are using other backends, this is not required.
 
 ```bash
 gcc --version
 ```
 
-### 3 部署
+### 3 Deploy
 
-有三种方式可以部署HugeGraph-Server组件：
+There are three ways to deploy HugeGraph-Server components:
 
-- 方式1：一键部署
-- 方式2：下载tar包
-- 方式3：源码编译
+- Method 1: One-click deployment
+- Method 2: Download the tarball
+- Method 3: Source code compilation
 
-#### 3.1 一键部署
+#### 3.1 One-click deployment
 
-HugeGraph-Tools提供了一键部署的命令行工具，用户可以使用该工具快速地一键下载、解压、配置并启动HugeGraphServer和HugeGraphStudio。
-当然，还是得先下载HugeGraph-Tools的tar包。
+HugeGraph-Tools provides a command-line tool for one-click deployment, users can use this tool to quickly download、decompress、configure and start HugeGraphServer and HugeGraphStudio with one click.
+of course, you still have to download the tarball of HugeGraph-Tools first.
 
 ```bash
 wget https://github.com/hugegraph/hugegraph-tools/releases/download/v${version}/hugegraph-tools-${version}.tar.gz
@@ -51,39 +51,39 @@ tar -zxvf hugegraph-tools-${version}.tar.gz
 cd hugegraph-tools-${version}
 ```
 
-> 注：${version}为版本号，最新版本号可参考[Download页面](/docs/download/download)，或直接从Download页面点击链接下载
+> note：${version} is the version, The latest version can refer to [Download Page](/docs/download/download), Or click the link to download directly from the Download page
 
-HugeGraph-Tools 的总入口脚本是`bin/hugegraph`，用户可以使用`help`子命令查看其用法，这里只介绍一键部署的命令。
+The general entry script for HugeGraph-Tools is `bin/hugegraph`, Users can use the `help` command to view its usage, here only the commands for one-click deployment are introduced.
 
 ```bash
 bin/hugegraph deploy -v {hugegraph-version} -p {install-path} [-u {download-path-prefix}]
 ```
 
-`{hugegraph-version}`表示要部署的HugeGraphServer及HugeGraphStudio的版本，用户可查看`conf/version-mapping.yaml`文件获取版本信息，`{install-path}`指定HugeGraphServer及HugeGraphStudio的安装目录，`{download-path-prefix}`可选，指定HugeGraphServer及HugeGraphStudio tar包的下载地址，不提供时使用默认下载地址，比如要启动 0.6 版本的HugeGraph-Server及HugeGraphStudio将上述命令写为`bin/hugegraph deploy -v 0.6 -p services`即可。
+`{hugegraph-version}` indicates the version of HugeGraphServer and HugeGraphStudio to be deployed, users can view the `conf/version-mapping.yaml` file for version information, `{install-path}` specify the installation directory of HugeGraphServer and HugeGraphStudio, `{download-path-prefix}` optional, specify the download address of HugeGraphServer and HugeGraphStudio tarball, use default download URL if not provided, for example, to start HugeGraph-Server and HugeGraphStudio version 0.6, write the above command as `bin/hugegraph deploy -v 0.6 -p services`.
 
-#### 3.2 下载tar包
+#### 3.2 Download the tar tarball
 
 ```bash
 wget https://github.com/hugegraph/hugegraph/releases/download/v${version}/hugegraph-${version}.tar.gz
 tar -zxvf hugegraph-${version}.tar.gz
 ```
 
-#### 3.3 源码编译
+#### 3.3 Source code compilation
 
-下载HugeGraph源代码
+Download HugeGraph source code
 
 ```bash
 git clone https://github.com/hugegraph/hugegraph.git
 ```
 
-编译打包生成tar包
+Compile and generate tarball
 
 ```bash
 cd hugegraph
 mvn package -DskipTests
 ```
 
-执行日志如下：
+The execution log is as follows:
 
 ```bash
 ......
@@ -106,37 +106,37 @@ mvn package -DskipTests
 ......
 ```
 
-执行成功后，在hugegraph目录下生成 hugegraph-*.tar.gz 文件，就是编译生成的tar包。
+After successful execution, hugegraph-*.tar.gz files will be generated in the hugegraph directory, which is the tarball generated by compilation.
 
-### 4 配置
+### 4 Config
 
-如果需要快速启动HugeGraph仅用于测试，那么只需要进行少数几个配置项的修改即可（见下一节）。
-详细的配置介绍请参考[配置文档](/docs/config/config-guide)及[配置项介绍](/docs/config/config-option)
+If you need to quickly start HugeGraph just for testing, then you only need to modify a few configuration items (see next section).
+for detailed configuration introduction, please refer to [configuration document](/docs/config/config-guide) and [introduction to configuration items](/docs/config/config-option)
 
-### 5 启动
+### 5 Startup
 
-启动分为"首次启动"和"非首次启动"，这么区分是因为在第一次启动前需要初始化后端数据库，然后启动服务。
-而在人为停掉服务后，或者其他原因需要再次启动服务时，因为后端数据库是持久化存在的，直接启动服务即可。
+The startup is divided into "first startup" and "non-first startup". This distinction is because the back-end database needs to be initialized before the first startup, and then the service is started.
+after the service is stopped artificially, or when the service needs to be started again for other reasons, because the backend database is persistent, you can start the service directly.
 
-HugeGraphServer启动时会连接后端存储并尝试检查后端存储版本号，如果未初始化后端或者后端已初始化但版本不匹配时（旧版本数据），HugeGraphServer会启动失败，并给出错误信息。
+When HugeGraphServer starts, it will connect to the backend storage and try to check the version number of the backend storage. If the backend is not initialized or the backend has been initialized but the version does not match (old version data), HugeGraphServer will fail to start and give an error message.
 
-如果需要外部访问HugeGraphServer，请修改`rest-server.properties`的`restserver.url`配置项
-（默认为`http://127.0.0.1:8080`），修改成机器名或IP地址。
+If you need to access HugeGraphServer externally, please modify the `restserver.url` configuration item of `rest-server.properties`
+（default is `http://127.0.0.1:8080`）, change to machine name or IP address.
 
-由于各种后端所需的配置（hugegraph.properties）及启动步骤略有不同，下面逐一对各后端的配置及启动做介绍。
+Since the configuration (hugegraph.properties) and startup steps required by various backends are slightly different, the following will introduce the configuration and startup of each backend one by one.
 
 #### 5.1 Memory
 
-修改 hugegraph.properties
+Update hugegraph.properties
 
 ```properties
 backend=memory
 serializer=text
 ```
 
-> Memory后端的数据是保存在内存中无法持久化的，不需要初始化后端，这也是唯一一个不需要初始化的后端。
+> The data of the Memory backend is stored in memory and cannot be persisted. It does not need to initialize the backend. This is the only backend that does not require initialization.
 
-启动 server
+Start server
 
 ```bash
 bin/start-hugegraph.sh
@@ -144,13 +144,13 @@ Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 ```
 
-提示的 url 与 rest-server.properties 中配置的 restserver.url 一致
+The prompted url is the same as the restserver.url configured in rest-server.properties
 
 #### 5.2 RocksDB
 
-> RocksDB是一个嵌入式的数据库，不需要手动安装部署, 要求 GCC 版本 >= 4.3.0（GLIBCXX_3.4.10），如不满足，需要提前升级 GCC
+> RocksDB is an embedded database that does not require manual installation and deployment. GCC version >= 4.3.0 (GLIBCXX_3.4.10) is required. If not, GCC needs to be upgraded in advance
 
-修改 hugegraph.properties
+Update hugegraph.properties
 
 ```properties
 backend=rocksdb
@@ -159,14 +159,14 @@ rocksdb.data_path=.
 rocksdb.wal_path=.
 ```
 
-初始化数据库（仅第一次启动时需要）
+Initialize the database (required only on first startup)
 
 ```bash
 cd hugegraph-${version}
 bin/init-store.sh
 ```
 
-启动server
+Start server
 
 ```bash
 bin/start-hugegraph.sh
@@ -176,9 +176,9 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 #### 5.3 Cassandra
 
-> 用户需自行安装 Cassandra，要求版本 3.0 以上，[下载地址](http://cassandra.apache.org/download/)
+> users need to install Cassandra by themselves, requiring version 3.0 or above, [download link](http://cassandra.apache.org/download/)
 
-修改 hugegraph.properties
+Update hugegraph.properties
 
 ```properties
 backend=cassandra
@@ -196,7 +196,8 @@ cassandra.password=
 #cassandra.keyspace.replication=3
 ```
 
-初始化数据库（仅第一次启动时需要）
+Initialize the database (required only on first startup)
+
 
 ```bash
 cd hugegraph-${version}
@@ -220,7 +221,7 @@ Initing HugeGraph Store...
 2017-12-01 11:27:00 10413 [pool-3-thread-1] [INFO ] com.baidu.hugegraph.backend.Transaction [] - Clear cache on event 'store.init'
 ```
 
-启动server
+Start server
 
 ```bash
 bin/start-hugegraph.sh
@@ -230,9 +231,9 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 #### 5.4 ScyllaDB
 
-> 用户需自行安装 ScyllaDB，推荐版本 2.1 以上，[下载地址](https://docs.scylladb.com/getting-started/)
+> users need to install ScyllaDB by themselves, version 2.1 or above is recommended, [download link](https://docs.scylladb.com/getting-started/)
 
-修改 hugegraph.properties
+Update hugegraph.properties
 
 ```properties
 backend=scylladb
@@ -250,16 +251,16 @@ cassandra.password=
 #cassandra.keyspace.replication=3
 ```
 
-由于 scylladb 数据库本身就是基于 cassandra 的"优化版"，如果用户未安装 scylladb ，也可以直接使用 cassandra 作为后端存储，只需要把 backend 和 serializer 修改为 scylladb，host 和 post 指向 cassandra 集群的 seeds 和 port 即可，但是并不建议这样做，这样发挥不出 scylladb 本身的优势了。
+Since the scylladb database itself is an "optimized version" based on cassandra, if the user does not have scylladb installed, they can also use cassandra as the backend storage directly. They only need to change the backend and serializer to scylladb, and the host and post point to the seeds and port of the cassandra cluster. Yes, but it is not recommended to do so, it will not take advantage of scylladb itself.
 
-初始化数据库（仅第一次启动时需要）
+Initialize the database (required only on first startup)
 
 ```bash
 cd hugegraph-${version}
 bin/init-store.sh
 ```
 
-启动server
+Start server
 
 ```bash
 bin/start-hugegraph.sh
@@ -269,9 +270,9 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 #### 5.5 HBase
 
-> 用户需自行安装 HBase，要求版本 2.0 以上，[下载地址](https://hbase.apache.org/downloads.html)
+> users need to install HBase by themselves, requiring version 2.0 or above,[download link](https://hbase.apache.org/downloads.html)
 
-修改 hugegraph.properties
+Update hugegraph.properties
 
 ```properties
 backend=hbase
@@ -282,14 +283,14 @@ hbase.hosts=localhost
 hbase.port=2181
 ```
 
-初始化数据库（仅第一次启动时需要）
+Initialize the database (required only on first startup)
 
 ```bash
 cd hugegraph-${version}
 bin/init-store.sh
 ```
 
-启动server
+Start server
 
 ```bash
 bin/start-hugegraph.sh
@@ -297,53 +298,52 @@ Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 ```
 
-> 更多其它后端配置可参考[配置项介绍](/docs/config/config-option)
+> for more other backend configurations, please refer to[introduction to configuration items](/docs/config/config-option)
 
-### 6 访问Server
+### 6 Access server
 
-#### 6.1 服务启动状态校验
+#### 6.1 Service startup status check
 
-`jps`查看服务进程
+Use `jps` to see service process
 
 ```bash
 jps
 6475 HugeGraphServer
 ```
 
-`curl`请求`RESTfulAPI`
+`curl` request `RESTfulAPI`
 
 ```bash
 echo `curl -o /dev/null -s -w %{http_code} "http://localhost:8080/graphs/hugegraph/graph/vertices"`
 ```
 
-返回结果200，代表server启动正常
+Return 200, which means the server starts normally.
 
-#### 6.2 请求Server
+#### 6.2 Request Server
 
-HugeGraphServer的RESTful API包括多种类型的资源，典型的包括graph、schema、gremlin、traverser和task，
+The RESTful API of HugeGraphServer includes various types of resources, typically including graph, schema, gremlin, traverser and task.
 
-- `graph`包含`vertices`、`edges`
-- `schema` 包含`vertexlabels`、 `propertykeys`、 `edgelabels`、`indexlabels`
-- `gremlin`包含各种`Gremlin`语句，如`g.v()`，可以同步或者异步执行
-- `traverser`包含各种高级查询，包括最短路径、交叉点、N步可达邻居等
-- `task`包含异步任务的查询和删除
+- `graph` contains `vertices`、`edges`
+- `schema`  contains `vertexlabels`、 `propertykeys`、 `edgelabels`、`indexlabels`
+- `gremlin` contains various `Gremlin` statements, such as `g.v()`, which can be executed synchronously or asynchronously
+- `traverser` contains various advanced queries including shortest paths, intersections, N-step reachable neighbors, etc.
+- `task` contains query and delete with asynchronous tasks
 
-##### 6.2.1 获取`hugegraph`的顶点及相关属性
+##### 6.2.1 Get vertices and its related properties in `hugegraph`
 
 ```bash
 curl http://localhost:8080/graphs/hugegraph/graph/vertices 
 ```
 
-_说明_
+_explanation_
 
-1. 由于图的点和边很多，对于 list 型的请求，比如获取所有顶点，获取所有边等，Server 会将数据压缩再返回，
-所以使用 curl 时得到一堆乱码，可以重定向至 gunzip 进行解压。推荐使用 Chrome 浏览器 + Restlet 插件发送 HTTP 请求进行测试。
+1. Since there are many vertices and edges in the graph, for list-type requests, such as getting all vertices, getting all edges, etc., the server will compress the data and return it, so when use curl, you get a bunch of garbled characters, you can redirect to gunzip for decompression. It is recommended to use Chrome browser + Restlet plugin to send HTTP requests for testing.
 
     ```
     curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
     ```
 
-2. 当前HugeGraphServer的默认配置只能是本机访问，可以修改配置，使其能在其他机器访问。
+2. The current default configuration of HugeGraphServer can only be accessed locally, and the configuration can be modified so that it can be accessed on other machines.
 
     ```
     vim conf/rest-server.properties
@@ -351,7 +351,7 @@ _说明_
     restserver.url=http://0.0.0.0:8080
     ```
 
-响应体如下：
+response body：
 
 ```json
 {
@@ -405,9 +405,9 @@ _说明_
 }
 ```
 
-详细的API请参考[RESTful-API](/dcos/clients/restful-api)文档
+For detailed API, please refer to[RESTful-API](/dcos/clients/restful-api)
 
-### 7 停止Server
+### 7 Stop Server
 
 ```bash
 $cd hugegraph-${version}
