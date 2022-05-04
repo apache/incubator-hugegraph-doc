@@ -55,9 +55,6 @@ The functions of this system include but are not limited to:
 - [HugeGraph-Tools](/docs/quickstart/hugegraph-tools): HugeGraph-Tools is HugeGraph's deployment and management tools, including functions such as managing graphs, backup/restore, Gremlin execution, etc.
 
 ### Contact Us
-- Project sponsor: Liu Jie
-- Project leader: Han Zuli
-- Technical person in charge: [Li Zhangmei](https://github.com/javeme)
-- Interface person: [Zhang Yi](https://github.com/zhoney), [Li Ningrui](https://github.com/Linary)
+- [Github Issues](https://github.com/apache/incubator-hugegraph/issues): Feedback on usage issues and functional requirements (priority)
 - Feedback Email: [hugegraph@googlegroups.com](mailto:hugegraph@googlegroups.com)
 - WeChat public account: HugeGraph
