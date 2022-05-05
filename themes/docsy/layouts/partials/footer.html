@@ -3,16 +3,27 @@
   <div class="container">
     <div class="row">
       {{ if .Site.Params.ui.footer_logo }}
-      <div class="col-3">
-          <a href="https://www.apache.org">
-            <div class="footer-apache-logo">
-              {{ with resources.Get "icons/apache_logo.svg" }}{{ ( . | minify).Content | safeHTML }}{{ end }}{{ end }}
-            </div>
-          </a>
+      <div class="col-6">
+          <div class="footer-row">
+            <a href="https://www.apache.org">
+              <div class="footer-apache-logo">
+                {{ with resources.Get "icons/apache_logo.svg" }}{{ ( . | minify).Content | safeHTML }}{{ end }}{{ end }}
+              </div>
+            </a>
+            <ul class="footer-link">
+              <li><a class="white" href="http://www.apache.org">Foundation</a></li>
+              <li><a class="white" href="http://www.apache.org/licenses/">License</a></li>
+              <li><a class="white" href="https://www.apache.org/security/">Security</a></li>
+              <li><a class="white" href="http://www.apache.org/events/current-event">Events</a></li>
+              <li><a class="white" href="http://www.apache.org/foundation/sponsorship.html">Sponsorship</a></li>
+              <li><a class="white" href="http://www.apache.org/foundation/thanks.html">Thanks</a></li>
+            </ul>
+          </div>
       </div>
-      <div class="col-9 text-white text-center container-center">
-        <p>Copyright &copy; {{ now.Year}} The Apache Software Foundation, Licensed under the <a class="white" href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.</p>
-        <p>Apache and the Apache feather logo are trademarks of The Apache Software Foundation. </p>
+      <div class="col-6 text-white text-center container-center">
+        <p>Copyright &copy; {{ now.Year}} The Apache Software Foundation, Licensed under</p>
+        <p>the <a class="white" href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a> .Apache and the Apache feather</p>
+        <p>logo are trademarks of The Apache Software Foundation. </p>
       </div>
     </div>
   </div>
