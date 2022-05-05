@@ -353,32 +353,23 @@ interface            | param | description
 -------------------- | ----- | ---------------------------------------------------------
 by(String... fields) | files | allow to build index for multi fields for secondary index
 
-- indexType: 建立的索引类型，目前支持五种，即 Secondary、Range、Search、Shard 和 Unique。
-    - Secondary 支持精确匹配的二级索引，允许建立联合索引，联合索引支持索引前缀搜索
-        - 单个属性，支持相等查询，比如：person顶点的city属性的二级索引，可以用`g.V().has("city", "北京")
-        `查询"city属性值是北京"的全部顶点
-        - 联合索引，支持前缀查询和相等查询，比如：person顶点的city和street属性的联合索引，可以用`g.V().has
-        ("city", "北京").has('street', '中关村街道')
-        `查询"city属性值是北京且street属性值是中关村"的全部顶点，或者`g.V()
-        .has("city", "北京")`查询"city属性值是北京"的全部顶点
-        > secondary index的查询都是基于"是"或者"相等"的查询条件，不支持"部分匹配"
-    - Range 支持数值类型的范围查询
-        - 必须是单个数字或者日期属性，比如：person顶点的age属性的范围索引，可以用`g.V().has("age", P.gt(18))
-        `查询"age属性值大于18"的顶点。除了`P.gt()`以外，还支持`P.gte()`, `P.lte()`, `P.lt()`,
-        `P.eq()`, `P.between()`, `P.inside()`和`P.outside()`等
-    - Search 支持全文检索的索引
-        - 必须是单个文本属性，比如：person顶点的address属性的全文索引，可以用`g.V().has("address", Text
-        .contains('大厦')`查询"address属性中包含大厦"的全部顶点
-        > search index的查询是基于"是"或者"包含"的查询条件
-    - Shard 支持前缀匹配 + 数字范围查询的索引
-        - N个属性的分片索引，支持前缀相等情况下的范围查询，比如：person顶点的city和age属性的分片索引，可以用`g.V().has
-        ("city", "北京").has("age", P.between(18, 30))
-        `查询"city属性是北京且年龄大于等于18小于30"的全部顶点
-        - shard index N个属性全是文本属性时，等价于secondary index
-        - shard index只有单个数字或者日期属性时，等价于range index
-        > shard index可以有任意数字或者日期属性，但是查询时最多只能提供一个范围查找条件，且该范围查找条件的属性的前缀属性都是相等查询条件
-    - Unique 支持属性值唯一性约束，即可以限定属性的值不重复，允许联合索引，但不支持查询
-        - 单个或者多个属性的唯一性索引，不可用来查询，只可对属性的值进行限定，当出现重复值时将报错
+- indexType: There are currently five types of indexes established, namely Secondary, Range, Search, Shard and Unique.
+    - Secondary Index supports exact matching secondary index, allow to build joint index, joint index supports index prefix search
+        - Single Property Secondary Index, support equality query, for example: the secondary index of the city property of the person vertex, you can use `g.V().has("city", "Beijing")` to query all the vertices with "city attribute value is Beijing"
+        - Joint Secondary Index, supports prefix query and equality query, such as: joint index of city and street properties of person vertex, you can use `g.V().has("city", "Beijing").has('street', 'Zhongguancun street ')` to query all vertices of "city property value is Beijing and street property value is Zhongguancun", or `g.V().has("city", "Beijing")` to query all vertices of "city property value is Beijing".
+        > The query of Secondary Index is based on the query condition of "yes" or "equal", and does not support "partial matching".
+    - Range Index supports for range queries of numeric types
+        - Must be a single number or date attribute, for example: the range index of the age property of the person vertex, you can use `g.V().has("age", P.gt(18))` to query the vertices with "age property value greater than 18" . In addition to `P.gt()`, also supports `P.gte()`, `P.lte()`, `P.lt()`, `P.eq()`, `P.between() `, `P.inside()` and `P.outside()` etc.
+    - Search Index supports full-text search
+        - It must be a single text property, such as: full-text index of the address property of the person vertex, you can use `g.V().has("address", Text.contains('building')` to query all vertices whose "address property contains a 'building'"
+        > The query of the Search Index is based on the query condition of "is" or "contains".
+    - Shard Index supports prefix matching + numeric range query
+        - The shard index of N properties supports range queries with equal prefixes. For example, the shard index of the city and age properties of the person vertex can use `g.V().has("city", "Beijing").has ("age", P.between(18, 30))`Query "city property is Beijing and all vertices whose age is greater than or equal to 18 and less than 30".
+        - When all N properties are text properties in a Shard Index, it is equivalent to Secondary Index.
+        - When there is only one single number or date property in a Shard Index, it is equivalent to the Range Index.
+        > Shard Index can have any number or date property, but at most one range search condition can be provided when querying, and the prefix properties of the Shard Search conditions must be "equals".
+    - Unique Index supports properties uniqueness constraints, that is, the value of properties can be limited to not repeat, and joint indexing is allowed, but querying is not supported now
+        - The unique index of single or multiple properties cannot be used for query, only the value of the property can be limited, and an error will be reported when there is a duplicate value.
 
 interface   | indexType | description
 ----------- | --------- | ---------------------------------------
