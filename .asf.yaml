@@ -25,27 +25,33 @@ github:
     projects: true
   description: HugeGraph Website and Doc
   homepage: https://apache.github.io/incubator-hugegraph-doc/
+  labels:
+    - hugegraph
+    - website
+    - hugo
+    - apache
+
   del_branch_on_merge: true
   # GitHug-Page
   ghp_branch: gh-pages
   #ghp_path: /docs
-  #labels:
   
-  # This config used for test website before release
+  # This config used for test website before release, the branch name is fixed
   staging:
     profile: ~
-    whoami: website
+    whoami: asf-staging
 
   # Release website config
   publish:
-    whoami: gh-pages
+    whoami: asf-site
 
   enabled_merge_buttons:
     merge:  false
     squash: true
     rebase: true
+
   protected_branches:
-    master:
+    main:
       required_status_checks:
         # strict means "Require branches to be up to date before merging".
         strict: true
