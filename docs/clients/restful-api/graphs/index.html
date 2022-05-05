@@ -4,8 +4,6 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="generator" content="Hugo 0.95.0" />
-<link rel="alternate" type="text/html" href="/docs/_print/">
-<link rel="alternate" type="application/rss&#43;xml" href="/docs/index.xml">
 <meta name="robots" content="index, follow">
 
 
@@ -20,18 +18,33 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>Documentation | HugeGraph</title>
-<meta name="description" content="Welcome to HugeGraph docs
-">
-<meta property="og:title" content="Documentation" />
-<meta property="og:description" content="Apache HugeGraph site" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="/docs/" /><meta property="og:site_name" content="HugeGraph" />
+<title>Graphs API | HugeGraph</title>
+<meta name="description" content="6.1 Graphs
+6.1.1 列出数据库中全部的图
+Method &amp; Url
+GET http://localhost:8080/graphs
+Response Status
+200
+Response Body
+{
+    &#34;graphs&#34;: [ …">
+<meta property="og:title" content="Graphs API" />
+<meta property="og:description" content="6.1 Graphs 6.1.1 列出数据库中全部的图 Method &amp; Url GET http://localhost:8080/graphs Response Status 200 Response Body {  &#34;graphs&#34;: [  &#34;hugegraph&#34;,  &#34;hugegraph1&#34;  ] } 6.1.2 查看某个图的信息 Method &amp; Url GET http://localhost:8080/graphs/hugegraph Response Status 200 Response Body {  &#34;name&#34;: &#34;hugegraph&#34;,  &#34;backend&#34;: &#34;cassandra&#34; } 6.1.3 清空某个图的全部数据，包括schema、vertex、edge和index等，该操作需要管理员权限 Params 由于清空图是一个比较危险的操作，为避免用户误调用，我们给API添加了用于确认的参数：
+ confirm_message: 默认为I&#39;m sure to delete all data  Method &amp; Url DELETE http://localhost:8080/graphs/hugegraph/clear?confirm_message=I%27m&#43;sure&#43;to&#43;delete&#43;all&#43;data Response Status 204 6.2 Conf 6.2.1 查看某个图的配置，该操作需要管理员权限 Method &amp; Url GET http://localhost:8080/graphs/hugegraph/conf Response Status 200 Response Body # gremlin entrence to create graph gremlin." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/docs/clients/restful-api/graphs/" /><meta property="article:section" content="docs" />
 
-<meta itemprop="name" content="Documentation">
-<meta itemprop="description" content="Apache HugeGraph site"><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Documentation"/>
-<meta name="twitter:description" content="Apache HugeGraph site"/>
+<meta property="article:modified_time" content="2022-04-17T11:51:18+08:00" /><meta property="og:site_name" content="HugeGraph" />
+
+<meta itemprop="name" content="Graphs API">
+<meta itemprop="description" content="6.1 Graphs 6.1.1 列出数据库中全部的图 Method &amp; Url GET http://localhost:8080/graphs Response Status 200 Response Body {  &#34;graphs&#34;: [  &#34;hugegraph&#34;,  &#34;hugegraph1&#34;  ] } 6.1.2 查看某个图的信息 Method &amp; Url GET http://localhost:8080/graphs/hugegraph Response Status 200 Response Body {  &#34;name&#34;: &#34;hugegraph&#34;,  &#34;backend&#34;: &#34;cassandra&#34; } 6.1.3 清空某个图的全部数据，包括schema、vertex、edge和index等，该操作需要管理员权限 Params 由于清空图是一个比较危险的操作，为避免用户误调用，我们给API添加了用于确认的参数：
+ confirm_message: 默认为I&#39;m sure to delete all data  Method &amp; Url DELETE http://localhost:8080/graphs/hugegraph/clear?confirm_message=I%27m&#43;sure&#43;to&#43;delete&#43;all&#43;data Response Status 204 6.2 Conf 6.2.1 查看某个图的配置，该操作需要管理员权限 Method &amp; Url GET http://localhost:8080/graphs/hugegraph/conf Response Status 200 Response Body # gremlin entrence to create graph gremlin.">
+<meta itemprop="dateModified" content="2022-04-17T11:51:18+08:00" />
+<meta itemprop="wordCount" content="189">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Graphs API"/>
+<meta name="twitter:description" content="6.1 Graphs 6.1.1 列出数据库中全部的图 Method &amp; Url GET http://localhost:8080/graphs Response Status 200 Response Body {  &#34;graphs&#34;: [  &#34;hugegraph&#34;,  &#34;hugegraph1&#34;  ] } 6.1.2 查看某个图的信息 Method &amp; Url GET http://localhost:8080/graphs/hugegraph Response Status 200 Response Body {  &#34;name&#34;: &#34;hugegraph&#34;,  &#34;backend&#34;: &#34;cassandra&#34; } 6.1.3 清空某个图的全部数据，包括schema、vertex、edge和index等，该操作需要管理员权限 Params 由于清空图是一个比较危险的操作，为避免用户误调用，我们给API添加了用于确认的参数：
+ confirm_message: 默认为I&#39;m sure to delete all data  Method &amp; Url DELETE http://localhost:8080/graphs/hugegraph/clear?confirm_message=I%27m&#43;sure&#43;to&#43;delete&#43;all&#43;data Response Status 204 6.2 Conf 6.2.1 查看某个图的配置，该操作需要管理员权限 Method &amp; Url GET http://localhost:8080/graphs/hugegraph/conf Response Status 200 Response Body # gremlin entrence to create graph gremlin."/>
 
 
 
@@ -57,7 +70,7 @@ if (!doNotTrack) {
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
   </head>
-  <body class="td-section">
+  <body class="td-page">
     <header>
       
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
@@ -76,7 +89,7 @@ if (!doNotTrack) {
 				
 				
 				
-				<a class="nav-link active" href="/docs/" ><i class='fas fa-book pr-2'></i><span class="active">Documentation</span></a>
+				<a class="nav-link" href="/docs/" ><i class='fas fa-book pr-2'></i><span>Documentation</span></a>
 			</li>
 			
 			
@@ -120,7 +133,7 @@ if (!doNotTrack) {
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="/cn/docs/">中文</a>
+	<a class="dropdown-item" href="/cn/docs/clients/restful-api/graphs/">中文</a>
 	
 </div>
 			</li>
@@ -154,13 +167,13 @@ if (!doNotTrack) {
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="/cn/docs/">中文</a>
+	<a class="dropdown-item" href="/cn/docs/clients/restful-api/graphs/">中文</a>
 	
 </div>
     </div>
     <ul class="td-sidebar-nav__section pr-md-3 ul-0">
       <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-docs-li">
-  <a href="/docs/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__section tree-root" id="m-docs"><span class="td-sidebar-nav-active-item">Documentation</span></a>
+  <a href="/docs/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-docs"><span class="">Documentation</span></a>
   <ul class="ul-1">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsintroductionreadme-li">
   <a href="/docs/introduction/readme/" title="Introduction with HugeGraph" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsintroductionreadme"><span class="">Introduction</span></a>
@@ -194,10 +207,10 @@ if (!doNotTrack) {
   <a href="/docs/config/config-https/" title="配置 HugeGraphServer 使用 https 协议" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsconfigconfig-https"><span class="">Config Https</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsclients-li">
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-docsclients-li">
   <a href="/docs/clients/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docsclients"><span class="">API</span></a>
   <ul class="ul-2 foldable">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsclientsrestful-api-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-docsclientsrestful-api-li">
   <a href="/docs/clients/restful-api/" title="HugeGraph RESTful API" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docsclientsrestful-api"><span class="">RESTful API</span></a>
   <ul class="ul-3 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsclientsrestful-apischema-li">
@@ -222,8 +235,8 @@ if (!doNotTrack) {
   <a href="/docs/clients/restful-api/rank/" title="Rank API" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsclientsrestful-apirank"><span class="">Rank</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsclientsrestful-apivariable-li">
   <a href="/docs/clients/restful-api/variable/" title="Variable API" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsclientsrestful-apivariable"><span class="">Variable</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsclientsrestful-apigraphs-li">
-  <a href="/docs/clients/restful-api/graphs/" title="Graphs API" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsclientsrestful-apigraphs"><span class="">Graphs</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-docsclientsrestful-apigraphs-li">
+  <a href="/docs/clients/restful-api/graphs/" title="Graphs API" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-docsclientsrestful-apigraphs"><span class="td-sidebar-nav-active-item">Graphs</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsclientsrestful-apitask-li">
   <a href="/docs/clients/restful-api/task/" title="Task API" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsclientsrestful-apitask"><span class="">Task</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsclientsrestful-apigremlin-li">
@@ -321,17 +334,29 @@ if (!doNotTrack) {
           <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
             
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
-<a href="https://github.com/apache/incubator-hugegraph/tree/master/content/en/docs/_index.md" class="td-page-meta--view" target="_blank" rel="noopener"><i class="fa fa-file-alt fa-fw"></i> View page source</a>
-  <a href="https://github.com/apache/incubator-hugegraph/edit/master/content/en/docs/_index.md" class="td-page-meta--edit" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
-  <a href="https://github.com/apache/incubator-hugegraph/new/master/content/en/docs/_index.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" class="td-page-meta--child" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> Create child page</a>
-  <a href="https://github.com/apache/incubator-hugegraph/issues/new?title=Documentation" class="td-page-meta--issue" target="_blank" rel="noopener"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/apache/incubator-hugegraph/tree/master/content/en/docs/clients/restful-api/graphs.md" class="td-page-meta--view" target="_blank" rel="noopener"><i class="fa fa-file-alt fa-fw"></i> View page source</a>
+  <a href="https://github.com/apache/incubator-hugegraph/edit/master/content/en/docs/clients/restful-api/graphs.md" class="td-page-meta--edit" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+  <a href="https://github.com/apache/incubator-hugegraph/new/master/content/en/docs/clients/restful-api/graphs.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" class="td-page-meta--child" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> Create child page</a>
+  <a href="https://github.com/apache/incubator-hugegraph/issues/new?title=Graphs%20API" class="td-page-meta--issue" target="_blank" rel="noopener"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
   <a href="https://github.com/apache/incubator-hugegraph/issues/new" class="td-page-meta--project-issue" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
-  <a id="print" href="/docs/_print/"><i class="fa fa-print fa-fw"></i> Print entire section</a>
+  <a id="print" href="/docs/clients/restful-api/_print/"><i class="fa fa-print fa-fw"></i> Print entire section</a>
 
 </div>
 
             
 
+
+<div class="td-toc"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#61-graphs">6.1 Graphs</a></li>
+        <li><a href="#62-conf">6.2 Conf</a></li>
+        <li><a href="#63-mode">6.3 Mode</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
 
 
 
@@ -366,17 +391,26 @@ if (!doNotTrack) {
             
   
 
-            <nav aria-label="breadcrumb" class="td-breadcrumbs td-breadcrumbs__single">
+            <nav aria-label="breadcrumb" class="td-breadcrumbs">
   <ol class="breadcrumb">
-  <li class="breadcrumb-item active" aria-current="page">
+  <li class="breadcrumb-item">
     <a href="/docs/">Documentation</a>
+  </li>
+  <li class="breadcrumb-item">
+    <a href="/docs/clients/">API</a>
+  </li>
+  <li class="breadcrumb-item">
+    <a href="/docs/clients/restful-api/">RESTful API</a>
+  </li>
+  <li class="breadcrumb-item active" aria-current="page">
+    <a href="/docs/clients/restful-api/graphs/">Graphs</a>
   </li>
   </ol>
 </nav>
             
 <div class="td-content">
-	<h1>Documentation</h1>
-  
+	<h1>Graphs API</h1>
+	
 	<header class="article-meta">
 		
 		
@@ -391,127 +425,123 @@ if (!doNotTrack) {
 			
 		
 		
-	</header>
-	<p>Welcome to HugeGraph docs</p>
+	</header>    
+	<h3 id="61-graphs">6.1 Graphs</h3>
+<h4 id="611-列出数据库中全部的图">6.1.1 列出数据库中全部的图</h4>
+<h5 id="method--url">Method &amp; Url</h5>
+<pre tabindex="0"><code>GET http://localhost:8080/graphs
+</code></pre><h5 id="response-status">Response Status</h5>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#0000cf;font-weight:bold">200</span>
+</span></span></code></pre></div><h5 id="response-body">Response Body</h5>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;graphs&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#4e9a06">&#34;hugegraph&#34;</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#4e9a06">&#34;hugegraph1&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></div><h4 id="612-查看某个图的信息">6.1.2 查看某个图的信息</h4>
+<h5 id="method--url-1">Method &amp; Url</h5>
+<pre tabindex="0"><code>GET http://localhost:8080/graphs/hugegraph
+</code></pre><h5 id="response-status-1">Response Status</h5>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#0000cf;font-weight:bold">200</span>
+</span></span></code></pre></div><h5 id="response-body-1">Response Body</h5>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;name&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;hugegraph&#34;</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;backend&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;cassandra&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></div><h4 id="613-清空某个图的全部数据包括schemavertexedge和index等该操作需要管理员权限">6.1.3 清空某个图的全部数据，包括schema、vertex、edge和index等，<strong>该操作需要管理员权限</strong></h4>
+<h5 id="params">Params</h5>
+<p>由于清空图是一个比较危险的操作，为避免用户误调用，我们给API添加了用于确认的参数：</p>
+<ul>
+<li>confirm_message: 默认为<code>I'm sure to delete all data</code></li>
+</ul>
+<h5 id="method--url-2">Method &amp; Url</h5>
+<pre tabindex="0"><code>DELETE http://localhost:8080/graphs/hugegraph/clear?confirm_message=I%27m+sure+to+delete+all+data
+</code></pre><h5 id="response-status-2">Response Status</h5>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#0000cf;font-weight:bold">204</span>
+</span></span></code></pre></div><h3 id="62-conf">6.2 Conf</h3>
+<h4 id="621-查看某个图的配置该操作需要管理员权限">6.2.1 查看某个图的配置，<strong>该操作需要管理员权限</strong></h4>
+<h5 id="method--url-3">Method &amp; Url</h5>
+<pre tabindex="0"><code>GET http://localhost:8080/graphs/hugegraph/conf
+</code></pre><h5 id="response-status-3">Response Status</h5>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#0000cf;font-weight:bold">200</span>
+</span></span></code></pre></div><h5 id="response-body-2">Response Body</h5>
+<pre tabindex="0"><code class="language-properties" data-lang="properties"># gremlin entrence to create graph
+gremlin.graph=com.baidu.hugegraph.HugeFactory
 
-        <div class="section-index">
-    
-    
-    
-    
-    
-    
-    
-    
-    <hr class="panel-line">
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/introduction/readme/">Introduction with HugeGraph</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/download/download/">Download HugeGraph</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/quickstart/">Quick Start</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/config/">Config</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/clients/">API</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/guides/">GUIDES</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/language/">QUERY LANGUAGE</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/performance/">PERFORMANCE</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/contribution-guidelines/">Contribution Guidelines</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/changelog/">CHANGELOGS</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/building/"></a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/cla/"></a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/summary/"></a>
-                </h5>
-                <p></p>
-            </div>
-        
-    
-</div>
+# cache config
+#schema.cache_capacity=1048576
+#graph.cache_capacity=10485760
+#graph.cache_expire=600
 
+# schema illegal name template
+#schema.illegal_name_regex=\s+|~.*
+
+#vertex.default_label=vertex
+
+backend=cassandra
+serializer=cassandra
+
+store=hugegraph
+...
+</code></pre><h3 id="63-mode">6.3 Mode</h3>
+<p>合法的图模式包括：NONE，RESTORING，MERGING，LOADING</p>
+<ul>
+<li>None 模式（默认），元数据和图数据的写入属于正常状态。特别的：
+<ul>
+<li>元数据（schema）创建时不允许指定 ID</li>
+<li>图数据（vertex）在 id strategy 为 Automatic 时，不允许指定 ID</li>
+</ul>
+</li>
+<li>LOADING：批量导入数据时自动启用，特别的：
+<ul>
+<li>添加顶点/边时，不会检查必填属性是否传入</li>
+</ul>
+</li>
+</ul>
+<p>Restore 时存在两种不同的模式： Restoring 和 Merging</p>
+<ul>
+<li>Restoring 模式，恢复到一个新图中，特别的：
+<ul>
+<li>元数据（schema）创建时允许指定 ID</li>
+<li>图数据（vertex）在 id strategy 为 Automatic 时，允许指定 ID</li>
+</ul>
+</li>
+<li>Merging 模式，合并到一个已存在元数据和图数据的图中，特别的：
+<ul>
+<li>元数据（schema）创建时不允许指定 ID</li>
+<li>图数据（vertex）在 id strategy 为 Automatic 时，允许指定 ID</li>
+</ul>
+</li>
+</ul>
+<p>正常情况下，图模式为 None，当需要 Restore 图时，需要根据需要临时修改图模式为 Restoring 模式或者 Merging 模式，并在完成 Restore 时，恢复图模式为 None。</p>
+<h4 id="631-查看某个图的模式-该操作需要管理员权限">6.3.1 查看某个图的模式. <strong>该操作需要管理员权限</strong></h4>
+<h5 id="method--url-4">Method &amp; Url</h5>
+<pre tabindex="0"><code>GET http://localhost:8080/graphs/hugegraph/mode
+</code></pre><h5 id="response-status-4">Response Status</h5>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#0000cf;font-weight:bold">200</span>
+</span></span></code></pre></div><h5 id="response-body-3">Response Body</h5>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;mode&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;NONE&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></div><blockquote>
+<p>合法的图模式包括：NONE，RESTORING，MERGING</p>
+</blockquote>
+<h4 id="632-设置某个图的模式-该操作需要管理员权限">6.3.2 设置某个图的模式. <strong>该操作需要管理员权限</strong></h4>
+<h5 id="method--url-5">Method &amp; Url</h5>
+<pre tabindex="0"><code>PUT http://localhost:8080/graphs/hugegraph/mode
+</code></pre><h5 id="request-body">Request Body</h5>
+<pre tabindex="0"><code>&#34;RESTORING&#34;
+</code></pre><blockquote>
+<p>合法的图模式包括：NONE，RESTORING，MERGING</p>
+</blockquote>
+<h5 id="response-status-5">Response Status</h5>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#0000cf;font-weight:bold">200</span>
+</span></span></code></pre></div><h5 id="response-body-4">Response Body</h5>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;mode&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;RESTORING&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span></code></pre></div>
 	
 		<style>
   .feedback--answer {
@@ -577,10 +607,11 @@ if (!doNotTrack) {
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified April 21, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/1eb2a91114480cc46ec9a9b1f35258d4cbb34666">update homepage (1eb2a91)</a>
+  Last modified April 17, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/aec74b1c4cf9329b85175ff66782e5c7bcce132e">add en doc (aec74b1)</a>
 </div>
 
 </div>
+
 
           </main>
         </div>

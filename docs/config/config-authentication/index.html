@@ -4,8 +4,6 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="generator" content="Hugo 0.95.0" />
-<link rel="alternate" type="text/html" href="/docs/_print/">
-<link rel="alternate" type="application/rss&#43;xml" href="/docs/index.xml">
 <meta name="robots" content="index, follow">
 
 
@@ -20,18 +18,41 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>Documentation | HugeGraph</title>
-<meta name="description" content="Welcome to HugeGraph docs
-">
-<meta property="og:title" content="Documentation" />
-<meta property="og:description" content="Apache HugeGraph site" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="/docs/" /><meta property="og:site_name" content="HugeGraph" />
+<title>HugeGraph 内置用户权限与扩展权限配置及使用 | HugeGraph</title>
+<meta name="description" content="概述
+HugeGraph 为了方便不同用户场景下的鉴权使用，目前内置了两套权限模式：
 
-<meta itemprop="name" content="Documentation">
-<meta itemprop="description" content="Apache HugeGraph site"><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Documentation"/>
-<meta name="twitter:description" content="Apache HugeGraph site"/>
+简单的ConfigAuthenticator模式，通过本地配置文件存储用户名和密码 (仅支持单 GraphServer)
+完备的StandardAuthenticator模式，支持多用户认证、以及细粒度的权限访问 …">
+<meta property="og:title" content="HugeGraph 内置用户权限与扩展权限配置及使用" />
+<meta property="og:description" content="概述 HugeGraph 为了方便不同用户场景下的鉴权使用，目前内置了两套权限模式：
+ 简单的ConfigAuthenticator模式，通过本地配置文件存储用户名和密码 (仅支持单 GraphServer) 完备的StandardAuthenticator模式，支持多用户认证、以及细粒度的权限访问控制，采用基于 “用户-用户组-操作-资源” 的 4 层设计，灵活控制用户角色与权限 (支持多 GraphServer)  其中 StandardAuthenticator 模式的几个核心设计：
+ 初始化时创建超级管理员 (admin) 用户，后续通过超级管理员创建其它用户，新创建的用户被分配足够权限后，可以创建或管理更多的用户 支持动态创建用户、用户组、资源，支持动态分配或取消权限 用户可以属于一个或多个用户组，每个用户组可以拥有对任意个资源的操作权限，操作类型包括：读、写、删除、执行等种类 &ldquo;资源&rdquo; 描述了图数据库中的数据，比如符合某一类条件的顶点，每一个资源包括 type、label、properties三个要素，共有 18 种类型、任意 label、任意 properties 可组合形成的资源，一个资源的内部条件是且关系，多个资源之间的条件是或关系  举例说明：
+// 场景：某用户只有北京地区的数据读取权限 user(name=xx) -belong-&gt; group(name=xx) -access(read)-&gt; target(graph=graph1, resource={label: person, city: Beijing}) 配置用户认证 HugeGraph 默认不启用用户认证功能，需通过修改配置文件来启用该功能。内置实现了StandardAuthenticator和ConfigAuthenticator两种模式，StandardAuthenticator模式支持多用户认证与细粒度权限控制，ConfigAuthenticator模式支持简单的用户权限认证。此外，开发者可以自定义实现HugeAuthenticator接口来对接自身的权限系统。
+用户认证方式均采用 HTTP Basic Authentication ，简单说就是在发送 HTTP 请求时在 Authentication 设置选择 Basic 然后输入对应的用户名和密码，对应 HTTP 明文如下所示 :
+GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels Authorization: Basic admin xxxx StandardAuthenticator模式 StandardAuthenticator模式是通过在数据库后端存储用户信息来支持用户认证和权限控制，该实现基于数据库存储的用户的名称与密码进行认证（密码已被加密），基于用户的角色来细粒度控制用户权限。下面是具体的配置流程（重启服务生效）：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/docs/config/config-authentication/" /><meta property="article:section" content="docs" />
+
+<meta property="article:modified_time" content="2022-04-17T11:51:18+08:00" /><meta property="og:site_name" content="HugeGraph" />
+
+<meta itemprop="name" content="HugeGraph 内置用户权限与扩展权限配置及使用">
+<meta itemprop="description" content="概述 HugeGraph 为了方便不同用户场景下的鉴权使用，目前内置了两套权限模式：
+ 简单的ConfigAuthenticator模式，通过本地配置文件存储用户名和密码 (仅支持单 GraphServer) 完备的StandardAuthenticator模式，支持多用户认证、以及细粒度的权限访问控制，采用基于 “用户-用户组-操作-资源” 的 4 层设计，灵活控制用户角色与权限 (支持多 GraphServer)  其中 StandardAuthenticator 模式的几个核心设计：
+ 初始化时创建超级管理员 (admin) 用户，后续通过超级管理员创建其它用户，新创建的用户被分配足够权限后，可以创建或管理更多的用户 支持动态创建用户、用户组、资源，支持动态分配或取消权限 用户可以属于一个或多个用户组，每个用户组可以拥有对任意个资源的操作权限，操作类型包括：读、写、删除、执行等种类 &ldquo;资源&rdquo; 描述了图数据库中的数据，比如符合某一类条件的顶点，每一个资源包括 type、label、properties三个要素，共有 18 种类型、任意 label、任意 properties 可组合形成的资源，一个资源的内部条件是且关系，多个资源之间的条件是或关系  举例说明：
+// 场景：某用户只有北京地区的数据读取权限 user(name=xx) -belong-&gt; group(name=xx) -access(read)-&gt; target(graph=graph1, resource={label: person, city: Beijing}) 配置用户认证 HugeGraph 默认不启用用户认证功能，需通过修改配置文件来启用该功能。内置实现了StandardAuthenticator和ConfigAuthenticator两种模式，StandardAuthenticator模式支持多用户认证与细粒度权限控制，ConfigAuthenticator模式支持简单的用户权限认证。此外，开发者可以自定义实现HugeAuthenticator接口来对接自身的权限系统。
+用户认证方式均采用 HTTP Basic Authentication ，简单说就是在发送 HTTP 请求时在 Authentication 设置选择 Basic 然后输入对应的用户名和密码，对应 HTTP 明文如下所示 :
+GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels Authorization: Basic admin xxxx StandardAuthenticator模式 StandardAuthenticator模式是通过在数据库后端存储用户信息来支持用户认证和权限控制，该实现基于数据库存储的用户的名称与密码进行认证（密码已被加密），基于用户的角色来细粒度控制用户权限。下面是具体的配置流程（重启服务生效）：">
+<meta itemprop="dateModified" content="2022-04-17T11:51:18+08:00" />
+<meta itemprop="wordCount" content="106">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="HugeGraph 内置用户权限与扩展权限配置及使用"/>
+<meta name="twitter:description" content="概述 HugeGraph 为了方便不同用户场景下的鉴权使用，目前内置了两套权限模式：
+ 简单的ConfigAuthenticator模式，通过本地配置文件存储用户名和密码 (仅支持单 GraphServer) 完备的StandardAuthenticator模式，支持多用户认证、以及细粒度的权限访问控制，采用基于 “用户-用户组-操作-资源” 的 4 层设计，灵活控制用户角色与权限 (支持多 GraphServer)  其中 StandardAuthenticator 模式的几个核心设计：
+ 初始化时创建超级管理员 (admin) 用户，后续通过超级管理员创建其它用户，新创建的用户被分配足够权限后，可以创建或管理更多的用户 支持动态创建用户、用户组、资源，支持动态分配或取消权限 用户可以属于一个或多个用户组，每个用户组可以拥有对任意个资源的操作权限，操作类型包括：读、写、删除、执行等种类 &ldquo;资源&rdquo; 描述了图数据库中的数据，比如符合某一类条件的顶点，每一个资源包括 type、label、properties三个要素，共有 18 种类型、任意 label、任意 properties 可组合形成的资源，一个资源的内部条件是且关系，多个资源之间的条件是或关系  举例说明：
+// 场景：某用户只有北京地区的数据读取权限 user(name=xx) -belong-&gt; group(name=xx) -access(read)-&gt; target(graph=graph1, resource={label: person, city: Beijing}) 配置用户认证 HugeGraph 默认不启用用户认证功能，需通过修改配置文件来启用该功能。内置实现了StandardAuthenticator和ConfigAuthenticator两种模式，StandardAuthenticator模式支持多用户认证与细粒度权限控制，ConfigAuthenticator模式支持简单的用户权限认证。此外，开发者可以自定义实现HugeAuthenticator接口来对接自身的权限系统。
+用户认证方式均采用 HTTP Basic Authentication ，简单说就是在发送 HTTP 请求时在 Authentication 设置选择 Basic 然后输入对应的用户名和密码，对应 HTTP 明文如下所示 :
+GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels Authorization: Basic admin xxxx StandardAuthenticator模式 StandardAuthenticator模式是通过在数据库后端存储用户信息来支持用户认证和权限控制，该实现基于数据库存储的用户的名称与密码进行认证（密码已被加密），基于用户的角色来细粒度控制用户权限。下面是具体的配置流程（重启服务生效）："/>
 
 
 
@@ -57,7 +78,7 @@ if (!doNotTrack) {
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
   </head>
-  <body class="td-section">
+  <body class="td-page">
     <header>
       
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
@@ -76,7 +97,7 @@ if (!doNotTrack) {
 				
 				
 				
-				<a class="nav-link active" href="/docs/" ><i class='fas fa-book pr-2'></i><span class="active">Documentation</span></a>
+				<a class="nav-link" href="/docs/" ><i class='fas fa-book pr-2'></i><span>Documentation</span></a>
 			</li>
 			
 			
@@ -120,7 +141,7 @@ if (!doNotTrack) {
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="/cn/docs/">中文</a>
+	<a class="dropdown-item" href="/cn/docs/config/config-authentication/">中文</a>
 	
 </div>
 			</li>
@@ -154,13 +175,13 @@ if (!doNotTrack) {
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="/cn/docs/">中文</a>
+	<a class="dropdown-item" href="/cn/docs/config/config-authentication/">中文</a>
 	
 </div>
     </div>
     <ul class="td-sidebar-nav__section pr-md-3 ul-0">
       <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-docs-li">
-  <a href="/docs/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__section tree-root" id="m-docs"><span class="td-sidebar-nav-active-item">Documentation</span></a>
+  <a href="/docs/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-docs"><span class="">Documentation</span></a>
   <ul class="ul-1">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsintroductionreadme-li">
   <a href="/docs/introduction/readme/" title="Introduction with HugeGraph" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsintroductionreadme"><span class="">Introduction</span></a>
@@ -181,15 +202,15 @@ if (!doNotTrack) {
   <a href="/docs/quickstart/hugegraph-client/" title="HugeGraph-Client Quick Start" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsquickstarthugegraph-client"><span class="">Develop with HugeGraph-Client</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsconfig-li">
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-docsconfig-li">
   <a href="/docs/config/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docsconfig"><span class="">Config</span></a>
   <ul class="ul-2 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconfigconfig-guide-li">
   <a href="/docs/config/config-guide/" title="HugeGraph 配置" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsconfigconfig-guide"><span class="">Config Guide</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconfigconfig-option-li">
   <a href="/docs/config/config-option/" title="HugeGraph 配置项" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsconfigconfig-option"><span class="">Config Options</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconfigconfig-authentication-li">
-  <a href="/docs/config/config-authentication/" title="HugeGraph 内置用户权限与扩展权限配置及使用" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsconfigconfig-authentication"><span class="">Config Authentication</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-docsconfigconfig-authentication-li">
+  <a href="/docs/config/config-authentication/" title="HugeGraph 内置用户权限与扩展权限配置及使用" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-docsconfigconfig-authentication"><span class="td-sidebar-nav-active-item">Config Authentication</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconfigconfig-https-li">
   <a href="/docs/config/config-https/" title="配置 HugeGraphServer 使用 https 协议" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsconfigconfig-https"><span class="">Config Https</span></a>
 </li>
@@ -321,17 +342,29 @@ if (!doNotTrack) {
           <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
             
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
-<a href="https://github.com/apache/incubator-hugegraph/tree/master/content/en/docs/_index.md" class="td-page-meta--view" target="_blank" rel="noopener"><i class="fa fa-file-alt fa-fw"></i> View page source</a>
-  <a href="https://github.com/apache/incubator-hugegraph/edit/master/content/en/docs/_index.md" class="td-page-meta--edit" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
-  <a href="https://github.com/apache/incubator-hugegraph/new/master/content/en/docs/_index.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" class="td-page-meta--child" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> Create child page</a>
-  <a href="https://github.com/apache/incubator-hugegraph/issues/new?title=Documentation" class="td-page-meta--issue" target="_blank" rel="noopener"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/apache/incubator-hugegraph/tree/master/content/en/docs/config/config-authentication.md" class="td-page-meta--view" target="_blank" rel="noopener"><i class="fa fa-file-alt fa-fw"></i> View page source</a>
+  <a href="https://github.com/apache/incubator-hugegraph/edit/master/content/en/docs/config/config-authentication.md" class="td-page-meta--edit" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+  <a href="https://github.com/apache/incubator-hugegraph/new/master/content/en/docs/config/config-authentication.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" class="td-page-meta--child" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> Create child page</a>
+  <a href="https://github.com/apache/incubator-hugegraph/issues/new?title=HugeGraph%20%e5%86%85%e7%bd%ae%e7%94%a8%e6%88%b7%e6%9d%83%e9%99%90%e4%b8%8e%e6%89%a9%e5%b1%95%e6%9d%83%e9%99%90%e9%85%8d%e7%bd%ae%e5%8f%8a%e4%bd%bf%e7%94%a8" class="td-page-meta--issue" target="_blank" rel="noopener"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
   <a href="https://github.com/apache/incubator-hugegraph/issues/new" class="td-page-meta--project-issue" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
-  <a id="print" href="/docs/_print/"><i class="fa fa-print fa-fw"></i> Print entire section</a>
+  <a id="print" href="/docs/config/_print/"><i class="fa fa-print fa-fw"></i> Print entire section</a>
 
 </div>
 
             
 
+
+<div class="td-toc"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#概述">概述</a></li>
+        <li><a href="#配置用户认证">配置用户认证</a></li>
+        <li><a href="#自定义用户认证系统">自定义用户认证系统</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
 
 
 
@@ -366,17 +399,23 @@ if (!doNotTrack) {
             
   
 
-            <nav aria-label="breadcrumb" class="td-breadcrumbs td-breadcrumbs__single">
+            <nav aria-label="breadcrumb" class="td-breadcrumbs">
   <ol class="breadcrumb">
-  <li class="breadcrumb-item active" aria-current="page">
+  <li class="breadcrumb-item">
     <a href="/docs/">Documentation</a>
+  </li>
+  <li class="breadcrumb-item">
+    <a href="/docs/config/">Config</a>
+  </li>
+  <li class="breadcrumb-item active" aria-current="page">
+    <a href="/docs/config/config-authentication/">Config Authentication</a>
   </li>
   </ol>
 </nav>
             
 <div class="td-content">
-	<h1>Documentation</h1>
-  
+	<h1>HugeGraph 内置用户权限与扩展权限配置及使用</h1>
+	
 	<header class="article-meta">
 		
 		
@@ -391,126 +430,63 @@ if (!doNotTrack) {
 			
 		
 		
-	</header>
-	<p>Welcome to HugeGraph docs</p>
+	</header>    
+	<h3 id="概述">概述</h3>
+<p>HugeGraph 为了方便不同用户场景下的鉴权使用，目前内置了两套权限模式：</p>
+<ol>
+<li>简单的<code>ConfigAuthenticator</code>模式，通过本地配置文件存储用户名和密码 (仅支持单 GraphServer)</li>
+<li>完备的<code>StandardAuthenticator</code>模式，支持多用户认证、以及细粒度的权限访问控制，采用基于 “用户-用户组-操作-资源” 的 4 层设计，灵活控制用户角色与权限 (支持多 GraphServer)</li>
+</ol>
+<p>其中 <code>StandardAuthenticator</code> 模式的几个核心设计：</p>
+<ul>
+<li>初始化时创建超级管理员 (<code>admin</code>) 用户，后续通过超级管理员创建其它用户，新创建的用户被分配足够权限后，可以创建或管理更多的用户</li>
+<li>支持动态创建用户、用户组、资源，支持动态分配或取消权限</li>
+<li>用户可以属于一个或多个用户组，每个用户组可以拥有对任意个资源的操作权限，操作类型包括：读、写、删除、执行等种类</li>
+<li>&ldquo;资源&rdquo; 描述了图数据库中的数据，比如符合某一类条件的顶点，每一个资源包括 <code>type</code>、<code>label</code>、<code>properties</code>三个要素，共有 18 种类型、任意 label、任意 properties 可组合形成的资源，一个资源的内部条件是且关系，多个资源之间的条件是或关系</li>
+</ul>
+<p>举例说明：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// 场景：某用户只有北京地区的数据读取权限
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">user</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">name</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">xx</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-</span><span style="color:#000">belong</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span> <span style="color:#000">group</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">name</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">xx</span><span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">-</span><span style="color:#000">access</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">read</span><span style="color:#ce5c00;font-weight:bold">)-&gt;</span> <span style="color:#000">target</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">graph</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">graph1</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">resource</span><span style="color:#ce5c00;font-weight:bold">={</span><span style="color:#000">label</span><span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#000">person</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">city</span><span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#000">Beijing</span><span style="color:#ce5c00;font-weight:bold">})</span>
+</span></span></code></pre></div><h3 id="配置用户认证">配置用户认证</h3>
+<p>HugeGraph 默认<strong>不启用</strong>用户认证功能，需通过修改配置文件来启用该功能。内置实现了<code>StandardAuthenticator</code>和<code>ConfigAuthenticator</code>两种模式，<code>StandardAuthenticator</code>模式支持多用户认证与细粒度权限控制，<code>ConfigAuthenticator</code>模式支持简单的用户权限认证。此外，开发者可以自定义实现<code>HugeAuthenticator</code>接口来对接自身的权限系统。</p>
+<p>用户认证方式均采用 <a href="https://zh.wikipedia.org/wiki/HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81">HTTP Basic Authentication</a> ，简单说就是在发送 HTTP 请求时在 <code>Authentication</code> 设置选择 <code>Basic</code> 然后输入对应的用户名和密码，对应 HTTP 明文如下所示 :</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-http" data-lang="http"><span style="display:flex;"><span><span style="color:#a40000">GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels
+</span></span></span><span style="display:flex;"><span><span style="color:#a40000">Authorization: Basic admin xxxx
+</span></span></span></code></pre></div><h4 id="standardauthenticator模式">StandardAuthenticator模式</h4>
+<p><code>StandardAuthenticator</code>模式是通过在数据库后端存储用户信息来支持用户认证和权限控制，该实现基于数据库存储的用户的名称与密码进行认证（密码已被加密），基于用户的角色来细粒度控制用户权限。下面是具体的配置流程（重启服务生效）：</p>
+<p>在配置文件<code>gremlin-server.yaml</code>中配置<code>authenticator</code>及其<code>rest-server</code>文件路径：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">authentication</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>{<span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">authenticator</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">com.baidu.hugegraph.auth.StandardAuthenticator,</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">authenticationHandler</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">com.baidu.hugegraph.auth.WsAndHttpBasicAuthHandler,</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">config</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>{<span style="color:#204a87;font-weight:bold">tokens</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">conf/rest-server.properties}</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span>}<span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><p>在配置文件<code>rest-server.properties</code>中配置<code>authenticator</code>及其<code>graph_store</code>信息：</p>
+<pre tabindex="0"><code class="language-properties" data-lang="properties">auth.authenticator=com.baidu.hugegraph.auth.StandardAuthenticator
+auth.graph_store=hugegraph
 
-        <div class="section-index">
-    
-    
-    
-    
-    
-    
-    
-    
-    <hr class="panel-line">
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/introduction/readme/">Introduction with HugeGraph</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/download/download/">Download HugeGraph</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/quickstart/">Quick Start</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/config/">Config</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/clients/">API</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/guides/">GUIDES</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/language/">QUERY LANGUAGE</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/performance/">PERFORMANCE</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/contribution-guidelines/">Contribution Guidelines</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/changelog/">CHANGELOGS</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/building/"></a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/cla/"></a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/summary/"></a>
-                </h5>
-                <p></p>
-            </div>
-        
-    
-</div>
+# auth client config
+# 如果是分开部署 GraphServer 和 AuthServer, 还需要指定下面的配置, 地址填写 AuthServer 的 IP:RPC 端口
+#auth.remote_url=127.0.0.1:8899,127.0.0.1:8898,127.0.0.1:8897
+</code></pre><p>其中，<code>graph_store</code>配置项是指使用哪一个图来存储用户信息，如果存在多个图的话，选取任意一个均可。</p>
+<p>在配置文件<code>hugegraph{n}.properties</code>中配置<code>gremlin.graph</code>信息：</p>
+<pre tabindex="0"><code class="language-properties" data-lang="properties">gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
+</code></pre><p>然后详细的权限 API 调用和说明请参考 <a href="/docs/clients/restful-api/auth">Authentication-API</a> 文档</p>
+<h4 id="configauthenticator模式">ConfigAuthenticator模式</h4>
+<p><code>ConfigAuthenticator</code>模式是通过预先在配置文件中设置用户信息来支持用户认证，该实现是基于配置好的静态<code>tokens</code>来验证用户是否合法。下面是具体的配置流程（重启服务生效）：</p>
+<p>在配置文件<code>gremlin-server.yaml</code>中配置<code>authenticator</code>及其<code>rest-server</code>文件路径：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">authentication</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>{<span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">authenticator</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">com.baidu.hugegraph.auth.ConfigAuthenticator,</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">authenticationHandler</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">com.baidu.hugegraph.auth.WsAndHttpBasicAuthHandler,</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">config</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>{<span style="color:#204a87;font-weight:bold">tokens</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">conf/rest-server.properties}</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span>}<span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><p>在配置文件<code>rest-server.properties</code>中配置<code>authenticator</code>及其<code>tokens</code>信息：</p>
+<pre tabindex="0"><code class="language-properties" data-lang="properties">auth.authenticator=com.baidu.hugegraph.auth.ConfigAuthenticator
+auth.admin_token=token-value-a
+auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
+</code></pre><p>在配置文件<code>hugegraph{n}.properties</code>中配置<code>gremlin.graph</code>信息：</p>
+<pre tabindex="0"><code class="language-properties" data-lang="properties">gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
+</code></pre><h3 id="自定义用户认证系统">自定义用户认证系统</h3>
+<p>如果需要支持更加灵活的用户系统，可自定义authenticator进行扩展，自定义authenticator实现接口<code>com.baidu.hugegraph.auth.HugeAuthenticator</code>即可，然后修改配置文件中<code>authenticator</code>配置项指向该实现。</p>
 
 	
 		<style>
@@ -577,10 +553,11 @@ if (!doNotTrack) {
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified April 21, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/1eb2a91114480cc46ec9a9b1f35258d4cbb34666">update homepage (1eb2a91)</a>
+  Last modified April 17, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/aec74b1c4cf9329b85175ff66782e5c7bcce132e">add en doc (aec74b1)</a>
 </div>
 
 </div>
+
 
           </main>
         </div>

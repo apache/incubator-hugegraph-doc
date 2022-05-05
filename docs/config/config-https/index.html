@@ -4,8 +4,6 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="generator" content="Hugo 0.95.0" />
-<link rel="alternate" type="text/html" href="/docs/_print/">
-<link rel="alternate" type="application/rss&#43;xml" href="/docs/index.xml">
 <meta name="robots" content="index, follow">
 
 
@@ -20,18 +18,38 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>Documentation | HugeGraph</title>
-<meta name="description" content="Welcome to HugeGraph docs
-">
-<meta property="og:title" content="Documentation" />
-<meta property="og:description" content="Apache HugeGraph site" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="/docs/" /><meta property="og:site_name" content="HugeGraph" />
+<title>配置 HugeGraphServer 使用 https 协议 | HugeGraph</title>
+<meta name="description" content="概述
+HugeGraphServer 默认使用的是 http 协议，如果用户对请求的安全性有要求，可以配置成 https。
+服务端配置
+修改 conf/rest-server.properties 配置文件，将 restserver.url 的 schema 部分改为 https。
+# …">
+<meta property="og:title" content="配置 HugeGraphServer 使用 https 协议" />
+<meta property="og:description" content="概述 HugeGraphServer 默认使用的是 http 协议，如果用户对请求的安全性有要求，可以配置成 https。
+服务端配置 修改 conf/rest-server.properties 配置文件，将 restserver.url 的 schema 部分改为 https。
+# 将协议设置为 https restserver.url=https://127.0.0.1:8080 # 服务端 keystore 文件路径，当协议为 https 时该默认值自动生效，可按需修改此项 ssl.keystore_file=conf/hugegraph-server.keystore # 服务端 keystore 文件密码，当协议为 https 时该默认值自动生效，可按需修改此项 ssl.keystore_password=****** 服务端的 conf 目录下已经给出了一个 keystore 文件hugegraph-server.keystore，该文件的密码为hugegraph， 这两项都是在开启了 https 协议时的默认值，用户可以生成自己的 keystore 文件及密码，然后修改ssl.keystore_file和ssl.keystore_password的值。
+客户端配置 在 HugeGraph-Client 中使用 https 在构造 HugeClient 时传入 https 相关的配置，代码示例：
+String url = &#34;https://localhost:8080&#34;; String graphName = &#34;hugegraph&#34;; HugeClientBuilder builder = HugeClient.builder(url, graphName); // 客户端 keystore 文件路径 String trustStoreFilePath = &#34;hugegraph." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/docs/config/config-https/" /><meta property="article:section" content="docs" />
 
-<meta itemprop="name" content="Documentation">
-<meta itemprop="description" content="Apache HugeGraph site"><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Documentation"/>
-<meta name="twitter:description" content="Apache HugeGraph site"/>
+<meta property="article:modified_time" content="2022-04-17T11:51:18+08:00" /><meta property="og:site_name" content="HugeGraph" />
+
+<meta itemprop="name" content="配置 HugeGraphServer 使用 https 协议">
+<meta itemprop="description" content="概述 HugeGraphServer 默认使用的是 http 协议，如果用户对请求的安全性有要求，可以配置成 https。
+服务端配置 修改 conf/rest-server.properties 配置文件，将 restserver.url 的 schema 部分改为 https。
+# 将协议设置为 https restserver.url=https://127.0.0.1:8080 # 服务端 keystore 文件路径，当协议为 https 时该默认值自动生效，可按需修改此项 ssl.keystore_file=conf/hugegraph-server.keystore # 服务端 keystore 文件密码，当协议为 https 时该默认值自动生效，可按需修改此项 ssl.keystore_password=****** 服务端的 conf 目录下已经给出了一个 keystore 文件hugegraph-server.keystore，该文件的密码为hugegraph， 这两项都是在开启了 https 协议时的默认值，用户可以生成自己的 keystore 文件及密码，然后修改ssl.keystore_file和ssl.keystore_password的值。
+客户端配置 在 HugeGraph-Client 中使用 https 在构造 HugeClient 时传入 https 相关的配置，代码示例：
+String url = &#34;https://localhost:8080&#34;; String graphName = &#34;hugegraph&#34;; HugeClientBuilder builder = HugeClient.builder(url, graphName); // 客户端 keystore 文件路径 String trustStoreFilePath = &#34;hugegraph.">
+<meta itemprop="dateModified" content="2022-04-17T11:51:18+08:00" />
+<meta itemprop="wordCount" content="232">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="配置 HugeGraphServer 使用 https 协议"/>
+<meta name="twitter:description" content="概述 HugeGraphServer 默认使用的是 http 协议，如果用户对请求的安全性有要求，可以配置成 https。
+服务端配置 修改 conf/rest-server.properties 配置文件，将 restserver.url 的 schema 部分改为 https。
+# 将协议设置为 https restserver.url=https://127.0.0.1:8080 # 服务端 keystore 文件路径，当协议为 https 时该默认值自动生效，可按需修改此项 ssl.keystore_file=conf/hugegraph-server.keystore # 服务端 keystore 文件密码，当协议为 https 时该默认值自动生效，可按需修改此项 ssl.keystore_password=****** 服务端的 conf 目录下已经给出了一个 keystore 文件hugegraph-server.keystore，该文件的密码为hugegraph， 这两项都是在开启了 https 协议时的默认值，用户可以生成自己的 keystore 文件及密码，然后修改ssl.keystore_file和ssl.keystore_password的值。
+客户端配置 在 HugeGraph-Client 中使用 https 在构造 HugeClient 时传入 https 相关的配置，代码示例：
+String url = &#34;https://localhost:8080&#34;; String graphName = &#34;hugegraph&#34;; HugeClientBuilder builder = HugeClient.builder(url, graphName); // 客户端 keystore 文件路径 String trustStoreFilePath = &#34;hugegraph."/>
 
 
 
@@ -57,7 +75,7 @@ if (!doNotTrack) {
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
   </head>
-  <body class="td-section">
+  <body class="td-page">
     <header>
       
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
@@ -76,7 +94,7 @@ if (!doNotTrack) {
 				
 				
 				
-				<a class="nav-link active" href="/docs/" ><i class='fas fa-book pr-2'></i><span class="active">Documentation</span></a>
+				<a class="nav-link" href="/docs/" ><i class='fas fa-book pr-2'></i><span>Documentation</span></a>
 			</li>
 			
 			
@@ -120,7 +138,7 @@ if (!doNotTrack) {
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="/cn/docs/">中文</a>
+	<a class="dropdown-item" href="/cn/docs/config/config-https/">中文</a>
 	
 </div>
 			</li>
@@ -154,13 +172,13 @@ if (!doNotTrack) {
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	
-	<a class="dropdown-item" href="/cn/docs/">中文</a>
+	<a class="dropdown-item" href="/cn/docs/config/config-https/">中文</a>
 	
 </div>
     </div>
     <ul class="td-sidebar-nav__section pr-md-3 ul-0">
       <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-docs-li">
-  <a href="/docs/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__section tree-root" id="m-docs"><span class="td-sidebar-nav-active-item">Documentation</span></a>
+  <a href="/docs/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-docs"><span class="">Documentation</span></a>
   <ul class="ul-1">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsintroductionreadme-li">
   <a href="/docs/introduction/readme/" title="Introduction with HugeGraph" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsintroductionreadme"><span class="">Introduction</span></a>
@@ -181,7 +199,7 @@ if (!doNotTrack) {
   <a href="/docs/quickstart/hugegraph-client/" title="HugeGraph-Client Quick Start" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsquickstarthugegraph-client"><span class="">Develop with HugeGraph-Client</span></a>
 </li>
   </ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsconfig-li">
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-docsconfig-li">
   <a href="/docs/config/" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id="m-docsconfig"><span class="">Config</span></a>
   <ul class="ul-2 foldable">
     <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconfigconfig-guide-li">
@@ -190,8 +208,8 @@ if (!doNotTrack) {
   <a href="/docs/config/config-option/" title="HugeGraph 配置项" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsconfigconfig-option"><span class="">Config Options</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconfigconfig-authentication-li">
   <a href="/docs/config/config-authentication/" title="HugeGraph 内置用户权限与扩展权限配置及使用" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsconfigconfig-authentication"><span class="">Config Authentication</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsconfigconfig-https-li">
-  <a href="/docs/config/config-https/" title="配置 HugeGraphServer 使用 https 协议" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-docsconfigconfig-https"><span class="">Config Https</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-docsconfigconfig-https-li">
+  <a href="/docs/config/config-https/" title="配置 HugeGraphServer 使用 https 协议" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-docsconfigconfig-https"><span class="td-sidebar-nav-active-item">Config Https</span></a>
 </li>
   </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsclients-li">
@@ -321,17 +339,30 @@ if (!doNotTrack) {
           <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
             
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
-<a href="https://github.com/apache/incubator-hugegraph/tree/master/content/en/docs/_index.md" class="td-page-meta--view" target="_blank" rel="noopener"><i class="fa fa-file-alt fa-fw"></i> View page source</a>
-  <a href="https://github.com/apache/incubator-hugegraph/edit/master/content/en/docs/_index.md" class="td-page-meta--edit" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
-  <a href="https://github.com/apache/incubator-hugegraph/new/master/content/en/docs/_index.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" class="td-page-meta--child" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> Create child page</a>
-  <a href="https://github.com/apache/incubator-hugegraph/issues/new?title=Documentation" class="td-page-meta--issue" target="_blank" rel="noopener"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+<a href="https://github.com/apache/incubator-hugegraph/tree/master/content/en/docs/config/config-https.md" class="td-page-meta--view" target="_blank" rel="noopener"><i class="fa fa-file-alt fa-fw"></i> View page source</a>
+  <a href="https://github.com/apache/incubator-hugegraph/edit/master/content/en/docs/config/config-https.md" class="td-page-meta--edit" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+  <a href="https://github.com/apache/incubator-hugegraph/new/master/content/en/docs/config/config-https.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" class="td-page-meta--child" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> Create child page</a>
+  <a href="https://github.com/apache/incubator-hugegraph/issues/new?title=%e9%85%8d%e7%bd%ae%20HugeGraphServer%20%e4%bd%bf%e7%94%a8%20https%20%e5%8d%8f%e8%ae%ae" class="td-page-meta--issue" target="_blank" rel="noopener"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
   <a href="https://github.com/apache/incubator-hugegraph/issues/new" class="td-page-meta--project-issue" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
-  <a id="print" href="/docs/_print/"><i class="fa fa-print fa-fw"></i> Print entire section</a>
+  <a id="print" href="/docs/config/_print/"><i class="fa fa-print fa-fw"></i> Print entire section</a>
 
 </div>
 
             
 
+
+<div class="td-toc"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#概述">概述</a></li>
+        <li><a href="#服务端配置">服务端配置</a></li>
+        <li><a href="#客户端配置">客户端配置</a></li>
+        <li><a href="#如何生成证书文件">如何生成证书文件</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
 
 
 
@@ -366,17 +397,23 @@ if (!doNotTrack) {
             
   
 
-            <nav aria-label="breadcrumb" class="td-breadcrumbs td-breadcrumbs__single">
+            <nav aria-label="breadcrumb" class="td-breadcrumbs">
   <ol class="breadcrumb">
-  <li class="breadcrumb-item active" aria-current="page">
+  <li class="breadcrumb-item">
     <a href="/docs/">Documentation</a>
+  </li>
+  <li class="breadcrumb-item">
+    <a href="/docs/config/">Config</a>
+  </li>
+  <li class="breadcrumb-item active" aria-current="page">
+    <a href="/docs/config/config-https/">Config Https</a>
   </li>
   </ol>
 </nav>
             
 <div class="td-content">
-	<h1>Documentation</h1>
-  
+	<h1>配置 HugeGraphServer 使用 https 协议</h1>
+	
 	<header class="article-meta">
 		
 		
@@ -391,126 +428,76 @@ if (!doNotTrack) {
 			
 		
 		
-	</header>
-	<p>Welcome to HugeGraph docs</p>
-
-        <div class="section-index">
-    
-    
-    
-    
-    
-    
-    
-    
-    <hr class="panel-line">
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/introduction/readme/">Introduction with HugeGraph</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/download/download/">Download HugeGraph</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/quickstart/">Quick Start</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/config/">Config</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/clients/">API</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/guides/">GUIDES</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/language/">QUERY LANGUAGE</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/performance/">PERFORMANCE</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/contribution-guidelines/">Contribution Guidelines</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/changelog/">CHANGELOGS</a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/building/"></a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/cla/"></a>
-                </h5>
-                <p></p>
-            </div>
-        
-            
-            <div class="entry">
-                <h5>
-                    <a href="/docs/summary/"></a>
-                </h5>
-                <p></p>
-            </div>
-        
-    
-</div>
+	</header>    
+	<h3 id="概述">概述</h3>
+<p>HugeGraphServer 默认使用的是 http 协议，如果用户对请求的安全性有要求，可以配置成 https。</p>
+<h3 id="服务端配置">服务端配置</h3>
+<p>修改 conf/rest-server.properties 配置文件，将 restserver.url 的 schema 部分改为 https。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># 将协议设置为 https</span>
+</span></span><span style="display:flex;"><span><span style="color:#c4a000">restserver.url</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">https://127.0.0.1:8080</span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># 服务端 keystore 文件路径，当协议为 https 时该默认值自动生效，可按需修改此项</span>
+</span></span><span style="display:flex;"><span><span style="color:#c4a000">ssl.keystore_file</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">conf/hugegraph-server.keystore</span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># 服务端 keystore 文件密码，当协议为 https 时该默认值自动生效，可按需修改此项</span>
+</span></span><span style="display:flex;"><span><span style="color:#c4a000">ssl.keystore_password</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">******</span>
+</span></span></code></pre></div><p>服务端的 conf 目录下已经给出了一个 keystore 文件<code>hugegraph-server.keystore</code>，该文件的密码为<code>hugegraph</code>，
+这两项都是在开启了 https 协议时的默认值，用户可以生成自己的 keystore 文件及密码，然后修改<code>ssl.keystore_file</code>和<code>ssl.keystore_password</code>的值。</p>
+<h3 id="客户端配置">客户端配置</h3>
+<h4 id="在-hugegraph-client-中使用-https">在 HugeGraph-Client 中使用 https</h4>
+<p>在构造 HugeClient 时传入 https 相关的配置，代码示例：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#000">String</span> <span style="color:#000">url</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;https://localhost:8080&#34;</span><span style="color:#ce5c00;font-weight:bold">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">String</span> <span style="color:#000">graphName</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;hugegraph&#34;</span><span style="color:#ce5c00;font-weight:bold">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">HugeClientBuilder</span> <span style="color:#000">builder</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">HugeClient</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">builder</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">url</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">graphName</span><span style="color:#ce5c00;font-weight:bold">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// 客户端 keystore 文件路径
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">String</span> <span style="color:#000">trustStoreFilePath</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;hugegraph.truststore&#34;</span><span style="color:#ce5c00;font-weight:bold">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// 客户端 keystore 密码
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">String</span> <span style="color:#000">trustStorePassword</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;******&#34;</span><span style="color:#ce5c00;font-weight:bold">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">builder</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">configSSL</span><span style="color:#ce5c00;font-weight:bold">(</span><span style="color:#000">trustStoreFilePath</span><span style="color:#ce5c00;font-weight:bold">,</span> <span style="color:#000">trustStorePassword</span><span style="color:#ce5c00;font-weight:bold">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">HugeClient</span> <span style="color:#000">hugeClient</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">builder</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#c4a000">build</span><span style="color:#ce5c00;font-weight:bold">();</span>
+</span></span></code></pre></div><blockquote>
+<p>注意：HugeGraph-Client 在 1.9.0 版本以前是直接以 new 的方式创建，并且不支持 https 协议，在 1.9.0 版本以后改成以 builder 的方式创建，并支持配置 https 协议。</p>
+</blockquote>
+<h4 id="在-hugegraph-loader-中使用-https">在 HugeGraph-Loader 中使用 https</h4>
+<p>启动导入任务时，在命令行中添加如下选项：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># https</span>
+</span></span><span style="display:flex;"><span>--protocol https
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># 客户端证书文件路径，当指定 --protocol 为 https 时，默认值 conf/hugegraph.truststore 自动生效，可按需修改</span>
+</span></span><span style="display:flex;"><span>--trust-store-file <span style="color:#ce5c00;font-weight:bold">{</span>file<span style="color:#ce5c00;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># 客户端证书文件密码，当指定 --protocol 为 https 时，默认值 hugegraph 自动生效，可按需修改</span>
+</span></span><span style="display:flex;"><span>--trust-store-password <span style="color:#ce5c00;font-weight:bold">{</span>password<span style="color:#ce5c00;font-weight:bold">}</span>
+</span></span></code></pre></div><p>hugegraph-loader 的 conf 目录下已经放了一个默认的客户端证书文件 hugegraph.truststore，其密码是 hugegraph。</p>
+<h4 id="在-hugegraph-tools-中使用-https">在 HugeGraph-Tools 中使用 https</h4>
+<p>执行命令时，在命令行中添加如下选项：</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># 客户端证书文件路径，当 url 中使用 https 协议时，默认值 conf/hugegraph.truststore 自动生效，可按需修改</span>
+</span></span><span style="display:flex;"><span>--trust-store-file <span style="color:#ce5c00;font-weight:bold">{</span>file<span style="color:#ce5c00;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># 客户端证书文件密码，当 url 中使用 https 协议时，默认值 hugegraph 自动生效，可按需修改</span>
+</span></span><span style="display:flex;"><span>--trust-store-password <span style="color:#ce5c00;font-weight:bold">{</span>password<span style="color:#ce5c00;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># 执行迁移命令时，当 --target-url 中使用 https 协议时，默认值 conf/hugegraph.truststore 自动生效，可按需修改</span>
+</span></span><span style="display:flex;"><span>--target-trust-store-file <span style="color:#ce5c00;font-weight:bold">{</span>target-file<span style="color:#ce5c00;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># 执行迁移命令时，当 --target-url 中使用 https 协议时，默认值 hugegraph 自动生效，可按需修改</span>
+</span></span><span style="display:flex;"><span>--target-trust-store-password <span style="color:#ce5c00;font-weight:bold">{</span>target-password<span style="color:#ce5c00;font-weight:bold">}</span>
+</span></span></code></pre></div><p>hugegraph-tools 的 conf 目录下已经放了一个默认的客户端证书文件 hugegraph.truststore，其密码是 hugegraph。</p>
+<h3 id="如何生成证书文件">如何生成证书文件</h3>
+<p>本部分给出生成证书的示例，如果默认的证书已经够用，或者已经知晓如何生成，可跳过。</p>
+<h4 id="服务端">服务端</h4>
+<ol>
+<li>⽣成服务端私钥，并且导⼊到服务端 keystore ⽂件中，server.keystore 是给服务端⽤的，其中保存着⾃⼰的私钥</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>keytool -genkey -alias serverkey -keyalg RSA -keystore server.keystore
+</span></span></code></pre></div><p>过程中根据需求填写描述信息，默认证书的描述信息如下：</p>
+<pre tabindex="0"><code>名字和姓⽒：hugegraph
+组织单位名称：hugegraph
+组织名称：hugegraph
+城市或区域名称：BJ
+州或省份名称：BJ
+国家代码：CN
+</code></pre><ol start="2">
+<li>根据服务端私钥，导出服务端证书</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>keytool -export -alias serverkey -keystore server.keystore -file server.crt
+</span></span></code></pre></div><p>server.crt 就是服务端的证书</p>
+<h4 id="客户端">客户端</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>keytool -import -alias serverkey -file server.crt -keystore client.truststore
+</span></span></code></pre></div><p>client.truststore 是给客户端⽤的，其中保存着受信任的证书</p>
 
 	
 		<style>
@@ -577,10 +564,11 @@ if (!doNotTrack) {
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified April 21, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/1eb2a91114480cc46ec9a9b1f35258d4cbb34666">update homepage (1eb2a91)</a>
+  Last modified April 17, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/aec74b1c4cf9329b85175ff66782e5c7bcce132e">add en doc (aec74b1)</a>
 </div>
 
 </div>
+
 
           </main>
         </div>
