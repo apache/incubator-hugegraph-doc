@@ -409,41 +409,42 @@ schema.getIndexLabel("personByAge").indexType()
 schema.getIndexLabel("personByAge").name()
 ```
 
-### 3 图数据
+### 3 Graph
 
 #### 3.1 Vertex
 
-顶点是构成图的最基本元素，一个图中可以有非常多的顶点。下面给出一个添加顶点的例子：
+Vertices are the most basic elements of a graph, and there can be many vertices in a graph. Here is an example of adding vertices:
 
 ```java
 Vertex marko = graph.addVertex(T.label, "person", "name", "marko", "age", 29);
 Vertex lop = graph.addVertex(T.label, "software", "name", "lop", "lang", "java", "price", 328);
 ```
 
-- 添加顶点的关键是顶点属性，添加顶点函数的参数个数必须为偶数，且满足`key1 -> val1, key2 -> val2 ···`的顺序排列，键值对之间的顺序是自由的。
-- 参数中必须包含一对特殊的键值对，就是`T.label -> "val"`，用来定义该顶点的类别，以便于程序从缓存或后端获取到该VertexLabel的schema定义，然后做后续的约束检查。例子中的label定义为person。
-- 如果顶点类型的 Id 策略为 `AUTOMATIC`，则不允许用户传入 id 键值对。
-- 如果顶点类型的 Id 策略为 `CUSTOMIZE_STRING`，则用户需要自己传入 String 类型 id 的值，键值对形如：`"T.id", "123456"`。
-- 如果顶点类型的 Id 策略为 `CUSTOMIZE_NUMBER`，则用户需要自己传入 Number 类型 id 的值，键值对形如：`"T.id", 123456`。
-- 如果顶点类型的 Id 策略为 `PRIMARY_KEY`，参数还必须全部包含该`primaryKeys`对应属性的名和值，如果不设置会抛出异常。比如之前`person`的`primaryKeys`是`name`，例子中就设置了`name`的值为`marko`。
-- 对于非 nullableKeys 的属性，必须要赋值。
-- 剩下的参数就是顶点其他属性的设置，但并非必须。
-- 调用`addVertex`方法后，顶点会立刻被插入到后端存储系统中。
+- The key to adding vertices is the vertex properties. The number of parameters of the vertex adding function must be an even number and satisfy the order of `key1 -> val1, key2 -> val2 ...`, and the order between key-value pairs is free .
+- The parameter must contain a special key-value pair, namely `T.label -> "val"`, which is used to define the category of the vertex, so that the program can obtain the schema definition of the VertexLabel from the cache or backend, and then do subsequent constraint checks. The label in the example is defined as person.
+- If the vertex type's Id policy is `AUTOMATIC`, users are not allowed to pass in id key-value pairs.
+- If the Id policy of the vertex type is `CUSTOMIZE_STRING`, the user needs to pass in the value of the id of the String type. The key-value pair is like: `"T.id", "123456"`.
+- If the Id policy of the vertex type is `CUSTOMIZE_NUMBER`, the user needs to pass in the value of the id of the Number type. The key-value pair is like: `"T.id", 123456`.
+- If the Id policy of the vertex type is `PRIMARY_KEY`, the parameters must also contain the name and value of the properties corresponding to the `primaryKeys`, if not set an exception will be thrown. For example, the `primaryKeys` of `person` is `name`, in the example, the value of `name` is set to `marko`.
+- For properties that are not nullableKeys, a value must be assigned.
+- The remaining parameters are the settings of other properties of the vertex, but they are not required.
+- After calling the `addVertex` method, the vertices are inserted into the backend storage system immediately.
 
 #### 3.2 Edge
 
-有了点，还需要边才能构成完整的图。下面给出一个添加边的例子：
+After added vertices, edges are also needed to form a complete graph. Here is an example of adding edges:
 
 ```java
 Edge knows1 = marko.addEdge("knows", vadas, "city", "Beijing");
 ```
 
-- 由（源）顶点来调用添加边的函数，函数第一个参数为边的label，第二个参数是目标顶点，这两个参数的位置和顺序是固定的。后续的参数就是`key1 -> val1, key2 -> val2 ···`的顺序排列，设置边的属性，键值对顺序自由。
-- 源顶点和目标顶点必须符合 EdgeLabel 中 sourcelabel 和 targetlabel 的定义，不能随意添加。
-- 对于非 nullableKeys 的属性，必须要赋值。
+- The function `addEdge()` of the (source) vertex is to add a edge(relationship) between itself and another vertex. The first parameter of the function is the label of the edge, and the second parameter is the target vertex. The position and order of these two parameters are fixed. The subsequent parameters are the order of `key1 -> val1, key2 -> val2 ...`, set the properties of the edge, and the key-value pair order is free.
+- The source and target vertices must conform to the definitions of sourcelabel and targetlabel in EdgeLabel, and cannot be added arbitrarily.
+- For properties that are not nullableKeys, a value must be assigned.
 
-**注意：当frequency为multiple时必须要设置sortKeys对应属性类型的值。**
 
-### 4 简单示例
+**Note: When frequency is multiple, the value of the property type corresponding to sortKeys must be set.**
 
-简单示例见[HugeGraph-Client](/docs/quickstart/hugegraph-client)
+### 4 Examples
+
+Simple examples can reference [HugeGraph-Client](/docs/quickstart/hugegraph-client)
