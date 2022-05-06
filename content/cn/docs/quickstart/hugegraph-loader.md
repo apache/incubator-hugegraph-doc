@@ -588,7 +588,8 @@ bin/mapping-convert.sh struct.json
 - url: jdbc 要连接的数据库的 url，必填；
 - database: 要连接的数据库名，必填；
 - schema: 要连接的 schema 名，不同的数据库要求不一样，下面详细说明；
-- table: 要连接的表名，必填；
+- table: 要连接的表名，`custom_sql` 和 `table` 参数必须填其中一个；
+- custom_sql: 自定义 SQL 语句，`custom_sql` 和 `table` 参数必须填其中一个；
 - username: 连接数据库的用户名，必填；
 - password: 连接数据库的密码，必填；
 - batch_size: 按页获取表数据时的一页的大小，默认为 500，选填；
