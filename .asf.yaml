@@ -36,7 +36,7 @@ github:
   ghp_branch: gh-pages
   #ghp_path: /docs
   enabled_merge_buttons:
-    merge:  true
+    merge:  false
     squash: false
     rebase: true
   protected_branches: ~
