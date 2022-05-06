@@ -1,5 +1,7 @@
 ## Introduction of HugeGraph
 
+Please visit the [website](https://hugegraph.apache.org/) to get the latest info, current branch will be archived soon (move to [website](https://github.com/apache/incubator-hugegraph-doc/tree/website) branch)
+
 ### Summary
 
 HugeGraph is an easy-to-use, efficient, general-purpose open source graph database system(Graph Database, [GitHub project address](https://github.com/hugegraph/hugegraph)),
