@@ -585,7 +585,8 @@ As mentioned above, it supports multiple relational databases, but because their
 - url: the url of the database that jdbc wants to connect to, required;
 - database: the name of the database to be connected, required;
 - schema: The name of the schema to be connected, different databases have different requirements, and the details are explained below;
-- table: the name of the table to be connected, required;
+- table: the name of the table to be connected, at least one of `table` or `custom_sql` is required;
+- custom_sql: custom SQL statement, at least one of `table` or `custom_sql` is required;
 - username: username to connect to the database, required;
 - password: password for connecting to the database, required;
 - batch_size: The size of one page when obtaining table data by page, the default is 500, optional;
