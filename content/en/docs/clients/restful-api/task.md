@@ -6,12 +6,12 @@ weight: 13
 
 ### 7.1 Task
 
-#### 7.1.1 列出某个图中全部的异步任务
+#### 7.1.1 list all asynTasks in graph
 
 ##### Params
 
-- status: 异步任务的状态
-- limit：返回异步任务数目上限
+- status: the status of asynTasks
+- limit：the max number of tasks to return
 
 ##### Method & Url
 
@@ -45,7 +45,7 @@ GET http://localhost:8080/graphs/hugegraph/tasks?status=success
 }
 ```
 
-#### 7.1.2 查看某个异步任务的信息
+#### 7.1.2 view the details of an asyncTask
 
 ##### Method & Url
 
@@ -77,7 +77,7 @@ GET http://localhost:8080/graphs/hugegraph/tasks/2
 }
 ```
 
-#### 7.1.3 删除某个异步任务信息，**不删除异步任务本身**
+#### 7.1.3 delete task infomation of an asyncTask，**won't delete the task itself**
 
 ##### Method & Url
 
@@ -93,7 +93,7 @@ DELETE http://localhost:8080/graphs/hugegraph/tasks/2
 
 #### 7.1.4 取消某个异步任务，**该异步任务必须具有处理中断的能力**
 
-假设已经通过[Gremlin API](../gremlin)创建了一个异步任务如下：
+if you already created an asyncTask via [Gremlin API](../gremlin) as follows：
 
 ```groovy
 "for (int i = 0; i < 10; i++) {" +
@@ -113,7 +113,7 @@ DELETE http://localhost:8080/graphs/hugegraph/tasks/2
 PUT http://localhost:8080/graphs/hugegraph/tasks/2?action=cancel
 ```
 
-> 请保证在10秒内发送该请求，如果超过10秒发送，任务可能已经执行完成，无法取消。
+> cancel it in 10s. if more than 10s，the task may already finished,then can't be cancelled.
 
 ##### Response Status
 
@@ -129,4 +129,4 @@ PUT http://localhost:8080/graphs/hugegraph/tasks/2?action=cancel
 }
 ```
 
-此时查询 label 为 man 的顶点数目，一定是小于 10 的。
+query the number of vertex which label is man ，it must less than 10。
