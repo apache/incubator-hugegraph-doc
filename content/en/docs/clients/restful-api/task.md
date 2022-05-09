@@ -6,7 +6,7 @@ weight: 13
 
 ### 7.1 Task
 
-#### 7.1.1 list all asynTasks in graph
+#### 7.1.1 List all async tasks in graph
 
 ##### Params
 
@@ -45,7 +45,7 @@ GET http://localhost:8080/graphs/hugegraph/tasks?status=success
 }
 ```
 
-#### 7.1.2 view the details of an asyncTask
+#### 7.1.2 View the details of an async task
 
 ##### Method & Url
 
@@ -77,7 +77,7 @@ GET http://localhost:8080/graphs/hugegraph/tasks/2
 }
 ```
 
-#### 7.1.3 delete task infomation of an asyncTask，**won't delete the task itself**
+#### 7.1.3 Delete task infomation of an async task，**won't delete the task itself**
 
 ##### Method & Url
 
@@ -93,7 +93,7 @@ DELETE http://localhost:8080/graphs/hugegraph/tasks/2
 
 #### 7.1.4 取消某个异步任务，**该异步任务必须具有处理中断的能力**
 
-if you already created an asyncTask via [Gremlin API](../gremlin) as follows：
+If you already created an async task via [Gremlin API](../gremlin) as follows：
 
 ```groovy
 "for (int i = 0; i < 10; i++) {" +
@@ -128,4 +128,4 @@ PUT http://localhost:8080/graphs/hugegraph/tasks/2?action=cancel
 }
 ```
 
-query the number of vertex which label is man ，it must less than 10。
+At this point, the number of vertices whose label is man must be less than 10.
