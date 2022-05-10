@@ -123,34 +123,37 @@ schema.edgeLabel("rating")
 
 ##### 4.2.1.1 Function Introduction
 
-适用于二分图，给出所有源顶点相关的其他顶点及其相关性组成的列表。
+suitable for bipartite graph, will return all vertex or a list of it's correlation which related to all source vertex.
 
-> 二分图：也称二部图，是图论里的一种特殊模型，也是一种特殊的网络流。其最大的特点在于，可以将图里的顶点分为两个集合，两个集合之间的点有边相连，但集合内的点之间没有直接关联。
 
-假设有一个用户和物品的二分图，基于随机游走的 PersonalRank 算法步骤如下：
+> Bipartite Graph is a special model in Graph Theory, as well as a special flow in network. The strongest feature is, it split all vertex in graph into two sets. The vertex in the each set is not connected. However,the vertex in two sets may connected with each other.
 
-1. 选定一个起点用户 u，其初始权重为 1.0，从 Vu 开始游走（有 alpha 的概率走到邻居点，1 - alpha 的概率停留）；
-2. 如果决定向外游走, 那么会选取某一个类型的出边, 例如 `rating` 来查找共同的打分人：
-   1. 那就从当前节点的邻居节点中按照均匀分布随机选择一个，并且按照均匀分布划分权重值；
-   2. 给源顶点补偿权重 1 - alpha；
-   3. 重复步骤2；
-3. 达到一定步数或达到精度后收敛，得到推荐列表。
+Suppose we have one bipartite graph based on user and things.
+A random walk based PersonalRank algorithm should be likes this:
+
+
+1. Choose a user u as start vertex, let's set the initial weight to be 1.0 . Go from Vu with probability alpha to a neighbor vertex, and (1-alpha) to stay.
+2. If we decide to go outside, we would like to choose an edge, such as `rating`, to find a common judge.
+   1. Then choose the neighbors of current vertex randomly with uniform distribution, and reset the weights with uniform distribution.
+   2. Compensate the source vertex's weight with (1 - alpha)
+   3. Repeat step 2;
+3. Convergence after reaching a certain number of steps or precision, then we got a recommend-list.
 
 ###### Params
 
 **Required**:
-- source: 源顶点 id
-- label: 源点出发的某类边 label，须连接两类不同顶点
+- source: the id of source vertex
+- label: edge label go from the source vertex, should connect two different type of vertex
 
 **Optional**:
-- alpha：每轮迭代时从某个点往外走的概率，与 PageRank 算法中的 alpha 类似，取值区间为 (0, 1], 默认值 `0.85` 
+- alpha: the probability of going out for one vertex in each iteration，similar to the alpha of PageRank,required, value range is (0, 1], default 0.85.
 - max_degree: 查询过程中，单个顶点遍历的最大邻接边数目，默认为 `10000`
 - max_depth: 迭代次数，取值区间为 [2, 50], 默认值 `5`
 - with_label：筛选结果中保留哪些结果，可选以下三类, 默认为 `BOTH_LABEL`
     - SAME_LABEL：仅保留与源顶点相同类别的顶点
     - OTHER_LABEL：仅保留与源顶点不同类别（二分图的另一端）的顶点
     - BOTH_LABEL：同时保留与源顶点相同和相反类别的顶点
-- limit: 返回的顶点的最大数目，默认为 `100`
+- limit: max return vertex number,default `100`
 - max_diff: 提前收敛的精度差, 默认为 `0.0001` (*后续实现*)  
 - sorted：返回的结果是否根据 rank 排序，为 true 时降序排列，反之不排序，默认为 `true`
 
