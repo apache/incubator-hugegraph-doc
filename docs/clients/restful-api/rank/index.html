@@ -31,13 +31,13 @@ HugeGraphServer 除了上一节提到的遍历（traverser）方法，还提供�
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/docs/clients/restful-api/rank/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2022-04-17T11:51:18+08:00" /><meta property="og:site_name" content="HugeGraph" />
+<meta property="article:modified_time" content="2022-04-17T11:36:55+08:00" /><meta property="og:site_name" content="HugeGraph" />
 
 <meta itemprop="name" content="Rank API">
 <meta itemprop="description" content="4.1 rank API 概述 HugeGraphServer 除了上一节提到的遍历（traverser）方法，还提供了一类专门做推荐的方法，我们称为rank API， 可在图中为一个点推荐与其关系密切的其它点。
 4.2 rank API 详解 4.2.1 Personal Rank API Personal Rank 算法典型场景是用于推荐应用中, 根据某个点现有的出边, 推荐具有相近 / 相同关系的其他点, 比如根据某个人的阅读记录 / 习惯, 向它推荐其他可能感兴趣的书, 或潜在的书友, 举例如下:
  假设给定 1个 Person 点 是 tom, 它喜欢 a,b,c,d,e 5本书, 我们的想给 tom 推荐一些书友, 以及一些书, 最容易的想法就是看看还有哪些人喜欢过这些书 (共同兴趣) 那么此时, 需要有其它的 Person 点比如 neo, 他喜欢 b,d,f 3本书, 以及 jay, 它喜欢 c,d,e,g 4本书, lee 它喜欢 a,d,e,f 4本书 由于 tom 已经看过的书不需要重复推荐, 所以返回结果里应该期望推荐有共同喜好的其他书友看过, 但 tom 没看过的书, 比如推荐 &ldquo;f&rdquo; 和 &ldquo;g&rdquo; 书, 且优先级 f &gt; g 此时再计算 tom 的个性化 rank 值, 就会返回排序后 TopN 推荐的 书友 &#43; 书 的结果了 (如果只需要推荐的书, 选择 OTHER_LABEL 即可)  4.">
-<meta itemprop="dateModified" content="2022-04-17T11:51:18+08:00" />
+<meta itemprop="dateModified" content="2022-04-17T11:36:55+08:00" />
 <meta itemprop="wordCount" content="757">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Rank API"/>
@@ -48,8 +48,8 @@ HugeGraphServer 除了上一节提到的遍历（traverser）方法，还提供�
 
 
 
-<link rel="preload" href="/scss/main.scss" as="style">
-<link href="/scss/main.scss" rel="stylesheet" integrity="">
+<link rel="preload" href="/scss/main.min.db39f6d8b4e51e8200036c7769f7f4bcd9811ab25ad4f8d3f8087f9b3b565b7c.css" as="style">
+<link href="/scss/main.min.db39f6d8b4e51e8200036c7769f7f4bcd9811ab25ad4f8d3f8087f9b3b565b7c.css" rel="stylesheet" integrity="">
 
 <script
   src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -831,7 +831,7 @@ if (!doNotTrack) {
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified April 17, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/aec74b1c4cf9329b85175ff66782e5c7bcce132e">add en doc (aec74b1)</a>
+  Last modified April 17, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/ef36544478e135c747b8f0d13f1fde8b7faa1b75">rebuild doc (ef36544)</a>
 </div>
 
 </div>

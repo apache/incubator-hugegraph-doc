@@ -33,7 +33,7 @@ HugeGraphServer 内部集成了 GremlinServer 和 RestServer，而 gremlin-serve
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/docs/config/config-guide/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2022-04-17T11:51:18+08:00" /><meta property="og:site_name" content="HugeGraph" />
+<meta property="article:modified_time" content="2022-04-17T11:36:55+08:00" /><meta property="og:site_name" content="HugeGraph" />
 
 <meta itemprop="name" content="HugeGraph 配置">
 <meta itemprop="description" content="1 概述 配置文件的目录为 hugegraph-release/conf，所有关于服务和图本身的配置都在此目录下。
@@ -42,7 +42,7 @@ HugeGraphServer 内部集成了 GremlinServer 和 RestServer，而 gremlin-serve
  GremlinServer：GremlinServer接受用户的gremlin语句，解析后转而调用Core的代码。 RestServer：提供RESTful API，根据不同的HTTP请求，调用对应的Core API，如果用户请求体是gremlin语句，则会转发给GremlinServer，实现对图数据的操作。  下面对这三个配置文件逐一介绍。
 2 gremlin-server.yaml gremlin-server.yaml 文件默认的内容如下：
 # host and port of gremlin server, need to be consistent with host and port in rest-server.properties#host: 127.0.0.1#port: 8182# timeout in ms of gremlin queryscriptEvaluationTimeout:30000channelizer:org.apache.tinkerpop.gremlin.server.channel.WsAndHttpChannelizergraphs:{hugegraph:conf/hugegraph.properties}scriptEngines:{gremlin-groovy:{plugins:{com.baidu.hugegraph.plugin.HugeGraphGremlinPlugin:{},org.apache.tinkerpop.gremlin.server.jsr223.GremlinServerGremlinPlugin:{},org.apache.tinkerpop.gremlin.jsr223.ImportGremlinPlugin:{classImports:[java.lang.Math,com.baidu.hugegraph.backend.id.IdGenerator,com.baidu.hugegraph.type.define.Directions,com.baidu.hugegraph.type.define.NodeRole,com.baidu.hugegraph.traversal.algorithm.CustomizePathsTraverser,com.baidu.hugegraph.traversal.algorithm.CustomizedCrosspointsTraverser,com.baidu.hugegraph.traversal.algorithm.FusiformSimilarityTraverser,com.baidu.hugegraph.traversal.algorithm.HugeTraverser,com.baidu.hugegraph.traversal.algorithm.NeighborRankTraverser,com.baidu.hugegraph.traversal.algorithm.PathsTraverser,com.baidu.hugegraph.traversal.algorithm.PersonalRankTraverser,com.baidu.hugegraph.traversal.algorithm.ShortestPathTraverser,com.baidu.hugegraph.traversal.algorithm.SubGraphTraverser,com.baidu.hugegraph.traversal.optimize.Text,com.baidu.hugegraph.traversal.optimize.TraversalUtil,com.baidu.hugegraph.util.DateUtil],methodImports:[java.lang.Math#*]},org.apache.tinkerpop.gremlin.jsr223.ScriptFileGremlinPlugin:{files:[scripts/empty-sample.groovy]}}}}serializers:- {className:org.apache.tinkerpop.gremlin.driver.ser.GraphBinaryMessageSerializerV1,config:{serializeResultToString:false,ioRegistries:[com.baidu.hugegraph.io.HugeGraphIoRegistry]}}- {className:org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV1d0,config:{serializeResultToString:false,ioRegistries:[com.baidu.hugegraph.io.HugeGraphIoRegistry]}}- {className:org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV2d0,config:{serializeResultToString:false,ioRegistries:[com.baidu.hugegraph.io.HugeGraphIoRegistry]}}- {className:org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV3d0,config:{serializeResultToString:false,ioRegistries:[com.baidu.hugegraph.io.HugeGraphIoRegistry]}}metrics:{consoleReporter:{enabled: false, interval:180000},csvReporter:{enabled: false, interval: 180000, fileName:./metrics/gremlin-server-metrics.csv},jmxReporter:{enabled:false},slf4jReporter:{enabled: false, interval:180000},gangliaReporter:{enabled: false, interval: 180000, addressingMode:MULTICAST},graphiteReporter:{enabled: false, interval:180000}}maxInitialLineLength:4096maxHeaderSize:8192maxChunkSize:8192maxContentLength:65536maxAccumulationBufferComponents:1024resultIterationBatchSize:64writeBufferLowWaterMark:32768writeBufferHighWaterMark:65536ssl:{enabled:false}上面的配置项很多，但目前只需要关注如下几个配置项：channelizer 和 graphs。">
-<meta itemprop="dateModified" content="2022-04-17T11:51:18+08:00" />
+<meta itemprop="dateModified" content="2022-04-17T11:36:55+08:00" />
 <meta itemprop="wordCount" content="403">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="HugeGraph 配置"/>
@@ -56,8 +56,8 @@ HugeGraphServer 内部集成了 GremlinServer 和 RestServer，而 gremlin-serve
 
 
 
-<link rel="preload" href="/scss/main.scss" as="style">
-<link href="/scss/main.scss" rel="stylesheet" integrity="">
+<link rel="preload" href="/scss/main.min.db39f6d8b4e51e8200036c7769f7f4bcd9811ab25ad4f8d3f8087f9b3b565b7c.css" as="style">
+<link href="/scss/main.min.db39f6d8b4e51e8200036c7769f7f4bcd9811ab25ad4f8d3f8087f9b3b565b7c.css" rel="stylesheet" integrity="">
 
 <script
   src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -757,7 +757,7 @@ serializer=binary
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified April 17, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/aec74b1c4cf9329b85175ff66782e5c7bcce132e">add en doc (aec74b1)</a>
+  Last modified April 17, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/ef36544478e135c747b8f0d13f1fde8b7faa1b75">rebuild doc (ef36544)</a>
 </div>
 
 </div>

@@ -33,7 +33,7 @@ String url = &#34;https://localhost:8080&#34;; String graphName = &#34;hugegraph
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/docs/config/config-https/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2022-04-17T11:51:18+08:00" /><meta property="og:site_name" content="HugeGraph" />
+<meta property="article:modified_time" content="2022-04-17T11:36:55+08:00" /><meta property="og:site_name" content="HugeGraph" />
 
 <meta itemprop="name" content="配置 HugeGraphServer 使用 https 协议">
 <meta itemprop="description" content="概述 HugeGraphServer 默认使用的是 http 协议，如果用户对请求的安全性有要求，可以配置成 https。
@@ -41,7 +41,7 @@ String url = &#34;https://localhost:8080&#34;; String graphName = &#34;hugegraph
 # 将协议设置为 https restserver.url=https://127.0.0.1:8080 # 服务端 keystore 文件路径，当协议为 https 时该默认值自动生效，可按需修改此项 ssl.keystore_file=conf/hugegraph-server.keystore # 服务端 keystore 文件密码，当协议为 https 时该默认值自动生效，可按需修改此项 ssl.keystore_password=****** 服务端的 conf 目录下已经给出了一个 keystore 文件hugegraph-server.keystore，该文件的密码为hugegraph， 这两项都是在开启了 https 协议时的默认值，用户可以生成自己的 keystore 文件及密码，然后修改ssl.keystore_file和ssl.keystore_password的值。
 客户端配置 在 HugeGraph-Client 中使用 https 在构造 HugeClient 时传入 https 相关的配置，代码示例：
 String url = &#34;https://localhost:8080&#34;; String graphName = &#34;hugegraph&#34;; HugeClientBuilder builder = HugeClient.builder(url, graphName); // 客户端 keystore 文件路径 String trustStoreFilePath = &#34;hugegraph.">
-<meta itemprop="dateModified" content="2022-04-17T11:51:18+08:00" />
+<meta itemprop="dateModified" content="2022-04-17T11:36:55+08:00" />
 <meta itemprop="wordCount" content="232">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="配置 HugeGraphServer 使用 https 协议"/>
@@ -54,8 +54,8 @@ String url = &#34;https://localhost:8080&#34;; String graphName = &#34;hugegraph
 
 
 
-<link rel="preload" href="/scss/main.scss" as="style">
-<link href="/scss/main.scss" rel="stylesheet" integrity="">
+<link rel="preload" href="/scss/main.min.db39f6d8b4e51e8200036c7769f7f4bcd9811ab25ad4f8d3f8087f9b3b565b7c.css" as="style">
+<link href="/scss/main.min.db39f6d8b4e51e8200036c7769f7f4bcd9811ab25ad4f8d3f8087f9b3b565b7c.css" rel="stylesheet" integrity="">
 
 <script
   src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -564,7 +564,7 @@ if (!doNotTrack) {
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified April 17, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/aec74b1c4cf9329b85175ff66782e5c7bcce132e">add en doc (aec74b1)</a>
+  Last modified April 17, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/ef36544478e135c747b8f0d13f1fde8b7faa1b75">rebuild doc (ef36544)</a>
 </div>
 
 </div>

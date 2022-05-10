@@ -28,14 +28,14 @@ Currently supported data sources include:
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/docs/quickstart/hugegraph-loader/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2022-04-26T16:00:39+08:00" /><meta property="og:site_name" content="HugeGraph" />
+<meta property="article:modified_time" content="2022-05-06T12:00:44+08:00" /><meta property="og:site_name" content="HugeGraph" />
 
 <meta itemprop="name" content="HugeGraph-Loader Quick Start">
 <meta itemprop="description" content="1 HugeGraph-Loader Overview HugeGraph-Loader is the data import component of HugeGragh, which can convert data from various data sources into graph vertices and edges and import them into the graph database in batches.
 Currently supported data sources include:
  Local disk file or directory, supports TEXT, CSV and JSON format files, supports compressed files HDFS file or directory, supports compressed files Mainstream relational databases, such as MySQL, PostgreSQL, Oracle, SQL Server  Local disk files and HDFS files support resumable uploads.">
-<meta itemprop="dateModified" content="2022-04-26T16:00:39+08:00" />
-<meta itemprop="wordCount" content="5147">
+<meta itemprop="dateModified" content="2022-05-06T12:00:44+08:00" />
+<meta itemprop="wordCount" content="5168">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="HugeGraph-Loader Quick Start"/>
 <meta name="twitter:description" content="1 HugeGraph-Loader Overview HugeGraph-Loader is the data import component of HugeGragh, which can convert data from various data sources into graph vertices and edges and import them into the graph database in batches.
@@ -45,8 +45,8 @@ Currently supported data sources include:
 
 
 
-<link rel="preload" href="/scss/main.scss" as="style">
-<link href="/scss/main.scss" rel="stylesheet" integrity="">
+<link rel="preload" href="/scss/main.min.db39f6d8b4e51e8200036c7769f7f4bcd9811ab25ad4f8d3f8087f9b3b565b7c.css" as="style">
+<link href="/scss/main.min.db39f6d8b4e51e8200036c7769f7f4bcd9811ab25ad4f8d3f8087f9b3b565b7c.css" rel="stylesheet" integrity="">
 
 <script
   src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -899,7 +899,8 @@ Office,388
 <li>url: the url of the database that jdbc wants to connect to, required;</li>
 <li>database: the name of the database to be connected, required;</li>
 <li>schema: The name of the schema to be connected, different databases have different requirements, and the details are explained below;</li>
-<li>table: the name of the table to be connected, required;</li>
+<li>table: the name of the table to be connected, at least one of <code>table</code> or <code>custom_sql</code> is required;</li>
+<li>custom_sql: custom SQL statement, at least one of <code>table</code> or <code>custom_sql</code> is required;</li>
 <li>username: username to connect to the database, required;</li>
 <li>password: password for connecting to the database, required;</li>
 <li>batch_size: The size of one page when obtaining table data by page, the default is 500, optional;</li>
@@ -1478,7 +1479,7 @@ count metrics
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified April 26, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/ea914b5ab572aa3a7ddb3730c120f227043c4792">translate: hugegraph-loader.md into english (#113) (ea914b5)</a>
+  Last modified May 6, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/7877f73c3e0ac9455afc9c0a68a7bbdad26184ee">custom sql doc (7877f73)</a>
 </div>
 
 </div>

@@ -789,7 +789,8 @@ Office,388
 &lt;li&gt;url: the url of the database that jdbc wants to connect to, required;&lt;/li&gt;
 &lt;li&gt;database: the name of the database to be connected, required;&lt;/li&gt;
 &lt;li&gt;schema: The name of the schema to be connected, different databases have different requirements, and the details are explained below;&lt;/li&gt;
-&lt;li&gt;table: the name of the table to be connected, required;&lt;/li&gt;
+&lt;li&gt;table: the name of the table to be connected, at least one of &lt;code&gt;table&lt;/code&gt; or &lt;code&gt;custom_sql&lt;/code&gt; is required;&lt;/li&gt;
+&lt;li&gt;custom_sql: custom SQL statement, at least one of &lt;code&gt;table&lt;/code&gt; or &lt;code&gt;custom_sql&lt;/code&gt; is required;&lt;/li&gt;
 &lt;li&gt;username: username to connect to the database, required;&lt;/li&gt;
 &lt;li&gt;password: password for connecting to the database, required;&lt;/li&gt;
 &lt;li&gt;batch_size: The size of one page when obtaining table data by page, the default is 500, optional;&lt;/li&gt;

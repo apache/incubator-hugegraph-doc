@@ -36,7 +36,7 @@ Backup bin/hugegraph backup -t all -d data 该命令将 http://127.0.0.1 的 hug
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/docs/guides/backup-restore/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2022-04-17T11:51:18+08:00" /><meta property="og:site_name" content="HugeGraph" />
+<meta property="article:modified_time" content="2022-04-17T11:36:55+08:00" /><meta property="og:site_name" content="HugeGraph" />
 
 <meta itemprop="name" content="Backup Restore">
 <meta itemprop="description" content="描述 Backup 和 Restore 是备份图和恢复图的功能。备份和恢复的数据包括元数据（schema）和图数据（vertex 和 edge）。
@@ -46,7 +46,7 @@ Restore 有两种模式：
  Restoring 模式，将 Backup 导出的元数据和图数据原封不动的恢复到 HugeGraph 系统中。可用于图的备份和恢复，一般目标图是新图（没有元数据和图数据）。比如：  系统升级，先备份图，然后升级系统，最后将图恢复到新的系统中 图迁移，从一个 HugeGraph 系统中，使用 Backup 功能将图导出，然后使用 Restore 功能将图导入另一个 HugeGraph 系统中   Merging 模式，将 Backup 导出的元数据和图数据导入到另一个已经存在元数据或者图数据的图中，过程中元数据的 ID 可能发生改变，顶点和边的 ID 也会发生相应变化。  可用于合并图    使用方法 可以使用hugegraph-tools进行图的备份和恢复。
 Backup bin/hugegraph backup -t all -d data 该命令将 http://127.0.0.1 的 hugegraph 图的全部元数据和图数据备份到data目录下。
  Backup 在三种图模式下都可以正常工作">
-<meta itemprop="dateModified" content="2022-04-17T11:51:18+08:00" />
+<meta itemprop="dateModified" content="2022-04-17T11:36:55+08:00" />
 <meta itemprop="wordCount" content="212">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Backup Restore"/>
@@ -61,8 +61,8 @@ Backup bin/hugegraph backup -t all -d data 该命令将 http://127.0.0.1 的 hug
 
 
 
-<link rel="preload" href="/scss/main.scss" as="style">
-<link href="/scss/main.scss" rel="stylesheet" integrity="">
+<link rel="preload" href="/scss/main.min.db39f6d8b4e51e8200036c7769f7f4bcd9811ab25ad4f8d3f8087f9b3b565b7c.css" as="style">
+<link href="/scss/main.min.db39f6d8b4e51e8200036c7769f7f4bcd9811ab25ad4f8d3f8087f9b3b565b7c.css" rel="stylesheet" integrity="">
 
 <script
   src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -607,7 +607,7 @@ if (!doNotTrack) {
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified April 17, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/aec74b1c4cf9329b85175ff66782e5c7bcce132e">add en doc (aec74b1)</a>
+  Last modified April 17, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/ef36544478e135c747b8f0d13f1fde8b7faa1b75">rebuild doc (ef36544)</a>
 </div>
 
 </div>

@@ -37,8 +37,8 @@
 
 
 
-<link rel="preload" href="/scss/main.scss" as="style">
-<link href="/scss/main.scss" rel="stylesheet" integrity="">
+<link rel="preload" href="/scss/main.min.db39f6d8b4e51e8200036c7769f7f4bcd9811ab25ad4f8d3f8087f9b3b565b7c.css" as="style">
+<link href="/scss/main.min.db39f6d8b4e51e8200036c7769f7f4bcd9811ab25ad4f8d3f8087f9b3b565b7c.css" rel="stylesheet" integrity="">
 
 <script
   src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -1438,7 +1438,7 @@ This is the multi-page printable view of this section.
 	<h1 id="pg-bde129922f801ad9560757fcec64d05c">6 - Rebuild API</h1>
     
 	<h3 id="16-rebuild">1.6 Rebuild</h3>
-<h4 id="161-重建indexlabel">1.6.1 重建IndexLabel</h4>
+<h4 id="161-rebuild-indexlabel">1.6.1 Rebuild IndexLabel</h4>
 <h5 id="method--url">Method &amp; Url</h5>
 <pre tabindex="0"><code>PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/indexlabels/personByCity
 </code></pre><h5 id="response-status">Response Status</h5>
@@ -1447,11 +1447,11 @@ This is the multi-page printable view of this section.
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;task_id&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">1</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span></code></pre></div><p>注：</p>
+</span></span></code></pre></div><p>Note:</p>
 <blockquote>
-<p>可以通过<code>GET http://localhost:8080/graphs/hugegraph/tasks/1</code>（其中&quot;1&quot;是task_id）来查询异步任务的执行状态，更多<a href="../task">异步任务RESTful API</a></p>
+<p>You can get the asynchronous job status by <code>GET http://localhost:8080/graphs/hugegraph/tasks/${task_id}</code> (the task_id here should be 1). See More <a href="../task">AsyncJob RESTfull API</a></p>
 </blockquote>
-<h4 id="162-vertexlabel对应的全部索引重建">1.6.2 VertexLabel对应的全部索引重建</h4>
+<h4 id="162-rebulid-all-indexs-of-vertexlabel">1.6.2 Rebulid all Indexs of VertexLabel</h4>
 <h5 id="method--url-1">Method &amp; Url</h5>
 <pre tabindex="0"><code>PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/vertexlabels/person
 </code></pre><h5 id="response-status-1">Response Status</h5>
@@ -1460,11 +1460,11 @@ This is the multi-page printable view of this section.
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;task_id&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">2</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span></code></pre></div><p>注：</p>
+</span></span></code></pre></div><p>Note:</p>
 <blockquote>
-<p>可以通过<code>GET http://localhost:8080/graphs/hugegraph/tasks/2</code>（其中&quot;2&quot;是task_id）来查询异步任务的执行状态，更多<a href="../task">异步任务RESTful API</a></p>
+<p>You can get the asynchronous job status by <code>GET http://localhost:8080/graphs/hugegraph/tasks/${task_id}</code> (the task_id here should be 2). See More <a href="../task">AsyncJob RESTfull API</a></p>
 </blockquote>
-<h4 id="163-edgelabel对应的全部索引重建">1.6.3 EdgeLabel对应的全部索引重建</h4>
+<h4 id="163-rebulid-all-indexs-of-edgelabel">1.6.3 Rebulid all Indexs of EdgeLabel</h4>
 <h5 id="method--url-2">Method &amp; Url</h5>
 <pre tabindex="0"><code>PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/edgelabels/created
 </code></pre><h5 id="response-status-2">Response Status</h5>
@@ -1473,9 +1473,9 @@ This is the multi-page printable view of this section.
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;task_id&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">3</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span></code></pre></div><p>注：</p>
+</span></span></code></pre></div><p>Note:</p>
 <blockquote>
-<p>可以通过<code>GET http://localhost:8080/graphs/hugegraph/tasks/3</code>（其中&quot;3&quot;是task_id）来查询异步任务的执行状态，更多<a href="../task">异步任务RESTful API</a></p>
+<p>You can get the asynchronous job status by <code>GET http://localhost:8080/graphs/hugegraph/tasks/${task_id}</code> (the task_id here should be 3). See More <a href="../task">AsyncJob RESTfull API</a></p>
 </blockquote>
 
 </div>
@@ -5765,11 +5765,11 @@ store=hugegraph
 	<h1 id="pg-d9de752e44e3a8a709d187e4101fd818">13 - Task API</h1>
     
 	<h3 id="71-task">7.1 Task</h3>
-<h4 id="711-列出某个图中全部的异步任务">7.1.1 列出某个图中全部的异步任务</h4>
+<h4 id="711-list-all-async-tasks-in-graph">7.1.1 List all async tasks in graph</h4>
 <h5 id="params">Params</h5>
 <ul>
-<li>status: 异步任务的状态</li>
-<li>limit：返回异步任务数目上限</li>
+<li>status: the status of asynTasks</li>
+<li>limit：the max number of tasks to return</li>
 </ul>
 <h5 id="method--url">Method &amp; Url</h5>
 <pre tabindex="0"><code>GET http://localhost:8080/graphs/hugegraph/tasks?status=success
@@ -5791,7 +5791,7 @@ store=hugegraph
 </span></span><span style="display:flex;"><span>		<span style="color:#204a87;font-weight:bold">&#34;task_input&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;{\&#34;gremlin\&#34;:\&#34;hugegraph.traversal().V()\&#34;,\&#34;bindings\&#34;:{},\&#34;language\&#34;:\&#34;gremlin-groovy\&#34;,\&#34;aliases\&#34;:{\&#34;hugegraph\&#34;:\&#34;graph\&#34;}}&#34;</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">}]</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span></code></pre></div><h4 id="712-查看某个异步任务的信息">7.1.2 查看某个异步任务的信息</h4>
+</span></span></code></pre></div><h4 id="712-view-the-details-of-an-async-task">7.1.2 View the details of an async task</h4>
 <h5 id="method--url-1">Method &amp; Url</h5>
 <pre tabindex="0"><code>GET http://localhost:8080/graphs/hugegraph/tasks/2
 </code></pre><h5 id="response-status-1">Response Status</h5>
@@ -5810,13 +5810,13 @@ store=hugegraph
 </span></span><span style="display:flex;"><span>	<span style="color:#204a87;font-weight:bold">&#34;task_callable&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;com.baidu.hugegraph.api.job.GremlinAPI$GremlinJob&#34;</span><span style="color:#000;font-weight:bold">,</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#204a87;font-weight:bold">&#34;task_input&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;{\&#34;gremlin\&#34;:\&#34;hugegraph.traversal().V()\&#34;,\&#34;bindings\&#34;:{},\&#34;language\&#34;:\&#34;gremlin-groovy\&#34;,\&#34;aliases\&#34;:{\&#34;hugegraph\&#34;:\&#34;graph\&#34;}}&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span></code></pre></div><h4 id="713-删除某个异步任务信息不删除异步任务本身">7.1.3 删除某个异步任务信息，<strong>不删除异步任务本身</strong></h4>
+</span></span></code></pre></div><h4 id="713-delete-task-infomation-of-an-async-taskwont-delete-the-task-itself">7.1.3 Delete task infomation of an async task，<strong>won&rsquo;t delete the task itself</strong></h4>
 <h5 id="method--url-2">Method &amp; Url</h5>
 <pre tabindex="0"><code>DELETE http://localhost:8080/graphs/hugegraph/tasks/2
 </code></pre><h5 id="response-status-2">Response Status</h5>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#0000cf;font-weight:bold">204</span>
 </span></span></code></pre></div><h4 id="714-取消某个异步任务该异步任务必须具有处理中断的能力">7.1.4 取消某个异步任务，<strong>该异步任务必须具有处理中断的能力</strong></h4>
-<p>假设已经通过<a href="../gremlin">Gremlin API</a>创建了一个异步任务如下：</p>
+<p>If you already created an async task via <a href="../gremlin">Gremlin API</a> as follows：</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-groovy" data-lang="groovy"><span style="display:flex;"><span><span style="color:#4e9a06">&#34;for (int i = 0; i &lt; 10; i++) {&#34;</span> <span style="color:#ce5c00;font-weight:bold">+</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;hugegraph.addVertex(T.label, &#39;man&#39;);&#34;</span> <span style="color:#ce5c00;font-weight:bold">+</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;hugegraph.tx().commit();&#34;</span> <span style="color:#ce5c00;font-weight:bold">+</span>
@@ -5829,7 +5829,7 @@ store=hugegraph
 </span></span></code></pre></div><h5 id="method--url-3">Method &amp; Url</h5>
 <pre tabindex="0"><code>PUT http://localhost:8080/graphs/hugegraph/tasks/2?action=cancel
 </code></pre><blockquote>
-<p>请保证在10秒内发送该请求，如果超过10秒发送，任务可能已经执行完成，无法取消。</p>
+<p>cancel it in 10s. if more than 10s，the task may already finished,then can&rsquo;t be cancelled.</p>
 </blockquote>
 <h5 id="response-status-3">Response Status</h5>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#0000cf;font-weight:bold">202</span>
@@ -5837,7 +5837,7 @@ store=hugegraph
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;cancelled&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">true</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span></code></pre></div><p>此时查询 label 为 man 的顶点数目，一定是小于 10 的。</p>
+</span></span></code></pre></div><p>At this point, the number of vertices whose label is man must be less than 10.</p>
 
 </div>
 
