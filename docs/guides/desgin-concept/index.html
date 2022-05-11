@@ -36,7 +36,7 @@ HugeGraph对应的存储概念模型也是参考Property Graph而设计的，具
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/docs/guides/desgin-concept/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2022-04-17T11:51:18+08:00" /><meta property="og:site_name" content="HugeGraph" />
+<meta property="article:modified_time" content="2022-04-17T11:36:55+08:00" /><meta property="og:site_name" content="HugeGraph" />
 
 <meta itemprop="name" content="HugeGraph Design Concepts">
 <meta itemprop="description" content="1. Property Graph 常见的图数据表示模型有两种，分别是RDF（Resource Description Framework）模型和属性图（Property Graph）模型。 RDF和Property Graph都是最基础、最有名的图表示模式，都能够表示各种图的实体关系建模。 RDF是W3C标准，而Property Graph是工业标准，受到广大图数据库厂商的广泛支持。HugeGraph目前采用Property Graph。
@@ -48,7 +48,7 @@ HugeGraph对应的存储概念模型也是参考Property Graph而设计的，具
 3. VertexId 策略 HugeGraph的Vertex支持三种ID策略，在同一个图数据库中不同的VertexLabel可以使用不同的Id策略，目前HugeGraph支持的Id策略分别是：
  自动生成（AUTOMATIC）：使用Snowflake算法自动生成全局唯一Id，Long类型； 主键（PRIMARY_KEY）：通过VertexLabel&#43;PrimaryKeyValues生成Id，String类型； 自定义（CUSTOMIZE_STRING|CUSTOMIZE_NUMBER）：用户自定义Id，分为String和Long类型两种，需自己保证Id的唯一性；  默认的Id策略是AUTOMATIC，如果用户调用primaryKeys()方法并设置了正确的PrimaryKeys，则自动启用PRIMARY_KEY策略。 启用PRIMARY_KEY策略后HugeGraph能根据PrimaryKeys实现数据去重。
  AUTOMATIC ID策略  schema.vertexLabel(&#34;person&#34;)  .useAutomaticId()  .properties(&#34;name&#34;, &#34;age&#34;, &#34;city&#34;)  .create(); graph.addVertex(T.label, &#34;person&#34;,&#34;name&#34;, &#34;marko&#34;, &#34;age&#34;, 18, &#34;city&#34;, &#34;Beijing&#34;); PRIMARY_KEY ID策略  schema.">
-<meta itemprop="dateModified" content="2022-04-17T11:51:18+08:00" />
+<meta itemprop="dateModified" content="2022-04-17T11:36:55+08:00" />
 <meta itemprop="wordCount" content="335">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="HugeGraph Design Concepts"/>
@@ -695,7 +695,7 @@ HugeGraph目前采用EdgeCut的分区方案。</p>
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified April 17, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/aec74b1c4cf9329b85175ff66782e5c7bcce132e">add en doc (aec74b1)</a>
+  Last modified April 17, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/ef36544478e135c747b8f0d13f1fde8b7faa1b75">rebuild doc (ef36544)</a>
 </div>
 
 </div>

@@ -33,13 +33,13 @@ Params说明
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/docs/clients/restful-api/edgelabel/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2022-04-17T11:51:18+08:00" /><meta property="og:site_name" content="HugeGraph" />
+<meta property="article:modified_time" content="2022-04-17T11:36:55+08:00" /><meta property="og:site_name" content="HugeGraph" />
 
 <meta itemprop="name" content="EdgeLabel API">
 <meta itemprop="description" content="1.4 EdgeLabel 假设已经创建好了1.2.3中的 PropertyKeys 和 1.3.3中的 VertexLabels
 Params说明
  name：顶点类型名称，必填 source_label: 源顶点类型的名称，必填 target_label: 目标顶点类型的名称，必填 frequency：两个点之间是否可以有多条边，可以取值SINGLE和MULTIPLE，非必填，默认值SINGLE properties: 边类型关联的属性类型，选填 sort_keys: 当允许关联多次时，指定区分键属性列表 nullable_keys：可为空的属性，选填，默认可为空 enable_label_index： 是否开启类型索引，默认关闭  1.4.1 创建一个EdgeLabel Method &amp; Url POST http://localhost:8080/graphs/hugegraph/schema/edgelabels Request Body {  &#34;name&#34;: &#34;created&#34;,  &#34;source_label&#34;: &#34;person&#34;,  &#34;target_label&#34;: &#34;software&#34;,  &#34;frequency&#34;: &#34;SINGLE&#34;,  &#34;properties&#34;: [  &#34;date&#34;  ],  &#34;sort_keys&#34;: [],  &#34;nullable_keys&#34;: [],  &#34;enable_label_index&#34;: true } Response Status 201 Response Body {  &#34;id&#34;: 1,  &#34;sort_keys&#34;: [  ],  &#34;source_label&#34;: &#34;person&#34;,  &#34;name&#34;: &#34;created&#34;,  &#34;index_names&#34;: [  ],  &#34;properties&#34;: [  &#34;date&#34;  ],  &#34;target_label&#34;: &#34;software&#34;,  &#34;frequency&#34;: &#34;SINGLE&#34;,  &#34;nullable_keys&#34;: [  ],  &#34;enable_label_index&#34;: true,  &#34;user_data&#34;: {} } 从 hugegraph-server v0.">
-<meta itemprop="dateModified" content="2022-04-17T11:51:18+08:00" />
+<meta itemprop="dateModified" content="2022-04-17T11:36:55+08:00" />
 <meta itemprop="wordCount" content="396">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="EdgeLabel API"/>
@@ -705,7 +705,7 @@ if (!doNotTrack) {
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified April 17, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/aec74b1c4cf9329b85175ff66782e5c7bcce132e">add en doc (aec74b1)</a>
+  Last modified April 17, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/ef36544478e135c747b8f0d13f1fde8b7faa1b75">rebuild doc (ef36544)</a>
 </div>
 
 </div>

@@ -31,12 +31,12 @@ Method &amp; Url GET http://127.0.0.1:8080/gremlin?gremlin=hugegraph.traversal()
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/docs/clients/restful-api/gremlin/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2022-04-17T11:51:18+08:00" /><meta property="og:site_name" content="HugeGraph" />
+<meta property="article:modified_time" content="2022-04-17T11:36:55+08:00" /><meta property="og:site_name" content="HugeGraph" />
 
 <meta itemprop="name" content="Gremlin API">
 <meta itemprop="description" content="8.1 Gremlin 8.1.1 向HugeGraphServer发送gremlin语句（GET），同步执行 Params  gremlin: 要发送给HugeGraphServer执行的gremlin语句 bindings: 用来绑定参数，key是字符串，value是绑定的值（只能是字符串或者数字），功能类似于MySQL的 Prepared Statement，用于加速语句执行 language: 发送语句的语言类型，默认为gremlin-groovy aliases: 为存在于图空间的已有变量添加别名  查询顶点
 Method &amp; Url GET http://127.0.0.1:8080/gremlin?gremlin=hugegraph.traversal().V(&#39;1:marko&#39;) Response Status 200 Response Body { 	&#34;requestId&#34;: &#34;c6ef47a8-b634-4b07-9d38-6b3b69a3a556&#34;, 	&#34;status&#34;: { 	&#34;message&#34;: &#34;&#34;, 	&#34;code&#34;: 200, 	&#34;attributes&#34;: {} 	}, 	&#34;result&#34;: { 	&#34;data&#34;: [{ 	&#34;id&#34;: &#34;1:marko&#34;, 	&#34;label&#34;: &#34;person&#34;, 	&#34;type&#34;: &#34;vertex&#34;, 	&#34;properties&#34;: { 	&#34;city&#34;: [{ 	&#34;id&#34;: &#34;1:marko&gt;city&#34;, 	&#34;value&#34;: &#34;Beijing&#34; 	}], 	&#34;name&#34;: [{ 	&#34;id&#34;: &#34;1:marko&gt;name&#34;, 	&#34;value&#34;: &#34;marko&#34; 	}], 	&#34;age&#34;: [{ 	&#34;id&#34;: &#34;1:marko&gt;age&#34;, 	&#34;value&#34;: 29 	}] 	} 	}], 	&#34;meta&#34;: {} 	} } 8.">
-<meta itemprop="dateModified" content="2022-04-17T11:51:18+08:00" />
+<meta itemprop="dateModified" content="2022-04-17T11:36:55+08:00" />
 <meta itemprop="wordCount" content="304">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Gremlin API"/>
@@ -658,7 +658,7 @@ if (!doNotTrack) {
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified April 17, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/aec74b1c4cf9329b85175ff66782e5c7bcce132e">add en doc (aec74b1)</a>
+  Last modified April 17, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/ef36544478e135c747b8f0d13f1fde8b7faa1b75">rebuild doc (ef36544)</a>
 </div>
 
 </div>

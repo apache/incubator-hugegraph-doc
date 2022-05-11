@@ -35,7 +35,7 @@ import com.baidu.hugegraph.HugeFactory import com.baidu.hugegraph.dist.RegisterU
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/docs/clients/gremlin-console/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2022-04-17T11:51:18+08:00" /><meta property="og:site_name" content="HugeGraph" />
+<meta property="article:modified_time" content="2022-04-17T11:36:55+08:00" /><meta property="og:site_name" content="HugeGraph" />
 
 <meta itemprop="name" content="Gremlin-Console">
 <meta itemprop="description" content="Gremlin-Console是由Tinkerpop自己开发的一个交互式客户端，用户可以使用该客户端对Graph做各种操作，主要有两种使用模式：
@@ -43,7 +43,7 @@ import com.baidu.hugegraph.HugeFactory import com.baidu.hugegraph.dist.RegisterU
 这种模式便于用户快速上手体验，但是不适合大量数据插入和查询的场景。下面给一个示例：
 在script目录下有一个示例脚本：example.groovy
 import com.baidu.hugegraph.HugeFactory import com.baidu.hugegraph.dist.RegisterUtil import org.apache.tinkerpop.gremlin.structure.T  RegisterUtil.registerCassandra(); RegisterUtil.registerScyllaDB();  conf = &#34;conf/hugegraph.properties&#34; graph = HugeFactory.open(conf); schema = graph.schema();  schema.propertyKey(&#34;name&#34;).asText().ifNotExist().create(); schema.propertyKey(&#34;age&#34;).asInt().ifNotExist().create(); schema.propertyKey(&#34;city&#34;).asText().ifNotExist().create(); schema.propertyKey(&#34;weight&#34;).asDouble().ifNotExist().create(); schema.propertyKey(&#34;lang&#34;).asText().ifNotExist().create(); schema.propertyKey(&#34;date&#34;).asText().ifNotExist().create(); schema.propertyKey(&#34;price&#34;).asInt().ifNotExist().create();  schema.vertexLabel(&#34;person&#34;).properties(&#34;name&#34;, &#34;age&#34;, &#34;city&#34;).primaryKeys(&#34;name&#34;).ifNotExist().create(); schema.vertexLabel(&#34;software&#34;).properties(&#34;name&#34;, &#34;lang&#34;, &#34;price&#34;).primaryKeys(&#34;name&#34;).ifNotExist().create(); schema.indexLabel(&#34;personByName&#34;).onV(&#34;person&#34;).by(&#34;name&#34;).secondary().ifNotExist().create(); schema.indexLabel(&#34;personByCity&#34;).onV(&#34;person&#34;).by(&#34;city&#34;).secondary().ifNotExist().create(); schema.indexLabel(&#34;personByAgeAndCity&#34;).onV(&#34;person&#34;).by(&#34;age&#34;, &#34;city&#34;).secondary().ifNotExist().create(); schema.indexLabel(&#34;softwareByPrice&#34;).onV(&#34;software&#34;).by(&#34;price&#34;).range().ifNotExist().create(); schema.edgeLabel(&#34;knows&#34;).sourceLabel(&#34;person&#34;).targetLabel(&#34;person&#34;).properties(&#34;date&#34;, &#34;weight&#34;).ifNotExist().create(); schema.edgeLabel(&#34;created&#34;).sourceLabel(&#34;person&#34;).targetLabel(&#34;software&#34;).properties(&#34;date&#34;, &#34;weight&#34;).ifNotExist().create(); schema.indexLabel(&#34;createdByDate&#34;).onE(&#34;created&#34;).by(&#34;date&#34;).secondary().ifNotExist().create(); schema.indexLabel(&#34;createdByWeight&#34;).onE(&#34;created&#34;).by(&#34;weight&#34;).range().ifNotExist().create(); schema.indexLabel(&#34;knowsByWeight&#34;).onE(&#34;knows&#34;).by(&#34;weight&#34;).range().ifNotExist().create();  marko = graph.addVertex(T.label, &#34;person&#34;, &#34;name&#34;, &#34;marko&#34;, &#34;age&#34;, 29, &#34;city&#34;, &#34;Beijing&#34;); vadas = graph.addVertex(T.label, &#34;person&#34;, &#34;name&#34;, &#34;vadas&#34;, &#34;age&#34;, 27, &#34;city&#34;, &#34;Hongkong&#34;); lop = graph.">
-<meta itemprop="dateModified" content="2022-04-17T11:51:18+08:00" />
+<meta itemprop="dateModified" content="2022-04-17T11:36:55+08:00" />
 <meta itemprop="wordCount" content="683">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Gremlin-Console"/>
@@ -749,7 +749,7 @@ if (!doNotTrack) {
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified April 17, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/aec74b1c4cf9329b85175ff66782e5c7bcce132e">add en doc (aec74b1)</a>
+  Last modified April 17, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/ef36544478e135c747b8f0d13f1fde8b7faa1b75">rebuild doc (ef36544)</a>
 </div>
 
 </div>

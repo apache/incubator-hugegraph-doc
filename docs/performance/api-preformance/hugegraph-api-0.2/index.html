@@ -47,13 +47,13 @@ Memory
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/docs/performance/api-preformance/hugegraph-api-0.2/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2022-04-17T11:51:18+08:00" /><meta property="og:site_name" content="HugeGraph" />
+<meta property="article:modified_time" content="2022-04-17T11:36:55+08:00" /><meta property="og:site_name" content="HugeGraph" />
 
 <meta itemprop="name" content="v0.2">
 <meta itemprop="description" content="1 测试环境 1.1 软硬件信息 起压和被压机器配置相同，基本参数如下：
    CPU Memory 网卡     24 Intel(R) Xeon(R) CPU E5-2620 v2 @ 2.10GHz 61G 1000Mbps    测试工具：apache-Jmeter-2.5.1
 1.2 服务配置  HugeGraph版本：0.2 后端存储：使用服务内嵌的cassandra-3.10，单点部署； 后端配置修改：修改了cassandra.yaml文件中的以下两个属性，其余选项均保持默认   batch_size_warn_threshold_in_kb: 1000 batch_size_fail_threshold_in_kb: 1000  HugeGraphServer 与 HugeGremlinServer 与cassandra都在同一机器上启动，server 相关的配置文件除主机和端口有修改外，其余均保持默认。  1.3 名词解释  Samples &ndash; 本次场景中一共完成了多少个线程 Average &ndash; 平均响应时间 Median &ndash; 统计意义上面的响应时间的中值 90% Line &ndash; 所有线程中90%的线程的响应时间都小于xx Min &ndash; 最小响应时间 Max &ndash; 最大响应时间 Error &ndash; 出错率 Troughput &ndash; 吞吐量Â KB/sec &ndash; 以流量做衡量的吞吐量  注：时间的单位均为ms">
-<meta itemprop="dateModified" content="2022-04-17T11:51:18+08:00" />
+<meta itemprop="dateModified" content="2022-04-17T11:36:55+08:00" />
 <meta itemprop="wordCount" content="294">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="v0.2"/>
@@ -846,7 +846,7 @@ if (!doNotTrack) {
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified April 17, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/aec74b1c4cf9329b85175ff66782e5c7bcce132e">add en doc (aec74b1)</a>
+  Last modified April 17, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/ef36544478e135c747b8f0d13f1fde8b7faa1b75">rebuild doc (ef36544)</a>
 </div>
 
 </div>

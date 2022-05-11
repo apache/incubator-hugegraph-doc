@@ -31,13 +31,13 @@ HugeGraph支持全文检索，全文检索功能涉及到各语言分词，目�
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/docs/guides/custom-plugin/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2022-04-17T11:51:18+08:00" /><meta property="og:site_name" content="HugeGraph" />
+<meta property="article:modified_time" content="2022-04-17T11:36:55+08:00" /><meta property="og:site_name" content="HugeGraph" />
 
 <meta itemprop="name" content="HugeGraph Plugin机制及插件扩展流程">
 <meta itemprop="description" content="背景  HugeGraph不仅开源开放，而且要做到简单易用，一般用户无需更改源码也能轻松增加插件扩展功能。 HugeGraph支持多种内置存储后端，也允许用户无需更改现有源码的情况下扩展自定义后端。 HugeGraph支持全文检索，全文检索功能涉及到各语言分词，目前已内置8种中文分词器，也允许用户无需更改现有源码的情况下扩展自定义分词器。  可扩展维度 目前插件方式提供如下几个维度的扩展项：
  后端存储 序列化器 自定义配置项 分词器  插件实现机制  HugeGraph提供插件接口HugeGraphPlugin，通过Java SPI机制支持插件化 HugeGraph提供了4个扩展项注册函数：registerOptions()、registerBackend()、registerSerializer()、registerAnalyzer() 插件实现者实现相应的Options、Backend、Serializer或Analyzer的接口 插件实现者实现HugeGraphPlugin接口的register()方法，在该方法中注册上述第3点所列的具体实现类，并打成jar包 插件使用者将jar包放在HugeGraph Server安装目录的plugins目录下，修改相关配置项为插件自定义值，重启即可生效  插件实现流程实例 1 新建一个maven项目 1.1 项目名称取名：hugegraph-plugin-demo 1.2 添加hugegraph-core Jar包依赖 maven pom.xml详细内容如下：
 &lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;  &lt;project xmlns=&#34;http://maven.apache.org/POM/4.0.0&#34;  xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34;  xsi:schemaLocation=&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&#34;&gt;   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;  &lt;groupId&gt;com.baidu.hugegraph&lt;/groupId&gt;  &lt;artifactId&gt;hugegraph-plugin-demo&lt;/artifactId&gt;  &lt;version&gt;1.0.0&lt;/version&gt;  &lt;packaging&gt;jar&lt;/packaging&gt;   &lt;name&gt;hugegraph-plugin-demo&lt;/name&gt;   &lt;dependencies&gt;  &lt;dependency&gt;  &lt;groupId&gt;com.baidu.hugegraph&lt;/groupId&gt;  &lt;artifactId&gt;hugegraph-core&lt;/artifactId&gt;  &lt;version&gt;${project.version}&lt;/version&gt;  &lt;/dependency&gt;  &lt;/dependencies&gt; &lt;/project&gt; 2 实现扩展功能 2.">
-<meta itemprop="dateModified" content="2022-04-17T11:51:18+08:00" />
+<meta itemprop="dateModified" content="2022-04-17T11:36:55+08:00" />
 <meta itemprop="wordCount" content="555">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="HugeGraph Plugin机制及插件扩展流程"/>
@@ -752,7 +752,7 @@ if (!doNotTrack) {
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified April 17, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/aec74b1c4cf9329b85175ff66782e5c7bcce132e">add en doc (aec74b1)</a>
+  Last modified April 17, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/ef36544478e135c747b8f0d13f1fde8b7faa1b75">rebuild doc (ef36544)</a>
 </div>
 
 </div>

@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>/docs/guides/architectural/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -16,7 +16,7 @@
                 />
   </url><url>
     <loc>/docs/config/config-guide/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -29,7 +29,7 @@
                 />
   </url><url>
     <loc>/docs/language/hugegraph-gremlin/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -45,7 +45,7 @@
     <lastmod>2022-04-28T21:26:41+08:00</lastmod>
   </url><url>
     <loc>/docs/performance/hugegraph-benchmark-0.5.6/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -84,7 +84,7 @@
                 />
   </url><url>
     <loc>/docs/changelog/hugegraph-0.12.0-release-notes/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -97,7 +97,7 @@
                 />
   </url><url>
     <loc>/docs/clients/restful-api/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -110,7 +110,7 @@
                 />
   </url><url>
     <loc>/docs/clients/restful-api/schema/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -123,7 +123,7 @@
                 />
   </url><url>
     <loc>/docs/performance/api-preformance/hugegraph-api-0.5.6-rocksdb/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -136,7 +136,7 @@
                 />
   </url><url>
     <loc>/docs/config/config-option/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -149,7 +149,7 @@
                 />
   </url><url>
     <loc>/docs/guides/desgin-concept/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -175,7 +175,7 @@
                 />
   </url><url>
     <loc>/docs/language/hugegraph-example/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -201,7 +201,7 @@
                 />
   </url><url>
     <loc>/docs/performance/api-preformance/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -214,7 +214,7 @@
                 />
   </url><url>
     <loc>/docs/quickstart/hugegraph-loader/</loc>
-    <lastmod>2022-04-26T16:00:39+08:00</lastmod>
+    <lastmod>2022-05-06T12:00:44+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -227,7 +227,7 @@
                 />
   </url><url>
     <loc>/docs/clients/restful-api/propertykey/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -243,7 +243,7 @@
     <lastmod>2022-04-28T21:26:41+08:00</lastmod>
   </url><url>
     <loc>/docs/performance/api-preformance/hugegraph-api-0.5.6-cassandra/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -256,7 +256,7 @@
                 />
   </url><url>
     <loc>/docs/config/config-authentication/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -269,7 +269,7 @@
                 />
   </url><url>
     <loc>/docs/clients/gremlin-console/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -282,7 +282,7 @@
                 />
   </url><url>
     <loc>/docs/guides/custom-plugin/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -295,7 +295,7 @@
                 />
   </url><url>
     <loc>/docs/performance/hugegraph-loader-performance/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -308,7 +308,7 @@
                 />
   </url><url>
     <loc>/docs/quickstart/hugegraph-tools/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -321,7 +321,7 @@
                 />
   </url><url>
     <loc>/docs/quickstart/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -334,7 +334,7 @@
                 />
   </url><url>
     <loc>/docs/performance/api-preformance/hugegraph-api-0.4.4/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -347,7 +347,7 @@
                 />
   </url><url>
     <loc>/docs/clients/restful-api/vertexlabel/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -360,7 +360,7 @@
                 />
   </url><url>
     <loc>/docs/guides/backup-restore/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -373,7 +373,7 @@
                 />
   </url><url>
     <loc>/docs/config/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -386,7 +386,7 @@
                 />
   </url><url>
     <loc>/docs/config/config-https/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -399,7 +399,7 @@
                 />
   </url><url>
     <loc>/docs/clients/restful-api/edgelabel/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -412,7 +412,7 @@
                 />
   </url><url>
     <loc>/docs/performance/api-preformance/hugegraph-api-0.2/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -438,7 +438,7 @@
                 />
   </url><url>
     <loc>/docs/clients/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -451,7 +451,7 @@
                 />
   </url><url>
     <loc>/docs/guides/faq/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -464,7 +464,7 @@
                 />
   </url><url>
     <loc>/docs/clients/restful-api/indexlabel/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -490,7 +490,7 @@
                 />
   </url><url>
     <loc>/docs/guides/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -503,7 +503,7 @@
                 />
   </url><url>
     <loc>/docs/clients/restful-api/rebuild/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-05-09T18:43:53+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -516,7 +516,7 @@
                 />
   </url><url>
     <loc>/docs/language/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -529,7 +529,7 @@
                 />
   </url><url>
     <loc>/docs/clients/restful-api/vertex/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -542,7 +542,7 @@
                 />
   </url><url>
     <loc>/docs/clients/restful-api/edge/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -555,7 +555,7 @@
                 />
   </url><url>
     <loc>/docs/performance/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -571,7 +571,7 @@
     <lastmod>2022-04-28T21:26:41+08:00</lastmod>
   </url><url>
     <loc>/docs/clients/restful-api/traverser/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -597,7 +597,7 @@
                 />
   </url><url>
     <loc>/docs/clients/restful-api/rank/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -610,7 +610,7 @@
                 />
   </url><url>
     <loc>/docs/clients/restful-api/variable/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -623,7 +623,7 @@
                 />
   </url><url>
     <loc>/docs/clients/restful-api/graphs/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -636,7 +636,7 @@
                 />
   </url><url>
     <loc>/docs/clients/restful-api/task/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-05-09T18:43:53+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -649,7 +649,7 @@
                 />
   </url><url>
     <loc>/docs/clients/restful-api/gremlin/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -662,7 +662,7 @@
                 />
   </url><url>
     <loc>/docs/clients/restful-api/auth/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -675,7 +675,7 @@
                 />
   </url><url>
     <loc>/docs/clients/restful-api/other/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -701,7 +701,7 @@
                 />
   </url><url>
     <loc>/blog/news/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-03-21T18:55:33+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -714,7 +714,7 @@
                 />
   </url><url>
     <loc>/blog/releases/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-03-21T18:55:33+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -727,7 +727,7 @@
                 />
   </url><url>
     <loc>/blog/2018/10/06/easy-documentation-with-docsy/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-03-21T18:55:33+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -740,7 +740,7 @@
                 />
   </url><url>
     <loc>/blog/2018/10/06/the-second-blog-post/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-03-21T18:55:33+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -753,7 +753,7 @@
                 />
   </url><url>
     <loc>/blog/2018/01/04/another-great-release/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-03-21T18:55:33+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -766,7 +766,7 @@
                 />
   </url><url>
     <loc>/docs/building/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-03-21T19:51:14+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -779,7 +779,7 @@
                 />
   </url><url>
     <loc>/docs/cla/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-03-21T19:51:14+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -792,7 +792,7 @@
                 />
   </url><url>
     <loc>/docs/performance/hugegraph-benchmark-0.4.4/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-03-21T19:51:14+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -805,7 +805,7 @@
                 />
   </url><url>
     <loc>/docs/summary/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-04-17T11:36:55+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -831,7 +831,7 @@
                 />
   </url><url>
     <loc>/blog/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-03-21T18:55:33+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -856,7 +856,7 @@
                 />
   </url><url>
     <loc>/community/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-03-21T18:55:33+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -869,7 +869,7 @@
                 />
   </url><url>
     <loc>/</loc>
-    <lastmod>2022-04-28T16:30:21+08:00</lastmod>
+    <lastmod>2022-05-10T23:26:13+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"
@@ -882,7 +882,7 @@
                 />
   </url><url>
     <loc>/search/</loc>
-    <lastmod>2022-04-17T11:51:18+08:00</lastmod>
+    <lastmod>2022-03-21T18:55:33+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="cn"

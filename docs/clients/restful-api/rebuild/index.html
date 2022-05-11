@@ -20,40 +20,33 @@
 
 <title>Rebuild API | HugeGraph</title>
 <meta name="description" content="1.6 Rebuild
-1.6.1 重建IndexLabel
+1.6.1 Rebuild IndexLabel
 Method &amp; Url
 PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/indexlabels/personByCity
-Response Status
-202 …">
+Response Status …">
 <meta property="og:title" content="Rebuild API" />
-<meta property="og:description" content="1.6 Rebuild 1.6.1 重建IndexLabel Method &amp; Url PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/indexlabels/personByCity Response Status 202 Response Body {  &#34;task_id&#34;: 1 } 注：
- 可以通过GET http://localhost:8080/graphs/hugegraph/tasks/1（其中&quot;1&quot;是task_id）来查询异步任务的执行状态，更多异步任务RESTful API
- 1.6.2 VertexLabel对应的全部索引重建 Method &amp; Url PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/vertexlabels/person Response Status 202 Response Body {  &#34;task_id&#34;: 2 } 注：
- 可以通过GET http://localhost:8080/graphs/hugegraph/tasks/2（其中&quot;2&quot;是task_id）来查询异步任务的执行状态，更多异步任务RESTful API
- 1.6.3 EdgeLabel对应的全部索引重建 Method &amp; Url PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/edgelabels/created Response Status 202 Response Body {  &#34;task_id&#34;: 3 } 注：
- 可以通过GET http://localhost:8080/graphs/hugegraph/tasks/3（其中&quot;3&quot;是task_id）来查询异步任务的执行状态，更多异步任务RESTful API" />
+<meta property="og:description" content="1.6 Rebuild 1.6.1 Rebuild IndexLabel Method &amp; Url PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/indexlabels/personByCity Response Status 202 Response Body {  &#34;task_id&#34;: 1 } Note:
+ You can get the asynchronous job status by GET http://localhost:8080/graphs/hugegraph/tasks/${task_id} (the task_id here should be 1). See More AsyncJob RESTfull API
+ 1.6.2 Rebulid all Indexs of VertexLabel Method &amp; Url PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/vertexlabels/person Response Status 202 Response Body {  &#34;task_id&#34;: 2 } Note:
+ You can get the asynchronous job status by GET http://localhost:8080/graphs/hugegraph/tasks/${task_id} (the task_id here should be 2)." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/docs/clients/restful-api/rebuild/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2022-04-17T11:51:18+08:00" /><meta property="og:site_name" content="HugeGraph" />
+<meta property="article:modified_time" content="2022-05-09T18:43:53+08:00" /><meta property="og:site_name" content="HugeGraph" />
 
 <meta itemprop="name" content="Rebuild API">
-<meta itemprop="description" content="1.6 Rebuild 1.6.1 重建IndexLabel Method &amp; Url PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/indexlabels/personByCity Response Status 202 Response Body {  &#34;task_id&#34;: 1 } 注：
- 可以通过GET http://localhost:8080/graphs/hugegraph/tasks/1（其中&quot;1&quot;是task_id）来查询异步任务的执行状态，更多异步任务RESTful API
- 1.6.2 VertexLabel对应的全部索引重建 Method &amp; Url PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/vertexlabels/person Response Status 202 Response Body {  &#34;task_id&#34;: 2 } 注：
- 可以通过GET http://localhost:8080/graphs/hugegraph/tasks/2（其中&quot;2&quot;是task_id）来查询异步任务的执行状态，更多异步任务RESTful API
- 1.6.3 EdgeLabel对应的全部索引重建 Method &amp; Url PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/edgelabels/created Response Status 202 Response Body {  &#34;task_id&#34;: 3 } 注：
- 可以通过GET http://localhost:8080/graphs/hugegraph/tasks/3（其中&quot;3&quot;是task_id）来查询异步任务的执行状态，更多异步任务RESTful API">
-<meta itemprop="dateModified" content="2022-04-17T11:51:18+08:00" />
-<meta itemprop="wordCount" content="62">
+<meta itemprop="description" content="1.6 Rebuild 1.6.1 Rebuild IndexLabel Method &amp; Url PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/indexlabels/personByCity Response Status 202 Response Body {  &#34;task_id&#34;: 1 } Note:
+ You can get the asynchronous job status by GET http://localhost:8080/graphs/hugegraph/tasks/${task_id} (the task_id here should be 1). See More AsyncJob RESTfull API
+ 1.6.2 Rebulid all Indexs of VertexLabel Method &amp; Url PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/vertexlabels/person Response Status 202 Response Body {  &#34;task_id&#34;: 2 } Note:
+ You can get the asynchronous job status by GET http://localhost:8080/graphs/hugegraph/tasks/${task_id} (the task_id here should be 2).">
+<meta itemprop="dateModified" content="2022-05-09T18:43:53+08:00" />
+<meta itemprop="wordCount" content="125">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Rebuild API"/>
-<meta name="twitter:description" content="1.6 Rebuild 1.6.1 重建IndexLabel Method &amp; Url PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/indexlabels/personByCity Response Status 202 Response Body {  &#34;task_id&#34;: 1 } 注：
- 可以通过GET http://localhost:8080/graphs/hugegraph/tasks/1（其中&quot;1&quot;是task_id）来查询异步任务的执行状态，更多异步任务RESTful API
- 1.6.2 VertexLabel对应的全部索引重建 Method &amp; Url PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/vertexlabels/person Response Status 202 Response Body {  &#34;task_id&#34;: 2 } 注：
- 可以通过GET http://localhost:8080/graphs/hugegraph/tasks/2（其中&quot;2&quot;是task_id）来查询异步任务的执行状态，更多异步任务RESTful API
- 1.6.3 EdgeLabel对应的全部索引重建 Method &amp; Url PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/edgelabels/created Response Status 202 Response Body {  &#34;task_id&#34;: 3 } 注：
- 可以通过GET http://localhost:8080/graphs/hugegraph/tasks/3（其中&quot;3&quot;是task_id）来查询异步任务的执行状态，更多异步任务RESTful API"/>
+<meta name="twitter:description" content="1.6 Rebuild 1.6.1 Rebuild IndexLabel Method &amp; Url PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/indexlabels/personByCity Response Status 202 Response Body {  &#34;task_id&#34;: 1 } Note:
+ You can get the asynchronous job status by GET http://localhost:8080/graphs/hugegraph/tasks/${task_id} (the task_id here should be 1). See More AsyncJob RESTfull API
+ 1.6.2 Rebulid all Indexs of VertexLabel Method &amp; Url PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/vertexlabels/person Response Status 202 Response Body {  &#34;task_id&#34;: 2 } Note:
+ You can get the asynchronous job status by GET http://localhost:8080/graphs/hugegraph/tasks/${task_id} (the task_id here should be 2)."/>
 
 
 
@@ -424,7 +417,7 @@ if (!doNotTrack) {
 		
 	</header>    
 	<h3 id="16-rebuild">1.6 Rebuild</h3>
-<h4 id="161-重建indexlabel">1.6.1 重建IndexLabel</h4>
+<h4 id="161-rebuild-indexlabel">1.6.1 Rebuild IndexLabel</h4>
 <h5 id="method--url">Method &amp; Url</h5>
 <pre tabindex="0"><code>PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/indexlabels/personByCity
 </code></pre><h5 id="response-status">Response Status</h5>
@@ -433,11 +426,11 @@ if (!doNotTrack) {
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;task_id&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">1</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span></code></pre></div><p>注：</p>
+</span></span></code></pre></div><p>Note:</p>
 <blockquote>
-<p>可以通过<code>GET http://localhost:8080/graphs/hugegraph/tasks/1</code>（其中&quot;1&quot;是task_id）来查询异步任务的执行状态，更多<a href="../task">异步任务RESTful API</a></p>
+<p>You can get the asynchronous job status by <code>GET http://localhost:8080/graphs/hugegraph/tasks/${task_id}</code> (the task_id here should be 1). See More <a href="../task">AsyncJob RESTfull API</a></p>
 </blockquote>
-<h4 id="162-vertexlabel对应的全部索引重建">1.6.2 VertexLabel对应的全部索引重建</h4>
+<h4 id="162-rebulid-all-indexs-of-vertexlabel">1.6.2 Rebulid all Indexs of VertexLabel</h4>
 <h5 id="method--url-1">Method &amp; Url</h5>
 <pre tabindex="0"><code>PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/vertexlabels/person
 </code></pre><h5 id="response-status-1">Response Status</h5>
@@ -446,11 +439,11 @@ if (!doNotTrack) {
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;task_id&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">2</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span></code></pre></div><p>注：</p>
+</span></span></code></pre></div><p>Note:</p>
 <blockquote>
-<p>可以通过<code>GET http://localhost:8080/graphs/hugegraph/tasks/2</code>（其中&quot;2&quot;是task_id）来查询异步任务的执行状态，更多<a href="../task">异步任务RESTful API</a></p>
+<p>You can get the asynchronous job status by <code>GET http://localhost:8080/graphs/hugegraph/tasks/${task_id}</code> (the task_id here should be 2). See More <a href="../task">AsyncJob RESTfull API</a></p>
 </blockquote>
-<h4 id="163-edgelabel对应的全部索引重建">1.6.3 EdgeLabel对应的全部索引重建</h4>
+<h4 id="163-rebulid-all-indexs-of-edgelabel">1.6.3 Rebulid all Indexs of EdgeLabel</h4>
 <h5 id="method--url-2">Method &amp; Url</h5>
 <pre tabindex="0"><code>PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/edgelabels/created
 </code></pre><h5 id="response-status-2">Response Status</h5>
@@ -459,9 +452,9 @@ if (!doNotTrack) {
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">&#34;task_id&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">3</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span></code></pre></div><p>注：</p>
+</span></span></code></pre></div><p>Note:</p>
 <blockquote>
-<p>可以通过<code>GET http://localhost:8080/graphs/hugegraph/tasks/3</code>（其中&quot;3&quot;是task_id）来查询异步任务的执行状态，更多<a href="../task">异步任务RESTful API</a></p>
+<p>You can get the asynchronous job status by <code>GET http://localhost:8080/graphs/hugegraph/tasks/${task_id}</code> (the task_id here should be 3). See More <a href="../task">AsyncJob RESTfull API</a></p>
 </blockquote>
 
 	
@@ -529,7 +522,7 @@ if (!doNotTrack) {
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified April 17, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/aec74b1c4cf9329b85175ff66782e5c7bcce132e">add en doc (aec74b1)</a>
+  Last modified May 9, 2022: <a href="https://github.com/apache/incubator-hugegraph/commit/617b0dc0e08bbaaec2a6c69997f18a6a0c778534">pull-130 fix the reviewed problems (617b0dc)</a>
 </div>
 
 </div>
