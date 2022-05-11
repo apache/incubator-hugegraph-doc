@@ -1,9 +1,10 @@
 {{ $links := .Site.Params.links }}
-<footer class="bg-dark py-5 row d-print-none">
-  <div class="container">
+<footer class="bg-dark py-3 row d-print-none">
+  <div class="footer-container">
     <div class="row">
       {{ if .Site.Params.ui.footer_logo }}
-      <div class="col-6">
+      <div class="col-1"></div>
+      <div class="col-4 text-center container-center">
           <div class="footer-row">
             <a href="https://www.apache.org">
               <div class="footer-apache-logo">
@@ -21,10 +22,10 @@
           </div>
       </div>
       <div class="col-6 text-white text-center container-center">
-        <p>Copyright &copy; {{ now.Year}} The Apache Software Foundation, Licensed under</p>
-        <p>the <a class="white" href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a> .Apache and the Apache feather</p>
-        <p>logo are trademarks of The Apache Software Foundation. </p>
+        <p>Copyright &copy; {{ now.Year}} The Apache Software Foundation, Licensed under the <a class="white" href="https://www.apache.org/licenses/LICENSE-2.0">Apache License Version 2.0</a></p>
+        <p>Apache and the Apache feather logo are trademarks of The Apache Software Foundation.</p>
       </div>
+      <div class="col-1"></div>
     </div>
   </div>
 </footer>
