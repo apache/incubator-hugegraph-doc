@@ -25,12 +25,9 @@ POST http://localhost:8080/graphs/hugegraph/schema/propertykeys
 
 ```json
 {
-    "property_key" : {
-        "name": "age",
-        "data_type": "INT",
-        "cardinality": "SINGLE"
-    },
-    "task_id": 0
+    "name": "age",
+    "data_type": "INT",
+    "cardinality": "SINGLE"
 }
 ```
 
@@ -69,14 +66,11 @@ PUT http://localhost:8080/graphs/hugegraph/schema/propertykeys/age?action=append
 
 ```json
 {
-    "property_key" : {
-        "name": "age",
-        "user_data": {
-            "min": 0,
-            "max": 100
-        }
-    },
-    "task_id" : 0
+    "name": "age",
+    "user_data": {
+        "min": 0,
+        "max": 100
+    }
 }
 ```
 
