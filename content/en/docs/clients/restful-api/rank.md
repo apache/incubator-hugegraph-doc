@@ -147,15 +147,16 @@ A random walk based PersonalRank algorithm should be likes this:
 
 **Optional**:
 - alpha: the probability of going out for one vertex in each iteration，similar to the alpha of PageRank,required, value range is (0, 1], default 0.85.
-- max_degree: 查询过程中，单个顶点遍历的最大邻接边数目，默认为 `10000`
-- max_depth: 迭代次数，取值区间为 [2, 50], 默认值 `5`
+- max_degree: in query process, the max iteration number of adjacency edge for a vertex, default `10000`
+- max_depth: iteration number,range [2, 50], default `5`
 - with_label：筛选结果中保留哪些结果，可选以下三类, 默认为 `BOTH_LABEL`
-    - SAME_LABEL：仅保留与源顶点相同类别的顶点
-    - OTHER_LABEL：仅保留与源顶点不同类别（二分图的另一端）的顶点
-    - BOTH_LABEL：同时保留与源顶点相同和相反类别的顶点
+- with_label：result filter,default `BOTH_LABEL`,optional list as follows:
+    - SAME_LABEL：Only keep vertex which has the same type as source vertex
+    - OTHER_LABEL：Only keep vertex which has different type as source vertex (the another part in bipartite graph)
+    - BOTH_LABEL：Keep both type vertex
 - limit: max return vertex number,default `100`
-- max_diff: 提前收敛的精度差, 默认为 `0.0001` (*后续实现*)  
-- sorted：返回的结果是否根据 rank 排序，为 true 时降序排列，反之不排序，默认为 `true`
+- max_diff: accuracy for convergence, default `0.0001` (*will implement soon*)  
+- sorted： whether sort the result by rank or not, true for descending sort, false for none, default `true`
 
 ##### 4.2.1.2 Usage
 
@@ -204,9 +205,8 @@ POST http://localhost:8080/graphs/hugegraph/traversers/personalrank
 
 ##### 4.2.1.3 Suitable Scenario
 
-两类不同顶点连接形成的二分图中，给某个点推荐相关性最高的其他顶点，例如：
-
-- 阅读推荐: 找出优先给某人推荐的其他**书籍**, 也可以同时推荐共同喜好最高的**书友** (例: 微信 "你的好友也在看 xx 文章" 功能)
+In a bipartite graph build by two different type of vertex, recommend other most related vertex to one vertex. for example:
+- Reading recommendation: find out the **books** should be recommended to someone first, It is also possible to recommend **book pal**  with the highest common preferences at the same time (just like: wechat "your friend also read xx " function)
 - 社交推荐: 找出拥有相同关注话题的其他**博主**, 也可以推荐可能感兴趣的**新闻/消息** (例: Weibo 中的 "热点推荐" 功能)
 - 商品推荐: 通过某人现在的购物习惯, 找出应优先推给它的**商品列表**, 也可以给它推荐**带货**播主 (例: TaoBao 的 "猜你喜欢" 功能)
 

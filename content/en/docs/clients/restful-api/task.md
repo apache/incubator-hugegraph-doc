@@ -91,7 +91,7 @@ DELETE http://localhost:8080/graphs/hugegraph/tasks/2
 204
 ```
 
-#### 7.1.4 取消某个异步任务，**该异步任务必须具有处理中断的能力**
+#### 7.1.4 Cancel an async task**the task should be able to be canceled**
 
 If you already created an async task via [Gremlin API](../gremlin) as follows：
 
