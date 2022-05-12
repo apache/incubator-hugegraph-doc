@@ -31,12 +31,9 @@ POST http://localhost:8080/graphs/hugegraph/schema/propertykeys
 
 ```json
 {
-    "property_key" : {
-        "name": "age",
-        "data_type": "INT",
-        "cardinality": "SINGLE"
-    },
-    "task_id": 0
+    "name": "age",
+    "data_type": "INT",
+    "cardinality": "SINGLE"
 }
 ```
 
@@ -50,12 +47,20 @@ POST http://localhost:8080/graphs/hugegraph/schema/propertykeys
 
 ```json
 {
-    "id": 2,
-    "name": "age",
-    "data_type": "INT",
-    "cardinality": "SINGLE",
-    "properties": [],
-    "user_data": {}
+    "property_key": {
+        "id": 1,
+        "name": "age",
+        "data_type": "INT",
+        "cardinality": "SINGLE",
+        "aggregate_type": "NONE",
+        "write_type": "OLTP",
+        "properties": [],
+        "status": "CREATED",
+        "user_data": {
+            "~create_time": "2022-05-13 13:47:23.745"
+        }
+    },
+    "task_id": 0
 }
 ```
 
@@ -75,14 +80,11 @@ PUT http://localhost:8080/graphs/hugegraph/schema/propertykeys/age?action=append
 
 ```json
 {
-    "property_key" : {
-        "name": "age",
-        "user_data": {
-            "min": 0,
-            "max": 100
-        }
-    },
-    "task_id" : 0
+    "name": "age",
+    "user_data": {
+        "min": 0,
+        "max": 100
+    }
 }
 ```
 
@@ -96,15 +98,22 @@ PUT http://localhost:8080/graphs/hugegraph/schema/propertykeys/age?action=append
 
 ```json
 {
-    "id": 2,
-    "name": "age",
-    "data_type": "INT",
-    "cardinality": "SINGLE",
-    "properties": [],
-    "user_data": {
-        "min": 0,
-        "max": 100
-    }
+    "property_key": {
+        "id": 1,
+        "name": "age",
+        "data_type": "INT",
+        "cardinality": "SINGLE",
+        "aggregate_type": "NONE",
+        "write_type": "OLTP",
+        "properties": [],
+        "status": "CREATED",
+        "user_data": {
+            "min": 0,
+            "max": 100,
+            "~create_time": "2022-05-13 13:47:23.745"
+        }
+    },
+    "task_id": 0
 }
 ```
 
@@ -207,12 +216,19 @@ GET http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
 
 ```json
 {
-    "id": 2,
+    "id": 1,
     "name": "age",
     "data_type": "INT",
     "cardinality": "SINGLE",
+    "aggregate_type": "NONE",
+    "write_type": "OLTP",
     "properties": [],
-    "user_data": {}
+    "status": "CREATED",
+    "user_data": {
+        "min": 0,
+        "max": 100,
+        "~create_time": "2022-05-13 13:47:23.745"
+    }
 }
 ```
 
@@ -236,14 +252,6 @@ DELETE http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
 
 ```json
 {
-    "property_key" : {
-        "id": 2,
-        "name": "age",
-        "data_type": "INT",
-        "cardinality": "SINGLE",
-        "properties": [],
-        "user_data": {}
-    },
     "task_id" : 0
 }
 ```
