@@ -74,6 +74,53 @@ DELETE http://localhost:8080/graphs/hugegraph/clear?confirm_message=I%27m+sure+t
 204
 ```
 
+#### 6.1.4 创建一个图，**该操作需要管理员权限**
+
+##### Params
+
+- clone_graph_name: 已有的一个graph名称
+
+##### Method & Url
+
+```
+POST http://localhost:8080/graphs/hugegraph_clone?clone_graph_name=hugegraph
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "name": "hugegraph_clone",
+    "backend": "rocksdb"
+}
+```
+
+#### 6.1.5 删除某个图及其全部数据
+
+##### Params
+
+由于删除图是一个比较危险的操作，为避免用户误调用，我们给API添加了用于确认的参数：
+
+- confirm_message: 默认为`I'm sure to drop the graph`
+
+##### Method & Url
+
+```
+DELETE http://localhost:8080/graphs/hugegraph_clone?confirm_message=I%27m%20sure%20to%20drop%20the%20graph
+```
+
+##### Response Status
+
+```json
+204
+```
+
 ### 6.2 Conf
 
 #### 6.2.1 查看某个图的配置，**该操作需要管理员权限**
@@ -135,7 +182,7 @@ Restore 时存在两种不同的模式： Restoring 和 Merging
 正常情况下，图模式为 None，当需要 Restore 图时，需要根据需要临时修改图模式为 Restoring 模式或者 Merging 模式，并在完成 Restore 时，恢复图模式为 None。
 
 
-#### 6.3.1 查看某个图的模式. **该操作需要管理员权限**
+#### 6.3.1 查看某个图的模式.
 
 ##### Method & Url
 
@@ -186,5 +233,151 @@ PUT http://localhost:8080/graphs/hugegraph/mode
 ```json
 {
     "mode": "RESTORING"
+}
+```
+
+#### 6.3.3 查看某个图的读模式.
+
+##### Params
+
+- name: 图的名称
+
+##### Method & Url
+
+```
+GET http://localhost:8080/graphs/hugegraph/graph_read_mode
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "graph_read_mode": "ALL"
+}
+```
+
+#### 6.3.4 设置某个图的读模式. **该操作需要管理员权限**
+
+##### Params
+
+- name: 图的名称
+
+##### Method & Url
+
+```
+PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
+```
+
+##### Request Body
+
+```
+"OLTP_ONLY"
+```
+
+> 合法的图模式包括：ALL，OLTP_ONLY，OLAP_ONLY
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "graph_read_mode": "OLTP_ONLY"
+}
+```
+
+### 6.4 Snapshot
+
+#### 6.4.1 创建快照
+
+##### Params
+
+- name: 图的名称
+
+##### Method & Url
+
+```
+PUT http://localhost:8080/graphs/hugegraph/snapshot_create
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "hugegraph": "snapshot_created"
+}
+```
+
+#### 6.4.2 快照恢复
+
+##### Params
+
+- name: 图的名称
+
+##### Method & Url
+
+```
+PUT http://localhost:8080/graphs/hugegraph/snapshot_resume
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "hugegraph": "snapshot_resumed"
+}
+```
+
+### 6.5 Compact
+
+#### 6.5.1 手动紧致图，**该操作需要管理员权限**
+
+##### Params
+
+- name: 图的名称
+
+##### Method & Url
+
+```
+PUT http://localhost:8080/graphs/hugegraph/compact
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "nodes": 1,
+    "cluster_id": "local",
+    "servers": {
+        "local": "OK"
+    }
 }
 ```
