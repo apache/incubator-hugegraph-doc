@@ -6,7 +6,7 @@ weight: 12
 
 ### 6.1 Graphs
 
-#### 6.1.1 列出数据库中全部的图
+#### 6.1.1 List all graphs
 
 ##### Method & Url
 
@@ -31,7 +31,7 @@ GET http://localhost:8080/graphs
 }
 ```
 
-#### 6.1.2 查看某个图的信息
+#### 6.1.2 Get details of the graph
 
 ##### Method & Url
 
@@ -54,13 +54,14 @@ GET http://localhost:8080/graphs/hugegraph
 }
 ```
 
-#### 6.1.3 清空某个图的全部数据，包括schema、vertex、edge和index等，**该操作需要管理员权限**
+#### 6.1.3 Clear all data of a graph，include: schema、vertex、edge and index .etc，**This operation requires administrator privileges**
 
 ##### Params
 
-由于清空图是一个比较危险的操作，为避免用户误调用，我们给API添加了用于确认的参数：
+Since emptying the graph is a dangerous operation, we have added parameters for confirmation to the API to 
+avoid false calls by users：
 
-- confirm_message: 默认为`I'm sure to delete all data`
+- confirm_message: default by `I'm sure to delete all data`
 
 ##### Method & Url
 
@@ -74,9 +75,57 @@ DELETE http://localhost:8080/graphs/hugegraph/clear?confirm_message=I%27m+sure+t
 204
 ```
 
+#### 6.1.4 Create graph，**This operation requires administrator privileges**
+
+##### Params
+
+- clone_graph_name: name of an exist graph
+
+##### Method & Url
+
+```
+POST http://localhost:8080/graphs/hugegraph_clone?clone_graph_name=hugegraph
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "name": "hugegraph_clone",
+    "backend": "rocksdb"
+}
+```
+
+#### 6.1.5 Delete graph and it's data
+
+##### Params
+
+Since deleting a graph is a dangerous operation, we have added parameters for confirmation to the API to 
+avoid false calls by users：
+
+- confirm_message: default by `I'm sure to drop the graph`
+
+##### Method & Url
+
+```
+DELETE http://localhost:8080/graphs/hugegraph_clone?confirm_message=I%27m%20sure%20to%20drop%20the%20graph
+```
+
+##### Response Status
+
+```json
+204
+```
+
 ### 6.2 Conf
 
-#### 6.2.1 查看某个图的配置，**该操作需要管理员权限**
+#### 6.2.1 Get configuration for a graph，**This operation requires administrator privileges**
 
 ##### Method & Url
 
@@ -115,27 +164,28 @@ store=hugegraph
 
 ### 6.3 Mode
 
-合法的图模式包括：NONE，RESTORING，MERGING，LOADING
+Allowed graph mode values are：NONE，RESTORING，MERGING，LOADING
     
-- None 模式（默认），元数据和图数据的写入属于正常状态。特别的：
-    - 元数据（schema）创建时不允许指定 ID
-    - 图数据（vertex）在 id strategy 为 Automatic 时，不允许指定 ID
-- LOADING：批量导入数据时自动启用，特别的：
-    - 添加顶点/边时，不会检查必填属性是否传入
+- None mode is regular mode
+    - Not allowed create schema with specified id
+    - Not support create vertex with id for AUTOMATIC id strategy
+- LOADING mode used to load data via hugegraph-loader.
+    - When adding vertices / edges, it is not checked whether the required attributes are passed in
 
-Restore 时存在两种不同的模式： Restoring 和 Merging
+Restore has two different modes： Restoring and Merging
 
-- Restoring 模式，恢复到一个新图中，特别的：
-    - 元数据（schema）创建时允许指定 ID
-    - 图数据（vertex）在 id strategy 为 Automatic 时，允许指定 ID
-- Merging 模式，合并到一个已存在元数据和图数据的图中，特别的：
-    - 元数据（schema）创建时不允许指定 ID
-    - 图数据（vertex）在 id strategy 为 Automatic 时，允许指定 ID
+- Restoring mode is used to restore schema and graph data to an new graph.
+    - Support create schema with specified id
+    - Support create vertex with id for AUTOMATIC id strategy
+- Merging mode is used to merge schema and graph data to an existing graph.
+    - Not allowed create schema with specified id
+    - Support create vertex with id for AUTOMATIC id strategy
 
-正常情况下，图模式为 None，当需要 Restore 图时，需要根据需要临时修改图模式为 Restoring 模式或者 Merging 模式，并在完成 Restore 时，恢复图模式为 None。
+Under normal circumstances, the graph mode is None. When you need to restore the graph, 
+you need to temporarily modify the graph mode to Restoring or Merging as needed. 
+When you complete the restore, change the graph mode to None.
 
-
-#### 6.3.1 查看某个图的模式. **该操作需要管理员权限**
+#### 6.3.1 Get graph mode.
 
 ##### Method & Url
 
@@ -157,9 +207,9 @@ GET http://localhost:8080/graphs/hugegraph/mode
 }
 ```
 
-> 合法的图模式包括：NONE，RESTORING，MERGING
+> Allowed graph mode values are：NONE，RESTORING，MERGING
 
-#### 6.3.2 设置某个图的模式. **该操作需要管理员权限**
+#### 6.3.2 Modify graph mode. **This operation requires administrator privileges**
 
 ##### Method & Url
 
@@ -173,7 +223,7 @@ PUT http://localhost:8080/graphs/hugegraph/mode
 "RESTORING"
 ```
 
-> 合法的图模式包括：NONE，RESTORING，MERGING
+> Allowed graph mode values are：NONE，RESTORING，MERGING
 
 ##### Response Status
 
@@ -186,5 +236,151 @@ PUT http://localhost:8080/graphs/hugegraph/mode
 ```json
 {
     "mode": "RESTORING"
+}
+```
+
+#### 6.3.3 Get graph's read mode.
+
+##### Params
+
+- name: name of a graph
+
+##### Method & Url
+
+```
+GET http://localhost:8080/graphs/hugegraph/graph_read_mode
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "graph_read_mode": "ALL"
+}
+```
+
+#### 6.3.4 Modify graph's read mode. **This operation requires administrator privileges**
+
+##### Params
+
+- name: name of a graph
+
+##### Method & Url
+
+```
+PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
+```
+
+##### Request Body
+
+```
+"OLTP_ONLY"
+```
+
+> Allowed read mode values are：ALL，OLTP_ONLY，OLAP_ONLY
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "graph_read_mode": "OLTP_ONLY"
+}
+```
+
+### 6.4 Snapshot
+
+#### 6.4.1 Create a snapshot
+
+##### Params
+
+- name: name of a graph
+
+##### Method & Url
+
+```
+PUT http://localhost:8080/graphs/hugegraph/snapshot_create
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "hugegraph": "snapshot_created"
+}
+```
+
+#### 6.4.2 Resume a snapshot
+
+##### Params
+
+- name: name of a graph
+
+##### Method & Url
+
+```
+PUT http://localhost:8080/graphs/hugegraph/snapshot_resume
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "hugegraph": "snapshot_resumed"
+}
+```
+
+### 6.5 Compact
+
+#### 6.5.1 Manually compact graph，**This operation requires administrator privileges**
+
+##### Params
+
+- name: name of a graph
+
+##### Method & Url
+
+```
+PUT http://localhost:8080/graphs/hugegraph/compact
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "nodes": 1,
+    "cluster_id": "local",
+    "servers": {
+        "local": "OK"
+    }
 }
 ```
