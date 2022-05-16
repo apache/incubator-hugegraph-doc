@@ -300,7 +300,7 @@ Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 ```
 
-#### 5.5 Palo
+#### 5.6 Palo
 
 > 用户需自行安装百度Palo或者Apache doris，推荐版本1.0以上，[下载地址](http://doris.incubator.apache.org/downloads/downloads.html)
 
