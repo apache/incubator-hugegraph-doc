@@ -307,8 +307,8 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 修改 hugegraph.properties
 
 ```properties
-backend=Palo
-serializer=Palo
+backend=palo
+serializer=palo
 
 # mysql backend config (Palo目前还需要使用MySQL的URL来建立连接进行数据读取)
 jdbc.driver=com.mysql.jdbc.Driver
