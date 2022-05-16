@@ -60,7 +60,7 @@ bin/hugegraph deploy -v {hugegraph-version} -p {install-path} [-u {download-path
 #### 3.2 下载tar包
 
 ```bash
-wget https://github.com/hugegraph/hugegraph/releases/download/v${version}/hugegraph-${version}.tar.gz
+wget https://github.com/apache/incubator-hugegraph/releases/download/v${version}/hugegraph-${version}.tar.gz
 tar -zxvf hugegraph-${version}.tar.gz
 ```
 
@@ -69,13 +69,13 @@ tar -zxvf hugegraph-${version}.tar.gz
 下载HugeGraph源代码
 
 ```bash
-git clone https://github.com/hugegraph/hugegraph.git
+git clone https://github.com/apache/incubator-hugegraph.git
 ```
 
 编译打包生成tar包
 
 ```bash
-cd hugegraph
+cd incubator-hugegraph
 mvn package -DskipTests
 ```
 
@@ -83,22 +83,29 @@ mvn package -DskipTests
 
 ```bash
 ......
-[INFO] Reactor Summary:
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for hugegraph 0.13.0:
 [INFO] 
-[INFO] hugegraph .......................................... SUCCESS [  0.003 s]
-[INFO] hugegraph-core ..................................... SUCCESS [ 15.335 s]
-[INFO] hugegraph-api ...................................... SUCCESS [  0.829 s]
-[INFO] hugegraph-cassandra ................................ SUCCESS [  1.095 s]
-[INFO] hugegraph-scylladb ................................. SUCCESS [  0.313 s]
-[INFO] hugegraph-rocksdb .................................. SUCCESS [  0.506 s]
-[INFO] hugegraph-mysql .................................... SUCCESS [  0.412 s]
-[INFO] hugegraph-palo ..................................... SUCCESS [  0.359 s]
-[INFO] hugegraph-dist ..................................... SUCCESS [  7.470 s]
-[INFO] hugegraph-example .................................. SUCCESS [  0.403 s]
-[INFO] hugegraph-test ..................................... SUCCESS [  1.509 s]
+[INFO] hugegraph .......................................... SUCCESS [09:51 min]
+[INFO] hugegraph-core ..................................... SUCCESS [34:12 min]
+[INFO] hugegraph-api ...................................... SUCCESS [04:02 min]
+[INFO] hugegraph-cassandra ................................ SUCCESS [05:27 min]
+[INFO] hugegraph-scylladb ................................. SUCCESS [  0.355 s]
+[INFO] hugegraph-rocksdb .................................. SUCCESS [17:40 min]
+[INFO] hugegraph-mysql .................................... SUCCESS [ 21.114 s]
+[INFO] hugegraph-palo ..................................... SUCCESS [  0.397 s]
+[INFO] hugegraph-hbase .................................... SUCCESS [24:55 min]
+[INFO] hugegraph-postgresql ............................... SUCCESS [01:02 min]
+[INFO] hugegraph-dist ..................................... SUCCESS [02:01 min]
+[INFO] hugegraph-example .................................. SUCCESS [  0.504 s]
+[INFO] hugegraph-test ..................................... SUCCESS [ 50.490 s]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:40 h
+[INFO] Finished at: 2022-05-16T11:40:23+08:00
+[INFO] ------------------------------------------------------------------------
+
 ......
 ```
 
@@ -292,6 +299,49 @@ bin/start-hugegraph.sh
 Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 ```
+
+#### 5.5 Palo
+
+> 用户需自行安装百度Palo或者Apache doris，推荐版本1.0以上，[下载地址](http://doris.incubator.apache.org/downloads/downloads.html)
+
+修改 hugegraph.properties
+
+```properties
+backend=Palo
+serializer=Palo
+
+# mysql backend config (Palo目前还需要使用MySQL的URL来建立连接进行数据读取)
+jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://192.168.1.241:9030
+jdbc.username=root
+jdbc.password=
+
+
+# palo backend config
+palo.host=192.168.1.241
+palo.http_port=8030
+palo.username=root
+palo.password=
+palo.poll_interval=10
+palo.temp_dir=./palo-data
+palo.file_limit_size=32
+```
+
+初始化数据库（仅第一次启动时需要）
+
+```bash
+cd hugegraph-${version}
+bin/init-store.sh
+```
+
+启动server
+
+```bash
+bin/start-hugegraph.sh
+Starting HugeGraphServer...
+Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
+```
+
 
 > 更多其它后端配置可参考[配置项介绍](/config/config-option.md)
 
