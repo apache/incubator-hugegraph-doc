@@ -207,8 +207,8 @@ POST http://localhost:8080/graphs/hugegraph/traversers/personalrank
 
 In a bipartite graph build by two different type of vertex, recommend other most related vertex to one vertex. for example:
 - Reading recommendation: find out the **books** should be recommended to someone first, It is also possible to recommend **book pal**  with the highest common preferences at the same time (just like: wechat "your friend also read xx " function)
-- 社交推荐: 找出拥有相同关注话题的其他**博主**, 也可以推荐可能感兴趣的**新闻/消息** (例: Weibo 中的 "热点推荐" 功能)
-- 商品推荐: 通过某人现在的购物习惯, 找出应优先推给它的**商品列表**, 也可以给它推荐**带货**播主 (例: TaoBao 的 "猜你喜欢" 功能)
+- Social recommendation: find out other **Poster** who interested in same topics, or other **News/Messages** you may interested (Such as : "Hot News" function in Weibo)
+- Commodity recommendation: accroding to someone's shooping habbit,find out a **commodity list** should recommend first, some online **salesman** may also be good (Such as : "You May Like" function in TaoBao)
 
 #### 4.2.2 Neighbor Rank API
 
@@ -298,8 +298,9 @@ public class Loader {
 
 ##### 4.2.2.1 Function Introduction
 
-在一般图结构中，找出每一层与给定起点相关性最高的前 N 个顶点及其相关度，用图的语义理解就是：从起点往外走，
-走到各层各个顶点的概率。
+In a general graph structure,find the first N vertices of each layer with the highest correlation with a given starting point and their relevance.
+
+In graph words:  to go out from the starting point, get the probability of going to each vertex of each layer.
 
 ###### Params
 
@@ -308,9 +309,10 @@ public class Loader {
 - steps: a path rule for source vertex visited,it's a list of Step,each Step map to a layout in result,required.The structure of each Step as follows：
 	- direction：the direction of edge（OUT, IN, BOTH）, BOTH for default.
 	- labels：a list of edge types, will union all edge types
-	- max_degree：查询过程中，单个顶点遍历的最大邻接边数目,default 10000 (Note: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)
-	- top：在结果中每一层只保留权重最高的前 N 个结果，默认为 100，最大值为 1000
-- capacity: 遍历过程中最大的访问的顶点数目，选填项，默认为10000000
+	- max_degree：in query process, the max iteration number of adjacency edge for a vertex, default `10000` 
+        (Note: before v0.12 step only support degree as parameter name, from v0.12, use max_degree, compatible with degree)
+	- top： retains only the top N results with the highest weight in each layer of the results, default 100, max 1000 
+- capacity: the maximum number of vertexes visited during the traversal, optional, default 10000000
 
 ##### 4.2.2.2 Usage
 
@@ -395,6 +397,6 @@ POST http://localhost:8080/graphs/hugegraph/traversers/neighborrank
 
 ##### 4.2.2.3 Suitable Scenario
 
-为给定的起点在不同的层中找到最应该推荐的顶点。
+Find the vertices in different layers for a given start point that should be most recommended
 
-- 比如：在观众、朋友、电影、导演的四层图结构中，根据某个观众的朋友们喜欢的电影，为这个观众推荐电影；或者根据这些电影是谁拍的，为其推荐导演。
+- For example, in the four-layered structure of the audience, friends, movies, and directors, according to the movies that a certain audience's friends like, recommend movies for that audience, or recommend directors for those movies based on who made them.
