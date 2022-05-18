@@ -5,7 +5,7 @@ title = "Apache HugeGraph"
 contentDir = "content/cn"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
-publishdir = "docs"
+#publishdir = "docs"
 
 # Useful when translating.
 enableMissingTranslationPlaceholders = true

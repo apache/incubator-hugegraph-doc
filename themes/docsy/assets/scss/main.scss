@@ -45,10 +45,14 @@ footer {
         color: #fff;
         text-decoration: underline;
     }
+    .footer-container{
+        width: 100%;
+        overflow: hidden;
+    }
     .footer-apache-logo{
         width: 300px;
         max-width: 80%;
-        margin: 0 0 10px 0;
+        margin: 0 0 10px 10px;
     }
     .container-center{
         margin: auto;
