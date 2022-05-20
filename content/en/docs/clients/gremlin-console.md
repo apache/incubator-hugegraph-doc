@@ -4,18 +4,18 @@ linkTitle: "Gremlin Console"
 weight: 3
 ---
 
-Gremlin-Console是由Tinkerpop自己开发的一个交互式客户端，用户可以使用该客户端对Graph做各种操作，主要有两种使用模式：
+Gremlin-Console is an interactive client developed by Tinkerpop. Users can use this client to perform various operations on Graph. There are two main usage modes:
 
-- 单机离线调用模式；
-- Client/Server请求模式；
+- Stand-alone offline call mode;
+- Client/Server request mode;
 
-### 1 单机离线调用模式
+### 1 Stand-alone offline call mode
 
-由于lib目录下已经包含了HugeCore的jar包，且HugeGraph已经作为插件注册到Console中，用户可以直接写groovy脚本调用HugeGraph-Core的代码，然后交由Gremlin-Console内的解析引擎执行，就能在不启动Server的情况下操作图。
+Since the lib directory already contains the HugeCore jar package, and HugeGraph has been registered in the Console as a plug-in, the users can write a groovy script directly to call the code of HugeGraph-Core, and then hand it over to the parsing engine in Gremlin-Console for execution. As a result, the users  can operate the graph without starting the Server.
 
-这种模式便于用户快速上手体验，但是不适合大量数据插入和查询的场景。下面给一个示例：
+This mode is convenient for users to get started quickly, but it is not suitable for scenarios where a large amount of data is inserted and queried. Here is an example:
 
-在script目录下有一个示例脚本：example.groovy
+There is a sample script in the script directory：example.groovy
 
 ```groovy
 import com.baidu.hugegraph.HugeFactory
@@ -71,11 +71,11 @@ System.out.println(">>>> query all vertices: size=" + g.V().toList().size());
 System.out.println(">>>> query all edges: size=" + g.E().toList().size());
 ```
 
-其实这一段groovy脚本几乎就是Java代码，不同之处仅在于变量的定义可以不写类型声明，以及每一行末尾的分号可以去掉。
+In fact, this groovy script is almost Java code, the only difference is that the variable definition can be written without the type declaration, and the semicolon at the end of each line can be removed.
 
-> g.V() 是获取所有的顶点，g.E() 是获取所有的边，toList() 是把结果存到一个 List 中，参考[TinkerPop Terminal Steps](http://tinkerpop.apache.org/docs/current/reference/#terminal-steps)。
+> g.V() is to get all the vertices, g.E() is to get all the edges, toList() is to store the result in a List, refer to[TinkerPop Terminal Steps](http://tinkerpop.apache.org/docs/current/reference/#terminal-steps)。
 
-下面进入gremlin-console，并传入该脚本令其执行：
+Enter the gremlin-console below and pass in the script to execute it:
 
 ```bash
 bin/gremlin-console.sh scripts/example.groovy
@@ -95,7 +95,7 @@ plugin activated: tinkerpop.tinkergraph
 >>>> query all edges: size=6
 ```
 
-可以看到，插入了6个顶点、6条边，并查询出来了。进入console之后，还可继续输入groovy语句对图做操作：
+As you can see, 6 vertices and 6 edges are inserted and queried. After entering the console, you can continue to enter groovy statements to operate on the graph:
 
 ```groovy
 gremlin> g.V()
@@ -114,13 +114,13 @@ gremlin> g.E()
 ==>e[S1:marko>2>>S2:lop][1:marko-created->2:lop]
 ```
 
-更多的Gremlin语句请参考[Tinkerpop官网](http://tinkerpop.apache.org/docs/current/reference/)
+For more Gremlin statements, please refer to [Tinkerpop Official Website](http://tinkerpop.apache.org/docs/current/reference/)
 
-### 2 Client/Server请求模式
+### 2 Client/Server request mode
 
-因为Gremlin-Console只能通过WebSocket连接HugeGraph-Server，默认HugeGraph-Server是对外提供HTTP连接的，所以先修改gremlin-server的配置。
+Because Gremlin-Console can only connect to HugeGraph-Server through WebSocket, HugeGraph-Server provides HTTP connections by default, so modify the configuration of gremlin-server first.
 
-*注意：将连接方式修改为WebSocket后，HugeGraph-Client、HugeGraph-Loader、HugeGraph-Studio等配套工具都不能使用了。*
+*Note: After changing the connection method to WebSocket, HugeGraph-Client, HugeGraph-Loader, HugeGraph-Studio and other supporting tools cannot be used.*
 
 ```yaml
 # vim conf/gremlin-server.yaml
@@ -195,9 +195,9 @@ ssl: {
 }
 ```
 
-将`channelizer: org.apache.tinkerpop.gremlin.server.channel.HttpChannelizer`修改成`channelizer: org.apache.tinkerpop.gremlin.server.channel.WebSocketChannelizer`或直接注释，然后按照步骤启动Server。
+Modify `channelizer: org.apache.tinkerpop.gremlin.server.channel.HttpChannelizer` to `channelizer: org.apache.tinkerpop.gremlin.server.channel.WebSocketChannelizer` or comment directly, and then follow the steps to start the Server.
 
-然后进入gremlin-console
+Then enter gremlin-console
 
 ```bash
 bin/gremlin-console.sh 
@@ -212,7 +212,7 @@ plugin activated: tinkerpop.utilities
 plugin activated: tinkerpop.tinkergraph
 ```
 
-连接server，需在配置文件中指定连接参数，在conf目录下有一个默认的remote.yaml
+To connect to the server, you need to specify the connection parameters in the configuration file, and there is a default remote.yaml in the conf directory
 
 ```yaml
 # cat conf/remote.yaml
@@ -235,7 +235,7 @@ gremlin> :remote connect tinkerpop.server conf/remote.yaml
 ==>Configured localhost/127.0.0.1:8182
 ```
 
-连接成功之后，在console的上下文中能使用的变量只有hugegraph和hugegraph1两个图对象（在gremlin-server.yaml中配置），如果想拥有更多的变量，可以在`scripts/empty-sample.groovy`中添加，如:
+After the connection is successful, the only variables that can be used in the context of the console are two graph objects, hugegraph and hugegraph1 (configured in gremlin-server.yaml), and if you want to have more variables, you can add them in `scripts/empty-sample.groovy`, such as:
 
 ```groovy
 import org.apache.tinkerpop.gremlin.server.util.LifeCycleHook
@@ -260,9 +260,9 @@ schema = hugegraph.schema()
 g = hugegraph.traversal()
 ```
 
-这样在console中便可以直接使用schema和g这两个对象，做元数据的管理和图的查询了。
+In this way, the two objects schema and g can be directly used in the console for metadata management and graph query.
 
-不定义了也没关系，因为所有的对象都可以通过graph获得，例如：
+It doesn't matter if it is not defined, because all objects are available through the graph, for example:
 
 ```groovy
 gremlin> :> hugegraph.traversal().V()
@@ -274,9 +274,9 @@ gremlin> :> hugegraph.traversal().V()
 ==>v[2:lop]
 ```
 
-在Client/Server模式下，所有跟Server有关的操作都要加上`:> `，如果不加，表示在console本地操作。
+In Client/Server mode, all operations related to Server must be added with `:> `, if not, it means local operation in the console.
 
-还可以把多条语句放在一个字符串变量中，然后一次性发给server：
+You can also put multiple statements in a string variable and send them to the server at once:
 
 ```groovy
 gremlin> script = """
@@ -305,4 +305,4 @@ gremlin> :> @script
 ==>6
 ```
 
-更多关于gremlin-console的使用，请参考[Tinkerpop官网](http://tinkerpop.apache.org/docs/current/reference/)
+For more information on the use of gremlin-console, please refer to [Tinkerpop Official Website](http://tinkerpop.apache.org/docs/current/reference/)
