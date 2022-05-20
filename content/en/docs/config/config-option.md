@@ -1,12 +1,12 @@
 ---
-title: "HugeGraph 配置项"
+title: "HugeGraph Config Options"
 linkTitle: "Config Options"
 weight: 2
 ---
 
-### Gremlin Server 配置项
+### Gremlin Server Config Options
 
-对应配置文件`gremlin-server.yaml`
+Corresponding configuration file `gremlin-server.yaml`
 
 config option           | default value                                                                                                | descrition
 ----------------------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------
@@ -17,9 +17,9 @@ scriptEvaluationTimeout | 30000                                                 
 channelizer             | org.apache.tinkerpop.gremlin.server.channel.HttpChannelizer                                                  | Indicates the protocol which the Gremlin Server provides service.
 authentication          | authenticator: com.baidu.hugegraph.auth.StandardAuthenticator, config: {tokens: conf/rest-server.properties} | The authenticator and config(contains tokens path) of authentication mechanism.
 
-### Rest Server & API 配置项
+### Rest Server & API Config Options
 
-对应配置文件`rest-server.properties`
+Corresponding configuration file `rest-server.properties`
 
 config option                      | default value                                    | descrition
 ---------------------------------- | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------
@@ -53,9 +53,9 @@ auth.token_expire                  | 86400                                      
 auth.token_secret                  | FXQXbJtbCLxODc6tGci732pkH1cyf8Qg                 | Secret key of HS256 algorithm.
 exception.allow_trace              | false                                            | Whether to allow exception trace stack.
 
-### 基本配置项
+### Basic Config Options
 
-基本配置项及后端配置项对应配置文件：{graph-name}.properties，如`hugegraph.properties`
+Basic Config Options and Backend Config Options correspond to configuration files：{graph-name}.properties，such as `hugegraph.properties`
 
 config option                    | default value                   | descrition
 -------------------------------- | ------------------------------- | -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -129,7 +129,7 @@ raft.rpc_buf_low_water_mark      | 10485760                        | The Channel
 raft.rpc_buf_high_water_mark     | 20971520                        | The ChannelOutboundBuffer's high water mark of netty, only when buffer size exceed this size, the method ChannelOutboundBuffer.isWritable() will return false, it means that the downstream pressure is too great to process the request or network is very congestion, upstream needs to limit rate at this time.
 raft.read_strategy               | ReadOnlyLeaseBased              | The linearizability of read strategy.
 
-### RPC server 配置
+### RPC server Config
 
 config option                  | default value  | descrition
 ------------------------------ | -------------- | ------------------------------------------------------------------
@@ -147,7 +147,7 @@ rpc.server_host                |                | The hosts/ips bound by rpc ser
 rpc.server_port                | 8090           | The port bound by rpc server to provide services.
 rpc.server_timeout             | 30             | The timeout(in seconds) of rpc server execution.
 
-### Cassandra 后端配置项
+### Cassandra Backend Config Options
 
 config option                  | default value  | descrition
 ------------------------------ | -------------- | ------------------------------------------------------------------
@@ -165,16 +165,16 @@ cassandra.compression_type     | none           | The compression algorithm of c
 cassandra.jmx_port=7199        | 7199           | The port of JMX API service for cassandra.
 cassandra.aggregation_timeout  | 43200          | The timeout in seconds of waiting for aggregation.
 
-### ScyllaDB 后端配置项
+### ScyllaDB Backend Config Options
 
 config option                  | default value | descrition
 ------------------------------ | ------------- | ------------------------------------------------------------------------------------------------
 backend                        |               | Must be set to `scylladb`.
 serializer                     |               | Must be set to `scylladb`.
 
-其它与 Cassandra 后端一致。
+Others are consistent with the Cassandra backend.
 
-### RocksDB 后端配置项
+### RocksDB Backend Config Options
 
 config option                                   | default value                                                                                                                        | descrition
 ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -228,13 +228,13 @@ rocksdb.level0_slowdown_writes_trigger          | 20                            
 rocksdb.level0_stop_writes_trigger              | 36                                                                                                                                   | Hard limit on number of level-0 files for stopping writes.
 rocksdb.soft_pending_compaction_bytes_limit     | 68719476736                                                                                                                          | The soft limit to impose on pending compaction in bytes.
 
-### HBase 后端配置项
+### HBase Backend Config Options
 
 config option            | default value               | descrition
 ------------------------ | --------------------------- | -------------------------------------------------------------------------------
 backend                  |                             | Must be set to `hbase`.
 serializer               |                             | Must be set to `hbase`.
-hbase.hosts              | localhost                   | The hostnames or ip addresses of HBase zookeeper, separated with commas. 
+hbase.hosts              | localhost                   | The hostnames or ip addresses of HBase zookeeper, separated with commas.
 hbase.port               | 2181                        | The port address of HBase zookeeper.
 hbase.threads_max        | 64                          | The max threads num of hbase connections.
 hbase.znode_parent       | /hbase                      | The znode parent path of HBase zookeeper.
@@ -246,7 +246,7 @@ hbase.kerberos_principal |                             | The HBase's principal f
 hbase.krb5_conf          |  etc/krb5.conf              | Kerberos configuration file, including KDC IP, default realm, etc.
 hbase.hbase_site         | /etc/hbase/conf/hbase-site.xml| The HBase's configuration file
 
-### MySQL & PostgreSQL 后端配置项
+### MySQL & PostgreSQL Backend Config Options
 
 config option            | default value               | descrition
 ------------------------ | --------------------------- | -------------------------------------------------------------------------------
@@ -262,15 +262,15 @@ jdbc.reconnect_max_times | 3                           | The reconnect times whe
 jdbc.storage_engine      | InnoDB                      | The storage engine of backend store database, like InnoDB/MyISAM/RocksDB for MySQL.
 jdbc.postgresql.connect_database | template1           | The database used to connect when init store, drop store or check store exist.
 
-### PostgreSQL 后端配置项
+### PostgreSQL Backend Config Options
 
 config option            | default value               | descrition
 ------------------------ | --------------------------- | -------------------------------------------------------------------------------
 backend                  |                             | Must be set to `postgresql`.
 serializer               |                             | Must be set to `postgresql`.
 
-其它与 MySQL 后端一致。
+Others are consistent with the MySQL backend.
 
-> PostgreSQL 后端的 driver 和 url 应该设置为:
+> The driver and url of the PostgreSQL backend should be set to:
 > - `jdbc.driver=org.postgresql.Driver`
 > - `jdbc.url=jdbc:postgresql://localhost:5432/`
