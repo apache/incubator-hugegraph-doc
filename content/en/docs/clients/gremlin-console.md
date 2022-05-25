@@ -4,14 +4,14 @@ linkTitle: "Gremlin Console"
 weight: 3
 ---
 
-Gremlin-Console is an interactive client developed by Tinkerpop. Users can use this client to perform various operations on Graph. There are two main usage modes:
+Gremlin-Console is an interactive client developed by TinkerPop. Users can use this client to perform various operations on Graph. There are two main usage modes:
 
-- Stand-alone offline call mode;
-- Client/Server request mode;
+- Stand-alone offline mode;
+- Client/Server mode;
 
-### 1 Stand-alone offline call mode
+### 1 Stand-alone offline mode
 
-Since the lib directory already contains the HugeCore jar package, and HugeGraph has been registered in the Console as a plug-in, the users can write a groovy script directly to call the code of HugeGraph-Core, and then hand it over to the parsing engine in Gremlin-Console for execution. As a result, the users  can operate the graph without starting the Server.
+Since the lib directory already contains the HugeCore jar package, and HugeGraph has been registered in the Console as a plug-in, the users can write a groovy script directly to call the code of HugeGraph-Core, and then hand it over to the parsing engine in Gremlin-Console for execution. As a result, the users can operate the graph without starting the Server.
 
 This mode is convenient for users to get started quickly, but it is not suitable for scenarios where a large amount of data is inserted and queried. Here is an example:
 
@@ -73,7 +73,7 @@ System.out.println(">>>> query all edges: size=" + g.E().toList().size());
 
 In fact, this groovy script is almost Java code, the only difference is that the variable definition can be written without the type declaration, and the semicolon at the end of each line can be removed.
 
-> g.V() is to get all the vertices, g.E() is to get all the edges, toList() is to store the result in a List, refer to[TinkerPop Terminal Steps](http://tinkerpop.apache.org/docs/current/reference/#terminal-steps)。
+> `g.V()` is to get all the vertices, `g.E()` is to get all the edges, `toList()` is to store the result in a List, refer to[TinkerPop Terminal Steps](http://tinkerpop.apache.org/docs/current/reference/#terminal-steps)。
 
 Enter the gremlin-console below and pass in the script to execute it:
 
@@ -116,7 +116,7 @@ gremlin> g.E()
 
 For more Gremlin statements, please refer to [Tinkerpop Official Website](http://tinkerpop.apache.org/docs/current/reference/)
 
-### 2 Client/Server request mode
+### 2 Client/Server mode
 
 Because Gremlin-Console can only connect to HugeGraph-Server through WebSocket, HugeGraph-Server provides HTTP connections by default, so modify the configuration of gremlin-server first.
 
@@ -212,7 +212,7 @@ plugin activated: tinkerpop.utilities
 plugin activated: tinkerpop.tinkergraph
 ```
 
-To connect to the server, you need to specify the connection parameters in the configuration file, and there is a default remote.yaml in the conf directory
+To connect to the server, you need to specify the connection parameters in the configuration file, and there is a default remote.yaml file in the conf directory
 
 ```yaml
 # cat conf/remote.yaml
@@ -260,7 +260,7 @@ schema = hugegraph.schema()
 g = hugegraph.traversal()
 ```
 
-In this way, the two objects schema and g can be directly used in the console for metadata management and graph query.
+In this way, the two objects `schema` and `g` can be directly used in the console for metadata management and graph query.
 
 It doesn't matter if it is not defined, because all objects are available through the graph, for example:
 
