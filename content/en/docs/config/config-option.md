@@ -129,7 +129,7 @@ raft.rpc_buf_low_water_mark      | 10485760                        | The Channel
 raft.rpc_buf_high_water_mark     | 20971520                        | The ChannelOutboundBuffer's high water mark of netty, only when buffer size exceed this size, the method ChannelOutboundBuffer.isWritable() will return false, it means that the downstream pressure is too great to process the request or network is very congestion, upstream needs to limit rate at this time.
 raft.read_strategy               | ReadOnlyLeaseBased              | The linearizability of read strategy.
 
-### RPC server Config
+### RPC server Config Options
 
 config option                  | default value  | descrition
 ------------------------------ | -------------- | ------------------------------------------------------------------
@@ -172,7 +172,7 @@ config option                  | default value | descrition
 backend                        |               | Must be set to `scylladb`.
 serializer                     |               | Must be set to `scylladb`.
 
-Others are consistent with the Cassandra backend.
+Other options are consistent with the Cassandra backend.
 
 ### RocksDB Backend Config Options
 
@@ -269,7 +269,7 @@ config option            | default value               | descrition
 backend                  |                             | Must be set to `postgresql`.
 serializer               |                             | Must be set to `postgresql`.
 
-Others are consistent with the MySQL backend.
+Other options are consistent with the MySQL backend.
 
 > The driver and url of the PostgreSQL backend should be set to:
 > - `jdbc.driver=org.postgresql.Driver`
