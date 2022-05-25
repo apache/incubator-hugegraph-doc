@@ -86,24 +86,21 @@ mvn package -DskipTests
 [INFO] ------------------------------------------------------------------------
 [INFO] Reactor Summary for hugegraph 0.13.0:
 [INFO] 
-[INFO] hugegraph .......................................... SUCCESS [09:51 min]
-[INFO] hugegraph-core ..................................... SUCCESS [34:12 min]
-[INFO] hugegraph-api ...................................... SUCCESS [04:02 min]
-[INFO] hugegraph-cassandra ................................ SUCCESS [05:27 min]
-[INFO] hugegraph-scylladb ................................. SUCCESS [  0.355 s]
-[INFO] hugegraph-rocksdb .................................. SUCCESS [17:40 min]
-[INFO] hugegraph-mysql .................................... SUCCESS [ 21.114 s]
-[INFO] hugegraph-palo ..................................... SUCCESS [  0.397 s]
-[INFO] hugegraph-hbase .................................... SUCCESS [24:55 min]
-[INFO] hugegraph-postgresql ............................... SUCCESS [01:02 min]
-[INFO] hugegraph-dist ..................................... SUCCESS [02:01 min]
-[INFO] hugegraph-example .................................. SUCCESS [  0.504 s]
-[INFO] hugegraph-test ..................................... SUCCESS [ 50.490 s]
+[INFO] hugegraph .......................................... SUCCESS [  0.003 s]
+[INFO] hugegraph-core ..................................... SUCCESS [ 15.335 s]
+[INFO] hugegraph-api ...................................... SUCCESS [  0.829 s]
+[INFO] hugegraph-cassandra ................................ SUCCESS [  1.095 s]
+[INFO] hugegraph-scylladb ................................. SUCCESS [  0.313 s]
+[INFO] hugegraph-rocksdb .................................. SUCCESS [  0.506 s]
+[INFO] hugegraph-mysql .................................... SUCCESS [  0.412 s]
+[INFO] hugegraph-palo ..................................... SUCCESS [  0.359 s]
+[INFO] hugegraph-hbase .................................... SUCCESS [ 1:55 min]
+[INFO] hugegraph-postgresql ............................... SUCCESS [ 1:02 min]
+[INFO] hugegraph-dist ..................................... SUCCESS [  7.470 s]
+[INFO] hugegraph-example .................................. SUCCESS [  0.403 s]
+[INFO] hugegraph-test ..................................... SUCCESS [  1.509 s]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  01:40 h
-[INFO] Finished at: 2022-05-16T11:40:23+08:00
 [INFO] ------------------------------------------------------------------------
 
 ......
@@ -315,7 +312,6 @@ jdbc.driver=com.mysql.jdbc.Driver
 jdbc.url=jdbc:mysql://192.168.1.241:9030
 jdbc.username=root
 jdbc.password=
-
 
 # palo backend config
 palo.host=192.168.1.241
