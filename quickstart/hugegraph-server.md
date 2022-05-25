@@ -60,7 +60,7 @@ bin/hugegraph deploy -v {hugegraph-version} -p {install-path} [-u {download-path
 #### 3.2 下载tar包
 
 ```bash
-wget https://github.com/apache/incubator-hugegraph/releases/download/v${version}/hugegraph-${version}.tar.gz
+wget https://github.com/apache/hugegraph/releases/download/v${version}/hugegraph-${version}.tar.gz
 tar -zxvf hugegraph-${version}.tar.gz
 ```
 
@@ -69,13 +69,13 @@ tar -zxvf hugegraph-${version}.tar.gz
 下载HugeGraph源代码
 
 ```bash
-git clone https://github.com/apache/incubator-hugegraph.git
+git clone https://github.com/apache/hugegraph.git hugegraph
 ```
 
 编译打包生成tar包
 
 ```bash
-cd incubator-hugegraph
+cd hugegraph
 mvn package -DskipTests
 ```
 
@@ -113,7 +113,7 @@ mvn package -DskipTests
 
 ### 4 配置
 
-如果需要快速启动HugeGraph仅用于测试，那么只需要进行少数几个配置项的修改即可（见下一节）。
+如果需要快速启动 HugeGraph 仅用于测试，那么只需要进行少数几个配置项的修改即可（见下一节）。
 详细的配置介绍请参考[配置文档](/config/config-guide.md)及[配置项介绍](/config/config-option.md)
 
 ### 5 启动
@@ -341,7 +341,6 @@ bin/start-hugegraph.sh
 Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 ```
-
 
 > 更多其它后端配置可参考[配置项介绍](/config/config-option.md)
 
