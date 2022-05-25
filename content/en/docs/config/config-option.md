@@ -245,6 +245,9 @@ hbase.kerberos_keytab    |                             | The HBase's key tab fil
 hbase.kerberos_principal |                             | The HBase's principal for kerberos authentication.
 hbase.krb5_conf          |  etc/krb5.conf              | Kerberos configuration file, including KDC IP, default realm, etc.
 hbase.hbase_site         | /etc/hbase/conf/hbase-site.xml| The HBase's configuration file
+hbase.enable_partition   | true                           | Is pre-split partitions enabled for HBase.
+hbase.vertex_partitions  | 10                             | The number of partitions of the HBase vertex table.
+hbase.edge_partitions    | 30                             | The number of partitions of the HBase edge table.
 
 ### MySQL & PostgreSQL Backend Config Options
 
