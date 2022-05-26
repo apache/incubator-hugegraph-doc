@@ -83,7 +83,18 @@ DELETE http://localhost:8080/graphs/hugegraph/clear?confirm_message=I%27m+sure+t
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph_clone?clone_graph_name=hugegraph
+POST http://localhost:8080/graphs/hugegraph2?clone_graph_name=hugegraph
+```
+
+##### Request Body
+
+```
+gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
+backend=rocksdb
+serializer=binary
+store=hugegraph2
+rocksdb.data_path=./hg2
+rocksdb.wal_path=./hg2
 ```
 
 ##### Response Status
@@ -352,7 +363,7 @@ PUT http://localhost:8080/graphs/hugegraph/snapshot_resume
 
 ### 6.5 Compact
 
-#### 6.5.1 手动紧致图，**该操作需要管理员权限**
+#### 6.5.1 手动压缩图，**该操作需要管理员权限**
 
 ##### Params
 
