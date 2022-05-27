@@ -74,16 +74,50 @@ DELETE http://localhost:8080/graphs/hugegraph/clear?confirm_message=I%27m+sure+t
 204
 ```
 
-#### 6.1.4 创建一个图，**该操作需要管理员权限**
+#### 6.1.4 克隆一个图，**该操作需要管理员权限**
 
 ##### Params
 
-- clone_graph_name: 已有的一个graph名称
+- clone_graph_name: 已有图的名称；从已有的图来克隆，用户可选择传递配置文件，传递时将替换已有图中的配置；
 
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph2?clone_graph_name=hugegraph
+POST http://localhost:8080/graphs/hugegraph_clone?clone_graph_name=hugegraph
+```
+
+##### Request Body 【可选】
+
+```
+gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
+backend=rocksdb
+serializer=binary
+store=hugegraph_clone
+rocksdb.data_path=./hg2
+rocksdb.wal_path=./hg2
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "name": "hugegraph_clone",
+    "backend": "rocksdb"
+}
+```
+
+#### 6.1.5 创建一个图，**该操作需要管理员权限**
+
+##### Method & Url
+
+```
+POST http://localhost:8080/graphs/hugegraph2
 ```
 
 ##### Request Body
@@ -107,12 +141,12 @@ rocksdb.wal_path=./hg2
 
 ```json
 {
-    "name": "hugegraph_clone",
+    "name": "hugegraph2",
     "backend": "rocksdb"
 }
 ```
 
-#### 6.1.5 删除某个图及其全部数据
+#### 6.1.6 删除某个图及其全部数据
 
 ##### Params
 

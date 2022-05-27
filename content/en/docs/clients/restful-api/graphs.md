@@ -75,16 +75,52 @@ DELETE http://localhost:8080/graphs/hugegraph/clear?confirm_message=I%27m+sure+t
 204
 ```
 
-#### 6.1.4 Create graph，**This operation requires administrator privileges**
+#### 6.1.4 Clone graph，**This operation requires administrator privileges**
 
 ##### Params
 
-- clone_graph_name: name of an exist graph
+- clone_graph_name: name of an exist graph.
+                    To clone from an existing graph, the user can choose to transfer the configuration file, 
+                    which will replace the configuration in the existing graph
 
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph2?clone_graph_name=hugegraph
+POST http://localhost:8080/graphs/hugegraph_clone?clone_graph_name=hugegraph
+```
+
+##### Request Body [Optional]
+
+```
+gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
+backend=rocksdb
+serializer=binary
+store=hugegraph_clone
+rocksdb.data_path=./hg2
+rocksdb.wal_path=./hg2
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "name": "hugegraph_clone",
+    "backend": "rocksdb"
+}
+```
+
+#### 6.1.5 Create graph，**This operation requires administrator privileges**
+
+##### Method & Url
+
+```
+POST http://localhost:8080/graphs/hugegraph2
 ```
 
 ##### Request Body
@@ -108,12 +144,12 @@ rocksdb.wal_path=./hg2
 
 ```json
 {
-    "name": "hugegraph_clone",
+    "name": "hugegraph2",
     "backend": "rocksdb"
 }
 ```
 
-#### 6.1.5 Delete graph and it's data
+#### 6.1.6 Delete graph and it's data
 
 ##### Params
 
