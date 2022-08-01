@@ -944,3 +944,20 @@ count metrics
      edge insert failure           : 0
 ```
 
+#### 4.5 Import data by spark-loader
+> Spark version: Spark 3+, other versions has not been tested.  
+> HugeGraph Toolchain version: toolchain-1.0.0
+> 
+The parameters of `spark-loader` are divided into two parts. Note: Because the abbreviations of 
+these two parameter names have overlapping parts, please use the full name of the parameter. 
+And there is no need to guarantee the order between the two parameters.
+- hugegraph parameters (Reference: [hugegraph-loader parameter description](https://hugegraph.apache.org/docs/quickstart/hugegraph-loader/#341-parameter-description) )
+- Spark task submission parameters (Reference: [Submitting Applications](https://spark.apache.org/docs/3.3.0/submitting-applications.html#content))
+
+Example:
+```bash
+sh bin/hugegraph-spark-loader.sh --master yarn \
+--deploy-mode cluster --name spark-hugegraph-loader --file ./hugegraph.json \
+--username admin --token admin --host xx.xx.xx.xx --port 8093 \
+--graph graph-test --num-executors 6 --executor-cores 16 --executor-memory 15g
+````
