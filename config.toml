@@ -150,7 +150,7 @@ version = "0.13"
 url_latest_version = "https://example.com"
 
 # Repository configuration (URLs for in-page links to opening issues and suggesting changes)
-github_repo = "https://github.com/apache/incubator-hugegraph"
+github_repo = "https://github.com/apache/incubator-hugegraph-doc"
 # An optional link to a related project repo. For example, the sibling repository where your product code lives.
 github_project_repo = "https://github.com/apache/incubator-hugegraph"
 
