@@ -949,6 +949,7 @@ count metrics
 
 #### 4.5 使用 spark-loader 导入
 > Spark 版本：Spark 3+， 其他版本未测试。
+> HugeGraph Toolchain 版本: toolchain-1.0.0
 > 
 `spark-loader` 的参数分为两部分，注意：因二者参数名缩写存在重合部分，请使用参数全称。两种参数之间无需保证先后顺序。
 - hugegraph 参数（参考：[hugegraph-loader 参数说明](https://hugegraph.apache.org/cn/docs/quickstart/hugegraph-loader/#341-%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E) ）

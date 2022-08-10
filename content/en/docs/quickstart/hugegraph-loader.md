@@ -946,6 +946,7 @@ count metrics
 
 #### 4.5 Import data by spark-loader
 > Spark version: Spark 3+, other versions has not been tested.  
+> HugeGraph Toolchain version: toolchain-1.0.0
 > 
 The parameters of `spark-loader` are divided into two parts. Note: Because the abbreviations of 
 these two parameter names have overlapping parts, please use the full name of the parameter. 
