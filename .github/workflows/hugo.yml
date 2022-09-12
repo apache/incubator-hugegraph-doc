@@ -54,9 +54,9 @@ jobs:
           fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
       - name: Setup Node
-          uses: actions/setup-node@v2.4.0
-          with:
-            node-version: "16"
+        uses: actions/setup-node@v2.4.0
+        with:
+          node-version: "16"
             
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
