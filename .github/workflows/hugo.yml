@@ -15,7 +15,7 @@
 
 # Sample workflow for building and deploying a Hugo site to GitHub Pages
 # Refer: https://github.com/marketplace/actions/github-pages-action
-name: Deploy site to pages (hugo)
+name: Deploy Site (hugo)
 
 on:
   pull_request:
