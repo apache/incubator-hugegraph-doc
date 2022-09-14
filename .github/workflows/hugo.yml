@@ -14,8 +14,7 @@
 # limitations under the License.
 
 # Sample workflow for building and deploying a Hugo site to GitHub Pages
-# Refer: https://github.com/marketplace/actions/github-pages-action
-name: Deploy Site (hugo)
+name: Deploy site to pages (hugo)
 
 on:
   pull_request:
@@ -42,13 +41,13 @@ jobs:
         uses: actions/setup-node@v2.4.0
         with:
           node-version: "16"
-
+            
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: '0.102.3'
           extended: true
-
+          
       - uses: actions/cache@v2
         with:
           path: /tmp/hugo_cache
@@ -64,6 +63,8 @@ jobs:
         if: ${{ github.ref == 'refs/heads/master' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          # https://gohugo.io/hosting-and-deployment/hosting-on-github/#github-pages-setting
+          # Refer: https://github.com/marketplace/actions/github-pages-action
           publish_dir: ./public
-          publish_branch: asf-site    # Settings > GitHub Pages set the source branch to this publish_branch
+          publish_branch: asf-site
+          keep_files: true # A simple way to keep ".asf.yaml" file
+          commit_message: ${{ github.event.head_commit.message }}
