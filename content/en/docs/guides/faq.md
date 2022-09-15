@@ -38,7 +38,7 @@ weight: 5
 
 - 服务启动成功后，使用`curl`查询所有顶点时返回乱码
 
-  服务端返回的批量顶点/边是压缩（gzip）过的，可以使用管道重定向至gunzip进行解压（`curl http://example | gunzip`），也可以用`Firefox`的`postman`或者`Chrome`浏览器的`restlet`插件发请求，会自动解压缩响应数据。
+  服务端返回的批量顶点/边是压缩（gzip）过的，可以使用管道重定向至 gunzip 进行解压（`curl http://example | gunzip`），也可以用`Firefox`的`postman`或者`Chrome`浏览器的`restlet`插件发请求，会自动解压缩响应数据。
 
 - 使用顶点Id通过`RESTful API`查询顶点时返回空，但是顶点确实是存在的
 

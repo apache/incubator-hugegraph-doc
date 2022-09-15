@@ -5,9 +5,9 @@ draft: true
 weight: 7
 ---
 
-### 1 HugeGraph-Spark概述
+### 1 HugeGraph-Spark概述 (Deprecated)
 
-HugeGraph-Spark 是一个连接 HugeGraph 和 Spark GraphX 的工具，能够读取 HugeGraph 中的数据并转换成 Spark GraphX 的 RDD，然后执行 GraphX 中的各种图算法。
+HugeGraph-Spark 是一个连接 HugeGraph 和 Spark GraphX 的工具，能够读取 HugeGraph 中的数据并转换成 Spark GraphX 的 RDD，然后执行 GraphX 中的各种图算法。 (WARNING: Deprecated Now! Use HugeGraph-Computer instead)
 
 ### 2 环境依赖
 

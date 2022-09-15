@@ -5,7 +5,9 @@ draft: true
 weight: 5
 ---
 
-### 1 HugeGraph-Studio概述
+### 1 HugeGraph-Studio概述 (Deprecated)
+
+(WARNING: Deprecated Now! Use HugeGraph-Hubble instead)
 
 HugeGraph-Studio是HugeGraph的前端展示工具，是基于Web的图形化IDE环境。
 通过HugeGraph-Studio，用户可以执行Gremlin语句，并及时获得图形化的展示结果。
@@ -242,23 +244,23 @@ HugeGraph-Studio不仅支持通过graph的方式展示数据，还支持表格�
 
 ##### 4.4.1 自定义VertexLabel 样式
 
-属性                         | 默认值       | 类型     | 说明
-:------------------------- | :-------- | :----- | :--------------------------------------------------------------------------------------------------------------
-`vis.size`                 | `25`      | number | 顶点大小
-`vis.scaling.min`          | `10`      | number | 根据标签内容调整节点大小，优先级比vis.size高
-`vis.scaling.max`          | `30`      | number | 根据标签内容调整节点大小，优先级比vis.size高
-`vis.shape`                | dot       | string | 形状，包括ellipse, circle, database, box, text，diamond, dot, star, triangle, triangleDown, hexagon, square and icon.
-`vis.border`               | #00ccff   | string | 顶点边框颜色
-`vis.background`           | #00ccff   | string | 顶点背景颜色
-`vis.hover.border`         | #00ccff   | string | 鼠标悬浮时，顶点边框颜色
-`vis.hover.background`     | #ec3112   | string | 鼠标悬浮时，顶点背景颜色
-`vis.highlight.border`     | #fb6a02   | string | 选中时，顶点边框颜色
-`vis.highlight.background` | #fb6a02   | string | 选中时，顶点背景颜色
-`vis.font.color`           | #343434   | string | 顶点类型字体颜色
-`vis.font.size`            | `12`      | string | 顶点类型字体大小
-`vis.icon.code`            | `\uf111`  | string | FontAwesome 图标编码，目前支持4.7.5版本的图标
-`vis.icon.color`           | `#2B7CE9` | string | 图标颜色，优先级比vis.background高
-`vis.icon.size`            | 50        | string | icon大小，优先级比vis.size高
+| 属性                         | 默认值       | 类型     | 说明                                                                                                              |
+|:---------------------------|:----------|:-------|:----------------------------------------------------------------------------------------------------------------|
+| `vis.size`                 | `25`      | number | 顶点大小                                                                                                            |
+| `vis.scaling.min`          | `10`      | number | 根据标签内容调整节点大小，优先级比vis.size高                                                                                      |
+| `vis.scaling.max`          | `30`      | number | 根据标签内容调整节点大小，优先级比vis.size高                                                                                      |
+| `vis.shape`                | dot       | string | 形状，包括ellipse, circle, database, box, text，diamond, dot, star, triangle, triangleDown, hexagon, square and icon. |
+| `vis.border`               | #00ccff   | string | 顶点边框颜色                                                                                                          |
+| `vis.background`           | #00ccff   | string | 顶点背景颜色                                                                                                          |
+| `vis.hover.border`         | #00ccff   | string | 鼠标悬浮时，顶点边框颜色                                                                                                    |
+| `vis.hover.background`     | #ec3112   | string | 鼠标悬浮时，顶点背景颜色                                                                                                    |
+| `vis.highlight.border`     | #fb6a02   | string | 选中时，顶点边框颜色                                                                                                      |
+| `vis.highlight.background` | #fb6a02   | string | 选中时，顶点背景颜色                                                                                                      |
+| `vis.font.color`           | #343434   | string | 顶点类型字体颜色                                                                                                        |
+| `vis.font.size`            | `12`      | string | 顶点类型字体大小                                                                                                        |
+| `vis.icon.code`            | `\uf111`  | string | FontAwesome 图标编码，目前支持4.7.5版本的图标                                                                                 |
+| `vis.icon.color`           | `#2B7CE9` | string | 图标颜色，优先级比vis.background高                                                                                        |
+| `vis.icon.size`            | 50        | string | icon大小，优先级比vis.size高                                                                                            |
 
 示例：
 
@@ -284,7 +286,8 @@ graph.schema().vertexLabel("software")
 
 <div align="center">
 
-颜色代码示例：
+颜色代码示例:
+
 <table style="BORDER-COLLAPSE: collapse" bordercolor="#111111" cellpadding="2" width="740" border="0">
 <tbody><tr><td align="middle" width="10%" bgcolor="#fffff" height="16"><font face="MS Sans Serif" size="2" color="#000000">#ffffff </font></td><td align="middle" width="10%" bgcolor="#ffffcc" height="16"><font face="MS Sans Serif" size="2" color="#000000">#ffffcc </font></td><td align="middle" width="10%" bgcolor="#cccccc" height="16"><font face="MS Sans Serif" size="2" color="#000000">#cccccc </font></td><td align="middle" width="10%" bgcolor="#999999" height="16"><font face="MS Sans Serif" size="2" color="#000000">#999999 </font></td><td align="middle" width="10%" bgcolor="#000000" height="16"><font face="MS Sans Serif" color="#ffffff" size="2">#000000 </font></td><td align="middle" width="10%" bgcolor="#fc363b" height="16"><font face="MS Sans Serif" color="#ffffff" size="2">#fc363b </font></td><td align="middle" width="10%" bgcolor="#fb157e" height="16"><font face="MS Sans Serif" color="#ffffff" size="2">#fb157e </font></td><td align="middle" width="10%" bgcolor="#fec96e" height="16"><font face="MS Sans Serif" color="#ffffff" size="2">#fec96e </font></td><td align="middle" width="10%" bgcolor="#b80711" height="16"><font face="MS Sans Serif" color="#ffffff" size="2">#b80711</font></td><td align="middle" width="10%" bgcolor="#e981f2" height="16"><font face="MS Sans Serif" color="#ffffff" size="2">#e981f2 </font></td></tr><tr><td align="middle" width="10%" bgcolor="#fb6120" height="16"><font face="MS Sans Serif" size="2" color="#000000">#fb6120 </font></td><td align="middle" width="10%" bgcolor="#9b9dfa" height="16"><font face="MS Sans Serif" size="2" color="#000000">#9b9dfa </font></td><td align="middle" width="10%" bgcolor="#98c2f9" height="16"><font face="MS Sans Serif" size="2" color="#000000">#98c2f9 </font></td><td align="middle" width="10%" bgcolor="#3e71ef" height="16"><font face="MS Sans Serif" size="2" color="#000000">#3e71ef </font></td><td align="middle" width="10%" bgcolor="#fecec8" height="16"><font face="MS Sans Serif" color="#00000" size="2">#fecec8 </font></td><td align="middle" width="10%" bgcolor="#77d46f" height="16"><font face="MS Sans Serif" color="#00000" size="2">#77d46f </font></td><td align="middle" width="10%" bgcolor="#fefc38" height="16"><font face="MS Sans Serif" color="#00000" size="2">#fefc38 </font></td><td align="middle" width="10%" bgcolor="#7ede4d" height="16"><font face="MS Sans Serif" color="#ffffff" size="2">#7ede4d </font></td><td align="middle" width="10%" bgcolor="#c3f9be" height="16"><font face="MS Sans Serif" color="#00000" size="2">#c3f9be</font></td><td align="middle" width="10%" bgcolor="#f95c79" height="16"><font face="MS Sans Serif" color="#ffffff" size="2">#f95c79 </font></td></tr></tbody>
 </table>

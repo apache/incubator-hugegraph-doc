@@ -26,7 +26,7 @@ Data import is to convert the user's business data into the vertices and edges o
 
 ##### Graph Analysis
 
-By inputting the graph traversal language Gremlin, high-performance general analysis of graph data can be realized, and functions such as customized multi-dimensional path query of vertices can be provided, and three kinds of graph result display methods are provided, including: graph form, table form, Json form, and multi-dimensional display. The data form meets the needs of various scenarios used by users. It provides functions such as running records and collection of common statements, realizing the traceability of graph operations, and the reuse and sharing of query input, which is fast and efficient. It supports the export of graph data, and the export format is Json format.
+By inputting the graph traversal language Gremlin, high-performance general analysis of graph data can be realized, and functions such as customized multidimensional path query of vertices can be provided, and three kinds of graph result display methods are provided, including: graph form, table form, Json form, and multidimensional display. The data form meets the needs of various scenarios used by users. It provides functions such as running records and collection of common statements, realizing the traceability of graph operations, and the reuse and sharing of query input, which is fast and efficient. It supports the export of graph data, and the export format is Json format.
 
 ##### Task Management
 
@@ -59,7 +59,7 @@ Create graph by filling in the content as follows:：
 
 
 ##### 3.1.2	Graph Access
-Realize the information access of the graph space. After entering, you can perform operations such as multi-dimensional query analysis, metadata management, data import, and algorithm analysis of the graph.
+Realize the information access of the graph space. After entering, you can perform operations such as multidimensional query analysis, metadata management, data import, and algorithm analysis of the graph.
 
 <center>
   <img src="/docs/images/images-hubble/312图访问.png" alt="image">

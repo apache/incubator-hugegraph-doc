@@ -8,7 +8,7 @@ weight: 1
 
 HugeGraph-Server is the core part of the HugeGraph Project, contains submodules such as Core、Backend、API.
 
-The Core Module is an implementation of the Tinkerpop interface; The Backend module is used to save the graph data to the data store, currently supported backends include：Memory、Cassandra、ScyllaDB、RocksDB; The API Module provides HTTP Server, which converts Client's HTTP request into a call to Core Moudle.
+The Core Module is an implementation of the Tinkerpop interface; The Backend module is used to save the graph data to the data store, currently supported backends include：Memory、Cassandra、ScyllaDB、RocksDB; The API Module provides HTTP Server, which converts Client's HTTP request into a call to Core Module.
 
 > There will be two spellings HugeGraph-Server and HugeGraphServer in the document, and other modules are similar. There is no big difference in the meaning of these two ways of writing, which can be distinguished as follows: `HugeGraph-Server` represents the code of server-related components, `HugeGraphServer` represents the service process.
 

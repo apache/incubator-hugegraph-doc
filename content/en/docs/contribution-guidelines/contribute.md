@@ -4,7 +4,7 @@ linkTitle: "How to Contribute to HugeGraph"
 weight: 1
 ---
 
-Thanks for taking the time to contribute! As an open source project, HugeGraph is looking forward to be contributed from everyone, and we are also grateful to all of the contributors.
+Thanks for taking the time to contribute! As an open source project, HugeGraph is looking forward to be contributed from everyone, and we are also grateful to all the contributors.
 
 The following is a contribution guide for HugeGraph:
 
@@ -50,7 +50,7 @@ If you encounter bugs or have any questions, please go to [GitHub Issues](https:
 
 #### 3.1 Create a new branch
 
-Please don't use master branch for development. Instead we should create a new branch:
+Please don't use master branch for development. We should create a new branch instead:
 
 ```shell
 # checkout master branch
@@ -132,7 +132,7 @@ Please click on "Details" to find the problem if any check does not pass.
 
 If there are checks not passed or changes requested, then continue to modify the code and push again.
 
-## 6. Further changes after review 
+## 6. More changes after review 
 
 If we have not passed the review, don't be discouraged. Usually a commit needs to be reviewed several times before being accepted! Please follow the review comments and make further changes.
 

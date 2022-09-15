@@ -4,28 +4,35 @@ linkTitle: "Rank"
 weight: 10
 ---
 
-### 4.1 rank API 概述
+### 4.1 Rank API overview
 
-HugeGraphServer 除了上一节提到的遍历（traverser）方法，还提供了一类专门做推荐的方法，我们称为`rank API`，
-可在图中为一个点推荐与其关系密切的其它点。
+Not only the Graph iteration （traverser) method, HugeGraph-Server also provide `Rank API` for recommendation purpose.
+You can use it to recommend some vertexes much closer to a vertex.
 
-### 4.2 rank API 详解
+
+### 4.2 Details of Rank API
 
 #### 4.2.1 Personal Rank API
 
-Personal Rank 算法典型场景是用于推荐应用中, 根据某个点现有的出边, 推荐具有相近 / 相同关系的其他点,
-比如根据某个人的阅读记录 / 习惯, 向它推荐其他可能感兴趣的书, 或潜在的书友, 举例如下:
-1. 假设给定 1个 Person 点 是 tom, 它喜欢 `a,b,c,d,e` 5本书, 我们的想给 tom 推荐一些书友, 以及一些书, 最容易的想法就是看看还有哪些人喜欢过这些书 (共同兴趣)
-2. 那么此时, 需要有其它的 Person 点比如 neo, 他喜欢 `b,d,f` 3本书, 以及 jay, 它喜欢 `c,d,e,g` 4本书, lee 它喜欢 `a,d,e,f` 4本书
-3. 由于 tom 已经看过的书不需要重复推荐, 所以返回结果里应该期望推荐有共同喜好的其他书友看过, 但 tom 没看过的书, 比如推荐 "f"  和 "g" 书, 且优先级 f > g
-4. 此时再计算 tom 的个性化 rank 值, 就会返回排序后 TopN 推荐的 书友 + 书 的结果了 (如果只需要推荐的书, 选择 OTHER_LABEL 即可)
+A typical scenario for `Personal Rank` algorithm is in recommendation application. According to the out edges of a vertex, 
+recommend some other vertices that having the same or similar edges.
 
-##### 4.2.1.0 数据准备
+Here is a use case:
+According to someone's reading habit or reading history, we can recommend some books he may be interested or some book pal.
 
-上面是一个简单的例子, 这里再提供一个公开的 1MB 测试数据集 [MovieLens](https://grouplens.org/datasets/movielens/) 为例，
-用户需下载该数据集，然后使用 HugeGraph-Loader 导入到 HugeGraph 中，简单起见，数据中顶点 user 
-和 movie 的属性都忽略，仅使用 id 字段即可，边 rating 的具体评分值也忽略。loader 使用的元数据
-文件和输入源映射文件内容如下：
+For Example:
+1. Suppose we have a vertex, Person type, and named tom.He like 5 books `a,b,c,d,e`. If we want to recommend some book pal and books for tom, an easier idea is let's check whoever also liked these books (common hobby based).
+2. Now, we need someone else, like neo, he like three books `b,d,f`. And Jay, he like 4 books `c,d,e,g`, and Lee, he also like 4 books `a,d,e,f`.
+3. For we don't need to recommend books tom already read, the recommend-list should only contain the books Tom's book pal already read but tom haven't read yet. Such as book "f" and "g", and with priority f > g.
+4. Now, we recompute Tom's personal rank value, we will get a sorted TopN book pal or book recommend-list. (Choose OTHER_LABEL,for Only Book purpose)
+
+
+##### 4.2.1.0 Data Preparation
+
+The case above is simple. Here we also provide a public test dataset [MovieLens](https://grouplens.org/datasets/movielens/) for use case.
+You should download the dataset. The load it into HugeGraph with HugeGraph-Loader. To make it simple, we ignore all properties data of user and move. only field id is enough. we also ignore the value of edge rating. 
+
+The metadata for input file and mapping file as follows:
 
 ```groovy
 ////////////////////////////////////////////////////////////
@@ -112,42 +119,45 @@ schema.edgeLabel("rating")
 }
 ```
 
-> 注意将映射文件中`input.path`的值修改为自己本地的路径。
+>Note: modify the `input.path` to your local path.
 
-##### 4.2.1.1 功能介绍
+##### 4.2.1.1 Function Introduction
 
-适用于二分图，给出所有源顶点相关的其他顶点及其相关性组成的列表。
+suitable for bipartite graph, will return all vertex or a list of its correlation which related to all source vertex.
 
-> 二分图：也称二部图，是图论里的一种特殊模型，也是一种特殊的网络流。其最大的特点在于，可以将图里的顶点分为两个集合，两个集合之间的点有边相连，但集合内的点之间没有直接关联。
 
-假设有一个用户和物品的二分图，基于随机游走的 PersonalRank 算法步骤如下：
+> Bipartite Graph is a special model in Graph Theory, as well as a special flow in network. The strongest feature is, it split all vertex in graph into two sets. The vertex in the set is not connected. However,the vertex in two sets may connect with each other.
 
-1. 选定一个起点用户 u，其初始权重为 1.0，从 Vu 开始游走（有 alpha 的概率走到邻居点，1 - alpha 的概率停留）；
-2. 如果决定向外游走, 那么会选取某一个类型的出边, 例如 `rating` 来查找共同的打分人：
-   1. 那就从当前节点的邻居节点中按照均匀分布随机选择一个，并且按照均匀分布划分权重值；
-   2. 给源顶点补偿权重 1 - alpha；
-   3. 重复步骤2；
-3. 达到一定步数或达到精度后收敛，得到推荐列表。
+Suppose we have one bipartite graph based on user and things.
+A random walk based PersonalRank algorithm should be likes this:
+
+
+1. Choose a user u as start vertex, let's set the initial weight to be 1.0 . Go from Vu with probability alpha to a neighbor vertex, and (1-alpha) to stay.
+2. If we decide to go outside, we would like to choose an edge, such as `rating`, to find a common judge.
+   1. Then choose the neighbors of current vertex randomly with uniform distribution, and reset the weights with uniform distribution.
+   2. Compensate the source vertex's weight with (1 - alpha)
+   3. Repeat step 2;
+3. Convergence after reaching a certain number of steps or precision, then we got a recommend-list.
 
 ###### Params
 
-**必填项**:
-- source: 源顶点 id
-- label: 源点出发的某类边 label，须连接两类不同顶点
+**Required**:
+- source: the id of source vertex
+- label: edge label go from the source vertex, should connect two different type of vertex
 
-**选填项**:
-- alpha：每轮迭代时从某个点往外走的概率，与 PageRank 算法中的 alpha 类似，取值区间为 (0, 1], 默认值 `0.85` 
-- max_degree: 查询过程中，单个顶点遍历的最大邻接边数目，默认为 `10000`
-- max_depth: 迭代次数，取值区间为 [2, 50], 默认值 `5`
-- with_label：筛选结果中保留哪些结果，可选以下三类, 默认为 `BOTH_LABEL`
-    - SAME_LABEL：仅保留与源顶点相同类别的顶点
-    - OTHER_LABEL：仅保留与源顶点不同类别（二分图的另一端）的顶点
-    - BOTH_LABEL：同时保留与源顶点相同和相反类别的顶点
-- limit: 返回的顶点的最大数目，默认为 `100`
-- max_diff: 提前收敛的精度差, 默认为 `0.0001` (*后续实现*)  
-- sorted：返回的结果是否根据 rank 排序，为 true 时降序排列，反之不排序，默认为 `true`
+**Optional**:
+- alpha: the probability of going out for one vertex in each iteration，similar to the alpha of PageRank,required, value range is (0, 1], default 0.85.
+- max_degree: in query process, the max iteration number of adjacency edge for a vertex, default `10000`
+- max_depth: iteration number,range [2, 50], default `5`
+- with_label：result filter,default `BOTH_LABEL`,optional list as follows:
+    - SAME_LABEL：Only keep vertex which has the same type as source vertex
+    - OTHER_LABEL：Only keep vertex which has different type as source vertex (the another part in bipartite graph)
+    - BOTH_LABEL：Keep both type vertex
+- limit: max return vertex number,default `100`
+- max_diff: accuracy for convergence, default `0.0001` (*will implement soon*)  
+- sorted： whether sort the result by rank or not, true for descending sort, false for none, default `true`
 
-##### 4.2.1.2 使用方法
+##### 4.2.1.2 Usage
 
 ###### Method & Url
 
@@ -192,17 +202,16 @@ POST http://localhost:8080/graphs/hugegraph/traversers/personalrank
 }
 ```
 
-##### 4.2.1.3 适用场景
+##### 4.2.1.3 Suitable Scenario
 
-两类不同顶点连接形成的二分图中，给某个点推荐相关性最高的其他顶点，例如：
-
-- 阅读推荐: 找出优先给某人推荐的其他**书籍**, 也可以同时推荐共同喜好最高的**书友** (例: 微信 "你的好友也在看 xx 文章" 功能)
-- 社交推荐: 找出拥有相同关注话题的其他**博主**, 也可以推荐可能感兴趣的**新闻/消息** (例: Weibo 中的 "热点推荐" 功能)
-- 商品推荐: 通过某人现在的购物习惯, 找出应优先推给它的**商品列表**, 也可以给它推荐**带货**播主 (例: TaoBao 的 "猜你喜欢" 功能)
+In a bipartite graph build by two different type of vertex, recommend other most related vertex to one vertex. for example:
+- Reading recommendation: find out the **books** should be recommended to someone first, It is also possible to recommend **book pal**  with the highest common preferences at the same time (just like: WeChat "your friend also read xx " function)
+- Social recommendation: find out other **Poster** who interested in same topics, or other **News/Messages** you may be interested with (Such as : "Hot News" function in Weibo)
+- Commodity recommendation: according to someone's shopping habit,find out a **commodity list** should recommend first, some online **salesman** may also be good (Such as : "You May Like" function in TaoBao)
 
 #### 4.2.2 Neighbor Rank API
 
-##### 4.2.2.0 数据准备
+##### 4.2.2.0 Data Preparation
 
 ```java
 public class Loader {
@@ -286,23 +295,25 @@ public class Loader {
 }
 ```
 
-##### 4.2.2.1 功能介绍
+##### 4.2.2.1 Function Introduction
 
-在一般图结构中，找出每一层与给定起点相关性最高的前 N 个顶点及其相关度，用图的语义理解就是：从起点往外走，
-走到各层各个顶点的概率。
+In a general graph structure,find the first N vertices of each layer with the highest correlation with a given starting point and their relevance.
+
+In graph words:  to go out from the starting point, get the probability of going to each vertex of each layer.
 
 ###### Params
 
-- source: 源顶点 id，必填项
-- alpha：每轮迭代时从某个点往外走的概率，与 PageRank 算法中的 alpha 类似，必填项，取值区间为 (0, 1] 
-- steps: 表示从起始顶点走过的路径规则，是一组 Step 的列表，每个 Step 对应结果中的一层，必填项。每个 Step 的结构如下：
-	- direction：表示边的方向（OUT, IN, BOTH），默认是 BOTH
-	- labels：边的类型列表，多个边类型取并集
-	- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)
-	- top：在结果中每一层只保留权重最高的前 N 个结果，默认为 100，最大值为 1000
-- capacity: 遍历过程中最大的访问的顶点数目，选填项，默认为10000000
+- source: id of source vertex，required
+- alpha：the probability of going out for one vertex in each iteration，similar to the alpha of PageRank,required, value range is (0, 1] 
+- steps: a path rule for source vertex visited,it's a list of Step,each Step map to a layout in result,required.The structure of each Step as follows：
+	- direction：the direction of edge（OUT, IN, BOTH）, BOTH for default.
+	- labels：a list of edge types, will union all edge types
+	- max_degree：in query process, the max iteration number of adjacency edge for a vertex, default `10000` 
+        (Note: before v0.12 step only support degree as parameter name, from v0.12, use max_degree, compatible with degree)
+	- top： retains only the top N results with the highest weight in each layer of the results, default 100, max 1000 
+- capacity: the maximum number of vertexes visited during the traversal, optional, default 10000000
 
-##### 4.2.2.2 使用方法
+##### 4.2.2.2 Usage
 
 ###### Method & Url
 
@@ -383,8 +394,8 @@ POST http://localhost:8080/graphs/hugegraph/traversers/neighborrank
 }
 ```
 
-##### 4.2.2.3 适用场景
+##### 4.2.2.3 Suitable Scenario
 
-为给定的起点在不同的层中找到最应该推荐的顶点。
+Find the vertices in different layers for a given start point that should be most recommended
 
-- 比如：在观众、朋友、电影、导演的四层图结构中，根据某个观众的朋友们喜欢的电影，为这个观众推荐电影；或者根据这些电影是谁拍的，为其推荐导演。
+- For example, in the four-layered structure of the audience, friends, movies, and directors, according to the movies that a certain audience's friends like, recommend movies for that audience, or recommend directors for those movies based on who made them.
