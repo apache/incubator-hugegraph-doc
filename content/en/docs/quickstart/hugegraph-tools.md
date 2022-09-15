@@ -6,7 +6,7 @@ weight: 3
 
 ### 1 HugeGraph-Tools概述
 
-HugeGraph-Tools 是 HugeGragh 的自动化部署、管理和备份/还原组件。
+HugeGraph-Tools 是 HugeGraph 的自动化部署、管理和备份/还原组件。
 
 ### 2 获取 HugeGraph-Tools
 
@@ -73,15 +73,15 @@ Usage: hugegraph [options] [command] [command options]
 上述全局变量，也可以通过环境变量来设置。一种方式是在命令行使用 export 设置临时环境变量，在该命令行关闭之前均有效
 
 
-全局变量      | 环境变量                | 示例                                           
------------- | --------------------- | ------------------------------------------
---url        | HUGEGRAPH_URL         | export HUGEGRAPH_URL=http://127.0.0.1:8080
---graph      | HUGEGRAPH_GRAPH       | export HUGEGRAPH_GRAPH=hugegraph 
---user       | HUGEGRAPH_USERNAME    | export HUGEGRAPH_USERNAME=admin
---password   | HUGEGRAPH_PASSWORD    | export HUGEGRAPH_PASSWORD=test
---timeout    | HUGEGRAPH_TIMEOUT     | export HUGEGRAPH_TIMEOUT=30
---trust-store-file | HUGEGRAPH_TRUST_STORE_FILE | export HUGEGRAPH_TRUST_STORE_FILE=/tmp/trust-store
---trust-store-password | HUGEGRAPH_TRUST_STORE_PASSWORD | export HUGEGRAPH_TRUST_STORE_PASSWORD=xxxx
+| 全局变量                   | 环境变量                           | 示例                                                 |
+|------------------------|--------------------------------|----------------------------------------------------|
+| --url                  | HUGEGRAPH_URL                  | export HUGEGRAPH_URL=http://127.0.0.1:8080         |
+| --graph                | HUGEGRAPH_GRAPH                | export HUGEGRAPH_GRAPH=hugegraph                   |
+| --user                 | HUGEGRAPH_USERNAME             | export HUGEGRAPH_USERNAME=admin                    |
+| --password             | HUGEGRAPH_PASSWORD             | export HUGEGRAPH_PASSWORD=test                     |
+| --timeout              | HUGEGRAPH_TIMEOUT              | export HUGEGRAPH_TIMEOUT=30                        |
+| --trust-store-file     | HUGEGRAPH_TRUST_STORE_FILE     | export HUGEGRAPH_TRUST_STORE_FILE=/tmp/trust-store |
+| --trust-store-password | HUGEGRAPH_TRUST_STORE_PASSWORD | export HUGEGRAPH_TRUST_STORE_PASSWORD=xxxx         |
 
 另一种方式是在 bin/hugegraph 脚本中设置环境变量：
 

@@ -10,8 +10,8 @@ HugeGraph-Client sends HTTP request to HugeGraph-Server to obtain and parse the 
 
 ### 2 What You Need
 
-- JDK1.8
-- Maven-3.3.9
+- JDK 1.8
+- Maven 3.3.9+
 
 ### 3 How To Use
 
@@ -19,7 +19,7 @@ The basic steps to use HugeGraph-Client are as follows:
 
 - Build a new Maven project by IDEA or Eclipse
 - Add HugeGraph-Client dependency in pom file;
-- Create a object to invoke the interface of HugeGraph-Client
+- Create an object to invoke the interface of HugeGraph-Client
 
 See the complete example in the following section for the detail.
 

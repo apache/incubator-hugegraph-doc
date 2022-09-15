@@ -35,20 +35,20 @@ HugeGraph相对于TitanDB而言，其主要特点如下：
 
 该关系图谱中有两类顶点，分别是人物（character）和位置（location）如下表：
 
-名称        | 类型     | 属性
---------- | ------ | -------------
-character | vertex | name,age,type
-location  | vertex | name
+| 名称        | 类型     | 属性            |
+|-----------|--------|---------------|
+| character | vertex | name,age,type |
+| location  | vertex | name          |
 
 有六种关系，分别是父子（father）、母子（mother）、兄弟（brother）、战斗（battled）、居住(lives)、拥有宠物（pet） 关于关系图谱的具体信息如下：
 
-名称      | 类型   | source vertex label | target vertex label | 属性
-------- | ---- | ------------------- | ------------------- | ------
-father  | edge | character           | character           | -
-mother  | edge | character           | character           | -
-brother | edge | character           | character           | -
-pet     | edge | character           | character           | -
-lives   | edge | character           | location            | reason
+| 名称      | 类型   | source vertex label | target vertex label | 属性     |
+|---------|------|---------------------|---------------------|--------|
+| father  | edge | character           | character           | -      |
+| mother  | edge | character           | character           | -      |
+| brother | edge | character           | character           | -      |
+| pet     | edge | character           | character           | -      |
+| lives   | edge | character           | location            | reason |
 
 在HugeGraph中，每个edge label只能作用于一对source vertex label和target vertex label。也就是说，如果一个图内定义了一种关系father连接character和character，那farther就不能再连接其他的vertex labels。
 
@@ -125,7 +125,7 @@ HugeGraph默认是自动生成Id，如果用户通过`primaryKeys`指定`VertexL
 
 #### 3.1 Traversal Query
 
-**1\. Find the grand father of hercules**
+**1\. Find the grandfather of hercules**
 
 ```groovy
 g.V().hasLabel('character').has('name','hercules').out('father').out('father')

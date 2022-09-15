@@ -259,7 +259,7 @@ public class SpaceAnalyzer implements Analyzer {
 }
 ```
  
-#### 3 实现插件接口，并进行注册
+#### 3. 实现插件接口，并进行注册
 
 插件注册入口为`HugeGraphPlugin.register()`，自定义插件必须实现该接口方法，在其内部注册上述定义好的扩展项。
 接口`com.baidu.hugegraph.plugin.HugeGraphPlugin`定义如下：
@@ -304,13 +304,13 @@ public class DemoPlugin implements HugeGraphPlugin {
 }
 ```
 
-#### 4 配置SPI入口
+#### 4. 配置SPI入口
 
 1. 确保services目录存在：hugegraph-plugin-demo/resources/META-INF/services
 2. 在services目录下建立文本文件：com.baidu.hugegraph.plugin.HugeGraphPlugin
 3. 文件内容如下：com.baidu.hugegraph.plugin.DemoPlugin
  
-#### 5 打Jar包
+#### 5. 打Jar包
 
 通过maven打包，在项目目录下执行命令`mvn package`，在target目录下会生成Jar包文件。
 使用时将该Jar包拷到`plugins`目录，重启服务即可生效。
