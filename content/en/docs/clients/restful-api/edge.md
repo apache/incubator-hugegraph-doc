@@ -370,18 +370,18 @@ PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action
 
 属性键值对由JSON格式的属性名称和属性值组成，允许多个属性键值对作为查询条件，属性值支持精确匹配和范围匹配，精确匹配时形如`properties={"weight":0.8}`，范围匹配时形如`properties={"age":"P.gt(0.8)"}`,范围匹配支持的表达式如下：
 
-表达式           | 说明
----------------- | -------
-P.eq(number)     | 属性值等于number的边
-P.neq(number)    | 属性值不等于number的边
-P.lt(number)     | 属性值小于number的边
-P.lte(number)    | 属性值小于等于number的边
-P.gt(number)     | 属性值大于number的边
-P.gte(number)    | 属性值大于等于number的边
-P.between(number1,number2)            | 属性值大于等于number1且小于number2的边
-P.inside(number1,number2)             | 属性值大于number1且小于number2的边
-P.outside(number1,number2)            | 属性值小于number1且大于number2的边
-P.within(value1,value2,value3,...)    | 属性值等于任何一个给定value的边
+| 表达式                                | 说明                         |
+|------------------------------------|----------------------------|
+| P.eq(number)                       | 属性值等于number的边              |
+| P.neq(number)                      | 属性值不等于number的边             |
+| P.lt(number)                       | 属性值小于number的边              |
+| P.lte(number)                      | 属性值小于等于number的边            |
+| P.gt(number)                       | 属性值大于number的边              |
+| P.gte(number)                      | 属性值大于等于number的边            |
+| P.between(number1,number2)         | 属性值大于等于number1且小于number2的边 |
+| P.inside(number1,number2)          | 属性值大于number1且小于number2的边   |
+| P.outside(number1,number2)         | 属性值小于number1且大于number2的边   |
+| P.within(value1,value2,value3,...) | 属性值等于任何一个给定value的边         |
 
 **查询与顶点 person:josh(vertex_id="1:josh") 相连且 label 为 created 的边**
 
