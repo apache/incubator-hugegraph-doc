@@ -8,13 +8,13 @@ weight: 7
 
 顶点类型中的 Id 策略决定了顶点的 Id 类型，其对应关系如下：
 
-Id_Strategy      | id type
----------------- | -------
-AUTOMATIC        | number
-PRIMARY_KEY      | string
-CUSTOMIZE_STRING | string
-CUSTOMIZE_NUMBER | number
-CUSTOMIZE_UUID   | uuid
+| Id_Strategy      | id type |
+|------------------|---------|
+| AUTOMATIC        | number  |
+| PRIMARY_KEY      | string  |
+| CUSTOMIZE_STRING | string  |
+| CUSTOMIZE_NUMBER | number  |
+| CUSTOMIZE_UUID   | uuid    |
 
 顶点的 `GET/PUT/DELETE` API 中 url 的 id 部分传入的应是带有类型信息的 id 值，这个类型信息用 json 串是否带引号表示，也就是说：
 
@@ -387,18 +387,18 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=elimi
 
 属性键值对由JSON格式的属性名称和属性值组成，允许多个属性键值对作为查询条件，属性值支持精确匹配和范围匹配，精确匹配时形如`properties={"age":29}`，范围匹配时形如`properties={"age":"P.gt(29)"}`,范围匹配支持的表达式如下：
 
-表达式           | 说明
----------------- | -------
-P.eq(number)     | 属性值等于number的顶点
-P.neq(number)    | 属性值不等于number的顶点
-P.lt(number)     | 属性值小于number的顶点
-P.lte(number)    | 属性值小于等于number的顶点
-P.gt(number)     | 属性值大于number的顶点
-P.gte(number)    | 属性值大于等于number的顶点
-P.between(number1,number2)            | 属性值大于等于number1且小于number2的顶点
-P.inside(number1,number2)             | 属性值大于number1且小于number2的顶点
-P.outside(number1,number2)            | 属性值小于number1且大于number2的顶点
-P.within(value1,value2,value3,...)    | 属性值等于任何一个给定value的顶点
+| 表达式                                | 说明                          |
+|------------------------------------|-----------------------------|
+| P.eq(number)                       | 属性值等于number的顶点              |
+| P.neq(number)                      | 属性值不等于number的顶点             |
+| P.lt(number)                       | 属性值小于number的顶点              |
+| P.lte(number)                      | 属性值小于等于number的顶点            |
+| P.gt(number)                       | 属性值大于number的顶点              |
+| P.gte(number)                      | 属性值大于等于number的顶点            |
+| P.between(number1,number2)         | 属性值大于等于number1且小于number2的顶点 |
+| P.inside(number1,number2)          | 属性值大于number1且小于number2的顶点   |
+| P.outside(number1,number2)         | 属性值小于number1且大于number2的顶点   |
+| P.within(value1,value2,value3,...) | 属性值等于任何一个给定value的顶点         |
 
 **查询所有 age 为 20 且 label 为 person 的顶点**
 

@@ -57,39 +57,38 @@ PropertyKey 允许定义的约束信息包括：name、datatype、cardinality、
 
 - name: 属性的名字，用来区分不同的 PropertyKey，不允许有同名的属性；
 
-interface                | param | must set
------------------------- | ----- | --------
-propertyKey(String name) | name  | y
+| interface                | param | must set |
+|--------------------------|-------|----------|
+| propertyKey(String name) | name  | y        |
 
 - datatype：属性值类型，必须从下表中选择符合具体业务场景的一项显式设置；
 
-interface     | Java Class
-------------- | ----------
-asText()      | String
-asInt()       | Integer
-asDate()      | Date
-asUuid()      | UUID
-asBoolean()   | Boolean
-asByte()      | Byte
-asBlob()      | Byte[]
-asDouble()    | Double
-asFloat()     | Float
-asLong()      | Long
+| interface   | Java Class |
+|-------------|------------|
+| asText()    | String     |
+| asInt()     | Integer    |
+| asDate()    | Date       |
+| asUuid()    | UUID       |
+| asBoolean() | Boolean    |
+| asByte()    | Byte       |
+| asBlob()    | Byte[]     |
+| asDouble()  | Double     |
+| asFloat()   | Float      |
+| asLong()    | Long       |
 
 - cardinality：属性值是单值还是多值，多值的情况下又分为允许有重复值和不允许有重复值，该项默认为 single，如有必要可从下表中选择一项设置；
 
-interface     | cardinality | description
-------------- | ----------- | -------------------------------------------
-valueSingle() | single      | single value
-valueList()   | list        | multi-values that allow duplicate value
-valueSet()    | set         | multi-values that not allow duplicate value
+| interface     | cardinality | description                                 |
+|---------------|-------------|---------------------------------------------|
+| valueSingle() | single      | single value                                |
+| valueList()   | list        | multi-values that allow duplicate value     |
+| valueSet()    | set         | multi-values that not allow duplicate value |
 
 - userdata：用户可以自己添加一些约束或额外信息，然后自行检查传入的属性是否满足约束，或者必要的时候提取出额外信息
 
-interface                          | description
----------------------------------- | ----------------------------------------------
-userdata(String key, Object value) | The same key, the latter will cover the former
-
+| interface                          | description                                    |
+|------------------------------------|------------------------------------------------|
+| userdata(String key, Object value) | The same key, the latter will cover the former |
 
 ##### 2.2.2 创建 PropertyKey
 
@@ -136,59 +135,59 @@ VertexLabel 允许定义的约束信息包括：name、idStrategy、properties�
 
 - name: 属性的名字，用来区分不同的 VertexLabel，不允许有同名的属性；
 
-interface                | param | must set
------------------------- | ----- | --------
-vertexLabel(String name) | name  | y
+| interface                | param | must set |
+|--------------------------|-------|----------|
+| vertexLabel(String name) | name  | y        |
 
 - idStrategy: 每一个 VertexLabel 都可以选择自己的 Id 策略，目前有三种策略供选择，即 Automatic（自动生成）、Customize（用户传入）和 PrimaryKey（主属性键）。其中 Automatic 使用 Snowflake 算法生成 Id，Customize 需要用户自行传入字符串或数字类型的 Id，PrimaryKey 则允许用户从 VertexLabel 的属性中选择若干主属性作为区分的依据，HugeGraph 内部会根据主属性的值拼接生成 Id。idStrategy 默认使用 Automatic的，但如果用户没有显式设置 idStrategy 又调用了 primaryKeys(...) 方法设置了主属性，则 idStrategy 将自动使用 PrimaryKey；
 
-interface             | idStrategy        | description
---------------------- | ----------------- | ------------------------------------------------------
-useAutomaticId        | AUTOMATIC         | generate id automaticly by Snowflake algorithom
-useCustomizeStringId  | CUSTOMIZE_STRING  | passed id by user, must be string type
-useCustomizeNumberId  | CUSTOMIZE_NUMBER  | passed id by user, must be number type
-usePrimaryKeyId       | PRIMARY_KEY       | choose some important prop as primary key to splice id
+| interface            | idStrategy       | description                                             |
+|----------------------|------------------|---------------------------------------------------------|
+| useAutomaticId       | AUTOMATIC        | generate id automatically by Snowflake algorithm        |
+| useCustomizeStringId | CUSTOMIZE_STRING | passed id by user, must be string type                  |
+| useCustomizeNumberId | CUSTOMIZE_NUMBER | passed id by user, must be number type                  |
+| usePrimaryKeyId      | PRIMARY_KEY      | choose some important prop as primary key to splice id  |
 
 - properties: 定义顶点的属性，传入的参数是 PropertyKey 的 name
 
-interface                        | description
--------------------------------- | -------------------------
-properties(String... properties) | allow to pass multi props
+| interface                        | description               |
+|----------------------------------|---------------------------|
+| properties(String... properties) | allow to pass multi props |
 
 - primaryKeys: 当用户选择了 PrimaryKey 的 Id 策略时，需要从 VertexLabel 的属性中选择若干主属性作为区分的依据；
 
-interface                   | description
---------------------------- | -----------------------------------------
-primaryKeys(String... keys) | allow to choose multi prop as primaryKeys
+| interface                   | description                               |
+|-----------------------------|-------------------------------------------|
+| primaryKeys(String... keys) | allow to choose multi prop as primaryKeys |
 
 需要注意的是，Id 策略的选择与 primaryKeys 的设置有一些相互约束，不能随意调用，约束关系见下表：
 
-|                   | useAutomaticId | useCustomizeStringId | useCustomizeNumberId | usePrimaryKeyId
-| ----------------- | -------------- | -------------------- | -------------------- | ---------------
-| unset primaryKeys | AUTOMATIC      | CUSTOMIZE_STRING     | CUSTOMIZE_NUMBER     | ERROR
-| set primaryKeys   | ERROR          | ERROR                | ERROR                | PRIMARY_KEY
+|                   | useAutomaticId | useCustomizeStringId | useCustomizeNumberId | usePrimaryKeyId |
+|-------------------|----------------|----------------------|----------------------|-----------------|
+| unset primaryKeys | AUTOMATIC      | CUSTOMIZE_STRING     | CUSTOMIZE_NUMBER     | ERROR           |
+| set primaryKeys   | ERROR          | ERROR                | ERROR                | PRIMARY_KEY     |
 
 - nullableKeys: 对于通过 properties(...) 方法设置过的属性，默认全都是不可为空的，也就是在创建顶点时该属性必须赋值，这样可能对用户数据提出了太过严格的完整性要求。为避免这样的强约束，用户可以通过
 本方法设置若干属性为可空的，这样添加顶点时该属性可以不赋值。
 
-interface                          | description
----------------------------------- | -------------------------
-nullableKeys(String... properties) | allow to pass multi props
+| interface                          | description               |
+|------------------------------------|---------------------------|
+| nullableKeys(String... properties) | allow to pass multi props |
 
 注意：primaryKeys 和 nullableKeys 不能有交集，因为一个属性不能既作为主属性，又是可空的。
 
 - enableLabelIndex：用户可以指定是否需要为label创建索引。不创建则无法全局搜索指定label的顶点和边，创建则可以全局搜索，做类似于`g.V().hasLabel('person'), g.E().has('label', 'person')`这样的查询，
 但是插入数据时性能上会更加慢，并且需要占用更多的存储空间。此项默认为 true。
 
-interface                          | description
----------------------------------- | -------------------------------
-enableLabelIndex(boolean enable)   | Whether to create a label index
+| interface                        | description                     |
+|----------------------------------|---------------------------------|
+| enableLabelIndex(boolean enable) | Whether to create a label index |
 
 - userdata：用户可以自己添加一些约束或额外信息，然后自行检查传入的属性是否满足约束，或者必要的时候提取出额外信息
 
-interface                          | description
----------------------------------- | ----------------------------------------------
-userdata(String key, Object value) | The same key, the latter will cover the former
+| interface                          | description                                    |
+|------------------------------------|------------------------------------------------|
+| userdata(String key, Object value) | The same key, the latter will cover the former |
 
 ##### 2.3.2 创建 VertexLabel
 
@@ -246,37 +245,37 @@ EdgeLabel 允许定义的约束信息包括：name、sourceLabel、targetLabel�
 
 - name: 属性的名字，用来区分不同的 EdgeLabel，不允许有同名的属性；
 
-interface              | param | must set
----------------------- | ----- | --------
-edgeLabel(String name) | name  | y
+| interface              | param | must set |
+|------------------------|-------|----------|
+| edgeLabel(String name) | name  | y        |
 
 - sourceLabel: 边连接的源顶点类型名，只允许设置一个；
 
 - targetLabel: 边连接的目标顶点类型名，只允许设置一个；
 
-interface                 | param | must set
-------------------------- | ----- | --------
-sourceLabel(String label) | label | y
-targetLabel(String label) | label | y
+| interface                 | param | must set |
+|---------------------------|-------|----------|
+| sourceLabel(String label) | label | y        |
+| targetLabel(String label) | label | y        |
 
 - frequency: 字面意思是频率，表示在两个具体的顶点间某个关系出现的次数，可以是单次（single）或多次（frequency），默认为single；
 
-interface    | frequency | description
------------- | --------- | -----------------------------------
-singleTime() | single    | a relationship can only occur once
-multiTimes() | multiple  | a relationship can occur many times
+| interface    | frequency | description                         |
+|--------------|-----------|-------------------------------------|
+| singleTime() | single    | a relationship can only occur once  |
+| multiTimes() | multiple  | a relationship can occur many times |
 
 - properties: 定义边的属性
 
-interface                        | description
--------------------------------- | -------------------------
-properties(String... properties) | allow to pass multi props
+| interface                        | description               |
+|----------------------------------|---------------------------|
+| properties(String... properties) | allow to pass multi props |
 
 - sortKeys: 当 EdgeLabel 的 frequency 为 multiple 时，需要某些属性来区分这多次的关系，故引入了 sortKeys（排序键）；
 
-interface                | description
------------------------- | --------------------------------------
-sortKeys(String... keys) | allow to choose multi prop as sortKeys
+| interface                | description                            |
+|--------------------------|----------------------------------------|
+| sortKeys(String... keys) | allow to choose multi prop as sortKeys |
 
 - nullableKeys: 与顶点中的 nullableKeys 概念一致，不再赘述
 
@@ -286,9 +285,9 @@ sortKeys(String... keys) | allow to choose multi prop as sortKeys
 
 - userdata：用户可以自己添加一些约束或额外信息，然后自行检查传入的属性是否满足约束，或者必要的时候提取出额外信息
 
-interface                          | description
----------------------------------- | ----------------------------------------------
-userdata(String key, Object value) | The same key, the latter will cover the former
+| interface                          | description                                    |
+|------------------------------------|------------------------------------------------|
+| userdata(String key, Object value) | The same key, the latter will cover the former |
 
 ##### 2.4.2 创建 EdgeLabel
 
@@ -332,28 +331,28 @@ schema.getEdgeLabel("knows").userdata()
 
 IndexLabel 用来定义索引类型，描述索引的约束信息，主要是为了方便查询。
 
-IndexLabel 允许定义的约束信息包括：name、baseType、baseValue、indexFeilds、indexType，下面逐一介绍。
+IndexLabel 允许定义的约束信息包括：name、baseType、baseValue、indexFields、indexType，下面逐一介绍。
 
 - name: 属性的名字，用来区分不同的 IndexLabel，不允许有同名的属性；
 
-interface               | param | must set
------------------------ | ----- | --------
-indexLabel(String name) | name  | y
+| interface               | param | must set |
+|-------------------------|-------|----------|
+| indexLabel(String name) | name  | y        |
 
 - baseType: 表示要为 VertexLabel 还是 EdgeLabel 建立索引, 与下面的 baseValue 配合使用；
 
 - baseValue: 指定要建立索引的 VertexLabel 或 EdgeLabel 的名称；
 
-interface             | param     | description
---------------------- | --------- | ----------------------------------------
-onV(String baseValue) | baseValue | build index for VertexLabel: 'baseValue'
-onE(String baseValue) | baseValue | build index for EdgeLabel: 'baseValue'
+| interface             | param     | description                              |
+|-----------------------|-----------|------------------------------------------|
+| onV(String baseValue) | baseValue | build index for VertexLabel: 'baseValue' |
+| onE(String baseValue) | baseValue | build index for EdgeLabel: 'baseValue'   |
 
-- indexFeilds: 要在哪些属性上建立索引，可以是为多列建立联合索引；
+- indexFields: 要在哪些属性上建立索引，可以是为多列建立联合索引；
 
-interface            | param | description
--------------------- | ----- | ---------------------------------------------------------
-by(String... fields) | files | allow to build index for multi fields for secondary index
+| interface            | param | description                                               |
+|----------------------|-------|-----------------------------------------------------------|
+| by(String... fields) | files | allow to build index for multi fields for secondary index |
 
 - indexType: 建立的索引类型，目前支持五种，即 Secondary、Range、Search、Shard 和 Unique。
     - Secondary 支持精确匹配的二级索引，允许建立联合索引，联合索引支持索引前缀搜索
@@ -382,13 +381,13 @@ by(String... fields) | files | allow to build index for multi fields for seconda
     - Unique 支持属性值唯一性约束，即可以限定属性的值不重复，允许联合索引，但不支持查询
         - 单个或者多个属性的唯一性索引，不可用来查询，只可对属性的值进行限定，当出现重复值时将报错
 
-interface   | indexType | description
------------ | --------- | ---------------------------------------
-secondary() | Secondary | support prefix search
-range()     | Range     | support range(numeric or date type) search
-search()    | Search    | support full text search
-shard()     | Shard     | support prefix + range(numeric or date type) search
-unique()    | Unique    | support unique props value, not support search
+| interface   | indexType | description                                         |
+|-------------|-----------|-----------------------------------------------------|
+| secondary() | Secondary | support prefix search                               |
+| range()     | Range     | support range(numeric or date type) search          |
+| search()    | Search    | support full text search                            |
+| shard()     | Shard     | support prefix + range(numeric or date type) search |
+| unique()    | Unique    | support unique props value, not support search      |
 
 ##### 2.5.2 创建 IndexLabel
 
@@ -450,7 +449,7 @@ Edge knows1 = marko.addEdge("knows", vadas, "city", "Beijing");
 ```
 
 - 由（源）顶点来调用添加边的函数，函数第一个参数为边的label，第二个参数是目标顶点，这两个参数的位置和顺序是固定的。后续的参数就是`key1 -> val1, key2 -> val2 ···`的顺序排列，设置边的属性，键值对顺序自由。
-- 源顶点和目标顶点必须符合 EdgeLabel 中 sourcelabel 和 targetlabel 的定义，不能随意添加。
+- 源顶点和目标顶点必须符合 EdgeLabel 中 source-label 和 target-label 的定义，不能随意添加。
 - 对于非 nullableKeys 的属性，必须要赋值。
 
 **注意：当frequency为multiple时必须要设置sortKeys对应属性类型的值。**

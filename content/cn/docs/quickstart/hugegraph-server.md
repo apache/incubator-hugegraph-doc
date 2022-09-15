@@ -337,7 +337,7 @@ curl http://localhost:8080/graphs/hugegraph/graph/vertices
 _说明_
 
 1. 由于图的点和边很多，对于 list 型的请求，比如获取所有顶点，获取所有边等，Server 会将数据压缩再返回，
-所以使用 curl 时得到一堆乱码，可以重定向至 gunzip 进行解压。推荐使用 Chrome 浏览器 + Restlet 插件发送 HTTP 请求进行测试。
+所以使用 curl 时得到一堆乱码，可以重定向至 `gunzip` 进行解压。推荐使用 Chrome 浏览器 + Restlet 插件发送 HTTP 请求进行测试。
 
     ```
     curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
