@@ -601,7 +601,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>服务启动成功后，使用&lt;code>curl&lt;/code>查询所有顶点时返回乱码&lt;/p>
-&lt;p>服务端返回的批量顶点/边是压缩（gzip）过的，可以使用管道重定向至 gunzip 进行解压（&lt;code>curl http://example | gunzip&lt;/code>），也可以用&lt;code>Firefox&lt;/code>的&lt;code>postman&lt;/code>或者&lt;code>Chrome&lt;/code>浏览器的&lt;code>restlet&lt;/code>插件发请求，会自动解压缩响应数据。&lt;/p>
+&lt;p>服务端返回的批量顶点/边是压缩（gzip）过的，可以使用管道重定向至 &lt;code>gunzip&lt;/code> 进行解压（&lt;code>curl http://example | gunzip&lt;/code>），也可以用&lt;code>Firefox&lt;/code>的&lt;code>postman&lt;/code>或者&lt;code>Chrome&lt;/code>浏览器的&lt;code>restlet&lt;/code>插件发请求，会自动解压缩响应数据。&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>使用顶点Id通过&lt;code>RESTful API&lt;/code>查询顶点时返回空，但是顶点确实是存在的&lt;/p>

@@ -202,7 +202,7 @@
 &lt;tr>
 &lt;td>useAutomaticId&lt;/td>
 &lt;td>AUTOMATIC&lt;/td>
-&lt;td>generate id automaticly by Snowflake algorithom&lt;/td>
+&lt;td>generate id automatically by Snowflake algorithm&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>useCustomizeStringId&lt;/td>
@@ -525,7 +525,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="25-indexlabel">2.5 IndexLabel&lt;/h4>
 &lt;h5 id="251-接口及参数介绍">2.5.1 接口及参数介绍&lt;/h5>
 &lt;p>IndexLabel 用来定义索引类型，描述索引的约束信息，主要是为了方便查询。&lt;/p>
-&lt;p>IndexLabel 允许定义的约束信息包括：name、baseType、baseValue、indexFeilds、indexType，下面逐一介绍。&lt;/p>
+&lt;p>IndexLabel 允许定义的约束信息包括：name、baseType、baseValue、indexFields、indexType，下面逐一介绍。&lt;/p>
 &lt;ul>
 &lt;li>name: 属性的名字，用来区分不同的 IndexLabel，不允许有同名的属性；&lt;/li>
 &lt;/ul>
@@ -575,7 +575,7 @@
 &lt;/tbody>
 &lt;/table>
 &lt;ul>
-&lt;li>indexFeilds: 要在哪些属性上建立索引，可以是为多列建立联合索引；&lt;/li>
+&lt;li>indexFields: 要在哪些属性上建立索引，可以是为多列建立联合索引；&lt;/li>
 &lt;/ul>
 &lt;table>
 &lt;thead>
@@ -712,7 +712,7 @@
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">Edge&lt;/span> &lt;span style="color:#000">knows1&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">marko&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addEdge&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;knows&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">vadas&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>由（源）顶点来调用添加边的函数，函数第一个参数为边的label，第二个参数是目标顶点，这两个参数的位置和顺序是固定的。后续的参数就是&lt;code>key1 -&amp;gt; val1, key2 -&amp;gt; val2 ···&lt;/code>的顺序排列，设置边的属性，键值对顺序自由。&lt;/li>
-&lt;li>源顶点和目标顶点必须符合 EdgeLabel 中 sourcelabel 和 targetlabel 的定义，不能随意添加。&lt;/li>
+&lt;li>源顶点和目标顶点必须符合 EdgeLabel 中 source-label 和 target-label 的定义，不能随意添加。&lt;/li>
 &lt;li>对于非 nullableKeys 的属性，必须要赋值。&lt;/li>
 &lt;/ul>
 &lt;p>&lt;strong>注意：当frequency为multiple时必须要设置sortKeys对应属性类型的值。&lt;/strong>&lt;/p>

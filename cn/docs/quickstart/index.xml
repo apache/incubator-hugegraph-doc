@@ -206,7 +206,7 @@ hbase.port=2181
 &lt;ol>
 &lt;li>
 &lt;p>由于图的点和边很多，对于 list 型的请求，比如获取所有顶点，获取所有边等，Server 会将数据压缩再返回，
-所以使用 curl 时得到一堆乱码，可以重定向至 gunzip 进行解压。推荐使用 Chrome 浏览器 + Restlet 插件发送 HTTP 请求进行测试。&lt;/p>
+所以使用 curl 时得到一堆乱码，可以重定向至 &lt;code>gunzip&lt;/code> 进行解压。推荐使用 Chrome 浏览器 + Restlet 插件发送 HTTP 请求进行测试。&lt;/p>
 &lt;pre tabindex="0">&lt;code>curl &amp;#34;http://localhost:8080/graphs/hugegraph/graph/vertices&amp;#34; | gunzip
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;li>
@@ -271,7 +271,7 @@ restserver.url=http://0.0.0.0:8080
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">$bin&lt;/span>/stop-hugegraph.sh
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: HugeGraph-Loader Quick Start</title><link>/cn/docs/quickstart/hugegraph-loader/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-loader/</guid><description>
 &lt;h3 id="1-hugegraph-loader概述">1 HugeGraph-Loader概述&lt;/h3>
-&lt;p>HugeGraph-Loader 是 HugeGragh 的数据导入组件，能够将多种数据源的数据转化为图的顶点和边并批量导入到图数据库中。&lt;/p>
+&lt;p>HugeGraph-Loader 是 HugeGraph 的数据导入组件，能够将多种数据源的数据转化为图的顶点和边并批量导入到图数据库中。&lt;/p>
 &lt;p>目前支持的数据源包括：&lt;/p>
 &lt;ul>
 &lt;li>本地磁盘文件或目录，支持 TEXT、CSV 和 JSON 格式的文件，支持压缩文件&lt;/li>
@@ -738,7 +738,7 @@ Office,388
 &lt;ul>
 &lt;li>type: 输入源类型，必须填 hdfs 或 HDFS，必填；&lt;/li>
 &lt;li>path: HDFS 文件或目录的路径，必须是 HDFS 的绝对路径，必填；&lt;/li>
-&lt;li>core_site_path: HDFS 集群的 core-site.xml 文件路径，重点要指明 namenode 的地址（fs.default.name），以及文件系统的实现（fs.hdfs.impl）；&lt;/li>
+&lt;li>core_site_path: HDFS 集群的 core-site.xml 文件路径，重点要指明 NameNode 的地址（&lt;code>fs.default.name&lt;/code>），以及文件系统的实现（&lt;code>fs.hdfs.impl&lt;/code>）；&lt;/li>
 &lt;/ul>
 &lt;h6 id="3323-jdbc-输入源">3.3.2.3 JDBC 输入源&lt;/h6>
 &lt;p>前面说到过支持多种关系型数据库，但由于它们的映射结构非常相似，故统称为 JDBC 输入源，然后用&lt;code>vendor&lt;/code>节点区分不同的数据库。&lt;/p>
@@ -1139,7 +1139,7 @@ Office,388
 &lt;h5 id="343-logs-目录文件说明">3.4.3 logs 目录文件说明&lt;/h5>
 &lt;p>程序执行过程中各日志及错误数据会写入 hugegraph-loader.log 文件中。&lt;/p>
 &lt;h5 id="344-执行命令">3.4.4 执行命令&lt;/h5>
-&lt;p>运行 bin/hugeloader 并传入参数&lt;/p>
+&lt;p>运行 bin/hugegraph-loader 并传入参数&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/hugegraph-loader -g &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>GRAPH_NAME&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span> -f &lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">INPUT_DESC_FILE&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span> -s &lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">SCHEMA_FILE&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span> -h &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>HOST&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span> -p &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>PORT&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4-完整示例">4 完整示例&lt;/h3>
 &lt;p>下面给出的是 hugegraph-loader 包中 example 目录下的例子。&lt;/p>
@@ -1280,7 +1280,7 @@ HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span>--graph graph-test --num-executors &lt;span style="color:#0000cf;font-weight:bold">6&lt;/span> --executor-cores &lt;span style="color:#0000cf;font-weight:bold">16&lt;/span> --executor-memory 15g
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: HugeGraph-Tools Quick Start</title><link>/cn/docs/quickstart/hugegraph-tools/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-tools/</guid><description>
 &lt;h3 id="1-hugegraph-tools概述">1 HugeGraph-Tools概述&lt;/h3>
-&lt;p>HugeGraph-Tools 是 HugeGragh 的自动化部署、管理和备份/还原组件。&lt;/p>
+&lt;p>HugeGraph-Tools 是 HugeGraph 的自动化部署、管理和备份/还原组件。&lt;/p>
 &lt;h3 id="2-获取-hugegraph-tools">2 获取 HugeGraph-Tools&lt;/h3>
 &lt;p>有两种方式可以获取 HugeGraph-Tools：&lt;/p>
 &lt;ul>
@@ -2560,9 +2560,9 @@ HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
 &lt;h3 id="45-example示例说明">4.5 Example示例说明&lt;/h3>
 &lt;p>示例说明见&lt;a href="/docs/clients/hugegraph-client">HugeGraph-Client基本API介绍&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph-Spark Quick Start</title><link>/cn/docs/quickstart/hugegraph-spark/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-spark/</guid><description>
 &lt;blockquote>
-&lt;p>Note: This project is archived now, consider use hugegraph-computer instead&lt;/p>
+&lt;p>Note: HugeGraph-Spark 已经停止维护, 不再更新, 请转向使用 hugegraph-computer, 感谢理解&lt;/p>
 &lt;/blockquote>
-&lt;h3 id="1-hugegraph-spark概述">1 HugeGraph-Spark概述&lt;/h3>
+&lt;h3 id="1-hugegraph-spark概述-deprecated">1 HugeGraph-Spark概述 (Deprecated)&lt;/h3>
 &lt;p>HugeGraph-Spark 是一个连接 HugeGraph 和 Spark GraphX 的工具，能够读取 HugeGraph 中的数据并转换成 Spark GraphX 的 RDD，然后执行 GraphX 中的各种图算法。&lt;/p>
 &lt;h3 id="2-环境依赖">2 环境依赖&lt;/h3>
 &lt;p>在使用 HugeGraph-Spark 前，需要依赖 HugeGraph Server 服务，下载和启动 Server 请参考 &lt;a href="/docs/quickstart/hugegraph-server">HugeGraph-Server Quick Start&lt;/a>。另外，由于 HugeGraph-Spark 需要使用 Spark GraphX，所以还需要下载 spark，本文的示例使用的是 apache-spark-2.1.1。&lt;/p>

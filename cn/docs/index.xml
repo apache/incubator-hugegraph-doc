@@ -291,7 +291,7 @@ serializer=binary
 &lt;/tr>
 &lt;tr>
 &lt;td>ThreadedTransactions&lt;/td>
-&lt;td>Determines if the {@code Graph} implementation supports threaded transactions which allow a transactionto be executed across multiple threads via {@link Transaction#createThreadedTx()}.&lt;/td>
+&lt;td>Determines if the {@code Graph} implementation supports threaded transactions which allow a transaction be executed across multiple threads via {@link Transaction#createThreadedTx()}.&lt;/td>
 &lt;td>false&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -313,7 +313,7 @@ serializer=binary
 &lt;tbody>
 &lt;tr>
 &lt;td>UserSuppliedIds&lt;/td>
-&lt;td>Determines if an {@link Element} can have a user defined identifier. Implementation that do not support this feature will be expected to auto-generate unique identifiers. In other words, if the {@link Graph} allows {@code graph.addVertex(id,x)} to work and thus set the identifier of the newly added {@link Vertex} to the value of {@code x} then this feature should return true. In this case, {@code x} is assumed to be an identifier datat ype that the {@link Graph} will accept.&lt;/td>
+&lt;td>Determines if an {@link Element} can have a user defined identifier. Implementation that do not support this feature will be expected to auto-generate unique identifiers. In other words, if the {@link Graph} allows {@code graph.addVertex(id,x)} to work and thus set the identifier of the newly added {@link Vertex} to the value of {@code x} then this feature should return true. In this case, {@code x} is assumed to be an identifier data type that the {@link Graph} will accept.&lt;/td>
 &lt;td>false&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -363,7 +363,7 @@ serializer=binary
 &lt;/tr>
 &lt;tr>
 &lt;td>DuplicateMultiProperties&lt;/td>
-&lt;td>Determines if a {@link Vertex} can support non-unique values on the same key. For this valueto be {@code true}, then {@link #supportsMetaProperties()} must also return true. By default this method, just returns what {@link #supportsMultiProperties()} returns.&lt;/td>
+&lt;td>Determines if a {@link Vertex} can support non-unique values on the same key. For this value to be {@code true}, then {@link #supportsMetaProperties()} must also return true. By default this method, just returns what {@link #supportsMultiProperties()} returns.&lt;/td>
 &lt;td>false&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -390,7 +390,7 @@ serializer=binary
 &lt;tbody>
 &lt;tr>
 &lt;td>UserSuppliedIds&lt;/td>
-&lt;td>Determines if an {@link Element} can have a user defined identifier. Implementation that do not support this feature will be expected to auto-generate unique identifiers. In other words, if the {@link Graph} allows {@code graph.addVertex(id,x)} to work and thus set the identifier of the newly added {@link Vertex} to the value of {@code x} then this feature should return true. In this case, {@code x} is assumed to be an identifier datat ype that the {@link Graph} will accept.&lt;/td>
+&lt;td>Determines if an {@link Element} can have a user defined identifier. Implementation that do not support this feature will be expected to auto-generate unique identifiers. In other words, if the {@link Graph} allows {@code graph.addVertex(id,x)} to work and thus set the identifier of the newly added {@link Vertex} to the value of {@code x} then this feature should return true. In this case, {@code x} is assumed to be an identifier data type that the {@link Graph} will accept.&lt;/td>
 &lt;td>false&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -482,12 +482,12 @@ serializer=binary
 &lt;/tr>
 &lt;tr>
 &lt;td>MapValues&lt;/td>
-&lt;td>Supports setting of a {@code Map} value. The assumption is that the {@code Map} can containarbitrary serializable values that may or may not be defined as a feature itself&lt;/td>
+&lt;td>Supports setting of a {@code Map} value. The assumption is that the {@code Map} can contain arbitrary serializable values that may or may not be defined as a feature itself&lt;/td>
 &lt;td>false&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>MixedListValues&lt;/td>
-&lt;td>Supports setting of a {@code List} value. The assumption is that the {@code List} can containarbitrary serializable values that may or may not be defined as a feature itself. As this{@code List} is &amp;ldquo;mixed&amp;rdquo; it does not need to contain objects of the same type.&lt;/td>
+&lt;td>Supports setting of a {@code List} value. The assumption is that the {@code List} can contain arbitrary serializable values that may or may not be defined as a feature itself. As this{@code List} is &amp;ldquo;mixed&amp;rdquo; it does not need to contain objects of the same type.&lt;/td>
 &lt;td>false&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -537,7 +537,7 @@ serializer=binary
 &lt;/tr>
 &lt;tr>
 &lt;td>UniformListValues&lt;/td>
-&lt;td>Supports setting of a {@code List} value. The assumption is that the {@code List} can containarbitrary serializable values that may or may not be defined as a feature itself. As this{@code List} is &amp;ldquo;uniform&amp;rdquo; it must contain objects of the same type.&lt;/td>
+&lt;td>Supports setting of a {@code List} value. The assumption is that the {@code List} can contain arbitrary serializable values that may or may not be defined as a feature itself. As this{@code List} is &amp;ldquo;uniform&amp;rdquo; it must contain objects of the same type.&lt;/td>
 &lt;td>false&lt;/td>
 &lt;/tr>
 &lt;/tbody>
@@ -839,7 +839,7 @@ serializer=binary
 &lt;li>
 &lt;p>Titan版本：0.5.4, 使用thrift+Cassandra模式&lt;/p>
 &lt;ul>
-&lt;li>Cassandra版本：cassandra-3.10，commitlog和data共用SSD&lt;/li>
+&lt;li>Cassandra版本：cassandra-3.10，commit-log 和 data 共用SSD&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>
@@ -1430,7 +1430,7 @@ hbase.port=2181
 &lt;ol>
 &lt;li>
 &lt;p>由于图的点和边很多，对于 list 型的请求，比如获取所有顶点，获取所有边等，Server 会将数据压缩再返回，
-所以使用 curl 时得到一堆乱码，可以重定向至 gunzip 进行解压。推荐使用 Chrome 浏览器 + Restlet 插件发送 HTTP 请求进行测试。&lt;/p>
+所以使用 curl 时得到一堆乱码，可以重定向至 &lt;code>gunzip&lt;/code> 进行解压。推荐使用 Chrome 浏览器 + Restlet 插件发送 HTTP 请求进行测试。&lt;/p>
 &lt;pre tabindex="0">&lt;code>curl &amp;#34;http://localhost:8080/graphs/hugegraph/graph/vertices&amp;#34; | gunzip
 &lt;/code>&lt;/pre>&lt;/li>
 &lt;li>
@@ -2181,7 +2181,7 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -2224,7 +2224,7 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -2321,7 +2321,7 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;tr>
 &lt;td>auth.authenticator&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>The class path of authenticator implemention. e.g., com.baidu.hugegraph.auth.StandardAuthenticator, or com.baidu.hugegraph.auth.ConfigAuthenticator.&lt;/td>
+&lt;td>The class path of authenticator implementation. e.g., com.baidu.hugegraph.auth.StandardAuthenticator, or com.baidu.hugegraph.auth.ConfigAuthenticator.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>auth.admin_token&lt;/td>
@@ -2382,7 +2382,7 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -2678,8 +2678,8 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;/tr>
 &lt;tr>
 &lt;td>raft.backend_threads&lt;/td>
-&lt;td>current CPU vcores&lt;/td>
-&lt;td>The thread number used to apply task to bakcend.&lt;/td>
+&lt;td>current CPU v-cores&lt;/td>
+&lt;td>The thread number used to apply task to backend.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>raft.read_index_threads&lt;/td>
@@ -2739,7 +2739,7 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -2751,7 +2751,7 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;tr>
 &lt;td>rpc.client_load_balancer&lt;/td>
 &lt;td>consistentHash&lt;/td>
-&lt;td>The rpc client uses a load-balancing algorithm to access multiple rpc servers in one cluster. Default value is &amp;lsquo;consistentHash&amp;rsquo;, means forwording by request parameters.&lt;/td>
+&lt;td>The rpc client uses a load-balancing algorithm to access multiple rpc servers in one cluster. Default value is &amp;lsquo;consistentHash&amp;rsquo;, means forwarding by request parameters.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>rpc.client_read_timeout&lt;/td>
@@ -2816,7 +2816,7 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -2893,7 +2893,7 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -2916,7 +2916,7 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -3173,7 +3173,7 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -3265,7 +3265,7 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -3332,7 +3332,7 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -3832,7 +3832,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;p>HugeGraph默认是自动生成Id，如果用户通过&lt;code>primaryKeys&lt;/code>指定&lt;code>VertexLabel&lt;/code>的&lt;code>primaryKeys&lt;/code>字段列表后，&lt;code>VertexLabel&lt;/code>的Id策略将会自动切换到&lt;code>primaryKeys&lt;/code>策略。 启用&lt;code>primaryKeys&lt;/code>策略后,HugeGraph通过&lt;code>vertexLabel+primaryKeys&lt;/code>拼接生成&lt;code>VertexId&lt;/code> ，可实现自动去重，同时无需额外创建索引即可以使用&lt;code>primaryKeys&lt;/code>中的属性进行快速查询。 例如 &amp;ldquo;character&amp;rdquo; 和 &amp;ldquo;location&amp;rdquo; 都有&lt;code>primaryKeys(&amp;quot;name&amp;quot;)&lt;/code>属性，因此在不额外创建索引的情况下可以通过&lt;code>g.V().hasLabel('character') .has('name','hercules')&lt;/code>查询vertex 。&lt;/p>
 &lt;h3 id="3-graph-traversal-examples">3 Graph Traversal Examples&lt;/h3>
 &lt;h4 id="31-traversal-query">3.1 Traversal Query&lt;/h4>
-&lt;p>&lt;strong>1. Find the grand father of hercules&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>1. Find the grandfather of hercules&lt;/strong>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">g&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">V&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">hasLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;character&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">has&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;name&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;hercules&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">out&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;father&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">out&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;father&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>也可以通过&lt;code>repeat&lt;/code>方式：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">g&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">V&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">hasLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;character&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">has&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;name&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;hercules&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">repeat&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">__&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">out&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;father&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)).&lt;/span>&lt;span style="color:#c4a000">times&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
@@ -4062,7 +4062,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;tr>
 &lt;td>useAutomaticId&lt;/td>
 &lt;td>AUTOMATIC&lt;/td>
-&lt;td>generate id automaticly by Snowflake algorithom&lt;/td>
+&lt;td>generate id automatically by Snowflake algorithm&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>useCustomizeStringId&lt;/td>
@@ -4385,7 +4385,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="25-indexlabel">2.5 IndexLabel&lt;/h4>
 &lt;h5 id="251-接口及参数介绍">2.5.1 接口及参数介绍&lt;/h5>
 &lt;p>IndexLabel 用来定义索引类型，描述索引的约束信息，主要是为了方便查询。&lt;/p>
-&lt;p>IndexLabel 允许定义的约束信息包括：name、baseType、baseValue、indexFeilds、indexType，下面逐一介绍。&lt;/p>
+&lt;p>IndexLabel 允许定义的约束信息包括：name、baseType、baseValue、indexFields、indexType，下面逐一介绍。&lt;/p>
 &lt;ul>
 &lt;li>name: 属性的名字，用来区分不同的 IndexLabel，不允许有同名的属性；&lt;/li>
 &lt;/ul>
@@ -4435,7 +4435,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/tbody>
 &lt;/table>
 &lt;ul>
-&lt;li>indexFeilds: 要在哪些属性上建立索引，可以是为多列建立联合索引；&lt;/li>
+&lt;li>indexFields: 要在哪些属性上建立索引，可以是为多列建立联合索引；&lt;/li>
 &lt;/ul>
 &lt;table>
 &lt;thead>
@@ -4572,14 +4572,14 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">Edge&lt;/span> &lt;span style="color:#000">knows1&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">marko&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addEdge&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;knows&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">vadas&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>由（源）顶点来调用添加边的函数，函数第一个参数为边的label，第二个参数是目标顶点，这两个参数的位置和顺序是固定的。后续的参数就是&lt;code>key1 -&amp;gt; val1, key2 -&amp;gt; val2 ···&lt;/code>的顺序排列，设置边的属性，键值对顺序自由。&lt;/li>
-&lt;li>源顶点和目标顶点必须符合 EdgeLabel 中 sourcelabel 和 targetlabel 的定义，不能随意添加。&lt;/li>
+&lt;li>源顶点和目标顶点必须符合 EdgeLabel 中 source-label 和 target-label 的定义，不能随意添加。&lt;/li>
 &lt;li>对于非 nullableKeys 的属性，必须要赋值。&lt;/li>
 &lt;/ul>
 &lt;p>&lt;strong>注意：当frequency为multiple时必须要设置sortKeys对应属性类型的值。&lt;/strong>&lt;/p>
 &lt;h3 id="4-简单示例">4 简单示例&lt;/h3>
 &lt;p>简单示例见&lt;a href="/docs/quickstart/hugegraph-client">HugeGraph-Client&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph-Loader Quick Start</title><link>/cn/docs/quickstart/hugegraph-loader/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-loader/</guid><description>
 &lt;h3 id="1-hugegraph-loader概述">1 HugeGraph-Loader概述&lt;/h3>
-&lt;p>HugeGraph-Loader 是 HugeGragh 的数据导入组件，能够将多种数据源的数据转化为图的顶点和边并批量导入到图数据库中。&lt;/p>
+&lt;p>HugeGraph-Loader 是 HugeGraph 的数据导入组件，能够将多种数据源的数据转化为图的顶点和边并批量导入到图数据库中。&lt;/p>
 &lt;p>目前支持的数据源包括：&lt;/p>
 &lt;ul>
 &lt;li>本地磁盘文件或目录，支持 TEXT、CSV 和 JSON 格式的文件，支持压缩文件&lt;/li>
@@ -5046,7 +5046,7 @@ Office,388
 &lt;ul>
 &lt;li>type: 输入源类型，必须填 hdfs 或 HDFS，必填；&lt;/li>
 &lt;li>path: HDFS 文件或目录的路径，必须是 HDFS 的绝对路径，必填；&lt;/li>
-&lt;li>core_site_path: HDFS 集群的 core-site.xml 文件路径，重点要指明 namenode 的地址（fs.default.name），以及文件系统的实现（fs.hdfs.impl）；&lt;/li>
+&lt;li>core_site_path: HDFS 集群的 core-site.xml 文件路径，重点要指明 NameNode 的地址（&lt;code>fs.default.name&lt;/code>），以及文件系统的实现（&lt;code>fs.hdfs.impl&lt;/code>）；&lt;/li>
 &lt;/ul>
 &lt;h6 id="3323-jdbc-输入源">3.3.2.3 JDBC 输入源&lt;/h6>
 &lt;p>前面说到过支持多种关系型数据库，但由于它们的映射结构非常相似，故统称为 JDBC 输入源，然后用&lt;code>vendor&lt;/code>节点区分不同的数据库。&lt;/p>
@@ -5447,7 +5447,7 @@ Office,388
 &lt;h5 id="343-logs-目录文件说明">3.4.3 logs 目录文件说明&lt;/h5>
 &lt;p>程序执行过程中各日志及错误数据会写入 hugegraph-loader.log 文件中。&lt;/p>
 &lt;h5 id="344-执行命令">3.4.4 执行命令&lt;/h5>
-&lt;p>运行 bin/hugeloader 并传入参数&lt;/p>
+&lt;p>运行 bin/hugegraph-loader 并传入参数&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/hugegraph-loader -g &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>GRAPH_NAME&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span> -f &lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">INPUT_DESC_FILE&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span> -s &lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">SCHEMA_FILE&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span> -h &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>HOST&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span> -p &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>PORT&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4-完整示例">4 完整示例&lt;/h3>
 &lt;p>下面给出的是 hugegraph-loader 包中 example 目录下的例子。&lt;/p>
@@ -6578,7 +6578,7 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">return&lt;/span> &lt;span style="color:#204a87;font-weight:bold">new&lt;/span> &lt;span style="color:#000">HashSet&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;lt;&amp;gt;(&lt;/span>&lt;span style="color:#000">Arrays&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">asList&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">text&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">split&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34; &amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)));&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="3-实现插件接口并进行注册">3 实现插件接口，并进行注册&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="3-实现插件接口并进行注册">3. 实现插件接口，并进行注册&lt;/h4>
 &lt;p>插件注册入口为&lt;code>HugeGraphPlugin.register()&lt;/code>，自定义插件必须实现该接口方法，在其内部注册上述定义好的扩展项。
 接口&lt;code>com.baidu.hugegraph.plugin.HugeGraphPlugin&lt;/code>定义如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">interface&lt;/span> &lt;span style="color:#000">HugeGraphPlugin&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>
@@ -6613,13 +6613,13 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">HugeGraphPlugin&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">registerAnalyzer&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;demo&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">SpaceAnalyzer&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">class&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">getName&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">());&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="4-配置spi入口">4 配置SPI入口&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="4-配置spi入口">4. 配置SPI入口&lt;/h4>
 &lt;ol>
 &lt;li>确保services目录存在：hugegraph-plugin-demo/resources/META-INF/services&lt;/li>
 &lt;li>在services目录下建立文本文件：com.baidu.hugegraph.plugin.HugeGraphPlugin&lt;/li>
 &lt;li>文件内容如下：com.baidu.hugegraph.plugin.DemoPlugin&lt;/li>
 &lt;/ol>
-&lt;h4 id="5-打jar包">5 打Jar包&lt;/h4>
+&lt;h4 id="5-打jar包">5. 打Jar包&lt;/h4>
 &lt;p>通过maven打包，在项目目录下执行命令&lt;code>mvn package&lt;/code>，在target目录下会生成Jar包文件。
 使用时将该Jar包拷到&lt;code>plugins&lt;/code>目录，重启服务即可生效。&lt;/p></description></item><item><title>Docs: HugeGraph-Loader Performance</title><link>/cn/docs/performance/hugegraph-loader-performance/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/performance/hugegraph-loader-performance/</guid><description>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
@@ -6638,7 +6638,7 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;li>默认开启label index，6.3w edges/s&lt;/li>
 &lt;/ul></description></item><item><title>Docs: HugeGraph-Tools Quick Start</title><link>/cn/docs/quickstart/hugegraph-tools/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-tools/</guid><description>
 &lt;h3 id="1-hugegraph-tools概述">1 HugeGraph-Tools概述&lt;/h3>
-&lt;p>HugeGraph-Tools 是 HugeGragh 的自动化部署、管理和备份/还原组件。&lt;/p>
+&lt;p>HugeGraph-Tools 是 HugeGraph 的自动化部署、管理和备份/还原组件。&lt;/p>
 &lt;h3 id="2-获取-hugegraph-tools">2 获取 HugeGraph-Tools&lt;/h3>
 &lt;p>有两种方式可以获取 HugeGraph-Tools：&lt;/p>
 &lt;ul>
@@ -8948,7 +8948,7 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;/li>
 &lt;li>
 &lt;p>服务启动成功后，使用&lt;code>curl&lt;/code>查询所有顶点时返回乱码&lt;/p>
-&lt;p>服务端返回的批量顶点/边是压缩（gzip）过的，可以使用管道重定向至gunzip进行解压（&lt;code>curl http://example | gunzip&lt;/code>），也可以用&lt;code>Firefox&lt;/code>的&lt;code>postman&lt;/code>或者&lt;code>Chrome&lt;/code>浏览器的&lt;code>restlet&lt;/code>插件发请求，会自动解压缩响应数据。&lt;/p>
+&lt;p>服务端返回的批量顶点/边是压缩（gzip）过的，可以使用管道重定向至 &lt;code>gunzip&lt;/code> 进行解压（&lt;code>curl http://example | gunzip&lt;/code>），也可以用&lt;code>Firefox&lt;/code>的&lt;code>postman&lt;/code>或者&lt;code>Chrome&lt;/code>浏览器的&lt;code>restlet&lt;/code>插件发请求，会自动解压缩响应数据。&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>使用顶点Id通过&lt;code>RESTful API&lt;/code>查询顶点时返回空，但是顶点确实是存在的&lt;/p>
@@ -9669,9 +9669,9 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;li>HugeStudio打包时，编译失败但没有报错，导致发布包无法启动（HugeGraph-1368）&lt;/li>
 &lt;/ul></description></item><item><title>Docs: HugeGraph-Spark Quick Start</title><link>/cn/docs/quickstart/hugegraph-spark/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-spark/</guid><description>
 &lt;blockquote>
-&lt;p>Note: This project is archived now, consider use hugegraph-computer instead&lt;/p>
+&lt;p>Note: HugeGraph-Spark 已经停止维护, 不再更新, 请转向使用 hugegraph-computer, 感谢理解&lt;/p>
 &lt;/blockquote>
-&lt;h3 id="1-hugegraph-spark概述">1 HugeGraph-Spark概述&lt;/h3>
+&lt;h3 id="1-hugegraph-spark概述-deprecated">1 HugeGraph-Spark概述 (Deprecated)&lt;/h3>
 &lt;p>HugeGraph-Spark 是一个连接 HugeGraph 和 Spark GraphX 的工具，能够读取 HugeGraph 中的数据并转换成 Spark GraphX 的 RDD，然后执行 GraphX 中的各种图算法。&lt;/p>
 &lt;h3 id="2-环境依赖">2 环境依赖&lt;/h3>
 &lt;p>在使用 HugeGraph-Spark 前，需要依赖 HugeGraph Server 服务，下载和启动 Server 请参考 &lt;a href="/docs/quickstart/hugegraph-server">HugeGraph-Server Quick Start&lt;/a>。另外，由于 HugeGraph-Spark 需要使用 Spark GraphX，所以还需要下载 spark，本文的示例使用的是 apache-spark-2.1.1。&lt;/p>

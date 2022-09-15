@@ -423,7 +423,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">return&lt;/span> &lt;span style="color:#204a87;font-weight:bold">new&lt;/span> &lt;span style="color:#000">HashSet&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;lt;&amp;gt;(&lt;/span>&lt;span style="color:#000">Arrays&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">asList&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">text&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">split&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34; &amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)));&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="3-实现插件接口并进行注册">3 实现插件接口，并进行注册&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="3-实现插件接口并进行注册">3. 实现插件接口，并进行注册&lt;/h4>
 &lt;p>插件注册入口为&lt;code>HugeGraphPlugin.register()&lt;/code>，自定义插件必须实现该接口方法，在其内部注册上述定义好的扩展项。
 接口&lt;code>com.baidu.hugegraph.plugin.HugeGraphPlugin&lt;/code>定义如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">interface&lt;/span> &lt;span style="color:#000">HugeGraphPlugin&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>
@@ -458,13 +458,13 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">HugeGraphPlugin&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">registerAnalyzer&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;demo&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">SpaceAnalyzer&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">class&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">getName&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">());&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="4-配置spi入口">4 配置SPI入口&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="4-配置spi入口">4. 配置SPI入口&lt;/h4>
 &lt;ol>
 &lt;li>确保services目录存在：hugegraph-plugin-demo/resources/META-INF/services&lt;/li>
 &lt;li>在services目录下建立文本文件：com.baidu.hugegraph.plugin.HugeGraphPlugin&lt;/li>
 &lt;li>文件内容如下：com.baidu.hugegraph.plugin.DemoPlugin&lt;/li>
 &lt;/ol>
-&lt;h4 id="5-打jar包">5 打Jar包&lt;/h4>
+&lt;h4 id="5-打jar包">5. 打Jar包&lt;/h4>
 &lt;p>通过maven打包，在项目目录下执行命令&lt;code>mvn package&lt;/code>，在target目录下会生成Jar包文件。
 使用时将该Jar包拷到&lt;code>plugins&lt;/code>目录，重启服务即可生效。&lt;/p></description></item><item><title>Docs: Backup Restore</title><link>/cn/docs/guides/backup-restore/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/guides/backup-restore/</guid><description>
 &lt;h2 id="描述">描述&lt;/h2>
@@ -601,7 +601,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>服务启动成功后，使用&lt;code>curl&lt;/code>查询所有顶点时返回乱码&lt;/p>
-&lt;p>服务端返回的批量顶点/边是压缩（gzip）过的，可以使用管道重定向至gunzip进行解压（&lt;code>curl http://example | gunzip&lt;/code>），也可以用&lt;code>Firefox&lt;/code>的&lt;code>postman&lt;/code>或者&lt;code>Chrome&lt;/code>浏览器的&lt;code>restlet&lt;/code>插件发请求，会自动解压缩响应数据。&lt;/p>
+&lt;p>服务端返回的批量顶点/边是压缩（gzip）过的，可以使用管道重定向至 &lt;code>gunzip&lt;/code> 进行解压（&lt;code>curl http://example | gunzip&lt;/code>），也可以用&lt;code>Firefox&lt;/code>的&lt;code>postman&lt;/code>或者&lt;code>Chrome&lt;/code>浏览器的&lt;code>restlet&lt;/code>插件发请求，会自动解压缩响应数据。&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>使用顶点Id通过&lt;code>RESTful API&lt;/code>查询顶点时返回空，但是顶点确实是存在的&lt;/p>
