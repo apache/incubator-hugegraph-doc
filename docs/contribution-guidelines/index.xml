@@ -1,5 +1,5 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HugeGraph – Contribution Guidelines</title><link>/docs/contribution-guidelines/</link><description>Recent content in Contribution Guidelines on HugeGraph</description><generator>Hugo -- gohugo.io</generator><atom:link href="/docs/contribution-guidelines/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: How to Contribute to HugeGraph</title><link>/docs/contribution-guidelines/contribute/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/contribution-guidelines/contribute/</guid><description>
-&lt;p>Thanks for taking the time to contribute! As an open source project, HugeGraph is looking forward to be contributed from everyone, and we are also grateful to all of the contributors.&lt;/p>
+&lt;p>Thanks for taking the time to contribute! As an open source project, HugeGraph is looking forward to be contributed from everyone, and we are also grateful to all the contributors.&lt;/p>
 &lt;p>The following is a contribution guide for HugeGraph:&lt;/p>
 &lt;img width="884" alt="image" src="https://user-images.githubusercontent.com/9625821/159643158-8bf72c0a-93c3-4a58-8912-7b2ab20ced1d.png">
 &lt;h2 id="1-preparation">1. Preparation&lt;/h2>
@@ -34,7 +34,7 @@
 &lt;p>If you encounter bugs or have any questions, please go to &lt;a href="https://github.com/apache/incubator-hugegraph/issues">GitHub Issues&lt;/a> to report them and feel free to &lt;a href="https://github.com/hugegraph/hugegraph/issues/new">create an issue&lt;/a>.&lt;/p>
 &lt;h2 id="3-make-changes-of-code-locally">3. Make changes of code locally&lt;/h2>
 &lt;h4 id="31-create-a-new-branch">3.1 Create a new branch&lt;/h4>
-&lt;p>Please don&amp;rsquo;t use master branch for development. Instead we should create a new branch:&lt;/p>
+&lt;p>Please don&amp;rsquo;t use master branch for development. We should create a new branch instead:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># checkout master branch&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git checkout master
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># pull the latest code from official hugegraph&lt;/span>
@@ -84,7 +84,7 @@
 &lt;p>The commit will be accepted and merged if there is no problem after review.&lt;/p>
 &lt;p>Please click on &amp;ldquo;Details&amp;rdquo; to find the problem if any check does not pass.&lt;/p>
 &lt;p>If there are checks not passed or changes requested, then continue to modify the code and push again.&lt;/p>
-&lt;h2 id="6-further-changes-after-review">6. Further changes after review&lt;/h2>
+&lt;h2 id="6-more-changes-after-review">6. More changes after review&lt;/h2>
 &lt;p>If we have not passed the review, don&amp;rsquo;t be discouraged. Usually a commit needs to be reviewed several times before being accepted! Please follow the review comments and make further changes.&lt;/p>
 &lt;p>After the further changes, we submit them to the local repo:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># commit all updated files in a new commit,&lt;/span>
@@ -109,7 +109,7 @@
 &lt;p>In the process of using HugeGraph, if you have any questions or ideas, suggestions, you can participate in the HugeGraph community building through the Apache mailing list. Sending a subscription email is also very simple, the steps are as follows:&lt;/p>
 &lt;ol>
 &lt;li>
-&lt;p>Send an email to &lt;a href="mailto:dev-subscribe@hugegraph.apache.org">dev-subscribe@hugegraph.apache.org&lt;/a> with your own email address, subject and content are arbitrary.&lt;/p>
+&lt;p>Email &lt;a href="mailto:dev-subscribe@hugegraph.apache.org">dev-subscribe@hugegraph.apache.org&lt;/a> with your own email address, subject and content are arbitrary.&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Receive confirmation email and reply. After completing step 1, you will receive a confirmation email from &lt;a href="mailto:dev-help@hugegraph.apache.org">dev-help@hugegraph.apache.org&lt;/a> (if not received, please confirm whether the email is automatically classified as spam, promotion email, subscription email, etc.) . Then reply directly to the email, or click on the link in the email to reply quickly, the subject and content are arbitrary.&lt;/p>
@@ -123,7 +123,7 @@
 &lt;p>Unsubscribe from the mailing list steps are as follows:&lt;/p>
 &lt;ol>
 &lt;li>
-&lt;p>Send an email to &lt;a href="mailto:dev-unsubscribe@hugegraph.apache.org">dev-unsubscribe@hugegraph.apache.org&lt;/a> with your subscribed email address, subject and content are arbitrary.&lt;/p>
+&lt;p>Email &lt;a href="mailto:dev-unsubscribe@hugegraph.apache.org">dev-unsubscribe@hugegraph.apache.org&lt;/a> with your subscribed email address, subject and content are arbitrary.&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Receive confirmation email and reply. After completing step 1, you will receive a confirmation email from &lt;a href="mailto:dev-help@hugegraph.apache.org">dev-help@hugegraph.apache.org&lt;/a> (if not received, please confirm whether the email is automatically classified as spam, promotion email, subscription email, etc.) . Then reply directly to the email, or click on the link in the email to reply quickly, the subject and content are arbitrary.&lt;/p>

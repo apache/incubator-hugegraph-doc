@@ -291,7 +291,7 @@ serializer=binary
 &lt;/tr>
 &lt;tr>
 &lt;td>ThreadedTransactions&lt;/td>
-&lt;td>Determines if the {@code Graph} implementation supports threaded transactions which allow a transactionto be executed across multiple threads via {@link Transaction#createThreadedTx()}.&lt;/td>
+&lt;td>Determines if the {@code Graph} implementation supports threaded transactions which allow a transaction be executed across multiple threads via {@link Transaction#createThreadedTx()}.&lt;/td>
 &lt;td>false&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -313,7 +313,7 @@ serializer=binary
 &lt;tbody>
 &lt;tr>
 &lt;td>UserSuppliedIds&lt;/td>
-&lt;td>Determines if an {@link Element} can have a user defined identifier. Implementation that do not support this feature will be expected to auto-generate unique identifiers. In other words, if the {@link Graph} allows {@code graph.addVertex(id,x)} to work and thus set the identifier of the newly added {@link Vertex} to the value of {@code x} then this feature should return true. In this case, {@code x} is assumed to be an identifier datat ype that the {@link Graph} will accept.&lt;/td>
+&lt;td>Determines if an {@link Element} can have a user defined identifier. Implementation that do not support this feature will be expected to auto-generate unique identifiers. In other words, if the {@link Graph} allows {@code graph.addVertex(id,x)} to work and thus set the identifier of the newly added {@link Vertex} to the value of {@code x} then this feature should return true. In this case, {@code x} is assumed to be an identifier data type that the {@link Graph} will accept.&lt;/td>
 &lt;td>false&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -363,7 +363,7 @@ serializer=binary
 &lt;/tr>
 &lt;tr>
 &lt;td>DuplicateMultiProperties&lt;/td>
-&lt;td>Determines if a {@link Vertex} can support non-unique values on the same key. For this valueto be {@code true}, then {@link #supportsMetaProperties()} must also return true. By default this method, just returns what {@link #supportsMultiProperties()} returns.&lt;/td>
+&lt;td>Determines if a {@link Vertex} can support non-unique values on the same key. For this value to be {@code true}, then {@link #supportsMetaProperties()} must also return true. By default this method, just returns what {@link #supportsMultiProperties()} returns.&lt;/td>
 &lt;td>false&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -390,7 +390,7 @@ serializer=binary
 &lt;tbody>
 &lt;tr>
 &lt;td>UserSuppliedIds&lt;/td>
-&lt;td>Determines if an {@link Element} can have a user defined identifier. Implementation that do not support this feature will be expected to auto-generate unique identifiers. In other words, if the {@link Graph} allows {@code graph.addVertex(id,x)} to work and thus set the identifier of the newly added {@link Vertex} to the value of {@code x} then this feature should return true. In this case, {@code x} is assumed to be an identifier datat ype that the {@link Graph} will accept.&lt;/td>
+&lt;td>Determines if an {@link Element} can have a user defined identifier. Implementation that do not support this feature will be expected to auto-generate unique identifiers. In other words, if the {@link Graph} allows {@code graph.addVertex(id,x)} to work and thus set the identifier of the newly added {@link Vertex} to the value of {@code x} then this feature should return true. In this case, {@code x} is assumed to be an identifier data type that the {@link Graph} will accept.&lt;/td>
 &lt;td>false&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -482,12 +482,12 @@ serializer=binary
 &lt;/tr>
 &lt;tr>
 &lt;td>MapValues&lt;/td>
-&lt;td>Supports setting of a {@code Map} value. The assumption is that the {@code Map} can containarbitrary serializable values that may or may not be defined as a feature itself&lt;/td>
+&lt;td>Supports setting of a {@code Map} value. The assumption is that the {@code Map} can contain arbitrary serializable values that may or may not be defined as a feature itself&lt;/td>
 &lt;td>false&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>MixedListValues&lt;/td>
-&lt;td>Supports setting of a {@code List} value. The assumption is that the {@code List} can containarbitrary serializable values that may or may not be defined as a feature itself. As this{@code List} is &amp;ldquo;mixed&amp;rdquo; it does not need to contain objects of the same type.&lt;/td>
+&lt;td>Supports setting of a {@code List} value. The assumption is that the {@code List} can contain arbitrary serializable values that may or may not be defined as a feature itself. As this{@code List} is &amp;ldquo;mixed&amp;rdquo; it does not need to contain objects of the same type.&lt;/td>
 &lt;td>false&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -537,7 +537,7 @@ serializer=binary
 &lt;/tr>
 &lt;tr>
 &lt;td>UniformListValues&lt;/td>
-&lt;td>Supports setting of a {@code List} value. The assumption is that the {@code List} can containarbitrary serializable values that may or may not be defined as a feature itself. As this{@code List} is &amp;ldquo;uniform&amp;rdquo; it must contain objects of the same type.&lt;/td>
+&lt;td>Supports setting of a {@code List} value. The assumption is that the {@code List} can contain arbitrary serializable values that may or may not be defined as a feature itself. As this{@code List} is &amp;ldquo;uniform&amp;rdquo; it must contain objects of the same type.&lt;/td>
 &lt;td>false&lt;/td>
 &lt;/tr>
 &lt;/tbody>
@@ -725,7 +725,7 @@ serializer=binary
 &lt;/tr>
 &lt;/tbody>
 &lt;/table></description></item><item><title>Docs: How to Contribute to HugeGraph</title><link>/docs/contribution-guidelines/contribute/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/contribution-guidelines/contribute/</guid><description>
-&lt;p>Thanks for taking the time to contribute! As an open source project, HugeGraph is looking forward to be contributed from everyone, and we are also grateful to all of the contributors.&lt;/p>
+&lt;p>Thanks for taking the time to contribute! As an open source project, HugeGraph is looking forward to be contributed from everyone, and we are also grateful to all the contributors.&lt;/p>
 &lt;p>The following is a contribution guide for HugeGraph:&lt;/p>
 &lt;img width="884" alt="image" src="https://user-images.githubusercontent.com/9625821/159643158-8bf72c0a-93c3-4a58-8912-7b2ab20ced1d.png">
 &lt;h2 id="1-preparation">1. Preparation&lt;/h2>
@@ -760,7 +760,7 @@ serializer=binary
 &lt;p>If you encounter bugs or have any questions, please go to &lt;a href="https://github.com/apache/incubator-hugegraph/issues">GitHub Issues&lt;/a> to report them and feel free to &lt;a href="https://github.com/hugegraph/hugegraph/issues/new">create an issue&lt;/a>.&lt;/p>
 &lt;h2 id="3-make-changes-of-code-locally">3. Make changes of code locally&lt;/h2>
 &lt;h4 id="31-create-a-new-branch">3.1 Create a new branch&lt;/h4>
-&lt;p>Please don&amp;rsquo;t use master branch for development. Instead we should create a new branch:&lt;/p>
+&lt;p>Please don&amp;rsquo;t use master branch for development. We should create a new branch instead:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># checkout master branch&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git checkout master
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># pull the latest code from official hugegraph&lt;/span>
@@ -810,7 +810,7 @@ serializer=binary
 &lt;p>The commit will be accepted and merged if there is no problem after review.&lt;/p>
 &lt;p>Please click on &amp;ldquo;Details&amp;rdquo; to find the problem if any check does not pass.&lt;/p>
 &lt;p>If there are checks not passed or changes requested, then continue to modify the code and push again.&lt;/p>
-&lt;h2 id="6-further-changes-after-review">6. Further changes after review&lt;/h2>
+&lt;h2 id="6-more-changes-after-review">6. More changes after review&lt;/h2>
 &lt;p>If we have not passed the review, don&amp;rsquo;t be discouraged. Usually a commit needs to be reviewed several times before being accepted! Please follow the review comments and make further changes.&lt;/p>
 &lt;p>After the further changes, we submit them to the local repo:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># commit all updated files in a new commit,&lt;/span>
@@ -945,7 +945,7 @@ serializer=binary
 &lt;li>
 &lt;p>Titan版本：0.5.4, 使用thrift+Cassandra模式&lt;/p>
 &lt;ul>
-&lt;li>Cassandra版本：cassandra-3.10，commitlog和data共用SSD&lt;/li>
+&lt;li>Cassandra版本：cassandra-3.10，commit-log 和 data 共用SSD&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>
@@ -1331,7 +1331,7 @@ serializer=binary
 &lt;/ul></description></item><item><title>Docs: HugeGraph-Server Quick Start</title><link>/docs/quickstart/hugegraph-server/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-server/</guid><description>
 &lt;h3 id="1-hugegraph-server-overview">1 HugeGraph-Server Overview&lt;/h3>
 &lt;p>HugeGraph-Server is the core part of the HugeGraph Project, contains submodules such as Core、Backend、API.&lt;/p>
-&lt;p>The Core Module is an implementation of the Tinkerpop interface; The Backend module is used to save the graph data to the data store, currently supported backends include：Memory、Cassandra、ScyllaDB、RocksDB; The API Module provides HTTP Server, which converts Client&amp;rsquo;s HTTP request into a call to Core Moudle.&lt;/p>
+&lt;p>The Core Module is an implementation of the Tinkerpop interface; The Backend module is used to save the graph data to the data store, currently supported backends include：Memory、Cassandra、ScyllaDB、RocksDB; The API Module provides HTTP Server, which converts Client&amp;rsquo;s HTTP request into a call to Core Module.&lt;/p>
 &lt;blockquote>
 &lt;p>There will be two spellings HugeGraph-Server and HugeGraphServer in the document, and other modules are similar. There is no big difference in the meaning of these two ways of writing, which can be distinguished as follows: &lt;code>HugeGraph-Server&lt;/code> represents the code of server-related components, &lt;code>HugeGraphServer&lt;/code> represents the service process.&lt;/p>
 &lt;/blockquote>
@@ -1633,7 +1633,7 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;/ul>
 &lt;h3 id="modules">Modules&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="/docs/quickstart/hugegraph-server">HugeGraph-Server&lt;/a>: HugeGraph-Server is the core part of the HugeGraph project, including sub-modules such as Core, Backend, and API;
+&lt;li>&lt;a href="/docs/quickstart/hugegraph-server">HugeGraph-Server&lt;/a>: HugeGraph-Server is the core part of the HugeGraph project, including submodules such as Core, Backend, and API;
 &lt;ul>
 &lt;li>Core: Graph engine implementation, connecting the Backend module downward and supporting the API module upward;&lt;/li>
 &lt;li>Backend: Realize the storage of graph data to the backend. The supported backends include: Memory, Cassandra, ScyllaDB, RocksDB, HBase, MySQL and PostgreSQL. Users can choose one according to the actual situation;&lt;/li>
@@ -1648,7 +1648,7 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;/ul>
 &lt;h3 id="contact-us">Contact Us&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph/issues">Github Issues&lt;/a>: Feedback on usage issues and functional requirements (priority)&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph/issues">GitHub Issues&lt;/a>: Feedback on usage issues and functional requirements (priority)&lt;/li>
 &lt;li>Feedback Email: &lt;a href="mailto:hugegraph@googlegroups.com">hugegraph@googlegroups.com&lt;/a>&lt;/li>
 &lt;li>WeChat public account: HugeGraph&lt;/li>
 &lt;/ul></description></item><item><title>Docs: HugeGraph 0.12 Release Notes</title><link>/docs/changelog/hugegraph-0.12.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/changelog/hugegraph-0.12.0-release-notes/</guid><description>
@@ -2285,7 +2285,7 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -2328,7 +2328,7 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -2425,7 +2425,7 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;tr>
 &lt;td>auth.authenticator&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>The class path of authenticator implemention. e.g., com.baidu.hugegraph.auth.StandardAuthenticator, or com.baidu.hugegraph.auth.ConfigAuthenticator.&lt;/td>
+&lt;td>The class path of authenticator implementation. e.g., com.baidu.hugegraph.auth.StandardAuthenticator, or com.baidu.hugegraph.auth.ConfigAuthenticator.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>auth.admin_token&lt;/td>
@@ -2486,7 +2486,7 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -2721,7 +2721,7 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;td>Specify the mode for the text analyzer, the available mode of analyzer are {word: [MaximumMatching, ReverseMaximumMatching, MinimumMatching, ReverseMinimumMatching, BidirectionalMaximumMatching, BidirectionalMinimumMatching, BidirectionalMaximumMinimumMatching, FullSegmentation, MinimalWordCount, MaxNgramScore, PureEnglish], ansj: [BaseAnalysis, IndexAnalysis, ToAnalysis, NlpAnalysis], hanlp: [standard, nlp, index, nShort, shortest, speed], smartcn: [], jieba: [SEARCH, INDEX], jcseg: [Simple, Complex], mmseg4j: [Simple, Complex, MaxWord], ikanalyzer: [smart, max_word]}.&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>snowflake.datecenter_id&lt;/td>
+&lt;td>snowflake.datacenter_id&lt;/td>
 &lt;td>0&lt;/td>
 &lt;td>The datacenter id of snowflake id generator.&lt;/td>
 &lt;/tr>
@@ -2782,8 +2782,8 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;/tr>
 &lt;tr>
 &lt;td>raft.backend_threads&lt;/td>
-&lt;td>current CPU vcores&lt;/td>
-&lt;td>The thread number used to apply task to bakcend.&lt;/td>
+&lt;td>current CPU v-cores&lt;/td>
+&lt;td>The thread number used to apply task to backend.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>raft.read_index_threads&lt;/td>
@@ -2843,7 +2843,7 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -2855,7 +2855,7 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;tr>
 &lt;td>rpc.client_load_balancer&lt;/td>
 &lt;td>consistentHash&lt;/td>
-&lt;td>The rpc client uses a load-balancing algorithm to access multiple rpc servers in one cluster. Default value is &amp;lsquo;consistentHash&amp;rsquo;, means forwording by request parameters.&lt;/td>
+&lt;td>The rpc client uses a load-balancing algorithm to access multiple rpc servers in one cluster. Default value is &amp;lsquo;consistentHash&amp;rsquo;, means forwarding by request parameters.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>rpc.client_read_timeout&lt;/td>
@@ -2920,7 +2920,7 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -2997,7 +2997,7 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -3020,7 +3020,7 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -3277,7 +3277,7 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -3369,7 +3369,7 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -3436,7 +3436,7 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -3921,7 +3921,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;p>HugeGraph默认是自动生成Id，如果用户通过&lt;code>primaryKeys&lt;/code>指定&lt;code>VertexLabel&lt;/code>的&lt;code>primaryKeys&lt;/code>字段列表后，&lt;code>VertexLabel&lt;/code>的Id策略将会自动切换到&lt;code>primaryKeys&lt;/code>策略。 启用&lt;code>primaryKeys&lt;/code>策略后,HugeGraph通过&lt;code>vertexLabel+primaryKeys&lt;/code>拼接生成&lt;code>VertexId&lt;/code> ，可实现自动去重，同时无需额外创建索引即可以使用&lt;code>primaryKeys&lt;/code>中的属性进行快速查询。 例如 &amp;ldquo;character&amp;rdquo; 和 &amp;ldquo;location&amp;rdquo; 都有&lt;code>primaryKeys(&amp;quot;name&amp;quot;)&lt;/code>属性，因此在不额外创建索引的情况下可以通过&lt;code>g.V().hasLabel('character') .has('name','hercules')&lt;/code>查询vertex 。&lt;/p>
 &lt;h3 id="3-graph-traversal-examples">3 Graph Traversal Examples&lt;/h3>
 &lt;h4 id="31-traversal-query">3.1 Traversal Query&lt;/h4>
-&lt;p>&lt;strong>1. Find the grand father of hercules&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>1. Find the grandfather of hercules&lt;/strong>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">g&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">V&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">hasLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;character&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">has&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;name&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;hercules&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">out&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;father&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">out&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;father&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>也可以通过&lt;code>repeat&lt;/code>方式：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">g&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">V&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">hasLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;character&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">has&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;name&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;hercules&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">repeat&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">__&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">out&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;father&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)).&lt;/span>&lt;span style="color:#c4a000">times&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
@@ -4049,7 +4049,7 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;/tbody>
 &lt;/table>
 &lt;ul>
-&lt;li>cardinality: Whether the property value is single-valued or multi-valued, in the case of multi-valued, it is divided into allowing-duplicate values and not-allowing-duplicate values. This item is single by default. If necessary, you can select a setting from the following table:&lt;/li>
+&lt;li>cardinality: Whether the property value is single-valued or multivalued, in the case of multivalued, it is divided into allowing-duplicate values and not-allowing-duplicate values. This item is single by default. If necessary, you can select a setting from the following table:&lt;/li>
 &lt;/ul>
 &lt;table>
 &lt;thead>
@@ -4100,7 +4100,7 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asText&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">valueSet&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In the following examples, the syntax of &lt;code>gremlin&lt;/code> and &lt;code>java&lt;/code> is exactly the same, so we won&amp;rsquo;t repeat them.&lt;/p>
 &lt;ul>
-&lt;li>ifNotExist(): Add a judgment mechanism for create, if the current PropertyKey already exists, it will not be created, otherwise the property will be created. If no ifNotExist() is added, an exception will be thrown if a properkey with the same name already exists. The same as below, and will not be repeated there.&lt;/li>
+&lt;li>ifNotExist(): Add a judgment mechanism for create, if the current PropertyKey already exists, it will not be created, otherwise the property will be created. If no ifNotExist() is added, an exception will be thrown if a property-key with the same name already exists. The same as below, and will not be repeated there.&lt;/li>
 &lt;/ul>
 &lt;h5 id="223-delete-propertykey">2.2.3 Delete PropertyKey&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">remove&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
@@ -4137,7 +4137,7 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;/tbody>
 &lt;/table>
 &lt;ul>
-&lt;li>idStrategy: Each VertexLabel can choose its own Id strategy. There are currently three strategies to choose from, namely Automatic (automatically generated), Customize (user input) and PrimaryKey (primary attribute key). Among them, Automatic uses the Snowflake algorithm to generate Id, Customize requires the user to pass in the Id of string or number type, and PrimaryKey allows the user to select several properties of VertexLabel as the basis for differentiation. HugeGraph will be spliced and generated Id according to the value of the primary properties. idStrategy uses Automatic by default, but if the user does not explicitly set idStrategy and calls the primaryKeys(&amp;hellip;) method to set the primary property, then idStrategy will automatically use PrimaryKey.&lt;/li>
+&lt;li>idStrategy: Each VertexLabel can choose its own ID strategy. There are currently three strategies to choose from, namely Automatic (automatically generated), Customize (user input) and PrimaryKey (primary attribute key). Among them, Automatic uses the Snowflake algorithm to generate Id, Customize requires the user to pass in the Id of string or number type, and PrimaryKey allows the user to select several properties of VertexLabel as the basis for differentiation. HugeGraph will be spliced and generated ID according to the value of the primary properties. idStrategy uses Automatic by default, but if the user does not explicitly set idStrategy and calls the primaryKeys(&amp;hellip;) method to set the primary property, then idStrategy will automatically use PrimaryKey.&lt;/li>
 &lt;/ul>
 &lt;table>
 &lt;thead>
@@ -4151,7 +4151,7 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;tr>
 &lt;td>useAutomaticId&lt;/td>
 &lt;td>AUTOMATIC&lt;/td>
-&lt;td>generate id automaticly by Snowflake algorithom&lt;/td>
+&lt;td>generate id automatically by Snowflake algorithm&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>useCustomizeStringId&lt;/td>
@@ -4188,7 +4188,7 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;/tbody>
 &lt;/table>
 &lt;ul>
-&lt;li>primaryKeys: When the user selects the Id strategy of PrimaryKey, several primary properties need to be selected from the properties of VertexLabel as the basis for differentiation;&lt;/li>
+&lt;li>primaryKeys: When the user selects the ID strategy of PrimaryKey, several primary properties need to be selected from the properties of VertexLabel as the basis for differentiation;&lt;/li>
 &lt;/ul>
 &lt;table>
 &lt;thead>
@@ -4204,7 +4204,7 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;p>Note that the selection of the Id strategy and the setting of primaryKeys have some mutual constraints, which cannot be called at will. The constraints are shown in the following table:&lt;/p>
+&lt;p>Note that the selection of the ID strategy and the setting of primaryKeys have some mutual constraints, which cannot be called at will. The constraints are shown in the following table:&lt;/p>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -4456,7 +4456,7 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">edgeLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;knows&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">properties&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;price&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">nullableKeys&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;price&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">append&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="244-delete-edgelabel">2.4.4 Delete EdgeLabel&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">edgeLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;knows&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">remove&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="245-qeury-edgelabel">2.4.5 Qeury EdgeLabel&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="245-query-edgelabel">2.4.5 Query EdgeLabel&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// Get EdgeLabel
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">getEdgeLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;knows&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -4472,7 +4472,7 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="25-indexlabel">2.5 IndexLabel&lt;/h4>
 &lt;h5 id="251-interface-and-parameter-introduction">2.5.1 Interface and parameter introduction&lt;/h5>
 &lt;p>IndexLabel is used to define the index type and describe the constraint information of the index, mainly for the convenience of query.&lt;/p>
-&lt;p>The constraint information that IndexLabel allows to define include: name, baseType, baseValue, indexFeilds, indexType, which are introduced one by one below.&lt;/p>
+&lt;p>The constraint information that IndexLabel allows to define include: name, baseType, baseValue, indexFields, indexType, which are introduced one by one below.&lt;/p>
 &lt;ul>
 &lt;li>name: The name of the IndexLabel, used to distinguish different IndexLabels, IndexLabels with the same name are not allowed.&lt;/li>
 &lt;/ul>
@@ -4546,7 +4546,7 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;li>Secondary Index supports exact matching secondary index, allow to build joint index, joint index supports index prefix search
 &lt;ul>
 &lt;li>Single Property Secondary Index, support equality query, for example: the secondary index of the city property of the person vertex, you can use &lt;code>g.V().has(&amp;quot;city&amp;quot;, &amp;quot;Beijing&amp;quot;)&lt;/code> to query all the vertices with &amp;ldquo;city attribute value is Beijing&amp;rdquo;&lt;/li>
-&lt;li>Joint Secondary Index, supports prefix query and equality query, such as: joint index of city and street properties of person vertex, you can use &lt;code>g.V().has(&amp;quot;city&amp;quot;, &amp;quot;Beijing&amp;quot;).has('street', 'Zhongguancun street ')&lt;/code> to query all vertices of &amp;ldquo;city property value is Beijing and street property value is Zhongguancun&amp;rdquo;, or &lt;code>g.V().has(&amp;quot;city&amp;quot;, &amp;quot;Beijing&amp;quot;)&lt;/code> to query all vertices of &amp;ldquo;city property value is Beijing&amp;rdquo;.&lt;/li>
+&lt;li>Joint Secondary Index, supports prefix query and equality query, such as: joint index of city and street properties of person vertex, you can use &lt;code>g.V().has(&amp;quot;city&amp;quot;, &amp;quot;Beijing&amp;quot;).has('street', 'Zhongguancun street ')&lt;/code> to query all vertices of &amp;ldquo;city property value is Beijing and street property value is ZhongGuanCun&amp;rdquo;, or &lt;code>g.V().has(&amp;quot;city&amp;quot;, &amp;quot;Beijing&amp;quot;)&lt;/code> to query all vertices of &amp;ldquo;city property value is Beijing&amp;rdquo;.&lt;/li>
 &lt;/ul>
 &lt;blockquote>
 &lt;p>The query of Secondary Index is based on the query condition of &amp;ldquo;yes&amp;rdquo; or &amp;ldquo;equal&amp;rdquo;, and does not support &amp;ldquo;partial matching&amp;rdquo;.&lt;/p>
@@ -4645,10 +4645,10 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>The key to adding vertices is the vertex properties. The number of parameters of the vertex adding function must be an even number and satisfy the order of &lt;code>key1 -&amp;gt; val1, key2 -&amp;gt; val2 ...&lt;/code>, and the order between key-value pairs is free .&lt;/li>
 &lt;li>The parameter must contain a special key-value pair, namely &lt;code>T.label -&amp;gt; &amp;quot;val&amp;quot;&lt;/code>, which is used to define the category of the vertex, so that the program can obtain the schema definition of the VertexLabel from the cache or backend, and then do subsequent constraint checks. The label in the example is defined as person.&lt;/li>
-&lt;li>If the vertex type&amp;rsquo;s Id policy is &lt;code>AUTOMATIC&lt;/code>, users are not allowed to pass in id key-value pairs.&lt;/li>
-&lt;li>If the Id policy of the vertex type is &lt;code>CUSTOMIZE_STRING&lt;/code>, the user needs to pass in the value of the id of the String type. The key-value pair is like: &lt;code>&amp;quot;T.id&amp;quot;, &amp;quot;123456&amp;quot;&lt;/code>.&lt;/li>
-&lt;li>If the Id policy of the vertex type is &lt;code>CUSTOMIZE_NUMBER&lt;/code>, the user needs to pass in the value of the id of the Number type. The key-value pair is like: &lt;code>&amp;quot;T.id&amp;quot;, 123456&lt;/code>.&lt;/li>
-&lt;li>If the Id policy of the vertex type is &lt;code>PRIMARY_KEY&lt;/code>, the parameters must also contain the name and value of the properties corresponding to the &lt;code>primaryKeys&lt;/code>, if not set an exception will be thrown. For example, the &lt;code>primaryKeys&lt;/code> of &lt;code>person&lt;/code> is &lt;code>name&lt;/code>, in the example, the value of &lt;code>name&lt;/code> is set to &lt;code>marko&lt;/code>.&lt;/li>
+&lt;li>If the vertex type&amp;rsquo;s ID policy is &lt;code>AUTOMATIC&lt;/code>, users are not allowed to pass in id key-value pairs.&lt;/li>
+&lt;li>If the ID policy of the vertex type is &lt;code>CUSTOMIZE_STRING&lt;/code>, the user needs to pass in the value of the id of the String type. The key-value pair is like: &lt;code>&amp;quot;T.id&amp;quot;, &amp;quot;123456&amp;quot;&lt;/code>.&lt;/li>
+&lt;li>If the ID policy of the vertex type is &lt;code>CUSTOMIZE_NUMBER&lt;/code>, the user needs to pass in the value of the id of the Number type. The key-value pair is like: &lt;code>&amp;quot;T.id&amp;quot;, 123456&lt;/code>.&lt;/li>
+&lt;li>If the ID policy of the vertex type is &lt;code>PRIMARY_KEY&lt;/code>, the parameters must also contain the name and value of the properties corresponding to the &lt;code>primaryKeys&lt;/code>, if not set an exception will be thrown. For example, the &lt;code>primaryKeys&lt;/code> of &lt;code>person&lt;/code> is &lt;code>name&lt;/code>, in the example, the value of &lt;code>name&lt;/code> is set to &lt;code>marko&lt;/code>.&lt;/li>
 &lt;li>For properties that are not nullableKeys, a value must be assigned.&lt;/li>
 &lt;li>The remaining parameters are the settings of other properties of the vertex, but they are not required.&lt;/li>
 &lt;li>After calling the &lt;code>addVertex&lt;/code> method, the vertices are inserted into the backend storage system immediately.&lt;/li>
@@ -4657,15 +4657,15 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;p>After added vertices, edges are also needed to form a complete graph. Here is an example of adding edges:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">Edge&lt;/span> &lt;span style="color:#000">knows1&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">marko&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addEdge&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;knows&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">vadas&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>The function &lt;code>addEdge()&lt;/code> of the (source) vertex is to add a edge(relationship) between itself and another vertex. The first parameter of the function is the label of the edge, and the second parameter is the target vertex. The position and order of these two parameters are fixed. The subsequent parameters are the order of &lt;code>key1 -&amp;gt; val1, key2 -&amp;gt; val2 ...&lt;/code>, set the properties of the edge, and the key-value pair order is free.&lt;/li>
-&lt;li>The source and target vertices must conform to the definitions of sourcelabel and targetlabel in EdgeLabel, and cannot be added arbitrarily.&lt;/li>
+&lt;li>The function &lt;code>addEdge()&lt;/code> of the (source) vertex is to add an edge(relationship) between itself and another vertex. The first parameter of the function is the label of the edge, and the second parameter is the target vertex. The position and order of these two parameters are fixed. The subsequent parameters are the order of &lt;code>key1 -&amp;gt; val1, key2 -&amp;gt; val2 ...&lt;/code>, set the properties of the edge, and the key-value pair order is free.&lt;/li>
+&lt;li>The source and target vertices must conform to the definitions of source-label and target label in EdgeLabel, and cannot be added arbitrarily.&lt;/li>
 &lt;li>For properties that are not nullableKeys, a value must be assigned.&lt;/li>
 &lt;/ul>
 &lt;p>&lt;strong>Note: When frequency is multiple, the value of the property type corresponding to sortKeys must be set.&lt;/strong>&lt;/p>
 &lt;h3 id="4-examples">4 Examples&lt;/h3>
 &lt;p>Simple examples can reference &lt;a href="/docs/quickstart/hugegraph-client">HugeGraph-Client&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph-Loader Quick Start</title><link>/docs/quickstart/hugegraph-loader/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-loader/</guid><description>
 &lt;h3 id="1-hugegraph-loader-overview">1 HugeGraph-Loader Overview&lt;/h3>
-&lt;p>HugeGraph-Loader is the data import component of HugeGragh, which can convert data from various data sources into graph vertices and edges and import them into the graph database in batches.&lt;/p>
+&lt;p>HugeGraph-Loader is the data import component of HugeGraph, which can convert data from various data sources into graph vertices and edges and import them into the graph database in batches.&lt;/p>
 &lt;p>Currently supported data sources include:&lt;/p>
 &lt;ul>
 &lt;li>Local disk file or directory, supports TEXT, CSV and JSON format files, supports compressed files&lt;/li>
@@ -4781,7 +4781,7 @@ id | name | age | city
 id | name | lang | price
 &lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>// created schema
 id | p_id | s_id | date
-&lt;/code>&lt;/pre>&lt;p>If the id strategy of person or software is specified as PRIMARY_KEY when modeling (schema), choose name as the primary key (note: this is the concept of vertexlabel in hugegraph), when importing edge data, the source vertex and target need to be spliced ​​out. For the id of the vertex, you must go to the person/software table with p_id/s_id to find the corresponding name. In the case of the schema that requires additional query, the loader does not support it temporarily. In this case, the following two methods can be used instead:&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>If the id strategy of person or software is specified as PRIMARY_KEY when modeling (schema), choose name as the primary key (note: this is the concept of vertex-label in hugegraph), when importing edge data, the source vertex and target need to be spliced ​​out. For the id of the vertex, you must go to the person/software table with p_id/s_id to find the corresponding name. In the case of the schema that requires additional query, the loader does not support it temporarily. In this case, the following two methods can be used instead:&lt;/p>
 &lt;ol>
 &lt;li>The id strategy of person and software is still specified as PRIMARY_KEY, but the id column of the person table and software table is used as the primary key attribute of the vertex, so that the id can be generated by directly splicing p_id and s_id with the label of the vertex when importing an edge;&lt;/li>
 &lt;li>Specify the id policy of person and software as CUSTOMIZE, and then directly use the id column of the person table and the software table as the vertex id, so that p_id and s_id can be used directly when importing edges;&lt;/li>
@@ -4802,7 +4802,7 @@ Jerry,36,Shanghai
 Photoshop,999
 Office,388
 &lt;/code>&lt;/pre>&lt;h6 id="3222-edge-data">3.2.2.2 Edge data&lt;/h6>
-&lt;p>The edge data file consists of data line by line. Generally, each line is used as an edge. Some of the columns are used as the IDs of the source and target vertices, and other columns are used as edge attributes. The following uses JSON format as an example.&lt;/p>
+&lt;p>The edge data file consists of data line by line. Generally, each line is used as an edge. Some columns are used as the IDs of the source and target vertices, and other columns are used as edge attributes. The following uses JSON format as an example.&lt;/p>
 &lt;ul>
 &lt;li>knows edge data&lt;/li>
 &lt;/ul>
@@ -5132,7 +5132,7 @@ Office,388
 &lt;ul>
 &lt;li>type: input source type, must fill in hdfs or HDFS, required;&lt;/li>
 &lt;li>path: the path of the HDFS file or directory, it must be the absolute path of HDFS, required;&lt;/li>
-&lt;li>core_site_path: the path of the core-site.xml file of the HDFS cluster, the key point is to specify the address of the namenode (fs.default.name) and the implementation of the file system (fs.hdfs.impl);&lt;/li>
+&lt;li>core_site_path: the path of the core-site.xml file of the HDFS cluster, the key point is to specify the address of the NameNode (&lt;code>fs.default.name&lt;/code>) and the implementation of the file system (&lt;code>fs.hdfs.impl&lt;/code>);&lt;/li>
 &lt;/ul>
 &lt;h6 id="3323-jdbc-input-source">3.3.2.3 JDBC input source&lt;/h6>
 &lt;p>As mentioned above, it supports multiple relational databases, but because their mapping structures are very similar, they are collectively referred to as JDBC input sources, and then use the &lt;code>vendor&lt;/code> node to distinguish different databases.&lt;/p>
@@ -5338,7 +5338,7 @@ Office,388
 &lt;td>-g or &amp;ndash;graph&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Y&lt;/td>
-&lt;td>graph dbspace&lt;/td>
+&lt;td>graph space name&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>-s or &amp;ndash;schema&lt;/td>
@@ -5519,13 +5519,12 @@ Continue for the breakpoint.&lt;/p>
 In the failed file, after the user modifies the data lines in the failed file, set &amp;ndash;reload-failure to true to import these &amp;ldquo;failed files&amp;rdquo; as input sources (does not affect the normal file import),
 Of course, if there is still a problem with the modified data line, it will be logged again to the failure file (don&amp;rsquo;t worry about duplicate lines).&lt;/p>
 &lt;p>Each vertex map or edge map will generate its own failure file when data insertion fails. The failure file is divided into a parsing failure file (suffix .parse-error) and an insertion failure file (suffix .insert-error).
-They are stored in the &lt;code>${struct}/current&lt;/code> directory. For example, there is a vertex mapping person and an edge mapping knows in the mapping file, each of which has some error lines. When the Loader exits, in the
-You will see the following files in the &lt;code>${struct}/current&lt;/code> directory:&lt;/p>
+They are stored in the &lt;code>${struct}/current&lt;/code> directory. For example, there is a vertex mapping person and an edge mapping knows in the mapping file, each of which has some error lines. When the Loader exits, you will see the following files in the &lt;code>${struct}/current&lt;/code> directory:&lt;/p>
 &lt;ul>
 &lt;li>person-b4cd32ab.parse-error: Vertex map person parses wrong data&lt;/li>
 &lt;li>person-b4cd32ab.insert-error: Vertex map person inserts wrong data&lt;/li>
-&lt;li>knows-eb6b2bac.parse-error: edgemap knows parses wrong data&lt;/li>
-&lt;li>knows-eb6b2bac.insert-error: edgemap knows inserts wrong data&lt;/li>
+&lt;li>knows-eb6b2bac.parse-error: edge map knows parses wrong data&lt;/li>
+&lt;li>knows-eb6b2bac.insert-error: edge map knows inserts wrong data&lt;/li>
 &lt;/ul>
 &lt;blockquote>
 &lt;p>.parse-error and .insert-error do not always exist together. Only lines with parsing errors will have .parse-error files, and only lines with insertion errors will have .insert-error files.&lt;/p>
@@ -5533,7 +5532,7 @@ You will see the following files in the &lt;code>${struct}/current&lt;/code> dir
 &lt;h5 id="343-logs-directory-file-description">3.4.3 logs directory file description&lt;/h5>
 &lt;p>The log and error data during program execution will be written into hugegraph-loader.log file.&lt;/p>
 &lt;h5 id="344-execute-command">3.4.4 Execute command&lt;/h5>
-&lt;p>Run bin/hugeloader and pass in parameters&lt;/p>
+&lt;p>Run bin/hugegraph-loader and pass in parameters&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/hugegraph-loader -g &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>GRAPH_NAME&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span> -f &lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">INPUT_DESC_FILE&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span> -s &lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">SCHEMA_FILE&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span> -h &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>HOST&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span> -p &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>PORT&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4-complete-example">4 Complete example&lt;/h3>
 &lt;p>Given below is an example in the example directory of the hugegraph-loader package.&lt;/p>
@@ -5855,7 +5854,7 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;p>In the process of using HugeGraph, if you have any questions or ideas, suggestions, you can participate in the HugeGraph community building through the Apache mailing list. Sending a subscription email is also very simple, the steps are as follows:&lt;/p>
 &lt;ol>
 &lt;li>
-&lt;p>Send an email to &lt;a href="mailto:dev-subscribe@hugegraph.apache.org">dev-subscribe@hugegraph.apache.org&lt;/a> with your own email address, subject and content are arbitrary.&lt;/p>
+&lt;p>Email &lt;a href="mailto:dev-subscribe@hugegraph.apache.org">dev-subscribe@hugegraph.apache.org&lt;/a> with your own email address, subject and content are arbitrary.&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Receive confirmation email and reply. After completing step 1, you will receive a confirmation email from &lt;a href="mailto:dev-help@hugegraph.apache.org">dev-help@hugegraph.apache.org&lt;/a> (if not received, please confirm whether the email is automatically classified as spam, promotion email, subscription email, etc.) . Then reply directly to the email, or click on the link in the email to reply quickly, the subject and content are arbitrary.&lt;/p>
@@ -5869,7 +5868,7 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;p>Unsubscribe from the mailing list steps are as follows:&lt;/p>
 &lt;ol>
 &lt;li>
-&lt;p>Send an email to &lt;a href="mailto:dev-unsubscribe@hugegraph.apache.org">dev-unsubscribe@hugegraph.apache.org&lt;/a> with your subscribed email address, subject and content are arbitrary.&lt;/p>
+&lt;p>Email &lt;a href="mailto:dev-unsubscribe@hugegraph.apache.org">dev-unsubscribe@hugegraph.apache.org&lt;/a> with your subscribed email address, subject and content are arbitrary.&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Receive confirmation email and reply. After completing step 1, you will receive a confirmation email from &lt;a href="mailto:dev-help@hugegraph.apache.org">dev-help@hugegraph.apache.org&lt;/a> (if not received, please confirm whether the email is automatically classified as spam, promotion email, subscription email, etc.) . Then reply directly to the email, or click on the link in the email to reply quickly, the subject and content are arbitrary.&lt;/p>
@@ -6525,7 +6524,7 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">return&lt;/span> &lt;span style="color:#204a87;font-weight:bold">new&lt;/span> &lt;span style="color:#000">HashSet&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;lt;&amp;gt;(&lt;/span>&lt;span style="color:#000">Arrays&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">asList&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">text&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">split&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34; &amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)));&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="3-实现插件接口并进行注册">3 实现插件接口，并进行注册&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="3-实现插件接口并进行注册">3. 实现插件接口，并进行注册&lt;/h4>
 &lt;p>插件注册入口为&lt;code>HugeGraphPlugin.register()&lt;/code>，自定义插件必须实现该接口方法，在其内部注册上述定义好的扩展项。
 接口&lt;code>com.baidu.hugegraph.plugin.HugeGraphPlugin&lt;/code>定义如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">interface&lt;/span> &lt;span style="color:#000">HugeGraphPlugin&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>
@@ -6560,13 +6559,13 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">HugeGraphPlugin&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">registerAnalyzer&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;demo&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">SpaceAnalyzer&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">class&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">getName&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">());&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="4-配置spi入口">4 配置SPI入口&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="4-配置spi入口">4. 配置SPI入口&lt;/h4>
 &lt;ol>
 &lt;li>确保services目录存在：hugegraph-plugin-demo/resources/META-INF/services&lt;/li>
 &lt;li>在services目录下建立文本文件：com.baidu.hugegraph.plugin.HugeGraphPlugin&lt;/li>
 &lt;li>文件内容如下：com.baidu.hugegraph.plugin.DemoPlugin&lt;/li>
 &lt;/ol>
-&lt;h4 id="5-打jar包">5 打Jar包&lt;/h4>
+&lt;h4 id="5-打jar包">5. 打Jar包&lt;/h4>
 &lt;p>通过maven打包，在项目目录下执行命令&lt;code>mvn package&lt;/code>，在target目录下会生成Jar包文件。
 使用时将该Jar包拷到&lt;code>plugins&lt;/code>目录，重启服务即可生效。&lt;/p></description></item><item><title>Docs: HugeGraph-Loader Performance</title><link>/docs/performance/hugegraph-loader-performance/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/performance/hugegraph-loader-performance/</guid><description>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
@@ -6585,7 +6584,7 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;li>默认开启label index，6.3w edges/s&lt;/li>
 &lt;/ul></description></item><item><title>Docs: HugeGraph-Tools Quick Start</title><link>/docs/quickstart/hugegraph-tools/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-tools/</guid><description>
 &lt;h3 id="1-hugegraph-tools概述">1 HugeGraph-Tools概述&lt;/h3>
-&lt;p>HugeGraph-Tools 是 HugeGragh 的自动化部署、管理和备份/还原组件。&lt;/p>
+&lt;p>HugeGraph-Tools 是 HugeGraph 的自动化部署、管理和备份/还原组件。&lt;/p>
 &lt;h3 id="2-获取-hugegraph-tools">2 获取 HugeGraph-Tools&lt;/h3>
 &lt;p>有两种方式可以获取 HugeGraph-Tools：&lt;/p>
 &lt;ul>
@@ -8284,7 +8283,7 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;h5 id="data-import">Data Import&lt;/h5>
 &lt;p>Data import is to convert the user&amp;rsquo;s business data into the vertices and edges of the graph and insert it into the graph database. The platform provides a wizard-style visual import module. By creating import tasks, the management of import tasks and the parallel operation of multiple import tasks are realized. Improve import performance. After entering the import task, you only need to follow the platform step prompts, upload files as needed, and fill in the content to easily implement the import process of graph data. At the same time, it supports breakpoint resuming, error retry mechanism, etc., which reduces import costs and improves efficiency.&lt;/p>
 &lt;h5 id="graph-analysis">Graph Analysis&lt;/h5>
-&lt;p>By inputting the graph traversal language Gremlin, high-performance general analysis of graph data can be realized, and functions such as customized multi-dimensional path query of vertices can be provided, and three kinds of graph result display methods are provided, including: graph form, table form, Json form, and multi-dimensional display. The data form meets the needs of various scenarios used by users. It provides functions such as running records and collection of common statements, realizing the traceability of graph operations, and the reuse and sharing of query input, which is fast and efficient. It supports the export of graph data, and the export format is Json format.&lt;/p>
+&lt;p>By inputting the graph traversal language Gremlin, high-performance general analysis of graph data can be realized, and functions such as customized multidimensional path query of vertices can be provided, and three kinds of graph result display methods are provided, including: graph form, table form, Json form, and multidimensional display. The data form meets the needs of various scenarios used by users. It provides functions such as running records and collection of common statements, realizing the traceability of graph operations, and the reuse and sharing of query input, which is fast and efficient. It supports the export of graph data, and the export format is Json format.&lt;/p>
 &lt;h5 id="task-management">Task Management&lt;/h5>
 &lt;p>For Gremlin tasks that need to traverse the whole graph, index creation and reconstruction and other time-consuming asynchronous tasks, the platform provides corresponding task management functions to achieve unified management and result viewing of asynchronous tasks.&lt;/p>
 &lt;h3 id="2platform-workflow">2 Platform Workflow&lt;/h3>
@@ -8304,7 +8303,7 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;img src="/docs/images/images-hubble/311图创建2.png" alt="image">
 &lt;/center>
 &lt;h5 id="312graph-access">3.1.2 Graph Access&lt;/h5>
-&lt;p>Realize the information access of the graph space. After entering, you can perform operations such as multi-dimensional query analysis, metadata management, data import, and algorithm analysis of the graph.&lt;/p>
+&lt;p>Realize the information access of the graph space. After entering, you can perform operations such as multidimensional query analysis, metadata management, data import, and algorithm analysis of the graph.&lt;/p>
 &lt;center>
 &lt;img src="/docs/images/images-hubble/312图访问.png" alt="image">
 &lt;/center>
@@ -8675,7 +8674,7 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;/li>
 &lt;li>
 &lt;p>服务启动成功后，使用&lt;code>curl&lt;/code>查询所有顶点时返回乱码&lt;/p>
-&lt;p>服务端返回的批量顶点/边是压缩（gzip）过的，可以使用管道重定向至gunzip进行解压（&lt;code>curl http://example | gunzip&lt;/code>），也可以用&lt;code>Firefox&lt;/code>的&lt;code>postman&lt;/code>或者&lt;code>Chrome&lt;/code>浏览器的&lt;code>restlet&lt;/code>插件发请求，会自动解压缩响应数据。&lt;/p>
+&lt;p>服务端返回的批量顶点/边是压缩（gzip）过的，可以使用管道重定向至 gunzip 进行解压（&lt;code>curl http://example | gunzip&lt;/code>），也可以用&lt;code>Firefox&lt;/code>的&lt;code>postman&lt;/code>或者&lt;code>Chrome&lt;/code>浏览器的&lt;code>restlet&lt;/code>插件发请求，会自动解压缩响应数据。&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>使用顶点Id通过&lt;code>RESTful API&lt;/code>查询顶点时返回空，但是顶点确实是存在的&lt;/p>
@@ -8849,15 +8848,15 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;p>HugeGraph-Client sends HTTP request to HugeGraph-Server to obtain and parse the execution result of Server. Currently only the HugeGraph-Client for Java is provided. You can use HugeGraph-Client to write Java code to operate HugeGraph, such as adding, deleting, modifying, and querying schema and graph data, or executing gremlin statements.&lt;/p>
 &lt;h3 id="2-what-you-need">2 What You Need&lt;/h3>
 &lt;ul>
-&lt;li>JDK1.8&lt;/li>
-&lt;li>Maven-3.3.9&lt;/li>
+&lt;li>JDK 1.8&lt;/li>
+&lt;li>Maven 3.3.9+&lt;/li>
 &lt;/ul>
 &lt;h3 id="3-how-to-use">3 How To Use&lt;/h3>
 &lt;p>The basic steps to use HugeGraph-Client are as follows:&lt;/p>
 &lt;ul>
 &lt;li>Build a new Maven project by IDEA or Eclipse&lt;/li>
 &lt;li>Add HugeGraph-Client dependency in pom file;&lt;/li>
-&lt;li>Create a object to invoke the interface of HugeGraph-Client&lt;/li>
+&lt;li>Create an object to invoke the interface of HugeGraph-Client&lt;/li>
 &lt;/ul>
 &lt;p>See the complete example in the following section for the detail.&lt;/p>
 &lt;h3 id="4-complete-example">4 Complete Example&lt;/h3>
@@ -12880,24 +12879,26 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;li>按id列表查询边，可用于批量查询边&lt;/li>
 &lt;li>获取分片和按分片查询边，可以用来遍历全部边&lt;/li>
 &lt;/ul></description></item><item><title>Docs: Rank API</title><link>/docs/clients/restful-api/rank/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/clients/restful-api/rank/</guid><description>
-&lt;h3 id="41-rank-api-概述">4.1 rank API 概述&lt;/h3>
-&lt;p>HugeGraphServer 除了上一节提到的遍历（traverser）方法，还提供了一类专门做推荐的方法，我们称为&lt;code>rank API&lt;/code>，
-可在图中为一个点推荐与其关系密切的其它点。&lt;/p>
-&lt;h3 id="42-rank-api-详解">4.2 rank API 详解&lt;/h3>
+&lt;h3 id="41-rank-api-overview">4.1 Rank API overview&lt;/h3>
+&lt;p>Not only the Graph iteration （traverser) method, HugeGraph-Server also provide &lt;code>Rank API&lt;/code> for recommendation purpose.
+You can use it to recommend some vertexes much closer to a vertex.&lt;/p>
+&lt;h3 id="42-details-of-rank-api">4.2 Details of Rank API&lt;/h3>
 &lt;h4 id="421-personal-rank-api">4.2.1 Personal Rank API&lt;/h4>
-&lt;p>Personal Rank 算法典型场景是用于推荐应用中, 根据某个点现有的出边, 推荐具有相近 / 相同关系的其他点,
-比如根据某个人的阅读记录 / 习惯, 向它推荐其他可能感兴趣的书, 或潜在的书友, 举例如下:&lt;/p>
+&lt;p>A typical scenario for &lt;code>Personal Rank&lt;/code> algorithm is in recommendation application. According to the out edges of a vertex,
+recommend some other vertices that having the same or similar edges.&lt;/p>
+&lt;p>Here is a use case:
+According to someone&amp;rsquo;s reading habit or reading history, we can recommend some books he may be interested or some book pal.&lt;/p>
+&lt;p>For Example:&lt;/p>
 &lt;ol>
-&lt;li>假设给定 1个 Person 点 是 tom, 它喜欢 &lt;code>a,b,c,d,e&lt;/code> 5本书, 我们的想给 tom 推荐一些书友, 以及一些书, 最容易的想法就是看看还有哪些人喜欢过这些书 (共同兴趣)&lt;/li>
-&lt;li>那么此时, 需要有其它的 Person 点比如 neo, 他喜欢 &lt;code>b,d,f&lt;/code> 3本书, 以及 jay, 它喜欢 &lt;code>c,d,e,g&lt;/code> 4本书, lee 它喜欢 &lt;code>a,d,e,f&lt;/code> 4本书&lt;/li>
-&lt;li>由于 tom 已经看过的书不需要重复推荐, 所以返回结果里应该期望推荐有共同喜好的其他书友看过, 但 tom 没看过的书, 比如推荐 &amp;ldquo;f&amp;rdquo; 和 &amp;ldquo;g&amp;rdquo; 书, 且优先级 f &amp;gt; g&lt;/li>
-&lt;li>此时再计算 tom 的个性化 rank 值, 就会返回排序后 TopN 推荐的 书友 + 书 的结果了 (如果只需要推荐的书, 选择 OTHER_LABEL 即可)&lt;/li>
+&lt;li>Suppose we have a vertex, Person type, and named tom.He like 5 books &lt;code>a,b,c,d,e&lt;/code>. If we want to recommend some book pal and books for tom, an easier idea is let&amp;rsquo;s check whoever also liked these books (common hobby based).&lt;/li>
+&lt;li>Now, we need someone else, like neo, he like three books &lt;code>b,d,f&lt;/code>. And Jay, he like 4 books &lt;code>c,d,e,g&lt;/code>, and Lee, he also like 4 books &lt;code>a,d,e,f&lt;/code>.&lt;/li>
+&lt;li>For we don&amp;rsquo;t need to recommend books tom already read, the recommend-list should only contain the books Tom&amp;rsquo;s book pal already read but tom haven&amp;rsquo;t read yet. Such as book &amp;ldquo;f&amp;rdquo; and &amp;ldquo;g&amp;rdquo;, and with priority f &amp;gt; g.&lt;/li>
+&lt;li>Now, we recompute Tom&amp;rsquo;s personal rank value, we will get a sorted TopN book pal or book recommend-list. (Choose OTHER_LABEL,for Only Book purpose)&lt;/li>
 &lt;/ol>
-&lt;h5 id="4210-数据准备">4.2.1.0 数据准备&lt;/h5>
-&lt;p>上面是一个简单的例子, 这里再提供一个公开的 1MB 测试数据集 &lt;a href="https://grouplens.org/datasets/movielens/">MovieLens&lt;/a> 为例，
-用户需下载该数据集，然后使用 HugeGraph-Loader 导入到 HugeGraph 中，简单起见，数据中顶点 user
-和 movie 的属性都忽略，仅使用 id 字段即可，边 rating 的具体评分值也忽略。loader 使用的元数据
-文件和输入源映射文件内容如下：&lt;/p>
+&lt;h5 id="4210-data-preparation">4.2.1.0 Data Preparation&lt;/h5>
+&lt;p>The case above is simple. Here we also provide a public test dataset &lt;a href="https://grouplens.org/datasets/movielens/">MovieLens&lt;/a> for use case.
+You should download the dataset. The load it into HugeGraph with HugeGraph-Loader. To make it simple, we ignore all properties data of user and move. only field id is enough. we also ignore the value of edge rating.&lt;/p>
+&lt;p>The metadata for input file and mapping file as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">////////////////////////////////////////////////////////////
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// UserID::Gender::Age::Occupation::Zip-code
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// MovieID::Title::Genres
@@ -12978,48 +12979,49 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>注意将映射文件中&lt;code>input.path&lt;/code>的值修改为自己本地的路径。&lt;/p>
+&lt;p>Note: modify the &lt;code>input.path&lt;/code> to your local path.&lt;/p>
 &lt;/blockquote>
-&lt;h5 id="4211-功能介绍">4.2.1.1 功能介绍&lt;/h5>
-&lt;p>适用于二分图，给出所有源顶点相关的其他顶点及其相关性组成的列表。&lt;/p>
+&lt;h5 id="4211-function-introduction">4.2.1.1 Function Introduction&lt;/h5>
+&lt;p>suitable for bipartite graph, will return all vertex or a list of its correlation which related to all source vertex.&lt;/p>
 &lt;blockquote>
-&lt;p>二分图：也称二部图，是图论里的一种特殊模型，也是一种特殊的网络流。其最大的特点在于，可以将图里的顶点分为两个集合，两个集合之间的点有边相连，但集合内的点之间没有直接关联。&lt;/p>
+&lt;p>Bipartite Graph is a special model in Graph Theory, as well as a special flow in network. The strongest feature is, it split all vertex in graph into two sets. The vertex in the set is not connected. However,the vertex in two sets may connect with each other.&lt;/p>
 &lt;/blockquote>
-&lt;p>假设有一个用户和物品的二分图，基于随机游走的 PersonalRank 算法步骤如下：&lt;/p>
+&lt;p>Suppose we have one bipartite graph based on user and things.
+A random walk based PersonalRank algorithm should be likes this:&lt;/p>
 &lt;ol>
-&lt;li>选定一个起点用户 u，其初始权重为 1.0，从 Vu 开始游走（有 alpha 的概率走到邻居点，1 - alpha 的概率停留）；&lt;/li>
-&lt;li>如果决定向外游走, 那么会选取某一个类型的出边, 例如 &lt;code>rating&lt;/code> 来查找共同的打分人：
+&lt;li>Choose a user u as start vertex, let&amp;rsquo;s set the initial weight to be 1.0 . Go from Vu with probability alpha to a neighbor vertex, and (1-alpha) to stay.&lt;/li>
+&lt;li>If we decide to go outside, we would like to choose an edge, such as &lt;code>rating&lt;/code>, to find a common judge.
 &lt;ol>
-&lt;li>那就从当前节点的邻居节点中按照均匀分布随机选择一个，并且按照均匀分布划分权重值；&lt;/li>
-&lt;li>给源顶点补偿权重 1 - alpha；&lt;/li>
-&lt;li>重复步骤2；&lt;/li>
+&lt;li>Then choose the neighbors of current vertex randomly with uniform distribution, and reset the weights with uniform distribution.&lt;/li>
+&lt;li>Compensate the source vertex&amp;rsquo;s weight with (1 - alpha)&lt;/li>
+&lt;li>Repeat step 2;&lt;/li>
 &lt;/ol>
 &lt;/li>
-&lt;li>达到一定步数或达到精度后收敛，得到推荐列表。&lt;/li>
+&lt;li>Convergence after reaching a certain number of steps or precision, then we got a recommend-list.&lt;/li>
 &lt;/ol>
 &lt;h6 id="params">Params&lt;/h6>
-&lt;p>&lt;strong>必填项&lt;/strong>:&lt;/p>
+&lt;p>&lt;strong>Required&lt;/strong>:&lt;/p>
 &lt;ul>
-&lt;li>source: 源顶点 id&lt;/li>
-&lt;li>label: 源点出发的某类边 label，须连接两类不同顶点&lt;/li>
+&lt;li>source: the id of source vertex&lt;/li>
+&lt;li>label: edge label go from the source vertex, should connect two different type of vertex&lt;/li>
 &lt;/ul>
-&lt;p>&lt;strong>选填项&lt;/strong>:&lt;/p>
+&lt;p>&lt;strong>Optional&lt;/strong>:&lt;/p>
 &lt;ul>
-&lt;li>alpha：每轮迭代时从某个点往外走的概率，与 PageRank 算法中的 alpha 类似，取值区间为 (0, 1], 默认值 &lt;code>0.85&lt;/code>&lt;/li>
-&lt;li>max_degree: 查询过程中，单个顶点遍历的最大邻接边数目，默认为 &lt;code>10000&lt;/code>&lt;/li>
-&lt;li>max_depth: 迭代次数，取值区间为 [2, 50], 默认值 &lt;code>5&lt;/code>&lt;/li>
-&lt;li>with_label：筛选结果中保留哪些结果，可选以下三类, 默认为 &lt;code>BOTH_LABEL&lt;/code>
+&lt;li>alpha: the probability of going out for one vertex in each iteration，similar to the alpha of PageRank,required, value range is (0, 1], default 0.85.&lt;/li>
+&lt;li>max_degree: in query process, the max iteration number of adjacency edge for a vertex, default &lt;code>10000&lt;/code>&lt;/li>
+&lt;li>max_depth: iteration number,range [2, 50], default &lt;code>5&lt;/code>&lt;/li>
+&lt;li>with_label：result filter,default &lt;code>BOTH_LABEL&lt;/code>,optional list as follows:
 &lt;ul>
-&lt;li>SAME_LABEL：仅保留与源顶点相同类别的顶点&lt;/li>
-&lt;li>OTHER_LABEL：仅保留与源顶点不同类别（二分图的另一端）的顶点&lt;/li>
-&lt;li>BOTH_LABEL：同时保留与源顶点相同和相反类别的顶点&lt;/li>
+&lt;li>SAME_LABEL：Only keep vertex which has the same type as source vertex&lt;/li>
+&lt;li>OTHER_LABEL：Only keep vertex which has different type as source vertex (the another part in bipartite graph)&lt;/li>
+&lt;li>BOTH_LABEL：Keep both type vertex&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>limit: 返回的顶点的最大数目，默认为 &lt;code>100&lt;/code>&lt;/li>
-&lt;li>max_diff: 提前收敛的精度差, 默认为 &lt;code>0.0001&lt;/code> (&lt;em>后续实现&lt;/em>)&lt;/li>
-&lt;li>sorted：返回的结果是否根据 rank 排序，为 true 时降序排列，反之不排序，默认为 &lt;code>true&lt;/code>&lt;/li>
+&lt;li>limit: max return vertex number,default &lt;code>100&lt;/code>&lt;/li>
+&lt;li>max_diff: accuracy for convergence, default &lt;code>0.0001&lt;/code> (&lt;em>will implement soon&lt;/em>)&lt;/li>
+&lt;li>sorted： whether sort the result by rank or not, true for descending sort, false for none, default &lt;code>true&lt;/code>&lt;/li>
 &lt;/ul>
-&lt;h5 id="4212-使用方法">4.2.1.2 使用方法&lt;/h5>
+&lt;h5 id="4212-usage">4.2.1.2 Usage&lt;/h5>
 &lt;h6 id="method--url">Method &amp;amp; Url&lt;/h6>
 &lt;pre tabindex="0">&lt;code>POST http://localhost:8080/graphs/hugegraph/traversers/personalrank
 &lt;/code>&lt;/pre>&lt;h6 id="request-body">Request Body&lt;/h6>
@@ -13047,15 +13049,15 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;2:589&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.00035922123055598566&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;2:110&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.0003466135844390885&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="4213-适用场景">4.2.1.3 适用场景&lt;/h5>
-&lt;p>两类不同顶点连接形成的二分图中，给某个点推荐相关性最高的其他顶点，例如：&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="4213-suitable-scenario">4.2.1.3 Suitable Scenario&lt;/h5>
+&lt;p>In a bipartite graph build by two different type of vertex, recommend other most related vertex to one vertex. for example:&lt;/p>
 &lt;ul>
-&lt;li>阅读推荐: 找出优先给某人推荐的其他&lt;strong>书籍&lt;/strong>, 也可以同时推荐共同喜好最高的&lt;strong>书友&lt;/strong> (例: 微信 &amp;ldquo;你的好友也在看 xx 文章&amp;rdquo; 功能)&lt;/li>
-&lt;li>社交推荐: 找出拥有相同关注话题的其他&lt;strong>博主&lt;/strong>, 也可以推荐可能感兴趣的&lt;strong>新闻/消息&lt;/strong> (例: Weibo 中的 &amp;ldquo;热点推荐&amp;rdquo; 功能)&lt;/li>
-&lt;li>商品推荐: 通过某人现在的购物习惯, 找出应优先推给它的&lt;strong>商品列表&lt;/strong>, 也可以给它推荐&lt;strong>带货&lt;/strong>播主 (例: TaoBao 的 &amp;ldquo;猜你喜欢&amp;rdquo; 功能)&lt;/li>
+&lt;li>Reading recommendation: find out the &lt;strong>books&lt;/strong> should be recommended to someone first, It is also possible to recommend &lt;strong>book pal&lt;/strong> with the highest common preferences at the same time (just like: WeChat &amp;ldquo;your friend also read xx &amp;quot; function)&lt;/li>
+&lt;li>Social recommendation: find out other &lt;strong>Poster&lt;/strong> who interested in same topics, or other &lt;strong>News/Messages&lt;/strong> you may be interested with (Such as : &amp;ldquo;Hot News&amp;rdquo; function in Weibo)&lt;/li>
+&lt;li>Commodity recommendation: according to someone&amp;rsquo;s shopping habit,find out a &lt;strong>commodity list&lt;/strong> should recommend first, some online &lt;strong>salesman&lt;/strong> may also be good (Such as : &amp;ldquo;You May Like&amp;rdquo; function in TaoBao)&lt;/li>
 &lt;/ul>
 &lt;h4 id="422-neighbor-rank-api">4.2.2 Neighbor Rank API&lt;/h4>
-&lt;h5 id="4220-数据准备">4.2.2.0 数据准备&lt;/h5>
+&lt;h5 id="4220-data-preparation">4.2.2.0 Data Preparation&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">class&lt;/span> &lt;span style="color:#000">Loader&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">static&lt;/span> &lt;span style="color:#204a87;font-weight:bold">void&lt;/span> &lt;span style="color:#000">main&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">String&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> &lt;span style="color:#000">args&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">HugeClient&lt;/span> &lt;span style="color:#000">client&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">new&lt;/span> &lt;span style="color:#000">HugeClient&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;http://127.0.0.1:8080&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
@@ -13135,24 +13137,25 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">G&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addEdge&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;directedBy&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">M&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="4221-功能介绍">4.2.2.1 功能介绍&lt;/h5>
-&lt;p>在一般图结构中，找出每一层与给定起点相关性最高的前 N 个顶点及其相关度，用图的语义理解就是：从起点往外走，
-走到各层各个顶点的概率。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="4221-function-introduction">4.2.2.1 Function Introduction&lt;/h5>
+&lt;p>In a general graph structure,find the first N vertices of each layer with the highest correlation with a given starting point and their relevance.&lt;/p>
+&lt;p>In graph words: to go out from the starting point, get the probability of going to each vertex of each layer.&lt;/p>
 &lt;h6 id="params-1">Params&lt;/h6>
 &lt;ul>
-&lt;li>source: 源顶点 id，必填项&lt;/li>
-&lt;li>alpha：每轮迭代时从某个点往外走的概率，与 PageRank 算法中的 alpha 类似，必填项，取值区间为 (0, 1]&lt;/li>
-&lt;li>steps: 表示从起始顶点走过的路径规则，是一组 Step 的列表，每个 Step 对应结果中的一层，必填项。每个 Step 的结构如下：
+&lt;li>source: id of source vertex，required&lt;/li>
+&lt;li>alpha：the probability of going out for one vertex in each iteration，similar to the alpha of PageRank,required, value range is (0, 1]&lt;/li>
+&lt;li>steps: a path rule for source vertex visited,it&amp;rsquo;s a list of Step,each Step map to a layout in result,required.The structure of each Step as follows：
 &lt;ul>
-&lt;li>direction：表示边的方向（OUT, IN, BOTH），默认是 BOTH&lt;/li>
-&lt;li>labels：边的类型列表，多个边类型取并集&lt;/li>
-&lt;li>max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)&lt;/li>
-&lt;li>top：在结果中每一层只保留权重最高的前 N 个结果，默认为 100，最大值为 1000&lt;/li>
+&lt;li>direction：the direction of edge（OUT, IN, BOTH）, BOTH for default.&lt;/li>
+&lt;li>labels：a list of edge types, will union all edge types&lt;/li>
+&lt;li>max_degree：in query process, the max iteration number of adjacency edge for a vertex, default &lt;code>10000&lt;/code>
+(Note: before v0.12 step only support degree as parameter name, from v0.12, use max_degree, compatible with degree)&lt;/li>
+&lt;li>top： retains only the top N results with the highest weight in each layer of the results, default 100, max 1000&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>capacity: 遍历过程中最大的访问的顶点数目，选填项，默认为10000000&lt;/li>
+&lt;li>capacity: the maximum number of vertexes visited during the traversal, optional, default 10000000&lt;/li>
 &lt;/ul>
-&lt;h5 id="4222-使用方法">4.2.2.2 使用方法&lt;/h5>
+&lt;h5 id="4222-usage">4.2.2.2 Usage&lt;/h5>
 &lt;h6 id="method--url-1">Method &amp;amp; Url&lt;/h6>
 &lt;pre tabindex="0">&lt;code>POST http://localhost:8080/graphs/hugegraph/traversers/neighborrank
 &lt;/code>&lt;/pre>&lt;h6 id="request-body-1">Request Body&lt;/h6>
@@ -13216,10 +13219,10 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="4223-适用场景">4.2.2.3 适用场景&lt;/h5>
-&lt;p>为给定的起点在不同的层中找到最应该推荐的顶点。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="4223-suitable-scenario">4.2.2.3 Suitable Scenario&lt;/h5>
+&lt;p>Find the vertices in different layers for a given start point that should be most recommended&lt;/p>
 &lt;ul>
-&lt;li>比如：在观众、朋友、电影、导演的四层图结构中，根据某个观众的朋友们喜欢的电影，为这个观众推荐电影；或者根据这些电影是谁拍的，为其推荐导演。&lt;/li>
+&lt;li>For example, in the four-layered structure of the audience, friends, movies, and directors, according to the movies that a certain audience&amp;rsquo;s friends like, recommend movies for that audience, or recommend directors for those movies based on who made them.&lt;/li>
 &lt;/ul></description></item><item><title>Docs: Variable API</title><link>/docs/clients/restful-api/variable/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/clients/restful-api/variable/</guid><description>
 &lt;h3 id="51-variables">5.1 Variables&lt;/h3>
 &lt;p>Variables可以用来存储有关整个图的数据，数据按照键值对的方式存取&lt;/p>
@@ -13505,7 +13508,7 @@ When you complete the restore, change the graph mode to None.&lt;/p>
 &lt;h4 id="711-list-all-async-tasks-in-graph">7.1.1 List all async tasks in graph&lt;/h4>
 &lt;h5 id="params">Params&lt;/h5>
 &lt;ul>
-&lt;li>status: the status of asynTasks&lt;/li>
+&lt;li>status: the status of asyncTasks&lt;/li>
 &lt;li>limit：the max number of tasks to return&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url">Method &amp;amp; Url&lt;/h5>
@@ -13547,12 +13550,12 @@ When you complete the restore, change the graph mode to None.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;task_callable&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;com.baidu.hugegraph.api.job.GremlinAPI$GremlinJob&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;task_input&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;{\&amp;#34;gremlin\&amp;#34;:\&amp;#34;hugegraph.traversal().V()\&amp;#34;,\&amp;#34;bindings\&amp;#34;:{},\&amp;#34;language\&amp;#34;:\&amp;#34;gremlin-groovy\&amp;#34;,\&amp;#34;aliases\&amp;#34;:{\&amp;#34;hugegraph\&amp;#34;:\&amp;#34;graph\&amp;#34;}}&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="713-delete-task-infomation-of-an-async-taskwont-delete-the-task-itself">7.1.3 Delete task infomation of an async task，&lt;strong>won&amp;rsquo;t delete the task itself&lt;/strong>&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="713-delete-task-information-of-an-async-taskwont-delete-the-task-itself">7.1.3 Delete task information of an async task，&lt;strong>won&amp;rsquo;t delete the task itself&lt;/strong>&lt;/h4>
 &lt;h5 id="method--url-2">Method &amp;amp; Url&lt;/h5>
 &lt;pre tabindex="0">&lt;code>DELETE http://localhost:8080/graphs/hugegraph/tasks/2
 &lt;/code>&lt;/pre>&lt;h5 id="response-status-2">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">204&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="714-取消某个异步任务该异步任务必须具有处理中断的能力">7.1.4 取消某个异步任务，&lt;strong>该异步任务必须具有处理中断的能力&lt;/strong>&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="714-cancel-an-async-task-the-task-should-be-able-to-be-canceled">7.1.4 Cancel an async task, &lt;strong>the task should be able to be canceled&lt;/strong>&lt;/h4>
 &lt;p>If you already created an async task via &lt;a href="../gremlin">Gremlin API&lt;/a> as follows：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&amp;#34;for (int i = 0; i &amp;lt; 10; i++) {&amp;#34;&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">+&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph.addVertex(T.label, &amp;#39;man&amp;#39;);&amp;#34;&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">+&lt;/span>
@@ -13566,7 +13569,7 @@ When you complete the restore, change the graph mode to None.&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="method--url-3">Method &amp;amp; Url&lt;/h5>
 &lt;pre tabindex="0">&lt;code>PUT http://localhost:8080/graphs/hugegraph/tasks/2?action=cancel
 &lt;/code>&lt;/pre>&lt;blockquote>
-&lt;p>cancel it in 10s. if more than 10s，the task may already finished,then can&amp;rsquo;t be cancelled.&lt;/p>
+&lt;p>cancel it in 10s. if more than 10s，the task may already be finished, then can&amp;rsquo;t be cancelled.&lt;/p>
 &lt;/blockquote>
 &lt;h5 id="response-status-3">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">202&lt;/span>
@@ -14425,18 +14428,7 @@ P.gte(18)），properties如果为null表示任意属性均可，如果属性名
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;api&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;0.13.2.0&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs:</title><link>/docs/building/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/building/</guid><description>
-&lt;p>HugeDoc Installation&lt;/p>
-&lt;p>HugeDoc use &lt;a href="https://github.com/GitbookIO/gitbook">GitBook&lt;/a> to convert markdown to static website,
-and use GitBook with NodeJs to server as web server.&lt;/p>
-&lt;h3 id="how-to-use">How To use&lt;/h3>
-&lt;p>Install GitBook is via &lt;strong>NPM&lt;/strong>:&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ npm install gitbook-cli -g
-&lt;/code>&lt;/pre>&lt;p>Preview and serve your book using:&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ gitbook serve
-&lt;/code>&lt;/pre>&lt;p>Or build the static website using:&lt;/p>
-&lt;pre tabindex="0">&lt;code>$ gitbook build
-&lt;/code>&lt;/pre></description></item><item><title>Docs:</title><link>/docs/cla/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/cla/</guid><description>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs:</title><link>/docs/cla/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/cla/</guid><description>
 &lt;h2 id="contributor-agreement">Contributor Agreement&lt;/h2>
 &lt;h2 id="individual-contributor-exclusive-license-agreement">Individual Contributor exclusive License Agreement&lt;/h2>
 &lt;h2 id="including-the-traditional-patent-license-option">(including the TRADITIONAL PATENT LICENSE OPTION)&lt;/h2>
@@ -14599,7 +14591,7 @@ and use GitBook with NodeJs to server as web server.&lt;/p>
 &lt;h4 id="13-服务配置">1.3 服务配置&lt;/h4>
 &lt;ul>
 &lt;li>HugeGraph版本：0.4.4，RestServer和Gremlin Server和backends都在同一台服务器上&lt;/li>
-&lt;li>Cassandra版本：cassandra-3.10，commitlog和data共用SSD&lt;/li>
+&lt;li>Cassandra版本：cassandra-3.10，commit-log 和data共用SSD&lt;/li>
 &lt;li>RocksDB版本：rocksdbjni-5.8.6&lt;/li>
 &lt;li>Titan版本：0.5.4, 使用thrift+Cassandra模式&lt;/li>
 &lt;/ul>
@@ -14977,7 +14969,7 @@ and use GitBook with NodeJs to server as web server.&lt;/p>
 &lt;td>6564.191&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>RcoksDB（core）&lt;/td>
+&lt;td>RocksDB（core）&lt;/td>
 &lt;td>33.383&lt;/td>
 &lt;td>199.894&lt;/td>
 &lt;td>763.869&lt;/td>

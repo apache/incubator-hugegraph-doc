@@ -32,7 +32,7 @@
 &lt;/tr>
 &lt;tr>
 &lt;td>ThreadedTransactions&lt;/td>
-&lt;td>Determines if the {@code Graph} implementation supports threaded transactions which allow a transactionto be executed across multiple threads via {@link Transaction#createThreadedTx()}.&lt;/td>
+&lt;td>Determines if the {@code Graph} implementation supports threaded transactions which allow a transaction be executed across multiple threads via {@link Transaction#createThreadedTx()}.&lt;/td>
 &lt;td>false&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -54,7 +54,7 @@
 &lt;tbody>
 &lt;tr>
 &lt;td>UserSuppliedIds&lt;/td>
-&lt;td>Determines if an {@link Element} can have a user defined identifier. Implementation that do not support this feature will be expected to auto-generate unique identifiers. In other words, if the {@link Graph} allows {@code graph.addVertex(id,x)} to work and thus set the identifier of the newly added {@link Vertex} to the value of {@code x} then this feature should return true. In this case, {@code x} is assumed to be an identifier datat ype that the {@link Graph} will accept.&lt;/td>
+&lt;td>Determines if an {@link Element} can have a user defined identifier. Implementation that do not support this feature will be expected to auto-generate unique identifiers. In other words, if the {@link Graph} allows {@code graph.addVertex(id,x)} to work and thus set the identifier of the newly added {@link Vertex} to the value of {@code x} then this feature should return true. In this case, {@code x} is assumed to be an identifier data type that the {@link Graph} will accept.&lt;/td>
 &lt;td>false&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -104,7 +104,7 @@
 &lt;/tr>
 &lt;tr>
 &lt;td>DuplicateMultiProperties&lt;/td>
-&lt;td>Determines if a {@link Vertex} can support non-unique values on the same key. For this valueto be {@code true}, then {@link #supportsMetaProperties()} must also return true. By default this method, just returns what {@link #supportsMultiProperties()} returns.&lt;/td>
+&lt;td>Determines if a {@link Vertex} can support non-unique values on the same key. For this value to be {@code true}, then {@link #supportsMetaProperties()} must also return true. By default this method, just returns what {@link #supportsMultiProperties()} returns.&lt;/td>
 &lt;td>false&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -131,7 +131,7 @@
 &lt;tbody>
 &lt;tr>
 &lt;td>UserSuppliedIds&lt;/td>
-&lt;td>Determines if an {@link Element} can have a user defined identifier. Implementation that do not support this feature will be expected to auto-generate unique identifiers. In other words, if the {@link Graph} allows {@code graph.addVertex(id,x)} to work and thus set the identifier of the newly added {@link Vertex} to the value of {@code x} then this feature should return true. In this case, {@code x} is assumed to be an identifier datat ype that the {@link Graph} will accept.&lt;/td>
+&lt;td>Determines if an {@link Element} can have a user defined identifier. Implementation that do not support this feature will be expected to auto-generate unique identifiers. In other words, if the {@link Graph} allows {@code graph.addVertex(id,x)} to work and thus set the identifier of the newly added {@link Vertex} to the value of {@code x} then this feature should return true. In this case, {@code x} is assumed to be an identifier data type that the {@link Graph} will accept.&lt;/td>
 &lt;td>false&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -223,12 +223,12 @@
 &lt;/tr>
 &lt;tr>
 &lt;td>MapValues&lt;/td>
-&lt;td>Supports setting of a {@code Map} value. The assumption is that the {@code Map} can containarbitrary serializable values that may or may not be defined as a feature itself&lt;/td>
+&lt;td>Supports setting of a {@code Map} value. The assumption is that the {@code Map} can contain arbitrary serializable values that may or may not be defined as a feature itself&lt;/td>
 &lt;td>false&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>MixedListValues&lt;/td>
-&lt;td>Supports setting of a {@code List} value. The assumption is that the {@code List} can containarbitrary serializable values that may or may not be defined as a feature itself. As this{@code List} is &amp;ldquo;mixed&amp;rdquo; it does not need to contain objects of the same type.&lt;/td>
+&lt;td>Supports setting of a {@code List} value. The assumption is that the {@code List} can contain arbitrary serializable values that may or may not be defined as a feature itself. As this{@code List} is &amp;ldquo;mixed&amp;rdquo; it does not need to contain objects of the same type.&lt;/td>
 &lt;td>false&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -278,7 +278,7 @@
 &lt;/tr>
 &lt;tr>
 &lt;td>UniformListValues&lt;/td>
-&lt;td>Supports setting of a {@code List} value. The assumption is that the {@code List} can containarbitrary serializable values that may or may not be defined as a feature itself. As this{@code List} is &amp;ldquo;uniform&amp;rdquo; it must contain objects of the same type.&lt;/td>
+&lt;td>Supports setting of a {@code List} value. The assumption is that the {@code List} can contain arbitrary serializable values that may or may not be defined as a feature itself. As this{@code List} is &amp;ldquo;uniform&amp;rdquo; it must contain objects of the same type.&lt;/td>
 &lt;td>false&lt;/td>
 &lt;/tr>
 &lt;/tbody>
@@ -616,7 +616,7 @@
 &lt;p>HugeGraph默认是自动生成Id，如果用户通过&lt;code>primaryKeys&lt;/code>指定&lt;code>VertexLabel&lt;/code>的&lt;code>primaryKeys&lt;/code>字段列表后，&lt;code>VertexLabel&lt;/code>的Id策略将会自动切换到&lt;code>primaryKeys&lt;/code>策略。 启用&lt;code>primaryKeys&lt;/code>策略后,HugeGraph通过&lt;code>vertexLabel+primaryKeys&lt;/code>拼接生成&lt;code>VertexId&lt;/code> ，可实现自动去重，同时无需额外创建索引即可以使用&lt;code>primaryKeys&lt;/code>中的属性进行快速查询。 例如 &amp;ldquo;character&amp;rdquo; 和 &amp;ldquo;location&amp;rdquo; 都有&lt;code>primaryKeys(&amp;quot;name&amp;quot;)&lt;/code>属性，因此在不额外创建索引的情况下可以通过&lt;code>g.V().hasLabel('character') .has('name','hercules')&lt;/code>查询vertex 。&lt;/p>
 &lt;h3 id="3-graph-traversal-examples">3 Graph Traversal Examples&lt;/h3>
 &lt;h4 id="31-traversal-query">3.1 Traversal Query&lt;/h4>
-&lt;p>&lt;strong>1. Find the grand father of hercules&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>1. Find the grandfather of hercules&lt;/strong>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">g&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">V&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">hasLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;character&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">has&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;name&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;hercules&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">out&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;father&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">out&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;father&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>也可以通过&lt;code>repeat&lt;/code>方式：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">g&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">V&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">hasLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;character&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">has&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;name&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;hercules&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">repeat&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">__&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">out&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;father&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)).&lt;/span>&lt;span style="color:#c4a000">times&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>

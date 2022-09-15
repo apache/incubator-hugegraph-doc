@@ -248,7 +248,7 @@ serializer=binary
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -291,7 +291,7 @@ serializer=binary
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -388,7 +388,7 @@ serializer=binary
 &lt;tr>
 &lt;td>auth.authenticator&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>The class path of authenticator implemention. e.g., com.baidu.hugegraph.auth.StandardAuthenticator, or com.baidu.hugegraph.auth.ConfigAuthenticator.&lt;/td>
+&lt;td>The class path of authenticator implementation. e.g., com.baidu.hugegraph.auth.StandardAuthenticator, or com.baidu.hugegraph.auth.ConfigAuthenticator.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>auth.admin_token&lt;/td>
@@ -449,7 +449,7 @@ serializer=binary
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -684,7 +684,7 @@ serializer=binary
 &lt;td>Specify the mode for the text analyzer, the available mode of analyzer are {word: [MaximumMatching, ReverseMaximumMatching, MinimumMatching, ReverseMinimumMatching, BidirectionalMaximumMatching, BidirectionalMinimumMatching, BidirectionalMaximumMinimumMatching, FullSegmentation, MinimalWordCount, MaxNgramScore, PureEnglish], ansj: [BaseAnalysis, IndexAnalysis, ToAnalysis, NlpAnalysis], hanlp: [standard, nlp, index, nShort, shortest, speed], smartcn: [], jieba: [SEARCH, INDEX], jcseg: [Simple, Complex], mmseg4j: [Simple, Complex, MaxWord], ikanalyzer: [smart, max_word]}.&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>snowflake.datecenter_id&lt;/td>
+&lt;td>snowflake.datacenter_id&lt;/td>
 &lt;td>0&lt;/td>
 &lt;td>The datacenter id of snowflake id generator.&lt;/td>
 &lt;/tr>
@@ -745,8 +745,8 @@ serializer=binary
 &lt;/tr>
 &lt;tr>
 &lt;td>raft.backend_threads&lt;/td>
-&lt;td>current CPU vcores&lt;/td>
-&lt;td>The thread number used to apply task to bakcend.&lt;/td>
+&lt;td>current CPU v-cores&lt;/td>
+&lt;td>The thread number used to apply task to backend.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>raft.read_index_threads&lt;/td>
@@ -806,7 +806,7 @@ serializer=binary
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -818,7 +818,7 @@ serializer=binary
 &lt;tr>
 &lt;td>rpc.client_load_balancer&lt;/td>
 &lt;td>consistentHash&lt;/td>
-&lt;td>The rpc client uses a load-balancing algorithm to access multiple rpc servers in one cluster. Default value is &amp;lsquo;consistentHash&amp;rsquo;, means forwording by request parameters.&lt;/td>
+&lt;td>The rpc client uses a load-balancing algorithm to access multiple rpc servers in one cluster. Default value is &amp;lsquo;consistentHash&amp;rsquo;, means forwarding by request parameters.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>rpc.client_read_timeout&lt;/td>
@@ -883,7 +883,7 @@ serializer=binary
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -960,7 +960,7 @@ serializer=binary
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -983,7 +983,7 @@ serializer=binary
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -1240,7 +1240,7 @@ serializer=binary
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -1332,7 +1332,7 @@ serializer=binary
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -1399,7 +1399,7 @@ serializer=binary
 &lt;tr>
 &lt;th>config option&lt;/th>
 &lt;th>default value&lt;/th>
-&lt;th>descrition&lt;/th>
+&lt;th>description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>

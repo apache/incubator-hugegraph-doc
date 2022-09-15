@@ -100,7 +100,7 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;/tbody>
 &lt;/table>
 &lt;ul>
-&lt;li>cardinality: Whether the property value is single-valued or multi-valued, in the case of multi-valued, it is divided into allowing-duplicate values and not-allowing-duplicate values. This item is single by default. If necessary, you can select a setting from the following table:&lt;/li>
+&lt;li>cardinality: Whether the property value is single-valued or multivalued, in the case of multivalued, it is divided into allowing-duplicate values and not-allowing-duplicate values. This item is single by default. If necessary, you can select a setting from the following table:&lt;/li>
 &lt;/ul>
 &lt;table>
 &lt;thead>
@@ -151,7 +151,7 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asText&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">valueSet&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In the following examples, the syntax of &lt;code>gremlin&lt;/code> and &lt;code>java&lt;/code> is exactly the same, so we won&amp;rsquo;t repeat them.&lt;/p>
 &lt;ul>
-&lt;li>ifNotExist(): Add a judgment mechanism for create, if the current PropertyKey already exists, it will not be created, otherwise the property will be created. If no ifNotExist() is added, an exception will be thrown if a properkey with the same name already exists. The same as below, and will not be repeated there.&lt;/li>
+&lt;li>ifNotExist(): Add a judgment mechanism for create, if the current PropertyKey already exists, it will not be created, otherwise the property will be created. If no ifNotExist() is added, an exception will be thrown if a property-key with the same name already exists. The same as below, and will not be repeated there.&lt;/li>
 &lt;/ul>
 &lt;h5 id="223-delete-propertykey">2.2.3 Delete PropertyKey&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">remove&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
@@ -188,7 +188,7 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;/tbody>
 &lt;/table>
 &lt;ul>
-&lt;li>idStrategy: Each VertexLabel can choose its own Id strategy. There are currently three strategies to choose from, namely Automatic (automatically generated), Customize (user input) and PrimaryKey (primary attribute key). Among them, Automatic uses the Snowflake algorithm to generate Id, Customize requires the user to pass in the Id of string or number type, and PrimaryKey allows the user to select several properties of VertexLabel as the basis for differentiation. HugeGraph will be spliced and generated Id according to the value of the primary properties. idStrategy uses Automatic by default, but if the user does not explicitly set idStrategy and calls the primaryKeys(&amp;hellip;) method to set the primary property, then idStrategy will automatically use PrimaryKey.&lt;/li>
+&lt;li>idStrategy: Each VertexLabel can choose its own ID strategy. There are currently three strategies to choose from, namely Automatic (automatically generated), Customize (user input) and PrimaryKey (primary attribute key). Among them, Automatic uses the Snowflake algorithm to generate Id, Customize requires the user to pass in the Id of string or number type, and PrimaryKey allows the user to select several properties of VertexLabel as the basis for differentiation. HugeGraph will be spliced and generated ID according to the value of the primary properties. idStrategy uses Automatic by default, but if the user does not explicitly set idStrategy and calls the primaryKeys(&amp;hellip;) method to set the primary property, then idStrategy will automatically use PrimaryKey.&lt;/li>
 &lt;/ul>
 &lt;table>
 &lt;thead>
@@ -202,7 +202,7 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;tr>
 &lt;td>useAutomaticId&lt;/td>
 &lt;td>AUTOMATIC&lt;/td>
-&lt;td>generate id automaticly by Snowflake algorithom&lt;/td>
+&lt;td>generate id automatically by Snowflake algorithm&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>useCustomizeStringId&lt;/td>
@@ -239,7 +239,7 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;/tbody>
 &lt;/table>
 &lt;ul>
-&lt;li>primaryKeys: When the user selects the Id strategy of PrimaryKey, several primary properties need to be selected from the properties of VertexLabel as the basis for differentiation;&lt;/li>
+&lt;li>primaryKeys: When the user selects the ID strategy of PrimaryKey, several primary properties need to be selected from the properties of VertexLabel as the basis for differentiation;&lt;/li>
 &lt;/ul>
 &lt;table>
 &lt;thead>
@@ -255,7 +255,7 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;p>Note that the selection of the Id strategy and the setting of primaryKeys have some mutual constraints, which cannot be called at will. The constraints are shown in the following table:&lt;/p>
+&lt;p>Note that the selection of the ID strategy and the setting of primaryKeys have some mutual constraints, which cannot be called at will. The constraints are shown in the following table:&lt;/p>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -507,7 +507,7 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">edgeLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;knows&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">properties&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;price&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">nullableKeys&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;price&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">append&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="244-delete-edgelabel">2.4.4 Delete EdgeLabel&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">edgeLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;knows&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">remove&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="245-qeury-edgelabel">2.4.5 Qeury EdgeLabel&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="245-query-edgelabel">2.4.5 Query EdgeLabel&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// Get EdgeLabel
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">getEdgeLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;knows&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -523,7 +523,7 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="25-indexlabel">2.5 IndexLabel&lt;/h4>
 &lt;h5 id="251-interface-and-parameter-introduction">2.5.1 Interface and parameter introduction&lt;/h5>
 &lt;p>IndexLabel is used to define the index type and describe the constraint information of the index, mainly for the convenience of query.&lt;/p>
-&lt;p>The constraint information that IndexLabel allows to define include: name, baseType, baseValue, indexFeilds, indexType, which are introduced one by one below.&lt;/p>
+&lt;p>The constraint information that IndexLabel allows to define include: name, baseType, baseValue, indexFields, indexType, which are introduced one by one below.&lt;/p>
 &lt;ul>
 &lt;li>name: The name of the IndexLabel, used to distinguish different IndexLabels, IndexLabels with the same name are not allowed.&lt;/li>
 &lt;/ul>
@@ -597,7 +597,7 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;li>Secondary Index supports exact matching secondary index, allow to build joint index, joint index supports index prefix search
 &lt;ul>
 &lt;li>Single Property Secondary Index, support equality query, for example: the secondary index of the city property of the person vertex, you can use &lt;code>g.V().has(&amp;quot;city&amp;quot;, &amp;quot;Beijing&amp;quot;)&lt;/code> to query all the vertices with &amp;ldquo;city attribute value is Beijing&amp;rdquo;&lt;/li>
-&lt;li>Joint Secondary Index, supports prefix query and equality query, such as: joint index of city and street properties of person vertex, you can use &lt;code>g.V().has(&amp;quot;city&amp;quot;, &amp;quot;Beijing&amp;quot;).has('street', 'Zhongguancun street ')&lt;/code> to query all vertices of &amp;ldquo;city property value is Beijing and street property value is Zhongguancun&amp;rdquo;, or &lt;code>g.V().has(&amp;quot;city&amp;quot;, &amp;quot;Beijing&amp;quot;)&lt;/code> to query all vertices of &amp;ldquo;city property value is Beijing&amp;rdquo;.&lt;/li>
+&lt;li>Joint Secondary Index, supports prefix query and equality query, such as: joint index of city and street properties of person vertex, you can use &lt;code>g.V().has(&amp;quot;city&amp;quot;, &amp;quot;Beijing&amp;quot;).has('street', 'Zhongguancun street ')&lt;/code> to query all vertices of &amp;ldquo;city property value is Beijing and street property value is ZhongGuanCun&amp;rdquo;, or &lt;code>g.V().has(&amp;quot;city&amp;quot;, &amp;quot;Beijing&amp;quot;)&lt;/code> to query all vertices of &amp;ldquo;city property value is Beijing&amp;rdquo;.&lt;/li>
 &lt;/ul>
 &lt;blockquote>
 &lt;p>The query of Secondary Index is based on the query condition of &amp;ldquo;yes&amp;rdquo; or &amp;ldquo;equal&amp;rdquo;, and does not support &amp;ldquo;partial matching&amp;rdquo;.&lt;/p>
@@ -696,10 +696,10 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>The key to adding vertices is the vertex properties. The number of parameters of the vertex adding function must be an even number and satisfy the order of &lt;code>key1 -&amp;gt; val1, key2 -&amp;gt; val2 ...&lt;/code>, and the order between key-value pairs is free .&lt;/li>
 &lt;li>The parameter must contain a special key-value pair, namely &lt;code>T.label -&amp;gt; &amp;quot;val&amp;quot;&lt;/code>, which is used to define the category of the vertex, so that the program can obtain the schema definition of the VertexLabel from the cache or backend, and then do subsequent constraint checks. The label in the example is defined as person.&lt;/li>
-&lt;li>If the vertex type&amp;rsquo;s Id policy is &lt;code>AUTOMATIC&lt;/code>, users are not allowed to pass in id key-value pairs.&lt;/li>
-&lt;li>If the Id policy of the vertex type is &lt;code>CUSTOMIZE_STRING&lt;/code>, the user needs to pass in the value of the id of the String type. The key-value pair is like: &lt;code>&amp;quot;T.id&amp;quot;, &amp;quot;123456&amp;quot;&lt;/code>.&lt;/li>
-&lt;li>If the Id policy of the vertex type is &lt;code>CUSTOMIZE_NUMBER&lt;/code>, the user needs to pass in the value of the id of the Number type. The key-value pair is like: &lt;code>&amp;quot;T.id&amp;quot;, 123456&lt;/code>.&lt;/li>
-&lt;li>If the Id policy of the vertex type is &lt;code>PRIMARY_KEY&lt;/code>, the parameters must also contain the name and value of the properties corresponding to the &lt;code>primaryKeys&lt;/code>, if not set an exception will be thrown. For example, the &lt;code>primaryKeys&lt;/code> of &lt;code>person&lt;/code> is &lt;code>name&lt;/code>, in the example, the value of &lt;code>name&lt;/code> is set to &lt;code>marko&lt;/code>.&lt;/li>
+&lt;li>If the vertex type&amp;rsquo;s ID policy is &lt;code>AUTOMATIC&lt;/code>, users are not allowed to pass in id key-value pairs.&lt;/li>
+&lt;li>If the ID policy of the vertex type is &lt;code>CUSTOMIZE_STRING&lt;/code>, the user needs to pass in the value of the id of the String type. The key-value pair is like: &lt;code>&amp;quot;T.id&amp;quot;, &amp;quot;123456&amp;quot;&lt;/code>.&lt;/li>
+&lt;li>If the ID policy of the vertex type is &lt;code>CUSTOMIZE_NUMBER&lt;/code>, the user needs to pass in the value of the id of the Number type. The key-value pair is like: &lt;code>&amp;quot;T.id&amp;quot;, 123456&lt;/code>.&lt;/li>
+&lt;li>If the ID policy of the vertex type is &lt;code>PRIMARY_KEY&lt;/code>, the parameters must also contain the name and value of the properties corresponding to the &lt;code>primaryKeys&lt;/code>, if not set an exception will be thrown. For example, the &lt;code>primaryKeys&lt;/code> of &lt;code>person&lt;/code> is &lt;code>name&lt;/code>, in the example, the value of &lt;code>name&lt;/code> is set to &lt;code>marko&lt;/code>.&lt;/li>
 &lt;li>For properties that are not nullableKeys, a value must be assigned.&lt;/li>
 &lt;li>The remaining parameters are the settings of other properties of the vertex, but they are not required.&lt;/li>
 &lt;li>After calling the &lt;code>addVertex&lt;/code> method, the vertices are inserted into the backend storage system immediately.&lt;/li>
@@ -708,8 +708,8 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;p>After added vertices, edges are also needed to form a complete graph. Here is an example of adding edges:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">Edge&lt;/span> &lt;span style="color:#000">knows1&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">marko&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addEdge&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;knows&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">vadas&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>The function &lt;code>addEdge()&lt;/code> of the (source) vertex is to add a edge(relationship) between itself and another vertex. The first parameter of the function is the label of the edge, and the second parameter is the target vertex. The position and order of these two parameters are fixed. The subsequent parameters are the order of &lt;code>key1 -&amp;gt; val1, key2 -&amp;gt; val2 ...&lt;/code>, set the properties of the edge, and the key-value pair order is free.&lt;/li>
-&lt;li>The source and target vertices must conform to the definitions of sourcelabel and targetlabel in EdgeLabel, and cannot be added arbitrarily.&lt;/li>
+&lt;li>The function &lt;code>addEdge()&lt;/code> of the (source) vertex is to add an edge(relationship) between itself and another vertex. The first parameter of the function is the label of the edge, and the second parameter is the target vertex. The position and order of these two parameters are fixed. The subsequent parameters are the order of &lt;code>key1 -&amp;gt; val1, key2 -&amp;gt; val2 ...&lt;/code>, set the properties of the edge, and the key-value pair order is free.&lt;/li>
+&lt;li>The source and target vertices must conform to the definitions of source-label and target label in EdgeLabel, and cannot be added arbitrarily.&lt;/li>
 &lt;li>For properties that are not nullableKeys, a value must be assigned.&lt;/li>
 &lt;/ul>
 &lt;p>&lt;strong>Note: When frequency is multiple, the value of the property type corresponding to sortKeys must be set.&lt;/strong>&lt;/p>

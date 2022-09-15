@@ -113,7 +113,7 @@
 &lt;li>
 &lt;p>Titan版本：0.5.4, 使用thrift+Cassandra模式&lt;/p>
 &lt;ul>
-&lt;li>Cassandra版本：cassandra-3.10，commitlog和data共用SSD&lt;/li>
+&lt;li>Cassandra版本：cassandra-3.10，commit-log 和 data 共用SSD&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>
@@ -628,7 +628,7 @@
 &lt;h4 id="13-服务配置">1.3 服务配置&lt;/h4>
 &lt;ul>
 &lt;li>HugeGraph版本：0.4.4，RestServer和Gremlin Server和backends都在同一台服务器上&lt;/li>
-&lt;li>Cassandra版本：cassandra-3.10，commitlog和data共用SSD&lt;/li>
+&lt;li>Cassandra版本：cassandra-3.10，commit-log 和data共用SSD&lt;/li>
 &lt;li>RocksDB版本：rocksdbjni-5.8.6&lt;/li>
 &lt;li>Titan版本：0.5.4, 使用thrift+Cassandra模式&lt;/li>
 &lt;/ul>
@@ -1006,7 +1006,7 @@
 &lt;td>6564.191&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>RcoksDB（core）&lt;/td>
+&lt;td>RocksDB（core）&lt;/td>
 &lt;td>33.383&lt;/td>
 &lt;td>199.894&lt;/td>
 &lt;td>763.869&lt;/td>
