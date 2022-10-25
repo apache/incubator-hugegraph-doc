@@ -236,6 +236,6 @@ enable = false
 #  desc = "Chat with other project developers"
 [[params.links.developer]]
   name = "Developer mailing list"
-  url = "dev@hugegraph.apache.org"
+  url = "mailto:dev@hugegraph.apache.org"
   icon = "fa fa-envelope"
   desc = "Discuss development issues around the project"
