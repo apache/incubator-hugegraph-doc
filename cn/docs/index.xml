@@ -1499,7 +1499,7 @@ restserver.url=http://0.0.0.0:8080
 &lt;p>HugeGraph是一款易用、高效、通用的开源图数据库系统（Graph Database，&lt;a href="https://github.com/hugegraph/hugegraph">GitHub项目地址&lt;/a>），
 实现了&lt;a href="https://tinkerpop.apache.org">Apache TinkerPop3&lt;/a>框架及完全兼容&lt;a href="https://tinkerpop.apache.org/gremlin.html">Gremlin&lt;/a>查询语言，
 具备完善的工具链组件，助力用户轻松构建基于图数据库之上的应用和产品。HugeGraph支持百亿以上的顶点和边快速导入，并提供毫秒级的关联关系查询能力（OLTP），
-并可与Hadoop、Spark等大数据平台集成以进行离线分析（OLAP）。&lt;/p>
+并支持大规模分布式图分析（OLAP）。&lt;/p>
 &lt;p>HugeGraph典型应用场景包括深度关系探索、关联分析、路径搜索、特征抽取、数据聚类、社区检测、
 知识图谱等，适用业务领域有如网络安全、电信诈骗、金融风控、广告推荐、社交网络和智能机器人等。&lt;/p>
 &lt;p>本系统的主要应用场景是解决反欺诈、威胁情报、黑产打击等业务的图数据存储和建模分析需求，在此基础上逐步扩展及支持了更多的通用图应用。&lt;/p>
@@ -1539,7 +1539,7 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;/li>
 &lt;li>&lt;a href="/docs/quickstart/hugegraph-client">HugeGraph-Client&lt;/a>：HugeGraph-Client提供了RESTful API的客户端，用于连接HugeGraph-Server，目前仅实现Java版，其他语言用户可自行实现；&lt;/li>
 &lt;li>&lt;a href="/docs/quickstart/hugegraph-loader">HugeGraph-Loader&lt;/a>：HugeGraph-Loader是基于HugeGraph-Client的数据导入工具，将普通文本数据转化为图形的顶点和边并插入图形数据库中；&lt;/li>
-&lt;li>&lt;a href="/docs/quickstart/hugegraph-computer">HugeGraph-Computer&lt;/a>：HugeGraph-Computer 是分布式图处理系统 (OLAP). 它是 [Pregel](&lt;a href="https://kowshik.github">https://kowshik.github&lt;/a>. io/JPregel/pregel_paper.pdf) 的一个实现. 它可以运行在 Kubernetes 上；&lt;/li>
+&lt;li>&lt;a href="/docs/quickstart/hugegraph-computer">HugeGraph-Computer&lt;/a>：HugeGraph-Computer 是分布式图处理系统 (OLAP). 它是 &lt;a href="https://kowshik.github.io/JPregel/pregel_paper.pdf">Pregel&lt;/a> 的一个实现. 它可以运行在 Kubernetes 上；&lt;/li>
 &lt;li>&lt;a href="/docs/quickstart/hugegraph-hubble">HugeGraph-Hubble&lt;/a>：HugeGraph-Hubble是HugeGraph的Web可视化管理平台，一站式可视化分析平台，平台涵盖了从数据建模，到数据快速导入，再到数据的在线、离线分析、以及图的统一管理的全过程；&lt;/li>
 &lt;li>&lt;a href="/docs/quickstart/hugegraph-tools">HugeGraph-Tools&lt;/a>：HugeGraph-Tools是HugeGraph的部署和管理工具，包括管理图、备份/恢复、Gremlin执行等功能。&lt;/li>
 &lt;/ul>
