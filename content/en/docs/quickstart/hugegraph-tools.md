@@ -183,9 +183,9 @@ Usage: hugegraph [options] [command] [command options]
     - --backup-num，选填项，指定保存的最新的备份的数目，默认为 3
     - --interval，选填项，指定进行备份的周期，格式同 Linux crontab 格式
 - dump，把整张图的顶点和边全部导出，默认以`vertex vertex-edge1 vertex-edge2...`JSON格式存储。
-用户也可以自定义存储格式，只需要在`hugegraph-tools/src/main/java/com/baidu/hugegraph/formatter`
-目录下实现一个继承自`Formatter`的类，例如`CustomFormatter`，使用时指定该类为formatter即可，例如
-`bin/hugegraph dump -f CustomFormatter`
+  用户也可以自定义存储格式，只需要在`hugegraph-tools/src/main/java/com/baidu/hugegraph/formatter`
+  目录下实现一个继承自`Formatter`的类，例如`CustomFormatter`，使用时指定该类为formatter即可，例如
+  `bin/hugegraph dump -f CustomFormatter`
     - --formatter 或者 -f，指定使用的 formatter，默认为 JsonFormatter
     - --directory 或者 -d，存储 schema 或者 data 的目录，默认为当前目录
     - --log 或者 -l，指定日志目录，默认为当前目录

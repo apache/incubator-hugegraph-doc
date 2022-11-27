@@ -2,7 +2,7 @@
 title: "HugeGraph-Studio Quick Start"
 linkTitle: "Display with HugeGraph-Studio"
 draft: true
-weight: 5
+weight: 9
 ---
 
 ### 1 HugeGraph-Studio概述 (Deprecated)
