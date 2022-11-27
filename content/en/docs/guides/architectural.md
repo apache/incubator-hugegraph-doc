@@ -27,3 +27,4 @@ HugeGraph的主要功能分为HugeCore、ApiServer、HugeGraph-Client、HugeGrap
 - HugeGraph-Client：基于Java客户端驱动程序。HugeGraph-Client是Java版本客户端驱动程序，后续可根据需要提供Python、Go、C++等多语言支持。
 - HugeGraph-Loader：数据导入模块。HugeGraph-Loader可以扫描并分析现有数据，自动生成Graph Schema创建语言，通过批量方式快速导入数据。
 - HugeGraph-Studio：基于Web的可视化IDE环境。以Notebook方式记录Gremlin查询，可视化展示Graph的关联关系。HugeGraph-Studio也是本系统推荐的工具。
+- HugeGraph-Computer：HugeGraph-Computer是一个分布式图处理系统 (OLAP)。

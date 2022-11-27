@@ -51,7 +51,7 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
   - API：内置REST Server，向用户提供RESTful API，同时完全兼容Gremlin查询。
 - [HugeGraph-Client](/docs/quickstart/hugegraph-client)：HugeGraph-Client提供了RESTful API的客户端，用于连接HugeGraph-Server，目前仅实现Java版，其他语言用户可自行实现；
 - [HugeGraph-Loader](/docs/quickstart/hugegraph-loader)：HugeGraph-Loader是基于HugeGraph-Client的数据导入工具，将普通文本数据转化为图形的顶点和边并插入图形数据库中；
-- [HugeGraph-Spark](/docs/quickstart/hugegraph-spark)：HugeGraph-Spark能在图上做并行计算，例如PageRank算法等；
+- [HugeGraph-Computer](/docs/quickstart/hugegraph-computer)：HugeGraph-Computer 是分布式图处理系统 (OLAP). 它是 [Pregel](https://kowshik.github. io/JPregel/pregel_paper.pdf) 的一个实现. 它可以运行在 Kubernetes 上；
 - [HugeGraph-Hubble](/docs/quickstart/hugegraph-hubble)：HugeGraph-Hubble是HugeGraph的Web可视化管理平台，一站式可视化分析平台，平台涵盖了从数据建模，到数据快速导入，再到数据的在线、离线分析、以及图的统一管理的全过程；
 - [HugeGraph-Tools](/docs/quickstart/hugegraph-tools)：HugeGraph-Tools是HugeGraph的部署和管理工具，包括管理图、备份/恢复、Gremlin执行等功能。
 
