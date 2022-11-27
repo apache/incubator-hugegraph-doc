@@ -9,14 +9,14 @@
 * [Visual with HugeGraph-Hubble](quickstart/hugegraph-hubble.md)
 * [Display with HugeGraph-Studio](quickstart/hugegraph-studio.md)
 * [Develop with HugeGraph-Client](quickstart/hugegraph-client.md)
-* [Analysis with HugeGraph-Spark](quickstart/hugegraph-spark.md)
+* [Analysis with HugeGraph-Computer](quickstart/hugegraph-computer.md)
 
 ## Config
 * [Config Guide](config/config-guide.md)
 * [Config Options](config/config-option.md)
 * [Config Authentication](config/config-authentication.md)
 * [Config HTTPS](config/config-https.md)
-
+* [Config Computer](config/config-computer.md)
 
 ## API
 * [RESTful API](clients/hugegraph-api.md)
