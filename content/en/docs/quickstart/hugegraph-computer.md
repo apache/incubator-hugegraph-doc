@@ -6,7 +6,7 @@ weight: 7
 
 ## 1 HugeGraph-Computer Overview
 
-The hugegraph-computer is a distributed graph processing system for hugegraph. It is an implementation of [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf). It runs on Kubernetes or YARN framework.
+The `HugeGraph-Computer` is a distributed graph processing system for hugegraph. It is an implementation of [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf). It runs on Kubernetes framework.
 
 ### Features
 
@@ -21,11 +21,11 @@ The hugegraph-computer is a distributed graph processing system for hugegraph. I
 
 ### 2.1 Run PageRank algorithm locally
 
-> To run algorithm with hugegraph-computer, you need to install 64-bit JRE/JDK 11 or later versions.
+> To run algorithm with HugeGraph-Computer, you need to install 64-bit JRE/JDK 11 or later versions.
 >
-> You also need to deploy Hugegraph-Server and [Etcd](https://etcd.io/docs/v3.5/quickstart/).
+> You also need to deploy HugeGraph-Server and [Etcd](https://etcd.io/docs/v3.5/quickstart/).
 
-#### 2.1.1 Download the compiled archive
+#### 2.1 Download the compiled archive
 
 Download the latest version of the HugeGraph-Computer release package:
 
@@ -34,7 +34,7 @@ wget https://github.com/apache/hugegraph-computer/releases/download/v${version}/
 tar zxvf hugegraph-computer-${version}.tar.gz
 ```
 
-#### 2.2 Clone source code to compile and install
+#### 2.2 Clone source code to compile and package
 
 Clone the latest version of HugeGraph-Computer source package:
 
@@ -50,6 +50,8 @@ mvn clean package -DskipTests
 ```
 
 #### 2.3 Start master node
+
+> You can use `-c`  parameter specify the configuration file, and computer config please see: [Computer Config Options](/docs/config/config-computer#computer-config-options)
 
 ```bash
 cd hugegraph-computer-${version}
@@ -82,14 +84,16 @@ curl "http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3" | gunz
 
 ### 2.2 Run PageRank algorithm in Kubernetes
 
+> To run algorithm with HugeGraph-Computer you need to deploy HugeGraph-Server first
+
 #### 2.2.1 Install hugegraph-computer CRD
 
 ```bash
 # Kubernetes version >= v1.16
-kubectl apply -f https://raw.githubusercontent.com/hugegraph/hugegraph-computer/master/computer-k8s-operator/manifest/hugegraph-computer-crd.v1.yaml
+kubectl apply -f https://raw.githubusercontent.com/apache/hugegraph-computer/master/computer-k8s-operator/manifest/hugegraph-computer-crd.v1.yaml
 
 # Kubernetes version < v1.16
-kubectl apply -f https://raw.githubusercontent.com/hugegraph/hugegraph-computer/master/computer-k8s-operator/manifest/hugegraph-computer-crd.v1beta1.yaml
+kubectl apply -f https://raw.githubusercontent.com/apache/hugegraph-computer/master/computer-k8s-operator/manifest/hugegraph-computer-crd.v1beta1.yaml
 ```
 
 #### 2.2.2 Show CRD
@@ -104,7 +108,7 @@ hugegraphcomputerjobs.hugegraph.apache.org   2021-09-16T08:01:08Z
 #### 2.2.3 Install hugegraph-computer-operator&etcd-server
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/hugegraph/hugegraph-computer/master/computer-k8s-operator/manifest/hugegraph-computer-operator.yaml
+kubectl apply -f https://raw.githubusercontent.com/apache/hugegraph-computer/master/computer-k8s-operator/manifest/hugegraph-computer-operator.yaml
 ```
 
 #### 2.2.4 Wait for hugegraph-computer-operator&etcd-server deployment to complete
@@ -118,6 +122,10 @@ hugegraph-computer-operator-etcd-28lm67jxk5                       1/1     Runnin
 ```
 
 #### 2.2.5 Submit job
+
+> More CRD spec please see: [Computer CRD](/docs/config/config-computer#hugegraph-computer-crd)
+>
+> More computer config please see: [Computer Config Options](/docs/config/config-computer#computer-config-options)
 
 ```yaml
 cat <<EOF | kubectl apply --filename -
@@ -139,7 +147,7 @@ spec:
     job.partitions_count: "20"
     algorithm.params_class: org.apache.hugegraph.computer.algorithm.centrality.pagerank.PageRankParams
     hugegraph.url: http://${hugegraph-server-host}:${hugegraph-server-port} # hugegraph server url
-    hugegraph.name: hugegraph
+    hugegraph.name: hugegraph # hugegraph graph name
 EOF
 ```
 
@@ -180,16 +188,16 @@ If the output to `Hugegraph-Server` is consistent with Locally, if output to `HD
 
 ### 3 Built-In algorithms document
 
-#### 3.1 Currently supported algorithms list: 
+#### 3.1  Supported algorithms list: 
 
-##### Centrality Algorithm:
+###### Centrality Algorithm:
 
 * PageRank
 * BetweennessCentrality
 * ClosenessCentrality
 * DegreeCentrality
 
-##### Community Algorithm:
+###### Community Algorithm:
 
 * ClusteringCoefficient
 * Kcore
@@ -197,12 +205,16 @@ If the output to `Hugegraph-Server` is consistent with Locally, if output to `HD
 * TriangleCount
 * Wcc
 
-##### Path Algorithm:
+###### Path Algorithm:
 
 * RingsDetection
 * RingsDetectionWithFilter
 
 More please see: https://github.com/apache/hugegraph-computer/tree/master/computer-algorithm/src/main/java/com/baidu/hugegraph/computer/algorithm
+
+#### 3.2 Algorithm describe
+
+TODO
 
 ### 4 Algorithm development guide
 
