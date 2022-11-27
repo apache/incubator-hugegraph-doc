@@ -9,7 +9,7 @@ weight: 1
 HugeGraph是一款易用、高效、通用的开源图数据库系统（Graph Database，[GitHub项目地址](https://github.com/hugegraph/hugegraph)），
 实现了[Apache TinkerPop3](https://tinkerpop.apache.org)框架及完全兼容[Gremlin](https://tinkerpop.apache.org/gremlin.html)查询语言，
 具备完善的工具链组件，助力用户轻松构建基于图数据库之上的应用和产品。HugeGraph支持百亿以上的顶点和边快速导入，并提供毫秒级的关联关系查询能力（OLTP），
-并可与Hadoop、Spark等大数据平台集成以进行离线分析（OLAP）。
+并支持大规模分布式图分析（OLAP）。
 
 HugeGraph典型应用场景包括深度关系探索、关联分析、路径搜索、特征抽取、数据聚类、社区检测、
 知识图谱等，适用业务领域有如网络安全、电信诈骗、金融风控、广告推荐、社交网络和智能机器人等。
@@ -51,7 +51,7 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
   - API：内置REST Server，向用户提供RESTful API，同时完全兼容Gremlin查询。
 - [HugeGraph-Client](/docs/quickstart/hugegraph-client)：HugeGraph-Client提供了RESTful API的客户端，用于连接HugeGraph-Server，目前仅实现Java版，其他语言用户可自行实现；
 - [HugeGraph-Loader](/docs/quickstart/hugegraph-loader)：HugeGraph-Loader是基于HugeGraph-Client的数据导入工具，将普通文本数据转化为图形的顶点和边并插入图形数据库中；
-- [HugeGraph-Computer](/docs/quickstart/hugegraph-computer)：HugeGraph-Computer 是分布式图处理系统 (OLAP). 它是 [Pregel](https://kowshik.github. io/JPregel/pregel_paper.pdf) 的一个实现. 它可以运行在 Kubernetes 上；
+- [HugeGraph-Computer](/docs/quickstart/hugegraph-computer)：HugeGraph-Computer 是分布式图处理系统 (OLAP). 它是 [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf) 的一个实现. 它可以运行在 Kubernetes 上；
 - [HugeGraph-Hubble](/docs/quickstart/hugegraph-hubble)：HugeGraph-Hubble是HugeGraph的Web可视化管理平台，一站式可视化分析平台，平台涵盖了从数据建模，到数据快速导入，再到数据的在线、离线分析、以及图的统一管理的全过程；
 - [HugeGraph-Tools](/docs/quickstart/hugegraph-tools)：HugeGraph-Tools是HugeGraph的部署和管理工具，包括管理图、备份/恢复、Gremlin执行等功能。
 
