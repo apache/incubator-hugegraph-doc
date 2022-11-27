@@ -14,6 +14,7 @@ The `HugeGraph-Computer` is a distributed graph processing system for hugegraph.
 - Based on BSP(Bulk Synchronous Parallel) model, an algorithm performs computing through multiple parallel iterations, every iteration is a superstep.
 - Auto memory management. The framework will never be OOM(Out of Memory) since it will split some data to disk if it doesn't have enough memory to hold all the data.
 - The part of edges or the messages of super node can be in memory, so you will never lose it.
+- You can load the data from HDFS or loacal file or HugeGraph.
 - You can output the results to HDFS or HugeGraph, or any other system.
 - Easy to develop a new algorithm. You just need to focus on a vertex only processing just like as in a single server, without worrying about message transfer and memory/storage management.
 
