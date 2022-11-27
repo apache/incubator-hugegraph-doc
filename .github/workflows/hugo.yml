@@ -56,7 +56,7 @@ jobs:
             ${{ runner.os }}-hugomod-
 
       - name: Build Site (minify)
-        run: hugo --minify
+        run: npm i && hugo --minify
 
       - name: Deploy Site
         uses: peaceiris/actions-gh-pages@v3

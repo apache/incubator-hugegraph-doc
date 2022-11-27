@@ -2,7 +2,7 @@
 title: "HugeGraph-Spark Quick Start"
 linkTitle: "Analysis with HugeGraph-Spark"
 draft: true
-weight: 7
+weight: 8
 ---
 
 ### 1 HugeGraph-Spark概述 (Deprecated)
