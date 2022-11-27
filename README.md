@@ -42,15 +42,16 @@ The functions of this system include but are not limited to:
 
 ### Modules
 
-- [HugeGraph-Server](/docs/quickstart/hugegraph-server): HugeGraph-Server is the core part of the HugeGraph project, including sub-modules such as Core, Backend, and API;
+- [HugeGraph-Server](https://hugegraph.apache.org/docs/quickstart/hugegraph-server): HugeGraph-Server is the core part of the HugeGraph project, including sub-modules such as Core, Backend, and API;
   - Core: Graph engine implementation, connecting the Backend module downward and supporting the API module upward;
   - Backend: Realize the storage of graph data to the backend. The supported backends include: Memory, Cassandra, ScyllaDB, RocksDB, HBase, MySQL and PostgreSQL. Users can choose one according to the actual situation;
   - API: Built-in REST Server, provides RESTful API to users, and is fully compatible with Gremlin query.
-- [HugeGraph-Client](/docs/quickstart/hugegraph-client): HugeGraph-Client provides a RESTful API client for connecting to HugeGraph-Server. Currently, only Java version is implemented. Users of other languages can implement it by themselves;
-- [HugeGraph-Loader](/docs/quickstart/hugegraph-loader): HugeGraph-Loader is a data import tool based on HugeGraph-Client, which converts ordinary text data into graph vertices and edges and inserts them into graph database;
-- [HugeGraph-Computer](/docs/quickstart/hugegraph-computer): HugeGraph-Computer is a distributed graph processing system for HugeGraph (OLAP). It is an implementation of [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf). It runs on Kubernetes framework;
-- [HugeGraph-Hubble](/docs/quickstart/hugegraph-hubble): HugeGraph-Hubble is HugeGraph's web visualization management platform, a one-stop visual analysis platform. The platform covers the whole process from data modeling, to rapid data import, to online and offline analysis of data, and unified management of graphs;
-- [HugeGraph-Tools](/docs/quickstart/hugegraph-tools): HugeGraph-Tools is HugeGraph's deployment and management tools, including functions such as managing graphs, backup/restore, Gremlin execution, etc.
+- [HugeGraph-Client](https://hugegraph.apache.org/docs/quickstart/hugegraph-client): 
+  HugeGraph-Client provides a RESTful API client for connecting to HugeGraph-Server. Currently, only Java version is implemented. Users of other languages can implement it by themselves;
+- [HugeGraph-Loader](https://hugegraph.apache.org/docs/quickstart/hugegraph-loader): HugeGraph-Loader is a data import tool based on HugeGraph-Client, which converts ordinary text data into graph vertices and edges and inserts them into graph database;
+- [HugeGraph-Computer](https://hugegraph.apache.org/docs/quickstart/hugegraph-computer): HugeGraph-Computer is a distributed graph processing system for HugeGraph (OLAP). It is an implementation of [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf). It runs on Kubernetes framework;
+- [HugeGraph-Hubble](https://hugegraph.apache.org/docs/quickstart/hugegraph-hubble): HugeGraph-Hubble is HugeGraph's web visualization management platform, a one-stop visual analysis platform. The platform covers the whole process from data modeling, to rapid data import, to online and offline analysis of data, and unified management of graphs;
+- [HugeGraph-Tools](https://hugegraph.apache.org/docs/quickstart/hugegraph-tools): HugeGraph-Tools is HugeGraph's deployment and management tools, including functions such as managing graphs, backup/restore, Gremlin execution, etc.
 
 ### Contact Us
 - [Github Issues](https://github.com/apache/incubator-hugegraph/issues): Feedback on usage issues and functional requirements (priority)
