@@ -6,7 +6,7 @@ weight: 7
 
 ## 1 HugeGraph-Computer Overview
 
-The `HugeGraph-Computer` is a distributed graph processing system for hugegraph. It is an implementation of [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf). It runs on Kubernetes framework.
+The `HugeGraph-Computer` is a distributed graph processing system for HugeGraph (OLAP). It is an implementation of [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf). It runs on Kubernetes framework.
 
 ### Features
 
@@ -19,6 +19,11 @@ The `HugeGraph-Computer` is a distributed graph processing system for hugegraph.
 - Easy to develop a new algorithm. You just need to focus on a vertex only processing just like as in a single server, without worrying about message transfer and memory/storage management.
 
 ## 2 Get Started
+
+There are two ways to get HugeGraph-Computer:
+
+- Download the compiled tarball
+- Clone source code then compile and package
 
 ### 2.1 Run PageRank algorithm locally
 
@@ -52,7 +57,7 @@ mvn clean package -DskipTests
 
 #### 2.3 Start master node
 
-> You can use `-c`  parameter specify the configuration file, and computer config please see: [Computer Config Options](/docs/config/config-computer#computer-config-options)
+> You can use `-c`  parameter specify the configuration file, more computer config please see:[Computer Config Options](/docs/config/config-computer#computer-config-options)
 
 ```bash
 cd hugegraph-computer-${version}
@@ -69,7 +74,7 @@ bin/start-computer.sh -d local -r worker
 
 2.5.1 Enable `OLAP` index query for server
 
-If OLAP index is not enabled, it needs to be enable, more reference: [modify-graphs-read-mode](/docs/clients/restful-api/graphs/#634-modify-graphs-read-mode-this-operation-requires-administrator-privileges)
+If OLAP index is not enabled, it needs to enable, more reference: [modify-graphs-read-mode](/docs/clients/restful-api/graphs/#634-modify-graphs-read-mode-this-operation-requires-administrator-privileges)
 
 ```http
 PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
@@ -77,7 +82,7 @@ PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
 "ALL"
 ```
 
-2.5.2 Query `page_rank` propertie value:
+2.5.2 Query `page_rank` property value:
 
 ```bash
 curl "http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3" | gunzip
@@ -87,7 +92,7 @@ curl "http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3" | gunz
 
 > To run algorithm with HugeGraph-Computer you need to deploy HugeGraph-Server first
 
-#### 2.2.1 Install hugegraph-computer CRD
+#### 2.2.1 Install HugeGraph-Computer CRD
 
 ```bash
 # Kubernetes version >= v1.16
@@ -124,7 +129,7 @@ hugegraph-computer-operator-etcd-28lm67jxk5                       1/1     Runnin
 
 #### 2.2.5 Submit job
 
-> More CRD spec please see: [Computer CRD](/docs/config/config-computer#hugegraph-computer-crd)
+> More computer crd please see: [Computer CRD](/docs/config/config-computer#hugegraph-computer-crd)
 >
 > More computer config please see: [Computer Config Options](/docs/config/config-computer#computer-config-options)
 
@@ -161,7 +166,7 @@ NAME               JOBID              JOBSTATUS
 pagerank-sample    pagerank-sample    RUNNING
 ```
 
-#### 2.2.7 Show log nodes
+#### 2.2.7 Show log of nodes
 
 ```bash
 # Show the master log
@@ -189,7 +194,7 @@ If the output to `Hugegraph-Server` is consistent with Locally, if output to `HD
 
 ### 3 Built-In algorithms document
 
-#### 3.1  Supported algorithms list: 
+#### 3.1  Supported algorithms list:
 
 ###### Centrality Algorithm:
 
@@ -211,7 +216,7 @@ If the output to `Hugegraph-Server` is consistent with Locally, if output to `HD
 * RingsDetection
 * RingsDetectionWithFilter
 
-More please see: https://github.com/apache/hugegraph-computer/tree/master/computer-algorithm/src/main/java/org/apache/hugegraph/computer/algorithm
+More algorithms please see: [Built-In algorithms](https://github.com/apache/hugegraph-computer/tree/master/computer-algorithm/src/main/java/org/apache/hugegraph/computer/algorithm)
 
 #### 3.2 Algorithm describe
 

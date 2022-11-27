@@ -4,31 +4,36 @@ linkTitle: "Analysis with HugeGraph-Computer"
 weight: 7
 ---
 
-## 1 HugeGraph-Computer Overview
+## 1 HugeGraph-Computer 概述
 
-The `HugeGraph-Computer` is a distributed graph processing system for hugegraph. It is an implementation of [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf). It runs on Kubernetes framework.
+`HugeGraph-Computer` 是分布式图处理系统 (OLAP). 它是 [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf) 的一个实现. 它可以运行在 Kubernetes 上。
 
-### Features
+### 特性
 
-- Support distributed MPP graph computing, and integrates with HugeGraph as graph input/output storage.
-- Based on BSP(Bulk Synchronous Parallel) model, an algorithm performs computing through multiple parallel iterations, every iteration is a superstep.
-- Auto memory management. The framework will never be OOM(Out of Memory) since it will split some data to disk if it doesn't have enough memory to hold all the data.
-- The part of edges or the messages of super node can be in memory, so you will never lose it.
-- You can load the data from HDFS or HugeGraph, or any other system.
-- You can output the results to HDFS or HugeGraph, or any other system.
-- Easy to develop a new algorithm. You just need to focus on a vertex only processing just like as in a single server, without worrying about message transfer and memory/storage management.
+- 支持分布式MPP图计算，集成HugeGraph作为图输入输出存储。
+- 算法基于BSP(Bulk Synchronous Parallel)模型，通过多次并行迭代进行计算，每一次迭代都是一次超步。
+- 自动内存管理。该框架永远不会出现 OOM（内存不足），因为如果它没有足够的内存来容纳所有数据，它会将一些数据拆分到磁盘。
+- 边的部分或超级节点的消息可以在内存中，所以你永远不会丢失它。
+- 您可以从 HDFS 或 HugeGraph 或任何其他系统加载数据。
+- 您可以将结果输出到 HDFS 或 HugeGraph，或任何其他系统。
+- 易于开发新算法。您只需要像在单个服务器中一样专注于仅顶点处理，而不必担心消息传输和内存存储管理。
 
-## 2 Get Started
+## 2 开始
 
-### 2.1 Run PageRank algorithm locally
+### 2.1 在本地运行 PageRank 算法
 
-> To run algorithm with HugeGraph-Computer, you need to install 64-bit JRE/JDK 11 or later versions.
+> 要使用 HugeGraph-Computer 运行算法，您需要安装 64 位 JREJDK 11 或更高版本。
 >
-> You also need to deploy HugeGraph-Server and [Etcd](https://etcd.io/docs/v3.5/quickstart/).
+> 还需要首先部署 HugeGraph-Server 和 [Etcd](https://etcd.io/docs/v3.5/quickstart/).
 
 #### 2.1 Download the compiled archive
 
-Download the latest version of the HugeGraph-Computer release package:
+有两种方式可以获取 HugeGraph-Computer：
+
+- 下载已编译的压缩包
+- 克隆源码编译打包
+
+下载最新版本的 HugeGraph-Computer release 包：
 
 ```bash
 wget https://github.com/apache/hugegraph-computer/releases/download/v${version}/hugegraph-loader-${version}.tar.gz
@@ -37,39 +42,39 @@ tar zxvf hugegraph-computer-${version}.tar.gz
 
 #### 2.2 Clone source code to compile and package
 
-Clone the latest version of HugeGraph-Computer source package:
+克隆最新版本的 HugeGraph-Computer 源码包：
 
 ```bash
 $ git clone https://github.com/apache/hugegraph-computer.git
 ```
 
-Compile and generate tar package:
+编译生成tar包:
 
 ```bash
 cd hugegraph-computer
 mvn clean package -DskipTests
 ```
 
-#### 2.3 Start master node
+#### 2.3 启动 master 节点
 
-> You can use `-c`  parameter specify the configuration file, and computer config please see: [Computer Config Options](/docs/config/config-computer#computer-config-options)
+> 您可以使用 `-c` 参数指定配置文件, 更多computer 配置请看: [Computer Config Options](/docs/config/config-computer#computer-config-options)
 
 ```bash
 cd hugegraph-computer-${version}
 bin/start-computer.sh -d local -r master
 ```
 
-#### 2.4 Start worker node
+#### 2.4 启动 worker 节点
 
 ```
 bin/start-computer.sh -d local -r worker
 ```
 
-#### 2.5 Query algorithm results
+#### 2.5 查询算法结果
 
-2.5.1 Enable `OLAP` index query for server
+2.5.1 为 server 启用 `OLAP` 索引查询
 
-If OLAP index is not enabled, it needs to be enable, more reference: [modify-graphs-read-mode](/docs/clients/restful-api/graphs/#634-modify-graphs-read-mode-this-operation-requires-administrator-privileges)
+如果没有启用OLAP索引，则需要启用, 更多参考: [modify-graphs-read-mode](/docs/clients/restful-api/graphs/#634-modify-graphs-read-mode-this-operation-requires-administrator-privileges)
 
 ```http
 PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
@@ -77,17 +82,17 @@ PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
 "ALL"
 ```
 
-2.5.2 Query `page_rank` propertie value:
+2.5.2 查询 `page_rank` 属性值:
 
 ```bash
 curl "http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3" | gunzip
 ```
 
-### 2.2 Run PageRank algorithm in Kubernetes
+### 2.2 在 Kubernetes 中运行 PageRank 算法
 
-> To run algorithm with HugeGraph-Computer you need to deploy HugeGraph-Server first
+> 要使用 HugeGraph-Computer 运行算法，您需要先部署 HugeGraph-Server
 
-#### 2.2.1 Install hugegraph-computer CRD
+#### 2.2.1 安装 HugeGraph-Computer CRD
 
 ```bash
 # Kubernetes version >= v1.16
@@ -97,7 +102,7 @@ kubectl apply -f https://raw.githubusercontent.com/apache/hugegraph-computer/mas
 kubectl apply -f https://raw.githubusercontent.com/apache/hugegraph-computer/master/computer-k8s-operator/manifest/hugegraph-computer-crd.v1beta1.yaml
 ```
 
-#### 2.2.2 Show CRD
+#### 2.2.2 显示 CRD
 
 ```bash
 kubectl get crd
@@ -106,13 +111,13 @@ NAME                                        CREATED AT
 hugegraphcomputerjobs.hugegraph.apache.org   2021-09-16T08:01:08Z
 ```
 
-#### 2.2.3 Install hugegraph-computer-operator&etcd-server
+#### 2.2.3 安装 hugegraph-computer-operator&etcd-server
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/apache/hugegraph-computer/master/computer-k8s-operator/manifest/hugegraph-computer-operator.yaml
 ```
 
-#### 2.2.4 Wait for hugegraph-computer-operator&etcd-server deployment to complete
+#### 2.2.4 等待 hugegraph-computer-operator&etcd-server 部署完成
 
 ```bash
 kubectl get pod -n hugegraph-computer-operator-system
@@ -122,11 +127,11 @@ hugegraph-computer-operator-controller-manager-58c5545949-jqvzl   1/1     Runnin
 hugegraph-computer-operator-etcd-28lm67jxk5                       1/1     Running   0          15h
 ```
 
-#### 2.2.5 Submit job
+#### 2.2.5 提交作业
 
-> More CRD spec please see: [Computer CRD](/docs/config/config-computer#hugegraph-computer-crd)
+> 更多 computer crd spec 请看: [Computer CRD](/docs/config/config-computer#hugegraph-computer-crd)
 >
-> More computer config please see: [Computer Config Options](/docs/config/config-computer#computer-config-options)
+> 更多 Computer 配置请看: [Computer Config Options](/docs/config/config-computer#computer-config-options)
 
 ```yaml
 cat <<EOF | kubectl apply --filename -
@@ -152,7 +157,7 @@ spec:
 EOF
 ```
 
-#### 2.2.6 Show job
+#### 2.2.6 显示作业
 
 ```bash
 kubectl get hcjob/pagerank-sample -n hugegraph-computer-system
@@ -161,7 +166,7 @@ NAME               JOBID              JOBSTATUS
 pagerank-sample    pagerank-sample    RUNNING
 ```
 
-#### 2.2.7 Show log nodes
+#### 2.2.7 显示节点日志
 
 ```bash
 # Show the master log
@@ -171,11 +176,11 @@ kubectl logs -l component=pagerank-sample-master -n hugegraph-computer-system
 kubectl logs -l component=pagerank-sample-worker -n hugegraph-computer-system
 
 # Show diagnostic log of a job
-# NOTE: diagnostic log exist only when the job fails, and it will only be saved for one hour.
+# 注意: 诊断日志仅在作业失败时存在，并且只会保存一小时。
 kubectl get event --field-selector reason=ComputerJobFailed --field-selector involvedObject.name=pagerank-sample -n hugegraph-computer-system
 ```
 
-#### 2.2.8 Show success event of a job
+#### 2.2.8 显示作业的成功事件
 
 > NOTE: it will only be saved for one hour
 
@@ -183,22 +188,22 @@ kubectl get event --field-selector reason=ComputerJobFailed --field-selector inv
 kubectl get event --field-selector reason=ComputerJobSucceed --field-selector involvedObject.name=pagerank-sample -n hugegraph-computer-system
 ```
 
-#### 2.2.9 Query algorithm results
+#### 2.2.9 查询算法结果
 
-If the output to `Hugegraph-Server` is consistent with Locally, if output to `HDFS`, please check the result file in the directory of `/hugegraph-computer/results/{jobId}` directory.
+如果输出到 `Hugegraph-Server` 则与 Locally 模式一致，如果输出到 `HDFS` ，请检查 `hugegraph-computerresults{jobId}`目录下的结果文件。
 
-### 3 Built-In algorithms document
+### 3 内置算法文档
 
-#### 3.1  Supported algorithms list: 
+#### 3.1  支持的算法列表:
 
-###### Centrality Algorithm:
+###### 中心性算法:
 
 * PageRank
 * BetweennessCentrality
 * ClosenessCentrality
 * DegreeCentrality
 
-###### Community Algorithm:
+###### 社区算法:
 
 * ClusteringCoefficient
 * Kcore
@@ -206,17 +211,17 @@ If the output to `Hugegraph-Server` is consistent with Locally, if output to `HD
 * TriangleCount
 * Wcc
 
-###### Path Algorithm:
+###### 路径算法:
 
 * RingsDetection
 * RingsDetectionWithFilter
 
-More please see: https://github.com/apache/hugegraph-computer/tree/master/computer-algorithm/src/main/java/org/apache/hugegraph/computer/algorithm
+更多算法请看: [Built-In algorithms](https://github.com/apache/hugegraph-computer/tree/master/computer-algorithm/src/main/java/org/apache/hugegraph/computer/algorithm)
 
-#### 3.2 Algorithm describe
+#### 3.2 算法描述
 
 TODO
 
-### 4 Algorithm development guide
+### 4 算法开发指南
 
 TODO

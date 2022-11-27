@@ -1,6 +1,7 @@
 ---
 title: "HugeGraph-Spark Quick Start"
 linkTitle: "(Deprecated) Analysis with HugeGraph-Spark"
+draft: true
 weight: 7
 ---
 
