@@ -15,6 +15,7 @@
 &lt;li>HugeGraph-Client：基于Java客户端驱动程序。HugeGraph-Client是Java版本客户端驱动程序，后续可根据需要提供Python、Go、C++等多语言支持。&lt;/li>
 &lt;li>HugeGraph-Loader：数据导入模块。HugeGraph-Loader可以扫描并分析现有数据，自动生成Graph Schema创建语言，通过批量方式快速导入数据。&lt;/li>
 &lt;li>HugeGraph-Studio：基于Web的可视化IDE环境。以Notebook方式记录Gremlin查询，可视化展示Graph的关联关系。HugeGraph-Studio也是本系统推荐的工具。&lt;/li>
+&lt;li>HugeGraph-Computer：HugeGraph-Computer是一个分布式图处理系统 (OLAP)。&lt;/li>
 &lt;/ul></description></item><item><title>Docs: HugeGraph Design Concepts</title><link>/cn/docs/guides/desgin-concept/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/guides/desgin-concept/</guid><description>
 &lt;h3 id="1-property-graph">1. Property Graph&lt;/h3>
 &lt;p>常见的图数据表示模型有两种，分别是RDF（Resource Description Framework）模型和属性图（Property Graph）模型。

@@ -1546,4 +1546,826 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>server.crt 就是服务端的证书&lt;/p>
 &lt;h4 id="客户端">客户端&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>keytool -import -alias serverkey -file server.crt -keystore client.truststore
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>client.truststore 是给客户端⽤的，其中保存着受信任的证书&lt;/p></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>client.truststore 是给客户端⽤的，其中保存着受信任的证书&lt;/p></description></item><item><title>Docs: HugeGraph-Computer Config</title><link>/docs/config/config-computer/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/config/config-computer/</guid><description>
+&lt;h3 id="computer-config-options">Computer Config Options&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>algorithm.message_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.config.Null&lt;/td>
+&lt;td>The class of message passed when compute vertex.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>algorithm.params_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.config.Null&lt;/td>
+&lt;td>The class used to transfer algorithms&amp;rsquo; parameters before algorithm been run.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>algorithm.result_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.config.Null&lt;/td>
+&lt;td>The class of vertex&amp;rsquo;s value, the instance is used to store computation result for the vertex.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>allocator.max_vertices_per_thread&lt;/td>
+&lt;td>10000&lt;/td>
+&lt;td>Maximum number of vertices per thread processed in each memory allocator&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>bsp.etcd_endpoints&lt;/td>
+&lt;td>http://localhost:2379&lt;/td>
+&lt;td>The end points to access etcd.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>bsp.log_interval&lt;/td>
+&lt;td>30000&lt;/td>
+&lt;td>The log interval(in ms) to print the log while waiting bsp event.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>bsp.max_super_step&lt;/td>
+&lt;td>10&lt;/td>
+&lt;td>The max super step of the algorithm.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>bsp.register_timeout&lt;/td>
+&lt;td>300000&lt;/td>
+&lt;td>The max timeout to wait for master and works to register.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>bsp.wait_master_timeout&lt;/td>
+&lt;td>86400000&lt;/td>
+&lt;td>The max timeout(in ms) to wait for master bsp event.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>bsp.wait_workers_timeout&lt;/td>
+&lt;td>86400000&lt;/td>
+&lt;td>The max timeout to wait for workers bsp event.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>hgkv.max_data_block_size&lt;/td>
+&lt;td>65536&lt;/td>
+&lt;td>The max byte size of hgkv-file data block.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>hgkv.max_file_size&lt;/td>
+&lt;td>2147483648&lt;/td>
+&lt;td>The max number of bytes in each hgkv-file.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>hgkv.max_merge_files&lt;/td>
+&lt;td>10&lt;/td>
+&lt;td>The max number of files to merge at one time.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>hgkv.temp_file_dir&lt;/td>
+&lt;td>/tmp/hgkv&lt;/td>
+&lt;td>This folder is used to store temporary files, temporary files will be generated during the file merging process.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>hugegraph.name&lt;/td>
+&lt;td>hugegraph&lt;/td>
+&lt;td>The graph name to load data and write results back.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>hugegraph.url&lt;/td>
+&lt;td>http://127.0.0.1:8080&lt;/td>
+&lt;td>The hugegraph url to load data and write results back.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.edge_direction&lt;/td>
+&lt;td>OUT&lt;/td>
+&lt;td>The data of the edge in which direction is loaded, when the value is BOTH, the edges in both OUT and IN direction will be loaded.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.edge_freq&lt;/td>
+&lt;td>MULTIPLE&lt;/td>
+&lt;td>The frequency of edges can exist between a pair of vertices, allowed values: [SINGLE, SINGLE_PER_LABEL, MULTIPLE]. SINGLE means that only one edge can exist between a pair of vertices, use sourceId + targetId to identify it; SINGLE_PER_LABEL means that each edge label can exist one edge between a pair of vertices, use sourceId + edgelabel + targetId to identify it; MULTIPLE means that many edge can exist between a pair of vertices, use sourceId + edgelabel + sortValues + targetId to identify it.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.filter_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.input.filter.DefaultInputFilter&lt;/td>
+&lt;td>The class to create input-filter object, input-filter is used to Filter vertex edges according to user needs.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.loader_schema_path&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The schema path of loader input, only takes effect when the input.source_type=loader is enabled&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.loader_struct_path&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The struct path of loader input, only takes effect when the input.source_type=loader is enabled&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.max_edges_in_one_vertex&lt;/td>
+&lt;td>200&lt;/td>
+&lt;td>The maximum number of adjacent edges allowed to be attached to a vertex, the adjacent edges will be stored and transferred together as a batch unit.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.source_type&lt;/td>
+&lt;td>hugegraph-server&lt;/td>
+&lt;td>The source type to load input data, allowed values: [&amp;lsquo;hugegraph-server&amp;rsquo;, &amp;lsquo;hugegraph-loader&amp;rsquo;], the &amp;lsquo;hugegraph-loader&amp;rsquo; means use hugegraph-loader load data from HDFS or file, if use &amp;lsquo;hugegraph-loader&amp;rsquo; load data then please config &amp;lsquo;input.loader_struct_path&amp;rsquo; and &amp;lsquo;input.loader_schema_path&amp;rsquo;.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.split_fetch_timeout&lt;/td>
+&lt;td>300&lt;/td>
+&lt;td>The timeout in seconds to fetch input splits&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.split_max_splits&lt;/td>
+&lt;td>10000000&lt;/td>
+&lt;td>The maximum number of input splits&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.split_page_size&lt;/td>
+&lt;td>500&lt;/td>
+&lt;td>The page size for streamed load input split data&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.split_size&lt;/td>
+&lt;td>1048576&lt;/td>
+&lt;td>The input split size in bytes&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>job.id&lt;/td>
+&lt;td>local_0001&lt;/td>
+&lt;td>The job id on Yarn cluster or K8s cluster.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>job.partitions_count&lt;/td>
+&lt;td>1&lt;/td>
+&lt;td>The partitions count for computing one graph algorithm job.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>job.partitions_thread_nums&lt;/td>
+&lt;td>4&lt;/td>
+&lt;td>The number of threads for partition parallel compute.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>job.workers_count&lt;/td>
+&lt;td>1&lt;/td>
+&lt;td>The workers count for computing one graph algorithm job.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>master.computation_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.master.DefaultMasterComputation&lt;/td>
+&lt;td>Master-computation is computation that can determine whether to continue next superstep. It runs at the end of each superstep on master.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.batch_size&lt;/td>
+&lt;td>500&lt;/td>
+&lt;td>The batch size of output&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.batch_threads&lt;/td>
+&lt;td>1&lt;/td>
+&lt;td>The threads number used to batch output&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_core_site_path&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The hdfs core site path.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_delimiter&lt;/td>
+&lt;td>,&lt;/td>
+&lt;td>The delimiter of hdfs output.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_kerberos_enable&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>Is Kerberos authentication enabled for Hdfs.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_kerberos_keytab&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The Hdfs&amp;rsquo;s key tab file for kerberos authentication.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_kerberos_principal&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The Hdfs&amp;rsquo;s principal for kerberos authentication.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_krb5_conf&lt;/td>
+&lt;td>/etc/krb5.conf&lt;/td>
+&lt;td>Kerberos configuration file.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_merge_partitions&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>Whether merge output files of multiple partitions.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_path_prefix&lt;/td>
+&lt;td>/hugegraph-computer/results&lt;/td>
+&lt;td>The directory of hdfs output result.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_replication&lt;/td>
+&lt;td>3&lt;/td>
+&lt;td>The replication number of hdfs.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_site_path&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The hdfs site path.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_url&lt;/td>
+&lt;td>hdfs://127.0.0.1:9000&lt;/td>
+&lt;td>The hdfs url of output.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_user&lt;/td>
+&lt;td>hadoop&lt;/td>
+&lt;td>The hdfs user of output.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.output_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.output.LogOutput&lt;/td>
+&lt;td>The class to output the computation result of each vertex. Be called after iteration computation.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.result_name&lt;/td>
+&lt;td>value&lt;/td>
+&lt;td>The value is assigned dynamically by #name() of instance created by WORKER_COMPUTATION_CLASS.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.result_write_type&lt;/td>
+&lt;td>OLAP_COMMON&lt;/td>
+&lt;td>The result write-type to output to hugegraph, allowed values are: [OLAP_COMMON, OLAP_SECONDARY, OLAP_RANGE].&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.retry_interval&lt;/td>
+&lt;td>10&lt;/td>
+&lt;td>The retry interval when output failed&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.retry_times&lt;/td>
+&lt;td>3&lt;/td>
+&lt;td>The retry times when output failed&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.single_threads&lt;/td>
+&lt;td>1&lt;/td>
+&lt;td>The threads number used to single output&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.thread_pool_shutdown_timeout&lt;/td>
+&lt;td>60&lt;/td>
+&lt;td>The timeout seconds of output threads pool shutdown&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.with_adjacent_edges&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>Output the adjacent edges of the vertex or not&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.with_edge_properties&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>Output the properties of the edge or not&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.with_vertex_properties&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>Output the properties of the vertex or not&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>sort.thread_nums&lt;/td>
+&lt;td>4&lt;/td>
+&lt;td>The number of threads performing internal sorting.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.client_connect_timeout&lt;/td>
+&lt;td>3000&lt;/td>
+&lt;td>The timeout(in ms) of client connect to server.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.client_threads&lt;/td>
+&lt;td>4&lt;/td>
+&lt;td>The number of transport threads for client.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.close_timeout&lt;/td>
+&lt;td>10000&lt;/td>
+&lt;td>The timeout(in ms) of close server or close client.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.finish_session_timeout&lt;/td>
+&lt;td>0&lt;/td>
+&lt;td>The timeout(in ms) to finish session, 0 means using (transport.sync_request_timeout * transport.max_pending_requests).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.heartbeat_interval&lt;/td>
+&lt;td>20000&lt;/td>
+&lt;td>The minimum interval(in ms) between heartbeats on client side.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.io_mode&lt;/td>
+&lt;td>AUTO&lt;/td>
+&lt;td>The network IO Mode, either &amp;lsquo;NIO&amp;rsquo;, &amp;lsquo;EPOLL&amp;rsquo;, &amp;lsquo;AUTO&amp;rsquo;, the &amp;lsquo;AUTO&amp;rsquo; means selecting the property mode automatically.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.max_pending_requests&lt;/td>
+&lt;td>8&lt;/td>
+&lt;td>The max number of client unreceived ack, it will trigger the sending unavailable if the number of unreceived ack &amp;gt;= max_pending_requests.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.max_syn_backlog&lt;/td>
+&lt;td>511&lt;/td>
+&lt;td>The capacity of SYN queue on server side, 0 means using system default value.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.max_timeout_heartbeat_count&lt;/td>
+&lt;td>120&lt;/td>
+&lt;td>The maximum times of timeout heartbeat on client side, if the number of timeouts waiting for heartbeat response continuously &amp;gt; max_heartbeat_timeouts the channel will be closed from client side.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.min_ack_interval&lt;/td>
+&lt;td>200&lt;/td>
+&lt;td>The minimum interval(in ms) of server reply ack.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.min_pending_requests&lt;/td>
+&lt;td>6&lt;/td>
+&lt;td>The minimum number of client unreceived ack, it will trigger the sending available if the number of unreceived ack &amp;lt; min_pending_requests.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.network_retries&lt;/td>
+&lt;td>3&lt;/td>
+&lt;td>The number of retry attempts for network communication,if network unstable.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.provider_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.network.netty.NettyTransportProvider&lt;/td>
+&lt;td>The transport provider, currently only supports Netty.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.receive_buffer_size&lt;/td>
+&lt;td>0&lt;/td>
+&lt;td>The size of socket receive-buffer in bytes, 0 means using system default value.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.recv_file_mode&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>Whether enable receive buffer-file mode, it will receive buffer write file from socket by zero-copy if enable.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.send_buffer_size&lt;/td>
+&lt;td>0&lt;/td>
+&lt;td>The size of socket send-buffer in bytes, 0 means using system default value.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.server_host&lt;/td>
+&lt;td>127.0.0.1&lt;/td>
+&lt;td>The server hostname or ip to listen on to transfer data.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.server_idle_timeout&lt;/td>
+&lt;td>360000&lt;/td>
+&lt;td>The max timeout(in ms) of server idle.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.server_port&lt;/td>
+&lt;td>0&lt;/td>
+&lt;td>The server port to listen on to transfer data. The system will assign a random port if it&amp;rsquo;s set to 0.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.server_threads&lt;/td>
+&lt;td>4&lt;/td>
+&lt;td>The number of transport threads for server.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.sync_request_timeout&lt;/td>
+&lt;td>10000&lt;/td>
+&lt;td>The timeout(in ms) to wait response after sending sync-request.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.tcp_keep_alive&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>Whether enable TCP keep-alive.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.transport_epoll_lt&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>Whether enable EPOLL level-trigger.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.write_buffer_high_mark&lt;/td>
+&lt;td>67108864&lt;/td>
+&lt;td>The high water mark for write buffer in bytes, it will trigger the sending unavailable if the number of queued bytes &amp;gt; write_buffer_high_mark.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.write_buffer_low_mark&lt;/td>
+&lt;td>33554432&lt;/td>
+&lt;td>The low water mark for write buffer in bytes, it will trigger the sending available if the number of queued bytes &amp;lt; write_buffer_low_mark.org.apache.hugegraph.config.OptionChecker$$Lambda$97/0x00000008001c8440@776a6d9b&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.write_socket_timeout&lt;/td>
+&lt;td>3000&lt;/td>
+&lt;td>The timeout(in ms) to write data to socket buffer.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>valuefile.max_segment_size&lt;/td>
+&lt;td>1073741824&lt;/td>
+&lt;td>The max number of bytes in each segment of value-file.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>worker.combiner_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.config.Null&lt;/td>
+&lt;td>Combiner can combine messages into one value for a vertex, for example page-rank algorithm can combine messages of a vertex to a sum value.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>worker.computation_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.config.Null&lt;/td>
+&lt;td>The class to create worker-computation object, worker-computation is used to compute each vertex in each superstep.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>worker.data_dirs&lt;/td>
+&lt;td>[jobs]&lt;/td>
+&lt;td>The directories separated by &amp;lsquo;,&amp;rsquo; that received vertices and messages can persist into.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>worker.edge_properties_combiner_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.combiner.OverwritePropertiesCombiner&lt;/td>
+&lt;td>The combiner can combine several properties of the same edge into one properties at inputstep.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>worker.partitioner&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.graph.partition.HashPartitioner&lt;/td>
+&lt;td>The partitioner that decides which partition a vertex should be in, and which worker a partition should be in.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>worker.received_buffers_bytes_limit&lt;/td>
+&lt;td>104857600&lt;/td>
+&lt;td>The limit bytes of buffers of received data, the total size of all buffers can&amp;rsquo;t excess this limit. If received buffers reach this limit, they will be merged into a file.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>worker.vertex_properties_combiner_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.combiner.OverwritePropertiesCombiner&lt;/td>
+&lt;td>The combiner can combine several properties of the same vertex into one properties at inputstep.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>worker.wait_finish_messages_timeout&lt;/td>
+&lt;td>86400000&lt;/td>
+&lt;td>The max timeout(in ms) message-handler wait for finish-message of all workers.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>worker.wait_sort_timeout&lt;/td>
+&lt;td>600000&lt;/td>
+&lt;td>The max timeout(in ms) message-handler wait for sort-thread to sort one batch of buffers.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>worker.write_buffer_capacity&lt;/td>
+&lt;td>52428800&lt;/td>
+&lt;td>The initial size of write buffer that used to store vertex or message.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>worker.write_buffer_threshold&lt;/td>
+&lt;td>52428800&lt;/td>
+&lt;td>The threshold of write buffer, exceeding it will trigger sorting, the write buffer is used to store vertex or message.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="k8s-operator-config-options">K8s Operator Config Options&lt;/h3>
+&lt;blockquote>
+&lt;p>NOTE: Option needs to be converted through environment variable settings, e.g k8s.internal_etcd_url =&amp;gt; INTERNAL_ETCD_URL&lt;/p>
+&lt;/blockquote>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>k8s.auto_destroy_pod&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>Whether to automatically destroy all pods when the job is completed or failed.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.close_reconciler_timeout&lt;/td>
+&lt;td>120&lt;/td>
+&lt;td>The max timeout(in ms) to close reconciler.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.internal_etcd_url&lt;/td>
+&lt;td>http://127.0.0.1:2379&lt;/td>
+&lt;td>The internal etcd url for operator system.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.max_reconcile_retry&lt;/td>
+&lt;td>3&lt;/td>
+&lt;td>The max retry times of reconcile.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.probe_backlog&lt;/td>
+&lt;td>50&lt;/td>
+&lt;td>The maximum backlog for serving health probes.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.probe_port&lt;/td>
+&lt;td>9892&lt;/td>
+&lt;td>The value is the port that the controller bind to for serving health probes.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.ready_check_internal&lt;/td>
+&lt;td>1000&lt;/td>
+&lt;td>The time interval(ms) of check ready.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.ready_timeout&lt;/td>
+&lt;td>30000&lt;/td>
+&lt;td>The max timeout(in ms) of check ready.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.reconciler_count&lt;/td>
+&lt;td>10&lt;/td>
+&lt;td>The max number of reconciler thread.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.resync_period&lt;/td>
+&lt;td>600000&lt;/td>
+&lt;td>The minimum frequency at which watched resources are reconciled.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.timezone&lt;/td>
+&lt;td>Asia/Shanghai&lt;/td>
+&lt;td>The timezone of computer job and operator.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.watch_namespace&lt;/td>
+&lt;td>hugegraph-computer-system&lt;/td>
+&lt;td>The value is watch custom resources in the namespace, ignore other namespaces, the &amp;lsquo;*&amp;rsquo; means is all namespaces will be watched.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="hugegraph-computer-crd">HugeGraph-Computer CRD&lt;/h3>
+&lt;blockquote>
+&lt;p>CRD: &lt;a href="https://github.com/apache/hugegraph-computer/blob/master/computer-k8s-operator/manifest/hugegraph-computer-crd.v1.yaml">https://github.com/apache/hugegraph-computer/blob/master/computer-k8s-operator/manifest/hugegraph-computer-crd.v1.yaml&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>spec&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;th>required&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>algorithmName&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The name of algorithm.&lt;/td>
+&lt;td>true&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>jobId&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The job id.&lt;/td>
+&lt;td>true&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>image&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The image of algorithm.&lt;/td>
+&lt;td>true&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>computerConf&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The map of computer config options.&lt;/td>
+&lt;td>true&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>workerInstances&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The number of worker instances, it will instead the &amp;lsquo;job.workers_count&amp;rsquo; option.&lt;/td>
+&lt;td>true&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>pullPolicy&lt;/td>
+&lt;td>Always&lt;/td>
+&lt;td>The pull-policy of image, detail please refer to: &lt;a href="https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy">https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>pullSecrets&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The pull-secrets of Image, detail please refer to: &lt;a href="https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod">https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>masterCpu&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The cpu limit of master, the unit can be &amp;rsquo;m&amp;rsquo; or without unit detail please refer to：&lt;a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu">https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>workerCpu&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The cpu limit of worker, the unit can be &amp;rsquo;m&amp;rsquo; or without unit detail please refer to：&lt;a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu">https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>masterMemory&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The memory limit of master, the unit can be one of Ei、Pi、Ti、Gi、Mi、Ki detail please refer to：&lt;a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory">https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>workerMemory&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The memory limit of worker, the unit can be one of Ei、Pi、Ti、Gi、Mi、Ki detail please refer to：&lt;a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory">https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>log4jXml&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The log4j.xml path for computer job.&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>jarFile&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The jar path of computer algorithm.&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>remoteJarUri&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The remote jar uri of computer algorithm, it will overlay algorithm image.&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>jvmOptions&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The java startup parameters of computer job.&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>envVars&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>please refer to: &lt;a href="https://kubernetes.io/docs/tasks/inject-data-application/define-interdependent-environment-variables/">https://kubernetes.io/docs/tasks/inject-data-application/define-interdependent-environment-variables/&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>envFrom&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>please refer to: &lt;a href="https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/">https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>masterCommand&lt;/td>
+&lt;td>bin/start-computer.sh&lt;/td>
+&lt;td>The run command of master, equivalent to &amp;lsquo;Entrypoint&amp;rsquo; field of Docker.&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>masterArgs&lt;/td>
+&lt;td>[&amp;quot;-r master&amp;quot;, &amp;ldquo;-d k8s&amp;rdquo;]&lt;/td>
+&lt;td>The run args of master, equivalent to &amp;lsquo;Cmd&amp;rsquo; field of Docker.&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>workerCommand&lt;/td>
+&lt;td>bin/start-computer.sh&lt;/td>
+&lt;td>The run command of worker, equivalent to &amp;lsquo;Entrypoint&amp;rsquo; field of Docker.&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>workerArgs&lt;/td>
+&lt;td>[&amp;quot;-r worker&amp;quot;, &amp;ldquo;-d k8s&amp;rdquo;]&lt;/td>
+&lt;td>The run args of worker, equivalent to &amp;lsquo;Cmd&amp;rsquo; field of Docker.&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>volumes&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Please refer to: &lt;a href="https://kubernetes.io/docs/concepts/storage/volumes/">https://kubernetes.io/docs/concepts/storage/volumes/&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>volumeMounts&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Please refer to: &lt;a href="https://kubernetes.io/docs/concepts/storage/volumes/">https://kubernetes.io/docs/concepts/storage/volumes/&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>secretPaths&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The map of k8s-secret name and mount path.&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>configMapPaths&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The map of k8s-configmap name and mount path.&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>podTemplateSpec&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Please refer to: &lt;a href="https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-template-v1/#PodTemplateSpec">https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-template-v1/#PodTemplateSpec&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>securityContext&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Please refer to: &lt;a href="https://kubernetes.io/docs/tasks/configure-pod-container/security-context/">https://kubernetes.io/docs/tasks/configure-pod-container/security-context/&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="kubedriver-config-options">KubeDriver Config Options&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>k8s.build_image_bash_path&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The path of command used to build image.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.enable_internal_algorithm&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>Whether enable internal algorithm.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.framework_image_url&lt;/td>
+&lt;td>hugegraph/hugegraph-computer:latest&lt;/td>
+&lt;td>The image url of computer framework.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.image_repository_password&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The password for login image repository.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.image_repository_registry&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The address for login image repository.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.image_repository_url&lt;/td>
+&lt;td>hugegraph/hugegraph-computer&lt;/td>
+&lt;td>The url of image repository.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.image_repository_username&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The username for login image repository.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.internal_algorithm&lt;/td>
+&lt;td>[pageRank]&lt;/td>
+&lt;td>The name list of all internal algorithm.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.internal_algorithm_image_url&lt;/td>
+&lt;td>hugegraph/hugegraph-computer:latest&lt;/td>
+&lt;td>The image url of internal algorithm.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.jar_file_dir&lt;/td>
+&lt;td>/cache/jars/&lt;/td>
+&lt;td>The directory where the algorithm jar to upload location.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.kube_config&lt;/td>
+&lt;td>~/.kube/config&lt;/td>
+&lt;td>The path of k8s config file.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.log4j_xml_path&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The log4j.xml path for computer job.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.namespace&lt;/td>
+&lt;td>hugegraph-computer-system&lt;/td>
+&lt;td>The namespace of hugegraph-computer system.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.pull_secret_names&lt;/td>
+&lt;td>[]&lt;/td>
+&lt;td>The names of pull-secret for pulling image.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item></channel></rss>
