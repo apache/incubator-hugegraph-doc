@@ -6,7 +6,7 @@ weight: 7
 
 ## 1 HugeGraph-Computer Overview
 
-The `HugeGraph-Computer` is a distributed graph processing system for HugeGraph (OLAP). It is an implementation of [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf). It runs on Kubernetes framework.
+The [`HugeGraph-Computer`](https://github.com/apache/incubator-hugegraph-computer) is a distributed graph processing system for HugeGraph (OLAP). It is an implementation of [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf). It runs on Kubernetes framework.
 
 ### Features
 
@@ -20,16 +20,16 @@ The `HugeGraph-Computer` is a distributed graph processing system for HugeGraph 
 
 ## 2 Get Started
 
-There are two ways to get HugeGraph-Computer:
-
-- Download the compiled tarball
-- Clone source code then compile and package
-
 ### 2.1 Run PageRank algorithm locally
 
 > To run algorithm with HugeGraph-Computer, you need to install 64-bit JRE/JDK 11 or later versions.
 >
 > You also need to deploy HugeGraph-Server and [Etcd](https://etcd.io/docs/v3.5/quickstart/).
+
+There are two ways to get HugeGraph-Computer:
+
+- Download the compiled tarball
+- Clone source code then compile and package
 
 #### 2.1 Download the compiled archive
 
@@ -192,9 +192,9 @@ kubectl get event --field-selector reason=ComputerJobSucceed --field-selector in
 
 If the output to `Hugegraph-Server` is consistent with Locally, if output to `HDFS`, please check the result file in the directory of `/hugegraph-computer/results/{jobId}` directory.
 
-### 3 Built-In algorithms document
+## 3 Built-In algorithms document
 
-#### 3.1  Supported algorithms list:
+### 3.1 Supported algorithms list:
 
 ###### Centrality Algorithm:
 
@@ -218,10 +218,10 @@ If the output to `Hugegraph-Server` is consistent with Locally, if output to `HD
 
 More algorithms please see: [Built-In algorithms](https://github.com/apache/hugegraph-computer/tree/master/computer-algorithm/src/main/java/org/apache/hugegraph/computer/algorithm)
 
-#### 3.2 Algorithm describe
+### 3.2 Algorithm describe
 
 TODO
 
-### 4 Algorithm development guide
+## 4 Algorithm development guide
 
 TODO

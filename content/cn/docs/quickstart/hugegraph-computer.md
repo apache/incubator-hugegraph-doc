@@ -6,7 +6,7 @@ weight: 7
 
 ## 1 HugeGraph-Computer 概述
 
-`HugeGraph-Computer` 是分布式图处理系统 (OLAP). 它是 [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf) 的一个实现. 它可以运行在 Kubernetes 上。
+[`HugeGraph-Computer`](https://github.com/apache/incubator-hugegraph-computer) 是分布式图处理系统 (OLAP). 它是 [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf) 的一个实现. 它可以运行在 Kubernetes 上。
 
 ### 特性
 
@@ -26,12 +26,12 @@ weight: 7
 >
 > 还需要首先部署 HugeGraph-Server 和 [Etcd](https://etcd.io/docs/v3.5/quickstart/).
 
-#### 2.1 Download the compiled archive
-
 有两种方式可以获取 HugeGraph-Computer：
 
 - 下载已编译的压缩包
 - 克隆源码编译打包
+
+#### 2.1 Download the compiled archive
 
 下载最新版本的 HugeGraph-Computer release 包：
 
@@ -192,9 +192,9 @@ kubectl get event --field-selector reason=ComputerJobSucceed --field-selector in
 
 如果输出到 `Hugegraph-Server` 则与 Locally 模式一致，如果输出到 `HDFS` ，请检查 `hugegraph-computerresults{jobId}`目录下的结果文件。
 
-### 3 内置算法文档
+## 3 内置算法文档
 
-#### 3.1  支持的算法列表:
+### 3.1 支持的算法列表:
 
 ###### 中心性算法:
 
@@ -218,10 +218,10 @@ kubectl get event --field-selector reason=ComputerJobSucceed --field-selector in
 
 更多算法请看: [Built-In algorithms](https://github.com/apache/hugegraph-computer/tree/master/computer-algorithm/src/main/java/org/apache/hugegraph/computer/algorithm)
 
-#### 3.2 算法描述
+### 3.2 算法描述
 
 TODO
 
-### 4 算法开发指南
+## 4 算法开发指南
 
 TODO
