@@ -2575,7 +2575,7 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;h3 id="45-more-information-about-example">4.5 More Information About Example&lt;/h3>
 &lt;p>See&lt;a href="/docs/clients/hugegraph-client">Introduce basic API of HugeGraph-Client&lt;/a>.&lt;/p></description></item><item><title>Docs: HugeGraph-Computer Quick Start</title><link>/docs/quickstart/hugegraph-computer/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-computer/</guid><description>
 &lt;h2 id="1-hugegraph-computer-overview">1 HugeGraph-Computer Overview&lt;/h2>
-&lt;p>The &lt;code>HugeGraph-Computer&lt;/code> is a distributed graph processing system for HugeGraph (OLAP). It is an implementation of &lt;a href="https://kowshik.github.io/JPregel/pregel_paper.pdf">Pregel&lt;/a>. It runs on Kubernetes framework.&lt;/p>
+&lt;p>The &lt;a href="https://github.com/apache/incubator-hugegraph-computer">&lt;code>HugeGraph-Computer&lt;/code>&lt;/a> is a distributed graph processing system for HugeGraph (OLAP). It is an implementation of &lt;a href="https://kowshik.github.io/JPregel/pregel_paper.pdf">Pregel&lt;/a>. It runs on Kubernetes framework.&lt;/p>
 &lt;h3 id="features">Features&lt;/h3>
 &lt;ul>
 &lt;li>Support distributed MPP graph computing, and integrates with HugeGraph as graph input/output storage.&lt;/li>
@@ -2587,16 +2587,16 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;li>Easy to develop a new algorithm. You just need to focus on a vertex only processing just like as in a single server, without worrying about message transfer and memory/storage management.&lt;/li>
 &lt;/ul>
 &lt;h2 id="2-get-started">2 Get Started&lt;/h2>
-&lt;p>There are two ways to get HugeGraph-Computer:&lt;/p>
-&lt;ul>
-&lt;li>Download the compiled tarball&lt;/li>
-&lt;li>Clone source code then compile and package&lt;/li>
-&lt;/ul>
 &lt;h3 id="21-run-pagerank-algorithm-locally">2.1 Run PageRank algorithm locally&lt;/h3>
 &lt;blockquote>
 &lt;p>To run algorithm with HugeGraph-Computer, you need to install 64-bit JRE/JDK 11 or later versions.&lt;/p>
 &lt;p>You also need to deploy HugeGraph-Server and &lt;a href="https://etcd.io/docs/v3.5/quickstart/">Etcd&lt;/a>.&lt;/p>
 &lt;/blockquote>
+&lt;p>There are two ways to get HugeGraph-Computer:&lt;/p>
+&lt;ul>
+&lt;li>Download the compiled tarball&lt;/li>
+&lt;li>Clone source code then compile and package&lt;/li>
+&lt;/ul>
 &lt;h4 id="21-download-the-compiled-archive">2.1 Download the compiled archive&lt;/h4>
 &lt;p>Download the latest version of the HugeGraph-Computer release package:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://github.com/apache/hugegraph-computer/releases/download/v&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>/hugegraph-loader-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>.tar.gz
@@ -2694,8 +2694,8 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get event --field-selector &lt;span style="color:#000">reason&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>ComputerJobSucceed --field-selector involvedObject.name&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>pagerank-sample -n hugegraph-computer-system
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="229-query-algorithm-results">2.2.9 Query algorithm results&lt;/h4>
 &lt;p>If the output to &lt;code>Hugegraph-Server&lt;/code> is consistent with Locally, if output to &lt;code>HDFS&lt;/code>, please check the result file in the directory of &lt;code>/hugegraph-computer/results/{jobId}&lt;/code> directory.&lt;/p>
-&lt;h3 id="3-built-in-algorithms-document">3 Built-In algorithms document&lt;/h3>
-&lt;h4 id="31--supported-algorithms-list">3.1 Supported algorithms list:&lt;/h4>
+&lt;h2 id="3-built-in-algorithms-document">3 Built-In algorithms document&lt;/h2>
+&lt;h3 id="31-supported-algorithms-list">3.1 Supported algorithms list:&lt;/h3>
 &lt;h6 id="centrality-algorithm">Centrality Algorithm:&lt;/h6>
 &lt;ul>
 &lt;li>PageRank&lt;/li>
@@ -2717,7 +2717,7 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;li>RingsDetectionWithFilter&lt;/li>
 &lt;/ul>
 &lt;p>More algorithms please see: &lt;a href="https://github.com/apache/hugegraph-computer/tree/master/computer-algorithm/src/main/java/org/apache/hugegraph/computer/algorithm">Built-In algorithms&lt;/a>&lt;/p>
-&lt;h4 id="32-algorithm-describe">3.2 Algorithm describe&lt;/h4>
+&lt;h3 id="32-algorithm-describe">3.2 Algorithm describe&lt;/h3>
 &lt;p>TODO&lt;/p>
-&lt;h3 id="4-algorithm-development-guide">4 Algorithm development guide&lt;/h3>
+&lt;h2 id="4-algorithm-development-guide">4 Algorithm development guide&lt;/h2>
 &lt;p>TODO&lt;/p></description></item></channel></rss>

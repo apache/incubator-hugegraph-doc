@@ -2560,7 +2560,7 @@ HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
 &lt;h3 id="45-example示例说明">4.5 Example示例说明&lt;/h3>
 &lt;p>示例说明见&lt;a href="/docs/clients/hugegraph-client">HugeGraph-Client基本API介绍&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph-Computer Quick Start</title><link>/cn/docs/quickstart/hugegraph-computer/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-computer/</guid><description>
 &lt;h2 id="1-hugegraph-computer-概述">1 HugeGraph-Computer 概述&lt;/h2>
-&lt;p>&lt;code>HugeGraph-Computer&lt;/code> 是分布式图处理系统 (OLAP). 它是 &lt;a href="https://kowshik.github.io/JPregel/pregel_paper.pdf">Pregel&lt;/a> 的一个实现. 它可以运行在 Kubernetes 上。&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/incubator-hugegraph-computer">&lt;code>HugeGraph-Computer&lt;/code>&lt;/a> 是分布式图处理系统 (OLAP). 它是 &lt;a href="https://kowshik.github.io/JPregel/pregel_paper.pdf">Pregel&lt;/a> 的一个实现. 它可以运行在 Kubernetes 上。&lt;/p>
 &lt;h3 id="特性">特性&lt;/h3>
 &lt;ul>
 &lt;li>支持分布式MPP图计算，集成HugeGraph作为图输入输出存储。&lt;/li>
@@ -2577,12 +2577,12 @@ HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
 &lt;p>要使用 HugeGraph-Computer 运行算法，您需要安装 64 位 JREJDK 11 或更高版本。&lt;/p>
 &lt;p>还需要首先部署 HugeGraph-Server 和 &lt;a href="https://etcd.io/docs/v3.5/quickstart/">Etcd&lt;/a>.&lt;/p>
 &lt;/blockquote>
-&lt;h4 id="21-download-the-compiled-archive">2.1 Download the compiled archive&lt;/h4>
 &lt;p>有两种方式可以获取 HugeGraph-Computer：&lt;/p>
 &lt;ul>
 &lt;li>下载已编译的压缩包&lt;/li>
 &lt;li>克隆源码编译打包&lt;/li>
 &lt;/ul>
+&lt;h4 id="21-download-the-compiled-archive">2.1 Download the compiled archive&lt;/h4>
 &lt;p>下载最新版本的 HugeGraph-Computer release 包：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://github.com/apache/hugegraph-computer/releases/download/v&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>/hugegraph-loader-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxvf hugegraph-computer-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>.tar.gz
@@ -2679,8 +2679,8 @@ HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get event --field-selector &lt;span style="color:#000">reason&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>ComputerJobSucceed --field-selector involvedObject.name&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>pagerank-sample -n hugegraph-computer-system
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="229-查询算法结果">2.2.9 查询算法结果&lt;/h4>
 &lt;p>如果输出到 &lt;code>Hugegraph-Server&lt;/code> 则与 Locally 模式一致，如果输出到 &lt;code>HDFS&lt;/code> ，请检查 &lt;code>hugegraph-computerresults{jobId}&lt;/code>目录下的结果文件。&lt;/p>
-&lt;h3 id="3-内置算法文档">3 内置算法文档&lt;/h3>
-&lt;h4 id="31--支持的算法列表">3.1 支持的算法列表:&lt;/h4>
+&lt;h2 id="3-内置算法文档">3 内置算法文档&lt;/h2>
+&lt;h3 id="31-支持的算法列表">3.1 支持的算法列表:&lt;/h3>
 &lt;h6 id="中心性算法">中心性算法:&lt;/h6>
 &lt;ul>
 &lt;li>PageRank&lt;/li>
@@ -2702,7 +2702,7 @@ HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
 &lt;li>RingsDetectionWithFilter&lt;/li>
 &lt;/ul>
 &lt;p>更多算法请看: &lt;a href="https://github.com/apache/hugegraph-computer/tree/master/computer-algorithm/src/main/java/org/apache/hugegraph/computer/algorithm">Built-In algorithms&lt;/a>&lt;/p>
-&lt;h4 id="32-算法描述">3.2 算法描述&lt;/h4>
+&lt;h3 id="32-算法描述">3.2 算法描述&lt;/h3>
 &lt;p>TODO&lt;/p>
-&lt;h3 id="4-算法开发指南">4 算法开发指南&lt;/h3>
+&lt;h2 id="4-算法开发指南">4 算法开发指南&lt;/h2>
 &lt;p>TODO&lt;/p></description></item></channel></rss>

@@ -2192,7 +2192,7 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;tr>
 &lt;td>log4jXml&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>The log4j.xml path for computer job.&lt;/td>
+&lt;td>The content of log4j.xml for computer job.&lt;/td>
 &lt;td>false&lt;/td>
 &lt;/tr>
 &lt;tr>
