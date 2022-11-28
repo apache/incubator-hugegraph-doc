@@ -140,7 +140,7 @@ weight: 5
 | workerCpu       |                         | The cpu limit of worker, the unit can be 'm' or without unit detail please refer to：[https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu) | false    |
 | masterMemory    |                         | The memory limit of master, the unit can be one of Ei、Pi、Ti、Gi、Mi、Ki detail please refer to：[https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory) | false    |
 | workerMemory    |                         | The memory limit of worker, the unit can be one of Ei、Pi、Ti、Gi、Mi、Ki detail please refer to：[https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory) | false    |
-| log4jXml        |                         | The log4j.xml path for computer job.                         | false    |
+| log4jXml        |                         | The content of log4j.xml for computer job.                   | false    |
 | jarFile         |                         | The jar path of computer algorithm.                          | false    |
 | remoteJarUri    |                         | The remote jar uri of computer algorithm, it will overlay algorithm image. | false    |
 | jvmOptions      |                         | The java startup parameters of computer job.                 | false    |
