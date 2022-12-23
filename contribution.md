@@ -18,10 +18,10 @@ U should ensure NPM & Hugo binary [download url](https://github.com/gohugoio/hug
 # 0. install npm & hugo if you don't have it
 
 # Mac version (0.95 extend)
-wget https://github.do/https://github.com/gohugoio/hugo/releases/download/v0.95.0/hugo_extended_0.95.0_macOS-64bit.tar.gz
+wget https://github.com/gohugoio/hugo/releases/download/v0.95.0/hugo_extended_0.95.0_macOS-64bit.tar.gz
 
 # Linux version (0.95 extend)
-wget https://github.do/https://github.com/gohugoio/hugo/releases/download/v0.95.0/hugo_extended_0.95.0_Linux-64bit.tar.gz
+wget https://github.com/gohugoio/hugo/releases/download/v0.95.0/hugo_extended_0.95.0_Linux-64bit.tar.gz
 
 # 解压后 hugo 是单二进制文件, 可直接使用, 或推荐放 /usr/bin 及环境变量下.
 sudo install hugo /usr/bin # 如果 mac 提示没有权限, 你可以直接使用它, 也可以 mv hugo /usr/bin 代替
