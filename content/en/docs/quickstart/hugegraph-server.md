@@ -281,6 +281,12 @@ serializer=hbase
 # hbase backend config
 hbase.hosts=localhost
 hbase.port=2181
+# IMPORTANT: recommend to modify the HBase partition number
+#            by the actual/env data amount & RS amount before init store
+#            It will influence the load speed a lot
+#hbase.enable_partition=true
+#hbase.vertex_partitions=10
+#hbase.edge_partitions=30
 ```
 
 Initialize the database (required only on first startup)
