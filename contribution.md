@@ -27,13 +27,13 @@ wget https://github.com/gohugoio/hugo/releases/download/v0.95.0/hugo_extended_0.
 sudo install hugo /usr/bin # 如果 mac 提示没有权限, 你可以直接使用它, 也可以 mv hugo /usr/bin 代替
 
 # 1. download website's source code
-git clone https://github.com/hugegraph/hugegraph-doc.git master
+git clone https://github.com/hugegraph/hugegraph-doc.git website
 
 # if download slowly or failed, try the proxy url
-git clone https://api.mtr.pub/hugegraph/hugegraph-doc.git master # or https://github.do/https://github.com/hugegraph/hugegraph-doc.git
+git clone https://api.mtr.pub/hugegraph/hugegraph-doc.git website # or https://github.do/https://github.com/hugegraph/hugegraph-doc.git
 
 # 2. install npm dependencies in project root dir
-cd master && npm install
+cd website && npm install
 
 # 3. just start server in localhost now (Don't need do anything else)
 hugo server
