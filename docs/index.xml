@@ -1860,6 +1860,53 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;li>修复 MacOS free_memory 计算问题（hugegraph-tools #82）&lt;/li>
 &lt;li>支持备份恢复时指定线程数hugegraph-tools #83）&lt;/li>
 &lt;li>支持动态创建图、克隆图、删除图等命令（hugegraph-tools #95)&lt;/li>
+&lt;/ul></description></item><item><title>Docs: HugeGraph 1.0.0 Release Notes</title><link>/docs/changelog/hugegraph-1.0.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/changelog/hugegraph-1.0.0-release-notes/</guid><description>
+&lt;h3 id="server-api--client">Server (API &amp;amp; Client)&lt;/h3>
+&lt;h4 id="接口更新">接口更新&lt;/h4>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h4 id="其它修改">其它修改&lt;/h4>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h3 id="core--server">Core &amp;amp; Server&lt;/h3>
+&lt;h4 id="功能更新">功能更新&lt;/h4>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h4 id="bug修复">BUG修复&lt;/h4>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h4 id="配置项修改">配置项修改：&lt;/h4>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h4 id="其它修改-1">其它修改&lt;/h4>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h3 id="toolchain">Toolchain&lt;/h3>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h3 id="computer">Computer&lt;/h3>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h3 id="commons">Commons&lt;/h3>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
 &lt;/ul></description></item><item><title>Docs: Schema API</title><link>/docs/clients/restful-api/schema/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/clients/restful-api/schema/</guid><description>
 &lt;h3 id="11-schema">1.1 Schema&lt;/h3>
 &lt;p>HugeGraph 提供单一接口获取某个图的全部 Schema 信息，包括：PropertyKey、VertexLabel、EdgeLabel 和 IndexLabel。&lt;/p>
@@ -7324,7 +7371,57 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;li>8000并发：存在0.01%的错误率，平均耗15ms，拐点应该在7000左右，跟顶点结果匹配；&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;/ul></description></item><item><title>Docs: VertexLabel API</title><link>/docs/clients/restful-api/vertexlabel/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/clients/restful-api/vertexlabel/</guid><description>
+&lt;/ul></description></item><item><title>Docs: Validate Apache Release</title><link>/docs/contribution-guidelines/validate-release/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/contribution-guidelines/validate-release/</guid><description>
+&lt;blockquote>
+&lt;p>TODO: Translate this article to English!&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="验证阶段">验证阶段&lt;/h2>
+&lt;p>当内部的临时发布和打包工作完成后, 其他的社区开发者(尤其是 PMC)需要参与到&lt;a href="https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist">验证环节&lt;/a>确保某个人发布版本的&amp;quot;正确性 + 完整性&amp;quot;, 这里需要&lt;strong>每个人&lt;/strong>都尽量参与, 然后后序&lt;strong>邮件回复&lt;/strong>的时候说明自己&lt;strong>已检查&lt;/strong>了哪些项. (下面是核心项)&lt;/p>
+&lt;h4 id="1-检查-hash-值">1. 检查 hash 值&lt;/h4>
+&lt;p>首先需要检查 &lt;code>source + binary&lt;/code> 包的文件完整性, 通过 &lt;code>shasum&lt;/code> 进行校验, 确保和发布到 apache/github 上的 hash 值一致 (一般是 sha512), 这里同0x02的最后一步检验.&lt;/p>
+&lt;h4 id="2-检查-gpg-签名">2. 检查 gpg 签名&lt;/h4>
+&lt;p>这个就是为了确保发布的包是由&lt;strong>可信赖&lt;/strong>的人上传的, 假设 tom 签名后上传, 其他人应该下载 A 的&lt;strong>公钥&lt;/strong>然后进行&lt;strong>签名确认&lt;/strong>, 相关命令:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 1. 下载项目可信赖公钥到本地 (首次需要)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl xxx &amp;gt;&amp;gt; PK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg --import PK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 1.2 等待响应后输入 trust 表示信任 tom 的公钥 (其他人名类似)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg -edit-key tom
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 2. 检查签名 (可用 0x03 章节的第 ⑧ 步的 for 循环脚本批量遍历)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg --verify xx.asc xxx-source.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg --verify xx.asc xxx-binary.tar.gz &lt;span style="color:#8f5902;font-style:italic"># 注: 我们目前没有 binary 后缀&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>先确认了整体的完整性/一致性, 然后接下来确认具体的内容 (&lt;strong>关键&lt;/strong>)&lt;/p>
+&lt;h4 id="3-检查压缩包内容">3. 检查压缩包内容&lt;/h4>
+&lt;p>这里分源码包 + 二进制包两个方面, 源码包更为严格, 挑核心的部分说 (完整的列表参考官方 &lt;a href="https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist">Wiki&lt;/a>, 比较长)&lt;/p>
+&lt;p>首先我们需要从 apache 官方的 &lt;code>release-candidate&lt;/code> 地址下载包到本地 (地址: &lt;code>dist.apache.org/repos/dist/dev/hugegraph/&lt;/code>)&lt;/p>
+&lt;h5 id="a-源码包">A. 源码包&lt;/h5>
+&lt;p>解压 &lt;code>xxx-hugegraph-source.tar.gz&lt;/code>后, 进行如下检查:&lt;/p>
+&lt;ol>
+&lt;li>文件夹都带有 &lt;code>incubating&lt;/code>, 且不存在&lt;strong>空的&lt;/strong>文件/文件夹&lt;/li>
+&lt;li>存在&lt;code>DISCLAIMER&lt;/code>文件&lt;/li>
+&lt;li>存在 &lt;code>LICENSE&lt;/code> + &lt;code>NOTICE&lt;/code> 文件并且内容正常&lt;/li>
+&lt;li>&lt;strong>不存在&lt;/strong>任何二进制文件&lt;/li>
+&lt;li>源码文件都包含标准 &lt;code>ASF License&lt;/code> 头 (这个用插件跑一下为主)&lt;/li>
+&lt;li>检查每个父/子模块的 &lt;code>pom.xml&lt;/code> 版本号是否一致 (且符合期望)&lt;/li>
+&lt;li>检查前 3 ~ 5 个 commit 提交, 点进去看看是否修改处和源码文件一致&lt;/li>
+&lt;li>最后, 确保源码可以正常/正确编译 (然后看看测试和规范)&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 同时也可以检查一下代码风格是否符合规范, 不符合的可以放下一次调整&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn clean &lt;span style="color:#204a87">test&lt;/span> -Dcheckstyle.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">false&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="b-二进制包">B. 二进制包&lt;/h5>
+&lt;p>解压 &lt;code>xxx-hugegraph.tar.gz&lt;/code>后, 进行如下检查:&lt;/p>
+&lt;ol>
+&lt;li>文件夹都带有 &lt;code>incubating&lt;/code>&lt;/li>
+&lt;li>存在 &lt;code>LICENSE&lt;/code> + &lt;code>NOTICE&lt;/code> 文件并且内容正常&lt;/li>
+&lt;li>通过 gpg 命令确认每个文件的签名正常&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>注:&lt;/strong> 如果二进制包里面引入了第三方依赖, 则需要更新 LICENSE, 加入第三方依赖的 LICENSE; 若第三方依赖 LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更新我们的 NOTICE 文件&lt;/p>
+&lt;h4 id="4-检查官网以及-github-等页面">4. 检查官网以及 github 等页面&lt;/h4>
+&lt;ol>
+&lt;li>确保官网至少满足 &lt;a href="https://whimsy.apache.org/pods/project/hugegraph">apache website check&lt;/a>, 以及没有死链等&lt;/li>
+&lt;li>更新&lt;strong>下载链接&lt;/strong>以及版本更新说明&lt;/li>
+&lt;li>&amp;hellip;&lt;/li>
+&lt;/ol></description></item><item><title>Docs: VertexLabel API</title><link>/docs/clients/restful-api/vertexlabel/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/clients/restful-api/vertexlabel/</guid><description>
 &lt;h3 id="13-vertexlabel">1.3 VertexLabel&lt;/h3>
 &lt;p>假设已经创建好了1.1.3中列出来的 PropertyKeys&lt;/p>
 &lt;p>Params说明&lt;/p>
@@ -15465,591 +15562,4 @@ P.gte(18)），properties如果为null表示任意属性均可，如果属性名
 &lt;p>9.2 This Agreement sets out the entire agreement between You and Us for Your Contributions to Us and overrides all other agreements or understandings.&lt;/p>
 &lt;p>9.3 In case of Your death, this agreement shall continue with Your heirs. In case of more than one heir, all heirs must exercise their rights through a commonly authorized person.&lt;/p>
 &lt;p>9.4 If any provision of this Agreement is found void and unenforceable, such provision will be replaced to the extent possible with a provision that comes closest to the meaning of the original provision and that is enforceable. The terms and conditions set forth in this Agreement shall apply notwithstanding any failure of essential purpose of this Agreement or any limited remedy to the maximum extent possible under law.&lt;/p>
-&lt;p>9.5 You agree to notify Us of any facts or circumstances of which you become aware that would make this Agreement inaccurate in any respect.&lt;/p></description></item><item><title>Docs:</title><link>/docs/performance/hugegraph-benchmark-0.4.4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/performance/hugegraph-benchmark-0.4.4/</guid><description>
-&lt;h3 id="1-测试环境">1 测试环境&lt;/h3>
-&lt;h4 id="11-硬件信息">1.1 硬件信息&lt;/h4>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>CPU&lt;/th>
-&lt;th>Memory&lt;/th>
-&lt;th>网卡&lt;/th>
-&lt;th>磁盘&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>48 Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz&lt;/td>
-&lt;td>128G&lt;/td>
-&lt;td>10000Mbps&lt;/td>
-&lt;td>750GB SSD&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h4 id="12-软件信息">1.2 软件信息&lt;/h4>
-&lt;h5 id="121-测试用例">1.2.1 测试用例&lt;/h5>
-&lt;p>测试使用&lt;a href="https://github.com/socialsensor/graphdb-benchmarks">graphdb-benchmark&lt;/a>，一个图数据库测试集。该测试集主要包含4类测试：&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>Massive Insertion，批量插入顶点和边，一定数量的顶点或边一次性提交&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Single Insertion，单条插入，每个顶点或者每条边立即提交&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Query，主要是图数据库的基本查询操作：&lt;/p>
-&lt;ul>
-&lt;li>Find Neighbors，查询所有顶点的邻居&lt;/li>
-&lt;li>Find Adjacent Nodes，查询所有边的邻接顶点&lt;/li>
-&lt;li>Find Shortest Path，查询第一个顶点到100个随机顶点的最短路径&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>Clustering，基于Louvain Method的社区发现算法&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h5 id="122-测试数据集">1.2.2 测试数据集&lt;/h5>
-&lt;p>测试使用人造数据和真实数据&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>MIW、SIW和QW使用SNAP数据集&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>&lt;a href="http://snap.stanford.edu/data/email-Enron.html">Enron Dataset&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;a href="http://snap.stanford.edu/data/amazon0601.html">Amazon dataset&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;a href="http://snap.stanford.edu/data/com-Youtube.html">Youtube dataset&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;a href="http://snap.stanford.edu/data/com-LiveJournal.html">LiveJournal dataset&lt;/a>&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>CW使用&lt;a href="https://sites.google.com/site/andrealancichinetti/files">LFR-Benchmark generator&lt;/a>生成的人造数据&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h6 id="本测试用到的数据集规模">本测试用到的数据集规模&lt;/h6>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>名称&lt;/th>
-&lt;th>vertex数目&lt;/th>
-&lt;th>edge数目&lt;/th>
-&lt;th>文件大小&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>email-enron.txt&lt;/td>
-&lt;td>36,691&lt;/td>
-&lt;td>367,661&lt;/td>
-&lt;td>4MB&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>com-youtube.ungraph.txt&lt;/td>
-&lt;td>1,157,806&lt;/td>
-&lt;td>2,987,624&lt;/td>
-&lt;td>38.7MB&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>amazon0601.txt&lt;/td>
-&lt;td>403,393&lt;/td>
-&lt;td>3,387,388&lt;/td>
-&lt;td>47.9MB&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h4 id="13-服务配置">1.3 服务配置&lt;/h4>
-&lt;ul>
-&lt;li>HugeGraph版本：0.4.4，RestServer和Gremlin Server和backends都在同一台服务器上&lt;/li>
-&lt;li>Cassandra版本：cassandra-3.10，commit-log 和data共用SSD&lt;/li>
-&lt;li>RocksDB版本：rocksdbjni-5.8.6&lt;/li>
-&lt;li>Titan版本：0.5.4, 使用thrift+Cassandra模式&lt;/li>
-&lt;/ul>
-&lt;blockquote>
-&lt;p>graphdb-benchmark适配的Titan版本为0.5.4&lt;/p>
-&lt;/blockquote>
-&lt;h3 id="2-测试结果">2 测试结果&lt;/h3>
-&lt;h4 id="21-batch插入性能">2.1 Batch插入性能&lt;/h4>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Backend&lt;/th>
-&lt;th>email-enron(30w)&lt;/th>
-&lt;th>amazon0601(300w)&lt;/th>
-&lt;th>com-youtube.ungraph(300w)&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>Titan&lt;/td>
-&lt;td>9.516&lt;/td>
-&lt;td>88.123&lt;/td>
-&lt;td>111.586&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>RocksDB&lt;/td>
-&lt;td>2.345&lt;/td>
-&lt;td>14.076&lt;/td>
-&lt;td>16.636&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Cassandra&lt;/td>
-&lt;td>11.930&lt;/td>
-&lt;td>108.709&lt;/td>
-&lt;td>101.959&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Memory&lt;/td>
-&lt;td>3.077&lt;/td>
-&lt;td>15.204&lt;/td>
-&lt;td>13.841&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;p>&lt;em>说明&lt;/em>&lt;/p>
-&lt;ul>
-&lt;li>表头&amp;quot;（）&amp;ldquo;中数据是数据规模，以边为单位&lt;/li>
-&lt;li>表中数据是批量插入的时间，单位是s&lt;/li>
-&lt;li>例如，HugeGraph使用RocksDB插入amazon0601数据集的300w条边，花费14.076s，速度约为21w edges/s&lt;/li>
-&lt;/ul>
-&lt;h5 id="结论">结论&lt;/h5>
-&lt;ul>
-&lt;li>RocksDB和Memory后端插入性能优于Cassandra&lt;/li>
-&lt;li>HugeGraph和Titan同样使用Cassandra作为后端的情况下，插入性能接近&lt;/li>
-&lt;/ul>
-&lt;h4 id="22-遍历性能">2.2 遍历性能&lt;/h4>
-&lt;h5 id="221-术语说明">2.2.1 术语说明&lt;/h5>
-&lt;ul>
-&lt;li>FN(Find Neighbor), 遍历所有vertex, 根据vertex查邻接edge, 通过edge和vertex查other vertex&lt;/li>
-&lt;li>FA(Find Adjacent), 遍历所有edge，根据edge获得source vertex和target vertex&lt;/li>
-&lt;/ul>
-&lt;h5 id="222-fn性能">2.2.2 FN性能&lt;/h5>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Backend&lt;/th>
-&lt;th>email-enron(3.6w)&lt;/th>
-&lt;th>amazon0601(40w)&lt;/th>
-&lt;th>com-youtube.ungraph(120w)&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>Titan&lt;/td>
-&lt;td>7.724&lt;/td>
-&lt;td>70.935&lt;/td>
-&lt;td>128.884&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>RocksDB&lt;/td>
-&lt;td>8.876&lt;/td>
-&lt;td>65.852&lt;/td>
-&lt;td>63.388&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Cassandra&lt;/td>
-&lt;td>13.125&lt;/td>
-&lt;td>126.959&lt;/td>
-&lt;td>102.580&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Memory&lt;/td>
-&lt;td>22.309&lt;/td>
-&lt;td>207.411&lt;/td>
-&lt;td>165.609&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;p>&lt;em>说明&lt;/em>&lt;/p>
-&lt;ul>
-&lt;li>表头&amp;rdquo;（）&amp;ldquo;中数据是数据规模，以顶点为单位&lt;/li>
-&lt;li>表中数据是遍历顶点花费的时间，单位是s&lt;/li>
-&lt;li>例如，HugeGraph使用RocksDB后端遍历amazon0601的所有顶点，并查找邻接边和另一顶点，总共耗时65.852s&lt;/li>
-&lt;/ul>
-&lt;h5 id="223-fa性能">2.2.3 FA性能&lt;/h5>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Backend&lt;/th>
-&lt;th>email-enron(30w)&lt;/th>
-&lt;th>amazon0601(300w)&lt;/th>
-&lt;th>com-youtube.ungraph(300w)&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>Titan&lt;/td>
-&lt;td>7.119&lt;/td>
-&lt;td>63.353&lt;/td>
-&lt;td>115.633&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>RocksDB&lt;/td>
-&lt;td>6.032&lt;/td>
-&lt;td>64.526&lt;/td>
-&lt;td>52.721&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Cassandra&lt;/td>
-&lt;td>9.410&lt;/td>
-&lt;td>102.766&lt;/td>
-&lt;td>94.197&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Memory&lt;/td>
-&lt;td>12.340&lt;/td>
-&lt;td>195.444&lt;/td>
-&lt;td>140.89&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;p>&lt;em>说明&lt;/em>&lt;/p>
-&lt;ul>
-&lt;li>表头&amp;rdquo;（）&amp;ldquo;中数据是数据规模，以边为单位&lt;/li>
-&lt;li>表中数据是遍历边花费的时间，单位是s&lt;/li>
-&lt;li>例如，HugeGraph使用RocksDB后端遍历amazon0601的所有边，并查询每条边的两个顶点，总共耗时64.526s&lt;/li>
-&lt;/ul>
-&lt;h6 id="结论-1">结论&lt;/h6>
-&lt;ul>
-&lt;li>HugeGraph RocksDB &amp;gt; Titan thrift+Cassandra &amp;gt; HugeGraph Cassandra &amp;gt; HugeGraph Memory&lt;/li>
-&lt;/ul>
-&lt;h4 id="23-hugegraph-图常用分析方法性能">2.3 HugeGraph-图常用分析方法性能&lt;/h4>
-&lt;h5 id="术语说明">术语说明&lt;/h5>
-&lt;ul>
-&lt;li>FS(Find Shortest Path), 寻找最短路径&lt;/li>
-&lt;li>K-neighbor，从起始vertex出发，通过K跳边能够到达的所有顶点, 包括1, 2, 3&amp;hellip;(K-1), K跳边可达vertex&lt;/li>
-&lt;li>K-out, 从起始vertex出发，恰好经过K跳out边能够到达的顶点&lt;/li>
-&lt;/ul>
-&lt;h5 id="fs性能">FS性能&lt;/h5>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Backend&lt;/th>
-&lt;th>email-enron(30w)&lt;/th>
-&lt;th>amazon0601(300w)&lt;/th>
-&lt;th>com-youtube.ungraph(300w)&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>Titan&lt;/td>
-&lt;td>11.333&lt;/td>
-&lt;td>0.313&lt;/td>
-&lt;td>376.06&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>RocksDB&lt;/td>
-&lt;td>44.391&lt;/td>
-&lt;td>2.221&lt;/td>
-&lt;td>268.792&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Cassandra&lt;/td>
-&lt;td>39.845&lt;/td>
-&lt;td>3.337&lt;/td>
-&lt;td>331.113&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Memory&lt;/td>
-&lt;td>35.638&lt;/td>
-&lt;td>2.059&lt;/td>
-&lt;td>388.987&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;p>&lt;em>说明&lt;/em>&lt;/p>
-&lt;ul>
-&lt;li>表头&amp;rdquo;（）&amp;ldquo;中数据是数据规模，以边为单位&lt;/li>
-&lt;li>表中数据是找到&lt;strong>从第一个顶点出发到达随机选择的100个顶点的最短路径&lt;/strong>的时间，单位是s&lt;/li>
-&lt;li>例如，HugeGraph使用RocksDB查找第一个顶点到100个随机顶点的最短路径，总共耗时2.059s&lt;/li>
-&lt;/ul>
-&lt;h6 id="结论-2">结论&lt;/h6>
-&lt;ul>
-&lt;li>在数据规模小或者顶点关联关系少的场景下，Titan最短路径性能优于HugeGraph&lt;/li>
-&lt;li>随着数据规模增大且顶点的关联度增高，HugeGraph最短路径性能优于Titan&lt;/li>
-&lt;/ul>
-&lt;h5 id="k-neighbor性能">K-neighbor性能&lt;/h5>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>顶点&lt;/th>
-&lt;th>深度&lt;/th>
-&lt;th>一度&lt;/th>
-&lt;th>二度&lt;/th>
-&lt;th>三度&lt;/th>
-&lt;th>四度&lt;/th>
-&lt;th>五度&lt;/th>
-&lt;th>六度&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>v1&lt;/td>
-&lt;td>时间&lt;/td>
-&lt;td>0.031s&lt;/td>
-&lt;td>0.033s&lt;/td>
-&lt;td>0.048s&lt;/td>
-&lt;td>0.500s&lt;/td>
-&lt;td>11.27s&lt;/td>
-&lt;td>OOM&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>v111&lt;/td>
-&lt;td>时间&lt;/td>
-&lt;td>0.027s&lt;/td>
-&lt;td>0.034s&lt;/td>
-&lt;td>0.115&lt;/td>
-&lt;td>1.36s&lt;/td>
-&lt;td>OOM&lt;/td>
-&lt;td>&amp;ndash;&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>v1111&lt;/td>
-&lt;td>时间&lt;/td>
-&lt;td>0.039s&lt;/td>
-&lt;td>0.027s&lt;/td>
-&lt;td>0.052s&lt;/td>
-&lt;td>0.511s&lt;/td>
-&lt;td>10.96s&lt;/td>
-&lt;td>OOM&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;p>&lt;em>说明&lt;/em>&lt;/p>
-&lt;ul>
-&lt;li>HugeGraph-Server的JVM内存设置为32GB，数据量过大时会出现OOM&lt;/li>
-&lt;/ul>
-&lt;h5 id="k-out性能">K-out性能&lt;/h5>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>顶点&lt;/th>
-&lt;th>深度&lt;/th>
-&lt;th>一度&lt;/th>
-&lt;th>二度&lt;/th>
-&lt;th>三度&lt;/th>
-&lt;th>四度&lt;/th>
-&lt;th>五度&lt;/th>
-&lt;th>六度&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>v1&lt;/td>
-&lt;td>时间&lt;/td>
-&lt;td>0.054s&lt;/td>
-&lt;td>0.057s&lt;/td>
-&lt;td>0.109s&lt;/td>
-&lt;td>0.526s&lt;/td>
-&lt;td>3.77s&lt;/td>
-&lt;td>OOM&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>度&lt;/td>
-&lt;td>10&lt;/td>
-&lt;td>133&lt;/td>
-&lt;td>2453&lt;/td>
-&lt;td>50,830&lt;/td>
-&lt;td>1,128,688&lt;/td>
-&lt;td>&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>v111&lt;/td>
-&lt;td>时间&lt;/td>
-&lt;td>0.032s&lt;/td>
-&lt;td>0.042s&lt;/td>
-&lt;td>0.136s&lt;/td>
-&lt;td>1.25s&lt;/td>
-&lt;td>20.62s&lt;/td>
-&lt;td>OOM&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>度&lt;/td>
-&lt;td>10&lt;/td>
-&lt;td>211&lt;/td>
-&lt;td>4944&lt;/td>
-&lt;td>113150&lt;/td>
-&lt;td>2,629,970&lt;/td>
-&lt;td>&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>v1111&lt;/td>
-&lt;td>时间&lt;/td>
-&lt;td>0.039s&lt;/td>
-&lt;td>0.045s&lt;/td>
-&lt;td>0.053s&lt;/td>
-&lt;td>1.10s&lt;/td>
-&lt;td>2.92s&lt;/td>
-&lt;td>OOM&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>度&lt;/td>
-&lt;td>10&lt;/td>
-&lt;td>140&lt;/td>
-&lt;td>2555&lt;/td>
-&lt;td>50825&lt;/td>
-&lt;td>1,070,230&lt;/td>
-&lt;td>&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;p>&lt;em>说明&lt;/em>&lt;/p>
-&lt;ul>
-&lt;li>HugeGraph-Server的JVM内存设置为32GB，数据量过大时会出现OOM&lt;/li>
-&lt;/ul>
-&lt;h6 id="结论-3">结论&lt;/h6>
-&lt;ul>
-&lt;li>FS场景，HugeGraph性能优于Titan&lt;/li>
-&lt;li>K-neighbor和K-out场景，HugeGraph能够实现在5度范围内秒级返回结果&lt;/li>
-&lt;/ul>
-&lt;h4 id="24-图综合性能测试-cw">2.4 图综合性能测试-CW&lt;/h4>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>数据库&lt;/th>
-&lt;th>规模1000&lt;/th>
-&lt;th>规模5000&lt;/th>
-&lt;th>规模10000&lt;/th>
-&lt;th>规模20000&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>Titan&lt;/td>
-&lt;td>45.943&lt;/td>
-&lt;td>849.168&lt;/td>
-&lt;td>2737.117&lt;/td>
-&lt;td>9791.46&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Memory(core)&lt;/td>
-&lt;td>41.077&lt;/td>
-&lt;td>1825.905&lt;/td>
-&lt;td>*&lt;/td>
-&lt;td>*&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Cassandra（core）&lt;/td>
-&lt;td>39.783&lt;/td>
-&lt;td>862.744&lt;/td>
-&lt;td>2423.136&lt;/td>
-&lt;td>6564.191&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>RocksDB（core）&lt;/td>
-&lt;td>33.383&lt;/td>
-&lt;td>199.894&lt;/td>
-&lt;td>763.869&lt;/td>
-&lt;td>1677.813&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;p>&lt;em>说明&lt;/em>&lt;/p>
-&lt;ul>
-&lt;li>&amp;ldquo;规模&amp;quot;以顶点为单位&lt;/li>
-&lt;li>表中数据是社区发现完成需要的时间，单位是s，例如HugeGraph使用RocksDB后端在规模10000的数据集，社区聚合不再变化，需要耗时763.869s&lt;/li>
-&lt;li>&amp;ldquo;*&amp;ldquo;表示超过10000s未完成&lt;/li>
-&lt;li>CW测试是CRUD的综合评估&lt;/li>
-&lt;li>后三者分别是HugeGraph的不同后端，该测试中HugeGraph跟Titan一样，没有通过client，直接对core操作&lt;/li>
-&lt;/ul>
-&lt;h5 id="结论-4">结论&lt;/h5>
-&lt;ul>
-&lt;li>HugeGraph在使用Cassandra后端时，性能略优于Titan，随着数据规模的增大，优势越来越明显，数据规模20000时，比Titan快30%&lt;/li>
-&lt;li>HugeGraph在使用RocksDB后端时，性能远高于Titan和HugeGraph的Cassandra后端，分别比两者快了6倍和4倍&lt;/li>
-&lt;/ul></description></item><item><title>Docs:</title><link>/docs/summary/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/summary/</guid><description>
-&lt;h1 id="hugegraph-docs">HugeGraph Docs&lt;/h1>
-&lt;ul>
-&lt;li>&lt;a href="download.md">Download&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h2 id="quickstart">Quickstart&lt;/h2>
-&lt;ul>
-&lt;li>&lt;a href="quickstart/hugegraph-server.md">Install HugeGraph-Server&lt;/a>&lt;/li>
-&lt;li>&lt;a href="quickstart/hugegraph-loader.md">Load data with HugeGraph-Loader&lt;/a>&lt;/li>
-&lt;li>&lt;a href="quickstart/hugegraph-tools.md">Manage with HugeGraph-Tools&lt;/a>&lt;/li>
-&lt;li>&lt;a href="quickstart/hugegraph-hubble.md">Visual with HugeGraph-Hubble&lt;/a>&lt;/li>
-&lt;li>&lt;a href="quickstart/hugegraph-studio.md">Display with HugeGraph-Studio&lt;/a>&lt;/li>
-&lt;li>&lt;a href="quickstart/hugegraph-client.md">Develop with HugeGraph-Client&lt;/a>&lt;/li>
-&lt;li>&lt;a href="quickstart/hugegraph-computer.md">Analysis with HugeGraph-Computer&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h2 id="config">Config&lt;/h2>
-&lt;ul>
-&lt;li>&lt;a href="config/config-guide.md">Config Guide&lt;/a>&lt;/li>
-&lt;li>&lt;a href="config/config-option.md">Config Options&lt;/a>&lt;/li>
-&lt;li>&lt;a href="config/config-authentication.md">Config Authentication&lt;/a>&lt;/li>
-&lt;li>&lt;a href="config/config-https.md">Config HTTPS&lt;/a>&lt;/li>
-&lt;li>&lt;a href="config/config-computer.md">Config Computer&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h2 id="api">API&lt;/h2>
-&lt;ul>
-&lt;li>&lt;a href="clients/hugegraph-api.md">RESTful API&lt;/a>
-&lt;ul>
-&lt;li>&lt;a href="clients/restful-api/schema.md">Schema&lt;/a>&lt;/li>
-&lt;li>&lt;a href="clients/restful-api/propertykey.md">PropertyKey&lt;/a>&lt;/li>
-&lt;li>&lt;a href="clients/restful-api/vertexlabel.md">VertexLabel&lt;/a>&lt;/li>
-&lt;li>&lt;a href="clients/restful-api/edgelabel.md">EdgeLabel&lt;/a>&lt;/li>
-&lt;li>&lt;a href="clients/restful-api/indexlabel.md">IndexLabel&lt;/a>&lt;/li>
-&lt;li>&lt;a href="clients/restful-api/rebuild.md">Rebuild&lt;/a>&lt;/li>
-&lt;li>&lt;a href="clients/restful-api/vertex.md">Vertex&lt;/a>&lt;/li>
-&lt;li>&lt;a href="clients/restful-api/edge.md">Edge&lt;/a>&lt;/li>
-&lt;li>&lt;a href="clients/restful-api/traverser.md">Traverser&lt;/a>&lt;/li>
-&lt;li>&lt;a href="clients/restful-api/rank.md">Rank&lt;/a>&lt;/li>
-&lt;li>&lt;a href="clients/restful-api/variable.md">Variable&lt;/a>&lt;/li>
-&lt;li>&lt;a href="clients/restful-api/graphs.md">Graphs&lt;/a>&lt;/li>
-&lt;li>&lt;a href="clients/restful-api/task.md">Task&lt;/a>&lt;/li>
-&lt;li>&lt;a href="clients/restful-api/gremlin.md">Gremlin&lt;/a>&lt;/li>
-&lt;li>&lt;a href="clients/restful-api/auth.md">Authentication&lt;/a>&lt;/li>
-&lt;li>&lt;a href="clients/restful-api/other.md">Other&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>&lt;a href="clients/hugegraph-client.md">Java Client&lt;/a>&lt;/li>
-&lt;li>&lt;a href="clients/gremlin-console.md">Gremlin Console&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h2 id="guides">Guides&lt;/h2>
-&lt;ul>
-&lt;li>&lt;a href="guides/architectural.md">Architecture Overview&lt;/a>&lt;/li>
-&lt;li>&lt;a href="guides/desgin-concept.md">Design Concepts&lt;/a>&lt;/li>
-&lt;li>&lt;a href="guides/custom-plugin.md">Custom Plugins&lt;/a>&lt;/li>
-&lt;li>&lt;a href="guides/backup-restore.md">Backup Restore&lt;/a>&lt;/li>
-&lt;li>&lt;a href="guides/faq.md">FAQ&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h2 id="query-language">Query Language&lt;/h2>
-&lt;ul>
-&lt;li>&lt;a href="language/hugegraph-gremlin.md">Gremlin Query Language&lt;/a>&lt;/li>
-&lt;li>&lt;a href="language/hugegraph-example.md">HugeGraph Examples&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h2 id="performance">Performance&lt;/h2>
-&lt;ul>
-&lt;li>&lt;a href="performance/hugegraph-benchmark-0.5.6.md">HugeGraph Benchmark Performance&lt;/a>&lt;/li>
-&lt;li>&lt;a href="content/cn/docs/performance/api-preformance/_index.md">HugeGraph API Performance&lt;/a>
-&lt;ul>
-&lt;li>&lt;a href="content/cn/docs/performance/api-preformance/hugegraph-api-0.5.6-RocksDB.md">v0.5.6 Stand-alone(RocksDB)&lt;/a>&lt;/li>
-&lt;li>&lt;a href="content/cn/docs/performance/api-preformance/hugegraph-api-0.5.6-Cassandra.md">v0.5.6 Cluster(Cassandra)&lt;/a>&lt;/li>
-&lt;li>&lt;a href="content/cn/docs/performance/api-preformance/hugegraph-api-0.4.4.md">v0.4.4&lt;/a>&lt;/li>
-&lt;li>&lt;a href="content/cn/docs/performance/api-preformance/hugegraph-api-0.2.md">v0.2&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>&lt;a href="performance/hugegraph-loader-performance.md">HugeGraph-Loader Performance&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h2 id="changelogs">ChangeLogs&lt;/h2>
-&lt;ul>
-&lt;li>&lt;a href="changelog/hugegraph-0.12.0-release-notes.md">Release-0.12.0&lt;/a>&lt;/li>
-&lt;li>&lt;a href="changelog/hugegraph-0.11.2-release-notes.md">Release-0.11.2&lt;/a>&lt;/li>
-&lt;li>&lt;a href="changelog/hugegraph-0.10.4-release-notes.md">Release-0.10.4&lt;/a>&lt;/li>
-&lt;li>&lt;a href="changelog/hugegraph-0.9.2-release-notes.md">Release-0.9.2&lt;/a>&lt;/li>
-&lt;li>&lt;a href="changelog/hugegraph-0.8.0-release-notes.md">Release-0.8.0&lt;/a>&lt;/li>
-&lt;li>&lt;a href="changelog/hugegraph-0.7.4-release-notes.md">Release-0.7.4&lt;/a>&lt;/li>
-&lt;li>&lt;a href="changelog/hugegraph-0.6.1-release-notes.md">Release-0.6.1&lt;/a>&lt;/li>
-&lt;li>&lt;a href="changelog/hugegraph-0.5.6-release-notes.md">Release-0.5.6&lt;/a>&lt;/li>
-&lt;li>&lt;a href="changelog/hugegraph-0.4.4-release-notes.md">Release-0.4.4&lt;/a>&lt;/li>
-&lt;li>&lt;a href="changelog/hugegraph-0.3.3-release-notes.md">Release-0.3.3&lt;/a>&lt;/li>
-&lt;li>&lt;a href="changelog/hugegraph-0.2.4-release-notes.md">Release-0.2.4&lt;/a>&lt;/li>
-&lt;li>&lt;a href="changelog/hugegraph-0.2-release-notes.md">Release-0.2&lt;/a>&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;p>9.5 You agree to notify Us of any facts or circumstances of which you become aware that would make this Agreement inaccurate in any respect.&lt;/p></description></item></channel></rss>

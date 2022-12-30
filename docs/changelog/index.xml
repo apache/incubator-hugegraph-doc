@@ -201,4 +201,51 @@
 &lt;li>修复 MacOS free_memory 计算问题（hugegraph-tools #82）&lt;/li>
 &lt;li>支持备份恢复时指定线程数hugegraph-tools #83）&lt;/li>
 &lt;li>支持动态创建图、克隆图、删除图等命令（hugegraph-tools #95)&lt;/li>
+&lt;/ul></description></item><item><title>Docs: HugeGraph 1.0.0 Release Notes</title><link>/docs/changelog/hugegraph-1.0.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/changelog/hugegraph-1.0.0-release-notes/</guid><description>
+&lt;h3 id="server-api--client">Server (API &amp;amp; Client)&lt;/h3>
+&lt;h4 id="接口更新">接口更新&lt;/h4>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h4 id="其它修改">其它修改&lt;/h4>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h3 id="core--server">Core &amp;amp; Server&lt;/h3>
+&lt;h4 id="功能更新">功能更新&lt;/h4>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h4 id="bug修复">BUG修复&lt;/h4>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h4 id="配置项修改">配置项修改：&lt;/h4>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h4 id="其它修改-1">其它修改&lt;/h4>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h3 id="toolchain">Toolchain&lt;/h3>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h3 id="computer">Computer&lt;/h3>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h3 id="commons">Commons&lt;/h3>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
 &lt;/ul></description></item></channel></rss>

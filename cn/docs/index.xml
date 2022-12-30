@@ -1756,6 +1756,56 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;li>修复 MacOS free_memory 计算问题（hugegraph-tools #82）&lt;/li>
 &lt;li>支持备份恢复时指定线程数hugegraph-tools #83）&lt;/li>
 &lt;li>支持动态创建图、克隆图、删除图等命令（hugegraph-tools #95)&lt;/li>
+&lt;/ul></description></item><item><title>Docs: HugeGraph 1.0.0 Release Notes</title><link>/cn/docs/changelog/hugegraph-1.0.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/changelog/hugegraph-1.0.0-release-notes/</guid><description>
+&lt;blockquote>
+&lt;p>TODO: translate this article to Chinese&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="server-api--client">Server (API &amp;amp; Client)&lt;/h3>
+&lt;h4 id="接口更新">接口更新&lt;/h4>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h4 id="其它修改">其它修改&lt;/h4>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h3 id="core--server">Core &amp;amp; Server&lt;/h3>
+&lt;h4 id="功能更新">功能更新&lt;/h4>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h4 id="bug修复">BUG修复&lt;/h4>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h4 id="配置项修改">配置项修改：&lt;/h4>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h4 id="其它修改-1">其它修改&lt;/h4>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h3 id="toolchain">Toolchain&lt;/h3>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h3 id="computer">Computer&lt;/h3>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h3 id="commons">Commons&lt;/h3>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
 &lt;/ul></description></item><item><title>Docs: Schema API</title><link>/cn/docs/clients/restful-api/schema/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/restful-api/schema/</guid><description>
 &lt;h3 id="11-schema">1.1 Schema&lt;/h3>
 &lt;p>HugeGraph 提供单一接口获取某个图的全部 Schema 信息，包括：PropertyKey、VertexLabel、EdgeLabel 和 IndexLabel。&lt;/p>
@@ -15136,43 +15186,4 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;ul>
 &lt;li>内部依赖包匹配版本检查&lt;/li>
 &lt;li>API匹配版本检查&lt;/li>
-&lt;/ul></description></item><item><title>Docs: Variable API</title><link>/cn/docs/clients/restful-api/variable/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/restful-api/variable/</guid><description>
-&lt;h3 id="51-variables">5.1 Variables&lt;/h3>
-&lt;p>Variables可以用来存储有关整个图的数据，数据按照键值对的方式存取&lt;/p>
-&lt;h4 id="511-创建或者更新某个键值对">5.1.1 创建或者更新某个键值对&lt;/h4>
-&lt;h5 id="method--url">Method &amp;amp; Url&lt;/h5>
-&lt;pre tabindex="0">&lt;code>PUT http://localhost:8080/graphs/hugegraph/variables/name
-&lt;/code>&lt;/pre>&lt;h5 id="request-body">Request Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;data&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;tom&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body">Response Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;tom&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="512-列出全部键值对">5.1.2 列出全部键值对&lt;/h4>
-&lt;h5 id="method--url-1">Method &amp;amp; Url&lt;/h5>
-&lt;pre tabindex="0">&lt;code>GET http://localhost:8080/graphs/hugegraph/variables
-&lt;/code>&lt;/pre>&lt;h5 id="response-status-1">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-1">Response Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;tom&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="513-列出某个键值对">5.1.3 列出某个键值对&lt;/h4>
-&lt;h5 id="method--url-2">Method &amp;amp; Url&lt;/h5>
-&lt;pre tabindex="0">&lt;code>GET http://localhost:8080/graphs/hugegraph/variables/name
-&lt;/code>&lt;/pre>&lt;h5 id="response-status-2">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-2">Response Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;tom&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="514-删除某个键值对">5.1.4 删除某个键值对&lt;/h4>
-&lt;h5 id="method--url-3">Method &amp;amp; Url&lt;/h5>
-&lt;pre tabindex="0">&lt;code>DELETE http://localhost:8080/graphs/hugegraph/variables/name
-&lt;/code>&lt;/pre>&lt;h5 id="response-status-3">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">204&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+&lt;/ul></description></item></channel></rss>
