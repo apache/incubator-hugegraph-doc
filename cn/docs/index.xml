@@ -1756,56 +1756,6 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;li>修复 MacOS free_memory 计算问题（hugegraph-tools #82）&lt;/li>
 &lt;li>支持备份恢复时指定线程数hugegraph-tools #83）&lt;/li>
 &lt;li>支持动态创建图、克隆图、删除图等命令（hugegraph-tools #95)&lt;/li>
-&lt;/ul></description></item><item><title>Docs: HugeGraph 1.0.0 Release Notes</title><link>/cn/docs/changelog/hugegraph-1.0.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/changelog/hugegraph-1.0.0-release-notes/</guid><description>
-&lt;blockquote>
-&lt;p>TODO: translate this article to Chinese&lt;/p>
-&lt;/blockquote>
-&lt;h3 id="server-api--client">Server (API &amp;amp; Client)&lt;/h3>
-&lt;h4 id="接口更新">接口更新&lt;/h4>
-&lt;ul>
-&lt;li>xx&lt;/li>
-&lt;li>xx&lt;/li>
-&lt;/ul>
-&lt;h4 id="其它修改">其它修改&lt;/h4>
-&lt;ul>
-&lt;li>xx&lt;/li>
-&lt;li>xx&lt;/li>
-&lt;/ul>
-&lt;h3 id="core--server">Core &amp;amp; Server&lt;/h3>
-&lt;h4 id="功能更新">功能更新&lt;/h4>
-&lt;ul>
-&lt;li>xx&lt;/li>
-&lt;li>xx&lt;/li>
-&lt;/ul>
-&lt;h4 id="bug修复">BUG修复&lt;/h4>
-&lt;ul>
-&lt;li>xx&lt;/li>
-&lt;li>xx&lt;/li>
-&lt;/ul>
-&lt;h4 id="配置项修改">配置项修改：&lt;/h4>
-&lt;ul>
-&lt;li>xx&lt;/li>
-&lt;li>xx&lt;/li>
-&lt;/ul>
-&lt;h4 id="其它修改-1">其它修改&lt;/h4>
-&lt;ul>
-&lt;li>xx&lt;/li>
-&lt;li>xx&lt;/li>
-&lt;/ul>
-&lt;h3 id="toolchain">Toolchain&lt;/h3>
-&lt;ul>
-&lt;li>xx&lt;/li>
-&lt;li>xx&lt;/li>
-&lt;/ul>
-&lt;h3 id="computer">Computer&lt;/h3>
-&lt;ul>
-&lt;li>xx&lt;/li>
-&lt;li>xx&lt;/li>
-&lt;/ul>
-&lt;h3 id="commons">Commons&lt;/h3>
-&lt;ul>
-&lt;li>xx&lt;/li>
-&lt;li>xx&lt;/li>
 &lt;/ul></description></item><item><title>Docs: Schema API</title><link>/cn/docs/clients/restful-api/schema/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/restful-api/schema/</guid><description>
 &lt;h3 id="11-schema">1.1 Schema&lt;/h3>
 &lt;p>HugeGraph 提供单一接口获取某个图的全部 Schema 信息，包括：PropertyKey、VertexLabel、EdgeLabel 和 IndexLabel。&lt;/p>
@@ -2229,7 +2179,116 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;p>####### 结论：&lt;/p>
 &lt;ul>
 &lt;li>并发13000，吞吐量是12225，边的按id查询的并发能力为13000，平均延时为12ms&lt;/li>
-&lt;/ul></description></item><item><title>Docs: HugeGraph 配置项</title><link>/cn/docs/config/config-option/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/config/config-option/</guid><description>
+&lt;/ul></description></item><item><title>Docs: 如何参与 HugeGraph 社区</title><link>/cn/docs/contribution-guidelines/contribute/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/contribution-guidelines/contribute/</guid><description>
+&lt;blockquote>
+&lt;p>TODO: translate this article to Chinese&lt;/p>
+&lt;/blockquote>
+&lt;p>Thanks for taking the time to contribute! As an open source project, HugeGraph is looking forward to be contributed from everyone, and we are also grateful to all the contributors.&lt;/p>
+&lt;p>The following is a contribution guide for HugeGraph:&lt;/p>
+&lt;img width="884" alt="image" src="https://user-images.githubusercontent.com/9625821/159643158-8bf72c0a-93c3-4a58-8912-7b2ab20ced1d.png">
+&lt;h2 id="1-preparation">1. Preparation&lt;/h2>
+&lt;p>We can contribute by reporting issues, submitting code patches or any other feedback.&lt;/p>
+&lt;p>Before submitting the code, we need to do some preparation:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Sign up or login to GitHub: &lt;a href="https://github.com">https://github.com&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Fork HugeGraph repo from GitHub: &lt;a href="https://github.com/hugegraph/hugegraph/fork">https://github.com/apache/incubator-hugegraph/fork&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Clone code from fork repo to local: &lt;a href="https://github.com/$%7BGITHUB_USER_NAME%7D/hugegraph">https://github.com/${GITHUB_USER_NAME}/hugegraph&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># clone code from remote to local repo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">GITHUB_USER_NAME&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>/hugegraph
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Configure local HugeGraph repo&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># add upstream to synchronize the latest code&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git remote add hugegraph https://github.com/hugegraph/hugegraph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># set name and email to push code to github&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git config user.name &lt;span style="color:#4e9a06">&amp;#34;{full-name}&amp;#34;&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># like &amp;#34;Jermy Li&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git config user.email &lt;span style="color:#4e9a06">&amp;#34;{email-address-of-github}&amp;#34;&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># like &amp;#34;jermy@apache.org&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;p>Optional: You can use &lt;a href="https://desktop.github.com/">GitHub desktop&lt;/a> to greatly simplify the commit and update process.&lt;/p>
+&lt;h2 id="2-create-an-issue-on-github">2. Create an Issue on GitHub&lt;/h2>
+&lt;p>If you encounter bugs or have any questions, please go to &lt;a href="https://github.com/apache/incubator-hugegraph/issues">GitHub Issues&lt;/a> to report them and feel free to &lt;a href="https://github.com/hugegraph/hugegraph/issues/new">create an issue&lt;/a>.&lt;/p>
+&lt;h2 id="3-make-changes-of-code-locally">3. Make changes of code locally&lt;/h2>
+&lt;h4 id="31-create-a-new-branch">3.1 Create a new branch&lt;/h4>
+&lt;p>Please don&amp;rsquo;t use master branch for development. We should create a new branch instead:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># checkout master branch&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git checkout master
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># pull the latest code from official hugegraph&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git pull hugegraph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># create new branch: bugfix-branch&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git checkout -b bugfix-branch
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="32-change-the-code">3.2 Change the code&lt;/h4>
+&lt;p>Assume that we need to modify some files like &amp;ldquo;HugeGraph.java&amp;rdquo; and &amp;ldquo;HugeFactory.java&amp;rdquo;:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># modify code to fix a bug&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vim hugegraph-core/src/main/java/com/baidu/hugegraph/HugeGraph.java
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vim hugegraph-core/src/main/java/com/baidu/hugegraph/HugeFactory.java
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># run test locally (optional)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn &lt;span style="color:#204a87">test&lt;/span> -Pcore-test,memory
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note: In order to be consistent with the code style easily, if you use &lt;a href="https://www.jetbrains.com/idea/">IDEA&lt;/a> as your IDE, you can directly &lt;a href="https://www.jetbrains.com/help/idea/configuring-code-style.html">import&lt;/a> our code style &lt;a href="./hugegraph-style.xml">configuration file&lt;/a>.&lt;/p>
+&lt;h4 id="33-commit-changes-to-git-repo">3.3 Commit changes to git repo&lt;/h4>
+&lt;p>After the code has been completed, we submit them to the local git repo:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># add files to local git index&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git add hugegraph-core/src/main/java/com/baidu/hugegraph/HugeGraph.java
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git add hugegraph-core/src/main/java/com/baidu/hugegraph/HugeFactory.java
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># commit to local git repo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git commit
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Please edit the commit message after running &lt;code>git commit&lt;/code>, we can explain what and how to fix a bug or implement a feature, the following is an example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>Fix bug: run deploy multiple &lt;span style="color:#204a87">times&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fix &lt;span style="color:#8f5902;font-style:italic">#ISSUE_ID&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>Please remember to fill in the issue id, which was generated by GitHub after issue creation.&lt;/p>
+&lt;/blockquote>
+&lt;h4 id="34-push-commit-to-github-fork-repo">3.4 Push commit to GitHub fork repo&lt;/h4>
+&lt;p>Push the local commit to GitHub fork repo:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># push the local commit to fork repo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git push origin bugfix-branch:bugfix-branch
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note that since GitHub requires submitting code through &lt;code>username + token&lt;/code> (instead of using &lt;code>username + password&lt;/code> directly), you need to create a GitHub token from &lt;a href="https://github.com/settings/tokens">https://github.com/settings/tokens&lt;/a>:
+&lt;img width="1280" alt="image" src="https://user-images.githubusercontent.com/9625821/163524204-7fe0e6bf-9c8b-4b1a-ac65-6a0ac423eb16.png">&lt;/p>
+&lt;h2 id="4-create-a-pull-request">4. Create a Pull Request&lt;/h2>
+&lt;p>Go to the web page of GitHub fork repo, there would be a chance to create a Pull Request after pushing to a new branch, just click button &amp;ldquo;Compare &amp;amp; pull request&amp;rdquo; to do it. Then edit the description for proposed changes, which can just be copied from the commit message.&lt;/p>
+&lt;p>Please sign the HugeGraph CLA when contributing code for the first time. You can sign the CLA by just posting a Pull Request Comment same as the below format:&lt;/p>
+&lt;p>&lt;code>I have read the CLA Document and I hereby sign the CLA&lt;/code>&lt;/p>
+&lt;p>Note: please make sure the email address you used to submit the code is bound to the GitHub account. For how to bind the email address, please refer to &lt;a href="https://github.com/settings/emails">https://github.com/settings/emails&lt;/a>:
+&lt;img width="1280" alt="image" src="https://user-images.githubusercontent.com/9625821/163522445-2a50a72a-dea2-434f-9868-3a0d40d0d037.png">&lt;/p>
+&lt;h2 id="5-code-review">5. Code review&lt;/h2>
+&lt;p>Maintainers will start the code review after all the &lt;strong>automatic&lt;/strong> checks are passed:&lt;/p>
+&lt;ul>
+&lt;li>Check: Contributor License Agreement is signed&lt;/li>
+&lt;li>Check: Travis CI builds is passed (automatically Test and Deploy)&lt;/li>
+&lt;/ul>
+&lt;p>The commit will be accepted and merged if there is no problem after review.&lt;/p>
+&lt;p>Please click on &amp;ldquo;Details&amp;rdquo; to find the problem if any check does not pass.&lt;/p>
+&lt;p>If there are checks not passed or changes requested, then continue to modify the code and push again.&lt;/p>
+&lt;h2 id="6-more-changes-after-review">6. More changes after review&lt;/h2>
+&lt;p>If we have not passed the review, don&amp;rsquo;t be discouraged. Usually a commit needs to be reviewed several times before being accepted! Please follow the review comments and make further changes.&lt;/p>
+&lt;p>After the further changes, we submit them to the local repo:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># commit all updated files in a new commit,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># please feel free to enter any appropriate commit message, note that&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># we will squash all commits in the pull request as one commit when&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># merging into the master branch.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git commit -a
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>If there are conflicts that prevent the code from being merged, we need to rebase on master branch:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># synchronize the latest code&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git checkout master
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git pull hugegraph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># rebase on master&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git checkout bugfix-branch
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git rebase -i master
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/blockquote>
+&lt;p>And push it to GitHub fork repo again:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># force push the local commit to fork repo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git push -f origin bugfix-branch:bugfix-branch
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>GitHub will automatically update the Pull Request after we push it, just wait for code review.&lt;/p></description></item><item><title>Docs: HugeGraph 配置项</title><link>/cn/docs/config/config-option/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/config/config-option/</guid><description>
 &lt;h3 id="gremlin-server-配置项">Gremlin Server 配置项&lt;/h3>
 &lt;p>对应配置文件&lt;code>gremlin-server.yaml&lt;/code>&lt;/p>
 &lt;table>
@@ -3600,6 +3659,9 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;blockquote>
 &lt;p>TinkerPop API允许打开事务，请求完成时会自动关闭(Gremlin Server强制关闭)&lt;/p>
 &lt;/blockquote></description></item><item><title>Docs: Download HugeGraph</title><link>/cn/docs/download/download/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/download/download/</guid><description>
+&lt;blockquote>
+&lt;p>TODO: update 1.0.0 download link&lt;/p>
+&lt;/blockquote>
 &lt;h3 id="latest-version">Latest version&lt;/h3>
 &lt;p>The latest HugeGraph: &lt;strong>0.12.0&lt;/strong>, released on &lt;em>2021-12-31&lt;/em>.&lt;/p>
 &lt;table>
@@ -6105,7 +6167,37 @@ HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
 &lt;p>####### 结论：&lt;/p>
 &lt;ul>
 &lt;li>并发12000，吞吐量是10688，边的按id查询的并发能力为12000，平均延时为63ms&lt;/li>
-&lt;/ul></description></item><item><title>Docs: HugeGraph 内置用户权限与扩展权限配置及使用</title><link>/cn/docs/config/config-authentication/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/config/config-authentication/</guid><description>
+&lt;/ul></description></item><item><title>Docs: 订阅社区邮箱</title><link>/cn/docs/contribution-guidelines/subscribe/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/contribution-guidelines/subscribe/</guid><description>
+&lt;blockquote>
+&lt;p>TODO: translate this article to Chinese&lt;/p>
+&lt;/blockquote>
+&lt;p>It is highly recommended to subscribe to the development mailing list to keep up-to-date with the community.&lt;/p>
+&lt;p>In the process of using HugeGraph, if you have any questions or ideas, suggestions, you can participate in the HugeGraph community building through the Apache mailing list. Sending a subscription email is also very simple, the steps are as follows:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Email &lt;a href="mailto:dev-subscribe@hugegraph.apache.org">dev-subscribe@hugegraph.apache.org&lt;/a> with your own email address, subject and content are arbitrary.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Receive confirmation email and reply. After completing step 1, you will receive a confirmation email from &lt;a href="mailto:dev-help@hugegraph.apache.org">dev-help@hugegraph.apache.org&lt;/a> (if not received, please confirm whether the email is automatically classified as spam, promotion email, subscription email, etc.) . Then reply directly to the email, or click on the link in the email to reply quickly, the subject and content are arbitrary.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Receive a welcome email. After completing the above steps, you will receive a welcome email with the subject WELCOME to &lt;a href="mailto:dev@hugegraph.apache.org">dev@hugegraph.apache.org&lt;/a>, and you have successfully subscribed to the Apache HugeGraph mailing list.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h1 id="unsubscribe-mailing-lists">Unsubscribe Mailing Lists&lt;/h1>
+&lt;p>If you do not need to know what&amp;rsquo;s going on with HugeGraph, you can unsubscribe from the mailing list.&lt;/p>
+&lt;p>Unsubscribe from the mailing list steps are as follows:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Email &lt;a href="mailto:dev-unsubscribe@hugegraph.apache.org">dev-unsubscribe@hugegraph.apache.org&lt;/a> with your subscribed email address, subject and content are arbitrary.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Receive confirmation email and reply. After completing step 1, you will receive a confirmation email from &lt;a href="mailto:dev-help@hugegraph.apache.org">dev-help@hugegraph.apache.org&lt;/a> (if not received, please confirm whether the email is automatically classified as spam, promotion email, subscription email, etc.) . Then reply directly to the email, or click on the link in the email to reply quickly, the subject and content are arbitrary.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Receive a goodbye email. After completing the above steps, you will receive a goodbye email with the subject GOODBYE from &lt;a href="mailto:dev@hugegraph.apache.org">dev@hugegraph.apache.org&lt;/a>, and you have successfully unsubscribed to the Apache HugeGraph mailing list, and you will not receive emails from &lt;a href="mailto:dev@hugegraph.apache.org">dev@hugegraph.apache.org&lt;/a>.&lt;/p>
+&lt;/li>
+&lt;/ol></description></item><item><title>Docs: HugeGraph 内置用户权限与扩展权限配置及使用</title><link>/cn/docs/config/config-authentication/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/config/config-authentication/</guid><description>
 &lt;h3 id="概述">概述&lt;/h3>
 &lt;p>HugeGraph 为了方便不同用户场景下的鉴权使用，目前内置了两套权限模式：&lt;/p>
 &lt;ol>
@@ -7785,7 +7877,54 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注：&lt;/p>
 &lt;blockquote>
 &lt;p>可以通过&lt;code>GET http://localhost:8080/graphs/hugegraph/tasks/1&lt;/code>（其中&amp;quot;1&amp;quot;是task_id）来查询异步任务的执行状态，更多&lt;a href="../task">异步任务RESTful API&lt;/a>&lt;/p>
-&lt;/blockquote></description></item><item><title>Docs: Backup Restore</title><link>/cn/docs/guides/backup-restore/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/guides/backup-restore/</guid><description>
+&lt;/blockquote></description></item><item><title>Docs: 验证 Apache 发版</title><link>/cn/docs/contribution-guidelines/validate-release/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/contribution-guidelines/validate-release/</guid><description>
+&lt;h2 id="验证阶段">验证阶段&lt;/h2>
+&lt;p>当内部的临时发布和打包工作完成后, 其他的社区开发者(尤其是 PMC)需要参与到&lt;a href="https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist">验证环节&lt;/a>确保某个人发布版本的&amp;quot;正确性 + 完整性&amp;quot;, 这里需要&lt;strong>每个人&lt;/strong>都尽量参与, 然后后序&lt;strong>邮件回复&lt;/strong>的时候说明自己&lt;strong>已检查&lt;/strong>了哪些项. (下面是核心项)&lt;/p>
+&lt;h4 id="1-检查-hash-值">1. 检查 hash 值&lt;/h4>
+&lt;p>首先需要检查 &lt;code>source + binary&lt;/code> 包的文件完整性, 通过 &lt;code>shasum&lt;/code> 进行校验, 确保和发布到 apache/github 上的 hash 值一致 (一般是 sha512), 这里同0x02的最后一步检验.&lt;/p>
+&lt;h4 id="2-检查-gpg-签名">2. 检查 gpg 签名&lt;/h4>
+&lt;p>这个就是为了确保发布的包是由&lt;strong>可信赖&lt;/strong>的人上传的, 假设 tom 签名后上传, 其他人应该下载 A 的&lt;strong>公钥&lt;/strong>然后进行&lt;strong>签名确认&lt;/strong>, 相关命令:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 1. 下载项目可信赖公钥到本地 (首次需要)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl xxx &amp;gt;&amp;gt; PK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg --import PK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 1.2 等待响应后输入 trust 表示信任 tom 的公钥 (其他人名类似)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg -edit-key tom
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 2. 检查签名 (可用 0x03 章节的第 ⑧ 步的 for 循环脚本批量遍历)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg --verify xx.asc xxx-source.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg --verify xx.asc xxx-binary.tar.gz &lt;span style="color:#8f5902;font-style:italic"># 注: 我们目前没有 binary 后缀&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>先确认了整体的完整性/一致性, 然后接下来确认具体的内容 (&lt;strong>关键&lt;/strong>)&lt;/p>
+&lt;h4 id="3-检查压缩包内容">3. 检查压缩包内容&lt;/h4>
+&lt;p>这里分源码包 + 二进制包两个方面, 源码包更为严格, 挑核心的部分说 (完整的列表参考官方 &lt;a href="https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist">Wiki&lt;/a>, 比较长)&lt;/p>
+&lt;p>首先我们需要从 apache 官方的 &lt;code>release-candidate&lt;/code> 地址下载包到本地 (地址: &lt;code>dist.apache.org/repos/dist/dev/hugegraph/&lt;/code>)&lt;/p>
+&lt;h5 id="a-源码包">A. 源码包&lt;/h5>
+&lt;p>解压 &lt;code>xxx-hugegraph-source.tar.gz&lt;/code>后, 进行如下检查:&lt;/p>
+&lt;ol>
+&lt;li>文件夹都带有 &lt;code>incubating&lt;/code>, 且不存在&lt;strong>空的&lt;/strong>文件/文件夹&lt;/li>
+&lt;li>存在&lt;code>DISCLAIMER&lt;/code>文件&lt;/li>
+&lt;li>存在 &lt;code>LICENSE&lt;/code> + &lt;code>NOTICE&lt;/code> 文件并且内容正常&lt;/li>
+&lt;li>&lt;strong>不存在&lt;/strong>任何二进制文件&lt;/li>
+&lt;li>源码文件都包含标准 &lt;code>ASF License&lt;/code> 头 (这个用插件跑一下为主)&lt;/li>
+&lt;li>检查每个父/子模块的 &lt;code>pom.xml&lt;/code> 版本号是否一致 (且符合期望)&lt;/li>
+&lt;li>检查前 3 ~ 5 个 commit 提交, 点进去看看是否修改处和源码文件一致&lt;/li>
+&lt;li>最后, 确保源码可以正常/正确编译 (然后看看测试和规范)&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 同时也可以检查一下代码风格是否符合规范, 不符合的可以放下一次调整&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn clean &lt;span style="color:#204a87">test&lt;/span> -Dcheckstyle.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">false&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="b-二进制包">B. 二进制包&lt;/h5>
+&lt;p>解压 &lt;code>xxx-hugegraph.tar.gz&lt;/code>后, 进行如下检查:&lt;/p>
+&lt;ol>
+&lt;li>文件夹都带有 &lt;code>incubating&lt;/code>&lt;/li>
+&lt;li>存在 &lt;code>LICENSE&lt;/code> + &lt;code>NOTICE&lt;/code> 文件并且内容正常&lt;/li>
+&lt;li>通过 gpg 命令确认每个文件的签名正常&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>注:&lt;/strong> 如果二进制包里面引入了第三方依赖, 则需要更新 LICENSE, 加入第三方依赖的 LICENSE; 若第三方依赖 LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更新我们的 NOTICE 文件&lt;/p>
+&lt;h4 id="4-检查官网以及-github-等页面">4. 检查官网以及 github 等页面&lt;/h4>
+&lt;ol>
+&lt;li>确保官网至少满足 &lt;a href="https://whimsy.apache.org/pods/project/hugegraph">apache website check&lt;/a>, 以及没有死链等&lt;/li>
+&lt;li>更新&lt;strong>下载链接&lt;/strong>以及版本更新说明&lt;/li>
+&lt;li>…..&lt;/li>
+&lt;/ol></description></item><item><title>Docs: Backup Restore</title><link>/cn/docs/guides/backup-restore/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/guides/backup-restore/</guid><description>
 &lt;h2 id="描述">描述&lt;/h2>
 &lt;p>Backup 和 Restore 是备份图和恢复图的功能。备份和恢复的数据包括元数据（schema）和图数据（vertex 和 edge）。&lt;/p>
 &lt;h4 id="backup">Backup&lt;/h4>
@@ -14907,283 +15046,4 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;p>为给定的起点在不同的层中找到最应该推荐的顶点。&lt;/p>
 &lt;ul>
 &lt;li>比如：在观众、朋友、电影、导演的四层图结构中，根据某个观众的朋友们喜欢的电影，为这个观众推荐电影；或者根据这些电影是谁拍的，为其推荐导演。&lt;/li>
-&lt;/ul></description></item><item><title>Docs: HugeGraph 0.3.3 Release Notes</title><link>/cn/docs/changelog/hugegraph-0.3.3-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/changelog/hugegraph-0.3.3-release-notes/</guid><description>
-&lt;h3 id="api--java-client">API &amp;amp; Java Client&lt;/h3>
-&lt;h4 id="功能更新">功能更新&lt;/h4>
-&lt;ul>
-&lt;li>为vertex-label和edge-label增加可空属性集合，允许在create和append时指定（HugeGraph-245）&lt;/li>
-&lt;li>配合core的功能为用户提供tinkerpop variables RESTful API（HugeGraph-396）&lt;/li>
-&lt;li>支持顶点／边属性的更新和删除（HugeGraph-894）&lt;/li>
-&lt;li>支持顶点／边的条件查询（HugeGraph-919）&lt;/li>
-&lt;/ul>
-&lt;h4 id="bug修复">BUG修复&lt;/h4>
-&lt;ul>
-&lt;li>HugeGraph-API接收的RequestBody为null或&amp;quot;&amp;ldquo;时抛出空指针异常（HugeGraph-795）&lt;/li>
-&lt;li>为HugeGraph-API添加输入参数检查，避免抛出空指针异常（HugeGraph-796 ～ HugeGraph-798，HugeGraph-802，HugeGraph-808 ～ HugeGraph-814，HugeGraph-817，HugeGraph-823，HugeGraph-860）&lt;/li>
-&lt;li>创建缺失outV-label 或者 inV-label的实体边，依然能够被创建成功，不符合需求（HugeGraph-835）&lt;/li>
-&lt;li>创建vertex-label和edge-label时可以任意传入index-names（HugeGraph-837）&lt;/li>
-&lt;li>创建index，base-type=“VERTEX”等值（期望VL、EL），返回500（HugeGraph-846）&lt;/li>
-&lt;li>创建index，base-type和base-value不匹配，提示不友好（HugeGraph-848）&lt;/li>
-&lt;li>删除已经不存在的两个实体之间的关系，schema返回204，顶点和边类型的则返回404（期望统一为404）（HugeGraph-853，HugeGraph-854）&lt;/li>
-&lt;li>给vertex-label追加属性，缺失id-strategy，返回信息有误（HugeGraph-861）&lt;/li>
-&lt;li>给edge-label追加属性，name缺失，提示信息有误（HugeGraph-862）&lt;/li>
-&lt;li>给edge-label追加属性，source-label为“null”，提示信息有误（HugeGraph-863）&lt;/li>
-&lt;li>查询时的StringId如果为空字符串应该抛出异常（HugeGraph-868）&lt;/li>
-&lt;li>通Rest API创建两个顶点之间的边，在studio中通过g.V()则刚新创建的边则不显示，g.E()则能够显示新创建的边（HugeGraph-869）&lt;/li>
-&lt;li>HugeGraph-Server的内部错误500，不应该将stack trace返回给Client（HugeGraph-879）&lt;/li>
-&lt;li>addEdge传入空的id字符串时会抛出非法参数异常（HugeGraph-885）&lt;/li>
-&lt;li>HugeGraph-Client 的 Gremlin 查询结果在解析 Path 时，如果不包含Vertex／Edge会反序列化异常（HugeGraph-891）&lt;/li>
-&lt;li>枚举HugeKeys的字符串变成小写字母加下划线，导致API序列化时字段名与类中变量名不一致，进而序列化失败（HugeGraph-896）&lt;/li>
-&lt;li>增加边到不存在的顶点时返回404（期望400）（HugeGraph-922）&lt;/li>
-&lt;/ul>
-&lt;h3 id="core">Core&lt;/h3>
-&lt;h4 id="功能更新-1">功能更新&lt;/h4>
-&lt;ul>
-&lt;li>支持对顶点/边属性（包括索引列）的更新操作（HugeGraph-369）&lt;/li>
-&lt;li>索引field为空或者空字符串的支持（hugegraph-553和hugegraph-288）&lt;/li>
-&lt;li>vertex/edge的属性一致性保证推迟到实际要访问属性时（hugegraph-763）&lt;/li>
-&lt;li>增加ScyllaDB后端驱动（HugeGraph-772）&lt;/li>
-&lt;li>支持tinkerpop的hasKey、hasValue查询（HugeGraph-826）&lt;/li>
-&lt;li>支持tinkerpop的variables功能(HugeGraph-396)&lt;/li>
-&lt;li>以“~”为开头的为系统隐藏属性，用户不可以创建(HugeGraph-842)&lt;/li>
-&lt;li>增加Backend Features以兼容不同后端的特性(HugeGraph-844)&lt;/li>
-&lt;li>对mutation的update可能出现的操作不直接抛错，进行细化处理（HugeGraph-887）&lt;/li>
-&lt;li>对append到vertex-label/edge-label的property检查，必须是nullable的（HugeGraph-890）&lt;/li>
-&lt;li>对于按照id查询，当有的id不存在时，返回其余存在的对象，而非直接抛异常（HugeGraph-900）&lt;/li>
-&lt;/ul>
-&lt;h4 id="bug修复-1">BUG修复&lt;/h4>
-&lt;ul>
-&lt;li>Vertex.edges(Direction.BOTH,&amp;hellip;) assert error（HugeGraph-661）&lt;/li>
-&lt;li>无法支持在addVertex函数中对同一property（single）多次赋值（HugeGraph-662）&lt;/li>
-&lt;li>更新属性时不涉及更新的索引列会丢失（HugeGraph-801）&lt;/li>
-&lt;li>GraphTransaction中的ConditionQuery需要索引查询时，没有触发commit，导致查询失败（HugeGraph-805）&lt;/li>
-&lt;li>Cassandra不支持query offset，查询时limit=offset+limit取回所有记录后过滤（HugeGraph-851）&lt;/li>
-&lt;li>多个插入操作加上一个删除操作，插入操作会覆盖删除操作（HugeGraph-857）&lt;/li>
-&lt;li>查询时的StringId如果为空字符串应该抛出异常（HugeGraph-868）&lt;/li>
-&lt;li>元数据schema方法只返回 hidden 信息（HugeGraph-912）&lt;/li>
-&lt;/ul>
-&lt;h3 id="测试">测试&lt;/h3>
-&lt;ul>
-&lt;li>tinkerpop的structure和process测试使用不同的keyspace（HugeGraph-763）&lt;/li>
-&lt;li>将tinkerpop测试和unit测试添加到流水线release-after-merge中（HugeGraph-763）&lt;/li>
-&lt;li>jenkins脚本分离各阶段子脚本，修改项目中的子脚本即可生效构建（HugeGraph-800）&lt;/li>
-&lt;li>增加clear backends功能，在tinkerpop suite运行完成后清除后端（HugeGraph-852）&lt;/li>
-&lt;li>增加BackendMutation的测试（HugeGraph-801）&lt;/li>
-&lt;li>多线程操作图时可能抛出NoHostAvailableException异常（HugeGraph-883）&lt;/li>
-&lt;/ul>
-&lt;h3 id="内部修改">内部修改&lt;/h3>
-&lt;ul>
-&lt;li>调整HugeGraphServer和HugeGremlinServer启动时JVM的堆内存初始为256M，最大为2048M（HugeGraph-218）&lt;/li>
-&lt;li>创建Cassandra Table时，使用schemaBuilder代替字符串拼接（hugegraph-773）&lt;/li>
-&lt;li>运行测试用例时如果初始化图失败（比如数据库连接不上），clear()报错（HugeGraph-910）&lt;/li>
-&lt;li>Example抛异常 Need to specify a readable config file rather than&amp;hellip;（HugeGraph-921）&lt;/li>
-&lt;li>HugeGraphServer和HugeGreminServer的缓存保持同步（HugeGraph-569）&lt;/li>
-&lt;/ul></description></item><item><title>Docs: HugeGraph 0.2 Release Notes</title><link>/cn/docs/changelog/hugegraph-0.2-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/changelog/hugegraph-0.2-release-notes/</guid><description>
-&lt;h3 id="api--java-client">API &amp;amp; Java Client&lt;/h3>
-&lt;h4 id="功能更新">功能更新&lt;/h4>
-&lt;p>0.2版实现了图数据库基本功能，提供如下功能：&lt;/p>
-&lt;h3 id="元数据schema">元数据（Schema）&lt;/h3>
-&lt;h4 id="顶点类型vertex-label">顶点类型（Vertex Label）&lt;/h4>
-&lt;ul>
-&lt;li>创建顶点类型&lt;/li>
-&lt;li>删除顶点类型&lt;/li>
-&lt;li>查询顶点类型&lt;/li>
-&lt;li>增加顶点类型的属性&lt;/li>
-&lt;/ul>
-&lt;h4 id="边类型edge-label">边类型（Edge Label）&lt;/h4>
-&lt;ul>
-&lt;li>创建边类型&lt;/li>
-&lt;li>删除边类型&lt;/li>
-&lt;li>查询边类型&lt;/li>
-&lt;li>增加边类型的属性&lt;/li>
-&lt;/ul>
-&lt;h4 id="属性property-key">属性（Property Key）&lt;/h4>
-&lt;ul>
-&lt;li>创建属性&lt;/li>
-&lt;li>删除属性&lt;/li>
-&lt;li>查询属性&lt;/li>
-&lt;/ul>
-&lt;h4 id="索引index-label">索引（Index Label）&lt;/h4>
-&lt;ul>
-&lt;li>创建索引&lt;/li>
-&lt;li>删除索引&lt;/li>
-&lt;li>查询索引&lt;/li>
-&lt;/ul>
-&lt;h4 id="元数据检查">元数据检查&lt;/h4>
-&lt;ul>
-&lt;li>元数据依赖的其它元数据检查（如Vertex Label依赖Property Key）&lt;/li>
-&lt;li>数据依赖的元数据检查（如Vertex依赖Vertex Label）&lt;/li>
-&lt;/ul>
-&lt;h3 id="图数据">图数据&lt;/h3>
-&lt;h4 id="顶点vertex">顶点（Vertex）&lt;/h4>
-&lt;ul>
-&lt;li>
-&lt;p>增加顶点&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>删除顶点&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>增加顶点属性&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>删除顶点属性（必须为非索引列）&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>批量插入顶点&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>查询&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>批量查询&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>顶点ID策略&lt;/p>
-&lt;ul>
-&lt;li>用户指定ID（字符串）&lt;/li>
-&lt;li>用户指定某些属性组合作为ID（拼接为可见字符串）&lt;/li>
-&lt;li>自动生成ID&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;h4 id="边edge">边（Edge）&lt;/h4>
-&lt;ul>
-&lt;li>增加边&lt;/li>
-&lt;li>增加多条同类型边到指定的两个节点（SortKey）&lt;/li>
-&lt;li>删除边&lt;/li>
-&lt;li>增加边属性&lt;/li>
-&lt;li>删除边属性（必须为非索引列）&lt;/li>
-&lt;li>批量插入边&lt;/li>
-&lt;li>查询&lt;/li>
-&lt;li>批量查询&lt;/li>
-&lt;/ul>
-&lt;h4 id="顶点边属性">顶点/边属性&lt;/h4>
-&lt;ul>
-&lt;li>
-&lt;p>属性类型支持&lt;/p>
-&lt;ul>
-&lt;li>text&lt;/li>
-&lt;li>boolean&lt;/li>
-&lt;li>byte、blob&lt;/li>
-&lt;li>int、long&lt;/li>
-&lt;li>float、double&lt;/li>
-&lt;li>timestamp&lt;/li>
-&lt;li>uuid&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>支持单值属性&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>支持多值属性：List、Set（&lt;em>注意：非嵌套属性&lt;/em>）&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h3 id="事务">事务&lt;/h3>
-&lt;ul>
-&lt;li>原子性级别保证（&lt;em>依赖后端&lt;/em>）&lt;/li>
-&lt;li>自动提交事务&lt;/li>
-&lt;li>手动提交事务&lt;/li>
-&lt;li>并行事务&lt;/li>
-&lt;/ul>
-&lt;h3 id="索引">索引&lt;/h3>
-&lt;h4 id="索引类型">索引类型&lt;/h4>
-&lt;ul>
-&lt;li>二级索引&lt;/li>
-&lt;li>范围索引（数字类型）&lt;/li>
-&lt;/ul>
-&lt;h4 id="索引操作">索引操作&lt;/h4>
-&lt;ul>
-&lt;li>为指定类型的顶点/边创建单列索引（不支持List或Set列创建索引）&lt;/li>
-&lt;li>为指定类型的顶点/边创建复合索引（不支持List或Set列创建索引，复合索引为前缀索引）&lt;/li>
-&lt;li>删除指定类型顶点/边的索引（部分或全部索引均可）&lt;/li>
-&lt;li>重建指定类型顶点/边的索引（部分或全部索引均可）&lt;/li>
-&lt;/ul>
-&lt;h3 id="查询遍历">查询/遍历&lt;/h3>
-&lt;ul>
-&lt;li>
-&lt;p>列出所有元数据、图数据（支持Limit，不支持分页）&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>根据ID查询元数据、图数据&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>根据指定属性的值查询图数据&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>根据指定属性的值范围查询图数据（属性必须为数字类型）&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>根据指定顶点/边类型、指定属性的值查询顶点/边&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>根据指定顶点/边类型、指定属性的值范围查询顶点（属性必须为数字类型）&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>根据顶点类型（Vertex Label）查询顶点&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>根据边类型（Edge Label）查询边&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>根据顶点查询边&lt;/p>
-&lt;ul>
-&lt;li>查询顶点的所有边&lt;/li>
-&lt;li>查询顶点的指定方向边（出边、入边）&lt;/li>
-&lt;li>查询顶点的指定方向、指定类型边&lt;/li>
-&lt;li>查询两个顶点的同类型边中的某条边（SortKey）&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>标准Gremlin遍历&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h3 id="缓存">缓存&lt;/h3>
-&lt;h4 id="可缓存内容">可缓存内容&lt;/h4>
-&lt;ul>
-&lt;li>元数据缓存&lt;/li>
-&lt;li>顶点缓存&lt;/li>
-&lt;/ul>
-&lt;h4 id="缓存特性">缓存特性&lt;/h4>
-&lt;ul>
-&lt;li>LRU策略&lt;/li>
-&lt;li>高性能并发访问&lt;/li>
-&lt;li>支持超时过期机制&lt;/li>
-&lt;/ul>
-&lt;h3 id="接口restful-api">接口（RESTful API）&lt;/h3>
-&lt;ul>
-&lt;li>版本号接口&lt;/li>
-&lt;li>图实例接口&lt;/li>
-&lt;li>元数据接口&lt;/li>
-&lt;li>图数据接口&lt;/li>
-&lt;li>Gremlin接口&lt;/li>
-&lt;/ul>
-&lt;p>更多细节详见&lt;a href="/clients/hugegraph-api.html">API文档&lt;/a>&lt;/p>
-&lt;h3 id="后端支持">后端支持&lt;/h3>
-&lt;h4 id="支持cassandra后端">支持Cassandra后端&lt;/h4>
-&lt;ul>
-&lt;li>持久化&lt;/li>
-&lt;li>CQL3&lt;/li>
-&lt;li>集群&lt;/li>
-&lt;/ul>
-&lt;h4 id="支持memory后端仅用于测试">支持Memory后端（仅用于测试）&lt;/h4>
-&lt;ul>
-&lt;li>非持久化&lt;/li>
-&lt;li>部分特性无法支持（如：更新边属性、根据边类型查询边）&lt;/li>
-&lt;/ul>
-&lt;h3 id="其它">其它&lt;/h3>
-&lt;h4 id="支持配置项">支持配置项&lt;/h4>
-&lt;ul>
-&lt;li>后端存储类型&lt;/li>
-&lt;li>序列化方式&lt;/li>
-&lt;li>缓存参数&lt;/li>
-&lt;/ul>
-&lt;h4 id="支持多图实例">支持多图实例&lt;/h4>
-&lt;ul>
-&lt;li>静态方式（&lt;em>增加多个图配置文件&lt;/em>）&lt;/li>
-&lt;/ul>
-&lt;h4 id="版本检查">版本检查&lt;/h4>
-&lt;ul>
-&lt;li>内部依赖包匹配版本检查&lt;/li>
-&lt;li>API匹配版本检查&lt;/li>
 &lt;/ul></description></item></channel></rss>
