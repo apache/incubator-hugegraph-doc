@@ -4,6 +4,8 @@ linkTitle: "Download"
 weight: 2
 ---
 
+> TODO: update 1.0.0 download link
+
 ### Latest version
 
 The latest HugeGraph: **0.12.0**, released on _2021-12-31_.

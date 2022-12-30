@@ -1,6 +1,6 @@
 ---
 title: "验证 Apache 发版"
-linkTitle: "验证 Apache 发版e"
+linkTitle: "验证 Apache 发版"
 weight: 3
 ---
 
