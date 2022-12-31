@@ -4,70 +4,70 @@ linkTitle: "Validate Apache Release"
 weight: 3
 ---
 
-> TODO: Translate this article to English!
+> TODO: enhance this doc soon
 
-## 验证阶段
+## Verification
 
-当内部的临时发布和打包工作完成后, 其他的社区开发者(尤其是 PMC)需要参与到[验证环节](https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist)确保某个人发布版本的"正确性 + 完整性", 这里需要**每个人**都尽量参与, 然后后序**邮件回复**的时候说明自己**已检查**了哪些项. (下面是核心项)
+When the internal temporary release and packaging work is completed, other community developers (especially PMC) need to participate in the [verification link](https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist)To ensure the "correctness + completeness" of someone's published version, here requires **everyone** to participate as much as possible, and then explain which items you have **checked** in the subsequent **email reply**. (The following are the core items)
 
-#### 1. 检查 hash 值
+#### 1. check hash value
 
-首先需要检查 `source + binary` 包的文件完整性, 通过 `shasum` 进行校验, 确保和发布到 apache/github 上的 hash 值一致 (一般是 sha512), 这里同0x02的最后一步检验.
+First you need to check the file integrity of the `source + binary` package, Verify by `shasum` to ensure that it is consistent with the hash value published on apache/github (Usually sha512), Here is the same as the last step of 0x02 inspection.
 
-#### 2. 检查 gpg 签名
+#### 2. check gpg signature
 
-这个就是为了确保发布的包是由**可信赖**的人上传的, 假设 tom 签名后上传, 其他人应该下载 A 的**公钥**然后进行**签名确认**, 相关命令:
+This is to ensure that the published package is uploaded by a **reliable** person. Assuming tom signs and uploads, others should download A’s **public key** and then perform **signature confirmation**. Related commands:
 
 ```bash
-# 1. 下载项目可信赖公钥到本地 (首次需要)
+# 1. Download the trusted public key of the project to the local (required for the first time)
 curl xxx >> PK
 gpg --import PK
-# 1.2 等待响应后输入 trust 表示信任 tom 的公钥 (其他人名类似)
+# 1.2 Enter trust after waiting for the response to trust Tom's public key (other names are similar)
 gpg -edit-key tom 
 
-# 2. 检查签名 (可用 0x03 章节的第 ⑧ 步的 for 循环脚本批量遍历)
+# 2. Check the signature (you can use the for loop script in step ⑧ of Chapter 0x03 to traverse in batches)
 gpg --verify xx.asc xxx-source.tar.gz
-gpg --verify xx.asc xxx-binary.tar.gz # 注: 我们目前没有 binary 后缀
+gpg --verify xx.asc xxx-binary.tar.gz # Note: We currently do not have a binary suffix
 ```
 
-先确认了整体的完整性/一致性, 然后接下来确认具体的内容 (**关键**)
+First confirm the overall integrity/consistency, and then confirm the specific content (**key**)
 
-#### 3. 检查压缩包内容
+#### 3. Check the archive contents
 
-这里分源码包 + 二进制包两个方面, 源码包更为严格, 挑核心的部分说 (完整的列表参考官方 [Wiki](https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist), 比较长)
+Here it is divided into two aspects: source code package + binary package, The source code package is more strict, it can be said that the core part (Because it is longer,For a complete list refer to the official [Wiki](https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist))
 
-首先我们需要从 apache 官方的 `release-candidate` 地址下载包到本地 (地址: `dist.apache.org/repos/dist/dev/hugegraph/`)
+First of all, we need to download the package from the apache official `release-candidate` URL to the local (URL: `dist.apache.org/repos/dist/dev/hugegraph/`)
 
-##### A. 源码包
+##### A. source package
 
-解压 `xxx-hugegraph-source.tar.gz`后, 进行如下检查:
+After decompressing `xxx-hugegraph-source.tar.gz`, Do the following checks:
 
-1. 文件夹都带有 `incubating`, 且不存在**空的**文件/文件夹
-2. 存在`DISCLAIMER`文件
-3. 存在 `LICENSE` + `NOTICE` 文件并且内容正常
-4. **不存在**任何二进制文件
-5. 源码文件都包含标准 `ASF License` 头 (这个用插件跑一下为主)
-6. 检查每个父/子模块的 `pom.xml` 版本号是否一致 (且符合期望)
-7. 检查前 3 ~ 5 个 commit 提交, 点进去看看是否修改处和源码文件一致
-8. 最后, 确保源码可以正常/正确编译 (然后看看测试和规范)
+1. folders with `incubating`, and no **empty** files/folders
+2. `DISCLAIMER` file exists
+3. `LICENSE` + `NOTICE` file exists and the content is normal
+4. ** does not exist ** any binaries
+5. The source code files all contain the standard `ASF License` header ((this can be done using a plugin))
+6. Check whether the `pom.xml` version number of each parent/child module is consistent (and meet expectations)
+7. Check the first 3 to 5 commits, click to see if the modification is consistent with the source file
+8. Finally, make sure the source code works/compiles correctly (then look at tests and specs)
 
 ```bash
-# 同时也可以检查一下代码风格是否符合规范, 不符合的可以放下一次调整
+# At the same time, you can also check whether the code style conforms to the specification, and if it does not conform, you can put down an adjustment
 mvn clean test -Dcheckstyle.skip=false
 ```
 
-##### B. 二进制包
+##### B. binary package
 
-解压 `xxx-hugegraph.tar.gz`后, 进行如下检查:
+After decompressing `xxx-hugegraph.tar.gz`, perform the following checks:
 
-1. 文件夹都带有 `incubating`
-2. 存在 `LICENSE` + `NOTICE` 文件并且内容正常
-3. 通过 gpg 命令确认每个文件的签名正常
+1. folders with `incubating`
+2. `LICENSE` and `NOTICE` file exists and the content is normal
+3. Confirm that the signature of each file is normal through the gpg command
 
-**注:** 如果二进制包里面引入了第三方依赖, 则需要更新 LICENSE, 加入第三方依赖的 LICENSE; 若第三方依赖 LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更新我们的 NOTICE 文件
+**Note:** If a third-party dependency is introduced in the binary package, you need to update the LICENSE and add the third-party dependent LICENSE; if the third-party dependent LICENSE is Apache 2.0, and the corresponding project contains NOTICE, you also need to update Our NOTICE file
 
-#### 4. 检查官网以及 github 等页面
+#### 4. Check the official website and github and other pages
 
-1. 确保官网至少满足 [apache website check](https://whimsy.apache.org/pods/project/hugegraph), 以及没有死链等
-2. 更新**下载链接**以及版本更新说明
+1. Make sure that the official website at least meets [apache website check](https://whimsy.apache.org/pods/project/hugegraph), and no circular links etc.
+2. Update **download link** and version update instructions
 3. ...
