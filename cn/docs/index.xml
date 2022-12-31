@@ -3659,11 +3659,8 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;blockquote>
 &lt;p>TinkerPop API允许打开事务，请求完成时会自动关闭(Gremlin Server强制关闭)&lt;/p>
 &lt;/blockquote></description></item><item><title>Docs: Download HugeGraph</title><link>/cn/docs/download/download/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/download/download/</guid><description>
-&lt;blockquote>
-&lt;p>TODO: update 1.0.0 download link&lt;/p>
-&lt;/blockquote>
 &lt;h3 id="latest-version">Latest version&lt;/h3>
-&lt;p>The latest HugeGraph: &lt;strong>0.12.0&lt;/strong>, released on &lt;em>2021-12-31&lt;/em>.&lt;/p>
+&lt;p>The latest HugeGraph: &lt;strong>1.0.0&lt;/strong>, released on &lt;em>2022-12-31&lt;/em>.&lt;/p>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -3676,26 +3673,48 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;tr>
 &lt;td>HugeGraph-Server&lt;/td>
 &lt;td>HugeGraph的主程序&lt;/td>
-&lt;td>&lt;a href="https://github.com/hugegraph/hugegraph/releases/download/v0.12.0/hugegraph-0.12.0.tar.gz">0.12.0&lt;/a>&lt;/td>
+&lt;td>&lt;a href="https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz">1.0.0&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>HugeGraph-Hubble&lt;/td>
-&lt;td>基于Web的可视化图形界面&lt;/td>
-&lt;td>&lt;a href="https://github.com/hugegraph/hugegraph-hubble/releases/download/v1.6.0/hugegraph-hubble-1.6.0.tar.gz">1.6.0&lt;/a>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>HugeGraph-Loader&lt;/td>
-&lt;td>数据导入工具&lt;/td>
-&lt;td>&lt;a href="https://github.com/hugegraph/hugegraph-loader/releases/download/v0.12.0/hugegraph-loader-0.12.0.tar.gz">0.12.0&lt;/a>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>HugeGraph-Tools&lt;/td>
-&lt;td>命令行工具集&lt;/td>
-&lt;td>&lt;a href="https://github.com/hugegraph/hugegraph-tools/releases/download/v1.6.0/hugegraph-tools-1.6.0.tar.gz">1.6.0&lt;/a>&lt;/td>
+&lt;td>HugeGraph-Toolchain&lt;/td>
+&lt;td>数据导入/导出/备份, Web可视化图形界面等工具合集&lt;/td>
+&lt;td>&lt;a href="https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz">1.0.0&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
 &lt;h3 id="versions-mapping">Versions mapping&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Version&lt;/th>
+&lt;th>Release Date&lt;/th>
+&lt;th>server&lt;/th>
+&lt;th>client&lt;/th>
+&lt;th>loader&lt;/th>
+&lt;th>hubble&lt;/th>
+&lt;th>computer&lt;/th>
+&lt;th>common&lt;/th>
+&lt;th>tools&lt;/th>
+&lt;th>Release Notes&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>1.0.0&lt;/td>
+&lt;td>2022-12-31&lt;/td>
+&lt;td>[&lt;a href="https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz">Source&lt;/a>] [&lt;a href="https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>[&lt;a href="https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0.tar.gz">Source&lt;/a>] [&lt;a href="https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;td>[&lt;a href="https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-commons-incubating-1.0.0-src.tar.gz">Source&lt;/a>] [&lt;a href="https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-commons-incubating-1.0.0-src.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-commons-incubating-1.0.0-src.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;td>[&lt;a href="https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz">Source&lt;/a>] [&lt;a href="https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;td>&lt;a href="/docs/changelog/hugegraph-1.0.0-release-notes/">Release-Notes&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="旧版本下载地址-outdated-versions-mapping">旧版本下载地址 (Outdated Versions mapping)&lt;/h3>
 &lt;table>
 &lt;thead>
 &lt;tr>
