@@ -140,23 +140,64 @@
 &lt;/ol></description></item><item><title>Docs: 验证 Apache 发版</title><link>/cn/docs/contribution-guidelines/validate-release/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/contribution-guidelines/validate-release/</guid><description>
 &lt;h2 id="验证阶段">验证阶段&lt;/h2>
 &lt;p>当内部的临时发布和打包工作完成后, 其他的社区开发者(尤其是 PMC)需要参与到&lt;a href="https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist">验证环节&lt;/a>确保某个人发布版本的&amp;quot;正确性 + 完整性&amp;quot;, 这里需要&lt;strong>每个人&lt;/strong>都尽量参与, 然后后序&lt;strong>邮件回复&lt;/strong>的时候说明自己&lt;strong>已检查&lt;/strong>了哪些项. (下面是核心项)&lt;/p>
-&lt;h4 id="1-检查-hash-值">1. 检查 hash 值&lt;/h4>
-&lt;p>首先需要检查 &lt;code>source + binary&lt;/code> 包的文件完整性, 通过 &lt;code>shasum&lt;/code> 进行校验, 确保和发布到 apache/github 上的 hash 值一致 (一般是 sha512), 这里同0x02的最后一步检验.&lt;/p>
-&lt;h4 id="2-检查-gpg-签名">2. 检查 gpg 签名&lt;/h4>
-&lt;p>这个就是为了确保发布的包是由&lt;strong>可信赖&lt;/strong>的人上传的, 假设 tom 签名后上传, 其他人应该下载 A 的&lt;strong>公钥&lt;/strong>然后进行&lt;strong>签名确认&lt;/strong>, 相关命令:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 1. 下载项目可信赖公钥到本地 (首次需要)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl xxx &amp;gt;&amp;gt; PK
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg --import PK
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 1.2 等待响应后输入 trust 表示信任 tom 的公钥 (其他人名类似)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg -edit-key tom
+&lt;h4 id="1-准备工作">1. 准备工作&lt;/h4>
+&lt;p>如果本地没有 svn 或 gpg 环境, 建议先安装一下 (windows 推荐使用 WSL2 环境, 或者至少是 &lt;code>git-bash&lt;/code>)&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 1. 安装svn&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># ubuntu/debian&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt install subversion -y
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># MacOS&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>brew install subversion
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 验证安装是否成功, 执行以下命令:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>svn --version
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 2. 检查签名 (可用 0x03 章节的第 ⑧ 步的 for 循环脚本批量遍历)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 2. 安装gpg&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># ubuntu/debian&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt-get install gnupg -y
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># MacOS&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>brew install gnupg
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 验证安装是否成功, 执行以下命令:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg --version
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 3. 下载 hugegraph-svn 目录 (版本号注意填写此次验证版本, 这里以1.0.0为例)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>svn co https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># (注) 如果出现 svn 下载某个文件速度很慢的情况, 可以考虑 wget 单个文件下载, 如下 (或考虑使用代理)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="2-检查-hash-值">2. 检查 hash 值&lt;/h4>
+&lt;p>首先需要检查 &lt;code>source + binary&lt;/code> 包的文件完整性, 通过 &lt;code>shasum&lt;/code> 进行校验, 确保和发布到 apache/github 上的 hash 值一致 (一般是 sha512)&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>执行命令:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">for&lt;/span> i in *.tar.gz&lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#204a87;font-weight:bold">do&lt;/span> &lt;span style="color:#204a87">echo&lt;/span> &lt;span style="color:#000">$i&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span> shasum -a &lt;span style="color:#0000cf;font-weight:bold">512&lt;/span> --check &lt;span style="color:#000">$i&lt;/span>.sha512&lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#204a87;font-weight:bold">done&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="3-检查-gpg-签名">3. 检查 gpg 签名&lt;/h4>
+&lt;p>这个就是为了确保发布的包是由&lt;strong>可信赖&lt;/strong>的人上传的, 假设 tom 签名后上传, 其他人应该下载 A 的&lt;strong>公钥&lt;/strong>然后进行&lt;strong>签名确认&lt;/strong>, 相关命令:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 1. 下载项目可信赖公钥到本地 (首次需要) &amp;amp; 导入&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl https://downloads.apache.org/incubator/hugegraph/KEYS &amp;gt; KEYS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg --import KEYS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 导入后可以看到如下输出, 这代表导入了 3 个用户公钥&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg: /home/ubuntu/.gnupg/trustdb.gpg: trustdb created
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg: key B78B058CC255F6DC: public key &lt;span style="color:#4e9a06">&amp;#34;Imba Jin (apache mail) &amp;lt;jin@apache.org&amp;gt;&amp;#34;&lt;/span> imported
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg: key 818108E7924549CC: public key &lt;span style="color:#4e9a06">&amp;#34;vaughn &amp;lt;vaughn@apache.org&amp;gt;&amp;#34;&lt;/span> imported
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg: key 28DCAED849C4180E: public key &lt;span style="color:#4e9a06">&amp;#34;coderzc (CODE SIGNING KEY) &amp;lt;zhaocong@apache.org&amp;gt;&amp;#34;&lt;/span> imported
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg: Total number processed: &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg: imported: &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 2. 信任发版用户 (这里需要信任 3 个, 对 Imba Jin, vaughn, coderzc 依次执行相同操作)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg --edit-key Imba Jin &lt;span style="color:#8f5902;font-style:italic"># 以第一个为例, 进入交互模式&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg&amp;gt; trust
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...输出选项..
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Your decision? &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span> &lt;span style="color:#8f5902;font-style:italic">#选择5&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Do you really want to &lt;span style="color:#204a87">set&lt;/span> this key to ultimate trust? &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>y/N&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> y &lt;span style="color:#8f5902;font-style:italic">#选择y, 然后 q 退出信任下一个用户&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 3. 检查签名(确保没有 Warning 输出, 每一个 source/binary 文件都提示 Good Signature)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">#单个文件验证&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg --verify xx.asc xxx-source.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg --verify xx.asc xxx-binary.tar.gz &lt;span style="color:#8f5902;font-style:italic"># 注: 我们目前没有 binary 后缀&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>先确认了整体的完整性/一致性, 然后接下来确认具体的内容 (&lt;strong>关键&lt;/strong>)&lt;/p>
-&lt;h4 id="3-检查压缩包内容">3. 检查压缩包内容&lt;/h4>
-&lt;p>这里分源码包 + 二进制包两个方面, 源码包更为严格, 挑核心的部分说 (完整的列表参考官方 &lt;a href="https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist">Wiki&lt;/a>, 比较长)&lt;/p>
-&lt;p>首先我们需要从 apache 官方的 &lt;code>release-candidate&lt;/code> 地址下载包到本地 (地址: &lt;code>dist.apache.org/repos/dist/dev/hugegraph/&lt;/code>)&lt;/p>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">#for循环遍历验证(推荐使用)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">for&lt;/span> i in *.tar.gz&lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#204a87;font-weight:bold">do&lt;/span> &lt;span style="color:#204a87">echo&lt;/span> &lt;span style="color:#000">$i&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span> gpg --verify &lt;span style="color:#000">$i&lt;/span>.asc &lt;span style="color:#000">$i&lt;/span> &lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#204a87;font-weight:bold">done&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>先确认了整体的&amp;quot;完整性 + 一致性&amp;quot;, 然后接下来确认具体的内容 (&lt;strong>关键&lt;/strong>)&lt;/p>
+&lt;h4 id="4-检查压缩包内容">4. 检查压缩包内容&lt;/h4>
+&lt;p>这里分源码包 + 二进制包两个方面, 源码包更为严格, 挑核心的部分说 (完整的列表可参考官方 &lt;a href="https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist">Wiki&lt;/a>, 比较长)&lt;/p>
+&lt;p>首先我们需要从 apache 官方的 &lt;code>release-candidate&lt;/code> 地址下载包到本地 (地址: &lt;a href="https://dist.apache.org/repos/dist/dev/incubator/hugegraph/">点击跳转&lt;/a>)&lt;/p>
 &lt;h5 id="a-源码包">A. 源码包&lt;/h5>
 &lt;p>解压 &lt;code>xxx-hugegraph-source.tar.gz&lt;/code>后, 进行如下检查:&lt;/p>
 &lt;ol>
@@ -170,18 +211,17 @@
 &lt;li>最后, 确保源码可以正常/正确编译 (然后看看测试和规范)&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 同时也可以检查一下代码风格是否符合规范, 不符合的可以放下一次调整&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn clean &lt;span style="color:#204a87">test&lt;/span> -Dcheckstyle.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn clean package -Dmaven.test.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">true&lt;/span> -Dcheckstyle.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">false&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="b-二进制包">B. 二进制包&lt;/h5>
 &lt;p>解压 &lt;code>xxx-hugegraph.tar.gz&lt;/code>后, 进行如下检查:&lt;/p>
 &lt;ol>
 &lt;li>文件夹都带有 &lt;code>incubating&lt;/code>&lt;/li>
 &lt;li>存在 &lt;code>LICENSE&lt;/code> + &lt;code>NOTICE&lt;/code> 文件并且内容正常&lt;/li>
-&lt;li>通过 gpg 命令确认每个文件的签名正常&lt;/li>
 &lt;/ol>
 &lt;p>&lt;strong>注:&lt;/strong> 如果二进制包里面引入了第三方依赖, 则需要更新 LICENSE, 加入第三方依赖的 LICENSE; 若第三方依赖 LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更新我们的 NOTICE 文件&lt;/p>
-&lt;h4 id="4-检查官网以及-github-等页面">4. 检查官网以及 github 等页面&lt;/h4>
+&lt;h4 id="5-检查官网以及-github-等页面">5. 检查官网以及 github 等页面&lt;/h4>
 &lt;ol>
 &lt;li>确保官网至少满足 &lt;a href="https://whimsy.apache.org/pods/project/hugegraph">apache website check&lt;/a>, 以及没有死链等&lt;/li>
 &lt;li>更新&lt;strong>下载链接&lt;/strong>以及版本更新说明&lt;/li>
-&lt;li>…..&lt;/li>
+&lt;li>&amp;hellip;&lt;/li>
 &lt;/ol></description></item></channel></rss>
