@@ -4,20 +4,23 @@ linkTitle: "Download"
 weight: 2
 ---
 
-> TODO: update 1.0.0 download link
-
 ### Latest version
 
-The latest HugeGraph: **0.12.0**, released on _2021-12-31_.
+The latest HugeGraph: **1.0.0**, released on _2022-12-31_.
 
 | components       | description   | download                                                                                                         |
 |------------------|---------------|------------------------------------------------------------------------------------------------------------------|
-| HugeGraph-Server | HugeGraph的主程序 | [0.12.0](https://github.com/hugegraph/hugegraph/releases/download/v0.12.0/hugegraph-0.12.0.tar.gz)               |
-| HugeGraph-Hubble | 基于Web的可视化图形界面 | [1.6.0](https://github.com/hugegraph/hugegraph-hubble/releases/download/v1.6.0/hugegraph-hubble-1.6.0.tar.gz)    |
-| HugeGraph-Loader | 数据导入工具        | [0.12.0](https://github.com/hugegraph/hugegraph-loader/releases/download/v0.12.0/hugegraph-loader-0.12.0.tar.gz) |
-| HugeGraph-Tools  | 命令行工具集        | [1.6.0](https://github.com/hugegraph/hugegraph-tools/releases/download/v1.6.0/hugegraph-tools-1.6.0.tar.gz)      |
+| HugeGraph-Server | HugeGraph的主程序 | [1.0.0](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz)               |
+| HugeGraph-Hubble | 基于Web的可视化图形界面 | 1.0.0  |
+| HugeGraph-Loader | 数据导入工具        | 1.0.0 |
+| HugeGraph-Tools  | 命令行工具集        | [1.0.0](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz)      |
 
-### Versions mapping
+###  Versions mapping
+|Version   |  Release Date | server  | client  | loader  |hubble   | computer  |common  |   	tools | Release Notes  |
+| ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ |
+| 1.0.0  | 2022-12-31  | [[Source](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz)] [[Sign](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz.asc)] [[SHA512](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz.sha512)]  |   |   |   |  [[Source](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0.tar.gz)] [[Sign](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0.tar.gz.asc)] [[SHA512](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0.tar.gz.sha512)]   |  [[Source](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-commons-incubating-1.0.0-src.tar.gz)] [[Sign](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-commons-incubating-1.0.0-src.tar.gz.asc)] [[SHA512](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-commons-incubating-1.0.0-src.tar.gz.sha512)]   |   [[Source](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz)] [[Sign](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz.asc)] [[SHA512](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz.sha512)]  |[Release-Notes](/docs/changelog/hugegraph-1.0.0-release-notes/)|
+---
+### outdated Versions mapping
 
 | server                                                                                             | client                                                                                 | loader                                                                                                           | hubble                                                                                                             | common                                                                                   | tools                                                                                                       |
 |----------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
