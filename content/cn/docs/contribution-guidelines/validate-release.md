@@ -60,9 +60,13 @@ Your decision? 5 #选择5
 Do you really want to set this key to ultimate trust? (y/N) y #选择y, 然后 q 退出信任下一个用户
 
 
-# 3. 检查签名 (可用 0x03 章节的第 ⑧ 步的 for 循环脚本批量遍历)
+# 3. 检查签名(确保没有 Warning 输出, 每一个 source/binary 文件都提示 Good Signature)
+#单个文件验证
 gpg --verify xx.asc xxx-source.tar.gz
 gpg --verify xx.asc xxx-binary.tar.gz # 注: 我们目前没有 binary 后缀
+#for循环遍历处理
+for i in *.tar.gz; do echo $i; gpg --verify $i.asc $i ; done
+
 ```
 
 先确认了整体的完整性/一致性, 然后接下来确认具体的内容 (**关键**)
