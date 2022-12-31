@@ -35,6 +35,10 @@ wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hug
 
 首先需要检查 `source + binary` 包的文件完整性, 通过 `shasum` 进行校验, 确保和发布到 apache/github 上的 hash 值一致 (一般是 sha512), 这里同0x02的最后一步检验.
 
+```bash
+执行命令:
+for i in *.tar.gz; do echo $i; shasum -a 512 --check  $i.sha512; done
+```
 #### 3. 检查 gpg 签名
 
 这个就是为了确保发布的包是由**可信赖**的人上传的, 假设 tom 签名后上传, 其他人应该下载 A 的**公钥**然后进行**签名确认**, 相关命令:
@@ -92,7 +96,7 @@ for i in *.tar.gz; do echo $i; gpg --verify $i.asc $i ; done
 
 ```bash
 # 同时也可以检查一下代码风格是否符合规范, 不符合的可以放下一次调整
-mvn clean test -Dcheckstyle.skip=false
+mvn clean package -Dmaven.test.skip=true -Dcheckstyle.skip=false
 ```
 
 ##### B. 二进制包
