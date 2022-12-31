@@ -3,7 +3,10 @@ title: "Validate Apache Release"
 linkTitle: "Validate Apache Release"
 weight: 3
 ---
-## verification phase
+
+> TODO: enhance this doc soon
+
+## Verification
 
 When the internal temporary release and packaging work is completed, other community developers (especially PMC) need to participate in the [verification link](https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist)To ensure the "correctness + completeness" of someone's published version, here requires **everyone** to participate as much as possible, and then explain which items you have **checked** in the subsequent **email reply**. (The following are the core items)
 
