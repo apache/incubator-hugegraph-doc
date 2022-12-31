@@ -64,7 +64,7 @@ Do you really want to set this key to ultimate trust? (y/N) y #选择y, 然后 q
 #单个文件验证
 gpg --verify xx.asc xxx-source.tar.gz
 gpg --verify xx.asc xxx-binary.tar.gz # 注: 我们目前没有 binary 后缀
-#for循环遍历处理
+#for循环遍历验证(推荐使用)
 for i in *.tar.gz; do echo $i; gpg --verify $i.asc $i ; done
 
 ```
