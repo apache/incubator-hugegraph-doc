@@ -14,15 +14,19 @@ The latest HugeGraph: **1.0.0**, released on _2022-12-31_.
 | HugeGraph-Toolchain  | 数据导入/导出/备份, Web可视化图形界面等工具合集    | [1.0.0](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz)      |
 
 ### Binary Versions mapping
+
 |Version   |  Release Date | server  |toolchain|computer   | Release Notes  |
 | ------------ | ------------ | ------------ |------------ | ------------ | ------------ | ------------ |
 | 1.0.0  | 2022-12-31  | [[Binary](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz)] [[Sign](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz.asc)] [[SHA512](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz.sha512)]  | [[Binary](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz)] [[Sign](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz.asc)] [[SHA512](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz.sha512)]  |   [[Binary](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0.tar.gz)] [[Sign](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0.tar.gz.asc)] [[SHA512](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0.tar.gz.sha512)]    |[Release-Notes](/docs/changelog/hugegraph-1.0.0-release-notes/)|
----
+
 ### Source Versions mapping
+
 |Version   |  Release Date | server  |toolchain|computer  |common  | Release Notes  |
 | ------------ | ------------ | ------------ |------------ | ------------ | ------------ | ------------ |
 | 1.0.0  | 2022-12-31  | [[Source](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0-src.tar.gz)] [[Sign](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0-src.tar.gz.asc)] [[SHA512](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0-src.tar.gz.sha512)]  | [[Source](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0-src.tar.gz)] [[Sign](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0-src.tar.gz.asc)] [[SHA512](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0-src.tar.gz.sha512)]  |   [[Source](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0-src.tar.gz)] [[Sign](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0-src.tar.gz.asc)] [[SHA512](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0-src.tar.gz.sha512)]   |  [[Source](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-commons-incubating-1.0.0-src.tar.gz)] [[Sign](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-commons-incubating-1.0.0-src.tar.gz.asc)] [[SHA512](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-commons-incubating-1.0.0-src.tar.gz.sha512)]   |[Release-Notes](/docs/changelog/hugegraph-1.0.0-release-notes/)|
+
 ---
+
 ### 旧版本下载地址 (Outdated Versions mapping)
 
 | server                                                                                             | client                                                                                 | loader                                                                                                           | hubble                                                                                                             | common                                                                                   | tools                                                                                                       |
@@ -38,7 +42,8 @@ The latest HugeGraph: **1.0.0**, released on _2022-12-31_.
 | [0.4.5](https://hugegraph.github.io/hugegraph-downloads/hugegraph-release-0.4.5-SNAPSHOT.tar.gz)   | [1.4.7](https://mvnrepository.com/artifact/com.baidu.hugegraph/hugegraph-client/1.4.7) | [0.2.2](https://hugegraph.github.io/hugegraph-downloads/hugegraph-loader/hugegraph-loader-0.2.2-bin.tar.gz)      | [0.4.1](https://hugegraph.github.io/hugegraph-downloads/hugegraph-studio/hugestudio-release-0.4.1-SNAPSHOT.tar.gz) | 1.3.12                                                                                   |                                                                                                             |
 
 > 说明：最新的图分析和展示平台为 hubble，支持 0.10 及之后的 server 版本；studio 为 server 0.10.x 以及之前的版本的图分析和展示平台，其功能从 0.10 起不再更新。
-### Release Notes
+
+### Release Notes (old version)
 
 - 2021-12-31: Release HugeGraph 0.12.0，see [HugeGraph 0.12.0 Release Notes](/docs/changelog/hugegraph-0.12.0-release-notes)
 - 2020-11-20: Release HugeGraph 0.11.2，see [HugeGraph 0.11.2 Release Notes](/docs/changelog/hugegraph-0.11.2-release-notes)
