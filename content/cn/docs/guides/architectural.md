@@ -8,18 +8,18 @@ weight: 1
 
 作为一款通用的图数据库产品，HugeGraph需具备图数据的基本功能，如下图所示。HugeGraph包括三个层次的功能，分别是存储层、计算层和用户接口层。 HugeGraph支持OLTP和OLAP两种图计算类型，其中OLTP实现了[Apache TinkerPop3](https://tinkerpop.apache.org)框架，并支持[Gremlin](https://tinkerpop.apache.org/gremlin.html)查询语言。 OLAP计算是基于SparkGraphX实现。
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/design/architectural-overview.png" alt="image">
-</center>
+</div>
 
 
 ### 2 组件
 
 HugeGraph的主要功能分为HugeCore、ApiServer、HugeGraph-Client、HugeGraph-Loader和HugeGraph-Studio等组件构成，各组件之间的通信关系如下图所示。
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/design/architectural-component.png" alt="image">
-</center>
+</div>
 
 
 - HugeCore ：HugeGraph的核心模块，TinkerPop的接口主要在该模块中实现。HugeCore的功能涵盖包括OLTP和OLAP两个部分。

@@ -8,9 +8,9 @@ weight: 1
 
 被压机器信息
 
-CPU                                          | Memory | 网卡        | 磁盘
--------------------------------------------- | ------ | --------- | ------------------
-48 Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz | 128G   | 10000Mbps | 750GB SSD,2.7T HDD
+| CPU                                          | Memory | 网卡        | 磁盘                 |
+|----------------------------------------------|--------|-----------|--------------------|
+| 48 Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz | 128G   | 10000Mbps | 750GB SSD,2.7T HDD |
 
 - 起压力机器信息：与被压机器同配置
 - 测试工具：apache-Jmeter-2.5.1
@@ -57,9 +57,9 @@ CPU                                          | Memory | 网卡        | 磁盘
 
 ###### 顶点的最大插入速度：
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/API-perf/v0.5.6/rocksdb/vertex_batch.png" alt="image">
-</center>
+</div>
 
 
 ####### 结论：
@@ -68,9 +68,9 @@ CPU                                          | Memory | 网卡        | 磁盘
 
 ###### 边的最大插入速度
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/API-perf/v0.5.6/rocksdb/edge_batch.png" alt="image">
-</center>
+</div>
 
 ####### 结论：
 
@@ -91,9 +91,9 @@ CPU                                          | Memory | 网卡        | 磁盘
 
 ###### 顶点的单条插入
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/API-perf/v0.5.6/rocksdb/vertex_single.png" alt="image">
-</center>
+</div>
 
 
 ####### 结论：

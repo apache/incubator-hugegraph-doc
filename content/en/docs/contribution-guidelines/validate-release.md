@@ -82,7 +82,7 @@ First confirm the overall integrity/consistency, and then confirm the specific c
 
 #### 4. Check the archive contents
 
-Here it is divided into two aspects: source code package + binary package, The source code package is more strict, it can be said that the core part (Because it is longer,For a complete list refer to the official [Wiki](https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist))
+Here it is divided into two aspects: source code package + binary package, The source code package is stricter, it can be said that the core part (Because it is longer,For a complete list refer to the official [Wiki](https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist))
 
 First of all, we need to download the package from the apache official `release-candidate` URL to the local (URL: [click to jump](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/))
 
@@ -114,7 +114,7 @@ After decompressing `xxx-hugegraph.tar.gz`, perform the following checks:
 
 **Note:** If a third-party dependency is introduced in the binary package, you need to update the LICENSE and add the third-party dependent LICENSE; if the third-party dependent LICENSE is Apache 2.0, and the corresponding project contains NOTICE, you also need to update Our NOTICE file
 
-#### 5. Check the official website and github and other pages
+#### 5. Check the official website and GitHub and other pages
 
 1. Make sure that the official website at least meets [apache website check](https://whimsy.apache.org/pods/project/hugegraph), and no circular links etc.
 2. Update **download link** and version update instructions

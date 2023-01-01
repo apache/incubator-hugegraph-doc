@@ -47,16 +47,16 @@ $ git clone https://github.com/hugegraph/hugegraph-loader.git
 由于Oracle ojdbc license的限制，需要手动安装ojdbc到本地maven仓库。
 访问[Oracle jdbc 下载](https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html) 页面。选择Oracle Database 12c Release 2 (12.2.0.1) drivers，如下图所示。
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/oracle-download.png" alt="image">
-</center>
+</div>
 
 
 打开链接后，选择“ojdbc8.jar”, 如下图所示。
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/ojdbc8.png" alt="image">
-</center>
+</div>
 
 
  把ojdbc8安装到本地maven仓库，进入``ojdbc8.jar``所在目录，执行以下命令。
@@ -87,10 +87,10 @@ mvn clean package -DskipTests
 比如想创建一个拥有两类顶点及两类边的图，顶点是"人"和"软件"，边是"人认识人"和"人创造软件"，并且这些顶点和边都带有一些属性，比如顶点"人"有："姓名"、"年龄"等属性，
 "软件"有："名字"、"售卖价格"等属性；边"认识"有: "日期"属性等。
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/demo-graph-model.png" alt="image">
   <p>示例图模型</p>
-</center>
+</div>
 
 
 在设计好了图模型之后，我们可以用`groovy`编写出`schema`的定义，并保存至文件中，这里命名为`schema.groovy`。
@@ -535,7 +535,7 @@ Office,388
 }
 ```
 
-映射文件 1.0 版本是以顶点和边为中心，设置输入源；而 2.0 版本是以输入源为中心，设置顶点和边映射。有些输入源（比如一个文件）既能生成顶点，也能生成边，如果用 1.0 版的格式写，就需要在 vertex 和 egde 映射块中各写一次 input 块，这两次的 input 块是完全一样的；而 2.0 版本只需要写一次 input。所以 2.0 版相比于 1.0 版，能省掉一些 input 的重复书写。
+映射文件 1.0 版本是以顶点和边为中心，设置输入源；而 2.0 版本是以输入源为中心，设置顶点和边映射。有些输入源（比如一个文件）既能生成顶点，也能生成边，如果用 1.0 版的格式写，就需要在 vertex 和 edge 映射块中各写一次 input 块，这两次的 input 块是完全一样的；而 2.0 版本只需要写一次 input。所以 2.0 版相比于 1.0 版，能省掉一些 input 的重复书写。
 
 在 hugegraph-loader-{version} 的 bin 目录下，有一个脚本工具 `mapping-convert.sh` 能直接将 1.0 版本的映射文件转换为 2.0 版本的，使用方式如下：
 
@@ -596,41 +596,41 @@ bin/mapping-convert.sh struct.json
 
 **MYSQL**
 
-| 节点 | 固定值或常见值 |
-| --- | --- | 
-| vendor | MYSQL |
-| driver | com.mysql.cj.jdbc.Driver |
-| url | jdbc:mysql://127.0.0.1:3306 |
+| 节点     | 固定值或常见值                     |
+|--------|-----------------------------| 
+| vendor | MYSQL                       |
+| driver | com.mysql.cj.jdbc.Driver    |
+| url    | jdbc:mysql://127.0.0.1:3306 |
 
 schema: 可空，若填写必须与database的值一样
 
 **POSTGRESQL**
 
-| 节点 | 固定值或常见值 |
-| --- | --- | 
-| vendor | POSTGRESQL |
-| driver | org.postgresql.Driver |
-| url | jdbc:postgresql://127.0.0.1:5432 |
+| 节点     | 固定值或常见值                          |
+|--------|----------------------------------| 
+| vendor | POSTGRESQL                       |
+| driver | org.postgresql.Driver            |
+| url    | jdbc:postgresql://127.0.0.1:5432 |
 
 schema: 可空，默认值为“public”
 
 **ORACLE**
 
-| 节点 | 固定值或常见值 |
-| --- | --- | 
-| vendor | ORACLE |
-| driver | oracle.jdbc.driver.OracleDriver |
-| url | jdbc:oracle:thin:@127.0.0.1:1521 |
+| 节点     | 固定值或常见值                          |
+|--------|----------------------------------| 
+| vendor | ORACLE                           |
+| driver | oracle.jdbc.driver.OracleDriver  |
+| url    | jdbc:oracle:thin:@127.0.0.1:1521 |
 
 schema: 可空，默认值与用户名相同
 
 **SQLSERVER**
 
-| 节点 | 固定值或常见值 |
-| --- | --- | 
-| vendor | SQLSERVER |
+| 节点     | 固定值或常见值                                      |
+|--------|----------------------------------------------| 
+| vendor | SQLSERVER                                    |
 | driver | com.microsoft.sqlserver.jdbc.SQLServerDriver |
-| url | jdbc:sqlserver://127.0.0.1:1433 |
+| url    | jdbc:sqlserver://127.0.0.1:1433              |
 
 schema: 必填
 
