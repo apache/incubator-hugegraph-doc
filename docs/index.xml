@@ -3523,22 +3523,12 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;tbody>
 &lt;tr>
 &lt;td>HugeGraph-Server&lt;/td>
-&lt;td>HugeGraph 的主程序&lt;/td>
+&lt;td>The main program of HugeGraph&lt;/td>
 &lt;td>&lt;a href="https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz">1.0.0&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>HugeGraph-Hubble&lt;/td>
-&lt;td>基于 Web 的可视化图形界面&lt;/td>
-&lt;td>1.0.0&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>HugeGraph-Loader&lt;/td>
-&lt;td>数据导入工具&lt;/td>
-&lt;td>1.0.0&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>HugeGraph-Tools&lt;/td>
-&lt;td>命令行工具集&lt;/td>
+&lt;td>HugeGraph-Toolchain&lt;/td>
+&lt;td>A collection of tools for graph data import/export/backup, web visualization, etc.&lt;/td>
 &lt;td>&lt;a href="https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz">1.0.0&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;/tbody>
