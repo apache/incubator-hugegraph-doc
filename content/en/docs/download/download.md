@@ -12,10 +12,8 @@ The latest HugeGraph: **1.0.0**, released on _2022-12-31_.
 
 | components       | description               | download                                                                                                                     |
 | ---------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| HugeGraph-Server | HugeGraph 的主程序        | [1.0.0](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz)           |
-| HugeGraph-Hubble | 基于 Web 的可视化图形界面 | 1.0.0                                                                                                                        |
-| HugeGraph-Loader | 数据导入工具              | 1.0.0                                                                                                                        |
-| HugeGraph-Tools  | 命令行工具集              | [1.0.0](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz) |
+| HugeGraph-Server | The main program of HugeGraph        | [1.0.0](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz)           |
+| HugeGraph-Tools  | A collection of tools for graph data import/export/backup, web visualization, etc.              | [1.0.0](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz) |
 
 ### Binary Versions mapping
 
