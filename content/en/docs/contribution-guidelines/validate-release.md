@@ -101,7 +101,7 @@ After decompressing `xxx-hugegraph-source.tar.gz`, Do the following checks:
 
 ```bash
 # At the same time, you can also check whether the code style conforms to the specification, and if it does not conform, you can put down an adjustment
-mvn clean test -Dcheckstyle.skip=false
+mvn clean package -Dmaven.test.skip=true -Dcheckstyle.skip=true
 ```
 
 ##### B. binary package

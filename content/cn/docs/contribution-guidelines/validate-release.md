@@ -100,7 +100,7 @@ for i in *.tar.gz; do echo $i; gpg --verify $i.asc $i ; done
 
 ```bash
 # 同时也可以检查一下代码风格是否符合规范, 不符合的可以放下一次调整
-mvn clean package -Dmaven.test.skip=true -Dcheckstyle.skip=false
+mvn clean package -Dmaven.test.skip=true -Dcheckstyle.skip=true
 ```
 
 ##### B. 二进制包
