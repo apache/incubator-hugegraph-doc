@@ -22,7 +22,7 @@ weight: 7
 
 ### 2.1 在本地运行 PageRank 算法
 
-> 要使用 HugeGraph-Computer 运行算法，您需要安装 64 位 JREJDK 11 或更高版本。
+> 要使用 HugeGraph-Computer 运行算法，您需要安装 64 位 Java 11 或更高版本。
 >
 > 还需要首先部署 HugeGraph-Server 和 [Etcd](https://etcd.io/docs/v3.5/quickstart/).
 

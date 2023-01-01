@@ -100,7 +100,10 @@ After decompressing `xxx-hugegraph-source.tar.gz`, Do the following checks:
 8. Finally, make sure the source code works/compiles correctly (then look at tests and specs)
 
 ```bash
-# At the same time, you can also check whether the code style conforms to the specification, and if it does not conform, you can put down an adjustment
+# prefer to use/switch to java 11 for the following operations (compiling/running)
+# java --version
+
+# try to test in the Unix env to check if it works well
 mvn clean package -Dmaven.test.skip=true -Dcheckstyle.skip=true
 ```
 

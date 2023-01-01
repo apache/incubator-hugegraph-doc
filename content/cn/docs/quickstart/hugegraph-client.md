@@ -10,8 +10,8 @@ HugeGraph-Client向HugeGraph-Server发出HTTP请求，获取并解析Server的�
 
 ### 2 环境要求
 
-- jdk1.8
-- maven-3.3.9
+- java 11 (兼容 java 8)
+- maven 3.5+
 
 ### 3 使用流程
 
