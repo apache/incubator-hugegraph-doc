@@ -1,14 +1,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HugeGraph – GUIDES</title><link>/cn/docs/guides/</link><description>Recent content in GUIDES on HugeGraph</description><generator>Hugo -- gohugo.io</generator><atom:link href="/cn/docs/guides/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: HugeGraph Architecture Overview</title><link>/cn/docs/guides/architectural/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/guides/architectural/</guid><description>
 &lt;h3 id="1-概述">1 概述&lt;/h3>
 &lt;p>作为一款通用的图数据库产品，HugeGraph需具备图数据的基本功能，如下图所示。HugeGraph包括三个层次的功能，分别是存储层、计算层和用户接口层。 HugeGraph支持OLTP和OLAP两种图计算类型，其中OLTP实现了&lt;a href="https://tinkerpop.apache.org">Apache TinkerPop3&lt;/a>框架，并支持&lt;a href="https://tinkerpop.apache.org/gremlin.html">Gremlin&lt;/a>查询语言。 OLAP计算是基于SparkGraphX实现。&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/design/architectural-overview.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h3 id="2-组件">2 组件&lt;/h3>
 &lt;p>HugeGraph的主要功能分为HugeCore、ApiServer、HugeGraph-Client、HugeGraph-Loader和HugeGraph-Studio等组件构成，各组件之间的通信关系如下图所示。&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/design/architectural-component.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;ul>
 &lt;li>HugeCore ：HugeGraph的核心模块，TinkerPop的接口主要在该模块中实现。HugeCore的功能涵盖包括OLTP和OLAP两个部分。&lt;/li>
 &lt;li>ApiServer ：提供RESTFul Api接口，对外提供Graph Api、Schema Api和Gremlin Api等接口服务。&lt;/li>
@@ -574,7 +574,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>启动服务时提示：&lt;code>xxx (core dumped) xxx&lt;/code>&lt;/p>
-&lt;p>请检查JDK版本是否为1.8&lt;/p>
+&lt;p>请检查JDK版本是否为 Java11 (至少是Java8)&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>启动服务成功了，但是操作图时有类似于&amp;quot;无法连接到后端或连接未打开&amp;quot;的提示&lt;/p>

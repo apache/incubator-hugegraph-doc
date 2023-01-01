@@ -6,8 +6,8 @@
 &lt;p>There will be two spellings HugeGraph-Server and HugeGraphServer in the document, and other modules are similar. There is no big difference in the meaning of these two ways of writing, which can be distinguished as follows: &lt;code>HugeGraph-Server&lt;/code> represents the code of server-related components, &lt;code>HugeGraphServer&lt;/code> represents the service process.&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="2-dependency">2 Dependency&lt;/h3>
-&lt;h4 id="21-install-jdk-18">2.1 Install JDK-1.8&lt;/h4>
-&lt;p>HugeGraph-Server developed based on jdk-1.8, project&amp;rsquo;s code uses many classes and methods in jdk-1.8, please install and configure by yourself.&lt;/p>
+&lt;h4 id="21-install-java11-jdk-11">2.1 Install Java11 (JDK 11)&lt;/h4>
+&lt;p>Consider use Java 11 to run &lt;code>HugeGraph-Server&lt;/code>(also compatible with Java 8), and configure by yourself.&lt;/p>
 &lt;p>&lt;strong>Be sure to execute the &lt;code>java -version&lt;/code> command to check the jdk version before reading&lt;/strong>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>java -version
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="22-install-gcc-430glibcxx_3410-or-update-version-optional">2.2 Install GCC-4.3.0(GLIBCXX_3.4.10) or update version (optional)&lt;/h4>
@@ -326,10 +326,10 @@ Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-d
 &lt;p>This step is the modeling process. Users need to have a clear idea of ​​their existing data and the graph model they want to create, and then write the schema to build the graph model.&lt;/p>
 &lt;p>For example, if you want to create a graph with two types of vertices and two types of edges, the vertices are &amp;ldquo;people&amp;rdquo; and &amp;ldquo;software&amp;rdquo;, the edges are &amp;ldquo;people know people&amp;rdquo; and &amp;ldquo;people create software&amp;rdquo;, and these vertices and edges have some attributes, For example, the vertex &amp;ldquo;person&amp;rdquo; has: &amp;ldquo;name&amp;rdquo;, &amp;ldquo;age&amp;rdquo; and other attributes,
 &amp;ldquo;Software&amp;rdquo; includes: &amp;ldquo;name&amp;rdquo;, &amp;ldquo;sale price&amp;rdquo; and other attributes; side &amp;ldquo;knowledge&amp;rdquo; includes: &amp;ldquo;date&amp;rdquo; attribute and so on.&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/demo-graph-model.png" alt="image">
 &lt;p>graph model example&lt;/p>
-&lt;/center>
+&lt;/div>
 &lt;p>After designing the graph model, we can use &lt;code>groovy&lt;/code> to write the definition of &lt;code>schema&lt;/code> and save it to a file, here named &lt;code>schema.groovy&lt;/code>.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// Create some properties
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asText&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
@@ -704,7 +704,7 @@ Office,388
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The 1.0 version of the mapping file is centered on the vertex and edge, and sets the input source; while the 2.0 version is centered on the input source, and sets the vertex and edge mapping. Some input sources (such as a file) can generate both vertices and edges. If you write in the 1.0 format, you need to write an input block in each of the vertex and egde mapping blocks. The two input blocks are exactly the same ; and the 2.0 version only needs to write input once. Therefore, compared with version 1.0, version 2.0 can save some repetitive writing of input.&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The 1.0 version of the mapping file is centered on the vertex and edge, and sets the input source; while the 2.0 version is centered on the input source, and sets the vertex and edge mapping. Some input sources (such as a file) can generate both vertices and edges. If you write in the 1.0 format, you need to write an input block in each of the vertex and edge mapping blocks. The two input blocks are exactly the same ; and the 2.0 version only needs to write input once. Therefore, compared with version 1.0, version 2.0 can save some repetitive writing of input.&lt;/p>
 &lt;p>In the bin directory of hugegraph-loader-{version}, there is a script tool &lt;code>mapping-convert.sh&lt;/code> that can directly convert the mapping file of version 1.0 to version 2.0. The usage is as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/mapping-convert.sh struct.json
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>A struct-v2.json will be generated in the same directory as struct.json.&lt;/p>
@@ -2264,8 +2264,8 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;p>HugeGraph-Client sends HTTP request to HugeGraph-Server to obtain and parse the execution result of Server. Currently only the HugeGraph-Client for Java is provided. You can use HugeGraph-Client to write Java code to operate HugeGraph, such as adding, deleting, modifying, and querying schema and graph data, or executing gremlin statements.&lt;/p>
 &lt;h3 id="2-what-you-need">2 What You Need&lt;/h3>
 &lt;ul>
-&lt;li>JDK 1.8&lt;/li>
-&lt;li>Maven 3.3.9+&lt;/li>
+&lt;li>Java 11 (also support Java 8)&lt;/li>
+&lt;li>Maven 3.5+&lt;/li>
 &lt;/ul>
 &lt;h3 id="3-how-to-use">3 How To Use&lt;/h3>
 &lt;p>The basic steps to use HugeGraph-Client are as follows:&lt;/p>
@@ -2594,7 +2594,7 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;h2 id="2-get-started">2 Get Started&lt;/h2>
 &lt;h3 id="21-run-pagerank-algorithm-locally">2.1 Run PageRank algorithm locally&lt;/h3>
 &lt;blockquote>
-&lt;p>To run algorithm with HugeGraph-Computer, you need to install 64-bit JRE/JDK 11 or later versions.&lt;/p>
+&lt;p>To run algorithm with HugeGraph-Computer, you need to install 64-bit Java 11 or later versions.&lt;/p>
 &lt;p>You also need to deploy HugeGraph-Server and &lt;a href="https://etcd.io/docs/v3.5/quickstart/">Etcd&lt;/a>.&lt;/p>
 &lt;/blockquote>
 &lt;p>There are two ways to get HugeGraph-Computer:&lt;/p>

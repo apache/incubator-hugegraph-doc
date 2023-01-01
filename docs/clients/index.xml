@@ -188,7 +188,7 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;/tbody>
 &lt;/table>
 &lt;ul>
-&lt;li>idStrategy: Each VertexLabel can choose its own ID strategy. There are currently three strategies to choose from, namely Automatic (automatically generated), Customize (user input) and PrimaryKey (primary attribute key). Among them, Automatic uses the Snowflake algorithm to generate Id, Customize requires the user to pass in the Id of string or number type, and PrimaryKey allows the user to select several properties of VertexLabel as the basis for differentiation. HugeGraph will be spliced and generated ID according to the value of the primary properties. idStrategy uses Automatic by default, but if the user does not explicitly set idStrategy and calls the primaryKeys(&amp;hellip;) method to set the primary property, then idStrategy will automatically use PrimaryKey.&lt;/li>
+&lt;li>idStrategy: Each VertexLabel can choose its own ID strategy. There are currently three strategies to choose from, namely Automatic (automatically generated), Customize (user input) and PrimaryKey (primary attribute key). Among them, Automatic uses the Snowflake algorithm to generate ID, Customize requires the user to pass in the ID of string or number type, and PrimaryKey allows the user to select several properties of VertexLabel as the basis for differentiation. HugeGraph will be spliced and generated ID according to the value of the primary properties. idStrategy uses Automatic by default, but if the user does not explicitly set idStrategy and calls the primaryKeys(&amp;hellip;) method to set the primary property, then idStrategy will automatically use PrimaryKey.&lt;/li>
 &lt;/ul>
 &lt;table>
 &lt;thead>

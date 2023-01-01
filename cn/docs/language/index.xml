@@ -482,9 +482,9 @@
 &lt;/ul>
 &lt;h4 id="12-人物关系图谱">1.2 人物关系图谱&lt;/h4>
 &lt;p>本示例通过Property Graph Model图数据模型来描述希腊神话中各人物角色的关系（也被成为人物关系图谱），具体关系详见下图。&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/graph-of-gods.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>其中，圆形节点代表实体(Vertex)，箭头代表关系（Edge），方框的内容为属性。&lt;/p>
 &lt;p>该关系图谱中有两类顶点，分别是人物（character）和位置（location）如下表：&lt;/p>
 &lt;table>

@@ -6,8 +6,8 @@
 &lt;p>文档中会大量出现&lt;code>HugeGraph-Server&lt;/code>及&lt;code>HugeGraphServer&lt;/code>这两种写法，其他组件也类似。这两种写法含义上并无大的差异，可以这么区分：&lt;code>HugeGraph-Server&lt;/code>表示服务端相关组件代码，&lt;code>HugeGraphServer&lt;/code>表示服务进程。&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="2-依赖">2 依赖&lt;/h3>
-&lt;h4 id="21-安装jdk-18">2.1 安装JDK-1.8&lt;/h4>
-&lt;p>HugeGraph-Server 基于jdk-1.8开发，代码用到了较多jdk-1.8中的类和方法，请用户自行安装配置。&lt;/p>
+&lt;h4 id="21-安装-java-11-jdk-11">2.1 安装 Java 11 (JDK 11)&lt;/h4>
+&lt;p>请优先考虑在 Java11 的环境上启动 &lt;code>HugeGraph-Server&lt;/code>, 目前同时保留对 Java8 的兼容&lt;/p>
 &lt;p>&lt;strong>在往下阅读之前务必执行&lt;code>java -version&lt;/code>命令查看jdk版本&lt;/strong>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>java -version
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="22-安装gcc-430glibcxx_3410或更新版本可选">2.2 安装GCC-4.3.0(GLIBCXX_3.4.10)或更新版本（可选）&lt;/h4>
@@ -303,13 +303,13 @@ restserver.url=http://0.0.0.0:8080
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ git clone https://github.com/hugegraph/hugegraph-loader.git
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>由于Oracle ojdbc license的限制，需要手动安装ojdbc到本地maven仓库。
 访问&lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html">Oracle jdbc 下载&lt;/a> 页面。选择Oracle Database 12c Release 2 (12.2.0.1) drivers，如下图所示。&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/oracle-download.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>打开链接后，选择“ojdbc8.jar”, 如下图所示。&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/ojdbc8.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>把ojdbc8安装到本地maven仓库，进入&lt;code>ojdbc8.jar&lt;/code>所在目录，执行以下命令。&lt;/p>
 &lt;pre tabindex="0">&lt;code>mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
 &lt;/code>&lt;/pre>&lt;p>编译生成 tar 包:&lt;/p>
@@ -327,10 +327,10 @@ restserver.url=http://0.0.0.0:8080
 &lt;p>这一步是建模的过程，用户需要对自己已有的数据和想要创建的图模型有一个清晰的构想，然后编写 schema 建立图模型。&lt;/p>
 &lt;p>比如想创建一个拥有两类顶点及两类边的图，顶点是&amp;quot;人&amp;quot;和&amp;quot;软件&amp;quot;，边是&amp;quot;人认识人&amp;quot;和&amp;quot;人创造软件&amp;quot;，并且这些顶点和边都带有一些属性，比如顶点&amp;quot;人&amp;quot;有：&amp;ldquo;姓名&amp;rdquo;、&amp;ldquo;年龄&amp;quot;等属性，
 &amp;ldquo;软件&amp;quot;有：&amp;ldquo;名字&amp;rdquo;、&amp;ldquo;售卖价格&amp;quot;等属性；边&amp;quot;认识&amp;quot;有: &amp;ldquo;日期&amp;quot;属性等。&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/demo-graph-model.png" alt="image">
 &lt;p>示例图模型&lt;/p>
-&lt;/center>
+&lt;/div>
 &lt;p>在设计好了图模型之后，我们可以用&lt;code>groovy&lt;/code>编写出&lt;code>schema&lt;/code>的定义，并保存至文件中，这里命名为&lt;code>schema.groovy&lt;/code>。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// 创建一些属性
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asText&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
@@ -705,7 +705,7 @@ Office,388
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>映射文件 1.0 版本是以顶点和边为中心，设置输入源；而 2.0 版本是以输入源为中心，设置顶点和边映射。有些输入源（比如一个文件）既能生成顶点，也能生成边，如果用 1.0 版的格式写，就需要在 vertex 和 egde 映射块中各写一次 input 块，这两次的 input 块是完全一样的；而 2.0 版本只需要写一次 input。所以 2.0 版相比于 1.0 版，能省掉一些 input 的重复书写。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>映射文件 1.0 版本是以顶点和边为中心，设置输入源；而 2.0 版本是以输入源为中心，设置顶点和边映射。有些输入源（比如一个文件）既能生成顶点，也能生成边，如果用 1.0 版的格式写，就需要在 vertex 和 edge 映射块中各写一次 input 块，这两次的 input 块是完全一样的；而 2.0 版本只需要写一次 input。所以 2.0 版相比于 1.0 版，能省掉一些 input 的重复书写。&lt;/p>
 &lt;p>在 hugegraph-loader-{version} 的 bin 目录下，有一个脚本工具 &lt;code>mapping-convert.sh&lt;/code> 能直接将 1.0 版本的映射文件转换为 2.0 版本的，使用方式如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/mapping-convert.sh struct.json
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>会在 struct.json 的同级目录下生成一个 struct-v2.json。&lt;/p>
@@ -1909,39 +1909,39 @@ HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
 &lt;p>对于需要遍历全图的Gremlin任务，索引的创建与重建等耗时较长的异步任务，平台提供相应的任务管理功能，实现异步任务的统一的管理与结果查看。&lt;/p>
 &lt;h3 id="2平台使用流程">2 平台使用流程&lt;/h3>
 &lt;p>平台的模块使用流程如下：&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/2平台使用流程.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h3 id="3平台使用说明">3 平台使用说明&lt;/h3>
 &lt;h4 id="31图管理">3.1 图管理&lt;/h4>
 &lt;h5 id="311图创建">3.1.1 图创建&lt;/h5>
 &lt;p>图管理模块下，点击【创建图】，通过填写图ID、图名称、主机名、端口号、用户名、密码的信息，实现多图的连接。&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/311图创建.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>创建图填写内容如下：&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/311图创建2.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h5 id="312图访问">3.1.2 图访问&lt;/h5>
 &lt;p>实现图空间的信息访问，进入后，可进行图的多维查询分析、元数据管理、数据导入、算法分析等操作。&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/312图访问.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h5 id="313图管理">3.1.3 图管理&lt;/h5>
 &lt;ol>
 &lt;li>用户通过对图的概览、搜索以及单图的信息编辑与删除，实现图的统一管理。&lt;/li>
 &lt;li>搜索范围：可对图名称和ID进行搜索。&lt;/li>
 &lt;/ol>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/313图管理.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h4 id="32元数据建模列表图模式">3.2 元数据建模（列表+图模式）&lt;/h4>
 &lt;h5 id="321模块入口">3.2.1 模块入口&lt;/h5>
 &lt;p>左侧导航处：&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/321元数据入口.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h5 id="322属性类型">3.2.2 属性类型&lt;/h5>
 &lt;h6 id="3221创建">3.2.2.1 创建&lt;/h6>
 &lt;ol>
@@ -1949,26 +1949,26 @@ HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
 &lt;li>创建的属性可作为顶点类型和边类型的属性。&lt;/li>
 &lt;/ol>
 &lt;p>列表模式：&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/3221属性创建.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>图模式：&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/3221属性创建2.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h6 id="3222复用">3.2.2.2 复用&lt;/h6>
 &lt;ol>
 &lt;li>平台提供【复用】功能，可直接复用其他图的元数据。&lt;/li>
 &lt;li>选择需要复用的图ID，继续选择需要复用的属性，之后平台会进行是否冲突的校验，通过后，可实现元数据的复用。&lt;/li>
 &lt;/ol>
 &lt;p>选择复用项：&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/3222属性复用.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>校验复用项：&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/3222属性复用2.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h6 id="3223管理">3.2.2.3 管理&lt;/h6>
 &lt;ol>
 &lt;li>在属性列表中可进行单条删除或批量删除操作。&lt;/li>
@@ -2248,8 +2248,8 @@ HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
 &lt;p>HugeGraph-Client向HugeGraph-Server发出HTTP请求，获取并解析Server的执行结果。目前仅提供了Java版，用户可以使用HugeGraph-Client编写Java代码操作HugeGraph，比如元数据和图数据的增删改查，或者执行gremlin语句。&lt;/p>
 &lt;h3 id="2-环境要求">2 环境要求&lt;/h3>
 &lt;ul>
-&lt;li>jdk1.8&lt;/li>
-&lt;li>maven-3.3.9&lt;/li>
+&lt;li>java 11 (兼容 java 8)&lt;/li>
+&lt;li>maven 3.5+&lt;/li>
 &lt;/ul>
 &lt;h3 id="3-使用流程">3 使用流程&lt;/h3>
 &lt;p>使用HugeGraph-Client的基本步骤如下:&lt;/p>
@@ -2579,7 +2579,7 @@ HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
 &lt;h2 id="2-开始">2 开始&lt;/h2>
 &lt;h3 id="21-在本地运行-pagerank-算法">2.1 在本地运行 PageRank 算法&lt;/h3>
 &lt;blockquote>
-&lt;p>要使用 HugeGraph-Computer 运行算法，您需要安装 64 位 JREJDK 11 或更高版本。&lt;/p>
+&lt;p>要使用 HugeGraph-Computer 运行算法，您需要安装 64 位 Java 11 或更高版本。&lt;/p>
 &lt;p>还需要首先部署 HugeGraph-Server 和 &lt;a href="https://etcd.io/docs/v3.5/quickstart/">Etcd&lt;/a>.&lt;/p>
 &lt;/blockquote>
 &lt;p>有两种方式可以获取 HugeGraph-Computer：&lt;/p>

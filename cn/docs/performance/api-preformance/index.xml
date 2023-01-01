@@ -53,17 +53,17 @@
 &lt;h6 id="压力参数">压力参数&lt;/h6>
 &lt;p>持续时间：5min&lt;/p>
 &lt;h6 id="顶点的最大插入速度">顶点的最大插入速度：&lt;/h6>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/rocksdb/vertex_batch.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>####### 结论：&lt;/p>
 &lt;ul>
 &lt;li>并发2200，顶点的吞吐量是2026.8，每秒可处理的数据：2026.8*200=405360/s&lt;/li>
 &lt;/ul>
 &lt;h6 id="边的最大插入速度">边的最大插入速度&lt;/h6>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/rocksdb/edge_batch.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>####### 结论：&lt;/p>
 &lt;ul>
 &lt;li>并发900，边的吞吐量是776.9，每秒可处理的数据：776.9*500=388450/s&lt;/li>
@@ -78,9 +78,9 @@
 &lt;li>服务异常标志：错误率大于0.00%&lt;/li>
 &lt;/ul>
 &lt;h6 id="顶点的单条插入">顶点的单条插入&lt;/h6>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/rocksdb/vertex_single.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>####### 结论：&lt;/p>
 &lt;ul>
 &lt;li>并发11500，吞吐量为10730，顶点的单条插入并发能力为11500&lt;/li>
@@ -172,17 +172,17 @@
 &lt;h6 id="压力参数">压力参数&lt;/h6>
 &lt;p>持续时间：5min&lt;/p>
 &lt;h6 id="顶点的最大插入速度">顶点的最大插入速度：&lt;/h6>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/cassandra/vertex_batch.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>####### 结论：&lt;/p>
 &lt;ul>
 &lt;li>并发3500，顶点的吞吐量是261，每秒可处理的数据：261*200=52200/s&lt;/li>
 &lt;/ul>
 &lt;h6 id="边的最大插入速度">边的最大插入速度&lt;/h6>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/cassandra/edge_batch.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>####### 结论：&lt;/p>
 &lt;ul>
 &lt;li>并发1000，边的吞吐量是323，每秒可处理的数据：323*500=161500/s&lt;/li>
@@ -197,17 +197,17 @@
 &lt;li>服务异常标志：错误率大于0.00%&lt;/li>
 &lt;/ul>
 &lt;h6 id="顶点的单条插入">顶点的单条插入&lt;/h6>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/cassandra/vertex_single.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>####### 结论：&lt;/p>
 &lt;ul>
 &lt;li>并发9000，吞吐量为8400，顶点的单条插入并发能力为9000&lt;/li>
 &lt;/ul>
 &lt;h6 id="边的单条插入">边的单条插入&lt;/h6>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/cassandra/edge_single.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>####### 结论：&lt;/p>
 &lt;ul>
 &lt;li>并发4500，吞吐量是4160，边的单条插入并发能力为4500&lt;/li>
@@ -222,17 +222,17 @@
 &lt;li>服务异常标志：错误率大于0.00%&lt;/li>
 &lt;/ul>
 &lt;h6 id="顶点的按id查询">顶点的按id查询&lt;/h6>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/cassandra/vertex_id_query.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>####### 结论：&lt;/p>
 &lt;ul>
 &lt;li>并发14500，吞吐量是13576，顶点的按id查询的并发能力为14500，平均延时为11ms&lt;/li>
 &lt;/ul>
 &lt;h6 id="边的按id查询">边的按id查询&lt;/h6>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/cassandra/edge_id_query.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>####### 结论：&lt;/p>
 &lt;ul>
 &lt;li>并发12000，吞吐量是10688，边的按id查询的并发能力为12000，平均延时为63ms&lt;/li>
@@ -301,18 +301,18 @@
 &lt;h6 id="压力参数">压力参数&lt;/h6>
 &lt;p>持续时间：5min&lt;/p>
 &lt;h6 id="顶点和边的最大插入速度高性能服务器使用ssd存储rocksdb数据">顶点和边的最大插入速度（高性能服务器，使用SSD存储RocksDB数据）：&lt;/h6>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.4.4/best.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h6 id="结论">结论：&lt;/h6>
 &lt;ul>
 &lt;li>并发1000，边的吞吐量是是451，每秒可处理的数据：451*500条=225500/s&lt;/li>
 &lt;li>并发2000，顶点的吞吐量是1842.4，每秒可处理的数据：1842.4*200=368480/s&lt;/li>
 &lt;/ul>
 &lt;p>&lt;strong>1. CPU和内存对插入性能的影响（服务器都使用HDD存储RocksDB数据，批量插入）&lt;/strong>&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.4.4/cpu-memory.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h6 id="结论-1">结论：&lt;/h6>
 &lt;ul>
 &lt;li>同样使用HDD硬盘，CPU和内存增加了1倍&lt;/li>
@@ -320,18 +320,18 @@
 &lt;li>顶点：吞吐量从1263.8提升至1842.4，性能提升了约45%&lt;/li>
 &lt;/ul>
 &lt;p>&lt;strong>2. SSD和HDD对插入性能的影响（高性能服务器，批量插入）&lt;/strong>&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.4.4/ssd.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h6 id="结论-2">结论：&lt;/h6>
 &lt;ul>
 &lt;li>边：使用SSD吞吐量451.7,使用HDD吞吐量426.6，性能提升5%&lt;/li>
 &lt;li>顶点：使用SSD吞吐量1842.4，使用HDD吞吐量1794，性能提升约3%&lt;/li>
 &lt;/ul>
 &lt;p>&lt;strong>3. 不同并发线程数对插入性能的影响（普通服务器，使用HDD存储RocksDB数据）&lt;/strong>&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.4.4/threads-batch.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h6 id="结论-3">结论：&lt;/h6>
 &lt;ul>
 &lt;li>顶点：1000并发，响应时间7ms和1500并发响应时间1028ms差距悬殊，且吞吐量一直保持在1300左右，因此拐点数据应该在1300 ，且并发1300时，响应时间已达到22ms，在可控范围内，相比HugeGraph 0.2（1000并发：平均响应时间8959ms），处理能力出现质的飞跃；&lt;/li>
@@ -346,9 +346,9 @@
 &lt;li>持续时间：5min&lt;/li>
 &lt;li>服务异常标志：错误率大于0.00%&lt;/li>
 &lt;/ul>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.4.4/threads-single.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h6 id="结论-4">结论：&lt;/h6>
 &lt;ul>
 &lt;li>顶点：
@@ -404,7 +404,7 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;li>Min &amp;ndash; 最小响应时间&lt;/li>
 &lt;li>Max &amp;ndash; 最大响应时间&lt;/li>
 &lt;li>Error &amp;ndash; 出错率&lt;/li>
-&lt;li>Troughput &amp;ndash; 吞吐量Â&lt;/li>
+&lt;li>Throughput &amp;ndash; 吞吐量Â&lt;/li>
 &lt;li>KB/sec &amp;ndash; 以流量做衡量的吞吐量&lt;/li>
 &lt;/ul>
 &lt;p>&lt;em>注：时间的单位均为ms&lt;/em>&lt;/p>

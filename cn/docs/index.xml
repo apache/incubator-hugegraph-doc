@@ -1,14 +1,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HugeGraph – Documentation</title><link>/cn/docs/</link><description>Recent content in Documentation on HugeGraph</description><generator>Hugo -- gohugo.io</generator><atom:link href="/cn/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: HugeGraph Architecture Overview</title><link>/cn/docs/guides/architectural/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/guides/architectural/</guid><description>
 &lt;h3 id="1-概述">1 概述&lt;/h3>
 &lt;p>作为一款通用的图数据库产品，HugeGraph需具备图数据的基本功能，如下图所示。HugeGraph包括三个层次的功能，分别是存储层、计算层和用户接口层。 HugeGraph支持OLTP和OLAP两种图计算类型，其中OLTP实现了&lt;a href="https://tinkerpop.apache.org">Apache TinkerPop3&lt;/a>框架，并支持&lt;a href="https://tinkerpop.apache.org/gremlin.html">Gremlin&lt;/a>查询语言。 OLAP计算是基于SparkGraphX实现。&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/design/architectural-overview.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h3 id="2-组件">2 组件&lt;/h3>
 &lt;p>HugeGraph的主要功能分为HugeCore、ApiServer、HugeGraph-Client、HugeGraph-Loader和HugeGraph-Studio等组件构成，各组件之间的通信关系如下图所示。&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/design/architectural-component.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;ul>
 &lt;li>HugeCore ：HugeGraph的核心模块，TinkerPop的接口主要在该模块中实现。HugeCore的功能涵盖包括OLTP和OLAP两个部分。&lt;/li>
 &lt;li>ApiServer ：提供RESTFul Api接口，对外提供Graph Api、Schema Api和Gremlin Api等接口服务。&lt;/li>
@@ -1231,8 +1231,8 @@ serializer=binary
 &lt;p>文档中会大量出现&lt;code>HugeGraph-Server&lt;/code>及&lt;code>HugeGraphServer&lt;/code>这两种写法，其他组件也类似。这两种写法含义上并无大的差异，可以这么区分：&lt;code>HugeGraph-Server&lt;/code>表示服务端相关组件代码，&lt;code>HugeGraphServer&lt;/code>表示服务进程。&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="2-依赖">2 依赖&lt;/h3>
-&lt;h4 id="21-安装jdk-18">2.1 安装JDK-1.8&lt;/h4>
-&lt;p>HugeGraph-Server 基于jdk-1.8开发，代码用到了较多jdk-1.8中的类和方法，请用户自行安装配置。&lt;/p>
+&lt;h4 id="21-安装-java-11-jdk-11">2.1 安装 Java 11 (JDK 11)&lt;/h4>
+&lt;p>请优先考虑在 Java11 的环境上启动 &lt;code>HugeGraph-Server&lt;/code>, 目前同时保留对 Java8 的兼容&lt;/p>
 &lt;p>&lt;strong>在往下阅读之前务必执行&lt;code>java -version&lt;/code>命令查看jdk版本&lt;/strong>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>java -version
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="22-安装gcc-430glibcxx_3410或更新版本可选">2.2 安装GCC-4.3.0(GLIBCXX_3.4.10)或更新版本（可选）&lt;/h4>
@@ -1553,209 +1553,63 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph/issues">Github Issues&lt;/a>: 反馈使用问题与功能需求 (优先使用)&lt;/li>
 &lt;li>反馈邮箱：&lt;a href="mailto:hugegraph@googlegroups.com">hugegraph@googlegroups.com&lt;/a>&lt;/li>
 &lt;li>微信公众号：HugeGraph&lt;/li>
-&lt;/ul></description></item><item><title>Docs: HugeGraph 0.12 Release Notes</title><link>/cn/docs/changelog/hugegraph-0.12.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/changelog/hugegraph-0.12.0-release-notes/</guid><description>
-&lt;h3 id="api--client">API &amp;amp; Client&lt;/h3>
+&lt;/ul></description></item><item><title>Docs: HugeGraph 1.0.0 Release Notes</title><link>/cn/docs/changelog/hugegraph-1.0.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/changelog/hugegraph-1.0.0-release-notes/</guid><description>
+&lt;blockquote>
+&lt;p>TODO: update the summary soon, please check the detail in each repository first, thanks
+TODO: translate this article to Chinese&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph/releases/tag/1.0.0">Server Release Note&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/releases/tag/1.0.0">Toolchain Release Note&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-computer/releases/tag/1.0.0">Computer Release Note&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-commons/releases/tag/1.0.0">Commons Release Note&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="server-api--client">Server (API &amp;amp; Client)&lt;/h3>
 &lt;h4 id="接口更新">接口更新&lt;/h4>
 &lt;ul>
-&lt;li>支持 https + auth 模式连接图服务 （hugegraph-client #109 #110）&lt;/li>
-&lt;li>统一 kout/kneighbor 等 OLTP 接口的参数命名及默认值（hugegraph-client #122 #123）&lt;/li>
-&lt;li>支持 RESTful 接口利用 P.textcontains() 进行属性全文检索（hugegraph #1312）&lt;/li>
-&lt;li>增加 graph_read_mode API 接口，以切换 OLTP、OLAP 读模式（hugegraph #1332）&lt;/li>
-&lt;li>支持 list/set 类型的聚合属性 aggregate property（hugegraph #1332）&lt;/li>
-&lt;li>权限接口增加 METRICS 资源类型（hugegraph #1355、hugegraph-client #114）&lt;/li>
-&lt;li>权限接口增加 SCHEMA 资源类型（hugegraph #1362、hugegraph-client #117）&lt;/li>
-&lt;li>增加手动 compact API 接口，支持 rocksdb/cassandra/hbase 后端（hugegraph #1378）&lt;/li>
-&lt;li>权限接口增加 login/logout API，支持颁发或回收 Token（hugegraph #1500、hugegraph-client #125）&lt;/li>
-&lt;li>权限接口增加 project API（hugegraph #1504、hugegraph-client #127）&lt;/li>
-&lt;li>增加 OLAP 回写接口，支持 cassandra/rocksdb 后端（hugegraph #1506、hugegraph-client #129）&lt;/li>
-&lt;li>增加返回一个图的所有 Schema 的 API 接口（hugegraph #1567、hugegraph-client #134）&lt;/li>
-&lt;li>变更 property key 创建与更新 API 的 HTTP 返回码为 202（hugegraph #1584）&lt;/li>
-&lt;li>增强 Text.contains() 支持3种格式：&amp;ldquo;word&amp;rdquo;、&amp;quot;(word)&amp;quot;、&amp;quot;(word1|word2|word3)&amp;quot;（hugegraph #1652）&lt;/li>
-&lt;li>统一了属性中特殊字符的行为（hugegraph #1670 #1684）&lt;/li>
-&lt;li>支持动态创建图实例、克隆图实例、删除图实例（hugegraph-client #135）&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
 &lt;/ul>
 &lt;h4 id="其它修改">其它修改&lt;/h4>
 &lt;ul>
-&lt;li>修复在恢复 index label 时 IndexLabelV56 id 丢失的问题（hugegraph-client #118）&lt;/li>
-&lt;li>为 Edge 类增加 name() 方法（hugegraph-client #121）&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
 &lt;/ul>
 &lt;h3 id="core--server">Core &amp;amp; Server&lt;/h3>
 &lt;h4 id="功能更新">功能更新&lt;/h4>
 &lt;ul>
-&lt;li>支持动态创建图实例（hugegraph #1065）&lt;/li>
-&lt;li>支持通过 Gremlin 调用 OLTP 算法（hugegraph #1289）&lt;/li>
-&lt;li>支持多集群使用同一个图权限服务，以共享权限信息（hugegraph #1350）&lt;/li>
-&lt;li>支持跨多节点的 Cache 缓存同步（hugegraph #1357）&lt;/li>
-&lt;li>支持 OLTP 算法使用原生集合以降低 GC 压力提升性能（hugegraph #1409）&lt;/li>
-&lt;li>支持对新增的 Raft 节点打快照或恢复快照（hugegraph #1439）&lt;/li>
-&lt;li>支持对集合属性建立二级索引 Secondary Index（hugegraph #1474）&lt;/li>
-&lt;li>支持审计日志，及其压缩、限速等功能（hugegraph #1492 #1493）&lt;/li>
-&lt;li>支持 OLTP 算法使用高性能并行无锁原生集合以提升性能（hugegraph #1552）&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
 &lt;/ul>
 &lt;h4 id="bug修复">BUG修复&lt;/h4>
 &lt;ul>
-&lt;li>修复带权最短路径算法（weighted shortest path）NPE问题 （hugegraph #1250）&lt;/li>
-&lt;li>增加 Raft 相关的安全操作白名单（hugegraph #1257）&lt;/li>
-&lt;li>修复 RocksDB 实例未正确关闭的问题（hugegraph #1264）&lt;/li>
-&lt;li>在清空数据 truncate 操作之后，显示的发起写快照 Raft Snapshot（hugegraph #1275）&lt;/li>
-&lt;li>修复 Raft Leader 在收到 Follower 转发请求时未更新缓存的问题（hugegraph #1279）&lt;/li>
-&lt;li>修复带权最短路径算法（weighted shortest path）结果不稳定的问题（hugegraph #1280）&lt;/li>
-&lt;li>修复 rays 算法 limit 参数不生效问题（hugegraph #1284）&lt;/li>
-&lt;li>修复 neighborrank 算法 capacity 参数未检查的问题（hugegraph #1290）&lt;/li>
-&lt;li>修复 PostgreSQL 因为不存在与用户同名的数据库而初始化失败的问题（hugegraph #1293）&lt;/li>
-&lt;li>修复 HBase 后端当启用 Kerberos 时初始化失败的问题（hugegraph #1294）&lt;/li>
-&lt;li>修复 HBase/RocksDB 后端 shard 结束判断错误问题（hugegraph #1306）&lt;/li>
-&lt;li>修复带权最短路径算法（weighted shortest path）未检查目标顶点存在的问题（hugegraph #1307）&lt;/li>
-&lt;li>修复 personalrank/neighborrank 算法中非 String 类型 id 的问题（hugegraph #1310）&lt;/li>
-&lt;li>检查必须是 master 节点才允许调度 gremlin job（hugegraph #1314）&lt;/li>
-&lt;li>修复 g.V().hasLabel().limit(n) 因为索引覆盖导致的部分结果不准确问题（hugegraph #1316）&lt;/li>
-&lt;li>修复 jaccardsimilarity 算法当并集为空时报 NaN 错误的问题（hugegraph #1324）&lt;/li>
-&lt;li>修复 Raft Follower 节点操作 Schema 多节点之间数据不同步问题（hugegraph #1325）&lt;/li>
-&lt;li>修复因为 tx 未关闭导致的 TTL 不生效问题（hugegraph #1330）&lt;/li>
-&lt;li>修复 gremlin job 的执行结果大于 Cassandra 限制但小于任务限制时的异常处理（hugegraph #1334）&lt;/li>
-&lt;li>检查权限接口 auth-delete 和 role-get API 操作时图必须存在（hugegraph #1338）&lt;/li>
-&lt;li>修复异步任务结果中包含 path/tree 时系列化不正常的问题（hugegraph #1351）&lt;/li>
-&lt;li>修复初始化 admin 用户时的 NPE 问题（hugegraph #1360）&lt;/li>
-&lt;li>修复异步任务原子性操作问题，确保 update/get fields 及 re-schedule 的原子性（hugegraph #1361）&lt;/li>
-&lt;li>修复权限 NONE 资源类型的问题（hugegraph #1362）&lt;/li>
-&lt;li>修复启用权限后，truncate 操作报错 SecurityException 及管理员信息丢失问题（hugegraph #1365）&lt;/li>
-&lt;li>修复启用权限后，解析数据忽略了权限异常的问题（hugegraph #1380）&lt;/li>
-&lt;li>修复 AuthManager 在初始化时会尝试连接其它节点的问题（hugegraph #1381）&lt;/li>
-&lt;li>修复特定的 shard 信息导致 base64 解码错误的问题（hugegraph #1383）&lt;/li>
-&lt;li>修复启用权限后，使用 consistent-hash LB 在校验权限时，creator 为空的问题（hugegraph #1385）&lt;/li>
-&lt;li>改进权限中 VAR 资源不再依赖于 VERTEX 资源（hugegraph #1386）&lt;/li>
-&lt;li>规范启用权限后，Schema 操作仅依赖具体的资源（hugegraph #1387）&lt;/li>
-&lt;li>规范启用权限后，部分操作由依赖 STATUS 资源改为依赖 ANY 资源（hugegraph #1391）&lt;/li>
-&lt;li>规范启用权限后，禁止初始化管理员密码为空（hugegraph #1400）&lt;/li>
-&lt;li>检查创建用户时 username/password 不允许为空（hugegraph #1402）&lt;/li>
-&lt;li>修复更新 Label 时，PrimaryKey 或 SortKey 被设置为可空属性的问题（hugegraph #1406）&lt;/li>
-&lt;li>修复 ScyllaDB 丢失分页结果问题（hugegraph #1407）&lt;/li>
-&lt;li>修复带权最短路径算法（weighted shortest path）权重属性强制转换为 double 的问题（hugegraph #1432）&lt;/li>
-&lt;li>统一 OLTP 算法中的 degree 参数命名（hugegraph #1433）&lt;/li>
-&lt;li>修复 fusiformsimilarity 算法当 similars 为空的时候返回所有的顶点问题（hugegraph #1434）&lt;/li>
-&lt;li>改进 paths 算法，当起始点与目标点相同时应该返回空路径（hugegraph #1435）&lt;/li>
-&lt;li>修改 kout/kneighbor 的 limit 参数默认值 10 为 10000000（hugegraph #1436）&lt;/li>
-&lt;li>修复分页信息中的 &amp;lsquo;+&amp;rsquo; 被 URL 编码为空格的问题（hugegraph #1437）&lt;/li>
-&lt;li>改进边更新接口的错误提示信息（hugegraph #1443）&lt;/li>
-&lt;li>修复 kout 算法 degree 未在所有 label 范围生效的问题（hugegraph #1459）&lt;/li>
-&lt;li>改进 kneighbor/kout 算法，起始点不允许出现在结果集中（hugegraph #1459 #1463）&lt;/li>
-&lt;li>统一 kout/kneighbor 的 Get 和 Post 版本行为（hugegraph #1470）&lt;/li>
-&lt;li>改进创建边时顶点类型不匹配的错误提示信息（hugegraph #1477）&lt;/li>
-&lt;li>修复 Range Index 的残留索引问题（hugegraph #1498）&lt;/li>
-&lt;li>修复权限操作未失效缓存的问题（hugegraph #1528）&lt;/li>
-&lt;li>修复 sameneighbor 的 limit 参数默认值 10 为 10000000（hugegraph #1530）&lt;/li>
-&lt;li>修复 clear API 不应该所有后端都调用 create snapshot 的问题（hugegraph #1532）&lt;/li>
-&lt;li>修复当 loading 模式时创建 Index Label 阻塞问题（hugegraph #1548）&lt;/li>
-&lt;li>修复增加图到 project 或从 project 移除图的问题（hugegraph #1562）&lt;/li>
-&lt;li>改进权限操作的一些错误提示信息（hugegraph #1563）&lt;/li>
-&lt;li>支持浮点属性设置为 Infinity/NaN 的值（hugegraph #1578)&lt;/li>
-&lt;li>修复 Raft 启用 safe_read 时的 quorum read 问题（hugegraph #1618)&lt;/li>
-&lt;li>修复 token 过期时间配置的单位问题（hugegraph #1625）&lt;/li>
-&lt;li>修复 MySQL Statement 资源泄露问题（hugegraph #1627）&lt;/li>
-&lt;li>修复竞争条件下 Schema.getIndexLabel 获取不到数据的问题（hugegraph #1629）&lt;/li>
-&lt;li>修复 HugeVertex4Insert 无法系列化问题（hugegraph #1630）&lt;/li>
-&lt;li>修复 MySQL count Statement 未关闭问题（hugegraph #1640）&lt;/li>
-&lt;li>修复当删除 Index Label 异常时，导致状态不同步问题（hugegraph #1642）&lt;/li>
-&lt;li>修复 MySQL 执行 gremlin timeout 导致的 statement 未关闭问题（hugegraph #1643）&lt;/li>
-&lt;li>改进 Search Index 以兼容特殊 Unicode 字符：\u0000 to \u0003（hugegraph #1659）&lt;/li>
-&lt;li>修复 #1659 引入的 Char 未转化为 String 的问题（hugegraph #1664）&lt;/li>
-&lt;li>修复 has() + within() 查询时结果异常问题（hugegraph #1680）&lt;/li>
-&lt;li>升级 Log4j 版本到 2.17 以修复安全漏洞（hugegraph #1686 #1698 #1702）&lt;/li>
-&lt;li>修复 HBase 后端 shard scan 中 startkey 包含空串时 NPE 问题（hugegraph #1691）&lt;/li>
-&lt;li>修复 paths 算法在深层环路遍历时性能下降问题 （hugegraph #1694）&lt;/li>
-&lt;li>改进 personalrank 算法的参数默认值及错误检查（hugegraph #1695）&lt;/li>
-&lt;li>修复 RESTful 接口 P.within 条件不生效问题（hugegraph #1704）&lt;/li>
-&lt;li>修复启用权限时无法动态创建图的问题（hugegraph #1708）&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
 &lt;/ul>
 &lt;h4 id="配置项修改">配置项修改：&lt;/h4>
 &lt;ul>
-&lt;li>共享 SSL 相关配置项命名（hugegraph #1260）&lt;/li>
-&lt;li>支持 RocksDB 配置项 rocksdb.level_compaction_dynamic_level_bytes（hugegraph #1262）&lt;/li>
-&lt;li>去除 RESFful Server 服务协议配置项 restserver.protocol，自动提取 URL 中的 Schema（hugegraph #1272）&lt;/li>
-&lt;li>增加 PostgreSQL 配置项 jdbc.postgresql.connect_database（hugegraph #1293）&lt;/li>
-&lt;li>增加针对顶点主键是否编码的配置项 vertex.encode_primary_key_number（hugegraph #1323）&lt;/li>
-&lt;li>增加针对聚合查询是否启用索引优化的配置项 query.optimize_aggregate_by_index（hugegraph #1549）&lt;/li>
-&lt;li>修改 cache_type 的默认值 l1 为 l2（hugegraph #1681）&lt;/li>
-&lt;li>增加 JDBC 强制重连配置项 jdbc.forced_auto_reconnect（hugegraph #1710）&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
 &lt;/ul>
 &lt;h4 id="其它修改-1">其它修改&lt;/h4>
 &lt;ul>
-&lt;li>增加默认的 SSL Certificate 文件（hugegraph #1254）&lt;/li>
-&lt;li>OLTP 并行请求共享线程池，而非每个请求使用单独的线程池（hugegraph #1258）&lt;/li>
-&lt;li>修复 Example 的问题（hugegraph #1308）&lt;/li>
-&lt;li>使用 jraft 版本 1.3.5（hugegraph #1313）&lt;/li>
-&lt;li>如果启用了 Raft 模式时，关闭 RocksDB 的 WAL（hugegraph #1318）&lt;/li>
-&lt;li>使用 TarLz4Util 来提升快照 Snapshot 压缩的性能（hugegraph #1336）&lt;/li>
-&lt;li>升级存储的版本号（store version），因为 property key 增加了 read frequency（hugegraph #1341）&lt;/li>
-&lt;li>顶点/边 vertex/edge 的 Get API 使用 queryVertex/queryEdge 方法来替代 iterator 方法（hugegraph #1345）&lt;/li>
-&lt;li>支持 BFS 优化的多度查询（hugegraph #1359)&lt;/li>
-&lt;li>改进 RocksDB deleteRange() 带来的查询性能问题（hugegraph #1375）&lt;/li>
-&lt;li>修复 travis-ci cannot find symbol Namifiable 问题（hugegraph #1376）&lt;/li>
-&lt;li>确保 RocksDB 快照的磁盘与 data path 指定的一致（hugegraph #1392）&lt;/li>
-&lt;li>修复 MacOS 空闲内存 free_memory 计算不准确问题（hugegraph #1396）&lt;/li>
-&lt;li>增加 Raft onBusy 回调来配合限速（hugegraph #1401）&lt;/li>
-&lt;li>升级 netty-all 版本 4.1.13.Final 到 4.1.42.Final（hugegraph #1403）&lt;/li>
-&lt;li>支持 TaskScheduler 暂停当设置为 loading 模式时（hugegraph #1414）&lt;/li>
-&lt;li>修复 raft-tools 脚本的问题（hugegraph #1416）&lt;/li>
-&lt;li>修复 license params 问题（hugegraph #1420）&lt;/li>
-&lt;li>提升写权限日志的性能，通过 batch flush &amp;amp; async write 方式改进（hugegraph #1448）&lt;/li>
-&lt;li>增加 MySQL 连接 URL 的日志记录（hugegraph #1451）&lt;/li>
-&lt;li>提升用户信息校验性能（hugegraph# 1460）&lt;/li>
-&lt;li>修复 TTL 因为起始时间问题导致的错误（hugegraph #1478）&lt;/li>
-&lt;li>支持日志配置的热加载及对审计日志的压缩（hugegraph #1492）&lt;/li>
-&lt;li>支持针对用户级别的审计日志的限速（hugegraph #1493）&lt;/li>
-&lt;li>缓存 RamCache 支持用户自定义的过期时间（hugegraph #1494）&lt;/li>
-&lt;li>在 auth client 端缓存 login role 以避免重复的 RPC 调用（hugegraph #1507）&lt;/li>
-&lt;li>修复 IdSet.contains() 未复写 AbstractCollection.contains() 问题（hugegraph #1511）&lt;/li>
-&lt;li>修复当 commitPartOfEdgeDeletions() 失败时，未回滚 rollback 的问题（hugegraph #1513）&lt;/li>
-&lt;li>提升 Cache metrics 性能（hugegraph #1515）&lt;/li>
-&lt;li>当发生 license 操作错误时，增加打印异常日志（hugegraph #1522）&lt;/li>
-&lt;li>改进 SimilarsMap 实现（hugegraph #1523）&lt;/li>
-&lt;li>使用 tokenless 方式来更新 coverage（hugegraph #1529）&lt;/li>
-&lt;li>改进 project update 接口的代码（hugegraph #1537）&lt;/li>
-&lt;li>允许从 option() 访问 GRAPH_STORE（hugegraph #1546）&lt;/li>
-&lt;li>优化 kout/kneighbor 的 count 查询以避免拷贝集合（hugegraph #1550）&lt;/li>
-&lt;li>优化 shortestpath 遍历方式，以数据量少的一端优先遍历（hugegraph #1569）&lt;/li>
-&lt;li>完善 rocksdb.data_disks 配置项的 allowed keys 提示信息（hugegraph #1585）&lt;/li>
-&lt;li>为 number id 优化 OLTP 遍历中的 id2code 方法性能（hugegraph #1623）&lt;/li>
-&lt;li>优化 HugeElement.getProperties() 返回 Collection&amp;lt;Property&amp;gt;（hugegraph #1624）&lt;/li>
-&lt;li>增加 APACHE PROPOSAL 文件（hugegraph #1644）&lt;/li>
-&lt;li>改进 close tx 的流程（hugegraph #1655）&lt;/li>
-&lt;li>当 reset() 时为 MySQL close 捕获所有类型异常（hugegraph #1661）&lt;/li>
-&lt;li>改进 OLAP property 模块代码（hugegraph #1675）&lt;/li>
-&lt;li>改进查询模块的执行性能（hugegraph #1711）&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
 &lt;/ul>
-&lt;h3 id="loader">Loader&lt;/h3>
+&lt;h3 id="toolchain">Toolchain&lt;/h3>
 &lt;ul>
-&lt;li>支持导入 Parquet 格式文件（hugegraph-loader #174）&lt;/li>
-&lt;li>支持 HDFS Kerberos 权限验证（hugegraph-loader #176）&lt;/li>
-&lt;li>支持 HTTPS 协议连接到服务端导入数据（hugegraph-loader #183）&lt;/li>
-&lt;li>修复 trust store file 路径问题（hugegraph-loader #186）&lt;/li>
-&lt;li>处理 loading mode 重置的异常（hugegraph-loader #187）&lt;/li>
-&lt;li>增加在插入数据时对非空属性的检查（hugegraph-loader #190）&lt;/li>
-&lt;li>修复客户端与服务端时区不同导致的时间判断问题（hugegraph-loader #192）&lt;/li>
-&lt;li>优化数据解析性能（hugegraph-loader #194）&lt;/li>
-&lt;li>当用户指定了文件头时，检查其必须不为空（hugegraph-loader #195）&lt;/li>
-&lt;li>修复示例程序中 MySQL struct.json 格式问题（hugegraph-loader #198）&lt;/li>
-&lt;li>修复顶点边导入速度不精确的问题（hugegraph-loader #200 #205）&lt;/li>
-&lt;li>当导入启用 check-vertex 时，确保先导入顶点再导入边（hugegraph-loader #206）&lt;/li>
-&lt;li>修复边 Json 数据导入格式不统一时数组溢出的问题（hugegraph-loader #211）&lt;/li>
-&lt;li>修复因边 mapping 文件不存在导致的 NPE 问题（hugegraph-loader #213）&lt;/li>
-&lt;li>修复读取时间可能出现负数的问题（hugegraph-loader #215)&lt;/li>
-&lt;li>改进目录文件的日志打印（hugegraph-loader #223)&lt;/li>
-&lt;li>改进 loader 的的 Schema 处理流程（hugegraph-loader #230)&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
 &lt;/ul>
-&lt;h3 id="tools">Tools&lt;/h3>
+&lt;h3 id="computer">Computer&lt;/h3>
 &lt;ul>
-&lt;li>支持 HTTPS 协议（hugegraph-tools #71）&lt;/li>
-&lt;li>移除 &amp;ndash;protocol 参数，直接从URL中自动提取（hugegraph-tools #72）&lt;/li>
-&lt;li>支持将数据 dump 到 HDFS 文件系统（hugegraph-tools #73）&lt;/li>
-&lt;li>修复 trust store file 路径问题（hugegraph-tools #75）&lt;/li>
-&lt;li>支持权限信息的备份恢复（hugegraph-tools #76）&lt;/li>
-&lt;li>支持无参数的 Printer 打印（hugegraph-tools #79）&lt;/li>
-&lt;li>修复 MacOS free_memory 计算问题（hugegraph-tools #82）&lt;/li>
-&lt;li>支持备份恢复时指定线程数hugegraph-tools #83）&lt;/li>
-&lt;li>支持动态创建图、克隆图、删除图等命令（hugegraph-tools #95)&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h3 id="commons">Commons&lt;/h3>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
 &lt;/ul></description></item><item><title>Docs: Schema API</title><link>/cn/docs/clients/restful-api/schema/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/restful-api/schema/</guid><description>
 &lt;h3 id="11-schema">1.1 Schema&lt;/h3>
 &lt;p>HugeGraph 提供单一接口获取某个图的全部 Schema 信息，包括：PropertyKey、VertexLabel、EdgeLabel 和 IndexLabel。&lt;/p>
@@ -2115,17 +1969,17 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;h6 id="压力参数">压力参数&lt;/h6>
 &lt;p>持续时间：5min&lt;/p>
 &lt;h6 id="顶点的最大插入速度">顶点的最大插入速度：&lt;/h6>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/rocksdb/vertex_batch.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>####### 结论：&lt;/p>
 &lt;ul>
 &lt;li>并发2200，顶点的吞吐量是2026.8，每秒可处理的数据：2026.8*200=405360/s&lt;/li>
 &lt;/ul>
 &lt;h6 id="边的最大插入速度">边的最大插入速度&lt;/h6>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/rocksdb/edge_batch.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>####### 结论：&lt;/p>
 &lt;ul>
 &lt;li>并发900，边的吞吐量是776.9，每秒可处理的数据：776.9*500=388450/s&lt;/li>
@@ -2140,9 +1994,9 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;li>服务异常标志：错误率大于0.00%&lt;/li>
 &lt;/ul>
 &lt;h6 id="顶点的单条插入">顶点的单条插入&lt;/h6>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/rocksdb/vertex_single.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>####### 结论：&lt;/p>
 &lt;ul>
 &lt;li>并发11500，吞吐量为10730，顶点的单条插入并发能力为11500&lt;/li>
@@ -3852,9 +3706,9 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/ul>
 &lt;h4 id="12-人物关系图谱">1.2 人物关系图谱&lt;/h4>
 &lt;p>本示例通过Property Graph Model图数据模型来描述希腊神话中各人物角色的关系（也被成为人物关系图谱），具体关系详见下图。&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/graph-of-gods.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>其中，圆形节点代表实体(Vertex)，箭头代表关系（Edge），方框的内容为属性。&lt;/p>
 &lt;p>该关系图谱中有两类顶点，分别是人物（character）和位置（location）如下表：&lt;/p>
 &lt;table>
@@ -4760,13 +4614,13 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ git clone https://github.com/hugegraph/hugegraph-loader.git
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>由于Oracle ojdbc license的限制，需要手动安装ojdbc到本地maven仓库。
 访问&lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html">Oracle jdbc 下载&lt;/a> 页面。选择Oracle Database 12c Release 2 (12.2.0.1) drivers，如下图所示。&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/oracle-download.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>打开链接后，选择“ojdbc8.jar”, 如下图所示。&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/ojdbc8.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>把ojdbc8安装到本地maven仓库，进入&lt;code>ojdbc8.jar&lt;/code>所在目录，执行以下命令。&lt;/p>
 &lt;pre tabindex="0">&lt;code>mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
 &lt;/code>&lt;/pre>&lt;p>编译生成 tar 包:&lt;/p>
@@ -4784,10 +4638,10 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;p>这一步是建模的过程，用户需要对自己已有的数据和想要创建的图模型有一个清晰的构想，然后编写 schema 建立图模型。&lt;/p>
 &lt;p>比如想创建一个拥有两类顶点及两类边的图，顶点是&amp;quot;人&amp;quot;和&amp;quot;软件&amp;quot;，边是&amp;quot;人认识人&amp;quot;和&amp;quot;人创造软件&amp;quot;，并且这些顶点和边都带有一些属性，比如顶点&amp;quot;人&amp;quot;有：&amp;ldquo;姓名&amp;rdquo;、&amp;ldquo;年龄&amp;quot;等属性，
 &amp;ldquo;软件&amp;quot;有：&amp;ldquo;名字&amp;rdquo;、&amp;ldquo;售卖价格&amp;quot;等属性；边&amp;quot;认识&amp;quot;有: &amp;ldquo;日期&amp;quot;属性等。&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/demo-graph-model.png" alt="image">
 &lt;p>示例图模型&lt;/p>
-&lt;/center>
+&lt;/div>
 &lt;p>在设计好了图模型之后，我们可以用&lt;code>groovy&lt;/code>编写出&lt;code>schema&lt;/code>的定义，并保存至文件中，这里命名为&lt;code>schema.groovy&lt;/code>。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// 创建一些属性
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asText&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
@@ -5162,7 +5016,7 @@ Office,388
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>映射文件 1.0 版本是以顶点和边为中心，设置输入源；而 2.0 版本是以输入源为中心，设置顶点和边映射。有些输入源（比如一个文件）既能生成顶点，也能生成边，如果用 1.0 版的格式写，就需要在 vertex 和 egde 映射块中各写一次 input 块，这两次的 input 块是完全一样的；而 2.0 版本只需要写一次 input。所以 2.0 版相比于 1.0 版，能省掉一些 input 的重复书写。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>映射文件 1.0 版本是以顶点和边为中心，设置输入源；而 2.0 版本是以输入源为中心，设置顶点和边映射。有些输入源（比如一个文件）既能生成顶点，也能生成边，如果用 1.0 版的格式写，就需要在 vertex 和 edge 映射块中各写一次 input 块，这两次的 input 块是完全一样的；而 2.0 版本只需要写一次 input。所以 2.0 版相比于 1.0 版，能省掉一些 input 的重复书写。&lt;/p>
 &lt;p>在 hugegraph-loader-{version} 的 bin 目录下，有一个脚本工具 &lt;code>mapping-convert.sh&lt;/code> 能直接将 1.0 版本的映射文件转换为 2.0 版本的，使用方式如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/mapping-convert.sh struct.json
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>会在 struct.json 的同级目录下生成一个 struct-v2.json。&lt;/p>
@@ -6084,6 +5938,209 @@ HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
 &lt;li>在 backup/dump 之前清除分片文件（hugegraph-tools #53）&lt;/li>
 &lt;li>改进 HugeGraph-tools 的报错信息（hugegraph-tools #67）&lt;/li>
 &lt;li>改进 migrate 子命令，删除掉不支持的子配置（hugegraph-tools #68）&lt;/li>
+&lt;/ul></description></item><item><title>Docs: HugeGraph 0.12 Release Notes</title><link>/cn/docs/changelog/hugegraph-0.12.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/changelog/hugegraph-0.12.0-release-notes/</guid><description>
+&lt;h3 id="api--client">API &amp;amp; Client&lt;/h3>
+&lt;h4 id="接口更新">接口更新&lt;/h4>
+&lt;ul>
+&lt;li>支持 https + auth 模式连接图服务 （hugegraph-client #109 #110）&lt;/li>
+&lt;li>统一 kout/kneighbor 等 OLTP 接口的参数命名及默认值（hugegraph-client #122 #123）&lt;/li>
+&lt;li>支持 RESTful 接口利用 P.textcontains() 进行属性全文检索（hugegraph #1312）&lt;/li>
+&lt;li>增加 graph_read_mode API 接口，以切换 OLTP、OLAP 读模式（hugegraph #1332）&lt;/li>
+&lt;li>支持 list/set 类型的聚合属性 aggregate property（hugegraph #1332）&lt;/li>
+&lt;li>权限接口增加 METRICS 资源类型（hugegraph #1355、hugegraph-client #114）&lt;/li>
+&lt;li>权限接口增加 SCHEMA 资源类型（hugegraph #1362、hugegraph-client #117）&lt;/li>
+&lt;li>增加手动 compact API 接口，支持 rocksdb/cassandra/hbase 后端（hugegraph #1378）&lt;/li>
+&lt;li>权限接口增加 login/logout API，支持颁发或回收 Token（hugegraph #1500、hugegraph-client #125）&lt;/li>
+&lt;li>权限接口增加 project API（hugegraph #1504、hugegraph-client #127）&lt;/li>
+&lt;li>增加 OLAP 回写接口，支持 cassandra/rocksdb 后端（hugegraph #1506、hugegraph-client #129）&lt;/li>
+&lt;li>增加返回一个图的所有 Schema 的 API 接口（hugegraph #1567、hugegraph-client #134）&lt;/li>
+&lt;li>变更 property key 创建与更新 API 的 HTTP 返回码为 202（hugegraph #1584）&lt;/li>
+&lt;li>增强 Text.contains() 支持3种格式：&amp;ldquo;word&amp;rdquo;、&amp;quot;(word)&amp;quot;、&amp;quot;(word1|word2|word3)&amp;quot;（hugegraph #1652）&lt;/li>
+&lt;li>统一了属性中特殊字符的行为（hugegraph #1670 #1684）&lt;/li>
+&lt;li>支持动态创建图实例、克隆图实例、删除图实例（hugegraph-client #135）&lt;/li>
+&lt;/ul>
+&lt;h4 id="其它修改">其它修改&lt;/h4>
+&lt;ul>
+&lt;li>修复在恢复 index label 时 IndexLabelV56 id 丢失的问题（hugegraph-client #118）&lt;/li>
+&lt;li>为 Edge 类增加 name() 方法（hugegraph-client #121）&lt;/li>
+&lt;/ul>
+&lt;h3 id="core--server">Core &amp;amp; Server&lt;/h3>
+&lt;h4 id="功能更新">功能更新&lt;/h4>
+&lt;ul>
+&lt;li>支持动态创建图实例（hugegraph #1065）&lt;/li>
+&lt;li>支持通过 Gremlin 调用 OLTP 算法（hugegraph #1289）&lt;/li>
+&lt;li>支持多集群使用同一个图权限服务，以共享权限信息（hugegraph #1350）&lt;/li>
+&lt;li>支持跨多节点的 Cache 缓存同步（hugegraph #1357）&lt;/li>
+&lt;li>支持 OLTP 算法使用原生集合以降低 GC 压力提升性能（hugegraph #1409）&lt;/li>
+&lt;li>支持对新增的 Raft 节点打快照或恢复快照（hugegraph #1439）&lt;/li>
+&lt;li>支持对集合属性建立二级索引 Secondary Index（hugegraph #1474）&lt;/li>
+&lt;li>支持审计日志，及其压缩、限速等功能（hugegraph #1492 #1493）&lt;/li>
+&lt;li>支持 OLTP 算法使用高性能并行无锁原生集合以提升性能（hugegraph #1552）&lt;/li>
+&lt;/ul>
+&lt;h4 id="bug修复">BUG修复&lt;/h4>
+&lt;ul>
+&lt;li>修复带权最短路径算法（weighted shortest path）NPE问题 （hugegraph #1250）&lt;/li>
+&lt;li>增加 Raft 相关的安全操作白名单（hugegraph #1257）&lt;/li>
+&lt;li>修复 RocksDB 实例未正确关闭的问题（hugegraph #1264）&lt;/li>
+&lt;li>在清空数据 truncate 操作之后，显示的发起写快照 Raft Snapshot（hugegraph #1275）&lt;/li>
+&lt;li>修复 Raft Leader 在收到 Follower 转发请求时未更新缓存的问题（hugegraph #1279）&lt;/li>
+&lt;li>修复带权最短路径算法（weighted shortest path）结果不稳定的问题（hugegraph #1280）&lt;/li>
+&lt;li>修复 rays 算法 limit 参数不生效问题（hugegraph #1284）&lt;/li>
+&lt;li>修复 neighborrank 算法 capacity 参数未检查的问题（hugegraph #1290）&lt;/li>
+&lt;li>修复 PostgreSQL 因为不存在与用户同名的数据库而初始化失败的问题（hugegraph #1293）&lt;/li>
+&lt;li>修复 HBase 后端当启用 Kerberos 时初始化失败的问题（hugegraph #1294）&lt;/li>
+&lt;li>修复 HBase/RocksDB 后端 shard 结束判断错误问题（hugegraph #1306）&lt;/li>
+&lt;li>修复带权最短路径算法（weighted shortest path）未检查目标顶点存在的问题（hugegraph #1307）&lt;/li>
+&lt;li>修复 personalrank/neighborrank 算法中非 String 类型 id 的问题（hugegraph #1310）&lt;/li>
+&lt;li>检查必须是 master 节点才允许调度 gremlin job（hugegraph #1314）&lt;/li>
+&lt;li>修复 g.V().hasLabel().limit(n) 因为索引覆盖导致的部分结果不准确问题（hugegraph #1316）&lt;/li>
+&lt;li>修复 jaccardsimilarity 算法当并集为空时报 NaN 错误的问题（hugegraph #1324）&lt;/li>
+&lt;li>修复 Raft Follower 节点操作 Schema 多节点之间数据不同步问题（hugegraph #1325）&lt;/li>
+&lt;li>修复因为 tx 未关闭导致的 TTL 不生效问题（hugegraph #1330）&lt;/li>
+&lt;li>修复 gremlin job 的执行结果大于 Cassandra 限制但小于任务限制时的异常处理（hugegraph #1334）&lt;/li>
+&lt;li>检查权限接口 auth-delete 和 role-get API 操作时图必须存在（hugegraph #1338）&lt;/li>
+&lt;li>修复异步任务结果中包含 path/tree 时系列化不正常的问题（hugegraph #1351）&lt;/li>
+&lt;li>修复初始化 admin 用户时的 NPE 问题（hugegraph #1360）&lt;/li>
+&lt;li>修复异步任务原子性操作问题，确保 update/get fields 及 re-schedule 的原子性（hugegraph #1361）&lt;/li>
+&lt;li>修复权限 NONE 资源类型的问题（hugegraph #1362）&lt;/li>
+&lt;li>修复启用权限后，truncate 操作报错 SecurityException 及管理员信息丢失问题（hugegraph #1365）&lt;/li>
+&lt;li>修复启用权限后，解析数据忽略了权限异常的问题（hugegraph #1380）&lt;/li>
+&lt;li>修复 AuthManager 在初始化时会尝试连接其它节点的问题（hugegraph #1381）&lt;/li>
+&lt;li>修复特定的 shard 信息导致 base64 解码错误的问题（hugegraph #1383）&lt;/li>
+&lt;li>修复启用权限后，使用 consistent-hash LB 在校验权限时，creator 为空的问题（hugegraph #1385）&lt;/li>
+&lt;li>改进权限中 VAR 资源不再依赖于 VERTEX 资源（hugegraph #1386）&lt;/li>
+&lt;li>规范启用权限后，Schema 操作仅依赖具体的资源（hugegraph #1387）&lt;/li>
+&lt;li>规范启用权限后，部分操作由依赖 STATUS 资源改为依赖 ANY 资源（hugegraph #1391）&lt;/li>
+&lt;li>规范启用权限后，禁止初始化管理员密码为空（hugegraph #1400）&lt;/li>
+&lt;li>检查创建用户时 username/password 不允许为空（hugegraph #1402）&lt;/li>
+&lt;li>修复更新 Label 时，PrimaryKey 或 SortKey 被设置为可空属性的问题（hugegraph #1406）&lt;/li>
+&lt;li>修复 ScyllaDB 丢失分页结果问题（hugegraph #1407）&lt;/li>
+&lt;li>修复带权最短路径算法（weighted shortest path）权重属性强制转换为 double 的问题（hugegraph #1432）&lt;/li>
+&lt;li>统一 OLTP 算法中的 degree 参数命名（hugegraph #1433）&lt;/li>
+&lt;li>修复 fusiformsimilarity 算法当 similars 为空的时候返回所有的顶点问题（hugegraph #1434）&lt;/li>
+&lt;li>改进 paths 算法，当起始点与目标点相同时应该返回空路径（hugegraph #1435）&lt;/li>
+&lt;li>修改 kout/kneighbor 的 limit 参数默认值 10 为 10000000（hugegraph #1436）&lt;/li>
+&lt;li>修复分页信息中的 &amp;lsquo;+&amp;rsquo; 被 URL 编码为空格的问题（hugegraph #1437）&lt;/li>
+&lt;li>改进边更新接口的错误提示信息（hugegraph #1443）&lt;/li>
+&lt;li>修复 kout 算法 degree 未在所有 label 范围生效的问题（hugegraph #1459）&lt;/li>
+&lt;li>改进 kneighbor/kout 算法，起始点不允许出现在结果集中（hugegraph #1459 #1463）&lt;/li>
+&lt;li>统一 kout/kneighbor 的 Get 和 Post 版本行为（hugegraph #1470）&lt;/li>
+&lt;li>改进创建边时顶点类型不匹配的错误提示信息（hugegraph #1477）&lt;/li>
+&lt;li>修复 Range Index 的残留索引问题（hugegraph #1498）&lt;/li>
+&lt;li>修复权限操作未失效缓存的问题（hugegraph #1528）&lt;/li>
+&lt;li>修复 sameneighbor 的 limit 参数默认值 10 为 10000000（hugegraph #1530）&lt;/li>
+&lt;li>修复 clear API 不应该所有后端都调用 create snapshot 的问题（hugegraph #1532）&lt;/li>
+&lt;li>修复当 loading 模式时创建 Index Label 阻塞问题（hugegraph #1548）&lt;/li>
+&lt;li>修复增加图到 project 或从 project 移除图的问题（hugegraph #1562）&lt;/li>
+&lt;li>改进权限操作的一些错误提示信息（hugegraph #1563）&lt;/li>
+&lt;li>支持浮点属性设置为 Infinity/NaN 的值（hugegraph #1578)&lt;/li>
+&lt;li>修复 Raft 启用 safe_read 时的 quorum read 问题（hugegraph #1618)&lt;/li>
+&lt;li>修复 token 过期时间配置的单位问题（hugegraph #1625）&lt;/li>
+&lt;li>修复 MySQL Statement 资源泄露问题（hugegraph #1627）&lt;/li>
+&lt;li>修复竞争条件下 Schema.getIndexLabel 获取不到数据的问题（hugegraph #1629）&lt;/li>
+&lt;li>修复 HugeVertex4Insert 无法系列化问题（hugegraph #1630）&lt;/li>
+&lt;li>修复 MySQL count Statement 未关闭问题（hugegraph #1640）&lt;/li>
+&lt;li>修复当删除 Index Label 异常时，导致状态不同步问题（hugegraph #1642）&lt;/li>
+&lt;li>修复 MySQL 执行 gremlin timeout 导致的 statement 未关闭问题（hugegraph #1643）&lt;/li>
+&lt;li>改进 Search Index 以兼容特殊 Unicode 字符：\u0000 to \u0003（hugegraph #1659）&lt;/li>
+&lt;li>修复 #1659 引入的 Char 未转化为 String 的问题（hugegraph #1664）&lt;/li>
+&lt;li>修复 has() + within() 查询时结果异常问题（hugegraph #1680）&lt;/li>
+&lt;li>升级 Log4j 版本到 2.17 以修复安全漏洞（hugegraph #1686 #1698 #1702）&lt;/li>
+&lt;li>修复 HBase 后端 shard scan 中 startkey 包含空串时 NPE 问题（hugegraph #1691）&lt;/li>
+&lt;li>修复 paths 算法在深层环路遍历时性能下降问题 （hugegraph #1694）&lt;/li>
+&lt;li>改进 personalrank 算法的参数默认值及错误检查（hugegraph #1695）&lt;/li>
+&lt;li>修复 RESTful 接口 P.within 条件不生效问题（hugegraph #1704）&lt;/li>
+&lt;li>修复启用权限时无法动态创建图的问题（hugegraph #1708）&lt;/li>
+&lt;/ul>
+&lt;h4 id="配置项修改">配置项修改：&lt;/h4>
+&lt;ul>
+&lt;li>共享 SSL 相关配置项命名（hugegraph #1260）&lt;/li>
+&lt;li>支持 RocksDB 配置项 rocksdb.level_compaction_dynamic_level_bytes（hugegraph #1262）&lt;/li>
+&lt;li>去除 RESFful Server 服务协议配置项 restserver.protocol，自动提取 URL 中的 Schema（hugegraph #1272）&lt;/li>
+&lt;li>增加 PostgreSQL 配置项 jdbc.postgresql.connect_database（hugegraph #1293）&lt;/li>
+&lt;li>增加针对顶点主键是否编码的配置项 vertex.encode_primary_key_number（hugegraph #1323）&lt;/li>
+&lt;li>增加针对聚合查询是否启用索引优化的配置项 query.optimize_aggregate_by_index（hugegraph #1549）&lt;/li>
+&lt;li>修改 cache_type 的默认值 l1 为 l2（hugegraph #1681）&lt;/li>
+&lt;li>增加 JDBC 强制重连配置项 jdbc.forced_auto_reconnect（hugegraph #1710）&lt;/li>
+&lt;/ul>
+&lt;h4 id="其它修改-1">其它修改&lt;/h4>
+&lt;ul>
+&lt;li>增加默认的 SSL Certificate 文件（hugegraph #1254）&lt;/li>
+&lt;li>OLTP 并行请求共享线程池，而非每个请求使用单独的线程池（hugegraph #1258）&lt;/li>
+&lt;li>修复 Example 的问题（hugegraph #1308）&lt;/li>
+&lt;li>使用 jraft 版本 1.3.5（hugegraph #1313）&lt;/li>
+&lt;li>如果启用了 Raft 模式时，关闭 RocksDB 的 WAL（hugegraph #1318）&lt;/li>
+&lt;li>使用 TarLz4Util 来提升快照 Snapshot 压缩的性能（hugegraph #1336）&lt;/li>
+&lt;li>升级存储的版本号（store version），因为 property key 增加了 read frequency（hugegraph #1341）&lt;/li>
+&lt;li>顶点/边 vertex/edge 的 Get API 使用 queryVertex/queryEdge 方法来替代 iterator 方法（hugegraph #1345）&lt;/li>
+&lt;li>支持 BFS 优化的多度查询（hugegraph #1359)&lt;/li>
+&lt;li>改进 RocksDB deleteRange() 带来的查询性能问题（hugegraph #1375）&lt;/li>
+&lt;li>修复 travis-ci cannot find symbol Namifiable 问题（hugegraph #1376）&lt;/li>
+&lt;li>确保 RocksDB 快照的磁盘与 data path 指定的一致（hugegraph #1392）&lt;/li>
+&lt;li>修复 MacOS 空闲内存 free_memory 计算不准确问题（hugegraph #1396）&lt;/li>
+&lt;li>增加 Raft onBusy 回调来配合限速（hugegraph #1401）&lt;/li>
+&lt;li>升级 netty-all 版本 4.1.13.Final 到 4.1.42.Final（hugegraph #1403）&lt;/li>
+&lt;li>支持 TaskScheduler 暂停当设置为 loading 模式时（hugegraph #1414）&lt;/li>
+&lt;li>修复 raft-tools 脚本的问题（hugegraph #1416）&lt;/li>
+&lt;li>修复 license params 问题（hugegraph #1420）&lt;/li>
+&lt;li>提升写权限日志的性能，通过 batch flush &amp;amp; async write 方式改进（hugegraph #1448）&lt;/li>
+&lt;li>增加 MySQL 连接 URL 的日志记录（hugegraph #1451）&lt;/li>
+&lt;li>提升用户信息校验性能（hugegraph# 1460）&lt;/li>
+&lt;li>修复 TTL 因为起始时间问题导致的错误（hugegraph #1478）&lt;/li>
+&lt;li>支持日志配置的热加载及对审计日志的压缩（hugegraph #1492）&lt;/li>
+&lt;li>支持针对用户级别的审计日志的限速（hugegraph #1493）&lt;/li>
+&lt;li>缓存 RamCache 支持用户自定义的过期时间（hugegraph #1494）&lt;/li>
+&lt;li>在 auth client 端缓存 login role 以避免重复的 RPC 调用（hugegraph #1507）&lt;/li>
+&lt;li>修复 IdSet.contains() 未复写 AbstractCollection.contains() 问题（hugegraph #1511）&lt;/li>
+&lt;li>修复当 commitPartOfEdgeDeletions() 失败时，未回滚 rollback 的问题（hugegraph #1513）&lt;/li>
+&lt;li>提升 Cache metrics 性能（hugegraph #1515）&lt;/li>
+&lt;li>当发生 license 操作错误时，增加打印异常日志（hugegraph #1522）&lt;/li>
+&lt;li>改进 SimilarsMap 实现（hugegraph #1523）&lt;/li>
+&lt;li>使用 tokenless 方式来更新 coverage（hugegraph #1529）&lt;/li>
+&lt;li>改进 project update 接口的代码（hugegraph #1537）&lt;/li>
+&lt;li>允许从 option() 访问 GRAPH_STORE（hugegraph #1546）&lt;/li>
+&lt;li>优化 kout/kneighbor 的 count 查询以避免拷贝集合（hugegraph #1550）&lt;/li>
+&lt;li>优化 shortestpath 遍历方式，以数据量少的一端优先遍历（hugegraph #1569）&lt;/li>
+&lt;li>完善 rocksdb.data_disks 配置项的 allowed keys 提示信息（hugegraph #1585）&lt;/li>
+&lt;li>为 number id 优化 OLTP 遍历中的 id2code 方法性能（hugegraph #1623）&lt;/li>
+&lt;li>优化 HugeElement.getProperties() 返回 Collection&amp;lt;Property&amp;gt;（hugegraph #1624）&lt;/li>
+&lt;li>增加 APACHE PROPOSAL 文件（hugegraph #1644）&lt;/li>
+&lt;li>改进 close tx 的流程（hugegraph #1655）&lt;/li>
+&lt;li>当 reset() 时为 MySQL close 捕获所有类型异常（hugegraph #1661）&lt;/li>
+&lt;li>改进 OLAP property 模块代码（hugegraph #1675）&lt;/li>
+&lt;li>改进查询模块的执行性能（hugegraph #1711）&lt;/li>
+&lt;/ul>
+&lt;h3 id="loader">Loader&lt;/h3>
+&lt;ul>
+&lt;li>支持导入 Parquet 格式文件（hugegraph-loader #174）&lt;/li>
+&lt;li>支持 HDFS Kerberos 权限验证（hugegraph-loader #176）&lt;/li>
+&lt;li>支持 HTTPS 协议连接到服务端导入数据（hugegraph-loader #183）&lt;/li>
+&lt;li>修复 trust store file 路径问题（hugegraph-loader #186）&lt;/li>
+&lt;li>处理 loading mode 重置的异常（hugegraph-loader #187）&lt;/li>
+&lt;li>增加在插入数据时对非空属性的检查（hugegraph-loader #190）&lt;/li>
+&lt;li>修复客户端与服务端时区不同导致的时间判断问题（hugegraph-loader #192）&lt;/li>
+&lt;li>优化数据解析性能（hugegraph-loader #194）&lt;/li>
+&lt;li>当用户指定了文件头时，检查其必须不为空（hugegraph-loader #195）&lt;/li>
+&lt;li>修复示例程序中 MySQL struct.json 格式问题（hugegraph-loader #198）&lt;/li>
+&lt;li>修复顶点边导入速度不精确的问题（hugegraph-loader #200 #205）&lt;/li>
+&lt;li>当导入启用 check-vertex 时，确保先导入顶点再导入边（hugegraph-loader #206）&lt;/li>
+&lt;li>修复边 Json 数据导入格式不统一时数组溢出的问题（hugegraph-loader #211）&lt;/li>
+&lt;li>修复因边 mapping 文件不存在导致的 NPE 问题（hugegraph-loader #213）&lt;/li>
+&lt;li>修复读取时间可能出现负数的问题（hugegraph-loader #215)&lt;/li>
+&lt;li>改进目录文件的日志打印（hugegraph-loader #223)&lt;/li>
+&lt;li>改进 loader 的的 Schema 处理流程（hugegraph-loader #230)&lt;/li>
+&lt;/ul>
+&lt;h3 id="tools">Tools&lt;/h3>
+&lt;ul>
+&lt;li>支持 HTTPS 协议（hugegraph-tools #71）&lt;/li>
+&lt;li>移除 &amp;ndash;protocol 参数，直接从URL中自动提取（hugegraph-tools #72）&lt;/li>
+&lt;li>支持将数据 dump 到 HDFS 文件系统（hugegraph-tools #73）&lt;/li>
+&lt;li>修复 trust store file 路径问题（hugegraph-tools #75）&lt;/li>
+&lt;li>支持权限信息的备份恢复（hugegraph-tools #76）&lt;/li>
+&lt;li>支持无参数的 Printer 打印（hugegraph-tools #79）&lt;/li>
+&lt;li>修复 MacOS free_memory 计算问题（hugegraph-tools #82）&lt;/li>
+&lt;li>支持备份恢复时指定线程数hugegraph-tools #83）&lt;/li>
+&lt;li>支持动态创建图、克隆图、删除图等命令（hugegraph-tools #95)&lt;/li>
 &lt;/ul></description></item><item><title>Docs: v0.5.6 Cluster(Cassandra)</title><link>/cn/docs/performance/api-preformance/hugegraph-api-0.5.6-cassandra/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/performance/api-preformance/hugegraph-api-0.5.6-cassandra/</guid><description>
 &lt;h3 id="1-测试环境">1 测试环境&lt;/h3>
 &lt;p>被压机器信息&lt;/p>
@@ -6139,17 +6196,17 @@ HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
 &lt;h6 id="压力参数">压力参数&lt;/h6>
 &lt;p>持续时间：5min&lt;/p>
 &lt;h6 id="顶点的最大插入速度">顶点的最大插入速度：&lt;/h6>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/cassandra/vertex_batch.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>####### 结论：&lt;/p>
 &lt;ul>
 &lt;li>并发3500，顶点的吞吐量是261，每秒可处理的数据：261*200=52200/s&lt;/li>
 &lt;/ul>
 &lt;h6 id="边的最大插入速度">边的最大插入速度&lt;/h6>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/cassandra/edge_batch.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>####### 结论：&lt;/p>
 &lt;ul>
 &lt;li>并发1000，边的吞吐量是323，每秒可处理的数据：323*500=161500/s&lt;/li>
@@ -6164,17 +6221,17 @@ HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
 &lt;li>服务异常标志：错误率大于0.00%&lt;/li>
 &lt;/ul>
 &lt;h6 id="顶点的单条插入">顶点的单条插入&lt;/h6>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/cassandra/vertex_single.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>####### 结论：&lt;/p>
 &lt;ul>
 &lt;li>并发9000，吞吐量为8400，顶点的单条插入并发能力为9000&lt;/li>
 &lt;/ul>
 &lt;h6 id="边的单条插入">边的单条插入&lt;/h6>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/cassandra/edge_single.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>####### 结论：&lt;/p>
 &lt;ul>
 &lt;li>并发4500，吞吐量是4160，边的单条插入并发能力为4500&lt;/li>
@@ -6189,17 +6246,17 @@ HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
 &lt;li>服务异常标志：错误率大于0.00%&lt;/li>
 &lt;/ul>
 &lt;h6 id="顶点的按id查询">顶点的按id查询&lt;/h6>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/cassandra/vertex_id_query.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>####### 结论：&lt;/p>
 &lt;ul>
 &lt;li>并发14500，吞吐量是13576，顶点的按id查询的并发能力为14500，平均延时为11ms&lt;/li>
 &lt;/ul>
 &lt;h6 id="边的按id查询">边的按id查询&lt;/h6>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/cassandra/edge_id_query.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>####### 结论：&lt;/p>
 &lt;ul>
 &lt;li>并发12000，吞吐量是10688，边的按id查询的并发能力为12000，平均延时为63ms&lt;/li>
@@ -7630,18 +7687,18 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;h6 id="压力参数">压力参数&lt;/h6>
 &lt;p>持续时间：5min&lt;/p>
 &lt;h6 id="顶点和边的最大插入速度高性能服务器使用ssd存储rocksdb数据">顶点和边的最大插入速度（高性能服务器，使用SSD存储RocksDB数据）：&lt;/h6>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.4.4/best.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h6 id="结论">结论：&lt;/h6>
 &lt;ul>
 &lt;li>并发1000，边的吞吐量是是451，每秒可处理的数据：451*500条=225500/s&lt;/li>
 &lt;li>并发2000，顶点的吞吐量是1842.4，每秒可处理的数据：1842.4*200=368480/s&lt;/li>
 &lt;/ul>
 &lt;p>&lt;strong>1. CPU和内存对插入性能的影响（服务器都使用HDD存储RocksDB数据，批量插入）&lt;/strong>&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.4.4/cpu-memory.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h6 id="结论-1">结论：&lt;/h6>
 &lt;ul>
 &lt;li>同样使用HDD硬盘，CPU和内存增加了1倍&lt;/li>
@@ -7649,18 +7706,18 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;li>顶点：吞吐量从1263.8提升至1842.4，性能提升了约45%&lt;/li>
 &lt;/ul>
 &lt;p>&lt;strong>2. SSD和HDD对插入性能的影响（高性能服务器，批量插入）&lt;/strong>&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.4.4/ssd.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h6 id="结论-2">结论：&lt;/h6>
 &lt;ul>
 &lt;li>边：使用SSD吞吐量451.7,使用HDD吞吐量426.6，性能提升5%&lt;/li>
 &lt;li>顶点：使用SSD吞吐量1842.4，使用HDD吞吐量1794，性能提升约3%&lt;/li>
 &lt;/ul>
 &lt;p>&lt;strong>3. 不同并发线程数对插入性能的影响（普通服务器，使用HDD存储RocksDB数据）&lt;/strong>&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.4.4/threads-batch.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h6 id="结论-3">结论：&lt;/h6>
 &lt;ul>
 &lt;li>顶点：1000并发，响应时间7ms和1500并发响应时间1028ms差距悬殊，且吞吐量一直保持在1300左右，因此拐点数据应该在1300 ，且并发1300时，响应时间已达到22ms，在可控范围内，相比HugeGraph 0.2（1000并发：平均响应时间8959ms），处理能力出现质的飞跃；&lt;/li>
@@ -7675,9 +7732,9 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;li>持续时间：5min&lt;/li>
 &lt;li>服务异常标志：错误率大于0.00%&lt;/li>
 &lt;/ul>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.4.4/threads-single.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h6 id="结论-4">结论：&lt;/h6>
 &lt;ul>
 &lt;li>顶点：
@@ -7986,8 +8043,11 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;li>检查前 3 ~ 5 个 commit 提交, 点进去看看是否修改处和源码文件一致&lt;/li>
 &lt;li>最后, 确保源码可以正常/正确编译 (然后看看测试和规范)&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 同时也可以检查一下代码风格是否符合规范, 不符合的可以放下一次调整&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn clean package -Dmaven.test.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">true&lt;/span> -Dcheckstyle.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">false&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 请优先使用/切换到 java 11 版本进行后序的编译和运行操作&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># java --version&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 尝试在 Unix 环境下编译测试是否正常&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn clean package -Dmaven.test.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">true&lt;/span> -Dcheckstyle.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">true&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="b-二进制包">B. 二进制包&lt;/h5>
 &lt;p>解压 &lt;code>xxx-hugegraph.tar.gz&lt;/code>后, 进行如下检查:&lt;/p>
 &lt;ol>
@@ -8533,7 +8593,7 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;li>Min &amp;ndash; 最小响应时间&lt;/li>
 &lt;li>Max &amp;ndash; 最大响应时间&lt;/li>
 &lt;li>Error &amp;ndash; 出错率&lt;/li>
-&lt;li>Troughput &amp;ndash; 吞吐量Â&lt;/li>
+&lt;li>Throughput &amp;ndash; 吞吐量Â&lt;/li>
 &lt;li>KB/sec &amp;ndash; 以流量做衡量的吞吐量&lt;/li>
 &lt;/ul>
 &lt;p>&lt;em>注：时间的单位均为ms&lt;/em>&lt;/p>
@@ -8849,39 +8909,39 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;p>对于需要遍历全图的Gremlin任务，索引的创建与重建等耗时较长的异步任务，平台提供相应的任务管理功能，实现异步任务的统一的管理与结果查看。&lt;/p>
 &lt;h3 id="2平台使用流程">2 平台使用流程&lt;/h3>
 &lt;p>平台的模块使用流程如下：&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/2平台使用流程.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h3 id="3平台使用说明">3 平台使用说明&lt;/h3>
 &lt;h4 id="31图管理">3.1 图管理&lt;/h4>
 &lt;h5 id="311图创建">3.1.1 图创建&lt;/h5>
 &lt;p>图管理模块下，点击【创建图】，通过填写图ID、图名称、主机名、端口号、用户名、密码的信息，实现多图的连接。&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/311图创建.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>创建图填写内容如下：&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/311图创建2.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h5 id="312图访问">3.1.2 图访问&lt;/h5>
 &lt;p>实现图空间的信息访问，进入后，可进行图的多维查询分析、元数据管理、数据导入、算法分析等操作。&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/312图访问.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h5 id="313图管理">3.1.3 图管理&lt;/h5>
 &lt;ol>
 &lt;li>用户通过对图的概览、搜索以及单图的信息编辑与删除，实现图的统一管理。&lt;/li>
 &lt;li>搜索范围：可对图名称和ID进行搜索。&lt;/li>
 &lt;/ol>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/313图管理.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h4 id="32元数据建模列表图模式">3.2 元数据建模（列表+图模式）&lt;/h4>
 &lt;h5 id="321模块入口">3.2.1 模块入口&lt;/h5>
 &lt;p>左侧导航处：&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/321元数据入口.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h5 id="322属性类型">3.2.2 属性类型&lt;/h5>
 &lt;h6 id="3221创建">3.2.2.1 创建&lt;/h6>
 &lt;ol>
@@ -8889,26 +8949,26 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;li>创建的属性可作为顶点类型和边类型的属性。&lt;/li>
 &lt;/ol>
 &lt;p>列表模式：&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/3221属性创建.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>图模式：&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/3221属性创建2.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h6 id="3222复用">3.2.2.2 复用&lt;/h6>
 &lt;ol>
 &lt;li>平台提供【复用】功能，可直接复用其他图的元数据。&lt;/li>
 &lt;li>选择需要复用的图ID，继续选择需要复用的属性，之后平台会进行是否冲突的校验，通过后，可实现元数据的复用。&lt;/li>
 &lt;/ol>
 &lt;p>选择复用项：&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/3222属性复用.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>校验复用项：&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/3222属性复用2.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h6 id="3223管理">3.2.2.3 管理&lt;/h6>
 &lt;ol>
 &lt;li>在属性列表中可进行单条删除或批量删除操作。&lt;/li>
@@ -9673,7 +9733,7 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;/table>
 &lt;h3 id="k8s-operator-config-options">K8s Operator Config Options&lt;/h3>
 &lt;blockquote>
-&lt;p>NOTE: Option needs to be converted through environment variable settings, e.g k8s.internal_etcd_url =&amp;gt; INTERNAL_ETCD_URL&lt;/p>
+&lt;p>NOTE: Option needs to be converted through environment variable settings, e.g. k8s.internal_etcd_url =&amp;gt; INTERNAL_ETCD_URL&lt;/p>
 &lt;/blockquote>
 &lt;table>
 &lt;thead>
@@ -10013,7 +10073,7 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;/li>
 &lt;li>
 &lt;p>启动服务时提示：&lt;code>xxx (core dumped) xxx&lt;/code>&lt;/p>
-&lt;p>请检查JDK版本是否为1.8&lt;/p>
+&lt;p>请检查JDK版本是否为 Java11 (至少是Java8)&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>启动服务成功了，但是操作图时有类似于&amp;quot;无法连接到后端或连接未打开&amp;quot;的提示&lt;/p>
@@ -10316,8 +10376,8 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;p>HugeGraph-Client向HugeGraph-Server发出HTTP请求，获取并解析Server的执行结果。目前仅提供了Java版，用户可以使用HugeGraph-Client编写Java代码操作HugeGraph，比如元数据和图数据的增删改查，或者执行gremlin语句。&lt;/p>
 &lt;h3 id="2-环境要求">2 环境要求&lt;/h3>
 &lt;ul>
-&lt;li>jdk1.8&lt;/li>
-&lt;li>maven-3.3.9&lt;/li>
+&lt;li>java 11 (兼容 java 8)&lt;/li>
+&lt;li>maven 3.5+&lt;/li>
 &lt;/ul>
 &lt;h3 id="3-使用流程">3 使用流程&lt;/h3>
 &lt;p>使用HugeGraph-Client的基本步骤如下:&lt;/p>
@@ -10776,7 +10836,7 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;h2 id="2-开始">2 开始&lt;/h2>
 &lt;h3 id="21-在本地运行-pagerank-算法">2.1 在本地运行 PageRank 算法&lt;/h3>
 &lt;blockquote>
-&lt;p>要使用 HugeGraph-Computer 运行算法，您需要安装 64 位 JREJDK 11 或更高版本。&lt;/p>
+&lt;p>要使用 HugeGraph-Computer 运行算法，您需要安装 64 位 Java 11 或更高版本。&lt;/p>
 &lt;p>还需要首先部署 HugeGraph-Server 和 &lt;a href="https://etcd.io/docs/v3.5/quickstart/">Etcd&lt;/a>.&lt;/p>
 &lt;/blockquote>
 &lt;p>有两种方式可以获取 HugeGraph-Computer：&lt;/p>
@@ -14781,345 +14841,4 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;ul>
 &lt;li>按id列表查询边，可用于批量查询边&lt;/li>
 &lt;li>获取分片和按分片查询边，可以用来遍历全部边&lt;/li>
-&lt;/ul></description></item><item><title>Docs: Rank API</title><link>/cn/docs/clients/restful-api/rank/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/restful-api/rank/</guid><description>
-&lt;h3 id="41-rank-api-概述">4.1 rank API 概述&lt;/h3>
-&lt;p>HugeGraphServer 除了上一节提到的遍历（traverser）方法，还提供了一类专门做推荐的方法，我们称为&lt;code>rank API&lt;/code>，
-可在图中为一个点推荐与其关系密切的其它点。&lt;/p>
-&lt;h3 id="42-rank-api-详解">4.2 rank API 详解&lt;/h3>
-&lt;h4 id="421-personal-rank-api">4.2.1 Personal Rank API&lt;/h4>
-&lt;p>Personal Rank 算法典型场景是用于推荐应用中, 根据某个点现有的出边, 推荐具有相近 / 相同关系的其他点,
-比如根据某个人的阅读记录 / 习惯, 向它推荐其他可能感兴趣的书, 或潜在的书友, 举例如下:&lt;/p>
-&lt;ol>
-&lt;li>假设给定 1个 Person 点 是 tom, 它喜欢 &lt;code>a,b,c,d,e&lt;/code> 5本书, 我们的想给 tom 推荐一些书友, 以及一些书, 最容易的想法就是看看还有哪些人喜欢过这些书 (共同兴趣)&lt;/li>
-&lt;li>那么此时, 需要有其它的 Person 点比如 neo, 他喜欢 &lt;code>b,d,f&lt;/code> 3本书, 以及 jay, 它喜欢 &lt;code>c,d,e,g&lt;/code> 4本书, lee 它喜欢 &lt;code>a,d,e,f&lt;/code> 4本书&lt;/li>
-&lt;li>由于 tom 已经看过的书不需要重复推荐, 所以返回结果里应该期望推荐有共同喜好的其他书友看过, 但 tom 没看过的书, 比如推荐 &amp;ldquo;f&amp;rdquo; 和 &amp;ldquo;g&amp;rdquo; 书, 且优先级 f &amp;gt; g&lt;/li>
-&lt;li>此时再计算 tom 的个性化 rank 值, 就会返回排序后 TopN 推荐的 书友 + 书 的结果了 (如果只需要推荐的书, 选择 OTHER_LABEL 即可)&lt;/li>
-&lt;/ol>
-&lt;h5 id="4210-数据准备">4.2.1.0 数据准备&lt;/h5>
-&lt;p>上面是一个简单的例子, 这里再提供一个公开的 1MB 测试数据集 &lt;a href="https://grouplens.org/datasets/movielens/">MovieLens&lt;/a> 为例，
-用户需下载该数据集，然后使用 HugeGraph-Loader 导入到 HugeGraph 中，简单起见，数据中顶点 user
-和 movie 的属性都忽略，仅使用 id 字段即可，边 rating 的具体评分值也忽略。loader 使用的元数据
-文件和输入源映射文件内容如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">////////////////////////////////////////////////////////////
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// UserID::Gender::Age::Occupation::Zip-code
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// MovieID::Title::Genres
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// UserID::MovieID::Rating::Timestamp
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">////////////////////////////////////////////////////////////
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// Define schema
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asInt&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;rate&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asInt&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">vertexLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;user&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">properties&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">primaryKeys&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">vertexLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;movie&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">properties&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">primaryKeys&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">edgeLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;rating&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">sourceLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;user&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">targetLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;movie&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">properties&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;rate&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;vertices&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;user&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;input&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;file&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;path&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;users.dat&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;format&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;TEXT&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;delimiter&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;::&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;header&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;UserID&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Gender&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Age&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Occupation&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Zip-code&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">},&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;ignored&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Gender&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Age&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Occupation&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Zip-code&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;mapping&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;UserID&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">},&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;movie&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;input&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;file&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;path&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;movies.dat&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;format&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;TEXT&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;delimiter&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;::&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;header&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;MovieID&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Title&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Genres&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">},&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;ignored&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Title&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Genres&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;mapping&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;MovieID&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">],&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;edges&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;rating&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;UserID&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;MovieID&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;input&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;file&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;path&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;ratings.dat&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;format&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;TEXT&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;delimiter&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;::&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;header&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;UserID&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;MovieID&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Rating&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Timestamp&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">},&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;ignored&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Timestamp&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;mapping&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;UserID&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;MovieID&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;Rating&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;rate&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>注意将映射文件中&lt;code>input.path&lt;/code>的值修改为自己本地的路径。&lt;/p>
-&lt;/blockquote>
-&lt;h5 id="4211-功能介绍">4.2.1.1 功能介绍&lt;/h5>
-&lt;p>适用于二分图，给出所有源顶点相关的其他顶点及其相关性组成的列表。&lt;/p>
-&lt;blockquote>
-&lt;p>二分图：也称二部图，是图论里的一种特殊模型，也是一种特殊的网络流。其最大的特点在于，可以将图里的顶点分为两个集合，两个集合之间的点有边相连，但集合内的点之间没有直接关联。&lt;/p>
-&lt;/blockquote>
-&lt;p>假设有一个用户和物品的二分图，基于随机游走的 PersonalRank 算法步骤如下：&lt;/p>
-&lt;ol>
-&lt;li>选定一个起点用户 u，其初始权重为 1.0，从 Vu 开始游走（有 alpha 的概率走到邻居点，1 - alpha 的概率停留）；&lt;/li>
-&lt;li>如果决定向外游走, 那么会选取某一个类型的出边, 例如 &lt;code>rating&lt;/code> 来查找共同的打分人：
-&lt;ol>
-&lt;li>那就从当前节点的邻居节点中按照均匀分布随机选择一个，并且按照均匀分布划分权重值；&lt;/li>
-&lt;li>给源顶点补偿权重 1 - alpha；&lt;/li>
-&lt;li>重复步骤2；&lt;/li>
-&lt;/ol>
-&lt;/li>
-&lt;li>达到一定步数或达到精度后收敛，得到推荐列表。&lt;/li>
-&lt;/ol>
-&lt;h6 id="params">Params&lt;/h6>
-&lt;p>&lt;strong>必填项&lt;/strong>:&lt;/p>
-&lt;ul>
-&lt;li>source: 源顶点 id&lt;/li>
-&lt;li>label: 源点出发的某类边 label，须连接两类不同顶点&lt;/li>
-&lt;/ul>
-&lt;p>&lt;strong>选填项&lt;/strong>:&lt;/p>
-&lt;ul>
-&lt;li>alpha：每轮迭代时从某个点往外走的概率，与 PageRank 算法中的 alpha 类似，取值区间为 (0, 1], 默认值 &lt;code>0.85&lt;/code>&lt;/li>
-&lt;li>max_degree: 查询过程中，单个顶点遍历的最大邻接边数目，默认为 &lt;code>10000&lt;/code>&lt;/li>
-&lt;li>max_depth: 迭代次数，取值区间为 [2, 50], 默认值 &lt;code>5&lt;/code>&lt;/li>
-&lt;li>with_label：筛选结果中保留哪些结果，可选以下三类, 默认为 &lt;code>BOTH_LABEL&lt;/code>
-&lt;ul>
-&lt;li>SAME_LABEL：仅保留与源顶点相同类别的顶点&lt;/li>
-&lt;li>OTHER_LABEL：仅保留与源顶点不同类别（二分图的另一端）的顶点&lt;/li>
-&lt;li>BOTH_LABEL：同时保留与源顶点相同和相反类别的顶点&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>limit: 返回的顶点的最大数目，默认为 &lt;code>100&lt;/code>&lt;/li>
-&lt;li>max_diff: 提前收敛的精度差, 默认为 &lt;code>0.0001&lt;/code> (&lt;em>后续实现&lt;/em>)&lt;/li>
-&lt;li>sorted：返回的结果是否根据 rank 排序，为 true 时降序排列，反之不排序，默认为 &lt;code>true&lt;/code>&lt;/li>
-&lt;/ul>
-&lt;h5 id="4212-使用方法">4.2.1.2 使用方法&lt;/h5>
-&lt;h6 id="method--url">Method &amp;amp; Url&lt;/h6>
-&lt;pre tabindex="0">&lt;code>POST http://localhost:8080/graphs/hugegraph/traversers/personalrank
-&lt;/code>&lt;/pre>&lt;h6 id="request-body">Request Body&lt;/h6>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;1:1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;rating&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;alpha&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.6&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_depth&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">15&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;with_label&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;OTHER_LABEL&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;sorted&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">10&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="response-status">Response Status&lt;/h6>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="response-body">Response Body&lt;/h6>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;2:2858&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.0005014026017816927&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;2:1196&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.0004336708357653617&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;2:1210&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.0004128083140214213&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;2:593&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.00038117341069881513&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;2:480&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.00037005373269728036&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;2:1198&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.000366641614652057&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;2:2396&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.0003622362410538888&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;2:2571&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.0003593312457300953&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;2:589&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.00035922123055598566&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;2:110&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.0003466135844390885&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="4213-适用场景">4.2.1.3 适用场景&lt;/h5>
-&lt;p>两类不同顶点连接形成的二分图中，给某个点推荐相关性最高的其他顶点，例如：&lt;/p>
-&lt;ul>
-&lt;li>阅读推荐: 找出优先给某人推荐的其他&lt;strong>书籍&lt;/strong>, 也可以同时推荐共同喜好最高的&lt;strong>书友&lt;/strong> (例: 微信 &amp;ldquo;你的好友也在看 xx 文章&amp;rdquo; 功能)&lt;/li>
-&lt;li>社交推荐: 找出拥有相同关注话题的其他&lt;strong>博主&lt;/strong>, 也可以推荐可能感兴趣的&lt;strong>新闻/消息&lt;/strong> (例: Weibo 中的 &amp;ldquo;热点推荐&amp;rdquo; 功能)&lt;/li>
-&lt;li>商品推荐: 通过某人现在的购物习惯, 找出应优先推给它的&lt;strong>商品列表&lt;/strong>, 也可以给它推荐&lt;strong>带货&lt;/strong>播主 (例: TaoBao 的 &amp;ldquo;猜你喜欢&amp;rdquo; 功能)&lt;/li>
-&lt;/ul>
-&lt;h4 id="422-neighbor-rank-api">4.2.2 Neighbor Rank API&lt;/h4>
-&lt;h5 id="4220-数据准备">4.2.2.0 数据准备&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">class&lt;/span> &lt;span style="color:#000">Loader&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">static&lt;/span> &lt;span style="color:#204a87;font-weight:bold">void&lt;/span> &lt;span style="color:#000">main&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">String&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> &lt;span style="color:#000">args&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">HugeClient&lt;/span> &lt;span style="color:#000">client&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">new&lt;/span> &lt;span style="color:#000">HugeClient&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;http://127.0.0.1:8080&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">SchemaManager&lt;/span> &lt;span style="color:#000">schema&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">client&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asText&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">vertexLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">properties&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">useCustomizeStringId&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">vertexLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;movie&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">properties&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">useCustomizeStringId&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">edgeLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;follow&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">sourceLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">targetLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">edgeLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;like&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">sourceLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">targetLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;movie&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">edgeLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;directedBy&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">sourceLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;movie&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">targetLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">GraphManager&lt;/span> &lt;span style="color:#000">graph&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">client&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Vertex&lt;/span> &lt;span style="color:#000">O&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addVertex&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">id&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;O&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;O&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Vertex&lt;/span> &lt;span style="color:#000">A&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addVertex&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">id&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;A&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;A&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Vertex&lt;/span> &lt;span style="color:#000">B&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addVertex&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">id&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;B&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;B&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Vertex&lt;/span> &lt;span style="color:#000">C&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addVertex&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">id&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;C&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;C&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Vertex&lt;/span> &lt;span style="color:#000">D&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addVertex&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">id&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;D&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;D&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Vertex&lt;/span> &lt;span style="color:#000">E&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addVertex&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;movie&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">id&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;E&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;E&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Vertex&lt;/span> &lt;span style="color:#000">F&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addVertex&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;movie&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">id&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;F&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;F&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Vertex&lt;/span> &lt;span style="color:#000">G&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addVertex&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;movie&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">id&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;G&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;G&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Vertex&lt;/span> &lt;span style="color:#000">H&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addVertex&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;movie&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">id&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;H&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;H&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Vertex&lt;/span> &lt;span style="color:#000">I&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addVertex&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;movie&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">id&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;I&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;I&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Vertex&lt;/span> &lt;span style="color:#000">J&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addVertex&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;movie&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">id&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;J&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;J&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Vertex&lt;/span> &lt;span style="color:#000">K&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addVertex&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">id&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;K&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;K&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Vertex&lt;/span> &lt;span style="color:#000">L&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addVertex&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">id&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;L&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;L&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Vertex&lt;/span> &lt;span style="color:#000">M&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addVertex&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">id&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;M&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;M&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">O&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addEdge&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;follow&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">A&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">O&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addEdge&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;follow&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">B&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">O&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addEdge&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;follow&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">C&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">D&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addEdge&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;follow&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">O&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">A&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addEdge&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;follow&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">B&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">A&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addEdge&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;like&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">E&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">A&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addEdge&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;like&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">F&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">B&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addEdge&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;like&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">G&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">B&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addEdge&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;like&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">H&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">C&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addEdge&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;like&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">I&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">C&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addEdge&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;like&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">J&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">E&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addEdge&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;directedBy&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">K&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">F&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addEdge&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;directedBy&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">B&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">F&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addEdge&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;directedBy&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">L&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">G&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addEdge&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;directedBy&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">M&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="4221-功能介绍">4.2.2.1 功能介绍&lt;/h5>
-&lt;p>在一般图结构中，找出每一层与给定起点相关性最高的前 N 个顶点及其相关度，用图的语义理解就是：从起点往外走，
-走到各层各个顶点的概率。&lt;/p>
-&lt;h6 id="params-1">Params&lt;/h6>
-&lt;ul>
-&lt;li>source: 源顶点 id，必填项&lt;/li>
-&lt;li>alpha：每轮迭代时从某个点往外走的概率，与 PageRank 算法中的 alpha 类似，必填项，取值区间为 (0, 1]&lt;/li>
-&lt;li>steps: 表示从起始顶点走过的路径规则，是一组 Step 的列表，每个 Step 对应结果中的一层，必填项。每个 Step 的结构如下：
-&lt;ul>
-&lt;li>direction：表示边的方向（OUT, IN, BOTH），默认是 BOTH&lt;/li>
-&lt;li>labels：边的类型列表，多个边类型取并集&lt;/li>
-&lt;li>max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)&lt;/li>
-&lt;li>top：在结果中每一层只保留权重最高的前 N 个结果，默认为 100，最大值为 1000&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>capacity: 遍历过程中最大的访问的顶点数目，选填项，默认为10000000&lt;/li>
-&lt;/ul>
-&lt;h5 id="4222-使用方法">4.2.2.2 使用方法&lt;/h5>
-&lt;h6 id="method--url-1">Method &amp;amp; Url&lt;/h6>
-&lt;pre tabindex="0">&lt;code>POST http://localhost:8080/graphs/hugegraph/traversers/neighborrank
-&lt;/code>&lt;/pre>&lt;h6 id="request-body-1">Request Body&lt;/h6>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;source&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;O&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;steps&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:[&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;direction&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;OUT&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;labels&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:[&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;follow&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">],&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_degree&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">-1&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;top&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">100&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">},&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;direction&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;OUT&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;labels&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:[&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;follow&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;like&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">],&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_degree&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">-1&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;top&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">100&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">},&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;direction&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;OUT&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;labels&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:[&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;directedBy&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">],&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_degree&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">-1&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;top&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">100&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">],&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;alpha&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">0.9&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;capacity&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">-1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="response-status-1">Response Status&lt;/h6>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="response-body-1">Response Body&lt;/h6>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;ranks&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;O&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">},&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;B&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.4305&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;A&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.3&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;C&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.3&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">},&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;G&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.17550000000000002&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;H&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.17550000000000002&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;I&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.135&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;J&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.135&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;E&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.09000000000000001&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;F&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.09000000000000001&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">},&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;M&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.15795&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;K&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.08100000000000002&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;L&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.04050000000000001&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="4223-适用场景">4.2.2.3 适用场景&lt;/h5>
-&lt;p>为给定的起点在不同的层中找到最应该推荐的顶点。&lt;/p>
-&lt;ul>
-&lt;li>比如：在观众、朋友、电影、导演的四层图结构中，根据某个观众的朋友们喜欢的电影，为这个观众推荐电影；或者根据这些电影是谁拍的，为其推荐导演。&lt;/li>
 &lt;/ul></description></item></channel></rss>

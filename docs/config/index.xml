@@ -2036,7 +2036,7 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;/table>
 &lt;h3 id="k8s-operator-config-options">K8s Operator Config Options&lt;/h3>
 &lt;blockquote>
-&lt;p>NOTE: Option needs to be converted through environment variable settings, e.g k8s.internal_etcd_url =&amp;gt; INTERNAL_ETCD_URL&lt;/p>
+&lt;p>NOTE: Option needs to be converted through environment variable settings, e.g. k8s.internal_etcd_url =&amp;gt; INTERNAL_ETCD_URL&lt;/p>
 &lt;/blockquote>
 &lt;table>
 &lt;thead>

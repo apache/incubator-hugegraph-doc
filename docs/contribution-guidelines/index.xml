@@ -193,7 +193,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">for&lt;/span> i in *.tar.gz&lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#204a87;font-weight:bold">do&lt;/span> &lt;span style="color:#204a87">echo&lt;/span> &lt;span style="color:#000">$i&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span> gpg --verify &lt;span style="color:#000">$i&lt;/span>.asc &lt;span style="color:#000">$i&lt;/span> &lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#204a87;font-weight:bold">done&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>First confirm the overall integrity/consistency, and then confirm the specific content (&lt;strong>key&lt;/strong>)&lt;/p>
 &lt;h4 id="4-check-the-archive-contents">4. Check the archive contents&lt;/h4>
-&lt;p>Here it is divided into two aspects: source code package + binary package, The source code package is more strict, it can be said that the core part (Because it is longer,For a complete list refer to the official &lt;a href="https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist">Wiki&lt;/a>)&lt;/p>
+&lt;p>Here it is divided into two aspects: source code package + binary package, The source code package is stricter, it can be said that the core part (Because it is longer,For a complete list refer to the official &lt;a href="https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist">Wiki&lt;/a>)&lt;/p>
 &lt;p>First of all, we need to download the package from the apache official &lt;code>release-candidate&lt;/code> URL to the local (URL: &lt;a href="https://dist.apache.org/repos/dist/dev/incubator/hugegraph/">click to jump&lt;/a>)&lt;/p>
 &lt;h5 id="a-source-package">A. source package&lt;/h5>
 &lt;p>After decompressing &lt;code>xxx-hugegraph-source.tar.gz&lt;/code>, Do the following checks:&lt;/p>
@@ -207,8 +207,11 @@
 &lt;li>Check the first 3 to 5 commits, click to see if the modification is consistent with the source file&lt;/li>
 &lt;li>Finally, make sure the source code works/compiles correctly (then look at tests and specs)&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># At the same time, you can also check whether the code style conforms to the specification, and if it does not conform, you can put down an adjustment&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn clean &lt;span style="color:#204a87">test&lt;/span> -Dcheckstyle.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">false&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># prefer to use/switch to java 11 for the following operations (compiling/running)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># java --version&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># try to test in the Unix env to check if it works well&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn clean package -Dmaven.test.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">true&lt;/span> -Dcheckstyle.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">true&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="b-binary-package">B. binary package&lt;/h5>
 &lt;p>After decompressing &lt;code>xxx-hugegraph.tar.gz&lt;/code>, perform the following checks:&lt;/p>
 &lt;ol>
@@ -217,7 +220,7 @@
 &lt;li>Confirm that the signature of each file is normal through the gpg command&lt;/li>
 &lt;/ol>
 &lt;p>&lt;strong>Note:&lt;/strong> If a third-party dependency is introduced in the binary package, you need to update the LICENSE and add the third-party dependent LICENSE; if the third-party dependent LICENSE is Apache 2.0, and the corresponding project contains NOTICE, you also need to update Our NOTICE file&lt;/p>
-&lt;h4 id="5-check-the-official-website-and-github-and-other-pages">5. Check the official website and github and other pages&lt;/h4>
+&lt;h4 id="5-check-the-official-website-and-github-and-other-pages">5. Check the official website and GitHub and other pages&lt;/h4>
 &lt;ol>
 &lt;li>Make sure that the official website at least meets &lt;a href="https://whimsy.apache.org/pods/project/hugegraph">apache website check&lt;/a>, and no circular links etc.&lt;/li>
 &lt;li>Update &lt;strong>download link&lt;/strong> and version update instructions&lt;/li>

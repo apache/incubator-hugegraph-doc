@@ -1337,8 +1337,8 @@ serializer=binary
 &lt;p>There will be two spellings HugeGraph-Server and HugeGraphServer in the document, and other modules are similar. There is no big difference in the meaning of these two ways of writing, which can be distinguished as follows: &lt;code>HugeGraph-Server&lt;/code> represents the code of server-related components, &lt;code>HugeGraphServer&lt;/code> represents the service process.&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="2-dependency">2 Dependency&lt;/h3>
-&lt;h4 id="21-install-jdk-18">2.1 Install JDK-1.8&lt;/h4>
-&lt;p>HugeGraph-Server developed based on jdk-1.8, project&amp;rsquo;s code uses many classes and methods in jdk-1.8, please install and configure by yourself.&lt;/p>
+&lt;h4 id="21-install-java11-jdk-11">2.1 Install Java11 (JDK 11)&lt;/h4>
+&lt;p>Consider use Java 11 to run &lt;code>HugeGraph-Server&lt;/code>(also compatible with Java 8), and configure by yourself.&lt;/p>
 &lt;p>&lt;strong>Be sure to execute the &lt;code>java -version&lt;/code> command to check the jdk version before reading&lt;/strong>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>java -version
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="22-install-gcc-430glibcxx_3410-or-update-version-optional">2.2 Install GCC-4.3.0(GLIBCXX_3.4.10) or update version (optional)&lt;/h4>
@@ -1657,209 +1657,62 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph/issues">GitHub Issues&lt;/a>: Feedback on usage issues and functional requirements (priority)&lt;/li>
 &lt;li>Feedback Email: &lt;a href="mailto:hugegraph@googlegroups.com">hugegraph@googlegroups.com&lt;/a>&lt;/li>
 &lt;li>WeChat public account: HugeGraph&lt;/li>
-&lt;/ul></description></item><item><title>Docs: HugeGraph 0.12 Release Notes</title><link>/docs/changelog/hugegraph-0.12.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/changelog/hugegraph-0.12.0-release-notes/</guid><description>
-&lt;h3 id="api--client">API &amp;amp; Client&lt;/h3>
+&lt;/ul></description></item><item><title>Docs: HugeGraph 1.0.0 Release Notes</title><link>/docs/changelog/hugegraph-1.0.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/changelog/hugegraph-1.0.0-release-notes/</guid><description>
+&lt;blockquote>
+&lt;p>TODO: update the summary soon, please check the detail in each repository first, thanks&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph/releases/tag/1.0.0">Server Release Note&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/releases/tag/1.0.0">Toolchain Release Note&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-computer/releases/tag/1.0.0">Computer Release Note&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-commons/releases/tag/1.0.0">Commons Release Note&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="server-api--client">Server (API &amp;amp; Client)&lt;/h3>
 &lt;h4 id="接口更新">接口更新&lt;/h4>
 &lt;ul>
-&lt;li>支持 https + auth 模式连接图服务 （hugegraph-client #109 #110）&lt;/li>
-&lt;li>统一 kout/kneighbor 等 OLTP 接口的参数命名及默认值（hugegraph-client #122 #123）&lt;/li>
-&lt;li>支持 RESTful 接口利用 P.textcontains() 进行属性全文检索（hugegraph #1312）&lt;/li>
-&lt;li>增加 graph_read_mode API 接口，以切换 OLTP、OLAP 读模式（hugegraph #1332）&lt;/li>
-&lt;li>支持 list/set 类型的聚合属性 aggregate property（hugegraph #1332）&lt;/li>
-&lt;li>权限接口增加 METRICS 资源类型（hugegraph #1355、hugegraph-client #114）&lt;/li>
-&lt;li>权限接口增加 SCHEMA 资源类型（hugegraph #1362、hugegraph-client #117）&lt;/li>
-&lt;li>增加手动 compact API 接口，支持 rocksdb/cassandra/hbase 后端（hugegraph #1378）&lt;/li>
-&lt;li>权限接口增加 login/logout API，支持颁发或回收 Token（hugegraph #1500、hugegraph-client #125）&lt;/li>
-&lt;li>权限接口增加 project API（hugegraph #1504、hugegraph-client #127）&lt;/li>
-&lt;li>增加 OLAP 回写接口，支持 cassandra/rocksdb 后端（hugegraph #1506、hugegraph-client #129）&lt;/li>
-&lt;li>增加返回一个图的所有 Schema 的 API 接口（hugegraph #1567、hugegraph-client #134）&lt;/li>
-&lt;li>变更 property key 创建与更新 API 的 HTTP 返回码为 202（hugegraph #1584）&lt;/li>
-&lt;li>增强 Text.contains() 支持3种格式：&amp;ldquo;word&amp;rdquo;、&amp;quot;(word)&amp;quot;、&amp;quot;(word1|word2|word3)&amp;quot;（hugegraph #1652）&lt;/li>
-&lt;li>统一了属性中特殊字符的行为（hugegraph #1670 #1684）&lt;/li>
-&lt;li>支持动态创建图实例、克隆图实例、删除图实例（hugegraph-client #135）&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
 &lt;/ul>
 &lt;h4 id="其它修改">其它修改&lt;/h4>
 &lt;ul>
-&lt;li>修复在恢复 index label 时 IndexLabelV56 id 丢失的问题（hugegraph-client #118）&lt;/li>
-&lt;li>为 Edge 类增加 name() 方法（hugegraph-client #121）&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
 &lt;/ul>
 &lt;h3 id="core--server">Core &amp;amp; Server&lt;/h3>
 &lt;h4 id="功能更新">功能更新&lt;/h4>
 &lt;ul>
-&lt;li>支持动态创建图实例（hugegraph #1065）&lt;/li>
-&lt;li>支持通过 Gremlin 调用 OLTP 算法（hugegraph #1289）&lt;/li>
-&lt;li>支持多集群使用同一个图权限服务，以共享权限信息（hugegraph #1350）&lt;/li>
-&lt;li>支持跨多节点的 Cache 缓存同步（hugegraph #1357）&lt;/li>
-&lt;li>支持 OLTP 算法使用原生集合以降低 GC 压力提升性能（hugegraph #1409）&lt;/li>
-&lt;li>支持对新增的 Raft 节点打快照或恢复快照（hugegraph #1439）&lt;/li>
-&lt;li>支持对集合属性建立二级索引 Secondary Index（hugegraph #1474）&lt;/li>
-&lt;li>支持审计日志，及其压缩、限速等功能（hugegraph #1492 #1493）&lt;/li>
-&lt;li>支持 OLTP 算法使用高性能并行无锁原生集合以提升性能（hugegraph #1552）&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
 &lt;/ul>
 &lt;h4 id="bug修复">BUG修复&lt;/h4>
 &lt;ul>
-&lt;li>修复带权最短路径算法（weighted shortest path）NPE问题 （hugegraph #1250）&lt;/li>
-&lt;li>增加 Raft 相关的安全操作白名单（hugegraph #1257）&lt;/li>
-&lt;li>修复 RocksDB 实例未正确关闭的问题（hugegraph #1264）&lt;/li>
-&lt;li>在清空数据 truncate 操作之后，显示的发起写快照 Raft Snapshot（hugegraph #1275）&lt;/li>
-&lt;li>修复 Raft Leader 在收到 Follower 转发请求时未更新缓存的问题（hugegraph #1279）&lt;/li>
-&lt;li>修复带权最短路径算法（weighted shortest path）结果不稳定的问题（hugegraph #1280）&lt;/li>
-&lt;li>修复 rays 算法 limit 参数不生效问题（hugegraph #1284）&lt;/li>
-&lt;li>修复 neighborrank 算法 capacity 参数未检查的问题（hugegraph #1290）&lt;/li>
-&lt;li>修复 PostgreSQL 因为不存在与用户同名的数据库而初始化失败的问题（hugegraph #1293）&lt;/li>
-&lt;li>修复 HBase 后端当启用 Kerberos 时初始化失败的问题（hugegraph #1294）&lt;/li>
-&lt;li>修复 HBase/RocksDB 后端 shard 结束判断错误问题（hugegraph #1306）&lt;/li>
-&lt;li>修复带权最短路径算法（weighted shortest path）未检查目标顶点存在的问题（hugegraph #1307）&lt;/li>
-&lt;li>修复 personalrank/neighborrank 算法中非 String 类型 id 的问题（hugegraph #1310）&lt;/li>
-&lt;li>检查必须是 master 节点才允许调度 gremlin job（hugegraph #1314）&lt;/li>
-&lt;li>修复 g.V().hasLabel().limit(n) 因为索引覆盖导致的部分结果不准确问题（hugegraph #1316）&lt;/li>
-&lt;li>修复 jaccardsimilarity 算法当并集为空时报 NaN 错误的问题（hugegraph #1324）&lt;/li>
-&lt;li>修复 Raft Follower 节点操作 Schema 多节点之间数据不同步问题（hugegraph #1325）&lt;/li>
-&lt;li>修复因为 tx 未关闭导致的 TTL 不生效问题（hugegraph #1330）&lt;/li>
-&lt;li>修复 gremlin job 的执行结果大于 Cassandra 限制但小于任务限制时的异常处理（hugegraph #1334）&lt;/li>
-&lt;li>检查权限接口 auth-delete 和 role-get API 操作时图必须存在（hugegraph #1338）&lt;/li>
-&lt;li>修复异步任务结果中包含 path/tree 时系列化不正常的问题（hugegraph #1351）&lt;/li>
-&lt;li>修复初始化 admin 用户时的 NPE 问题（hugegraph #1360）&lt;/li>
-&lt;li>修复异步任务原子性操作问题，确保 update/get fields 及 re-schedule 的原子性（hugegraph #1361）&lt;/li>
-&lt;li>修复权限 NONE 资源类型的问题（hugegraph #1362）&lt;/li>
-&lt;li>修复启用权限后，truncate 操作报错 SecurityException 及管理员信息丢失问题（hugegraph #1365）&lt;/li>
-&lt;li>修复启用权限后，解析数据忽略了权限异常的问题（hugegraph #1380）&lt;/li>
-&lt;li>修复 AuthManager 在初始化时会尝试连接其它节点的问题（hugegraph #1381）&lt;/li>
-&lt;li>修复特定的 shard 信息导致 base64 解码错误的问题（hugegraph #1383）&lt;/li>
-&lt;li>修复启用权限后，使用 consistent-hash LB 在校验权限时，creator 为空的问题（hugegraph #1385）&lt;/li>
-&lt;li>改进权限中 VAR 资源不再依赖于 VERTEX 资源（hugegraph #1386）&lt;/li>
-&lt;li>规范启用权限后，Schema 操作仅依赖具体的资源（hugegraph #1387）&lt;/li>
-&lt;li>规范启用权限后，部分操作由依赖 STATUS 资源改为依赖 ANY 资源（hugegraph #1391）&lt;/li>
-&lt;li>规范启用权限后，禁止初始化管理员密码为空（hugegraph #1400）&lt;/li>
-&lt;li>检查创建用户时 username/password 不允许为空（hugegraph #1402）&lt;/li>
-&lt;li>修复更新 Label 时，PrimaryKey 或 SortKey 被设置为可空属性的问题（hugegraph #1406）&lt;/li>
-&lt;li>修复 ScyllaDB 丢失分页结果问题（hugegraph #1407）&lt;/li>
-&lt;li>修复带权最短路径算法（weighted shortest path）权重属性强制转换为 double 的问题（hugegraph #1432）&lt;/li>
-&lt;li>统一 OLTP 算法中的 degree 参数命名（hugegraph #1433）&lt;/li>
-&lt;li>修复 fusiformsimilarity 算法当 similars 为空的时候返回所有的顶点问题（hugegraph #1434）&lt;/li>
-&lt;li>改进 paths 算法，当起始点与目标点相同时应该返回空路径（hugegraph #1435）&lt;/li>
-&lt;li>修改 kout/kneighbor 的 limit 参数默认值 10 为 10000000（hugegraph #1436）&lt;/li>
-&lt;li>修复分页信息中的 &amp;lsquo;+&amp;rsquo; 被 URL 编码为空格的问题（hugegraph #1437）&lt;/li>
-&lt;li>改进边更新接口的错误提示信息（hugegraph #1443）&lt;/li>
-&lt;li>修复 kout 算法 degree 未在所有 label 范围生效的问题（hugegraph #1459）&lt;/li>
-&lt;li>改进 kneighbor/kout 算法，起始点不允许出现在结果集中（hugegraph #1459 #1463）&lt;/li>
-&lt;li>统一 kout/kneighbor 的 Get 和 Post 版本行为（hugegraph #1470）&lt;/li>
-&lt;li>改进创建边时顶点类型不匹配的错误提示信息（hugegraph #1477）&lt;/li>
-&lt;li>修复 Range Index 的残留索引问题（hugegraph #1498）&lt;/li>
-&lt;li>修复权限操作未失效缓存的问题（hugegraph #1528）&lt;/li>
-&lt;li>修复 sameneighbor 的 limit 参数默认值 10 为 10000000（hugegraph #1530）&lt;/li>
-&lt;li>修复 clear API 不应该所有后端都调用 create snapshot 的问题（hugegraph #1532）&lt;/li>
-&lt;li>修复当 loading 模式时创建 Index Label 阻塞问题（hugegraph #1548）&lt;/li>
-&lt;li>修复增加图到 project 或从 project 移除图的问题（hugegraph #1562）&lt;/li>
-&lt;li>改进权限操作的一些错误提示信息（hugegraph #1563）&lt;/li>
-&lt;li>支持浮点属性设置为 Infinity/NaN 的值（hugegraph #1578)&lt;/li>
-&lt;li>修复 Raft 启用 safe_read 时的 quorum read 问题（hugegraph #1618)&lt;/li>
-&lt;li>修复 token 过期时间配置的单位问题（hugegraph #1625）&lt;/li>
-&lt;li>修复 MySQL Statement 资源泄露问题（hugegraph #1627）&lt;/li>
-&lt;li>修复竞争条件下 Schema.getIndexLabel 获取不到数据的问题（hugegraph #1629）&lt;/li>
-&lt;li>修复 HugeVertex4Insert 无法系列化问题（hugegraph #1630）&lt;/li>
-&lt;li>修复 MySQL count Statement 未关闭问题（hugegraph #1640）&lt;/li>
-&lt;li>修复当删除 Index Label 异常时，导致状态不同步问题（hugegraph #1642）&lt;/li>
-&lt;li>修复 MySQL 执行 gremlin timeout 导致的 statement 未关闭问题（hugegraph #1643）&lt;/li>
-&lt;li>改进 Search Index 以兼容特殊 Unicode 字符：\u0000 to \u0003（hugegraph #1659）&lt;/li>
-&lt;li>修复 #1659 引入的 Char 未转化为 String 的问题（hugegraph #1664）&lt;/li>
-&lt;li>修复 has() + within() 查询时结果异常问题（hugegraph #1680）&lt;/li>
-&lt;li>升级 Log4j 版本到 2.17 以修复安全漏洞（hugegraph #1686 #1698 #1702）&lt;/li>
-&lt;li>修复 HBase 后端 shard scan 中 startkey 包含空串时 NPE 问题（hugegraph #1691）&lt;/li>
-&lt;li>修复 paths 算法在深层环路遍历时性能下降问题 （hugegraph #1694）&lt;/li>
-&lt;li>改进 personalrank 算法的参数默认值及错误检查（hugegraph #1695）&lt;/li>
-&lt;li>修复 RESTful 接口 P.within 条件不生效问题（hugegraph #1704）&lt;/li>
-&lt;li>修复启用权限时无法动态创建图的问题（hugegraph #1708）&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
 &lt;/ul>
 &lt;h4 id="配置项修改">配置项修改：&lt;/h4>
 &lt;ul>
-&lt;li>共享 SSL 相关配置项命名（hugegraph #1260）&lt;/li>
-&lt;li>支持 RocksDB 配置项 rocksdb.level_compaction_dynamic_level_bytes（hugegraph #1262）&lt;/li>
-&lt;li>去除 RESFful Server 服务协议配置项 restserver.protocol，自动提取 URL 中的 Schema（hugegraph #1272）&lt;/li>
-&lt;li>增加 PostgreSQL 配置项 jdbc.postgresql.connect_database（hugegraph #1293）&lt;/li>
-&lt;li>增加针对顶点主键是否编码的配置项 vertex.encode_primary_key_number（hugegraph #1323）&lt;/li>
-&lt;li>增加针对聚合查询是否启用索引优化的配置项 query.optimize_aggregate_by_index（hugegraph #1549）&lt;/li>
-&lt;li>修改 cache_type 的默认值 l1 为 l2（hugegraph #1681）&lt;/li>
-&lt;li>增加 JDBC 强制重连配置项 jdbc.forced_auto_reconnect（hugegraph #1710）&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
 &lt;/ul>
 &lt;h4 id="其它修改-1">其它修改&lt;/h4>
 &lt;ul>
-&lt;li>增加默认的 SSL Certificate 文件（hugegraph #1254）&lt;/li>
-&lt;li>OLTP 并行请求共享线程池，而非每个请求使用单独的线程池（hugegraph #1258）&lt;/li>
-&lt;li>修复 Example 的问题（hugegraph #1308）&lt;/li>
-&lt;li>使用 jraft 版本 1.3.5（hugegraph #1313）&lt;/li>
-&lt;li>如果启用了 Raft 模式时，关闭 RocksDB 的 WAL（hugegraph #1318）&lt;/li>
-&lt;li>使用 TarLz4Util 来提升快照 Snapshot 压缩的性能（hugegraph #1336）&lt;/li>
-&lt;li>升级存储的版本号（store version），因为 property key 增加了 read frequency（hugegraph #1341）&lt;/li>
-&lt;li>顶点/边 vertex/edge 的 Get API 使用 queryVertex/queryEdge 方法来替代 iterator 方法（hugegraph #1345）&lt;/li>
-&lt;li>支持 BFS 优化的多度查询（hugegraph #1359)&lt;/li>
-&lt;li>改进 RocksDB deleteRange() 带来的查询性能问题（hugegraph #1375）&lt;/li>
-&lt;li>修复 travis-ci cannot find symbol Namifiable 问题（hugegraph #1376）&lt;/li>
-&lt;li>确保 RocksDB 快照的磁盘与 data path 指定的一致（hugegraph #1392）&lt;/li>
-&lt;li>修复 MacOS 空闲内存 free_memory 计算不准确问题（hugegraph #1396）&lt;/li>
-&lt;li>增加 Raft onBusy 回调来配合限速（hugegraph #1401）&lt;/li>
-&lt;li>升级 netty-all 版本 4.1.13.Final 到 4.1.42.Final（hugegraph #1403）&lt;/li>
-&lt;li>支持 TaskScheduler 暂停当设置为 loading 模式时（hugegraph #1414）&lt;/li>
-&lt;li>修复 raft-tools 脚本的问题（hugegraph #1416）&lt;/li>
-&lt;li>修复 license params 问题（hugegraph #1420）&lt;/li>
-&lt;li>提升写权限日志的性能，通过 batch flush &amp;amp; async write 方式改进（hugegraph #1448）&lt;/li>
-&lt;li>增加 MySQL 连接 URL 的日志记录（hugegraph #1451）&lt;/li>
-&lt;li>提升用户信息校验性能（hugegraph# 1460）&lt;/li>
-&lt;li>修复 TTL 因为起始时间问题导致的错误（hugegraph #1478）&lt;/li>
-&lt;li>支持日志配置的热加载及对审计日志的压缩（hugegraph #1492）&lt;/li>
-&lt;li>支持针对用户级别的审计日志的限速（hugegraph #1493）&lt;/li>
-&lt;li>缓存 RamCache 支持用户自定义的过期时间（hugegraph #1494）&lt;/li>
-&lt;li>在 auth client 端缓存 login role 以避免重复的 RPC 调用（hugegraph #1507）&lt;/li>
-&lt;li>修复 IdSet.contains() 未复写 AbstractCollection.contains() 问题（hugegraph #1511）&lt;/li>
-&lt;li>修复当 commitPartOfEdgeDeletions() 失败时，未回滚 rollback 的问题（hugegraph #1513）&lt;/li>
-&lt;li>提升 Cache metrics 性能（hugegraph #1515）&lt;/li>
-&lt;li>当发生 license 操作错误时，增加打印异常日志（hugegraph #1522）&lt;/li>
-&lt;li>改进 SimilarsMap 实现（hugegraph #1523）&lt;/li>
-&lt;li>使用 tokenless 方式来更新 coverage（hugegraph #1529）&lt;/li>
-&lt;li>改进 project update 接口的代码（hugegraph #1537）&lt;/li>
-&lt;li>允许从 option() 访问 GRAPH_STORE（hugegraph #1546）&lt;/li>
-&lt;li>优化 kout/kneighbor 的 count 查询以避免拷贝集合（hugegraph #1550）&lt;/li>
-&lt;li>优化 shortestpath 遍历方式，以数据量少的一端优先遍历（hugegraph #1569）&lt;/li>
-&lt;li>完善 rocksdb.data_disks 配置项的 allowed keys 提示信息（hugegraph #1585）&lt;/li>
-&lt;li>为 number id 优化 OLTP 遍历中的 id2code 方法性能（hugegraph #1623）&lt;/li>
-&lt;li>优化 HugeElement.getProperties() 返回 Collection&amp;lt;Property&amp;gt;（hugegraph #1624）&lt;/li>
-&lt;li>增加 APACHE PROPOSAL 文件（hugegraph #1644）&lt;/li>
-&lt;li>改进 close tx 的流程（hugegraph #1655）&lt;/li>
-&lt;li>当 reset() 时为 MySQL close 捕获所有类型异常（hugegraph #1661）&lt;/li>
-&lt;li>改进 OLAP property 模块代码（hugegraph #1675）&lt;/li>
-&lt;li>改进查询模块的执行性能（hugegraph #1711）&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
 &lt;/ul>
-&lt;h3 id="loader">Loader&lt;/h3>
+&lt;h3 id="toolchain">Toolchain&lt;/h3>
 &lt;ul>
-&lt;li>支持导入 Parquet 格式文件（hugegraph-loader #174）&lt;/li>
-&lt;li>支持 HDFS Kerberos 权限验证（hugegraph-loader #176）&lt;/li>
-&lt;li>支持 HTTPS 协议连接到服务端导入数据（hugegraph-loader #183）&lt;/li>
-&lt;li>修复 trust store file 路径问题（hugegraph-loader #186）&lt;/li>
-&lt;li>处理 loading mode 重置的异常（hugegraph-loader #187）&lt;/li>
-&lt;li>增加在插入数据时对非空属性的检查（hugegraph-loader #190）&lt;/li>
-&lt;li>修复客户端与服务端时区不同导致的时间判断问题（hugegraph-loader #192）&lt;/li>
-&lt;li>优化数据解析性能（hugegraph-loader #194）&lt;/li>
-&lt;li>当用户指定了文件头时，检查其必须不为空（hugegraph-loader #195）&lt;/li>
-&lt;li>修复示例程序中 MySQL struct.json 格式问题（hugegraph-loader #198）&lt;/li>
-&lt;li>修复顶点边导入速度不精确的问题（hugegraph-loader #200 #205）&lt;/li>
-&lt;li>当导入启用 check-vertex 时，确保先导入顶点再导入边（hugegraph-loader #206）&lt;/li>
-&lt;li>修复边 Json 数据导入格式不统一时数组溢出的问题（hugegraph-loader #211）&lt;/li>
-&lt;li>修复因边 mapping 文件不存在导致的 NPE 问题（hugegraph-loader #213）&lt;/li>
-&lt;li>修复读取时间可能出现负数的问题（hugegraph-loader #215)&lt;/li>
-&lt;li>改进目录文件的日志打印（hugegraph-loader #223)&lt;/li>
-&lt;li>改进 loader 的的 Schema 处理流程（hugegraph-loader #230)&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
 &lt;/ul>
-&lt;h3 id="tools">Tools&lt;/h3>
+&lt;h3 id="computer">Computer&lt;/h3>
 &lt;ul>
-&lt;li>支持 HTTPS 协议（hugegraph-tools #71）&lt;/li>
-&lt;li>移除 &amp;ndash;protocol 参数，直接从URL中自动提取（hugegraph-tools #72）&lt;/li>
-&lt;li>支持将数据 dump 到 HDFS 文件系统（hugegraph-tools #73）&lt;/li>
-&lt;li>修复 trust store file 路径问题（hugegraph-tools #75）&lt;/li>
-&lt;li>支持权限信息的备份恢复（hugegraph-tools #76）&lt;/li>
-&lt;li>支持无参数的 Printer 打印（hugegraph-tools #79）&lt;/li>
-&lt;li>修复 MacOS free_memory 计算问题（hugegraph-tools #82）&lt;/li>
-&lt;li>支持备份恢复时指定线程数hugegraph-tools #83）&lt;/li>
-&lt;li>支持动态创建图、克隆图、删除图等命令（hugegraph-tools #95)&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
+&lt;/ul>
+&lt;h3 id="commons">Commons&lt;/h3>
+&lt;ul>
+&lt;li>xx&lt;/li>
+&lt;li>xx&lt;/li>
 &lt;/ul></description></item><item><title>Docs: Schema API</title><link>/docs/clients/restful-api/schema/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/clients/restful-api/schema/</guid><description>
 &lt;h3 id="11-schema">1.1 Schema&lt;/h3>
 &lt;p>HugeGraph 提供单一接口获取某个图的全部 Schema 信息，包括：PropertyKey、VertexLabel、EdgeLabel 和 IndexLabel。&lt;/p>
@@ -3655,7 +3508,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;p>TinkerPop API允许打开事务，请求完成时会自动关闭(Gremlin Server强制关闭)&lt;/p>
 &lt;/blockquote></description></item><item><title>Docs: Download HugeGraph</title><link>/docs/download/download/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/download/download/</guid><description>
 &lt;blockquote>
-&lt;p>TODO: update 1.0.0 download link&lt;/p>
+&lt;p>TODO: update 1.0.0 download link with the CN doc&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="latest-version">Latest version&lt;/h3>
 &lt;p>The latest HugeGraph: &lt;strong>1.0.0&lt;/strong>, released on &lt;em>2022-12-31&lt;/em>.&lt;/p>
@@ -3846,9 +3699,9 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/ul>
 &lt;h4 id="12-人物关系图谱">1.2 人物关系图谱&lt;/h4>
 &lt;p>本示例通过Property Graph Model图数据模型来描述希腊神话中各人物角色的关系（也被成为人物关系图谱），具体关系详见下图。&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/graph-of-gods.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>其中，圆形节点代表实体(Vertex)，箭头代表关系（Edge），方框的内容为属性。&lt;/p>
 &lt;p>该关系图谱中有两类顶点，分别是人物（character）和位置（location）如下表：&lt;/p>
 &lt;table>
@@ -4196,7 +4049,7 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;/tbody>
 &lt;/table>
 &lt;ul>
-&lt;li>idStrategy: Each VertexLabel can choose its own ID strategy. There are currently three strategies to choose from, namely Automatic (automatically generated), Customize (user input) and PrimaryKey (primary attribute key). Among them, Automatic uses the Snowflake algorithm to generate Id, Customize requires the user to pass in the Id of string or number type, and PrimaryKey allows the user to select several properties of VertexLabel as the basis for differentiation. HugeGraph will be spliced and generated ID according to the value of the primary properties. idStrategy uses Automatic by default, but if the user does not explicitly set idStrategy and calls the primaryKeys(&amp;hellip;) method to set the primary property, then idStrategy will automatically use PrimaryKey.&lt;/li>
+&lt;li>idStrategy: Each VertexLabel can choose its own ID strategy. There are currently three strategies to choose from, namely Automatic (automatically generated), Customize (user input) and PrimaryKey (primary attribute key). Among them, Automatic uses the Snowflake algorithm to generate ID, Customize requires the user to pass in the ID of string or number type, and PrimaryKey allows the user to select several properties of VertexLabel as the basis for differentiation. HugeGraph will be spliced and generated ID according to the value of the primary properties. idStrategy uses Automatic by default, but if the user does not explicitly set idStrategy and calls the primaryKeys(&amp;hellip;) method to set the primary property, then idStrategy will automatically use PrimaryKey.&lt;/li>
 &lt;/ul>
 &lt;table>
 &lt;thead>
@@ -4775,10 +4628,10 @@ Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-d
 &lt;p>This step is the modeling process. Users need to have a clear idea of ​​their existing data and the graph model they want to create, and then write the schema to build the graph model.&lt;/p>
 &lt;p>For example, if you want to create a graph with two types of vertices and two types of edges, the vertices are &amp;ldquo;people&amp;rdquo; and &amp;ldquo;software&amp;rdquo;, the edges are &amp;ldquo;people know people&amp;rdquo; and &amp;ldquo;people create software&amp;rdquo;, and these vertices and edges have some attributes, For example, the vertex &amp;ldquo;person&amp;rdquo; has: &amp;ldquo;name&amp;rdquo;, &amp;ldquo;age&amp;rdquo; and other attributes,
 &amp;ldquo;Software&amp;rdquo; includes: &amp;ldquo;name&amp;rdquo;, &amp;ldquo;sale price&amp;rdquo; and other attributes; side &amp;ldquo;knowledge&amp;rdquo; includes: &amp;ldquo;date&amp;rdquo; attribute and so on.&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/demo-graph-model.png" alt="image">
 &lt;p>graph model example&lt;/p>
-&lt;/center>
+&lt;/div>
 &lt;p>After designing the graph model, we can use &lt;code>groovy&lt;/code> to write the definition of &lt;code>schema&lt;/code> and save it to a file, here named &lt;code>schema.groovy&lt;/code>.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// Create some properties
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asText&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
@@ -5153,7 +5006,7 @@ Office,388
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The 1.0 version of the mapping file is centered on the vertex and edge, and sets the input source; while the 2.0 version is centered on the input source, and sets the vertex and edge mapping. Some input sources (such as a file) can generate both vertices and edges. If you write in the 1.0 format, you need to write an input block in each of the vertex and egde mapping blocks. The two input blocks are exactly the same ; and the 2.0 version only needs to write input once. Therefore, compared with version 1.0, version 2.0 can save some repetitive writing of input.&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The 1.0 version of the mapping file is centered on the vertex and edge, and sets the input source; while the 2.0 version is centered on the input source, and sets the vertex and edge mapping. Some input sources (such as a file) can generate both vertices and edges. If you write in the 1.0 format, you need to write an input block in each of the vertex and edge mapping blocks. The two input blocks are exactly the same ; and the 2.0 version only needs to write input once. Therefore, compared with version 1.0, version 2.0 can save some repetitive writing of input.&lt;/p>
 &lt;p>In the bin directory of hugegraph-loader-{version}, there is a script tool &lt;code>mapping-convert.sh&lt;/code> that can directly convert the mapping file of version 1.0 to version 2.0. The usage is as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/mapping-convert.sh struct.json
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>A struct-v2.json will be generated in the same directory as struct.json.&lt;/p>
@@ -5908,7 +5761,210 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;task_id&amp;#34;&lt;/span> &lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Subscribe Mailing Lists</title><link>/docs/contribution-guidelines/subscribe/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/contribution-guidelines/subscribe/</guid><description>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: HugeGraph 0.12 Release Notes</title><link>/docs/changelog/hugegraph-0.12.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/changelog/hugegraph-0.12.0-release-notes/</guid><description>
+&lt;h3 id="api--client">API &amp;amp; Client&lt;/h3>
+&lt;h4 id="接口更新">接口更新&lt;/h4>
+&lt;ul>
+&lt;li>支持 https + auth 模式连接图服务 （hugegraph-client #109 #110）&lt;/li>
+&lt;li>统一 kout/kneighbor 等 OLTP 接口的参数命名及默认值（hugegraph-client #122 #123）&lt;/li>
+&lt;li>支持 RESTful 接口利用 P.textcontains() 进行属性全文检索（hugegraph #1312）&lt;/li>
+&lt;li>增加 graph_read_mode API 接口，以切换 OLTP、OLAP 读模式（hugegraph #1332）&lt;/li>
+&lt;li>支持 list/set 类型的聚合属性 aggregate property（hugegraph #1332）&lt;/li>
+&lt;li>权限接口增加 METRICS 资源类型（hugegraph #1355、hugegraph-client #114）&lt;/li>
+&lt;li>权限接口增加 SCHEMA 资源类型（hugegraph #1362、hugegraph-client #117）&lt;/li>
+&lt;li>增加手动 compact API 接口，支持 rocksdb/cassandra/hbase 后端（hugegraph #1378）&lt;/li>
+&lt;li>权限接口增加 login/logout API，支持颁发或回收 Token（hugegraph #1500、hugegraph-client #125）&lt;/li>
+&lt;li>权限接口增加 project API（hugegraph #1504、hugegraph-client #127）&lt;/li>
+&lt;li>增加 OLAP 回写接口，支持 cassandra/rocksdb 后端（hugegraph #1506、hugegraph-client #129）&lt;/li>
+&lt;li>增加返回一个图的所有 Schema 的 API 接口（hugegraph #1567、hugegraph-client #134）&lt;/li>
+&lt;li>变更 property key 创建与更新 API 的 HTTP 返回码为 202（hugegraph #1584）&lt;/li>
+&lt;li>增强 Text.contains() 支持3种格式：&amp;ldquo;word&amp;rdquo;、&amp;quot;(word)&amp;quot;、&amp;quot;(word1|word2|word3)&amp;quot;（hugegraph #1652）&lt;/li>
+&lt;li>统一了属性中特殊字符的行为（hugegraph #1670 #1684）&lt;/li>
+&lt;li>支持动态创建图实例、克隆图实例、删除图实例（hugegraph-client #135）&lt;/li>
+&lt;/ul>
+&lt;h4 id="其它修改">其它修改&lt;/h4>
+&lt;ul>
+&lt;li>修复在恢复 index label 时 IndexLabelV56 id 丢失的问题（hugegraph-client #118）&lt;/li>
+&lt;li>为 Edge 类增加 name() 方法（hugegraph-client #121）&lt;/li>
+&lt;/ul>
+&lt;h3 id="core--server">Core &amp;amp; Server&lt;/h3>
+&lt;h4 id="功能更新">功能更新&lt;/h4>
+&lt;ul>
+&lt;li>支持动态创建图实例（hugegraph #1065）&lt;/li>
+&lt;li>支持通过 Gremlin 调用 OLTP 算法（hugegraph #1289）&lt;/li>
+&lt;li>支持多集群使用同一个图权限服务，以共享权限信息（hugegraph #1350）&lt;/li>
+&lt;li>支持跨多节点的 Cache 缓存同步（hugegraph #1357）&lt;/li>
+&lt;li>支持 OLTP 算法使用原生集合以降低 GC 压力提升性能（hugegraph #1409）&lt;/li>
+&lt;li>支持对新增的 Raft 节点打快照或恢复快照（hugegraph #1439）&lt;/li>
+&lt;li>支持对集合属性建立二级索引 Secondary Index（hugegraph #1474）&lt;/li>
+&lt;li>支持审计日志，及其压缩、限速等功能（hugegraph #1492 #1493）&lt;/li>
+&lt;li>支持 OLTP 算法使用高性能并行无锁原生集合以提升性能（hugegraph #1552）&lt;/li>
+&lt;/ul>
+&lt;h4 id="bug修复">BUG修复&lt;/h4>
+&lt;ul>
+&lt;li>修复带权最短路径算法（weighted shortest path）NPE问题 （hugegraph #1250）&lt;/li>
+&lt;li>增加 Raft 相关的安全操作白名单（hugegraph #1257）&lt;/li>
+&lt;li>修复 RocksDB 实例未正确关闭的问题（hugegraph #1264）&lt;/li>
+&lt;li>在清空数据 truncate 操作之后，显示的发起写快照 Raft Snapshot（hugegraph #1275）&lt;/li>
+&lt;li>修复 Raft Leader 在收到 Follower 转发请求时未更新缓存的问题（hugegraph #1279）&lt;/li>
+&lt;li>修复带权最短路径算法（weighted shortest path）结果不稳定的问题（hugegraph #1280）&lt;/li>
+&lt;li>修复 rays 算法 limit 参数不生效问题（hugegraph #1284）&lt;/li>
+&lt;li>修复 neighborrank 算法 capacity 参数未检查的问题（hugegraph #1290）&lt;/li>
+&lt;li>修复 PostgreSQL 因为不存在与用户同名的数据库而初始化失败的问题（hugegraph #1293）&lt;/li>
+&lt;li>修复 HBase 后端当启用 Kerberos 时初始化失败的问题（hugegraph #1294）&lt;/li>
+&lt;li>修复 HBase/RocksDB 后端 shard 结束判断错误问题（hugegraph #1306）&lt;/li>
+&lt;li>修复带权最短路径算法（weighted shortest path）未检查目标顶点存在的问题（hugegraph #1307）&lt;/li>
+&lt;li>修复 personalrank/neighborrank 算法中非 String 类型 id 的问题（hugegraph #1310）&lt;/li>
+&lt;li>检查必须是 master 节点才允许调度 gremlin job（hugegraph #1314）&lt;/li>
+&lt;li>修复 g.V().hasLabel().limit(n) 因为索引覆盖导致的部分结果不准确问题（hugegraph #1316）&lt;/li>
+&lt;li>修复 jaccardsimilarity 算法当并集为空时报 NaN 错误的问题（hugegraph #1324）&lt;/li>
+&lt;li>修复 Raft Follower 节点操作 Schema 多节点之间数据不同步问题（hugegraph #1325）&lt;/li>
+&lt;li>修复因为 tx 未关闭导致的 TTL 不生效问题（hugegraph #1330）&lt;/li>
+&lt;li>修复 gremlin job 的执行结果大于 Cassandra 限制但小于任务限制时的异常处理（hugegraph #1334）&lt;/li>
+&lt;li>检查权限接口 auth-delete 和 role-get API 操作时图必须存在（hugegraph #1338）&lt;/li>
+&lt;li>修复异步任务结果中包含 path/tree 时系列化不正常的问题（hugegraph #1351）&lt;/li>
+&lt;li>修复初始化 admin 用户时的 NPE 问题（hugegraph #1360）&lt;/li>
+&lt;li>修复异步任务原子性操作问题，确保 update/get fields 及 re-schedule 的原子性（hugegraph #1361）&lt;/li>
+&lt;li>修复权限 NONE 资源类型的问题（hugegraph #1362）&lt;/li>
+&lt;li>修复启用权限后，truncate 操作报错 SecurityException 及管理员信息丢失问题（hugegraph #1365）&lt;/li>
+&lt;li>修复启用权限后，解析数据忽略了权限异常的问题（hugegraph #1380）&lt;/li>
+&lt;li>修复 AuthManager 在初始化时会尝试连接其它节点的问题（hugegraph #1381）&lt;/li>
+&lt;li>修复特定的 shard 信息导致 base64 解码错误的问题（hugegraph #1383）&lt;/li>
+&lt;li>修复启用权限后，使用 consistent-hash LB 在校验权限时，creator 为空的问题（hugegraph #1385）&lt;/li>
+&lt;li>改进权限中 VAR 资源不再依赖于 VERTEX 资源（hugegraph #1386）&lt;/li>
+&lt;li>规范启用权限后，Schema 操作仅依赖具体的资源（hugegraph #1387）&lt;/li>
+&lt;li>规范启用权限后，部分操作由依赖 STATUS 资源改为依赖 ANY 资源（hugegraph #1391）&lt;/li>
+&lt;li>规范启用权限后，禁止初始化管理员密码为空（hugegraph #1400）&lt;/li>
+&lt;li>检查创建用户时 username/password 不允许为空（hugegraph #1402）&lt;/li>
+&lt;li>修复更新 Label 时，PrimaryKey 或 SortKey 被设置为可空属性的问题（hugegraph #1406）&lt;/li>
+&lt;li>修复 ScyllaDB 丢失分页结果问题（hugegraph #1407）&lt;/li>
+&lt;li>修复带权最短路径算法（weighted shortest path）权重属性强制转换为 double 的问题（hugegraph #1432）&lt;/li>
+&lt;li>统一 OLTP 算法中的 degree 参数命名（hugegraph #1433）&lt;/li>
+&lt;li>修复 fusiformsimilarity 算法当 similars 为空的时候返回所有的顶点问题（hugegraph #1434）&lt;/li>
+&lt;li>改进 paths 算法，当起始点与目标点相同时应该返回空路径（hugegraph #1435）&lt;/li>
+&lt;li>修改 kout/kneighbor 的 limit 参数默认值 10 为 10000000（hugegraph #1436）&lt;/li>
+&lt;li>修复分页信息中的 &amp;lsquo;+&amp;rsquo; 被 URL 编码为空格的问题（hugegraph #1437）&lt;/li>
+&lt;li>改进边更新接口的错误提示信息（hugegraph #1443）&lt;/li>
+&lt;li>修复 kout 算法 degree 未在所有 label 范围生效的问题（hugegraph #1459）&lt;/li>
+&lt;li>改进 kneighbor/kout 算法，起始点不允许出现在结果集中（hugegraph #1459 #1463）&lt;/li>
+&lt;li>统一 kout/kneighbor 的 Get 和 Post 版本行为（hugegraph #1470）&lt;/li>
+&lt;li>改进创建边时顶点类型不匹配的错误提示信息（hugegraph #1477）&lt;/li>
+&lt;li>修复 Range Index 的残留索引问题（hugegraph #1498）&lt;/li>
+&lt;li>修复权限操作未失效缓存的问题（hugegraph #1528）&lt;/li>
+&lt;li>修复 sameneighbor 的 limit 参数默认值 10 为 10000000（hugegraph #1530）&lt;/li>
+&lt;li>修复 clear API 不应该所有后端都调用 create snapshot 的问题（hugegraph #1532）&lt;/li>
+&lt;li>修复当 loading 模式时创建 Index Label 阻塞问题（hugegraph #1548）&lt;/li>
+&lt;li>修复增加图到 project 或从 project 移除图的问题（hugegraph #1562）&lt;/li>
+&lt;li>改进权限操作的一些错误提示信息（hugegraph #1563）&lt;/li>
+&lt;li>支持浮点属性设置为 Infinity/NaN 的值（hugegraph #1578)&lt;/li>
+&lt;li>修复 Raft 启用 safe_read 时的 quorum read 问题（hugegraph #1618)&lt;/li>
+&lt;li>修复 token 过期时间配置的单位问题（hugegraph #1625）&lt;/li>
+&lt;li>修复 MySQL Statement 资源泄露问题（hugegraph #1627）&lt;/li>
+&lt;li>修复竞争条件下 Schema.getIndexLabel 获取不到数据的问题（hugegraph #1629）&lt;/li>
+&lt;li>修复 HugeVertex4Insert 无法系列化问题（hugegraph #1630）&lt;/li>
+&lt;li>修复 MySQL count Statement 未关闭问题（hugegraph #1640）&lt;/li>
+&lt;li>修复当删除 Index Label 异常时，导致状态不同步问题（hugegraph #1642）&lt;/li>
+&lt;li>修复 MySQL 执行 gremlin timeout 导致的 statement 未关闭问题（hugegraph #1643）&lt;/li>
+&lt;li>改进 Search Index 以兼容特殊 Unicode 字符：\u0000 to \u0003（hugegraph #1659）&lt;/li>
+&lt;li>修复 #1659 引入的 Char 未转化为 String 的问题（hugegraph #1664）&lt;/li>
+&lt;li>修复 has() + within() 查询时结果异常问题（hugegraph #1680）&lt;/li>
+&lt;li>升级 Log4j 版本到 2.17 以修复安全漏洞（hugegraph #1686 #1698 #1702）&lt;/li>
+&lt;li>修复 HBase 后端 shard scan 中 startkey 包含空串时 NPE 问题（hugegraph #1691）&lt;/li>
+&lt;li>修复 paths 算法在深层环路遍历时性能下降问题 （hugegraph #1694）&lt;/li>
+&lt;li>改进 personalrank 算法的参数默认值及错误检查（hugegraph #1695）&lt;/li>
+&lt;li>修复 RESTful 接口 P.within 条件不生效问题（hugegraph #1704）&lt;/li>
+&lt;li>修复启用权限时无法动态创建图的问题（hugegraph #1708）&lt;/li>
+&lt;/ul>
+&lt;h4 id="配置项修改">配置项修改：&lt;/h4>
+&lt;ul>
+&lt;li>共享 SSL 相关配置项命名（hugegraph #1260）&lt;/li>
+&lt;li>支持 RocksDB 配置项 rocksdb.level_compaction_dynamic_level_bytes（hugegraph #1262）&lt;/li>
+&lt;li>去除 RESFful Server 服务协议配置项 restserver.protocol，自动提取 URL 中的 Schema（hugegraph #1272）&lt;/li>
+&lt;li>增加 PostgreSQL 配置项 jdbc.postgresql.connect_database（hugegraph #1293）&lt;/li>
+&lt;li>增加针对顶点主键是否编码的配置项 vertex.encode_primary_key_number（hugegraph #1323）&lt;/li>
+&lt;li>增加针对聚合查询是否启用索引优化的配置项 query.optimize_aggregate_by_index（hugegraph #1549）&lt;/li>
+&lt;li>修改 cache_type 的默认值 l1 为 l2（hugegraph #1681）&lt;/li>
+&lt;li>增加 JDBC 强制重连配置项 jdbc.forced_auto_reconnect（hugegraph #1710）&lt;/li>
+&lt;/ul>
+&lt;h4 id="其它修改-1">其它修改&lt;/h4>
+&lt;ul>
+&lt;li>增加默认的 SSL Certificate 文件（hugegraph #1254）&lt;/li>
+&lt;li>OLTP 并行请求共享线程池，而非每个请求使用单独的线程池（hugegraph #1258）&lt;/li>
+&lt;li>修复 Example 的问题（hugegraph #1308）&lt;/li>
+&lt;li>使用 jraft 版本 1.3.5（hugegraph #1313）&lt;/li>
+&lt;li>如果启用了 Raft 模式时，关闭 RocksDB 的 WAL（hugegraph #1318）&lt;/li>
+&lt;li>使用 TarLz4Util 来提升快照 Snapshot 压缩的性能（hugegraph #1336）&lt;/li>
+&lt;li>升级存储的版本号（store version），因为 property key 增加了 read frequency（hugegraph #1341）&lt;/li>
+&lt;li>顶点/边 vertex/edge 的 Get API 使用 queryVertex/queryEdge 方法来替代 iterator 方法（hugegraph #1345）&lt;/li>
+&lt;li>支持 BFS 优化的多度查询（hugegraph #1359)&lt;/li>
+&lt;li>改进 RocksDB deleteRange() 带来的查询性能问题（hugegraph #1375）&lt;/li>
+&lt;li>修复 travis-ci cannot find symbol Namifiable 问题（hugegraph #1376）&lt;/li>
+&lt;li>确保 RocksDB 快照的磁盘与 data path 指定的一致（hugegraph #1392）&lt;/li>
+&lt;li>修复 MacOS 空闲内存 free_memory 计算不准确问题（hugegraph #1396）&lt;/li>
+&lt;li>增加 Raft onBusy 回调来配合限速（hugegraph #1401）&lt;/li>
+&lt;li>升级 netty-all 版本 4.1.13.Final 到 4.1.42.Final（hugegraph #1403）&lt;/li>
+&lt;li>支持 TaskScheduler 暂停当设置为 loading 模式时（hugegraph #1414）&lt;/li>
+&lt;li>修复 raft-tools 脚本的问题（hugegraph #1416）&lt;/li>
+&lt;li>修复 license params 问题（hugegraph #1420）&lt;/li>
+&lt;li>提升写权限日志的性能，通过 batch flush &amp;amp; async write 方式改进（hugegraph #1448）&lt;/li>
+&lt;li>增加 MySQL 连接 URL 的日志记录（hugegraph #1451）&lt;/li>
+&lt;li>提升用户信息校验性能（hugegraph# 1460）&lt;/li>
+&lt;li>修复 TTL 因为起始时间问题导致的错误（hugegraph #1478）&lt;/li>
+&lt;li>支持日志配置的热加载及对审计日志的压缩（hugegraph #1492）&lt;/li>
+&lt;li>支持针对用户级别的审计日志的限速（hugegraph #1493）&lt;/li>
+&lt;li>缓存 RamCache 支持用户自定义的过期时间（hugegraph #1494）&lt;/li>
+&lt;li>在 auth client 端缓存 login role 以避免重复的 RPC 调用（hugegraph #1507）&lt;/li>
+&lt;li>修复 IdSet.contains() 未复写 AbstractCollection.contains() 问题（hugegraph #1511）&lt;/li>
+&lt;li>修复当 commitPartOfEdgeDeletions() 失败时，未回滚 rollback 的问题（hugegraph #1513）&lt;/li>
+&lt;li>提升 Cache metrics 性能（hugegraph #1515）&lt;/li>
+&lt;li>当发生 license 操作错误时，增加打印异常日志（hugegraph #1522）&lt;/li>
+&lt;li>改进 SimilarsMap 实现（hugegraph #1523）&lt;/li>
+&lt;li>使用 tokenless 方式来更新 coverage（hugegraph #1529）&lt;/li>
+&lt;li>改进 project update 接口的代码（hugegraph #1537）&lt;/li>
+&lt;li>允许从 option() 访问 GRAPH_STORE（hugegraph #1546）&lt;/li>
+&lt;li>优化 kout/kneighbor 的 count 查询以避免拷贝集合（hugegraph #1550）&lt;/li>
+&lt;li>优化 shortestpath 遍历方式，以数据量少的一端优先遍历（hugegraph #1569）&lt;/li>
+&lt;li>完善 rocksdb.data_disks 配置项的 allowed keys 提示信息（hugegraph #1585）&lt;/li>
+&lt;li>为 number id 优化 OLTP 遍历中的 id2code 方法性能（hugegraph #1623）&lt;/li>
+&lt;li>优化 HugeElement.getProperties() 返回 Collection&amp;lt;Property&amp;gt;（hugegraph #1624）&lt;/li>
+&lt;li>增加 APACHE PROPOSAL 文件（hugegraph #1644）&lt;/li>
+&lt;li>改进 close tx 的流程（hugegraph #1655）&lt;/li>
+&lt;li>当 reset() 时为 MySQL close 捕获所有类型异常（hugegraph #1661）&lt;/li>
+&lt;li>改进 OLAP property 模块代码（hugegraph #1675）&lt;/li>
+&lt;li>改进查询模块的执行性能（hugegraph #1711）&lt;/li>
+&lt;/ul>
+&lt;h3 id="loader">Loader&lt;/h3>
+&lt;ul>
+&lt;li>支持导入 Parquet 格式文件（hugegraph-loader #174）&lt;/li>
+&lt;li>支持 HDFS Kerberos 权限验证（hugegraph-loader #176）&lt;/li>
+&lt;li>支持 HTTPS 协议连接到服务端导入数据（hugegraph-loader #183）&lt;/li>
+&lt;li>修复 trust store file 路径问题（hugegraph-loader #186）&lt;/li>
+&lt;li>处理 loading mode 重置的异常（hugegraph-loader #187）&lt;/li>
+&lt;li>增加在插入数据时对非空属性的检查（hugegraph-loader #190）&lt;/li>
+&lt;li>修复客户端与服务端时区不同导致的时间判断问题（hugegraph-loader #192）&lt;/li>
+&lt;li>优化数据解析性能（hugegraph-loader #194）&lt;/li>
+&lt;li>当用户指定了文件头时，检查其必须不为空（hugegraph-loader #195）&lt;/li>
+&lt;li>修复示例程序中 MySQL struct.json 格式问题（hugegraph-loader #198）&lt;/li>
+&lt;li>修复顶点边导入速度不精确的问题（hugegraph-loader #200 #205）&lt;/li>
+&lt;li>当导入启用 check-vertex 时，确保先导入顶点再导入边（hugegraph-loader #206）&lt;/li>
+&lt;li>修复边 Json 数据导入格式不统一时数组溢出的问题（hugegraph-loader #211）&lt;/li>
+&lt;li>修复因边 mapping 文件不存在导致的 NPE 问题（hugegraph-loader #213）&lt;/li>
+&lt;li>修复读取时间可能出现负数的问题（hugegraph-loader #215)&lt;/li>
+&lt;li>改进目录文件的日志打印（hugegraph-loader #223)&lt;/li>
+&lt;li>改进 loader 的的 Schema 处理流程（hugegraph-loader #230)&lt;/li>
+&lt;/ul>
+&lt;h3 id="tools">Tools&lt;/h3>
+&lt;ul>
+&lt;li>支持 HTTPS 协议（hugegraph-tools #71）&lt;/li>
+&lt;li>移除 &amp;ndash;protocol 参数，直接从URL中自动提取（hugegraph-tools #72）&lt;/li>
+&lt;li>支持将数据 dump 到 HDFS 文件系统（hugegraph-tools #73）&lt;/li>
+&lt;li>修复 trust store file 路径问题（hugegraph-tools #75）&lt;/li>
+&lt;li>支持权限信息的备份恢复（hugegraph-tools #76）&lt;/li>
+&lt;li>支持无参数的 Printer 打印（hugegraph-tools #79）&lt;/li>
+&lt;li>修复 macOS free_memory 计算问题（hugegraph-tools #82）&lt;/li>
+&lt;li>支持备份恢复时指定线程数hugegraph-tools #83）&lt;/li>
+&lt;li>支持动态创建图、克隆图、删除图等命令（hugegraph-tools #95)&lt;/li>
+&lt;/ul></description></item><item><title>Docs: Subscribe Mailing Lists</title><link>/docs/contribution-guidelines/subscribe/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/contribution-guidelines/subscribe/</guid><description>
 &lt;p>It is highly recommended to subscribe to the development mailing list to keep up-to-date with the community.&lt;/p>
 &lt;p>In the process of using HugeGraph, if you have any questions or ideas, suggestions, you can participate in the HugeGraph community building through the Apache mailing list. Sending a subscription email is also very simple, the steps are as follows:&lt;/p>
 &lt;ol>
@@ -7439,7 +7495,7 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">for&lt;/span> i in *.tar.gz&lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#204a87;font-weight:bold">do&lt;/span> &lt;span style="color:#204a87">echo&lt;/span> &lt;span style="color:#000">$i&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span> gpg --verify &lt;span style="color:#000">$i&lt;/span>.asc &lt;span style="color:#000">$i&lt;/span> &lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#204a87;font-weight:bold">done&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>First confirm the overall integrity/consistency, and then confirm the specific content (&lt;strong>key&lt;/strong>)&lt;/p>
 &lt;h4 id="4-check-the-archive-contents">4. Check the archive contents&lt;/h4>
-&lt;p>Here it is divided into two aspects: source code package + binary package, The source code package is more strict, it can be said that the core part (Because it is longer,For a complete list refer to the official &lt;a href="https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist">Wiki&lt;/a>)&lt;/p>
+&lt;p>Here it is divided into two aspects: source code package + binary package, The source code package is stricter, it can be said that the core part (Because it is longer,For a complete list refer to the official &lt;a href="https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist">Wiki&lt;/a>)&lt;/p>
 &lt;p>First of all, we need to download the package from the apache official &lt;code>release-candidate&lt;/code> URL to the local (URL: &lt;a href="https://dist.apache.org/repos/dist/dev/incubator/hugegraph/">click to jump&lt;/a>)&lt;/p>
 &lt;h5 id="a-source-package">A. source package&lt;/h5>
 &lt;p>After decompressing &lt;code>xxx-hugegraph-source.tar.gz&lt;/code>, Do the following checks:&lt;/p>
@@ -7453,8 +7509,11 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;li>Check the first 3 to 5 commits, click to see if the modification is consistent with the source file&lt;/li>
 &lt;li>Finally, make sure the source code works/compiles correctly (then look at tests and specs)&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># At the same time, you can also check whether the code style conforms to the specification, and if it does not conform, you can put down an adjustment&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn clean &lt;span style="color:#204a87">test&lt;/span> -Dcheckstyle.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">false&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># prefer to use/switch to java 11 for the following operations (compiling/running)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># java --version&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># try to test in the Unix env to check if it works well&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn clean package -Dmaven.test.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">true&lt;/span> -Dcheckstyle.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">true&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="b-binary-package">B. binary package&lt;/h5>
 &lt;p>After decompressing &lt;code>xxx-hugegraph.tar.gz&lt;/code>, perform the following checks:&lt;/p>
 &lt;ol>
@@ -7463,7 +7522,7 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;li>Confirm that the signature of each file is normal through the gpg command&lt;/li>
 &lt;/ol>
 &lt;p>&lt;strong>Note:&lt;/strong> If a third-party dependency is introduced in the binary package, you need to update the LICENSE and add the third-party dependent LICENSE; if the third-party dependent LICENSE is Apache 2.0, and the corresponding project contains NOTICE, you also need to update Our NOTICE file&lt;/p>
-&lt;h4 id="5-check-the-official-website-and-github-and-other-pages">5. Check the official website and github and other pages&lt;/h4>
+&lt;h4 id="5-check-the-official-website-and-github-and-other-pages">5. Check the official website and GitHub and other pages&lt;/h4>
 &lt;ol>
 &lt;li>Make sure that the official website at least meets &lt;a href="https://whimsy.apache.org/pods/project/hugegraph">apache website check&lt;/a>, and no circular links etc.&lt;/li>
 &lt;li>Update &lt;strong>download link&lt;/strong> and version update instructions&lt;/li>
@@ -9278,7 +9337,7 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;/table>
 &lt;h3 id="k8s-operator-config-options">K8s Operator Config Options&lt;/h3>
 &lt;blockquote>
-&lt;p>NOTE: Option needs to be converted through environment variable settings, e.g k8s.internal_etcd_url =&amp;gt; INTERNAL_ETCD_URL&lt;/p>
+&lt;p>NOTE: Option needs to be converted through environment variable settings, e.g. k8s.internal_etcd_url =&amp;gt; INTERNAL_ETCD_URL&lt;/p>
 &lt;/blockquote>
 &lt;table>
 &lt;thead>
@@ -9618,7 +9677,7 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;/li>
 &lt;li>
 &lt;p>启动服务时提示：&lt;code>xxx (core dumped) xxx&lt;/code>&lt;/p>
-&lt;p>请检查JDK版本是否为1.8&lt;/p>
+&lt;p>请检查 JDK 版本是否为 Java 11, 至少要求是 Java 8&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>启动服务成功了，但是操作图时有类似于&amp;quot;无法连接到后端或连接未打开&amp;quot;的提示&lt;/p>
@@ -9820,8 +9879,8 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;p>HugeGraph-Client sends HTTP request to HugeGraph-Server to obtain and parse the execution result of Server. Currently only the HugeGraph-Client for Java is provided. You can use HugeGraph-Client to write Java code to operate HugeGraph, such as adding, deleting, modifying, and querying schema and graph data, or executing gremlin statements.&lt;/p>
 &lt;h3 id="2-what-you-need">2 What You Need&lt;/h3>
 &lt;ul>
-&lt;li>JDK 1.8&lt;/li>
-&lt;li>Maven 3.3.9+&lt;/li>
+&lt;li>Java 11 (also support Java 8)&lt;/li>
+&lt;li>Maven 3.5+&lt;/li>
 &lt;/ul>
 &lt;h3 id="3-how-to-use">3 How To Use&lt;/h3>
 &lt;p>The basic steps to use HugeGraph-Client are as follows:&lt;/p>
@@ -10190,7 +10249,7 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;h2 id="2-get-started">2 Get Started&lt;/h2>
 &lt;h3 id="21-run-pagerank-algorithm-locally">2.1 Run PageRank algorithm locally&lt;/h3>
 &lt;blockquote>
-&lt;p>To run algorithm with HugeGraph-Computer, you need to install 64-bit JRE/JDK 11 or later versions.&lt;/p>
+&lt;p>To run algorithm with HugeGraph-Computer, you need to install 64-bit Java 11 or later versions.&lt;/p>
 &lt;p>You also need to deploy HugeGraph-Server and &lt;a href="https://etcd.io/docs/v3.5/quickstart/">Etcd&lt;/a>.&lt;/p>
 &lt;/blockquote>
 &lt;p>There are two ways to get HugeGraph-Computer:&lt;/p>
@@ -15609,503 +15668,4 @@ P.gte(18)），properties如果为null表示任意属性均可，如果属性名
 &lt;p>9.2 This Agreement sets out the entire agreement between You and Us for Your Contributions to Us and overrides all other agreements or understandings.&lt;/p>
 &lt;p>9.3 In case of Your death, this agreement shall continue with Your heirs. In case of more than one heir, all heirs must exercise their rights through a commonly authorized person.&lt;/p>
 &lt;p>9.4 If any provision of this Agreement is found void and unenforceable, such provision will be replaced to the extent possible with a provision that comes closest to the meaning of the original provision and that is enforceable. The terms and conditions set forth in this Agreement shall apply notwithstanding any failure of essential purpose of this Agreement or any limited remedy to the maximum extent possible under law.&lt;/p>
-&lt;p>9.5 You agree to notify Us of any facts or circumstances of which you become aware that would make this Agreement inaccurate in any respect.&lt;/p></description></item><item><title>Docs:</title><link>/docs/performance/hugegraph-benchmark-0.4.4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/performance/hugegraph-benchmark-0.4.4/</guid><description>
-&lt;h3 id="1-测试环境">1 测试环境&lt;/h3>
-&lt;h4 id="11-硬件信息">1.1 硬件信息&lt;/h4>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>CPU&lt;/th>
-&lt;th>Memory&lt;/th>
-&lt;th>网卡&lt;/th>
-&lt;th>磁盘&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>48 Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz&lt;/td>
-&lt;td>128G&lt;/td>
-&lt;td>10000Mbps&lt;/td>
-&lt;td>750GB SSD&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h4 id="12-软件信息">1.2 软件信息&lt;/h4>
-&lt;h5 id="121-测试用例">1.2.1 测试用例&lt;/h5>
-&lt;p>测试使用&lt;a href="https://github.com/socialsensor/graphdb-benchmarks">graphdb-benchmark&lt;/a>，一个图数据库测试集。该测试集主要包含4类测试：&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>Massive Insertion，批量插入顶点和边，一定数量的顶点或边一次性提交&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Single Insertion，单条插入，每个顶点或者每条边立即提交&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Query，主要是图数据库的基本查询操作：&lt;/p>
-&lt;ul>
-&lt;li>Find Neighbors，查询所有顶点的邻居&lt;/li>
-&lt;li>Find Adjacent Nodes，查询所有边的邻接顶点&lt;/li>
-&lt;li>Find Shortest Path，查询第一个顶点到100个随机顶点的最短路径&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>Clustering，基于Louvain Method的社区发现算法&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h5 id="122-测试数据集">1.2.2 测试数据集&lt;/h5>
-&lt;p>测试使用人造数据和真实数据&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>MIW、SIW和QW使用SNAP数据集&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>&lt;a href="http://snap.stanford.edu/data/email-Enron.html">Enron Dataset&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;a href="http://snap.stanford.edu/data/amazon0601.html">Amazon dataset&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;a href="http://snap.stanford.edu/data/com-Youtube.html">Youtube dataset&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;a href="http://snap.stanford.edu/data/com-LiveJournal.html">LiveJournal dataset&lt;/a>&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>CW使用&lt;a href="https://sites.google.com/site/andrealancichinetti/files">LFR-Benchmark generator&lt;/a>生成的人造数据&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h6 id="本测试用到的数据集规模">本测试用到的数据集规模&lt;/h6>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>名称&lt;/th>
-&lt;th>vertex数目&lt;/th>
-&lt;th>edge数目&lt;/th>
-&lt;th>文件大小&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>email-enron.txt&lt;/td>
-&lt;td>36,691&lt;/td>
-&lt;td>367,661&lt;/td>
-&lt;td>4MB&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>com-youtube.ungraph.txt&lt;/td>
-&lt;td>1,157,806&lt;/td>
-&lt;td>2,987,624&lt;/td>
-&lt;td>38.7MB&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>amazon0601.txt&lt;/td>
-&lt;td>403,393&lt;/td>
-&lt;td>3,387,388&lt;/td>
-&lt;td>47.9MB&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h4 id="13-服务配置">1.3 服务配置&lt;/h4>
-&lt;ul>
-&lt;li>HugeGraph版本：0.4.4，RestServer和Gremlin Server和backends都在同一台服务器上&lt;/li>
-&lt;li>Cassandra版本：cassandra-3.10，commit-log 和data共用SSD&lt;/li>
-&lt;li>RocksDB版本：rocksdbjni-5.8.6&lt;/li>
-&lt;li>Titan版本：0.5.4, 使用thrift+Cassandra模式&lt;/li>
-&lt;/ul>
-&lt;blockquote>
-&lt;p>graphdb-benchmark适配的Titan版本为0.5.4&lt;/p>
-&lt;/blockquote>
-&lt;h3 id="2-测试结果">2 测试结果&lt;/h3>
-&lt;h4 id="21-batch插入性能">2.1 Batch插入性能&lt;/h4>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Backend&lt;/th>
-&lt;th>email-enron(30w)&lt;/th>
-&lt;th>amazon0601(300w)&lt;/th>
-&lt;th>com-youtube.ungraph(300w)&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>Titan&lt;/td>
-&lt;td>9.516&lt;/td>
-&lt;td>88.123&lt;/td>
-&lt;td>111.586&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>RocksDB&lt;/td>
-&lt;td>2.345&lt;/td>
-&lt;td>14.076&lt;/td>
-&lt;td>16.636&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Cassandra&lt;/td>
-&lt;td>11.930&lt;/td>
-&lt;td>108.709&lt;/td>
-&lt;td>101.959&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Memory&lt;/td>
-&lt;td>3.077&lt;/td>
-&lt;td>15.204&lt;/td>
-&lt;td>13.841&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;p>&lt;em>说明&lt;/em>&lt;/p>
-&lt;ul>
-&lt;li>表头&amp;quot;（）&amp;ldquo;中数据是数据规模，以边为单位&lt;/li>
-&lt;li>表中数据是批量插入的时间，单位是s&lt;/li>
-&lt;li>例如，HugeGraph使用RocksDB插入amazon0601数据集的300w条边，花费14.076s，速度约为21w edges/s&lt;/li>
-&lt;/ul>
-&lt;h5 id="结论">结论&lt;/h5>
-&lt;ul>
-&lt;li>RocksDB和Memory后端插入性能优于Cassandra&lt;/li>
-&lt;li>HugeGraph和Titan同样使用Cassandra作为后端的情况下，插入性能接近&lt;/li>
-&lt;/ul>
-&lt;h4 id="22-遍历性能">2.2 遍历性能&lt;/h4>
-&lt;h5 id="221-术语说明">2.2.1 术语说明&lt;/h5>
-&lt;ul>
-&lt;li>FN(Find Neighbor), 遍历所有vertex, 根据vertex查邻接edge, 通过edge和vertex查other vertex&lt;/li>
-&lt;li>FA(Find Adjacent), 遍历所有edge，根据edge获得source vertex和target vertex&lt;/li>
-&lt;/ul>
-&lt;h5 id="222-fn性能">2.2.2 FN性能&lt;/h5>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Backend&lt;/th>
-&lt;th>email-enron(3.6w)&lt;/th>
-&lt;th>amazon0601(40w)&lt;/th>
-&lt;th>com-youtube.ungraph(120w)&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>Titan&lt;/td>
-&lt;td>7.724&lt;/td>
-&lt;td>70.935&lt;/td>
-&lt;td>128.884&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>RocksDB&lt;/td>
-&lt;td>8.876&lt;/td>
-&lt;td>65.852&lt;/td>
-&lt;td>63.388&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Cassandra&lt;/td>
-&lt;td>13.125&lt;/td>
-&lt;td>126.959&lt;/td>
-&lt;td>102.580&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Memory&lt;/td>
-&lt;td>22.309&lt;/td>
-&lt;td>207.411&lt;/td>
-&lt;td>165.609&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;p>&lt;em>说明&lt;/em>&lt;/p>
-&lt;ul>
-&lt;li>表头&amp;rdquo;（）&amp;ldquo;中数据是数据规模，以顶点为单位&lt;/li>
-&lt;li>表中数据是遍历顶点花费的时间，单位是s&lt;/li>
-&lt;li>例如，HugeGraph使用RocksDB后端遍历amazon0601的所有顶点，并查找邻接边和另一顶点，总共耗时65.852s&lt;/li>
-&lt;/ul>
-&lt;h5 id="223-fa性能">2.2.3 FA性能&lt;/h5>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Backend&lt;/th>
-&lt;th>email-enron(30w)&lt;/th>
-&lt;th>amazon0601(300w)&lt;/th>
-&lt;th>com-youtube.ungraph(300w)&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>Titan&lt;/td>
-&lt;td>7.119&lt;/td>
-&lt;td>63.353&lt;/td>
-&lt;td>115.633&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>RocksDB&lt;/td>
-&lt;td>6.032&lt;/td>
-&lt;td>64.526&lt;/td>
-&lt;td>52.721&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Cassandra&lt;/td>
-&lt;td>9.410&lt;/td>
-&lt;td>102.766&lt;/td>
-&lt;td>94.197&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Memory&lt;/td>
-&lt;td>12.340&lt;/td>
-&lt;td>195.444&lt;/td>
-&lt;td>140.89&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;p>&lt;em>说明&lt;/em>&lt;/p>
-&lt;ul>
-&lt;li>表头&amp;rdquo;（）&amp;ldquo;中数据是数据规模，以边为单位&lt;/li>
-&lt;li>表中数据是遍历边花费的时间，单位是s&lt;/li>
-&lt;li>例如，HugeGraph使用RocksDB后端遍历amazon0601的所有边，并查询每条边的两个顶点，总共耗时64.526s&lt;/li>
-&lt;/ul>
-&lt;h6 id="结论-1">结论&lt;/h6>
-&lt;ul>
-&lt;li>HugeGraph RocksDB &amp;gt; Titan thrift+Cassandra &amp;gt; HugeGraph Cassandra &amp;gt; HugeGraph Memory&lt;/li>
-&lt;/ul>
-&lt;h4 id="23-hugegraph-图常用分析方法性能">2.3 HugeGraph-图常用分析方法性能&lt;/h4>
-&lt;h5 id="术语说明">术语说明&lt;/h5>
-&lt;ul>
-&lt;li>FS(Find Shortest Path), 寻找最短路径&lt;/li>
-&lt;li>K-neighbor，从起始vertex出发，通过K跳边能够到达的所有顶点, 包括1, 2, 3&amp;hellip;(K-1), K跳边可达vertex&lt;/li>
-&lt;li>K-out, 从起始vertex出发，恰好经过K跳out边能够到达的顶点&lt;/li>
-&lt;/ul>
-&lt;h5 id="fs性能">FS性能&lt;/h5>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Backend&lt;/th>
-&lt;th>email-enron(30w)&lt;/th>
-&lt;th>amazon0601(300w)&lt;/th>
-&lt;th>com-youtube.ungraph(300w)&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>Titan&lt;/td>
-&lt;td>11.333&lt;/td>
-&lt;td>0.313&lt;/td>
-&lt;td>376.06&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>RocksDB&lt;/td>
-&lt;td>44.391&lt;/td>
-&lt;td>2.221&lt;/td>
-&lt;td>268.792&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Cassandra&lt;/td>
-&lt;td>39.845&lt;/td>
-&lt;td>3.337&lt;/td>
-&lt;td>331.113&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Memory&lt;/td>
-&lt;td>35.638&lt;/td>
-&lt;td>2.059&lt;/td>
-&lt;td>388.987&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;p>&lt;em>说明&lt;/em>&lt;/p>
-&lt;ul>
-&lt;li>表头&amp;rdquo;（）&amp;ldquo;中数据是数据规模，以边为单位&lt;/li>
-&lt;li>表中数据是找到&lt;strong>从第一个顶点出发到达随机选择的100个顶点的最短路径&lt;/strong>的时间，单位是s&lt;/li>
-&lt;li>例如，HugeGraph使用RocksDB查找第一个顶点到100个随机顶点的最短路径，总共耗时2.059s&lt;/li>
-&lt;/ul>
-&lt;h6 id="结论-2">结论&lt;/h6>
-&lt;ul>
-&lt;li>在数据规模小或者顶点关联关系少的场景下，Titan最短路径性能优于HugeGraph&lt;/li>
-&lt;li>随着数据规模增大且顶点的关联度增高，HugeGraph最短路径性能优于Titan&lt;/li>
-&lt;/ul>
-&lt;h5 id="k-neighbor性能">K-neighbor性能&lt;/h5>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>顶点&lt;/th>
-&lt;th>深度&lt;/th>
-&lt;th>一度&lt;/th>
-&lt;th>二度&lt;/th>
-&lt;th>三度&lt;/th>
-&lt;th>四度&lt;/th>
-&lt;th>五度&lt;/th>
-&lt;th>六度&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>v1&lt;/td>
-&lt;td>时间&lt;/td>
-&lt;td>0.031s&lt;/td>
-&lt;td>0.033s&lt;/td>
-&lt;td>0.048s&lt;/td>
-&lt;td>0.500s&lt;/td>
-&lt;td>11.27s&lt;/td>
-&lt;td>OOM&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>v111&lt;/td>
-&lt;td>时间&lt;/td>
-&lt;td>0.027s&lt;/td>
-&lt;td>0.034s&lt;/td>
-&lt;td>0.115&lt;/td>
-&lt;td>1.36s&lt;/td>
-&lt;td>OOM&lt;/td>
-&lt;td>&amp;ndash;&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>v1111&lt;/td>
-&lt;td>时间&lt;/td>
-&lt;td>0.039s&lt;/td>
-&lt;td>0.027s&lt;/td>
-&lt;td>0.052s&lt;/td>
-&lt;td>0.511s&lt;/td>
-&lt;td>10.96s&lt;/td>
-&lt;td>OOM&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;p>&lt;em>说明&lt;/em>&lt;/p>
-&lt;ul>
-&lt;li>HugeGraph-Server的JVM内存设置为32GB，数据量过大时会出现OOM&lt;/li>
-&lt;/ul>
-&lt;h5 id="k-out性能">K-out性能&lt;/h5>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>顶点&lt;/th>
-&lt;th>深度&lt;/th>
-&lt;th>一度&lt;/th>
-&lt;th>二度&lt;/th>
-&lt;th>三度&lt;/th>
-&lt;th>四度&lt;/th>
-&lt;th>五度&lt;/th>
-&lt;th>六度&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>v1&lt;/td>
-&lt;td>时间&lt;/td>
-&lt;td>0.054s&lt;/td>
-&lt;td>0.057s&lt;/td>
-&lt;td>0.109s&lt;/td>
-&lt;td>0.526s&lt;/td>
-&lt;td>3.77s&lt;/td>
-&lt;td>OOM&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>度&lt;/td>
-&lt;td>10&lt;/td>
-&lt;td>133&lt;/td>
-&lt;td>2453&lt;/td>
-&lt;td>50,830&lt;/td>
-&lt;td>1,128,688&lt;/td>
-&lt;td>&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>v111&lt;/td>
-&lt;td>时间&lt;/td>
-&lt;td>0.032s&lt;/td>
-&lt;td>0.042s&lt;/td>
-&lt;td>0.136s&lt;/td>
-&lt;td>1.25s&lt;/td>
-&lt;td>20.62s&lt;/td>
-&lt;td>OOM&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>度&lt;/td>
-&lt;td>10&lt;/td>
-&lt;td>211&lt;/td>
-&lt;td>4944&lt;/td>
-&lt;td>113150&lt;/td>
-&lt;td>2,629,970&lt;/td>
-&lt;td>&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>v1111&lt;/td>
-&lt;td>时间&lt;/td>
-&lt;td>0.039s&lt;/td>
-&lt;td>0.045s&lt;/td>
-&lt;td>0.053s&lt;/td>
-&lt;td>1.10s&lt;/td>
-&lt;td>2.92s&lt;/td>
-&lt;td>OOM&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>度&lt;/td>
-&lt;td>10&lt;/td>
-&lt;td>140&lt;/td>
-&lt;td>2555&lt;/td>
-&lt;td>50825&lt;/td>
-&lt;td>1,070,230&lt;/td>
-&lt;td>&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;p>&lt;em>说明&lt;/em>&lt;/p>
-&lt;ul>
-&lt;li>HugeGraph-Server的JVM内存设置为32GB，数据量过大时会出现OOM&lt;/li>
-&lt;/ul>
-&lt;h6 id="结论-3">结论&lt;/h6>
-&lt;ul>
-&lt;li>FS场景，HugeGraph性能优于Titan&lt;/li>
-&lt;li>K-neighbor和K-out场景，HugeGraph能够实现在5度范围内秒级返回结果&lt;/li>
-&lt;/ul>
-&lt;h4 id="24-图综合性能测试-cw">2.4 图综合性能测试-CW&lt;/h4>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>数据库&lt;/th>
-&lt;th>规模1000&lt;/th>
-&lt;th>规模5000&lt;/th>
-&lt;th>规模10000&lt;/th>
-&lt;th>规模20000&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>Titan&lt;/td>
-&lt;td>45.943&lt;/td>
-&lt;td>849.168&lt;/td>
-&lt;td>2737.117&lt;/td>
-&lt;td>9791.46&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Memory(core)&lt;/td>
-&lt;td>41.077&lt;/td>
-&lt;td>1825.905&lt;/td>
-&lt;td>*&lt;/td>
-&lt;td>*&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Cassandra（core）&lt;/td>
-&lt;td>39.783&lt;/td>
-&lt;td>862.744&lt;/td>
-&lt;td>2423.136&lt;/td>
-&lt;td>6564.191&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>RocksDB（core）&lt;/td>
-&lt;td>33.383&lt;/td>
-&lt;td>199.894&lt;/td>
-&lt;td>763.869&lt;/td>
-&lt;td>1677.813&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;p>&lt;em>说明&lt;/em>&lt;/p>
-&lt;ul>
-&lt;li>&amp;ldquo;规模&amp;quot;以顶点为单位&lt;/li>
-&lt;li>表中数据是社区发现完成需要的时间，单位是s，例如HugeGraph使用RocksDB后端在规模10000的数据集，社区聚合不再变化，需要耗时763.869s&lt;/li>
-&lt;li>&amp;ldquo;*&amp;ldquo;表示超过10000s未完成&lt;/li>
-&lt;li>CW测试是CRUD的综合评估&lt;/li>
-&lt;li>后三者分别是HugeGraph的不同后端，该测试中HugeGraph跟Titan一样，没有通过client，直接对core操作&lt;/li>
-&lt;/ul>
-&lt;h5 id="结论-4">结论&lt;/h5>
-&lt;ul>
-&lt;li>HugeGraph在使用Cassandra后端时，性能略优于Titan，随着数据规模的增大，优势越来越明显，数据规模20000时，比Titan快30%&lt;/li>
-&lt;li>HugeGraph在使用RocksDB后端时，性能远高于Titan和HugeGraph的Cassandra后端，分别比两者快了6倍和4倍&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;p>9.5 You agree to notify Us of any facts or circumstances of which you become aware that would make this Agreement inaccurate in any respect.&lt;/p></description></item></channel></rss>

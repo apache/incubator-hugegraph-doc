@@ -574,7 +574,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>启动服务时提示：&lt;code>xxx (core dumped) xxx&lt;/code>&lt;/p>
-&lt;p>请检查JDK版本是否为1.8&lt;/p>
+&lt;p>请检查 JDK 版本是否为 Java 11, 至少要求是 Java 8&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>启动服务成功了，但是操作图时有类似于&amp;quot;无法连接到后端或连接未打开&amp;quot;的提示&lt;/p>
