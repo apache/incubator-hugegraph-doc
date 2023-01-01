@@ -17,7 +17,7 @@ weight: 2
 - 支持共同邻居，Jaccard 相似度，全部最短路径，带权最短路径和单源最短路径5种遍历算法（hugegraph #936，hugegraph-client #80）
 - 支持用户认证和细粒度权限控制（hugegraph #749，hugegraph #985，hugegraph-client #81）
 - 支持遍历 API 的顶点计数功能（hugegraph #995，hugegraph-client #84）
-- 支持 HTTPS 协议（hugegrap #1036，hugegraph-client #85）
+- 支持 HTTPS 协议（hugegraph #1036，hugegraph-client #85）
 - 支持创建索引时控制是否重建索引（hugegraph #1106，hugegraph-client #91）
 - 支持定制的 kout/kneighbor，多点最短路径，最相似 Jaccard 点和模板路径5种遍历算法（hugegraph #1174，hugegraph-client #100，hugegraph-client #106）
 

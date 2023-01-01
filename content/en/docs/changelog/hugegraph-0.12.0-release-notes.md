@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph 0.12 Release Notes"
 linkTitle: "Release-0.12.0"
-weight: 1
+weight: 2
 ---
 
 ### API & Client
@@ -205,7 +205,7 @@ weight: 1
 - 修复 trust store file 路径问题（hugegraph-tools #75）
 - 支持权限信息的备份恢复（hugegraph-tools #76）
 - 支持无参数的 Printer 打印（hugegraph-tools #79）
-- 修复 MacOS free_memory 计算问题（hugegraph-tools #82）
+- 修复 macOS free_memory 计算问题（hugegraph-tools #82）
 - 支持备份恢复时指定线程数hugegraph-tools #83）
 - 支持动态创建图、克隆图、删除图等命令（hugegraph-tools #95)
 

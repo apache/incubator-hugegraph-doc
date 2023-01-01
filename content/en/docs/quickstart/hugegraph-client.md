@@ -10,8 +10,8 @@ HugeGraph-Client sends HTTP request to HugeGraph-Server to obtain and parse the 
 
 ### 2 What You Need
 
-- JDK 1.8
-- Maven 3.3.9+
+- Java 11 (also support Java 8)
+- Maven 3.5+
 
 ### 3 How To Use
 

@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph 1.0.0 Release Notes"
 linkTitle: "Release-1.0.0"
-weight: 0
+weight: 1
 ---
 
 > TODO: update the summary soon, please check the detail in each repository first, thanks

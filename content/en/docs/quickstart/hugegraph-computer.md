@@ -22,7 +22,7 @@ The [`HugeGraph-Computer`](https://github.com/apache/incubator-hugegraph-compute
 
 ### 2.1 Run PageRank algorithm locally
 
-> To run algorithm with HugeGraph-Computer, you need to install 64-bit JRE/JDK 11 or later versions.
+> To run algorithm with HugeGraph-Computer, you need to install 64-bit Java 11 or later versions.
 >
 > You also need to deploy HugeGraph-Server and [Etcd](https://etcd.io/docs/v3.5/quickstart/).
 
