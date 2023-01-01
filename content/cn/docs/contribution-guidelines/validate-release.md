@@ -99,8 +99,11 @@ for i in *.tar.gz; do echo $i; gpg --verify $i.asc $i ; done
 8. 最后, 确保源码可以正常/正确编译 (然后看看测试和规范)
 
 ```bash
-# 同时也可以检查一下代码风格是否符合规范, 不符合的可以放下一次调整
-mvn clean package -Dmaven.test.skip=true -Dcheckstyle.skip=false
+# 请优先使用/切换到 java 11 版本进行后序的编译和运行操作
+# java --version
+
+# 尝试在 Unix 环境下编译测试是否正常
+mvn clean package -Dmaven.test.skip=true -Dcheckstyle.skip=true
 ```
 
 ##### B. 二进制包

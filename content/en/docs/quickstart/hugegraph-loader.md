@@ -84,10 +84,10 @@ This step is the modeling process. Users need to have a clear idea of ​​thei
 For example, if you want to create a graph with two types of vertices and two types of edges, the vertices are "people" and "software", the edges are "people know people" and "people create software", and these vertices and edges have some attributes, For example, the vertex "person" has: "name", "age" and other attributes,
 "Software" includes: "name", "sale price" and other attributes; side "knowledge" includes: "date" attribute and so on.
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/demo-graph-model.png" alt="image">
   <p>graph model example</p>
-</center>
+</div>
 
 
 After designing the graph model, we can use `groovy` to write the definition of `schema` and save it to a file, here named `schema.groovy`.
@@ -532,7 +532,7 @@ Mapping file for version 1.0:
 }
 ```
 
-The 1.0 version of the mapping file is centered on the vertex and edge, and sets the input source; while the 2.0 version is centered on the input source, and sets the vertex and edge mapping. Some input sources (such as a file) can generate both vertices and edges. If you write in the 1.0 format, you need to write an input block in each of the vertex and egde mapping blocks. The two input blocks are exactly the same ; and the 2.0 version only needs to write input once. Therefore, compared with version 1.0, version 2.0 can save some repetitive writing of input.
+The 1.0 version of the mapping file is centered on the vertex and edge, and sets the input source; while the 2.0 version is centered on the input source, and sets the vertex and edge mapping. Some input sources (such as a file) can generate both vertices and edges. If you write in the 1.0 format, you need to write an input block in each of the vertex and edge mapping blocks. The two input blocks are exactly the same ; and the 2.0 version only needs to write input once. Therefore, compared with version 1.0, version 2.0 can save some repetitive writing of input.
 
 In the bin directory of hugegraph-loader-{version}, there is a script tool `mapping-convert.sh` that can directly convert the mapping file of version 1.0 to version 2.0. The usage is as follows:
 
@@ -593,41 +593,41 @@ As mentioned above, it supports multiple relational databases, but because their
 
 **MYSQL**
 
-| Node | Fixed value or common value |
-| --- | --- |
-| vendor | MYSQL |
-| driver | com.mysql.cj.jdbc.Driver |
-| url | jdbc:mysql://127.0.0.1:3306 |
+| Node   | Fixed value or common value |
+|--------|-----------------------------|
+| vendor | MYSQL                       |
+| driver | com.mysql.cj.jdbc.Driver    |
+| url    | jdbc:mysql://127.0.0.1:3306 |
 
 schema: nullable, if filled in, it must be the same as the value of database
 
 **POSTGRESQL**
 
-| Node | Fixed value or common value |
-| --- | --- |
-| vendor | POSTGRESQL |
-| driver | org.postgresql.Driver |
-| url | jdbc:postgresql://127.0.0.1:5432 |
+| Node   | Fixed value or common value      |
+|--------|----------------------------------|
+| vendor | POSTGRESQL                       |
+| driver | org.postgresql.Driver            |
+| url    | jdbc:postgresql://127.0.0.1:5432 |
 
 schema: nullable, default is "public"
 
 **ORACLE**
 
-| Node | Fixed value or common value |
-| --- | --- |
-| vendor | ORACLE |
-| driver | oracle.jdbc.driver.OracleDriver |
-| url | jdbc:oracle:thin:@127.0.0.1:1521 |
+| Node   | Fixed value or common value      |
+|--------|----------------------------------|
+| vendor | ORACLE                           |
+| driver | oracle.jdbc.driver.OracleDriver  |
+| url    | jdbc:oracle:thin:@127.0.0.1:1521 |
 
 schema: nullable, the default value is the same as the username
 
 **SQLSERVER**
 
-| Node | Fixed value or common value |
-| --- | --- |
-| vendor | SQLSERVER |
+| Node   | Fixed value or common value                  |
+|--------|----------------------------------------------|
+| vendor | SQLSERVER                                    |
 | driver | com.microsoft.sqlserver.jdbc.SQLServerDriver |
-| url | jdbc:sqlserver://127.0.0.1:1433 |
+| url    | jdbc:sqlserver://127.0.0.1:1433              |
 
 schema: required
 

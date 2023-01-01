@@ -14,9 +14,9 @@ Core模块是Tinkerpop接口的实现，Backend模块用于管理数据存储，
 
 ### 2 依赖
 
-#### 2.1 安装JDK-1.8
+#### 2.1 安装 Java 11 (JDK 11)
 
-HugeGraph-Server 基于jdk-1.8开发，代码用到了较多jdk-1.8中的类和方法，请用户自行安装配置。
+请优先考虑在 Java11 的环境上启动 `HugeGraph-Server`, 目前同时保留对 Java8 的兼容 
 
 **在往下阅读之前务必执行`java -version`命令查看jdk版本**
 

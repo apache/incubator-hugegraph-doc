@@ -36,9 +36,9 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
 
 平台的模块使用流程如下：
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/images-hubble/2平台使用流程.png" alt="image">
-</center>
+</div>
 
 
 ### 3	平台使用说明
@@ -46,42 +46,42 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
 ##### 3.1.1	图创建
 图管理模块下，点击【创建图】，通过填写图ID、图名称、主机名、端口号、用户名、密码的信息，实现多图的连接。
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/images-hubble/311图创建.png" alt="image">
-</center>
+</div>
 
 
 创建图填写内容如下：
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/images-hubble/311图创建2.png" alt="image">
-</center>
+</div>
 
 
 ##### 3.1.2	图访问
 实现图空间的信息访问，进入后，可进行图的多维查询分析、元数据管理、数据导入、算法分析等操作。
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/images-hubble/312图访问.png" alt="image">
-</center>
+</div>
 
 
 ##### 3.1.3	图管理
 1. 用户通过对图的概览、搜索以及单图的信息编辑与删除，实现图的统一管理。
 2. 搜索范围：可对图名称和ID进行搜索。
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/images-hubble/313图管理.png" alt="image">
-</center>
+</div>
 
 
 #### 3.2	元数据建模（列表+图模式）
 ##### 3.2.1	模块入口
 左侧导航处：
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/images-hubble/321元数据入口.png" alt="image">
-</center>
+</div>
 
 
 ##### 3.2.2	属性类型
@@ -91,16 +91,16 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
 
 列表模式：
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/images-hubble/3221属性创建.png" alt="image">
-</center>
+</div>
 
 
 图模式：
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/images-hubble/3221属性创建2.png" alt="image">
-</center>
+</div>
 
 
 ###### 3.2.2.2	复用
@@ -109,16 +109,16 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
 
 选择复用项：
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/images-hubble/3222属性复用.png" alt="image">
-</center>
+</div>
 
 
 校验复用项：
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/images-hubble/3222属性复用2.png" alt="image">
-</center>
+</div>
 
 
 ###### 3.2.2.3	管理

@@ -8,10 +8,10 @@ weight: 3
 
 被压机器信息
 
-机器编号                              | CPU                                          | Memory | 网卡        | 磁盘
---------------------------------- | -------------------------------------------- | ------ | --------- | ------------------
-1 | 24 Intel(R) Xeon(R) CPU E5-2620 v2 @ 2.10GHz | 61G    | 1000Mbps  | 1.4T HDD
-2 | 48 Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz | 128G   | 10000Mbps | 750GB SSD,2.7T HDD
+| 机器编号 | CPU                                          | Memory | 网卡        | 磁盘                 |
+|------|----------------------------------------------|--------|-----------|--------------------|
+| 1    | 24 Intel(R) Xeon(R) CPU E5-2620 v2 @ 2.10GHz | 61G    | 1000Mbps  | 1.4T HDD           |
+| 2    | 48 Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz | 128G   | 10000Mbps | 750GB SSD,2.7T HDD |
 
 - 起压力机器信息：与编号 1 机器同配置
 - 测试工具：apache-Jmeter-2.5.1
@@ -59,9 +59,9 @@ weight: 3
 
 ###### 顶点和边的最大插入速度（高性能服务器，使用SSD存储RocksDB数据）：
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/API-perf/v0.4.4/best.png" alt="image">
-</center>
+</div>
 
 
 ###### 结论：
@@ -71,9 +71,9 @@ weight: 3
 
 **1\. CPU和内存对插入性能的影响（服务器都使用HDD存储RocksDB数据，批量插入）**
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/API-perf/v0.4.4/cpu-memory.png" alt="image">
-</center>
+</div>
 
 
 ###### 结论：
@@ -84,9 +84,9 @@ weight: 3
 
 **2\. SSD和HDD对插入性能的影响（高性能服务器，批量插入）**
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/API-perf/v0.4.4/ssd.png" alt="image">
-</center>
+</div>
 
 
 ###### 结论：
@@ -96,9 +96,9 @@ weight: 3
 
 **3\. 不同并发线程数对插入性能的影响（普通服务器，使用HDD存储RocksDB数据）**
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/API-perf/v0.4.4/threads-batch.png" alt="image">
-</center>
+</div>
 
 
 ###### 结论：
@@ -119,9 +119,9 @@ weight: 3
 - 持续时间：5min
 - 服务异常标志：错误率大于0.00%
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/API-perf/v0.4.4/threads-single.png" alt="image">
-</center>
+</div>
 
 ###### 结论：
 

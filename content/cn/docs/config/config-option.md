@@ -8,7 +8,7 @@ weight: 2
 
 对应配置文件`gremlin-server.yaml`
 
-| config option           | default value                                                                                                | description                                                                      |
+| config option           | default value                                                                                                | description                                                                     |
 |-------------------------|--------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
 | host                    | 127.0.0.1                                                                                                    | The host or ip of Gremlin Server.                                               |
 | port                    | 8182                                                                                                         | The listening port of Gremlin Server.                                           |
@@ -21,7 +21,7 @@ weight: 2
 
 对应配置文件`rest-server.properties`
 
-| config option                      | default value                                    | description                                                                                                                                                                                                    |
+| config option                      | default value                                    | description                                                                                                                                                                                                   |
 |------------------------------------|--------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | graphs                             | [hugegraph:conf/hugegraph.properties]            | The map of graphs' name and config file.                                                                                                                                                                      |
 | server.id                          | server-1                                         | The id of rest server, used for license verification.                                                                                                                                                         |
@@ -41,7 +41,7 @@ weight: 2
 | batch.max_vertices_per_batch       | 500                                              | The maximum number of vertices submitted per batch.                                                                                                                                                           |
 | batch.max_write_ratio              | 50                                               | The maximum thread ratio for batch writing, only take effect if the batch.max_write_threads is 0.                                                                                                             |
 | batch.max_write_threads            | 0                                                | The maximum threads for batch writing, if the value is 0, the actual value will be set to batch.max_write_ratio * restserver.max_worker_threads.                                                              |
-| auth.authenticator                 |                                                  | The class path of authenticator implementation. e.g., com.baidu.hugegraph.auth.StandardAuthenticator, or com.baidu.hugegraph.auth.ConfigAuthenticator.                                                          |
+| auth.authenticator                 |                                                  | The class path of authenticator implementation. e.g., com.baidu.hugegraph.auth.StandardAuthenticator, or com.baidu.hugegraph.auth.ConfigAuthenticator.                                                        |
 | auth.admin_token                   | 162f7848-0b6d-4faf-b557-3a0797869c55             | Token for administrator operations, only for com.baidu.hugegraph.auth.ConfigAuthenticator.                                                                                                                    |
 | auth.graph_store                   | hugegraph                                        | The name of graph used to store authentication information, like users, only for com.baidu.hugegraph.auth.StandardAuthenticator.                                                                              |
 | auth.user_tokens                   | [hugegraph:9fd95c9c-711b-415b-b85f-d4df46ba5c31] | The map of user tokens with name and password, only for com.baidu.hugegraph.auth.ConfigAuthenticator.                                                                                                         |
@@ -57,7 +57,7 @@ weight: 2
 
 基本配置项及后端配置项对应配置文件：{graph-name}.properties，如`hugegraph.properties`
 
-| config option                         | default value                                | description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| config option                         | default value                                | description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 |---------------------------------------|----------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | gremlin.graph	                        | com.baidu.hugegraph.HugeFactory              | Gremlin entrance to create graph.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | backend                               | rocksdb                                      | The data store type, available values are [memory, rocksdb, cassandra, scylladb, hbase, mysql].                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
@@ -149,7 +149,7 @@ weight: 2
 
 ### Cassandra 后端配置项
 
-| config option                  | default value  | description                                                                                                                                     |
+| config option                  | default value  | description                                                                                                                                    |
 |--------------------------------|----------------|------------------------------------------------------------------------------------------------------------------------------------------------|
 | backend                        |                | Must be set to `cassandra`.                                                                                                                    |
 | serializer                     |                | Must be set to `cassandra`.                                                                                                                    |
@@ -167,7 +167,7 @@ weight: 2
 
 ### ScyllaDB 后端配置项
 
-| config option | default value | description                 |
+| config option | default value | description                |
 |---------------|---------------|----------------------------|
 | backend       |               | Must be set to `scylladb`. |
 | serializer    |               | Must be set to `scylladb`. |
@@ -176,7 +176,7 @@ weight: 2
 
 ### RocksDB 后端配置项
 
-| config option                                   | default value                                                                                                                        | description                                                                                                                                                                                                                                                                                                                                                                                            |
+| config option                                   | default value                                                                                                                        | description                                                                                                                                                                                                                                                                                                                                                                                           |
 |-------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | backend                                         |                                                                                                                                      | Must be set to `rocksdb`.                                                                                                                                                                                                                                                                                                                                                                             |
 | serializer                                      |                                                                                                                                      | Must be set to `binary`.                                                                                                                                                                                                                                                                                                                                                                              |
@@ -230,7 +230,7 @@ weight: 2
 
 ### HBase 后端配置项
 
-| config option             | default value                  | description                                                               |
+| config option             | default value                  | description                                                              |
 |---------------------------|--------------------------------|--------------------------------------------------------------------------|
 | backend                   |                                | Must be set to `hbase`.                                                  |
 | serializer                |                                | Must be set to `hbase`.                                                  |
@@ -251,7 +251,7 @@ weight: 2
 
 ### MySQL & PostgreSQL 后端配置项
 
-| config option                    | default value               | description                                                                          |
+| config option                    | default value               | description                                                                         |
 |----------------------------------|-----------------------------|-------------------------------------------------------------------------------------|
 | backend                          |                             | Must be set to `mysql`.                                                             |
 | serializer                       |                             | Must be set to `mysql`.                                                             |
@@ -267,7 +267,7 @@ weight: 2
 
 ### PostgreSQL 后端配置项
 
-| config option | default value | description                   |
+| config option | default value | description                  |
 |---------------|---------------|------------------------------|
 | backend       |               | Must be set to `postgresql`. |
 | serializer    |               | Must be set to `postgresql`. |
