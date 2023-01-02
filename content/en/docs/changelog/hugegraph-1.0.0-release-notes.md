@@ -38,15 +38,20 @@ weight: 1
 
 - fix(core): NoSuchMethodError Relations() & can't query edges by multi labels + properties.
 - fix(core): limit max depth for cycle detection.
-- fix: tree step & edge batch update error & edge cache & task status.
-- fix(mysql): run g.V() is error & update ci with docker image in MySQL.
+- fix(core): traversal contains Tree step has different result.
+- fix edge batch update error.
+- fix unexpected task status.
+- fix(core): edge cache not clear when update or delete associated vertex.
+- fix(mysql): run g.V() is error when it's MySQL backend.
 - fix: close exception and server-info EXPIRED_INTERVAL.
 - fix: export ConditionP.
 - fix: query by within + Text.contains.
 - fix: schema label race condition of addIndexLabel/removeIndexLabel.
 - fix: limit admin role can drop graph.
-- fix: ProfileApi url check & add build package to ignore file
-- fix: empty-graph in count().is(0)& can't shutdown with exception & possible extra comma.
+- fix: ProfileApi url check & add build package to ignore file.
+- fix: can't shutdown when starting with exception.
+- fix: Traversal.graph is empty in StepStrategy.apply() with count().is(0).
+- fix: possible extra comma before where statement in MySQL backend.
 - fix: JNA UnsatisfiedLinkError for Apple M1.
 - fix: start RpcServer NPE & args count of ACTION_CLEARED error & example error.
 - fix: rpc server not start.
