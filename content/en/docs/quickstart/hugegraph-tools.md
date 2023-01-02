@@ -39,7 +39,7 @@ cd hugegraph-tools
 mvn package -DskipTests
 ```
 
-generate tar package hugegraph-tools-${version}.tar.gz
+Generate tar package hugegraph-tools-${version}.tar.gz
 
 
 ### 3 How to use
@@ -529,7 +529,7 @@ Usage: hugegraph [options] [command] [command options]
 ./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph gremlin-schedule --script 'g.V().count()'
 ```
 
-###### 2. View task status
+###### 2. Show task status
 
 ```bash
 ./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph task-list
@@ -539,7 +539,7 @@ Usage: hugegraph [options] [command] [command options]
 ./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph task-list --status success
 ```
 
-###### 3. View and set graph mode
+###### 3. Set and show graph mode
 
 ```bash
 ./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph graph-mode-set -m RESTORING MERGING NONE
