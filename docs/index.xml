@@ -6688,54 +6688,54 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;ul>
 &lt;li>默认开启label index，6.3w edges/s&lt;/li>
 &lt;/ul></description></item><item><title>Docs: HugeGraph-Tools Quick Start</title><link>/docs/quickstart/hugegraph-tools/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-tools/</guid><description>
-&lt;h3 id="1-hugegraph-tools概述">1 HugeGraph-Tools概述&lt;/h3>
-&lt;p>HugeGraph-Tools 是 HugeGraph 的自动化部署、管理和备份/还原组件。&lt;/p>
-&lt;h3 id="2-获取-hugegraph-tools">2 获取 HugeGraph-Tools&lt;/h3>
-&lt;p>有两种方式可以获取 HugeGraph-Tools：&lt;/p>
+&lt;h3 id="1-hugegraph-tools-overview">1 HugeGraph-Tools Overview&lt;/h3>
+&lt;p>HugeGraph-Tools is an automated deployment, management and backup/restore component of HugeGraph.&lt;/p>
+&lt;h3 id="2-get-hugegraph-tools">2 Get HugeGraph-Tools&lt;/h3>
+&lt;p>There are two ways to get HugeGraph-Tools:&lt;/p>
 &lt;ul>
-&lt;li>下载二进制tar包&lt;/li>
-&lt;li>下载源码编译安装&lt;/li>
+&lt;li>Download the compiled tarball&lt;/li>
+&lt;li>Clone source code then compile and install&lt;/li>
 &lt;/ul>
-&lt;h4 id="21-下载二进制tar包">2.1 下载二进制tar包&lt;/h4>
-&lt;p>下载最新版本的 HugeGraph-Tools 包：&lt;/p>
+&lt;h4 id="21-download-the-compiled-archive">2.1 Download the compiled archive&lt;/h4>
+&lt;p>Download the latest version of the HugeGraph-Tools package:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://github.com/hugegraph/hugegraph-tools/releases/download/v&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>/hugegraph-tools-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxvf hugegraph-tools-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>.tar.gz
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="22-下载源码编译安装">2.2 下载源码编译安装&lt;/h4>
-&lt;p>下载最新版本的 HugeGraph-Tools 源码包：&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="22-clone-source-code-to-compile-and-install">2.2 Clone source code to compile and install&lt;/h4>
+&lt;p>Download the latest version of the HugeGraph-Tools source package:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ git clone https://github.com/hugegraph/hugegraph-tools.git
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>编译生成 tar 包:&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Compile and generate tar package:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-tools
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn package -DskipTests
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>生成 tar 包 hugegraph-tools-${version}.tar.gz&lt;/p>
-&lt;h3 id="3-使用">3 使用&lt;/h3>
-&lt;h4 id="31-功能概览">3.1 功能概览&lt;/h4>
-&lt;p>解压后，进入 hugegraph-tools 目录，可以使用&lt;code>bin/hugegraph&lt;/code>或者&lt;code>bin/hugegraph help&lt;/code>来查看 usage 信息。主要分为：&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Generate tar package hugegraph-tools-${version}.tar.gz&lt;/p>
+&lt;h3 id="3-how-to-use">3 How to use&lt;/h3>
+&lt;h4 id="31-function-overview">3.1 Function overview&lt;/h4>
+&lt;p>After decompression, enter the hugegraph-tools directory, you can use &lt;code>bin/hugegraph&lt;/code> or &lt;code>bin/hugegraph help&lt;/code> to view the usage information. mainly divided:&lt;/p>
 &lt;ul>
-&lt;li>图管理类，graph-mode-set、graph-mode-get、graph-list、graph-get 和 graph-clear&lt;/li>
-&lt;li>异步任务管理类，task-list、task-get、task-delete、task-cancel 和 task-clear&lt;/li>
-&lt;li>Gremlin类，gremlin-execute 和 gremlin-schedule&lt;/li>
-&lt;li>备份/恢复类，backup、restore、migrate、schedule-backup 和 dump&lt;/li>
-&lt;li>安装部署类，deploy、clear、start-all 和 stop-all&lt;/li>
+&lt;li>Graph management Type，graph-mode-set、graph-mode-get、graph-list、graph-get and graph-clear&lt;/li>
+&lt;li>Asynchronous task management Type，task-list、task-get、task-delete、task-cancel and task-clear&lt;/li>
+&lt;li>Gremlin Type，gremlin-execute and gremlin-schedule&lt;/li>
+&lt;li>Backup/Restore Type，backup、restore、migrate、schedule-backup and dump&lt;/li>
+&lt;li>Install the deployment Type，deploy、clear、start-all and stop-all&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>Usage: hugegraph &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>options&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>command&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87">command&lt;/span> options&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="32-options-全局变量">3.2 [options]-全局变量&lt;/h5>
-&lt;p>&lt;code>options&lt;/code>是 HugeGraph-Tools 的全局变量，可以在 hugegraph-tools/bin/hugegraph 中配置,包括：&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="32-options-global-variable">3.2 [options]-Global Variable&lt;/h5>
+&lt;p>&lt;code>options&lt;/code> is a global variable of HugeGraph-Tools, which can be configured in hugegraph-tools/bin/hugegraph, including:&lt;/p>
 &lt;ul>
-&lt;li>&amp;ndash;graph，HugeGraph-Tools 操作的图的名字，默认值是 hugegraph&lt;/li>
-&lt;li>&amp;ndash;url，HugeGraph-Server 的服务地址，默认是 http://127.0.0.1:8080&lt;/li>
-&lt;li>&amp;ndash;user，当 HugeGraph-Server 开启认证时，传递用户名&lt;/li>
-&lt;li>&amp;ndash;password，当 HugeGraph-Server 开启认证时，传递用户的密码&lt;/li>
-&lt;li>&amp;ndash;timeout，连接 HugeGraph-Server 时的超时时间，默认是 30s&lt;/li>
-&lt;li>&amp;ndash;trust-store-file，证书文件的路径，当 &amp;ndash;url 使用 https 时，HugeGraph-Client 使用的 truststore 文件，默认为空，代表使用 hugegraph-tools 内置的 truststore 文件 conf/hugegraph.truststore&lt;/li>
-&lt;li>&amp;ndash;trust-store-password，证书文件的密码，当 &amp;ndash;url 使用 https 时，HugeGraph-Client 使用的 truststore 的密码，默认为空，代表使用 hugegraph-tools 内置的 truststore 文件的密码&lt;/li>
+&lt;li>&amp;ndash;graph，HugeGraph-Tools The name of the graph to operate on, the default value is hugegraph&lt;/li>
+&lt;li>&amp;ndash;url，The service address of HugeGraph-Server, the default is http://127.0.0.1:8080&lt;/li>
+&lt;li>&amp;ndash;user，When HugeGraph-Server opens authentication, pass username&lt;/li>
+&lt;li>&amp;ndash;password，When HugeGraph-Server opens authentication, pass the user&amp;rsquo;s password&lt;/li>
+&lt;li>&amp;ndash;timeout，Timeout when connecting to HugeGraph-Server, the default is 30s&lt;/li>
+&lt;li>&amp;ndash;trust-store-file，The path of the certificate file, when &amp;ndash;url uses https, the truststore file used by HugeGraph-Client, the default is empty, which means using the built-in truststore file conf/hugegraph.truststore of hugegraph-tools&lt;/li>
+&lt;li>&amp;ndash;trust-store-password，The password of the certificate file, when &amp;ndash;url uses https, the password of the truststore used by HugeGraph-Client, the default is empty, representing the password of the built-in truststore file of hugegraph-tools&lt;/li>
 &lt;/ul>
-&lt;p>上述全局变量，也可以通过环境变量来设置。一种方式是在命令行使用 export 设置临时环境变量，在该命令行关闭之前均有效&lt;/p>
+&lt;p>The above global variables can also be set through environment variables. One way is to use export on the command line to set temporary environment variables, which are valid until the command line is closed&lt;/p>
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th>全局变量&lt;/th>
-&lt;th>环境变量&lt;/th>
-&lt;th>示例&lt;/th>
+&lt;th>Global Variable&lt;/th>
+&lt;th>Environment Variable&lt;/th>
+&lt;th>Example&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -6776,7 +6776,7 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;p>另一种方式是在 bin/hugegraph 脚本中设置环境变量：&lt;/p>
+&lt;p>Another way is to set the environment variable in the bin/hugegraph script:&lt;/p>
 &lt;pre tabindex="0">&lt;code>#!/bin/bash
 # Set environment here if needed
 #export HUGEGRAPH_URL=
@@ -6786,177 +6786,177 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 #export HUGEGRAPH_TIMEOUT=
 #export HUGEGRAPH_TRUST_STORE_FILE=
 #export HUGEGRAPH_TRUST_STORE_PASSWORD=
-&lt;/code>&lt;/pre>&lt;h5 id="33-图管理类graph-mode-setgraph-mode-getgraph-listgraph-get和graph-clear">3.3 图管理类，graph-mode-set、graph-mode-get、graph-list、graph-get和graph-clear&lt;/h5>
+&lt;/code>&lt;/pre>&lt;h5 id="33-graph-management-typegraph-mode-setgraph-mode-getgraph-listgraph-get-and-graph-clear">3.3 Graph Management Type，graph-mode-set、graph-mode-get、graph-list、graph-get and graph-clear&lt;/h5>
 &lt;ul>
-&lt;li>graph-mode-set，设置图的 restore mode
+&lt;li>graph-mode-set，set graph restore mode
 &lt;ul>
-&lt;li>&amp;ndash;graph-mode 或者 -m，必填项，指定将要设置的模式，合法值包括 [NONE, RESTORING, MERGING, LOADING]&lt;/li>
+&lt;li>&amp;ndash;graph-mode or -m, required, specifies the mode to be set, legal values include [NONE, RESTORING, MERGING, LOADING]&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>graph-mode-get，获取图的 restore mode&lt;/li>
-&lt;li>graph-list，列出某个 HugeGraph-Server 中全部的图&lt;/li>
-&lt;li>graph-get，获取某个图及其存储后端类型&lt;/li>
-&lt;li>graph-clear，清除某个图的全部 schema 和 data
+&lt;li>graph-mode-get，get graph restore mode&lt;/li>
+&lt;li>graph-list，list all graphs in a HugeGraph-Server&lt;/li>
+&lt;li>graph-get，get a graph and its storage backend type&lt;/li>
+&lt;li>graph-clear，clear all schema and data of a graph
 &lt;ul>
-&lt;li>&amp;ndash;confirm-message 或者 -c，必填项，删除确认信息，需要手动输入，二次确认防止误删，&amp;ldquo;I&amp;rsquo;m sure to delete all data&amp;rdquo;，包括双引号&lt;/li>
+&lt;li>&amp;ndash;confirm-message Or -c, required, delete confirmation information, manual input is required, double confirmation to prevent accidental deletion, &amp;ldquo;I&amp;rsquo;m sure to delete all data&amp;rdquo;, including double quotes&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
 &lt;blockquote>
-&lt;p>当需要把备份的图原样恢复到一个新的图中的时候，需要先将图模式设置为 RESTORING 模式；当需要将备份的图合并到已存在的图中时，需要先将图模式设置为 MERGING 模式。&lt;/p>
+&lt;p>When you need to restore the backup graph to a new graph, you need to set the graph mode to RESTORING mode; when you need to merge the backup graph into an existing graph, you need to first set the graph mode to MERGING model.&lt;/p>
 &lt;/blockquote>
-&lt;h5 id="34-异步任务管理类task-listtask-get和task-delete">3.4 异步任务管理类，task-list、task-get和task-delete&lt;/h5>
+&lt;h5 id="34-asynchronous-task-management-typetask-listtask-get-and-task-delete">3.4 Asynchronous task management Type，task-list、task-get and task-delete&lt;/h5>
 &lt;ul>
-&lt;li>task-list，列出某个图中的异步任务，可以根据任务的状态过滤
+&lt;li>task-list，List the asynchronous tasks in a graph, which can be filtered according to the status of the tasks
 &lt;ul>
-&lt;li>&amp;ndash;status，选填项，指定要查看的任务的状态，即按状态过滤任务&lt;/li>
-&lt;li>&amp;ndash;limit，选填项，指定要获取的任务的数目，默认为 -1，意思为获取全部符合条件的任务&lt;/li>
+&lt;li>&amp;ndash;status，Optional, specify the status of the task to view, i.e. filter tasks by status&lt;/li>
+&lt;li>&amp;ndash;limit，Optional, specify the number of tasks to be obtained, the default is -1, which means to obtain all eligible tasks&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>task-get，获取某个异步任务的详细信息
+&lt;li>task-get，Get detailed information about an asynchronous task
 &lt;ul>
-&lt;li>&amp;ndash;task-id，必填项，指定异步任务的 ID&lt;/li>
+&lt;li>&amp;ndash;task-id，Required, specifies the ID of the asynchronous task&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>task-delete，删除某个异步任务的信息
+&lt;li>task-delete，Delete information about an asynchronous task
 &lt;ul>
-&lt;li>&amp;ndash;task-id，必填项，指定异步任务的 ID&lt;/li>
+&lt;li>&amp;ndash;task-id，Required, specifies the ID of the asynchronous task&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>task-cancel，取消某个异步任务的执行
+&lt;li>task-cancel，Cancel the execution of an asynchronous task
 &lt;ul>
-&lt;li>&amp;ndash;task-id，要取消的异步任务的 ID&lt;/li>
+&lt;li>&amp;ndash;task-id，ID of the asynchronous task to cancel&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>task-clear，清理完成的异步任务
+&lt;li>task-clear，Clean up completed asynchronous tasks
 &lt;ul>
-&lt;li>&amp;ndash;force，选填项，设置时，表示清理全部异步任务，未执行完成的先取消，然后清除所有异步任务。默认只清理已完成的异步任务&lt;/li>
+&lt;li>&amp;ndash;force，Optional. When set, it means to clean up all asynchronous tasks. Unfinished ones are canceled first, and then all asynchronous tasks are cleared. By default, only completed asynchronous tasks are cleaned up&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
-&lt;h5 id="35-gremlin类gremlin-execute和gremlin-schedule">3.5 Gremlin类，gremlin-execute和gremlin-schedule&lt;/h5>
+&lt;h5 id="35-gremlin-typegremlin-execute-and-gremlin-schedule">3.5 Gremlin Type，gremlin-execute and gremlin-schedule&lt;/h5>
 &lt;ul>
-&lt;li>gremlin-execute，发送 Gremlin 语句到 HugeGraph-Server 来执行查询或修改操作，同步执行，结束后返回结果
+&lt;li>gremlin-execute, send Gremlin statements to HugeGraph-Server to execute query or modification operations, execute synchronously, and return results after completion
 &lt;ul>
-&lt;li>&amp;ndash;file 或者 -f，指定要执行的脚本文件，UTF-8编码，与 &amp;ndash;script 互斥&lt;/li>
-&lt;li>&amp;ndash;script 或者 -s，指定要执行的脚本字符串，与 &amp;ndash;file 互斥&lt;/li>
-&lt;li>&amp;ndash;aliases 或者 -a，Gremlin 别名设置，格式为：key1=value1,key2=value2,&amp;hellip;&lt;/li>
-&lt;li>&amp;ndash;bindings 或者 -b，Gremlin 绑定设置，格式为：key1=value1,key2=value2,&amp;hellip;&lt;/li>
-&lt;li>&amp;ndash;language 或者 -l，Gremlin 脚本的语言，默认为 gremlin-groovy&lt;/li>
+&lt;li>&amp;ndash;file or -f, specify the script file to execute, UTF-8 encoding, mutually exclusive with &amp;ndash;script&lt;/li>
+&lt;li>&amp;ndash;script or -s, specifies the script string to execute, mutually exclusive with &amp;ndash;file&lt;/li>
+&lt;li>&amp;ndash;aliases or -a, Gremlin alias settings, the format is: key1=value1,key2=value2,&amp;hellip;&lt;/li>
+&lt;li>&amp;ndash;bindings or -b, Gremlin binding settings, the format is: key1=value1,key2=value2,&amp;hellip;&lt;/li>
+&lt;li>&amp;ndash;language or -l, the language of the Gremlin script, the default is gremlin-groovy&lt;/li>
 &lt;/ul>
 &lt;blockquote>
-&lt;p>&amp;ndash;file 和 &amp;ndash;script 二者互斥，必须设置其中之一&lt;/p>
+&lt;p>&amp;ndash;file and &amp;ndash;script are mutually exclusive, one of them must be set&lt;/p>
 &lt;/blockquote>
 &lt;/li>
-&lt;li>gremlin-schedule，发送 Gremlin 语句到 HugeGraph-Server 来执行查询或修改操作，异步执行，任务提交后立刻返回异步任务id
+&lt;li>gremlin-schedule, send Gremlin statements to HugeGraph-Server to perform query or modification operations, asynchronous execution, and return the asynchronous task id immediately after the task is submitted
 &lt;ul>
-&lt;li>&amp;ndash;file 或者 -f，指定要执行的脚本文件，UTF-8编码，与 &amp;ndash;script 互斥&lt;/li>
-&lt;li>&amp;ndash;script 或者 -s，指定要执行的脚本字符串，与 &amp;ndash;file 互斥&lt;/li>
-&lt;li>&amp;ndash;bindings 或者 -b，Gremlin 绑定设置，格式为：key1=value1,key2=value2,&amp;hellip;&lt;/li>
-&lt;li>&amp;ndash;language 或者 -l，Gremlin 脚本的语言，默认为 gremlin-groovy&lt;/li>
+&lt;li>&amp;ndash;file or -f, specify the script file to execute, UTF-8 encoding, mutually exclusive with &amp;ndash;script&lt;/li>
+&lt;li>&amp;ndash;script or -s, specifies the script string to execute, mutually exclusive with &amp;ndash;file&lt;/li>
+&lt;li>&amp;ndash;bindings or -b, Gremlin binding settings, the format is: key1=value1,key2=value2,&amp;hellip;&lt;/li>
+&lt;li>&amp;ndash;language or -l, the language of the Gremlin script, the default is gremlin-groovy&lt;/li>
 &lt;/ul>
 &lt;blockquote>
-&lt;p>&amp;ndash;file 和 &amp;ndash;script 二者互斥，必须设置其中之一&lt;/p>
+&lt;p>&amp;ndash;file and &amp;ndash;script are mutually exclusive, one of them must be set&lt;/p>
 &lt;/blockquote>
 &lt;/li>
 &lt;/ul>
-&lt;h5 id="36-备份恢复类">3.6 备份/恢复类&lt;/h5>
+&lt;h5 id="36-backuprestore-type">3.6 Backup/Restore Type&lt;/h5>
 &lt;ul>
-&lt;li>backup，将某张图中的 schema 或者 data 备份到 HugeGraph 系统之外，以 JSON 形式存在本地磁盘或者 HDFS
+&lt;li>backup, back up the schema or data in a certain graph out of the HugeGraph system, and store it on the local disk or HDFS in the form of JSON
 &lt;ul>
-&lt;li>&amp;ndash;format，备份的格式，可选值包括 [json, text]，默认为 json&lt;/li>
-&lt;li>&amp;ndash;all-properties，是否备份顶点/边全部的属性，仅在 &amp;ndash;format 为 text 是有效，默认 false&lt;/li>
-&lt;li>&amp;ndash;label，要备份的顶点/边的类型，仅在 &amp;ndash;format 为 text 是有效，只有备份顶点或者边的时候有效&lt;/li>
-&lt;li>&amp;ndash;properties，要备份的顶点/边的属性，逗号分隔，仅在 &amp;ndash;format 为 text 是有效，只有备份顶点或者边的时候有效&lt;/li>
-&lt;li>&amp;ndash;compress，备份时是否压缩数据，默认为 true&lt;/li>
-&lt;li>&amp;ndash;directory 或者 -d，存储 schema 或者 data 的目录，本地目录时，默认为&amp;rsquo;./{graphName}&amp;rsquo;，HDFS 时，默认为 &amp;lsquo;{fs.default.name}/{graphName}&amp;rsquo;&lt;/li>
-&lt;li>&amp;ndash;huge-types 或者 -t，要备份的数据类型，逗号分隔，可选值为 &amp;lsquo;all&amp;rsquo; 或者 一个或多个 [vertex,edge,vertex_label,edge_label,property_key,index_label] 的组合，&amp;lsquo;all&amp;rsquo; 代表全部6种类型，即顶点、边和所有schema&lt;/li>
-&lt;li>&amp;ndash;log 或者 -l，指定日志目录，默认为当前目录&lt;/li>
-&lt;li>&amp;ndash;retry，指定失败重试次数，默认为 3&lt;/li>
-&lt;li>&amp;ndash;split-size 或者 -s，指定在备份时对顶点或者边分块的大小，默认为 1048576&lt;/li>
-&lt;li>-D，用 -Dkey=value 的模式指定动态参数，用来备份数据到 HDFS 时，指定 HDFS 的配置项，例如：-Dfs.default.name=hdfs://localhost:9000&lt;/li>
+&lt;li>&amp;ndash;format, the backup format, optional values include [json, text], the default is json&lt;/li>
+&lt;li>&amp;ndash;all-properties, whether to back up all properties of vertices/edges, only valid when &amp;ndash;format is text, default false&lt;/li>
+&lt;li>&amp;ndash;label, the type of vertices/edges to be backed up, only valid when &amp;ndash;format is text, only valid when backing up vertices or edges&lt;/li>
+&lt;li>&amp;ndash;properties, properties of vertices/edges to be backed up, separated by commas, only valid when &amp;ndash;format is text, valid only when backing up vertices or edges&lt;/li>
+&lt;li>&amp;ndash;compress, whether to compress data during backup, the default is true&lt;/li>
+&lt;li>&amp;ndash;directory or -d, the directory to store schema or data, the default is &amp;lsquo;./{graphName}&amp;rsquo; for local directory, and &amp;lsquo;{fs.default.name}/{graphName}&amp;rsquo; for HDFS&lt;/li>
+&lt;li>&amp;ndash;huge-types or -t, the data types to be backed up, separated by commas, the optional value is &amp;lsquo;all&amp;rsquo; or a combination of one or more [vertex, edge, vertex_label, edge_label, property_key, index_label], &amp;lsquo;all&amp;rsquo; Represents all 6 types, namely vertices, edges and all schemas&lt;/li>
+&lt;li>&amp;ndash;log or -l, specify the log directory, the default is the current directory&lt;/li>
+&lt;li>&amp;ndash;retry, specify the number of failed retries, the default is 3&lt;/li>
+&lt;li>&amp;ndash;split-size or -s, specifies the size of splitting vertices or edges when backing up, the default is 1048576&lt;/li>
+&lt;li>-D, use the mode of -Dkey=value to specify dynamic parameters, and specify HDFS configuration items when backing up data to HDFS, for example: -Dfs.default.name=hdfs://localhost:9000&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>restore，将 JSON 格式存储的 schema 或者 data 恢复到一个新图中（RESTORING 模式）或者合并到已存在的图中（MERGING 模式）
+&lt;li>restore, restore schema or data stored in JSON format to a new graph (RESTORING mode) or merge into an existing graph (MERGING mode)
 &lt;ul>
-&lt;li>&amp;ndash;directory 或者 -d，存储 schema 或者 data 的目录，本地目录时，默认为&amp;rsquo;./{graphName}&amp;rsquo;，HDFS 时，默认为 &amp;lsquo;{fs.default.name}/{graphName}&amp;rsquo;&lt;/li>
-&lt;li>&amp;ndash;clean，是否在恢复图完成后删除 &amp;ndash;directory 指定的目录，默认为 false&lt;/li>
-&lt;li>&amp;ndash;huge-types 或者 -t，要恢复的数据类型，逗号分隔，可选值为 &amp;lsquo;all&amp;rsquo; 或者 一个或多个 [vertex,edge,vertex_label,edge_label,property_key,index_label] 的组合，&amp;lsquo;all&amp;rsquo; 代表全部6种类型，即顶点、边和所有schema&lt;/li>
-&lt;li>&amp;ndash;log 或者 -l，指定日志目录，默认为当前目录&lt;/li>
-&lt;li>&amp;ndash;retry，指定失败重试次数，默认为 3&lt;/li>
-&lt;li>-D，用 -Dkey=value 的模式指定动态参数，用来从 HDFS 恢复图时，指定 HDFS 的配置项，例如：-Dfs.default.name=hdfs://localhost:9000&lt;/li>
+&lt;li>&amp;ndash;directory or -d, the directory to store schema or data, the default is &amp;lsquo;./{graphName}&amp;rsquo; for local directory, and &amp;lsquo;{fs.default.name}/{graphName}&amp;rsquo; for HDFS&lt;/li>
+&lt;li>&amp;ndash;clean, whether to delete the directory specified by &amp;ndash;directory after the recovery map is completed, the default is false&lt;/li>
+&lt;li>&amp;ndash;huge-types or -t, data types to restore, separated by commas, optional value is &amp;lsquo;all&amp;rsquo; or a combination of one or more [vertex, edge, vertex_label, edge_label, property_key, index_label], &amp;lsquo;all&amp;rsquo; Represents all 6 types, namely vertices, edges and all schemas&lt;/li>
+&lt;li>&amp;ndash;log or -l, specify the log directory, the default is the current directory&lt;/li>
+&lt;li>&amp;ndash;retry, specify the number of failed retries, the default is 3&lt;/li>
+&lt;li>-D, use the mode of -Dkey=value to specify dynamic parameters, which are used to specify HDFS configuration items when restoring graphs from HDFS, for example: -Dfs.default.name=hdfs://localhost:9000&lt;/li>
 &lt;/ul>
 &lt;blockquote>
-&lt;p>只有当 &amp;ndash;format 为 json 执行 backup 时，才可以使用 restore 命令恢复&lt;/p>
+&lt;p>restore command can be used only if &amp;ndash;format is executed as backup for json&lt;/p>
 &lt;/blockquote>
 &lt;/li>
-&lt;li>migrate, 将当前连接的图迁移至另一个 HugeGraphServer 中
+&lt;li>migrate, migrate the currently connected graph to another HugeGraphServer
 &lt;ul>
-&lt;li>&amp;ndash;target-graph，目标图的名字，默认为 hugegraph&lt;/li>
-&lt;li>&amp;ndash;target-url，目标图所在的 HugeGraphServer，默认为 http://127.0.0.1:8081&lt;/li>
-&lt;li>&amp;ndash;target-username，访问目标图的用户名&lt;/li>
-&lt;li>&amp;ndash;target-password，访问目标图的密码&lt;/li>
-&lt;li>&amp;ndash;target-timeout，访问目标图的超时时间&lt;/li>
-&lt;li>&amp;ndash;target-trust-store-file，访问目标图使用的 truststore 文件&lt;/li>
-&lt;li>&amp;ndash;target-trust-store-password，访问目标图使用的 truststore 的密码&lt;/li>
-&lt;li>&amp;ndash;directory 或者 -d，迁移过程中，存储源图的 schema 或者 data 的目录，本地目录时，默认为&amp;rsquo;./{graphName}&amp;rsquo;，HDFS 时，默认为 &amp;lsquo;{fs.default.name}/{graphName}&amp;rsquo;&lt;/li>
-&lt;li>&amp;ndash;huge-types 或者 -t，要迁移的数据类型，逗号分隔，可选值为 &amp;lsquo;all&amp;rsquo; 或者 一个或多个 [vertex,edge,vertex_label,edge_label,property_key,index_label] 的组合，&amp;lsquo;all&amp;rsquo; 代表全部6种类型，即顶点、边和所有schema&lt;/li>
-&lt;li>&amp;ndash;log 或者 -l，指定日志目录，默认为当前目录&lt;/li>
-&lt;li>&amp;ndash;retry，指定失败重试次数，默认为 3&lt;/li>
-&lt;li>&amp;ndash;split-size 或者 -s，指定迁移过程中对源图进行备份时顶点或者边分块的大小，默认为 1048576&lt;/li>
-&lt;li>-D，用 -Dkey=value 的模式指定动态参数，用来在迁移图过程中需要备份数据到 HDFS 时，指定 HDFS 的配置项，例如：-Dfs.default.name=hdfs://localhost:9000&lt;/li>
-&lt;li>&amp;ndash;graph-mode 或者 -m，将源图恢复到目标图时将目标图设置的模式，合法值包括 [RESTORING, MERGING]&lt;/li>
-&lt;li>&amp;ndash;keep-local-data，是否保留在迁移图的过程中产生的源图的备份，默认为 false，即默认迁移图结束后不保留产生的源图备份&lt;/li>
+&lt;li>&amp;ndash;target-graph, the name of the target graph, the default is hugegraph&lt;/li>
+&lt;li>&amp;ndash;target-url, the HugeGraphServer where the target graph is located, the default is http://127.0.0.1:8081&lt;/li>
+&lt;li>&amp;ndash;target-username, the username to access the target map&lt;/li>
+&lt;li>&amp;ndash;target-password, the password to access the target map&lt;/li>
+&lt;li>&amp;ndash;target-timeout, the timeout for accessing the target map&lt;/li>
+&lt;li>&amp;ndash;target-trust-store-file, access the truststore file used by the target graph&lt;/li>
+&lt;li>&amp;ndash;target-trust-store-password, the password to access the truststore used by the target map&lt;/li>
+&lt;li>&amp;ndash;directory or -d, during the migration process, the directory where the schema or data of the source graph is stored. For a local directory, the default is &amp;lsquo;./{graphName}&amp;rsquo;; for HDFS, the default is &amp;lsquo;{fs.default.name}/ {graphName}&amp;rsquo;&lt;/li>
+&lt;li>&amp;ndash;huge-types or -t, the data types to be migrated, separated by commas, the optional value is &amp;lsquo;all&amp;rsquo; or a combination of one or more [vertex, edge, vertex_label, edge_label, property_key, index_label], &amp;lsquo;all&amp;rsquo; Represents all 6 types, namely vertices, edges and all schemas&lt;/li>
+&lt;li>&amp;ndash;log or -l, specify the log directory, the default is the current directory&lt;/li>
+&lt;li>&amp;ndash;retry, specify the number of failed retries, the default is 3&lt;/li>
+&lt;li>&amp;ndash;split-size or -s, specify the size of the vertex or edge block when backing up the source graph during the migration process, the default is 1048576&lt;/li>
+&lt;li>-D, use the mode of -Dkey=value to specify dynamic parameters, which are used to specify HDFS configuration items when the data needs to be backed up to HDFS during the migration process, for example: -Dfs.default.name=hdfs://localhost: 9000&lt;/li>
+&lt;li>&amp;ndash;graph-mode or -m, the mode to set the target graph when restoring the source graph to the target graph, legal values include [RESTORING, MERGING]&lt;/li>
+&lt;li>&amp;ndash;keep-local-data, whether to keep the backup of the source map generated in the process of migrating the map, the default is false, that is, the backup of the source map is not kept after the default migration map ends&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>schedule-backup，周期性对图执行备份操作，并保留一定数目的最新备份（目前仅支持本地文件系统）
+&lt;li>schedule-backup, periodically back up the graph and keep a certain number of the latest backups (currently only supports local file systems)
 &lt;ul>
-&lt;li>&amp;ndash;directory 或者 -d，必填项，指定备份数据的目录&lt;/li>
-&lt;li>&amp;ndash;backup-num，选填项，指定保存的最新的备份的数目，默认为 3&lt;/li>
-&lt;li>&amp;ndash;interval，选填项，指定进行备份的周期，格式同 Linux crontab 格式&lt;/li>
+&lt;li>&amp;ndash;directory or -d, required, specifies the directory of the backup data&lt;/li>
+&lt;li>&amp;ndash;backup-num, optional, specifies the number of latest backups to save, defaults to 3&lt;/li>
+&lt;li>&amp;ndash;interval, an optional item, specifies the backup cycle, the format is the same as the Linux crontab format&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>dump，把整张图的顶点和边全部导出，默认以&lt;code>vertex vertex-edge1 vertex-edge2...&lt;/code>JSON格式存储。
-用户也可以自定义存储格式，只需要在&lt;code>hugegraph-tools/src/main/java/com/baidu/hugegraph/formatter&lt;/code>
-目录下实现一个继承自&lt;code>Formatter&lt;/code>的类，例如&lt;code>CustomFormatter&lt;/code>，使用时指定该类为formatter即可，例如
+&lt;li>dump, export all the vertices and edges of the entire graph, and store them in &lt;code>vertex vertex-edge1 vertex-edge2...&lt;/code>JSON format by default.
+Users can also customize the storage format, just need to be in &lt;code>hugegraph-tools/src/main/java/com/baidu/hugegraph/formatter&lt;/code>
+Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, such as &lt;code>CustomFormatter&lt;/code>, and specify this class as formatter when using it, for example
 &lt;code>bin/hugegraph dump -f CustomFormatter&lt;/code>
 &lt;ul>
-&lt;li>&amp;ndash;formatter 或者 -f，指定使用的 formatter，默认为 JsonFormatter&lt;/li>
-&lt;li>&amp;ndash;directory 或者 -d，存储 schema 或者 data 的目录，默认为当前目录&lt;/li>
-&lt;li>&amp;ndash;log 或者 -l，指定日志目录，默认为当前目录&lt;/li>
-&lt;li>&amp;ndash;retry，指定失败重试次数，默认为 3&lt;/li>
-&lt;li>&amp;ndash;split-size 或者 -s，指定在备份时对顶点或者边分块的大小，默认为 1048576&lt;/li>
-&lt;li>-D，用 -Dkey=value 的模式指定动态参数，用来备份数据到 HDFS 时，指定 HDFS 的配置项，例如：-Dfs.default.name=hdfs://localhost:9000&lt;/li>
+&lt;li>&amp;ndash;formatter or -f, specify the formatter to use, the default is JsonFormatter&lt;/li>
+&lt;li>&amp;ndash;directory or -d, the directory where schema or data is stored, the default is the current directory&lt;/li>
+&lt;li>&amp;ndash;log or -l, specify the log directory, the default is the current directory&lt;/li>
+&lt;li>&amp;ndash;retry, specify the number of failed retries, the default is 3&lt;/li>
+&lt;li>&amp;ndash;split-size or -s, specifies the size of splitting vertices or edges when backing up, the default is 1048576&lt;/li>
+&lt;li>-D, use the mode of -Dkey=value to specify dynamic parameters, and specify HDFS configuration items when backing up data to HDFS, for example: -Dfs.default.name=hdfs://localhost:9000&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
-&lt;h5 id="37-安装部署类">3.7 安装部署类&lt;/h5>
+&lt;h5 id="37-install-the-deployment-type">3.7 Install the deployment type&lt;/h5>
 &lt;ul>
-&lt;li>deploy，一键下载、安装和启动 HugeGraph-Server 和 HugeGraph-Studio
+&lt;li>deploy, one-click download, install and start HugeGraph-Server and HugeGraph-Studio
 &lt;ul>
-&lt;li>-v，必填项，指明安装的 HugeGraph-Server 和 HugeGraph-Studio 的版本号，最新的是 0.9&lt;/li>
-&lt;li>-p，必填项，指定安装的 HugeGraph-Server 和 HugeGraph-Studio 目录&lt;/li>
-&lt;li>-u，选填项，指定下载 HugeGraph-Server 和 HugeGraph-Studio 压缩包的链接&lt;/li>
+&lt;li>-v, required, specifies the version number of HugeGraph-Server and HugeGraph-Studio installed, the latest is 0.9&lt;/li>
+&lt;li>-p, required, specifies the installed HugeGraph-Server and HugeGraph-Studio directories&lt;/li>
+&lt;li>-u, optional, specifies the link to download the HugeGraph-Server and HugeGraph-Studio compressed packages&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>clear，清理 HugeGraph-Server 和 HugeGraph-Studio 目录和tar包
+&lt;li>clear, clean up HugeGraph-Server and HugeGraph-Studio directories and tarballs
 &lt;ul>
-&lt;li>-p，必填项，指定要清理的 HugeGraph-Server 和 HugeGraph-Studio 的目录&lt;/li>
+&lt;li>-p, required, specifies the directory of HugeGraph-Server and HugeGraph-Studio to be cleaned&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>start-all，一键启动 HugeGraph-Server 和 HugeGraph-Studio，并启动监控，服务死掉时自动拉起服务
+&lt;li>start-all, start HugeGraph-Server and HugeGraph-Studio with one click, and start monitoring, automatically pull up the service when the service dies
 &lt;ul>
-&lt;li>-v，必填项，指明要启动的 HugeGraph-Server 和 HugeGraph-Studio 的版本号，最新的是 0.9&lt;/li>
-&lt;li>-p，必填项，指定安装了 HugeGraph-Server 和 HugeGraph-Studio 的目录&lt;/li>
+&lt;li>-v, required, specifies the version number of HugeGraph-Server and HugeGraph-Studio to be started, the latest is 0.9&lt;/li>
+&lt;li>-p, required, specifies the directory where HugeGraph-Server and HugeGraph-Studio are installed&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>stop-all，一键关闭 HugeGraph-Server 和 HugeGraph-Studio&lt;/li>
+&lt;li>stop-all, close HugeGraph-Server and HugeGraph-Studio with one click&lt;/li>
 &lt;/ul>
 &lt;blockquote>
-&lt;p>deploy命令中有可选参数 -u，提供时会使用指定的下载地址替代默认下载地址下载 tar 包，并且将地址写入&lt;code>~/hugegraph-download-url-prefix&lt;/code>文件中；之后如果不指定地址时，会优先从&lt;code>~/hugegraph-download-url-prefix&lt;/code>指定的地址下载 tar 包；如果 -u 和&lt;code>~/hugegraph-download-url-prefix&lt;/code>都没有时，会从默认下载地址进行下载&lt;/p>
+&lt;p>There is an optional parameter -u in the deploy command. When provided, the specified download address will be used instead of the default download address to download the tar package, and the address will be written into the &lt;code>~/hugegraph-download-url-prefix&lt;/code> file; if no address is specified later When -u and &lt;code>~/hugegraph-download-url-prefix&lt;/code> are not specified, the tar package will be downloaded from the address specified by &lt;code>~/hugegraph-download-url-prefix&lt;/code>; if there is neither -u nor &lt;code>~/hugegraph-download-url-prefix&lt;/code>, it will be downloaded from the default download address&lt;/p>
 &lt;/blockquote>
-&lt;h5 id="38-具体命令参数">3.8 具体命令参数&lt;/h5>
-&lt;p>各子命令的具体参数如下：&lt;/p>
+&lt;h5 id="38-specific-command-parameters">3.8 Specific command parameters&lt;/h5>
+&lt;p>The specific parameters of each subcommand are as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>Usage: hugegraph &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>options&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>command&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87">command&lt;/span> options&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Options:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --graph
@@ -7258,20 +7258,20 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87">help&lt;/span> Print usage
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Usage: &lt;span style="color:#204a87">help&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="39-具体命令示例">3.9 具体命令示例&lt;/h5>
-&lt;h6 id="1-gremlin语句">1. gremlin语句&lt;/h6>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 同步执行gremlin&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="39-specific-command-example">3.9 Specific command example&lt;/h5>
+&lt;h6 id="1-gremlin-statement">1. gremlin statement&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Execute gremlin synchronously&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph gremlin-execute --script &lt;span style="color:#4e9a06">&amp;#39;g.V().count()&amp;#39;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 异步执行gremlin&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Execute gremlin asynchronously&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph gremlin-schedule --script &lt;span style="color:#4e9a06">&amp;#39;g.V().count()&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="2-查看task情况">2. 查看task情况&lt;/h6>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="2-show-task-status">2. Show task status&lt;/h6>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph task-list
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph task-list --limit &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph task-list --status success
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="3-图模式查看和设置">3. 图模式查看和设置&lt;/h6>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="3-set-and-show-graph-mode">3. Set and show graph mode&lt;/h6>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph graph-mode-set -m RESTORING MERGING NONE
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph graph-mode-set -m RESTORING
@@ -7279,22 +7279,22 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph graph-mode-get
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph graph-list
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="4-清理图">4. 清理图&lt;/h6>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="4-cleanup-graph">4. Cleanup Graph&lt;/h6>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph graph-clear -c &lt;span style="color:#4e9a06">&amp;#34;I&amp;#39;m sure to delete all data&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="5-图备份">5. 图备份&lt;/h6>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="5-backup-graph">5. Backup Graph&lt;/h6>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph backup -t all --directory ./backup-test
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="6-周期性的备份">6. 周期性的备份&lt;/h6>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="6-periodic-backup-graph">6. Periodic Backup Graph&lt;/h6>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph --interval */2 * * * * schedule-backup -d ./backup-0.10.2
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="7-图恢复">7. 图恢复&lt;/h6>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 设置图模式&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="7-recovery-graph">7. Recovery Graph&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># set graph mode&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph graph-mode-set -m RESTORING
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 恢复图&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># recovery graph&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph restore -t all --directory ./backup-test
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 恢复图模式&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># restore graph mode&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph graph-mode-set -m NONE
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="8-图迁移">8. 图迁移&lt;/h6>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="8-graph-migration">8. Graph Migration&lt;/h6>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph migrate --target-url http://127.0.0.1:8090 --target-graph hugegraph
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: v0.4.4</title><link>/docs/performance/api-preformance/hugegraph-api-0.4.4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/performance/api-preformance/hugegraph-api-0.4.4/</guid><description>
 &lt;h3 id="1-测试环境">1 测试环境&lt;/h3>
