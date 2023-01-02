@@ -17,7 +17,7 @@ weight: 1
 
 - 支持热更新`trace`开关的 API `/exception/trace`。
 - 支持 Cypher 图查询语言。
-- 支持 通过 Swagger UI 接口来查看 API 列表。
+- 支持通过 Swagger UI 接口来查看提供的 API 列表。
 
 #### Client 客户端更新
 
@@ -33,32 +33,32 @@ weight: 1
 - 支持 Cypher 图查询语言。
 - 支持集群 Master 角色的自动管理与故障转移。
 - 支持 16 个 OLAP 算法, 包括：LPA, Louvain, PageRank, BetweennessCentrality, RingsDetect等。
+- 根据 Apache 基金会对项目的发版要求进行适配，包括 License 合规性、发版流程、代码风格等。
 
 #### Bug 修复
 
-- 修复无法根据多个Label和属性来查询边数据。
+- 修复无法根据多个 Label 和属性来查询边数据。
 - 增加对环路检测算法的最大深度限制。
-- fix: tree step & edge batch update error & edge cache & task status.
-- 修复 tree() 返回结果异常问题。
+- 修复 tree() 语句返回结果异常问题。
 - 修复批量更新边传入 Id 时的检查异常问题。
 - 解决非预期的 Task 状态问题。
 - 解决在更新顶点时未清除边缓存的问题。
-- 修复 MySQL 后端执行 g.V() 错误。
+- 修复 MySQL 后端执行 g.V() 时的错误。
 - 修复因为 server-info 无法超时导致的问题。
 - 导出了 ConditionP 类型用于 Gremlin 中用户使用。
 - 修复 within + Text.contains 查询问题。
 - 修复 addIndexLabel/removeIndexLabel 接口的竞争条件问题。
 - 限制仅 Admin 允许输出图实例。
 - 修复 Profile API 的检查问题。
-- 修复 Empty Graph 在 count().is(0) 查询中的问题。
-- 修复异常时无法关闭服务的问题。
+- 修复在 count().is(0) 查询中 Empty Graph 的问题。
+- 修复在异常时无法关闭服务的问题。
 - 修复在 Apple M1 系统上的 JNA 报错 UnsatisfiedLinkError 的问题。
 - 修复启动 RpcServer 时报 NPE 的问题。
 - 修复 ACTION_CLEARED 参数数量的问题。
-- 修复 RPC 服务启动问题。
+- 修复 RpcServer 服务启动问题。
 - 修复用户传入参数可能得数字转换隐患问题。
 - 移除了 Word 分词器依赖。
-- 修复 Cassandra 与 MySQL 后端在异常时关闭迭代器的问题。
+- 修复 Cassandra 与 MySQL 后端在异常时未优雅关闭迭代器的问题。
 
 #### 配置项更新
 
