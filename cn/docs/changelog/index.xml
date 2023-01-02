@@ -1,7 +1,6 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HugeGraph – CHANGELOGS</title><link>/cn/docs/changelog/</link><description>Recent content in CHANGELOGS on HugeGraph</description><generator>Hugo -- gohugo.io</generator><atom:link href="/cn/docs/changelog/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: HugeGraph 1.0.0 Release Notes</title><link>/cn/docs/changelog/hugegraph-1.0.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/changelog/hugegraph-1.0.0-release-notes/</guid><description>
 &lt;blockquote>
-&lt;p>TODO: update the summary soon, please check the detail in each repository first, thanks
-TODO: translate this article to Chinese&lt;/p>
+&lt;p>TODO: update the summary soon, please check the detail in each repository first, thanks&lt;/p>
 &lt;/blockquote>
 &lt;ul>
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph/releases/tag/1.0.0">Server Release Note&lt;/a>&lt;/li>
@@ -9,49 +8,99 @@ TODO: translate this article to Chinese&lt;/p>
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-computer/releases/tag/1.0.0">Computer Release Note&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-commons/releases/tag/1.0.0">Commons Release Note&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h3 id="server-api--client">Server (API &amp;amp; Client)&lt;/h3>
-&lt;h4 id="接口更新">接口更新&lt;/h4>
+&lt;h3 id="oltp-api--client-更新">OLTP API &amp;amp; Client 更新&lt;/h3>
+&lt;h4 id="api-接口更新">API 接口更新&lt;/h4>
 &lt;ul>
-&lt;li>xx&lt;/li>
-&lt;li>xx&lt;/li>
+&lt;li>支持热更新&lt;code>trace&lt;/code>开关的 API &lt;code>/exception/trace&lt;/code>。&lt;/li>
+&lt;li>支持 Cypher 图查询语言。&lt;/li>
+&lt;li>支持通过 Swagger UI 接口来查看提供的 API 列表。&lt;/li>
 &lt;/ul>
-&lt;h4 id="其它修改">其它修改&lt;/h4>
+&lt;h4 id="client-客户端更新">Client 客户端更新&lt;/h4>
 &lt;ul>
-&lt;li>xx&lt;/li>
 &lt;li>xx&lt;/li>
 &lt;/ul>
 &lt;h3 id="core--server">Core &amp;amp; Server&lt;/h3>
 &lt;h4 id="功能更新">功能更新&lt;/h4>
 &lt;ul>
-&lt;li>xx&lt;/li>
-&lt;li>xx&lt;/li>
+&lt;li>支持 Java 11 版本。&lt;/li>
+&lt;li>支持 2 个新的 OLTP 算法： adamic-adar 和 resource-allocation。&lt;/li>
+&lt;li>支持 HBase 后端使用哈希 RowKey，并且允许预初始化 HBase 表.&lt;/li>
+&lt;li>支持 Cypher 图查询语言。&lt;/li>
+&lt;li>支持集群 Master 角色的自动管理与故障转移。&lt;/li>
+&lt;li>支持 16 个 OLAP 算法, 包括：LPA, Louvain, PageRank, BetweennessCentrality, RingsDetect等。&lt;/li>
+&lt;li>根据 Apache 基金会对项目的发版要求进行适配，包括 License 合规性、发版流程、代码风格等。&lt;/li>
 &lt;/ul>
-&lt;h4 id="bug修复">BUG修复&lt;/h4>
+&lt;h4 id="bug-修复">Bug 修复&lt;/h4>
+&lt;ul>
+&lt;li>修复无法根据多个 Label 和属性来查询边数据。&lt;/li>
+&lt;li>增加对环路检测算法的最大深度限制。&lt;/li>
+&lt;li>修复 tree() 语句返回结果异常问题。&lt;/li>
+&lt;li>修复批量更新边传入 Id 时的检查异常问题。&lt;/li>
+&lt;li>解决非预期的 Task 状态问题。&lt;/li>
+&lt;li>解决在更新顶点时未清除边缓存的问题。&lt;/li>
+&lt;li>修复 MySQL 后端执行 g.V() 时的错误。&lt;/li>
+&lt;li>修复因为 server-info 无法超时导致的问题。&lt;/li>
+&lt;li>导出了 ConditionP 类型用于 Gremlin 中用户使用。&lt;/li>
+&lt;li>修复 within + Text.contains 查询问题。&lt;/li>
+&lt;li>修复 addIndexLabel/removeIndexLabel 接口的竞争条件问题。&lt;/li>
+&lt;li>限制仅 Admin 允许输出图实例。&lt;/li>
+&lt;li>修复 Profile API 的检查问题。&lt;/li>
+&lt;li>修复在 count().is(0) 查询中 Empty Graph 的问题。&lt;/li>
+&lt;li>修复在异常时无法关闭服务的问题。&lt;/li>
+&lt;li>修复在 Apple M1 系统上的 JNA 报错 UnsatisfiedLinkError 的问题。&lt;/li>
+&lt;li>修复启动 RpcServer 时报 NPE 的问题。&lt;/li>
+&lt;li>修复 ACTION_CLEARED 参数数量的问题。&lt;/li>
+&lt;li>修复 RpcServer 服务启动问题。&lt;/li>
+&lt;li>修复用户传入参数可能得数字转换隐患问题。&lt;/li>
+&lt;li>移除了 Word 分词器依赖。&lt;/li>
+&lt;li>修复 Cassandra 与 MySQL 后端在异常时未优雅关闭迭代器的问题。&lt;/li>
+&lt;/ul>
+&lt;h4 id="配置项更新">配置项更新&lt;/h4>
+&lt;ul>
+&lt;li>将配置项 &lt;code>raft.endpoint&lt;/code> 从 Graph 作用域移动到 Server 作用域中。&lt;/li>
+&lt;/ul>
+&lt;h4 id="其它修改">其它修改&lt;/h4>
+&lt;ul>
+&lt;li>refact(core): enhance schema job module.&lt;/li>
+&lt;li>refact(raft): improve raft module &amp;amp; test &amp;amp; install snapshot and add peer.&lt;/li>
+&lt;li>refact(core): remove early cycle detection &amp;amp; limit max depth.&lt;/li>
+&lt;li>cache: fix assert node.next==empty.&lt;/li>
+&lt;li>fix apache license conflicts: jnr-posix and jboss-logging.&lt;/li>
+&lt;li>chore: add logo in README &amp;amp; remove outdated log4j version.&lt;/li>
+&lt;li>refact(core): improve CachedGraphTransaction perf.&lt;/li>
+&lt;li>chore: update CI config &amp;amp; support ci robot &amp;amp; add codeQL SEC-check &amp;amp; graph option.&lt;/li>
+&lt;li>refact: ingore security check api &amp;amp; fix some bugs &amp;amp; clean code.&lt;/li>
+&lt;li>doc: enhance CONTRIBUTING.md &amp;amp; README.md.&lt;/li>
+&lt;li>refact: add checkstyle plugin &amp;amp; clean/format the code.&lt;/li>
+&lt;li>refact(core): improve decode string empty bytes &amp;amp; avoid array-construct columns in BackendEntry.&lt;/li>
+&lt;li>refact(cassandra): translate ipv4 to ipv6 metrics &amp;amp; update cassandra dependency vesion.&lt;/li>
+&lt;li>chore: use .asf.yaml for apache workflow &amp;amp; replace APPLICATION_JSON with TEXT_PLAIN.&lt;/li>
+&lt;li>feat: add system schema store.&lt;/li>
+&lt;li>refact(rocksdb): update rocksdb version to 6.22 &amp;amp; improve rocksdb code.&lt;/li>
+&lt;li>refact: update mysql scope to test &amp;amp; clean protobuf style/configs.&lt;/li>
+&lt;li>chore: upgrade Dockerfile server to 0.12.0 &amp;amp; add editorconfig &amp;amp; improve ci.&lt;/li>
+&lt;li>chore: upgrade grpc version.&lt;/li>
+&lt;li>feat: support updateIfPresent/updateIfAbsent operation.&lt;/li>
+&lt;li>chore: modify abnormal logs &amp;amp; upgrade netty-all to 4.1.44.&lt;/li>
+&lt;li>refact: upgrade dependencies &amp;amp; adopt new analyzer &amp;amp; clean code.&lt;/li>
+&lt;li>chore: improve .gitignore &amp;amp; update ci configs &amp;amp; add RAT/faltten plugin.&lt;/li>
+&lt;li>chore(license): add dependencies-check ci &amp;amp; 3rd-party dependency licenses.&lt;/li>
+&lt;li>refact: Shutdown log when shutdown process &amp;amp; fix tx leak &amp;amp; enhance the file path.&lt;/li>
+&lt;li>refact: rename package to apache &amp;amp; dependency in all modules (Breaking Change).&lt;/li>
+&lt;li>chore: add license checker &amp;amp; update antrun plugin &amp;amp; fix building problem in windows.&lt;/li>
+&lt;li>feat: support one-step script for apache release v1.0.0 release.&lt;/li>
+&lt;/ul>
+&lt;h3 id="toolchain-更新">Toolchain 更新&lt;/h3>
 &lt;ul>
 &lt;li>xx&lt;/li>
 &lt;li>xx&lt;/li>
 &lt;/ul>
-&lt;h4 id="配置项修改">配置项修改：&lt;/h4>
+&lt;h3 id="computer-更新">Computer 更新&lt;/h3>
 &lt;ul>
 &lt;li>xx&lt;/li>
 &lt;li>xx&lt;/li>
 &lt;/ul>
-&lt;h4 id="其它修改-1">其它修改&lt;/h4>
-&lt;ul>
-&lt;li>xx&lt;/li>
-&lt;li>xx&lt;/li>
-&lt;/ul>
-&lt;h3 id="toolchain">Toolchain&lt;/h3>
-&lt;ul>
-&lt;li>xx&lt;/li>
-&lt;li>xx&lt;/li>
-&lt;/ul>
-&lt;h3 id="computer">Computer&lt;/h3>
-&lt;ul>
-&lt;li>xx&lt;/li>
-&lt;li>xx&lt;/li>
-&lt;/ul>
-&lt;h3 id="commons">Commons&lt;/h3>
+&lt;h3 id="commons-更新">Commons 更新&lt;/h3>
 &lt;ul>
 &lt;li>xx&lt;/li>
 &lt;li>xx&lt;/li>

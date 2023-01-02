@@ -8,49 +8,97 @@
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-computer/releases/tag/1.0.0">Computer Release Note&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-commons/releases/tag/1.0.0">Commons Release Note&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h3 id="server-api--client">Server (API &amp;amp; Client)&lt;/h3>
-&lt;h4 id="接口更新">接口更新&lt;/h4>
+&lt;h3 id="oltp-api--client-changes">OLTP API &amp;amp; Client Changes&lt;/h3>
+&lt;h4 id="api-changes">API Changes&lt;/h4>
 &lt;ul>
-&lt;li>xx&lt;/li>
-&lt;li>xx&lt;/li>
+&lt;li>feat(api): support hot set trace through /exception/trace API.&lt;/li>
+&lt;li>feat(api): support query by cypher language.&lt;/li>
+&lt;li>feat(api): support swagger UI to viewing API.&lt;/li>
 &lt;/ul>
-&lt;h4 id="其它修改">其它修改&lt;/h4>
+&lt;h4 id="client-changes">Client Changes&lt;/h4>
 &lt;ul>
-&lt;li>xx&lt;/li>
 &lt;li>xx&lt;/li>
 &lt;/ul>
 &lt;h3 id="core--server">Core &amp;amp; Server&lt;/h3>
-&lt;h4 id="功能更新">功能更新&lt;/h4>
+&lt;h4 id="feature-changes">Feature Changes&lt;/h4>
+&lt;ul>
+&lt;li>feat: support java 11 &amp;amp; adapt shell/ci code.&lt;/li>
+&lt;li>feat(core): support adamic-adar &amp;amp; resource-allocation algorithms.&lt;/li>
+&lt;li>feat(hbase): support hash rowkey struct &amp;amp; pre-init tables.&lt;/li>
+&lt;li>feat(core): support query data by use cypher language.&lt;/li>
+&lt;li>feat(core): support automatic management for cluster role.&lt;/li>
+&lt;li>feat(core): support 16 OLAP algorithms, like LPA, Louvain, PageRank, BetweennessCentrality, RingsDetect.&lt;/li>
+&lt;/ul>
+&lt;h4 id="bug-fix">Bug Fix&lt;/h4>
+&lt;ul>
+&lt;li>fix(core): NoSuchMethodError Relations() &amp;amp; can&amp;rsquo;t query edges by multi labels + properties.&lt;/li>
+&lt;li>fix(core): limit max depth for cycle detection.&lt;/li>
+&lt;li>fix(core): traversal contains Tree step has different result.&lt;/li>
+&lt;li>fix edge batch update error.&lt;/li>
+&lt;li>fix unexpected task status.&lt;/li>
+&lt;li>fix(core): edge cache not clear when update or delete associated vertex.&lt;/li>
+&lt;li>fix(mysql): run g.V() is error when it&amp;rsquo;s MySQL backend.&lt;/li>
+&lt;li>fix: close exception and server-info EXPIRED_INTERVAL.&lt;/li>
+&lt;li>fix: export ConditionP.&lt;/li>
+&lt;li>fix: query by within + Text.contains.&lt;/li>
+&lt;li>fix: schema label race condition of addIndexLabel/removeIndexLabel.&lt;/li>
+&lt;li>fix: limit admin role can drop graph.&lt;/li>
+&lt;li>fix: ProfileApi url check &amp;amp; add build package to ignore file.&lt;/li>
+&lt;li>fix: can&amp;rsquo;t shutdown when starting with exception.&lt;/li>
+&lt;li>fix: Traversal.graph is empty in StepStrategy.apply() with count().is(0).&lt;/li>
+&lt;li>fix: possible extra comma before where statement in MySQL backend.&lt;/li>
+&lt;li>fix: JNA UnsatisfiedLinkError for Apple M1.&lt;/li>
+&lt;li>fix: start RpcServer NPE &amp;amp; args count of ACTION_CLEARED error &amp;amp; example error.&lt;/li>
+&lt;li>fix: rpc server not start.&lt;/li>
+&lt;li>fix: User-controlled data in numeric cast &amp;amp; remove word dependency.&lt;/li>
+&lt;li>fix: closing iterators on errors for Cassandra &amp;amp; Mysql.&lt;/li>
+&lt;/ul>
+&lt;h4 id="options-changes">Options Changes&lt;/h4>
+&lt;ul>
+&lt;li>move &lt;code>raft.endpoint&lt;/code> option from graph scope to server scope.&lt;/li>
+&lt;/ul>
+&lt;h4 id="other-changes">Other Changes&lt;/h4>
+&lt;ul>
+&lt;li>refact(core): enhance schema job module.&lt;/li>
+&lt;li>refact(raft): improve raft module &amp;amp; test &amp;amp; install snapshot and add peer.&lt;/li>
+&lt;li>refact(core): remove early cycle detection &amp;amp; limit max depth.&lt;/li>
+&lt;li>cache: fix assert node.next==empty.&lt;/li>
+&lt;li>fix apache license conflicts: jnr-posix and jboss-logging.&lt;/li>
+&lt;li>chore: add logo in README &amp;amp; remove outdated log4j version.&lt;/li>
+&lt;li>refact(core): improve CachedGraphTransaction perf.&lt;/li>
+&lt;li>chore: update CI config &amp;amp; support ci robot &amp;amp; add codeQL SEC-check &amp;amp; graph option.&lt;/li>
+&lt;li>refact: ingore security check api &amp;amp; fix some bugs &amp;amp; clean code.&lt;/li>
+&lt;li>doc: enhance CONTRIBUTING.md &amp;amp; README.md.&lt;/li>
+&lt;li>refact: add checkstyle plugin &amp;amp; clean/format the code.&lt;/li>
+&lt;li>refact(core): improve decode string empty bytes &amp;amp; avoid array-construct columns in BackendEntry.&lt;/li>
+&lt;li>refact(cassandra): translate ipv4 to ipv6 metrics &amp;amp; update cassandra dependency vesion.&lt;/li>
+&lt;li>chore: use .asf.yaml for apache workflow &amp;amp; replace APPLICATION_JSON with TEXT_PLAIN.&lt;/li>
+&lt;li>feat: add system schema store.&lt;/li>
+&lt;li>refact(rocksdb): update rocksdb version to 6.22 &amp;amp; improve rocksdb code.&lt;/li>
+&lt;li>refact: update mysql scope to test &amp;amp; clean protobuf style/configs.&lt;/li>
+&lt;li>chore: upgrade Dockerfile server to 0.12.0 &amp;amp; add editorconfig &amp;amp; improve ci.&lt;/li>
+&lt;li>chore: upgrade grpc version.&lt;/li>
+&lt;li>feat: support updateIfPresent/updateIfAbsent operation.&lt;/li>
+&lt;li>chore: modify abnormal logs &amp;amp; upgrade netty-all to 4.1.44.&lt;/li>
+&lt;li>refact: upgrade dependencies &amp;amp; adopt new analyzer &amp;amp; clean code.&lt;/li>
+&lt;li>chore: improve .gitignore &amp;amp; update ci configs &amp;amp; add RAT/faltten plugin.&lt;/li>
+&lt;li>chore(license): add dependencies-check ci &amp;amp; 3rd-party dependency licenses.&lt;/li>
+&lt;li>refact: Shutdown log when shutdown process &amp;amp; fix tx leak &amp;amp; enhance the file path.&lt;/li>
+&lt;li>refact: rename package to apache &amp;amp; dependency in all modules (Breaking Change).&lt;/li>
+&lt;li>chore: add license checker &amp;amp; update antrun plugin &amp;amp; fix building problem in windows.&lt;/li>
+&lt;li>feat: support one-step script for apache release v1.0.0 release.&lt;/li>
+&lt;/ul>
+&lt;h3 id="toolchain-changes">Toolchain Changes&lt;/h3>
 &lt;ul>
 &lt;li>xx&lt;/li>
 &lt;li>xx&lt;/li>
 &lt;/ul>
-&lt;h4 id="bug修复">BUG修复&lt;/h4>
+&lt;h3 id="computer-changes">Computer Changes&lt;/h3>
 &lt;ul>
 &lt;li>xx&lt;/li>
 &lt;li>xx&lt;/li>
 &lt;/ul>
-&lt;h4 id="配置项修改">配置项修改：&lt;/h4>
-&lt;ul>
-&lt;li>xx&lt;/li>
-&lt;li>xx&lt;/li>
-&lt;/ul>
-&lt;h4 id="其它修改-1">其它修改&lt;/h4>
-&lt;ul>
-&lt;li>xx&lt;/li>
-&lt;li>xx&lt;/li>
-&lt;/ul>
-&lt;h3 id="toolchain">Toolchain&lt;/h3>
-&lt;ul>
-&lt;li>xx&lt;/li>
-&lt;li>xx&lt;/li>
-&lt;/ul>
-&lt;h3 id="computer">Computer&lt;/h3>
-&lt;ul>
-&lt;li>xx&lt;/li>
-&lt;li>xx&lt;/li>
-&lt;/ul>
-&lt;h3 id="commons">Commons&lt;/h3>
+&lt;h3 id="commons-changes">Commons Changes&lt;/h3>
 &lt;ul>
 &lt;li>xx&lt;/li>
 &lt;li>xx&lt;/li>
