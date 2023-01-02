@@ -15,9 +15,9 @@ weight: 1
 
 #### API 接口更新
 
-- feat(api): support hot set trace through /exception/trace API.
-- feat(api): support query by cypher language.
-- feat(api): support swagger UI to viewing API.
+- 支持热更新`trace`开关的 API `/exception/trace`。
+- 支持 Cypher 图查询语言。
+- 支持 通过 Swagger UI 接口来查看 API 列表。
 
 #### Client 客户端更新
 
@@ -27,35 +27,42 @@ weight: 1
 
 #### 功能更新
 
-- feat: support java 11 & adapt shell/ci code.
-- feat(core): support adamic-adar & resource-allocation algorithms.
-- feat(hbase): support hash rowkey struct & pre-init tables.
-- feat(core): support query data by use cypher language.
-- feat(core): support automatic management for cluster role.
-- feat(core): support 16 OLAP algorithms, like LPA, Louvain, PageRank, BetweennessCentrality, RingsDetect.
+- 支持 Java 11 版本。
+- 支持 2 个新的 OLTP 算法： adamic-adar 和 resource-allocation。
+- 支持 HBase 后端使用哈希 RowKey，并且允许预初始化 HBase 表.
+- 支持 Cypher 图查询语言。
+- 支持集群 Master 角色的自动管理与故障转移。
+- 支持 16 个 OLAP 算法, 包括：LPA, Louvain, PageRank, BetweennessCentrality, RingsDetect等。
 
 #### Bug 修复
 
-- fix(core): NoSuchMethodError Relations() & can't query edges by multi labels + properties.
-- fix(core): limit max depth for cycle detection.
+- 修复无法根据多个Label和属性来查询边数据。
+- 增加对环路检测算法的最大深度限制。
 - fix: tree step & edge batch update error & edge cache & task status.
-- fix(mysql): run g.V() is error & update ci with docker image in MySQL.
-- fix: close exception and server-info EXPIRED_INTERVAL.
-- fix: export ConditionP.
-- fix: query by within + Text.contains.
-- fix: schema label race condition of addIndexLabel/removeIndexLabel.
-- fix: limit admin role can drop graph.
-- fix: ProfileApi url check & add build package to ignore file
-- fix: empty-graph in count().is(0)& can't shutdown with exception & possible extra comma.
-- fix: JNA UnsatisfiedLinkError for Apple M1.
-- fix: start RpcServer NPE & args count of ACTION_CLEARED error & example error.
-- fix: rpc server not start.
-- fix: User-controlled data in numeric cast & remove word dependency.
-- fix: closing iterators on errors for Cassandra & Mysql.
+- 修复 tree() 返回结果异常问题。
+- 修复批量更新边传入 Id 时的检查异常问题。
+- 解决非预期的 Task 状态问题。
+- 解决在更新顶点时未清除边缓存的问题。
+- 修复 MySQL 后端执行 g.V() 错误。
+- 修复因为 server-info 无法超时导致的问题。
+- 导出了 ConditionP 类型用于 Gremlin 中用户使用。
+- 修复 within + Text.contains 查询问题。
+- 修复 addIndexLabel/removeIndexLabel 接口的竞争条件问题。
+- 限制仅 Admin 允许输出图实例。
+- 修复 Profile API 的检查问题。
+- 修复 Empty Graph 在 count().is(0) 查询中的问题。
+- 修复异常时无法关闭服务的问题。
+- 修复在 Apple M1 系统上的 JNA 报错 UnsatisfiedLinkError 的问题。
+- 修复启动 RpcServer 时报 NPE 的问题。
+- 修复 ACTION_CLEARED 参数数量的问题。
+- 修复 RPC 服务启动问题。
+- 修复用户传入参数可能得数字转换隐患问题。
+- 移除了 Word 分词器依赖。
+- 修复 Cassandra 与 MySQL 后端在异常时关闭迭代器的问题。
 
 #### 配置项更新
 
-- move `raft.endpoint` option from graph scope to server scope.
+- 将配置项 `raft.endpoint` 从 Graph 作用域移动到 Server 作用域中。
 
 #### 其它修改
 
