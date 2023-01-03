@@ -136,3 +136,26 @@ bin/start-computer.sh -d local -r master
 1. 确保官网至少满足 [apache website check](https://whimsy.apache.org/pods/project/hugegraph), 以及没有死链等
 2. 更新**下载链接**以及版本更新说明
 3. ...
+
+## 邮件模板
+
+检查完成后, 你应该按不同角色回复邮件: (普通开发者 & PMC 成员)
+
+```markdown
++1 (non-binding)
+I have checked:
+- xx
+- xx
+- ...
+```
+
+特别注意 PMC 成员必须使用 `binding` 标记回复邮件, 这对于统计有效投票很重要;
+
+```markdown
++1 (binding)
+I have checked:
+- xx
+- xx
+- ...
+```
+
