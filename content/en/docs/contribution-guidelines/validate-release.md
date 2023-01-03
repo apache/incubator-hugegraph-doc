@@ -137,3 +137,24 @@ more reference official website: https://hugegraph.apache.org/cn/docs/quickstart
 1. Make sure that the official website at least meets [apache website check](https://whimsy.apache.org/pods/project/hugegraph), and no circular links etc.
 2. Update **download link** and version update instructions
 3. ...
+
+## Mail Template
+
+After the check & test, you should reply the mail with the following content: (normal devs & PMC)
+```markdown
++1 (non-binding)
+I have checked:
+- xx
+- xx
+- ...
+```
+
+and the PMC members should reply with `binding`, it's important for summary the valid votes:
+```markdown
++1 (binding)
+I have checked:
+- xx
+- xx
+- ...
+```
+
