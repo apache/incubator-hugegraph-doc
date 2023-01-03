@@ -112,6 +112,22 @@ mvn clean package -Dmaven.test.skip=true -Dcheckstyle.skip=true
 
 1. 文件夹都带有 `incubating`
 2. 存在 `LICENSE` + `NOTICE` 文件并且内容正常
+3. 服务启动
+```bash
+# hugegraph-server
+bin/start-hugegraph.sh
+
+# hugegraph-loader
+bin/hugegraph-loader.sh -f path -g graph -s schema
+
+# hugegraph-hubble
+bin/start-hubble.sh
+
+# hugegraph-computer
+bin/start-computer.sh -d local -r master
+
+更多参考官网: https://hugegraph.apache.org/cn/docs/quickstart
+```
 
 **注:** 如果二进制包里面引入了第三方依赖, 则需要更新 LICENSE, 加入第三方依赖的 LICENSE; 若第三方依赖 LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更新我们的 NOTICE 文件
 

@@ -113,7 +113,22 @@ After decompressing `xxx-hugegraph.tar.gz`, perform the following checks:
 
 1. folders with `incubating`
 2. `LICENSE` and `NOTICE` file exists and the content is normal
-3. Confirm that the signature of each file is normal through the gpg command
+3. start server
+```bash
+# hugegraph-server
+bin/start-hugegraph.sh
+
+# hugegraph-loader
+bin/hugegraph-loader.sh -f path -g graph -s schema
+
+# hugegraph-hubble
+bin/start-hubble.sh
+
+# hugegraph-computer
+bin/start-computer.sh -d local -r master
+
+more reference official website: https://hugegraph.apache.org/cn/docs/quickstart
+```
 
 **Note:** If a third-party dependency is introduced in the binary package, you need to update the LICENSE and add the third-party dependent LICENSE; if the third-party dependent LICENSE is Apache 2.0, and the corresponding project contains NOTICE, you also need to update Our NOTICE file
 
