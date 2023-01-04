@@ -16,27 +16,30 @@ weight: 1
 #### API Changes
 
 - feat(api): support hot set trace through /exception/trace API.
-- feat(api): support query by cypher language.
+- feat(api): support query by Cypher language.
 - feat(api): support swagger UI to viewing API.
 
 #### Client Changes
 
-- xx
+- feat(client) support Cypher query API.
+- refact(client): change 'limit' type from long to int.
+- feat(client): server bypass for hbase writing (Beta).
 
 ### Core & Server
 
 #### Feature Changes
 
-- feat: support java 11 & adapt shell/ci code.
+- feat: support Java 11.
 - feat(core): support adamic-adar & resource-allocation algorithms.
-- feat(hbase): support hash rowkey struct & pre-init tables.
-- feat(core): support query data by use cypher language.
-- feat(core): support automatic management for cluster role.
-- feat(core): support 16 OLAP algorithms, like LPA, Louvain, PageRank, BetweennessCentrality, RingsDetect.
+- feat(hbase): support hash rowkey & pre-init tables.
+- feat(core): support query by Cypher language.
+- feat(core): support automatic management and failover for cluster role.
+- feat(core): support 16 OLAP algorithms, like: LPA, Louvain, PageRank, BetweennessCentrality, RingsDetect.
 
 #### Bug Fix
 
-- fix(core): NoSuchMethodError Relations() & can't query edges by multi labels + properties.
+- fix(core): can't query edges by multi labels + properties.
+- fix(core): occasionally NoSuchMethodError Relations().
 - fix(core): limit max depth for cycle detection.
 - fix(core): traversal contains Tree step has different result.
 - fix edge batch update error.
