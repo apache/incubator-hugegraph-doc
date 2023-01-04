@@ -9,22 +9,20 @@
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-commons/releases/tag/1.0.0">Commons Release Note&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="oltp-api--client-更新">OLTP API &amp;amp; Client 更新&lt;/h3>
-&lt;h4 id="api-接口更新">API 接口更新&lt;/h4>
+&lt;h4 id="apiclient-接口更新">API/Client 接口更新&lt;/h4>
 &lt;ul>
-&lt;li>支持热更新&lt;code>trace&lt;/code>开关的 API &lt;code>/exception/trace&lt;/code>。&lt;/li>
-&lt;li>支持 Cypher 图查询语言。&lt;/li>
+&lt;li>支持热更新&lt;code>trace&lt;/code>开关的 &lt;code>/exception/trace&lt;/code> API。&lt;/li>
+&lt;li>支持 Cypher 图查询语言 API。&lt;/li>
 &lt;li>支持通过 Swagger UI 接口来查看提供的 API 列表。&lt;/li>
-&lt;/ul>
-&lt;h4 id="client-客户端更新">Client 客户端更新&lt;/h4>
-&lt;ul>
-&lt;li>xx&lt;/li>
+&lt;li>将各算法中 &amp;rsquo;limit&amp;rsquo; 参数的类型由 long 调整为 int。&lt;/li>
+&lt;li>支持在 Client 端跳过 Server 对 HBase 写入数据 (Beta)。&lt;/li>
 &lt;/ul>
 &lt;h3 id="core--server">Core &amp;amp; Server&lt;/h3>
 &lt;h4 id="功能更新">功能更新&lt;/h4>
 &lt;ul>
 &lt;li>支持 Java 11 版本。&lt;/li>
 &lt;li>支持 2 个新的 OLTP 算法： adamic-adar 和 resource-allocation。&lt;/li>
-&lt;li>支持 HBase 后端使用哈希 RowKey，并且允许预初始化 HBase 表.&lt;/li>
+&lt;li>支持 HBase 后端使用哈希 RowKey，并且允许预初始化 HBase 表。&lt;/li>
 &lt;li>支持 Cypher 图查询语言。&lt;/li>
 &lt;li>支持集群 Master 角色的自动管理与故障转移。&lt;/li>
 &lt;li>支持 16 个 OLAP 算法, 包括：LPA, Louvain, PageRank, BetweennessCentrality, RingsDetect等。&lt;/li>

@@ -12,26 +12,29 @@
 &lt;h4 id="api-changes">API Changes&lt;/h4>
 &lt;ul>
 &lt;li>feat(api): support hot set trace through /exception/trace API.&lt;/li>
-&lt;li>feat(api): support query by cypher language.&lt;/li>
+&lt;li>feat(api): support query by Cypher language.&lt;/li>
 &lt;li>feat(api): support swagger UI to viewing API.&lt;/li>
 &lt;/ul>
 &lt;h4 id="client-changes">Client Changes&lt;/h4>
 &lt;ul>
-&lt;li>xx&lt;/li>
+&lt;li>feat(client) support Cypher query API.&lt;/li>
+&lt;li>refact(client): change &amp;rsquo;limit&amp;rsquo; type from long to int.&lt;/li>
+&lt;li>feat(client): server bypass for hbase writing (Beta).&lt;/li>
 &lt;/ul>
 &lt;h3 id="core--server">Core &amp;amp; Server&lt;/h3>
 &lt;h4 id="feature-changes">Feature Changes&lt;/h4>
 &lt;ul>
-&lt;li>feat: support java 11 &amp;amp; adapt shell/ci code.&lt;/li>
+&lt;li>feat: support Java 11.&lt;/li>
 &lt;li>feat(core): support adamic-adar &amp;amp; resource-allocation algorithms.&lt;/li>
-&lt;li>feat(hbase): support hash rowkey struct &amp;amp; pre-init tables.&lt;/li>
-&lt;li>feat(core): support query data by use cypher language.&lt;/li>
-&lt;li>feat(core): support automatic management for cluster role.&lt;/li>
-&lt;li>feat(core): support 16 OLAP algorithms, like LPA, Louvain, PageRank, BetweennessCentrality, RingsDetect.&lt;/li>
+&lt;li>feat(hbase): support hash rowkey &amp;amp; pre-init tables.&lt;/li>
+&lt;li>feat(core): support query by Cypher language.&lt;/li>
+&lt;li>feat(core): support automatic management and failover for cluster role.&lt;/li>
+&lt;li>feat(core): support 16 OLAP algorithms, like: LPA, Louvain, PageRank, BetweennessCentrality, RingsDetect.&lt;/li>
 &lt;/ul>
 &lt;h4 id="bug-fix">Bug Fix&lt;/h4>
 &lt;ul>
-&lt;li>fix(core): NoSuchMethodError Relations() &amp;amp; can&amp;rsquo;t query edges by multi labels + properties.&lt;/li>
+&lt;li>fix(core): can&amp;rsquo;t query edges by multi labels + properties.&lt;/li>
+&lt;li>fix(core): occasionally NoSuchMethodError Relations().&lt;/li>
 &lt;li>fix(core): limit max depth for cycle detection.&lt;/li>
 &lt;li>fix(core): traversal contains Tree step has different result.&lt;/li>
 &lt;li>fix edge batch update error.&lt;/li>
