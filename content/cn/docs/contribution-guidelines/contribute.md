@@ -20,7 +20,7 @@ Before submitting the code, we need to do some preparation:
 
 1. Sign up or login to GitHub:  [https://github.com](https://github.com)
 
-2. Fork HugeGraph repo from GitHub: [https://github.com/apache/incubator-hugegraph/fork](https://github.com/hugegraph/hugegraph/fork)
+2. Fork HugeGraph repo from GitHub: [https://github.com/apache/incubator-hugegraph/fork](https://github.com/apache/hugegraph/fork)
 
 3. Clone code from fork repo to local: [https://github.com/${GITHUB_USER_NAME}/hugegraph](https://github.com/${GITHUB_USER_NAME}/hugegraph)
 
@@ -35,7 +35,7 @@ Before submitting the code, we need to do some preparation:
    cd hugegraph
 
    # add upstream to synchronize the latest code
-   git remote add hugegraph https://github.com/hugegraph/hugegraph
+   git remote add hugegraph https://github.com/apache/hugegraph
 
    # set name and email to push code to github
    git config user.name "{full-name}" # like "Jermy Li"
@@ -46,7 +46,7 @@ Optional: You can use [GitHub desktop](https://desktop.github.com/) to greatly s
 
 ## 2. Create an Issue on GitHub
 
-If you encounter bugs or have any questions, please go to [GitHub Issues](https://github.com/apache/incubator-hugegraph/issues) to report them and feel free to [create an issue](https://github.com/hugegraph/hugegraph/issues/new).
+If you encounter bugs or have any questions, please go to [GitHub Issues](https://github.com/apache/incubator-hugegraph/issues) to report them and feel free to [create an issue](https://github.com/apache/hugegraph/issues/new).
 
 ## 3. Make changes of code locally
 
@@ -69,8 +69,8 @@ Assume that we need to modify some files like "HugeGraph.java" and "HugeFactory.
 
 ```shell
 # modify code to fix a bug
-vim hugegraph-core/src/main/java/com/baidu/hugegraph/HugeGraph.java
-vim hugegraph-core/src/main/java/com/baidu/hugegraph/HugeFactory.java
+vim hugegraph-core/src/main/java/org/apache/hugegraph/HugeGraph.java
+vim hugegraph-core/src/main/java/org/apache/hugegraph/HugeFactory.java
 # run test locally (optional)
 mvn test -Pcore-test,memory
 ```
@@ -82,8 +82,8 @@ After the code has been completed, we submit them to the local git repo:
 
 ```shell
 # add files to local git index
-git add hugegraph-core/src/main/java/com/baidu/hugegraph/HugeGraph.java
-git add hugegraph-core/src/main/java/com/baidu/hugegraph/HugeFactory.java
+git add hugegraph-core/src/main/java/org/apache/hugegraph/HugeGraph.java
+git add hugegraph-core/src/main/java/org/apache/hugegraph/HugeFactory.java
 # commit to local git repo
 git commit
 ```

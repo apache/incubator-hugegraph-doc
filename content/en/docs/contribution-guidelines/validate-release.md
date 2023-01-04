@@ -4,7 +4,7 @@ linkTitle: "Validate Apache Release"
 weight: 3
 ---
 
-> TODO: enhance this doc soon
+> Note: this doc will be updated continuously.
 
 ## Verification
 
@@ -143,18 +143,22 @@ more reference official website: https://hugegraph.apache.org/cn/docs/quickstart
 After the check & test, you should reply the mail with the following content: (normal devs & PMC)
 ```markdown
 +1 (non-binding)
-I have checked:
-- xx
-- xx
-- ...
+I checked:
+1. All download links are valid
+2. Checksum and signature are OK
+3. LICENSE and NOTICE are exist
+4. Build successfully on macOS(Big Sur) 
+5. ....
 ```
 
 and the PMC members should reply with `binding`, it's important for summary the valid votes:
 ```markdown
 +1 (binding)
-I have checked:
-- xx
-- xx
-- ...
+I checked:
+1. All download links are valid
+2. Checksum and signature are OK
+3. LICENSE and NOTICE are exist
+4. Build successfully on macOS(Big Sur) 
+5. ....
 ```
 

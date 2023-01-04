@@ -97,4 +97,4 @@ weight: 5
 
   请求头中需要指定`Content-Type:application/json`
 
-其他问题可以在对应项目的 issue 区搜索，例如 [Server-Issues](https://github.com/hugegraph/hugegraph/issues) / [Loader Issues](https://github.com/hugegraph/hugegraph-loader/issues)
+其他问题可以在对应项目的 issue 区搜索，例如 [Server-Issues](https://github.com/apache/hugegraph/issues) / [Loader Issues](https://github.com/apache/hugegraph-toolchain/issues)

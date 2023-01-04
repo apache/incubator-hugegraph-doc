@@ -27,10 +27,10 @@ wget https://github.com/gohugoio/hugo/releases/download/v0.95.0/hugo_extended_0.
 sudo install hugo /usr/bin # 如果 mac 提示没有权限, 你可以直接使用它, 也可以 mv hugo /usr/bin 代替
 
 # 1. download website's source code
-git clone https://github.com/hugegraph/hugegraph-doc.git website
+git clone https://github.com/apache/hugegraph-doc.git website
 
 # if download slowly or failed, try the proxy url
-git clone https://api.mtr.pub/hugegraph/hugegraph-doc.git website # or https://github.do/https://github.com/hugegraph/hugegraph-doc.git
+git clone https://api.mtr.pub/apache/hugegraph-doc.git website # or https://github.do/https://github.com/apache/hugegraph-doc.git
 
 # 2. install npm dependencies in project root dir
 cd website && npm install
@@ -51,11 +51,11 @@ You can find detailed **theme instructions** in the [Docsy user guide - Content 
 
 1. `config.toml` in the **root dir** is global config
 2. `config.toml` in the `./themes/docsy` is theme config
-3. `content` dir contains multi language contens (docs/index-html/blog/about/bg-imgage), it's the most important dir
+3. `content` dir contains multi-language contents (docs/index-html/blog/about/bg-image), it's the most important dir
     - `content/en` represent english site, we do need translate the `doc` in it (可先用 google 翻译, 紧急)
     - `content/cn` represent chinese site (需要汉化其中英文部分)
 
-We can see some [example website](https://www.docsy.dev/docs/examples/) & refer to their github **source code** to reduce time to design
+We can see some [example website](https://www.docsy.dev/docs/examples/) & refer to their GitHub **source code** to reduce time to design
 
 <img width="440" alt="image" src="https://user-images.githubusercontent.com/17706099/164688677-c2da2fc6-a88e-4786-a648-07a481cc8f9d.png">
 
