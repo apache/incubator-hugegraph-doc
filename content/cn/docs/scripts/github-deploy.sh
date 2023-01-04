@@ -2,7 +2,7 @@
 set -x
 # this script is for developers to manually deploy doc to GitHub Pages
 REMOTE="github"
-REMOTE_URL="https://github.com/hugegraph/hugegraph-doc"
+REMOTE_URL="https://github.com/apache/hugegraph-doc"
 REPO="hugegraph-doc"
 BRANCH_BUILD="master"
 BRANCH_PAGES="gh-pages"

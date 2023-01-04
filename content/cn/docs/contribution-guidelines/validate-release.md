@@ -4,6 +4,8 @@ linkTitle: "验证 Apache 发版"
 weight: 3
 ---
 
+> Note: 这篇文档会持续更新。
+
 ## 验证阶段
 
 当内部的临时发布和打包工作完成后, 其他的社区开发者(尤其是 PMC)需要参与到[验证环节](https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist)确保某个人发布版本的"正确性 + 完整性", 这里需要**每个人**都尽量参与, 然后后序**邮件回复**的时候说明自己**已检查**了哪些项. (下面是核心项)
@@ -136,3 +138,30 @@ bin/start-computer.sh -d local -r master
 1. 确保官网至少满足 [apache website check](https://whimsy.apache.org/pods/project/hugegraph), 以及没有死链等
 2. 更新**下载链接**以及版本更新说明
 3. ...
+
+## 邮件模板
+
+检查完成后, 你应该按不同角色回复邮件: (普通开发者 & PMC 成员)
+
+```markdown
++1 (non-binding)
+I checked:
+1. All download links are valid
+2. Checksum and signature are OK
+3. LICENSE and NOTICE are exist
+4. Build successfully on macOS(Big Sur) 
+5. ....
+```
+
+特别注意 PMC 成员必须使用 `binding` 标记回复邮件, 这对于统计有效投票很重要;
+
+```markdown
++1 (binding)
+I checked:
+1. All download links are valid
+2. Checksum and signature are OK
+3. LICENSE and NOTICE are exist
+4. Build successfully on macOS(Big Sur) 
+5. ....
+```
+

@@ -42,13 +42,15 @@ gcc --version
 
 #### 3.1 一键部署
 
-HugeGraph-Tools提供了一键部署的命令行工具，用户可以使用该工具快速地一键下载、解压、配置并启动HugeGraphServer和HugeGraphStudio。
-当然，还是得先下载HugeGraph-Tools的tar包。
+HugeGraph-Tools 提供了一键部署的命令行工具，用户可以使用该工具快速地一键下载、解压、配置并启动 HugeGraph-Server 和 HugeGraph-Hubble
+最新的 HugeGraph-Toolchain 中已经包含所有的这些工具, 直接下载它解压就有工具包集合了
 
 ```bash
-wget https://github.com/hugegraph/hugegraph-tools/releases/download/v${version}/hugegraph-tools-${version}.tar.gz
-tar -zxvf hugegraph-tools-${version}.tar.gz
-cd hugegraph-tools-${version}
+# download toolchain package, it includes loader + tool + hubble, please check the latest version (here is 1.0.0)
+wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
+tar zxf *hugegraph-*.tar.gz
+# enter the tool's package
+cd *hugegraph*/*tool* 
 ```
 
 > 注：${version}为版本号，最新版本号可参考[Download页面](/docs/download/download)，或直接从Download页面点击链接下载
@@ -64,8 +66,9 @@ bin/hugegraph deploy -v {hugegraph-version} -p {install-path} [-u {download-path
 #### 3.2 下载tar包
 
 ```bash
-wget https://github.com/hugegraph/hugegraph/releases/download/v${version}/hugegraph-${version}.tar.gz
-tar -zxvf hugegraph-${version}.tar.gz
+# use the latest version, here is 1.0.0 for example
+wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz
+tar zxf *hugegraph*.tar.gz
 ```
 
 #### 3.3 源码编译
@@ -73,7 +76,7 @@ tar -zxvf hugegraph-${version}.tar.gz
 下载HugeGraph源代码
 
 ```bash
-git clone https://github.com/hugegraph/hugegraph.git
+git clone https://github.com/apache/hugegraph.git
 ```
 
 编译打包生成tar包

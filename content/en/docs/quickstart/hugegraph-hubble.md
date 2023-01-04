@@ -36,9 +36,9 @@ For Gremlin tasks that need to traverse the whole graph, index creation and reco
 
 The module usage process of the platform is as follows:
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/images-hubble/2平台使用流程.png" alt="image">
-</center>
+</div>
 
 
 ### 3	Platform Instructions
@@ -46,9 +46,9 @@ The module usage process of the platform is as follows:
 ##### 3.1.1	Graph creation
 Under the graph management module, click [Create graph], and realize the connection of multiple graphs by filling in the graph ID, graph name, host name, port number, username, and password information.
 
-<center>
+<div style="text-align: center;">
   <img src="/docs/images/images-hubble/311图创建.png" alt="image">
-</center>
+</div>
 
 
 Create graph by filling in the content as follows:：

@@ -4,7 +4,7 @@ Please visit the [contribution doc](./contribution.md) to get start, include the
 
 ### Summary
 
-HugeGraph is an easy-to-use, efficient, general-purpose open source graph database system(Graph Database, [GitHub project address](https://github.com/hugegraph/hugegraph)),
+HugeGraph is an easy-to-use, efficient, general-purpose open source graph database system(Graph Database, [GitHub project address](https://github.com/apache/hugegraph)),
 implemented the [Apache TinkerPop3](https://tinkerpop.apache.org) framework and is fully compatible with the [Gremlin](https://tinkerpop.apache.org/gremlin.html) query language,
 With complete toolchain components, it helps users to easily build applications and products based on graph databases. HugeGraph supports fast import of more than 10 billion vertices and edges, and provides millisecond-level relational query capability (OLTP). 
 It supports large-scale distributed graph processing (OLAP).
