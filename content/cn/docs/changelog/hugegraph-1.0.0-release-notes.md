@@ -13,15 +13,13 @@ weight: 1
 
 ### OLTP API & Client 更新
 
-#### API 接口更新
+#### API/Client 接口更新
 
-- 支持热更新`trace`开关的 API `/exception/trace`。
-- 支持 Cypher 图查询语言。
+- 支持热更新`trace`开关的 `/exception/trace` API。
+- 支持 Cypher 图查询语言 API。
 - 支持通过 Swagger UI 接口来查看提供的 API 列表。
-
-#### Client 客户端更新
-
-- xx
+- 将各算法中 'limit' 参数的类型由 long 调整为 int。
+- 支持在 Client 端跳过 Server 对 HBase 写入数据 (Beta)。
 
 ### Core & Server
 
@@ -29,7 +27,7 @@ weight: 1
 
 - 支持 Java 11 版本。
 - 支持 2 个新的 OLTP 算法： adamic-adar 和 resource-allocation。
-- 支持 HBase 后端使用哈希 RowKey，并且允许预初始化 HBase 表.
+- 支持 HBase 后端使用哈希 RowKey，并且允许预初始化 HBase 表。
 - 支持 Cypher 图查询语言。
 - 支持集群 Master 角色的自动管理与故障转移。
 - 支持 16 个 OLAP 算法, 包括：LPA, Louvain, PageRank, BetweennessCentrality, RingsDetect等。
