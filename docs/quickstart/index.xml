@@ -294,12 +294,16 @@ restserver.url=http://0.0.0.0:8080
 &lt;li>Clone source code then compile and install&lt;/li>
 &lt;/ul>
 &lt;h4 id="21-download-the-compiled-archive">2.1 Download the compiled archive&lt;/h4>
-&lt;p>Download the latest version of the HugeGraph-Loader release package:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://github.com/hugegraph/hugegraph-loader/releases/download/v&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>/hugegraph-loader-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>.tar.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxvf hugegraph-loader-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>.tar.gz
+&lt;p>Download the latest version of the HugeGraph-Toolchain release package:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph*.tar.gz
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="22-clone-source-code-to-compile-and-install">2.2 Clone source code to compile and install&lt;/h4>
 &lt;p>Clone the latest version of HugeGraph-Loader source package:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ git clone https://github.com/hugegraph/hugegraph-loader.git
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 1. get from github&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph-toolchain.git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 2. get from direct (e.g. here is 1.0.0, please choose the latest version)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0-src.tar.gz
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Due to the license limitation of the &lt;code>Oracle OJDBC&lt;/code>, you need to manually install ojdbc to the local maven repository.
 Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html">Oracle jdbc downloads&lt;/a> page. Select Oracle Database 12c Release 2 (12.2.0.1) drivers, as shown in the following figure.&lt;/p>
 &lt;center>
@@ -1293,12 +1297,16 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;li>Clone source code then compile and install&lt;/li>
 &lt;/ul>
 &lt;h4 id="21-download-the-compiled-archive">2.1 Download the compiled archive&lt;/h4>
-&lt;p>Download the latest version of the HugeGraph-Tools package:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://github.com/hugegraph/hugegraph-tools/releases/download/v&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>/hugegraph-tools-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>.tar.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxvf hugegraph-tools-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>.tar.gz
+&lt;p>Download the latest version of the HugeGraph-Toolchain package:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph*.tar.gz
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="22-clone-source-code-to-compile-and-install">2.2 Clone source code to compile and install&lt;/h4>
 &lt;p>Download the latest version of the HugeGraph-Tools source package:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ git clone https://github.com/hugegraph/hugegraph-tools.git
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 1. get from github&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph-toolchain.git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 2. get from direct (e.g. here is 1.0.0, please choose the latest version)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0-src.tar.gz
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Compile and generate tar package:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-tools
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn package -DskipTests
@@ -1909,16 +1917,16 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;p>For Gremlin tasks that need to traverse the whole graph, index creation and reconstruction and other time-consuming asynchronous tasks, the platform provides corresponding task management functions to achieve unified management and result viewing of asynchronous tasks.&lt;/p>
 &lt;h3 id="2platform-workflow">2 Platform Workflow&lt;/h3>
 &lt;p>The module usage process of the platform is as follows:&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/2平台使用流程.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;h3 id="3platform-instructions">3 Platform Instructions&lt;/h3>
 &lt;h4 id="31graph-management">3.1 Graph Management&lt;/h4>
 &lt;h5 id="311graph-creation">3.1.1 Graph creation&lt;/h5>
 &lt;p>Under the graph management module, click [Create graph], and realize the connection of multiple graphs by filling in the graph ID, graph name, host name, port number, username, and password information.&lt;/p>
-&lt;center>
+&lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/311图创建.png" alt="image">
-&lt;/center>
+&lt;/div>
 &lt;p>Create graph by filling in the content as follows:：&lt;/p>
 &lt;center>
 &lt;img src="/docs/images/images-hubble/311图创建2.png" alt="image">

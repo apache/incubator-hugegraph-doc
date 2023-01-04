@@ -13,7 +13,7 @@
 &lt;p>Sign up or login to GitHub: &lt;a href="https://github.com">https://github.com&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>Fork HugeGraph repo from GitHub: &lt;a href="https://github.com/hugegraph/hugegraph/fork">https://github.com/apache/incubator-hugegraph/fork&lt;/a>&lt;/p>
+&lt;p>Fork HugeGraph repo from GitHub: &lt;a href="https://github.com/apache/hugegraph/fork">https://github.com/apache/incubator-hugegraph/fork&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Clone code from fork repo to local: &lt;a href="https://github.com/$%7BGITHUB_USER_NAME%7D/hugegraph">https://github.com/${GITHUB_USER_NAME}/hugegraph&lt;/a>&lt;/p>
@@ -25,7 +25,7 @@
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># add upstream to synchronize the latest code&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git remote add hugegraph https://github.com/hugegraph/hugegraph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git remote add hugegraph https://github.com/apache/hugegraph
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># set name and email to push code to github&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git config user.name &lt;span style="color:#4e9a06">&amp;#34;{full-name}&amp;#34;&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># like &amp;#34;Jermy Li&amp;#34;&lt;/span>
@@ -34,7 +34,7 @@
 &lt;/ol>
 &lt;p>Optional: You can use &lt;a href="https://desktop.github.com/">GitHub desktop&lt;/a> to greatly simplify the commit and update process.&lt;/p>
 &lt;h2 id="2-create-an-issue-on-github">2. Create an Issue on GitHub&lt;/h2>
-&lt;p>If you encounter bugs or have any questions, please go to &lt;a href="https://github.com/apache/incubator-hugegraph/issues">GitHub Issues&lt;/a> to report them and feel free to &lt;a href="https://github.com/hugegraph/hugegraph/issues/new">create an issue&lt;/a>.&lt;/p>
+&lt;p>If you encounter bugs or have any questions, please go to &lt;a href="https://github.com/apache/incubator-hugegraph/issues">GitHub Issues&lt;/a> to report them and feel free to &lt;a href="https://github.com/apache/hugegraph/issues/new">create an issue&lt;/a>.&lt;/p>
 &lt;h2 id="3-make-changes-of-code-locally">3. Make changes of code locally&lt;/h2>
 &lt;h4 id="31-create-a-new-branch">3.1 Create a new branch&lt;/h4>
 &lt;p>Please don&amp;rsquo;t use master branch for development. We should create a new branch instead:&lt;/p>
@@ -47,16 +47,16 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="32-change-the-code">3.2 Change the code&lt;/h4>
 &lt;p>Assume that we need to modify some files like &amp;ldquo;HugeGraph.java&amp;rdquo; and &amp;ldquo;HugeFactory.java&amp;rdquo;:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># modify code to fix a bug&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vim hugegraph-core/src/main/java/com/baidu/hugegraph/HugeGraph.java
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vim hugegraph-core/src/main/java/com/baidu/hugegraph/HugeFactory.java
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vim hugegraph-core/src/main/java/org/apache/hugegraph/HugeGraph.java
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vim hugegraph-core/src/main/java/org/apache/hugegraph/HugeFactory.java
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># run test locally (optional)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn &lt;span style="color:#204a87">test&lt;/span> -Pcore-test,memory
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note: In order to be consistent with the code style easily, if you use &lt;a href="https://www.jetbrains.com/idea/">IDEA&lt;/a> as your IDE, you can directly &lt;a href="https://www.jetbrains.com/help/idea/configuring-code-style.html">import&lt;/a> our code style &lt;a href="./hugegraph-style.xml">configuration file&lt;/a>.&lt;/p>
 &lt;h4 id="33-commit-changes-to-git-repo">3.3 Commit changes to git repo&lt;/h4>
 &lt;p>After the code has been completed, we submit them to the local git repo:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># add files to local git index&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git add hugegraph-core/src/main/java/com/baidu/hugegraph/HugeGraph.java
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git add hugegraph-core/src/main/java/com/baidu/hugegraph/HugeFactory.java
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git add hugegraph-core/src/main/java/org/apache/hugegraph/HugeGraph.java
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git add hugegraph-core/src/main/java/org/apache/hugegraph/HugeFactory.java
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># commit to local git repo&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git commit
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Please edit the commit message after running &lt;code>git commit&lt;/code>, we can explain what and how to fix a bug or implement a feature, the following is an example:&lt;/p>
@@ -138,6 +138,9 @@
 &lt;p>Receive a goodbye email. After completing the above steps, you will receive a goodbye email with the subject GOODBYE from &lt;a href="mailto:dev@hugegraph.apache.org">dev@hugegraph.apache.org&lt;/a>, and you have successfully unsubscribed to the Apache HugeGraph mailing list, and you will not receive emails from &lt;a href="mailto:dev@hugegraph.apache.org">dev@hugegraph.apache.org&lt;/a>.&lt;/p>
 &lt;/li>
 &lt;/ol></description></item><item><title>Docs: 验证 Apache 发版</title><link>/cn/docs/contribution-guidelines/validate-release/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/contribution-guidelines/validate-release/</guid><description>
+&lt;blockquote>
+&lt;p>Note: 这篇文档会持续更新。&lt;/p>
+&lt;/blockquote>
 &lt;h2 id="验证阶段">验证阶段&lt;/h2>
 &lt;p>当内部的临时发布和打包工作完成后, 其他的社区开发者(尤其是 PMC)需要参与到&lt;a href="https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist">验证环节&lt;/a>确保某个人发布版本的&amp;quot;正确性 + 完整性&amp;quot;, 这里需要&lt;strong>每个人&lt;/strong>都尽量参与, 然后后序&lt;strong>邮件回复&lt;/strong>的时候说明自己&lt;strong>已检查&lt;/strong>了哪些项. (下面是核心项)&lt;/p>
 &lt;h4 id="1-准备工作">1. 准备工作&lt;/h4>
@@ -241,4 +244,22 @@
 &lt;li>确保官网至少满足 &lt;a href="https://whimsy.apache.org/pods/project/hugegraph">apache website check&lt;/a>, 以及没有死链等&lt;/li>
 &lt;li>更新&lt;strong>下载链接&lt;/strong>以及版本更新说明&lt;/li>
 &lt;li>&amp;hellip;&lt;/li>
-&lt;/ol></description></item></channel></rss>
+&lt;/ol>
+&lt;h2 id="邮件模板">邮件模板&lt;/h2>
+&lt;p>检查完成后, 你应该按不同角色回复邮件: (普通开发者 &amp;amp; PMC 成员)&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>+1 (non-binding)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>I checked:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">1.&lt;/span> All download links are valid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">2.&lt;/span> Checksum and signature are OK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">3.&lt;/span> LICENSE and NOTICE are exist
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">4.&lt;/span> Build successfully on macOS(Big Sur)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">5.&lt;/span> ....
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>特别注意 PMC 成员必须使用 &lt;code>binding&lt;/code> 标记回复邮件, 这对于统计有效投票很重要;&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>+1 (binding)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>I checked:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">1.&lt;/span> All download links are valid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">2.&lt;/span> Checksum and signature are OK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">3.&lt;/span> LICENSE and NOTICE are exist
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">4.&lt;/span> Build successfully on macOS(Big Sur)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">5.&lt;/span> ....
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

@@ -659,4 +659,4 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;p>请求头中需要指定&lt;code>Content-Type:application/json&lt;/code>&lt;/p>
 &lt;/li>
 &lt;/ul>
-&lt;p>其他问题可以在对应项目的 issue 区搜索，例如 &lt;a href="https://github.com/hugegraph/hugegraph/issues">Server-Issues&lt;/a> / &lt;a href="https://github.com/hugegraph/hugegraph-loader/issues">Loader Issues&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;p>其他问题可以在对应项目的 issue 区搜索，例如 &lt;a href="https://github.com/apache/hugegraph/issues">Server-Issues&lt;/a> / &lt;a href="https://github.com/apache/hugegraph-toolchain/issues">Loader Issues&lt;/a>&lt;/p></description></item></channel></rss>

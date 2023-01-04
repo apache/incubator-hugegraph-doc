@@ -1246,11 +1246,13 @@ serializer=binary
 &lt;li>方式3：源码编译&lt;/li>
 &lt;/ul>
 &lt;h4 id="31-一键部署">3.1 一键部署&lt;/h4>
-&lt;p>HugeGraph-Tools提供了一键部署的命令行工具，用户可以使用该工具快速地一键下载、解压、配置并启动HugeGraphServer和HugeGraphStudio。
-当然，还是得先下载HugeGraph-Tools的tar包。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://github.com/hugegraph/hugegraph-tools/releases/download/v&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>/hugegraph-tools-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>.tar.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar -zxvf hugegraph-tools-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>.tar.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-tools-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
+&lt;p>HugeGraph-Tools 提供了一键部署的命令行工具，用户可以使用该工具快速地一键下载、解压、配置并启动 HugeGraph-Server 和 HugeGraph-Hubble
+最新的 HugeGraph-Toolchain 中已经包含所有的这些工具, 直接下载它解压就有工具包集合了&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># download toolchain package, it includes loader + tool + hubble, please check the latest version (here is 1.0.0)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph-*.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># enter the tool&amp;#39;s package&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph*/*tool*
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
 &lt;p>注：${version}为版本号，最新版本号可参考&lt;a href="/docs/download/download">Download页面&lt;/a>，或直接从Download页面点击链接下载&lt;/p>
 &lt;/blockquote>
@@ -1258,11 +1260,12 @@ serializer=binary
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/hugegraph deploy -v &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>hugegraph-version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span> -p &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>install-path&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>-u &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>download-path-prefix&lt;span style="color:#ce5c00;font-weight:bold">}]&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>{hugegraph-version}&lt;/code>表示要部署的HugeGraphServer及HugeGraphStudio的版本，用户可查看&lt;code>conf/version-mapping.yaml&lt;/code>文件获取版本信息，&lt;code>{install-path}&lt;/code>指定HugeGraphServer及HugeGraphStudio的安装目录，&lt;code>{download-path-prefix}&lt;/code>可选，指定HugeGraphServer及HugeGraphStudio tar包的下载地址，不提供时使用默认下载地址，比如要启动 0.6 版本的HugeGraph-Server及HugeGraphStudio将上述命令写为&lt;code>bin/hugegraph deploy -v 0.6 -p services&lt;/code>即可。&lt;/p>
 &lt;h4 id="32-下载tar包">3.2 下载tar包&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://github.com/hugegraph/hugegraph/releases/download/v&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>/hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>.tar.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar -zxvf hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>.tar.gz
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># use the latest version, here is 1.0.0 for example&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph*.tar.gz
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="33-源码编译">3.3 源码编译&lt;/h4>
 &lt;p>下载HugeGraph源代码&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone https://github.com/hugegraph/hugegraph.git
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph.git
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>编译打包生成tar包&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn package -DskipTests
@@ -1501,7 +1504,7 @@ restserver.url=http://0.0.0.0:8080
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">$bin&lt;/span>/stop-hugegraph.sh
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Introduction with HugeGraph</title><link>/cn/docs/introduction/readme/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/introduction/readme/</guid><description>
 &lt;h3 id="summary">Summary&lt;/h3>
-&lt;p>HugeGraph是一款易用、高效、通用的开源图数据库系统（Graph Database，&lt;a href="https://github.com/hugegraph/hugegraph">GitHub项目地址&lt;/a>），
+&lt;p>HugeGraph是一款易用、高效、通用的开源图数据库系统（Graph Database，&lt;a href="https://github.com/apache/hugegraph">GitHub项目地址&lt;/a>），
 实现了&lt;a href="https://tinkerpop.apache.org">Apache TinkerPop3&lt;/a>框架及完全兼容&lt;a href="https://tinkerpop.apache.org/gremlin.html">Gremlin&lt;/a>查询语言，
 具备完善的工具链组件，助力用户轻松构建基于图数据库之上的应用和产品。HugeGraph支持百亿以上的顶点和边快速导入，并提供毫秒级的关联关系查询能力（OLTP），
 并支持大规模分布式图分析（OLAP）。&lt;/p>
@@ -2097,7 +2100,7 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;p>Sign up or login to GitHub: &lt;a href="https://github.com">https://github.com&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>Fork HugeGraph repo from GitHub: &lt;a href="https://github.com/hugegraph/hugegraph/fork">https://github.com/apache/incubator-hugegraph/fork&lt;/a>&lt;/p>
+&lt;p>Fork HugeGraph repo from GitHub: &lt;a href="https://github.com/apache/hugegraph/fork">https://github.com/apache/incubator-hugegraph/fork&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Clone code from fork repo to local: &lt;a href="https://github.com/$%7BGITHUB_USER_NAME%7D/hugegraph">https://github.com/${GITHUB_USER_NAME}/hugegraph&lt;/a>&lt;/p>
@@ -2109,7 +2112,7 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># add upstream to synchronize the latest code&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git remote add hugegraph https://github.com/hugegraph/hugegraph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git remote add hugegraph https://github.com/apache/hugegraph
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># set name and email to push code to github&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git config user.name &lt;span style="color:#4e9a06">&amp;#34;{full-name}&amp;#34;&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># like &amp;#34;Jermy Li&amp;#34;&lt;/span>
@@ -2118,7 +2121,7 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;/ol>
 &lt;p>Optional: You can use &lt;a href="https://desktop.github.com/">GitHub desktop&lt;/a> to greatly simplify the commit and update process.&lt;/p>
 &lt;h2 id="2-create-an-issue-on-github">2. Create an Issue on GitHub&lt;/h2>
-&lt;p>If you encounter bugs or have any questions, please go to &lt;a href="https://github.com/apache/incubator-hugegraph/issues">GitHub Issues&lt;/a> to report them and feel free to &lt;a href="https://github.com/hugegraph/hugegraph/issues/new">create an issue&lt;/a>.&lt;/p>
+&lt;p>If you encounter bugs or have any questions, please go to &lt;a href="https://github.com/apache/incubator-hugegraph/issues">GitHub Issues&lt;/a> to report them and feel free to &lt;a href="https://github.com/apache/hugegraph/issues/new">create an issue&lt;/a>.&lt;/p>
 &lt;h2 id="3-make-changes-of-code-locally">3. Make changes of code locally&lt;/h2>
 &lt;h4 id="31-create-a-new-branch">3.1 Create a new branch&lt;/h4>
 &lt;p>Please don&amp;rsquo;t use master branch for development. We should create a new branch instead:&lt;/p>
@@ -2131,16 +2134,16 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="32-change-the-code">3.2 Change the code&lt;/h4>
 &lt;p>Assume that we need to modify some files like &amp;ldquo;HugeGraph.java&amp;rdquo; and &amp;ldquo;HugeFactory.java&amp;rdquo;:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># modify code to fix a bug&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vim hugegraph-core/src/main/java/com/baidu/hugegraph/HugeGraph.java
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vim hugegraph-core/src/main/java/com/baidu/hugegraph/HugeFactory.java
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vim hugegraph-core/src/main/java/org/apache/hugegraph/HugeGraph.java
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vim hugegraph-core/src/main/java/org/apache/hugegraph/HugeFactory.java
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># run test locally (optional)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn &lt;span style="color:#204a87">test&lt;/span> -Pcore-test,memory
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note: In order to be consistent with the code style easily, if you use &lt;a href="https://www.jetbrains.com/idea/">IDEA&lt;/a> as your IDE, you can directly &lt;a href="https://www.jetbrains.com/help/idea/configuring-code-style.html">import&lt;/a> our code style &lt;a href="./hugegraph-style.xml">configuration file&lt;/a>.&lt;/p>
 &lt;h4 id="33-commit-changes-to-git-repo">3.3 Commit changes to git repo&lt;/h4>
 &lt;p>After the code has been completed, we submit them to the local git repo:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># add files to local git index&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git add hugegraph-core/src/main/java/com/baidu/hugegraph/HugeGraph.java
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git add hugegraph-core/src/main/java/com/baidu/hugegraph/HugeFactory.java
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git add hugegraph-core/src/main/java/org/apache/hugegraph/HugeGraph.java
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git add hugegraph-core/src/main/java/org/apache/hugegraph/HugeFactory.java
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># commit to local git repo&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git commit
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Please edit the commit message after running &lt;code>git commit&lt;/code>, we can explain what and how to fix a bug or implement a feature, the following is an example:&lt;/p>
@@ -4655,12 +4658,16 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;li>克隆源码编译安装&lt;/li>
 &lt;/ul>
 &lt;h4 id="21-下载已编译的压缩包">2.1 下载已编译的压缩包&lt;/h4>
-&lt;p>下载最新版本的 HugeGraph-Loader release 包：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://github.com/hugegraph/hugegraph-loader/releases/download/v&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>/hugegraph-loader-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>.tar.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxvf hugegraph-loader-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>.tar.gz
+&lt;p>下载最新版本的 HugeGraph-Toolchain Release 包, 里面包含了 loader + tool + hubble 全套工具, 如果你已经下载, 可跳过重复步骤&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph*.tar.gz
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="22-克隆源码编译安装">2.2 克隆源码编译安装&lt;/h4>
 &lt;p>克隆最新版本的 HugeGraph-Loader 源码包：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ git clone https://github.com/hugegraph/hugegraph-loader.git
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 1. get from github&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph-toolchain.git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 2. get from direct (e.g. here is 1.0.0, please choose the latest version)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0-src.tar.gz
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>由于Oracle ojdbc license的限制，需要手动安装ojdbc到本地maven仓库。
 访问&lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html">Oracle jdbc 下载&lt;/a> 页面。选择Oracle Database 12c Release 2 (12.2.0.1) drivers，如下图所示。&lt;/p>
 &lt;div style="text-align: center;">
@@ -6930,18 +6937,22 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;h3 id="1-hugegraph-tools概述">1 HugeGraph-Tools概述&lt;/h3>
 &lt;p>HugeGraph-Tools 是 HugeGraph 的自动化部署、管理和备份/还原组件。&lt;/p>
 &lt;h3 id="2-获取-hugegraph-tools">2 获取 HugeGraph-Tools&lt;/h3>
-&lt;p>有两种方式可以获取 HugeGraph-Tools：&lt;/p>
+&lt;p>有两种方式可以获取 HugeGraph-Tools：(它被包含子 Toolchain 中)&lt;/p>
 &lt;ul>
 &lt;li>下载二进制tar包&lt;/li>
 &lt;li>下载源码编译安装&lt;/li>
 &lt;/ul>
 &lt;h4 id="21-下载二进制tar包">2.1 下载二进制tar包&lt;/h4>
-&lt;p>下载最新版本的 HugeGraph-Tools 包：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://github.com/hugegraph/hugegraph-tools/releases/download/v&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>/hugegraph-tools-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>.tar.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxvf hugegraph-tools-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>.tar.gz
+&lt;p>下载最新版本的 HugeGraph-Toolchain 包, 然后进入 tools 子目录&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph*.tar.gz
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="22-下载源码编译安装">2.2 下载源码编译安装&lt;/h4>
-&lt;p>下载最新版本的 HugeGraph-Tools 源码包：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ git clone https://github.com/hugegraph/hugegraph-tools.git
+&lt;p>下载最新版本的 HugeGraph-Toolchain 源码包, 然后根目录编译或者单独编译 tool 子模块：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 1. get from github&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph-toolchain.git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 2. get from direct (e.g. here is 1.0.0, please choose the latest version)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0-src.tar.gz
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>编译生成 tar 包:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-tools
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn package -DskipTests
@@ -8020,6 +8031,9 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;blockquote>
 &lt;p>可以通过&lt;code>GET http://localhost:8080/graphs/hugegraph/tasks/1&lt;/code>（其中&amp;quot;1&amp;quot;是task_id）来查询异步任务的执行状态，更多&lt;a href="../task">异步任务RESTful API&lt;/a>&lt;/p>
 &lt;/blockquote></description></item><item><title>Docs: 验证 Apache 发版</title><link>/cn/docs/contribution-guidelines/validate-release/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/contribution-guidelines/validate-release/</guid><description>
+&lt;blockquote>
+&lt;p>Note: 这篇文档会持续更新。&lt;/p>
+&lt;/blockquote>
 &lt;h2 id="验证阶段">验证阶段&lt;/h2>
 &lt;p>当内部的临时发布和打包工作完成后, 其他的社区开发者(尤其是 PMC)需要参与到&lt;a href="https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist">验证环节&lt;/a>确保某个人发布版本的&amp;quot;正确性 + 完整性&amp;quot;, 这里需要&lt;strong>每个人&lt;/strong>都尽量参与, 然后后序&lt;strong>邮件回复&lt;/strong>的时候说明自己&lt;strong>已检查&lt;/strong>了哪些项. (下面是核心项)&lt;/p>
 &lt;h4 id="1-准备工作">1. 准备工作&lt;/h4>
@@ -8123,7 +8137,25 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;li>确保官网至少满足 &lt;a href="https://whimsy.apache.org/pods/project/hugegraph">apache website check&lt;/a>, 以及没有死链等&lt;/li>
 &lt;li>更新&lt;strong>下载链接&lt;/strong>以及版本更新说明&lt;/li>
 &lt;li>&amp;hellip;&lt;/li>
-&lt;/ol></description></item><item><title>Docs: Backup Restore</title><link>/cn/docs/guides/backup-restore/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/guides/backup-restore/</guid><description>
+&lt;/ol>
+&lt;h2 id="邮件模板">邮件模板&lt;/h2>
+&lt;p>检查完成后, 你应该按不同角色回复邮件: (普通开发者 &amp;amp; PMC 成员)&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>+1 (non-binding)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>I checked:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">1.&lt;/span> All download links are valid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">2.&lt;/span> Checksum and signature are OK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">3.&lt;/span> LICENSE and NOTICE are exist
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">4.&lt;/span> Build successfully on macOS(Big Sur)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">5.&lt;/span> ....
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>特别注意 PMC 成员必须使用 &lt;code>binding&lt;/code> 标记回复邮件, 这对于统计有效投票很重要;&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>+1 (binding)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>I checked:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">1.&lt;/span> All download links are valid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">2.&lt;/span> Checksum and signature are OK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">3.&lt;/span> LICENSE and NOTICE are exist
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">4.&lt;/span> Build successfully on macOS(Big Sur)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">5.&lt;/span> ....
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Backup Restore</title><link>/cn/docs/guides/backup-restore/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/guides/backup-restore/</guid><description>
 &lt;h2 id="描述">描述&lt;/h2>
 &lt;p>Backup 和 Restore 是备份图和恢复图的功能。备份和恢复的数据包括元数据（schema）和图数据（vertex 和 edge）。&lt;/p>
 &lt;h4 id="backup">Backup&lt;/h4>
@@ -10221,7 +10253,7 @@ batch_size_fail_threshold_in_kb: 1000
 &lt;p>请求头中需要指定&lt;code>Content-Type:application/json&lt;/code>&lt;/p>
 &lt;/li>
 &lt;/ul>
-&lt;p>其他问题可以在对应项目的 issue 区搜索，例如 &lt;a href="https://github.com/hugegraph/hugegraph/issues">Server-Issues&lt;/a> / &lt;a href="https://github.com/hugegraph/hugegraph-loader/issues">Loader Issues&lt;/a>&lt;/p></description></item><item><title>Docs: IndexLabel API</title><link>/cn/docs/clients/restful-api/indexlabel/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/restful-api/indexlabel/</guid><description>
+&lt;p>其他问题可以在对应项目的 issue 区搜索，例如 &lt;a href="https://github.com/apache/hugegraph/issues">Server-Issues&lt;/a> / &lt;a href="https://github.com/apache/hugegraph-toolchain/issues">Loader Issues&lt;/a>&lt;/p></description></item><item><title>Docs: IndexLabel API</title><link>/cn/docs/clients/restful-api/indexlabel/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/restful-api/indexlabel/</guid><description>
 &lt;h3 id="15-indexlabel">1.5 IndexLabel&lt;/h3>
 &lt;p>假设已经创建好了1.1.3中的 PropertyKeys 、1.2.3中的 VertexLabels 以及 1.3.3中的 EdgeLabels&lt;/p>
 &lt;h4 id="151-创建一个indexlabel">1.5.1 创建一个IndexLabel&lt;/h4>
