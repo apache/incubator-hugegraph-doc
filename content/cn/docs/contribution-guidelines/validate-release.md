@@ -93,7 +93,7 @@ for i in *.tar.gz; do echo $i; gpg --verify $i.asc $i ; done
 
 1. 文件夹都带有 `incubating`, 且不存在**空的**文件/文件夹
 2. 存在 `LICENSE` + `NOTICE` 文件并且内容正常
-3. ** 不存在 ** 任何二进制文件
+3. **不存在** 缺乏 License 的二进制文件
 4. 源码文件都包含标准 `ASF License` 头 (这个用插件跑一下为主)
 5. 检查每个父 / 子模块的 `pom.xml` 版本号是否一致 (且符合期望)
 6. 检查前 3 ~ 5 个 commit 提交，点进去看看是否修改处和源码文件一致
