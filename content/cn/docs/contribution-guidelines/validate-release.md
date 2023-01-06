@@ -33,7 +33,7 @@ gpg --version
 
 # 3. 下载 hugegraph-svn 目录 (版本号注意填写此次验证版本, 这里以1.0.0为例)
 svn co https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/
-# (注) 如果出现 svn 下载某个文件速度很慢的情况, 可以考虑 wget 单个文件下载, 如下 (或考虑使用代理)
+# (注) 如果出现 svn 下载某个文件速度很慢的情况, 可以考虑 wget 单个文件下载, 如下 (或考虑使用 VPN / 代理)
 wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
 ```
 
@@ -89,10 +89,10 @@ for i in *.tar.gz; do echo $i; gpg --verify $i.asc $i ; done
 
 ##### A. 源码包
 
-解压 `xxx-hugegraph-source.tar.gz`后, 进行如下检查:
+解压 `*hugegraph*src.tar.gz`后, 进行如下检查:
 
 1. 文件夹都带有 `incubating`, 且不存在**空的**文件/文件夹
-2. 存在 `LICENSE` + `NOTICE` 文件并且内容正常
+2. 存在 `LICENSE` + `NOTICE` + 存在 `DISCLAIMER` 文件并且内容正常
 3. **不存在** 缺乏 License 的二进制文件
 4. 源码文件都包含标准 `ASF License` 头 (这个用插件跑一下为主)
 5. 检查每个父 / 子模块的 `pom.xml` 版本号是否一致 (且符合期望)
@@ -135,7 +135,7 @@ bin/start-computer.sh -d local -r master
 #### 5. 检查官网以及 github 等页面
 
 1. 确保官网至少满足 [apache website check](https://whimsy.apache.org/pods/project/hugegraph), 以及没有死链等
-2. 更新**下载链接**以及版本更新说明
+2. 更新**下载链接**存在, 以及版本更新说明页面更新
 3. ...
 
 ## 邮件模板
