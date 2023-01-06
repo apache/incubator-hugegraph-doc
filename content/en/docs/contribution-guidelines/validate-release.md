@@ -89,10 +89,10 @@ First of all, we need to download the package from the apache official `release-
 
 ##### A. source package
 
-After decompressing `xxx-hugegraph-source.tar.gz`, Do the following checks:
+After decompressing `*hugegraph*src.tar.gz`, Do the following checks:
 
 1. folders with `incubating`, and no **empty** files/folders
-2. `LICENSE` + `NOTICE` file exists and the content is normal
+2. `LICENSE` + `NOTICE` + `DISCLAIM` file exists and the content is normal
 3. **does not exist** binaries (without LICENSE)
 4. The source code files all contain the standard `ASF License` header (this could be done with the Maven-MAT plugin)
 5. Check whether the `pom.xml` version number of each parent/child module is consistent (and meet expectations)
@@ -135,7 +135,7 @@ more reference official website: https://hugegraph.apache.org/cn/docs/quickstart
 #### 5. Check the official website and GitHub and other pages
 
 1. Make sure that the official website at least meets [apache website check](https://whimsy.apache.org/pods/project/hugegraph), and no circular links etc.
-2. Update **download link** and version update instructions
+2. Update **download link** and release notes updated
 3. ...
 
 ## Mail Template
