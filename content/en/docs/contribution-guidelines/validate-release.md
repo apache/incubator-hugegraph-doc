@@ -71,9 +71,10 @@ Do you really want to set this key to ultimate trust? (y/N) y #slect y, then q q
 
 # 3. Check the signature (make sure there is no Warning output, every source/binary file prompts Good Signature)
 #Single file verification
-gpg --verify xx.asc xxx-source.tar.gz
-gpg --verify xx.asc xxx-binary.tar.gz # 注: 我们目前没有 binary 后缀
-#for loop traversal verification (recommended)
+gpg --verify xx.asc xxx-src.tar.gz
+gpg --verify xx.asc xxx.tar.gz # Note: without the bin/binary suffix
+
+# One-click shell traversal verification (recommended)
 for i in *.tar.gz; do echo $i; gpg --verify $i.asc $i ; done
 
 ```
@@ -88,16 +89,15 @@ First of all, we need to download the package from the apache official `release-
 
 ##### A. source package
 
-After decompressing `xxx-hugegraph-source.tar.gz`, Do the following checks:
+After decompressing `*hugegraph*src.tar.gz`, Do the following checks:
 
 1. folders with `incubating`, and no **empty** files/folders
-2. `DISCLAIMER` file exists
-3. `LICENSE` + `NOTICE` file exists and the content is normal
-4. ** does not exist ** any binaries
-5. The source code files all contain the standard `ASF License` header ((this can be done using a plugin))
-6. Check whether the `pom.xml` version number of each parent/child module is consistent (and meet expectations)
-7. Check the first 3 to 5 commits, click to see if the modification is consistent with the source file
-8. Finally, make sure the source code works/compiles correctly (then look at tests and specs)
+2. `LICENSE` + `NOTICE` + `DISCLAIM` file exists and the content is normal
+3. **does not exist** binaries (without LICENSE)
+4. The source code files all contain the standard `ASF License` header (this could be done with the Maven-MAT plugin)
+5. Check whether the `pom.xml` version number of each parent/child module is consistent (and meet expectations)
+6. Check the first 3 to 5 commits, click to see if the modification is consistent with the source file
+7. Finally, make sure the source code works/compiles correctly
 
 ```bash
 # prefer to use/switch to java 11 for the following operations (compiling/running)
@@ -135,7 +135,7 @@ more reference official website: https://hugegraph.apache.org/cn/docs/quickstart
 #### 5. Check the official website and GitHub and other pages
 
 1. Make sure that the official website at least meets [apache website check](https://whimsy.apache.org/pods/project/hugegraph), and no circular links etc.
-2. Update **download link** and version update instructions
+2. Update **download link** and release notes updated
 3. ...
 
 ## Mail Template

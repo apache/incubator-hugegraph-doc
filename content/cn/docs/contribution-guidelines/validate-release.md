@@ -33,7 +33,7 @@ gpg --version
 
 # 3. 下载 hugegraph-svn 目录 (版本号注意填写此次验证版本, 这里以1.0.0为例)
 svn co https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/
-# (注) 如果出现 svn 下载某个文件速度很慢的情况, 可以考虑 wget 单个文件下载, 如下 (或考虑使用代理)
+# (注) 如果出现 svn 下载某个文件速度很慢的情况, 可以考虑 wget 单个文件下载, 如下 (或考虑使用 VPN / 代理)
 wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
 ```
 
@@ -72,11 +72,11 @@ Do you really want to set this key to ultimate trust? (y/N) y #选择y, 然后 q
 
 # 3. 检查签名(确保没有 Warning 输出, 每一个 source/binary 文件都提示 Good Signature)
 #单个文件验证
-gpg --verify xx.asc xxx-source.tar.gz
-gpg --verify xx.asc xxx-binary.tar.gz # 注: 我们目前没有 binary 后缀
-#for循环遍历验证(推荐使用)
-for i in *.tar.gz; do echo $i; gpg --verify $i.asc $i ; done
+gpg --verify xx.asc xxx-src.tar.gz
+gpg --verify xx.asc xxx.tar.gz # 注：目前没有  bin/binary  后缀
 
+# 一行脚本快速验证所有包 (推荐使用，请确保所有 gpg 公钥已经信任)
+for i in *.tar.gz; do echo $i; gpg --verify $i.asc $i ; done
 ```
 
 先确认了整体的"完整性 + 一致性", 然后接下来确认具体的内容 (**关键**)
@@ -89,16 +89,15 @@ for i in *.tar.gz; do echo $i; gpg --verify $i.asc $i ; done
 
 ##### A. 源码包
 
-解压 `xxx-hugegraph-source.tar.gz`后, 进行如下检查:
+解压 `*hugegraph*src.tar.gz`后, 进行如下检查:
 
 1. 文件夹都带有 `incubating`, 且不存在**空的**文件/文件夹
-2. 存在`DISCLAIMER`文件
-3. 存在 `LICENSE` + `NOTICE` 文件并且内容正常
-4. **不存在**任何二进制文件
-5. 源码文件都包含标准 `ASF License` 头 (这个用插件跑一下为主)
-6. 检查每个父/子模块的 `pom.xml` 版本号是否一致 (且符合期望)
-7. 检查前 3 ~ 5 个 commit 提交, 点进去看看是否修改处和源码文件一致
-8. 最后, 确保源码可以正常/正确编译 (然后看看测试和规范)
+2. 存在 `LICENSE` + `NOTICE` + 存在 `DISCLAIMER` 文件并且内容正常
+3. **不存在** 缺乏 License 的二进制文件
+4. 源码文件都包含标准 `ASF License` 头 (这个用插件跑一下为主)
+5. 检查每个父 / 子模块的 `pom.xml` 版本号是否一致 (且符合期望)
+6. 检查前 3 ~ 5 个 commit 提交，点进去看看是否修改处和源码文件一致
+7. 最后，确保源码可以正常 / 正确编译 (然后看看测试和规范)
 
 ```bash
 # 请优先使用/切换到 java 11 版本进行后序的编译和运行操作
@@ -136,7 +135,7 @@ bin/start-computer.sh -d local -r master
 #### 5. 检查官网以及 github 等页面
 
 1. 确保官网至少满足 [apache website check](https://whimsy.apache.org/pods/project/hugegraph), 以及没有死链等
-2. 更新**下载链接**以及版本更新说明
+2. 更新**下载链接**存在, 以及版本更新说明页面更新
 3. ...
 
 ## 邮件模板
