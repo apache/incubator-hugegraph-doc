@@ -4,7 +4,7 @@ linkTitle: "Release-1.0.0"
 weight: 1
 ---
 
-> TODO: update the summary soon, please check the detail in each repository first, thanks
+> Note: the summary is updating, please check the detail in each repository first, thanks
 
 - [Server Release Note](https://github.com/apache/incubator-hugegraph/releases/tag/1.0.0)
 - [Toolchain Release Note](https://github.com/apache/incubator-hugegraph-toolchain/releases/tag/1.0.0)
@@ -72,11 +72,11 @@ weight: 1
 - chore: add logo in README & remove outdated log4j version.
 - refact(core): improve CachedGraphTransaction perf.
 - chore: update CI config & support ci robot & add codeQL SEC-check & graph option.
-- refact: ingore security check api & fix some bugs & clean code.
+- refact: ignore security check api & fix some bugs & clean code.
 - doc: enhance CONTRIBUTING.md & README.md.
 - refact: add checkstyle plugin & clean/format the code.
 - refact(core): improve decode string empty bytes & avoid array-construct columns in BackendEntry.
-- refact(cassandra): translate ipv4 to ipv6 metrics & update cassandra dependency vesion.
+- refact(cassandra): translate ipv4 to ipv6 metrics & update cassandra dependency version.
 - chore: use .asf.yaml for apache workflow & replace APPLICATION_JSON with TEXT_PLAIN.
 - feat: add system schema store.
 - refact(rocksdb): update rocksdb version to 6.22 & improve rocksdb code.
@@ -86,24 +86,11 @@ weight: 1
 - feat: support updateIfPresent/updateIfAbsent operation.
 - chore: modify abnormal logs & upgrade netty-all to 4.1.44.
 - refact: upgrade dependencies & adopt new analyzer & clean code.
-- chore: improve .gitignore & update ci configs & add RAT/faltten plugin.
+- chore: improve .gitignore & update ci configs & add RAT/flatten plugin.
 - chore(license): add dependencies-check ci & 3rd-party dependency licenses.
 - refact: Shutdown log when shutdown process & fix tx leak & enhance the file path.
 - refact: rename package to apache & dependency in all modules (Breaking Change).
 - chore: add license checker & update antrun plugin & fix building problem in windows.
 - feat: support one-step script for apache release v1.0.0 release.
 
-### Toolchain 更新
-
-- xx
-- xx
-
-### Computer 更新
-
-- xx
-- xx
-
-### Commons 更新
-
-- xx
-- xx
+.... (Toolchain, Computer, Commons, etc.)

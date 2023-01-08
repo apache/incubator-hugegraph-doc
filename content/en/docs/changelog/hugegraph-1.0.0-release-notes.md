@@ -4,7 +4,7 @@ linkTitle: "Release-1.0.0"
 weight: 1
 ---
 
-> TODO: update the summary soon, please check the detail in each repository first, thanks
+> Note: the summary is updating, please check the detail in each repository first, thanks
 
 - [Server Release Note](https://github.com/apache/incubator-hugegraph/releases/tag/1.0.0)
 - [Toolchain Release Note](https://github.com/apache/incubator-hugegraph-toolchain/releases/tag/1.0.0)
@@ -33,7 +33,7 @@ weight: 1
 - feat(core): support adamic-adar & resource-allocation algorithms.
 - feat(hbase): support hash rowkey & pre-init tables.
 - feat(core): support query by Cypher language.
-- feat(core): support automatic management and failover for cluster role.
+- feat(core): support automatic management and fail-over for cluster role.
 - feat(core): support 16 OLAP algorithms, like: LPA, Louvain, PageRank, BetweennessCentrality, RingsDetect.
 
 #### Bug Fix
@@ -52,7 +52,7 @@ weight: 1
 - fix: schema label race condition of addIndexLabel/removeIndexLabel.
 - fix: limit admin role can drop graph.
 - fix: ProfileApi url check & add build package to ignore file.
-- fix: can't shutdown when starting with exception.
+- fix: can't shut down when starting with exception.
 - fix: Traversal.graph is empty in StepStrategy.apply() with count().is(0).
 - fix: possible extra comma before where statement in MySQL backend.
 - fix: JNA UnsatisfiedLinkError for Apple M1.
@@ -61,7 +61,7 @@ weight: 1
 - fix: User-controlled data in numeric cast & remove word dependency.
 - fix: closing iterators on errors for Cassandra & Mysql.
 
-#### Options Changes
+#### Option Changes
 
 - move `raft.endpoint` option from graph scope to server scope.
 
@@ -75,11 +75,11 @@ weight: 1
 - chore: add logo in README & remove outdated log4j version.
 - refact(core): improve CachedGraphTransaction perf.
 - chore: update CI config & support ci robot & add codeQL SEC-check & graph option.
-- refact: ingore security check api & fix some bugs & clean code.
+- refact: ignore security check api & fix some bugs & clean code.
 - doc: enhance CONTRIBUTING.md & README.md.
 - refact: add checkstyle plugin & clean/format the code.
 - refact(core): improve decode string empty bytes & avoid array-construct columns in BackendEntry.
-- refact(cassandra): translate ipv4 to ipv6 metrics & update cassandra dependency vesion.
+- refact(cassandra): translate ipv4 to ipv6 metrics & update cassandra dependency version.
 - chore: use .asf.yaml for apache workflow & replace APPLICATION_JSON with TEXT_PLAIN.
 - feat: add system schema store.
 - refact(rocksdb): update rocksdb version to 6.22 & improve rocksdb code.
@@ -89,24 +89,11 @@ weight: 1
 - feat: support updateIfPresent/updateIfAbsent operation.
 - chore: modify abnormal logs & upgrade netty-all to 4.1.44.
 - refact: upgrade dependencies & adopt new analyzer & clean code.
-- chore: improve .gitignore & update ci configs & add RAT/faltten plugin.
+- chore: improve .gitignore & update ci configs & add RAT/flatten plugin.
 - chore(license): add dependencies-check ci & 3rd-party dependency licenses.
 - refact: Shutdown log when shutdown process & fix tx leak & enhance the file path.
 - refact: rename package to apache & dependency in all modules (Breaking Change).
 - chore: add license checker & update antrun plugin & fix building problem in windows.
 - feat: support one-step script for apache release v1.0.0 release.
 
-### Toolchain Changes
-
-- xx
-- xx
-
-### Computer Changes
-
-- xx
-- xx
-
-### Commons Changes
-
-- xx
-- xx
+.... (Toolchain, Computer, Commons, etc.)
