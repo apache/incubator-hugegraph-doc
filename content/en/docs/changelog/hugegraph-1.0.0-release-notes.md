@@ -4,13 +4,6 @@ linkTitle: "Release-1.0.0"
 weight: 1
 ---
 
-> Note: the summary is updating, please check the detail in each repository first, thanks
-
-- [Server Release Note](https://github.com/apache/incubator-hugegraph/releases/tag/1.0.0)
-- [Toolchain Release Note](https://github.com/apache/incubator-hugegraph-toolchain/releases/tag/1.0.0)
-- [Computer Release Note](https://github.com/apache/incubator-hugegraph-computer/releases/tag/1.0.0)
-- [Commons Release Note](https://github.com/apache/incubator-hugegraph-commons/releases/tag/1.0.0)
-
 ### OLTP API & Client Changes
 
 #### API Changes
@@ -35,6 +28,7 @@ weight: 1
 - feat(core): support query by Cypher language.
 - feat(core): support automatic management and fail-over for cluster role.
 - feat(core): support 16 OLAP algorithms, like: LPA, Louvain, PageRank, BetweennessCentrality, RingsDetect.
+- feat: prepare for Apache release.
 
 #### Bug Fix
 
@@ -96,4 +90,86 @@ weight: 1
 - chore: add license checker & update antrun plugin & fix building problem in windows.
 - feat: support one-step script for apache release v1.0.0 release.
 
-.... (Toolchain, Computer, Commons, etc.)
+### Computer (OLAP)
+
+#### Algorithm Changes
+
+- feat: implement page-rank algorithm.
+- feat: implement wcc algorithm.
+- feat: implement degree centrality.
+- feat: implement triangle_count algorithm.
+- feat: implement rings-detection algorithm.
+- feat: implement LPA algorithm.
+- feat: implement kcore algorithm.
+- feat: implement closeness centrality algorithm.
+- feat: implement betweenness centrality algorithm.
+- feat: implement cluster coefficient algorithm.
+
+#### Platform Changes
+
+- feat: init module computer-core & computer-algorithm & etcd dependency.
+- feat: add Id as base type of vertex id.
+- feat: init Vertex/Edge/Properties & JsonStructGraphOutput.
+- feat: load data from hugegraph server.
+- feat: init basic combiner, Bsp4Worker, Bsp4Master.
+- feat: init sort & transport interface & basic FileInput/Output Stream.
+- feat: init computation & ComputerOutput/Driver interface.
+- feat: init Partitioner and HashPartitioner
+- feat: init Master/WorkerService module.
+- feat: init Heap/LoserTree sorting.
+- feat: init rpc module.
+- feat: init transport server, client, en/decode, flowControl, heartbeat.
+- feat: init DataDirManager & PointerCombiner.
+- feat: init aggregator module & add copy() and assign() methods to Value class.
+- feat: add startAsync and finishAsync on client side, add onStarted and onFinished on server side.
+- feat: init store/sort module.
+- feat: link managers in worker sending end.
+- feat: implement data receiver of worker.
+- feat: implement StreamGraphInput and EntryInput.
+- feat: add Sender and Receiver to process compute message.
+- feat: add seqfile fromat.
+- feat: add ComputeManager.
+- feat: add computer-k8s and computer-k8s-operator.
+- feat: add startup and make docker image code.
+- feat: sort different type of message use different combiner.
+- feat: add HDFS output format.
+- feat: mount config-map and secret to container.
+- feat: support java11.
+- feat: support partition concurrent compute.
+- refact: abstract computer-api from computer-core.
+- refact: optimize data receiving.
+- fix: release file descriptor after input and compute.
+- doc: add operator deploy readme.
+- feat: prepare for Apache release.
+
+### Toolchain (loader, tools, hubble)
+
+- feat(loader): support use SQL to construct graph.
+- feat(loader): support Spark-Loader mode(include jdbc source).
+- feat(loader): support Flink-CDC mode.
+- fix(loader):  fix NPE when loading ORC data.
+- fix(loader):  fix schema is not cached with Spark/Flink mode.
+- fix(loader):  fix json deserialize error.
+- fix(loader):  fix jackson conflicts & missing dependencies.
+- feat(hubble): supplementary algorithms UI.
+- feat(hubble): support highlighting and hints for Gremlin text.
+- feat(hubble): add docker-file for hubble.
+- feat(hubble): display packaging log output progress while building.
+- fix(hubble):  fix port-input placeholder UI.
+- feat: prepare for Apache release.
+
+### Commons (common,rpc)
+
+- feat: support assert-throws method returning Future.
+- feat: add Cnm and Anm to CollectionUtil.
+- feat: support custom content-type.
+- feat: prepare for Apache release.
+
+### Release Details
+
+Please check the release details in each repository:
+
+- [Server Release Notes](https://github.com/apache/incubator-hugegraph/releases/tag/1.0.0)
+- [Toolchain Release Notes](https://github.com/apache/incubator-hugegraph-toolchain/releases/tag/1.0.0)
+- [Computer Release Notes](https://github.com/apache/incubator-hugegraph-computer/releases/tag/1.0.0)
+- [Commons Release Notes](https://github.com/apache/incubator-hugegraph-commons/releases/tag/1.0.0)
