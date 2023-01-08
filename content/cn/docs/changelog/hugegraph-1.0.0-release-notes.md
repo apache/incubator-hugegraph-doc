@@ -4,13 +4,6 @@ linkTitle: "Release-1.0.0"
 weight: 1
 ---
 
-> Note: the summary is updating, please check the detail in each repository first, thanks
-
-- [Server Release Note](https://github.com/apache/incubator-hugegraph/releases/tag/1.0.0)
-- [Toolchain Release Note](https://github.com/apache/incubator-hugegraph-toolchain/releases/tag/1.0.0)
-- [Computer Release Note](https://github.com/apache/incubator-hugegraph-computer/releases/tag/1.0.0)
-- [Commons Release Note](https://github.com/apache/incubator-hugegraph-commons/releases/tag/1.0.0)
-
 ### OLTP API & Client 更新
 
 #### API/Client 接口更新
@@ -31,7 +24,7 @@ weight: 1
 - 支持 Cypher 图查询语言。
 - 支持集群 Master 角色的自动管理与故障转移。
 - 支持 16 个 OLAP 算法, 包括：LPA, Louvain, PageRank, BetweennessCentrality, RingsDetect等。
-- 根据 Apache 基金会对项目的发版要求进行适配，包括 License 合规性、发版流程、代码风格等。
+- 根据 Apache 基金会对项目的发版要求进行适配，包括 License 合规性、发版流程、代码风格等，支持 Apache 版本发布。
 
 #### Bug 修复
 
@@ -93,4 +86,88 @@ weight: 1
 - chore: add license checker & update antrun plugin & fix building problem in windows.
 - feat: support one-step script for apache release v1.0.0 release.
 
-.... (Toolchain, Computer, Commons, etc.)
+
+### Computer (OLAP)
+
+#### Algorithm Changes
+
+- 支持 PageRank 算法。
+- 支持 WCC 算法。
+- 支持 degree centrality 算法。
+- 支持 triangle count 算法。
+- 支持 rings detection 算法。
+- 支持 LPA 算法。
+- 支持 k-core 算法。
+- 支持 closeness centrality 算法。
+- 支持 betweenness centrality 算法。
+- 支持 cluster coefficient 算法。
+
+#### Platform Changes
+
+- feat: init module computer-core & computer-algorithm & etcd dependency.
+- feat: add Id as base type of vertex id.
+- feat: init Vertex/Edge/Properties & JsonStructGraphOutput.
+- feat: load data from hugegraph server.
+- feat: init basic combiner, Bsp4Worker, Bsp4Master.
+- feat: init sort & transport interface & basic FileInput/Output Stream.
+- feat: init computation & ComputerOutput/Driver interface.
+- feat: init Partitioner and HashPartitioner
+- feat: init Master/WorkerService module.
+- feat: init Heap/LoserTree sorting.
+- feat: init rpc module.
+- feat: init transport server, client, en/decode, flowControl, heartbeat.
+- feat: init DataDirManager & PointerCombiner.
+- feat: init aggregator module & add copy() and assign() methods to Value class.
+- feat: add startAsync and finishAsync on client side, add onStarted and onFinished on server side.
+- feat: init store/sort module.
+- feat: link managers in worker sending end.
+- feat: implement data receiver of worker.
+- feat: implement StreamGraphInput and EntryInput.
+- feat: add Sender and Receiver to process compute message.
+- feat: add seqfile fromat.
+- feat: add ComputeManager.
+- feat: add computer-k8s and computer-k8s-operator.
+- feat: add startup and make docker image code.
+- feat: sort different type of message use different combiner.
+- feat: add HDFS output format.
+- feat: mount config-map and secret to container.
+- feat: support java11.
+- feat: support partition concurrent compute.
+- refact: abstract computer-api from computer-core.
+- refact: optimize data receiving.
+- fix: release file descriptor after input and compute.
+- doc: add operator deploy readme.
+- feat: prepare for Apache release.
+
+### Toolchain (loader, tools, hubble)
+
+- 支持 Loader 使用 SQL 格式来选取从关系数据库导入哪些数据。
+- 支持 Loader 从 Spark 导入数据（包括 JDBC 方式）。
+- 支持 Loader 增加 Flink-CDC 模式。
+- 解决 Loader 导入 ORC 格式数据时，报错 NPE。
+- 解决 Loader 在 Spark/Flink 模式时未缓存 Schema 的问题。
+- 解决 Loader 的 Json 反序列化问题。
+- 解决 Loader 的 Jackson 版本冲突与依赖问题。
+- 支持 Hubble 高级算法接口的 UI 界面。
+- 支持 Hubble 中 Gremlin 语句的高亮格式显示.
+- 支持 Hubble 使用 Docker 镜像部署。
+- 支持  输出构建日志。
+- 解决 Hubble 的端口输入框问题。
+- 支持 Apache 项目发版的适配。
+
+### Commons (common,rpc)
+
+- 支持 assert-throws 方法返回 Future。
+- 增加 Cnm 与 Anm 方法到 CollectionUtil 中。
+- 支持 用户自定义的 content-type。
+- 支持 Apache 项目发版的适配。
+
+### Release Details
+
+更加详细的版本变更信息，可以查看各个子仓库的链接：
+
+- [Server Release Notes](https://github.com/apache/incubator-hugegraph/releases/tag/1.0.0)
+- [Toolchain Release Notes](https://github.com/apache/incubator-hugegraph-toolchain/releases/tag/1.0.0)
+- [Computer Release Notes](https://github.com/apache/incubator-hugegraph-computer/releases/tag/1.0.0)
+- [Commons Release Notes](https://github.com/apache/incubator-hugegraph-commons/releases/tag/1.0.0)
+
