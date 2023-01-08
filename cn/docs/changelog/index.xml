@@ -1,13 +1,4 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HugeGraph – CHANGELOGS</title><link>/cn/docs/changelog/</link><description>Recent content in CHANGELOGS on HugeGraph</description><generator>Hugo -- gohugo.io</generator><atom:link href="/cn/docs/changelog/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: HugeGraph 1.0.0 Release Notes</title><link>/cn/docs/changelog/hugegraph-1.0.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/changelog/hugegraph-1.0.0-release-notes/</guid><description>
-&lt;blockquote>
-&lt;p>Note: the summary is updating, please check the detail in each repository first, thanks&lt;/p>
-&lt;/blockquote>
-&lt;ul>
-&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph/releases/tag/1.0.0">Server Release Note&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/releases/tag/1.0.0">Toolchain Release Note&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-computer/releases/tag/1.0.0">Computer Release Note&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-commons/releases/tag/1.0.0">Commons Release Note&lt;/a>&lt;/li>
-&lt;/ul>
 &lt;h3 id="oltp-api--client-更新">OLTP API &amp;amp; Client 更新&lt;/h3>
 &lt;h4 id="apiclient-接口更新">API/Client 接口更新&lt;/h4>
 &lt;ul>
@@ -26,7 +17,7 @@
 &lt;li>支持 Cypher 图查询语言。&lt;/li>
 &lt;li>支持集群 Master 角色的自动管理与故障转移。&lt;/li>
 &lt;li>支持 16 个 OLAP 算法, 包括：LPA, Louvain, PageRank, BetweennessCentrality, RingsDetect等。&lt;/li>
-&lt;li>根据 Apache 基金会对项目的发版要求进行适配，包括 License 合规性、发版流程、代码风格等。&lt;/li>
+&lt;li>根据 Apache 基金会对项目的发版要求进行适配，包括 License 合规性、发版流程、代码风格等，支持 Apache 版本发布。&lt;/li>
 &lt;/ul>
 &lt;h4 id="bug-修复">Bug 修复&lt;/h4>
 &lt;ul>
@@ -88,7 +79,88 @@
 &lt;li>chore: add license checker &amp;amp; update antrun plugin &amp;amp; fix building problem in windows.&lt;/li>
 &lt;li>feat: support one-step script for apache release v1.0.0 release.&lt;/li>
 &lt;/ul>
-&lt;p>&amp;hellip;. (Toolchain, Computer, Commons, etc.)&lt;/p></description></item><item><title>Docs: HugeGraph 0.11 Release Notes</title><link>/cn/docs/changelog/hugegraph-0.11.2-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/changelog/hugegraph-0.11.2-release-notes/</guid><description>
+&lt;h3 id="computer-olap">Computer (OLAP)&lt;/h3>
+&lt;h4 id="algorithm-changes">Algorithm Changes&lt;/h4>
+&lt;ul>
+&lt;li>支持 PageRank 算法。&lt;/li>
+&lt;li>支持 WCC 算法。&lt;/li>
+&lt;li>支持 degree centrality 算法。&lt;/li>
+&lt;li>支持 triangle count 算法。&lt;/li>
+&lt;li>支持 rings detection 算法。&lt;/li>
+&lt;li>支持 LPA 算法。&lt;/li>
+&lt;li>支持 k-core 算法。&lt;/li>
+&lt;li>支持 closeness centrality 算法。&lt;/li>
+&lt;li>支持 betweenness centrality 算法。&lt;/li>
+&lt;li>支持 cluster coefficient 算法。&lt;/li>
+&lt;/ul>
+&lt;h4 id="platform-changes">Platform Changes&lt;/h4>
+&lt;ul>
+&lt;li>feat: init module computer-core &amp;amp; computer-algorithm &amp;amp; etcd dependency.&lt;/li>
+&lt;li>feat: add Id as base type of vertex id.&lt;/li>
+&lt;li>feat: init Vertex/Edge/Properties &amp;amp; JsonStructGraphOutput.&lt;/li>
+&lt;li>feat: load data from hugegraph server.&lt;/li>
+&lt;li>feat: init basic combiner, Bsp4Worker, Bsp4Master.&lt;/li>
+&lt;li>feat: init sort &amp;amp; transport interface &amp;amp; basic FileInput/Output Stream.&lt;/li>
+&lt;li>feat: init computation &amp;amp; ComputerOutput/Driver interface.&lt;/li>
+&lt;li>feat: init Partitioner and HashPartitioner&lt;/li>
+&lt;li>feat: init Master/WorkerService module.&lt;/li>
+&lt;li>feat: init Heap/LoserTree sorting.&lt;/li>
+&lt;li>feat: init rpc module.&lt;/li>
+&lt;li>feat: init transport server, client, en/decode, flowControl, heartbeat.&lt;/li>
+&lt;li>feat: init DataDirManager &amp;amp; PointerCombiner.&lt;/li>
+&lt;li>feat: init aggregator module &amp;amp; add copy() and assign() methods to Value class.&lt;/li>
+&lt;li>feat: add startAsync and finishAsync on client side, add onStarted and onFinished on server side.&lt;/li>
+&lt;li>feat: init store/sort module.&lt;/li>
+&lt;li>feat: link managers in worker sending end.&lt;/li>
+&lt;li>feat: implement data receiver of worker.&lt;/li>
+&lt;li>feat: implement StreamGraphInput and EntryInput.&lt;/li>
+&lt;li>feat: add Sender and Receiver to process compute message.&lt;/li>
+&lt;li>feat: add seqfile fromat.&lt;/li>
+&lt;li>feat: add ComputeManager.&lt;/li>
+&lt;li>feat: add computer-k8s and computer-k8s-operator.&lt;/li>
+&lt;li>feat: add startup and make docker image code.&lt;/li>
+&lt;li>feat: sort different type of message use different combiner.&lt;/li>
+&lt;li>feat: add HDFS output format.&lt;/li>
+&lt;li>feat: mount config-map and secret to container.&lt;/li>
+&lt;li>feat: support java11.&lt;/li>
+&lt;li>feat: support partition concurrent compute.&lt;/li>
+&lt;li>refact: abstract computer-api from computer-core.&lt;/li>
+&lt;li>refact: optimize data receiving.&lt;/li>
+&lt;li>fix: release file descriptor after input and compute.&lt;/li>
+&lt;li>doc: add operator deploy readme.&lt;/li>
+&lt;li>feat: prepare for Apache release.&lt;/li>
+&lt;/ul>
+&lt;h3 id="toolchain-loader-tools-hubble">Toolchain (loader, tools, hubble)&lt;/h3>
+&lt;ul>
+&lt;li>支持 Loader 使用 SQL 格式来选取从关系数据库导入哪些数据。&lt;/li>
+&lt;li>支持 Loader 从 Spark 导入数据（包括 JDBC 方式）。&lt;/li>
+&lt;li>支持 Loader 增加 Flink-CDC 模式。&lt;/li>
+&lt;li>解决 Loader 导入 ORC 格式数据时，报错 NPE。&lt;/li>
+&lt;li>解决 Loader 在 Spark/Flink 模式时未缓存 Schema 的问题。&lt;/li>
+&lt;li>解决 Loader 的 Json 反序列化问题。&lt;/li>
+&lt;li>解决 Loader 的 Jackson 版本冲突与依赖问题。&lt;/li>
+&lt;li>支持 Hubble 高级算法接口的 UI 界面。&lt;/li>
+&lt;li>支持 Hubble 中 Gremlin 语句的高亮格式显示.&lt;/li>
+&lt;li>支持 Hubble 使用 Docker 镜像部署。&lt;/li>
+&lt;li>支持 输出构建日志。&lt;/li>
+&lt;li>解决 Hubble 的端口输入框问题。&lt;/li>
+&lt;li>支持 Apache 项目发版的适配。&lt;/li>
+&lt;/ul>
+&lt;h3 id="commons-commonrpc">Commons (common,rpc)&lt;/h3>
+&lt;ul>
+&lt;li>支持 assert-throws 方法返回 Future。&lt;/li>
+&lt;li>增加 Cnm 与 Anm 方法到 CollectionUtil 中。&lt;/li>
+&lt;li>支持 用户自定义的 content-type。&lt;/li>
+&lt;li>支持 Apache 项目发版的适配。&lt;/li>
+&lt;/ul>
+&lt;h3 id="release-details">Release Details&lt;/h3>
+&lt;p>更加详细的版本变更信息，可以查看各个子仓库的链接：&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph/releases/tag/1.0.0">Server Release Notes&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/releases/tag/1.0.0">Toolchain Release Notes&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-computer/releases/tag/1.0.0">Computer Release Notes&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-commons/releases/tag/1.0.0">Commons Release Notes&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: HugeGraph 0.11 Release Notes</title><link>/cn/docs/changelog/hugegraph-0.11.2-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/changelog/hugegraph-0.11.2-release-notes/</guid><description>
 &lt;h3 id="api--client">API &amp;amp; Client&lt;/h3>
 &lt;h4 id="功能更新">功能更新&lt;/h4>
 &lt;ul>
