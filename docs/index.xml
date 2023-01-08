@@ -1659,7 +1659,7 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;li>WeChat public account: HugeGraph&lt;/li>
 &lt;/ul></description></item><item><title>Docs: HugeGraph 1.0.0 Release Notes</title><link>/docs/changelog/hugegraph-1.0.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/changelog/hugegraph-1.0.0-release-notes/</guid><description>
 &lt;blockquote>
-&lt;p>TODO: update the summary soon, please check the detail in each repository first, thanks&lt;/p>
+&lt;p>Note: the summary is updating, please check the detail in each repository first, thanks&lt;/p>
 &lt;/blockquote>
 &lt;ul>
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph/releases/tag/1.0.0">Server Release Note&lt;/a>&lt;/li>
@@ -1687,7 +1687,7 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;li>feat(core): support adamic-adar &amp;amp; resource-allocation algorithms.&lt;/li>
 &lt;li>feat(hbase): support hash rowkey &amp;amp; pre-init tables.&lt;/li>
 &lt;li>feat(core): support query by Cypher language.&lt;/li>
-&lt;li>feat(core): support automatic management and failover for cluster role.&lt;/li>
+&lt;li>feat(core): support automatic management and fail-over for cluster role.&lt;/li>
 &lt;li>feat(core): support 16 OLAP algorithms, like: LPA, Louvain, PageRank, BetweennessCentrality, RingsDetect.&lt;/li>
 &lt;/ul>
 &lt;h4 id="bug-fix">Bug Fix&lt;/h4>
@@ -1706,7 +1706,7 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;li>fix: schema label race condition of addIndexLabel/removeIndexLabel.&lt;/li>
 &lt;li>fix: limit admin role can drop graph.&lt;/li>
 &lt;li>fix: ProfileApi url check &amp;amp; add build package to ignore file.&lt;/li>
-&lt;li>fix: can&amp;rsquo;t shutdown when starting with exception.&lt;/li>
+&lt;li>fix: can&amp;rsquo;t shut down when starting with exception.&lt;/li>
 &lt;li>fix: Traversal.graph is empty in StepStrategy.apply() with count().is(0).&lt;/li>
 &lt;li>fix: possible extra comma before where statement in MySQL backend.&lt;/li>
 &lt;li>fix: JNA UnsatisfiedLinkError for Apple M1.&lt;/li>
@@ -1715,7 +1715,7 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;li>fix: User-controlled data in numeric cast &amp;amp; remove word dependency.&lt;/li>
 &lt;li>fix: closing iterators on errors for Cassandra &amp;amp; Mysql.&lt;/li>
 &lt;/ul>
-&lt;h4 id="options-changes">Options Changes&lt;/h4>
+&lt;h4 id="option-changes">Option Changes&lt;/h4>
 &lt;ul>
 &lt;li>move &lt;code>raft.endpoint&lt;/code> option from graph scope to server scope.&lt;/li>
 &lt;/ul>
@@ -1729,11 +1729,11 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;li>chore: add logo in README &amp;amp; remove outdated log4j version.&lt;/li>
 &lt;li>refact(core): improve CachedGraphTransaction perf.&lt;/li>
 &lt;li>chore: update CI config &amp;amp; support ci robot &amp;amp; add codeQL SEC-check &amp;amp; graph option.&lt;/li>
-&lt;li>refact: ingore security check api &amp;amp; fix some bugs &amp;amp; clean code.&lt;/li>
+&lt;li>refact: ignore security check api &amp;amp; fix some bugs &amp;amp; clean code.&lt;/li>
 &lt;li>doc: enhance CONTRIBUTING.md &amp;amp; README.md.&lt;/li>
 &lt;li>refact: add checkstyle plugin &amp;amp; clean/format the code.&lt;/li>
 &lt;li>refact(core): improve decode string empty bytes &amp;amp; avoid array-construct columns in BackendEntry.&lt;/li>
-&lt;li>refact(cassandra): translate ipv4 to ipv6 metrics &amp;amp; update cassandra dependency vesion.&lt;/li>
+&lt;li>refact(cassandra): translate ipv4 to ipv6 metrics &amp;amp; update cassandra dependency version.&lt;/li>
 &lt;li>chore: use .asf.yaml for apache workflow &amp;amp; replace APPLICATION_JSON with TEXT_PLAIN.&lt;/li>
 &lt;li>feat: add system schema store.&lt;/li>
 &lt;li>refact(rocksdb): update rocksdb version to 6.22 &amp;amp; improve rocksdb code.&lt;/li>
@@ -1743,28 +1743,14 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;li>feat: support updateIfPresent/updateIfAbsent operation.&lt;/li>
 &lt;li>chore: modify abnormal logs &amp;amp; upgrade netty-all to 4.1.44.&lt;/li>
 &lt;li>refact: upgrade dependencies &amp;amp; adopt new analyzer &amp;amp; clean code.&lt;/li>
-&lt;li>chore: improve .gitignore &amp;amp; update ci configs &amp;amp; add RAT/faltten plugin.&lt;/li>
+&lt;li>chore: improve .gitignore &amp;amp; update ci configs &amp;amp; add RAT/flatten plugin.&lt;/li>
 &lt;li>chore(license): add dependencies-check ci &amp;amp; 3rd-party dependency licenses.&lt;/li>
 &lt;li>refact: Shutdown log when shutdown process &amp;amp; fix tx leak &amp;amp; enhance the file path.&lt;/li>
 &lt;li>refact: rename package to apache &amp;amp; dependency in all modules (Breaking Change).&lt;/li>
 &lt;li>chore: add license checker &amp;amp; update antrun plugin &amp;amp; fix building problem in windows.&lt;/li>
 &lt;li>feat: support one-step script for apache release v1.0.0 release.&lt;/li>
 &lt;/ul>
-&lt;h3 id="toolchain-changes">Toolchain Changes&lt;/h3>
-&lt;ul>
-&lt;li>xx&lt;/li>
-&lt;li>xx&lt;/li>
-&lt;/ul>
-&lt;h3 id="computer-changes">Computer Changes&lt;/h3>
-&lt;ul>
-&lt;li>xx&lt;/li>
-&lt;li>xx&lt;/li>
-&lt;/ul>
-&lt;h3 id="commons-changes">Commons Changes&lt;/h3>
-&lt;ul>
-&lt;li>xx&lt;/li>
-&lt;li>xx&lt;/li>
-&lt;/ul></description></item><item><title>Docs: Schema API</title><link>/docs/clients/restful-api/schema/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/clients/restful-api/schema/</guid><description>
+&lt;p>&amp;hellip;. (Toolchain, Computer, Commons, etc.)&lt;/p></description></item><item><title>Docs: Schema API</title><link>/docs/clients/restful-api/schema/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/clients/restful-api/schema/</guid><description>
 &lt;h3 id="11-schema">1.1 Schema&lt;/h3>
 &lt;p>HugeGraph 提供单一接口获取某个图的全部 Schema 信息，包括：PropertyKey、VertexLabel、EdgeLabel 和 IndexLabel。&lt;/p>
 &lt;h5 id="method--url">Method &amp;amp; Url&lt;/h5>

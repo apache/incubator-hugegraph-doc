@@ -1558,7 +1558,7 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;li>微信公众号：HugeGraph&lt;/li>
 &lt;/ul></description></item><item><title>Docs: HugeGraph 1.0.0 Release Notes</title><link>/cn/docs/changelog/hugegraph-1.0.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/changelog/hugegraph-1.0.0-release-notes/</guid><description>
 &lt;blockquote>
-&lt;p>TODO: update the summary soon, please check the detail in each repository first, thanks&lt;/p>
+&lt;p>Note: the summary is updating, please check the detail in each repository first, thanks&lt;/p>
 &lt;/blockquote>
 &lt;ul>
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph/releases/tag/1.0.0">Server Release Note&lt;/a>&lt;/li>
@@ -1625,11 +1625,11 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;li>chore: add logo in README &amp;amp; remove outdated log4j version.&lt;/li>
 &lt;li>refact(core): improve CachedGraphTransaction perf.&lt;/li>
 &lt;li>chore: update CI config &amp;amp; support ci robot &amp;amp; add codeQL SEC-check &amp;amp; graph option.&lt;/li>
-&lt;li>refact: ingore security check api &amp;amp; fix some bugs &amp;amp; clean code.&lt;/li>
+&lt;li>refact: ignore security check api &amp;amp; fix some bugs &amp;amp; clean code.&lt;/li>
 &lt;li>doc: enhance CONTRIBUTING.md &amp;amp; README.md.&lt;/li>
 &lt;li>refact: add checkstyle plugin &amp;amp; clean/format the code.&lt;/li>
 &lt;li>refact(core): improve decode string empty bytes &amp;amp; avoid array-construct columns in BackendEntry.&lt;/li>
-&lt;li>refact(cassandra): translate ipv4 to ipv6 metrics &amp;amp; update cassandra dependency vesion.&lt;/li>
+&lt;li>refact(cassandra): translate ipv4 to ipv6 metrics &amp;amp; update cassandra dependency version.&lt;/li>
 &lt;li>chore: use .asf.yaml for apache workflow &amp;amp; replace APPLICATION_JSON with TEXT_PLAIN.&lt;/li>
 &lt;li>feat: add system schema store.&lt;/li>
 &lt;li>refact(rocksdb): update rocksdb version to 6.22 &amp;amp; improve rocksdb code.&lt;/li>
@@ -1639,28 +1639,14 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;li>feat: support updateIfPresent/updateIfAbsent operation.&lt;/li>
 &lt;li>chore: modify abnormal logs &amp;amp; upgrade netty-all to 4.1.44.&lt;/li>
 &lt;li>refact: upgrade dependencies &amp;amp; adopt new analyzer &amp;amp; clean code.&lt;/li>
-&lt;li>chore: improve .gitignore &amp;amp; update ci configs &amp;amp; add RAT/faltten plugin.&lt;/li>
+&lt;li>chore: improve .gitignore &amp;amp; update ci configs &amp;amp; add RAT/flatten plugin.&lt;/li>
 &lt;li>chore(license): add dependencies-check ci &amp;amp; 3rd-party dependency licenses.&lt;/li>
 &lt;li>refact: Shutdown log when shutdown process &amp;amp; fix tx leak &amp;amp; enhance the file path.&lt;/li>
 &lt;li>refact: rename package to apache &amp;amp; dependency in all modules (Breaking Change).&lt;/li>
 &lt;li>chore: add license checker &amp;amp; update antrun plugin &amp;amp; fix building problem in windows.&lt;/li>
 &lt;li>feat: support one-step script for apache release v1.0.0 release.&lt;/li>
 &lt;/ul>
-&lt;h3 id="toolchain-更新">Toolchain 更新&lt;/h3>
-&lt;ul>
-&lt;li>xx&lt;/li>
-&lt;li>xx&lt;/li>
-&lt;/ul>
-&lt;h3 id="computer-更新">Computer 更新&lt;/h3>
-&lt;ul>
-&lt;li>xx&lt;/li>
-&lt;li>xx&lt;/li>
-&lt;/ul>
-&lt;h3 id="commons-更新">Commons 更新&lt;/h3>
-&lt;ul>
-&lt;li>xx&lt;/li>
-&lt;li>xx&lt;/li>
-&lt;/ul></description></item><item><title>Docs: Schema API</title><link>/cn/docs/clients/restful-api/schema/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/restful-api/schema/</guid><description>
+&lt;p>&amp;hellip;. (Toolchain, Computer, Commons, etc.)&lt;/p></description></item><item><title>Docs: Schema API</title><link>/cn/docs/clients/restful-api/schema/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/restful-api/schema/</guid><description>
 &lt;h3 id="11-schema">1.1 Schema&lt;/h3>
 &lt;p>HugeGraph 提供单一接口获取某个图的全部 Schema 信息，包括：PropertyKey、VertexLabel、EdgeLabel 和 IndexLabel。&lt;/p>
 &lt;h5 id="method--url">Method &amp;amp; Url&lt;/h5>
