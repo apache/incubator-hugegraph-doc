@@ -368,7 +368,7 @@ PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action
     - 如果使用page参数，则：offset参数不可用（不填或者为0），direction不可用，properties最多只能有一个
     - 如果不使用page参数，则：offset和limit可以用来限制结果范围，direction参数忽略
 
-属性键值对由JSON格式的属性名称和属性值组成，允许多个属性键值对作为查询条件，属性值支持精确匹配和范围匹配，精确匹配时形如`properties={"weight":0.8}`，范围匹配时形如`properties={"age":"P.gt(0.8)"}`,范围匹配支持的表达式如下：
+属性键值对由JSON格式的属性名称和属性值组成，允许多个属性键值对作为查询条件，属性值支持精确匹配、范围匹配和模糊匹配，精确匹配时形如`properties={"weight":0.8}`，范围匹配时形如`properties={"age":"P.gt(0.8)"}`，模糊匹配时形如`properties={"city": "P.textcontains("ChengDu China")}`，范围匹配支持的表达式如下：
 
 | 表达式                                | 说明                         |
 |------------------------------------|----------------------------|
