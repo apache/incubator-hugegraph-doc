@@ -1924,7 +1924,7 @@
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
-&lt;p>属性键值对由JSON格式的属性名称和属性值组成，允许多个属性键值对作为查询条件，属性值支持精确匹配和范围匹配，精确匹配时形如&lt;code>properties={&amp;quot;weight&amp;quot;:0.8}&lt;/code>，范围匹配时形如&lt;code>properties={&amp;quot;age&amp;quot;:&amp;quot;P.gt(0.8)&amp;quot;}&lt;/code>,范围匹配支持的表达式如下：&lt;/p>
+&lt;p>属性键值对由JSON格式的属性名称和属性值组成，允许多个属性键值对作为查询条件，属性值支持精确匹配、范围匹配和模糊匹配，精确匹配时形如&lt;code>properties={&amp;quot;weight&amp;quot;:0.8}&lt;/code>，范围匹配时形如&lt;code>properties={&amp;quot;age&amp;quot;:&amp;quot;P.gt(0.8)&amp;quot;}&lt;/code>，模糊匹配时形如&lt;code>properties={&amp;quot;city&amp;quot;: &amp;quot;P.textcontains(&amp;quot;ChengDu China&amp;quot;)}&lt;/code>，范围匹配支持的表达式如下：&lt;/p>
 &lt;table>
 &lt;thead>
 &lt;tr>
