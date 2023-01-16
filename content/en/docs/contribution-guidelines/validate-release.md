@@ -68,10 +68,9 @@ gpg> trust
 Your decision? 5 #select five
 Do you really want to set this key to ultimate trust? (y/N) y #slect y, then q quits trusting the next user
 
-You could also use the command to trust one user in non-interactive mode:
+# (Optional) You could also use the command to trust one user in non-interactive mode:
 echo -e "5\ny\n" | gpg --batch --command-fd 0 --edit-key $USER trust
-
-Or use the script to auto import all public keys (be carefully):
+# Or use the script to auto import all public gpg keys (be carefully):
 for key in $(gpg --no-tty --list-keys --with-colons | awk -F: '/^pub/ {print $5}'); do
   echo -e "5\ny\n" | gpg --batch --command-fd 0 --edit-key "$key" trust
 done
