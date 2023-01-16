@@ -56,19 +56,25 @@ gpg --import KEYS
 
 # 导入后可以看到如下输出, 这代表导入了 3 个用户公钥
 gpg: /home/ubuntu/.gnupg/trustdb.gpg: trustdb created
-gpg: key B78B058CC255F6DC: public key "Imba Jin (apache mail) <jin@apache.org>" imported
+gpg: key BA7E78F8A81A885E: public key "imbajin (apache mail) <jin@apache.org>" imported
 gpg: key 818108E7924549CC: public key "vaughn <vaughn@apache.org>" imported
 gpg: key 28DCAED849C4180E: public key "coderzc (CODE SIGNING KEY) <zhaocong@apache.org>" imported
 gpg: Total number processed: 3
 gpg:               imported: 3
 
-# 2. 信任发版用户 (这里需要信任 3 个, 对 Imba Jin, vaughn, coderzc 依次执行相同操作)
-gpg --edit-key Imba Jin # 以第一个为例, 进入交互模式
+# 2. 信任发版用户 (你需要信任 x 个邮件里提到的 gpg 用户名, ＞1则依次执行相同操作)
+gpg --edit-key $USER # 这里填写具体用户名或者公钥串, 回车进入交互模式
 gpg> trust
 ...输出选项..
 Your decision? 5 #选择5
 Do you really want to set this key to ultimate trust? (y/N) y #选择y, 然后 q 退出信任下一个用户
 
+# (可选) 你也可以直接使用非交互模式的如下命令:
+echo -e "5\ny\n" | gpg --batch --command-fd 0 --edit-key $USER trust
+# 或者是信任所有当前导入过的 gpg 公钥 (请小心检查)
+for key in $(gpg --no-tty --list-keys --with-colons | awk -F: '/^pub/ {print $5}'); do
+  echo -e "5\ny\n" | gpg --batch --command-fd 0 --edit-key "$key" trust
+done
 
 # 3. 检查签名(确保没有 Warning 输出, 每一个 source/binary 文件都提示 Good Signature)
 #单个文件验证
