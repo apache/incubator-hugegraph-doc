@@ -10,8 +10,7 @@ weight: 2
 
 #### 1.1 HugeGraph与TitanDB的异同
 
-HugeGraph和TitanDB都是基于[Apache TinkerPop3](https://tinkerpop.apache.org)框架的图数据库，均支持[Gremlin](https://tinkerpop.apache
-.org/gremlin.html)图查询语言，在使用方法和接口方面具有很多相似的地方。然而HugeGraph是全新设计开发的，其代码结构清晰，功能较为丰富，接口更为友好等特点。
+HugeGraph和TitanDB都是基于[Apache TinkerPop3](https://tinkerpop.apache.org)框架的图数据库，均支持[Gremlin](https://tinkerpop.apache.org/gremlin.html)图查询语言，在使用方法和接口方面具有很多相似的地方。然而HugeGraph是全新设计开发的，其代码结构清晰，功能较为丰富，接口更为友好等特点。
 
 HugeGraph相对于TitanDB而言，其主要特点如下：
 
