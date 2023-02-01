@@ -469,8 +469,7 @@
 &lt;h3 id="1-概述">1 概述&lt;/h3>
 &lt;p>本示例将&lt;a href="http://s3.thinkaurelius.com/docs/titan/1.0.0/getting-started.html">TitanDB Getting Started&lt;/a> 为模板来演示HugeGraph的使用方法。通过对比HugeGraph和TitanDB，了解HugeGraph和TitanDB的差异。&lt;/p>
 &lt;h4 id="11-hugegraph与titandb的异同">1.1 HugeGraph与TitanDB的异同&lt;/h4>
-&lt;p>HugeGraph和TitanDB都是基于&lt;a href="https://tinkerpop.apache.org">Apache TinkerPop3&lt;/a>框架的图数据库，均支持[Gremlin](&lt;a href="https://tinkerpop.apache">https://tinkerpop.apache&lt;/a>
-.org/gremlin.html)图查询语言，在使用方法和接口方面具有很多相似的地方。然而HugeGraph是全新设计开发的，其代码结构清晰，功能较为丰富，接口更为友好等特点。&lt;/p>
+&lt;p>HugeGraph和TitanDB都是基于&lt;a href="https://tinkerpop.apache.org">Apache TinkerPop3&lt;/a>框架的图数据库，均支持&lt;a href="https://tinkerpop.apache.org/gremlin.html">Gremlin&lt;/a>图查询语言，在使用方法和接口方面具有很多相似的地方。然而HugeGraph是全新设计开发的，其代码结构清晰，功能较为丰富，接口更为友好等特点。&lt;/p>
 &lt;p>HugeGraph相对于TitanDB而言，其主要特点如下：&lt;/p>
 &lt;ul>
 &lt;li>HugeGraph目前有HugeGraph-API、HugeGraph-Client、HugeGraph-Loader、HugeGraph-Studio、HugeGraph-Spark等完善的工具组件，可以完成系统集成、数据载入、图可视化查询、Spark 连接等功能；&lt;/li>
