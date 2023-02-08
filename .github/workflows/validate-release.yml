@@ -1,4 +1,4 @@
-name: Validate Apache Release
+name: "Validate Apache Release"
 
 on:
   workflow_dispatch:
@@ -6,10 +6,7 @@ on:
       release_version:
         required: true
         default: '1.0.0'
-      deploy:
-        required: true
-        default: false
-        type: boolean
+
   push:
     branches:
       - 'release-*'
@@ -23,8 +20,8 @@ jobs:
     env:
       SCRIPT_PATH: hugegraph-dist/scripts/
       URL_PREFIX: https://dist.apache.org/repos/dist/dev/incubator/hugegraph/
-      USER: 'Imba Jin'
-      RELEASE_VERSION: #todo parse version
+      USER: 'imbajin'
+      RELEASE_VERSION: '' #todo parse version
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
@@ -52,11 +49,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: 1.Download SVN Sources
+      - name: 1. Download SVN Sources
         run: |
           rm -rf dist/${{ inputs.release_version }} && svn co ${URL_PREFIX}/${{ inputs.release_version }} dist/${{ inputs.release_version }}
           cd dist/${{ inputs.release_version }} || exit
-      - name: 2.Check Environment & Import Public Keys
+
+      - name: 2. Check Environment & Import Public Keys
         run: |
           cd dist/${{ inputs.release_version }}
           shasum --version 1>/dev/null || exit
@@ -73,7 +71,8 @@ jobs:
           do
               echo -e "5\ny\n" | gpg --batch --command-fd 0 --edit-key "$key" trust
           done
-      - name: 3.Check Sha512 & GPG Signature
+
+      - name: 3. Check Sha512 & GPG Signature
         run: |
           cd dist/${{ inputs.release_version }}
           for i in *.tar.gz; do
@@ -81,7 +80,8 @@ jobs:
             shasum -a 512 --check "$i".sha512 || exit
             eval gpg "${GPG_OPT}" --verify "$i".asc "$i" || exit
           done
-      - name: 4.Validate Source Packages
+
+      - name: 4. Validate Source Packages
         run: |
           cd dist/${{ inputs.release_version }}
           ls -lh ./*.tar.gz
@@ -116,7 +116,8 @@ jobs:
             mvn package -DskipTests -ntp && ls -lh
             cd .. || exit
           done
-      - name: 5.Run Compiled Packages In Server
+
+      - name: 5. Run Compiled Packages In Server
         run: |
           cd dist/${{ inputs.release_version }}
           ls -lh
@@ -124,7 +125,8 @@ jobs:
           bin/init-store.sh && sleep 1
           bin/start-hugegraph.sh && ls ../../
           cd ../../ || exit
-      - name: 6.Run Compiled Packages In ToolChain(Loader/Tool/Hubble)
+
+      - name: 6. Run Compiled Packages In ToolChain(Loader/Tool/Hubble)
         run: |
           cd dist/${{ inputs.release_version }}
           cd ./*toolchain*src || exit
@@ -147,6 +149,7 @@ jobs:
           cat conf/hugegraph-hubble.properties && bin/start-hubble.sh
           cd ../../../ || exit
           rm -rf ./*src* && ls -lh
+
       - name: 7.Validate Binary Packages(Check NOTICE & LICENSE file)
         run: |
           cd dist/${{ inputs.release_version }}
@@ -172,6 +175,7 @@ jobs:
           fi
           cd - || exit
           done
+
       - name: 8.Validate Binary Packages(Start Server)
         run: |
           cd dist/${{ inputs.release_version }}
@@ -181,6 +185,7 @@ jobs:
           jps | grep HugeGraphServer | awk '{print $1}' | xargs kill -9
           bin/start-hugegraph.sh && ls ../
           cd - || exit
+
       - name: 9.Validate Binary Packages(Start ToolChain(Loader/Tool/Hubble))
         run: |
           cd dist/${{ inputs.release_version }}
@@ -204,6 +209,7 @@ jobs:
           cat conf/hugegraph-hubble.properties
           bin/stop-hubble.sh && bin/start-hubble.sh
           cd - || exit
+
     strategy:
       fail-fast: false
       matrix:
