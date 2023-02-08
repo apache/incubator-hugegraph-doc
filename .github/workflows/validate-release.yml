@@ -207,4 +207,4 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        java_version: [ '8' ] ## 临时处理，回滚8，11
+        java_version: [ '8','11' ]
