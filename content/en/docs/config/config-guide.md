@@ -199,6 +199,7 @@ raft.rpc_threads=80
 raft.rpc_connect_timeout=5000
 raft.rpc_timeout=60000
 
+# if use 'ikanalyzer', need download jar from 'https://github.com/apache/hugegraph-doc/raw/ik_binary/dist/server/ikanalyzer-2012_u6.jar' to lib directory
 search.text_analyzer=jieba
 search.text_analyzer_mode=INDEX
 
