@@ -62,12 +62,12 @@ gpg: key 28DCAED849C4180E: public key "coderzc (CODE SIGNING KEY) <zhaocong@apac
 gpg: Total number processed: 3
 gpg:               imported: 3
 
-# 2. 信任发版用户 (你需要信任 x 个邮件里提到的 gpg 用户名, ＞1则依次执行相同操作)
+# 2. 信任发版用户 (你需要信任 n 个邮件里提到的 gpg 用户名, ＞1则依次执行相同操作)
 gpg --edit-key $USER # 这里填写具体用户名或者公钥串, 回车进入交互模式
 gpg> trust
 ...输出选项..
-Your decision? 5 #选择5
-Do you really want to set this key to ultimate trust? (y/N) y #选择y, 然后 q 退出信任下一个用户
+Your decision? 5 # 选择5
+Do you really want to set this key to ultimate trust? (y/N) y # 选择y, 然后 q 退出信任下一个用户
 
 # (可选) 你也可以直接使用非交互模式的如下命令:
 echo -e "5\ny\n" | gpg --batch --command-fd 0 --edit-key $USER trust
