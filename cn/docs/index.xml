@@ -187,6 +187,7 @@ raft.apply_batch=1
 raft.rpc_threads=80
 raft.rpc_connect_timeout=5000
 raft.rpc_timeout=60000
+# if use &amp;#39;ikanalyzer&amp;#39;, need download jar from &amp;#39;https://github.com/apache/hugegraph-doc/raw/ik_binary/dist/server/ikanalyzer-2012_u6.jar&amp;#39; to lib directory
 search.text_analyzer=jieba
 search.text_analyzer_mode=INDEX
 # rocksdb backend config
@@ -2686,7 +2687,7 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;tr>
 &lt;td>search.text_analyzer&lt;/td>
 &lt;td>ikanalyzer&lt;/td>
-&lt;td>Choose a text analyzer for searching the vertex/edge properties, available type are [word, ansj, hanlp, smartcn, jieba, jcseg, mmseg4j, ikanalyzer].&lt;/td>
+&lt;td>Choose a text analyzer for searching the vertex/edge properties, available type are [word, ansj, hanlp, smartcn, jieba, jcseg, mmseg4j, ikanalyzer]. # if use &amp;lsquo;ikanalyzer&amp;rsquo;, need download jar from &amp;lsquo;&lt;a href="https://github.com/apache/hugegraph-doc/raw/ik_binary/dist/server/ikanalyzer-2012_u6.jar'">https://github.com/apache/hugegraph-doc/raw/ik_binary/dist/server/ikanalyzer-2012_u6.jar'&lt;/a> to lib directory&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>search.text_analyzer_mode&lt;/td>
