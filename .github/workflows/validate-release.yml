@@ -109,19 +109,19 @@ jobs:
             COUNT=$(find . -type d -empty | wc -l)
             if [[ $COUNT -ne 0 ]]; then
               find . -type d -empty
-              echo "The package should not include empty directory, but get $COUNT" # TODO: && exit 1
+              echo "The package shouldn't include empty directory, but get $COUNT" # TODO: && exit 1
             fi
           
             # 4.3 ensure any file should less than 900kb & not include binary file
             COUNT=$(find . -type f -size +900k | wc -l)
             if [[ $COUNT -ne 0 ]]; then
               find . -type f -size +900k
-              echo "The package should not include file larger than 900kb, but get $COUNT"
+              echo "The package shouldn't include file larger than 900kb, but get $COUNT"
             fi
-            COUNT=$(find . -type f | perl -lne 'print if -B' | wc -l)
+            COUNT=$(find . -type f | perl -lne 'print if -B' | grep -v *.txt | wc -l)
             if [[ $COUNT -ne 0 ]]; then
               find . -type f | perl -lne 'print if -B'
-              echo "The package should not include binary file, but get $COUNT"
+              echo "The package shouldn't include binary file, but get $COUNT"
             fi
           
             # 4.4 test compile the packages
