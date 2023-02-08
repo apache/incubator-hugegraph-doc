@@ -14,7 +14,7 @@
 # limitations under the License.
 
 # Sample workflow for building and deploying a Hugo site to GitHub Pages
-name: Deploy site to pages (hugo)
+name: "Deploy site to pages (hugo)"
 
 on:
   pull_request:
