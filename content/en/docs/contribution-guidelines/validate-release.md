@@ -61,12 +61,12 @@ gpg: key 28DCAED849C4180E: public key "coderzc (CODE SIGNING KEY) <zhaocong@apac
 gpg: Total number processed: 3
 gpg:               imported: 3
 
-# 2. Trust release users (you need trust x username mentioned in voting mail, if more than 1 user, just repeat the steps in turn or use script)
+# 2. Trust release users (trust n username mentioned in voting mail, if more than one user, just repeat the steps in turn or use the script below)
 gpg --edit-key $USER # input the username, enter the interactive mode
 gpg> trust
 ...output options..
-Your decision? 5 #select five
-Do you really want to set this key to ultimate trust? (y/N) y #slect y, then q quits trusting the next user
+Your decision? 5 # select 5
+Do you really want to set this key to ultimate trust? (y/N) y # slect y, then q quits trusting the next user
 
 # (Optional) You could also use the command to trust one user in non-interactive mode:
 echo -e "5\ny\n" | gpg --batch --command-fd 0 --edit-key $USER trust
