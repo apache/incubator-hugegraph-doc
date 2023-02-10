@@ -1,6 +1,6 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HugeGraph – Quick Start</title><link>/docs/quickstart/</link><description>Recent content in Quick Start on HugeGraph</description><generator>Hugo -- gohugo.io</generator><atom:link href="/docs/quickstart/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: HugeGraph-Server Quick Start</title><link>/docs/quickstart/hugegraph-server/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-server/</guid><description>
 &lt;h3 id="1-hugegraph-server-overview">1 HugeGraph-Server Overview&lt;/h3>
-&lt;p>HugeGraph-Server is the core part of the HugeGraph Project, contains submodules such as Core、Backend、API.&lt;/p>
+&lt;p>&lt;code>HugeGraph-Server&lt;/code> is the core part of the HugeGraph Project, contains submodules such as Core、Backend、API.&lt;/p>
 &lt;p>The Core Module is an implementation of the Tinkerpop interface; The Backend module is used to save the graph data to the data store, currently supported backends include：Memory、Cassandra、ScyllaDB、RocksDB; The API Module provides HTTP Server, which converts Client&amp;rsquo;s HTTP request into a call to Core Module.&lt;/p>
 &lt;blockquote>
 &lt;p>There will be two spellings HugeGraph-Server and HugeGraphServer in the document, and other modules are similar. There is no big difference in the meaning of these two ways of writing, which can be distinguished as follows: &lt;code>HugeGraph-Server&lt;/code> represents the code of server-related components, &lt;code>HugeGraphServer&lt;/code> represents the service process.&lt;/p>
@@ -17,30 +17,34 @@
 &lt;p>There are three ways to deploy HugeGraph-Server components:&lt;/p>
 &lt;ul>
 &lt;li>Method 1: One-click deployment&lt;/li>
-&lt;li>Method 2: Download the tarball&lt;/li>
+&lt;li>Method 2: Download the tarball (most recommended)&lt;/li>
 &lt;li>Method 3: Source code compilation&lt;/li>
 &lt;/ul>
 &lt;h4 id="31-one-click-deployment">3.1 One-click deployment&lt;/h4>
-&lt;p>HugeGraph-Tools provides a command-line tool for one-click deployment, users can use this tool to quickly download、decompress、configure and start HugeGraphServer and HugeGraphStudio with one click.
-of course, you still have to download the tarball of HugeGraph-Tools first.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://github.com/hugegraph/hugegraph-tools/releases/download/v&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>/hugegraph-tools-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>.tar.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar -zxvf hugegraph-tools-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>.tar.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-tools-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
+&lt;p>HugeGraph-Tools provides a command-line tool for one-click deployment, users can use this tool to quickly download、decompress、configure and start HugeGraphServer and HugeGraph-Hubble with one click.&lt;/p>
+&lt;p>Of course, you should download the tarball of HugeGraph-Toolchain first.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># download toolchain package, it includes loader + tool + hubble, please check the latest version (here is 1.0.0)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph-*.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># enter the tool&amp;#39;s package&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph*/*tool*
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>note：${version} is the version, The latest version can refer to &lt;a href="/docs/download/download">Download Page&lt;/a>, Or click the link to download directly from the Download page&lt;/p>
+&lt;p>note：${version} is the version, The latest version can refer to &lt;a href="/docs/download/download">Download Page&lt;/a>, or click the link to download directly from the Download page&lt;/p>
 &lt;/blockquote>
 &lt;p>The general entry script for HugeGraph-Tools is &lt;code>bin/hugegraph&lt;/code>, Users can use the &lt;code>help&lt;/code> command to view its usage, here only the commands for one-click deployment are introduced.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/hugegraph deploy -v &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>hugegraph-version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span> -p &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>install-path&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>-u &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>download-path-prefix&lt;span style="color:#ce5c00;font-weight:bold">}]&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>{hugegraph-version}&lt;/code> indicates the version of HugeGraphServer and HugeGraphStudio to be deployed, users can view the &lt;code>conf/version-mapping.yaml&lt;/code> file for version information, &lt;code>{install-path}&lt;/code> specify the installation directory of HugeGraphServer and HugeGraphStudio, &lt;code>{download-path-prefix}&lt;/code> optional, specify the download address of HugeGraphServer and HugeGraphStudio tarball, use default download URL if not provided, for example, to start HugeGraph-Server and HugeGraphStudio version 0.6, write the above command as &lt;code>bin/hugegraph deploy -v 0.6 -p services&lt;/code>.&lt;/p>
 &lt;h4 id="32-download-the-tar-tarball">3.2 Download the tar tarball&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://github.com/hugegraph/hugegraph/releases/download/v&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>/hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>.tar.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar -zxvf hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>.tar.gz
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># use the latest version, here is 1.0.0 for example&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph*.tar.gz
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="33-source-code-compilation">3.3 Source code compilation&lt;/h4>
 &lt;p>Download HugeGraph source code&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone https://github.com/hugegraph/hugegraph.git
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph.git
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Compile and generate tarball&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn package -DskipTests
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn package -DskipTests -ntp
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The execution log is as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>......
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> Reactor Summary:
@@ -60,7 +64,7 @@ of course, you still have to download the tarball of HugeGraph-Tools first.&lt;/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> BUILD SUCCESS
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> ------------------------------------------------------------------------
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>......
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>After successful execution, hugegraph-*.tar.gz files will be generated in the hugegraph directory, which is the tarball generated by compilation.&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>After successful execution, &lt;code>*hugegraph-*.tar.gz&lt;/code> files will be generated in the hugegraph directory, which is the tarball generated by compilation.&lt;/p>
 &lt;h3 id="4-config">4 Config&lt;/h3>
 &lt;p>If you need to quickly start HugeGraph just for testing, then you only need to modify a few configuration items (see next section).
 for detailed configuration introduction, please refer to &lt;a href="/docs/config/config-guide">configuration document&lt;/a> and &lt;a href="/docs/config/config-option">introduction to configuration items&lt;/a>&lt;/p>
