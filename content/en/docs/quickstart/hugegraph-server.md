@@ -1,12 +1,12 @@
 ---
 title: "HugeGraph-Server Quick Start"
-linkTitle: "Install HugeGraph-Server"
+linkTitle: "Install/Build HugeGraph-Server"
 weight: 1
 ---
 
 ### 1 HugeGraph-Server Overview
 
-HugeGraph-Server is the core part of the HugeGraph Project, contains submodules such as Core、Backend、API.
+`HugeGraph-Server` is the core part of the HugeGraph Project, contains submodules such as Core、Backend、API.
 
 The Core Module is an implementation of the Tinkerpop interface; The Backend module is used to save the graph data to the data store, currently supported backends include：Memory、Cassandra、ScyllaDB、RocksDB; The API Module provides HTTP Server, which converts Client's HTTP request into a call to Core Module.
 
@@ -37,7 +37,7 @@ gcc --version
 There are three ways to deploy HugeGraph-Server components:
 
 - Method 1: One-click deployment
-- Method 2: Download the tarball
+- Method 2: Download the tarball (most recommended)
 - Method 3: Source code compilation
 
 #### 3.1 One-click deployment
