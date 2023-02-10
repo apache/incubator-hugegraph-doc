@@ -8126,19 +8126,25 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 导入后可以看到如下输出, 这代表导入了 3 个用户公钥&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg: /home/ubuntu/.gnupg/trustdb.gpg: trustdb created
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg: key B78B058CC255F6DC: public key &lt;span style="color:#4e9a06">&amp;#34;Imba Jin (apache mail) &amp;lt;jin@apache.org&amp;gt;&amp;#34;&lt;/span> imported
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg: key BA7E78F8A81A885E: public key &lt;span style="color:#4e9a06">&amp;#34;imbajin (apache mail) &amp;lt;jin@apache.org&amp;gt;&amp;#34;&lt;/span> imported
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg: key 818108E7924549CC: public key &lt;span style="color:#4e9a06">&amp;#34;vaughn &amp;lt;vaughn@apache.org&amp;gt;&amp;#34;&lt;/span> imported
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg: key 28DCAED849C4180E: public key &lt;span style="color:#4e9a06">&amp;#34;coderzc (CODE SIGNING KEY) &amp;lt;zhaocong@apache.org&amp;gt;&amp;#34;&lt;/span> imported
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg: Total number processed: &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg: imported: &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 2. 信任发版用户 (这里需要信任 3 个, 对 Imba Jin, vaughn, coderzc 依次执行相同操作)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg --edit-key Imba Jin &lt;span style="color:#8f5902;font-style:italic"># 以第一个为例, 进入交互模式&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 2. 信任发版用户 (你需要信任 n 个邮件里提到的 gpg 用户名, ＞1则依次执行相同操作)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg --edit-key &lt;span style="color:#000">$USER&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># 这里填写具体用户名或者公钥串, 回车进入交互模式&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg&amp;gt; trust
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...输出选项..
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Your decision? &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span> &lt;span style="color:#8f5902;font-style:italic">#选择5&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Do you really want to &lt;span style="color:#204a87">set&lt;/span> this key to ultimate trust? &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>y/N&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> y &lt;span style="color:#8f5902;font-style:italic">#选择y, 然后 q 退出信任下一个用户&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Your decision? &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># 选择5&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Do you really want to &lt;span style="color:#204a87">set&lt;/span> this key to ultimate trust? &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>y/N&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> y &lt;span style="color:#8f5902;font-style:italic"># 选择y, 然后 q 退出信任下一个用户&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># (可选) 你也可以直接使用非交互模式的如下命令:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">echo&lt;/span> -e &lt;span style="color:#4e9a06">&amp;#34;5\ny\n&amp;#34;&lt;/span> &lt;span style="color:#000;font-weight:bold">|&lt;/span> gpg --batch --command-fd &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> --edit-key &lt;span style="color:#000">$USER&lt;/span> trust
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 或者是信任所有当前导入过的 gpg 公钥 (请小心检查)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">for&lt;/span> key in &lt;span style="color:#204a87;font-weight:bold">$(&lt;/span>gpg --no-tty --list-keys --with-colons &lt;span style="color:#000;font-weight:bold">|&lt;/span> awk -F: &lt;span style="color:#4e9a06">&amp;#39;/^pub/ {print $5}&amp;#39;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">)&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#204a87;font-weight:bold">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87">echo&lt;/span> -e &lt;span style="color:#4e9a06">&amp;#34;5\ny\n&amp;#34;&lt;/span> &lt;span style="color:#000;font-weight:bold">|&lt;/span> gpg --batch --command-fd &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> --edit-key &lt;span style="color:#4e9a06">&amp;#34;&lt;/span>&lt;span style="color:#000">$key&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;&lt;/span> trust
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">done&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 3. 检查签名(确保没有 Warning 输出, 每一个 source/binary 文件都提示 Good Signature)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">#单个文件验证&lt;/span>
@@ -8159,9 +8165,9 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;li>&lt;strong>不存在&lt;/strong> 缺乏 License 的二进制文件&lt;/li>
 &lt;li>源码文件都包含标准 &lt;code>ASF License&lt;/code> 头 (这个用插件跑一下为主)&lt;/li>
 &lt;li>检查每个父 / 子模块的 &lt;code>pom.xml&lt;/code> 版本号是否一致 (且符合期望)&lt;/li>
-&lt;li>检查前 3 ~ 5 个 commit 提交，点进去看看是否修改处和源码文件一致&lt;/li>
 &lt;li>最后，确保源码可以正常 / 正确编译 (然后看看测试和规范)&lt;/li>
 &lt;/ol>
+&lt;p>PMC 同学请特别注意认真检查 &lt;code>LICENSE&lt;/code> + &lt;code>NOTICE&lt;/code> 文件, 确保文件严格遵循了 ASF 的发版要求, 大部分的发版问题都与之相关&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 请优先使用/切换到 java 11 版本进行后序的编译和运行操作&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># java --version&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>

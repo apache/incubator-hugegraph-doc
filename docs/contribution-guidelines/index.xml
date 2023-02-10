@@ -171,18 +171,25 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># After importing, you can see the following output, which means that 3 user public keys have been imported&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg: /home/ubuntu/.gnupg/trustdb.gpg: trustdb created
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg: key B78B058CC255F6DC: public key &lt;span style="color:#4e9a06">&amp;#34;Imba Jin (apache mail) &amp;lt;jin@apache.org&amp;gt;&amp;#34;&lt;/span> imported
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg: key BA7E78F8A81A885E: public key &lt;span style="color:#4e9a06">&amp;#34;imbajin (apache mail) &amp;lt;jin@apache.org&amp;gt;&amp;#34;&lt;/span> imported
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg: key 818108E7924549CC: public key &lt;span style="color:#4e9a06">&amp;#34;vaughn &amp;lt;vaughn@apache.org&amp;gt;&amp;#34;&lt;/span> imported
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg: key 28DCAED849C4180E: public key &lt;span style="color:#4e9a06">&amp;#34;coderzc (CODE SIGNING KEY) &amp;lt;zhaocong@apache.org&amp;gt;&amp;#34;&lt;/span> imported
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg: Total number processed: &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg: imported: &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 2. Trust release users (here you need to trust 3 users, perform the same operation for Imba Jin, vaughn, coderzc in turn)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg --edit-key Imba Jin &lt;span style="color:#8f5902;font-style:italic"># Take the first one as an example, enter the interactive mode&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 2. Trust release users (trust n username mentioned in voting mail, if more than one user, just repeat the steps in turn or use the script below)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg --edit-key &lt;span style="color:#000">$USER&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># input the username, enter the interactive mode&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg&amp;gt; trust
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...output options..
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Your decision? &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span> &lt;span style="color:#8f5902;font-style:italic">#select five&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Do you really want to &lt;span style="color:#204a87">set&lt;/span> this key to ultimate trust? &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>y/N&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> y &lt;span style="color:#8f5902;font-style:italic">#slect y, then q quits trusting the next user&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Your decision? &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># select 5&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Do you really want to &lt;span style="color:#204a87">set&lt;/span> this key to ultimate trust? &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>y/N&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> y &lt;span style="color:#8f5902;font-style:italic"># slect y, then q quits trusting the next user&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># (Optional) You could also use the command to trust one user in non-interactive mode:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">echo&lt;/span> -e &lt;span style="color:#4e9a06">&amp;#34;5\ny\n&amp;#34;&lt;/span> &lt;span style="color:#000;font-weight:bold">|&lt;/span> gpg --batch --command-fd &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> --edit-key &lt;span style="color:#000">$USER&lt;/span> trust
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Or use the script to auto import all public gpg keys (be carefully):&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">for&lt;/span> key in &lt;span style="color:#204a87;font-weight:bold">$(&lt;/span>gpg --no-tty --list-keys --with-colons &lt;span style="color:#000;font-weight:bold">|&lt;/span> awk -F: &lt;span style="color:#4e9a06">&amp;#39;/^pub/ {print $5}&amp;#39;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">)&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#204a87;font-weight:bold">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87">echo&lt;/span> -e &lt;span style="color:#4e9a06">&amp;#34;5\ny\n&amp;#34;&lt;/span> &lt;span style="color:#000;font-weight:bold">|&lt;/span> gpg --batch --command-fd &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> --edit-key &lt;span style="color:#4e9a06">&amp;#34;&lt;/span>&lt;span style="color:#000">$key&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;&lt;/span> trust
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">done&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 3. Check the signature (make sure there is no Warning output, every source/binary file prompts Good Signature)&lt;/span>
@@ -202,9 +209,8 @@
 &lt;li>folders with &lt;code>incubating&lt;/code>, and no &lt;strong>empty&lt;/strong> files/folders&lt;/li>
 &lt;li>&lt;code>LICENSE&lt;/code> + &lt;code>NOTICE&lt;/code> + &lt;code>DISCLAIM&lt;/code> file exists and the content is normal&lt;/li>
 &lt;li>&lt;strong>does not exist&lt;/strong> binaries (without LICENSE)&lt;/li>
-&lt;li>The source code files all contain the standard &lt;code>ASF License&lt;/code> header (this could be done with the Maven-MAT plugin)&lt;/li>
+&lt;li>The source code files all contain the standard &lt;code>ASF License&lt;/code> header (this could be done with the &lt;code>Maven-MAT&lt;/code> plugin)&lt;/li>
 &lt;li>Check whether the &lt;code>pom.xml&lt;/code> version number of each parent/child module is consistent (and meet expectations)&lt;/li>
-&lt;li>Check the first 3 to 5 commits, click to see if the modification is consistent with the source file&lt;/li>
 &lt;li>Finally, make sure the source code works/compiles correctly&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># prefer to use/switch to java 11 for the following operations (compiling/running)&lt;/span>
