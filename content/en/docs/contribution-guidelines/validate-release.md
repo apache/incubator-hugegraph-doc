@@ -101,10 +101,9 @@ After decompressing `*hugegraph*src.tar.gz`, Do the following checks:
 1. folders with `incubating`, and no **empty** files/folders
 2. `LICENSE` + `NOTICE` + `DISCLAIM` file exists and the content is normal
 3. **does not exist** binaries (without LICENSE)
-4. The source code files all contain the standard `ASF License` header (this could be done with the Maven-MAT plugin)
+4. The source code files all contain the standard `ASF License` header (this could be done with the `Maven-MAT` plugin)
 5. Check whether the `pom.xml` version number of each parent/child module is consistent (and meet expectations)
-6. Check the first 3 to 5 commits, click to see if the modification is consistent with the source file
-7. Finally, make sure the source code works/compiles correctly
+6. Finally, make sure the source code works/compiles correctly
 
 ```bash
 # prefer to use/switch to java 11 for the following operations (compiling/running)
