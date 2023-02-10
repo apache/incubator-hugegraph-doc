@@ -56,19 +56,25 @@ gpg --import KEYS
 
 # 导入后可以看到如下输出, 这代表导入了 3 个用户公钥
 gpg: /home/ubuntu/.gnupg/trustdb.gpg: trustdb created
-gpg: key B78B058CC255F6DC: public key "Imba Jin (apache mail) <jin@apache.org>" imported
+gpg: key BA7E78F8A81A885E: public key "imbajin (apache mail) <jin@apache.org>" imported
 gpg: key 818108E7924549CC: public key "vaughn <vaughn@apache.org>" imported
 gpg: key 28DCAED849C4180E: public key "coderzc (CODE SIGNING KEY) <zhaocong@apache.org>" imported
 gpg: Total number processed: 3
 gpg:               imported: 3
 
-# 2. 信任发版用户 (这里需要信任 3 个, 对 Imba Jin, vaughn, coderzc 依次执行相同操作)
-gpg --edit-key Imba Jin # 以第一个为例, 进入交互模式
+# 2. 信任发版用户 (你需要信任 n 个邮件里提到的 gpg 用户名, ＞1则依次执行相同操作)
+gpg --edit-key $USER # 这里填写具体用户名或者公钥串, 回车进入交互模式
 gpg> trust
 ...输出选项..
-Your decision? 5 #选择5
-Do you really want to set this key to ultimate trust? (y/N) y #选择y, 然后 q 退出信任下一个用户
+Your decision? 5 # 选择5
+Do you really want to set this key to ultimate trust? (y/N) y # 选择y, 然后 q 退出信任下一个用户
 
+# (可选) 你也可以直接使用非交互模式的如下命令:
+echo -e "5\ny\n" | gpg --batch --command-fd 0 --edit-key $USER trust
+# 或者是信任所有当前导入过的 gpg 公钥 (请小心检查)
+for key in $(gpg --no-tty --list-keys --with-colons | awk -F: '/^pub/ {print $5}'); do
+  echo -e "5\ny\n" | gpg --batch --command-fd 0 --edit-key "$key" trust
+done
 
 # 3. 检查签名(确保没有 Warning 输出, 每一个 source/binary 文件都提示 Good Signature)
 #单个文件验证
@@ -96,8 +102,9 @@ for i in *.tar.gz; do echo $i; gpg --verify $i.asc $i ; done
 3. **不存在** 缺乏 License 的二进制文件
 4. 源码文件都包含标准 `ASF License` 头 (这个用插件跑一下为主)
 5. 检查每个父 / 子模块的 `pom.xml` 版本号是否一致 (且符合期望)
-6. 检查前 3 ~ 5 个 commit 提交，点进去看看是否修改处和源码文件一致
-7. 最后，确保源码可以正常 / 正确编译 (然后看看测试和规范)
+6. 最后，确保源码可以正常 / 正确编译 (然后看看测试和规范)
+
+PMC 同学请特别注意认真检查 `LICENSE` + `NOTICE` 文件, 确保文件严格遵循了 ASF 的发版要求, 大部分的发版问题都与之相关
 
 ```bash
 # 请优先使用/切换到 java 11 版本进行后序的编译和运行操作
