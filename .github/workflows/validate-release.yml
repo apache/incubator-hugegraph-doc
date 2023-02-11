@@ -20,7 +20,7 @@ on:
 
 jobs:
   build:
-    name: "Build On ${{ matrix.os }}-${{ matrix.java_version }}"
+    name: "Build On ${{ matrix.os }}(jdk-${{ matrix.java_version }})"
     runs-on: ${{ matrix.os }}
     env:
       SCRIPT_PATH: hugegraph-dist/scripts/
