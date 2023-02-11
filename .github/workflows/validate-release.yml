@@ -20,7 +20,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: [ubuntu-latest, windows-latest, macos-latest]
     env:
       SCRIPT_PATH: hugegraph-dist/scripts/
       URL_PREFIX: https://dist.apache.org/repos/dist/dev/incubator/hugegraph/
