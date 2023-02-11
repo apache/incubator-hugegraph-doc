@@ -12,42 +12,36 @@ The Core Module is an implementation of the Tinkerpop interface; The Backend mod
 
 > There will be two spellings HugeGraph-Server and HugeGraphServer in the document, and other modules are similar. There is no big difference in the meaning of these two ways of writing, which can be distinguished as follows: `HugeGraph-Server` represents the code of server-related components, `HugeGraphServer` represents the service process.
 
-### 2 Dependency
+### 2 Dependency for Building/Running
 
 #### 2.1 Install Java11 (JDK 11)
 
-Consider use Java 11 to run `HugeGraph-Server`(also compatible with Java 8), and configure by yourself.
+Consider use Java 11 to run `HugeGraph-Server`(also compatible with Java 8 now), and configure by yourself.
 
 **Be sure to execute the `java -version` command to check the jdk version before reading**
 
-```bash
-java -version
-```
+#### 2.2 Install GCC-4.3(GLIBCXX_3.4.10) or higher version (optional)
 
-#### 2.2 Install GCC-4.3.0(GLIBCXX_3.4.10) or update version (optional)
-
-If you are using the RocksDB backend, be sure to execute the `gcc --version` command to check the gcc version; if you are using other backends, this is not required.
-
-```bash
-gcc --version
-```
+If you are using the `RocksDB` backend, be sure to execute the `gcc --version` command to check its version; Not required if you are using other backends.
 
 ### 3 Deploy
 
 There are three ways to deploy HugeGraph-Server components:
 
 - Method 1: One-click deployment
-- Method 2: Download the tarball (most recommended)
+- Method 2: Download the binary tarball (most recommended)
 - Method 3: Source code compilation
+- Method 4: Use Docker container (BETA)
 
 #### 3.1 One-click deployment
 
-HugeGraph-Tools provides a command-line tool for one-click deployment, users can use this tool to quickly download、decompress、configure and start HugeGraphServer and HugeGraph-Hubble with one click.
+`HugeGraph-Tools` provides a command-line tool for one-click deployment, users can use this tool to quickly download、decompress、configure and start `HugeGraphServer` and `HugeGraph-Hubble` with one click.
 
-Of course, you should download the tarball of HugeGraph-Toolchain first.
+Of course, you should download the tarball of `HugeGraph-Toolchain` first.
 
 ```bash
-# download toolchain package, it includes loader + tool + hubble, please check the latest version (here is 1.0.0)
+# download toolchain binary package, it includes loader + tool + hubble
+# please check the latest version (e.g. here is 1.0.0)
 wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
 tar zxf *hugegraph-*.tar.gz
 
@@ -65,26 +59,42 @@ bin/hugegraph deploy -v {hugegraph-version} -p {install-path} [-u {download-path
 
 `{hugegraph-version}` indicates the version of HugeGraphServer and HugeGraphStudio to be deployed, users can view the `conf/version-mapping.yaml` file for version information, `{install-path}` specify the installation directory of HugeGraphServer and HugeGraphStudio, `{download-path-prefix}` optional, specify the download address of HugeGraphServer and HugeGraphStudio tarball, use default download URL if not provided, for example, to start HugeGraph-Server and HugeGraphStudio version 0.6, write the above command as `bin/hugegraph deploy -v 0.6 -p services`.
 
-#### 3.2 Download the tar tarball
+#### 3.2 Download the binary tar tarball
 
+You could download the binary tarball from the download page of ASF site like this:
 ```bash
 # use the latest version, here is 1.0.0 for example
 wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz
 tar zxf *hugegraph*.tar.gz
+
+# (Optional) verify the integrity with SHA512 (recommended)
+shasum -a 512 apache-hugegraph-incubating-1.0.0.tar.gz
+curl https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz.sha512
 ```
 
 #### 3.3 Source code compilation
 
-Download HugeGraph source code
+We could get HugeGraph **source code** by 2 ways: (So as the other HugeGraph repos/modules)
+- download the stable/release version from the ASF site
+- clone the unstable/latest version by GitBox(ASF) or GitHub
 
 ```bash
+# Way 1. download release package from the ASF site
+wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-src-1.0.0.tar.gz
+tar zxf *hugegraph*.tar.gz
+
+# (Optional) verify the integrity with SHA512 (recommended)
+shasum -a 512 apache-hugegraph-incubating-src-1.0.0.tar.gz
+curl https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0-src.tar.gz.sha512
+
+# Way2 : clone the latest code by git way (e.g GitHub)
 git clone https://github.com/apache/hugegraph.git
 ```
 
 Compile and generate tarball
 
 ```bash
-cd hugegraph
+cd *hugegraph
 mvn package -DskipTests -ntp
 ```
 
