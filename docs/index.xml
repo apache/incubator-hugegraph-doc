@@ -1337,25 +1337,25 @@ serializer=binary
 &lt;blockquote>
 &lt;p>There will be two spellings HugeGraph-Server and HugeGraphServer in the document, and other modules are similar. There is no big difference in the meaning of these two ways of writing, which can be distinguished as follows: &lt;code>HugeGraph-Server&lt;/code> represents the code of server-related components, &lt;code>HugeGraphServer&lt;/code> represents the service process.&lt;/p>
 &lt;/blockquote>
-&lt;h3 id="2-dependency">2 Dependency&lt;/h3>
+&lt;h3 id="2-dependency-for-buildingrunning">2 Dependency for Building/Running&lt;/h3>
 &lt;h4 id="21-install-java11-jdk-11">2.1 Install Java11 (JDK 11)&lt;/h4>
-&lt;p>Consider use Java 11 to run &lt;code>HugeGraph-Server&lt;/code>(also compatible with Java 8), and configure by yourself.&lt;/p>
+&lt;p>Consider use Java 11 to run &lt;code>HugeGraph-Server&lt;/code>(also compatible with Java 8 now), and configure by yourself.&lt;/p>
 &lt;p>&lt;strong>Be sure to execute the &lt;code>java -version&lt;/code> command to check the jdk version before reading&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>java -version
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="22-install-gcc-430glibcxx_3410-or-update-version-optional">2.2 Install GCC-4.3.0(GLIBCXX_3.4.10) or update version (optional)&lt;/h4>
-&lt;p>If you are using the RocksDB backend, be sure to execute the &lt;code>gcc --version&lt;/code> command to check the gcc version; if you are using other backends, this is not required.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>gcc --version
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-deploy">3 Deploy&lt;/h3>
+&lt;h4 id="22-install-gcc-43glibcxx_3410-or-higher-version-optional">2.2 Install GCC-4.3(GLIBCXX_3.4.10) or higher version (optional)&lt;/h4>
+&lt;p>If you are using the &lt;code>RocksDB&lt;/code> backend, be sure to execute the &lt;code>gcc --version&lt;/code> command to check its version; Not required if you are using other backends.&lt;/p>
+&lt;h3 id="3-deploy">3 Deploy&lt;/h3>
 &lt;p>There are three ways to deploy HugeGraph-Server components:&lt;/p>
 &lt;ul>
 &lt;li>Method 1: One-click deployment&lt;/li>
-&lt;li>Method 2: Download the tarball (most recommended)&lt;/li>
+&lt;li>Method 2: Download the binary tarball (most recommended)&lt;/li>
 &lt;li>Method 3: Source code compilation&lt;/li>
+&lt;li>Method 4: Use Docker container (BETA)&lt;/li>
 &lt;/ul>
 &lt;h4 id="31-one-click-deployment">3.1 One-click deployment&lt;/h4>
-&lt;p>HugeGraph-Tools provides a command-line tool for one-click deployment, users can use this tool to quickly download、decompress、configure and start HugeGraphServer and HugeGraph-Hubble with one click.&lt;/p>
-&lt;p>Of course, you should download the tarball of HugeGraph-Toolchain first.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># download toolchain package, it includes loader + tool + hubble, please check the latest version (here is 1.0.0)&lt;/span>
+&lt;p>&lt;code>HugeGraph-Tools&lt;/code> provides a command-line tool for one-click deployment, users can use this tool to quickly download、decompress、configure and start &lt;code>HugeGraphServer&lt;/code> and &lt;code>HugeGraph-Hubble&lt;/code> with one click.&lt;/p>
+&lt;p>Of course, you should download the tarball of &lt;code>HugeGraph-Toolchain&lt;/code> first.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># download toolchain binary package, it includes loader + tool + hubble&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># please check the latest version (e.g. here is 1.0.0)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph-*.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -1367,15 +1367,33 @@ serializer=binary
 &lt;p>The general entry script for HugeGraph-Tools is &lt;code>bin/hugegraph&lt;/code>, Users can use the &lt;code>help&lt;/code> command to view its usage, here only the commands for one-click deployment are introduced.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/hugegraph deploy -v &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>hugegraph-version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span> -p &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>install-path&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>-u &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>download-path-prefix&lt;span style="color:#ce5c00;font-weight:bold">}]&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>{hugegraph-version}&lt;/code> indicates the version of HugeGraphServer and HugeGraphStudio to be deployed, users can view the &lt;code>conf/version-mapping.yaml&lt;/code> file for version information, &lt;code>{install-path}&lt;/code> specify the installation directory of HugeGraphServer and HugeGraphStudio, &lt;code>{download-path-prefix}&lt;/code> optional, specify the download address of HugeGraphServer and HugeGraphStudio tarball, use default download URL if not provided, for example, to start HugeGraph-Server and HugeGraphStudio version 0.6, write the above command as &lt;code>bin/hugegraph deploy -v 0.6 -p services&lt;/code>.&lt;/p>
-&lt;h4 id="32-download-the-tar-tarball">3.2 Download the tar tarball&lt;/h4>
+&lt;h4 id="32-download-the-binary-tar-tarball">3.2 Download the binary tar tarball&lt;/h4>
+&lt;p>You could download the binary tarball from the download page of ASF site like this:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># use the latest version, here is 1.0.0 for example&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph*.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># (Optional) verify the integrity with SHA512 (recommended)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>shasum -a &lt;span style="color:#0000cf;font-weight:bold">512&lt;/span> apache-hugegraph-incubating-1.0.0.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz.sha512
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="33-source-code-compilation">3.3 Source code compilation&lt;/h4>
-&lt;p>Download HugeGraph source code&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph.git
+&lt;p>We could get HugeGraph &lt;strong>source code&lt;/strong> by 2 ways: (So as the other HugeGraph repos/modules)&lt;/p>
+&lt;ul>
+&lt;li>download the stable/release version from the ASF site&lt;/li>
+&lt;li>clone the unstable/latest version by GitBox(ASF) or GitHub&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Way 1. download release package from the ASF site&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-src-1.0.0.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph*.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># (Optional) verify the integrity with SHA512 (recommended)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>shasum -a &lt;span style="color:#0000cf;font-weight:bold">512&lt;/span> apache-hugegraph-incubating-src-1.0.0.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0-src.tar.gz.sha512
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Way2 : clone the latest code by git way (e.g GitHub)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph.git
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Compile and generate tarball&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn package -DskipTests -ntp
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The execution log is as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>......
