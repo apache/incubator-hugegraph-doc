@@ -20,7 +20,8 @@ on:
 
 jobs:
   build:
-    runs-on: [ubuntu-latest, windows-latest, macos-latest]
+    name: "Build On ${{ matrix.os }}"
+    runs-on: ${{ matrix.os }}
     env:
       SCRIPT_PATH: hugegraph-dist/scripts/
       URL_PREFIX: https://dist.apache.org/repos/dist/dev/incubator/hugegraph/
@@ -269,3 +270,4 @@ jobs:
       fail-fast: false
       matrix:
         java_version: [ '8','11' ]
+        os: [ubuntu-latest, windows-latest, macos-latest]
