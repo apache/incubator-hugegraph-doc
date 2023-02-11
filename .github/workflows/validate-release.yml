@@ -6,6 +6,10 @@ on:
       release_version:
         required: true
         default: '1.0.0'
+      gpg_user:
+        required: true
+        default: 'imbajin'
+
 
   push:
     branches:
@@ -20,7 +24,7 @@ jobs:
     env:
       SCRIPT_PATH: hugegraph-dist/scripts/
       URL_PREFIX: https://dist.apache.org/repos/dist/dev/incubator/hugegraph/
-      USER: 'imbajin'
+      USER: ${{ inputs.gpg_user }}
       # TODO: parse version from the running branch name & also adapt the input version
       RELEASE_VERSION: ''
     steps:
@@ -104,19 +108,26 @@ jobs:
             if [[ ! -f "DISCLAIMER" ]]; then
                 echo "The package should include DISCLAIMER file" && exit 1
             fi
+            # 4.2 ensure doesn't contains *GPL/BCL/JSR-275/RSAL/QPL/SSPL/CPOL/NPL1.*/CC-BY 
+            #     dependency in LICENSE and NOTICE file 
+            COUNT=$(grep -E "GPL|BCL|JSR-275|RSAL|QPL|SSPL|CPOL|NPL1|CC-BY" LICENSE NOTICE | wc -l)
+            if [[ $COUNT -ne 0 ]]; then
+              grep -E "GPL|BCL|JSR-275|RSAL|QPL|SSPL|CPOL|NPL1.0|CC-BY" LICENSE NOTICE
+              echo "The package shouldn't include GPL* invalid dependency, but get $COUNT" && exit 1
+            fi
 
-            # 4.2 ensure doesn't contains empty directory or file
+            # 4.3 ensure doesn't contains empty directory or file
             COUNT=$(find . -type d -empty | wc -l)
             if [[ $COUNT -ne 0 ]]; then
               find . -type d -empty
-              echo "The package shouldn't include empty directory, but get $COUNT" # TODO: && exit 1
+              echo "The package shouldn't include empty directory, but get $COUNT" && exit 1
             fi
           
-            # 4.3 ensure any file should less than 900kb & not include binary file
+            # 4.4 ensure any file should less than 900kb & not include binary file
             COUNT=$(find . -type f -size +900k | wc -l)
             if [[ $COUNT -ne 0 ]]; then
               find . -type f -size +900k
-              echo "The package shouldn't include file larger than 900kb, but get $COUNT"
+              echo "The package shouldn't include file larger than 900kb, but get $COUNT" && exit 1
             fi
             COUNT=$(find . -type f | perl -lne 'print if -B' | grep -v *.txt | wc -l)
             if [[ $COUNT -ne 0 ]]; then
@@ -124,7 +135,7 @@ jobs:
               echo "The package shouldn't include binary file, but get $COUNT"
             fi
           
-            # 4.4 test compile the packages
+            # 4.5 test compile the packages
             if [[ $JAVA_VERSION == 8 && "$i" =~ "computer" ]]; then
               cd .. && echo "skip computer module in java8"
               continue
@@ -182,7 +193,7 @@ jobs:
             fi
             tar xzvf "$i" || exit
 
-            # 7.1 check root dir include "NOTICE"/"LICENSE"/"DISCLAIMER" files & "release-docs" dir
+            # 7.1 check root dir include "NOTICE"/"LICENSE"/"DISCLAIMER" files & "licenses" dir
             cd "$(basename "$i" .tar.gz)" && ls -lh || exit
             if [[ ! -f "LICENSE" ]]; then
               echo "The package should include LICENSE file" && exit 1
@@ -193,15 +204,23 @@ jobs:
             if [[ ! -f "DISCLAIMER" ]]; then
                 echo "The package should include DISCLAIMER file" && exit 1
             fi
-            if [[ ! -d "release-docs" ]]; then
-              echo "The package should include release-docs dir" && exit 1
+            if [[ ! -d "licenses" ]]; then
+              echo "The package should include licenses dir" && exit 1
+            fi
+
+            # 7.2 ensure doesn't contains *GPL/BCL/JSR-275/RSAL/QPL/SSPL/CPOL/NPL1.*/CC-BY 
+            #     dependency in LICENSE/NOTICE and licenses/* files 
+            COUNT=$(grep -r -E "GPL|BCL|JSR-275|RSAL|QPL|SSPL|CPOL|NPL1|CC-BY" LICENSE NOTICE licenses | wc -l)
+            if [[ $COUNT -ne 0 ]]; then
+              grep -r -E "GPL|BCL|JSR-275|RSAL|QPL|SSPL|CPQL|NPL1|CC-BY" LICENSE NOTICE licenses
+              echo "The package shouldn't include GPL* invalid dependency, but get $COUNT" && exit 1
             fi
           
-            # 7.2 ensure doesn't contains empty directory or file
+            # 7.3 ensure doesn't contains empty directory or file
             COUNT=$(find . -type d -empty | wc -l)
             if [[ $COUNT -ne 0 ]]; then
               find . -type d -empty
-              echo "The package shouldn't include empty directory, but get $COUNT" # TODO: && exit 1
+              echo "The package shouldn't include empty directory, but get $COUNT" && exit 1
             fi
 
             cd - || exit
