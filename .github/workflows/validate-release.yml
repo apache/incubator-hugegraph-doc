@@ -129,11 +129,11 @@ jobs:
               find . -type f -size +900k
               echo "The package shouldn't include file larger than 900kb, but get $COUNT" && exit 1
             fi
-            COUNT=$(find . -type f | perl -lne 'print if -B' | grep -v *.txt | wc -l)
+            COUNT=$(find . -type f | perl -lne 'print if -B' | grep --exclude=*.{txt}  | wc -l)
             if [[ $COUNT -ne 0 ]]; then
               find . -type f | perl -lne 'print if -B'
               # due to the search script is not perfect, we can't exit here (check manually)
-              echo "The package shouldn't include binary file, but get $COUNT"
+              echo "The package shouldn't include binary file, but get $COUNT" && exit 1
             fi
           
             # 4.5 test compile the packages
