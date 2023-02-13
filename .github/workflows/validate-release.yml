@@ -184,7 +184,7 @@ jobs:
           # TODO: need stop the server here
           echo "====pwd"
           pwd
-          cd dist/${{ inputs.release_version }}/*hugegraph-incubating*src/*hugegraph*${{ inputs.release_version }} || exit
+          cd ../../../*hugegraph-incubating*src/*hugegraph*${{ inputs.release_version }} || exit
           bin/stop-hugegraph.sh || exit
           cd -
           cd ../../../ || exit
