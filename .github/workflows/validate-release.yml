@@ -236,8 +236,6 @@ jobs:
           cd dist/${{ inputs.release_version }}
           cd ./*hugegraph-incubating*${{ inputs.release_version }} || exit
           bin/init-store.sh && sleep 1
-          # kill the HugeGraphServer process by jps
-          jps | grep HugeGraphServer | awk '{print $1}' | xargs kill -9
           bin/start-hugegraph.sh && ls ../
           cd - || exit
 
