@@ -10,7 +10,6 @@ on:
         required: true
         default: 'imbajin'
 
-
   push:
     branches:
       - 'release-*'
@@ -20,7 +19,7 @@ on:
 
 jobs:
   build:
-    name: "Build On ${{ matrix.os }}(jdk-${{ matrix.java_version }})"
+    name: "Build On ${{ matrix.os }} (java-${{ matrix.java_version }})"
     runs-on: ${{ matrix.os }}
     env:
       SCRIPT_PATH: hugegraph-dist/scripts/
@@ -138,7 +137,7 @@ jobs:
             fi
           
             # 4.5 test compile the packages
-            if [[ $JAVA_VERSION == 8 && "$i" =~ "computer" ]]; then
+            if [[ ${{ matrix.java_version }} == 8 && "$i" =~ "computer" ]]; then
               cd .. && echo "skip computer module in java8"
               continue
             fi
@@ -198,9 +197,10 @@ jobs:
             tar xzvf "$i" || exit
 
             # 7.1 check root dir include "NOTICE"/"LICENSE"/"DISCLAIMER" & "licenses" dir
-            (cd "$(basename "$i" .tar.gz)" && ls -lh) || exit
+            cd "$(basename "$i" .tar.gz)" || exit
+            ls -lh
             if [[ ! -f "LICENSE" ]]; then
-              echo "The package should include LICENSE file" && exit 1
+              echo "The package should include LICENSE file" && ls -lh && exit 1
             fi
             if [[ ! -f "NOTICE" ]]; then
               echo "The package should include NOTICE file" && exit 1
