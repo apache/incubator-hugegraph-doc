@@ -181,9 +181,12 @@ jobs:
           echo "test hubble"
           cd ./*hubble*${{ inputs.release_version }} || exit
           cat conf/hugegraph-hubble.properties && bin/start-hubble.sh
-          # TODO: need stop the server here
           cd ../../../ || exit
           rm -rf ./*src* && ls -lh
+          # TODO: need stop the server here
+          cd dist/${{ inputs.release_version }} && ls -lh
+          cd ./*hugegraph-incubating*src/*hugegraph*${{ inputs.release_version }} || exit
+          bin/stop-hugegraph.sh
 
       - name: 7. Validate Binary Packages
         run: |
@@ -269,6 +272,9 @@ jobs:
           bin/stop-hubble.sh && bin/start-hubble.sh
           cd - || exit
           # TODO: need stop the server here
+          cd dist/${{ inputs.release_version }} && ls -lh
+          cd ./*hugegraph-incubating*src/*hugegraph*${{ inputs.release_version }} || exit
+          bin/stop-hugegraph.sh
 
     strategy:
       fail-fast: false
