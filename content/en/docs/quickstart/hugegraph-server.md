@@ -73,6 +73,7 @@ curl https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hug
 ```
 
 #### 3.3 Source code compilation
+Please ensure that the wget command is installed before compiling the source code
 
 We could get HugeGraph **source code** by 2 ways: (So as the other HugeGraph repos/modules)
 - download the stable/release version from the ASF site

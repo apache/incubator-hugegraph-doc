@@ -12,7 +12,7 @@ When the internal temporary release and packaging work is completed, other commu
 
 #### 1. prepare
 
-If there is no svn or gpg environment locally, it is recommended to install it first (windows recommend using WSL2 environment, or at least `git-bash`)
+If there is no svn or gpg or wget environment locally, it is recommended to install it first (windows recommend using WSL2 environment, or at least `git-bash`), also make sure to install java (recommended 11) and maven software
 ```bash
 # 1. install svn
 # ubuntu/debian
@@ -30,7 +30,13 @@ brew install gnupg
 # To verify that the installation was successful, execute the following command:
 gpg --version
 
-# 3. Download the hugegraph-svn directory (version number, pay attention to fill in the verification version, here we take 1.0.0 as an example)
+# 3. install wget
+# ubuntu/debian
+sudo apt-get install wget -y
+# MacOS
+brew install wget
+
+# 4. Download the hugegraph-svn directory (version number, pay attention to fill in the verification version, here we take 1.0.0 as an example)
 svn co https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/
 # (Note) If svn downloads a file very slowly, you can consider wget to download a single file, as follows (or consider using a proxy)
 wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz

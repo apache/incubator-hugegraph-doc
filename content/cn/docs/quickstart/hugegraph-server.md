@@ -73,6 +73,8 @@ tar zxf *hugegraph*.tar.gz
 
 #### 3.3 源码编译
 
+源码编译前请确保安装了wget命令
+
 下载HugeGraph源代码
 
 ```bash
