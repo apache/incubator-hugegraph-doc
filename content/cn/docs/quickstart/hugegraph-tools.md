@@ -25,6 +25,7 @@ tar zxf *hugegraph*.tar.gz
 ```
 
 #### 2.2 下载源码编译安装
+源码编译前请确保安装了wget命令
 
 下载最新版本的 HugeGraph-Toolchain 源码包, 然后根目录编译或者单独编译 tool 子模块：
 

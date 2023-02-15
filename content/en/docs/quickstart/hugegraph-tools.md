@@ -25,6 +25,7 @@ tar zxf *hugegraph*.tar.gz
 ```
 
 #### 2.2 Clone source code to compile and install
+Please ensure that the wget command is installed before compiling the source code
 
 Download the latest version of the HugeGraph-Tools source package:
 
