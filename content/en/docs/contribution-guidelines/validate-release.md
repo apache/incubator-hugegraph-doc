@@ -30,7 +30,7 @@ brew install gnupg
 # To verify that the installation was successful, execute the following command:
 gpg --version
 
-# 3. install wget
+# 3. install wget (we will enhance it later, like use `curl`)
 # ubuntu/debian
 sudo apt-get install wget -y
 # MacOS
