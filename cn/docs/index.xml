@@ -1265,6 +1265,7 @@ serializer=binary
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph*.tar.gz
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="33-源码编译">3.3 源码编译&lt;/h4>
+&lt;p>源码编译前请确保安装了wget命令&lt;/p>
 &lt;p>下载HugeGraph源代码&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph.git
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>编译打包生成tar包&lt;/p>
@@ -6936,6 +6937,7 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph*.tar.gz
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="22-下载源码编译安装">2.2 下载源码编译安装&lt;/h4>
+&lt;p>源码编译前请确保安装了wget命令&lt;/p>
 &lt;p>下载最新版本的 HugeGraph-Toolchain 源码包, 然后根目录编译或者单独编译 tool 子模块：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 1. get from github&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph-toolchain.git
@@ -8026,7 +8028,7 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;h2 id="验证阶段">验证阶段&lt;/h2>
 &lt;p>当内部的临时发布和打包工作完成后, 其他的社区开发者(尤其是 PMC)需要参与到&lt;a href="https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist">验证环节&lt;/a>确保某个人发布版本的&amp;quot;正确性 + 完整性&amp;quot;, 这里需要&lt;strong>每个人&lt;/strong>都尽量参与, 然后后序&lt;strong>邮件回复&lt;/strong>的时候说明自己&lt;strong>已检查&lt;/strong>了哪些项. (下面是核心项)&lt;/p>
 &lt;h4 id="1-准备工作">1. 准备工作&lt;/h4>
-&lt;p>如果本地没有 svn 或 gpg 环境, 建议先安装一下 (windows 推荐使用 WSL2 环境, 或者至少是 &lt;code>git-bash&lt;/code>)&lt;/p>
+&lt;p>如果本地没有 svn 或 gpg 或 wget 环境, 建议先安装一下 (windows 推荐使用 WSL2 环境, 或者至少是 &lt;code>git-bash&lt;/code>), 同时确保安装Java(推荐11)和maven软件。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 1. 安装svn&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># ubuntu/debian&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt install subversion -y
@@ -8043,7 +8045,13 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 验证安装是否成功, 执行以下命令:&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg --version
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 3. 下载 hugegraph-svn 目录 (版本号注意填写此次验证版本, 这里以1.0.0为例)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 3. 安装wget&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># ubuntu/debian&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt-get install wget -y
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># MacOS&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>brew install wget
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 4. 下载 hugegraph-svn 目录 (版本号注意填写此次验证版本, 这里以1.0.0为例)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>svn co https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># (注) 如果出现 svn 下载某个文件速度很慢的情况, 可以考虑 wget 单个文件下载, 如下 (或考虑使用 VPN / 代理)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz

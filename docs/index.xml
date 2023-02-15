@@ -1377,6 +1377,7 @@ serializer=binary
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>shasum -a &lt;span style="color:#0000cf;font-weight:bold">512&lt;/span> apache-hugegraph-incubating-1.0.0.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz.sha512
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="33-source-code-compilation">3.3 Source code compilation&lt;/h4>
+&lt;p>Please ensure that the wget command is installed before compiling the source code&lt;/p>
 &lt;p>We could get HugeGraph &lt;strong>source code&lt;/strong> by 2 ways: (So as the other HugeGraph repos/modules)&lt;/p>
 &lt;ul>
 &lt;li>download the stable/release version from the ASF site&lt;/li>
@@ -6766,6 +6767,7 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph*.tar.gz
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="22-clone-source-code-to-compile-and-install">2.2 Clone source code to compile and install&lt;/h4>
+&lt;p>Please ensure that the wget command is installed before compiling the source code&lt;/p>
 &lt;p>Download the latest version of the HugeGraph-Tools source package:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 1. get from github&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph-toolchain.git
@@ -7499,7 +7501,7 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;h2 id="verification">Verification&lt;/h2>
 &lt;p>When the internal temporary release and packaging work is completed, other community developers (especially PMC) need to participate in the &lt;a href="https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist">verification link&lt;/a>To ensure the &amp;ldquo;correctness + completeness&amp;rdquo; of someone&amp;rsquo;s published version, here requires &lt;strong>everyone&lt;/strong> to participate as much as possible, and then explain which items you have &lt;strong>checked&lt;/strong> in the subsequent &lt;strong>email reply&lt;/strong>. (The following are the core items)&lt;/p>
 &lt;h4 id="1-prepare">1. prepare&lt;/h4>
-&lt;p>If there is no svn or gpg environment locally, it is recommended to install it first (windows recommend using WSL2 environment, or at least &lt;code>git-bash&lt;/code>)&lt;/p>
+&lt;p>If there is no svn or gpg or wget environment locally, it is recommended to install it first (windows recommend using WSL2 environment, or at least &lt;code>git-bash&lt;/code>), also make sure to install java (recommended 11) and maven software&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 1. install svn&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># ubuntu/debian&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt install subversion -y
@@ -7516,7 +7518,13 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># To verify that the installation was successful, execute the following command:&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg --version
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 3. Download the hugegraph-svn directory (version number, pay attention to fill in the verification version, here we take 1.0.0 as an example)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 3. install wget (we will enhance it later, like use `curl`)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># ubuntu/debian&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt-get install wget -y
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># MacOS&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>brew install wget
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 4. Download the hugegraph-svn directory (version number, pay attention to fill in the verification version, here we take 1.0.0 as an example)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>svn co https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># (Note) If svn downloads a file very slowly, you can consider wget to download a single file, as follows (or consider using a proxy)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
