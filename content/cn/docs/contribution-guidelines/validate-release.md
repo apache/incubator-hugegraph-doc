@@ -12,7 +12,7 @@ weight: 3
 
 #### 1. 准备工作
 
-如果本地没有 svn 或 gpg 环境, 建议先安装一下 (windows 推荐使用 WSL2 环境, 或者至少是 `git-bash`)
+如果本地没有 svn 或 gpg 或 wget 环境, 建议先安装一下 (windows 推荐使用 WSL2 环境, 或者至少是 `git-bash`), 同时确保安装Java(推荐11)和maven软件。
 
 ```bash
 # 1. 安装svn
@@ -31,7 +31,13 @@ brew install gnupg
 # 验证安装是否成功, 执行以下命令:
 gpg --version
 
-# 3. 下载 hugegraph-svn 目录 (版本号注意填写此次验证版本, 这里以1.0.0为例)
+# 3. 安装wget
+# ubuntu/debian
+sudo apt-get install wget -y
+# MacOS
+brew install wget
+
+# 4. 下载 hugegraph-svn 目录 (版本号注意填写此次验证版本, 这里以1.0.0为例)
 svn co https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/
 # (注) 如果出现 svn 下载某个文件速度很慢的情况, 可以考虑 wget 单个文件下载, 如下 (或考虑使用 VPN / 代理)
 wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
