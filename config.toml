@@ -41,7 +41,11 @@ enableGitInfo = true
     weight = -99
     pre = "<i class='fab fa-github pr-2'></i>"
     url = "https://github.com/apache/incubator-hugegraph"
-
+  [[menu.main]]
+    name ="Download"
+    weight = -98
+    pre = "<i class='fas fa-download pr-2'></i>"
+    url = "/docs/download/download/"
 
 
 # You can add your own taxonomies
