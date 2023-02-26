@@ -65,4 +65,4 @@ notifications:
   # before use the config, we should ensure the "mail" address has set well (exist)
   #pullrequests_comment: issues@hugegraph.apache.org
   #issues: issues@hugegraph.apache.org
-  discussions: issues@hugegraph.apache.org
+  discussions: dev@hugegraph.apache.org
