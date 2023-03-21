@@ -28,7 +28,7 @@ github:
   labels:
     - hugegraph
     - website
-    - hugo
+    - doc
     - apache
     - graph
   del_branch_on_merge: true
@@ -42,12 +42,10 @@ github:
   protected_branches:
     master:
       required_status_checks:
-        # strict means "Require branches to be up-to-date before merging".
-        #strict: true
         contexts:
           - deploy
       required_pull_request_reviews:
-        #dismiss_stale_reviews: true
+        dismiss_stale_reviews: true
         required_approving_review_count: 1
         require_code_owner_reviews: false
   
@@ -61,8 +59,9 @@ publish:
   whoami: asf-site
 
 notifications:
-  #pullrequests_status: dev@hugegraph.apache.org
-  # before use the config, we should ensure the "mail" address has set well (exist)
-  #pullrequests_comment: issues@hugegraph.apache.org
-  #issues: issues@hugegraph.apache.org
+  # use https://selfserve.apache.org to manage it
+  pullrequests_status: dev@hugegraph.apache.org
+  pullrequests_comment: issues@hugegraph.apache.org
+  pullrequests_bot_dependabot: issues@hugegraph.apache.org
+  issues: issues@hugegraph.apache.org
   discussions: dev@hugegraph.apache.org
