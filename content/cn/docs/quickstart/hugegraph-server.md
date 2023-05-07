@@ -415,7 +415,7 @@ _说明_
 }
 ```
 
-详细的API请参考[RESTful-API](/dcos/clients/restful-api)文档
+详细的API请参考[RESTful-API](/docs/clients/restful-api)文档
 
 ### 7 停止Server
 
