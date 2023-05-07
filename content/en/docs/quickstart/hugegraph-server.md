@@ -426,7 +426,7 @@ response body：
 }
 ```
 
-For detailed API, please refer to[RESTful-API](/dcos/clients/restful-api)
+For detailed API, please refer to[RESTful-API](/docs/clients/restful-api)
 
 ### 7 Stop Server
 
