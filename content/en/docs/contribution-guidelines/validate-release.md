@@ -37,9 +37,9 @@ sudo apt-get install wget -y
 brew install wget
 
 # 4. Download the hugegraph-svn directory (version number, pay attention to fill in the verification version, here we take 1.0.0 as an example)
-svn co https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/
+svn co https://downloads.apache.org/incubator/hugegraph/1.0.0/
 # (Note) If svn downloads a file very slowly, you can consider wget to download a single file, as follows (or consider using a proxy)
-wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
+wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
 ```
 
 #### 2. check hash value
@@ -98,7 +98,7 @@ First confirm the overall integrity/consistency, and then confirm the specific c
 
 Here it is divided into two aspects: source code package + binary package, The source code package is stricter, it can be said that the core part (Because it is longer,For a complete list refer to the official [Wiki](https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist))
 
-First of all, we need to download the package from the apache official `release-candidate` URL to the local (URL: [click to jump](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/))
+First of all, we need to download the package from the apache official `release-candidate` URL to the local (URL: [click to jump](https://downloads.apache.org/incubator/hugegraph/))
 
 ##### A. source package
 

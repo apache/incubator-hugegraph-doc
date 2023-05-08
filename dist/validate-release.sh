@@ -21,7 +21,7 @@
 # 3. Compile the source package & run server & toolchain
 # 4. Run server & toolchain in binary package
 
-URL_PREFIX="https://dist.apache.org/repos/dist/dev/incubator/hugegraph/"
+URL_PREFIX="https://downloads.apache.org/incubator/hugegraph/"
 # release version (input by committer)
 RELEASE_VERSION=$1
 JAVA_VERSION=$2

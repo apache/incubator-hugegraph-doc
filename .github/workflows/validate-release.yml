@@ -23,7 +23,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     env:
       SCRIPT_PATH: hugegraph-dist/scripts/
-      URL_PREFIX: https://dist.apache.org/repos/dist/dev/incubator/hugegraph/
+      URL_PREFIX: https://downloads.apache.org/incubator/hugegraph/
       USER: ${{ inputs.gpg_user }}
       # TODO: parse version from the running branch name & also adapt the input version
       RELEASE_VERSION: ''

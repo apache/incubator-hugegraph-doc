@@ -38,9 +38,9 @@ sudo apt-get install wget -y
 brew install wget
 
 # 4. 下载 hugegraph-svn 目录 (版本号注意填写此次验证版本, 这里以1.0.0为例)
-svn co https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/
+svn co https://downloads.apache.org/incubator/hugegraph/1.0.0/
 # (注) 如果出现 svn 下载某个文件速度很慢的情况, 可以考虑 wget 单个文件下载, 如下 (或考虑使用 VPN / 代理)
-wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
+wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
 ```
 
 #### 2. 检查 hash 值
@@ -97,7 +97,7 @@ for i in *.tar.gz; do echo $i; gpg --verify $i.asc $i ; done
 
 这里分源码包 + 二进制包两个方面, 源码包更为严格, 挑核心的部分说 (完整的列表可参考官方 [Wiki](https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist), 比较长)
 
-首先我们需要从 apache 官方的 `release-candidate` 地址下载包到本地 (地址: [点击跳转](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/))
+首先我们需要从 apache 官方的 `release-candidate` 地址下载包到本地 (地址: [点击跳转](https://downloads.apache.org/incubator/hugegraph/))
 
 ##### A. 源码包
 
