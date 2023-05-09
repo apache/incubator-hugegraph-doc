@@ -32,7 +32,7 @@ HugeGraph-Loader 是 HugeGraph 的数据导入组件，能够将多种数据源�
 下载最新版本的 HugeGraph-Toolchain Release 包, 里面包含了 loader + tool + hubble 全套工具, 如果你已经下载, 可跳过重复步骤
 
 ```bash
-wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
+wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
 tar zxf *hugegraph*.tar.gz
 ```
 
@@ -45,7 +45,7 @@ tar zxf *hugegraph*.tar.gz
 git clone https://github.com/apache/hugegraph-toolchain.git
 
 # 2. get from direct  (e.g. here is 1.0.0, please choose the latest version)
-wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0-src.tar.gz
+wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0-src.tar.gz
 ```
 
 由于Oracle ojdbc license的限制，需要手动安装ojdbc到本地maven仓库。
