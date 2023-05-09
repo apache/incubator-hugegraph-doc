@@ -39,7 +39,7 @@ brew install wget
 # 4. Download the hugegraph-svn directory (version number, pay attention to fill in the verification version, here we take 1.0.0 as an example)
 svn co https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/
 # (Note) If svn downloads a file very slowly, you can consider wget to download a single file, as follows (or consider using a proxy)
-wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
+wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
 ```
 
 #### 2. check hash value
