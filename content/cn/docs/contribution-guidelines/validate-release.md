@@ -38,7 +38,7 @@ sudo apt-get install wget -y
 brew install wget
 
 # 4. 下载 hugegraph-svn 目录 (版本号注意填写此次验证版本, 这里以1.0.0为例)
-svn co https://downloads.apache.org/incubator/hugegraph/1.0.0/
+svn co https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/
 # (注) 如果出现 svn 下载某个文件速度很慢的情况, 可以考虑 wget 单个文件下载, 如下 (或考虑使用 VPN / 代理)
 wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
 ```
