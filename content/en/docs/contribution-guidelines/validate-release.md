@@ -98,7 +98,7 @@ First confirm the overall integrity/consistency, and then confirm the specific c
 
 Here it is divided into two aspects: source code package + binary package, The source code package is stricter, it can be said that the core part (Because it is longer,For a complete list refer to the official [Wiki](https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist))
 
-First of all, we need to download the package from the apache official `release-candidate` URL to the local (URL: [click to jump](https://downloads.apache.org/incubator/hugegraph/))
+First of all, we need to download the package from the apache official `release-candidate` URL to the local (URL: [click to jump](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/))
 
 ##### A. source package
 

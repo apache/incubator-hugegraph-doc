@@ -97,7 +97,7 @@ for i in *.tar.gz; do echo $i; gpg --verify $i.asc $i ; done
 
 这里分源码包 + 二进制包两个方面, 源码包更为严格, 挑核心的部分说 (完整的列表可参考官方 [Wiki](https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist), 比较长)
 
-首先我们需要从 apache 官方的 `release-candidate` 地址下载包到本地 (地址: [点击跳转](https://downloads.apache.org/incubator/hugegraph/))
+首先我们需要从 apache 官方的 `release-candidate` 地址下载包到本地 (地址: [点击跳转](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/))
 
 ##### A. 源码包
 
