@@ -796,6 +796,7 @@ bin/hugegraph-loader -g {GRAPH_NAME} -f ${INPUT_DESC_FILE} -s ${SCHEMA_FILE} -h 
 ### 4 完整示例
 
 下面给出的是 hugegraph-loader 包中 example 目录下的例子。
+GitHub 地址：https://github.com/apache/incubator-hugegraph-toolchain/tree/master/hugegraph-loader/assembly/static/example/file
 
 #### 4.1 准备数据
 
