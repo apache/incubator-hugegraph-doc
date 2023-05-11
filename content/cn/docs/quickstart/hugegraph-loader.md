@@ -849,7 +849,6 @@ schema.propertyKey("price").asDouble().ifNotExist().create();
 schema.vertexLabel("person").properties("name", "age", "city").primaryKeys("name").ifNotExist().create();
 schema.vertexLabel("software").properties("name", "lang", "price").primaryKeys("name").ifNotExist().create();
 
-schema.indexLabel("personByName").onV("person").by("name").secondary().ifNotExist().create();
 schema.indexLabel("personByAge").onV("person").by("age").range().ifNotExist().create();
 schema.indexLabel("personByCity").onV("person").by("city").secondary().ifNotExist().create();
 schema.indexLabel("personByAgeAndCity").onV("person").by("age", "city").secondary().ifNotExist().create();
@@ -872,26 +871,27 @@ schema.indexLabel("knowsByWeight").onE("knows").by("weight").range().ifNotExist(
       "label": "person",
       "input": {
         "type": "file",
-        "path": "example/vertex_person.csv",
+        "path": "example/file/vertex_person.csv",
         "format": "CSV",
         "header": ["name", "age", "city"],
-        "charset": "UTF-8"
+        "charset": "UTF-8",
+        "skipped_line": {
+          "regex": "(^#|^//).*"
+        }
       },
-      "mapping": {
-        "name": "name",
-        "age": "age",
-        "city": "city"
-      }
+      "null_values": ["NULL", "null", ""]
     },
     {
       "label": "software",
       "input": {
         "type": "file",
-        "path": "example/vertex_software.text",
+        "path": "example/file/vertex_software.txt",
         "format": "TEXT",
         "delimiter": "|",
         "charset": "GBK"
-      }
+      },
+      "id": "id",
+      "ignored": ["ISBN"]
     }
   ],
   "edges": [
@@ -901,26 +901,27 @@ schema.indexLabel("knowsByWeight").onE("knows").by("weight").range().ifNotExist(
       "target": ["target_name"],
       "input": {
         "type": "file",
-        "path": "example/edge_knows.json",
-        "format": "JSON"
+        "path": "example/file/edge_knows.json",
+        "format": "JSON",
+        "date_format": "yyyyMMdd"
       },
-      "mapping": {
+      "field_mapping": {
         "source_name": "name",
         "target_name": "name"
       }
     },
     {
       "label": "created",
-      "source": ["aname"],
-      "target": ["bname"],
+      "source": ["source_name"],
+      "target": ["target_id"],
       "input": {
         "type": "file",
-        "path": "example/edge_created.json",
-        "format": "JSON"
+        "path": "example/file/edge_created.json",
+        "format": "JSON",
+        "date_format": "yyyy-MM-dd"
       },
-      "mapping": {
-        "aname": "name",
-        "bname": "name"
+      "field_mapping": {
+        "source_name": "name"
       }
     }
   ]
