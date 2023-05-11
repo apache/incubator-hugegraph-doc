@@ -542,8 +542,8 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;p>实现的设置图模式的 RESTful API 如下：&lt;/p>
 &lt;h5 id="查看某个图的模式-该操作需要管理员权限">查看某个图的模式. &lt;strong>该操作需要管理员权限&lt;/strong>&lt;/h5>
 &lt;h6 id="method--url">Method &amp;amp; Url&lt;/h6>
-&lt;pre tabindex="0">&lt;code>GET http://localhost:8080/graphs/{graph}/mode
-&lt;/code>&lt;/pre>&lt;h6 id="response-status">Response Status&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/{graph}/mode
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="response-status">Response Status&lt;/h6>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="response-body">Response Body&lt;/h6>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
@@ -554,10 +554,10 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/blockquote>
 &lt;h5 id="设置某个图的模式-该操作需要管理员权限">设置某个图的模式. &lt;strong>该操作需要管理员权限&lt;/strong>&lt;/h5>
 &lt;h6 id="method--url-1">Method &amp;amp; Url&lt;/h6>
-&lt;pre tabindex="0">&lt;code>PUT http://localhost:8080/graphs/{graph}/mode
-&lt;/code>&lt;/pre>&lt;h6 id="request-body">Request Body&lt;/h6>
-&lt;pre tabindex="0">&lt;code>&amp;#34;RESTORING&amp;#34;
-&lt;/code>&lt;/pre>&lt;blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/{graph}/mode
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="request-body">Request Body&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>&amp;#34;RESTORING&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
 &lt;p>合法的图模式包括：NONE，RESTORING，MERGING&lt;/p>
 &lt;/blockquote>
 &lt;h6 id="response-status-1">Response Status&lt;/h6>
@@ -611,17 +611,17 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;li>
 &lt;p>已经根据需要给顶点Id加上了双引号，但是通过&lt;code>RESTful API&lt;/code>查询顶点时仍然返回空&lt;/p>
 &lt;p>检查顶点id中是否包含&lt;code>+&lt;/code>、&lt;code>空格&lt;/code>、&lt;code>/&lt;/code>、&lt;code>?&lt;/code>、&lt;code>%&lt;/code>、&lt;code>&amp;amp;&lt;/code>和&lt;code>=&lt;/code>这些URL的保留字符，如果存在则需要进行编码。下表给出了编码值：&lt;/p>
-&lt;pre tabindex="0">&lt;code>特殊字符 | 编码值
---------| ----
-+ | %2B
-空格 | %20
-/ | %2F
-? | %3F
-% | %25
-# | %23
-&amp;amp; | %26
-= | %3D
-&lt;/code>&lt;/pre>&lt;/li>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>特殊字符 | 编码值
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>--------| ----
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+ | %2B
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>空格 | %20
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/ | %2F
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>? | %3F
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>% | %25
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># | %23
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;amp; | %26
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>= | %3D
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>查询某一类别的顶点或边（&lt;code>query by label&lt;/code>）时提示超时&lt;/p>
 &lt;p>由于属于某一label的数据量可能比较多，请加上limit限制。&lt;/p>

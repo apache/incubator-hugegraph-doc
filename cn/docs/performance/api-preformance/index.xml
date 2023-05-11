@@ -390,9 +390,9 @@
 &lt;li>后端存储：使用服务内嵌的cassandra-3.10，单点部署；&lt;/li>
 &lt;li>后端配置修改：修改了cassandra.yaml文件中的以下两个属性，其余选项均保持默认&lt;/li>
 &lt;/ul>
-&lt;pre tabindex="0">&lt;code> batch_size_warn_threshold_in_kb: 1000
-batch_size_fail_threshold_in_kb: 1000
-&lt;/code>&lt;/pre>&lt;ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span> batch_size_warn_threshold_in_kb: 1000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> batch_size_fail_threshold_in_kb: 1000
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>HugeGraphServer 与 HugeGremlinServer 与cassandra都在同一机器上启动，server 相关的配置文件除主机和端口有修改外，其余均保持默认。&lt;/li>
 &lt;/ul>
 &lt;h4 id="13-名词解释">1.3 名词解释&lt;/h4>

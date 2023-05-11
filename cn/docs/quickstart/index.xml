@@ -77,9 +77,9 @@
 &lt;p>由于各种后端所需的配置（hugegraph.properties）及启动步骤略有不同，下面逐一对各后端的配置及启动做介绍。&lt;/p>
 &lt;h4 id="51-memory">5.1 Memory&lt;/h4>
 &lt;p>修改 hugegraph.properties&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-properties" data-lang="properties">backend=memory
-serializer=text
-&lt;/code>&lt;/pre>&lt;blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=memory
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=text
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
 &lt;p>Memory后端的数据是保存在内存中无法持久化的，不需要初始化后端，这也是唯一一个不需要初始化的后端。&lt;/p>
 &lt;/blockquote>
 &lt;p>启动 server&lt;/p>
@@ -92,11 +92,11 @@ serializer=text
 &lt;p>RocksDB是一个嵌入式的数据库，不需要手动安装部署, 要求 GCC 版本 &amp;gt;= 4.3.0（GLIBCXX_3.4.10），如不满足，需要提前升级 GCC&lt;/p>
 &lt;/blockquote>
 &lt;p>修改 hugegraph.properties&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-properties" data-lang="properties">backend=rocksdb
-serializer=binary
-rocksdb.data_path=.
-rocksdb.wal_path=.
-&lt;/code>&lt;/pre>&lt;p>初始化数据库（仅第一次启动时需要）&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=rocksdb
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=binary
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.data_path=.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.wal_path=.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>初始化数据库（仅第一次启动时需要）&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动server&lt;/p>
@@ -108,18 +108,20 @@ rocksdb.wal_path=.
 &lt;p>用户需自行安装 Cassandra，要求版本 3.0 以上，&lt;a href="http://cassandra.apache.org/download/">下载地址&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;p>修改 hugegraph.properties&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-properties" data-lang="properties">backend=cassandra
-serializer=cassandra
-# cassandra backend config
-cassandra.host=localhost
-cassandra.port=9042
-cassandra.username=
-cassandra.password=
-#cassandra.connect_timeout=5
-#cassandra.read_timeout=20
-#cassandra.keyspace.strategy=SimpleStrategy
-#cassandra.keyspace.replication=3
-&lt;/code>&lt;/pre>&lt;p>初始化数据库（仅第一次启动时需要）&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=cassandra
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=cassandra
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># cassandra backend config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.host=localhost
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.port=9042
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.username=
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.password=
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.connect_timeout=5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.read_timeout=20
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.keyspace.strategy=SimpleStrategy
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.keyspace.replication=3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>初始化数据库（仅第一次启动时需要）&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Initing HugeGraph Store...
@@ -148,18 +150,20 @@ cassandra.password=
 &lt;p>用户需自行安装 ScyllaDB，推荐版本 2.1 以上，&lt;a href="https://docs.scylladb.com/getting-started/">下载地址&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;p>修改 hugegraph.properties&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-properties" data-lang="properties">backend=scylladb
-serializer=scylladb
-# cassandra backend config
-cassandra.host=localhost
-cassandra.port=9042
-cassandra.username=
-cassandra.password=
-#cassandra.connect_timeout=5
-#cassandra.read_timeout=20
-#cassandra.keyspace.strategy=SimpleStrategy
-#cassandra.keyspace.replication=3
-&lt;/code>&lt;/pre>&lt;p>由于 scylladb 数据库本身就是基于 cassandra 的&amp;quot;优化版&amp;quot;，如果用户未安装 scylladb ，也可以直接使用 cassandra 作为后端存储，只需要把 backend 和 serializer 修改为 scylladb，host 和 post 指向 cassandra 集群的 seeds 和 port 即可，但是并不建议这样做，这样发挥不出 scylladb 本身的优势了。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=scylladb
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=scylladb
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># cassandra backend config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.host=localhost
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.port=9042
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.username=
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.password=
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.connect_timeout=5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.read_timeout=20
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.keyspace.strategy=SimpleStrategy
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.keyspace.replication=3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>由于 scylladb 数据库本身就是基于 cassandra 的&amp;quot;优化版&amp;quot;，如果用户未安装 scylladb ，也可以直接使用 cassandra 作为后端存储，只需要把 backend 和 serializer 修改为 scylladb，host 和 post 指向 cassandra 集群的 seeds 和 port 即可，但是并不建议这样做，这样发挥不出 scylladb 本身的优势了。&lt;/p>
 &lt;p>初始化数据库（仅第一次启动时需要）&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
@@ -172,17 +176,18 @@ cassandra.password=
 &lt;p>用户需自行安装 HBase，要求版本 2.0 以上，&lt;a href="https://hbase.apache.org/downloads.html">下载地址&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;p>修改 hugegraph.properties&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-properties" data-lang="properties">backend=hbase
-serializer=hbase
-# hbase backend config
-hbase.hosts=localhost
-hbase.port=2181
-# Note: recommend to modify the HBase partition number by the actual/env data amount &amp;amp; RS amount before init store
-# it may influence the loading speed a lot
-#hbase.enable_partition=true
-#hbase.vertex_partitions=10
-#hbase.edge_partitions=30
-&lt;/code>&lt;/pre>&lt;p>初始化数据库（仅第一次启动时需要）&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=hbase
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=hbase
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># hbase backend config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hbase.hosts=localhost
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hbase.port=2181
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Note: recommend to modify the HBase partition number by the actual/env data amount &amp;amp; RS amount before init store
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># it may influence the loading speed a lot
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#hbase.enable_partition=true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#hbase.vertex_partitions=10
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#hbase.edge_partitions=30
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>初始化数据库（仅第一次启动时需要）&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动server&lt;/p>
@@ -216,13 +221,14 @@ hbase.port=2181
 &lt;li>
 &lt;p>由于图的点和边很多，对于 list 型的请求，比如获取所有顶点，获取所有边等，Server 会将数据压缩再返回，
 所以使用 curl 时得到一堆乱码，可以重定向至 &lt;code>gunzip&lt;/code> 进行解压。推荐使用 Chrome 浏览器 + Restlet 插件发送 HTTP 请求进行测试。&lt;/p>
-&lt;pre tabindex="0">&lt;code>curl &amp;#34;http://localhost:8080/graphs/hugegraph/graph/vertices&amp;#34; | gunzip
-&lt;/code>&lt;/pre>&lt;/li>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>curl &amp;#34;http://localhost:8080/graphs/hugegraph/graph/vertices&amp;#34; | gunzip
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>当前HugeGraphServer的默认配置只能是本机访问，可以修改配置，使其能在其他机器访问。&lt;/p>
-&lt;pre tabindex="0">&lt;code>vim conf/rest-server.properties
-restserver.url=http://0.0.0.0:8080
-&lt;/code>&lt;/pre>&lt;/li>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>vim conf/rest-server.properties
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>restserver.url=http://0.0.0.0:8080
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ol>
 &lt;p>响应体如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
@@ -319,8 +325,8 @@ restserver.url=http://0.0.0.0:8080
 &lt;img src="/docs/images/ojdbc8.png" alt="image">
 &lt;/div>
 &lt;p>把ojdbc8安装到本地maven仓库，进入&lt;code>ojdbc8.jar&lt;/code>所在目录，执行以下命令。&lt;/p>
-&lt;pre tabindex="0">&lt;code>mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
-&lt;/code>&lt;/pre>&lt;p>编译生成 tar 包:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>编译生成 tar 包:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-loader
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn clean package -DskipTests
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-使用流程">3 使用流程&lt;/h3>
@@ -378,13 +384,13 @@ restserver.url=http://0.0.0.0:8080
 &lt;/ul>
 &lt;p>TEXT 是自定义分隔符的文本文件，第一行通常是标题，记录了每一列的名称，也允许没有标题行（在映射文件中指定）。其余的每行代表一条记录，会被转化为一个顶点/边；行的每一列对应一个字段，会被转化为顶点/边的 id、label 或属性；&lt;/p>
 &lt;p>示例如下：&lt;/p>
-&lt;pre tabindex="0">&lt;code>id|name|lang|price|ISBN
-1|lop|java|328|ISBN978-7-107-18618-5
-2|ripple|java|199|ISBN978-7-100-13678-5
-&lt;/code>&lt;/pre>&lt;p>CSV 是分隔符为逗号&lt;code>,&lt;/code>的 TEXT 文件，当列值本身包含逗号时，该列值需要用双引号包起来，如：&lt;/p>
-&lt;pre tabindex="0">&lt;code>marko,29,Beijing
-&amp;#34;li,nary&amp;#34;,26,&amp;#34;Wu,han&amp;#34;
-&lt;/code>&lt;/pre>&lt;p>JSON 文件要求每一行都是一个 JSON 串，且每行的格式需保持一致。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>id|name|lang|price|ISBN
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1|lop|java|328|ISBN978-7-107-18618-5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2|ripple|java|199|ISBN978-7-100-13678-5
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>CSV 是分隔符为逗号&lt;code>,&lt;/code>的 TEXT 文件，当列值本身包含逗号时，该列值需要用双引号包起来，如：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>marko,29,Beijing
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;#34;li,nary&amp;#34;,26,&amp;#34;Wu,han&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>JSON 文件要求每一行都是一个 JSON 串，且每行的格式需保持一致。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#204a87;font-weight:bold">&amp;#34;source_name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;marko&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;target_name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;vadas&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;date&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;20160110&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;weight&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.5&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#204a87;font-weight:bold">&amp;#34;source_name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;marko&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;target_name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;josh&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;date&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;20130220&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;weight&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1.0&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="3212-hdfs-文件或目录">3.2.1.2 HDFS 文件或目录&lt;/h6>
@@ -394,13 +400,13 @@ restserver.url=http://0.0.0.0:8080
 &lt;p>loader 还支持以部分关系型数据库作为数据源，目前支持 MySQL、PostgreSQL、Oracle 和 SQL Server。&lt;/p>
 &lt;p>但目前对表结构要求较为严格，如果导入过程中需要做&lt;strong>关联查询&lt;/strong>，这样的表结构是不允许的。关联查询的意思是：在读到表的某行后，发现某列的值不能直接使用（比如外键），需要再去做一次查询才能确定该列的真实值。&lt;/p>
 &lt;p>举个例子：假设有三张表，person、software 和 created&lt;/p>
-&lt;pre tabindex="0">&lt;code>// person 表结构
-id | name | age | city
-&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>// software 表结构
-id | name | lang | price
-&lt;/code>&lt;/pre>&lt;pre tabindex="0">&lt;code>// created 表结构
-id | p_id | s_id | date
-&lt;/code>&lt;/pre>&lt;p>如果在建模（schema）时指定 person 或 software 的 id 策略是 PRIMARY_KEY，选择以 name 作为 primary keys（注意：这是 hugegraph 中 vertexlabel 的概念），在导入边数据时，由于需要拼接出源顶点和目标顶点的 id，必须拿着 p_id/s_id 去 person/software 表中查到对应的 name，这种需要做额外查询的表结构的情况，loader 暂时是不支持的。这时可以采用以下两种方式替代：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>// person 表结构
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>id | name | age | city
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>// software 表结构
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>id | name | lang | price
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>// created 表结构
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>id | p_id | s_id | date
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果在建模（schema）时指定 person 或 software 的 id 策略是 PRIMARY_KEY，选择以 name 作为 primary keys（注意：这是 hugegraph 中 vertexlabel 的概念），在导入边数据时，由于需要拼接出源顶点和目标顶点的 id，必须拿着 p_id/s_id 去 person/software 表中查到对应的 name，这种需要做额外查询的表结构的情况，loader 暂时是不支持的。这时可以采用以下两种方式替代：&lt;/p>
 &lt;ol>
 &lt;li>仍然指定 person 和 software 的 id 策略为 PRIMARY_KEY，但是以 person 表和 software 表的 id 列作为顶点的主键属性，这样导入边时直接使用 p_id 和 s_id 和顶点的 label 拼接就能生成 id 了；&lt;/li>
 &lt;li>指定 person 和 software 的 id 策略为 CUSTOMIZE，然后直接以 person 表和 software 表的 id 列作为顶点 id，这样导入边时直接使用 p_id 和 s_id 即可；&lt;/li>
@@ -412,15 +418,15 @@ id | p_id | s_id | date
 &lt;ul>
 &lt;li>person 顶点数据（数据本身不包含 header）&lt;/li>
 &lt;/ul>
-&lt;pre tabindex="0">&lt;code class="language-csv" data-lang="csv">Tom,48,Beijing
-Jerry,36,Shanghai
-&lt;/code>&lt;/pre>&lt;ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>Tom,48,Beijing
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Jerry,36,Shanghai
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>software 顶点数据（数据本身包含 header）&lt;/li>
 &lt;/ul>
-&lt;pre tabindex="0">&lt;code class="language-csv" data-lang="csv">name,price
-Photoshop,999
-Office,388
-&lt;/code>&lt;/pre>&lt;h6 id="3222-边数据">3.2.2.2 边数据&lt;/h6>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>name,price
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Photoshop,999
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Office,388
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="3222-边数据">3.2.2.2 边数据&lt;/h6>
 &lt;p>边数据文件由一行一行的数据组成，一般每一行作为一条边，其中有部分列会作为源顶点和目标顶点的 id，其他列作为边属性。下面以 JSON 格式作为示例进行说明。&lt;/p>
 &lt;ul>
 &lt;li>knows 边数据&lt;/li>
@@ -1158,24 +1164,24 @@ Office,388
 &lt;p>下面给出的是 hugegraph-loader 包中 example 目录下的例子。(&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/tree/master/hugegraph-loader/assembly/static/example/file">GitHub 地址&lt;/a>)&lt;/p>
 &lt;h4 id="41-准备数据">4.1 准备数据&lt;/h4>
 &lt;p>顶点文件：&lt;code>example/file/vertex_person.csv&lt;/code>&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-csv" data-lang="csv">marko,29,Beijing
-vadas,27,Hongkong
-josh,32,Beijing
-peter,35,Shanghai
-&amp;#34;li,nary&amp;#34;,26,&amp;#34;Wu,han&amp;#34;
-&lt;/code>&lt;/pre>&lt;p>顶点文件：&lt;code>example/file/vertex_software.txt&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>marko,29,Beijing
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vadas,27,Hongkong
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>josh,32,Beijing
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>peter,35,Shanghai
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;#34;li,nary&amp;#34;,26,&amp;#34;Wu,han&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>顶点文件：&lt;code>example/file/vertex_software.txt&lt;/code>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>name|lang|price
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>lop|java|328
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ripple|java|199
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>边文件：&lt;code>example/file/edge_knows.json&lt;/code>&lt;/p>
-&lt;pre tabindex="0">&lt;code>{&amp;#34;source_name&amp;#34;: &amp;#34;marko&amp;#34;, &amp;#34;target_name&amp;#34;: &amp;#34;vadas&amp;#34;, &amp;#34;date&amp;#34;: &amp;#34;20160110&amp;#34;, &amp;#34;weight&amp;#34;: 0.5}
-{&amp;#34;source_name&amp;#34;: &amp;#34;marko&amp;#34;, &amp;#34;target_name&amp;#34;: &amp;#34;josh&amp;#34;, &amp;#34;date&amp;#34;: &amp;#34;20130220&amp;#34;, &amp;#34;weight&amp;#34;: 1.0}
-&lt;/code>&lt;/pre>&lt;p>边文件：&lt;code>example/file/edge_created.json&lt;/code>&lt;/p>
-&lt;pre tabindex="0">&lt;code>{&amp;#34;aname&amp;#34;: &amp;#34;marko&amp;#34;, &amp;#34;bname&amp;#34;: &amp;#34;lop&amp;#34;, &amp;#34;date&amp;#34;: &amp;#34;20171210&amp;#34;, &amp;#34;weight&amp;#34;: 0.4}
-{&amp;#34;aname&amp;#34;: &amp;#34;josh&amp;#34;, &amp;#34;bname&amp;#34;: &amp;#34;lop&amp;#34;, &amp;#34;date&amp;#34;: &amp;#34;20091111&amp;#34;, &amp;#34;weight&amp;#34;: 0.4}
-{&amp;#34;aname&amp;#34;: &amp;#34;josh&amp;#34;, &amp;#34;bname&amp;#34;: &amp;#34;ripple&amp;#34;, &amp;#34;date&amp;#34;: &amp;#34;20171210&amp;#34;, &amp;#34;weight&amp;#34;: 1.0}
-{&amp;#34;aname&amp;#34;: &amp;#34;peter&amp;#34;, &amp;#34;bname&amp;#34;: &amp;#34;lop&amp;#34;, &amp;#34;date&amp;#34;: &amp;#34;20170324&amp;#34;, &amp;#34;weight&amp;#34;: 0.2}
-&lt;/code>&lt;/pre>&lt;h4 id="42-编写schema">4.2 编写schema&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>{&amp;#34;source_name&amp;#34;: &amp;#34;marko&amp;#34;, &amp;#34;target_name&amp;#34;: &amp;#34;vadas&amp;#34;, &amp;#34;date&amp;#34;: &amp;#34;20160110&amp;#34;, &amp;#34;weight&amp;#34;: 0.5}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{&amp;#34;source_name&amp;#34;: &amp;#34;marko&amp;#34;, &amp;#34;target_name&amp;#34;: &amp;#34;josh&amp;#34;, &amp;#34;date&amp;#34;: &amp;#34;20130220&amp;#34;, &amp;#34;weight&amp;#34;: 1.0}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>边文件：&lt;code>example/file/edge_created.json&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>{&amp;#34;aname&amp;#34;: &amp;#34;marko&amp;#34;, &amp;#34;bname&amp;#34;: &amp;#34;lop&amp;#34;, &amp;#34;date&amp;#34;: &amp;#34;20171210&amp;#34;, &amp;#34;weight&amp;#34;: 0.4}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{&amp;#34;aname&amp;#34;: &amp;#34;josh&amp;#34;, &amp;#34;bname&amp;#34;: &amp;#34;lop&amp;#34;, &amp;#34;date&amp;#34;: &amp;#34;20091111&amp;#34;, &amp;#34;weight&amp;#34;: 0.4}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{&amp;#34;aname&amp;#34;: &amp;#34;josh&amp;#34;, &amp;#34;bname&amp;#34;: &amp;#34;ripple&amp;#34;, &amp;#34;date&amp;#34;: &amp;#34;20171210&amp;#34;, &amp;#34;weight&amp;#34;: 1.0}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{&amp;#34;aname&amp;#34;: &amp;#34;peter&amp;#34;, &amp;#34;bname&amp;#34;: &amp;#34;lop&amp;#34;, &amp;#34;date&amp;#34;: &amp;#34;20170324&amp;#34;, &amp;#34;weight&amp;#34;: 0.2}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="42-编写schema">4.2 编写schema&lt;/h4>
 &lt;p>schema文件：&lt;code>example/file/schema.groovy&lt;/code>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asText&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asInt&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
@@ -1264,20 +1270,20 @@ peter,35,Shanghai
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="44-执行命令导入">4.4 执行命令导入&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sh bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>导入结束后，会出现类似如下统计信息：&lt;/p>
-&lt;pre tabindex="0">&lt;code>vertices/edges has been loaded this time : 8/6
---------------------------------------------------
-count metrics
-input read success : 14
-input read failure : 0
-vertex parse success : 8
-vertex parse failure : 0
-vertex insert success : 8
-vertex insert failure : 0
-edge parse success : 6
-edge parse failure : 0
-edge insert success : 6
-edge insert failure : 0
-&lt;/code>&lt;/pre>&lt;h4 id="45-使用-spark-loader-导入">4.5 使用 spark-loader 导入&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>vertices/edges has been loaded this time : 8/6
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>--------------------------------------------------
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>count metrics
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> input read success : 14
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> input read failure : 0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vertex parse success : 8
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vertex parse failure : 0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vertex insert success : 8
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> vertex insert failure : 0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> edge parse success : 6
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> edge parse failure : 0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> edge insert success : 6
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> edge insert failure : 0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="45-使用-spark-loader-导入">4.5 使用 spark-loader 导入&lt;/h4>
 &lt;blockquote>
 &lt;p>Spark 版本：Spark 3+， 其他版本未测试。
 HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
@@ -1387,16 +1393,17 @@ HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
 &lt;/tbody>
 &lt;/table>
 &lt;p>另一种方式是在 bin/hugegraph 脚本中设置环境变量：&lt;/p>
-&lt;pre tabindex="0">&lt;code>#!/bin/bash
-# Set environment here if needed
-#export HUGEGRAPH_URL=
-#export HUGEGRAPH_GRAPH=
-#export HUGEGRAPH_USERNAME=
-#export HUGEGRAPH_PASSWORD=
-#export HUGEGRAPH_TIMEOUT=
-#export HUGEGRAPH_TRUST_STORE_FILE=
-#export HUGEGRAPH_TRUST_STORE_PASSWORD=
-&lt;/code>&lt;/pre>&lt;h5 id="33-图管理类graph-mode-setgraph-mode-getgraph-listgraph-get和graph-clear">3.3 图管理类，graph-mode-set、graph-mode-get、graph-list、graph-get和graph-clear&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Set environment here if needed&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">#export HUGEGRAPH_URL=&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">#export HUGEGRAPH_GRAPH=&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">#export HUGEGRAPH_USERNAME=&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">#export HUGEGRAPH_PASSWORD=&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">#export HUGEGRAPH_TIMEOUT=&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">#export HUGEGRAPH_TRUST_STORE_FILE=&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">#export HUGEGRAPH_TRUST_STORE_PASSWORD=&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="33-图管理类graph-mode-setgraph-mode-getgraph-listgraph-get和graph-clear">3.3 图管理类，graph-mode-set、graph-mode-get、graph-list、graph-get和graph-clear&lt;/h5>
 &lt;ul>
 &lt;li>graph-mode-set，设置图的 restore mode
 &lt;ul>
@@ -2618,8 +2625,8 @@ HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-computer-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/start-computer.sh -d &lt;span style="color:#204a87">local&lt;/span> -r master
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="24-启动-worker-节点">2.4 启动 worker 节点&lt;/h4>
-&lt;pre tabindex="0">&lt;code>bin/start-computer.sh -d local -r worker
-&lt;/code>&lt;/pre>&lt;h4 id="25-查询算法结果">2.5 查询算法结果&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>bin/start-computer.sh -d local -r worker
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="25-查询算法结果">2.5 查询算法结果&lt;/h4>
 &lt;p>2.5.1 为 server 启用 &lt;code>OLAP&lt;/code> 索引查询&lt;/p>
 &lt;p>如果没有启用OLAP索引，则需要启用, 更多参考: &lt;a href="/docs/clients/restful-api/graphs/#634-modify-graphs-read-mode-this-operation-requires-administrator-privileges">modify-graphs-read-mode&lt;/a>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-http" data-lang="http">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">PUT http://localhost:8080/graphs/hugegraph/graph_read_mode

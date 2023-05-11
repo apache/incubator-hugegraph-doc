@@ -66,34 +66,34 @@ gcc --version 3 部署 有三种方式可以部署HugeGraph-Server组件：
 </span></span></code></pre></div><p>执行成功后，在hugegraph目录下生成 hugegraph-*.tar.gz 文件，就是编译生成的tar包。</p><h3 id=4-配置>4 配置</h3><p>如果需要快速启动HugeGraph仅用于测试，那么只需要进行少数几个配置项的修改即可（见下一节）。
 详细的配置介绍请参考<a href=/docs/config/config-guide>配置文档</a>及<a href=/docs/config/config-option>配置项介绍</a></p><h3 id=5-启动>5 启动</h3><p>启动分为"首次启动"和"非首次启动"，这么区分是因为在第一次启动前需要初始化后端数据库，然后启动服务。
 而在人为停掉服务后，或者其他原因需要再次启动服务时，因为后端数据库是持久化存在的，直接启动服务即可。</p><p>HugeGraphServer启动时会连接后端存储并尝试检查后端存储版本号，如果未初始化后端或者后端已初始化但版本不匹配时（旧版本数据），HugeGraphServer会启动失败，并给出错误信息。</p><p>如果需要外部访问HugeGraphServer，请修改<code>rest-server.properties</code>的<code>restserver.url</code>配置项
-（默认为<code>http://127.0.0.1:8080</code>），修改成机器名或IP地址。</p><p>由于各种后端所需的配置（hugegraph.properties）及启动步骤略有不同，下面逐一对各后端的配置及启动做介绍。</p><h4 id=51-memory>5.1 Memory</h4><p>修改 hugegraph.properties</p><pre tabindex=0><code class=language-properties data-lang=properties>backend=memory
-serializer=text
-</code></pre><blockquote><p>Memory后端的数据是保存在内存中无法持久化的，不需要初始化后端，这也是唯一一个不需要初始化的后端。</p></blockquote><p>启动 server</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>bin/start-hugegraph.sh
+（默认为<code>http://127.0.0.1:8080</code>），修改成机器名或IP地址。</p><p>由于各种后端所需的配置（hugegraph.properties）及启动步骤略有不同，下面逐一对各后端的配置及启动做介绍。</p><h4 id=51-memory>5.1 Memory</h4><p>修改 hugegraph.properties</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>backend=memory
+</span></span><span style=display:flex><span>serializer=text
+</span></span></code></pre></div><blockquote><p>Memory后端的数据是保存在内存中无法持久化的，不需要初始化后端，这也是唯一一个不需要初始化的后端。</p></blockquote><p>启动 server</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>bin/start-hugegraph.sh
 </span></span><span style=display:flex><span>Starting HugeGraphServer...
 </span></span><span style=display:flex><span>Connecting to HugeGraphServer <span style=color:#ce5c00;font-weight:700>(</span>http://127.0.0.1:8080/graphs<span style=color:#ce5c00;font-weight:700>)</span>....OK
-</span></span></code></pre></div><p>提示的 url 与 rest-server.properties 中配置的 restserver.url 一致</p><h4 id=52-rocksdb>5.2 RocksDB</h4><blockquote><p>RocksDB是一个嵌入式的数据库，不需要手动安装部署, 要求 GCC 版本 >= 4.3.0（GLIBCXX_3.4.10），如不满足，需要提前升级 GCC</p></blockquote><p>修改 hugegraph.properties</p><pre tabindex=0><code class=language-properties data-lang=properties>backend=rocksdb
-serializer=binary
-rocksdb.data_path=.
-rocksdb.wal_path=.
-</code></pre><p>初始化数据库（仅第一次启动时需要）</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#204a87>cd</span> hugegraph-<span style=color:#4e9a06>${</span><span style=color:#000>version</span><span style=color:#4e9a06>}</span>
+</span></span></code></pre></div><p>提示的 url 与 rest-server.properties 中配置的 restserver.url 一致</p><h4 id=52-rocksdb>5.2 RocksDB</h4><blockquote><p>RocksDB是一个嵌入式的数据库，不需要手动安装部署, 要求 GCC 版本 >= 4.3.0（GLIBCXX_3.4.10），如不满足，需要提前升级 GCC</p></blockquote><p>修改 hugegraph.properties</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>backend=rocksdb
+</span></span><span style=display:flex><span>serializer=binary
+</span></span><span style=display:flex><span>rocksdb.data_path=.
+</span></span><span style=display:flex><span>rocksdb.wal_path=.
+</span></span></code></pre></div><p>初始化数据库（仅第一次启动时需要）</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#204a87>cd</span> hugegraph-<span style=color:#4e9a06>${</span><span style=color:#000>version</span><span style=color:#4e9a06>}</span>
 </span></span><span style=display:flex><span>bin/init-store.sh
 </span></span></code></pre></div><p>启动server</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>bin/start-hugegraph.sh
 </span></span><span style=display:flex><span>Starting HugeGraphServer...
 </span></span><span style=display:flex><span>Connecting to HugeGraphServer <span style=color:#ce5c00;font-weight:700>(</span>http://127.0.0.1:8080/graphs<span style=color:#ce5c00;font-weight:700>)</span>....OK
-</span></span></code></pre></div><h4 id=53-cassandra>5.3 Cassandra</h4><blockquote><p>用户需自行安装 Cassandra，要求版本 3.0 以上，<a href=http://cassandra.apache.org/download/>下载地址</a></p></blockquote><p>修改 hugegraph.properties</p><pre tabindex=0><code class=language-properties data-lang=properties>backend=cassandra
-serializer=cassandra
-
-# cassandra backend config
-cassandra.host=localhost
-cassandra.port=9042
-cassandra.username=
-cassandra.password=
-#cassandra.connect_timeout=5
-#cassandra.read_timeout=20
-
-#cassandra.keyspace.strategy=SimpleStrategy
-#cassandra.keyspace.replication=3
-</code></pre><p>初始化数据库（仅第一次启动时需要）</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#204a87>cd</span> hugegraph-<span style=color:#4e9a06>${</span><span style=color:#000>version</span><span style=color:#4e9a06>}</span>
+</span></span></code></pre></div><h4 id=53-cassandra>5.3 Cassandra</h4><blockquote><p>用户需自行安装 Cassandra，要求版本 3.0 以上，<a href=http://cassandra.apache.org/download/>下载地址</a></p></blockquote><p>修改 hugegraph.properties</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>backend=cassandra
+</span></span><span style=display:flex><span>serializer=cassandra
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># cassandra backend config
+</span></span><span style=display:flex><span>cassandra.host=localhost
+</span></span><span style=display:flex><span>cassandra.port=9042
+</span></span><span style=display:flex><span>cassandra.username=
+</span></span><span style=display:flex><span>cassandra.password=
+</span></span><span style=display:flex><span>#cassandra.connect_timeout=5
+</span></span><span style=display:flex><span>#cassandra.read_timeout=20
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>#cassandra.keyspace.strategy=SimpleStrategy
+</span></span><span style=display:flex><span>#cassandra.keyspace.replication=3
+</span></span></code></pre></div><p>初始化数据库（仅第一次启动时需要）</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#204a87>cd</span> hugegraph-<span style=color:#4e9a06>${</span><span style=color:#000>version</span><span style=color:#4e9a06>}</span>
 </span></span><span style=display:flex><span>bin/init-store.sh
 </span></span><span style=display:flex><span>Initing HugeGraph Store...
 </span></span><span style=display:flex><span>2017-12-01 11:26:51 <span style=color:#0000cf;font-weight:700>1424</span>  <span style=color:#ce5c00;font-weight:700>[</span>main<span style=color:#ce5c00;font-weight:700>]</span> <span style=color:#ce5c00;font-weight:700>[</span>INFO <span style=color:#ce5c00;font-weight:700>]</span> com.baidu.hugegraph.HugeGraph <span style=color:#ce5c00;font-weight:700>[]</span> - Opening backend store: <span style=color:#4e9a06>&#39;cassandra&#39;</span>
@@ -115,36 +115,36 @@ cassandra.password=
 </span></span></code></pre></div><p>启动server</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>bin/start-hugegraph.sh
 </span></span><span style=display:flex><span>Starting HugeGraphServer...
 </span></span><span style=display:flex><span>Connecting to HugeGraphServer <span style=color:#ce5c00;font-weight:700>(</span>http://127.0.0.1:8080/graphs<span style=color:#ce5c00;font-weight:700>)</span>....OK
-</span></span></code></pre></div><h4 id=54-scylladb>5.4 ScyllaDB</h4><blockquote><p>用户需自行安装 ScyllaDB，推荐版本 2.1 以上，<a href=https://docs.scylladb.com/getting-started/>下载地址</a></p></blockquote><p>修改 hugegraph.properties</p><pre tabindex=0><code class=language-properties data-lang=properties>backend=scylladb
-serializer=scylladb
-
-# cassandra backend config
-cassandra.host=localhost
-cassandra.port=9042
-cassandra.username=
-cassandra.password=
-#cassandra.connect_timeout=5
-#cassandra.read_timeout=20
-
-#cassandra.keyspace.strategy=SimpleStrategy
-#cassandra.keyspace.replication=3
-</code></pre><p>由于 scylladb 数据库本身就是基于 cassandra 的"优化版"，如果用户未安装 scylladb ，也可以直接使用 cassandra 作为后端存储，只需要把 backend 和 serializer 修改为 scylladb，host 和 post 指向 cassandra 集群的 seeds 和 port 即可，但是并不建议这样做，这样发挥不出 scylladb 本身的优势了。</p><p>初始化数据库（仅第一次启动时需要）</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#204a87>cd</span> hugegraph-<span style=color:#4e9a06>${</span><span style=color:#000>version</span><span style=color:#4e9a06>}</span>
+</span></span></code></pre></div><h4 id=54-scylladb>5.4 ScyllaDB</h4><blockquote><p>用户需自行安装 ScyllaDB，推荐版本 2.1 以上，<a href=https://docs.scylladb.com/getting-started/>下载地址</a></p></blockquote><p>修改 hugegraph.properties</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>backend=scylladb
+</span></span><span style=display:flex><span>serializer=scylladb
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># cassandra backend config
+</span></span><span style=display:flex><span>cassandra.host=localhost
+</span></span><span style=display:flex><span>cassandra.port=9042
+</span></span><span style=display:flex><span>cassandra.username=
+</span></span><span style=display:flex><span>cassandra.password=
+</span></span><span style=display:flex><span>#cassandra.connect_timeout=5
+</span></span><span style=display:flex><span>#cassandra.read_timeout=20
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>#cassandra.keyspace.strategy=SimpleStrategy
+</span></span><span style=display:flex><span>#cassandra.keyspace.replication=3
+</span></span></code></pre></div><p>由于 scylladb 数据库本身就是基于 cassandra 的"优化版"，如果用户未安装 scylladb ，也可以直接使用 cassandra 作为后端存储，只需要把 backend 和 serializer 修改为 scylladb，host 和 post 指向 cassandra 集群的 seeds 和 port 即可，但是并不建议这样做，这样发挥不出 scylladb 本身的优势了。</p><p>初始化数据库（仅第一次启动时需要）</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#204a87>cd</span> hugegraph-<span style=color:#4e9a06>${</span><span style=color:#000>version</span><span style=color:#4e9a06>}</span>
 </span></span><span style=display:flex><span>bin/init-store.sh
 </span></span></code></pre></div><p>启动server</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>bin/start-hugegraph.sh
 </span></span><span style=display:flex><span>Starting HugeGraphServer...
 </span></span><span style=display:flex><span>Connecting to HugeGraphServer <span style=color:#ce5c00;font-weight:700>(</span>http://127.0.0.1:8080/graphs<span style=color:#ce5c00;font-weight:700>)</span>....OK
-</span></span></code></pre></div><h4 id=55-hbase>5.5 HBase</h4><blockquote><p>用户需自行安装 HBase，要求版本 2.0 以上，<a href=https://hbase.apache.org/downloads.html>下载地址</a></p></blockquote><p>修改 hugegraph.properties</p><pre tabindex=0><code class=language-properties data-lang=properties>backend=hbase
-serializer=hbase
-
-# hbase backend config
-hbase.hosts=localhost
-hbase.port=2181
-# Note: recommend to modify the HBase partition number by the actual/env data amount &amp; RS amount before init store
-# it may influence the loading speed a lot
-#hbase.enable_partition=true
-#hbase.vertex_partitions=10
-#hbase.edge_partitions=30
-</code></pre><p>初始化数据库（仅第一次启动时需要）</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#204a87>cd</span> hugegraph-<span style=color:#4e9a06>${</span><span style=color:#000>version</span><span style=color:#4e9a06>}</span>
+</span></span></code></pre></div><h4 id=55-hbase>5.5 HBase</h4><blockquote><p>用户需自行安装 HBase，要求版本 2.0 以上，<a href=https://hbase.apache.org/downloads.html>下载地址</a></p></blockquote><p>修改 hugegraph.properties</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>backend=hbase
+</span></span><span style=display:flex><span>serializer=hbase
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span># hbase backend config
+</span></span><span style=display:flex><span>hbase.hosts=localhost
+</span></span><span style=display:flex><span>hbase.port=2181
+</span></span><span style=display:flex><span># Note: recommend to modify the HBase partition number by the actual/env data amount &amp; RS amount before init store
+</span></span><span style=display:flex><span># it may influence the loading speed a lot
+</span></span><span style=display:flex><span>#hbase.enable_partition=true
+</span></span><span style=display:flex><span>#hbase.vertex_partitions=10
+</span></span><span style=display:flex><span>#hbase.edge_partitions=30
+</span></span></code></pre></div><p>初始化数据库（仅第一次启动时需要）</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#204a87>cd</span> hugegraph-<span style=color:#4e9a06>${</span><span style=color:#000>version</span><span style=color:#4e9a06>}</span>
 </span></span><span style=display:flex><span>bin/init-store.sh
 </span></span></code></pre></div><p>启动server</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>bin/start-hugegraph.sh
 </span></span><span style=display:flex><span>Starting HugeGraphServer...
@@ -154,11 +154,11 @@ hbase.port=2181
 </span></span></code></pre></div><p><code>curl</code>请求<code>RESTfulAPI</code></p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#204a87>echo</span> <span style=color:#4e9a06>`</span>curl -o /dev/null -s -w %<span style=color:#ce5c00;font-weight:700>{</span>http_code<span style=color:#ce5c00;font-weight:700>}</span> <span style=color:#4e9a06>&#34;http://localhost:8080/graphs/hugegraph/graph/vertices&#34;</span><span style=color:#4e9a06>`</span>
 </span></span></code></pre></div><p>返回结果200，代表server启动正常</p><h4 id=62-请求server>6.2 请求Server</h4><p>HugeGraphServer的RESTful API包括多种类型的资源，典型的包括graph、schema、gremlin、traverser和task，</p><ul><li><code>graph</code>包含<code>vertices</code>、<code>edges</code></li><li><code>schema</code> 包含<code>vertexlabels</code>、 <code>propertykeys</code>、 <code>edgelabels</code>、<code>indexlabels</code></li><li><code>gremlin</code>包含各种<code>Gremlin</code>语句，如<code>g.v()</code>，可以同步或者异步执行</li><li><code>traverser</code>包含各种高级查询，包括最短路径、交叉点、N步可达邻居等</li><li><code>task</code>包含异步任务的查询和删除</li></ul><h5 id=621-获取hugegraph的顶点及相关属性>6.2.1 获取<code>hugegraph</code>的顶点及相关属性</h5><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>curl http://localhost:8080/graphs/hugegraph/graph/vertices 
 </span></span></code></pre></div><p><em>说明</em></p><ol><li><p>由于图的点和边很多，对于 list 型的请求，比如获取所有顶点，获取所有边等，Server 会将数据压缩再返回，
-所以使用 curl 时得到一堆乱码，可以重定向至 <code>gunzip</code> 进行解压。推荐使用 Chrome 浏览器 + Restlet 插件发送 HTTP 请求进行测试。</p><pre tabindex=0><code>curl &#34;http://localhost:8080/graphs/hugegraph/graph/vertices&#34; | gunzip
-</code></pre></li><li><p>当前HugeGraphServer的默认配置只能是本机访问，可以修改配置，使其能在其他机器访问。</p><pre tabindex=0><code>vim conf/rest-server.properties
-
-restserver.url=http://0.0.0.0:8080
-</code></pre></li></ol><p>响应体如下：</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span><span style=color:#000;font-weight:700>{</span>
+所以使用 curl 时得到一堆乱码，可以重定向至 <code>gunzip</code> 进行解压。推荐使用 Chrome 浏览器 + Restlet 插件发送 HTTP 请求进行测试。</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>curl &#34;http://localhost:8080/graphs/hugegraph/graph/vertices&#34; | gunzip
+</span></span></code></pre></div></li><li><p>当前HugeGraphServer的默认配置只能是本机访问，可以修改配置，使其能在其他机器访问。</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback><span style=display:flex><span>vim conf/rest-server.properties
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>restserver.url=http://0.0.0.0:8080
+</span></span></code></pre></div></li></ol><p>响应体如下：</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span><span style=color:#000;font-weight:700>{</span>
 </span></span><span style=display:flex><span>    <span style=color:#204a87;font-weight:700>&#34;vertices&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>[</span>
 </span></span><span style=display:flex><span>        <span style=color:#000;font-weight:700>{</span>
 </span></span><span style=display:flex><span>            <span style=color:#204a87;font-weight:700>&#34;id&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;2lop&#34;</span><span style=color:#000;font-weight:700>,</span>
