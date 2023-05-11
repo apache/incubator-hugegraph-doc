@@ -792,6 +792,7 @@ bin/hugegraph-loader -g {GRAPH_NAME} -f ${INPUT_DESC_FILE} -s ${SCHEMA_FILE} -h 
 ### 4 Complete example
 
 Given below is an example in the example directory of the hugegraph-loader package.
+GitHub Address: https://github.com/apache/incubator-hugegraph-toolchain/tree/master/hugegraph-loader/assembly/static/example/file
 
 #### 4.1 Prepare data
 
