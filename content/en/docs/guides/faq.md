@@ -24,9 +24,9 @@ weight: 5
 
   RocksDB requires gcc 4.3.0 (GLIBCXX_3.4.10) and above
 
-- Execution `init-store.sh` reports an error: `NoHostAvailableException`
+- The error `NoHostAvailableException` occurred while executing `init-store.sh`.
 
-  `NoHostAvailableException` It means that the service cannot be connected to `Cassandra`. If you are sure to use the `cassandra` backend, please install and start the service first. As for the fact that this prompt itself may not be straightforward enough, we will update the documentation to explain it. 
+  `NoHostAvailableException` means that the `Cassandra` service cannot be connected to. If you are sure that you want to use the Cassandra backend, please install and start this service first. As for the message itself, it may not be clear enough, and we will update the documentation to provide further explanation.
   
 - The `bin` directory contains `start-hugegraph.sh`, `start-restserver.sh` and `start-gremlinserver.sh`.  These scripts seem to be related to startup.  Which one should be used?
 
@@ -42,7 +42,7 @@ weight: 5
   
 - When using the vertex Id to query the vertex through the `RESTful API`, it returns empty, but the vertex does exist
 
-  Check the type of the vertex ID. If it is a string type, double quotes need to be added to the id part of the API url, and the number type does not need to be added.
+  Check the type of the vertex ID. If it is a string type, the "id" part of the API URL needs to be enclosed in double quotes, while for numeric types, it is not necessary to enclose the ID in quotes.
 
 - Vertex Id has been double quoted as required, but querying the vertex via the   RESTful API  still returns empty
   
