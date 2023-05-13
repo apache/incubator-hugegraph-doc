@@ -1,21 +1,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HugeGraph – GUIDES</title><link>/docs/guides/</link><description>Recent content in GUIDES on HugeGraph</description><generator>Hugo -- gohugo.io</generator><atom:link href="/docs/guides/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: HugeGraph Architecture Overview</title><link>/docs/guides/architectural/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/guides/architectural/</guid><description>
-&lt;h3 id="1-概述">1 概述&lt;/h3>
-&lt;p>作为一款通用的图数据库产品，HugeGraph需具备图数据的基本功能，如下图所示。HugeGraph包括三个层次的功能，分别是存储层、计算层和用户接口层。 HugeGraph支持OLTP和OLAP两种图计算类型，其中OLTP实现了&lt;a href="https://tinkerpop.apache.org">Apache TinkerPop3&lt;/a>框架，并支持&lt;a href="https://tinkerpop.apache.org/gremlin.html">Gremlin&lt;/a>查询语言。 OLAP计算是基于SparkGraphX实现。&lt;/p>
+&lt;h3 id="1-overview">1 Overview&lt;/h3>
+&lt;p>As a general-purpose graph database product, HugeGraph needs to have the basic functions of graph data, as shown in the figure below. HugeGraph includes three levels of functions, namely storage layer, computing layer and user interface layer. HugeGraph supports two types of graph computing, OLTP and OLAP. OLTP implements the &lt;a href="https://tinkerpop.apache.org">Apache TinkerPop3&lt;/a> framework and supports the &lt;a href="https://tinkerpop.apache.org/gremlin.html">Gremlin&lt;/a> query language. OLAP computing is implemented based on SparkGraphX.&lt;/p>
 &lt;center>
 &lt;img src="/docs/images/design/architectural-overview.png" alt="image">
 &lt;/center>
-&lt;h3 id="2-组件">2 组件&lt;/h3>
-&lt;p>HugeGraph的主要功能分为HugeCore、ApiServer、HugeGraph-Client、HugeGraph-Loader和HugeGraph-Studio等组件构成，各组件之间的通信关系如下图所示。&lt;/p>
+&lt;h3 id="2-components">2 components&lt;/h3>
+&lt;p>The main functions of HugeGraph are divided into components such as HugeCore, ApiServer, HugeGraph-Client, HugeGraph-Loader and HugeGraph-Studio. The communication relationship between each component is shown in the figure below.&lt;/p>
 &lt;center>
 &lt;img src="/docs/images/design/architectural-component.png" alt="image">
 &lt;/center>
 &lt;ul>
-&lt;li>HugeCore ：HugeGraph的核心模块，TinkerPop的接口主要在该模块中实现。HugeCore的功能涵盖包括OLTP和OLAP两个部分。&lt;/li>
-&lt;li>ApiServer ：提供RESTFul Api接口，对外提供Graph Api、Schema Api和Gremlin Api等接口服务。&lt;/li>
-&lt;li>HugeGraph-Client：基于Java客户端驱动程序。HugeGraph-Client是Java版本客户端驱动程序，后续可根据需要提供Python、Go、C++等多语言支持。&lt;/li>
-&lt;li>HugeGraph-Loader：数据导入模块。HugeGraph-Loader可以扫描并分析现有数据，自动生成Graph Schema创建语言，通过批量方式快速导入数据。&lt;/li>
-&lt;li>HugeGraph-Studio：基于Web的可视化IDE环境。以Notebook方式记录Gremlin查询，可视化展示Graph的关联关系。HugeGraph-Studio也是本系统推荐的工具。&lt;/li>
-&lt;li>HugeGraph-Computer：HugeGraph-Computer是一个分布式图处理系统 (OLAP)。&lt;/li>
+&lt;li>HugeCore: The core module of HugeGraph, the interface of TinkerPop is mainly implemented in this module. The function of HugeCore includes two parts: OLTP and OLAP.&lt;/li>
+&lt;li>ApiServer: Provides RESTFul Api interface, and provides external interface services such as Graph Api, Schema Api, and Gremlin Api.&lt;/li>
+&lt;li>HugeGraph-Client: Java-based client driver. HugeGraph-Client is a Java version client driver, which can provide Python, Go, C++ and other multi-language support as needed.&lt;/li>
+&lt;li>HugeGraph-Loader: data import module. HugeGraph-Loader can scan and analyze existing data, automatically generate Graph Schema creation language, and quickly import data in batches.&lt;/li>
+&lt;li>HugeGraph-Studio: Web-based visual IDE environment. Record Gremlin queries in Notebook mode, and visualize the relationship between Graphs. HugeGraph-Studio is also a tool recommended by this system.&lt;/li>
+&lt;li>HugeGraph-Computer: HugeGraph-Computer is a distributed graph processing system (OLAP).&lt;/li>
 &lt;/ul></description></item><item><title>Docs: HugeGraph Design Concepts</title><link>/docs/guides/desgin-concept/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/guides/desgin-concept/</guid><description>
 &lt;h3 id="1-property-graph">1. Property Graph&lt;/h3>
 &lt;p>常见的图数据表示模型有两种，分别是RDF（Resource Description Framework）模型和属性图（Property Graph）模型。
