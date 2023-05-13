@@ -4,27 +4,27 @@ linkTitle: "Architecture Overview"
 weight: 1
 ---
 
-### 1 概述
+### 1 Overview
 
-作为一款通用的图数据库产品，HugeGraph需具备图数据的基本功能，如下图所示。HugeGraph包括三个层次的功能，分别是存储层、计算层和用户接口层。 HugeGraph支持OLTP和OLAP两种图计算类型，其中OLTP实现了[Apache TinkerPop3](https://tinkerpop.apache.org)框架，并支持[Gremlin](https://tinkerpop.apache.org/gremlin.html)查询语言。 OLAP计算是基于SparkGraphX实现。
+As a general-purpose graph database product, HugeGraph needs to have the basic functions of graph data, as shown in the figure below. HugeGraph includes three levels of functions, namely storage layer, computing layer and user interface layer. HugeGraph supports two types of graph computing, OLTP and OLAP. OLTP implements the [Apache TinkerPop3](https://tinkerpop.apache.org) framework and supports the [Gremlin](https://tinkerpop.apache.org/gremlin.html) query language. OLAP computing is implemented based on SparkGraphX.
 
 <center>
   <img src="/docs/images/design/architectural-overview.png" alt="image">
 </center>
 
 
-### 2 组件
+### 2 components
 
-HugeGraph的主要功能分为HugeCore、ApiServer、HugeGraph-Client、HugeGraph-Loader和HugeGraph-Studio等组件构成，各组件之间的通信关系如下图所示。
+The main functions of HugeGraph are divided into components such as HugeCore, ApiServer, HugeGraph-Client, HugeGraph-Loader and HugeGraph-Studio. The communication relationship between each component is shown in the figure below.
 
 <center>
   <img src="/docs/images/design/architectural-component.png" alt="image">
 </center>
 
 
-- HugeCore ：HugeGraph的核心模块，TinkerPop的接口主要在该模块中实现。HugeCore的功能涵盖包括OLTP和OLAP两个部分。
-- ApiServer ：提供RESTFul Api接口，对外提供Graph Api、Schema Api和Gremlin Api等接口服务。
-- HugeGraph-Client：基于Java客户端驱动程序。HugeGraph-Client是Java版本客户端驱动程序，后续可根据需要提供Python、Go、C++等多语言支持。
-- HugeGraph-Loader：数据导入模块。HugeGraph-Loader可以扫描并分析现有数据，自动生成Graph Schema创建语言，通过批量方式快速导入数据。
-- HugeGraph-Studio：基于Web的可视化IDE环境。以Notebook方式记录Gremlin查询，可视化展示Graph的关联关系。HugeGraph-Studio也是本系统推荐的工具。
-- HugeGraph-Computer：HugeGraph-Computer是一个分布式图处理系统 (OLAP)。
+- HugeCore: The core module of HugeGraph, the interface of TinkerPop is mainly implemented in this module. The function of HugeCore includes two parts: OLTP and OLAP.
+- ApiServer: Provides RESTFul Api interface, and provides external interface services such as Graph Api, Schema Api, and Gremlin Api.
+- HugeGraph-Client: Java-based client driver. HugeGraph-Client is a Java version client driver, which can provide Python, Go, C++ and other multi-language support as needed.
+- HugeGraph-Loader: data import module. HugeGraph-Loader can scan and analyze existing data, automatically generate Graph Schema creation language, and quickly import data in batches.
+- HugeGraph-Studio: Web-based visual IDE environment. Record Gremlin queries in Notebook mode, and visualize the relationship between Graphs. HugeGraph-Studio is also a tool recommended by this system.
+- HugeGraph-Computer: HugeGraph-Computer is a distributed graph processing system (OLAP).
