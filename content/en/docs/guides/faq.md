@@ -28,9 +28,9 @@ weight: 5
 
   `NoHostAvailableException` It means that the service cannot be connected to `Cassandra`. If you are sure to use the `cassandra` backend, please install and start the service first. As for the fact that this prompt itself may not be straightforward enough, we will update the documentation to explain it. 
   
-- The `bin` directory contains `start-hugegraph.sh`, `start-restserver.sh` and `start-gremlinserver.sh` scripts seem to be related to startup.  Which one should be used?
+- The `bin` directory contains `start-hugegraph.sh`, `start-restserver.sh` and `start-gremlinserver.sh`.  These scripts seem to be related to startup.  Which one should be used?
 
-  Since version 0.3.3, GremlinServer and RestServer have been merged into HugeGraphServer as `start-hugegraph.sh`.  Just use it to start.  The latter two will be deleted in subsequent versions.
+  Since version 0.3.3, GremlinServer and RestServer have been merged into HugeGraphServer. To start, use start-hugegraph.sh. The latter two will be removed in future versions.
 
 - Two graphs are configured, the names are `hugegraph` and `hugegraph1`, and the command to start the service is `start-hugegraph.sh`. Is only the hugegraph graph opened?
 
