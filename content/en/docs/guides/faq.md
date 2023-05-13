@@ -77,7 +77,7 @@ weight: 5
 
   At present, there is really no good way to delete all the data. If the user deploys the `Server` and the backend by himself, he can directly clear the database and restart the `Server`. You can use the paging API or scan API to get all the data first, and then delete them one by one.
 
-- Cleared the database and executed `init-store`, but when adding `schema`, it prompts "xxx has existed"
+- The database has been cleared and `init-store` has been executed, but when trying to add a schema, the prompt "xxx has existed" appeared.
 
   There is a cache in the `HugeGraphServer`, and it is necessary to restart the `Server` when the database is cleared, otherwise the residual cache will be inconsistent.
 
