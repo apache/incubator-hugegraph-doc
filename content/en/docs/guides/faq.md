@@ -97,4 +97,4 @@ weight: 5
 
   `Content-Type: application/json` needs to be specified in the request header
 
-Other issues can be searched in the issue area of the corresponding project, such as [Server-Issues](https://github.com/hugegraph/hugegraph/issues) / [Loader Issues](https://github.com/hugegraph/hugegraph-loader/issues)
+Other issues can be searched in the issue area of the corresponding project, such as [Server-Issues](https://github.com/apache/hugegraph/issues) / [Loader Issues](https://github.com/apache/hugegraph-loader/issues)
