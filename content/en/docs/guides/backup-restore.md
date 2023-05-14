@@ -1,32 +1,32 @@
 ---
-title: "Backup Restore"
+title: "Backup and Restore"
 linkTitle: "Backup Restore"
 weight: 4
 ---
 
-## 描述
+## Description
 
-Backup 和 Restore 是备份图和恢复图的功能。备份和恢复的数据包括元数据（schema）和图数据（vertex 和 edge）。
+Backup and Restore are functions of backup map and restore map. The data backed up and restored includes metadata (schema) and graph data (vertex and edge).
 
 #### Backup
 
-将 HugeGraph 系统中的一张图的元数据和图数据以 JSON 格式导出。
+Export the metadata and graph data of a graph in the HugeGraph system in JSON format.
 
 #### Restore
 
-将 Backup 导出的JSON格式的数据，重新导入到 HugeGraph 系统中的一个图中。
+Re-import the data in JSON format exported by Backup to a graph in the HugeGraph system.
 
-Restore 有两种模式：
+Restore has two modes:
 
-- Restoring 模式，将 Backup 导出的元数据和图数据原封不动的恢复到 HugeGraph 系统中。可用于图的备份和恢复，一般目标图是新图（没有元数据和图数据）。比如：
-    - 系统升级，先备份图，然后升级系统，最后将图恢复到新的系统中
-    - 图迁移，从一个 HugeGraph 系统中，使用 Backup 功能将图导出，然后使用 Restore 功能将图导入另一个 HugeGraph 系统中
-- Merging 模式，将 Backup 导出的元数据和图数据导入到另一个已经存在元数据或者图数据的图中，过程中元数据的 ID 可能发生改变，顶点和边的 ID 也会发生相应变化。
-    - 可用于合并图
+- In Restoring mode, the metadata and graph data exported by Backup are restored to the HugeGraph system intact. It can be used for graph backup and recovery, and the general target graph is a new graph (without metadata and graph data). for example:
+  - System upgrade, first back up the map, then upgrade the system, and finally restore the map to the new system
+  - Graph migration, from a HugeGraph system, use the Backup function to export the graph, and then use the Restore function to import the graph into another HugeGraph system
+- In the Merging mode, the metadata and graph data exported by Backup are imported into another graph that already has metadata or graph data. During the process, the ID of the metadata may change, and the IDs of vertices and edges will also change accordingly.
+  - Can be used to merge graphs
 
-## 使用方法
+## Instructions
 
-可以使用[hugegraph-tools](/docs/quickstart/hugegraph-tools)进行图的备份和恢复。
+You can use [hugegraph-tools](/docs/quickstart/hugegraph-tools) to backup and restore graphs.
 
 #### Backup
 
@@ -34,73 +34,76 @@ Restore 有两种模式：
 bin/hugegraph backup -t all -d data
 ```
 
-该命令将 http://127.0.0.1 的 hugegraph 图的全部元数据和图数据备份到data目录下。
+This command backs up all the metadata and graph data of the hugegraph graph of http://127.0.0.1 to the data directory.
 
-> Backup 在三种图模式下都可以正常工作
+> Backup works fine in all three graph modes
 
 #### Restore
 
-Restore 有两种模式： RESTORING 和 MERGING，备份之前首先要根据需要设置图模式。
+Restore has two modes: RESTORING and MERGING. Before backup, you must first set the graph mode according to your needs.
 
-##### 步骤1：查看并设置图模式
+##### Step 1: View and set graph mode
 
 ```bash
 bin/hugegraph graph-mode-get
 ```
-该命令用于查看当前图模式，包括：NONE、RESTORING、MERGING。
+This command is used to view the current graph mode, including: NONE, RESTORING, MERGING.
 
 ```bash
 bin/hugegraph graph-mode-set -m RESTORING
 ```
-该命令用于设置图模式，Restore 之前可以设置成 RESTORING 或者 MERGING 模式，例子中设置成 RESTORING。
 
-##### 步骤2：Restore 数据
+This command is used to set the graph mode. Before Restore, it can be set to RESTORING or MERGING mode. In the example, it is set to RESTORING.
+
+##### Step 2: Restore data
 
 ```bash
 bin/hugegraph restore -t all -d data
 ```
-该命令将data目录下的全部元数据和图数据重新导入到 http://127.0.0.1 的 hugegraph 图中。
+This command re-imports all metadata and graph data in the data directory to the hugegraph graph at http://127.0.0.1.
 
-##### 步骤3：恢复图模式
+##### Step 3: Restoring Graph Mode
 
 ```bash
 bin/hugegraph graph-mode-set -m NONE
 ```
-该命令用于恢复图模式为 NONE。
+This command is used to restore the graph mode to NONE.
 
-至此，一次完整的图备份和图恢复流程结束。
+So far, a complete graph backup and graph recovery process is over.
 
-#### 帮助
+#### help
 
-备份和恢复命令的详细使用方式可以参考[hugegraph-tools文档](/docs/quickstart/hugegraph-tools)。
+For detailed usage of backup and restore commands, please refer to the [hugegraph-tools documentation](/docs/quickstart/hugegraph-tools).
 
-## Backup/Restore使用和实现的API说明
+## API description for Backup/Restore usage and implementation
 
 #### Backup
 
-Backup 使用`元数据`和`图数据`的相应的 list(GET) API 导出，并未增加新的 API。
+Backup uses the corresponding list(GET) API export of metadata and graph data, and no new API is added.
 
 #### Restore
 
-Restore 使用`元数据`和`图数据`的相应的 create(POST) API 导入，并未增加新的 API。
+Restore uses the corresponding create(POST) API imports for metadata and graph data, and does not add new APIs.
 
-Restore 时存在两种不同的模式： Restoring 和 Merging，另外，还有常规模式 NONE(默认)，区别如下：
+There are two different modes for Restore: Restoring and Merging. In addition, there is a regular mode of NONE (default), the differences are as follows:
 
-- None 模式，元数据和图数据的写入属于正常状态，可参见功能说明。特别的：
-    - 元数据（schema）创建时不允许指定 ID
-    - 图数据（vertex）在 id strategy 为 Automatic 时，不允许指定 ID
-- Restoring 模式，恢复到一个新图中，特别的：
-    - 元数据（schema）创建时允许指定 ID
-    - 图数据（vertex）在 id strategy 为 Automatic 时，允许指定 ID
-- Merging 模式，合并到一个已存在元数据和图数据的图中，特别的：
-    - 元数据（schema）创建时不允许指定 ID
-    - 图数据（vertex）在 id strategy 为 Automatic 时，允许指定 ID
+- In None mode, the writing of metadata and graph data is normal, please refer to the function description. special:
+    - ID is not allowed when metadata (schema) is created
+    - Graph data (vertex) is not allowed to specify an ID when the id strategy is Automatic
+- Restoring mode, restoring to a new graph, in particular:
+    - ID is allowed to be specified when metadata (schema) is created
+    - Graph data (vertex) allows specifying an ID when the id strategy is Automatic
+- Merging mode, merging into a graph with existing metadata and graph data, in particular:
+    - ID is not allowed when metadata (schema) is created
+    - Graph data (vertex) allows specifying an ID when the id strategy is Automatic
 
-正常情况下，图模式为 None，当需要 Restore 图时，需要根据需要临时修改图模式为 Restoring 模式或者 Merging 模式，并在完成 Restore 时，恢复图模式为 None。
 
-实现的设置图模式的 RESTful API 如下：
+Normally, the graph mode is None. When you need to restore the graph, you need to temporarily change the graph mode to Restoring mode or 
+Merging mode as needed, and when the Restore is completed, restore the graph mode to None.
 
-##### 查看某个图的模式. **该操作需要管理员权限**
+The implemented RESTful API for setting graph mode is as follows:
+
+##### View the schema of a graph. **This operation requires administrator privileges**
 
 ###### Method & Url
 
@@ -122,9 +125,9 @@ GET http://localhost:8080/graphs/{graph}/mode
 }
 ```
 
-> 合法的图模式包括：NONE，RESTORING，MERGING
+> Legal graph modes include: NONE, RESTORING, MERGING
 
-##### 设置某个图的模式. **该操作需要管理员权限**
+##### Set the mode of a graph. ""This operation requires administrator privileges**
 
 ###### Method & Url
 
@@ -138,7 +141,7 @@ PUT http://localhost:8080/graphs/{graph}/mode
 "RESTORING"
 ```
 
-> 合法的图模式包括：NONE，RESTORING，MERGING
+> Legal graph modes include: NONE, RESTORING, MERGING
 
 ###### Response Status
 
