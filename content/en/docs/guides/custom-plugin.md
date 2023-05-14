@@ -4,14 +4,14 @@ linkTitle: "HugeGraph Plugin"
 weight: 3
 ---
 
-### background
+### Background
 
 1. HugeGraph is not only open source and open, but also simple and easy to use. General users can easily add plug-in extension functions without changing the source code.
 2. HugeGraph supports a variety of built-in storage backends, and also allows users to extend custom backends without changing the existing source code.
 3. HugeGraph supports full-text search. The full-text search function involves word segmentation in various languages. Currently, there are 8 built-in Chinese word 
 breakers, and it also allows users to expand custom word breakers without changing the existing source code.
 
-### scalable dimension
+### Scalable dimension
 
 Currently, the plug-in method provides extensions in the following dimensions:
 
