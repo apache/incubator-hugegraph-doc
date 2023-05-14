@@ -338,7 +338,6 @@ public class BatchExample {
 }
 ```
 
-
 ### 4.4 Run The Example
 
 Before running Example, you need to start the Server. For the startup process, see[HugeGraph-Server Quick Start](/docs/quickstart/hugegraph-server).
