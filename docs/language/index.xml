@@ -1,10 +1,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HugeGraph – QUERY LANGUAGE</title><link>/docs/language/</link><description>Recent content in QUERY LANGUAGE on HugeGraph</description><generator>Hugo -- gohugo.io</generator><atom:link href="/docs/language/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: HugeGraph Gremlin</title><link>/docs/language/hugegraph-gremlin/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/language/hugegraph-gremlin/</guid><description>
-&lt;h3 id="概述">概述&lt;/h3>
-&lt;p>HugeGraph支持&lt;a href="https://tinkerpop.apache.org">Apache TinkerPop3&lt;/a>的图形遍历查询语言&lt;a href="https://tinkerpop.apache.org/gremlin.html">Gremlin&lt;/a>。 SQL是关系型数据库查询语言，而Gremlin是一种通用的图数据库查询语言，Gremlin可用于创建图的实体（Vertex和Edge）、修改实体内部属性、删除实体，也可执行图的查询操作。&lt;/p>
-&lt;p>Gremlin可用于创建图的实体（Vertex和Edge）、修改实体内部属性、删除实体，更主要的是可用于执行图的查询及分析操作。&lt;/p>
+&lt;h3 id="overview">Overview&lt;/h3>
+&lt;p>HugeGraph supports &lt;a href="https://tinkerpop.apache.org/gremlin.html">Gremlin&lt;/a>, a graph traversal query language of &lt;a href="https://tinkerpop.apache.org">Apache TinkerPop3&lt;/a>. While SQL is a query language for relational databases, Gremlin is a general-purpose query language for graph databases. Gremlin can be used to create entities (Vertex and Edge) of a graph, modify the properties of entities, delete entities, as well as perform graph queries.&lt;/p>
+&lt;p>Gremlin can be used to create entities (Vertex and Edge) of a graph, modify the properties of entities, and delete entities. More importantly, it can be used to perform graph querying and analysis operations.&lt;/p>
 &lt;h3 id="tinkerpop-features">TinkerPop Features&lt;/h3>
-&lt;p>HugeGraph实现了TinkerPop框架，但是并没有实现TinkerPop所有的特性。&lt;/p>
-&lt;p>下表列出HugeGraph对TinkerPop各种特性的支持情况：&lt;/p>
+&lt;p>HugeGraph implements the TinkerPop framework, but not all TinkerPop features are implemented.&lt;/p>
+&lt;p>The table below lists the support status of various TinkerPop features in HugeGraph:&lt;/p>
 &lt;h3 id="graph-features">Graph Features&lt;/h3>
 &lt;table>
 &lt;thead>
@@ -283,185 +283,185 @@
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;h3 id="gremlin的步骤">Gremlin的步骤&lt;/h3>
-&lt;p>HugeGraph支持Gremlin的所有步骤。有关Gremlin的完整参考信息，请参与&lt;a href="http://tinkerpop.apache.org/docs/current/reference/">Gremlin官网&lt;/a>。&lt;/p>
+&lt;h3 id="gremlin-steps">Gremlin Steps&lt;/h3>
+&lt;p>HugeGraph supports all steps of Gremlin. For complete reference information about Gremlin, please refer to the &lt;a href="http://tinkerpop.apache.org/docs/current/reference/">Gremlin official website&lt;/a>.&lt;/p>
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th>步骤&lt;/th>
-&lt;th>说明&lt;/th>
-&lt;th>文档&lt;/th>
+&lt;th>Step&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;th>Documentation&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
 &lt;td>addE&lt;/td>
-&lt;td>在两个顶点之间添加边&lt;/td>
+&lt;td>Add an edge between two vertices.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#addedge-step">addE step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>addV&lt;/td>
-&lt;td>将顶点添加到图形&lt;/td>
+&lt;td>add vertices to graph.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#addvertex-step">addV step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>and&lt;/td>
-&lt;td>确保所有遍历都返回值&lt;/td>
+&lt;td>Make sure all traversals return values.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#add-step">and step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>as&lt;/td>
-&lt;td>用于向步骤的输出分配变量的步骤调制器&lt;/td>
+&lt;td>Step modulator for assigning variables to the step&amp;rsquo;s output.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#as-step">as step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>by&lt;/td>
-&lt;td>与&lt;code>group&lt;/code>和&lt;code>order&lt;/code>配合使用的步骤调制器&lt;/td>
+&lt;td>Step Modulators used in conjunction with group and order.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#by-step">by step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>coalesce&lt;/td>
-&lt;td>返回第一个返回结果的遍历&lt;/td>
+&lt;td>Returns the first traversal that returns a result.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#coalesce-step">coalesce step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>constant&lt;/td>
-&lt;td>返回常量值。 与&lt;code>coalesce&lt;/code>配合使用&lt;/td>
+&lt;td>Returns a constant value. Used in conjunction with coalesce.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#constant-step">constant step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>count&lt;/td>
-&lt;td>从遍历返回计数&lt;/td>
+&lt;td>Returns a count from the traversal.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#addedge-step">count step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>dedup&lt;/td>
-&lt;td>返回已删除重复内容的值&lt;/td>
+&lt;td>Returns values with duplicates removed.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#dedup-step">dedup step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>drop&lt;/td>
-&lt;td>丢弃值（顶点/边缘）&lt;/td>
+&lt;td>Discards a value (vertex/edge).&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#drop-step">drop step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>fold&lt;/td>
-&lt;td>充当用于计算结果聚合值的屏障&lt;/td>
+&lt;td>Acts as a barrier for computing aggregated values from results.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#fold-step">fold step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>group&lt;/td>
-&lt;td>根据指定的标签将值分组&lt;/td>
+&lt;td>Groups values based on specified labels.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#group-step">group step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>has&lt;/td>
-&lt;td>用于筛选属性、顶点和边缘。 支持&lt;code>hasLabel&lt;/code>、&lt;code>hasId&lt;/code>、&lt;code>hasNot&lt;/code> 和 &lt;code>has&lt;/code> 变体&lt;/td>
+&lt;td>Used to filter properties, vertices, and edges. Supports &lt;code>hasLabel&lt;/code>, &lt;code>hasId&lt;/code>, &lt;code>hasNot&lt;/code>, and &lt;code>has&lt;/code> variants.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#has-step">has step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>inject&lt;/td>
-&lt;td>将值注入流中&lt;/td>
+&lt;td>Injects values into the stream.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#inject-step">inject step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>is&lt;/td>
-&lt;td>用于通过布尔表达式执行筛选器&lt;/td>
+&lt;td>Used to filter by a Boolean expression.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#is-step">is step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>limit&lt;/td>
-&lt;td>用于限制遍历中的项数&lt;/td>
+&lt;td>Used to limit the number of items in a traversal.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#limit-step">limit step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>local&lt;/td>
-&lt;td>本地包装遍历的某个部分，类似于子查询&lt;/td>
+&lt;td>Locally wraps a part of a traversal, similar to a subquery.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#local-step">local step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>not&lt;/td>
-&lt;td>用于生成筛选器的求反结果&lt;/td>
+&lt;td>Used to generate the negation result of a filter.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#not-step">not step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>optional&lt;/td>
-&lt;td>如果生成了某个结果，则返回指定遍历的结果，否则返回调用元素&lt;/td>
+&lt;td>Returns the result of a specified traversal if it generates any results, otherwise returns the calling element.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#optional-step">optional step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>or&lt;/td>
-&lt;td>确保至少有一个遍历会返回值&lt;/td>
+&lt;td>Ensures that at least one traversal returns a value.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#or-step">or step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>order&lt;/td>
-&lt;td>按指定的排序顺序返回结果&lt;/td>
+&lt;td>Returns results in the specified order.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#order-step">order step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>path&lt;/td>
-&lt;td>返回遍历的完整路径&lt;/td>
+&lt;td>Returns the full path of the traversal.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#addedge-step">path step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>project&lt;/td>
-&lt;td>将属性投影为映射&lt;/td>
+&lt;td>Projects properties as a map.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#project-step">project step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>properties&lt;/td>
-&lt;td>返回指定标签的属性&lt;/td>
+&lt;td>Returns properties with specified labels.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#properties-step">properties step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>range&lt;/td>
-&lt;td>根据指定的值范围进行筛选&lt;/td>
+&lt;td>Filters based on a specified range of values.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#range-step">range step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>repeat&lt;/td>
-&lt;td>将步骤重复指定的次数。 用于循环&lt;/td>
+&lt;td>Repeats a step a specified number of times. Used for looping.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#repeat-step">repeat step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>sample&lt;/td>
-&lt;td>用于对遍历返回的结果采样&lt;/td>
+&lt;td>Used to sample results returned by the traversal.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#sample-step">sample step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>select&lt;/td>
-&lt;td>用于投影遍历返回的结果&lt;/td>
+&lt;td>Used to project the results returned by the traversal.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#select-step">select step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>store&lt;/td>
-&lt;td>用于遍历返回的非阻塞聚合&lt;/td>
+&lt;td>This step is used fo.r non-blocking aggregation of results returned by traversal&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#store-step">store step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>tree&lt;/td>
-&lt;td>将顶点中的路径聚合到树中&lt;/td>
-&lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#tree-step">tree step&lt;/a>&lt;/td>
+&lt;td>Aggregate the paths in vertices into a tree.&lt;/td>
+&lt;td>&lt;a href="http://tinkerpop.apac.he.org/docs/current/reference/#tree-step">tree step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>unfold&lt;/td>
-&lt;td>将迭代器作为步骤展开&lt;/td>
-&lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#unfold-step">unfold step&lt;/a>&lt;/td>
+&lt;td>Unfolds an iterator as a step.&lt;/td>
+&lt;td>&lt;a href="http://tinkerpop.apache.org/docs/c.urrent/reference/#unfold-step">unfold step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>union&lt;/td>
-&lt;td>合并多个遍历返回的结果&lt;/td>
+&lt;td>Merge the results returned by multiple traversals.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#union-step">union step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>V&lt;/td>
-&lt;td>包括顶点与边之间的遍历所需的步骤：&lt;code>V&lt;/code>、&lt;code>E&lt;/code>、&lt;code>out&lt;/code>、&lt;code>in&lt;/code>、&lt;code>both&lt;/code>、&lt;code>outE&lt;/code>、&lt;code>inE&lt;/code>、&lt;code>bothE&lt;/code>、&lt;code>outV&lt;/code>、&lt;code>inV&lt;/code>、&lt;code>bothV&lt;/code> 和 &lt;code>otherV&lt;/code>&lt;/td>
+&lt;td>These are the steps required for traversing between vertices and edges: &lt;code>V&lt;/code>, &lt;code>E&lt;/code>, &lt;code>out&lt;/code>, &lt;code>in&lt;/code>, &lt;code>both&lt;/code>, &lt;code>outE&lt;/code>, &lt;code>inE&lt;/code>, &lt;code>bothE&lt;/code>, &lt;code>outV&lt;/code>, &lt;code>inV&lt;/code>, &lt;code>bothV&lt;/code>, and &lt;code>otherV&lt;/code>.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#vertex-steps">order step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>where&lt;/td>
-&lt;td>用于筛选遍历返回的结果。 支持 &lt;code>eq&lt;/code>、&lt;code>neq&lt;/code>、&lt;code>lt&lt;/code>、&lt;code>lte&lt;/code>、&lt;code>gt&lt;/code>、&lt;code>gte&lt;/code> 和 &lt;code>between&lt;/code> 运算符&lt;/td>
+&lt;td>Used to filter the results returned by a traversal. Supports &lt;code>eq&lt;/code>, &lt;code>neq&lt;/code>, &lt;code>lt&lt;/code>, &lt;code>lte&lt;/code>, &lt;code>gt&lt;/code>, &lt;code>gte&lt;/code>, and &lt;code>between&lt;/code> operators.&lt;/td>
 &lt;td>&lt;a href="http://tinkerpop.apache.org/docs/current/reference/#where-step">where step&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;/tbody>
