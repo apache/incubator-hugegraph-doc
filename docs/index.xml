@@ -3477,33 +3477,39 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;/ul>
 &lt;/blockquote></description></item><item><title>Docs: HugeGraph Design Concepts</title><link>/docs/guides/desgin-concept/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/guides/desgin-concept/</guid><description>
 &lt;h3 id="1-property-graph">1. Property Graph&lt;/h3>
-&lt;p>常见的图数据表示模型有两种，分别是RDF（Resource Description Framework）模型和属性图（Property Graph）模型。
-RDF和Property Graph都是最基础、最有名的图表示模式，都能够表示各种图的实体关系建模。
-RDF是W3C标准，而Property Graph是工业标准，受到广大图数据库厂商的广泛支持。HugeGraph目前采用Property Graph。&lt;/p>
-&lt;p>HugeGraph对应的存储概念模型也是参考Property Graph而设计的，具体示例详见下图：（&lt;em>此图为旧版设计已过时，请忽略它，后续更新&lt;/em>）&lt;/p>
+&lt;p>There are two common graph data representation models, namely the RDF (Resource Description Framework) model and the Property Graph (Property Graph) model.
+Both RDF and Property Graph are the most basic and well-known graph representation modes, and both can represent entity-relationship modeling of various graphs.
+RDF is a W3C standard, while Property Graph is an industry standard and is widely supported by graph database vendors. HugeGraph currently uses Property Graph.&lt;/p>
+&lt;p>The storage concept model corresponding to HugeGraph is also designed with reference to Property Graph. For specific examples, see the figure below:
+( This figure is outdated for the old version design, please ignore it and update it later )&lt;/p>
 &lt;p>&lt;img src="/docs/images/design/PropertyGraph.png" alt="image">&lt;/p>
-&lt;p>在HugeGraph内部，每个顶点 / 边由唯一的 VertexId / EdgeId 标识，属性存储在对应点 / 边内部。而顶点与顶点之间的关系 / 映射则是通过边来存储的。&lt;/p>
-&lt;p>顶点属性值通过边指针方式存储时，如果要更新一个顶点特定的属性值直接通过覆盖写入即可，其弊端是冗余存储了VertexId；
-如果要更新关系的属性需要通过read-and-modify方式，先读取所有属性，修改部分属性，然后再写入存储系统，更新效率较低。
-从经验来看顶点属性的修改需求较多，而边的属性修改需求较少，例如PageRank和Graph Cluster等计算都需要频繁修改顶点的属性值。&lt;/p>
-&lt;h3 id="2-图分区方案">2. 图分区方案&lt;/h3>
-&lt;p>对于分布式图数据库而言，图的分区存储方式有两种：分别是边分割存储（Edge Cut）和点分割存储（Vertex Cut），如下图所示。
-使用Edge Cut方式存储图时，任何一个顶点只会出现在一台机器上，而边可能分布在不同机器上，这种存储方式有可能导致边多次存储。
-使用Vertex Cut方式存储图时，任何一条边只会出现在一台机器上，而每相同的一个点可能分布到不同机器上，这种存储方式可能会导致顶点多次存储。&lt;/p>
+&lt;p>Inside HugeGraph, each vertex/edge is identified by a unique VertexId/EdgeId, and the attributes are stored inside the corresponding vertex/edge.
+The relationship/mapping between vertices is stored through edges.&lt;/p>
+&lt;p>When the vertex attribute value is stored by edge pointer, if you want to update a vertex-specific attribute value, you can directly write it by overwriting.
+The disadvantage is that the VertexId is redundantly stored; if you want to update the attribute of the relationship, you need to use the read-and-modify method ,
+read all attributes first, modify some attributes, and then write to the storage system, the update efficiency is low. According to experience, there are more
+requirements for modifying vertex attributes, but less for edge attributes. For example, calculations such as PageRank and Graph Cluster require frequent
+modification of vertex attribute values.&lt;/p>
+&lt;h3 id="2-graph-partition-scheme">2. Graph Partition Scheme&lt;/h3>
+&lt;p>For distributed graph databases, there are two partition storage methods for graphs: Edge Cut and Vertex Cut, as shown in the following figure. When using the
+Edge Cut method to store graphs, any vertex will only appear on one machine, while edges may be distributed on different machines. This storage method may lead
+to multiple storage of edges. When using the Vertex Cut method to store graphs, any edge will only appear on one machine, and each same point may be distributed
+to different machines. This storage method may result in multiple storage of vertices.&lt;/p>
 &lt;p>&lt;img src="/docs/images/design/GraphCut.png" alt="image">&lt;/p>
-&lt;p>采用EdgeCut分区方案可以支持高性能的插入和更新操作，而VertexCut分区方案更适合静态图查询分析，因此EdgeCut适合OLTP图查询，VertexCut更适合OLAP的图查询。
-HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
-&lt;h3 id="3-vertexid-策略">3. VertexId 策略&lt;/h3>
-&lt;p>HugeGraph的Vertex支持三种ID策略，在同一个图数据库中不同的VertexLabel可以使用不同的Id策略，目前HugeGraph支持的Id策略分别是：&lt;/p>
+&lt;p>The EdgeCut partition scheme can support high-performance insert and update operations, while the VertexCut partition scheme is more suitable for static graph query
+analysis, so EdgeCut is suitable for OLTP graph query, and VertexCut is more suitable for OLAP graph query. HugeGraph currently adopts the partition scheme of EdgeCut.&lt;/p>
+&lt;h3 id="3-vertexid-strategy">3. VertexId Strategy&lt;/h3>
+&lt;p>Vertex of HugeGraph supports three ID strategies. Different VertexLabels in the same graph database can use different Id strategies. Currently, the Id strategies
+supported by HugeGraph are:&lt;/p>
 &lt;ul>
-&lt;li>自动生成（AUTOMATIC）：使用Snowflake算法自动生成全局唯一Id，Long类型；&lt;/li>
-&lt;li>主键（PRIMARY_KEY）：通过VertexLabel+PrimaryKeyValues生成Id，String类型；&lt;/li>
-&lt;li>自定义（CUSTOMIZE_STRING|CUSTOMIZE_NUMBER）：用户自定义Id，分为String和Long类型两种，需自己保证Id的唯一性；&lt;/li>
+&lt;li>Automatic generation (AUTOMATIC): Use the Snowflake algorithm to automatically generate a globally unique Id, Long type;&lt;/li>
+&lt;li>Primary Key (PRIMARY_KEY): Generate Id through VertexLabel+PrimaryKeyValues, String type;&lt;/li>
+&lt;li>Custom (CUSTOMIZE_STRING|CUSTOMIZE_NUMBER): User-defined Id, which is divided into two types: String and Long, and you need to ensure the uniqueness of the Id yourself;&lt;/li>
 &lt;/ul>
-&lt;p>默认的Id策略是AUTOMATIC，如果用户调用primaryKeys()方法并设置了正确的PrimaryKeys，则自动启用PRIMARY_KEY策略。
-启用PRIMARY_KEY策略后HugeGraph能根据PrimaryKeys实现数据去重。&lt;/p>
+&lt;p>The default Id policy is AUTOMATIC, if the user calls the primaryKeys() method and sets the correct PrimaryKeys, the PRIMARY_KEY policy is automatically enabled.
+After enabling the PRIMARY_KEY strategy, HugeGraph can implement data deduplication based on PrimaryKeys.&lt;/p>
 &lt;ol>
-&lt;li>AUTOMATIC ID策略&lt;/li>
+&lt;li>AUTOMATIC ID Policy&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">vertexLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">useAutomaticId&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
@@ -3511,7 +3517,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addVertex&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;marko&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">18&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
-&lt;li>PRIMARY_KEY ID策略&lt;/li>
+&lt;li>PRIMARY_KEY ID policy&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">vertexLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">usePrimaryKeyId&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
@@ -3520,7 +3526,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addVertex&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;marko&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">18&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
-&lt;li>CUSTOMIZE_STRING ID策略&lt;/li>
+&lt;li>CUSTOMIZE_STRING ID Policy&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">vertexLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">useCustomizeStringId&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
@@ -3528,78 +3534,77 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addVertex&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">id&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;123456&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;marko&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">18&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
-&lt;li>CUSTOMIZE_NUMBER ID策略&lt;/li>
+&lt;li>CUSTOMIZE_NUMBER ID Policy&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">vertexLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">useCustomizeNumberId&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">properties&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">addVertex&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">T&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">id&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">123456&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;marko&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">18&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果用户需要Vertex去重，有三种方案分别是：&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If users need Vertex deduplication, there are three options:&lt;/p>
 &lt;ol>
-&lt;li>采用PRIMARY_KEY策略，自动覆盖，适合大数据量批量插入，用户无法知道是否发生了覆盖行为&lt;/li>
-&lt;li>采用AUTOMATIC策略，read-and-modify，适合小数据量插入，用户可以明确知道是否发生覆盖&lt;/li>
-&lt;li>采用CUSTOMIZE_STRING或CUSTOMIZE_NUMBER策略，用户自己保证唯一&lt;/li>
+&lt;li>Adopt PRIMARY_KEY strategy, automatic overwriting, suitable for batch insertion of large amount of data, users cannot know whether overwriting has occurred&lt;/li>
+&lt;li>Adopt AUTOMATIC strategy, read-and-modify, suitable for small data insertion, users can clearly know whether overwriting occurs&lt;/li>
+&lt;li>Using the CUSTOMIZE_STRING or CUSTOMIZE_NUMBER strategy, the user guarantees the uniqueness&lt;/li>
 &lt;/ol>
-&lt;h3 id="4-edgeid-策略">4. EdgeId 策略&lt;/h3>
-&lt;p>HugeGraph的EdgeId是由&lt;code>srcVertexId&lt;/code>+&lt;code>edgeLabel&lt;/code>+&lt;code>sortKey&lt;/code>+&lt;code>tgtVertexId&lt;/code>四部分组合而成。其中&lt;code>sortKey&lt;/code>是HugeGraph的一个重要概念。
-在Edge中加入&lt;code>sortKey&lt;/code>作为Edge的唯一标识的原因有两个：&lt;/p>
+&lt;h3 id="4-edgeid-policy">4. EdgeId policy&lt;/h3>
+&lt;p>The EdgeId of HugeGraph is composed of &lt;code>srcVertexId&lt;/code> + &lt;code>edgeLabel&lt;/code> + &lt;code>sortKey&lt;/code> + &lt;code>tgtVertexId&lt;/code>. Among them &lt;code>sortKey&lt;/code> is an important concept of HugeGraph.
+There are two reasons for adding Edge sortKeyas the unique ID of Edge:&lt;/p>
 &lt;ol>
-&lt;li>如果两个顶点之间存在多条相同Label的边可通过&lt;code>sortKey&lt;/code>来区分&lt;/li>
-&lt;li>对于SuperNode的节点，可以通过&lt;code>sortKey&lt;/code>来排序截断。&lt;/li>
+&lt;li>If there are multiple edges of the same Label between two vertices, they can be sortKeydistinguished by&lt;/li>
+&lt;li>For SuperNode nodes, it can be sortKeysorted and truncated by.&lt;/li>
 &lt;/ol>
-&lt;p>由于EdgeId是由&lt;code>srcVertexId&lt;/code>+&lt;code>edgeLabel&lt;/code>+&lt;code>sortKey&lt;/code>+&lt;code>tgtVertexId&lt;/code>四部分组合，多次插入相同的Edge时HugeGraph会自动覆盖以实现去重。
-需要注意的是如果批量插入模式下Edge的属性也将会覆盖。&lt;/p>
-&lt;p>另外由于HugeGraph的EdgeId采用自动去重策略，对于self-loop（一个顶点存在一条指向自身的边）的情况下HugeGraph认为仅有一条边，对于采用AUTOMATIC策略的图数据库（例如TitianDB
-）则会认为该图存在两条边。&lt;/p>
+&lt;p>Since EdgeId is composed of &lt;code>srcVertexId&lt;/code> + &lt;code>edgeLabel&lt;/code> + &lt;code>sortKey&lt;/code> + &lt;code>tgtVertexId&lt;/code>, HugeGraph will automatically overwrite when the same Edge is inserted
+multiple times to achieve deduplication. It should be noted that the properties of Edge will also be overwritten in the batch insert mode.&lt;/p>
+&lt;p>In addition, because HugeGraph&amp;rsquo;s EdgeId adopts an automatic deduplication strategy, HugeGraph considers that there is only one edge in the case of self-loop
+(a vertex has an edge pointing to itself). The graph has two edges.&lt;/p>
 &lt;blockquote>
-&lt;p>HugeGraph的边仅支持有向边，无向边可以创建Out和In两条边来实现。&lt;/p>
+&lt;p>The edges of HugeGraph only support directed edges, and undirected edges can be realized by creating two edges, Out and In.&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="5-hugegraph-transaction-overview">5. HugeGraph transaction overview&lt;/h3>
-&lt;h5 id="tinkerpop事务概述">TinkerPop事务概述&lt;/h5>
-&lt;p>TinkerPop transaction事务是指对数据库执行操作的工作单元，一个事务内的一组操作要么执行成功，要么全部失败。
-详细介绍请参考TinkerPop官方文档：http://tinkerpop.apache.org/docs/current/reference/#transactions&lt;/p>
-&lt;h5 id="tinkerpop事务操作接口">TinkerPop事务操作接口&lt;/h5>
+&lt;h5 id="tinkerpop-transaction-overview">TinkerPop transaction overview&lt;/h5>
+&lt;p>A TinkerPop transaction refers to a unit of work that performs operations on the database. A set of operations within a transaction either succeeds or all fail. For a detailed introduction, please refer to the official documentation of TinkerPop: &lt;a href="http://tinkerpop.apache.org/docs/current/reference/#transactions">http://tinkerpop.apache.org/docs/current/reference/#transactions&lt;/a>：http://tinkerpop.apache.org/docs/current/reference/#transactions&lt;/p>
+&lt;h5 id="tinkerpop-transaction-overview-1">TinkerPop transaction overview&lt;/h5>
 &lt;ul>
-&lt;li>open 打开事务&lt;/li>
-&lt;li>commit 提交事务&lt;/li>
-&lt;li>rollback 回滚事务&lt;/li>
-&lt;li>close 关闭事务&lt;/li>
+&lt;li>open open transaction&lt;/li>
+&lt;li>commit commit transaction&lt;/li>
+&lt;li>rollback rollback transaction&lt;/li>
+&lt;li>close closes the transaction&lt;/li>
 &lt;/ul>
-&lt;h5 id="tinkerpop事务规范">TinkerPop事务规范&lt;/h5>
+&lt;h5 id="tinkerpop-transaction-specification">TinkerPop transaction specification&lt;/h5>
 &lt;ul>
-&lt;li>事务必须显式提交后才可生效（未提交时修改操作只有本事务内查询可看到）&lt;/li>
-&lt;li>事务必须打开之后才可提交或回滚&lt;/li>
-&lt;li>如果事务设置自动打开则无需显式打开（默认方式），如果设置手动打开则必须显式打开&lt;/li>
-&lt;li>可设置事务关闭时：自动提交、自动回滚（默认方式）、手动（禁止显式关闭）等3种模式&lt;/li>
-&lt;li>事务在提交或回滚后必须是关闭状态&lt;/li>
-&lt;li>事务在查询后必须是打开状态&lt;/li>
-&lt;li>事务（非threaded tx）必须线程隔离，多线程操作同一事务互不影响&lt;/li>
+&lt;li>The transaction must be explicitly committed before it can take effect (the modification operation can only be seen by the query in this transaction if it is not committed)&lt;/li>
+&lt;li>A transaction must be opened before it can be committed or rolled back&lt;/li>
+&lt;li>If the transaction setting is automatically turned on, there is no need to explicitly turn it on (the default method), if it is set to be turned on manually, it must be turned on explicitly&lt;/li>
+&lt;li>When the transaction is closed, you can set three modes: automatic commit, automatic rollback (default mode), manual (explicit shutdown is prohibited), etc.&lt;/li>
+&lt;li>The transaction must be closed after committing or rolling back&lt;/li>
+&lt;li>The transaction must be open after the query&lt;/li>
+&lt;li>Transactions (non-threaded tx) must be thread-isolated, and multi-threaded operations on the same transaction do not affect each other&lt;/li>
 &lt;/ul>
-&lt;p>更多事务规范用例见：&lt;a href="https://github.com/apache/tinkerpop/blob/master/gremlin-test/src/main/java/org/apache/tinkerpop/gremlin/structure/TransactionTest.java">Transaction Test&lt;/a>&lt;/p>
-&lt;h5 id="hugegraph事务实现">HugeGraph事务实现&lt;/h5>
+&lt;p>For more transaction specification use cases, see: &lt;a href="https://github.com/apache/tinkerpop/blob/master/gremlin-test/src/main/java/org/apache/tinkerpop/gremlin/structure/TransactionTest.java">Transaction Test&lt;/a>&lt;/p>
+&lt;h5 id="hugegraph-transaction-implementation">HugeGraph transaction implementation&lt;/h5>
 &lt;ul>
-&lt;li>一个事务中所有的操作要么成功要么失败&lt;/li>
-&lt;li>一个事务只能读取到另外一个事务已提交的内容（Read committed）&lt;/li>
-&lt;li>所有未提交的操作均能在本事务中查询出来，包括：
+&lt;li>All operations in a transaction either succeed or fail&lt;/li>
+&lt;li>A transaction can only read what has been committed by another transaction (Read committed)&lt;/li>
+&lt;li>All uncommitted operations can be queried in this transaction, including:
 &lt;ul>
-&lt;li>增加顶点能够查询出该顶点&lt;/li>
-&lt;li>删除顶点能够过滤掉该顶点&lt;/li>
-&lt;li>删除顶点能够过滤掉该顶点相关边&lt;/li>
-&lt;li>增加边能够查询出该边&lt;/li>
-&lt;li>删除边能够过滤掉该边&lt;/li>
-&lt;li>增加/修改（顶点、边）属性能够在查询时生效&lt;/li>
-&lt;li>删除（顶点、边）属性能够在查询时生效&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>所有未提交的操作在事务回滚后均失效，包括：
-&lt;ul>
-&lt;li>顶点、边的增加、删除&lt;/li>
-&lt;li>属性的增加/修改、删除&lt;/li>
+&lt;li>Adding a vertex can query the vertex&lt;/li>
+&lt;li>Delete a vertex to filter out the vertex&lt;/li>
+&lt;li>Deleting a vertex can filter out the related edges of the vertex&lt;/li>
+&lt;li>Adding an edge can query the edge&lt;/li>
+&lt;li>Delete edge can filter out the edge&lt;/li>
+&lt;li>Adding/modifying (vertex, edge) attributes can take effect when querying&lt;/li>
+&lt;li>Delete (vertex, edge) attributes can take effect at query time&lt;/li>
 &lt;/ul>
 &lt;/li>
+&lt;li>All uncommitted operations become invalid after the transaction is rolled back, including:
+&lt;ul>
+&lt;li>Adding and deleting vertices and edges&lt;/li>
+&lt;li>Addition/modification, deletion of attributes&lt;/li>
 &lt;/ul>
-&lt;p>示例：一个事务无法读取另一个事务未提交的内容&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Example: One transaction cannot read another transaction&amp;rsquo;s uncommitted content&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">static&lt;/span> &lt;span style="color:#204a87;font-weight:bold">void&lt;/span> &lt;span style="color:#000">testUncommittedTx&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">final&lt;/span> &lt;span style="color:#000">HugeGraph&lt;/span> &lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#204a87;font-weight:bold">throws&lt;/span> &lt;span style="color:#000">InterruptedException&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">final&lt;/span> &lt;span style="color:#000">CountDownLatch&lt;/span> &lt;span style="color:#000">latchUncommit&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">new&lt;/span> &lt;span style="color:#000">CountDownLatch&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">1&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
@@ -3651,18 +3656,18 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">assert&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">!&lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">vertices&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">hasNext&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">assert&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">!&lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">edges&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">hasNext&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="事务实现原理">事务实现原理&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="principle-of-transaction-realization">Principle of transaction realization&lt;/h5>
 &lt;ul>
-&lt;li>服务端内部通过将事务与线程绑定实现隔离（ThreadLocal）&lt;/li>
-&lt;li>本事务未提交的内容按照时间顺序覆盖老数据以供本事务查询最新版本数据&lt;/li>
-&lt;li>底层依赖后端数据库保证事务原子性操作（如Cassandra/RocksDB的batch接口均保证原子性）&lt;/li>
+&lt;li>The server internally realizes isolation by binding transactions to threads (ThreadLocal)&lt;/li>
+&lt;li>The uncommitted content of this transaction overwrites the old data in chronological order for this transaction to query the latest version of data&lt;/li>
+&lt;li>The bottom layer relies on the back-end database to ensure transaction atomicity (for example, the batch interface of Cassandra/RocksDB guarantees atomicity)&lt;/li>
 &lt;/ul>
-&lt;h6 id="注意">&lt;em>注意&lt;/em>&lt;/h6>
+&lt;h6 id="notice">Notice&lt;/h6>
 &lt;blockquote>
-&lt;p>RESTful API暂时未暴露事务接口&lt;/p>
+&lt;p>The RESTful API does not expose the transaction interface for the time being&lt;/p>
 &lt;/blockquote>
 &lt;blockquote>
-&lt;p>TinkerPop API允许打开事务，请求完成时会自动关闭(Gremlin Server强制关闭)&lt;/p>
+&lt;p>TinkerPop API allows open transactions, which are automatically closed when the request is completed (Gremlin Server forces close)&lt;/p>
 &lt;/blockquote></description></item><item><title>Docs: Download HugeGraph</title><link>/docs/download/download/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/download/download/</guid><description>
 &lt;h3 id="latest-version">Latest version&lt;/h3>
 &lt;p>The latest HugeGraph: &lt;strong>1.0.0&lt;/strong>, released on &lt;em>2023-02-22&lt;/em>(&lt;a href="/docs/quickstart/hugegraph-server/">how to build from source&lt;/a>).&lt;/p>
