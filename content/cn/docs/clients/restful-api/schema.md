@@ -11,7 +11,9 @@ HugeGraph 提供单一接口获取某个图的全部 Schema 信息，包括：Pr
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/schema
+GET http://localhost:8080/graphs/{graph_name}/schema
+
+e.g: GET http://localhost:8080/graphs/hugegraph/schema
 ```
 
 ##### Response Status
@@ -28,15 +30,14 @@ GET http://localhost:8080/graphs/hugegraph/schema
         {
             "id": 7,
             "name": "price",
-            "data_type": "INT",
+            "data_type": "DOUBLE",
             "cardinality": "SINGLE",
             "aggregate_type": "NONE",
             "write_type": "OLTP",
-            "properties": [
-            ],
+            "properties": [],
             "status": "CREATED",
             "user_data": {
-                "~create_time": "2021-09-03 15:13:40.741"
+                "~create_time": "2023-05-08 17:49:05.316"
             }
         },
         {
@@ -46,11 +47,10 @@ GET http://localhost:8080/graphs/hugegraph/schema
             "cardinality": "SINGLE",
             "aggregate_type": "NONE",
             "write_type": "OLTP",
-            "properties": [
-            ],
+            "properties": [],
             "status": "CREATED",
             "user_data": {
-                "~create_time": "2021-09-03 15:13:40.729"
+                "~create_time": "2023-05-08 17:49:05.309"
             }
         },
         {
@@ -60,11 +60,10 @@ GET http://localhost:8080/graphs/hugegraph/schema
             "cardinality": "SINGLE",
             "aggregate_type": "NONE",
             "write_type": "OLTP",
-            "properties": [
-            ],
+            "properties": [],
             "status": "CREATED",
             "user_data": {
-                "~create_time": "2021-09-03 15:13:40.691"
+                "~create_time": "2023-05-08 17:49:05.287"
             }
         },
         {
@@ -74,11 +73,10 @@ GET http://localhost:8080/graphs/hugegraph/schema
             "cardinality": "SINGLE",
             "aggregate_type": "NONE",
             "write_type": "OLTP",
-            "properties": [
-            ],
+            "properties": [],
             "status": "CREATED",
             "user_data": {
-                "~create_time": "2021-09-03 15:13:40.678"
+                "~create_time": "2023-05-08 17:49:05.280"
             }
         },
         {
@@ -88,11 +86,10 @@ GET http://localhost:8080/graphs/hugegraph/schema
             "cardinality": "SINGLE",
             "aggregate_type": "NONE",
             "write_type": "OLTP",
-            "properties": [
-            ],
+            "properties": [],
             "status": "CREATED",
             "user_data": {
-                "~create_time": "2021-09-03 15:13:40.718"
+                "~create_time": "2023-05-08 17:49:05.301"
             }
         },
         {
@@ -102,11 +99,10 @@ GET http://localhost:8080/graphs/hugegraph/schema
             "cardinality": "SINGLE",
             "aggregate_type": "NONE",
             "write_type": "OLTP",
-            "properties": [
-            ],
+            "properties": [],
             "status": "CREATED",
             "user_data": {
-                "~create_time": "2021-09-03 15:13:40.707"
+                "~create_time": "2023-05-08 17:49:05.294"
             }
         },
         {
@@ -116,11 +112,10 @@ GET http://localhost:8080/graphs/hugegraph/schema
             "cardinality": "SINGLE",
             "aggregate_type": "NONE",
             "write_type": "OLTP",
-            "properties": [
-            ],
+            "properties": [],
             "status": "CREATED",
             "user_data": {
-                "~create_time": "2021-09-03 15:13:40.609"
+                "~create_time": "2023-05-08 17:49:05.250"
             }
         }
     ],
@@ -133,9 +128,11 @@ GET http://localhost:8080/graphs/hugegraph/schema
                 "name"
             ],
             "nullable_keys": [
-                "age"
+                "age",
+                "city"
             ],
             "index_labels": [
+                "personByAge",
                 "personByCity",
                 "personByAgeAndCity"
             ],
@@ -148,19 +145,15 @@ GET http://localhost:8080/graphs/hugegraph/schema
             "ttl": 0,
             "enable_label_index": true,
             "user_data": {
-                "~create_time": "2021-09-03 15:13:40.783"
+                "~create_time": "2023-05-08 17:49:05.336"
             }
         },
         {
             "id": 2,
             "name": "software",
-            "id_strategy": "PRIMARY_KEY",
-            "primary_keys": [
-                "name"
-            ],
-            "nullable_keys": [
-                "price"
-            ],
+            "id_strategy": "CUSTOMIZE_NUMBER",
+            "primary_keys": [],
+            "nullable_keys": [],
             "index_labels": [
                 "softwareByPrice"
             ],
@@ -173,7 +166,7 @@ GET http://localhost:8080/graphs/hugegraph/schema
             "ttl": 0,
             "enable_label_index": true,
             "user_data": {
-                "~create_time": "2021-09-03 15:13:40.840"
+                "~create_time": "2023-05-08 17:49:05.347"
             }
         }
     ],
@@ -183,13 +176,9 @@ GET http://localhost:8080/graphs/hugegraph/schema
             "name": "knows",
             "source_label": "person",
             "target_label": "person",
-            "frequency": "MULTIPLE",
-            "sort_keys": [
-                "date"
-            ],
-            "nullable_keys": [
-                "weight"
-            ],
+            "frequency": "SINGLE",
+            "sort_keys": [],
+            "nullable_keys": [],
             "index_labels": [
                 "knowsByWeight"
             ],
@@ -201,7 +190,7 @@ GET http://localhost:8080/graphs/hugegraph/schema
             "ttl": 0,
             "enable_label_index": true,
             "user_data": {
-                "~create_time": "2021-09-03 15:13:41.840"
+                "~create_time": "2023-05-08 17:49:08.437"
             }
         },
         {
@@ -210,11 +199,8 @@ GET http://localhost:8080/graphs/hugegraph/schema
             "source_label": "person",
             "target_label": "software",
             "frequency": "SINGLE",
-            "sort_keys": [
-            ],
-            "nullable_keys": [
-                "weight"
-            ],
+            "sort_keys": [],
+            "nullable_keys": [],
             "index_labels": [
                 "createdByDate",
                 "createdByWeight"
@@ -227,13 +213,27 @@ GET http://localhost:8080/graphs/hugegraph/schema
             "ttl": 0,
             "enable_label_index": true,
             "user_data": {
-                "~create_time": "2021-09-03 15:13:41.868"
+                "~create_time": "2023-05-08 17:49:08.446"
             }
         }
     ],
     "indexlabels": [
         {
             "id": 1,
+            "name": "personByAge",
+            "base_type": "VERTEX_LABEL",
+            "base_value": "person",
+            "index_type": "RANGE_INT",
+            "fields": [
+                "age"
+            ],
+            "status": "CREATED",
+            "user_data": {
+                "~create_time": "2023-05-08 17:49:05.375"
+            }
+        },
+        {
+            "id": 2,
             "name": "personByCity",
             "base_type": "VERTEX_LABEL",
             "base_value": "person",
@@ -243,39 +243,11 @@ GET http://localhost:8080/graphs/hugegraph/schema
             ],
             "status": "CREATED",
             "user_data": {
-                "~create_time": "2021-09-03 15:13:40.886"
+                "~create_time": "2023-05-08 17:49:06.898"
             }
         },
         {
-            "id": 4,
-            "name": "createdByDate",
-            "base_type": "EDGE_LABEL",
-            "base_value": "created",
-            "index_type": "SECONDARY",
-            "fields": [
-                "date"
-            ],
-            "status": "CREATED",
-            "user_data": {
-                "~create_time": "2021-09-03 15:13:41.878"
-            }
-        },
-        {
-            "id": 5,
-            "name": "createdByWeight",
-            "base_type": "EDGE_LABEL",
-            "base_value": "created",
-            "index_type": "RANGE_DOUBLE",
-            "fields": [
-                "weight"
-            ],
-            "status": "CREATED",
-            "user_data": {
-                "~create_time": "2021-09-03 15:13:42.117"
-            }
-        },
-        {
-            "id": 2,
+            "id": 3,
             "name": "personByAgeAndCity",
             "base_type": "VERTEX_LABEL",
             "base_value": "person",
@@ -286,25 +258,53 @@ GET http://localhost:8080/graphs/hugegraph/schema
             ],
             "status": "CREATED",
             "user_data": {
-                "~create_time": "2021-09-03 15:13:41.351"
+                "~create_time": "2023-05-08 17:49:07.407"
             }
         },
         {
-            "id": 3,
+            "id": 4,
             "name": "softwareByPrice",
             "base_type": "VERTEX_LABEL",
             "base_value": "software",
-            "index_type": "RANGE_INT",
+            "index_type": "RANGE_DOUBLE",
             "fields": [
                 "price"
             ],
             "status": "CREATED",
             "user_data": {
-                "~create_time": "2021-09-03 15:13:41.587"
+                "~create_time": "2023-05-08 17:49:07.916"
+            }
+        },
+        {
+            "id": 5,
+            "name": "createdByDate",
+            "base_type": "EDGE_LABEL",
+            "base_value": "created",
+            "index_type": "SECONDARY",
+            "fields": [
+                "date"
+            ],
+            "status": "CREATED",
+            "user_data": {
+                "~create_time": "2023-05-08 17:49:08.454"
             }
         },
         {
             "id": 6,
+            "name": "createdByWeight",
+            "base_type": "EDGE_LABEL",
+            "base_value": "created",
+            "index_type": "RANGE_DOUBLE",
+            "fields": [
+                "weight"
+            ],
+            "status": "CREATED",
+            "user_data": {
+                "~create_time": "2023-05-08 17:49:08.963"
+            }
+        },
+        {
+            "id": 7,
             "name": "knowsByWeight",
             "base_type": "EDGE_LABEL",
             "base_value": "knows",
@@ -314,7 +314,7 @@ GET http://localhost:8080/graphs/hugegraph/schema
             ],
             "status": "CREATED",
             "user_data": {
-                "~create_time": "2021-09-03 15:13:42.376"
+                "~create_time": "2023-05-08 17:49:09.473"
             }
         }
     ]
