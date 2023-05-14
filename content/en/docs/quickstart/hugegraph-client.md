@@ -37,7 +37,7 @@ Using IDEA or Eclipse to create the project:
 ```xml
 <dependencies>
     <dependency>
-        <groupId>com.baidu.hugegraph</groupId>
+        <groupId>org.apache.hugegraph</groupId>
         <artifactId>hugegraph-client</artifactId>
         <version>${version}</version>
     </dependency>    
@@ -53,16 +53,16 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
-import com.baidu.hugegraph.driver.GraphManager;
-import com.baidu.hugegraph.driver.GremlinManager;
-import com.baidu.hugegraph.driver.HugeClient;
-import com.baidu.hugegraph.driver.SchemaManager;
-import com.baidu.hugegraph.structure.constant.T;
-import com.baidu.hugegraph.structure.graph.Edge;
-import com.baidu.hugegraph.structure.graph.Path;
-import com.baidu.hugegraph.structure.graph.Vertex;
-import com.baidu.hugegraph.structure.gremlin.Result;
-import com.baidu.hugegraph.structure.gremlin.ResultSet;
+import org.apache.hugegraph.driver.GraphManager;
+import org.apache.hugegraph.driver.GremlinManager;
+import org.apache.hugegraph.driver.HugeClient;
+import org.apache.hugegraph.driver.SchemaManager;
+import org.apache.hugegraph.structure.constant.T;
+import org.apache.hugegraph.structure.graph.Edge;
+import org.apache.hugegraph.structure.graph.Path;
+import org.apache.hugegraph.structure.graph.Vertex;
+import org.apache.hugegraph.structure.gremlin.Result;
+import org.apache.hugegraph.structure.gremlin.ResultSet;
 
 public class SingleExample {
 
@@ -150,17 +150,17 @@ public class SingleExample {
               .create();
 
         GraphManager graph = hugeClient.graph();
-        Vertex marko = graph.addVertex(T.label, "person", "name", "marko",
+        Vertex marko = graph.addVertex(T.LABEL, "person", "name", "marko",
                                        "age", 29, "city", "Beijing");
-        Vertex vadas = graph.addVertex(T.label, "person", "name", "vadas",
+        Vertex vadas = graph.addVertex(T.LABEL, "person", "name", "vadas",
                                        "age", 27, "city", "Hongkong");
-        Vertex lop = graph.addVertex(T.label, "software", "name", "lop",
+        Vertex lop = graph.addVertex(T.LABEL, "software", "name", "lop",
                                      "lang", "java", "price", 328);
-        Vertex josh = graph.addVertex(T.label, "person", "name", "josh",
+        Vertex josh = graph.addVertex(T.LABEL, "person", "name", "josh",
                                       "age", 32, "city", "Beijing");
-        Vertex ripple = graph.addVertex(T.label, "software", "name", "ripple",
+        Vertex ripple = graph.addVertex(T.LABEL, "software", "name", "ripple",
                                         "lang", "java", "price", 199);
-        Vertex peter = graph.addVertex(T.label, "person", "name", "peter",
+        Vertex peter = graph.addVertex(T.LABEL, "person", "name", "peter",
                                        "age", 35, "city", "Shanghai");
 
         marko.addEdge("knows", vadas, "date", "2016-01-10", "weight", 0.5);
@@ -203,11 +203,11 @@ public class SingleExample {
 import java.util.ArrayList;
 import java.util.List;
 
-import com.baidu.hugegraph.driver.GraphManager;
-import com.baidu.hugegraph.driver.HugeClient;
-import com.baidu.hugegraph.driver.SchemaManager;
-import com.baidu.hugegraph.structure.graph.Edge;
-import com.baidu.hugegraph.structure.graph.Vertex;
+import org.apache.hugegraph.driver.GraphManager;
+import org.apache.hugegraph.driver.HugeClient;
+import org.apache.hugegraph.driver.SchemaManager;
+import org.apache.hugegraph.structure.graph.Edge;
+import org.apache.hugegraph.structure.graph.Vertex;
 
 public class BatchExample {
 
