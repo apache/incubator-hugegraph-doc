@@ -497,13 +497,13 @@
 &lt;ul>
 &lt;li>社区聚类算法性能 Neo4j &amp;gt; HugeGraph &amp;gt; Titan&lt;/li>
 &lt;/ul></description></item><item><title>Docs: HugeGraph-API Performance</title><link>/docs/performance/api-preformance/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/performance/api-preformance/</guid><description>
-&lt;p>HugeGraph API性能测试主要测试HugeGraph-Server对RESTful API请求的并发处理能力，包括：&lt;/p>
+&lt;p>The HugeGraph API performance test mainly tests HugeGraph-Server&amp;rsquo;s ability to concurrently process RESTful API requests, including:&lt;/p>
 &lt;ul>
-&lt;li>顶点/边的单条插入&lt;/li>
-&lt;li>顶点/边的批量插入&lt;/li>
-&lt;li>顶点/边的查询&lt;/li>
+&lt;li>Single insertion of vertices/edges&lt;/li>
+&lt;li>Batch insertion of vertices/edges&lt;/li>
+&lt;li>Vertex/Edge Queries&lt;/li>
 &lt;/ul>
-&lt;p>HugeGraph的每个发布版本的RESTful API的性能测试情况可以参考：&lt;/p>
+&lt;p>For the performance test of the RESTful API of each release version of HugeGraph, please refer to:&lt;/p>
 &lt;ul>
 &lt;li>&lt;a href="/docs/performance/api-preformance/hugegraph-api-0.5.6-rocksdb/">v0.5.6 stand-alone&lt;/a>&lt;/li>
 &lt;li>&lt;a href="/docs/performance/api-preformance/hugegraph-api-0.5.6-cassandra/">v0.5.6 cluster&lt;/a>&lt;/li>
@@ -511,7 +511,7 @@
 &lt;li>&lt;a href="/docs/performance/api-preformance/hugegraph-api-0.2/">v0.2&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;blockquote>
-&lt;p>之前的版本只提供HugeGraph所支持的后端种类中性能最好的API性能测试，从0.5.6版本开始，分别提供了单机和集群的性能情况&lt;/p>
+&lt;p>Starting from version 0.5.6, in addition to providing performance tests for the API with the best performance among the backend types supported by HugeGraph, performance tests for both single machine and cluster environments are now available.&lt;/p>
 &lt;/blockquote></description></item><item><title>Docs: HugeGraph-Loader Performance</title><link>/docs/performance/hugegraph-loader-performance/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/performance/hugegraph-loader-performance/</guid><description>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;p>当要批量插入的图数据（包括顶点和边）条数为billion级别及以下，或者总数据量小于TB时，可以采用&lt;a href="/docs/quickstart/hugegraph-loader">HugeGraph-Loader&lt;/a>工具持续、高速导入图数据&lt;/p>
