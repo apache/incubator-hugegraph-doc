@@ -53,7 +53,7 @@ The functions of this system include but are not limited to:
 
 ### Contact Us
 - [Github Issues](https://github.com/apache/incubator-hugegraph/issues): Feedback on usage issues and functional requirements (priority)
-- Feedback Email: [dev@apache.hugegraph.org](mailto:dev@apache.hugegraph.org)
+- Feedback Email: [dev@hugegraph.apache.org](mailto:dev@hugegraph.apache.org)
 - WeChat public account: Apache HugeGraph, welcome to scan this QR code to follow us.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="./assets/images/weixin.jpg" width="180px">
+<img src="./assets/images/weixin.png">
