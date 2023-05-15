@@ -5,11 +5,9 @@ Please visit the [contribution doc](./contribution.md) to get start, include the
 ### Summary
 
 HugeGraph is an easy-to-use, efficient, general-purpose open source graph database system(Graph Database, [GitHub project address](https://github.com/apache/hugegraph)),
-implemented the [Apache TinkerPop3](https://tinkerpop.apache.org) framework and is fully compatible with the [Gremlin](https://tinkerpop.apache.org/gremlin.html) query language,
+implemented the [Apache TinkerPop3](https://tinkerpop.apache.org) framework and is fully compatible with the [Gremlin](https://tinkerpop.apache.org/gremlin.html) query language.
 With complete toolchain components, it helps users to easily build applications and products based on graph databases. HugeGraph supports fast import of more than 10 billion vertices and edges, and provides millisecond-level relational query capability (OLTP). 
 It supports large-scale distributed graph processing (OLAP).
-
-Typical application scenarios of HugeGraph include deep relationship exploration, association analysis, path search, feature extraction, data clustering, community detection, knowledge graph, etc., and are applicable to business fields such as network security, telecommunication fraud, financial risk control, advertising recommendation, social network and intelligence Robots etc.
 
 Typical application scenarios of HugeGraph include deep relationship exploration, association analysis, path search, feature extraction, data clustering, community detection, knowledge graph, etc., and are applicable to business fields such as network security, telecommunication fraud, financial risk control, advertising recommendation, social network and intelligence Robots etc.
 
@@ -55,5 +53,7 @@ The functions of this system include but are not limited to:
 
 ### Contact Us
 - [Github Issues](https://github.com/apache/incubator-hugegraph/issues): Feedback on usage issues and functional requirements (priority)
-- Feedback Email: [hugegraph@googlegroups.com](mailto:hugegraph@googlegroups.com)
-- WeChat public account: HugeGraph
+- Feedback Email: [dev@hugegraph.apache.org](mailto:dev@hugegraph.apache.org)
+- WeChat public account: Apache HugeGraph, welcome to scan this QR code to follow us.
+
+<img src="./assets/images/weixin.png">
