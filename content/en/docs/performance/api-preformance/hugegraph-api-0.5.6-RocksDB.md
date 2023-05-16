@@ -4,143 +4,145 @@ linkTitle: "v0.5.6 Stand-alone(RocksDB)"
 weight: 1
 ---
 
-### 1 测试环境
+### 1 Test environment
 
-被压机器信息
+Compressed machine information:
 
 CPU                                          | Memory | 网卡        | 磁盘
 -------------------------------------------- | ------ | --------- | ------------------
 48 Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz | 128G   | 10000Mbps | 750GB SSD,2.7T HDD
 
-- 起压力机器信息：与被压机器同配置
-- 测试工具：apache-Jmeter-2.5.1
+- Information about the machine used to generate load: configured the same as the machine that is being tested under load.
+- Testing tool: Apache JMeter 2.5.1
 
-注：起压机器和被压机器在同一机房
+Note: The load-generating machine and the machine under test are located in the same local network.
 
-### 2 测试说明
+### 2 Test description
 
-#### 2.1 名词定义（时间的单位均为ms）
+#### 2.1 Definition of terms (the unit of time is ms)
 
-- Samples -- 本次场景中一共完成了多少个线程
-- Average -- 平均响应时间
-- Median -- 统计意义上面的响应时间的中值
-- 90% Line -- 所有线程中90%的线程的响应时间都小于xx
-- Min -- 最小响应时间
-- Max -- 最大响应时间
-- Error -- 出错率
-- Throughput -- 吞吐量
-- KB/sec -- 以流量做衡量的吞吐量
+- Samples: The total number of threads completed in the current scenario.
+- Average: The average response time.
+- Median: The statistical median of the response time.
+- 90% Line: The response time below which 90% of all threads fall.
+- Min: The minimum response time.
+- Max: The maximum response time.
+- Error: The error rate.
+- Throughput: The number of requests processed per unit of time.
+- KB/sec: Throughput measured in terms of data transferred per second.
 
-#### 2.2 底层存储
+#### 2.2 Underlying storage
 
-后端存储使用RocksDB，HugeGraph与RocksDB都在同一机器上启动，server相关的配置文件除主机和端口有修改外，其余均保持默认。
+RocksDB is used for backend storage, HugeGraph and RocksDB are both started on the same machine, and the configuration files related to the server remain as default except for the modification of the host and port.
 
-### 3 性能结果总结
+### 3 Summary of performance results
 
-1. HugeGraph单条插入顶点和边的速度在每秒1w左右
-2. 顶点和边的批量插入速度远大于单条插入速度
-3. 按id查询顶点和边的并发度可达到13000以上，且请求的平均延时小于50ms
+1. The speed of inserting a single vertex and edge in HugeGraph is about 1w per second
+2. The batch insertion speed of vertices and edges is much faster than the single insertion speed
+3. The concurrency of querying vertices and edges by id can reach more than 13000, and the average delay of requests is less than 50ms
 
-### 4 测试结果及分析
+### 4 Test results and analysis
 
-#### 4.1 batch插入
+#### 4.1 batch insertion
 
-##### 4.1.1 压力上限测试
+##### 4.1.1 Upper limit stress testing
 
-###### 测试方法
+###### Test methods
 
-不断提升并发量，测试server仍能正常提供服务的压力上限
+The upper limit of stress testing is to continuously increase the concurrency and test whether the server can still provide services normally.
 
-###### 压力参数
+###### Stress Parameters
 
-持续时间：5min
+Duration: 5 minutes
 
-###### 顶点的最大插入速度：
+###### Maximum insertion speed for vertices:
 
 <center>
   <img src="/docs/images/API-perf/v0.5.6/rocksdb/vertex_batch.png" alt="image">
 </center>
 
 
-####### 结论：
+####### in conclusion:
 
-- 并发2200，顶点的吞吐量是2026.8，每秒可处理的数据：2026.8*200=405360/s
+- With a concurrency of 2200, the throughput for vertices is 2026.8. This means that the system can process data at a rate of 405360 per second (2026.8 * 200).
 
-###### 边的最大插入速度
+
+###### Maximum insertion speed for edges
+
 
 <center>
   <img src="/docs/images/API-perf/v0.5.6/rocksdb/edge_batch.png" alt="image">
 </center>
 
-####### 结论：
+####### Conclusion:
 
-- 并发900，边的吞吐量是776.9，每秒可处理的数据：776.9*500=388450/s
+- With a concurrency of 900, the throughput for edges is 776.9. This means that the system can process data at a rate of 388450 per second (776.9 * 500).
 
-#### 4.2 single插入
+#### 4.2 Single insertion
 
-##### 4.2.1 压力上限测试
+##### 4.2.1 Stress limit testing
 
-###### 测试方法
+###### Test Methods
 
-不断提升并发量，测试server仍能正常提供服务的压力上限
+Stress limit testing is a process of continuously increasing the concurrency level to test the upper limit of the server's ability to provide normal service.
 
-###### 压力参数
+###### Stress parameters
 
-- 持续时间：5min
-- 服务异常标志：错误率大于0.00%
+- Duration: 5 minutes.
+- Service exception indicator: Error rate greater than 0.00%.
 
-###### 顶点的单条插入
+###### Single vertex insertion
 
 <center>
   <img src="/docs/images/API-perf/v0.5.6/rocksdb/vertex_single.png" alt="image">
 </center>
 
 
-####### 结论：
+####### Conclusion:
 
-- 并发11500，吞吐量为10730，顶点的单条插入并发能力为11500
+- With a concurrency of 11500, the throughput is 10730. This means that the system can handle a single concurrent insertion of vertices at a concurrency level of 11500.
 
-###### 边的单条插入
+###### Single edge insertion
 
 <center>
   <img src="/docs/images/API-perf/v0.5.6/rocksdb/edge_single.png" alt="image">
 </center>
 
 
-####### 结论：
+####### Conclusion:
 
-- 并发9000，吞吐量是8418，边的单条插入并发能力为9000
+- With a concurrency of 9000, the throughput is 8418. This means that the system can handle a single concurrent insertion of edges at a concurrency level of 9000.
 
-#### 4.3 按id查询
+#### 4.3 Search by ID
 
-##### 4.3.1 压力上限测试
+##### 4.3.1 Stress test upper limit
 
-###### 测试方法
+###### Testing method
 
-不断提升并发量，测试server仍能正常提供服务的压力上限
+Continuously increasing the concurrency level to test the upper limit of the server's ability to provide service under normal conditions.
 
-###### 压力参数
+###### stress parameters
 
-- 持续时间：5min
-- 服务异常标志：错误率大于0.00%
+- Duration: 5 minutes
+- Service abnormality indicator: error rate greater than 0.00%
 
-###### 顶点的按id查询
+###### Querying vertices by ID
 
 <center>
   <img src="/docs/images/API-perf/v0.5.6/rocksdb/vertex_id_query.png" alt="image">
 </center>
 
-####### 结论：
+####### Conclusion：
 
-- 并发14000，吞吐量是12663，顶点的按id查询的并发能力为14000，平均延时为44ms
+- Concurrency is 14,000, throughput is 12,663. The concurrency capacity for querying vertices by ID is 14,000, with an average delay of 44ms.
 
-###### 边的按id查询
+###### Querying edges by ID
 
 <center>
   <img src="/docs/images/API-perf/v0.5.6/rocksdb/edge_id_query.png" alt="image">
 </center>
 
 
-####### 结论：
+####### Conclusion：
 
-- 并发13000，吞吐量是12225，边的按id查询的并发能力为13000，平均延时为12ms
+- Concurrency is 13,000, throughput is 12,225. The concurrency capacity for querying edges by ID is 13,000, with an average delay of 12ms.
