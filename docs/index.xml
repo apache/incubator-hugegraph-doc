@@ -2161,8 +2161,8 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: v0.5.6 Stand-alone(RocksDB)</title><link>/docs/performance/api-preformance/hugegraph-api-0.5.6-rocksdb/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/performance/api-preformance/hugegraph-api-0.5.6-rocksdb/</guid><description>
-&lt;h3 id="1-测试环境">1 测试环境&lt;/h3>
-&lt;p>被压机器信息&lt;/p>
+&lt;h3 id="1-test-environment">1 Test environment&lt;/h3>
+&lt;p>Compressed machine information:&lt;/p>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -2182,103 +2182,103 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;/tbody>
 &lt;/table>
 &lt;ul>
-&lt;li>起压力机器信息：与被压机器同配置&lt;/li>
-&lt;li>测试工具：apache-Jmeter-2.5.1&lt;/li>
+&lt;li>Information about the machine used to generate load: configured the same as the machine that is being tested under load.&lt;/li>
+&lt;li>Testing tool: Apache JMeter 2.5.1&lt;/li>
 &lt;/ul>
-&lt;p>注：起压机器和被压机器在同一机房&lt;/p>
-&lt;h3 id="2-测试说明">2 测试说明&lt;/h3>
-&lt;h4 id="21-名词定义时间的单位均为ms">2.1 名词定义（时间的单位均为ms）&lt;/h4>
+&lt;p>Note: The load-generating machine and the machine under test are located in the same local network.&lt;/p>
+&lt;h3 id="2-test-description">2 Test description&lt;/h3>
+&lt;h4 id="21-definition-of-terms-the-unit-of-time-is-ms">2.1 Definition of terms (the unit of time is ms)&lt;/h4>
 &lt;ul>
-&lt;li>Samples &amp;ndash; 本次场景中一共完成了多少个线程&lt;/li>
-&lt;li>Average &amp;ndash; 平均响应时间&lt;/li>
-&lt;li>Median &amp;ndash; 统计意义上面的响应时间的中值&lt;/li>
-&lt;li>90% Line &amp;ndash; 所有线程中90%的线程的响应时间都小于xx&lt;/li>
-&lt;li>Min &amp;ndash; 最小响应时间&lt;/li>
-&lt;li>Max &amp;ndash; 最大响应时间&lt;/li>
-&lt;li>Error &amp;ndash; 出错率&lt;/li>
-&lt;li>Throughput &amp;ndash; 吞吐量&lt;/li>
-&lt;li>KB/sec &amp;ndash; 以流量做衡量的吞吐量&lt;/li>
+&lt;li>Samples: The total number of threads completed in the current scenario.&lt;/li>
+&lt;li>Average: The average response time.&lt;/li>
+&lt;li>Median: The statistical median of the response time.&lt;/li>
+&lt;li>90% Line: The response time below which 90% of all threads fall.&lt;/li>
+&lt;li>Min: The minimum response time.&lt;/li>
+&lt;li>Max: The maximum response time.&lt;/li>
+&lt;li>Error: The error rate.&lt;/li>
+&lt;li>Throughput: The number of requests processed per unit of time.&lt;/li>
+&lt;li>KB/sec: Throughput measured in terms of data transferred per second.&lt;/li>
 &lt;/ul>
-&lt;h4 id="22-底层存储">2.2 底层存储&lt;/h4>
-&lt;p>后端存储使用RocksDB，HugeGraph与RocksDB都在同一机器上启动，server相关的配置文件除主机和端口有修改外，其余均保持默认。&lt;/p>
-&lt;h3 id="3-性能结果总结">3 性能结果总结&lt;/h3>
+&lt;h4 id="22-underlying-storage">2.2 Underlying storage&lt;/h4>
+&lt;p>RocksDB is used for backend storage, HugeGraph and RocksDB are both started on the same machine, and the configuration files related to the server remain as default except for the modification of the host and port.&lt;/p>
+&lt;h3 id="3-summary-of-performance-results">3 Summary of performance results&lt;/h3>
 &lt;ol>
-&lt;li>HugeGraph单条插入顶点和边的速度在每秒1w左右&lt;/li>
-&lt;li>顶点和边的批量插入速度远大于单条插入速度&lt;/li>
-&lt;li>按id查询顶点和边的并发度可达到13000以上，且请求的平均延时小于50ms&lt;/li>
+&lt;li>The speed of inserting a single vertex and edge in HugeGraph is about 1w per second&lt;/li>
+&lt;li>The batch insertion speed of vertices and edges is much faster than the single insertion speed&lt;/li>
+&lt;li>The concurrency of querying vertices and edges by id can reach more than 13000, and the average delay of requests is less than 50ms&lt;/li>
 &lt;/ol>
-&lt;h3 id="4-测试结果及分析">4 测试结果及分析&lt;/h3>
-&lt;h4 id="41-batch插入">4.1 batch插入&lt;/h4>
-&lt;h5 id="411-压力上限测试">4.1.1 压力上限测试&lt;/h5>
-&lt;h6 id="测试方法">测试方法&lt;/h6>
-&lt;p>不断提升并发量，测试server仍能正常提供服务的压力上限&lt;/p>
-&lt;h6 id="压力参数">压力参数&lt;/h6>
-&lt;p>持续时间：5min&lt;/p>
-&lt;h6 id="顶点的最大插入速度">顶点的最大插入速度：&lt;/h6>
+&lt;h3 id="4-test-results-and-analysis">4 Test results and analysis&lt;/h3>
+&lt;h4 id="41-batch-insertion">4.1 batch insertion&lt;/h4>
+&lt;h5 id="411-upper-limit-stress-testing">4.1.1 Upper limit stress testing&lt;/h5>
+&lt;h6 id="test-methods">Test methods&lt;/h6>
+&lt;p>The upper limit of stress testing is to continuously increase the concurrency and test whether the server can still provide services normally.&lt;/p>
+&lt;h6 id="stress-parameters">Stress Parameters&lt;/h6>
+&lt;p>Duration: 5 minutes&lt;/p>
+&lt;h6 id="maximum-insertion-speed-for-vertices">Maximum insertion speed for vertices:&lt;/h6>
 &lt;center>
 &lt;img src="/docs/images/API-perf/v0.5.6/rocksdb/vertex_batch.png" alt="image">
 &lt;/center>
-&lt;p>####### 结论：&lt;/p>
+&lt;p>####### in conclusion:&lt;/p>
 &lt;ul>
-&lt;li>并发2200，顶点的吞吐量是2026.8，每秒可处理的数据：2026.8*200=405360/s&lt;/li>
+&lt;li>With a concurrency of 2200, the throughput for vertices is 2026.8. This means that the system can process data at a rate of 405360 per second (2026.8 * 200).&lt;/li>
 &lt;/ul>
-&lt;h6 id="边的最大插入速度">边的最大插入速度&lt;/h6>
+&lt;h6 id="maximum-insertion-speed-for-edges">Maximum insertion speed for edges&lt;/h6>
 &lt;center>
 &lt;img src="/docs/images/API-perf/v0.5.6/rocksdb/edge_batch.png" alt="image">
 &lt;/center>
-&lt;p>####### 结论：&lt;/p>
+&lt;p>####### Conclusion:&lt;/p>
 &lt;ul>
-&lt;li>并发900，边的吞吐量是776.9，每秒可处理的数据：776.9*500=388450/s&lt;/li>
+&lt;li>With a concurrency of 900, the throughput for edges is 776.9. This means that the system can process data at a rate of 388450 per second (776.9 * 500).&lt;/li>
 &lt;/ul>
-&lt;h4 id="42-single插入">4.2 single插入&lt;/h4>
-&lt;h5 id="421-压力上限测试">4.2.1 压力上限测试&lt;/h5>
-&lt;h6 id="测试方法-1">测试方法&lt;/h6>
-&lt;p>不断提升并发量，测试server仍能正常提供服务的压力上限&lt;/p>
-&lt;h6 id="压力参数-1">压力参数&lt;/h6>
+&lt;h4 id="42-single-insertion">4.2 Single insertion&lt;/h4>
+&lt;h5 id="421-stress-limit-testing">4.2.1 Stress limit testing&lt;/h5>
+&lt;h6 id="test-methods-1">Test Methods&lt;/h6>
+&lt;p>Stress limit testing is a process of continuously increasing the concurrency level to test the upper limit of the server&amp;rsquo;s ability to provide normal service.&lt;/p>
+&lt;h6 id="stress-parameters-1">Stress parameters&lt;/h6>
 &lt;ul>
-&lt;li>持续时间：5min&lt;/li>
-&lt;li>服务异常标志：错误率大于0.00%&lt;/li>
+&lt;li>Duration: 5 minutes.&lt;/li>
+&lt;li>Service exception indicator: Error rate greater than 0.00%.&lt;/li>
 &lt;/ul>
-&lt;h6 id="顶点的单条插入">顶点的单条插入&lt;/h6>
+&lt;h6 id="single-vertex-insertion">Single vertex insertion&lt;/h6>
 &lt;center>
 &lt;img src="/docs/images/API-perf/v0.5.6/rocksdb/vertex_single.png" alt="image">
 &lt;/center>
-&lt;p>####### 结论：&lt;/p>
+&lt;p>####### Conclusion:&lt;/p>
 &lt;ul>
-&lt;li>并发11500，吞吐量为10730，顶点的单条插入并发能力为11500&lt;/li>
+&lt;li>With a concurrency of 11500, the throughput is 10730. This means that the system can handle a single concurrent insertion of vertices at a concurrency level of 11500.&lt;/li>
 &lt;/ul>
-&lt;h6 id="边的单条插入">边的单条插入&lt;/h6>
+&lt;h6 id="single-edge-insertion">Single edge insertion&lt;/h6>
 &lt;center>
 &lt;img src="/docs/images/API-perf/v0.5.6/rocksdb/edge_single.png" alt="image">
 &lt;/center>
-&lt;p>####### 结论：&lt;/p>
+&lt;p>####### Conclusion:&lt;/p>
 &lt;ul>
-&lt;li>并发9000，吞吐量是8418，边的单条插入并发能力为9000&lt;/li>
+&lt;li>With a concurrency of 9000, the throughput is 8418. This means that the system can handle a single concurrent insertion of edges at a concurrency level of 9000.&lt;/li>
 &lt;/ul>
-&lt;h4 id="43-按id查询">4.3 按id查询&lt;/h4>
-&lt;h5 id="431-压力上限测试">4.3.1 压力上限测试&lt;/h5>
-&lt;h6 id="测试方法-2">测试方法&lt;/h6>
-&lt;p>不断提升并发量，测试server仍能正常提供服务的压力上限&lt;/p>
-&lt;h6 id="压力参数-2">压力参数&lt;/h6>
+&lt;h4 id="43-search-by-id">4.3 Search by ID&lt;/h4>
+&lt;h5 id="431-stress-test-upper-limit">4.3.1 Stress test upper limit&lt;/h5>
+&lt;h6 id="testing-method">Testing method&lt;/h6>
+&lt;p>Continuously increasing the concurrency level to test the upper limit of the server&amp;rsquo;s ability to provide service under normal conditions.&lt;/p>
+&lt;h6 id="stress-parameters-2">stress parameters&lt;/h6>
 &lt;ul>
-&lt;li>持续时间：5min&lt;/li>
-&lt;li>服务异常标志：错误率大于0.00%&lt;/li>
+&lt;li>Duration: 5 minutes&lt;/li>
+&lt;li>Service abnormality indicator: error rate greater than 0.00%&lt;/li>
 &lt;/ul>
-&lt;h6 id="顶点的按id查询">顶点的按id查询&lt;/h6>
+&lt;h6 id="querying-vertices-by-id">Querying vertices by ID&lt;/h6>
 &lt;center>
 &lt;img src="/docs/images/API-perf/v0.5.6/rocksdb/vertex_id_query.png" alt="image">
 &lt;/center>
-&lt;p>####### 结论：&lt;/p>
+&lt;p>####### Conclusion：&lt;/p>
 &lt;ul>
-&lt;li>并发14000，吞吐量是12663，顶点的按id查询的并发能力为14000，平均延时为44ms&lt;/li>
+&lt;li>Concurrency is 14,000, throughput is 12,663. The concurrency capacity for querying vertices by ID is 14,000, with an average delay of 44ms.&lt;/li>
 &lt;/ul>
-&lt;h6 id="边的按id查询">边的按id查询&lt;/h6>
+&lt;h6 id="querying-edges-by-id">Querying edges by ID&lt;/h6>
 &lt;center>
 &lt;img src="/docs/images/API-perf/v0.5.6/rocksdb/edge_id_query.png" alt="image">
 &lt;/center>
-&lt;p>####### 结论：&lt;/p>
+&lt;p>####### Conclusion：&lt;/p>
 &lt;ul>
-&lt;li>并发13000，吞吐量是12225，边的按id查询的并发能力为13000，平均延时为12ms&lt;/li>
+&lt;li>Concurrency is 13,000, throughput is 12,225. The concurrency capacity for querying edges by ID is 13,000, with an average delay of 12ms.&lt;/li>
 &lt;/ul></description></item><item><title>Docs: HugeGraph Config Options</title><link>/docs/config/config-option/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/config/config-option/</guid><description>
 &lt;h3 id="gremlin-server-config-options">Gremlin Server Config Options&lt;/h3>
 &lt;p>Corresponding configuration file &lt;code>gremlin-server.yaml&lt;/code>&lt;/p>
