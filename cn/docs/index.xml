@@ -5603,10 +5603,11 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>josh,32,Beijing
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>peter,35,Shanghai
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;#34;li,nary&amp;#34;,26,&amp;#34;Wu,han&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tom,null,NULL
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>顶点文件：&lt;code>example/file/vertex_software.txt&lt;/code>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>name|lang|price
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>lop|java|328
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ripple|java|199
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>id|name|lang|price|ISBN
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1|lop|java|328|ISBN978-7-107-18618-5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2|ripple|java|199|ISBN978-7-100-13678-5
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>边文件：&lt;code>example/file/edge_knows.json&lt;/code>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>{&amp;#34;source_name&amp;#34;: &amp;#34;marko&amp;#34;, &amp;#34;target_name&amp;#34;: &amp;#34;vadas&amp;#34;, &amp;#34;date&amp;#34;: &amp;#34;20160110&amp;#34;, &amp;#34;weight&amp;#34;: 0.5}
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{&amp;#34;source_name&amp;#34;: &amp;#34;marko&amp;#34;, &amp;#34;target_name&amp;#34;: &amp;#34;josh&amp;#34;, &amp;#34;date&amp;#34;: &amp;#34;20130220&amp;#34;, &amp;#34;weight&amp;#34;: 1.0}
