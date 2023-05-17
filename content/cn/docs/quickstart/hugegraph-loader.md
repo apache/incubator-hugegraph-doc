@@ -807,14 +807,15 @@ vadas,27,Hongkong
 josh,32,Beijing
 peter,35,Shanghai
 "li,nary",26,"Wu,han"
+tom,null,NULL
 ```
 
 顶点文件：`example/file/vertex_software.txt`
 
 ```text
-name|lang|price
-lop|java|328
-ripple|java|199
+id|name|lang|price|ISBN
+1|lop|java|328|ISBN978-7-107-18618-5
+2|ripple|java|199|ISBN978-7-100-13678-5
 ```
 
 边文件：`example/file/edge_knows.json`
