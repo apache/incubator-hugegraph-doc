@@ -4,130 +4,125 @@ linkTitle: "v0.4.4"
 weight: 3
 ---
 
-### 1 测试环境
+### 1 Test environment
 
-被压机器信息
+Target Machine Information
 
-机器编号                              | CPU                                          | Memory | 网卡        | 磁盘
+机器编号                              | CPU                                          | Memory | NIC (Network Interface Card)        | Disk
 --------------------------------- | -------------------------------------------- | ------ | --------- | ------------------
 1 | 24 Intel(R) Xeon(R) CPU E5-2620 v2 @ 2.10GHz | 61G    | 1000Mbps  | 1.4T HDD
 2 | 48 Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz | 128G   | 10000Mbps | 750GB SSD,2.7T HDD
 
-- 起压力机器信息：与编号 1 机器同配置
-- 测试工具：apache-Jmeter-2.5.1
+- **Pressure testing machine information:** Configured the same as machine number 1.
+- **Testing tool:** Apache JMeter 2.5.1.
 
-注：起压机器和被压机器在同一机房
+Note: The pressure testing machine and the machine being tested are in the same room.
 
-### 2 测试说明
+### 2 Test Description
 
-#### 2.1 名词定义（时间的单位均为ms）
+#### 2.1 Definition of terms (the unit of time is ms)
 
-- Samples -- 本次场景中一共完成了多少个线程
-- Average -- 平均响应时间
-- Median -- 统计意义上面的响应时间的中值
-- 90% Line -- 所有线程中90%的线程的响应时间都小于xx
-- Min -- 最小响应时间
-- Max -- 最大响应时间
-- Error -- 出错率
-- Throughput -- 吞吐量
-- KB/sec -- 以流量做衡量的吞吐量
+- Samples -- The total number of threads completed in this scenario.
+- Average -- The average response time.
+- Median -- The median response time in terms of statistical significance.
+- 90% Line -- The response time of 90% of all threads is less than xx.
+- Min -- The minimum response time.
+- Max -- The maximum response time.
+- Error -- The error rate.
+- Throughput -- The throughput.
+- KB/sec -- The throughput measured in terms of traffic.
 
-#### 2.2 底层存储
+#### 2.2 Underlying storage
 
-后端存储使用RocksDB，HugeGraph与RocksDB都在同一机器上启动，server相关的配置文件除主机和端口有修改外，其余均保持默认。
+RocksDB is used for backend storage, HugeGraph and RocksDB are both started on the same machine, and the configuration files related to the server remain the default except for the modification of the host and port.
 
-### 3 性能结果总结
+### 3 Summary of performance results
 
-1. HugeGraph每秒能够处理的请求数目上限是7000
-2. 批量插入速度远大于单条插入，在服务器上测试结果达到22w edges/s，37w vertices/s
-3. 后端是RocksDB，增大CPU数目和内存大小可以增大批量插入的性能。CPU和内存扩大一倍，性能增加45%-60%
-4. 批量插入场景，使用SSD替代HDD，性能提升较小，只有3%-5%
+1. The upper limit of the number of requests HugeGraph can handle per second is 7000
+2. The speed of batch insertion is much higher than that of single insertion, and the test results on the server reach 22w edges/s, 37w vertices/s
+3. The backend is RocksDB, and increasing the number of CPUs and memory size can improve the performance of batch inserts. Doubling the CPU and memory size can increase performance by 45% to 60%.
+4. In the batch insertion scenario, using SSD instead of HDD, the performance improvement is small, only 3%-5%
 
-### 4 测试结果及分析
+### 4 Test results and analysis
 
-#### 4.1 batch插入
+#### 4.1 Batch insertion
 
-##### 4.1.1 压力上限测试
+##### 4.1.1 Maximum Pressure Test
 
-###### 测试方法
+###### Test Methods
 
-不断提升并发量，测试server仍能正常提供服务的压力上限
+Continuously increase the concurrency level and test the upper limit of the server's ability to provide services normally.
 
-###### 压力参数
+###### Pressure Parameters
 
-持续时间：5min
+Duration: 5 minutes
 
-###### 顶点和边的最大插入速度（高性能服务器，使用SSD存储RocksDB数据）：
+###### Maximum Insertion Speed of Vertices and Edges (High-performance server with SSD storage for RocksDB data):
 
 <center>
   <img src="/docs/images/API-perf/v0.4.4/best.png" alt="image">
 </center>
 
+###### Conclusion:
 
-###### 结论：
+- With a concurrency of 1000, the edge throughput is 451, which can process 225,500 data per second: 451 * 500 = 225,500/s.
+- With a concurrency of 2000, the vertex throughput is 1842.4, which can process 368,480 data per second: 1842.4 * 200 = 368,480/s.
 
-- 并发1000，边的吞吐量是是451，每秒可处理的数据：451*500条=225500/s
-- 并发2000，顶点的吞吐量是1842.4，每秒可处理的数据：1842.4*200=368480/s
-
-**1\. CPU和内存对插入性能的影响（服务器都使用HDD存储RocksDB数据，批量插入）**
+**1\. The Impact of CPU and Memory on Insertion Performance (Servers Using HDD Storage for RocksDB Data, Batch Insertion)**
 
 <center>
   <img src="/docs/images/API-perf/v0.4.4/cpu-memory.png" alt="image">
 </center>
 
+###### Conclusion:
 
-###### 结论：
+- With the same HDD disk, doubling the CPU and memory size increases edge throughput from 268 to 426, which improves performance by about 60%.
+- With the same HDD disk, doubling the CPU and memory size increases vertex throughput from 1263.8 to 1842.4, which improves performance by about 45%.
 
-- 同样使用HDD硬盘，CPU和内存增加了1倍
-- 边：吞吐量从268提升至426，性能提升了约60%
-- 顶点：吞吐量从1263.8提升至1842.4，性能提升了约45%
-
-**2\. SSD和HDD对插入性能的影响（高性能服务器，批量插入）**
+**2\. The Impact of SSD and HDD on Insertion Performance (High-performance Servers, Batch Insertion)**
 
 <center>
   <img src="/docs/images/API-perf/v0.4.4/ssd.png" alt="image">
 </center>
 
+###### Conclusion:
 
-###### 结论：
+- For edge insertion, using SSD yields a throughput of 451.7, while using HDD yields a throughput of 426.6, which results in a 5% performance improvement.
+- For vertex insertion, using SSD yields a throughput of 1842.4, while using HDD yields a throughput of 1794, which results in a performance improvement of about 3%.
 
-- 边：使用SSD吞吐量451.7,使用HDD吞吐量426.6，性能提升5%
-- 顶点：使用SSD吞吐量1842.4，使用HDD吞吐量1794，性能提升约3%
-
-**3\. 不同并发线程数对插入性能的影响（普通服务器，使用HDD存储RocksDB数据）**
+**3\. The Impact of Different Concurrent Thread Numbers on Insertion Performance (Ordinary Servers, HDD Storage for RocksDB Data)**
 
 <center>
   <img src="/docs/images/API-perf/v0.4.4/threads-batch.png" alt="image">
 </center>
 
+##### Conclusion:
 
-###### 结论：
+- For vertices, at 1000 concurrency, the response time is 7ms and at 1500 concurrency, the response time is 1028ms. The throughput remained around 1300, indicating that the inflection point data should be around 1300. At 1300 concurrency, the response time has reached 22ms, which is within a controllable range. Compared to HugeGraph 0.2 (1000 concurrency: average response time 8959ms), the processing capacity has made a qualitative leap.
+- For edges, the processing time is too long and exceeds 3 seconds from 1000 to 2000 concurrency, and the throughput almost fluctuates around 270. Therefore, increasing the concurrency will not significantly increase the throughput. 270 is an inflection point, and compared with HugeGraph 0.2 (1000 concurrency: average response time 31849ms), the processing capacity has improved significantly.
 
-- 顶点：1000并发，响应时间7ms和1500并发响应时间1028ms差距悬殊，且吞吐量一直保持在1300左右，因此拐点数据应该在1300 ，且并发1300时，响应时间已达到22ms，在可控范围内，相比HugeGraph 0.2（1000并发：平均响应时间8959ms），处理能力出现质的飞跃；
-- 边：从1000并发到2000并发，处理时间过长，超过3s，且吞吐量几乎在270左右浮动，因此继续增大并发线程数吞吐量不会再大幅增长，270 是一个拐点，跟HugeGraph 0.2版本（1000并发：平均响应时间31849ms）相比较，处理能力提升非常明显；
+#### 4.2 single insertion
 
-#### 4.2 single插入
+##### 4.2.1 Upper Limit Test under Pressure
 
-##### 4.2.1 压力上限测试
+###### Test Method
 
-###### 测试方法
+Continuously increase the concurrency level and test the upper limit of the pressure at which the server can still provide normal services.
 
-不断提升并发量，测试server仍能正常提供服务的压力上限
+###### Pressure Parameters
 
-###### 压力参数
-
-- 持续时间：5min
-- 服务异常标志：错误率大于0.00%
+- Duration: 5 minutes
+- Service exception criteria: Error rate greater than 0.00%.
 
 <center>
   <img src="/docs/images/API-perf/v0.4.4/threads-single.png" alt="image">
 </center>
 
-###### 结论：
+#### Conclusion:
 
-- 顶点：
-  - 4000并发：正常，无错误率，平均耗时小于1ms， 6000并发无错误，平均耗时5ms，在可接受范围内；
-  - 8000并发：存在0.01%的错误，已经无法处理，出现connection timeout错误，顶峰应该在7000左右
-- 边：
-  - 4000并发：响应时间1ms，6000并发无任何异常，平均响应时间8ms，主要差异在于 IO network recv和send以及CPU）；
-  - 8000并发：存在0.01%的错误率，平均耗15ms，拐点应该在7000左右，跟顶点结果匹配；
+- Vertices:
+  - At 4000 concurrent connections, there were no errors, with an average response time of less than 1ms. At 6000 concurrent connections, there were no errors, with an average response time of 5ms, which is acceptable.
+  - At 8000 concurrent connections, there were 0.01% errors and the system could not handle it, resulting in connection timeout errors. The system's peak performance should be around 7000 concurrent connections.
+- Edges:
+  - At 4000 concurrent connections, the response time was 1ms. At 6000 concurrent connections, there were no abnormalities, with an average response time of 8ms. The main differences were in IO network recv and send as well as CPU usage.
+  - At 8000 concurrent connections, there was a 0.01% error rate, with an average response time of 15ms. The turning point should be around 7000 concurrent connections, which matches the vertex results.
