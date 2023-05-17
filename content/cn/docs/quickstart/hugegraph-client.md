@@ -342,9 +342,9 @@ public class BatchExample {
 
 ### 4.4 运行Example
 
-运行Example之前需要启动Server, 启动过程见[HugeGraph-Server Quick Start](/docs/quickstart/hugegraph-server)
+运行Example之前需要启动Server, 启动过程见[HugeGraph-Server Quick Start](/cn/docs/quickstart/hugegraph-server)
 
 ### 4.5 Example示例说明
 
-示例说明见[HugeGraph-Client基本API介绍](/docs/clients/hugegraph-client)
+示例说明见[HugeGraph-Client基本API介绍](/cn/docs/clients/hugegraph-client)
 
