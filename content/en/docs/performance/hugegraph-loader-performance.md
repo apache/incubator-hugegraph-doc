@@ -4,19 +4,19 @@ linkTitle: "HugeGraph-Loader Performance"
 weight: 3
 ---
 
-## 使用场景
+## Use Cases
 
-当要批量插入的图数据（包括顶点和边）条数为billion级别及以下，或者总数据量小于TB时，可以采用[HugeGraph-Loader](/docs/quickstart/hugegraph-loader)工具持续、高速导入图数据
+When the number of graph data to be batch inserted (including vertices and edges) is at the billion level or below, or the total data size is less than TB, the [HugeGraph-Loader](/docs/quickstart/hugegraph-loader) tool can be used to continuously and quickly import graph data.
 
-## 性能
+## Performance
 
-> 测试均采用网址数据的边数据
+> The test uses the edge data of website.
 
-### RocksDB单机性能
+### RocksDB single-machine performance
 
-- 关闭label index，22.8w edges/s
-- 开启label index，15.3w edges/s
+- When label index is turned off, 228k edges/s.
+- When label index is turned on, 153k edges/s.
 
-### Cassandra集群性能
+### Cassandra cluster performance
 
-- 默认开启label index，6.3w edges/s
+- When label index is turned on by default, 63k edges/s.
