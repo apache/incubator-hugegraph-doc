@@ -10882,9 +10882,9 @@ HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="44-运行example">4.4 运行Example&lt;/h3>
-&lt;p>运行Example之前需要启动Server, 启动过程见&lt;a href="/docs/quickstart/hugegraph-server">HugeGraph-Server Quick Start&lt;/a>&lt;/p>
+&lt;p>运行Example之前需要启动Server, 启动过程见&lt;a href="/cn/docs/quickstart/hugegraph-server">HugeGraph-Server Quick Start&lt;/a>&lt;/p>
 &lt;h3 id="45-example示例说明">4.5 Example示例说明&lt;/h3>
-&lt;p>示例说明见&lt;a href="/docs/clients/hugegraph-client">HugeGraph-Client基本API介绍&lt;/a>&lt;/p></description></item><item><title>Docs: Rebuild API</title><link>/cn/docs/clients/restful-api/rebuild/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/restful-api/rebuild/</guid><description>
+&lt;p>示例说明见&lt;a href="/cn/docs/clients/hugegraph-client">HugeGraph-Client基本API介绍&lt;/a>&lt;/p></description></item><item><title>Docs: Rebuild API</title><link>/cn/docs/clients/restful-api/rebuild/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/restful-api/rebuild/</guid><description>
 &lt;h3 id="16-rebuild">1.6 Rebuild&lt;/h3>
 &lt;h4 id="161-重建indexlabel">1.6.1 重建IndexLabel&lt;/h4>
 &lt;h5 id="method--url">Method &amp;amp; Url&lt;/h5>
