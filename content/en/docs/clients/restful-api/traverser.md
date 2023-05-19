@@ -4,59 +4,63 @@ linkTitle: "Traverser"
 weight: 9
 ---
 
-### 3.1 traverser API概述
+### 3.1 Overview of Traverser API
 
-HugeGraphServer为HugeGraph图数据库提供了RESTful API接口。除了顶点和边的CRUD基本操作以外，还提供了一些遍历（traverser）方法，我们称为`traverser API`。这些遍历方法实现了一些复杂的图算法，方便用户对图进行分析和挖掘。
+HugeGraphServer provides a RESTful API interface for the HugeGraph graph database. In addition to the basic CRUD operations for vertices and edges, it also offers several traversal methods, which we refer to as the `traverser API`. These traversal methods implement various complex graph algorithms, making it convenient for users to analyze and explore the graph.
 
-HugeGraph支持的Traverser API包括：
+The Traverser API supported by HugeGraph includes:
 
-- K-out API，根据起始顶点，查找恰好N步可达的邻居，分为基础版和高级版：
-    - 基础版使用GET方法，根据起始顶点，查找恰好N步可达的邻居
-    - 高级版使用POST方法，根据起始顶点，查找恰好N步可达的邻居，与基础版的不同在于：
-        - 支持只统计邻居数量
-        - 支持边属性过滤
-        - 支持返回到达邻居的最短路径
-- K-neighbor API，根据起始顶点，查找N步以内可达的所有邻居，分为基础版和高级版：
-    - 基础版使用GET方法，根据起始顶点，查找N步以内可达的所有邻居
-    - 高级版使用POST方法，根据起始顶点，查找N步以内可达的所有邻居，与基础版的不同在于：
-        - 支持只统计邻居数量
-        - 支持边属性过滤
-        - 支持返回到达邻居的最短路径
-- Same Neighbors, 查询两个顶点的共同邻居
-- Jaccard Similarity API，计算jaccard相似度，包括两种：
-    - 一种是使用GET方法，计算两个顶点的邻居的相似度（交并比）
-    - 一种是使用POST方法，在全图中查找与起点的jaccard similarity最高的N个点
-- Shortest Path API，查找两个顶点之间的最短路径
-- All Shortest Paths，查找两个顶点间的全部最短路径
-- Weighted Shortest Path，查找起点到目标点的带权最短路径
-- Single Source Shortest Path，查找一个点到其他各个点的加权最短路径
-- Multi Node Shortest Path，查找指定顶点集之间两两最短路径
-- Paths API，查找两个顶点间的全部路径，分为基础版和高级版：
-    - 基础版使用GET方法，根据起点和终点，查找两个顶点间的全部路径
-    - 高级版使用POST方法，根据一组起点和一组终点，查找两个集合间符合条件的全部路径
-- Customized Paths API，从一批顶点出发，按（一种）模式遍历经过的全部路径
-- Template Path API，指定起点和终点以及起点和终点间路径信息，查找符合的路径
-- Crosspoints API，查找两个顶点的交点（共同祖先或者共同子孙）
-- Customized Crosspoints API，从一批顶点出发，按多种模式遍历，最后一步到达的顶点的交点
-- Rings API，从起始顶点出发，可到达的环路路径
-- Rays API，从起始顶点出发，可到达边界的路径（即无环路径）
-- Fusiform Similarity API，查找一个顶点的梭形相似点
-- Vertices API
-	- 按ID批量查询顶点；
-	- 获取顶点的分区；
-	- 按分区查询顶点；
-- Edges API
-	- 按ID批量查询边；
-	- 获取边的分区；
-	- 按分区查询边；
+- K-out API: It finds neighbors that are exactly N steps away from a given starting vertex. There are two versions:
+    - The basic version uses the GET method to find neighbors that are exactly N steps away from a given starting vertex.
+    - The advanced version uses the POST method to find neighbors that are exactly N steps away from a given starting vertex. The advanced version differs from the basic version in the following ways:
+        - Supports counting the number of neighbors only
+        - Supports filtering by edge properties
+        - Supports returning the shortest path to reach the neighbor
+- K-neighbor API: It finds all neighbors that are within N steps of a given starting vertex. There are two versions:
+    - The basic version uses the GET method to find all neighbors that are within N steps of a given starting vertex.
+    - The advanced version uses the POST method to find all neighbors that are within N steps of a given starting vertex. The advanced version differs from the basic version in the following ways:
+        - Supports counting the number of neighbors only
+        - Supports filtering by edge properties
+        - Supports returning the shortest path to reach the neighbor
+- Same Neighbors: It queries the common neighbors of two vertices.
+- Jaccard Similarity API: It calculates the Jaccard similarity, which includes two types:
+    - One type uses the GET method to calculate the similarity (intersection over union) of neighbors between two vertices.
+    - The other type uses the POST method to find the top N vertices with the highest Jaccard similarity to a given starting vertex in the entire graph.
+- Shortest Path API: It finds the shortest path between two vertices.
+- All Shortest Paths: It finds all shortest paths between two vertices.
+- Weighted Shortest Path: It finds the shortest weighted path from a starting vertex to a target vertex.
+- Single Source Shortest Path: It finds the weighted shortest path from a single source vertex to all other vertices.
+- Multi Node Shortest Path: It finds the shortest path between every pair of specified vertices.
+- Paths API: It finds all paths between two vertices. There are two versions:
+    - The basic version uses the GET method to find all paths between a given starting vertex and an ending vertex.
+    - The advanced version uses the POST method to find all paths that meet certain conditions between a set of starting vertices and a set of ending vertices.
+### 3.2 Detailed Explanation of Traverser API
 
-### 3.2. traverser API详解
+In the following, we provide a detailed explanation of the Traverser API:
 
-使用方法中的例子，都是基于TinkerPop官网给出的图：
+- Customized Paths API: It traverses all paths that pass through a batch of vertices according to a specific pattern.
+- Template Path API: It specifies a starting point, an ending point, and the path information between them to find matching paths.
+- Crosspoints API: It finds the intersection (common ancestors or common descendants) between two vertices.
+- Customized Crosspoints API: It traverses multiple patterns starting from a batch of vertices and finds the intersections with the vertices reached in the final step.
+- Rings API: It finds the cyclic paths that can be reached from a starting vertex.
+- Rays API: It finds the paths from a starting vertex that reach the boundaries (i.e., paths without cycles).
+- Fusiform Similarity API: It finds the fusiform similar vertices to a given vertex.
+- Vertices API:
+	- Batch querying vertices by ID.
+	- Getting the partitions of vertices.
+	- Querying vertices by partition.
+- Edges API:
+	- Batch querying edges by ID.
+	- Getting the partitions of edges.
+	- Querying edges by partition.
 
-![tinkerpop示例图](http://tinkerpop.apache.org/docs/3.4.0/images/tinkerpop-modern.png)
+### 3.2 Detailed Explanation of Traverser API
 
-数据导入程序如下：
+The usage examples provided in this section are based on the graph presented on the TinkerPop official website:
+
+![tinkerpop example graph](http://tinkerpop.apache.org/docs/3.4.0/images/tinkerpop-modern.png)
+
+The data import program is as follows:
 
 ```java
 public class Loader {
@@ -168,7 +172,7 @@ public class Loader {
 }
 ```
 
-顶点ID为：
+The vertex IDs are:
 
 ```
 "2:ripple",
@@ -179,7 +183,7 @@ public class Loader {
 "2:lop"
 ```
 
-边ID为：
+The edge IDs are:
 
 ```
 "S1:peter>2>>S2:lop",
@@ -190,24 +194,24 @@ public class Loader {
 "S1:marko>2>>S2:lop"
 ```
 
-#### 3.2.1 K-out API（GET，基础版）
+#### 3.2.1 K-out API (GET, Basic Version)
 
-##### 3.2.1.1 功能介绍
+##### 3.2.1.1 Functionality Overview
 
-根据起始顶点、方向、边的类型（可选）和深度depth，查找从起始顶点出发恰好depth步可达的顶点
+The K-out API allows you to find vertices that are exactly "depth" steps away from a given starting vertex, considering the specified direction, edge type (optional), and depth.
 
 ###### Params
 
-- source：起始顶点id，必填项
-- direction：起始顶点向外发散的方向（OUT,IN,BOTH），选填项，默认是BOTH
-- max_depth：步数，必填项
-- label：边的类型，选填项，默认代表所有edge label
-- nearest：nearest为true时，代表起始顶点到达结果顶点的最短路径长度为depth，不存在更短的路径；nearest为false时，代表起始顶点到结果顶点有一条长度为depth的路径（未必最短且可以有环），选填项，默认为true
-- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
-- capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
-- limit：返回的顶点的最大数目，选填项，默认为10000000
+- source: ID of the starting vertex (required)
+- direction: Direction of traversal from the starting vertex (OUT, IN, BOTH). Optional, default is BOTH.
+- max_depth: Number of steps (required)
+- label: Edge type (optional), represents all edge labels by default
+- nearest: When nearest is set to true, it means the shortest path length from the starting vertex to the result vertices is equal to the depth, and there is no shorter path. When nearest is set to false, it means there is at least one path of length depth from the starting vertex to the result vertices (not necessarily the shortest and may contain cycles). Optional, default is true.
+- max_degree: Maximum number of adjacent edges to traverse per vertex during the query. Optional, default is 10000.
+- capacity: Maximum number of vertices to be visited during the traversal. Optional, default is 10000000.
+- limit: Maximum number of vertices to be returned. Optional, default is 10000000.
 
-##### 3.2.1.2 使用方法
+##### 3.2.1.2 Usage Example
 
 ###### Method & Url
 
@@ -232,46 +236,46 @@ GET http://localhost:8080/graphs/{graph}/traversers/kout?source="1:marko"&max_de
 }
 ```
 
-##### 3.2.1.3 适用场景
+##### 3.2.1.3 Use Cases
 
-查找恰好N步关系可达的顶点。两个例子：
+Finding vertices that are exactly N steps away in a relationship. Two examples:
 
-- 家族关系中，查找一个人的所有孙子，person A通过连续的两条“儿子”边到达的顶点集合。
-- 社交关系中发现潜在好友，例如：与目标用户相隔两层朋友关系的用户，可以通过连续两条“朋友”边到达的顶点。
+- In a family relationship, finding all grandchildren of a person. The set of vertices that can be reached by person A through two consecutive "son" edges.
+- Discovering potential friends in a social network. For example, finding users who are two degrees of friendship away from the target user, reachable through two consecutive "friend" edges.
 
-#### 3.2.2 K-out API（POST，高级版）
+#### 3.2.2 K-out API (POST, Advanced Version)
 
-##### 3.2.2.1 功能介绍
+##### 3.2.2.1 Functionality Overview
 
-根据起始顶点、步骤（包括方向、边类型和过滤属性）和深度depth，查找从起始顶点出发恰好depth步可达的顶点。
+The K-out API allows you to find vertices that are exactly "depth" steps away from a given starting vertex, considering the specified steps (including direction, edge type, and attribute filtering).
 
-> 与K-out基础版的不同在于：
-> - 支持只统计邻居数量
-> - 支持边属性过滤
-> - 支持返回到达邻居的最短路径
+> The advanced version differs from the basic version of K-out API in the following aspects:
+> - Supports counting the number of neighbors only
+> - Supports edge attribute filtering
+> - Supports returning the shortest path to the neighbor
 
 ###### Params
 
-- source：起始顶点id，必填项
-- 从起始点出发的Step，必填项，结构如下：
-    - direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
-    - labels：边的类型列表
-    - properties：通过属性的值过滤边
-    - max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)
-    - skip_degree：用于设置查询过程中舍弃超级顶点的最小边数，即当某个顶点的邻接边数目大于 skip_degree 时，完全舍弃该顶点。选填项，如果开启时，需满足 `skip_degree >= max_degree` 约束，默认为0 (不启用)，表示不跳过任何点 (注意:  开启此配置后，遍历时会尝试访问一个顶点的 skip_degree 条边，而不仅仅是 max_degree 条边，这样有额外的遍历开销，对查询性能影响可能有较大影响，请确认理解后再开启)
-- max_depth：步数，必填项
-- nearest：nearest为true时，代表起始顶点到达结果顶点的最短路径长度为depth，不存在更短的路径；nearest为false时，代表起始顶点到结果顶点有一条长度为depth的路径（未必最短且可以有环），选填项，默认为true
-- count_only：Boolean值，true表示只统计结果的数目，不返回具体结果；false表示返回具体的结果，默认为false
-- with_path：true表示返回起始点到每个邻居的最短路径，false表示不返回起始点到每个邻居的最短路径，选填项，默认为false
-- with_vertex，选填项，默认为false：
-    - true表示返回结果包含完整的顶点信息（路径中的全部顶点）
-        - with_path为true时，返回所有路径中的顶点的完整信息
-        - with_path为false时，返回所有邻居的完整信息
-    - false时表示只返回顶点id
-- capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
-- limit：返回的顶点的最大数目，选填项，默认为10000000
+- source: The ID of the starting vertex, required.
+- Step from the starting point, required, with the following structure:
+    - direction: Represents the direction of the edges (OUT, IN, BOTH), default is BOTH.
+    - labels: List of edge types.
+    - properties: Filters edges based on property values.
+    - max_degree: Maximum number of adjacent edges to traverse for a single vertex, default is 10000 (Note: Prior to version 0.12, the parameter name was "degree" instead of "max_degree". Starting from version 0.12, "max_degree" is used uniformly, while still supporting the "degree" syntax for backward compatibility).
+    - skip_degree: Sets the minimum number of edges to skip super vertices during the query process. If the number of adjacent edges for a vertex is greater than skip_degree, the vertex is completely skipped. Optional. If enabled, it should satisfy the constraint `skip_degree >= max_degree`. Default is 0 (not enabled), indicating no skipping of any vertices (Note: Enabling this configuration means that during traversal, an attempt will be made to access skip_degree edges of a vertex, not just max_degree edges. This incurs additional traversal overhead and may have a significant impact on query performance. Please enable it only after understanding the implications).
+- max_depth: Number of steps, required.
+- nearest: When nearest is true, it means the shortest path length from the starting vertex to the result vertex is equal to depth, and there is no shorter path. When nearest is false, it means there is a path of length depth from the starting vertex to the result vertex (not necessarily the shortest and can contain cycles). Optional, default is true.
+- count_only: Boolean value, true indicates only counting the number of results without returning specific results, false indicates returning specific results. Default is false.
+- with_path: When true, it returns the shortest path from the starting vertex to each neighbor. When false, it does not return the shortest path. Optional, default is false.
+- with_vertex: Optional, default is false:
+    - When true, the results include complete vertex information (all vertices in the path):
+        - When with_path is true, it returns complete information of all vertices in all paths.
+        - When with_path is false, it returns complete information of all neighbors.
+    - When false, it only returns vertex IDs.
+- capacity: Maximum number of vertices to visit during traversal. Optional, default is 10000000.
+- limit: Maximum number of vertices to return. Optional, default is 10000000.
 
-##### 3.2.2.2 使用方法
+##### 3.2.2.2 Usage
 
 ###### Method & Url
 
@@ -383,28 +387,28 @@ POST http://localhost:8080/graphs/{graph}/traversers/kout
 
 ```
 
-##### 3.2.2.3 适用场景
+##### 3.2.2.3 Use Cases
 
-参见3.2.1.3
+Refer to 3.2.1.3.
 
-#### 3.2.3 K-neighbor（GET，基础版）
+#### 3.2.3 K-neighbor (GET, Basic Version)
 
-##### 3.2.3.1 功能介绍
+##### 3.2.3.1 Function Introduction
 
-根据起始顶点、方向、边的类型（可选）和深度depth，查找包括起始顶点在内、depth步之内可达的所有顶点
+Find all vertices that are reachable within depth steps, including the starting vertex, based on the starting vertex, direction, edge type (optional), and depth.
 
-> 相当于：起始顶点、K-out(1)、K-out(2)、... 、K-out(max_depth)的并集
+> Equivalent to the union of: starting vertex, K-out(1), K-out(2), ..., K-out(max_depth).
 
 ###### Params
 
-- source: 起始顶点id，必填项
-- direction：起始顶点向外发散的方向（OUT,IN,BOTH），选填项，默认是BOTH
-- max_depth：步数，必填项
-- label：边的类型，选填项，默认代表所有edge label
-- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
-- limit：返回的顶点的最大数目，也即遍历过程中最大的访问的顶点数目，选填项，默认为10000000
+- source: ID of the starting vertex, required.
+- direction: Direction in which the starting vertex's edges extend (OUT, IN, BOTH). Optional, default is BOTH.
+- max_depth: Number of steps, required.
+- label: Edge type, optional, default represents all edge labels.
+- max_degree: Maximum number of adjacent edges to traverse for a single vertex during the query process. Optional, default is 10000.
+- limit: Maximum number of vertices to return, also represents the maximum number of vertices to visit during traversal. Optional, default is 10000000.
 
-##### 3.2.3.2 使用方法
+##### 3.2.3.2 Usage
 
 ###### Method & Url
 
@@ -433,45 +437,44 @@ GET http://localhost:8080/graphs/{graph}/traversers/kneighbor?source=“1:marko�
 }
 ```
 
-##### 3.2.3.3 适用场景
+##### 3.2.3.3 Use Cases
 
-查找N步以内可达的所有顶点，例如：
+Find all vertices reachable within N steps, for example:
 
-- 家族关系中，查找一个人五服以内所有子孙，person A通过连续的5条“亲子”边到达的顶点集合。
-- 社交关系中发现好友圈子，例如目标用户通过1条、2条、3条“朋友”边可到达的用户可以组成目标用户的朋友圈子
+- In a family relationship, find all descendants within five generations of a person. This can be achieved by traversing five consecutive "parent-child" edges from person A.
+- In a social network, discover friend circles. For example, users who can be reached by 1, 2, or 3 "friend" edges from the target user can form the target user's friend circle.
 
+#### 3.2.4 K-neighbor API (POST, Advanced Version)
 
-#### 3.2.4 K-neighbor API（POST，高级版）
+##### 3.2.4.1 Function Introduction
 
-##### 3.2.4.1 功能介绍
+Find all vertices that are reachable within depth steps from the starting vertex, based on the starting vertex, steps (including direction, edge type, and filter properties), and depth.
 
-根据起始顶点、步骤（包括方向、边类型和过滤属性）和深度depth，查找从起始顶点出发depth步内可达的所有顶点。
-
-> 与K-neighbor基础版的不同在于：
-> - 支持只统计邻居数量
-> - 支持边属性过滤
-> - 支持返回到达邻居的最短路径
+> The difference from the Basic Version of K-neighbor API is that:
+> - It supports counting the number of neighbors only.
+> - It supports filtering edges based on their properties.
+> - It supports returning the shortest path to reach the neighbors.
 
 ###### Params
 
-- source：起始顶点id，必填项
-- 从起始点出发的Step，必填项，结构如下：
-    - direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
-    - labels：边的类型列表
-    - properties：通过属性的值过滤边
-    - max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)
-    - skip_degree：用于设置查询过程中舍弃超级顶点的最小边数，即当某个顶点的邻接边数目大于 skip_degree 时，完全舍弃该顶点。选填项，如果开启时，需满足 `skip_degree >= max_degree` 约束，默认为0 (不启用)，表示不跳过任何点 (注意:  开启此配置后，遍历时会尝试访问一个顶点的 skip_degree 条边，而不仅仅是 max_degree 条边，这样有额外的遍历开销，对查询性能影响可能有较大影响，请确认理解后再开启)
-- max_depth：步数，必填项
-- count_only：Boolean值，true表示只统计结果的数目，不返回具体结果；false表示返回具体的结果，默认为false
-- with_path：true表示返回起始点到每个邻居的最短路径，false表示不返回起始点到每个邻居的最短路径，选填项，默认为false
-- with_vertex，选填项，默认为false：
-    - true表示返回结果包含完整的顶点信息（路径中的全部顶点）
-        - with_path为true时，返回所有路径中的顶点的完整信息
-        - with_path为false时，返回所有邻居的完整信息
-    - false时表示只返回顶点id
-- limit：返回的顶点的最大数目，选填项，默认为10000000
+- source: Starting vertex ID, required.
+- Step from the starting point, required, with the following structure:
+    - direction: Represents the direction of edges (OUT, IN, BOTH). Default is BOTH.
+    - labels: List of edge types.
+    - properties: Filter edges based on property values.
+    - max_degree: Maximum number of adjacent edges to traverse for each vertex during the query process. Default is 10000. (Note: Before version 0.12, the parameter name within the step only supported "degree." Starting from version 0.12, it is unified as "max_degree" and is backward compatible with the "degree" notation.)
+    - skip_degree: Used to set the minimum number of edges to discard super vertices during the query process. When the number of adjacent edges for a vertex exceeds skip_degree, the vertex is completely discarded. This is an optional parameter. If enabled, it should satisfy the constraint `skip_degree >= max_degree`. Default is 0 (not enabled), which means no vertices are skipped. (Note: When this configuration is enabled, the traversal will attempt to access skip_degree edges for each vertex, not just max_degree edges. This incurs additional traversal overhead and may significantly impact query performance. Please make sure to understand this before enabling.)
+- max_depth: Number of steps, required.
+- count_only: Boolean value. If true, only the count of results is returned without the actual results. If false, the specific results are returned. Default is false.
+- with_path: If true, the shortest path from the starting point to each neighbor is returned. If false, the shortest path from the starting point to each neighbor is not returned. This is an optional parameter. Default is false.
+- with_vertex: Optional parameter, default is false:
+    - If true, the results include complete vertex information (all vertices in the path).
+        - When with_path is true, it returns complete information of all vertices in the paths.
+        - When with_path is false, it returns complete information of all neighbors.
+    - If false, only the vertex ID is returned.
+- limit: Maximum number of vertices to be returned. Also, the maximum number of vertices visited during the traversal process. This is an optional parameter. Default is 10000000.
 
-##### 3.2.4.2 使用方法
+##### 3.2.4.2 Usage Method
 
 ###### Method & Url
 
@@ -623,26 +626,26 @@ POST http://localhost:8080/graphs/{graph}/traversers/kneighbor
 }
 ```
 
-##### 3.2.4.3 适用场景
+##### 3.2.4.3 Use Cases
 
-参见3.2.3.3
+See 3.2.3.3
 
 #### 3.2.5 Same Neighbors
 
-##### 3.2.5.1 功能介绍
+##### 3.2.5.1 Function Introduction
 
-查询两个点的共同邻居
+Retrieve the common neighbors of two vertices.
 
 ###### Params
 
-- vertex：一个顶点id，必填项
-- other：另一个顶点id，必填项
-- direction：顶点向外发散的方向（OUT,IN,BOTH），选填项，默认是BOTH
-- label：边的类型，选填项，默认代表所有edge label
-- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
-- limit：返回的共同邻居的最大数目，选填项，默认为10000000
+- vertex: ID of one vertex, required.
+- other: ID of another vertex, required.
+- direction: Direction in which the vertex expands outward (OUT, IN, BOTH). Optional, default is BOTH.
+- label: Edge type. Optional, default represents all edge labels.
+- max_degree: Maximum number of adjacent edges to traverse for each vertex during the query process. Optional, default is 10000.
+- limit: Maximum number of common neighbors to be returned. Optional, default is 10000000.
 
-##### 3.2.5.2 使用方法
+##### 3.2.5.2 Usage Method
 
 ###### Method & Url
 
@@ -666,27 +669,27 @@ GET http://localhost:8080/graphs/{graph}/traversers/sameneighbors?vertex=“1:ma
 }
 ```
 
-##### 3.2.5.3 适用场景
+##### 3.2.5.3 Use Cases
 
-查找两个顶点的共同邻居：
+Find the common neighbors of two vertices:
 
-- 社交关系中发现两个用户的共同粉丝或者共同关注用户
+- In a social network, find the common followers or users both users are following.
 
-#### 3.2.6 Jaccard Similarity（GET）
+#### 3.2.6 Jaccard Similarity (GET)
 
-##### 3.2.6.1 功能介绍
+##### 3.2.6.1 Function Introduction
 
-计算两个顶点的jaccard similarity（两个顶点邻居的交集比上两个顶点邻居的并集）
+Compute the Jaccard similarity between two vertices (the intersection of the neighbors of the two vertices divided by the union of the neighbors of the two vertices).
 
 ###### Params
 
-- vertex：一个顶点id，必填项
-- other：另一个顶点id，必填项
-- direction：顶点向外发散的方向（OUT,IN,BOTH），选填项，默认是BOTH
-- label：边的类型，选填项，默认代表所有edge label
-- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
+- vertex: ID of one vertex, required.
+- other: ID of another vertex, required.
+- direction: Direction in which the vertex expands outward (OUT, IN, BOTH). Optional, default is BOTH.
+- label: Edge type. Optional, default represents all edge labels.
+- max_degree: Maximum number of adjacent edges to traverse for each vertex during the query process. Optional, default is 10000.
 
-##### 3.2.6.2 使用方法
+##### 3.2.6.2 Usage Method
 
 ###### Method & Url
 
@@ -708,31 +711,31 @@ GET http://localhost:8080/graphs/{graph}/traversers/jaccardsimilarity?vertex="1:
 }
 ```
 
-##### 3.2.6.3 适用场景
+##### 3.2.6.3 Use Cases
 
-用于评估两个点的相似性或者紧密度
+Used to evaluate the similarity or closeness between two vertices.
 
-#### 3.2.7 Jaccard Similarity（POST）
+#### 3.2.7 Jaccard Similarity (POST)
 
-##### 3.2.7.1 功能介绍
+##### 3.2.7.1 Function Introduction
 
-计算与指定顶点的jaccard similarity最大的N个点
+Compute the N vertices with the highest Jaccard similarity to a specified vertex.
 
-> jaccard similarity的计算方式为：两个顶点邻居的交集比上两个顶点邻居的并集
+> The Jaccard similarity is calculated as the intersection of the neighbors of the two vertices divided by the union of the neighbors of the two vertices.
 
 ###### Params
 
-- vertex：一个顶点id，必填项
-- 从起始点出发的Step，必填项，结构如下：
-	- direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
-	- labels：边的类型列表
-	- properties：通过属性的值过滤边
-	- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)
-	- skip_degree：用于设置查询过程中舍弃超级顶点的最小边数，即当某个顶点的邻接边数目大于 skip_degree 时，完全舍弃该顶点。选填项，如果开启时，需满足 `skip_degree >= max_degree` 约束，默认为0 (不启用)，表示不跳过任何点 (注意:  开启此配置后，遍历时会尝试访问一个顶点的 skip_degree 条边，而不仅仅是 max_degree 条边，这样有额外的遍历开销，对查询性能影响可能有较大影响，请确认理解后再开启)
-- top：返回一个起点的jaccard similarity中最大的top个，选填项，默认为100
-- capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
+- vertex: ID of a vertex, required.
+- Steps from the starting point, required. The structure is as follows:
+	- direction: Direction of the edges (OUT, IN, BOTH). Optional, default is BOTH.
+	- labels: List of edge types.
+	- properties: Filter edges based on property values.
+	- max_degree: Maximum number of adjacent edges to traverse for each vertex during the query process. Default is 10000. (Note: Prior to version 0.12, the parameter name inside "step" was "degree". Starting from version 0.12, it is unified as "max_degree" and still compatible with "degree" notation.)
+	- skip_degree: Used to set the minimum number of edges to skip super vertices during the query process. If the number of adjacent edges for a vertex is greater than skip_degree, the vertex is completely skipped. Optional, default is 0 (not enabled), which means no skipping. (Note: When this configuration is enabled, the traversal will attempt to access skip_degree edges of a vertex, not just max_degree edges. This incurs additional traversal overhead and may have a significant impact on query performance. Please enable it after understanding and confirming.)
+- top: Return the top N vertices with the highest Jaccard similarity for a starting vertex. Optional, default is 100.
+- capacity: Maximum number of vertices to be visited during the traversal process. Optional, default is 10000000.
 
-##### 3.2.7.2 使用方法
+##### 3.2.7.2 Usage Method
 
 ###### Method & Url
 
@@ -771,28 +774,28 @@ POST http://localhost:8080/graphs/{graph}/traversers/jaccardsimilarity
 }
 ```
 
-##### 3.2.7.3 适用场景
+##### 3.2.7.3 Use Cases
 
-用于在图中找出与指定顶点相似性最高的顶点
+Used to find the vertices in the graph that have the highest similarity to a specified vertex.
 
 #### 3.2.8 Shortest Path
 
-##### 3.2.8.1 功能介绍
+##### 3.2.8.1 Function Introduction
 
-根据起始顶点、目的顶点、方向、边的类型（可选）和最大深度，查找一条最短路径
+Find the shortest path between a starting vertex and a target vertex based on the direction, edge type (optional), and maximum depth.
 
 ###### Params
 
-- source：起始顶点id，必填项
-- target：目的顶点id，必填项
-- direction：起始顶点向外发散的方向（OUT,IN,BOTH），选填项，默认是BOTH
-- max_depth：最大步数，必填项
-- label：边的类型，选填项，默认代表所有edge label
-- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
-- skip_degree：用于设置查询过程中舍弃超级顶点的最小边数，即当某个顶点的邻接边数目大于 skip_degree 时，完全舍弃该顶点。选填项，如果开启时，需满足 `skip_degree >= max_degree` 约束，默认为0 (不启用)，表示不跳过任何点 (注意:  开启此配置后，遍历时会尝试访问一个顶点的 skip_degree 条边，而不仅仅是 max_degree 条边，这样有额外的遍历开销，对查询性能影响可能有较大影响，请确认理解后再开启)
-- capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
+- source: ID of the starting vertex, required.
+- target: ID of the target vertex, required.
+- direction: Direction in which the starting vertex expands (OUT, IN, BOTH). Optional, default is BOTH.
+- max_depth: Maximum number of steps, required.
+- label: Edge type, optional. Default represents all edge labels.
+- max_degree: Maximum number of adjacent edges to traverse for each vertex during the query process. Optional, default is 10000.
+- skip_degree: Used to set the minimum number of edges to skip super vertices during the query process. If the number of adjacent edges for a vertex is greater than skip_degree, the vertex is completely skipped. Optional, default is 0 (not enabled), which means no skipping. (Note: When this configuration is enabled, the traversal will attempt to access skip_degree edges of a vertex, not just max_degree edges. This incurs additional traversal overhead and may have a significant impact on query performance. Please enable it after understanding and confirming.)
+- capacity: Maximum number of vertices to be visited during the traversal process. Optional, default is 10000000.
 
-##### 3.2.8.2 使用方法
+##### 3.2.8.2 Usage Method
 
 ###### Method & Url
 
@@ -818,31 +821,31 @@ GET http://localhost:8080/graphs/{graph}/traversers/shortestpath?source="1:marko
 }
 ```
 
-##### 3.2.8.3 适用场景
+##### 3.2.8.3 Use Cases
 
-查找两个顶点间的最短路径，例如：
+Used to find the shortest path between two vertices, for example:
 
-- 社交关系网中，查找两个用户有关系的最短路径，即最近的朋友关系链
-- 设备关联网络中，查找两个设备最短的关联关系
+- In a social network, finding the shortest path between two users, representing the closest friend relationship chain.
+- In a device association network, finding the shortest association relationship between two devices.
 
 #### 3.2.9 All Shortest Paths
 
-##### 3.2.9.1 功能介绍
+##### 3.2.9.1 Function Introduction
 
-根据起始顶点、目的顶点、方向、边的类型（可选）和最大深度，查找两点间所有的最短路径
+Find all shortest paths between a starting vertex and a target vertex based on the direction, edge type (optional), and maximum depth.
 
 ###### Params
 
-- source：起始顶点id，必填项
-- target：目的顶点id，必填项
-- direction：起始顶点向外发散的方向（OUT,IN,BOTH），选填项，默认是BOTH
-- max_depth：最大步数，必填项
-- label：边的类型，选填项，默认代表所有edge label
-- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
-- skip_degree：用于设置查询过程中舍弃超级顶点的最小边数，即当某个顶点的邻接边数目大于 skip_degree 时，完全舍弃该顶点。选填项，如果开启时，需满足 `skip_degree >= max_degree` 约束，默认为0 (不启用)，表示不跳过任何点 (注意:  开启此配置后，遍历时会尝试访问一个顶点的 skip_degree 条边，而不仅仅是 max_degree 条边，这样有额外的遍历开销，对查询性能影响可能有较大影响，请确认理解后再开启)
-- capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
+- source: ID of the starting vertex, required.
+- target: ID of the target vertex, required.
+- direction: Direction in which the starting vertex expands (OUT, IN, BOTH). Optional, default is BOTH.
+- max_depth: Maximum number of steps, required.
+- label: Edge type, optional. Default represents all edge labels.
+- max_degree: Maximum number of adjacent edges to traverse for each vertex during the query process. Optional, default is 10000.
+- skip_degree: Used to set the minimum number of edges to skip super vertices during the query process. If the number of adjacent edges for a vertex is greater than skip_degree, the vertex is completely skipped. Optional, default is 0 (not enabled), which means no skipping. (Note: When this configuration is enabled, the traversal will attempt to access skip_degree edges of a vertex, not just max_degree edges. This incurs additional traversal overhead and may have a significant impact on query performance. Please enable it after understanding and confirming.)
+- capacity: Maximum number of vertices to be visited during the traversal process. Optional, default is 10000000.
 
-##### 3.2.9.2 使用方法
+##### 3.2.9.2 Usage Method
 
 ###### Method & Url
 
@@ -881,32 +884,32 @@ GET http://localhost:8080/graphs/{graph}/traversers/allshortestpaths?source="A"&
 }
 ```
 
-##### 3.2.9.3 适用场景
+##### 3.2.9.3 Use Cases
 
-查找两个顶点间的所有最短路径，例如：
+Used to find all shortest paths between two vertices, for example:
 
-- 社交关系网中，查找两个用户有关系的全部最短路径，即最近的朋友关系链
-- 设备关联网络中，查找两个设备全部的最短关联关系
+- In a social network, finding all shortest paths between two users, representing all the closest friend relationship chains.
+- In a device association network, finding all shortest association relationships between two devices.
 
 #### 3.2.10 Weighted Shortest Path
 
-##### 3.2.10.1 功能介绍
+##### 3.2.10.1 Function Introduction
 
-根据起始顶点、目的顶点、方向、边的类型（可选）和最大深度，查找一条带权最短路径
+Find a weighted shortest path between a starting vertex and a target vertex based on the direction, edge type (optional), maximum depth, and edge weight property.
 
 ###### Params
 
-- source：起始顶点id，必填项
-- target：目的顶点id，必填项
-- direction：起始顶点向外发散的方向（OUT,IN,BOTH），选填项，默认是BOTH
-- label：边的类型，选填项，默认代表所有edge label
-- weight：边的权重属性，必填项，必须是数字类型的属性
-- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
-- skip_degree：用于设置查询过程中舍弃超级顶点的最小边数，即当某个顶点的邻接边数目大于 skip_degree 时，完全舍弃该顶点。选填项，如果开启时，需满足 `skip_degree >= max_degree` 约束，默认为0 (不启用)，表示不跳过任何点 (注意:  开启此配置后，遍历时会尝试访问一个顶点的 skip_degree 条边，而不仅仅是 max_degree 条边，这样有额外的遍历开销，对查询性能影响可能有较大影响，请确认理解后再开启)
-- capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
-- with_vertex：true表示返回结果包含完整的顶点信息（路径中的全部顶点），false时表示只返回顶点id，选填项，默认为false
+- source: ID of the starting vertex, required.
+- target: ID of the target vertex, required.
+- direction: Direction in which the starting vertex expands (OUT, IN, BOTH). Optional, default is BOTH.
+- label: Edge type, optional. Default represents all edge labels.
+- weight: Edge weight property, required. It must be a numeric property.
+- max_degree: Maximum number of adjacent edges to traverse for each vertex during the query process. Optional, default is 10000.
+- skip_degree: Used to set the minimum number of edges to skip super vertices during the query process. If the number of adjacent edges for a vertex is greater than skip_degree, the vertex is completely skipped. Optional, default is 0 (not enabled), which means no skipping. (Note: When this configuration is enabled, the traversal will attempt to access skip_degree edges of a vertex, not just max_degree edges. This incurs additional traversal overhead and may have a significant impact on query performance. Please enable it after understanding and confirming.)
+- capacity: Maximum number of vertices to be visited during the traversal process. Optional, default is 10000000.
+- with_vertex: true to include complete vertex information (all vertices in the path) in the result, false to only return vertex IDs. Optional, default is false.
 
-##### 3.2.10.2 使用方法
+##### 3.2.10.2 Usage Method
 
 ###### Method & Url
 
@@ -967,31 +970,31 @@ GET http://localhost:8080/graphs/{graph}/traversers/weightedshortestpath?source=
 }
 ```
 
-##### 3.2.10.3 适用场景
+##### 3.2.10.3 Use Cases
 
-查找两个顶点间的带权最短路径，例如：
+Used to find the weighted shortest path between two vertices, for example:
 
-- 交通线路中查找从A城市到B城市花钱最少的交通方式
+- In a transportation network, finding the transportation method that requires the least cost from city A to city B.
 
 #### 3.2.11 Single Source Shortest Path
 
-##### 3.2.11.1 功能介绍
+##### 3.2.11.1 Function Introduction
 
-从一个顶点出发，查找该点到图中其他顶点的最短路径（可选是否带权重）
+Starting from a vertex, find the shortest paths from that vertex to other vertices in the graph (optional with weight).
 
 ###### Params
 
-- source：起始顶点id，必填项
-- direction：起始顶点向外发散的方向（OUT,IN,BOTH），选填项，默认是BOTH
-- label：边的类型，选填项，默认代表所有edge label
-- weight：边的权重属性，选填项，必须是数字类型的属性，如果不填或者虽然填了但是边没有该属性，则权重为1.0
-- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
-- skip_degree：用于设置查询过程中舍弃超级顶点的最小边数，即当某个顶点的邻接边数目大于 skip_degree 时，完全舍弃该顶点。选填项，如果开启时，需满足 `skip_degree >= max_degree` 约束，默认为0 (不启用)，表示不跳过任何点 (注意:  开启此配置后，遍历时会尝试访问一个顶点的 skip_degree 条边，而不仅仅是 max_degree 条边，这样有额外的遍历开销，对查询性能影响可能有较大影响，请确认理解后再开启)
-- capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
-- limit：查询到的目标顶点个数，也是返回的最短路径的条数，选填项，默认为10
-- with_vertex：true表示返回结果包含完整的顶点信息（路径中的全部顶点），false时表示只返回顶点id，选填项，默认为false
+- source: ID of the starting vertex, required.
+- direction: Direction in which the starting vertex expands (OUT, IN, BOTH). Optional, default is BOTH.
+- label: Edge type, optional. Default represents all edge labels.
+- weight: Edge weight property, optional. It must be a numeric property. If not provided or the edges don't have this property, the weight is considered as 1.0.
+- max_degree: Maximum number of adjacent edges to traverse for each vertex during the query process. Optional, default is 10000.
+- skip_degree: Used to set the minimum number of edges to skip super vertices during the query process. If the number of adjacent edges for a vertex is greater than skip_degree, the vertex is completely skipped. Optional, default is 0 (not enabled), which means no skipping. (Note: When this configuration is enabled, the traversal will attempt to access skip_degree edges of a vertex, not just max_degree edges. This incurs additional traversal overhead and may have a significant impact on query performance. Please enable it after understanding and confirming.)
+- capacity: Maximum number of vertices to be visited during the traversal process. Optional, default is 10000000.
+- limit: Number of target vertices to be queried and the number of shortest paths to be returned. Optional, default is 10.
+- with_vertex: true to include complete vertex information (all vertices in the path) in the result, false to only return vertex IDs. Optional, default is false.
 
-##### 3.2.11.2 使用方法
+##### 3.2.11.2 Usage Method
 
 ###### Method & Url
 
@@ -1113,37 +1116,37 @@ GET http://localhost:8080/graphs/{graph}/traversers/singlesourceshortestpath?sou
 }
 ```
 
-##### 3.2.11.3 适用场景
+##### 3.2.11.3 Use Cases
 
-查找从一个点出发到其他顶点的带权最短路径，比如：
+Used to find the weighted shortest path from one vertex to other vertices, for example:
 
-- 查找从北京出发到全国其他所有城市的耗时最短的乘车方案
+- Finding the shortest travel time by bus from Beijing to all other cities in the country.
 
 #### 3.2.12 Multi Node Shortest Path
 
-##### 3.2.12.1 功能介绍
+##### 3.2.12.1 Function Introduction
 
-查找指定顶点集两两之间的最短路径
+Finds the shortest paths between pairs of specified vertices.
 
 ###### Params
 
-- vertices：定义起始顶点，必填项，指定方式包括：
-	- ids：通过顶点id列表提供起始顶点
-	- label和properties：如果没有指定ids，则使用label和properties的联合条件查询起始顶点
-		- label：顶点的类型
-		- properties：通过属性的值查询起始顶点
-		> 注意：properties中的属性值可以是列表，表示只要key对应的value在列表中就可以
-- step：表示从起始顶点到终止顶点走过的路径，必填项，Step的结构如下：
-	- direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
-	- labels：边的类型列表
-	- properties：通过属性的值过滤边
-	- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)
-	- skip_degree：用于设置查询过程中舍弃超级顶点的最小边数，即当某个顶点的邻接边数目大于 skip_degree 时，完全舍弃该顶点。选填项，如果开启时，需满足 `skip_degree >= max_degree` 约束，默认为0 (不启用)，表示不跳过任何点 (注意:  开启此配置后，遍历时会尝试访问一个顶点的 skip_degree 条边，而不仅仅是 max_degree 条边，这样有额外的遍历开销，对查询性能影响可能有较大影响，请确认理解后再开启)
-- max_depth：步数，必填项
-- capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
-- with_vertex：true表示返回结果包含完整的顶点信息（路径中的全部顶点），false时表示只返回顶点id，选填项，默认为false
+- vertices: Defines the starting vertices, required. It can be specified in the following ways:
+	- ids: Provide a list of vertex IDs as starting vertices.
+	- label and properties: If no IDs are specified, use the combined conditions of label and properties to query the starting vertices.
+		- label: Vertex type.
+		- properties: Query the starting vertices based on property values.
+		> Note: Property values in properties can be a list, indicating that the value of the key can be any value in the list.
+- step: Represents the path from the starting vertices to the destination vertices, required. The structure of the step is as follows:
+	- direction: Represents the direction of the edges (OUT, IN, BOTH). Default is BOTH.
+	- labels: List of edge types.
+	- properties: Filters the edges based on property values.
+	- max_degree: Maximum number of adjacent edges to traverse for each vertex during the query process. Default is 10000. (Note: Before version 0.12, the step only supported "degree" as the parameter name. Starting from version 0.12, "max_degree" is used uniformly, and "degree" is still supported for backward compatibility.)
+	- skip_degree: Used to set the minimum number of edges to skip super vertices during the query process. If the number of adjacent edges for a vertex is greater than skip_degree, the vertex is completely skipped. Optional, default is 0 (not enabled), which means no skipping. (Note: When this configuration is enabled, the traversal will attempt to access skip_degree edges of a vertex, not just max_degree edges. This incurs additional traversal overhead and may have a significant impact on query performance. Please enable it after understanding and confirming.)
+- max_depth: Number of steps, required.
+- capacity: Maximum number of vertices to be visited during the traversal process. Optional, default is 10000000.
+- with_vertex: true to include complete vertex information (all vertices in the path) in the result, false to only return vertex IDs. Optional, default is false.
 
-##### 3.2.12.2 使用方法
+##### 3.2.12.2 Usage Method
 
 ###### Method & Url
 
@@ -1348,30 +1351,30 @@ POST http://localhost:8080/graphs/{graph}/traversers/multinodeshortestpath
 }
 ```
 
-##### 3.2.12.3 适用场景
+##### 3.2.12.3 Use Cases
 
-查找多个点之间的最短路径，比如：
+Used to find the shortest paths between multiple vertices, for example:
 
-- 查找多个公司和法人之间的最短路径
+- Finding the shortest paths between multiple companies and their legal representatives.
 
-#### 3.2.13 Paths （GET，基础版）
+#### 3.2.13 Paths (GET, Basic Version)
 
-##### 3.2.13.1 功能介绍
+##### 3.2.13.1 Function Introduction
 
-根据起始顶点、目的顶点、方向、边的类型（可选）和最大深度等条件查找所有路径
+Finds all paths based on conditions such as the starting vertex, destination vertex, direction, edge types (optional), and maximum depth.
 
 ###### Params
 
-- source：起始顶点id，必填项
-- target：目的顶点id，必填项
-- direction：起始顶点向外发散的方向（OUT,IN,BOTH），选填项，默认是BOTH
-- label：边的类型，选填项，默认代表所有edge label
-- max_depth：步数，必填项
-- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
-- capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
-- limit：返回的路径的最大数目，选填项，默认为10
+- source: ID of the starting vertex, required.
+- target: ID of the destination vertex, required.
+- direction: Direction in which the starting vertex expands (OUT, IN, BOTH). Optional, default is BOTH.
+- label: Edge type. Optional, default represents all edge labels.
+- max_depth: Number of steps, required.
+- max_degree: Maximum number of adjacent edges to traverse for each vertex during the query process. Optional, default is 10000.
+- capacity: Maximum number of vertices to be visited during the traversal process. Optional, default is 10000000.
+- limit: Maximum number of paths to be returned. Optional, default is 10.
 
-##### 3.2.13.2 使用方法
+##### 3.2.13.2 Usage Method
 
 ###### Method & Url
 
@@ -1407,47 +1410,46 @@ GET http://localhost:8080/graphs/{graph}/traversers/paths?source="1:marko"&targe
 }
 ```
 
-##### 3.2.13.3 适用场景
+##### 3.2.13.3 Use Cases
 
-查找两个顶点间的所有路径，例如：
+Used to find all paths between two vertices, for example:
 
-- 社交网络中，查找两个用户所有可能的关系路径
-- 设备关联网络中，查找两个设备之间所有的关联路径
+- In a social network, finding all possible relationship paths between two users.
+- In a device association network, finding all associated paths between two devices.
 
-#### 3.2.14 Paths （POST，高级版）
+#### 3.2.14 Paths (POST, Advanced Version)
 
-##### 3.2.14.1 功能介绍
+##### 3.2.14.1 Function Introduction
 
-根据起始顶点、目的顶点、步骤（step）和最大深度等条件查找所有路径
+Finds all paths based on conditions such as the starting vertex, destination vertex, steps (step), and maximum depth.
 
 ###### Params
 
-- sources：定义起始顶点，必填项，指定方式包括：
-	- ids：通过顶点id列表提供起始顶点
-	- label和properties：如果没有指定ids，则使用label和properties的联合条件查询起始顶点
-		- label：顶点的类型
-		- properties：通过属性的值查询起始顶点
-		> 注意：properties中的属性值可以是列表，表示只要key对应的value在列表中就可以
-- targets：定义终止顶点，必填项，指定方式包括：
-	- ids：通过顶点id列表提供终止顶点
-	- label和properties：如果没有指定ids，则使用label和properties的联合条件查询终止顶点
-		- label：顶点的类型
-		- properties：通过属性的值查询终止顶点
-		> 注意：properties中的属性值可以是列表，表示只要key对应的value在列表中就可以
-- step：表示从起始顶点到终止顶点走过的路径，必填项，Step的结构如下：
-	- direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
-	- labels：边的类型列表
-	- properties：通过属性的值过滤边
-	- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)
-	- skip_degree：用于设置查询过程中舍弃超级顶点的最小边数，即当某个顶点的邻接边数目大于 skip_degree 时，完全舍弃该顶点。选填项，如果开启时，需满足 `skip_degree >= max_degree` 约束，默认为0 (不启用)，表示不跳过任何点 (注意:  开启此配置后，遍历时会尝试访问一个顶点的 skip_degree 条边，而不仅仅是 max_degree 条边，这样有额外的遍历开销，对查询性能影响可能有较大影响，请确认理解后再开启)
-- max_depth：步数，必填项
-- nearest：nearest为true时，代表起始顶点到达结果顶点的最短路径长度为depth，不存在更短的路径；nearest为false时，代表起始顶点到结果顶点有一条长度为depth的路径（未必最短且可以有环），选填项，默认为true
-- capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
-- limit：返回的路径的最大数目，选填项，默认为10
-- with_vertex：true表示返回结果包含完整的顶点信息（路径中的全部顶点），false时表示只返回顶点id，选填项，默认为false
+- sources: Defines the starting vertices, required. The specification methods include:
+	- ids: Provide the starting vertices through a list of vertex IDs.
+	- label and properties: If no IDs are specified, use the label and properties as combined conditions to query the starting vertices.
+		- label: Vertex type.
+		- properties: Query the starting vertices based on the values of their properties.
+		> Note: The property values in properties can be a list, indicating that any value corresponding to the key is acceptable.
+- targets: Defines the destination vertices, required. The specification methods include:
+	- ids: Provide the destination vertices through a list of vertex IDs.
+	- label and properties: If no IDs are specified, use the label and properties as combined conditions to query the destination vertices.
+		- label: Vertex type.
+		- properties: Query the destination vertices based on the values of their properties.
+		> Note: The property values in properties can be a list, indicating that any value corresponding to the key is acceptable.
+- step: Represents the path from the starting vertex to the destination vertex, required. The structure of Step is as follows:
+	- direction: Represents the direction of edges (OUT, IN, BOTH). The default is BOTH.
+	- labels: List of edge types.
+	- properties: Filters edges based on property values.
+	- max_degree: Maximum number of adjacent edges to traverse for each vertex during the query process. Default is 10000. (Note: Prior to version 0.12, step only supported degree as a parameter name. Starting from version 0.12, max_degree is used uniformly and degree writing is backward compatible.)
+	- skip_degree: Used to set the minimum number of edges to be discarded for super vertices during the query process. When the number of adjacent edges for a vertex is greater than skip_degree, the vertex is completely discarded. Optional, if enabled, it must satisfy the constraint `skip_degree >= max_degree`. Default is 0 (not enabled), which means no points are skipped. (Note: When this configuration is enabled, the traversal will attempt to visit skip_degree edges of a vertex, not just max_degree edges. This incurs additional traversal overhead and may have a significant impact on query performance. Please make sure to understand before enabling it.)
+- max_depth: Number of steps, required.
+- nearest: When nearest is true, it means the shortest path length from the starting vertex to the result vertex is depth, and there is no shorter path. When nearest is false, it means there is a path of length depth from the starting vertex to the result vertex (not necessarily the shortest path and can have cycles). Optional, default is true.
+- capacity: Maximum number of vertices to be visited during the traversal process. Optional, default is 10000000.
+- limit: Maximum number of paths to be returned. Optional, default is 10.
+- with_vertex: When true, the results include complete vertex information (all vertices in the path). When false, only the vertex IDs are returned. Optional, default is false.
 
-
-##### 3.2.14.2 使用方法
+##### 3.2.14.2 Usage Method
 
 ###### Method & Url
 
@@ -1509,44 +1511,44 @@ POST http://localhost:8080/graphs/{graph}/traversers/paths
 
 ```
 
-##### 3.2.14.3 适用场景
+##### 3.2.14.3 Use Cases
 
-查找两个顶点间的所有路径，例如：
+Used to find all paths between two vertices, for example:
 
-- 社交网络中，查找两个用户所有可能的关系路径
-- 设备关联网络中，查找两个设备之间所有的关联路径
+- In a social network, finding all possible relationship paths between two users.
+- In a device association network, finding all associated paths between two devices.
 
 #### 3.2.15 Customized Paths
 
-##### 3.2.15.1 功能介绍
+##### 3.2.15.1 Function Introduction
 
-根据一批起始顶点、边规则（包括方向、边的类型和属性过滤）和最大深度等条件查找符合条件的所有的路径
+Finds all paths that meet the specified conditions based on a batch of starting vertices, edge rules (including direction, edge types, and property filters), and maximum depth.
 
 ###### Params
 
-- sources：定义起始顶点，必填项，指定方式包括：
-	- ids：通过顶点id列表提供起始顶点
-	- label和properties：如果没有指定ids，则使用label和properties的联合条件查询起始顶点
-		- label：顶点的类型
-		- properties：通过属性的值查询起始顶点
-		> 注意：properties中的属性值可以是列表，表示只要key对应的value在列表中就可以
-- steps：表示从起始顶点走过的路径规则，是一组Step的列表。必填项。每个Step的结构如下：
-	- direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
-	- labels：边的类型列表
-	- properties：通过属性的值过滤边
-	- weight_by：根据指定的属性计算边的权重，sort_by不为NONE时有效，与default_weight互斥
-	- default_weight：当边没有属性作为权重计算值时，采取的默认权重，sort_by不为NONE时有效，与weight_by互斥
-	- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)
-	- sample：当需要对某个step的符合条件的边进行采样时设置，-1表示不采样，默认为采样100
-- sort_by：根据路径的权重排序，选填项，默认为NONE：
-	- NONE表示不排序，默认值
-	- INCR表示按照路径权重的升序排序
-	- DECR表示按照路径权重的降序排序
-- capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
-- limit：返回的路径的最大数目，选填项，默认为10
-- with_vertex：true表示返回结果包含完整的顶点信息（路径中的全部顶点），false时表示只返回顶点id，选填项，默认为false
+- sources: Defines the starting vertices, required. The specification methods include:
+	- ids: Provide the starting vertices through a list of vertex IDs.
+	- label and properties: If no IDs are specified, use the label and properties as combined conditions to query the starting vertices.
+		- label: Vertex type.
+		- properties: Query the starting vertices based on the values of their properties.
+		> Note: The property values in properties can be a list, indicating that any value corresponding to the key is acceptable.
+- steps: Represents the path rules traversed from the starting vertices and is a list of Steps. Required. The structure of each Step is as follows:
+	- direction: Represents the direction of edges (OUT, IN, BOTH). The default is BOTH.
+	- labels: List of edge types.
+	- properties: Filters edges based on property values.
+	- weight_by: Calculates the weight of edges based on the specified property. It is effective when sort_by is not NONE and is mutually exclusive with default_weight.
+	- default_weight: The default weight to be used when there is no property to calculate the weight of edges. It is effective when sort_by is not NONE and is mutually exclusive with weight_by.
+	- max_degree: Maximum number of adjacent edges to traverse for each vertex during the query process. Default is 10000. (Note: Prior to version 0.12, step only supported degree as a parameter name. Starting from version 0.12, max_degree is used uniformly and degree writing is backward compatible.)
+	- sample: Used when sampling is needed for the edges that meet the conditions of a specific step. -1 means no sampling, and the default is to sample 100 edges.
+- sort_by: Sorts the paths based on their weights. Optional, default is NONE:
+	- NONE: No sorting, default value.
+	- INCR: Sorts in ascending order based on path weights.
+	- DECR: Sorts in descending order based on path weights.
+- capacity: Maximum number of vertices to be visited during the traversal process. Optional, default is 10000000.
+- limit: Maximum number of paths to be returned. Optional, default is 10.
+- with_vertex: When true, the results include complete vertex information (all vertices in the path). When false, only the vertex IDs are returned. Optional, default is false.
 
-##### 3.2.15.2 使用方法
+##### 3.2.15.2 Usage Method
 
 ###### Method & Url
 
@@ -1696,46 +1698,48 @@ POST http://localhost:8080/graphs/{graph}/traversers/customizedpaths
 }
 ```
 
-##### 3.2.15.3 适用场景
+##### 3.2.15.3 Use Cases
 
-适合查找各种复杂的路径集合，例如：
+Suitable for finding various complex sets of paths, for example:
 
-- 社交网络中，查找看过张艺谋所导演的电影的用户关注的大V的路径（张艺谋--->电影---->用户--->大V）
-- 风控网络中，查找多个高风险用户的直系亲属的朋友的路径（高风险用户--->直系亲属--->朋友）
+- In a social network, finding the paths from users who have watched movies directed by Zhang Yimou to the influencers they follow (Zhang Yimou ---> Movie ---> User ---> Influencer).
+- In a risk control network, finding the paths from multiple high-risk users to the friends of their direct relatives (High-risk user ---> Direct relative ---> Friend).
 
 #### 3.2.16 Template Paths
 
-##### 3.2.16.1 功能介绍
+##### 3.2.16.1 Function Introduction
 
-根据一批起始顶点、边规则（包括方向、边的类型和属性过滤）和最大深度等条件查找符合条件的所有的路径
+Finds all paths that meet the specified conditions based on a batch of starting vertices, edge rules (including direction, edge types, and property filters), and maximum depth.
 
 ###### Params
 
-- sources：定义起始顶点，必填项，指定方式包括：
-	- ids：通过顶点id列表提供起始顶点
-	- label和properties：如果没有指定ids，则使用label和properties的联合条件查询起始顶点
-		- label：顶点的类型
-		- properties：通过属性的值查询起始顶点
-		> 注意：properties中的属性值可以是列表，表示只要key对应的value在列表中就可以
-- targets：定义终止顶点，必填项，指定方式包括：
-	- ids：通过顶点id列表提供终止顶点
-	- label和properties：如果没有指定ids，则使用label和properties的联合条件查询终止顶点
-		- label：顶点的类型
-		- properties：通过属性的值查询终止顶点
-		> 注意：properties中的属性值可以是列表，表示只要key对应的value在列表中就可以
-- steps：表示从起始顶点走过的路径规则，是一组Step的列表。必填项。每个Step的结构如下：
-	- direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
-	- labels：边的类型列表
-	- properties：通过属性的值过滤边
-	- max_times：当前step可以重复的次数，当为N时，表示从起始顶点可以经过当前step 1-N 次
-	- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)
-	- skip_degree：用于设置查询过程中舍弃超级顶点的最小边数，即当某个顶点的邻接边数目大于 skip_degree 时，完全舍弃该顶点。选填项，如果开启时，需满足 `skip_degree >= max_degree` 约束，默认为0 (不启用)，表示不跳过任何点 (注意:  开启此配置后，遍历时会尝试访问一个顶点的 skip_degree 条边，而不仅仅是 max_degree 条边，这样有额外的遍历开销，对查询性能影响可能有较大影响，请确认理解后再开启)
-- with_ring：Boolean值，true表示包含环路；false表示不包含环路，默认为false
-- capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
-- limit：返回的路径的最大数目，选填项，默认为10
-- with_vertex：true表示返回结果包含完整的顶点信息（路径中的全部顶点），false时表示只返回顶点id，选填项，默认为false
+- sources: Defines the starting vertices, required. The specification methods include:
+	- ids: Provide the starting vertices through a list of vertex IDs.
+	- label and properties: If no IDs are specified, use the label and properties as combined conditions to query the starting vertices.
+		- label: Vertex type.
+		- properties: Query the starting vertices based on the values of their properties.
+		> Note: The property values in properties can be a list, indicating that any value corresponding to the key is acceptable.
+- targets: Defines the ending vertices, required. The specification methods include:
+	- ids: Provide the ending vertices through a list of vertex IDs.
+	- label and properties: If no IDs are specified, use the label and properties as combined conditions to query the ending vertices.
+		- label: Vertex type.
+		- properties: Query the ending vertices based on the values of their properties.
+		> Note: The property values in properties can be a list, indicating that any value corresponding to the key is acceptable.
+- steps: Represents the path rules traversed from the starting vertices and is a list of Steps. Required. The structure of each Step is as follows:
+	- direction: Represents the direction of edges (OUT, IN, BOTH). The default is BOTH.
+	- labels: List of edge types.
+	- properties: Filters edges based on property values.
+	- max_times: The number of times the current step can be repeated. When set to N, it means the starting vertices can pass through the current step 1-N times.
+	- max_degree: Maximum number of adjacent edges to traverse for each vertex during the query process. Default is 10000. (Note: Prior to version 0.12, step only supported degree as a parameter name. Starting from version 0.12, max_degree is used uniformly and degree writing is backward compatible.)
+	- skip_degree: Used to set the minimum number of edges to discard super vertices during the query process. When the number of adjacent edges of a vertex is greater than skip_degree, the vertex is completely discarded. Optional. If enabled, it must satisfy the `skip_degree >= max_degree` constraint. Default is 0 (not enabled), which means no points are skipped. (Note: After enabling this configuration, traversing will attempt to access a vertex's skip_degree edges, not just max_degree edges. This incurs additional traversal overhead and may have a significant impact on query performance. Please ensure understanding before enabling.)
+- with_ring: Boolean value, true to include cycles; false to exclude cycles. Default is false.
+- capacity: Maximum number of vertices to be visited during the traversal process. Optional, default is 10000000.
+- limit: Maximum number of paths to be returned. Optional, default is 10.
+- with_vertex: When true, the results include complete vertex information (all vertices in the path). When false, only the vertex IDs are returned. Optional, default is
 
-##### 3.2.16.2 使用方法
+ false.
+
+##### 3.2.16.2 Usage Method
 
 ###### Method & Url
 
@@ -1878,28 +1882,28 @@ POST http://localhost:8080/graphs/{graph}/traversers/templatepaths
 
 ```
 
-##### 3.2.16.3 适用场景
+##### 3.2.16.3 Use Cases
 
-适合查找各种复杂的模板路径，比如personA -(朋友)-> personB -(同学)-> personC，其中"朋友"和"同学"边可以分别是最多3层和4层的情况
+Suitable for finding various complex template paths, such as personA -(Friend)-> personB -(Classmate)-> personC, where the "Friend" and "Classmate" edges can have a maximum depth of 3 and 4 layers, respectively.
 
 #### 3.2.17 Crosspoints
 
-##### 3.2.17.1 功能介绍
+##### 3.2.17.1 Function Introduction
 
-根据起始顶点、目的顶点、方向、边的类型（可选）和最大深度等条件查找相交点
+Finds the intersection points based on the specified conditions, including starting vertices, destination vertices, direction, edge types (optional), and maximum depth.
 
 ###### Params
 
-- source：起始顶点id，必填项
-- target：目的顶点id，必填项
-- direction：起始顶点到目的顶点的方向, 目的点到起始点是反方向，BOTH时不考虑方向（OUT,IN,BOTH），选填项，默认是BOTH
-- label：边的类型，选填项，默认代表所有edge label
-- max_depth：步数，必填项
-- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
-- capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
-- limit：返回的交点的最大数目，选填项，默认为10
+- source: ID of the starting vertex, required.
+- target: ID of the destination vertex, required.
+- direction: The direction from the starting vertex to the destination vertex. The reverse direction is used from the destination vertex to the starting vertex. When set to BOTH, the direction is not considered (OUT, IN, BOTH). Optional, default is BOTH.
+- label: Edge type, optional. Default represents all edge labels.
+- max_depth: Number of steps, required.
+- max_degree: Maximum number of adjacent edges to traverse for each vertex during the query process. Optional, default is 10000.
+- capacity: Maximum number of vertices to be visited during the traversal process. Optional, default is 10000000.
+- limit: Maximum number of intersection points to be returned. Optional, default is 10.
 
-##### 3.2.17.2 使用方法
+##### 3.2.17.2 Usage Method
 
 ###### Method & Url
 
@@ -1930,45 +1934,46 @@ GET http://localhost:8080/graphs/{graph}/traversers/crosspoints?source="2:lop"&t
 }
 ```
 
-##### 3.2.17.3 适用场景
+##### 3.2.17.3 Use Cases
 
-查找两个顶点的交点及其路径，例如：
+Used to find the intersection points and their paths between two vertices, such as:
 
-- 社交网络中，查找两个用户共同关注的话题或者大V
-- 家族关系中，查找共同的祖先
+- In a social network, finding the topics or influencers that two users have in common.
+- In a family relationship, finding common ancestors.
 
 #### 3.2.18 Customized Crosspoints
 
-##### 3.2.18.1 功能介绍
+##### 3.2.18.1 Function Introduction
 
-根据一批起始顶点、多种边规则（包括方向、边的类型和属性过滤）和最大深度等条件查找符合条件的所有的路径终点的交集
+Finds the intersection of destination vertices that satisfy the specified conditions, including starting vertices, multiple edge rules (including direction, edge type, and property filters), and maximum depth.
 
 ###### Params
 
-- sources：定义起始顶点，必填项，指定方式包括：
-	- ids：通过顶点id列表提供起始顶点
-	- label和properties：如果没有指定ids，则使用label和properties的联合条件查询起始顶点
-		- label：顶点的类型
-		- properties：通过属性的值查询起始顶点
-		> 注意：properties中的属性值可以是列表，表示只要key对应的value在列表中就可以
+- sources: Defines the starting vertices, required. The specified options include:
+	- ids: Provides a list of vertex IDs as starting vertices.
+	- label and properties: If no IDs are specified, uses the combined conditions of label and properties to query the starting vertices.
+		- label: Type of the vertex.
+		- properties: Queries the starting vertices based on property values.
+		> Note: Property values in properties can be a list, indicating that the value of the key can be any item in the list.
 
-- path_patterns：表示从起始顶点走过的路径规则，是一组规则的列表。必填项。每个规则是一个PathPattern
-	- 每个PathPattern是一组Step列表，每个Step结构如下：
-		- direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
-		- labels：边的类型列表
-		- properties：通过属性的值过滤边
-		- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)
-		- skip_degree：用于设置查询过程中舍弃超级顶点的最小边数，即当某个顶点的邻接边数目大于 skip_degree 时，完全舍弃该顶点。选填项，如果开启时，需满足 `skip_degree >= max_degree` 约束，默认为0 (不启用)，表示不跳过任何点 (注意:  开启此配置后，遍历时会尝试访问一个顶点的 skip_degree 条边，而不仅仅是 max_degree 条边，这样有额外的遍历开销，对查询性能影响可能有较大影响，请确认理解后再开启)
-- capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
-- limit：返回的路径的最大数目，选填项，默认为10
-- with_path：true表示返回交点所在的路径，false表示不返回交点所在的路径，选填项，默认为false
-- with_vertex，选填项，默认为false：
-	- true表示返回结果包含完整的顶点信息（路径中的全部顶点）
-		- with_path为true时，返回所有路径中的顶点的完整信息
-		- with_path为false时，返回所有交点的完整信息
-	- false时表示只返回顶点id
+- path_patterns: Represents the path rules to be followed from the starting vertices. It is a list of rules. Required. Each rule is a PathPattern.
+	- Each PathPattern consists of a list of steps, where each step has the following structure:
+		- direction: Indicates the direction of the edge (OUT, IN, BOTH). Default is BOTH.
+		- labels: List of edge types.
+		- properties: Filters the edges based on property values.
+		- max_degree: Maximum number of adjacent edges to traverse for each vertex during the query process. Default is 10000.
+		- skip_degree: Sets the minimum number of edges to discard super vertices during the query process. If the number of adjacent edges for a vertex is greater than skip_degree, the vertex is completely discarded. Optional. If enabled, it must satisfy the constraint `skip_degree >= max_degree`. Default is 0 (not enabled), which means no vertices are skipped. Note: When this configuration is enabled, the traversal process will attempt to visit skip_degree edges of a vertex, not just max_degree edges. This incurs additional traversal overhead and may significantly impact query performance. Please make sure you understand it before enabling.
 
-##### 3.2.18.2 使用方法
+- capacity: Maximum number of vertices to be visited during the traversal process. Optional. Default is 10000000.
+- limit: Maximum number of paths to be returned. Optional. Default is 10.
+- with_path: When set to true, returns the paths where the intersection points are located. When set to false, does not return the paths. Optional. Default is false.
+- with_vertex: Optional. Default is false.
+	- When set to true, the result includes complete vertex information (all vertices in the paths):
+		- When with_path is true, it returns complete information of all vertices in the paths.
+		- When with_path is false, it returns complete information of all intersection points.
+	- When set to false, only the vertex IDs are returned.
+
+##### 3.2.18.2 Usage Method
 
 ###### Method & Url
 
@@ -2113,32 +2118,32 @@ POST http://localhost:8080/graphs/{graph}/traversers/customizedcrosspoints
 }
 ```
 
-##### 3.2.18.3 适用场景
+##### 3.2.18.3 Use Cases
 
-查询一组顶点通过多种路径在终点有交集的情况。例如：
+Used to query a group of vertices that have intersections at the destination through multiple paths. For example:
 
-- 在商品图谱中，多款手机、学习机、游戏机通过不同的低级别的类目路径，最终都属于一级类目的电子设备
+- In a product knowledge graph, multiple models of smartphones, learning devices, and gaming devices belong to the top-level category of electronic devices through different lower-level category paths.
 
 #### 3.2.19 Rings
 
-##### 3.2.19.1 功能介绍
+##### 3.2.19.1 Function Introduction
 
-根据起始顶点、方向、边的类型（可选）和最大深度等条件查找可达的环路
+Finds reachable cycles based on the specified conditions, including starting vertices, direction, edge types (optional), and maximum depth.
 
-例如：1 -> 25 -> 775 -> 14690 -> 25, 其中环路为 25 -> 775 -> 14690 -> 25
+For example: 1 -> 25 -> 775 -> 14690 -> 25, where the cycle is 25 -> 775 -> 14690 -> 25.
 
 ###### Params
 
-- source：起始顶点id，必填项
-- direction：起始顶点发出的边的方向（OUT,IN,BOTH），选填项，默认是BOTH
-- label：边的类型，选填项，默认代表所有edge label
-- max_depth：步数，必填项
-- source_in_ring：环路是否包含起点，选填项，默认为true
-- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
-- capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
-- limit：返回的可达环路的最大数目，选填项，默认为10
+- source: Starting vertex ID, required.
+- direction: Direction of edges emitted from the starting vertex (OUT, IN, BOTH). Optional. Default is BOTH.
+- label: Edge type. Optional. Default represents all edge labels.
+- max_depth: Number of steps. Required.
+- source_in_ring: Whether the starting point is included in the cycle. Optional. Default is true.
+- max_degree: Maximum number of adjacent edges to traverse for each vertex during the query process. Optional. Default is 10000.
+- capacity: Maximum number of vertices to be visited during the traversal process. Optional. Default is 10000000.
+- limit: Maximum number of reachable cycles to be returned. Optional. Default is 10.
 
-##### 3.2.19.2 使用方法
+##### 3.2.19.2 Usage Method
 
 ###### Method & Url
 
@@ -2182,32 +2187,32 @@ GET http://localhost:8080/graphs/{graph}/traversers/rings?source="1:marko"&max_d
 }
 ```
 
-##### 3.2.19.3 适用场景
+##### 3.2.19.3 Use Cases
 
-查询起始顶点可达的环路，例如：
+Used to query cycles reachable from the starting vertex, for example:
 
-- 风控项目中，查询一个用户可达的循环担保的人或者设备
-- 设备关联网络中，发现一个设备周围的循环引用的设备
+- In a risk control project, querying individuals or devices involved in a circular guarantee that a user is connected to.
+- In a device network, discovering devices that have circular references around a specific device.
 
 #### 3.2.20 Rays
 
-##### 3.2.20.1 功能介绍
+##### 3.2.20.1 Function Introduction
 
-根据起始顶点、方向、边的类型（可选）和最大深度等条件查找发散到边界顶点的路径
+Finds paths that diverge from the starting vertex and reach boundary vertices based on the specified conditions, including starting vertices, direction, edge types (optional), and maximum depth.
 
-例如：1 -> 25 -> 775 -> 14690 -> 2289 -> 18379, 其中 18379 为边界顶点，即没有从 18379 发出的边
+For example: 1 -> 25 -> 775 -> 14690 -> 2289 -> 18379, where 18379 is the boundary vertex, meaning there are no edges emitted from 18379.
 
 ###### Params
 
-- source：起始顶点id，必填项
-- direction：起始顶点发出的边的方向（OUT,IN,BOTH），选填项，默认是BOTH
-- label：边的类型，选填项，默认代表所有edge label
-- max_depth：步数，必填项
-- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
-- capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
-- limit：返回的非环路的最大数目，选填项，默认为10
+- source: Starting vertex ID, required.
+- direction: Direction of edges emitted from the starting vertex (OUT, IN, BOTH). Optional. Default is BOTH.
+- label: Edge type. Optional. Default represents all edge labels.
+- max_depth: Number of steps. Required.
+- max_degree: Maximum number of adjacent edges to traverse for each vertex during the query process. Optional. Default is 10000.
+- capacity: Maximum number of vertices to be visited during the traversal process. Optional. Default is 10000000.
+- limit: Maximum number of non-cycle paths to be returned. Optional. Default is 10.
 
-##### 3.2.20.2 使用方法
+##### 3.2.20.2 Usage Method
 
 ###### Method & Url
 
@@ -2256,45 +2261,47 @@ GET http://localhost:8080/graphs/{graph}/traversers/rays?source="1:marko"&max_de
 }
 ```
 
-##### 3.2.20.3 适用场景
+##### 3.2.20.3 Use Cases
 
-查找起始顶点到某种关系的边界顶点的路径，例如：
+Used to find paths from the starting vertex to boundary vertices based on a specific relationship, for example:
 
-- 家族关系中，查找一个人到所有还没有孩子的子孙的路径
-- 设备关联网络中，找到某个设备到终端设备的路径
+- In a family relationship, finding paths from a person to all descendants who do not have children.
+- In a device network, discovering paths from a specific device to terminal devices.
 
 #### 3.2.21 Fusiform Similarity
 
-##### 3.2.21.1 功能介绍
+##### 3.2.21.1 Function Introduction
 
-按照条件查询一批顶点对应的"梭形相似点"。当两个顶点跟很多共同的顶点之间有某种关系的时候，我们认为这两个点为"梭形相似点"。举个例子说明"梭形相似点"："读者A"读了100本书，可以定义读过这100本书中的80本以上的读者，是"读者A"的"梭形相似点"
+Queries a batch of "fusiform similar vertices" based on specified conditions. When two vertices share a certain relationship with many common vertices, they are considered "fusiform similar vertices." For example, if "Reader A" has read 100 books, readers who have read 80 or more of these 100 books can be defined as "fusiform similar vertices" of "Reader A."
 
 ###### Params
 
-- sources：定义起始顶点，必填项，指定方式包括：
-	- ids：通过顶点id列表提供起始顶点
-	- label和properties：如果没有指定ids，则使用label和properties的联合条件查询起始顶点
-		- label：顶点的类型
-		- properties：通过属性的值查询起始顶点
-		> 注意：properties中的属性值可以是列表，表示只要key对应的value在列表中就可以
+- sources: Starting vertices, required. Specify using:
+	- ids: Provide a list of vertex IDs as starting vertices.
+	- label and properties: If ids are not specified, use the combined conditions of label and properties to query the starting vertices.
+		- label: Vertex type.
+		- properties: Query the starting vertices based on the values of their properties.
+		> Note: Property values in properties can be a list, indicating that the value of the key can be any value in the list.
 
-- label：边的类型，选填项，默认代表所有edge label
-- direction：起始顶点向外发散的方向（OUT,IN,BOTH），选填项，默认是BOTH
-- min_neighbors：最少邻居数目，邻居数目少于这个阈值时，认为起点不具备"梭形相似点"。比如想要找一个"读者A"读过的书的"梭形相似点"，那么`min_neighbors`为100时，表示"读者A"至少要读过100本书才可以有"梭形相似点"，必填项
-- alpha：相似度，代表：起点与"梭形相似点"的共同邻居数目占起点的全部邻居数目的比例，必填项
-- min_similars："梭形相似点"的最少个数，只有当起点的"梭形相似点"数目大于或等于该值时，才会返回起点及其"梭形相似点"，选填项，默认值为1
-- top：返回一个起点的"梭形相似点"中相似度最高的top个，必填项，0表示全部
-- group_property：与`min_groups`一起使用，当起点跟其所有的"梭形相似点"某个属性的值有至少`min_groups`个不同值时，才会返回该起点及其"梭形相似点"。比如为"读者A"推荐"异地"书友时，需要设置`group_property`为读者的"城市"属性，`min_group`至少为2，选填项，不填代表不需要根据属性过滤
-- min_groups：与`group_property`一起使用，只有`group_property`设置时才有意义
-- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，选填项，默认为10000
-- capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
-- limit：返回的结果数目上限（一个起点及其"梭形相似点"算一个结果），选填项，默认为10
-- with_intermediary：是否返回起点及其"梭形相似点"共同关联的中间点，默认为false
-- with_vertex，选填项，默认为false：
-	- true表示返回结果包含完整的顶点信息
-	- false时表示只返回顶点id
+- label: Edge type. Optional. Default represents all edge labels.
+- direction: Direction in which the starting vertex diverges (OUT, IN, BOTH). Optional. Default is BOTH.
+- min_neighbors: Minimum number of neighbors. If the number of neighbors is less than this threshold, the starting vertex is not considered a "fusiform similar vertex." For example, if you want to find "fusiform similar vertices" of books read by "Reader A," and min_neighbors is set to 100, it means that "Reader A" must have read at least 100 books to have "fusiform similar vertices." Required.
+- alpha: Similarity, representing the proportion of common neighbors between the starting vertex and "fusiform similar vertices" to all neighbors of the starting vertex. Required.
+- min_similars: Minimum number of "fusiform similar vertices." Only when the number of "fusiform similar vertices" of the starting vertex is greater than or equal to this value, the starting vertex and its "fusiform similar vertices" will be returned. Optional. Default is 1.
+- top: Returns the top highest similarity "fusiform similar vertices" of a starting vertex. Required. 0 means all.
+- group_property: Used together with min_groups. Returns the starting vertex and its "fusiform similar vertices" only if there are at least min_groups different values for a certain attribute of the starting vertex and its "fusiform similar vertices." For example, when recommending "out-of-town" book buddies for "Reader A," set group_property to the "city" attribute of readers and min_group to at least 2. Optional. If not specified, no filtering based on attributes is needed.
+- min_groups: Used together with group_property. Only meaningful when group_property is set.
+- max_degree: Maximum number of adjacent edges to traverse for each vertex during the query process. Optional. Default is 10000.
+- capacity: Maximum number of vertices to be visited during the traversal process. Optional. Default is 10000000.
+- limit: Maximum number of results to be returned (one starting vertex and its "fusiform similar vertices" count as one result). Optional. Default is 10.
+- with_intermediary: Whether to return the starting vertex and the intermediate vertices that are commonly related to the "fusiform
 
-##### 3.2.21.2 使用方法
+ similar vertices." Default is false.
+- with_vertex: Optional. Default is false.
+	- true: Returns complete vertex information in the results.
+	- false: Only returns vertex IDs.
+
+##### 3.2.21.2 Usage Method
 
 ###### Method & Url
 
@@ -2388,20 +2395,20 @@ POST http://localhost:8080/graphs/hugegraph/traversers/fusiformsimilarity
 }
 ```
 
-##### 3.2.21.3 适用场景
+##### 3.2.21.3 Use Cases
 
-查询一组顶点相似度很高的顶点。例如：
+Used to query vertices that have high similarity with a group of vertices. For example:
 
-- 跟一个读者有类似书单的读者
-- 跟一个玩家玩类似游戏的玩家
+- Readers with similar book lists to a specific reader.
+- Players who play similar games to a specific player.
 
 #### 3.2.22 Vertices
 
-##### 3.2.22.1 根据顶点的id列表，批量查询顶点
+##### 3.2.22.1 Batch Query Vertices by Vertex IDs
 
 ###### Params
 
-- ids：要查询的顶点id列表
+- ids: List of vertex IDs to be queried.
 
 ###### Method & Url
 
@@ -2474,13 +2481,13 @@ GET http://localhost:8080/graphs/hugegraph/traversers/vertices?ids="1:marko"&ids
 }
 ```
 
-##### 3.2.22.2 获取顶点 Shard 信息
+##### 3.2.22.2 Get Vertex Shard Information
 
-通过指定的分片大小split_size，获取顶点分片信息（可以与 3.2.21.3 中的 Scan 配合使用来获取顶点）。
+Obtain vertex shard information by specifying the shard size `split_size` (can be used in conjunction with Scan in 3.2.21.3 to retrieve vertices).
 
 ###### Params
 
-- split_size：分片大小，必填项
+- split_size: Shard size, required.
 
 ###### Method & Url
 
@@ -2524,16 +2531,16 @@ GET http://localhost:8080/graphs/hugegraph/traversers/vertices/shards?split_size
 }
 ```
 
-##### 3.2.22.3 根据Shard信息批量获取顶点
+##### 3.2.22.3 Batch Retrieve Vertices Based on Shard Information
 
-通过指定的分片信息批量查询顶点（Shard信息的获取参见 3.2.21.2 Shard）。
+Retrieve vertices in batches based on the specified shard information (refer to 3.2.21.2 Shard for obtaining shard information).
 
 ###### Params
 
-- start：分片起始位置，必填项
-- end：分片结束位置，必填项
-- page：分页位置，选填项，默认为null，不分页；当page为“”时表示分页的第一页，从start指示的位置开始
-- page_limit：分页获取顶点时，一页中顶点数目的上限，选填项，默认为100000
+- start: Shard start position, required.
+- end: Shard end position, required.
+- page: Page position for pagination, optional. Default is null, no pagination. When page is "", it represents the first page of pagination starting from the position indicated by start.
+- page_limit: The upper limit of the number of vertices per page when retrieving vertices with pagination, optional. Default is 100000.
 
 ###### Method & Url
 
@@ -2706,18 +2713,18 @@ GET http://localhost:8080/graphs/hugegraph/traversers/vertices/scan?start=0&end=
 }
 ```
 
-##### 3.2.22.4 适用场景
+##### 3.2.22.4 Use Cases
 
-- 按id列表查询顶点，可用于批量查询顶点，比如在path查询到多条路径之后，可以进一步查询某条路径的所有顶点属性。
-- 获取分片和按分片查询顶点，可以用来遍历全部顶点
+- Querying vertices by ID list, which can be used for batch vertex queries. For example, after querying multiple paths in a path search, you can further query all vertex properties of a specific path.
+- Retrieving shards and querying vertices by shard, which can be used to traverse all vertices.
 
 #### 3.2.23 Edges
 
-##### 3.2.23.1 根据边的id列表，批量查询边
+##### 3.2.23.1 Batch Retrieve Edges Based on Edge IDs
 
 ###### Params
 
-- ids：要查询的边id列表
+- ids: List of edge IDs to be queried.
 
 ###### Method & Url
 
@@ -2766,13 +2773,13 @@ GET http://localhost:8080/graphs/hugegraph/traversers/edges?ids="S1:josh>1>>S2:l
 }
 ```
 
-##### 3.2.23.2 获取边 Shard 信息
+##### 3.2.23.2 Retrieve Edge Shard Information
 
-通过指定的分片大小split_size，获取边分片信息（可以与 3.2.22.3 中的 Scan 配合使用来获取边）。
+Retrieve shard information for edges by specifying the shard size (`split_size`). This can be used in conjunction with the Scan operation described in section 3.2.22.3 to retrieve edges.
 
 ###### Params
 
-- split_size：分片大小，必填项
+- split_size: Shard size, required field.
 
 ###### Method & Url
 
@@ -2820,16 +2827,16 @@ GET http://localhost:8080/graphs/hugegraph/traversers/edges/shards?split_size=42
 }
 ```
 
-##### 3.2.23.3 根据 Shard 信息批量获取边
+##### 3.2.23.3 Batch Retrieve Edges Based on Shard Information
 
-通过指定的分片信息批量查询边（Shard信息的获取参见 3.2.22.2）。
+Batch retrieve edges by specifying shard information (refer to section 3.2.22.2 for shard retrieval).
 
 ###### Params
 
-- start：分片起始位置，必填项
-- end：分片结束位置，必填项
-- page：分页位置，选填项，默认为null，不分页；当page为“”时表示分页的第一页，从start指示的位置开始
-- page_limit：分页获取边时，一页中边数目的上限，选填项，默认为100000
+- start: Shard starting position, required field.
+- end: Shard ending position, required field.
+- page: Page position for pagination, optional field. Default is null, which means no pagination. When `page` is empty, it indicates the first page of pagination starting from the position indicated by `start`.
+- page_limit: Upper limit of the number of edges per page for paginated retrieval, optional field. Default is 100000.
 
 ###### Method & Url
 
@@ -2930,7 +2937,7 @@ GET http://localhost:8080/graphs/hugegraph/traversers/edges/scan?start=0&end=322
 }
 ```
 
-##### 3.2.23.4 适用场景
+##### 3.2.23.4 Use Cases
 
-- 按id列表查询边，可用于批量查询边
-- 获取分片和按分片查询边，可以用来遍历全部边
+- Querying edges based on ID list, suitable for batch retrieval of edges.
+- Retrieving shard information and querying edges based on shards, useful for traversing all edges.
