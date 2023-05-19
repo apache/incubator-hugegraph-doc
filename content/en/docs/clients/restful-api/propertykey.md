@@ -6,20 +6,19 @@ weight: 2
 
 ### 1.2 PropertyKey
 
-Params说明：
+Params Description:
 
-- name：属性类型名称，必填
-- data_type：属性类型数据类型，包括：bool、byte、int、long、float、double、string、date、uuid、blob，默认string类型
-- cardinality：属性类型基数，包括：single、list、set，默认single
+- name: The name of the property type, required.
+- data_type: The data type of the property type, including: bool, byte, int, long, float, double, string, date, uuid, blob. The default data type is string.
+- cardinality: The cardinality of the property type, including: single, list, set. The default cardinality is single.
 
-请求体字段说明：
+Request Body Field Description:
 
-- id：属性类型id值
-- properties：属性的属性，对于属性而言，此项为空
-- user_data：设置属性类型的通用信息，比如可设置age属性的取值范围，最小为0，最大为100；目前此项不做任何校验，只为后期拓展提供预留入口
+- id: The ID value of the property type.
+- properties: The properties of the property type. For properties, this field is empty.
+- user_data: Setting the common information of the property type, such as setting the value range of the age property from 0 to 100. Currently, no validation is performed on this field, and it is only a reserved entry for future expansion.
 
-
-#### 1.2.1 创建一个 PropertyKey
+#### 1.2.1 Create a PropertyKey
 
 ##### Method & Url
 
@@ -64,11 +63,11 @@ POST http://localhost:8080/graphs/hugegraph/schema/propertykeys
 }
 ```
 
-#### 1.2.2 为已存在的 PropertyKey 添加或移除 userdata
+#### 1.2.2 Add or Remove userdata for an existing PropertyKey
 
 ##### Params
 
-- action: 表示当前行为是添加还是移除，取值为`append`（添加）和`eliminate`（移除）
+- action: Indicates whether the current action is to add or remove userdata. Possible values are `append` (add) and `eliminate` (remove).
 
 ##### Method & Url
 
@@ -117,7 +116,7 @@ PUT http://localhost:8080/graphs/hugegraph/schema/propertykeys/age?action=append
 }
 ```
 
-#### 1.2.3 获取所有的 PropertyKey
+#### 1.2.3 Get all PropertyKeys
 
 ##### Method & Url
 
@@ -196,7 +195,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/propertykeys
 }
 ```
 
-#### 1.2.4 根据name获取PropertyKey
+#### 1.2.4 Get PropertyKey according to name
 
 ##### Method & Url
 
@@ -204,7 +203,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/propertykeys
 GET http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
 ```
 
-其中，`age`为要获取的PropertyKey的名字
+Where `age` is the name of the PropertyKey to be retrieved.
 
 ##### Response Status
 
@@ -232,7 +231,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
 }
 ```
 
-#### 1.2.5 根据name删除PropertyKey
+#### 1.2.5 Delete PropertyKey according to name
 
 ##### Method & Url
 
@@ -240,7 +239,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
 DELETE http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
 ```
 
-其中，`age`为要获取的PropertyKey的名字
+Where `age` is the name of the PropertyKey to be deleted.
 
 ##### Response Status
 

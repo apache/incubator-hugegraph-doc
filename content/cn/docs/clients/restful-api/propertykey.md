@@ -204,7 +204,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/propertykeys
 GET http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
 ```
 
-其中，`age`为要获取的PropertyKey的名字
+其中，`age`为要获取的 PropertyKey 的名称
 
 ##### Response Status
 
@@ -232,7 +232,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
 }
 ```
 
-#### 1.2.5 根据name删除PropertyKey
+#### 1.2.5 根据 name 删除 PropertyKey
 
 ##### Method & Url
 
@@ -240,7 +240,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
 DELETE http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
 ```
 
-其中，`age`为要获取的PropertyKey的名字
+其中，`age`为要删除的 PropertyKey 的名称
 
 ##### Response Status
 
