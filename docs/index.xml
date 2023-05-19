@@ -16,18 +16,18 @@
 &lt;li>HugeGraph-Loader: data import module. HugeGraph-Loader can scan and analyze existing data, automatically generate Graph Schema creation language, and quickly import data in batches.&lt;/li>
 &lt;li>HugeGraph-Studio: Web-based visual IDE environment. Record Gremlin queries in Notebook mode, and visualize the relationship between Graphs. HugeGraph-Studio is also a tool recommended by this system.&lt;/li>
 &lt;li>HugeGraph-Computer: HugeGraph-Computer is a distributed graph processing system (OLAP).&lt;/li>
-&lt;/ul></description></item><item><title>Docs: HugeGraph 配置</title><link>/docs/config/config-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/config/config-guide/</guid><description>
-&lt;h3 id="1-概述">1 概述&lt;/h3>
-&lt;p>配置文件的目录为 hugegraph-release/conf，所有关于服务和图本身的配置都在此目录下。&lt;/p>
-&lt;p>主要的配置文件包括：gremlin-server.yaml、rest-server.properties 和 hugegraph.properties&lt;/p>
-&lt;p>HugeGraphServer 内部集成了 GremlinServer 和 RestServer，而 gremlin-server.yaml 和 rest-server.properties 就是用来配置这两个Server的。&lt;/p>
+&lt;/ul></description></item><item><title>Docs: HugeGraph configuration</title><link>/docs/config/config-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/config/config-guide/</guid><description>
+&lt;h3 id="1-overview">1 Overview&lt;/h3>
+&lt;p>The directory for the configuration files is &lt;code>hugegraph-release/conf&lt;/code>, and all the configurations related to the service and the graph itself are located in this directory.&lt;/p>
+&lt;p>The main configuration files include &lt;code>gremlin-server.yaml&lt;/code>, &lt;code>rest-server.properties&lt;/code>, and &lt;code>hugegraph.properties&lt;/code>.&lt;/p>
+&lt;p>The &lt;code>HugeGraphServer&lt;/code> integrates the &lt;code>GremlinServer&lt;/code> and &lt;code>RestServer&lt;/code> internally, and &lt;code>gremlin-server.yaml&lt;/code> and &lt;code>rest-server.properties&lt;/code> are used to configure these two servers.&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="http://tinkerpop.apache.org/docs/3.2.3/reference/#gremlin-server">GremlinServer&lt;/a>：GremlinServer接受用户的gremlin语句，解析后转而调用Core的代码。&lt;/li>
-&lt;li>RestServer：提供RESTful API，根据不同的HTTP请求，调用对应的Core API，如果用户请求体是gremlin语句，则会转发给GremlinServer，实现对图数据的操作。&lt;/li>
+&lt;li>&lt;a href="http://tinkerpop.apache.org/docs/3.2.3/reference/#gremlin-server">GremlinServer&lt;/a>: GremlinServer accepts Gremlin statements from users, parses them, and then invokes the Core code.&lt;/li>
+&lt;li>RestServer: It provides a RESTful API that, based on different HTTP requests, calls the corresponding Core API. If the user&amp;rsquo;s request body is a Gremlin statement, it will be forwarded to GremlinServer to perform operations on the graph data.&lt;/li>
 &lt;/ul>
-&lt;p>下面对这三个配置文件逐一介绍。&lt;/p>
-&lt;h3 id="2-gremlin-serveryaml">2 gremlin-server.yaml&lt;/h3>
-&lt;p>gremlin-server.yaml 文件默认的内容如下：&lt;/p>
+&lt;p>Now let&amp;rsquo;s introduce these three configuration files one by one.&lt;/p>
+&lt;h3 id="2-gremlin-serveryaml">2. gremlin-server.yaml&lt;/h3>
+&lt;p>The default content of the &lt;code>gremlin-server.yaml&lt;/code> file is as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># host and port of gremlin server, need to be consistent with host and port in rest-server.properties&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic">#host: 127.0.0.1&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic">#port: 8182&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -115,21 +115,19 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">ssl&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">enabled&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">false&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>}&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上面的配置项很多，但目前只需要关注如下几个配置项：channelizer 和 graphs。&lt;/p>
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>There are many configuration options mentioned above, but for now, let&amp;rsquo;s focus on the following options: &lt;code>channelizer&lt;/code> and &lt;code>graphs&lt;/code>.&lt;/p>
 &lt;ul>
-&lt;li>graphs：GremlinServer 启动时需要打开的图，该项是一个 map 结构，key 是图的名字，value 是该图的配置文件路径；&lt;/li>
-&lt;li>channelizer：GremlinServer 与客户端有两种通信方式，分别是 WebSocket 和 HTTP（默认）。如果选择 WebSocket，
-用户可以通过 &lt;a href="/clients/gremlin-console.html">Gremlin-Console&lt;/a> 快速体验 HugeGraph 的特性，但是不支持大规模数据导入，
-推荐使用 HTTP 的通信方式，HugeGraph 的外围组件都是基于 HTTP 实现的；&lt;/li>
+&lt;li>&lt;code>graphs&lt;/code>: This option specifies the graphs that need to be opened when the GremlinServer starts. It is a map structure where the key is the name of the graph and the value is the configuration file path for that graph.&lt;/li>
+&lt;li>&lt;code>channelizer&lt;/code>: The GremlinServer supports two communication modes with clients: WebSocket and HTTP (default). If WebSocket is chosen, users can quickly experience the features of HugeGraph using &lt;a href="/clients/gremlin-console.html">Gremlin-Console&lt;/a>, but it does not support importing large-scale data. It is recommended to use HTTP for communication, as all peripheral components of HugeGraph are implemented based on HTTP.&lt;/li>
 &lt;/ul>
-&lt;p>默认GremlinServer是服务在 localhost:8182，如果需要修改，配置 host、port 即可&lt;/p>
+&lt;p>By default, the GremlinServer serves at &lt;code>localhost:8182&lt;/code>. If you need to modify it, configure the &lt;code>host&lt;/code> and &lt;code>port&lt;/code> settings.&lt;/p>
 &lt;ul>
-&lt;li>host：部署 GremlinServer 机器的机器名或 IP，目前 HugeGraphServer 不支持分布式部署，且GremlinServer不直接暴露给用户;&lt;/li>
-&lt;li>port：部署 GremlinServer 机器的端口；&lt;/li>
+&lt;li>&lt;code>host&lt;/code>: The hostname or IP address of the machine where the GremlinServer is deployed. Currently, HugeGraphServer does not support distributed deployment, and GremlinServer is not directly exposed to users.&lt;/li>
+&lt;li>&lt;code>port&lt;/code>: The port number of the machine where the GremlinServer is deployed.&lt;/li>
 &lt;/ul>
-&lt;p>同时需要在 rest-server.properties 中增加对应的配置项 gremlinserver.url=http://host:port&lt;/p>
-&lt;h3 id="3-rest-serverproperties">3 rest-server.properties&lt;/h3>
-&lt;p>rest-server.properties 文件的默认内容如下：&lt;/p>
+&lt;p>Additionally, you need to add the corresponding configuration &lt;code>gremlinserver.url=http://host:port&lt;/code> in &lt;code>rest-server.properties&lt;/code>.&lt;/p>
+&lt;h3 id="3-rest-serverproperties">3. rest-server.properties&lt;/h3>
+&lt;p>The default content of the &lt;code>rest-server.properties&lt;/code> file is as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># bind url
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>restserver.url=http://127.0.0.1:8080
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># gremlin server url, need to be consistent with host and port in gremlin-server.yaml
@@ -146,17 +144,17 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.id=server-1
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.role=master
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>restserver.url：RestServer 提供服务的 url，根据实际环境修改；&lt;/li>
-&lt;li>graphs：RestServer 启动时也需要打开图，该项为 map 结构，key 是图的名字，value 是该图的配置文件路径；&lt;/li>
+&lt;li>&lt;code>restserver.url&lt;/code>: The URL at which the RestServer provides its services. Modify it according to the actual environment.&lt;/li>
+&lt;li>&lt;code>graphs&lt;/code>: The RestServer also needs to open graphs when it starts. This option is a map structure where the key is the name of the graph and the value is the configuration file path for that graph.&lt;/li>
 &lt;/ul>
 &lt;blockquote>
-&lt;p>注意：gremlin-server.yaml 和 rest-server.properties 都包含 graphs 配置项，而 &lt;code>init-store&lt;/code> 命令是根据 gremlin-server.yaml 的 graphs 下的图进行初始化的。&lt;/p>
+&lt;p>Note: Both &lt;code>gremlin-server.yaml&lt;/code> and &lt;code>rest-server.properties&lt;/code> contain the &lt;code>graphs&lt;/code> configuration option, and the &lt;code>init-store&lt;/code> command initializes based on the graphs specified in the &lt;code>graphs&lt;/code> section of &lt;code>gremlin-server.yaml&lt;/code>.&lt;/p>
 &lt;/blockquote>
 &lt;blockquote>
-&lt;p>配置项 gremlinserver.url 是 GremlinServer 为 RestServer 提供服务的 url，该配置项默认为 http://localhost:8182，如需修改，需要和 gremlin-server.yaml 中的 host 和 port 相匹配；&lt;/p>
+&lt;p>The &lt;code>gremlinserver.url&lt;/code> configuration option is the URL at which the GremlinServer provides services to the RestServer. By default, it is set to &lt;code>http://localhost:8182&lt;/code>. If you need to modify it, it should match the &lt;code>host&lt;/code> and &lt;code>port&lt;/code> settings in &lt;code>gremlin-server.yaml&lt;/code>.&lt;/p>
 &lt;/blockquote>
-&lt;h3 id="4-hugegraphproperties">4 hugegraph.properties&lt;/h3>
-&lt;p>hugegraph.properties 是一类文件，因为如果系统存在多个图，则会有多个相似的文件。该文件用来配置与图存储和查询相关的参数，文件的默认内容如下：&lt;/p>
+&lt;h3 id="4-hugegraphproperties">4. hugegraph.properties&lt;/h3>
+&lt;p>&lt;code>hugegraph.properties&lt;/code> is a type of file. If the system has multiple graphs, there will be multiple similar files. This file is used to configure parameters related to graph storage and querying. The default content of the file is as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># gremlin entrence to create graph
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gremlin.graph=com.baidu.hugegraph.HugeFactory
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -241,39 +239,39 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#palo.poll_interval=10
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#palo.temp_dir=./palo-data
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#palo.file_limit_size=32
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>重点关注未注释的几项：&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Pay attention to the following uncommented items:&lt;/p>
 &lt;ul>
-&lt;li>gremlin.graph：GremlinServer 的启动入口，用户不要修改此项；&lt;/li>
-&lt;li>backend：使用的后端存储，可选值有 memory、cassandra、scylladb、mysql、hbase、postgresql 和 rocksdb；&lt;/li>
-&lt;li>serializer：主要为内部使用，用于将 schema、vertex 和 edge 序列化到后端，对应的可选值为 text、cassandra、scylladb 和 binary；(注：rocksdb后端值需是binary，其他后端backend与serializer值需保持一致，如hbase后端该值为hbase)&lt;/li>
-&lt;li>store：图存储到后端使用的数据库名，在 cassandra 和 scylladb 中就是 keyspace 名，此项的值与 GremlinServer 和 RestServer 中的图名并无关系，但是出于直观考虑，建议仍然使用相同的名字；&lt;/li>
-&lt;li>cassandra.host：backend 为 cassandra 或 scylladb 时此项才有意义，cassandra/scylladb 集群的 seeds；&lt;/li>
-&lt;li>cassandra.port：backend 为 cassandra 或 scylladb 时此项才有意义，cassandra/scylladb 集群的 native port；&lt;/li>
-&lt;li>rocksdb.data_path：backend 为 rocksdb 时此项才有意义，rocksdb 的数据目录&lt;/li>
-&lt;li>rocksdb.wal_path：backend 为 rocksdb 时此项才有意义，rocksdb 的日志目录&lt;/li>
-&lt;li>admin.token: 通过一个token来获取服务器的配置信息，例如：&lt;a href="http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55">http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55&lt;/a>&lt;/li>
+&lt;li>&lt;code>gremlin.graph&lt;/code>: The entry point for GremlinServer startup. Users should not modify this item.&lt;/li>
+&lt;li>&lt;code>backend&lt;/code>: The backend storage used, with options including &lt;code>memory&lt;/code>, &lt;code>cassandra&lt;/code>, &lt;code>scylladb&lt;/code>, &lt;code>mysql&lt;/code>, &lt;code>hbase&lt;/code>, &lt;code>postgresql&lt;/code>, and &lt;code>rocksdb&lt;/code>.&lt;/li>
+&lt;li>&lt;code>serializer&lt;/code>: Mainly for internal use, used to serialize schema, vertices, and edges to the backend. The corresponding options are &lt;code>text&lt;/code>, &lt;code>cassandra&lt;/code>, &lt;code>scylladb&lt;/code>, and &lt;code>binary&lt;/code> (Note: The &lt;code>rocksdb&lt;/code> backend should have a value of &lt;code>binary&lt;/code>, while for other backends, the values of &lt;code>backend&lt;/code> and &lt;code>serializer&lt;/code> should remain consistent. For example, for the &lt;code>hbase&lt;/code> backend, the value should be &lt;code>hbase&lt;/code>).&lt;/li>
+&lt;li>&lt;code>store&lt;/code>: The name of the database used for storing the graph in the backend. In Cassandra and ScyllaDB, it corresponds to the keyspace name. The value of this item is unrelated to the graph name in GremlinServer and RestServer, but for clarity, it is recommended to use the same name.&lt;/li>
+&lt;li>&lt;code>cassandra.host&lt;/code>: This item is only meaningful when the backend is set to &lt;code>cassandra&lt;/code> or &lt;code>scylladb&lt;/code>. It specifies the seeds of the Cassandra/ScyllaDB cluster.&lt;/li>
+&lt;li>&lt;code>cassandra.port&lt;/code>: This item is only meaningful when the backend is set to &lt;code>cassandra&lt;/code> or &lt;code>scylladb&lt;/code>. It specifies the native port of the Cassandra/ScyllaDB cluster.&lt;/li>
+&lt;li>&lt;code>rocksdb.data_path&lt;/code>: This item is only meaningful when the backend is set to &lt;code>rocksdb&lt;/code>. It specifies the data directory for RocksDB.&lt;/li>
+&lt;li>&lt;code>rocksdb.wal_path&lt;/code>: This item is only meaningful when the backend is set to &lt;code>rocksdb&lt;/code>. It specifies the log directory for RocksDB.&lt;/li>
+&lt;li>&lt;code>admin.token&lt;/code>: A token used to retrieve server configuration information. For example: &lt;a href="http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55">http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h3 id="5-多图配置">5 多图配置&lt;/h3>
-&lt;p>我们的系统是可以存在多个图的，并且各个图的后端可以不一样，比如图 hugegraph 和 hugegraph1，其中 hugegraph 以 cassandra 作为后端，hugegraph1 以 rocksdb作为后端。&lt;/p>
-&lt;p>配置方法也很简单：&lt;/p>
-&lt;p>&lt;strong>修改 gremlin-server.yaml&lt;/strong>&lt;/p>
-&lt;p>在 gremlin-server.yaml 的 graphs 域中添加一个键值对，键为图的名字，值为图的配置文件路径，比如：&lt;/p>
+&lt;h3 id="5-multi-graph-configuration">5. Multi-Graph Configuration&lt;/h3>
+&lt;p>Our system can have multiple graphs, and each graph can have a different backend. For example, there are two graphs named &lt;code>hugegraph&lt;/code> and &lt;code>hugegraph1&lt;/code>, where &lt;code>hugegraph&lt;/code> uses Cassandra as the backend and &lt;code>hugegraph1&lt;/code> uses RocksDB as the backend.&lt;/p>
+&lt;p>The configuration method is simple:&lt;/p>
+&lt;p>&lt;strong>Modify &lt;code>gremlin-server.yaml&lt;/code>&lt;/strong>&lt;/p>
+&lt;p>Add a key-value pair in the &lt;code>graphs&lt;/code> section of &lt;code>gremlin-server.yaml&lt;/code>, where the key is the name of the graph and the value is the path to the graph&amp;rsquo;s configuration file. For example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">graphs&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hugegraph&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">conf/hugegraph.properties,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hugegraph1&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">conf/hugegraph1.properties&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>}&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>修改 rest-server.properties&lt;/strong>&lt;/p>
-&lt;p>在 rest-server.properties 的 graphs 域中添加一个键值对，键为图的名字，值为图的配置文件路径，比如：&lt;/p>
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Modify &lt;code>rest-server.properties&lt;/code>&lt;/strong>&lt;/p>
+&lt;p>Add a key-value pair in the &lt;code>graphs&lt;/code> section of &lt;code>rest-server.properties&lt;/code>, where the key is the name of the graph and the value is the path to the graph&amp;rsquo;s configuration file. For example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>graphs=[hugegraph:conf/hugegraph.properties, hugegraph1:conf/hugegraph1.properties]
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>添加 hugegraph1.properties&lt;/strong>&lt;/p>
-&lt;p>拷贝 hugegraph.properties，命名为 hugegraph1.properties，修改图对应的数据库名以及关于后端部分的参数，比如：&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Add &lt;code>hugegraph1.properties&lt;/code>&lt;/strong>&lt;/p>
+&lt;p>Copy &lt;code>hugegraph.properties&lt;/code> and name it &lt;code>hugegraph1.properties&lt;/code>. Modify the database name corresponding to the graph and the parameters related to the backend. For example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>store=hugegraph1
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>backend=rocksdb
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=binary
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>停止 Server，初始化执行 init-store.sh（为新的图创建数据库），重新启动 Server&lt;/strong>&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Stop the server, execute &lt;code>init-store.sh&lt;/code> (to create a new database for the new graph), and restart the server.&lt;/strong>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ bin/stop-hugegraph.sh
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ bin/init-store.sh
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ bin/start-hugegraph.sh
