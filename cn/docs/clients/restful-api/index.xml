@@ -449,7 +449,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="124-根据name获取propertykey">1.2.4 根据name获取PropertyKey&lt;/h4>
 &lt;h5 id="method--url-3">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中，&lt;code>age&lt;/code>为要获取的PropertyKey的名字&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中，&lt;code>age&lt;/code>为要获取的 PropertyKey 的名称&lt;/p>
 &lt;h5 id="response-status-3">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-3">Response Body&lt;/h5>
@@ -468,10 +468,10 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;~create_time&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;2022-05-13 13:47:23.745&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="125-根据name删除propertykey">1.2.5 根据name删除PropertyKey&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="125-根据-name-删除-propertykey">1.2.5 根据 name 删除 PropertyKey&lt;/h4>
 &lt;h5 id="method--url-4">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中，&lt;code>age&lt;/code>为要获取的PropertyKey的名字&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中，&lt;code>age&lt;/code>为要删除的 PropertyKey 的名称&lt;/p>
 &lt;h5 id="response-status-4">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">202&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-4">Response Body&lt;/h5>
