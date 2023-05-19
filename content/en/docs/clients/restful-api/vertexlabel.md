@@ -6,22 +6,21 @@ weight: 3
 
 ### 1.3 VertexLabel
 
-假设已经创建好了1.1.3中列出来的 PropertyKeys
+Assuming that the PropertyKeys listed in 1.1.3 have already been created.
 
-Params说明
+Params Description:
 
-- id：顶点类型id值
-- name：顶点类型名称，必填
-- id_strategy: 顶点类型的ID策略，主键ID、自动生成、自定义字符串、自定义数字、自定义UUID，默认主键ID
-- properties: 顶点类型关联的属性类型
-- primary_keys: 主键属性，当ID策略为PRIMARY_KEY时必须有值，其他ID策略时必须为空；
-- enable_label_index： 是否开启类型索引，默认关闭
-- index_names：顶点类型创建的索引，详情见3.4 
-- nullable_keys：可为空的属性
-- user_data：设置顶点类型的通用信息，作用同属性类型
+- id: The ID value of the vertex type.
+- name: The name of the vertex type, required.
+- id_strategy: The ID strategy for the vertex type, including primary key ID, auto-generated, custom string, custom number, custom UUID. The default strategy is primary key ID.
+- properties: The property types associated with the vertex type.
+- primary_keys: The primary key properties. This field must have a value when the ID strategy is PRIMARY_KEY, and must be empty for other ID strategies.
+- enable_label_index: Whether to enable label indexing. It is disabled by default.
+- index_names: The indexes created for the vertex type. See details in section 3.4.
+- nullable_keys: Nullable properties.
+- user_data: Setting the common information of the vertex type, similar to the property type.
 
-
-#### 1.3.1 创建一个VertexLabel
+#### 1.3.1 Create a VertexLabel
 
 ##### Method & Url
 
@@ -76,7 +75,7 @@ POST http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 }
 ```
 
-从 hugegraph-server v0.11.2 版本开始支持顶点的 TTL 功能。顶点的 TTL 是通过 VertexLabel 来设置的。比如希望 person 类型的顶点存活时间为一天，需要在创建 person VertexLabel 的时候将 TTL 字段设置为 86400000，即单位为毫秒。
+Starting from version v0.11.2, hugegraph-server supports Time-to-Live (TTL) functionality for vertices. The TTL for vertices is set through VertexLabel. For example, if you want the vertices of type "person" to have a lifespan of one day, you need to set the TTL field to 86400000 (in milliseconds) when creating the "person" VertexLabel.
 
 ```json
 {
@@ -95,7 +94,7 @@ POST http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 }
 ```
 
-另外，当顶点中带有"创建时间"的属性且希望以"创建时间"属性作为计算顶点存活时间的起点时，可以设置 VertexLabel 中的 ttl_start_time 字段。比如 person VertexLabel 有 createdTime 属性，且 createdTime 是 Date 类型的参数，希望 person 类型的顶点从创建开始存活一天的时间，那么创建 person VertexLabel 的 Request Body 如下：
+Additionally, if the vertex has a property called "createdTime" and you want to use it as the starting point for calculating the vertex's lifespan, you can set the ttl_start_time field in the VertexLabel. For example, if the "person" VertexLabel has a property called "createdTime" of type Date, and you want the vertices of type "person" to live for one day starting from the creation time, the Request Body for creating the "person" VertexLabel would be as follows:
 
 ```json
 {
@@ -116,11 +115,11 @@ POST http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 }
 ```
 
-#### 1.3.2 为已存在的VertexLabel添加properties或userdata，或者移除userdata（目前不支持移除properties）
+#### 1.3.2 Add properties or userdata to an existing VertexLabel, or remove userdata (removing properties is currently not supported)
 
 ##### Params
 
-- action: 表示当前行为是添加还是移除，取值为`append`（添加）和`eliminate`（移除）
+- action: Indicates whether the current action is to add or remove. Possible values are `append` (add) and `eliminate` (remove).
 
 ##### Method & Url
 
@@ -176,7 +175,7 @@ PUT http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person?action=app
 }
 ```
 
-#### 1.3.3 获取所有的VertexLabel
+#### 1.3.3 Get all VertexLabels
 
 ##### Method & Url
 
@@ -241,7 +240,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 }
 ```
 
-#### 1.3.4 根据name获取VertexLabel
+#### 1.3.4 Get VertexLabel by name
 
 ##### Method & Url
 
@@ -282,9 +281,9 @@ GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person
 }
 ```
 
-#### 1.3.5 根据name删除VertexLabel
+#### 1.3.5 Delete VertexLabel by name
 
-删除 VertexLabel 会导致删除对应的顶点以及相关的索引数据，会产生一个异步任务
+Deleting a VertexLabel will result in the removal of corresponding vertices and related index data. This operation will generate an asynchronous task.
 
 ##### Method & Url
 
@@ -306,6 +305,6 @@ DELETE http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person
 }
 ```
 
-注：
+Note:
 
-> 可以通过`GET http://localhost:8080/graphs/hugegraph/tasks/1`（其中"1"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](../task)
+> You can use `GET http://localhost:8080/graphs/hugegraph/tasks/1` (where "1" is the task_id) to query the execution status of the asynchronous task. For more information, refer to the [Asynchronous Task RESTful API](../task).
