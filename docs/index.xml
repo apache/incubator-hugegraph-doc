@@ -7722,20 +7722,20 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">5.&lt;/span> ....
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: VertexLabel API</title><link>/docs/clients/restful-api/vertexlabel/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/clients/restful-api/vertexlabel/</guid><description>
 &lt;h3 id="13-vertexlabel">1.3 VertexLabel&lt;/h3>
-&lt;p>假设已经创建好了1.1.3中列出来的 PropertyKeys&lt;/p>
-&lt;p>Params说明&lt;/p>
+&lt;p>Assuming that the PropertyKeys listed in 1.1.3 have already been created.&lt;/p>
+&lt;p>Params Description:&lt;/p>
 &lt;ul>
-&lt;li>id：顶点类型id值&lt;/li>
-&lt;li>name：顶点类型名称，必填&lt;/li>
-&lt;li>id_strategy: 顶点类型的ID策略，主键ID、自动生成、自定义字符串、自定义数字、自定义UUID，默认主键ID&lt;/li>
-&lt;li>properties: 顶点类型关联的属性类型&lt;/li>
-&lt;li>primary_keys: 主键属性，当ID策略为PRIMARY_KEY时必须有值，其他ID策略时必须为空；&lt;/li>
-&lt;li>enable_label_index： 是否开启类型索引，默认关闭&lt;/li>
-&lt;li>index_names：顶点类型创建的索引，详情见3.4&lt;/li>
-&lt;li>nullable_keys：可为空的属性&lt;/li>
-&lt;li>user_data：设置顶点类型的通用信息，作用同属性类型&lt;/li>
+&lt;li>id: The ID value of the vertex type.&lt;/li>
+&lt;li>name: The name of the vertex type, required.&lt;/li>
+&lt;li>id_strategy: The ID strategy for the vertex type, including primary key ID, auto-generated, custom string, custom number, custom UUID. The default strategy is primary key ID.&lt;/li>
+&lt;li>properties: The property types associated with the vertex type.&lt;/li>
+&lt;li>primary_keys: The primary key properties. This field must have a value when the ID strategy is PRIMARY_KEY, and must be empty for other ID strategies.&lt;/li>
+&lt;li>enable_label_index: Whether to enable label indexing. It is disabled by default.&lt;/li>
+&lt;li>index_names: The indexes created for the vertex type. See details in section 3.4.&lt;/li>
+&lt;li>nullable_keys: Nullable properties.&lt;/li>
+&lt;li>user_data: Setting the common information of the vertex type, similar to the property type.&lt;/li>
 &lt;/ul>
-&lt;h4 id="131-创建一个vertexlabel">1.3.1 创建一个VertexLabel&lt;/h4>
+&lt;h4 id="131-create-a-vertexlabel">1.3.1 Create a VertexLabel&lt;/h4>
 &lt;h5 id="method--url">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body">Request Body&lt;/h5>
@@ -7773,7 +7773,7 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;enable_label_index&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user_data&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>从 hugegraph-server v0.11.2 版本开始支持顶点的 TTL 功能。顶点的 TTL 是通过 VertexLabel 来设置的。比如希望 person 类型的顶点存活时间为一天，需要在创建 person VertexLabel 的时候将 TTL 字段设置为 86400000，即单位为毫秒。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Starting from version v0.11.2, hugegraph-server supports Time-to-Live (TTL) functionality for vertices. The TTL for vertices is set through VertexLabel. For example, if you want the vertices of type &amp;ldquo;person&amp;rdquo; to have a lifespan of one day, you need to set the TTL field to 86400000 (in milliseconds) when creating the &amp;ldquo;person&amp;rdquo; VertexLabel.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;id_strategy&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;DEFAULT&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -7788,7 +7788,7 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;ttl&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">86400000&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;enable_label_index&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>另外，当顶点中带有&amp;quot;创建时间&amp;quot;的属性且希望以&amp;quot;创建时间&amp;quot;属性作为计算顶点存活时间的起点时，可以设置 VertexLabel 中的 ttl_start_time 字段。比如 person VertexLabel 有 createdTime 属性，且 createdTime 是 Date 类型的参数，希望 person 类型的顶点从创建开始存活一天的时间，那么创建 person VertexLabel 的 Request Body 如下：&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Additionally, if the vertex has a property called &amp;ldquo;createdTime&amp;rdquo; and you want to use it as the starting point for calculating the vertex&amp;rsquo;s lifespan, you can set the ttl_start_time field in the VertexLabel. For example, if the &amp;ldquo;person&amp;rdquo; VertexLabel has a property called &amp;ldquo;createdTime&amp;rdquo; of type Date, and you want the vertices of type &amp;ldquo;person&amp;rdquo; to live for one day starting from the creation time, the Request Body for creating the &amp;ldquo;person&amp;rdquo; VertexLabel would be as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;id_strategy&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;DEFAULT&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -7805,10 +7805,10 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;ttl_start_time&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;createdTime&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;enable_label_index&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="132-为已存在的vertexlabel添加properties或userdata或者移除userdata目前不支持移除properties">1.3.2 为已存在的VertexLabel添加properties或userdata，或者移除userdata（目前不支持移除properties）&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="132-add-properties-or-userdata-to-an-existing-vertexlabel-or-remove-userdata-removing-properties-is-currently-not-supported">1.3.2 Add properties or userdata to an existing VertexLabel, or remove userdata (removing properties is currently not supported)&lt;/h4>
 &lt;h5 id="params">Params&lt;/h5>
 &lt;ul>
-&lt;li>action: 表示当前行为是添加还是移除，取值为&lt;code>append&lt;/code>（添加）和&lt;code>eliminate&lt;/code>（移除）&lt;/li>
+&lt;li>action: Indicates whether the current action is to add or remove. Possible values are &lt;code>append&lt;/code> (add) and &lt;code>eliminate&lt;/code> (remove).&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-1">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person?action=append
@@ -7848,7 +7848,7 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;super&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;animal&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="133-获取所有的vertexlabel">1.3.3 获取所有的VertexLabel&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="133-get-all-vertexlabels">1.3.3 Get all VertexLabels&lt;/h4>
 &lt;h5 id="method--url-2">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-2">Response Status&lt;/h5>
@@ -7900,7 +7900,7 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="134-根据name获取vertexlabel">1.3.4 根据name获取VertexLabel&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="134-get-vertexlabel-by-name">1.3.4 Get VertexLabel by name&lt;/h4>
 &lt;h5 id="method--url-3">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-3">Response Status&lt;/h5>
@@ -7928,8 +7928,8 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;super&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;animal&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="135-根据name删除vertexlabel">1.3.5 根据name删除VertexLabel&lt;/h4>
-&lt;p>删除 VertexLabel 会导致删除对应的顶点以及相关的索引数据，会产生一个异步任务&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="135-delete-vertexlabel-by-name">1.3.5 Delete VertexLabel by name&lt;/h4>
+&lt;p>Deleting a VertexLabel will result in the removal of corresponding vertices and related index data. This operation will generate an asynchronous task.&lt;/p>
 &lt;h5 id="method--url-4">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-4">Response Status&lt;/h5>
@@ -7938,9 +7938,9 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;task_id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注：&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note:&lt;/p>
 &lt;blockquote>
-&lt;p>可以通过&lt;code>GET http://localhost:8080/graphs/hugegraph/tasks/1&lt;/code>（其中&amp;quot;1&amp;quot;是task_id）来查询异步任务的执行状态，更多&lt;a href="../task">异步任务RESTful API&lt;/a>&lt;/p>
+&lt;p>You can use &lt;code>GET http://localhost:8080/graphs/hugegraph/tasks/1&lt;/code> (where &amp;ldquo;1&amp;rdquo; is the task_id) to query the execution status of the asynchronous task. For more information, refer to the &lt;a href="../task">Asynchronous Task RESTful API&lt;/a>.&lt;/p>
 &lt;/blockquote></description></item><item><title>Docs: Backup and Restore</title><link>/docs/guides/backup-restore/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/guides/backup-restore/</guid><description>
 &lt;h2 id="description">Description&lt;/h2>
 &lt;p>Backup and Restore are functions of backup map and restore map. The data backed up and restored includes metadata (schema) and graph data (vertex and edge).&lt;/p>
