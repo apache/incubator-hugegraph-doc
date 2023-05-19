@@ -1077,7 +1077,7 @@
 &lt;p>You can get the asynchronous job status by &lt;code>GET http://localhost:8080/graphs/hugegraph/tasks/${task_id}&lt;/code> (the task_id here should be 3). See More &lt;a href="../task">AsyncJob RESTfull API&lt;/a>&lt;/p>
 &lt;/blockquote></description></item><item><title>Docs: Vertex API</title><link>/docs/clients/restful-api/vertex/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/clients/restful-api/vertex/</guid><description>
 &lt;h3 id="21-vertex">2.1 Vertex&lt;/h3>
-&lt;p>顶点类型中的 Id 策略决定了顶点的 Id 类型，其对应关系如下：&lt;/p>
+&lt;p>In vertex types, the Id strategy determines the type of the vertex Id, with the corresponding relationships as follows:&lt;/p>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -1108,14 +1108,14 @@
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;p>顶点的 &lt;code>GET/PUT/DELETE&lt;/code> API 中 url 的 id 部分传入的应是带有类型信息的 id 值，这个类型信息用 json 串是否带引号表示，也就是说：&lt;/p>
+&lt;p>For the &lt;code>GET/PUT/DELETE&lt;/code> API of a vertex, the id part in the URL should be passed as the id value with type information. This type information is indicated by whether the JSON string is enclosed in quotes, meaning:&lt;/p>
 &lt;ul>
-&lt;li>当 id 类型为 number 时，url 中的 id 不带引号，形如 xxx/vertices/123456&lt;/li>
-&lt;li>当 id 类型为 string 时，url 中的 id 带引号，形如 xxx/vertices/&amp;ldquo;123456&amp;rdquo;&lt;/li>
+&lt;li>When the id type is number, the id in the URL is without quotes, for example: xxx/vertices/123456.&lt;/li>
+&lt;li>When the id type is string, the id in the URL is enclosed in quotes, for example: xxx/vertices/&amp;ldquo;123456&amp;rdquo;.&lt;/li>
 &lt;/ul>
 &lt;hr>
-&lt;p>接下来的示例均假设已经创建好了前述的各种 schema 信息&lt;/p>
-&lt;h4 id="211-创建一个顶点">2.1.1 创建一个顶点&lt;/h4>
+&lt;p>The following examples assume that the aforementioned schema information has been created.&lt;/p>
+&lt;h4 id="211-create-a-vertex">2.1.1 Create a vertex&lt;/h4>
 &lt;h5 id="method--url">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphs/hugegraph/graph/vertices
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body">Request Body&lt;/h5>
@@ -1148,7 +1148,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="212-创建多个顶点">2.1.2 创建多个顶点&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="212-create-multiple-vertices">2.1.2 Create multiple vertices&lt;/h4>
 &lt;h5 id="method--url-1">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphs/hugegraph/graph/vertices/batch
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-1">Request Body&lt;/h5>
@@ -1176,7 +1176,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;1:marko&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;2:ripple&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="213-更新顶点属性">2.1.3 更新顶点属性&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="213-update-vertex-properties">2.1.3 Update vertex properties&lt;/h4>
 &lt;h5 id="method--url-2">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/&amp;#34;1:marko&amp;#34;?action=append
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-2">Request Body&lt;/h5>
@@ -1188,7 +1188,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>注意：属性的取值是有三种类别的，分别是single、set和list。如果是single，表示增加或更新属性值；如果是set或list，则表示追加属性值。&lt;/p>
+&lt;p>Note: There are three categories for property values: single, set, and list. If it is single, it means adding or updating the property value. If it is set or list, it means appending the property value.&lt;/p>
 &lt;/blockquote>
 &lt;h5 id="response-status-2">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
@@ -1218,20 +1218,20 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="214-批量更新顶点属性">2.1.4 批量更新顶点属性&lt;/h4>
-&lt;h5 id="功能说明">功能说明&lt;/h5>
-&lt;p>批量更新顶点的属性，并支持多种更新策略，包括&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="214-batch-update-vertex-properties">2.1.4 Batch Update Vertex Properties&lt;/h4>
+&lt;h5 id="function-description">Function Description&lt;/h5>
+&lt;p>Batch update properties of vertices and support various update strategies, including:&lt;/p>
 &lt;ul>
-&lt;li>SUM: 数值累加&lt;/li>
-&lt;li>BIGGER: 两个数字/日期取更大的&lt;/li>
-&lt;li>SMALLER: 两个数字/日期取更小的&lt;/li>
-&lt;li>UNION: Set属性取并集&lt;/li>
-&lt;li>INTERSECTION: Set属性取交集&lt;/li>
-&lt;li>APPEND: List属性追加元素&lt;/li>
-&lt;li>ELIMINATE: List/Set属性删除元素&lt;/li>
-&lt;li>OVERRIDE: 覆盖已有属性，如果新属性为null，则仍然使用旧属性&lt;/li>
+&lt;li>SUM: Numeric accumulation&lt;/li>
+&lt;li>BIGGER: Take the larger value between two numbers/dates&lt;/li>
+&lt;li>SMALLER: Take the smaller value between two numbers/dates&lt;/li>
+&lt;li>UNION: Take the union of set properties&lt;/li>
+&lt;li>INTERSECTION: Take the intersection of set properties&lt;/li>
+&lt;li>APPEND: Append elements to list properties&lt;/li>
+&lt;li>ELIMINATE: Remove elements from list/set properties&lt;/li>
+&lt;li>OVERRIDE: Override existing properties, if the new property is null, the old property is still used&lt;/li>
 &lt;/ul>
-&lt;p>假设原顶点及属性为：&lt;/p>
+&lt;p>Assuming the original vertex and properties are:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;vertices&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:[&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
@@ -1330,17 +1330,17 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>结果分析：&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Result Analysis:&lt;/p>
 &lt;ul>
-&lt;li>lang 属性未指定更新策略，直接用新值覆盖旧值，无论新值是否为null；&lt;/li>
-&lt;li>price 属性指定 BIGGER 的更新策略，旧属性值为328，新属性值为299，所以仍然保留了旧属性值328；&lt;/li>
-&lt;li>age 属性指定 OVERRIDE 更新策略，而新属性值中未传入age，相当于age为null，所以仍然保留了原属性值32；&lt;/li>
-&lt;li>city 属性也指定了 OVERRIDE 更新策略，且新属性值不为null，所以覆盖了旧值；&lt;/li>
-&lt;li>weight 属性指定了 SUM 更新策略，旧属性值为0.1，新属性值为0.2，最后的值为0.3；&lt;/li>
-&lt;li>hobby 属性（基数为Set）指定了 UNION 更新策略，所以新值与旧值取了并集；&lt;/li>
+&lt;li>The lang property does not specify an update strategy and is directly overwritten by the new value, regardless of whether the new value is null.&lt;/li>
+&lt;li>The price property specifies the BIGGER update strategy. The old property value is 328, and the new property value is 299, so the old property value of 328 is retained.&lt;/li>
+&lt;li>The age property specifies the OVERRIDE update strategy, but the new property value does not include age, which is equivalent to age being null. Therefore, the original property value of 32 is still retained.&lt;/li>
+&lt;li>The city property also specifies the OVERRIDE update strategy, and the new property value is not null, so it overrides the old value.&lt;/li>
+&lt;li>The weight property specifies the SUM update strategy. The old property value is 0.1, and the new property value is 0.2. The final value is 0.3.&lt;/li>
+&lt;li>The hobby property (cardinality is Set) specifies the UNION update strategy, so the new value is taken as the union with the old value.&lt;/li>
 &lt;/ul>
-&lt;p>其他的更新策略使用方式可以类推，不再赘述。&lt;/p>
-&lt;h4 id="215-删除顶点属性">2.1.5 删除顶点属性&lt;/h4>
+&lt;p>The usage of other update strategies can be inferred in a similar manner and will not be further elaborated.&lt;/p>
+&lt;h4 id="215-delete-vertex-properties">2.1.5 Delete Vertex Properties&lt;/h4>
 &lt;h5 id="method--url-4">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/&amp;#34;1:marko&amp;#34;?action=eliminate
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-4">Request Body&lt;/h5>
@@ -1351,7 +1351,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>注意：这里会直接删除属性（删除key和所有value），无论其属性的取值是single、set或list。&lt;/p>
+&lt;p>Note: Here, the properties (keys and all values) will be directly deleted, regardless of whether the property values are single, set, or list.&lt;/p>
 &lt;/blockquote>
 &lt;h5 id="response-status-4">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
@@ -1375,67 +1375,67 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="216-获取符合条件的顶点">2.1.6 获取符合条件的顶点&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="216-get-vertices-that-meet-the-criteria">2.1.6 Get Vertices that Meet the Criteria&lt;/h4>
 &lt;h5 id="params">Params&lt;/h5>
 &lt;ul>
-&lt;li>label: 顶点类型&lt;/li>
-&lt;li>properties: 属性键值对(根据属性查询的前提是预先建立了索引)&lt;/li>
-&lt;li>limit: 查询最大数目&lt;/li>
-&lt;li>page: 页号&lt;/li>
+&lt;li>label: Vertex type&lt;/li>
+&lt;li>properties: Property key-value pairs (precondition: indexes are created for property queries)&lt;/li>
+&lt;li>limit: Maximum number of results&lt;/li>
+&lt;li>page: Page number&lt;/li>
 &lt;/ul>
-&lt;p>以上参数都是可选的，如果提供page参数，必须提供limit参数，不允许带其他参数。&lt;code>label, properties&lt;/code>和&lt;code>limit&lt;/code>可以任意组合。&lt;/p>
-&lt;p>属性键值对由JSON格式的属性名称和属性值组成，允许多个属性键值对作为查询条件，属性值支持精确匹配、范围匹配和模糊匹配，精确匹配时形如&lt;code>properties={&amp;quot;age&amp;quot;:29}&lt;/code>，范围匹配时形如&lt;code>properties={&amp;quot;age&amp;quot;:&amp;quot;P.gt(29)&amp;quot;}&lt;/code>，模糊匹配时形如&lt;code>properties={&amp;quot;city&amp;quot;: &amp;quot;P.textcontains(&amp;quot;ChengDu China&amp;quot;)}，&lt;/code>范围匹配支持的表达式如下：&lt;/p>
+&lt;p>All of the above parameters are optional. If the &lt;code>page&lt;/code> parameter is provided, the &lt;code>limit&lt;/code> parameter must also be provided, and no other parameters are allowed. &lt;code>label, properties&lt;/code>, and &lt;code>limit&lt;/code> can be combined in any way.&lt;/p>
+&lt;p>Property key-value pairs consist of the property name and value in JSON format. Multiple property key-value pairs are allowed as query conditions. The property value supports exact matching, range matching, and fuzzy matching. For exact matching, use the format &lt;code>properties={&amp;quot;age&amp;quot;:29}&lt;/code>, for range matching, use the format &lt;code>properties={&amp;quot;age&amp;quot;:&amp;quot;P.gt(29)&amp;quot;}&lt;/code>, and for fuzzy matching, use the format &lt;code>properties={&amp;quot;city&amp;quot;: &amp;quot;P.textcontains(&amp;quot;ChengDu China&amp;quot;)}&lt;/code>. The following expressions are supported for range matching:&lt;/p>
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th>表达式&lt;/th>
-&lt;th>说明&lt;/th>
+&lt;th>Expression&lt;/th>
+&lt;th>Explanation&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
 &lt;td>P.eq(number)&lt;/td>
-&lt;td>属性值等于number的顶点&lt;/td>
+&lt;td>Vertices with property value equal to &lt;code>number&lt;/code>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>P.neq(number)&lt;/td>
-&lt;td>属性值不等于number的顶点&lt;/td>
+&lt;td>Vertices with property value not equal to &lt;code>number&lt;/code>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>P.lt(number)&lt;/td>
-&lt;td>属性值小于number的顶点&lt;/td>
+&lt;td>Vertices with property value less than &lt;code>number&lt;/code>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>P.lte(number)&lt;/td>
-&lt;td>属性值小于等于number的顶点&lt;/td>
+&lt;td>Vertices with property value less than or equal to &lt;code>number&lt;/code>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>P.gt(number)&lt;/td>
-&lt;td>属性值大于number的顶点&lt;/td>
+&lt;td>Vertices with property value greater than &lt;code>number&lt;/code>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>P.gte(number)&lt;/td>
-&lt;td>属性值大于等于number的顶点&lt;/td>
+&lt;td>Vertices with property value greater than or equal to &lt;code>number&lt;/code>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>P.between(number1,number2)&lt;/td>
-&lt;td>属性值大于等于number1且小于number2的顶点&lt;/td>
+&lt;td>Vertices with property value greater than or equal to &lt;code>number1&lt;/code> and less than &lt;code>number2&lt;/code>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>P.inside(number1,number2)&lt;/td>
-&lt;td>属性值大于number1且小于number2的顶点&lt;/td>
+&lt;td>Vertices with property value greater than &lt;code>number1&lt;/code> and less than &lt;code>number2&lt;/code>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>P.outside(number1,number2)&lt;/td>
-&lt;td>属性值小于number1且大于number2的顶点&lt;/td>
+&lt;td>Vertices with property value less than &lt;code>number1&lt;/code> and greater than &lt;code>number2&lt;/code>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>P.within(value1,value2,value3,&amp;hellip;)&lt;/td>
-&lt;td>属性值等于任何一个给定value的顶点&lt;/td>
+&lt;td>Vertices with property value equal to any of the given &lt;code>values&lt;/code>&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;p>&lt;strong>查询所有 age 为 20 且 label 为 person 的顶点&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>Query all vertices with age 20 and label person&lt;/strong>&lt;/p>
 &lt;h5 id="method--url-5">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&amp;amp;properties={&amp;#34;age&amp;#34;:29}&amp;amp;limit=1
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-5">Response Status&lt;/h5>
@@ -1470,7 +1470,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>分页查询所有顶点，获取第一页（page不带参数值），限定3条&lt;/strong>&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Paginate through all vertices, retrieve the first page (page without parameter value), limited to 3 records&lt;/strong>&lt;/p>
 &lt;h5 id="method--url-6">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/graph/vertices?page&amp;amp;limit=3
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-6">Response Status&lt;/h5>
@@ -1537,9 +1537,8 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">],&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;page&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;001000100853313a706574657200f07ffffffc00e797c6349be736fffc8699e8a502efe10004&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>返回的body里面是带有下一页的页号信息的，&lt;code>&amp;quot;page&amp;quot;: &amp;quot;001000100853313a706574657200f07ffffffc00e797c6349be736fffc8699e8a502efe10004&amp;quot;&lt;/code>，
-在查询下一页的时候将该值赋给page参数。&lt;/p>
-&lt;p>&lt;strong>分页查询所有顶点，获取下一页（page带上上一页返回的page值），限定3条&lt;/strong>&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The returned body contains information about the page number of the next page, &lt;code>&amp;quot;page&amp;quot;: &amp;quot;001000100853313a706574657200f07ffffffc00e797c6349be736fffc8699e8a502efe10004&amp;quot;&lt;/code>. When querying the next page, assign this value to the &lt;code>page&lt;/code> parameter.&lt;/p>
+&lt;p>&lt;strong>Paginate and retrieve all vertices, including the next page (passing the &lt;code>page&lt;/code> value returned from the previous page), limited to 3 items.&lt;/strong>&lt;/p>
 &lt;h5 id="method--url-7">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/graph/vertices?page=001000100853313a706574657200f07ffffffc00e797c6349be736fffc8699e8a502efe10004&amp;amp;limit=3
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-7">Response Status&lt;/h5>
@@ -1606,8 +1605,8 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">],&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;page&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">null&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>此时&lt;code>&amp;quot;page&amp;quot;: null&lt;/code>表示已经没有下一页了 (注: 后端为 Cassandra 时，为了性能考虑，返回页恰好为最后一页时，返回 &lt;code>page&lt;/code> 值可能非空，通过该 &lt;code>page&lt;/code> 再请求下一页数据时则返回 &lt;code>空数据&lt;/code> 及 &lt;code>page = null&lt;/code>，其他情况类似)&lt;/p>
-&lt;h4 id="217-根据id获取顶点">2.1.7 根据Id获取顶点&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>At this point, &lt;code>&amp;quot;page&amp;quot;: null&lt;/code> indicates that there are no more pages available. (Note: When using Cassandra as the backend for performance reasons, if the returned page happens to be the last page, the &lt;code>page&lt;/code> value may not be empty. When requesting the next page using that &lt;code>page&lt;/code> value, it will return &lt;code>empty data&lt;/code> and &lt;code>page = null&lt;/code>. The same applies to other similar situations.)&lt;/p>
+&lt;h4 id="217-retrieve-vertex-by-id">2.1.7 Retrieve Vertex by ID&lt;/h4>
 &lt;h5 id="method--url-8">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/graph/vertices/&amp;#34;1:marko&amp;#34;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-8">Response Status&lt;/h5>
@@ -1632,18 +1631,18 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="218-根据id删除顶点">2.1.8 根据Id删除顶点&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="218-delete-vertex-by-id">2.1.8 Delete Vertex by ID&lt;/h4>
 &lt;h5 id="params-1">Params&lt;/h5>
 &lt;ul>
-&lt;li>label: 顶点类型，可选参数&lt;/li>
+&lt;li>label: Vertex type, optional parameter&lt;/li>
 &lt;/ul>
-&lt;p>&lt;strong>仅根据Id删除顶点&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>Delete the vertex based on ID only.&lt;/strong>&lt;/p>
 &lt;h5 id="method--url-9">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/&amp;#34;1:marko&amp;#34;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-9">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">204&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>根据Label+Id删除顶点&lt;/strong>&lt;/p>
-&lt;p>通过指定Label参数和Id来删除顶点时，一般来说其性能比仅根据Id删除会更好。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Delete Vertex by Label+ID&lt;/strong>&lt;/p>
+&lt;p>When deleting a vertex by specifying both the Label parameter and the ID, it generally offers better performance compared to deleting by ID alone.&lt;/p>
 &lt;h5 id="method--url-10">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/&amp;#34;1:marko&amp;#34;?label=person
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-10">Response Status&lt;/h5>
