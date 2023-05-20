@@ -11144,27 +11144,26 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">204&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Edge API</title><link>/docs/clients/restful-api/edge/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/clients/restful-api/edge/</guid><description>
 &lt;h3 id="22-edge">2.2 Edge&lt;/h3>
-&lt;p>顶点 id 格式的修改也影响到了边的 Id 以及源顶点和目标顶点 id 的格式。&lt;/p>
-&lt;p>EdgeId是由 &lt;code>src-vertex-id + direction + label + sort-values + tgt-vertex-id&lt;/code> 拼接而成，
-但是这里的顶点id类型不是通过引号区分的，而是根据前缀区分：&lt;/p>
+&lt;p>The modification of the vertex ID format also affects the ID of the edge, as well as the formats of the source vertex and target vertex IDs.&lt;/p>
+&lt;p>The EdgeId is formed by concatenating &lt;code>src-vertex-id + direction + label + sort-values + tgt-vertex-id&lt;/code>, but the vertex ID types are not distinguished by quotation marks here. Instead, they are distinguished by prefixes:&lt;/p>
 &lt;ul>
-&lt;li>当 id 类型为 number 时，EdgeId 的顶点 id 前有一个前缀&lt;code>L&lt;/code> ，形如 &amp;ldquo;L123456&amp;gt;1&amp;raquo;L987654&amp;rdquo;&lt;/li>
-&lt;li>当 id 类型为 string 时，EdgeId 的顶点 id 前有一个前缀&lt;code>S&lt;/code> ，形如 &amp;ldquo;S1:peter&amp;gt;1&amp;raquo;S2:lop&amp;rdquo;&lt;/li>
+&lt;li>When the ID type is number, the vertex ID in the EdgeId has a prefix &lt;code>L&lt;/code>, like &amp;ldquo;L123456&amp;gt;1&amp;raquo;L987654&amp;rdquo;.&lt;/li>
+&lt;li>When the ID type is string, the vertex ID in the EdgeId has a prefix &lt;code>S&lt;/code>, like &amp;ldquo;S1:peter&amp;gt;1&amp;raquo;S2:lop&amp;rdquo;.&lt;/li>
 &lt;/ul>
 &lt;hr>
-&lt;p>接下来的示例均假设已经创建好了前述的各种schema和vertex信息&lt;/p>
-&lt;h4 id="221-创建一条边">2.2.1 创建一条边&lt;/h4>
-&lt;p>Params说明&lt;/p>
+&lt;p>The following examples assume that various schemas and vertex information mentioned above have been created.&lt;/p>
+&lt;h4 id="221-creating-an-edge">2.2.1 Creating an Edge&lt;/h4>
+&lt;p>Params Explanation&lt;/p>
 &lt;ul>
-&lt;li>label：边类型名称，必填&lt;/li>
-&lt;li>outV：源顶点id，必填&lt;/li>
-&lt;li>inV：目标顶点id，必填&lt;/li>
-&lt;li>outVLabel：源顶点类型。必填&lt;/li>
-&lt;li>inVLabel：目标顶点类型。必填&lt;/li>
-&lt;li>properties: 边关联的属性，对象内部结构为：
+&lt;li>label: The name of the edge type, required.&lt;/li>
+&lt;li>outV: The ID of the source vertex, required.&lt;/li>
+&lt;li>inV: The ID of the target vertex, required.&lt;/li>
+&lt;li>outVLabel: The type of the source vertex, required.&lt;/li>
+&lt;li>inVLabel: The type of the target vertex, required.&lt;/li>
+&lt;li>properties: The properties associated with the edge. The internal structure of the object is as follows:
 &lt;ol>
-&lt;li>name：属性名称&lt;/li>
-&lt;li>value：属性值&lt;/li>
+&lt;li>name: The name of the property.&lt;/li>
+&lt;li>value: The value of the property.&lt;/li>
 &lt;/ol>
 &lt;/li>
 &lt;/ul>
@@ -11198,10 +11197,10 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;weight&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.2&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="222-创建多条边">2.2.2 创建多条边&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="222-creating-multiple-edges">2.2.2 Creating Multiple Edges&lt;/h4>
 &lt;h5 id="params">Params&lt;/h5>
 &lt;ul>
-&lt;li>check_vertex: 是否检查顶点存在(true | false)，当设置为 true 而待插入边的源顶点或目标顶点不存在时会报错。&lt;/li>
+&lt;li>check_vertex: Whether to check vertex existence (true | false). When set to true and the source or target vertex of the edge being inserted does not exist, an error will be reported.&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-1">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphs/hugegraph/graph/edges/batch
@@ -11237,7 +11236,7 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;S1:peter&amp;gt;1&amp;gt;&amp;gt;S2:lop&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;S1:marko&amp;gt;2&amp;gt;&amp;gt;S1:vadas&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="223-更新边属性">2.2.3 更新边属性&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="223-updating-edge-properties">2.2.3 Updating Edge Properties&lt;/h4>
 &lt;h5 id="method--url-2">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter&amp;gt;1&amp;gt;&amp;gt;S2:lop?action=append
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-2">Request Body&lt;/h5>
@@ -11247,7 +11246,7 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>注意：属性的取值是有三种类别的，分别是single、set和list。如果是single，表示增加或更新属性值；如果是set或list，则表示追加属性值。&lt;/p>
+&lt;p>Note: There are three categories of property values: single, set, and list. If it is single, it means adding or updating the property value. If it is set or list, it means appending the property value.&lt;/p>
 &lt;/blockquote>
 &lt;h5 id="response-status-2">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
@@ -11265,10 +11264,10 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;weight&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="224-批量更新边属性">2.2.4 批量更新边属性&lt;/h4>
-&lt;h5 id="功能说明">功能说明&lt;/h5>
-&lt;p>与批量更新顶点属性类似&lt;/p>
-&lt;p>假设原边及属性为：&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="224-batch-updating-edge-properties">2.2.4 Batch Updating Edge Properties&lt;/h4>
+&lt;h5 id="function-description">Function Description&lt;/h5>
+&lt;p>Similar to batch updating vertex properties.&lt;/p>
+&lt;p>Assuming the original edge and its properties are:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;edges&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:[&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
@@ -11369,7 +11368,7 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="225-删除边属性">2.2.5 删除边属性&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="225-deleting-edge-properties">2.2.5 Deleting Edge Properties&lt;/h4>
 &lt;h5 id="method--url-4">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter&amp;gt;1&amp;gt;&amp;gt;S2:lop?action=eliminate
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-4">Request Body&lt;/h5>
@@ -11379,7 +11378,7 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>注意：这里会直接删除属性（删除key和所有value），无论其属性的取值是single、set或list。&lt;/p>
+&lt;p>Note: This will directly delete the properties (removing the key and all values), regardless of whether the property values are single, set, or list.&lt;/p>
 &lt;/blockquote>
 &lt;h5 id="response-status-4">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
@@ -11396,80 +11395,79 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;date&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;20170324&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="226-获取符合条件的边">2.2.6 获取符合条件的边&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="226-fetching-edges-that-match-the-criteria">2.2.6 Fetching Edges that Match the Criteria&lt;/h4>
 &lt;h5 id="params-1">Params&lt;/h5>
 &lt;ul>
-&lt;li>vertex_id: 顶点id&lt;/li>
-&lt;li>direction: 边的方向(OUT | IN | BOTH)&lt;/li>
-&lt;li>label: 边的标签&lt;/li>
-&lt;li>properties: 属性键值对(根据属性查询的前提是预先建立了索引)&lt;/li>
-&lt;li>offset：偏移，默认为0&lt;/li>
-&lt;li>limit: 查询数目，默认为100&lt;/li>
-&lt;li>page: 页号&lt;/li>
+&lt;li>vertex_id: Vertex ID&lt;/li>
+&lt;li>direction: Direction of the edge (OUT | IN | BOTH)&lt;/li>
+&lt;li>label: Edge label&lt;/li>
+&lt;li>properties: Key-value pairs of properties (previously indexed for property-based queries)&lt;/li>
+&lt;li>offset: Offset, default is 0&lt;/li>
+&lt;li>limit: Number of results to query, default is 100&lt;/li>
+&lt;li>page: Page number&lt;/li>
 &lt;/ul>
-&lt;p>支持的查询有以下几种：&lt;/p>
+&lt;p>The supported query options are as follows:&lt;/p>
 &lt;ul>
-&lt;li>提供vertex_id参数时，不可以使用参数page，direction、label、properties可选，offset和limit可以
-限制结果范围&lt;/li>
-&lt;li>不提供vertex_id参数时，label和properties可选
+&lt;li>When the vertex_id parameter is provided, the page parameter cannot be used. The direction, label, and properties parameters are optional, while offset and limit can be used to restrict the result range.&lt;/li>
+&lt;li>When the vertex_id parameter is not provided, the label and properties parameters are optional.
 &lt;ul>
-&lt;li>如果使用page参数，则：offset参数不可用（不填或者为0），direction不可用，properties最多只能有一个&lt;/li>
-&lt;li>如果不使用page参数，则：offset和limit可以用来限制结果范围，direction参数忽略&lt;/li>
+&lt;li>If the page parameter is used: the offset parameter is not available (either not provided or set to 0), the direction parameter is not available, and at most one property can be specified.&lt;/li>
+&lt;li>If the page parameter is not used: the offset and limit parameters can be used to restrict the result range, and the direction parameter is ignored.&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
-&lt;p>属性键值对由JSON格式的属性名称和属性值组成，允许多个属性键值对作为查询条件，属性值支持精确匹配、范围匹配和模糊匹配，精确匹配时形如&lt;code>properties={&amp;quot;weight&amp;quot;:0.8}&lt;/code>，范围匹配时形如&lt;code>properties={&amp;quot;age&amp;quot;:&amp;quot;P.gt(0.8)&amp;quot;}&lt;/code>，模糊匹配时形如&lt;code>properties={&amp;quot;city&amp;quot;: &amp;quot;P.textcontains(&amp;quot;ChengDu China&amp;quot;)}&lt;/code>，范围匹配支持的表达式如下：&lt;/p>
+&lt;p>Property key-value pairs consist of the attribute name and attribute value in JSON format. Multiple property key-value pairs are allowed as query conditions. The attribute value supports exact matching, range matching, and fuzzy matching. For exact matching, it is in the form &lt;code>properties={&amp;quot;weight&amp;quot;: 0.8}&lt;/code>. For range matching, it is in the form &lt;code>properties={&amp;quot;age&amp;quot;: &amp;quot;P.gt(0.8)&amp;quot;}&lt;/code>. For fuzzy matching, it is in the form &lt;code>properties={&amp;quot;city&amp;quot;: &amp;quot;P.textcontains(&amp;quot;ChengDu China&amp;quot;)}&lt;/code>. The supported expressions for range matching are as follows:&lt;/p>
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th>表达式&lt;/th>
-&lt;th>说明&lt;/th>
+&lt;th>Expression&lt;/th>
+&lt;th>Description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
 &lt;td>P.eq(number)&lt;/td>
-&lt;td>属性值等于number的边&lt;/td>
+&lt;td>Edges with attribute value equal to &lt;code>number&lt;/code>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>P.neq(number)&lt;/td>
-&lt;td>属性值不等于number的边&lt;/td>
+&lt;td>Edges with attribute value not equal to &lt;code>number&lt;/code>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>P.lt(number)&lt;/td>
-&lt;td>属性值小于number的边&lt;/td>
+&lt;td>Edges with attribute value less than &lt;code>number&lt;/code>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>P.lte(number)&lt;/td>
-&lt;td>属性值小于等于number的边&lt;/td>
+&lt;td>Edges with attribute value less than or equal to &lt;code>number&lt;/code>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>P.gt(number)&lt;/td>
-&lt;td>属性值大于number的边&lt;/td>
+&lt;td>Edges with attribute value greater than &lt;code>number&lt;/code>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>P.gte(number)&lt;/td>
-&lt;td>属性值大于等于number的边&lt;/td>
+&lt;td>Edges with attribute value greater than or equal to &lt;code>number&lt;/code>&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>P.between(number1,number2)&lt;/td>
-&lt;td>属性值大于等于number1且小于number2的边&lt;/td>
+&lt;td>P.between(number1, number2)&lt;/td>
+&lt;td>Edges with attribute value greater than or equal to &lt;code>number1&lt;/code> and less than &lt;code>number2&lt;/code>&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>P.inside(number1,number2)&lt;/td>
-&lt;td>属性值大于number1且小于number2的边&lt;/td>
+&lt;td>P.inside(number1, number2)&lt;/td>
+&lt;td>Edges with attribute value greater than &lt;code>number1&lt;/code> and less than &lt;code>number2&lt;/code>&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>P.outside(number1,number2)&lt;/td>
-&lt;td>属性值小于number1且大于number2的边&lt;/td>
+&lt;td>P.outside(number1, number2)&lt;/td>
+&lt;td>Edges with attribute value less than &lt;code>number1&lt;/code> and greater than &lt;code>number2&lt;/code>&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>P.within(value1,value2,value3,&amp;hellip;)&lt;/td>
-&lt;td>属性值等于任何一个给定value的边&lt;/td>
+&lt;td>P.within(value1, value2, value3, &amp;hellip;)&lt;/td>
+&lt;td>Edges with attribute value equal to any of the given &lt;code>values&lt;/code>&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;p>&lt;strong>查询与顶点 person:josh(vertex_id=&amp;ldquo;1:josh&amp;rdquo;) 相连且 label 为 created 的边&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>Query for edges connected to vertex person:josh (vertex_id=&amp;ldquo;1:josh&amp;rdquo;) with label created&lt;/strong>&lt;/p>
 &lt;h5 id="method--url-5">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?vertex_id=&amp;#34;1:josh&amp;#34;&amp;amp;direction=BOTH&amp;amp;label=created&amp;amp;properties={}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-5">Response Status&lt;/h5>
@@ -11505,7 +11503,7 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>分页查询所有边，获取第一页（page不带参数值），限定3条&lt;/strong>&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Paginated query for all edges, fetching the first page (page without a parameter value), limited to 3 records&lt;/strong>&lt;/p>
 &lt;h5 id="method--url-6">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page&amp;amp;limit=3
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-6">Response Status&lt;/h5>
@@ -11554,9 +11552,8 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">],&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;page&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;002500100753313a6a6f73681210010004000000020953323a726970706c65f07ffffffcf07ffffffd8460d63f4b398dd2721ed4fdb7716b420004&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>返回的body里面是带有下一页的页号信息的，&lt;code>&amp;quot;page&amp;quot;: &amp;quot;002500100753313a6a6f73681210010004000000020953323a726970706c65f07ffffffcf07ffffffd8460d63f4b398dd2721ed4fdb7716b420004&amp;quot;&lt;/code>，
-在查询下一页的时候将该值赋给page参数。&lt;/p>
-&lt;p>&lt;strong>分页查询所有边，获取下一页（page带上上一页返回的page值），限定3条&lt;/strong>&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The returned body contains the information of the next page, &lt;code>&amp;quot;page&amp;quot;: &amp;quot;002500100753313a6a6f73681210010004000000020953323a726970706c65f07ffffffcf07ffffffd8460d63f4b398dd2721ed4fdb7716b420004&amp;quot;&lt;/code>. When querying the next page, assign this value to the page parameter.&lt;/p>
+&lt;p>&lt;strong>Paginated query for all edges, fetching the next page (page with the value returned from the previous page), limited to 3 records&lt;/strong>&lt;/p>
 &lt;h5 id="method--url-7">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page=002500100753313a6a6f73681210010004000000020953323a726970706c65f07ffffffcf07ffffffd8460d63f4b398dd2721ed4fdb7716b420004&amp;amp;limit=3
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-7">Response Status&lt;/h5>
@@ -11605,8 +11602,8 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">],&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;page&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">null&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>此时&lt;code>&amp;quot;page&amp;quot;: null&lt;/code>表示已经没有下一页了 (注: 后端为 Cassandra 时，为了性能考虑，返回页恰好为最后一页时，返回 &lt;code>page&lt;/code> 值可能非空，通过该 &lt;code>page&lt;/code> 再请求下一页数据时则返回 &lt;code>空数据&lt;/code> 及 &lt;code>page = null&lt;/code>，其他情况类似)&lt;/p>
-&lt;h4 id="227-根据id获取边">2.2.7 根据Id获取边&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>When &lt;code>&amp;quot;page&amp;quot;: null&lt;/code> is returned, it indicates that there are no more pages available. (Note: When the backend is Cassandra, for performance considerations, if the returned page happens to be the last page, the &lt;code>page&lt;/code> value may not be empty. When requesting the next page data using that &lt;code>page&lt;/code> value, it will return &lt;code>empty data&lt;/code> and &lt;code>page = null&lt;/code>. Similar situations apply for other cases.)&lt;/p>
+&lt;h4 id="227-fetching-edge-by-id">2.2.7 Fetching Edge by ID&lt;/h4>
 &lt;h5 id="method--url-8">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter&amp;gt;1&amp;gt;&amp;gt;S2:lop
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-8">Response Status&lt;/h5>
@@ -11625,18 +11622,18 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;weight&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.2&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="228-根据id删除边">2.2.8 根据Id删除边&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="228-deleting-edge-by-id">2.2.8 Deleting Edge by ID&lt;/h4>
 &lt;h5 id="params-2">Params&lt;/h5>
 &lt;ul>
-&lt;li>label: 边类型，可选参数&lt;/li>
+&lt;li>label: Edge type, optional parameter&lt;/li>
 &lt;/ul>
-&lt;p>&lt;strong>仅根据Id删除边&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>Deleting Edge by ID only&lt;/strong>&lt;/p>
 &lt;h5 id="method--url-9">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter&amp;gt;1&amp;gt;&amp;gt;S2:lop
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-9">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">204&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>根据Label+Id删除边&lt;/strong>&lt;/p>
-&lt;p>通过指定Label参数和Id来删除边时，一般来说其性能比仅根据Id删除会更好。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Deleting Edge by Label+ID&lt;/strong>&lt;/p>
+&lt;p>In general, specifying the Label parameter along with the ID to delete an edge will provide better performance compared to deleting by ID only.&lt;/p>
 &lt;h5 id="method--url-10">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter&amp;gt;1&amp;gt;&amp;gt;S2:lop?label=person
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-10">Response Status&lt;/h5>
