@@ -4,38 +4,33 @@ linkTitle: "Authentication"
 weight: 15
 ---
 
-### 9.1 用户认证与权限控制
+### 9.1 User Authentication and Access Control
 
-> 开启权限及相关配置请先参考 [权限配置](/docs/config/config-authentication/) 文档
+> To enable authentication and related configurations, please refer to the [Authentication Configuration](/docs/config/config-authentication/) documentation.
 
-##### 用户认证与权限控制概述：
-HugeGraph支持多用户认证、以及细粒度的权限访问控制，采用基于“用户-用户组-操作-资源”的4层设计，灵活控制用户角色与权限。 
-资源描述了图数据库中的数据，比如符合某一类条件的顶点，每一个资源包括type、label、properties三个要素，共有18种type、
-任意label、任意properties的组合形成的资源，一个资源的内部条件是且关系，多个资源之间的条件是或关系。用户可以属于一个或多个用户组，
-每个用户组可以拥有对任意个资源的操作权限，操作类型包括：读、写、删除、执行等种类。 HugeGraph支持动态创建用户、用户组、资源，
-支持动态分配或取消权限。初始化数据库时超级管理员用户被创建，后续可通过超级管理员创建各类角色用户，新创建的用户如果被分配足够权限后，可以由其创建或管理更多的用户。
+##### Overview of User Authentication and Access Control:
+HugeGraph supports multi-user authentication and fine-grained access control. It adopts a 4-tier design based on "User-User Group-Operation-Resource" to flexibly control user roles and permissions. Resources describe data in the graph database, such as vertices that meet certain conditions. Each resource consists of three elements: type, label, and properties. There are a total of 18 types and combinations of any label and properties to form resources. The internal condition of a resource is an "AND" relationship, while the condition between multiple resources is an "OR" relationship. Users can belong to one or more user groups, and each user group can have permissions for any number of resources. The types of operations include read, write, delete, execute, etc. HugeGraph supports dynamically creating users, user groups, and resources, and supports dynamically assigning or revoking permissions. During the initialization of the database, a super administrator user is created, and subsequently, various role users can be created by the super administrator. If a newly created user is assigned sufficient permissions, they can create or manage more users.
 
-##### 举例说明：
-user(name=boss) -belong-> group(name=all) -access(read)-> target(graph=graph1, resource={label: person,
-city: Beijing})  
-描述：用户'boss'拥有对'graph1'图中北京人的读权限。
+##### Example:
+user(name=boss) -belong-> group(name=all) -access(read)-> target(graph=graph1, resource={label: person, city: Beijing})  
+Description: User 'boss' has read permission for people in the 'graph1' graph from Beijing.
 
-##### 接口说明：
-用户认证与权限控制接口包括5类：UserAPI、GroupAPI、TargetAPI、BelongAPI、AccessAPI。
+##### Interface Description:
+The user authentication and access control interface includes 5 categories: UserAPI, GroupAPI, TargetAPI, BelongAPI, AccessAPI.
 
-### 9.2 用户（User）API
-用户接口包括：创建用户，删除用户，修改用户，和查询用户相关信息接口。
+### 9.2 User (User) API
+The user interface includes APIs for creating users, deleting users, modifying users, and querying user-related information.
 
-#### 9.2.1 创建用户
+#### 9.2.1 Create User
 
 ##### Params
 
-- user_name: 用户名称
-- user_password: 用户密码
-- user_phone: 用户手机号
-- user_email: 用户邮箱  
+- user_name: User name
+- user_password: User password
+- user_phone: User phone number
+- user_email: User email
 
-其中 user_name 和 user_password 为必填。
+Both user_name and user_password are required.
 
 ##### Request Body
 
@@ -62,7 +57,7 @@ POST http://localhost:8080/graphs/hugegraph/auth/users
 ```
 
 ##### Response Body
-返回报文中，密码为加密后的密文
+In the response message, the password is encrypted as ciphertext.
 ```json
 {
     "user_password": "******",
@@ -76,11 +71,11 @@ POST http://localhost:8080/graphs/hugegraph/auth/users
 }
 ```
 
-#### 9.2.2 删除用户
+#### 9.2.2 Delete User
 
 ##### Params
 
-- id: 需要删除的用户 Id
+- id: User ID to be deleted
 
 
 ##### Method & Url
@@ -101,11 +96,11 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/users/-63:test
 1
 ```
 
-#### 9.2.3 修改用户
+#### 9.2.3 Modify User
 
 ##### Params
 
-- id: 需要修改的用户 Id
+- id: User ID to be modified
 
 ##### Method & Url
 
@@ -114,7 +109,8 @@ PUT http://localhost:8080/graphs/hugegraph/auth/users/-63:test
 ```
 
 ##### Request Body
-修改user_name、user_password和user_phone
+Modify user_name, user_password, and user_phone.
+
 ```json
 {
     "user_name": "test",
@@ -130,7 +126,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/users/-63:test
 ```
 
 ##### Response Body
-返回结果是包含修改过的内容在内的整个用户组对象
+The returned result is the entire user object including the modified content.
 ```json
 {
     "user_password": "******",
@@ -143,11 +139,11 @@ PUT http://localhost:8080/graphs/hugegraph/auth/users/-63:test
 }
 ```
 
-#### 9.2.4 查询用户列表
+#### 9.2.4 Query User List
 
 ##### Params
 
-- limit: 返回结果条数的上限
+- limit: Upper limit of the number of results returned
 
 
 ##### Method & Url
@@ -179,11 +175,11 @@ GET http://localhost:8080/graphs/hugegraph/auth/users
 }
 ```
 
-#### 9.2.5 查询某个用户
+#### 9.2.5 Query a User
 
 ##### Params
 
-- id: 需要查询的用户 Id
+- id: User ID to be queried
 
 ##### Method & Url
 
@@ -214,7 +210,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/users/-63:admin
 }
 ```
 
-#### 9.2.6 查询某个用户的角色
+#### 9.2.6 Query Roles of a User
 
 ##### Method & Url
 
@@ -246,16 +242,16 @@ GET http://localhost:8080/graphs/hugegraph/auth/users/-63:boss/role
 }
 ```
 
-### 9.3 用户组（Group）API
-用户组会赋予相应的资源权限，用户会被分配不同的用户组，即可拥有不同的资源权限。  
-用户组接口包括：创建用户组，删除用户组，修改用户组，和查询用户组相关信息接口。
+### 9.3 Group (Group) API
+Groups grant corresponding resource permissions, and users are assigned to different groups, thereby having different resource permissions.
+The group interface includes APIs for creating groups, deleting groups, modifying groups, and querying group-related information.
 
-#### 9.3.1 创建用户组
+#### 9.3.1 Create Group
 
 ##### Params
 
-- group_name: 用户组名称
-- group_description: 用户组描述
+- group_name: Group name
+- group_description: Group description
 
 ##### Request Body
 
@@ -292,11 +288,11 @@ POST http://localhost:8080/graphs/hugegraph/auth/groups
 }
 ```
 
-#### 9.3.2 删除用户组
+#### 9.3.2 Delete Group
 
 ##### Params
 
-- id: 需要删除的用户组 Id
+- id: Group ID to be deleted
 
 
 ##### Method & Url
@@ -317,11 +313,11 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
 1
 ```
 
-#### 9.3.3 修改用户组
+#### 9.3.3 Modify Group
 
 ##### Params
 
-- id: 需要修改的用户组 Id
+- id: Group ID to be modified
 
 ##### Method & Url
 
@@ -330,7 +326,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
 ```
 
 ##### Request Body
-修改group_description
+Modify group_description
 ```json
 {
     "group_name": "grant",
@@ -345,7 +341,8 @@ PUT http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
 ```
 
 ##### Response Body
-返回结果是包含修改过的内容在内的整个用户组对象
+The returned result is the entire group object including the modified content.
+
 ```json
 {
     "group_creator": "admin",
@@ -357,11 +354,11 @@ PUT http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
 }
 ```
 
-#### 9.3.4 查询用户组列表
+#### 9.3.4 Query Group List
 
 ##### Params
 
-- limit: 返回结果条数的上限
+- limit: Upper limit of the number of results returned
 
 ##### Method & Url
 
@@ -392,11 +389,11 @@ GET http://localhost:8080/graphs/hugegraph/auth/groups
 }
 ```
 
-#### 9.3.5 查询某个用户组
+#### 9.3.5 Query a Specific Group
 
 ##### Params
 
-- id: 需要查询的用户组 Id
+- id: Group ID to be queried
 
 ##### Method & Url
 
@@ -423,28 +420,26 @@ GET http://localhost:8080/graphs/hugegraph/auth/groups/-69:all
 }
 ```
 
-### 9.4 资源（Target）API
-资源描述了图数据库中的数据，比如符合某一类条件的顶点，每一个资源包括type、label、properties三个要素，共有18种type、
-任意label、任意properties的组合形成的资源，一个资源的内部条件是且关系，多个资源之间的条件是或关系。   
-资源接口包括：资源的创建、删除、修改和查询。
+### 9.4 Resource (Target) API
+Resources describe data in the graph database, such as vertices that meet certain criteria. Each resource includes three elements: type, label, and properties. There are 18 types in total, and the combination of any label and any properties forms a resource. The internal conditions of a resource are based on the AND relationship, while the conditions between multiple resources are based on the OR relationship.  
+The resource API includes creating, deleting, modifying, and querying resources.
 
-#### 9.4.1 创建资源
+#### 9.4.1 Create Resource
 
 ##### Params
-- target_name: 资源名称
-- target_graph: 资源图
-- target_url: 资源地址
-- target_resources: 资源定义(列表)
+- target_name: Name of the resource
+- target_graph: Graph of the resource
+- target_url: URL of the resource
+- target_resources: Resource definitions (list)
 
-target_resources可以包括多个target_resource，以列表的形式存储。  
-每个target_resource包含：
-- type：可选值 VERTEX, EDGE等, 可填ALL，则表示可以是顶点或边；
-- label：可选值，⼀个顶点或边类型的名称，可填*，则表示任意类型；
-- properties：map类型，可包含多个属性的键值对，必须匹配所有属性值，属性值⽀持填条件范围（age:
-  P.gte(18)），properties如果为null表示任意属性均可，如果属性名和属性值均为‘*ʼ也表示任意属性均可。
+target_resources can include multiple target_resource, stored in the form of a list.  
+Each target_resource contains:
+- type: Optional value: VERTEX, EDGE, etc. Can be filled with ALL, indicating it can be a vertex or edge.
+- label: Optional value: name of a vertex or edge type. Can be filled with *, indicating any type.
+- properties: Map type, can contain multiple key-value pairs of properties. Must match all property values. Property values can support conditional ranges (e.g., age: P.gte(18)). If properties are null, it means any property is allowed. If both the property name and value are '*', it also means any property is allowed.
 
-如精细资源："target_resources": [{"type":"VERTEX","label":"person","properties":{"city":"Beijing","age":"P.gte(20)"}}]**  
-资源定义含义：类型是'person'的顶点，且城市属性是'Beijing'，年龄属性大于等于20。
+For example, a specific resource: "target_resources": [{"type":"VERTEX","label":"person","properties":{"city":"Beijing","age":"P.gte(20)"}}]  
+The resource definition means: a vertex of type 'person' with the city property set to 'Beijing' and the age property greater than or equal to 20.
 
 ##### Request Body
 
@@ -494,12 +489,11 @@ POST http://localhost:8080/graphs/hugegraph/auth/targets
 }
 ```
 
-#### 9.4.2 删除资源
+#### 9.4.2 Delete Resource
 
 ##### Params
 
-- id: 需要删除的资源 Id
-
+- id: Resource Id to be deleted
 
 ##### Method & Url
 
@@ -519,12 +513,11 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
 1
 ```
 
-#### 9.4.3 修改资源
+#### 9.4.3 Modify Resource
 
 ##### Params
 
-- id: 需要修改的资源 Id
-
+- id: Resource Id to be modified
 
 ##### Method & Url
 
@@ -533,7 +526,8 @@ PUT http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
 ```
 
 ##### Request Body
-修改资源定义中的type
+Modify the 'type' in the resource definition.
+
 ```json
 {
     "target_name": "gremlin",
@@ -554,7 +548,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
 ```
 
 ##### Response Body
-返回结果是包含修改过的内容在内的整个用户组对象
+The response contains the entire target group object, including the modified content.
 ```json
 {
     "target_creator": "admin",
@@ -574,11 +568,11 @@ PUT http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
 }
 ```
 
-#### 9.4.4 查询资源列表
+#### 9.4.4 Query Resource List
 
 ##### Params
 
-- limit: 返回结果条数的上限
+- limit: Upper limit of the number of returned results.
 
 ##### Method & Url
 
@@ -633,11 +627,11 @@ GET http://localhost:8080/graphs/hugegraph/auth/targets
 }
 ```
 
-#### 9.4.5 查询某个资源
+#### 9.4.5 Query a Specific Resource
 
 ##### Params
 
-- id: 需要查询的资源 Id
+- id: Id of the resource to query
 
 ##### Method & Url
 
@@ -672,17 +666,18 @@ GET http://localhost:8080/graphs/hugegraph/auth/targets/-77:grant
 }
 ```
 
-### 9.5 关联角色（Belong）API
-关联用户和用户组的关系，一个用户可以关联一个或者多个用户组。用户组拥有相关资源的权限，不同用户组的资源权限可以理解为不同的角色。即给用户关联角色。  
-关联角色接口包括：用户关联角色的创建、删除、修改和查询。
+### 9.5 Association of Roles (Belong) API
 
-#### 9.5.1 创建用户的关联角色
+The association between users and user groups allows a user to be associated with one or more user groups. User groups have permissions for related resources, and the permissions for different user groups can be understood as different roles. In other words, users are associated with roles.  
+The API for associating roles includes creating, deleting, modifying, and querying the association of roles for users.
+
+#### 9.5.1 Create an Association of Roles for a User
 
 ##### Params
 
-- user: 用户 Id
-- group: 用户组 Id
-- belong_description: 描述
+- user: User ID
+- group: User group ID
+- belong_description: Description
 
 ##### Request Body
 
@@ -719,11 +714,11 @@ POST http://localhost:8080/graphs/hugegraph/auth/belongs
 }
 ```
 
-#### 9.5.2 删除关联角色
+#### 9.5.2 Delete an Association of Roles
 
 ##### Params
 
-- id: 需要删除的关联角色 Id
+- id: ID of the association of roles to delete
 
 ##### Method & Url
 
@@ -743,12 +738,13 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:g
 1
 ```
 
-#### 9.5.3 修改关联角色
-关联角色只能修改描述，不能修改 user 和 group 属性，如果需要修改关联角色，需要删除原来关联关系，新增关联角色。
+#### 9.5.3 Modify an Association of Roles
+
+An association of roles can only be modified for its description. The `user` and `group` properties cannot be modified. If you need to modify an association of roles, you need to delete the existing association and create a new one.
 
 ##### Params
 
-- id: 需要修改的关联角色 Id
+- id: ID of the association of roles to modify
 
 ##### Method & Url
 
@@ -757,7 +753,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:gran
 ```
 
 ##### Request Body
-修改belong_description
+Modify the `belong_description` field
 ```json
 {
     "belong_description": "update test"
@@ -771,7 +767,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:gran
 ```
 
 ##### Response Body
-返回结果是包含修改过的内容在内的整个用户组对象
+The response includes the modified content as well as the entire association of roles object
 ```json
 {
     "belong_description": "update test",
@@ -784,11 +780,11 @@ PUT http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:gran
 }
 ```
 
-#### 9.5.4 查询关联角色列表
+#### 9.5.4 Query List of Associations of Roles
 
 ##### Params
 
-- limit: 返回结果条数的上限
+- limit: Upper limit on the number of results to return
 
 
 ##### Method & Url
@@ -820,11 +816,11 @@ GET http://localhost:8080/graphs/hugegraph/auth/belongs
 }
 ```
 
-#### 9.5.5 查看某个关联角色
+#### 9.5.5 View a Specific Association of Roles
 
 ##### Params
 
-- id: 需要查询的关联角色 Id
+- id: The id of the association of roles to be queried
 
 ##### Method & Url
 
@@ -851,24 +847,24 @@ GET http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:all
 }
 ```
 
-### 9.6 赋权（Access）API
-给用户组赋予资源的权限，主要包含：读操作(READ)、写操作(WRITE)、删除操作(DELETE)、执行操作(EXECUTE)等。  
-赋权接口包括：赋权的创建、删除、修改和查询。
+### 9.6 Authorization (Access) API
+Grant permissions to user groups for resources, including operations such as READ, WRITE, DELETE, EXECUTE, etc.
+The authorization API includes: creating, deleting, modifying, and querying permissions.
 
-#### 9.6.1 创建赋权(用户组赋予资源的权限)
+#### 9.6.1 Create Authorization (Granting permissions to user groups for resources)
 
 ##### Params
 
-- group: 用户组 Id
-- target: 资源 Id
-- access_permission: 权限许可  
-- access_description: 赋权描述
+- group: Group ID
+- target: Resource ID
+- access_permission: Permission grant
+- access_description: Authorization description
 
-access_permission：
-- READ：读操作，所有的查询，包括查询Schema、查顶点/边，查询顶点和边的数量VERTEX_AGGR/EDGE_AGGR，也包括读图的状态STATUS、变量VAR、任务TASK等；
-- WRITE：写操作，所有的创建、更新操作，包括给Schema增加property key，给顶点增加或更新属性等；
-- DELETE：删除操作，包括删除元数据、删除顶点/边；
-- EXECUTE：执⾏操作，包括执⾏Gremlin语句、执⾏Task、执⾏metadata函数；
+Access permissions:
+- READ: Read operations, including all queries such as querying the schema, retrieving vertices/edges, aggregating vertex and edge counts (VERTEX_AGGR/EDGE_AGGR), and reading the graph's status (STATUS), variables (VAR), tasks (TASK), etc.
+- WRITE: Write operations, including creating and updating operations, such as adding property keys to the schema or adding/updating properties of vertices.
+- DELETE: Delete operations, including deleting metadata, vertices, or edges.
+- EXECUTE: Execute operations, including executing Gremlin queries, executing tasks, and executing metadata functions.
 
 ##### Request Body
 
@@ -906,12 +902,11 @@ POST http://localhost:8080/graphs/hugegraph/auth/accesses
 }
 ```
 
-#### 9.6.2 删除赋权
+#### 9.6.2 Delete Authorization
 
 ##### Params
 
-- id: 需要删除的赋权 Id
-
+- id: The ID of the authorization to be deleted
 
 ##### Method & Url
 
@@ -931,12 +926,12 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>12>S-77
 1
 ```
 
-#### 9.6.3 修改赋权
-赋权只能修改描述，不能修改用户组、资源和权限许可，如果需要修改赋权的关系，可以删除原来的赋权关系，新增赋权。
+#### 9.6.3 Modify Authorization
+Authorization can only be modified for its description. User group, resource, and permission cannot be modified. If you need to modify the relationship of the authorization, you can delete the original authorization relationship and create a new one.
 
 ##### Params
 
-- id: 需要修改的赋权 Id
+- id: The ID of the authorization to be modified
 
 ##### Method & Url
 
@@ -945,7 +940,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>12>S-77:al
 ```
 
 ##### Request Body
-修改access_description
+Modify access_description
 ```json
 {
     "access_description": "test"
@@ -959,7 +954,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>12>S-77:al
 ```
 
 ##### Response Body
-返回结果是包含修改过的内容在内的整个用户组对象
+#### Return Result Including Modified Content of the Entire User Group Object
 ```json
 {
     "access_description": "test",
@@ -973,11 +968,11 @@ PUT http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>12>S-77:al
 }
 ```
 
-#### 9.6.4 查询赋权列表
+#### 9.6.4 Query Authorization List
 
 ##### Params
 
-- limit: 返回结果条数的上限
+- limit: The maximum number of results to return
 
 ##### Method & Url
 
@@ -1009,11 +1004,11 @@ GET http://localhost:8080/graphs/hugegraph/auth/accesses
 }
 ```
 
-#### 9.6.5 查询某个赋权
+#### 9.6.5 Query a Specific Authorization
 
 ##### Params
 
-- id: 需要查询的赋权 Id
+- id: The ID of the authorization to be queried
 
 ##### Method & Url
 
