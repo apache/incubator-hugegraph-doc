@@ -15131,33 +15131,28 @@ When you complete the restore, change the graph mode to None.&lt;/p>
 &lt;blockquote>
 &lt;p>You can query the execution status of an asynchronous task by using &lt;code>GET http://localhost:8080/graphs/hugegraph/tasks/2&lt;/code> (where &amp;ldquo;2&amp;rdquo; is the task_id). For more information, refer to the &lt;a href="../task">Asynchronous Task RESTful API&lt;/a>.&lt;/p>
 &lt;/blockquote></description></item><item><title>Docs: Authentication API</title><link>/docs/clients/restful-api/auth/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/clients/restful-api/auth/</guid><description>
-&lt;h3 id="91-用户认证与权限控制">9.1 用户认证与权限控制&lt;/h3>
+&lt;h3 id="91-user-authentication-and-access-control">9.1 User Authentication and Access Control&lt;/h3>
 &lt;blockquote>
-&lt;p>开启权限及相关配置请先参考 &lt;a href="/docs/config/config-authentication/">权限配置&lt;/a> 文档&lt;/p>
+&lt;p>To enable authentication and related configurations, please refer to the &lt;a href="/docs/config/config-authentication/">Authentication Configuration&lt;/a> documentation.&lt;/p>
 &lt;/blockquote>
-&lt;h5 id="用户认证与权限控制概述">用户认证与权限控制概述：&lt;/h5>
-&lt;p>HugeGraph支持多用户认证、以及细粒度的权限访问控制，采用基于“用户-用户组-操作-资源”的4层设计，灵活控制用户角色与权限。
-资源描述了图数据库中的数据，比如符合某一类条件的顶点，每一个资源包括type、label、properties三个要素，共有18种type、
-任意label、任意properties的组合形成的资源，一个资源的内部条件是且关系，多个资源之间的条件是或关系。用户可以属于一个或多个用户组，
-每个用户组可以拥有对任意个资源的操作权限，操作类型包括：读、写、删除、执行等种类。 HugeGraph支持动态创建用户、用户组、资源，
-支持动态分配或取消权限。初始化数据库时超级管理员用户被创建，后续可通过超级管理员创建各类角色用户，新创建的用户如果被分配足够权限后，可以由其创建或管理更多的用户。&lt;/p>
-&lt;h5 id="举例说明">举例说明：&lt;/h5>
-&lt;p>user(name=boss) -belong-&amp;gt; group(name=all) -access(read)-&amp;gt; target(graph=graph1, resource={label: person,
-city: Beijing})&lt;br>
-描述：用户&amp;rsquo;boss&amp;rsquo;拥有对&amp;rsquo;graph1&amp;rsquo;图中北京人的读权限。&lt;/p>
-&lt;h5 id="接口说明">接口说明：&lt;/h5>
-&lt;p>用户认证与权限控制接口包括5类：UserAPI、GroupAPI、TargetAPI、BelongAPI、AccessAPI。&lt;/p>
-&lt;h3 id="92-用户userapi">9.2 用户（User）API&lt;/h3>
-&lt;p>用户接口包括：创建用户，删除用户，修改用户，和查询用户相关信息接口。&lt;/p>
-&lt;h4 id="921-创建用户">9.2.1 创建用户&lt;/h4>
+&lt;h5 id="overview-of-user-authentication-and-access-control">Overview of User Authentication and Access Control:&lt;/h5>
+&lt;p>HugeGraph supports multi-user authentication and fine-grained access control. It adopts a 4-tier design based on &amp;ldquo;User-User Group-Operation-Resource&amp;rdquo; to flexibly control user roles and permissions. Resources describe data in the graph database, such as vertices that meet certain conditions. Each resource consists of three elements: type, label, and properties. There are a total of 18 types and combinations of any label and properties to form resources. The internal condition of a resource is an &amp;ldquo;AND&amp;rdquo; relationship, while the condition between multiple resources is an &amp;ldquo;OR&amp;rdquo; relationship. Users can belong to one or more user groups, and each user group can have permissions for any number of resources. The types of operations include read, write, delete, execute, etc. HugeGraph supports dynamically creating users, user groups, and resources, and supports dynamically assigning or revoking permissions. During the initialization of the database, a super administrator user is created, and subsequently, various role users can be created by the super administrator. If a newly created user is assigned sufficient permissions, they can create or manage more users.&lt;/p>
+&lt;h5 id="example">Example:&lt;/h5>
+&lt;p>user(name=boss) -belong-&amp;gt; group(name=all) -access(read)-&amp;gt; target(graph=graph1, resource={label: person, city: Beijing})&lt;br>
+Description: User &amp;lsquo;boss&amp;rsquo; has read permission for people in the &amp;lsquo;graph1&amp;rsquo; graph from Beijing.&lt;/p>
+&lt;h5 id="interface-description">Interface Description:&lt;/h5>
+&lt;p>The user authentication and access control interface includes 5 categories: UserAPI, GroupAPI, TargetAPI, BelongAPI, AccessAPI.&lt;/p>
+&lt;h3 id="92-user-user-api">9.2 User (User) API&lt;/h3>
+&lt;p>The user interface includes APIs for creating users, deleting users, modifying users, and querying user-related information.&lt;/p>
+&lt;h4 id="921-create-user">9.2.1 Create User&lt;/h4>
 &lt;h5 id="params">Params&lt;/h5>
 &lt;ul>
-&lt;li>user_name: 用户名称&lt;/li>
-&lt;li>user_password: 用户密码&lt;/li>
-&lt;li>user_phone: 用户手机号&lt;/li>
-&lt;li>user_email: 用户邮箱&lt;/li>
+&lt;li>user_name: User name&lt;/li>
+&lt;li>user_password: User password&lt;/li>
+&lt;li>user_phone: User phone number&lt;/li>
+&lt;li>user_email: User email&lt;/li>
 &lt;/ul>
-&lt;p>其中 user_name 和 user_password 为必填。&lt;/p>
+&lt;p>Both user_name and user_password are required.&lt;/p>
 &lt;h5 id="request-body">Request Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user_name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;boss&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -15170,7 +15165,7 @@ city: Beijing})&lt;br>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">201&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body">Response Body&lt;/h5>
-&lt;p>返回报文中，密码为加密后的密文&lt;/p>
+&lt;p>In the response message, the password is encrypted as ciphertext.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user_password&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;******&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user_email&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;123@xx.com&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -15181,10 +15176,10 @@ city: Beijing})&lt;br>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;-63:boss&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user_create&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;2020-11-17 14:31:07.833&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="922-删除用户">9.2.2 删除用户&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="922-delete-user">9.2.2 Delete User&lt;/h4>
 &lt;h5 id="params-1">Params&lt;/h5>
 &lt;ul>
-&lt;li>id: 需要删除的用户 Id&lt;/li>
+&lt;li>id: User ID to be deleted&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-1">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphs/hugegraph/auth/users/-63:test
@@ -15192,15 +15187,15 @@ city: Beijing})&lt;br>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">204&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-1">Response Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="923-修改用户">9.2.3 修改用户&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="923-modify-user">9.2.3 Modify User&lt;/h4>
 &lt;h5 id="params-2">Params&lt;/h5>
 &lt;ul>
-&lt;li>id: 需要修改的用户 Id&lt;/li>
+&lt;li>id: User ID to be modified&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-2">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/auth/users/-63:test
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-1">Request Body&lt;/h5>
-&lt;p>修改user_name、user_password和user_phone&lt;/p>
+&lt;p>Modify user_name, user_password, and user_phone.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user_name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;test&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user_password&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;******&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -15209,7 +15204,7 @@ city: Beijing})&lt;br>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-2">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-2">Response Body&lt;/h5>
-&lt;p>返回结果是包含修改过的内容在内的整个用户组对象&lt;/p>
+&lt;p>The returned result is the entire user object including the modified content.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user_password&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;******&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user_update&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;2020-11-12 10:29:30.455&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -15219,10 +15214,10 @@ city: Beijing})&lt;br>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;-63:test&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user_create&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;2020-11-12 10:27:13.601&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="924-查询用户列表">9.2.4 查询用户列表&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="924-query-user-list">9.2.4 Query User List&lt;/h4>
 &lt;h5 id="params-3">Params&lt;/h5>
 &lt;ul>
-&lt;li>limit: 返回结果条数的上限&lt;/li>
+&lt;li>limit: Upper limit of the number of results returned&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-3">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/auth/users
@@ -15241,10 +15236,10 @@ city: Beijing})&lt;br>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="925-查询某个用户">9.2.5 查询某个用户&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="925-query-a-user">9.2.5 Query a User&lt;/h4>
 &lt;h5 id="params-4">Params&lt;/h5>
 &lt;ul>
-&lt;li>id: 需要查询的用户 Id&lt;/li>
+&lt;li>id: User ID to be queried&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-4">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/auth/users/-63:admin
@@ -15263,7 +15258,7 @@ city: Beijing})&lt;br>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="926-查询某个用户的角色">9.2.6 查询某个用户的角色&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="926-query-roles-of-a-user">9.2.6 Query Roles of a User&lt;/h4>
 &lt;h5 id="method--url-5">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/auth/users/-63:boss/role
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-5">Response Status&lt;/h5>
@@ -15282,14 +15277,14 @@ city: Beijing})&lt;br>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="93-用户组groupapi">9.3 用户组（Group）API&lt;/h3>
-&lt;p>用户组会赋予相应的资源权限，用户会被分配不同的用户组，即可拥有不同的资源权限。&lt;br>
-用户组接口包括：创建用户组，删除用户组，修改用户组，和查询用户组相关信息接口。&lt;/p>
-&lt;h4 id="931-创建用户组">9.3.1 创建用户组&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="93-group-group-api">9.3 Group (Group) API&lt;/h3>
+&lt;p>Groups grant corresponding resource permissions, and users are assigned to different groups, thereby having different resource permissions.
+The group interface includes APIs for creating groups, deleting groups, modifying groups, and querying group-related information.&lt;/p>
+&lt;h4 id="931-create-group">9.3.1 Create Group&lt;/h4>
 &lt;h5 id="params-5">Params&lt;/h5>
 &lt;ul>
-&lt;li>group_name: 用户组名称&lt;/li>
-&lt;li>group_description: 用户组描述&lt;/li>
+&lt;li>group_name: Group name&lt;/li>
+&lt;li>group_description: Group description&lt;/li>
 &lt;/ul>
 &lt;h5 id="request-body-2">Request Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
@@ -15309,10 +15304,10 @@ city: Beijing})&lt;br>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;-69:all&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;group_description&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;group can do anything&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="932-删除用户组">9.3.2 删除用户组&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="932-delete-group">9.3.2 Delete Group&lt;/h4>
 &lt;h5 id="params-6">Params&lt;/h5>
 &lt;ul>
-&lt;li>id: 需要删除的用户组 Id&lt;/li>
+&lt;li>id: Group ID to be deleted&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-7">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
@@ -15320,15 +15315,15 @@ city: Beijing})&lt;br>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">204&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-7">Response Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="933-修改用户组">9.3.3 修改用户组&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="933-modify-group">9.3.3 Modify Group&lt;/h4>
 &lt;h5 id="params-7">Params&lt;/h5>
 &lt;ul>
-&lt;li>id: 需要修改的用户组 Id&lt;/li>
+&lt;li>id: Group ID to be modified&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-8">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-3">Request Body&lt;/h5>
-&lt;p>修改group_description&lt;/p>
+&lt;p>Modify group_description&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;group_name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;grant&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;group_description&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;grant&amp;#34;&lt;/span>
@@ -15336,7 +15331,7 @@ city: Beijing})&lt;br>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-8">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-8">Response Body&lt;/h5>
-&lt;p>返回结果是包含修改过的内容在内的整个用户组对象&lt;/p>
+&lt;p>The returned result is the entire group object including the modified content.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;group_creator&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;admin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;group_name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;grant&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -15345,10 +15340,10 @@ city: Beijing})&lt;br>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;-69:grant&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;group_description&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;grant&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="934-查询用户组列表">9.3.4 查询用户组列表&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="934-query-group-list">9.3.4 Query Group List&lt;/h4>
 &lt;h5 id="params-8">Params&lt;/h5>
 &lt;ul>
-&lt;li>limit: 返回结果条数的上限&lt;/li>
+&lt;li>limit: Upper limit of the number of results returned&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-9">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/auth/groups
@@ -15367,10 +15362,10 @@ city: Beijing})&lt;br>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="935-查询某个用户组">9.3.5 查询某个用户组&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="935-query-a-specific-group">9.3.5 Query a Specific Group&lt;/h4>
 &lt;h5 id="params-9">Params&lt;/h5>
 &lt;ul>
-&lt;li>id: 需要查询的用户组 Id&lt;/li>
+&lt;li>id: Group ID to be queried&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-10">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/auth/groups/-69:all
@@ -15385,28 +15380,26 @@ city: Beijing})&lt;br>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;-69:all&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;group_description&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;group can do anything&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="94-资源targetapi">9.4 资源（Target）API&lt;/h3>
-&lt;p>资源描述了图数据库中的数据，比如符合某一类条件的顶点，每一个资源包括type、label、properties三个要素，共有18种type、
-任意label、任意properties的组合形成的资源，一个资源的内部条件是且关系，多个资源之间的条件是或关系。&lt;br>
-资源接口包括：资源的创建、删除、修改和查询。&lt;/p>
-&lt;h4 id="941-创建资源">9.4.1 创建资源&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="94-resource-target-api">9.4 Resource (Target) API&lt;/h3>
+&lt;p>Resources describe data in the graph database, such as vertices that meet certain criteria. Each resource includes three elements: type, label, and properties. There are 18 types in total, and the combination of any label and any properties forms a resource. The internal conditions of a resource are based on the AND relationship, while the conditions between multiple resources are based on the OR relationship.&lt;br>
+The resource API includes creating, deleting, modifying, and querying resources.&lt;/p>
+&lt;h4 id="941-create-resource">9.4.1 Create Resource&lt;/h4>
 &lt;h5 id="params-10">Params&lt;/h5>
 &lt;ul>
-&lt;li>target_name: 资源名称&lt;/li>
-&lt;li>target_graph: 资源图&lt;/li>
-&lt;li>target_url: 资源地址&lt;/li>
-&lt;li>target_resources: 资源定义(列表)&lt;/li>
+&lt;li>target_name: Name of the resource&lt;/li>
+&lt;li>target_graph: Graph of the resource&lt;/li>
+&lt;li>target_url: URL of the resource&lt;/li>
+&lt;li>target_resources: Resource definitions (list)&lt;/li>
 &lt;/ul>
-&lt;p>target_resources可以包括多个target_resource，以列表的形式存储。&lt;br>
-每个target_resource包含：&lt;/p>
+&lt;p>target_resources can include multiple target_resource, stored in the form of a list.&lt;br>
+Each target_resource contains:&lt;/p>
 &lt;ul>
-&lt;li>type：可选值 VERTEX, EDGE等, 可填ALL，则表示可以是顶点或边；&lt;/li>
-&lt;li>label：可选值，⼀个顶点或边类型的名称，可填*，则表示任意类型；&lt;/li>
-&lt;li>properties：map类型，可包含多个属性的键值对，必须匹配所有属性值，属性值⽀持填条件范围（age:
-P.gte(18)），properties如果为null表示任意属性均可，如果属性名和属性值均为‘*ʼ也表示任意属性均可。&lt;/li>
+&lt;li>type: Optional value: VERTEX, EDGE, etc. Can be filled with ALL, indicating it can be a vertex or edge.&lt;/li>
+&lt;li>label: Optional value: name of a vertex or edge type. Can be filled with *, indicating any type.&lt;/li>
+&lt;li>properties: Map type, can contain multiple key-value pairs of properties. Must match all property values. Property values can support conditional ranges (e.g., age: P.gte(18)). If properties are null, it means any property is allowed. If both the property name and value are &amp;lsquo;*&amp;rsquo;, it also means any property is allowed.&lt;/li>
 &lt;/ul>
-&lt;p>如精细资源：&amp;ldquo;target_resources&amp;rdquo;: [{&amp;ldquo;type&amp;rdquo;:&amp;ldquo;VERTEX&amp;rdquo;,&amp;ldquo;label&amp;rdquo;:&amp;ldquo;person&amp;rdquo;,&amp;ldquo;properties&amp;rdquo;:{&amp;ldquo;city&amp;rdquo;:&amp;ldquo;Beijing&amp;rdquo;,&amp;ldquo;age&amp;rdquo;:&amp;ldquo;P.gte(20)&amp;rdquo;}}]**&lt;br>
-资源定义含义：类型是&amp;rsquo;person&amp;rsquo;的顶点，且城市属性是&amp;rsquo;Beijing&amp;rsquo;，年龄属性大于等于20。&lt;/p>
+&lt;p>For example, a specific resource: &amp;ldquo;target_resources&amp;rdquo;: [{&amp;ldquo;type&amp;rdquo;:&amp;ldquo;VERTEX&amp;rdquo;,&amp;ldquo;label&amp;rdquo;:&amp;ldquo;person&amp;rdquo;,&amp;ldquo;properties&amp;rdquo;:{&amp;ldquo;city&amp;rdquo;:&amp;ldquo;Beijing&amp;rdquo;,&amp;ldquo;age&amp;rdquo;:&amp;ldquo;P.gte(20)&amp;rdquo;}}]&lt;br>
+The resource definition means: a vertex of type &amp;lsquo;person&amp;rsquo; with the city property set to &amp;lsquo;Beijing&amp;rsquo; and the age property greater than or equal to 20.&lt;/p>
 &lt;h5 id="request-body-4">Request Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;target_name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;all&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -15439,10 +15432,10 @@ P.gte(18)），properties如果为null表示任意属性均可，如果属性名
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;-77:all&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;target_update&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;2020-11-11 15:32:01.192&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="942-删除资源">9.4.2 删除资源&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="942-delete-resource">9.4.2 Delete Resource&lt;/h4>
 &lt;h5 id="params-11">Params&lt;/h5>
 &lt;ul>
-&lt;li>id: 需要删除的资源 Id&lt;/li>
+&lt;li>id: Resource Id to be deleted&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-12">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
@@ -15450,15 +15443,15 @@ P.gte(18)），properties如果为null表示任意属性均可，如果属性名
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">204&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-12">Response Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="943-修改资源">9.4.3 修改资源&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="943-modify-resource">9.4.3 Modify Resource&lt;/h4>
 &lt;h5 id="params-12">Params&lt;/h5>
 &lt;ul>
-&lt;li>id: 需要修改的资源 Id&lt;/li>
+&lt;li>id: Resource Id to be modified&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-13">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-5">Request Body&lt;/h5>
-&lt;p>修改资源定义中的type&lt;/p>
+&lt;p>Modify the &amp;rsquo;type&amp;rsquo; in the resource definition.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;target_name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;gremlin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;target_graph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -15472,7 +15465,7 @@ P.gte(18)），properties如果为null表示任意属性均可，如果属性名
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-13">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-13">Response Body&lt;/h5>
-&lt;p>返回结果是包含修改过的内容在内的整个用户组对象&lt;/p>
+&lt;p>The response contains the entire target group object, including the modified content.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;target_creator&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;admin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;target_name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;gremlin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -15489,10 +15482,10 @@ P.gte(18)），properties如果为null表示任意属性均可，如果属性名
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;-77:gremlin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;target_update&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;2020-11-12 09:37:12.780&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="944-查询资源列表">9.4.4 查询资源列表&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="944-query-resource-list">9.4.4 Query Resource List&lt;/h4>
 &lt;h5 id="params-13">Params&lt;/h5>
 &lt;ul>
-&lt;li>limit: 返回结果条数的上限&lt;/li>
+&lt;li>limit: Upper limit of the number of returned results.&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-14">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/auth/targets
@@ -15535,10 +15528,10 @@ P.gte(18)），properties如果为null表示任意属性均可，如果属性名
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="945-查询某个资源">9.4.5 查询某个资源&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="945-query-a-specific-resource">9.4.5 Query a Specific Resource&lt;/h4>
 &lt;h5 id="params-14">Params&lt;/h5>
 &lt;ul>
-&lt;li>id: 需要查询的资源 Id&lt;/li>
+&lt;li>id: Id of the resource to query&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-15">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/auth/targets/-77:grant
@@ -15561,15 +15554,15 @@ P.gte(18)），properties如果为null表示任意属性均可，如果属性名
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;-77:grant&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;target_update&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;2020-11-11 15:43:24.841&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="95-关联角色belongapi">9.5 关联角色（Belong）API&lt;/h3>
-&lt;p>关联用户和用户组的关系，一个用户可以关联一个或者多个用户组。用户组拥有相关资源的权限，不同用户组的资源权限可以理解为不同的角色。即给用户关联角色。&lt;br>
-关联角色接口包括：用户关联角色的创建、删除、修改和查询。&lt;/p>
-&lt;h4 id="951-创建用户的关联角色">9.5.1 创建用户的关联角色&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="95-association-of-roles-belong-api">9.5 Association of Roles (Belong) API&lt;/h3>
+&lt;p>The association between users and user groups allows a user to be associated with one or more user groups. User groups have permissions for related resources, and the permissions for different user groups can be understood as different roles. In other words, users are associated with roles.&lt;br>
+The API for associating roles includes creating, deleting, modifying, and querying the association of roles for users.&lt;/p>
+&lt;h4 id="951-create-an-association-of-roles-for-a-user">9.5.1 Create an Association of Roles for a User&lt;/h4>
 &lt;h5 id="params-15">Params&lt;/h5>
 &lt;ul>
-&lt;li>user: 用户 Id&lt;/li>
-&lt;li>group: 用户组 Id&lt;/li>
-&lt;li>belong_description: 描述&lt;/li>
+&lt;li>user: User ID&lt;/li>
+&lt;li>group: User group ID&lt;/li>
+&lt;li>belong_description: Description&lt;/li>
 &lt;/ul>
 &lt;h5 id="request-body-6">Request Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
@@ -15589,10 +15582,10 @@ P.gte(18)），properties如果为null表示任意属性均可，如果属性名
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;-63:boss&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;group&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;-69:all&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="952-删除关联角色">9.5.2 删除关联角色&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="952-delete-an-association-of-roles">9.5.2 Delete an Association of Roles&lt;/h4>
 &lt;h5 id="params-16">Params&lt;/h5>
 &lt;ul>
-&lt;li>id: 需要删除的关联角色 Id&lt;/li>
+&lt;li>id: ID of the association of roles to delete&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-17">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss&amp;gt;-82&amp;gt;&amp;gt;S-69:grant
@@ -15600,23 +15593,23 @@ P.gte(18)），properties如果为null表示任意属性均可，如果属性名
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">204&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-17">Response Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="953-修改关联角色">9.5.3 修改关联角色&lt;/h4>
-&lt;p>关联角色只能修改描述，不能修改 user 和 group 属性，如果需要修改关联角色，需要删除原来关联关系，新增关联角色。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="953-modify-an-association-of-roles">9.5.3 Modify an Association of Roles&lt;/h4>
+&lt;p>An association of roles can only be modified for its description. The &lt;code>user&lt;/code> and &lt;code>group&lt;/code> properties cannot be modified. If you need to modify an association of roles, you need to delete the existing association and create a new one.&lt;/p>
 &lt;h5 id="params-17">Params&lt;/h5>
 &lt;ul>
-&lt;li>id: 需要修改的关联角色 Id&lt;/li>
+&lt;li>id: ID of the association of roles to modify&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-18">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss&amp;gt;-82&amp;gt;&amp;gt;S-69:grant
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-7">Request Body&lt;/h5>
-&lt;p>修改belong_description&lt;/p>
+&lt;p>Modify the &lt;code>belong_description&lt;/code> field&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;belong_description&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;update test&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-18">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-18">Response Body&lt;/h5>
-&lt;p>返回结果是包含修改过的内容在内的整个用户组对象&lt;/p>
+&lt;p>The response includes the modified content as well as the entire association of roles object&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;belong_description&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;update test&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;belong_create&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;2020-11-12 10:40:21.720&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -15626,10 +15619,10 @@ P.gte(18)），properties如果为null表示任意属性均可，如果属性名
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;-63:boss&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;group&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;-69:grant&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="954-查询关联角色列表">9.5.4 查询关联角色列表&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="954-query-list-of-associations-of-roles">9.5.4 Query List of Associations of Roles&lt;/h4>
 &lt;h5 id="params-18">Params&lt;/h5>
 &lt;ul>
-&lt;li>limit: 返回结果条数的上限&lt;/li>
+&lt;li>limit: Upper limit on the number of results to return&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-19">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/auth/belongs
@@ -15648,10 +15641,10 @@ P.gte(18)），properties如果为null表示任意属性均可，如果属性名
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="955-查看某个关联角色">9.5.5 查看某个关联角色&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="955-view-a-specific-association-of-roles">9.5.5 View a Specific Association of Roles&lt;/h4>
 &lt;h5 id="params-19">Params&lt;/h5>
 &lt;ul>
-&lt;li>id: 需要查询的关联角色 Id&lt;/li>
+&lt;li>id: The id of the association of roles to be queried&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-20">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss&amp;gt;-82&amp;gt;&amp;gt;S-69:all
@@ -15666,23 +15659,23 @@ P.gte(18)），properties如果为null表示任意属性均可，如果属性名
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;-63:boss&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;group&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;-69:all&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="96-赋权accessapi">9.6 赋权（Access）API&lt;/h3>
-&lt;p>给用户组赋予资源的权限，主要包含：读操作(READ)、写操作(WRITE)、删除操作(DELETE)、执行操作(EXECUTE)等。&lt;br>
-赋权接口包括：赋权的创建、删除、修改和查询。&lt;/p>
-&lt;h4 id="961-创建赋权用户组赋予资源的权限">9.6.1 创建赋权(用户组赋予资源的权限)&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="96-authorization-access-api">9.6 Authorization (Access) API&lt;/h3>
+&lt;p>Grant permissions to user groups for resources, including operations such as READ, WRITE, DELETE, EXECUTE, etc.
+The authorization API includes: creating, deleting, modifying, and querying permissions.&lt;/p>
+&lt;h4 id="961-create-authorization-granting-permissions-to-user-groups-for-resources">9.6.1 Create Authorization (Granting permissions to user groups for resources)&lt;/h4>
 &lt;h5 id="params-20">Params&lt;/h5>
 &lt;ul>
-&lt;li>group: 用户组 Id&lt;/li>
-&lt;li>target: 资源 Id&lt;/li>
-&lt;li>access_permission: 权限许可&lt;/li>
-&lt;li>access_description: 赋权描述&lt;/li>
+&lt;li>group: Group ID&lt;/li>
+&lt;li>target: Resource ID&lt;/li>
+&lt;li>access_permission: Permission grant&lt;/li>
+&lt;li>access_description: Authorization description&lt;/li>
 &lt;/ul>
-&lt;p>access_permission：&lt;/p>
+&lt;p>Access permissions:&lt;/p>
 &lt;ul>
-&lt;li>READ：读操作，所有的查询，包括查询Schema、查顶点/边，查询顶点和边的数量VERTEX_AGGR/EDGE_AGGR，也包括读图的状态STATUS、变量VAR、任务TASK等；&lt;/li>
-&lt;li>WRITE：写操作，所有的创建、更新操作，包括给Schema增加property key，给顶点增加或更新属性等；&lt;/li>
-&lt;li>DELETE：删除操作，包括删除元数据、删除顶点/边；&lt;/li>
-&lt;li>EXECUTE：执⾏操作，包括执⾏Gremlin语句、执⾏Task、执⾏metadata函数；&lt;/li>
+&lt;li>READ: Read operations, including all queries such as querying the schema, retrieving vertices/edges, aggregating vertex and edge counts (VERTEX_AGGR/EDGE_AGGR), and reading the graph&amp;rsquo;s status (STATUS), variables (VAR), tasks (TASK), etc.&lt;/li>
+&lt;li>WRITE: Write operations, including creating and updating operations, such as adding property keys to the schema or adding/updating properties of vertices.&lt;/li>
+&lt;li>DELETE: Delete operations, including deleting metadata, vertices, or edges.&lt;/li>
+&lt;li>EXECUTE: Execute operations, including executing Gremlin queries, executing tasks, and executing metadata functions.&lt;/li>
 &lt;/ul>
 &lt;h5 id="request-body-8">Request Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
@@ -15704,10 +15697,10 @@ P.gte(18)），properties如果为null表示任意属性均可，如果属性名
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;group&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;-69:all&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;-77:all&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="962-删除赋权">9.6.2 删除赋权&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="962-delete-authorization">9.6.2 Delete Authorization&lt;/h4>
 &lt;h5 id="params-21">Params&lt;/h5>
 &lt;ul>
-&lt;li>id: 需要删除的赋权 Id&lt;/li>
+&lt;li>id: The ID of the authorization to be deleted&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-22">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all&amp;gt;-88&amp;gt;12&amp;gt;S-77:all
@@ -15715,23 +15708,23 @@ P.gte(18)），properties如果为null表示任意属性均可，如果属性名
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">204&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-22">Response Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="963-修改赋权">9.6.3 修改赋权&lt;/h4>
-&lt;p>赋权只能修改描述，不能修改用户组、资源和权限许可，如果需要修改赋权的关系，可以删除原来的赋权关系，新增赋权。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="963-modify-authorization">9.6.3 Modify Authorization&lt;/h4>
+&lt;p>Authorization can only be modified for its description. User group, resource, and permission cannot be modified. If you need to modify the relationship of the authorization, you can delete the original authorization relationship and create a new one.&lt;/p>
 &lt;h5 id="params-22">Params&lt;/h5>
 &lt;ul>
-&lt;li>id: 需要修改的赋权 Id&lt;/li>
+&lt;li>id: The ID of the authorization to be modified&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-23">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all&amp;gt;-88&amp;gt;12&amp;gt;S-77:all
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-9">Request Body&lt;/h5>
-&lt;p>修改access_description&lt;/p>
+&lt;p>Modify access_description&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;access_description&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;test&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-23">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-23">Response Body&lt;/h5>
-&lt;p>返回结果是包含修改过的内容在内的整个用户组对象&lt;/p>
+&lt;h4 id="return-result-including-modified-content-of-the-entire-user-group-object">Return Result Including Modified Content of the Entire User Group Object&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;access_description&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;test&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;access_permission&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;WRITE&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -15742,10 +15735,10 @@ P.gte(18)），properties如果为null表示任意属性均可，如果属性名
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;group&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;-69:all&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;target&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;-77:all&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="964-查询赋权列表">9.6.4 查询赋权列表&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="964-query-authorization-list">9.6.4 Query Authorization List&lt;/h4>
 &lt;h5 id="params-23">Params&lt;/h5>
 &lt;ul>
-&lt;li>limit: 返回结果条数的上限&lt;/li>
+&lt;li>limit: The maximum number of results to return&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-24">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/auth/accesses
@@ -15765,10 +15758,10 @@ P.gte(18)），properties如果为null表示任意属性均可，如果属性名
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="965-查询某个赋权">9.6.5 查询某个赋权&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="965-query-a-specific-authorization">9.6.5 Query a Specific Authorization&lt;/h4>
 &lt;h5 id="params-24">Params&lt;/h5>
 &lt;ul>
-&lt;li>id: 需要查询的赋权 Id&lt;/li>
+&lt;li>id: The ID of the authorization to be queried&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-25">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all&amp;gt;-88&amp;gt;11&amp;gt;S-77:all
