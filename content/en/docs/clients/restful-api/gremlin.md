@@ -6,16 +6,16 @@ weight: 14
 
 ### 8.1 Gremlin
 
-#### 8.1.1 向HugeGraphServer发送gremlin语句（GET），同步执行
+#### 8.1.1 Sending a gremlin statement (GET) to HugeGraphServer for synchronous execution
 
 ##### Params
 
-- gremlin: 要发送给`HugeGraphServer`执行的`gremlin`语句
-- bindings: 用来绑定参数，key是字符串，value是绑定的值（只能是字符串或者数字），功能类似于MySQL的 Prepared Statement，用于加速语句执行
-- language: 发送语句的语言类型，默认为`gremlin-groovy`
-- aliases: 为存在于图空间的已有变量添加别名
+- gremlin: The gremlin statement to be sent to `HugeGraphServer` for execution
+- bindings: Used to bind parameters. Key is a string, and the value is the bound value (can only be a string or number). This functionality is similar to MySQL's Prepared Statement and is used to speed up statement execution.
+- language: The language type of the sent statement. Default is `gremlin-groovy`.
+- aliases: Adds aliases for existing variables in the graph space.
 
-**查询顶点**
+**Querying vertices**
 
 ##### Method & Url
 
@@ -64,7 +64,7 @@ GET http://127.0.0.1:8080/gremlin?gremlin=hugegraph.traversal().V('1:marko')
 }
 ```
 
-#### 8.1.2 向HugeGraphServer发送gremlin语句（POST），同步执行
+#### 8.1.2 Sending a gremlin statement (POST) to HugeGraphServer for synchronous execution
 
 ##### Method & Url
 
@@ -72,7 +72,7 @@ GET http://127.0.0.1:8080/gremlin?gremlin=hugegraph.traversal().V('1:marko')
 POST http://localhost:8080/gremlin
 ```
 
-**查询顶点**
+**Querying vertices**
 
 ##### Request Body
 
@@ -126,16 +126,13 @@ POST http://localhost:8080/gremlin
 }
 ```
 
-注意：
+Note:
 
-> 这里是直接使用图对象（hugegraph），先获取其遍历器（traversal()），再获取顶点。
-不能直接写成`graph.traversal().V()`或`g.V()`，可以通过`"aliases": {"graph": "hugegraph", "g": "__g_hugegraph"}`
-为图和遍历器添加别名后使用别名操作。其中，`hugegraph`是原生存在的变量，`__g_hugegraph`是`HugeGraphServer`额外添加的变量，
-每个图都会存在一个对应的这样格式（__g_${graph}）的遍历器对象。
+> Here we directly use the graph object (`hugegraph`), first retrieve its traversal iterator (`traversal()`), and then retrieve the vertices. Instead of writing `graph.traversal().V()` or `g.V()`, you can use aliases to operate on the graph and traversal iterator. In this case, `hugegraph` is a native variable, and `__g_hugegraph` is an additional variable added by HugeGraphServer. Each graph will have a corresponding traversal iterator object in this format (`__g_${graph}`).
 
-> 响应体的结构与其他 Vertex 或 Edge 的 RESTful API的结构有区别，用户可能需要自行解析。
+> The structure of the response body is different from the RESTful API structure of other vertices or edges. Users may need to parse it manually.
 
-**查询边**
+**Querying edges**
 
 ##### Request Body
 
@@ -186,7 +183,7 @@ POST http://localhost:8080/gremlin
 }
 ```
 
-#### 8.1.3 向HugeGraphServer发送gremlin语句（POST），异步执行
+#### 8.1.3 Sending a gremlin statement (POST) to HugeGraphServer for asynchronous execution
 
 ##### Method & Url
 
@@ -194,7 +191,7 @@ POST http://localhost:8080/gremlin
 POST http://localhost:8080/graphs/hugegraph/jobs/gremlin
 ```
 
-**查询顶点**
+**Querying vertices**
 
 ##### Request Body
 
@@ -207,10 +204,9 @@ POST http://localhost:8080/graphs/hugegraph/jobs/gremlin
 }
 ```
 
-注意：
+Note:
 
-> 异步执行Gremlin语句暂不支持aliases，可以使用 `graph` 代表要操作的图，也可以直接使用图的名字， 例如 `hugegraph`;
-另外`g`代表 traversal，等价于 `graph.traversal()` 或者 `hugegraph.traversal()`
+> Asynchronous execution of Gremlin statements does not currently support aliases. You can use `graph` to represent the graph you want to operate on, or directly use the name of the graph, such as `hugegraph`. Additionally, `g` represents the traversal, which is equivalent to `graph.traversal()` or `hugegraph.traversal()`.
 
 ##### Response Status
 
@@ -226,11 +222,11 @@ POST http://localhost:8080/graphs/hugegraph/jobs/gremlin
 }
 ```
 
-注：
+Note:
 
-> 可以通过`GET http://localhost:8080/graphs/hugegraph/tasks/1`（其中"1"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](../task)
+> You can query the execution status of an asynchronous task by using `GET http://localhost:8080/graphs/hugegraph/tasks/1` (where "1" is the task_id). For more information, refer to the [Asynchronous Task RESTful API](../task).
 
-**查询边**
+**Querying edges**
 
 ##### Request Body
 
@@ -257,6 +253,6 @@ POST http://localhost:8080/graphs/hugegraph/jobs/gremlin
 }
 ```
 
-注：
+Note:
 
-> 可以通过`GET http://localhost:8080/graphs/hugegraph/tasks/2`（其中"2"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](../task)
+> You can query the execution status of an asynchronous task by using `GET http://localhost:8080/graphs/hugegraph/tasks/2` (where "2" is the task_id). For more information, refer to the [Asynchronous Task RESTful API](../task).
