@@ -6,9 +6,9 @@ weight: 11
 
 ### 5.1 Variables
 
-Variables可以用来存储有关整个图的数据，数据按照键值对的方式存取
+Variables can be used to store data about the entire graph. The data is accessed and stored in the form of key-value pairs.
 
-#### 5.1.1 创建或者更新某个键值对
+#### 5.1.1 Creating or Updating a Key-Value Pair
 
 ##### Method & Url
 
@@ -38,7 +38,7 @@ PUT http://localhost:8080/graphs/hugegraph/variables/name
 }
 ```
 
-#### 5.1.2 列出全部键值对
+#### 5.1.2 Listing all key-value pairs
 
 ##### Method & Url
 
@@ -60,7 +60,7 @@ GET http://localhost:8080/graphs/hugegraph/variables
 }
 ```
 
-#### 5.1.3 列出某个键值对
+#### 5.1.3 Listing a specific key-value pair
 
 ##### Method & Url
 
@@ -82,7 +82,7 @@ GET http://localhost:8080/graphs/hugegraph/variables/name
 }
 ```
 
-#### 5.1.4 删除某个键值对
+#### 5.1.4 Deleting a specific key-value pair
 
 ##### Method & Url
 
