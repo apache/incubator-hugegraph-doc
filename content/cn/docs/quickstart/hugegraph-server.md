@@ -39,6 +39,7 @@ gcc --version
 - 方式1：一键部署
 - 方式2：下载tar包
 - 方式3：源码编译
+- 方式4：使用Docker容器
 
 #### 3.1 一键部署
 
@@ -112,6 +113,10 @@ mvn package -DskipTests
 ```
 
 执行成功后，在hugegraph目录下生成 hugegraph-*.tar.gz 文件，就是编译生成的tar包。
+
+#### 3.4 使用Docker容器
+
+可参考[Docker部署方式](https://hub.docker.com/r/hugegraph/hugegraph)。
 
 ### 4 配置
 
