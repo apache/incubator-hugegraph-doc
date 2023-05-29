@@ -1263,6 +1263,7 @@
 &lt;li>方式1：一键部署&lt;/li>
 &lt;li>方式2：下载tar包&lt;/li>
 &lt;li>方式3：源码编译&lt;/li>
+&lt;li>方式4：使用Docker容器&lt;/li>
 &lt;/ul>
 &lt;h4 id="31-一键部署">3.1 一键部署&lt;/h4>
 &lt;p>HugeGraph-Tools 提供了一键部署的命令行工具，用户可以使用该工具快速地一键下载、解压、配置并启动 HugeGraph-Server 和 HugeGraph-Hubble
@@ -1309,6 +1310,8 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> ------------------------------------------------------------------------
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>......
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>执行成功后，在hugegraph目录下生成 hugegraph-*.tar.gz 文件，就是编译生成的tar包。&lt;/p>
+&lt;h4 id="34-使用docker容器">3.4 使用Docker容器&lt;/h4>
+&lt;p>可参考&lt;a href="https://hub.docker.com/r/hugegraph/hugegraph">Docker部署方式&lt;/a>。&lt;/p>
 &lt;h3 id="4-配置">4 配置&lt;/h3>
 &lt;p>如果需要快速启动HugeGraph仅用于测试，那么只需要进行少数几个配置项的修改即可（见下一节）。
 详细的配置介绍请参考&lt;a href="/docs/config/config-guide">配置文档&lt;/a>及&lt;a href="/docs/config/config-option">配置项介绍&lt;/a>&lt;/p>
