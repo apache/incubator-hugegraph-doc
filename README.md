@@ -56,4 +56,4 @@ The functions of this system include but are not limited to:
 - Feedback Email: [dev@hugegraph.apache.org](mailto:dev@hugegraph.apache.org)
 - WeChat public account: Apache HugeGraph, welcome to scan this QR code to follow us.
 
-<img src="./assets/images/weixin.png">
+<img src="./assets/images/wechat.png">
