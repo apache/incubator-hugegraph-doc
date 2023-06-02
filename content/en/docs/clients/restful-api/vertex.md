@@ -157,13 +157,13 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=appen
 
 ```json
 {
-    "id":"1:marko",
-    "label":"person",
-    "type":"vertex",
-    "properties":{
-        "name":"marko",
-        "age":30,
-        "city":"Beijing"
+    "id": "1:marko",
+    "label": "person",
+    "type": "vertex",
+    "properties": {
+        "name": "marko",
+        "age": 30,
+        "city": "Beijing"
     }
 }
 ```
@@ -187,27 +187,27 @@ Assuming the original vertex and properties are:
 
 ```json
 {
-    "vertices":[
+    "vertices": [
         {
-            "id":"2:lop",
-            "label":"software",
-            "type":"vertex",
-            "properties":{
-                "name":"lop",
-                "lang":"java",
-                "price":328
+            "id": "2:lop",
+            "label": "software",
+            "type": "vertex",
+            "properties": {
+                "name": "lop",
+                "lang": "java",
+                "price": 328
             }
         },
         {
-            "id":"1:josh",
-            "label":"person",
-            "type":"vertex",
-            "properties":{
-                "name":"josh",
-                "age":32,
-                "city":"Beijing",
-                "weight":0.1,
-                "hobby":[
+            "id": "1:josh",
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "josh",
+                "age": 32,
+                "city": "Beijing",
+                "weight": 0.1,
+                "hobby": [
                     "reading",
                     "football"
                 ]
@@ -233,37 +233,37 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
 
 ```json
 {
-    "vertices":[
+    "vertices": [
         {
-            "label":"software",
-            "type":"vertex",
-            "properties":{
-                "name":"lop",
-                "lang":"c++",
-                "price":299
+            "label": "software",
+            "type": "vertex",
+            "properties": {
+                "name": "lop",
+                "lang": "c++",
+                "price": 299
             }
         },
         {
-            "label":"person",
-            "type":"vertex",
-            "properties":{
-                "name":"josh",
-                "city":"Shanghai",
-                "weight":0.2,
-                "hobby":[
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "josh",
+                "city": "Shanghai",
+                "weight": 0.2,
+                "hobby": [
                     "swiming"
                 ]
             }
         }
     ],
-    "update_strategies":{
-        "price":"BIGGER",
-        "age":"OVERRIDE",
-        "city":"OVERRIDE",
-        "weight":"SUM",
-        "hobby":"UNION"
+    "update_strategies": {
+        "price": "BIGGER",
+        "age": "OVERRIDE",
+        "city": "OVERRIDE",
+        "weight": "SUM",
+        "hobby": "UNION"
     },
-    "create_if_not_exist":true
+    "create_if_not_exist": true
 }
 ```
 
