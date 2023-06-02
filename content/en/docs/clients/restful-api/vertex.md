@@ -202,7 +202,7 @@ Assuming the original vertex and properties are:
 }
 ```
 
-It can be added by the following command:
+Add vertices with the following command:
 
 ```shell
 curl -H "Content-Type: application/json" -d '[{"label":"person","properties":{"name":"josh","age":32,"city":"Beijing","weight":0.1,"hobby":["reading","football"]}},{"label":"software","properties":{"name":"lop","lang":"java","price":328}}]' http:///127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
