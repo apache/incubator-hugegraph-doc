@@ -52,13 +52,9 @@ The functions of this system include but are not limited to:
 - [HugeGraph-Tools](https://hugegraph.apache.org/docs/quickstart/hugegraph-tools): HugeGraph-Tools is HugeGraph's deployment and management tools, including functions such as managing graphs, backup/restore, Gremlin execution, etc.
 
 ### Subscribe the mailing list
-Read all the mail easily at: https://lists.apache.org/list.html?dev@hugegraph.apache.org
 
-HugeGraph offers 2 dev mailing lists:
+HugeGraph offered an email list for development and user discussions. 
 - hugegraph-dev: [dev@hugegraph.apache.org](mailto:dev@hugegraph.apache.org) for development and users discussions.
-- hugegraph-commits: [commits@hugegraph.apache.org](mailto:commits@hugegraph.apache.org) for commits / [pull requests](https://github.com/apache/incubator-hugegraph/pulls) and other notifications like code review comments.
-
-You can subscribe to the mailing list anytime you want, and you can also check [historical emails](https://lists.apache.org/list.html?dev@hugegraph.apache.org).
 
 Subscribe to the mailing list by following steps:
 - Email [dev-subscribe@hugegraph.apache.org](mailto:dev-subscribe@hugegraph.apache.org) by your email account, and then you will receive a confirmation email.
@@ -66,8 +62,13 @@ Subscribe to the mailing list by following steps:
 - Now you are a subscriber of the mailing list. If you have more questions, just email to the mailing list and someone will reply you soon.
 - If you want to unsubscribe the mailing list, just email to [dev-unsubscribe@hugegraph.apache.org](mailto:dev-unsubscribe@hugegraph.apache.org) and follow the steps in the confirmation email.
 
+You can subscribe to the mailing list anytime you want. Additionally, you can check [historical emails / all emails](https://lists.apache.org/list.html?dev@hugegraph.apache.org) easily (even if you are not subscribe the list).
+
+Some notes:
+- If you don't receive the confirmation email, please send it after 24h later.
+- Don't send mail to **dev** until you subscribe the mailing list successfully (otherwise the mail will be banned).
+
 More information of mailing subscribe can be found at:
-- https://dubbo.apache.org/zh/docs/contribution-guidelines/contributor/mailing-list-subscription-guide_dev/
 - http://apache.org/foundation/mailinglists.html#subscribing
 
 ### Contact Us
