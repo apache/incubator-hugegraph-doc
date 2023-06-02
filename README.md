@@ -51,6 +51,25 @@ The functions of this system include but are not limited to:
 - [HugeGraph-Hubble](https://hugegraph.apache.org/docs/quickstart/hugegraph-hubble): HugeGraph-Hubble is HugeGraph's web visualization management platform, a one-stop visual analysis platform. The platform covers the whole process from data modeling, to rapid data import, to online and offline analysis of data, and unified management of graphs;
 - [HugeGraph-Tools](https://hugegraph.apache.org/docs/quickstart/hugegraph-tools): HugeGraph-Tools is HugeGraph's deployment and management tools, including functions such as managing graphs, backup/restore, Gremlin execution, etc.
 
+### Subscribe the mailing list
+Read all the mail easily at: https://lists.apache.org/list.html?dev@hugegraph.apache.org
+
+HugeGraph offers 2 dev mailing lists:
+- hugegraph-dev: [dev@hugegraph.apache.org](mailto:dev@hugegraph.apache.org) for development and users discussions.
+- hugegraph-commits: [commits@hugegraph.apache.org](mailto:commits@hugegraph.apache.org) for commits / [pull requests](https://github.com/apache/incubator-hugegraph/pulls) and other notifications like code review comments.
+
+You can subscribe to the mailing list anytime you want, and you can also check [historical emails](https://lists.apache.org/list.html?dev@hugegraph.apache.org).
+
+Subscribe to the mailing list by following steps:
+- Email [dev-subscribe@hugegraph.apache.org](mailto:dev-subscribe@hugegraph.apache.org) by your email account, and then you will receive a confirmation email.
+- Reply the confirmation email to confirm your subscription. Then, you will receive another email.
+- Now you are a subscriber of the mailing list. If you have more questions, just email to the mailing list and someone will reply you soon.
+- If you want to unsubscribe the mailing list, just email to [dev-unsubscribe@hugegraph.apache.org](mailto:dev-unsubscribe@hugegraph.apache.org) and follow the steps in the confirmation email.
+
+More information of mailing subscribe can be found at:
+- https://dubbo.apache.org/zh/docs/contribution-guidelines/contributor/mailing-list-subscription-guide_dev/
+- http://apache.org/foundation/mailinglists.html#subscribing
+
 ### Contact Us
 - [Github Issues](https://github.com/apache/incubator-hugegraph/issues): Feedback on usage issues and functional requirements (priority)
 - Feedback Email: [dev@hugegraph.apache.org](mailto:dev@hugegraph.apache.org)
