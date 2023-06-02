@@ -70,12 +70,12 @@ POST http://localhost:8080/graphs/hugegraph/graph/vertices
 
 ```json
 {
-    "id":"1:marko",
-    "label":"person",
-    "type":"vertex",
-    "properties":{
-        "name":"marko",
-        "age":29
+    "id": "1:marko",
+    "label": "person",
+    "type": "vertex",
+    "properties": {
+        "name": "marko",
+        "age": 29
     }
 }
 ```
@@ -157,13 +157,13 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=appen
 
 ```json
 {
-    "id":"1:marko",
-    "label":"person",
-    "type":"vertex",
-    "properties":{
-        "name":"marko",
-        "age":30,
-        "city":"Beijing"
+    "id": "1:marko",
+    "label": "person",
+    "type": "vertex",
+    "properties": {
+        "name": "marko",
+        "age": 30,
+        "city": "Beijing"
     }
 }
 ```
@@ -187,27 +187,27 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=appen
 
 ```json
 {
-    "vertices":[
+    "vertices": [
         {
-            "id":"2:lop",
-            "label":"software",
-            "type":"vertex",
-            "properties":{
-                "name":"lop",
-                "lang":"java",
-                "price":328
+            "id": "2:lop",
+            "label": "software",
+            "type": "vertex",
+            "properties": {
+                "name": "lop",
+                "lang": "java",
+                "price": 328
             }
         },
         {
-            "id":"1:josh",
-            "label":"person",
-            "type":"vertex",
-            "properties":{
-                "name":"josh",
-                "age":32,
-                "city":"Beijing",
-                "weight":0.1,
-                "hobby":[
+            "id": "1:josh",
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "josh",
+                "age": 32,
+                "city": "Beijing",
+                "weight": 0.1,
+                "hobby": [
                     "reading",
                     "football"
                 ]
@@ -233,37 +233,37 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
 
 ```json
 {
-    "vertices":[
+    "vertices": [
         {
-            "label":"software",
-            "type":"vertex",
-            "properties":{
-                "name":"lop",
-                "lang":"c++",
-                "price":299
+            "label": "software",
+            "type": "vertex",
+            "properties": {
+                "name": "lop",
+                "lang": "c++",
+                "price": 299
             }
         },
         {
-            "label":"person",
-            "type":"vertex",
-            "properties":{
-                "name":"josh",
-                "city":"Shanghai",
-                "weight":0.2,
-                "hobby":[
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "josh",
+                "city": "Shanghai",
+                "weight": 0.2,
+                "hobby": [
                     "swiming"
                 ]
             }
         }
     ],
-    "update_strategies":{
-        "price":"BIGGER",
-        "age":"OVERRIDE",
-        "city":"OVERRIDE",
-        "weight":"SUM",
-        "hobby":"UNION"
+    "update_strategies": {
+        "price": "BIGGER",
+        "age": "OVERRIDE",
+        "city": "OVERRIDE",
+        "weight": "SUM",
+        "hobby": "UNION"
     },
-    "create_if_not_exist":true
+    "create_if_not_exist": true
 }
 ```
 
@@ -277,27 +277,27 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
 
 ```json
 {
-    "vertices":[
+    "vertices": [
         {
-            "id":"2:lop",
-            "label":"software",
-            "type":"vertex",
-            "properties":{
-                "name":"lop",
-                "lang":"c++",
-                "price":328.0
+            "id": "2:lop",
+            "label": "software",
+            "type": "vertex",
+            "properties": {
+                "name": "lop",
+                "lang": "c++",
+                "price": 328
             }
         },
         {
-            "id":"1:josh",
-            "label":"person",
-            "type":"vertex",
-            "properties":{
-                "name":"josh",
-                "age":32,
-                "city":"Shanghai",
-                "weight":0.3,
-                "hobby":[
+            "id": "1:josh",
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "josh",
+                "age": 32,
+                "city": "Shanghai",
+                "weight": 0.3,
+                "hobby": [
                     "reading",
                     "football",
                     "swiming"
@@ -350,12 +350,12 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=elimi
 
 ```json
 {
-    "id":"1:marko",
-    "label":"person",
-    "type":"vertex",
-    "properties":{
-        "name":"marko",
-        "age":30
+    "id": "1:marko",
+    "label": "person",
+    "type": "vertex",
+    "properties": {
+        "name": "marko",
+        "age": 30
     }
 }
 ```
@@ -404,14 +404,14 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&propertie
 
 ```json
 {
-    "vertices":[
+    "vertices": [
         {
-            "id":"1:marko",
-            "label":"person",
-            "type":"vertex",
-            "properties":{
-                "name":"marko",
-                "age":30
+            "id": "1:marko",
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "marko",
+                "age": 30
             }
         }
     ]
@@ -442,27 +442,27 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3
 
 ```json
 {
-    "vertices":[
+    "vertices": [
         {
-            "id":"2:lop",
-            "label":"software",
-            "type":"vertex",
-            "properties":{
-                "name":"lop",
-                "lang":"c++",
-                "price":328.0
+            "id": "2:lop",
+            "label": "software",
+            "type": "vertex",
+            "properties": {
+                "name": "lop",
+                "lang": "c++",
+                "price": 328
             }
         },
         {
-            "id":"1:josh",
-            "label":"person",
-            "type":"vertex",
-            "properties":{
-                "name":"josh",
-                "age":32,
-                "city":"Shanghai",
-                "weight":0.3,
-                "hobby":[
+            "id": "1:josh",
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "josh",
+                "age": 32,
+                "city": "Shanghai",
+                "weight": 0.3,
+                "hobby": [
                     "reading",
                     "football",
                     "swiming"
@@ -470,16 +470,16 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3
             }
         },
         {
-            "id":"1:marko",
-            "label":"person",
-            "type":"vertex",
-            "properties":{
-                "name":"marko",
-                "age":30
+            "id": "1:marko",
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "marko",
+                "age": 30
             }
         }
     ],
-    "page":"CIYxOnBldGVyAAAAAAAAAAM="
+    "page": "CIYxOnBldGVyAAAAAAAAAAM="
 }
 ```
 
@@ -504,39 +504,39 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?page=001000100853313a7
 
 ```json
 {
-    "vertices":[
+    "vertices": [
         {
-            "id":"1:peter",
-            "label":"person",
-            "type":"vertex",
-            "properties":{
-                "name":"peter",
-                "age":29,
-                "city":"Shanghai"
+            "id": "1:peter",
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "peter",
+                "age": 29,
+                "city": "Shanghai"
             }
         },
         {
-            "id":"1:vadas",
-            "label":"person",
-            "type":"vertex",
-            "properties":{
-                "name":"vadas",
-                "age":27,
-                "city":"Hongkong"
+            "id": "1:vadas",
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "vadas",
+                "age": 27,
+                "city": "Hongkong"
             }
         },
         {
-            "id":"2:ripple",
-            "label":"software",
-            "type":"vertex",
-            "properties":{
-                "name":"ripple",
-                "lang":"java",
-                "price":199.0
+            "id": "2:ripple",
+            "label": "software",
+            "type": "vertex",
+            "properties": {
+                "name": "ripple",
+                "lang": "java",
+                "price": 199
             }
         }
     ],
-    "page":null
+    "page": null
 }
 ```
 
@@ -560,12 +560,12 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
 
 ```json
 {
-    "id":"1:marko",
-    "label":"person",
-    "type":"vertex",
-    "properties":{
-        "name":"marko",
-        "age":30
+    "id": "1:marko",
+    "label": "person",
+    "type": "vertex",
+    "properties": {
+        "name": "marko",
+        "age": 30
     }
 }
 ```
