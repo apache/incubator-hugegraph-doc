@@ -25,6 +25,21 @@ For the `GET/PUT/DELETE` API of a vertex, the id part in the URL should be passe
 
 The following examples need to create a `schema` according to the following script.
 
+```groovy
+schema.propertyKey("name").asText().ifNotExist().create();
+schema.propertyKey("age").asInt().ifNotExist().create();
+schema.propertyKey("city").asText().ifNotExist().create();
+schema.propertyKey("weight").asDouble().ifNotExist().create();
+schema.propertyKey("lang").asText().ifNotExist().create();
+schema.propertyKey("price").asDouble().ifNotExist().create();
+schema.propertyKey("hobby").asText().valueList().ifNotExist().create();
+
+schema.vertexLabel("person").properties("name", "age", "city", "weight", "hobby").primaryKeys("name").nullableKeys("age", "city", "weight", "hobby").ifNotExist().create();
+schema.vertexLabel("software").properties("name", "lang", "price").primaryKeys("name").nullableKeys("lang", "price").ifNotExist().create();
+
+schema.indexLabel("personByAge").onV("person").by("age").range().ifNotExist().create();
+```
+
 #### 2.1.1 Create a vertex
 
 ##### Method & Url
