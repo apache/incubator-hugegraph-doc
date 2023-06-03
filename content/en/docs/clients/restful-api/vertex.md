@@ -6,7 +6,7 @@ weight: 7
 
 ### 2.1 Vertex
 
-In vertex types, the Id strategy determines the type of the vertex Id, with the corresponding relationships as follows:
+In vertex types, the `Id` strategy determines the type of the vertex `Id`, with the corresponding relationships as follows:
 
 | Id_Strategy      | id type |
 |------------------|---------|
@@ -18,8 +18,8 @@ In vertex types, the Id strategy determines the type of the vertex Id, with the 
 
 For the `GET/PUT/DELETE` API of a vertex, the id part in the URL should be passed as the id value with type information. This type information is indicated by whether the JSON string is enclosed in quotes, meaning:
 
-- When the id type is number, the id in the URL is without quotes, for example: xxx/vertices/123456.
-- When the id type is string, the id in the URL is enclosed in quotes, for example: xxx/vertices/"123456".
+- When the id type is `number`, the id in the URL is without quotes, for example: `xxx/vertices/123456`.
+- When the id type is `string`, the id in the URL is enclosed in quotes, for example: `xxx/vertices/"123456"`.
 
 -------------------------------------------------------------------
 
@@ -386,7 +386,7 @@ Property key-value pairs consist of the property name and value in JSON format. 
 | P.outside(number1,number2)         | Vertices with property value less than `number1` and greater than `number2`    |
 | P.within(value1,value2,value3,...) | Vertices with property value equal to any of the given `values`     |
 
-**Query all vertices with age 20 and label person**
+**Query all vertices with age 29 and label person**
 
 ##### Method & Url
 
@@ -483,14 +483,14 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3
 }
 ```
 
-The returned body contains information about the page number of the next page, `"page": "001000100853313a706574657200f07ffffffc00e797c6349be736fffc8699e8a502efe10004"`. When querying the next page, assign this value to the `page` parameter.
+The returned `body` contains information about the page number of the next `page`, `"page": "CIYxOnBldGVyAAAAAAAAAAM"`. When querying the next page, assign this value to the `page` parameter.
 
 **Paginate and retrieve all vertices, including the next page (passing the `page` value returned from the previous page), limited to 3 items.**
 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph/vertices?page=001000100853313a706574657200f07ffffffc00e797c6349be736fffc8699e8a502efe10004&limit=3
+GET http://localhost:8080/graphs/hugegraph/graph/vertices?page=CIYxOnBldGVyAAAAAAAAAAM=&limit=3
 ```
 
 ##### Response Status
@@ -600,6 +600,7 @@ DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"?label=per
 ```
 
 ##### Response Status
+
 ```json
 204
 ```
