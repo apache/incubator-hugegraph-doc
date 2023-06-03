@@ -53,22 +53,22 @@ The functions of this system include but are not limited to:
 
 ### Subscribe the mailing list
 
-HugeGraph offered an email list for development and user discussions. 
-- hugegraph-dev: [dev@hugegraph.apache.org](mailto:dev@hugegraph.apache.org) for development and users discussions.
+HugeGraph offers an email list for development and user discussions.
+- hugegraph-dev: [dev@hugegraph.apache.org](mailto:dev@hugegraph.apache.org) for both development and users discussions.
 
 Subscribe to the mailing list by following steps:
-- Email [dev-subscribe@hugegraph.apache.org](mailto:dev-subscribe@hugegraph.apache.org) by your email account, and then you will receive a confirmation email.
-- Reply the confirmation email to confirm your subscription. Then, you will receive another email.
-- Now you are a subscriber of the mailing list. If you have more questions, just email to the mailing list and someone will reply you soon.
-- If you want to unsubscribe the mailing list, just email to [dev-unsubscribe@hugegraph.apache.org](mailto:dev-unsubscribe@hugegraph.apache.org) and follow the steps in the confirmation email.
+- Email [dev-subscribe@hugegraph.apache.org](mailto:dev-subscribe@hugegraph.apache.org) through your email account, and then you will receive a confirmation email.
+- Reply to the confirmation email to confirm your subscription. Then, you will receive another confirmation email.
+- Now you are a subscriber of the mailing list. If you have more questions, just email the mailing list and someone will reply to you soon.
+- If you want to unsubscribe from the mailing list, just email [dev-unsubscribe@hugegraph.apache.org](mailto:dev-unsubscribe@hugegraph.apache.org) and follow the steps in the confirmation email.
 
-You can subscribe to the mailing list anytime you want. Additionally, you can check [historical emails / all emails](https://lists.apache.org/list.html?dev@hugegraph.apache.org) easily (even if you are not subscribe the list).
+You can subscribe to the mailing list anytime you want. Additionally, you can check [historical emails / all emails](https://lists.apache.org/list.html?dev@hugegraph.apache.org) easily (even if you are not subscribing to the list).
 
 Some notes:
-- If you don't receive the confirmation email, please send it after 24h later.
-- Don't send mail to **dev** until you subscribe the mailing list successfully (otherwise the mail will be banned).
+- If you don't receive the confirmation email, please send it after 24 hours later.
+- Don't email to **dev** until you subscribe to the mailing list successfully (otherwise the mail will be banned).
 
-More information of mailing subscribe can be found at:
+More information on mailing subscribe can be found at:
 - http://apache.org/foundation/mailinglists.html#subscribing
 
 ### Contact Us
