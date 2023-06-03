@@ -23,7 +23,7 @@ weight: 7
 
 -------------------------------------------------------------------
 
-接下来的示例需要根据以下脚本创建 `schema`。
+接下来的示例需要先根据以下 `groovy` 脚本创建图 `schema`
 
 ```groovy
 schema.propertyKey("name").asText().ifNotExist().create();
@@ -251,7 +251,7 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
                 "city": "Shanghai",
                 "weight": 0.2,
                 "hobby": [
-                    "swiming"
+                    "swimming"
                 ]
             }
         }
@@ -300,7 +300,7 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
                 "hobby": [
                     "reading",
                     "football",
-                    "swiming"
+                    "swimming"
                 ]
             }
         }
@@ -465,7 +465,7 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3
                 "hobby": [
                     "reading",
                     "football",
-                    "swiming"
+                    "swimming"
                 ]
             }
         },

@@ -23,7 +23,7 @@ For the `GET/PUT/DELETE` API of a vertex, the id part in the URL should be passe
 
 -------------------------------------------------------------------
 
-The following examples need to create a `schema` according to the following script.
+The next example requires first creating the graph `schema` from the following `groovy` script
 
 ```groovy
 schema.propertyKey("name").asText().ifNotExist().create();
@@ -251,7 +251,7 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
                 "city": "Shanghai",
                 "weight": 0.2,
                 "hobby": [
-                    "swiming"
+                    "swimming"
                 ]
             }
         }
@@ -300,7 +300,7 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
                 "hobby": [
                     "reading",
                     "football",
-                    "swiming"
+                    "swimming"
                 ]
             }
         }
@@ -465,7 +465,7 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3
                 "hobby": [
                     "reading",
                     "football",
-                    "swiming"
+                    "swimming"
                 ]
             }
         },
