@@ -52,8 +52,11 @@ The functions of this system include but are not limited to:
 - [HugeGraph-Tools](https://hugegraph.apache.org/docs/quickstart/hugegraph-tools): HugeGraph-Tools is HugeGraph's deployment and management tools, including functions such as managing graphs, backup/restore, Gremlin execution, etc.
 
 ### Contact Us
-- [Github Issues](https://github.com/apache/incubator-hugegraph/issues): Feedback on usage issues and functional requirements (priority)
-- Feedback Email: [dev@hugegraph.apache.org](mailto:dev@hugegraph.apache.org)
-- WeChat public account: Apache HugeGraph, welcome to scan this QR code to follow us.
 
-<img src="./assets/images/wechat.png">
+---
+
+ - [GitHub Issues](https://github.com/apache/incubator-hugegraph-doc/issues): Feedback on usage issues and functional requirements (quick response)
+ - Feedback Email: [dev@hugegraph.apache.org](mailto:dev@hugegraph.apache.org) ([subscriber](https://hugegraph.apache.org/docs/contribution-guidelines/subscribe/) only)
+ - WeChat public account: Apache HugeGraph, welcome to scan this QR code to follow us.
+
+ <img src="./assets/images/wechat.png" alt="QR png" width="350"/>
