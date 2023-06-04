@@ -6,7 +6,7 @@ weight: 7
 
 ### 2.1 Vertex
 
-顶点类型中的 Id 策略决定了顶点的 Id 类型，其对应关系如下：
+顶点类型中的 `Id` 策略决定了顶点的 `Id` 类型，其对应的 `id` 类型如下：
 
 | Id_Strategy      | id type |
 |------------------|---------|
@@ -16,14 +16,29 @@ weight: 7
 | CUSTOMIZE_NUMBER | number  |
 | CUSTOMIZE_UUID   | uuid    |
 
-顶点的 `GET/PUT/DELETE` API 中 url 的 id 部分传入的应是带有类型信息的 id 值，这个类型信息用 json 串是否带引号表示，也就是说：
+顶点的 `GET/PUT/DELETE` API 中 url 的 id 部分应该传入带有类型信息的 id 值，这个类型信息通过 json 串是否带引号来表示，也就是说：
 
-- 当 id 类型为 number 时，url 中的 id 不带引号，形如 xxx/vertices/123456
-- 当 id 类型为 string 时，url 中的 id 带引号，形如 xxx/vertices/"123456"
+- 当 id 类型为 `number` 时，url 中的 id 不带引号，例如 `xxx/vertices/123456`
+- 当 id 类型为 `string` 时，url 中的 id 带引号，例如 `xxx/vertices/"123456"`
 
 -------------------------------------------------------------------
 
-接下来的示例均假设已经创建好了前述的各种 schema 信息
+接下来的示例需要先根据以下 `groovy` 脚本创建图 `schema`
+
+```groovy
+schema.propertyKey("name").asText().ifNotExist().create();
+schema.propertyKey("age").asInt().ifNotExist().create();
+schema.propertyKey("city").asText().ifNotExist().create();
+schema.propertyKey("weight").asDouble().ifNotExist().create();
+schema.propertyKey("lang").asText().ifNotExist().create();
+schema.propertyKey("price").asDouble().ifNotExist().create();
+schema.propertyKey("hobby").asText().valueList().ifNotExist().create();
+
+schema.vertexLabel("person").properties("name", "age", "city", "weight", "hobby").primaryKeys("name").nullableKeys("age", "city", "weight", "hobby").ifNotExist().create();
+schema.vertexLabel("software").properties("name", "lang", "price").primaryKeys("name").nullableKeys("lang", "price").ifNotExist().create();
+
+schema.indexLabel("personByAge").onV("person").by("age").range().ifNotExist().create();
+```
 
 #### 2.1.1 创建一个顶点
 
@@ -59,18 +74,8 @@ POST http://localhost:8080/graphs/hugegraph/graph/vertices
     "label": "person",
     "type": "vertex",
     "properties": {
-        "name": [
-            {
-                "id": "1:marko>name",
-                "value": "marko"
-            }
-        ],
-        "age": [
-            {
-                "id": "1:marko>age",
-                "value": 29
-            }
-        ]
+        "name": "marko",
+        "age": 29
     }
 }
 ```
@@ -140,7 +145,7 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=appen
 }
 ```
 
-> 注意：属性的取值是有三种类别的，分别是single、set和list。如果是single，表示增加或更新属性值；如果是set或list，则表示追加属性值。
+> 注意：属性的取值有三种类别，分别为single、set和list。single表示增加或更新属性值，set或list表示追加属性值。
 
 ##### Response Status
 
@@ -156,24 +161,9 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=appen
     "label": "person",
     "type": "vertex",
     "properties": {
-        "city": [
-            {
-                "id": "1:marko>city",
-                "value": "Beijing"
-            }
-        ],
-        "name": [
-            {
-                "id": "1:marko>name",
-                "value": "marko"
-            }
-        ],
-        "age": [
-            {
-                "id": "1:marko>age",
-                "value": 30
-            }
-        ]
+        "name": "marko",
+        "age": 30,
+        "city": "Beijing"
     }
 }
 ```
@@ -182,42 +172,42 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=appen
 
 ##### 功能说明
 
-批量更新顶点的属性，并支持多种更新策略，包括
+批量更新顶点的属性时，可以选择多种更新策略，如下：
 
 - SUM: 数值累加
-- BIGGER: 两个数字/日期取更大的
-- SMALLER: 两个数字/日期取更小的
+- BIGGER: 原值和新值(数字、日期)取更大的
+- SMALLER: 原值和新值(数字、日期)取更小的
 - UNION: Set属性取并集
 - INTERSECTION: Set属性取交集
 - APPEND: List属性追加元素
 - ELIMINATE: List/Set属性删除元素
 - OVERRIDE: 覆盖已有属性，如果新属性为null，则仍然使用旧属性
 
-假设原顶点及属性为：
+假设原顶点的属性如下：
 
 ```json
 {
-    "vertices":[
+    "vertices": [
         {
-            "id":"2:lop",
-            "label":"software",
-            "type":"vertex",
-            "properties":{
-                "name":"lop",
-                "lang":"java",
-                "price":328
+            "id": "2:lop",
+            "label": "software",
+            "type": "vertex",
+            "properties": {
+                "name": "lop",
+                "lang": "java",
+                "price": 328
             }
         },
         {
-            "id":"1:josh",
-            "label":"person",
-            "type":"vertex",
-            "properties":{
-                "name":"josh",
-                "age":32,
-                "city":"Beijing",
-                "weight":0.1,
-                "hobby":[
+            "id": "1:josh",
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "josh",
+                "age": 32,
+                "city": "Beijing",
+                "weight": 0.1,
+                "hobby": [
                     "reading",
                     "football"
                 ]
@@ -225,6 +215,12 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=appen
         }
     ]
 }
+```
+
+通过以下命令新增顶点：
+
+```shell
+curl -H "Content-Type: application/json" -d '[{"label":"person","properties":{"name":"josh","age":32,"city":"Beijing","weight":0.1,"hobby":["reading","football"]}},{"label":"software","properties":{"name":"lop","lang":"java","price":328}}]' http:///127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
 ```
 
 ##### Method & Url
@@ -237,37 +233,37 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
 
 ```json
 {
-    "vertices":[
+    "vertices": [
         {
-            "label":"software",
-            "type":"vertex",
-            "properties":{
-                "name":"lop",
-                "lang":"c++",
-                "price":299
+            "label": "software",
+            "type": "vertex",
+            "properties": {
+                "name": "lop",
+                "lang": "c++",
+                "price": 299
             }
         },
         {
-            "label":"person",
-            "type":"vertex",
-            "properties":{
-                "name":"josh",
-                "city":"Shanghai",
-                "weight":0.2,
-                "hobby":[
-                    "swiming"
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "josh",
+                "city": "Shanghai",
+                "weight": 0.2,
+                "hobby": [
+                    "swimming"
                 ]
             }
         }
     ],
-    "update_strategies":{
-        "price":"BIGGER",
-        "age":"OVERRIDE",
-        "city":"OVERRIDE",
-        "weight":"SUM",
-        "hobby":"UNION"
+    "update_strategies": {
+        "price": "BIGGER",
+        "age": "OVERRIDE",
+        "city": "OVERRIDE",
+        "weight": "SUM",
+        "hobby": "UNION"
     },
-    "create_if_not_exist":true
+    "create_if_not_exist": true
 }
 ```
 
@@ -302,9 +298,9 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
                 "city": "Shanghai",
                 "weight": 0.3,
                 "hobby": [
-                    "swiming",
                     "reading",
-                    "football"
+                    "football",
+                    "swimming"
                 ]
             }
         }
@@ -312,7 +308,7 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
 }
 ```
 
-结果分析：
+结果分析如下：
 
 - lang 属性未指定更新策略，直接用新值覆盖旧值，无论新值是否为null；
 - price 属性指定 BIGGER 的更新策略，旧属性值为328，新属性值为299，所以仍然保留了旧属性值328；
@@ -321,7 +317,7 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
 - weight 属性指定了 SUM 更新策略，旧属性值为0.1，新属性值为0.2，最后的值为0.3；
 - hobby 属性（基数为Set）指定了 UNION 更新策略，所以新值与旧值取了并集；
 
-其他的更新策略使用方式可以类推，不再赘述。
+其他更新策略的使用方式与此类似，此处不再详述。
 
 #### 2.1.5 删除顶点属性
 
@@ -358,18 +354,8 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=elimi
     "label": "person",
     "type": "vertex",
     "properties": {
-        "name": [
-            {
-                "id": "1:marko>name",
-                "value": "marko"
-            }
-        ],
-        "age": [
-            {
-                "id": "1:marko>age",
-                "value": 30
-            }
-        ]
+        "name": "marko",
+        "age": 30
     }
 }
 ```
@@ -378,14 +364,14 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=elimi
 
 ##### Params
 
-- label: 顶点类型
-- properties: 属性键值对(根据属性查询的前提是预先建立了索引)
-- limit: 查询最大数目
-- page: 页号
+- label: 顶点的类型
+- properties: 属性键值对（查询属性的前提是该属性已经建立了索引）
+- limit: 查询结果的最大数目
+- page: 分页的页号
 
-以上参数都是可选的，如果提供page参数，必须提供limit参数，不允许带其他参数。`label, properties`和`limit`可以任意组合。
+以上参数都是可选的，但如果提供了page参数，就必须同时提供limit参数，并且不能再提供其他参数。`label, properties`和`limit`之间可以任意组合。
 
-属性键值对由JSON格式的属性名称和属性值组成，允许多个属性键值对作为查询条件，属性值支持精确匹配和范围匹配，精确匹配时形如`properties={"age":29}`，范围匹配时形如`properties={"age":"P.gt(29)"}`,范围匹配支持的表达式如下：
+属性键值对由属性名称和属性值组成JSON格式的对象，可以使用多个属性键值对作为查询条件，属性值支持精确匹配和范围匹配，精确匹配的形式如`properties={"age":29}`，范围匹配的形式如`properties={"age":"P.gt(29)"}`，范围匹配支持以下表达式：
 
 | 表达式                                | 说明                          |
 |------------------------------------|-----------------------------|
@@ -400,7 +386,7 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=elimi
 | P.outside(number1,number2)         | 属性值小于number1且大于number2的顶点   |
 | P.within(value1,value2,value3,...) | 属性值等于任何一个给定value的顶点         |
 
-**查询所有 age 为 20 且 label 为 person 的顶点**
+**查询所有 age 为 29 且 label 为 person 的顶点**
 
 ##### Method & Url
 
@@ -424,24 +410,8 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&propertie
             "label": "person",
             "type": "vertex",
             "properties": {
-                "city": [
-                    {
-                        "id": "1:marko>city",
-                        "value": "Beijing"
-                    }
-                ],
-                "name": [
-                    {
-                        "id": "1:marko>name",
-                        "value": "marko"
-                    }
-                ],
-                "age": [
-                    {
-                        "id": "1:marko>age",
-                        "value": 29
-                    }
-                ]
+                "name": "marko",
+                "age": 30
             }
         }
     ]
@@ -449,6 +419,12 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&propertie
 ```
 
 **分页查询所有顶点，获取第一页（page不带参数值），限定3条**
+
+通过以下命令新增顶点：
+
+```shell
+curl -H "Content-Type: application/json" -d '[{"label":"person","properties":{"name":"peter","age":29,"city":"Shanghai"}},{"label":"person","properties":{"name":"vadas","age":27,"city":"Hongkong"}}]' http://localhost:8080/graphs/hugegraph/graph/vertices/batch
+```
 
 ##### Method & Url
 
@@ -466,77 +442,55 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3
 
 ```json
 {
-	"vertices": [{
-			"id": "2:ripple",
-			"label": "software",
-			"type": "vertex",
-			"properties": {
-				"price": [{
-					"id": "2:ripple>price",
-					"value": 199
-				}],
-				"name": [{
-					"id": "2:ripple>name",
-					"value": "ripple"
-				}],
-				"lang": [{
-					"id": "2:ripple>lang",
-					"value": "java"
-				}]
-			}
-		},
-		{
-			"id": "1:vadas",
-			"label": "person",
-			"type": "vertex",
-			"properties": {
-				"city": [{
-					"id": "1:vadas>city",
-					"value": "Hongkong"
-				}],
-				"name": [{
-					"id": "1:vadas>name",
-					"value": "vadas"
-				}],
-				"age": [{
-					"id": "1:vadas>age",
-					"value": 27
-				}]
-			}
-		},
-		{
-			"id": "1:peter",
-			"label": "person",
-			"type": "vertex",
-			"properties": {
-				"city": [{
-					"id": "1:peter>city",
-					"value": "Shanghai"
-				}],
-				"name": [{
-					"id": "1:peter>name",
-					"value": "peter"
-				}],
-				"age": [{
-					"id": "1:peter>age",
-					"value": 35
-				}]
-			}
-		}
-	],
-	"page": "001000100853313a706574657200f07ffffffc00e797c6349be736fffc8699e8a502efe10004"
+    "vertices": [
+        {
+            "id": "2:lop",
+            "label": "software",
+            "type": "vertex",
+            "properties": {
+                "name": "lop",
+                "lang": "c++",
+                "price": 328
+            }
+        },
+        {
+            "id": "1:josh",
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "josh",
+                "age": 32,
+                "city": "Shanghai",
+                "weight": 0.3,
+                "hobby": [
+                    "reading",
+                    "football",
+                    "swimming"
+                ]
+            }
+        },
+        {
+            "id": "1:marko",
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "marko",
+                "age": 30
+            }
+        }
+    ],
+    "page": "CIYxOnBldGVyAAAAAAAAAAM="
 }
 ```
 
-返回的body里面是带有下一页的页号信息的，`"page": "001000100853313a706574657200f07ffffffc00e797c6349be736fffc8699e8a502efe10004"`，
-在查询下一页的时候将该值赋给page参数。
+返回的 `body` 里面是带有下一页的页号信息的，`"page": "CIYxOnBldGVyAAAAAAAAAAM="`，在查询下一页的时候将该值赋给 `page` 参数。
 
 **分页查询所有顶点，获取下一页（page带上上一页返回的page值），限定3条**
 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph/vertices?page=001000100853313a706574657200f07ffffffc00e797c6349be736fffc8699e8a502efe10004&limit=3
+GET http://localhost:8080/graphs/hugegraph/graph/vertices?page=CIYxOnBldGVyAAAAAAAAAAM=&limit=3
 ```
 
 ##### Response Status
@@ -549,69 +503,43 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?page=001000100853313a7
 
 ```json
 {
-	"vertices": [{
-			"id": "1:josh",
-			"label": "person",
-			"type": "vertex",
-			"properties": {
-				"city": [{
-					"id": "1:josh>city",
-					"value": "Beijing"
-				}],
-				"name": [{
-					"id": "1:josh>name",
-					"value": "josh"
-				}],
-				"age": [{
-					"id": "1:josh>age",
-					"value": 32
-				}]
-			}
-		},
-		{
-			"id": "1:marko",
-			"label": "person",
-			"type": "vertex",
-			"properties": {
-				"city": [{
-					"id": "1:marko>city",
-					"value": "Beijing"
-				}],
-				"name": [{
-					"id": "1:marko>name",
-					"value": "marko"
-				}],
-				"age": [{
-					"id": "1:marko>age",
-					"value": 29
-				}]
-			}
-		},
-		{
-			"id": "2:lop",
-			"label": "software",
-			"type": "vertex",
-			"properties": {
-				"price": [{
-					"id": "2:lop>price",
-					"value": 328
-				}],
-				"name": [{
-					"id": "2:lop>name",
-					"value": "lop"
-				}],
-				"lang": [{
-					"id": "2:lop>lang",
-					"value": "java"
-				}]
-			}
-		}
-	],
-	"page": null
+    "vertices": [
+        {
+            "id": "1:peter",
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "peter",
+                "age": 29,
+                "city": "Shanghai"
+            }
+        },
+        {
+            "id": "1:vadas",
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "vadas",
+                "age": 27,
+                "city": "Hongkong"
+            }
+        },
+        {
+            "id": "2:ripple",
+            "label": "software",
+            "type": "vertex",
+            "properties": {
+                "name": "ripple",
+                "lang": "java",
+                "price": 199
+            }
+        }
+    ],
+    "page": null
 }
 ```
 
-此时`"page": null`表示已经没有下一页了 (注: 后端为 Cassandra 时，为了性能考虑，返回页恰好为最后一页时，返回 `page` 值可能非空，通过该 `page` 再请求下一页数据时则返回 `空数据` 及 `page = null`，其他情况类似)
+当`"page": null`时，表示已经没有下一页了（注：如果后端使用的是 Cassandra ，为了提高性能，当返回的页数刚好是最后一页时，返回的 `page` 值可能不为空，但是如果用这个 `page` 值再请求下一页数据时，就会返回 `空数据` 和 `page = null`，其他情况也类似）
 
 #### 2.1.7 根据Id获取顶点
 
@@ -635,18 +563,8 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
     "label": "person",
     "type": "vertex",
     "properties": {
-        "name": [
-            {
-                "id": "1:marko>name",
-                "value": "marko"
-            }
-        ],
-        "age": [
-            {
-                "id": "1:marko>age",
-                "value": 29
-            }
-        ]
+        "name": "marko",
+        "age": 30
     }
 }
 ```
@@ -682,6 +600,7 @@ DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"?label=per
 ```
 
 ##### Response Status
+
 ```json
 204
 ```
