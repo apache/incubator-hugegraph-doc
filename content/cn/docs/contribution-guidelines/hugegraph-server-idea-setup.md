@@ -31,9 +31,11 @@ git clone https://github.com/apache/hugegraph.git
 cp -r hugegraph-dist/src/assembly/static/scripts hugegraph-dist/src/assembly/static/conf path-to-your-directory
 ```
 
+将 `path-to-your-directory` 替换为你创建的文件夹的路径。
+
 #### 2. `InitStore` 类初始化图
 
-首先，需要在配置文件中配置数据库后端。以 RocksDB 为例，在 `path-to/conf/graphs/hugegraph.properties` 文件中进行以下配置：
+首先，需要在配置文件中配置数据库后端。以 RocksDB 为例，在 `path-to-your-directory/conf/graphs/hugegraph.properties` 文件中进行以下配置：
 
 ```properties
 backend=rocksdb
@@ -70,9 +72,9 @@ rocksdb.wal_path=.
 
 - 在 `Use classpath of module` 中选择 `hugegraph-dist`
 - 将 `Main class` 设置为 `org.apache.hugegraph.dist.HugeGraphServer`
-- 设置运行参数为 `conf/gremlin-server.yaml conf/rest-server.properties`，同样地，这里的路径是相对于工作路径的，需要将工作路径设置为 `<path-to-your-directory>`
+- 设置运行参数为 `conf/gremlin-server.yaml conf/rest-server.properties`，同样地，这里的路径是相对于工作路径的，需要将工作路径设置为 `path-to-your-directory`
 
-配置完成后运行，如果看到以下日志，表示 `HugeGraphServer` 已经成功启动：
+配置完成后运行，如果看到以下类似日志，表示 `HugeGraphServer` 已经成功启动：
 
 ```java
 ......
@@ -106,7 +108,7 @@ curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
 
 原因可能是在使用 Java 11 编译时触发了交叉编译，导致项目中使用的 `sun.misc.Unsafe` 找不到符号。有两种解决方案可供选择：
 
-1. 在 IntelliJ IDEA 的 `Preferences` 中找到 `Java Compiler` 面板，然后关闭 `--release` 选项 (推荐)
+1. 在 IntelliJ IDEA 的 `Preferences/Settings` 中找到 `Java Compiler` 面板，然后关闭 `--release` 选项 (推荐)
 2. 或者将项目的 SDK 版本设置为 8
 
 ##### 参考
