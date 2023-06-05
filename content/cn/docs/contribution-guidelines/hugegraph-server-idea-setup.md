@@ -1,6 +1,6 @@
 ---
-title: "如何在 IDEA 中搭建 HugeGraph-Server 开发环境"
-linkTitle: "如何在 IDEA 中搭建 HugeGraph-Server 开发环境"
+title: "在 IDEA 中配置 HugeGraph-Server 开发环境"
+linkTitle: "在 IDEA 中配置 HugeGraph-Server 开发环境"
 weight: 4
 ---
 
