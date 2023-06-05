@@ -113,9 +113,9 @@ At this point, you can view detailed variable information in the debugger.
 The reason may be that cross-compilation is triggered when using Java 11 to compile, causing the symbol of `sun.misc.Unsafe` used in the project to not be found. There are two possible solutions:
 
 1. In IntelliJ IDEA, go to `Preferences` and find the `Java Compiler` panel. Then, disable the `--release` option, or
-2. Set the project's SDK to version 8 (not recommended).
+2. Set the Project SDK to 8 (not recommended).
 
-### Reference
+### References
 
 1. [HugeGraph-Server Quick Start](/docs/quickstart/hugegraph-server/)
 2. [Local Debugging Guide for HugeGraph Server (Win/Unix)](https://gist.github.com/imbajin/1661450f000cd62a67e46d4f1abfe82c)
