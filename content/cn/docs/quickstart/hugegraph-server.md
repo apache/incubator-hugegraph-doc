@@ -428,3 +428,7 @@ _说明_
 $cd hugegraph-${version}
 $bin/stop-hugegraph.sh
 ```
+
+### 8 使用 IntelliJ IDEA 调试 Server
+
+请参考[如何在 IDEA 中搭建 HugeGraph-Server 开发环境](/docs/contribution-guidelines/hugegraph-server-idea-setup)
