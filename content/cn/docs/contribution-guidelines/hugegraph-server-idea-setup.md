@@ -19,7 +19,6 @@ weight: 4
 
 ```bash
 git clone https://github.com/apache/hugegraph.git
-cd hugegraph
 ```
 
 ### 步骤
@@ -29,12 +28,12 @@ cd hugegraph
 为了避免配置文件的更改影响 Git 的追踪，建议将所需的配置文件拷贝到一个单独的文件夹中：
 
 ```bash
-cp -r hugegraph-dist/src/assembly/static/scripts hugegraph-dist/src/assembly/static/conf <path-to-your-directory>
+cp -r hugegraph-dist/src/assembly/static/scripts hugegraph-dist/src/assembly/static/conf path-to-your-directory
 ```
 
-#### 2. `InitStore` 运行配置
+#### 2. `InitStore` 类初始化图
 
-首先，需要在配置文件中配置数据库后端。以 RocksDB 为例，在 <path-to-your-directory>/conf/graphs/hugegraph.properties 文件中进行以下配置：
+首先，需要在配置文件中配置数据库后端。以 RocksDB 为例，在 `path-to/conf/graphs/hugegraph.properties` 文件中进行以下配置：
 
 ```properties
 backend=rocksdb
@@ -47,9 +46,9 @@ rocksdb.wal_path=.
 
 - 在 `Use classpath of module` 中选择 `hugegraph-dist`
 - 将 `Main class` 设置为 `org.apache.hugegraph.cmd.InitStore`
-- 设置运行参数为 `conf/graphs/hugegraph.properties`，这里的路径是相对于工作路径的，需要将工作路径设置为 `<path-to-your-directory>`
+- 设置运行参数为 `conf/graphs/hugegraph.properties`，这里的路径是相对于工作路径的，需要将工作路径设置为 `path-to-your-directory`
 
-配置完成后运行，如果运行成功，将会输出以下运行日志：
+配置完成后运行，如果运行成功，将会输出以下类似运行日志：
 
 ```java
 2023-06-05 00:43:37 [main] [INFO] o.a.h.u.ConfigUtil - Scanning option 'graphs' directory './conf/graphs'
@@ -87,12 +86,9 @@ rocksdb.wal_path=.
 
 ```java
 public String list(@Context GraphManager manager,
-                   @PathParam("graph") String graph,
-                   @QueryParam("label") String label,
-                   @QueryParam("properties") String properties,
-                   ......) {
-    ......
-
+                   @PathParam("graph") String graph, @QueryParam("label") String label,
+                   @QueryParam("properties") String properties, ......) {
+    // ignore log
     Map<String, Object> props = parseProperties(properties);
 ```
 
@@ -104,16 +100,16 @@ curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
 
 此时，可以在调试器中查看详细的变量信息。
 
-### 可能出现的问题
+### 可能遇到的问题
 
-#### java: package sun.misc does not exist
+*** java: package sun.misc does not exist ***
 
 原因可能是在使用 Java 11 编译时触发了交叉编译，导致项目中使用的 `sun.misc.Unsafe` 找不到符号。有两种解决方案可供选择：
 
-1. 在 IntelliJ IDEA 的 `Preferences` 中找到 `Java Compiler` 面板，然后关闭 `--release` 选项，或者
-2. 将项目的 SDK 设置为 8 (不推荐)
+1. 在 IntelliJ IDEA 的 `Preferences` 中找到 `Java Compiler` 面板，然后关闭 `--release` 选项 (推荐)
+2. 或者将项目的 SDK 版本设置为 8
 
-### 参考
+##### 参考
 
 1. [HugeGraph-Server Quick Start](/docs/quickstart/hugegraph-server/)
 2. [hugegraph-server 本地调试文档 (Win/Unix)](https://gist.github.com/imbajin/1661450f000cd62a67e46d4f1abfe82c)
