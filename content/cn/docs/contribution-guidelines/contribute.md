@@ -76,18 +76,20 @@ mvn test -Pcore-test,memory
 ```
 Note: In order to be consistent with the code style easily, if you use [IDEA](https://www.jetbrains.com/idea/) as your IDE, you can directly [import](https://www.jetbrains.com/help/idea/configuring-code-style.html) our code style [configuration file](./hugegraph-style.xml). 
 
-##### 3.2.1 Check licenses
-如果我们要添加新的第三方依赖我们需要做下面的几件事情：
-1. 找到第三方依赖的仓库，将依赖的license文件放到 [./hugegraph-dist/release-docs/licenses/](https://github.com/apache/incubator-hugegraph/tree/master/hugegraph-dist/release-docs/licenses) 路径下。
-2. 在[./hugegraph-dist/release-docs/LICENSE](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/release-docs/LICENSE) 中声明该依赖的LICENSE信息。
-3. 找到仓库里的 NOTICE 文件，追加到 [./hugegraph-dist/release-docs/NOTICE](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/release-docs/NOTICE) 文件后面（如果没有NOTICE文件则跳过这一步）。
-4. 本地执行[./hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh) 脚本更新依赖列表[known-dependencies.txt](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/scripts/dependency/known-dependencies.txt) (或者手动更新)。
+##### 3.2.1 添加第三方依赖
 
-例如：在源码中引入了第三方文件 `ant-1.9.1.jar`
+如果我们要在 `HugeGraph` 项目中添加新的第三方依赖, 我们需要做下面的几件事情：
+1. 找到第三方依赖的仓库，将依赖的 `license` 文件放到 [./hugegraph-dist/release-docs/licenses/](https://github.com/apache/incubator-hugegraph/tree/master/hugegraph-dist/release-docs/licenses) 路径下。
+2. 在[./hugegraph-dist/release-docs/LICENSE](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/release-docs/LICENSE) 中声明该依赖的 `LICENSE` 信息。
+3. 找到仓库里的 NOTICE 文件，将其追加到 [./hugegraph-dist/release-docs/NOTICE](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/release-docs/NOTICE) 文件后面（如果没有NOTICE文件则跳过这一步）。
+4. 本地执行[./hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh) 脚本来更新依赖列表[known-dependencies.txt](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/scripts/dependency/known-dependencies.txt) (或者手动更新)。
+
+**例如**：在项目中引入了第三方新依赖 -> `ant-1.9.1.jar`
 - 项目源码位于：https://github.com/apache/ant/tree/rel/1.9.1
 - LICENSE 文件：https://github.com/apache/ant/blob/rel/1.9.1/LICENSE
 - NOTICE 文件：https://github.com/apache/ant/blob/rel/1.9.1/NOTICE
-`ant-1.9.1.jar` 的 license 信息需要在 LICENSE 文件中指定，notice 信息需要在 NOTICE 文件中指定。 ant-1.9.1.jar 对应的详细 LICENSE 文件需要复制到 licenses/ 目录下。最后更新 known-dependencies.txt 文件。
+
+`ant-1.9.1.jar` 的 license 信息需要在 LICENSE 文件中指定，notice 信息需要在 NOTICE 文件中指定。 ant-1.9.1.jar 对应的详细 LICENSE 文件需要复制到我们的 licenses/ 目录下。最后更新 known-dependencies.txt 文件。
 
 #### 3.3 Commit changes to git repo
 
