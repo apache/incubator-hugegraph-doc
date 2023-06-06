@@ -76,6 +76,13 @@ mvn test -Pcore-test,memory
 ```
 Note: In order to be consistent with the code style easily, if you use [IDEA](https://www.jetbrains.com/idea/) as your IDE, you can directly [import](https://www.jetbrains.com/help/idea/configuring-code-style.html) our code style [configuration file](./hugegraph-style.xml). 
 
+##### 3.2.1 Check licenses
+如果我们要添加新的第三方依赖我们需要做下面的几件事情：
+1. 找到第三方依赖的仓库，将依赖的license文件放到 [./hugegraph-dist/release-docs/licenses/](https://github.com/apache/incubator-hugegraph/tree/master/hugegraph-dist/release-docs/licenses) 路径下。
+2. 在[./hugegraph-dist/release-docs/LICENSE](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/release-docs/LICENSE) 中声明该依赖的LICENSE信息。
+3. 找到仓库里的 NOTICE 文件，追加到 [./hugegraph-dist/release-docs/NOTICE](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/release-docs/NOTICE) 文件后面（如果没有NOTICE文件则跳过这一步）。
+4. 本地执行[./hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh) 脚本更新依赖列表[known-dependencies.txt](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/scripts/dependency/known-dependencies.txt) (或者手动更新)。
+
 #### 3.3 Commit changes to git repo
 
 After the code has been completed, we submit them to the local git repo:
