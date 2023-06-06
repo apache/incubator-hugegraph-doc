@@ -74,6 +74,13 @@ mvn test -Pcore-test,memory
 ```
 Note: In order to be consistent with the code style easily, if you use [IDEA](https://www.jetbrains.com/idea/) as your IDE, you can directly [import](https://www.jetbrains.com/help/idea/configuring-code-style.html) our code style [configuration file](./hugegraph-style.xml). 
 
+##### 3.2.1 Check licenses
+If we want to add a new third-party dependency we need to do the following things:
+1. Find the third-party dependency repository, and put the dependency license file in [./hugegraph-dist/release-docs/licenses/](https://github.com/apache/incubator-hugegraph/tree/master/hugegraph -dist/release-docs/licenses) path.
+2. Declare the dependency in [./hugegraph-dist/release-docs/LICENSE](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/release-docs/LICENSE) LICENSE information.
+3. Find the NOTICE file in the repository and append it to [./hugegraph-dist/release-docs/NOTICE](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/release-docs /NOTICE) (skip this step if there is no NOTICE file).
+4. Execute script [./hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh) to update dependency list [known-dependencies.txt](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/scripts/dependency/known-dependencies.txt) (or manually update).
+
 #### 3.3 Commit changes to git repo
 
 After the code has been completed, we submit them to the local git repo:
