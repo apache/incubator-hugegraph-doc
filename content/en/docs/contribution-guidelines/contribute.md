@@ -81,6 +81,12 @@ If we want to add a new third-party dependency we need to do the following thing
 3. Find the NOTICE file in the repository and append it to [./hugegraph-dist/release-docs/NOTICE](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/release-docs /NOTICE) (skip this step if there is no NOTICE file).
 4. Execute script [./hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh) to update dependency list [known-dependencies.txt](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/scripts/dependency/known-dependencies.txt) (or manually update).
 
+For example: the third-party file `ant-1.9.1.jar` is introduced in the source code
+- The project source code is located at: https://github.com/apache/ant/tree/rel/1.9.1
+- LICENSE file: https://github.com/apache/ant/blob/rel/1.9.1/LICENSE
+- NOTICE file: https://github.com/apache/ant/blob/rel/1.9.1/NOTICE   
+The license information of `ant-1.9.1.jar` needs to be specified in the LICENSE file, and the notice information needs to be specified in the NOTICE file. The detailed LICENSE file corresponding to ant-1.9.1.jar needs to be copied to the licenses/ directory. Finally update the known-dependencies.txt file.
+
 #### 3.3 Commit changes to git repo
 
 After the code has been completed, we submit them to the local git repo:
