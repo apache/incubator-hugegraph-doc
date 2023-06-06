@@ -14,6 +14,12 @@ In the process of using HugeGraph, if you have any questions or ideas, suggestio
 
 3. Receive a welcome email. After completing the above steps, you will receive a welcome email with the subject WELCOME to dev@hugegraph.apache.org, and you have successfully subscribed to the Apache HugeGraph mailing list.
 
+Some notes:
+
+- If you don't receive the confirmation email, please send it after 24 hours later.
+
+- Don't email to dev until you subscribe to the mailing list successfully (otherwise the mail will be banned).
+
 # Unsubscribe Mailing Lists
 
 If you do not need to know what's going on with HugeGraph, you can unsubscribe from the mailing list.

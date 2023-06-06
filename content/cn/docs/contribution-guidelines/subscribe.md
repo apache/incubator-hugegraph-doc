@@ -15,6 +15,12 @@ weight: 2
 
 3. 收到欢迎邮件。完成上述步骤后，您将收到一封主题为 "WELCOME to [dev@hugegraph.apache.org](mailto:dev@hugegraph.apache.org)" 的欢迎邮件，表示您已成功订阅 Apache HugeGraph 邮件列表。
 
+注意事项：
+
+- 如果您没有收到确认电子邮件，请在 24 小时后发送。
+
+- 在成功订阅邮件列表之前，请不要向**dev**发送邮件，否则您的邮件将会被拉黑。
+
 # 退订邮件列表
 
 如果您不再需要了解 HugeGraph 的最新动态，可以退订邮件列表。
