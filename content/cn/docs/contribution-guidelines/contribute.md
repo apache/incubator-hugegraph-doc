@@ -83,6 +83,12 @@ Note: In order to be consistent with the code style easily, if you use [IDEA](ht
 3. 找到仓库里的 NOTICE 文件，追加到 [./hugegraph-dist/release-docs/NOTICE](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/release-docs/NOTICE) 文件后面（如果没有NOTICE文件则跳过这一步）。
 4. 本地执行[./hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh) 脚本更新依赖列表[known-dependencies.txt](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/scripts/dependency/known-dependencies.txt) (或者手动更新)。
 
+例如：在源码中引入了第三方文件 `ant-1.9.1.jar`
+- 项目源码位于：https://github.com/apache/ant/tree/rel/1.9.1
+- LICENSE 文件：https://github.com/apache/ant/blob/rel/1.9.1/LICENSE
+- NOTICE 文件：https://github.com/apache/ant/blob/rel/1.9.1/NOTICE
+`ant-1.9.1.jar` 的 license 信息需要在 LICENSE 文件中指定，notice 信息需要在 NOTICE 文件中指定。 ant-1.9.1.jar 对应的详细 LICENSE 文件需要复制到 licenses/ 目录下。最后更新 known-dependencies.txt 文件。
+
 #### 3.3 Commit changes to git repo
 
 After the code has been completed, we submit them to the local git repo:
