@@ -66,7 +66,7 @@ rocksdb.wal_path=.
 2023-06-05 00:43:39 [hugegraph-shutdown] [INFO] o.a.h.HugeFactory - HugeGraph is shutting down
 ```
 
-#### 3. `HugeGraphServer` 运行配置
+#### 3. 运行 `HugeGraphServer`
 
 类似地，打开 IntelliJ IDEA 的 `Run/Debug Configurations` 面板，创建一个新的 `Application` 配置，按照以下步骤进行配置：
 

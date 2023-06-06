@@ -19,7 +19,6 @@ Before proceeding with the following process, make sure that you have cloned the
 
 ```bash
 git clone https://github.com/apache/hugegraph.git
-cd hugegraph
 ```
 
 ### Steps
@@ -29,14 +28,14 @@ cd hugegraph
 To avoid the impact of configuration file changes on Git tracking, it is recommended to copy the required configuration files to a separate folder. Run the following command to copy the files:
 
 ```bash
-cp -r hugegraph-dist/src/assembly/static/scripts hugegraph-dist/src/assembly/static/conf <path-to-your-directory>
+cp -r hugegraph-dist/src/assembly/static/scripts hugegraph-dist/src/assembly/static/conf path-to-your-directory
 ```
 
-Replace `<path-to-your-directory>` with the path to the directory where you want to copy the files.
+Replace `path-to-your-directory` with the path to the directory where you want to copy the files.
 
-#### 2. Configure `InitStore`
+#### 2. Configure `InitStore` to initialize the graph
 
-First, you need to configure the database backend in the configuration files. In this example, we will use RocksDB. Open `<path-to-your-directory>/conf/graphs/hugegraph.properties` and configure it as follows:
+First, you need to configure the database backend in the configuration files. In this example, we will use RocksDB. Open `path-to-your-directory/conf/graphs/hugegraph.properties` and configure it as follows:
 
 ```properties
 backend=rocksdb
@@ -49,7 +48,7 @@ Next, open the `Run/Debug Configurations` panel in IntelliJ IDEA and create a ne
 
 - Select `hugegraph-dist` as the `Use classpath of module`.
 - Set the `Main class` to `org.apache.hugegraph.cmd.InitStore`.
-- Set the program arguments to `conf/graphs/hugegraph.properties`. Note that the path here is relative to the working directory, so make sure to set the working directory to `<path-to-your-directory>`.
+- Set the program arguments to `conf/graphs/hugegraph.properties`. Note that the path here is relative to the working directory, so make sure to set the working directory to `path-to-your-directory`.
 
 Once the configuration is completed, run it. If the execution is successful, the following runtime logs will be displayed:
 
@@ -67,13 +66,13 @@ Once the configuration is completed, run it. If the execution is successful, the
 2023-06-05 00:43:39 [hugegraph-shutdown] [INFO] o.a.h.HugeFactory - HugeGraph is shutting down
 ```
 
-#### 3. Configure `HugeGraphServer`
+#### 3. Running `HugeGraphServer`
 
 Similarly, open the `Run/Debug Configurations` panel in IntelliJ IDEA and create a new `Application` configuration. Follow these steps for the configuration:
 
 - Select `hugegraph-dist` as the `Use classpath of module`.
 - Set the `Main class` to `org.apache.hugegraph.dist.HugeGraphServer`.
-- Set the program arguments to `conf/gremlin-server.yaml conf/rest-server.properties`. Similarly, note that the path here is relative to the working directory, so make sure to set the working directory to `<path-to-your-directory>`.
+- Set the program arguments to `conf/gremlin-server.yaml conf/rest-server.properties`. Similarly, note that the path here is relative to the working directory, so make sure to set the working directory to `path-to-your-directory`.
 
 Once the configuration is completed, run it. If you see the following logs, it means that `HugeGraphServer` has been successfully started:
 
@@ -89,12 +88,9 @@ After completing the above configuration, you can try debugging `HugeGraphServer
 
 ```java
 public String list(@Context GraphManager manager,
-                   @PathParam("graph") String graph,
-                   @QueryParam("label") String label,
-                   @QueryParam("properties") String properties,
-                   ......) {
-    ......
-
+                   @PathParam("graph") String graph, @QueryParam("label") String label,
+                   @QueryParam("properties") String properties, ......) {
+    // ignore log
     Map<String, Object> props = parseProperties(properties);
 ```
 
@@ -112,8 +108,8 @@ At this point, you can view detailed variable information in the debugger.
 
 The reason may be that cross-compilation is triggered when using Java 11 to compile, causing the symbol of `sun.misc.Unsafe` used in the project to not be found. There are two possible solutions:
 
-1. In IntelliJ IDEA, go to `Preferences` and find the `Java Compiler` panel. Then, disable the `--release` option, or
-2. Set the Project SDK to 8 (not recommended).
+1. In IntelliJ IDEA, go to `Preferences/Settings` and find the `Java Compiler` panel. Then, disable the `--release` option (recommended).
+2. Set the Project SDK to 8.
 
 ### References
 
