@@ -438,3 +438,7 @@ For detailed API, please refer to [RESTful-API](/docs/clients/restful-api)
 $cd hugegraph-${version}
 $bin/stop-hugegraph.sh
 ```
+
+### 8 Debug Server with IntelliJ IDEA
+
+Please refer to [How to Set Up HugeGraph-Server Development Environment in IDEA](/docs/contribution-guidelines/hugegraph-server-idea-setup)
