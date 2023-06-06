@@ -287,7 +287,8 @@
 &lt;h3 id="7-停止server">7 停止Server&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">$cd&lt;/span> hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">$bin&lt;/span>/stop-hugegraph.sh
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: HugeGraph-Loader Quick Start</title><link>/cn/docs/quickstart/hugegraph-loader/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-loader/</guid><description>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="8-使用-intellij-idea-调试-server">8 使用 IntelliJ IDEA 调试 Server&lt;/h3>
+&lt;p>请参考&lt;a href="/docs/contribution-guidelines/hugegraph-server-idea-setup">如何在 IDEA 中搭建 HugeGraph-Server 开发环境&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph-Loader Quick Start</title><link>/cn/docs/quickstart/hugegraph-loader/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-loader/</guid><description>
 &lt;h3 id="1-hugegraph-loader概述">1 HugeGraph-Loader概述&lt;/h3>
 &lt;p>HugeGraph-Loader 是 HugeGraph 的数据导入组件，能够将多种数据源的数据转化为图的顶点和边并批量导入到图数据库中。&lt;/p>
 &lt;p>目前支持的数据源包括：&lt;/p>
