@@ -225,3 +225,7 @@ TODO
 ## 4 Algorithm development guide
 
 TODO
+
+## 5 Note
+
+- If some classes under computer-k8s cannot be found, you need to execute `mvn compile` in advance to generate corresponding classes.
