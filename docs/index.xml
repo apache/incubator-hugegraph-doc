@@ -10649,7 +10649,11 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;h3 id="32-algorithm-describe">3.2 Algorithm describe&lt;/h3>
 &lt;p>TODO&lt;/p>
 &lt;h2 id="4-algorithm-development-guide">4 Algorithm development guide&lt;/h2>
-&lt;p>TODO&lt;/p></description></item><item><title>Docs: Vertex API</title><link>/docs/clients/restful-api/vertex/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/clients/restful-api/vertex/</guid><description>
+&lt;p>TODO&lt;/p>
+&lt;h2 id="5-note">5 Note&lt;/h2>
+&lt;ul>
+&lt;li>If some classes under computer-k8s cannot be found, you need to execute &lt;code>mvn compile&lt;/code> in advance to generate corresponding classes.&lt;/li>
+&lt;/ul></description></item><item><title>Docs: Vertex API</title><link>/docs/clients/restful-api/vertex/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/clients/restful-api/vertex/</guid><description>
 &lt;h3 id="21-vertex">2.1 Vertex&lt;/h3>
 &lt;p>In vertex types, the &lt;code>Id&lt;/code> strategy determines the type of the vertex &lt;code>Id&lt;/code>, with the corresponding relationships as follows:&lt;/p>
 &lt;table>

@@ -11240,7 +11240,11 @@ HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
 &lt;h3 id="32-算法描述">3.2 算法描述&lt;/h3>
 &lt;p>TODO&lt;/p>
 &lt;h2 id="4-算法开发指南">4 算法开发指南&lt;/h2>
-&lt;p>TODO&lt;/p></description></item><item><title>Docs: HugeGraph 0.6 Release Notes</title><link>/cn/docs/changelog/hugegraph-0.6.1-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/changelog/hugegraph-0.6.1-release-notes/</guid><description>
+&lt;p>TODO&lt;/p>
+&lt;h2 id="5-注意事项">5 注意事项&lt;/h2>
+&lt;ul>
+&lt;li>如果computer-k8s模块下面的某些类不存在，你需要运行&lt;code>mvn compile&lt;/code>来提前生成对应的类。&lt;/li>
+&lt;/ul></description></item><item><title>Docs: HugeGraph 0.6 Release Notes</title><link>/cn/docs/changelog/hugegraph-0.6.1-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/changelog/hugegraph-0.6.1-release-notes/</guid><description>
 &lt;h3 id="api--java-client">API &amp;amp; Java Client&lt;/h3>
 &lt;h4 id="功能更新">功能更新&lt;/h4>
 &lt;ul>

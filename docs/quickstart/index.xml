@@ -2769,4 +2769,8 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;h3 id="32-algorithm-describe">3.2 Algorithm describe&lt;/h3>
 &lt;p>TODO&lt;/p>
 &lt;h2 id="4-algorithm-development-guide">4 Algorithm development guide&lt;/h2>
-&lt;p>TODO&lt;/p></description></item></channel></rss>
+&lt;p>TODO&lt;/p>
+&lt;h2 id="5-note">5 Note&lt;/h2>
+&lt;ul>
+&lt;li>If some classes under computer-k8s cannot be found, you need to execute &lt;code>mvn compile&lt;/code> in advance to generate corresponding classes.&lt;/li>
+&lt;/ul></description></item></channel></rss>

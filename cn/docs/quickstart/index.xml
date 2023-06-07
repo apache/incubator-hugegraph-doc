@@ -2736,4 +2736,8 @@ HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
 &lt;h3 id="32-算法描述">3.2 算法描述&lt;/h3>
 &lt;p>TODO&lt;/p>
 &lt;h2 id="4-算法开发指南">4 算法开发指南&lt;/h2>
-&lt;p>TODO&lt;/p></description></item></channel></rss>
+&lt;p>TODO&lt;/p>
+&lt;h2 id="5-注意事项">5 注意事项&lt;/h2>
+&lt;ul>
+&lt;li>如果computer-k8s模块下面的某些类不存在，你需要运行&lt;code>mvn compile&lt;/code>来提前生成对应的类。&lt;/li>
+&lt;/ul></description></item></channel></rss>
