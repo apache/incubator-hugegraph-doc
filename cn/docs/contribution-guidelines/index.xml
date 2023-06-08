@@ -119,7 +119,7 @@
 &lt;p>注意事项：&lt;/p>
 &lt;ul>
 &lt;li>如果您没有收到确认邮件，请在24小时后再重试发送邮件。&lt;/li>
-&lt;li>在成功订阅邮件列表之前，请勿发送电子邮件到 &lt;strong>dev&lt;/strong>（未订阅发送的邮件将被被自动拦截）。&lt;/li>
+&lt;li>在成功订阅邮件列表之前，请勿发送电子邮件到 &lt;strong>dev&lt;/strong>（未订阅发送的邮件将被自动拦截）。&lt;/li>
 &lt;/ul>
 &lt;p>HugeGraph提供了一个供开发和用户讨论的电子邮件列表。&lt;/p>
 &lt;ul>
