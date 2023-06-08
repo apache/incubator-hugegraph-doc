@@ -1,25 +1,31 @@
 ---
-title: "订阅社区邮箱"
-linkTitle: "订阅社区邮箱"
+title: "订阅社区列表"
+linkTitle: "订阅社区列表"
 weight: 2
 ---
 
+按照以下步骤订阅邮件列表：
 
-强烈建议订阅开发者邮件列表，以保持与社区的最新动态。
+- 通过您的电子邮件账户发送邮件至 [dev-subscribe@hugegraph.apache.org](mailto:dev-subscribe@hugegraph.apache.org)，然后您将收到一封确认邮件。
+- 回复确认邮件以确认您的订阅。然后，您将收到另一封确认邮件。
+- 现在您已经成为该邮件列表的订阅者。如果您有更多问题，只需发送邮件到邮件列表，有人会很快回复您。
+- 如果您想取消订阅邮件列表，只需发送邮件至 [dev-unsubscribe@hugegraph.apache.org](mailto:dev-unsubscribe@hugegraph.apache.org)，然后按照确认邮件中的步骤操作即可。
 
-在使用 HugeGraph 的过程中，如果您有任何问题、想法或建议，您可以通过 Apache 邮件列表参与 HugeGraph 社区的建设。发送订阅邮件也非常简单，步骤如下：
+您可以随时订阅邮件列表。此外，您也可以直接浏览[历史邮件/所有邮件](https://lists.apache.org/list.html?dev@hugegraph.apache.org)（即使没有订阅列表）。
 
-1. 使用您自己的电子邮件地址发送邮件到 [dev-subscribe@hugegraph.apache.org](mailto:dev-subscribe@hugegraph.apache.org)（主题和内容任意）。
+ 注意事项：
 
-2. 收到确认邮件并回复。完成第一步后，您将收到来自 [dev-help@hugegraph.apache.org](mailto:dev-help@hugegraph.apache.org) 的确认邮件（如果未收到，请确认邮件是否被自动归类为垃圾邮件、推广邮件、订阅邮件等）。然后直接回复邮件，或点击邮件中的链接快速回复（主题和内容任意）。
+ - 如果您没有收到确认邮件，请在24小时后再重试发送邮件。
+ - 在成功订阅邮件列表之前，请不要发送电子邮件到 **dev**（否则该邮件将被封禁）。
 
-3. 收到欢迎邮件。完成上述步骤后，您将收到一封主题为 "WELCOME to [dev@hugegraph.apache.org](mailto:dev@hugegraph.apache.org)" 的欢迎邮件，表示您已成功订阅 Apache HugeGraph 邮件列表。
+HugeGraph提供了一个供开发和用户讨论的电子邮件列表。
 
-注意事项：
+- hugegraph-dev: [dev@hugegraph.apache.org](mailto:dev@hugegraph.apache.org) 用于开发和用户讨论。
 
-- 如果您没有收到确认电子邮件，请在 24 小时后发送。
+有关邮件订阅的更多信息，请参阅：
 
-- 在成功订阅邮件列表之前，请不要向**dev**发送邮件，否则您的邮件将会被拉黑。
+- [https://lists.apache.org/list.html?dev@hugegraph.apache.org](https://lists.apache.org/list.html?dev@hugegraph.apache.org)
+- [http://apache.org/foundation/mailinglists.html#subscribing](http://apache.org/foundation/mailinglists.html#subscribing)
 
 # 退订邮件列表
 
