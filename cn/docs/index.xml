@@ -6404,34 +6404,40 @@ HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
 &lt;ul>
 &lt;li>并发12000，吞吐量是10688，边的按id查询的并发能力为12000，平均延时为63ms&lt;/li>
 &lt;/ul></description></item><item><title>Docs: 订阅社区邮箱</title><link>/cn/docs/contribution-guidelines/subscribe/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/contribution-guidelines/subscribe/</guid><description>
-&lt;blockquote>
-&lt;p>TODO: translate this article to Chinese&lt;/p>
-&lt;/blockquote>
-&lt;p>It is highly recommended to subscribe to the development mailing list to keep up-to-date with the community.&lt;/p>
-&lt;p>In the process of using HugeGraph, if you have any questions or ideas, suggestions, you can participate in the HugeGraph community building through the Apache mailing list. Sending a subscription email is also very simple, the steps are as follows:&lt;/p>
+&lt;p>按照以下步骤订阅邮件列表：&lt;/p>
+&lt;ul>
+&lt;li>通过您的电子邮件账户发送邮件至 &lt;a href="mailto:dev-subscribe@hugegraph.apache.org">dev-subscribe@hugegraph.apache.org&lt;/a>，然后您将收到一封确认邮件。&lt;/li>
+&lt;li>回复确认邮件以确认您的订阅。然后，您将收到另一封确认邮件。&lt;/li>
+&lt;li>现在您已经成为该邮件列表的订阅者。如果您有更多问题，只需发送邮件到邮件列表，社区同学看到后会及时回复。&lt;/li>
+&lt;li>如果您想取消订阅邮件列表，只需发送邮件至 &lt;a href="mailto:dev-unsubscribe@hugegraph.apache.org">dev-unsubscribe@hugegraph.apache.org&lt;/a>，然后按照确认邮件中的步骤操作即可。&lt;/li>
+&lt;/ul>
+&lt;p>您可以随时订阅邮件列表。此外，您也可以直接浏览&lt;a href="https://lists.apache.org/list.html?dev@hugegraph.apache.org">历史邮件/所有邮件&lt;/a>（即使没有订阅列表）。&lt;/p>
+&lt;p>注意事项：&lt;/p>
+&lt;ul>
+&lt;li>如果您没有收到确认邮件，请在24小时后再重试发送邮件。&lt;/li>
+&lt;li>在成功订阅邮件列表之前，请勿发送电子邮件到 &lt;strong>dev&lt;/strong>（未订阅发送的邮件将被被自动拦截）。&lt;/li>
+&lt;/ul>
+&lt;p>HugeGraph提供了一个供开发和用户讨论的电子邮件列表。&lt;/p>
+&lt;ul>
+&lt;li>hugegraph-dev: &lt;a href="mailto:dev@hugegraph.apache.org">dev@hugegraph.apache.org&lt;/a> 用于开发和用户讨论。&lt;/li>
+&lt;/ul>
+&lt;p>有关邮件订阅的更多信息，请参阅：&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://lists.apache.org/list.html?dev@hugegraph.apache.org">https://lists.apache.org/list.html?dev@hugegraph.apache.org&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://apache.org/foundation/mailinglists.html#subscribing">http://apache.org/foundation/mailinglists.html#subscribing&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h1 id="退订邮件列表-">退订邮件列表 👋🏻&lt;/h1>
+&lt;p>如果您不再需要了解 HugeGraph 的最新动态，可以退订邮件列表。&lt;/p>
+&lt;p>退订邮件列表的步骤如下：&lt;/p>
 &lt;ol>
 &lt;li>
-&lt;p>Email &lt;a href="mailto:dev-subscribe@hugegraph.apache.org">dev-subscribe@hugegraph.apache.org&lt;/a> with your own email address, subject and content are arbitrary.&lt;/p>
+&lt;p>使用您订阅时的电子邮件发送邮件到 &lt;a href="mailto:dev-unsubscribe@hugegraph.apache.org">dev-unsubscribe@hugegraph.apache.org&lt;/a>（主题和内容任意）。&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>Receive confirmation email and reply. After completing step 1, you will receive a confirmation email from &lt;a href="mailto:dev-help@hugegraph.apache.org">dev-help@hugegraph.apache.org&lt;/a> (if not received, please confirm whether the email is automatically classified as spam, promotion email, subscription email, etc.) . Then reply directly to the email, or click on the link in the email to reply quickly, the subject and content are arbitrary.&lt;/p>
+&lt;p>收到确认邮件并回复。完成第一步后，您将收到来自 &lt;a href="mailto:dev-help@hugegraph.apache.org">dev-help@hugegraph.apache.org&lt;/a> 的确认邮件（如果未收到，请确认邮件是否被自动归类为垃圾邮件、推广邮件、订阅邮件等）。然后直接回复邮件，或点击邮件中的链接快速回复（主题和内容任意）。&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>Receive a welcome email. After completing the above steps, you will receive a welcome email with the subject WELCOME to &lt;a href="mailto:dev@hugegraph.apache.org">dev@hugegraph.apache.org&lt;/a>, and you have successfully subscribed to the Apache HugeGraph mailing list.&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;h1 id="unsubscribe-mailing-lists">Unsubscribe Mailing Lists&lt;/h1>
-&lt;p>If you do not need to know what&amp;rsquo;s going on with HugeGraph, you can unsubscribe from the mailing list.&lt;/p>
-&lt;p>Unsubscribe from the mailing list steps are as follows:&lt;/p>
-&lt;ol>
-&lt;li>
-&lt;p>Email &lt;a href="mailto:dev-unsubscribe@hugegraph.apache.org">dev-unsubscribe@hugegraph.apache.org&lt;/a> with your subscribed email address, subject and content are arbitrary.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Receive confirmation email and reply. After completing step 1, you will receive a confirmation email from &lt;a href="mailto:dev-help@hugegraph.apache.org">dev-help@hugegraph.apache.org&lt;/a> (if not received, please confirm whether the email is automatically classified as spam, promotion email, subscription email, etc.) . Then reply directly to the email, or click on the link in the email to reply quickly, the subject and content are arbitrary.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Receive a goodbye email. After completing the above steps, you will receive a goodbye email with the subject GOODBYE from &lt;a href="mailto:dev@hugegraph.apache.org">dev@hugegraph.apache.org&lt;/a>, and you have successfully unsubscribed to the Apache HugeGraph mailing list, and you will not receive emails from &lt;a href="mailto:dev@hugegraph.apache.org">dev@hugegraph.apache.org&lt;/a>.&lt;/p>
+&lt;p>收到再见邮件。完成上述步骤后，您将收到一封主题为 &amp;ldquo;GOODBYE from &lt;a href="mailto:dev@hugegraph.apache.org">dev@hugegraph.apache.org&lt;/a>&amp;rdquo; 的再见邮件，表示您已成功退订 Apache HugeGraph 邮件列表，您将不再接收来自 &lt;a href="mailto:dev@hugegraph.apache.org">dev@hugegraph.apache.org&lt;/a> 的邮件。&lt;/p>
 &lt;/li>
 &lt;/ol></description></item><item><title>Docs: HugeGraph 内置用户权限与扩展权限配置及使用</title><link>/cn/docs/config/config-authentication/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/config/config-authentication/</guid><description>
 &lt;h3 id="概述">概述&lt;/h3>

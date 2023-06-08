@@ -105,19 +105,29 @@
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># force push the local commit to fork repo&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git push -f origin bugfix-branch:bugfix-branch
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>GitHub will automatically update the Pull Request after we push it, just wait for code review.&lt;/p></description></item><item><title>Docs: Subscribe Mailing Lists</title><link>/docs/contribution-guidelines/subscribe/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/contribution-guidelines/subscribe/</guid><description>
-&lt;p>It is highly recommended to subscribe to the development mailing list to keep up-to-date with the community.&lt;/p>
-&lt;p>In the process of using HugeGraph, if you have any questions or ideas, suggestions, you can participate in the HugeGraph community building through the Apache mailing list. Sending a subscription email is also very simple, the steps are as follows:&lt;/p>
-&lt;ol>
-&lt;li>
-&lt;p>Email &lt;a href="mailto:dev-subscribe@hugegraph.apache.org">dev-subscribe@hugegraph.apache.org&lt;/a> with your own email address, subject and content are arbitrary.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Receive confirmation email and reply. After completing step 1, you will receive a confirmation email from &lt;a href="mailto:dev-help@hugegraph.apache.org">dev-help@hugegraph.apache.org&lt;/a> (if not received, please confirm whether the email is automatically classified as spam, promotion email, subscription email, etc.) . Then reply directly to the email, or click on the link in the email to reply quickly, the subject and content are arbitrary.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Receive a welcome email. After completing the above steps, you will receive a welcome email with the subject WELCOME to &lt;a href="mailto:dev@hugegraph.apache.org">dev@hugegraph.apache.org&lt;/a>, and you have successfully subscribed to the Apache HugeGraph mailing list.&lt;/p>
-&lt;/li>
-&lt;/ol>
+&lt;h3 id="subscribe-the-mailing-list">Subscribe the mailing list&lt;/h3>
+&lt;p>Subscribe to the mailing list by following steps:&lt;/p>
+&lt;ul>
+&lt;li>Email &lt;a href="mailto:dev-subscribe@hugegraph.apache.org">dev-subscribe@hugegraph.apache.org&lt;/a> through your email account, and then you will receive a confirmation email.&lt;/li>
+&lt;li>Reply to the confirmation email to confirm your subscription. Then, you will receive another confirmation email.&lt;/li>
+&lt;li>Now you are a subscriber of the mailing list. If you have more questions, just email the mailing list and someone will reply to you soon.&lt;/li>
+&lt;li>If you want to unsubscribe from the mailing list, just email &lt;a href="mailto:dev-unsubscribe@hugegraph.apache.org">dev-unsubscribe@hugegraph.apache.org&lt;/a> and follow the steps in the confirmation email.&lt;/li>
+&lt;/ul>
+&lt;p>You can subscribe to the mailing list anytime you want. Additionally, you can check &lt;a href="https://lists.apache.org/list.html?dev@hugegraph.apache.org">historical emails / all emails&lt;/a> easily (even if you are not subscribing to the list).&lt;/p>
+&lt;p>Some notes:&lt;/p>
+&lt;ul>
+&lt;li>If you don&amp;rsquo;t receive the confirmation email, please send it after 24 hours later.&lt;/li>
+&lt;li>Don&amp;rsquo;t email to &lt;strong>dev&lt;/strong> until you subscribe to the mailing list successfully (otherwise the mail will be banned).&lt;/li>
+&lt;/ul>
+&lt;p>HugeGraph offers an email list for development and user discussions.&lt;/p>
+&lt;ul>
+&lt;li>hugegraph-dev: &lt;a href="mailto:dev@hugegraph.apache.org">dev@hugegraph.apache.org&lt;/a> for both development and users discussions.&lt;/li>
+&lt;/ul>
+&lt;p>More information on mailing subscribe can be found at:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://lists.apache.org/list.html?dev@hugegraph.apache.org">https://lists.apache.org/list.html?dev@hugegraph.apache.org&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://apache.org/foundation/mailinglists.html#subscribing">http://apache.org/foundation/mailinglists.html#subscribing&lt;/a>&lt;/li>
+&lt;/ul>
 &lt;h1 id="unsubscribe-mailing-lists">Unsubscribe Mailing Lists&lt;/h1>
 &lt;p>If you do not need to know what&amp;rsquo;s going on with HugeGraph, you can unsubscribe from the mailing list.&lt;/p>
 &lt;p>Unsubscribe from the mailing list steps are as follows:&lt;/p>
