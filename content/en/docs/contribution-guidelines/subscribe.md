@@ -4,15 +4,27 @@ linkTitle: "Subscribe Mailing Lists"
 weight: 2
 ---
 
-It is highly recommended to subscribe to the development mailing list to keep up-to-date with the community.
+### Subscribe the mailing list
 
-In the process of using HugeGraph, if you have any questions or ideas, suggestions, you can participate in the HugeGraph community building through the Apache mailing list. Sending a subscription email is also very simple, the steps are as follows:
+Subscribe to the mailing list by following steps:
+- Email [dev-subscribe@hugegraph.apache.org](mailto:dev-subscribe@hugegraph.apache.org) through your email account, and then you will receive a confirmation email.
+- Reply to the confirmation email to confirm your subscription. Then, you will receive another confirmation email.
+- Now you are a subscriber of the mailing list. If you have more questions, just email the mailing list and someone will reply to you soon.
+- If you want to unsubscribe from the mailing list, just email [dev-unsubscribe@hugegraph.apache.org](mailto:dev-unsubscribe@hugegraph.apache.org) and follow the steps in the confirmation email.
 
-1. Email dev-subscribe@hugegraph.apache.org with your own email address, subject and content are arbitrary.
+You can subscribe to the mailing list anytime you want. Additionally, you can check [historical emails / all emails](https://lists.apache.org/list.html?dev@hugegraph.apache.org) easily (even if you are not subscribing to the list).
 
-2. Receive confirmation email and reply. After completing step 1, you will receive a confirmation email from dev-help@hugegraph.apache.org (if not received, please confirm whether the email is automatically classified as spam, promotion email, subscription email, etc.) . Then reply directly to the email, or click on the link in the email to reply quickly, the subject and content are arbitrary.
+ Some notes:
+ - If you don't receive the confirmation email, please send it after 24 hours later.
+ - Don't email to **dev** until you subscribe to the mailing list successfully (otherwise the mail will be banned).
 
-3. Receive a welcome email. After completing the above steps, you will receive a welcome email with the subject WELCOME to dev@hugegraph.apache.org, and you have successfully subscribed to the Apache HugeGraph mailing list.
+HugeGraph offers an email list for development and user discussions.
+- hugegraph-dev: [dev@hugegraph.apache.org](mailto:dev@hugegraph.apache.org) for both development and users discussions.
+
+
+More information on mailing subscribe can be found at:
+- https://lists.apache.org/list.html?dev@hugegraph.apache.org
+- http://apache.org/foundation/mailinglists.html#subscribing
 
 # Unsubscribe Mailing Lists
 
