@@ -432,3 +432,60 @@ $bin/stop-hugegraph.sh
 ### 8 使用 IntelliJ IDEA 调试 Server
 
 请参考[如何在 IDEA 中搭建 HugeGraph-Server 开发环境](/docs/contribution-guidelines/hugegraph-server-idea-setup)
+
+### 9 在启动 Server 时创建示例图
+
+修改 `conf/gremlin-server.yaml`，将 `empty-sample.groovy` 修改为 `example.groovy`：
+
+```yaml
+org.apache.tinkerpop.gremlin.jsr223.ScriptFileGremlinPlugin: {
+    files: [scripts/example.groovy]
+}
+```
+
+修改 `scripts/example.groovy`，将：
+
+```groovy
+RegisterUtil.registerRocksDB()
+conf = "conf/graphs/hugegraph.properties"
+graph = HugeFactory.open(conf)
+graph.serverStarted(IdGenerator.of("server-tinkerpop"), NodeRole.MASTER)
+schema = graph.schema()
+```
+
+修改为：
+
+```groovy
+conf = "conf/graphs/hugegraph.properties"
+graph = HugeFactory.open(conf)
+schema = graph.schema()
+```
+
+然后使用脚本启动 HugeGraph-Server，如果打印出类似日志：
+
+```java
+2023-06-10 19:41:14 [main] [INFO] o.a.h.d.HugeGremlinServer [org.apache.hugegraph.dist.HugeGremlinServer.start(HugeGremlinServer.java:38)] - 3.5.1
+         \,,,/
+         (o o)
+-----oOOo-(3)-oOOo-----
+
+2023-06-10 19:41:14 [main] [INFO] o.a.h.u.ConfigUtil [org.apache.hugegraph.util.ConfigUtil.scanGraphsDir(ConfigUtil.java:88)] - Scanning option 'graphs' directory './conf/graphs'
+2023-06-10 19:41:14 [main] [INFO] o.a.h.d.HugeGremlinServer [org.apache.hugegraph.dist.HugeGremlinServer.start(HugeGremlinServer.java:52)] - Configuring Gremlin Server from /Users/dingyuchen/Desktop/hugegraph/apache-hugegraph-incubating-1.0.0/conf/gremlin-server.yaml
+>>>> query all vertices: size=6
+>>>> query all edges: size=6
+```
+
+并且使用 RESTful API 请求 `HugeGraphServer` 得到如下结果：
+
+```json
+> curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   222  100   222    0     0   3163      0 --:--:-- --:--:-- --:--:--  3964
+{"vertices":[{"id":"2:lop","label":"software","type":"vertex","properties":{"name":"lop","lang":"java","price":328}},{"id":"1:josh","label":"person","type":"vertex","properties":{"name":"josh","age":32,"city":"Beijing"}},{"id":"1:marko","label":"person","type":"vertex","properties":{"name":"marko","age":29,"city":"Beijing"}},{"id":"1:peter","label":"person","type":"vertex","properties":{"name":"peter","age":35,"city":"Shanghai"}},{"id":"1:vadas","label":"person","type":"vertex","properties":{"name":"vadas","age":27,"city":"Hongkong"}},{"id":"2:ripple","label":"software","type":"vertex","properties":{"name":"ripple","lang":"java","price":199}}]}
+```
+
+代表创建示例图成功。
+
+> 使用 IntelliJ IDEA 在启动 Server 时创建示例图的流程类似，不再赘述。
