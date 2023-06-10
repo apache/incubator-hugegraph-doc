@@ -228,6 +228,31 @@ enable = false
 #  icon = "fab fa-stack-overflow"
 #  desc = "Practical questions and curated answers"
 # Developer relevant links. These will show up on right side of footer and in the community page if you have one.
+[[params.links.user]]
+  name ="Introduction"
+  url = "../docs/introduction/readme/"
+  icon = "fa fa-book"
+  desc = "Increase your understanding about the project"
+[[params.links.user]]
+  name ="Quick start"
+  url = "../docs/quickstart/hugegraph-server/"
+  icon = "fa fa-rocket"
+  desc = "Embark on your HugeGraph journey with a simple configuration"
+[[params.links.user]]
+  name ="Download"
+  url = "../docs/download/download/"
+  icon = "fa fa-download"
+  desc = "Explore the comprehensive details of the project"
+[[params.links.user]]
+  name ="Config"
+  url = "../docs/config/"
+  icon = "fa fa-cog"
+  desc = "Unleash your ideas through file configuration"
+[[params.links.user]]
+  name ="WeChat"
+  url = "https://github.com/apache/incubator-hugegraph#contact-us"
+  icon = "fa fa-comments"
+  desc = "Follow us on WeChat to get the latest news"
 [[params.links.developer]]
   name = "GitHub"
   url = "https://github.com/apache/incubator-hugegraph"
@@ -240,6 +265,6 @@ enable = false
 #  desc = "Chat with other project developers"
 [[params.links.developer]]
   name = "Developer mailing list"
-  url = "mailto:dev@hugegraph.apache.org"
+  url = "../docs/contribution-guidelines/subscribe/"
   icon = "fa fa-envelope"
   desc = "Discuss development issues around the project"
