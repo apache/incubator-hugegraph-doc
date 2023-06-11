@@ -257,46 +257,97 @@ Pay attention to the following uncommented items:
 
 ### 5. Multi-Graph Configuration
 
-Our system can have multiple graphs, and each graph can have a different backend. For example, there are two graphs named `hugegraph` and `hugegraph1`, where `hugegraph` uses Cassandra as the backend and `hugegraph1` uses RocksDB as the backend.
+Our system can have multiple graphs, and the backend of each graph can be different, such as `hugegraph_rocksdb` and `hugegraph_mysql`, where `hugegraph_rocksdb` uses `RocksDB` as the backend, and `hugegraph_mysql` uses `MySQL` as a backend.
 
 The configuration method is simple:
 
-**Modify `gremlin-server.yaml`**
-
-Add a key-value pair in the `graphs` section of `gremlin-server.yaml`, where the key is the name of the graph and the value is the path to the graph's configuration file. For example:
-
-```yaml
-graphs: {
-  hugegraph: conf/hugegraph.properties,
-  hugegraph1: conf/hugegraph1.properties
-}
-```
-
 **Modify `rest-server.properties`**
 
-Add a key-value pair in the `graphs` section of `rest-server.properties`, where the key is the name of the graph and the value is the path to the graph's configuration file. For example:
+Modify the graph configuration file path (default path) in the graphs domain of rest-server.properties, for example:
 
 ```properties
-graphs=[hugegraph:conf/hugegraph.properties, hugegraph1:conf/hugegraph1.properties]
+graphs=./conf/graphs
 ```
 
-**Add `hugegraph1.properties`**
+Modify `hugegraph_mysql_backend.properties` and `hugegraph_rocksdb_backend.properties` based on `hugegraph.properties` under `conf/graphs` path
 
-Copy `hugegraph.properties` and name it `hugegraph1.properties`. Modify the database name corresponding to the graph and the parameters related to the backend. For example:
+The modified part of `hugegraph_mysql_backend.properties` is as follows:
 
 ```properties
-store=hugegraph1
+backend=mysql
+serializer=mysql
 
-...
+store=hugegraph_mysql
 
+# mysql backend config
+jdbc.driver=com.mysql.cj.jdbc.Driver
+jdbc.url=jdbc:mysql://127.0.0.1:3306
+jdbc.username=root
+jdbc.password=123456
+jdbc.reconnect_max_times=3
+jdbc.reconnect_interval=3
+jdbc.ssl_mode=false
+```
+
+The modified part of `hugegraph_rocksdb_backend.properties` is as follows:
+
+```properties
 backend=rocksdb
 serializer=binary
+
+store=hugegraph_rocksdb
 ```
 
 **Stop the server, execute `init-store.sh` (to create a new database for the new graph), and restart the server.**
 
 ```bash
-$ bin/stop-hugegraph.sh
-$ bin/init-store.sh
-$ bin/start-hugegraph.sh
+$ ./bin/stop-hugegraph.sh
+```
+
+```bash
+$ ./bin/init-store.sh
+
+Initializing HugeGraph Store...
+2023-06-11 14:16:14 [main] [INFO] o.a.h.u.ConfigUtil - Scanning option 'graphs' directory './conf/graphs'
+2023-06-11 14:16:14 [main] [INFO] o.a.h.c.InitStore - Init graph with config file: ./conf/graphs/hugegraph_rocksdb_backend.properties
+...
+2023-06-11 14:16:15 [main] [INFO] o.a.h.StandardHugeGraph - Graph 'hugegraph_rocksdb' has been initialized
+2023-06-11 14:16:15 [main] [INFO] o.a.h.c.InitStore - Init graph with config file: ./conf/graphs/hugegraph_mysql_backend.properties
+...
+2023-06-11 14:16:16 [main] [INFO] o.a.h.StandardHugeGraph - Graph 'hugegraph_mysql' has been initialized
+2023-06-11 14:16:16 [main] [INFO] o.a.h.StandardHugeGraph - Close graph standardhugegraph[hugegraph_rocksdb]
+...
+2023-06-11 14:16:16 [main] [INFO] o.a.h.HugeFactory - HugeFactory shutdown
+2023-06-11 14:16:16 [hugegraph-shutdown] [INFO] o.a.h.HugeFactory - HugeGraph is shutting down
+Initialization finished.
+```
+
+```bash
+$ ./bin/start-hugegraph.sh
+
+Starting HugeGraphServer...
+Connecting to HugeGraphServer (http://127.0.0.1:18080/graphs)...OK
+Started [pid 21614]
+```
+
+Check out created graphs:
+
+```bash
+curl http://127.0.0.1:8080/graphs/
+
+{"graphs":["hugegraph_rocksdb","hugegraph_mysql"]}
+```
+
+Get details of the graph
+
+```bash
+curl http://127.0.0.1:8080/graphs/hugegraph_mysql_backend
+
+{"name":"hugegraph_mysql","backend":"mysql"}
+```
+
+```bash
+curl http://127.0.0.1:8080/graphs/hugegraph_rocksdb_backend
+
+{"name":"hugegraph_rocksdb","backend":"rocksdb"}
 ```
