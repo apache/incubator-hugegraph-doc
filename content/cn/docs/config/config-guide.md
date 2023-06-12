@@ -263,15 +263,15 @@ cassandra.password=
 
 配置方法也很简单：
 
-**修改 rest-server.properties**
+**[可选]：修改 rest-server.properties**
 
-在 rest-server.properties 的 graphs 域中修改图的配置文件路径(默认路径)，比如：
+可以在 `rest-server.properties` 的 `graphs` 域中修改图的配置文件目录。默认配置为 `graphs=./conf/graphs`，如果想要修改为其它目录则调整 `graphs` 域，比如调整为 `graphs=/etc/hugegraph/graphs`，示例如下：
 
 ```properties
 graphs=./conf/graphs
 ```
 
-在 `conf/graphs` 路径下基于 `hugegraph.properties` 修改得到 `hugegraph_mysql_backend.properties` 和   `hugegraph_rocksdb_backend.properties`
+在 `conf/graphs` 路径下基于 `hugegraph.properties` 修改得到 `hugegraph_mysql_backend.properties` 和 `hugegraph_rocksdb_backend.properties`
 
 `hugegraph_mysql_backend.properties` 修改的部分如下：
 

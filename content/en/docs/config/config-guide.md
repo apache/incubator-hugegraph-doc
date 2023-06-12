@@ -261,9 +261,9 @@ Our system can have multiple graphs, and the backend of each graph can be differ
 
 The configuration method is simple:
 
-**Modify `rest-server.properties`**
+**[Optional]: Modify `rest-server.properties`**
 
-Modify the graph configuration file path (default path) in the graphs domain of rest-server.properties, for example:
+You can modify the graph profile directory in the `graphs` field of `rest-server.properties`. The default configuration is `graphs=. /conf/graphs`, if you want to change it to another directory then adjust the `graphs` domain, for example to `graphs=/etc/hugegraph/graphs`, example is as follows:
 
 ```properties
 graphs=./conf/graphs
