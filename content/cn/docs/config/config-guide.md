@@ -265,7 +265,7 @@ cassandra.password=
 
 **[可选]：修改 rest-server.properties**
 
-可以在 `rest-server.properties` 的 `graphs` 域中修改图的配置文件目录。默认配置为 `graphs=./conf/graphs`，如果想要修改为其它目录则调整 `graphs` 域，比如调整为 `graphs=/etc/hugegraph/graphs`，示例如下：
+通过修改 `rest-server.properties` 中的 `graphs` 配置项来设置图的配置文件目录。默认配置为 `graphs=./conf/graphs`，如果想要修改为其它目录则调整 `graphs` 配置项，比如调整为 `graphs=/etc/hugegraph/graphs`，示例如下：
 
 ```properties
 graphs=./conf/graphs

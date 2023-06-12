@@ -263,7 +263,7 @@ The configuration method is simple:
 
 **[Optional]: Modify `rest-server.properties`**
 
-You can modify the graph profile directory in the `graphs` field of `rest-server.properties`. The default configuration is `graphs=. /conf/graphs`, if you want to change it to another directory then adjust the `graphs` domain, for example to `graphs=/etc/hugegraph/graphs`, example is as follows:
+You can modify the graph profile directory in the `graphs` field of `rest-server.properties`. The default configuration is `graphs=./conf/graphs`, if you want to change it to another directory then adjust the `graphs` field, e.g. adjust it to `graphs=/etc/hugegraph/graphs`, example is as follows:
 
 ```properties
 graphs=./conf/graphs
