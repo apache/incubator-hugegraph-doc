@@ -327,7 +327,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 #### 5.6 MySQL
 
-> Users need to install MySQL, [Download Link](https://dev.mysql.com/downloads/mysql/)
+> Due to MySQL is under GPL license, which is not compatible with Apache License indeed, Users need to install MySQL, [Download Link](https://dev.mysql.com/downloads/mysql/)
 
 Download MySQL's [driver package] (https://repo1.maven.org/maven2/mysql/mysql-connector-java/), such as `mysql-connector-java-8.0.30.jar`, and put it into HugeGraph- Server's `lib` directory.
 

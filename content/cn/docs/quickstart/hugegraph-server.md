@@ -316,7 +316,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 #### 5.6 MySQL
 
-> 用户需自行安装 MySQL，[下载地址](https://dev.mysql.com/downloads/mysql/)
+> 由于 MySQL 是在 GPL 协议下，与 Apache 协议不兼容，用户需自行安装 MySQL，[下载地址](https://dev.mysql.com/downloads/mysql/)
 
 下载 MySQL 的[驱动包](https://repo1.maven.org/maven2/mysql/mysql-connector-java/)，比如 `mysql-connector-java-8.0.30.jar`，并放入 HugeGraph-Server 的 `lib` 目录下。
 
