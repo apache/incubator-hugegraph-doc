@@ -41,7 +41,6 @@ schema.propertyKey("price").asInt().ifNotExist().create()
 
 schema.vertexLabel("person").properties("name", "age", "city").primaryKeys("name").ifNotExist().create()
 schema.vertexLabel("software").properties("name", "lang", "price").primaryKeys("name").ifNotExist().create()
-// schema.indexLabel("personByName").onV("person").by("name").secondary().ifNotExist().create()
 schema.indexLabel("personByCity").onV("person").by("city").secondary().ifNotExist().create()
 schema.indexLabel("personByAgeAndCity").onV("person").by("age", "city").secondary().ifNotExist().create()
 schema.indexLabel("softwareByPrice").onV("software").by("price").range().ifNotExist().create()
@@ -124,7 +123,7 @@ gremlin>
 
 因为 Gremlin-Console 只能通过 WebSocket 连接 HugeGraph-Server，默认 HugeGraph-Server 是对外提供 HTTP 连接的，所以先修改 gremlin-server 的配置。
 
-*注意：将连接方式修改为 WebSocket 后，HugeGraph-Client、HugeGraph-Loader、HugeGraph-Studio 等配套工具都不能使用了。*
+*注意：将连接方式修改为 WebSocket 后，HugeGraph-Client、HugeGraph-Loader、HugeGraph-Hubble 等配套工具都不能使用了。*
 
 ```yaml
 # vim conf/gremlin-server.yaml
@@ -148,7 +147,7 @@ channelizer: org.apache.tinkerpop.gremlin.server.channel.HttpChannelizer
 plugin activated: HugeGraph
 plugin activated: tinkerpop.server
 plugin activated: tinkerpop.utilities
-plugin activated: tinkerpop.tinkergraph         
+plugin activated: tinkerpop.tinkergraph
 ```
 
 连接 server，需在配置文件中指定连接参数，在 conf 目录下有一个默认的 `remote.yaml`：
@@ -171,7 +170,7 @@ gremlin> :remote connect tinkerpop.server conf/remote.yaml
 ==>Configured localhost/127.0.0.1:8182
 ```
 
-连接成功之后，如果在启动 HugegraphServer 的过程中导入了示例图 `example.groovy`，就可以在 console 中直接进行查询
+连接成功之后，如果在启动 HugeGraphServer 的过程中导入了示例图 `example.groovy`，就可以在 console 中直接进行查询
 
 ```groovy
 gremlin> :> hugegraph.traversal().V()
@@ -183,7 +182,7 @@ gremlin> :> hugegraph.traversal().V()
 ==>[id:2:ripple,label:software,type:vertex,properties:[name:ripple,lang:java,price:199]]
 ```
 
-在 Client/Server 模式下，所有和 Server 有关的操作都要加上 `:> `，如果不加，表示在 console 本地操作。
+> 注意：在 Client/Server 模式下，所有和 Server 有关的操作都要加上 `:> `，如果不加，表示在 console 本地操作。
 
 还可以把多条语句放在一个字符串变量中，然后一次性发给 Server：
 
