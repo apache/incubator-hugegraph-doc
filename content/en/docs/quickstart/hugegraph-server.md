@@ -6,9 +6,9 @@ weight: 1
 
 ### 1 HugeGraph-Server Overview
 
-`HugeGraph-Server` is the core part of the HugeGraph Project, contains submodules such as Core、Backend、API.
+`HugeGraph-Server` is the core part of the HugeGraph Project, contains submodules such as Core, Backend, API.
 
-The Core Module is an implementation of the Tinkerpop interface; The Backend module is used to save the graph data to the data store, currently supported backends include：Memory、Cassandra、ScyllaDB、RocksDB; The API Module provides HTTP Server, which converts Client's HTTP request into a call to Core Module.
+The Core Module is an implementation of the Tinkerpop interface; The Backend module is used to save the graph data to the data store, currently supported backends include: Memory, Cassandra, ScyllaDB, RocksDB; The API Module provides HTTP Server, which converts Client's HTTP request into a call to Core Module.
 
 > There will be two spellings HugeGraph-Server and HugeGraphServer in the document, and other modules are similar. There is no big difference in the meaning of these two ways of writing, which can be distinguished as follows: `HugeGraph-Server` represents the code of server-related components, `HugeGraphServer` represents the service process.
 
@@ -16,7 +16,7 @@ The Core Module is an implementation of the Tinkerpop interface; The Backend mod
 
 #### 2.1 Install Java11 (JDK 11)
 
-Consider use Java 11 to run `HugeGraph-Server`(also compatible with Java 8 now), and configure by yourself.
+Consider use Java 11 to run `HugeGraph-Server` (also compatible with Java 8 now), and configure by yourself.
 
 **Be sure to execute the `java -version` command to check the jdk version before reading**
 
@@ -35,7 +35,7 @@ There are three ways to deploy HugeGraph-Server components:
 
 #### 3.1 One-click deployment
 
-`HugeGraph-Tools` provides a command-line tool for one-click deployment, users can use this tool to quickly download、decompress、configure and start `HugeGraphServer` and `HugeGraph-Hubble` with one click.
+`HugeGraph-Tools` provides a command-line tool for one-click deployment, users can use this tool to quickly download, decompress, configure and start `HugeGraphServer` and `HugeGraph-Hubble` with one click.
 
 Of course, you should download the tarball of `HugeGraph-Toolchain` first.
 
@@ -49,7 +49,7 @@ tar zxf *hugegraph-*.tar.gz
 cd *hugegraph*/*tool* 
 ```
 
-> note：${version} is the version, The latest version can refer to [Download Page](/docs/download/download), or click the link to download directly from the Download page
+> note: `${version}` is the version, The latest version can refer to [Download Page](/docs/download/download), or click the link to download directly from the Download page
 
 The general entry script for HugeGraph-Tools is `bin/hugegraph`, Users can use the `help` command to view its usage, here only the commands for one-click deployment are introduced.
 
@@ -376,7 +376,7 @@ _explanation_
     restserver.url=http://0.0.0.0:8080
     ```
 
-response body：
+response body:
 
 ```javasript
 {
@@ -441,4 +441,51 @@ $bin/stop-hugegraph.sh
 
 ### 8 Debug Server with IntelliJ IDEA
 
-Please refer to [How to Set Up HugeGraph-Server Development Environment in IDEA](/docs/contribution-guidelines/hugegraph-server-idea-setup)
+Please refer to [Setup Server in IDEA](/docs/contribution-guidelines/hugegraph-server-idea-setup)
+
+### 9 Create Sample Graph on Server Startup
+
+Modify `conf/gremlin-server.yaml` and change `empty-sample.groovy` to `example.groovy`:
+
+```yaml
+org.apache.tinkerpop.gremlin.jsr223.ScriptFileGremlinPlugin: {
+    files: [scripts/example.groovy]
+}
+```
+
+Modify `scripts/example.groovy` as follows:
+
+```groovy
+conf = "conf/graphs/hugegraph.properties"
+graph = HugeFactory.open(conf)
+schema = graph.schema()
+```
+
+Afterwards, start the HugeGraph-Server using the script. If logs similar to the following are printed:
+
+```java
+2023-06-10 19:41:14 [main] [INFO] o.a.h.d.HugeGremlinServer [org.apache.hugegraph.dist.HugeGremlinServer.start(HugeGremlinServer.java:38)] - 3.5.1
+         \,,,/
+         (o o)
+-----oOOo-(3)-oOOo-----
+
+2023-06-10 19:41:14 [main] [INFO] o.a.h.u.ConfigUtil [org.apache.hugegraph.util.ConfigUtil.scanGraphsDir(ConfigUtil.java:88)] - Scanning option 'graphs' directory './conf/graphs'
+2023-06-10 19:41:14 [main] [INFO] o.a.h.d.HugeGremlinServer [org.apache.hugegraph.dist.HugeGremlinServer.start(HugeGremlinServer.java:52)] - Configuring Gremlin Server from /Users/dingyuchen/Desktop/hugegraph/apache-hugegraph-incubating-1.0.0/conf/gremlin-server.yaml
+>>>> query all vertices: size=6
+>>>> query all edges: size=6
+```
+
+And when using the RESTful API to request `HugeGraphServer`, you receive the following result:
+
+```javascript
+> curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   222  100   222    0     0   3163      0 --:--:-- --:--:-- --:--:--  3964
+{"vertices":[{"id":"2:lop","label":"software","type":"vertex","properties":{"name":"lop","lang":"java","price":328}},{"id":"1:josh","label":"person","type":"vertex","properties":{"name":"josh","age":32,"city":"Beijing"}},{"id":"1:marko","label":"person","type":"vertex","properties":{"name":"marko","age":29,"city":"Beijing"}},{"id":"1:peter","label":"person","type":"vertex","properties":{"name":"peter","age":35,"city":"Shanghai"}},{"id":"1:vadas","label":"person","type":"vertex","properties":{"name":"vadas","age":27,"city":"Hongkong"}},{"id":"2:ripple","label":"software","type":"vertex","properties":{"name":"ripple","lang":"java","price":199}}]}
+```
+
+indicating the successful creation of the sample graph.
+
+> The process of creating sample graph on server startup is similar when using IntelliJ IDEA and will not be described further.

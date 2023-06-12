@@ -1,6 +1,6 @@
 ---
-title: "How to Set Up HugeGraph-Server Development Environment in IDEA"
-linkTitle: "How to Set Up HugeGraph-Server Development Environment in IDEA"
+title: "Setup Server in IDEA"
+linkTitle: "Setup Server in IDEA"
 weight: 4
 ---
 
@@ -102,6 +102,16 @@ curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
 
 At this point, you can view detailed variable information in the debugger.
 
+#### 5. Log4j2 Configuration
+
+By default, when running `InitStore` and `HugeGraphServer`, the Log4j2 configuration file path read is `hugegraph-dist/src/main/resources/log4j2.xml`, not `path-to-your-directory/conf/log4j2.xml`. This configuration file is read when starting HugeGraphServer using the **script**.
+
+To avoid maintaining two separate configuration files, you can modify the Log4j2 configuration file path when running and debugging HugeGraphServer in **IntelliJ IDEA**:
+
+1. Open the previously created `Application` configuration.
+2. Click on `Modify options` - `Add VM options`.
+3. Set the VM options to `-Dlog4j.configurationFile=conf/log4j2.xml`.
+
 ### Possible Issues
 
 #### java: package sun.misc does not exist
@@ -110,6 +120,10 @@ The reason may be that cross-compilation is triggered when using Java 11 to comp
 
 1. In IntelliJ IDEA, go to `Preferences/Settings` and find the `Java Compiler` panel. Then, disable the `--release` option (recommended).
 2. Set the Project SDK to 8.
+
+#### Unable to Print Location Information (%l) in Log4j2
+
+This is because Log4j2 uses asynchronous loggers. You can refer to the [official documentation](https://logging.apache.org/log4j/2.x/manual/layouts.html#LocationInformation) for configuration details.
 
 ### References
 

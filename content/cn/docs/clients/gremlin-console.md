@@ -4,305 +4,202 @@ linkTitle: "Gremlin Console"
 weight: 3
 ---
 
-Gremlin-Console是由Tinkerpop自己开发的一个交互式客户端，用户可以使用该客户端对Graph做各种操作，主要有两种使用模式：
+Gremlin-Console 是由 Tinkerpop 自己开发的一个交互式客户端，用户可以使用该客户端对 Graph 做各种操作，主要有两种使用模式：
 
-- 单机离线调用模式；
-- Client/Server请求模式；
+- 单机离线调用模式
+- Client/Server 请求模式
 
 ### 1 单机离线调用模式
 
-由于lib目录下已经包含了HugeCore的jar包，且HugeGraph已经作为插件注册到Console中，用户可以直接写groovy脚本调用HugeGraph-Core的代码，然后交由Gremlin-Console内的解析引擎执行，就能在不启动Server的情况下操作图。
+由于 lib 目录下已经包含了 HugeCore 的 jar 包，且 HugeGraph 已经作为插件注册到 Console 中，用户可以直接写 groovy 脚本调用 HugeGraph-Core 的代码，然后交由 Gremlin-Console 内的解析引擎执行，就能在不启动 Server 的情况下操作图。
 
 这种模式便于用户快速上手体验，但是不适合大量数据插入和查询的场景。下面给一个示例：
 
-在script目录下有一个示例脚本：example.groovy
+在 script 目录下有一个示例脚本 `example.groovy`：
 
 ```groovy
-import com.baidu.hugegraph.HugeFactory
-import com.baidu.hugegraph.dist.RegisterUtil
+import org.apache.hugegraph.HugeFactory
+import org.apache.hugegraph.backend.id.IdGenerator
+import org.apache.hugegraph.dist.RegisterUtil
+import org.apache.hugegraph.type.define.NodeRole
 import org.apache.tinkerpop.gremlin.structure.T
 
-RegisterUtil.registerCassandra();
-RegisterUtil.registerScyllaDB();
+RegisterUtil.registerRocksDB()
 
-conf = "conf/hugegraph.properties"
-graph = HugeFactory.open(conf);
-schema = graph.schema();
+conf = "conf/graphs/hugegraph.properties"
+graph = HugeFactory.open(conf)
+graph.serverStarted(IdGenerator.of("server-tinkerpop"), NodeRole.MASTER)
+schema = graph.schema()
 
-schema.propertyKey("name").asText().ifNotExist().create();
-schema.propertyKey("age").asInt().ifNotExist().create();
-schema.propertyKey("city").asText().ifNotExist().create();
-schema.propertyKey("weight").asDouble().ifNotExist().create();
-schema.propertyKey("lang").asText().ifNotExist().create();
-schema.propertyKey("date").asText().ifNotExist().create();
-schema.propertyKey("price").asInt().ifNotExist().create();
+schema.propertyKey("name").asText().ifNotExist().create()
+schema.propertyKey("age").asInt().ifNotExist().create()
+schema.propertyKey("city").asText().ifNotExist().create()
+schema.propertyKey("weight").asDouble().ifNotExist().create()
+schema.propertyKey("lang").asText().ifNotExist().create()
+schema.propertyKey("date").asText().ifNotExist().create()
+schema.propertyKey("price").asInt().ifNotExist().create()
 
-schema.vertexLabel("person").properties("name", "age", "city").primaryKeys("name").ifNotExist().create();
-schema.vertexLabel("software").properties("name", "lang", "price").primaryKeys("name").ifNotExist().create();
-schema.indexLabel("personByName").onV("person").by("name").secondary().ifNotExist().create();
-schema.indexLabel("personByCity").onV("person").by("city").secondary().ifNotExist().create();
-schema.indexLabel("personByAgeAndCity").onV("person").by("age", "city").secondary().ifNotExist().create();
-schema.indexLabel("softwareByPrice").onV("software").by("price").range().ifNotExist().create();
-schema.edgeLabel("knows").sourceLabel("person").targetLabel("person").properties("date", "weight").ifNotExist().create();
-schema.edgeLabel("created").sourceLabel("person").targetLabel("software").properties("date", "weight").ifNotExist().create();
-schema.indexLabel("createdByDate").onE("created").by("date").secondary().ifNotExist().create();
-schema.indexLabel("createdByWeight").onE("created").by("weight").range().ifNotExist().create();
-schema.indexLabel("knowsByWeight").onE("knows").by("weight").range().ifNotExist().create();
+schema.vertexLabel("person").properties("name", "age", "city").primaryKeys("name").ifNotExist().create()
+schema.vertexLabel("software").properties("name", "lang", "price").primaryKeys("name").ifNotExist().create()
+schema.indexLabel("personByCity").onV("person").by("city").secondary().ifNotExist().create()
+schema.indexLabel("personByAgeAndCity").onV("person").by("age", "city").secondary().ifNotExist().create()
+schema.indexLabel("softwareByPrice").onV("software").by("price").range().ifNotExist().create()
+schema.edgeLabel("knows").sourceLabel("person").targetLabel("person").properties("date", "weight").ifNotExist().create()
+schema.edgeLabel("created").sourceLabel("person").targetLabel("software").properties("date", "weight").ifNotExist().create()
+schema.indexLabel("createdByDate").onE("created").by("date").secondary().ifNotExist().create()
+schema.indexLabel("createdByWeight").onE("created").by("weight").range().ifNotExist().create()
+schema.indexLabel("knowsByWeight").onE("knows").by("weight").range().ifNotExist().create()
 
-marko = graph.addVertex(T.label, "person", "name", "marko", "age", 29, "city", "Beijing");
-vadas = graph.addVertex(T.label, "person", "name", "vadas", "age", 27, "city", "Hongkong");
-lop = graph.addVertex(T.label, "software", "name", "lop", "lang", "java", "price", 328);
-josh = graph.addVertex(T.label, "person", "name", "josh", "age", 32, "city", "Beijing");
-ripple = graph.addVertex(T.label, "software", "name", "ripple", "lang", "java", "price", 199);
-peter = graph.addVertex(T.label, "person", "name", "peter", "age", 35, "city", "Shanghai");
+marko = graph.addVertex(T.label, "person", "name", "marko", "age", 29, "city", "Beijing")
+vadas = graph.addVertex(T.label, "person", "name", "vadas", "age", 27, "city", "Hongkong")
+lop = graph.addVertex(T.label, "software", "name", "lop", "lang", "java", "price", 328)
+josh = graph.addVertex(T.label, "person", "name", "josh", "age", 32, "city", "Beijing")
+ripple = graph.addVertex(T.label, "software", "name", "ripple", "lang", "java", "price", 199)
+peter = graph.addVertex(T.label, "person", "name", "peter", "age", 35, "city", "Shanghai")
 
-marko.addEdge("knows", vadas, "date", "20160110", "weight", 0.5);
-marko.addEdge("knows", josh, "date", "20130220", "weight", 1.0);
-marko.addEdge("created", lop, "date", "20171210", "weight", 0.4);
-josh.addEdge("created", lop, "date", "20091111", "weight", 0.4);
-josh.addEdge("created", ripple, "date", "20171210", "weight", 1.0);
-peter.addEdge("created", lop, "date", "20170324", "weight", 0.2);
+marko.addEdge("knows", vadas, "date", "20160110", "weight", 0.5)
+marko.addEdge("knows", josh, "date", "20130220", "weight", 1.0)
+marko.addEdge("created", lop, "date", "20171210", "weight", 0.4)
+josh.addEdge("created", lop, "date", "20091111", "weight", 0.4)
+josh.addEdge("created", ripple, "date", "20171210", "weight", 1.0)
+peter.addEdge("created", lop, "date", "20170324", "weight", 0.2)
 
-graph.tx().commit();
+graph.tx().commit()
 
-g = graph.traversal();
+g = graph.traversal()
 
-System.out.println(">>>> query all vertices: size=" + g.V().toList().size());
-System.out.println(">>>> query all edges: size=" + g.E().toList().size());
+System.out.println(">>>> query all vertices: size=" + g.V().toList().size())
+System.out.println(">>>> query all edges: size=" + g.E().toList().size())
 ```
 
-其实这一段groovy脚本几乎就是Java代码，不同之处仅在于变量的定义可以不写类型声明，以及每一行末尾的分号可以去掉。
+其实这一段 groovy 脚本几乎就是 Java 代码，不同之处仅在于变量的定义可以不写类型声明，以及每一行末尾的分号可以去掉。
 
-> g.V() 是获取所有的顶点，g.E() 是获取所有的边，toList() 是把结果存到一个 List 中，参考[TinkerPop Terminal Steps](http://tinkerpop.apache.org/docs/current/reference/#terminal-steps)。
+> `g.V()` 是获取所有的顶点，`g.E()` 是获取所有的边，`toList()` 是把结果存到一个 List 中，参考 [TinkerPop Terminal Steps](http://tinkerpop.apache.org/docs/current/reference/#terminal-steps)。
 
-下面进入gremlin-console，并传入该脚本令其执行：
+下面进入 gremlin-console，并传入该脚本令其执行：
 
 ```bash
-bin/gremlin-console.sh scripts/example.groovy
-objc[5038]: Class JavaLaunchHelper is implemented in both /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/bin/java (0x10137a4c0) and /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/libinstrument.dylib (0x102bbb4e0). One of the two will be used. Which one is undefined.
+> ./bin/gremlin-console.sh -- -i scripts/example.groovy
 
          \,,,/
          (o o)
 -----oOOo-(3)-oOOo-----
-plugin activated: com.baidu.hugegraph
+plugin activated: HugeGraph
 plugin activated: tinkerpop.server
 plugin activated: tinkerpop.utilities
 plugin activated: tinkerpop.tinkergraph
-2018-01-15 14:36:19 7516  [main] [WARN ] com.baidu.hugegraph.config.HugeConfig [] - The config option 'rocksdb.data_path' is redundant, please ensure it has been registered
-2018-01-15 14:36:19 7523  [main] [WARN ] com.baidu.hugegraph.config.HugeConfig [] - The config option 'rocksdb.wal_path' is redundant, please ensure it has been registered
-2018-01-15 14:36:19 7604  [main] [INFO ] com.baidu.hugegraph.HugeGraph [] - Opening backend store 'cassandra' for graph 'hugegraph'
+main dict load finished, time elapsed 644 ms
+model load finished, time elapsed 35 ms.
 >>>> query all vertices: size=6
 >>>> query all edges: size=6
+gremlin> 
 ```
 
-可以看到，插入了6个顶点、6条边，并查询出来了。进入console之后，还可继续输入groovy语句对图做操作：
+> 这里的 `--` 会被 getopts 解析为最后一个 option，这样后面的 options 就可以传入 Gremlin-Console 进行处理了。`-i` 代表 `Execute the specified script and leave the console open on completion`，更多的选项可以参考 Gremlin-Console 的[源代码](https://github.com/apache/tinkerpop/blob/3.5.1/gremlin-console/src/main/groovy/org/apache/tinkerpop/gremlin/console/Console.groovy#L483)。
+
+可以看到，插入了 6 个顶点、6 条边，并查询出来了。进入 console 之后，还可继续输入 groovy 语句对图做操作：
 
 ```groovy
 gremlin> g.V()
-==>v[2:ripple]
-==>v[1:vadas]
-==>v[1:peter]
+==>v[2:lop]
 ==>v[1:josh]
 ==>v[1:marko]
-==>v[2:lop]
+==>v[1:peter]
+==>v[1:vadas]
+==>v[2:ripple]
 gremlin> g.E()
-==>e[S1:josh>2>>S2:ripple][1:josh-created->2:ripple]
-==>e[S1:marko>1>20160110>S1:vadas][1:marko-knows->1:vadas]
-==>e[S1:peter>2>>S2:lop][1:peter-created->2:lop]
 ==>e[S1:josh>2>>S2:lop][1:josh-created->2:lop]
-==>e[S1:marko>1>20130220>S1:josh][1:marko-knows->1:josh]
+==>e[S1:josh>2>>S2:ripple][1:josh-created->2:ripple]
+==>e[S1:marko>1>>S1:josh][1:marko-knows->1:josh]
+==>e[S1:marko>1>>S1:vadas][1:marko-knows->1:vadas]
 ==>e[S1:marko>2>>S2:lop][1:marko-created->2:lop]
+==>e[S1:peter>2>>S2:lop][1:peter-created->2:lop]
+gremlin> 
 ```
 
-更多的Gremlin语句请参考[Tinkerpop官网](http://tinkerpop.apache.org/docs/current/reference/)
+更多的 Gremlin 语句请参考 [Tinkerpop 官网](http://tinkerpop.apache.org/docs/current/reference/)。
 
-### 2 Client/Server请求模式
+### 2 Client/Server 请求模式
 
-因为Gremlin-Console只能通过WebSocket连接HugeGraph-Server，默认HugeGraph-Server是对外提供HTTP连接的，所以先修改gremlin-server的配置。
+因为 Gremlin-Console 只能通过 WebSocket 连接 HugeGraph-Server，默认 HugeGraph-Server 是对外提供 HTTP 连接的，所以先修改 gremlin-server 的配置。
 
-*注意：将连接方式修改为WebSocket后，HugeGraph-Client、HugeGraph-Loader、HugeGraph-Studio等配套工具都不能使用了。*
+*注意：将连接方式修改为 WebSocket 后，HugeGraph-Client、HugeGraph-Loader、HugeGraph-Hubble 等配套工具都不能使用了。*
 
 ```yaml
 # vim conf/gremlin-server.yaml
-host: 127.0.0.1
-port: 8182
-scriptEvaluationTimeout: 30000
-# If you want to start gremlin-server for gremlin-console(web-socket),
+# ......
+# If you want to start gremlin-server for gremlin-console (web-socket),
 # please change `HttpChannelizer` to `WebSocketChannelizer` or comment this line.
 channelizer: org.apache.tinkerpop.gremlin.server.channel.HttpChannelizer
-graphs: {
-  hugegraph: conf/hugegraph.properties,
-  hugegraph1: conf/hugegraph1.properties
-}
-plugins:
-  - com.baidu.hugegraph
-scriptEngines: {
-  gremlin-groovy: {
-    imports: [java.lang.Math],
-    staticImports: [java.lang.Math.PI],
-    scripts: [scripts/empty-sample.groovy]
-  }
-}
-serializers:
-  - { className: org.apache.tinkerpop.gremlin.driver.ser.GryoLiteMessageSerializerV1d0,
-      config: {
-        serializeResultToString: false,
-        ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
-      }
-    }
-  - { className: org.apache.tinkerpop.gremlin.driver.ser.GryoMessageSerializerV1d0,
-      config: {
-        serializeResultToString: true,
-        ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
-      }
-    }
-  - { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerGremlinV1d0,
-      config: {
-        serializeResultToString: false,
-        ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
-      }
-    }
-  - { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerGremlinV2d0,
-      config: {
-        serializeResultToString: false,
-        ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
-      }
-    }
-  - { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV1d0,
-      config: {
-        serializeResultToString: false,
-        ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
-      }
-    }
-metrics: {
-  consoleReporter: {enabled: false, interval: 180000},
-  csvReporter: {enabled: true, interval: 180000, fileName: /tmp/gremlin-server-metrics.csv},
-  jmxReporter: {enabled: false},
-  slf4jReporter: {enabled: false, interval: 180000},
-  gangliaReporter: {enabled: false, interval: 180000, addressingMode: MULTICAST},
-  graphiteReporter: {enabled: false, interval: 180000}
-}
-maxInitialLineLength: 4096
-maxHeaderSize: 8192
-maxChunkSize: 8192
-maxContentLength: 65536
-maxAccumulationBufferComponents: 1024
-resultIterationBatchSize: 64
-writeBufferLowWaterMark: 32768
-writeBufferHighWaterMark: 65536
-ssl: {
-  enabled: false
-}
+# ......
 ```
 
-将`channelizer: org.apache.tinkerpop.gremlin.server.channel.HttpChannelizer`修改成`channelizer: org.apache.tinkerpop.gremlin.server.channel.WebSocketChannelizer`或直接注释，然后按照步骤启动Server。
+将 `channelizer: org.apache.tinkerpop.gremlin.server.channel.HttpChannelizer` 修改成 `channelizer: org.apache.tinkerpop.gremlin.server.channel.WebSocketChannelizer` 或直接注释，然后按照[步骤](/docs/quickstart/hugegraph-server/)启动 HugegraphServer。
 
-然后进入gremlin-console
+下面进入 gremlin-console：
 
 ```bash
-bin/gremlin-console.sh 
-objc[5761]: Class JavaLaunchHelper is implemented in both /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/bin/java (0x10ec584c0) and /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/libinstrument.dylib (0x10ecdc4e0). One of the two will be used. Which one is undefined.
+> ./bin/gremlin-console.sh
 
          \,,,/
          (o o)
 -----oOOo-(3)-oOOo-----
-plugin activated: com.baidu.hugegraph
+plugin activated: HugeGraph
 plugin activated: tinkerpop.server
 plugin activated: tinkerpop.utilities
 plugin activated: tinkerpop.tinkergraph
 ```
 
-连接server，需在配置文件中指定连接参数，在conf目录下有一个默认的remote.yaml
+连接 server，需在配置文件中指定连接参数，在 conf 目录下有一个默认的 `remote.yaml`：
 
 ```yaml
 # cat conf/remote.yaml
 hosts: [localhost]
 port: 8182
 serializer: {
-  className: org.apache.tinkerpop.gremlin.driver.ser.GryoMessageSerializerV1d0,
+  className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV1d0,
   config: {
-    serializeResultToString: true,
-    ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
+    serializeResultToString: false,
+    ioRegistries: [org.apache.hugegraph.io.HugeGraphIoRegistry]
   }
 }
 ```
 
 ```groovy
 gremlin> :remote connect tinkerpop.server conf/remote.yaml
-2018-01-15 15:30:31 11528 [main] [INFO ] org.apache.tinkerpop.gremlin.driver.Connection [] - Created new connection for ws://localhost:8182/gremlin
-2018-01-15 15:30:31 11538 [main] [INFO ] org.apache.tinkerpop.gremlin.driver.Connection [] - Created new connection for ws://localhost:8182/gremlin
-2018-01-15 15:30:31 11538 [main] [INFO ] org.apache.tinkerpop.gremlin.driver.ConnectionPool [] - Opening connection pool on Host{address=localhost/127.0.0.1:8182, hostUri=ws://localhost:8182/gremlin} with core size of 2
 ==>Configured localhost/127.0.0.1:8182
 ```
 
-连接成功之后，在console的上下文中能使用的变量只有hugegraph和hugegraph1两个图对象（在gremlin-server.yaml中配置），如果想拥有更多的变量，可以在`scripts/empty-sample.groovy`中添加，如:
-
-```groovy
-import org.apache.tinkerpop.gremlin.server.util.LifeCycleHook
-
-// an init script that returns a Map allows explicit setting of global bindings.
-def globals = [:]
-
-// defines a sample LifeCycleHook that prints some output to the Gremlin Server console.
-// note that the name of the key in the "global" map is unimportant.
-globals << [hook: [
-        onStartUp : { ctx ->
-            ctx.logger.info("Executed once at startup of Gremlin Server.")
-        },
-        onShutDown: { ctx ->
-            ctx.logger.info("Executed once at shutdown of Gremlin Server.")
-        }
-] as LifeCycleHook]
-
-// define schema manger for hugegraph
-schema = hugegraph.schema()
-// define the default TraversalSource to bind queries to - this one will be named "g".
-g = hugegraph.traversal()
-```
-
-这样在console中便可以直接使用schema和g这两个对象，做元数据的管理和图的查询了。
-
-不定义了也没关系，因为所有的对象都可以通过graph获得，例如：
+连接成功之后，如果在启动 HugeGraphServer 的过程中导入了示例图 `example.groovy`，就可以在 console 中直接进行查询
 
 ```groovy
 gremlin> :> hugegraph.traversal().V()
-==>v[2:ripple]
-==>v[1:vadas]
-==>v[1:peter]
-==>v[1:josh]
-==>v[1:marko]
-==>v[2:lop]
+==>[id:2:lop,label:software,type:vertex,properties:[name:lop,lang:java,price:328]]
+==>[id:1:josh,label:person,type:vertex,properties:[name:josh,age:32,city:Beijing]]
+==>[id:1:marko,label:person,type:vertex,properties:[name:marko,age:29,city:Beijing]]
+==>[id:1:peter,label:person,type:vertex,properties:[name:peter,age:35,city:Shanghai]]
+==>[id:1:vadas,label:person,type:vertex,properties:[name:vadas,age:27,city:Hongkong]]
+==>[id:2:ripple,label:software,type:vertex,properties:[name:ripple,lang:java,price:199]]
 ```
 
-在Client/Server模式下，所有跟Server有关的操作都要加上`:> `，如果不加，表示在console本地操作。
+> 注意：在 Client/Server 模式下，所有和 Server 有关的操作都要加上 `:> `，如果不加，表示在 console 本地操作。
 
-还可以把多条语句放在一个字符串变量中，然后一次性发给server：
+还可以把多条语句放在一个字符串变量中，然后一次性发给 Server：
 
 ```groovy
 gremlin> script = """
+......1> graph = hugegraph;
+......2> g = graph.traversal();
+......3> g.V().toList().size();
+......4> """
+==>
 graph = hugegraph;
-marko = graph.addVertex(T.label, "person", "name", "marko", "age", 29, "city", "Beijing");
-vadas = graph.addVertex(T.label, "person", "name", "vadas", "age", 27, "city", "Hongkong");
-lop = graph.addVertex(T.label, "software", "name", "lop", "lang", "java", "price", 328);
-josh = graph.addVertex(T.label, "person", "name", "josh", "age", 32, "city", "Beijing");
-ripple = graph.addVertex(T.label, "software", "name", "ripple", "lang", "java", "price", 199);
-peter = graph.addVertex(T.label, "person", "name", "peter", "age", 35, "city", "Shanghai");
-
-marko.addEdge("knows", vadas, "date", "20160110", "weight", 0.5);
-marko.addEdge("knows", josh, "date", "20130220", "weight", 1.0);
-marko.addEdge("created", lop, "date", "20171210", "weight", 0.4);
-josh.addEdge("created", lop, "date", "20091111", "weight", 0.4);
-josh.addEdge("created", ripple, "date", "20171210", "weight", 1.0);
-peter.addEdge("created", lop, "date", "20170324", "weight", 0.2);
-
-graph.tx().commit();
-
 g = graph.traversal();
 g.V().toList().size();
-"""
 
 gremlin> :> @script
 ==>6
+gremlin> 
 ```
 
-更多关于gremlin-console的使用，请参考[Tinkerpop官网](http://tinkerpop.apache.org/docs/current/reference/)
+更多关于 gremlin-console 的使用，请参考 [Tinkerpop 官网](http://tinkerpop.apache.org/docs/current/reference/)
