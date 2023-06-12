@@ -278,7 +278,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">3.&lt;/span> LICENSE and NOTICE are exist
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">4.&lt;/span> Build successfully on macOS(Big Sur)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">5.&lt;/span> ....
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: How to Set Up HugeGraph-Server Development Environment in IDEA</title><link>/docs/contribution-guidelines/hugegraph-server-idea-setup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/contribution-guidelines/hugegraph-server-idea-setup/</guid><description>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Setup Server in IDEA</title><link>/docs/contribution-guidelines/hugegraph-server-idea-setup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/contribution-guidelines/hugegraph-server-idea-setup/</guid><description>
 &lt;blockquote>
 &lt;p>NOTE: The following configuration is for reference purposes only, and has been tested on Linux and macOS platforms based on &lt;a href="https://github.com/apache/incubator-hugegraph/commit/a946ad1de4e8f922251a5241ffc957c33379677f">this version&lt;/a>.&lt;/p>
 &lt;/blockquote>
@@ -341,6 +341,14 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then use the RESTful API to request &lt;code>HugeGraphServer&lt;/code>:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl &lt;span style="color:#4e9a06">&amp;#34;http://localhost:8080/graphs/hugegraph/graph/vertices&amp;#34;&lt;/span> &lt;span style="color:#000;font-weight:bold">|&lt;/span> gunzip
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>At this point, you can view detailed variable information in the debugger.&lt;/p>
+&lt;h4 id="5-log4j2-configuration">5. Log4j2 Configuration&lt;/h4>
+&lt;p>By default, when running &lt;code>InitStore&lt;/code> and &lt;code>HugeGraphServer&lt;/code>, the Log4j2 configuration file path read is &lt;code>hugegraph-dist/src/main/resources/log4j2.xml&lt;/code>, not &lt;code>path-to-your-directory/conf/log4j2.xml&lt;/code>. This configuration file is read when starting HugeGraphServer using the &lt;strong>script&lt;/strong>.&lt;/p>
+&lt;p>To avoid maintaining two separate configuration files, you can modify the Log4j2 configuration file path when running and debugging HugeGraphServer in &lt;strong>IntelliJ IDEA&lt;/strong>:&lt;/p>
+&lt;ol>
+&lt;li>Open the previously created &lt;code>Application&lt;/code> configuration.&lt;/li>
+&lt;li>Click on &lt;code>Modify options&lt;/code> - &lt;code>Add VM options&lt;/code>.&lt;/li>
+&lt;li>Set the VM options to &lt;code>-Dlog4j.configurationFile=conf/log4j2.xml&lt;/code>.&lt;/li>
+&lt;/ol>
 &lt;h3 id="possible-issues">Possible Issues&lt;/h3>
 &lt;h4 id="java-package-sunmisc-does-not-exist">java: package sun.misc does not exist&lt;/h4>
 &lt;p>The reason may be that cross-compilation is triggered when using Java 11 to compile, causing the symbol of &lt;code>sun.misc.Unsafe&lt;/code> used in the project to not be found. There are two possible solutions:&lt;/p>
@@ -348,6 +356,8 @@
 &lt;li>In IntelliJ IDEA, go to &lt;code>Preferences/Settings&lt;/code> and find the &lt;code>Java Compiler&lt;/code> panel. Then, disable the &lt;code>--release&lt;/code> option (recommended).&lt;/li>
 &lt;li>Set the Project SDK to 8.&lt;/li>
 &lt;/ol>
+&lt;h4 id="unable-to-print-location-information-l-in-log4j2">Unable to Print Location Information (%l) in Log4j2&lt;/h4>
+&lt;p>This is because Log4j2 uses asynchronous loggers. You can refer to the &lt;a href="https://logging.apache.org/log4j/2.x/manual/layouts.html#LocationInformation">official documentation&lt;/a> for configuration details.&lt;/p>
 &lt;h3 id="references">References&lt;/h3>
 &lt;ol>
 &lt;li>&lt;a href="/docs/quickstart/hugegraph-server/">HugeGraph-Server Quick Start&lt;/a>&lt;/li>

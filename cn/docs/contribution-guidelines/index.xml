@@ -280,7 +280,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">3.&lt;/span> LICENSE and NOTICE are exist
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">4.&lt;/span> Build successfully on macOS(Big Sur)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">5.&lt;/span> ....
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: 在 IDEA 中配置 HugeGraph-Server 开发环境</title><link>/cn/docs/contribution-guidelines/hugegraph-server-idea-setup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/contribution-guidelines/hugegraph-server-idea-setup/</guid><description>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: 在 IDEA 中配置 Server 开发环境</title><link>/cn/docs/contribution-guidelines/hugegraph-server-idea-setup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/contribution-guidelines/hugegraph-server-idea-setup/</guid><description>
 &lt;blockquote>
 &lt;p>注意：下述配置仅供参考，基于&lt;a href="https://github.com/apache/incubator-hugegraph/commit/a946ad1de4e8f922251a5241ffc957c33379677f">这个版本&lt;/a>，在 Linux 和 macOS 平台下进行了测试。&lt;/p>
 &lt;/blockquote>
@@ -343,13 +343,23 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后，使用 RESTful API 请求 &lt;code>HugeGraphServer&lt;/code>：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl &lt;span style="color:#4e9a06">&amp;#34;http://localhost:8080/graphs/hugegraph/graph/vertices&amp;#34;&lt;/span> &lt;span style="color:#000;font-weight:bold">|&lt;/span> gunzip
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>此时，可以在调试器中查看详细的变量信息。&lt;/p>
+&lt;h4 id="5-log4j2-日志配置">5. Log4j2 日志配置&lt;/h4>
+&lt;p>默认情况下，运行 &lt;code>InitStore&lt;/code> 和 &lt;code>HugeGraphServer&lt;/code> 时，读取的 Log4j2 配置文件路径为 &lt;code>hugegraph-dist/src/main/resources/log4j2.xml&lt;/code>，而不是 &lt;code>path-to-your-directory/conf/log4j2.xml&lt;/code>，这个配置文件是使用&lt;strong>脚本&lt;/strong>启动 HugeGraphServer 时读取的。&lt;/p>
+&lt;p>为了避免同时维护两份配置文件，可以考虑在 &lt;strong>IntelliJ IDEA&lt;/strong> 运行与调试 HugeGraphServer 时，修改读取的 Log4j2 配置文件路径：&lt;/p>
+&lt;ol>
+&lt;li>打开之前创建的 &lt;code>Application&lt;/code> 配置&lt;/li>
+&lt;li>点击 &lt;code>Modify options&lt;/code> - &lt;code>Add VM options&lt;/code>&lt;/li>
+&lt;li>设置 VM options 为 &lt;code>-Dlog4j.configurationFile=conf/log4j2.xml&lt;/code>&lt;/li>
+&lt;/ol>
 &lt;h3 id="可能遇到的问题">可能遇到的问题&lt;/h3>
-&lt;p>*** java: package sun.misc does not exist ***&lt;/p>
+&lt;h4 id="java-package-sunmisc-does-not-exist">java: package sun.misc does not exist&lt;/h4>
 &lt;p>原因可能是在使用 Java 11 编译时触发了交叉编译，导致项目中使用的 &lt;code>sun.misc.Unsafe&lt;/code> 找不到符号。有两种解决方案可供选择：&lt;/p>
 &lt;ol>
 &lt;li>在 IntelliJ IDEA 的 &lt;code>Preferences/Settings&lt;/code> 中找到 &lt;code>Java Compiler&lt;/code> 面板，然后关闭 &lt;code>--release&lt;/code> 选项 (推荐)&lt;/li>
 &lt;li>或者将项目的 SDK 版本设置为 8&lt;/li>
 &lt;/ol>
+&lt;h4 id="log4j2-日志无法打印-l-等位置信息">Log4j2 日志无法打印 %l 等位置信息&lt;/h4>
+&lt;p>这是因为 Log4j2 中使用了 asynchronous loggers，可以参考&lt;a href="https://logging.apache.org/log4j/2.x/manual/layouts.html#LocationInformation">官方文档&lt;/a>进行配置&lt;/p>
 &lt;h5 id="参考">参考&lt;/h5>
 &lt;ol>
 &lt;li>&lt;a href="/docs/quickstart/hugegraph-server/">HugeGraph-Server Quick Start&lt;/a>&lt;/li>
