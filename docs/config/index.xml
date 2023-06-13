@@ -234,29 +234,64 @@
 &lt;li>&lt;code>admin.token&lt;/code>: A token used to retrieve server configuration information. For example: &lt;a href="http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55">http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="5-multi-graph-configuration">5. Multi-Graph Configuration&lt;/h3>
-&lt;p>Our system can have multiple graphs, and each graph can have a different backend. For example, there are two graphs named &lt;code>hugegraph&lt;/code> and &lt;code>hugegraph1&lt;/code>, where &lt;code>hugegraph&lt;/code> uses Cassandra as the backend and &lt;code>hugegraph1&lt;/code> uses RocksDB as the backend.&lt;/p>
+&lt;p>Our system can have multiple graphs, and the backend of each graph can be different, such as &lt;code>hugegraph_rocksdb&lt;/code> and &lt;code>hugegraph_mysql&lt;/code>, where &lt;code>hugegraph_rocksdb&lt;/code> uses &lt;code>RocksDB&lt;/code> as the backend, and &lt;code>hugegraph_mysql&lt;/code> uses &lt;code>MySQL&lt;/code> as a backend.&lt;/p>
 &lt;p>The configuration method is simple:&lt;/p>
-&lt;p>&lt;strong>Modify &lt;code>gremlin-server.yaml&lt;/code>&lt;/strong>&lt;/p>
-&lt;p>Add a key-value pair in the &lt;code>graphs&lt;/code> section of &lt;code>gremlin-server.yaml&lt;/code>, where the key is the name of the graph and the value is the path to the graph&amp;rsquo;s configuration file. For example:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">graphs&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hugegraph&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">conf/hugegraph.properties,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hugegraph1&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">conf/hugegraph1.properties&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>}&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Modify &lt;code>rest-server.properties&lt;/code>&lt;/strong>&lt;/p>
-&lt;p>Add a key-value pair in the &lt;code>graphs&lt;/code> section of &lt;code>rest-server.properties&lt;/code>, where the key is the name of the graph and the value is the path to the graph&amp;rsquo;s configuration file. For example:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>graphs=[hugegraph:conf/hugegraph.properties, hugegraph1:conf/hugegraph1.properties]
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Add &lt;code>hugegraph1.properties&lt;/code>&lt;/strong>&lt;/p>
-&lt;p>Copy &lt;code>hugegraph.properties&lt;/code> and name it &lt;code>hugegraph1.properties&lt;/code>. Modify the database name corresponding to the graph and the parameters related to the backend. For example:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>store=hugegraph1
+&lt;p>&lt;strong>[Optional]: Modify &lt;code>rest-server.properties&lt;/code>&lt;/strong>&lt;/p>
+&lt;p>You can modify the graph profile directory in the &lt;code>graphs&lt;/code> field of &lt;code>rest-server.properties&lt;/code>. The default configuration is &lt;code>graphs=./conf/graphs&lt;/code>, if you want to change it to another directory then adjust the &lt;code>graphs&lt;/code> field, e.g. adjust it to &lt;code>graphs=/etc/hugegraph/graphs&lt;/code>, example is as follows:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>graphs=./conf/graphs
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Modify &lt;code>hugegraph_mysql_backend.properties&lt;/code> and &lt;code>hugegraph_rocksdb_backend.properties&lt;/code> based on &lt;code>hugegraph.properties&lt;/code> under &lt;code>conf/graphs&lt;/code> path&lt;/p>
+&lt;p>The modified part of &lt;code>hugegraph_mysql_backend.properties&lt;/code> is as follows:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=mysql
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=mysql
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store=hugegraph_mysql
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>backend=rocksdb
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># mysql backend config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.driver=com.mysql.cj.jdbc.Driver
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.url=jdbc:mysql://127.0.0.1:3306
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.username=root
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.password=123456
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.reconnect_max_times=3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.reconnect_interval=3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.ssl_mode=false
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The modified part of &lt;code>hugegraph_rocksdb_backend.properties&lt;/code> is as follows:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=rocksdb
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=binary
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store=hugegraph_rocksdb
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Stop the server, execute &lt;code>init-store.sh&lt;/code> (to create a new database for the new graph), and restart the server.&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ bin/stop-hugegraph.sh
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ bin/init-store.sh
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ bin/start-hugegraph.sh
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ ./bin/stop-hugegraph.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ ./bin/init-store.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Initializing HugeGraph Store...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-06-11 14:16:14 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.h.u.ConfigUtil - Scanning option &lt;span style="color:#4e9a06">&amp;#39;graphs&amp;#39;&lt;/span> directory &lt;span style="color:#4e9a06">&amp;#39;./conf/graphs&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-06-11 14:16:14 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.h.c.InitStore - Init graph with config file: ./conf/graphs/hugegraph_rocksdb_backend.properties
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-06-11 14:16:15 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.h.StandardHugeGraph - Graph &lt;span style="color:#4e9a06">&amp;#39;hugegraph_rocksdb&amp;#39;&lt;/span> has been initialized
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-06-11 14:16:15 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.h.c.InitStore - Init graph with config file: ./conf/graphs/hugegraph_mysql_backend.properties
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-06-11 14:16:16 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.h.StandardHugeGraph - Graph &lt;span style="color:#4e9a06">&amp;#39;hugegraph_mysql&amp;#39;&lt;/span> has been initialized
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-06-11 14:16:16 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.h.StandardHugeGraph - Close graph standardhugegraph&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>hugegraph_rocksdb&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-06-11 14:16:16 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.h.HugeFactory - HugeFactory shutdown
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-06-11 14:16:16 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>hugegraph-shutdown&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.h.HugeFactory - HugeGraph is shutting down
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Initialization finished.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ ./bin/start-hugegraph.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>http://127.0.0.1:18080/graphs&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>...OK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Started &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>pid 21614&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Check out created graphs:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl http://127.0.0.1:8080/graphs/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;graphs&amp;#34;&lt;/span>:&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;hugegraph_rocksdb&amp;#34;&lt;/span>,&lt;span style="color:#4e9a06">&amp;#34;hugegraph_mysql&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">]}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Get details of the graph&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl http://127.0.0.1:8080/graphs/hugegraph_mysql_backend
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>:&lt;span style="color:#4e9a06">&amp;#34;hugegraph_mysql&amp;#34;&lt;/span>,&lt;span style="color:#4e9a06">&amp;#34;backend&amp;#34;&lt;/span>:&lt;span style="color:#4e9a06">&amp;#34;mysql&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl http://127.0.0.1:8080/graphs/hugegraph_rocksdb_backend
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>:&lt;span style="color:#4e9a06">&amp;#34;hugegraph_rocksdb&amp;#34;&lt;/span>,&lt;span style="color:#4e9a06">&amp;#34;backend&amp;#34;&lt;/span>:&lt;span style="color:#4e9a06">&amp;#34;rocksdb&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: HugeGraph Config Options</title><link>/docs/config/config-option/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/config/config-option/</guid><description>
 &lt;h3 id="gremlin-server-config-options">Gremlin Server Config Options&lt;/h3>
 &lt;p>Corresponding configuration file &lt;code>gremlin-server.yaml&lt;/code>&lt;/p>
