@@ -259,46 +259,97 @@ cassandra.password=
 
 ### 5 多图配置
 
-我们的系统是可以存在多个图的，并且各个图的后端可以不一样，比如图 hugegraph 和 hugegraph1，其中 hugegraph 以 cassandra 作为后端，hugegraph1 以 rocksdb作为后端。
+我们的系统是可以存在多个图的，并且各个图的后端可以不一样，比如图 `hugegraph_rocksdb` 和 `hugegraph_mysql`，其中 `hugegraph_rocksdb` 以 `RocksDB` 作为后端，`hugegraph_mysql` 以 `MySQL` 作为后端。
 
 配置方法也很简单：
 
-**修改 gremlin-server.yaml**
+**[可选]：修改 rest-server.properties**
 
-在 gremlin-server.yaml 的 graphs 域中添加一个键值对，键为图的名字，值为图的配置文件路径，比如：
-
-```yaml
-graphs: {
-  hugegraph: conf/hugegraph.properties,
-  hugegraph1: conf/hugegraph1.properties
-}
-```
-
-**修改 rest-server.properties**
-
-在 rest-server.properties 的 graphs 域中添加一个键值对，键为图的名字，值为图的配置文件路径，比如：
+通过修改 `rest-server.properties` 中的 `graphs` 配置项来设置图的配置文件目录。默认配置为 `graphs=./conf/graphs`，如果想要修改为其它目录则调整 `graphs` 配置项，比如调整为 `graphs=/etc/hugegraph/graphs`，示例如下：
 
 ```properties
-graphs=[hugegraph:conf/hugegraph.properties, hugegraph1:conf/hugegraph1.properties]
+graphs=./conf/graphs
 ```
 
-**添加 hugegraph1.properties**
+在 `conf/graphs` 路径下基于 `hugegraph.properties` 修改得到 `hugegraph_mysql_backend.properties` 和 `hugegraph_rocksdb_backend.properties`
 
-拷贝 hugegraph.properties，命名为 hugegraph1.properties，修改图对应的数据库名以及关于后端部分的参数，比如：
+`hugegraph_mysql_backend.properties` 修改的部分如下：
 
 ```properties
-store=hugegraph1
+backend=mysql
+serializer=mysql
 
-...
+store=hugegraph_mysql
 
+# mysql backend config
+jdbc.driver=com.mysql.cj.jdbc.Driver
+jdbc.url=jdbc:mysql://127.0.0.1:3306
+jdbc.username=root
+jdbc.password=123456
+jdbc.reconnect_max_times=3
+jdbc.reconnect_interval=3
+jdbc.ssl_mode=false
+```
+
+`hugegraph_rocksdb_backend.properties` 修改的部分如下：
+
+```properties
 backend=rocksdb
 serializer=binary
+
+store=hugegraph_rocksdb
 ```
 
 **停止 Server，初始化执行 init-store.sh（为新的图创建数据库），重新启动 Server**
 
 ```bash
-$ bin/stop-hugegraph.sh
-$ bin/init-store.sh
-$ bin/start-hugegraph.sh
+$ ./bin/stop-hugegraph.sh
+```
+
+```bash
+$ ./bin/init-store.sh
+
+Initializing HugeGraph Store...
+2023-06-11 14:16:14 [main] [INFO] o.a.h.u.ConfigUtil - Scanning option 'graphs' directory './conf/graphs'
+2023-06-11 14:16:14 [main] [INFO] o.a.h.c.InitStore - Init graph with config file: ./conf/graphs/hugegraph_rocksdb_backend.properties
+...
+2023-06-11 14:16:15 [main] [INFO] o.a.h.StandardHugeGraph - Graph 'hugegraph_rocksdb' has been initialized
+2023-06-11 14:16:15 [main] [INFO] o.a.h.c.InitStore - Init graph with config file: ./conf/graphs/hugegraph_mysql_backend.properties
+...
+2023-06-11 14:16:16 [main] [INFO] o.a.h.StandardHugeGraph - Graph 'hugegraph_mysql' has been initialized
+2023-06-11 14:16:16 [main] [INFO] o.a.h.StandardHugeGraph - Close graph standardhugegraph[hugegraph_rocksdb]
+...
+2023-06-11 14:16:16 [main] [INFO] o.a.h.HugeFactory - HugeFactory shutdown
+2023-06-11 14:16:16 [hugegraph-shutdown] [INFO] o.a.h.HugeFactory - HugeGraph is shutting down
+Initialization finished.
+```
+
+```bash
+$ ./bin/start-hugegraph.sh
+
+Starting HugeGraphServer...
+Connecting to HugeGraphServer (http://127.0.0.1:18080/graphs)...OK
+Started [pid 21614]
+```
+
+查看创建的图：
+
+```bash
+curl http://127.0.0.1:8080/graphs/
+
+{"graphs":["hugegraph_rocksdb","hugegraph_mysql"]}
+```
+
+查看某个图的信息：
+
+```bash
+curl http://127.0.0.1:8080/graphs/hugegraph_mysql_backend
+
+{"name":"hugegraph_mysql","backend":"mysql"}
+```
+
+```bash
+curl http://127.0.0.1:8080/graphs/hugegraph_rocksdb_backend
+
+{"name":"hugegraph_rocksdb","backend":"rocksdb"}
 ```

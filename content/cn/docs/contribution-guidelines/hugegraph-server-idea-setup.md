@@ -1,6 +1,6 @@
 ---
-title: "在 IDEA 中配置 HugeGraph-Server 开发环境"
-linkTitle: "在 IDEA 中配置 HugeGraph-Server 开发环境"
+title: "在 IDEA 中配置 Server 开发环境"
+linkTitle: "在 IDEA 中配置 Server 开发环境"
 weight: 4
 ---
 
@@ -102,14 +102,28 @@ curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
 
 此时，可以在调试器中查看详细的变量信息。
 
+#### 5. Log4j2 日志配置
+
+默认情况下，运行 `InitStore` 和 `HugeGraphServer` 时，读取的 Log4j2 配置文件路径为 `hugegraph-dist/src/main/resources/log4j2.xml`，而不是 `path-to-your-directory/conf/log4j2.xml`，这个配置文件是使用**脚本**启动 HugeGraphServer 时读取的。
+
+为了避免同时维护两份配置文件，可以考虑在 **IntelliJ IDEA** 运行与调试 HugeGraphServer 时，修改读取的 Log4j2 配置文件路径：
+
+1. 打开之前创建的 `Application` 配置
+2. 点击 `Modify options` - `Add VM options`
+3. 设置 VM options 为 `-Dlog4j.configurationFile=conf/log4j2.xml`
+
 ### 可能遇到的问题
 
-*** java: package sun.misc does not exist ***
+#### java: package sun.misc does not exist
 
 原因可能是在使用 Java 11 编译时触发了交叉编译，导致项目中使用的 `sun.misc.Unsafe` 找不到符号。有两种解决方案可供选择：
 
 1. 在 IntelliJ IDEA 的 `Preferences/Settings` 中找到 `Java Compiler` 面板，然后关闭 `--release` 选项 (推荐)
 2. 或者将项目的 SDK 版本设置为 8
+
+#### Log4j2 日志无法打印 %l 等位置信息
+
+这是因为 Log4j2 中使用了 asynchronous loggers，可以参考[官方文档](https://logging.apache.org/log4j/2.x/manual/layouts.html#LocationInformation)进行配置
 
 ##### 参考
 
