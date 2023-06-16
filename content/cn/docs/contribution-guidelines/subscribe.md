@@ -9,7 +9,6 @@ weight: 2
 - 通过您的电子邮件账户发送邮件至 [dev-subscribe@hugegraph.apache.org](mailto:dev-subscribe@hugegraph.apache.org)，然后您将收到一封确认邮件。
 - 回复确认邮件以确认您的订阅。然后，您将收到另一封确认邮件。
 - 现在您已经成为该邮件列表的订阅者。如果您有更多问题，只需发送邮件到邮件列表，社区同学看到后会及时回复。
-- 如果您想取消订阅邮件列表，只需发送邮件至 [dev-unsubscribe@hugegraph.apache.org](mailto:dev-unsubscribe@hugegraph.apache.org)，然后按照确认邮件中的步骤操作即可。
 
 您可以随时订阅邮件列表。此外，您也可以直接浏览[历史邮件/所有邮件](https://lists.apache.org/list.html?dev@hugegraph.apache.org)（即使没有订阅列表）。
 
@@ -27,7 +26,7 @@ HugeGraph提供了一个供开发和用户讨论的电子邮件列表。
 - [https://lists.apache.org/list.html?dev@hugegraph.apache.org](https://lists.apache.org/list.html?dev@hugegraph.apache.org)
 - [http://apache.org/foundation/mailinglists.html#subscribing](http://apache.org/foundation/mailinglists.html#subscribing)
 
-# 退订邮件列表 👋🏻 
+# 退订邮件列表
 
 如果您不再需要了解 HugeGraph 的最新动态，可以退订邮件列表。
 

@@ -10,7 +10,6 @@ Subscribe to the mailing list by following steps:
 - Email [dev-subscribe@hugegraph.apache.org](mailto:dev-subscribe@hugegraph.apache.org) through your email account, and then you will receive a confirmation email.
 - Reply to the confirmation email to confirm your subscription. Then, you will receive another confirmation email.
 - Now you are a subscriber of the mailing list. If you have more questions, just email the mailing list and someone will reply to you soon.
-- If you want to unsubscribe from the mailing list, just email [dev-unsubscribe@hugegraph.apache.org](mailto:dev-unsubscribe@hugegraph.apache.org) and follow the steps in the confirmation email.
 
 You can subscribe to the mailing list anytime you want. Additionally, you can check [historical emails / all emails](https://lists.apache.org/list.html?dev@hugegraph.apache.org) easily (even if you are not subscribing to the list).
 
