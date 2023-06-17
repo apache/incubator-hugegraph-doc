@@ -1,8 +1,11 @@
 ---
 title: "v0.2"
 linkTitle: "v0.2"
+draft: true
 weight: 4
 ---
+
+> Note: v0.2 is an old version, not recommended to use, please use the latest version, thank you for understanding.
 
 ### 1 Test environment
 

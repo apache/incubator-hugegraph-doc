@@ -14,7 +14,6 @@ HugeGraph的每个发布版本的RESTful API的性能测试情况可以参考：
 
 - [v0.5.6 stand-alone](/docs/performance/api-preformance/hugegraph-api-0.5.6-rocksdb/)
 - [v0.5.6 cluster](/docs/performance/api-preformance/hugegraph-api-0.5.6-cassandra/)
-- [v0.4.4](/docs/performance/api-preformance/hugegraph-api-0.4.4/)
-- [v0.2](/docs/performance/api-preformance/hugegraph-api-0.2/)
 
-> 之前的版本只提供HugeGraph所支持的后端种类中性能最好的API性能测试，从0.5.6版本开始，分别提供了单机和集群的性能情况
+> 即将更新，敬请期待！
+

@@ -1,8 +1,11 @@
 ---
 title: "v0.2"
 linkTitle: "v0.2"
+draft: true
 weight: 4
 ---
+
+> Note: v0.2属于旧版本, 不建议使用, 请使用最新版本, 感谢理解
 
 ### 1 测试环境
 
