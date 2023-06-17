@@ -3820,7 +3820,7 @@ multiple times to achieve deduplication. It should be noted that the properties 
 &lt;/tbody>
 &lt;/table>
 &lt;hr>
-&lt;h3 id="outdated-versions-mapping">outdated Versions mapping&lt;/h3>
+&lt;h3 id="outdated-versions-mapping">Outdated Versions Mapping&lt;/h3>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -6204,7 +6204,6 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;li>Email &lt;a href="mailto:dev-subscribe@hugegraph.apache.org">dev-subscribe@hugegraph.apache.org&lt;/a> through your email account, and then you will receive a confirmation email.&lt;/li>
 &lt;li>Reply to the confirmation email to confirm your subscription. Then, you will receive another confirmation email.&lt;/li>
 &lt;li>Now you are a subscriber of the mailing list. If you have more questions, just email the mailing list and someone will reply to you soon.&lt;/li>
-&lt;li>If you want to unsubscribe from the mailing list, just email &lt;a href="mailto:dev-unsubscribe@hugegraph.apache.org">dev-unsubscribe@hugegraph.apache.org&lt;/a> and follow the steps in the confirmation email.&lt;/li>
 &lt;/ul>
 &lt;p>You can subscribe to the mailing list anytime you want. Additionally, you can check &lt;a href="https://lists.apache.org/list.html?dev@hugegraph.apache.org">historical emails / all emails&lt;/a> easily (even if you are not subscribing to the list).&lt;/p>
 &lt;p>Some notes:&lt;/p>
@@ -7464,133 +7463,7 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph graph-mode-set -m NONE
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="8-graph-migration">8. Graph Migration&lt;/h6>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph migrate --target-url http://127.0.0.1:8090 --target-graph hugegraph
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: v0.4.4</title><link>/docs/performance/api-preformance/hugegraph-api-0.4.4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/performance/api-preformance/hugegraph-api-0.4.4/</guid><description>
-&lt;h3 id="1-test-environment">1 Test environment&lt;/h3>
-&lt;p>Target Machine Information&lt;/p>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>机器编号&lt;/th>
-&lt;th>CPU&lt;/th>
-&lt;th>Memory&lt;/th>
-&lt;th>NIC (Network Interface Card)&lt;/th>
-&lt;th>Disk&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>1&lt;/td>
-&lt;td>24 Intel(R) Xeon(R) CPU E5-2620 v2 @ 2.10GHz&lt;/td>
-&lt;td>61G&lt;/td>
-&lt;td>1000Mbps&lt;/td>
-&lt;td>1.4T HDD&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>2&lt;/td>
-&lt;td>48 Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz&lt;/td>
-&lt;td>128G&lt;/td>
-&lt;td>10000Mbps&lt;/td>
-&lt;td>750GB SSD,2.7T HDD&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;ul>
-&lt;li>&lt;strong>Pressure testing machine information:&lt;/strong> Configured the same as machine number 1.&lt;/li>
-&lt;li>&lt;strong>Testing tool:&lt;/strong> Apache JMeter 2.5.1.&lt;/li>
-&lt;/ul>
-&lt;p>Note: The pressure testing machine and the machine being tested are in the same room.&lt;/p>
-&lt;h3 id="2-test-description">2 Test Description&lt;/h3>
-&lt;h4 id="21-definition-of-terms-the-unit-of-time-is-ms">2.1 Definition of terms (the unit of time is ms)&lt;/h4>
-&lt;ul>
-&lt;li>Samples &amp;ndash; The total number of threads completed in this scenario.&lt;/li>
-&lt;li>Average &amp;ndash; The average response time.&lt;/li>
-&lt;li>Median &amp;ndash; The median response time in terms of statistical significance.&lt;/li>
-&lt;li>90% Line &amp;ndash; The response time of 90% of all threads is less than xx.&lt;/li>
-&lt;li>Min &amp;ndash; The minimum response time.&lt;/li>
-&lt;li>Max &amp;ndash; The maximum response time.&lt;/li>
-&lt;li>Error &amp;ndash; The error rate.&lt;/li>
-&lt;li>Throughput &amp;ndash; The throughput.&lt;/li>
-&lt;li>KB/sec &amp;ndash; The throughput measured in terms of traffic.&lt;/li>
-&lt;/ul>
-&lt;h4 id="22-underlying-storage">2.2 Underlying storage&lt;/h4>
-&lt;p>RocksDB is used for backend storage, HugeGraph and RocksDB are both started on the same machine, and the configuration files related to the server remain the default except for the modification of the host and port.&lt;/p>
-&lt;h3 id="3-summary-of-performance-results">3 Summary of performance results&lt;/h3>
-&lt;ol>
-&lt;li>The upper limit of the number of requests HugeGraph can handle per second is 7000&lt;/li>
-&lt;li>The speed of batch insertion is much higher than that of single insertion, and the test results on the server reach 22w edges/s, 37w vertices/s&lt;/li>
-&lt;li>The backend is RocksDB, and increasing the number of CPUs and memory size can improve the performance of batch inserts. Doubling the CPU and memory size can increase performance by 45% to 60%.&lt;/li>
-&lt;li>In the batch insertion scenario, using SSD instead of HDD, the performance improvement is small, only 3%-5%&lt;/li>
-&lt;/ol>
-&lt;h3 id="4-test-results-and-analysis">4 Test results and analysis&lt;/h3>
-&lt;h4 id="41-batch-insertion">4.1 Batch insertion&lt;/h4>
-&lt;h5 id="411-maximum-pressure-test">4.1.1 Maximum Pressure Test&lt;/h5>
-&lt;h6 id="test-methods">Test Methods&lt;/h6>
-&lt;p>Continuously increase the concurrency level and test the upper limit of the server&amp;rsquo;s ability to provide services normally.&lt;/p>
-&lt;h6 id="pressure-parameters">Pressure Parameters&lt;/h6>
-&lt;p>Duration: 5 minutes&lt;/p>
-&lt;h6 id="maximum-insertion-speed-of-vertices-and-edges-high-performance-server-with-ssd-storage-for-rocksdb-data">Maximum Insertion Speed of Vertices and Edges (High-performance server with SSD storage for RocksDB data):&lt;/h6>
-&lt;center>
-&lt;img src="/docs/images/API-perf/v0.4.4/best.png" alt="image">
-&lt;/center>
-&lt;h6 id="conclusion">Conclusion:&lt;/h6>
-&lt;ul>
-&lt;li>With a concurrency of 1000, the edge throughput is 451, which can process 225,500 data per second: 451 * 500 = 225,500/s.&lt;/li>
-&lt;li>With a concurrency of 2000, the vertex throughput is 1842.4, which can process 368,480 data per second: 1842.4 * 200 = 368,480/s.&lt;/li>
-&lt;/ul>
-&lt;p>&lt;strong>1. The Impact of CPU and Memory on Insertion Performance (Servers Using HDD Storage for RocksDB Data, Batch Insertion)&lt;/strong>&lt;/p>
-&lt;center>
-&lt;img src="/docs/images/API-perf/v0.4.4/cpu-memory.png" alt="image">
-&lt;/center>
-&lt;h6 id="conclusion-1">Conclusion:&lt;/h6>
-&lt;ul>
-&lt;li>With the same HDD disk, doubling the CPU and memory size increases edge throughput from 268 to 426, which improves performance by about 60%.&lt;/li>
-&lt;li>With the same HDD disk, doubling the CPU and memory size increases vertex throughput from 1263.8 to 1842.4, which improves performance by about 45%.&lt;/li>
-&lt;/ul>
-&lt;p>&lt;strong>2. The Impact of SSD and HDD on Insertion Performance (High-performance Servers, Batch Insertion)&lt;/strong>&lt;/p>
-&lt;center>
-&lt;img src="/docs/images/API-perf/v0.4.4/ssd.png" alt="image">
-&lt;/center>
-&lt;h6 id="conclusion-2">Conclusion:&lt;/h6>
-&lt;ul>
-&lt;li>For edge insertion, using SSD yields a throughput of 451.7, while using HDD yields a throughput of 426.6, which results in a 5% performance improvement.&lt;/li>
-&lt;li>For vertex insertion, using SSD yields a throughput of 1842.4, while using HDD yields a throughput of 1794, which results in a performance improvement of about 3%.&lt;/li>
-&lt;/ul>
-&lt;p>&lt;strong>3. The Impact of Different Concurrent Thread Numbers on Insertion Performance (Ordinary Servers, HDD Storage for RocksDB Data)&lt;/strong>&lt;/p>
-&lt;center>
-&lt;img src="/docs/images/API-perf/v0.4.4/threads-batch.png" alt="image">
-&lt;/center>
-&lt;h5 id="conclusion-3">Conclusion:&lt;/h5>
-&lt;ul>
-&lt;li>For vertices, at 1000 concurrency, the response time is 7ms and at 1500 concurrency, the response time is 1028ms. The throughput remained around 1300, indicating that the inflection point data should be around 1300. At 1300 concurrency, the response time has reached 22ms, which is within a controllable range. Compared to HugeGraph 0.2 (1000 concurrency: average response time 8959ms), the processing capacity has made a qualitative leap.&lt;/li>
-&lt;li>For edges, the processing time is too long and exceeds 3 seconds from 1000 to 2000 concurrency, and the throughput almost fluctuates around 270. Therefore, increasing the concurrency will not significantly increase the throughput. 270 is an inflection point, and compared with HugeGraph 0.2 (1000 concurrency: average response time 31849ms), the processing capacity has improved significantly.&lt;/li>
-&lt;/ul>
-&lt;h4 id="42-single-insertion">4.2 single insertion&lt;/h4>
-&lt;h5 id="421-upper-limit-test-under-pressure">4.2.1 Upper Limit Test under Pressure&lt;/h5>
-&lt;h6 id="test-method">Test Method&lt;/h6>
-&lt;p>Continuously increase the concurrency level and test the upper limit of the pressure at which the server can still provide normal services.&lt;/p>
-&lt;h6 id="pressure-parameters-1">Pressure Parameters&lt;/h6>
-&lt;ul>
-&lt;li>Duration: 5 minutes&lt;/li>
-&lt;li>Service exception criteria: Error rate greater than 0.00%.&lt;/li>
-&lt;/ul>
-&lt;center>
-&lt;img src="/docs/images/API-perf/v0.4.4/threads-single.png" alt="image">
-&lt;/center>
-&lt;h4 id="conclusion-4">Conclusion:&lt;/h4>
-&lt;ul>
-&lt;li>Vertices:
-&lt;ul>
-&lt;li>At 4000 concurrent connections, there were no errors, with an average response time of less than 1ms. At 6000 concurrent connections, there were no errors, with an average response time of 5ms, which is acceptable.&lt;/li>
-&lt;li>At 8000 concurrent connections, there were 0.01% errors and the system could not handle it, resulting in connection timeout errors. The system&amp;rsquo;s peak performance should be around 7000 concurrent connections.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>Edges:
-&lt;ul>
-&lt;li>At 4000 concurrent connections, the response time was 1ms. At 6000 concurrent connections, there were no abnormalities, with an average response time of 8ms. The main differences were in IO network recv and send as well as CPU usage.&lt;/li>
-&lt;li>At 8000 concurrent connections, there was a 0.01% error rate, with an average response time of 15ms. The turning point should be around 7000 concurrent connections, which matches the vertex results.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul></description></item><item><title>Docs: Validate Apache Release</title><link>/docs/contribution-guidelines/validate-release/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/contribution-guidelines/validate-release/</guid><description>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Validate Apache Release</title><link>/docs/contribution-guidelines/validate-release/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/contribution-guidelines/validate-release/</guid><description>
 &lt;blockquote>
 &lt;p>Note: this doc will be updated continuously.&lt;/p>
 &lt;/blockquote>
@@ -8426,346 +8299,7 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;li>&lt;a href="https://gist.github.com/imbajin/1661450f000cd62a67e46d4f1abfe82c">Local Debugging Guide for HugeGraph Server (Win/Unix)&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://youtrack.jetbrains.com/issue/IDEA-180033">&amp;ldquo;package sun.misc does not exist&amp;rdquo; compilation error&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://youtrack.jetbrains.com/issue/IDEA-201168">Cannot compile: java: package sun.misc does not exist&lt;/a>&lt;/li>
-&lt;/ol></description></item><item><title>Docs: v0.2</title><link>/docs/performance/api-preformance/hugegraph-api-0.2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/performance/api-preformance/hugegraph-api-0.2/</guid><description>
-&lt;h3 id="1-test-environment">1 Test environment&lt;/h3>
-&lt;h4 id="11-software-and-hardware-information">1.1 Software and hardware information&lt;/h4>
-&lt;p>The load testing and target machines have the same configuration, with the following basic parameters:&lt;/p>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>CPU&lt;/th>
-&lt;th>Memory&lt;/th>
-&lt;th>网卡&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>24 Intel(R) Xeon(R) CPU E5-2620 v2 @ 2.10GHz&lt;/td>
-&lt;td>61G&lt;/td>
-&lt;td>1000Mbps&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h4 id="12-service-configuration">1.2 Service Configuration&lt;/h4>
-&lt;ul>
-&lt;li>HugeGraph Version: 0.2&lt;/li>
-&lt;li>Backend Storage: Cassandra 3.10, deployed as a single node in the service.&lt;/li>
-&lt;li>Backend Configuration Modification: Modified two properties in the cassandra.yaml file, while keeping the rest of the options default:&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span> batch_size_warn_threshold_in_kb: 1000
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> batch_size_fail_threshold_in_kb: 1000
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>HugeGraphServer, HugeGremlinServer, and Cassandra are all started on the same machine. Configuration files for the servers are modified only for the host and port settings.&lt;/li>
-&lt;/ul>
-&lt;h4 id="13-glossary">1.3 Glossary&lt;/h4>
-&lt;ul>
-&lt;li>Samples &amp;ndash; The total number of threads completed in this scenario.&lt;/li>
-&lt;li>Average &amp;ndash; The average response time.&lt;/li>
-&lt;li>Median &amp;ndash; The statistical median of response times.&lt;/li>
-&lt;li>90% Line &amp;ndash; The response time below which 90% of all threads fall.&lt;/li>
-&lt;li>Min &amp;ndash; The minimum response time.&lt;/li>
-&lt;li>Max &amp;ndash; The maximum response time.&lt;/li>
-&lt;li>Error &amp;ndash; The error rate.&lt;/li>
-&lt;li>Troughput &amp;ndash; The number of requests processed per unit of time.&lt;/li>
-&lt;li>KB/sec &amp;ndash; The throughput measured in kilobytes per second.&lt;/li>
-&lt;/ul>
-&lt;p>&lt;em>Note: All time units are measured in ms.&lt;/em>&lt;/p>
-&lt;h3 id="2-test-results">2 Test Results&lt;/h3>
-&lt;h4 id="21-schema">2.1 schema&lt;/h4>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Label&lt;/th>
-&lt;th>Samples&lt;/th>
-&lt;th>Average&lt;/th>
-&lt;th>Median&lt;/th>
-&lt;th>90%Line&lt;/th>
-&lt;th>Min&lt;/th>
-&lt;th>Max&lt;/th>
-&lt;th>Error%&lt;/th>
-&lt;th>Throughput&lt;/th>
-&lt;th>KB/sec&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>property_keys&lt;/td>
-&lt;td>331000&lt;/td>
-&lt;td>1&lt;/td>
-&lt;td>1&lt;/td>
-&lt;td>2&lt;/td>
-&lt;td>0&lt;/td>
-&lt;td>172&lt;/td>
-&lt;td>0.00%&lt;/td>
-&lt;td>920.7/sec&lt;/td>
-&lt;td>178.1&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>vertex_labels&lt;/td>
-&lt;td>331000&lt;/td>
-&lt;td>1&lt;/td>
-&lt;td>2&lt;/td>
-&lt;td>2&lt;/td>
-&lt;td>1&lt;/td>
-&lt;td>126&lt;/td>
-&lt;td>0.00%&lt;/td>
-&lt;td>920.7/sec&lt;/td>
-&lt;td>193.4&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>edge_labels&lt;/td>
-&lt;td>331000&lt;/td>
-&lt;td>2&lt;/td>
-&lt;td>2&lt;/td>
-&lt;td>3&lt;/td>
-&lt;td>1&lt;/td>
-&lt;td>158&lt;/td>
-&lt;td>0.00%&lt;/td>
-&lt;td>920.7/sec&lt;/td>
-&lt;td>242.8&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;p>Conclusion: Under the pressure of 1000 concurrent requests lasting for 5 minutes, the average response time for the schema interface is 1-2ms, and there is no pressure.&lt;/p>
-&lt;h4 id="22-single-insert">2.2 Single Insert&lt;/h4>
-&lt;h5 id="221-insertion-rate-test">2.2.1 Insertion Rate Test&lt;/h5>
-&lt;h6 id="pressure-parameters">Pressure Parameters&lt;/h6>
-&lt;p>Test Method: Fixed concurrency, test server and backend processing speed.&lt;/p>
-&lt;ul>
-&lt;li>Concurrency: 1000&lt;/li>
-&lt;li>Duration: 5 minutes&lt;/li>
-&lt;/ul>
-&lt;h6 id="performance-indicators">Performance Indicators&lt;/h6>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Label&lt;/th>
-&lt;th>Samples&lt;/th>
-&lt;th>Average&lt;/th>
-&lt;th>Median&lt;/th>
-&lt;th>90%Line&lt;/th>
-&lt;th>Min&lt;/th>
-&lt;th>Max&lt;/th>
-&lt;th>Error%&lt;/th>
-&lt;th>Throughput&lt;/th>
-&lt;th>KB/sec&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>single_insert_vertices&lt;/td>
-&lt;td>331000&lt;/td>
-&lt;td>0&lt;/td>
-&lt;td>1&lt;/td>
-&lt;td>1&lt;/td>
-&lt;td>0&lt;/td>
-&lt;td>21&lt;/td>
-&lt;td>0.00%&lt;/td>
-&lt;td>920.7/sec&lt;/td>
-&lt;td>234.4&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>single_insert_edges&lt;/td>
-&lt;td>331000&lt;/td>
-&lt;td>2&lt;/td>
-&lt;td>2&lt;/td>
-&lt;td>3&lt;/td>
-&lt;td>1&lt;/td>
-&lt;td>53&lt;/td>
-&lt;td>0.00%&lt;/td>
-&lt;td>920.7/sec&lt;/td>
-&lt;td>309.1&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h6 id="conclusion">Conclusion&lt;/h6>
-&lt;ul>
-&lt;li>For vertices: average response time of 1ms, with each request inserting one piece of data. With an average of 920 requests processed per second, the average total data processed per second is approximately 920 pieces of data.&lt;/li>
-&lt;li>For edges: average response time of 1ms, with each request inserting one piece of data. With an average of 920 requests processed per second, the average total data processed per second is approximately 920 pieces of data.&lt;/li>
-&lt;/ul>
-&lt;h5 id="222-stress-test">2.2.2 Stress Test&lt;/h5>
-&lt;p>Test Method: Continuously increase concurrency to test the maximum stress level at which the server can still provide normal services.&lt;/p>
-&lt;h6 id="stress-parameters">Stress Parameters&lt;/h6>
-&lt;ul>
-&lt;li>Duration: 5 minutes&lt;/li>
-&lt;li>Service Exception Flag: Error rate greater than 0.00%&lt;/li>
-&lt;/ul>
-&lt;h6 id="performance-metrics">Performance Metrics&lt;/h6>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Concurrency&lt;/th>
-&lt;th>Samples&lt;/th>
-&lt;th>Average&lt;/th>
-&lt;th>Median&lt;/th>
-&lt;th>90%Line&lt;/th>
-&lt;th>Min&lt;/th>
-&lt;th>Max&lt;/th>
-&lt;th>Error%&lt;/th>
-&lt;th>Throughput&lt;/th>
-&lt;th>KB/sec&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>2000(vertex)&lt;/td>
-&lt;td>661916&lt;/td>
-&lt;td>1&lt;/td>
-&lt;td>1&lt;/td>
-&lt;td>1&lt;/td>
-&lt;td>0&lt;/td>
-&lt;td>3012&lt;/td>
-&lt;td>0.00%&lt;/td>
-&lt;td>1842.9/sec&lt;/td>
-&lt;td>469.1&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>4000(vertex)&lt;/td>
-&lt;td>1316124&lt;/td>
-&lt;td>13&lt;/td>
-&lt;td>1&lt;/td>
-&lt;td>14&lt;/td>
-&lt;td>0&lt;/td>
-&lt;td>9023&lt;/td>
-&lt;td>0.00%&lt;/td>
-&lt;td>3673.1/sec&lt;/td>
-&lt;td>935.0&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>5000(vertex)&lt;/td>
-&lt;td>1468121&lt;/td>
-&lt;td>1010&lt;/td>
-&lt;td>1135&lt;/td>
-&lt;td>1227&lt;/td>
-&lt;td>0&lt;/td>
-&lt;td>9223&lt;/td>
-&lt;td>0.06%&lt;/td>
-&lt;td>4095.6/sec&lt;/td>
-&lt;td>1046.0&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>7000(vertex)&lt;/td>
-&lt;td>1378454&lt;/td>
-&lt;td>1617&lt;/td>
-&lt;td>1708&lt;/td>
-&lt;td>1886&lt;/td>
-&lt;td>0&lt;/td>
-&lt;td>9361&lt;/td>
-&lt;td>0.08%&lt;/td>
-&lt;td>3860.3/sec&lt;/td>
-&lt;td>987.1&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>2000(edge)&lt;/td>
-&lt;td>629399&lt;/td>
-&lt;td>953&lt;/td>
-&lt;td>1043&lt;/td>
-&lt;td>1113&lt;/td>
-&lt;td>1&lt;/td>
-&lt;td>9001&lt;/td>
-&lt;td>0.00%&lt;/td>
-&lt;td>1750.3/sec&lt;/td>
-&lt;td>587.6&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>3000(edge)&lt;/td>
-&lt;td>648364&lt;/td>
-&lt;td>2258&lt;/td>
-&lt;td>2404&lt;/td>
-&lt;td>2500&lt;/td>
-&lt;td>2&lt;/td>
-&lt;td>9001&lt;/td>
-&lt;td>0.00%&lt;/td>
-&lt;td>1810.7/sec&lt;/td>
-&lt;td>607.9&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>4000(edge)&lt;/td>
-&lt;td>649904&lt;/td>
-&lt;td>1992&lt;/td>
-&lt;td>2112&lt;/td>
-&lt;td>2211&lt;/td>
-&lt;td>1&lt;/td>
-&lt;td>9001&lt;/td>
-&lt;td>0.06%&lt;/td>
-&lt;td>1812.5/sec&lt;/td>
-&lt;td>608.5&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h6 id="conclusion-1">Conclusion&lt;/h6>
-&lt;ul>
-&lt;li>Vertex:
-&lt;ul>
-&lt;li>4000 concurrency: normal, no error rate, average time 13ms;&lt;/li>
-&lt;li>5000 concurrency: if 5000 data insertions are processed per second, there will be an error rate of 0.06%, indicating that it cannot be handled. The peak should be at 4000.&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>Edge:
-&lt;ul>
-&lt;li>1000 concurrency: response time is 2ms, which is quite different from the response time of 2000 concurrency, mainly because IO network rec and send, as well as CPU, have almost doubled);&lt;/li>
-&lt;li>2000 concurrency: if 2000 data insertions are processed per second, the average time is 953ms, and the average number of requests processed per second is 1750;&lt;/li>
-&lt;li>3000 concurrency: if 3000 data insertions are processed per second, the average time is 2258ms, and the average number of requests processed per second is 1810;&lt;/li>
-&lt;li>4000 concurrency: if 4000 data insertions are processed per second, the average number of requests processed per second is 1812;&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;h4 id="23-batch-insertion">2.3 Batch Insertion&lt;/h4>
-&lt;h5 id="231-insertion-rate-test">2.3.1 Insertion Rate Test&lt;/h5>
-&lt;h6 id="pressure-parameters-1">Pressure Parameters&lt;/h6>
-&lt;p>Test Method: Fix the concurrency and test the processing speed of the server and backend.&lt;/p>
-&lt;ul>
-&lt;li>Concurrency: 1000&lt;/li>
-&lt;li>Duration: 5 minutes&lt;/li>
-&lt;/ul>
-&lt;h6 id="performance-indicators-1">Performance Indicators&lt;/h6>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Label&lt;/th>
-&lt;th>Samples&lt;/th>
-&lt;th>Average&lt;/th>
-&lt;th>Median&lt;/th>
-&lt;th>90%Line&lt;/th>
-&lt;th>Min&lt;/th>
-&lt;th>Max&lt;/th>
-&lt;th>Error%&lt;/th>
-&lt;th>Throughput&lt;/th>
-&lt;th>KB/sec&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>batch_insert_vertices&lt;/td>
-&lt;td>37162&lt;/td>
-&lt;td>8959&lt;/td>
-&lt;td>9595&lt;/td>
-&lt;td>9704&lt;/td>
-&lt;td>17&lt;/td>
-&lt;td>9852&lt;/td>
-&lt;td>0.00%&lt;/td>
-&lt;td>103.4/sec&lt;/td>
-&lt;td>393.3&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>batch_insert_edges&lt;/td>
-&lt;td>10800&lt;/td>
-&lt;td>31849&lt;/td>
-&lt;td>34544&lt;/td>
-&lt;td>35132&lt;/td>
-&lt;td>435&lt;/td>
-&lt;td>35747&lt;/td>
-&lt;td>0.00%&lt;/td>
-&lt;td>28.8/sec&lt;/td>
-&lt;td>814.9&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h6 id="conclusion-2">Conclusion&lt;/h6>
-&lt;ul>
-&lt;li>Vertex: The average response time is 8959ms, which is too long. Each request inserts 199 data, and the average processing rate is 103 requests per second. Therefore, the average number of data processed per second is about 2w (20,000) data.&lt;/li>
-&lt;li>Edge: The average response time is 31849ms, which is too long. Each request inserts 499 data, and the average processing rate is 28 requests per second. Therefore, the average number of data processed per second is about 13900 (13,900) data.&lt;/li>
-&lt;/ul></description></item><item><title>Docs: HugeGraph-Hubble Quick Start</title><link>/docs/quickstart/hugegraph-hubble/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-hubble/</guid><description>
+&lt;/ol></description></item><item><title>Docs: HugeGraph-Hubble Quick Start</title><link>/docs/quickstart/hugegraph-hubble/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-hubble/</guid><description>
 &lt;h3 id="1-hugegraph-hubble-overview">1 HugeGraph-Hubble Overview&lt;/h3>
 &lt;p>HugeGraph is an analysis-oriented graph database system that supports batch operations, which fully supports &lt;a href="https://tinkerpop.apache.org">Apache TinkerPop3&lt;/a> framework and &lt;a href="https://tinkerpop.apache.org/gremlin.html">Gremlin&lt;/a> graph query language. It provides a complete tool chain ecology such as export, backup, and recovery, and effectively solve the storage, query and correlation analysis needs of massive graph data. HugeGraph is widely used in the fields of risk control, insurance claims, recommendation search, public security crime crackdown, knowledge graph, network security, IT operation and maintenance of bank securities companies, and is committed to allowing more industries, organizations and users to enjoy a wider range of data comprehensive value.&lt;/p>
 &lt;p>&lt;strong>HugeGraph-Hubble&lt;/strong> is HugeGraph&amp;rsquo;s one-stop visual analysis platform. The platform covers the whole process from data modeling, to efficient data import, to real-time and offline analysis of data, and unified management of graphs, realizing the whole process wizard of graph application. It is designed to improve the user&amp;rsquo;s use fluency, lower the user&amp;rsquo;s use threshold, and provide a more efficient and easy-to-use user experience.&lt;/p>
@@ -15800,4 +15334,565 @@ The authorization API includes: creating, deleting, modifying, and querying perm
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;api&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;0.13.2.0&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs:</title><link>/docs/cla/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/cla/</guid><description>
+&lt;h2 id="contributor-agreement">Contributor Agreement&lt;/h2>
+&lt;h2 id="individual-contributor-exclusive-license-agreement">Individual Contributor exclusive License Agreement&lt;/h2>
+&lt;h2 id="including-the-traditional-patent-license-option">(including the TRADITIONAL PATENT LICENSE OPTION)&lt;/h2>
+&lt;p>Thank you for your interest in contributing to HugeGraph&amp;rsquo;s all projects (&amp;ldquo;We&amp;rdquo; or &amp;ldquo;Us&amp;rdquo;).&lt;/p>
+&lt;p>The purpose of this contributor agreement (&amp;ldquo;Agreement&amp;rdquo;) is to clarify and document the rights granted by contributors to Us. To make this document effective, please follow the comment of GitHub CLA-Assistant when submitting a new pull request.&lt;/p>
+&lt;h3 id="how-to-use-this-contributor-agreement">How to use this Contributor Agreement&lt;/h3>
+&lt;p>If You are an employee and have created the Contribution as part of your employment, You need to have Your employer approve this Agreement or sign the Entity version of this document. If You do not own the Copyright in the entire work of authorship, any other author of the Contribution should also sign this – in any event, please contact Us at &lt;a href="mailto:hugegraph@googlegroups.com">hugegraph@googlegroups.com&lt;/a>&lt;/p>
+&lt;h3 id="1-definitions">1. Definitions&lt;/h3>
+&lt;p>&lt;strong>&amp;ldquo;You&amp;rdquo;&lt;/strong> means the individual Copyright owner who Submits a Contribution to Us.&lt;/p>
+&lt;p>&lt;strong>&amp;ldquo;Contribution&amp;rdquo;&lt;/strong> means any original work of authorship, including any original modifications or additions to an existing work of authorship, Submitted by You to Us, in which You own the Copyright.&lt;/p>
+&lt;p>&lt;strong>&amp;ldquo;Copyright&amp;rdquo;&lt;/strong> means all rights protecting works of authorship, including copyright, moral and neighboring rights, as appropriate, for the full term of their existence.&lt;/p>
+&lt;p>&lt;strong>&amp;ldquo;Material&amp;rdquo;&lt;/strong> means the software or documentation made available by Us to third parties. When this Agreement covers more than one software project, the Material means the software or documentation to which the Contribution was Submitted. After You Submit the Contribution, it may be included in the Material.&lt;/p>
+&lt;p>&lt;strong>&amp;ldquo;Submit&amp;rdquo;&lt;/strong> means any act by which a Contribution is transferred to Us by You by means of tangible or intangible media, including but not limited to electronic mailing lists, source code control systems, and issue tracking systems that are managed by, or on behalf of, Us, but excluding any transfer that is conspicuously marked or otherwise designated in writing by You as &amp;ldquo;Not a Contribution.&amp;rdquo;&lt;/p>
+&lt;p>&lt;strong>&amp;ldquo;Documentation&amp;rdquo;&lt;/strong> means any non-software portion of a Contribution.&lt;/p>
+&lt;h3 id="2-license-grant">2. License grant&lt;/h3>
+&lt;h4 id="21-copyright-license-to-us">2.1 Copyright license to Us&lt;/h4>
+&lt;p>Subject to the terms and conditions of this Agreement, You hereby grant to Us a worldwide, royalty-free, Exclusive, perpetual and irrevocable (except as stated in Section 8.2) license, with the right to transfer an unlimited number of non-exclusive licenses or to grant sublicenses to third parties, under the Copyright covering the Contribution to use the Contribution by all means, including, but not limited to:&lt;/p>
+&lt;ul>
+&lt;li>publish the Contribution,&lt;/li>
+&lt;li>modify the Contribution,&lt;/li>
+&lt;li>prepare derivative works based upon or containing the Contribution and/or to combine the Contribution with other Materials,&lt;/li>
+&lt;li>reproduce the Contribution in original or modified form,&lt;/li>
+&lt;li>distribute, to make the Contribution available to the public, display and publicly perform the Contribution in original or modified form.&lt;/li>
+&lt;/ul>
+&lt;h4 id="22-moral-rights">2.2 Moral rights&lt;/h4>
+&lt;p>Moral Rights remain unaffected to the extent they are recognized and not waivable by applicable law. Notwithstanding, You may add your name to the attribution mechanism customary used in the Materials you Contribute to, such as the header of the source code files of Your Contribution, and We will respect this attribution when using Your Contribution.&lt;/p>
+&lt;h4 id="23-copyright-license-back-to-you">2.3 Copyright license back to You&lt;/h4>
+&lt;p>Upon such grant of rights to Us, We immediately grant to You a worldwide, royalty-free, non-exclusive, perpetual and irrevocable license, with the right to transfer an unlimited number of non-exclusive licenses or to grant sublicenses to third parties, under the Copyright covering the Contribution to use the Contribution by all means, including, but not limited to:&lt;/p>
+&lt;ul>
+&lt;li>publish the Contribution,&lt;/li>
+&lt;li>modify the Contribution,&lt;/li>
+&lt;li>prepare derivative works based upon or containing the Contribution and/or to combine the Contribution with other Materials,&lt;/li>
+&lt;li>reproduce the Contribution in original or modified form,&lt;/li>
+&lt;li>distribute, to make the Contribution available to the public, display and publicly perform the Contribution in original or modified form.&lt;/li>
+&lt;/ul>
+&lt;p>This license back is limited to the Contribution and does not provide any rights to the Material.&lt;/p>
+&lt;h3 id="3-patents">3. Patents&lt;/h3>
+&lt;h4 id="31-patent-license">3.1 Patent license&lt;/h4>
+&lt;p>Subject to the terms and conditions of this Agreement You hereby grant to Us and to recipients of Materials distributed by Us a worldwide, royalty-free, non-exclusive, perpetual and irrevocable (except as stated in Section 3.2) patent license, with the right to transfer an unlimited number of non-exclusive licenses or to grant sublicenses to third parties, to make, have made, use, sell, offer for sale, import and otherwise transfer the Contribution and the Contribution in combination with any Material (and portions of such combination). This license applies to all patents owned or controlled by You, whether already acquired or hereafter acquired, that would be infringed by making, having made, using, selling, offering for sale, importing or otherwise transferring of Your Contribution(s) alone or by combination of Your Contribution(s) with any Material.&lt;/p>
+&lt;h4 id="32-revocation-of-patent-license">3.2 Revocation of patent license&lt;/h4>
+&lt;p>You reserve the right to revoke the patent license stated in section 3.1 if We make any infringement claim that is targeted at your Contribution and not asserted for a Defensive Purpose. An assertion of claims of the Patents shall be considered for a &amp;ldquo;Defensive Purpose&amp;rdquo; if the claims are asserted against an entity that has filed, maintained, threatened, or voluntarily participated in a patent infringement lawsuit against Us or any of Our licensees.&lt;/p>
+&lt;h3 id="4-license-obligations-by-us">4. License obligations by Us&lt;/h3>
+&lt;p>We agree to (sub)license the Contribution or any Materials containing, based on or derived from your Contribution under the terms of any licenses the Free Software Foundation classifies as Free Software License and which are approved by the Open Source Initiative as Open Source licenses.&lt;/p>
+&lt;p>More specifically and in strict accordance with the above paragraph, we agree to (sub)license the Contribution or any Materials containing, based on or derived from the Contribution only in accordance with our licensing policy available at: &lt;a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0&lt;/a>.&lt;/p>
+&lt;p>In addition, We may use the following licenses for Documentation in the Contribution: GFDL-1.2 (including any right to adopt any future version of a license).&lt;/p>
+&lt;p>We agree to license patents owned or controlled by You only to the extent necessary to (sub)license Your Contribution(s) and the combination of Your Contribution(s) with the Material under the terms of any licenses the Free Software Foundation classifies as Free Software licenses and which are approved by the Open Source Initiative as Open Source licenses..&lt;/p>
+&lt;h3 id="5-disclaimer">5. Disclaimer&lt;/h3>
+&lt;p>THE CONTRIBUTION IS PROVIDED &amp;ldquo;AS IS&amp;rdquo;. MORE PARTICULARLY, ALL EXPRESS OR IMPLIED WARRANTIES INCLUDING, WITHOUT LIMITATION, ANY IMPLIED WARRANTY OF SATISFACTORY QUALITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT ARE EXPRESSLY DISCLAIMED BY YOU TO US AND BY US TO YOU. TO THE EXTENT THAT ANY SUCH WARRANTIES CANNOT BE DISCLAIMED, SUCH WARRANTY IS LIMITED IN DURATION AND EXTENT TO THE MINIMUM PERIOD AND EXTENT PERMITTED BY LAW.&lt;/p>
+&lt;h3 id="6-consequential-damage-waiver">6. Consequential damage waiver&lt;/h3>
+&lt;p>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL YOU OR WE BE LIABLE FOR ANY LOSS OF PROFITS, LOSS OF ANTICIPATED SAVINGS, LOSS OF DATA, INDIRECT, SPECIAL, INCIDENTAL, CONSEQUENTIAL AND EXEMPLARY DAMAGES ARISING OUT OF THIS AGREEMENT REGARDLESS OF THE LEGAL OR EQUITABLE THEORY (CONTRACT, TORT OR OTHERWISE) UPON WHICH THE CLAIM IS BASED.&lt;/p>
+&lt;h3 id="7-approximation-of-disclaimer-and-damage-waiver">7. Approximation of disclaimer and damage waiver&lt;/h3>
+&lt;p>IF THE DISCLAIMER AND DAMAGE WAIVER MENTIONED IN SECTION 5. AND SECTION 6. CANNOT BE GIVEN LEGAL EFFECT UNDER APPLICABLE LOCAL LAW, REVIEWING COURTS SHALL APPLY LOCAL LAW THAT MOST CLOSELY APPROXIMATES AN ABSOLUTE WAIVER OF ALL CIVIL OR CONTRACTUAL LIABILITY IN CONNECTION WITH THE CONTRIBUTION.&lt;/p>
+&lt;h3 id="8-term">8. Term&lt;/h3>
+&lt;p>8.1 This Agreement shall come into effect upon Your acceptance of the terms and conditions.&lt;/p>
+&lt;p>8.2 This Agreement shall apply for the term of the copyright and patents licensed here. However, You shall have the right to terminate the Agreement if We do not fulfill the obligations as set forth in Section 4. Such termination must be made in writing.&lt;/p>
+&lt;p>8.3 In the event of a termination of this Agreement Sections 5, 6, 7, 8 and 9 shall survive such termination and shall remain in full force thereafter. For the avoidance of doubt, Free and Open Source Software (sub)licenses that have already been granted for Contributions at the date of the termination shall remain in full force after the termination of this Agreement.&lt;/p>
+&lt;h3 id="9-miscellaneous">9 Miscellaneous&lt;/h3>
+&lt;p>9.1 This Agreement and all disputes, claims, actions, suits or other proceedings arising out of this agreement or relating in any way to it shall be governed by the laws of China excluding its private international law provisions.&lt;/p>
+&lt;p>9.2 This Agreement sets out the entire agreement between You and Us for Your Contributions to Us and overrides all other agreements or understandings.&lt;/p>
+&lt;p>9.3 In case of Your death, this agreement shall continue with Your heirs. In case of more than one heir, all heirs must exercise their rights through a commonly authorized person.&lt;/p>
+&lt;p>9.4 If any provision of this Agreement is found void and unenforceable, such provision will be replaced to the extent possible with a provision that comes closest to the meaning of the original provision and that is enforceable. The terms and conditions set forth in this Agreement shall apply notwithstanding any failure of essential purpose of this Agreement or any limited remedy to the maximum extent possible under law.&lt;/p>
+&lt;p>9.5 You agree to notify Us of any facts or circumstances of which you become aware that would make this Agreement inaccurate in any respect.&lt;/p></description></item><item><title>Docs:</title><link>/docs/performance/hugegraph-benchmark-0.4.4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/performance/hugegraph-benchmark-0.4.4/</guid><description>
+&lt;h3 id="1-测试环境">1 测试环境&lt;/h3>
+&lt;h4 id="11-硬件信息">1.1 硬件信息&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>CPU&lt;/th>
+&lt;th>Memory&lt;/th>
+&lt;th>网卡&lt;/th>
+&lt;th>磁盘&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>48 Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz&lt;/td>
+&lt;td>128G&lt;/td>
+&lt;td>10000Mbps&lt;/td>
+&lt;td>750GB SSD&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="12-软件信息">1.2 软件信息&lt;/h4>
+&lt;h5 id="121-测试用例">1.2.1 测试用例&lt;/h5>
+&lt;p>测试使用&lt;a href="https://github.com/socialsensor/graphdb-benchmarks">graphdb-benchmark&lt;/a>，一个图数据库测试集。该测试集主要包含4类测试：&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Massive Insertion，批量插入顶点和边，一定数量的顶点或边一次性提交&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Single Insertion，单条插入，每个顶点或者每条边立即提交&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Query，主要是图数据库的基本查询操作：&lt;/p>
+&lt;ul>
+&lt;li>Find Neighbors，查询所有顶点的邻居&lt;/li>
+&lt;li>Find Adjacent Nodes，查询所有边的邻接顶点&lt;/li>
+&lt;li>Find Shortest Path，查询第一个顶点到100个随机顶点的最短路径&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Clustering，基于Louvain Method的社区发现算法&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h5 id="122-测试数据集">1.2.2 测试数据集&lt;/h5>
+&lt;p>测试使用人造数据和真实数据&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>MIW、SIW和QW使用SNAP数据集&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="http://snap.stanford.edu/data/email-Enron.html">Enron Dataset&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="http://snap.stanford.edu/data/amazon0601.html">Amazon dataset&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="http://snap.stanford.edu/data/com-Youtube.html">Youtube dataset&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="http://snap.stanford.edu/data/com-LiveJournal.html">LiveJournal dataset&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>CW使用&lt;a href="https://sites.google.com/site/andrealancichinetti/files">LFR-Benchmark generator&lt;/a>生成的人造数据&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h6 id="本测试用到的数据集规模">本测试用到的数据集规模&lt;/h6>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>名称&lt;/th>
+&lt;th>vertex数目&lt;/th>
+&lt;th>edge数目&lt;/th>
+&lt;th>文件大小&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>email-enron.txt&lt;/td>
+&lt;td>36,691&lt;/td>
+&lt;td>367,661&lt;/td>
+&lt;td>4MB&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>com-youtube.ungraph.txt&lt;/td>
+&lt;td>1,157,806&lt;/td>
+&lt;td>2,987,624&lt;/td>
+&lt;td>38.7MB&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>amazon0601.txt&lt;/td>
+&lt;td>403,393&lt;/td>
+&lt;td>3,387,388&lt;/td>
+&lt;td>47.9MB&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="13-服务配置">1.3 服务配置&lt;/h4>
+&lt;ul>
+&lt;li>HugeGraph版本：0.4.4，RestServer和Gremlin Server和backends都在同一台服务器上&lt;/li>
+&lt;li>Cassandra版本：cassandra-3.10，commit-log 和data共用SSD&lt;/li>
+&lt;li>RocksDB版本：rocksdbjni-5.8.6&lt;/li>
+&lt;li>Titan版本：0.5.4, 使用thrift+Cassandra模式&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>graphdb-benchmark适配的Titan版本为0.5.4&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="2-测试结果">2 测试结果&lt;/h3>
+&lt;h4 id="21-batch插入性能">2.1 Batch插入性能&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Backend&lt;/th>
+&lt;th>email-enron(30w)&lt;/th>
+&lt;th>amazon0601(300w)&lt;/th>
+&lt;th>com-youtube.ungraph(300w)&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Titan&lt;/td>
+&lt;td>9.516&lt;/td>
+&lt;td>88.123&lt;/td>
+&lt;td>111.586&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>RocksDB&lt;/td>
+&lt;td>2.345&lt;/td>
+&lt;td>14.076&lt;/td>
+&lt;td>16.636&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Cassandra&lt;/td>
+&lt;td>11.930&lt;/td>
+&lt;td>108.709&lt;/td>
+&lt;td>101.959&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Memory&lt;/td>
+&lt;td>3.077&lt;/td>
+&lt;td>15.204&lt;/td>
+&lt;td>13.841&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;em>说明&lt;/em>&lt;/p>
+&lt;ul>
+&lt;li>表头&amp;quot;（）&amp;ldquo;中数据是数据规模，以边为单位&lt;/li>
+&lt;li>表中数据是批量插入的时间，单位是s&lt;/li>
+&lt;li>例如，HugeGraph使用RocksDB插入amazon0601数据集的300w条边，花费14.076s，速度约为21w edges/s&lt;/li>
+&lt;/ul>
+&lt;h5 id="结论">结论&lt;/h5>
+&lt;ul>
+&lt;li>RocksDB和Memory后端插入性能优于Cassandra&lt;/li>
+&lt;li>HugeGraph和Titan同样使用Cassandra作为后端的情况下，插入性能接近&lt;/li>
+&lt;/ul>
+&lt;h4 id="22-遍历性能">2.2 遍历性能&lt;/h4>
+&lt;h5 id="221-术语说明">2.2.1 术语说明&lt;/h5>
+&lt;ul>
+&lt;li>FN(Find Neighbor), 遍历所有vertex, 根据vertex查邻接edge, 通过edge和vertex查other vertex&lt;/li>
+&lt;li>FA(Find Adjacent), 遍历所有edge，根据edge获得source vertex和target vertex&lt;/li>
+&lt;/ul>
+&lt;h5 id="222-fn性能">2.2.2 FN性能&lt;/h5>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Backend&lt;/th>
+&lt;th>email-enron(3.6w)&lt;/th>
+&lt;th>amazon0601(40w)&lt;/th>
+&lt;th>com-youtube.ungraph(120w)&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Titan&lt;/td>
+&lt;td>7.724&lt;/td>
+&lt;td>70.935&lt;/td>
+&lt;td>128.884&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>RocksDB&lt;/td>
+&lt;td>8.876&lt;/td>
+&lt;td>65.852&lt;/td>
+&lt;td>63.388&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Cassandra&lt;/td>
+&lt;td>13.125&lt;/td>
+&lt;td>126.959&lt;/td>
+&lt;td>102.580&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Memory&lt;/td>
+&lt;td>22.309&lt;/td>
+&lt;td>207.411&lt;/td>
+&lt;td>165.609&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;em>说明&lt;/em>&lt;/p>
+&lt;ul>
+&lt;li>表头&amp;rdquo;（）&amp;ldquo;中数据是数据规模，以顶点为单位&lt;/li>
+&lt;li>表中数据是遍历顶点花费的时间，单位是s&lt;/li>
+&lt;li>例如，HugeGraph使用RocksDB后端遍历amazon0601的所有顶点，并查找邻接边和另一顶点，总共耗时65.852s&lt;/li>
+&lt;/ul>
+&lt;h5 id="223-fa性能">2.2.3 FA性能&lt;/h5>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Backend&lt;/th>
+&lt;th>email-enron(30w)&lt;/th>
+&lt;th>amazon0601(300w)&lt;/th>
+&lt;th>com-youtube.ungraph(300w)&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Titan&lt;/td>
+&lt;td>7.119&lt;/td>
+&lt;td>63.353&lt;/td>
+&lt;td>115.633&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>RocksDB&lt;/td>
+&lt;td>6.032&lt;/td>
+&lt;td>64.526&lt;/td>
+&lt;td>52.721&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Cassandra&lt;/td>
+&lt;td>9.410&lt;/td>
+&lt;td>102.766&lt;/td>
+&lt;td>94.197&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Memory&lt;/td>
+&lt;td>12.340&lt;/td>
+&lt;td>195.444&lt;/td>
+&lt;td>140.89&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;em>说明&lt;/em>&lt;/p>
+&lt;ul>
+&lt;li>表头&amp;rdquo;（）&amp;ldquo;中数据是数据规模，以边为单位&lt;/li>
+&lt;li>表中数据是遍历边花费的时间，单位是s&lt;/li>
+&lt;li>例如，HugeGraph使用RocksDB后端遍历amazon0601的所有边，并查询每条边的两个顶点，总共耗时64.526s&lt;/li>
+&lt;/ul>
+&lt;h6 id="结论-1">结论&lt;/h6>
+&lt;ul>
+&lt;li>HugeGraph RocksDB &amp;gt; Titan thrift+Cassandra &amp;gt; HugeGraph Cassandra &amp;gt; HugeGraph Memory&lt;/li>
+&lt;/ul>
+&lt;h4 id="23-hugegraph-图常用分析方法性能">2.3 HugeGraph-图常用分析方法性能&lt;/h4>
+&lt;h5 id="术语说明">术语说明&lt;/h5>
+&lt;ul>
+&lt;li>FS(Find Shortest Path), 寻找最短路径&lt;/li>
+&lt;li>K-neighbor，从起始vertex出发，通过K跳边能够到达的所有顶点, 包括1, 2, 3&amp;hellip;(K-1), K跳边可达vertex&lt;/li>
+&lt;li>K-out, 从起始vertex出发，恰好经过K跳out边能够到达的顶点&lt;/li>
+&lt;/ul>
+&lt;h5 id="fs性能">FS性能&lt;/h5>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Backend&lt;/th>
+&lt;th>email-enron(30w)&lt;/th>
+&lt;th>amazon0601(300w)&lt;/th>
+&lt;th>com-youtube.ungraph(300w)&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Titan&lt;/td>
+&lt;td>11.333&lt;/td>
+&lt;td>0.313&lt;/td>
+&lt;td>376.06&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>RocksDB&lt;/td>
+&lt;td>44.391&lt;/td>
+&lt;td>2.221&lt;/td>
+&lt;td>268.792&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Cassandra&lt;/td>
+&lt;td>39.845&lt;/td>
+&lt;td>3.337&lt;/td>
+&lt;td>331.113&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Memory&lt;/td>
+&lt;td>35.638&lt;/td>
+&lt;td>2.059&lt;/td>
+&lt;td>388.987&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;em>说明&lt;/em>&lt;/p>
+&lt;ul>
+&lt;li>表头&amp;rdquo;（）&amp;ldquo;中数据是数据规模，以边为单位&lt;/li>
+&lt;li>表中数据是找到&lt;strong>从第一个顶点出发到达随机选择的100个顶点的最短路径&lt;/strong>的时间，单位是s&lt;/li>
+&lt;li>例如，HugeGraph使用RocksDB查找第一个顶点到100个随机顶点的最短路径，总共耗时2.059s&lt;/li>
+&lt;/ul>
+&lt;h6 id="结论-2">结论&lt;/h6>
+&lt;ul>
+&lt;li>在数据规模小或者顶点关联关系少的场景下，Titan最短路径性能优于HugeGraph&lt;/li>
+&lt;li>随着数据规模增大且顶点的关联度增高，HugeGraph最短路径性能优于Titan&lt;/li>
+&lt;/ul>
+&lt;h5 id="k-neighbor性能">K-neighbor性能&lt;/h5>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>顶点&lt;/th>
+&lt;th>深度&lt;/th>
+&lt;th>一度&lt;/th>
+&lt;th>二度&lt;/th>
+&lt;th>三度&lt;/th>
+&lt;th>四度&lt;/th>
+&lt;th>五度&lt;/th>
+&lt;th>六度&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>v1&lt;/td>
+&lt;td>时间&lt;/td>
+&lt;td>0.031s&lt;/td>
+&lt;td>0.033s&lt;/td>
+&lt;td>0.048s&lt;/td>
+&lt;td>0.500s&lt;/td>
+&lt;td>11.27s&lt;/td>
+&lt;td>OOM&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>v111&lt;/td>
+&lt;td>时间&lt;/td>
+&lt;td>0.027s&lt;/td>
+&lt;td>0.034s&lt;/td>
+&lt;td>0.115&lt;/td>
+&lt;td>1.36s&lt;/td>
+&lt;td>OOM&lt;/td>
+&lt;td>&amp;ndash;&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>v1111&lt;/td>
+&lt;td>时间&lt;/td>
+&lt;td>0.039s&lt;/td>
+&lt;td>0.027s&lt;/td>
+&lt;td>0.052s&lt;/td>
+&lt;td>0.511s&lt;/td>
+&lt;td>10.96s&lt;/td>
+&lt;td>OOM&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;em>说明&lt;/em>&lt;/p>
+&lt;ul>
+&lt;li>HugeGraph-Server的JVM内存设置为32GB，数据量过大时会出现OOM&lt;/li>
+&lt;/ul>
+&lt;h5 id="k-out性能">K-out性能&lt;/h5>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>顶点&lt;/th>
+&lt;th>深度&lt;/th>
+&lt;th>一度&lt;/th>
+&lt;th>二度&lt;/th>
+&lt;th>三度&lt;/th>
+&lt;th>四度&lt;/th>
+&lt;th>五度&lt;/th>
+&lt;th>六度&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>v1&lt;/td>
+&lt;td>时间&lt;/td>
+&lt;td>0.054s&lt;/td>
+&lt;td>0.057s&lt;/td>
+&lt;td>0.109s&lt;/td>
+&lt;td>0.526s&lt;/td>
+&lt;td>3.77s&lt;/td>
+&lt;td>OOM&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>度&lt;/td>
+&lt;td>10&lt;/td>
+&lt;td>133&lt;/td>
+&lt;td>2453&lt;/td>
+&lt;td>50,830&lt;/td>
+&lt;td>1,128,688&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>v111&lt;/td>
+&lt;td>时间&lt;/td>
+&lt;td>0.032s&lt;/td>
+&lt;td>0.042s&lt;/td>
+&lt;td>0.136s&lt;/td>
+&lt;td>1.25s&lt;/td>
+&lt;td>20.62s&lt;/td>
+&lt;td>OOM&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>度&lt;/td>
+&lt;td>10&lt;/td>
+&lt;td>211&lt;/td>
+&lt;td>4944&lt;/td>
+&lt;td>113150&lt;/td>
+&lt;td>2,629,970&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>v1111&lt;/td>
+&lt;td>时间&lt;/td>
+&lt;td>0.039s&lt;/td>
+&lt;td>0.045s&lt;/td>
+&lt;td>0.053s&lt;/td>
+&lt;td>1.10s&lt;/td>
+&lt;td>2.92s&lt;/td>
+&lt;td>OOM&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>度&lt;/td>
+&lt;td>10&lt;/td>
+&lt;td>140&lt;/td>
+&lt;td>2555&lt;/td>
+&lt;td>50825&lt;/td>
+&lt;td>1,070,230&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;em>说明&lt;/em>&lt;/p>
+&lt;ul>
+&lt;li>HugeGraph-Server的JVM内存设置为32GB，数据量过大时会出现OOM&lt;/li>
+&lt;/ul>
+&lt;h6 id="结论-3">结论&lt;/h6>
+&lt;ul>
+&lt;li>FS场景，HugeGraph性能优于Titan&lt;/li>
+&lt;li>K-neighbor和K-out场景，HugeGraph能够实现在5度范围内秒级返回结果&lt;/li>
+&lt;/ul>
+&lt;h4 id="24-图综合性能测试-cw">2.4 图综合性能测试-CW&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>数据库&lt;/th>
+&lt;th>规模1000&lt;/th>
+&lt;th>规模5000&lt;/th>
+&lt;th>规模10000&lt;/th>
+&lt;th>规模20000&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Titan&lt;/td>
+&lt;td>45.943&lt;/td>
+&lt;td>849.168&lt;/td>
+&lt;td>2737.117&lt;/td>
+&lt;td>9791.46&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Memory(core)&lt;/td>
+&lt;td>41.077&lt;/td>
+&lt;td>1825.905&lt;/td>
+&lt;td>*&lt;/td>
+&lt;td>*&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Cassandra（core）&lt;/td>
+&lt;td>39.783&lt;/td>
+&lt;td>862.744&lt;/td>
+&lt;td>2423.136&lt;/td>
+&lt;td>6564.191&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>RocksDB（core）&lt;/td>
+&lt;td>33.383&lt;/td>
+&lt;td>199.894&lt;/td>
+&lt;td>763.869&lt;/td>
+&lt;td>1677.813&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;em>说明&lt;/em>&lt;/p>
+&lt;ul>
+&lt;li>&amp;ldquo;规模&amp;quot;以顶点为单位&lt;/li>
+&lt;li>表中数据是社区发现完成需要的时间，单位是s，例如HugeGraph使用RocksDB后端在规模10000的数据集，社区聚合不再变化，需要耗时763.869s&lt;/li>
+&lt;li>&amp;ldquo;*&amp;ldquo;表示超过10000s未完成&lt;/li>
+&lt;li>CW测试是CRUD的综合评估&lt;/li>
+&lt;li>后三者分别是HugeGraph的不同后端，该测试中HugeGraph跟Titan一样，没有通过client，直接对core操作&lt;/li>
+&lt;/ul>
+&lt;h5 id="结论-4">结论&lt;/h5>
+&lt;ul>
+&lt;li>HugeGraph在使用Cassandra后端时，性能略优于Titan，随着数据规模的增大，优势越来越明显，数据规模20000时，比Titan快30%&lt;/li>
+&lt;li>HugeGraph在使用RocksDB后端时，性能远高于Titan和HugeGraph的Cassandra后端，分别比两者快了6倍和4倍&lt;/li>
+&lt;/ul></description></item></channel></rss>

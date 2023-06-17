@@ -113,7 +113,6 @@
 &lt;li>通过您的电子邮件账户发送邮件至 &lt;a href="mailto:dev-subscribe@hugegraph.apache.org">dev-subscribe@hugegraph.apache.org&lt;/a>，然后您将收到一封确认邮件。&lt;/li>
 &lt;li>回复确认邮件以确认您的订阅。然后，您将收到另一封确认邮件。&lt;/li>
 &lt;li>现在您已经成为该邮件列表的订阅者。如果您有更多问题，只需发送邮件到邮件列表，社区同学看到后会及时回复。&lt;/li>
-&lt;li>如果您想取消订阅邮件列表，只需发送邮件至 &lt;a href="mailto:dev-unsubscribe@hugegraph.apache.org">dev-unsubscribe@hugegraph.apache.org&lt;/a>，然后按照确认邮件中的步骤操作即可。&lt;/li>
 &lt;/ul>
 &lt;p>您可以随时订阅邮件列表。此外，您也可以直接浏览&lt;a href="https://lists.apache.org/list.html?dev@hugegraph.apache.org">历史邮件/所有邮件&lt;/a>（即使没有订阅列表）。&lt;/p>
 &lt;p>注意事项：&lt;/p>
@@ -130,7 +129,7 @@
 &lt;li>&lt;a href="https://lists.apache.org/list.html?dev@hugegraph.apache.org">https://lists.apache.org/list.html?dev@hugegraph.apache.org&lt;/a>&lt;/li>
 &lt;li>&lt;a href="http://apache.org/foundation/mailinglists.html#subscribing">http://apache.org/foundation/mailinglists.html#subscribing&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h1 id="退订邮件列表-">退订邮件列表 👋🏻&lt;/h1>
+&lt;h1 id="退订邮件列表">退订邮件列表&lt;/h1>
 &lt;p>如果您不再需要了解 HugeGraph 的最新动态，可以退订邮件列表。&lt;/p>
 &lt;p>退订邮件列表的步骤如下：&lt;/p>
 &lt;ol>

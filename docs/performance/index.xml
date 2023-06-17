@@ -493,11 +493,9 @@
 &lt;ul>
 &lt;li>&lt;a href="/docs/performance/api-preformance/hugegraph-api-0.5.6-rocksdb/">v0.5.6 stand-alone&lt;/a>&lt;/li>
 &lt;li>&lt;a href="/docs/performance/api-preformance/hugegraph-api-0.5.6-cassandra/">v0.5.6 cluster&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/docs/performance/api-preformance/hugegraph-api-0.4.4/">v0.4.4&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/docs/performance/api-preformance/hugegraph-api-0.2/">v0.2&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;blockquote>
-&lt;p>Starting from version 0.5.6, in addition to providing performance tests for the API with the best performance among the backend types supported by HugeGraph, performance tests for both single machine and cluster environments are now available.&lt;/p>
+&lt;p>Updates coming soon, stay tuned!&lt;/p>
 &lt;/blockquote></description></item><item><title>Docs: HugeGraph-Loader Performance</title><link>/docs/performance/hugegraph-loader-performance/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/performance/hugegraph-loader-performance/</guid><description>
 &lt;h2 id="use-cases">Use Cases&lt;/h2>
 &lt;p>When the number of graph data to be batch inserted (including vertices and edges) is at the billion level or below, or the total data size is less than TB, the &lt;a href="/docs/quickstart/hugegraph-loader">HugeGraph-Loader&lt;/a> tool can be used to continuously and quickly import graph data.&lt;/p>

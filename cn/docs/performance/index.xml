@@ -507,11 +507,9 @@
 &lt;ul>
 &lt;li>&lt;a href="/docs/performance/api-preformance/hugegraph-api-0.5.6-rocksdb/">v0.5.6 stand-alone&lt;/a>&lt;/li>
 &lt;li>&lt;a href="/docs/performance/api-preformance/hugegraph-api-0.5.6-cassandra/">v0.5.6 cluster&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/docs/performance/api-preformance/hugegraph-api-0.4.4/">v0.4.4&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/docs/performance/api-preformance/hugegraph-api-0.2/">v0.2&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;blockquote>
-&lt;p>之前的版本只提供HugeGraph所支持的后端种类中性能最好的API性能测试，从0.5.6版本开始，分别提供了单机和集群的性能情况&lt;/p>
+&lt;p>即将更新，敬请期待！&lt;/p>
 &lt;/blockquote></description></item><item><title>Docs: HugeGraph-Loader Performance</title><link>/cn/docs/performance/hugegraph-loader-performance/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/performance/hugegraph-loader-performance/</guid><description>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;p>当要批量插入的图数据（包括顶点和边）条数为billion级别及以下，或者总数据量小于TB时，可以采用&lt;a href="/docs/quickstart/hugegraph-loader">HugeGraph-Loader&lt;/a>工具持续、高速导入图数据&lt;/p>
