@@ -16,3 +16,4 @@ For the performance test of the RESTful API of each release version of HugeGraph
 - [v0.5.6 cluster](/docs/performance/api-preformance/hugegraph-api-0.5.6-cassandra/)
 
 > Updates coming soon, stay tuned!
+

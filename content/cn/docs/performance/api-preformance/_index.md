@@ -16,3 +16,4 @@ HugeGraph的每个发布版本的RESTful API的性能测试情况可以参考：
 - [v0.5.6 cluster](/docs/performance/api-preformance/hugegraph-api-0.5.6-cassandra/)
 
 > 即将更新，敬请期待！
+
