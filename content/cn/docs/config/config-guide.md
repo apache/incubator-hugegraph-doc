@@ -26,38 +26,61 @@ gremlin-server.yaml 文件默认的内容如下：
 #host: 127.0.0.1
 #port: 8182
 
-# timeout in ms of gremlin query
-scriptEvaluationTimeout: 30000
+# Gremlin查询中的超时时间（以毫秒为单位）
+evaluationTimeout: 30000
 
 channelizer: org.apache.tinkerpop.gremlin.server.channel.WsAndHttpChannelizer
+# 不要在此处设置图形，此功能将在支持动态添加图形后再进行处理
 graphs: {
-  hugegraph: conf/hugegraph.properties
 }
 scriptEngines: {
   gremlin-groovy: {
+    staticImports: [
+      org.opencypher.gremlin.process.traversal.CustomPredicates.*',
+      org.opencypher.gremlin.traversal.CustomFunctions.*
+    ],
     plugins: {
-      com.baidu.hugegraph.plugin.HugeGraphGremlinPlugin: {},
+      org.apache.hugegraph.plugin.HugeGraphGremlinPlugin: {},
       org.apache.tinkerpop.gremlin.server.jsr223.GremlinServerGremlinPlugin: {},
       org.apache.tinkerpop.gremlin.jsr223.ImportGremlinPlugin: {
         classImports: [
           java.lang.Math,
-          com.baidu.hugegraph.backend.id.IdGenerator,
-          com.baidu.hugegraph.type.define.Directions,
-          com.baidu.hugegraph.type.define.NodeRole,
-          com.baidu.hugegraph.traversal.algorithm.CustomizePathsTraverser,
-          com.baidu.hugegraph.traversal.algorithm.CustomizedCrosspointsTraverser,
-          com.baidu.hugegraph.traversal.algorithm.FusiformSimilarityTraverser,
-          com.baidu.hugegraph.traversal.algorithm.HugeTraverser,
-          com.baidu.hugegraph.traversal.algorithm.NeighborRankTraverser,
-          com.baidu.hugegraph.traversal.algorithm.PathsTraverser,
-          com.baidu.hugegraph.traversal.algorithm.PersonalRankTraverser,
-          com.baidu.hugegraph.traversal.algorithm.ShortestPathTraverser,
-          com.baidu.hugegraph.traversal.algorithm.SubGraphTraverser,
-          com.baidu.hugegraph.traversal.optimize.Text,
-          com.baidu.hugegraph.traversal.optimize.TraversalUtil,
-          com.baidu.hugegraph.util.DateUtil
+          org.apache.hugegraph.backend.id.IdGenerator,
+          org.apache.hugegraph.type.define.Directions,
+          org.apache.hugegraph.type.define.NodeRole,
+          org.apache.hugegraph.traversal.algorithm.CollectionPathsTraverser,
+          org.apache.hugegraph.traversal.algorithm.CountTraverser,
+          org.apache.hugegraph.traversal.algorithm.CustomizedCrosspointsTraverser,
+          org.apache.hugegraph.traversal.algorithm.CustomizePathsTraverser,
+          org.apache.hugegraph.traversal.algorithm.FusiformSimilarityTraverser,
+          org.apache.hugegraph.traversal.algorithm.HugeTraverser,
+          org.apache.hugegraph.traversal.algorithm.JaccardSimilarTraverser,
+          org.apache.hugegraph.traversal.algorithm.KneighborTraverser,
+          org.apache.hugegraph.traversal.algorithm.KoutTraverser,
+          org.apache.hugegraph.traversal.algorithm.MultiNodeShortestPathTraverser,
+          org.apache.hugegraph.traversal.algorithm.NeighborRankTraverser,
+          org.apache.hugegraph.traversal.algorithm.PathsTraverser,
+          org.apache.hugegraph.traversal.algorithm.PersonalRankTraverser,
+          org.apache.hugegraph.traversal.algorithm.SameNeighborTraverser,
+          org.apache.hugegraph.traversal.algorithm.ShortestPathTraverser,
+          org.apache.hugegraph.traversal.algorithm.SingleSourceShortestPathTraverser,
+          org.apache.hugegraph.traversal.algorithm.SubGraphTraverser,
+          org.apache.hugegraph.traversal.algorithm.TemplatePathsTraverser,
+          org.apache.hugegraph.traversal.algorithm.steps.EdgeStep,
+          org.apache.hugegraph.traversal.algorithm.steps.RepeatEdgeStep,
+          org.apache.hugegraph.traversal.algorithm.steps.WeightedEdgeStep,
+          org.apache.hugegraph.traversal.optimize.ConditionP,
+          org.apache.hugegraph.traversal.optimize.Text,
+          org.apache.hugegraph.traversal.optimize.TraversalUtil,
+          org.apache.hugegraph.util.DateUtil,
+          org.opencypher.gremlin.traversal.CustomFunctions,
+          org.opencypher.gremlin.traversal.CustomPredicate
         ],
-        methodImports: [java.lang.Math#*]
+        methodImports: [
+          java.lang.Math#*,
+          org.opencypher.gremlin.traversal.CustomPredicate#*,
+          org.opencypher.gremlin.traversal.CustomFunctions#*
+        ]
       },
       org.apache.tinkerpop.gremlin.jsr223.ScriptFileGremlinPlugin: {
         files: [scripts/empty-sample.groovy]
@@ -69,25 +92,25 @@ serializers:
   - { className: org.apache.tinkerpop.gremlin.driver.ser.GraphBinaryMessageSerializerV1,
       config: {
         serializeResultToString: false,
-        ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
+        ioRegistries: [org.apache.hugegraph.io.HugeGraphIoRegistry]
       }
   }
   - { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV1d0,
       config: {
         serializeResultToString: false,
-        ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
+        ioRegistries: [org.apache.hugegraph.io.HugeGraphIoRegistry]
       }
   }
   - { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV2d0,
       config: {
         serializeResultToString: false,
-        ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
+        ioRegistries: [org.apache.hugegraph.io.HugeGraphIoRegistry]
       }
   }
   - { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV3d0,
       config: {
         serializeResultToString: false,
-        ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
+        ioRegistries: [org.apache.hugegraph.io.HugeGraphIoRegistry]
       }
   }
 metrics: {
