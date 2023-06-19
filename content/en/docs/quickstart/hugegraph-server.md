@@ -323,7 +323,7 @@ Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 ```
 
-> for more other backend configurations, please refer to[introduction to configuration items](/docs/config/config-option)
+> for more other backend configurations, please refer to[introduction to configuration options](/docs/config/config-option)
 
 #### 5.6 MySQL
 
