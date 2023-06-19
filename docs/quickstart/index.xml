@@ -216,7 +216,7 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer...
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>http://127.0.0.1:8080/graphs&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>....OK
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>for more other backend configurations, please refer to&lt;a href="/docs/config/config-option">introduction to configuration items&lt;/a>&lt;/p>
+&lt;p>for more other backend configurations, please refer to&lt;a href="/docs/config/config-option">introduction to configuration options&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;h4 id="56-mysql">5.6 MySQL&lt;/h4>
 &lt;blockquote>

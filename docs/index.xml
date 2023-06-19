@@ -278,7 +278,7 @@
 &lt;p>Our system can have multiple graphs, and the backend of each graph can be different, such as &lt;code>hugegraph_rocksdb&lt;/code> and &lt;code>hugegraph_mysql&lt;/code>, where &lt;code>hugegraph_rocksdb&lt;/code> uses &lt;code>RocksDB&lt;/code> as the backend, and &lt;code>hugegraph_mysql&lt;/code> uses &lt;code>MySQL&lt;/code> as a backend.&lt;/p>
 &lt;p>The configuration method is simple:&lt;/p>
 &lt;p>&lt;strong>[Optional]: Modify &lt;code>rest-server.properties&lt;/code>&lt;/strong>&lt;/p>
-&lt;p>You can modify the graph profile directory in the &lt;code>graphs&lt;/code> field of &lt;code>rest-server.properties&lt;/code>. The default configuration is &lt;code>graphs=./conf/graphs&lt;/code>, if you want to change it to another directory then adjust the &lt;code>graphs&lt;/code> field, e.g. adjust it to &lt;code>graphs=/etc/hugegraph/graphs&lt;/code>, example is as follows:&lt;/p>
+&lt;p>You can modify the graph profile directory in the &lt;code>graphs&lt;/code> option of &lt;code>rest-server.properties&lt;/code>. The default configuration is &lt;code>graphs=./conf/graphs&lt;/code>, if you want to change it to another directory then adjust the &lt;code>graphs&lt;/code> option, e.g. adjust it to &lt;code>graphs=/etc/hugegraph/graphs&lt;/code>, example is as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>graphs=./conf/graphs
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Modify &lt;code>hugegraph_mysql_backend.properties&lt;/code> and &lt;code>hugegraph_rocksdb_backend.properties&lt;/code> based on &lt;code>hugegraph.properties&lt;/code> under &lt;code>conf/graphs&lt;/code> path&lt;/p>
 &lt;p>The modified part of &lt;code>hugegraph_mysql_backend.properties&lt;/code> is as follows:&lt;/p>
@@ -1608,7 +1608,7 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer...
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>http://127.0.0.1:8080/graphs&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>....OK
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>for more other backend configurations, please refer to&lt;a href="/docs/config/config-option">introduction to configuration items&lt;/a>&lt;/p>
+&lt;p>for more other backend configurations, please refer to&lt;a href="/docs/config/config-option">introduction to configuration options&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;h4 id="56-mysql">5.6 MySQL&lt;/h4>
 &lt;blockquote>
