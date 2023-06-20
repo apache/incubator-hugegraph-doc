@@ -20,7 +20,7 @@ Consider use Java 11 to run `HugeGraph-Server` (also compatible with Java 8 now)
 
 **Be sure to execute the `java -version` command to check the jdk version before reading**
 
-#### 2.2 Install GCC-4.3(GLIBCXX_3.4.10) or higher version (optional)
+#### 2.2 Install GCC-4.3 (GLIBCXX_3.4.10) or higher version (optional)
 
 If you are using the `RocksDB` backend, be sure to execute the `gcc --version` command to check its version; Not required if you are using other backends.
 
