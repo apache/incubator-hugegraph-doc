@@ -48,7 +48,7 @@ Next, open the `Run/Debug Configurations` panel in IntelliJ IDEA and create a ne
 
 - Select `hugegraph-dist` as the `Use classpath of module`.
 - Set the `Main class` to `org.apache.hugegraph.cmd.InitStore`.
-- Set the program arguments to `conf/graphs/hugegraph.properties`. Note that the path here is relative to the working directory, so make sure to set the working directory to `path-to-your-directory`.
+- Set the program arguments to `conf/rest-server.properties`. Note that the path here is relative to the working directory, so make sure to set the working directory to `path-to-your-directory`.
 
 Once the configuration is completed, run it. If the execution is successful, the following runtime logs will be displayed:
 

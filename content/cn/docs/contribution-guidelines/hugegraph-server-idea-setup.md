@@ -48,7 +48,7 @@ rocksdb.wal_path=.
 
 - 在 `Use classpath of module` 中选择 `hugegraph-dist`
 - 将 `Main class` 设置为 `org.apache.hugegraph.cmd.InitStore`
-- 设置运行参数为 `conf/graphs/hugegraph.properties`，这里的路径是相对于工作路径的，需要将工作路径设置为 `path-to-your-directory`
+- 设置运行参数为 `conf/rest-server.properties`，这里的路径是相对于工作路径的，需要将工作路径设置为 `path-to-your-directory`
 
 配置完成后运行，如果运行成功，将会输出以下类似运行日志：
 
