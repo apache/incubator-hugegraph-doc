@@ -251,7 +251,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#jdbc.password=
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#jdbc.reconnect_max_times=3
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#jdbc.reconnect_interval=3
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#jdbc.sslmode=false
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#jdbc.ssl_mode=false
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># postgresql &amp;amp; cockroachdb backend config
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#jdbc.driver=org.postgresql.Driver
@@ -9029,7 +9029,7 @@ HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
 &lt;ul>
 &lt;li>在 &lt;code>Use classpath of module&lt;/code> 中选择 &lt;code>hugegraph-dist&lt;/code>&lt;/li>
 &lt;li>将 &lt;code>Main class&lt;/code> 设置为 &lt;code>org.apache.hugegraph.cmd.InitStore&lt;/code>&lt;/li>
-&lt;li>设置运行参数为 &lt;code>conf/graphs/hugegraph.properties&lt;/code>，这里的路径是相对于工作路径的，需要将工作路径设置为 &lt;code>path-to-your-directory&lt;/code>&lt;/li>
+&lt;li>设置运行参数为 &lt;code>conf/rest-server.properties&lt;/code>，这里的路径是相对于工作路径的，需要将工作路径设置为 &lt;code>path-to-your-directory&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;p>配置完成后运行，如果运行成功，将会输出以下类似运行日志：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">2023&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">-&lt;/span>&lt;span style="color:#000">06&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">-&lt;/span>&lt;span style="color:#000">05&lt;/span> &lt;span style="color:#000">00&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000">43&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000">37&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>&lt;span style="color:#000">main&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>&lt;span style="color:#000">INFO&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#000">o&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">a&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">h&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">u&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">ConfigUtil&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">-&lt;/span> &lt;span style="color:#000">Scanning&lt;/span> &lt;span style="color:#000">option&lt;/span> &lt;span style="color:#a40000">&amp;#39;&lt;/span>&lt;span style="color:#000">graphs&lt;/span>&lt;span style="color:#a40000">&amp;#39;&lt;/span> &lt;span style="color:#000">directory&lt;/span> &lt;span style="color:#a40000">&amp;#39;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">./&lt;/span>&lt;span style="color:#000">conf&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">/&lt;/span>&lt;span style="color:#000">graphs&lt;/span>&lt;span style="color:#a40000">&amp;#39;&lt;/span>

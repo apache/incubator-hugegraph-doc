@@ -233,7 +233,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#jdbc.password=
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#jdbc.reconnect_max_times=3
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#jdbc.reconnect_interval=3
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#jdbc.sslmode=false
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#jdbc.ssl_mode=false
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># postgresql &amp;amp; cockroachdb backend config
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#jdbc.driver=org.postgresql.Driver
