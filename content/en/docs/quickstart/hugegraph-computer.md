@@ -36,8 +36,9 @@ There are two ways to get HugeGraph-Computer:
 Download the latest version of the HugeGraph-Computer release package:
 
 ```bash
-wget https://github.com/apache/hugegraph-computer/releases/download/v${version}/hugegraph-loader-${version}.tar.gz
-tar zxvf hugegraph-computer-${version}.tar.gz
+wget https://downloads.apache.org/incubator/hugegraph/${version}/apache-hugegraph-computer-incubating-${version}.tar.gz
+tar zxvf apache-hugegraph-computer-incubating-${version}.tar.gz
+mv apache-hugegraph-computer-incubating-${version} hugegraph-computer
 ```
 
 #### 2.2 Clone source code to compile and package
@@ -60,13 +61,13 @@ mvn clean package -DskipTests
 > You can use `-c`  parameter specify the configuration file, more computer config please see:[Computer Config Options](/docs/config/config-computer#computer-config-options)
 
 ```bash
-cd hugegraph-computer-${version}
+cd hugegraph-computer
 bin/start-computer.sh -d local -r master
 ```
 
 #### 2.4 Start worker node
 
-```
+```bash
 bin/start-computer.sh -d local -r worker
 ```
 

@@ -36,8 +36,9 @@ weight: 7
 下载最新版本的 HugeGraph-Computer release 包：
 
 ```bash
-wget https://github.com/apache/hugegraph-computer/releases/download/v${version}/hugegraph-loader-${version}.tar.gz
-tar zxvf hugegraph-computer-${version}.tar.gz
+wget https://downloads.apache.org/incubator/hugegraph/${version}/apache-hugegraph-computer-incubating-${version}.tar.gz
+tar zxvf apache-hugegraph-computer-incubating-${version}.tar.gz
+mv apache-hugegraph-computer-incubating-${version} hugegraph-computer
 ```
 
 #### 2.2 Clone source code to compile and package
@@ -60,13 +61,13 @@ mvn clean package -DskipTests
 > 您可以使用 `-c` 参数指定配置文件, 更多computer 配置请看: [Computer Config Options](/docs/config/config-computer#computer-config-options)
 
 ```bash
-cd hugegraph-computer-${version}
+cd hugegraph-computer
 bin/start-computer.sh -d local -r master
 ```
 
 #### 2.4 启动 worker 节点
 
-```
+```bash
 bin/start-computer.sh -d local -r worker
 ```
 
