@@ -37,8 +37,7 @@ Download the latest version of the HugeGraph-Computer release package:
 
 ```bash
 wget https://downloads.apache.org/incubator/hugegraph/${version}/apache-hugegraph-computer-incubating-${version}.tar.gz
-tar zxvf apache-hugegraph-computer-incubating-${version}.tar.gz
-mv apache-hugegraph-computer-incubating-${version} hugegraph-computer
+tar zxvf apache-hugegraph-computer-incubating-${version}.tar.gz -C hugegraph-computer
 ```
 
 #### 2.2 Clone source code to compile and package
