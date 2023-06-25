@@ -14,15 +14,11 @@ The Core Module is an implementation of the Tinkerpop interface; The Backend mod
 
 ### 2 Dependency for Building/Running
 
-#### 2.1 Install Java11 (JDK 11)
+#### 2.1 Install Java 11 (JDK 11)
 
 Consider use Java 11 to run `HugeGraph-Server` (also compatible with Java 8 now), and configure by yourself.
 
 **Be sure to execute the `java -version` command to check the jdk version before reading**
-
-#### 2.2 Install GCC-4.3(GLIBCXX_3.4.10) or higher version (optional)
-
-If you are using the `RocksDB` backend, be sure to execute the `gcc --version` command to check its version; Not required if you are using other backends.
 
 ### 3 Deploy
 

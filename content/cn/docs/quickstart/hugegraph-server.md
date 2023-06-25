@@ -16,20 +16,12 @@ Core 模块是 Tinkerpop 接口的实现，Backend 模块用于管理数据存�
 
 #### 2.1 安装 Java 11 (JDK 11)
 
-请优先考虑在 Java11 的环境上启动 `HugeGraph-Server`，目前同时保留对 Java8 的兼容
+请优先考虑在 Java 11 的环境上启动 `HugeGraph-Server`，目前同时保留对 Java 8 的兼容
 
 **在往下阅读之前务必执行 `java -version` 命令查看 jdk 版本**
 
 ```bash
 java -version
-```
-
-#### 2.2 安装 GCC-4.3.0 (GLIBCXX_3.4.10) 或更新版本（可选）
-
-如果使用的是 RocksDB 后端，请务必执行 `gcc --version` 命令查看 gcc 版本；若使用其他后端，则不需要。
-
-```bash
-gcc --version
 ```
 
 ### 3 部署
@@ -320,7 +312,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 下载 MySQL 的[驱动包](https://repo1.maven.org/maven2/mysql/mysql-connector-java/)，比如 `mysql-connector-java-8.0.30.jar`，并放入 HugeGraph-Server 的 `lib` 目录下。
 
-修改 `hugegraph.properties`，配置数据库URL，用户名和密码，`store` 是数据库名，如果没有会被自动创建。
+修改 `hugegraph.properties`，配置数据库 URL，用户名和密码，`store` 是数据库名，如果没有会被自动创建。
 
 ```properties
 backend=mysql
@@ -345,7 +337,7 @@ cd hugegraph-${version}
 bin/init-store.sh
 ```
 
-启动server
+启动 server
 
 ```bash
 bin/start-hugegraph.sh

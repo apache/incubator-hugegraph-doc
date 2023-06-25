@@ -114,16 +114,18 @@ To avoid maintaining two separate configuration files, you can modify the Log4j2
 
 ### Possible Issues
 
-#### java: package sun.misc does not exist
+#### 1. java: package sun.misc does not exist
 
 The reason may be that cross-compilation is triggered when using Java 11 to compile, causing the symbol of `sun.misc.Unsafe` used in the project to not be found. There are two possible solutions:
 
 1. In IntelliJ IDEA, go to `Preferences/Settings` and find the `Java Compiler` panel. Then, disable the `--release` option (recommended).
 2. Set the Project SDK to 8.
 
-#### Unable to Print Location Information (%l) in Log4j2
+#### 2. Unable to Print Location Information (%l) in Log4j2
 
 This is because Log4j2 uses asynchronous loggers. You can refer to the [official documentation](https://logging.apache.org/log4j/2.x/manual/layouts.html#LocationInformation) for configuration details.
+
+---
 
 ### References
 

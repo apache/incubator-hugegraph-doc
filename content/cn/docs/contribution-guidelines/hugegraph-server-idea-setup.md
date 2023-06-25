@@ -114,16 +114,18 @@ curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
 
 ### 可能遇到的问题
 
-#### java: package sun.misc does not exist
+#### 1. java: package sun.misc does not exist
 
 原因可能是在使用 Java 11 编译时触发了交叉编译，导致项目中使用的 `sun.misc.Unsafe` 找不到符号。有两种解决方案可供选择：
 
 1. 在 IntelliJ IDEA 的 `Preferences/Settings` 中找到 `Java Compiler` 面板，然后关闭 `--release` 选项 (推荐)
 2. 或者将项目的 SDK 版本设置为 8
 
-#### Log4j2 日志无法打印 %l 等位置信息
+#### 2. Log4j2 日志无法打印 %l 等位置信息
 
 这是因为 Log4j2 中使用了 asynchronous loggers，可以参考[官方文档](https://logging.apache.org/log4j/2.x/manual/layouts.html#LocationInformation)进行配置
+
+---
 
 ##### 参考
 
