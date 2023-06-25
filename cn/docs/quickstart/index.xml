@@ -7,12 +7,9 @@
 &lt;/blockquote>
 &lt;h3 id="2-依赖">2 依赖&lt;/h3>
 &lt;h4 id="21-安装-java-11-jdk-11">2.1 安装 Java 11 (JDK 11)&lt;/h4>
-&lt;p>请优先考虑在 Java11 的环境上启动 &lt;code>HugeGraph-Server&lt;/code>，目前同时保留对 Java8 的兼容&lt;/p>
+&lt;p>请优先考虑在 Java 11 的环境上启动 &lt;code>HugeGraph-Server&lt;/code>，目前同时保留对 Java 8 的兼容&lt;/p>
 &lt;p>&lt;strong>在往下阅读之前务必执行 &lt;code>java -version&lt;/code> 命令查看 jdk 版本&lt;/strong>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>java -version
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="22-安装-gcc-430-glibcxx_3410-或更新版本可选">2.2 安装 GCC-4.3.0 (GLIBCXX_3.4.10) 或更新版本（可选）&lt;/h4>
-&lt;p>如果使用的是 RocksDB 后端，请务必执行 &lt;code>gcc --version&lt;/code> 命令查看 gcc 版本；若使用其他后端，则不需要。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>gcc --version
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-部署">3 部署&lt;/h3>
 &lt;p>有三种方式可以部署 HugeGraph-Server 组件：&lt;/p>
 &lt;ul>
@@ -203,7 +200,7 @@
 &lt;p>由于 MySQL 是在 GPL 协议下，与 Apache 协议不兼容，用户需自行安装 MySQL，&lt;a href="https://dev.mysql.com/downloads/mysql/">下载地址&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;p>下载 MySQL 的&lt;a href="https://repo1.maven.org/maven2/mysql/mysql-connector-java/">驱动包&lt;/a>，比如 &lt;code>mysql-connector-java-8.0.30.jar&lt;/code>，并放入 HugeGraph-Server 的 &lt;code>lib&lt;/code> 目录下。&lt;/p>
-&lt;p>修改 &lt;code>hugegraph.properties&lt;/code>，配置数据库URL，用户名和密码，&lt;code>store&lt;/code> 是数据库名，如果没有会被自动创建。&lt;/p>
+&lt;p>修改 &lt;code>hugegraph.properties&lt;/code>，配置数据库 URL，用户名和密码，&lt;code>store&lt;/code> 是数据库名，如果没有会被自动创建。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=mysql
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=mysql
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -220,7 +217,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>初始化数据库（仅第一次启动时需要）&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动server&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动 server&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer...
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>http://127.0.0.1:8080/graphs&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>....OK

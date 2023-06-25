@@ -351,14 +351,15 @@
 &lt;li>设置 VM options 为 &lt;code>-Dlog4j.configurationFile=conf/log4j2.xml&lt;/code>&lt;/li>
 &lt;/ol>
 &lt;h3 id="可能遇到的问题">可能遇到的问题&lt;/h3>
-&lt;h4 id="java-package-sunmisc-does-not-exist">java: package sun.misc does not exist&lt;/h4>
+&lt;h4 id="1-java-package-sunmisc-does-not-exist">1. java: package sun.misc does not exist&lt;/h4>
 &lt;p>原因可能是在使用 Java 11 编译时触发了交叉编译，导致项目中使用的 &lt;code>sun.misc.Unsafe&lt;/code> 找不到符号。有两种解决方案可供选择：&lt;/p>
 &lt;ol>
 &lt;li>在 IntelliJ IDEA 的 &lt;code>Preferences/Settings&lt;/code> 中找到 &lt;code>Java Compiler&lt;/code> 面板，然后关闭 &lt;code>--release&lt;/code> 选项 (推荐)&lt;/li>
 &lt;li>或者将项目的 SDK 版本设置为 8&lt;/li>
 &lt;/ol>
-&lt;h4 id="log4j2-日志无法打印-l-等位置信息">Log4j2 日志无法打印 %l 等位置信息&lt;/h4>
+&lt;h4 id="2-log4j2-日志无法打印-l-等位置信息">2. Log4j2 日志无法打印 %l 等位置信息&lt;/h4>
 &lt;p>这是因为 Log4j2 中使用了 asynchronous loggers，可以参考&lt;a href="https://logging.apache.org/log4j/2.x/manual/layouts.html#LocationInformation">官方文档&lt;/a>进行配置&lt;/p>
+&lt;hr>
 &lt;h5 id="参考">参考&lt;/h5>
 &lt;ol>
 &lt;li>&lt;a href="/docs/quickstart/hugegraph-server/">HugeGraph-Server Quick Start&lt;/a>&lt;/li>

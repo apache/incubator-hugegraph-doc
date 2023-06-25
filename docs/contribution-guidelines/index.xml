@@ -349,14 +349,15 @@
 &lt;li>Set the VM options to &lt;code>-Dlog4j.configurationFile=conf/log4j2.xml&lt;/code>.&lt;/li>
 &lt;/ol>
 &lt;h3 id="possible-issues">Possible Issues&lt;/h3>
-&lt;h4 id="java-package-sunmisc-does-not-exist">java: package sun.misc does not exist&lt;/h4>
+&lt;h4 id="1-java-package-sunmisc-does-not-exist">1. java: package sun.misc does not exist&lt;/h4>
 &lt;p>The reason may be that cross-compilation is triggered when using Java 11 to compile, causing the symbol of &lt;code>sun.misc.Unsafe&lt;/code> used in the project to not be found. There are two possible solutions:&lt;/p>
 &lt;ol>
 &lt;li>In IntelliJ IDEA, go to &lt;code>Preferences/Settings&lt;/code> and find the &lt;code>Java Compiler&lt;/code> panel. Then, disable the &lt;code>--release&lt;/code> option (recommended).&lt;/li>
 &lt;li>Set the Project SDK to 8.&lt;/li>
 &lt;/ol>
-&lt;h4 id="unable-to-print-location-information-l-in-log4j2">Unable to Print Location Information (%l) in Log4j2&lt;/h4>
+&lt;h4 id="2-unable-to-print-location-information-l-in-log4j2">2. Unable to Print Location Information (%l) in Log4j2&lt;/h4>
 &lt;p>This is because Log4j2 uses asynchronous loggers. You can refer to the &lt;a href="https://logging.apache.org/log4j/2.x/manual/layouts.html#LocationInformation">official documentation&lt;/a> for configuration details.&lt;/p>
+&lt;hr>
 &lt;h3 id="references">References&lt;/h3>
 &lt;ol>
 &lt;li>&lt;a href="/docs/quickstart/hugegraph-server/">HugeGraph-Server Quick Start&lt;/a>&lt;/li>

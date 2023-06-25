@@ -1,21 +1,33 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HugeGraph – Documentation</title><link>/cn/docs/</link><description>Recent content in Documentation on HugeGraph</description><generator>Hugo -- gohugo.io</generator><atom:link href="/cn/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: HugeGraph Architecture Overview</title><link>/cn/docs/guides/architectural/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/guides/architectural/</guid><description>
 &lt;h3 id="1-概述">1 概述&lt;/h3>
-&lt;p>作为一款通用的图数据库产品，HugeGraph需具备图数据的基本功能，如下图所示。HugeGraph包括三个层次的功能，分别是存储层、计算层和用户接口层。 HugeGraph支持OLTP和OLAP两种图计算类型，其中OLTP实现了&lt;a href="https://tinkerpop.apache.org">Apache TinkerPop3&lt;/a>框架，并支持&lt;a href="https://tinkerpop.apache.org/gremlin.html">Gremlin&lt;/a>查询语言。 OLAP计算是基于SparkGraphX实现。&lt;/p>
+&lt;p>作为一款通用的图数据库产品，HugeGraph 需具备图数据库的基本功能。HugeGraph 支持 OLTP 和 OLAP 两种图计算类型，其中 OLTP 实现了 &lt;a href="https://tinkerpop.apache.org">Apache TinkerPop3&lt;/a> 框架，支持 &lt;a href="https://tinkerpop.apache.org/gremlin.html">Gremlin&lt;/a> 和 &lt;a href="https://en.wikipedia.org/wiki/Cypher">Cypher&lt;/a> 查询语言，拥有功能齐全的应用工具链，还提供了插件式后端存储驱动框架。&lt;/p>
+&lt;p>下面是 HugeGraph 的整体架构图：&lt;/p>
 &lt;div style="text-align: center;">
-&lt;img src="/docs/images/design/architectural-overview.png" alt="image">
+&lt;img src="/docs/images/design/architectural-revised.png" alt="image">
 &lt;/div>
-&lt;h3 id="2-组件">2 组件&lt;/h3>
-&lt;p>HugeGraph的主要功能分为HugeCore、ApiServer、HugeGraph-Client、HugeGraph-Loader和HugeGraph-Studio等组件构成，各组件之间的通信关系如下图所示。&lt;/p>
-&lt;div style="text-align: center;">
-&lt;img src="/docs/images/design/architectural-component.png" alt="image">
-&lt;/div>
+&lt;p>HugeGraph 包括三个层次的功能，分别是应用程序层、图引擎层和存储层。&lt;/p>
 &lt;ul>
-&lt;li>HugeCore ：HugeGraph的核心模块，TinkerPop的接口主要在该模块中实现。HugeCore的功能涵盖包括OLTP和OLAP两个部分。&lt;/li>
-&lt;li>ApiServer ：提供RESTFul Api接口，对外提供Graph Api、Schema Api和Gremlin Api等接口服务。&lt;/li>
-&lt;li>HugeGraph-Client：基于Java客户端驱动程序。HugeGraph-Client是Java版本客户端驱动程序，后续可根据需要提供Python、Go、C++等多语言支持。&lt;/li>
-&lt;li>HugeGraph-Loader：数据导入模块。HugeGraph-Loader可以扫描并分析现有数据，自动生成Graph Schema创建语言，通过批量方式快速导入数据。&lt;/li>
-&lt;li>HugeGraph-Studio：基于Web的可视化IDE环境。以Notebook方式记录Gremlin查询，可视化展示Graph的关联关系。HugeGraph-Studio也是本系统推荐的工具。&lt;/li>
-&lt;li>HugeGraph-Computer：HugeGraph-Computer是一个分布式图处理系统 (OLAP)。&lt;/li>
+&lt;li>应用程序层：
+&lt;ul>
+&lt;li>&lt;a href="/docs/quickstart/hugegraph-hubble/">Hubble&lt;/a>: 一站式可视化分析平台，平台涵盖了从数据建模，到数据快速导入，再到数据的在线、离线分析、以及图的统一管理的全过程，实现了图应用的全流程向导式操作。&lt;/li>
+&lt;li>&lt;a href="/docs/quickstart/hugegraph-loader/">Loader&lt;/a>: 数据导入组件，能够将多种数据源的数据转化为图的顶点和边并批量导入到图数据库中。&lt;/li>
+&lt;li>&lt;a href="/docs/quickstart/hugegraph-tools/">Tools&lt;/a>: 命令行工具，用于部署、管理和备份/恢复 HugeGraph 中的数据。&lt;/li>
+&lt;li>&lt;a href="/docs/quickstart/hugegraph-computer/">Computer&lt;/a>: 分布式图处理系统 (OLAP)，它是 &lt;a href="https://kowshik.github.io/JPregel/pregel_paper.pdf">Pregel&lt;/a> 的一个实现，可以运行在 Kubernetes 上。&lt;/li>
+&lt;li>&lt;a href="/docs/quickstart/hugegraph-client/">Client&lt;/a>: 使用 Java 编写的 HugeGraph 客户端，用户可以使用 Client 编写 Java 代码操作 HugeGraph，后续可根据需要提供 Python、Go、C++ 等多语言支持。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a href="/docs/quickstart/hugegraph-server/">图引擎层&lt;/a>：
+&lt;ul>
+&lt;li>REST Server: 提供 RESTful API 用于查询 Graph/Schema 等信息，支持 &lt;a href="https://tinkerpop.apache.org/gremlin.html">Gremlin&lt;/a> 和 &lt;a href="https://en.wikipedia.org/wiki/Cypher">Cypher&lt;/a> 查询语言，提供服务监控和运维的 APIs。&lt;/li>
+&lt;li>Graph Engine: 支持 OLTP 和 OLAP 两种图计算类型，其中 OLTP 实现了 &lt;a href="https://tinkerpop.apache.org">Apache TinkerPop3&lt;/a> 框架。&lt;/li>
+&lt;li>Backend Interface: 实现将图数据存储到后端。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>存储层：
+&lt;ul>
+&lt;li>Storage Backend: 支持多种内置存储后端 (RocksDB/MySQL/HBase/&amp;hellip;)，也允许用户无需更改现有源码的情况下扩展自定义后端。&lt;/li>
+&lt;/ul>
+&lt;/li>
 &lt;/ul></description></item><item><title>Docs: HugeGraph 配置</title><link>/cn/docs/config/config-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/config/config-guide/</guid><description>
 &lt;h3 id="1-概述">1 概述&lt;/h3>
 &lt;p>配置文件的目录为 hugegraph-release/conf，所有关于服务和图本身的配置都在此目录下。&lt;/p>
@@ -1309,12 +1321,9 @@
 &lt;/blockquote>
 &lt;h3 id="2-依赖">2 依赖&lt;/h3>
 &lt;h4 id="21-安装-java-11-jdk-11">2.1 安装 Java 11 (JDK 11)&lt;/h4>
-&lt;p>请优先考虑在 Java11 的环境上启动 &lt;code>HugeGraph-Server&lt;/code>，目前同时保留对 Java8 的兼容&lt;/p>
+&lt;p>请优先考虑在 Java 11 的环境上启动 &lt;code>HugeGraph-Server&lt;/code>，目前同时保留对 Java 8 的兼容&lt;/p>
 &lt;p>&lt;strong>在往下阅读之前务必执行 &lt;code>java -version&lt;/code> 命令查看 jdk 版本&lt;/strong>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>java -version
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="22-安装-gcc-430-glibcxx_3410-或更新版本可选">2.2 安装 GCC-4.3.0 (GLIBCXX_3.4.10) 或更新版本（可选）&lt;/h4>
-&lt;p>如果使用的是 RocksDB 后端，请务必执行 &lt;code>gcc --version&lt;/code> 命令查看 gcc 版本；若使用其他后端，则不需要。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>gcc --version
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-部署">3 部署&lt;/h3>
 &lt;p>有三种方式可以部署 HugeGraph-Server 组件：&lt;/p>
 &lt;ul>
@@ -1505,7 +1514,7 @@
 &lt;p>由于 MySQL 是在 GPL 协议下，与 Apache 协议不兼容，用户需自行安装 MySQL，&lt;a href="https://dev.mysql.com/downloads/mysql/">下载地址&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;p>下载 MySQL 的&lt;a href="https://repo1.maven.org/maven2/mysql/mysql-connector-java/">驱动包&lt;/a>，比如 &lt;code>mysql-connector-java-8.0.30.jar&lt;/code>，并放入 HugeGraph-Server 的 &lt;code>lib&lt;/code> 目录下。&lt;/p>
-&lt;p>修改 &lt;code>hugegraph.properties&lt;/code>，配置数据库URL，用户名和密码，&lt;code>store&lt;/code> 是数据库名，如果没有会被自动创建。&lt;/p>
+&lt;p>修改 &lt;code>hugegraph.properties&lt;/code>，配置数据库 URL，用户名和密码，&lt;code>store&lt;/code> 是数据库名，如果没有会被自动创建。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=mysql
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=mysql
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -1522,7 +1531,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>初始化数据库（仅第一次启动时需要）&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动server&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动 server&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer...
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>http://127.0.0.1:8080/graphs&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>....OK
@@ -9073,14 +9082,15 @@ HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
 &lt;li>设置 VM options 为 &lt;code>-Dlog4j.configurationFile=conf/log4j2.xml&lt;/code>&lt;/li>
 &lt;/ol>
 &lt;h3 id="可能遇到的问题">可能遇到的问题&lt;/h3>
-&lt;h4 id="java-package-sunmisc-does-not-exist">java: package sun.misc does not exist&lt;/h4>
+&lt;h4 id="1-java-package-sunmisc-does-not-exist">1. java: package sun.misc does not exist&lt;/h4>
 &lt;p>原因可能是在使用 Java 11 编译时触发了交叉编译，导致项目中使用的 &lt;code>sun.misc.Unsafe&lt;/code> 找不到符号。有两种解决方案可供选择：&lt;/p>
 &lt;ol>
 &lt;li>在 IntelliJ IDEA 的 &lt;code>Preferences/Settings&lt;/code> 中找到 &lt;code>Java Compiler&lt;/code> 面板，然后关闭 &lt;code>--release&lt;/code> 选项 (推荐)&lt;/li>
 &lt;li>或者将项目的 SDK 版本设置为 8&lt;/li>
 &lt;/ol>
-&lt;h4 id="log4j2-日志无法打印-l-等位置信息">Log4j2 日志无法打印 %l 等位置信息&lt;/h4>
+&lt;h4 id="2-log4j2-日志无法打印-l-等位置信息">2. Log4j2 日志无法打印 %l 等位置信息&lt;/h4>
 &lt;p>这是因为 Log4j2 中使用了 asynchronous loggers，可以参考&lt;a href="https://logging.apache.org/log4j/2.x/manual/layouts.html#LocationInformation">官方文档&lt;/a>进行配置&lt;/p>
+&lt;hr>
 &lt;h5 id="参考">参考&lt;/h5>
 &lt;ol>
 &lt;li>&lt;a href="/docs/quickstart/hugegraph-server/">HugeGraph-Server Quick Start&lt;/a>&lt;/li>

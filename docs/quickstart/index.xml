@@ -6,11 +6,9 @@
 &lt;p>There will be two spellings HugeGraph-Server and HugeGraphServer in the document, and other modules are similar. There is no big difference in the meaning of these two ways of writing, which can be distinguished as follows: &lt;code>HugeGraph-Server&lt;/code> represents the code of server-related components, &lt;code>HugeGraphServer&lt;/code> represents the service process.&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="2-dependency-for-buildingrunning">2 Dependency for Building/Running&lt;/h3>
-&lt;h4 id="21-install-java11-jdk-11">2.1 Install Java11 (JDK 11)&lt;/h4>
+&lt;h4 id="21-install-java-11-jdk-11">2.1 Install Java 11 (JDK 11)&lt;/h4>
 &lt;p>Consider use Java 11 to run &lt;code>HugeGraph-Server&lt;/code> (also compatible with Java 8 now), and configure by yourself.&lt;/p>
 &lt;p>&lt;strong>Be sure to execute the &lt;code>java -version&lt;/code> command to check the jdk version before reading&lt;/strong>&lt;/p>
-&lt;h4 id="22-install-gcc-43glibcxx_3410-or-higher-version-optional">2.2 Install GCC-4.3(GLIBCXX_3.4.10) or higher version (optional)&lt;/h4>
-&lt;p>If you are using the &lt;code>RocksDB&lt;/code> backend, be sure to execute the &lt;code>gcc --version&lt;/code> command to check its version; Not required if you are using other backends.&lt;/p>
 &lt;h3 id="3-deploy">3 Deploy&lt;/h3>
 &lt;p>There are three ways to deploy HugeGraph-Server components:&lt;/p>
 &lt;ul>
