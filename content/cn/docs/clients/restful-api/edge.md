@@ -6,7 +6,7 @@ weight: 8
 
 ### 2.2 Edge
 
-顶点 id 格式的修改也影响到了边的 Id 以及源顶点和目标顶点 id 的格式
+顶点 id 格式的修改也影响到了边的 id 以及源顶点和目标顶点 id 的格式
 
 EdgeId 是由 `src-vertex-id + direction + label + sort-values + tgt-vertex-id` 拼接而成，但是这里的顶点 id 类型不是通过引号区分的，而是根据前缀区分：
 
@@ -130,7 +130,7 @@ POST http://localhost:8080/graphs/hugegraph/graph/edges
 
 **请求参数说明：**
 
-- check_vertex：当设置为 true 而待插入边的源顶点或目标顶点不存在时会报错，默认为 true
+- check_vertex：是否检查顶点存在 (true | false)，当设置为 true 而待插入边的源顶点或目标顶点不存在时会报错，默认为 true
 
 **请求体说明：**
 
@@ -262,7 +262,7 @@ PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop?action
   - UNION/INTERSECTION：仅支持 set 类型
   - APPEND/ELIMINATE：仅支持 collection 类型
   - OVERRIDE
-- check_vertex：当设置为 true 而待插入边的源顶点或目标顶点不存在时会报错，默认为 true
+- check_vertex：是否检查顶点存在 (true | false)，当设置为 true 而待插入边的源顶点或目标顶点不存在时会报错，默认为 true
 - create_if_not_exist：目前只支持设定为 true
 
 ##### Method & Url
@@ -416,7 +416,7 @@ PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop?action
 - direction: 边的方向 (OUT | IN | BOTH)，默认为 BOTH
 - label: 边的标签
 - properties: 属性键值对 (根据属性查询的前提是预先建立了索引)
-- keep_start_p: 是否支持范围匹配，默认为 false
+- keep_start_p: 默认为 false，当设置为 true 后，不会自动转义范围匹配输入的表达式，例如此时 `properties={"age":"P.gt(0.8)"}` 会被理解为精确匹配，即 age 属性等于 "P.gt(0.8)"
 - offset：偏移，默认为 0
 - limit: 查询数目，默认为 100
 - page: 页号
@@ -438,12 +438,12 @@ PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop?action
 | P.textcontains(value)              | 属性值包含给定 value 的边 (string 类型)     |
 | P.contains(value)                  | 属性值包含给定 value 的边 (collection 类型) |
 
-**查询与顶点 person:marko(vertex_id="1:marko") 相连且 label 为 knows 的边**
+**查询与顶点 person:marko(vertex_id="1:marko") 相连且 label 为 knows 的且 date 属性等于 "20160111" 的边**
 
 ##### Method & Url
 
 ```
-GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?vertex_id="1:marko"&label=knows
+GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?vertex_id="1:marko"&label=knows&properties={"date":"P.within(\"20160111\")"}
 ```
 
 ##### Response Status
@@ -457,19 +457,6 @@ GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?vertex_id="1:marko"&label
 ```json
 {
     "edges": [
-        {
-            "id": "S1:marko>1>>S1:josh",
-            "label": "knows",
-            "type": "edge",
-            "outV": "1:marko",
-            "outVLabel": "person",
-            "inV": "1:josh",
-            "inVLabel": "person",
-            "properties": {
-                "weight": 1.5,
-                "date": "20130221"
-            }
-        },
         {
             "id": "S1:marko>1>>S1:vadas",
             "label": "knows",
@@ -580,7 +567,7 @@ GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page=EoYxOm1hcmtvgggCAIQy
 
 > 注：后端为 Cassandra 时，为了性能考虑，返回页恰好为最后一页时，返回 `page` 值可能非空，通过该 `page` 再请求下一页数据时则返回 `空数据` 及 `page = null`，其他情况类似
 
-#### 2.2.7 根据 Id 获取边
+#### 2.2.7 根据 id 获取边
 
 **路径参数说明：**
 
@@ -617,7 +604,7 @@ GET http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop
 }
 ```
 
-#### 2.2.8 根据 Id 删除边
+#### 2.2.8 根据 id 删除边
 
 ##### Params
 
@@ -630,7 +617,7 @@ GET http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop
 
 - label: 边的标签
 
-**仅根据 Id 删除边**
+**仅根据 id 删除边**
 
 ##### Method & Url
 
@@ -644,9 +631,9 @@ DELETE http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop
 204
 ```
 
-**根据 Label + Id 删除边**
+**根据 Label + id 删除边**
 
-通过指定 Label 参数和 Id 来删除边时，一般来说其性能比仅根据 Id 删除会更好
+通过指定 Label 参数和 id 来删除边时，一般来说其性能比仅根据 id 删除会更好
 
 ##### Method & Url
 
