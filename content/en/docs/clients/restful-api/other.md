@@ -6,7 +6,7 @@ weight: 16
 
 ### 10.1 Other
 
-#### 10.1.1 查看HugeGraph的版本信息
+#### 10.1.1 View Version Information of HugeGraph
 
 ##### Method & Url
 

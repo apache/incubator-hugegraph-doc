@@ -12,7 +12,7 @@ When the internal temporary release and packaging work is completed, other commu
 
 #### 1. prepare
 
-If there is no svn or gpg environment locally, it is recommended to install it first (windows recommend using WSL2 environment, or at least `git-bash`)
+If there is no svn or gpg or wget environment locally, it is recommended to install it first (windows recommend using WSL2 environment, or at least `git-bash`), also make sure to install java (recommended 11) and maven software
 ```bash
 # 1. install svn
 # ubuntu/debian
@@ -30,7 +30,13 @@ brew install gnupg
 # To verify that the installation was successful, execute the following command:
 gpg --version
 
-# 3. Download the hugegraph-svn directory (version number, pay attention to fill in the verification version, here we take 1.0.0 as an example)
+# 3. install wget (we will enhance it later, like use `curl`)
+# ubuntu/debian
+sudo apt-get install wget -y
+# MacOS
+brew install wget
+
+# 4. Download the hugegraph-svn directory (version number, pay attention to fill in the verification version, here we take 1.0.0 as an example)
 svn co https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/
 # (Note) If svn downloads a file very slowly, you can consider wget to download a single file, as follows (or consider using a proxy)
 wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
@@ -55,18 +61,25 @@ gpg --import KEYS
 
 # After importing, you can see the following output, which means that 3 user public keys have been imported
 gpg: /home/ubuntu/.gnupg/trustdb.gpg: trustdb created
-gpg: key B78B058CC255F6DC: public key "Imba Jin (apache mail) <jin@apache.org>" imported
+gpg: key BA7E78F8A81A885E: public key "imbajin (apache mail) <jin@apache.org>" imported
 gpg: key 818108E7924549CC: public key "vaughn <vaughn@apache.org>" imported
 gpg: key 28DCAED849C4180E: public key "coderzc (CODE SIGNING KEY) <zhaocong@apache.org>" imported
 gpg: Total number processed: 3
 gpg:               imported: 3
 
-# 2. Trust release users (here you need to trust 3 users, perform the same operation for Imba Jin, vaughn, coderzc in turn)
-gpg --edit-key Imba Jin # Take the first one as an example, enter the interactive mode
+# 2. Trust release users (trust n username mentioned in voting mail, if more than one user, just repeat the steps in turn or use the script below)
+gpg --edit-key $USER # input the username, enter the interactive mode
 gpg> trust
 ...output options..
-Your decision? 5 #select five
-Do you really want to set this key to ultimate trust? (y/N) y #slect y, then q quits trusting the next user
+Your decision? 5 # select 5
+Do you really want to set this key to ultimate trust? (y/N) y # slect y, then q quits trusting the next user
+
+# (Optional) You could also use the command to trust one user in non-interactive mode:
+echo -e "5\ny\n" | gpg --batch --command-fd 0 --edit-key $USER trust
+# Or use the script to auto import all public gpg keys (be carefully):
+for key in $(gpg --no-tty --list-keys --with-colons | awk -F: '/^pub/ {print $5}'); do
+  echo -e "5\ny\n" | gpg --batch --command-fd 0 --edit-key "$key" trust
+done
 
 
 # 3. Check the signature (make sure there is no Warning output, every source/binary file prompts Good Signature)
@@ -94,10 +107,9 @@ After decompressing `*hugegraph*src.tar.gz`, Do the following checks:
 1. folders with `incubating`, and no **empty** files/folders
 2. `LICENSE` + `NOTICE` + `DISCLAIM` file exists and the content is normal
 3. **does not exist** binaries (without LICENSE)
-4. The source code files all contain the standard `ASF License` header (this could be done with the Maven-MAT plugin)
+4. The source code files all contain the standard `ASF License` header (this could be done with the `Maven-MAT` plugin)
 5. Check whether the `pom.xml` version number of each parent/child module is consistent (and meet expectations)
-6. Check the first 3 to 5 commits, click to see if the modification is consistent with the source file
-7. Finally, make sure the source code works/compiles correctly
+6. Finally, make sure the source code works/compiles correctly
 
 ```bash
 # prefer to use/switch to java 11 for the following operations (compiling/running)

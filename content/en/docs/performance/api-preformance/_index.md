@@ -4,17 +4,16 @@ linkTitle: "HugeGraph-API Performance"
 weight: 2
 ---
 
-HugeGraph API性能测试主要测试HugeGraph-Server对RESTful API请求的并发处理能力，包括：
+The HugeGraph API performance test mainly tests HugeGraph-Server's ability to concurrently process RESTful API requests, including:
 
-- 顶点/边的单条插入
-- 顶点/边的批量插入
-- 顶点/边的查询
+- Single insertion of vertices/edges
+- Batch insertion of vertices/edges
+- Vertex/Edge Queries
 
-HugeGraph的每个发布版本的RESTful API的性能测试情况可以参考：
+For the performance test of the RESTful API of each release version of HugeGraph, please refer to:
 
 - [v0.5.6 stand-alone](/docs/performance/api-preformance/hugegraph-api-0.5.6-rocksdb/)
 - [v0.5.6 cluster](/docs/performance/api-preformance/hugegraph-api-0.5.6-cassandra/)
-- [v0.4.4](/docs/performance/api-preformance/hugegraph-api-0.4.4/)
-- [v0.2](/docs/performance/api-preformance/hugegraph-api-0.2/)
 
-> 之前的版本只提供HugeGraph所支持的后端种类中性能最好的API性能测试，从0.5.6版本开始，分别提供了单机和集群的性能情况
+> Updates coming soon, stay tuned!
+

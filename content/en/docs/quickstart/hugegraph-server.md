@@ -1,57 +1,51 @@
 ---
 title: "HugeGraph-Server Quick Start"
-linkTitle: "Install HugeGraph-Server"
+linkTitle: "Install/Build HugeGraph-Server"
 weight: 1
 ---
 
 ### 1 HugeGraph-Server Overview
 
-HugeGraph-Server is the core part of the HugeGraph Project, contains submodules such as Core、Backend、API.
+`HugeGraph-Server` is the core part of the HugeGraph Project, contains submodules such as Core, Backend, API.
 
-The Core Module is an implementation of the Tinkerpop interface; The Backend module is used to save the graph data to the data store, currently supported backends include：Memory、Cassandra、ScyllaDB、RocksDB; The API Module provides HTTP Server, which converts Client's HTTP request into a call to Core Module.
+The Core Module is an implementation of the Tinkerpop interface; The Backend module is used to save the graph data to the data store, currently supported backends include: Memory, Cassandra, ScyllaDB, RocksDB; The API Module provides HTTP Server, which converts Client's HTTP request into a call to Core Module.
 
 > There will be two spellings HugeGraph-Server and HugeGraphServer in the document, and other modules are similar. There is no big difference in the meaning of these two ways of writing, which can be distinguished as follows: `HugeGraph-Server` represents the code of server-related components, `HugeGraphServer` represents the service process.
 
-### 2 Dependency
+### 2 Dependency for Building/Running
 
-#### 2.1 Install Java11 (JDK 11)
+#### 2.1 Install Java 11 (JDK 11)
 
-Consider use Java 11 to run `HugeGraph-Server`(also compatible with Java 8), and configure by yourself.
+Consider use Java 11 to run `HugeGraph-Server` (also compatible with Java 8 now), and configure by yourself.
 
 **Be sure to execute the `java -version` command to check the jdk version before reading**
-
-```bash
-java -version
-```
-
-#### 2.2 Install GCC-4.3.0(GLIBCXX_3.4.10) or update version (optional)
-
-If you are using the RocksDB backend, be sure to execute the `gcc --version` command to check the gcc version; if you are using other backends, this is not required.
-
-```bash
-gcc --version
-```
 
 ### 3 Deploy
 
 There are three ways to deploy HugeGraph-Server components:
 
 - Method 1: One-click deployment
-- Method 2: Download the tarball
+- Method 2: Download the binary tarball (most recommended)
 - Method 3: Source code compilation
+- Method 4: Use Docker container
 
 #### 3.1 One-click deployment
 
-HugeGraph-Tools provides a command-line tool for one-click deployment, users can use this tool to quickly download、decompress、configure and start HugeGraphServer and HugeGraphStudio with one click.
-of course, you still have to download the tarball of HugeGraph-Tools first.
+`HugeGraph-Tools` provides a command-line tool for one-click deployment, users can use this tool to quickly download, decompress, configure and start `HugeGraphServer` and `HugeGraph-Hubble` with one click.
+
+Of course, you should download the tarball of `HugeGraph-Toolchain` first.
 
 ```bash
-wget https://github.com/hugegraph/hugegraph-tools/releases/download/v${version}/hugegraph-tools-${version}.tar.gz
-tar -zxvf hugegraph-tools-${version}.tar.gz
-cd hugegraph-tools-${version}
+# download toolchain binary package, it includes loader + tool + hubble
+# please check the latest version (e.g. here is 1.0.0)
+wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
+tar zxf *hugegraph-*.tar.gz
+
+# enter the tool's package
+cd *hugegraph*/*tool* 
 ```
 
-> note：${version} is the version, The latest version can refer to [Download Page](/docs/download/download), Or click the link to download directly from the Download page
+> note: `${version}` is the version, The latest version can refer to [Download Page](/docs/download/download), or click the link to download directly from the Download page
 
 The general entry script for HugeGraph-Tools is `bin/hugegraph`, Users can use the `help` command to view its usage, here only the commands for one-click deployment are introduced.
 
@@ -61,26 +55,44 @@ bin/hugegraph deploy -v {hugegraph-version} -p {install-path} [-u {download-path
 
 `{hugegraph-version}` indicates the version of HugeGraphServer and HugeGraphStudio to be deployed, users can view the `conf/version-mapping.yaml` file for version information, `{install-path}` specify the installation directory of HugeGraphServer and HugeGraphStudio, `{download-path-prefix}` optional, specify the download address of HugeGraphServer and HugeGraphStudio tarball, use default download URL if not provided, for example, to start HugeGraph-Server and HugeGraphStudio version 0.6, write the above command as `bin/hugegraph deploy -v 0.6 -p services`.
 
-#### 3.2 Download the tar tarball
+#### 3.2 Download the binary tar tarball
 
+You could download the binary tarball from the download page of ASF site like this:
 ```bash
-wget https://github.com/hugegraph/hugegraph/releases/download/v${version}/hugegraph-${version}.tar.gz
-tar -zxvf hugegraph-${version}.tar.gz
+# use the latest version, here is 1.0.0 for example
+wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz
+tar zxf *hugegraph*.tar.gz
+
+# (Optional) verify the integrity with SHA512 (recommended)
+shasum -a 512 apache-hugegraph-incubating-1.0.0.tar.gz
+curl https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz.sha512
 ```
 
 #### 3.3 Source code compilation
+Please ensure that the wget command is installed before compiling the source code
 
-Download HugeGraph source code
+We could get HugeGraph **source code** by 2 ways: (So as the other HugeGraph repos/modules)
+- download the stable/release version from the ASF site
+- clone the unstable/latest version by GitBox(ASF) or GitHub
 
 ```bash
-git clone https://github.com/hugegraph/hugegraph.git
+# Way 1. download release package from the ASF site
+wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-src-1.0.0.tar.gz
+tar zxf *hugegraph*.tar.gz
+
+# (Optional) verify the integrity with SHA512 (recommended)
+shasum -a 512 apache-hugegraph-incubating-src-1.0.0.tar.gz
+curl https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0-src.tar.gz.sha512
+
+# Way2 : clone the latest code by git way (e.g GitHub)
+git clone https://github.com/apache/hugegraph.git
 ```
 
 Compile and generate tarball
 
 ```bash
-cd hugegraph
-mvn package -DskipTests
+cd *hugegraph
+mvn package -DskipTests -ntp
 ```
 
 The execution log is as follows:
@@ -106,7 +118,11 @@ The execution log is as follows:
 ......
 ```
 
-After successful execution, hugegraph-*.tar.gz files will be generated in the hugegraph directory, which is the tarball generated by compilation.
+After successful execution, `*hugegraph-*.tar.gz` files will be generated in the hugegraph directory, which is the tarball generated by compilation.
+
+#### 3.4 Use Docker container
+
+You can refer to [Docker deployment guide](https://hub.docker.com/r/hugegraph/hugegraph).
 
 ### 4 Config
 
@@ -203,22 +219,22 @@ Initialize the database (required only on first startup)
 cd hugegraph-${version}
 bin/init-store.sh
 Initing HugeGraph Store...
-2017-12-01 11:26:51 1424  [main] [INFO ] com.baidu.hugegraph.HugeGraph [] - Opening backend store: 'cassandra'
-2017-12-01 11:26:52 2389  [main] [INFO ] com.baidu.hugegraph.backend.store.cassandra.CassandraStore [] - Failed to connect keyspace: hugegraph, try init keyspace later
-2017-12-01 11:26:52 2472  [main] [INFO ] com.baidu.hugegraph.backend.store.cassandra.CassandraStore [] - Failed to connect keyspace: hugegraph, try init keyspace later
-2017-12-01 11:26:52 2557  [main] [INFO ] com.baidu.hugegraph.backend.store.cassandra.CassandraStore [] - Failed to connect keyspace: hugegraph, try init keyspace later
-2017-12-01 11:26:53 2797  [main] [INFO ] com.baidu.hugegraph.backend.store.cassandra.CassandraStore [] - Store initialized: huge_graph
-2017-12-01 11:26:53 2945  [main] [INFO ] com.baidu.hugegraph.backend.store.cassandra.CassandraStore [] - Store initialized: huge_schema
-2017-12-01 11:26:53 3044  [main] [INFO ] com.baidu.hugegraph.backend.store.cassandra.CassandraStore [] - Store initialized: huge_index
-2017-12-01 11:26:53 3046  [pool-3-thread-1] [INFO ] com.baidu.hugegraph.backend.Transaction [] - Clear cache on event 'store.init'
-2017-12-01 11:26:59 9720  [main] [INFO ] com.baidu.hugegraph.HugeGraph [] - Opening backend store: 'cassandra'
-2017-12-01 11:27:00 9805  [main] [INFO ] com.baidu.hugegraph.backend.store.cassandra.CassandraStore [] - Failed to connect keyspace: hugegraph1, try init keyspace later
-2017-12-01 11:27:00 9886  [main] [INFO ] com.baidu.hugegraph.backend.store.cassandra.CassandraStore [] - Failed to connect keyspace: hugegraph1, try init keyspace later
-2017-12-01 11:27:00 9955  [main] [INFO ] com.baidu.hugegraph.backend.store.cassandra.CassandraStore [] - Failed to connect keyspace: hugegraph1, try init keyspace later
-2017-12-01 11:27:00 10175 [main] [INFO ] com.baidu.hugegraph.backend.store.cassandra.CassandraStore [] - Store initialized: huge_graph
-2017-12-01 11:27:00 10321 [main] [INFO ] com.baidu.hugegraph.backend.store.cassandra.CassandraStore [] - Store initialized: huge_schema
-2017-12-01 11:27:00 10413 [main] [INFO ] com.baidu.hugegraph.backend.store.cassandra.CassandraStore [] - Store initialized: huge_index
-2017-12-01 11:27:00 10413 [pool-3-thread-1] [INFO ] com.baidu.hugegraph.backend.Transaction [] - Clear cache on event 'store.init'
+2017-12-01 11:26:51 1424  [main] [INFO ] org.apache.hugegraph.HugeGraph [] - Opening backend store: 'cassandra'
+2017-12-01 11:26:52 2389  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Failed to connect keyspace: hugegraph, try init keyspace later
+2017-12-01 11:26:52 2472  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Failed to connect keyspace: hugegraph, try init keyspace later
+2017-12-01 11:26:52 2557  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Failed to connect keyspace: hugegraph, try init keyspace later
+2017-12-01 11:26:53 2797  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Store initialized: huge_graph
+2017-12-01 11:26:53 2945  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Store initialized: huge_schema
+2017-12-01 11:26:53 3044  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Store initialized: huge_index
+2017-12-01 11:26:53 3046  [pool-3-thread-1] [INFO ] org.apache.hugegraph.backend.Transaction [] - Clear cache on event 'store.init'
+2017-12-01 11:26:59 9720  [main] [INFO ] org.apache.hugegraph.HugeGraph [] - Opening backend store: 'cassandra'
+2017-12-01 11:27:00 9805  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Failed to connect keyspace: hugegraph1, try init keyspace later
+2017-12-01 11:27:00 9886  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Failed to connect keyspace: hugegraph1, try init keyspace later
+2017-12-01 11:27:00 9955  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Failed to connect keyspace: hugegraph1, try init keyspace later
+2017-12-01 11:27:00 10175 [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Store initialized: huge_graph
+2017-12-01 11:27:00 10321 [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Store initialized: huge_schema
+2017-12-01 11:27:00 10413 [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Store initialized: huge_index
+2017-12-01 11:27:00 10413 [pool-3-thread-1] [INFO ] org.apache.hugegraph.backend.Transaction [] - Clear cache on event 'store.init'
 ```
 
 Start server
@@ -303,7 +319,46 @@ Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 ```
 
-> for more other backend configurations, please refer to[introduction to configuration items](/docs/config/config-option)
+> for more other backend configurations, please refer to[introduction to configuration options](/docs/config/config-option)
+
+#### 5.6 MySQL
+
+> Due to MySQL is under GPL license, which is not compatible with Apache License indeed, Users need to install MySQL, [Download Link](https://dev.mysql.com/downloads/mysql/)
+
+Download MySQL's [driver package] (https://repo1.maven.org/maven2/mysql/mysql-connector-java/), such as `mysql-connector-java-8.0.30.jar`, and put it into HugeGraph- Server's `lib` directory.
+
+Modify `hugegraph.properties`, configure the database URL, username and password, `store` is the database name, if not, it will be created automatically.
+
+```properties
+backend=mysql
+serializer=mysql
+
+store=hugegraph
+
+# mysql backend config
+jdbc.driver=com.mysql.cj.jdbc.Driver
+jdbc.url=jdbc:mysql://127.0.0.1:3306
+jdbc.username=
+jdbc.password=
+jdbc.reconnect_max_times=3
+jdbc.reconnect_interval=3
+jdbc.ssl_mode=false
+```
+
+Initialize the database (required only on first startup)
+
+```bash
+cd hugegraph-${version}
+bin/init-store.sh
+```
+
+Start server
+
+```bash
+bin/start-hugegraph.sh
+Starting HugeGraphServer...
+Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
+```
 
 ### 6 Access server
 
@@ -356,7 +411,7 @@ _explanation_
     restserver.url=http://0.0.0.0:8080
     ```
 
-response body：
+response body:
 
 ```javasript
 {
@@ -410,7 +465,7 @@ response body：
 }
 ```
 
-For detailed API, please refer to[RESTful-API](/dcos/clients/restful-api)
+For detailed API, please refer to [RESTful-API](/docs/clients/restful-api)
 
 ### 7 Stop Server
 
@@ -418,3 +473,54 @@ For detailed API, please refer to[RESTful-API](/dcos/clients/restful-api)
 $cd hugegraph-${version}
 $bin/stop-hugegraph.sh
 ```
+
+### 8 Debug Server with IntelliJ IDEA
+
+Please refer to [Setup Server in IDEA](/docs/contribution-guidelines/hugegraph-server-idea-setup)
+
+### 9 Create Sample Graph on Server Startup
+
+Modify `conf/gremlin-server.yaml` and change `empty-sample.groovy` to `example.groovy`:
+
+```yaml
+org.apache.tinkerpop.gremlin.jsr223.ScriptFileGremlinPlugin: {
+    files: [scripts/example.groovy]
+}
+```
+
+Modify `scripts/example.groovy` as follows:
+
+```groovy
+conf = "conf/graphs/hugegraph.properties"
+graph = HugeFactory.open(conf)
+schema = graph.schema()
+```
+
+Afterwards, start the HugeGraph-Server using the script. If logs similar to the following are printed:
+
+```java
+2023-06-10 19:41:14 [main] [INFO] o.a.h.d.HugeGremlinServer [org.apache.hugegraph.dist.HugeGremlinServer.start(HugeGremlinServer.java:38)] - 3.5.1
+         \,,,/
+         (o o)
+-----oOOo-(3)-oOOo-----
+
+2023-06-10 19:41:14 [main] [INFO] o.a.h.u.ConfigUtil [org.apache.hugegraph.util.ConfigUtil.scanGraphsDir(ConfigUtil.java:88)] - Scanning option 'graphs' directory './conf/graphs'
+2023-06-10 19:41:14 [main] [INFO] o.a.h.d.HugeGremlinServer [org.apache.hugegraph.dist.HugeGremlinServer.start(HugeGremlinServer.java:52)] - Configuring Gremlin Server from /Users/dingyuchen/Desktop/hugegraph/apache-hugegraph-incubating-1.0.0/conf/gremlin-server.yaml
+>>>> query all vertices: size=6
+>>>> query all edges: size=6
+```
+
+And when using the RESTful API to request `HugeGraphServer`, you receive the following result:
+
+```javascript
+> curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   222  100   222    0     0   3163      0 --:--:-- --:--:-- --:--:--  3964
+{"vertices":[{"id":"2:lop","label":"software","type":"vertex","properties":{"name":"lop","lang":"java","price":328}},{"id":"1:josh","label":"person","type":"vertex","properties":{"name":"josh","age":32,"city":"Beijing"}},{"id":"1:marko","label":"person","type":"vertex","properties":{"name":"marko","age":29,"city":"Beijing"}},{"id":"1:peter","label":"person","type":"vertex","properties":{"name":"peter","age":35,"city":"Shanghai"}},{"id":"1:vadas","label":"person","type":"vertex","properties":{"name":"vadas","age":27,"city":"Hongkong"}},{"id":"2:ripple","label":"software","type":"vertex","properties":{"name":"ripple","lang":"java","price":199}}]}
+```
+
+indicating the successful creation of the sample graph.
+
+> The process of creating sample graph on server startup is similar when using IntelliJ IDEA and will not be described further.

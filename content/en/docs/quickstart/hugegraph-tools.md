@@ -20,11 +20,12 @@ There are two ways to get HugeGraph-Tools:
 Download the latest version of the HugeGraph-Toolchain package:
 
 ```bash
-wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
+wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
 tar zxf *hugegraph*.tar.gz
 ```
 
 #### 2.2 Clone source code to compile and install
+Please ensure that the wget command is installed before compiling the source code
 
 Download the latest version of the HugeGraph-Tools source package:
 
@@ -33,7 +34,7 @@ Download the latest version of the HugeGraph-Tools source package:
 git clone https://github.com/apache/hugegraph-toolchain.git
 
 # 2. get from direct  (e.g. here is 1.0.0, please choose the latest version)
-wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0-src.tar.gz
+wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0-src.tar.gz
 ```
 
 Compile and generate tar package:

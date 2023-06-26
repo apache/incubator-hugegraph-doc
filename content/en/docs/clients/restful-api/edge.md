@@ -6,30 +6,29 @@ weight: 8
 
 ### 2.2 Edge
 
-顶点 id 格式的修改也影响到了边的 Id 以及源顶点和目标顶点 id 的格式。
+The modification of the vertex ID format also affects the ID of the edge, as well as the formats of the source vertex and target vertex IDs.
 
-EdgeId是由 `src-vertex-id + direction + label + sort-values + tgt-vertex-id` 拼接而成，
-但是这里的顶点id类型不是通过引号区分的，而是根据前缀区分：
+The EdgeId is formed by concatenating `src-vertex-id + direction + label + sort-values + tgt-vertex-id`, but the vertex ID types are not distinguished by quotation marks here. Instead, they are distinguished by prefixes:
 
-- 当 id 类型为 number 时，EdgeId 的顶点 id 前有一个前缀`L` ，形如 "L123456>1>>L987654"
-- 当 id 类型为 string 时，EdgeId 的顶点 id 前有一个前缀`S` ，形如 "S1:peter>1>>S2:lop"
+- When the ID type is number, the vertex ID in the EdgeId has a prefix `L`, like "L123456>1>>L987654".
+- When the ID type is string, the vertex ID in the EdgeId has a prefix `S`, like "S1:peter>1>>S2:lop".
 
 --------------------------------------------------------------------------------
 
-接下来的示例均假设已经创建好了前述的各种schema和vertex信息
+The following examples assume that various schemas and vertex information mentioned above have been created.
 
-#### 2.2.1 创建一条边
+#### 2.2.1 Creating an Edge
 
-Params说明
+Params Explanation
 
-- label：边类型名称，必填
-- outV：源顶点id，必填
-- inV：目标顶点id，必填
-- outVLabel：源顶点类型。必填
-- inVLabel：目标顶点类型。必填
-- properties: 边关联的属性，对象内部结构为：
-  1. name：属性名称
-  2. value：属性值
+- label: The name of the edge type, required.
+- outV: The ID of the source vertex, required.
+- inV: The ID of the target vertex, required.
+- outVLabel: The type of the source vertex, required.
+- inVLabel: The type of the target vertex, required.
+- properties: The properties associated with the edge. The internal structure of the object is as follows:
+  1. name: The name of the property.
+  2. value: The value of the property.
 
 
 ##### Method & Url
@@ -78,11 +77,11 @@ POST http://localhost:8080/graphs/hugegraph/graph/edges
 }
 ```
 
-#### 2.2.2 创建多条边
+#### 2.2.2 Creating Multiple Edges
 
 ##### Params
 
-- check_vertex: 是否检查顶点存在(true | false)，当设置为 true 而待插入边的源顶点或目标顶点不存在时会报错。
+- check_vertex: Whether to check vertex existence (true | false). When set to true and the source or target vertex of the edge being inserted does not exist, an error will be reported.
 
 ##### Method & Url
 
@@ -134,7 +133,7 @@ POST http://localhost:8080/graphs/hugegraph/graph/edges/batch
 ]
 ```
 
-#### 2.2.3 更新边属性
+#### 2.2.3 Updating Edge Properties
 
 ##### Method & Url
 
@@ -152,7 +151,7 @@ PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action
 }
 ```
 
-> 注意：属性的取值是有三种类别的，分别是single、set和list。如果是single，表示增加或更新属性值；如果是set或list，则表示追加属性值。
+> Note: There are three categories of property values: single, set, and list. If it is single, it means adding or updating the property value. If it is set or list, it means appending the property value.
 
 ##### Response Status
 
@@ -178,13 +177,13 @@ PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action
 }
 ```
 
-#### 2.2.4 批量更新边属性
+#### 2.2.4 Batch Updating Edge Properties
 
-##### 功能说明
+##### Function Description
 
-与批量更新顶点属性类似
+Similar to batch updating vertex properties.
 
-假设原边及属性为：
+Assuming the original edge and its properties are:
 
 ```json
 {
@@ -305,7 +304,7 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/edges/batch
 }
 ```
 
-#### 2.2.5 删除边属性
+#### 2.2.5 Deleting Edge Properties
 
 ##### Method & Url
 
@@ -323,7 +322,7 @@ PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action
 }
 ```
 
-> 注意：这里会直接删除属性（删除key和所有value），无论其属性的取值是single、set或list。
+> Note: This will directly delete the properties (removing the key and all values), regardless of whether the property values are single, set, or list.
 
 ##### Response Status
 
@@ -348,42 +347,41 @@ PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action
 }
 ```
 
-#### 2.2.6 获取符合条件的边
+#### 2.2.6 Fetching Edges that Match the Criteria
 
 ##### Params
 
-- vertex_id: 顶点id
-- direction: 边的方向(OUT | IN | BOTH)
-- label: 边的标签
-- properties: 属性键值对(根据属性查询的前提是预先建立了索引)
-- offset：偏移，默认为0
-- limit: 查询数目，默认为100
-- page: 页号
+- vertex_id: Vertex ID
+- direction: Direction of the edge (OUT | IN | BOTH)
+- label: Edge label
+- properties: Key-value pairs of properties (previously indexed for property-based queries)
+- offset: Offset, default is 0
+- limit: Number of results to query, default is 100
+- page: Page number
 
-支持的查询有以下几种：
+The supported query options are as follows:
 
-- 提供vertex_id参数时，不可以使用参数page，direction、label、properties可选，offset和limit可以
-限制结果范围
-- 不提供vertex_id参数时，label和properties可选
-    - 如果使用page参数，则：offset参数不可用（不填或者为0），direction不可用，properties最多只能有一个
-    - 如果不使用page参数，则：offset和limit可以用来限制结果范围，direction参数忽略
+- When the vertex_id parameter is provided, the page parameter cannot be used. The direction, label, and properties parameters are optional, while offset and limit can be used to restrict the result range.
+- When the vertex_id parameter is not provided, the label and properties parameters are optional.
+    - If the page parameter is used: the offset parameter is not available (either not provided or set to 0), the direction parameter is not available, and at most one property can be specified.
+    - If the page parameter is not used: the offset and limit parameters can be used to restrict the result range, and the direction parameter is ignored.
 
-属性键值对由JSON格式的属性名称和属性值组成，允许多个属性键值对作为查询条件，属性值支持精确匹配、范围匹配和模糊匹配，精确匹配时形如`properties={"weight":0.8}`，范围匹配时形如`properties={"age":"P.gt(0.8)"}`，模糊匹配时形如`properties={"city": "P.textcontains("ChengDu China")}`，范围匹配支持的表达式如下：
+Property key-value pairs consist of the attribute name and attribute value in JSON format. Multiple property key-value pairs are allowed as query conditions. The attribute value supports exact matching, range matching, and fuzzy matching. For exact matching, it is in the form `properties={"weight": 0.8}`. For range matching, it is in the form `properties={"age": "P.gt(0.8)"}`. For fuzzy matching, it is in the form `properties={"city": "P.textcontains("ChengDu China")}`. The supported expressions for range matching are as follows:
 
-| 表达式                                | 说明                         |
-|------------------------------------|----------------------------|
-| P.eq(number)                       | 属性值等于number的边              |
-| P.neq(number)                      | 属性值不等于number的边             |
-| P.lt(number)                       | 属性值小于number的边              |
-| P.lte(number)                      | 属性值小于等于number的边            |
-| P.gt(number)                       | 属性值大于number的边              |
-| P.gte(number)                      | 属性值大于等于number的边            |
-| P.between(number1,number2)         | 属性值大于等于number1且小于number2的边 |
-| P.inside(number1,number2)          | 属性值大于number1且小于number2的边   |
-| P.outside(number1,number2)         | 属性值小于number1且大于number2的边   |
-| P.within(value1,value2,value3,...) | 属性值等于任何一个给定value的边         |
+| Expression                            | Description                          |
+| ------------------------------------ | ------------------------------------ |
+| P.eq(number)                         | Edges with attribute value equal to `number`              |
+| P.neq(number)                        | Edges with attribute value not equal to `number`             |
+| P.lt(number)                         | Edges with attribute value less than `number`              |
+| P.lte(number)                        | Edges with attribute value less than or equal to `number`            |
+| P.gt(number)                         | Edges with attribute value greater than `number`              |
+| P.gte(number)                        | Edges with attribute value greater than or equal to `number`            |
+| P.between(number1, number2)          | Edges with attribute value greater than or equal to `number1` and less than `number2` |
+| P.inside(number1, number2)           | Edges with attribute value greater than `number1` and less than `number2`   |
+| P.outside(number1, number2)          | Edges with attribute value less than `number1` and greater than `number2`   |
+| P.within(value1, value2, value3, ...) | Edges with attribute value equal to any of the given `values`         |
 
-**查询与顶点 person:josh(vertex_id="1:josh") 相连且 label 为 created 的边**
+**Query for edges connected to vertex person:josh (vertex_id="1:josh") with label created**
 
 ##### Method & Url
 
@@ -432,7 +430,7 @@ GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?vertex_id="1:josh"&direct
 }
 ```
 
-**分页查询所有边，获取第一页（page不带参数值），限定3条**
+**Paginated query for all edges, fetching the first page (page without a parameter value), limited to 3 records**
 
 ##### Method & Url
 
@@ -494,10 +492,9 @@ GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page&limit=3
 }
 ```
 
-返回的body里面是带有下一页的页号信息的，`"page": "002500100753313a6a6f73681210010004000000020953323a726970706c65f07ffffffcf07ffffffd8460d63f4b398dd2721ed4fdb7716b420004"`，
-在查询下一页的时候将该值赋给page参数。
+The returned body contains the information of the next page, `"page": "002500100753313a6a6f73681210010004000000020953323a726970706c65f07ffffffcf07ffffffd8460d63f4b398dd2721ed4fdb7716b420004"`. When querying the next page, assign this value to the page parameter.
 
-**分页查询所有边，获取下一页（page带上上一页返回的page值），限定3条**
+**Paginated query for all edges, fetching the next page (page with the value returned from the previous page), limited to 3 records**
 
 ##### Method & Url
 
@@ -559,9 +556,9 @@ GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page=002500100753313a6a6f
 }
 ```
 
-此时`"page": null`表示已经没有下一页了 (注: 后端为 Cassandra 时，为了性能考虑，返回页恰好为最后一页时，返回 `page` 值可能非空，通过该 `page` 再请求下一页数据时则返回 `空数据` 及 `page = null`，其他情况类似)
+When `"page": null` is returned, it indicates that there are no more pages available. (Note: When the backend is Cassandra, for performance considerations, if the returned page happens to be the last page, the `page` value may not be empty. When requesting the next page data using that `page` value, it will return `empty data` and `page = null`. Similar situations apply for other cases.)
 
-#### 2.2.7 根据Id获取边
+#### 2.2.7 Fetching Edge by ID
 
 ##### Method & Url
 
@@ -593,13 +590,13 @@ GET http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
 }
 ```
 
-#### 2.2.8 根据Id删除边
+#### 2.2.8 Deleting Edge by ID
 
 ##### Params
 
-- label: 边类型，可选参数
+- label: Edge type, optional parameter
 
-**仅根据Id删除边**
+**Deleting Edge by ID only**
 
 ##### Method & Url
 
@@ -613,9 +610,9 @@ DELETE http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
 204
 ```
 
-**根据Label+Id删除边**
+**Deleting Edge by Label+ID**
 
-通过指定Label参数和Id来删除边时，一般来说其性能比仅根据Id删除会更好。
+In general, specifying the Label parameter along with the ID to delete an edge will provide better performance compared to deleting by ID only.
 
 ##### Method & Url
 

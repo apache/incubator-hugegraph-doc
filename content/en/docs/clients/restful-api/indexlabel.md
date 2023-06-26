@@ -6,9 +6,9 @@ weight: 5
 
 ### 1.5 IndexLabel
 
-假设已经创建好了1.1.3中的 PropertyKeys 、1.2.3中的 VertexLabels 以及 1.3.3中的 EdgeLabels
+Assuming PropertyKeys from version 1.1.3, VertexLabels from version 1.2.3, and EdgeLabels from version 1.3.3 have already been created.
 
-#### 1.5.1 创建一个IndexLabel
+#### 1.5.1 Create an IndexLabel
 
 ##### Method & Url
 
@@ -54,7 +54,7 @@ POST http://localhost:8080/graphs/hugegraph/schema/indexlabels
 }
 ```
 
-#### 1.5.2 获取所有的IndexLabel
+#### 1.5.2 Get all IndexLabels
 
 ##### Method & Url
 
@@ -118,7 +118,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/indexlabels
 }
 ```
 
-#### 1.5.3 根据name获取IndexLabel
+#### 1.5.3 Get IndexLabel by name
 
 ##### Method & Url
 
@@ -147,9 +147,9 @@ GET http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
 }
 ```
 
-#### 1.5.4 根据name删除IndexLabel
+#### 1.5.4 Delete IndexLabel by name
 
-删除 IndexLabel 会导致删除相关的索引数据，会产生一个异步任务
+Deleting an IndexLabel will result in the deletion of related index data. This operation will generate an asynchronous task.
 
 ##### Method & Url
 
@@ -171,6 +171,6 @@ DELETE http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
 }
 ```
 
-注：
+Note:
 
-> 可以通过`GET http://localhost:8080/graphs/hugegraph/tasks/1`（其中"1"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](../task)
+> You can query the execution status of an asynchronous task by using `GET http://localhost:8080/graphs/hugegraph/tasks/1` (where "1" is the task_id). For more information, refer to the [Asynchronous Task RESTful API](../task).

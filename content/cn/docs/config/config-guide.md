@@ -26,38 +26,61 @@ gremlin-server.yaml 文件默认的内容如下：
 #host: 127.0.0.1
 #port: 8182
 
-# timeout in ms of gremlin query
-scriptEvaluationTimeout: 30000
+# Gremlin查询中的超时时间（以毫秒为单位）
+evaluationTimeout: 30000
 
 channelizer: org.apache.tinkerpop.gremlin.server.channel.WsAndHttpChannelizer
+# 不要在此处设置图形，此功能将在支持动态添加图形后再进行处理
 graphs: {
-  hugegraph: conf/hugegraph.properties
 }
 scriptEngines: {
   gremlin-groovy: {
+    staticImports: [
+      org.opencypher.gremlin.process.traversal.CustomPredicates.*',
+      org.opencypher.gremlin.traversal.CustomFunctions.*
+    ],
     plugins: {
-      com.baidu.hugegraph.plugin.HugeGraphGremlinPlugin: {},
+      org.apache.hugegraph.plugin.HugeGraphGremlinPlugin: {},
       org.apache.tinkerpop.gremlin.server.jsr223.GremlinServerGremlinPlugin: {},
       org.apache.tinkerpop.gremlin.jsr223.ImportGremlinPlugin: {
         classImports: [
           java.lang.Math,
-          com.baidu.hugegraph.backend.id.IdGenerator,
-          com.baidu.hugegraph.type.define.Directions,
-          com.baidu.hugegraph.type.define.NodeRole,
-          com.baidu.hugegraph.traversal.algorithm.CustomizePathsTraverser,
-          com.baidu.hugegraph.traversal.algorithm.CustomizedCrosspointsTraverser,
-          com.baidu.hugegraph.traversal.algorithm.FusiformSimilarityTraverser,
-          com.baidu.hugegraph.traversal.algorithm.HugeTraverser,
-          com.baidu.hugegraph.traversal.algorithm.NeighborRankTraverser,
-          com.baidu.hugegraph.traversal.algorithm.PathsTraverser,
-          com.baidu.hugegraph.traversal.algorithm.PersonalRankTraverser,
-          com.baidu.hugegraph.traversal.algorithm.ShortestPathTraverser,
-          com.baidu.hugegraph.traversal.algorithm.SubGraphTraverser,
-          com.baidu.hugegraph.traversal.optimize.Text,
-          com.baidu.hugegraph.traversal.optimize.TraversalUtil,
-          com.baidu.hugegraph.util.DateUtil
+          org.apache.hugegraph.backend.id.IdGenerator,
+          org.apache.hugegraph.type.define.Directions,
+          org.apache.hugegraph.type.define.NodeRole,
+          org.apache.hugegraph.traversal.algorithm.CollectionPathsTraverser,
+          org.apache.hugegraph.traversal.algorithm.CountTraverser,
+          org.apache.hugegraph.traversal.algorithm.CustomizedCrosspointsTraverser,
+          org.apache.hugegraph.traversal.algorithm.CustomizePathsTraverser,
+          org.apache.hugegraph.traversal.algorithm.FusiformSimilarityTraverser,
+          org.apache.hugegraph.traversal.algorithm.HugeTraverser,
+          org.apache.hugegraph.traversal.algorithm.JaccardSimilarTraverser,
+          org.apache.hugegraph.traversal.algorithm.KneighborTraverser,
+          org.apache.hugegraph.traversal.algorithm.KoutTraverser,
+          org.apache.hugegraph.traversal.algorithm.MultiNodeShortestPathTraverser,
+          org.apache.hugegraph.traversal.algorithm.NeighborRankTraverser,
+          org.apache.hugegraph.traversal.algorithm.PathsTraverser,
+          org.apache.hugegraph.traversal.algorithm.PersonalRankTraverser,
+          org.apache.hugegraph.traversal.algorithm.SameNeighborTraverser,
+          org.apache.hugegraph.traversal.algorithm.ShortestPathTraverser,
+          org.apache.hugegraph.traversal.algorithm.SingleSourceShortestPathTraverser,
+          org.apache.hugegraph.traversal.algorithm.SubGraphTraverser,
+          org.apache.hugegraph.traversal.algorithm.TemplatePathsTraverser,
+          org.apache.hugegraph.traversal.algorithm.steps.EdgeStep,
+          org.apache.hugegraph.traversal.algorithm.steps.RepeatEdgeStep,
+          org.apache.hugegraph.traversal.algorithm.steps.WeightedEdgeStep,
+          org.apache.hugegraph.traversal.optimize.ConditionP,
+          org.apache.hugegraph.traversal.optimize.Text,
+          org.apache.hugegraph.traversal.optimize.TraversalUtil,
+          org.apache.hugegraph.util.DateUtil,
+          org.opencypher.gremlin.traversal.CustomFunctions,
+          org.opencypher.gremlin.traversal.CustomPredicate
         ],
-        methodImports: [java.lang.Math#*]
+        methodImports: [
+          java.lang.Math#*,
+          org.opencypher.gremlin.traversal.CustomPredicate#*,
+          org.opencypher.gremlin.traversal.CustomFunctions#*
+        ]
       },
       org.apache.tinkerpop.gremlin.jsr223.ScriptFileGremlinPlugin: {
         files: [scripts/empty-sample.groovy]
@@ -69,25 +92,25 @@ serializers:
   - { className: org.apache.tinkerpop.gremlin.driver.ser.GraphBinaryMessageSerializerV1,
       config: {
         serializeResultToString: false,
-        ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
+        ioRegistries: [org.apache.hugegraph.io.HugeGraphIoRegistry]
       }
   }
   - { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV1d0,
       config: {
         serializeResultToString: false,
-        ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
+        ioRegistries: [org.apache.hugegraph.io.HugeGraphIoRegistry]
       }
   }
   - { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV2d0,
       config: {
         serializeResultToString: false,
-        ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
+        ioRegistries: [org.apache.hugegraph.io.HugeGraphIoRegistry]
       }
   }
   - { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV3d0,
       config: {
         serializeResultToString: false,
-        ioRegistries: [com.baidu.hugegraph.io.HugeGraphIoRegistry]
+        ioRegistries: [org.apache.hugegraph.io.HugeGraphIoRegistry]
       }
   }
 metrics: {
@@ -199,6 +222,7 @@ raft.rpc_threads=80
 raft.rpc_connect_timeout=5000
 raft.rpc_timeout=60000
 
+# if use 'ikanalyzer', need download jar from 'https://github.com/apache/hugegraph-doc/raw/ik_binary/dist/server/ikanalyzer-2012_u6.jar' to lib directory
 search.text_analyzer=jieba
 search.text_analyzer_mode=INDEX
 
@@ -229,7 +253,7 @@ cassandra.password=
 #jdbc.password=
 #jdbc.reconnect_max_times=3
 #jdbc.reconnect_interval=3
-#jdbc.sslmode=false
+#jdbc.ssl_mode=false
 
 # postgresql & cockroachdb backend config
 #jdbc.driver=org.postgresql.Driver
@@ -247,7 +271,7 @@ cassandra.password=
 重点关注未注释的几项：
 
 - gremlin.graph：GremlinServer 的启动入口，用户不要修改此项；
-- backend：使用的后端存储，可选值有 memory、cassandra、scylladb 和 rocksdb；
+- backend：使用的后端存储，可选值有 memory、cassandra、scylladb、mysql、hbase、postgresql 和 rocksdb；
 - serializer：主要为内部使用，用于将 schema、vertex 和 edge 序列化到后端，对应的可选值为 text、cassandra、scylladb 和 binary；(注：rocksdb后端值需是binary，其他后端backend与serializer值需保持一致，如hbase后端该值为hbase)
 - store：图存储到后端使用的数据库名，在 cassandra 和 scylladb 中就是 keyspace 名，此项的值与 GremlinServer 和 RestServer 中的图名并无关系，但是出于直观考虑，建议仍然使用相同的名字；
 - cassandra.host：backend 为 cassandra 或 scylladb 时此项才有意义，cassandra/scylladb 集群的 seeds；
@@ -258,46 +282,97 @@ cassandra.password=
 
 ### 5 多图配置
 
-我们的系统是可以存在多个图的，并且各个图的后端可以不一样，比如图 hugegraph 和 hugegraph1，其中 hugegraph 以 cassandra 作为后端，hugegraph1 以 rocksdb作为后端。
+我们的系统是可以存在多个图的，并且各个图的后端可以不一样，比如图 `hugegraph_rocksdb` 和 `hugegraph_mysql`，其中 `hugegraph_rocksdb` 以 `RocksDB` 作为后端，`hugegraph_mysql` 以 `MySQL` 作为后端。
 
 配置方法也很简单：
 
-**修改 gremlin-server.yaml**
+**[可选]：修改 rest-server.properties**
 
-在 gremlin-server.yaml 的 graphs 域中添加一个键值对，键为图的名字，值为图的配置文件路径，比如：
-
-```yaml
-graphs: {
-  hugegraph: conf/hugegraph.properties,
-  hugegraph1: conf/hugegraph1.properties
-}
-```
-
-**修改 rest-server.properties**
-
-在 rest-server.properties 的 graphs 域中添加一个键值对，键为图的名字，值为图的配置文件路径，比如：
+通过修改 `rest-server.properties` 中的 `graphs` 配置项来设置图的配置文件目录。默认配置为 `graphs=./conf/graphs`，如果想要修改为其它目录则调整 `graphs` 配置项，比如调整为 `graphs=/etc/hugegraph/graphs`，示例如下：
 
 ```properties
-graphs=[hugegraph:conf/hugegraph.properties, hugegraph1:conf/hugegraph1.properties]
+graphs=./conf/graphs
 ```
 
-**添加 hugegraph1.properties**
+在 `conf/graphs` 路径下基于 `hugegraph.properties` 修改得到 `hugegraph_mysql_backend.properties` 和 `hugegraph_rocksdb_backend.properties`
 
-拷贝 hugegraph.properties，命名为 hugegraph1.properties，修改图对应的数据库名以及关于后端部分的参数，比如：
+`hugegraph_mysql_backend.properties` 修改的部分如下：
 
 ```properties
-store=hugegraph1
+backend=mysql
+serializer=mysql
 
-...
+store=hugegraph_mysql
 
+# mysql backend config
+jdbc.driver=com.mysql.cj.jdbc.Driver
+jdbc.url=jdbc:mysql://127.0.0.1:3306
+jdbc.username=root
+jdbc.password=123456
+jdbc.reconnect_max_times=3
+jdbc.reconnect_interval=3
+jdbc.ssl_mode=false
+```
+
+`hugegraph_rocksdb_backend.properties` 修改的部分如下：
+
+```properties
 backend=rocksdb
 serializer=binary
+
+store=hugegraph_rocksdb
 ```
 
 **停止 Server，初始化执行 init-store.sh（为新的图创建数据库），重新启动 Server**
 
 ```bash
-$ bin/stop-hugegraph.sh
-$ bin/init-store.sh
-$ bin/start-hugegraph.sh
+$ ./bin/stop-hugegraph.sh
+```
+
+```bash
+$ ./bin/init-store.sh
+
+Initializing HugeGraph Store...
+2023-06-11 14:16:14 [main] [INFO] o.a.h.u.ConfigUtil - Scanning option 'graphs' directory './conf/graphs'
+2023-06-11 14:16:14 [main] [INFO] o.a.h.c.InitStore - Init graph with config file: ./conf/graphs/hugegraph_rocksdb_backend.properties
+...
+2023-06-11 14:16:15 [main] [INFO] o.a.h.StandardHugeGraph - Graph 'hugegraph_rocksdb' has been initialized
+2023-06-11 14:16:15 [main] [INFO] o.a.h.c.InitStore - Init graph with config file: ./conf/graphs/hugegraph_mysql_backend.properties
+...
+2023-06-11 14:16:16 [main] [INFO] o.a.h.StandardHugeGraph - Graph 'hugegraph_mysql' has been initialized
+2023-06-11 14:16:16 [main] [INFO] o.a.h.StandardHugeGraph - Close graph standardhugegraph[hugegraph_rocksdb]
+...
+2023-06-11 14:16:16 [main] [INFO] o.a.h.HugeFactory - HugeFactory shutdown
+2023-06-11 14:16:16 [hugegraph-shutdown] [INFO] o.a.h.HugeFactory - HugeGraph is shutting down
+Initialization finished.
+```
+
+```bash
+$ ./bin/start-hugegraph.sh
+
+Starting HugeGraphServer...
+Connecting to HugeGraphServer (http://127.0.0.1:18080/graphs)...OK
+Started [pid 21614]
+```
+
+查看创建的图：
+
+```bash
+curl http://127.0.0.1:8080/graphs/
+
+{"graphs":["hugegraph_rocksdb","hugegraph_mysql"]}
+```
+
+查看某个图的信息：
+
+```bash
+curl http://127.0.0.1:8080/graphs/hugegraph_mysql_backend
+
+{"name":"hugegraph_mysql","backend":"mysql"}
+```
+
+```bash
+curl http://127.0.0.1:8080/graphs/hugegraph_rocksdb_backend
+
+{"name":"hugegraph_rocksdb","backend":"rocksdb"}
 ```

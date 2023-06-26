@@ -4,97 +4,97 @@ linkTitle: "FAQ"
 weight: 5
 ---
 
-- 如何选择后端存储? 选 RocksDB 还是 Cassandra 还是 Hbase 还是 Mysql?
+- How to choose the back-end storage? Choose RocksDB or Cassandra or Hbase or Mysql?
 
-  根据你的具体需要来判断, 一般单机或数据量 < 100 亿推荐 RocksDB, 其他推荐使用分布式存储的后端集群
+  Judge according to your specific needs. Generally, if the stand-alone machine or the data volume is < 10 billion, RocksDB is recommended, and other back-end clusters that use distributed storage are recommended.
 
-- 启动服务时提示：`xxx (core dumped) xxx`
+- Prompt when starting the service: `xxx (core dumped) xxx`
 
-  请检查 JDK 版本是否为 Java 11, 至少要求是 Java 8  
+  Please check if the JDK version is Java 11, at least Java 8 is required
 
-- 启动服务成功了，但是操作图时有类似于"无法连接到后端或连接未打开"的提示
+- The service is started successfully, but there is a prompt similar to "Unable to connect to the backend or the connection is not open" when operating the graph
 
-  第一次启动服务前，需要先使用`init-store`初始化后端，后续版本会将提示得更清晰直接。
-
-- 所有的后端在使用前都需要执行`init-store`吗，序列化的选择可以随意填写么?
+  init-storeBefore starting the service for the first time, you need to use the initialization backend first , and subsequent versions will prompt more clearly and directly.
   
-  除了`memory`不需要，其他后端均需要，如：`cassandra`、`hbase`和`rocksdb`等，序列化需一一对应不可随意填写。
+- Do all backends need to be executed before use init-store, and can the serialization options be filled in at will?
 
-- 执行`init-store`报错：```Exception in thread "main" java.lang.UnsatisfiedLinkError: /tmp/librocksdbjni3226083071221514754.so: /usr/lib64/libstdc++.so.6: version `GLIBCXX_3.4.10' not found (required by /tmp/librocksdbjni3226083071221514754.so)```
+  Except memorynot required, other backends are required, such as: `cassandra`, `hbaseand`, `rocksdb`, etc. Serialization needs to be one-to-one correspondence and cannot be filled in at will.
 
-  RocksDB需要 gcc 4.3.0 (GLIBCXX_3.4.10) 及以上版本
+- Execution `init-store` error: ```Exception in thread "main" java.lang.UnsatisfiedLinkError: /tmp/librocksdbjni3226083071221514754.so: /usr/lib64/libstdc++.so.6: version `GLIBCXX_3.4.10' not found (required by /tmp/librocksdbjni3226083071221514754.so)```
 
-- 执行`init-store.sh`时报错：`NoHostAvailableException`
+  RocksDB requires gcc 4.3.0 (GLIBCXX_3.4.10) and above
 
-  `NoHostAvailableException` 是指无法连接到`Cassandra`服务，如果确定是要使用`cassandra`后端，请先安装并启动这个服务。至于这个提示本身可能不够直白，我们会更新到文档进行说明的。
+- The error `NoHostAvailableException` occurred while executing `init-store.sh`.
 
-- `bin`目录下包含`start-hugegraph.sh`、`start-restserver.sh`和`start-gremlinserver.sh`三个似乎与启动有关的脚本，到底该使用哪个
-
-  自0.3.3版本以来，已经把 GremlinServer 和 RestServer 合并为 HugeGraphServer 了，使用`start-hugegraph.sh`启动即可，后两个在后续版本会被删掉。
-
-- 配置了两个图，名字是`hugegraph`和`hugegraph1`，而启动服务的命令是`start-hugegraph.sh`，是只打开了`hugegraph`这个图吗
-
-  `start-hugegraph.sh`会打开所有`gremlin-server.yaml`的`graphs`下的图，这二者并无名字上的直接关系
-
-- 服务启动成功后，使用`curl`查询所有顶点时返回乱码
-
-  服务端返回的批量顶点/边是压缩（gzip）过的，可以使用管道重定向至 `gunzip` 进行解压（`curl http://example | gunzip`），也可以用`Firefox`的`postman`或者`Chrome`浏览器的`restlet`插件发请求，会自动解压缩响应数据。
-
-- 使用顶点Id通过`RESTful API`查询顶点时返回空，但是顶点确实是存在的
-
-  检查顶点Id的类型，如果是字符串类型，`API`的`url`中的id部分需要加上双引号，数字类型则不用加。
-
-- 已经根据需要给顶点Id加上了双引号，但是通过`RESTful API`查询顶点时仍然返回空
+  `NoHostAvailableException` means that the `Cassandra` service cannot be connected to. If you are sure that you want to use the Cassandra backend, please install and start this service first. As for the message itself, it may not be clear enough, and we will update the documentation to provide further explanation.
   
-  检查顶点id中是否包含`+`、`空格`、`/`、`?`、`%`、`&`和`=`这些URL的保留字符，如果存在则需要进行编码。下表给出了编码值：
+- The `bin` directory contains `start-hugegraph.sh`, `start-restserver.sh` and `start-gremlinserver.sh`.  These scripts seem to be related to startup.  Which one should be used?
+
+  Since version 0.3.3, GremlinServer and RestServer have been merged into HugeGraphServer. To start, use start-hugegraph.sh. The latter two will be removed in future versions.
+
+- Two graphs are configured, the names are `hugegraph` and `hugegraph1`, and the command to start the service is `start-hugegraph.sh`. Is only the hugegraph graph opened?
+
+  `start-hugegraph.sh` will open all graphs under the graphs of `gremlin-server.yaml`.  The two have no direct relationship in name
+
+- After the service starts successfully, garbled characters are returned when using `curl` to query all vertices
+
+  The batch vertices/edges returned by the server are compressed (gzip), and can be redirected to `gunzip` for decompression (`curl http://example | gunzip`), or can be sent with the `postman` of `Firefox` or the `restlet` plug-in of Chrome browser. request, the response data will be decompressed automatically.
+  
+- When using the vertex Id to query the vertex through the `RESTful API`, it returns empty, but the vertex does exist
+
+  Check the type of the vertex ID. If it is a string type, the "id" part of the API URL needs to be enclosed in double quotes, while for numeric types, it is not necessary to enclose the ID in quotes.
+
+- Vertex Id has been double quoted as required, but querying the vertex via the   RESTful API  still returns empty
+  
+  Check whether the vertex id contains `+`, `space`, `/`, `?`, `%`, `&`, and `=` reserved characters of these `URLs`.  If they exist, they need to be encoded. The following table gives the coded values:
   
   ```
-  特殊字符 | 编码值
-  --------| ----
-  +       | %2B
-  空格     | %20
-  /       | %2F
-  ?       | %3F
-  %       | %25
-  #       | %23
-  &       | %26
-  =       | %3D
+  special character | encoded value
+  ------------------| -------------
+  +                 | %2B
+  space             | %20
+  /                 | %2F
+  ?                 | %3F
+  %                 | %25
+  #                 | %23
+  &                 | %26
+  =                 | %3D
   ```
   
-- 查询某一类别的顶点或边（`query by label`）时提示超时
+- Timeout when querying vertices or edges of a certain category (`query by label`)
 
-  由于属于某一label的数据量可能比较多，请加上limit限制。
+  Since the amount of data belonging to a certain label may be relatively large, please add a limit limit.
 
-- 通过`RESTful API`操作图是可以的，但是发送`Gremlin`语句就报错：`Request Failed(500)`
+- It is possible to operate the graph through the `RESTful API`, but when sending `Gremlin` statements, an error is reported: `Request Failed(500)`
 
-  可能是`GremlinServer`的配置有误，检查`gremlin-server.yaml`的`host`、`port`是否与`rest-server.properties`的`gremlinserver.url`匹配，如不匹配则修改，然后重启服务。
+  It may be that the configuration of `GremlinServer` is wrong, check whether the `host` and `port` of `gremlin-server.yaml` match the `gremlinserver.url` of `rest-server.properties`, if they do not match, modify them, and then Restart the service.
 
-- 使用`Loader`导数据出现`Socket Timeout`异常，然后导致`Loader`中断
+- When using `Loader` to import data, a `Socket Timeout` exception occurs, and then `Loader` is interrupted
 
-  持续地导入数据会使`Server`的压力过大，然后导致有些请求超时。可以通过调整`Loader`的参数来适当缓解`Server`压力（如：重试次数，重试间隔，错误容忍数等），降低该问题出现频率。
+  Continuously importing data will put too much pressure on the `Server`, which will cause some requests to time out. The pressure on `Server` can be appropriately relieved by adjusting the parameters of `Loader` (such as: number of retries, retry interval, error tolerance, etc.), and reduce the frequency of this problem.
 
-- 如何删除全部的顶点和边，RESTful API中没有这样的接口，调用`gremlin`的`g.V().drop()`会报错`Vertices in transaction have reached capacity xxx`
+- How to delete all vertices and edges. There is no such interface in the RESTful API. Calling `g.V().drop()` of `gremlin` will report an error `Vertices in transaction have reached capacity xxx`
 
-  目前确实没有好办法删除全部的数据，用户如果是自己部署的`Server`和后端，可以直接清空数据库，重启`Server`。可以使用paging API或scan API先获取所有数据，再逐条删除。
+  At present, there is really no good way to delete all the data. If the user deploys the `Server` and the backend by himself, he can directly clear the database and restart the `Server`. You can use the paging API or scan API to get all the data first, and then delete them one by one.
 
-- 清空了数据库，并且执行了`init-store`，但是添加`schema`时提示"xxx has existed"
+- The database has been cleared and `init-store` has been executed, but when trying to add a schema, the prompt "xxx has existed" appeared.
 
-  `HugeGraphServer`内是有缓存的，清空数据库的同时是需要重启`Server`的，否则残留的缓存会产生不一致。
+  There is a cache in the `HugeGraphServer`, and it is necessary to restart the `Server` when the database is cleared, otherwise the residual cache will be inconsistent.
 
-- 插入顶点或边的过程中报错：`Id max length is 128, but got xxx {yyy}` 或 `Big id max length is 32768, but got xxx`
+- An error is reported during the process of inserting vertices or edges: `Id max length is 128, but got xxx {yyy}` or `Big id max length is 32768, but got xxx`
 
-  为了保证查询性能，目前的后端存储对id列的长度做了限制，顶点id不能超过128字节，边id长度不能超过32768字节，索引id不能超过128字节。
+  In order to ensure query performance, the current backend storage limits the length of the id column. The vertex id cannot exceed 128 bytes, the edge id cannot exceed 32768 bytes, and the index id cannot exceed 128 bytes.
 
-- 是否支持嵌套属性，如果不支持，是否有什么替代方案
+- Is there support for nested attributes, and if not, are there any alternatives?
 
-  嵌套属性目前暂不支持。替代方案：可以把嵌套属性作为单独的顶点拿出来，然后用边连接起来。
+  Nested attributes are currently not supported. Alternative: Nested attributes can be taken out as individual vertices and connected with edges.
 
-- 一个`EdgeLabel`是否可以连接多对`VertexLabel`，比如"投资"关系，可以是"个人"投资"企业"，也可以是"企业"投资"企业"
+- Can an `EdgeLabel` connect multiple pairs of `VertexLabel`, such as "investment" relationship, which can be "individual" investing in "enterprise", or "enterprise" investing in "enterprise"?
 
-  一个`EdgeLabel`不支持连接多对`VertexLabel`，需要用户将`EdgeLabel`拆分得更细一点，如："个人投资"，"企业投资"。
+  An `EdgeLabel` does not support connecting multiple pairs of `VertexLabels`, users need to split the `EdgeLabel` into finer details, such as: "personal investment", "enterprise investment".
 
-- 通过`RestAPI`发送请求时提示`HTTP 415 Unsupported Media Type`
+- Prompt `HTTP 415 Unsupported Media Type` when sending a request through `RestAPI`
 
-  请求头中需要指定`Content-Type:application/json`
+  `Content-Type: application/json` needs to be specified in the request header
 
-其他问题可以在对应项目的 issue 区搜索，例如 [Server-Issues](https://github.com/hugegraph/hugegraph/issues) / [Loader Issues](https://github.com/hugegraph/hugegraph-loader/issues)
+Other issues can be searched in the issue area of the corresponding project, such as [Server-Issues](https://github.com/apache/hugegraph/issues) / [Loader Issues](https://github.com/apache/hugegraph-loader/issues)

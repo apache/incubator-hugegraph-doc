@@ -5,11 +5,9 @@ Please visit the [contribution doc](./contribution.md) to get start, include the
 ### Summary
 
 HugeGraph is an easy-to-use, efficient, general-purpose open source graph database system(Graph Database, [GitHub project address](https://github.com/apache/hugegraph)),
-implemented the [Apache TinkerPop3](https://tinkerpop.apache.org) framework and is fully compatible with the [Gremlin](https://tinkerpop.apache.org/gremlin.html) query language,
+implemented the [Apache TinkerPop3](https://tinkerpop.apache.org) framework and is fully compatible with the [Gremlin](https://tinkerpop.apache.org/gremlin.html) query language.
 With complete toolchain components, it helps users to easily build applications and products based on graph databases. HugeGraph supports fast import of more than 10 billion vertices and edges, and provides millisecond-level relational query capability (OLTP). 
 It supports large-scale distributed graph processing (OLAP).
-
-Typical application scenarios of HugeGraph include deep relationship exploration, association analysis, path search, feature extraction, data clustering, community detection, knowledge graph, etc., and are applicable to business fields such as network security, telecommunication fraud, financial risk control, advertising recommendation, social network and intelligence Robots etc.
 
 Typical application scenarios of HugeGraph include deep relationship exploration, association analysis, path search, feature extraction, data clustering, community detection, knowledge graph, etc., and are applicable to business fields such as network security, telecommunication fraud, financial risk control, advertising recommendation, social network and intelligence Robots etc.
 
@@ -53,7 +51,32 @@ The functions of this system include but are not limited to:
 - [HugeGraph-Hubble](https://hugegraph.apache.org/docs/quickstart/hugegraph-hubble): HugeGraph-Hubble is HugeGraph's web visualization management platform, a one-stop visual analysis platform. The platform covers the whole process from data modeling, to rapid data import, to online and offline analysis of data, and unified management of graphs;
 - [HugeGraph-Tools](https://hugegraph.apache.org/docs/quickstart/hugegraph-tools): HugeGraph-Tools is HugeGraph's deployment and management tools, including functions such as managing graphs, backup/restore, Gremlin execution, etc.
 
+### Subscribe the mailing list
+
+HugeGraph offers an email list for development and user discussions.
+- hugegraph-dev: [dev@hugegraph.apache.org](mailto:dev@hugegraph.apache.org) for both development and users discussions.
+
+Subscribe to the mailing list by following steps:
+- Email [dev-subscribe@hugegraph.apache.org](mailto:dev-subscribe@hugegraph.apache.org) through your email account, and then you will receive a confirmation email.
+- Reply to the confirmation email to confirm your subscription. Then, you will receive another confirmation email.
+- Now you are a subscriber of the mailing list. If you have more questions, just email the mailing list and someone will reply to you soon.
+- If you want to unsubscribe from the mailing list, just email [dev-unsubscribe@hugegraph.apache.org](mailto:dev-unsubscribe@hugegraph.apache.org) and follow the steps in the confirmation email.
+
+You can subscribe to the mailing list anytime you want. Additionally, you can check [historical emails / all emails](https://lists.apache.org/list.html?dev@hugegraph.apache.org) easily (even if you are not subscribing to the list).
+
+Some notes:
+- If you don't receive the confirmation email, please send it after 24 hours later.
+- Don't email to **dev** until you subscribe to the mailing list successfully (otherwise the mail will be banned).
+
+More information on mailing subscribe can be found at:
+- http://apache.org/foundation/mailinglists.html#subscribing
+
 ### Contact Us
-- [Github Issues](https://github.com/apache/incubator-hugegraph/issues): Feedback on usage issues and functional requirements (priority)
-- Feedback Email: [hugegraph@googlegroups.com](mailto:hugegraph@googlegroups.com)
-- WeChat public account: HugeGraph
+
+---
+
+ - [GitHub Issues](https://github.com/apache/incubator-hugegraph-doc/issues): Feedback on usage issues and functional requirements (quick response)
+ - Feedback Email: [dev@hugegraph.apache.org](mailto:dev@hugegraph.apache.org) ([subscriber](https://hugegraph.apache.org/docs/contribution-guidelines/subscribe/) only)
+ - WeChat public account: Apache HugeGraph, welcome to scan this QR code to follow us.
+
+ <img src="./assets/images/wechat.png" alt="QR png" width="350"/>

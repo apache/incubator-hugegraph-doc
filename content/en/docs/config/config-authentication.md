@@ -1,42 +1,42 @@
 ---
-title: "HugeGraph 内置用户权限与扩展权限配置及使用"
+title: "Built-in User Authentication and Authorization Configuration and Usage in HugeGraph"
 linkTitle: "Config Authentication"
 weight: 3
 ---
 
-### 概述
-HugeGraph 为了方便不同用户场景下的鉴权使用，目前内置了两套权限模式：
-1. 简单的`ConfigAuthenticator`模式，通过本地配置文件存储用户名和密码 (仅支持单 GraphServer)
-2. 完备的`StandardAuthenticator`模式，支持多用户认证、以及细粒度的权限访问控制，采用基于 “用户-用户组-操作-资源” 的 4 层设计，灵活控制用户角色与权限 (支持多 GraphServer)
+### Overview
+To facilitate authentication usage in different user scenarios, HugeGraph currently provides two built-in authorization modes:
+1. Simple `ConfigAuthenticator` mode, which stores usernames and passwords in a local configuration file (supports only a single GraphServer).
+2. Comprehensive `StandardAuthenticator` mode, which supports multi-user authentication and fine-grained access control. It adopts a 4-layer design based on "User-UserGroup-Operation-Resource" to flexibly control user roles and permissions (supports multiple GraphServers).
 
-其中 `StandardAuthenticator` 模式的几个核心设计：
-- 初始化时创建超级管理员 (`admin`) 用户，后续通过超级管理员创建其它用户，新创建的用户被分配足够权限后，可以创建或管理更多的用户
-- 支持动态创建用户、用户组、资源，支持动态分配或取消权限
-- 用户可以属于一个或多个用户组，每个用户组可以拥有对任意个资源的操作权限，操作类型包括：读、写、删除、执行等种类
-- "资源" 描述了图数据库中的数据，比如符合某一类条件的顶点，每一个资源包括 `type`、`label`、`properties`三个要素，共有 18 种类型、任意 label、任意 properties 可组合形成的资源，一个资源的内部条件是且关系，多个资源之间的条件是或关系
+Some key designs of the `StandardAuthenticator` mode include:
+- During initialization, a super administrator (`admin`) user is created. Subsequently, other users can be created by the super administrator. Once newly created users are assigned sufficient permissions, they can create or manage more users.
+- It supports dynamic creation of users, user groups, and resources, as well as dynamic allocation or revocation of permissions.
+- Users can belong to one or multiple user groups. Each user group can have permissions to operate on any number of resources. The types of operations include read, write, delete, execute, and others.
+- "Resource" describes the data in the graph database, such as vertices that meet certain criteria. Each resource consists of three elements: `type`, `label`, and `properties`. There are 18 types in total, with the ability to combine any label and properties. The internal condition of a resource is an AND relationship, while the condition between multiple resources is an OR relationship.
 
-举例说明：
+Here is an example to illustrate:
 
 ```java
-// 场景：某用户只有北京地区的数据读取权限
+// Scenario: A user only has data read permission for the Beijing area
 user(name=xx) -belong-> group(name=xx) -access(read)-> target(graph=graph1, resource={label: person, city: Beijing})
 ```
 
-### 配置用户认证
+### Configure User Authentication
 
-HugeGraph 默认**不启用**用户认证功能，需通过修改配置文件来启用该功能。内置实现了`StandardAuthenticator`和`ConfigAuthenticator`两种模式，`StandardAuthenticator`模式支持多用户认证与细粒度权限控制，`ConfigAuthenticator`模式支持简单的用户权限认证。此外，开发者可以自定义实现`HugeAuthenticator`接口来对接自身的权限系统。
+By default, HugeGraph does **not enable** user authentication. You need to modify the configuration file to enable this feature. HugeGraph provides two built-in authentication modes: `StandardAuthenticator` and `ConfigAuthenticator`. The `StandardAuthenticator` mode supports multi-user authentication and fine-grained permission control, while the `ConfigAuthenticator` mode supports simple user permission authentication. Additionally, developers can implement their own `HugeAuthenticator` interface to integrate with their existing authentication systems.
 
-用户认证方式均采用 [HTTP Basic Authentication](https://zh.wikipedia.org/wiki/HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81) ，简单说就是在发送 HTTP 请求时在 `Authentication` 设置选择 `Basic` 然后输入对应的用户名和密码，对应 HTTP 明文如下所示 :
+Both authentication modes adopt [HTTP Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication). In simple terms, when sending an HTTP request, you need to set the `Authentication` header to `Basic` and provide the corresponding username and password. The corresponding HTTP plaintext format is as follows:
 
 ```http
 GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 Authorization: Basic admin xxxx
 ```
 
-#### StandardAuthenticator模式
-`StandardAuthenticator`模式是通过在数据库后端存储用户信息来支持用户认证和权限控制，该实现基于数据库存储的用户的名称与密码进行认证（密码已被加密），基于用户的角色来细粒度控制用户权限。下面是具体的配置流程（重启服务生效）：
+#### StandardAuthenticator Mode
+The `StandardAuthenticator` mode supports user authentication and permission control by storing user information in the database backend. This implementation authenticates users based on their names and passwords (encrypted) stored in the database and controls user permissions based on their roles. Below is the specific configuration process (requires service restart):
 
-在配置文件`gremlin-server.yaml`中配置`authenticator`及其`rest-server`文件路径：
+Configure the `authenticator` and its `rest-server` file path in the `gremlin-server.yaml` configuration file:
 
 ```yaml
 authentication: {
@@ -46,31 +46,32 @@ authentication: {
 }
 ```
 
-在配置文件`rest-server.properties`中配置`authenticator`及其`graph_store`信息：
+Configure the `authenticator` and `graph_store` information in the `rest-server.properties` configuration file:
 
 ```properties
 auth.authenticator=com.baidu.hugegraph.auth.StandardAuthenticator
 auth.graph_store=hugegraph
 
-# auth client config
-# 如果是分开部署 GraphServer 和 AuthServer, 还需要指定下面的配置, 地址填写 AuthServer 的 IP:RPC 端口
-#auth.remote_url=127.0.0.1:8899,127.0.0.1:8898,127.0.0.1:8897
-```
-其中，`graph_store`配置项是指使用哪一个图来存储用户信息，如果存在多个图的话，选取任意一个均可。
+# Auth Client Config
+# If GraphServer and AuthServer are deployed separately, you also need to specify the following configuration. Fill in the IP:RPC port of AuthServer.
+# auth.remote_url=127.0.0.1:8899,127.0.0.1:8898,127.0.0.1:8897
 
-在配置文件`hugegraph{n}.properties`中配置`gremlin.graph`信息：
+```
+In the above configuration, the `graph_store` option specifies which graph to use for storing user information. If there are multiple graphs, you can choose any of them.
+
+In the `hugegraph{n}.properties` configuration file, configure the `gremlin.graph` information:
 
 ```properties
 gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
 ```
 
-然后详细的权限 API 调用和说明请参考 [Authentication-API](/docs/clients/restful-api/auth) 文档 
+For detailed API calls and explanations regarding permissions, please refer to the [Authentication-API](/docs/clients/restful-api/auth) documentation.
 
-#### ConfigAuthenticator模式
+#### ConfigAuthenticator Mode
 
-`ConfigAuthenticator`模式是通过预先在配置文件中设置用户信息来支持用户认证，该实现是基于配置好的静态`tokens`来验证用户是否合法。下面是具体的配置流程（重启服务生效）：
+The `ConfigAuthenticator` mode supports user authentication by predefining user information in the configuration file. This implementation verifies the legitimacy of users based on preconfigured static `tokens`. Below is the specific configuration process (requires service restart):
 
-在配置文件`gremlin-server.yaml`中配置`authenticator`及其`rest-server`文件路径：
+Configure the `authenticator` and its `rest-server` file path in the `gremlin-server.yaml` configuration file:
 
 ```yaml
 authentication: {
@@ -80,7 +81,7 @@ authentication: {
 }
 ```
 
-在配置文件`rest-server.properties`中配置`authenticator`及其`tokens`信息：
+Configure the `authenticator` and its `tokens` information in the `rest-server.properties` configuration file:
 
 ```properties
 auth.authenticator=com.baidu.hugegraph.auth.ConfigAuthenticator
@@ -88,12 +89,12 @@ auth.admin_token=token-value-a
 auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 ```
 
-在配置文件`hugegraph{n}.properties`中配置`gremlin.graph`信息：
+In the `hugegraph{n}.properties` configuration file, configure the `gremlin.graph` information:
 
 ```properties
 gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
 ```
 
-### 自定义用户认证系统
+### Custom User Authentication System
 
-如果需要支持更加灵活的用户系统，可自定义authenticator进行扩展，自定义authenticator实现接口`com.baidu.hugegraph.auth.HugeAuthenticator`即可，然后修改配置文件中`authenticator`配置项指向该实现。
+If you need to support a more flexible user system, you can customize the authenticator for extension. Simply implement the `com.baidu.hugegraph.auth.HugeAuthenticator` interface with your custom authenticator, and then modify the `authenticator` configuration item in the configuration file to point to your implementation.

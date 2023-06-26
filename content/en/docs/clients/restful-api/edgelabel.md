@@ -6,21 +6,20 @@ weight: 4
 
 ### 1.4 EdgeLabel
 
-假设已经创建好了1.2.3中的 PropertyKeys 和 1.3.3中的 VertexLabels
+Assuming PropertyKeys from version 1.2.3 and VertexLabels from version 1.3.3 have already been created.
 
-Params说明
+Params Explanation
 
-- name：顶点类型名称，必填
-- source_label: 源顶点类型的名称，必填
-- target_label: 目标顶点类型的名称，必填
-- frequency：两个点之间是否可以有多条边，可以取值SINGLE和MULTIPLE，非必填，默认值SINGLE
-- properties: 边类型关联的属性类型，选填
-- sort_keys: 当允许关联多次时，指定区分键属性列表
-- nullable_keys：可为空的属性，选填，默认可为空
-- enable_label_index： 是否开启类型索引，默认关闭
+- name: Name of the vertex type, required.
+- source_label: Name of the source vertex type, required.
+- target_label: Name of the target vertex type, required.
+- frequency: Whether there can be multiple edges between two points, can have values SINGLE or MULTIPLE, optional (default value: SINGLE).
+- properties: Property types associated with the edge type, optional.
+- sort_keys: Specifies a list of differentiating key properties when multiple associations are allowed.
+- nullable_keys: Nullable properties, optional (default: nullable).
+- enable_label_index: Whether to enable type indexing, disabled by default.
 
-
-#### 1.4.1 创建一个EdgeLabel
+#### 1.4.1 Create an EdgeLabel
 
 ##### Method & Url
 
@@ -74,7 +73,7 @@ POST http://localhost:8080/graphs/hugegraph/schema/edgelabels
 }
 ```
 
-从 hugegraph-server v0.11.2 版本开始支持边的 TTL 功能。边的 TTL 是通过 EdgeLabel 来设置的。比如希望 knows 类型的边存活时间为一天，需要在创建 knows EdgeLabel 的时候将 TTL 字段设置为 86400000，即单位为毫秒。
+Starting from version 0.11.2 of hugegraph-server, the TTL (Time to Live) feature for edges is supported. The TTL for edges is set through EdgeLabel. For example, if you want the "knows" type of edge to have a lifespan of one day, you need to set the TTL field to 86400000 when creating the "knows" EdgeLabel, where the unit is milliseconds.
 
 ```json
 {
@@ -99,7 +98,7 @@ POST http://localhost:8080/graphs/hugegraph/schema/edgelabels
 }
 ```
 
-另外，当边中带有"创建时间"的属性且希望以"创建时间"属性作为计算边存活时间的起点时，可以设置 EdgeLabel 中的 ttl_start_time 字段。比如 knows EdgeLabel 有 createdTime 属性，且 createdTime 是 Date 类型的参数，希望 knows 类型的边从创建开始存活一天的时间，那么创建 knows EdgeLabel 的 Request Body 如下：
+Additionally, when the edge has a property called "createdTime" and you want to use the "createdTime" property as the starting point for calculating the edge's lifespan, you can set the ttl_start_time field in the EdgeLabel. For example, if the knows EdgeLabel has a property called "createdTime" which is of type Date, and you want the "knows" type of edge to live for one day from the time of creation, the Request Body for creating the knows EdgeLabel would be as follows:
 
 ```json
 {
@@ -125,11 +124,11 @@ POST http://localhost:8080/graphs/hugegraph/schema/edgelabels
 }
 ```
 
-#### 1.4.2 为已存在的EdgeLabel添加properties或userdata，或者移除userdata（目前不支持移除properties）
+#### 1.4.2 Add properties or userdata to an existing EdgeLabel, or remove userdata (removing properties is currently not supported)
 
 ##### Params
 
-- action: 表示当前行为是添加还是移除，取值为`append`（添加）和`eliminate`（移除）
+- action: Indicates whether the current action is to add or remove, with values `append` (add) and `eliminate` (remove).
 
 ##### Method & Url
 
@@ -182,7 +181,7 @@ PUT http://localhost:8080/graphs/hugegraph/schema/edgelabels/created?action=appe
 }
 ```
 
-#### 1.4.3 获取所有的EdgeLabel
+#### 1.4.3 Get all EdgeLabels
 
 ##### Method & Url
 
@@ -244,7 +243,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/edgelabels
 }
 ```
 
-#### 1.4.4 根据name获取EdgeLabel
+#### 1.4.4 Get EdgeLabel by name
 
 ##### Method & Url
 
@@ -285,9 +284,9 @@ GET http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
 }
 ```
 
-#### 1.4.5 根据name删除EdgeLabel
+#### 1.4.5 Delete EdgeLabel by name
 
-删除 EdgeLabel 会导致删除对应的边以及相关的索引数据，会产生一个异步任务
+Deleting an EdgeLabel will result in the deletion of corresponding edges and related index data. This operation will generate an asynchronous task.
 
 ##### Method & Url
 
@@ -309,6 +308,6 @@ DELETE http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
 }
 ```
 
-注：
+Note:
 
-> 可以通过`GET http://localhost:8080/graphs/hugegraph/tasks/1`（其中"1"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](../task)
+> You can query the execution status of an asynchronous task by using `GET http://localhost:8080/graphs/hugegraph/tasks/1` (where "1" is the task_id). For more information, refer to the [Asynchronous Task RESTful API](../task).

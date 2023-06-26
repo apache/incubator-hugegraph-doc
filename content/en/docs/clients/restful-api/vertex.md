@@ -6,7 +6,7 @@ weight: 7
 
 ### 2.1 Vertex
 
-顶点类型中的 Id 策略决定了顶点的 Id 类型，其对应关系如下：
+In vertex types, the `Id` strategy determines the type of the vertex `Id`, with the corresponding relationships as follows:
 
 | Id_Strategy      | id type |
 |------------------|---------|
@@ -16,16 +16,31 @@ weight: 7
 | CUSTOMIZE_NUMBER | number  |
 | CUSTOMIZE_UUID   | uuid    |
 
-顶点的 `GET/PUT/DELETE` API 中 url 的 id 部分传入的应是带有类型信息的 id 值，这个类型信息用 json 串是否带引号表示，也就是说：
+For the `GET/PUT/DELETE` API of a vertex, the id part in the URL should be passed as the id value with type information. This type information is indicated by whether the JSON string is enclosed in quotes, meaning:
 
-- 当 id 类型为 number 时，url 中的 id 不带引号，形如 xxx/vertices/123456
-- 当 id 类型为 string 时，url 中的 id 带引号，形如 xxx/vertices/"123456"
+- When the id type is `number`, the id in the URL is without quotes, for example: `xxx/vertices/123456`.
+- When the id type is `string`, the id in the URL is enclosed in quotes, for example: `xxx/vertices/"123456"`.
 
 -------------------------------------------------------------------
 
-接下来的示例均假设已经创建好了前述的各种 schema 信息
+The next example requires first creating the graph `schema` from the following `groovy` script
 
-#### 2.1.1 创建一个顶点
+```groovy
+schema.propertyKey("name").asText().ifNotExist().create();
+schema.propertyKey("age").asInt().ifNotExist().create();
+schema.propertyKey("city").asText().ifNotExist().create();
+schema.propertyKey("weight").asDouble().ifNotExist().create();
+schema.propertyKey("lang").asText().ifNotExist().create();
+schema.propertyKey("price").asDouble().ifNotExist().create();
+schema.propertyKey("hobby").asText().valueList().ifNotExist().create();
+
+schema.vertexLabel("person").properties("name", "age", "city", "weight", "hobby").primaryKeys("name").nullableKeys("age", "city", "weight", "hobby").ifNotExist().create();
+schema.vertexLabel("software").properties("name", "lang", "price").primaryKeys("name").nullableKeys("lang", "price").ifNotExist().create();
+
+schema.indexLabel("personByAge").onV("person").by("age").range().ifNotExist().create();
+```
+
+#### 2.1.1 Create a vertex
 
 ##### Method & Url
 
@@ -59,23 +74,13 @@ POST http://localhost:8080/graphs/hugegraph/graph/vertices
     "label": "person",
     "type": "vertex",
     "properties": {
-        "name": [
-            {
-                "id": "1:marko>name",
-                "value": "marko"
-            }
-        ],
-        "age": [
-            {
-                "id": "1:marko>age",
-                "value": 29
-            }
-        ]
+        "name": "marko",
+        "age": 29
     }
 }
 ```
 
-#### 2.1.2 创建多个顶点
+#### 2.1.2 Create multiple vertices
 
 ##### Method & Url
 
@@ -120,7 +125,7 @@ POST http://localhost:8080/graphs/hugegraph/graph/vertices/batch
 ]
 ```
 
-#### 2.1.3 更新顶点属性
+#### 2.1.3 Update vertex properties
 
 ##### Method & Url
 
@@ -140,7 +145,7 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=appen
 }
 ```
 
-> 注意：属性的取值是有三种类别的，分别是single、set和list。如果是single，表示增加或更新属性值；如果是set或list，则表示追加属性值。
+> Note: There are three categories for property values: single, set, and list. If it is single, it means adding or updating the property value. If it is set or list, it means appending the property value.
 
 ##### Response Status
 
@@ -156,68 +161,53 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=appen
     "label": "person",
     "type": "vertex",
     "properties": {
-        "city": [
-            {
-                "id": "1:marko>city",
-                "value": "Beijing"
-            }
-        ],
-        "name": [
-            {
-                "id": "1:marko>name",
-                "value": "marko"
-            }
-        ],
-        "age": [
-            {
-                "id": "1:marko>age",
-                "value": 30
-            }
-        ]
+        "name": "marko",
+        "age": 30,
+        "city": "Beijing"
     }
 }
 ```
 
-#### 2.1.4 批量更新顶点属性
+#### 2.1.4 Batch Update Vertex Properties
 
-##### 功能说明
+##### Function Description
 
-批量更新顶点的属性，并支持多种更新策略，包括
+Batch update properties of vertices and support various update strategies, including:
 
-- SUM: 数值累加
-- BIGGER: 两个数字/日期取更大的
-- SMALLER: 两个数字/日期取更小的
-- UNION: Set属性取并集
-- INTERSECTION: Set属性取交集
-- APPEND: List属性追加元素
-- ELIMINATE: List/Set属性删除元素
-- OVERRIDE: 覆盖已有属性，如果新属性为null，则仍然使用旧属性
+- SUM: Numeric accumulation
+- BIGGER: Take the larger value between two numbers/dates
+- SMALLER: Take the smaller value between two numbers/dates
+- UNION: Take the union of set properties
+- INTERSECTION: Take the intersection of set properties
+- APPEND: Append elements to list properties
+- ELIMINATE: Remove elements from list/set properties
+- OVERRIDE: Override existing properties, if the new property is null, the old property is still used
 
-假设原顶点及属性为：
+Assuming the original vertex and properties are:
 
 ```json
 {
-    "vertices":[
+    "vertices": [
         {
-            "id":"2:lop",
-            "label":"software",
-            "type":"vertex",
-            "properties":{
-                "name":"lop",
-                "lang":"java",
-                "price":328
+            "id": "2:lop",
+            "label": "software",
+            "type": "vertex",
+            "properties": {
+                "name": "lop",
+                "lang": "java",
+                "price": 328
             }
         },
         {
-            "id":"1:josh",
-            "label":"person",
-            "type":"vertex",
-            "properties":{
-                "name":"josh",
-                "age":32,
-                "city":"Beijing",
-                "weight":0.1,
-                "hobby":[
+            "id": "1:josh",
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "josh",
+                "age": 32,
+                "city": "Beijing",
+                "weight": 0.1,
+                "hobby": [
                     "reading",
                     "football"
                 ]
@@ -225,6 +215,12 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=appen
         }
     ]
 }
+```
+
+Add vertices with the following command:
+
+```shell
+curl -H "Content-Type: application/json" -d '[{"label":"person","properties":{"name":"josh","age":32,"city":"Beijing","weight":0.1,"hobby":["reading","football"]}},{"label":"software","properties":{"name":"lop","lang":"java","price":328}}]' http:///127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
 ```
 
 ##### Method & Url
@@ -237,37 +233,37 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
 
 ```json
 {
-    "vertices":[
+    "vertices": [
         {
-            "label":"software",
-            "type":"vertex",
-            "properties":{
-                "name":"lop",
-                "lang":"c++",
-                "price":299
+            "label": "software",
+            "type": "vertex",
+            "properties": {
+                "name": "lop",
+                "lang": "c++",
+                "price": 299
             }
         },
         {
-            "label":"person",
-            "type":"vertex",
-            "properties":{
-                "name":"josh",
-                "city":"Shanghai",
-                "weight":0.2,
-                "hobby":[
-                    "swiming"
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "josh",
+                "city": "Shanghai",
+                "weight": 0.2,
+                "hobby": [
+                    "swimming"
                 ]
             }
         }
     ],
-    "update_strategies":{
-        "price":"BIGGER",
-        "age":"OVERRIDE",
-        "city":"OVERRIDE",
-        "weight":"SUM",
-        "hobby":"UNION"
+    "update_strategies": {
+        "price": "BIGGER",
+        "age": "OVERRIDE",
+        "city": "OVERRIDE",
+        "weight": "SUM",
+        "hobby": "UNION"
     },
-    "create_if_not_exist":true
+    "create_if_not_exist": true
 }
 ```
 
@@ -302,9 +298,9 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
                 "city": "Shanghai",
                 "weight": 0.3,
                 "hobby": [
-                    "swiming",
                     "reading",
-                    "football"
+                    "football",
+                    "swimming"
                 ]
             }
         }
@@ -312,18 +308,18 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
 }
 ```
 
-结果分析：
+Result Analysis:
 
-- lang 属性未指定更新策略，直接用新值覆盖旧值，无论新值是否为null；
-- price 属性指定 BIGGER 的更新策略，旧属性值为328，新属性值为299，所以仍然保留了旧属性值328；
-- age 属性指定 OVERRIDE 更新策略，而新属性值中未传入age，相当于age为null，所以仍然保留了原属性值32；
-- city 属性也指定了 OVERRIDE 更新策略，且新属性值不为null，所以覆盖了旧值；
-- weight 属性指定了 SUM 更新策略，旧属性值为0.1，新属性值为0.2，最后的值为0.3；
-- hobby 属性（基数为Set）指定了 UNION 更新策略，所以新值与旧值取了并集；
+- The lang property does not specify an update strategy and is directly overwritten by the new value, regardless of whether the new value is null.
+- The price property specifies the BIGGER update strategy. The old property value is 328, and the new property value is 299, so the old property value of 328 is retained.
+- The age property specifies the OVERRIDE update strategy, but the new property value does not include age, which is equivalent to age being null. Therefore, the original property value of 32 is still retained.
+- The city property also specifies the OVERRIDE update strategy, and the new property value is not null, so it overrides the old value.
+- The weight property specifies the SUM update strategy. The old property value is 0.1, and the new property value is 0.2. The final value is 0.3.
+- The hobby property (cardinality is Set) specifies the UNION update strategy, so the new value is taken as the union with the old value.
 
-其他的更新策略使用方式可以类推，不再赘述。
+The usage of other update strategies can be inferred in a similar manner and will not be further elaborated.
 
-#### 2.1.5 删除顶点属性
+#### 2.1.5 Delete Vertex Properties
 
 ##### Method & Url
 
@@ -342,7 +338,7 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=elimi
 }
 ```
 
-> 注意：这里会直接删除属性（删除key和所有value），无论其属性的取值是single、set或list。
+> Note: Here, the properties (keys and all values) will be directly deleted, regardless of whether the property values are single, set, or list.
 
 ##### Response Status
 
@@ -358,49 +354,39 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=elimi
     "label": "person",
     "type": "vertex",
     "properties": {
-        "name": [
-            {
-                "id": "1:marko>name",
-                "value": "marko"
-            }
-        ],
-        "age": [
-            {
-                "id": "1:marko>age",
-                "value": 30
-            }
-        ]
+        "name": "marko",
+        "age": 30
     }
 }
 ```
 
-#### 2.1.6 获取符合条件的顶点
+#### 2.1.6 Get Vertices that Meet the Criteria
 
 ##### Params
 
-- label: 顶点类型
-- properties: 属性键值对(根据属性查询的前提是预先建立了索引)
-- limit: 查询最大数目
-- page: 页号
+- label: Vertex type
+- properties: Property key-value pairs (precondition: indexes are created for property queries)
+- limit: Maximum number of results
+- page: Page number
 
-以上参数都是可选的，如果提供page参数，必须提供limit参数，不允许带其他参数。`label, properties`和`limit`可以任意组合。
+All of the above parameters are optional. If the `page` parameter is provided, the `limit` parameter must also be provided, and no other parameters are allowed. `label, properties`, and `limit` can be combined in any way.
 
-属性键值对由JSON格式的属性名称和属性值组成，允许多个属性键值对作为查询条件，属性值支持精确匹配、范围匹配和模糊匹配，精确匹配时形如`properties={"age":29}`，范围匹配时形如`properties={"age":"P.gt(29)"}`，模糊匹配时形如`properties={"city": "P.textcontains("ChengDu China")}，`范围匹配支持的表达式如下：
+Property key-value pairs consist of the property name and value in JSON format. Multiple property key-value pairs are allowed as query conditions. The property value supports exact matching, range matching, and fuzzy matching. For exact matching, use the format `properties={"age":29}`, for range matching, use the format `properties={"age":"P.gt(29)"}`, and for fuzzy matching, use the format `properties={"city": "P.textcontains("ChengDu China")}`. The following expressions are supported for range matching:
 
-| 表达式                                | 说明                          |
-|------------------------------------|-----------------------------|
-| P.eq(number)                       | 属性值等于number的顶点              |
-| P.neq(number)                      | 属性值不等于number的顶点             |
-| P.lt(number)                       | 属性值小于number的顶点              |
-| P.lte(number)                      | 属性值小于等于number的顶点            |
-| P.gt(number)                       | 属性值大于number的顶点              |
-| P.gte(number)                      | 属性值大于等于number的顶点            |
-| P.between(number1,number2)         | 属性值大于等于number1且小于number2的顶点 |
-| P.inside(number1,number2)          | 属性值大于number1且小于number2的顶点   |
-| P.outside(number1,number2)         | 属性值小于number1且大于number2的顶点   |
-| P.within(value1,value2,value3,...) | 属性值等于任何一个给定value的顶点         |
+| Expression                        | Explanation                                    |
+|------------------------------------|---------------------------------------------|
+| P.eq(number)                       | Vertices with property value equal to `number`         |
+| P.neq(number)                      | Vertices with property value not equal to `number`     |
+| P.lt(number)                       | Vertices with property value less than `number`         |
+| P.lte(number)                      | Vertices with property value less than or equal to `number`   |
+| P.gt(number)                       | Vertices with property value greater than `number`         |
+| P.gte(number)                      | Vertices with property value greater than or equal to `number`   |
+| P.between(number1,number2)         | Vertices with property value greater than or equal to `number1` and less than `number2`  |
+| P.inside(number1,number2)          | Vertices with property value greater than `number1` and less than `number2`    |
+| P.outside(number1,number2)         | Vertices with property value less than `number1` and greater than `number2`    |
+| P.within(value1,value2,value3,...) | Vertices with property value equal to any of the given `values`     |
 
-**查询所有 age 为 20 且 label 为 person 的顶点**
+**Query all vertices with age 29 and label person**
 
 ##### Method & Url
 
@@ -424,31 +410,21 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&propertie
             "label": "person",
             "type": "vertex",
             "properties": {
-                "city": [
-                    {
-                        "id": "1:marko>city",
-                        "value": "Beijing"
-                    }
-                ],
-                "name": [
-                    {
-                        "id": "1:marko>name",
-                        "value": "marko"
-                    }
-                ],
-                "age": [
-                    {
-                        "id": "1:marko>age",
-                        "value": 29
-                    }
-                ]
+                "name": "marko",
+                "age": 30
             }
         }
     ]
 }
 ```
 
-**分页查询所有顶点，获取第一页（page不带参数值），限定3条**
+**Paginate through all vertices, retrieve the first page (page without parameter value), limited to 3 records**
+
+Add vertices with the following command:
+
+```shell
+curl -H "Content-Type: application/json" -d '[{"label":"person","properties":{"name":"peter","age":29,"city":"Shanghai"}},{"label":"person","properties":{"name":"vadas","age":27,"city":"Hongkong"}}]' http://localhost:8080/graphs/hugegraph/graph/vertices/batch
+```
 
 ##### Method & Url
 
@@ -466,77 +442,55 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3
 
 ```json
 {
-	"vertices": [{
-			"id": "2:ripple",
-			"label": "software",
-			"type": "vertex",
-			"properties": {
-				"price": [{
-					"id": "2:ripple>price",
-					"value": 199
-				}],
-				"name": [{
-					"id": "2:ripple>name",
-					"value": "ripple"
-				}],
-				"lang": [{
-					"id": "2:ripple>lang",
-					"value": "java"
-				}]
-			}
-		},
-		{
-			"id": "1:vadas",
-			"label": "person",
-			"type": "vertex",
-			"properties": {
-				"city": [{
-					"id": "1:vadas>city",
-					"value": "Hongkong"
-				}],
-				"name": [{
-					"id": "1:vadas>name",
-					"value": "vadas"
-				}],
-				"age": [{
-					"id": "1:vadas>age",
-					"value": 27
-				}]
-			}
-		},
-		{
-			"id": "1:peter",
-			"label": "person",
-			"type": "vertex",
-			"properties": {
-				"city": [{
-					"id": "1:peter>city",
-					"value": "Shanghai"
-				}],
-				"name": [{
-					"id": "1:peter>name",
-					"value": "peter"
-				}],
-				"age": [{
-					"id": "1:peter>age",
-					"value": 35
-				}]
-			}
-		}
-	],
-	"page": "001000100853313a706574657200f07ffffffc00e797c6349be736fffc8699e8a502efe10004"
+    "vertices": [
+        {
+            "id": "2:lop",
+            "label": "software",
+            "type": "vertex",
+            "properties": {
+                "name": "lop",
+                "lang": "c++",
+                "price": 328
+            }
+        },
+        {
+            "id": "1:josh",
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "josh",
+                "age": 32,
+                "city": "Shanghai",
+                "weight": 0.3,
+                "hobby": [
+                    "reading",
+                    "football",
+                    "swimming"
+                ]
+            }
+        },
+        {
+            "id": "1:marko",
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "marko",
+                "age": 30
+            }
+        }
+    ],
+    "page": "CIYxOnBldGVyAAAAAAAAAAM="
 }
 ```
 
-返回的body里面是带有下一页的页号信息的，`"page": "001000100853313a706574657200f07ffffffc00e797c6349be736fffc8699e8a502efe10004"`，
-在查询下一页的时候将该值赋给page参数。
+The returned `body` contains information about the page number of the next `page`, `"page": "CIYxOnBldGVyAAAAAAAAAAM"`. When querying the next page, assign this value to the `page` parameter.
 
-**分页查询所有顶点，获取下一页（page带上上一页返回的page值），限定3条**
+**Paginate and retrieve all vertices, including the next page (passing the `page` value returned from the previous page), limited to 3 items.**
 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph/vertices?page=001000100853313a706574657200f07ffffffc00e797c6349be736fffc8699e8a502efe10004&limit=3
+GET http://localhost:8080/graphs/hugegraph/graph/vertices?page=CIYxOnBldGVyAAAAAAAAAAM=&limit=3
 ```
 
 ##### Response Status
@@ -549,71 +503,45 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?page=001000100853313a7
 
 ```json
 {
-	"vertices": [{
-			"id": "1:josh",
-			"label": "person",
-			"type": "vertex",
-			"properties": {
-				"city": [{
-					"id": "1:josh>city",
-					"value": "Beijing"
-				}],
-				"name": [{
-					"id": "1:josh>name",
-					"value": "josh"
-				}],
-				"age": [{
-					"id": "1:josh>age",
-					"value": 32
-				}]
-			}
-		},
-		{
-			"id": "1:marko",
-			"label": "person",
-			"type": "vertex",
-			"properties": {
-				"city": [{
-					"id": "1:marko>city",
-					"value": "Beijing"
-				}],
-				"name": [{
-					"id": "1:marko>name",
-					"value": "marko"
-				}],
-				"age": [{
-					"id": "1:marko>age",
-					"value": 29
-				}]
-			}
-		},
-		{
-			"id": "2:lop",
-			"label": "software",
-			"type": "vertex",
-			"properties": {
-				"price": [{
-					"id": "2:lop>price",
-					"value": 328
-				}],
-				"name": [{
-					"id": "2:lop>name",
-					"value": "lop"
-				}],
-				"lang": [{
-					"id": "2:lop>lang",
-					"value": "java"
-				}]
-			}
-		}
-	],
-	"page": null
+    "vertices": [
+        {
+            "id": "1:peter",
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "peter",
+                "age": 29,
+                "city": "Shanghai"
+            }
+        },
+        {
+            "id": "1:vadas",
+            "label": "person",
+            "type": "vertex",
+            "properties": {
+                "name": "vadas",
+                "age": 27,
+                "city": "Hongkong"
+            }
+        },
+        {
+            "id": "2:ripple",
+            "label": "software",
+            "type": "vertex",
+            "properties": {
+                "name": "ripple",
+                "lang": "java",
+                "price": 199
+            }
+        }
+    ],
+    "page": null
 }
 ```
 
-此时`"page": null`表示已经没有下一页了 (注: 后端为 Cassandra 时，为了性能考虑，返回页恰好为最后一页时，返回 `page` 值可能非空，通过该 `page` 再请求下一页数据时则返回 `空数据` 及 `page = null`，其他情况类似)
+At this point, `"page": null` indicates that there are no more pages available. (Note: When using Cassandra as the backend for performance reasons, if the returned page happens to be the last page, the `page` value may not be empty. When requesting the next page using that `page` value, it will return `empty data` and `page = null`. The same applies to other similar situations.)
 
-#### 2.1.7 根据Id获取顶点
+#### 2.1.7 Retrieve Vertex by ID
 
 ##### Method & Url
 
@@ -635,29 +563,19 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
     "label": "person",
     "type": "vertex",
     "properties": {
-        "name": [
-            {
-                "id": "1:marko>name",
-                "value": "marko"
-            }
-        ],
-        "age": [
-            {
-                "id": "1:marko>age",
-                "value": 29
-            }
-        ]
+        "name": "marko",
+        "age": 30
     }
 }
 ```
 
-#### 2.1.8 根据Id删除顶点
+#### 2.1.8 Delete Vertex by ID
 
 ##### Params
 
-- label: 顶点类型，可选参数
+- label: Vertex type, optional parameter
 
-**仅根据Id删除顶点**
+**Delete the vertex based on ID only.**
 
 ##### Method & Url
 
@@ -671,9 +589,9 @@ DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
 204
 ```
 
-**根据Label+Id删除顶点**
+**Delete Vertex by Label+ID**
 
-通过指定Label参数和Id来删除顶点时，一般来说其性能比仅根据Id删除会更好。
+When deleting a vertex by specifying both the Label parameter and the ID, it generally offers better performance compared to deleting by ID alone.
 
 ##### Method & Url
 
@@ -682,6 +600,7 @@ DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"?label=per
 ```
 
 ##### Response Status
+
 ```json
 204
 ```

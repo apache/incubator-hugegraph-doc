@@ -4,144 +4,141 @@ linkTitle: "v0.5.6 Cluster(Cassandra)"
 weight: 2
 ---
 
-### 1 测试环境
+### 1 Test environment
 
-被压机器信息
+Compressed machine information
 
 CPU                                          | Memory | 网卡      | 磁盘
 -------------------------------------------- | ------ | --------- | ------------------
 48 Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz | 128G   | 10000Mbps | 750GB SSD,2.7T HDD
 
-- 起压力机器信息：与被压机器同配置
-- 测试工具：apache-Jmeter-2.5.1
+- Starting Pressure Machine Information: Configured the same as the compressed machine.
+- Testing tool: Apache JMeter 2.5.1.
 
-注：起压机器和被压机器在同一机房
+Note: The machine used to initiate the load and the machine being tested are located in the same data center (or server room)
 
-### 2 测试说明
+### 2 Test Description
 
-#### 2.1 名词定义（时间的单位均为ms）
+#### 2.1 Definition of terms (the unit of time is ms)
 
-- Samples -- 本次场景中一共完成了多少个线程
-- Average -- 平均响应时间
-- Median -- 统计意义上面的响应时间的中值
-- 90% Line -- 所有线程中90%的线程的响应时间都小于xx
-- Min -- 最小响应时间
-- Max -- 最大响应时间
-- Error -- 出错率
-- Throughput -- 吞吐量
-- KB/sec -- 以流量做衡量的吞吐量
+- Samples -- The total number of threads completed in this scenario.
+- Average -- The average response time.
+- Median -- The median response time in statistical terms.
+- 90% Line -- The response time below which 90% of all threads fall.
+- Min -- The minimum response time.
+- Max -- The maximum response time.
+- Error -- The error rate.
+- Throughput -- The number of transactions processed per unit of time.
+- KB/sec -- The throughput measured in terms of data transmitted per second.
 
-#### 2.2 底层存储
+#### 2.2 Low-Level Storage
 
-后端存储使用15节点Cassandra集群，HugeGraph与Cassandra集群位于不同的服务器，server相关的配置文件除主机和端口有修改外，其余均保持默认。
+A 15-node Cassandra cluster is used for backend storage. HugeGraph and the Cassandra cluster are located on separate servers. Server-related configuration files are modified only for host and port settings, while the rest remain default.
 
-### 3 性能结果总结
+### 3 Summary of Performance Results
 
-1. HugeGraph单条插入顶点和边的速度分别为9000和4500
-2. 顶点和边的批量插入速度分别为5w/s和15w/s，远大于单条插入速度
-3. 按id查询顶点和边的并发度可达到12000以上，且请求的平均延时小于70ms
+1. The speed of single vertex and edge insertion in HugeGraph is 9000 and 4500 per second, respectively.
+2. The speed of bulk vertex and edge insertion is 50,000 and 150,000 per second, respectively, which is much higher than the single insertion speed.
+3. The concurrency for querying vertices and edges by ID can reach more than 12,000, and the average request delay is less than 70ms.
 
-### 4 测试结果及分析
+### 4 Test Results and Analysis
 
-#### 4.1 batch插入
+#### 4.1 Batch Insertion
 
-##### 4.1.1 压力上限测试
+##### 4.1.1 Pressure Upper Limit Test
 
-###### 测试方法
+###### Test Method
 
-不断提升并发量，测试server仍能正常提供服务的压力上限
+Continuously increase the concurrency level to test the upper limit of the server's ability to provide services.
 
-###### 压力参数
+###### Pressure Parameters
 
-持续时间：5min
+Duration: 5 minutes.
 
-###### 顶点的最大插入速度：
+###### Maximum Insertion Speed of Vertices:
 
 <center>
   <img src="/docs/images/API-perf/v0.5.6/cassandra/vertex_batch.png" alt="image">
 </center>
 
+###### Conclusion:
 
-####### 结论：
+- At a concurrency level of 3500, the throughput of vertices is 261, and the amount of data processed per second is 52,200 (261 * 200).
 
-- 并发3500，顶点的吞吐量是261，每秒可处理的数据：261*200=52200/s
-
-###### 边的最大插入速度
+###### Maximum Insertion Speed of Edges:
 
 <center>
   <img src="/docs/images/API-perf/v0.5.6/cassandra/edge_batch.png" alt="image">
 </center>
 
+###### Conclusion:
 
-####### 结论：
+- At a concurrency level of 1000, the throughput of edges is 323, and the amount of data processed per second is 161,500 (323 * 500).
 
-- 并发1000，边的吞吐量是323，每秒可处理的数据：323*500=161500/s
+#### 4.2 Single Insertion
 
-#### 4.2 single插入
+##### 4.2.1 Pressure Upper Limit Test
 
-##### 4.2.1 压力上限测试
+###### Test Method
 
-###### 测试方法
+Continuously increase the concurrency level to test the upper limit of the server's ability to provide services.
 
-不断提升并发量，测试server仍能正常提供服务的压力上限
+###### Pressure Parameters
 
-###### 压力参数
+- Duration: 5 minutes.
+- Service exception mark: Error rate greater than 0.00%.
 
-- 持续时间：5min
-- 服务异常标志：错误率大于0.00%
-
-###### 顶点的单条插入
+###### Single Insertion of Vertices:
 
 <center>
   <img src="/docs/images/API-perf/v0.5.6/cassandra/vertex_single.png" alt="image">
 </center>
 
+###### Conclusion:
 
-####### 结论：
+- At a concurrency level of 9000, the throughput is 8400, and the single-insertion concurrency capability for vertices is 9000.
 
-- 并发9000，吞吐量为8400，顶点的单条插入并发能力为9000
-
-###### 边的单条插入
+###### Single Insertion of Edges:
 
 <center>
   <img src="/docs/images/API-perf/v0.5.6/cassandra/edge_single.png" alt="image">
 </center>
 
 
-####### 结论：
+###### Conclusion:
 
-- 并发4500，吞吐量是4160，边的单条插入并发能力为4500
+- At a concurrency level of 4500, the throughput is 4160, and the single-insertion concurrency capability for edges is 4500.
 
-#### 4.3 按id查询
+#### 4.3 Query by ID
 
-##### 4.3.1 压力上限测试
+##### 4.3.1 Pressure Upper Limit Test
 
-###### 测试方法
+###### Test Method
 
-不断提升并发量，测试server仍能正常提供服务的压力上限
+Continuously increase the concurrency and test the upper limit of the pressure that the server can still provide services normally.
 
-###### 压力参数
+###### Pressure Parameters
 
-- 持续时间：5min
-- 服务异常标志：错误率大于0.00%
+- Duration: 5 minutes
+- Service exception flag: error rate greater than 0.00%
 
-###### 顶点的按id查询
+###### Query by ID for vertices
 
 <center>
   <img src="/docs/images/API-perf/v0.5.6/cassandra/vertex_id_query.png" alt="image">
 </center>
 
 
-####### 结论：
+###### Conclusion:
 
-- 并发14500，吞吐量是13576，顶点的按id查询的并发能力为14500，平均延时为11ms
+- The concurrent capacity of the vertex search by ID is 14500, with a throughput of 13576 and an average delay of 11ms.
 
-###### 边的按id查询
+###### Edge search by ID
 
 <center>
   <img src="/docs/images/API-perf/v0.5.6/cassandra/edge_id_query.png" alt="image">
 </center>
 
-####### 结论：
+###### Conclusion:
 
-- 并发12000，吞吐量是10688，边的按id查询的并发能力为12000，平均延时为63ms
+- For edge ID-based queries, the server's concurrent capacity is up to 12,000, with a throughput of 10,688 and an average latency of 63ms.

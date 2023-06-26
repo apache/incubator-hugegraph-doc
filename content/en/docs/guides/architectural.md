@@ -4,27 +4,27 @@ linkTitle: "Architecture Overview"
 weight: 1
 ---
 
-### 1 概述
+### 1 Overview
 
-作为一款通用的图数据库产品，HugeGraph需具备图数据的基本功能，如下图所示。HugeGraph包括三个层次的功能，分别是存储层、计算层和用户接口层。 HugeGraph支持OLTP和OLAP两种图计算类型，其中OLTP实现了[Apache TinkerPop3](https://tinkerpop.apache.org)框架，并支持[Gremlin](https://tinkerpop.apache.org/gremlin.html)查询语言。 OLAP计算是基于SparkGraphX实现。
+As a general-purpose graph database product, HugeGraph needs to possess basic graph database functionality. HugeGraph supports two types of graph computation: OLTP and OLAP. For OLTP, it implements the [Apache TinkerPop3](https://tinkerpop.apache.org) framework and supports the [Gremlin](https://tinkerpop.apache.org/gremlin.html) and [Cypher](https://en.wikipedia.org/wiki/Cypher) query languages. It comes with a complete application toolchain and provides a plugin-based backend storage driver framework.
 
-<center>
-  <img src="/docs/images/design/architectural-overview.png" alt="image">
-</center>
+Below is the overall architecture diagram of HugeGraph:
 
+<div style="text-align: center;">
+  <img src="/docs/images/design/architectural-revised.png" alt="image">
+</div>
 
-### 2 组件
+HugeGraph consists of three layers of functionality: the application layer, the graph engine layer, and the storage layer.
 
-HugeGraph的主要功能分为HugeCore、ApiServer、HugeGraph-Client、HugeGraph-Loader和HugeGraph-Studio等组件构成，各组件之间的通信关系如下图所示。
-
-<center>
-  <img src="/docs/images/design/architectural-component.png" alt="image">
-</center>
-
-
-- HugeCore ：HugeGraph的核心模块，TinkerPop的接口主要在该模块中实现。HugeCore的功能涵盖包括OLTP和OLAP两个部分。
-- ApiServer ：提供RESTFul Api接口，对外提供Graph Api、Schema Api和Gremlin Api等接口服务。
-- HugeGraph-Client：基于Java客户端驱动程序。HugeGraph-Client是Java版本客户端驱动程序，后续可根据需要提供Python、Go、C++等多语言支持。
-- HugeGraph-Loader：数据导入模块。HugeGraph-Loader可以扫描并分析现有数据，自动生成Graph Schema创建语言，通过批量方式快速导入数据。
-- HugeGraph-Studio：基于Web的可视化IDE环境。以Notebook方式记录Gremlin查询，可视化展示Graph的关联关系。HugeGraph-Studio也是本系统推荐的工具。
-- HugeGraph-Computer：HugeGraph-Computer是一个分布式图处理系统 (OLAP)。
+- Application Layer:
+  - [Hubble](/docs/quickstart/hugegraph-hubble/): An all-in-one visual analytics platform that covers the entire process of data modeling, rapid data import, online and offline analysis of data, and unified management of graphs. It provides a guided workflow for operating graph applications.
+  - [Loader](/docs/quickstart/hugegraph-loader/): A data import component that can transform data from various sources into vertices and edges and bulk import them into the graph database.
+  - [Tools](/docs/quickstart/hugegraph-tools/): Command-line tools for deploying, managing, and backing up/restoring data in HugeGraph.
+  - [Computer](/docs/quickstart/hugegraph-computer/): A distributed graph processing system (OLAP) that implements [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf). It can run on Kubernetes.
+  - [Client](/docs/quickstart/hugegraph-client/): HugeGraph client written in Java. Users can use the client to operate HugeGraph using Java code. Support for other languages such as Python, Go, and C++ may be provided in the future.
+- [Graph Engine Layer](/docs/quickstart/hugegraph-server/):
+  - REST Server: Provides a RESTful API for querying graph/schema information, supports the [Gremlin](https://tinkerpop.apache.org/gremlin.html) and [Cypher](https://en.wikipedia.org/wiki/Cypher) query languages, and offers APIs for service monitoring and operations.
+  - Graph Engine: Supports both OLTP and OLAP graph computation types, with OLTP implementing the [Apache TinkerPop3](https://tinkerpop.apache.org) framework.
+  - Backend Interface: Implements the storage of graph data to the backend.
+- Storage Layer:
+  - Storage Backend: Supports multiple built-in storage backends (RocksDB/MySQL/HBase/...) and allows users to extend custom backends without modifying the existing source code.

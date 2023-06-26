@@ -5,42 +5,48 @@ weight: 2
 ---
 
 ### 1. Property Graph
-常见的图数据表示模型有两种，分别是RDF（Resource Description Framework）模型和属性图（Property Graph）模型。
-RDF和Property Graph都是最基础、最有名的图表示模式，都能够表示各种图的实体关系建模。
-RDF是W3C标准，而Property Graph是工业标准，受到广大图数据库厂商的广泛支持。HugeGraph目前采用Property Graph。
+There are two common graph data representation models, namely the RDF (Resource Description Framework) model and the Property Graph (Property Graph) model. 
+Both RDF and Property Graph are the most basic and well-known graph representation modes, and both can represent entity-relationship modeling of various graphs. 
+RDF is a W3C standard, while Property Graph is an industry standard and is widely supported by graph database vendors. HugeGraph currently uses Property Graph.
 
-HugeGraph对应的存储概念模型也是参考Property Graph而设计的，具体示例详见下图：（*此图为旧版设计已过时，请忽略它，后续更新*）
+The storage concept model corresponding to HugeGraph is also designed with reference to Property Graph. For specific examples, see the figure below: 
+( This figure is outdated for the old version design, please ignore it and update it later )
 
 ![image](/docs/images/design/PropertyGraph.png)
 
-在HugeGraph内部，每个顶点 / 边由唯一的 VertexId / EdgeId 标识，属性存储在对应点 / 边内部。而顶点与顶点之间的关系 / 映射则是通过边来存储的。
+Inside HugeGraph, each vertex/edge is identified by a unique VertexId/EdgeId, and the attributes are stored inside the corresponding vertex/edge. 
+The relationship/mapping between vertices is stored through edges.
 
-顶点属性值通过边指针方式存储时，如果要更新一个顶点特定的属性值直接通过覆盖写入即可，其弊端是冗余存储了VertexId；
-如果要更新关系的属性需要通过read-and-modify方式，先读取所有属性，修改部分属性，然后再写入存储系统，更新效率较低。
-从经验来看顶点属性的修改需求较多，而边的属性修改需求较少，例如PageRank和Graph Cluster等计算都需要频繁修改顶点的属性值。
+When the vertex attribute value is stored by edge pointer, if you want to update a vertex-specific attribute value, you can directly write it by overwriting. 
+The disadvantage is that the VertexId is redundantly stored; if you want to update the attribute of the relationship, you need to use the read-and-modify method , 
+read all attributes first, modify some attributes, and then write to the storage system, the update efficiency is low. According to experience, there are more 
+requirements for modifying vertex attributes, but less for edge attributes. For example, calculations such as PageRank and Graph Cluster require frequent 
+modification of vertex attribute values.
 
-### 2. 图分区方案
-对于分布式图数据库而言，图的分区存储方式有两种：分别是边分割存储（Edge Cut）和点分割存储（Vertex Cut），如下图所示。
-使用Edge Cut方式存储图时，任何一个顶点只会出现在一台机器上，而边可能分布在不同机器上，这种存储方式有可能导致边多次存储。
-使用Vertex Cut方式存储图时，任何一条边只会出现在一台机器上，而每相同的一个点可能分布到不同机器上，这种存储方式可能会导致顶点多次存储。
+### 2. Graph Partition Scheme
+For distributed graph databases, there are two partition storage methods for graphs: Edge Cut and Vertex Cut, as shown in the following figure. When using the 
+Edge Cut method to store graphs, any vertex will only appear on one machine, while edges may be distributed on different machines. This storage method may lead 
+to multiple storage of edges. When using the Vertex Cut method to store graphs, any edge will only appear on one machine, and each same point may be distributed 
+to different machines. This storage method may result in multiple storage of vertices.
 
 ![image](/docs/images/design/GraphCut.png)
 
-采用EdgeCut分区方案可以支持高性能的插入和更新操作，而VertexCut分区方案更适合静态图查询分析，因此EdgeCut适合OLTP图查询，VertexCut更适合OLAP的图查询。
-HugeGraph目前采用EdgeCut的分区方案。
+The EdgeCut partition scheme can support high-performance insert and update operations, while the VertexCut partition scheme is more suitable for static graph query 
+analysis, so EdgeCut is suitable for OLTP graph query, and VertexCut is more suitable for OLAP graph query. HugeGraph currently adopts the partition scheme of EdgeCut.
 
-### 3. VertexId 策略
+### 3. VertexId Strategy
 
-HugeGraph的Vertex支持三种ID策略，在同一个图数据库中不同的VertexLabel可以使用不同的Id策略，目前HugeGraph支持的Id策略分别是：
+Vertex of HugeGraph supports three ID strategies. Different VertexLabels in the same graph database can use different Id strategies. Currently, the Id strategies 
+supported by HugeGraph are:
 
-- 自动生成（AUTOMATIC）：使用Snowflake算法自动生成全局唯一Id，Long类型；
-- 主键（PRIMARY_KEY）：通过VertexLabel+PrimaryKeyValues生成Id，String类型；
-- 自定义（CUSTOMIZE_STRING|CUSTOMIZE_NUMBER）：用户自定义Id，分为String和Long类型两种，需自己保证Id的唯一性；
+- Automatic generation (AUTOMATIC): Use the Snowflake algorithm to automatically generate a globally unique Id, Long type;
+- Primary Key (PRIMARY_KEY): Generate Id through VertexLabel+PrimaryKeyValues, String type;
+- Custom (CUSTOMIZE_STRING|CUSTOMIZE_NUMBER): User-defined Id, which is divided into two types: String and Long, and you need to ensure the uniqueness of the Id yourself;
 
-默认的Id策略是AUTOMATIC，如果用户调用primaryKeys()方法并设置了正确的PrimaryKeys，则自动启用PRIMARY_KEY策略。
-启用PRIMARY_KEY策略后HugeGraph能根据PrimaryKeys实现数据去重。
+The default Id policy is AUTOMATIC, if the user calls the primaryKeys() method and sets the correct PrimaryKeys, the PRIMARY_KEY policy is automatically enabled. 
+After enabling the PRIMARY_KEY strategy, HugeGraph can implement data deduplication based on PrimaryKeys.
 
- 1. AUTOMATIC ID策略
+ 1. AUTOMATIC ID Policy
  ```java
 schema.vertexLabel("person")
       .useAutomaticId()
@@ -49,7 +55,7 @@ schema.vertexLabel("person")
 graph.addVertex(T.label, "person","name", "marko", "age", 18, "city", "Beijing");
  ```
 
- 2. PRIMARY_KEY ID策略
+ 2. PRIMARY_KEY ID policy
  ```java
 schema.vertexLabel("person")
       .usePrimaryKeyId()
@@ -59,7 +65,7 @@ schema.vertexLabel("person")
 graph.addVertex(T.label, "person","name", "marko", "age", 18, "city", "Beijing");
  ```
 
- 3. CUSTOMIZE_STRING ID策略
+ 3. CUSTOMIZE_STRING ID Policy
  ```java
 schema.vertexLabel("person")
       .useCustomizeStringId()
@@ -68,7 +74,7 @@ schema.vertexLabel("person")
 graph.addVertex(T.label, "person", T.id, "123456", "name", "marko","age", 18, "city", "Beijing");
  ```
 
- 4. CUSTOMIZE_NUMBER ID策略
+ 4. CUSTOMIZE_NUMBER ID Policy
  ```java
 schema.vertexLabel("person")
       .useCustomizeNumberId()
@@ -77,71 +83,71 @@ schema.vertexLabel("person")
 graph.addVertex(T.label, "person", T.id, 123456, "name", "marko","age", 18, "city", "Beijing");
  ```
 
-如果用户需要Vertex去重，有三种方案分别是：
+If users need Vertex deduplication, there are three options:
 
-1. 采用PRIMARY_KEY策略，自动覆盖，适合大数据量批量插入，用户无法知道是否发生了覆盖行为
-2. 采用AUTOMATIC策略，read-and-modify，适合小数据量插入，用户可以明确知道是否发生覆盖
-3. 采用CUSTOMIZE_STRING或CUSTOMIZE_NUMBER策略，用户自己保证唯一
+1. Adopt PRIMARY_KEY strategy, automatic overwriting, suitable for batch insertion of large amount of data, users cannot know whether overwriting has occurred
+2. Adopt AUTOMATIC strategy, read-and-modify, suitable for small data insertion, users can clearly know whether overwriting occurs
+3. Using the CUSTOMIZE_STRING or CUSTOMIZE_NUMBER strategy, the user guarantees the uniqueness
 
-### 4. EdgeId 策略
+### 4. EdgeId policy
 
-HugeGraph的EdgeId是由`srcVertexId`+`edgeLabel`+`sortKey`+`tgtVertexId`四部分组合而成。其中`sortKey`是HugeGraph的一个重要概念。
-在Edge中加入`sortKey`作为Edge的唯一标识的原因有两个：
+The EdgeId of HugeGraph is composed of `srcVertexId` + `edgeLabel` + `sortKey` + `tgtVertexId`.  Among them `sortKey` is an important concept of HugeGraph.
+There are two reasons for adding Edge sortKeyas the unique ID of Edge:
 
-1. 如果两个顶点之间存在多条相同Label的边可通过`sortKey`来区分
-2. 对于SuperNode的节点，可以通过`sortKey`来排序截断。
+1. If there are multiple edges of the same Label between two vertices, they can be sortKeydistinguished by
+2. For SuperNode nodes, it can be sortKeysorted and truncated by.
 
-由于EdgeId是由`srcVertexId`+`edgeLabel`+`sortKey`+`tgtVertexId`四部分组合，多次插入相同的Edge时HugeGraph会自动覆盖以实现去重。
-需要注意的是如果批量插入模式下Edge的属性也将会覆盖。
+Since EdgeId is composed of `srcVertexId` + `edgeLabel` + `sortKey` + `tgtVertexId`, HugeGraph will automatically overwrite when the same Edge is inserted 
+multiple times to achieve deduplication. It should be noted that the properties of Edge will also be overwritten in the batch insert mode.
 
-另外由于HugeGraph的EdgeId采用自动去重策略，对于self-loop（一个顶点存在一条指向自身的边）的情况下HugeGraph认为仅有一条边，对于采用AUTOMATIC策略的图数据库（例如TitianDB
-）则会认为该图存在两条边。
+In addition, because HugeGraph's EdgeId adopts an automatic deduplication strategy, HugeGraph considers that there is only one edge in the case of self-loop 
+(a vertex has an edge pointing to itself). The graph has two edges.
 
-> HugeGraph的边仅支持有向边，无向边可以创建Out和In两条边来实现。
+> The edges of HugeGraph only support directed edges, and undirected edges can be realized by creating two edges, Out and In.
 
 ### 5. HugeGraph transaction overview
 
-##### TinkerPop事务概述
+##### TinkerPop transaction overview
 
-TinkerPop transaction事务是指对数据库执行操作的工作单元，一个事务内的一组操作要么执行成功，要么全部失败。
-详细介绍请参考TinkerPop官方文档：http://tinkerpop.apache.org/docs/current/reference/#transactions
+A TinkerPop transaction refers to a unit of work that performs operations on the database. A set of operations within a transaction either succeeds or all fail. For a detailed introduction, please refer to the official documentation of TinkerPop: http://tinkerpop.apache.org/docs/current/reference/#transactions：http://tinkerpop.apache.org/docs/current/reference/#transactions
 
-##### TinkerPop事务操作接口
+##### TinkerPop transaction overview
 
-- open 打开事务
-- commit 提交事务
-- rollback 回滚事务
-- close 关闭事务 
+- open open transaction
+- commit commit transaction
+- rollback rollback transaction
+- close closes the transaction
 
-##### TinkerPop事务规范
+##### TinkerPop transaction specification
 
-- 事务必须显式提交后才可生效（未提交时修改操作只有本事务内查询可看到）
-- 事务必须打开之后才可提交或回滚
-- 如果事务设置自动打开则无需显式打开（默认方式），如果设置手动打开则必须显式打开
-- 可设置事务关闭时：自动提交、自动回滚（默认方式）、手动（禁止显式关闭）等3种模式
-- 事务在提交或回滚后必须是关闭状态
-- 事务在查询后必须是打开状态
-- 事务（非threaded tx）必须线程隔离，多线程操作同一事务互不影响
+- The transaction must be explicitly committed before it can take effect (the modification operation can only be seen by the query in this transaction if it is not committed)
+- A transaction must be opened before it can be committed or rolled back
+- If the transaction setting is automatically turned on, there is no need to explicitly turn it on (the default method), if it is set to be turned on manually, it must be turned on explicitly
+- When the transaction is closed, you can set three modes: automatic commit, automatic rollback (default mode), manual (explicit shutdown is prohibited), etc.
+- The transaction must be closed after committing or rolling back
+- The transaction must be open after the query
+- Transactions (non-threaded tx) must be thread-isolated, and multi-threaded operations on the same transaction do not affect each other
 
-更多事务规范用例见：[Transaction Test](https://github.com/apache/tinkerpop/blob/master/gremlin-test/src/main/java/org/apache/tinkerpop/gremlin/structure/TransactionTest.java)
+For more transaction specification use cases, see: [Transaction Test](https://github.com/apache/tinkerpop/blob/master/gremlin-test/src/main/java/org/apache/tinkerpop/gremlin/structure/TransactionTest.java)
 
-##### HugeGraph事务实现
+##### HugeGraph transaction implementation
 
-- 一个事务中所有的操作要么成功要么失败
-- 一个事务只能读取到另外一个事务已提交的内容（Read committed）
-- 所有未提交的操作均能在本事务中查询出来，包括：
-  - 增加顶点能够查询出该顶点
-  - 删除顶点能够过滤掉该顶点
-  - 删除顶点能够过滤掉该顶点相关边
-  - 增加边能够查询出该边
-  - 删除边能够过滤掉该边
-  - 增加/修改（顶点、边）属性能够在查询时生效
-  - 删除（顶点、边）属性能够在查询时生效
-- 所有未提交的操作在事务回滚后均失效，包括：
-  - 顶点、边的增加、删除
-  - 属性的增加/修改、删除
+- All operations in a transaction either succeed or fail
+- A transaction can only read what has been committed by another transaction (Read committed)
+- All uncommitted operations can be queried in this transaction, including:
+  - Adding a vertex can query the vertex
+  - Delete a vertex to filter out the vertex
+  - Deleting a vertex can filter out the related edges of the vertex
+  - Adding an edge can query the edge
+  - Delete edge can filter out the edge
+  - Adding/modifying (vertex, edge) attributes can take effect when querying
+  - Delete (vertex, edge) attributes can take effect at query time
+- All uncommitted operations become invalid after the transaction is rolled back, including:
+  - Adding and deleting vertices and edges
+  - Addition/modification, deletion of attributes
 
-示例：一个事务无法读取另一个事务未提交的内容
+Example: One transaction cannot read another transaction's uncommitted content
+
 ```java
     static void testUncommittedTx(final HugeGraph graph) throws InterruptedException {
 
@@ -196,15 +202,15 @@ TinkerPop transaction事务是指对数据库执行操作的工作单元，一�
     }
 ```
 
-##### 事务实现原理
+##### Principle of transaction realization
 
-- 服务端内部通过将事务与线程绑定实现隔离（ThreadLocal）
-- 本事务未提交的内容按照时间顺序覆盖老数据以供本事务查询最新版本数据
-- 底层依赖后端数据库保证事务原子性操作（如Cassandra/RocksDB的batch接口均保证原子性）
+- The server internally realizes isolation by binding transactions to threads (ThreadLocal)
+- The uncommitted content of this transaction overwrites the old data in chronological order for this transaction to query the latest version of data
+- The bottom layer relies on the back-end database to ensure transaction atomicity (for example, the batch interface of Cassandra/RocksDB guarantees atomicity)
 
-###### *注意*
+###### Notice 
 
-> RESTful API暂时未暴露事务接口
+> The RESTful API does not expose the transaction interface for the time being
 
-> TinkerPop API允许打开事务，请求完成时会自动关闭(Gremlin Server强制关闭)
+> TinkerPop API allows open transactions, which are automatically closed when the request is completed (Gremlin Server forces close)
 

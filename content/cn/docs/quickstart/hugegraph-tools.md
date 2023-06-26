@@ -20,11 +20,12 @@ HugeGraph-Tools 是 HugeGraph 的自动化部署、管理和备份/还原组件�
 下载最新版本的 HugeGraph-Toolchain 包, 然后进入 tools 子目录
 
 ```bash
-wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
+wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
 tar zxf *hugegraph*.tar.gz
 ```
 
 #### 2.2 下载源码编译安装
+源码编译前请确保安装了wget命令
 
 下载最新版本的 HugeGraph-Toolchain 源码包, 然后根目录编译或者单独编译 tool 子模块：
 
@@ -33,7 +34,7 @@ tar zxf *hugegraph*.tar.gz
 git clone https://github.com/apache/hugegraph-toolchain.git
 
 # 2. get from direct  (e.g. here is 1.0.0, please choose the latest version)
-wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0-src.tar.gz
+wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0-src.tar.gz
 ```
 
 编译生成 tar 包:
