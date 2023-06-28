@@ -569,6 +569,8 @@ GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page=EoYxOm1hcmtvgggCAIQy
 
 #### 2.2.7 根据 id 获取边
 
+##### Params
+
 **路径参数说明：**
 
 - graph：待操作的图
@@ -631,9 +633,9 @@ DELETE http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop
 204
 ```
 
-**根据 Label + id 删除边**
+**根据 label + id 删除边**
 
-通过指定 Label 参数和 id 来删除边时，一般来说其性能比仅根据 id 删除会更好
+通过指定 label 参数和 id 来删除边时，一般来说其性能比仅根据 id 删除会更好
 
 ##### Method & Url
 
