@@ -15,21 +15,64 @@ The EdgeId is formed by concatenating `src-vertex-id + direction + label + sort-
 
 --------------------------------------------------------------------------------
 
-The following examples assume that various schemas and vertex information mentioned above have been created.
+The following example requires creating a graph `schema` based on the following `groovy` script:
+
+```groovy
+import org.apache.hugegraph.HugeFactory
+import org.apache.tinkerpop.gremlin.structure.T
+
+conf = "conf/graphs/hugegraph.properties"
+graph = HugeFactory.open(conf)
+schema = graph.schema()
+
+schema.propertyKey("name").asText().ifNotExist().create()
+schema.propertyKey("age").asInt().ifNotExist().create()
+schema.propertyKey("city").asText().ifNotExist().create()
+schema.propertyKey("weight").asDouble().ifNotExist().create()
+schema.propertyKey("lang").asText().ifNotExist().create()
+schema.propertyKey("date").asText().ifNotExist().create()
+schema.propertyKey("price").asInt().ifNotExist().create()
+
+schema.vertexLabel("person").properties("name", "age", "city").primaryKeys("name").ifNotExist().create()
+schema.vertexLabel("software").properties("name", "lang", "price").primaryKeys("name").ifNotExist().create()
+schema.indexLabel("personByCity").onV("person").by("city").secondary().ifNotExist().create()
+schema.indexLabel("personByAgeAndCity").onV("person").by("age", "city").secondary().ifNotExist().create()
+schema.indexLabel("softwareByPrice").onV("software").by("price").range().ifNotExist().create()
+schema.edgeLabel("knows").sourceLabel("person").targetLabel("person").properties("date", "weight").ifNotExist().create()
+schema.edgeLabel("created").sourceLabel("person").targetLabel("software").properties("date", "weight").ifNotExist().create()
+schema.indexLabel("createdByDate").onE("created").by("date").secondary().ifNotExist().create()
+schema.indexLabel("createdByWeight").onE("created").by("weight").range().ifNotExist().create()
+schema.indexLabel("knowsByWeight").onE("knows").by("weight").range().ifNotExist().create()
+
+marko = graph.addVertex(T.label, "person", "name", "marko", "age", 29, "city", "Beijing")
+vadas = graph.addVertex(T.label, "person", "name", "vadas", "age", 27, "city", "Hongkong")
+lop = graph.addVertex(T.label, "software", "name", "lop", "lang", "java", "price", 328)
+josh = graph.addVertex(T.label, "person", "name", "josh", "age", 32, "city", "Beijing")
+ripple = graph.addVertex(T.label, "software", "name", "ripple", "lang", "java", "price", 199)
+peter = graph.addVertex(T.label, "person", "name", "peter", "age", 35, "city", "Shanghai")
+
+graph.tx().commit()
+g = graph.traversal()
+```
 
 #### 2.2.1 Creating an Edge
 
-Params Explanation
+##### Params
 
-- label: The name of the edge type, required.
-- outV: The ID of the source vertex, required.
-- inV: The ID of the target vertex, required.
-- outVLabel: The type of the source vertex, required.
-- inVLabel: The type of the target vertex, required.
+**Path Parameter Description:**
+
+- graph: The graph to operate on
+
+**Request Body Description:**
+
+- label: The edge type name (required)
+- outV: The source vertex id (required)
+- inV: The target vertex id (required)
+- outVLabel: The source vertex type (required)
+- inVLabel: The target vertex type (required)
 - properties: The properties associated with the edge. The internal structure of the object is as follows:
-  1. name: The name of the property.
-  2. value: The value of the property.
-
+  1. name: The property name
+  2. value: The property value
 
 ##### Method & Url
 
@@ -42,13 +85,13 @@ POST http://localhost:8080/graphs/hugegraph/graph/edges
 ```json
 {
     "label": "created",
-    "outV": "1:peter",
+    "outV": "1:marko",
     "inV": "2:lop",
     "outVLabel": "person",
     "inVLabel": "software",
     "properties": {
-        "date": "2017-5-18",
-        "weight": 0.2
+        "date": "20171210",
+        "weight": 0.4
     }
 }
 ```
@@ -63,16 +106,16 @@ POST http://localhost:8080/graphs/hugegraph/graph/edges
 
 ```json
 {
-    "id": "S1:peter>1>>S2:lop",
+    "id": "S1:marko>2>>S2:lop",
     "label": "created",
     "type": "edge",
-    "inVLabel": "software",
+    "outV": "1:marko",
     "outVLabel": "person",
     "inV": "2:lop",
-    "outV": "1:peter",
+    "inVLabel": "software",
     "properties": {
-        "date": "2017-5-18",
-        "weight": 0.2
+        "weight": 0.4,
+        "date": "20171210"
     }
 }
 ```
@@ -81,7 +124,17 @@ POST http://localhost:8080/graphs/hugegraph/graph/edges
 
 ##### Params
 
-- check_vertex: Whether to check vertex existence (true | false). When set to true and the source or target vertex of the edge being inserted does not exist, an error will be reported.
+**Path Parameter Description:**
+
+- graph: The graph to operate on
+
+**Request Parameter Description:**
+
+- check_vertex: Whether to check the existence of vertices (true | false). When set to true, an error will be thrown if the source or target vertices of the edge to be inserted do not exist. Default is true.
+
+**Request Body Description:**
+
+- List of edge information
 
 ##### Method & Url
 
@@ -94,25 +147,25 @@ POST http://localhost:8080/graphs/hugegraph/graph/edges/batch
 ```json
 [
     {
-        "label": "created",
-        "outV": "1:peter",
-        "inV": "2:lop",
-        "outVLabel": "person",
-        "inVLabel": "software",
-        "properties": {
-            "date": "2017-5-18",
-            "weight": 0.2
-        }
-    },
-    {
         "label": "knows",
         "outV": "1:marko",
         "inV": "1:vadas",
         "outVLabel": "person",
         "inVLabel": "person",
         "properties": {
-            "date": "2016-01-10",
+            "date": "20160110",
             "weight": 0.5
+        }
+    },
+    {
+        "label": "knows",
+        "outV": "1:marko",
+        "inV": "1:josh",
+        "outVLabel": "person",
+        "inVLabel": "person",
+        "properties": {
+            "date": "20130220",
+            "weight": 1.0
         }
     }
 ]
@@ -128,17 +181,32 @@ POST http://localhost:8080/graphs/hugegraph/graph/edges/batch
 
 ```json
 [
-    "S1:peter>1>>S2:lop",
-    "S1:marko>2>>S1:vadas"
+    "S1:marko>1>>S1:vadas",
+    "S1:marko>1>>S1:josh"
 ]
 ```
 
 #### 2.2.3 Updating Edge Properties
 
+##### Params
+
+**Path Parameter Description:**
+
+- graph: The graph to operate on
+- id: The ID of the edge to be operated on
+
+**Request Parameter Description:**
+
+- action: The append action
+
+**Request Body Description:**
+
+- Edge information
+
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action=append
+PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop?action=append
 ```
 
 ##### Request Body
@@ -151,7 +219,7 @@ PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action
 }
 ```
 
-> Note: There are three categories of property values: single, set, and list. If it is single, it means adding or updating the property value. If it is set or list, it means appending the property value.
+> NOTE: There are three categories of property values: single, set, and list. If it is single, it means adding or updating the property value. If it is set or list, it means appending the property value.
 
 ##### Response Status
 
@@ -163,60 +231,39 @@ PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action
 
 ```json
 {
-    "id": "S1:peter>1>>S2:lop",
+    "id": "S1:marko>2>>S2:lop",
     "label": "created",
     "type": "edge",
-    "inVLabel": "software",
+    "outV": "1:marko",
     "outVLabel": "person",
     "inV": "2:lop",
-    "outV": "1:peter",
+    "inVLabel": "software",
     "properties": {
-        "date": "2017-5-18",
-        "weight": 1
+        "weight": 1.0,
+        "date": "20171210"
     }
 }
 ```
 
 #### 2.2.4 Batch Updating Edge Properties
 
-##### Function Description
+##### Params
 
-Similar to batch updating vertex properties.
+**Path Parameter Description:**
 
-Assuming the original edge and its properties are:
+- graph: The graph to operate on
 
-```json
-{
-    "edges":[
-        {
-            "id":"S1:josh>2>>S2:ripple",
-            "label":"created",
-            "type":"edge",
-            "outV":"1:josh",
-            "outVLabel":"person",
-            "inV":"2:ripple",
-            "inVLabel":"software",
-            "properties":{
-                "weight":1,
-                "date":1512835200000
-            }
-        },
-        {
-            "id":"S1:marko>1>7JooBil0>S1:josh",
-            "label":"knows",
-            "type":"edge",
-            "outV":"1:marko",
-            "outVLabel":"person",
-            "inV":"1:josh",
-            "inVLabel":"person",
-            "properties":{
-                "weight":1,
-                "date":1361289600000
-            }
-        }
-    ]
-}
-```
+**Request Body Description:**
+
+- edges: List of edge information
+- update_strategies: For each property, you can set its update strategy individually, including:
+  - SUM: Only supports number type
+  - BIGGER/SMALLER: Only supports date/number type
+  - UNION/INTERSECTION: Only supports set type
+  - APPEND/ELIMINATE: Only supports collection type
+  - OVERRIDE
+- check_vertex: Whether to check the existence of vertices (true | false). When set to true, an error will be thrown if the source or target vertices of the edge to be inserted do not exist. Default is true.
+- create_if_not_exist: Currently only supports setting to true
 
 ##### Method & Url
 
@@ -228,165 +275,37 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/edges/batch
 
 ```json
 {
-    "edges":[
+    "edges": [
         {
-            "id":"S1:josh>2>>S2:ripple",
-            "label":"created",
-            "outV":"1:josh",
-            "outVLabel":"person",
-            "inV":"2:ripple",
-            "inVLabel":"software",
-            "properties":{
-                "weight":0.1,
-                "date":1522835200000
+            "label": "knows",
+            "outV": "1:marko",
+            "inV": "1:vadas",
+            "outVLabel": "person",
+            "inVLabel": "person",
+            "properties": {
+                "date": "20160111",
+                "weight": 1.0
             }
         },
         {
-            "id":"S1:marko>1>7JooBil0>S1:josh",
-            "label":"knows",
-            "outV":"1:marko",
-            "outVLabel":"person",
-            "inV":"1:josh",
-            "inVLabel":"person",
-            "properties":{
-                "weight":0.2,
-                "date":1301289600000
+            "label": "knows",
+            "outV": "1:marko",
+            "inV": "1:josh",
+            "outVLabel": "person",
+            "inVLabel": "person",
+            "properties": {
+                "date": "20130221",
+                "weight": 0.5
             }
         }
     ],
-    "update_strategies":{
-        "weight":"SUM",
-        "date":"BIGGER"
+    "update_strategies": {
+        "weight": "SUM",
+        "date": "OVERRIDE"
     },
     "check_vertex": false,
-    "create_if_not_exist":true
+    "create_if_not_exist": true
 }
-```
-
-##### Response Status
-
-```json
-200
-```
-
-##### Response Body
-
-```json
-{
-    "edges":[
-        {
-            "id":"S1:josh>2>>S2:ripple",
-            "label":"created",
-            "type":"edge",
-            "outV":"1:josh",
-            "outVLabel":"person",
-            "inV":"2:ripple",
-            "inVLabel":"software",
-            "properties":{
-                "weight":1.1,
-                "date":1522835200000
-            }
-        },
-        {
-            "id":"S1:marko>1>7JooBil0>S1:josh",
-            "label":"knows",
-            "type":"edge",
-            "outV":"1:marko",
-            "outVLabel":"person",
-            "inV":"1:josh",
-            "inVLabel":"person",
-            "properties":{
-                "weight":1.2,
-                "date":1301289600000
-            }
-        }
-    ]
-}
-```
-
-#### 2.2.5 Deleting Edge Properties
-
-##### Method & Url
-
-```
-PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?action=eliminate
-```
-
-##### Request Body
-
-```json
-{
-    "properties": {
-        "weight": 1.0
-    }
-}
-```
-
-> Note: This will directly delete the properties (removing the key and all values), regardless of whether the property values are single, set, or list.
-
-##### Response Status
-
-```json
-200
-```
-
-##### Response Body
-
-```json
-{
-    "id": "S1:peter>1>>S2:lop",
-    "label": "created",
-    "type": "edge",
-    "inVLabel": "software",
-    "outVLabel": "person",
-    "inV": "2:lop",
-    "outV": "1:peter",
-    "properties": {
-        "date": "20170324"
-    }
-}
-```
-
-#### 2.2.6 Fetching Edges that Match the Criteria
-
-##### Params
-
-- vertex_id: Vertex ID
-- direction: Direction of the edge (OUT | IN | BOTH)
-- label: Edge label
-- properties: Key-value pairs of properties (previously indexed for property-based queries)
-- offset: Offset, default is 0
-- limit: Number of results to query, default is 100
-- page: Page number
-
-The supported query options are as follows:
-
-- When the vertex_id parameter is provided, the page parameter cannot be used. The direction, label, and properties parameters are optional, while offset and limit can be used to restrict the result range.
-- When the vertex_id parameter is not provided, the label and properties parameters are optional.
-    - If the page parameter is used: the offset parameter is not available (either not provided or set to 0), the direction parameter is not available, and at most one property can be specified.
-    - If the page parameter is not used: the offset and limit parameters can be used to restrict the result range, and the direction parameter is ignored.
-
-Property key-value pairs consist of the attribute name and attribute value in JSON format. Multiple property key-value pairs are allowed as query conditions. The attribute value supports exact matching, range matching, and fuzzy matching. For exact matching, it is in the form `properties={"weight": 0.8}`. For range matching, it is in the form `properties={"age": "P.gt(0.8)"}`. For fuzzy matching, it is in the form `properties={"city": "P.textcontains("ChengDu China")}`. The supported expressions for range matching are as follows:
-
-| Expression                            | Description                          |
-| ------------------------------------ | ------------------------------------ |
-| P.eq(number)                         | Edges with attribute value equal to `number`              |
-| P.neq(number)                        | Edges with attribute value not equal to `number`             |
-| P.lt(number)                         | Edges with attribute value less than `number`              |
-| P.lte(number)                        | Edges with attribute value less than or equal to `number`            |
-| P.gt(number)                         | Edges with attribute value greater than `number`              |
-| P.gte(number)                        | Edges with attribute value greater than or equal to `number`            |
-| P.between(number1, number2)          | Edges with attribute value greater than or equal to `number1` and less than `number2` |
-| P.inside(number1, number2)           | Edges with attribute value greater than `number1` and less than `number2`   |
-| P.outside(number1, number2)          | Edges with attribute value less than `number1` and greater than `number2`   |
-| P.within(value1, value2, value3, ...) | Edges with attribute value equal to any of the given `values`         |
-
-**Query for edges connected to vertex person:josh (vertex_id="1:josh") with label created**
-
-##### Method & Url
-
-```
-GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?vertex_id="1:josh"&direction=BOTH&label=created&properties={}
 ```
 
 ##### Response Status
@@ -401,41 +320,130 @@ GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?vertex_id="1:josh"&direct
 {
     "edges": [
         {
-            "id": "S1:josh>1>>S2:lop",
-            "label": "created",
+            "id": "S1:marko>1>>S1:vadas",
+            "label": "knows",
             "type": "edge",
-            "inVLabel": "software",
+            "outV": "1:marko",
             "outVLabel": "person",
-            "inV": "2:lop",
-            "outV": "1:josh",
+            "inV": "1:vadas",
+            "inVLabel": "person",
             "properties": {
-                "date": "20091111",
-                "weight": 0.4
+                "weight": 1.5,
+                "date": "20160111"
             }
         },
         {
-            "id": "S1:josh>1>>S2:ripple",
-            "label": "created",
+            "id": "S1:marko>1>>S1:josh",
+            "label": "knows",
             "type": "edge",
-            "inVLabel": "software",
+            "outV": "1:marko",
             "outVLabel": "person",
-            "inV": "2:ripple",
-            "outV": "1:josh",
+            "inV": "1:josh",
+            "inVLabel": "person",
             "properties": {
-                "date": "20171210",
-                "weight": 1
+                "weight": 1.5,
+                "date": "20130221"
             }
         }
     ]
 }
 ```
 
-**Paginated query for all edges, fetching the first page (page without a parameter value), limited to 3 records**
+#### 2.2.5 Deleting Edge Properties
+
+##### Params
+
+**Path Parameter Description:**
+
+- graph: The graph to operate on
+- id: The ID of the edge to be operated on
+
+**Request Parameter Description:**
+
+- action: The eliminate action
+
+**Request Body Description:**
+
+- Edge information
 
 ##### Method & Url
 
 ```
-GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page&limit=3
+PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop?action=eliminate
+```
+
+##### Request Body
+
+```json
+{
+    "properties": {
+        "weight": 1.0
+    }
+}
+```
+
+> NOTE: This will directly delete the properties (removing the key and all values), regardless of whether the property values are single, set, or list.
+
+##### Response Status
+
+```json
+400
+```
+
+##### Response Body
+
+It is not possible to delete an attribute that is not set as nullable.
+
+```json
+{
+    "exception": "class java.lang.IllegalArgumentException",
+    "message": "Can't remove non-null edge property 'p[weight->1.0]'",
+    "cause": ""
+}
+```
+
+#### 2.2.6 Fetching Edges that Match the Criteria
+
+##### Params
+
+**Path Parameter:**
+
+- graph: The graph to operate on
+
+**Request Parameters:**
+
+- vertex_id: Vertex ID
+- direction: Edge direction (OUT | IN | BOTH), default is BOTH
+- label: Edge label
+- properties: Key-value pairs of properties (requires pre-built indexes for property queries)
+- keep_start_p: Default is false. When set to true, the range matching input expression will not be automatically escaped. For example, `properties={"age":"P.gt(0.8)"}` will be interpreted as an exact match, i.e., the age property is equal to "P.gt(0.8)"
+- offset: Offset, default is 0
+- limit: Number of queries, default is 100
+- page: Page number
+
+Key-value pairs of properties consist of the property name and value in JSON format. Multiple key-value pairs are allowed as query conditions. Property values support exact matching and range matching. For exact matching, it is in the form `properties={"weight":0.8}`. For range matching, it is in the form `properties={"age":"P.gt(0.8)"}`. The expressions supported by range matching are as follows:
+
+| Expression                         | Description                                                                      |
+|------------------------------------|----------------------------------------------------------------------------------|
+| P.eq(number)                       | Edges with property value equal to number                                        |
+| P.neq(number)                      | Edges with property value not equal to number                                    |
+| P.lt(number)                       | Edges with property value less than number                                       |
+| P.lte(number)                      | Edges with property value less than or equal to number                           |
+| P.gt(number)                       | Edges with property value greater than number                                    |
+| P.gte(number)                      | Edges with property value greater than or equal to number                        |
+| P.between(number1,number2)         | Edges with property value greater than or equal to number1 and less than number2 |
+| P.inside(number1,number2)          | Edges with property value greater than number1 and less than number2             |
+| P.outside(number1,number2)         | Edges with property value less than number1 and greater than number2             |
+| P.within(value1,value2,value3,...) | Edges with property value equal to any of the given values                       |
+| P.textcontains(value)              | Edges with property value containing the given value (string type)               |
+| P.contains(value)                  | Edges with property value containing the given value (collection type)           |
+
+**Edges connected to the vertex person:marko(vertex_id="1:marko") with label knows and date property equal to "20160111"**
+
+##### Method & Url
+
+```
+GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?vertex_id="1:marko"&label=knows&properties={"date":"P.within(\"20160111\")"}
 ```
 
 ##### Response Status
@@ -448,58 +456,30 @@ GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page&limit=3
 
 ```json
 {
-	"edges": [{
-			"id": "S1:peter>2>>S2:lop",
-			"label": "created",
-			"type": "edge",
-			"inVLabel": "software",
-			"outVLabel": "person",
-			"inV": "2:lop",
-			"outV": "1:peter",
-			"properties": {
-				"weight": 0.2,
-				"date": "20170324"
-			}
-		},
-		{
-			"id": "S1:josh>2>>S2:lop",
-			"label": "created",
-			"type": "edge",
-			"inVLabel": "software",
-			"outVLabel": "person",
-			"inV": "2:lop",
-			"outV": "1:josh",
-			"properties": {
-				"weight": 0.4,
-				"date": "20091111"
-			}
-		},
-		{
-			"id": "S1:josh>2>>S2:ripple",
-			"label": "created",
-			"type": "edge",
-			"inVLabel": "software",
-			"outVLabel": "person",
-			"inV": "2:ripple",
-			"outV": "1:josh",
-			"properties": {
-				"weight": 1,
-				"date": "20171210"
-			}
-		}
-	],
-	"page": "002500100753313a6a6f73681210010004000000020953323a726970706c65f07ffffffcf07ffffffd8460d63f4b398dd2721ed4fdb7716b420004"
+    "edges": [
+        {
+            "id": "S1:marko>1>>S1:vadas",
+            "label": "knows",
+            "type": "edge",
+            "outV": "1:marko",
+            "outVLabel": "person",
+            "inV": "1:vadas",
+            "inVLabel": "person",
+            "properties": {
+                "weight": 1.5,
+                "date": "20160111"
+            }
+        }
+    ]
 }
 ```
 
-The returned body contains the information of the next page, `"page": "002500100753313a6a6f73681210010004000000020953323a726970706c65f07ffffffcf07ffffffd8460d63f4b398dd2721ed4fdb7716b420004"`. When querying the next page, assign this value to the page parameter.
-
-**Paginated query for all edges, fetching the next page (page with the value returned from the previous page), limited to 3 records**
+**Paginate and retrieve all edges, get the first page (page without parameter value), limit to 2 entries**
 
 ##### Method & Url
 
 ```
-GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page=002500100753313a6a6f73681210010004000000020953323a726970706c65f07ffffffcf07ffffffd8460d63f4b398dd2721ed4fdb7716b420004&limit=3
+GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page&limit=2
 ```
 
 ##### Response Status
@@ -512,58 +492,94 @@ GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page=002500100753313a6a6f
 
 ```json
 {
-	"edges": [{
-			"id": "S1:marko>1>20130220>S1:josh",
-			"label": "knows",
-			"type": "edge",
-			"inVLabel": "person",
-			"outVLabel": "person",
-			"inV": "1:josh",
-			"outV": "1:marko",
-			"properties": {
-				"weight": 1,
-				"date": "20130220"
-			}
-		},
-		{
-			"id": "S1:marko>1>20160110>S1:vadas",
-			"label": "knows",
-			"type": "edge",
-			"inVLabel": "person",
-			"outVLabel": "person",
-			"inV": "1:vadas",
-			"outV": "1:marko",
-			"properties": {
-				"weight": 0.5,
-				"date": "20160110"
-			}
-		},
-		{
-			"id": "S1:marko>2>>S2:lop",
-			"label": "created",
-			"type": "edge",
-			"inVLabel": "software",
-			"outVLabel": "person",
-			"inV": "2:lop",
-			"outV": "1:marko",
-			"properties": {
-				"weight": 0.4,
-				"date": "20171210"
-			}
-		}
-	],
-	"page": null
+    "edges": [
+        {
+            "id": "S1:marko>1>>S1:josh",
+            "label": "knows",
+            "type": "edge",
+            "outV": "1:marko",
+            "outVLabel": "person",
+            "inV": "1:josh",
+            "inVLabel": "person",
+            "properties": {
+                "weight": 1.5,
+                "date": "20130221"
+            }
+        },
+        {
+            "id": "S1:marko>1>>S1:vadas",
+            "label": "knows",
+            "type": "edge",
+            "outV": "1:marko",
+            "outVLabel": "person",
+            "inV": "1:vadas",
+            "inVLabel": "person",
+            "properties": {
+                "weight": 1.5,
+                "date": "20160111"
+            }
+        }
+    ],
+    "page": "EoYxOm1hcmtvgggCAIQyOmxvcAAAAAAAAAAC"
 }
 ```
 
-When `"page": null` is returned, it indicates that there are no more pages available. (Note: When the backend is Cassandra, for performance considerations, if the returned page happens to be the last page, the `page` value may not be empty. When requesting the next page data using that `page` value, it will return `empty data` and `page = null`. Similar situations apply for other cases.)
+The returned body contains the page number information for the next page, `"page": "EoYxOm1hcmtvgggCAIQyOmxvcAAAAAAAAAAC"`. When querying the next page, assign this value to the page parameter.
+
+**Paginate and retrieve all edges, get the next page (include the page value returned from the previous page), limit to 2 entries**
+
+##### Method & Url
+
+```
+GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page=EoYxOm1hcmtvgggCAIQyOmxvcAAAAAAAAAAC&limit=2
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+    "edges": [
+        {
+            "id": "S1:marko>2>>S2:lop",
+            "label": "created",
+            "type": "edge",
+            "outV": "1:marko",
+            "outVLabel": "person",
+            "inV": "2:lop",
+            "inVLabel": "software",
+            "properties": {
+                "weight": 1.0,
+                "date": "20171210"
+            }
+        }
+    ],
+    "page": null
+}
+```
+
+When `"page": null` is returned, it indicates that there are no more pages available.
+
+> NOTE: When the backend is Cassandra, for performance considerations, if the returned page happens to be the last page, the `page` value may not be empty. When requesting the next page data using that `page` value, it will return `empty data` and `page = null`. Similar situations apply for other cases.
 
 #### 2.2.7 Fetching Edge by ID
 
+##### Params
+
+**Path parameter description:**
+
+- graph: The graph to be operated on.
+- id: The ID of the edge to be operated on.
+
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
+GET http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop
 ```
 
 ##### Response Status
@@ -576,16 +592,16 @@ GET http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
 
 ```json
 {
-    "id": "S1:peter>1>>S2:lop",
+    "id": "S1:marko>2>>S2:lop",
     "label": "created",
     "type": "edge",
-    "inVLabel": "software",
+    "outV": "1:marko",
     "outVLabel": "person",
     "inV": "2:lop",
-    "outV": "1:peter",
+    "inVLabel": "software",
     "properties": {
-        "date": "2017-5-18",
-        "weight": 0.2
+        "weight": 1.0,
+        "date": "20171210"
     }
 }
 ```
@@ -594,14 +610,21 @@ GET http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
 
 ##### Params
 
-- label: Edge type, optional parameter
+**Path parameter description:**
+
+- graph: The graph to be operated on.
+- id: The ID of the edge to be operated on.
+
+**Request parameter description:**
+
+- label: The label of the edge.
 
 **Deleting Edge by ID only**
 
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
+DELETE http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop
 ```
 
 ##### Response Status
@@ -610,14 +633,14 @@ DELETE http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop
 204
 ```
 
-**Deleting Edge by Label+ID**
+**Deleting Edge by Label + ID**
 
 In general, specifying the Label parameter along with the ID to delete an edge will provide better performance compared to deleting by ID only.
 
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/graph/edges/S1:peter>1>>S2:lop?label=person
+DELETE http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>1>>S1:vadas?label=knows
 ```
 
 ##### Response Status
