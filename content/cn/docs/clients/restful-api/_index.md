@@ -39,6 +39,8 @@ HugeGraph-Server通过HugeGraph-API基于HTTP协议为Client提供操作图的�
 
 [comment]: <> (- [Gremlin]&#40;restful-api/gremlin.md&#41;)
 
+[comment]: <> (- [Cypher]&#40;restful-api/cypher.md&#41;)
+
 [comment]: <> (- [Authentication]&#40;restful-api/auth.md&#41;)
 
 [comment]: <> (- [Other]&#40;restful-api/other.md&#41;)

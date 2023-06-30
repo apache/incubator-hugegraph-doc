@@ -1,12 +1,12 @@
 ---
 title: "Other API"
 linkTitle: "Other"
-weight: 16
+weight: 17
 ---
 
-### 10.1 Other
+### 11.1 Other
 
-#### 10.1.1 View Version Information of HugeGraph
+#### 11.1.1 View Version Information of HugeGraph
 
 ##### Method & Url
 

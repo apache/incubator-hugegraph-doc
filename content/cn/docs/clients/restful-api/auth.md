@@ -1,10 +1,10 @@
 ---
 title: "Authentication API"
 linkTitle: "Authentication"
-weight: 15
+weight: 16
 ---
 
-### 9.1 用户认证与权限控制
+### 10.1 用户认证与权限控制
 
 > 开启权限及相关配置请先参考 [权限配置](/docs/config/config-authentication/) 文档
 
@@ -23,10 +23,10 @@ city: Beijing})
 ##### 接口说明：
 用户认证与权限控制接口包括5类：UserAPI、GroupAPI、TargetAPI、BelongAPI、AccessAPI。
 
-### 9.2 用户（User）API
+### 10.2 用户（User）API
 用户接口包括：创建用户，删除用户，修改用户，和查询用户相关信息接口。
 
-#### 9.2.1 创建用户
+#### 10.2.1 创建用户
 
 ##### Params
 
@@ -76,7 +76,7 @@ POST http://localhost:8080/graphs/hugegraph/auth/users
 }
 ```
 
-#### 9.2.2 删除用户
+#### 10.2.2 删除用户
 
 ##### Params
 
@@ -101,7 +101,7 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/users/-63:test
 1
 ```
 
-#### 9.2.3 修改用户
+#### 10.2.3 修改用户
 
 ##### Params
 
@@ -143,7 +143,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/users/-63:test
 }
 ```
 
-#### 9.2.4 查询用户列表
+#### 10.2.4 查询用户列表
 
 ##### Params
 
@@ -179,7 +179,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/users
 }
 ```
 
-#### 9.2.5 查询某个用户
+#### 10.2.5 查询某个用户
 
 ##### Params
 
@@ -214,7 +214,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/users/-63:admin
 }
 ```
 
-#### 9.2.6 查询某个用户的角色
+#### 10.2.6 查询某个用户的角色
 
 ##### Method & Url
 
@@ -246,11 +246,11 @@ GET http://localhost:8080/graphs/hugegraph/auth/users/-63:boss/role
 }
 ```
 
-### 9.3 用户组（Group）API
+### 10.3 用户组（Group）API
 用户组会赋予相应的资源权限，用户会被分配不同的用户组，即可拥有不同的资源权限。  
 用户组接口包括：创建用户组，删除用户组，修改用户组，和查询用户组相关信息接口。
 
-#### 9.3.1 创建用户组
+#### 10.3.1 创建用户组
 
 ##### Params
 
@@ -292,7 +292,7 @@ POST http://localhost:8080/graphs/hugegraph/auth/groups
 }
 ```
 
-#### 9.3.2 删除用户组
+#### 10.3.2 删除用户组
 
 ##### Params
 
@@ -317,7 +317,7 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
 1
 ```
 
-#### 9.3.3 修改用户组
+#### 10.3.3 修改用户组
 
 ##### Params
 
@@ -357,7 +357,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
 }
 ```
 
-#### 9.3.4 查询用户组列表
+#### 10.3.4 查询用户组列表
 
 ##### Params
 
@@ -392,7 +392,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/groups
 }
 ```
 
-#### 9.3.5 查询某个用户组
+#### 10.3.5 查询某个用户组
 
 ##### Params
 
@@ -423,12 +423,12 @@ GET http://localhost:8080/graphs/hugegraph/auth/groups/-69:all
 }
 ```
 
-### 9.4 资源（Target）API
+### 10.4 资源（Target）API
 资源描述了图数据库中的数据，比如符合某一类条件的顶点，每一个资源包括type、label、properties三个要素，共有18种type、
 任意label、任意properties的组合形成的资源，一个资源的内部条件是且关系，多个资源之间的条件是或关系。   
 资源接口包括：资源的创建、删除、修改和查询。
 
-#### 9.4.1 创建资源
+#### 10.4.1 创建资源
 
 ##### Params
 - target_name: 资源名称
@@ -494,7 +494,7 @@ POST http://localhost:8080/graphs/hugegraph/auth/targets
 }
 ```
 
-#### 9.4.2 删除资源
+#### 10.4.2 删除资源
 
 ##### Params
 
@@ -519,7 +519,7 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
 1
 ```
 
-#### 9.4.3 修改资源
+#### 10.4.3 修改资源
 
 ##### Params
 
@@ -574,7 +574,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
 }
 ```
 
-#### 9.4.4 查询资源列表
+#### 10.4.4 查询资源列表
 
 ##### Params
 
@@ -633,7 +633,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/targets
 }
 ```
 
-#### 9.4.5 查询某个资源
+#### 10.4.5 查询某个资源
 
 ##### Params
 
@@ -672,11 +672,11 @@ GET http://localhost:8080/graphs/hugegraph/auth/targets/-77:grant
 }
 ```
 
-### 9.5 关联角色（Belong）API
+### 10.5 关联角色（Belong）API
 关联用户和用户组的关系，一个用户可以关联一个或者多个用户组。用户组拥有相关资源的权限，不同用户组的资源权限可以理解为不同的角色。即给用户关联角色。  
 关联角色接口包括：用户关联角色的创建、删除、修改和查询。
 
-#### 9.5.1 创建用户的关联角色
+#### 10.5.1 创建用户的关联角色
 
 ##### Params
 
@@ -719,7 +719,7 @@ POST http://localhost:8080/graphs/hugegraph/auth/belongs
 }
 ```
 
-#### 9.5.2 删除关联角色
+#### 10.5.2 删除关联角色
 
 ##### Params
 
@@ -743,7 +743,7 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:g
 1
 ```
 
-#### 9.5.3 修改关联角色
+#### 10.5.3 修改关联角色
 关联角色只能修改描述，不能修改 user 和 group 属性，如果需要修改关联角色，需要删除原来关联关系，新增关联角色。
 
 ##### Params
@@ -784,7 +784,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:gran
 }
 ```
 
-#### 9.5.4 查询关联角色列表
+#### 10.5.4 查询关联角色列表
 
 ##### Params
 
@@ -820,7 +820,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/belongs
 }
 ```
 
-#### 9.5.5 查看某个关联角色
+#### 10.5.5 查看某个关联角色
 
 ##### Params
 
@@ -851,11 +851,11 @@ GET http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:all
 }
 ```
 
-### 9.6 赋权（Access）API
+### 10.6 赋权（Access）API
 给用户组赋予资源的权限，主要包含：读操作(READ)、写操作(WRITE)、删除操作(DELETE)、执行操作(EXECUTE)等。  
 赋权接口包括：赋权的创建、删除、修改和查询。
 
-#### 9.6.1 创建赋权(用户组赋予资源的权限)
+#### 10.6.1 创建赋权(用户组赋予资源的权限)
 
 ##### Params
 
@@ -906,7 +906,7 @@ POST http://localhost:8080/graphs/hugegraph/auth/accesses
 }
 ```
 
-#### 9.6.2 删除赋权
+#### 10.6.2 删除赋权
 
 ##### Params
 
@@ -931,7 +931,7 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>12>S-77
 1
 ```
 
-#### 9.6.3 修改赋权
+#### 10.6.3 修改赋权
 赋权只能修改描述，不能修改用户组、资源和权限许可，如果需要修改赋权的关系，可以删除原来的赋权关系，新增赋权。
 
 ##### Params
@@ -973,7 +973,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>12>S-77:al
 }
 ```
 
-#### 9.6.4 查询赋权列表
+#### 10.6.4 查询赋权列表
 
 ##### Params
 
@@ -1009,7 +1009,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/accesses
 }
 ```
 
-#### 9.6.5 查询某个赋权
+#### 10.6.5 查询某个赋权
 
 ##### Params
 
