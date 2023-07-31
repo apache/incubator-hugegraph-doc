@@ -10,7 +10,7 @@ weight: 15
 
 ##### Method & Url
 
-```
+```javascript
 GET /graphs/{graph}/cypher?cypher={cypher}
 ```
 
@@ -21,18 +21,18 @@ GET /graphs/{graph}/cypher?cypher={cypher}
 
 ##### Example
 
-```
+```javascript
 GET http://localhost:8080/graphs/hugecypher1/cypher?cypher=match(n:person) return n.name as name order by n.name limit 1
 ```
 
 ##### Response Status
 
-```json
+```javascript
 200
 ```
 ##### Response Body
 
-```json
+```javascript
 {
     "requestId": "766b9f48-2f10-40d9-951a-3027d0748ab7",
     "status": {
@@ -60,7 +60,7 @@ GET http://localhost:8080/graphs/hugecypher1/cypher?cypher=match(n:person) retur
 
 ##### Method & Url
 
-```
+```javascript
 POST /graphs/{graph}/cypher
 ```
 
@@ -77,23 +77,23 @@ Note:
 
 ##### Example
 
-```
+```javascript
 POST http://localhost:8080/graphs/hugecypher1/cypher
 ```
 
 ###### Request Body
 
-```json
+```cypher
 match(n:person) return n.name as name order by n.name limit 1
 ```
 ##### Response Status
 
-```json
+```javascript
 200
 ```
 ##### Response Body
 
-```json
+```javascript
 {
     "requestId": "f096bee0-e249-498f-b5a3-ea684fc84f57",
     "status": {
