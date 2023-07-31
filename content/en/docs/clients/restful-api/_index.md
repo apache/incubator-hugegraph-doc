@@ -38,6 +38,8 @@ HugeGraph-Server provides interfaces for clients to operate on graphs based on t
 
 [comment]: <> (- [Gremlin]&#40;restful-api/gremlin.md&#41;)
 
+[comment]: <> (- [Cypher]&#40;restful-api/cypher.md&#41;)
+
 [comment]: <> (- [Authentication]&#40;restful-api/auth.md&#41;)
 
 [comment]: <> (- [Other]&#40;restful-api/other.md&#41;)

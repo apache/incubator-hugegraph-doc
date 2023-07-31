@@ -35,6 +35,7 @@
     * [Graphs](clients/restful-api/graphs.md)
     * [Task](clients/restful-api/task.md)
     * [Gremlin](clients/restful-api/gremlin.md)
+    * [Cypher](clients/restful-api/cypher.md)
     * [Authentication](clients/restful-api/auth.md)
     * [Other](clients/restful-api/other.md)
 * [Java Client](clients/hugegraph-client.md)

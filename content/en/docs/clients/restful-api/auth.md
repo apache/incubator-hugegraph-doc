@@ -1,10 +1,10 @@
 ---
 title: "Authentication API"
 linkTitle: "Authentication"
-weight: 15
+weight: 16
 ---
 
-### 9.1 User Authentication and Access Control
+### 10.1 User Authentication and Access Control
 
 > To enable authentication and related configurations, please refer to the [Authentication Configuration](/docs/config/config-authentication/) documentation.
 
@@ -18,10 +18,10 @@ Description: User 'boss' has read permission for people in the 'graph1' graph fr
 ##### Interface Description:
 The user authentication and access control interface includes 5 categories: UserAPI, GroupAPI, TargetAPI, BelongAPI, AccessAPI.
 
-### 9.2 User (User) API
+### 10.2 User (User) API
 The user interface includes APIs for creating users, deleting users, modifying users, and querying user-related information.
 
-#### 9.2.1 Create User
+#### 10.2.1 Create User
 
 ##### Params
 
@@ -71,7 +71,7 @@ In the response message, the password is encrypted as ciphertext.
 }
 ```
 
-#### 9.2.2 Delete User
+#### 10.2.2 Delete User
 
 ##### Params
 
@@ -96,7 +96,7 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/users/-63:test
 1
 ```
 
-#### 9.2.3 Modify User
+#### 10.2.3 Modify User
 
 ##### Params
 
@@ -139,7 +139,7 @@ The returned result is the entire user object including the modified content.
 }
 ```
 
-#### 9.2.4 Query User List
+#### 10.2.4 Query User List
 
 ##### Params
 
@@ -175,7 +175,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/users
 }
 ```
 
-#### 9.2.5 Query a User
+#### 10.2.5 Query a User
 
 ##### Params
 
@@ -210,7 +210,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/users/-63:admin
 }
 ```
 
-#### 9.2.6 Query Roles of a User
+#### 10.2.6 Query Roles of a User
 
 ##### Method & Url
 
@@ -242,11 +242,11 @@ GET http://localhost:8080/graphs/hugegraph/auth/users/-63:boss/role
 }
 ```
 
-### 9.3 Group (Group) API
+### 10.3 Group (Group) API
 Groups grant corresponding resource permissions, and users are assigned to different groups, thereby having different resource permissions.
 The group interface includes APIs for creating groups, deleting groups, modifying groups, and querying group-related information.
 
-#### 9.3.1 Create Group
+#### 10.3.1 Create Group
 
 ##### Params
 
@@ -288,7 +288,7 @@ POST http://localhost:8080/graphs/hugegraph/auth/groups
 }
 ```
 
-#### 9.3.2 Delete Group
+#### 10.3.2 Delete Group
 
 ##### Params
 
@@ -313,7 +313,7 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
 1
 ```
 
-#### 9.3.3 Modify Group
+#### 10.3.3 Modify Group
 
 ##### Params
 
@@ -354,7 +354,7 @@ The returned result is the entire group object including the modified content.
 }
 ```
 
-#### 9.3.4 Query Group List
+#### 10.3.4 Query Group List
 
 ##### Params
 
@@ -389,7 +389,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/groups
 }
 ```
 
-#### 9.3.5 Query a Specific Group
+#### 10.3.5 Query a Specific Group
 
 ##### Params
 
@@ -420,11 +420,11 @@ GET http://localhost:8080/graphs/hugegraph/auth/groups/-69:all
 }
 ```
 
-### 9.4 Resource (Target) API
+### 10.4 Resource (Target) API
 Resources describe data in the graph database, such as vertices that meet certain criteria. Each resource includes three elements: type, label, and properties. There are 18 types in total, and the combination of any label and any properties forms a resource. The internal conditions of a resource are based on the AND relationship, while the conditions between multiple resources are based on the OR relationship.  
 The resource API includes creating, deleting, modifying, and querying resources.
 
-#### 9.4.1 Create Resource
+#### 10.4.1 Create Resource
 
 ##### Params
 - target_name: Name of the resource
@@ -489,7 +489,7 @@ POST http://localhost:8080/graphs/hugegraph/auth/targets
 }
 ```
 
-#### 9.4.2 Delete Resource
+#### 10.4.2 Delete Resource
 
 ##### Params
 
@@ -513,7 +513,7 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
 1
 ```
 
-#### 9.4.3 Modify Resource
+#### 10.4.3 Modify Resource
 
 ##### Params
 
@@ -568,7 +568,7 @@ The response contains the entire target group object, including the modified con
 }
 ```
 
-#### 9.4.4 Query Resource List
+#### 10.4.4 Query Resource List
 
 ##### Params
 
@@ -627,7 +627,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/targets
 }
 ```
 
-#### 9.4.5 Query a Specific Resource
+#### 10.4.5 Query a Specific Resource
 
 ##### Params
 
@@ -666,12 +666,12 @@ GET http://localhost:8080/graphs/hugegraph/auth/targets/-77:grant
 }
 ```
 
-### 9.5 Association of Roles (Belong) API
+### 10.5 Association of Roles (Belong) API
 
 The association between users and user groups allows a user to be associated with one or more user groups. User groups have permissions for related resources, and the permissions for different user groups can be understood as different roles. In other words, users are associated with roles.  
 The API for associating roles includes creating, deleting, modifying, and querying the association of roles for users.
 
-#### 9.5.1 Create an Association of Roles for a User
+#### 10.5.1 Create an Association of Roles for a User
 
 ##### Params
 
@@ -714,7 +714,7 @@ POST http://localhost:8080/graphs/hugegraph/auth/belongs
 }
 ```
 
-#### 9.5.2 Delete an Association of Roles
+#### 10.5.2 Delete an Association of Roles
 
 ##### Params
 
@@ -738,7 +738,7 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:g
 1
 ```
 
-#### 9.5.3 Modify an Association of Roles
+#### 10.5.3 Modify an Association of Roles
 
 An association of roles can only be modified for its description. The `user` and `group` properties cannot be modified. If you need to modify an association of roles, you need to delete the existing association and create a new one.
 
@@ -780,7 +780,7 @@ The response includes the modified content as well as the entire association of 
 }
 ```
 
-#### 9.5.4 Query List of Associations of Roles
+#### 10.5.4 Query List of Associations of Roles
 
 ##### Params
 
@@ -816,7 +816,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/belongs
 }
 ```
 
-#### 9.5.5 View a Specific Association of Roles
+#### 10.5.5 View a Specific Association of Roles
 
 ##### Params
 
@@ -847,11 +847,11 @@ GET http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:all
 }
 ```
 
-### 9.6 Authorization (Access) API
+### 10.6 Authorization (Access) API
 Grant permissions to user groups for resources, including operations such as READ, WRITE, DELETE, EXECUTE, etc.
 The authorization API includes: creating, deleting, modifying, and querying permissions.
 
-#### 9.6.1 Create Authorization (Granting permissions to user groups for resources)
+#### 10.6.1 Create Authorization (Granting permissions to user groups for resources)
 
 ##### Params
 
@@ -902,7 +902,7 @@ POST http://localhost:8080/graphs/hugegraph/auth/accesses
 }
 ```
 
-#### 9.6.2 Delete Authorization
+#### 10.6.2 Delete Authorization
 
 ##### Params
 
@@ -926,7 +926,7 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>12>S-77
 1
 ```
 
-#### 9.6.3 Modify Authorization
+#### 10.6.3 Modify Authorization
 Authorization can only be modified for its description. User group, resource, and permission cannot be modified. If you need to modify the relationship of the authorization, you can delete the original authorization relationship and create a new one.
 
 ##### Params
@@ -968,7 +968,7 @@ Modify access_description
 }
 ```
 
-#### 9.6.4 Query Authorization List
+#### 10.6.4 Query Authorization List
 
 ##### Params
 
@@ -1004,7 +1004,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/accesses
 }
 ```
 
-#### 9.6.5 Query a Specific Authorization
+#### 10.6.5 Query a Specific Authorization
 
 ##### Params
 
