@@ -32,7 +32,110 @@ By inputting the graph traversal language Gremlin, high-performance general anal
 
 For Gremlin tasks that need to traverse the whole graph, index creation and reconstruction and other time-consuming asynchronous tasks, the platform provides corresponding task management functions to achieve unified management and result viewing of asynchronous tasks.
 
-### 2	Platform Workflow
+### 2 Deploy
+
+There are three ways to deplot `hugegraph-hubble`
+- Use Toolchain
+- Source code compilation
+- Use Docker
+
+#### 2.1 Use Toolchain
+
+First, download the binary tar tarball
+
+```
+wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-{version}.tar.gz
+tar -xvf apache-hugegraph-toolchain-incubating-{version}.tar.gz 
+cd apache-hugegraph-toolchain-incubating-{version}.tar.gz/apache-hugegraph-hubble-incubating-{version}
+```
+
+Run `hubble`
+
+```
+bin/start-hubble.sh
+```
+
+Then, we can see:
+
+```shell
+starting HugeGraphHubble ..............timed out with http status 502
+2023-08-30 20:38:34 [main] [INFO ] o.a.h.HugeGraphHubble [] - Starting HugeGraphHubble v1.0.0 on cpu05 with PID 3422816 (/home/dandelion/apache-hugegraph-toolchain-incubating-1.0.0/apache-hugegraph-hubble-incubating-1.0.0/lib/hubble-be-1.0.0.jar started by dandelion in /home/dandelion/apache-hugegraph-toolchain-incubating-1.0.0/apache-hugegraph-hubble-incubating-1.0.0)
+2023-08-30 20:38:34 [main] [INFO ] o.a.h.HugeGraphHubble [] - No active profile set, falling back to default profiles: default
+2023-08-30 20:38:37 [main] [INFO ] o.a.c.h.Http11NioProtocol [] - Initializing ProtocolHandler ["http-nio-0.0.0.0-8088"]
+2023-08-30 20:38:37 [main] [INFO ] o.a.c.c.StandardService [] - Starting service [Tomcat]
+2023-08-30 20:38:37 [main] [INFO ] o.a.c.c.StandardEngine [] - Starting Servlet engine: [Apache Tomcat/9.0.24]
+2023-08-30 20:38:37 [main] [INFO ] o.a.c.c.C.[.[.[/] [] - Initializing Spring embedded WebApplicationContext
+2023-08-30 20:38:37 [main] [INFO ] c.z.h.HikariDataSource [] - hugegraph-hubble-HikariCP - Starting...
+2023-08-30 20:38:38 [main] [INFO ] c.z.h.HikariDataSource [] - hugegraph-hubble-HikariCP - Start completed.
+2023-08-30 20:38:41 [main] [INFO ] o.a.c.h.Http11NioProtocol [] - Starting ProtocolHandler ["http-nio-0.0.0.0-8088"]
+2023-08-30 20:38:41 [main] [INFO ] o.a.h.HugeGraphHubble [] - Started HugeGraphHubble in 7.379 seconds (JVM running for 8.499)
+flection.CachedClass
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+2023-08-30 20:38:37 [main] [INFO ] o.a.c.h.Http11NioProtocol [] - Initializing ProtocolHandler ["http-nio-0.0.0.0-8088"]
+2023-08-30 20:38:37 [main] [INFO ] o.a.c.c.StandardService [] - Starting service [Tomcat]
+2023-08-30 20:38:37 [main] [INFO ] o.a.c.c.StandardEngine [] - Starting Servlet engine: [Apache Tomcat/9.0.24]
+2023-08-30 20:38:37 [main] [INFO ] o.a.c.c.C.[.[.[/] [] - Initializing Spring embedded WebApplicationContext
+2023-08-30 20:38:37 [main] [INFO ] c.z.h.HikariDataSource [] - hugegraph-hubble-HikariCP - Starting...
+2023-08-30 20:38:38 [main] [INFO ] c.z.h.HikariDataSource [] - hugegraph-hubble-HikariCP - Start completed.
+2023-08-30 20:38:41 [main] [INFO ] o.a.c.h.Http11NioProtocol [] - Starting ProtocolHandler ["http-nio-0.0.0.0-8088"]
+2023-08-30 20:38:41 [main] [INFO ] o.a.h.HugeGraphHubble [] - Started HugeGraphHubble in 7.379 seconds (JVM running for 8.499)
+```
+
+Then use a web browser to access `ip:8088` and see the `Hubble` page. You can also stop the service using bin/stop-hubble.sh.
+
+#### 2.2 Source code compilation
+
+User should install `yarn==16.x` firstly.
+
+Download the toolchain source code.
+
+```shell
+git clone https://github.com/apache/incubator-hugegraph-toolchain.git
+```
+
+Compile `hubble`
+
+```shell
+cd incubator-hugegraph-toolchain/hugegraph-hubble
+mvn -e compile package -Dmaven.javadoc.skip=true -Dmaven.test.skip=true -ntp
+cd apache-hugegraph-hubble-incubating*
+```
+
+Run `hubble`
+
+```
+bin/start-hubble.sh -d
+```
+
+#### 2.3 Use docker
+
+> Note: if you're starting `hubble` with Docker, and `Hubble` and the server are on the same host. When setting the hostname for the graph later, please avoid directly using "localhost" or "127.0.0.1". This will refer to the `hubble` container internally, not the host machine, which could result in failure to connect to the graph.
+
+We can use `docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble` to quick start [hubble](https://hub.docker.com/r/hugegraph/hubble).
+
+Alternatively, you can use Docker Compose to start `hubble`. Additionally, if `hubble` and the graph are in the same Docker network, you can access the graph using the container name of the graph, eliminating the need for the host machine's IP address.
+
+Use `docker-compose up -d`，`docker-compose.yml` is following:
+
+```yaml
+version: '3'
+services:
+  graph_hubble:
+    image: hugegraph/hugegraph
+    container_name: graph
+    ports:
+      - 18080:8080
+
+  hubble:
+    image: hugegraph/hubble
+    container_name: hubble
+    ports:
+      - 8088:8088
+```
+
+
+### 3	Platform Workflow
 
 The module usage process of the platform is as follows:
 
@@ -41,9 +144,9 @@ The module usage process of the platform is as follows:
 </div>
 
 
-### 3	Platform Instructions
-#### 3.1	Graph Management
-##### 3.1.1	Graph creation
+### 4	Platform Instructions
+#### 4.1	Graph Management
+##### 4.1.1	Graph creation
 Under the graph management module, click [Create graph], and realize the connection of multiple graphs by filling in the graph ID, graph name, host name, port number, username, and password information.
 
 <div style="text-align: center;">
@@ -58,7 +161,7 @@ Create graph by filling in the content as follows:：
 </center>
 
 
-##### 3.1.2	Graph Access
+##### 4.1.2	Graph Access
 Realize the information access of the graph space. After entering, you can perform operations such as multidimensional query analysis, metadata management, data import, and algorithm analysis of the graph.
 
 <center>
@@ -66,7 +169,7 @@ Realize the information access of the graph space. After entering, you can perfo
 </center>
 
 
-##### 3.1.3	Graph management
+##### 4.1.3	Graph management
 1. Users can achieve unified management of graphs through overview, search, and information editing and deletion of single graphs.
 2. Search range: You can search for the graph name and ID.
 
@@ -75,8 +178,8 @@ Realize the information access of the graph space. After entering, you can perfo
 </center>
 
 
-#### 3.2	Metadata Modeling (list + graph mode)
-##### 3.2.1	Module entry
+#### 4.2	Metadata Modeling (list + graph mode)
+##### 4.2.1	Module entry
 Left navigation:
 
 <center>
@@ -84,8 +187,8 @@ Left navigation:
 </center>
 
 
-##### 3.2.2	Property type
-###### 3.2.2.1	Create type
+##### 4.2.2	Property type
+###### 4.2.2.1	Create type
 1. Fill in or select the attribute name, data type, and cardinality to complete the creation of the attribute.
 2. Created attributes can be used as attributes of vertex type and edge type.
 
@@ -103,7 +206,7 @@ Graph mode：
 </center>
 
 
-###### 3.2.2.2	Reuse
+###### 4.2.2.2	Reuse
 1. The platform provides the [Reuse] function, which can directly reuse the metadata of other graphs.
 2. Select the graph ID that needs to be reused, and continue to select the attributes that need to be reused. After that, the platform will check whether there is a conflict. After passing, the metadata can be reused.
 
@@ -121,11 +224,11 @@ Check reuse items:
 </center>
 
 
-###### 3.2.2.3	Management
+###### 4.2.2.3	Management
 1. You can delete a single item or delete it in batches in the attribute list.
 
-##### 3.2.3	Vertex type
-###### 3.2.3.1	Create type
+##### 4.2.3	Vertex type
+###### 4.2.3.1	Create type
 1. Fill in or select the vertex type name, ID strategy, association attribute, primary key attribute, vertex style, content displayed below the vertex in the query result, and index information: including whether to create a type index, and the specific content of the attribute index, complete the vertex Type creation.
 
 List mode:
@@ -141,11 +244,11 @@ Graph mode:
   <img src="/docs/images/images-hubble/3231顶点创建2.png" alt="image">
 </center>
 
-###### 3.2.3.2 Reuse
+###### 4.2.3.2 Reuse
 1. The multiplexing of vertex types will reuse the attributes and attribute indexes associated with this type together.
 2. The reuse method is similar to the property reuse, see 3.2.2.2.
 
-###### 3.2.3.3 Administration
+###### 4.2.3.3 Administration
 1. Editing operations are available. The vertex style, association type, vertex display content, and attribute index can be edited, and the rest cannot be edited.
 
 2. You can delete a single item or delete it in batches.
@@ -155,8 +258,8 @@ Graph mode:
 </center>
 
 
-##### 3.2.4 Edge Types
-###### 3.2.4.1 Create
+##### 4.2.4 Edge Types
+###### 4.2.4.1 Create
 1. Fill in or select the edge type name, start point type, end point type, associated attributes, whether to allow multiple connections, edge style, content displayed below the edge in the query result, and index information: including whether to create a type index, and attribute index The specific content, complete the creation of the edge type.
 
 List mode:
@@ -173,19 +276,19 @@ Graph mode：
 </center>
 
 
-###### 3.2.4.2 Reuse
+###### 4.2.4.2 Reuse
 1. The reuse of the edge type will reuse the start point type, end point type, associated attribute and attribute index of this type.
 2. The reuse method is similar to the property reuse, see 3.2.2.2.
 
 
-###### 3.2.4.3 Administration
+###### 4.2.4.3 Administration
 1. Editing operations are available. Edge styles, associated attributes, edge display content, and attribute indexes can be edited, and the rest cannot be edited, the same as the vertex type.
 2. You can delete a single item or delete it in batches.
 
-##### 3.2.5 Index Types
+##### 4.2.5 Index Types
 Displays vertex and edge indices for vertex types and edge types.
 
-#### 3.3 Data Import
+#### 4.3 Data Import
 The usage process of data import is as follows:
 
 <center>
@@ -193,14 +296,14 @@ The usage process of data import is as follows:
 </center>
 
 
-##### 3.3.1	Module entrance
+##### 4.3.1	Module entrance
 Left navigation:
 <center>
   <img src="/docs/images/images-hubble/331导入入口.png" alt="image">
 </center>
 
 
-##### 3.3.2 Create task
+##### 4.3.2 Create task
 1. Fill in the task name and remarks (optional) to create an import task.
 2. Multiple import tasks can be created and imported in parallel.
 
@@ -209,7 +312,7 @@ Left navigation:
 </center>
 
 
-##### 3.3.3 Uploading files
+##### 4.3.3 Uploading files
 1. Upload the file that needs to be composed. The currently supported format is CSV, which will be updated continuously in the future.
 2. Multiple files can be uploaded at the same time.
 
@@ -218,7 +321,7 @@ Left navigation:
 </center>
 
 
-##### 3.3.4 Setting up data mapping
+##### 4.3.4 Setting up data mapping
 1. Set up data mapping for uploaded files, including file settings and type settings
 2. File settings: Check or fill in whether to include the header, separator, encoding format and other settings of the file itself, all set the default values, no need to fill in manually
 3. Type setting:
@@ -245,7 +348,7 @@ Mapping list：
   </center>
 
 
-##### 3.3.5 Import data
+##### 4.3.5 Import data
 Before importing, you need to fill in the import setting parameters. After filling in, you can start importing data into the gallery.
 1. Import settings
 - The import setting parameter items are as shown in the figure below, all set the default value, no need to fill in manually
@@ -265,22 +368,22 @@ Before importing, you need to fill in the import setting parameters. After filli
 </center>
 
 
-#### 3.4 Data Analysis
-##### 3.4.1 Module entry
+#### 4.4 Data Analysis
+##### 4.4.1 Module entry
 Left navigation:
 <center>
   <img src="/docs/images/images-hubble/341分析入口.png" alt="image">
 </center>
 
 
-##### 3.4.2 Multi-image switching
+##### 4.4.2 Multi-image switching
 By switching the entrance on the left, flexibly switch the operation space of multiple graphs
 <center>
   <img src="/docs/images/images-hubble/342多图切换.png" alt="image">
 </center>
 
 
-##### 3.4.3 Graph Analysis and Processing
+##### 4.4.3 Graph Analysis and Processing
 HugeGraph supports Gremlin, a graph traversal query language of Apache TinkerPop3. Gremlin is a general graph database query language. By entering Gremlin statements and clicking execute, you can perform query and analysis operations on graph data, and create and delete vertices/edges. , vertex/edge attribute modification, etc.
 
 After Gremlin query, below is the graph result display area, which provides 3 kinds of graph result display modes: [Graph Mode], [Table Mode], [Json Mode].
@@ -305,11 +408,11 @@ Support zoom, center, full screen, export and other operations.
 </center>
 
 
-##### 3.4.4 Data Details
+##### 4.4.4 Data Details
 Click the vertex/edge entity to view the data details of the vertex/edge, including: vertex/edge type, vertex ID, attribute and corresponding value, expand the information display dimension of the graph, and improve the usability.
 
 
-##### 3.4.5 Multidimensional Path Query of Graph Results
+##### 4.4.5 Multidimensional Path Query of Graph Results
 In addition to the global query, in-depth customized query and hidden operations can be performed for the vertices in the query result to realize customized mining of graph results.
 
 Right-click a vertex, and the menu entry of the vertex appears, which can be displayed, inquired, hidden, etc.
@@ -324,8 +427,8 @@ Double-clicking a vertex also displays the vertex associated with the selected p
 </center>
 
 
-##### 3.4.6 Add vertex/edge
-###### 3.4.6.1 Added vertex
+##### 4.4.6 Add vertex/edge
+###### 4.4.6.1 Added vertex
 In the graph area, two entries can be used to dynamically add vertices, as follows:
 1. Click on the graph area panel, the Add Vertex entry appears
 2. Click the first icon in the action bar in the upper right corner
@@ -346,11 +449,11 @@ Add the vertex content as follows:
 </center>
 
 
-###### 3.4.6.2 Add edge
+###### 4.4.6.2 Add edge
 Right-click a vertex in the graph result to add the outgoing or incoming edge of that point.
 
 
-##### 3.4.7 Execute the query of records and favorites
+##### 4.4.7 Execute the query of records and favorites
 1. Record each query record at the bottom of the graph area, including: query time, execution type, content, status, time-consuming, as well as [collection] and [load] operations, to achieve a comprehensive record of graph execution, with traces to follow, and Can quickly load and reuse execution content
 2. Provides the function of collecting sentences, which can be used to collect frequently used sentences, which is convenient for fast calling of high-frequency sentences.
 
@@ -359,15 +462,15 @@ Right-click a vertex in the graph result to add the outgoing or incoming edge of
 </center>
 
 
-#### 3.5 Task Management
-##### 3.5.1 Module entry
+#### 4.5 Task Management
+##### 4.5.1 Module entry
 Left navigation:
 <center>
    <img src="/docs/images/images-hubble/351任务管理入口.png" alt="image">
 </center>
 
 
-##### 3.5.2 Task Management
+##### 4.5.2 Task Management
 1. Provide unified management and result viewing of asynchronous tasks. There are 4 types of asynchronous tasks, namely:
 - gremlin: Gremlin tasks
 - algorithm: OLAP algorithm task
@@ -383,7 +486,7 @@ Left navigation:
 </center>
 
 
-##### 3.5.3 Gremlin asynchronous tasks
+##### 4.5.3 Gremlin asynchronous tasks
 1. Create a task
 
 - The data analysis module currently supports two Gremlin operations, Gremlin query and Gremlin task; if the user switches to the Gremlin task, after clicking execute, an asynchronous task will be created in the asynchronous task center;
@@ -408,10 +511,10 @@ Click to view the entry to jump to the task management list, as follows:
 - The results are displayed in the form of json
 
 
-##### 3.5.4 OLAP algorithm tasks
+##### 4.5.4 OLAP algorithm tasks
 There is no visual OLAP algorithm execution on Hubble. You can call the RESTful API to perform OLAP algorithm tasks, find the corresponding tasks by ID in the task management, and view the progress and results.
 
-##### 3.5.5 Delete metadata, rebuild index
+##### 4.5.5 Delete metadata, rebuild index
 1. Create a task
 - In the metadata modeling module, when deleting metadata, an asynchronous task for deleting metadata can be created
 
