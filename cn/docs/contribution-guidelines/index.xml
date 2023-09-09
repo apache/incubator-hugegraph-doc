@@ -6,6 +6,7 @@
 &lt;p>The following is a contribution guide for HugeGraph:&lt;/p>
 &lt;img width="884" alt="image" src="https://user-images.githubusercontent.com/9625821/159643158-8bf72c0a-93c3-4a58-8912-7b2ab20ced1d.png">
 &lt;h2 id="1-preparation">1. Preparation&lt;/h2>
+&lt;p>&lt;strong>建议&lt;/strong>: 使用 &lt;a href="https://desktop.github.com/">GitHub desktop&lt;/a> 可以大幅简化和改善你提交 PR/Commit 的过程, 特别适合新人&lt;/p>
 &lt;p>We can contribute by reporting issues, submitting code patches or any other feedback.&lt;/p>
 &lt;p>Before submitting the code, we need to do some preparation:&lt;/p>
 &lt;ol>
@@ -32,7 +33,6 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git config user.email &lt;span style="color:#4e9a06">&amp;#34;{email-address-of-github}&amp;#34;&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># like &amp;#34;jermy@apache.org&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ol>
-&lt;p>Optional: You can use &lt;a href="https://desktop.github.com/">GitHub desktop&lt;/a> to greatly simplify the commit and update process.&lt;/p>
 &lt;h2 id="2-create-an-issue-on-github">2. Create an Issue on GitHub&lt;/h2>
 &lt;p>If you encounter bugs or have any questions, please go to &lt;a href="https://github.com/apache/incubator-hugegraph/issues">GitHub Issues&lt;/a> to report them and feel free to &lt;a href="https://github.com/apache/hugegraph/issues/new">create an issue&lt;/a>.&lt;/p>
 &lt;h2 id="3-make-changes-of-code-locally">3. Make changes of code locally&lt;/h2>
@@ -89,8 +89,6 @@
 &lt;img width="1280" alt="image" src="https://user-images.githubusercontent.com/9625821/163524204-7fe0e6bf-9c8b-4b1a-ac65-6a0ac423eb16.png">&lt;/p>
 &lt;h2 id="4-create-a-pull-request">4. Create a Pull Request&lt;/h2>
 &lt;p>Go to the web page of GitHub fork repo, there would be a chance to create a Pull Request after pushing to a new branch, just click button &amp;ldquo;Compare &amp;amp; pull request&amp;rdquo; to do it. Then edit the description for proposed changes, which can just be copied from the commit message.&lt;/p>
-&lt;p>Please sign the HugeGraph CLA when contributing code for the first time. You can sign the CLA by just posting a Pull Request Comment same as the below format:&lt;/p>
-&lt;p>&lt;code>I have read the CLA Document and I hereby sign the CLA&lt;/code>&lt;/p>
 &lt;p>Note: please make sure the email address you used to submit the code is bound to the GitHub account. For how to bind the email address, please refer to &lt;a href="https://github.com/settings/emails">https://github.com/settings/emails&lt;/a>:
 &lt;img width="1280" alt="image" src="https://user-images.githubusercontent.com/9625821/163522445-2a50a72a-dea2-434f-9868-3a0d40d0d037.png">&lt;/p>
 &lt;h2 id="5-code-review">5. Code review&lt;/h2>
