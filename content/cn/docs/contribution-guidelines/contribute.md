@@ -14,7 +14,7 @@ The following is a contribution guide for HugeGraph:
 
 ## 1. Preparation
 
-Optional: You can use [GitHub desktop](https://desktop.github.com/) to greatly simplify the commit and update process.
+**建议**: 使用 [GitHub desktop](https://desktop.github.com/) 可以大幅简化和改善你提交 PR/Commit 的过程, 特别适合新人
 
 We can contribute by reporting issues, submitting code patches or any other feedback.
 
