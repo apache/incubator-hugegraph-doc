@@ -110,7 +110,7 @@ bin/start-hubble.sh -d
 
 #### 2.3 使用Docker
 
-> 注意，如果使用docker启动hubble，如果hubble和server位于同一宿主机，在后续设置graph的hostname的时候请不要直接设置localhost或127.0.0.1，这将指向hubble容器内部而非宿主机，导致无法连接到graph
+> **特别注意**: 如果使用 docker 启动 hubble，且 hubble 和 server 位于同一宿主机，在后续 hubble 页面中设置 graph 的 hostname 的时候请不要直接设置 `localhost/127.0.0.1`，这将指向 hubble 容器内部而非宿主机，导致无法连接到 server
 
 我们可以使用 `docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble` 快速启动 [hubble](https://hub.docker.com/r/hugegraph/hubble).
 
