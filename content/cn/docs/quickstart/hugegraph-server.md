@@ -528,7 +528,7 @@ schema = graph.schema()
 > 使用 IntelliJ IDEA 在启动 Server 时创建示例图的流程类似，不再赘述。
 
 
-#### 9.2 启动脚本时使用参数
+#### 9.2 启动脚本时指定参数
 
 在启动脚本后加入`-p true`
 
