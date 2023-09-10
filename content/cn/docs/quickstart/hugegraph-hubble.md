@@ -43,7 +43,7 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
 
 首先下载tar包
 
-```
+```bash
 wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-{version}.tar.gz
 tar -xvf apache-hugegraph-toolchain-incubating-{version}.tar.gz 
 cd apache-hugegraph-toolchain-incubating-{version}.tar.gz/apache-hugegraph-hubble-incubating-{version}
