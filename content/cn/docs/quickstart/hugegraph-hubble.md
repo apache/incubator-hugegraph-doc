@@ -35,7 +35,7 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
 #### 2 部署
 
 有三种方式可以部署`hugegraph-hubble`
-- 使用toolchain
+- 下载 toolchain 二进制包
 - 源码编译
 - 使用docker
 
