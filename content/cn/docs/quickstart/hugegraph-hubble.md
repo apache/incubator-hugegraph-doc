@@ -51,7 +51,7 @@ cd apache-hugegraph-toolchain-incubating-{version}.tar.gz/apache-hugegraph-hubbl
 
 运行`hubble`
 
-```
+```bash
 bin/start-hubble.sh
 ```
 
