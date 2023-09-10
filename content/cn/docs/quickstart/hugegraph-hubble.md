@@ -104,7 +104,7 @@ cd apache-hugegraph-hubble-incubating*
 
 启动`hubble`
 
-```
+```bash
 bin/start-hubble.sh -d
 ```
 
