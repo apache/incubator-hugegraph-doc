@@ -543,9 +543,6 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)......OK
 ```javascript
 > curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
 
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100   222  100   222    0     0   4625      0 --:--:-- --:--:-- --:--:--  4625
 {"vertices":[{"id":"2:lop","label":"software","type":"vertex","properties":{"name":"lop","lang":"java","price":328}},{"id":"1:josh","label":"person","type":"vertex","properties":{"name":"josh","age":32,"city":"Beijing"}},{"id":"1:marko","label":"person","type":"vertex","properties":{"name":"marko","age":29,"city":"Beijing"}},{"id":"1:peter","label":"person","type":"vertex","properties":{"name":"peter","age":35,"city":"Shanghai"}},{"id":"1:vadas","label":"person","type":"vertex","properties":{"name":"vadas","age":27,"city":"Hongkong"}},{"id":"2:ripple","label":"software","type":"vertex","properties":{"name":"ripple","lang":"java","price":199}}]}
 ```
 
@@ -583,9 +580,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)......OK
 ```javascript
 > curl "http://localhost:18080/graphs/hugegraph/graph/vertices" | gunzip
 
-% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                Dload  Upload   Total   Spent    Left  Speed
-100   222  100   222    0     0   4625      0 --:--:-- --:--:-- --:--:--  4625
 {"vertices":[{"id":"2:lop","label":"software","type":"vertex","properties":{"name":"lop","lang":"java","price":328}},{"id":"1:josh","label":"person","type":"vertex","properties":{"name":"josh","age":32,"city":"Beijing"}},{"id":"1:marko","label":"person","type":"vertex","properties":{"name":"marko","age":29,"city":"Beijing"}},{"id":"1:peter","label":"person","type":"vertex","properties":{"name":"peter","age":35,"city":"Shanghai"}},{"id":"1:vadas","label":"person","type":"vertex","properties":{"name":"vadas","age":27,"city":"Hongkong"}},{"id":"2:ripple","label":"software","type":"vertex","properties":{"name":"ripple","lang":"java","price":199}}]}
 ```
+
 代表创建示例图成功。

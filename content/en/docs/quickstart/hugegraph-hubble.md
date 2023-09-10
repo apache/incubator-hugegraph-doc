@@ -35,15 +35,15 @@ For Gremlin tasks that need to traverse the whole graph, index creation and reco
 ### 2 Deploy
 
 There are three ways to deplot `hugegraph-hubble`
-- Use Toolchain
+- Download the Toolchain binary package
 - Source code compilation
 - Use Docker
 
-#### 2.1 Use Toolchain
+#### 2.1 Download the Toolchain binary package
 
 First, download the binary tar tarball
 
-```
+```bash
 wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-{version}.tar.gz
 tar -xvf apache-hugegraph-toolchain-incubating-{version}.tar.gz 
 cd apache-hugegraph-toolchain-incubating-{version}.tar.gz/apache-hugegraph-hubble-incubating-{version}
@@ -51,7 +51,7 @@ cd apache-hugegraph-toolchain-incubating-{version}.tar.gz/apache-hugegraph-hubbl
 
 Run `hubble`
 
-```
+```bash
 bin/start-hubble.sh
 ```
 
@@ -59,30 +59,14 @@ Then, we can see:
 
 ```shell
 starting HugeGraphHubble ..............timed out with http status 502
-2023-08-30 20:38:34 [main] [INFO ] o.a.h.HugeGraphHubble [] - Starting HugeGraphHubble v1.0.0 on cpu05 with PID 3422816 (/home/dandelion/apache-hugegraph-toolchain-incubating-1.0.0/apache-hugegraph-hubble-incubating-1.0.0/lib/hubble-be-1.0.0.jar started by dandelion in /home/dandelion/apache-hugegraph-toolchain-incubating-1.0.0/apache-hugegraph-hubble-incubating-1.0.0)
-2023-08-30 20:38:34 [main] [INFO ] o.a.h.HugeGraphHubble [] - No active profile set, falling back to default profiles: default
-2023-08-30 20:38:37 [main] [INFO ] o.a.c.h.Http11NioProtocol [] - Initializing ProtocolHandler ["http-nio-0.0.0.0-8088"]
-2023-08-30 20:38:37 [main] [INFO ] o.a.c.c.StandardService [] - Starting service [Tomcat]
-2023-08-30 20:38:37 [main] [INFO ] o.a.c.c.StandardEngine [] - Starting Servlet engine: [Apache Tomcat/9.0.24]
-2023-08-30 20:38:37 [main] [INFO ] o.a.c.c.C.[.[.[/] [] - Initializing Spring embedded WebApplicationContext
-2023-08-30 20:38:37 [main] [INFO ] c.z.h.HikariDataSource [] - hugegraph-hubble-HikariCP - Starting...
-2023-08-30 20:38:38 [main] [INFO ] c.z.h.HikariDataSource [] - hugegraph-hubble-HikariCP - Start completed.
-2023-08-30 20:38:41 [main] [INFO ] o.a.c.h.Http11NioProtocol [] - Starting ProtocolHandler ["http-nio-0.0.0.0-8088"]
-2023-08-30 20:38:41 [main] [INFO ] o.a.h.HugeGraphHubble [] - Started HugeGraphHubble in 7.379 seconds (JVM running for 8.499)
-flection.CachedClass
-WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
-WARNING: All illegal access operations will be denied in a future release
-2023-08-30 20:38:37 [main] [INFO ] o.a.c.h.Http11NioProtocol [] - Initializing ProtocolHandler ["http-nio-0.0.0.0-8088"]
-2023-08-30 20:38:37 [main] [INFO ] o.a.c.c.StandardService [] - Starting service [Tomcat]
-2023-08-30 20:38:37 [main] [INFO ] o.a.c.c.StandardEngine [] - Starting Servlet engine: [Apache Tomcat/9.0.24]
-2023-08-30 20:38:37 [main] [INFO ] o.a.c.c.C.[.[.[/] [] - Initializing Spring embedded WebApplicationContext
-2023-08-30 20:38:37 [main] [INFO ] c.z.h.HikariDataSource [] - hugegraph-hubble-HikariCP - Starting...
+2023-08-30 20:38:34 [main] [INFO ] o.a.h.HugeGraphHubble [] - Starting HugeGraphHubble v1.0.0 on cpu05 with PID xxx (~/apache-hugegraph-toolchain-incubating-1.0.0/apache-hugegraph-hubble-incubating-1.0.0/lib/hubble-be-1.0.0.jar started by $USER in ~/apache-hugegraph-toolchain-incubating-1.0.0/apache-hugegraph-hubble-incubating-1.0.0)
+...
 2023-08-30 20:38:38 [main] [INFO ] c.z.h.HikariDataSource [] - hugegraph-hubble-HikariCP - Start completed.
 2023-08-30 20:38:41 [main] [INFO ] o.a.c.h.Http11NioProtocol [] - Starting ProtocolHandler ["http-nio-0.0.0.0-8088"]
 2023-08-30 20:38:41 [main] [INFO ] o.a.h.HugeGraphHubble [] - Started HugeGraphHubble in 7.379 seconds (JVM running for 8.499)
 ```
 
-Then use a web browser to access `ip:8088` and see the `Hubble` page. You can also stop the service using bin/stop-hubble.sh.
+Then use a web browser to access `ip:8088` and you can see the `Hubble` page. You can stop the service using bin/stop-hubble.sh.
 
 #### 2.2 Source code compilation
 
@@ -91,7 +75,7 @@ User should install `yarn==16.x` firstly.
 Download the toolchain source code.
 
 ```shell
-git clone https://github.com/apache/incubator-hugegraph-toolchain.git
+git clone https://github.com/apache/hugegraph-toolchain.git
 ```
 
 Compile `hubble`
@@ -104,13 +88,13 @@ cd apache-hugegraph-hubble-incubating*
 
 Run `hubble`
 
-```
+```bash
 bin/start-hubble.sh -d
 ```
 
 #### 2.3 Use docker
 
-> Note: if you're starting `hubble` with Docker, and `Hubble` and the server are on the same host. When setting the hostname for the graph later, please avoid directly using "localhost" or "127.0.0.1". This will refer to the `hubble` container internally, not the host machine, which could result in failure to connect to the graph.
+> **Special Note**: If you are starting `hubble` with Docker, and `hubble` and the server are on the same host. When configuring the hostname for the graph on the Hubble web page, please do not directly set it to `localhost/127.0.0.1`. This will refer to the `hubble` container internally rather than the host machine, resulting in a connection failure to the server.
 
 We can use `docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble` to quick start [hubble](https://hub.docker.com/r/hugegraph/hubble).
 

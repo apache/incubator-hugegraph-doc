@@ -39,7 +39,7 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
 - 源码编译
 - 使用docker
 
-#### 2.1 使用toolchain
+#### 2.1 下载 toolchain 二进制包
 
 首先下载tar包
 
@@ -60,23 +60,7 @@ bin/start-hubble.sh
 ```shell
 starting HugeGraphHubble ..............timed out with http status 502
 2023-08-30 20:38:34 [main] [INFO ] o.a.h.HugeGraphHubble [] - Starting HugeGraphHubble v1.0.0 on cpu05 with PID xxx (~/apache-hugegraph-toolchain-incubating-1.0.0/apache-hugegraph-hubble-incubating-1.0.0/lib/hubble-be-1.0.0.jar started by $USER in ~/apache-hugegraph-toolchain-incubating-1.0.0/apache-hugegraph-hubble-incubating-1.0.0)
-2023-08-30 20:38:34 [main] [INFO ] o.a.h.HugeGraphHubble [] - No active profile set, falling back to default profiles: default
-2023-08-30 20:38:37 [main] [INFO ] o.a.c.h.Http11NioProtocol [] - Initializing ProtocolHandler ["http-nio-0.0.0.0-8088"]
-2023-08-30 20:38:37 [main] [INFO ] o.a.c.c.StandardService [] - Starting service [Tomcat]
-2023-08-30 20:38:37 [main] [INFO ] o.a.c.c.StandardEngine [] - Starting Servlet engine: [Apache Tomcat/9.0.24]
-2023-08-30 20:38:37 [main] [INFO ] o.a.c.c.C.[.[.[/] [] - Initializing Spring embedded WebApplicationContext
-2023-08-30 20:38:37 [main] [INFO ] c.z.h.HikariDataSource [] - hugegraph-hubble-HikariCP - Starting...
-2023-08-30 20:38:38 [main] [INFO ] c.z.h.HikariDataSource [] - hugegraph-hubble-HikariCP - Start completed.
-2023-08-30 20:38:41 [main] [INFO ] o.a.c.h.Http11NioProtocol [] - Starting ProtocolHandler ["http-nio-0.0.0.0-8088"]
-2023-08-30 20:38:41 [main] [INFO ] o.a.h.HugeGraphHubble [] - Started HugeGraphHubble in 7.379 seconds (JVM running for 8.499)
-flection.CachedClass
-WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
-WARNING: All illegal access operations will be denied in a future release
-2023-08-30 20:38:37 [main] [INFO ] o.a.c.h.Http11NioProtocol [] - Initializing ProtocolHandler ["http-nio-0.0.0.0-8088"]
-2023-08-30 20:38:37 [main] [INFO ] o.a.c.c.StandardService [] - Starting service [Tomcat]
-2023-08-30 20:38:37 [main] [INFO ] o.a.c.c.StandardEngine [] - Starting Servlet engine: [Apache Tomcat/9.0.24]
-2023-08-30 20:38:37 [main] [INFO ] o.a.c.c.C.[.[.[/] [] - Initializing Spring embedded WebApplicationContext
-2023-08-30 20:38:37 [main] [INFO ] c.z.h.HikariDataSource [] - hugegraph-hubble-HikariCP - Starting...
+...
 2023-08-30 20:38:38 [main] [INFO ] c.z.h.HikariDataSource [] - hugegraph-hubble-HikariCP - Start completed.
 2023-08-30 20:38:41 [main] [INFO ] o.a.c.h.Http11NioProtocol [] - Starting ProtocolHandler ["http-nio-0.0.0.0-8088"]
 2023-08-30 20:38:41 [main] [INFO ] o.a.h.HugeGraphHubble [] - Started HugeGraphHubble in 7.379 seconds (JVM running for 8.499)

@@ -533,9 +533,9 @@ indicating the successful creation of the sample graph.
 > The process of creating sample graph on server startup is similar when using IntelliJ IDEA and will not be described further.
 
 
-#### 9.2 Use command-line arguments in the startup script.
+#### 9.2 Specify command-line arguments in the startup script.
 
-Add `-p true` after the startup script.
+Carry the `-p true` arguments when starting the script.
 
 ```
 bin/start-hugegraph.sh -p true
@@ -548,9 +548,6 @@ And use the RESTful API to request `HugeGraphServer` and get the following resul
 ```javascript
 > curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
 
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100   222  100   222    0     0   4625      0 --:--:-- --:--:-- --:--:--  4625
 {"vertices":[{"id":"2:lop","label":"software","type":"vertex","properties":{"name":"lop","lang":"java","price":328}},{"id":"1:josh","label":"person","type":"vertex","properties":{"name":"josh","age":32,"city":"Beijing"}},{"id":"1:marko","label":"person","type":"vertex","properties":{"name":"marko","age":29,"city":"Beijing"}},{"id":"1:peter","label":"person","type":"vertex","properties":{"name":"peter","age":35,"city":"Shanghai"}},{"id":"1:vadas","label":"person","type":"vertex","properties":{"name":"vadas","age":27,"city":"Hongkong"}},{"id":"2:ripple","label":"software","type":"vertex","properties":{"name":"ripple","lang":"java","price":199}}]}
 ```
 
@@ -588,9 +585,6 @@ And use the RESTful API to request `HugeGraphServer` and get the following resul
 ```javascript
 > curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
 
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100   222  100   222    0     0   4625      0 --:--:-- --:--:-- --:--:--  4625
 {"vertices":[{"id":"2:lop","label":"software","type":"vertex","properties":{"name":"lop","lang":"java","price":328}},{"id":"1:josh","label":"person","type":"vertex","properties":{"name":"josh","age":32,"city":"Beijing"}},{"id":"1:marko","label":"person","type":"vertex","properties":{"name":"marko","age":29,"city":"Beijing"}},{"id":"1:peter","label":"person","type":"vertex","properties":{"name":"peter","age":35,"city":"Shanghai"}},{"id":"1:vadas","label":"person","type":"vertex","properties":{"name":"vadas","age":27,"city":"Hongkong"}},{"id":"2:ripple","label":"software","type":"vertex","properties":{"name":"ripple","lang":"java","price":199}}]}
 ```
 
