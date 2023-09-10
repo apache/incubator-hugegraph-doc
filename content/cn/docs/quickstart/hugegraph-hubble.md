@@ -91,7 +91,7 @@ WARNING: All illegal access operations will be denied in a future release
 下载toolchain源码包
 
 ```shell
-git clone https://github.com/apache/incubator-hugegraph-toolchain.git
+git clone https://github.com/apache/hugegraph-toolchain.git
 ```
 
 编译`hubble`
