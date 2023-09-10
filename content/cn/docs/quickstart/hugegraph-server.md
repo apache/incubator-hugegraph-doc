@@ -530,7 +530,7 @@ schema = graph.schema()
 
 #### 9.2 启动脚本时指定参数
 
-在启动脚本后加入`-p true`
+在脚本启动时候携带 `-p true` 参数
 
 ```
 bin/start-hugegraph.sh -p true
