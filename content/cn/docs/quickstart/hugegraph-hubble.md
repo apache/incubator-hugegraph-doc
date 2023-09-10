@@ -82,7 +82,7 @@ WARNING: All illegal access operations will be denied in a future release
 2023-08-30 20:38:41 [main] [INFO ] o.a.h.HugeGraphHubble [] - Started HugeGraphHubble in 7.379 seconds (JVM running for 8.499)
 ```
 
-然后使用浏览器访问 `ip:8088` 看到`hubble`页面, 也可以通过`bin/stop-hubble.sh`停止服务
+然后使用浏览器访问 `ip:8088` 可看到`hubble`页面, 通过`bin/stop-hubble.sh`则可以停止服务
 
 #### 2.2 源码编译
 
