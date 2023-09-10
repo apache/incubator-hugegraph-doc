@@ -535,7 +535,7 @@ indicating the successful creation of the sample graph.
 
 #### 9.2 Specify command-line arguments in the startup script.
 
-Carry the `-p true` arguments when starting the script.
+Carry the `-p true` arguments when starting the script, which indicates `preload`, to create a sample graph.
 
 ```
 bin/start-hugegraph.sh -p true

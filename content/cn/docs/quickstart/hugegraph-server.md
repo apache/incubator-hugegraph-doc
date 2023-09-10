@@ -530,7 +530,7 @@ schema = graph.schema()
 
 #### 9.2 启动脚本时指定参数
 
-在脚本启动时候携带 `-p true` 参数
+在脚本启动时候携带 `-p true` 参数, 表示preload, 即创建示例图
 
 ```
 bin/start-hugegraph.sh -p true

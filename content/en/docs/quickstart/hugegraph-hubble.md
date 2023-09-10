@@ -41,7 +41,7 @@ There are three ways to deplot `hugegraph-hubble`
 
 #### 2.1 Download the Toolchain binary package
 
-First, download the binary tar tarball
+`hubble` is in the `toolchain` project. First, download the binary tar tarball
 
 ```bash
 wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-{version}.tar.gz
@@ -70,7 +70,26 @@ Then use a web browser to access `ip:8088` and you can see the `Hubble` page. Yo
 
 #### 2.2 Source code compilation
 
-User should install `yarn==16.x` firstly.
+User should install `nodejs==16.x` and `yarn` firstly.
+
+```bash
+apt install curl build-essential
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+source ~/.bashrc
+nvm install 16
+```
+
+check the version is 16.x or not
+
+```bash
+node -v
+```
+
+install `yarn` by the command below:
+
+```bash
+npm install -g yarn
+```
 
 Download the toolchain source code.
 
@@ -81,7 +100,10 @@ git clone https://github.com/apache/hugegraph-toolchain.git
 Compile `hubble`
 
 ```shell
-cd incubator-hugegraph-toolchain/hugegraph-hubble
+cd incubator-hugegraph-toolchain
+sudo pip install -r hugegraph-hubble/hubble-dist/assembly/travis/requirements.txt
+mvn install -pl hugegraph-client,hugegraph-loader -am -Dmaven.javadoc.skip=true -DskipTests -ntp
+cd hugegraph-hubble
 mvn -e compile package -Dmaven.javadoc.skip=true -Dmaven.test.skip=true -ntp
 cd apache-hugegraph-hubble-incubating*
 ```

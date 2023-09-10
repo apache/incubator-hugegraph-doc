@@ -41,7 +41,7 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
 
 #### 2.1 下载 toolchain 二进制包
 
-首先下载tar包
+`hubble`项目在`toolchain`项目中, 首先下载`toolchain`的tar包
 
 ```bash
 wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-{version}.tar.gz
@@ -70,7 +70,26 @@ starting HugeGraphHubble ..............timed out with http status 502
 
 #### 2.2 源码编译
 
-需要用户提前安装`yarn==16.x`
+需要用户提前安装`nodejs==16.x` 与 `yarn`
+
+```bash
+apt install curl build-essential
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+source ~/.bashrc
+nvm install 16
+```
+
+然后确认安装版本是否为16.x
+
+```bash
+node -v
+```
+
+使用下列命令安装 `yarn`
+
+```bash
+npm install -g yarn
+```
 
 下载toolchain源码包
 
@@ -81,7 +100,10 @@ git clone https://github.com/apache/hugegraph-toolchain.git
 编译`hubble`
 
 ```shell
-cd incubator-hugegraph-toolchain/hugegraph-hubble
+cd incubator-hugegraph-toolchain
+sudo pip install -r hugegraph-hubble/hubble-dist/assembly/travis/requirements.txt
+mvn install -pl hugegraph-client,hugegraph-loader -am -Dmaven.javadoc.skip=true -DskipTests -ntp
+cd hugegraph-hubble
 mvn -e compile package -Dmaven.javadoc.skip=true -Dmaven.test.skip=true -ntp
 cd apache-hugegraph-hubble-incubating*
 ```
