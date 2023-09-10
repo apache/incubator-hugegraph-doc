@@ -59,7 +59,7 @@ bin/start-hubble.sh
 
 ```shell
 starting HugeGraphHubble ..............timed out with http status 502
-2023-08-30 20:38:34 [main] [INFO ] o.a.h.HugeGraphHubble [] - Starting HugeGraphHubble v1.0.0 on cpu05 with PID 3422816 (/home/dandelion/apache-hugegraph-toolchain-incubating-1.0.0/apache-hugegraph-hubble-incubating-1.0.0/lib/hubble-be-1.0.0.jar started by dandelion in /home/dandelion/apache-hugegraph-toolchain-incubating-1.0.0/apache-hugegraph-hubble-incubating-1.0.0)
+2023-08-30 20:38:34 [main] [INFO ] o.a.h.HugeGraphHubble [] - Starting HugeGraphHubble v1.0.0 on cpu05 with PID xxx (~/apache-hugegraph-toolchain-incubating-1.0.0/apache-hugegraph-hubble-incubating-1.0.0/lib/hubble-be-1.0.0.jar started by $USER in ~/apache-hugegraph-toolchain-incubating-1.0.0/apache-hugegraph-hubble-incubating-1.0.0)
 2023-08-30 20:38:34 [main] [INFO ] o.a.h.HugeGraphHubble [] - No active profile set, falling back to default profiles: default
 2023-08-30 20:38:37 [main] [INFO ] o.a.c.h.Http11NioProtocol [] - Initializing ProtocolHandler ["http-nio-0.0.0.0-8088"]
 2023-08-30 20:38:37 [main] [INFO ] o.a.c.c.StandardService [] - Starting service [Tomcat]
