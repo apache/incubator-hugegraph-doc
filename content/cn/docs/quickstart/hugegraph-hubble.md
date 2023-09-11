@@ -70,7 +70,7 @@ starting HugeGraphHubble ..............timed out with http status 502
 
 #### 2.2 源码编译
 
-需要用户提前安装`nodejs==16.x` 与 `yarn`
+**注意:** 编译 hubble 需要用户本地环境有安装 `Nodejs V16.x` 与 `yarn` 环境
 
 ```bash
 apt install curl build-essential
@@ -79,7 +79,7 @@ source ~/.bashrc
 nvm install 16
 ```
 
-然后确认安装版本是否为16.x
+然后确认安装版本是否为 `16.x` (请注意过高的 Node 版本会产生冲突)
 
 ```bash
 node -v
@@ -97,7 +97,7 @@ npm install -g yarn
 git clone https://github.com/apache/hugegraph-toolchain.git
 ```
 
-编译`hubble`
+编译`hubble`, 它依赖 loader 和 client, 编译时需提前构建这些依赖 (后续可跳)
 
 ```shell
 cd incubator-hugegraph-toolchain

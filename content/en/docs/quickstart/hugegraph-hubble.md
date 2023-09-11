@@ -70,7 +70,7 @@ Then use a web browser to access `ip:8088` and you can see the `Hubble` page. Yo
 
 #### 2.2 Source code compilation
 
-User should install `nodejs==16.x` and `yarn` firstly.
+**Note**: Compiling Hubble requires the user's local environment to have Node.js V16.x and yarn installed.
 
 ```bash
 apt install curl build-essential
@@ -79,7 +79,7 @@ source ~/.bashrc
 nvm install 16
 ```
 
-check the version is 16.x or not
+Then, verify that the installed Node.js version is 16.x (please note that higher Node version may cause conflicts).
 
 ```bash
 node -v
@@ -97,7 +97,7 @@ Download the toolchain source code.
 git clone https://github.com/apache/hugegraph-toolchain.git
 ```
 
-Compile `hubble`
+Compile `hubble`. It depends on the loader and client, so you need to build these dependencies in advance during the compilation process (you can skip this step later).
 
 ```shell
 cd incubator-hugegraph-toolchain
