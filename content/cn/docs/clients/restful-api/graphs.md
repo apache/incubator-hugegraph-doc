@@ -123,7 +123,7 @@ POST http://localhost:8080/graphs/hugegraph2
 ##### Request Body
 
 ```
-gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
+gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 backend=rocksdb
 serializer=binary
 store=hugegraph2
