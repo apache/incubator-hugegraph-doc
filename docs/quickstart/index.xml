@@ -331,6 +331,13 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="8-debug-server-with-intellij-idea">8 Debug Server with IntelliJ IDEA&lt;/h3>
 &lt;p>Please refer to &lt;a href="/docs/contribution-guidelines/hugegraph-server-idea-setup">Setup Server in IDEA&lt;/a>&lt;/p>
 &lt;h3 id="9-create-sample-graph-on-server-startup">9 Create Sample Graph on Server Startup&lt;/h3>
+&lt;p>There are three ways to create sample graph on server startup&lt;/p>
+&lt;ul>
+&lt;li>Method 1: Modify the configuration file directly.&lt;/li>
+&lt;li>Method 2: Use command-line arguments in the startup script.&lt;/li>
+&lt;li>Method 3: Use Docker or Docker Compose to add environment variables.&lt;/li>
+&lt;/ul>
+&lt;h4 id="91-modify-the-configuration-file-directly">9.1 Modify the configuration file directly.&lt;/h4>
 &lt;p>Modify &lt;code>conf/gremlin-server.yaml&lt;/code> and change &lt;code>empty-sample.groovy&lt;/code> to &lt;code>example.groovy&lt;/code>:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">org.apache.tinkerpop.gremlin.jsr223.ScriptFileGremlinPlugin&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">files&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#000">scripts/example.groovy]&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -359,7 +366,44 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>indicating the successful creation of the sample graph.&lt;/p>
 &lt;blockquote>
 &lt;p>The process of creating sample graph on server startup is similar when using IntelliJ IDEA and will not be described further.&lt;/p>
-&lt;/blockquote></description></item><item><title>Docs: HugeGraph-Loader Quick Start</title><link>/docs/quickstart/hugegraph-loader/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-loader/</guid><description>
+&lt;/blockquote>
+&lt;h4 id="92-specify-command-line-arguments-in-the-startup-script">9.2 Specify command-line arguments in the startup script.&lt;/h4>
+&lt;p>Carry the &lt;code>-p true&lt;/code> arguments when starting the script, which indicates &lt;code>preload&lt;/code>, to create a sample graph.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh -p true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer in daemon mode...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)......OK
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>And use the RESTful API to request &lt;code>HugeGraphServer&lt;/code> and get the following result:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">curl&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;http://localhost:8080/graphs/hugegraph/graph/vertices&amp;#34;&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">|&lt;/span> &lt;span style="color:#000">gunzip&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertices&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">[{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;2:lop&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;software&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;lop&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;lang&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;java&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;price&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">328&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:josh&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;josh&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">32&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:marko&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;marko&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">29&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:peter&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;peter&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">35&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Shanghai&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:vadas&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vadas&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">27&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Hongkong&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;2:ripple&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;software&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;ripple&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;lang&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;java&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;price&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">199&lt;/span>&lt;span style="color:#000;font-weight:bold">}}]}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This indicates the successful creation of the sample graph.&lt;/p>
+&lt;h4 id="93-use-docker-or-docker-compose-to-add-environment-variables">9.3 Use Docker or Docker Compose to add environment variables.&lt;/h4>
+&lt;p>Set the environment variable &lt;code>PRELOAD=true&lt;/code> when starting Docker in order to load data during the execution of the startup script.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Use &lt;code>docker run&lt;/code>&lt;/p>
+&lt;p>Use &lt;code>docker run -itd --name=graph -p 18080:8080 -e PRELOAD=true hugegraph/hugegraph:latest&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Use &lt;code>docker-compose&lt;/code>&lt;/p>
+&lt;p>Create &lt;code>docker-compose.yml&lt;/code> as following&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">graph&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:latest&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">environment&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#000">PRELOAD=true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">18080&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Use &lt;code>docker-compose up -d&lt;/code> to start the container&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>And use the RESTful API to request &lt;code>HugeGraphServer&lt;/code> and get the following result:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">curl&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;http://localhost:8080/graphs/hugegraph/graph/vertices&amp;#34;&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">|&lt;/span> &lt;span style="color:#000">gunzip&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertices&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">[{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;2:lop&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;software&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;lop&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;lang&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;java&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;price&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">328&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:josh&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;josh&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">32&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:marko&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;marko&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">29&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:peter&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;peter&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">35&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Shanghai&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:vadas&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vadas&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">27&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Hongkong&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;2:ripple&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;software&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;ripple&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;lang&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;java&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;price&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">199&lt;/span>&lt;span style="color:#000;font-weight:bold">}}]}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This indicates the successful creation of the sample graph.&lt;/p></description></item><item><title>Docs: HugeGraph-Loader Quick Start</title><link>/docs/quickstart/hugegraph-loader/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-loader/</guid><description>
 &lt;h3 id="1-hugegraph-loader-overview">1 HugeGraph-Loader Overview&lt;/h3>
 &lt;p>HugeGraph-Loader is the data import component of HugeGraph, which can convert data from various data sources into graph vertices and edges and import them into the graph database in batches.&lt;/p>
 &lt;p>Currently supported data sources include:&lt;/p>
@@ -2005,14 +2049,77 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;p>By inputting the graph traversal language Gremlin, high-performance general analysis of graph data can be realized, and functions such as customized multidimensional path query of vertices can be provided, and three kinds of graph result display methods are provided, including: graph form, table form, Json form, and multidimensional display. The data form meets the needs of various scenarios used by users. It provides functions such as running records and collection of common statements, realizing the traceability of graph operations, and the reuse and sharing of query input, which is fast and efficient. It supports the export of graph data, and the export format is Json format.&lt;/p>
 &lt;h5 id="task-management">Task Management&lt;/h5>
 &lt;p>For Gremlin tasks that need to traverse the whole graph, index creation and reconstruction and other time-consuming asynchronous tasks, the platform provides corresponding task management functions to achieve unified management and result viewing of asynchronous tasks.&lt;/p>
-&lt;h3 id="2platform-workflow">2 Platform Workflow&lt;/h3>
+&lt;h3 id="2-deploy">2 Deploy&lt;/h3>
+&lt;p>There are three ways to deplot &lt;code>hugegraph-hubble&lt;/code>&lt;/p>
+&lt;ul>
+&lt;li>Download the Toolchain binary package&lt;/li>
+&lt;li>Source code compilation&lt;/li>
+&lt;li>Use Docker&lt;/li>
+&lt;/ul>
+&lt;h4 id="21-download-the-toolchain-binary-package">2.1 Download the Toolchain binary package&lt;/h4>
+&lt;p>&lt;code>hubble&lt;/code> is in the &lt;code>toolchain&lt;/code> project. First, download the binary tar tarball&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar -xvf apache-hugegraph-toolchain-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> apache-hugegraph-toolchain-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz/apache-hugegraph-hubble-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Run &lt;code>hubble&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-hubble.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then, we can see:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>starting HugeGraphHubble ..............timed out with http status &lt;span style="color:#0000cf;font-weight:bold">502&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-08-30 20:38:34 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.h.HugeGraphHubble &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Starting HugeGraphHubble v1.0.0 on cpu05 with PID xxx &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>~/apache-hugegraph-toolchain-incubating-1.0.0/apache-hugegraph-hubble-incubating-1.0.0/lib/hubble-be-1.0.0.jar started by &lt;span style="color:#000">$USER&lt;/span> in ~/apache-hugegraph-toolchain-incubating-1.0.0/apache-hugegraph-hubble-incubating-1.0.0&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-08-30 20:38:38 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> c.z.h.HikariDataSource &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - hugegraph-hubble-HikariCP - Start completed.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-08-30 20:38:41 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.c.h.Http11NioProtocol &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Starting ProtocolHandler &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;http-nio-0.0.0.0-8088&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-08-30 20:38:41 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.h.HugeGraphHubble &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Started HugeGraphHubble in 7.379 seconds &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>JVM running &lt;span style="color:#204a87;font-weight:bold">for&lt;/span> 8.499&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then use a web browser to access &lt;code>ip:8088&lt;/code> and you can see the &lt;code>Hubble&lt;/code> page. You can stop the service using bin/stop-hubble.sh.&lt;/p>
+&lt;h4 id="22-source-code-compilation">2.2 Source code compilation&lt;/h4>
+&lt;p>&lt;strong>Note&lt;/strong>: Compiling Hubble requires the user&amp;rsquo;s local environment to have Node.js V16.x and yarn installed.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>apt install curl build-essential
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh &lt;span style="color:#000;font-weight:bold">|&lt;/span> bash
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">source&lt;/span> ~/.bashrc
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>nvm install &lt;span style="color:#0000cf;font-weight:bold">16&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then, verify that the installed Node.js version is 16.x (please note that higher Node version may cause conflicts).&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>node -v
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>install &lt;code>yarn&lt;/code> by the command below:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>npm install -g yarn
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Download the toolchain source code.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph-toolchain.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Compile &lt;code>hubble&lt;/code>. It depends on the loader and client, so you need to build these dependencies in advance during the compilation process (you can skip this step later).&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> incubator-hugegraph-toolchain
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo pip install -r hugegraph-hubble/hubble-dist/assembly/travis/requirements.txt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn install -pl hugegraph-client,hugegraph-loader -am -Dmaven.javadoc.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">true&lt;/span> -DskipTests -ntp
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-hubble
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn -e compile package -Dmaven.javadoc.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">true&lt;/span> -Dmaven.test.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">true&lt;/span> -ntp
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> apache-hugegraph-hubble-incubating*
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Run &lt;code>hubble&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-hubble.sh -d
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="23-use-docker">2.3 Use docker&lt;/h4>
+&lt;blockquote>
+&lt;p>&lt;strong>Special Note&lt;/strong>: If you are starting &lt;code>hubble&lt;/code> with Docker, and &lt;code>hubble&lt;/code> and the server are on the same host. When configuring the hostname for the graph on the Hubble web page, please do not directly set it to &lt;code>localhost/127.0.0.1&lt;/code>. This will refer to the &lt;code>hubble&lt;/code> container internally rather than the host machine, resulting in a connection failure to the server.&lt;/p>
+&lt;/blockquote>
+&lt;p>We can use &lt;code>docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble&lt;/code> to quick start &lt;a href="https://hub.docker.com/r/hugegraph/hubble">hubble&lt;/a>.&lt;/p>
+&lt;p>Alternatively, you can use Docker Compose to start &lt;code>hubble&lt;/code>. Additionally, if &lt;code>hubble&lt;/code> and the graph are in the same Docker network, you can access the graph using the container name of the graph, eliminating the need for the host machine&amp;rsquo;s IP address.&lt;/p>
+&lt;p>Use &lt;code>docker-compose up -d&lt;/code>，&lt;code>docker-compose.yml&lt;/code> is following:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">graph_hubble&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">18080&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hubble&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hubble&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hubble&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">8088&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8088&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3platform-workflow">3 Platform Workflow&lt;/h3>
 &lt;p>The module usage process of the platform is as follows:&lt;/p>
 &lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/2平台使用流程.png" alt="image">
 &lt;/div>
-&lt;h3 id="3platform-instructions">3 Platform Instructions&lt;/h3>
-&lt;h4 id="31graph-management">3.1 Graph Management&lt;/h4>
-&lt;h5 id="311graph-creation">3.1.1 Graph creation&lt;/h5>
+&lt;h3 id="4platform-instructions">4 Platform Instructions&lt;/h3>
+&lt;h4 id="41graph-management">4.1 Graph Management&lt;/h4>
+&lt;h5 id="411graph-creation">4.1.1 Graph creation&lt;/h5>
 &lt;p>Under the graph management module, click [Create graph], and realize the connection of multiple graphs by filling in the graph ID, graph name, host name, port number, username, and password information.&lt;/p>
 &lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/311图创建.png" alt="image">
@@ -2021,12 +2128,12 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;center>
 &lt;img src="/docs/images/images-hubble/311图创建2.png" alt="image">
 &lt;/center>
-&lt;h5 id="312graph-access">3.1.2 Graph Access&lt;/h5>
+&lt;h5 id="412graph-access">4.1.2 Graph Access&lt;/h5>
 &lt;p>Realize the information access of the graph space. After entering, you can perform operations such as multidimensional query analysis, metadata management, data import, and algorithm analysis of the graph.&lt;/p>
 &lt;center>
 &lt;img src="/docs/images/images-hubble/312图访问.png" alt="image">
 &lt;/center>
-&lt;h5 id="313graph-management">3.1.3 Graph management&lt;/h5>
+&lt;h5 id="413graph-management">4.1.3 Graph management&lt;/h5>
 &lt;ol>
 &lt;li>Users can achieve unified management of graphs through overview, search, and information editing and deletion of single graphs.&lt;/li>
 &lt;li>Search range: You can search for the graph name and ID.&lt;/li>
@@ -2034,14 +2141,14 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;center>
 &lt;img src="/docs/images/images-hubble/313图管理.png" alt="image">
 &lt;/center>
-&lt;h4 id="32metadata-modeling-list--graph-mode">3.2 Metadata Modeling (list + graph mode)&lt;/h4>
-&lt;h5 id="321module-entry">3.2.1 Module entry&lt;/h5>
+&lt;h4 id="42metadata-modeling-list--graph-mode">4.2 Metadata Modeling (list + graph mode)&lt;/h4>
+&lt;h5 id="421module-entry">4.2.1 Module entry&lt;/h5>
 &lt;p>Left navigation:&lt;/p>
 &lt;center>
 &lt;img src="/docs/images/images-hubble/321元数据入口.png" alt="image">
 &lt;/center>
-&lt;h5 id="322property-type">3.2.2 Property type&lt;/h5>
-&lt;h6 id="3221create-type">3.2.2.1 Create type&lt;/h6>
+&lt;h5 id="422property-type">4.2.2 Property type&lt;/h5>
+&lt;h6 id="4221create-type">4.2.2.1 Create type&lt;/h6>
 &lt;ol>
 &lt;li>Fill in or select the attribute name, data type, and cardinality to complete the creation of the attribute.&lt;/li>
 &lt;li>Created attributes can be used as attributes of vertex type and edge type.&lt;/li>
@@ -2054,7 +2161,7 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;center>
 &lt;img src="/docs/images/images-hubble/3221属性创建2.png" alt="image">
 &lt;/center>
-&lt;h6 id="3222reuse">3.2.2.2 Reuse&lt;/h6>
+&lt;h6 id="4222reuse">4.2.2.2 Reuse&lt;/h6>
 &lt;ol>
 &lt;li>The platform provides the [Reuse] function, which can directly reuse the metadata of other graphs.&lt;/li>
 &lt;li>Select the graph ID that needs to be reused, and continue to select the attributes that need to be reused. After that, the platform will check whether there is a conflict. After passing, the metadata can be reused.&lt;/li>
@@ -2067,12 +2174,12 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;center>
 &lt;img src="/docs/images/images-hubble/3222属性复用2.png" alt="image">
 &lt;/center>
-&lt;h6 id="3223management">3.2.2.3 Management&lt;/h6>
+&lt;h6 id="4223management">4.2.2.3 Management&lt;/h6>
 &lt;ol>
 &lt;li>You can delete a single item or delete it in batches in the attribute list.&lt;/li>
 &lt;/ol>
-&lt;h5 id="323vertex-type">3.2.3 Vertex type&lt;/h5>
-&lt;h6 id="3231create-type">3.2.3.1 Create type&lt;/h6>
+&lt;h5 id="423vertex-type">4.2.3 Vertex type&lt;/h5>
+&lt;h6 id="4231create-type">4.2.3.1 Create type&lt;/h6>
 &lt;ol>
 &lt;li>Fill in or select the vertex type name, ID strategy, association attribute, primary key attribute, vertex style, content displayed below the vertex in the query result, and index information: including whether to create a type index, and the specific content of the attribute index, complete the vertex Type creation.&lt;/li>
 &lt;/ol>
@@ -2084,12 +2191,12 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;center>
 &lt;img src="/docs/images/images-hubble/3231顶点创建2.png" alt="image">
 &lt;/center>
-&lt;h6 id="3232-reuse">3.2.3.2 Reuse&lt;/h6>
+&lt;h6 id="4232-reuse">4.2.3.2 Reuse&lt;/h6>
 &lt;ol>
 &lt;li>The multiplexing of vertex types will reuse the attributes and attribute indexes associated with this type together.&lt;/li>
 &lt;li>The reuse method is similar to the property reuse, see 3.2.2.2.&lt;/li>
 &lt;/ol>
-&lt;h6 id="3233-administration">3.2.3.3 Administration&lt;/h6>
+&lt;h6 id="4233-administration">4.2.3.3 Administration&lt;/h6>
 &lt;ol>
 &lt;li>
 &lt;p>Editing operations are available. The vertex style, association type, vertex display content, and attribute index can be edited, and the rest cannot be edited.&lt;/p>
@@ -2101,8 +2208,8 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;center>
 &lt;img src="/docs/images/images-hubble/3233顶点删除.png" alt="image">
 &lt;/center>
-&lt;h5 id="324-edge-types">3.2.4 Edge Types&lt;/h5>
-&lt;h6 id="3241-create">3.2.4.1 Create&lt;/h6>
+&lt;h5 id="424-edge-types">4.2.4 Edge Types&lt;/h5>
+&lt;h6 id="4241-create">4.2.4.1 Create&lt;/h6>
 &lt;ol>
 &lt;li>Fill in or select the edge type name, start point type, end point type, associated attributes, whether to allow multiple connections, edge style, content displayed below the edge in the query result, and index information: including whether to create a type index, and attribute index The specific content, complete the creation of the edge type.&lt;/li>
 &lt;/ol>
@@ -2114,29 +2221,29 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;center>
 &lt;img src="/docs/images/images-hubble/3241边创建2.png" alt="image">
 &lt;/center>
-&lt;h6 id="3242-reuse">3.2.4.2 Reuse&lt;/h6>
+&lt;h6 id="4242-reuse">4.2.4.2 Reuse&lt;/h6>
 &lt;ol>
 &lt;li>The reuse of the edge type will reuse the start point type, end point type, associated attribute and attribute index of this type.&lt;/li>
 &lt;li>The reuse method is similar to the property reuse, see 3.2.2.2.&lt;/li>
 &lt;/ol>
-&lt;h6 id="3243-administration">3.2.4.3 Administration&lt;/h6>
+&lt;h6 id="4243-administration">4.2.4.3 Administration&lt;/h6>
 &lt;ol>
 &lt;li>Editing operations are available. Edge styles, associated attributes, edge display content, and attribute indexes can be edited, and the rest cannot be edited, the same as the vertex type.&lt;/li>
 &lt;li>You can delete a single item or delete it in batches.&lt;/li>
 &lt;/ol>
-&lt;h5 id="325-index-types">3.2.5 Index Types&lt;/h5>
+&lt;h5 id="425-index-types">4.2.5 Index Types&lt;/h5>
 &lt;p>Displays vertex and edge indices for vertex types and edge types.&lt;/p>
-&lt;h4 id="33-data-import">3.3 Data Import&lt;/h4>
+&lt;h4 id="43-data-import">4.3 Data Import&lt;/h4>
 &lt;p>The usage process of data import is as follows:&lt;/p>
 &lt;center>
 &lt;img src="/docs/images/images-hubble/33导入流程.png" alt="image">
 &lt;/center>
-&lt;h5 id="331module-entrance">3.3.1 Module entrance&lt;/h5>
+&lt;h5 id="431module-entrance">4.3.1 Module entrance&lt;/h5>
 &lt;p>Left navigation:&lt;/p>
 &lt;center>
 &lt;img src="/docs/images/images-hubble/331导入入口.png" alt="image">
 &lt;/center>
-&lt;h5 id="332-create-task">3.3.2 Create task&lt;/h5>
+&lt;h5 id="432-create-task">4.3.2 Create task&lt;/h5>
 &lt;ol>
 &lt;li>Fill in the task name and remarks (optional) to create an import task.&lt;/li>
 &lt;li>Multiple import tasks can be created and imported in parallel.&lt;/li>
@@ -2144,7 +2251,7 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;center>
 &lt;img src="/docs/images/images-hubble/332创建任务.png" alt="image">
 &lt;/center>
-&lt;h5 id="333-uploading-files">3.3.3 Uploading files&lt;/h5>
+&lt;h5 id="433-uploading-files">4.3.3 Uploading files&lt;/h5>
 &lt;ol>
 &lt;li>Upload the file that needs to be composed. The currently supported format is CSV, which will be updated continuously in the future.&lt;/li>
 &lt;li>Multiple files can be uploaded at the same time.&lt;/li>
@@ -2152,7 +2259,7 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;center>
 &lt;img src="/docs/images/images-hubble/333上传文件.png" alt="image">
 &lt;/center>
-&lt;h5 id="334-setting-up-data-mapping">3.3.4 Setting up data mapping&lt;/h5>
+&lt;h5 id="434-setting-up-data-mapping">4.3.4 Setting up data mapping&lt;/h5>
 &lt;ol>
 &lt;li>
 &lt;p>Set up data mapping for uploaded files, including file settings and type settings&lt;/p>
@@ -2185,7 +2292,7 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;center>
 &lt;img src="/docs/images/images-hubble/334设置映射2.png" alt="image">
 &lt;/center>
-&lt;h5 id="335-import-data">3.3.5 Import data&lt;/h5>
+&lt;h5 id="435-import-data">4.3.5 Import data&lt;/h5>
 &lt;p>Before importing, you need to fill in the import setting parameters. After filling in, you can start importing data into the gallery.&lt;/p>
 &lt;ol>
 &lt;li>Import settings&lt;/li>
@@ -2207,18 +2314,18 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;center>
 &lt;img src="/docs/images/images-hubble/335导入详情.png" alt="image">
 &lt;/center>
-&lt;h4 id="34-data-analysis">3.4 Data Analysis&lt;/h4>
-&lt;h5 id="341-module-entry">3.4.1 Module entry&lt;/h5>
+&lt;h4 id="44-data-analysis">4.4 Data Analysis&lt;/h4>
+&lt;h5 id="441-module-entry">4.4.1 Module entry&lt;/h5>
 &lt;p>Left navigation:&lt;/p>
 &lt;center>
 &lt;img src="/docs/images/images-hubble/341分析入口.png" alt="image">
 &lt;/center>
-&lt;h5 id="342-multi-image-switching">3.4.2 Multi-image switching&lt;/h5>
+&lt;h5 id="442-multi-image-switching">4.4.2 Multi-image switching&lt;/h5>
 &lt;p>By switching the entrance on the left, flexibly switch the operation space of multiple graphs&lt;/p>
 &lt;center>
 &lt;img src="/docs/images/images-hubble/342多图切换.png" alt="image">
 &lt;/center>
-&lt;h5 id="343-graph-analysis-and-processing">3.4.3 Graph Analysis and Processing&lt;/h5>
+&lt;h5 id="443-graph-analysis-and-processing">4.4.3 Graph Analysis and Processing&lt;/h5>
 &lt;p>HugeGraph supports Gremlin, a graph traversal query language of Apache TinkerPop3. Gremlin is a general graph database query language. By entering Gremlin statements and clicking execute, you can perform query and analysis operations on graph data, and create and delete vertices/edges. , vertex/edge attribute modification, etc.&lt;/p>
 &lt;p>After Gremlin query, below is the graph result display area, which provides 3 kinds of graph result display modes: [Graph Mode], [Table Mode], [Json Mode].&lt;/p>
 &lt;p>Support zoom, center, full screen, export and other operations.&lt;/p>
@@ -2234,9 +2341,9 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;center>
 &lt;img src="/docs/images/images-hubble/343图分析-json.png" alt="image">
 &lt;/center>
-&lt;h5 id="344-data-details">3.4.4 Data Details&lt;/h5>
+&lt;h5 id="444-data-details">4.4.4 Data Details&lt;/h5>
 &lt;p>Click the vertex/edge entity to view the data details of the vertex/edge, including: vertex/edge type, vertex ID, attribute and corresponding value, expand the information display dimension of the graph, and improve the usability.&lt;/p>
-&lt;h5 id="345-multidimensional-path-query-of-graph-results">3.4.5 Multidimensional Path Query of Graph Results&lt;/h5>
+&lt;h5 id="445-multidimensional-path-query-of-graph-results">4.4.5 Multidimensional Path Query of Graph Results&lt;/h5>
 &lt;p>In addition to the global query, in-depth customized query and hidden operations can be performed for the vertices in the query result to realize customized mining of graph results.&lt;/p>
 &lt;p>Right-click a vertex, and the menu entry of the vertex appears, which can be displayed, inquired, hidden, etc.&lt;/p>
 &lt;ul>
@@ -2248,8 +2355,8 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;center>
 &lt;img src="/docs/images/images-hubble/345定制路径查询.png" alt="image">
 &lt;/center>
-&lt;h5 id="346-add-vertexedge">3.4.6 Add vertex/edge&lt;/h5>
-&lt;h6 id="3461-added-vertex">3.4.6.1 Added vertex&lt;/h6>
+&lt;h5 id="446-add-vertexedge">4.4.6 Add vertex/edge&lt;/h5>
+&lt;h6 id="4461-added-vertex">4.4.6.1 Added vertex&lt;/h6>
 &lt;p>In the graph area, two entries can be used to dynamically add vertices, as follows:&lt;/p>
 &lt;ol>
 &lt;li>Click on the graph area panel, the Add Vertex entry appears&lt;/li>
@@ -2264,9 +2371,9 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;center>
 &lt;img src="/docs/images/images-hubble/346新增顶点2.png" alt="image">
 &lt;/center>
-&lt;h6 id="3462-add-edge">3.4.6.2 Add edge&lt;/h6>
+&lt;h6 id="4462-add-edge">4.4.6.2 Add edge&lt;/h6>
 &lt;p>Right-click a vertex in the graph result to add the outgoing or incoming edge of that point.&lt;/p>
-&lt;h5 id="347-execute-the-query-of-records-and-favorites">3.4.7 Execute the query of records and favorites&lt;/h5>
+&lt;h5 id="447-execute-the-query-of-records-and-favorites">4.4.7 Execute the query of records and favorites&lt;/h5>
 &lt;ol>
 &lt;li>Record each query record at the bottom of the graph area, including: query time, execution type, content, status, time-consuming, as well as [collection] and [load] operations, to achieve a comprehensive record of graph execution, with traces to follow, and Can quickly load and reuse execution content&lt;/li>
 &lt;li>Provides the function of collecting sentences, which can be used to collect frequently used sentences, which is convenient for fast calling of high-frequency sentences.&lt;/li>
@@ -2274,13 +2381,13 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;center>
 &lt;img src="/docs/images/images-hubble/347收藏.png" alt="image">
 &lt;/center>
-&lt;h4 id="35-task-management">3.5 Task Management&lt;/h4>
-&lt;h5 id="351-module-entry">3.5.1 Module entry&lt;/h5>
+&lt;h4 id="45-task-management">4.5 Task Management&lt;/h4>
+&lt;h5 id="451-module-entry">4.5.1 Module entry&lt;/h5>
 &lt;p>Left navigation:&lt;/p>
 &lt;center>
 &lt;img src="/docs/images/images-hubble/351任务管理入口.png" alt="image">
 &lt;/center>
-&lt;h5 id="352-task-management">3.5.2 Task Management&lt;/h5>
+&lt;h5 id="452-task-management">4.5.2 Task Management&lt;/h5>
 &lt;ol>
 &lt;li>Provide unified management and result viewing of asynchronous tasks. There are 4 types of asynchronous tasks, namely:&lt;/li>
 &lt;/ol>
@@ -2299,7 +2406,7 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;center>
 &lt;img src="/docs/images/images-hubble/352任务列表.png" alt="image">
 &lt;/center>
-&lt;h5 id="353-gremlin-asynchronous-tasks">3.5.3 Gremlin asynchronous tasks&lt;/h5>
+&lt;h5 id="453-gremlin-asynchronous-tasks">4.5.3 Gremlin asynchronous tasks&lt;/h5>
 &lt;ol>
 &lt;li>Create a task&lt;/li>
 &lt;/ol>
@@ -2331,9 +2438,9 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;ul>
 &lt;li>The results are displayed in the form of json&lt;/li>
 &lt;/ul>
-&lt;h5 id="354-olap-algorithm-tasks">3.5.4 OLAP algorithm tasks&lt;/h5>
+&lt;h5 id="454-olap-algorithm-tasks">4.5.4 OLAP algorithm tasks&lt;/h5>
 &lt;p>There is no visual OLAP algorithm execution on Hubble. You can call the RESTful API to perform OLAP algorithm tasks, find the corresponding tasks by ID in the task management, and view the progress and results.&lt;/p>
-&lt;h5 id="355-delete-metadata-rebuild-index">3.5.5 Delete metadata, rebuild index&lt;/h5>
+&lt;h5 id="455-delete-metadata-rebuild-index">4.5.5 Delete metadata, rebuild index&lt;/h5>
 &lt;ol>
 &lt;li>Create a task&lt;/li>
 &lt;/ol>
