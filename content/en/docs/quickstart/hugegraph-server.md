@@ -480,6 +480,13 @@ Please refer to [Setup Server in IDEA](/docs/contribution-guidelines/hugegraph-s
 
 ### 9 Create Sample Graph on Server Startup
 
+There are three ways to create sample graph on server startup
+- Method 1: Modify the configuration file directly.
+- Method 2: Use command-line arguments in the startup script.
+- Method 3: Use Docker or Docker Compose to add environment variables.
+
+#### 9.1 Modify the configuration file directly.
+
 Modify `conf/gremlin-server.yaml` and change `empty-sample.groovy` to `example.groovy`:
 
 ```yaml
@@ -524,3 +531,61 @@ And when using the RESTful API to request `HugeGraphServer`, you receive the fol
 indicating the successful creation of the sample graph.
 
 > The process of creating sample graph on server startup is similar when using IntelliJ IDEA and will not be described further.
+
+
+#### 9.2 Specify command-line arguments in the startup script.
+
+Carry the `-p true` arguments when starting the script, which indicates `preload`, to create a sample graph.
+
+```
+bin/start-hugegraph.sh -p true
+Starting HugeGraphServer in daemon mode...
+Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)......OK
+```
+
+And use the RESTful API to request `HugeGraphServer` and get the following result:
+
+```javascript
+> curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
+
+{"vertices":[{"id":"2:lop","label":"software","type":"vertex","properties":{"name":"lop","lang":"java","price":328}},{"id":"1:josh","label":"person","type":"vertex","properties":{"name":"josh","age":32,"city":"Beijing"}},{"id":"1:marko","label":"person","type":"vertex","properties":{"name":"marko","age":29,"city":"Beijing"}},{"id":"1:peter","label":"person","type":"vertex","properties":{"name":"peter","age":35,"city":"Shanghai"}},{"id":"1:vadas","label":"person","type":"vertex","properties":{"name":"vadas","age":27,"city":"Hongkong"}},{"id":"2:ripple","label":"software","type":"vertex","properties":{"name":"ripple","lang":"java","price":199}}]}
+```
+
+This indicates the successful creation of the sample graph.
+
+
+#### 9.3 Use Docker or Docker Compose to add environment variables.
+
+Set the environment variable `PRELOAD=true` when starting Docker in order to load data during the execution of the startup script.
+
+1. Use `docker run`
+
+    Use `docker run -itd --name=graph -p 18080:8080 -e PRELOAD=true hugegraph/hugegraph:latest`
+
+2. Use `docker-compose`
+
+    Create `docker-compose.yml` as following
+
+    ```yaml
+    version: '3'
+      services:
+        graph:
+          image: hugegraph/hugegraph:latest
+          container_name: graph
+          environment:
+            - PRELOAD=true
+          ports:
+            - 18080:8080
+    ```
+
+    Use `docker-compose up -d` to start the container
+
+And use the RESTful API to request `HugeGraphServer` and get the following result:
+
+```javascript
+> curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
+
+{"vertices":[{"id":"2:lop","label":"software","type":"vertex","properties":{"name":"lop","lang":"java","price":328}},{"id":"1:josh","label":"person","type":"vertex","properties":{"name":"josh","age":32,"city":"Beijing"}},{"id":"1:marko","label":"person","type":"vertex","properties":{"name":"marko","age":29,"city":"Beijing"}},{"id":"1:peter","label":"person","type":"vertex","properties":{"name":"peter","age":35,"city":"Shanghai"}},{"id":"1:vadas","label":"person","type":"vertex","properties":{"name":"vadas","age":27,"city":"Hongkong"}},{"id":"2:ripple","label":"software","type":"vertex","properties":{"name":"ripple","lang":"java","price":199}}]}
+```
+
+This indicates the successful creation of the sample graph.

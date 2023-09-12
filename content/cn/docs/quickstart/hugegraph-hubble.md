@@ -32,7 +32,115 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
 
 对于需要遍历全图的Gremlin任务，索引的创建与重建等耗时较长的异步任务，平台提供相应的任务管理功能，实现异步任务的统一的管理与结果查看。
 
-### 2	平台使用流程
+#### 2 部署
+
+有三种方式可以部署`hugegraph-hubble`
+- 下载 toolchain 二进制包
+- 源码编译
+- 使用docker
+
+#### 2.1 下载 toolchain 二进制包
+
+`hubble`项目在`toolchain`项目中, 首先下载`toolchain`的tar包
+
+```bash
+wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-{version}.tar.gz
+tar -xvf apache-hugegraph-toolchain-incubating-{version}.tar.gz 
+cd apache-hugegraph-toolchain-incubating-{version}.tar.gz/apache-hugegraph-hubble-incubating-{version}
+```
+
+运行`hubble`
+
+```bash
+bin/start-hubble.sh
+```
+
+随后我们可以看到
+
+```shell
+starting HugeGraphHubble ..............timed out with http status 502
+2023-08-30 20:38:34 [main] [INFO ] o.a.h.HugeGraphHubble [] - Starting HugeGraphHubble v1.0.0 on cpu05 with PID xxx (~/apache-hugegraph-toolchain-incubating-1.0.0/apache-hugegraph-hubble-incubating-1.0.0/lib/hubble-be-1.0.0.jar started by $USER in ~/apache-hugegraph-toolchain-incubating-1.0.0/apache-hugegraph-hubble-incubating-1.0.0)
+...
+2023-08-30 20:38:38 [main] [INFO ] c.z.h.HikariDataSource [] - hugegraph-hubble-HikariCP - Start completed.
+2023-08-30 20:38:41 [main] [INFO ] o.a.c.h.Http11NioProtocol [] - Starting ProtocolHandler ["http-nio-0.0.0.0-8088"]
+2023-08-30 20:38:41 [main] [INFO ] o.a.h.HugeGraphHubble [] - Started HugeGraphHubble in 7.379 seconds (JVM running for 8.499)
+```
+
+然后使用浏览器访问 `ip:8088` 可看到`hubble`页面, 通过`bin/stop-hubble.sh`则可以停止服务
+
+#### 2.2 源码编译
+
+**注意:** 编译 hubble 需要用户本地环境有安装 `Nodejs V16.x` 与 `yarn` 环境
+
+```bash
+apt install curl build-essential
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+source ~/.bashrc
+nvm install 16
+```
+
+然后确认安装版本是否为 `16.x` (请注意过高的 Node 版本会产生冲突)
+
+```bash
+node -v
+```
+
+使用下列命令安装 `yarn`
+
+```bash
+npm install -g yarn
+```
+
+下载toolchain源码包
+
+```shell
+git clone https://github.com/apache/hugegraph-toolchain.git
+```
+
+编译`hubble`, 它依赖 loader 和 client, 编译时需提前构建这些依赖 (后续可跳)
+
+```shell
+cd incubator-hugegraph-toolchain
+sudo pip install -r hugegraph-hubble/hubble-dist/assembly/travis/requirements.txt
+mvn install -pl hugegraph-client,hugegraph-loader -am -Dmaven.javadoc.skip=true -DskipTests -ntp
+cd hugegraph-hubble
+mvn -e compile package -Dmaven.javadoc.skip=true -Dmaven.test.skip=true -ntp
+cd apache-hugegraph-hubble-incubating*
+```
+
+启动`hubble`
+
+```bash
+bin/start-hubble.sh -d
+```
+
+#### 2.3 使用Docker
+
+> **特别注意**: 如果使用 docker 启动 hubble，且 hubble 和 server 位于同一宿主机，在后续 hubble 页面中设置 graph 的 hostname 的时候请不要直接设置 `localhost/127.0.0.1`，这将指向 hubble 容器内部而非宿主机，导致无法连接到 server
+
+我们可以使用 `docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble` 快速启动 [hubble](https://hub.docker.com/r/hugegraph/hubble).
+
+或者使用docker-compose启动hubble，另外如果hubble和graph在同一个docker网络下，可以使用graph的contain_name进行访问，而不需要宿主机的ip
+
+使用`docker-compose up -d`，`docker-compose.yml`如下：
+
+```yaml
+version: '3'
+services:
+  graph_hubble:
+    image: hugegraph/hugegraph
+    container_name: graph
+    ports:
+      - 18080:8080
+
+  hubble:
+    image: hugegraph/hubble
+    container_name: hubble
+    ports:
+      - 8088:8088
+```
+
+### 3	平台使用流程
 
 平台的模块使用流程如下：
 
@@ -41,9 +149,9 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
 </div>
 
 
-### 3	平台使用说明
-#### 3.1	图管理
-##### 3.1.1	图创建
+### 4	平台使用说明
+#### 4.1	图管理
+##### 4.1.1	图创建
 图管理模块下，点击【创建图】，通过填写图ID、图名称、主机名、端口号、用户名、密码的信息，实现多图的连接。
 
 <div style="text-align: center;">
@@ -58,7 +166,7 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
 </div>
 
 
-##### 3.1.2	图访问
+##### 4.1.2	图访问
 实现图空间的信息访问，进入后，可进行图的多维查询分析、元数据管理、数据导入、算法分析等操作。
 
 <div style="text-align: center;">
@@ -66,7 +174,7 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
 </div>
 
 
-##### 3.1.3	图管理
+##### 4.1.3	图管理
 1. 用户通过对图的概览、搜索以及单图的信息编辑与删除，实现图的统一管理。
 2. 搜索范围：可对图名称和ID进行搜索。
 
@@ -75,8 +183,8 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
 </div>
 
 
-#### 3.2	元数据建模（列表+图模式）
-##### 3.2.1	模块入口
+#### 4.2	元数据建模（列表+图模式）
+##### 4.2.1	模块入口
 左侧导航处：
 
 <div style="text-align: center;">
@@ -84,8 +192,8 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
 </div>
 
 
-##### 3.2.2	属性类型
-###### 3.2.2.1	创建
+##### 4.2.2	属性类型
+###### 4.2.2.1	创建
 1.	填写或选择属性名称、数据类型、基数，完成属性的创建。
 2.	创建的属性可作为顶点类型和边类型的属性。
 
@@ -103,7 +211,7 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
 </div>
 
 
-###### 3.2.2.2	复用
+###### 4.2.2.2	复用
 1.	平台提供【复用】功能，可直接复用其他图的元数据。
 2.	选择需要复用的图ID，继续选择需要复用的属性，之后平台会进行是否冲突的校验，通过后，可实现元数据的复用。
 
@@ -121,11 +229,11 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
 </div>
 
 
-###### 3.2.2.3	管理
+###### 4.2.2.3	管理
 1.	在属性列表中可进行单条删除或批量删除操作。
 
-##### 3.2.3	顶点类型
-###### 3.2.3.1	创建
+##### 4.2.3	顶点类型
+###### 4.2.3.1	创建
 1.	填写或选择顶点类型名称、ID策略、关联属性、主键属性，顶点样式、查询结果中顶点下方展示的内容，以及索引的信息：包括是否创建类型索引，及属性索引的具体内容，完成顶点类型的创建。
 
 列表模式：
@@ -142,11 +250,11 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
 </center>
 
 
-###### 3.2.3.2	复用
+###### 4.2.3.2	复用
 1.	顶点类型的复用，会将此类型关联的属性和属性索引一并复用。
 2.	复用功能使用方法类似属性的复用，见3.2.2.2。
 
-###### 3.2.3.3	管理
+###### 4.2.3.3	管理
 1.	可进行编辑操作，顶点样式、关联类型、顶点展示内容、属性索引可编辑，其余不可编辑。
 
 
@@ -157,8 +265,8 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
 </center>
 
 
-##### 3.2.4	边类型
-###### 3.2.4.1	创建
+##### 4.2.4	边类型
+###### 4.2.4.1	创建
 1.	填写或选择边类型名称、起点类型、终点类型、关联属性、是否允许多次连接、边样式、查询结果中边下方展示的内容，以及索引的信息：包括是否创建类型索引，及属性索引的具体内容，完成边类型的创建。
 
 列表模式：
@@ -175,19 +283,19 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
 </center>
 
 
-###### 3.2.4.2	复用
+###### 4.2.4.2	复用
 1.	边类型的复用，会将此类型的起点类型、终点类型、关联的属性和属性索引一并复用。
 2.	复用功能使用方法类似属性的复用，见3.2.2.2。
 
 
-###### 3.2.4.3	管理
+###### 4.2.4.3	管理
 1.	可进行编辑操作，边样式、关联属性、边展示内容、属性索引可编辑，其余不可编辑，同顶点类型。
 2.	可进行单条删除或批量删除操作。
 
-##### 3.2.5	索引类型
+##### 4.2.5	索引类型
 展示顶点类型和边类型的顶点索引和边索引。
 
-#### 3.3	数据导入
+#### 4.3	数据导入
 数据导入的使用流程如下：
 
 <center>
@@ -195,14 +303,14 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
 </center>
 
 
-##### 3.3.1	模块入口
+##### 4.3.1	模块入口
 左侧导航处：
 <center>
   <img src="/docs/images/images-hubble/331导入入口.png" alt="image">
 </center>
 
 
-##### 3.3.2	创建任务
+##### 4.3.2	创建任务
 1.	填写任务名称和备注（非必填），可以创建导入任务。
 2.	可创建多个导入任务，并行导入。
 
@@ -211,7 +319,7 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
 </center>
 
 
-##### 3.3.3	上传文件
+##### 4.3.3	上传文件
 1.	上传需要构图的文件，目前支持的格式为CSV，后续会不断更新。
 2.	可同时上传多个文件。
 
@@ -220,7 +328,7 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
 </center>
 
 
-##### 3.3.4	设置数据映射
+##### 4.3.4	设置数据映射
 1. 对上传的文件分别设置数据映射，包括文件设置和类型设置
 2. 文件设置：勾选或填写是否包含表头、分隔符、编码格式等文件本身的设置内容，均设置默认值，无需手动填写
 3. 类型设置：
@@ -247,7 +355,7 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
   </center>
 
 
-##### 3.3.5	导入数据
+##### 4.3.5	导入数据
 导入前需要填写导入设置参数，填写完成后，可开始向图库中导入数据
 1.	导入设置
 - 导入设置参数项如下图所示，均设置默认值，无需手动填写
@@ -267,22 +375,22 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
 </center>
 
 
-#### 3.4	数据分析
-##### 3.4.1	模块入口
+#### 4.4	数据分析
+##### 4.4.1	模块入口
 左侧导航处：
 <center>
   <img src="/docs/images/images-hubble/341分析入口.png" alt="image">
 </center>
 
 
-##### 3.4.2	多图切换
+##### 4.4.2	多图切换
 通过左侧切换入口，灵活切换多图的操作空间
 <center>
   <img src="/docs/images/images-hubble/342多图切换.png" alt="image">
 </center>
 
 
-##### 3.4.3	图分析与处理
+##### 4.4.3	图分析与处理
 HugeGraph支持Apache TinkerPop3的图遍历查询语言Gremlin，Gremlin是一种通用的图数据库查询语言，通过输入Gremlin语句，点击执行，即可执行图数据的查询分析操作，并可实现顶点/边的创建及删除、顶点/边的属性修改等。
 
 Gremlin查询后，下方为图结果展示区域，提供3种图结果展示方式，分别为：【图模式】、【表格模式】、【Json模式】。
@@ -308,11 +416,11 @@ Gremlin查询后，下方为图结果展示区域，提供3种图结果展示方
 </center>
 
 
-##### 3.4.4	数据详情
+##### 4.4.4	数据详情
 点击顶点/边实体，可查看顶点/边的数据详情，包括：顶点/边类型，顶点ID，属性及对应值，拓展图的信息展示维度，提高易用性。
 
 
-##### 3.4.5	图结果的多维路径查询
+##### 4.4.5	图结果的多维路径查询
 除了全局的查询外，可针对查询结果中的顶点进行深度定制化查询以及隐藏操作，实现图结果的定制化挖掘。
 
 右击顶点，出现顶点的菜单入口，可进行展示、查询、隐藏等操作。
@@ -327,8 +435,8 @@ Gremlin查询后，下方为图结果展示区域，提供3种图结果展示方
 </center>
 
 
-##### 3.4.6	新增顶点/边
-###### 3.4.6.1	新增顶点
+##### 4.4.6	新增顶点/边
+###### 4.4.6.1	新增顶点
 在图区可通过两个入口，动态新增顶点，如下：
 1.	点击图区面板，出现添加顶点入口
 2.	点击右上角的操作栏中的首个图标
@@ -349,11 +457,11 @@ Gremlin查询后，下方为图结果展示区域，提供3种图结果展示方
 </center>
 
 
-###### 3.4.6.2	新增边
+###### 4.4.6.2	新增边
 右击图结果中的顶点，可增加该点的出边或者入边。
 
 
-##### 3.4.7	执行记录与收藏的查询
+##### 4.4.7	执行记录与收藏的查询
 1.	图区下方记载每次查询记录，包括：查询时间、执行类型、内容、状态、耗时、以及【收藏】和【加载】操作，实现图执行的全方位记录，有迹可循，并可对执行内容快速加载复用
 2.	提供语句的收藏功能，可对常用语句进行收藏操作，方便高频语句快速调用
 
@@ -362,15 +470,15 @@ Gremlin查询后，下方为图结果展示区域，提供3种图结果展示方
 </center>
 
 
-#### 3.5	任务管理
-##### 3.5.1	模块入口
+#### 4.5	任务管理
+##### 4.5.1	模块入口
 左侧导航处：
 <center>
   <img src="/docs/images/images-hubble/351任务管理入口.png" alt="image">
 </center>
 
 
-##### 3.5.2	任务管理
+##### 4.5.2	任务管理
 1. 提供异步任务的统一的管理与结果查看，异步任务包括4类，分别为：
 - 	gremlin：Gremlin任务
 - 	algorithm：OLAP算法任务
@@ -386,7 +494,7 @@ Gremlin查询后，下方为图结果展示区域，提供3种图结果展示方
 </center>
 
 
-##### 3.5.3	Gremlin异步任务
+##### 4.5.3	Gremlin异步任务
 1.创建任务
 
 - 数据分析模块，目前支持两种Gremlin操作，Gremlin查询和Gremlin任务；若用户切换到Gremlin任务，点击执行后，在异步任务中心会建立一条异步任务；
@@ -411,10 +519,10 @@ Gremlin查询后，下方为图结果展示区域，提供3种图结果展示方
 - 结果通过json形式展示
 
 
-##### 3.5.4	OLAP算法任务
+##### 4.5.4	OLAP算法任务
 Hubble上暂未提供可视化的OLAP算法执行，可调用RESTful API进行OLAP类算法任务，在任务管理中通过ID找到相应任务，查看进度与结果等。
 
-##### 3.5.5	删除元数据、重建索引
+##### 4.5.5	删除元数据、重建索引
 1.创建任务
 - 在元数据建模模块中，删除元数据时，可建立删除元数据的异步任务
 

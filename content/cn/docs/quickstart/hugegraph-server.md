@@ -465,6 +465,13 @@ $bin/stop-hugegraph.sh
 
 ### 9 在启动 Server 时创建示例图
 
+有三种方式可以在启动 Server 时创建示例图
+- 方式一: 直接修改配置文件
+- 方式二: 启动脚本使用命令行参数
+- 方式三: 使用docker或docker-compose添加环境变量
+
+#### 9.1 直接修改配置文件
+
 修改 `conf/gremlin-server.yaml`，将 `empty-sample.groovy` 修改为 `example.groovy`：
 
 ```yaml
@@ -519,3 +526,61 @@ schema = graph.schema()
 代表创建示例图成功。
 
 > 使用 IntelliJ IDEA 在启动 Server 时创建示例图的流程类似，不再赘述。
+
+
+#### 9.2 启动脚本时指定参数
+
+在脚本启动时候携带 `-p true` 参数, 表示preload, 即创建示例图
+
+```
+bin/start-hugegraph.sh -p true
+Starting HugeGraphServer in daemon mode...
+Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)......OK
+```
+
+并且使用 RESTful API 请求 `HugeGraphServer` 得到如下结果：
+
+```javascript
+> curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
+
+{"vertices":[{"id":"2:lop","label":"software","type":"vertex","properties":{"name":"lop","lang":"java","price":328}},{"id":"1:josh","label":"person","type":"vertex","properties":{"name":"josh","age":32,"city":"Beijing"}},{"id":"1:marko","label":"person","type":"vertex","properties":{"name":"marko","age":29,"city":"Beijing"}},{"id":"1:peter","label":"person","type":"vertex","properties":{"name":"peter","age":35,"city":"Shanghai"}},{"id":"1:vadas","label":"person","type":"vertex","properties":{"name":"vadas","age":27,"city":"Hongkong"}},{"id":"2:ripple","label":"software","type":"vertex","properties":{"name":"ripple","lang":"java","price":199}}]}
+```
+
+代表创建示例图成功。
+
+
+#### 9.3 使用docker启动
+
+在docker启动的时候设置环境变量 `PRELOAD=true`, 从而实现启动脚本的时候加载数据。
+
+1. 使用`docker run`
+
+    使用 `docker run -itd --name=graph -p 18080:8080 -e PRELOAD=true hugegraph/hugegraph:latest`
+
+2. 使用`docker-compose`
+
+    创建`docker-compose.yml`，具体文件如下
+
+    ```yaml
+    version: '3'
+      services:
+        graph:
+          image: hugegraph/hugegraph:latest
+          container_name: graph
+          environment:
+            - PRELOAD=true
+          ports:
+            - 18080:8080
+    ```
+
+    使用命令 `docker-compose up -d` 启动容器
+
+使用 RESTful API 请求 `HugeGraphServer` 得到如下结果：
+
+```javascript
+> curl "http://localhost:18080/graphs/hugegraph/graph/vertices" | gunzip
+
+{"vertices":[{"id":"2:lop","label":"software","type":"vertex","properties":{"name":"lop","lang":"java","price":328}},{"id":"1:josh","label":"person","type":"vertex","properties":{"name":"josh","age":32,"city":"Beijing"}},{"id":"1:marko","label":"person","type":"vertex","properties":{"name":"marko","age":29,"city":"Beijing"}},{"id":"1:peter","label":"person","type":"vertex","properties":{"name":"peter","age":35,"city":"Shanghai"}},{"id":"1:vadas","label":"person","type":"vertex","properties":{"name":"vadas","age":27,"city":"Hongkong"}},{"id":"2:ripple","label":"software","type":"vertex","properties":{"name":"ripple","lang":"java","price":199}}]}
+```
+
+代表创建示例图成功。
