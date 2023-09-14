@@ -515,7 +515,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/kneighbor?source=“1:marko�
 - count_only：Boolean值，true表示只统计结果的数目，不返回具体结果；false表示返回具体的结果，默认为false
 - with_path：true表示返回起始点到每个邻居的最短路径，false表示不返回起始点到每个邻居的最短路径，选填项，默认为false
 - with_edge，选填项，默认为false：
-    - true表示返回结果包含完成的边信息（路径中的全部边）
+    - true表示返回结果包含完整的边信息（路径中的全部边）
         - with_path为true时，返回所有路径中的边的完整信息
         - with_path为false时，不返回任何信息
     - false时表示只返回边id
