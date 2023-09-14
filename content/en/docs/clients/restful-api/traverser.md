@@ -271,13 +271,13 @@ The K-out API allows you to find vertices that are exactly "depth" steps away fr
 - nearest: When nearest is true, it means the shortest path length from the starting vertex to the result vertex is equal to depth, and there is no shorter path. When nearest is false, it means there is a path of length depth from the starting vertex to the result vertex (not necessarily the shortest and can contain cycles). Optional, default is true.
 - count_only: Boolean value, true indicates only counting the number of results without returning specific results, false indicates returning specific results. Default is false.
 - with_path: When true, it returns the shortest path from the starting vertex to each neighbor. When false, it does not return the shortest path. Optional, default is false.
-- with_edge: Optional, default is false:
-    - When true, the results include complete edge information (all edges in the path):
+- with_edge: Optional parameter, default is false:
+    - When true, the result will include complete edge information (all edges in the path):
         - When with_path is true, it returns complete information of all edges in all paths.
-        - When with_path is false, it returns nothing.
+        - When with_path is false, no information is returned.
     - When false, it only returns edge IDs.
-- with_vertex: Optional, default is false:
-    - When true, the results include complete vertex information (all vertices in the path):
+- with_vertex: Optional parameter, default is false:
+    - When true, the result will include complete vertex information (all vertices in the path):
         - When with_path is true, it returns complete information of all vertices in all paths.
         - When with_path is false, it returns complete information of all neighbors.
     - When false, it only returns vertex IDs.
@@ -515,16 +515,16 @@ Find all vertices that are reachable within depth steps from the starting vertex
 - max_depth: Number of steps, required.
 - count_only: Boolean value. If true, only the count of results is returned without the actual results. If false, the specific results are returned. Default is false.
 - with_path: If true, the shortest path from the starting point to each neighbor is returned. If false, the shortest path from the starting point to each neighbor is not returned. This is an optional parameter. Default is false.
-- with_edge: Optional, default is false:
-    - When true, the results include complete edge information (all edges in the path):
+- with_edge: Optional parameter, default is false:
+    - When true, the result will include complete edge information (all edges in the path):
         - When with_path is true, it returns complete information of all edges in all paths.
-        - When with_path is false, it returns nothing.
+        - When with_path is false, no information is returned.
     - When false, it only returns edge IDs.
 - with_vertex: Optional parameter, default is false:
-    - If true, the results include complete vertex information (all vertices in the path).
-        - When with_path is true, it returns complete information of all vertices in the paths.
+    - When true, the result will include complete vertex information (all vertices in the path):
+        - When with_path is true, it returns complete information of all vertices in all paths.
         - When with_path is false, it returns complete information of all neighbors.
-    - If false, only the vertex ID is returned.
+    - When false, it only returns vertex IDs.
 - limit: Maximum number of vertices to be returned. Also, the maximum number of vertices visited during the traversal process. This is an optional parameter. Default is 10000000.
 
 ##### 3.2.4.2 Usage Method
