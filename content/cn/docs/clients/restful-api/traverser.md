@@ -14,13 +14,13 @@ HugeGraph支持的Traverser API包括：
     - 基础版使用GET方法，根据起始顶点，查找恰好N步可达的邻居
     - 高级版使用POST方法，根据起始顶点，查找恰好N步可达的邻居，与基础版的不同在于：
         - 支持只统计邻居数量
-        - 支持边属性过滤
+        - 支持顶点和边属性过滤
         - 支持返回到达邻居的最短路径
 - K-neighbor API，根据起始顶点，查找N步以内可达的所有邻居，分为基础版和高级版：
     - 基础版使用GET方法，根据起始顶点，查找N步以内可达的所有邻居
     - 高级版使用POST方法，根据起始顶点，查找N步以内可达的所有邻居，与基础版的不同在于：
         - 支持只统计邻居数量
-        - 支持边属性过滤
+        - 支持顶点和边属性过滤
         - 支持返回到达邻居的最短路径
 - Same Neighbors, 查询两个顶点的共同邻居
 - Jaccard Similarity API，计算jaccard相似度，包括两种：
@@ -253,23 +253,33 @@ GET http://localhost:8080/graphs/{graph}/traversers/kout?source="1:marko"&max_de
 ###### Params
 
 - source：起始顶点id，必填项
-- 从起始点出发的Step，必填项，结构如下：
+- steps: 从起始点出发的Steps，必填项，结构如下：
     - direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
-    - labels：边的类型列表
-    - properties：通过属性的值过滤边
+    - edge_steps：边Step集合，支持对单边的类型和属性过滤，如果为空，则不过滤
+        - label：边类型
+        - properties：边属性
+    - vertex_steps：顶点Step集合，支持对单点的类型和属性过滤，如果为空，则不过滤
+        - label：顶点类型
+        - properties：顶点属性
     - max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)
     - skip_degree：用于设置查询过程中舍弃超级顶点的最小边数，即当某个顶点的邻接边数目大于 skip_degree 时，完全舍弃该顶点。选填项，如果开启时，需满足 `skip_degree >= max_degree` 约束，默认为0 (不启用)，表示不跳过任何点 (注意:  开启此配置后，遍历时会尝试访问一个顶点的 skip_degree 条边，而不仅仅是 max_degree 条边，这样有额外的遍历开销，对查询性能影响可能有较大影响，请确认理解后再开启)
 - max_depth：步数，必填项
 - nearest：nearest为true时，代表起始顶点到达结果顶点的最短路径长度为depth，不存在更短的路径；nearest为false时，代表起始顶点到结果顶点有一条长度为depth的路径（未必最短且可以有环），选填项，默认为true
 - count_only：Boolean值，true表示只统计结果的数目，不返回具体结果；false表示返回具体的结果，默认为false
 - with_path：true表示返回起始点到每个邻居的最短路径，false表示不返回起始点到每个邻居的最短路径，选填项，默认为false
+- with_edge，选填项，默认为false：
+    - 如果设置为true，则结果将包含所有边的完整信息，即路径中的所有边
+        - 当with_path为true时，将返回所有路径中的边的完整信息
+        - 当with_path为false时，不返回任何信息
+    - 如果设置为false，则仅返回边的id
 - with_vertex，选填项，默认为false：
-    - true表示返回结果包含完整的顶点信息（路径中的全部顶点）
-        - with_path为true时，返回所有路径中的顶点的完整信息
-        - with_path为false时，返回所有邻居的完整信息
-    - false时表示只返回顶点id
+    - 如果设置为true，则结果将包含所有顶点的完整信息，即路径中的所有顶点
+        - 当with_path为true时，将返回所有路径中的顶点的完整信息
+        - 当with_path为false时，返回所有邻居顶点的完整信息
+    - 如果设置为false，则仅返回顶点的id
 - capacity：遍历过程中最大的访问的顶点数目，选填项，默认为10000000
 - limit：返回的顶点的最大数目，选填项，默认为10000000
+- traverse_mode: 遍历方式，可选择“breadth_first_search”或“depth_first_search”作为参数，默认为“breadth_first_search”
 
 ##### 3.2.2.2 使用方法
 
@@ -283,21 +293,44 @@ POST http://localhost:8080/graphs/{graph}/traversers/kout
 
 ```json
 {
-  "source": "1:marko",
-  "step": {
-    "direction": "BOTH",
-    "labels": ["knows", "created"],
-    "properties": {
-      "weight": "P.gt(0.1)"
+    "source": "1:marko",
+    "steps": {
+        "direction": "BOTH",
+        "edge_steps": [
+            {
+                "label": "knows",
+                "properties": {
+                    "weight": "P.gt(0.1)"
+                }
+            },
+            {
+                "label": "created",
+                "properties": {
+                    "weight": "P.gt(0.1)"
+                }
+            }
+        ],
+        "vertex_steps": [
+            {
+                "label": "person",
+                "properties": {
+                    "age": "P.lt(32)"
+                }
+            },
+            {
+                "label": "software",
+                "properties": {}
+            }
+        ],
+        "max_degree": 10000,
+        "skip_degree": 100000
     },
-    "max_degree": 10000,
-    "skip_degree": 100000
-  },
-  "max_depth": 1,
-  "nearest": true,
-  "limit": 10000,
-  "with_vertex": true,
-  "with_path": true
+    "max_depth": 1,
+    "nearest": true,
+    "limit": 10000,
+    "with_vertex": true,
+    "with_path": true,
+    "with_edge": true
 }
 ```
 
@@ -311,9 +344,8 @@ POST http://localhost:8080/graphs/{graph}/traversers/kout
 
 ```json
 {
-    "size": 3,
-    "kout": [
-        "1:josh",
+    "size": 2,
+	"kout": [
         "1:vadas",
         "2:lop"
     ],
@@ -321,19 +353,13 @@ POST http://localhost:8080/graphs/{graph}/traversers/kout
         {
             "objects": [
                 "1:marko",
-                "1:josh"
+                "2:lop"
             ]
         },
         {
             "objects": [
                 "1:marko",
                 "1:vadas"
-            ]
-        },
-        {
-            "objects": [
-                "1:marko",
-                "2:lop"
             ]
         }
     ],
@@ -345,16 +371,6 @@ POST http://localhost:8080/graphs/{graph}/traversers/kout
             "properties": {
                 "name": "marko",
                 "age": 29,
-                "city": "Beijing"
-            }
-        },
-        {
-            "id": "1:josh",
-            "label": "person",
-            "type": "vertex",
-            "properties": {
-                "name": "josh",
-                "age": 32,
                 "city": "Beijing"
             }
         },
@@ -376,6 +392,34 @@ POST http://localhost:8080/graphs/{graph}/traversers/kout
                 "name": "lop",
                 "lang": "java",
                 "price": 328
+            }
+        }
+    ],
+    "edges": [
+        {
+            "id": "S1:marko>1>20160110>S1:vadas",
+            "label": "knows",
+            "type": "edge",
+            "outV": "1:marko",
+            "outVLabel": "person",
+            "inV": "1:vadas",
+            "inVLabel": "person",
+            "properties": {
+                "weight": 0.5,
+                "date": "20160110"
+            }
+        },
+        {
+            "id": "S1:marko>2>>S2:lop",
+            "label": "created",
+            "type": "edge",
+            "outV": "1:marko",
+            "outVLabel": "person",
+            "inV": "2:lop",
+            "inVLabel": "software",
+            "properties": {
+                "weight": 0.4,
+                "date": "20171210"
             }
         }
     ]
@@ -455,20 +499,31 @@ GET http://localhost:8080/graphs/{graph}/traversers/kneighbor?source=“1:marko�
 ###### Params
 
 - source：起始顶点id，必填项
-- 从起始点出发的Step，必填项，结构如下：
+- steps: 从起始点出发的Steps，必填项，结构如下：
     - direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
-    - labels：边的类型列表
-    - properties：通过属性的值过滤边
+    - 从起始点出发的Steps，必填项，结构如下：
+        - direction：表示边的方向（OUT,IN,BOTH），默认是BOTH
+        - edge_steps：边Step集合，支持对单边的类型和属性过滤，如果为空，则不过滤
+            - label：边类型
+            - properties：边属性
+        - vertex_steps：顶点Step集合，支持对单点的类型和属性过滤，如果为空，则不过滤
+            - label：顶点类型
+            - properties：顶点属性
     - max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)
     - skip_degree：用于设置查询过程中舍弃超级顶点的最小边数，即当某个顶点的邻接边数目大于 skip_degree 时，完全舍弃该顶点。选填项，如果开启时，需满足 `skip_degree >= max_degree` 约束，默认为0 (不启用)，表示不跳过任何点 (注意:  开启此配置后，遍历时会尝试访问一个顶点的 skip_degree 条边，而不仅仅是 max_degree 条边，这样有额外的遍历开销，对查询性能影响可能有较大影响，请确认理解后再开启)
 - max_depth：步数，必填项
 - count_only：Boolean值，true表示只统计结果的数目，不返回具体结果；false表示返回具体的结果，默认为false
 - with_path：true表示返回起始点到每个邻居的最短路径，false表示不返回起始点到每个邻居的最短路径，选填项，默认为false
+- with_edge，选填项，默认为false：
+    - 如果设置为true，则结果将包含所有边的完整信息，即路径中的所有边
+        - 当with_path为true时，将返回所有路径中的边的完整信息
+        - 当with_path为false时，不返回任何信息
+    - 如果设置为false，则仅返回边的id
 - with_vertex，选填项，默认为false：
-    - true表示返回结果包含完整的顶点信息（路径中的全部顶点）
-        - with_path为true时，返回所有路径中的顶点的完整信息
-        - with_path为false时，返回所有邻居的完整信息
-    - false时表示只返回顶点id
+    - 如果设置为true，则结果将包含所有顶点的完整信息，即路径中的所有顶点
+        - 当with_path为true时，将返回所有路径中的顶点的完整信息
+        - 当with_path为false时，返回所有邻居顶点的完整信息
+    - 如果设置为false，则仅返回顶点的id
 - limit：返回的顶点的最大数目，选填项，默认为10000000
 
 ##### 3.2.4.2 使用方法
@@ -483,20 +538,39 @@ POST http://localhost:8080/graphs/{graph}/traversers/kneighbor
 
 ```json
 {
-  "source": "1:marko",
-  "step": {
-    "direction": "BOTH",
-    "labels": ["knows", "created"],
-    "properties": {
-      "weight": "P.gt(0.1)"
-    },
-    "max_degree": 10000,
-    "skip_degree": 100000
-  },
-  "max_depth": 3,
-  "limit": 10000,
-  "with_vertex": true,
-  "with_path": true
+  	"source": "1:marko",
+  	"steps": {
+  	  	"direction": "BOTH",
+  	  	"edge_steps": [
+  	  	    {
+  	  	        "label": "knows",
+  	  	        "properties": {}
+  	  	    },
+  	  	    {
+  	  	        "label": "created",
+  	  	        "properties": {}
+  	  	    }
+  	  	],
+  	  	"vertex_steps": [
+  	  	    {
+  	  	        "label": "person",
+  	  	        "properties": {
+  	  	            "age": "P.gt(28)"
+  	  	        }
+  	  	    },
+  	  	    {
+  	  	        "label": "software",
+  	  	        "properties": {}
+  	  	    }
+  	  	],
+  	  	"max_degree": 10000,
+  	  	"skip_degree": 100000
+  	},
+  	"max_depth": 3,
+  	"limit": 10000,
+  	"with_vertex": true,
+  	"with_path": true,
+  	"with_edge": true
 }
 ```
 
@@ -510,38 +584,18 @@ POST http://localhost:8080/graphs/{graph}/traversers/kneighbor
 
 ```json
 {
-    "size": 6,
-    "kneighbor": [
-        "2:ripple",
-        "1:marko",
+    "size": 4,
+	"kneighbor": [
         "1:josh",
-        "1:vadas",
+        "2:lop",
         "1:peter",
-        "2:lop"
+        "2:ripple"
     ],
     "paths": [
         {
             "objects": [
                 "1:marko",
-                "1:josh",
-                "2:ripple"
-            ]
-        },
-        {
-            "objects": [
-                "1:marko"
-            ]
-        },
-        {
-            "objects": [
-                "1:marko",
-                "1:josh"
-            ]
-        },
-        {
-            "objects": [
-                "1:marko",
-                "1:vadas"
+                "2:lop"
             ]
         },
         {
@@ -554,7 +608,14 @@ POST http://localhost:8080/graphs/{graph}/traversers/kneighbor
         {
             "objects": [
                 "1:marko",
-                "2:lop"
+                "1:josh"
+            ]
+        },
+        {
+            "objects": [
+                "1:marko",
+                "1:josh",
+                "2:ripple"
             ]
         }
     ],
@@ -590,16 +651,6 @@ POST http://localhost:8080/graphs/{graph}/traversers/kneighbor
             }
         },
         {
-            "id": "1:vadas",
-            "label": "person",
-            "type": "vertex",
-            "properties": {
-                "name": "vadas",
-                "age": 27,
-                "city": "Hongkong"
-            }
-        },
-        {
             "id": "1:peter",
             "label": "person",
             "type": "vertex",
@@ -617,6 +668,60 @@ POST http://localhost:8080/graphs/{graph}/traversers/kneighbor
                 "name": "lop",
                 "lang": "java",
                 "price": 328
+            }
+        }
+    ],
+    "edges": [
+        {
+            "id": "S1:josh>2>>S2:ripple",
+            "label": "created",
+            "type": "edge",
+            "outV": "1:josh",
+            "outVLabel": "person",
+            "inV": "2:ripple",
+            "inVLabel": "software",
+            "properties": {
+                "weight": 1.0,
+                "date": "20171210"
+            }
+        },
+        {
+            "id": "S1:marko>2>>S2:lop",
+            "label": "created",
+            "type": "edge",
+            "outV": "1:marko",
+            "outVLabel": "person",
+            "inV": "2:lop",
+            "inVLabel": "software",
+            "properties": {
+                "weight": 0.4,
+                "date": "20171210"
+            }
+        },
+        {
+            "id": "S1:marko>1>20130220>S1:josh",
+            "label": "knows",
+            "type": "edge",
+            "outV": "1:marko",
+            "outVLabel": "person",
+            "inV": "1:josh",
+            "inVLabel": "person",
+            "properties": {
+                "weight": 1.0,
+                "date": "20130220"
+            }
+        },
+        {
+            "id": "S1:peter>2>>S2:lop",
+            "label": "created",
+            "type": "edge",
+            "outV": "1:peter",
+            "outVLabel": "person",
+            "inV": "2:lop",
+            "inVLabel": "software",
+            "properties": {
+                "weight": 0.2,
+                "date": "20170324"
             }
         }
     ]

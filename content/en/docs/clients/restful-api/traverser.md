@@ -14,13 +14,13 @@ The Traverser API supported by HugeGraph includes:
     - The basic version uses the GET method to find neighbors that are exactly N steps away from a given starting vertex.
     - The advanced version uses the POST method to find neighbors that are exactly N steps away from a given starting vertex. The advanced version differs from the basic version in the following ways:
         - Supports counting the number of neighbors only
-        - Supports filtering by edge properties
+        - Supports filtering by edge and vertex properties
         - Supports returning the shortest path to reach the neighbor
 - K-neighbor API: It finds all neighbors that are within N steps of a given starting vertex. There are two versions:
     - The basic version uses the GET method to find all neighbors that are within N steps of a given starting vertex.
     - The advanced version uses the POST method to find all neighbors that are within N steps of a given starting vertex. The advanced version differs from the basic version in the following ways:
         - Supports counting the number of neighbors only
-        - Supports filtering by edge properties
+        - Supports filtering by edge and vertex properties
         - Supports returning the shortest path to reach the neighbor
 - Same Neighbors: It queries the common neighbors of two vertices.
 - Jaccard Similarity API: It calculates the Jaccard similarity, which includes two types:
@@ -257,23 +257,33 @@ The K-out API allows you to find vertices that are exactly "depth" steps away fr
 ###### Params
 
 - source: The ID of the starting vertex, required.
-- Step from the starting point, required, with the following structure:
+- steps: Steps from the starting point, required, with the following structure:
     - direction: Represents the direction of the edges (OUT, IN, BOTH), default is BOTH.
-    - labels: List of edge types.
-    - properties: Filters edges based on property values.
+    - edge_steps: The step set of edges, supporting label and properties filtering for the edge. If edge_steps is empty, the edge is not filtered.
+        - label: Edge types.
+        - properties: Filter edges based on property values.
+    - vertex_steps: The step set of vertices, supporting label and properties filtering for the vertex. If vertex_steps is empty, the vertex is not filtered.
+        - label: Vertex types.
+        - properties: Filter vertices based on property values.
     - max_degree: Maximum number of adjacent edges to traverse for a single vertex, default is 10000 (Note: Prior to version 0.12, the parameter name was "degree" instead of "max_degree". Starting from version 0.12, "max_degree" is used uniformly, while still supporting the "degree" syntax for backward compatibility).
     - skip_degree: Sets the minimum number of edges to skip super vertices during the query process. If the number of adjacent edges for a vertex is greater than skip_degree, the vertex is completely skipped. Optional. If enabled, it should satisfy the constraint `skip_degree >= max_degree`. Default is 0 (not enabled), indicating no skipping of any vertices (Note: Enabling this configuration means that during traversal, an attempt will be made to access skip_degree edges of a vertex, not just max_degree edges. This incurs additional traversal overhead and may have a significant impact on query performance. Please enable it only after understanding the implications).
 - max_depth: Number of steps, required.
 - nearest: When nearest is true, it means the shortest path length from the starting vertex to the result vertex is equal to depth, and there is no shorter path. When nearest is false, it means there is a path of length depth from the starting vertex to the result vertex (not necessarily the shortest and can contain cycles). Optional, default is true.
 - count_only: Boolean value, true indicates only counting the number of results without returning specific results, false indicates returning specific results. Default is false.
 - with_path: When true, it returns the shortest path from the starting vertex to each neighbor. When false, it does not return the shortest path. Optional, default is false.
-- with_vertex: Optional, default is false:
-    - When true, the results include complete vertex information (all vertices in the path):
+- with_edge: Optional parameter, default is false:
+    - When true, the result will include complete edge information (all edges in the path):
+        - When with_path is true, it returns complete information of all edges in all paths.
+        - When with_path is false, no information is returned.
+    - When false, it only returns edge IDs.
+- with_vertex: Optional parameter, default is false:
+    - When true, the result will include complete vertex information (all vertices in the path):
         - When with_path is true, it returns complete information of all vertices in all paths.
         - When with_path is false, it returns complete information of all neighbors.
     - When false, it only returns vertex IDs.
 - capacity: Maximum number of vertices to visit during traversal. Optional, default is 10000000.
 - limit: Maximum number of vertices to return. Optional, default is 10000000.
+- traverse_mode: Traversal mode. There are two options: "breadth_first_search" and "depth_first_search", default is "breadth_first_search".
 
 ##### 3.2.2.2 Usage
 
@@ -287,21 +297,44 @@ POST http://localhost:8080/graphs/{graph}/traversers/kout
 
 ```json
 {
-  "source": "1:marko",
-  "step": {
-    "direction": "BOTH",
-    "labels": ["knows", "created"],
-    "properties": {
-      "weight": "P.gt(0.1)"
+    "source": "1:marko",
+    "steps": {
+        "direction": "BOTH",
+        "edge_steps": [
+            {
+                "label": "knows",
+                "properties": {
+                    "weight": "P.gt(0.1)"
+                }
+            },
+            {
+                "label": "created",
+                "properties": {
+                    "weight": "P.gt(0.1)"
+                }
+            }
+        ],
+        "vertex_steps": [
+            {
+                "label": "person",
+                "properties": {
+                    "age": "P.lt(32)"
+                }
+            },
+            {
+                "label": "software",
+                "properties": {}
+            }
+        ],
+        "max_degree": 10000,
+        "skip_degree": 100000
     },
-    "max_degree": 10000,
-    "skip_degree": 100000
-  },
-  "max_depth": 1,
-  "nearest": true,
-  "limit": 10000,
-  "with_vertex": true,
-  "with_path": true
+    "max_depth": 1,
+    "nearest": true,
+    "limit": 10000,
+    "with_vertex": true,
+    "with_path": true,
+    "with_edge": true
 }
 ```
 
@@ -315,9 +348,8 @@ POST http://localhost:8080/graphs/{graph}/traversers/kout
 
 ```json
 {
-    "size": 3,
+    "size": 2,
     "kout": [
-        "1:josh",
         "1:vadas",
         "2:lop"
     ],
@@ -325,19 +357,13 @@ POST http://localhost:8080/graphs/{graph}/traversers/kout
         {
             "objects": [
                 "1:marko",
-                "1:josh"
+                "2:lop"
             ]
         },
         {
             "objects": [
                 "1:marko",
                 "1:vadas"
-            ]
-        },
-        {
-            "objects": [
-                "1:marko",
-                "2:lop"
             ]
         }
     ],
@@ -349,16 +375,6 @@ POST http://localhost:8080/graphs/{graph}/traversers/kout
             "properties": {
                 "name": "marko",
                 "age": 29,
-                "city": "Beijing"
-            }
-        },
-        {
-            "id": "1:josh",
-            "label": "person",
-            "type": "vertex",
-            "properties": {
-                "name": "josh",
-                "age": 32,
                 "city": "Beijing"
             }
         },
@@ -380,6 +396,34 @@ POST http://localhost:8080/graphs/{graph}/traversers/kout
                 "name": "lop",
                 "lang": "java",
                 "price": 328
+            }
+        }
+    ],
+    "edges": [
+        {
+            "id": "S1:marko>1>20160110>S1:vadas",
+            "label": "knows",
+            "type": "edge",
+            "outV": "1:marko",
+            "outVLabel": "person",
+            "inV": "1:vadas",
+            "inVLabel": "person",
+            "properties": {
+                "weight": 0.5,
+                "date": "20160110"
+            }
+        },
+        {
+            "id": "S1:marko>2>>S2:lop",
+            "label": "created",
+            "type": "edge",
+            "outV": "1:marko",
+            "outVLabel": "person",
+            "inV": "2:lop",
+            "inVLabel": "software",
+            "properties": {
+                "weight": 0.4,
+                "date": "20171210"
             }
         }
     ]
@@ -458,20 +502,29 @@ Find all vertices that are reachable within depth steps from the starting vertex
 ###### Params
 
 - source: Starting vertex ID, required.
-- Step from the starting point, required, with the following structure:
-    - direction: Represents the direction of edges (OUT, IN, BOTH). Default is BOTH.
-    - labels: List of edge types.
-    - properties: Filter edges based on property values.
+- steps: Steps from the starting point, required, with the following structure:
+    - direction: Represents the direction of the edges (OUT, IN, BOTH), default is BOTH.
+    - edge_steps: The step set of edges, supporting label and properties filtering for the edge. If edge_steps is empty, the edge is not filtered.
+        - label: Edge types.
+        - properties: Filter edges based on property values.
+    - vertex_steps: The step set of vertices, supporting label and properties filtering for the vertex. If vertex_steps is empty, the vertex is not filtered.
+        - label: Vertex types.
+        - properties: Filter vertices based on property values.
     - max_degree: Maximum number of adjacent edges to traverse for each vertex during the query process. Default is 10000. (Note: Before version 0.12, the parameter name within the step only supported "degree." Starting from version 0.12, it is unified as "max_degree" and is backward compatible with the "degree" notation.)
     - skip_degree: Used to set the minimum number of edges to discard super vertices during the query process. When the number of adjacent edges for a vertex exceeds skip_degree, the vertex is completely discarded. This is an optional parameter. If enabled, it should satisfy the constraint `skip_degree >= max_degree`. Default is 0 (not enabled), which means no vertices are skipped. (Note: When this configuration is enabled, the traversal will attempt to access skip_degree edges for each vertex, not just max_degree edges. This incurs additional traversal overhead and may significantly impact query performance. Please make sure to understand this before enabling.)
 - max_depth: Number of steps, required.
 - count_only: Boolean value. If true, only the count of results is returned without the actual results. If false, the specific results are returned. Default is false.
 - with_path: If true, the shortest path from the starting point to each neighbor is returned. If false, the shortest path from the starting point to each neighbor is not returned. This is an optional parameter. Default is false.
+- with_edge: Optional parameter, default is false:
+    - When true, the result will include complete edge information (all edges in the path):
+        - When with_path is true, it returns complete information of all edges in all paths.
+        - When with_path is false, no information is returned.
+    - When false, it only returns edge IDs.
 - with_vertex: Optional parameter, default is false:
-    - If true, the results include complete vertex information (all vertices in the path).
-        - When with_path is true, it returns complete information of all vertices in the paths.
+    - When true, the result will include complete vertex information (all vertices in the path):
+        - When with_path is true, it returns complete information of all vertices in all paths.
         - When with_path is false, it returns complete information of all neighbors.
-    - If false, only the vertex ID is returned.
+    - When false, it only returns vertex IDs.
 - limit: Maximum number of vertices to be returned. Also, the maximum number of vertices visited during the traversal process. This is an optional parameter. Default is 10000000.
 
 ##### 3.2.4.2 Usage Method
@@ -486,20 +539,44 @@ POST http://localhost:8080/graphs/{graph}/traversers/kneighbor
 
 ```json
 {
-  "source": "1:marko",
-  "step": {
-    "direction": "BOTH",
-    "labels": ["knows", "created"],
-    "properties": {
-      "weight": "P.gt(0.1)"
+    "source": "1:marko",
+    "steps": {
+        "direction": "BOTH",
+        "edge_steps": [
+            {
+                "label": "knows",
+                "properties": {
+                    "weight": "P.gt(0.1)"
+                }
+            },
+            {
+                "label": "created",
+                "properties": {
+                    "weight": "P.gt(0.1)"
+                }
+            }
+        ],
+        "vertex_steps": [
+            {
+                "label": "person",
+                "properties": {
+                    "age": "P.lt(32)"
+                }
+            },
+            {
+                "label": "software",
+                "properties": {}
+            }
+        ],
+        "max_degree": 10000,
+        "skip_degree": 100000
     },
-    "max_degree": 10000,
-    "skip_degree": 100000
-  },
-  "max_depth": 3,
-  "limit": 10000,
-  "with_vertex": true,
-  "with_path": true
+    "max_depth": 1,
+    "nearest": true,
+    "limit": 10000,
+    "with_vertex": true,
+    "with_path": true,
+    "with_edge": true
 }
 ```
 
@@ -513,38 +590,18 @@ POST http://localhost:8080/graphs/{graph}/traversers/kneighbor
 
 ```json
 {
-    "size": 6,
+    "size": 4,
     "kneighbor": [
-        "2:ripple",
-        "1:marko",
         "1:josh",
-        "1:vadas",
+        "2:lop",
         "1:peter",
-        "2:lop"
+        "2:ripple"
     ],
     "paths": [
         {
             "objects": [
                 "1:marko",
-                "1:josh",
-                "2:ripple"
-            ]
-        },
-        {
-            "objects": [
-                "1:marko"
-            ]
-        },
-        {
-            "objects": [
-                "1:marko",
-                "1:josh"
-            ]
-        },
-        {
-            "objects": [
-                "1:marko",
-                "1:vadas"
+                "2:lop"
             ]
         },
         {
@@ -557,7 +614,14 @@ POST http://localhost:8080/graphs/{graph}/traversers/kneighbor
         {
             "objects": [
                 "1:marko",
-                "2:lop"
+                "1:josh"
+            ]
+        },
+        {
+            "objects": [
+                "1:marko",
+                "1:josh",
+                "2:ripple"
             ]
         }
     ],
@@ -593,16 +657,6 @@ POST http://localhost:8080/graphs/{graph}/traversers/kneighbor
             }
         },
         {
-            "id": "1:vadas",
-            "label": "person",
-            "type": "vertex",
-            "properties": {
-                "name": "vadas",
-                "age": 27,
-                "city": "Hongkong"
-            }
-        },
-        {
             "id": "1:peter",
             "label": "person",
             "type": "vertex",
@@ -620,6 +674,60 @@ POST http://localhost:8080/graphs/{graph}/traversers/kneighbor
                 "name": "lop",
                 "lang": "java",
                 "price": 328
+            }
+        }
+    ],
+    "edges": [
+        {
+            "id": "S1:josh>2>>S2:ripple",
+            "label": "created",
+            "type": "edge",
+            "outV": "1:josh",
+            "outVLabel": "person",
+            "inV": "2:ripple",
+            "inVLabel": "software",
+            "properties": {
+                "weight": 1.0,
+                "date": "20171210"
+            }
+        },
+        {
+            "id": "S1:marko>2>>S2:lop",
+            "label": "created",
+            "type": "edge",
+            "outV": "1:marko",
+            "outVLabel": "person",
+            "inV": "2:lop",
+            "inVLabel": "software",
+            "properties": {
+                "weight": 0.4,
+                "date": "20171210"
+            }
+        },
+        {
+            "id": "S1:marko>1>20130220>S1:josh",
+            "label": "knows",
+            "type": "edge",
+            "outV": "1:marko",
+            "outVLabel": "person",
+            "inV": "1:josh",
+            "inVLabel": "person",
+            "properties": {
+                "weight": 1.0,
+                "date": "20130220"
+            }
+        },
+        {
+            "id": "S1:peter>2>>S2:lop",
+            "label": "created",
+            "type": "edge",
+            "outV": "1:peter",
+            "outVLabel": "person",
+            "inV": "2:lop",
+            "inVLabel": "software",
+            "properties": {
+                "weight": 0.2,
+                "date": "20170324"
             }
         }
     ]
