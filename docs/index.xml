@@ -14492,10 +14492,10 @@ A random walk based PersonalRank algorithm should be likes this:&lt;/p>
 &lt;h5 id="method--url">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body">Response Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graphs&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;graphs&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph1&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
@@ -14504,84 +14504,86 @@ A random walk based PersonalRank algorithm should be likes this:&lt;/p>
 &lt;h5 id="method--url-1">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-1">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-1">Response Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;backend&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;cassandra&amp;#34;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;backend&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;cassandra&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="613-clear-all-data-of-a-graphinclude-schemavertexedge-and-index-etcthis-operation-requires-administrator-privileges">6.1.3 Clear all data of a graph，include: schema、vertex、edge and index .etc，&lt;strong>This operation requires administrator privileges&lt;/strong>&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="613-clear-all-data-of-a-graph-include-schema-vertex-edge-and-index-etcthis-operation">6.1.3 Clear all data of a graph, include: schema, vertex, edge and index .etc.,**This operation&lt;/h4>
+&lt;p>requires administrator privileges**&lt;/p>
 &lt;h5 id="params">Params&lt;/h5>
-&lt;p>Since emptying the graph is a dangerous operation, we have added parameters for confirmation to the API to
-avoid false calls by users：&lt;/p>
+&lt;p>Since emptying the graph is a dangerous operation, we have added parameters for confirmation to the
+API to
+avoid false calls by users:&lt;/p>
 &lt;ul>
 &lt;li>confirm_message: default by &lt;code>I'm sure to delete all data&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-2">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphs/hugegraph/clear?confirm_message=I%27m+sure+to+delete+all+data
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-2">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">204&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="614-clone-graphthis-operation-requires-administrator-privileges">6.1.4 Clone graph，&lt;strong>This operation requires administrator privileges&lt;/strong>&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">204&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="614-clone-graphthis-operation-requires-administrator-privileges">6.1.4 Clone graph,&lt;strong>This operation requires administrator privileges&lt;/strong>&lt;/h4>
 &lt;h5 id="params-1">Params&lt;/h5>
 &lt;ul>
-&lt;li>clone_graph_name: name of an exist graph.
+&lt;li>clone_graph_name: name of an existed graph.
 To clone from an existing graph, the user can choose to transfer the configuration file,
 which will replace the configuration in the existing graph&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-3">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphs/hugegraph_clone?clone_graph_name=hugegraph
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-optional">Request Body [Optional]&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>backend=rocksdb
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=binary
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store=hugegraph_clone
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.data_path=./hg2
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.wal_path=./hg2
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-3">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-2">Response Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph_clone&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;backend&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;rocksdb&amp;#34;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph_clone&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;backend&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;rocksdb&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="615-create-graphthis-operation-requires-administrator-privileges">6.1.5 Create graph，&lt;strong>This operation requires administrator privileges&lt;/strong>&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="615-create-graphthis-operation-requires-administrator-privileges">6.1.5 Create graph,&lt;strong>This operation requires administrator privileges&lt;/strong>&lt;/h4>
 &lt;h5 id="method--url-4">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphs/hugegraph2
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body">Request Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>backend=rocksdb
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=binary
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store=hugegraph2
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.data_path=./hg2
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.wal_path=./hg2
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-4">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-3">Response Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph2&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;backend&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;rocksdb&amp;#34;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph2&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;backend&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;rocksdb&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="616-delete-graph-and-its-data">6.1.6 Delete graph and it&amp;rsquo;s data&lt;/h4>
 &lt;h5 id="params-2">Params&lt;/h5>
-&lt;p>Since deleting a graph is a dangerous operation, we have added parameters for confirmation to the API to
-avoid false calls by users：&lt;/p>
+&lt;p>Since deleting a graph is a dangerous operation, we have added parameters for confirmation to the
+API to
+avoid false calls by users:&lt;/p>
 &lt;ul>
 &lt;li>confirm_message: default by &lt;code>I'm sure to drop the graph&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-5">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphs/hugegraph_clone?confirm_message=I%27m%20sure%20to%20drop%20the%20graph
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-5">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">204&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">204&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="62-conf">6.2 Conf&lt;/h3>
-&lt;h4 id="621-get-configuration-for-a-graphthis-operation-requires-administrator-privileges">6.2.1 Get configuration for a graph，&lt;strong>This operation requires administrator privileges&lt;/strong>&lt;/h4>
+&lt;h4 id="621-get-configuration-for-a-graphthis-operation-requires-administrator-privileges">6.2.1 Get configuration for a graph,&lt;strong>This operation requires administrator privileges&lt;/strong>&lt;/h4>
 &lt;h5 id="method--url-6">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/conf
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-6">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-4">Response Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># gremlin entrence to create graph
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gremlin.graph=com.baidu.hugegraph.HugeFactory
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gremlin.graph=org.apache.hugegraph.HugeFactory
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># cache config
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#schema.cache_capacity=1048576
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#graph.cache_capacity=10485760
@@ -14596,14 +14598,14 @@ avoid false calls by users：&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=cassandra
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store=hugegraph
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...=
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="63-mode">6.3 Mode&lt;/h3>
-&lt;p>Allowed graph mode values are：NONE，RESTORING，MERGING，LOADING&lt;/p>
+&lt;p>Allowed graph mode values are: NONE, RESTORING, MERGING, LOADING&lt;/p>
 &lt;ul>
 &lt;li>None mode is regular mode
 &lt;ul>
-&lt;li>Not allowed create schema with specified id&lt;/li>
-&lt;li>Not support create vertex with id for AUTOMATIC id strategy&lt;/li>
+&lt;li>Not allowed to create schema with specified id&lt;/li>
+&lt;li>Not support creating vertex with id for AUTOMATIC id strategy&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>LOADING mode used to load data via hugegraph-loader.
@@ -14612,9 +14614,9 @@ avoid false calls by users：&lt;/p>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
-&lt;p>Restore has two different modes： Restoring and Merging&lt;/p>
+&lt;p>Restore has two different modes: Restoring and Merging&lt;/p>
 &lt;ul>
-&lt;li>Restoring mode is used to restore schema and graph data to an new graph.
+&lt;li>Restoring mode is used to restore schema and graph data to a new graph.
 &lt;ul>
 &lt;li>Support create schema with specified id&lt;/li>
 &lt;li>Support create vertex with id for AUTOMATIC id strategy&lt;/li>
@@ -14622,7 +14624,7 @@ avoid false calls by users：&lt;/p>
 &lt;/li>
 &lt;li>Merging mode is used to merge schema and graph data to an existing graph.
 &lt;ul>
-&lt;li>Not allowed create schema with specified id&lt;/li>
+&lt;li>Not allowed to create schema with specified id&lt;/li>
 &lt;li>Support create vertex with id for AUTOMATIC id strategy&lt;/li>
 &lt;/ul>
 &lt;/li>
@@ -14634,13 +14636,13 @@ When you complete the restore, change the graph mode to None.&lt;/p>
 &lt;h5 id="method--url-7">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/mode
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-7">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-5">Response Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;mode&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;NONE&amp;#34;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;mode&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;NONE&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>Allowed graph mode values are：NONE，RESTORING，MERGING&lt;/p>
+&lt;p>Allowed graph mode values are: NONE, RESTORING, MERGING&lt;/p>
 &lt;/blockquote>
 &lt;h4 id="632-modify-graph-mode-this-operation-requires-administrator-privileges">6.3.2 Modify graph mode. &lt;strong>This operation requires administrator privileges&lt;/strong>&lt;/h4>
 &lt;h5 id="method--url-8">Method &amp;amp; Url&lt;/h5>
@@ -14648,13 +14650,13 @@ When you complete the restore, change the graph mode to None.&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-1">Request Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>&amp;#34;RESTORING&amp;#34;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>Allowed graph mode values are：NONE，RESTORING，MERGING&lt;/p>
+&lt;p>Allowed graph mode values are: NONE, RESTORING, MERGING&lt;/p>
 &lt;/blockquote>
 &lt;h5 id="response-status-8">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-6">Response Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;mode&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;RESTORING&amp;#34;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;mode&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;RESTORING&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="633-get-graphs-read-mode">6.3.3 Get graph&amp;rsquo;s read mode.&lt;/h4>
 &lt;h5 id="params-3">Params&lt;/h5>
@@ -14664,10 +14666,10 @@ When you complete the restore, change the graph mode to None.&lt;/p>
 &lt;h5 id="method--url-9">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/graph_read_mode
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-9">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-7">Response Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph_read_mode&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;ALL&amp;#34;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;graph_read_mode&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;ALL&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="634-modify-graphs-read-mode-this-operation-requires-administrator-privileges">6.3.4 Modify graph&amp;rsquo;s read mode. &lt;strong>This operation requires administrator privileges&lt;/strong>&lt;/h4>
 &lt;h5 id="params-4">Params&lt;/h5>
@@ -14679,13 +14681,13 @@ When you complete the restore, change the graph mode to None.&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-2">Request Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>&amp;#34;OLTP_ONLY&amp;#34;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>Allowed read mode values are：ALL，OLTP_ONLY，OLAP_ONLY&lt;/p>
+&lt;p>Allowed read mode values are: ALL, OLTP_ONLY, OLAP_ONLY&lt;/p>
 &lt;/blockquote>
 &lt;h5 id="response-status-10">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-8">Response Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph_read_mode&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;OLTP_ONLY&amp;#34;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;graph_read_mode&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;OLTP_ONLY&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="64-snapshot">6.4 Snapshot&lt;/h3>
 &lt;h4 id="641-create-a-snapshot">6.4.1 Create a snapshot&lt;/h4>
@@ -14696,10 +14698,10 @@ When you complete the restore, change the graph mode to None.&lt;/p>
 &lt;h5 id="method--url-11">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/snapshot_create
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-11">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-9">Response Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;snapshot_created&amp;#34;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;snapshot_created&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="642-resume-a-snapshot">6.4.2 Resume a snapshot&lt;/h4>
 &lt;h5 id="params-6">Params&lt;/h5>
@@ -14709,13 +14711,13 @@ When you complete the restore, change the graph mode to None.&lt;/p>
 &lt;h5 id="method--url-12">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/snapshot_resume
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-12">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-10">Response Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;snapshot_resumed&amp;#34;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;snapshot_resumed&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="65-compact">6.5 Compact&lt;/h3>
-&lt;h4 id="651-manually-compact-graphthis-operation-requires-administrator-privileges">6.5.1 Manually compact graph，&lt;strong>This operation requires administrator privileges&lt;/strong>&lt;/h4>
+&lt;h4 id="651-manually-compact-graphthis-operation-requires-administrator-privileges">6.5.1 Manually compact graph,&lt;strong>This operation requires administrator privileges&lt;/strong>&lt;/h4>
 &lt;h5 id="params-7">Params&lt;/h5>
 &lt;ul>
 &lt;li>name: name of a graph&lt;/li>
@@ -14723,13 +14725,13 @@ When you complete the restore, change the graph mode to None.&lt;/p>
 &lt;h5 id="method--url-13">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/compact
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-13">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-11">Response Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;nodes&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;cluster_id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;local&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;servers&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;local&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;OK&amp;#34;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;nodes&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;cluster_id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;local&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;servers&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;local&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;OK&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Task API</title><link>/docs/clients/restful-api/task/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/clients/restful-api/task/</guid><description>
