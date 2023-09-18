@@ -16,18 +16,18 @@ GET http://localhost:8080/graphs
 
 ##### Response Status
 
-```json
+```javascript
 200
 ```
 
 ##### Response Body
 
-```json
+```javascript
 {
-    "graphs": [
-        "hugegraph",
-        "hugegraph1"
-    ]
+  "graphs": [
+    "hugegraph",
+    "hugegraph1"
+  ]
 }
 ```
 
@@ -41,25 +41,28 @@ GET http://localhost:8080/graphs/hugegraph
 
 ##### Response Status
 
-```json
+```javascript
 200
 ```
 
 ##### Response Body
 
-```json
+```javascript
 {
-    "name": "hugegraph",
-    "backend": "cassandra"
+  "name": "hugegraph",
+  "backend": "cassandra"
 }
 ```
 
-#### 6.1.3 Clear all data of a graph，include: schema、vertex、edge and index .etc，**This operation requires administrator privileges**
+#### 6.1.3 Clear all data of a graph, include: schema, vertex, edge and index .etc.,**This operation
+
+requires administrator privileges**
 
 ##### Params
 
-Since emptying the graph is a dangerous operation, we have added parameters for confirmation to the API to 
-avoid false calls by users：
+Since emptying the graph is a dangerous operation, we have added parameters for confirmation to the
+API to
+avoid false calls by users:
 
 - confirm_message: default by `I'm sure to delete all data`
 
@@ -71,17 +74,17 @@ DELETE http://localhost:8080/graphs/hugegraph/clear?confirm_message=I%27m+sure+t
 
 ##### Response Status
 
-```json
+```javascript
 204
 ```
 
-#### 6.1.4 Clone graph，**This operation requires administrator privileges**
+#### 6.1.4 Clone graph,**This operation requires administrator privileges**
 
 ##### Params
 
-- clone_graph_name: name of an exist graph.
-                    To clone from an existing graph, the user can choose to transfer the configuration file, 
-                    which will replace the configuration in the existing graph
+- clone_graph_name: name of an existed graph.
+  To clone from an existing graph, the user can choose to transfer the configuration file,
+  which will replace the configuration in the existing graph
 
 ##### Method & Url
 
@@ -92,7 +95,7 @@ POST http://localhost:8080/graphs/hugegraph_clone?clone_graph_name=hugegraph
 ##### Request Body [Optional]
 
 ```
-gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
+gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 backend=rocksdb
 serializer=binary
 store=hugegraph_clone
@@ -102,20 +105,20 @@ rocksdb.wal_path=./hg2
 
 ##### Response Status
 
-```json
+```javascript
 200
 ```
 
 ##### Response Body
 
-```json
+```javascript
 {
-    "name": "hugegraph_clone",
-    "backend": "rocksdb"
+  "name": "hugegraph_clone",
+  "backend": "rocksdb"
 }
 ```
 
-#### 6.1.5 Create graph，**This operation requires administrator privileges**
+#### 6.1.5 Create graph,**This operation requires administrator privileges**
 
 ##### Method & Url
 
@@ -126,7 +129,7 @@ POST http://localhost:8080/graphs/hugegraph2
 ##### Request Body
 
 ```
-gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
+gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 backend=rocksdb
 serializer=binary
 store=hugegraph2
@@ -136,16 +139,16 @@ rocksdb.wal_path=./hg2
 
 ##### Response Status
 
-```json
+```javascript
 200
 ```
 
 ##### Response Body
 
-```json
+```javascript
 {
-    "name": "hugegraph2",
-    "backend": "rocksdb"
+  "name": "hugegraph2",
+  "backend": "rocksdb"
 }
 ```
 
@@ -153,8 +156,9 @@ rocksdb.wal_path=./hg2
 
 ##### Params
 
-Since deleting a graph is a dangerous operation, we have added parameters for confirmation to the API to 
-avoid false calls by users：
+Since deleting a graph is a dangerous operation, we have added parameters for confirmation to the
+API to
+avoid false calls by users:
 
 - confirm_message: default by `I'm sure to drop the graph`
 
@@ -166,13 +170,13 @@ DELETE http://localhost:8080/graphs/hugegraph_clone?confirm_message=I%27m%20sure
 
 ##### Response Status
 
-```json
+```javascript
 204
 ```
 
 ### 6.2 Conf
 
-#### 6.2.1 Get configuration for a graph，**This operation requires administrator privileges**
+#### 6.2.1 Get configuration for a graph,**This operation requires administrator privileges**
 
 ##### Method & Url
 
@@ -182,7 +186,7 @@ GET http://localhost:8080/graphs/hugegraph/conf
 
 ##### Response Status
 
-```json
+```javascript
 200
 ```
 
@@ -190,8 +194,7 @@ GET http://localhost:8080/graphs/hugegraph/conf
 
 ```properties
 # gremlin entrence to create graph
-gremlin.graph=com.baidu.hugegraph.HugeFactory
-
+gremlin.graph=org.apache.hugegraph.HugeFactory
 # cache config
 #schema.cache_capacity=1048576
 #graph.cache_capacity=10485760
@@ -206,30 +209,30 @@ backend=cassandra
 serializer=cassandra
 
 store=hugegraph
-...
+...=
 ```
 
 ### 6.3 Mode
 
-Allowed graph mode values are：NONE，RESTORING，MERGING，LOADING
-    
+Allowed graph mode values are: NONE, RESTORING, MERGING, LOADING
+
 - None mode is regular mode
-    - Not allowed create schema with specified id
-    - Not support create vertex with id for AUTOMATIC id strategy
+    - Not allowed to create schema with specified id
+    - Not support creating vertex with id for AUTOMATIC id strategy
 - LOADING mode used to load data via hugegraph-loader.
     - When adding vertices / edges, it is not checked whether the required attributes are passed in
 
-Restore has two different modes： Restoring and Merging
+Restore has two different modes: Restoring and Merging
 
-- Restoring mode is used to restore schema and graph data to an new graph.
+- Restoring mode is used to restore schema and graph data to a new graph.
     - Support create schema with specified id
     - Support create vertex with id for AUTOMATIC id strategy
 - Merging mode is used to merge schema and graph data to an existing graph.
-    - Not allowed create schema with specified id
+    - Not allowed to create schema with specified id
     - Support create vertex with id for AUTOMATIC id strategy
 
-Under normal circumstances, the graph mode is None. When you need to restore the graph, 
-you need to temporarily modify the graph mode to Restoring or Merging as needed. 
+Under normal circumstances, the graph mode is None. When you need to restore the graph,
+you need to temporarily modify the graph mode to Restoring or Merging as needed.
 When you complete the restore, change the graph mode to None.
 
 #### 6.3.1 Get graph mode.
@@ -242,19 +245,19 @@ GET http://localhost:8080/graphs/hugegraph/mode
 
 ##### Response Status
 
-```json
+```javascript
 200
 ```
 
 ##### Response Body
 
-```json
+```javascript
 {
-    "mode": "NONE"
+  "mode": "NONE"
 }
 ```
 
-> Allowed graph mode values are：NONE，RESTORING，MERGING
+> Allowed graph mode values are: NONE, RESTORING, MERGING
 
 #### 6.3.2 Modify graph mode. **This operation requires administrator privileges**
 
@@ -270,19 +273,19 @@ PUT http://localhost:8080/graphs/hugegraph/mode
 "RESTORING"
 ```
 
-> Allowed graph mode values are：NONE，RESTORING，MERGING
+> Allowed graph mode values are: NONE, RESTORING, MERGING
 
 ##### Response Status
 
-```json
+```javascript
 200
 ```
 
 ##### Response Body
 
-```json
+```javascript
 {
-    "mode": "RESTORING"
+  "mode": "RESTORING"
 }
 ```
 
@@ -300,15 +303,15 @@ GET http://localhost:8080/graphs/hugegraph/graph_read_mode
 
 ##### Response Status
 
-```json
+```javascript
 200
 ```
 
 ##### Response Body
 
-```json
+```javascript
 {
-    "graph_read_mode": "ALL"
+  "graph_read_mode": "ALL"
 }
 ```
 
@@ -330,19 +333,19 @@ PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
 "OLTP_ONLY"
 ```
 
-> Allowed read mode values are：ALL，OLTP_ONLY，OLAP_ONLY
+> Allowed read mode values are: ALL, OLTP_ONLY, OLAP_ONLY
 
 ##### Response Status
 
-```json
+```javascript
 200
 ```
 
 ##### Response Body
 
-```json
+```javascript
 {
-    "graph_read_mode": "OLTP_ONLY"
+  "graph_read_mode": "OLTP_ONLY"
 }
 ```
 
@@ -362,15 +365,15 @@ PUT http://localhost:8080/graphs/hugegraph/snapshot_create
 
 ##### Response Status
 
-```json
+```javascript
 200
 ```
 
 ##### Response Body
 
-```json
+```javascript
 {
-    "hugegraph": "snapshot_created"
+  "hugegraph": "snapshot_created"
 }
 ```
 
@@ -388,21 +391,21 @@ PUT http://localhost:8080/graphs/hugegraph/snapshot_resume
 
 ##### Response Status
 
-```json
+```javascript
 200
 ```
 
 ##### Response Body
 
-```json
+```javascript
 {
-    "hugegraph": "snapshot_resumed"
+  "hugegraph": "snapshot_resumed"
 }
 ```
 
 ### 6.5 Compact
 
-#### 6.5.1 Manually compact graph，**This operation requires administrator privileges**
+#### 6.5.1 Manually compact graph,**This operation requires administrator privileges**
 
 ##### Params
 
@@ -416,18 +419,18 @@ PUT http://localhost:8080/graphs/hugegraph/compact
 
 ##### Response Status
 
-```json
+```javascript
 200
 ```
 
 ##### Response Body
 
-```json
+```javascript
 {
-    "nodes": 1,
-    "cluster_id": "local",
-    "servers": {
-        "local": "OK"
-    }
+  "nodes": 1,
+  "cluster_id": "local",
+  "servers": {
+    "local": "OK"
+  }
 }
 ```
