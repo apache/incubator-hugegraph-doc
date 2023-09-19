@@ -48,7 +48,7 @@ The details of maven pom.xml are as follows:
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.baidu.hugegraph</groupId>
+    <groupId>org.apache.hugegraph</groupId>
     <artifactId>hugegraph-plugin-demo</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
@@ -57,7 +57,7 @@ The details of maven pom.xml are as follows:
 
     <dependencies>
         <dependency>
-            <groupId>com.baidu.hugegraph</groupId>
+            <groupId>org.apache.hugegraph</groupId>
             <artifactId>hugegraph-core</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -72,8 +72,8 @@ The details of maven pom.xml are as follows:
 
 ###### 2.1.1  Implement the interface BackendStoreProvider
 
-- Realizable interfaces: `com.baidu.hugegraph.backend.store.BackendStoreProvider`
-- Or inherit an abstract class：`com.baidu.hugegraph.backend.store.AbstractBackendStoreProvider`
+- Realizable interfaces: `org.apache.hugegraph.backend.store.BackendStoreProvider`
+- Or inherit an abstract class:`org.apache.hugegraph.backend.store.AbstractBackendStoreProvider`
  
 Take the RocksDB backend RocksDBStoreProvider as an example:
 
@@ -153,7 +153,7 @@ public interface BackendStore {
  
 ###### 2.1.3 Extending custom serializers
 
-The serializer must inherit the abstract class: `com.baidu.hugegraph.backend.serializer.AbstractSerializer` 
+The serializer must inherit the abstract class: `org.apache.hugegraph.backend.serializer.AbstractSerializer` 
 ( `implements GraphSerializer, SchemaSerializer`) The main interface is defined as follows:
 
 ```java
@@ -186,7 +186,7 @@ public interface SchemaSerializer {
 
 When adding a custom backend, it may be necessary to add new configuration items. The implementation process mainly includes:
 
-- Add a configuration item container class and implement the interface `com.baidu.hugegraph.config.OptionHolder`
+- Add a configuration item container class and implement the interface `org.apache.hugegraph.config.OptionHolder`
 - Provide a singleton method `public static OptionHolder instance()`, and call the method when the object is initialized `OptionHolder.registerOptions()`
 - Add configuration item declaration, single-value configuration item type is `ConfigOption`, multi-value configuration item type is `ConfigListOption`
  
@@ -242,16 +242,16 @@ public class RocksDBOptions extends OptionHolder {
 
 ##### 2.2 Extend custom tokenizer
 
-The tokenizer needs to implement the interface `com.baidu.hugegraph.analyzer.Analyzer`, take implementing a SpaceAnalyzer space tokenizer as an example.
+The tokenizer needs to implement the interface `org.apache.hugegraph.analyzer.Analyzer`, take implementing a SpaceAnalyzer space tokenizer as an example.
 
 ```java
-package com.baidu.hugegraph.plugin;
+package org.apache.hugegraph.plugin;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.baidu.hugegraph.analyzer.Analyzer;
+import org.apache.hugegraph.analyzer.Analyzer;
 
 public class SpaceAnalyzer implements Analyzer {
 
@@ -265,7 +265,7 @@ public class SpaceAnalyzer implements Analyzer {
 #### 3. Implement the plug-in interface and register it
 
 The plug-in registration entry is `HugeGraphPlugin.register()`, the custom plug-in must implement this interface method, and register the extension 
-items defined above inside it. The interface `com.baidu.hugegraph.plugin.HugeGraphPlugin` is defined as follows:
+items defined above inside it. The interface `org.apache.hugegraph.plugin.HugeGraphPlugin` is defined as follows:
 
 ```java
 public interface HugeGraphPlugin {
@@ -282,16 +282,16 @@ public interface HugeGraphPlugin {
  
 And HugeGraphPlugin provides 4 static methods for registering extensions:
 
-- registerOptions(String name, String classPath)：register configuration items
-- registerBackend(String name, String classPath)：register backend (BackendStoreProvider)
-- registerSerializer(String name, String classPath)：register serializer
-- registerAnalyzer(String name, String classPath)：register tokenizer
+- registerOptions(String name, String classPath): register configuration items
+- registerBackend(String name, String classPath): register backend (BackendStoreProvider)
+- registerSerializer(String name, String classPath): register serializer
+- registerAnalyzer(String name, String classPath): register tokenizer
  
  
 The following is an example of registering the SpaceAnalyzer tokenizer:
 
 ```java
-package com.baidu.hugegraph.plugin;
+package org.apache.hugegraph.plugin;
 
 public class DemoPlugin implements HugeGraphPlugin {
 
@@ -310,8 +310,8 @@ public class DemoPlugin implements HugeGraphPlugin {
 #### 4. Configure SPI entry
 
 1. Make sure the services directory exists: hugegraph-plugin-demo/resources/META-INF/services
-2. Create a text file in the services directory: com.baidu.hugegraph.plugin.HugeGraphPlugin
-3. The content of the file is as follows: com.baidu.hugegraph.plugin.DemoPlugin
+2. Create a text file in the services directory: org.apache.hugegraph.plugin.HugeGraphPlugin
+3. The content of the file is as follows: org.apache.hugegraph.plugin.DemoPlugin
 
 #### 5. Make Jar package
 

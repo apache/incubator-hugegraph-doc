@@ -1,14 +1,14 @@
 ---
-title: "HugeGraph Plugin机制及插件扩展流程"
+title: "HugeGraph Plugin 机制及插件扩展流程"
 linkTitle: "HugeGraph Plugin"
 weight: 3
 ---
 
 ### 背景
 
-1. HugeGraph不仅开源开放，而且要做到简单易用，一般用户无需更改源码也能轻松增加插件扩展功能。
-2. HugeGraph支持多种内置存储后端，也允许用户无需更改现有源码的情况下扩展自定义后端。
-3. HugeGraph支持全文检索，全文检索功能涉及到各语言分词，目前已内置8种中文分词器，也允许用户无需更改现有源码的情况下扩展自定义分词器。
+1. HugeGraph 不仅开源开放，而且要做到简单易用，一般用户无需更改源码也能轻松增加插件扩展功能。
+2. HugeGraph 支持多种内置存储后端，也允许用户无需更改现有源码的情况下扩展自定义后端。
+3. HugeGraph 支持全文检索，全文检索功能涉及到各语言分词，目前已内置 8 种中文分词器，也允许用户无需更改现有源码的情况下扩展自定义分词器。
 
 ### 可扩展维度
 
@@ -21,21 +21,21 @@ weight: 3
 
 ### 插件实现机制
 
-1. HugeGraph提供插件接口HugeGraphPlugin，通过Java SPI机制支持插件化
-2. HugeGraph提供了4个扩展项注册函数：`registerOptions()`、`registerBackend()`、`registerSerializer()`、`registerAnalyzer()`
-3. 插件实现者实现相应的Options、Backend、Serializer或Analyzer的接口
-4. 插件实现者实现HugeGraphPlugin接口的`register()`方法，在该方法中注册上述第3点所列的具体实现类，并打成jar包
-5. 插件使用者将jar包放在HugeGraph Server安装目录的`plugins`目录下，修改相关配置项为插件自定义值，重启即可生效
+1. HugeGraph 提供插件接口 HugeGraphPlugin，通过 Java SPI 机制支持插件化
+2. HugeGraph 提供了 4 个扩展项注册函数：`registerOptions()`、`registerBackend()`、`registerSerializer()`、`registerAnalyzer()`
+3. 插件实现者实现相应的 Options、Backend、Serializer 或 Analyzer 的接口
+4. 插件实现者实现 HugeGraphPlugin 接口的`register()`方法，在该方法中注册上述第 3 点所列的具体实现类，并打成 jar 包
+5. 插件使用者将 jar 包放在 HugeGraph Server 安装目录的`plugins`目录下，修改相关配置项为插件自定义值，重启即可生效
 
 ### 插件实现流程实例
 
-#### 1 新建一个maven项目
+#### 1 新建一个 maven 项目
 
 ##### 1.1 项目名称取名：hugegraph-plugin-demo
 
-##### 1.2 添加`hugegraph-core` Jar包依赖
+##### 1.2 添加`hugegraph-core` Jar 包依赖
 
-maven pom.xml详细内容如下：
+maven pom.xml 详细内容如下：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -45,7 +45,7 @@ maven pom.xml详细内容如下：
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.baidu.hugegraph</groupId>
+    <groupId>org.apache.hugegraph</groupId>
     <artifactId>hugegraph-plugin-demo</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
@@ -54,7 +54,7 @@ maven pom.xml详细内容如下：
 
     <dependencies>
         <dependency>
-            <groupId>com.baidu.hugegraph</groupId>
+            <groupId>org.apache.hugegraph</groupId>
             <artifactId>hugegraph-core</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -67,12 +67,12 @@ maven pom.xml详细内容如下：
 
 ##### 2.1 扩展自定义后端
 
-###### 2.1.1 实现接口BackendStoreProvider
+###### 2.1.1 实现接口 BackendStoreProvider
 
-- 可实现接口：`com.baidu.hugegraph.backend.store.BackendStoreProvider`
-- 或者继承抽象类：`com.baidu.hugegraph.backend.store.AbstractBackendStoreProvider`
+- 可实现接口：`org.apache.hugegraph.backend.store.BackendStoreProvider`
+- 或者继承抽象类：`org.apache.hugegraph.backend.store.AbstractBackendStoreProvider`
  
-以RocksDB后端RocksDBStoreProvider为例：
+以 RocksDB 后端 RocksDBStoreProvider 为例：
 
 ```java
 public class RocksDBStoreProvider extends AbstractBackendStoreProvider {
@@ -103,9 +103,9 @@ public class RocksDBStoreProvider extends AbstractBackendStoreProvider {
 }
 ```
 
-###### 2.1.2 实现接口BackendStore
+###### 2.1.2 实现接口 BackendStore
 
-BackendStore接口定义如下：
+BackendStore 接口定义如下：
 
 ```java
 public interface BackendStore {
@@ -150,7 +150,7 @@ public interface BackendStore {
  
 ###### 2.1.3 扩展自定义序列化器
 
-序列化器必须继承抽象类：`com.baidu.hugegraph.backend.serializer.AbstractSerializer`(`implements GraphSerializer, SchemaSerializer`)
+序列化器必须继承抽象类：`org.apache.hugegraph.backend.serializer.AbstractSerializer`(`implements GraphSerializer, SchemaSerializer`)
 主要接口的定义如下：
 
 ```java
@@ -183,11 +183,11 @@ public interface SchemaSerializer {
 
 增加自定义后端时，可能需要增加新的配置项，实现流程主要包括：
 
-- 增加配置项容器类，并实现接口`com.baidu.hugegraph.config.OptionHolder`
+- 增加配置项容器类，并实现接口`org.apache.hugegraph.config.OptionHolder`
 - 提供单例方法`public static OptionHolder instance()`，并在对象初始化时调用方法`OptionHolder.registerOptions()`
 - 增加配置项声明，单值配置项类型为`ConfigOption`、多值配置项类型为`ConfigListOption`
  
-以RocksDB配置项定义为例：
+以 RocksDB 配置项定义为例：
 
 ```java
 public class RocksDBOptions extends OptionHolder {
@@ -239,16 +239,16 @@ public class RocksDBOptions extends OptionHolder {
 
 ##### 2.2 扩展自定义分词器
 
-分词器需要实现接口`com.baidu.hugegraph.analyzer.Analyzer`，以实现一个SpaceAnalyzer空格分词器为例。
+分词器需要实现接口`org.apache.hugegraph.analyzer.Analyzer`，以实现一个 SpaceAnalyzer 空格分词器为例。
 
 ```java
-package com.baidu.hugegraph.plugin;
+package org.apache.hugegraph.plugin;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.baidu.hugegraph.analyzer.Analyzer;
+import org.apache.hugegraph.analyzer.Analyzer;
 
 public class SpaceAnalyzer implements Analyzer {
 
@@ -262,7 +262,7 @@ public class SpaceAnalyzer implements Analyzer {
 #### 3. 实现插件接口，并进行注册
 
 插件注册入口为`HugeGraphPlugin.register()`，自定义插件必须实现该接口方法，在其内部注册上述定义好的扩展项。
-接口`com.baidu.hugegraph.plugin.HugeGraphPlugin`定义如下：
+接口`org.apache.hugegraph.plugin.HugeGraphPlugin`定义如下：
 
 ```java
 public interface HugeGraphPlugin {
@@ -277,7 +277,7 @@ public interface HugeGraphPlugin {
 }
 ```
  
-并且HugeGraphPlugin提供了4个静态方法用于注册扩展项：
+并且 HugeGraphPlugin 提供了 4 个静态方法用于注册扩展项：
 
 - registerOptions(String name, String classPath)：注册配置项
 - registerBackend(String name, String classPath)：注册后端（BackendStoreProvider）
@@ -285,10 +285,10 @@ public interface HugeGraphPlugin {
 - registerAnalyzer(String name, String classPath)：注册分词器
  
  
-下面以注册SpaceAnalyzer分词器为例：
+下面以注册 SpaceAnalyzer 分词器为例：
 
 ```java
-package com.baidu.hugegraph.plugin;
+package org.apache.hugegraph.plugin;
 
 public class DemoPlugin implements HugeGraphPlugin {
 
@@ -304,13 +304,13 @@ public class DemoPlugin implements HugeGraphPlugin {
 }
 ```
 
-#### 4. 配置SPI入口
+#### 4. 配置 SPI 入口
 
-1. 确保services目录存在：hugegraph-plugin-demo/resources/META-INF/services
-2. 在services目录下建立文本文件：com.baidu.hugegraph.plugin.HugeGraphPlugin
-3. 文件内容如下：com.baidu.hugegraph.plugin.DemoPlugin
+1. 确保 services 目录存在：hugegraph-plugin-demo/resources/META-INF/services
+2. 在 services 目录下建立文本文件：org.apache.hugegraph.plugin.HugeGraphPlugin
+3. 文件内容如下：org.apache.hugegraph.plugin.DemoPlugin
  
-#### 5. 打Jar包
+#### 5. 打 Jar 包
 
-通过maven打包，在项目目录下执行命令`mvn package`，在target目录下会生成Jar包文件。
-使用时将该Jar包拷到`plugins`目录，重启服务即可生效。
+通过 maven 打包，在项目目录下执行命令`mvn package`，在 target 目录下会生成 Jar 包文件。
+使用时将该 Jar 包拷到`plugins`目录，重启服务即可生效。

@@ -10,10 +10,10 @@ weight: 1
 
 主要的配置文件包括：gremlin-server.yaml、rest-server.properties 和 hugegraph.properties
 
-HugeGraphServer 内部集成了 GremlinServer 和 RestServer，而 gremlin-server.yaml 和 rest-server.properties 就是用来配置这两个Server的。
+HugeGraphServer 内部集成了 GremlinServer 和 RestServer，而 gremlin-server.yaml 和 rest-server.properties 就是用来配置这两个 Server 的。
 
-- [GremlinServer](http://tinkerpop.apache.org/docs/3.2.3/reference/#gremlin-server)：GremlinServer接受用户的gremlin语句，解析后转而调用Core的代码。
-- RestServer：提供RESTful API，根据不同的HTTP请求，调用对应的Core API，如果用户请求体是gremlin语句，则会转发给GremlinServer，实现对图数据的操作。
+- [GremlinServer](http://tinkerpop.apache.org/docs/3.2.3/reference/#gremlin-server)：GremlinServer 接受用户的 gremlin 语句，解析后转而调用 Core 的代码。
+- RestServer：提供 RESTful API，根据不同的 HTTP 请求，调用对应的 Core API，如果用户请求体是 gremlin 语句，则会转发给 GremlinServer，实现对图数据的操作。
 
 下面对这三个配置文件逐一介绍。
 
@@ -26,7 +26,7 @@ gremlin-server.yaml 文件默认的内容如下：
 #host: 127.0.0.1
 #port: 8182
 
-# Gremlin查询中的超时时间（以毫秒为单位）
+# Gremlin 查询中的超时时间（以毫秒为单位）
 evaluationTimeout: 30000
 
 channelizer: org.apache.tinkerpop.gremlin.server.channel.WsAndHttpChannelizer
@@ -141,9 +141,9 @@ ssl: {
 用户可以通过 [Gremlin-Console](/clients/gremlin-console.html) 快速体验 HugeGraph 的特性，但是不支持大规模数据导入，
 推荐使用 HTTP 的通信方式，HugeGraph 的外围组件都是基于 HTTP 实现的；
 
-默认GremlinServer是服务在 localhost:8182，如果需要修改，配置 host、port 即可
+默认 GremlinServer 是服务在 localhost:8182，如果需要修改，配置 host、port 即可
 
-- host：部署 GremlinServer 机器的机器名或 IP，目前 HugeGraphServer 不支持分布式部署，且GremlinServer不直接暴露给用户;
+- host：部署 GremlinServer 机器的机器名或 IP，目前 HugeGraphServer 不支持分布式部署，且 GremlinServer 不直接暴露给用户;
 - port：部署 GremlinServer 机器的端口；
 
 同时需要在 rest-server.properties 中增加对应的配置项 gremlinserver.url=http://host:port
@@ -183,7 +183,7 @@ hugegraph.properties 是一类文件，因为如果系统存在多个图，则�
 
 ```properties
 # gremlin entrence to create graph
-gremlin.graph=com.baidu.hugegraph.HugeFactory
+gremlin.graph=org.apache.hugegraph.HugeFactory
 
 # cache config
 #schema.cache_capacity=100000
@@ -272,13 +272,13 @@ cassandra.password=
 
 - gremlin.graph：GremlinServer 的启动入口，用户不要修改此项；
 - backend：使用的后端存储，可选值有 memory、cassandra、scylladb、mysql、hbase、postgresql 和 rocksdb；
-- serializer：主要为内部使用，用于将 schema、vertex 和 edge 序列化到后端，对应的可选值为 text、cassandra、scylladb 和 binary；(注：rocksdb后端值需是binary，其他后端backend与serializer值需保持一致，如hbase后端该值为hbase)
+- serializer：主要为内部使用，用于将 schema、vertex 和 edge 序列化到后端，对应的可选值为 text、cassandra、scylladb 和 binary；(注：rocksdb 后端值需是 binary，其他后端 backend 与 serializer 值需保持一致，如 hbase 后端该值为 hbase)
 - store：图存储到后端使用的数据库名，在 cassandra 和 scylladb 中就是 keyspace 名，此项的值与 GremlinServer 和 RestServer 中的图名并无关系，但是出于直观考虑，建议仍然使用相同的名字；
 - cassandra.host：backend 为 cassandra 或 scylladb 时此项才有意义，cassandra/scylladb 集群的 seeds；
 - cassandra.port：backend 为 cassandra 或 scylladb 时此项才有意义，cassandra/scylladb 集群的 native port；
 - rocksdb.data_path：backend 为 rocksdb 时此项才有意义，rocksdb 的数据目录
 - rocksdb.wal_path：backend 为 rocksdb 时此项才有意义，rocksdb 的日志目录
-- admin.token: 通过一个token来获取服务器的配置信息，例如：<http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55>
+- admin.token: 通过一个 token 来获取服务器的配置信息，例如：<http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55>
 
 ### 5 多图配置
 

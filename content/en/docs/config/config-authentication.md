@@ -40,8 +40,8 @@ Configure the `authenticator` and its `rest-server` file path in the `gremlin-se
 
 ```yaml
 authentication: {
-  authenticator: com.baidu.hugegraph.auth.StandardAuthenticator,
-  authenticationHandler: com.baidu.hugegraph.auth.WsAndHttpBasicAuthHandler,
+  authenticator: org.apache.hugegraph.auth.StandardAuthenticator,
+  authenticationHandler: org.apache.hugegraph.auth.WsAndHttpBasicAuthHandler,
   config: {tokens: conf/rest-server.properties}
 }
 ```
@@ -49,7 +49,7 @@ authentication: {
 Configure the `authenticator` and `graph_store` information in the `rest-server.properties` configuration file:
 
 ```properties
-auth.authenticator=com.baidu.hugegraph.auth.StandardAuthenticator
+auth.authenticator=org.apache.hugegraph.auth.StandardAuthenticator
 auth.graph_store=hugegraph
 
 # Auth Client Config
@@ -62,7 +62,7 @@ In the above configuration, the `graph_store` option specifies which graph to us
 In the `hugegraph{n}.properties` configuration file, configure the `gremlin.graph` information:
 
 ```properties
-gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
+gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 ```
 
 For detailed API calls and explanations regarding permissions, please refer to the [Authentication-API](/docs/clients/restful-api/auth) documentation.
@@ -75,8 +75,8 @@ Configure the `authenticator` and its `rest-server` file path in the `gremlin-se
 
 ```yaml
 authentication: {
-  authenticator: com.baidu.hugegraph.auth.ConfigAuthenticator,
-  authenticationHandler: com.baidu.hugegraph.auth.WsAndHttpBasicAuthHandler,
+  authenticator: org.apache.hugegraph.auth.ConfigAuthenticator,
+  authenticationHandler: org.apache.hugegraph.auth.WsAndHttpBasicAuthHandler,
   config: {tokens: conf/rest-server.properties}
 }
 ```
@@ -84,7 +84,7 @@ authentication: {
 Configure the `authenticator` and its `tokens` information in the `rest-server.properties` configuration file:
 
 ```properties
-auth.authenticator=com.baidu.hugegraph.auth.ConfigAuthenticator
+auth.authenticator=org.apache.hugegraph.auth.ConfigAuthenticator
 auth.admin_token=token-value-a
 auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 ```
@@ -92,9 +92,11 @@ auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 In the `hugegraph{n}.properties` configuration file, configure the `gremlin.graph` information:
 
 ```properties
-gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
+gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 ```
 
 ### Custom User Authentication System
 
-If you need to support a more flexible user system, you can customize the authenticator for extension. Simply implement the `com.baidu.hugegraph.auth.HugeAuthenticator` interface with your custom authenticator, and then modify the `authenticator` configuration item in the configuration file to point to your implementation.
+If you need to support a more flexible user system, you can customize the authenticator for extension.
+Simply implement the `org.apache.hugegraph.auth.HugeAuthenticator` interface with your custom authenticator, 
+and then modify the `authenticator` configuration item in the configuration file to point to your implementation.
