@@ -7,7 +7,7 @@ weight: 7
 
 > Note: HugeGraph-Spark 已经停止维护, 不再更新, 请转向使用 hugegraph-computer, 感谢理解
 
-### 1 HugeGraph-Spark概述 (Deprecated)
+### 1 HugeGraph-Spark 概述 (Deprecated)
 
 HugeGraph-Spark 是一个连接 HugeGraph 和 Spark GraphX 的工具，能够读取 HugeGraph 中的数据并转换成 Spark GraphX 的 RDD，然后执行 GraphX 中的各种图算法。
 
@@ -75,15 +75,15 @@ HugeGraph-Spark 提供了两种添加配置项的方法：
 导入 hugegraph 相关类
 
 ```scala
-scala> import com.baidu.hugegraph.spark._
-import com.baidu.hugegraph.spark._
+scala> import org.apache.hugegraph.spark._
+import org.apache.hugegraph.spark._
 ```
 
 初始化 graph 对象（GraphX RDD），并创建 snapshot
 
 ```scala
 scala> val graph = sc.hugeGraph("hugegraph", "http://localhost:8080")
-org.apache.spark.graphx.Graph[com.baidu.hugegraph.spark.structure.HugeSparkVertex,com.baidu.hugegraph.spark.structure.HugeSparkEdge] = org.apache.spark.graphx.impl.GraphImpl@1418a1bd
+org.apache.spark.graphx.Graph[org.apache.hugegraph.spark.structure.HugeSparkVertex,org.apache.hugegraph.spark.structure.HugeSparkEdge] = org.apache.spark.graphx.impl.GraphImpl@1418a1bd
 ```
 
 如果已经配置过`spark.hugegraph.server.url`参数，可以省略第二个参数，直接通过`val graph = sc.hugeGraph("hugegraph")`调用即可。
@@ -117,7 +117,7 @@ sc.makeRDD(top10).join(graph.vertices).collect().foreach(println)
 
 ##### PageRank
 
-PageRank的结果仍为一个图，包含`vertices` 与 `edges`。
+PageRank 的结果仍为一个图，包含`vertices` 与 `edges`。
 
 ```scala
 val ranks = graph.pageRank(0.0001)
@@ -129,4 +129,4 @@ val ranks = graph.pageRank(0.0001)
 val top10 = ranks.vertices.top(10)
 ```
 
-更多 GraphX 的 API 请参考 [spark graphx官网](http://spark.apache.org/graphx/)。
+更多 GraphX 的 API 请参考 [spark graphx 官网](http://spark.apache.org/graphx/)。

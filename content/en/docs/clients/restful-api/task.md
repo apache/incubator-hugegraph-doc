@@ -11,7 +11,7 @@ weight: 13
 ##### Params
 
 - status: the status of asyncTasks
-- limit：the max number of tasks to return
+- limit: the max number of tasks to return
 
 ##### Method & Url
 
@@ -39,7 +39,7 @@ GET http://localhost:8080/graphs/hugegraph/tasks?status=success
 		"task_retries": 0,
 		"id": 2,
 		"task_type": "gremlin",
-		"task_callable": "com.baidu.hugegraph.api.job.GremlinAPI$GremlinJob",
+		"task_callable": "org.apache.hugegraph.api.job.GremlinAPI$GremlinJob",
 		"task_input": "{\"gremlin\":\"hugegraph.traversal().V()\",\"bindings\":{},\"language\":\"gremlin-groovy\",\"aliases\":{\"hugegraph\":\"graph\"}}"
 	}]
 }
@@ -72,12 +72,12 @@ GET http://localhost:8080/graphs/hugegraph/tasks/2
 	"task_retries": 0,
 	"id": 2,
 	"task_type": "gremlin",
-	"task_callable": "com.baidu.hugegraph.api.job.GremlinAPI$GremlinJob",
+	"task_callable": "org.apache.hugegraph.api.job.GremlinAPI$GremlinJob",
 	"task_input": "{\"gremlin\":\"hugegraph.traversal().V()\",\"bindings\":{},\"language\":\"gremlin-groovy\",\"aliases\":{\"hugegraph\":\"graph\"}}"
 }
 ```
 
-#### 7.1.3 Delete task information of an async task，**won't delete the task itself**
+#### 7.1.3 Delete task information of an async task,**won't delete the task itself**
 
 ##### Method & Url
 
@@ -93,7 +93,7 @@ DELETE http://localhost:8080/graphs/hugegraph/tasks/2
 
 #### 7.1.4 Cancel an async task, **the task should be able to be canceled**
 
-If you already created an async task via [Gremlin API](../gremlin) as follows：
+If you already created an async task via [Gremlin API](../gremlin) as follows:
 
 ```groovy
 "for (int i = 0; i < 10; i++) {" +
@@ -112,7 +112,7 @@ If you already created an async task via [Gremlin API](../gremlin) as follows：
 ```
 PUT http://localhost:8080/graphs/hugegraph/tasks/2?action=cancel
 ```
-> cancel it in 10s. if more than 10s，the task may already be finished, then can't be cancelled.
+> cancel it in 10s. if more than 10s, the task may already be finished, then can't be cancelled.
 
 ##### Response Status
 

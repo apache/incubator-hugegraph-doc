@@ -39,7 +39,7 @@ GET http://localhost:8080/graphs/hugegraph/tasks?status=success
 		"task_retries": 0,
 		"id": 2,
 		"task_type": "gremlin",
-		"task_callable": "com.baidu.hugegraph.api.job.GremlinAPI$GremlinJob",
+		"task_callable": "org.apache.hugegraph.api.job.GremlinAPI$GremlinJob",
 		"task_input": "{\"gremlin\":\"hugegraph.traversal().V()\",\"bindings\":{},\"language\":\"gremlin-groovy\",\"aliases\":{\"hugegraph\":\"graph\"}}"
 	}]
 }
@@ -72,7 +72,7 @@ GET http://localhost:8080/graphs/hugegraph/tasks/2
 	"task_retries": 0,
 	"id": 2,
 	"task_type": "gremlin",
-	"task_callable": "com.baidu.hugegraph.api.job.GremlinAPI$GremlinJob",
+	"task_callable": "org.apache.hugegraph.api.job.GremlinAPI$GremlinJob",
 	"task_input": "{\"gremlin\":\"hugegraph.traversal().V()\",\"bindings\":{},\"language\":\"gremlin-groovy\",\"aliases\":{\"hugegraph\":\"graph\"}}"
 }
 ```
@@ -113,7 +113,7 @@ DELETE http://localhost:8080/graphs/hugegraph/tasks/2
 PUT http://localhost:8080/graphs/hugegraph/tasks/2?action=cancel
 ```
 
-> 请保证在10秒内发送该请求，如果超过10秒发送，任务可能已经执行完成，无法取消。
+> 请保证在 10 秒内发送该请求，如果超过 10 秒发送，任务可能已经执行完成，无法取消。
 
 ##### Response Status
 

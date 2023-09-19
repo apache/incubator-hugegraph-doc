@@ -181,7 +181,7 @@ server.role=master
 
 ```properties
 # gremlin entrence to create graph
-gremlin.graph=com.baidu.hugegraph.HugeFactory
+gremlin.graph=org.apache.hugegraph.HugeFactory
 
 # cache config
 #schema.cache_capacity=100000
