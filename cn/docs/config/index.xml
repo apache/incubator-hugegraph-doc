@@ -2,10 +2,10 @@
 &lt;h3 id="1-概述">1 概述&lt;/h3>
 &lt;p>配置文件的目录为 hugegraph-release/conf，所有关于服务和图本身的配置都在此目录下。&lt;/p>
 &lt;p>主要的配置文件包括：gremlin-server.yaml、rest-server.properties 和 hugegraph.properties&lt;/p>
-&lt;p>HugeGraphServer 内部集成了 GremlinServer 和 RestServer，而 gremlin-server.yaml 和 rest-server.properties 就是用来配置这两个Server的。&lt;/p>
+&lt;p>HugeGraphServer 内部集成了 GremlinServer 和 RestServer，而 gremlin-server.yaml 和 rest-server.properties 就是用来配置这两个 Server 的。&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="http://tinkerpop.apache.org/docs/3.2.3/reference/#gremlin-server">GremlinServer&lt;/a>：GremlinServer接受用户的gremlin语句，解析后转而调用Core的代码。&lt;/li>
-&lt;li>RestServer：提供RESTful API，根据不同的HTTP请求，调用对应的Core API，如果用户请求体是gremlin语句，则会转发给GremlinServer，实现对图数据的操作。&lt;/li>
+&lt;li>&lt;a href="http://tinkerpop.apache.org/docs/3.2.3/reference/#gremlin-server">GremlinServer&lt;/a>：GremlinServer 接受用户的 gremlin 语句，解析后转而调用 Core 的代码。&lt;/li>
+&lt;li>RestServer：提供 RESTful API，根据不同的 HTTP 请求，调用对应的 Core API，如果用户请求体是 gremlin 语句，则会转发给 GremlinServer，实现对图数据的操作。&lt;/li>
 &lt;/ul>
 &lt;p>下面对这三个配置文件逐一介绍。&lt;/p>
 &lt;h3 id="2-gremlin-serveryaml">2 gremlin-server.yaml&lt;/h3>
@@ -14,7 +14,7 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic">#host: 127.0.0.1&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic">#port: 8182&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Gremlin查询中的超时时间（以毫秒为单位）&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Gremlin 查询中的超时时间（以毫秒为单位）&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">evaluationTimeout&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#0000cf;font-weight:bold">30000&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">channelizer&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.tinkerpop.gremlin.server.channel.WsAndHttpChannelizer&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -127,9 +127,9 @@
 用户可以通过 &lt;a href="/clients/gremlin-console.html">Gremlin-Console&lt;/a> 快速体验 HugeGraph 的特性，但是不支持大规模数据导入，
 推荐使用 HTTP 的通信方式，HugeGraph 的外围组件都是基于 HTTP 实现的；&lt;/li>
 &lt;/ul>
-&lt;p>默认GremlinServer是服务在 localhost:8182，如果需要修改，配置 host、port 即可&lt;/p>
+&lt;p>默认 GremlinServer 是服务在 localhost:8182，如果需要修改，配置 host、port 即可&lt;/p>
 &lt;ul>
-&lt;li>host：部署 GremlinServer 机器的机器名或 IP，目前 HugeGraphServer 不支持分布式部署，且GremlinServer不直接暴露给用户;&lt;/li>
+&lt;li>host：部署 GremlinServer 机器的机器名或 IP，目前 HugeGraphServer 不支持分布式部署，且 GremlinServer 不直接暴露给用户;&lt;/li>
 &lt;li>port：部署 GremlinServer 机器的端口；&lt;/li>
 &lt;/ul>
 &lt;p>同时需要在 rest-server.properties 中增加对应的配置项 gremlinserver.url=http://host:port&lt;/p>
@@ -163,7 +163,7 @@
 &lt;h3 id="4-hugegraphproperties">4 hugegraph.properties&lt;/h3>
 &lt;p>hugegraph.properties 是一类文件，因为如果系统存在多个图，则会有多个相似的文件。该文件用来配置与图存储和查询相关的参数，文件的默认内容如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># gremlin entrence to create graph
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gremlin.graph=com.baidu.hugegraph.HugeFactory
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gremlin.graph=org.apache.hugegraph.HugeFactory
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># cache config
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#schema.cache_capacity=100000
@@ -250,13 +250,13 @@
 &lt;ul>
 &lt;li>gremlin.graph：GremlinServer 的启动入口，用户不要修改此项；&lt;/li>
 &lt;li>backend：使用的后端存储，可选值有 memory、cassandra、scylladb、mysql、hbase、postgresql 和 rocksdb；&lt;/li>
-&lt;li>serializer：主要为内部使用，用于将 schema、vertex 和 edge 序列化到后端，对应的可选值为 text、cassandra、scylladb 和 binary；(注：rocksdb后端值需是binary，其他后端backend与serializer值需保持一致，如hbase后端该值为hbase)&lt;/li>
+&lt;li>serializer：主要为内部使用，用于将 schema、vertex 和 edge 序列化到后端，对应的可选值为 text、cassandra、scylladb 和 binary；(注：rocksdb 后端值需是 binary，其他后端 backend 与 serializer 值需保持一致，如 hbase 后端该值为 hbase)&lt;/li>
 &lt;li>store：图存储到后端使用的数据库名，在 cassandra 和 scylladb 中就是 keyspace 名，此项的值与 GremlinServer 和 RestServer 中的图名并无关系，但是出于直观考虑，建议仍然使用相同的名字；&lt;/li>
 &lt;li>cassandra.host：backend 为 cassandra 或 scylladb 时此项才有意义，cassandra/scylladb 集群的 seeds；&lt;/li>
 &lt;li>cassandra.port：backend 为 cassandra 或 scylladb 时此项才有意义，cassandra/scylladb 集群的 native port；&lt;/li>
 &lt;li>rocksdb.data_path：backend 为 rocksdb 时此项才有意义，rocksdb 的数据目录&lt;/li>
 &lt;li>rocksdb.wal_path：backend 为 rocksdb 时此项才有意义，rocksdb 的日志目录&lt;/li>
-&lt;li>admin.token: 通过一个token来获取服务器的配置信息，例如：&lt;a href="http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55">http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55&lt;/a>&lt;/li>
+&lt;li>admin.token: 通过一个 token 来获取服务器的配置信息，例如：&lt;a href="http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55">http://localhost:8080/graphs/hugegraph/conf?token=162f7848-0b6d-4faf-b557-3a0797869c55&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="5-多图配置">5 多图配置&lt;/h3>
 &lt;p>我们的系统是可以存在多个图的，并且各个图的后端可以不一样，比如图 &lt;code>hugegraph_rocksdb&lt;/code> 和 &lt;code>hugegraph_mysql&lt;/code>，其中 &lt;code>hugegraph_rocksdb&lt;/code> 以 &lt;code>RocksDB&lt;/code> 作为后端，&lt;code>hugegraph_mysql&lt;/code> 以 &lt;code>MySQL&lt;/code> 作为后端。&lt;/p>
@@ -356,7 +356,7 @@
 &lt;/tr>
 &lt;tr>
 &lt;td>authentication&lt;/td>
-&lt;td>authenticator: com.baidu.hugegraph.auth.StandardAuthenticator, config: {tokens: conf/rest-server.properties}&lt;/td>
+&lt;td>authenticator: org.apache.hugegraph.auth.StandardAuthenticator, config: {tokens: conf/rest-server.properties}&lt;/td>
 &lt;td>The authenticator and config(contains tokens path) of authentication mechanism.&lt;/td>
 &lt;/tr>
 &lt;/tbody>
@@ -465,22 +465,22 @@
 &lt;tr>
 &lt;td>auth.authenticator&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>The class path of authenticator implementation. e.g., com.baidu.hugegraph.auth.StandardAuthenticator, or com.baidu.hugegraph.auth.ConfigAuthenticator.&lt;/td>
+&lt;td>The class path of authenticator implementation. e.g., org.apache.hugegraph.auth.StandardAuthenticator, or org.apache.hugegraph.auth.ConfigAuthenticator.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>auth.admin_token&lt;/td>
 &lt;td>162f7848-0b6d-4faf-b557-3a0797869c55&lt;/td>
-&lt;td>Token for administrator operations, only for com.baidu.hugegraph.auth.ConfigAuthenticator.&lt;/td>
+&lt;td>Token for administrator operations, only for org.apache.hugegraph.auth.ConfigAuthenticator.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>auth.graph_store&lt;/td>
 &lt;td>hugegraph&lt;/td>
-&lt;td>The name of graph used to store authentication information, like users, only for com.baidu.hugegraph.auth.StandardAuthenticator.&lt;/td>
+&lt;td>The name of graph used to store authentication information, like users, only for org.apache.hugegraph.auth.StandardAuthenticator.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>auth.user_tokens&lt;/td>
 &lt;td>[hugegraph:9fd95c9c-711b-415b-b85f-d4df46ba5c31]&lt;/td>
-&lt;td>The map of user tokens with name and password, only for com.baidu.hugegraph.auth.ConfigAuthenticator.&lt;/td>
+&lt;td>The map of user tokens with name and password, only for org.apache.hugegraph.auth.ConfigAuthenticator.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>auth.audit_log_rate&lt;/td>
@@ -532,7 +532,7 @@
 &lt;tbody>
 &lt;tr>
 &lt;td>gremlin.graph&lt;/td>
-&lt;td>com.baidu.hugegraph.HugeFactory&lt;/td>
+&lt;td>org.apache.hugegraph.HugeFactory&lt;/td>
 &lt;td>Gremlin entrance to create graph.&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -1494,7 +1494,7 @@
 &lt;/table>
 &lt;p>其它与 MySQL 后端一致。&lt;/p>
 &lt;blockquote>
-&lt;p>PostgreSQL 后端的 driver 和 url 应该设置为:&lt;/p>
+&lt;p>PostgreSQL 后端的 driver 和 url 应该设置为：&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>jdbc.driver=org.postgresql.Driver&lt;/code>&lt;/li>
 &lt;li>&lt;code>jdbc.url=jdbc:postgresql://localhost:5432/&lt;/code>&lt;/li>
@@ -1504,7 +1504,7 @@
 &lt;p>HugeGraph 为了方便不同用户场景下的鉴权使用，目前内置了两套权限模式：&lt;/p>
 &lt;ol>
 &lt;li>简单的&lt;code>ConfigAuthenticator&lt;/code>模式，通过本地配置文件存储用户名和密码 (仅支持单 GraphServer)&lt;/li>
-&lt;li>完备的&lt;code>StandardAuthenticator&lt;/code>模式，支持多用户认证、以及细粒度的权限访问控制，采用基于 “用户-用户组-操作-资源” 的 4 层设计，灵活控制用户角色与权限 (支持多 GraphServer)&lt;/li>
+&lt;li>完备的&lt;code>StandardAuthenticator&lt;/code>模式，支持多用户认证、以及细粒度的权限访问控制，采用基于“用户 - 用户组 - 操作 - 资源”的 4 层设计，灵活控制用户角色与权限 (支持多 GraphServer)&lt;/li>
 &lt;/ol>
 &lt;p>其中 &lt;code>StandardAuthenticator&lt;/code> 模式的几个核心设计：&lt;/p>
 &lt;ul>
@@ -1521,41 +1521,41 @@
 &lt;p>用户认证方式均采用 &lt;a href="https://zh.wikipedia.org/wiki/HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81">HTTP Basic Authentication&lt;/a> ，简单说就是在发送 HTTP 请求时在 &lt;code>Authentication&lt;/code> 设置选择 &lt;code>Basic&lt;/code> 然后输入对应的用户名和密码，对应 HTTP 明文如下所示 :&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-http" data-lang="http">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">Authorization: Basic admin xxxx
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="standardauthenticator模式">StandardAuthenticator模式&lt;/h4>
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="standardauthenticator-模式">StandardAuthenticator 模式&lt;/h4>
 &lt;p>&lt;code>StandardAuthenticator&lt;/code>模式是通过在数据库后端存储用户信息来支持用户认证和权限控制，该实现基于数据库存储的用户的名称与密码进行认证（密码已被加密），基于用户的角色来细粒度控制用户权限。下面是具体的配置流程（重启服务生效）：&lt;/p>
 &lt;p>在配置文件&lt;code>gremlin-server.yaml&lt;/code>中配置&lt;code>authenticator&lt;/code>及其&lt;code>rest-server&lt;/code>文件路径：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">authentication&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticator&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.auth.StandardAuthenticator,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticationHandler&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.auth.WsAndHttpBasicAuthHandler,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticator&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.auth.StandardAuthenticator,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticationHandler&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.auth.WsAndHttpBasicAuthHandler,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">config&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#204a87;font-weight:bold">tokens&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">conf/rest-server.properties}&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>}&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在配置文件&lt;code>rest-server.properties&lt;/code>中配置&lt;code>authenticator&lt;/code>及其&lt;code>graph_store&lt;/code>信息：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>auth.authenticator=com.baidu.hugegraph.auth.StandardAuthenticator
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>auth.authenticator=org.apache.hugegraph.auth.StandardAuthenticator
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>auth.graph_store=hugegraph
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># auth client config
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 如果是分开部署 GraphServer 和 AuthServer, 还需要指定下面的配置, 地址填写 AuthServer 的 IP:RPC 端口
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 如果是分开部署 GraphServer 和 AuthServer, 还需要指定下面的配置，地址填写 AuthServer 的 IP:RPC 端口
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#auth.remote_url=127.0.0.1:8899,127.0.0.1:8898,127.0.0.1:8897
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中，&lt;code>graph_store&lt;/code>配置项是指使用哪一个图来存储用户信息，如果存在多个图的话，选取任意一个均可。&lt;/p>
 &lt;p>在配置文件&lt;code>hugegraph{n}.properties&lt;/code>中配置&lt;code>gremlin.graph&lt;/code>信息：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后详细的权限 API 调用和说明请参考 &lt;a href="/docs/clients/restful-api/auth">Authentication-API&lt;/a> 文档&lt;/p>
-&lt;h4 id="configauthenticator模式">ConfigAuthenticator模式&lt;/h4>
+&lt;h4 id="configauthenticator-模式">ConfigAuthenticator 模式&lt;/h4>
 &lt;p>&lt;code>ConfigAuthenticator&lt;/code>模式是通过预先在配置文件中设置用户信息来支持用户认证，该实现是基于配置好的静态&lt;code>tokens&lt;/code>来验证用户是否合法。下面是具体的配置流程（重启服务生效）：&lt;/p>
 &lt;p>在配置文件&lt;code>gremlin-server.yaml&lt;/code>中配置&lt;code>authenticator&lt;/code>及其&lt;code>rest-server&lt;/code>文件路径：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">authentication&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticator&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.auth.ConfigAuthenticator,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticationHandler&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.auth.WsAndHttpBasicAuthHandler,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticator&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.auth.ConfigAuthenticator,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticationHandler&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.auth.WsAndHttpBasicAuthHandler,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">config&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#204a87;font-weight:bold">tokens&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">conf/rest-server.properties}&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>}&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在配置文件&lt;code>rest-server.properties&lt;/code>中配置&lt;code>authenticator&lt;/code>及其&lt;code>tokens&lt;/code>信息：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>auth.authenticator=com.baidu.hugegraph.auth.ConfigAuthenticator
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>auth.authenticator=org.apache.hugegraph.auth.ConfigAuthenticator
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>auth.admin_token=token-value-a
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在配置文件&lt;code>hugegraph{n}.properties&lt;/code>中配置&lt;code>gremlin.graph&lt;/code>信息：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="自定义用户认证系统">自定义用户认证系统&lt;/h3>
-&lt;p>如果需要支持更加灵活的用户系统，可自定义authenticator进行扩展，自定义authenticator实现接口&lt;code>com.baidu.hugegraph.auth.HugeAuthenticator&lt;/code>即可，然后修改配置文件中&lt;code>authenticator&lt;/code>配置项指向该实现。&lt;/p></description></item><item><title>Docs: 配置 HugeGraphServer 使用 https 协议</title><link>/cn/docs/config/config-https/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/config/config-https/</guid><description>
+&lt;p>如果需要支持更加灵活的用户系统，可自定义 authenticator 进行扩展，自定义 authenticator 实现接口&lt;code>org.apache.hugegraph.auth.HugeAuthenticator&lt;/code>即可，然后修改配置文件中&lt;code>authenticator&lt;/code>配置项指向该实现。&lt;/p></description></item><item><title>Docs: 配置 HugeGraphServer 使用 https 协议</title><link>/cn/docs/config/config-https/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/config/config-https/</guid><description>
 &lt;h3 id="概述">概述&lt;/h3>
 &lt;p>HugeGraphServer 默认使用的是 http 协议，如果用户对请求的安全性有要求，可以配置成 https。&lt;/p>
 &lt;h3 id="服务端配置">服务端配置&lt;/h3>

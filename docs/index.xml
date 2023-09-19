@@ -191,7 +191,7 @@
 &lt;h3 id="4-hugegraphproperties">4. hugegraph.properties&lt;/h3>
 &lt;p>&lt;code>hugegraph.properties&lt;/code> is a type of file. If the system has multiple graphs, there will be multiple similar files. This file is used to configure parameters related to graph storage and querying. The default content of the file is as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># gremlin entrence to create graph
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gremlin.graph=com.baidu.hugegraph.HugeFactory
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gremlin.graph=org.apache.hugegraph.HugeFactory
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># cache config
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#schema.cache_capacity=100000
@@ -2501,7 +2501,7 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;/tr>
 &lt;tr>
 &lt;td>authentication&lt;/td>
-&lt;td>authenticator: com.baidu.hugegraph.auth.StandardAuthenticator, config: {tokens: conf/rest-server.properties}&lt;/td>
+&lt;td>authenticator: org.apache.hugegraph.auth.StandardAuthenticator, config: {tokens: conf/rest-server.properties}&lt;/td>
 &lt;td>The authenticator and config(contains tokens path) of authentication mechanism.&lt;/td>
 &lt;/tr>
 &lt;/tbody>
@@ -2610,22 +2610,22 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;tr>
 &lt;td>auth.authenticator&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>The class path of authenticator implementation. e.g., com.baidu.hugegraph.auth.StandardAuthenticator, or com.baidu.hugegraph.auth.ConfigAuthenticator.&lt;/td>
+&lt;td>The class path of authenticator implementation. e.g., org.apache.hugegraph.auth.StandardAuthenticator, or org.apache.hugegraph.auth.ConfigAuthenticator.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>auth.admin_token&lt;/td>
 &lt;td>162f7848-0b6d-4faf-b557-3a0797869c55&lt;/td>
-&lt;td>Token for administrator operations, only for com.baidu.hugegraph.auth.ConfigAuthenticator.&lt;/td>
+&lt;td>Token for administrator operations, only for org.apache.hugegraph.auth.ConfigAuthenticator.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>auth.graph_store&lt;/td>
 &lt;td>hugegraph&lt;/td>
-&lt;td>The name of graph used to store authentication information, like users, only for com.baidu.hugegraph.auth.StandardAuthenticator.&lt;/td>
+&lt;td>The name of graph used to store authentication information, like users, only for org.apache.hugegraph.auth.StandardAuthenticator.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>auth.user_tokens&lt;/td>
 &lt;td>[hugegraph:9fd95c9c-711b-415b-b85f-d4df46ba5c31]&lt;/td>
-&lt;td>The map of user tokens with name and password, only for com.baidu.hugegraph.auth.ConfigAuthenticator.&lt;/td>
+&lt;td>The map of user tokens with name and password, only for org.apache.hugegraph.auth.ConfigAuthenticator.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>auth.audit_log_rate&lt;/td>
@@ -2665,7 +2665,7 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;/tbody>
 &lt;/table>
 &lt;h3 id="basic-config-options">Basic Config Options&lt;/h3>
-&lt;p>Basic Config Options and Backend Config Options correspond to configuration files：{graph-name}.properties，such as &lt;code>hugegraph.properties&lt;/code>&lt;/p>
+&lt;p>Basic Config Options and Backend Config Options correspond to configuration files:{graph-name}.properties, such as &lt;code>hugegraph.properties&lt;/code>&lt;/p>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -2677,7 +2677,7 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;tbody>
 &lt;tr>
 &lt;td>gremlin.graph&lt;/td>
-&lt;td>com.baidu.hugegraph.HugeFactory&lt;/td>
+&lt;td>org.apache.hugegraph.HugeFactory&lt;/td>
 &lt;td>Gremlin entrance to create graph.&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -6469,12 +6469,12 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;p>The &lt;code>StandardAuthenticator&lt;/code> mode supports user authentication and permission control by storing user information in the database backend. This implementation authenticates users based on their names and passwords (encrypted) stored in the database and controls user permissions based on their roles. Below is the specific configuration process (requires service restart):&lt;/p>
 &lt;p>Configure the &lt;code>authenticator&lt;/code> and its &lt;code>rest-server&lt;/code> file path in the &lt;code>gremlin-server.yaml&lt;/code> configuration file:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">authentication&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticator&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.auth.StandardAuthenticator,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticationHandler&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.auth.WsAndHttpBasicAuthHandler,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticator&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.auth.StandardAuthenticator,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticationHandler&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.auth.WsAndHttpBasicAuthHandler,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">config&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#204a87;font-weight:bold">tokens&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">conf/rest-server.properties}&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>}&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Configure the &lt;code>authenticator&lt;/code> and &lt;code>graph_store&lt;/code> information in the &lt;code>rest-server.properties&lt;/code> configuration file:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>auth.authenticator=com.baidu.hugegraph.auth.StandardAuthenticator
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>auth.authenticator=org.apache.hugegraph.auth.StandardAuthenticator
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>auth.graph_store=hugegraph
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Auth Client Config
@@ -6482,24 +6482,26 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># auth.remote_url=127.0.0.1:8899,127.0.0.1:8898,127.0.0.1:8897
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In the above configuration, the &lt;code>graph_store&lt;/code> option specifies which graph to use for storing user information. If there are multiple graphs, you can choose any of them.&lt;/p>
 &lt;p>In the &lt;code>hugegraph{n}.properties&lt;/code> configuration file, configure the &lt;code>gremlin.graph&lt;/code> information:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For detailed API calls and explanations regarding permissions, please refer to the &lt;a href="/docs/clients/restful-api/auth">Authentication-API&lt;/a> documentation.&lt;/p>
 &lt;h4 id="configauthenticator-mode">ConfigAuthenticator Mode&lt;/h4>
 &lt;p>The &lt;code>ConfigAuthenticator&lt;/code> mode supports user authentication by predefining user information in the configuration file. This implementation verifies the legitimacy of users based on preconfigured static &lt;code>tokens&lt;/code>. Below is the specific configuration process (requires service restart):&lt;/p>
 &lt;p>Configure the &lt;code>authenticator&lt;/code> and its &lt;code>rest-server&lt;/code> file path in the &lt;code>gremlin-server.yaml&lt;/code> configuration file:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">authentication&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticator&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.auth.ConfigAuthenticator,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticationHandler&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.auth.WsAndHttpBasicAuthHandler,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticator&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.auth.ConfigAuthenticator,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticationHandler&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.auth.WsAndHttpBasicAuthHandler,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">config&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#204a87;font-weight:bold">tokens&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">conf/rest-server.properties}&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>}&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Configure the &lt;code>authenticator&lt;/code> and its &lt;code>tokens&lt;/code> information in the &lt;code>rest-server.properties&lt;/code> configuration file:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>auth.authenticator=com.baidu.hugegraph.auth.ConfigAuthenticator
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>auth.authenticator=org.apache.hugegraph.auth.ConfigAuthenticator
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>auth.admin_token=token-value-a
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In the &lt;code>hugegraph{n}.properties&lt;/code> configuration file, configure the &lt;code>gremlin.graph&lt;/code> information:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="custom-user-authentication-system">Custom User Authentication System&lt;/h3>
-&lt;p>If you need to support a more flexible user system, you can customize the authenticator for extension. Simply implement the &lt;code>com.baidu.hugegraph.auth.HugeAuthenticator&lt;/code> interface with your custom authenticator, and then modify the &lt;code>authenticator&lt;/code> configuration item in the configuration file to point to your implementation.&lt;/p></description></item><item><title>Docs: Gremlin-Console</title><link>/docs/clients/gremlin-console/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/clients/gremlin-console/</guid><description>
+&lt;p>If you need to support a more flexible user system, you can customize the authenticator for extension.
+Simply implement the &lt;code>org.apache.hugegraph.auth.HugeAuthenticator&lt;/code> interface with your custom authenticator,
+and then modify the &lt;code>authenticator&lt;/code> configuration item in the configuration file to point to your implementation.&lt;/p></description></item><item><title>Docs: Gremlin-Console</title><link>/docs/clients/gremlin-console/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/clients/gremlin-console/</guid><description>
 &lt;p>Gremlin-Console is an interactive client developed by TinkerPop. Users can use this client to perform various operations on Graph. There are two main usage modes:&lt;/p>
 &lt;ul>
 &lt;li>Stand-alone offline mode&lt;/li>
@@ -6696,7 +6698,7 @@ configuration items to the plug-in custom value, and restarts to take effect&lt;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#c4a000">xsi:schemaLocation=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;modelVersion&amp;gt;&lt;/span>4.0.0&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/modelVersion&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;groupId&amp;gt;&lt;/span>com.baidu.hugegraph&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.hugegraph&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/groupId&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;artifactId&amp;gt;&lt;/span>hugegraph-plugin-demo&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/artifactId&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;version&amp;gt;&lt;/span>1.0.0&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/version&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;packaging&amp;gt;&lt;/span>jar&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/packaging&amp;gt;&lt;/span>
@@ -6705,7 +6707,7 @@ configuration items to the plug-in custom value, and restarts to take effect&lt;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;dependencies&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;dependency&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;groupId&amp;gt;&lt;/span>com.baidu.hugegraph&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.hugegraph&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/groupId&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;artifactId&amp;gt;&lt;/span>hugegraph-core&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/artifactId&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;version&amp;gt;&lt;/span>${project.version}&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/version&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;/dependency&amp;gt;&lt;/span>
@@ -6715,8 +6717,8 @@ configuration items to the plug-in custom value, and restarts to take effect&lt;
 &lt;h5 id="21-extending-a-custom-backend">2.1 Extending a custom backend&lt;/h5>
 &lt;h6 id="211--implement-the-interface-backendstoreprovider">2.1.1 Implement the interface BackendStoreProvider&lt;/h6>
 &lt;ul>
-&lt;li>Realizable interfaces: &lt;code>com.baidu.hugegraph.backend.store.BackendStoreProvider&lt;/code>&lt;/li>
-&lt;li>Or inherit an abstract class：&lt;code>com.baidu.hugegraph.backend.store.AbstractBackendStoreProvider&lt;/code>&lt;/li>
+&lt;li>Realizable interfaces: &lt;code>org.apache.hugegraph.backend.store.BackendStoreProvider&lt;/code>&lt;/li>
+&lt;li>Or inherit an abstract class:&lt;code>org.apache.hugegraph.backend.store.AbstractBackendStoreProvider&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;p>Take the RocksDB backend RocksDBStoreProvider as an example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">class&lt;/span> &lt;span style="color:#000">RocksDBStoreProvider&lt;/span> &lt;span style="color:#204a87;font-weight:bold">extends&lt;/span> &lt;span style="color:#000">AbstractBackendStoreProvider&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>
@@ -6786,7 +6788,7 @@ configuration items to the plug-in custom value, and restarts to take effect&lt;
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#000">Id&lt;/span> &lt;span style="color:#000">nextId&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">HugeType&lt;/span> &lt;span style="color:#000">type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="213-extending-custom-serializers">2.1.3 Extending custom serializers&lt;/h6>
-&lt;p>The serializer must inherit the abstract class: &lt;code>com.baidu.hugegraph.backend.serializer.AbstractSerializer&lt;/code>
+&lt;p>The serializer must inherit the abstract class: &lt;code>org.apache.hugegraph.backend.serializer.AbstractSerializer&lt;/code>
 ( &lt;code>implements GraphSerializer, SchemaSerializer&lt;/code>) The main interface is defined as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">interface&lt;/span> &lt;span style="color:#000">GraphSerializer&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#000">BackendEntry&lt;/span> &lt;span style="color:#000">writeVertex&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">HugeVertex&lt;/span> &lt;span style="color:#000">vertex&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
@@ -6814,7 +6816,7 @@ configuration items to the plug-in custom value, and restarts to take effect&lt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="214-extend-custom-configuration-items">2.1.4 Extend custom configuration items&lt;/h6>
 &lt;p>When adding a custom backend, it may be necessary to add new configuration items. The implementation process mainly includes:&lt;/p>
 &lt;ul>
-&lt;li>Add a configuration item container class and implement the interface &lt;code>com.baidu.hugegraph.config.OptionHolder&lt;/code>&lt;/li>
+&lt;li>Add a configuration item container class and implement the interface &lt;code>org.apache.hugegraph.config.OptionHolder&lt;/code>&lt;/li>
 &lt;li>Provide a singleton method &lt;code>public static OptionHolder instance()&lt;/code>, and call the method when the object is initialized &lt;code>OptionHolder.registerOptions()&lt;/code>&lt;/li>
 &lt;li>Add configuration item declaration, single-value configuration item type is &lt;code>ConfigOption&lt;/code>, multi-value configuration item type is &lt;code>ConfigListOption&lt;/code>&lt;/li>
 &lt;/ul>
@@ -6865,14 +6867,14 @@ configuration items to the plug-in custom value, and restarts to take effect&lt;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="22-extend-custom-tokenizer">2.2 Extend custom tokenizer&lt;/h5>
-&lt;p>The tokenizer needs to implement the interface &lt;code>com.baidu.hugegraph.analyzer.Analyzer&lt;/code>, take implementing a SpaceAnalyzer space tokenizer as an example.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000">com.baidu.hugegraph.plugin&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">;&lt;/span>
+&lt;p>The tokenizer needs to implement the interface &lt;code>org.apache.hugegraph.analyzer.Analyzer&lt;/code>, take implementing a SpaceAnalyzer space tokenizer as an example.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000">org.apache.hugegraph.plugin&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">java.util.Arrays&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">java.util.HashSet&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">java.util.Set&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">com.baidu.hugegraph.analyzer.Analyzer&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">org.apache.hugegraph.analyzer.Analyzer&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">class&lt;/span> &lt;span style="color:#000">SpaceAnalyzer&lt;/span> &lt;span style="color:#204a87;font-weight:bold">implements&lt;/span> &lt;span style="color:#000">Analyzer&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -6883,7 +6885,7 @@ configuration items to the plug-in custom value, and restarts to take effect&lt;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="3-implement-the-plug-in-interface-and-register-it">3. Implement the plug-in interface and register it&lt;/h4>
 &lt;p>The plug-in registration entry is &lt;code>HugeGraphPlugin.register()&lt;/code>, the custom plug-in must implement this interface method, and register the extension
-items defined above inside it. The interface &lt;code>com.baidu.hugegraph.plugin.HugeGraphPlugin&lt;/code> is defined as follows:&lt;/p>
+items defined above inside it. The interface &lt;code>org.apache.hugegraph.plugin.HugeGraphPlugin&lt;/code> is defined as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">interface&lt;/span> &lt;span style="color:#000">HugeGraphPlugin&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#000">String&lt;/span> &lt;span style="color:#000">name&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
@@ -6896,13 +6898,13 @@ items defined above inside it. The interface &lt;code>com.baidu.hugegraph.plugin
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>And HugeGraphPlugin provides 4 static methods for registering extensions:&lt;/p>
 &lt;ul>
-&lt;li>registerOptions(String name, String classPath)：register configuration items&lt;/li>
-&lt;li>registerBackend(String name, String classPath)：register backend (BackendStoreProvider)&lt;/li>
-&lt;li>registerSerializer(String name, String classPath)：register serializer&lt;/li>
-&lt;li>registerAnalyzer(String name, String classPath)：register tokenizer&lt;/li>
+&lt;li>registerOptions(String name, String classPath): register configuration items&lt;/li>
+&lt;li>registerBackend(String name, String classPath): register backend (BackendStoreProvider)&lt;/li>
+&lt;li>registerSerializer(String name, String classPath): register serializer&lt;/li>
+&lt;li>registerAnalyzer(String name, String classPath): register tokenizer&lt;/li>
 &lt;/ul>
 &lt;p>The following is an example of registering the SpaceAnalyzer tokenizer:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000">com.baidu.hugegraph.plugin&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000">org.apache.hugegraph.plugin&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">class&lt;/span> &lt;span style="color:#000">DemoPlugin&lt;/span> &lt;span style="color:#204a87;font-weight:bold">implements&lt;/span> &lt;span style="color:#000">HugeGraphPlugin&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -6919,8 +6921,8 @@ items defined above inside it. The interface &lt;code>com.baidu.hugegraph.plugin
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="4-configure-spi-entry">4. Configure SPI entry&lt;/h4>
 &lt;ol>
 &lt;li>Make sure the services directory exists: hugegraph-plugin-demo/resources/META-INF/services&lt;/li>
-&lt;li>Create a text file in the services directory: com.baidu.hugegraph.plugin.HugeGraphPlugin&lt;/li>
-&lt;li>The content of the file is as follows: com.baidu.hugegraph.plugin.DemoPlugin&lt;/li>
+&lt;li>Create a text file in the services directory: org.apache.hugegraph.plugin.HugeGraphPlugin&lt;/li>
+&lt;li>The content of the file is as follows: org.apache.hugegraph.plugin.DemoPlugin&lt;/li>
 &lt;/ol>
 &lt;h4 id="5-make-jar-package">5. Make Jar package&lt;/h4>
 &lt;p>Through maven packaging, execute the command in the project directory mvn package, and a Jar package file will be generated in the
@@ -14740,7 +14742,7 @@ When you complete the restore, change the graph mode to None.&lt;/p>
 &lt;h5 id="params">Params&lt;/h5>
 &lt;ul>
 &lt;li>status: the status of asyncTasks&lt;/li>
-&lt;li>limit：the max number of tasks to return&lt;/li>
+&lt;li>limit: the max number of tasks to return&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/tasks?status=success
@@ -14758,7 +14760,7 @@ When you complete the restore, change the graph mode to None.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;task_retries&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;task_type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;gremlin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;task_callable&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;com.baidu.hugegraph.api.job.GremlinAPI$GremlinJob&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;task_callable&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;org.apache.hugegraph.api.job.GremlinAPI$GremlinJob&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;task_input&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;{\&amp;#34;gremlin\&amp;#34;:\&amp;#34;hugegraph.traversal().V()\&amp;#34;,\&amp;#34;bindings\&amp;#34;:{},\&amp;#34;language\&amp;#34;:\&amp;#34;gremlin-groovy\&amp;#34;,\&amp;#34;aliases\&amp;#34;:{\&amp;#34;hugegraph\&amp;#34;:\&amp;#34;graph\&amp;#34;}}&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
@@ -14778,16 +14780,16 @@ When you complete the restore, change the graph mode to None.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;task_retries&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;task_type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;gremlin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;task_callable&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;com.baidu.hugegraph.api.job.GremlinAPI$GremlinJob&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;task_callable&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;org.apache.hugegraph.api.job.GremlinAPI$GremlinJob&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;task_input&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;{\&amp;#34;gremlin\&amp;#34;:\&amp;#34;hugegraph.traversal().V()\&amp;#34;,\&amp;#34;bindings\&amp;#34;:{},\&amp;#34;language\&amp;#34;:\&amp;#34;gremlin-groovy\&amp;#34;,\&amp;#34;aliases\&amp;#34;:{\&amp;#34;hugegraph\&amp;#34;:\&amp;#34;graph\&amp;#34;}}&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="713-delete-task-information-of-an-async-taskwont-delete-the-task-itself">7.1.3 Delete task information of an async task，&lt;strong>won&amp;rsquo;t delete the task itself&lt;/strong>&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="713-delete-task-information-of-an-async-taskwont-delete-the-task-itself">7.1.3 Delete task information of an async task,&lt;strong>won&amp;rsquo;t delete the task itself&lt;/strong>&lt;/h4>
 &lt;h5 id="method--url-2">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphs/hugegraph/tasks/2
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-2">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">204&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="714-cancel-an-async-task-the-task-should-be-able-to-be-canceled">7.1.4 Cancel an async task, &lt;strong>the task should be able to be canceled&lt;/strong>&lt;/h4>
-&lt;p>If you already created an async task via &lt;a href="../gremlin">Gremlin API&lt;/a> as follows：&lt;/p>
+&lt;p>If you already created an async task via &lt;a href="../gremlin">Gremlin API&lt;/a> as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&amp;#34;for (int i = 0; i &amp;lt; 10; i++) {&amp;#34;&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">+&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph.addVertex(T.label, &amp;#39;man&amp;#39;);&amp;#34;&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">+&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph.tx().commit();&amp;#34;&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">+&lt;/span>
@@ -14800,7 +14802,7 @@ When you complete the restore, change the graph mode to None.&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="method--url-3">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/tasks/2?action=cancel
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>cancel it in 10s. if more than 10s，the task may already be finished, then can&amp;rsquo;t be cancelled.&lt;/p>
+&lt;p>cancel it in 10s. if more than 10s, the task may already be finished, then can&amp;rsquo;t be cancelled.&lt;/p>
 &lt;/blockquote>
 &lt;h5 id="response-status-3">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">202&lt;/span>

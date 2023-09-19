@@ -161,7 +161,7 @@
 &lt;h3 id="4-hugegraphproperties">4. hugegraph.properties&lt;/h3>
 &lt;p>&lt;code>hugegraph.properties&lt;/code> is a type of file. If the system has multiple graphs, there will be multiple similar files. This file is used to configure parameters related to graph storage and querying. The default content of the file is as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># gremlin entrence to create graph
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gremlin.graph=com.baidu.hugegraph.HugeFactory
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gremlin.graph=org.apache.hugegraph.HugeFactory
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># cache config
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#schema.cache_capacity=100000
@@ -354,7 +354,7 @@
 &lt;/tr>
 &lt;tr>
 &lt;td>authentication&lt;/td>
-&lt;td>authenticator: com.baidu.hugegraph.auth.StandardAuthenticator, config: {tokens: conf/rest-server.properties}&lt;/td>
+&lt;td>authenticator: org.apache.hugegraph.auth.StandardAuthenticator, config: {tokens: conf/rest-server.properties}&lt;/td>
 &lt;td>The authenticator and config(contains tokens path) of authentication mechanism.&lt;/td>
 &lt;/tr>
 &lt;/tbody>
@@ -463,22 +463,22 @@
 &lt;tr>
 &lt;td>auth.authenticator&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>The class path of authenticator implementation. e.g., com.baidu.hugegraph.auth.StandardAuthenticator, or com.baidu.hugegraph.auth.ConfigAuthenticator.&lt;/td>
+&lt;td>The class path of authenticator implementation. e.g., org.apache.hugegraph.auth.StandardAuthenticator, or org.apache.hugegraph.auth.ConfigAuthenticator.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>auth.admin_token&lt;/td>
 &lt;td>162f7848-0b6d-4faf-b557-3a0797869c55&lt;/td>
-&lt;td>Token for administrator operations, only for com.baidu.hugegraph.auth.ConfigAuthenticator.&lt;/td>
+&lt;td>Token for administrator operations, only for org.apache.hugegraph.auth.ConfigAuthenticator.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>auth.graph_store&lt;/td>
 &lt;td>hugegraph&lt;/td>
-&lt;td>The name of graph used to store authentication information, like users, only for com.baidu.hugegraph.auth.StandardAuthenticator.&lt;/td>
+&lt;td>The name of graph used to store authentication information, like users, only for org.apache.hugegraph.auth.StandardAuthenticator.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>auth.user_tokens&lt;/td>
 &lt;td>[hugegraph:9fd95c9c-711b-415b-b85f-d4df46ba5c31]&lt;/td>
-&lt;td>The map of user tokens with name and password, only for com.baidu.hugegraph.auth.ConfigAuthenticator.&lt;/td>
+&lt;td>The map of user tokens with name and password, only for org.apache.hugegraph.auth.ConfigAuthenticator.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>auth.audit_log_rate&lt;/td>
@@ -518,7 +518,7 @@
 &lt;/tbody>
 &lt;/table>
 &lt;h3 id="basic-config-options">Basic Config Options&lt;/h3>
-&lt;p>Basic Config Options and Backend Config Options correspond to configuration files：{graph-name}.properties，such as &lt;code>hugegraph.properties&lt;/code>&lt;/p>
+&lt;p>Basic Config Options and Backend Config Options correspond to configuration files:{graph-name}.properties, such as &lt;code>hugegraph.properties&lt;/code>&lt;/p>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -530,7 +530,7 @@
 &lt;tbody>
 &lt;tr>
 &lt;td>gremlin.graph&lt;/td>
-&lt;td>com.baidu.hugegraph.HugeFactory&lt;/td>
+&lt;td>org.apache.hugegraph.HugeFactory&lt;/td>
 &lt;td>Gremlin entrance to create graph.&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -1523,12 +1523,12 @@
 &lt;p>The &lt;code>StandardAuthenticator&lt;/code> mode supports user authentication and permission control by storing user information in the database backend. This implementation authenticates users based on their names and passwords (encrypted) stored in the database and controls user permissions based on their roles. Below is the specific configuration process (requires service restart):&lt;/p>
 &lt;p>Configure the &lt;code>authenticator&lt;/code> and its &lt;code>rest-server&lt;/code> file path in the &lt;code>gremlin-server.yaml&lt;/code> configuration file:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">authentication&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticator&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.auth.StandardAuthenticator,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticationHandler&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.auth.WsAndHttpBasicAuthHandler,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticator&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.auth.StandardAuthenticator,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticationHandler&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.auth.WsAndHttpBasicAuthHandler,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">config&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#204a87;font-weight:bold">tokens&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">conf/rest-server.properties}&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>}&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Configure the &lt;code>authenticator&lt;/code> and &lt;code>graph_store&lt;/code> information in the &lt;code>rest-server.properties&lt;/code> configuration file:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>auth.authenticator=com.baidu.hugegraph.auth.StandardAuthenticator
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>auth.authenticator=org.apache.hugegraph.auth.StandardAuthenticator
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>auth.graph_store=hugegraph
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Auth Client Config
@@ -1536,24 +1536,26 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># auth.remote_url=127.0.0.1:8899,127.0.0.1:8898,127.0.0.1:8897
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In the above configuration, the &lt;code>graph_store&lt;/code> option specifies which graph to use for storing user information. If there are multiple graphs, you can choose any of them.&lt;/p>
 &lt;p>In the &lt;code>hugegraph{n}.properties&lt;/code> configuration file, configure the &lt;code>gremlin.graph&lt;/code> information:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For detailed API calls and explanations regarding permissions, please refer to the &lt;a href="/docs/clients/restful-api/auth">Authentication-API&lt;/a> documentation.&lt;/p>
 &lt;h4 id="configauthenticator-mode">ConfigAuthenticator Mode&lt;/h4>
 &lt;p>The &lt;code>ConfigAuthenticator&lt;/code> mode supports user authentication by predefining user information in the configuration file. This implementation verifies the legitimacy of users based on preconfigured static &lt;code>tokens&lt;/code>. Below is the specific configuration process (requires service restart):&lt;/p>
 &lt;p>Configure the &lt;code>authenticator&lt;/code> and its &lt;code>rest-server&lt;/code> file path in the &lt;code>gremlin-server.yaml&lt;/code> configuration file:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">authentication&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticator&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.auth.ConfigAuthenticator,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticationHandler&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">com.baidu.hugegraph.auth.WsAndHttpBasicAuthHandler,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticator&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.auth.ConfigAuthenticator,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticationHandler&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.auth.WsAndHttpBasicAuthHandler,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">config&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#204a87;font-weight:bold">tokens&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">conf/rest-server.properties}&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>}&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Configure the &lt;code>authenticator&lt;/code> and its &lt;code>tokens&lt;/code> information in the &lt;code>rest-server.properties&lt;/code> configuration file:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>auth.authenticator=com.baidu.hugegraph.auth.ConfigAuthenticator
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>auth.authenticator=org.apache.hugegraph.auth.ConfigAuthenticator
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>auth.admin_token=token-value-a
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In the &lt;code>hugegraph{n}.properties&lt;/code> configuration file, configure the &lt;code>gremlin.graph&lt;/code> information:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>gremlin.graph=com.baidu.hugegraph.auth.HugeFactoryAuthProxy
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="custom-user-authentication-system">Custom User Authentication System&lt;/h3>
-&lt;p>If you need to support a more flexible user system, you can customize the authenticator for extension. Simply implement the &lt;code>com.baidu.hugegraph.auth.HugeAuthenticator&lt;/code> interface with your custom authenticator, and then modify the &lt;code>authenticator&lt;/code> configuration item in the configuration file to point to your implementation.&lt;/p></description></item><item><title>Docs: Configuring HugeGraphServer to Use HTTPS Protocol</title><link>/docs/config/config-https/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/config/config-https/</guid><description>
+&lt;p>If you need to support a more flexible user system, you can customize the authenticator for extension.
+Simply implement the &lt;code>org.apache.hugegraph.auth.HugeAuthenticator&lt;/code> interface with your custom authenticator,
+and then modify the &lt;code>authenticator&lt;/code> configuration item in the configuration file to point to your implementation.&lt;/p></description></item><item><title>Docs: Configuring HugeGraphServer to Use HTTPS Protocol</title><link>/docs/config/config-https/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/config/config-https/</guid><description>
 &lt;h3 id="overview">Overview&lt;/h3>
 &lt;p>By default, HugeGraphServer uses the HTTP protocol. However, if you have security requirements for your requests, you can configure it to use HTTPS.&lt;/p>
 &lt;h3 id="server-configuration">Server Configuration&lt;/h3>
