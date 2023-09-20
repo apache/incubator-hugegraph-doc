@@ -31,7 +31,7 @@ java -version
 - 方式 1：使用 Docker 容器 (推荐)
 - 方式 2：下载 tar 包
 - 方式 3：源码编译
-- 方式 4：一键部署
+- 方式 4：使用 tools 工具部署 (Outdated)
 
 #### 3.1 使用 Docker 容器 (推荐)
 <!-- 3.1 is linked by other place. if change 3.1's title, please check -->
