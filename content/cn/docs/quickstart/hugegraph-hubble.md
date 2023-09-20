@@ -35,11 +35,37 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
 ### 2 部署
 
 有三种方式可以部署`hugegraph-hubble`
+- 使用docker (推荐)
 - 下载 toolchain 二进制包
 - 源码编译
-- 使用docker
 
-#### 2.1 下载 toolchain 二进制包
+#### 2.1 使用Docker (推荐)
+
+> **特别注意**: 如果使用 docker 启动 hubble，且 hubble 和 server 位于同一宿主机，在后续 hubble 页面中设置 graph 的 hostname 的时候请不要直接设置 `localhost/127.0.0.1`，这将指向 hubble 容器内部而非宿主机，导致无法连接到 server
+
+我们可以使用 `docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble` 快速启动 [hubble](https://hub.docker.com/r/hugegraph/hubble).
+
+或者使用docker-compose启动hubble，另外如果hubble和graph在同一个docker网络下，可以使用graph的contain_name进行访问，而不需要宿主机的ip
+
+使用`docker-compose up -d`，`docker-compose.yml`如下：
+
+```yaml
+version: '3'
+services:
+  graph_hubble:
+    image: hugegraph/hugegraph
+    container_name: graph
+    ports:
+      - 18080:8080
+
+  hubble:
+    image: hugegraph/hubble
+    container_name: hubble
+    ports:
+      - 8088:8088
+```
+
+#### 2.2 下载 toolchain 二进制包
 
 `hubble`项目在`toolchain`项目中, 首先下载`toolchain`的tar包
 
@@ -68,7 +94,7 @@ starting HugeGraphHubble ..............timed out with http status 502
 
 然后使用浏览器访问 `ip:8088` 可看到`hubble`页面, 通过`bin/stop-hubble.sh`则可以停止服务
 
-#### 2.2 源码编译
+#### 2.3 源码编译
 
 **注意:** 编译 hubble 需要用户本地环境有安装 `Nodejs V16.x` 与 `yarn` 环境
 
@@ -112,32 +138,6 @@ cd apache-hugegraph-hubble-incubating*
 
 ```bash
 bin/start-hubble.sh -d
-```
-
-#### 2.3 使用Docker
-
-> **特别注意**: 如果使用 docker 启动 hubble，且 hubble 和 server 位于同一宿主机，在后续 hubble 页面中设置 graph 的 hostname 的时候请不要直接设置 `localhost/127.0.0.1`，这将指向 hubble 容器内部而非宿主机，导致无法连接到 server
-
-我们可以使用 `docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble` 快速启动 [hubble](https://hub.docker.com/r/hugegraph/hubble).
-
-或者使用docker-compose启动hubble，另外如果hubble和graph在同一个docker网络下，可以使用graph的contain_name进行访问，而不需要宿主机的ip
-
-使用`docker-compose up -d`，`docker-compose.yml`如下：
-
-```yaml
-version: '3'
-services:
-  graph_hubble:
-    image: hugegraph/hugegraph
-    container_name: graph
-    ports:
-      - 18080:8080
-
-  hubble:
-    image: hugegraph/hubble
-    container_name: hubble
-    ports:
-      - 8088:8088
 ```
 
 ### 3	平台使用流程
