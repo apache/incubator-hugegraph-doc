@@ -108,7 +108,7 @@ mvn package -DskipTests
 执行成功后，在 hugegraph 目录下生成 hugegraph-*.tar.gz 文件，就是编译生成的 tar 包。
 
 
-#### 3.4 一键部署
+#### 3.4 使用 tools 工具部署 (Outdated)
 
 HugeGraph-Tools 提供了一键部署的命令行工具，用户可以使用该工具快速地一键下载、解压、配置并启动 HugeGraph-Server 和 HugeGraph-Hubble，最新的 HugeGraph-Toolchain 中已经包含所有的这些工具，直接下载它解压就有工具包集合了
 
@@ -191,33 +191,7 @@ HugeGraphServer 启动时会连接后端存储并尝试检查后端存储版本�
 
 由于各种后端所需的配置（hugegraph.properties）及启动步骤略有不同，下面逐一对各后端的配置及启动做介绍。
 
-##### 5.2.1 Memory
-
-<details>
-<summary>点击展开/折叠 Memory 配置及启动方法</summary>
-
-修改 hugegraph.properties
-
-```properties
-backend=memory
-serializer=text
-```
-
-> Memory 后端的数据是保存在内存中无法持久化的，不需要初始化后端，这也是唯一一个不需要初始化的后端。
-
-启动 server
-
-```bash
-bin/start-hugegraph.sh
-Starting HugeGraphServer...
-Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
-```
-
-提示的 url 与 rest-server.properties 中配置的 restserver.url 一致
-
-</details>
-
-##### 5.2.2 RocksDB
+##### 5.2.1 RocksDB
 
 <details>
 <summary>点击展开/折叠 RocksDB 配置及启动方法</summary>
@@ -251,7 +225,93 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.2.3 Cassandra
+##### 5.2.2 HBase
+
+<details>
+<summary>点击展开/折叠 HBase 配置及启动方法</summary>
+
+> 用户需自行安装 HBase，要求版本 2.0 以上，[下载地址](https://hbase.apache.org/downloads.html)
+
+修改 hugegraph.properties
+
+```properties
+backend=hbase
+serializer=hbase
+
+# hbase backend config
+hbase.hosts=localhost
+hbase.port=2181
+# Note: recommend to modify the HBase partition number by the actual/env data amount & RS amount before init store
+# it may influence the loading speed a lot
+#hbase.enable_partition=true
+#hbase.vertex_partitions=10
+#hbase.edge_partitions=30
+```
+
+初始化数据库（仅第一次启动时需要）
+
+```bash
+cd hugegraph-${version}
+bin/init-store.sh
+```
+
+启动 server
+
+```bash
+bin/start-hugegraph.sh
+Starting HugeGraphServer...
+Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
+```
+
+> 更多其它后端配置可参考[配置项介绍](/docs/config/config-option)
+
+</details>
+
+##### 5.2.3 MySQL
+
+<details>
+<summary>点击展开/折叠 MySQL 配置及启动方法</summary>
+
+> 由于 MySQL 是在 GPL 协议下，与 Apache 协议不兼容，用户需自行安装 MySQL，[下载地址](https://dev.mysql.com/downloads/mysql/)
+
+下载 MySQL 的[驱动包](https://repo1.maven.org/maven2/mysql/mysql-connector-java/)，比如 `mysql-connector-java-8.0.30.jar`，并放入 HugeGraph-Server 的 `lib` 目录下。
+
+修改 `hugegraph.properties`，配置数据库 URL，用户名和密码，`store` 是数据库名，如果没有会被自动创建。
+
+```properties
+backend=mysql
+serializer=mysql
+
+store=hugegraph
+
+# mysql backend config
+jdbc.driver=com.mysql.cj.jdbc.Driver
+jdbc.url=jdbc:mysql://127.0.0.1:3306
+jdbc.username=
+jdbc.password=
+jdbc.reconnect_max_times=3
+jdbc.reconnect_interval=3
+jdbc.ssl_mode=false
+```
+
+初始化数据库（仅第一次启动时需要）
+
+```bash
+cd hugegraph-${version}
+bin/init-store.sh
+```
+
+启动 server
+
+```bash
+bin/start-hugegraph.sh
+Starting HugeGraphServer...
+Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
+```
+
+</details>
+
+##### 5.2.4 Cassandra
 
 <details>
 <summary>点击展开/折叠 Cassandra 配置及启动方法</summary>
@@ -310,7 +370,33 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.2.4 ScyllaDB
+##### 5.2.5 Memory
+
+<details>
+<summary>点击展开/折叠 Memory 配置及启动方法</summary>
+
+修改 hugegraph.properties
+
+```properties
+backend=memory
+serializer=text
+```
+
+> Memory 后端的数据是保存在内存中无法持久化的，不需要初始化后端，这也是唯一一个不需要初始化的后端。
+
+启动 server
+
+```bash
+bin/start-hugegraph.sh
+Starting HugeGraphServer...
+Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
+```
+
+提示的 url 与 rest-server.properties 中配置的 restserver.url 一致
+
+</details>
+
+##### 5.2.6 ScyllaDB
 
 <details>
 <summary>点击展开/折叠 ScyllaDB 配置及启动方法</summary>
@@ -354,91 +440,10 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.2.5 HBase
 
-<details>
-<summary>点击展开/折叠 HBase 配置及启动方法</summary>
 
-> 用户需自行安装 HBase，要求版本 2.0 以上，[下载地址](https://hbase.apache.org/downloads.html)
 
-修改 hugegraph.properties
 
-```properties
-backend=hbase
-serializer=hbase
-
-# hbase backend config
-hbase.hosts=localhost
-hbase.port=2181
-# Note: recommend to modify the HBase partition number by the actual/env data amount & RS amount before init store
-# it may influence the loading speed a lot
-#hbase.enable_partition=true
-#hbase.vertex_partitions=10
-#hbase.edge_partitions=30
-```
-
-初始化数据库（仅第一次启动时需要）
-
-```bash
-cd hugegraph-${version}
-bin/init-store.sh
-```
-
-启动 server
-
-```bash
-bin/start-hugegraph.sh
-Starting HugeGraphServer...
-Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
-```
-
-> 更多其它后端配置可参考[配置项介绍](/docs/config/config-option)
-
-</details>
-
-##### 5.2.6 MySQL
-
-<details>
-<summary>点击展开/折叠 MySQL 配置及启动方法</summary>
-
-> 由于 MySQL 是在 GPL 协议下，与 Apache 协议不兼容，用户需自行安装 MySQL，[下载地址](https://dev.mysql.com/downloads/mysql/)
-
-下载 MySQL 的[驱动包](https://repo1.maven.org/maven2/mysql/mysql-connector-java/)，比如 `mysql-connector-java-8.0.30.jar`，并放入 HugeGraph-Server 的 `lib` 目录下。
-
-修改 `hugegraph.properties`，配置数据库 URL，用户名和密码，`store` 是数据库名，如果没有会被自动创建。
-
-```properties
-backend=mysql
-serializer=mysql
-
-store=hugegraph
-
-# mysql backend config
-jdbc.driver=com.mysql.cj.jdbc.Driver
-jdbc.url=jdbc:mysql://127.0.0.1:3306
-jdbc.username=
-jdbc.password=
-jdbc.reconnect_max_times=3
-jdbc.reconnect_interval=3
-jdbc.ssl_mode=false
-```
-
-初始化数据库（仅第一次启动时需要）
-
-```bash
-cd hugegraph-${version}
-bin/init-store.sh
-```
-
-启动 server
-
-```bash
-bin/start-hugegraph.sh
-Starting HugeGraphServer...
-Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
-```
-
-</details>
 
 ##### 5.2.7 启动server的时候创建示例图
 

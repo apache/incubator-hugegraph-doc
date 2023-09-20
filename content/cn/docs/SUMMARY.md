@@ -9,8 +9,7 @@
 * [Develop with HugeGraph-Client](quickstart/hugegraph-client.md)
 * [Manage with HugeGraph-Tools](quickstart/hugegraph-tools.md)
 * [Analysis with HugeGraph-Computer](quickstart/hugegraph-computer.md)
-<!-- * [Display with HugeGraph-Studio](quickstart/hugegraph-studio.md) -->
-<!-- studio has been outdated -->
+* [Display with HugeGraph-Studio](quickstart/hugegraph-studio.md)
 
 ## Config
 * [Config Guide](config/config-guide.md)
