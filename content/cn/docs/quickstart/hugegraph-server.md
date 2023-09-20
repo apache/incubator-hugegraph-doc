@@ -1,6 +1,6 @@
 ---
 title: "HugeGraph-Server Quick Start"
-linkTitle: "Install HugeGraph-Server"
+linkTitle: "Install/Build HugeGraph-Server"
 weight: 1
 ---
 
@@ -26,34 +26,36 @@ java -version
 
 ### 3 部署
 
-有三种方式可以部署 HugeGraph-Server 组件：
+有四种方式可以部署 HugeGraph-Server 组件：
 
-- 方式 1：一键部署
+- 方式 1：使用 Docker 容器 (推荐)
 - 方式 2：下载 tar 包
 - 方式 3：源码编译
-- 方式 4：使用 Docker 容器
+- 方式 4：一键部署
 
-#### 3.1 一键部署
+#### 3.1 使用 Docker 容器 (推荐)
+<!-- 3.1 is linked by other place. if change 3.1's title, please check -->
+可参考 [Docker 部署方式](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/README.md)。
 
-HugeGraph-Tools 提供了一键部署的命令行工具，用户可以使用该工具快速地一键下载、解压、配置并启动 HugeGraph-Server 和 HugeGraph-Hubble，最新的 HugeGraph-Toolchain 中已经包含所有的这些工具，直接下载它解压就有工具包集合了
+我们可以使用 `docker run -itd --name=graph -p 8080:8080 hugegraph/hugegraph` 去快速启动一个内置了 `RocksDB` 的 `Hugegraph server`.
 
-```bash
-# download toolchain package, it includes loader + tool + hubble, please check the latest version (here is 1.0.0)
-wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
-tar zxf *hugegraph-*.tar.gz
-# enter the tool's package
-cd *hugegraph*/*tool* 
+可选项:
+
+1. 可以使用 `docker exec -it graph bash` 进入容器完成一些操作
+2. 可以使用 `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph` 在启动的时候预加载一个 **内置的** 样例图.
+
+另外, 我们也可以使用 `docker-compose` 完成部署, 使用 `docker-compose up -d`, 以下是一个样例的 `docker-compose.yml`:
+
+```yaml
+version: '3'
+services:
+  graph:
+    image: hugegraph/hugegraph
+    #environment:
+    #  - PRELOAD=true
+    ports:
+      - 18080:8080
 ```
-
-> 注：`${version}` 为版本号，最新版本号可参考 [Download 页面](/docs/download/download)，或直接从 Download 页面点击链接下载
-
-HugeGraph-Tools 的总入口脚本是 `bin/hugegraph`，用户可以使用 `help` 子命令查看其用法，这里只介绍一键部署的命令。
-
-```bash
-bin/hugegraph deploy -v {hugegraph-version} -p {install-path} [-u {download-path-prefix}]
-```
-
-`{hugegraph-version}` 表示要部署的 HugeGraphServer 及 HugeGraphStudio 的版本，用户可查看 `conf/version-mapping.yaml` 文件获取版本信息，`{install-path}` 指定 HugeGraphServer 及 HugeGraphStudio 的安装目录，`{download-path-prefix}` 可选，指定 HugeGraphServer 及 HugeGraphStudio tar 包的下载地址，不提供时使用默认下载地址，比如要启动 0.6 版本的 HugeGraph-Server 及 HugeGraphStudio 将上述命令写为 `bin/hugegraph deploy -v 0.6 -p services` 即可。
 
 #### 3.2 下载 tar 包
 
@@ -105,9 +107,28 @@ mvn package -DskipTests
 
 执行成功后，在 hugegraph 目录下生成 hugegraph-*.tar.gz 文件，就是编译生成的 tar 包。
 
-#### 3.4 使用 Docker 容器
 
-可参考 [Docker 部署方式](https://hub.docker.com/r/hugegraph/hugegraph)。
+#### 3.4 一键部署
+
+HugeGraph-Tools 提供了一键部署的命令行工具，用户可以使用该工具快速地一键下载、解压、配置并启动 HugeGraph-Server 和 HugeGraph-Hubble，最新的 HugeGraph-Toolchain 中已经包含所有的这些工具，直接下载它解压就有工具包集合了
+
+```bash
+# download toolchain package, it includes loader + tool + hubble, please check the latest version (here is 1.0.0)
+wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
+tar zxf *hugegraph-*.tar.gz
+# enter the tool's package
+cd *hugegraph*/*tool* 
+```
+
+> 注：`${version}` 为版本号，最新版本号可参考 [Download 页面](/docs/download/download)，或直接从 Download 页面点击链接下载
+
+HugeGraph-Tools 的总入口脚本是 `bin/hugegraph`，用户可以使用 `help` 子命令查看其用法，这里只介绍一键部署的命令。
+
+```bash
+bin/hugegraph deploy -v {hugegraph-version} -p {install-path} [-u {download-path-prefix}]
+```
+
+`{hugegraph-version}` 表示要部署的 HugeGraphServer 及 HugeGraphStudio 的版本，用户可查看 `conf/version-mapping.yaml` 文件获取版本信息，`{install-path}` 指定 HugeGraphServer 及 HugeGraphStudio 的安装目录，`{download-path-prefix}` 可选，指定 HugeGraphServer 及 HugeGraphStudio tar 包的下载地址，不提供时使用默认下载地址，比如要启动 0.6 版本的 HugeGraph-Server 及 HugeGraphStudio 将上述命令写为 `bin/hugegraph deploy -v 0.6 -p services` 即可。
 
 ### 4 配置
 
@@ -116,6 +137,49 @@ mvn package -DskipTests
 详细的配置介绍请参考[配置文档](/docs/config/config-guide)及[配置项介绍](/docs/config/config-option)。
 
 ### 5 启动
+
+#### 5.1 使用docker
+
+在 [3.1 使用 Docker 容器](#31-使用-docker-容器-推荐) 中, 我们已经介绍了 如何使用 `docker` 部署 `hugegraph-server`, 我们还可以设置参数在sever启动的时候加载样例图
+
+##### 5.1.1 启动server的时候创建示例图
+
+在docker启动的时候设置环境变量 `PRELOAD=true`, 从而实现启动脚本的时候加载数据。
+
+1. 使用`docker run`
+
+    使用 `docker run -itd --name=graph -p 18080:8080 -e PRELOAD=true hugegraph/hugegraph:latest`
+
+2. 使用`docker-compose`
+
+    创建`docker-compose.yml`，具体文件如下
+
+    ```yaml
+    version: '3'
+      services:
+        graph:
+          image: hugegraph/hugegraph:latest
+          container_name: graph
+          environment:
+            - PRELOAD=true
+          ports:
+            - 18080:8080
+    ```
+
+    使用命令 `docker-compose up -d` 启动容器
+
+使用 RESTful API 请求 `HugeGraphServer` 得到如下结果：
+
+```javascript
+> curl "http://localhost:18080/graphs/hugegraph/graph/vertices" | gunzip
+
+{"vertices":[{"id":"2:lop","label":"software","type":"vertex","properties":{"name":"lop","lang":"java","price":328}},{"id":"1:josh","label":"person","type":"vertex","properties":{"name":"josh","age":32,"city":"Beijing"}},{"id":"1:marko","label":"person","type":"vertex","properties":{"name":"marko","age":29,"city":"Beijing"}},{"id":"1:peter","label":"person","type":"vertex","properties":{"name":"peter","age":35,"city":"Shanghai"}},{"id":"1:vadas","label":"person","type":"vertex","properties":{"name":"vadas","age":27,"city":"Hongkong"}},{"id":"2:ripple","label":"software","type":"vertex","properties":{"name":"ripple","lang":"java","price":199}}]}
+```
+
+代表创建示例图成功。
+
+
+#### 5.2 使用启动脚本启动
 
 启动分为"首次启动"和"非首次启动"，这么区分是因为在第一次启动前需要初始化后端数据库，然后启动服务。
 
@@ -127,7 +191,10 @@ HugeGraphServer 启动时会连接后端存储并尝试检查后端存储版本�
 
 由于各种后端所需的配置（hugegraph.properties）及启动步骤略有不同，下面逐一对各后端的配置及启动做介绍。
 
-#### 5.1 Memory
+##### 5.2.1 Memory
+
+<details>
+<summary>点击展开/折叠 Memory 配置及启动方法</summary>
 
 修改 hugegraph.properties
 
@@ -148,7 +215,13 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 提示的 url 与 rest-server.properties 中配置的 restserver.url 一致
 
-#### 5.2 RocksDB
+</details>
+
+##### 5.2.2 RocksDB
+
+<details>
+<summary>点击展开/折叠 RocksDB 配置及启动方法</summary>
+
 
 > RocksDB 是一个嵌入式的数据库，不需要手动安装部署，要求 GCC 版本 >= 4.3.0（GLIBCXX_3.4.10），如不满足，需要提前升级 GCC
 
@@ -176,7 +249,12 @@ Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 ```
 
-#### 5.3 Cassandra
+</details>
+
+##### 5.2.3 Cassandra
+
+<details>
+<summary>点击展开/折叠 Cassandra 配置及启动方法</summary>
 
 > 用户需自行安装 Cassandra，要求版本 3.0 以上，[下载地址](http://cassandra.apache.org/download/)
 
@@ -230,7 +308,12 @@ Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 ```
 
-#### 5.4 ScyllaDB
+</details>
+
+##### 5.2.4 ScyllaDB
+
+<details>
+<summary>点击展开/折叠 ScyllaDB 配置及启动方法</summary>
 
 > 用户需自行安装 ScyllaDB，推荐版本 2.1 以上，[下载地址](https://docs.scylladb.com/getting-started/)
 
@@ -269,7 +352,12 @@ Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 ```
 
-#### 5.5 HBase
+</details>
+
+##### 5.2.5 HBase
+
+<details>
+<summary>点击展开/折叠 HBase 配置及启动方法</summary>
 
 > 用户需自行安装 HBase，要求版本 2.0 以上，[下载地址](https://hbase.apache.org/downloads.html)
 
@@ -306,7 +394,12 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 > 更多其它后端配置可参考[配置项介绍](/docs/config/config-option)
 
-#### 5.6 MySQL
+</details>
+
+##### 5.2.6 MySQL
+
+<details>
+<summary>点击展开/折叠 MySQL 配置及启动方法</summary>
 
 > 由于 MySQL 是在 GPL 协议下，与 Apache 协议不兼容，用户需自行安装 MySQL，[下载地址](https://dev.mysql.com/downloads/mysql/)
 
@@ -344,6 +437,28 @@ bin/start-hugegraph.sh
 Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 ```
+
+</details>
+
+##### 5.2.7 启动server的时候创建示例图
+
+在脚本启动时候携带 `-p true` 参数, 表示preload, 即创建示例图
+
+```
+bin/start-hugegraph.sh -p true
+Starting HugeGraphServer in daemon mode...
+Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)......OK
+```
+
+并且使用 RESTful API 请求 `HugeGraphServer` 得到如下结果：
+
+```javascript
+> curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
+
+{"vertices":[{"id":"2:lop","label":"software","type":"vertex","properties":{"name":"lop","lang":"java","price":328}},{"id":"1:josh","label":"person","type":"vertex","properties":{"name":"josh","age":32,"city":"Beijing"}},{"id":"1:marko","label":"person","type":"vertex","properties":{"name":"marko","age":29,"city":"Beijing"}},{"id":"1:peter","label":"person","type":"vertex","properties":{"name":"peter","age":35,"city":"Shanghai"}},{"id":"1:vadas","label":"person","type":"vertex","properties":{"name":"vadas","age":27,"city":"Hongkong"}},{"id":"2:ripple","label":"software","type":"vertex","properties":{"name":"ripple","lang":"java","price":199}}]}
+```
+
+代表创建示例图成功。
 
 ### 6 访问 Server
 
@@ -462,125 +577,3 @@ $bin/stop-hugegraph.sh
 ### 8 使用 IntelliJ IDEA 调试 Server
 
 请参考[在 IDEA 中配置 Server 开发环境](/docs/contribution-guidelines/hugegraph-server-idea-setup)
-
-### 9 在启动 Server 时创建示例图
-
-有三种方式可以在启动 Server 时创建示例图
-- 方式一: 直接修改配置文件
-- 方式二: 启动脚本使用命令行参数
-- 方式三: 使用docker或docker-compose添加环境变量
-
-#### 9.1 直接修改配置文件
-
-修改 `conf/gremlin-server.yaml`，将 `empty-sample.groovy` 修改为 `example.groovy`：
-
-```yaml
-org.apache.tinkerpop.gremlin.jsr223.ScriptFileGremlinPlugin: {
-    files: [scripts/example.groovy]
-}
-```
-
-修改 `scripts/example.groovy`，将：
-
-```groovy
-RegisterUtil.registerRocksDB()
-conf = "conf/graphs/hugegraph.properties"
-graph = HugeFactory.open(conf)
-graph.serverStarted(IdGenerator.of("server-tinkerpop"), NodeRole.MASTER)
-schema = graph.schema()
-```
-
-修改为：
-
-```groovy
-conf = "conf/graphs/hugegraph.properties"
-graph = HugeFactory.open(conf)
-schema = graph.schema()
-```
-
-然后使用脚本启动 HugeGraph-Server，如果打印出类似日志：
-
-```java
-2023-06-10 19:41:14 [main] [INFO] o.a.h.d.HugeGremlinServer [org.apache.hugegraph.dist.HugeGremlinServer.start(HugeGremlinServer.java:38)] - 3.5.1
-         \,,,/
-         (o o)
------oOOo-(3)-oOOo-----
-
-2023-06-10 19:41:14 [main] [INFO] o.a.h.u.ConfigUtil [org.apache.hugegraph.util.ConfigUtil.scanGraphsDir(ConfigUtil.java:88)] - Scanning option 'graphs' directory './conf/graphs'
-2023-06-10 19:41:14 [main] [INFO] o.a.h.d.HugeGremlinServer [org.apache.hugegraph.dist.HugeGremlinServer.start(HugeGremlinServer.java:52)] - Configuring Gremlin Server from /Users/dingyuchen/Desktop/hugegraph/apache-hugegraph-incubating-1.0.0/conf/gremlin-server.yaml
->>>> query all vertices: size=6
->>>> query all edges: size=6
-```
-
-并且使用 RESTful API 请求 `HugeGraphServer` 得到如下结果：
-
-```javascript
-> curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
-
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100   222  100   222    0     0   3163      0 --:--:-- --:--:-- --:--:--  3964
-{"vertices":[{"id":"2:lop","label":"software","type":"vertex","properties":{"name":"lop","lang":"java","price":328}},{"id":"1:josh","label":"person","type":"vertex","properties":{"name":"josh","age":32,"city":"Beijing"}},{"id":"1:marko","label":"person","type":"vertex","properties":{"name":"marko","age":29,"city":"Beijing"}},{"id":"1:peter","label":"person","type":"vertex","properties":{"name":"peter","age":35,"city":"Shanghai"}},{"id":"1:vadas","label":"person","type":"vertex","properties":{"name":"vadas","age":27,"city":"Hongkong"}},{"id":"2:ripple","label":"software","type":"vertex","properties":{"name":"ripple","lang":"java","price":199}}]}
-```
-
-代表创建示例图成功。
-
-> 使用 IntelliJ IDEA 在启动 Server 时创建示例图的流程类似，不再赘述。
-
-
-#### 9.2 启动脚本时指定参数
-
-在脚本启动时候携带 `-p true` 参数, 表示preload, 即创建示例图
-
-```
-bin/start-hugegraph.sh -p true
-Starting HugeGraphServer in daemon mode...
-Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)......OK
-```
-
-并且使用 RESTful API 请求 `HugeGraphServer` 得到如下结果：
-
-```javascript
-> curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
-
-{"vertices":[{"id":"2:lop","label":"software","type":"vertex","properties":{"name":"lop","lang":"java","price":328}},{"id":"1:josh","label":"person","type":"vertex","properties":{"name":"josh","age":32,"city":"Beijing"}},{"id":"1:marko","label":"person","type":"vertex","properties":{"name":"marko","age":29,"city":"Beijing"}},{"id":"1:peter","label":"person","type":"vertex","properties":{"name":"peter","age":35,"city":"Shanghai"}},{"id":"1:vadas","label":"person","type":"vertex","properties":{"name":"vadas","age":27,"city":"Hongkong"}},{"id":"2:ripple","label":"software","type":"vertex","properties":{"name":"ripple","lang":"java","price":199}}]}
-```
-
-代表创建示例图成功。
-
-
-#### 9.3 使用docker启动
-
-在docker启动的时候设置环境变量 `PRELOAD=true`, 从而实现启动脚本的时候加载数据。
-
-1. 使用`docker run`
-
-    使用 `docker run -itd --name=graph -p 18080:8080 -e PRELOAD=true hugegraph/hugegraph:latest`
-
-2. 使用`docker-compose`
-
-    创建`docker-compose.yml`，具体文件如下
-
-    ```yaml
-    version: '3'
-      services:
-        graph:
-          image: hugegraph/hugegraph:latest
-          container_name: graph
-          environment:
-            - PRELOAD=true
-          ports:
-            - 18080:8080
-    ```
-
-    使用命令 `docker-compose up -d` 启动容器
-
-使用 RESTful API 请求 `HugeGraphServer` 得到如下结果：
-
-```javascript
-> curl "http://localhost:18080/graphs/hugegraph/graph/vertices" | gunzip
-
-{"vertices":[{"id":"2:lop","label":"software","type":"vertex","properties":{"name":"lop","lang":"java","price":328}},{"id":"1:josh","label":"person","type":"vertex","properties":{"name":"josh","age":32,"city":"Beijing"}},{"id":"1:marko","label":"person","type":"vertex","properties":{"name":"marko","age":29,"city":"Beijing"}},{"id":"1:peter","label":"person","type":"vertex","properties":{"name":"peter","age":35,"city":"Shanghai"}},{"id":"1:vadas","label":"person","type":"vertex","properties":{"name":"vadas","age":27,"city":"Hongkong"}},{"id":"2:ripple","label":"software","type":"vertex","properties":{"name":"ripple","lang":"java","price":199}}]}
-```
-
-代表创建示例图成功。

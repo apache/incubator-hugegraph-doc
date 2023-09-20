@@ -5,11 +5,12 @@
 ## Quickstart
 * [Install HugeGraph-Server](quickstart/hugegraph-server.md)
 * [Load data with HugeGraph-Loader](quickstart/hugegraph-loader.md)
-* [Manage with HugeGraph-Tools](quickstart/hugegraph-tools.md)
 * [Visual with HugeGraph-Hubble](quickstart/hugegraph-hubble.md)
-* [Display with HugeGraph-Studio](quickstart/hugegraph-studio.md)
 * [Develop with HugeGraph-Client](quickstart/hugegraph-client.md)
+* [Manage with HugeGraph-Tools](quickstart/hugegraph-tools.md)
 * [Analysis with HugeGraph-Computer](quickstart/hugegraph-computer.md)
+<!-- * [Display with HugeGraph-Studio](quickstart/hugegraph-studio.md) -->
+<!-- studio has been outdated -->
 
 ## Config
 * [Config Guide](config/config-guide.md)

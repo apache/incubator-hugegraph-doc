@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph-Hubble Quick Start"
 linkTitle: "Visual with HugeGraph-Hubble"
-weight: 4
+weight: 3
 ---
 
 ### 1 HugeGraph-Hubble Overview
