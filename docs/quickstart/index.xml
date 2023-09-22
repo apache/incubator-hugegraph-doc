@@ -1073,175 +1073,175 @@ Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-d
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td>-f or &amp;ndash;file&lt;/td>
+&lt;td>&lt;code>-f&lt;/code> or &lt;code>--file&lt;/code>&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Y&lt;/td>
 &lt;td>path to configure script&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>-g or &amp;ndash;graph&lt;/td>
+&lt;td>&lt;code>-g&lt;/code> or &lt;code>--graph&lt;/code>&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Y&lt;/td>
 &lt;td>graph space name&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>-s or &amp;ndash;schema&lt;/td>
+&lt;td>&lt;code>-s&lt;/code> or &lt;code>--schema&lt;/code>&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Y&lt;/td>
 &lt;td>schema file path&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>-h or &amp;ndash;host&lt;/td>
+&lt;td>&lt;code>-h&lt;/code> or &lt;code>--host&lt;/code>&lt;/td>
 &lt;td>localhost&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>address of HugeGraphServer&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>-p or &amp;ndash;port&lt;/td>
+&lt;td>&lt;code>-p&lt;/code> or &lt;code>--port&lt;/code>&lt;/td>
 &lt;td>8080&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>port number of HugeGraphServer&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;username&lt;/td>
+&lt;td>&lt;code>--username&lt;/code>&lt;/td>
 &lt;td>null&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>When HugeGraphServer enables permission authentication, the username of the current graph&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;token&lt;/td>
+&lt;td>&lt;code>--token&lt;/code>&lt;/td>
 &lt;td>null&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>When HugeGraphServer has enabled authorization authentication, the token of the current graph&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;protocol&lt;/td>
+&lt;td>&lt;code>--protocol&lt;/code>&lt;/td>
 &lt;td>http&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Protocol for sending requests to the server, optional http or https&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;trust-store-file&lt;/td>
+&lt;td>&lt;code>--trust-store-file&lt;/code>&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>When the request protocol is https, the client&amp;rsquo;s certificate file path&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;trust-store-password&lt;/td>
+&lt;td>&lt;code>--trust-store-password&lt;/code>&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>When the request protocol is https, the client certificate password&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;clear-all-data&lt;/td>
+&lt;td>&lt;code>--clear-all-data&lt;/code>&lt;/td>
 &lt;td>false&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Whether to clear the original data on the server before importing data&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;clear-timeout&lt;/td>
+&lt;td>&lt;code>--clear-timeout&lt;/code>&lt;/td>
 &lt;td>240&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Timeout for clearing the original data on the server before importing data&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;incremental-mode&lt;/td>
+&lt;td>&lt;code>--incremental-mode&lt;/code>&lt;/td>
 &lt;td>false&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Whether to use the breakpoint resume mode, only the input source is FILE and HDFS support this mode, enabling this mode can start the import from the place where the last import stopped&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;failure-mode&lt;/td>
+&lt;td>&lt;code>--failure-mode&lt;/code>&lt;/td>
 &lt;td>false&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>When the failure mode is true, the data that failed before will be imported. Generally speaking, the failed data file needs to be manually corrected and edited, and then imported again&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;batch-insert-threads&lt;/td>
+&lt;td>&lt;code>--batch-insert-threads&lt;/code>&lt;/td>
 &lt;td>CPUs&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Batch insert thread pool size (CPUs is the number of &lt;strong>logical cores&lt;/strong> available to the current OS)&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;single-insert-threads&lt;/td>
+&lt;td>&lt;code>--single-insert-threads&lt;/code>&lt;/td>
 &lt;td>8&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Size of single insert thread pool&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;max-conn&lt;/td>
+&lt;td>&lt;code>--max-conn&lt;/code>&lt;/td>
 &lt;td>4 * CPUs&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>The maximum number of HTTP connections between HugeClient and HugeGraphServer, it is recommended to adjust this when &lt;strong>adjusting threads&lt;/strong>&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;max-conn-per-route&lt;/td>
+&lt;td>&lt;code>--max-conn-per-route&lt;/code>&lt;/td>
 &lt;td>2 * CPUs&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>The maximum number of HTTP connections for each route between HugeClient and HugeGraphServer, it is recommended to adjust this item at the same time when &lt;strong>adjusting the thread&lt;/strong>&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;batch-size&lt;/td>
+&lt;td>&lt;code>--batch-size&lt;/code>&lt;/td>
 &lt;td>500&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>The number of data items in each batch when importing data&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;max-parse-errors&lt;/td>
+&lt;td>&lt;code>--max-parse-errors&lt;/code>&lt;/td>
 &lt;td>1&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>The maximum number of lines of data parsing errors allowed, and the program exits when this value is reached&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;max-insert-errors&lt;/td>
+&lt;td>&lt;code>--max-insert-errors&lt;/code>&lt;/td>
 &lt;td>500&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>The maximum number of rows of data insertion errors allowed, and the program exits when this value is reached&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;timeout&lt;/td>
+&lt;td>&lt;code>--timeout&lt;/code>&lt;/td>
 &lt;td>60&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Timeout (seconds) for inserting results to return&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;shutdown-timeout&lt;/td>
+&lt;td>&lt;code>--shutdown-timeout&lt;/code>&lt;/td>
 &lt;td>10&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Waiting time for multithreading to stop (seconds)&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;retry-times&lt;/td>
+&lt;td>&lt;code>--retry-times&lt;/code>&lt;/td>
 &lt;td>0&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Number of retries when a specific exception occurs&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;retry-interval&lt;/td>
+&lt;td>&lt;code>--retry-interval&lt;/code>&lt;/td>
 &lt;td>10&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>interval before retry (seconds)&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;check-vertex&lt;/td>
+&lt;td>&lt;code>--check-vertex&lt;/code>&lt;/td>
 &lt;td>false&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Whether to check whether the vertex connected by the edge exists when inserting the edge&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;print-progress&lt;/td>
+&lt;td>&lt;code>--print-progress&lt;/code>&lt;/td>
 &lt;td>true&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Whether to print the number of imported items in the console in real time&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;dry-run&lt;/td>
+&lt;td>&lt;code>--dry-run&lt;/code>&lt;/td>
 &lt;td>false&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Turn on this mode, only parsing but not importing, usually used for testing&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;help&lt;/td>
+&lt;td>&lt;code>--help&lt;/code>&lt;/td>
 &lt;td>false&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>print help information&lt;/td>

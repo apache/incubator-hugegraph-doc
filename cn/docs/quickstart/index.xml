@@ -1058,175 +1058,175 @@
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td>-f 或 &amp;ndash;file&lt;/td>
+&lt;td>&lt;code>-f&lt;/code> 或 &lt;code>--file&lt;/code>&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Y&lt;/td>
 &lt;td>配置脚本的路径&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>-g 或 &amp;ndash;graph&lt;/td>
+&lt;td>&lt;code>-g&lt;/code> 或 &lt;code>--graph&lt;/code>&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Y&lt;/td>
 &lt;td>图数据库空间&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>-s 或 &amp;ndash;schema&lt;/td>
+&lt;td>&lt;code>-s&lt;/code> 或 &lt;code>--schema&lt;/code>&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Y&lt;/td>
 &lt;td>schema文件路径&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>-h 或 &amp;ndash;host&lt;/td>
+&lt;td>&lt;code>-h&lt;/code> 或 &lt;code>--host&lt;/code>&lt;/td>
 &lt;td>localhost&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>HugeGraphServer 的地址&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>-p 或 &amp;ndash;port&lt;/td>
+&lt;td>&lt;code>-p&lt;/code> 或 &lt;code>--port&lt;/code>&lt;/td>
 &lt;td>8080&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>HugeGraphServer 的端口号&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;username&lt;/td>
+&lt;td>&lt;code>--username&lt;/code>&lt;/td>
 &lt;td>null&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>当 HugeGraphServer 开启了权限认证时，当前图的 username&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;token&lt;/td>
+&lt;td>&lt;code>--token&lt;/code>&lt;/td>
 &lt;td>null&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>当 HugeGraphServer 开启了权限认证时，当前图的 token&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;protocol&lt;/td>
+&lt;td>&lt;code>--protocol&lt;/code>&lt;/td>
 &lt;td>http&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>向服务端发请求的协议，可选 http 或 https&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;trust-store-file&lt;/td>
+&lt;td>&lt;code>--trust-store-file&lt;/code>&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>请求协议为 https 时，客户端的证书文件路径&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;trust-store-password&lt;/td>
+&lt;td>&lt;code>--trust-store-password&lt;/code>&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>请求协议为 https 时，客户端证书密码&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;clear-all-data&lt;/td>
+&lt;td>&lt;code>--clear-all-data&lt;/code>&lt;/td>
 &lt;td>false&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>导入数据前是否清除服务端的原有数据&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;clear-timeout&lt;/td>
+&lt;td>&lt;code>--clear-timeout&lt;/code>&lt;/td>
 &lt;td>240&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>导入数据前清除服务端的原有数据的超时时间&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;incremental-mode&lt;/td>
+&lt;td>&lt;code>--incremental-mode&lt;/code>&lt;/td>
 &lt;td>false&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>是否使用断点续导模式，仅输入源为 FILE 和 HDFS 支持该模式，启用该模式能从上一次导入停止的地方开始导&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;failure-mode&lt;/td>
+&lt;td>&lt;code>--failure-mode&lt;/code>&lt;/td>
 &lt;td>false&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>失败模式为 true 时，会导入之前失败了的数据，一般来说失败数据文件需要在人工更正编辑好后，再次进行导入&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;batch-insert-threads&lt;/td>
+&lt;td>&lt;code>--batch-insert-threads&lt;/code>&lt;/td>
 &lt;td>CPUs&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>批量插入线程池大小 (CPUs是当前OS可用&lt;strong>逻辑核&lt;/strong>个数)&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;single-insert-threads&lt;/td>
+&lt;td>&lt;code>--single-insert-threads&lt;/code>&lt;/td>
 &lt;td>8&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>单条插入线程池的大小&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;max-conn&lt;/td>
+&lt;td>&lt;code>--max-conn&lt;/code>&lt;/td>
 &lt;td>4 * CPUs&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>HugeClient 与 HugeGraphServer 的最大 HTTP 连接数，&lt;strong>调整线程&lt;/strong>的时候建议同时调整此项&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;max-conn-per-route&lt;/td>
+&lt;td>&lt;code>--max-conn-per-route&lt;/code>&lt;/td>
 &lt;td>2 * CPUs&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>HugeClient 与 HugeGraphServer 每个路由的最大 HTTP 连接数，&lt;strong>调整线程&lt;/strong>的时候建议同时调整此项&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;batch-size&lt;/td>
+&lt;td>&lt;code>--batch-size&lt;/code>&lt;/td>
 &lt;td>500&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>导入数据时每个批次包含的数据条数&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;max-parse-errors&lt;/td>
+&lt;td>&lt;code>--max-parse-errors&lt;/code>&lt;/td>
 &lt;td>1&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>最多允许多少行数据解析错误，达到该值则程序退出&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;max-insert-errors&lt;/td>
+&lt;td>&lt;code>--max-insert-errors&lt;/code>&lt;/td>
 &lt;td>500&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>最多允许多少行数据插入错误，达到该值则程序退出&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;timeout&lt;/td>
+&lt;td>&lt;code>--timeout&lt;/code>&lt;/td>
 &lt;td>60&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>插入结果返回的超时时间（秒）&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;shutdown-timeout&lt;/td>
+&lt;td>&lt;code>--shutdown-timeout&lt;/code>&lt;/td>
 &lt;td>10&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>多线程停止的等待时间（秒）&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;retry-times&lt;/td>
+&lt;td>&lt;code>--retry-times&lt;/code>&lt;/td>
 &lt;td>0&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>发生特定异常时的重试次数&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;retry-interval&lt;/td>
+&lt;td>&lt;code>--retry-interval&lt;/code>&lt;/td>
 &lt;td>10&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>重试之前的间隔时间（秒）&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;check-vertex&lt;/td>
+&lt;td>&lt;code>--check-vertex&lt;/code>&lt;/td>
 &lt;td>false&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>插入边时是否检查边所连接的顶点是否存在&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;print-progress&lt;/td>
+&lt;td>&lt;code>--print-progress&lt;/code>&lt;/td>
 &lt;td>true&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>是否在控制台实时打印导入条数&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;dry-run&lt;/td>
+&lt;td>&lt;code>--dry-run&lt;/code>&lt;/td>
 &lt;td>false&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>打开该模式，只解析不导入，通常用于测试&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&amp;ndash;help&lt;/td>
+&lt;td>&lt;code>--help&lt;/code>&lt;/td>
 &lt;td>false&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>打印帮助信息&lt;/td>
