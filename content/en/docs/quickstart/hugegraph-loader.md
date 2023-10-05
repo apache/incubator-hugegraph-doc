@@ -635,6 +635,23 @@ schema: nullable, the default value is the same as the username
 
 schema: required
 
+###### 3.3.2.4 Kafka input source
+
+- type: input source type, `kafka` or `KAFKA`, required;
+- bootstrap_server: set the list of kafka bootstrap servers;
+- topic: the topic to subscribe to;
+- group: group of Kafka consumers;
+- from_beginning: set whether to read from the beginning;
+- format: format of the local file, options are CSV, TEXT and JSON, must be uppercase, required;
+- header: column name of each column of the file, if not specified, the first line of the data file will be used as the header; when the file itself has a header and the header is specified, the first line of the file will be treated as an ordinary data line; JSON files do not need to specify the header, optional;
+- delimiter: delimiter of the file line, default is comma "," as delimiter, JSON files do not need to specify, optional;
+- charset: encoding charset of the file, default is UTF-8, optional;
+- date_format: customized date format, default value is yyyy-MM-dd HH:mm:ss, optional; if the date is presented in the form of timestamp, this item must be written as timestamp (fixed);
+- extra_date_formats: a customized list of other date formats, empty by default, optional; each item in the list is an alternate date format to the date_format specified date format;
+- time_zone: set which time zone the date data is in, default is GMT+8, optional;
+- skipped_line: the line you want to skip, composite structure, currently can only configure the regular expression of the line to be skipped, described by the child node regex, the default is not to skip any line, optional;
+- early_stop: the record pulled from Kafka broker at a certain time is empty, stop the task, default is false, only for debugging, optional;
+
 ##### 3.3.1 Vertex and Edge Mapping
 
 The nodes of vertex and edge mapping (a key in the JSON file) have a lot of the same parts. The same parts are introduced first, and then the unique nodes of `vertex map` and `edge map` are introduced respectively.
@@ -717,13 +734,13 @@ The import process is controlled by commands submitted by the user, and the user
 
 ##### 3.4.1 Parameter description
 
-| Parameter               | Default value | Required or not | Description                                                                                                                                                                               |
-|-------------------------|---------------|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `-f` or `--file`            |               | Y               | path to configure script                                                                                                                                                                  |
-| `-g` or `--graph`           |               | Y               | graph space name                                                                                                                                                                          |
-| `-s` or `--schema`          |               | Y               | schema file path                                                                                                                                                                          |
-| `-h` or `--host`            | localhost     |                 | address of HugeGraphServer                                                                                                                                                                |
-| `-p` or `--port`            | 8080          |                 | port number of HugeGraphServer                                                                                                                                                            |
+| Parameter                 | Default value | Required or not | Description                                                                                                                                                                               |
+|---------------------------|---------------|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `-f` or `--file`          |               | Y               | path to configure script                                                                                                                                                                  |
+| `-g` or `--graph`         |               | Y               | graph space name                                                                                                                                                                          |
+| `-s` or `--schema`        |               | Y               | schema file path                                                                                                                                                                          |
+| `-h` or `--host`          | localhost     |                 | address of HugeGraphServer                                                                                                                                                                |
+| `-p` or `--port`          | 8080          |                 | port number of HugeGraphServer                                                                                                                                                            |
 | `--username`              | null          |                 | When HugeGraphServer enables permission authentication, the username of the current graph                                                                                                 |
 | `--token`                 | null          |                 | When HugeGraphServer has enabled authorization authentication, the token of the current graph                                                                                             |
 | `--protocol`              | http          |                 | Protocol for sending requests to the server, optional http or https                                                                                                                       |
