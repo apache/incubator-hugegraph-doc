@@ -989,6 +989,23 @@ Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-d
 &lt;/tbody>
 &lt;/table>
 &lt;p>schema: required&lt;/p>
+&lt;h6 id="3324-kafka-input-source">3.3.2.4 Kafka input source&lt;/h6>
+&lt;ul>
+&lt;li>type: input source type, &lt;code>kafka&lt;/code> or &lt;code>KAFKA&lt;/code>, required;&lt;/li>
+&lt;li>bootstrap_server: set the list of kafka bootstrap servers;&lt;/li>
+&lt;li>topic: the topic to subscribe to;&lt;/li>
+&lt;li>group: group of Kafka consumers;&lt;/li>
+&lt;li>from_beginning: set whether to read from the beginning;&lt;/li>
+&lt;li>format: format of the local file, options are CSV, TEXT and JSON, must be uppercase, required;&lt;/li>
+&lt;li>header: column name of each column of the file, if not specified, the first line of the data file will be used as the header; when the file itself has a header and the header is specified, the first line of the file will be treated as an ordinary data line; JSON files do not need to specify the header, optional;&lt;/li>
+&lt;li>delimiter: delimiter of the file line, default is comma &amp;ldquo;,&amp;rdquo; as delimiter, JSON files do not need to specify, optional;&lt;/li>
+&lt;li>charset: encoding charset of the file, default is UTF-8, optional;&lt;/li>
+&lt;li>date_format: customized date format, default value is yyyy-MM-dd HH:mm:ss, optional; if the date is presented in the form of timestamp, this item must be written as timestamp (fixed);&lt;/li>
+&lt;li>extra_date_formats: a customized list of other date formats, empty by default, optional; each item in the list is an alternate date format to the date_format specified date format;&lt;/li>
+&lt;li>time_zone: set which time zone the date data is in, default is GMT+8, optional;&lt;/li>
+&lt;li>skipped_line: the line you want to skip, composite structure, currently can only configure the regular expression of the line to be skipped, described by the child node regex, the default is not to skip any line, optional;&lt;/li>
+&lt;li>early_stop: the record pulled from Kafka broker at a certain time is empty, stop the task, default is false, only for debugging, optional;&lt;/li>
+&lt;/ul>
 &lt;h5 id="331-vertex-and-edge-mapping">3.3.1 Vertex and Edge Mapping&lt;/h5>
 &lt;p>The nodes of vertex and edge mapping (a key in the JSON file) have a lot of the same parts. The same parts are introduced first, and then the unique nodes of &lt;code>vertex map&lt;/code> and &lt;code>edge map&lt;/code> are introduced respectively.&lt;/p>
 &lt;p>&lt;strong>Nodes of the same section&lt;/strong>&lt;/p>
@@ -1252,7 +1269,7 @@ Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-d
 &lt;p>Usually, the Loader task takes a long time to execute. If the import interrupt process exits for some reason, and next time you want to continue the import from the interrupted point, this is the scenario of using breakpoint continuation.&lt;/p>
 &lt;p>The user sets the command line parameter &amp;ndash;incremental-mode to true to open the breakpoint resume mode. The key to breakpoint continuation lies in the progress file. When the import process exits, the import progress at the time of exit will be recorded.
 Recorded in the progress file, the progress file is located in the &lt;code>${struct}&lt;/code> directory, the file name is like &lt;code>load-progress ${date}&lt;/code>, ${struct} is the prefix of the mapping file, and ${date} is the start of the import
-moment. For example: for an import task started at &lt;code>2019-10-10 12:30:30&lt;/code>, the mapping file used is &lt;code>struct-example.json&lt;/code>, then the path of the progress file is the same as struct-example.json
+moment. For example, for an import task started at &lt;code>2019-10-10 12:30:30&lt;/code>, the mapping file used is &lt;code>struct-example.json&lt;/code>, then the path of the progress file is the same as struct-example.json
 Sibling &lt;code>struct-example/load-progress 2019-10-10 12:30:30&lt;/code>.&lt;/p>
 &lt;blockquote>
 &lt;p>Note: The generation of progress files is independent of whether &amp;ndash;incremental-mode is turned on or not, and a progress file is generated at the end of each import.&lt;/p>
@@ -1279,7 +1296,7 @@ They are stored in the &lt;code>${struct}/current&lt;/code> directory. For examp
 &lt;p>Run bin/hugegraph-loader and pass in parameters&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/hugegraph-loader -g &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>GRAPH_NAME&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span> -f &lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">INPUT_DESC_FILE&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span> -s &lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">SCHEMA_FILE&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span> -h &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>HOST&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span> -p &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>PORT&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4-complete-example">4 Complete example&lt;/h3>
-&lt;p>Given below is an example in the example directory of the hugegraph-loader package.(&lt;a href="https://github.com/apache/hugegraph-toolchain/tree/master/hugegraph-loader/assembly/static/example/file">GitHub address&lt;/a>)&lt;/p>
+&lt;p>Given below is an example in the example directory of the hugegraph-loader package. (&lt;a href="https://github.com/apache/hugegraph-toolchain/tree/master/hugegraph-loader/assembly/static/example/file">GitHub address&lt;/a>)&lt;/p>
 &lt;h4 id="41-prepare-data">4.1 Prepare data&lt;/h4>
 &lt;p>Vertex file: &lt;code>example/file/vertex_person.csv&lt;/code>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>marko,29,Beijing

@@ -74,7 +74,7 @@
 &lt;p>如果需要外部访问 HugeGraphServer，请修改 &lt;code>rest-server.properties&lt;/code> 的 &lt;code>restserver.url&lt;/code> 配置项（默认为 &lt;code>http://127.0.0.1:8080&lt;/code>），修改成机器名或 IP 地址。&lt;/p>
 &lt;p>由于各种后端所需的配置（hugegraph.properties）及启动步骤略有不同，下面逐一对各后端的配置及启动做介绍。&lt;/p>
 &lt;h4 id="51-memory">5.1 Memory&lt;/h4>
-&lt;p>修改 hugegraph.properties&lt;/p>
+&lt;p>修改 &lt;code>hugegraph.properties&lt;/code>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=memory
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=text
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
@@ -84,7 +84,7 @@
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer...
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>http://127.0.0.1:8080/graphs&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>....OK
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>提示的 url 与 rest-server.properties 中配置的 restserver.url 一致&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>提示的 url 与 &lt;code>rest-server.properties&lt;/code> 中配置的 &lt;code>restserver.url&lt;/code> 一致&lt;/p>
 &lt;h4 id="52-rocksdb">5.2 RocksDB&lt;/h4>
 &lt;blockquote>
 &lt;p>RocksDB 是一个嵌入式的数据库，不需要手动安装部署，要求 GCC 版本 &amp;gt;= 4.3.0（GLIBCXX_3.4.10），如不满足，需要提前升级 GCC&lt;/p>
@@ -312,9 +312,9 @@
 &lt;h3 id="9-在启动-server-时创建示例图">9 在启动 Server 时创建示例图&lt;/h3>
 &lt;p>有三种方式可以在启动 Server 时创建示例图&lt;/p>
 &lt;ul>
-&lt;li>方式一: 直接修改配置文件&lt;/li>
-&lt;li>方式二: 启动脚本使用命令行参数&lt;/li>
-&lt;li>方式三: 使用docker或docker-compose添加环境变量&lt;/li>
+&lt;li>方式一：直接修改配置文件&lt;/li>
+&lt;li>方式二：启动脚本使用命令行参数&lt;/li>
+&lt;li>方式三：使用 docker 或 docker-compose 添加环境变量&lt;/li>
 &lt;/ul>
 &lt;h4 id="91-直接修改配置文件">9.1 直接修改配置文件&lt;/h4>
 &lt;p>修改 &lt;code>conf/gremlin-server.yaml&lt;/code>，将 &lt;code>empty-sample.groovy&lt;/code> 修改为 &lt;code>example.groovy&lt;/code>：&lt;/p>
@@ -353,7 +353,7 @@
 &lt;p>使用 IntelliJ IDEA 在启动 Server 时创建示例图的流程类似，不再赘述。&lt;/p>
 &lt;/blockquote>
 &lt;h4 id="92-启动脚本时指定参数">9.2 启动脚本时指定参数&lt;/h4>
-&lt;p>在脚本启动时候携带 &lt;code>-p true&lt;/code> 参数, 表示preload, 即创建示例图&lt;/p>
+&lt;p>在脚本启动时候携带 &lt;code>-p true&lt;/code>参数，表示 preload, 即创建示例图图&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh -p true
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer in daemon mode...
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)......OK
@@ -362,8 +362,8 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertices&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">[{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;2:lop&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;software&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;lop&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;lang&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;java&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;price&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">328&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:josh&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;josh&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">32&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:marko&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;marko&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">29&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:peter&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;peter&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">35&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Shanghai&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:vadas&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vadas&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">27&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Hongkong&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;2:ripple&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;software&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;ripple&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;lang&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;java&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;price&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">199&lt;/span>&lt;span style="color:#000;font-weight:bold">}}]}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>代表创建示例图成功。&lt;/p>
-&lt;h4 id="93-使用docker启动">9.3 使用docker启动&lt;/h4>
-&lt;p>在docker启动的时候设置环境变量 &lt;code>PRELOAD=true&lt;/code>, 从而实现启动脚本的时候加载数据。&lt;/p>
+&lt;h4 id="93-使用-docker-启动">9.3 使用 docker 启动&lt;/h4>
+&lt;p>在 docker 启动的时候设置环境变量 &lt;code>PRELOAD=true&lt;/code>, 从而实现启动脚本的时候加载数据。&lt;/p>
 &lt;ol>
 &lt;li>
 &lt;p>使用&lt;code>docker run&lt;/code>&lt;/p>
@@ -389,7 +389,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertices&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">[{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;2:lop&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;software&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;lop&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;lang&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;java&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;price&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">328&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:josh&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;josh&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">32&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:marko&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;marko&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">29&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:peter&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;peter&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">35&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Shanghai&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:vadas&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vadas&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">27&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Hongkong&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;2:ripple&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;software&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;ripple&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;lang&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;java&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;price&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">199&lt;/span>&lt;span style="color:#000;font-weight:bold">}}]}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>代表创建示例图成功。&lt;/p></description></item><item><title>Docs: HugeGraph-Loader Quick Start</title><link>/cn/docs/quickstart/hugegraph-loader/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-loader/</guid><description>
-&lt;h3 id="1-hugegraph-loader概述">1 HugeGraph-Loader概述&lt;/h3>
+&lt;h3 id="1-hugegraph-loader-概述">1 HugeGraph-Loader 概述&lt;/h3>
 &lt;p>HugeGraph-Loader 是 HugeGraph 的数据导入组件，能够将多种数据源的数据转化为图的顶点和边并批量导入到图数据库中。&lt;/p>
 &lt;p>目前支持的数据源包括：&lt;/p>
 &lt;ul>
@@ -409,7 +409,7 @@
 &lt;li>克隆源码编译安装&lt;/li>
 &lt;/ul>
 &lt;h4 id="21-下载已编译的压缩包">2.1 下载已编译的压缩包&lt;/h4>
-&lt;p>下载最新版本的 HugeGraph-Toolchain Release 包, 里面包含了 loader + tool + hubble 全套工具, 如果你已经下载, 可跳过重复步骤&lt;/p>
+&lt;p>下载最新版本的 HugeGraph-Toolchain Release 包，里面包含了 loader + tool + hubble 全套工具，如果你已经下载，可跳过重复步骤&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph*.tar.gz
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="22-克隆源码编译安装">2.2 克隆源码编译安装&lt;/h4>
@@ -419,8 +419,8 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 2. get from direct (e.g. here is 1.0.0, please choose the latest version)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0-src.tar.gz
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>由于Oracle ojdbc license的限制，需要手动安装ojdbc到本地maven仓库。
-访问&lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html">Oracle jdbc 下载&lt;/a> 页面。选择Oracle Database 12c Release 2 (12.2.0.1) drivers，如下图所示。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>由于 Oracle ojdbc license 的限制，需要手动安装 ojdbc 到本地 maven 仓库。
+访问&lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html">Oracle jdbc 下载&lt;/a> 页面。选择 Oracle Database 12c Release 2 (12.2.0.1) drivers，如下图所示。&lt;/p>
 &lt;div style="text-align: center;">
 &lt;img src="/docs/images/oracle-download.png" alt="image">
 &lt;/div>
@@ -428,9 +428,9 @@
 &lt;div style="text-align: center;">
 &lt;img src="/docs/images/ojdbc8.png" alt="image">
 &lt;/div>
-&lt;p>把ojdbc8安装到本地maven仓库，进入&lt;code>ojdbc8.jar&lt;/code>所在目录，执行以下命令。&lt;/p>
+&lt;p>把 ojdbc8 安装到本地 maven 仓库，进入&lt;code>ojdbc8.jar&lt;/code>所在目录，执行以下命令。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>编译生成 tar 包:&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>编译生成 tar 包：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-loader
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn clean package -DskipTests
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-使用流程">3 使用流程&lt;/h3>
@@ -444,7 +444,7 @@
 &lt;h4 id="31-编写图模型">3.1 编写图模型&lt;/h4>
 &lt;p>这一步是建模的过程，用户需要对自己已有的数据和想要创建的图模型有一个清晰的构想，然后编写 schema 建立图模型。&lt;/p>
 &lt;p>比如想创建一个拥有两类顶点及两类边的图，顶点是&amp;quot;人&amp;quot;和&amp;quot;软件&amp;quot;，边是&amp;quot;人认识人&amp;quot;和&amp;quot;人创造软件&amp;quot;，并且这些顶点和边都带有一些属性，比如顶点&amp;quot;人&amp;quot;有：&amp;ldquo;姓名&amp;rdquo;、&amp;ldquo;年龄&amp;quot;等属性，
-&amp;ldquo;软件&amp;quot;有：&amp;ldquo;名字&amp;rdquo;、&amp;ldquo;售卖价格&amp;quot;等属性；边&amp;quot;认识&amp;quot;有: &amp;ldquo;日期&amp;quot;属性等。&lt;/p>
+&amp;ldquo;软件&amp;quot;有：&amp;ldquo;名字&amp;rdquo;、&amp;ldquo;售卖价格&amp;quot;等属性；边&amp;quot;认识&amp;quot;有：&amp;ldquo;日期&amp;quot;属性等。&lt;/p>
 &lt;div style="text-align: center;">
 &lt;img src="/docs/images/demo-graph-model.png" alt="image">
 &lt;p>示例图模型&lt;/p>
@@ -545,7 +545,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="33-编写数据源映射文件">3.3 编写数据源映射文件&lt;/h4>
 &lt;h5 id="331-映射文件概述">3.3.1 映射文件概述&lt;/h5>
 &lt;p>输入源的映射文件用于描述如何将输入源数据与图的顶点类型/边类型建立映射关系，以&lt;code>JSON&lt;/code>格式组织，由多个映射块组成，其中每一个映射块都负责将一个输入源映射为顶点和边。&lt;/p>
-&lt;p>具体而言，每个映射块包含&lt;strong>一个输入源&lt;/strong>和多个&lt;strong>顶点映射&lt;/strong>与&lt;strong>边映射&lt;/strong>块，输入源块对应上面介绍的&lt;code>本地磁盘文件或目录&lt;/code>、&lt;code>HDFS 文件或目录&lt;/code>和&lt;code>关系型数据库&lt;/code>，负责描述数据源的基本信息，比如数据在哪，是什么格式的，分隔符是什么等。顶点映射/边映射与该输入源绑定，可以选择输入源的哪些列，哪些列作为id、哪些列作为属性，以及每一列映射成什么属性，列的值映射成属性的什么值等等。&lt;/p>
+&lt;p>具体而言，每个映射块包含&lt;strong>一个输入源&lt;/strong>和多个&lt;strong>顶点映射&lt;/strong>与&lt;strong>边映射&lt;/strong>块，输入源块对应上面介绍的&lt;code>本地磁盘文件或目录&lt;/code>、&lt;code>HDFS 文件或目录&lt;/code>和&lt;code>关系型数据库&lt;/code>，负责描述数据源的基本信息，比如数据在哪，是什么格式的，分隔符是什么等。顶点映射/边映射与该输入源绑定，可以选择输入源的哪些列，哪些列作为 id、哪些列作为属性，以及每一列映射成什么属性，列的值映射成属性的什么值等等。&lt;/p>
 &lt;p>以最通俗的话讲，每一个映射块描述了：要导入的文件在哪，文件的每一行要作为哪一类顶点/边，文件的哪些列是需要导入的，以及这些列对应顶点/边的什么属性等。&lt;/p>
 &lt;blockquote>
 &lt;p>注意：0.11.0 版本以前的映射文件与 0.11.0 以后的格式变化较大，为表述方便，下面称 0.11.0 以前的映射文件（格式）为 1.0 版本，0.11.0 以后的为 2.0 版本。并且若无特殊说明，“映射文件”表示的是 2.0 版本的。&lt;/p>
@@ -846,7 +846,7 @@
 &lt;li>time_zone: 设置日期数据是处于哪个时区的，默认值为&lt;code>GMT+8&lt;/code>，选填；&lt;/li>
 &lt;li>skipped_line: 想跳过的行，复合结构，目前只能配置要跳过的行的正则表达式，用子节点&lt;code>regex&lt;/code>描述，默认不跳过任何行，选填；&lt;/li>
 &lt;li>compression: 文件的压缩格式，可选值为 NONE、GZIP、BZ2、XZ、LZMA、SNAPPY_RAW、SNAPPY_FRAMED、Z、DEFLATE、LZ4_BLOCK、LZ4_FRAMED、ORC 和 PARQUET，默认为 NONE，表示非压缩文件，选填；&lt;/li>
-&lt;li>list_format: 当文件(非 JSON )的某列是集合结构时（对应图中的 PropertyKey 的 Cardinality 为 Set 或 List），可以用此项设置该列的起始符、分隔符、结束符，复合结构:
+&lt;li>list_format: 当文件 (非 JSON ) 的某列是集合结构时（对应图中的 PropertyKey 的 Cardinality 为 Set 或 List），可以用此项设置该列的起始符、分隔符、结束符，复合结构：
 &lt;ul>
 &lt;li>start_symbol: 集合结构列的起始符 (默认值是 &lt;code>[&lt;/code>, JSON 格式目前不支持指定)&lt;/li>
 &lt;li>elem_delimiter: 集合结构列的分隔符 (默认值是 &lt;code>|&lt;/code>, JSON 格式目前只支持原生&lt;code>,&lt;/code>分隔)&lt;/li>
@@ -901,7 +901,7 @@
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;p>schema: 可空，若填写必须与database的值一样&lt;/p>
+&lt;p>schema: 可空，若填写必须与 database 的值一样&lt;/p>
 &lt;p>&lt;strong>POSTGRESQL&lt;/strong>&lt;/p>
 &lt;table>
 &lt;thead>
@@ -974,6 +974,23 @@
 &lt;/tbody>
 &lt;/table>
 &lt;p>schema: 必填&lt;/p>
+&lt;h6 id="3324-kafka-输入源">3.3.2.4 Kafka 输入源&lt;/h6>
+&lt;ul>
+&lt;li>type：输入源类型，必须填 &lt;code>kafka&lt;/code> 或 &lt;code>KAFKA&lt;/code>，必填；&lt;/li>
+&lt;li>bootstrap_server：设置 kafka bootstrap server 列表；&lt;/li>
+&lt;li>topic：订阅的 topic；&lt;/li>
+&lt;li>group：Kafka 消费者组；&lt;/li>
+&lt;li>from_beginning：设置是否从头开始读取；&lt;/li>
+&lt;li>format：本地文件的格式，可选值为 CSV、TEXT 及 JSON，必须大写，必填；&lt;/li>
+&lt;li>header：文件各列的列名，如不指定则会以数据文件第一行作为 header；当文件本身有标题且又指定了 header，文件的第一行会被当作普通的数据行；JSON 文件不需要指定 header，选填；&lt;/li>
+&lt;li>delimiter：文件行的列分隔符，默认以逗号&amp;rdquo;,&amp;ldquo;作为分隔符，JSON 文件不需要指定，选填；&lt;/li>
+&lt;li>charset：文件的编码字符集，默认 UTF-8，选填；&lt;/li>
+&lt;li>date_format：自定义的日期格式，默认值为 yyyy-MM-dd HH:mm:ss，选填；如果日期是以时间戳的形式呈现的，此项须写为 timestamp（固定写法）；&lt;/li>
+&lt;li>extra_date_formats：自定义的其他日期格式列表，默认为空，选填；列表中每一项都是一个 date_format 指定日期格式的备用日期格式；&lt;/li>
+&lt;li>time_zone：置日期数据是处于哪个时区的，默认值为 GMT+8，选填；&lt;/li>
+&lt;li>skipped_line：想跳过的行，复合结构，目前只能配置要跳过的行的正则表达式，用子节点 regex 描述，默认不跳过任何行，选填；&lt;/li>
+&lt;li>early_stop：某次从 Kafka broker 拉取的记录为空，停止任务，默认为 false，仅用于调试，选填；&lt;/li>
+&lt;/ul>
 &lt;h5 id="331-顶点和边映射">3.3.1 顶点和边映射&lt;/h5>
 &lt;p>顶点和边映射的节点（JSON 文件中的一个 key）有很多相同的部分，下面先介绍相同部分，再分别介绍&lt;code>顶点映射&lt;/code>和&lt;code>边映射&lt;/code>的特有节点。&lt;/p>
 &lt;p>&lt;strong>相同部分的节点&lt;/strong>&lt;/p>
@@ -987,19 +1004,19 @@
 &lt;li>update_strategies: 如果数据需要按特定方式批量&lt;strong>更新&lt;/strong>时可以对每个属性指定具体的更新策略 (具体见下)，选填；&lt;/li>
 &lt;li>unfold: 是否将列展开，展开的每一列都会与其他列一起组成一行，相当于是展开成了多行；比如文件的某一列（id 列）的值是&lt;code>[1,2,3]&lt;/code>，其他列的值是&lt;code>18,Beijing&lt;/code>，当设置了 unfold 之后，这一行就会变成 3 行，分别是：&lt;code>1,18,Beijing&lt;/code>，&lt;code>2,18,Beijing&lt;/code>和&lt;code>3,18,Beijing&lt;/code>。需要注意的是此项只会展开被选作为 id 的列。默认 false，选填；&lt;/li>
 &lt;/ul>
-&lt;p>&lt;strong>更新策略&lt;/strong>支持8种 : (需要全大写)&lt;/p>
+&lt;p>&lt;strong>更新策略&lt;/strong>支持 8 种 : (需要全大写)&lt;/p>
 &lt;ol>
 &lt;li>数值累加 : &lt;code>SUM&lt;/code>&lt;/li>
 &lt;li>两个数字/日期取更大的: &lt;code>BIGGER&lt;/code>&lt;/li>
 &lt;li>两个数字/日期取更小: &lt;code>SMALLER&lt;/code>&lt;/li>
-&lt;li>&lt;strong>Set&lt;/strong>属性取并集: &lt;code>UNION&lt;/code>&lt;/li>
-&lt;li>&lt;strong>Set&lt;/strong>属性取交集: &lt;code>INTERSECTION&lt;/code>&lt;/li>
-&lt;li>&lt;strong>List&lt;/strong>属性追加元素: &lt;code>APPEND&lt;/code>&lt;/li>
-&lt;li>&lt;strong>List/Set&lt;/strong>属性删除元素: &lt;code>ELIMINATE&lt;/code>&lt;/li>
-&lt;li>覆盖已有属性: &lt;code>OVERRIDE&lt;/code>&lt;/li>
+&lt;li>&lt;strong>Set&lt;/strong>属性取并集：&lt;code>UNION&lt;/code>&lt;/li>
+&lt;li>&lt;strong>Set&lt;/strong>属性取交集：&lt;code>INTERSECTION&lt;/code>&lt;/li>
+&lt;li>&lt;strong>List&lt;/strong>属性追加元素：&lt;code>APPEND&lt;/code>&lt;/li>
+&lt;li>&lt;strong>List/Set&lt;/strong>属性删除元素：&lt;code>ELIMINATE&lt;/code>&lt;/li>
+&lt;li>覆盖已有属性：&lt;code>OVERRIDE&lt;/code>&lt;/li>
 &lt;/ol>
-&lt;p>&lt;strong>注意:&lt;/strong> 如果新导入的属性值为空, 会采用已有的旧数据而不会采用空值, 效果可以参考如下示例&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// JSON文件中以如下方式指定更新策略
+&lt;p>&lt;strong>注意：&lt;/strong> 如果新导入的属性值为空，会采用已有的旧数据而不会采用空值，效果可以参考如下示例&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// JSON 文件中以如下方式指定更新策略
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;vertices&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
@@ -1018,7 +1035,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// 1.写入一行带OVERRIDE更新策略的数据 (这里null代表空)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// 1.写入一行带 OVERRIDE 更新策略的数据 (这里 null 代表空)
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#a40000">&amp;#39;a&lt;/span> &lt;span style="color:#a40000">b&lt;/span> &lt;span style="color:#204a87;font-weight:bold">null&lt;/span> &lt;span style="color:#204a87;font-weight:bold">null&lt;/span>&lt;span style="color:#a40000">&amp;#39;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// 2.再写一行
@@ -1027,7 +1044,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// 3.最后可以得到
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#a40000">&amp;#39;a&lt;/span> &lt;span style="color:#a40000">b&lt;/span> &lt;span style="color:#a40000">c&lt;/span> &lt;span style="color:#a40000">d&amp;#39;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// 如果没有更新策略, 则会得到
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// 如果没有更新策略，则会得到
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#a40000">&amp;#39;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">null&lt;/span> &lt;span style="color:#204a87;font-weight:bold">null&lt;/span> &lt;span style="color:#a40000">c&lt;/span> &lt;span style="color:#a40000">d&amp;#39;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
 &lt;p>&lt;strong>注意&lt;/strong> : 采用了批量更新的策略后, 磁盘读请求数会大幅上升, 导入速度相比纯写覆盖会慢数倍 (此时HDD磁盘&lt;a href="https://en.wikipedia.org/wiki/IOPS">IOPS&lt;/a>会成为瓶颈, 建议采用SSD以保证速度)&lt;/p>
@@ -1073,7 +1090,7 @@
 &lt;td>&lt;code>-s&lt;/code> 或 &lt;code>--schema&lt;/code>&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Y&lt;/td>
-&lt;td>schema文件路径&lt;/td>
+&lt;td>schema 文件路径&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&lt;code>-h&lt;/code> 或 &lt;code>--host&lt;/code>&lt;/td>
@@ -1145,7 +1162,7 @@
 &lt;td>&lt;code>--batch-insert-threads&lt;/code>&lt;/td>
 &lt;td>CPUs&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>批量插入线程池大小 (CPUs是当前OS可用&lt;strong>逻辑核&lt;/strong>个数)&lt;/td>
+&lt;td>批量插入线程池大小 (CPUs 是当前 OS 可用可用&lt;strong>逻辑核&lt;/strong>个数)&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&lt;code>--single-insert-threads&lt;/code>&lt;/td>
@@ -1286,8 +1303,8 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{&amp;#34;aname&amp;#34;: &amp;#34;josh&amp;#34;, &amp;#34;bname&amp;#34;: &amp;#34;lop&amp;#34;, &amp;#34;date&amp;#34;: &amp;#34;20091111&amp;#34;, &amp;#34;weight&amp;#34;: 0.4}
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{&amp;#34;aname&amp;#34;: &amp;#34;josh&amp;#34;, &amp;#34;bname&amp;#34;: &amp;#34;ripple&amp;#34;, &amp;#34;date&amp;#34;: &amp;#34;20171210&amp;#34;, &amp;#34;weight&amp;#34;: 1.0}
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{&amp;#34;aname&amp;#34;: &amp;#34;peter&amp;#34;, &amp;#34;bname&amp;#34;: &amp;#34;lop&amp;#34;, &amp;#34;date&amp;#34;: &amp;#34;20170324&amp;#34;, &amp;#34;weight&amp;#34;: 0.2}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="42-编写schema">4.2 编写schema&lt;/h4>
-&lt;p>schema文件：&lt;code>example/file/schema.groovy&lt;/code>&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="42-编写-schema">4.2 编写 schema&lt;/h4>
+&lt;p>schema 文件：&lt;code>example/file/schema.groovy&lt;/code>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asText&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asInt&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asText&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
@@ -1390,13 +1407,13 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> edge insert failure : 0
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="45-使用-spark-loader-导入">4.5 使用 spark-loader 导入&lt;/h4>
 &lt;blockquote>
-&lt;p>Spark 版本：Spark 3+， 其他版本未测试。
-HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
+&lt;p>Spark 版本：Spark 3+，其他版本未测试。
+HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;/blockquote>
 &lt;p>&lt;code>spark-loader&lt;/code> 的参数分为两部分，注意：因二者参数名缩写存在重合部分，请使用参数全称。两种参数之间无需保证先后顺序。&lt;/p>
 &lt;ul>
 &lt;li>hugegraph 参数（参考：&lt;a href="https://hugegraph.apache.org/cn/docs/quickstart/hugegraph-loader/#341-%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E">hugegraph-loader 参数说明&lt;/a> ）&lt;/li>
-&lt;li>Spark 任务提交参数 （参考：&lt;a href="https://spark.apache.org/docs/3.3.0/submitting-applications.html#content">Submitting Applications&lt;/a>）&lt;/li>
+&lt;li>Spark 任务提交参数（参考：&lt;a href="https://spark.apache.org/docs/3.3.0/submitting-applications.html#content">Submitting Applications&lt;/a>）&lt;/li>
 &lt;/ul>
 &lt;p>示例：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sh bin/hugegraph-spark-loader.sh --master yarn &lt;span style="color:#4e9a06">\
@@ -2433,31 +2450,32 @@ HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
 &lt;center>
 &lt;img src="/docs/images/images-hubble/355任务详情.png" alt="image">
 &lt;/center></description></item><item><title>Docs: HugeGraph-Client Quick Start</title><link>/cn/docs/quickstart/hugegraph-client/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-client/</guid><description>
-&lt;h3 id="1-hugegraph-client概述">1 HugeGraph-Client概述&lt;/h3>
-&lt;p>HugeGraph-Client向HugeGraph-Server发出HTTP请求，获取并解析Server的执行结果。目前仅提供了Java版，用户可以使用HugeGraph-Client编写Java代码操作HugeGraph，比如元数据和图数据的增删改查，或者执行gremlin语句。&lt;/p>
+&lt;h3 id="1-hugegraph-client-概述">1 HugeGraph-Client 概述&lt;/h3>
+&lt;p>HugeGraph-Client 向 HugeGraph-Server 发出 HTTP 请求，获取并解析 Server 的执行结果。目前仅提供了 Java 版，用户可以使用 HugeGraph-Client 编写 Java 代码操作 HugeGraph，比如元数据和图数据的增删改查，或者执行 gremlin 语句。&lt;/p>
 &lt;h3 id="2-环境要求">2 环境要求&lt;/h3>
 &lt;ul>
 &lt;li>java 11 (兼容 java 8)&lt;/li>
 &lt;li>maven 3.5+&lt;/li>
 &lt;/ul>
 &lt;h3 id="3-使用流程">3 使用流程&lt;/h3>
-&lt;p>使用HugeGraph-Client的基本步骤如下:&lt;/p>
+&lt;p>使用 HugeGraph-Client 的基本步骤如下：&lt;/p>
 &lt;ul>
-&lt;li>新建Eclipse/ IDEA Maven项目；&lt;/li>
-&lt;li>在pom文件中添加HugeGraph-Client依赖；&lt;/li>
-&lt;li>创建类，调用HugeGraph-Client接口；&lt;/li>
+&lt;li>新建Eclipse/ IDEA Maven 项目；&lt;/li>
+&lt;li>在 pom 文件中添加 HugeGraph-Client 依赖；&lt;/li>
+&lt;li>创建类，调用 HugeGraph-Client 接口；&lt;/li>
 &lt;/ul>
 &lt;p>详细使用过程见下节完整示例。&lt;/p>
 &lt;h3 id="4-完整示例">4 完整示例&lt;/h3>
-&lt;h4 id="41-新建maven工程">4.1 新建Maven工程&lt;/h4>
-&lt;p>可以选择Eclipse或者Intellij Idea创建工程：&lt;/p>
+&lt;h4 id="41-新建-maven-工程">4.1 新建 Maven 工程&lt;/h4>
+&lt;p>可以选择 Eclipse 或者 Intellij Idea 创建工程：&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="http://www.vogella.com/tutorials/EclipseMaven/article.html">Eclipse新建Maven工程&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://vaadin.com/docs/-/part/framework/getting-started/getting-started-idea.html">Intellij Idea 创建maven工程&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://www.vogella.com/tutorials/EclipseMaven/article.html">Eclipse 新建 Maven 工程&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://vaadin.com/docs/-/part/framework/getting-started/getting-started-idea.html">Intellij Idea 创建 maven 工程&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h4 id="42-添加hugegraph-client依赖">4.2 添加hugegraph-client依赖&lt;/h4>
-&lt;p>添加hugegraph-client依赖&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">&amp;lt;dependencies&amp;gt;&lt;/span>
+&lt;h4 id="42-添加-hugegraph-client-依赖">4.2 添加 hugegraph-client 依赖&lt;/h4>
+&lt;p>添加 hugegraph-client 依赖&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">&amp;lt;dependencies&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.hugegraph&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/groupId&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;artifactId&amp;gt;&lt;/span>hugegraph-client&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/artifactId&amp;gt;&lt;/span>
@@ -2749,10 +2767,11 @@ HugeGraph Toolchain 版本: toolchain-1.0.0&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">hugeClient&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">close&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="44-运行example">4.4 运行Example&lt;/h3>
-&lt;p>运行Example之前需要启动Server, 启动过程见&lt;a href="/cn/docs/quickstart/hugegraph-server">HugeGraph-Server Quick Start&lt;/a>&lt;/p>
-&lt;h3 id="45-example示例说明">4.5 Example示例说明&lt;/h3>
-&lt;p>示例说明见&lt;a href="/cn/docs/clients/hugegraph-client">HugeGraph-Client基本API介绍&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph-Computer Quick Start</title><link>/cn/docs/quickstart/hugegraph-computer/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-computer/</guid><description>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="44-运行-example">4.4 运行 Example&lt;/h3>
+&lt;p>运行 Example 之前需要启动 Server,
+启动过程见&lt;a href="/cn/docs/quickstart/hugegraph-server">HugeGraph-Server Quick Start&lt;/a>&lt;/p>
+&lt;h3 id="45-example-示例说明">4.5 Example 示例说明&lt;/h3>
+&lt;p>示例说明见&lt;a href="/cn/docs/clients/hugegraph-client">HugeGraph-Client 基本 API 介绍&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph-Computer Quick Start</title><link>/cn/docs/quickstart/hugegraph-computer/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-computer/</guid><description>
 &lt;h2 id="1-hugegraph-computer-概述">1 HugeGraph-Computer 概述&lt;/h2>
 &lt;p>&lt;a href="https://github.com/apache/incubator-hugegraph-computer">&lt;code>HugeGraph-Computer&lt;/code>&lt;/a> 是分布式图处理系统 (OLAP). 它是 &lt;a href="https://kowshik.github.io/JPregel/pregel_paper.pdf">Pregel&lt;/a> 的一个实现. 它可以运行在 Kubernetes 上。&lt;/p>
 &lt;h3 id="特性">特性&lt;/h3>
