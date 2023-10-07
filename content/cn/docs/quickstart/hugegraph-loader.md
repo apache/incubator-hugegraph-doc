@@ -63,7 +63,7 @@ wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-too
 </div>
 
 
- 把 ojdbc8 安装到本地 maven 仓库，进入``ojdbc8.jar``所在目录，执行以下命令。
+ 把 ojdbc8 安装到本地 maven 仓库，进入`ojdbc8.jar`所在目录，执行以下命令。
 ```
 mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
 ```

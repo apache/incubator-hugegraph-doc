@@ -62,7 +62,7 @@ After opening the link, select "ojdbc8.jar" as shown below.
 </center>
 
 
- Install ojdbc8 to the local maven repository, enter the directory where ``ojdbc8.jar`` is located, and execute the following command.
+ Install ojdbc8 to the local maven repository, enter the directory where `ojdbc8.jar` is located, and execute the following command.
 ```
 mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
 ```
@@ -772,7 +772,7 @@ Usually, the Loader task takes a long time to execute. If the import interrupt p
 
 The user sets the command line parameter --incremental-mode to true to open the breakpoint resume mode. The key to breakpoint continuation lies in the progress file. When the import process exits, the import progress at the time of exit will be recorded.
 Recorded in the progress file, the progress file is located in the `${struct}` directory, the file name is like `load-progress ${date}`, ${struct} is the prefix of the mapping file, and ${date} is the start of the import
-moment. For example: for an import task started at `2019-10-10 12:30:30`, the mapping file used is `struct-example.json`, then the path of the progress file is the same as struct-example.json
+moment. For example, for an import task started at `2019-10-10 12:30:30`, the mapping file used is `struct-example.json`, then the path of the progress file is the same as struct-example.json
 Sibling `struct-example/load-progress 2019-10-10 12:30:30`.
 
 > Note: The generation of progress files is independent of whether --incremental-mode is turned on or not, and a progress file is generated at the end of each import.
@@ -808,7 +808,7 @@ bin/hugegraph-loader -g {GRAPH_NAME} -f ${INPUT_DESC_FILE} -s ${SCHEMA_FILE} -h 
 
 ### 4 Complete example
 
-Given below is an example in the example directory of the hugegraph-loader package.([GitHub address](https://github.com/apache/hugegraph-toolchain/tree/master/hugegraph-loader/assembly/static/example/file))
+Given below is an example in the example directory of the hugegraph-loader package. ([GitHub address](https://github.com/apache/hugegraph-toolchain/tree/master/hugegraph-loader/assembly/static/example/file))
 
 #### 4.1 Prepare data
 
