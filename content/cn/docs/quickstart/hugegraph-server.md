@@ -129,7 +129,7 @@ HugeGraphServer 启动时会连接后端存储并尝试检查后端存储版本�
 
 #### 5.1 Memory
 
-修改 hugegraph.properties
+修改 `hugegraph.properties`
 
 ```properties
 backend=memory
@@ -146,7 +146,7 @@ Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 ```
 
-提示的 url 与 rest-server.properties 中配置的 restserver.url 一致
+提示的 url 与 `rest-server.properties` 中配置的 `restserver.url` 一致
 
 #### 5.2 RocksDB
 
@@ -466,9 +466,9 @@ $bin/stop-hugegraph.sh
 ### 9 在启动 Server 时创建示例图
 
 有三种方式可以在启动 Server 时创建示例图
-- 方式一: 直接修改配置文件
-- 方式二: 启动脚本使用命令行参数
-- 方式三: 使用docker或docker-compose添加环境变量
+- 方式一：直接修改配置文件
+- 方式二：启动脚本使用命令行参数
+- 方式三：使用 docker 或 docker-compose 添加环境变量
 
 #### 9.1 直接修改配置文件
 
@@ -530,7 +530,7 @@ schema = graph.schema()
 
 #### 9.2 启动脚本时指定参数
 
-在脚本启动时候携带 `-p true` 参数, 表示preload, 即创建示例图
+在脚本启动时候携带 `-p true`参数，表示 preload, 即创建示例图图
 
 ```
 bin/start-hugegraph.sh -p true
@@ -549,9 +549,9 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)......OK
 代表创建示例图成功。
 
 
-#### 9.3 使用docker启动
+#### 9.3 使用 docker 启动
 
-在docker启动的时候设置环境变量 `PRELOAD=true`, 从而实现启动脚本的时候加载数据。
+在 docker 启动的时候设置环境变量 `PRELOAD=true`, 从而实现启动脚本的时候加载数据。
 
 1. 使用`docker run`
 
