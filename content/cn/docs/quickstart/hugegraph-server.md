@@ -140,7 +140,7 @@ bin/hugegraph deploy -v {hugegraph-version} -p {install-path} [-u {download-path
 
 #### 5.1 使用docker
 
-在 [3.1 使用 Docker 容器](#31-使用-docker-容器-推荐) 中, 我们已经介绍了 如何使用 `docker` 部署 `hugegraph-server`, 我们还可以设置参数在sever启动的时候加载样例图
+在 [3.1 使用 Docker 容器](#31-使用-docker-容器-推荐)中, 我们已经介绍了 如何使用 `docker` 部署 `hugegraph-server`, 我们还可以设置参数在sever启动的时候加载样例图
 
 ##### 5.1.1 启动server的时候创建示例图
 
@@ -199,7 +199,7 @@ HugeGraphServer 启动时会连接后端存储并尝试检查后端存储版本�
 
 > RocksDB 是一个嵌入式的数据库，不需要手动安装部署，要求 GCC 版本 >= 4.3.0（GLIBCXX_3.4.10），如不满足，需要提前升级 GCC
 
-修改 hugegraph.properties
+修改 `hugegraph.properties`
 
 ```properties
 backend=rocksdb
@@ -223,7 +223,7 @@ Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 ```
 
-</details>
+提示的 url 与 `rest-server.properties` 中配置的 `restserver.url` 一致
 
 ##### 5.2.2 HBase
 
@@ -582,3 +582,5 @@ $bin/stop-hugegraph.sh
 ### 8 使用 IntelliJ IDEA 调试 Server
 
 请参考[在 IDEA 中配置 Server 开发环境](/docs/contribution-guidelines/hugegraph-server-idea-setup)
+  
+\

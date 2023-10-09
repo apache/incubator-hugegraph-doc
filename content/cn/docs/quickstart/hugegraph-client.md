@@ -4,9 +4,9 @@ linkTitle: "Develop with HugeGraph-Client"
 weight: 4
 ---
 
-### 1 HugeGraph-Client概述
+### 1 HugeGraph-Client 概述
 
-HugeGraph-Client向HugeGraph-Server发出HTTP请求，获取并解析Server的执行结果。目前仅提供了Java版，用户可以使用HugeGraph-Client编写Java代码操作HugeGraph，比如元数据和图数据的增删改查，或者执行gremlin语句。
+HugeGraph-Client 向 HugeGraph-Server 发出 HTTP 请求，获取并解析 Server 的执行结果。目前仅提供了 Java 版，用户可以使用 HugeGraph-Client 编写 Java 代码操作 HugeGraph，比如元数据和图数据的增删改查，或者执行 gremlin 语句。
 
 ### 2 环境要求
 
@@ -15,34 +15,35 @@ HugeGraph-Client向HugeGraph-Server发出HTTP请求，获取并解析Server的�
 
 ### 3 使用流程
 
-使用HugeGraph-Client的基本步骤如下:
+使用 HugeGraph-Client 的基本步骤如下：
 
-- 新建Eclipse/ IDEA Maven项目；
-- 在pom文件中添加HugeGraph-Client依赖；
-- 创建类，调用HugeGraph-Client接口；
+- 新建Eclipse/ IDEA Maven 项目；
+- 在 pom 文件中添加 HugeGraph-Client 依赖；
+- 创建类，调用 HugeGraph-Client 接口；
 
 详细使用过程见下节完整示例。
 
 ### 4 完整示例
 
-#### 4.1 新建Maven工程
+#### 4.1 新建 Maven 工程
 
-可以选择Eclipse或者Intellij Idea创建工程：
+可以选择 Eclipse 或者 Intellij Idea 创建工程：
 
-- [Eclipse新建Maven工程](http://www.vogella.com/tutorials/EclipseMaven/article.html)
-- [Intellij Idea 创建maven工程](https://vaadin.com/docs/-/part/framework/getting-started/getting-started-idea.html)
+- [Eclipse 新建 Maven 工程](http://www.vogella.com/tutorials/EclipseMaven/article.html)
+- [Intellij Idea 创建 maven 工程](https://vaadin.com/docs/-/part/framework/getting-started/getting-started-idea.html)
 
-#### 4.2 添加hugegraph-client依赖
+#### 4.2 添加 hugegraph-client 依赖
 
-添加hugegraph-client依赖
+添加 hugegraph-client 依赖
 
 ```xml
+
 <dependencies>
     <dependency>
         <groupId>org.apache.hugegraph</groupId>
         <artifactId>hugegraph-client</artifactId>
         <version>${version}</version>
-    </dependency>    
+    </dependency>
 </dependencies>
 ```
 
@@ -340,11 +341,12 @@ public class BatchExample {
 }
 ```
 
-### 4.4 运行Example
+### 4.4 运行 Example
 
-运行Example之前需要启动Server, 启动过程见[HugeGraph-Server Quick Start](/cn/docs/quickstart/hugegraph-server)
+运行 Example 之前需要启动 Server,
+启动过程见[HugeGraph-Server Quick Start](/cn/docs/quickstart/hugegraph-server)
 
-### 4.5 Example示例说明
+### 4.5 Example 示例说明
 
-示例说明见[HugeGraph-Client基本API介绍](/cn/docs/clients/hugegraph-client)
+示例说明见[HugeGraph-Client 基本 API 介绍](/cn/docs/clients/hugegraph-client)
 

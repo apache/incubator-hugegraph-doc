@@ -62,7 +62,7 @@ After opening the link, select "ojdbc8.jar" as shown below.
 </center>
 
 
- Install ojdbc8 to the local maven repository, enter the directory where ``ojdbc8.jar`` is located, and execute the following command.
+ Install ojdbc8 to the local maven repository, enter the directory where `ojdbc8.jar` is located, and execute the following command.
 ```
 mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
 ```
@@ -635,6 +635,23 @@ schema: nullable, the default value is the same as the username
 
 schema: required
 
+###### 3.3.2.4 Kafka input source
+
+- type: input source type, `kafka` or `KAFKA`, required;
+- bootstrap_server: set the list of kafka bootstrap servers;
+- topic: the topic to subscribe to;
+- group: group of Kafka consumers;
+- from_beginning: set whether to read from the beginning;
+- format: format of the local file, options are CSV, TEXT and JSON, must be uppercase, required;
+- header: column name of each column of the file, if not specified, the first line of the data file will be used as the header; when the file itself has a header and the header is specified, the first line of the file will be treated as an ordinary data line; JSON files do not need to specify the header, optional;
+- delimiter: delimiter of the file line, default is comma "," as delimiter, JSON files do not need to specify, optional;
+- charset: encoding charset of the file, default is UTF-8, optional;
+- date_format: customized date format, default value is yyyy-MM-dd HH:mm:ss, optional; if the date is presented in the form of timestamp, this item must be written as timestamp (fixed);
+- extra_date_formats: a customized list of other date formats, empty by default, optional; each item in the list is an alternate date format to the date_format specified date format;
+- time_zone: set which time zone the date data is in, default is GMT+8, optional;
+- skipped_line: the line you want to skip, composite structure, currently can only configure the regular expression of the line to be skipped, described by the child node regex, the default is not to skip any line, optional;
+- early_stop: the record pulled from Kafka broker at a certain time is empty, stop the task, default is false, only for debugging, optional;
+
 ##### 3.3.1 Vertex and Edge Mapping
 
 The nodes of vertex and edge mapping (a key in the JSON file) have a lot of the same parts. The same parts are introduced first, and then the unique nodes of `vertex map` and `edge map` are introduced respectively.
@@ -717,37 +734,37 @@ The import process is controlled by commands submitted by the user, and the user
 
 ##### 3.4.1 Parameter description
 
-| Parameter               | Default value | Required or not | Description                                                                                                                                                                               |
-|-------------------------|---------------|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| -f or --file            |               | Y               | path to configure script                                                                                                                                                                  |
-| -g or --graph           |               | Y               | graph space name                                                                                                                                                                          |
-| -s or --schema          |               | Y               | schema file path                                                                                                                                                                          |
-| -h or --host            | localhost     |                 | address of HugeGraphServer                                                                                                                                                                |
-| -p or --port            | 8080          |                 | port number of HugeGraphServer                                                                                                                                                            |
-| --username              | null          |                 | When HugeGraphServer enables permission authentication, the username of the current graph                                                                                                 |
-| --token                 | null          |                 | When HugeGraphServer has enabled authorization authentication, the token of the current graph                                                                                             |
-| --protocol              | http          |                 | Protocol for sending requests to the server, optional http or https                                                                                                                       |
-| --trust-store-file      |               |                 | When the request protocol is https, the client's certificate file path                                                                                                                    |
-| --trust-store-password  |               |                 | When the request protocol is https, the client certificate password                                                                                                                       |
-| --clear-all-data        | false         |                 | Whether to clear the original data on the server before importing data                                                                                                                    |
-| --clear-timeout         | 240           |                 | Timeout for clearing the original data on the server before importing data                                                                                                                |
-| --incremental-mode      | false         |                 | Whether to use the breakpoint resume mode, only the input source is FILE and HDFS support this mode, enabling this mode can start the import from the place where the last import stopped |
-| --failure-mode          | false         |                 | When the failure mode is true, the data that failed before will be imported. Generally speaking, the failed data file needs to be manually corrected and edited, and then imported again  |
-| --batch-insert-threads  | CPUs          |                 | Batch insert thread pool size (CPUs is the number of **logical cores** available to the current OS)                                                                                       |
-| --single-insert-threads | 8             |                 | Size of single insert thread pool                                                                                                                                                         |
-| --max-conn              | 4 * CPUs      |                 | The maximum number of HTTP connections between HugeClient and HugeGraphServer, it is recommended to adjust this when **adjusting threads**                                                |
-| --max-conn-per-route    | 2 * CPUs      |                 | The maximum number of HTTP connections for each route between HugeClient and HugeGraphServer, it is recommended to adjust this item at the same time when **adjusting the thread**        |
-| --batch-size            | 500           |                 | The number of data items in each batch when importing data                                                                                                                                |
-| --max-parse-errors      | 1             |                 | The maximum number of lines of data parsing errors allowed, and the program exits when this value is reached                                                                              |
-| --max-insert-errors     | 500           |                 | The maximum number of rows of data insertion errors allowed, and the program exits when this value is reached                                                                             |
-| --timeout               | 60            |                 | Timeout (seconds) for inserting results to return                                                                                                                                         |
-| --shutdown-timeout      | 10            |                 | Waiting time for multithreading to stop (seconds)                                                                                                                                         |
-| --retry-times           | 0             |                 | Number of retries when a specific exception occurs                                                                                                                                        |
-| --retry-interval        | 10            |                 | interval before retry (seconds)                                                                                                                                                           |
-| --check-vertex          | false         |                 | Whether to check whether the vertex connected by the edge exists when inserting the edge                                                                                                  |
-| --print-progress        | true          |                 | Whether to print the number of imported items in the console in real time                                                                                                                 |
-| --dry-run               | false         |                 | Turn on this mode, only parsing but not importing, usually used for testing                                                                                                               |
-| --help                  | false         |                 | print help information                                                                                                                                                                    |
+| Parameter                 | Default value | Required or not | Description                                                                                                                                                                               |
+|---------------------------|---------------|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `-f` or `--file`          |               | Y               | path to configure script                                                                                                                                                                  |
+| `-g` or `--graph`         |               | Y               | graph space name                                                                                                                                                                          |
+| `-s` or `--schema`        |               | Y               | schema file path                                                                                                                                                                          |
+| `-h` or `--host`          | localhost     |                 | address of HugeGraphServer                                                                                                                                                                |
+| `-p` or `--port`          | 8080          |                 | port number of HugeGraphServer                                                                                                                                                            |
+| `--username`              | null          |                 | When HugeGraphServer enables permission authentication, the username of the current graph                                                                                                 |
+| `--token`                 | null          |                 | When HugeGraphServer has enabled authorization authentication, the token of the current graph                                                                                             |
+| `--protocol`              | http          |                 | Protocol for sending requests to the server, optional http or https                                                                                                                       |
+| `--trust-store-file`      |               |                 | When the request protocol is https, the client's certificate file path                                                                                                                    |
+| `--trust-store-password`  |               |                 | When the request protocol is https, the client certificate password                                                                                                                       |
+| `--clear-all-data`        | false         |                 | Whether to clear the original data on the server before importing data                                                                                                                    |
+| `--clear-timeout`         | 240           |                 | Timeout for clearing the original data on the server before importing data                                                                                                                |
+| `--incremental-mode`      | false         |                 | Whether to use the breakpoint resume mode, only the input source is FILE and HDFS support this mode, enabling this mode can start the import from the place where the last import stopped |
+| `--failure-mode`          | false         |                 | When the failure mode is true, the data that failed before will be imported. Generally speaking, the failed data file needs to be manually corrected and edited, and then imported again  |
+| `--batch-insert-threads`  | CPUs          |                 | Batch insert thread pool size (CPUs is the number of **logical cores** available to the current OS)                                                                                       |
+| `--single-insert-threads` | 8             |                 | Size of single insert thread pool                                                                                                                                                         |
+| `--max-conn`              | 4 * CPUs      |                 | The maximum number of HTTP connections between HugeClient and HugeGraphServer, it is recommended to adjust this when **adjusting threads**                                                |
+| `--max-conn-per-route`    | 2 * CPUs      |                 | The maximum number of HTTP connections for each route between HugeClient and HugeGraphServer, it is recommended to adjust this item at the same time when **adjusting the thread**        |
+| `--batch-size`            | 500           |                 | The number of data items in each batch when importing data                                                                                                                                |
+| `--max-parse-errors`      | 1             |                 | The maximum number of lines of data parsing errors allowed, and the program exits when this value is reached                                                                              |
+| `--max-insert-errors`     | 500           |                 | The maximum number of rows of data insertion errors allowed, and the program exits when this value is reached                                                                             |
+| `--timeout`               | 60            |                 | Timeout (seconds) for inserting results to return                                                                                                                                         |
+| `--shutdown-timeout`      | 10            |                 | Waiting time for multithreading to stop (seconds)                                                                                                                                         |
+| `--retry-times`           | 0             |                 | Number of retries when a specific exception occurs                                                                                                                                        |
+| `--retry-interval`        | 10            |                 | interval before retry (seconds)                                                                                                                                                           |
+| `--check-vertex`          | false         |                 | Whether to check whether the vertex connected by the edge exists when inserting the edge                                                                                                  |
+| `--print-progress`        | true          |                 | Whether to print the number of imported items in the console in real time                                                                                                                 |
+| `--dry-run`               | false         |                 | Turn on this mode, only parsing but not importing, usually used for testing                                                                                                               |
+| `--help`                  | false         |                 | print help information                                                                                                                                                                    |
 
 ##### 3.4.2 Breakpoint Continuation Mode
 
@@ -755,7 +772,7 @@ Usually, the Loader task takes a long time to execute. If the import interrupt p
 
 The user sets the command line parameter --incremental-mode to true to open the breakpoint resume mode. The key to breakpoint continuation lies in the progress file. When the import process exits, the import progress at the time of exit will be recorded.
 Recorded in the progress file, the progress file is located in the `${struct}` directory, the file name is like `load-progress ${date}`, ${struct} is the prefix of the mapping file, and ${date} is the start of the import
-moment. For example: for an import task started at `2019-10-10 12:30:30`, the mapping file used is `struct-example.json`, then the path of the progress file is the same as struct-example.json
+moment. For example, for an import task started at `2019-10-10 12:30:30`, the mapping file used is `struct-example.json`, then the path of the progress file is the same as struct-example.json
 Sibling `struct-example/load-progress 2019-10-10 12:30:30`.
 
 > Note: The generation of progress files is independent of whether --incremental-mode is turned on or not, and a progress file is generated at the end of each import.
@@ -791,7 +808,7 @@ bin/hugegraph-loader -g {GRAPH_NAME} -f ${INPUT_DESC_FILE} -s ${SCHEMA_FILE} -h 
 
 ### 4 Complete example
 
-Given below is an example in the example directory of the hugegraph-loader package.([GitHub address](https://github.com/apache/hugegraph-toolchain/tree/master/hugegraph-loader/assembly/static/example/file))
+Given below is an example in the example directory of the hugegraph-loader package. ([GitHub address](https://github.com/apache/hugegraph-toolchain/tree/master/hugegraph-loader/assembly/static/example/file))
 
 #### 4.1 Prepare data
 
