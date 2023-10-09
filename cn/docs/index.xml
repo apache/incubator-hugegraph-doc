@@ -1336,12 +1336,12 @@
 &lt;!-- 3.1 is linked by other place. if change 3.1's title, please check -->
 &lt;p>可参考 &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/README.md">Docker 部署方式&lt;/a>。&lt;/p>
 &lt;p>我们可以使用 &lt;code>docker run -itd --name=graph -p 8080:8080 hugegraph/hugegraph&lt;/code> 去快速启动一个内置了 &lt;code>RocksDB&lt;/code> 的 &lt;code>Hugegraph server&lt;/code>.&lt;/p>
-&lt;p>可选项:&lt;/p>
+&lt;p>可选项：&lt;/p>
 &lt;ol>
 &lt;li>可以使用 &lt;code>docker exec -it graph bash&lt;/code> 进入容器完成一些操作&lt;/li>
-&lt;li>可以使用 &lt;code>docker run -itd --name=graph -p 8080:8080 -e PRELOAD=&amp;quot;true&amp;quot; hugegraph/hugegraph&lt;/code> 在启动的时候预加载一个 &lt;strong>内置的&lt;/strong> 样例图.&lt;/li>
+&lt;li>可以使用 &lt;code>docker run -itd --name=graph -p 8080:8080 -e PRELOAD=&amp;quot;true&amp;quot; hugegraph/hugegraph&lt;/code> 在启动的时候预加载一个 &lt;strong>内置的&lt;/strong>样例图。&lt;/li>
 &lt;/ol>
-&lt;p>另外, 我们也可以使用 &lt;code>docker-compose&lt;/code> 完成部署, 使用 &lt;code>docker-compose up -d&lt;/code>, 以下是一个样例的 &lt;code>docker-compose.yml&lt;/code>:&lt;/p>
+&lt;p>另外，我们也可以使用 &lt;code>docker-compose&lt;/code>完成部署，使用用 &lt;code>docker-compose up -d&lt;/code>, 以下是一个样例的 &lt;code>docker-compose.yml&lt;/code>:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">graph&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -1363,24 +1363,26 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn package -DskipTests
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>执行日志如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>......
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> Reactor Summary:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> Reactor Summary &lt;span style="color:#204a87;font-weight:bold">for&lt;/span> hugegraph 1.0.0:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph .......................................... SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 0.003 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph-core ..................................... SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 15.335 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph-api ...................................... SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 0.829 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph-cassandra ................................ SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 1.095 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph-scylladb ................................. SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 0.313 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph-rocksdb .................................. SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 0.506 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph-mysql .................................... SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 0.412 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph-palo ..................................... SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 0.359 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph-dist ..................................... SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 7.470 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph-example .................................. SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 0.403 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph-test ..................................... SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 1.509 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph .......................................... SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 2.405 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph-core ..................................... SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 13.405 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph-api ...................................... SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 25.943 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph-cassandra ................................ SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 54.270 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph-scylladb ................................. SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 1.032 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph-rocksdb .................................. SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 34.752 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph-mysql .................................... SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 1.778 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph-palo ..................................... SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 1.070 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph-hbase .................................... SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 32.124 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph-postgresql ............................... SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 1.823 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph-dist ..................................... SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 17.426 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph-example .................................. SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 1.941 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph-test ..................................... SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>01:01 min&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> ------------------------------------------------------------------------
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> BUILD SUCCESS
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> ------------------------------------------------------------------------
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>......
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>执行成功后，在 hugegraph 目录下生成 hugegraph-*.tar.gz 文件，就是编译生成的 tar 包。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>执行成功后，在 hugegraph 目录下生成 &lt;code>*hugegraph-*.tar.gz&lt;/code> 文件，就是编译生成的 tar 包。&lt;/p>
 &lt;h4 id="34-使用-tools-工具部署-outdated">3.4 使用 tools 工具部署 (Outdated)&lt;/h4>
 &lt;p>HugeGraph-Tools 提供了一键部署的命令行工具，用户可以使用该工具快速地一键下载、解压、配置并启动 HugeGraph-Server 和 HugeGraph-Hubble，最新的 HugeGraph-Toolchain 中已经包含所有的这些工具，直接下载它解压就有工具包集合了&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># download toolchain package, it includes loader + tool + hubble, please check the latest version (here is 1.0.0)&lt;/span>
@@ -1398,10 +1400,10 @@
 &lt;p>如果需要快速启动 HugeGraph 仅用于测试，那么只需要进行少数几个配置项的修改即可（见下一节）。&lt;/p>
 &lt;p>详细的配置介绍请参考&lt;a href="/docs/config/config-guide">配置文档&lt;/a>及&lt;a href="/docs/config/config-option">配置项介绍&lt;/a>。&lt;/p>
 &lt;h3 id="5-启动">5 启动&lt;/h3>
-&lt;h4 id="51-使用docker">5.1 使用docker&lt;/h4>
-&lt;p>在 &lt;a href="#31-%E4%BD%BF%E7%94%A8-docker-%E5%AE%B9%E5%99%A8-%E6%8E%A8%E8%8D%90">3.1 使用 Docker 容器&lt;/a>中, 我们已经介绍了 如何使用 &lt;code>docker&lt;/code> 部署 &lt;code>hugegraph-server&lt;/code>, 我们还可以设置参数在sever启动的时候加载样例图&lt;/p>
-&lt;h5 id="511-启动server的时候创建示例图">5.1.1 启动server的时候创建示例图&lt;/h5>
-&lt;p>在docker启动的时候设置环境变量 &lt;code>PRELOAD=true&lt;/code>, 从而实现启动脚本的时候加载数据。&lt;/p>
+&lt;h4 id="51-使用-docker">5.1 使用 Docker&lt;/h4>
+&lt;p>在 &lt;a href="#31-%E4%BD%BF%E7%94%A8-docker-%E5%AE%B9%E5%99%A8-%E6%8E%A8%E8%8D%90">3.1 使用 Docker 容器&lt;/a>中，我们已经介绍了 如何使用 &lt;code>docker&lt;/code> 部署 &lt;code>hugegraph-server&lt;/code>, 我们还可以设置参数在 sever 启动的时候加载样例图&lt;/p>
+&lt;h5 id="511-启动-server-的时候创建示例图">5.1.1 启动 server 的时候创建示例图&lt;/h5>
+&lt;p>在 docker 启动的时候设置环境变量 &lt;code>PRELOAD=true&lt;/code>, 从而实现启动脚本的时候加载数据。&lt;/p>
 &lt;ol>
 &lt;li>
 &lt;p>使用&lt;code>docker run&lt;/code>&lt;/p>
@@ -1445,13 +1447,14 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.data_path=.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.wal_path=.
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>初始化数据库（仅第一次启动时需要）&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动 server&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer...
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>http://127.0.0.1:8080/graphs&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>....OK
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>提示的 url 与 &lt;code>rest-server.properties&lt;/code> 中配置的 &lt;code>restserver.url&lt;/code> 一致&lt;/p>
+&lt;/details>
 &lt;h5 id="522-hbase">5.2.2 HBase&lt;/h5>
 &lt;details>
 &lt;summary>点击展开/折叠 HBase 配置及启动方法&lt;/summary>
@@ -1471,7 +1474,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#hbase.vertex_partitions=10
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#hbase.edge_partitions=30
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>初始化数据库（仅第一次启动时需要）&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动 server&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh
@@ -1503,7 +1506,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.reconnect_interval=3
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.ssl_mode=false
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>初始化数据库（仅第一次启动时需要）&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动 server&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh
@@ -1531,7 +1534,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.keyspace.strategy=SimpleStrategy
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.keyspace.replication=3
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>初始化数据库（仅第一次启动时需要）&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Initing HugeGraph Store...
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:26:51 &lt;span style="color:#0000cf;font-weight:bold">1424&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.HugeGraph &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Opening backend store: &lt;span style="color:#4e9a06">&amp;#39;cassandra&amp;#39;&lt;/span>
@@ -1592,15 +1595,15 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.keyspace.replication=3
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>由于 scylladb 数据库本身就是基于 cassandra 的&amp;quot;优化版&amp;quot;，如果用户未安装 scylladb，也可以直接使用 cassandra 作为后端存储，只需要把 backend 和 serializer 修改为 scylladb，host 和 post 指向 cassandra 集群的 seeds 和 port 即可，但是并不建议这样做，这样发挥不出 scylladb 本身的优势了。&lt;/p>
 &lt;p>初始化数据库（仅第一次启动时需要）&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动 server&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer...
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>http://127.0.0.1:8080/graphs&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>....OK
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/details>
-&lt;h5 id="527-启动server的时候创建示例图">5.2.7 启动server的时候创建示例图&lt;/h5>
-&lt;p>在脚本启动时候携带 &lt;code>-p true&lt;/code> 参数, 表示preload, 即创建示例图&lt;/p>
+&lt;h5 id="527-启动-server-的时候创建示例图">5.2.7 启动 server 的时候创建示例图&lt;/h5>
+&lt;p>在脚本启动时候携带 &lt;code>-p true&lt;/code>参数，表示 preload, 即创建示例图图&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh -p true
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer in daemon mode...
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)......OK
@@ -1693,7 +1696,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>详细的 API 请参考 &lt;a href="/docs/clients/restful-api">RESTful-API&lt;/a> 文档&lt;/p>
 &lt;h3 id="7-停止-server">7 停止 Server&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">$cd&lt;/span> hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">$cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">$bin&lt;/span>/stop-hugegraph.sh
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="8-使用-intellij-idea-调试-server">8 使用 IntelliJ IDEA 调试 Server&lt;/h3>
 &lt;p>请参考&lt;a href="/docs/contribution-guidelines/hugegraph-server-idea-setup">在 IDEA 中配置 Server 开发环境&lt;/a>&lt;/p></description></item><item><title>Docs: Introduction with HugeGraph</title><link>/cn/docs/introduction/readme/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/introduction/readme/</guid><description>
@@ -7484,9 +7487,9 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;blockquote>
 &lt;p>可以通过&lt;code>GET http://localhost:8080/graphs/hugegraph/tasks/1&lt;/code>（其中&amp;quot;1&amp;quot;是task_id）来查询异步任务的执行状态，更多&lt;a href="../task">异步任务RESTful API&lt;/a>&lt;/p>
 &lt;/blockquote></description></item><item><title>Docs: HugeGraph-Hubble Quick Start</title><link>/cn/docs/quickstart/hugegraph-hubble/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-hubble/</guid><description>
-&lt;h3 id="1-hugegraph-hubble概述">1 HugeGraph-Hubble概述&lt;/h3>
-&lt;p>HugeGraph是一款面向分析型，支持批量操作的图数据库系统，它由百度安全团队自主研发，全面支持&lt;a href="https://tinkerpop.apache.org">Apache TinkerPop3&lt;/a>框架和&lt;a href="https://tinkerpop.apache.org/gremlin.html">Gremlin&lt;/a>图查询语言，提供导出、备份、恢复等完善的工具链生态，有效解决海量图数据的存储、查询和关联分析需求。HugeGraph广泛应用于银行券商的风控打击、保险理赔、推荐搜索、公安犯罪打击、知识图谱构建、网络安全、IT运维等领域，致力于让更多行业、组织及用户享受到更广泛的数据综合价值。&lt;/p>
-&lt;p>&lt;strong>HugeGraph-Hubble&lt;/strong> 是HugeGraph的一站式可视化分析平台，平台涵盖了从数据建模，到数据快速导入，再到数据的在线、离线分析、以及图的统一管理的全过程，实现了图应用的全流程向导式操作，旨在提升用户的使用流畅度，降低用户的使用门槛，提供更为高效易用的使用体验。&lt;/p>
+&lt;h3 id="1-hugegraph-hubble-概述">1 HugeGraph-Hubble 概述&lt;/h3>
+&lt;p>HugeGraph 是一款面向分析型，支持批量操作的图数据库系统，它由百度安全团队自主研发，全面支持&lt;a href="https://tinkerpop.apache.org">Apache TinkerPop3&lt;/a>框架和&lt;a href="https://tinkerpop.apache.org/gremlin.html">Gremlin&lt;/a>图查询语言，提供导出、备份、恢复等完善的工具链生态，有效解决海量图数据的存储、查询和关联分析需求。HugeGraph 广泛应用于银行券商的风控打击、保险理赔、推荐搜索、公安犯罪打击、知识图谱构建、网络安全、IT 运维等领域，致力于让更多行业、组织及用户享受到更广泛的数据综合价值。&lt;/p>
+&lt;p>&lt;strong>HugeGraph-Hubble&lt;/strong> 是 HugeGraph 的一站式可视化分析平台，平台涵盖了从数据建模，到数据快速导入，再到数据的在线、离线分析、以及图的统一管理的全过程，实现了图应用的全流程向导式操作，旨在提升用户的使用流畅度，降低用户的使用门槛，提供更为高效易用的使用体验。&lt;/p>
 &lt;p>平台主要包括以下模块：&lt;/p>
 &lt;h5 id="图管理">图管理&lt;/h5>
 &lt;p>图管理模块通过图的创建，连接平台与图数据，实现多图的统一管理，并实现图的访问、编辑、删除、查询操作。&lt;/p>
@@ -7495,22 +7498,22 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;h5 id="数据导入">数据导入&lt;/h5>
 &lt;p>数据导入是将用户的业务数据转化为图的顶点和边并插入图数据库中，平台提供了向导式的可视化导入模块，通过创建导入任务，实现导入任务的管理及多个导入任务的并行运行，提高导入效能。进入导入任务后，只需跟随平台步骤提示，按需上传文件，填写内容，就可轻松实现图数据的导入过程，同时支持断点续传，错误重试机制等，降低导入成本，提升效率。&lt;/p>
 &lt;h5 id="图分析">图分析&lt;/h5>
-&lt;p>通过输入图遍历语言Gremlin可实现图数据的高性能通用分析，并提供顶点的定制化多维路径查询等功能，提供3种图结果展示方式，包括：图形式、表格形式、Json形式，多维度展示数据形态，满足用户使用的多种场景需求。提供运行记录及常用语句收藏等功能，实现图操作的可追溯，以及查询输入的复用共享，快捷高效。支持图数据的导出，导出格式为Json格式。&lt;/p>
+&lt;p>通过输入图遍历语言 Gremlin 可实现图数据的高性能通用分析，并提供顶点的定制化多维路径查询等功能，提供 3 种图结果展示方式，包括：图形式、表格形式、Json 形式，多维度展示数据形态，满足用户使用的多种场景需求。提供运行记录及常用语句收藏等功能，实现图操作的可追溯，以及查询输入的复用共享，快捷高效。支持图数据的导出，导出格式为 Json 格式。&lt;/p>
 &lt;h5 id="任务管理">任务管理&lt;/h5>
-&lt;p>对于需要遍历全图的Gremlin任务，索引的创建与重建等耗时较长的异步任务，平台提供相应的任务管理功能，实现异步任务的统一的管理与结果查看。&lt;/p>
+&lt;p>对于需要遍历全图的 Gremlin 任务，索引的创建与重建等耗时较长的异步任务，平台提供相应的任务管理功能，实现异步任务的统一的管理与结果查看。&lt;/p>
 &lt;h3 id="2-部署">2 部署&lt;/h3>
 &lt;p>有三种方式可以部署&lt;code>hugegraph-hubble&lt;/code>&lt;/p>
 &lt;ul>
-&lt;li>使用docker (推荐)&lt;/li>
+&lt;li>使用 docker (推荐)&lt;/li>
 &lt;li>下载 toolchain 二进制包&lt;/li>
 &lt;li>源码编译&lt;/li>
 &lt;/ul>
-&lt;h4 id="21-使用docker-推荐">2.1 使用Docker (推荐)&lt;/h4>
+&lt;h4 id="21-使用-docker-推荐">2.1 使用 Docker (推荐)&lt;/h4>
 &lt;blockquote>
-&lt;p>&lt;strong>特别注意&lt;/strong>: 如果使用 docker 启动 hubble，且 hubble 和 server 位于同一宿主机，在后续 hubble 页面中设置 graph 的 hostname 的时候请不要直接设置 &lt;code>localhost/127.0.0.1&lt;/code>，这将指向 hubble 容器内部而非宿主机，导致无法连接到 server&lt;/p>
+&lt;p>&lt;strong>特别注意&lt;/strong>: 如果使用 docker 启动 hubble，且 hubble 和 server 位于同一宿主机，在后续 hubble 页面中设置 graph 的 hostname 的时候请不要直接设置 &lt;code>localhost/127.0.0.1&lt;/code>，这将指向 hubble 容器内部而非宿主机，导致无法连接到 server. 如果 hubble 和 server 在同一 docker 网络下，则可以直接使用&lt;code>container_name&lt;/code>作为主机名，端口则为 8080. 或者也可以使用宿主机 ip 作为主机名，此时端口号为宿主机为 server 配置的端口&lt;/p>
 &lt;/blockquote>
 &lt;p>我们可以使用 &lt;code>docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble&lt;/code> 快速启动 &lt;a href="https://hub.docker.com/r/hugegraph/hubble">hubble&lt;/a>.&lt;/p>
-&lt;p>或者使用docker-compose启动hubble，另外如果hubble和graph在同一个docker网络下，可以使用graph的contain_name进行访问，而不需要宿主机的ip&lt;/p>
+&lt;p>或者使用 docker-compose 启动 hubble，另外如果 hubble 和 graph 在同一个 docker 网络下，可以使用 graph 的 contain_name 进行访问，而不需要宿主机的 ip&lt;/p>
 &lt;p>使用&lt;code>docker-compose up -d&lt;/code>，&lt;code>docker-compose.yml&lt;/code>如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -7526,7 +7529,7 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">8088&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8088&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="22-下载-toolchain-二进制包">2.2 下载 toolchain 二进制包&lt;/h4>
-&lt;p>&lt;code>hubble&lt;/code>项目在&lt;code>toolchain&lt;/code>项目中, 首先下载&lt;code>toolchain&lt;/code>的tar包&lt;/p>
+&lt;p>&lt;code>hubble&lt;/code>项目在&lt;code>toolchain&lt;/code>项目中，首先下载&lt;code>toolchain&lt;/code>的 tar 包&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar -xvf apache-hugegraph-toolchain-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> apache-hugegraph-toolchain-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz/apache-hugegraph-hubble-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
@@ -7539,9 +7542,9 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-08-30 20:38:38 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> c.z.h.HikariDataSource &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - hugegraph-hubble-HikariCP - Start completed.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-08-30 20:38:41 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.c.h.Http11NioProtocol &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Starting ProtocolHandler &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;http-nio-0.0.0.0-8088&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-08-30 20:38:41 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.h.HugeGraphHubble &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Started HugeGraphHubble in 7.379 seconds &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>JVM running &lt;span style="color:#204a87;font-weight:bold">for&lt;/span> 8.499&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后使用浏览器访问 &lt;code>ip:8088&lt;/code> 可看到&lt;code>hubble&lt;/code>页面, 通过&lt;code>bin/stop-hubble.sh&lt;/code>则可以停止服务&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后使用浏览器访问 &lt;code>ip:8088&lt;/code> 可看到&lt;code>hubble&lt;/code>页面，通过&lt;code>bin/stop-hubble.sh&lt;/code>则可以停止服务&lt;/p>
 &lt;h4 id="23-源码编译">2.3 源码编译&lt;/h4>
-&lt;p>&lt;strong>注意:&lt;/strong> 编译 hubble 需要用户本地环境有安装 &lt;code>Nodejs V16.x&lt;/code> 与 &lt;code>yarn&lt;/code> 环境&lt;/p>
+&lt;p>&lt;strong>注意：&lt;/strong> 编译 hubble 需要用户本地环境有安装 &lt;code>Nodejs V16.x&lt;/code> 与 &lt;code>yarn&lt;/code> 环境&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>apt install curl build-essential
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh &lt;span style="color:#000;font-weight:bold">|&lt;/span> bash
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">source&lt;/span> ~/.bashrc
@@ -7550,7 +7553,7 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>node -v
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用下列命令安装 &lt;code>yarn&lt;/code>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>npm install -g yarn
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>下载toolchain源码包&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>下载 toolchain 源码包&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph-toolchain.git
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>编译&lt;code>hubble&lt;/code>, 它依赖 loader 和 client, 编译时需提前构建这些依赖 (后续可跳)&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> incubator-hugegraph-toolchain
@@ -7569,7 +7572,7 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;h3 id="4平台使用说明">4 平台使用说明&lt;/h3>
 &lt;h4 id="41图管理">4.1 图管理&lt;/h4>
 &lt;h5 id="411图创建">4.1.1 图创建&lt;/h5>
-&lt;p>图管理模块下，点击【创建图】，通过填写图ID、图名称、主机名、端口号、用户名、密码的信息，实现多图的连接。&lt;/p>
+&lt;p>图管理模块下，点击【创建图】，通过填写图 ID、图名称、主机名、端口号、用户名、密码的信息，实现多图的连接。&lt;/p>
 &lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/311图创建.png" alt="image">
 &lt;/div>
@@ -7585,12 +7588,12 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;h5 id="413图管理">4.1.3 图管理&lt;/h5>
 &lt;ol>
 &lt;li>用户通过对图的概览、搜索以及单图的信息编辑与删除，实现图的统一管理。&lt;/li>
-&lt;li>搜索范围：可对图名称和ID进行搜索。&lt;/li>
+&lt;li>搜索范围：可对图名称和 ID 进行搜索。&lt;/li>
 &lt;/ol>
 &lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/313图管理.png" alt="image">
 &lt;/div>
-&lt;h4 id="42元数据建模列表图模式">4.2 元数据建模（列表+图模式）&lt;/h4>
+&lt;h4 id="42元数据建模列表--图模式">4.2 元数据建模（列表 + 图模式）&lt;/h4>
 &lt;h5 id="421模块入口">4.2.1 模块入口&lt;/h5>
 &lt;p>左侧导航处：&lt;/p>
 &lt;div style="text-align: center;">
@@ -7613,7 +7616,7 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;h6 id="4222复用">4.2.2.2 复用&lt;/h6>
 &lt;ol>
 &lt;li>平台提供【复用】功能，可直接复用其他图的元数据。&lt;/li>
-&lt;li>选择需要复用的图ID，继续选择需要复用的属性，之后平台会进行是否冲突的校验，通过后，可实现元数据的复用。&lt;/li>
+&lt;li>选择需要复用的图 ID，继续选择需要复用的属性，之后平台会进行是否冲突的校验，通过后，可实现元数据的复用。&lt;/li>
 &lt;/ol>
 &lt;p>选择复用项：&lt;/p>
 &lt;div style="text-align: center;">
@@ -7630,7 +7633,7 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;h5 id="423顶点类型">4.2.3 顶点类型&lt;/h5>
 &lt;h6 id="4231创建">4.2.3.1 创建&lt;/h6>
 &lt;ol>
-&lt;li>填写或选择顶点类型名称、ID策略、关联属性、主键属性，顶点样式、查询结果中顶点下方展示的内容，以及索引的信息：包括是否创建类型索引，及属性索引的具体内容，完成顶点类型的创建。&lt;/li>
+&lt;li>填写或选择顶点类型名称、ID 策略、关联属性、主键属性，顶点样式、查询结果中顶点下方展示的内容，以及索引的信息：包括是否创建类型索引，及属性索引的具体内容，完成顶点类型的创建。&lt;/li>
 &lt;/ol>
 &lt;p>列表模式：&lt;/p>
 &lt;center>
@@ -7643,7 +7646,7 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;h6 id="4232复用">4.2.3.2 复用&lt;/h6>
 &lt;ol>
 &lt;li>顶点类型的复用，会将此类型关联的属性和属性索引一并复用。&lt;/li>
-&lt;li>复用功能使用方法类似属性的复用，见3.2.2.2。&lt;/li>
+&lt;li>复用功能使用方法类似属性的复用，见 3.2.2.2。&lt;/li>
 &lt;/ol>
 &lt;h6 id="4233管理">4.2.3.3 管理&lt;/h6>
 &lt;ol>
@@ -7673,7 +7676,7 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;h6 id="4242复用">4.2.4.2 复用&lt;/h6>
 &lt;ol>
 &lt;li>边类型的复用，会将此类型的起点类型、终点类型、关联的属性和属性索引一并复用。&lt;/li>
-&lt;li>复用功能使用方法类似属性的复用，见3.2.2.2。&lt;/li>
+&lt;li>复用功能使用方法类似属性的复用，见 3.2.2.2。&lt;/li>
 &lt;/ol>
 &lt;h6 id="4243管理">4.2.4.3 管理&lt;/h6>
 &lt;ol>
@@ -7702,7 +7705,7 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;/center>
 &lt;h5 id="433上传文件">4.3.3 上传文件&lt;/h5>
 &lt;ol>
-&lt;li>上传需要构图的文件，目前支持的格式为CSV，后续会不断更新。&lt;/li>
+&lt;li>上传需要构图的文件，目前支持的格式为 CSV，后续会不断更新。&lt;/li>
 &lt;li>可同时上传多个文件。&lt;/li>
 &lt;/ol>
 &lt;center>
@@ -7721,8 +7724,8 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;ol>
 &lt;li>
 &lt;p>顶点映射和边映射：&lt;/p>
-&lt;p>【顶点类型】 ：选择顶点类型，并为其ID映射上传文件中列数据；&lt;/p>
-&lt;p>【边类型】：选择边类型，为其起点类型和终点类型的ID列映射上传文件的列数据；&lt;/p>
+&lt;p>【顶点类型】 ：选择顶点类型，并为其 ID 映射上传文件中列数据；&lt;/p>
+&lt;p>【边类型】：选择边类型，为其起点类型和终点类型的 ID 列映射上传文件的列数据；&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>映射设置：为选定的顶点类型的属性映射上传文件中的列数据，此处，若属性名称与文件的表头名称一致，可自动匹配映射属性，无需手动填选&lt;/p>
@@ -7775,8 +7778,8 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;img src="/docs/images/images-hubble/342多图切换.png" alt="image">
 &lt;/center>
 &lt;h5 id="443图分析与处理">4.4.3 图分析与处理&lt;/h5>
-&lt;p>HugeGraph支持Apache TinkerPop3的图遍历查询语言Gremlin，Gremlin是一种通用的图数据库查询语言，通过输入Gremlin语句，点击执行，即可执行图数据的查询分析操作，并可实现顶点/边的创建及删除、顶点/边的属性修改等。&lt;/p>
-&lt;p>Gremlin查询后，下方为图结果展示区域，提供3种图结果展示方式，分别为：【图模式】、【表格模式】、【Json模式】。&lt;/p>
+&lt;p>HugeGraph 支持 Apache TinkerPop3 的图遍历查询语言 Gremlin，Gremlin 是一种通用的图数据库查询语言，通过输入 Gremlin 语句，点击执行，即可执行图数据的查询分析操作，并可实现顶点/边的创建及删除、顶点/边的属性修改等。&lt;/p>
+&lt;p>Gremlin 查询后，下方为图结果展示区域，提供 3 种图结果展示方式，分别为：【图模式】、【表格模式】、【Json 模式】。&lt;/p>
 &lt;p>支持缩放、居中、全屏、导出等操作。&lt;/p>
 &lt;p>【图模式】&lt;/p>
 &lt;center>
@@ -7786,12 +7789,12 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;center>
 &lt;img src="/docs/images/images-hubble/343图分析-表格.png" alt="image">
 &lt;/center>
-&lt;p>【Json模式】&lt;/p>
+&lt;p>【Json 模式】&lt;/p>
 &lt;center>
 &lt;img src="/docs/images/images-hubble/343图分析-json.png" alt="image">
 &lt;/center>
 &lt;h5 id="444数据详情">4.4.4 数据详情&lt;/h5>
-&lt;p>点击顶点/边实体，可查看顶点/边的数据详情，包括：顶点/边类型，顶点ID，属性及对应值，拓展图的信息展示维度，提高易用性。&lt;/p>
+&lt;p>点击顶点/边实体，可查看顶点/边的数据详情，包括：顶点/边类型，顶点 ID，属性及对应值，拓展图的信息展示维度，提高易用性。&lt;/p>
 &lt;h5 id="445图结果的多维路径查询">4.4.5 图结果的多维路径查询&lt;/h5>
 &lt;p>除了全局的查询外，可针对查询结果中的顶点进行深度定制化查询以及隐藏操作，实现图结果的定制化挖掘。&lt;/p>
 &lt;p>右击顶点，出现顶点的菜单入口，可进行展示、查询、隐藏等操作。&lt;/p>
@@ -7811,7 +7814,7 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;li>点击图区面板，出现添加顶点入口&lt;/li>
 &lt;li>点击右上角的操作栏中的首个图标&lt;/li>
 &lt;/ol>
-&lt;p>通过选择或填写顶点类型、ID值、属性信息，完成顶点的增加。&lt;/p>
+&lt;p>通过选择或填写顶点类型、ID 值、属性信息，完成顶点的增加。&lt;/p>
 &lt;p>入口如下：&lt;/p>
 &lt;center>
 &lt;img src="/docs/images/images-hubble/346新增顶点.png" alt="image">
@@ -7838,29 +7841,29 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;/center>
 &lt;h5 id="452任务管理">4.5.2 任务管理&lt;/h5>
 &lt;ol>
-&lt;li>提供异步任务的统一的管理与结果查看，异步任务包括4类，分别为：&lt;/li>
+&lt;li>提供异步任务的统一的管理与结果查看，异步任务包括 4 类，分别为：&lt;/li>
 &lt;/ol>
 &lt;ul>
-&lt;li>gremlin：Gremlin任务&lt;/li>
-&lt;li>algorithm：OLAP算法任务&lt;/li>
+&lt;li>gremlin：Gremlin 任务务&lt;/li>
+&lt;li>algorithm：OLAP 算法任务务&lt;/li>
 &lt;li>remove_schema：删除元数据&lt;/li>
 &lt;li>rebuild_index：重建索引&lt;/li>
 &lt;/ul>
 &lt;ol start="2">
-&lt;li>列表显示当前图的异步任务信息，包括：任务ID，任务名称，任务类型，创建时间，耗时，状态，操作，实现对异步任务的管理。&lt;/li>
+&lt;li>列表显示当前图的异步任务信息，包括：任务 ID，任务名称，任务类型，创建时间，耗时，状态，操作，实现对异步任务的管理。&lt;/li>
 &lt;li>支持对任务类型和状态进行筛选&lt;/li>
-&lt;li>支持搜索任务ID和任务名称&lt;/li>
+&lt;li>支持搜索任务 ID 和任务名称&lt;/li>
 &lt;li>可对异步任务进行删除或批量删除操作&lt;/li>
 &lt;/ol>
 &lt;center>
 &lt;img src="/docs/images/images-hubble/352任务列表.png" alt="image">
 &lt;/center>
-&lt;h5 id="453gremlin异步任务">4.5.3 Gremlin异步任务&lt;/h5>
+&lt;h5 id="453gremlin-异步任务">4.5.3 Gremlin 异步任务&lt;/h5>
 &lt;p>1.创建任务&lt;/p>
 &lt;ul>
-&lt;li>数据分析模块，目前支持两种Gremlin操作，Gremlin查询和Gremlin任务；若用户切换到Gremlin任务，点击执行后，在异步任务中心会建立一条异步任务；
+&lt;li>数据分析模块，目前支持两种 Gremlin 操作，Gremlin 查询和 Gremlin 任务；若用户切换到 Gremlin 任务，点击执行后，在异步任务中心会建立一条异步任务；
 2.任务提交&lt;/li>
-&lt;li>任务提交成功后，图区部分返回提交结果和任务ID
+&lt;li>任务提交成功后，图区部分返回提交结果和任务 ID
 3.任务详情&lt;/li>
 &lt;li>提供【查看】入口，可跳转到任务详情查看当前任务具体执行情况跳转到任务中心后，直接显示当前执行的任务行&lt;/li>
 &lt;/ul>
@@ -7873,10 +7876,10 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;/center>
 &lt;p>4.查看结果&lt;/p>
 &lt;ul>
-&lt;li>结果通过json形式展示&lt;/li>
+&lt;li>结果通过 json 形式展示&lt;/li>
 &lt;/ul>
-&lt;h5 id="454olap算法任务">4.5.4 OLAP算法任务&lt;/h5>
-&lt;p>Hubble上暂未提供可视化的OLAP算法执行，可调用RESTful API进行OLAP类算法任务，在任务管理中通过ID找到相应任务，查看进度与结果等。&lt;/p>
+&lt;h5 id="454olap-算法任务">4.5.4 OLAP 算法任务&lt;/h5>
+&lt;p>Hubble 上暂未提供可视化的 OLAP 算法执行，可调用 RESTful API 进行 OLAP 类算法任务，在任务管理中通过 ID 找到相应任务，查看进度与结果等。&lt;/p>
 &lt;h5 id="455删除元数据重建索引">4.5.5 删除元数据、重建索引&lt;/h5>
 &lt;p>1.创建任务&lt;/p>
 &lt;ul>
