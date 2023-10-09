@@ -39,12 +39,12 @@ java -version
 
 我们可以使用 `docker run -itd --name=graph -p 8080:8080 hugegraph/hugegraph` 去快速启动一个内置了 `RocksDB` 的 `Hugegraph server`.
 
-可选项:
+可选项：
 
 1. 可以使用 `docker exec -it graph bash` 进入容器完成一些操作
-2. 可以使用 `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph` 在启动的时候预加载一个 **内置的** 样例图.
+2. 可以使用 `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph` 在启动的时候预加载一个 **内置的**样例图。
 
-另外, 我们也可以使用 `docker-compose` 完成部署, 使用 `docker-compose up -d`, 以下是一个样例的 `docker-compose.yml`:
+另外，我们也可以使用 `docker-compose`完成部署，使用用 `docker-compose up -d`, 以下是一个样例的 `docker-compose.yml`:
 
 ```yaml
 version: '3'
@@ -86,26 +86,28 @@ mvn package -DskipTests
 
 ```bash
 ......
-[INFO] Reactor Summary:
+[INFO] Reactor Summary for hugegraph 1.0.0:
 [INFO] 
-[INFO] hugegraph .......................................... SUCCESS [  0.003 s]
-[INFO] hugegraph-core ..................................... SUCCESS [ 15.335 s]
-[INFO] hugegraph-api ...................................... SUCCESS [  0.829 s]
-[INFO] hugegraph-cassandra ................................ SUCCESS [  1.095 s]
-[INFO] hugegraph-scylladb ................................. SUCCESS [  0.313 s]
-[INFO] hugegraph-rocksdb .................................. SUCCESS [  0.506 s]
-[INFO] hugegraph-mysql .................................... SUCCESS [  0.412 s]
-[INFO] hugegraph-palo ..................................... SUCCESS [  0.359 s]
-[INFO] hugegraph-dist ..................................... SUCCESS [  7.470 s]
-[INFO] hugegraph-example .................................. SUCCESS [  0.403 s]
-[INFO] hugegraph-test ..................................... SUCCESS [  1.509 s]
+[INFO] hugegraph .......................................... SUCCESS [  2.405 s]
+[INFO] hugegraph-core ..................................... SUCCESS [ 13.405 s]
+[INFO] hugegraph-api ...................................... SUCCESS [ 25.943 s]
+[INFO] hugegraph-cassandra ................................ SUCCESS [ 54.270 s]
+[INFO] hugegraph-scylladb ................................. SUCCESS [  1.032 s]
+[INFO] hugegraph-rocksdb .................................. SUCCESS [ 34.752 s]
+[INFO] hugegraph-mysql .................................... SUCCESS [  1.778 s]
+[INFO] hugegraph-palo ..................................... SUCCESS [  1.070 s]
+[INFO] hugegraph-hbase .................................... SUCCESS [ 32.124 s]
+[INFO] hugegraph-postgresql ............................... SUCCESS [  1.823 s]
+[INFO] hugegraph-dist ..................................... SUCCESS [ 17.426 s]
+[INFO] hugegraph-example .................................. SUCCESS [  1.941 s]
+[INFO] hugegraph-test ..................................... SUCCESS [01:01 min]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
 ......
 ```
 
-执行成功后，在 hugegraph 目录下生成 hugegraph-*.tar.gz 文件，就是编译生成的 tar 包。
+执行成功后，在 hugegraph 目录下生成 `*hugegraph-*.tar.gz` 文件，就是编译生成的 tar 包。
 
 
 #### 3.4 使用 tools 工具部署 (Outdated)
@@ -138,13 +140,13 @@ bin/hugegraph deploy -v {hugegraph-version} -p {install-path} [-u {download-path
 
 ### 5 启动
 
-#### 5.1 使用docker
+#### 5.1 使用 Docker
 
-在 [3.1 使用 Docker 容器](#31-使用-docker-容器-推荐)中, 我们已经介绍了 如何使用 `docker` 部署 `hugegraph-server`, 我们还可以设置参数在sever启动的时候加载样例图
+在 [3.1 使用 Docker 容器](#31-使用-docker-容器-推荐)中，我们已经介绍了 如何使用 `docker` 部署 `hugegraph-server`, 我们还可以设置参数在 sever 启动的时候加载样例图
 
-##### 5.1.1 启动server的时候创建示例图
+##### 5.1.1 启动 server 的时候创建示例图
 
-在docker启动的时候设置环境变量 `PRELOAD=true`, 从而实现启动脚本的时候加载数据。
+在 docker 启动的时候设置环境变量 `PRELOAD=true`, 从而实现启动脚本的时候加载数据。
 
 1. 使用`docker run`
 
@@ -211,7 +213,7 @@ rocksdb.wal_path=.
 初始化数据库（仅第一次启动时需要）
 
 ```bash
-cd hugegraph-${version}
+cd *hugegraph-${version}
 bin/init-store.sh
 ```
 
@@ -224,6 +226,8 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 ```
 
 提示的 url 与 `rest-server.properties` 中配置的 `restserver.url` 一致
+
+</details>
 
 ##### 5.2.2 HBase
 
@@ -251,7 +255,7 @@ hbase.port=2181
 初始化数据库（仅第一次启动时需要）
 
 ```bash
-cd hugegraph-${version}
+cd *hugegraph-${version}
 bin/init-store.sh
 ```
 
@@ -297,7 +301,7 @@ jdbc.ssl_mode=false
 初始化数据库（仅第一次启动时需要）
 
 ```bash
-cd hugegraph-${version}
+cd *hugegraph-${version}
 bin/init-store.sh
 ```
 
@@ -339,7 +343,7 @@ cassandra.password=
 初始化数据库（仅第一次启动时需要）
 
 ```bash
-cd hugegraph-${version}
+cd *hugegraph-${version}
 bin/init-store.sh
 Initing HugeGraph Store...
 2017-12-01 11:26:51 1424  [main] [INFO ] org.apache.hugegraph.HugeGraph [] - Opening backend store: 'cassandra'
@@ -426,7 +430,7 @@ cassandra.password=
 初始化数据库（仅第一次启动时需要）
 
 ```bash
-cd hugegraph-${version}
+cd *hugegraph-${version}
 bin/init-store.sh
 ```
 
@@ -440,14 +444,9 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
+##### 5.2.7 启动 server 的时候创建示例图
 
-
-
-
-
-##### 5.2.7 启动server的时候创建示例图
-
-在脚本启动时候携带 `-p true` 参数, 表示preload, 即创建示例图
+在脚本启动时候携带 `-p true`参数，表示 preload, 即创建示例图图
 
 ```
 bin/start-hugegraph.sh -p true
@@ -575,11 +574,10 @@ _说明_
 ### 7 停止 Server
 
 ```bash
-$cd hugegraph-${version}
+$cd *hugegraph-${version}
 $bin/stop-hugegraph.sh
 ```
 
 ### 8 使用 IntelliJ IDEA 调试 Server
 
 请参考[在 IDEA 中配置 Server 开发环境](/docs/contribution-guidelines/hugegraph-server-idea-setup)
-  

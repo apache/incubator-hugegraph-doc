@@ -96,19 +96,21 @@ The execution log is as follows:
 
 ```bash
 ......
-[INFO] Reactor Summary:
+[INFO] Reactor Summary for hugegraph 1.0.0:
 [INFO] 
-[INFO] hugegraph .......................................... SUCCESS [  0.003 s]
-[INFO] hugegraph-core ..................................... SUCCESS [ 15.335 s]
-[INFO] hugegraph-api ...................................... SUCCESS [  0.829 s]
-[INFO] hugegraph-cassandra ................................ SUCCESS [  1.095 s]
-[INFO] hugegraph-scylladb ................................. SUCCESS [  0.313 s]
-[INFO] hugegraph-rocksdb .................................. SUCCESS [  0.506 s]
-[INFO] hugegraph-mysql .................................... SUCCESS [  0.412 s]
-[INFO] hugegraph-palo ..................................... SUCCESS [  0.359 s]
-[INFO] hugegraph-dist ..................................... SUCCESS [  7.470 s]
-[INFO] hugegraph-example .................................. SUCCESS [  0.403 s]
-[INFO] hugegraph-test ..................................... SUCCESS [  1.509 s]
+[INFO] hugegraph .......................................... SUCCESS [  2.405 s]
+[INFO] hugegraph-core ..................................... SUCCESS [ 13.405 s]
+[INFO] hugegraph-api ...................................... SUCCESS [ 25.943 s]
+[INFO] hugegraph-cassandra ................................ SUCCESS [ 54.270 s]
+[INFO] hugegraph-scylladb ................................. SUCCESS [  1.032 s]
+[INFO] hugegraph-rocksdb .................................. SUCCESS [ 34.752 s]
+[INFO] hugegraph-mysql .................................... SUCCESS [  1.778 s]
+[INFO] hugegraph-palo ..................................... SUCCESS [  1.070 s]
+[INFO] hugegraph-hbase .................................... SUCCESS [ 32.124 s]
+[INFO] hugegraph-postgresql ............................... SUCCESS [  1.823 s]
+[INFO] hugegraph-dist ..................................... SUCCESS [ 17.426 s]
+[INFO] hugegraph-example .................................. SUCCESS [  1.941 s]
+[INFO] hugegraph-test ..................................... SUCCESS [01:01 min]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
@@ -150,7 +152,7 @@ for detailed configuration introduction, please refer to [configuration document
 
 ### 5 Startup
 
-#### 5.1 Use docker to startup
+#### 5.1 Use Docker to startup
 
 In [3.1 Use Docker container](#31-use-docker-container-recommended), we have introduced how to use docker to deploy `hugegraph-server`. `server` can also preload an example graph by setting the parameter.
 
@@ -247,7 +249,7 @@ rocksdb.wal_path=.
 Initialize the database (required only on first startup)
 
 ```bash
-cd hugegraph-${version}
+cd *hugegraph-${version}
 bin/init-store.sh
 ```
 
@@ -290,7 +292,7 @@ Initialize the database (required only on first startup)
 
 
 ```bash
-cd hugegraph-${version}
+cd *hugegraph-${version}
 bin/init-store.sh
 Initing HugeGraph Store...
 2017-12-01 11:26:51 1424  [main] [INFO ] org.apache.hugegraph.HugeGraph [] - Opening backend store: 'cassandra'
@@ -351,7 +353,7 @@ Since the scylladb database itself is an "optimized version" based on cassandra,
 Initialize the database (required only on first startup)
 
 ```bash
-cd hugegraph-${version}
+cd *hugegraph-${version}
 bin/init-store.sh
 ```
 
@@ -391,7 +393,7 @@ hbase.port=2181
 Initialize the database (required only on first startup)
 
 ```bash
-cd hugegraph-${version}
+cd *hugegraph-${version}
 bin/init-store.sh
 ```
 
@@ -437,7 +439,7 @@ jdbc.ssl_mode=false
 Initialize the database (required only on first startup)
 
 ```bash
-cd hugegraph-${version}
+cd *hugegraph-${version}
 bin/init-store.sh
 ```
 
@@ -581,7 +583,7 @@ For detailed API, please refer to [RESTful-API](/docs/clients/restful-api)
 ### 7 Stop Server
 
 ```bash
-$cd hugegraph-${version}
+$cd *hugegraph-${version}
 $bin/stop-hugegraph.sh
 ```
 

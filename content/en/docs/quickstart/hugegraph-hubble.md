@@ -41,7 +41,7 @@ There are three ways to deplot `hugegraph-hubble`
 
 #### 2.1 Use docker (recommended)
 
-> **Special Note**: If you are starting `hubble` with Docker, and `hubble` and the server are on the same host. When configuring the hostname for the graph on the Hubble web page, please do not directly set it to `localhost/127.0.0.1`. This will refer to the `hubble` container internally rather than the host machine, resulting in a connection failure to the server.
+> **Special Note**: If you are starting `hubble` with Docker, and `hubble` and the server are on the same host. When configuring the hostname for the graph on the Hubble web page, please do not directly set it to `localhost/127.0.0.1`. This will refer to the `hubble` container internally rather than the host machine, resulting in a connection failure to the server. If `hubble` and `server` is in the same docker network, you can use the `container_name` as the hostname, and `8080` as the port. Or you can use the ip of the host as the hostname, and the port is configured by the host for the server.
 
 We can use `docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble` to quick start [hubble](https://hub.docker.com/r/hugegraph/hubble).
 
