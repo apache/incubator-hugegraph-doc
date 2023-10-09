@@ -227,7 +227,6 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-
 ##### 5.2.2 HBase
 
 <details>
