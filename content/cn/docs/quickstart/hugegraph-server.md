@@ -225,6 +225,9 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 提示的 url 与 `rest-server.properties` 中配置的 `restserver.url` 一致
 
+</details>
+
+
 ##### 5.2.2 HBase
 
 <details>
