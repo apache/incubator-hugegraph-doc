@@ -104,6 +104,7 @@ mvn package -DskipTests
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
+......
 ```
 
 执行成功后，在 hugegraph 目录下生成 `*hugegraph-*.tar.gz` 文件，就是编译生成的 tar 包。
@@ -573,7 +574,7 @@ _说明_
 ### 7 停止 Server
 
 ```bash
-$cd hugegraph-${version}
+$cd *hugegraph-${version}
 $bin/stop-hugegraph.sh
 ```
 
