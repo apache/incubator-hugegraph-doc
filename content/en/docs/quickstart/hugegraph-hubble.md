@@ -52,7 +52,7 @@ Use `docker-compose up -d`，`docker-compose.yml` is following:
 ```yaml
 version: '3'
 services:
-  graph_hubble:
+  server:
     image: hugegraph/hugegraph
     container_name: graph
     ports:

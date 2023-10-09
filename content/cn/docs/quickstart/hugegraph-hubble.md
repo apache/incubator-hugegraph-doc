@@ -52,7 +52,7 @@ HugeGraph是一款面向分析型，支持批量操作的图数据库系统，�
 ```yaml
 version: '3'
 services:
-  graph_hubble:
+  server:
     image: hugegraph/hugegraph
     container_name: graph
     ports:
