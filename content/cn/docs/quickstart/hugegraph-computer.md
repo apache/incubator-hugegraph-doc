@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph-Computer Quick Start"
 linkTitle: "Analysis with HugeGraph-Computer"
-weight: 7
+weight: 6
 ---
 
 ## 1 HugeGraph-Computer 概述
