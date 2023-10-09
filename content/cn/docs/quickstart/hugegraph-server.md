@@ -583,4 +583,3 @@ $bin/stop-hugegraph.sh
 
 请参考[在 IDEA 中配置 Server 开发环境](/docs/contribution-guidelines/hugegraph-server-idea-setup)
   
-\
