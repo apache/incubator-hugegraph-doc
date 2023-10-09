@@ -106,7 +106,7 @@ mvn package -DskipTests
 [INFO] ------------------------------------------------------------------------
 ```
 
-执行成功后，在 hugegraph 目录下生成 \*hugegraph-*.tar.gz 文件，就是编译生成的 tar 包。
+执行成功后，在 hugegraph 目录下生成 `*hugegraph-*.tar.gz` 文件，就是编译生成的 tar 包。
 
 
 #### 3.4 使用 tools 工具部署 (Outdated)
