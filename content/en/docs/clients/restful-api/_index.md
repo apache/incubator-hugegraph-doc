@@ -42,4 +42,6 @@ HugeGraph-Server provides interfaces for clients to operate on graphs based on t
 
 [comment]: <> (- [Authentication]&#40;restful-api/auth.md&#41;)
 
+[comment]: <> (- [Metrics]&#40;restful-api/metrics.md&#41;)
+
 [comment]: <> (- [Other]&#40;restful-api/other.md&#41;)
