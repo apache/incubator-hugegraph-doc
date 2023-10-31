@@ -37,12 +37,12 @@ java -version
 <!-- 3.1 is linked by other place. if change 3.1's title, please check -->
 可参考 [Docker 部署方式](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/README.md)。
 
-我们可以使用 `docker run -itd --name=graph -p 8080:8080 hugegraph/hugegraph` 去快速启动一个内置了 `RocksDB` 的 `Hugegraph server`.
+我们可以使用 `docker run -itd --name=graph -p 18080:8080 hugegraph/hugegraph` 去快速启动一个内置了 `RocksDB` 的 `Hugegraph server`.
 
 可选项：
 
 1. 可以使用 `docker exec -it graph bash` 进入容器完成一些操作
-2. 可以使用 `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph` 在启动的时候预加载一个**内置的**样例图。
+2. 可以使用 `docker run -itd --name=graph -p 18080:8080 -e PRELOAD="true" hugegraph/hugegraph` 在启动的时候预加载一个**内置的**样例图。可以通过 `RESTful API` 进行验证。具体步骤可以参考 [5.1.1](/cn/docs/quickstart/hugegraph-server/#511-%E5%90%AF%E5%8A%A8-server-%E7%9A%84%E6%97%B6%E5%80%99%E5%88%9B%E5%BB%BA%E7%A4%BA%E4%BE%8B%E5%9B%BE) 
 
 另外，如果我们希望能够在一个文件中管理除了 `server` 之外的其他 Hugegraph 相关的实例，我们也可以使用 `docker-compose`完成部署，使用命令 `docker-compose up -d`，（当然只配置 `server` 也是可以的）以下是一个样例的 `docker-compose.yml`:
 
@@ -572,7 +572,13 @@ _说明_
 }
 ```
 
-详细的 API 请参考 [RESTful-API](/docs/clients/restful-api) 文档
+详细的 API 请参考 [RESTful-API](/docs/clients/restful-api) 文档。
+
+另外也可以通过访问 `localhost:8080/swagger-ui/index.html` 查看 api。
+
+<div style="text-align: center;">
+  <img src="/cn/docs/images/images-server/621swaggerui示例.png" alt="image">
+</div>
 
 ### 7 停止 Server
 

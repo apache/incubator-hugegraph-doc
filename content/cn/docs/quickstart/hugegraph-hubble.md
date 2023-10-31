@@ -165,6 +165,7 @@ bin/start-hubble.sh -d
   <img src="/docs/images/images-hubble/311图创建2.png" alt="image">
 </div>
 
+> **注意**：如果使用 docker 启动 `hubble`，且 `server` 和 `hubble` 位于同一宿主机，不能直接使用 `localhost/127.0.0.1` 作为主机名。如果 `hubble` 和 `server` 在同一 docker 网络下，则可以直接使用 container_name 作为主机名，端口则为 8080。或者也可以使用宿主机 ip 作为主机名，此时端口为宿主机为 server 配置的端口
 
 ##### 4.1.2	图访问
 实现图空间的信息访问，进入后，可进行图的多维查询分析、元数据管理、数据导入、算法分析等操作。
@@ -296,6 +297,9 @@ bin/start-hubble.sh -d
 展示顶点类型和边类型的顶点索引和边索引。
 
 #### 4.3	数据导入
+
+> **注意**：目前推荐使用 [hugegraph-loader](/cn/docs/quickstart/hugegraph-loader) 进行数据导入
+
 数据导入的使用流程如下：
 
 <center>
