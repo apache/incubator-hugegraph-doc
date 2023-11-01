@@ -349,7 +349,7 @@ Initialization finished.
 $ ./bin/start-hugegraph.sh
 
 Starting HugeGraphServer...
-Connecting to HugeGraphServer (http://127.0.0.1:18080/graphs)...OK
+Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)...OK
 Started [pid 21614]
 ```
 

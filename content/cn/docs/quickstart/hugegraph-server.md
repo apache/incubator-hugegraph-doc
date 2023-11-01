@@ -577,7 +577,7 @@ _说明_
 另外也可以通过访问 `localhost:8080/swagger-ui/index.html` 查看 api。
 
 <div style="text-align: center;">
-  <img src="/cn/docs/images/images-server/621swaggerui示例.png" alt="image">
+  <img src="/docs/images/images-server/621swaggerui示例.png" alt="image">
 </div>
 
 ### 7 停止 Server

@@ -41,7 +41,9 @@ There are three ways to deplot `hugegraph-hubble`
 
 #### 2.1 Use docker (recommended)
 
-> **Special Note**: If you are starting `hubble` with Docker, and `hubble` and the server are on the same host. When configuring the hostname for the graph on the Hubble web page, please do not directly set it to `localhost/127.0.0.1`. This will refer to the `hubble` container internally rather than the host machine, resulting in a connection failure to the server. If `hubble` and `server` is in the same docker network, you can use the `container_name` as the hostname, and `8080` as the port. Or you can use the ip of the host as the hostname, and the port is configured by the host for the server.
+> **Special Note**: If you are starting `hubble` with Docker, and `hubble` and the server are on the same host. When configuring the hostname for the graph on the Hubble web page, please do not directly set it to `localhost/127.0.0.1`. This will refer to the `hubble` container internally rather than the host machine, resulting in a connection failure to the server.
+>
+>  If `hubble` and `server` is in the same docker network, we **recommend** using the `container_name` (in our example, it is `graph`) as the hostname, and `8080` as the port. Or you can use the **host IP** as the hostname, and the port is configured by the host for the server.
 
 We can use `docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble` to quick start [hubble](https://hub.docker.com/r/hugegraph/hubble).
 
@@ -56,7 +58,7 @@ services:
     image: hugegraph/hugegraph
     container_name: graph
     ports:
-      - 18080:8080
+      - 8080:8080
 
   hubble:
     image: hugegraph/hubble
@@ -160,12 +162,13 @@ Under the graph management module, click [Create graph], and realize the connect
 </div>
 
 
-Create graph by filling in the content as follows:：
+Create graph by filling in the content as follows:
 
 <center>
   <img src="/docs/images/images-hubble/311图创建2.png" alt="image">
 </center>
 
+> **Special Note**: If you are starting `hubble` with Docker, and `hubble` and the server are on the same host. When configuring the hostname for the graph on the Hubble web page, please do not directly set it to `localhost/127.0.0.1`. If `hubble` and `server` is in the same docker network, we **recommend** using the `container_name` (in our example, it is `graph`) as the hostname, and `8080` as the port. Or you can use the **host IP** as the hostname, and the port is configured by the host for the server.
 
 ##### 4.1.2	Graph Access
 Realize the information access of the graph space. After entering, you can perform operations such as multidimensional query analysis, metadata management, data import, and algorithm analysis of the graph.
@@ -275,7 +278,7 @@ List mode:
 </center>
 
 
-Graph mode：
+Graph mode:
 
 <center>
   <img src="/docs/images/images-hubble/3241边创建2.png" alt="image">
@@ -295,6 +298,9 @@ Graph mode：
 Displays vertex and edge indices for vertex types and edge types.
 
 #### 4.3 Data Import
+
+> **Note**：currently, we recommend to use [hugegraph-loader](/en/docs/quickstart/hugegraph-loader) to load data
+
 The usage process of data import is as follows:
 
 <center>
