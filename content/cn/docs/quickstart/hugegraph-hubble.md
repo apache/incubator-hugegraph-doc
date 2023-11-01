@@ -56,7 +56,7 @@ services:
     image: hugegraph/hugegraph
     container_name: graph
     ports:
-      - 18080:8080
+      - 8080:8080
 
   hubble:
     image: hugegraph/hubble
