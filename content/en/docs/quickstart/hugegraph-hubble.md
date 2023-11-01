@@ -299,7 +299,7 @@ Displays vertex and edge indices for vertex types and edge types.
 
 #### 4.3 Data Import
 
-> **Note**：currently, we recommend to use [hugegraph-loader](/en/docs/quickstart/hugegraph-loader) to load data
+> **Note**：currently, we recommend to use [hugegraph-loader](/en/docs/quickstart/hugegraph-loader) to import data formally. The built-in import of `hubble` is used for **testing** and **getting started**.
 
 The usage process of data import is as follows:
 

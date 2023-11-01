@@ -300,7 +300,7 @@ bin/start-hubble.sh -d
 
 #### 4.3	数据导入
 
-> **注意**：目前推荐使用 [hugegraph-loader](/cn/docs/quickstart/hugegraph-loader) 进行数据导入
+> **注意**：目前推荐使用 [hugegraph-loader](/cn/docs/quickstart/hugegraph-loader) 进行正式数据导入, hubble 内置的导入用来做**测试**和**简单上手**
 
 数据导入的使用流程如下：
 
