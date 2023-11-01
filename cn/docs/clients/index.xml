@@ -1,6 +1,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HugeGraph – API</title><link>/cn/docs/clients/</link><description>Recent content in API on HugeGraph</description><generator>Hugo -- gohugo.io</generator><atom:link href="/cn/docs/clients/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: HugeGraph RESTful API</title><link>/cn/docs/clients/restful-api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/restful-api/</guid><description>
 &lt;p>HugeGraph-Server通过HugeGraph-API基于HTTP协议为Client提供操作图的接口，主要包括元数据和
-图数据的增删改查，遍历算法，变量，图操作及其他操作。&lt;/p></description></item><item><title>Docs: HugeGraph Java Client</title><link>/cn/docs/clients/hugegraph-client/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/hugegraph-client/</guid><description>
+图数据的增删改查，遍历算法，变量，图操作及其他操作。&lt;/p>
+&lt;p>除了下方的文档，你还可以通过 &lt;code>localhost:8080/swagger-ui/index.html&lt;/code> 访问 &lt;code>swagger-ui&lt;/code> 以查看 &lt;code>RESTful API&lt;/code>。&lt;a href="/cn/docs/quickstart/hugegraph-server#swaggerui-example">示例可以参考此处&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph Java Client</title><link>/cn/docs/clients/hugegraph-client/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/hugegraph-client/</guid><description>
 &lt;p>本文的代码都是&lt;code>java&lt;/code>语言写的，但其风格与&lt;code>gremlin(groovy)&lt;/code>是非常类似的。用户只需要把代码中的变量声明替换成&lt;code>def&lt;/code>或直接去掉，
 就能将&lt;code>java&lt;/code>代码转变为&lt;code>groovy&lt;/code>；另外就是每一行语句最后可以不加分号，&lt;code>groovy&lt;/code>认为一行就是一条语句。
 用户在&lt;code>HugeGraph-Studio&lt;/code>中编写的&lt;code>gremlin(groovy)&lt;/code>可以参考本文的&lt;code>java&lt;/code>代码，下面会举出几个例子。&lt;/p>

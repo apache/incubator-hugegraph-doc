@@ -24,17 +24,18 @@
 &lt;p>Optional:&lt;/p>
 &lt;ol>
 &lt;li>use &lt;code>docker exec -it graph bash&lt;/code> to enter the container to do some operations.&lt;/li>
-&lt;li>use &lt;code>docker run -itd --name=graph -p 8080:8080 -e PRELOAD=&amp;quot;true&amp;quot; hugegraph/hugegraph&lt;/code> to start with a &lt;strong>built-in&lt;/strong> example graph.&lt;/li>
+&lt;li>use &lt;code>docker run -itd --name=graph -p 8080:8080 -e PRELOAD=&amp;quot;true&amp;quot; hugegraph/hugegraph&lt;/code> to start with a &lt;strong>built-in&lt;/strong> example graph. We can use &lt;code>RESTful API&lt;/code> to verify the result. The detailed step can refer to &lt;a href="http://127.0.0.1:1313/docs/quickstart/hugegraph-server/#511-create-example-graph-when-starting-server">5.1.1&lt;/a>&lt;/li>
 &lt;/ol>
-&lt;p>Also, we can use &lt;code>docker-compose&lt;/code> to deploy, with &lt;code>docker-compose up -d&lt;/code>. Here is an example &lt;code>docker-compose.yml&lt;/code>:&lt;/p>
+&lt;p>Also, if we want to manage the other Hugegraph related instances in one file, we can use &lt;code>docker-compose&lt;/code> to deploy, with the command &lt;code>docker-compose up -d&lt;/code> (you can config only &lt;code>server&lt;/code>). Here is an example &lt;code>docker-compose.yml&lt;/code>:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">graph&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic">#environment:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># environment:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - PRELOAD=true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># PRELOAD is a option to preload a build-in sample graph when initializing.&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">18080&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="32-download-the-binary-tar-tarball">3.2 Download the binary tar tarball&lt;/h4>
 &lt;p>You could download the binary tarball from the download page of ASF site like this:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># use the latest version, here is 1.0.0 for example&lt;/span>
@@ -113,11 +114,11 @@ for detailed configuration introduction, please refer to &lt;a href="/docs/confi
 &lt;ol>
 &lt;li>
 &lt;p>Use &lt;code>docker run&lt;/code>&lt;/p>
-&lt;p>Use &lt;code>docker run -itd --name=graph -p 18080:8080 -e PRELOAD=true hugegraph/hugegraph:latest&lt;/code>&lt;/p>
+&lt;p>Use &lt;code>docker run -itd --name=graph -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:latest&lt;/code>&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Use &lt;code>docker-compose&lt;/code>&lt;/p>
-&lt;p>Create &lt;code>docker-compose.yml&lt;/code> as following&lt;/p>
+&lt;p>Create &lt;code>docker-compose.yml&lt;/code> as following. We should set the environment variable &lt;code>PRELOAD=true&lt;/code>. &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/src/assembly/static/scripts/example.groovy">&lt;code>example.groovy&lt;/code>&lt;/a> is a predefined script to preload the sample data. If needed, we can mount a new &lt;code>example.groovy&lt;/code> to change the preload data.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">graph&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -126,7 +127,7 @@ for detailed configuration introduction, please refer to &lt;a href="/docs/confi
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">environment&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#000">PRELOAD=true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">18080&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Use &lt;code>docker-compose up -d&lt;/code> to start the container&lt;/p>
 &lt;/li>
 &lt;/ol>
@@ -168,7 +169,7 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=binary
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.data_path=.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.wal_path=.
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Initialize the database (required only on first startup)&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Initialize the database (required on first startup or a new configuration was manually added under &amp;lsquo;conf/graphs/&amp;rsquo;)&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Start server&lt;/p>
@@ -196,7 +197,7 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.keyspace.strategy=SimpleStrategy
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.keyspace.replication=3
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Initialize the database (required only on first startup)&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Initialize the database (required on first startup or a new configuration was manually added under &amp;lsquo;conf/graphs/&amp;rsquo;)&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Initing HugeGraph Store...
@@ -242,7 +243,7 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.keyspace.strategy=SimpleStrategy
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.keyspace.replication=3
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Since the scylladb database itself is an &amp;ldquo;optimized version&amp;rdquo; based on cassandra, if the user does not have scylladb installed, they can also use cassandra as the backend storage directly. They only need to change the backend and serializer to scylladb, and the host and post point to the seeds and port of the cassandra cluster. Yes, but it is not recommended to do so, it will not take advantage of scylladb itself.&lt;/p>
-&lt;p>Initialize the database (required only on first startup)&lt;/p>
+&lt;p>Initialize the database (required on first startup or a new configuration was manually added under &amp;lsquo;conf/graphs/&amp;rsquo;)&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Start server&lt;/p>
@@ -268,7 +269,7 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#hbase.enable_partition=true
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#hbase.vertex_partitions=10
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#hbase.edge_partitions=30
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Initialize the database (required only on first startup)&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Initialize the database (required on first startup or a new configuration was manually added under &amp;lsquo;conf/graphs/&amp;rsquo;)&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Start server&lt;/p>
@@ -300,7 +301,7 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.reconnect_max_times=3
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.reconnect_interval=3
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.ssl_mode=false
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Initialize the database (required only on first startup)&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Initialize the database (required on first startup or a new configuration was manually added under &amp;lsquo;conf/graphs/&amp;rsquo;)&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Start server&lt;/p>
@@ -400,7 +401,12 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ...
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For detailed API, please refer to &lt;a href="/docs/clients/restful-api">RESTful-API&lt;/a>&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p id="swaggerui-example">&lt;/p>
+&lt;p>For detailed API, please refer to &lt;a href="/docs/clients/restful-api">RESTful-API&lt;/a>&lt;/p>
+&lt;p>You can also visit &lt;code>localhost:8080/swagger-ui/index.html&lt;/code> to check the API.&lt;/p>
+&lt;div style="text-align: center;">
+&lt;img src="/docs/images/images-server/621swaggerui示例.png" alt="image">
+&lt;/div>
 &lt;h3 id="7-stop-server">7 Stop Server&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">$cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">$bin&lt;/span>/stop-hugegraph.sh
@@ -1462,7 +1468,8 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;/ul>
 &lt;h4 id="21-use-docker-recommended">2.1 Use docker (recommended)&lt;/h4>
 &lt;blockquote>
-&lt;p>&lt;strong>Special Note&lt;/strong>: If you are starting &lt;code>hubble&lt;/code> with Docker, and &lt;code>hubble&lt;/code> and the server are on the same host. When configuring the hostname for the graph on the Hubble web page, please do not directly set it to &lt;code>localhost/127.0.0.1&lt;/code>. This will refer to the &lt;code>hubble&lt;/code> container internally rather than the host machine, resulting in a connection failure to the server. If &lt;code>hubble&lt;/code> and &lt;code>server&lt;/code> is in the same docker network, you can use the &lt;code>container_name&lt;/code> as the hostname, and &lt;code>8080&lt;/code> as the port. Or you can use the ip of the host as the hostname, and the port is configured by the host for the server.&lt;/p>
+&lt;p>&lt;strong>Special Note&lt;/strong>: If you are starting &lt;code>hubble&lt;/code> with Docker, and &lt;code>hubble&lt;/code> and the server are on the same host. When configuring the hostname for the graph on the Hubble web page, please do not directly set it to &lt;code>localhost/127.0.0.1&lt;/code>. This will refer to the &lt;code>hubble&lt;/code> container internally rather than the host machine, resulting in a connection failure to the server.&lt;/p>
+&lt;p>If &lt;code>hubble&lt;/code> and &lt;code>server&lt;/code> is in the same docker network, we &lt;strong>recommend&lt;/strong> using the &lt;code>container_name&lt;/code> (in our example, it is &lt;code>graph&lt;/code>) as the hostname, and &lt;code>8080&lt;/code> as the port. Or you can use the &lt;strong>host IP&lt;/strong> as the hostname, and the port is configured by the host for the server.&lt;/p>
 &lt;/blockquote>
 &lt;p>We can use &lt;code>docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble&lt;/code> to quick start &lt;a href="https://hub.docker.com/r/hugegraph/hubble">hubble&lt;/a>.&lt;/p>
 &lt;p>Alternatively, you can use Docker Compose to start &lt;code>hubble&lt;/code>. Additionally, if &lt;code>hubble&lt;/code> and the graph are in the same Docker network, you can access the graph using the container name of the graph, eliminating the need for the host machine&amp;rsquo;s IP address.&lt;/p>
@@ -1473,7 +1480,7 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">18080&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hubble&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hubble&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -1528,10 +1535,13 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/311图创建.png" alt="image">
 &lt;/div>
-&lt;p>Create graph by filling in the content as follows:：&lt;/p>
+&lt;p>Create graph by filling in the content as follows:&lt;/p>
 &lt;center>
 &lt;img src="/docs/images/images-hubble/311图创建2.png" alt="image">
 &lt;/center>
+&lt;blockquote>
+&lt;p>&lt;strong>Special Note&lt;/strong>: If you are starting &lt;code>hubble&lt;/code> with Docker, and &lt;code>hubble&lt;/code> and the server are on the same host. When configuring the hostname for the graph on the Hubble web page, please do not directly set it to &lt;code>localhost/127.0.0.1&lt;/code>. If &lt;code>hubble&lt;/code> and &lt;code>server&lt;/code> is in the same docker network, we &lt;strong>recommend&lt;/strong> using the &lt;code>container_name&lt;/code> (in our example, it is &lt;code>graph&lt;/code>) as the hostname, and &lt;code>8080&lt;/code> as the port. Or you can use the &lt;strong>host IP&lt;/strong> as the hostname, and the port is configured by the host for the server.&lt;/p>
+&lt;/blockquote>
 &lt;h5 id="412graph-access">4.1.2 Graph Access&lt;/h5>
 &lt;p>Realize the information access of the graph space. After entering, you can perform operations such as multidimensional query analysis, metadata management, data import, and algorithm analysis of the graph.&lt;/p>
 &lt;center>
@@ -1621,7 +1631,7 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;center>
 &lt;img src="/docs/images/images-hubble/3241边创建.png" alt="image">
 &lt;/center>
-&lt;p>Graph mode：&lt;/p>
+&lt;p>Graph mode:&lt;/p>
 &lt;center>
 &lt;img src="/docs/images/images-hubble/3241边创建2.png" alt="image">
 &lt;/center>
@@ -1638,6 +1648,9 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;h5 id="425-index-types">4.2.5 Index Types&lt;/h5>
 &lt;p>Displays vertex and edge indices for vertex types and edge types.&lt;/p>
 &lt;h4 id="43-data-import">4.3 Data Import&lt;/h4>
+&lt;blockquote>
+&lt;p>&lt;strong>Note&lt;/strong>：currently, we recommend to use &lt;a href="/en/docs/quickstart/hugegraph-loader">hugegraph-loader&lt;/a> to import data formally. The built-in import of &lt;code>hubble&lt;/code> is used for &lt;strong>testing&lt;/strong> and &lt;strong>getting started&lt;/strong>.&lt;/p>
+&lt;/blockquote>
 &lt;p>The usage process of data import is as follows:&lt;/p>
 &lt;center>
 &lt;img src="/docs/images/images-hubble/33导入流程.png" alt="image">
