@@ -579,9 +579,11 @@ response body:
 }
 ```
 
+<p id="swaggerui-example"></p>
+
 For detailed API, please refer to [RESTful-API](/docs/clients/restful-api)
 
-You can also visit `localhost:8080/swagger-ui/index.html` to check the api.
+You can also visit `localhost:8080/swagger-ui/index.html` to check the API.
 
 <div style="text-align: center;">
     <img src="/docs/images/images-server/621swaggerui示例.png" alt="image">

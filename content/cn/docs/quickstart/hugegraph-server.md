@@ -572,9 +572,11 @@ _说明_
 }
 ```
 
+<p id="swaggerui-example"></p>
+
 详细的 API 请参考 [RESTful-API](/docs/clients/restful-api) 文档。
 
-另外也可以通过访问 `localhost:8080/swagger-ui/index.html` 查看 api。
+另外也可以通过访问 `localhost:8080/swagger-ui/index.html` 查看 API。
 
 <div style="text-align: center;">
   <img src="/docs/images/images-server/621swaggerui示例.png" alt="image">
