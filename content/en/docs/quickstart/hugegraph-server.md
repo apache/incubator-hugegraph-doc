@@ -37,19 +37,20 @@ We can use `docker run -itd --name=graph -p 8080:8080 hugegraph/hugegraph` to qu
 
 Optional: 
 1. use `docker exec -it graph bash` to enter the container to do some operations.
-2. use `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph` to start with a **built-in** example graph.
+2. use `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph` to start with a **built-in** example graph. We can use `RESTful API` to verify the result. The detailed step can refer to [5.1.1](http://127.0.0.1:1313/docs/quickstart/hugegraph-server/#511-create-example-graph-when-starting-server)
 
-Also, we can use `docker-compose` to deploy, with `docker-compose up -d`. Here is an example `docker-compose.yml`:
+Also, if we want to manage the other Hugegraph related instances in one file, we can use `docker-compose` to deploy, with the command `docker-compose up -d` (you can config only `server`). Here is an example `docker-compose.yml`:
 
 ```yaml
 version: '3'
 services:
   graph:
     image: hugegraph/hugegraph
-    #environment:
+    # environment:
     #  - PRELOAD=true
+    # PRELOAD is a option to preload a build-in sample graph when initializing.
     ports:
-      - 18080:8080
+      - 8080:8080
 ```
 
 #### 3.2 Download the binary tar tarball
@@ -162,11 +163,11 @@ Set the environment variable `PRELOAD=true` when starting Docker in order to loa
 
 1. Use `docker run`
 
-    Use `docker run -itd --name=graph -p 18080:8080 -e PRELOAD=true hugegraph/hugegraph:latest`
+    Use `docker run -itd --name=graph -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:latest`
 
 2. Use `docker-compose`
 
-    Create `docker-compose.yml` as following
+    Create `docker-compose.yml` as following. We should set the environment variable `PRELOAD=true`. [`example.groovy`](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/src/assembly/static/scripts/example.groovy) is a predefined script to preload the sample data. If needed, we can mount a new `example.groovy` to change the preload data.
 
     ```yaml
     version: '3'
@@ -177,7 +178,7 @@ Set the environment variable `PRELOAD=true` when starting Docker in order to loa
           environment:
             - PRELOAD=true
           ports:
-            - 18080:8080
+            - 8080:8080
     ```
 
     Use `docker-compose up -d` to start the container
@@ -246,7 +247,7 @@ rocksdb.data_path=.
 rocksdb.wal_path=.
 ```
 
-Initialize the database (required only on first startup)
+Initialize the database (required on first startup or a new configuration was manually added under 'conf/graphs/')
 
 ```bash
 cd *hugegraph-${version}
@@ -288,7 +289,7 @@ cassandra.password=
 #cassandra.keyspace.replication=3
 ```
 
-Initialize the database (required only on first startup)
+Initialize the database (required on first startup or a new configuration was manually added under 'conf/graphs/')
 
 
 ```bash
@@ -350,7 +351,7 @@ cassandra.password=
 
 Since the scylladb database itself is an "optimized version" based on cassandra, if the user does not have scylladb installed, they can also use cassandra as the backend storage directly. They only need to change the backend and serializer to scylladb, and the host and post point to the seeds and port of the cassandra cluster. Yes, but it is not recommended to do so, it will not take advantage of scylladb itself.
 
-Initialize the database (required only on first startup)
+Initialize the database (required on first startup or a new configuration was manually added under 'conf/graphs/')
 
 ```bash
 cd *hugegraph-${version}
@@ -390,7 +391,7 @@ hbase.port=2181
 #hbase.edge_partitions=30
 ```
 
-Initialize the database (required only on first startup)
+Initialize the database (required on first startup or a new configuration was manually added under 'conf/graphs/')
 
 ```bash
 cd *hugegraph-${version}
@@ -436,7 +437,7 @@ jdbc.reconnect_interval=3
 jdbc.ssl_mode=false
 ```
 
-Initialize the database (required only on first startup)
+Initialize the database (required on first startup or a new configuration was manually added under 'conf/graphs/')
 
 ```bash
 cd *hugegraph-${version}
@@ -578,7 +579,15 @@ response body:
 }
 ```
 
+<p id="swaggerui-example"></p>
+
 For detailed API, please refer to [RESTful-API](/docs/clients/restful-api)
+
+You can also visit `localhost:8080/swagger-ui/index.html` to check the API.
+
+<div style="text-align: center;">
+    <img src="/docs/images/images-server/621swaggerui示例.png" alt="image">
+</div>
 
 ### 7 Stop Server
 
