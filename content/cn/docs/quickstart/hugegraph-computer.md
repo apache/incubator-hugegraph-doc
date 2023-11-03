@@ -138,7 +138,7 @@ cat <<EOF | kubectl apply --filename -
 apiVersion: hugegraph.apache.org/v1
 kind: HugeGraphComputerJob
 metadata:
-  namespace: hugegraph-computer-system
+  namespace: hugegraph-computer-operator-system
   name: &jobName pagerank-sample
 spec:
   jobId: *jobName
@@ -160,7 +160,7 @@ EOF
 #### 2.2.6 显示作业
 
 ```bash
-kubectl get hcjob/pagerank-sample -n hugegraph-computer-system
+kubectl get hcjob/pagerank-sample -n hugegraph-computer-operator-system
 
 NAME               JOBID              JOBSTATUS
 pagerank-sample    pagerank-sample    RUNNING
@@ -170,14 +170,14 @@ pagerank-sample    pagerank-sample    RUNNING
 
 ```bash
 # Show the master log
-kubectl logs -l component=pagerank-sample-master -n hugegraph-computer-system
+kubectl logs -l component=pagerank-sample-master -n hugegraph-computer-operator-system
 
 # Show the worker log
-kubectl logs -l component=pagerank-sample-worker -n hugegraph-computer-system
+kubectl logs -l component=pagerank-sample-worker -n hugegraph-computer-operator-system
 
 # Show diagnostic log of a job
 # 注意: 诊断日志仅在作业失败时存在，并且只会保存一小时。
-kubectl get event --field-selector reason=ComputerJobFailed --field-selector involvedObject.name=pagerank-sample -n hugegraph-computer-system
+kubectl get event --field-selector reason=ComputerJobFailed --field-selector involvedObject.name=pagerank-sample -n hugegraph-computer-operator-system
 ```
 
 #### 2.2.8 显示作业的成功事件
@@ -185,7 +185,7 @@ kubectl get event --field-selector reason=ComputerJobFailed --field-selector inv
 > NOTE: it will only be saved for one hour
 
 ```bash
-kubectl get event --field-selector reason=ComputerJobSucceed --field-selector involvedObject.name=pagerank-sample -n hugegraph-computer-system
+kubectl get event --field-selector reason=ComputerJobSucceed --field-selector involvedObject.name=pagerank-sample -n hugegraph-computer-operator-system
 ```
 
 #### 2.2.9 查询算法结果
