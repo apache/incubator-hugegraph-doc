@@ -5,8 +5,10 @@ weight: 1
 
 ---
 
-HugeGraph provides metrics info, including basic metrics, statistical metrics, system metrics, and
-backend metrics.
+
+HugeGraph provides a metrics interface for obtaining monitoring information, such as statistics on
+each Gremlin execution time, cache size, etc. The metrics interface includes the following
+categories: basic metrics, statistical metrics, system metrics, and back-end storage metrics.
 
 ## 1. Basic Metrics
 
@@ -14,7 +16,7 @@ backend metrics.
 
 ##### Params
 
-- type: If the passed value is JSON, it is returned in JSON format, otherwise it is returned in
+- type: If the passed value is `JSON`, it is returned in JSON format, otherwise it is returned in
   Promethaus format.
 
 ##### 1.1.1 Method & Url

@@ -5,7 +5,8 @@ weight: 1
 
 ---
 
-HugeGraph 提供关于 Metrics 的信息披露，包括：基础指标、统计指标、系统指标、后端指标。
+HugeGraph 提供了获取监控信息的 Metrics 接口，比如各个 Gremlin 执行时间的统计、缓存的占用大小等。Metrics
+接口包括如下几类：基础指标、统计指标、系统指标、后端存储指标。
 
 ## 1. 基础指标
 
@@ -13,7 +14,7 @@ HugeGraph 提供关于 Metrics 的信息披露，包括：基础指标、统计�
 
 ##### Params
 
-- type：如果传值为 json，则以 json 格式返回，否则以 Promethaus 格式返回。
+- type：如果传值为`json`，则以 json 格式返回，否则以 Promethaus 格式返回。
 
 ##### 1.1.1 Method & Url
 
