@@ -456,7 +456,7 @@ http://localhost:8080/metrics/
 
 ##### Response Body
 
-```json
+```text
 # HELP hugegraph_info
 # TYPE hugegraph_info untyped
 hugegraph_info{version="0.69",
@@ -1051,7 +1051,7 @@ GET http://localhost:8080/metrics/statistics
 
 ##### Response Status
 
-```json
+```text
 # HELP hugegraph_info
 # TYPE hugegraph_info untyped
 hugegraph_info{version="0.69",
