@@ -143,9 +143,69 @@ bin/hugegraph deploy -v {hugegraph-version} -p {install-path} [-u {download-path
 
 #### 5.1 使用 Docker
 
-在 [3.1 使用 Docker 容器](#31-使用-docker-容器-推荐)中，我们已经介绍了如何使用 `docker` 部署 `hugegraph-server`, 我们还可以设置参数在 sever 启动的时候加载样例图
+在 [3.1 使用 Docker 容器](#31-使用-docker-容器-推荐)中，我们已经介绍了如何使用 `docker` 部署 `hugegraph-server`, 我们还可以使用其他的后端存储或者设置参数在 sever 启动的时候加载样例图
 
-##### 5.1.1 启动 server 的时候创建示例图
+##### 5.1.1 使用 Cassandra 作为后端
+
+<details>
+<summary>点击展开/折叠 Cassandra 配置及启动方法</summary>
+
+在使用 Docker 进行存储的时候，我们需要可以使用 Cassandra 作为后端存储。我们更加推荐直接使用 docker-compose 来对于 server 以及 Cassandra 进行统一管理
+
+样例的 `docker-compose.yml` 可以在 [此处](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/docker/example/docker-compose-cassandra.yml) 获取，使用 `docker-compose up -d` 启动。(如果使用 cassandra 4.0 版本作为后端存储，则需要大约两个分钟初始化，请耐心等待)
+
+```yaml
+version: "3"
+
+services:
+  graph:
+    image: hugegraph/hugegraph
+    container_name: cas-graph
+    ports:
+      - 8080:8080
+    environment:
+      hugegraph.backend: cassandra
+      hugegraph.serializer: cassandra
+      hugegraph.cassandra.host: cas-cassandra
+      hugegraph.cassandra.port: 9042
+    networks:
+      - ca-network
+    depends_on:
+      - cassandra
+    healthcheck:
+      test: ["CMD", "bin/gremlin-console.sh", "--" ,"-e", "scripts/remote-connect.groovy"]
+      interval: 10s
+      timeout: 30s
+      retries: 3
+
+  cassandra:
+    image: cassandra:4
+    container_name: cas-cassandra
+    ports:
+      - 7000:7000
+      - 9042:9042
+    security_opt:
+      - seccomp:unconfined
+    networks:
+      - ca-network
+    healthcheck:
+      test: ["CMD", "cqlsh", "--execute", "describe keyspaces;"]
+      interval: 10s
+      timeout: 30s
+      retries: 5
+
+networks:
+  ca-network:
+
+volumes:
+  hugegraph-data:
+```
+
+在这个 yaml 中，需要在环境变量中以 `hugegraph.`的形式进行参数传递，配置 Cassandra 相关的参数，其他配置可以参照 [4 配置](#4-配置)
+
+</details>
+
+##### 5.1.2 启动 server 的时候创建示例图
 
 在 docker 启动的时候设置环境变量 `PRELOAD=true`, 从而实现启动脚本的时候加载数据。
 

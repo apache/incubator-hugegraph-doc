@@ -27,7 +27,38 @@ HugeGraph-Loader 是 HugeGraph 的数据导入组件，能够将多种数据源�
 - 下载已编译的压缩包
 - 克隆源码编译安装
 
-#### 2.1 下载已编译的压缩包
+#### 2.1 使用 Docker 镜像
+
+我们可以使用 `docker run -itd --name loader hugegraph/loader`部署 loader 服务。对于需要加载的数据，则可以通过挂载 `-v /path/to/data/file:/loader/file` 或者`docker cp`的方式将文件复制到 loader 容器内部。
+
+或者使用 docker-compose 启动 loader, 样例的 docker-compose.yml 如下所示，启动命令为 `docker-compose up -d`：
+
+```yaml
+version: '3'
+
+services:
+  server:
+    image: hugegraph/hugegraph
+    container_name: graph
+    ports:
+      - 8080:8080
+
+  hubble:
+    image: hugegraph/hubble
+    container_name: hubble
+    ports:
+      - 8088:8088
+
+  loader:
+    image: hugegraph/loader
+    container_name: loader
+    # mount your own data here
+    # volumes:
+      # - /path/to/data/file:/loader/file
+    tty: true
+```
+
+#### 2.2 下载已编译的压缩包
 
 下载最新版本的 HugeGraph-Toolchain Release 包，里面包含了 loader + tool + hubble 全套工具，如果你已经下载，可跳过重复步骤
 
@@ -36,7 +67,7 @@ wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-too
 tar zxf *hugegraph*.tar.gz
 ```
 
-#### 2.2 克隆源码编译安装
+#### 2.1 克隆源码编译安装
 
 克隆最新版本的 HugeGraph-Loader 源码包：
 
@@ -969,6 +1000,54 @@ count metrics
      edge insert success           : 6
      edge insert failure           : 0
 ```
+
+#### 4.6 使用 docker 导入
+
+首先使用 `docker exec -it loader bash` 进入容器内部
+
+> **注意**: 如果使用 docker-compose 部署 loader 和 server, 或 loader 和 server 位于同一 docker 网络，则导入数据的时候可以指定 `-h {server_container_name} -p 8080`, 否则需要指定 server 的宿主机的 ip 以及端口。其他的参数可以参考[此处](https://hugegraph.apache.org/docs/quickstart/hugegraph-loader/#341-parameter-description). 
+
+执行命令
+```bash
+sh bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy -h graph -p 8080
+```
+
+然后我们可以观察到结果：
+
+```bash
+HugeGraphLoader worked in NORMAL MODE
+vertices/edges loaded this time : 8/6
+--------------------------------------------------
+count metrics
+    input read success            : 14                  
+    input read failure            : 0                   
+    vertex parse success          : 8                   
+    vertex parse failure          : 0                   
+    vertex insert success         : 8                   
+    vertex insert failure         : 0                   
+    edge parse success            : 6                   
+    edge parse failure            : 0                   
+    edge insert success           : 6                   
+    edge insert failure           : 0                   
+--------------------------------------------------
+meter metrics
+    total time                    : 0.199s              
+    read time                     : 0.046s              
+    load time                     : 0.153s              
+    vertex load time              : 0.077s              
+    vertex load rate(vertices/s)  : 103                 
+    edge load time                : 0.112s              
+    edge load rate(edges/s)       : 53   
+```
+
+也可以使用 `curl` 或者 `hubble`观察导入结果，此处以以 `curl` 为例：
+
+```bash
+> curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
+{"vertices":[{"id":1,"label":"software","type":"vertex","properties":{"name":"lop","lang":"java","price":328.0}},{"id":2,"label":"software","type":"vertex","properties":{"name":"ripple","lang":"java","price":199.0}},{"id":"1:tom","label":"person","type":"vertex","properties":{"name":"tom"}},{"id":"1:josh","label":"person","type":"vertex","properties":{"name":"josh","age":32,"city":"Beijing"}},{"id":"1:marko","label":"person","type":"vertex","properties":{"name":"marko","age":29,"city":"Beijing"}},{"id":"1:peter","label":"person","type":"vertex","properties":{"name":"peter","age":35,"city":"Shanghai"}},{"id":"1:vadas","label":"person","type":"vertex","properties":{"name":"vadas","age":27,"city":"Hongkong"}},{"id":"1:li,nary","label":"person","type":"vertex","properties":{"name":"li,nary","age":26,"city":"Wu,han"}}]}
+```
+
+如果想检查边的导入结果，可以使用 `curl "http://localhost:8080/graphs/hugegraph/graph/edges" | gunzip`
 
 #### 4.5 使用 spark-loader 导入
 > Spark 版本：Spark 3+，其他版本未测试。
