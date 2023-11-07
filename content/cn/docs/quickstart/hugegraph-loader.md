@@ -31,7 +31,7 @@ HugeGraph-Loader 是 HugeGraph 的数据导入组件，能够将多种数据源�
 
 我们可以使用 `docker run -itd --name loader hugegraph/loader`部署 loader 服务。对于需要加载的数据，则可以通过挂载 `-v /path/to/data/file:/loader/file` 或者`docker cp`的方式将文件复制到 loader 容器内部。
 
-或者使用 docker-compose 启动 loader, 样例的 docker-compose.yml 如下所示，启动命令为 `docker-compose up -d`：
+或者使用 docker-compose 启动 loader, 启动命令为 `docker-compose up -d`, 样例的 docker-compose.yml 如下所示：
 
 ```yaml
 version: '3'
@@ -58,6 +58,8 @@ services:
     tty: true
 ```
 
+具体的数据导入流程可以参考 [4.6 使用 docker 导入](#46-使用-docker-导入) 
+
 #### 2.2 下载已编译的压缩包
 
 下载最新版本的 HugeGraph-Toolchain Release 包，里面包含了 loader + tool + hubble 全套工具，如果你已经下载，可跳过重复步骤
@@ -67,7 +69,7 @@ wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-too
 tar zxf *hugegraph*.tar.gz
 ```
 
-#### 2.1 克隆源码编译安装
+#### 2.3 克隆源码编译安装
 
 克隆最新版本的 HugeGraph-Loader 源码包：
 
@@ -80,21 +82,11 @@ wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-too
 ```
 
 由于 Oracle ojdbc license 的限制，需要手动安装 ojdbc 到本地 maven 仓库。
-访问[Oracle jdbc 下载](https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html) 页面。选择 Oracle Database 12c Release 2 (12.2.0.1) drivers，如下图所示。
+访问[Oracle jdbc 下载](https://www.oracle.com/database/technologies/appdev/jdbc-drivers-archive.html) 页面。选择 Oracle Database 12c Release 2 (12.2.0.1) drivers，如下图所示。
 
-<div style="text-align: center;">
-  <img src="/docs/images/oracle-download.png" alt="image">
-</div>
+打开链接后，选择“ojdbc8.jar”
 
-
-打开链接后，选择“ojdbc8.jar”, 如下图所示。
-
-<div style="text-align: center;">
-  <img src="/docs/images/ojdbc8.png" alt="image">
-</div>
-
-
- 把 ojdbc8 安装到本地 maven 仓库，进入`ojdbc8.jar`所在目录，执行以下命令。
+把 ojdbc8 安装到本地 maven 仓库，进入`ojdbc8.jar`所在目录，执行以下命令。
 ```
 mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
 ```
@@ -284,7 +276,9 @@ Office,388
 
 > 注意：0.11.0 版本以前的映射文件与 0.11.0 以后的格式变化较大，为表述方便，下面称 0.11.0 以前的映射文件（格式）为 1.0 版本，0.11.0 以后的为 2.0 版本。并且若无特殊说明，“映射文件”表示的是 2.0 版本的。
 
-2.0 版本的映射文件的框架为：
+
+<details>
+<summary>点击展开/折叠 2.0 版本的映射文件的框架</summary>
 
 ```json
 {
@@ -307,9 +301,13 @@ Office,388
 }
 ```
 
+</details>
+<br/>
+
 这里直接给出两个版本的映射文件（描述了上面图模型和数据文件）
 
-2.0 版本的映射文件：
+<details>
+<summary>点击展开/折叠 2.0 版本的映射文件</summary>
 
 ```json
 {
@@ -513,7 +511,11 @@ Office,388
 }
 ```
 
-1.0 版本的映射文件：
+</details>
+<br/>
+
+<details>
+<summary>点击展开/折叠 1.0 版本的映射文件</summary>
 
 ```json
 {
@@ -569,6 +571,9 @@ Office,388
   ]
 }
 ```
+
+</details>
+<br/> 
 
 映射文件 1.0 版本是以顶点和边为中心，设置输入源；而 2.0 版本是以输入源为中心，设置顶点和边映射。有些输入源（比如一个文件）既能生成顶点，也能生成边，如果用 1.0 版的格式写，就需要在 vertex 和 edge 映射块中各写一次 input 块，这两次的 input 块是完全一样的；而 2.0 版本只需要写一次 input。所以 2.0 版相比于 1.0 版，能省掉一些 input 的重复书写。
 
@@ -884,7 +889,8 @@ id|name|lang|price|ISBN
 
 #### 4.2 编写 schema
 
-schema 文件：`example/file/schema.groovy`
+<details>
+<summary>点击展开/折叠 schema 文件：example/file/schema.groovy</summary>
 
 ```groovy
 schema.propertyKey("name").asText().ifNotExist().create();
@@ -910,8 +916,12 @@ schema.indexLabel("createdByDate").onE("created").by("date").secondary().ifNotEx
 schema.indexLabel("createdByWeight").onE("created").by("weight").range().ifNotExist().create();
 schema.indexLabel("knowsByWeight").onE("knows").by("weight").range().ifNotExist().create();
 ```
+</details>
 
 #### 4.3 编写输入源映射文件`example/file/struct.json`
+
+<details>
+<summary>点击展开/折叠 源映射文件 example/file/struct.json</summary>
 
 ```json
 {
@@ -976,6 +986,7 @@ schema.indexLabel("knowsByWeight").onE("knows").by("weight").range().ifNotExist(
   ]
 }
 ```
+</details>
 
 #### 4.4 执行命令导入
 
@@ -1003,14 +1014,15 @@ count metrics
 
 #### 4.6 使用 docker 导入
 
-首先使用 `docker exec -it loader bash` 进入容器内部
+##### 4.6.1 使用 docker exec 直接导入数据
 
-> **注意**: 如果使用 docker-compose 部署 loader 和 server, 或 loader 和 server 位于同一 docker 网络，则导入数据的时候可以指定 `-h {server_container_name} -p 8080`, 否则需要指定 server 的宿主机的 ip 以及端口。其他的参数可以参考[此处](https://hugegraph.apache.org/docs/quickstart/hugegraph-loader/#341-parameter-description). 
+我们可以使用一下的命令对数据进行导入
 
-执行命令
 ```bash
-sh bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy -h graph -p 8080
+docker exec -it loader bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy -h graph -p 8080
 ```
+
+> 如果 `loader` 和 `server`位于同一 docker 网络，则可以指定定 `-h {server_container_name}`(在我们的例子中，, `server_container_name` 为 `graph`), 否则需要指定 `server`的宿主机的 ip
 
 然后我们可以观察到结果：
 
@@ -1040,7 +1052,7 @@ meter metrics
     edge load rate(edges/s)       : 53   
 ```
 
-也可以使用 `curl` 或者 `hubble`观察导入结果，此处以以 `curl` 为例：
+也可以使用 `curl` 或者 `hubble`观察导入结果，此处以 `curl` 为例：
 
 ```bash
 > curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
@@ -1048,6 +1060,17 @@ meter metrics
 ```
 
 如果想检查边的导入结果，可以使用 `curl "http://localhost:8080/graphs/hugegraph/graph/edges" | gunzip`
+
+##### 4.6.2 进入 docker 容器进行导入
+
+使用 `docker exec -it loader bash` 进入容器内部
+
+执行命令
+```bash
+sh bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy -h graph -p 8080
+```
+
+执行的结果如 [4.6.1](#461-使用-docker-exec-直接导入数据) 所示
 
 #### 4.5 使用 spark-loader 导入
 > Spark 版本：Spark 3+，其他版本未测试。
