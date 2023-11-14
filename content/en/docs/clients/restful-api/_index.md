@@ -44,4 +44,6 @@ Expect the doc below, you can also use `swagger-ui` to visit the `RESTful API` b
 
 [comment]: <> (- [Authentication]&#40;restful-api/auth.md&#41;)
 
+[comment]: <> (- [Metrics]&#40;restful-api/metrics.md&#41;)
+
 [comment]: <> (- [Other]&#40;restful-api/other.md&#41;)
