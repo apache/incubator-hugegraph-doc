@@ -201,7 +201,11 @@ volumes:
   hugegraph-data:
 ```
 
-在这个 yaml 中，需要在环境变量中以 `hugegraph.`的形式进行参数传递，配置 Cassandra 相关的参数，其他配置可以参照 [4 配置](#4-配置)
+在这个 yaml 中，需要在环境变量中以 `hugegraph.`的形式进行参数传递，配置 Cassandra 相关的参数。
+
+具体来说，在 `hugegraph.properties` 配置文件中，提供了 `backend=xxx`, `cassandra.host=xxx` 等配置项，为了配置这些配置项，在传递环境变量的过程之中，我们需要在这些配置项前加上 `hugegrpah.`，即 `hugegraph.backend` 和 `hugegraph.cassandra.host`。
+
+其他配置可以参照 [4 配置](#4-配置)
 
 </details>
 

@@ -1018,15 +1018,34 @@ count metrics
 
 ###### 4.5.1.1 数据准备
 
-在使用 loader 导入数据之前，我们需要将数据复制到容器内部。 
+如果仅仅尝试使用 loader, 我们可以使用内置的 example 数据集进行导入，无需自己额外准备数据
 
-首先我们可以根据 [4.1-4.3](#41-准备数据) 的步骤准备数据，将准备好的数据通过 `docker cp` 复制到 loader 容器内部：
+如果使用自定义的数据，则在使用 loader 导入数据之前，我们需要将数据复制到容器内部。 
+
+首先我们可以根据 [4.1-4.3](#41-准备数据) 的步骤准备数据，将准备好的数据通过 `docker cp` 复制到 loader 容器内部。
+
+假设我们已经按照上述的步骤准备好了对应的数据集，存放在 `hugegraph-dataset` 文件夹下，文件结构如下：
 
 ```bash
-docker cp /path/to/local/directory <container_name/id>:/path/to/container/directory
+tree -f hugegraph-dataset/
+
+hugegraph-dataset
+├── hugegraph-dataset/edge_created.json
+├── hugegraph-dataset/edge_knows.json
+├── hugegraph-dataset/schema.groovy
+├── hugegraph-dataset/struct.json
+├── hugegraph-dataset/vertex_person.csv
+└── hugegraph-dataset/vertex_software.txt
 ```
 
-如果仅仅尝试使用 loader, 我们可以使用内置的 example 数据集进行导入，无需自己额外准备数据
+将文件复制到容器内部
+
+```bash
+docker cp hugegraph-dataset loader:/loader/dataset
+docker exec -it loader ls /loader/dataset
+
+edge_created.json  edge_knows.json  schema.groovy  struct.json  vertex_person.csv  vertex_software.txt
+```
 
 ###### 4.5.1.2 数据导入
 
@@ -1039,6 +1058,13 @@ docker cp /path/to/local/directory <container_name/id>:/path/to/container/direct
 ```bash
 docker exec -it loader bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy -h graph -p 8080
 ```
+
+如果导入用户自定义的数据集，按照刚才的例子，则使用：
+
+```bash
+docker exec -it loader bin/hugegraph-loader.sh -g hugegraph -f /loader/dataset/struct.json -s /loader/dataset/schema.groovy -h graph -p 8080
+```
+
 
 > 如果 `loader` 和 `server`位于同一 docker 网络，则可以指定 `-h {server_container_name}`, 否则需要指定 `server`的宿主机的 ip (在我们的例子中， `server_container_name` 为 `graph`).
 
