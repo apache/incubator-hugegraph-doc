@@ -24,6 +24,7 @@ HugeGraph-Loader 是 HugeGraph 的数据导入组件，能够将多种数据源�
 
 有两种方式可以获取 HugeGraph-Loader：
 
+- 使用 Docker 镜像 (推荐)
 - 下载已编译的压缩包
 - 克隆源码编译安装
 
@@ -55,10 +56,9 @@ services:
     # mount your own data here
     # volumes:
       # - /path/to/data/file:/loader/file
-    tty: true
 ```
 
-具体的数据导入流程可以参考 [4.6 使用 docker 导入](#46-使用-docker-导入) 
+具体的数据导入流程可以参考 [4.5 使用 docker 导入](#45-使用-docker-导入) 
 
 #### 2.2 下载已编译的压缩包
 
@@ -873,14 +873,14 @@ id|name|lang|price|ISBN
 
 边文件：`example/file/edge_knows.json`
 
-```
+```json
 {"source_name": "marko", "target_name": "vadas", "date": "20160110", "weight": 0.5}
 {"source_name": "marko", "target_name": "josh", "date": "20130220", "weight": 1.0}
 ```
 
 边文件：`example/file/edge_created.json`
 
-```
+```json
 {"aname": "marko", "bname": "lop", "date": "20171210", "weight": 0.4}
 {"aname": "josh", "bname": "lop", "date": "20091111", "weight": 0.4}
 {"aname": "josh", "bname": "ripple", "date": "20171210", "weight": 1.0}
@@ -996,7 +996,7 @@ sh bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/f
 
 导入结束后，会出现类似如下统计信息：
 
-```
+```bash
 vertices/edges has been loaded this time : 8/6
 --------------------------------------------------
 count metrics
@@ -1012,17 +1012,35 @@ count metrics
      edge insert failure           : 0
 ```
 
-#### 4.6 使用 docker 导入
+#### 4.5 使用 docker 导入
 
-##### 4.6.1 使用 docker exec 直接导入数据
+##### 4.5.1 使用 docker exec 直接导入数据
 
-我们可以使用一下的命令对数据进行导入
+###### 4.5.1.1 数据准备
+
+在使用 loader 导入数据之前，我们需要将数据复制到容器内部。 
+
+首先我们可以根据 [4.1-4.3](#41-准备数据) 的步骤准备数据，将准备好的数据通过 `docker cp` 复制到 loader 容器内部：
+
+```bash
+docker cp /path/to/local/directory <container_name/id>:/path/to/container/directory
+```
+
+如果仅仅尝试使用 loader, 我们可以使用内置的 example 数据集进行导入，无需自己额外准备数据
+
+###### 4.5.1.2 数据导入
+
+以内置的 example 数据集为例，我们可以使用以下的命令对数据进行导入。
+
+如果需要导入自己准备的数据集，则只需要修改 `-f` 配置脚本的路径 以及 `-s` schema 文件路径即可。
+
+其他的参数可以参照 [3.4.1 参数说明](#341-参数说明)
 
 ```bash
 docker exec -it loader bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy -h graph -p 8080
 ```
 
-> 如果 `loader` 和 `server`位于同一 docker 网络，则可以指定定 `-h {server_container_name}`(在我们的例子中，, `server_container_name` 为 `graph`), 否则需要指定 `server`的宿主机的 ip
+> 如果 `loader` 和 `server`位于同一 docker 网络，则可以指定 `-h {server_container_name}`, 否则需要指定 `server`的宿主机的 ip (在我们的例子中， `server_container_name` 为 `graph`).
 
 然后我们可以观察到结果：
 
@@ -1061,18 +1079,19 @@ meter metrics
 
 如果想检查边的导入结果，可以使用 `curl "http://localhost:8080/graphs/hugegraph/graph/edges" | gunzip`
 
-##### 4.6.2 进入 docker 容器进行导入
+##### 4.5.2 进入 docker 容器进行导入
 
-使用 `docker exec -it loader bash` 进入容器内部
+除了直接使用 `docker exec` 导入数据，我们也可以进入容器进行数据导入，基本流程与 [4.5.1](#451-使用-docker-exec-直接导入数据) 相同
 
-执行命令
+使用 `docker exec -it loader bash`进入容器内部，并执行命令
+
 ```bash
 sh bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy -h graph -p 8080
 ```
 
-执行的结果如 [4.6.1](#461-使用-docker-exec-直接导入数据) 所示
+执行的结果如 [4.5.1](#451-使用-docker-exec-直接导入数据) 所示
 
-#### 4.5 使用 spark-loader 导入
+#### 4.6 使用 spark-loader 导入
 > Spark 版本：Spark 3+，其他版本未测试。
 > HugeGraph Toolchain 版本：toolchain-1.0.0
 > 

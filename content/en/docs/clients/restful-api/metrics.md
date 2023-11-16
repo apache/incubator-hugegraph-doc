@@ -1,7 +1,7 @@
 ---
 title: "Metrics API"
 linkTitle: "Metrics"
-weight: 1
+weight: 17
 
 ---
 
