@@ -157,7 +157,71 @@ for detailed configuration introduction, please refer to [configuration document
 
 In [3.1 Use Docker container](#31-use-docker-container-recommended), we have introduced how to use docker to deploy `hugegraph-server`. `server` can also preload an example graph by setting the parameter.
 
-##### 5.1.1 Create example graph when starting server
+##### 5.1.1 Use Cassandra as the storage
+
+<details>
+<summary> Click to expand/collapse Cassandra configuration and startup methods</summary>
+
+When using Docker, we can use Cassandra as the backend storage. We highly recommend using docker-compose directly to manage both the server and Cassandra.
+
+The sample `docker-compose.yml` can be obtained on [github](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/docker/example/docker-compose-cassandra.yml), and you can start it with `docker-compose up -d`. (If using Cassandra 4.0 as the backend storage, it takes approximately two minutes to initialize. Please be patient.)
+
+```yaml
+version: "3"
+
+services:
+  graph:
+    image: hugegraph/hugegraph
+    container_name: cas-graph
+    ports:
+      - 8080:8080
+    environment:
+      hugegraph.backend: cassandra
+      hugegraph.serializer: cassandra
+      hugegraph.cassandra.host: cas-cassandra
+      hugegraph.cassandra.port: 9042
+    networks:
+      - ca-network
+    depends_on:
+      - cassandra
+    healthcheck:
+      test: ["CMD", "bin/gremlin-console.sh", "--" ,"-e", "scripts/remote-connect.groovy"]
+      interval: 10s
+      timeout: 30s
+      retries: 3
+
+  cassandra:
+    image: cassandra:4
+    container_name: cas-cassandra
+    ports:
+      - 7000:7000
+      - 9042:9042
+    security_opt:
+      - seccomp:unconfined
+    networks:
+      - ca-network
+    healthcheck:
+      test: ["CMD", "cqlsh", "--execute", "describe keyspaces;"]
+      interval: 10s
+      timeout: 30s
+      retries: 5
+
+networks:
+  ca-network:
+
+volumes:
+  hugegraph-data:
+```
+
+In this yaml file, configuration parameters related to Cassandra need to be passed as environment variables in the format of `hugegraph.<parameter_name>`.
+
+Specifically, in the configuration file `hugegraph.properties` , there are settings like `backend=xxx` and `cassandra.host=xxx`. To configure these settings during the process of passing environment variables, we need to prepend `hugegraph.` to these configurations, like `hugegraph.backend` and `hugegraph.cassandra.host`.
+
+The rest of the configurations can be referenced under [4 config](#4-config)
+
+</details>
+
+##### 5.1.2 Create example graph when starting server
 
 Set the environment variable `PRELOAD=true` when starting Docker in order to load data during the execution of the startup script.
 
