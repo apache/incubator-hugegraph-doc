@@ -23,10 +23,43 @@ It will be explained in detail below.
 
 There are two ways to get HugeGraph-Loader:
 
+- User docker image (Recommended)
 - Download the compiled tarball
 - Clone source code then compile and install
 
-#### 2.1 Download the compiled archive
+#### 2.1 Use Docker image
+
+We can deploy the loader service using `docker run -itd --name loader hugegraph/loader`. For the data that needs to be loaded, it can be copied into the loader container either by mounting `-v /path/to/data/file:/loader/file` or by using `docker cp`.
+
+Alternatively, to start the loader using docker-compose, the command is `docker-compose up -d`. An example of the docker-compose.yml is as follows:
+
+```yaml
+version: '3'
+
+services:
+  server:
+    image: hugegraph/hugegraph
+    container_name: graph
+    ports:
+      - 8080:8080
+
+  hubble:
+    image: hugegraph/hubble
+    container_name: hubble
+    ports:
+      - 8088:8088
+
+  loader:
+    image: hugegraph/loader
+    container_name: loader
+    # mount your own data here
+    # volumes:
+      # - /path/to/data/file:/loader/file
+```
+
+The specific data loading process can be referenced under [4.5 User Docker to load data](#45-use-docker-to-load-data) 
+
+#### 2.2 Download the compiled archive
 
 Download the latest version of the HugeGraph-Toolchain release package:
 
@@ -35,7 +68,7 @@ wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-too
 tar zxf *hugegraph*.tar.gz
 ```
 
-#### 2.2 Clone source code to compile and install
+#### 2.3 Clone source code to compile and install
 
 Clone the latest version of HugeGraph-Loader source package:
 
@@ -48,21 +81,11 @@ wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-too
 ```
 
 Due to the license limitation of the `Oracle OJDBC`, you need to manually install ojdbc to the local maven repository.
-Visit the [Oracle jdbc downloads](https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html) page. Select Oracle Database 12c Release 2 (12.2.0.1) drivers, as shown in the following figure.
+Visit the [Oracle jdbc downloads](https://www.oracle.com/database/technologies/appdev/jdbc-drivers-archive.html) page. Select Oracle Database 12c Release 2 (12.2.0.1) drivers, as shown in the following figure.
 
-<center>
-  <img src="/docs/images/oracle-download.png" alt="image">
-</center>
+After opening the link, select "ojdbc8.jar".
 
-
-After opening the link, select "ojdbc8.jar" as shown below.
-
-<center>
-  <img src="/docs/images/ojdbc8.png" alt="image">
-</center>
-
-
- Install ojdbc8 to the local maven repository, enter the directory where `ojdbc8.jar` is located, and execute the following command.
+Install ojdbc8 to the local maven repository, enter the directory where `ojdbc8.jar` is located, and execute the following command.
 ```
 mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
 ```
@@ -250,7 +273,10 @@ In the simplest terms, each mapping block describes: where is the file to be imp
 
 > Note: The format of the mapping file before version 0.11.0 and the format after 0.11.0 has changed greatly. For the convenience of expression, the mapping file (format) before 0.11.0 is called version 1.0, and the version after 0.11.0 is version 2.0 . And unless otherwise specified, the "map file" refers to version 2.0.
 
-The skeleton of the map file for version 2.0 is:
+
+
+<details>
+<summary>Click to expand/collapse the skeleton of the map file for version 2.0</summary>
 
 ```json
 {
@@ -273,9 +299,13 @@ The skeleton of the map file for version 2.0 is:
 }
 ```
 
+</details>
+<br/>
+
 Two versions of the mapping file are given directly here (the above graph model and data file are described)
 
-Mapping file for version 2.0:
+<details>
+<summary>Click to expand/collapse mapping file for version 2.0</summary>
 
 ```json
 {
@@ -479,7 +509,11 @@ Mapping file for version 2.0:
 }
 ```
 
-Mapping file for version 1.0:
+</details>
+<br/>
+
+<details>
+<summary>Click to expand/collapse mapping file for version 1.0</summary>
 
 ```json
 {
@@ -535,6 +569,9 @@ Mapping file for version 1.0:
   ]
 }
 ```
+
+</details>
+<br/>
 
 The 1.0 version of the mapping file is centered on the vertex and edge, and sets the input source; while the 2.0 version is centered on the input source, and sets the vertex and edge mapping. Some input sources (such as a file) can generate both vertices and edges. If you write in the 1.0 format, you need to write an input block in each of the vertex and edge mapping blocks. The two input blocks are exactly the same ; and the 2.0 version only needs to write input once. Therefore, compared with version 1.0, version 2.0 can save some repetitive writing of input.
 
@@ -652,7 +689,7 @@ schema: required
 - skipped_line: the line you want to skip, composite structure, currently can only configure the regular expression of the line to be skipped, described by the child node regex, the default is not to skip any line, optional;
 - early_stop: the record pulled from Kafka broker at a certain time is empty, stop the task, default is false, only for debugging, optional;
 
-##### 3.3.1 Vertex and Edge Mapping
+##### 3.3.3 Vertex and Edge Mapping
 
 The nodes of vertex and edge mapping (a key in the JSON file) have a lot of the same parts. The same parts are introduced first, and then the unique nodes of `vertex map` and `edge map` are introduced respectively.
 
@@ -680,7 +717,7 @@ The nodes of vertex and edge mapping (a key in the JSON file) have a lot of the 
 
 **Note:** If the newly imported attribute value is empty, the existing old data will be used instead of the empty value. For the effect, please refer to the following example
 
-```javascript
+```json
 // The update strategy is specified in the JSON file as follows
 {
   "vertices": [
@@ -833,14 +870,14 @@ id|name|lang|price|ISBN
 
 Edge file: `example/file/edge_knows.json`
 
-```
+```json
 {"source_name": "marko", "target_name": "vadas", "date": "20160110", "weight": 0.5}
 {"source_name": "marko", "target_name": "josh", "date": "20130220", "weight": 1.0}
 ```
 
 Edge file: `example/file/edge_created.json`
 
-```
+```json
 {"aname": "marko", "bname": "lop", "date": "20171210", "weight": 0.4}
 {"aname": "josh", "bname": "lop", "date": "20091111", "weight": 0.4}
 {"aname": "josh", "bname": "ripple", "date": "20171210", "weight": 1.0}
@@ -849,7 +886,8 @@ Edge file: `example/file/edge_created.json`
 
 #### 4.2 Write schema
 
-schema file: `example/file/schema.groovy`
+<details>
+<summary>Click to expand/collapse schema file: example/file/schema.groovy</summary>
 
 ```groovy
 schema.propertyKey("name").asText().ifNotExist().create();
@@ -876,7 +914,12 @@ schema.indexLabel("createdByWeight").onE("created").by("weight").range().ifNotEx
 schema.indexLabel("knowsByWeight").onE("knows").by("weight").range().ifNotExist().create();
 ```
 
+</details>
+
 #### 4.3 Write the input source mapping file `example/file/struct.json`
+
+<details>
+<summary>Click to expand/collapse the input source mapping file example/file/struct.json</summary>
 
 ```json
 {
@@ -942,6 +985,8 @@ schema.indexLabel("knowsByWeight").onE("knows").by("weight").range().ifNotExist(
 }
 ```
 
+</details>
+
 #### 4.4 Command to import
 
 ```bash
@@ -950,7 +995,7 @@ sh bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/f
 
 After the import is complete, statistics similar to the following will appear:
 
-```
+```bash
 vertices/edges has been loaded this time : 8/6
 --------------------------------------------------
 count metrics
@@ -966,7 +1011,111 @@ count metrics
      edge insert failure           : 0
 ```
 
-#### 4.5 Import data by spark-loader
+#### 4.5 Use Docker to load data
+
+##### 4.5.1 Use docker exec to load data directly
+
+###### 4.5.1.1 Prepare data
+
+If you just want to try out the loader, you can import the built-in example dataset without needing to prepare additional data yourself.
+
+If using custom data, before importing data with the loader, we need to copy the data into the container.
+
+First, following the steps in [4.1-4.3](#41-prepare-data), we can prepare the data and then use `docker cp` to copy the prepared data into the loader container.
+
+Suppose we've prepared the corresponding dataset following the above steps, stored in the `hugegraph-dataset` folder with the following file structure:
+
+```bash
+tree -f hugegraph-dataset/
+
+hugegraph-dataset
+├── hugegraph-dataset/edge_created.json
+├── hugegraph-dataset/edge_knows.json
+├── hugegraph-dataset/schema.groovy
+├── hugegraph-dataset/struct.json
+├── hugegraph-dataset/vertex_person.csv
+└── hugegraph-dataset/vertex_software.txt
+```
+
+Copy the files into the container.
+
+```bash
+docker cp hugegraph-dataset loader:/loader/dataset
+docker exec -it loader ls /loader/dataset
+
+edge_created.json  edge_knows.json  schema.groovy  struct.json  vertex_person.csv  vertex_software.txt
+```
+
+###### 4.5.1.2 Data loading
+
+Taking the built-in example dataset as an example, we can use the following command to load the data.
+
+If you need to import your custom dataset, you just need to modify the paths for `-f` (data script) and `-s` (schema) configurations.
+
+"You can refer to [3.4.1 Parameter description](#341-parameter-description) for the rest of the parameters.
+
+```bash
+docker exec -it loader bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy -h graph -p 8080
+```
+
+If loading a custom dataset, following the previous example, you would use:
+
+```bash
+docker exec -it loader bin/hugegraph-loader.sh -g hugegraph -f /loader/dataset/struct.json -s /loader/dataset/schema.groovy -h graph -p 8080
+```
+
+> If `loader` and `server` are in the same Docker network, you can specify `-h {server_container_name}`; otherwise, you need to specify the IP of the `server` host (in our example, `server_container_name` is `graph`).
+
+Then we can obverse the result:
+
+```bash
+HugeGraphLoader worked in NORMAL MODE
+vertices/edges loaded this time : 8/6
+--------------------------------------------------
+count metrics
+    input read success            : 14                  
+    input read failure            : 0                   
+    vertex parse success          : 8                   
+    vertex parse failure          : 0                   
+    vertex insert success         : 8                   
+    vertex insert failure         : 0                   
+    edge parse success            : 6                   
+    edge parse failure            : 0                   
+    edge insert success           : 6                   
+    edge insert failure           : 0                   
+--------------------------------------------------
+meter metrics
+    total time                    : 0.199s              
+    read time                     : 0.046s              
+    load time                     : 0.153s              
+    vertex load time              : 0.077s              
+    vertex load rate(vertices/s)  : 103                 
+    edge load time                : 0.112s              
+    edge load rate(edges/s)       : 53   
+```
+
+You can also use `curl` or `hubble` to observe the import result. Here's an example using `curl`:
+
+```bash
+> curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
+{"vertices":[{"id":1,"label":"software","type":"vertex","properties":{"name":"lop","lang":"java","price":328.0}},{"id":2,"label":"software","type":"vertex","properties":{"name":"ripple","lang":"java","price":199.0}},{"id":"1:tom","label":"person","type":"vertex","properties":{"name":"tom"}},{"id":"1:josh","label":"person","type":"vertex","properties":{"name":"josh","age":32,"city":"Beijing"}},{"id":"1:marko","label":"person","type":"vertex","properties":{"name":"marko","age":29,"city":"Beijing"}},{"id":"1:peter","label":"person","type":"vertex","properties":{"name":"peter","age":35,"city":"Shanghai"}},{"id":"1:vadas","label":"person","type":"vertex","properties":{"name":"vadas","age":27,"city":"Hongkong"}},{"id":"1:li,nary","label":"person","type":"vertex","properties":{"name":"li,nary","age":26,"city":"Wu,han"}}]}
+```
+
+If you want to check the import result of edges, you can use `curl "http://localhost:8080/graphs/hugegraph/graph/edges" | gunzip`.
+
+##### 4.5.2 Enter the docker container to load data
+
+Besides using `docker exec` directly for data import, we can also enter the container for data loading. The basic process is similar to [4.5.1](#451-use-docker-exec-to-load-data-directly).
+
+Enter the container by `docker exec -it loader bash` and execute the command:
+
+```bash
+sh bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy -h graph -p 8080
+```
+
+The results of the execution will be similar to those shown in [4.5.1](#451-use-docker-exec-to-load-data-directly).
+
+#### 4.6 Import data by spark-loader
 > Spark version: Spark 3+, other versions has not been tested.  
 > HugeGraph Toolchain version: toolchain-1.0.0
 > 

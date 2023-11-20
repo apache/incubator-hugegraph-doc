@@ -150,9 +150,9 @@ bin/hugegraph deploy -v {hugegraph-version} -p {install-path} [-u {download-path
 <details>
 <summary>点击展开/折叠 Cassandra 配置及启动方法</summary>
 
-在使用 Docker 进行存储的时候，我们需要可以使用 Cassandra 作为后端存储。我们更加推荐直接使用 docker-compose 来对于 server 以及 Cassandra 进行统一管理
+在使用 Docker 的时候，我们可以使用 Cassandra 作为后端存储。我们更加推荐直接使用 docker-compose 来对于 server 以及 Cassandra 进行统一管理
 
-样例的 `docker-compose.yml` 可以在 [此处](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/docker/example/docker-compose-cassandra.yml) 获取，使用 `docker-compose up -d` 启动。(如果使用 cassandra 4.0 版本作为后端存储，则需要大约两个分钟初始化，请耐心等待)
+样例的 `docker-compose.yml` 可以在 [github](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/docker/example/docker-compose-cassandra.yml) 中获取，使用 `docker-compose up -d` 启动。(如果使用 cassandra 4.0 版本作为后端存储，则需要大约两个分钟初始化，请耐心等待)
 
 ```yaml
 version: "3"
@@ -201,7 +201,7 @@ volumes:
   hugegraph-data:
 ```
 
-在这个 yaml 中，需要在环境变量中以 `hugegraph.`的形式进行参数传递，配置 Cassandra 相关的参数。
+在这个 yaml 中，需要在环境变量中以 `hugegraph.<parameter_name>`的形式进行参数传递，配置 Cassandra 相关的参数。
 
 具体来说，在 `hugegraph.properties` 配置文件中，提供了 `backend=xxx`, `cassandra.host=xxx` 等配置项，为了配置这些配置项，在传递环境变量的过程之中，我们需要在这些配置项前加上 `hugegrpah.`，即 `hugegraph.backend` 和 `hugegraph.cassandra.host`。
 
