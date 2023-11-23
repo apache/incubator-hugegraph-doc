@@ -42,19 +42,20 @@ java -version
 可选项：
 
 1. 可以使用 `docker exec -it graph bash` 进入容器完成一些操作
-2. 可以使用 `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph` 在启动的时候预加载一个 **内置的**样例图。
+2. 可以使用 `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph` 在启动的时候预加载一个**内置的**样例图。可以通过 `RESTful API` 进行验证。具体步骤可以参考 [5.1.1](/cn/docs/quickstart/hugegraph-server/#511-%E5%90%AF%E5%8A%A8-server-%E7%9A%84%E6%97%B6%E5%80%99%E5%88%9B%E5%BB%BA%E7%A4%BA%E4%BE%8B%E5%9B%BE) 
 
-另外，我们也可以使用 `docker-compose`完成部署，使用用 `docker-compose up -d`, 以下是一个样例的 `docker-compose.yml`:
+另外，如果我们希望能够在一个文件中管理除了 `server` 之外的其他 Hugegraph 相关的实例，我们也可以使用 `docker-compose`完成部署，使用命令 `docker-compose up -d`，（当然只配置 `server` 也是可以的）以下是一个样例的 `docker-compose.yml`:
 
 ```yaml
 version: '3'
 services:
   graph:
     image: hugegraph/hugegraph
-    #environment:
+    # environment:
     #  - PRELOAD=true
+    # PRELOAD 为可选参数，为 True 时可以在启动的时候预加载一个内置的样例图
     ports:
-      - 18080:8080
+      - 8080:8080
 ```
 
 #### 3.2 下载 tar 包
@@ -142,19 +143,83 @@ bin/hugegraph deploy -v {hugegraph-version} -p {install-path} [-u {download-path
 
 #### 5.1 使用 Docker
 
-在 [3.1 使用 Docker 容器](#31-使用-docker-容器-推荐)中，我们已经介绍了 如何使用 `docker` 部署 `hugegraph-server`, 我们还可以设置参数在 sever 启动的时候加载样例图
+在 [3.1 使用 Docker 容器](#31-使用-docker-容器-推荐)中，我们已经介绍了如何使用 `docker` 部署 `hugegraph-server`, 我们还可以使用其他的后端存储或者设置参数在 sever 启动的时候加载样例图
 
-##### 5.1.1 启动 server 的时候创建示例图
+##### 5.1.1 使用 Cassandra 作为后端
+
+<details>
+<summary>点击展开/折叠 Cassandra 配置及启动方法</summary>
+
+在使用 Docker 的时候，我们可以使用 Cassandra 作为后端存储。我们更加推荐直接使用 docker-compose 来对于 server 以及 Cassandra 进行统一管理
+
+样例的 `docker-compose.yml` 可以在 [github](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/docker/example/docker-compose-cassandra.yml) 中获取，使用 `docker-compose up -d` 启动。(如果使用 cassandra 4.0 版本作为后端存储，则需要大约两个分钟初始化，请耐心等待)
+
+```yaml
+version: "3"
+
+services:
+  graph:
+    image: hugegraph/hugegraph
+    container_name: cas-graph
+    ports:
+      - 8080:8080
+    environment:
+      hugegraph.backend: cassandra
+      hugegraph.serializer: cassandra
+      hugegraph.cassandra.host: cas-cassandra
+      hugegraph.cassandra.port: 9042
+    networks:
+      - ca-network
+    depends_on:
+      - cassandra
+    healthcheck:
+      test: ["CMD", "bin/gremlin-console.sh", "--" ,"-e", "scripts/remote-connect.groovy"]
+      interval: 10s
+      timeout: 30s
+      retries: 3
+
+  cassandra:
+    image: cassandra:4
+    container_name: cas-cassandra
+    ports:
+      - 7000:7000
+      - 9042:9042
+    security_opt:
+      - seccomp:unconfined
+    networks:
+      - ca-network
+    healthcheck:
+      test: ["CMD", "cqlsh", "--execute", "describe keyspaces;"]
+      interval: 10s
+      timeout: 30s
+      retries: 5
+
+networks:
+  ca-network:
+
+volumes:
+  hugegraph-data:
+```
+
+在这个 yaml 中，需要在环境变量中以 `hugegraph.<parameter_name>`的形式进行参数传递，配置 Cassandra 相关的参数。
+
+具体来说，在 `hugegraph.properties` 配置文件中，提供了 `backend=xxx`, `cassandra.host=xxx` 等配置项，为了配置这些配置项，在传递环境变量的过程之中，我们需要在这些配置项前加上 `hugegrpah.`，即 `hugegraph.backend` 和 `hugegraph.cassandra.host`。
+
+其他配置可以参照 [4 配置](#4-配置)
+
+</details>
+
+##### 5.1.2 启动 server 的时候创建示例图
 
 在 docker 启动的时候设置环境变量 `PRELOAD=true`, 从而实现启动脚本的时候加载数据。
 
 1. 使用`docker run`
 
-    使用 `docker run -itd --name=graph -p 18080:8080 -e PRELOAD=true hugegraph/hugegraph:latest`
+    使用 `docker run -itd --name=graph -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:latest`
 
 2. 使用`docker-compose`
 
-    创建`docker-compose.yml`，具体文件如下
+    创建`docker-compose.yml`，具体文件如下，在环境变量中设置 PRELOAD=true。其中，[`example.groovy`](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/src/assembly/static/scripts/example.groovy) 是一个预定义的脚本，用于预加载样例数据。如果有需要，可以通过挂载新的 `example.groovy` 脚本改变预加载的数据。
 
     ```yaml
     version: '3'
@@ -164,8 +229,10 @@ bin/hugegraph deploy -v {hugegraph-version} -p {install-path} [-u {download-path
           container_name: graph
           environment:
             - PRELOAD=true
+          volumes:
+            - /path/to/yourscript:/hugegraph/scripts/example.groovy
           ports:
-            - 18080:8080
+            - 8080:8080
     ```
 
     使用命令 `docker-compose up -d` 启动容器
@@ -173,7 +240,7 @@ bin/hugegraph deploy -v {hugegraph-version} -p {install-path} [-u {download-path
 使用 RESTful API 请求 `HugeGraphServer` 得到如下结果：
 
 ```javascript
-> curl "http://localhost:18080/graphs/hugegraph/graph/vertices" | gunzip
+> curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
 
 {"vertices":[{"id":"2:lop","label":"software","type":"vertex","properties":{"name":"lop","lang":"java","price":328}},{"id":"1:josh","label":"person","type":"vertex","properties":{"name":"josh","age":32,"city":"Beijing"}},{"id":"1:marko","label":"person","type":"vertex","properties":{"name":"marko","age":29,"city":"Beijing"}},{"id":"1:peter","label":"person","type":"vertex","properties":{"name":"peter","age":35,"city":"Shanghai"}},{"id":"1:vadas","label":"person","type":"vertex","properties":{"name":"vadas","age":27,"city":"Hongkong"}},{"id":"2:ripple","label":"software","type":"vertex","properties":{"name":"ripple","lang":"java","price":199}}]}
 ```
@@ -210,7 +277,7 @@ rocksdb.data_path=.
 rocksdb.wal_path=.
 ```
 
-初始化数据库（仅第一次启动时需要）
+初始化数据库（第一次启动时或在 `conf/graphs/` 下手动添加了新配置时需要进行初始化）
 
 ```bash
 cd *hugegraph-${version}
@@ -252,7 +319,7 @@ hbase.port=2181
 #hbase.edge_partitions=30
 ```
 
-初始化数据库（仅第一次启动时需要）
+初始化数据库（第一次启动时或在 `conf/graphs/` 下手动添加了新配置时需要进行初始化）
 
 ```bash
 cd *hugegraph-${version}
@@ -298,7 +365,7 @@ jdbc.reconnect_interval=3
 jdbc.ssl_mode=false
 ```
 
-初始化数据库（仅第一次启动时需要）
+初始化数据库（第一次启动时或在 `conf/graphs/` 下手动添加了新配置时需要进行初始化）
 
 ```bash
 cd *hugegraph-${version}
@@ -340,7 +407,7 @@ cassandra.password=
 #cassandra.keyspace.replication=3
 ```
 
-初始化数据库（仅第一次启动时需要）
+初始化数据库（第一次启动时或在 `conf/graphs/` 下手动添加了新配置时需要进行初始化）
 
 ```bash
 cd *hugegraph-${version}
@@ -427,7 +494,7 @@ cassandra.password=
 
 由于 scylladb 数据库本身就是基于 cassandra 的"优化版"，如果用户未安装 scylladb，也可以直接使用 cassandra 作为后端存储，只需要把 backend 和 serializer 修改为 scylladb，host 和 post 指向 cassandra 集群的 seeds 和 port 即可，但是并不建议这样做，这样发挥不出 scylladb 本身的优势了。
 
-初始化数据库（仅第一次启动时需要）
+初始化数据库（第一次启动时或在 `conf/graphs/` 下手动添加了新配置时需要进行初始化）
 
 ```bash
 cd *hugegraph-${version}
@@ -569,7 +636,15 @@ _说明_
 }
 ```
 
-详细的 API 请参考 [RESTful-API](/docs/clients/restful-api) 文档
+<p id="swaggerui-example"></p>
+
+详细的 API 请参考 [RESTful-API](/docs/clients/restful-api) 文档。
+
+另外也可以通过访问 `localhost:8080/swagger-ui/index.html` 查看 API。
+
+<div style="text-align: center;">
+  <img src="/docs/images/images-server/621swaggerui示例.png" alt="image">
+</div>
 
 ### 7 停止 Server
 

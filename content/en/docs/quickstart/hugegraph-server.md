@@ -37,19 +37,20 @@ We can use `docker run -itd --name=graph -p 8080:8080 hugegraph/hugegraph` to qu
 
 Optional: 
 1. use `docker exec -it graph bash` to enter the container to do some operations.
-2. use `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph` to start with a **built-in** example graph.
+2. use `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph` to start with a **built-in** example graph. We can use `RESTful API` to verify the result. The detailed step can refer to [5.1.1](http://127.0.0.1:1313/docs/quickstart/hugegraph-server/#511-create-example-graph-when-starting-server)
 
-Also, we can use `docker-compose` to deploy, with `docker-compose up -d`. Here is an example `docker-compose.yml`:
+Also, if we want to manage the other Hugegraph related instances in one file, we can use `docker-compose` to deploy, with the command `docker-compose up -d` (you can config only `server`). Here is an example `docker-compose.yml`:
 
 ```yaml
 version: '3'
 services:
   graph:
     image: hugegraph/hugegraph
-    #environment:
+    # environment:
     #  - PRELOAD=true
+    # PRELOAD is a option to preload a build-in sample graph when initializing.
     ports:
-      - 18080:8080
+      - 8080:8080
 ```
 
 #### 3.2 Download the binary tar tarball
@@ -156,17 +157,81 @@ for detailed configuration introduction, please refer to [configuration document
 
 In [3.1 Use Docker container](#31-use-docker-container-recommended), we have introduced how to use docker to deploy `hugegraph-server`. `server` can also preload an example graph by setting the parameter.
 
-##### 5.1.1 Create example graph when starting server
+##### 5.1.1 Use Cassandra as the storage
+
+<details>
+<summary> Click to expand/collapse Cassandra configuration and startup methods</summary>
+
+When using Docker, we can use Cassandra as the backend storage. We highly recommend using docker-compose directly to manage both the server and Cassandra.
+
+The sample `docker-compose.yml` can be obtained on [github](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/docker/example/docker-compose-cassandra.yml), and you can start it with `docker-compose up -d`. (If using Cassandra 4.0 as the backend storage, it takes approximately two minutes to initialize. Please be patient.)
+
+```yaml
+version: "3"
+
+services:
+  graph:
+    image: hugegraph/hugegraph
+    container_name: cas-graph
+    ports:
+      - 8080:8080
+    environment:
+      hugegraph.backend: cassandra
+      hugegraph.serializer: cassandra
+      hugegraph.cassandra.host: cas-cassandra
+      hugegraph.cassandra.port: 9042
+    networks:
+      - ca-network
+    depends_on:
+      - cassandra
+    healthcheck:
+      test: ["CMD", "bin/gremlin-console.sh", "--" ,"-e", "scripts/remote-connect.groovy"]
+      interval: 10s
+      timeout: 30s
+      retries: 3
+
+  cassandra:
+    image: cassandra:4
+    container_name: cas-cassandra
+    ports:
+      - 7000:7000
+      - 9042:9042
+    security_opt:
+      - seccomp:unconfined
+    networks:
+      - ca-network
+    healthcheck:
+      test: ["CMD", "cqlsh", "--execute", "describe keyspaces;"]
+      interval: 10s
+      timeout: 30s
+      retries: 5
+
+networks:
+  ca-network:
+
+volumes:
+  hugegraph-data:
+```
+
+In this yaml file, configuration parameters related to Cassandra need to be passed as environment variables in the format of `hugegraph.<parameter_name>`.
+
+Specifically, in the configuration file `hugegraph.properties` , there are settings like `backend=xxx` and `cassandra.host=xxx`. To configure these settings during the process of passing environment variables, we need to prepend `hugegraph.` to these configurations, like `hugegraph.backend` and `hugegraph.cassandra.host`.
+
+The rest of the configurations can be referenced under [4 config](#4-config)
+
+</details>
+
+##### 5.1.2 Create example graph when starting server
 
 Set the environment variable `PRELOAD=true` when starting Docker in order to load data during the execution of the startup script.
 
 1. Use `docker run`
 
-    Use `docker run -itd --name=graph -p 18080:8080 -e PRELOAD=true hugegraph/hugegraph:latest`
+    Use `docker run -itd --name=graph -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:latest`
 
 2. Use `docker-compose`
 
-    Create `docker-compose.yml` as following
+    Create `docker-compose.yml` as following. We should set the environment variable `PRELOAD=true`. [`example.groovy`](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/src/assembly/static/scripts/example.groovy) is a predefined script to preload the sample data. If needed, we can mount a new `example.groovy` to change the preload data.
 
     ```yaml
     version: '3'
@@ -177,7 +242,7 @@ Set the environment variable `PRELOAD=true` when starting Docker in order to loa
           environment:
             - PRELOAD=true
           ports:
-            - 18080:8080
+            - 8080:8080
     ```
 
     Use `docker-compose up -d` to start the container
@@ -246,7 +311,7 @@ rocksdb.data_path=.
 rocksdb.wal_path=.
 ```
 
-Initialize the database (required only on first startup)
+Initialize the database (required on first startup or a new configuration was manually added under 'conf/graphs/')
 
 ```bash
 cd *hugegraph-${version}
@@ -288,7 +353,7 @@ cassandra.password=
 #cassandra.keyspace.replication=3
 ```
 
-Initialize the database (required only on first startup)
+Initialize the database (required on first startup or a new configuration was manually added under 'conf/graphs/')
 
 
 ```bash
@@ -350,7 +415,7 @@ cassandra.password=
 
 Since the scylladb database itself is an "optimized version" based on cassandra, if the user does not have scylladb installed, they can also use cassandra as the backend storage directly. They only need to change the backend and serializer to scylladb, and the host and post point to the seeds and port of the cassandra cluster. Yes, but it is not recommended to do so, it will not take advantage of scylladb itself.
 
-Initialize the database (required only on first startup)
+Initialize the database (required on first startup or a new configuration was manually added under 'conf/graphs/')
 
 ```bash
 cd *hugegraph-${version}
@@ -390,7 +455,7 @@ hbase.port=2181
 #hbase.edge_partitions=30
 ```
 
-Initialize the database (required only on first startup)
+Initialize the database (required on first startup or a new configuration was manually added under 'conf/graphs/')
 
 ```bash
 cd *hugegraph-${version}
@@ -436,7 +501,7 @@ jdbc.reconnect_interval=3
 jdbc.ssl_mode=false
 ```
 
-Initialize the database (required only on first startup)
+Initialize the database (required on first startup or a new configuration was manually added under 'conf/graphs/')
 
 ```bash
 cd *hugegraph-${version}
@@ -578,7 +643,15 @@ response body:
 }
 ```
 
+<p id="swaggerui-example"></p>
+
 For detailed API, please refer to [RESTful-API](/docs/clients/restful-api)
+
+You can also visit `localhost:8080/swagger-ui/index.html` to check the API.
+
+<div style="text-align: center;">
+    <img src="/docs/images/images-server/621swaggerui示例.png" alt="image">
+</div>
 
 ### 7 Stop Server
 
