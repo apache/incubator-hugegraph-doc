@@ -24,7 +24,7 @@ user(name=xx) -belong-> group(name=xx) -access(read)-> target(graph=graph1, reso
 
 HugeGraph 默认**不启用**用户认证功能，需通过修改配置文件来启用该功能。内置实现了`StandardAuthenticator`模式，该模式支持多用户认证与细粒度权限控制。此外，开发者可以自定义实现`HugeAuthenticator`接口来对接自身的权限系统。
 
-用户认证方式均采用 [HTTP Basic Authentication](https://zh.wikipedia.org/wiki/HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81) ，简单说就是在发送 HTTP 请求时在 `Authentication`设置选择 `Basic` 然后输入对应的用户名和密码，对应 HTTP 明文如下所示 :
+用户认证方式均采用 [HTTP Basic Authentication](https://zh.wikipedia.org/wiki/HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81) ，简单说就是在发送 HTTP 请求时在 `Authentication` 设置选择 `Basic` 然后输入对应的用户名和密码，对应 HTTP 明文如下所示 :
 
 ```http
 GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels
