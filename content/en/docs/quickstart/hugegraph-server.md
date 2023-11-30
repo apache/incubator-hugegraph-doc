@@ -653,6 +653,18 @@ You can also visit `localhost:8080/swagger-ui/index.html` to check the API.
     <img src="/docs/images/images-server/621swaggerui示例.png" alt="image">
 </div>
 
+When using Swagger UI to debug the API provided by HugeGraph, if HugeGraph Server turns on authentication mode, you can enter authentication information on the Swagger page.
+
+<div style="text-align: center;">
+  <img src="/docs/images/images-server/621swaggerui设置鉴权位置示例.png" alt="image">
+</div>
+
+Currently HugeGraph supports setting authentication information in two forms: Basic and Bearer.
+
+<div style="text-align: center;">
+  <img src="/docs/images/images-server/621swaggerui设置鉴权示例.png" alt="image">
+</div>
+
 ### 7 Stop Server
 
 ```bash
