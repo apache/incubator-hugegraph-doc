@@ -1756,6 +1756,14 @@
 &lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-server/621swaggerui示例.png" alt="image">
 &lt;/div>
+&lt;p>在使用 Swagger UI 调试 HugeGraph 提供的 API 时，如果 HugeGraph Server 开启了鉴权模式，可以在 Swagger 页面输入鉴权信息。&lt;/p>
+&lt;div style="text-align: center;">
+&lt;img src="/docs/images/images-server/621swaggerui设置鉴权位置示例.png" alt="image">
+&lt;/div>
+&lt;p>当前 HugeGraph 支持基于 Basic 和 Bearer 两种形式设置鉴权信息。&lt;/p>
+&lt;div style="text-align: center;">
+&lt;img src="/docs/images/images-server/621swaggerui设置鉴权示例.png" alt="image">
+&lt;/div>
 &lt;h3 id="7-停止-server">7 停止 Server&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">$cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">$bin&lt;/span>/stop-hugegraph.sh
@@ -6797,12 +6805,8 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;/li>
 &lt;/ol></description></item><item><title>Docs: HugeGraph 内置用户权限与扩展权限配置及使用</title><link>/cn/docs/config/config-authentication/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/config/config-authentication/</guid><description>
 &lt;h3 id="概述">概述&lt;/h3>
-&lt;p>HugeGraph 为了方便不同用户场景下的鉴权使用，目前内置了两套权限模式：&lt;/p>
-&lt;ol>
-&lt;li>简单的&lt;code>ConfigAuthenticator&lt;/code>模式，通过本地配置文件存储用户名和密码 (仅支持单 GraphServer)&lt;/li>
-&lt;li>完备的&lt;code>StandardAuthenticator&lt;/code>模式，支持多用户认证、以及细粒度的权限访问控制，采用基于“用户 - 用户组 - 操作 - 资源”的 4 层设计，灵活控制用户角色与权限 (支持多 GraphServer)&lt;/li>
-&lt;/ol>
-&lt;p>其中 &lt;code>StandardAuthenticator&lt;/code> 模式的几个核心设计：&lt;/p>
+&lt;p>HugeGraph 为了方便不同用户场景下的鉴权使用，目前内置了完备的&lt;code>StandardAuthenticator&lt;/code>权限模式，支持多用户认证、以及细粒度的权限访问控制，采用基于“用户 - 用户组 - 操作 - 资源”的 4 层设计，灵活控制用户角色与权限 (支持多 GraphServer)&lt;/p>
+&lt;p>&lt;code>StandardAuthenticator&lt;/code> 模式的几个核心设计：&lt;/p>
 &lt;ul>
 &lt;li>初始化时创建超级管理员 (&lt;code>admin&lt;/code>) 用户，后续通过超级管理员创建其它用户，新创建的用户被分配足够权限后，可以创建或管理更多的用户&lt;/li>
 &lt;li>支持动态创建用户、用户组、资源，支持动态分配或取消权限&lt;/li>
@@ -6813,7 +6817,7 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// 场景：某用户只有北京地区的数据读取权限
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">user&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">name&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">xx&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">-&lt;/span>&lt;span style="color:#000">belong&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">-&amp;gt;&lt;/span> &lt;span style="color:#000">group&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">name&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">xx&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">-&lt;/span>&lt;span style="color:#000">access&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">read&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)-&amp;gt;&lt;/span> &lt;span style="color:#000">target&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">graph1&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">resource&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">={&lt;/span>&lt;span style="color:#000">label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000">person&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">city&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000">Beijing&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">})&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="配置用户认证">配置用户认证&lt;/h3>
-&lt;p>HugeGraph 默认&lt;strong>不启用&lt;/strong>用户认证功能，需通过修改配置文件来启用该功能。内置实现了&lt;code>StandardAuthenticator&lt;/code>和&lt;code>ConfigAuthenticator&lt;/code>两种模式，&lt;code>StandardAuthenticator&lt;/code>模式支持多用户认证与细粒度权限控制，&lt;code>ConfigAuthenticator&lt;/code>模式支持简单的用户权限认证。此外，开发者可以自定义实现&lt;code>HugeAuthenticator&lt;/code>接口来对接自身的权限系统。&lt;/p>
+&lt;p>HugeGraph 默认&lt;strong>不启用&lt;/strong>用户认证功能，需通过修改配置文件来启用该功能。内置实现了&lt;code>StandardAuthenticator&lt;/code>模式，该模式支持多用户认证与细粒度权限控制。此外，开发者可以自定义实现&lt;code>HugeAuthenticator&lt;/code>接口来对接自身的权限系统。&lt;/p>
 &lt;p>用户认证方式均采用 &lt;a href="https://zh.wikipedia.org/wiki/HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81">HTTP Basic Authentication&lt;/a> ，简单说就是在发送 HTTP 请求时在 &lt;code>Authentication&lt;/code> 设置选择 &lt;code>Basic&lt;/code> 然后输入对应的用户名和密码，对应 HTTP 明文如下所示 :&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-http" data-lang="http">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">Authorization: Basic admin xxxx
@@ -6830,27 +6834,13 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>auth.graph_store=hugegraph
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># auth client config
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 如果是分开部署 GraphServer 和 AuthServer, 还需要指定下面的配置，地址填写 AuthServer 的 IP:RPC 端口
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 如果是分开部署 GraphServer 和 AuthServer，还需要指定下面的配置，地址填写 AuthServer 的 IP:RPC 端口
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#auth.remote_url=127.0.0.1:8899,127.0.0.1:8898,127.0.0.1:8897
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中，&lt;code>graph_store&lt;/code>配置项是指使用哪一个图来存储用户信息，如果存在多个图的话，选取任意一个均可。&lt;/p>
 &lt;p>在配置文件&lt;code>hugegraph{n}.properties&lt;/code>中配置&lt;code>gremlin.graph&lt;/code>信息：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后详细的权限 API 调用和说明请参考 &lt;a href="/docs/clients/restful-api/auth">Authentication-API&lt;/a> 文档&lt;/p>
-&lt;h4 id="configauthenticator-模式">ConfigAuthenticator 模式&lt;/h4>
-&lt;p>&lt;code>ConfigAuthenticator&lt;/code>模式是通过预先在配置文件中设置用户信息来支持用户认证，该实现是基于配置好的静态&lt;code>tokens&lt;/code>来验证用户是否合法。下面是具体的配置流程（重启服务生效）：&lt;/p>
-&lt;p>在配置文件&lt;code>gremlin-server.yaml&lt;/code>中配置&lt;code>authenticator&lt;/code>及其&lt;code>rest-server&lt;/code>文件路径：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">authentication&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticator&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.auth.ConfigAuthenticator,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">authenticationHandler&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.auth.WsAndHttpBasicAuthHandler,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">config&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>{&lt;span style="color:#204a87;font-weight:bold">tokens&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">conf/rest-server.properties}&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>}&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在配置文件&lt;code>rest-server.properties&lt;/code>中配置&lt;code>authenticator&lt;/code>及其&lt;code>tokens&lt;/code>信息：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>auth.authenticator=org.apache.hugegraph.auth.ConfigAuthenticator
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>auth.admin_token=token-value-a
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>auth.user_tokens=[hugegraph1:token-value-1, hugegraph2:token-value-2]
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在配置文件&lt;code>hugegraph{n}.properties&lt;/code>中配置&lt;code>gremlin.graph&lt;/code>信息：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="自定义用户认证系统">自定义用户认证系统&lt;/h3>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后详细的权限 API 调用和说明请参考 &lt;a href="/docs/clients/restful-api/auth">Authentication-API&lt;/a> 文档。&lt;/p>
+&lt;h3 id="自定义用户认证系统">自定义用户认证系统&lt;/h3>
 &lt;p>如果需要支持更加灵活的用户系统，可自定义 authenticator 进行扩展，自定义 authenticator 实现接口&lt;code>org.apache.hugegraph.auth.HugeAuthenticator&lt;/code>即可，然后修改配置文件中&lt;code>authenticator&lt;/code>配置项指向该实现。&lt;/p></description></item><item><title>Docs: Gremlin-Console</title><link>/cn/docs/clients/gremlin-console/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/gremlin-console/</guid><description>
 &lt;p>Gremlin-Console 是由 Tinkerpop 自己开发的一个交互式客户端，用户可以使用该客户端对 Graph 做各种操作，主要有两种使用模式：&lt;/p>
 &lt;ul>
