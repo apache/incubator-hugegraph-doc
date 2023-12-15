@@ -5068,6 +5068,7 @@ Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-d
 &lt;li>local disk file or directory&lt;/li>
 &lt;li>HDFS file or directory&lt;/li>
 &lt;li>Partial relational database&lt;/li>
+&lt;li>Kafka topic&lt;/li>
 &lt;/ul>
 &lt;h5 id="321-data-source-structure">3.2.1 Data source structure&lt;/h5>
 &lt;h6 id="3211-local-disk-file-or-directory">3.2.1.1 Local disk file or directory&lt;/h6>
@@ -5430,7 +5431,7 @@ Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-d
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/mapping-convert.sh struct.json
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>A struct-v2.json will be generated in the same directory as struct.json.&lt;/p>
 &lt;h5 id="332-input-source">3.3.2 Input Source&lt;/h5>
-&lt;p>Input sources are currently divided into three categories: FILE, HDFS, and JDBC, which are distinguished by the &lt;code>type&lt;/code> node. We call them local file input sources, HDFS input sources, and JDBC input sources, which are described below.&lt;/p>
+&lt;p>Input sources are currently divided into four categories: FILE, HDFS, JDBC and KAFKA, which are distinguished by the &lt;code>type&lt;/code> node. We call them local file input sources, HDFS input sources, JDBC input sources, and KAFKA input sources, which are described below.&lt;/p>
 &lt;h6 id="3321-local-file-input-source">3.3.2.1 Local file input source&lt;/h6>
 &lt;ul>
 &lt;li>id: The id of the input source. This field is used to support some internal functions. It is not required (it will be automatically generated if it is not filled in). It is strongly recommended to write it, which is very helpful for debugging;&lt;/li>

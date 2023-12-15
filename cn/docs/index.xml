@@ -5079,6 +5079,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;li>本地磁盘文件或目录&lt;/li>
 &lt;li>HDFS 文件或目录&lt;/li>
 &lt;li>部分关系型数据库&lt;/li>
+&lt;li>Kafka topic&lt;/li>
 &lt;/ul>
 &lt;h5 id="321-数据源结构">3.2.1 数据源结构&lt;/h5>
 &lt;h6 id="3211-本地磁盘文件或目录">3.2.1.1 本地磁盘文件或目录&lt;/h6>
@@ -5441,7 +5442,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/mapping-convert.sh struct.json
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>会在 struct.json 的同级目录下生成一个 struct-v2.json。&lt;/p>
 &lt;h5 id="332-输入源">3.3.2 输入源&lt;/h5>
-&lt;p>输入源目前分为三类：FILE、HDFS、JDBC，由&lt;code>type&lt;/code>节点区分，我们称为本地文件输入源、HDFS 输入源和 JDBC 输入源，下面分别介绍。&lt;/p>
+&lt;p>输入源目前分为四类：FILE、HDFS、JDBC、KAFKA，由&lt;code>type&lt;/code>节点区分，我们称为本地文件输入源、HDFS 输入源、JDBC 输入源和 KAFKA 输入源，下面分别介绍。&lt;/p>
 &lt;h6 id="3321-本地文件输入源">3.3.2.1 本地文件输入源&lt;/h6>
 &lt;ul>
 &lt;li>id: 输入源的 id，该字段用于支持一些内部功能，非必填（未填时会自动生成），强烈建议写上，对于调试大有裨益；&lt;/li>
