@@ -147,6 +147,7 @@ The data sources currently supported by HugeGraph-Loader include:
 - local disk file or directory
 - HDFS file or directory
 - Partial relational database
+- Kafka topic
 
 ##### 3.2.1 Data source structure
 
