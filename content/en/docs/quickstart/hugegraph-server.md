@@ -30,6 +30,11 @@ There are four ways to deploy HugeGraph-Server components:
 - Method 4: One-click deployment
 
 #### 3.1 Use Docker container (recommended)
+
+> Note: The docker image of hugegraph is a convenience release to start hugegraph quickly, not official distribution artifacts from ASF. You can find more details from [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub).
+
+> Note: Recommand to use `release tag`(like `1.0.0`) for the stable version. Use `latest` tag to experience the newest functions in development.
+
 <!-- 3.1 is linked by other place. if change 3.1's title, please check -->
 You can refer to [Docker deployment guide](https://hub.docker.com/r/hugegraph/hugegraph).
 

@@ -30,6 +30,12 @@ HugeGraph-Loader 是 HugeGraph 的数据导入组件，能够将多种数据源�
 
 #### 2.1 使用 Docker 镜像
 
+
+> 注意：hugegraph-loader 的 docker 镜像是一个便捷版本，用于快速启动 loader，并不是 ASF 官方发布版。你可以从 [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub) 中得到更多细节。
+
+> 注意：推荐使用 `release tag`(如 `1.0.0`) 以获取稳定版。使用 `latest` tag 可以使用开发中的最新功能。
+
+
 我们可以使用 `docker run -itd --name loader hugegraph/loader`部署 loader 服务。对于需要加载的数据，则可以通过挂载 `-v /path/to/data/file:/loader/file` 或者`docker cp`的方式将文件复制到 loader 容器内部。
 
 或者使用 docker-compose 启动 loader, 启动命令为 `docker-compose up -d`, 样例的 docker-compose.yml 如下所示：
