@@ -150,6 +150,7 @@ schema.edgeLabel("created").sourceLabel("person").targetLabel("software").ifNotE
 - 本地磁盘文件或目录
 - HDFS 文件或目录
 - 部分关系型数据库
+- Kafka topic
 
 ##### 3.2.1 数据源结构
 
@@ -587,7 +588,7 @@ bin/mapping-convert.sh struct.json
 
 ##### 3.3.2 输入源
 
-输入源目前分为三类：FILE、HDFS、JDBC，由`type`节点区分，我们称为本地文件输入源、HDFS 输入源和 JDBC 输入源，下面分别介绍。
+输入源目前分为四类：FILE、HDFS、JDBC、KAFKA，由`type`节点区分，我们称为本地文件输入源、HDFS 输入源、JDBC 输入源和 KAFKA 输入源，下面分别介绍。
 
 ###### 3.3.2.1 本地文件输入源
 

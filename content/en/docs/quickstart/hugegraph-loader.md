@@ -147,6 +147,7 @@ The data sources currently supported by HugeGraph-Loader include:
 - local disk file or directory
 - HDFS file or directory
 - Partial relational database
+- Kafka topic
 
 ##### 3.2.1 Data source structure
 
@@ -585,7 +586,7 @@ A struct-v2.json will be generated in the same directory as struct.json.
 
 ##### 3.3.2 Input Source
 
-Input sources are currently divided into three categories: FILE, HDFS, and JDBC, which are distinguished by the `type` node. We call them local file input sources, HDFS input sources, and JDBC input sources, which are described below.
+Input sources are currently divided into four categories: FILE, HDFS, JDBC and KAFKA, which are distinguished by the `type` node. We call them local file input sources, HDFS input sources, JDBC input sources, and KAFKA input sources, which are described below.
 
 ###### 3.3.2.1 Local file input source
 
