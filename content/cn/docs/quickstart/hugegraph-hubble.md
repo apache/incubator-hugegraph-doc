@@ -38,7 +38,7 @@ HugeGraph 是一款面向分析型，支持批量操作的图数据库系统，�
 
 - 下载 toolchain 二进制包
 - 源码编译
-- 使用 docker
+- 使用 docker (便于**测试**)
 
 #### 2.1 下载 toolchain 二进制包
 
@@ -115,11 +115,7 @@ cd apache-hugegraph-hubble-incubating*
 bin/start-hubble.sh -d
 ```
 
-#### 2.3 使用 Docker
-
-> 注意：hugegraph-hubble 的 docker 镜像是一个便捷版本，用于快速启动 hubble，并不是 ASF 官方发布版。你可以从 [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub) 中得到更多细节。
-
-> 注意：推荐使用 `release tag`(如 `1.0.0`) 以获取稳定版。使用 `latest` tag 可以使用开发中的最新功能。
+#### 2.3 使用 Docker (便于**测试**)
 
 > **特别注意**: docker 模式下，若 hubble 和 server 在同一宿主机，hubble 页面中设置 graph 的 `hostname` **不能设置**为 `localhost/127.0.0.1`，因这会指向 hubble **容器内部**而非宿主机，导致无法连接到 server.
 > 
@@ -146,6 +142,12 @@ services:
     ports:
       - 8088:8088
 ```
+
+> 注意：
+>
+> 1. hugegraph-hubble 的 docker 镜像是一个便捷版本，用于快速启动 hubble，并不是官方发布版。你可以从 [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub) 中得到更多细节。
+>
+> 2. 推荐使用 `release tag`(如 `1.0.0`) 以获取稳定版。使用 `latest` tag 可以使用开发中的最新功能。
 
 ### 3	平台使用流程
 

@@ -30,7 +30,7 @@ java -version
 
 - 方式 1：下载 tar 包
 - 方式 2：源码编译
-- 方式 3：使用 Docker 容器
+- 方式 3：使用 Docker 容器 (便于**测试**)
 - 方式 4：使用 tools 工具部署 (Outdated)
 
 
@@ -86,12 +86,8 @@ mvn package -DskipTests
 
 执行成功后，在 hugegraph 目录下生成 `*hugegraph-*.tar.gz` 文件，就是编译生成的 tar 包。
 
-#### 3.3 使用 Docker 容器
+#### 3.3 使用 Docker 容器 (便于**测试**)
 <!-- 3.1 is linked by other place. if change 3.1's title, please check -->
-
-> 注意：hugegraph 的 docker 镜像是一个便捷版本，用于快速启动 hugegraph，并不是 ASF 官方发布版。你可以从 [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub) 中得到更多细节。
-
-> 注意：推荐使用 `release tag`(如 `1.0.0`) 以获取稳定版。使用 `latest` tag 可以使用开发中的最新功能。
 
 可参考 [Docker 部署方式](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/README.md)。
 
@@ -115,6 +111,12 @@ services:
     ports:
       - 8080:8080
 ```
+
+> 注意：
+> 
+> 1. hugegraph 的 docker 镜像是一个便捷版本，用于快速启动 hugegraph，并不是官方发布版。你可以从 [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub) 中得到更多细节。
+>
+> 2. 推荐使用 `release tag`(如 `1.0.0`) 以获取稳定版。使用 `latest` tag 可以使用开发中的最新功能。
 
 #### 3.4 使用 tools 工具部署 (Outdated)
 

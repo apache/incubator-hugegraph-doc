@@ -38,7 +38,7 @@ There are three ways to deplot `hugegraph-hubble`
 
 - Download the Toolchain binary package
 - Source code compilation
-- Use Docker
+- Use Docker (Convenient for Test/Dev)
 
 #### 2.1 Download the Toolchain binary package
 
@@ -115,11 +115,7 @@ Run `hubble`
 bin/start-hubble.sh -d
 ```
 
-#### 2.3 Use docker
-
-> Note: The docker image of hugegraph-hubble is a convenience release to start hugegraph-hubble quickly, not official distribution artifacts from ASF. You can find more details from [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub).
-
-> Note: Recommand to use `release tag`(like `1.0.0`) for the stable version. Use `latest` tag to experience the newest functions in development.
+#### 2.3 Use docker (Convenient for Test/Dev)
 
 > **Special Note**: If you are starting `hubble` with Docker, and `hubble` and the server are on the same host. When configuring the hostname for the graph on the Hubble web page, please do not directly set it to `localhost/127.0.0.1`. This will refer to the `hubble` container internally rather than the host machine, resulting in a connection failure to the server.
 >
@@ -146,6 +142,12 @@ services:
     ports:
       - 8088:8088
 ```
+
+> Note: 
+>
+> 1. The docker image of hugegraph-hubble is a convenience release to start hugegraph-hubble quickly, not official distribution artifacts. You can find more details from [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub).
+> 
+> 2. Recommand to use `release tag`(like `1.0.0`) for the stable version. Use `latest` tag to experience the newest functions in development.
 
 ### 3	Platform Workflow
 
