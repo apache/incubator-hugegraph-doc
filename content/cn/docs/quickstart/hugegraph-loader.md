@@ -24,11 +24,49 @@ HugeGraph-Loader 是 HugeGraph 的数据导入组件，能够将多种数据源�
 
 有两种方式可以获取 HugeGraph-Loader：
 
-- 使用 Docker 镜像 (推荐)
 - 下载已编译的压缩包
 - 克隆源码编译安装
+- 使用 Docker 镜像
 
-#### 2.1 使用 Docker 镜像
+#### 2.1 下载已编译的压缩包
+
+下载最新版本的 HugeGraph-Toolchain Release 包，里面包含了 loader + tool + hubble 全套工具，如果你已经下载，可跳过重复步骤
+
+```bash
+wget https://downloads.apache.org/incubator/hugegraph/{version}//apache-hugegraph-toolchain-incubating-{version}.tar.gz
+tar zxf *hugegraph*.tar.gz
+```
+
+#### 2.2 克隆源码编译安装
+
+克隆最新版本的 HugeGraph-Loader 源码包：
+
+```bash
+# 1. get from github
+git clone https://github.com/apache/hugegraph-toolchain.git
+
+# 2. get from direct  (e.g. here is 1.0.0, please choose the latest version)
+wget https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph-toolchain-incubating-{version}-src.tar.gz
+```
+
+由于 Oracle ojdbc license 的限制，需要手动安装 ojdbc 到本地 maven 仓库。
+访问[Oracle jdbc 下载](https://www.oracle.com/database/technologies/appdev/jdbc-drivers-archive.html) 页面。选择 Oracle Database 12c Release 2 (12.2.0.1) drivers，如下图所示。
+
+打开链接后，选择“ojdbc8.jar”
+
+把 ojdbc8 安装到本地 maven 仓库，进入`ojdbc8.jar`所在目录，执行以下命令。
+```
+mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
+```
+
+编译生成 tar 包：
+
+```bash
+cd hugegraph-loader
+mvn clean package -DskipTests
+```
+
+#### 2.3 使用 Docker 镜像
 
 
 > 注意：hugegraph-loader 的 docker 镜像是一个便捷版本，用于快速启动 loader，并不是 ASF 官方发布版。你可以从 [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub) 中得到更多细节。
@@ -65,44 +103,6 @@ services:
 ```
 
 具体的数据导入流程可以参考 [4.5 使用 docker 导入](#45-使用-docker-导入) 
-
-#### 2.2 下载已编译的压缩包
-
-下载最新版本的 HugeGraph-Toolchain Release 包，里面包含了 loader + tool + hubble 全套工具，如果你已经下载，可跳过重复步骤
-
-```bash
-wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
-tar zxf *hugegraph*.tar.gz
-```
-
-#### 2.3 克隆源码编译安装
-
-克隆最新版本的 HugeGraph-Loader 源码包：
-
-```bash
-# 1. get from github
-git clone https://github.com/apache/hugegraph-toolchain.git
-
-# 2. get from direct  (e.g. here is 1.0.0, please choose the latest version)
-wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0-src.tar.gz
-```
-
-由于 Oracle ojdbc license 的限制，需要手动安装 ojdbc 到本地 maven 仓库。
-访问[Oracle jdbc 下载](https://www.oracle.com/database/technologies/appdev/jdbc-drivers-archive.html) 页面。选择 Oracle Database 12c Release 2 (12.2.0.1) drivers，如下图所示。
-
-打开链接后，选择“ojdbc8.jar”
-
-把 ojdbc8 安装到本地 maven 仓库，进入`ojdbc8.jar`所在目录，执行以下命令。
-```
-mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
-```
-
-编译生成 tar 包：
-
-```bash
-cd hugegraph-loader
-mvn clean package -DskipTests
-```
 
 ### 3 使用流程
 

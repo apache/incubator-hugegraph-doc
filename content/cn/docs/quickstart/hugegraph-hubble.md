@@ -35,43 +35,12 @@ HugeGraph 是一款面向分析型，支持批量操作的图数据库系统，�
 ### 2 部署
 
 有三种方式可以部署`hugegraph-hubble`
-- 使用 docker (推荐)
+
 - 下载 toolchain 二进制包
 - 源码编译
+- 使用 docker
 
-#### 2.1 使用 Docker (推荐)
-
-> 注意：hugegraph-hubble 的 docker 镜像是一个便捷版本，用于快速启动 hubble，并不是 ASF 官方发布版。你可以从 [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub) 中得到更多细节。
-
-> 注意：推荐使用 `release tag`(如 `1.0.0`) 以获取稳定版。使用 `latest` tag 可以使用开发中的最新功能。
-
-> **特别注意**: docker 模式下，若 hubble 和 server 在同一宿主机，hubble 页面中设置 graph 的 `hostname` **不能设置**为 `localhost/127.0.0.1`，因这会指向 hubble **容器内部**而非宿主机，导致无法连接到 server.
-> 
-> 若 hubble 和 server 在同一 docker 网络下，**推荐**直接使用`container_name` (如下例的 `graph`) 作为主机名。或者也可以使用 **宿主机 IP** 作为主机名，此时端口号为宿主机给 server 配置的端口
-
-我们可以使用 `docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble` 快速启动 [hubble](https://hub.docker.com/r/hugegraph/hubble).
-
-或者使用 docker-compose 启动 hubble，另外如果 hubble 和 graph 在同一个 docker 网络下，可以使用 graph 的 contain_name 进行访问，而不需要宿主机的 ip
-
-使用`docker-compose up -d`，`docker-compose.yml`如下：
-
-```yaml
-version: '3'
-services:
-  server:
-    image: hugegraph/hugegraph
-    container_name: graph
-    ports:
-      - 8080:8080
-
-  hubble:
-    image: hugegraph/hubble
-    container_name: hubble
-    ports:
-      - 8088:8088
-```
-
-#### 2.2 下载 toolchain 二进制包
+#### 2.1 下载 toolchain 二进制包
 
 `hubble`项目在`toolchain`项目中，首先下载`toolchain`的 tar 包
 
@@ -100,7 +69,7 @@ starting HugeGraphHubble ..............timed out with http status 502
 
 然后使用浏览器访问 `ip:8088` 可看到`hubble`页面，通过`bin/stop-hubble.sh`则可以停止服务
 
-#### 2.3 源码编译
+#### 2.2 源码编译
 
 **注意：** 编译 hubble 需要用户本地环境有安装 `Nodejs V16.x` 与 `yarn` 环境
 
@@ -144,6 +113,38 @@ cd apache-hugegraph-hubble-incubating*
 
 ```bash
 bin/start-hubble.sh -d
+```
+
+#### 2.3 使用 Docker
+
+> 注意：hugegraph-hubble 的 docker 镜像是一个便捷版本，用于快速启动 hubble，并不是 ASF 官方发布版。你可以从 [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub) 中得到更多细节。
+
+> 注意：推荐使用 `release tag`(如 `1.0.0`) 以获取稳定版。使用 `latest` tag 可以使用开发中的最新功能。
+
+> **特别注意**: docker 模式下，若 hubble 和 server 在同一宿主机，hubble 页面中设置 graph 的 `hostname` **不能设置**为 `localhost/127.0.0.1`，因这会指向 hubble **容器内部**而非宿主机，导致无法连接到 server.
+> 
+> 若 hubble 和 server 在同一 docker 网络下，**推荐**直接使用`container_name` (如下例的 `graph`) 作为主机名。或者也可以使用 **宿主机 IP** 作为主机名，此时端口号为宿主机给 server 配置的端口
+
+我们可以使用 `docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble` 快速启动 [hubble](https://hub.docker.com/r/hugegraph/hubble).
+
+或者使用 docker-compose 启动 hubble，另外如果 hubble 和 graph 在同一个 docker 网络下，可以使用 graph 的 contain_name 进行访问，而不需要宿主机的 ip
+
+使用`docker-compose up -d`，`docker-compose.yml`如下：
+
+```yaml
+version: '3'
+services:
+  server:
+    image: hugegraph/hugegraph
+    container_name: graph
+    ports:
+      - 8080:8080
+
+  hubble:
+    image: hugegraph/hubble
+    container_name: hubble
+    ports:
+      - 8088:8088
 ```
 
 ### 3	平台使用流程

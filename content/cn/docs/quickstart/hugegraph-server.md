@@ -28,50 +28,21 @@ java -version
 
 有四种方式可以部署 HugeGraph-Server 组件：
 
-- 方式 1：使用 Docker 容器 (推荐)
-- 方式 2：下载 tar 包
-- 方式 3：源码编译
+- 方式 1：下载 tar 包
+- 方式 2：源码编译
+- 方式 3：使用 Docker 容器
 - 方式 4：使用 tools 工具部署 (Outdated)
 
-#### 3.1 使用 Docker 容器 (推荐)
-<!-- 3.1 is linked by other place. if change 3.1's title, please check -->
 
-> 注意：hugegraph 的 docker 镜像是一个便捷版本，用于快速启动 hugegraph，并不是 ASF 官方发布版。你可以从 [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub) 中得到更多细节。
-
-> 注意：推荐使用 `release tag`(如 `1.0.0`) 以获取稳定版。使用 `latest` tag 可以使用开发中的最新功能。
-
-可参考 [Docker 部署方式](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/README.md)。
-
-我们可以使用 `docker run -itd --name=graph -p 8080:8080 hugegraph/hugegraph` 去快速启动一个内置了 `RocksDB` 的 `Hugegraph server`.
-
-可选项：
-
-1. 可以使用 `docker exec -it graph bash` 进入容器完成一些操作
-2. 可以使用 `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph` 在启动的时候预加载一个**内置的**样例图。可以通过 `RESTful API` 进行验证。具体步骤可以参考 [5.1.1](/cn/docs/quickstart/hugegraph-server/#511-%E5%90%AF%E5%8A%A8-server-%E7%9A%84%E6%97%B6%E5%80%99%E5%88%9B%E5%BB%BA%E7%A4%BA%E4%BE%8B%E5%9B%BE) 
-
-另外，如果我们希望能够在一个文件中管理除了 `server` 之外的其他 Hugegraph 相关的实例，我们也可以使用 `docker-compose`完成部署，使用命令 `docker-compose up -d`，（当然只配置 `server` 也是可以的）以下是一个样例的 `docker-compose.yml`:
-
-```yaml
-version: '3'
-services:
-  graph:
-    image: hugegraph/hugegraph
-    # environment:
-    #  - PRELOAD=true
-    # PRELOAD 为可选参数，为 True 时可以在启动的时候预加载一个内置的样例图
-    ports:
-      - 8080:8080
-```
-
-#### 3.2 下载 tar 包
+#### 3.1 下载 tar 包
 
 ```bash
 # use the latest version, here is 1.0.0 for example
-wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz
+wget https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph-incubating-{version}.tar.gz
 tar zxf *hugegraph*.tar.gz
 ```
 
-#### 3.3 源码编译
+#### 3.2 源码编译
 
 源码编译前请确保安装了 wget 命令
 
@@ -115,6 +86,35 @@ mvn package -DskipTests
 
 执行成功后，在 hugegraph 目录下生成 `*hugegraph-*.tar.gz` 文件，就是编译生成的 tar 包。
 
+#### 3.3 使用 Docker 容器
+<!-- 3.1 is linked by other place. if change 3.1's title, please check -->
+
+> 注意：hugegraph 的 docker 镜像是一个便捷版本，用于快速启动 hugegraph，并不是 ASF 官方发布版。你可以从 [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub) 中得到更多细节。
+
+> 注意：推荐使用 `release tag`(如 `1.0.0`) 以获取稳定版。使用 `latest` tag 可以使用开发中的最新功能。
+
+可参考 [Docker 部署方式](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/README.md)。
+
+我们可以使用 `docker run -itd --name=graph -p 8080:8080 hugegraph/hugegraph` 去快速启动一个内置了 `RocksDB` 的 `Hugegraph server`.
+
+可选项：
+
+1. 可以使用 `docker exec -it graph bash` 进入容器完成一些操作
+2. 可以使用 `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph` 在启动的时候预加载一个**内置的**样例图。可以通过 `RESTful API` 进行验证。具体步骤可以参考 [5.1.1](/cn/docs/quickstart/hugegraph-server/#511-%E5%90%AF%E5%8A%A8-server-%E7%9A%84%E6%97%B6%E5%80%99%E5%88%9B%E5%BB%BA%E7%A4%BA%E4%BE%8B%E5%9B%BE) 
+
+另外，如果我们希望能够在一个文件中管理除了 `server` 之外的其他 Hugegraph 相关的实例，我们也可以使用 `docker-compose`完成部署，使用命令 `docker-compose up -d`，（当然只配置 `server` 也是可以的）以下是一个样例的 `docker-compose.yml`:
+
+```yaml
+version: '3'
+services:
+  graph:
+    image: hugegraph/hugegraph
+    # environment:
+    #  - PRELOAD=true
+    # PRELOAD 为可选参数，为 True 时可以在启动的时候预加载一个内置的样例图
+    ports:
+      - 8080:8080
+```
 
 #### 3.4 使用 tools 工具部署 (Outdated)
 
@@ -146,11 +146,294 @@ bin/hugegraph deploy -v {hugegraph-version} -p {install-path} [-u {download-path
 
 ### 5 启动
 
-#### 5.1 使用 Docker
+#### 5.1 使用启动脚本启动
 
-在 [3.1 使用 Docker 容器](#31-使用-docker-容器-推荐)中，我们已经介绍了如何使用 `docker` 部署 `hugegraph-server`, 我们还可以使用其他的后端存储或者设置参数在 sever 启动的时候加载样例图
+启动分为"首次启动"和"非首次启动"，这么区分是因为在第一次启动前需要初始化后端数据库，然后启动服务。
 
-##### 5.1.1 使用 Cassandra 作为后端
+而在人为停掉服务后，或者其他原因需要再次启动服务时，因为后端数据库是持久化存在的，直接启动服务即可。
+
+HugeGraphServer 启动时会连接后端存储并尝试检查后端存储版本号，如果未初始化后端或者后端已初始化但版本不匹配时（旧版本数据），HugeGraphServer 会启动失败，并给出错误信息。
+
+如果需要外部访问 HugeGraphServer，请修改 `rest-server.properties` 的 `restserver.url` 配置项（默认为 `http://127.0.0.1:8080`），修改成机器名或 IP 地址。
+
+由于各种后端所需的配置（hugegraph.properties）及启动步骤略有不同，下面逐一对各后端的配置及启动做介绍。
+
+##### 5.1.1 RocksDB
+
+<details>
+<summary>点击展开/折叠 RocksDB 配置及启动方法</summary>
+
+
+> RocksDB 是一个嵌入式的数据库，不需要手动安装部署，要求 GCC 版本 >= 4.3.0（GLIBCXX_3.4.10），如不满足，需要提前升级 GCC
+
+修改 `hugegraph.properties`
+
+```properties
+backend=rocksdb
+serializer=binary
+rocksdb.data_path=.
+rocksdb.wal_path=.
+```
+
+初始化数据库（第一次启动时或在 `conf/graphs/` 下手动添加了新配置时需要进行初始化）
+
+```bash
+cd *hugegraph-${version}
+bin/init-store.sh
+```
+
+启动 server
+
+```bash
+bin/start-hugegraph.sh
+Starting HugeGraphServer...
+Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
+```
+
+提示的 url 与 `rest-server.properties` 中配置的 `restserver.url` 一致
+
+</details>
+
+##### 5.1.2 HBase
+
+<details>
+<summary>点击展开/折叠 HBase 配置及启动方法</summary>
+
+> 用户需自行安装 HBase，要求版本 2.0 以上，[下载地址](https://hbase.apache.org/downloads.html)
+
+修改 hugegraph.properties
+
+```properties
+backend=hbase
+serializer=hbase
+
+# hbase backend config
+hbase.hosts=localhost
+hbase.port=2181
+# Note: recommend to modify the HBase partition number by the actual/env data amount & RS amount before init store
+# it may influence the loading speed a lot
+#hbase.enable_partition=true
+#hbase.vertex_partitions=10
+#hbase.edge_partitions=30
+```
+
+初始化数据库（第一次启动时或在 `conf/graphs/` 下手动添加了新配置时需要进行初始化）
+
+```bash
+cd *hugegraph-${version}
+bin/init-store.sh
+```
+
+启动 server
+
+```bash
+bin/start-hugegraph.sh
+Starting HugeGraphServer...
+Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
+```
+
+> 更多其它后端配置可参考[配置项介绍](/docs/config/config-option)
+
+</details>
+
+##### 5.1.3 MySQL
+
+<details>
+<summary>点击展开/折叠 MySQL 配置及启动方法</summary>
+
+> 由于 MySQL 是在 GPL 协议下，与 Apache 协议不兼容，用户需自行安装 MySQL，[下载地址](https://dev.mysql.com/downloads/mysql/)
+
+下载 MySQL 的[驱动包](https://repo1.maven.org/maven2/mysql/mysql-connector-java/)，比如 `mysql-connector-java-8.0.30.jar`，并放入 HugeGraph-Server 的 `lib` 目录下。
+
+修改 `hugegraph.properties`，配置数据库 URL，用户名和密码，`store` 是数据库名，如果没有会被自动创建。
+
+```properties
+backend=mysql
+serializer=mysql
+
+store=hugegraph
+
+# mysql backend config
+jdbc.driver=com.mysql.cj.jdbc.Driver
+jdbc.url=jdbc:mysql://127.0.0.1:3306
+jdbc.username=
+jdbc.password=
+jdbc.reconnect_max_times=3
+jdbc.reconnect_interval=3
+jdbc.ssl_mode=false
+```
+
+初始化数据库（第一次启动时或在 `conf/graphs/` 下手动添加了新配置时需要进行初始化）
+
+```bash
+cd *hugegraph-${version}
+bin/init-store.sh
+```
+
+启动 server
+
+```bash
+bin/start-hugegraph.sh
+Starting HugeGraphServer...
+Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
+```
+
+</details>
+
+##### 5.1.4 Cassandra
+
+<details>
+<summary>点击展开/折叠 Cassandra 配置及启动方法</summary>
+
+> 用户需自行安装 Cassandra，要求版本 3.0 以上，[下载地址](http://cassandra.apache.org/download/)
+
+修改 hugegraph.properties
+
+```properties
+backend=cassandra
+serializer=cassandra
+
+# cassandra backend config
+cassandra.host=localhost
+cassandra.port=9042
+cassandra.username=
+cassandra.password=
+#cassandra.connect_timeout=5
+#cassandra.read_timeout=20
+
+#cassandra.keyspace.strategy=SimpleStrategy
+#cassandra.keyspace.replication=3
+```
+
+初始化数据库（第一次启动时或在 `conf/graphs/` 下手动添加了新配置时需要进行初始化）
+
+```bash
+cd *hugegraph-${version}
+bin/init-store.sh
+Initing HugeGraph Store...
+2017-12-01 11:26:51 1424  [main] [INFO ] org.apache.hugegraph.HugeGraph [] - Opening backend store: 'cassandra'
+2017-12-01 11:26:52 2389  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Failed to connect keyspace: hugegraph, try init keyspace later
+2017-12-01 11:26:52 2472  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Failed to connect keyspace: hugegraph, try init keyspace later
+2017-12-01 11:26:52 2557  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Failed to connect keyspace: hugegraph, try init keyspace later
+2017-12-01 11:26:53 2797  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Store initialized: huge_graph
+2017-12-01 11:26:53 2945  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Store initialized: huge_schema
+2017-12-01 11:26:53 3044  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Store initialized: huge_index
+2017-12-01 11:26:53 3046  [pool-3-thread-1] [INFO ] org.apache.hugegraph.backend.Transaction [] - Clear cache on event 'store.init'
+2017-12-01 11:26:59 9720  [main] [INFO ] org.apache.hugegraph.HugeGraph [] - Opening backend store: 'cassandra'
+2017-12-01 11:27:00 9805  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Failed to connect keyspace: hugegraph1, try init keyspace later
+2017-12-01 11:27:00 9886  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Failed to connect keyspace: hugegraph1, try init keyspace later
+2017-12-01 11:27:00 9955  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Failed to connect keyspace: hugegraph1, try init keyspace later
+2017-12-01 11:27:00 10175 [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Store initialized: huge_graph
+2017-12-01 11:27:00 10321 [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Store initialized: huge_schema
+2017-12-01 11:27:00 10413 [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Store initialized: huge_index
+2017-12-01 11:27:00 10413 [pool-3-thread-1] [INFO ] org.apache.hugegraph.backend.Transaction [] - Clear cache on event 'store.init'
+```
+
+启动 server
+
+```bash
+bin/start-hugegraph.sh
+Starting HugeGraphServer...
+Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
+```
+
+</details>
+
+##### 5.1.5 Memory
+
+<details>
+<summary>点击展开/折叠 Memory 配置及启动方法</summary>
+
+修改 hugegraph.properties
+
+```properties
+backend=memory
+serializer=text
+```
+
+> Memory 后端的数据是保存在内存中无法持久化的，不需要初始化后端，这也是唯一一个不需要初始化的后端。
+
+启动 server
+
+```bash
+bin/start-hugegraph.sh
+Starting HugeGraphServer...
+Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
+```
+
+提示的 url 与 rest-server.properties 中配置的 restserver.url 一致
+
+</details>
+
+##### 5.1.6 ScyllaDB
+
+<details>
+<summary>点击展开/折叠 ScyllaDB 配置及启动方法</summary>
+
+> 用户需自行安装 ScyllaDB，推荐版本 2.1 以上，[下载地址](https://docs.scylladb.com/getting-started/)
+
+修改 hugegraph.properties
+
+```properties
+backend=scylladb
+serializer=scylladb
+
+# cassandra backend config
+cassandra.host=localhost
+cassandra.port=9042
+cassandra.username=
+cassandra.password=
+#cassandra.connect_timeout=5
+#cassandra.read_timeout=20
+
+#cassandra.keyspace.strategy=SimpleStrategy
+#cassandra.keyspace.replication=3
+```
+
+由于 scylladb 数据库本身就是基于 cassandra 的"优化版"，如果用户未安装 scylladb，也可以直接使用 cassandra 作为后端存储，只需要把 backend 和 serializer 修改为 scylladb，host 和 post 指向 cassandra 集群的 seeds 和 port 即可，但是并不建议这样做，这样发挥不出 scylladb 本身的优势了。
+
+初始化数据库（第一次启动时或在 `conf/graphs/` 下手动添加了新配置时需要进行初始化）
+
+```bash
+cd *hugegraph-${version}
+bin/init-store.sh
+```
+
+启动 server
+
+```bash
+bin/start-hugegraph.sh
+Starting HugeGraphServer...
+Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
+```
+
+</details>
+
+##### 5.1.7 启动 server 的时候创建示例图
+
+在脚本启动时候携带 `-p true`参数，表示 preload, 即创建示例图图
+
+```
+bin/start-hugegraph.sh -p true
+Starting HugeGraphServer in daemon mode...
+Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)......OK
+```
+
+并且使用 RESTful API 请求 `HugeGraphServer` 得到如下结果：
+
+```javascript
+> curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
+
+{"vertices":[{"id":"2:lop","label":"software","type":"vertex","properties":{"name":"lop","lang":"java","price":328}},{"id":"1:josh","label":"person","type":"vertex","properties":{"name":"josh","age":32,"city":"Beijing"}},{"id":"1:marko","label":"person","type":"vertex","properties":{"name":"marko","age":29,"city":"Beijing"}},{"id":"1:peter","label":"person","type":"vertex","properties":{"name":"peter","age":35,"city":"Shanghai"}},{"id":"1:vadas","label":"person","type":"vertex","properties":{"name":"vadas","age":27,"city":"Hongkong"}},{"id":"2:ripple","label":"software","type":"vertex","properties":{"name":"ripple","lang":"java","price":199}}]}
+```
+
+代表创建示例图成功。
+
+#### 5.2 使用 Docker
+
+在 [3.3 使用 Docker 容器](#33-使用-docker-容器)中，我们已经介绍了如何使用 `docker` 部署 `hugegraph-server`, 我们还可以使用其他的后端存储或者设置参数在 sever 启动的时候加载样例图
+
+##### 5.2.1 使用 Cassandra 作为后端
 
 <details>
 <summary>点击展开/折叠 Cassandra 配置及启动方法</summary>
@@ -214,7 +497,7 @@ volumes:
 
 </details>
 
-##### 5.1.2 启动 server 的时候创建示例图
+##### 5.2.2 启动 server 的时候创建示例图
 
 在 docker 启动的时候设置环境变量 `PRELOAD=true`, 从而实现启动脚本的时候加载数据。
 
@@ -252,289 +535,6 @@ volumes:
 
 代表创建示例图成功。
 
-
-#### 5.2 使用启动脚本启动
-
-启动分为"首次启动"和"非首次启动"，这么区分是因为在第一次启动前需要初始化后端数据库，然后启动服务。
-
-而在人为停掉服务后，或者其他原因需要再次启动服务时，因为后端数据库是持久化存在的，直接启动服务即可。
-
-HugeGraphServer 启动时会连接后端存储并尝试检查后端存储版本号，如果未初始化后端或者后端已初始化但版本不匹配时（旧版本数据），HugeGraphServer 会启动失败，并给出错误信息。
-
-如果需要外部访问 HugeGraphServer，请修改 `rest-server.properties` 的 `restserver.url` 配置项（默认为 `http://127.0.0.1:8080`），修改成机器名或 IP 地址。
-
-由于各种后端所需的配置（hugegraph.properties）及启动步骤略有不同，下面逐一对各后端的配置及启动做介绍。
-
-##### 5.2.1 RocksDB
-
-<details>
-<summary>点击展开/折叠 RocksDB 配置及启动方法</summary>
-
-
-> RocksDB 是一个嵌入式的数据库，不需要手动安装部署，要求 GCC 版本 >= 4.3.0（GLIBCXX_3.4.10），如不满足，需要提前升级 GCC
-
-修改 `hugegraph.properties`
-
-```properties
-backend=rocksdb
-serializer=binary
-rocksdb.data_path=.
-rocksdb.wal_path=.
-```
-
-初始化数据库（第一次启动时或在 `conf/graphs/` 下手动添加了新配置时需要进行初始化）
-
-```bash
-cd *hugegraph-${version}
-bin/init-store.sh
-```
-
-启动 server
-
-```bash
-bin/start-hugegraph.sh
-Starting HugeGraphServer...
-Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
-```
-
-提示的 url 与 `rest-server.properties` 中配置的 `restserver.url` 一致
-
-</details>
-
-##### 5.2.2 HBase
-
-<details>
-<summary>点击展开/折叠 HBase 配置及启动方法</summary>
-
-> 用户需自行安装 HBase，要求版本 2.0 以上，[下载地址](https://hbase.apache.org/downloads.html)
-
-修改 hugegraph.properties
-
-```properties
-backend=hbase
-serializer=hbase
-
-# hbase backend config
-hbase.hosts=localhost
-hbase.port=2181
-# Note: recommend to modify the HBase partition number by the actual/env data amount & RS amount before init store
-# it may influence the loading speed a lot
-#hbase.enable_partition=true
-#hbase.vertex_partitions=10
-#hbase.edge_partitions=30
-```
-
-初始化数据库（第一次启动时或在 `conf/graphs/` 下手动添加了新配置时需要进行初始化）
-
-```bash
-cd *hugegraph-${version}
-bin/init-store.sh
-```
-
-启动 server
-
-```bash
-bin/start-hugegraph.sh
-Starting HugeGraphServer...
-Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
-```
-
-> 更多其它后端配置可参考[配置项介绍](/docs/config/config-option)
-
-</details>
-
-##### 5.2.3 MySQL
-
-<details>
-<summary>点击展开/折叠 MySQL 配置及启动方法</summary>
-
-> 由于 MySQL 是在 GPL 协议下，与 Apache 协议不兼容，用户需自行安装 MySQL，[下载地址](https://dev.mysql.com/downloads/mysql/)
-
-下载 MySQL 的[驱动包](https://repo1.maven.org/maven2/mysql/mysql-connector-java/)，比如 `mysql-connector-java-8.0.30.jar`，并放入 HugeGraph-Server 的 `lib` 目录下。
-
-修改 `hugegraph.properties`，配置数据库 URL，用户名和密码，`store` 是数据库名，如果没有会被自动创建。
-
-```properties
-backend=mysql
-serializer=mysql
-
-store=hugegraph
-
-# mysql backend config
-jdbc.driver=com.mysql.cj.jdbc.Driver
-jdbc.url=jdbc:mysql://127.0.0.1:3306
-jdbc.username=
-jdbc.password=
-jdbc.reconnect_max_times=3
-jdbc.reconnect_interval=3
-jdbc.ssl_mode=false
-```
-
-初始化数据库（第一次启动时或在 `conf/graphs/` 下手动添加了新配置时需要进行初始化）
-
-```bash
-cd *hugegraph-${version}
-bin/init-store.sh
-```
-
-启动 server
-
-```bash
-bin/start-hugegraph.sh
-Starting HugeGraphServer...
-Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
-```
-
-</details>
-
-##### 5.2.4 Cassandra
-
-<details>
-<summary>点击展开/折叠 Cassandra 配置及启动方法</summary>
-
-> 用户需自行安装 Cassandra，要求版本 3.0 以上，[下载地址](http://cassandra.apache.org/download/)
-
-修改 hugegraph.properties
-
-```properties
-backend=cassandra
-serializer=cassandra
-
-# cassandra backend config
-cassandra.host=localhost
-cassandra.port=9042
-cassandra.username=
-cassandra.password=
-#cassandra.connect_timeout=5
-#cassandra.read_timeout=20
-
-#cassandra.keyspace.strategy=SimpleStrategy
-#cassandra.keyspace.replication=3
-```
-
-初始化数据库（第一次启动时或在 `conf/graphs/` 下手动添加了新配置时需要进行初始化）
-
-```bash
-cd *hugegraph-${version}
-bin/init-store.sh
-Initing HugeGraph Store...
-2017-12-01 11:26:51 1424  [main] [INFO ] org.apache.hugegraph.HugeGraph [] - Opening backend store: 'cassandra'
-2017-12-01 11:26:52 2389  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Failed to connect keyspace: hugegraph, try init keyspace later
-2017-12-01 11:26:52 2472  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Failed to connect keyspace: hugegraph, try init keyspace later
-2017-12-01 11:26:52 2557  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Failed to connect keyspace: hugegraph, try init keyspace later
-2017-12-01 11:26:53 2797  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Store initialized: huge_graph
-2017-12-01 11:26:53 2945  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Store initialized: huge_schema
-2017-12-01 11:26:53 3044  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Store initialized: huge_index
-2017-12-01 11:26:53 3046  [pool-3-thread-1] [INFO ] org.apache.hugegraph.backend.Transaction [] - Clear cache on event 'store.init'
-2017-12-01 11:26:59 9720  [main] [INFO ] org.apache.hugegraph.HugeGraph [] - Opening backend store: 'cassandra'
-2017-12-01 11:27:00 9805  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Failed to connect keyspace: hugegraph1, try init keyspace later
-2017-12-01 11:27:00 9886  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Failed to connect keyspace: hugegraph1, try init keyspace later
-2017-12-01 11:27:00 9955  [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Failed to connect keyspace: hugegraph1, try init keyspace later
-2017-12-01 11:27:00 10175 [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Store initialized: huge_graph
-2017-12-01 11:27:00 10321 [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Store initialized: huge_schema
-2017-12-01 11:27:00 10413 [main] [INFO ] org.apache.hugegraph.backend.store.cassandra.CassandraStore [] - Store initialized: huge_index
-2017-12-01 11:27:00 10413 [pool-3-thread-1] [INFO ] org.apache.hugegraph.backend.Transaction [] - Clear cache on event 'store.init'
-```
-
-启动 server
-
-```bash
-bin/start-hugegraph.sh
-Starting HugeGraphServer...
-Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
-```
-
-</details>
-
-##### 5.2.5 Memory
-
-<details>
-<summary>点击展开/折叠 Memory 配置及启动方法</summary>
-
-修改 hugegraph.properties
-
-```properties
-backend=memory
-serializer=text
-```
-
-> Memory 后端的数据是保存在内存中无法持久化的，不需要初始化后端，这也是唯一一个不需要初始化的后端。
-
-启动 server
-
-```bash
-bin/start-hugegraph.sh
-Starting HugeGraphServer...
-Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
-```
-
-提示的 url 与 rest-server.properties 中配置的 restserver.url 一致
-
-</details>
-
-##### 5.2.6 ScyllaDB
-
-<details>
-<summary>点击展开/折叠 ScyllaDB 配置及启动方法</summary>
-
-> 用户需自行安装 ScyllaDB，推荐版本 2.1 以上，[下载地址](https://docs.scylladb.com/getting-started/)
-
-修改 hugegraph.properties
-
-```properties
-backend=scylladb
-serializer=scylladb
-
-# cassandra backend config
-cassandra.host=localhost
-cassandra.port=9042
-cassandra.username=
-cassandra.password=
-#cassandra.connect_timeout=5
-#cassandra.read_timeout=20
-
-#cassandra.keyspace.strategy=SimpleStrategy
-#cassandra.keyspace.replication=3
-```
-
-由于 scylladb 数据库本身就是基于 cassandra 的"优化版"，如果用户未安装 scylladb，也可以直接使用 cassandra 作为后端存储，只需要把 backend 和 serializer 修改为 scylladb，host 和 post 指向 cassandra 集群的 seeds 和 port 即可，但是并不建议这样做，这样发挥不出 scylladb 本身的优势了。
-
-初始化数据库（第一次启动时或在 `conf/graphs/` 下手动添加了新配置时需要进行初始化）
-
-```bash
-cd *hugegraph-${version}
-bin/init-store.sh
-```
-
-启动 server
-
-```bash
-bin/start-hugegraph.sh
-Starting HugeGraphServer...
-Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
-```
-
-</details>
-
-##### 5.2.7 启动 server 的时候创建示例图
-
-在脚本启动时候携带 `-p true`参数，表示 preload, 即创建示例图图
-
-```
-bin/start-hugegraph.sh -p true
-Starting HugeGraphServer in daemon mode...
-Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)......OK
-```
-
-并且使用 RESTful API 请求 `HugeGraphServer` 得到如下结果：
-
-```javascript
-> curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
-
-{"vertices":[{"id":"2:lop","label":"software","type":"vertex","properties":{"name":"lop","lang":"java","price":328}},{"id":"1:josh","label":"person","type":"vertex","properties":{"name":"josh","age":32,"city":"Beijing"}},{"id":"1:marko","label":"person","type":"vertex","properties":{"name":"marko","age":29,"city":"Beijing"}},{"id":"1:peter","label":"person","type":"vertex","properties":{"name":"peter","age":35,"city":"Shanghai"}},{"id":"1:vadas","label":"person","type":"vertex","properties":{"name":"vadas","age":27,"city":"Hongkong"}},{"id":"2:ripple","label":"software","type":"vertex","properties":{"name":"ripple","lang":"java","price":199}}]}
-```
-
-代表创建示例图成功。
 
 ### 6 访问 Server
 
