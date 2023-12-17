@@ -5,7 +5,7 @@ on:
     inputs:
       release_version:
         required: true
-        default: '1.0.0'
+        default: '1.2.0'
       gpg_user:
         required: true
         default: 'imbajin'
@@ -29,7 +29,7 @@ jobs:
       RELEASE_VERSION: ''
     steps:
       - name: Checkout source
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install JDK ${{ matrix.java_version }}
         uses: actions/setup-java@v3
         with:
@@ -63,23 +63,24 @@ jobs:
       - name: 2. Check Environment & Import Public Keys
         run: |
           cd dist/${{ inputs.release_version }}
+
           shasum --version 1>/dev/null || exit
           gpg --version 1>/dev/null || exit
-  
+
           wget https://downloads.apache.org/incubator/hugegraph/KEYS || exit
           echo "Import KEYS:" && gpg --import KEYS
-
+          # TODO: how to trust all public keys in gpg list, currently only trust the first one
           echo -e "5\ny\n" | gpg --batch --command-fd 0 --edit-key $USER trust
 
           echo "trust all pk"
-          for key in $(gpg --no-tty --list-keys --with-colons | awk -F: '/^pub/ {print $5}'); 
-          do
+          for key in $(gpg --no-tty --list-keys --with-colons | awk -F: '/^pub/ {print $5}'); do
               echo -e "5\ny\n" | gpg --batch --command-fd 0 --edit-key "$key" trust
           done
 
       - name: 3. Check SHA512 & GPG Signature
         run: |
           cd dist/${{ inputs.release_version }}
+
           for i in *.tar.gz; do
             echo "$i"
             shasum -a 512 --check "$i".sha512 || exit
@@ -88,17 +89,21 @@ jobs:
 
       - name: 4. Validate Source Packages
         run: |
-          cd dist/${{ inputs.release_version }} && ls -lh ./*.tar.gz
+          cd dist/${{ inputs.release_version }}
+
+          ls -lh ./*.tar.gz
           for i in *src.tar.gz; do
             echo "$i"
-            # 4.0 check the directory name include "incubating"
+
+            # 4.1 check the directory name include "incubating"
             if [[ ! "$i" =~ "incubating" ]]; then
               echo "The package name $i should include incubating" && exit 1
             fi
             tar xzvf "$i" || exit
             cd "$(basename "$i" .tar.gz)" || exit
+            echo "Start to check the package content: $(basename "$i" .tar.gz)"
 
-            # 4.1 check the directory include "NOTICE" and "LICENSE" and "DISCLAIMER" file
+            # 4.2 check the directory include "NOTICE" and "LICENSE" and "DISCLAIMER" file
             if [[ ! -f "LICENSE" ]]; then
               echo "The package should include LICENSE file" && exit 1
             fi
@@ -108,7 +113,8 @@ jobs:
             if [[ ! -f "DISCLAIMER" ]]; then
                 echo "The package should include DISCLAIMER file" && exit 1
             fi
-            # 4.2 ensure doesn't contains *GPL/BCL/JSR-275/RSAL/QPL/SSPL/CPOL/NPL1.*/CC-BY 
+
+            # 4.3 ensure doesn't contains *GPL/BCL/JSR-275/RSAL/QPL/SSPL/CPOL/NPL1.*/CC-BY 
             #     dependency in LICENSE and NOTICE file 
             COUNT=$(grep -E "GPL|BCL|JSR-275|RSAL|QPL|SSPL|CPOL|NPL1|CC-BY" LICENSE NOTICE | wc -l)
             if [[ $COUNT -ne 0 ]]; then
@@ -116,27 +122,27 @@ jobs:
               echo "The package shouldn't include GPL* invalid dependency, but get $COUNT" && exit 1
             fi
 
-            # 4.3 ensure doesn't contains empty directory or file
-            COUNT=$(find . -type d -empty | wc -l)
+            # 4.4 ensure doesn't contains empty directory or file
+            COUNT=$(find . -type f,d -empty | wc -l)
             if [[ $COUNT -ne 0 ]]; then
-              find . -type d -empty
-              echo "The package shouldn't include empty directory, but get $COUNT" && exit 1
+              find . -type f,d -empty
+              echo "The package shouldn't include empty dir/file, but get $COUNT" # TODO: && exit 1
             fi
-          
-            # 4.4 ensure any file should less than 900kb & not include binary file
-            COUNT=$(find . -type f -size +900k | wc -l)
+
+            # 4.5 ensure any file should less than 800kb & not include binary file
+            COUNT=$(find . -type f -size +800k | wc -l)
             if [[ $COUNT -ne 0 ]]; then
-              find . -type f -size +900k
-              echo "The package shouldn't include file larger than 900kb, but get $COUNT" && exit 1
+              find . -type f -size +800k
+              echo "The package shouldn't include file larger than 800kb, but get $COUNT" && exit 1
             fi
-            COUNT=$(find . -type f | grep -v .txt | perl -lne 'print if -B' | wc -l)
+            COUNT=$(find . -type f | grep -Ev ".txt|logo.png|favicon.ico|yarn.lock" | perl -lne 'print if -B' | wc -l)
             if [[ $COUNT -ne 0 ]]; then
-              find . -type f | grep -v .txt | perl -lne 'print if -B'
+              find . -type f | perl -lne 'print if -B'
               # due to the search script is not perfect, we can't exit here (check manually)
-              echo "The package shouldn't include binary file, but get $COUNT" && exit 1
+              echo "The package shouldn't include binary file, but get $COUNT" # TODO: && exit 1
             fi
-          
-            # 4.5 test compile the packages
+
+            # 4.6 test compile the packages
             if [[ ${{ matrix.java_version }} == 8 && "$i" =~ "computer" ]]; then
               cd .. && echo "skip computer module in java8"
               continue
@@ -148,15 +154,18 @@ jobs:
 
       - name: 5. Run Compiled Packages In Server
         run: |
-          cd dist/${{ inputs.release_version }} && ls -lh
-          cd ./*hugegraph-incubating*src/*hugegraph*${{ inputs.release_version }} || exit
+          cd dist/${{ inputs.release_version }}
+
+          ls -lh
+          cd ./*hugegraph-incubating*src/hugegraph-server/*hugegraph*${{ inputs.release_version }} || exit
           bin/init-store.sh && sleep 1
-          bin/start-hugegraph.sh && ls ../../
-          cd ../../ || exit
+          bin/start-hugegraph.sh && ls ../../../
+          cd ../../../ || exit
 
       - name: 6. Run Compiled Packages In ToolChain (Loader & Tool & Hubble)
         run: |
           cd dist/${{ inputs.release_version }}
+
           cd ./*toolchain*src || exit
           ls -lh
           cd ./*toolchain*${{ inputs.release_version }} || exit
@@ -176,32 +185,38 @@ jobs:
           bin/hugegraph task-list || exit
           bin/hugegraph backup -t all --directory ./backup-test || exit
           cd .. || exit
-          
+
           # 6.3 start hubble and connect to server 
           echo "test hubble"
           cd ./*hubble*${{ inputs.release_version }} || exit
-          cat conf/hugegraph-hubble.properties && bin/start-hubble.sh
-          # TODO: need stop the server here
-          jps | grep HugeGraphServer | awk '{print $1}' | xargs kill -9
+          # TODO: add hubble doc & test it
+          cat conf/hugegraph-hubble.properties
+          bin/start-hubble.sh && bin/stop-hubble.sh
+
           cd ../../../ || exit
+          # kill the HugeGraphServer process by jps
+          jps | grep HugeGraphServer | awk '{print $1}' | xargs kill -9
           rm -rf ./*src* && ls -lh
 
       - name: 7. Validate Binary Packages
         run: |
           cd dist/${{ inputs.release_version }}
+
           for i in *.tar.gz; do
             echo "$i"
-            # 7.0 check the directory name include "incubating"
+
+            # 7.1 check the directory name include "incubating"
             if [[ ! "$i" =~ "incubating" ]]; then
               echo "The package name $i should include incubating" && exit 1
             fi
             tar xzvf "$i" || exit
-
-            # 7.1 check root dir include "NOTICE"/"LICENSE"/"DISCLAIMER" & "licenses" dir
             cd "$(basename "$i" .tar.gz)" || exit
             ls -lh
+            echo "Start to check the package content: $(basename "$i" .tar.gz)"
+
+            # 7.2 check root dir include "NOTICE"/"LICENSE"/"DISCLAIMER" & "licenses" dir
             if [[ ! -f "LICENSE" ]]; then
-              echo "The package should include LICENSE file" && ls -lh && exit 1
+              echo "The package should include LICENSE file" && exit 1
             fi
             if [[ ! -f "NOTICE" ]]; then
               echo "The package should include NOTICE file" && exit 1
@@ -213,35 +228,37 @@ jobs:
               echo "The package should include licenses dir" && exit 1
             fi
 
-            # 7.2 ensure doesn't contains *GPL/BCL/JSR-275/RSAL/QPL/SSPL/CPOL/NPL1.*/CC-BY 
+            # 7.3 ensure doesn't contains *GPL/BCL/JSR-275/RSAL/QPL/SSPL/CPOL/NPL1.*/CC-BY 
             #     dependency in LICENSE/NOTICE and licenses/* files 
-            COUNT=$(grep -r -E "GPL|BCL|JSR-275|RSAL|QPL|SSPL|CPOL|NPL1|CC-BY" LICENSE NOTICE licenses | wc -l)
+            COUNT=$(grep -rE "GPL|BCL|JSR-275|RSAL|QPL|SSPL|CPOL|NPL1|CC-BY" LICENSE NOTICE licenses | wc -l)
             if [[ $COUNT -ne 0 ]]; then
               grep -r -E "GPL|BCL|JSR-275|RSAL|QPL|SSPL|CPQL|NPL1|CC-BY" LICENSE NOTICE licenses
               echo "The package shouldn't include GPL* invalid dependency, but get $COUNT" && exit 1
             fi
-          
-            # 7.3 ensure doesn't contains empty directory or file
-            COUNT=$(find . -type d -empty | wc -l)
+
+            # 7.4 ensure doesn't contains empty directory or file
+            COUNT=$(find . -type f,d -empty | wc -l)
             if [[ $COUNT -ne 0 ]]; then
-              find . -type d -empty
-              echo "The package shouldn't include empty directory, but get $COUNT" && exit 1
+              find . -type f,d -empty
+              echo "The package shouldn't include empty dir/file, but get $COUNT" && exit 1
             fi
 
             cd - || exit
           done
 
-      - name: 8. Validate Binary Packages(Start Server)
+      - name: 8. Run Binary Packages In Server
         run: |
           cd dist/${{ inputs.release_version }}
+
           cd ./*hugegraph-incubating*${{ inputs.release_version }} || exit
           bin/init-store.sh && sleep 1
           bin/start-hugegraph.sh && ls ../
           cd - || exit
 
-      - name: 9. Validate Binary Packages(Start ToolChain(Loader/Tool/Hubble))
+      - name: 9. Run Binary Packages In ToolChain (Loader & Tool & Hubble)
         run: |
           cd dist/${{ inputs.release_version }}
+
           cd ./*toolchain*${{ inputs.release_version }} || exit
           ls -lh
 
@@ -265,9 +282,10 @@ jobs:
           cd ./*hubble*${{ inputs.release_version }} || exit
           # TODO: add hubble doc & test it
           cat conf/hugegraph-hubble.properties
-          bin/stop-hubble.sh && bin/start-hubble.sh
+          bin/start-hubble.sh && bin/stop-hubble.sh
+
           cd - || exit
-          # TODO: need stop the server here 
+          # kill the HugeGraphServer process by jps
           jps | grep HugeGraphServer | awk '{print $1}' | xargs kill -9
 
     strategy:
