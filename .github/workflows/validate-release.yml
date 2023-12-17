@@ -27,6 +27,7 @@ jobs:
       USER: ${{ inputs.gpg_user }}
       # TODO: parse version from the running branch name & also adapt the input version
       RELEASE_VERSION: ''
+      USE_STAGE: 'true' # Whether to include the stage repository.
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
@@ -53,6 +54,11 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+      - name: Use staged maven repo settings
+        if: ${{ env.USE_STAGE == 'true' }}
+        run: |
+          cp $HOME/.m2/settings.xml /tmp/settings.xml
+          cp -vf .github/configs/settings.xml $HOME/.m2/settings.xml && cat $HOME/.m2/settings.xml
 
       - name: 1. Download SVN Sources
         run: |
