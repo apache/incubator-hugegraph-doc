@@ -1327,35 +1327,16 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-部署">3 部署&lt;/h3>
 &lt;p>有四种方式可以部署 HugeGraph-Server 组件：&lt;/p>
 &lt;ul>
-&lt;li>方式 1：使用 Docker 容器 (推荐)&lt;/li>
-&lt;li>方式 2：下载 tar 包&lt;/li>
-&lt;li>方式 3：源码编译&lt;/li>
+&lt;li>方式 1：下载 tar 包&lt;/li>
+&lt;li>方式 2：源码编译&lt;/li>
+&lt;li>方式 3：使用 Docker 容器 (便于&lt;strong>测试&lt;/strong>)&lt;/li>
 &lt;li>方式 4：使用 tools 工具部署 (Outdated)&lt;/li>
 &lt;/ul>
-&lt;h4 id="31-使用-docker-容器-推荐">3.1 使用 Docker 容器 (推荐)&lt;/h4>
-&lt;!-- 3.1 is linked by other place. if change 3.1's title, please check -->
-&lt;p>可参考 &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/README.md">Docker 部署方式&lt;/a>。&lt;/p>
-&lt;p>我们可以使用 &lt;code>docker run -itd --name=graph -p 8080:8080 hugegraph/hugegraph&lt;/code> 去快速启动一个内置了 &lt;code>RocksDB&lt;/code> 的 &lt;code>Hugegraph server&lt;/code>.&lt;/p>
-&lt;p>可选项：&lt;/p>
-&lt;ol>
-&lt;li>可以使用 &lt;code>docker exec -it graph bash&lt;/code> 进入容器完成一些操作&lt;/li>
-&lt;li>可以使用 &lt;code>docker run -itd --name=graph -p 8080:8080 -e PRELOAD=&amp;quot;true&amp;quot; hugegraph/hugegraph&lt;/code> 在启动的时候预加载一个&lt;strong>内置的&lt;/strong>样例图。可以通过 &lt;code>RESTful API&lt;/code> 进行验证。具体步骤可以参考 &lt;a href="/cn/docs/quickstart/hugegraph-server/#511-%E5%90%AF%E5%8A%A8-server-%E7%9A%84%E6%97%B6%E5%80%99%E5%88%9B%E5%BB%BA%E7%A4%BA%E4%BE%8B%E5%9B%BE">5.1.1&lt;/a>&lt;/li>
-&lt;/ol>
-&lt;p>另外，如果我们希望能够在一个文件中管理除了 &lt;code>server&lt;/code> 之外的其他 Hugegraph 相关的实例，我们也可以使用 &lt;code>docker-compose&lt;/code>完成部署，使用命令 &lt;code>docker-compose up -d&lt;/code>，（当然只配置 &lt;code>server&lt;/code> 也是可以的）以下是一个样例的 &lt;code>docker-compose.yml&lt;/code>:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">graph&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># environment:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - PRELOAD=true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># PRELOAD 为可选参数，为 True 时可以在启动的时候预加载一个内置的样例图&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="32-下载-tar-包">3.2 下载 tar 包&lt;/h4>
+&lt;h4 id="31-下载-tar-包">3.1 下载 tar 包&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># use the latest version, here is 1.0.0 for example&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>/apache-hugegraph-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph*.tar.gz
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="33-源码编译">3.3 源码编译&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="32-源码编译">3.2 源码编译&lt;/h4>
 &lt;p>源码编译前请确保安装了 wget 命令&lt;/p>
 &lt;p>下载 HugeGraph 源代码&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph.git
@@ -1384,6 +1365,36 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> ------------------------------------------------------------------------
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>......
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>执行成功后，在 hugegraph 目录下生成 &lt;code>*hugegraph-*.tar.gz&lt;/code> 文件，就是编译生成的 tar 包。&lt;/p>
+&lt;h4 id="33-使用-docker-容器-便于测试">3.3 使用 Docker 容器 (便于&lt;strong>测试&lt;/strong>)&lt;/h4>
+&lt;!-- 3.1 is linked by other place. if change 3.1's title, please check -->
+&lt;p>可参考 &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/README.md">Docker 部署方式&lt;/a>。&lt;/p>
+&lt;p>我们可以使用 &lt;code>docker run -itd --name=graph -p 8080:8080 hugegraph/hugegraph&lt;/code> 去快速启动一个内置了 &lt;code>RocksDB&lt;/code> 的 &lt;code>Hugegraph server&lt;/code>.&lt;/p>
+&lt;p>可选项：&lt;/p>
+&lt;ol>
+&lt;li>可以使用 &lt;code>docker exec -it graph bash&lt;/code> 进入容器完成一些操作&lt;/li>
+&lt;li>可以使用 &lt;code>docker run -itd --name=graph -p 8080:8080 -e PRELOAD=&amp;quot;true&amp;quot; hugegraph/hugegraph&lt;/code> 在启动的时候预加载一个&lt;strong>内置的&lt;/strong>样例图。可以通过 &lt;code>RESTful API&lt;/code> 进行验证。具体步骤可以参考 &lt;a href="/cn/docs/quickstart/hugegraph-server/#511-%E5%90%AF%E5%8A%A8-server-%E7%9A%84%E6%97%B6%E5%80%99%E5%88%9B%E5%BB%BA%E7%A4%BA%E4%BE%8B%E5%9B%BE">5.1.1&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;p>另外，如果我们希望能够在一个文件中管理除了 &lt;code>server&lt;/code> 之外的其他 Hugegraph 相关的实例，我们也可以使用 &lt;code>docker-compose&lt;/code>完成部署，使用命令 &lt;code>docker-compose up -d&lt;/code>，（当然只配置 &lt;code>server&lt;/code> 也是可以的）以下是一个样例的 &lt;code>docker-compose.yml&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">graph&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># environment:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - PRELOAD=true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># PRELOAD 为可选参数，为 True 时可以在启动的时候预加载一个内置的样例图&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>注意：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>hugegraph 的 docker 镜像是一个便捷版本，用于快速启动 hugegraph，并不是&lt;strong>官方发布物料包方式&lt;/strong>。你可以从 &lt;a href="https://infra.apache.org/release-distribution.html#dockerhub">ASF Release Distribution Policy&lt;/a> 中得到更多细节。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>推荐使用 &lt;code>release tag&lt;/code>(如 &lt;code>1.0.0&lt;/code>) 以获取稳定版。使用 &lt;code>latest&lt;/code> tag 可以使用开发中的最新功能。&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/blockquote>
 &lt;h4 id="34-使用-tools-工具部署-outdated">3.4 使用 tools 工具部署 (Outdated)&lt;/h4>
 &lt;p>HugeGraph-Tools 提供了一键部署的命令行工具，用户可以使用该工具快速地一键下载、解压、配置并启动 HugeGraph-Server 和 HugeGraph-Hubble，最新的 HugeGraph-Toolchain 中已经包含所有的这些工具，直接下载它解压就有工具包集合了&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># download toolchain package, it includes loader + tool + hubble, please check the latest version (here is 1.0.0)&lt;/span>
@@ -1401,9 +1412,192 @@
 &lt;p>如果需要快速启动 HugeGraph 仅用于测试，那么只需要进行少数几个配置项的修改即可（见下一节）。&lt;/p>
 &lt;p>详细的配置介绍请参考&lt;a href="/docs/config/config-guide">配置文档&lt;/a>及&lt;a href="/docs/config/config-option">配置项介绍&lt;/a>。&lt;/p>
 &lt;h3 id="5-启动">5 启动&lt;/h3>
-&lt;h4 id="51-使用-docker">5.1 使用 Docker&lt;/h4>
-&lt;p>在 &lt;a href="#31-%E4%BD%BF%E7%94%A8-docker-%E5%AE%B9%E5%99%A8-%E6%8E%A8%E8%8D%90">3.1 使用 Docker 容器&lt;/a>中，我们已经介绍了如何使用 &lt;code>docker&lt;/code> 部署 &lt;code>hugegraph-server&lt;/code>, 我们还可以使用其他的后端存储或者设置参数在 sever 启动的时候加载样例图&lt;/p>
-&lt;h5 id="511-使用-cassandra-作为后端">5.1.1 使用 Cassandra 作为后端&lt;/h5>
+&lt;h4 id="51-使用启动脚本启动">5.1 使用启动脚本启动&lt;/h4>
+&lt;p>启动分为&amp;quot;首次启动&amp;quot;和&amp;quot;非首次启动&amp;quot;，这么区分是因为在第一次启动前需要初始化后端数据库，然后启动服务。&lt;/p>
+&lt;p>而在人为停掉服务后，或者其他原因需要再次启动服务时，因为后端数据库是持久化存在的，直接启动服务即可。&lt;/p>
+&lt;p>HugeGraphServer 启动时会连接后端存储并尝试检查后端存储版本号，如果未初始化后端或者后端已初始化但版本不匹配时（旧版本数据），HugeGraphServer 会启动失败，并给出错误信息。&lt;/p>
+&lt;p>如果需要外部访问 HugeGraphServer，请修改 &lt;code>rest-server.properties&lt;/code> 的 &lt;code>restserver.url&lt;/code> 配置项（默认为 &lt;code>http://127.0.0.1:8080&lt;/code>），修改成机器名或 IP 地址。&lt;/p>
+&lt;p>由于各种后端所需的配置（hugegraph.properties）及启动步骤略有不同，下面逐一对各后端的配置及启动做介绍。&lt;/p>
+&lt;h5 id="511-rocksdb">5.1.1 RocksDB&lt;/h5>
+&lt;details>
+&lt;summary>点击展开/折叠 RocksDB 配置及启动方法&lt;/summary>
+&lt;blockquote>
+&lt;p>RocksDB 是一个嵌入式的数据库，不需要手动安装部署，要求 GCC 版本 &amp;gt;= 4.3.0（GLIBCXX_3.4.10），如不满足，需要提前升级 GCC&lt;/p>
+&lt;/blockquote>
+&lt;p>修改 &lt;code>hugegraph.properties&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=rocksdb
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=binary
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.data_path=.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.wal_path=.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>初始化数据库（第一次启动时或在 &lt;code>conf/graphs/&lt;/code> 下手动添加了新配置时需要进行初始化）&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动 server&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>http://127.0.0.1:8080/graphs&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>....OK
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>提示的 url 与 &lt;code>rest-server.properties&lt;/code> 中配置的 &lt;code>restserver.url&lt;/code> 一致&lt;/p>
+&lt;/details>
+&lt;h5 id="512-hbase">5.1.2 HBase&lt;/h5>
+&lt;details>
+&lt;summary>点击展开/折叠 HBase 配置及启动方法&lt;/summary>
+&lt;blockquote>
+&lt;p>用户需自行安装 HBase，要求版本 2.0 以上，&lt;a href="https://hbase.apache.org/downloads.html">下载地址&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>修改 hugegraph.properties&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=hbase
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=hbase
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># hbase backend config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hbase.hosts=localhost
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hbase.port=2181
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Note: recommend to modify the HBase partition number by the actual/env data amount &amp;amp; RS amount before init store
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># it may influence the loading speed a lot
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#hbase.enable_partition=true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#hbase.vertex_partitions=10
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#hbase.edge_partitions=30
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>初始化数据库（第一次启动时或在 &lt;code>conf/graphs/&lt;/code> 下手动添加了新配置时需要进行初始化）&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动 server&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>http://127.0.0.1:8080/graphs&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>....OK
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>更多其它后端配置可参考&lt;a href="/docs/config/config-option">配置项介绍&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;/details>
+&lt;h5 id="513-mysql">5.1.3 MySQL&lt;/h5>
+&lt;details>
+&lt;summary>点击展开/折叠 MySQL 配置及启动方法&lt;/summary>
+&lt;blockquote>
+&lt;p>由于 MySQL 是在 GPL 协议下，与 Apache 协议不兼容，用户需自行安装 MySQL，&lt;a href="https://dev.mysql.com/downloads/mysql/">下载地址&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>下载 MySQL 的&lt;a href="https://repo1.maven.org/maven2/mysql/mysql-connector-java/">驱动包&lt;/a>，比如 &lt;code>mysql-connector-java-8.0.30.jar&lt;/code>，并放入 HugeGraph-Server 的 &lt;code>lib&lt;/code> 目录下。&lt;/p>
+&lt;p>修改 &lt;code>hugegraph.properties&lt;/code>，配置数据库 URL，用户名和密码，&lt;code>store&lt;/code> 是数据库名，如果没有会被自动创建。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=mysql
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=mysql
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store=hugegraph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># mysql backend config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.driver=com.mysql.cj.jdbc.Driver
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.url=jdbc:mysql://127.0.0.1:3306
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.username=
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.password=
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.reconnect_max_times=3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.reconnect_interval=3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.ssl_mode=false
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>初始化数据库（第一次启动时或在 &lt;code>conf/graphs/&lt;/code> 下手动添加了新配置时需要进行初始化）&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动 server&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>http://127.0.0.1:8080/graphs&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>....OK
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/details>
+&lt;h5 id="514-cassandra">5.1.4 Cassandra&lt;/h5>
+&lt;details>
+&lt;summary>点击展开/折叠 Cassandra 配置及启动方法&lt;/summary>
+&lt;blockquote>
+&lt;p>用户需自行安装 Cassandra，要求版本 3.0 以上，&lt;a href="http://cassandra.apache.org/download/">下载地址&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>修改 hugegraph.properties&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=cassandra
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=cassandra
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># cassandra backend config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.host=localhost
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.port=9042
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.username=
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.password=
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.connect_timeout=5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.read_timeout=20
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.keyspace.strategy=SimpleStrategy
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.keyspace.replication=3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>初始化数据库（第一次启动时或在 &lt;code>conf/graphs/&lt;/code> 下手动添加了新配置时需要进行初始化）&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Initing HugeGraph Store...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:26:51 &lt;span style="color:#0000cf;font-weight:bold">1424&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.HugeGraph &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Opening backend store: &lt;span style="color:#4e9a06">&amp;#39;cassandra&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:26:52 &lt;span style="color:#0000cf;font-weight:bold">2389&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.store.cassandra.CassandraStore &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Failed to connect keyspace: hugegraph, try init keyspace later
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:26:52 &lt;span style="color:#0000cf;font-weight:bold">2472&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.store.cassandra.CassandraStore &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Failed to connect keyspace: hugegraph, try init keyspace later
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:26:52 &lt;span style="color:#0000cf;font-weight:bold">2557&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.store.cassandra.CassandraStore &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Failed to connect keyspace: hugegraph, try init keyspace later
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:26:53 &lt;span style="color:#0000cf;font-weight:bold">2797&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.store.cassandra.CassandraStore &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Store initialized: huge_graph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:26:53 &lt;span style="color:#0000cf;font-weight:bold">2945&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.store.cassandra.CassandraStore &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Store initialized: huge_schema
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:26:53 &lt;span style="color:#0000cf;font-weight:bold">3044&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.store.cassandra.CassandraStore &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Store initialized: huge_index
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:26:53 &lt;span style="color:#0000cf;font-weight:bold">3046&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>pool-3-thread-1&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.Transaction &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Clear cache on event &lt;span style="color:#4e9a06">&amp;#39;store.init&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:26:59 &lt;span style="color:#0000cf;font-weight:bold">9720&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.HugeGraph &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Opening backend store: &lt;span style="color:#4e9a06">&amp;#39;cassandra&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:27:00 &lt;span style="color:#0000cf;font-weight:bold">9805&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.store.cassandra.CassandraStore &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Failed to connect keyspace: hugegraph1, try init keyspace later
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:27:00 &lt;span style="color:#0000cf;font-weight:bold">9886&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.store.cassandra.CassandraStore &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Failed to connect keyspace: hugegraph1, try init keyspace later
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:27:00 &lt;span style="color:#0000cf;font-weight:bold">9955&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.store.cassandra.CassandraStore &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Failed to connect keyspace: hugegraph1, try init keyspace later
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:27:00 &lt;span style="color:#0000cf;font-weight:bold">10175&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.store.cassandra.CassandraStore &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Store initialized: huge_graph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:27:00 &lt;span style="color:#0000cf;font-weight:bold">10321&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.store.cassandra.CassandraStore &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Store initialized: huge_schema
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:27:00 &lt;span style="color:#0000cf;font-weight:bold">10413&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.store.cassandra.CassandraStore &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Store initialized: huge_index
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:27:00 &lt;span style="color:#0000cf;font-weight:bold">10413&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>pool-3-thread-1&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.Transaction &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Clear cache on event &lt;span style="color:#4e9a06">&amp;#39;store.init&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动 server&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>http://127.0.0.1:8080/graphs&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>....OK
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/details>
+&lt;h5 id="515-memory">5.1.5 Memory&lt;/h5>
+&lt;details>
+&lt;summary>点击展开/折叠 Memory 配置及启动方法&lt;/summary>
+&lt;p>修改 hugegraph.properties&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=memory
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=text
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>Memory 后端的数据是保存在内存中无法持久化的，不需要初始化后端，这也是唯一一个不需要初始化的后端。&lt;/p>
+&lt;/blockquote>
+&lt;p>启动 server&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>http://127.0.0.1:8080/graphs&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>....OK
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>提示的 url 与 rest-server.properties 中配置的 restserver.url 一致&lt;/p>
+&lt;/details>
+&lt;h5 id="516-scylladb">5.1.6 ScyllaDB&lt;/h5>
+&lt;details>
+&lt;summary>点击展开/折叠 ScyllaDB 配置及启动方法&lt;/summary>
+&lt;blockquote>
+&lt;p>用户需自行安装 ScyllaDB，推荐版本 2.1 以上，&lt;a href="https://docs.scylladb.com/getting-started/">下载地址&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>修改 hugegraph.properties&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=scylladb
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=scylladb
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># cassandra backend config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.host=localhost
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.port=9042
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.username=
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.password=
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.connect_timeout=5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.read_timeout=20
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.keyspace.strategy=SimpleStrategy
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.keyspace.replication=3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>由于 scylladb 数据库本身就是基于 cassandra 的&amp;quot;优化版&amp;quot;，如果用户未安装 scylladb，也可以直接使用 cassandra 作为后端存储，只需要把 backend 和 serializer 修改为 scylladb，host 和 post 指向 cassandra 集群的 seeds 和 port 即可，但是并不建议这样做，这样发挥不出 scylladb 本身的优势了。&lt;/p>
+&lt;p>初始化数据库（第一次启动时或在 &lt;code>conf/graphs/&lt;/code> 下手动添加了新配置时需要进行初始化）&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动 server&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>http://127.0.0.1:8080/graphs&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>....OK
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/details>
+&lt;h5 id="517-启动-server-的时候创建示例图">5.1.7 启动 server 的时候创建示例图&lt;/h5>
+&lt;p>在脚本启动时候携带 &lt;code>-p true&lt;/code>参数，表示 preload, 即创建示例图图&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh -p true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer in daemon mode...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)......OK
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>并且使用 RESTful API 请求 &lt;code>HugeGraphServer&lt;/code> 得到如下结果：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">curl&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;http://localhost:8080/graphs/hugegraph/graph/vertices&amp;#34;&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">|&lt;/span> &lt;span style="color:#000">gunzip&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertices&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">[{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;2:lop&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;software&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;lop&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;lang&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;java&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;price&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">328&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:josh&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;josh&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">32&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:marko&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;marko&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">29&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:peter&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;peter&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">35&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Shanghai&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:vadas&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vadas&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">27&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Hongkong&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;2:ripple&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;software&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;ripple&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;lang&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;java&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;price&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">199&lt;/span>&lt;span style="color:#000;font-weight:bold">}}]}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>代表创建示例图成功。&lt;/p>
+&lt;h4 id="52-使用-docker">5.2 使用 Docker&lt;/h4>
+&lt;p>在 &lt;a href="#33-%E4%BD%BF%E7%94%A8-docker-%E5%AE%B9%E5%99%A8">3.3 使用 Docker 容器&lt;/a>中，我们已经介绍了如何使用 &lt;code>docker&lt;/code> 部署 &lt;code>hugegraph-server&lt;/code>, 我们还可以使用其他的后端存储或者设置参数在 sever 启动的时候加载样例图&lt;/p>
+&lt;h5 id="521-使用-cassandra-作为后端">5.2.1 使用 Cassandra 作为后端&lt;/h5>
 &lt;details>
 &lt;summary>点击展开/折叠 Cassandra 配置及启动方法&lt;/summary>
 &lt;p>在使用 Docker 的时候，我们可以使用 Cassandra 作为后端存储。我们更加推荐直接使用 docker-compose 来对于 server 以及 Cassandra 进行统一管理&lt;/p>
@@ -1456,7 +1650,7 @@
 &lt;p>具体来说，在 &lt;code>hugegraph.properties&lt;/code> 配置文件中，提供了 &lt;code>backend=xxx&lt;/code>, &lt;code>cassandra.host=xxx&lt;/code> 等配置项，为了配置这些配置项，在传递环境变量的过程之中，我们需要在这些配置项前加上 &lt;code>hugegrpah.&lt;/code>，即 &lt;code>hugegraph.backend&lt;/code> 和 &lt;code>hugegraph.cassandra.host&lt;/code>。&lt;/p>
 &lt;p>其他配置可以参照 &lt;a href="#4-%E9%85%8D%E7%BD%AE">4 配置&lt;/a>&lt;/p>
 &lt;/details>
-&lt;h5 id="512-启动-server-的时候创建示例图">5.1.2 启动 server 的时候创建示例图&lt;/h5>
+&lt;h5 id="522-启动-server-的时候创建示例图">5.2.2 启动 server 的时候创建示例图&lt;/h5>
 &lt;p>在 docker 启动的时候设置环境变量 &lt;code>PRELOAD=true&lt;/code>, 从而实现启动脚本的时候加载数据。&lt;/p>
 &lt;ol>
 &lt;li>
@@ -1481,189 +1675,6 @@
 &lt;/li>
 &lt;/ol>
 &lt;p>使用 RESTful API 请求 &lt;code>HugeGraphServer&lt;/code> 得到如下结果：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">curl&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;http://localhost:8080/graphs/hugegraph/graph/vertices&amp;#34;&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">|&lt;/span> &lt;span style="color:#000">gunzip&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertices&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">[{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;2:lop&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;software&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;lop&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;lang&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;java&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;price&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">328&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:josh&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;josh&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">32&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:marko&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;marko&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">29&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:peter&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;peter&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">35&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Shanghai&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:vadas&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vadas&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">27&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Hongkong&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;2:ripple&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;software&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;ripple&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;lang&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;java&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;price&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">199&lt;/span>&lt;span style="color:#000;font-weight:bold">}}]}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>代表创建示例图成功。&lt;/p>
-&lt;h4 id="52-使用启动脚本启动">5.2 使用启动脚本启动&lt;/h4>
-&lt;p>启动分为&amp;quot;首次启动&amp;quot;和&amp;quot;非首次启动&amp;quot;，这么区分是因为在第一次启动前需要初始化后端数据库，然后启动服务。&lt;/p>
-&lt;p>而在人为停掉服务后，或者其他原因需要再次启动服务时，因为后端数据库是持久化存在的，直接启动服务即可。&lt;/p>
-&lt;p>HugeGraphServer 启动时会连接后端存储并尝试检查后端存储版本号，如果未初始化后端或者后端已初始化但版本不匹配时（旧版本数据），HugeGraphServer 会启动失败，并给出错误信息。&lt;/p>
-&lt;p>如果需要外部访问 HugeGraphServer，请修改 &lt;code>rest-server.properties&lt;/code> 的 &lt;code>restserver.url&lt;/code> 配置项（默认为 &lt;code>http://127.0.0.1:8080&lt;/code>），修改成机器名或 IP 地址。&lt;/p>
-&lt;p>由于各种后端所需的配置（hugegraph.properties）及启动步骤略有不同，下面逐一对各后端的配置及启动做介绍。&lt;/p>
-&lt;h5 id="521-rocksdb">5.2.1 RocksDB&lt;/h5>
-&lt;details>
-&lt;summary>点击展开/折叠 RocksDB 配置及启动方法&lt;/summary>
-&lt;blockquote>
-&lt;p>RocksDB 是一个嵌入式的数据库，不需要手动安装部署，要求 GCC 版本 &amp;gt;= 4.3.0（GLIBCXX_3.4.10），如不满足，需要提前升级 GCC&lt;/p>
-&lt;/blockquote>
-&lt;p>修改 &lt;code>hugegraph.properties&lt;/code>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=rocksdb
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=binary
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.data_path=.
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.wal_path=.
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>初始化数据库（第一次启动时或在 &lt;code>conf/graphs/&lt;/code> 下手动添加了新配置时需要进行初始化）&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动 server&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer...
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>http://127.0.0.1:8080/graphs&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>....OK
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>提示的 url 与 &lt;code>rest-server.properties&lt;/code> 中配置的 &lt;code>restserver.url&lt;/code> 一致&lt;/p>
-&lt;/details>
-&lt;h5 id="522-hbase">5.2.2 HBase&lt;/h5>
-&lt;details>
-&lt;summary>点击展开/折叠 HBase 配置及启动方法&lt;/summary>
-&lt;blockquote>
-&lt;p>用户需自行安装 HBase，要求版本 2.0 以上，&lt;a href="https://hbase.apache.org/downloads.html">下载地址&lt;/a>&lt;/p>
-&lt;/blockquote>
-&lt;p>修改 hugegraph.properties&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=hbase
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=hbase
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># hbase backend config
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hbase.hosts=localhost
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hbase.port=2181
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Note: recommend to modify the HBase partition number by the actual/env data amount &amp;amp; RS amount before init store
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># it may influence the loading speed a lot
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#hbase.enable_partition=true
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#hbase.vertex_partitions=10
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#hbase.edge_partitions=30
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>初始化数据库（第一次启动时或在 &lt;code>conf/graphs/&lt;/code> 下手动添加了新配置时需要进行初始化）&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动 server&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer...
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>http://127.0.0.1:8080/graphs&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>....OK
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>更多其它后端配置可参考&lt;a href="/docs/config/config-option">配置项介绍&lt;/a>&lt;/p>
-&lt;/blockquote>
-&lt;/details>
-&lt;h5 id="523-mysql">5.2.3 MySQL&lt;/h5>
-&lt;details>
-&lt;summary>点击展开/折叠 MySQL 配置及启动方法&lt;/summary>
-&lt;blockquote>
-&lt;p>由于 MySQL 是在 GPL 协议下，与 Apache 协议不兼容，用户需自行安装 MySQL，&lt;a href="https://dev.mysql.com/downloads/mysql/">下载地址&lt;/a>&lt;/p>
-&lt;/blockquote>
-&lt;p>下载 MySQL 的&lt;a href="https://repo1.maven.org/maven2/mysql/mysql-connector-java/">驱动包&lt;/a>，比如 &lt;code>mysql-connector-java-8.0.30.jar&lt;/code>，并放入 HugeGraph-Server 的 &lt;code>lib&lt;/code> 目录下。&lt;/p>
-&lt;p>修改 &lt;code>hugegraph.properties&lt;/code>，配置数据库 URL，用户名和密码，&lt;code>store&lt;/code> 是数据库名，如果没有会被自动创建。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=mysql
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=mysql
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store=hugegraph
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># mysql backend config
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.driver=com.mysql.cj.jdbc.Driver
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.url=jdbc:mysql://127.0.0.1:3306
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.username=
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.password=
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.reconnect_max_times=3
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.reconnect_interval=3
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jdbc.ssl_mode=false
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>初始化数据库（第一次启动时或在 &lt;code>conf/graphs/&lt;/code> 下手动添加了新配置时需要进行初始化）&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动 server&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer...
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>http://127.0.0.1:8080/graphs&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>....OK
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/details>
-&lt;h5 id="524-cassandra">5.2.4 Cassandra&lt;/h5>
-&lt;details>
-&lt;summary>点击展开/折叠 Cassandra 配置及启动方法&lt;/summary>
-&lt;blockquote>
-&lt;p>用户需自行安装 Cassandra，要求版本 3.0 以上，&lt;a href="http://cassandra.apache.org/download/">下载地址&lt;/a>&lt;/p>
-&lt;/blockquote>
-&lt;p>修改 hugegraph.properties&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=cassandra
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=cassandra
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># cassandra backend config
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.host=localhost
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.port=9042
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.username=
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.password=
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.connect_timeout=5
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.read_timeout=20
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.keyspace.strategy=SimpleStrategy
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.keyspace.replication=3
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>初始化数据库（第一次启动时或在 &lt;code>conf/graphs/&lt;/code> 下手动添加了新配置时需要进行初始化）&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Initing HugeGraph Store...
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:26:51 &lt;span style="color:#0000cf;font-weight:bold">1424&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.HugeGraph &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Opening backend store: &lt;span style="color:#4e9a06">&amp;#39;cassandra&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:26:52 &lt;span style="color:#0000cf;font-weight:bold">2389&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.store.cassandra.CassandraStore &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Failed to connect keyspace: hugegraph, try init keyspace later
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:26:52 &lt;span style="color:#0000cf;font-weight:bold">2472&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.store.cassandra.CassandraStore &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Failed to connect keyspace: hugegraph, try init keyspace later
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:26:52 &lt;span style="color:#0000cf;font-weight:bold">2557&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.store.cassandra.CassandraStore &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Failed to connect keyspace: hugegraph, try init keyspace later
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:26:53 &lt;span style="color:#0000cf;font-weight:bold">2797&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.store.cassandra.CassandraStore &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Store initialized: huge_graph
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:26:53 &lt;span style="color:#0000cf;font-weight:bold">2945&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.store.cassandra.CassandraStore &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Store initialized: huge_schema
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:26:53 &lt;span style="color:#0000cf;font-weight:bold">3044&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.store.cassandra.CassandraStore &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Store initialized: huge_index
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:26:53 &lt;span style="color:#0000cf;font-weight:bold">3046&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>pool-3-thread-1&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.Transaction &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Clear cache on event &lt;span style="color:#4e9a06">&amp;#39;store.init&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:26:59 &lt;span style="color:#0000cf;font-weight:bold">9720&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.HugeGraph &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Opening backend store: &lt;span style="color:#4e9a06">&amp;#39;cassandra&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:27:00 &lt;span style="color:#0000cf;font-weight:bold">9805&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.store.cassandra.CassandraStore &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Failed to connect keyspace: hugegraph1, try init keyspace later
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:27:00 &lt;span style="color:#0000cf;font-weight:bold">9886&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.store.cassandra.CassandraStore &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Failed to connect keyspace: hugegraph1, try init keyspace later
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:27:00 &lt;span style="color:#0000cf;font-weight:bold">9955&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.store.cassandra.CassandraStore &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Failed to connect keyspace: hugegraph1, try init keyspace later
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:27:00 &lt;span style="color:#0000cf;font-weight:bold">10175&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.store.cassandra.CassandraStore &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Store initialized: huge_graph
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:27:00 &lt;span style="color:#0000cf;font-weight:bold">10321&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.store.cassandra.CassandraStore &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Store initialized: huge_schema
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:27:00 &lt;span style="color:#0000cf;font-weight:bold">10413&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.store.cassandra.CassandraStore &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Store initialized: huge_index
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2017-12-01 11:27:00 &lt;span style="color:#0000cf;font-weight:bold">10413&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>pool-3-thread-1&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> org.apache.hugegraph.backend.Transaction &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Clear cache on event &lt;span style="color:#4e9a06">&amp;#39;store.init&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动 server&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer...
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>http://127.0.0.1:8080/graphs&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>....OK
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/details>
-&lt;h5 id="525-memory">5.2.5 Memory&lt;/h5>
-&lt;details>
-&lt;summary>点击展开/折叠 Memory 配置及启动方法&lt;/summary>
-&lt;p>修改 hugegraph.properties&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=memory
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=text
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>Memory 后端的数据是保存在内存中无法持久化的，不需要初始化后端，这也是唯一一个不需要初始化的后端。&lt;/p>
-&lt;/blockquote>
-&lt;p>启动 server&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer...
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>http://127.0.0.1:8080/graphs&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>....OK
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>提示的 url 与 rest-server.properties 中配置的 restserver.url 一致&lt;/p>
-&lt;/details>
-&lt;h5 id="526-scylladb">5.2.6 ScyllaDB&lt;/h5>
-&lt;details>
-&lt;summary>点击展开/折叠 ScyllaDB 配置及启动方法&lt;/summary>
-&lt;blockquote>
-&lt;p>用户需自行安装 ScyllaDB，推荐版本 2.1 以上，&lt;a href="https://docs.scylladb.com/getting-started/">下载地址&lt;/a>&lt;/p>
-&lt;/blockquote>
-&lt;p>修改 hugegraph.properties&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=scylladb
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=scylladb
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># cassandra backend config
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.host=localhost
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.port=9042
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.username=
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cassandra.password=
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.connect_timeout=5
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.read_timeout=20
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.keyspace.strategy=SimpleStrategy
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#cassandra.keyspace.replication=3
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>由于 scylladb 数据库本身就是基于 cassandra 的&amp;quot;优化版&amp;quot;，如果用户未安装 scylladb，也可以直接使用 cassandra 作为后端存储，只需要把 backend 和 serializer 修改为 scylladb，host 和 post 指向 cassandra 集群的 seeds 和 port 即可，但是并不建议这样做，这样发挥不出 scylladb 本身的优势了。&lt;/p>
-&lt;p>初始化数据库（第一次启动时或在 &lt;code>conf/graphs/&lt;/code> 下手动添加了新配置时需要进行初始化）&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动 server&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer...
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>http://127.0.0.1:8080/graphs&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>....OK
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/details>
-&lt;h5 id="527-启动-server-的时候创建示例图">5.2.7 启动 server 的时候创建示例图&lt;/h5>
-&lt;p>在脚本启动时候携带 &lt;code>-p true&lt;/code>参数，表示 preload, 即创建示例图图&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh -p true
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Starting HugeGraphServer in daemon mode...
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)......OK
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>并且使用 RESTful API 请求 &lt;code>HugeGraphServer&lt;/code> 得到如下结果：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;gt;&lt;/span> &lt;span style="color:#000">curl&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;http://localhost:8080/graphs/hugegraph/graph/vertices&amp;#34;&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">|&lt;/span> &lt;span style="color:#000">gunzip&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertices&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">[{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;2:lop&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;software&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;lop&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;lang&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;java&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;price&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">328&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:josh&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;josh&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">32&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:marko&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;marko&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">29&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:peter&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;peter&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">35&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Shanghai&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:vadas&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vadas&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">27&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Hongkong&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;2:ripple&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;software&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;ripple&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;lang&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;java&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;price&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">199&lt;/span>&lt;span style="color:#000;font-weight:bold">}}]}&lt;/span>
@@ -4989,11 +5000,30 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;h3 id="2-获取-hugegraph-loader">2 获取 HugeGraph-Loader&lt;/h3>
 &lt;p>有两种方式可以获取 HugeGraph-Loader：&lt;/p>
 &lt;ul>
-&lt;li>使用 Docker 镜像 (推荐)&lt;/li>
 &lt;li>下载已编译的压缩包&lt;/li>
 &lt;li>克隆源码编译安装&lt;/li>
+&lt;li>使用 Docker 镜像 (便于&lt;strong>测试&lt;/strong>)&lt;/li>
 &lt;/ul>
-&lt;h4 id="21-使用-docker-镜像">2.1 使用 Docker 镜像&lt;/h4>
+&lt;h4 id="21-下载已编译的压缩包">2.1 下载已编译的压缩包&lt;/h4>
+&lt;p>下载最新版本的 HugeGraph-Toolchain Release 包，里面包含了 loader + tool + hubble 全套工具，如果你已经下载，可跳过重复步骤&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>//apache-hugegraph-toolchain-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph*.tar.gz
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="22-克隆源码编译安装">2.2 克隆源码编译安装&lt;/h4>
+&lt;p>克隆最新版本的 HugeGraph-Loader 源码包：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 1. get from github&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph-toolchain.git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 2. get from direct (e.g. here is 1.0.0, please choose the latest version)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>/apache-hugegraph-toolchain-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>-src.tar.gz
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>由于 Oracle ojdbc license 的限制，需要手动安装 ojdbc 到本地 maven 仓库。
+访问&lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-drivers-archive.html">Oracle jdbc 下载&lt;/a> 页面。选择 Oracle Database 12c Release 2 (12.2.0.1) drivers，如下图所示。&lt;/p>
+&lt;p>打开链接后，选择“ojdbc8.jar”&lt;/p>
+&lt;p>把 ojdbc8 安装到本地 maven 仓库，进入&lt;code>ojdbc8.jar&lt;/code>所在目录，执行以下命令。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>编译生成 tar 包：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-loader
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn clean package -DskipTests
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="23-使用-docker-镜像-便于测试">2.3 使用 Docker 镜像 (便于&lt;strong>测试&lt;/strong>)&lt;/h4>
 &lt;p>我们可以使用 &lt;code>docker run -itd --name loader hugegraph/loader&lt;/code>部署 loader 服务。对于需要加载的数据，则可以通过挂载 &lt;code>-v /path/to/data/file:/loader/file&lt;/code> 或者&lt;code>docker cp&lt;/code>的方式将文件复制到 loader 容器内部。&lt;/p>
 &lt;p>或者使用 docker-compose 启动 loader, 启动命令为 &lt;code>docker-compose up -d&lt;/code>, 样例的 docker-compose.yml 如下所示：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -5018,26 +5048,18 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># volumes:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - /path/to/data/file:/loader/file&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>具体的数据导入流程可以参考 &lt;a href="#45-%E4%BD%BF%E7%94%A8-docker-%E5%AF%BC%E5%85%A5">4.5 使用 docker 导入&lt;/a>&lt;/p>
-&lt;h4 id="22-下载已编译的压缩包">2.2 下载已编译的压缩包&lt;/h4>
-&lt;p>下载最新版本的 HugeGraph-Toolchain Release 包，里面包含了 loader + tool + hubble 全套工具，如果你已经下载，可跳过重复步骤&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph*.tar.gz
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="23-克隆源码编译安装">2.3 克隆源码编译安装&lt;/h4>
-&lt;p>克隆最新版本的 HugeGraph-Loader 源码包：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 1. get from github&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph-toolchain.git
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 2. get from direct (e.g. here is 1.0.0, please choose the latest version)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0-src.tar.gz
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>由于 Oracle ojdbc license 的限制，需要手动安装 ojdbc 到本地 maven 仓库。
-访问&lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-drivers-archive.html">Oracle jdbc 下载&lt;/a> 页面。选择 Oracle Database 12c Release 2 (12.2.0.1) drivers，如下图所示。&lt;/p>
-&lt;p>打开链接后，选择“ojdbc8.jar”&lt;/p>
-&lt;p>把 ojdbc8 安装到本地 maven 仓库，进入&lt;code>ojdbc8.jar&lt;/code>所在目录，执行以下命令。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>编译生成 tar 包：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-loader
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn clean package -DskipTests
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-使用流程">3 使用流程&lt;/h3>
+&lt;blockquote>
+&lt;p>注意：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>hugegraph-loader 的 docker 镜像是一个便捷版本，用于快速启动 loader，并不是&lt;strong>官方发布物料包方式&lt;/strong>。你可以从 &lt;a href="https://infra.apache.org/release-distribution.html#dockerhub">ASF Release Distribution Policy&lt;/a> 中得到更多细节。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>推荐使用 &lt;code>release tag&lt;/code>(如 &lt;code>1.0.0&lt;/code>) 以获取稳定版。使用 &lt;code>latest&lt;/code> tag 可以使用开发中的最新功能。&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/blockquote>
+&lt;h3 id="3-使用流程">3 使用流程&lt;/h3>
 &lt;p>使用 HugeGraph-Loader 的基本流程分为以下几步：&lt;/p>
 &lt;ul>
 &lt;li>编写图模型&lt;/li>
@@ -7654,32 +7676,11 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;h3 id="2-部署">2 部署&lt;/h3>
 &lt;p>有三种方式可以部署&lt;code>hugegraph-hubble&lt;/code>&lt;/p>
 &lt;ul>
-&lt;li>使用 docker (推荐)&lt;/li>
 &lt;li>下载 toolchain 二进制包&lt;/li>
 &lt;li>源码编译&lt;/li>
+&lt;li>使用 docker (便于&lt;strong>测试&lt;/strong>)&lt;/li>
 &lt;/ul>
-&lt;h4 id="21-使用-docker-推荐">2.1 使用 Docker (推荐)&lt;/h4>
-&lt;blockquote>
-&lt;p>&lt;strong>特别注意&lt;/strong>: docker 模式下，若 hubble 和 server 在同一宿主机，hubble 页面中设置 graph 的 &lt;code>hostname&lt;/code> &lt;strong>不能设置&lt;/strong>为 &lt;code>localhost/127.0.0.1&lt;/code>，因这会指向 hubble &lt;strong>容器内部&lt;/strong>而非宿主机，导致无法连接到 server.&lt;/p>
-&lt;p>若 hubble 和 server 在同一 docker 网络下，&lt;strong>推荐&lt;/strong>直接使用&lt;code>container_name&lt;/code> (如下例的 &lt;code>graph&lt;/code>) 作为主机名。或者也可以使用 &lt;strong>宿主机 IP&lt;/strong> 作为主机名，此时端口号为宿主机给 server 配置的端口&lt;/p>
-&lt;/blockquote>
-&lt;p>我们可以使用 &lt;code>docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble&lt;/code> 快速启动 &lt;a href="https://hub.docker.com/r/hugegraph/hubble">hubble&lt;/a>.&lt;/p>
-&lt;p>或者使用 docker-compose 启动 hubble，另外如果 hubble 和 graph 在同一个 docker 网络下，可以使用 graph 的 contain_name 进行访问，而不需要宿主机的 ip&lt;/p>
-&lt;p>使用&lt;code>docker-compose up -d&lt;/code>，&lt;code>docker-compose.yml&lt;/code>如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">server&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hubble&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hubble&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hubble&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">8088&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8088&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="22-下载-toolchain-二进制包">2.2 下载 toolchain 二进制包&lt;/h4>
+&lt;h4 id="21-下载-toolchain-二进制包">2.1 下载 toolchain 二进制包&lt;/h4>
 &lt;p>&lt;code>hubble&lt;/code>项目在&lt;code>toolchain&lt;/code>项目中，首先下载&lt;code>toolchain&lt;/code>的 tar 包&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar -xvf apache-hugegraph-toolchain-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz
@@ -7694,7 +7695,7 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-08-30 20:38:41 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.c.h.Http11NioProtocol &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Starting ProtocolHandler &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;http-nio-0.0.0.0-8088&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-08-30 20:38:41 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.h.HugeGraphHubble &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Started HugeGraphHubble in 7.379 seconds &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>JVM running &lt;span style="color:#204a87;font-weight:bold">for&lt;/span> 8.499&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后使用浏览器访问 &lt;code>ip:8088&lt;/code> 可看到&lt;code>hubble&lt;/code>页面，通过&lt;code>bin/stop-hubble.sh&lt;/code>则可以停止服务&lt;/p>
-&lt;h4 id="23-源码编译">2.3 源码编译&lt;/h4>
+&lt;h4 id="22-源码编译">2.2 源码编译&lt;/h4>
 &lt;p>&lt;strong>注意：&lt;/strong> 编译 hubble 需要用户本地环境有安装 &lt;code>Nodejs V16.x&lt;/code> 与 &lt;code>yarn&lt;/code> 环境&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>apt install curl build-essential
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh &lt;span style="color:#000;font-weight:bold">|&lt;/span> bash
@@ -7715,7 +7716,39 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> apache-hugegraph-hubble-incubating*
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动&lt;code>hubble&lt;/code>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-hubble.sh -d
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3平台使用流程">3 平台使用流程&lt;/h3>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="23-使用-docker-便于测试">2.3 使用 Docker (便于&lt;strong>测试&lt;/strong>)&lt;/h4>
+&lt;blockquote>
+&lt;p>&lt;strong>特别注意&lt;/strong>: docker 模式下，若 hubble 和 server 在同一宿主机，hubble 页面中设置 graph 的 &lt;code>hostname&lt;/code> &lt;strong>不能设置&lt;/strong>为 &lt;code>localhost/127.0.0.1&lt;/code>，因这会指向 hubble &lt;strong>容器内部&lt;/strong>而非宿主机，导致无法连接到 server.&lt;/p>
+&lt;p>若 hubble 和 server 在同一 docker 网络下，&lt;strong>推荐&lt;/strong>直接使用&lt;code>container_name&lt;/code> (如下例的 &lt;code>graph&lt;/code>) 作为主机名。或者也可以使用 &lt;strong>宿主机 IP&lt;/strong> 作为主机名，此时端口号为宿主机给 server 配置的端口&lt;/p>
+&lt;/blockquote>
+&lt;p>我们可以使用 &lt;code>docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble&lt;/code> 快速启动 &lt;a href="https://hub.docker.com/r/hugegraph/hubble">hubble&lt;/a>.&lt;/p>
+&lt;p>或者使用 docker-compose 启动 hubble，另外如果 hubble 和 graph 在同一个 docker 网络下，可以使用 graph 的 contain_name 进行访问，而不需要宿主机的 ip&lt;/p>
+&lt;p>使用&lt;code>docker-compose up -d&lt;/code>，&lt;code>docker-compose.yml&lt;/code>如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">server&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hubble&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hubble&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hubble&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">8088&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8088&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>注意：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>hugegraph-hubble 的 docker 镜像是一个便捷版本，用于快速启动 hubble，并不是&lt;strong>官方发布物料包方式&lt;/strong>。你可以从 &lt;a href="https://infra.apache.org/release-distribution.html#dockerhub">ASF Release Distribution Policy&lt;/a> 中得到更多细节。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>推荐使用 &lt;code>release tag&lt;/code>(如 &lt;code>1.0.0&lt;/code>) 以获取稳定版。使用 &lt;code>latest&lt;/code> tag 可以使用开发中的最新功能。&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/blockquote>
+&lt;h3 id="3平台使用流程">3 平台使用流程&lt;/h3>
 &lt;p>平台的模块使用流程如下：&lt;/p>
 &lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/2平台使用流程.png" alt="image">
