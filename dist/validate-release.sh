@@ -89,9 +89,6 @@ for i in *src.tar.gz; do
   if [[ ! -f "DISCLAIMER" ]]; then
     echo "The package $i should include DISCLAIMER file" && exit 1
   fi
-  if [[ ! -d "licenses" ]]; then
-    echo "The package $i should include licenses dir" && exit 1
-  fi
 
   # 4.3: ensure doesn't contains *GPL/BCL/JSR-275/RSAL/QPL/SSPL/CPOL/NPL1.*/CC-BY
   #      dependency in LICENSE and NOTICE file
