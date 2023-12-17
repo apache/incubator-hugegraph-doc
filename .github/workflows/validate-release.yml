@@ -126,7 +126,7 @@ jobs:
             COUNT=$(find . -type f,d -empty | wc -l)
             if [[ $COUNT -ne 0 ]]; then
               find . -type f,d -empty
-              echo "The package shouldn't include empty dir/file, but get $COUNT" # TODO: && exit 1
+              echo "The package shouldn't include empty dir/file, but get $COUNT" && exit 1
             fi
 
             # 4.5 ensure any file should less than 800kb & not include binary file
@@ -138,8 +138,7 @@ jobs:
             COUNT=$(find . -type f | grep -Ev ".txt|logo.png|favicon.ico|yarn.lock" | perl -lne 'print if -B' | wc -l)
             if [[ $COUNT -ne 0 ]]; then
               find . -type f | perl -lne 'print if -B'
-              # due to the search script is not perfect, we can't exit here (check manually)
-              echo "The package shouldn't include binary file, but get $COUNT" # TODO: && exit 1
+              echo "The package shouldn't include binary file, but get $COUNT" && exit 1
             fi
 
             # 4.6 test compile the packages
@@ -262,7 +261,7 @@ jobs:
           cd ./*toolchain*${{ inputs.release_version }} || exit
           ls -lh
 
-          # 9.1 loader some data first 
+          # 9.1 loader some data first
           echo "test loader"
           cd ./*loader*${{ inputs.release_version }} || exit
           bin/hugegraph-loader.sh -f ./example/file/struct.json -s ./example/file/schema.groovy \
