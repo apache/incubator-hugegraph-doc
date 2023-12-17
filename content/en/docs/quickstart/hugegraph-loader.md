@@ -23,11 +23,49 @@ It will be explained in detail below.
 
 There are two ways to get HugeGraph-Loader:
 
-- User docker image (Recommended)
 - Download the compiled tarball
 - Clone source code then compile and install
+- Use docker image (Convenient for Test/Dev)
 
-#### 2.1 Use Docker image
+#### 2.1 Download the compiled archive
+
+Download the latest version of the HugeGraph-Toolchain release package:
+
+```bash
+wget https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph-toolchain-incubating-{version}.tar.gz
+tar zxf *hugegraph*.tar.gz
+```
+
+#### 2.2 Clone source code to compile and install
+
+Clone the latest version of HugeGraph-Loader source package:
+
+```bash
+# 1. get from github
+git clone https://github.com/apache/hugegraph-toolchain.git
+
+# 2. get from direct  (e.g. here is 1.0.0, please choose the latest version)
+wget https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph-toolchain-incubating-{version}-src.tar.gz
+```
+
+Due to the license limitation of the `Oracle OJDBC`, you need to manually install ojdbc to the local maven repository.
+Visit the [Oracle jdbc downloads](https://www.oracle.com/database/technologies/appdev/jdbc-drivers-archive.html) page. Select Oracle Database 12c Release 2 (12.2.0.1) drivers, as shown in the following figure.
+
+After opening the link, select "ojdbc8.jar".
+
+Install ojdbc8 to the local maven repository, enter the directory where `ojdbc8.jar` is located, and execute the following command.
+```
+mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
+```
+
+Compile and generate tar package:
+
+```bash
+cd hugegraph-loader
+mvn clean package -DskipTests
+```
+
+#### 2.3 Use Docker image (Convenient for Test/Dev)
 
 We can deploy the loader service using `docker run -itd --name loader hugegraph/loader`. For the data that needs to be loaded, it can be copied into the loader container either by mounting `-v /path/to/data/file:/loader/file` or by using `docker cp`.
 
@@ -59,43 +97,10 @@ services:
 
 The specific data loading process can be referenced under [4.5 User Docker to load data](#45-use-docker-to-load-data) 
 
-#### 2.2 Download the compiled archive
-
-Download the latest version of the HugeGraph-Toolchain release package:
-
-```bash
-wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
-tar zxf *hugegraph*.tar.gz
-```
-
-#### 2.3 Clone source code to compile and install
-
-Clone the latest version of HugeGraph-Loader source package:
-
-```bash
-# 1. get from github
-git clone https://github.com/apache/hugegraph-toolchain.git
-
-# 2. get from direct  (e.g. here is 1.0.0, please choose the latest version)
-wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0-src.tar.gz
-```
-
-Due to the license limitation of the `Oracle OJDBC`, you need to manually install ojdbc to the local maven repository.
-Visit the [Oracle jdbc downloads](https://www.oracle.com/database/technologies/appdev/jdbc-drivers-archive.html) page. Select Oracle Database 12c Release 2 (12.2.0.1) drivers, as shown in the following figure.
-
-After opening the link, select "ojdbc8.jar".
-
-Install ojdbc8 to the local maven repository, enter the directory where `ojdbc8.jar` is located, and execute the following command.
-```
-mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
-```
-
-Compile and generate tar package:
-
-```bash
-cd hugegraph-loader
-mvn clean package -DskipTests
-```
+> Note: 
+> 1. The docker image of hugegraph-loader is a convenience release to start hugegraph-loader quickly, but not **official distribution** artifacts. You can find more details from [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub).
+> 
+> 2. Recommand to use `release tag`(like `1.0.0`) for the stable version. Use `latest` tag to experience the newest functions in development.
 
 ### 3 How to use
 The basic process of using HugeGraph-Loader is divided into the following steps:
