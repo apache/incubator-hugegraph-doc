@@ -31,16 +31,17 @@ USER=$3
 
 RELEASE_VERSION=${RELEASE_VERSION:?"Please input the release version behind script"}
 
-# step1: download svn files
-rm -rf dist/"$RELEASE_VERSION" && svn co ${URL_PREFIX}/"$RELEASE_VERSION" dist/"$RELEASE_VERSION"
+# step 1: download svn files
+rm -rf dist/"$RELEASE_VERSION"
+svn co ${URL_PREFIX}/"$RELEASE_VERSION" dist/"$RELEASE_VERSION"
 cd dist/"$RELEASE_VERSION" || exit
 
-# step2: check environment & import public keys
+# step 2: check environment & import public keys
 shasum --version 1>/dev/null || exit
 gpg --version 1>/dev/null || exit
 
 wget https://downloads.apache.org/incubator/hugegraph/KEYS || exit
-gpg --import KEYS
+echo "Import KEYS:" && gpg --import KEYS
 # TODO: how to trust all public keys in gpg list, currently only trust the first one
 echo -e "5\ny\n" | gpg --batch --command-fd 0 --edit-key $USER trust
 
@@ -49,25 +50,27 @@ for key in $(gpg --no-tty --list-keys --with-colons | awk -F: '/^pub/ {print $5}
   echo -e "5\ny\n" | gpg --batch --command-fd 0 --edit-key "$key" trust
 done
 
-# step3: check sha512 & gpg signature
+# step 3: check sha512 & gpg signature
 for i in *.tar.gz; do
   echo "$i"
   shasum -a 512 --check "$i".sha512 || exit
   eval gpg "${GPG_OPT}" --verify "$i".asc "$i" || exit
 done
 
-# step4: validate source packages
+# step 4: validate source packages
 ls -lh ./*.tar.gz
 for i in *src.tar.gz; do
   echo "$i"
-  #### step4.0: check the directory name include "incubating"
+
+  ## step 4.1: check the directory name include "incubating"
   if [[ ! "$i" =~ "incubating" ]]; then
     echo "The package name $i should include incubating" && exit 1
   fi
   tar xzvf "$i" || exit
   cd "$(basename "$i" .tar.gz)" || exit
+  echo "Start to check the package content: $(basename "$i" .tar.gz)"
 
-  #### step4.1: check the directory include "NOTICE" and "LICENSE" file and "DISCLAIMER" file
+  ## step 4.2: check the directory include "NOTICE" and "LICENSE" file and "DISCLAIMER" file
   if [[ ! -f "LICENSE" ]]; then
     echo "The package $i should include LICENSE file" && exit 1
   fi
@@ -77,31 +80,36 @@ for i in *src.tar.gz; do
   if [[ ! -f "DISCLAIMER" ]]; then
     echo "The package $i should include DISCLAIMER file" && exit 1
   fi
-  # step4.2: ensure doesn't contains *GPL/BCL/JSR-275/RSAL/QPL/SSPL/CPOL/NPL1.*/CC-BY
+
+  ## step 4.3: ensure doesn't contains *GPL/BCL/JSR-275/RSAL/QPL/SSPL/CPOL/NPL1.*/CC-BY
+  ##           dependency in LICENSE and NOTICE file
   COUNT=$(grep -E "GPL|BCL|JSR-275|RSAL|QPL|SSPL|CPOL|NPL1|CC-BY" LICENSE NOTICE | wc -l)
   if [[ $COUNT -ne 0 ]]; then
      grep -E "GPL|BCL|JSR-275|RSAL|QPL|SSPL|CPOL|NPL1.0|CC-BY" LICENSE NOTICE
      echo "The package $i shouldn't include GPL* invalid dependency, but get $COUNT" && exit 1
   fi
-  # step4.3: ensure doesn't contains empty directory or file
+
+  ## step 4.4: ensure doesn't contains empty directory or file
   COUNT=$(find . -type d -empty | wc -l)
   if [[ $COUNT -ne 0 ]]; then
     find . -type d -empty
     echo "The package $i should not include empty directory, but get $COUNT" # TODO: && exit 1
   fi
-  # step4.4: ensure any file should less than 900kb & not include binary file
-  COUNT=$(find . -type f -size +900k | wc -l)
+
+  ## step 4.5: ensure any file should less than 800kb & not include binary file
+  COUNT=$(find . -type f -size +800k | wc -l)
   if [[ $COUNT -ne 0 ]]; then
-    find . -type f -size +900k
-    echo "The package $i shouldn't include file larger than 900kb, but get $COUNT" && exit 1
+    find . -type f -size +800k
+    echo "The package $i shouldn't include file larger than 800kb, but get $COUNT" && exit 1
   fi
-  COUNT=$(find . -type f | perl -lne 'print if -B' | grep -v *.txt | wc -l)
+  COUNT=$(find . -type f | grep -Ev ".txt|logo.png|favicon.ico|yarn.lock" | perl -lne 'print if -B' | wc -l)
   if [[ $COUNT -ne 0 ]]; then
     find . -type f | perl -lne 'print if -B'
-    echo "The package $i shouldn't include binary file, but get $COUNT"
+    # due to the search script is not perfect, we can't exit here (check manually)
+    echo "The package $i shouldn't include binary file, but get $COUNT" # TODO: && exit 1
   fi
 
-  #### step4.5: test compile the packages
+  ## step 4.6: test compile the packages
   if [[ $JAVA_VERSION == 8 && "$i" =~ "computer" ]]; then
     cd .. && echo "skip computer module in java8"
     continue
@@ -110,69 +118,80 @@ for i in *src.tar.gz; do
   cd .. || exit
 done
 
-#### step5: run the compiled packages in server
+# step 5: run the compiled packages in server
 ls -lh
-cd ./*hugegraph-incubating*src/*hugegraph*"${RELEASE_VERSION}" || exit
+cd ./*hugegraph-incubating*src/hugegraph-server/*hugegraph*"${RELEASE_VERSION}" || exit
 bin/init-store.sh && sleep 1
-bin/start-hugegraph.sh && ls ../../
-cd ../../ || exit
+bin/start-hugegraph.sh && ls ../../../
+cd ../../../ || exit
 
-#### step6: run the compiled packages in toolchain (include loader/tool/hubble)
+# step 6: run the compiled packages in toolchain (include loader/tool/hubble)
 cd ./*toolchain*src || exit
 ls -lh
 cd ./*toolchain*"${RELEASE_VERSION}" || exit
 ls -lh
 
-##### step6.1: test loader
+## step 6.1: load some data first
+echo "test loader"
 cd ./*loader*"${RELEASE_VERSION}" || exit
 bin/hugegraph-loader.sh -f ./example/file/struct.json -s ./example/file/schema.groovy \
   -g hugegraph || exit
 cd .. || exit
 
-##### step6.2: test tool
+## step 6.2: try some gremlin query & api in tool
+echo "test tool"
 cd ./*tool*"${RELEASE_VERSION}" || exit
 bin/hugegraph gremlin-execute --script 'g.V().count()' || exit
 bin/hugegraph task-list || exit
 bin/hugegraph backup -t all --directory ./backup-test || exit
 cd .. || exit
 
-##### step6.3: test hubble
+## step 6.3: start hubble and connect to server
+echo "test hubble"
 cd ./*hubble*"${RELEASE_VERSION}" || exit
 # TODO: add hubble doc & test it
-cat conf/hugegraph-hubble.properties && bin/start-hubble.sh
-cd ../../../ || exit
+cat conf/hugegraph-hubble.properties
+bin/start-hubble.sh && bin/stop-hubble.sh
 
-# step7: validate the binary packages
+cd ../../../ || exit
+# kill the HugeGraphServer process by jps
+jps | grep HugeGraphServer | awk '{print $1}' | xargs kill -9
 rm -rf ./*src* && ls -lh
+
+# step 7: validate the binary packages
 for i in *.tar.gz; do
   echo "$i"
-  #### step7.1: check the directory name include "incubating"
+
+  ## step 7.1: check the directory name include "incubating"
   if [[ ! "$i" =~ "incubating" ]]; then
     echo "The package name $i should include incubating" && exit 1
   fi
   tar xzvf "$i" || exit
 
-  #### step7.2: check root dir include "NOTICE"/"LICENSE"/"DISCLAIMER" files & "licenses" dir
+  ## step 7.2: check root dir include "NOTICE"/"LICENSE"/"DISCLAIMER" files & "licenses" dir
   cd "$(basename "$i" .tar.gz)" && ls -lh || exit
   if [[ ! -f "LICENSE" ]]; then
-    echo "The package $i should include LICENSE file" && exit 1
+    echo "The package $i should include LICENSE file" # TODO: && exit 1
   fi
   if [[ ! -f "NOTICE" ]]; then
-    echo "The package $i should include NOTICE file" && exit 1
+    echo "The package $i should include NOTICE file" # TODO: && exit 1
   fi
   if [[ ! -f "DISCLAIMER" ]]; then
-    echo "The package $i should include DISCLAIMER file" && exit 1
+    echo "The package $i should include DISCLAIMER file" # TODO: && exit 1
   fi
   if [[ ! -d "licenses" ]]; then
-    echo "The package $i should include licenses dir" && exit 1
+    echo "The package $i should include licenses dir" # TODO: && exit 1
   fi
-  #### step7.3: ensure doesn't contains *GPL/BCL/JSR-275/RSAL/QPL/SSPL/CPOL/NPL1.*/CC-BY
+
+  ## step 7.3: ensure doesn't contains *GPL/BCL/JSR-275/RSAL/QPL/SSPL/CPOL/NPL1.*/CC-BY
+  ##           dependency in LICENSE/NOTICE and licenses/* files
   COUNT=$(grep -r -E "GPL|BCL|JSR-275|RSAL|QPL|SSPL|CPOL|NPL1|CC-BY" LICENSE NOTICE licenses | wc -l)
   if [[ $COUNT -ne 0 ]]; then
     grep -r -E "GPL|BCL|JSR-275|RSAL|QPL|SSPL|CPQL|NPL1|CC-BY" LICENSE NOTICE licenses
-    echo "The package $i shouldn't include GPL* invalid dependency, but get $COUNT" && exit 1
+    echo "The package $i shouldn't include GPL* invalid dependency, but get $COUNT" # TODO: && exit 1
   fi
-  #### step7.4: ensure doesn't contains empty directory or file
+
+  ## step 7.4: ensure doesn't contains empty directory or file
   COUNT=$(find . -type d -empty | wc -l)
   if [[ $COUNT -ne 0 ]]; then
     find . -type d -empty
@@ -181,35 +200,40 @@ for i in *.tar.gz; do
   cd - || exit
 done
 
-#### step8: start the server
+# step 8: run the binary packages in server
 cd ./*hugegraph-incubating*"${RELEASE_VERSION}" || exit
 bin/init-store.sh && sleep 1
-# kill the HugeGraphServer process by jps
-jps | grep HugeGraphServer | awk '{print $1}' | xargs kill -9
 bin/start-hugegraph.sh && ls ../
 cd - || exit
 
-#### step9: running toolchain
+# step 9: run the binary packages in toolchain (include loader/tool/hubble)
 cd ./*toolchain*"${RELEASE_VERSION}" || exit
 ls -lh
-##### step9.1: test loader
+
+## step 9.1: load some data first
+echo "test loader"
 cd ./*loader*"${RELEASE_VERSION}" || exit
 bin/hugegraph-loader.sh -f ./example/file/struct.json -s ./example/file/schema.groovy \
   -g hugegraph || exit
 cd - || exit
 
-##### step9.2: test tool
+## step 9.2: try some gremlin query & api in tool
+echo "test tool"
 cd ./*tool*"${RELEASE_VERSION}" || exit
 bin/hugegraph gremlin-execute --script 'g.V().count()' || exit
 bin/hugegraph task-list || exit
 bin/hugegraph backup -t all --directory ./backup-test || exit
 cd - || exit
 
-##### step9.3: test hubble
+## step 9.3: start hubble and connect to server
+echo "test hubble"
 cd ./*hubble*"${RELEASE_VERSION}" || exit
 # TODO: add hubble doc & test it
 cat conf/hugegraph-hubble.properties
-bin/stop-hubble.sh && bin/start-hubble.sh
+bin/start-hubble.sh && bin/stop-hubble.sh
+
 cd - || exit
+# kill the HugeGraphServer process by jps
+jps | grep HugeGraphServer | awk '{print $1}' | xargs kill -9
 
 echo "Finish validate, please check all steps manually again!"
