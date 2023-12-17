@@ -101,7 +101,7 @@ services:
 
 > 注意：
 > 
-> 1. hugegraph-loader 的 docker 镜像是一个便捷版本，用于快速启动 loader，并不是**官方发布版**。你可以从 [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub) 中得到更多细节。
+> 1. hugegraph-loader 的 docker 镜像是一个便捷版本，用于快速启动 loader，并不是**官方发布物料包方式**。你可以从 [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub) 中得到更多细节。
 > 
 > 2. 推荐使用 `release tag`(如 `1.0.0`) 以获取稳定版。使用 `latest` tag 可以使用开发中的最新功能。
 
