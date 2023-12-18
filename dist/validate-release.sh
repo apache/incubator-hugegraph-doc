@@ -251,6 +251,7 @@ for i in *.tar.gz; do
   popd || exit
 done
 
+# TODO: skip the following steps by comparing the artifacts built from source packages with binary packages
 #########################################
 # Step 8: Run Binary Packages In Server #
 #########################################
