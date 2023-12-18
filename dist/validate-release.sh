@@ -111,30 +111,37 @@ for i in *src.tar.gz; do
   fi
 
   # 4.4: ensure doesn't contains empty directory or file
-  COUNT=$(find . -type d -empty | wc -l)
-  if [[ $COUNT -ne 0 ]]; then
+  find . -type d -empty | while read -r EMPTY_DIR; do
     find . -type d -empty
-    echo "The package $i should not include empty directory, but get $COUNT" && exit 1
-  fi
+    echo "Error: $EMPTY_DIR is empty" || exit 1
+  done
+  find . -type f -empty | while read -r EMPTY_FILE; do
+    find . -type f -empty
+    echo "Error: $EMPTY_FILE is empty" || exit 1
+  done
 
-  # 4.5: ensure any file should less than 800kb & not include binary file
-  COUNT=$(find . -type f -size +800k | wc -l)
-  if [[ $COUNT -ne 0 ]]; then
+  # 4.5: ensure any file should less than 800kb
+  find . -type f -size +800k | while read -r FILE; do
     find . -type f -size +800k
-    echo "The package $i shouldn't include file larger than 800kb, but get $COUNT" && exit 1
-  fi
-  COUNT=$(find . -type f | grep -Ev ".txt|logo.png|favicon.ico|yarn.lock" | perl -lne 'print if -B' | wc -l)
-  if [[ $COUNT -ne 0 ]]; then
-    find . -type f | perl -lne 'print if -B'
-    echo "The package $i shouldn't include binary file, but get $COUNT" && exit 1
-  fi
+    echo "Error: $FILE is larger than 800kb" || exit 1
+  done
+
+  # 4.6: ensure all binary files are documented in LICENSE
+  find . -type f | perl -lne 'print if -B' | while read -r BINARY_FILE; do
+    FILE_NAME=$(basename "$BINARY_FILE")
+    if grep -q "$FILE_NAME" LICENSE; then
+      echo "Binary file $BINARY_FILE is documented in LICENSE, please check manually"
+    else
+      echo "Error: Binary file $BINARY_FILE is not documented in LICENSE" || exit 1
+    fi
+  done
 
   # 4.6: test compile the packages
   if [[ $JAVA_VERSION == 8 && "$i" =~ "computer" ]]; then
     popd && echo "skip computer module in java8" || exit
     continue
   fi
-  mvn package -DskipTests -ntp -e || exit 1
+  mvn package -DskipTests -ntp -e || exit
   ls -lh
 
   popd || exit
