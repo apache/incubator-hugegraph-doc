@@ -78,6 +78,8 @@ done
 ####################################
 cd "$WORK_DIR"/dist/"$RELEASE_VERSION" || exit
 
+CATEGORY_X="GPL|LGPL|Sleepycat License|BSD-4-Clause||BCL|JSR-275|ASL|RSAL|QPL|SSPL|CPOL|NPL1|Creative Commons Non-Commercial"
+CATEGORY_B="CDDL1|CPL|EPL|IPL|MPL|SPL|OSL-3.0|UnRAR License|Erlang Public License|OFL|Ubuntu Font License Version 1.0|IPA Font License Agreement v1.0|EPL2.0|CC-BY"
 ls -lh ./*.tar.gz
 for i in *src.tar.gz; do
   echo "$i"
@@ -102,19 +104,14 @@ for i in *src.tar.gz; do
     echo "The package $i should include DISCLAIMER file" && exit 1
   fi
 
-  # 4.3: ensure doesn't contains *GPL/BCL/JSR-275/RSAL/QPL/SSPL/CPOL/NPL1.*/CC-BY
-  #      dependency in LICENSE and NOTICE file
-  CATEGORY_X="GPL|BCL|JSR-275|RSAL|QPL|SSPL|CPOL|NPL1|CC-BY"
+  # 4.3: ensure doesn't contains ASF CATEGORY X License dependencies in LICENSE and NOTICE files
   COUNT=$(grep -E $CATEGORY_X LICENSE NOTICE | wc -l)
   if [[ $COUNT -ne 0 ]]; then
      grep -E $CATEGORY_X LICENSE NOTICE
      echo "The package $i shouldn't include invalid ASF category X dependencies, but get $COUNT" && exit 1
   fi
 
-  # 4.4: ensure doesn't contains *CDDL1/CPL/EPL/IPL/MPL/SPL/OSL-3.0/UnRAR License/Erlang Public License
-  # /OFL/Ubuntu Font License Version 1.0/IPA Font License Agreement v1.0/EPL2.0
-  #      dependency in LICENSE and NOTICE file
-  CATEGORY_B="CDDL1/CPL/EPL/IPL/MPL/SPL/OSL-3.0/UnRAR License/Erlang Public License/OFL/Ubuntu Font License Version 1.0/IPA Font License Agreement v1.0/EPL2.0"
+  # 4.4: ensure doesn't contains ASF CATEGORY B License dependencies in LICENSE and NOTICE files
   COUNT=$(grep -E $CATEGORY_B LICENSE NOTICE | wc -l)
   if [[ $COUNT -ne 0 ]]; then
      grep -E $CATEGORY_B LICENSE NOTICE
@@ -253,12 +250,11 @@ for i in *.tar.gz; do
     echo "The package $i should include licenses dir" && exit 1
   fi
 
-  # 7.3: ensure doesn't contains *GPL/BCL/JSR-275/RSAL/QPL/SSPL/CPOL/NPL1.*/CC-BY
-  #      dependency in LICENSE/NOTICE and licenses/* files
-  COUNT=$(grep -r -E "GPL|BCL|JSR-275|RSAL|QPL|SSPL|CPOL|NPL1|CC-BY" LICENSE NOTICE licenses | wc -l)
+  # 7.3: ensure doesn't contains ASF CATEGORY X License dependencies in LICENSE/NOTICE and licenses/* files
+  COUNT=$(grep -r -E $CATEGORY_X LICENSE NOTICE licenses | wc -l)
   if [[ $COUNT -ne 0 ]]; then
-    grep -r -E "GPL|BCL|JSR-275|RSAL|QPL|SSPL|CPQL|NPL1|CC-BY" LICENSE NOTICE licenses
-    echo "The package $i shouldn't include GPL* invalid dependency, but get $COUNT" && exit 1
+    grep -r -E $CATEGORY_X LICENSE NOTICE licenses
+    echo "The package $i shouldn't include invalid ASF category X dependencies, but get $COUNT" && exit 1
   fi
 
   # 7.4: ensure doesn't contains empty directory or file
