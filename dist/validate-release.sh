@@ -107,14 +107,14 @@ for i in *src.tar.gz; do
   # 4.3: ensure doesn't contains ASF CATEGORY X License dependencies in LICENSE and NOTICE files
   COUNT=$(grep -E $CATEGORY_X LICENSE NOTICE | wc -l)
   if [[ $COUNT -ne 0 ]]; then
-     grep -E $CATEGORY_X LICENSE NOTICE
+     grep -E "$CATEGORY_X" LICENSE NOTICE
      echo "The package $i shouldn't include invalid ASF category X dependencies, but get $COUNT" && exit 1
   fi
 
   # 4.4: ensure doesn't contains ASF CATEGORY B License dependencies in LICENSE and NOTICE files
   COUNT=$(grep -E $CATEGORY_B LICENSE NOTICE | wc -l)
   if [[ $COUNT -ne 0 ]]; then
-     grep -E $CATEGORY_B LICENSE NOTICE
+     grep -E "$CATEGORY_B" LICENSE NOTICE
      echo "The package $i shouldn't include invalid ASF category B dependencies, but get $COUNT" && exit 1
   fi
 
@@ -150,7 +150,9 @@ for i in *src.tar.gz; do
     popd || exit
     continue
   fi
-  mvn package -DskipTests -ntp -e || exit
+#  mvn package -DskipTests -ntp -e || exit
+  # TODO: consider using commands that are entirely consistent with building binary packages
+  mvn package -DskipTests -Papache-release -ntp -e || exit
   ls -lh
 
   popd || exit
@@ -253,7 +255,7 @@ for i in *.tar.gz; do
   # 7.3: ensure doesn't contains ASF CATEGORY X License dependencies in LICENSE/NOTICE and licenses/* files
   COUNT=$(grep -r -E $CATEGORY_X LICENSE NOTICE licenses | wc -l)
   if [[ $COUNT -ne 0 ]]; then
-    grep -r -E $CATEGORY_X LICENSE NOTICE licenses
+    grep -r -E "$CATEGORY_X" LICENSE NOTICE licenses
     echo "The package $i shouldn't include invalid ASF category X dependencies, but get $COUNT" && exit 1
   fi
 
