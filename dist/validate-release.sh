@@ -150,9 +150,7 @@ for i in *src.tar.gz; do
     popd || exit
     continue
   fi
-#  mvn package -DskipTests -ntp -e || exit
-  # TODO: consider using commands that are entirely consistent with building binary packages
-  mvn package -DskipTests -Papache-release -ntp -e || exit
+  mvn package -DskipTests -ntp -e || exit
   ls -lh
 
   popd || exit
