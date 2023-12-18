@@ -133,9 +133,10 @@ done
 ###########################################
 ls -lh
 cd ./*hugegraph-incubating*src/hugegraph-server/*hugegraph*"${RELEASE_VERSION}" || exit
-bin/init-store.sh && sleep 1
-bin/start-hugegraph.sh && ls ../../../
-cd ../../../ || exit
+bin/init-store.sh || exit
+sleep 1
+bin/start-hugegraph.sh || exit
+ls ../../../ && cd ../../../ || exit
 
 #######################################################################
 # Step 6: Run Compiled Packages In ToolChain (Loader & Tool & Hubble) #
@@ -165,7 +166,8 @@ echo "test hubble"
 cd ./*hubble*"${RELEASE_VERSION}" || exit
 # TODO: add hubble doc & test it
 cat conf/hugegraph-hubble.properties
-bin/start-hubble.sh && bin/stop-hubble.sh
+bin/start-hubble.sh || exit
+bin/stop-hubble.sh || exit
 
 cd ../../../ || exit
 # kill the HugeGraphServer process by jps
@@ -176,6 +178,11 @@ rm -rf ./*src* && ls -lh
 # Step 7: Validate Binary Packages #
 ####################################
 for i in *.tar.gz; do
+  if [[ "$i" == *-src.tar.gz ]]; then
+    # skip source package
+    continue
+  fi
+
   echo "$i"
 
   # 7.1: check the directory name include "incubating"
@@ -224,9 +231,10 @@ done
 # Step 8: Run Binary Packages In Server #
 #########################################
 cd ./*hugegraph-incubating*"${RELEASE_VERSION}" || exit
-bin/init-store.sh && sleep 1
-bin/start-hugegraph.sh && ls ../
-cd - || exit
+bin/init-store.sh || exit
+sleep 1
+bin/start-hugegraph.sh || exit
+ls ../ && cd ../ || exit
 
 #####################################################################
 # Step 9: Run Binary Packages In ToolChain (Loader & Tool & Hubble) #
@@ -254,7 +262,8 @@ echo "test hubble"
 cd ./*hubble*"${RELEASE_VERSION}" || exit
 # TODO: add hubble doc & test it
 cat conf/hugegraph-hubble.properties
-bin/start-hubble.sh && bin/stop-hubble.sh
+bin/start-hubble.sh || exit
+bin/stop-hubble.sh || exit
 
 cd - || exit
 # kill the HugeGraphServer process by jps

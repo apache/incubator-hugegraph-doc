@@ -165,9 +165,10 @@ jobs:
 
           ls -lh
           cd ./*hugegraph-incubating*src/hugegraph-server/*hugegraph*${{ inputs.release_version }} || exit
-          bin/init-store.sh && sleep 1
-          bin/start-hugegraph.sh && ls ../../../
-          cd ../../../ || exit
+          bin/init-store.sh || exit
+          sleep 1
+          bin/start-hugegraph.sh || exit
+          ls ../../../ && cd ../../../ || exit
 
       - name: 6. Run Compiled Packages In ToolChain (Loader & Tool & Hubble)
         run: |
@@ -198,7 +199,8 @@ jobs:
           cd ./*hubble*${{ inputs.release_version }} || exit
           # TODO: add hubble doc & test it
           cat conf/hugegraph-hubble.properties
-          bin/start-hubble.sh && bin/stop-hubble.sh
+          bin/start-hubble.sh || exit
+          bin/stop-hubble.sh || exit
 
           cd ../../../ || exit
           # kill the HugeGraphServer process by jps
@@ -210,6 +212,11 @@ jobs:
           cd dist/${{ inputs.release_version }}
 
           for i in *.tar.gz; do
+            if [[ "$i" == *-src.tar.gz ]]; then
+              # skip source package
+              continue
+            fi
+
             echo "$i"
 
             # 7.1 check the directory name include "incubating"
@@ -259,9 +266,10 @@ jobs:
           cd dist/${{ inputs.release_version }}
 
           cd ./*hugegraph-incubating*${{ inputs.release_version }} || exit
-          bin/init-store.sh && sleep 1
-          bin/start-hugegraph.sh && ls ../
-          cd - || exit
+          bin/init-store.sh || exit
+          sleep 1
+          bin/start-hugegraph.sh || exit
+          ls ../ && cd ../ || exit
 
       - name: 9. Run Binary Packages In ToolChain (Loader & Tool & Hubble)
         run: |
@@ -290,7 +298,8 @@ jobs:
           cd ./*hubble*${{ inputs.release_version }} || exit
           # TODO: add hubble doc & test it
           cat conf/hugegraph-hubble.properties
-          bin/start-hubble.sh && bin/stop-hubble.sh
+          bin/start-hubble.sh || exit
+          bin/stop-hubble.sh || exit
 
           cd - || exit
           # kill the HugeGraphServer process by jps
