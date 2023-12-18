@@ -148,7 +148,7 @@ cd "$WORK_DIR"/dist/"$RELEASE_VERSION" || exit
 ls -lh
 pushd ./*hugegraph-incubating*src/hugegraph-server/*hugegraph*"${RELEASE_VERSION}" || exit
 bin/init-store.sh || exit
-sleep 1
+sleep 3
 bin/start-hugegraph.sh || exit
 popd || exit
 
@@ -195,7 +195,8 @@ pushd ./*hugegraph-incubating*src/hugegraph-server/*hugegraph*"${RELEASE_VERSION
 bin/stop-hugegraph.sh || exit
 popd || exit
 
-rm -rf ./*src* && ls -lh
+rm -rf ./*src*
+ls -lh
 
 ####################################
 # Step 7: Validate Binary Packages #
@@ -255,7 +256,7 @@ done
 #########################################
 pushd ./*hugegraph-incubating*"${RELEASE_VERSION}" || exit
 bin/init-store.sh || exit
-sleep 1
+sleep 3
 bin/start-hugegraph.sh || exit
 popd || exit
 
@@ -291,7 +292,7 @@ popd || exit
 
 # stop server
 cd "$WORK_DIR"/dist/"$RELEASE_VERSION" || exit
-pushd ./*hugegraph-incubating*src/hugegraph-server/*hugegraph*"${RELEASE_VERSION}" || exit
+pushd ./*hugegraph-incubating*"${RELEASE_VERSION}" || exit
 bin/stop-hugegraph.sh || exit
 popd || exit
 
