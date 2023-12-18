@@ -113,17 +113,17 @@ for i in *src.tar.gz; do
   # 4.4: ensure doesn't contains empty directory or file
   find . -type d -empty | while read -r EMPTY_DIR; do
     find . -type d -empty
-    echo "Error: $EMPTY_DIR is empty" || exit 1
+    echo "The package $i shouldn't include empty directory: $EMPTY_DIR is empty" && exit 1
   done
   find . -type f -empty | while read -r EMPTY_FILE; do
     find . -type f -empty
-    echo "Error: $EMPTY_FILE is empty" || exit 1
+    echo "The package $i shouldn't include empty file: $EMPTY_FILE is empty" && exit 1
   done
 
   # 4.5: ensure any file should less than 800kb
   find . -type f -size +800k | while read -r FILE; do
     find . -type f -size +800k
-    echo "Error: $FILE is larger than 800kb" || exit 1
+    echo "The package $i shouldn't include file larger than 800kb: $FILE is larger than 800kb" && exit 1
   done
 
   # 4.6: ensure all binary files are documented in LICENSE
@@ -132,7 +132,7 @@ for i in *src.tar.gz; do
     if grep -q "$FILE_NAME" LICENSE; then
       echo "Binary file $BINARY_FILE is documented in LICENSE, please check manually"
     else
-      echo "Error: Binary file $BINARY_FILE is not documented in LICENSE" || exit 1
+      echo "Error: Binary file $BINARY_FILE is not documented in LICENSE" && exit 1
     fi
   done
 
@@ -249,11 +249,14 @@ for i in *.tar.gz; do
   fi
 
   # 7.4: ensure doesn't contains empty directory or file
-  COUNT=$(find . -type d -empty | wc -l)
-  if [[ $COUNT -ne 0 ]]; then
+  find . -type d -empty | while read -r EMPTY_DIR; do
     find . -type d -empty
-    echo "The package $i should not include empty directory, but get $COUNT" && exit 1
-  fi
+    echo "The package $i shouldn't include empty directory: $EMPTY_DIR is empty" && exit 1
+  done
+  find . -type f -empty | while read -r EMPTY_FILE; do
+    find . -type f -empty
+    echo "The package $i shouldn't include empty file: $EMPTY_FILE is empty" && exit 1
+  done
 
   popd || exit
 done
