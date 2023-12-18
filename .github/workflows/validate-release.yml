@@ -158,6 +158,7 @@ jobs:
             if [[ ${{ matrix.java_version }} == 8 && "$i" =~ "computer" ]]; then
               echo "skip computer module in java8"
               popd || exit
+              continue
             fi
             mvn package -DskipTests -ntp -e || exit
             ls -lh
