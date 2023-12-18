@@ -30,17 +30,25 @@ USER=$3
 #GIT_BRANCH="release-${RELEASE_VERSION}"
 
 RELEASE_VERSION=${RELEASE_VERSION:?"Please input the release version behind script"}
+WORK_DIR=$(
+  cd "$(dirname "$0")" || exit
+  pwd
+)
+
+cd "${WORK_DIR}" || exit
+echo "Current work dir: $(pwd)"
 
 ################################
 # Step 1: Download SVN Sources #
 ################################
-rm -rf dist/"$RELEASE_VERSION"
-svn co ${URL_PREFIX}/"$RELEASE_VERSION" dist/"$RELEASE_VERSION"
-cd dist/"$RELEASE_VERSION" || exit
+rm -rf "$WORK_DIR"/dist/"$RELEASE_VERSION"
+svn co ${URL_PREFIX}/"$RELEASE_VERSION" "$WORK_DIR"/dist/"$RELEASE_VERSION"
 
 ##################################################
 # Step 2: Check Environment & Import Public Keys #
 ##################################################
+cd "$WORK_DIR"/dist/"$RELEASE_VERSION" || exit
+
 shasum --version 1>/dev/null || exit
 gpg --version 1>/dev/null || exit
 
@@ -57,6 +65,8 @@ done
 ########################################
 # Step 3: Check SHA512 & GPG Signature #
 ########################################
+cd "$WORK_DIR"/dist/"$RELEASE_VERSION" || exit
+
 for i in *.tar.gz; do
   echo "$i"
   shasum -a 512 --check "$i".sha512 || exit
@@ -66,6 +76,8 @@ done
 ####################################
 # Step 4: Validate Source Packages #
 ####################################
+cd "$WORK_DIR"/dist/"$RELEASE_VERSION" || exit
+
 ls -lh ./*.tar.gz
 for i in *src.tar.gz; do
   echo "$i"
@@ -76,7 +88,7 @@ for i in *src.tar.gz; do
   fi
 
   tar xzvf "$i" || exit
-  cd "$(basename "$i" .tar.gz)" || exit
+  pushd "$(basename "$i" .tar.gz)" || exit
   echo "Start to check the package content: $(basename "$i" .tar.gz)"
 
   # 4.2: check the directory include "NOTICE" and "LICENSE" file and "DISCLAIMER" file
@@ -119,59 +131,70 @@ for i in *src.tar.gz; do
 
   # 4.6: test compile the packages
   if [[ $JAVA_VERSION == 8 && "$i" =~ "computer" ]]; then
-    cd .. && echo "skip computer module in java8"
+    popd && echo "skip computer module in java8" || exit
     continue
   fi
   mvn package -DskipTests -ntp -e || exit 1
   ls -lh
 
-  cd .. || exit
+  popd || exit
 done
 
 ###########################################
 # Step 5: Run Compiled Packages In Server #
 ###########################################
+cd "$WORK_DIR"/dist/"$RELEASE_VERSION" || exit
+
 ls -lh
-cd ./*hugegraph-incubating*src/hugegraph-server/*hugegraph*"${RELEASE_VERSION}" || exit
+pushd ./*hugegraph-incubating*src/hugegraph-server/*hugegraph*"${RELEASE_VERSION}" || exit
 bin/init-store.sh || exit
 sleep 1
 bin/start-hugegraph.sh || exit
-ls ../../../ && cd ../../../ || exit
+popd || exit
 
 #######################################################################
 # Step 6: Run Compiled Packages In ToolChain (Loader & Tool & Hubble) #
 #######################################################################
-cd ./*toolchain*src || exit
+cd "$WORK_DIR"/dist/"$RELEASE_VERSION" || exit
+
+pushd ./*toolchain*src || exit
 ls -lh
-cd ./*toolchain*"${RELEASE_VERSION}" || exit
+pushd ./*toolchain*"${RELEASE_VERSION}" || exit
 ls -lh
 
 # 6.1: load some data first
 echo "test loader"
-cd ./*loader*"${RELEASE_VERSION}" || exit
+pushd ./*loader*"${RELEASE_VERSION}" || exit
 bin/hugegraph-loader.sh -f ./example/file/struct.json -s ./example/file/schema.groovy \
   -g hugegraph || exit
-cd .. || exit
+popd || exit
 
 # 6.2: try some gremlin query & api in tool
 echo "test tool"
-cd ./*tool*"${RELEASE_VERSION}" || exit
+pushd ./*tool*"${RELEASE_VERSION}" || exit
 bin/hugegraph gremlin-execute --script 'g.V().count()' || exit
 bin/hugegraph task-list || exit
 bin/hugegraph backup -t all --directory ./backup-test || exit
-cd .. || exit
+popd || exit
 
 # 6.3: start hubble and connect to server
 echo "test hubble"
-cd ./*hubble*"${RELEASE_VERSION}" || exit
+pushd ./*hubble*"${RELEASE_VERSION}" || exit
 # TODO: add hubble doc & test it
 cat conf/hugegraph-hubble.properties
 bin/start-hubble.sh || exit
 bin/stop-hubble.sh || exit
+popd || exit
 
-cd ../../../ || exit
-# kill the HugeGraphServer process by jps
-jps | grep HugeGraphServer | awk '{print $1}' | xargs kill -9
+popd || exit
+popd || exit
+
+# stop server
+cd "$WORK_DIR"/dist/"$RELEASE_VERSION" || exit
+pushd ./*hugegraph-incubating*src/hugegraph-server/*hugegraph*"${RELEASE_VERSION}" || exit
+bin/stop-hugegraph.sh || exit
+popd || exit
+
 rm -rf ./*src* && ls -lh
 
 ####################################
@@ -191,7 +214,7 @@ for i in *.tar.gz; do
   fi
 
   tar xzvf "$i" || exit
-  cd "$(basename "$i" .tar.gz)" || exit
+  pushd "$(basename "$i" .tar.gz)" || exit
   ls -lh
   echo "Start to check the package content: $(basename "$i" .tar.gz)"
 
@@ -224,49 +247,52 @@ for i in *.tar.gz; do
     echo "The package $i should not include empty directory, but get $COUNT" && exit 1
   fi
 
-  cd - || exit
+  popd || exit
 done
 
 #########################################
 # Step 8: Run Binary Packages In Server #
 #########################################
-cd ./*hugegraph-incubating*"${RELEASE_VERSION}" || exit
+pushd ./*hugegraph-incubating*"${RELEASE_VERSION}" || exit
 bin/init-store.sh || exit
 sleep 1
 bin/start-hugegraph.sh || exit
-ls ../ && cd ../ || exit
+popd || exit
 
 #####################################################################
 # Step 9: Run Binary Packages In ToolChain (Loader & Tool & Hubble) #
 #####################################################################
-cd ./*toolchain*"${RELEASE_VERSION}" || exit
+pushd ./*toolchain*"${RELEASE_VERSION}" || exit
 ls -lh
 
 # 9.1: load some data first
 echo "test loader"
-cd ./*loader*"${RELEASE_VERSION}" || exit
+pushd ./*loader*"${RELEASE_VERSION}" || exit
 bin/hugegraph-loader.sh -f ./example/file/struct.json -s ./example/file/schema.groovy \
   -g hugegraph || exit
-cd - || exit
+popd || exit
 
 # 9.2: try some gremlin query & api in tool
 echo "test tool"
-cd ./*tool*"${RELEASE_VERSION}" || exit
+pushd ./*tool*"${RELEASE_VERSION}" || exit
 bin/hugegraph gremlin-execute --script 'g.V().count()' || exit
 bin/hugegraph task-list || exit
 bin/hugegraph backup -t all --directory ./backup-test || exit
-cd - || exit
+popd || exit
 
 # 9.3: start hubble and connect to server
 echo "test hubble"
-cd ./*hubble*"${RELEASE_VERSION}" || exit
+pushd ./*hubble*"${RELEASE_VERSION}" || exit
 # TODO: add hubble doc & test it
 cat conf/hugegraph-hubble.properties
 bin/start-hubble.sh || exit
 bin/stop-hubble.sh || exit
+popd || exit
 
-cd - || exit
-# kill the HugeGraphServer process by jps
-jps | grep HugeGraphServer | awk '{print $1}' | xargs kill -9
+# stop server
+cd "$WORK_DIR"/dist/"$RELEASE_VERSION" || exit
+pushd ./*hugegraph-incubating*src/hugegraph-server/*hugegraph*"${RELEASE_VERSION}" || exit
+bin/stop-hugegraph.sh || exit
+popd || exit
 
 echo "Finish validate, please check all steps manually again!"
