@@ -64,11 +64,10 @@ jobs:
         run: |
           rm -rf dist/${{ inputs.release_version }}
           svn co ${URL_PREFIX}/${{ inputs.release_version }} dist/${{ inputs.release_version }}
-          cd dist/${{ inputs.release_version }} || exit
 
       - name: 2. Check Environment & Import Public Keys
         run: |
-          cd dist/${{ inputs.release_version }}
+          cd dist/${{ inputs.release_version }} || exit
 
           shasum --version 1>/dev/null || exit
           gpg --version 1>/dev/null || exit
@@ -85,7 +84,7 @@ jobs:
 
       - name: 3. Check SHA512 & GPG Signature
         run: |
-          cd dist/${{ inputs.release_version }}
+          cd dist/${{ inputs.release_version }} || exit
 
           for i in *.tar.gz; do
             echo "$i"
@@ -95,7 +94,7 @@ jobs:
 
       - name: 4. Validate Source Packages
         run: |
-          cd dist/${{ inputs.release_version }}
+          cd dist/${{ inputs.release_version }} || exit
 
           ls -lh ./*.tar.gz
           for i in *src.tar.gz; do
@@ -107,7 +106,7 @@ jobs:
             fi
 
             tar xzvf "$i" || exit
-            cd "$(basename "$i" .tar.gz)" || exit
+            pushd "$(basename "$i" .tar.gz)" || exit
             echo "Start to check the package content: $(basename "$i" .tar.gz)"
 
             # 4.2 check the directory include "NOTICE" and "LICENSE" and "DISCLAIMER" file
@@ -130,90 +129,104 @@ jobs:
             fi
 
             # 4.4 ensure doesn't contains empty directory or file
-            COUNT=$(find . -type f,d -empty | wc -l)
-            if [[ $COUNT -ne 0 ]]; then
-              find . -type f,d -empty
-              echo "The package shouldn't include empty dir/file, but get $COUNT" && exit 1
-            fi
+            find . -type d -empty | while read -r EMPTY_DIR; do
+              find . -type d -empty
+              echo "The package $i shouldn't include empty directory: $EMPTY_DIR is empty" && exit 1
+            done
+            find . -type f -empty | while read -r EMPTY_FILE; do
+              find . -type f -empty
+              echo "The package $i shouldn't include empty file: $EMPTY_FILE is empty" && exit 1
+            done
 
-            # 4.5 ensure any file should less than 800kb & not include binary file
-            COUNT=$(find . -type f -size +800k | wc -l)
-            if [[ $COUNT -ne 0 ]]; then
+            # 4.5 ensure any file should less than 800kb
+            find . -type f -size +800k | while read -r FILE; do
               find . -type f -size +800k
-              echo "The package shouldn't include file larger than 800kb, but get $COUNT" && exit 1
-            fi
-            COUNT=$(find . -type f | grep -Ev ".txt|logo.png|favicon.ico|yarn.lock" | perl -lne 'print if -B' | wc -l)
-            if [[ $COUNT -ne 0 ]]; then
-              find . -type f | perl -lne 'print if -B'
-              echo "The package shouldn't include binary file, but get $COUNT" && exit 1
-            fi
+              echo "The package $i shouldn't include file larger than 800kb: $FILE is larger than 800kb" && exit 1
+            done
 
-            # 4.6 test compile the packages
+            # 4.6: ensure all binary files are documented in LICENSE
+            find . -type f | perl -lne 'print if -B' | while read -r BINARY_FILE; do
+              FILE_NAME=$(basename "$BINARY_FILE")
+              if grep -q "$FILE_NAME" LICENSE; then
+                echo "Binary file $BINARY_FILE is documented in LICENSE, please check manually"
+              else
+                echo "Error: Binary file $BINARY_FILE is not documented in LICENSE" && exit 1
+              fi
+            done
+
+            # 4.7 test compile the packages
             if [[ ${{ matrix.java_version }} == 8 && "$i" =~ "computer" ]]; then
-              cd .. && echo "skip computer module in java8"
-              continue
+              echo "skip computer module in java8"
+              popd || exit
             fi
-            mvn package -DskipTests -ntp -e || exit 1
+            mvn package -DskipTests -ntp -e || exit
             ls -lh
 
-            cd .. || exit
+            popd || exit
           done
 
       - name: 5. Run Compiled Packages In Server
         run: |
-          cd dist/${{ inputs.release_version }}
+          cd dist/${{ inputs.release_version }} || exit
 
           ls -lh
-          cd ./*hugegraph-incubating*src/hugegraph-server/*hugegraph*${{ inputs.release_version }} || exit
+          pushd ./*hugegraph-incubating*src/hugegraph-server/*hugegraph*${{ inputs.release_version }} || exit
           bin/init-store.sh || exit
-          sleep 1
+          sleep 3
           bin/start-hugegraph.sh || exit
-          ls ../../../ && cd ../../../ || exit
+          popd || exit
 
       - name: 6. Run Compiled Packages In ToolChain (Loader & Tool & Hubble)
         run: |
-          cd dist/${{ inputs.release_version }}
+          cd dist/${{ inputs.release_version }} || exit
 
-          cd ./*toolchain*src || exit
+          pushd ./*toolchain*src || exit
           ls -lh
-          cd ./*toolchain*${{ inputs.release_version }} || exit
+          pushd ./*toolchain*${{ inputs.release_version }} || exit
           ls -lh
 
           # 6.1 load some data first
           echo "test loader"
-          cd ./*loader*${{ inputs.release_version }} || exit
+          pushd ./*loader*${{ inputs.release_version }} || exit
           bin/hugegraph-loader.sh -f ./example/file/struct.json -s ./example/file/schema.groovy \
             -g hugegraph || exit
-          cd .. || exit
+          popd || exit
 
           # 6.2 try some gremlin query & api in tool
           echo "test tool"
-          cd ./*tool*${{ inputs.release_version }} || exit
+          pushd ./*tool*${{ inputs.release_version }} || exit
           bin/hugegraph gremlin-execute --script 'g.V().count()' || exit
           bin/hugegraph task-list || exit
           bin/hugegraph backup -t all --directory ./backup-test || exit
-          cd .. || exit
+          popd || exit
 
           # 6.3 start hubble and connect to server 
           echo "test hubble"
-          cd ./*hubble*${{ inputs.release_version }} || exit
+          pushd ./*hubble*${{ inputs.release_version }} || exit
           # TODO: add hubble doc & test it
           cat conf/hugegraph-hubble.properties
           bin/start-hubble.sh || exit
           bin/stop-hubble.sh || exit
+          popd || exit
 
-          cd ../../../ || exit
-          # kill the HugeGraphServer process by jps
-          jps | grep HugeGraphServer | awk '{print $1}' | xargs kill -9
-          rm -rf ./*src* && ls -lh
+          popd || exit
+          popd || exit
+          # stop server
+          pushd ./*hugegraph-incubating*src/hugegraph-server/*hugegraph*${{ inputs.release_version }} || exit
+          bin/stop-hugegraph.sh || exit
+          popd || exit
+
+          # clear source packages
+          rm -rf ./*src*
+          ls -lh
 
       - name: 7. Validate Binary Packages
         run: |
-          cd dist/${{ inputs.release_version }}
+          cd dist/${{ inputs.release_version }} || exit
 
           for i in *.tar.gz; do
             if [[ "$i" == *-src.tar.gz ]]; then
-              # skip source package
+              # skip source packages
               continue
             fi
 
@@ -225,7 +238,7 @@ jobs:
             fi
 
             tar xzvf "$i" || exit
-            cd "$(basename "$i" .tar.gz)" || exit
+            pushd "$(basename "$i" .tar.gz)" || exit
             ls -lh
             echo "Start to check the package content: $(basename "$i" .tar.gz)"
 
@@ -251,59 +264,65 @@ jobs:
               echo "The package shouldn't include GPL* invalid dependency, but get $COUNT" && exit 1
             fi
 
-            # 7.4 ensure doesn't contains empty directory or file
-            COUNT=$(find . -type f,d -empty | wc -l)
-            if [[ $COUNT -ne 0 ]]; then
-              find . -type f,d -empty
-              echo "The package shouldn't include empty dir/file, but get $COUNT" && exit 1
-            fi
+            # 7.4: ensure doesn't contains empty directory or file
+            find . -type d -empty | while read -r EMPTY_DIR; do
+              find . -type d -empty
+              echo "The package $i shouldn't include empty directory: $EMPTY_DIR is empty" && exit 1
+            done
+            find . -type f -empty | while read -r EMPTY_FILE; do
+              find . -type f -empty
+              echo "The package $i shouldn't include empty file: $EMPTY_FILE is empty" && exit 1
+            done
 
-            cd - || exit
+            popd || exit
           done
 
       - name: 8. Run Binary Packages In Server
         run: |
-          cd dist/${{ inputs.release_version }}
+          cd dist/${{ inputs.release_version }} || exit
 
-          cd ./*hugegraph-incubating*${{ inputs.release_version }} || exit
+          pushd ./*hugegraph-incubating*${{ inputs.release_version }} || exit
           bin/init-store.sh || exit
-          sleep 1
+          sleep 3
           bin/start-hugegraph.sh || exit
-          ls ../ && cd ../ || exit
+          popd || exit
 
       - name: 9. Run Binary Packages In ToolChain (Loader & Tool & Hubble)
         run: |
-          cd dist/${{ inputs.release_version }}
+          cd dist/${{ inputs.release_version }} || exit
 
-          cd ./*toolchain*${{ inputs.release_version }} || exit
+          pushd ./*toolchain*${{ inputs.release_version }} || exit
           ls -lh
 
           # 9.1 loader some data first
           echo "test loader"
-          cd ./*loader*${{ inputs.release_version }} || exit
+          pushd ./*loader*${{ inputs.release_version }} || exit
           bin/hugegraph-loader.sh -f ./example/file/struct.json -s ./example/file/schema.groovy \
             -g hugegraph || exit
-          cd - || exit
+          popd || exit
 
           # 9.2 try some gremlin query & api in tool
           echo "test tool"
-          cd ./*tool*${{ inputs.release_version }} || exit
+          pushd ./*tool*${{ inputs.release_version }} || exit
           bin/hugegraph gremlin-execute --script 'g.V().count()' || exit
           bin/hugegraph task-list || exit
           bin/hugegraph backup -t all --directory ./backup-test || exit
-          cd - || exit
+          popd || exit
 
           # 9.3 start hubble and connect to server
           echo "test hubble"
-          cd ./*hubble*${{ inputs.release_version }} || exit
+          pushd ./*hubble*${{ inputs.release_version }} || exit
           # TODO: add hubble doc & test it
           cat conf/hugegraph-hubble.properties
           bin/start-hubble.sh || exit
           bin/stop-hubble.sh || exit
+          popd || exit
 
-          cd - || exit
-          # kill the HugeGraphServer process by jps
-          jps | grep HugeGraphServer | awk '{print $1}' | xargs kill -9
+          popd || exit
+          # stop server
+          pushd ./*hugegraph-incubating*${{ inputs.release_version }} || exit
+          bin/stop-hugegraph.sh || exit
+          popd || exit
 
     strategy:
       fail-fast: false

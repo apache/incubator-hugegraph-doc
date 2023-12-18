@@ -136,9 +136,10 @@ for i in *src.tar.gz; do
     fi
   done
 
-  # 4.6: test compile the packages
+  # 4.7: test compile the packages
   if [[ $JAVA_VERSION == 8 && "$i" =~ "computer" ]]; then
-    popd && echo "skip computer module in java8" || exit
+    echo "skip computer module in java8"
+    popd || exit
     continue
   fi
   mvn package -DskipTests -ntp -e || exit
@@ -195,22 +196,23 @@ popd || exit
 
 popd || exit
 popd || exit
-
 # stop server
-cd "$WORK_DIR"/dist/"$RELEASE_VERSION" || exit
 pushd ./*hugegraph-incubating*src/hugegraph-server/*hugegraph*"${RELEASE_VERSION}" || exit
 bin/stop-hugegraph.sh || exit
 popd || exit
 
+# clear source packages
 rm -rf ./*src*
 ls -lh
 
 ####################################
 # Step 7: Validate Binary Packages #
 ####################################
+cd "$WORK_DIR"/dist/"$RELEASE_VERSION" || exit
+
 for i in *.tar.gz; do
   if [[ "$i" == *-src.tar.gz ]]; then
-    # skip source package
+    # skip source packages
     continue
   fi
 
@@ -265,6 +267,8 @@ done
 #########################################
 # Step 8: Run Binary Packages In Server #
 #########################################
+cd "$WORK_DIR"/dist/"$RELEASE_VERSION" || exit
+
 pushd ./*hugegraph-incubating*"${RELEASE_VERSION}" || exit
 bin/init-store.sh || exit
 sleep 3
@@ -274,6 +278,8 @@ popd || exit
 #####################################################################
 # Step 9: Run Binary Packages In ToolChain (Loader & Tool & Hubble) #
 #####################################################################
+cd "$WORK_DIR"/dist/"$RELEASE_VERSION" || exit
+
 pushd ./*toolchain*"${RELEASE_VERSION}" || exit
 ls -lh
 
@@ -301,8 +307,8 @@ bin/start-hubble.sh || exit
 bin/stop-hubble.sh || exit
 popd || exit
 
+popd || exit
 # stop server
-cd "$WORK_DIR"/dist/"$RELEASE_VERSION" || exit
 pushd ./*hugegraph-incubating*"${RELEASE_VERSION}" || exit
 bin/stop-hugegraph.sh || exit
 popd || exit
