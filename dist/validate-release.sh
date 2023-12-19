@@ -78,8 +78,8 @@ done
 ####################################
 cd "$WORK_DIR"/dist/"$RELEASE_VERSION" || exit
 
-CATEGORY_X="\bGPL\b|\bLGPL\b|\bSleepycat License\b|\bBSD-4-Clause\b|\bBCL\b|\bJSR-275\b|\bAmazon Software License\b|\bRSAL\b|\bQPL\b|\bSSPL\b|\bCPOL\b|\bNPL1\b|\bCreative Commons Non-Commercial\b"
-CATEGORY_B="\bCDDL1\b|\bCPL\b|\bEPL\b|\bIPL\b|\bMPL\b|\bSPL\b|\bOSL-3.0\b|\bUnRAR License\b|\bErlang Public License\b|\bOFL\b|\bUbuntu Font License Version 1.0\b|\bIPA Font License Agreement v1.0\b|\bEPL2.0\b|\bCC-BY\b"
+CATEGORY_X="\bGPL\b|\bLGPL\b|Sleepycat License|BSD-4-Clause|\bBCL\b|JSR-275|Amazon Software License|\bRSAL\b|\bQPL\b|\bSSPL\b|\bCPOL\b|\bNPL1\b|Creative Commons Non-Commercial"
+CATEGORY_B="\bCDDL1\b|\bCPL\b|\bEPL\b|\bIPL\b|\bMPL\b|\bSPL\b|OSL-3.0|UnRAR License|Erlang Public License|\bOFL\b|Ubuntu Font License Version 1.0|IPA Font License Agreement v1.0|EPL2.0|CC-BY"
 ls -lh ./*.tar.gz
 for i in *src.tar.gz; do
   echo "$i"
