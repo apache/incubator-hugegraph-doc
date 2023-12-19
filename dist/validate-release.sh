@@ -78,7 +78,7 @@ done
 ####################################
 cd "$WORK_DIR"/dist/"$RELEASE_VERSION" || exit
 
-CATEGORY_X="GPL|LGPL|Sleepycat License|BSD-4-Clause|BCL|JSR-275|ASL|RSAL|QPL|SSPL|CPOL|NPL1|Creative Commons Non-Commercial"
+CATEGORY_X="GPL|LGPL|Sleepycat License|BSD-4-Clause|BCL|JSR-275|Amazon Software License|RSAL|QPL|SSPL|CPOL|NPL1|Creative Commons Non-Commercial"
 CATEGORY_B="CDDL1|CPL|EPL|IPL|MPL|SPL|OSL-3.0|UnRAR License|Erlang Public License|OFL|Ubuntu Font License Version 1.0|IPA Font License Agreement v1.0|EPL2.0|CC-BY"
 ls -lh ./*.tar.gz
 for i in *src.tar.gz; do
