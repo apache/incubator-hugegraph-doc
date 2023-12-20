@@ -78,6 +78,8 @@ done
 ####################################
 cd "$WORK_DIR"/dist/"$RELEASE_VERSION" || exit
 
+CATEGORY_X="\bGPL|\bLGPL|Sleepycat License|BSD-4-Clause|\bBCL\b|JSR-275|Amazon Software License|\bRSAL\b|\bQPL\b|\bSSPL|\bCPOL|\bNPL1|Creative Commons Non-Commercial"
+CATEGORY_B="\bCDDL1|\bCPL|\bEPL|\bIPL|\bMPL|\bSPL|OSL-3.0|UnRAR License|Erlang Public License|\bOFL\b|Ubuntu Font License Version 1.0|IPA Font License Agreement v1.0|EPL2.0|CC-BY"
 ls -lh ./*.tar.gz
 for i in *src.tar.gz; do
   echo "$i"
@@ -102,15 +104,21 @@ for i in *src.tar.gz; do
     echo "The package $i should include DISCLAIMER file" && exit 1
   fi
 
-  # 4.3: ensure doesn't contains *GPL/BCL/JSR-275/RSAL/QPL/SSPL/CPOL/NPL1.*/CC-BY
-  #      dependency in LICENSE and NOTICE file
-  COUNT=$(grep -E "GPL|BCL|JSR-275|RSAL|QPL|SSPL|CPOL|NPL1|CC-BY" LICENSE NOTICE | wc -l)
+  # 4.3: ensure doesn't contains ASF CATEGORY X License dependencies in LICENSE and NOTICE files
+  COUNT=$(grep -E $CATEGORY_X LICENSE NOTICE | wc -l)
   if [[ $COUNT -ne 0 ]]; then
-     grep -E "GPL|BCL|JSR-275|RSAL|QPL|SSPL|CPOL|NPL1.0|CC-BY" LICENSE NOTICE
-     echo "The package $i shouldn't include GPL* invalid dependency, but get $COUNT" && exit 1
+     grep -E "$CATEGORY_X" LICENSE NOTICE
+     echo "The package $i shouldn't include invalid ASF category X dependencies, but get $COUNT" && exit 1
   fi
 
-  # 4.4: ensure doesn't contains empty directory or file
+  # 4.4: ensure doesn't contains ASF CATEGORY B License dependencies in LICENSE and NOTICE files
+  COUNT=$(grep -E $CATEGORY_B LICENSE NOTICE | wc -l)
+  if [[ $COUNT -ne 0 ]]; then
+     grep -E "$CATEGORY_B" LICENSE NOTICE
+     echo "The package $i shouldn't include invalid ASF category B dependencies, but get $COUNT" && exit 1
+  fi
+
+  # 4.5: ensure doesn't contains empty directory or file
   find . -type d -empty | while read -r EMPTY_DIR; do
     find . -type d -empty
     echo "The package $i shouldn't include empty directory: $EMPTY_DIR is empty" && exit 1
@@ -120,13 +128,13 @@ for i in *src.tar.gz; do
     echo "The package $i shouldn't include empty file: $EMPTY_FILE is empty" && exit 1
   done
 
-  # 4.5: ensure any file should less than 800kb
+  # 4.6: ensure any file should less than 800kb
   find . -type f -size +800k | while read -r FILE; do
     find . -type f -size +800k
     echo "The package $i shouldn't include file larger than 800kb: $FILE is larger than 800kb" && exit 1
   done
 
-  # 4.6: ensure all binary files are documented in LICENSE
+  # 4.7: ensure all binary files are documented in LICENSE
   find . -type f | perl -lne 'print if -B' | while read -r BINARY_FILE; do
     FILE_NAME=$(basename "$BINARY_FILE")
     if grep -q "$FILE_NAME" LICENSE; then
@@ -136,13 +144,14 @@ for i in *src.tar.gz; do
     fi
   done
 
-  # 4.7: test compile the packages
+  # 4.8: test compile the packages
   if [[ $JAVA_VERSION == 8 && "$i" =~ "computer" ]]; then
     echo "skip computer module in java8"
     popd || exit
     continue
   fi
-  mvn package -DskipTests -ntp -e || exit
+  # TODO: consider using commands that are entirely consistent with building binary packages
+  mvn package -DskipTests -Papache-release -ntp -e || exit
   ls -lh
 
   popd || exit
@@ -242,12 +251,11 @@ for i in *.tar.gz; do
     echo "The package $i should include licenses dir" && exit 1
   fi
 
-  # 7.3: ensure doesn't contains *GPL/BCL/JSR-275/RSAL/QPL/SSPL/CPOL/NPL1.*/CC-BY
-  #      dependency in LICENSE/NOTICE and licenses/* files
-  COUNT=$(grep -r -E "GPL|BCL|JSR-275|RSAL|QPL|SSPL|CPOL|NPL1|CC-BY" LICENSE NOTICE licenses | wc -l)
+  # 7.3: ensure doesn't contains ASF CATEGORY X License dependencies in LICENSE/NOTICE and licenses/* files
+  COUNT=$(grep -r -E $CATEGORY_X LICENSE NOTICE licenses | wc -l)
   if [[ $COUNT -ne 0 ]]; then
-    grep -r -E "GPL|BCL|JSR-275|RSAL|QPL|SSPL|CPQL|NPL1|CC-BY" LICENSE NOTICE licenses
-    echo "The package $i shouldn't include GPL* invalid dependency, but get $COUNT" && exit 1
+    grep -r -E "$CATEGORY_X" LICENSE NOTICE licenses
+    echo "The package $i shouldn't include invalid ASF category X dependencies, but get $COUNT" && exit 1
   fi
 
   # 7.4: ensure doesn't contains empty directory or file
@@ -271,7 +279,7 @@ cd "$WORK_DIR"/dist/"$RELEASE_VERSION" || exit
 
 pushd ./*hugegraph-incubating*"${RELEASE_VERSION}" || exit
 bin/init-store.sh || exit
-sleep 3
+sleep 30
 bin/start-hugegraph.sh || exit
 popd || exit
 
