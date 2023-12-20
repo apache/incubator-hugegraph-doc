@@ -78,8 +78,8 @@ done
 ####################################
 cd "$WORK_DIR"/dist/"$RELEASE_VERSION" || exit
 
-CATEGORY_X="\bGPL\b|\bLGPL\b|Sleepycat License|BSD-4-Clause|\bBCL\b|JSR-275|Amazon Software License|\bRSAL\b|\bQPL\b|\bSSPL\b|\bCPOL\b|\bNPL1\b|Creative Commons Non-Commercial"
-CATEGORY_B="\bCDDL1\b|\bCPL\b|\bEPL\b|\bIPL\b|\bMPL\b|\bSPL\b|OSL-3.0|UnRAR License|Erlang Public License|\bOFL\b|Ubuntu Font License Version 1.0|IPA Font License Agreement v1.0|EPL2.0|CC-BY"
+CATEGORY_X="\bGPL|\bLGPL|Sleepycat License|BSD-4-Clause|\bBCL\b|JSR-275|Amazon Software License|\bRSAL\b|\bQPL\b|\bSSPL|\bCPOL|\bNPL1|Creative Commons Non-Commercial"
+CATEGORY_B="\bCDDL1|\bCPL|\bEPL|\bIPL|\bMPL|\bSPL|OSL-3.0|UnRAR License|Erlang Public License|\bOFL\b|Ubuntu Font License Version 1.0|IPA Font License Agreement v1.0|EPL2.0|CC-BY"
 ls -lh ./*.tar.gz
 for i in *src.tar.gz; do
   echo "$i"
@@ -279,7 +279,7 @@ cd "$WORK_DIR"/dist/"$RELEASE_VERSION" || exit
 
 pushd ./*hugegraph-incubating*"${RELEASE_VERSION}" || exit
 bin/init-store.sh || exit
-sleep 3
+sleep 30
 bin/start-hugegraph.sh || exit
 popd || exit
 
