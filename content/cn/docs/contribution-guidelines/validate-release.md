@@ -151,7 +151,13 @@ bin/start-hubble.sh
 ## 邮件模板
 
 检查完成后, 你应该按不同角色回复邮件: (普通开发者 & PMC 成员)
+```markdown
+[] +1 同意
 
+[] +0 没有意见
+
+[] -1 不同意，并注明原因
+```
 ```markdown
 +1 (non-binding)
 I checked:

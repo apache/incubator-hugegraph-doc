@@ -153,6 +153,15 @@ more reference official website: https://hugegraph.apache.org/docs/quickstart
 ## Mail Template
 
 After the check & test, you should reply the mail with the following content: (normal devs & PMC)
+
+```markdown
+[] +1 approve
+
+[] +0 no opinion
+
+[] -1 disapprove with the reason
+```
+
 ```markdown
 +1 (non-binding)
 I checked:
