@@ -37,10 +37,10 @@ sudo apt-get install wget -y
 # MacOS
 brew install wget
 
-# 4. 下载 hugegraph-svn 目录 (版本号注意填写此次验证版本, 这里以1.0.0为例)
-svn co https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/
+# 4. 下载 hugegraph-svn 目录 (版本号注意填写此次验证版本)
+svn co https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.x.x/
 # (注) 如果出现 svn 下载某个文件速度很慢的情况, 可以考虑 wget 单个文件下载, 如下 (或考虑使用 VPN / 代理)
-wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
+wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.x.x/apache-hugegraph-toolchain-incubating-1.x.x.tar.gz
 ```
 
 #### 2. 检查 hash 值
@@ -137,9 +137,6 @@ bin/hugegraph-loader.sh -f path -g graph -s schema
 # hugegraph-hubble
 bin/start-hubble.sh
 
-# hugegraph-computer
-bin/start-computer.sh -d local -r master
-
 更多参考官网: https://hugegraph.apache.org/cn/docs/quickstart
 ```
 
@@ -158,11 +155,16 @@ bin/start-computer.sh -d local -r master
 ```markdown
 +1 (non-binding)
 I checked:
-1. All download links are valid
-2. Checksum and signature are OK
-3. LICENSE and NOTICE are exist
-4. Build successfully on macOS(Big Sur) 
-5. ....
+1.Download link/tag in mail are valid
+2.Checksum and GPG signatures are OK
+3.LICENSE & NOTICE & DISCLAIMER are exist
+4.Build successfully on Ubuntu22.04 & MacOS 14.2
+5.No unexpected binary files
+6.Date is right in the NOTICE file
+7.Compile from source is fine under Java11
+8.No empty file & directory found
+9.Running server/loader/hubble process OK
+10. ....
 ```
 
 特别注意 PMC 成员必须使用 `binding` 标记回复邮件, 这对于统计有效投票很重要;
@@ -170,10 +172,15 @@ I checked:
 ```markdown
 +1 (binding)
 I checked:
-1. All download links are valid
-2. Checksum and signature are OK
-3. LICENSE and NOTICE are exist
-4. Build successfully on macOS(Big Sur) 
-5. ....
+1.Download link/tag in mail are valid
+2.Checksum and GPG signatures are OK
+3.LICENSE & NOTICE & DISCLAIMER are exist
+4.Build successfully on Ubuntu22.04 & MacOS 14.2
+5.No unexpected binary files
+6.Date is right in the NOTICE file
+7.Compile from source is fine under Java11
+8.No empty file & directory found
+9.Running server/loader/hubble process OK
+10. ....
 ```
 

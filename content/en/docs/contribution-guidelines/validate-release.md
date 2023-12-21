@@ -36,10 +36,12 @@ sudo apt-get install wget -y
 # MacOS
 brew install wget
 
-# 4. Download the hugegraph-svn directory (version number, pay attention to fill in the verification version, here we take 1.0.0 as an example)
-svn co https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/
-# (Note) If svn downloads a file very slowly, you can consider wget to download a single file, as follows (or consider using a proxy)
-wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
+# 4. Download the hugegraph-svn directory 
+# For version number, pay attention to fill in the verification version
+svn co https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.x.x/
+# (Note) If svn downloads a file very slowly, 
+# you can consider wget to download a single file, as follows (or consider using a proxy)
+wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.x.x/apache-hugegraph-toolchain-incubating-1.x.x.tar.gz
 ```
 
 #### 2. check hash value
@@ -136,10 +138,7 @@ bin/hugegraph-loader.sh -f path -g graph -s schema
 # hugegraph-hubble
 bin/start-hubble.sh
 
-# hugegraph-computer
-bin/start-computer.sh -d local -r master
-
-more reference official website: https://hugegraph.apache.org/cn/docs/quickstart
+more reference official website: https://hugegraph.apache.org/docs/quickstart
 ```
 
 **Note:** If a third-party dependency is introduced in the binary package, you need to update the LICENSE and add the third-party dependent LICENSE; if the third-party dependent LICENSE is Apache 2.0, and the corresponding project contains NOTICE, you also need to update Our NOTICE file
@@ -156,21 +155,31 @@ After the check & test, you should reply the mail with the following content: (n
 ```markdown
 +1 (non-binding)
 I checked:
-1. All download links are valid
-2. Checksum and signature are OK
-3. LICENSE and NOTICE are exist
-4. Build successfully on macOS(Big Sur) 
-5. ....
+1.Download link/tag in mail are valid
+2.Checksum and GPG signatures are OK
+3.LICENSE & NOTICE & DISCLAIMER are exist
+4.Build successfully on Ubuntu22.04 & MacOS 14.2
+5.No unexpected binary files
+6.Date is right in the NOTICE file
+7.Compile from source is fine under Java11
+8.No empty file & directory found
+9.Running server/loader/hubble process OK
+10. ....
 ```
 
 and the PMC members should reply with `binding`, it's important for summary the valid votes:
 ```markdown
 +1 (binding)
 I checked:
-1. All download links are valid
-2. Checksum and signature are OK
-3. LICENSE and NOTICE are exist
-4. Build successfully on macOS(Big Sur) 
-5. ....
+1.Download link/tag in mail are valid
+2.Checksum and GPG signatures are OK
+3.LICENSE & NOTICE & DISCLAIMER are exist
+4.Build successfully on Ubuntu22.04 & MacOS 14.2
+5.No unexpected binary files
+6.Date is right in the NOTICE file
+7.Compile from source is fine under Java11
+8.No empty file & directory found
+9.Running server/loader/hubble process OK
+10. ....
 ```
 
