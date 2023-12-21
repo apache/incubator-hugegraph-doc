@@ -1367,7 +1367,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>执行成功后，在 hugegraph 目录下生成 &lt;code>*hugegraph-*.tar.gz&lt;/code> 文件，就是编译生成的 tar 包。&lt;/p>
 &lt;h4 id="33-使用-docker-容器-便于测试">3.3 使用 Docker 容器 (便于&lt;strong>测试&lt;/strong>)&lt;/h4>
 &lt;!-- 3.1 is linked by other place. if change 3.1's title, please check -->
-&lt;p>可参考 &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/README.md">Docker 部署方式&lt;/a>。&lt;/p>
+&lt;p>可参考 &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/README.md">Docker 部署方式&lt;/a>。&lt;/p>
 &lt;p>我们可以使用 &lt;code>docker run -itd --name=graph -p 8080:8080 hugegraph/hugegraph&lt;/code> 去快速启动一个内置了 &lt;code>RocksDB&lt;/code> 的 &lt;code>Hugegraph server&lt;/code>.&lt;/p>
 &lt;p>可选项：&lt;/p>
 &lt;ol>
@@ -1601,7 +1601,7 @@
 &lt;details>
 &lt;summary>点击展开/折叠 Cassandra 配置及启动方法&lt;/summary>
 &lt;p>在使用 Docker 的时候，我们可以使用 Cassandra 作为后端存储。我们更加推荐直接使用 docker-compose 来对于 server 以及 Cassandra 进行统一管理&lt;/p>
-&lt;p>样例的 &lt;code>docker-compose.yml&lt;/code> 可以在 &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/docker/example/docker-compose-cassandra.yml">github&lt;/a> 中获取，使用 &lt;code>docker-compose up -d&lt;/code> 启动。(如果使用 cassandra 4.0 版本作为后端存储，则需要大约两个分钟初始化，请耐心等待)&lt;/p>
+&lt;p>样例的 &lt;code>docker-compose.yml&lt;/code> 可以在 &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/docker/example/docker-compose-cassandra.yml">github&lt;/a> 中获取，使用 &lt;code>docker-compose up -d&lt;/code> 启动。(如果使用 cassandra 4.0 版本作为后端存储，则需要大约两个分钟初始化，请耐心等待)&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;3&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -1659,7 +1659,7 @@
 &lt;/li>
 &lt;li>
 &lt;p>使用&lt;code>docker-compose&lt;/code>&lt;/p>
-&lt;p>创建&lt;code>docker-compose.yml&lt;/code>，具体文件如下，在环境变量中设置 PRELOAD=true。其中，&lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/src/assembly/static/scripts/example.groovy">&lt;code>example.groovy&lt;/code>&lt;/a> 是一个预定义的脚本，用于预加载样例数据。如果有需要，可以通过挂载新的 &lt;code>example.groovy&lt;/code> 脚本改变预加载的数据。&lt;/p>
+&lt;p>创建&lt;code>docker-compose.yml&lt;/code>，具体文件如下，在环境变量中设置 PRELOAD=true。其中，&lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/src/assembly/static/scripts/example.groovy">&lt;code>example.groovy&lt;/code>&lt;/a> 是一个预定义的脚本，用于预加载样例数据。如果有需要，可以通过挂载新的 &lt;code>example.groovy&lt;/code> 脚本改变预加载的数据。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">graph&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -1769,11 +1769,11 @@
 &lt;/div>
 &lt;p>在使用 Swagger UI 调试 HugeGraph 提供的 API 时，如果 HugeGraph Server 开启了鉴权模式，可以在 Swagger 页面输入鉴权信息。&lt;/p>
 &lt;div style="text-align: center;">
-&lt;img src="/docs/images/images-server/621swaggerui设置鉴权位置示例.png" alt="image">
+&lt;img src="/docs/images/images-server/621swaggerui-where-set-auth-example.png" alt="image">
 &lt;/div>
 &lt;p>当前 HugeGraph 支持基于 Basic 和 Bearer 两种形式设置鉴权信息。&lt;/p>
 &lt;div style="text-align: center;">
-&lt;img src="/docs/images/images-server/621swaggerui设置鉴权示例.png" alt="image">
+&lt;img src="/docs/images/images-server/621swaggerui-set-auth-example.png" alt="image">
 &lt;/div>
 &lt;h3 id="7-停止-server">7 停止 Server&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">$cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
@@ -2476,10 +2476,10 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;h5 id="321-添加第三方依赖">3.2.1 添加第三方依赖&lt;/h5>
 &lt;p>如果我们要在 &lt;code>HugeGraph&lt;/code> 项目中添加新的第三方依赖, 我们需要做下面的几件事情：&lt;/p>
 &lt;ol>
-&lt;li>找到第三方依赖的仓库，将依赖的 &lt;code>license&lt;/code> 文件放到 &lt;a href="https://github.com/apache/incubator-hugegraph/tree/master/hugegraph-dist/release-docs/licenses">./hugegraph-dist/release-docs/licenses/&lt;/a> 路径下。&lt;/li>
-&lt;li>在&lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/release-docs/LICENSE">./hugegraph-dist/release-docs/LICENSE&lt;/a> 中声明该依赖的 &lt;code>LICENSE&lt;/code> 信息。&lt;/li>
-&lt;li>找到仓库里的 NOTICE 文件，将其追加到 &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/release-docs/NOTICE">./hugegraph-dist/release-docs/NOTICE&lt;/a> 文件后面（如果没有NOTICE文件则跳过这一步）。&lt;/li>
-&lt;li>本地执行&lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh">./hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh&lt;/a> 脚本来更新依赖列表&lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/scripts/dependency/known-dependencies.txt">known-dependencies.txt&lt;/a> (或者手动更新)。&lt;/li>
+&lt;li>找到第三方依赖的仓库，将依赖的 &lt;code>license&lt;/code> 文件放到 &lt;a href="https://github.com/apache/incubator-hugegraph/tree/master/hugegraph-server/hugegraph-dist/release-docs/licenses">./hugegraph-dist/release-docs/licenses/&lt;/a> 路径下。&lt;/li>
+&lt;li>在&lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/release-docs/LICENSE">./hugegraph-dist/release-docs/LICENSE&lt;/a> 中声明该依赖的 &lt;code>LICENSE&lt;/code> 信息。&lt;/li>
+&lt;li>找到仓库里的 NOTICE 文件，将其追加到 &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/release-docs/NOTICE">./hugegraph-dist/release-docs/NOTICE&lt;/a> 文件后面（如果没有NOTICE文件则跳过这一步）。&lt;/li>
+&lt;li>本地执行&lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh">./hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh&lt;/a> 脚本来更新依赖列表&lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/scripts/dependency/known-dependencies.txt">known-dependencies.txt&lt;/a> (或者手动更新)。&lt;/li>
 &lt;/ol>
 &lt;p>&lt;strong>例如&lt;/strong>：在项目中引入了第三方新依赖 -&amp;gt; &lt;code>ant-1.9.1.jar&lt;/code>&lt;/p>
 &lt;ul>
@@ -3985,6 +3985,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/table>
 &lt;hr>
 &lt;h3 id="旧版本下载地址-outdated-versions-mapping">旧版本下载地址 (Outdated Versions Mapping)&lt;/h3>
+&lt;p>对于 1.0.0 之前的版本（即非 ASF 版本），HugeGraph 社区将不再维护。&lt;/p>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -3998,7 +3999,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td>&lt;a href="https://github.com/hugegraph/hugegraph/releases/download/v0.12.0/hugegraph-0.12.0.tar.gz">0.12.0&lt;/a>&lt;/td>
+&lt;td>&lt;a href="https://github.com/apache/incubator-hugegraph/releases/download/v0.12.0/hugegraph-0.12.0.tar.gz">0.12.0&lt;/a>&lt;/td>
 &lt;td>&lt;a href="https://mvnrepository.com/artifact/com.baidu.hugegraph/hugegraph-client/2.0.1">2.0.1&lt;/a>&lt;/td>
 &lt;td>&lt;a href="https://github.com/hugegraph/hugegraph-loader/releases/download/v0.12.0/hugegraph-loader-0.12.0.tar.gz">0.12.0&lt;/a>&lt;/td>
 &lt;td>&lt;a href="https://github.com/hugegraph/hugegraph-hubble/releases/download/v1.6.0/hugegraph-hubble-1.6.0.tar.gz">1.6.0&lt;/a>&lt;/td>
@@ -4006,7 +4007,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;td>&lt;a href="https://github.com/hugegraph/hugegraph-tools/releases/download/v1.6.0/hugegraph-tools-1.6.0.tar.gz">1.6.0&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;a href="https://github.com/hugegraph/hugegraph/releases/download/v0.11.2/hugegraph-0.11.2.tar.gz">0.11.2&lt;/a>&lt;/td>
+&lt;td>&lt;a href="https://github.com/apache/incubator-hugegraph/releases/download/v0.11.2/hugegraph-0.11.2.tar.gz">0.11.2&lt;/a>&lt;/td>
 &lt;td>&lt;a href="https://mvnrepository.com/artifact/com.baidu.hugegraph/hugegraph-client/1.9.1">1.9.1&lt;/a>&lt;/td>
 &lt;td>&lt;a href="https://github.com/hugegraph/hugegraph-loader/releases/download/v0.11.1/hugegraph-loader-0.11.1.tar.gz">0.11.1&lt;/a>&lt;/td>
 &lt;td>&lt;a href="https://github.com/hugegraph/hugegraph-hubble/releases/download/v1.5.0/hugegraph-hubble-1.5.0.tar.gz">1.5.0&lt;/a>&lt;/td>
@@ -4014,7 +4015,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;td>&lt;a href="https://github.com/hugegraph/hugegraph-tools/releases/download/v1.5.0/hugegraph-tools-1.5.0.tar.gz">1.5.0&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;a href="https://github.com/hugegraph/hugegraph/releases/download/v0.10.4/hugegraph-0.10.4.tar.gz">0.10.4&lt;/a>&lt;/td>
+&lt;td>&lt;a href="https://github.com/apache/incubator-hugegraph/releases/download/v0.10.4/hugegraph-0.10.4.tar.gz">0.10.4&lt;/a>&lt;/td>
 &lt;td>&lt;a href="https://mvnrepository.com/artifact/com.baidu.hugegraph/hugegraph-client/1.8.0">1.8.0&lt;/a>&lt;/td>
 &lt;td>&lt;a href="https://github.com/hugegraph/hugegraph-loader/releases/download/v0.10.1/hugegraph-loader-0.10.1.tar.gz">0.10.1&lt;/a>&lt;/td>
 &lt;td>&lt;a href="https://github.com/hugegraph/hugegraph-studio/releases/download/v0.10.0/hugegraph-studio-0.10.0.tar.gz">0.10.0&lt;/a>&lt;/td>
@@ -4022,7 +4023,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;td>&lt;a href="https://github.com/hugegraph/hugegraph-tools/releases/download/v1.4.0/hugegraph-tools-1.4.0.tar.gz">1.4.0&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;a href="https://github.com/hugegraph/hugegraph/releases/download/v0.9.2/hugegraph-0.9.2.tar.gz">0.9.2&lt;/a>&lt;/td>
+&lt;td>&lt;a href="https://github.com/apache/incubator-hugegraph/releases/download/v0.9.2/hugegraph-0.9.2.tar.gz">0.9.2&lt;/a>&lt;/td>
 &lt;td>&lt;a href="https://mvnrepository.com/artifact/com.baidu.hugegraph/hugegraph-client/1.7.0">1.7.0&lt;/a>&lt;/td>
 &lt;td>&lt;a href="https://github.com/hugegraph/hugegraph-loader/releases/download/v0.9.0/hugegraph-loader-0.9.0.tar.gz">0.9.0&lt;/a>&lt;/td>
 &lt;td>&lt;a href="https://github.com/hugegraph/hugegraph-studio/releases/download/v0.9.0/hugegraph-studio-0.9.0.tar.gz">0.9.0&lt;/a>&lt;/td>
@@ -4030,7 +4031,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;td>&lt;a href="https://github.com/hugegraph/hugegraph-tools/releases/download/v1.3.0/hugegraph-tools-1.3.0.tar.gz">1.3.0&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;a href="https://github.com/hugegraph/hugegraph/releases/download/v0.8.0/hugegraph-0.8.0.tar.gz">0.8.0&lt;/a>&lt;/td>
+&lt;td>&lt;a href="https://github.com/apache/incubator-hugegraph/releases/download/v0.8.0/hugegraph-0.8.0.tar.gz">0.8.0&lt;/a>&lt;/td>
 &lt;td>&lt;a href="https://mvnrepository.com/artifact/com.baidu.hugegraph/hugegraph-client/1.6.4">1.6.4&lt;/a>&lt;/td>
 &lt;td>&lt;a href="https://github.com/hugegraph/hugegraph-loader/releases/download/v0.8.0/hugegraph-loader-0.8.0.tar.gz">0.8.0&lt;/a>&lt;/td>
 &lt;td>&lt;a href="https://github.com/hugegraph/hugegraph-studio/releases/download/v0.8.0/hugegraph-studio-0.8.0.tar.gz">0.8.0&lt;/a>&lt;/td>
@@ -4038,7 +4039,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;td>&lt;a href="https://github.com/hugegraph/hugegraph-tools/releases/download/v1.2.0/hugegraph-tools-1.2.0.tar.gz">1.2.0&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;a href="https://github.com/hugegraph/hugegraph/releases/download/v0.7.4/hugegraph-0.7.4.tar.gz">0.7.4&lt;/a>&lt;/td>
+&lt;td>&lt;a href="https://github.com/apache/incubator-hugegraph/releases/download/v0.7.4/hugegraph-0.7.4.tar.gz">0.7.4&lt;/a>&lt;/td>
 &lt;td>&lt;a href="https://mvnrepository.com/artifact/com.baidu.hugegraph/hugegraph-client/1.5.8">1.5.8&lt;/a>&lt;/td>
 &lt;td>&lt;a href="https://github.com/hugegraph/hugegraph-loader/releases/download/v0.7.0/hugegraph-loader-0.7.0.tar.gz">0.7.0&lt;/a>&lt;/td>
 &lt;td>&lt;a href="https://github.com/hugegraph/hugegraph-studio/releases/download/v0.7.0/hugegraph-studio-0.7.0.tar.gz">0.7.0&lt;/a>&lt;/td>
@@ -4046,7 +4047,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;td>&lt;a href="https://github.com/hugegraph/hugegraph-tools/releases/download/v1.1.0/hugegraph-tools-1.1.0.tar.gz">1.1.0&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;a href="https://github.com/hugegraph/hugegraph/releases/download/v0.6.1/hugegraph-0.6.1.tar.gz">0.6.1&lt;/a>&lt;/td>
+&lt;td>&lt;a href="https://github.com/apache/incubator-hugegraph/releases/download/v0.6.1/hugegraph-0.6.1.tar.gz">0.6.1&lt;/a>&lt;/td>
 &lt;td>&lt;a href="https://mvnrepository.com/artifact/com.baidu.hugegraph/hugegraph-client/1.5.6">1.5.6&lt;/a>&lt;/td>
 &lt;td>&lt;a href="https://github.com/hugegraph/hugegraph-loader/releases/download/v0.6.1/hugegraph-loader-0.6.1.tar.gz">0.6.1&lt;/a>&lt;/td>
 &lt;td>&lt;a href="https://github.com/hugegraph/hugegraph-studio/releases/download/v0.6.1/hugegraph-studio-0.6.1.tar.gz">0.6.1&lt;/a>&lt;/td>
@@ -8120,10 +8121,10 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># MacOS&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>brew install wget
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 4. 下载 hugegraph-svn 目录 (版本号注意填写此次验证版本, 这里以1.0.0为例)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>svn co https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 4. 下载 hugegraph-svn 目录 (版本号注意填写此次验证版本)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>svn co https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.x.x/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># (注) 如果出现 svn 下载某个文件速度很慢的情况, 可以考虑 wget 单个文件下载, 如下 (或考虑使用 VPN / 代理)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.x.x/apache-hugegraph-toolchain-incubating-1.x.x.tar.gz
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="2-检查-hash-值">2. 检查 hash 值&lt;/h4>
 &lt;p>首先需要检查 &lt;code>source + binary&lt;/code> 包的文件完整性, 通过 &lt;code>shasum&lt;/code> 进行校验, 确保和发布到 apache/github 上的 hash 值一致 (一般是 sha512)&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>执行命令:
@@ -8199,9 +8200,6 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># hugegraph-hubble&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/start-hubble.sh
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># hugegraph-computer&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/start-computer.sh -d &lt;span style="color:#204a87">local&lt;/span> -r master
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>更多参考官网: https://hugegraph.apache.org/cn/docs/quickstart
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>注:&lt;/strong> 如果二进制包里面引入了第三方依赖, 则需要更新 LICENSE, 加入第三方依赖的 LICENSE; 若第三方依赖 LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更新我们的 NOTICE 文件&lt;/p>
 &lt;h4 id="5-检查官网以及-github-等页面">5. 检查官网以及 github 等页面&lt;/h4>
@@ -8212,21 +8210,36 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;/ol>
 &lt;h2 id="邮件模板">邮件模板&lt;/h2>
 &lt;p>检查完成后, 你应该按不同角色回复邮件: (普通开发者 &amp;amp; PMC 成员)&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>+1 (non-binding)
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>[] +1 approve
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[] +0 no opinion
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[] -1 disapprove with the reason
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>+1 (non-binding)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>I checked:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">1.&lt;/span> All download links are valid
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">2.&lt;/span> Checksum and signature are OK
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">3.&lt;/span> LICENSE and NOTICE are exist
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">4.&lt;/span> Build successfully on macOS(Big Sur)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">5.&lt;/span> ....
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1.Download link/tag in mail are valid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2.Checksum and GPG signatures are OK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>3.LICENSE &lt;span style="color:#a40000">&amp;amp;&lt;/span> NOTICE &lt;span style="color:#a40000">&amp;amp;&lt;/span> DISCLAIMER are exist
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4.Build successfully on XX OS version XXX
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>5.No unexpected binary files
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>6.Date is right in the NOTICE file
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>7.Compile from source is fine under JavaX
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>8.No empty file &lt;span style="color:#a40000">&amp;amp;&lt;/span> directory found
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">9.&lt;/span> Test running xxx service OK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">10.&lt;/span> ....
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>特别注意 PMC 成员必须使用 &lt;code>binding&lt;/code> 标记回复邮件, 这对于统计有效投票很重要;&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>+1 (binding)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>I checked:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">1.&lt;/span> All download links are valid
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">2.&lt;/span> Checksum and signature are OK
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">3.&lt;/span> LICENSE and NOTICE are exist
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">4.&lt;/span> Build successfully on macOS(Big Sur)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">5.&lt;/span> ....
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1.Download link/tag in mail are valid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2.Checksum and GPG signatures are OK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>3.LICENSE &lt;span style="color:#a40000">&amp;amp;&lt;/span> NOTICE &lt;span style="color:#a40000">&amp;amp;&lt;/span> DISCLAIMER are exist
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4.Build successfully on XX OS Version XX
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>5.No unexpected binary files
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>6.Date is right in the NOTICE file
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>7.Compile from source is fine under JavaXX
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>8.No empty file &lt;span style="color:#a40000">&amp;amp;&lt;/span> directory found
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">9.&lt;/span> Test running XXX service OK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">10.&lt;/span> ....
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Backup Restore</title><link>/cn/docs/guides/backup-restore/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/guides/backup-restore/</guid><description>
 &lt;h2 id="描述">描述&lt;/h2>
 &lt;p>Backup 和 Restore 是备份图和恢复图的功能。备份和恢复的数据包括元数据（schema）和图数据（vertex 和 edge）。&lt;/p>

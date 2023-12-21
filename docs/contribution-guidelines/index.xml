@@ -52,10 +52,10 @@
 &lt;h5 id="321-check-licenses">3.2.1 Check licenses&lt;/h5>
 &lt;p>If we want to add new third-party dependencies to the &lt;code>HugeGraph&lt;/code> project, we need to do the following things:&lt;/p>
 &lt;ol>
-&lt;li>Find the third-party dependent repository, put the dependent &lt;code>license&lt;/code> file into &lt;a href="https://github.com/apache/incubator-hugegraph/tree/master/hugegraph-dist/release-docs/licenses">./hugegraph-dist/release-docs/licenses/&lt;/a> path.&lt;/li>
-&lt;li>Declare the dependency in &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/release-docs/LICENSE">./hugegraph-dist/release-docs/LICENSE&lt;/a> &lt;code>LICENSE&lt;/code> information.&lt;/li>
-&lt;li>Find the NOTICE file in the repository and append it to &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/release-docs/NOTICE">./hugegraph-dist/release-docs/NOTICE&lt;/a> file (skip this step if there is no NOTICE file).&lt;/li>
-&lt;li>Execute locally &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh">./hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh&lt;/a> to update the dependency list &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/scripts/dependency/known-dependencies.txt">known-dependencies.txt&lt;/a> (or manually update) .&lt;/li>
+&lt;li>Find the third-party dependent repository, put the dependent &lt;code>license&lt;/code> file into &lt;a href="https://github.com/apache/incubator-hugegraph/tree/master/hugegraph-server/hugegraph-dist/release-docs/licenses">./hugegraph-dist/release-docs/licenses/&lt;/a> path.&lt;/li>
+&lt;li>Declare the dependency in &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/release-docs/LICENSE">./hugegraph-dist/release-docs/LICENSE&lt;/a> &lt;code>LICENSE&lt;/code> information.&lt;/li>
+&lt;li>Find the NOTICE file in the repository and append it to &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/release-docs/NOTICE">./hugegraph-dist/release-docs/NOTICE&lt;/a> file (skip this step if there is no NOTICE file).&lt;/li>
+&lt;li>Execute locally &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh">./hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh&lt;/a> to update the dependency list &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/scripts/dependency/known-dependencies.txt">known-dependencies.txt&lt;/a> (or manually update) .&lt;/li>
 &lt;/ol>
 &lt;p>&lt;strong>Example&lt;/strong>: A new third-party dependency is introduced into the project -&amp;gt; &lt;code>ant-1.9.1.jar&lt;/code>&lt;/p>
 &lt;ul>
@@ -183,10 +183,12 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># MacOS&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>brew install wget
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 4. Download the hugegraph-svn directory (version number, pay attention to fill in the verification version, here we take 1.0.0 as an example)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>svn co https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># (Note) If svn downloads a file very slowly, you can consider wget to download a single file, as follows (or consider using a proxy)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 4. Download the hugegraph-svn directory &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># For version number, pay attention to fill in the verification version&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>svn co https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.x.x/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># (Note) If svn downloads a file very slowly, &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># you can consider wget to download a single file, as follows (or consider using a proxy)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.x.x/apache-hugegraph-toolchain-incubating-1.x.x.tar.gz
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="2-check-hash-value">2. check hash value&lt;/h4>
 &lt;p>First you need to check the file integrity of the &lt;code>source + binary&lt;/code> package, Verify by &lt;code>shasum&lt;/code> to ensure that it is consistent with the hash value published on apache/github (Usually sha512), Here is the same as the last step of 0x02 inspection.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>execute the following command:
@@ -205,7 +207,8 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg: Total number processed: &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg: imported: &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 2. Trust release users (trust n username mentioned in voting mail, if more than one user, just repeat the steps in turn or use the script below)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 2. Trust release users (trust n username mentioned in voting mail, if more than one user, &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># just repeat the steps in turn or use the script below)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg --edit-key &lt;span style="color:#000">$USER&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># input the username, enter the interactive mode&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gpg&amp;gt; trust
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...output options..
@@ -262,10 +265,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># hugegraph-hubble&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/start-hubble.sh
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># hugegraph-computer&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/start-computer.sh -d &lt;span style="color:#204a87">local&lt;/span> -r master
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>more reference official website: https://hugegraph.apache.org/cn/docs/quickstart
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>more reference official website: https://hugegraph.apache.org/docs/quickstart
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Note:&lt;/strong> If a third-party dependency is introduced in the binary package, you need to update the LICENSE and add the third-party dependent LICENSE; if the third-party dependent LICENSE is Apache 2.0, and the corresponding project contains NOTICE, you also need to update Our NOTICE file&lt;/p>
 &lt;h4 id="5-check-the-official-website-and-github-and-other-pages">5. Check the official website and GitHub and other pages&lt;/h4>
 &lt;ol>
@@ -275,21 +275,36 @@
 &lt;/ol>
 &lt;h2 id="mail-template">Mail Template&lt;/h2>
 &lt;p>After the check &amp;amp; test, you should reply the mail with the following content: (normal devs &amp;amp; PMC)&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>+1 (non-binding)
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>[] +1 approve
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[] +0 no opinion
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[] -1 disapprove with the reason
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>+1 (non-binding)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>I checked:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">1.&lt;/span> All download links are valid
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">2.&lt;/span> Checksum and signature are OK
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">3.&lt;/span> LICENSE and NOTICE are exist
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">4.&lt;/span> Build successfully on macOS(Big Sur)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">5.&lt;/span> ....
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1.Download link/tag in mail are valid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2.Checksum and GPG signatures are OK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>3.LICENSE &lt;span style="color:#a40000">&amp;amp;&lt;/span> NOTICE &lt;span style="color:#a40000">&amp;amp;&lt;/span> DISCLAIMER are exist
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4.Build successfully on XX OS &lt;span style="color:#a40000">&amp;amp;&lt;/span> Version XX
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>5.No unexpected binary files
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>6.Date is right in the NOTICE file
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>7.Compile from source is fine under JavaXX
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>8.No empty file &lt;span style="color:#a40000">&amp;amp;&lt;/span> directory found
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">9.&lt;/span> Test running XXX service OK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">10.&lt;/span> ....
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>and the PMC members should reply with &lt;code>binding&lt;/code>, it&amp;rsquo;s important for summary the valid votes:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>+1 (binding)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>I checked:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">1.&lt;/span> All download links are valid
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">2.&lt;/span> Checksum and signature are OK
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">3.&lt;/span> LICENSE and NOTICE are exist
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">4.&lt;/span> Build successfully on macOS(Big Sur)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">5.&lt;/span> ....
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1.Download link/tag in mail are valid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2.Checksum and GPG signatures are OK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>3.LICENSE &lt;span style="color:#a40000">&amp;amp;&lt;/span> NOTICE &lt;span style="color:#a40000">&amp;amp;&lt;/span> DISCLAIMER are exist
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4.Build successfully on XX OS &lt;span style="color:#a40000">&amp;amp;&lt;/span> Version XX
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>5.No unexpected binary files
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>6.Date is right in the NOTICE file
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>7.Compile from source is fine under JavaXX
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>8.No empty file &lt;span style="color:#a40000">&amp;amp;&lt;/span> directory found
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">9.&lt;/span> Test running XX process OK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">10.&lt;/span> ....
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Setup Server in IDEA</title><link>/docs/contribution-guidelines/hugegraph-server-idea-setup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/contribution-guidelines/hugegraph-server-idea-setup/</guid><description>
 &lt;blockquote>
 &lt;p>NOTE: The following configuration is for reference purposes only, and has been tested on Linux and macOS platforms based on &lt;a href="https://github.com/apache/incubator-hugegraph/commit/a946ad1de4e8f922251a5241ffc957c33379677f">this version&lt;/a>.&lt;/p>

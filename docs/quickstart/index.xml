@@ -307,7 +307,7 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;details>
 &lt;summary> Click to expand/collapse Cassandra configuration and startup methods&lt;/summary>
 &lt;p>When using Docker, we can use Cassandra as the backend storage. We highly recommend using docker-compose directly to manage both the server and Cassandra.&lt;/p>
-&lt;p>The sample &lt;code>docker-compose.yml&lt;/code> can be obtained on &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/docker/example/docker-compose-cassandra.yml">github&lt;/a>, and you can start it with &lt;code>docker-compose up -d&lt;/code>. (If using Cassandra 4.0 as the backend storage, it takes approximately two minutes to initialize. Please be patient.)&lt;/p>
+&lt;p>The sample &lt;code>docker-compose.yml&lt;/code> can be obtained on &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/docker/example/docker-compose-cassandra.yml">github&lt;/a>, and you can start it with &lt;code>docker-compose up -d&lt;/code>. (If using Cassandra 4.0 as the backend storage, it takes approximately two minutes to initialize. Please be patient.)&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;3&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -365,7 +365,7 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;/li>
 &lt;li>
 &lt;p>Use &lt;code>docker-compose&lt;/code>&lt;/p>
-&lt;p>Create &lt;code>docker-compose.yml&lt;/code> as following. We should set the environment variable &lt;code>PRELOAD=true&lt;/code>. &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/src/assembly/static/scripts/example.groovy">&lt;code>example.groovy&lt;/code>&lt;/a> is a predefined script to preload the sample data. If needed, we can mount a new &lt;code>example.groovy&lt;/code> to change the preload data.&lt;/p>
+&lt;p>Create &lt;code>docker-compose.yml&lt;/code> as following. We should set the environment variable &lt;code>PRELOAD=true&lt;/code>. &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/src/assembly/static/scripts/example.groovy">&lt;code>example.groovy&lt;/code>&lt;/a> is a predefined script to preload the sample data. If needed, we can mount a new &lt;code>example.groovy&lt;/code> to change the preload data.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">graph&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -473,11 +473,11 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;/div>
 &lt;p>When using Swagger UI to debug the API provided by HugeGraph, if HugeGraph Server turns on authentication mode, you can enter authentication information on the Swagger page.&lt;/p>
 &lt;div style="text-align: center;">
-&lt;img src="/docs/images/images-server/621swaggerui设置鉴权位置示例.png" alt="image">
+&lt;img src="/docs/images/images-server/621swaggerui-where-set-auth-example.png" alt="image">
 &lt;/div>
 &lt;p>Currently HugeGraph supports setting authentication information in two forms: Basic and Bearer.&lt;/p>
 &lt;div style="text-align: center;">
-&lt;img src="/docs/images/images-server/621swaggerui设置鉴权示例.png" alt="image">
+&lt;img src="/docs/images/images-server/621swaggerui-set-auth-example.png" alt="image">
 &lt;/div>
 &lt;h3 id="7-stop-server">7 Stop Server&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">$cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>

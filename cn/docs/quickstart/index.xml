@@ -53,7 +53,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>执行成功后，在 hugegraph 目录下生成 &lt;code>*hugegraph-*.tar.gz&lt;/code> 文件，就是编译生成的 tar 包。&lt;/p>
 &lt;h4 id="33-使用-docker-容器-便于测试">3.3 使用 Docker 容器 (便于&lt;strong>测试&lt;/strong>)&lt;/h4>
 &lt;!-- 3.1 is linked by other place. if change 3.1's title, please check -->
-&lt;p>可参考 &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/README.md">Docker 部署方式&lt;/a>。&lt;/p>
+&lt;p>可参考 &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/README.md">Docker 部署方式&lt;/a>。&lt;/p>
 &lt;p>我们可以使用 &lt;code>docker run -itd --name=graph -p 8080:8080 hugegraph/hugegraph&lt;/code> 去快速启动一个内置了 &lt;code>RocksDB&lt;/code> 的 &lt;code>Hugegraph server&lt;/code>.&lt;/p>
 &lt;p>可选项：&lt;/p>
 &lt;ol>
@@ -287,7 +287,7 @@
 &lt;details>
 &lt;summary>点击展开/折叠 Cassandra 配置及启动方法&lt;/summary>
 &lt;p>在使用 Docker 的时候，我们可以使用 Cassandra 作为后端存储。我们更加推荐直接使用 docker-compose 来对于 server 以及 Cassandra 进行统一管理&lt;/p>
-&lt;p>样例的 &lt;code>docker-compose.yml&lt;/code> 可以在 &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/docker/example/docker-compose-cassandra.yml">github&lt;/a> 中获取，使用 &lt;code>docker-compose up -d&lt;/code> 启动。(如果使用 cassandra 4.0 版本作为后端存储，则需要大约两个分钟初始化，请耐心等待)&lt;/p>
+&lt;p>样例的 &lt;code>docker-compose.yml&lt;/code> 可以在 &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/docker/example/docker-compose-cassandra.yml">github&lt;/a> 中获取，使用 &lt;code>docker-compose up -d&lt;/code> 启动。(如果使用 cassandra 4.0 版本作为后端存储，则需要大约两个分钟初始化，请耐心等待)&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;3&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -345,7 +345,7 @@
 &lt;/li>
 &lt;li>
 &lt;p>使用&lt;code>docker-compose&lt;/code>&lt;/p>
-&lt;p>创建&lt;code>docker-compose.yml&lt;/code>，具体文件如下，在环境变量中设置 PRELOAD=true。其中，&lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/src/assembly/static/scripts/example.groovy">&lt;code>example.groovy&lt;/code>&lt;/a> 是一个预定义的脚本，用于预加载样例数据。如果有需要，可以通过挂载新的 &lt;code>example.groovy&lt;/code> 脚本改变预加载的数据。&lt;/p>
+&lt;p>创建&lt;code>docker-compose.yml&lt;/code>，具体文件如下，在环境变量中设置 PRELOAD=true。其中，&lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/src/assembly/static/scripts/example.groovy">&lt;code>example.groovy&lt;/code>&lt;/a> 是一个预定义的脚本，用于预加载样例数据。如果有需要，可以通过挂载新的 &lt;code>example.groovy&lt;/code> 脚本改变预加载的数据。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">graph&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -455,11 +455,11 @@
 &lt;/div>
 &lt;p>在使用 Swagger UI 调试 HugeGraph 提供的 API 时，如果 HugeGraph Server 开启了鉴权模式，可以在 Swagger 页面输入鉴权信息。&lt;/p>
 &lt;div style="text-align: center;">
-&lt;img src="/docs/images/images-server/621swaggerui设置鉴权位置示例.png" alt="image">
+&lt;img src="/docs/images/images-server/621swaggerui-where-set-auth-example.png" alt="image">
 &lt;/div>
 &lt;p>当前 HugeGraph 支持基于 Basic 和 Bearer 两种形式设置鉴权信息。&lt;/p>
 &lt;div style="text-align: center;">
-&lt;img src="/docs/images/images-server/621swaggerui设置鉴权示例.png" alt="image">
+&lt;img src="/docs/images/images-server/621swaggerui-set-auth-example.png" alt="image">
 &lt;/div>
 &lt;h3 id="7-停止-server">7 停止 Server&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">$cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
