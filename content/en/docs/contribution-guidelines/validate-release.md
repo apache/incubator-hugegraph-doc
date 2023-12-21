@@ -69,7 +69,8 @@ gpg: key 28DCAED849C4180E: public key "coderzc (CODE SIGNING KEY) <zhaocong@apac
 gpg: Total number processed: 3
 gpg:               imported: 3
 
-# 2. Trust release users (trust n username mentioned in voting mail, if more than one user, just repeat the steps in turn or use the script below)
+# 2. Trust release users (trust n username mentioned in voting mail, if more than one user, 
+# just repeat the steps in turn or use the script below)
 gpg --edit-key $USER # input the username, enter the interactive mode
 gpg> trust
 ...output options..
