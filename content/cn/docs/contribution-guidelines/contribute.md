@@ -79,10 +79,10 @@ Note: In order to be consistent with the code style easily, if you use [IDEA](ht
 ##### 3.2.1 添加第三方依赖
 
 如果我们要在 `HugeGraph` 项目中添加新的第三方依赖, 我们需要做下面的几件事情：
-1. 找到第三方依赖的仓库，将依赖的 `license` 文件放到 [./hugegraph-dist/release-docs/licenses/](https://github.com/apache/incubator-hugegraph/tree/master/hugegraph-dist/release-docs/licenses) 路径下。
-2. 在[./hugegraph-dist/release-docs/LICENSE](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/release-docs/LICENSE) 中声明该依赖的 `LICENSE` 信息。
-3. 找到仓库里的 NOTICE 文件，将其追加到 [./hugegraph-dist/release-docs/NOTICE](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/release-docs/NOTICE) 文件后面（如果没有NOTICE文件则跳过这一步）。
-4. 本地执行[./hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh) 脚本来更新依赖列表[known-dependencies.txt](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/scripts/dependency/known-dependencies.txt) (或者手动更新)。
+1. 找到第三方依赖的仓库，将依赖的 `license` 文件放到 [./hugegraph-dist/release-docs/licenses/](https://github.com/apache/incubator-hugegraph/tree/master/hugegraph-server/hugegraph-dist/release-docs/licenses) 路径下。
+2. 在[./hugegraph-dist/release-docs/LICENSE](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/release-docs/LICENSE) 中声明该依赖的 `LICENSE` 信息。
+3. 找到仓库里的 NOTICE 文件，将其追加到 [./hugegraph-dist/release-docs/NOTICE](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/release-docs/NOTICE) 文件后面（如果没有NOTICE文件则跳过这一步）。
+4. 本地执行[./hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh) 脚本来更新依赖列表[known-dependencies.txt](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/scripts/dependency/known-dependencies.txt) (或者手动更新)。
 
 **例如**：在项目中引入了第三方新依赖 -> `ant-1.9.1.jar`
 - 项目源码位于：https://github.com/apache/ant/tree/rel/1.9.1

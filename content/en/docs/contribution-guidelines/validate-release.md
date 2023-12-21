@@ -36,10 +36,12 @@ sudo apt-get install wget -y
 # MacOS
 brew install wget
 
-# 4. Download the hugegraph-svn directory (version number, pay attention to fill in the verification version, here we take 1.0.0 as an example)
-svn co https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/
-# (Note) If svn downloads a file very slowly, you can consider wget to download a single file, as follows (or consider using a proxy)
-wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
+# 4. Download the hugegraph-svn directory 
+# For version number, pay attention to fill in the verification version
+svn co https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.x.x/
+# (Note) If svn downloads a file very slowly, 
+# you can consider wget to download a single file, as follows (or consider using a proxy)
+wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.x.x/apache-hugegraph-toolchain-incubating-1.x.x.tar.gz
 ```
 
 #### 2. check hash value
@@ -67,7 +69,8 @@ gpg: key 28DCAED849C4180E: public key "coderzc (CODE SIGNING KEY) <zhaocong@apac
 gpg: Total number processed: 3
 gpg:               imported: 3
 
-# 2. Trust release users (trust n username mentioned in voting mail, if more than one user, just repeat the steps in turn or use the script below)
+# 2. Trust release users (trust n username mentioned in voting mail, if more than one user, 
+#      just repeat the steps in turn or use the script below)
 gpg --edit-key $USER # input the username, enter the interactive mode
 gpg> trust
 ...output options..
@@ -136,10 +139,7 @@ bin/hugegraph-loader.sh -f path -g graph -s schema
 # hugegraph-hubble
 bin/start-hubble.sh
 
-# hugegraph-computer
-bin/start-computer.sh -d local -r master
-
-more reference official website: https://hugegraph.apache.org/cn/docs/quickstart
+more reference official website: https://hugegraph.apache.org/docs/quickstart
 ```
 
 **Note:** If a third-party dependency is introduced in the binary package, you need to update the LICENSE and add the third-party dependent LICENSE; if the third-party dependent LICENSE is Apache 2.0, and the corresponding project contains NOTICE, you also need to update Our NOTICE file
@@ -153,24 +153,43 @@ more reference official website: https://hugegraph.apache.org/cn/docs/quickstart
 ## Mail Template
 
 After the check & test, you should reply the mail with the following content: (normal devs & PMC)
+
+```markdown
+[] +1 approve
+
+[] +0 no opinion
+
+[] -1 disapprove with the reason
+```
+
 ```markdown
 +1 (non-binding)
 I checked:
-1. All download links are valid
-2. Checksum and signature are OK
-3. LICENSE and NOTICE are exist
-4. Build successfully on macOS(Big Sur) 
-5. ....
+1.Download link/tag in mail are valid
+2.Checksum and GPG signatures are OK
+3.LICENSE & NOTICE & DISCLAIMER are exist
+4.Build successfully on XX OS & Version XX
+5.No unexpected binary files
+6.Date is right in the NOTICE file
+7.Compile from source is fine under JavaXX
+8.No empty file & directory found
+9. Test running XXX service OK
+10. ....
 ```
 
 and the PMC members should reply with `binding`, it's important for summary the valid votes:
 ```markdown
 +1 (binding)
 I checked:
-1. All download links are valid
-2. Checksum and signature are OK
-3. LICENSE and NOTICE are exist
-4. Build successfully on macOS(Big Sur) 
-5. ....
+1.Download link/tag in mail are valid
+2.Checksum and GPG signatures are OK
+3.LICENSE & NOTICE & DISCLAIMER are exist
+4.Build successfully on XX OS & Version XX
+5.No unexpected binary files
+6.Date is right in the NOTICE file
+7.Compile from source is fine under JavaXX
+8.No empty file & directory found
+9. Test running XX process OK
+10. ....
 ```
 
