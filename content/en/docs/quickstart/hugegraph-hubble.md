@@ -35,40 +35,12 @@ For Gremlin tasks that need to traverse the whole graph, index creation and reco
 ### 2 Deploy
 
 There are three ways to deplot `hugegraph-hubble`
-- Use Docker (recommended)
+
 - Download the Toolchain binary package
 - Source code compilation
+- Use Docker (Convenient for Test/Dev)
 
-#### 2.1 Use docker (recommended)
-
-> **Special Note**: If you are starting `hubble` with Docker, and `hubble` and the server are on the same host. When configuring the hostname for the graph on the Hubble web page, please do not directly set it to `localhost/127.0.0.1`. This will refer to the `hubble` container internally rather than the host machine, resulting in a connection failure to the server.
->
->  If `hubble` and `server` is in the same docker network, we **recommend** using the `container_name` (in our example, it is `graph`) as the hostname, and `8080` as the port. Or you can use the **host IP** as the hostname, and the port is configured by the host for the server.
-
-We can use `docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble` to quick start [hubble](https://hub.docker.com/r/hugegraph/hubble).
-
-Alternatively, you can use Docker Compose to start `hubble`. Additionally, if `hubble` and the graph are in the same Docker network, you can access the graph using the container name of the graph, eliminating the need for the host machine's IP address.
-
-Use `docker-compose up -d`，`docker-compose.yml` is following:
-
-```yaml
-version: '3'
-services:
-  server:
-    image: hugegraph/hugegraph
-    container_name: graph
-    ports:
-      - 8080:8080
-
-  hubble:
-    image: hugegraph/hubble
-    container_name: hubble
-    ports:
-      - 8088:8088
-```
-
-
-#### 2.2 Download the Toolchain binary package
+#### 2.1 Download the Toolchain binary package
 
 `hubble` is in the `toolchain` project. First, download the binary tar tarball
 
@@ -97,7 +69,7 @@ starting HugeGraphHubble ..............timed out with http status 502
 
 Then use a web browser to access `ip:8088` and you can see the `Hubble` page. You can stop the service using bin/stop-hubble.sh.
 
-#### 2.3 Source code compilation
+#### 2.2 Source code compilation
 
 **Note**: Compiling Hubble requires the user's local environment to have Node.js V16.x and yarn installed.
 
@@ -142,6 +114,40 @@ Run `hubble`
 ```bash
 bin/start-hubble.sh -d
 ```
+
+#### 2.3 Use docker (Convenient for Test/Dev)
+
+> **Special Note**: If you are starting `hubble` with Docker, and `hubble` and the server are on the same host. When configuring the hostname for the graph on the Hubble web page, please do not directly set it to `localhost/127.0.0.1`. This will refer to the `hubble` container internally rather than the host machine, resulting in a connection failure to the server.
+>
+>  If `hubble` and `server` is in the same docker network, we **recommend** using the `container_name` (in our example, it is `graph`) as the hostname, and `8080` as the port. Or you can use the **host IP** as the hostname, and the port is configured by the host for the server.
+
+We can use `docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble` to quick start [hubble](https://hub.docker.com/r/hugegraph/hubble).
+
+Alternatively, you can use Docker Compose to start `hubble`. Additionally, if `hubble` and the graph are in the same Docker network, you can access the graph using the container name of the graph, eliminating the need for the host machine's IP address.
+
+Use `docker-compose up -d`，`docker-compose.yml` is following:
+
+```yaml
+version: '3'
+services:
+  server:
+    image: hugegraph/hugegraph
+    container_name: graph
+    ports:
+      - 8080:8080
+
+  hubble:
+    image: hugegraph/hubble
+    container_name: hubble
+    ports:
+      - 8088:8088
+```
+
+> Note: 
+>
+> 1. The docker image of hugegraph-hubble is a convenience release to start hugegraph-hubble quickly, but not **official distribution** artifacts. You can find more details from [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub).
+> 
+> 2. Recommand to use `release tag`(like `1.0.0`) for the stable version. Use `latest` tag to experience the newest functions in development.
 
 ### 3	Platform Workflow
 
