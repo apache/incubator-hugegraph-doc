@@ -454,7 +454,7 @@ In [3.3 Use Docker container](#33-use-docker-container), we have introduced how 
 
 When using Docker, we can use Cassandra as the backend storage. We highly recommend using docker-compose directly to manage both the server and Cassandra.
 
-The sample `docker-compose.yml` can be obtained on [github](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/docker/example/docker-compose-cassandra.yml), and you can start it with `docker-compose up -d`. (If using Cassandra 4.0 as the backend storage, it takes approximately two minutes to initialize. Please be patient.)
+The sample `docker-compose.yml` can be obtained on [github](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/docker/example/docker-compose-cassandra.yml), and you can start it with `docker-compose up -d`. (If using Cassandra 4.0 as the backend storage, it takes approximately two minutes to initialize. Please be patient.)
 
 ```yaml
 version: "3"
@@ -521,7 +521,7 @@ Set the environment variable `PRELOAD=true` when starting Docker in order to loa
 
 2. Use `docker-compose`
 
-    Create `docker-compose.yml` as following. We should set the environment variable `PRELOAD=true`. [`example.groovy`](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-dist/src/assembly/static/scripts/example.groovy) is a predefined script to preload the sample data. If needed, we can mount a new `example.groovy` to change the preload data.
+    Create `docker-compose.yml` as following. We should set the environment variable `PRELOAD=true`. [`example.groovy`](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/src/assembly/static/scripts/example.groovy) is a predefined script to preload the sample data. If needed, we can mount a new `example.groovy` to change the preload data.
 
     ```yaml
     version: '3'
@@ -666,13 +666,13 @@ You can also visit `localhost:8080/swagger-ui/index.html` to check the API.
 When using Swagger UI to debug the API provided by HugeGraph, if HugeGraph Server turns on authentication mode, you can enter authentication information on the Swagger page.
 
 <div style="text-align: center;">
-  <img src="/docs/images/images-server/621swaggerui设置鉴权位置示例.png" alt="image">
+  <img src="/docs/images/images-server/621swaggerui-where-set-auth-example.png" alt="image">
 </div>
 
 Currently HugeGraph supports setting authentication information in two forms: Basic and Bearer.
 
 <div style="text-align: center;">
-  <img src="/docs/images/images-server/621swaggerui设置鉴权示例.png" alt="image">
+  <img src="/docs/images/images-server/621swaggerui-set-auth-example.png" alt="image">
 </div>
 
 ### 7 Stop Server
