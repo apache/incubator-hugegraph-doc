@@ -115,60 +115,73 @@ weight: 1
 * fix: remove okhttp1 due to conflicts risk by @imbajin in https://github.com/apache/incubator-hugegraph-computer/pull/294
 
 ### hugegraph-toolchain
-* chore: use fixed node.js version 16 to avoid ci problem by @wanganjuan in https://github.com/apache/incubator-hugegraph-toolchain/pull/437
-* use node.js version 16 to fixed ci problem by @wanganjuan in https://github.com/apache/incubator-hugegraph-toolchain/pull/441
-* chore: remove apache stage repo & update mail rule by @z7658329 in https://github.com/apache/incubator-hugegraph-toolchain/pull/433
-* chore(hubble): use latest code in Dockerfile by @simon824 in https://github.com/apache/incubator-hugegraph-toolchain/pull/440
-* chore: remove maven plugin for docker build by @simon824 in https://github.com/apache/incubator-hugegraph-toolchain/pull/443
-* refact: clean extra store file in all modules by @imbajin in https://github.com/apache/incubator-hugegraph-toolchain/pull/434
-* chore: improve spark parallel by @zyxxoo in https://github.com/apache/incubator-hugegraph-toolchain/pull/450
-* set default data  when create graph by @wanganjuan in https://github.com/apache/incubator-hugegraph-toolchain/pull/447
-* doc: fix build status badge link by @liuxiaocs7 in https://github.com/apache/incubator-hugegraph-toolchain/pull/455
-* chore: keep hadoop-hdfs-client and hadoop-common version consistent by @chenlixuan in https://github.com/apache/incubator-hugegraph-toolchain/pull/457
-* doc: add basic contact info & QR code in README by @liuxiaocs7 in https://github.com/apache/incubator-hugegraph-toolchain/pull/462
-* fix: hugegraph-spark-loader shell string length limit by @gaoyuan5251 in https://github.com/apache/incubator-hugegraph-toolchain/pull/469
-* fix: Spark loader Task not serializable by @haohao0103 in https://github.com/apache/incubator-hugegraph-toolchain/pull/471
-* chore: disable PR up-to-date in branch by @simon824 in https://github.com/apache/incubator-hugegraph-toolchain/pull/473
-* chore: auto add pr auto label by path by @liuxiaocs7 in https://github.com/apache/incubator-hugegraph-toolchain/pull/466
-* fix:Spark loader meet Exception: Class is not registered by @haohao0103 in https://github.com/apache/incubator-hugegraph-toolchain/pull/470
-* Fix convert numbers to strings by @liuxiaocs7 in https://github.com/apache/incubator-hugegraph-toolchain/pull/465
-* chore: update .asf.yaml for mail rule by @imbajin in https://github.com/apache/incubator-hugegraph-toolchain/pull/474
-* doc: update reademe  by @msgui in https://github.com/apache/incubator-hugegraph-toolchain/pull/475
-* chore: reduce mail to dev list by @conghuhu in https://github.com/apache/incubator-hugegraph-toolchain/pull/479
-* chore: unify the dependencies versions of the entire project by @conghuhu in https://github.com/apache/incubator-hugegraph-toolchain/pull/478
-* fix: Spark with loader has dependency conflicts by @haohao0103 in https://github.com/apache/incubator-hugegraph-toolchain/pull/480
-* fix: Spark Loader example schema and struct mismatch by @liuxiaocs7 in https://github.com/apache/incubator-hugegraph-toolchain/pull/504
-* chore(deps): bump word-wrap from 1.2.3 to 1.2.4 in /hugegraph-hubble/hubble-fe by @dependabot in https://github.com/apache/incubator-hugegraph-toolchain/pull/494
-* feat: add pr template by @liuxiaocs7 in https://github.com/apache/incubator-hugegraph-toolchain/pull/498
-* fix(loader): error log by @liuxiaocs7 in https://github.com/apache/incubator-hugegraph-toolchain/pull/499
-* fix: checkstyle && add suppressions.xml by @liuxiaocs7 in https://github.com/apache/incubator-hugegraph-toolchain/pull/500
-* fix(loader): resolve error in loader script by @lzyxx77 in https://github.com/apache/incubator-hugegraph-toolchain/pull/510
-* fix: base-ref/head-ref missed in dependency-check-ci on branch push by @msgui in https://github.com/apache/incubator-hugegraph-toolchain/pull/516
-* fix yarn network connection on linux/arm64 arch by @simon824 in https://github.com/apache/incubator-hugegraph-toolchain/pull/519
-* feat(loader): support kafka as datasource by @liuxiaocs7 in https://github.com/apache/incubator-hugegraph-toolchain/pull/506
-* doc(hubble): add docker-compose to start with server by @aroundabout in https://github.com/apache/incubator-hugegraph-toolchain/pull/522
-* feat(spark): support spark-sink connector for loader by @liuxiaocs7 in https://github.com/apache/incubator-hugegraph-toolchain/pull/497
-* chore(ci): add spark & go client module auto labeler by @liuxiaocs7 in https://github.com/apache/incubator-hugegraph-toolchain/pull/528
-* feat: support docker for loader by @aroundabout in https://github.com/apache/incubator-hugegraph-toolchain/pull/530
-* fix(hubble): drop-down box could not display all options by @wanganjuan in https://github.com/apache/incubator-hugegraph-toolchain/pull/535
-* chore(ci): add stage profile settings by @zhenyuT in https://github.com/apache/incubator-hugegraph-toolchain/pull/536
-* chore(deps): bump browserify-sign from 4.2.1 to 4.2.2 in /hugegraph-hubble/hubble-fe by @dependabot in https://github.com/apache/incubator-hugegraph-toolchain/pull/529
-* chore(client): increase the api num as the latest server commit + 10 by @aroundabout in https://github.com/apache/incubator-hugegraph-toolchain/pull/546
-* feat: update common version and remove jersey code by @zhenyuT in https://github.com/apache/incubator-hugegraph-toolchain/pull/538
-* fix(hubble): build with node and yarn by @liuxiaocs7 in https://github.com/apache/incubator-hugegraph-toolchain/pull/543
-* fix(loader): loader options by @liuxiaocs7 in https://github.com/apache/incubator-hugegraph-toolchain/pull/548
-* chore(deps): bump async from 2.6.3 to 2.6.4 in /hugegraph-hubble/hubble-fe by @dependabot in https://github.com/apache/incubator-hugegraph-toolchain/pull/484
-* chore(deps): bump semver from 5.7.1 to 5.7.2 in /hugegraph-hubble/hubble-fe by @dependabot in https://github.com/apache/incubator-hugegraph-toolchain/pull/491
-* fix base ref head ref and fix checkstyle by @liuxiaocs7 in https://github.com/apache/incubator-hugegraph-toolchain/pull/551
-* feature(client): support go client for hugegraph by @izliang in https://github.com/apache/incubator-hugegraph-toolchain/pull/514
-* refact(client): update tests for new OLTP traverser APIs by @DanGuge in https://github.com/apache/incubator-hugegraph-toolchain/pull/550
-* fix(hubble): parent override children dep version by @imbajin in https://github.com/apache/incubator-hugegraph-toolchain/pull/549
-* feat(spark): install hugegraph from source by @liuxiaocs7 in https://github.com/apache/incubator-hugegraph-toolchain/pull/552
-* feat(client): support edgeExistence api by @msgui in https://github.com/apache/incubator-hugegraph-toolchain/pull/544
-* fix: exclude okhttp1 which has different groupID with okhttp3 by @imbajin in https://github.com/apache/incubator-hugegraph-toolchain/pull/555
-* fix: github action build docker image failed during the release 1.2 process by @aroundabout in https://github.com/apache/incubator-hugegraph-toolchain/pull/556
-* fix: github action build hubble image failed by @aroundabout in https://github.com/apache/incubator-hugegraph-toolchain/pull/557
-* fix: build error with npm not exist & tiny improve by @imbajin in https://github.com/apache/incubator-hugegraph-toolchain/pull/558
+
+#### API Changes
+
+- feat(client): support edgeExistence api ([#544](https://github.com/apache/incubator-hugegraph-toolchain/pull/544))
+- refact(client): update tests for new OLTP traverser APIs ([#550](https://github.com/apache/incubator-hugegraph-toolchain/pull/550))
+
+
+#### Feature Changes
+
+- feat(spark): support spark-sink connector for loader ([#497](https://github.com/apache/incubator-hugegraph-toolchain/pull/497))
+- feat(loader): support kafka as datasource ([#506](https://github.com/apache/incubator-hugegraph-toolchain/pull/506))
+- feat(client): support go client for hugegraph ([#514](https://github.com/apache/incubator-hugegraph-toolchain/pull/514))
+- feat(loader): support docker for loader ([#530](https://github.com/apache/incubator-hugegraph-toolchain/pull/530))
+- feat: update common version and remove jersey code ([#538](https://github.com/apache/incubator-hugegraph-toolchain/pull/538))
+
+
+#### Bug Fix
+
+- fix: convert numbers to strings ([#465](https://github.com/apache/incubator-hugegraph-toolchain/pull/465))
+- fix: hugegraph-spark-loader shell string length limit ([#469](https://github.com/apache/incubator-hugegraph-toolchain/pull/469))
+- fix: spark loader meet Exception: Class is not registered ([#470](https://github.com/apache/incubator-hugegraph-toolchain/pull/470))
+- fix: spark loader Task not serializable ([#471](https://github.com/apache/incubator-hugegraph-toolchain/pull/471))
+- fix: spark with loader has dependency conflicts ([#480](https://github.com/apache/incubator-hugegraph-toolchain/pull/480))
+- fix: spark-loader example schema and struct mismatch ([#504](https://github.com/apache/incubator-hugegraph-toolchain/pull/504))
+- fix(loader): error log ([#499](https://github.com/apache/incubator-hugegraph-toolchain/pull/499))
+- fix: checkstyle && add suppressions.xml ([#500](https://github.com/apache/incubator-hugegraph-toolchain/pull/500))
+- fix(loader): resolve error in loader script ([#510](https://github.com/apache/incubator-hugegraph-toolchain/pull/510))
+- fix: base-ref/head-ref missed in dependency-check-ci on branch push ([#516](https://github.com/apache/incubator-hugegraph-toolchain/pull/516), [#551](https://github.com/apache/incubator-hugegraph-toolchain/pull/551))
+- fix yarn network connection on linux/arm64 arch ([#519](https://github.com/apache/incubator-hugegraph-toolchain/pull/519))
+- fix(hubble): drop-down box could not display all options ([#535](https://github.com/apache/incubator-hugegraph-toolchain/pull/535))
+- fix(hubble): build with node and yarn ([#543](https://github.com/apache/incubator-hugegraph-toolchain/pull/543))
+- fix(loader): loader options ([#548](https://github.com/apache/incubator-hugegraph-toolchain/pull/548))
+- fix(hubble): parent override children dep version ([#549](https://github.com/apache/incubator-hugegraph-toolchain/pull/549))
+- fix: exclude okhttp1 which has different groupID with okhttp3 ([#555](https://github.com/apache/incubator-hugegraph-toolchain/pull/555))
+- fix: github action build docker image failed ([#556](https://github.com/apache/incubator-hugegraph-toolchain/pull/556), [#557](https://github.com/apache/incubator-hugegraph-toolchain/pull/557))
+- fix: build error with npm not exist & tiny improve ([#558](https://github.com/apache/incubator-hugegraph-toolchain/pull/558))
+
+
+#### Option Changes
+
+- set default data when create graph ([#447](https://github.com/apache/incubator-hugegraph-toolchain/pull/447))
+
+
+#### Other Changes
+
+- chore: remove apache stage repo & update mail rule ([#433](https://github.com/apache/incubator-hugegraph-toolchain/pull/433), [#474](https://github.com/apache/incubator-hugegraph-toolchain/pull/474), [#479](https://github.com/apache/incubator-hugegraph-toolchain/pull/479))
+- refact: clean extra store file in all modules ([#434](https://github.com/apache/incubator-hugegraph-toolchain/pull/434))
+- chore: use fixed node.js version 16 to avoid ci problem ([#437](https://github.com/apache/incubator-hugegraph-toolchain/pull/437), [#441](https://github.com/apache/incubator-hugegraph-toolchain/pull/441))
+- chore(hubble): use latest code in Dockerfile ([#440](https://github.com/apache/incubator-hugegraph-toolchain/pull/440))
+- chore: remove maven plugin for docker build ([#443](https://github.com/apache/incubator-hugegraph-toolchain/pull/443))
+- chore: improve spark parallel ([#450](https://github.com/apache/incubator-hugegraph-toolchain/pull/450))
+- doc: fix build status badge link ([#455](https://github.com/apache/incubator-hugegraph-toolchain/pull/455))
+- chore: keep hadoop-hdfs-client and hadoop-common version consistent ([#457](https://github.com/apache/incubator-hugegraph-toolchain/pull/457))
+- doc: add basic contact info & QR code in README ([#462](https://github.com/apache/incubator-hugegraph-toolchain/pull/462), [#475](https://github.com/apache/incubator-hugegraph-toolchain/pull/475))
+- chore: disable PR up-to-date in branch ([#473](https://github.com/apache/incubator-hugegraph-toolchain/pull/473))
+- chore: auto add pr auto label by path ([#466](https://github.com/apache/incubator-hugegraph-toolchain/pull/466), [#528](https://github.com/apache/incubator-hugegraph-toolchain/pull/528))
+- chore: unify the dependencies versions of the entire project ([#478](https://github.com/apache/incubator-hugegraph-toolchain/pull/478))
+- chore(deps): bump word-wrap, browserify-sign, async, semver in hubble-fe ([#494](https://github.com/apache/incubator-hugegraph-toolchain/pull/494), [#529](https://github.com/apache/incubator-hugegraph-toolchain/pull/529), [#484](https://github.com/apache/incubator-hugegraph-toolchain/pull/484), [#491](https://github.com/apache/incubator-hugegraph-toolchain/pull/491))
+- chore: add pr template ([#498](https://github.com/apache/incubator-hugegraph-toolchain/pull/498))
+- doc(hubble): add docker-compose to start with server ([#522](https://github.com/apache/incubator-hugegraph-toolchain/pull/522))
+- chore(ci): add stage profile settings ([#536](https://github.com/apache/incubator-hugegraph-toolchain/pull/536))
+- chore(client): increase the api num as the latest server commit + 10 ([#546](https://github.com/apache/incubator-hugegraph-toolchain/pull/546))
+- chore(spark): install hugegraph from source ([#552](https://github.com/apache/incubator-hugegraph-toolchain/pull/552))
+- doc: adjust docker related desc in readme ([#559](https://github.com/apache/incubator-hugegraph-toolchain/pull/559))
+- chore(license): update license for 1.2 ([#560](https://github.com/apache/incubator-hugegraph-toolchain/pull/560), [#561](https://github.com/apache/incubator-hugegraph-toolchain/pull/561))
+
+
 
 ### hugegraph-commons
 * fix(common): handle spring-boot2/jersey dependency conflicts by @z7658329 in https://github.com/apache/incubator-hugegraph-commons/pull/131
