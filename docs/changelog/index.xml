@@ -243,38 +243,47 @@
 &lt;li>fix: TinkerPop unit test lack some lables by @zyxxoo in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2387">https://github.com/apache/incubator-hugegraph/pull/2387&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="hugegraph-computer">hugegraph-computer&lt;/h3>
+&lt;h4 id="feature-changes">Feature Changes&lt;/h4>
 &lt;ul>
-&lt;li>remove apache stage repo &amp;amp; update notification rule by @z7658329 in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/232">https://github.com/apache/incubator-hugegraph-computer/pull/232&lt;/a>&lt;/li>
-&lt;li>chore: fix empty license file by @simon824 in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/233">https://github.com/apache/incubator-hugegraph-computer/pull/233&lt;/a>&lt;/li>
-&lt;li>chore: enhance mailbox settings &amp;amp; enable require ci by @imbajin in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/235">https://github.com/apache/incubator-hugegraph-computer/pull/235&lt;/a>&lt;/li>
-&lt;li>fix: typo errors in start-computer.sh by @Radeity in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/238">https://github.com/apache/incubator-hugegraph-computer/pull/238&lt;/a>&lt;/li>
-&lt;li>[Feature-241] Add PULL_REQUEST_TEMPLATE by @Radeity in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/242">https://github.com/apache/incubator-hugegraph-computer/pull/242&lt;/a>&lt;/li>
-&lt;li>chore：change etcd url only for ci by @coderzc in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/245">https://github.com/apache/incubator-hugegraph-computer/pull/245&lt;/a>&lt;/li>
-&lt;li>feat: implement fast-failover for MessageRecvManager and DataClientManager by @Radeity in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/243">https://github.com/apache/incubator-hugegraph-computer/pull/243&lt;/a>&lt;/li>
-&lt;li>feat: implement parallel send data in load graph step by @Radeity in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/248">https://github.com/apache/incubator-hugegraph-computer/pull/248&lt;/a>&lt;/li>
-&lt;li>fix: superstep not take effect by @JackyYangPassion in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/237">https://github.com/apache/incubator-hugegraph-computer/pull/237&lt;/a>&lt;/li>
-&lt;li>doc: update readme &amp;amp; add QR code by @msgui in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/249">https://github.com/apache/incubator-hugegraph-computer/pull/249&lt;/a>&lt;/li>
-&lt;li>feat(core): isolate namespace for different input data source by @Radeity in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/252">https://github.com/apache/incubator-hugegraph-computer/pull/252&lt;/a>&lt;/li>
-&lt;li>doc(k8s): add building note for missing classes by @conghuhu in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/254">https://github.com/apache/incubator-hugegraph-computer/pull/254&lt;/a>&lt;/li>
-&lt;li>chore: reduce mail to dev list by @imbajin in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/255">https://github.com/apache/incubator-hugegraph-computer/pull/255&lt;/a>&lt;/li>
-&lt;li>chore: update PULL_REQUEST_TEMPLATE.md by @Radeity in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/257">https://github.com/apache/incubator-hugegraph-computer/pull/257&lt;/a>&lt;/li>
-&lt;li>feat(k8s): init operator project &amp;amp; add webhook by @Radeity in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/259">https://github.com/apache/incubator-hugegraph-computer/pull/259&lt;/a>&lt;/li>
-&lt;li>fix(k8s): remove crd declaration in operator yaml by @Radeity in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/263">https://github.com/apache/incubator-hugegraph-computer/pull/263&lt;/a>&lt;/li>
-&lt;li>add: dependency-review by @msgui in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/266">https://github.com/apache/incubator-hugegraph-computer/pull/266&lt;/a>&lt;/li>
-&lt;li>chore: correct incorrect comment by @diaohancai in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/268">https://github.com/apache/incubator-hugegraph-computer/pull/268&lt;/a>&lt;/li>
-&lt;li>refact(core): support auth config for computer task by @diaohancai in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/265">https://github.com/apache/incubator-hugegraph-computer/pull/265&lt;/a>&lt;/li>
-&lt;li>fix(k8s): modify inconsistent apiGroups by @Radeity in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/270">https://github.com/apache/incubator-hugegraph-computer/pull/270&lt;/a>&lt;/li>
-&lt;li>feat(core): support load vertex/edge snapshot by @Radeity in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/269">https://github.com/apache/incubator-hugegraph-computer/pull/269&lt;/a>&lt;/li>
-&lt;li>feat(k8s): Add MinIO as internal(default) storage by @Radeity in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/272">https://github.com/apache/incubator-hugegraph-computer/pull/272&lt;/a>&lt;/li>
-&lt;li>feat(algorithm): support random walk in computer by @diaohancai in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/274">https://github.com/apache/incubator-hugegraph-computer/pull/274&lt;/a>&lt;/li>
-&lt;li>fix(algorithm): record loop is not copied by @corgiboygsj in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/276">https://github.com/apache/incubator-hugegraph-computer/pull/276&lt;/a>&lt;/li>
-&lt;li>refactor(api): ListValue.getFirst() replaces ListValue.get(0) by @diaohancai in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/282">https://github.com/apache/incubator-hugegraph-computer/pull/282&lt;/a>&lt;/li>
-&lt;li>feat: use &amp;lsquo;foreground&amp;rsquo; delete policy to cancel k8s job by @qwtsc in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/290">https://github.com/apache/incubator-hugegraph-computer/pull/290&lt;/a>&lt;/li>
-&lt;li>feat(algorithm): support biased second order random walk by @diaohancai in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/280">https://github.com/apache/incubator-hugegraph-computer/pull/280&lt;/a>&lt;/li>
-&lt;li>Improve: Passing workerId to WorkerStat &amp;amp; Skip wait worker close if master executes failed by @coderzc in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/292">https://github.com/apache/incubator-hugegraph-computer/pull/292&lt;/a>&lt;/li>
-&lt;li>refact(core): adaptor for common 1.2 &amp;amp; fix a string of possible CI problem by @imbajin in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/286">https://github.com/apache/incubator-hugegraph-computer/pull/286&lt;/a>&lt;/li>
-&lt;li>chore: add check dependencies by @simon824 in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/293">https://github.com/apache/incubator-hugegraph-computer/pull/293&lt;/a>&lt;/li>
-&lt;li>fix: remove okhttp1 due to conflicts risk by @imbajin in &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/294">https://github.com/apache/incubator-hugegraph-computer/pull/294&lt;/a>&lt;/li>
+&lt;li>feat: implement fast-failover for MessageRecvManager and DataClientManager (&lt;a href="/apache/incubator-hugegraph-computer/pull/243">#243&lt;/a>)&lt;/li>
+&lt;li>feat: implement parallel send data in load graph step (&lt;a href="/apache/incubator-hugegraph-computer/pull/248">#248&lt;/a>)&lt;/li>
+&lt;li>feat(k8s): init operator project &amp;amp; add webhook (&lt;a href="/apache/incubator-hugegraph-computer/pull/259">#259&lt;/a>, &lt;a href="/apache/incubator-hugegraph-computer/pull/263">#263&lt;/a>)&lt;/li>
+&lt;li>feat(core): support load vertex/edge snapshot (&lt;a href="/apache/incubator-hugegraph-computer/pull/269">#269&lt;/a>)&lt;/li>
+&lt;li>feat(k8s): Add MinIO as internal(default) storage (&lt;a href="/apache/incubator-hugegraph-computer/pull/272">#272&lt;/a>)&lt;/li>
+&lt;li>feat(algorithm): support random walk in computer (&lt;a href="/apache/incubator-hugegraph-computer/pull/274">#274&lt;/a>, &lt;a href="/apache/incubator-hugegraph-computer/pull/280">#280&lt;/a>)&lt;/li>
+&lt;li>feat: use ‘foreground’ delete policy to cancel k8s job (&lt;a href="/apache/incubator-hugegraph-computer/pull/290">#290&lt;/a>)&lt;/li>
+&lt;/ul>
+&lt;h4 id="bug-fix">Bug Fix&lt;/h4>
+&lt;ul>
+&lt;li>fix: superstep not take effect (&lt;a href="/apache/incubator-hugegraph-computer/pull/237">#237&lt;/a>)&lt;/li>
+&lt;li>fix(k8s): modify inconsistent apiGroups (&lt;a href="/apache/incubator-hugegraph-computer/pull/270">#270&lt;/a>)&lt;/li>
+&lt;li>fix(algorithm): record loop is not copied (&lt;a href="/apache/incubator-hugegraph-computer/pull/276">#276&lt;/a>)&lt;/li>
+&lt;li>refact(core): adaptor for common 1.2 &amp;amp; fix a string of possible CI problem (&lt;a href="/apache/incubator-hugegraph-computer/pull/286">#286&lt;/a>)&lt;/li>
+&lt;li>fix: remove okhttp1 due to conflicts risk (&lt;a href="/apache/incubator-hugegraph-computer/pull/294">#294&lt;/a>)&lt;/li>
+&lt;li>fix(core): io.grpc.grpc-core dependency conflic (&lt;a href="/apache/incubator-hugegraph-computer/pull/296">#296&lt;/a>)&lt;/li>
+&lt;/ul>
+&lt;h4 id="option-changes">Option Changes&lt;/h4>
+&lt;ul>
+&lt;li>feat(core): isolate namespace for different input data source (&lt;a href="/apache/incubator-hugegraph-computer/pull/252">#252&lt;/a>)&lt;/li>
+&lt;li>refact(core): support auth config for computer task (&lt;a href="/apache/incubator-hugegraph-computer/pull/265">#265&lt;/a>)&lt;/li>
+&lt;/ul>
+&lt;h4 id="other-changes">Other Changes&lt;/h4>
+&lt;ul>
+&lt;li>remove apache stage repo &amp;amp; update notification rule (&lt;a href="/apache/incubator-hugegraph-computer/pull/232">#232&lt;/a>)&lt;/li>
+&lt;li>chore: fix empty license file (&lt;a href="/apache/incubator-hugegraph-computer/pull/233">#233&lt;/a>)&lt;/li>
+&lt;li>chore: enhance mailbox settings &amp;amp; enable require ci (&lt;a href="/apache/incubator-hugegraph-computer/pull/235">#235&lt;/a>)&lt;/li>
+&lt;li>fix: typo errors in start-computer.sh (&lt;a href="/apache/incubator-hugegraph-computer/pull/238">#238&lt;/a>)&lt;/li>
+&lt;li>[Feature-241] Add PULL_REQUEST_TEMPLATE (&lt;a href="/apache/incubator-hugegraph-computer/pull/242">#242&lt;/a>, &lt;a href="/apache/incubator-hugegraph-computer/pull/257">#257&lt;/a>)&lt;/li>
+&lt;li>chore：change etcd url only for ci (&lt;a href="/apache/incubator-hugegraph-computer/pull/245">#245&lt;/a>)&lt;/li>
+&lt;li>doc: update readme &amp;amp; add QR code (&lt;a href="/apache/incubator-hugegraph-computer/pull/249">#249&lt;/a>)&lt;/li>
+&lt;li>doc(k8s): add building note for missing classes (&lt;a href="/apache/incubator-hugegraph-computer/pull/254">#254&lt;/a>)&lt;/li>
+&lt;li>chore: reduce mail to dev list (&lt;a href="/apache/incubator-hugegraph-computer/pull/255">#255&lt;/a>)&lt;/li>
+&lt;li>add: dependency-review (&lt;a href="/apache/incubator-hugegraph-computer/pull/266">#266&lt;/a>)&lt;/li>
+&lt;li>chore: correct incorrect comment (&lt;a href="/apache/incubator-hugegraph-computer/pull/268">#268&lt;/a>)&lt;/li>
+&lt;li>refactor(api): ListValue.getFirst() replaces ListValue.get(0) (&lt;a href="/apache/incubator-hugegraph-computer/pull/282">#282&lt;/a>)&lt;/li>
+&lt;li>Improve: Passing workerId to WorkerStat &amp;amp; Skip wait worker close if master executes failed (&lt;a href="/apache/incubator-hugegraph-computer/pull/292">#292&lt;/a>)&lt;/li>
+&lt;li>chore: add check dependencies (&lt;a href="/apache/incubator-hugegraph-computer/pull/293">#293&lt;/a>)&lt;/li>
+&lt;li>chore(license): update license for 1.2.0 (&lt;a href="/apache/incubator-hugegraph-computer/pull/299">#299&lt;/a>)&lt;/li>
 &lt;/ul>
 &lt;h3 id="hugegraph-toolchain">hugegraph-toolchain&lt;/h3>
 &lt;ul>
