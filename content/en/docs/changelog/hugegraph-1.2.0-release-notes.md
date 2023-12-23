@@ -5,80 +5,95 @@ weight: 1
 ---
 
 ### hugegraph
-* fix: transfer add_peer/remove_peer command to leader by @simon824 in https://github.com/apache/incubator-hugegraph/pull/2112
-* doc: update issue template & README file by @imbajin in https://github.com/apache/incubator-hugegraph/pull/2131
-* chore: cmn algorithm optimization by @zyxxoo in https://github.com/apache/incubator-hugegraph/pull/2134
-* add github token for license check comment by @JackyYangPassion in https://github.com/apache/incubator-hugegraph/pull/2139
-* refact: use standard UTF-8 charset & enhance CI configs by @imbajin in https://github.com/apache/incubator-hugegraph/pull/2095
-* refact: use a slim way to build docker image on latest code & support zgc by @imbajin in https://github.com/apache/incubator-hugegraph/pull/2118
-* chore: disable PR up-to-date in branch by @javeme in https://github.com/apache/incubator-hugegraph/pull/2150
-* feat: support task auto manage by server role state machine by @zyxxoo in https://github.com/apache/incubator-hugegraph/pull/2130
-* fix query dirty edges of a vertex with cache by @javeme in https://github.com/apache/incubator-hugegraph/pull/2166
-* feat: support parallel compress snapshot by @wuchaojing in https://github.com/apache/incubator-hugegraph/pull/2136
-* refact(core): remove lock of globalMasterInfo to optimize perf by @zyxxoo in https://github.com/apache/incubator-hugegraph/pull/2151
-* feat: use an enhanced CypherAPI to refactor it by @lynnbond in https://github.com/apache/incubator-hugegraph/pull/2143
-* chore: remove stage-repo in pom due to release done & update mail rule by @z7658329 in https://github.com/apache/incubator-hugegraph/pull/2128
-* move validate release to hugegraph-doc by @z7658329 in https://github.com/apache/incubator-hugegraph/pull/2109
-* fix exception of vertex-drop with index by @simon824 in https://github.com/apache/incubator-hugegraph/pull/2181
-* chore: async remove left index shouldn't effect query by @zyxxoo in https://github.com/apache/incubator-hugegraph/pull/2199
-* fix: remove dup 'From' in filterExpiredResultFromFromBackend by @KeeProMise in https://github.com/apache/incubator-hugegraph/pull/2207
-* refact(core): early stop unnecessary loops in edge cache by @GYXkeep in https://github.com/apache/incubator-hugegraph/pull/2211
-* refact(core): optimized batch removal of remaining indices consumed by a single consumer by @zyxxoo in https://github.com/apache/incubator-hugegraph/pull/2203
-* chore: update .asf.yaml for mail rule by @imbajin in https://github.com/apache/incubator-hugegraph/pull/2221
-* doc: update README & add QR code by @msgui in https://github.com/apache/incubator-hugegraph/pull/2218
-* fix: jdbc ssl mode parameter redundant by @liuxiaocs7 in https://github.com/apache/incubator-hugegraph/pull/2224
-* fix: error when start gremlin-console with sample script by @VGalaxies in https://github.com/apache/incubator-hugegraph/pull/2231
-* chore: improve the UI & content in README by @lionztt in https://github.com/apache/incubator-hugegraph/pull/2227
-* add com.janeluo.ikkanalyzer dependency to core model by @KeeProMise in https://github.com/apache/incubator-hugegraph/pull/2206
-* fix: update ssl_mode value by @liuxiaocs7 in https://github.com/apache/incubator-hugegraph/pull/2235
-* chore: add pr template by @liuxiaocs7 in https://github.com/apache/incubator-hugegraph/pull/2234
-* fix(core): support order by id  by @liuxiaocs7 in https://github.com/apache/incubator-hugegraph/pull/2233
-* doc: modify ASF and remove meaningless CLA by @KeeProMise in https://github.com/apache/incubator-hugegraph/pull/2237
-* fix: optimizing ClassNotFoundException error message for MYSQL by @Z-HUANT in https://github.com/apache/incubator-hugegraph/pull/2246
-* feat(perf): support JMH benchmark in HG-test module by @conghuhu in https://github.com/apache/incubator-hugegraph/pull/2238
-* fix：asf invalid notification scheme 'discussions_status' by @Z-HUANT in https://github.com/apache/incubator-hugegraph/pull/2247
-* fix: asf invalid notification scheme 'discussions_comment' by @Z-HUANT in https://github.com/apache/incubator-hugegraph/pull/2250
-* fix: incorrect use of 'NO_LIMIT' variable by @DanGuge in https://github.com/apache/incubator-hugegraph/pull/2253
-* feat(api&core):  in oltp apis, add statistics info and support full info about vertices and edges by @DanGuge in https://github.com/apache/incubator-hugegraph/pull/2262
-* Update StandardStateMachineCallback.java by @lzyxx77 in https://github.com/apache/incubator-hugegraph/pull/2290
-* chore(dist): replace wget to curl to download swagger-ui  by @VGalaxies in https://github.com/apache/incubator-hugegraph/pull/2277
-* feat(dist): support pre-load test graph data in docker container by @aroundabout in https://github.com/apache/incubator-hugegraph/pull/2241
-* fix(core): close flat mapper iterator after usage by @qwtsc in https://github.com/apache/incubator-hugegraph/pull/2281
-* fix(dist): avoid var PRELOAD cover environmnet vars by @aroundabout in https://github.com/apache/incubator-hugegraph/pull/2302
-* feat(api-core): support label & property filtering for both edge and vertex & support kout dfs mode by @DanGuge in https://github.com/apache/incubator-hugegraph/pull/2295
-* fix: base-ref/head-ref missed in dependency-review on master by @msgui in https://github.com/apache/incubator-hugegraph/pull/2308
-* doc: update README about start server with example graph by @aroundabout in https://github.com/apache/incubator-hugegraph/pull/2315
-* Feat: IP white list by @SunnyBoy-WYH in https://github.com/apache/incubator-hugegraph/pull/2299
-* feat(api): support metric API Prometheus format & add statistic metric api  by @SunnyBoy-WYH in https://github.com/apache/incubator-hugegraph/pull/2286
-* README.md tiny improve by @javeme in https://github.com/apache/incubator-hugegraph/pull/2320
-* feat(api): support embedded arthas agent in hugegraph-server by @SunnyBoy-WYH in https://github.com/apache/incubator-hugegraph/pull/2278
-* doc: README.md tiny improve  by @aroundabout in https://github.com/apache/incubator-hugegraph/pull/2331
-* feat: support Cassandra with docker-compose in server by @aroundabout in https://github.com/apache/incubator-hugegraph/pull/2307
-* fix: in wait-storage.sh, always wait for storage with default rocksdb  by @aroundabout in https://github.com/apache/incubator-hugegraph/pull/2333
-* feat(core): support batch+parallel edges traverse by @DanGuge in https://github.com/apache/incubator-hugegraph/pull/2312
-* fix(core): handle schema Cache expandCapacity concurrent problem by @conghuhu in https://github.com/apache/incubator-hugegraph/pull/2332
-* feat(cassandra): adapt cassandra from 3.11.12 to 4.0.10 by @lzyxx77 in https://github.com/apache/incubator-hugegraph/pull/2300
-* chore(api): add swagger desc for Arthas & Metric & Cypher & White API by @SunnyBoy-WYH in https://github.com/apache/incubator-hugegraph/pull/2337
-* feat(api): support recording slow query log by @SunnyBoy-WYH in https://github.com/apache/incubator-hugegraph/pull/2327
-* refact: adjust project structure for merge PD & Store[Breaking Change] by @VGalaxies in https://github.com/apache/incubator-hugegraph/pull/2338
-* fix(api): clean some code for release by @imbajin in https://github.com/apache/incubator-hugegraph/pull/2348
-* fix(api): refactor/downgrade record logic for slow log by @imbajin in https://github.com/apache/incubator-hugegraph/pull/2347
-* feat: adapt Dockerfile for new project structure by @aroundabout in https://github.com/apache/incubator-hugegraph/pull/2344
-* fix: remove redirect-to-master from synchronous Gremlin API by @qwtsc in https://github.com/apache/incubator-hugegraph/pull/2356
-* chore: disable raft test in normal PR due to timeout problem by @imbajin in https://github.com/apache/incubator-hugegraph/pull/2349
-* feat(server):swagger support auth for standardAuth mode  by @SunnyBoy-WYH in https://github.com/apache/incubator-hugegraph/pull/2360
-* chore(ci): add stage profile settings by @lzyxx77 in https://github.com/apache/incubator-hugegraph/pull/2361
-* fix HBase PrefixFilter bug by @haohao0103 in https://github.com/apache/incubator-hugegraph/pull/2364
-* feat: optimising adjacency edge queries by @msgui in https://github.com/apache/incubator-hugegraph/pull/2242
-* chore: move server info into GlobalMasterInfo by @javeme in https://github.com/apache/incubator-hugegraph/pull/2370
-* chore: fix curl failed to request https urls by @simon824 in https://github.com/apache/incubator-hugegraph/pull/2378
-* refact(api): update common 1.2 & fix jersey client code problem by @zhenyuT in https://github.com/apache/incubator-hugegraph/pull/2365
-* fix(api): correct the vertex id in the edge-existence api by @msgui in https://github.com/apache/incubator-hugegraph/pull/2380
-* chore: reset hugegraph version to 1.2.0 by @VGalaxies in https://github.com/apache/incubator-hugegraph/pull/2382
-* refact(rocksdb): clean & reformat some code by @imbajin in https://github.com/apache/incubator-hugegraph/pull/2200
-* feat(core): add IntMapByDynamicHash V1 implement by @conghuhu in https://github.com/apache/incubator-hugegraph/pull/2377
-* fix: github action build docker image failed during the release 1.2 process by @aroundabout in https://github.com/apache/incubator-hugegraph/pull/2386
-* fix: TinkerPop unit test lack some lables by @zyxxoo in https://github.com/apache/incubator-hugegraph/pull/2387
+
+#### API Changes
+
+- feat(api&core): in oltp apis, add statistics info and support full info about vertices and edges ([#2262](https://github.com/apache/incubator-hugegraph/pull/2262))
+- feat(api): support embedded arthas agent in hugegraph-server ([#2278](https://github.com/apache/incubator-hugegraph/pull/2278),[#2337](https://github.com/apache/incubator-hugegraph/pull/2337))
+- feat(api): support metric API Prometheus format & add statistic metric api ([#2286](https://github.com/apache/incubator-hugegraph/pull/2286))
+- feat(api-core): support label & property filtering for both edge and vertex & support kout dfs mode ([#2295](https://github.com/apache/incubator-hugegraph/pull/2295))
+- feat(api): support recording slow query log ([#2327](https://github.com/apache/incubator-hugegraph/pull/2327))
+
+
+#### Feature Changes
+
+- feat: support task auto manage by server role state machine ([#2130](https://github.com/apache/incubator-hugegraph/pull/2130))
+- feat: support parallel compress snapshot ([#2136](https://github.com/apache/incubator-hugegraph/pull/2136))
+- feat: use an enhanced CypherAPI to refactor it ([#2143](https://github.com/apache/incubator-hugegraph/pull/2143))
+- feat(perf): support JMH benchmark in HG-test module ([#2238](https://github.com/apache/incubator-hugegraph/pull/2238))
+- feat: optimising adjacency edge queries ([#2242](https://github.com/apache/incubator-hugegraph/pull/2242))
+- Feat: IP white list ([#2299](https://github.com/apache/incubator-hugegraph/pull/2299))
+- feat(cassandra): adapt cassandra from 3.11.12 to 4.0.10 ([#2300](https://github.com/apache/incubator-hugegraph/pull/2300))
+- feat: support Cassandra with docker-compose in server ([#2307](https://github.com/apache/incubator-hugegraph/pull/2307))
+- feat(core): support batch+parallel edges traverse ([#2312](https://github.com/apache/incubator-hugegraph/pull/2312))
+- feat: adapt Dockerfile for new project structur ([#2344](https://github.com/apache/incubator-hugegraph/pull/2344))
+- feat(server):swagger support auth for standardAuth mode by ([#2360](https://github.com/apache/incubator-hugegraph/pull/2360))
+- feat(core): add IntMapByDynamicHash V1 implement ([#2377](https://github.com/apache/incubator-hugegraph/pull/2377))
+
+#### Bug Fix
+
+- fix: transfer add_peer/remove_peer command to leader ([#2112](https://github.com/apache/incubator-hugegraph/pull/2112))
+- fix query dirty edges of a vertex with cache ([#2166](https://github.com/apache/incubator-hugegraph/pull/2166))
+- fix exception of vertex-drop with index ([#2181](https://github.com/apache/incubator-hugegraph/pull/2181))
+- fix: remove dup ‘From’ in filterExpiredResultFromFromBackend ([#2207](https://github.com/apache/incubator-hugegraph/pull/2207))
+- fix: jdbc ssl mode parameter redundant ([#2224](https://github.com/apache/incubator-hugegraph/pull/2224))
+- fix: error when start gremlin-console with sample script ([#2231](https://github.com/apache/incubator-hugegraph/pull/2231))
+- fix(core): support order by id ([#2233](https://github.com/apache/incubator-hugegraph/pull/2233))
+- fix: update ssl_mode value ([#2235](https://github.com/apache/incubator-hugegraph/pull/2235))
+- fix: optimizing ClassNotFoundException error message for MYSQL ([#2246](https://github.com/apache/incubator-hugegraph/pull/2246))
+- fix：asf invalid notification scheme ‘discussions_status’ ([#2247](https://github.com/apache/incubator-hugegraph/pull/2247))
+- fix: asf invalid notification scheme ‘discussions_comment’ ([#2250](https://github.com/apache/incubator-hugegraph/pull/2250))
+- fix: incorrect use of ‘NO_LIMIT’ variable ([#2253](https://github.com/apache/incubator-hugegraph/pull/2253))
+- fix(core): close flat mapper iterator after usage ([#2281](https://github.com/apache/incubator-hugegraph/pull/2281))
+- fix(dist): avoid var PRELOAD cover environmnet vars ([#2302](https://github.com/apache/incubator-hugegraph/pull/2302))
+- fix: base-ref/head-ref missed in dependency-review on master ([#2308](https://github.com/apache/incubator-hugegraph/pull/2308))
+- fix(core): handle schema Cache expandCapacity concurrent problem ([#2332](https://github.com/apache/incubator-hugegraph/pull/2332))
+- fix: in wait-storage.sh, always wait for storage with default rocksdb ([#2333](https://github.com/apache/incubator-hugegraph/pull/2333))
+- fix(api): refactor/downgrade record logic for slow log ([#2347](https://github.com/apache/incubator-hugegraph/pull/2347))
+- fix(api): clean some code for release ([#2348](https://github.com/apache/incubator-hugegraph/pull/2348))
+- fix: remove redirect-to-master from synchronous Gremlin API ([#2356](https://github.com/apache/incubator-hugegraph/pull/2356))
+- fix HBase PrefixFilter bug ([#2364](https://github.com/apache/incubator-hugegraph/pull/2364))
+- chore: fix curl failed to request https urls ([#2378](https://github.com/apache/incubator-hugegraph/pull/2378))
+- fix(api): correct the vertex id in the edge-existence api ([#2380](https://github.com/apache/incubator-hugegraph/pull/2380))
+- fix: github action build docker image failed during the release 1.2 process ([#2386](https://github.com/apache/incubator-hugegraph/pull/2386))
+- fix: TinkerPop unit test lack some lables ([#2387](https://github.com/apache/incubator-hugegraph/pull/2387))
+
+#### Option Changes
+
+- feat(dist): support pre-load test graph data in docker container ([#2241](https://github.com/apache/incubator-hugegraph/pull/2241))
+
+#### Other Changes
+
+- refact: use standard UTF-8 charset & enhance CI configs ([#2095](https://github.com/apache/incubator-hugegraph/pull/2095))
+- move validate release to hugegraph-doc ([#2109](https://github.com/apache/incubator-hugegraph/pull/2109))
+- refact: use a slim way to build docker image on latest code & support zgc ([#2118](https://github.com/apache/incubator-hugegraph/pull/2118))
+- chore: remove stage-repo in pom due to release done & update mail rule ([#2128](https://github.com/apache/incubator-hugegraph/pull/2128))
+- doc: update issue template & README file ([#2131](https://github.com/apache/incubator-hugegraph/pull/2131))
+- chore: cmn algorithm optimization ([#2134](https://github.com/apache/incubator-hugegraph/pull/2134))
+- add github token for license check comment ([#2139](https://github.com/apache/incubator-hugegraph/pull/2139))
+- chore: disable PR up-to-date in branch ([#2150](https://github.com/apache/incubator-hugegraph/pull/2150))
+- refact(core): remove lock of globalMasterInfo to optimize perf ([#2151](https://github.com/apache/incubator-hugegraph/pull/2151))
+- chore: async remove left index shouldn’t effect query ([#2199](https://github.com/apache/incubator-hugegraph/pull/2199))
+- refact(rocksdb): clean & reformat some code ([#2200](https://github.com/apache/incubator-hugegraph/pull/2200))
+- refact(core): optimized batch removal of remaining indices consumed by a single consumer ([#2203](https://github.com/apache/incubator-hugegraph/pull/2203))
+- add com.janeluo.ikkanalyzer dependency to core model ([#2206](https://github.com/apache/incubator-hugegraph/pull/2206))
+- refact(core): early stop unnecessary loops in edge cache ([#2211](https://github.com/apache/incubator-hugegraph/pull/2211))
+- doc: update README & add QR code ([#2218](https://github.com/apache/incubator-hugegraph/pull/2218))
+- chore: update .asf.yaml for mail rule ([#2221](https://github.com/apache/incubator-hugegraph/pull/2221))
+- chore: improve the UI & content in README ([#2227](https://github.com/apache/incubator-hugegraph/pull/2227))
+- chore: add pr template ([#2234](https://github.com/apache/incubator-hugegraph/pull/2234))
+- doc: modify ASF and remove meaningless CLA ([#2237](https://github.com/apache/incubator-hugegraph/pull/2237))
+- chore(dist): replace wget to curl to download swagger-ui ([#2277](https://github.com/apache/incubator-hugegraph/pull/2277))
+- Update StandardStateMachineCallback.java ([#2290](https://github.com/apache/incubator-hugegraph/pull/2290))
+- doc: update README about start server with example graph ([#2315](https://github.com/apache/incubator-hugegraph/pull/2315))
+- README.md tiny improve ([#2320](https://github.com/apache/incubator-hugegraph/pull/2320))
+- doc: README.md tiny improve ([#2331](https://github.com/apache/incubator-hugegraph/pull/2331))
+- refact: adjust project structure for merge PD & Store[Breaking Change] ([#2338](https://github.com/apache/incubator-hugegraph/pull/2338))
+- chore: disable raft test in normal PR due to timeout problem ([#2349](https://github.com/apache/incubator-hugegraph/pull/2349))
+- chore(ci): add stage profile settings ([#2361](https://github.com/apache/incubator-hugegraph/pull/2361))
+- refact(api): update common 1.2 & fix jersey client code problem ([#2365](https://github.com/apache/incubator-hugegraph/pull/2365))
+- chore: move server info into GlobalMasterInfo ([#2370](https://github.com/apache/incubator-hugegraph/pull/2370))
+- chore: reset hugegraph version to 1.2.0 ([#2382](https://github.com/apache/incubator-hugegraph/pull/2382))
 
 
 ### hugegraph-computer
@@ -190,15 +205,24 @@ weight: 1
 
 
 ### hugegraph-commons
-* fix(common): handle spring-boot2/jersey dependency conflicts by @z7658329 in https://github.com/apache/incubator-hugegraph-commons/pull/131
-* refact(common): add more construction methods for convenient by @chengxin1374 in https://github.com/apache/incubator-hugegraph-commons/pull/132
-* add: dependency-review by @msgui in https://github.com/apache/incubator-hugegraph-commons/pull/134
-* feat(common): replace jersey dependencies with OkHttp (Breaking Change) by @zhenyuT in https://github.com/apache/incubator-hugegraph-commons/pull/133
-* fix: Assert.assertThrows() should check result of exceptionConsumer by @javeme in https://github.com/apache/incubator-hugegraph-commons/pull/135
-* refact(common): rename jsonutil to avoid conflicts with server by @imbajin in https://github.com/apache/incubator-hugegraph-commons/pull/136
-* fix(common): json param convert by @zhenyuT in https://github.com/apache/incubator-hugegraph-commons/pull/137
-* doc: update README for release by @imbajin in https://github.com/apache/incubator-hugegraph-commons/pull/138
-* update licence by @zhenyuT in https://github.com/apache/incubator-hugegraph-commons/pull/139
+
+#### Feature Changes
+
+- feat(common): replace jersey dependencies with OkHttp (Breaking Change) ([#133](https://github.com/apache/incubator-hugegraph-commons/pull/133))
+
+#### Bug Fix
+
+- fix(common): handle spring-boot2/jersey dependency conflicts ([#131](https://github.com/apache/incubator-hugegraph-commons/pull/131))
+- fix: Assert.assertThrows() should check result of exceptionConsumer ([#135](https://github.com/apache/incubator-hugegraph-commons/pull/135))
+- fix(common): json param convert ([#137](https://github.com/apache/incubator-hugegraph-commons/pull/137))
+
+#### Other Changes
+
+- refact(common): add more construction methods for convenient ([#132](https://github.com/apache/incubator-hugegraph-commons/pull/132))
+- add: dependency-review ([#134](https://github.com/apache/incubator-hugegraph-commons/pull/134))
+- refact(common): rename jsonutil to avoid conflicts with server ([#136](https://github.com/apache/incubator-hugegraph-commons/pull/136))
+- doc: update README for release ([#138](https://github.com/apache/incubator-hugegraph-commons/pull/138))
+- update licence ([#139](https://github.com/apache/incubator-hugegraph-commons/pull/139))
 
 ### Release Details
 
