@@ -8,11 +8,18 @@ weight: 3
 
 ## Verification
 
-When the internal temporary release and packaging work is completed, other community developers (especially PMC) need to participate in the [verification link](https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist)To ensure the "correctness + completeness" of someone's published version, here requires **everyone** to participate as much as possible, and then explain which items you have **checked** in the subsequent **email reply**. (The following are the core items)
+When the internal temporary release and packaging work is completed, other community developers (
+especially PMC) need to participate in the [verification link](https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist)
+To ensure the "correctness + completeness" of someone's published version, here requires **everyone
+** to participate as much as possible, and then explain which items you have **checked** in the
+subsequent **email reply**.(The following are the core items)
 
 #### 1. prepare
 
-If there is no svn or gpg or wget environment locally, it is recommended to install it first (windows recommend using WSL2 environment, or at least `git-bash`), also make sure to install java (recommended 11) and maven software
+If there is no svn or gpg or wget environment locally, it is recommended to install it first 
+(windows recommend using WSL2 environment, or at least `git-bash`), also make sure to install java 
+(recommended 11) and maven software
+
 ```bash
 # 1. install svn
 # ubuntu/debian
@@ -46,7 +53,10 @@ wget https://dist.apache.org/repos/dist/dev/incubator/hugegraph/1.x.x/apache-hug
 
 #### 2. check hash value
 
-First you need to check the file integrity of the `source + binary` package, Verify by `shasum` to ensure that it is consistent with the hash value published on apache/github (Usually sha512), Here is the same as the last step of 0x02 inspection.
+First you need to check the file integrity of the `source + binary` package, Verify by `shasum` to
+ensure that it is consistent with the hash value published on apache/GitHub (Usually sha512), Here
+is the same as the last step of 0x02 inspection.
+
 ```bash
 execute the following command:
 for i in *.tar.gz; do echo $i; shasum -a 512 --check  $i.sha512; done
@@ -54,20 +64,26 @@ for i in *.tar.gz; do echo $i; shasum -a 512 --check  $i.sha512; done
 
 #### 3. check gpg signature
 
-This is to ensure that the published package is uploaded by a **reliable** person. Assuming tom signs and uploads, others should download A’s **public key** and then perform **signature confirmation**. Related commands:
+This is to ensure that the published package is uploaded by a **reliable** person.
+Assuming tom signs and uploads,
+others should download A's **public key** and then perform **signature
+confirmation**.
+
+Related commands:
 
 ```bash
 # 1. Download project trusted public key to local (required for the first time) & import
 curl  https://downloads.apache.org/incubator/hugegraph/KEYS > KEYS
 gpg --import KEYS
 
-# After importing, you can see the following output, which means that 3 user public keys have been imported
+# After importing, you can see the following output, which means that x user public keys have been imported
 gpg: /home/ubuntu/.gnupg/trustdb.gpg: trustdb created
 gpg: key BA7E78F8A81A885E: public key "imbajin (apache mail) <jin@apache.org>" imported
 gpg: key 818108E7924549CC: public key "vaughn <vaughn@apache.org>" imported
 gpg: key 28DCAED849C4180E: public key "coderzc (CODE SIGNING KEY) <zhaocong@apache.org>" imported
-gpg: Total number processed: 3
-gpg:               imported: 3
+...
+gpg: Total number processed: x
+gpg:               imported: x
 
 # 2. Trust release users (trust n username mentioned in voting mail, if more than one user, 
 #      just repeat the steps in turn or use the script below)
@@ -99,9 +115,12 @@ First confirm the overall integrity/consistency, and then confirm the specific c
 
 #### 4. Check the archive contents
 
-Here it is divided into two aspects: source code package + binary package, The source code package is stricter, it can be said that the core part (Because it is longer,For a complete list refer to the official [Wiki](https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist))
+Here it is divided into two aspects: source code package + binary package, The source code package
+is stricter, it can be said that the core part (Because it is longer, For a complete list refer to
+the official [Wiki](https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist))
 
-First of all, we need to download the package from the apache official `release-candidate` URL to the local (URL: [click to jump](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/))
+First of all, we need to download the package from the apache official `release-candidate` URL to
+the local (URL: [click to jump](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/))
 
 ##### A. source package
 
@@ -110,16 +129,18 @@ After decompressing `*hugegraph*src.tar.gz`, Do the following checks:
 1. folders with `incubating`, and no **empty** files/folders
 2. `LICENSE` + `NOTICE` + `DISCLAIM` file exists and the content is normal
 3. **does not exist** binaries (without LICENSE)
-4. The source code files all contain the standard `ASF License` header (this could be done with the `Maven-MAT` plugin)
-5. Check whether the `pom.xml` version number of each parent/child module is consistent (and meet expectations)
+4. The source code files all contain the standard `ASF License` header (this could be done with
+   the `Maven-MAT` plugin)
+5. Check whether the `pom.xml` version number of each parent/child module is consistent (and meet
+   expectations)
 6. Finally, make sure the source code works/compiles correctly
 
 ```bash
 # prefer to use/switch to java 11 for the following operations (compiling/running)
 # java --version
 
-# try to test in the Unix env to check if it works well
-mvn clean package -Dmaven.test.skip=true -Dcheckstyle.skip=true
+# try to compile in the Unix env to check if it works well
+mvn clean package -P stage -Dmaven.test.skip=true -Dcheckstyle.skip=true
 ```
 
 ##### B. binary package
@@ -129,6 +150,7 @@ After decompressing `xxx-hugegraph.tar.gz`, perform the following checks:
 1. folders with `incubating`
 2. `LICENSE` and `NOTICE` file exists and the content is normal
 3. start server
+
 ```bash
 # hugegraph-server
 bin/start-hugegraph.sh
@@ -142,17 +164,20 @@ bin/start-hubble.sh
 more reference official website: https://hugegraph.apache.org/docs/quickstart
 ```
 
-**Note:** If a third-party dependency is introduced in the binary package, you need to update the LICENSE and add the third-party dependent LICENSE; if the third-party dependent LICENSE is Apache 2.0, and the corresponding project contains NOTICE, you also need to update Our NOTICE file
+**Note:** If a third-party dependency is introduced in the binary package, you need to update the
+LICENSE and add the third-party dependent LICENSE; if the third-party dependent LICENSE is Apache
+2.0, and the corresponding project contains NOTICE, you also need to update Our NOTICE file
 
 #### 5. Check the official website and GitHub and other pages
 
-1. Make sure that the official website at least meets [apache website check](https://whimsy.apache.org/pods/project/hugegraph), and no circular links etc.
+1. Make sure that the official website at least meets [apache website check](https://whimsy.apache.org/pods/project/hugegraph),
+   and no circular links, etc.
 2. Update **download link** and release notes updated
 3. ...
 
 ## Mail Template
 
-After the check & test, you should reply the mail with the following content: (normal devs & PMC)
+After the check & test, you should reply to the mail with the following content: (normal devs & PMC)
 
 ```markdown
 [] +1 approve
@@ -165,31 +190,31 @@ After the check & test, you should reply the mail with the following content: (n
 ```markdown
 +1 (non-binding)
 I checked:
-1.Download link/tag in mail are valid
-2.Checksum and GPG signatures are OK
-3.LICENSE & NOTICE & DISCLAIMER are exist
-4.Build successfully on XX OS & Version XX
-5.No unexpected binary files
-6.Date is right in the NOTICE file
-7.Compile from source is fine under JavaXX
-8.No empty file & directory found
+1. Download link/tag in mail are valid
+2. Checksum and GPG signatures are OK
+3. LICENSE & NOTICE & DISCLAIMER are exist
+4. Build successfully on XX OS & Version XX
+5. No unexpected binary files
+6. Date is right in the NOTICE file
+7. Compile from source is fine under JavaXX
+8. No empty file & directory found
 9. Test running XXX service OK
 10. ....
 ```
 
 and the PMC members should reply with `binding`, it's important for summary the valid votes:
+
 ```markdown
 +1 (binding)
 I checked:
-1.Download link/tag in mail are valid
-2.Checksum and GPG signatures are OK
-3.LICENSE & NOTICE & DISCLAIMER are exist
-4.Build successfully on XX OS & Version XX
-5.No unexpected binary files
-6.Date is right in the NOTICE file
-7.Compile from source is fine under JavaXX
-8.No empty file & directory found
+1. Download link/tag in mail are valid
+2. Checksum and GPG signatures are OK
+3. LICENSE & NOTICE & DISCLAIMER are exist
+4. Build successfully on XX OS & Version XX
+5. No unexpected binary files
+6. Date is right in the NOTICE file
+7. Compile from source is fine under JavaXX
+8. No empty file & directory found
 9. Test running XX process OK
 10. ....
 ```
-
