@@ -172,7 +172,7 @@ weight: 1
 - chore: disable PR up-to-date in branch ([#473](https://github.com/apache/incubator-hugegraph-toolchain/pull/473))
 - chore: auto add pr auto label by path ([#466](https://github.com/apache/incubator-hugegraph-toolchain/pull/466), [#528](https://github.com/apache/incubator-hugegraph-toolchain/pull/528))
 - chore: unify the dependencies versions of the entire project ([#478](https://github.com/apache/incubator-hugegraph-toolchain/pull/478))
-- chore(deps): bump word-wrap, browserify-sign, async, semver in hubble-fe ([#494](https://github.com/apache/incubator-hugegraph-toolchain/pull/494), [#529](https://github.com/apache/incubator-hugegraph-toolchain/pull/529), [#484](https://github.com/apache/incubator-hugegraph-toolchain/pull/484), [#491](https://github.com/apache/incubator-hugegraph-toolchain/pull/491))
+- chore(deps): bump async, semver, word-wrap, browserify-sign in hubble-fe ([#484](https://github.com/apache/incubator-hugegraph-toolchain/pull/484), [#491](https://github.com/apache/incubator-hugegraph-toolchain/pull/491), [#494](https://github.com/apache/incubator-hugegraph-toolchain/pull/494), [#529](https://github.com/apache/incubator-hugegraph-toolchain/pull/529))
 - chore: add pr template ([#498](https://github.com/apache/incubator-hugegraph-toolchain/pull/498))
 - doc(hubble): add docker-compose to start with server ([#522](https://github.com/apache/incubator-hugegraph-toolchain/pull/522))
 - chore(ci): add stage profile settings ([#536](https://github.com/apache/incubator-hugegraph-toolchain/pull/536))
