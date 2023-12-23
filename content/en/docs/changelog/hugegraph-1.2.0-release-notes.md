@@ -82,8 +82,6 @@ weight: 1
 
 
 ### hugegraph-computer
-#### API Changes
-
 #### Feature Changes
 * feat: implement fast-failover for MessageRecvManager and DataClientManager ([#243](https://github.com/apache/incubator-hugegraph-computer/pull/243))
 * feat: implement parallel send data in load graph step ([#248](https://github.com/apache/incubator-hugegraph-computer/pull/248))
