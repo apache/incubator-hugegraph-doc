@@ -112,6 +112,19 @@ services:
       - 8080:8080
 ```
 
+在 docker 部署模式下，如果想要使用 HugeGraph 鉴权模式，需要在进入容器停止 HugeGraph 后，删除相关图数据并重新启动 HugeGraph。若图已有业务数据，则无法转换鉴权模式，对于该功能的支持将在下个版本中支持。
+
+```bash
+bin/stop-hugegraph.sh
+
+rm -rf rocksdb-data/
+
+bin/init-store.sh
+
+bin/start-hugegraph.sh
+
+```
+
 > 注意：
 > 
 > 1. hugegraph 的 docker 镜像是一个便捷版本，用于快速启动 hugegraph，并不是**官方发布物料包方式**。你可以从 [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub) 中得到更多细节。
@@ -160,6 +173,20 @@ HugeGraphServer 启动时会连接后端存储并尝试检查后端存储版本�
 
 由于各种后端所需的配置（hugegraph.properties）及启动步骤略有不同，下面逐一对各后端的配置及启动做介绍。
 
+如果想要使用 HugeGraph 鉴权模式，在后面正式启动 HugeGraph 之前应按照 [HugeGraph 鉴权配置](https://hugegraph.apache.org/cn/docs/config/config-authentication/) 进行配置
+
+如果已经初始化 HugeGraph 并需要转换为鉴权模式，则需要删除相关图数据并重新启动 HugeGraph。若图已有业务数据，则无法转换鉴权模式，对于该功能的支持将在下个版本中支持。
+
+```bash
+bin/stop-hugegraph.sh
+
+rm -rf rocksdb-data/
+
+bin/init-store.sh
+
+bin/start-hugegraph.sh
+
+```
 ##### 5.1.1 RocksDB
 
 <details>
