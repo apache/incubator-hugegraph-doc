@@ -70,7 +70,7 @@ gpg: Total number processed: 3
 gpg:               imported: 3
 
 # 2. Trust release users (trust n username mentioned in voting mail, if more than one user, 
-# just repeat the steps in turn or use the script below)
+#      just repeat the steps in turn or use the script below)
 gpg --edit-key $USER # input the username, enter the interactive mode
 gpg> trust
 ...output options..
@@ -168,12 +168,12 @@ I checked:
 1.Download link/tag in mail are valid
 2.Checksum and GPG signatures are OK
 3.LICENSE & NOTICE & DISCLAIMER are exist
-4.Build successfully on Ubuntu22.04 & MacOS 14.2
+4.Build successfully on XX OS & Version XX
 5.No unexpected binary files
 6.Date is right in the NOTICE file
-7.Compile from source is fine under Java11
+7.Compile from source is fine under JavaXX
 8.No empty file & directory found
-9.Running server/loader/hubble process OK
+9. Test running XXX service OK
 10. ....
 ```
 
@@ -184,12 +184,12 @@ I checked:
 1.Download link/tag in mail are valid
 2.Checksum and GPG signatures are OK
 3.LICENSE & NOTICE & DISCLAIMER are exist
-4.Build successfully on Ubuntu22.04 & MacOS 14.2
+4.Build successfully on XX OS & Version XX
 5.No unexpected binary files
 6.Date is right in the NOTICE file
-7.Compile from source is fine under Java11
+7.Compile from source is fine under JavaXX
 8.No empty file & directory found
-9.Running server/loader/hubble process OK
+9. Test running XX process OK
 10. ....
 ```
 

@@ -152,11 +152,11 @@ bin/start-hubble.sh
 
 检查完成后, 你应该按不同角色回复邮件: (普通开发者 & PMC 成员)
 ```markdown
-[] +1 同意
+[] +1 approve
 
-[] +0 没有意见
+[] +0 no opinion
 
-[] -1 不同意，并注明原因
+[] -1 disapprove with the reason
 ```
 ```markdown
 +1 (non-binding)
@@ -164,12 +164,12 @@ I checked:
 1.Download link/tag in mail are valid
 2.Checksum and GPG signatures are OK
 3.LICENSE & NOTICE & DISCLAIMER are exist
-4.Build successfully on Ubuntu22.04 & MacOS 14.2
+4.Build successfully on XX OS version XXX
 5.No unexpected binary files
 6.Date is right in the NOTICE file
-7.Compile from source is fine under Java11
+7.Compile from source is fine under JavaX
 8.No empty file & directory found
-9.Running server/loader/hubble process OK
+9. Test running xxx service OK
 10. ....
 ```
 
@@ -181,12 +181,12 @@ I checked:
 1.Download link/tag in mail are valid
 2.Checksum and GPG signatures are OK
 3.LICENSE & NOTICE & DISCLAIMER are exist
-4.Build successfully on Ubuntu22.04 & MacOS 14.2
+4.Build successfully on XX OS Version XX
 5.No unexpected binary files
 6.Date is right in the NOTICE file
-7.Compile from source is fine under Java11
+7.Compile from source is fine under JavaXX
 8.No empty file & directory found
-9.Running server/loader/hubble process OK
+9. Test running XXX service OK
 10. ....
 ```
 
