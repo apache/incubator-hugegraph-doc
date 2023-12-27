@@ -115,12 +115,16 @@ services:
 在 docker 部署模式下，如果想要使用 HugeGraph 鉴权模式，需要在进入容器停止 HugeGraph 后，删除相关图数据并重新启动 HugeGraph。若图已有业务数据，则无法转换鉴权模式，对于该功能的支持将在下个版本中支持。
 
 ```bash
+# stop the hugeGraph firstly
 bin/stop-hugegraph.sh
 
+# delete the store data
 rm -rf rocksdb-data/
 
+# init store again
 bin/init-store.sh
 
+# start hugeGraph again
 bin/start-hugegraph.sh
 
 ```
@@ -178,12 +182,16 @@ HugeGraphServer 启动时会连接后端存储并尝试检查后端存储版本�
 如果已经初始化 HugeGraph 并需要转换为鉴权模式，则需要删除相关图数据并重新启动 HugeGraph。若图已有业务数据，则无法转换鉴权模式，对于该功能的支持将在下个版本中支持。
 
 ```bash
+# stop the hugeGraph firstly
 bin/stop-hugegraph.sh
 
+# delete the store data
 rm -rf rocksdb-data/
 
+# init store again
 bin/init-store.sh
 
+# start hugeGraph again
 bin/start-hugegraph.sh
 
 ```

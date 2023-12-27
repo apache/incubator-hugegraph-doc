@@ -124,12 +124,16 @@ services:
 In docker deployment mode, if you want to use HugeGraph authentication mode, you need to enter the container to stop HugeGraph, then delete the related graph data and restart HugeGraph. if the graph already has business data, you can't switch the authentication mode, the support for this feature will be supported in the next release.
 
 ```bash
+# stop the hugeGraph firstly
 bin/stop-hugegraph.sh
 
+# delete the store data
 rm -rf rocksdb-data/
 
+# init store again
 bin/init-store.sh
 
+# start hugeGraph again
 bin/start-hugegraph.sh
 
 ```
@@ -191,12 +195,16 @@ If you want to use HugeGraph authentication mode, you should follow the [HugeGra
 
 If you have initialized HugeGraph and need to convert to the authentication mode, you need to delete the related graph data and restart HugeGraph. if the graph already has business data, you can't convert to the authentication mode, the support for this feature will be supported in the next release.
 ```bash
+# stop the hugeGraph firstly
 bin/stop-hugegraph.sh
 
+# delete the store data
 rm -rf rocksdb-data/
 
+# init store again
 bin/init-store.sh
 
+# start hugeGraph again
 bin/start-hugegraph.sh
 
 ```
