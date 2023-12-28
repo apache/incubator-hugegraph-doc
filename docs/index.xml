@@ -10651,8 +10651,12 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;li>You can output the results to HDFS or HugeGraph, or any other system.&lt;/li>
 &lt;li>Easy to develop a new algorithm. You just need to focus on a vertex only processing just like as in a single server, without worrying about message transfer and memory/storage management.&lt;/li>
 &lt;/ul>
-&lt;h2 id="2-get-started">2 Get Started&lt;/h2>
-&lt;h3 id="21-run-pagerank-algorithm-locally">2.1 Run PageRank algorithm locally&lt;/h3>
+&lt;h2 id="2-dependency-for-buildingrunning">2 Dependency for Building/Running&lt;/h2>
+&lt;h3 id="21-install-java-11-jdk-11">2.1 Install Java 11 (JDK 11)&lt;/h3>
+&lt;p>Required to use Java 11 to run &lt;code>HugeGraph-Computer&lt;/code> (&lt;strong>not compatible with Java 8 now!!!&lt;/strong>), and configure by yourself.&lt;/p>
+&lt;p>&lt;strong>Be sure to execute the &lt;code>java -version&lt;/code> command to check the jdk version before reading&lt;/strong>&lt;/p>
+&lt;h2 id="3-get-started">3 Get Started&lt;/h2>
+&lt;h3 id="31-run-pagerank-algorithm-locally">3.1 Run PageRank algorithm locally&lt;/h3>
 &lt;blockquote>
 &lt;p>To run algorithm with HugeGraph-Computer, you need to install 64-bit Java 11 or later versions.&lt;/p>
 &lt;p>You also need to deploy HugeGraph-Server and &lt;a href="https://etcd.io/docs/v3.5/quickstart/">Etcd&lt;/a>.&lt;/p>
@@ -10662,56 +10666,56 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;li>Download the compiled tarball&lt;/li>
 &lt;li>Clone source code then compile and package&lt;/li>
 &lt;/ul>
-&lt;h4 id="21-download-the-compiled-archive">2.1 Download the compiled archive&lt;/h4>
+&lt;h4 id="311-download-the-compiled-archive">3.1.1 Download the compiled archive&lt;/h4>
 &lt;p>Download the latest version of the HugeGraph-Computer release package:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>/apache-hugegraph-computer-incubating-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxvf apache-hugegraph-computer-incubating-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>.tar.gz -C hugegraph-computer
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="22-clone-source-code-to-compile-and-package">2.2 Clone source code to compile and package&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="312-clone-source-code-to-compile-and-package">3.1.2 Clone source code to compile and package&lt;/h4>
 &lt;p>Clone the latest version of HugeGraph-Computer source package:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ git clone https://github.com/apache/hugegraph-computer.git
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Compile and generate tar package:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-computer
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn clean package -DskipTests
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="23-start-master-node">2.3 Start master node&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="313-start-master-node">3.1.3 Start master node&lt;/h4>
 &lt;blockquote>
 &lt;p>You can use &lt;code>-c&lt;/code> parameter specify the configuration file, more computer config please see:&lt;a href="/docs/config/config-computer#computer-config-options">Computer Config Options&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-computer
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/start-computer.sh -d &lt;span style="color:#204a87">local&lt;/span> -r master
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="24-start-worker-node">2.4 Start worker node&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="314-start-worker-node">3.1.4 Start worker node&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-computer.sh -d &lt;span style="color:#204a87">local&lt;/span> -r worker
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="25-query-algorithm-results">2.5 Query algorithm results&lt;/h4>
-&lt;p>2.5.1 Enable &lt;code>OLAP&lt;/code> index query for server&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="315-query-algorithm-results">3.1.5 Query algorithm results&lt;/h4>
+&lt;p>3.1.5.1 Enable &lt;code>OLAP&lt;/code> index query for server&lt;/p>
 &lt;p>If OLAP index is not enabled, it needs to enable, more reference: &lt;a href="/docs/clients/restful-api/graphs/#634-modify-graphs-read-mode-this-operation-requires-administrator-privileges">modify-graphs-read-mode&lt;/a>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-http" data-lang="http">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&amp;#34;ALL&amp;#34;
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>2.5.2 Query &lt;code>page_rank&lt;/code> property value:&lt;/p>
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>3.1.5.2 Query &lt;code>page_rank&lt;/code> property value:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl &lt;span style="color:#4e9a06">&amp;#34;http://localhost:8080/graphs/hugegraph/graph/vertices?page&amp;amp;limit=3&amp;#34;&lt;/span> &lt;span style="color:#000;font-weight:bold">|&lt;/span> gunzip
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="22-run-pagerank-algorithm-in-kubernetes">2.2 Run PageRank algorithm in Kubernetes&lt;/h3>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="32-run-pagerank-algorithm-in-kubernetes">3.2 Run PageRank algorithm in Kubernetes&lt;/h3>
 &lt;blockquote>
 &lt;p>To run algorithm with HugeGraph-Computer you need to deploy HugeGraph-Server first&lt;/p>
 &lt;/blockquote>
-&lt;h4 id="221-install-hugegraph-computer-crd">2.2.1 Install HugeGraph-Computer CRD&lt;/h4>
+&lt;h4 id="321-install-hugegraph-computer-crd">3.2.1 Install HugeGraph-Computer CRD&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Kubernetes version &amp;gt;= v1.16&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl apply -f https://raw.githubusercontent.com/apache/hugegraph-computer/master/computer-k8s-operator/manifest/hugegraph-computer-crd.v1.yaml
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Kubernetes version &amp;lt; v1.16&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl apply -f https://raw.githubusercontent.com/apache/hugegraph-computer/master/computer-k8s-operator/manifest/hugegraph-computer-crd.v1beta1.yaml
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="222-show-crd">2.2.2 Show CRD&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="322-show-crd">3.2.2 Show CRD&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get crd
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NAME CREATED AT
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugegraphcomputerjobs.hugegraph.apache.org 2021-09-16T08:01:08Z
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="223-install-hugegraph-computer-operatoretcd-server">2.2.3 Install hugegraph-computer-operator&amp;amp;etcd-server&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="323-install-hugegraph-computer-operatoretcd-server">3.2.3 Install hugegraph-computer-operator&amp;amp;etcd-server&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl apply -f https://raw.githubusercontent.com/apache/hugegraph-computer/master/computer-k8s-operator/manifest/hugegraph-computer-operator.yaml
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="224-wait-for-hugegraph-computer-operatoretcd-server-deployment-to-complete">2.2.4 Wait for hugegraph-computer-operator&amp;amp;etcd-server deployment to complete&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="324-wait-for-hugegraph-computer-operatoretcd-server-deployment-to-complete">3.2.4 Wait for hugegraph-computer-operator&amp;amp;etcd-server deployment to complete&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get pod -n hugegraph-computer-operator-system
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NAME READY STATUS RESTARTS AGE
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugegraph-computer-operator-controller-manager-58c5545949-jqvzl 1/1 Running &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 15h
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugegraph-computer-operator-etcd-28lm67jxk5 1/1 Running &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 15h
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="225-submit-job">2.2.5 Submit job&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="325-submit-job">3.2.5 Submit job&lt;/h4>
 &lt;blockquote>
 &lt;p>More computer crd please see: &lt;a href="/docs/config/config-computer#hugegraph-computer-crd">Computer CRD&lt;/a>&lt;/p>
 &lt;p>More computer config please see: &lt;a href="/docs/config/config-computer#computer-config-options">Computer Config Options&lt;/a>&lt;/p>
@@ -10737,12 +10741,12 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hugegraph.url&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">http://${hugegraph-server-host}:${hugegraph-server-port}&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># hugegraph server url&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hugegraph.name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># hugegraph graph name&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#000">EOF&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="226-show-job">2.2.6 Show job&lt;/h4>
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="326-show-job">3.2.6 Show job&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get hcjob/pagerank-sample -n hugegraph-computer-operator-system
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NAME JOBID JOBSTATUS
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pagerank-sample pagerank-sample RUNNING
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="227-show-log-of-nodes">2.2.7 Show log of nodes&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="327-show-log-of-nodes">3.2.7 Show log of nodes&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Show the master log&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl logs -l &lt;span style="color:#000">component&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>pagerank-sample-master -n hugegraph-computer-operator-system
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -10752,15 +10756,15 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Show diagnostic log of a job&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># NOTE: diagnostic log exist only when the job fails, and it will only be saved for one hour.&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl get event --field-selector &lt;span style="color:#000">reason&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>ComputerJobFailed --field-selector involvedObject.name&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>pagerank-sample -n hugegraph-computer-operator-system
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="228-show-success-event-of-a-job">2.2.8 Show success event of a job&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="328-show-success-event-of-a-job">3.2.8 Show success event of a job&lt;/h4>
 &lt;blockquote>
 &lt;p>NOTE: it will only be saved for one hour&lt;/p>
 &lt;/blockquote>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get event --field-selector &lt;span style="color:#000">reason&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>ComputerJobSucceed --field-selector involvedObject.name&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>pagerank-sample -n hugegraph-computer-operator-system
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="229-query-algorithm-results">2.2.9 Query algorithm results&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="329-query-algorithm-results">3.2.9 Query algorithm results&lt;/h4>
 &lt;p>If the output to &lt;code>Hugegraph-Server&lt;/code> is consistent with Locally, if output to &lt;code>HDFS&lt;/code>, please check the result file in the directory of &lt;code>/hugegraph-computer/results/{jobId}&lt;/code> directory.&lt;/p>
-&lt;h2 id="3-built-in-algorithms-document">3 Built-In algorithms document&lt;/h2>
-&lt;h3 id="31-supported-algorithms-list">3.1 Supported algorithms list:&lt;/h3>
+&lt;h2 id="4-built-in-algorithms-document">4 Built-In algorithms document&lt;/h2>
+&lt;h3 id="41-supported-algorithms-list">4.1 Supported algorithms list:&lt;/h3>
 &lt;h6 id="centrality-algorithm">Centrality Algorithm:&lt;/h6>
 &lt;ul>
 &lt;li>PageRank&lt;/li>
@@ -10782,11 +10786,11 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;li>RingsDetectionWithFilter&lt;/li>
 &lt;/ul>
 &lt;p>More algorithms please see: &lt;a href="https://github.com/apache/hugegraph-computer/tree/master/computer-algorithm/src/main/java/org/apache/hugegraph/computer/algorithm">Built-In algorithms&lt;/a>&lt;/p>
-&lt;h3 id="32-algorithm-describe">3.2 Algorithm describe&lt;/h3>
+&lt;h3 id="42-algorithm-describe">4.2 Algorithm describe&lt;/h3>
 &lt;p>TODO&lt;/p>
-&lt;h2 id="4-algorithm-development-guide">4 Algorithm development guide&lt;/h2>
+&lt;h2 id="5-algorithm-development-guide">5 Algorithm development guide&lt;/h2>
 &lt;p>TODO&lt;/p>
-&lt;h2 id="5-note">5 Note&lt;/h2>
+&lt;h2 id="6-note">6 Note&lt;/h2>
 &lt;ul>
 &lt;li>If some classes under computer-k8s cannot be found, you need to execute &lt;code>mvn compile&lt;/code> in advance to generate corresponding classes.&lt;/li>
 &lt;/ul></description></item><item><title>Docs: Rebuild API</title><link>/docs/clients/restful-api/rebuild/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/clients/restful-api/rebuild/</guid><description>
