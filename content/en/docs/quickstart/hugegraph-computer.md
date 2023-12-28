@@ -22,7 +22,7 @@ The [`HugeGraph-Computer`](https://github.com/apache/incubator-hugegraph-compute
 
 ### 2.1 Install Java 11 (JDK 11)
 
-Consider use Java 11 to run `HugeGraph-Computer` (**not compatible with Java 8 now!!!**), and configure by yourself.
+Required to use Java 11 to run `HugeGraph-Computer` (**not compatible with Java 8 now!!!**), and configure by yourself.
 
 **Be sure to execute the `java -version` command to check the jdk version before reading**
 
