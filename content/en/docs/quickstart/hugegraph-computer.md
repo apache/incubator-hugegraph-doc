@@ -18,9 +18,17 @@ The [`HugeGraph-Computer`](https://github.com/apache/incubator-hugegraph-compute
 - You can output the results to HDFS or HugeGraph, or any other system.
 - Easy to develop a new algorithm. You just need to focus on a vertex only processing just like as in a single server, without worrying about message transfer and memory/storage management.
 
-## 2 Get Started
+## 2 Dependency for Building/Running
 
-### 2.1 Run PageRank algorithm locally
+### 2.1 Install Java 11 (JDK 11)
+
+Required to use Java 11 to run `HugeGraph-Computer` (**not compatible with Java 8 now!!!**), and configure by yourself.
+
+**Be sure to execute the `java -version` command to check the jdk version before reading**
+
+## 3 Get Started
+
+### 3.1 Run PageRank algorithm locally
 
 > To run algorithm with HugeGraph-Computer, you need to install 64-bit Java 11 or later versions.
 >
@@ -31,7 +39,7 @@ There are two ways to get HugeGraph-Computer:
 - Download the compiled tarball
 - Clone source code then compile and package
 
-#### 2.1 Download the compiled archive
+#### 3.1.1 Download the compiled archive
 
 Download the latest version of the HugeGraph-Computer release package:
 
@@ -40,7 +48,7 @@ wget https://downloads.apache.org/incubator/hugegraph/${version}/apache-hugegrap
 tar zxvf apache-hugegraph-computer-incubating-${version}.tar.gz -C hugegraph-computer
 ```
 
-#### 2.2 Clone source code to compile and package
+#### 3.1.2 Clone source code to compile and package
 
 Clone the latest version of HugeGraph-Computer source package:
 
@@ -55,7 +63,7 @@ cd hugegraph-computer
 mvn clean package -DskipTests
 ```
 
-#### 2.3 Start master node
+#### 3.1.3 Start master node
 
 > You can use `-c`  parameter specify the configuration file, more computer config please see:[Computer Config Options](/docs/config/config-computer#computer-config-options)
 
@@ -64,15 +72,15 @@ cd hugegraph-computer
 bin/start-computer.sh -d local -r master
 ```
 
-#### 2.4 Start worker node
+#### 3.1.4 Start worker node
 
 ```bash
 bin/start-computer.sh -d local -r worker
 ```
 
-#### 2.5 Query algorithm results
+#### 3.1.5 Query algorithm results
 
-2.5.1 Enable `OLAP` index query for server
+3.1.5.1 Enable `OLAP` index query for server
 
 If OLAP index is not enabled, it needs to enable, more reference: [modify-graphs-read-mode](/docs/clients/restful-api/graphs/#634-modify-graphs-read-mode-this-operation-requires-administrator-privileges)
 
@@ -82,17 +90,17 @@ PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
 "ALL"
 ```
 
-2.5.2 Query `page_rank` property value:
+3.1.5.2 Query `page_rank` property value:
 
 ```bash
 curl "http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3" | gunzip
 ```
 
-### 2.2 Run PageRank algorithm in Kubernetes
+### 3.2 Run PageRank algorithm in Kubernetes
 
 > To run algorithm with HugeGraph-Computer you need to deploy HugeGraph-Server first
 
-#### 2.2.1 Install HugeGraph-Computer CRD
+#### 3.2.1 Install HugeGraph-Computer CRD
 
 ```bash
 # Kubernetes version >= v1.16
@@ -102,7 +110,7 @@ kubectl apply -f https://raw.githubusercontent.com/apache/hugegraph-computer/mas
 kubectl apply -f https://raw.githubusercontent.com/apache/hugegraph-computer/master/computer-k8s-operator/manifest/hugegraph-computer-crd.v1beta1.yaml
 ```
 
-#### 2.2.2 Show CRD
+#### 3.2.2 Show CRD
 
 ```bash
 kubectl get crd
@@ -111,13 +119,13 @@ NAME                                        CREATED AT
 hugegraphcomputerjobs.hugegraph.apache.org   2021-09-16T08:01:08Z
 ```
 
-#### 2.2.3 Install hugegraph-computer-operator&etcd-server
+#### 3.2.3 Install hugegraph-computer-operator&etcd-server
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/apache/hugegraph-computer/master/computer-k8s-operator/manifest/hugegraph-computer-operator.yaml
 ```
 
-#### 2.2.4 Wait for hugegraph-computer-operator&etcd-server deployment to complete
+#### 3.2.4 Wait for hugegraph-computer-operator&etcd-server deployment to complete
 
 ```bash
 kubectl get pod -n hugegraph-computer-operator-system
@@ -127,7 +135,7 @@ hugegraph-computer-operator-controller-manager-58c5545949-jqvzl   1/1     Runnin
 hugegraph-computer-operator-etcd-28lm67jxk5                       1/1     Running   0          15h
 ```
 
-#### 2.2.5 Submit job
+#### 3.2.5 Submit job
 
 > More computer crd please see: [Computer CRD](/docs/config/config-computer#hugegraph-computer-crd)
 >
@@ -157,7 +165,7 @@ spec:
 EOF
 ```
 
-#### 2.2.6 Show job
+#### 3.2.6 Show job
 
 ```bash
 kubectl get hcjob/pagerank-sample -n hugegraph-computer-operator-system
@@ -166,7 +174,7 @@ NAME               JOBID              JOBSTATUS
 pagerank-sample    pagerank-sample    RUNNING
 ```
 
-#### 2.2.7 Show log of nodes
+#### 3.2.7 Show log of nodes
 
 ```bash
 # Show the master log
@@ -180,7 +188,7 @@ kubectl logs -l component=pagerank-sample-worker -n hugegraph-computer-operator-
 kubectl get event --field-selector reason=ComputerJobFailed --field-selector involvedObject.name=pagerank-sample -n hugegraph-computer-operator-system
 ```
 
-#### 2.2.8 Show success event of a job
+#### 3.2.8 Show success event of a job
 
 > NOTE: it will only be saved for one hour
 
@@ -188,13 +196,13 @@ kubectl get event --field-selector reason=ComputerJobFailed --field-selector inv
 kubectl get event --field-selector reason=ComputerJobSucceed --field-selector involvedObject.name=pagerank-sample -n hugegraph-computer-operator-system
 ```
 
-#### 2.2.9 Query algorithm results
+#### 3.2.9 Query algorithm results
 
 If the output to `Hugegraph-Server` is consistent with Locally, if output to `HDFS`, please check the result file in the directory of `/hugegraph-computer/results/{jobId}` directory.
 
-## 3 Built-In algorithms document
+## 4 Built-In algorithms document
 
-### 3.1 Supported algorithms list:
+### 4.1 Supported algorithms list:
 
 ###### Centrality Algorithm:
 
@@ -218,14 +226,14 @@ If the output to `Hugegraph-Server` is consistent with Locally, if output to `HD
 
 More algorithms please see: [Built-In algorithms](https://github.com/apache/hugegraph-computer/tree/master/computer-algorithm/src/main/java/org/apache/hugegraph/computer/algorithm)
 
-### 3.2 Algorithm describe
+### 4.2 Algorithm describe
 
 TODO
 
-## 4 Algorithm development guide
+## 5 Algorithm development guide
 
 TODO
 
-## 5 Note
+## 6 Note
 
 - If some classes under computer-k8s cannot be found, you need to execute `mvn compile` in advance to generate corresponding classes.
