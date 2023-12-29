@@ -22,19 +22,15 @@ weight: 6
 
 ### 2.1 安装 Java 11 (JDK 11)
 
-要求在 Java 11 的环境上启动 `HugeGraph-Computer` (**现在不兼容 Java 8!**)，然后自行配置。
+**必须**在 ≥ `Java 11` 的环境上启动 `Computer`，然后自行配置。
 
 **在往下阅读之前务必执行 `java -version` 命令查看 jdk 版本**
-
-```bash
-java -version
-```
 
 ## 3 开始
 
 ### 3.1 在本地运行 PageRank 算法
 
-> 要使用 HugeGraph-Computer 运行算法，您需要安装 64 位 Java 11 或更高版本。
+> 要使用 HugeGraph-Computer 运行算法，必须装有 Java 11 或更高版本。
 >
 > 还需要首先部署 HugeGraph-Server 和 [Etcd](https://etcd.io/docs/v3.5/quickstart/).
 
