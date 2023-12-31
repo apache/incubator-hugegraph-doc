@@ -1436,7 +1436,7 @@
 &lt;/ul>
 &lt;h4 id="31-download-the-binary-tar-tarball">3.1 Download the binary tar tarball&lt;/h4>
 &lt;p>You could download the binary tarball from the download page of ASF site like this:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># use the latest version, here is 1.0.0 for example&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># use the latest version, here is 1.2.0 for example&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>/apache-hugegraph-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph*.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -1465,7 +1465,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn package -DskipTests -ntp
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The execution log is as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>......
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> Reactor Summary &lt;span style="color:#204a87;font-weight:bold">for&lt;/span> hugegraph 1.0.0:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> Reactor Summary &lt;span style="color:#204a87;font-weight:bold">for&lt;/span> hugegraph 1.2.0:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph .......................................... SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 2.405 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph-core ..................................... SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 13.405 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
@@ -1511,7 +1511,7 @@
 &lt;p>The docker image of hugegraph is a convenience release to start hugegraph quickly, but not &lt;strong>official distribution&lt;/strong> artifacts. You can find more details from &lt;a href="https://infra.apache.org/release-distribution.html#dockerhub">ASF Release Distribution Policy&lt;/a>.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>Recommand to use &lt;code>release tag&lt;/code>(like &lt;code>1.0.0&lt;/code>) for the stable version. Use &lt;code>latest&lt;/code> tag to experience the newest functions in development.&lt;/p>
+&lt;p>Recommand to use &lt;code>release tag&lt;/code>(like &lt;code>1.2.0&lt;/code>) for the stable version. Use &lt;code>latest&lt;/code> tag to experience the newest functions in development.&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;/blockquote>
@@ -1519,8 +1519,8 @@
 &lt;p>&lt;code>HugeGraph-Tools&lt;/code> provides a command-line tool for one-click deployment, users can use this tool to quickly download, decompress, configure and start &lt;code>HugeGraphServer&lt;/code> and &lt;code>HugeGraph-Hubble&lt;/code> with one click.&lt;/p>
 &lt;p>Of course, you should download the tarball of &lt;code>HugeGraph-Toolchain&lt;/code> first.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># download toolchain binary package, it includes loader + tool + hubble&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># please check the latest version (e.g. here is 1.0.0)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># please check the latest version (e.g. here is 1.2.0)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-toolchain-incubating-1.2.0.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph-*.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># enter the tool&amp;#39;s package&lt;/span>
@@ -4140,7 +4140,7 @@ multiple times to achieve deduplication. It should be noted that the properties 
 &lt;p>TinkerPop API allows open transactions, which are automatically closed when the request is completed (Gremlin Server forces close)&lt;/p>
 &lt;/blockquote></description></item><item><title>Docs: Download HugeGraph</title><link>/docs/download/download/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/download/download/</guid><description>
 &lt;h3 id="latest-version">Latest version&lt;/h3>
-&lt;p>The latest HugeGraph: &lt;strong>1.0.0&lt;/strong>, released on &lt;em>2023-02-22&lt;/em>(&lt;a href="/docs/quickstart/hugegraph-server/">how to build from source&lt;/a>).&lt;/p>
+&lt;p>The latest HugeGraph: &lt;strong>1.2.0&lt;/strong>, released on &lt;em>2023-12-28&lt;/em>(&lt;a href="/docs/quickstart/hugegraph-server/">how to build from source&lt;/a>).&lt;/p>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -4153,12 +4153,12 @@ multiple times to achieve deduplication. It should be noted that the properties 
 &lt;tr>
 &lt;td>HugeGraph-Server&lt;/td>
 &lt;td>The main program of HugeGraph&lt;/td>
-&lt;td>&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz">1.0.0&lt;/a>(&lt;a href="https://dlcdn.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz">alternate&lt;/a>)&lt;/td>
+&lt;td>&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-incubating-1.2.0.tar.gz">1.2.0&lt;/a>(&lt;a href="https://dlcdn.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-incubating-1.2.0.tar.gz">alternate&lt;/a>)&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>HugeGraph-Toolchain&lt;/td>
 &lt;td>A collection of tools for graph data import/export/backup, web visualization, etc.&lt;/td>
-&lt;td>&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz">1.0.0&lt;/a>(&lt;a href="https://dlcdn.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz">alternate&lt;/a>)&lt;/td>
+&lt;td>&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-toolchain-incubating-1.2.0.tar.gz">1.2.0&lt;/a>(&lt;a href="https://dlcdn.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-toolchain-incubating-1.2.0.tar.gz">alternate&lt;/a>)&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -4170,18 +4170,16 @@ multiple times to achieve deduplication. It should be noted that the properties 
 &lt;th>Release Date&lt;/th>
 &lt;th>server&lt;/th>
 &lt;th>toolchain&lt;/th>
-&lt;th>computer&lt;/th>
 &lt;th>Release Notes&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td>1.0.0&lt;/td>
-&lt;td>2023-02-22&lt;/td>
-&lt;td>[&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz">Binary&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
-&lt;td>[&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz">Binary&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
-&lt;td>[&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0.tar.gz">Binary&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
-&lt;td>&lt;a href="/docs/changelog/hugegraph-1.0.0-release-notes/">Release-Notes&lt;/a>&lt;/td>
+&lt;td>1.2.0&lt;/td>
+&lt;td>2023-12-28&lt;/td>
+&lt;td>[&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-incubating-1.2.0.tar.gz">Binary&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-incubating-1.2.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-incubating-1.2.0.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;td>[&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-toolchain-incubating-1.2.0.tar.gz">Binary&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-toolchain-incubating-1.2.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-toolchain-incubating-1.2.0.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;td>&lt;a href="/docs/changelog/hugegraph-1.2.0-release-notes/">Release-Notes&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -4201,19 +4199,51 @@ multiple times to achieve deduplication. It should be noted that the properties 
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td>1.0.0&lt;/td>
-&lt;td>2023-02-22&lt;/td>
-&lt;td>[&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0-src.tar.gz">Source&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0-src.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0-src.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
-&lt;td>[&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0-src.tar.gz">Source&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0-src.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0-src.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
-&lt;td>[&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0-src.tar.gz">Source&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0-src.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0-src.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
-&lt;td>[&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-commons-incubating-1.0.0-src.tar.gz">Source&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-commons-incubating-1.0.0-src.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-commons-incubating-1.0.0-src.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
-&lt;td>&lt;a href="/docs/changelog/hugegraph-1.0.0-release-notes/">Release-Notes&lt;/a>&lt;/td>
+&lt;td>1.2.0&lt;/td>
+&lt;td>2023-12-28&lt;/td>
+&lt;td>[&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-incubating-1.2.0-src.tar.gz">Source&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-incubating-1.2.0-src.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-incubating-1.2.0-src.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;td>[&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-toolchain-incubating-1.2.0-src.tar.gz">Source&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-toolchain-incubating-1.2.0-src.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-toolchain-incubating-1.2.0-src.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;td>[&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-computer-incubating-1.2.0-src.tar.gz">Source&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-computer-incubating-1.2.0-src.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-computer-incubating-1.2.0-src.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;td>[&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-commons-incubating-1.2.0-src.tar.gz">Source&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-commons-incubating-1.2.0-src.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-commons-incubating-1.2.0-src.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;td>&lt;a href="/docs/changelog/hugegraph-1.2.0-release-notes/">Release-Notes&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
 &lt;hr>
 &lt;h3 id="outdated-versions-mapping">Outdated Versions Mapping&lt;/h3>
-&lt;p>For versions before 1.0.0 (i.e. non ASF versions), the HugeGraph community will no longer maintain them.&lt;/p>
+&lt;p>Apache versions.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Version&lt;/th>
+&lt;th>Release Date&lt;/th>
+&lt;th>server&lt;/th>
+&lt;th>toolchain&lt;/th>
+&lt;th>Release Notes&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>1.2.0&lt;/td>
+&lt;td>2023-12-28&lt;/td>
+&lt;td>[&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-incubating-1.2.0.tar.gz">Binary&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-incubating-1.2.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-incubating-1.2.0.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;td>[&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-toolchain-incubating-1.2.0.tar.gz">Binary&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-toolchain-incubating-1.2.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-toolchain-incubating-1.2.0.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;td>&lt;a href="/docs/changelog/hugegraph-1.2.0-release-notes/">Release-Notes&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>1.0.0&lt;/td>
+&lt;td>2023-02-22&lt;/td>
+&lt;td>[&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz">Binary&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;td>[&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz">Binary&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;td>&lt;a href="/docs/changelog/hugegraph-1.0.0-release-notes/">Release-Notes&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Note:&lt;/p>
+&lt;ol>
+&lt;li>Please migrate to the latest release version as soon as possible. The community will no longer maintain old versions before &lt;code>1.0.0&lt;/code> (non ASF versions)&lt;/li>
+&lt;li>&lt;code>1.2.0&lt;/code> is the last major version compatible with &lt;code>Java8&lt;/code>, please migrate the runtime as soon as possible ≥ &lt;code>Java11&lt;/code>&lt;/li>
+&lt;/ol>
 &lt;table>
 &lt;thead>
 &lt;tr>
