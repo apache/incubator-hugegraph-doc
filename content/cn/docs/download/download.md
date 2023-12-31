@@ -6,7 +6,7 @@ weight: 2
 
 ### Latest version
 
-The latest HugeGraph: **1.2.0**, released on _2023-02-22_([how to build from source](/docs/quickstart/hugegraph-server/)).
+The latest HugeGraph: **1.2.0**, released on _2023-12-28_([how to build from source](/docs/quickstart/hugegraph-server/)).
 
 | components          | description                                      | download                                                                                                                                                                                                                          |
 | ------------------- | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
