@@ -18,11 +18,19 @@ weight: 6
 - 您可以将结果输出到 HDFS 或 HugeGraph，或任何其他系统。
 - 易于开发新算法。您只需要像在单个服务器中一样专注于仅顶点处理，而不必担心消息传输和内存存储管理。
 
-## 2 开始
+## 2 依赖
 
-### 2.1 在本地运行 PageRank 算法
+### 2.1 安装 Java 11 (JDK 11)
 
-> 要使用 HugeGraph-Computer 运行算法，您需要安装 64 位 Java 11 或更高版本。
+**必须**在 ≥ `Java 11` 的环境上启动 `Computer`，然后自行配置。
+
+**在往下阅读之前务必执行 `java -version` 命令查看 jdk 版本**
+
+## 3 开始
+
+### 3.1 在本地运行 PageRank 算法
+
+> 要使用 HugeGraph-Computer 运行算法，必须装有 Java 11 或更高版本。
 >
 > 还需要首先部署 HugeGraph-Server 和 [Etcd](https://etcd.io/docs/v3.5/quickstart/).
 
@@ -31,7 +39,7 @@ weight: 6
 - 下载已编译的压缩包
 - 克隆源码编译打包
 
-#### 2.1 Download the compiled archive
+#### 3.1.1 下载已编译的压缩包
 
 下载最新版本的 HugeGraph-Computer release 包：
 
@@ -40,7 +48,7 @@ wget https://downloads.apache.org/incubator/hugegraph/${version}/apache-hugegrap
 tar zxvf apache-hugegraph-computer-incubating-${version}.tar.gz -C hugegraph-computer
 ```
 
-#### 2.2 Clone source code to compile and package
+#### 3.1.2 克隆源码编译打包
 
 克隆最新版本的 HugeGraph-Computer 源码包：
 
@@ -55,7 +63,7 @@ cd hugegraph-computer
 mvn clean package -DskipTests
 ```
 
-#### 2.3 启动 master 节点
+#### 3.1.3 启动 master 节点
 
 > 您可以使用 `-c` 参数指定配置文件, 更多computer 配置请看: [Computer Config Options](/docs/config/config-computer#computer-config-options)
 
@@ -64,13 +72,13 @@ cd hugegraph-computer
 bin/start-computer.sh -d local -r master
 ```
 
-#### 2.4 启动 worker 节点
+#### 3.1.4 启动 worker 节点
 
 ```bash
 bin/start-computer.sh -d local -r worker
 ```
 
-#### 2.5 查询算法结果
+#### 3.1.5 查询算法结果
 
 2.5.1 为 server 启用 `OLAP` 索引查询
 
@@ -82,17 +90,17 @@ PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
 "ALL"
 ```
 
-2.5.2 查询 `page_rank` 属性值:
+3.1.5.2 查询 `page_rank` 属性值:
 
 ```bash
 curl "http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3" | gunzip
 ```
 
-### 2.2 在 Kubernetes 中运行 PageRank 算法
+### 3.2 在 Kubernetes 中运行 PageRank 算法
 
 > 要使用 HugeGraph-Computer 运行算法，您需要先部署 HugeGraph-Server
 
-#### 2.2.1 安装 HugeGraph-Computer CRD
+#### 3.2.1 安装 HugeGraph-Computer CRD
 
 ```bash
 # Kubernetes version >= v1.16
@@ -102,7 +110,7 @@ kubectl apply -f https://raw.githubusercontent.com/apache/hugegraph-computer/mas
 kubectl apply -f https://raw.githubusercontent.com/apache/hugegraph-computer/master/computer-k8s-operator/manifest/hugegraph-computer-crd.v1beta1.yaml
 ```
 
-#### 2.2.2 显示 CRD
+#### 3.2.2 显示 CRD
 
 ```bash
 kubectl get crd
@@ -111,13 +119,13 @@ NAME                                        CREATED AT
 hugegraphcomputerjobs.hugegraph.apache.org   2021-09-16T08:01:08Z
 ```
 
-#### 2.2.3 安装 hugegraph-computer-operator&etcd-server
+#### 3.2.3 安装 hugegraph-computer-operator&etcd-server
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/apache/hugegraph-computer/master/computer-k8s-operator/manifest/hugegraph-computer-operator.yaml
 ```
 
-#### 2.2.4 等待 hugegraph-computer-operator&etcd-server 部署完成
+#### 3.2.4 等待 hugegraph-computer-operator&etcd-server 部署完成
 
 ```bash
 kubectl get pod -n hugegraph-computer-operator-system
@@ -127,7 +135,7 @@ hugegraph-computer-operator-controller-manager-58c5545949-jqvzl   1/1     Runnin
 hugegraph-computer-operator-etcd-28lm67jxk5                       1/1     Running   0          15h
 ```
 
-#### 2.2.5 提交作业
+#### 3.2.5 提交作业
 
 > 更多 computer crd spec 请看: [Computer CRD](/docs/config/config-computer#hugegraph-computer-crd)
 >
@@ -157,7 +165,7 @@ spec:
 EOF
 ```
 
-#### 2.2.6 显示作业
+#### 3.2.6 显示作业
 
 ```bash
 kubectl get hcjob/pagerank-sample -n hugegraph-computer-operator-system
@@ -166,7 +174,7 @@ NAME               JOBID              JOBSTATUS
 pagerank-sample    pagerank-sample    RUNNING
 ```
 
-#### 2.2.7 显示节点日志
+#### 3.2.7 显示节点日志
 
 ```bash
 # Show the master log
@@ -180,7 +188,7 @@ kubectl logs -l component=pagerank-sample-worker -n hugegraph-computer-operator-
 kubectl get event --field-selector reason=ComputerJobFailed --field-selector involvedObject.name=pagerank-sample -n hugegraph-computer-operator-system
 ```
 
-#### 2.2.8 显示作业的成功事件
+#### 3.2.8 显示作业的成功事件
 
 > NOTE: it will only be saved for one hour
 
@@ -188,13 +196,13 @@ kubectl get event --field-selector reason=ComputerJobFailed --field-selector inv
 kubectl get event --field-selector reason=ComputerJobSucceed --field-selector involvedObject.name=pagerank-sample -n hugegraph-computer-operator-system
 ```
 
-#### 2.2.9 查询算法结果
+#### 3.2.9 查询算法结果
 
 如果输出到 `Hugegraph-Server` 则与 Locally 模式一致，如果输出到 `HDFS` ，请检查 `hugegraph-computerresults{jobId}`目录下的结果文件。
 
-## 3 内置算法文档
+## 4 内置算法文档
 
-### 3.1 支持的算法列表:
+### 4.1 支持的算法列表:
 
 ###### 中心性算法:
 
@@ -218,14 +226,14 @@ kubectl get event --field-selector reason=ComputerJobSucceed --field-selector in
 
 更多算法请看: [Built-In algorithms](https://github.com/apache/hugegraph-computer/tree/master/computer-algorithm/src/main/java/org/apache/hugegraph/computer/algorithm)
 
-### 3.2 算法描述
+### 4.2 算法描述
 
 TODO
 
-## 4 算法开发指南
+## 5 算法开发指南
 
 TODO
 
-## 5 注意事项
+## 6 注意事项
 
 - 如果computer-k8s模块下面的某些类不存在，你需要运行`mvn compile`来提前生成对应的类。
