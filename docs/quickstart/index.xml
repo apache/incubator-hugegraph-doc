@@ -3023,12 +3023,12 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;/ul>
 &lt;h2 id="2-dependency-for-buildingrunning">2 Dependency for Building/Running&lt;/h2>
 &lt;h3 id="21-install-java-11-jdk-11">2.1 Install Java 11 (JDK 11)&lt;/h3>
-&lt;p>Required to use Java 11 to run &lt;code>HugeGraph-Computer&lt;/code> (&lt;strong>not compatible with Java 8 now!!!&lt;/strong>), and configure by yourself.&lt;/p>
+&lt;p>&lt;strong>Must&lt;/strong> use ≥ &lt;code>Java 11&lt;/code> to run &lt;code>Computer&lt;/code>, and configure by yourself.&lt;/p>
 &lt;p>&lt;strong>Be sure to execute the &lt;code>java -version&lt;/code> command to check the jdk version before reading&lt;/strong>&lt;/p>
 &lt;h2 id="3-get-started">3 Get Started&lt;/h2>
 &lt;h3 id="31-run-pagerank-algorithm-locally">3.1 Run PageRank algorithm locally&lt;/h3>
 &lt;blockquote>
-&lt;p>To run algorithm with HugeGraph-Computer, you need to install 64-bit Java 11 or later versions.&lt;/p>
+&lt;p>To run algorithm with HugeGraph-Computer, you need to install Java 11 or later versions.&lt;/p>
 &lt;p>You also need to deploy HugeGraph-Server and &lt;a href="https://etcd.io/docs/v3.5/quickstart/">Etcd&lt;/a>.&lt;/p>
 &lt;/blockquote>
 &lt;p>There are two ways to get HugeGraph-Computer:&lt;/p>

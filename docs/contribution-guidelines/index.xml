@@ -262,7 +262,7 @@ the &lt;code>Maven-MAT&lt;/code> plugin)&lt;/li>
 expectations)&lt;/li>
 &lt;li>Finally, make sure the source code works/compiles correctly&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># prefer to use/switch to java 11 for the following operations (compiling/running)&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># prefer to use/switch to `java 11` for the following operations (compiling/running) (Note: `Computer` only supports `java &amp;gt;= 11`)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># java --version&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># try to compile in the Unix env to check if it works well&lt;/span>

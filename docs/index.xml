@@ -2120,6 +2120,14 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-computer/releases/tag/1.0.0">Computer Release Notes&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-commons/releases/tag/1.0.0">Commons Release Notes&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Docs: HugeGraph 1.2.0 Release Notes</title><link>/docs/changelog/hugegraph-1.2.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/changelog/hugegraph-1.2.0-release-notes/</guid><description>
+&lt;h3 id="java-version-statement">Java version statement&lt;/h3>
+&lt;p>v1.2.0:&lt;/p>
+&lt;ol>
+&lt;li>hugegraph, hugegraph-toolchain, hugegraph-commons consider use Java 11, also compatible with Java 8 now.&lt;/li>
+&lt;li>hugegraph-computer required to use Java 11, &lt;strong>not compatible with Java 8 now!&lt;/strong>&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>v1.2.0 is the last compatible version of Java8&lt;/strong>.&lt;/p>
+&lt;p>In the future, we will gradually upgrade the java version, &lt;strong>Java 11&lt;/strong> -&amp;gt; &lt;strong>Java 17&lt;/strong> -&amp;gt; &lt;strong>Java 21&lt;/strong>.&lt;/p>
 &lt;h3 id="hugegraph">hugegraph&lt;/h3>
 &lt;h4 id="api-changes">API Changes&lt;/h4>
 &lt;ul>
@@ -7495,7 +7503,7 @@ the &lt;code>Maven-MAT&lt;/code> plugin)&lt;/li>
 expectations)&lt;/li>
 &lt;li>Finally, make sure the source code works/compiles correctly&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># prefer to use/switch to java 11 for the following operations (compiling/running)&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># prefer to use/switch to `java 11` for the following operations (compiling/running) (Note: `Computer` only supports `java &amp;gt;= 11`)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># java --version&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># try to compile in the Unix env to check if it works well&lt;/span>
@@ -10683,12 +10691,12 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;/ul>
 &lt;h2 id="2-dependency-for-buildingrunning">2 Dependency for Building/Running&lt;/h2>
 &lt;h3 id="21-install-java-11-jdk-11">2.1 Install Java 11 (JDK 11)&lt;/h3>
-&lt;p>Required to use Java 11 to run &lt;code>HugeGraph-Computer&lt;/code> (&lt;strong>not compatible with Java 8 now!!!&lt;/strong>), and configure by yourself.&lt;/p>
+&lt;p>&lt;strong>Must&lt;/strong> use ≥ &lt;code>Java 11&lt;/code> to run &lt;code>Computer&lt;/code>, and configure by yourself.&lt;/p>
 &lt;p>&lt;strong>Be sure to execute the &lt;code>java -version&lt;/code> command to check the jdk version before reading&lt;/strong>&lt;/p>
 &lt;h2 id="3-get-started">3 Get Started&lt;/h2>
 &lt;h3 id="31-run-pagerank-algorithm-locally">3.1 Run PageRank algorithm locally&lt;/h3>
 &lt;blockquote>
-&lt;p>To run algorithm with HugeGraph-Computer, you need to install 64-bit Java 11 or later versions.&lt;/p>
+&lt;p>To run algorithm with HugeGraph-Computer, you need to install Java 11 or later versions.&lt;/p>
 &lt;p>You also need to deploy HugeGraph-Server and &lt;a href="https://etcd.io/docs/v3.5/quickstart/">Etcd&lt;/a>.&lt;/p>
 &lt;/blockquote>
 &lt;p>There are two ways to get HugeGraph-Computer:&lt;/p>

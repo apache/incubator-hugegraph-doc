@@ -253,7 +253,7 @@ hash 值一致 (一般是 sha512)&lt;/p>
 &lt;/ol>
 &lt;p>PMC 同学请特别注意认真检查 &lt;code>LICENSE&lt;/code> + &lt;code>NOTICE&lt;/code> 文件，确保文件严格遵循了 ASF 的发版要求，
 大部分的发版问题都与之相关&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 请优先使用/切换到 java 11 版本进行后序的编译和运行操作&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 请优先使用/切换到 `java 11` 版本进行后序的编译和运行操作 (注:`Computer` 仅支持 `java &amp;gt;= 11`) &lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># java --version&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 尝试在 Unix 环境下编译测试是否正常 (stage 表示从 stage 仓库拉取依赖)&lt;/span>

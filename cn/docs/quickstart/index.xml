@@ -2989,10 +2989,14 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;li>您可以将结果输出到 HDFS 或 HugeGraph，或任何其他系统。&lt;/li>
 &lt;li>易于开发新算法。您只需要像在单个服务器中一样专注于仅顶点处理，而不必担心消息传输和内存存储管理。&lt;/li>
 &lt;/ul>
-&lt;h2 id="2-开始">2 开始&lt;/h2>
-&lt;h3 id="21-在本地运行-pagerank-算法">2.1 在本地运行 PageRank 算法&lt;/h3>
+&lt;h2 id="2-依赖">2 依赖&lt;/h2>
+&lt;h3 id="21-安装-java-11-jdk-11">2.1 安装 Java 11 (JDK 11)&lt;/h3>
+&lt;p>&lt;strong>必须&lt;/strong>在 ≥ &lt;code>Java 11&lt;/code> 的环境上启动 &lt;code>Computer&lt;/code>，然后自行配置。&lt;/p>
+&lt;p>&lt;strong>在往下阅读之前务必执行 &lt;code>java -version&lt;/code> 命令查看 jdk 版本&lt;/strong>&lt;/p>
+&lt;h2 id="3-开始">3 开始&lt;/h2>
+&lt;h3 id="31-在本地运行-pagerank-算法">3.1 在本地运行 PageRank 算法&lt;/h3>
 &lt;blockquote>
-&lt;p>要使用 HugeGraph-Computer 运行算法，您需要安装 64 位 Java 11 或更高版本。&lt;/p>
+&lt;p>要使用 HugeGraph-Computer 运行算法，必须装有 Java 11 或更高版本。&lt;/p>
 &lt;p>还需要首先部署 HugeGraph-Server 和 &lt;a href="https://etcd.io/docs/v3.5/quickstart/">Etcd&lt;/a>.&lt;/p>
 &lt;/blockquote>
 &lt;p>有两种方式可以获取 HugeGraph-Computer：&lt;/p>
@@ -3000,56 +3004,56 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;li>下载已编译的压缩包&lt;/li>
 &lt;li>克隆源码编译打包&lt;/li>
 &lt;/ul>
-&lt;h4 id="21-download-the-compiled-archive">2.1 Download the compiled archive&lt;/h4>
+&lt;h4 id="311-下载已编译的压缩包">3.1.1 下载已编译的压缩包&lt;/h4>
 &lt;p>下载最新版本的 HugeGraph-Computer release 包：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>/apache-hugegraph-computer-incubating-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxvf apache-hugegraph-computer-incubating-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>.tar.gz -C hugegraph-computer
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="22-clone-source-code-to-compile-and-package">2.2 Clone source code to compile and package&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="312-克隆源码编译打包">3.1.2 克隆源码编译打包&lt;/h4>
 &lt;p>克隆最新版本的 HugeGraph-Computer 源码包：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ git clone https://github.com/apache/hugegraph-computer.git
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>编译生成tar包:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-computer
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn clean package -DskipTests
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="23-启动-master-节点">2.3 启动 master 节点&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="313-启动-master-节点">3.1.3 启动 master 节点&lt;/h4>
 &lt;blockquote>
 &lt;p>您可以使用 &lt;code>-c&lt;/code> 参数指定配置文件, 更多computer 配置请看: &lt;a href="/docs/config/config-computer#computer-config-options">Computer Config Options&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-computer
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/start-computer.sh -d &lt;span style="color:#204a87">local&lt;/span> -r master
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="24-启动-worker-节点">2.4 启动 worker 节点&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="314-启动-worker-节点">3.1.4 启动 worker 节点&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-computer.sh -d &lt;span style="color:#204a87">local&lt;/span> -r worker
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="25-查询算法结果">2.5 查询算法结果&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="315-查询算法结果">3.1.5 查询算法结果&lt;/h4>
 &lt;p>2.5.1 为 server 启用 &lt;code>OLAP&lt;/code> 索引查询&lt;/p>
 &lt;p>如果没有启用OLAP索引，则需要启用, 更多参考: &lt;a href="/docs/clients/restful-api/graphs/#634-modify-graphs-read-mode-this-operation-requires-administrator-privileges">modify-graphs-read-mode&lt;/a>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-http" data-lang="http">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&amp;#34;ALL&amp;#34;
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>2.5.2 查询 &lt;code>page_rank&lt;/code> 属性值:&lt;/p>
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>3.1.5.2 查询 &lt;code>page_rank&lt;/code> 属性值:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl &lt;span style="color:#4e9a06">&amp;#34;http://localhost:8080/graphs/hugegraph/graph/vertices?page&amp;amp;limit=3&amp;#34;&lt;/span> &lt;span style="color:#000;font-weight:bold">|&lt;/span> gunzip
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="22-在-kubernetes-中运行-pagerank-算法">2.2 在 Kubernetes 中运行 PageRank 算法&lt;/h3>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="32-在-kubernetes-中运行-pagerank-算法">3.2 在 Kubernetes 中运行 PageRank 算法&lt;/h3>
 &lt;blockquote>
 &lt;p>要使用 HugeGraph-Computer 运行算法，您需要先部署 HugeGraph-Server&lt;/p>
 &lt;/blockquote>
-&lt;h4 id="221-安装-hugegraph-computer-crd">2.2.1 安装 HugeGraph-Computer CRD&lt;/h4>
+&lt;h4 id="321-安装-hugegraph-computer-crd">3.2.1 安装 HugeGraph-Computer CRD&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Kubernetes version &amp;gt;= v1.16&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl apply -f https://raw.githubusercontent.com/apache/hugegraph-computer/master/computer-k8s-operator/manifest/hugegraph-computer-crd.v1.yaml
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Kubernetes version &amp;lt; v1.16&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl apply -f https://raw.githubusercontent.com/apache/hugegraph-computer/master/computer-k8s-operator/manifest/hugegraph-computer-crd.v1beta1.yaml
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="222-显示-crd">2.2.2 显示 CRD&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="322-显示-crd">3.2.2 显示 CRD&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get crd
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NAME CREATED AT
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugegraphcomputerjobs.hugegraph.apache.org 2021-09-16T08:01:08Z
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="223-安装-hugegraph-computer-operatoretcd-server">2.2.3 安装 hugegraph-computer-operator&amp;amp;etcd-server&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="323-安装-hugegraph-computer-operatoretcd-server">3.2.3 安装 hugegraph-computer-operator&amp;amp;etcd-server&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl apply -f https://raw.githubusercontent.com/apache/hugegraph-computer/master/computer-k8s-operator/manifest/hugegraph-computer-operator.yaml
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="224-等待-hugegraph-computer-operatoretcd-server-部署完成">2.2.4 等待 hugegraph-computer-operator&amp;amp;etcd-server 部署完成&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="324-等待-hugegraph-computer-operatoretcd-server-部署完成">3.2.4 等待 hugegraph-computer-operator&amp;amp;etcd-server 部署完成&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get pod -n hugegraph-computer-operator-system
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NAME READY STATUS RESTARTS AGE
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugegraph-computer-operator-controller-manager-58c5545949-jqvzl 1/1 Running &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 15h
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugegraph-computer-operator-etcd-28lm67jxk5 1/1 Running &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 15h
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="225-提交作业">2.2.5 提交作业&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="325-提交作业">3.2.5 提交作业&lt;/h4>
 &lt;blockquote>
 &lt;p>更多 computer crd spec 请看: &lt;a href="/docs/config/config-computer#hugegraph-computer-crd">Computer CRD&lt;/a>&lt;/p>
 &lt;p>更多 Computer 配置请看: &lt;a href="/docs/config/config-computer#computer-config-options">Computer Config Options&lt;/a>&lt;/p>
@@ -3075,12 +3079,12 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hugegraph.url&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">http://${hugegraph-server-host}:${hugegraph-server-port}&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># hugegraph server url&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hugegraph.name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># hugegraph graph name&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#000">EOF&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="226-显示作业">2.2.6 显示作业&lt;/h4>
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="326-显示作业">3.2.6 显示作业&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get hcjob/pagerank-sample -n hugegraph-computer-operator-system
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NAME JOBID JOBSTATUS
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pagerank-sample pagerank-sample RUNNING
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="227-显示节点日志">2.2.7 显示节点日志&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="327-显示节点日志">3.2.7 显示节点日志&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Show the master log&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl logs -l &lt;span style="color:#000">component&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>pagerank-sample-master -n hugegraph-computer-operator-system
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -3090,15 +3094,15 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Show diagnostic log of a job&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 注意: 诊断日志仅在作业失败时存在，并且只会保存一小时。&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl get event --field-selector &lt;span style="color:#000">reason&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>ComputerJobFailed --field-selector involvedObject.name&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>pagerank-sample -n hugegraph-computer-operator-system
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="228-显示作业的成功事件">2.2.8 显示作业的成功事件&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="328-显示作业的成功事件">3.2.8 显示作业的成功事件&lt;/h4>
 &lt;blockquote>
 &lt;p>NOTE: it will only be saved for one hour&lt;/p>
 &lt;/blockquote>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get event --field-selector &lt;span style="color:#000">reason&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>ComputerJobSucceed --field-selector involvedObject.name&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>pagerank-sample -n hugegraph-computer-operator-system
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="229-查询算法结果">2.2.9 查询算法结果&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="329-查询算法结果">3.2.9 查询算法结果&lt;/h4>
 &lt;p>如果输出到 &lt;code>Hugegraph-Server&lt;/code> 则与 Locally 模式一致，如果输出到 &lt;code>HDFS&lt;/code> ，请检查 &lt;code>hugegraph-computerresults{jobId}&lt;/code>目录下的结果文件。&lt;/p>
-&lt;h2 id="3-内置算法文档">3 内置算法文档&lt;/h2>
-&lt;h3 id="31-支持的算法列表">3.1 支持的算法列表:&lt;/h3>
+&lt;h2 id="4-内置算法文档">4 内置算法文档&lt;/h2>
+&lt;h3 id="41-支持的算法列表">4.1 支持的算法列表:&lt;/h3>
 &lt;h6 id="中心性算法">中心性算法:&lt;/h6>
 &lt;ul>
 &lt;li>PageRank&lt;/li>
@@ -3120,11 +3124,11 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;li>RingsDetectionWithFilter&lt;/li>
 &lt;/ul>
 &lt;p>更多算法请看: &lt;a href="https://github.com/apache/hugegraph-computer/tree/master/computer-algorithm/src/main/java/org/apache/hugegraph/computer/algorithm">Built-In algorithms&lt;/a>&lt;/p>
-&lt;h3 id="32-算法描述">3.2 算法描述&lt;/h3>
+&lt;h3 id="42-算法描述">4.2 算法描述&lt;/h3>
 &lt;p>TODO&lt;/p>
-&lt;h2 id="4-算法开发指南">4 算法开发指南&lt;/h2>
+&lt;h2 id="5-算法开发指南">5 算法开发指南&lt;/h2>
 &lt;p>TODO&lt;/p>
-&lt;h2 id="5-注意事项">5 注意事项&lt;/h2>
+&lt;h2 id="6-注意事项">6 注意事项&lt;/h2>
 &lt;ul>
 &lt;li>如果computer-k8s模块下面的某些类不存在，你需要运行&lt;code>mvn compile&lt;/code>来提前生成对应的类。&lt;/li>
 &lt;/ul></description></item></channel></rss>
