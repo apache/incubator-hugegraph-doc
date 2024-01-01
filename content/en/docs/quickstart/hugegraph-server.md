@@ -121,21 +121,6 @@ services:
     ports:
       - 8080:8080
 ```
-In docker deployment mode, if you want to use HugeGraph authentication mode, you need to enter the container to stop HugeGraph, delete the related graph data and restart HugeGraph. if the graph already has business data, you can't convert authentication mode directly for the time being (improvements/support for this feature will be released in the next version).
-```bash
-# stop the hugeGraph firstly
-bin/stop-hugegraph.sh
-
-# delete the store data (here we use the default path for rocksdb)
-rm -rf rocksdb-data/
-
-# init store again
-bin/init-store.sh
-
-# start hugeGraph again
-bin/start-hugegraph.sh
-
-```
 
 > Note: 
 >
@@ -190,23 +175,6 @@ Since the configuration (hugegraph.properties) and startup steps required by var
 
 If you want to use HugeGraph authentication mode, you should follow the [Server Authentication Configuration](https://hugegraph.apache.org/cn/docs/config/config-authentication/) configuration before you start Server later.
 
-If HugeGraph has been initialized and needs to be converted to forensic mode, you need to delete the related graph data and restart HugeGraph. if the graph already has business data, you can't directly convert the forensic mode for the time being (improvements/support for this feature will be released in the next version).
-
-If you have initialized HugeGraph and need to convert to the authentication mode, you need to delete the related graph data and restart HugeGraph. if the graph already has business data, you can't convert to the authentication mode, the support for this feature will be supported in the next release.
-```bash
-# stop the hugeGraph firstly
-bin/stop-hugegraph.sh
-
-# delete the store data (here we use the default path for rocksdb)
-rm -rf rocksdb-data/
-
-# init store again
-bin/init-store.sh
-
-# start hugeGraph again
-bin/start-hugegraph.sh
-
-```
 ##### 5.1.1 Memory
 
 <details>

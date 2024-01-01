@@ -74,3 +74,21 @@ For detailed API calls and explanations regarding permissions, please refer to t
 If you need to support a more flexible user system, you can customize the authenticator for extension.
 Simply implement the `org.apache.hugegraph.auth.HugeAuthenticator` interface with your custom authenticator, 
 and then modify the `authenticator` configuration item in the configuration file to point to your implementation.
+
+### Switching authentication mode
+
+If HugeGraph has already been initialized and needs to be converted to authentication mode, relevant graph data needs to be deleted and HugeGraph needs to be restarted. If there is already business data in the diagram, it is temporarily not possible to directly convert the authentication mode (improvements/support for this feature will be released in the next version).
+```bash
+# stop the hugeGraph firstly
+bin/stop-hugegraph.sh
+
+# delete the store data (here we use the default path for rocksdb)
+rm -rf rocksdb-data/
+
+# init store again
+bin/init-store.sh
+
+# start hugeGraph again
+bin/start-hugegraph.sh
+
+```
