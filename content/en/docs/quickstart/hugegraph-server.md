@@ -121,13 +121,12 @@ services:
     ports:
       - 8080:8080
 ```
-In docker deployment mode, if you want to use HugeGraph authentication mode, you need to enter the container to stop HugeGraph, then delete the related graph data and restart HugeGraph. if the graph already has business data, you can't switch the authentication mode, the support for this feature will be supported in the next release.
-
+In docker deployment mode, if you want to use HugeGraph authentication mode, you need to enter the container to stop HugeGraph, delete the related graph data and restart HugeGraph. if the graph already has business data, you can't convert authentication mode directly for the time being (improvements/support for this feature will be released in the next version).
 ```bash
 # stop the hugeGraph firstly
 bin/stop-hugegraph.sh
 
-# delete the store data
+# delete the store data (here we use the default path for rocksdb)
 rm -rf rocksdb-data/
 
 # init store again
@@ -189,16 +188,16 @@ If you need to access HugeGraphServer externally, please modify the `restserver.
 
 Since the configuration (hugegraph.properties) and startup steps required by various backends are slightly different, the following will introduce the configuration and startup of each backend one by one.
 
-If you want to use HugeGraph authentication mode, you should follow the [HugeGraph Authentication Configuration](https://hugegraph.apache.org/cn/docs/config/config-authentication/) configuration before you start HugeGraph later.
+If you want to use HugeGraph authentication mode, you should follow the [Server Authentication Configuration](https://hugegraph.apache.org/cn/docs/config/config-authentication/) configuration before you start Server later.
 
-如果已经初始化 HugeGraph 并需要转换为鉴权模式，则需要删除相关图数据并重新启动 HugeGraph。若图已有业务数据，则无法转换鉴权模式，对于该功能的支持将在下个版本中支持。
+If HugeGraph has been initialized and needs to be converted to forensic mode, you need to delete the related graph data and restart HugeGraph. if the graph already has business data, you can't directly convert the forensic mode for the time being (improvements/support for this feature will be released in the next version).
 
 If you have initialized HugeGraph and need to convert to the authentication mode, you need to delete the related graph data and restart HugeGraph. if the graph already has business data, you can't convert to the authentication mode, the support for this feature will be supported in the next release.
 ```bash
 # stop the hugeGraph firstly
 bin/stop-hugegraph.sh
 
-# delete the store data
+# delete the store data (here we use the default path for rocksdb)
 rm -rf rocksdb-data/
 
 # init store again
