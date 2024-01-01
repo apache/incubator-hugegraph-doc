@@ -69,9 +69,11 @@ gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 如果需要支持更加灵活的用户系统，可自定义 authenticator 进行扩展，自定义 authenticator 实现接口`org.apache.hugegraph.auth.HugeAuthenticator`即可，然后修改配置文件中`authenticator`配置项指向该实现。
 
 
-### 切换鉴权模式
+### 基于鉴权模式启动
 
-如果已经初始化 HugeGraph 并需要转换为鉴权模式，需要删除相关图数据并重新启动 HugeGraph。若图已有业务数据，暂时无法直接转换鉴权模式 (对于该功能的改进/支持将在下个版本中发布)。
+在鉴权配置完成后，对于非 docker 部署模式，首次执行 init-store.sh 时支持在命令行输入 admin 账户密码。
+
+如果基于 docker 镜像部署或者已经初始化 HugeGraph 并需要转换为鉴权模式，需要删除相关图数据并重新启动 HugeGraph，若图已有业务数据，暂时无法直接转换鉴权模式 (对于该功能的改进/支持将在下个版本中发布)。
 
 ```bash
 # stop the hugeGraph firstly
