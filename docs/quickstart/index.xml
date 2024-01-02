@@ -125,6 +125,7 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;p>If you need to access HugeGraphServer externally, please modify the &lt;code>restserver.url&lt;/code> configuration item of &lt;code>rest-server.properties&lt;/code>
 （default is &lt;code>http://127.0.0.1:8080&lt;/code>）, change to machine name or IP address.&lt;/p>
 &lt;p>Since the configuration (hugegraph.properties) and startup steps required by various backends are slightly different, the following will introduce the configuration and startup of each backend one by one.&lt;/p>
+&lt;p>If you want to use HugeGraph authentication mode, you should follow the &lt;a href="https://hugegraph.apache.org/docs/config/config-authentication/">Server Authentication Configuration&lt;/a> configuration before you start Server later.&lt;/p>
 &lt;h5 id="511-memory">5.1.1 Memory&lt;/h5>
 &lt;details>
 &lt;summary>Click to expand/collapse Memory configuration and startup methods&lt;/summary>

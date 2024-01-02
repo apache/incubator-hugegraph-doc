@@ -1541,7 +1541,24 @@ roles. Below is the specific configuration process (requires service restart):&l
 &lt;h3 id="custom-user-authentication-system">Custom User Authentication System&lt;/h3>
 &lt;p>If you need to support a more flexible user system, you can customize the authenticator for extension.
 Simply implement the &lt;code>org.apache.hugegraph.auth.HugeAuthenticator&lt;/code> interface with your custom authenticator,
-and then modify the &lt;code>authenticator&lt;/code> configuration item in the configuration file to point to your implementation.&lt;/p></description></item><item><title>Docs: Configuring HugeGraphServer to Use HTTPS Protocol</title><link>/docs/config/config-https/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/config/config-https/</guid><description>
+and then modify the &lt;code>authenticator&lt;/code> configuration item in the configuration file to point to your implementation.&lt;/p>
+&lt;h3 id="switching-authentication-mode">Switching authentication mode&lt;/h3>
+&lt;p>After the authentication configuration completed, enter the &lt;strong>admin password&lt;/strong> on the &lt;strong>command line&lt;/strong> when executing &lt;code>init store. sh&lt;/code> for the first time. (For non-Docker mode)&lt;/p>
+&lt;p>If deployed based on Docker image or if HugeGraph has already been initialized and needs to be converted to authentication mode,
+relevant graph data needs to be deleted and HugeGraph needs to be restarted. If there is already business data in the diagram,
+it is temporarily &lt;strong>not possible&lt;/strong> to directly convert the authentication mode (improvements/support for this feature will be released in the next version).&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># stop the hugeGraph firstly&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/stop-hugegraph.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># delete the store data (here we use the default path for rocksdb)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rm -rf rocksdb-data/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># init store again&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/init-store.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># start hugeGraph again&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Configuring HugeGraphServer to Use HTTPS Protocol</title><link>/docs/config/config-https/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/config/config-https/</guid><description>
 &lt;h3 id="overview">Overview&lt;/h3>
 &lt;p>By default, HugeGraphServer uses the HTTP protocol. However, if you have security requirements for your requests, you can configure it to use HTTPS.&lt;/p>
 &lt;h3 id="server-configuration">Server Configuration&lt;/h3>

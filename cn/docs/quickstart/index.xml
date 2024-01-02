@@ -104,6 +104,7 @@
 &lt;p>HugeGraphServer 启动时会连接后端存储并尝试检查后端存储版本号，如果未初始化后端或者后端已初始化但版本不匹配时（旧版本数据），HugeGraphServer 会启动失败，并给出错误信息。&lt;/p>
 &lt;p>如果需要外部访问 HugeGraphServer，请修改 &lt;code>rest-server.properties&lt;/code> 的 &lt;code>restserver.url&lt;/code> 配置项（默认为 &lt;code>http://127.0.0.1:8080&lt;/code>），修改成机器名或 IP 地址。&lt;/p>
 &lt;p>由于各种后端所需的配置（hugegraph.properties）及启动步骤略有不同，下面逐一对各后端的配置及启动做介绍。&lt;/p>
+&lt;p>如果想要使用 HugeGraph 鉴权模式，在后面正式启动 Server 之前应按照 &lt;a href="https://hugegraph.apache.org/cn/docs/config/config-authentication/">Server 鉴权配置&lt;/a> 进行配置。&lt;/p>
 &lt;h5 id="511-rocksdb">5.1.1 RocksDB&lt;/h5>
 &lt;details>
 &lt;summary>点击展开/折叠 RocksDB 配置及启动方法&lt;/summary>
