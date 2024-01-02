@@ -160,6 +160,8 @@ HugeGraphServer 启动时会连接后端存储并尝试检查后端存储版本�
 
 由于各种后端所需的配置（hugegraph.properties）及启动步骤略有不同，下面逐一对各后端的配置及启动做介绍。
 
+如果想要使用 HugeGraph 鉴权模式，在后面正式启动 Server 之前应按照 [Server 鉴权配置](https://hugegraph.apache.org/cn/docs/config/config-authentication/) 进行配置。
+
 ##### 5.1.1 RocksDB
 
 <details>

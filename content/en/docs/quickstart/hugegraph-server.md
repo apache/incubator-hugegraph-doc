@@ -173,6 +173,8 @@ If you need to access HugeGraphServer externally, please modify the `restserver.
 
 Since the configuration (hugegraph.properties) and startup steps required by various backends are slightly different, the following will introduce the configuration and startup of each backend one by one.
 
+If you want to use HugeGraph authentication mode, you should follow the [Server Authentication Configuration](https://hugegraph.apache.org/docs/config/config-authentication/) configuration before you start Server later.
+
 ##### 5.1.1 Memory
 
 <details>
