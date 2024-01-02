@@ -77,12 +77,11 @@ and then modify the `authenticator` configuration item in the configuration file
 
 ### Switching authentication mode
 
-After the authentication configuration is completed, for non Docker deployment modes, 
-it is supported to enter the admin account password on the command line when executing init store. sh for the first time.
+After the authentication configuration completed, enter the **admin password** on the **command line** when executing `init store. sh` for the first time. (For non-Docker mode)
 
 If deployed based on Docker image or if HugeGraph has already been initialized and needs to be converted to authentication mode, 
 relevant graph data needs to be deleted and HugeGraph needs to be restarted. If there is already business data in the diagram, 
-it is temporarily not possible to directly convert the authentication mode (improvements/support for this feature will be released in the next version).
+it is temporarily **not possible** to directly convert the authentication mode (improvements/support for this feature will be released in the next version).
 
 ```bash
 # stop the hugeGraph firstly
