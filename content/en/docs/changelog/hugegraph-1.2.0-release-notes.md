@@ -9,7 +9,7 @@ v1.2.0:
 1. hugegraph, hugegraph-toolchain, hugegraph-commons consider use Java 11, also compatible with Java 8 now. 
 2. hugegraph-computer required to use Java 11, **not compatible with Java 8 now!**
 
-**v1.2.0 is the last compatible version of Java8**.
+**v1.2.0 may be the last version compatible with Java 8 (assuming there is no 1.3 and 1.4).** Compatibility with Java 8 will end with v1.5 (excluding the client).
 
 In the future, we will gradually upgrade the java version, **Java 11** -> **Java 17** -> **Java 21**.
 
