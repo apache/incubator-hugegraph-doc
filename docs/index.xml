@@ -6960,7 +6960,7 @@ and then modify the &lt;code>authenticator&lt;/code> configuration item in the c
 &lt;p>After the authentication configuration completed, enter the &lt;strong>admin password&lt;/strong> on the &lt;strong>command line&lt;/strong> when executing &lt;code>init store. sh&lt;/code> for the first time. (For non-Docker mode)&lt;/p>
 &lt;p>If deployed based on Docker image or if HugeGraph has already been initialized and needs to be converted to authentication mode,
 relevant graph data needs to be deleted and HugeGraph needs to be restarted. If there is already business data in the diagram,
-it is temporarily &lt;strong>not possible&lt;/strong> to directly convert the authentication mode (improvements/support for this feature will be released in the next version).&lt;/p>
+it is temporarily &lt;strong>not possible&lt;/strong> to directly convert the authentication mode (improvements/support for this feature will be released in the next version. Could refer &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2411">PR 2411&lt;/a>).&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># stop the hugeGraph firstly&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/stop-hugegraph.sh
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
