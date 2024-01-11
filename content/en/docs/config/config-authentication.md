@@ -81,7 +81,7 @@ After the authentication configuration completed, enter the **admin password** o
 
 If deployed based on Docker image or if HugeGraph has already been initialized and needs to be converted to authentication mode, 
 relevant graph data needs to be deleted and HugeGraph needs to be restarted. If there is already business data in the diagram, 
-it is temporarily **not possible** to directly convert the authentication mode (improvements/support for this feature will be released in the next version. The latest code has already been fixed: [PR 2411](https://github.com/apache/incubator-hugegraph/pull/2411).).
+it is temporarily **not possible** to directly convert the authentication mode (improvements/support for this feature will be released in the next version. Could refer [PR 2411](https://github.com/apache/incubator-hugegraph/pull/2411)).
 
 ```bash
 # stop the hugeGraph firstly
