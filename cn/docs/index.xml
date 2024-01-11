@@ -2004,7 +2004,7 @@ HugeGraph支持多用户并行操作，用户可输入Gremlin查询语句，并�
 &lt;li>hugegraph, hugegraph-toolchain, hugegraph-commons consider use Java 11, also compatible with Java 8 now.&lt;/li>
 &lt;li>hugegraph-computer required to use Java 11, &lt;strong>not compatible with Java 8 now!&lt;/strong>&lt;/li>
 &lt;/ol>
-&lt;p>&lt;strong>v1.2.0 is the last compatible version of Java8&lt;/strong>.&lt;/p>
+&lt;p>&lt;strong>v1.2.0 可能是最后一个兼容 Java8 的大版本&lt;/strong>, 到 1.5.0 &lt;a href="https://github.com/apache/incubator-hugegraph/issues/2265">PD/Store&lt;/a> 正式合入 master 后标志着 Java8 兼容的正式终结 (除Client 外所有组件都将以 Java 11 作为基准, 然后迈向 Java17).&lt;/p>
 &lt;p>In the future, we will gradually upgrade the java version, &lt;strong>Java 11&lt;/strong> -&amp;gt; &lt;strong>Java 17&lt;/strong> -&amp;gt; &lt;strong>Java 21&lt;/strong>.&lt;/p>
 &lt;h3 id="hugegraph">hugegraph&lt;/h3>
 &lt;h4 id="api-changes">API Changes&lt;/h4>
