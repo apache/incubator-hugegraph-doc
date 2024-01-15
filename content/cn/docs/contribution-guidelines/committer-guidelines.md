@@ -131,7 +131,7 @@ Thanks!
 
 ## 宣布投票结果
 
-投票邮件结束后，投票发起者需要在第二封 [VOTE] 邮件里提醒投票结束。同时，投票发起者需要发起邮票宣布投票结果，发送至 private@hugegraph.apache.org。
+投票邮件结束后，投票发起者需要邮件里提醒投票结束。同时，投票发起者需要发起邮件宣布投票结果，发送至 private@hugegraph.apache.org。
 
 > TODO: 邮件模板
 
