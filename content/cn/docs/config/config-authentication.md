@@ -89,3 +89,46 @@ bin/init-store.sh
 bin/start-hugegraph.sh
 
 ```
+
+### 使用 Docker 时开启鉴权模式
+
+对于镜像 `hugegraph/hugegraph` 大于等于 `1.2.0` 的版本，我们可以在启动 `docker` 镜像的同时开启鉴权模式
+
+具体做法如下：
+
+#### 1. 采用 docker run
+
+在 `docker run` 中添加环境变量 `AUTH=true` 即可开启鉴权模式，默认密码为 `hugegraph`，也可以手动设置密码，如 `123456`：
+
+```bash
+docker run -itd -e AUTH=true -e PASSWORD=123456 --name=graph -p 8080:8080 hugegraph/hugegraph:1.2.0
+```
+
+#### 2. 采用 docker-compose
+
+使用 `docker-compose` 在环境变量中设置 `AUTH=true` 以及 `PASSWORD` (可选) 即可
+
+```yaml
+version: '3'
+services:
+  server:
+    image: hugegraph/hugegraph:1.2.0
+    container_name: graph
+    ports:
+      - 8080:8080
+    environment:
+      - AUTH=true
+      - PASSWORD=123456
+```
+
+#### 3. 进入容器后重新开启鉴权模式
+
+首先进入容器：
+
+```bash
+docker exec -it graph bash
+# 用于快速修改配置
+bin/enable-auth.sh
+```
+
+之后参照 [基于鉴权模式启动](#基于鉴权模式启动) 即可
