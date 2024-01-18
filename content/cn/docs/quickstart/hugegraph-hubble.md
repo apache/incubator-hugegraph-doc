@@ -42,13 +42,13 @@ HugeGraph 是一款面向分析型，支持批量操作的图数据库系统，�
 
 #### 2.1 使用 Docker (便于**测试**)
 
-> **特别注意**: docker 模式下，若 hubble 和 server 在同一宿主机，hubble 页面中设置 graph 的 `hostname` **不能设置**为 `localhost/127.0.0.1`，因这会指向 hubble **容器内部**而非宿主机，导致无法连接到 server.
+> **特别注意**: docker 模式下，若 hubble 和 server 在同一宿主机，hubble 页面中设置 server 的 `hostname` **不能设置**为 `localhost/127.0.0.1`，因这会指向 hubble **容器内部**而非宿主机，导致无法连接到 server.
 > 
-> 若 hubble 和 server 在同一 docker 网络下，**推荐**直接使用`container_name` (如下例的 `graph`) 作为主机名。或者也可以使用 **宿主机 IP** 作为主机名，此时端口号为宿主机给 server 配置的端口
+> 若 hubble 和 server 在同一 docker 网络下，**推荐**直接使用`container_name` (如下例的 `server`) 作为主机名。或者也可以使用 **宿主机 IP** 作为主机名，此时端口号为宿主机给 server 配置的端口
 
 我们可以使用 `docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble` 快速启动 [hubble](https://hub.docker.com/r/hugegraph/hubble).
 
-或者使用 docker-compose 启动 hubble，另外如果 hubble 和 graph 在同一个 docker 网络下，可以使用 graph 的 contain_name 进行访问，而不需要宿主机的 ip
+或者使用 docker-compose 启动 hubble，另外如果 hubble 和 server 在同一个 docker 网络下，可以使用 server 的 contain_name 进行访问，而不需要宿主机的 ip
 
 使用`docker-compose up -d`，`docker-compose.yml`如下：
 
@@ -57,7 +57,7 @@ version: '3'
 services:
   server:
     image: hugegraph/hugegraph
-    container_name: graph
+    container_name: server
     ports:
       - 8080:8080
 
@@ -79,7 +79,7 @@ services:
 `hubble`项目在`toolchain`项目中，首先下载`toolchain`的 tar 包
 
 ```bash
-wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-{version}.tar.gz
+wget https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph-toolchain-incubating-{version}.tar.gz
 tar -xvf apache-hugegraph-toolchain-incubating-{version}.tar.gz 
 cd apache-hugegraph-toolchain-incubating-{version}.tar.gz/apache-hugegraph-hubble-incubating-{version}
 ```

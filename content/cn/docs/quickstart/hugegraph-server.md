@@ -38,12 +38,12 @@ java -version
 
 可参考 [Docker 部署方式](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/README.md)。
 
-我们可以使用 `docker run -itd --name=graph -p 8080:8080 hugegraph/hugegraph` 去快速启动一个内置了 `RocksDB` 的 `Hugegraph server`.
+我们可以使用 `docker run -itd --name=server -p 8080:8080 hugegraph/hugegraph` 去快速启动一个内置了 `RocksDB` 的 `Hugegraph server`.
 
 可选项：
 
-1. 可以使用 `docker exec -it graph bash` 进入容器完成一些操作
-2. 可以使用 `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph` 在启动的时候预加载一个**内置的**样例图。可以通过 `RESTful API` 进行验证。具体步骤可以参考 [5.1.1](/cn/docs/quickstart/hugegraph-server/#511-%E5%90%AF%E5%8A%A8-server-%E7%9A%84%E6%97%B6%E5%80%99%E5%88%9B%E5%BB%BA%E7%A4%BA%E4%BE%8B%E5%9B%BE) 
+1. 可以使用 `docker exec -it server bash` 进入容器完成一些操作
+2. 可以使用 `docker run -itd --name=server -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph` 在启动的时候预加载一个**内置的**样例图。可以通过 `RESTful API` 进行验证。具体步骤可以参考 [5.1.1](/cn/docs/quickstart/hugegraph-server/#511-%E5%90%AF%E5%8A%A8-server-%E7%9A%84%E6%97%B6%E5%80%99%E5%88%9B%E5%BB%BA%E7%A4%BA%E4%BE%8B%E5%9B%BE) 
 3. 可以使用 `AUTH=true -e PASSWORD=123456` 设置是否开启鉴权模式以及 admin 的密码，具体步骤可以参考 [Config Authentication](/cn/docs/config/config-authentication#使用-docker-时开启鉴权模式) 
 
 另外，如果我们希望能够在一个文件中管理除了 `server` 之外的其他 Hugegraph 相关的实例，我们也可以使用 `docker-compose`完成部署，使用命令 `docker-compose up -d`，（当然只配置 `server` 也是可以的）以下是一个样例的 `docker-compose.yml`:
@@ -51,8 +51,9 @@ java -version
 ```yaml
 version: '3'
 services:
-  graph:
+  server:
     image: hugegraph/hugegraph
+    container_name: server
     # environment:
     #  - PRELOAD=true 为可选参数，为 True 时可以在启动的时候预加载一个内置的样例图
     #  - AUTH=true 为可选参数，为 True 时可以在启动的时候开启鉴权模式，默认密码为 hugegraph
@@ -451,9 +452,9 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)......OK
 version: "3"
 
 services:
-  graph:
+  server:
     image: hugegraph/hugegraph
-    container_name: cas-graph
+    container_name: cas-server
     ports:
       - 8080:8080
     environment:
@@ -508,7 +509,7 @@ volumes:
 
 1. 使用`docker run`
 
-    使用 `docker run -itd --name=graph -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:latest`
+    使用 `docker run -itd --name=server -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:latest`
 
 2. 使用`docker-compose`
 
@@ -517,9 +518,9 @@ volumes:
     ```yaml
     version: '3'
       services:
-        graph:
+        server:
           image: hugegraph/hugegraph:latest
-          container_name: graph
+          container_name: server
           environment:
             - PRELOAD=true
           volumes:
