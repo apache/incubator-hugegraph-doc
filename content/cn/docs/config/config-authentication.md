@@ -73,13 +73,15 @@ gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 
 在鉴权配置完成后，需在首次执行 `init-store.sh` 时命令行中输入 `admin` 密码 (非 docker 部署模式下)
 
-如果基于 docker 镜像部署或者已经初始化 HugeGraph 并需要转换为鉴权模式，需要删除相关图数据并重新启动 HugeGraph，若图已有业务数据，暂时**无法直接转换**鉴权模式 (对于该功能的改进将在下个版本发布，修改方式可参考 [PR 2411](https://github.com/apache/incubator-hugegraph/pull/2411))。
+如果基于 docker 镜像部署或者已经初始化 HugeGraph 并需要转换为鉴权模式，需要删除相关图数据并重新启动 HugeGraph, 若图已有业务数据，暂时**无法直接转换**鉴权模式 (hugegraph 版本 <= 1.2.0) 
+> 对于该功能的改进已经在最新版本发布，修改方式可参考 [PR 2411](https://github.com/apache/incubator-hugegraph/pull/2411), 此时无需删除原本存储的数据。
 
 ```bash
 # stop the hugeGraph firstly
 bin/stop-hugegraph.sh
 
 # delete the store data (here we use the default path for rocksdb)
+# there is no need to delete in the latest version (fixed in https://github.com/apache/incubator-hugegraph/pull/2411)
 rm -rf rocksdb-data/
 
 # init store again
