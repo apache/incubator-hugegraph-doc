@@ -85,7 +85,7 @@ tar zxf *hugegraph*.tar.gz
 # 1. get from github
 git clone https://github.com/apache/hugegraph-toolchain.git
 
-# 2. get from direct  (e.g. here is 1.0.0, please choose the latest version)
+# 2. get from direct url (please choose the **latest release** version)
 wget https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph-toolchain-incubating-{version}-src.tar.gz
 ```
 
