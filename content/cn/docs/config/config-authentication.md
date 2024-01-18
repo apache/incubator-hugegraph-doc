@@ -129,7 +129,7 @@ services:
 
 ```bash
 docker exec -it graph bash
-# 用于快速修改配置
+# 用于快速修改配置, 修改前的文件被保存在conf-bak文件夹下
 bin/enable-auth.sh
 ```
 
