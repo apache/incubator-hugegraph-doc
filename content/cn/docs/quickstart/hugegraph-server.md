@@ -652,19 +652,19 @@ _说明_
 另外也可以通过访问 `localhost:8080/swagger-ui/index.html` 查看 API。
 
 <div style="text-align: center;">
-  <img src="/docs/images/images-server/621swaggerui示例.png" alt="image">
+  <img src="/docs/images/images-server/swagger-ui.png" alt="image">
 </div>
 
 在使用 Swagger UI 调试 HugeGraph 提供的 API 时，如果 HugeGraph Server 开启了鉴权模式，可以在 Swagger 页面输入鉴权信息。
 
 <div style="text-align: center;">
-  <img src="/docs/images/images-server/621swaggerui-where-set-auth-example.png" alt="image">
+  <img src="/docs/images/images-server/swagger-ui-where-set-auth-example.png" alt="image">
 </div>
 
 当前 HugeGraph 支持基于 Basic 和 Bearer 两种形式设置鉴权信息。
 
 <div style="text-align: center;">
-  <img src="/docs/images/images-server/621swaggerui-set-auth-example.png" alt="image">
+  <img src="/docs/images/images-server/swagger-ui-set-auth-example.png" alt="image">
 </div>
 
 ### 7 停止 Server

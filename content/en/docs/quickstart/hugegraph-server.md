@@ -662,19 +662,19 @@ For detailed API, please refer to [RESTful-API](/docs/clients/restful-api)
 You can also visit `localhost:8080/swagger-ui/index.html` to check the API.
 
 <div style="text-align: center;">
-    <img src="/docs/images/images-server/621swaggerui示例.png" alt="image">
+  <img src="/docs/images/images-server/swagger-ui.png" alt="image">
 </div>
 
 When using Swagger UI to debug the API provided by HugeGraph, if HugeGraph Server turns on authentication mode, you can enter authentication information on the Swagger page.
 
 <div style="text-align: center;">
-  <img src="/docs/images/images-server/621swaggerui-where-set-auth-example.png" alt="image">
+  <img src="/docs/images/images-server/swagger-ui-where-set-auth-example.png" alt="image">
 </div>
 
-Currently HugeGraph supports setting authentication information in two forms: Basic and Bearer.
+Currently, HugeGraph supports setting authentication information in two forms: Basic and Bearer.
 
 <div style="text-align: center;">
-  <img src="/docs/images/images-server/621swaggerui-set-auth-example.png" alt="image">
+  <img src="/docs/images/images-server/swagger-ui-set-auth-example.png" alt="image">
 </div>
 
 ### 7 Stop Server
