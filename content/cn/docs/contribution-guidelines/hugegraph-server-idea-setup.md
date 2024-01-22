@@ -129,7 +129,7 @@ curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
 
 > module java.base does not "exports jdk.internal.reflect" to unnamed module @36b0fcd5
 
-原因是在 **Java 11** 环境下配置**用户认证** (authenticator) 后运行 `HugeGraphServer` 时，未将 `jdk.internal.reflect` 包导出给未命名模块，参考脚本启动时的[配置](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/src/assembly/static/bin/hugegraph-server.sh#L124)，需要在 `HugeGraphServer` 的 `Application` 配置中添加下述 VM options:
+原因是上述步骤在 **Java 11** 环境下配置**用户认证** (authenticator) 后运行 `HugeGraphServer` 时，未将 `jdk.internal.reflect` 包导出给未命名模块。参考脚本启动时的[配置](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/src/assembly/static/bin/hugegraph-server.sh#L124)，需要在 `HugeGraphServer` 的 `Application` 配置中添加下述 VM options:
 
 ```text
 --add-exports=java.base/jdk.internal.reflect=ALL-UNNAMED --add-modules=jdk.unsupported --add-exports=java.base/sun.nio.ch=ALL-UNNAMED
