@@ -8,7 +8,7 @@ weight: 4
 
 ### 背景
 
-在 [Quick Start](/docs/quickstart/hugegraph-server/) 部分已经介绍了使用**脚本**启停 HugeGraphServer 的流程。下面以 Linux 平台为例，介绍使用 **IntelliJ IDEA** 运行与调试 HugeGraph-Server 的流程。
+在 [Quick Start](/docs/quickstart/hugegraph-server/) 部分已经介绍了使用**脚本**启停 HugeGraphServer 的流程。下面以 Linux 平台为例，介绍使用 **IntelliJ IDEA** 运行与调试 HugeGraphServer 的流程。
 
 本地启动的核心与**脚本启动**是一样的：
 
@@ -74,6 +74,18 @@ rocksdb.wal_path=.
 - 将 `Main class` 设置为 `org.apache.hugegraph.dist.HugeGraphServer`
 - 设置运行参数为 `conf/gremlin-server.yaml conf/rest-server.properties`，同样地，这里的路径是相对于工作路径的，需要将工作路径设置为 `path-to-your-directory`
 
+> 若在 **Java 11** 环境下为 HugeGraphServer 配置了**用户认证** (authenticator)，则需要参考脚本启动时的[配置](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/src/assembly/static/bin/hugegraph-server.sh#L124)，添加下述 **VM options**:
+>
+> ```text
+> --add-exports=java.base/jdk.internal.reflect=ALL-UNNAMED --add-modules=jdk.unsupported --add-exports=java.base/sun.nio.ch=ALL-UNNAMED
+> ```
+>
+> 否则会报错：
+>
+> ```text
+> java.lang.reflect.InaccessibleObjectException: Unable to make public static synchronized void jdk.internal.reflect.Reflection.registerFieldsToFilter(java.lang.Class,java.lang.String[]) accessible: module java.base does not "exports jdk.internal.reflect" to unnamed module @36b0fcd5
+> ```
+
 配置完成后运行，如果看到以下类似日志，表示 `HugeGraphServer` 已经成功启动：
 
 ```java
@@ -124,16 +136,6 @@ curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
 #### 2. Log4j2 日志无法打印 %l 等位置信息
 
 这是因为 Log4j2 中使用了 asynchronous loggers，可以参考[官方文档](https://logging.apache.org/log4j/2.x/manual/layouts.html#LocationInformation)进行配置
-
-#### 3. Unable to make public static synchronized void jdk.internal.reflect.Reflection.registerFieldsToFilter(java.lang.Class,java.lang.String[]) accessible
-
-> module java.base does not "exports jdk.internal.reflect" to unnamed module @36b0fcd5
-
-原因是上述步骤在 **Java 11** 环境下配置**用户认证** (authenticator) 后运行 `HugeGraphServer` 时，未将 `jdk.internal.reflect` 包导出给未命名模块。参考脚本启动时的[配置](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/src/assembly/static/bin/hugegraph-server.sh#L124)，需要在 `HugeGraphServer` 的 `Application` 配置中添加下述 VM options:
-
-```text
---add-exports=java.base/jdk.internal.reflect=ALL-UNNAMED --add-modules=jdk.unsupported --add-exports=java.base/sun.nio.ch=ALL-UNNAMED
-```
 
 ---
 
