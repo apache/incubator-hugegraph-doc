@@ -116,7 +116,7 @@ curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
 
 #### 1. java: package sun.misc does not exist
 
-原因可能是在使用 Java 11 编译时触发了交叉编译，导致项目中使用的 `sun.misc.Unsafe` 找不到符号。有两种解决方案可供选择：
+原因可能是在使用 **Java 11** 编译时触发了交叉编译，导致项目中使用的 `sun.misc.Unsafe` 找不到符号。有两种解决方案可供选择：
 
 1. 在 IntelliJ IDEA 的 `Preferences/Settings` 中找到 `Java Compiler` 面板，然后关闭 `--release` 选项 (推荐)
 2. 或者将项目的 SDK 版本设置为 8
@@ -124,6 +124,16 @@ curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
 #### 2. Log4j2 日志无法打印 %l 等位置信息
 
 这是因为 Log4j2 中使用了 asynchronous loggers，可以参考[官方文档](https://logging.apache.org/log4j/2.x/manual/layouts.html#LocationInformation)进行配置
+
+#### 3. Unable to make public static synchronized void jdk.internal.reflect.Reflection.registerFieldsToFilter(java.lang.Class,java.lang.String[]) accessible
+
+> module java.base does not "exports jdk.internal.reflect" to unnamed module @36b0fcd5
+
+原因是在 **Java 11** 环境下配置**用户认证** (authenticator) 后运行 `HugeGraphServer` 时，未将 `jdk.internal.reflect` 包导出给未命名模块，参考脚本启动时的[配置](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/src/assembly/static/bin/hugegraph-server.sh#L124)，需要在 `HugeGraphServer` 的 `Application` 配置中添加下述 VM options:
+
+```text
+--add-exports=java.base/jdk.internal.reflect=ALL-UNNAMED --add-modules=jdk.unsupported --add-exports=java.base/sun.nio.ch=ALL-UNNAMED
+```
 
 ---
 
