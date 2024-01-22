@@ -452,15 +452,15 @@
 &lt;p>详细的 API 请参考 &lt;a href="/docs/clients/restful-api">RESTful-API&lt;/a> 文档。&lt;/p>
 &lt;p>另外也可以通过访问 &lt;code>localhost:8080/swagger-ui/index.html&lt;/code> 查看 API。&lt;/p>
 &lt;div style="text-align: center;">
-&lt;img src="/docs/images/images-server/621swaggerui示例.png" alt="image">
+&lt;img src="/docs/images/images-server/swagger-ui.png" alt="image">
 &lt;/div>
 &lt;p>在使用 Swagger UI 调试 HugeGraph 提供的 API 时，如果 HugeGraph Server 开启了鉴权模式，可以在 Swagger 页面输入鉴权信息。&lt;/p>
 &lt;div style="text-align: center;">
-&lt;img src="/docs/images/images-server/621swaggerui-where-set-auth-example.png" alt="image">
+&lt;img src="/docs/images/images-server/swagger-ui-where-set-auth-example.png" alt="image">
 &lt;/div>
 &lt;p>当前 HugeGraph 支持基于 Basic 和 Bearer 两种形式设置鉴权信息。&lt;/p>
 &lt;div style="text-align: center;">
-&lt;img src="/docs/images/images-server/621swaggerui-set-auth-example.png" alt="image">
+&lt;img src="/docs/images/images-server/swagger-ui-set-auth-example.png" alt="image">
 &lt;/div>
 &lt;h3 id="7-停止-server">7 停止 Server&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">$cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>

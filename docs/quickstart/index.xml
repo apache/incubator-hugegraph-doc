@@ -470,15 +470,15 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;p>For detailed API, please refer to &lt;a href="/docs/clients/restful-api">RESTful-API&lt;/a>&lt;/p>
 &lt;p>You can also visit &lt;code>localhost:8080/swagger-ui/index.html&lt;/code> to check the API.&lt;/p>
 &lt;div style="text-align: center;">
-&lt;img src="/docs/images/images-server/621swaggerui示例.png" alt="image">
+&lt;img src="/docs/images/images-server/swagger-ui.png" alt="image">
 &lt;/div>
 &lt;p>When using Swagger UI to debug the API provided by HugeGraph, if HugeGraph Server turns on authentication mode, you can enter authentication information on the Swagger page.&lt;/p>
 &lt;div style="text-align: center;">
-&lt;img src="/docs/images/images-server/621swaggerui-where-set-auth-example.png" alt="image">
+&lt;img src="/docs/images/images-server/swagger-ui-where-set-auth-example.png" alt="image">
 &lt;/div>
-&lt;p>Currently HugeGraph supports setting authentication information in two forms: Basic and Bearer.&lt;/p>
+&lt;p>Currently, HugeGraph supports setting authentication information in two forms: Basic and Bearer.&lt;/p>
 &lt;div style="text-align: center;">
-&lt;img src="/docs/images/images-server/621swaggerui-set-auth-example.png" alt="image">
+&lt;img src="/docs/images/images-server/swagger-ui-set-auth-example.png" alt="image">
 &lt;/div>
 &lt;h3 id="7-stop-server">7 Stop Server&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">$cd&lt;/span> *hugegraph-&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">version&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>
