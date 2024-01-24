@@ -52,13 +52,13 @@ rocksdb.wal_path=.
 
 > 若在 **Java 11** 环境下为 HugeGraph-Server 配置了**用户认证** (authenticator)，需要参考二进制包的脚本[配置](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/src/assembly/static/bin/init-store.sh#L52)，添加下述 **VM options**:
 >
-> ```text
+> ```bash
 > --add-exports=java.base/jdk.internal.reflect=ALL-UNNAMED
 > ```
 >
 > 否则会报错：
 >
-> ```text
+> ```java
 > java.lang.reflect.InaccessibleObjectException: Unable to make public static synchronized void jdk.internal.reflect.Reflection.registerFieldsToFilter(java.lang.Class,java.lang.String[]) accessible: module java.base does not "exports jdk.internal.reflect" to unnamed module @xxx
 > ```
 
@@ -88,13 +88,13 @@ rocksdb.wal_path=.
 
 > 类似的，若在 **Java 11** 环境下为 HugeGraph-Server 配置了**用户认证** (authenticator)，同样需要参考二进制包的脚本[配置](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/src/assembly/static/bin/hugegraph-server.sh#L124)，添加下述 **VM options**:
 >
-> ```text
+> ```bash
 > --add-exports=java.base/jdk.internal.reflect=ALL-UNNAMED --add-modules=jdk.unsupported --add-exports=java.base/sun.nio.ch=ALL-UNNAMED
 > ```
 >
 > 否则会报错：
 >
-> ```text
+> ```java
 > java.lang.reflect.InaccessibleObjectException: Unable to make public static synchronized void jdk.internal.reflect.Reflection.registerFieldsToFilter(java.lang.Class,java.lang.String[]) accessible: module java.base does not "exports jdk.internal.reflect" to unnamed module @xxx
 > ```
 

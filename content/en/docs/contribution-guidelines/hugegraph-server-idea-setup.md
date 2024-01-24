@@ -8,12 +8,12 @@ weight: 4
 
 ### Background
 
-The [Quick Start](/docs/quickstart/hugegraph-server/) section provides instructions on how to start and stop HugeGraphServer using **scripts**. In this guide, we will explain how to run and debug HugeGraph-Server on the Linux platform using **IntelliJ IDEA**.
+The [Quick Start](/docs/quickstart/hugegraph-server/) section provides instructions on how to start and stop HugeGraph-Server using **scripts**. In this guide, we will explain how to run and debug HugeGraph-Server on the Linux platform using **IntelliJ IDEA**.
 
 The core steps for local startup are the same as starting with **scripts**:
 
 1. Initialize the database backend by executing the `InitStore` class to initialize the graph.
-2. Start HugeGraphServer by executing the `HugeGraphServer` class to load the initialized graph information and start the server.
+2. Start HugeGraph-Server by executing the `HugeGraphServer` class to load the initialized graph information and start the server.
 
 Before proceeding with the following process, make sure that you have cloned the source code of HugeGraph and have configured the development environment, such as JDK 11.
 
@@ -50,6 +50,18 @@ Next, open the `Run/Debug Configurations` panel in IntelliJ IDEA and create a ne
 - Set the `Main class` to `org.apache.hugegraph.cmd.InitStore`.
 - Set the program arguments to `conf/rest-server.properties`. Note that the path here is relative to the working directory, so make sure to set the working directory to `path-to-your-directory`.
 
+> If **user authentication** (authenticator) is configured for HugeGraph-Server in the **Java 11** environment, you need to refer to the script [configuration](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/src/assembly/static/bin/init-store.sh#L52) in the binary package and add the following **VM options**:
+>
+> ```bash
+> --add-exports=java.base/jdk.internal.reflect=ALL-UNNAMED
+> ```
+>
+> Otherwise, an error will occur:
+>
+> ```java
+> java.lang.reflect.InaccessibleObjectException: Unable to make public static synchronized void jdk.internal.reflect.Reflection.registerFieldsToFilter(java.lang.Class,java.lang.String[]) accessible: module java.base does not "exports jdk.internal.reflect" to unnamed module @xxx
+> ```
+
 Once the configuration is completed, run it. If the execution is successful, the following runtime logs will be displayed:
 
 ```java
@@ -73,6 +85,17 @@ Similarly, open the `Run/Debug Configurations` panel in IntelliJ IDEA and create
 - Select `hugegraph-dist` as the `Use classpath of module`.
 - Set the `Main class` to `org.apache.hugegraph.dist.HugeGraphServer`.
 - Set the program arguments to `conf/gremlin-server.yaml conf/rest-server.properties`. Similarly, note that the path here is relative to the working directory, so make sure to set the working directory to `path-to-your-directory`.
+
+> Similarly, if **user authentication** (authenticator) is configured for HugeGraph-Server in the **Java 11** environment, you need to refer to the script [configuration](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/src/assembly/static/bin/hugegraph-server.sh#L124) in the binary package and add the following **VM options**:
+>
+> ```bash
+> --add-exports=java.base/jdk.internal.reflect=ALL-UNNAMED --add-modules=jdk.unsupported --add-exports=java.base/sun.nio.ch=ALL-UNNAMED
+> ```
+> Otherwise, an error will occur:
+>
+> ```java
+> java.lang.reflect.InaccessibleObjectException: Unable to make public static synchronized void jdk.internal.reflect.Reflection.registerFieldsToFilter(java.lang.Class,java.lang.String[]) accessible: module java.base does not "exports jdk.internal.reflect" to unnamed module @xxx
+> ```
 
 Once the configuration is completed, run it. If you see the following logs, it means that `HugeGraphServer` has been successfully started:
 
@@ -104,9 +127,9 @@ At this point, you can view detailed variable information in the debugger.
 
 #### 5. Log4j2 Configuration
 
-By default, when running `InitStore` and `HugeGraphServer`, the Log4j2 configuration file path read is `hugegraph-dist/src/main/resources/log4j2.xml`, not `path-to-your-directory/conf/log4j2.xml`. This configuration file is read when starting HugeGraphServer using the **script**.
+By default, when running `InitStore` and `HugeGraphServer`, the Log4j2 configuration file path read is `hugegraph-dist/src/main/resources/log4j2.xml`, not `path-to-your-directory/conf/log4j2.xml`. This configuration file is read when starting HugeGraph-Server using the **script**.
 
-To avoid maintaining two separate configuration files, you can modify the Log4j2 configuration file path when running and debugging HugeGraphServer in **IntelliJ IDEA**:
+To avoid maintaining two separate configuration files, you can modify the Log4j2 configuration file path when running and debugging HugeGraph-Server in **IntelliJ IDEA**:
 
 1. Open the previously created `Application` configuration.
 2. Click on `Modify options` - `Add VM options`.
@@ -119,7 +142,7 @@ To avoid maintaining two separate configuration files, you can modify the Log4j2
 The reason may be that cross-compilation is triggered when using Java 11 to compile, causing the symbol of `sun.misc.Unsafe` used in the project to not be found. There are two possible solutions:
 
 1. In IntelliJ IDEA, go to `Preferences/Settings` and find the `Java Compiler` panel. Then, disable the `--release` option (recommended).
-2. Set the Project SDK to 8.
+2. Set the Project SDK to 8 (Deprecated soon).
 
 #### 2. Unable to Print Location Information (%l) in Log4j2
 
