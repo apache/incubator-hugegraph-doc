@@ -8,12 +8,12 @@ weight: 4
 
 ### 背景
 
-在 [Quick Start](/docs/quickstart/hugegraph-server/) 部分已经介绍了使用**脚本**启停 HugeGraphServer 的流程。下面以 Linux 平台为例，介绍使用 **IntelliJ IDEA** 运行与调试 HugeGraph-Server 的流程。
+在 [Quick Start](/docs/quickstart/hugegraph-server/) 部分已经介绍了使用**脚本**启停 HugeGraph-Server 的流程。下面以 Linux 平台为例，介绍使用 **IntelliJ IDEA** 运行与调试 HugeGraph-Server 的流程。
 
 本地启动的核心与**脚本启动**是一样的：
 
 1. 初始化数据库后端，执行 `InitStore` 类初始化图
-2. 启动 HugeGraphServer，执行 `HugeGraphServer` 类加载初始化的图信息启动
+2. 启动 HugeGraph-Server，执行 `HugeGraphServer` 类加载初始化的图信息启动
 
 在执行下述流程之前，请确保已经克隆了 HugeGraph 的源代码，并且已经配置了 JDK 11 等开发环境。
 
@@ -50,6 +50,18 @@ rocksdb.wal_path=.
 - 将 `Main class` 设置为 `org.apache.hugegraph.cmd.InitStore`
 - 设置运行参数为 `conf/rest-server.properties`，这里的路径是相对于工作路径的，需要将工作路径设置为 `path-to-your-directory`
 
+> 若在 **Java 11** 环境下为 HugeGraph-Server 配置了**用户认证** (authenticator)，需要参考二进制包的脚本[配置](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/src/assembly/static/bin/init-store.sh#L52)，添加下述 **VM options**:
+>
+> ```text
+> --add-exports=java.base/jdk.internal.reflect=ALL-UNNAMED
+> ```
+>
+> 否则会报错：
+>
+> ```text
+> java.lang.reflect.InaccessibleObjectException: Unable to make public static synchronized void jdk.internal.reflect.Reflection.registerFieldsToFilter(java.lang.Class,java.lang.String[]) accessible: module java.base does not "exports jdk.internal.reflect" to unnamed module @xxx
+> ```
+
 配置完成后运行，如果运行成功，将会输出以下类似运行日志：
 
 ```java
@@ -73,6 +85,18 @@ rocksdb.wal_path=.
 - 在 `Use classpath of module` 中选择 `hugegraph-dist`
 - 将 `Main class` 设置为 `org.apache.hugegraph.dist.HugeGraphServer`
 - 设置运行参数为 `conf/gremlin-server.yaml conf/rest-server.properties`，同样地，这里的路径是相对于工作路径的，需要将工作路径设置为 `path-to-your-directory`
+
+> 类似的，若在 **Java 11** 环境下为 HugeGraph-Server 配置了**用户认证** (authenticator)，同样需要参考二进制包的脚本[配置](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/src/assembly/static/bin/hugegraph-server.sh#L124)，添加下述 **VM options**:
+>
+> ```text
+> --add-exports=java.base/jdk.internal.reflect=ALL-UNNAMED --add-modules=jdk.unsupported --add-exports=java.base/sun.nio.ch=ALL-UNNAMED
+> ```
+>
+> 否则会报错：
+>
+> ```text
+> java.lang.reflect.InaccessibleObjectException: Unable to make public static synchronized void jdk.internal.reflect.Reflection.registerFieldsToFilter(java.lang.Class,java.lang.String[]) accessible: module java.base does not "exports jdk.internal.reflect" to unnamed module @xxx
+> ```
 
 配置完成后运行，如果看到以下类似日志，表示 `HugeGraphServer` 已经成功启动：
 
@@ -104,9 +128,9 @@ curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
 
 #### 5. Log4j2 日志配置
 
-默认情况下，运行 `InitStore` 和 `HugeGraphServer` 时，读取的 Log4j2 配置文件路径为 `hugegraph-dist/src/main/resources/log4j2.xml`，而不是 `path-to-your-directory/conf/log4j2.xml`，这个配置文件是使用**脚本**启动 HugeGraphServer 时读取的。
+默认情况下，运行 `InitStore` 和 `HugeGraphServer` 时，读取的 Log4j2 配置文件路径为 `hugegraph-dist/src/main/resources/log4j2.xml`，而不是 `path-to-your-directory/conf/log4j2.xml`，这个配置文件是使用**脚本**启动 HugeGraph-Server 时读取的。
 
-为了避免同时维护两份配置文件，可以考虑在 **IntelliJ IDEA** 运行与调试 HugeGraphServer 时，修改读取的 Log4j2 配置文件路径：
+为了避免同时维护两份配置文件，可以考虑在 **IntelliJ IDEA** 运行与调试 HugeGraph-Server 时，修改读取的 Log4j2 配置文件路径：
 
 1. 打开之前创建的 `Application` 配置
 2. 点击 `Modify options` - `Add VM options`
@@ -116,10 +140,10 @@ curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
 
 #### 1. java: package sun.misc does not exist
 
-原因可能是在使用 Java 11 编译时触发了交叉编译，导致项目中使用的 `sun.misc.Unsafe` 找不到符号。有两种解决方案可供选择：
+原因可能是在使用 **Java 11** 编译时触发了交叉编译，导致项目中使用的 `sun.misc.Unsafe` 找不到符号。有两种解决方案可供选择：
 
 1. 在 IntelliJ IDEA 的 `Preferences/Settings` 中找到 `Java Compiler` 面板，然后关闭 `--release` 选项 (推荐)
-2. 或者将项目的 SDK 版本设置为 8
+2. 或者将项目的 SDK 版本设置为 8 (Deprecated soon)
 
 #### 2. Log4j2 日志无法打印 %l 等位置信息
 
