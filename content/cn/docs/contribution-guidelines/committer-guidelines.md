@@ -1,6 +1,6 @@
 ---
-title: "Apache Committer 指南"
-linkTitle: "Apache Committer 指南"
+title: "Apache HugeGraph Committer 指南"
+linkTitle: "Apache HugeGraph Committer 指南"
 weight: 5
 ---
 
