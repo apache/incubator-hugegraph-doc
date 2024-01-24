@@ -28,7 +28,7 @@ weight: 5
 
 下面是对应的邮件模板：
 
-> 后续将使用 xxx 指代候选人
+> 后续将使用 xxx 指代候选人，一般 `xxx` 为一个容易读的名字 (例如 `Simon Jay`)，`ASF-INFRA` 建议**避免**使用不易读的 `ID` 直接作为邮件**人名代指** (例如**避免** `simon321` 或 `wh0isSim0n` 😄)
 
 ```text
 To: private@hugegraph.apache.org
@@ -69,7 +69,7 @@ Welcome everyone to share opinions~
 Thanks!
 ```
 
-对于讨论邮件中贡献链接，可以使用 [GitHub Search](https://github.com/search) 的统计功能，按需输入如下对应关键词查询即可，可以在此基础上添加新的 repo 如 `repo:apache/incubator-hugegraph-computer`，注意选取合适的时间范围：
+对于讨论邮件中贡献链接，可以使用 [GitHub Search](https://github.com/search) 的统计功能，按需输入如下对应关键词查询即可，可以在此基础上添加新的 repo 如 `repo:apache/incubator-hugegraph-computer`，特别注意调整**时间范围** (下面是一个模板参考，请自行调整参数):
 
 - PR 提交次数
   - `is:pr author:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
@@ -223,8 +223,8 @@ xxx
 
 一旦邀请被接受，候选人需要完成以下事项：
 
-- 订阅 dev@hugegraph.apache.org
-- 签署 [ICLA](https://www.apache.org/licenses/icla.pdf)
+- 订阅 dev@hugegraph.apache.org，具体步骤请参考[文档](https://hugegraph.apache.org/docs/contribution-guidelines/subscribe/)
+- 签署 [ICLA](https://www.apache.org/licenses/icla.pdf)，具体步骤如下
 
 ### ICLA 签署流程
 
@@ -298,3 +298,4 @@ TODO
 5. https://www.apache.org/licenses/contributor-agreements.html#submitting
 6. https://www.apache.org/licenses/cla-faq.html#printer
 7. https://linkis.apache.org/zh-CN/community/how-to-sign-apache-icla
+8. https://github.com/apache/incubator-hugegraph/issues/1732 (HugeGraph ICLA related issue)
