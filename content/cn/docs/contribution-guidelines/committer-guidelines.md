@@ -20,9 +20,9 @@ weight: 5
 
 # 推选详细流程
 
-**讨论 → 投票 → 邀请 → 公告**
+**讨论 (DISCUSS) → 投票 (VOTE) → 邀请 (INVITE) → 公告 (ANNOUNCE)**
 
-## 1. 发起社区邮件讨论 (DISSCUSS)
+## 1. 发起社区邮件讨论 (DISCUSS)
 
 任何 HugeGraph 的 (P)PMC 成员都可以发起投票讨论，在发现社区贡献者任何有价值的贡献并取得候选人本人同意后，可以在 private@hugegraph.apache.org 发起讨论。
 讨论邮件里提议者要把候选人的贡献说清楚，并最好给出确认贡献的 URL 等信息，便于大家讨论分析。
@@ -37,11 +37,11 @@ Subject: [VOTE] New committer: xxx
 
 Hi all:
 
-I am pleased to nominate xxx for the role of HugeGraph Committer based on his contributions over the past few months.
+I am pleased to nominate xxx for the role of HugeGraph Committer based on his/her contributions over the past few months.
 
 [ Candidate's Contribution Summary ]
 
-Here are the relevant PRs (issues) he has participated in:
+Here are the relevant PRs (issues) he/she has participated in:
 
 **Core Features:**
 - Feature 1: [ Reference Links ]
@@ -53,7 +53,7 @@ Here are the relevant PRs (issues) he has participated in:
 
 [ Candidate's Current Notable Contributions ]
 
-His contributions bring the following benefits to the community, helping us in the following ways:
+His/Her contributions bring the following benefits to the community, helping us in the following ways:
 
 [ Candidate's Contributions and Benefits to the Community ]
 
@@ -69,8 +69,7 @@ Welcome everyone to share opinions~
 Thanks!
 ```
 
-对于讨论邮件中贡献链接，可以使用 [GitHub Search](https://github.com/search) 的统计功能，按需输入如下对应关键词查询即可，可以在此基础上添加新的 repo 
-如 `repo:apache/incubator-hugegraph-computer`，特别注意调整**时间范围** (下面是一个模板参考，请自行调整参数):
+对于讨论邮件中贡献链接，可以使用 [GitHub Search](https://github.com/search) 的统计功能，按需输入如下对应关键词查询即可，可以在此基础上添加新的 repo 如 `repo:apache/incubator-hugegraph-computer`，特别注意调整**时间范围** (下面是一个模板参考，请自行调整参数):
 
 - PR 提交次数
   - `is:pr author:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
@@ -116,7 +115,7 @@ Through the discussion of last week:
 [ Discussion Mailing List Link ]
 
 We have discussed and listed what xxx participated in the HugeGraph community.
-I believe making her/him a Committer will enhance the work for HugeGraph. 
+I believe making him/her a Committer will enhance the work for HugeGraph. 
 
 So, I am happy to call VOTE to accept xxx as a HugeGraph Committer.
  
@@ -312,15 +311,15 @@ for more information about roles at Apache.
 To: dev@hugegraph.apache.org
 Subject: [ANNOUNCE] New Committer: xxx
 
-Hi everyone, The PPMC for Apache HugeGraph(incubating) has invited xxx(Xxx) to
-become a Committer and we are pleased to announce that he has accepted.
+Hi everyone, The PPMC for Apache HugeGraph(incubating) has invited xxx to
+become a Committer and we are pleased to announce that he/she has accepted.
 
-xxx is being active in the HugeGraph community & dedicated to xx modules, 
-and we are glad to see his more interactions with the community in thefuture.
+xxx is being active in the HugeGraph community & dedicated to ... modules, 
+and we are glad to see his/her more interactions with the community in the future.
 
-(Optional) His GitHub account is https://github.com/VGalaxies
+(Optional) His/Her GitHub account is https://github.com/xxx
 
-Welcome xx, and please enjoy your community journey~ 
+Welcome xxx, and please enjoy your community journey~ 
 
 Thanks! 
 
