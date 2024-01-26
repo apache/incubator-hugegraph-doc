@@ -4,7 +4,7 @@ linkTitle: "Apache HugeGraph Committer 指南"
 weight: 5
 ---
 
-> 本文档概述了 Apache Committer 推选要求以及流程，对应的官方文档可见: https://community.apache.org/newcommitter.html
+> 本文档概述了 Apache Committer 推选要求以及流程，对应的 ASF 官方文档可见：https://community.apache.org/newcommitter.html
 
 # 候选人要求
 
@@ -22,15 +22,16 @@ weight: 5
 
 **讨论 → 投票 → 邀请 → 公告**
 
-## 发起社区邮件讨论
+## 1. 发起社区邮件讨论 (DISSCUSS)
 
-任何 HugeGraph 的 (P)PMC 成员都可以发起投票讨论，在发现社区贡献者任何有价值的贡献并取得候选人本人同意后，可以在 private@hugegraph.apache.org 发起讨论。讨论邮件里提议者要把候选人的贡献说清楚，并且给出复核对应贡献的地址，便于大家讨论分析。
+任何 HugeGraph 的 (P)PMC 成员都可以发起投票讨论，在发现社区贡献者任何有价值的贡献并取得候选人本人同意后，可以在 private@hugegraph.apache.org 发起讨论。
+讨论邮件里提议者要把候选人的贡献说清楚，并最好给出确认贡献的 URL 等信息，便于大家讨论分析。
 
-下面是对应的邮件模板：
+下面是 HugeGraph 对应的邮件模板：(仅供参考)
 
-> 后续将使用 xxx 指代候选人，一般 `xxx` 为一个容易读的名字 (例如 `Simon Jay`)，`ASF-INFRA` 建议**避免**使用不易读的 `ID` 直接作为邮件**人名代指** (例如**避免** `simon321` 或 `wh0isSim0n` 😄)
+> 后续将使用 xxx 指代候选人名，一般 `xxx` 为一个容易读的名字 (例如 `Simon Jay`)，`ASF-INFRA` 建议**避免**使用不易读的 `ID` 直接作为邮件**人名代指** (例如**避免** `simon321` 或 `wh0isSim0n` 😄)
 
-```text
+```markdown
 To: private@hugegraph.apache.org
 Subject: [VOTE] New committer: xxx
 
@@ -43,16 +44,12 @@ I am pleased to nominate xxx for the role of HugeGraph Committer based on his co
 Here are the relevant PRs (issues) he has participated in:
 
 **Core Features:**
-
-[ Reference Links ]
+- Feature 1: [ Reference Links ]
+- ...
 
 **Fix/Chore/Release:**
 
-[ Reference Links ]
-
 **Doc:**
-
-[ Reference Links ]
 
 [ Candidate's Current Notable Contributions ]
 
@@ -63,13 +60,17 @@ His contributions bring the following benefits to the community, helping us in t
 In view of the above contributions, I elect xxx as Committer of the HugeGraph project.
 
 [ Reference Links ]
+1. PR1
+2. PR2
+3. ...
 
 Welcome everyone to share opinions~
 
 Thanks!
 ```
 
-对于讨论邮件中贡献链接，可以使用 [GitHub Search](https://github.com/search) 的统计功能，按需输入如下对应关键词查询即可，可以在此基础上添加新的 repo 如 `repo:apache/incubator-hugegraph-computer`，特别注意调整**时间范围** (下面是一个模板参考，请自行调整参数):
+对于讨论邮件中贡献链接，可以使用 [GitHub Search](https://github.com/search) 的统计功能，按需输入如下对应关键词查询即可，可以在此基础上添加新的 repo 
+如 `repo:apache/incubator-hugegraph-computer`，特别注意调整**时间范围** (下面是一个模板参考，请自行调整参数):
 
 - PR 提交次数
   - `is:pr author:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
@@ -97,9 +98,9 @@ Thanks!
 - 评论 PR 数
   - `type:pr commenter:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
 
-Mailing Lists 可以使用 https://lists.apache.org/list?dev@hugegraph.apache.org:lte=10M:xxx 查询。
+Mailing Lists 的参与则可使用 https://lists.apache.org/list?dev@hugegraph.apache.org:lte=10M:xxx 查询。
 
-## 发起社区邮件投票
+## 2. 发起社区邮件投票 (VOTE)
 
 如果讨论邮件在规定时间内没有收到分歧信息，投票发起者需要在 private@hugegraph.apache.org 发起对 Committer 的选举投票。
 
@@ -115,7 +116,7 @@ Through the discussion of last week:
 [ Discussion Mailing List Link ]
 
 We have discussed and listed what xxx participated in the HugeGraph community.
-I believe making him a Committer will enhance the work for HugeGraph. 
+I believe making her/him a Committer will enhance the work for HugeGraph. 
 
 So, I am happy to call VOTE to accept xxx as a HugeGraph Committer.
  
@@ -129,17 +130,34 @@ Please vote accordingly:
 Thanks!
 ```
 
-## 宣布投票结果
+然后 (P)PMC 成员回复 +1 或 -1 的邮件回复表达意见，一般来说至少需要 ≥3 票 +1 才能结束投票。
 
-投票邮件结束后，投票发起者需要邮件里提醒投票结束。同时，投票发起者需要发起邮件宣布投票结果，发送至 private@hugegraph.apache.org。
+## 宣布投票结果 (RESULT)
 
-> TODO: 邮件模板
+投票邮件结束后，投票发起者需要邮件里提醒投票结束。同时，投票发起者需要发起邮件宣布投票结果，发送至 private@hugegraph.apache.org，邮件模板可参考：
 
-## 向候选人发起邮件邀请
+```text
+To: private@hugegraph.apache.org
+Subject: [RESULTS][VOTE] xxx as a HugeGraph Committer
+
+Hi all: The vote for "xxx" as an HugeGraph Committer has PASSED and closed now.
+
+The result is as follows: X PMC +1 Votes: 
+- A (PMC ID)
+- B
+- C...
+
+Vote thread:
+put vote thread link here
+ 
+Then I'm going to invite xxx to join us soon. Thanks for everyone's support!
+```
+
+## 向候选人发起邮件邀请 (INVITE)
 
 宣布投票结果邮件发出后，投票发起人要给候选人发送邀请邮件。邀请邮件主送候选人，抄送 private@hugegraph.apache.org，被邀请的候选人必须通过指定的邮箱地址回复接受或者拒绝该邀请。
 
-下面是对应的邮件模板：
+下面是对应可参考的邮件模板：
 
 ```text
 To: [ Candidate's Email ]
@@ -196,7 +214,7 @@ With the expectation of your acceptance, welcome!
 The Apache HugeGraph(incubating) PPMC
 ```
 
-## 候选人接受邀请
+## 候选人接受邀请 (ACCEPT)
 
 候选人应回复上述邮件 (选择 **reply all**)，表明接受邀请，邮件模板可参考：
 
@@ -219,12 +237,12 @@ Signing and submitting iCLA and registering Apache ID.
 xxx
 ```
 
-当然，候选人也可以选择拒绝邀请。
+当然，候选人也可以选择拒绝邀请，这里就没有模板了:) 
 
 一旦邀请被接受，候选人需要完成以下事项：
 
-- 订阅 dev@hugegraph.apache.org，具体步骤请参考[文档](https://hugegraph.apache.org/docs/contribution-guidelines/subscribe/)
-- 签署 [ICLA](https://www.apache.org/licenses/icla.pdf)，具体步骤如下
+- 订阅 dev@hugegraph.apache.org，具体步骤/过滤等配置请参考[文档](https://hugegraph.apache.org/docs/contribution-guidelines/subscribe/)
+- 签署 [ICLA](https://www.apache.org/licenses/icla.pdf)，具体步骤见下↓
 
 ### ICLA 签署流程
 
@@ -251,14 +269,15 @@ Hello everyone:
 
 I have accepted the Apache HugeGraph(incubating) PPMC invitation to
 become a HugeGraph committer, the attachment is my ICLA information.
-My GitHub account is https://github.com/xxx. Thanks!
+
+(Optional) My GitHub account is https://github.com/xxx. Thanks!
 
 xxx
 ```
 
-> 更多注意事项可参考 https://github.com/apache/incubator-hugegraph/issues/1732
+> 更多注意事项可参考 https://github.com/apache/hugegraph/issues/1732
 
-PMC 成员将等待 Apache secretary 确认 ICLA 备案，候选人和 PMC 成员将收到以下电子邮件：
+PMC 成员将等待 `Apache secretary` 团队确认 `ICLA` 备案，候选人和 PMC 成员将收到以下电子邮件：
 
 ```text
 Dear xxx,
@@ -272,7 +291,7 @@ Please refer to https://www.apache.org/foundation/how-it-works.html#developers
 for more information about roles at Apache.
 ```
 
-### 设置 Apache 账号和开发环境
+### 设置 Apache 账号和开发环境 (CONFIG)
 
 备案完成后，候选人将收到来自 root@apache.org 主题为 `Welcome to the Apache Software Foundation` 的邮件，此时需按照邮件中的步骤设置 Apache 账号和开发环境：
 
@@ -280,22 +299,41 @@ for more information about roles at Apache.
 2. 配置个人信息 https://whimsy.apache.org/roster/committer/xxx
 3. 关联 GitHub 账号 https://gitbox.apache.org/boxer
    1. 这一步需要配置 GitHub 双重身份验证 (2FA)
-4. **负责提名的 PMC 成员需通过 [Roster](https://whimsy.apache.org/roster/ppmc/hugegraph) 页面，将新的 Committer 添加到官方提交者列表中**
+4. **负责提名的 PMC 成员需通过 [Roster](https://whimsy.apache.org/roster/ppmc/hugegraph) 页面，将新的 Committer 添加到官方提交者列表中** (**重要**, 否则仓库权限不生效)
    1. 在这一步后，候选人即新的 Committer 才拥有对 GitHub HugeGraph 仓库的写权限
 5. (可选) 新的 Committer 可以使用 Apache 账号[申请](https://www.jetbrains.com/shop/eform/apache)免费使用 Jetbrains 的全系列产品
 
 
-## 发布公告邮件
+## 发布公告邮件 (ANNOUNCE)
 
-TODO
+当候选人完成上述步骤后，候选人将正式成为 HugeGraph 的 Committer，此时需要向 dev@hugegraph.apache.org 发送公告邮件，邮件模板可参考：
+
+```text
+To: dev@hugegraph.apache.org
+Subject: [ANNOUNCE] New Committer: xxx
+
+Hi everyone, The PPMC for Apache HugeGraph(incubating) has invited xxx(Xxx) to
+become a Committer and we are pleased to announce that he has accepted.
+
+xxx is being active in the HugeGraph community & dedicated to xx modules, 
+and we are glad to see his more interactions with the community in thefuture.
+
+(Optional) His GitHub account is https://github.com/VGalaxies
+
+Welcome xx, and please enjoy your community journey~ 
+
+Thanks! 
+
+The Apache HugeGraph PPMC
+```
 
 # 参考
 
-1. https://community.apache.org/newcommitter.html (官方文档)
+1. https://community.apache.org/newcommitter.html (ASF 官方文档)
 2. https://infra.apache.org/new-committers-guide.html
 3. https://www.apache.org/dev/pmc.html#newcommitter
 4. https://linkis.apache.org/zh-CN/community/how-to-vote-a-committer-pmc
 5. https://www.apache.org/licenses/contributor-agreements.html#submitting
 6. https://www.apache.org/licenses/cla-faq.html#printer
 7. https://linkis.apache.org/zh-CN/community/how-to-sign-apache-icla
-8. https://github.com/apache/incubator-hugegraph/issues/1732 (HugeGraph ICLA related issue)
+8. https://github.com/apache/hugegraph/issues/1732 (HugeGraph ICLA related issue)
