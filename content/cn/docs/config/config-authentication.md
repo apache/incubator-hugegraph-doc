@@ -74,7 +74,7 @@ gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 在鉴权配置完成后，需在首次执行 `init-store.sh` 时命令行中输入 `admin` 密码 (非 docker 部署模式下)
 
 如果基于 docker 镜像部署或者已经初始化 HugeGraph 并需要转换为鉴权模式，需要删除相关图数据并重新启动 HugeGraph, 若图已有业务数据，暂时**无法直接转换**鉴权模式 (hugegraph 版本 <= 1.2.0) 
-> 对于该功能的改进已经在最新版本发布(Docker latest 可用)，可参考 [PR 2411](https://github.com/apache/incubator-hugegraph/pull/2411), 此时可无缝切换。 
+> 对于该功能的改进已经在最新版本发布 (Docker latest 可用)，可参考 [PR 2411](https://github.com/apache/incubator-hugegraph/pull/2411), 此时可无缝切换。 
 
 ```bash
 # stop the hugeGraph firstly
@@ -100,15 +100,15 @@ bin/start-hugegraph.sh
 
 #### 1. 采用 docker run
 
-在 `docker run` 中添加环境变量 `AUTH=true` 即可开启鉴权模式，默认密码为 `hugegraph`，也可以手动设置密码，如 `123456`：
+在 `docker run` 中添加环境变量 `PASSWORD=123456`（密码可以自由设置）即可开启鉴权模式：：
 
 ```bash
-docker run -itd -e AUTH=true -e PASSWORD=123456 --name=graph -p 8080:8080 hugegraph/hugegraph:1.2.0
+docker run -itd -e PASSWORD=123456 --name=graph -p 8080:8080 hugegraph/hugegraph:1.2.0
 ```
 
 #### 2. 采用 docker-compose
 
-使用 `docker-compose` 在环境变量中设置 `AUTH=true` 以及 `PASSWORD` (可选) 即可
+使用 `docker-compose` 在环境变量中设置 `PASSWORD=123456`即可
 
 ```yaml
 version: '3'
@@ -119,7 +119,6 @@ services:
     ports:
       - 8080:8080
     environment:
-      - AUTH=true
       - PASSWORD=123456
 ```
 
