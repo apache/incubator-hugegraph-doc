@@ -8,6 +8,8 @@ weight: 4
 
 HugeGraph-Client 向 HugeGraph-Server 发出 HTTP 请求，获取并解析 Server 的执行结果。目前仅提供了 Java 版，用户可以使用 HugeGraph-Client 编写 Java 代码操作 HugeGraph，比如元数据和图数据的增删改查，或者执行 gremlin 语句。
 
+> 现在已经支持[基于 Go 语言的 HugeGraph Client SDK 工具](https://github.com/apache/incubator-hugegraph-toolchain/blob/master/hugegraph-client-go/README.md) (version >=1.2.0)
+
 ### 2 环境要求
 
 - java 11 (兼容 java 8)

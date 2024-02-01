@@ -8,6 +8,8 @@ weight: 4
 
 HugeGraph-Client sends HTTP request to HugeGraph-Server to obtain and parse the execution result of Server. Currently only the HugeGraph-Client for Java is provided. You can use HugeGraph-Client to write Java code to operate HugeGraph, such as adding, deleting, modifying, and querying schema and graph data, or executing gremlin statements.
 
+> Now we support [HugeGraph client SDK tool based on Go language](https://github.com/apache/incubator-hugegraph-toolchain/blob/master/hugegraph-client-go/README.en.md) (version >=1.2.0)
+
 ### 2 What You Need
 
 - Java 11 (also support Java 8)
