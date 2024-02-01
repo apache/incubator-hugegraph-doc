@@ -13,16 +13,52 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-部署">3 部署&lt;/h3>
 &lt;p>有四种方式可以部署 HugeGraph-Server 组件：&lt;/p>
 &lt;ul>
-&lt;li>方式 1：下载 tar 包&lt;/li>
-&lt;li>方式 2：源码编译&lt;/li>
-&lt;li>方式 3：使用 Docker 容器 (便于&lt;strong>测试&lt;/strong>)&lt;/li>
+&lt;li>方式 1：使用 Docker 容器 (便于&lt;strong>测试&lt;/strong>)&lt;/li>
+&lt;li>方式 2：下载 tar 包&lt;/li>
+&lt;li>方式 3：源码编译&lt;/li>
 &lt;li>方式 4：使用 tools 工具部署 (Outdated)&lt;/li>
 &lt;/ul>
-&lt;h4 id="31-下载-tar-包">3.1 下载 tar 包&lt;/h4>
+&lt;h4 id="31-使用-docker-容器-便于测试">3.1 使用 Docker 容器 (便于&lt;strong>测试&lt;/strong>)&lt;/h4>
+&lt;!-- 3.1 is linked by other place. if change 3.1's title, please check -->
+&lt;p>可参考 &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/README.md">Docker 部署方式&lt;/a>。&lt;/p>
+&lt;p>我们可以使用 &lt;code>docker run -itd --name=server -p 8080:8080 hugegraph/hugegraph&lt;/code> 去快速启动一个内置了 &lt;code>RocksDB&lt;/code> 的 &lt;code>Hugegraph server&lt;/code>.&lt;/p>
+&lt;p>可选项：&lt;/p>
+&lt;ol>
+&lt;li>可以使用 &lt;code>docker exec -it server bash&lt;/code> 进入容器完成一些操作&lt;/li>
+&lt;li>可以使用 &lt;code>docker run -itd --name=server -p 8080:8080 -e PRELOAD=&amp;quot;true&amp;quot; hugegraph/hugegraph&lt;/code> 在启动的时候预加载一个&lt;strong>内置的&lt;/strong>样例图。可以通过 &lt;code>RESTful API&lt;/code> 进行验证。具体步骤可以参考 &lt;a href="/cn/docs/quickstart/hugegraph-server/#511-%E5%90%AF%E5%8A%A8-server-%E7%9A%84%E6%97%B6%E5%80%99%E5%88%9B%E5%BB%BA%E7%A4%BA%E4%BE%8B%E5%9B%BE">5.1.1&lt;/a>&lt;/li>
+&lt;li>可以使用 &lt;code>-e PASSWORD=123456&lt;/code> 设置是否开启鉴权模式以及 admin 的密码，具体步骤可以参考 &lt;a href="/cn/docs/config/config-authentication#%E4%BD%BF%E7%94%A8-docker-%E6%97%B6%E5%BC%80%E5%90%AF%E9%89%B4%E6%9D%83%E6%A8%A1%E5%BC%8F">Config Authentication&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;p>如果使用 docker desktop，则可以按照如下的方式设置可选项：&lt;/p>
+&lt;div style="text-align: center;">
+&lt;img src="/docs/images/images-server/31docker-option.jpg" alt="image" style="width:33%;">
+&lt;/div>
+&lt;p>另外，如果我们希望能够在一个文件中管理除了 &lt;code>server&lt;/code> 之外的其他 Hugegraph 相关的实例，我们也可以使用 &lt;code>docker-compose&lt;/code>完成部署，使用命令 &lt;code>docker-compose up -d&lt;/code>，（当然只配置 &lt;code>server&lt;/code> 也是可以的）以下是一个样例的 &lt;code>docker-compose.yml&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">server&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">server&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># environment:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - PRELOAD=true 为可选参数，为 True 时可以在启动的时候预加载一个内置的样例图&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - PASSWORD=123456 为可选参数，设置的时候可以开启鉴权模式，并设置密码&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>注意：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>hugegraph 的 docker 镜像是一个便捷版本，用于快速启动 hugegraph，并不是&lt;strong>官方发布物料包方式&lt;/strong>。你可以从 &lt;a href="https://infra.apache.org/release-distribution.html#dockerhub">ASF Release Distribution Policy&lt;/a> 中得到更多细节。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>推荐使用 &lt;code>release tag&lt;/code>(如 &lt;code>1.2.0&lt;/code>) 以获取稳定版。使用 &lt;code>latest&lt;/code> tag 可以使用开发中的最新功能。&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/blockquote>
+&lt;h4 id="32-下载-tar-包">3.2 下载 tar 包&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># use the latest version, here is 1.2.0 for example&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>/apache-hugegraph-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph*.tar.gz
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="32-源码编译">3.2 源码编译&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="33-源码编译">3.3 源码编译&lt;/h4>
 &lt;p>源码编译前请确保安装了 wget 命令&lt;/p>
 &lt;p>下载 HugeGraph 源代码&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph.git
@@ -51,36 +87,6 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> ------------------------------------------------------------------------
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>......
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>执行成功后，在 hugegraph 目录下生成 &lt;code>*hugegraph-*.tar.gz&lt;/code> 文件，就是编译生成的 tar 包。&lt;/p>
-&lt;h4 id="33-使用-docker-容器-便于测试">3.3 使用 Docker 容器 (便于&lt;strong>测试&lt;/strong>)&lt;/h4>
-&lt;!-- 3.1 is linked by other place. if change 3.1's title, please check -->
-&lt;p>可参考 &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/README.md">Docker 部署方式&lt;/a>。&lt;/p>
-&lt;p>我们可以使用 &lt;code>docker run -itd --name=graph -p 8080:8080 hugegraph/hugegraph&lt;/code> 去快速启动一个内置了 &lt;code>RocksDB&lt;/code> 的 &lt;code>Hugegraph server&lt;/code>.&lt;/p>
-&lt;p>可选项：&lt;/p>
-&lt;ol>
-&lt;li>可以使用 &lt;code>docker exec -it graph bash&lt;/code> 进入容器完成一些操作&lt;/li>
-&lt;li>可以使用 &lt;code>docker run -itd --name=graph -p 8080:8080 -e PRELOAD=&amp;quot;true&amp;quot; hugegraph/hugegraph&lt;/code> 在启动的时候预加载一个&lt;strong>内置的&lt;/strong>样例图。可以通过 &lt;code>RESTful API&lt;/code> 进行验证。具体步骤可以参考 &lt;a href="/cn/docs/quickstart/hugegraph-server/#511-%E5%90%AF%E5%8A%A8-server-%E7%9A%84%E6%97%B6%E5%80%99%E5%88%9B%E5%BB%BA%E7%A4%BA%E4%BE%8B%E5%9B%BE">5.1.1&lt;/a>&lt;/li>
-&lt;/ol>
-&lt;p>另外，如果我们希望能够在一个文件中管理除了 &lt;code>server&lt;/code> 之外的其他 Hugegraph 相关的实例，我们也可以使用 &lt;code>docker-compose&lt;/code>完成部署，使用命令 &lt;code>docker-compose up -d&lt;/code>，（当然只配置 &lt;code>server&lt;/code> 也是可以的）以下是一个样例的 &lt;code>docker-compose.yml&lt;/code>:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">graph&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># environment:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - PRELOAD=true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># PRELOAD 为可选参数，为 True 时可以在启动的时候预加载一个内置的样例图&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>注意：&lt;/p>
-&lt;ol>
-&lt;li>
-&lt;p>hugegraph 的 docker 镜像是一个便捷版本，用于快速启动 hugegraph，并不是&lt;strong>官方发布物料包方式&lt;/strong>。你可以从 &lt;a href="https://infra.apache.org/release-distribution.html#dockerhub">ASF Release Distribution Policy&lt;/a> 中得到更多细节。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>推荐使用 &lt;code>release tag&lt;/code>(如 &lt;code>1.2.0&lt;/code>) 以获取稳定版。使用 &lt;code>latest&lt;/code> tag 可以使用开发中的最新功能。&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;/blockquote>
 &lt;h4 id="34-使用-tools-工具部署-outdated">3.4 使用 tools 工具部署 (Outdated)&lt;/h4>
 &lt;p>HugeGraph-Tools 提供了一键部署的命令行工具，用户可以使用该工具快速地一键下载、解压、配置并启动 HugeGraph-Server 和 HugeGraph-Hubble，最新的 HugeGraph-Toolchain 中已经包含所有的这些工具，直接下载它解压就有工具包集合了&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># download toolchain package, it includes loader + tool + hubble, please check the latest version (here is 1.2.0)&lt;/span>
@@ -292,9 +298,9 @@
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;3&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">graph&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">server&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">cas-graph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">cas-server&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">environment&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -342,16 +348,16 @@
 &lt;ol>
 &lt;li>
 &lt;p>使用&lt;code>docker run&lt;/code>&lt;/p>
-&lt;p>使用 &lt;code>docker run -itd --name=graph -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:latest&lt;/code>&lt;/p>
+&lt;p>使用 &lt;code>docker run -itd --name=server -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:latest&lt;/code>&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>使用&lt;code>docker-compose&lt;/code>&lt;/p>
 &lt;p>创建&lt;code>docker-compose.yml&lt;/code>，具体文件如下，在环境变量中设置 PRELOAD=true。其中，&lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/src/assembly/static/scripts/example.groovy">&lt;code>example.groovy&lt;/code>&lt;/a> 是一个预定义的脚本，用于预加载样例数据。如果有需要，可以通过挂载新的 &lt;code>example.groovy&lt;/code> 脚本改变预加载的数据。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">graph&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">server&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:latest&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">server&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">environment&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#000">PRELOAD=true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">volumes&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -483,30 +489,11 @@
 &lt;h3 id="2-获取-hugegraph-loader">2 获取 HugeGraph-Loader&lt;/h3>
 &lt;p>有两种方式可以获取 HugeGraph-Loader：&lt;/p>
 &lt;ul>
+&lt;li>使用 Docker 镜像 (便于&lt;strong>测试&lt;/strong>)&lt;/li>
 &lt;li>下载已编译的压缩包&lt;/li>
 &lt;li>克隆源码编译安装&lt;/li>
-&lt;li>使用 Docker 镜像 (便于&lt;strong>测试&lt;/strong>)&lt;/li>
 &lt;/ul>
-&lt;h4 id="21-下载已编译的压缩包">2.1 下载已编译的压缩包&lt;/h4>
-&lt;p>下载最新版本的 HugeGraph-Toolchain Release 包，里面包含了 loader + tool + hubble 全套工具，如果你已经下载，可跳过重复步骤&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>//apache-hugegraph-toolchain-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph*.tar.gz
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="22-克隆源码编译安装">2.2 克隆源码编译安装&lt;/h4>
-&lt;p>克隆最新版本的 HugeGraph-Loader 源码包：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 1. get from github&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph-toolchain.git
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 2. get from direct (e.g. here is 1.0.0, please choose the latest version)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>/apache-hugegraph-toolchain-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>-src.tar.gz
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>由于 Oracle ojdbc license 的限制，需要手动安装 ojdbc 到本地 maven 仓库。
-访问&lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-drivers-archive.html">Oracle jdbc 下载&lt;/a> 页面。选择 Oracle Database 12c Release 2 (12.2.0.1) drivers，如下图所示。&lt;/p>
-&lt;p>打开链接后，选择“ojdbc8.jar”&lt;/p>
-&lt;p>把 ojdbc8 安装到本地 maven 仓库，进入&lt;code>ojdbc8.jar&lt;/code>所在目录，执行以下命令。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>编译生成 tar 包：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-loader
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn clean package -DskipTests
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="23-使用-docker-镜像-便于测试">2.3 使用 Docker 镜像 (便于&lt;strong>测试&lt;/strong>)&lt;/h4>
+&lt;h4 id="21-使用-docker-镜像-便于测试">2.1 使用 Docker 镜像 (便于&lt;strong>测试&lt;/strong>)&lt;/h4>
 &lt;p>我们可以使用 &lt;code>docker run -itd --name loader hugegraph/loader&lt;/code>部署 loader 服务。对于需要加载的数据，则可以通过挂载 &lt;code>-v /path/to/data/file:/loader/file&lt;/code> 或者&lt;code>docker cp&lt;/code>的方式将文件复制到 loader 容器内部。&lt;/p>
 &lt;p>或者使用 docker-compose 启动 loader, 启动命令为 &lt;code>docker-compose up -d&lt;/code>, 样例的 docker-compose.yml 如下所示：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -514,7 +501,7 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">server&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">server&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -538,11 +525,33 @@
 &lt;p>hugegraph-loader 的 docker 镜像是一个便捷版本，用于快速启动 loader，并不是&lt;strong>官方发布物料包方式&lt;/strong>。你可以从 &lt;a href="https://infra.apache.org/release-distribution.html#dockerhub">ASF Release Distribution Policy&lt;/a> 中得到更多细节。&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>推荐使用 &lt;code>release tag&lt;/code>(如 &lt;code>1.0.0&lt;/code>) 以获取稳定版。使用 &lt;code>latest&lt;/code> tag 可以使用开发中的最新功能。&lt;/p>
+&lt;p>推荐使用 &lt;code>release tag&lt;/code>(如 &lt;code>1.2.0&lt;/code>) 以获取稳定版。使用 &lt;code>latest&lt;/code> tag 可以使用开发中的最新功能。&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;/blockquote>
-&lt;h3 id="3-使用流程">3 使用流程&lt;/h3>
+&lt;h4 id="22-下载已编译的压缩包">2.2 下载已编译的压缩包&lt;/h4>
+&lt;p>下载最新版本的 &lt;code>HugeGraph-Toolchain&lt;/code> Release 包，里面包含了 &lt;code>loader + tool + hubble&lt;/code> 全套工具，如果你已经下载，可跳过重复步骤&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>/apache-hugegraph-toolchain-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph*.tar.gz
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="23-克隆源码编译安装">2.3 克隆源码编译安装&lt;/h4>
+&lt;p>克隆最新版本的 HugeGraph-Loader 源码包：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 1. get from github&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph-toolchain.git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 2. get from direct url (please choose the **latest release** version)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>/apache-hugegraph-toolchain-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>-src.tar.gz
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;details>
+&lt;summary>点击展开/折叠 手动安装 ojdbc 方法&lt;/summary>
+&lt;p>由于 Oracle ojdbc license 的限制，需要手动安装 ojdbc 到本地 maven 仓库。
+访问 &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-drivers-archive.html">Oracle jdbc 下载&lt;/a> 页面。选择 Oracle Database 12c Release 2 (12.2.0.1) drivers，如下图所示。&lt;/p>
+&lt;p>打开链接后，选择“ojdbc8.jar”&lt;/p>
+&lt;p>把 ojdbc8 安装到本地 maven 仓库，进入&lt;code>ojdbc8.jar&lt;/code>所在目录，执行以下命令。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/details>
+&lt;p>编译生成 tar 包：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-loader
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn clean package -DskipTests
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-使用流程">3 使用流程&lt;/h3>
 &lt;p>使用 HugeGraph-Loader 的基本流程分为以下几步：&lt;/p>
 &lt;ul>
 &lt;li>编写图模型&lt;/li>
@@ -1554,11 +1563,11 @@
 &lt;p>以内置的 example 数据集为例，我们可以使用以下的命令对数据进行导入。&lt;/p>
 &lt;p>如果需要导入自己准备的数据集，则只需要修改 &lt;code>-f&lt;/code> 配置脚本的路径 以及 &lt;code>-s&lt;/code> schema 文件路径即可。&lt;/p>
 &lt;p>其他的参数可以参照 &lt;a href="#341-%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E">3.4.1 参数说明&lt;/a>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker &lt;span style="color:#204a87">exec&lt;/span> -it loader bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy -h graph -p &lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker &lt;span style="color:#204a87">exec&lt;/span> -it loader bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy -h server -p &lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果导入用户自定义的数据集，按照刚才的例子，则使用：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker &lt;span style="color:#204a87">exec&lt;/span> -it loader bin/hugegraph-loader.sh -g hugegraph -f /loader/dataset/struct.json -s /loader/dataset/schema.groovy -h graph -p &lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker &lt;span style="color:#204a87">exec&lt;/span> -it loader bin/hugegraph-loader.sh -g hugegraph -f /loader/dataset/struct.json -s /loader/dataset/schema.groovy -h server -p &lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>如果 &lt;code>loader&lt;/code> 和 &lt;code>server&lt;/code>位于同一 docker 网络，则可以指定 &lt;code>-h {server_container_name}&lt;/code>, 否则需要指定 &lt;code>server&lt;/code>的宿主机的 ip (在我们的例子中， &lt;code>server_container_name&lt;/code> 为 &lt;code>graph&lt;/code>).&lt;/p>
+&lt;p>如果 &lt;code>loader&lt;/code> 和 &lt;code>server&lt;/code>位于同一 docker 网络，则可以指定 &lt;code>-h {server_container_name}&lt;/code>, 否则需要指定 &lt;code>server&lt;/code>的宿主机的 ip (在我们的例子中， &lt;code>server_container_name&lt;/code> 为 &lt;code>server&lt;/code>).&lt;/p>
 &lt;/blockquote>
 &lt;p>然后我们可以观察到结果：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>HugeGraphLoader worked in NORMAL MODE
@@ -1591,7 +1600,7 @@
 &lt;h5 id="452-进入-docker-容器进行导入">4.5.2 进入 docker 容器进行导入&lt;/h5>
 &lt;p>除了直接使用 &lt;code>docker exec&lt;/code> 导入数据，我们也可以进入容器进行数据导入，基本流程与 &lt;a href="#451-%E4%BD%BF%E7%94%A8-docker-exec-%E7%9B%B4%E6%8E%A5%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE">4.5.1&lt;/a> 相同&lt;/p>
 &lt;p>使用 &lt;code>docker exec -it loader bash&lt;/code>进入容器内部，并执行命令&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sh bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy -h graph -p &lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sh bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy -h server -p &lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>执行的结果如 &lt;a href="#451-%E4%BD%BF%E7%94%A8-docker-exec-%E7%9B%B4%E6%8E%A5%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE">4.5.1&lt;/a> 所示&lt;/p>
 &lt;h4 id="46-使用-spark-loader-导入">4.6 使用 spark-loader 导入&lt;/h4>
 &lt;blockquote>
@@ -1626,13 +1635,45 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;h3 id="2-部署">2 部署&lt;/h3>
 &lt;p>有三种方式可以部署&lt;code>hugegraph-hubble&lt;/code>&lt;/p>
 &lt;ul>
+&lt;li>使用 docker (便于&lt;strong>测试&lt;/strong>)&lt;/li>
 &lt;li>下载 toolchain 二进制包&lt;/li>
 &lt;li>源码编译&lt;/li>
-&lt;li>使用 docker (便于&lt;strong>测试&lt;/strong>)&lt;/li>
 &lt;/ul>
-&lt;h4 id="21-下载-toolchain-二进制包">2.1 下载 toolchain 二进制包&lt;/h4>
+&lt;h4 id="21-使用-docker-便于测试">2.1 使用 Docker (便于&lt;strong>测试&lt;/strong>)&lt;/h4>
+&lt;blockquote>
+&lt;p>&lt;strong>特别注意&lt;/strong>: docker 模式下，若 hubble 和 server 在同一宿主机，hubble 页面中设置 server 的 &lt;code>hostname&lt;/code> &lt;strong>不能设置&lt;/strong>为 &lt;code>localhost/127.0.0.1&lt;/code>，因这会指向 hubble &lt;strong>容器内部&lt;/strong>而非宿主机，导致无法连接到 server.&lt;/p>
+&lt;p>若 hubble 和 server 在同一 docker 网络下，&lt;strong>推荐&lt;/strong>直接使用&lt;code>container_name&lt;/code> (如下例的 &lt;code>server&lt;/code>) 作为主机名。或者也可以使用 &lt;strong>宿主机 IP&lt;/strong> 作为主机名，此时端口号为宿主机给 server 配置的端口&lt;/p>
+&lt;/blockquote>
+&lt;p>我们可以使用 &lt;code>docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble&lt;/code> 快速启动 &lt;a href="https://hub.docker.com/r/hugegraph/hubble">hubble&lt;/a>.&lt;/p>
+&lt;p>或者使用 docker-compose 启动 hubble，另外如果 hubble 和 server 在同一个 docker 网络下，可以使用 server 的 contain_name 进行访问，而不需要宿主机的 ip&lt;/p>
+&lt;p>使用&lt;code>docker-compose up -d&lt;/code>，&lt;code>docker-compose.yml&lt;/code>如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">server&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">server&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hubble&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hubble&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hubble&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">8088&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8088&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>注意：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;code>hugegraph-hubble&lt;/code> 的 docker 镜像是一个便捷发布版本，用于快速测试试用 hubble，并非&lt;strong>ASF官方发布物料包的方式&lt;/strong>。你可以从 &lt;a href="https://infra.apache.org/release-distribution.html#dockerhub">ASF Release Distribution Policy&lt;/a> 中得到更多细节。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>生产环境&lt;/strong>推荐使用 &lt;code>release tag&lt;/code>(如 &lt;code>1.2.0&lt;/code>) 稳定版。使用 &lt;code>latest&lt;/code> tag 默认对应 master 最新代码。&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/blockquote>
+&lt;h4 id="22-下载-toolchain-二进制包">2.2 下载 toolchain 二进制包&lt;/h4>
 &lt;p>&lt;code>hubble&lt;/code>项目在&lt;code>toolchain&lt;/code>项目中，首先下载&lt;code>toolchain&lt;/code>的 tar 包&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>/apache-hugegraph-toolchain-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar -xvf apache-hugegraph-toolchain-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> apache-hugegraph-toolchain-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz/apache-hugegraph-hubble-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>运行&lt;code>hubble&lt;/code>&lt;/p>
@@ -1645,7 +1686,7 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-08-30 20:38:41 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.c.h.Http11NioProtocol &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Starting ProtocolHandler &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;http-nio-0.0.0.0-8088&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-08-30 20:38:41 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.h.HugeGraphHubble &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Started HugeGraphHubble in 7.379 seconds &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>JVM running &lt;span style="color:#204a87;font-weight:bold">for&lt;/span> 8.499&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后使用浏览器访问 &lt;code>ip:8088&lt;/code> 可看到&lt;code>hubble&lt;/code>页面，通过&lt;code>bin/stop-hubble.sh&lt;/code>则可以停止服务&lt;/p>
-&lt;h4 id="22-源码编译">2.2 源码编译&lt;/h4>
+&lt;h4 id="23-源码编译">2.3 源码编译&lt;/h4>
 &lt;p>&lt;strong>注意：&lt;/strong> 编译 hubble 需要用户本地环境有安装 &lt;code>Nodejs V16.x&lt;/code> 与 &lt;code>yarn&lt;/code> 环境&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>apt install curl build-essential
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh &lt;span style="color:#000;font-weight:bold">|&lt;/span> bash
@@ -1666,39 +1707,7 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> apache-hugegraph-hubble-incubating*
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动&lt;code>hubble&lt;/code>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-hubble.sh -d
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="23-使用-docker-便于测试">2.3 使用 Docker (便于&lt;strong>测试&lt;/strong>)&lt;/h4>
-&lt;blockquote>
-&lt;p>&lt;strong>特别注意&lt;/strong>: docker 模式下，若 hubble 和 server 在同一宿主机，hubble 页面中设置 graph 的 &lt;code>hostname&lt;/code> &lt;strong>不能设置&lt;/strong>为 &lt;code>localhost/127.0.0.1&lt;/code>，因这会指向 hubble &lt;strong>容器内部&lt;/strong>而非宿主机，导致无法连接到 server.&lt;/p>
-&lt;p>若 hubble 和 server 在同一 docker 网络下，&lt;strong>推荐&lt;/strong>直接使用&lt;code>container_name&lt;/code> (如下例的 &lt;code>graph&lt;/code>) 作为主机名。或者也可以使用 &lt;strong>宿主机 IP&lt;/strong> 作为主机名，此时端口号为宿主机给 server 配置的端口&lt;/p>
-&lt;/blockquote>
-&lt;p>我们可以使用 &lt;code>docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble&lt;/code> 快速启动 &lt;a href="https://hub.docker.com/r/hugegraph/hubble">hubble&lt;/a>.&lt;/p>
-&lt;p>或者使用 docker-compose 启动 hubble，另外如果 hubble 和 graph 在同一个 docker 网络下，可以使用 graph 的 contain_name 进行访问，而不需要宿主机的 ip&lt;/p>
-&lt;p>使用&lt;code>docker-compose up -d&lt;/code>，&lt;code>docker-compose.yml&lt;/code>如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">server&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hubble&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hubble&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hubble&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">8088&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8088&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>注意：&lt;/p>
-&lt;ol>
-&lt;li>
-&lt;p>hugegraph-hubble 的 docker 镜像是一个便捷版本，用于快速启动 hubble，并不是&lt;strong>官方发布物料包方式&lt;/strong>。你可以从 &lt;a href="https://infra.apache.org/release-distribution.html#dockerhub">ASF Release Distribution Policy&lt;/a> 中得到更多细节。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>推荐使用 &lt;code>release tag&lt;/code>(如 &lt;code>1.0.0&lt;/code>) 以获取稳定版。使用 &lt;code>latest&lt;/code> tag 可以使用开发中的最新功能。&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;/blockquote>
-&lt;h3 id="3平台使用流程">3 平台使用流程&lt;/h3>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3平台使用流程">3 平台使用流程&lt;/h3>
 &lt;p>平台的模块使用流程如下：&lt;/p>
 &lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/2平台使用流程.png" alt="image">
@@ -2043,6 +2052,9 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;/center></description></item><item><title>Docs: HugeGraph-Client Quick Start</title><link>/cn/docs/quickstart/hugegraph-client/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-client/</guid><description>
 &lt;h3 id="1-hugegraph-client-概述">1 HugeGraph-Client 概述&lt;/h3>
 &lt;p>HugeGraph-Client 向 HugeGraph-Server 发出 HTTP 请求，获取并解析 Server 的执行结果。目前仅提供了 Java 版，用户可以使用 HugeGraph-Client 编写 Java 代码操作 HugeGraph，比如元数据和图数据的增删改查，或者执行 gremlin 语句。&lt;/p>
+&lt;blockquote>
+&lt;p>现在已经支持&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/blob/master/hugegraph-client-go/README.md">基于 Go 语言的 HugeGraph Client SDK 工具&lt;/a> (version &amp;gt;=1.2.0)&lt;/p>
+&lt;/blockquote>
 &lt;h3 id="2-环境要求">2 环境要求&lt;/h3>
 &lt;ul>
 &lt;li>java 11 (兼容 java 8)&lt;/li>

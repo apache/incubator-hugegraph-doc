@@ -1543,14 +1543,18 @@ roles. Below is the specific configuration process (requires service restart):&l
 Simply implement the &lt;code>org.apache.hugegraph.auth.HugeAuthenticator&lt;/code> interface with your custom authenticator,
 and then modify the &lt;code>authenticator&lt;/code> configuration item in the configuration file to point to your implementation.&lt;/p>
 &lt;h3 id="switching-authentication-mode">Switching authentication mode&lt;/h3>
-&lt;p>After the authentication configuration completed, enter the &lt;strong>admin password&lt;/strong> on the &lt;strong>command line&lt;/strong> when executing &lt;code>init store. sh&lt;/code> for the first time. (For non-Docker mode)&lt;/p>
+&lt;p>After the authentication configuration completed, enter the &lt;strong>admin password&lt;/strong> on the &lt;strong>command line&lt;/strong> when executing &lt;code>init store.sh&lt;/code> for the first time. (For non-Docker mode)&lt;/p>
 &lt;p>If deployed based on Docker image or if HugeGraph has already been initialized and needs to be converted to authentication mode,
 relevant graph data needs to be deleted and HugeGraph needs to be restarted. If there is already business data in the diagram,
-it is temporarily &lt;strong>not possible&lt;/strong> to directly convert the authentication mode (improvements/support for this feature will be released in the next version. Could refer &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2411">PR 2411&lt;/a>).&lt;/p>
+it is temporarily &lt;strong>not possible&lt;/strong> to directly convert the authentication mode (version&amp;lt;=1.2.0 )&lt;/p>
+&lt;blockquote>
+&lt;p>Improvements for this feature have been included in the latest release (available in latest docker image), please refer to &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2411">PR 2411&lt;/a>. Seamless switching is now available.&lt;/p>
+&lt;/blockquote>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># stop the hugeGraph firstly&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/stop-hugegraph.sh
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># delete the store data (here we use the default path for rocksdb)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># there is no need to delete in the latest version (fixed in https://github.com/apache/incubator-hugegraph/pull/2411)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rm -rf rocksdb-data/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># init store again&lt;/span>
@@ -1558,7 +1562,29 @@ it is temporarily &lt;strong>not possible&lt;/strong> to directly convert the au
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># start hugeGraph again&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Configuring HugeGraphServer to Use HTTPS Protocol</title><link>/docs/config/config-https/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/config/config-https/</guid><description>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="use-docker-to-enble-authentication-mode">Use docker to enble authentication mode&lt;/h3>
+&lt;p>For versions of the hugegraph/hugegraph image equal to or greater than 1.2.0, you can enable authentication mode while starting the Docker image.&lt;/p>
+&lt;p>The steps are as follows:&lt;/p>
+&lt;h4 id="1-use-docker-run">1. Use docker run&lt;/h4>
+&lt;p>To enable authentication mode, add the environment variable &lt;code>PASSWORD=123456&lt;/code> (you can freely set the password) in the &lt;code>docker run&lt;/code> command:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker run -itd -e &lt;span style="color:#000">PASSWORD&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">123456&lt;/span> --name&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>server -p 8080:8080 hugegraph/hugegraph:1.2.0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="2-use-docker-compose">2. Use docker-compose&lt;/h4>
+&lt;p>Use &lt;code>docker-compose&lt;/code> and set he environment variable &lt;code>PASSWORD=123456&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">server&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:1.2.0&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">server&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">environment&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#000">PASSWORD=123456&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="3-enter-the-container-to-enable-authentication-mode">3. Enter the container to enable authentication mode&lt;/h4>
+&lt;p>Enter the container first:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker &lt;span style="color:#204a87">exec&lt;/span> -it server bash
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Modify the config quickly, the modified file are save in the conf-bak folder&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/enable-auth.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then follow &lt;a href="#switching-authentication-mode">Switching authentication mode&lt;/a>&lt;/p></description></item><item><title>Docs: Configuring HugeGraphServer to Use HTTPS Protocol</title><link>/docs/config/config-https/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/config/config-https/</guid><description>
 &lt;h3 id="overview">Overview&lt;/h3>
 &lt;p>By default, HugeGraphServer uses the HTTP protocol. However, if you have security requirements for your requests, you can configure it to use HTTPS.&lt;/p>
 &lt;h3 id="server-configuration">Server Configuration&lt;/h3>
