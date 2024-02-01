@@ -79,6 +79,9 @@ git clone https://github.com/apache/hugegraph-toolchain.git
 wget https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph-toolchain-incubating-{version}-src.tar.gz
 ```
 
+<details>
+<summary>click to fold/collapse hwo to install ojdbc</summary>
+
 Due to the license limitation of the `Oracle OJDBC`, you need to manually install ojdbc to the local maven repository.
 Visit the [Oracle jdbc downloads](https://www.oracle.com/database/technologies/appdev/jdbc-drivers-archive.html) page. Select Oracle Database 12c Release 2 (12.2.0.1) drivers, as shown in the following figure.
 
@@ -88,6 +91,8 @@ Install ojdbc8 to the local maven repository, enter the directory where `ojdbc8.
 ```
 mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
 ```
+
+</details>
 
 Compile and generate tar package:
 
