@@ -415,4 +415,337 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;li>&lt;a href="https://gist.github.com/imbajin/1661450f000cd62a67e46d4f1abfe82c">hugegraph-server 本地调试文档 (Win/Unix)&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://youtrack.jetbrains.com/issue/IDEA-180033">&amp;ldquo;package sun.misc does not exist&amp;rdquo; compilation error&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://youtrack.jetbrains.com/issue/IDEA-201168">Cannot compile: java: package sun.misc does not exist&lt;/a>&lt;/li>
+&lt;/ol></description></item><item><title>Docs: Apache HugeGraph Committer 指南</title><link>/cn/docs/contribution-guidelines/committer-guidelines/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/contribution-guidelines/committer-guidelines/</guid><description>
+&lt;blockquote>
+&lt;p>本文档概述了 Apache Committer 推选要求以及流程，对应的 ASF 官方文档可见：https://community.apache.org/newcommitter.html&lt;/p>
+&lt;/blockquote>
+&lt;h1 id="候选人要求">候选人要求&lt;/h1>
+&lt;ol>
+&lt;li>候选人应遵守 &lt;a href="https://www.apache.org/foundation/policies/conduct.html">Apache Code of Conduct&lt;/a>&lt;/li>
+&lt;li>PMC 成员将通过搜索&lt;a href="https://lists.apache.org/list?dev@hugegraph.apache.org">邮件列表&lt;/a>、&lt;a href="https://github.com/apache/hugegraph/issues">issues&lt;/a>、&lt;a href="https://github.com/apache/incubator-hugegraph/pulls">PRs&lt;/a>、&lt;a href="https://hugegraph.apache.org/docs">官网文档&lt;/a>等方式，了解候选人如何与他人互动，以及他们所做的贡献&lt;/li>
+&lt;li>以下是在评估候选人是否适合成为 Committer 时需要考虑的一些要点：
+&lt;ol>
+&lt;li>与社区成员合作的能力&lt;/li>
+&lt;li>担任导师的能力&lt;/li>
+&lt;li>社区参与度&lt;/li>
+&lt;li>贡献程度&lt;/li>
+&lt;li>个人技能/能力&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
+&lt;h1 id="推选详细流程">推选详细流程&lt;/h1>
+&lt;p>&lt;strong>讨论 (DISCUSS) → 投票 (VOTE) → 邀请 (INVITE) → 公告 (ANNOUNCE)&lt;/strong>&lt;/p>
+&lt;h2 id="1-发起社区邮件讨论-discuss">1. 发起社区邮件讨论 (DISCUSS)&lt;/h2>
+&lt;p>任何 HugeGraph 的 (P)PMC 成员都可以发起投票讨论，在发现社区贡献者任何有价值的贡献并取得候选人本人同意后，可以在 &lt;a href="mailto:private@hugegraph.apache.org">private@hugegraph.apache.org&lt;/a> 发起讨论。
+讨论邮件里提议者要把候选人的贡献说清楚，并最好给出确认贡献的 URL 等信息，便于大家讨论分析。&lt;/p>
+&lt;p>下面是 HugeGraph 对应的邮件模板：(仅供参考)&lt;/p>
+&lt;blockquote>
+&lt;p>后续将使用 xxx 指代候选人名，一般 &lt;code>xxx&lt;/code> 为一个容易读的名字 (例如 &lt;code>Simon Jay&lt;/code>)，&lt;code>ASF-INFRA&lt;/code> 建议&lt;strong>避免&lt;/strong>使用不易读的 &lt;code>ID&lt;/code> 直接作为邮件&lt;strong>人名代指&lt;/strong> (例如&lt;strong>避免&lt;/strong> &lt;code>simon321&lt;/code> 或 &lt;code>wh0isSim0n&lt;/code> 😄)&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>To: private@hugegraph.apache.org
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Subject: [VOTE] New committer: xxx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Hi all:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>I am pleased to nominate xxx for the role of HugeGraph Committer based on his/her contributions over the past few months.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[ Candidate&amp;#39;s Contribution Summary ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Here are the relevant PRs (issues) he/she has participated in:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">**Core Features:**&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">-&lt;/span> Feature 1: [ Reference Links ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">-&lt;/span> ...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">**Fix/Chore/Release:**&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">**Doc:**&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[ Candidate&amp;#39;s Current Notable Contributions ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>His/Her contributions bring the following benefits to the community, helping us in the following ways:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[ Candidate&amp;#39;s Contributions and Benefits to the Community ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>In view of the above contributions, I elect xxx as Committer of the HugeGraph project.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[ Reference Links ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">1.&lt;/span> PR1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">2.&lt;/span> PR2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">3.&lt;/span> ...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Welcome everyone to share opinions~
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Thanks!
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>对于讨论邮件中贡献链接，可以使用 &lt;a href="https://github.com/search">GitHub Search&lt;/a> 的统计功能，按需输入如下对应关键词查询即可，可以在此基础上添加新的 repo 如 &lt;code>repo:apache/incubator-hugegraph-computer&lt;/code>，特别注意调整&lt;strong>时间范围&lt;/strong> (下面是一个模板参考，请自行调整参数):&lt;/p>
+&lt;ul>
+&lt;li>PR 提交次数
+&lt;ul>
+&lt;li>&lt;code>is:pr author:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:&amp;gt;2023-06-01 updated:&amp;lt;2023-12-25&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>代码提交/修改行数
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph/graphs/contributors?from=2023-06-01&amp;amp;to=2023-12-25&amp;amp;type=c">https://github.com/apache/incubator-hugegraph/graphs/contributors?from=2023-06-01&amp;amp;to=2023-12-25&amp;amp;type=c&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-doc/graphs/contributors?from=2023-06-01&amp;amp;to=2023-12-25&amp;amp;type=c">https://github.com/apache/incubator-hugegraph-doc/graphs/contributors?from=2023-06-01&amp;amp;to=2023-12-25&amp;amp;type=c&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>PR 提交关联 Issue 次数
+&lt;ul>
+&lt;li>&lt;code>linked:issue involves:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:&amp;gt;2023-06-01 updated:&amp;lt;2023-12-25&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>PR Review 个数
+&lt;ul>
+&lt;li>&lt;code>type:pr reviewed-by:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:&amp;gt;2023-06-01 updated:&amp;lt;2023-12-25&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>PR Review 行数&lt;/li>
+&lt;li>合并次数
+&lt;ul>
+&lt;li>&lt;code>type:pr author:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:&amp;gt;2023-06-01 updated:&amp;lt;2023-12-25&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>有效合并行数
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph/graphs/contributors?from=2023-06-01&amp;amp;to=2023-12-25&amp;amp;type=c">https://github.com/apache/incubator-hugegraph/graphs/contributors?from=2023-06-01&amp;amp;to=2023-12-25&amp;amp;type=c&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-doc/graphs/contributors?from=2023-06-01&amp;amp;to=2023-12-25&amp;amp;type=c">https://github.com/apache/incubator-hugegraph-doc/graphs/contributors?from=2023-06-01&amp;amp;to=2023-12-25&amp;amp;type=c&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Issue 提交数
+&lt;ul>
+&lt;li>&lt;code>type:issue author:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:&amp;gt;2023-06-01 updated:&amp;lt;2023-12-25&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Issue 修复数
+&lt;ul>
+&lt;li>在 Issue 提交数的基础上选取状态为 closed 的 Issues&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Issue 参与数
+&lt;ul>
+&lt;li>&lt;code>type:issue involves:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:&amp;gt;2023-06-01 updated:&amp;lt;2023-12-25&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>评论 Issue 数
+&lt;ul>
+&lt;li>&lt;code>type:issue commenter:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:&amp;gt;2023-06-01 updated:&amp;lt;2023-12-25&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>评论 PR 数
+&lt;ul>
+&lt;li>&lt;code>type:pr commenter:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:&amp;gt;2023-06-01 updated:&amp;lt;2023-12-25&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>Mailing Lists 的参与则可使用 &lt;a href="https://lists.apache.org/list?dev@hugegraph.apache.org:lte=10M:xxx">https://lists.apache.org/list?dev@hugegraph.apache.org:lte=10M:xxx&lt;/a> 查询。&lt;/p>
+&lt;h2 id="2-发起社区邮件投票-vote">2. 发起社区邮件投票 (VOTE)&lt;/h2>
+&lt;p>如果讨论邮件在规定时间内没有收到分歧信息，投票发起者需要在 &lt;a href="mailto:private@hugegraph.apache.org">private@hugegraph.apache.org&lt;/a> 发起对 Committer 的选举投票。&lt;/p>
+&lt;p>下面是对应的邮件模板：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>To: private@hugegraph.apache.org
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Subject: [VOTE] xxx as a HugeGraph Committer
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Hi all:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Through the discussion of last week:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[ Discussion Mailing List Link ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>We have discussed and listed what xxx participated in the HugeGraph community.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>I believe making him/her a Committer will enhance the work for HugeGraph.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>So, I am happy to call VOTE to accept xxx as a HugeGraph Committer.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Voting will continue for at least 72 hours or until the required number of votes is reached.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Please vote accordingly:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[ ] +1 approve
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[ ] +0 no opinion
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[ ] -1 disapprove with the reason
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Thanks!
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后 (P)PMC 成员回复 +1 或 -1 的邮件回复表达意见，一般来说至少需要 ≥3 票 +1 才能结束投票。&lt;/p>
+&lt;h2 id="宣布投票结果-result">宣布投票结果 (RESULT)&lt;/h2>
+&lt;p>投票邮件结束后，投票发起者需要邮件里提醒投票结束。同时，投票发起者需要发起邮件宣布投票结果，发送至 &lt;a href="mailto:private@hugegraph.apache.org">private@hugegraph.apache.org&lt;/a>，邮件模板可参考：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>To: private@hugegraph.apache.org
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Subject: [RESULTS][VOTE] xxx as a HugeGraph Committer
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Hi all: The vote for &amp;#34;xxx&amp;#34; as an HugeGraph Committer has PASSED and closed now.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>The result is as follows: X PMC +1 Votes:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>- A (PMC ID)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>- B
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>- C...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Vote thread:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>put vote thread link here
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Then I&amp;#39;m going to invite xxx to join us soon. Thanks for everyone&amp;#39;s support!
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="向候选人发起邮件邀请-invite">向候选人发起邮件邀请 (INVITE)&lt;/h2>
+&lt;p>宣布投票结果邮件发出后，投票发起人要给候选人发送邀请邮件。邀请邮件主送候选人，抄送 &lt;a href="mailto:private@hugegraph.apache.org">private@hugegraph.apache.org&lt;/a>，被邀请的候选人必须通过指定的邮箱地址回复接受或者拒绝该邀请。&lt;/p>
+&lt;p>下面是对应可参考的邮件模板：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>To: [ Candidate&amp;#39;s Email ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Cc: private@hugegraph.apache.org
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Subject: Invitation to become HugeGraph committer: xxx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Hello xxx,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>The HugeGraph Project Management Committee (PPMC)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hereby offers you committer privileges to the project.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>These privileges are offered on the understanding that you&amp;#39;ll use them
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reasonably and with common sense. We like to work on trust
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rather than unnecessary constraints.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Being a committer enables you to more easily make
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>changes without needing to go through the patch
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>submission process.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Being a committer does not require you to
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>participate any more than you already do. It does
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tend to make one even more committed. You will
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>probably find that you spend more time here.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Of course, you can decline and instead remain as a
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>contributor, participating as you do now.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>A. This personal invitation is a chance for you to
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>accept or decline in private. Either way, please
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>let us know in reply to the private@hugegraph.apache.org
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>address only.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>B. If you accept, the next step is to register an iCLA:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 1. Details of the iCLA and the forms are found
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> through this link: https://www.apache.org/licenses/#clas
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 2. Instructions for its completion and return to
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> the Secretary of the ASF are found at
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> https://www.apache.org/licenses/#submitting
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 3. When you transmit the completed iCLA, request
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> to notify the Apache HugeGraph project and choose a
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> unique Apache ID. Look to see if your preferred
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ID is already taken at
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> https://people.apache.org/committer-index.html
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> This will allow the Secretary to notify the PMC
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> when your iCLA has been recorded.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>When recording of your iCLA is noted, you will
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>receive a follow-up message with the next steps for
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>establishing you as a committer.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>With the expectation of your acceptance, welcome!
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>The Apache HugeGraph(incubating) PPMC
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="候选人接受邀请-accept">候选人接受邀请 (ACCEPT)&lt;/h2>
+&lt;p>候选人应回复上述邮件 (选择 &lt;strong>reply all&lt;/strong>)，表明接受邀请，邮件模板可参考：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>To: [ Sender&amp;#39;s Email ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Cc: private@hugegraph.apache.org
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Subject: Re: Invitation to become HugeGraph committer: xxx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Hello Apache HugeGraph(incubating) PPMC,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>I accept the invitation.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Thanks to the Apache HugeGraph Community for recognizing my work, I
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>will continue to actively participate in the work of the Apache
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>HugeGraph(incubating).
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Next, I will follow the instructions to complete the next steps:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Signing and submitting iCLA and registering Apache ID.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>xxx
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>当然，候选人也可以选择拒绝邀请，这里就没有模板了:)&lt;/p>
+&lt;p>一旦邀请被接受，候选人需要完成以下事项：&lt;/p>
+&lt;ul>
+&lt;li>订阅 &lt;a href="mailto:dev@hugegraph.apache.org">dev@hugegraph.apache.org&lt;/a>，具体步骤/过滤等配置请参考&lt;a href="https://hugegraph.apache.org/docs/contribution-guidelines/subscribe/">文档&lt;/a>&lt;/li>
+&lt;li>签署 &lt;a href="https://www.apache.org/licenses/icla.pdf">ICLA&lt;/a>，具体步骤见下↓&lt;/li>
+&lt;/ul>
+&lt;h3 id="icla-签署流程">ICLA 签署流程&lt;/h3>
+&lt;ol>
+&lt;li>下载 &lt;a href="https://www.apache.org/licenses/icla.pdf">ICLA&lt;/a>&lt;/li>
+&lt;li>打开 PDF 并填写相关内容，均需要全英文填写，建议使用 PDF 工具编辑并署名
+&lt;ol>
+&lt;li>&lt;strong>Full name&lt;/strong>: 名字在前，姓氏在后&lt;/li>
+&lt;li>&lt;strong>Public name&lt;/strong>: 可以不填，默认和 &lt;code>Full name&lt;/code> 相同&lt;/li>
+&lt;li>勾选 check this box only if you entered names with your family name first&lt;/li>
+&lt;li>&lt;strong>Postal Address&lt;/strong>: 英文地址，从小地方到大地方的顺序来写，需详细到门牌号&lt;/li>
+&lt;li>&lt;strong>Country:&lt;/strong> 所在国家英文&lt;/li>
+&lt;li>&lt;strong>E-mail&lt;/strong>: 邮箱地址，建议与上述邮件中使用的邮箱相同&lt;/li>
+&lt;li>&lt;strong>(optional) preferred Apache id(s)&lt;/strong>: 选择一个 &lt;a href="http://people.apache.org/committer-index.html">Apache committer&lt;/a> 页面不存在的 &lt;strong>SVN ID&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>(optional) notify project&lt;/strong>：Apache HugeGraph(incubating)&lt;/li>
+&lt;li>&lt;strong>签名：务必使用 PDF 工具手写&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Date:&lt;/strong> 格式 xxxx-xx-xx&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>签署完之后将 &lt;code>icla.pdf&lt;/code> 重命名为 &lt;code>姓名拼音-icla.pdf&lt;/code>&lt;/li>
+&lt;li>发送下述邮件，并附件引用 &lt;code>姓名拼音-icla.pdf&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>To: secretary@apache.org
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Subject: ICLA Information
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Hello everyone:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>I have accepted the Apache HugeGraph(incubating) PPMC invitation to
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>become a HugeGraph committer, the attachment is my ICLA information.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>(Optional) My GitHub account is https://github.com/xxx. Thanks!
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>xxx
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>更多注意事项可参考 &lt;a href="https://github.com/apache/hugegraph/issues/1732">https://github.com/apache/hugegraph/issues/1732&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>PMC 成员将等待 &lt;code>Apache secretary&lt;/code> 团队确认 &lt;code>ICLA&lt;/code> 备案，候选人和 PMC 成员将收到以下电子邮件：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>Dear xxx,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>This message acknowledges receipt of your ICLA, which has been filed in the Apache Software Foundation records.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Your account (with id xxx) has been requested for you and you should receive email with next steps
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>within the next few days (this process can take up to a week).
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Please refer to https://www.apache.org/foundation/how-it-works.html#developers
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>for more information about roles at Apache.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="设置-apache-账号和开发环境-config">设置 Apache 账号和开发环境 (CONFIG)&lt;/h3>
+&lt;p>备案完成后，候选人将收到来自 &lt;a href="mailto:root@apache.org">root@apache.org&lt;/a> 主题为 &lt;code>Welcome to the Apache Software Foundation&lt;/code> 的邮件，此时需按照邮件中的步骤设置 Apache 账号和开发环境：&lt;/p>
+&lt;ol>
+&lt;li>重置密码 &lt;a href="https://id.apache.org/reset/enter">https://id.apache.org/reset/enter&lt;/a>&lt;/li>
+&lt;li>配置个人信息 &lt;a href="https://whimsy.apache.org/roster/committer/xxx">https://whimsy.apache.org/roster/committer/xxx&lt;/a>&lt;/li>
+&lt;li>关联 GitHub 账号 &lt;a href="https://gitbox.apache.org/boxer">https://gitbox.apache.org/boxer&lt;/a>
+&lt;ol>
+&lt;li>这一步需要配置 GitHub 双重身份验证 (2FA)&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>&lt;strong>负责提名的 PMC 成员需通过 &lt;a href="https://whimsy.apache.org/roster/ppmc/hugegraph">Roster&lt;/a> 页面，将新的 Committer 添加到官方提交者列表中&lt;/strong> (&lt;strong>重要&lt;/strong>, 否则仓库权限不生效)
+&lt;ol>
+&lt;li>在这一步后，候选人即新的 Committer 才拥有对 GitHub HugeGraph 仓库的写权限&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>(可选) 新的 Committer 可以使用 Apache 账号&lt;a href="https://www.jetbrains.com/shop/eform/apache">申请&lt;/a>免费使用 Jetbrains 的全系列产品&lt;/li>
+&lt;/ol>
+&lt;h2 id="发布公告邮件-announce">发布公告邮件 (ANNOUNCE)&lt;/h2>
+&lt;p>当候选人完成上述步骤后，候选人将正式成为 HugeGraph 的 Committer，此时需要向 &lt;a href="mailto:dev@hugegraph.apache.org">dev@hugegraph.apache.org&lt;/a> 发送公告邮件，邮件模板可参考：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>To: dev@hugegraph.apache.org
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Subject: [ANNOUNCE] New Committer: xxx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Hi everyone, The PPMC for Apache HugeGraph(incubating) has invited xxx to
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>become a Committer and we are pleased to announce that he/she has accepted.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>xxx is being active in the HugeGraph community &amp;amp; dedicated to ... modules,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>and we are glad to see his/her more interactions with the community in the future.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>(Optional) His/Her GitHub account is https://github.com/xxx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Welcome xxx, and please enjoy your community journey~
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Thanks!
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>The Apache HugeGraph PPMC
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="参考">参考&lt;/h1>
+&lt;ol>
+&lt;li>&lt;a href="https://community.apache.org/newcommitter.html">https://community.apache.org/newcommitter.html&lt;/a> (ASF 官方文档)&lt;/li>
+&lt;li>&lt;a href="https://infra.apache.org/new-committers-guide.html">https://infra.apache.org/new-committers-guide.html&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.apache.org/dev/pmc.html#newcommitter">https://www.apache.org/dev/pmc.html#newcommitter&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://linkis.apache.org/zh-CN/community/how-to-vote-a-committer-pmc">https://linkis.apache.org/zh-CN/community/how-to-vote-a-committer-pmc&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.apache.org/licenses/contributor-agreements.html#submitting">https://www.apache.org/licenses/contributor-agreements.html#submitting&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.apache.org/licenses/cla-faq.html#printer">https://www.apache.org/licenses/cla-faq.html#printer&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://linkis.apache.org/zh-CN/community/how-to-sign-apache-icla">https://linkis.apache.org/zh-CN/community/how-to-sign-apache-icla&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/hugegraph/issues/1732">https://github.com/apache/hugegraph/issues/1732&lt;/a> (HugeGraph ICLA related issue)&lt;/li>
 &lt;/ol></description></item></channel></rss>
