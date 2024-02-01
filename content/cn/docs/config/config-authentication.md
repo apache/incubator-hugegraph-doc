@@ -1,6 +1,6 @@
 ---
 title: "HugeGraph 内置用户权限与扩展权限配置及使用"
-linkTitle: "Config Authentication"
+linkTitle: "权限配置"
 weight: 3
 ---
 

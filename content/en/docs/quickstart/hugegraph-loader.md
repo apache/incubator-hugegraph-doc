@@ -23,11 +23,42 @@ It will be explained in detail below.
 
 There are two ways to get HugeGraph-Loader:
 
+- Use docker image (Convenient for Test/Dev)
 - Download the compiled tarball
 - Clone source code then compile and install
-- Use docker image (Convenient for Test/Dev)
 
-#### 2.1 Download the compiled archive
+#### 2.1 Use Docker image (Convenient for Test/Dev)
+
+We can deploy the loader service using `docker run -itd --name loader hugegraph/loader`. For the data that needs to be loaded, it can be copied into the loader container either by mounting `-v /path/to/data/file:/loader/file` or by using `docker cp`.
+
+Alternatively, to start the loader using docker-compose, the command is `docker-compose up -d`. An example of the docker-compose.yml is as follows:
+
+```yaml
+version: '3'
+
+services:
+  server:
+    image: hugegraph/hugegraph
+    container_name: server
+    ports:
+      - 8080:8080
+
+  loader:
+    image: hugegraph/loader
+    container_name: loader
+    # mount your own data here
+    # volumes:
+      # - /path/to/data/file:/loader/file
+```
+
+The specific data loading process can be referenced under [4.5 User Docker to load data](#45-use-docker-to-load-data) 
+
+> Note: 
+> 1. The docker image of hugegraph-loader is a convenience release to start hugegraph-loader quickly, but not **official distribution** artifacts. You can find more details from [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub).
+> 
+> 2. Recommand to use `release tag`(like `1.2.0`) for the stable version. Use `latest` tag to experience the newest functions in development.
+
+#### 2.2 Download the compiled archive
 
 Download the latest version of the HugeGraph-Toolchain release package:
 
@@ -36,7 +67,7 @@ wget https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph
 tar zxf *hugegraph*.tar.gz
 ```
 
-#### 2.2 Clone source code to compile and install
+#### 2.3 Clone source code to compile and install
 
 Clone the latest version of HugeGraph-Loader source package:
 
@@ -64,43 +95,6 @@ Compile and generate tar package:
 cd hugegraph-loader
 mvn clean package -DskipTests
 ```
-
-#### 2.3 Use Docker image (Convenient for Test/Dev)
-
-We can deploy the loader service using `docker run -itd --name loader hugegraph/loader`. For the data that needs to be loaded, it can be copied into the loader container either by mounting `-v /path/to/data/file:/loader/file` or by using `docker cp`.
-
-Alternatively, to start the loader using docker-compose, the command is `docker-compose up -d`. An example of the docker-compose.yml is as follows:
-
-```yaml
-version: '3'
-
-services:
-  server:
-    image: hugegraph/hugegraph
-    container_name: graph
-    ports:
-      - 8080:8080
-
-  hubble:
-    image: hugegraph/hubble
-    container_name: hubble
-    ports:
-      - 8088:8088
-
-  loader:
-    image: hugegraph/loader
-    container_name: loader
-    # mount your own data here
-    # volumes:
-      # - /path/to/data/file:/loader/file
-```
-
-The specific data loading process can be referenced under [4.5 User Docker to load data](#45-use-docker-to-load-data) 
-
-> Note: 
-> 1. The docker image of hugegraph-loader is a convenience release to start hugegraph-loader quickly, but not **official distribution** artifacts. You can find more details from [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub).
-> 
-> 2. Recommand to use `release tag`(like `1.0.0`) for the stable version. Use `latest` tag to experience the newest functions in development.
 
 ### 3 How to use
 The basic process of using HugeGraph-Loader is divided into the following steps:
@@ -1061,16 +1055,16 @@ If you need to import your custom dataset, you just need to modify the paths for
 "You can refer to [3.4.1 Parameter description](#341-parameter-description) for the rest of the parameters.
 
 ```bash
-docker exec -it loader bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy -h graph -p 8080
+docker exec -it loader bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy -h server -p 8080
 ```
 
 If loading a custom dataset, following the previous example, you would use:
 
 ```bash
-docker exec -it loader bin/hugegraph-loader.sh -g hugegraph -f /loader/dataset/struct.json -s /loader/dataset/schema.groovy -h graph -p 8080
+docker exec -it loader bin/hugegraph-loader.sh -g hugegraph -f /loader/dataset/struct.json -s /loader/dataset/schema.groovy -h server -p 8080
 ```
 
-> If `loader` and `server` are in the same Docker network, you can specify `-h {server_container_name}`; otherwise, you need to specify the IP of the `server` host (in our example, `server_container_name` is `graph`).
+> If `loader` and `server` are in the same Docker network, you can specify `-h {server_container_name}`; otherwise, you need to specify the IP of the `server` host (in our example, `server_container_name` is `server`).
 
 Then we can obverse the result:
 
@@ -1116,7 +1110,7 @@ Besides using `docker exec` directly for data import, we can also enter the cont
 Enter the container by `docker exec -it loader bash` and execute the command:
 
 ```bash
-sh bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy -h graph -p 8080
+sh bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy -h server -p 8080
 ```
 
 The results of the execution will be similar to those shown in [4.5.1](#451-use-docker-exec-to-load-data-directly).

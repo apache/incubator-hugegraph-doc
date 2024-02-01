@@ -1,6 +1,6 @@
 ---
 title: "HugeGraph-Server Quick Start"
-linkTitle: "Install/Build HugeGraph-Server"
+linkTitle: "安装/构建 HugeGraph-Server"
 weight: 1
 ---
 
@@ -44,7 +44,13 @@ java -version
 
 1. 可以使用 `docker exec -it server bash` 进入容器完成一些操作
 2. 可以使用 `docker run -itd --name=server -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph` 在启动的时候预加载一个**内置的**样例图。可以通过 `RESTful API` 进行验证。具体步骤可以参考 [5.1.1](/cn/docs/quickstart/hugegraph-server/#511-%E5%90%AF%E5%8A%A8-server-%E7%9A%84%E6%97%B6%E5%80%99%E5%88%9B%E5%BB%BA%E7%A4%BA%E4%BE%8B%E5%9B%BE) 
-3. 可以使用 `AUTH=true -e PASSWORD=123456` 设置是否开启鉴权模式以及 admin 的密码，具体步骤可以参考 [Config Authentication](/cn/docs/config/config-authentication#使用-docker-时开启鉴权模式) 
+3. 可以使用 `-e PASSWORD=123456` 设置是否开启鉴权模式以及 admin 的密码，具体步骤可以参考 [Config Authentication](/cn/docs/config/config-authentication#使用-docker-时开启鉴权模式) 
+
+如果使用 docker desktop，则可以按照如下的方式设置可选项：
+<div style="text-align: center;">
+    <img src="/docs/images/images-server/31docker-option.jpg" alt="image" style="width:33%;">
+</div>
+
 
 另外，如果我们希望能够在一个文件中管理除了 `server` 之外的其他 Hugegraph 相关的实例，我们也可以使用 `docker-compose`完成部署，使用命令 `docker-compose up -d`，（当然只配置 `server` 也是可以的）以下是一个样例的 `docker-compose.yml`:
 
@@ -56,8 +62,7 @@ services:
     container_name: server
     # environment:
     #  - PRELOAD=true 为可选参数，为 True 时可以在启动的时候预加载一个内置的样例图
-    #  - AUTH=true 为可选参数，为 True 时可以在启动的时候开启鉴权模式，默认密码为 hugegraph
-    #  - PASSWORD=123456 为可选参数，可以为鉴权模式设置密码
+    #  - PASSWORD=123456 为可选参数，设置的时候可以开启鉴权模式，并设置密码
     ports:
       - 8080:8080
 ```

@@ -1,6 +1,6 @@
 ---
 title: "HugeGraph-Client Quick Start"
-linkTitle: "Develop with HugeGraph-Client"
+linkTitle: "使用 HugeGraph-Client 进行开发"
 weight: 4
 ---
 

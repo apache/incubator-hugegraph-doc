@@ -1,6 +1,6 @@
 ---
 title: "HugeGraph Architecture Overview"
-linkTitle: "Architecture Overview"
+linkTitle: "架构总览"
 weight: 1
 ---
 

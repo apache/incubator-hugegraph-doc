@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph 1.2.0 Release Notes"
 linkTitle: "Release-1.2.0"
-weight: 1
+weight: 10
 ---
 
 ### Java version statement

@@ -1,6 +1,6 @@
 ---
 title: "HugeGraph-Computer Quick Start"
-linkTitle: "Analysis with HugeGraph-Computer"
+linkTitle: "使用 HugeGraph-Computer 进行数据分析"
 weight: 6
 ---
 

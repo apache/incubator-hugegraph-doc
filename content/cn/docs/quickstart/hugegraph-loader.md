@@ -1,6 +1,6 @@
 ---
 title: "HugeGraph-Loader Quick Start"
-linkTitle: "Load data with HugeGraph-Loader"
+linkTitle: "使用 HugeGraph-Loader 导入数据"
 weight: 2
 ---
 

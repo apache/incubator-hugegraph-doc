@@ -1,6 +1,6 @@
 ---
 title: "HugeGraph-Loader Performance"
-linkTitle: "HugeGraph-Loader Performance"
+linkTitle: "HugeGraph-Loader 性能"
 weight: 3
 ---
 

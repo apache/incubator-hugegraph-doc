@@ -1,6 +1,6 @@
 ---
 title: "HugeGraph-Hubble Quick Start"
-linkTitle: "Visual with HugeGraph-Hubble"
+linkTitle: "使用 HugeGraph-Hubble 可视化"
 weight: 3
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: "HugeGraph 0.12 Release Notes"
 linkTitle: "Release-0.12.0"
+draft: true
 weight: 12
 ---
 
@@ -8,7 +9,7 @@ weight: 12
 
 #### 接口更新
 
-- 支持 https + auth 模式连接图服务 （hugegraph-client #109  #110）
+- 支持 https + auth 模式连接图服务（hugegraph-client #109  #110）
 - 统一 kout/kneighbor 等 OLTP 接口的参数命名及默认值（hugegraph-client #122  #123）
 - 支持 RESTful 接口利用 P.textcontains() 进行属性全文检索（hugegraph #1312）
 - 增加 graph_read_mode API 接口，以切换 OLTP、OLAP 读模式（hugegraph #1332）
@@ -21,7 +22,7 @@ weight: 12
 - 增加 OLAP 回写接口，支持 cassandra/rocksdb 后端（hugegraph #1506、hugegraph-client #129）
 - 增加返回一个图的所有 Schema 的 API 接口（hugegraph #1567、hugegraph-client #134）
 - 变更 property key 创建与更新 API 的 HTTP 返回码为 202（hugegraph #1584）
-- 增强 Text.contains() 支持3种格式："word"、"(word)"、"(word1|word2|word3)"（hugegraph #1652）
+- 增强 Text.contains() 支持 3 种格式："word"、"(word)"、"(word1|word2|word3)"（hugegraph #1652）
 - 统一了属性中特殊字符的行为（hugegraph #1670 #1684）
 - 支持动态创建图实例、克隆图实例、删除图实例（hugegraph-client #135）
 
@@ -44,9 +45,9 @@ weight: 12
 - 支持审计日志，及其压缩、限速等功能（hugegraph #1492 #1493）
 - 支持 OLTP 算法使用高性能并行无锁原生集合以提升性能（hugegraph #1552）
 
-#### BUG修复
+#### BUG 修复
 
-- 修复带权最短路径算法（weighted shortest path）NPE问题 （hugegraph #1250）
+- 修复带权最短路径算法（weighted shortest path）NPE 问题（hugegraph #1250）
 - 增加 Raft 相关的安全操作白名单（hugegraph #1257）
 - 修复 RocksDB 实例未正确关闭的问题（hugegraph #1264）
 - 在清空数据 truncate 操作之后，显示的发起写快照 Raft Snapshot（hugegraph #1275）
@@ -114,7 +115,7 @@ weight: 12
 - 修复 has() + within() 查询时结果异常问题（hugegraph #1680）
 - 升级 Log4j 版本到 2.17 以修复安全漏洞（hugegraph #1686 #1698 #1702）
 - 修复 HBase 后端 shard scan 中 startkey 包含空串时 NPE 问题（hugegraph #1691）
-- 修复 paths 算法在深层环路遍历时性能下降问题 （hugegraph #1694）
+- 修复 paths 算法在深层环路遍历时性能下降问题（hugegraph #1694）
 - 改进 personalrank 算法的参数默认值及错误检查（hugegraph #1695）
 - 修复 RESTful 接口 P.within 条件不生效问题（hugegraph #1704）
 - 修复启用权限时无法动态创建图的问题（hugegraph #1708）
@@ -200,12 +201,12 @@ weight: 12
 ### Tools
 
 - 支持 HTTPS 协议（hugegraph-tools #71）
-- 移除 --protocol 参数，直接从URL中自动提取（hugegraph-tools #72）
+- 移除 --protocol 参数，直接从 URL 中自动提取（hugegraph-tools #72）
 - 支持将数据 dump 到 HDFS 文件系统（hugegraph-tools #73）
 - 修复 trust store file 路径问题（hugegraph-tools #75）
 - 支持权限信息的备份恢复（hugegraph-tools #76）
 - 支持无参数的 Printer 打印（hugegraph-tools #79）
 - 修复 MacOS free_memory 计算问题（hugegraph-tools #82）
-- 支持备份恢复时指定线程数hugegraph-tools #83）
+- 支持备份恢复时指定线程数 hugegraph-tools #83）
 - 支持动态创建图、克隆图、删除图等命令（hugegraph-tools #95)
 
