@@ -1,6 +1,6 @@
 ---
 title: "Backup Restore"
-linkTitle: "备份与恢复"
+linkTitle: "备份 & 恢复"
 weight: 4
 ---
 

@@ -81,7 +81,7 @@ gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 bin/stop-hugegraph.sh
 
 # delete the store data (here we use the default path for rocksdb)
-# there is no need to delete in the latest version (fixed in https://github.com/apache/incubator-hugegraph/pull/2411)
+# Note: no need to delete data in the latest code (fixed in https://github.com/apache/incubator-hugegraph/pull/2411)
 rm -rf rocksdb-data/
 
 # init store again

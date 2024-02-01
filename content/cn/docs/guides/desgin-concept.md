@@ -1,6 +1,6 @@
 ---
 title: "HugeGraph Design Concepts"
-linkTitle: "设计理念"
+linkTitle: "设计理念(legacy)"
 weight: 2
 ---
 

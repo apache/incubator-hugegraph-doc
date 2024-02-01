@@ -1,6 +1,6 @@
 ---
 title: "HugeGraph BenchMark Performance"
-linkTitle: "HugeGraph 基准性能"
+linkTitle: "HugeGraph 基准测试"
 weight: 1
 ---
 
