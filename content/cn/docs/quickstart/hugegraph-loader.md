@@ -1,6 +1,6 @@
 ---
 title: "HugeGraph-Loader Quick Start"
-linkTitle: "Load data with HugeGraph-Loader"
+linkTitle: "使用 Loader/Spark 实时导入数据"
 weight: 2
 ---
 
@@ -24,49 +24,12 @@ HugeGraph-Loader 是 HugeGraph 的数据导入组件，能够将多种数据源�
 
 有两种方式可以获取 HugeGraph-Loader：
 
+- 使用 Docker 镜像 (便于**测试**)
 - 下载已编译的压缩包
 - 克隆源码编译安装
-- 使用 Docker 镜像 (便于**测试**)
 
-#### 2.1 下载已编译的压缩包
 
-下载最新版本的 HugeGraph-Toolchain Release 包，里面包含了 loader + tool + hubble 全套工具，如果你已经下载，可跳过重复步骤
-
-```bash
-wget https://downloads.apache.org/incubator/hugegraph/{version}//apache-hugegraph-toolchain-incubating-{version}.tar.gz
-tar zxf *hugegraph*.tar.gz
-```
-
-#### 2.2 克隆源码编译安装
-
-克隆最新版本的 HugeGraph-Loader 源码包：
-
-```bash
-# 1. get from github
-git clone https://github.com/apache/hugegraph-toolchain.git
-
-# 2. get from direct  (e.g. here is 1.0.0, please choose the latest version)
-wget https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph-toolchain-incubating-{version}-src.tar.gz
-```
-
-由于 Oracle ojdbc license 的限制，需要手动安装 ojdbc 到本地 maven 仓库。
-访问[Oracle jdbc 下载](https://www.oracle.com/database/technologies/appdev/jdbc-drivers-archive.html) 页面。选择 Oracle Database 12c Release 2 (12.2.0.1) drivers，如下图所示。
-
-打开链接后，选择“ojdbc8.jar”
-
-把 ojdbc8 安装到本地 maven 仓库，进入`ojdbc8.jar`所在目录，执行以下命令。
-```
-mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
-```
-
-编译生成 tar 包：
-
-```bash
-cd hugegraph-loader
-mvn clean package -DskipTests
-```
-
-#### 2.3 使用 Docker 镜像 (便于**测试**)
+#### 2.1 使用 Docker 镜像 (便于**测试**)
 
 我们可以使用 `docker run -itd --name loader hugegraph/loader`部署 loader 服务。对于需要加载的数据，则可以通过挂载 `-v /path/to/data/file:/loader/file` 或者`docker cp`的方式将文件复制到 loader 容器内部。
 
@@ -78,7 +41,7 @@ version: '3'
 services:
   server:
     image: hugegraph/hugegraph
-    container_name: graph
+    container_name: server
     ports:
       - 8080:8080
 
@@ -103,7 +66,50 @@ services:
 > 
 > 1. hugegraph-loader 的 docker 镜像是一个便捷版本，用于快速启动 loader，并不是**官方发布物料包方式**。你可以从 [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub) 中得到更多细节。
 > 
-> 2. 推荐使用 `release tag`(如 `1.0.0`) 以获取稳定版。使用 `latest` tag 可以使用开发中的最新功能。
+> 2. 推荐使用 `release tag`(如 `1.2.0`) 以获取稳定版。使用 `latest` tag 可以使用开发中的最新功能。
+
+#### 2.2 下载已编译的压缩包
+
+下载最新版本的 `HugeGraph-Toolchain` Release 包，里面包含了 `loader + tool + hubble` 全套工具，如果你已经下载，可跳过重复步骤
+
+```bash
+wget https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph-toolchain-incubating-{version}.tar.gz
+tar zxf *hugegraph*.tar.gz
+```
+
+#### 2.3 克隆源码编译安装
+
+克隆最新版本的 HugeGraph-Loader 源码包：
+
+```bash
+# 1. get from github
+git clone https://github.com/apache/hugegraph-toolchain.git
+
+# 2. get from direct url (please choose the **latest release** version)
+wget https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph-toolchain-incubating-{version}-src.tar.gz
+```
+
+<details>
+<summary>点击展开/折叠 手动安装 ojdbc 方法</summary>
+
+由于 Oracle ojdbc license 的限制，需要手动安装 ojdbc 到本地 maven 仓库。
+访问 [Oracle jdbc 下载](https://www.oracle.com/database/technologies/appdev/jdbc-drivers-archive.html) 页面。选择 Oracle Database 12c Release 2 (12.2.0.1) drivers，如下图所示。
+
+打开链接后，选择“ojdbc8.jar”
+
+把 ojdbc8 安装到本地 maven 仓库，进入`ojdbc8.jar`所在目录，执行以下命令。
+```
+mvn install:install-file -Dfile=./ojdbc8.jar -DgroupId=com.oracle -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
+```
+
+</details>
+
+编译生成 tar 包：
+
+```bash
+cd hugegraph-loader
+mvn clean package -DskipTests
+```
 
 ### 3 使用流程
 
@@ -1064,17 +1070,17 @@ edge_created.json  edge_knows.json  schema.groovy  struct.json  vertex_person.cs
 其他的参数可以参照 [3.4.1 参数说明](#341-参数说明)
 
 ```bash
-docker exec -it loader bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy -h graph -p 8080
+docker exec -it loader bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy -h server -p 8080
 ```
 
 如果导入用户自定义的数据集，按照刚才的例子，则使用：
 
 ```bash
-docker exec -it loader bin/hugegraph-loader.sh -g hugegraph -f /loader/dataset/struct.json -s /loader/dataset/schema.groovy -h graph -p 8080
+docker exec -it loader bin/hugegraph-loader.sh -g hugegraph -f /loader/dataset/struct.json -s /loader/dataset/schema.groovy -h server -p 8080
 ```
 
 
-> 如果 `loader` 和 `server`位于同一 docker 网络，则可以指定 `-h {server_container_name}`, 否则需要指定 `server`的宿主机的 ip (在我们的例子中， `server_container_name` 为 `graph`).
+> 如果 `loader` 和 `server`位于同一 docker 网络，则可以指定 `-h {server_container_name}`, 否则需要指定 `server`的宿主机的 ip (在我们的例子中， `server_container_name` 为 `server`).
 
 然后我们可以观察到结果：
 
@@ -1120,7 +1126,7 @@ meter metrics
 使用 `docker exec -it loader bash`进入容器内部，并执行命令
 
 ```bash
-sh bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy -h graph -p 8080
+sh bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy -h server -p 8080
 ```
 
 执行的结果如 [4.5.1](#451-使用-docker-exec-直接导入数据) 所示

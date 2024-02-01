@@ -1,6 +1,6 @@
 ---
 title: "配置 HugeGraphServer 使用 https 协议"
-linkTitle: "Config Https"
+linkTitle: "配置 HTTPS"
 weight: 4
 ---
 

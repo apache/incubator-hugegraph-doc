@@ -1,6 +1,6 @@
 ---
 title: "HugeGraph-Computer Quick Start"
-linkTitle: "Analysis with HugeGraph-Computer"
+linkTitle: "使用 Computer 进行 OLAP 分析"
 weight: 6
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "HugeGraph-Server Quick Start"
-linkTitle: "Install/Build HugeGraph-Server"
+linkTitle: "安装/构建 HugeGraph-Server"
 weight: 1
 ---
 
@@ -28,13 +28,52 @@ java -version
 
 有四种方式可以部署 HugeGraph-Server 组件：
 
-- 方式 1：下载 tar 包
-- 方式 2：源码编译
-- 方式 3：使用 Docker 容器 (便于**测试**)
+- 方式 1：使用 Docker 容器 (便于**测试**)
+- 方式 2：下载 tar 包
+- 方式 3：源码编译
 - 方式 4：使用 tools 工具部署 (Outdated)
 
+#### 3.1 使用 Docker 容器 (便于**测试**)
+<!-- 3.1 is linked by other place. if change 3.1's title, please check -->
 
-#### 3.1 下载 tar 包
+可参考 [Docker 部署方式](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/README.md)。
+
+我们可以使用 `docker run -itd --name=server -p 8080:8080 hugegraph/hugegraph` 去快速启动一个内置了 `RocksDB` 的 `Hugegraph server`.
+
+可选项：
+
+1. 可以使用 `docker exec -it server bash` 进入容器完成一些操作
+2. 可以使用 `docker run -itd --name=server -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph` 在启动的时候预加载一个**内置的**样例图。可以通过 `RESTful API` 进行验证。具体步骤可以参考 [5.1.1](/cn/docs/quickstart/hugegraph-server/#511-%E5%90%AF%E5%8A%A8-server-%E7%9A%84%E6%97%B6%E5%80%99%E5%88%9B%E5%BB%BA%E7%A4%BA%E4%BE%8B%E5%9B%BE) 
+3. 可以使用 `-e PASSWORD=123456` 设置是否开启鉴权模式以及 admin 的密码，具体步骤可以参考 [Config Authentication](/cn/docs/config/config-authentication#使用-docker-时开启鉴权模式) 
+
+如果使用 docker desktop，则可以按照如下的方式设置可选项：
+<div style="text-align: center;">
+    <img src="/docs/images/images-server/31docker-option.jpg" alt="image" style="width:33%;">
+</div>
+
+
+另外，如果我们希望能够在一个文件中管理除了 `server` 之外的其他 Hugegraph 相关的实例，我们也可以使用 `docker-compose`完成部署，使用命令 `docker-compose up -d`，（当然只配置 `server` 也是可以的）以下是一个样例的 `docker-compose.yml`:
+
+```yaml
+version: '3'
+services:
+  server:
+    image: hugegraph/hugegraph
+    container_name: server
+    # environment:
+    #  - PRELOAD=true 为可选参数，为 True 时可以在启动的时候预加载一个内置的样例图
+    #  - PASSWORD=123456 为可选参数，设置的时候可以开启鉴权模式，并设置密码
+    ports:
+      - 8080:8080
+```
+
+> 注意：
+> 
+> 1. hugegraph 的 docker 镜像是一个便捷版本，用于快速启动 hugegraph，并不是**官方发布物料包方式**。你可以从 [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub) 中得到更多细节。
+>
+> 2. 推荐使用 `release tag`(如 `1.2.0`) 以获取稳定版。使用 `latest` tag 可以使用开发中的最新功能。
+
+#### 3.2 下载 tar 包
 
 ```bash
 # use the latest version, here is 1.2.0 for example
@@ -42,7 +81,7 @@ wget https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph
 tar zxf *hugegraph*.tar.gz
 ```
 
-#### 3.2 源码编译
+#### 3.3 源码编译
 
 源码编译前请确保安装了 wget 命令
 
@@ -85,38 +124,6 @@ mvn package -DskipTests
 ```
 
 执行成功后，在 hugegraph 目录下生成 `*hugegraph-*.tar.gz` 文件，就是编译生成的 tar 包。
-
-#### 3.3 使用 Docker 容器 (便于**测试**)
-<!-- 3.1 is linked by other place. if change 3.1's title, please check -->
-
-可参考 [Docker 部署方式](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/README.md)。
-
-我们可以使用 `docker run -itd --name=graph -p 8080:8080 hugegraph/hugegraph` 去快速启动一个内置了 `RocksDB` 的 `Hugegraph server`.
-
-可选项：
-
-1. 可以使用 `docker exec -it graph bash` 进入容器完成一些操作
-2. 可以使用 `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph` 在启动的时候预加载一个**内置的**样例图。可以通过 `RESTful API` 进行验证。具体步骤可以参考 [5.1.1](/cn/docs/quickstart/hugegraph-server/#511-%E5%90%AF%E5%8A%A8-server-%E7%9A%84%E6%97%B6%E5%80%99%E5%88%9B%E5%BB%BA%E7%A4%BA%E4%BE%8B%E5%9B%BE) 
-
-另外，如果我们希望能够在一个文件中管理除了 `server` 之外的其他 Hugegraph 相关的实例，我们也可以使用 `docker-compose`完成部署，使用命令 `docker-compose up -d`，（当然只配置 `server` 也是可以的）以下是一个样例的 `docker-compose.yml`:
-
-```yaml
-version: '3'
-services:
-  graph:
-    image: hugegraph/hugegraph
-    # environment:
-    #  - PRELOAD=true
-    # PRELOAD 为可选参数，为 True 时可以在启动的时候预加载一个内置的样例图
-    ports:
-      - 8080:8080
-```
-
-> 注意：
-> 
-> 1. hugegraph 的 docker 镜像是一个便捷版本，用于快速启动 hugegraph，并不是**官方发布物料包方式**。你可以从 [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub) 中得到更多细节。
->
-> 2. 推荐使用 `release tag`(如 `1.2.0`) 以获取稳定版。使用 `latest` tag 可以使用开发中的最新功能。
 
 #### 3.4 使用 tools 工具部署 (Outdated)
 
@@ -450,9 +457,9 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)......OK
 version: "3"
 
 services:
-  graph:
+  server:
     image: hugegraph/hugegraph
-    container_name: cas-graph
+    container_name: cas-server
     ports:
       - 8080:8080
     environment:
@@ -507,7 +514,7 @@ volumes:
 
 1. 使用`docker run`
 
-    使用 `docker run -itd --name=graph -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:latest`
+    使用 `docker run -itd --name=server -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:latest`
 
 2. 使用`docker-compose`
 
@@ -516,9 +523,9 @@ volumes:
     ```yaml
     version: '3'
       services:
-        graph:
+        server:
           image: hugegraph/hugegraph:latest
-          container_name: graph
+          container_name: server
           environment:
             - PRELOAD=true
           volumes:

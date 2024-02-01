@@ -1,6 +1,6 @@
 ---
 title: "HugeGraph-API Performance"
-linkTitle: "HugeGraph-API Performance"
+linkTitle: "HugeGraph-API 性能"
 weight: 2
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "HugeGraph-Computer 配置"
-linkTitle: "Config Computer"
+linkTitle: "图计算 Computer 配置"
 weight: 5
 ---
 

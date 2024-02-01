@@ -77,17 +77,20 @@ and then modify the `authenticator` configuration item in the configuration file
 
 ### Switching authentication mode
 
-After the authentication configuration completed, enter the **admin password** on the **command line** when executing `init store. sh` for the first time. (For non-Docker mode)
+After the authentication configuration completed, enter the **admin password** on the **command line** when executing `init store.sh` for the first time. (For non-Docker mode)
 
 If deployed based on Docker image or if HugeGraph has already been initialized and needs to be converted to authentication mode, 
 relevant graph data needs to be deleted and HugeGraph needs to be restarted. If there is already business data in the diagram, 
-it is temporarily **not possible** to directly convert the authentication mode (improvements/support for this feature will be released in the next version. Could refer [PR 2411](https://github.com/apache/incubator-hugegraph/pull/2411)).
+it is temporarily **not possible** to directly convert the authentication mode (version<=1.2.0 )
+
+> Improvements for this feature have been included in the latest release (available in latest docker image), please refer to  [PR 2411](https://github.com/apache/incubator-hugegraph/pull/2411). Seamless switching is now available.
 
 ```bash
 # stop the hugeGraph firstly
 bin/stop-hugegraph.sh
 
 # delete the store data (here we use the default path for rocksdb)
+# there is no need to delete in the latest version (fixed in https://github.com/apache/incubator-hugegraph/pull/2411)
 rm -rf rocksdb-data/
 
 # init store again
@@ -97,3 +100,45 @@ bin/init-store.sh
 bin/start-hugegraph.sh
 
 ```
+
+### Use docker to enble authentication mode
+
+For versions of the hugegraph/hugegraph image equal to or greater than 1.2.0, you can enable authentication mode while starting the Docker image. 
+
+The steps are as follows:
+
+#### 1. Use docker run
+
+To enable authentication mode, add the environment variable `PASSWORD=123456` (you can freely set the password) in the `docker run` command:
+
+```bash
+docker run -itd -e PASSWORD=123456 --name=server -p 8080:8080 hugegraph/hugegraph:1.2.0
+```
+
+#### 2. Use docker-compose
+
+Use `docker-compose` and set he environment variable `PASSWORD=123456`:
+
+```yaml
+version: '3'
+services:
+  server:
+    image: hugegraph/hugegraph:1.2.0
+    container_name: server
+    ports:
+      - 8080:8080
+    environment:
+      - PASSWORD=123456
+```
+
+#### 3. Enter the container to enable authentication mode
+
+Enter the container first:
+
+```bash
+docker exec -it server bash
+# Modify the config quickly, the modified file are save in the conf-bak folder
+bin/enable-auth.sh
+```
+
+Then follow [Switching authentication mode](#switching-authentication-mode)
