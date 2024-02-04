@@ -2,24 +2,20 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
+const projectName = "Template";
+const mainRepoName = "apache-website-template";
+const siteRepoName = "apache-website-template";
+
 const config: Config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
+  title: `Apache ${projectName}`,
+  tagline: `Welcome to Apache ${projectName}!`,
   favicon: 'img/favicon.ico',
 
-  // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
+  url: `https://${projectName.toLowerCase()}.apache.org/`,
   baseUrl: '/',
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
-
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenMarkdownLinks: 'throw',
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -34,18 +30,14 @@ const config: Config = {
       'classic',
       {
         docs: {
-          sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          sidebarPath: './docs/sidebars.ts',
+          editUrl: `https://github.com/apache/${siteRepoName}/tree/main/`,
         },
         blog: {
+          blogSidebarCount: 'ALL',
+          blogSidebarTitle: 'All our posts',
           showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          editUrl: `https://github.com/apache/${siteRepoName}/tree/main/`,
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -55,73 +47,81 @@ const config: Config = {
   ],
 
   themeConfig: {
-    // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    // TODO: Replace with your project's social card
+    image: 'img/social-card.png',
     navbar: {
-      title: 'My Site',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'Logo',
         src: 'img/logo.svg',
       },
       items: [
+        {type: 'docSidebar', sidebarId: 'docs', position: 'right', label: 'Docs'},
+        {to: '/blog', label: 'Blog', position: 'right'},
         {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          position: 'left',
-          label: 'Tutorial',
-        },
-        {to: '/blog', label: 'Blog', position: 'left'},
-        {
-          href: 'https://github.com/facebook/docusaurus',
-          label: 'GitHub',
+          type: 'dropdown',
+          label: 'ASF',
           position: 'right',
+          items: [
+            {
+              label: 'Foundation',
+              to: 'https://www.apache.org/'
+            },
+            {
+              label: 'License',
+              to: 'https://www.apache.org/licenses/'
+            },
+            {
+              label: 'Events',
+              to: 'https://www.apache.org/events/current-event.html'
+            },
+            {
+              label: 'Privacy',
+              to: 'https://privacy.apache.org/policies/privacy-policy-public.html'
+            },
+            {
+              label: 'Security',
+              to: 'https://www.apache.org/security/'
+            },
+            {
+              label: 'Sponsorship',
+              to: 'https://www.apache.org/foundation/sponsorship.html'
+            },
+            {
+              label: 'Thanks',
+              to: 'https://www.apache.org/foundation/thanks.html'
+            },
+            {
+              label: 'Code of Conduct',
+              to: 'https://www.apache.org/foundation/policies/conduct.html'
+            }
+          ]
+        },
+        {
+          href: `https://github.com/apache/${mainRepoName}`,
+          position: 'right',
+          className: 'header-github-link',
+          'aria-label': 'GitHub repository',
         },
       ],
     },
     footer: {
       style: 'dark',
-      links: [
-        {
-          title: 'Docs',
-          items: [
-            {
-              label: 'Tutorial',
-              to: '/docs/intro',
-            },
-          ],
-        },
-        {
-          title: 'Community',
-          items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
-            },
-          ],
-        },
-      ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      links: [],
+      logo: {
+        width: 200,
+        src: "/img/apache-incubator.svg",
+        href: "https://incubator.apache.org/",
+        alt: "Apache Incubator logo"
+      },
+      copyright: `<div>
+      <p>
+        Apache ${projectName} is an effort undergoing incubation at The Apache Software Foundation (ASF), sponsored by the Apache Incubator. Incubation is required of all newly accepted projects until a further review indicates that the infrastructure, communications, and decision making process have stabilized in a manner consistent with other successful ASF projects. While incubation status is not necessarily a reflection of the completeness or stability of the code, it does indicate that the project has yet to be fully endorsed by the ASF.
+      </p>
+      <p>
+        Copyright © ${new Date().getFullYear()} The Apache Software Foundation, Licensed under the Apache License, Version 2.0. <br/>
+        Apache, the names of Apache projects, and the feather logo are either registered trademarks or trademarks of the Apache Software Foundation in the United States and/or other countries.
+      </p>
+      </div>`,
     },
     prism: {
       theme: prismThemes.github,
