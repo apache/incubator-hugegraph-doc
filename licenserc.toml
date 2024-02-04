@@ -15,8 +15,18 @@
 # specific language governing permissions and limitations
 # under the License.
 
-tison:
-  name: tison
-  title: Apache Member
-  url: https://github.com/tisonkun
-  image_url: https://github.com/tisonkun.png
+headerPath = "Apache-2.0-ASF.txt"
+
+excludes = [
+  # Website generated files
+  "build",
+  ".docusaurus",
+
+  # Documents
+  "**/*.md",
+  "**/*.mdx",
+
+  # Meta files
+  "NOTICE",
+  ".nojekyll",
+]

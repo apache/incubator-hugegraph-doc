@@ -15,8 +15,29 @@
 # specific language governing permissions and limitations
 # under the License.
 
-tison:
-  name: tison
-  title: Apache Member
-  url: https://github.com/tisonkun
-  image_url: https://github.com/tisonkun.png
+github:
+  description: "Apache Website Template"
+  homepage: https://foo.apache.org/
+  features:
+    issues: true
+    projects: false
+    wiki: false
+  labels:
+    - website
+  enabled_merge_buttons:
+    squash:  true
+    merge:   false
+    rebase:  false
+  protected_branches:
+    main: {}
+    asf-site: {}
+
+publish:
+  whoami: asf-site
+
+# notifications:
+#   commits:      commits@foo.apache.org
+#   issues:       commits@foo.apache.org
+#   pullrequests: commits@foo.apache.org
+#   jobs:         commits@foo.apache.org
+#   discussions:  commits@foo.apache.org
