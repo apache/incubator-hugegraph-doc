@@ -31,6 +31,8 @@ Below is a template for HugeGraph emails: (For reference only)
 > Note: The term `xxx` will be used to refer to the candidate. Typically, `xxx` represents an easily readable name (e.g., `Simon Jay`). 
 > 
 > ASF-INFRA recommends **avoiding** the use of less readable `ID` directly as a reference to the person in emails (e.g., avoid `simon321` or `wh0isSim0n` 😄).
+>
+> In addition, it is best to choose the **"pure text"** mode, otherwise the typesetting may be chaotic in the ASF Mailing-list UI
 
 ```markdown
 To: private@hugegraph.apache.org
