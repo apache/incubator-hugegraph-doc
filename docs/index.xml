@@ -8524,10 +8524,12 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 The initiator of the discussion should clearly state the candidate&amp;rsquo;s contributions in the discussion email and provide URLs or other information for confirming the contributions, facilitating discussion and analysis.&lt;/p>
 &lt;p>Below is a template for HugeGraph emails: (For reference only)&lt;/p>
 &lt;blockquote>
-&lt;p>The term &lt;code>xxx&lt;/code> will be used to refer to the candidate. Typically, &lt;code>xxx&lt;/code> represents an easily readable name (e.g., &lt;code>Simon Jay&lt;/code>). ASF-INFRA recommends &lt;strong>avoiding&lt;/strong> the use of less readable &lt;code>ID&lt;/code> directly as a reference to the person in emails (e.g., avoid &lt;code>simon321&lt;/code> or &lt;code>wh0isSim0n&lt;/code> 😄).&lt;/p>
+&lt;p>Note: The term &lt;code>xxx&lt;/code> will be used to refer to the candidate. Typically, &lt;code>xxx&lt;/code> represents an easily readable name (e.g., &lt;code>Simon Jay&lt;/code>).&lt;/p>
+&lt;p>ASF-INFRA recommends &lt;strong>avoiding&lt;/strong> the use of less readable &lt;code>ID&lt;/code> directly as a reference to the person in emails (e.g., avoid &lt;code>simon321&lt;/code> or &lt;code>wh0isSim0n&lt;/code> 😄).&lt;/p>
+&lt;p>In addition, it is best to choose the &lt;strong>&amp;ldquo;pure text&amp;rdquo;&lt;/strong> mode, otherwise the typesetting may be chaotic in the ASF Mailing-list UI&lt;/p>
 &lt;/blockquote>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>To: private@hugegraph.apache.org
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Subject: [VOTE] New committer: xxx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Subject: [DISCUSS] XXX as a HugeGraph Committer Candidate
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Hi all:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
