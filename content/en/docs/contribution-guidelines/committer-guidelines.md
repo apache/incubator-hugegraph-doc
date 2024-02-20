@@ -29,11 +29,12 @@ The initiator of the discussion should clearly state the candidate's contributio
 Below is a template for HugeGraph emails: (For reference only)
 
 > Note: The term `xxx` will be used to refer to the candidate. Typically, `xxx` represents an easily readable name (e.g., `Simon Jay`). 
+> 
 > ASF-INFRA recommends **avoiding** the use of less readable `ID` directly as a reference to the person in emails (e.g., avoid `simon321` or `wh0isSim0n` 😄).
 
 ```markdown
 To: private@hugegraph.apache.org
-Subject: [DISCUSS] New committer: xxx
+Subject: [DISCUSS] XXX as a HugeGraph Committer Candidate
 
 Hi all:
 
