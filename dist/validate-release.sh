@@ -34,7 +34,7 @@ SVN_URL_PREFIX="https://dist.apache.org/repos/dist/dev/incubator/hugegraph"
 # git release branch (check it carefully)
 #GIT_BRANCH="release-${RELEASE_VERSION}"
 
-RELEASE_VERSION=${RELEASE_VERSION:?"Please input the release version behind script"}
+RELEASE_VERSION=${RELEASE_VERSION:?"Please input the release version, like 1.2.0"}
 USER=${USER-"imbajin"}
 WORK_DIR=$(
   cd "$(dirname "$0")"
