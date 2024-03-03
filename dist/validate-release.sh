@@ -28,14 +28,14 @@ RELEASE_VERSION=$1 # like 1.2.0
 JAVA_VERSION=$2 # like 8
 USER=$3
 
-# this path is just valid in release-ing progress
+# this URL is only valid during the release process
 SVN_URL_PREFIX="https://dist.apache.org/repos/dist/dev/incubator/hugegraph"
 
 # git release branch (check it carefully)
 #GIT_BRANCH="release-${RELEASE_VERSION}"
 
 RELEASE_VERSION=${RELEASE_VERSION:?"Please input the release version, like 1.2.0"}
-USER=${USER-"imbajin"}
+USER=${USER:-"imbajin"}
 WORK_DIR=$(
   cd "$(dirname "$0")"
   pwd
