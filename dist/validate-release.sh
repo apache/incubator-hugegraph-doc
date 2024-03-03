@@ -96,8 +96,9 @@ for i in *src.tar.gz; do
   fi
 
   tar -xzvf "$i"
-  pushd "$(basename "$i" .tar.gz)"
-  echo "Start to check the package content: $(basename "$i" .tar.gz)"
+  MODULE_DIR=$(basename "$i" .tar.gz)
+  pushd ${MODULE_DIR}
+  echo "Start to check the package content: ${MODULE_DIR}"
 
   # 4.2: check the directory include "NOTICE" and "LICENSE" file and "DISCLAIMER" file
   if [[ ! -f "LICENSE" ]]; then
@@ -169,7 +170,7 @@ done
 cd "${WORK_DIR}/dist/${RELEASE_VERSION}"
 
 ls -lh
-pushd "./*hugegraph-incubating*src/hugegraph-server/*hugegraph*${RELEASE_VERSION}"
+pushd ./*hugegraph-incubating*src/hugegraph-server/*hugegraph*"${RELEASE_VERSION}"
 bin/init-store.sh
 sleep 3
 bin/start-hugegraph.sh
@@ -180,21 +181,21 @@ popd
 #######################################################################
 cd "${WORK_DIR}/dist/${RELEASE_VERSION}"
 
-pushd "./*toolchain*src"
+pushd ./*toolchain*src
 ls -lh
-pushd "./*toolchain*${RELEASE_VERSION}"
+pushd ./*toolchain*"${RELEASE_VERSION}"
 ls -lh
 
 # 6.1: load some data first
 echo "test loader"
-pushd "./*loader*${RELEASE_VERSION}"
+pushd ./*loader*"${RELEASE_VERSION}"
 bin/hugegraph-loader.sh -f ./example/file/struct.json -s ./example/file/schema.groovy \
   -g hugegraph
 popd
 
 # 6.2: try some gremlin query & api in tool
 echo "test tool"
-pushd "./*tool*${RELEASE_VERSION}"
+pushd ./*tool*"${RELEASE_VERSION}"
 bin/hugegraph gremlin-execute --script 'g.V().count()'
 bin/hugegraph task-list
 bin/hugegraph backup -t all --directory ./backup-test
@@ -202,7 +203,7 @@ popd
 
 # 6.3: start hubble and connect to server
 echo "test hubble"
-pushd "./*hubble*${RELEASE_VERSION}"
+pushd ./*hubble*"${RELEASE_VERSION}"
 # TODO: add hubble doc & test it
 cat conf/hugegraph-hubble.properties
 bin/start-hubble.sh
@@ -212,7 +213,7 @@ popd
 popd
 popd
 # stop server
-pushd "./*hugegraph-incubating*src/hugegraph-server/*hugegraph*${RELEASE_VERSION}"
+pushd ./*hugegraph-incubating*src/hugegraph-server/*hugegraph*"${RELEASE_VERSION}"
 bin/stop-hugegraph.sh
 popd
 
@@ -239,9 +240,10 @@ for i in *.tar.gz; do
   fi
 
   tar -xzvf "$i"
-  pushd "$(basename "$i" .tar.gz)"
+  MODULE_DIR=$(basename "$i" .tar.gz)
+  pushd ${MODULE_DIR}
   ls -lh
-  echo "Start to check the package content: $(basename "$i" .tar.gz)"
+  echo "Start to check the package content: ${MODULE_DIR}"
 
   # 7.2: check root dir include "NOTICE"/"LICENSE"/"DISCLAIMER" files & "licenses" dir
   if [[ ! -f "LICENSE" ]]; then
@@ -283,7 +285,7 @@ done
 #########################################
 cd "${WORK_DIR}/dist/${RELEASE_VERSION}"
 
-pushd "./*hugegraph-incubating*${RELEASE_VERSION}"
+pushd ./*hugegraph-incubating*"${RELEASE_VERSION}"
 bin/init-store.sh
 sleep 3
 bin/start-hugegraph.sh
@@ -294,18 +296,18 @@ popd
 #####################################################################
 cd "${WORK_DIR}/dist/${RELEASE_VERSION}"
 
-pushd "./*toolchain*${RELEASE_VERSION}"
+pushd ./*toolchain*"${RELEASE_VERSION}"
 ls -lh
 
 # 9.1: load some data first
 echo "test loader"
-pushd "./*loader*${RELEASE_VERSION}"
+pushd ./*loader*"${RELEASE_VERSION}"
 bin/hugegraph-loader.sh -f ./example/file/struct.json -s ./example/file/schema.groovy -g hugegraph
 popd
 
 # 9.2: try some gremlin query & api in tool
 echo "test tool"
-pushd "./*tool*${RELEASE_VERSION}"
+pushd ./*tool*"${RELEASE_VERSION}"
 bin/hugegraph gremlin-execute --script 'g.V().count()'
 bin/hugegraph task-list
 bin/hugegraph backup -t all --directory ./backup-test
@@ -313,7 +315,7 @@ popd
 
 # 9.3: start hubble and connect to server
 echo "test hubble"
-pushd "./*hubble*${RELEASE_VERSION}"
+pushd ./*hubble*"${RELEASE_VERSION}"
 # TODO: add hubble doc & test it
 cat conf/hugegraph-hubble.properties
 bin/start-hubble.sh
@@ -322,7 +324,7 @@ popd
 
 popd
 # stop server
-pushd "./*hugegraph-incubating*${RELEASE_VERSION}"
+pushd ./*hugegraph-incubating*"${RELEASE_VERSION}"
 bin/stop-hugegraph.sh
 popd
 
