@@ -34,7 +34,7 @@ python3 ./hugegraph-llm/src/hugegraph_llm/utils/gradio_demo.py
     - 用户定义的 JSON 格式模式。 
     - 指定 HugeGraph 图实例的名称，它将自动提取图的模式。
   - Disambiguate word sense：是否进行词义消除歧义。 
-  - Commit to hugegraph：是否将构建的知识图提交到 HugeGraph 服务器
+  - Commit to hugegraph：是否将构建的知识图谱提交到 HugeGraph 服务器
 
 ![gradio配置](/docs/images/gradio-kg.png)
 
@@ -59,7 +59,7 @@ builder = KgBuilder(llm)
 ![gradio配置](/docs/images/kg-uml.png)
 
 
-1. 初始化: 初始化 LLMs 实例，获取 LLM 模型，然后创建图谱构建的任务实例 `KgBuilder`，KgBuilder 中定义了多个 operator ，用户可以根据需求自由组合达到目的 。（tip: `print_result()` 可以在控制台打印每一步输出的结果，不影响整体执行逻辑）
+1. 初始化: 初始化 LLMs 实例，获取 LLM，然后创建图谱构建的任务实例 `KgBuilder`，KgBuilder 中定义了多个 operator，用户可以根据需求自由组合达到目的 。（tip: `print_result()` 可以在控制台打印每一步输出的结果，不影响整体执行逻辑）
 
 ```python
 llm = LLMs().get_llm()
@@ -72,10 +72,10 @@ builder = KgBuilder(llm)
 ```python
 # Import schema from a HugeGraph instance
 builder.import_schema(from_hugegraph="test_graph").print_result()
-# Import schema from an extraction result
-builder.import_schema(from_extraction="xxx").print_result()
 # Import schema from user-defined schema
 builder.import_schema(from_user_defined="xxx").print_result()
+# Import schema from an extraction result
+builder.import_schema(from_extraction="xxx").print_result()
 ```
 3. 提取三元组：使用 `extract_triples` 方法从文本中提取三元组。
 

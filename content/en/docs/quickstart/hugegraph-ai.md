@@ -20,7 +20,7 @@ hugegraph-ai aims to explore the integration of HugeGraph and artificial intelli
 export PYTHONPATH=${PROJECT_ROOT_DIR}/hugegraph-llm/src:${PROJECT_ROOT_DIR}/hugegraph-python-client/src
 python3 ./hugegraph-llm/src/hugegraph_llm/utils/gradio_demo.py
 ```
-- Configure HugeGraph database connection information and LLM model information, which can be configured in two ways:
+- Configure HugeGraph database connection information and LLM information, which can be configured in two ways:
   1. Configure the `./hugegraph-llm/src/config/config.ini` file
   2. Configure in gradio, as shown in the figure:
   ![gradio-config](/docs/images/gradio-config.png)
@@ -58,7 +58,7 @@ builder = KgBuilder(llm)
 - Sequence Diagram
   ![gradio-config](/docs/images/kg-uml.png)
 
-1. Initialize: Initialize the LLMs instance, get the LLM model, and then create a task instance `KgBuilder` for graph construction. `KgBuilder` defines multiple operators, and users can freely combine them according to their needs. (tip: `print_result()` can print the result of each step in the console, without affecting the overall execution logic)
+1. Initialize: Initialize the LLMs instance, get the LLM, and then create a task instance `KgBuilder` for graph construction. `KgBuilder` defines multiple operators, and users can freely combine them according to their needs. (tip: `print_result()` can print the result of each step in the console, without affecting the overall execution logic)
 
 ```python
 llm = LLMs().get_llm()
@@ -72,10 +72,10 @@ builder = KgBuilder(llm)
 ```python
 # Import schema from a HugeGraph instance
 builder.import_schema(from_hugegraph="test_graph").print_result()
-# Import schema from an extraction result
-builder.import_schema(from_extraction="xxx").print_result()
 # Import schema from user-defined schema
 builder.import_schema(from_user_defined="xxx").print_result()
+# Import schema from an extraction result
+builder.import_schema(from_extraction="xxx").print_result()
 ```
 3. Extract triples: Use the `extract_triples` method to extract triples from the text.
 
