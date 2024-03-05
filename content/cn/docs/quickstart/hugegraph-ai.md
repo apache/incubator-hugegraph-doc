@@ -23,6 +23,10 @@ python3 ./hugegraph-llm/src/hugegraph_llm/utils/gradio_demo.py
   1. 配置 `./hugegraph-llm/src/config/config.ini` 文件
   2. 在 gradio 中配置，如图所示:
   ![gradio配置](/docs/images/gradio-config.png)
+- 离线下载 NLTK stopwords 
+```bash
+python3 ./hugegraph_llm/operators/common_op/nltk_helper.py
+```
 
 
 ### 4 使用说明

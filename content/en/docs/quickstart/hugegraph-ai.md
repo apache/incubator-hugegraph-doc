@@ -24,6 +24,10 @@ python3 ./hugegraph-llm/src/hugegraph_llm/utils/gradio_demo.py
   1. Configure the `./hugegraph-llm/src/config/config.ini` file
   2. Configure in gradio, as shown in the figure:
   ![gradio-config](/docs/images/gradio-config.png)
+- offline download NLTK stopwords
+```bash
+python3 ./hugegraph_llm/operators/common_op/nltk_helper.py
+```
 
 ### 4 How to use
 #### 4.1 Build a knowledge graph in HugeGraph through LLM
