@@ -135,7 +135,7 @@ git clone https://github.com/apache/hugegraph-toolchain.git
 Compile `hubble`. It depends on the loader and client, so you need to build these dependencies in advance during the compilation process (you can skip this step later).
 
 ```shell
-cd incubator-hugegraph-toolchain
+cd hugegraph-toolchain
 sudo pip install -r hugegraph-hubble/hubble-dist/assembly/travis/requirements.txt
 mvn install -pl hugegraph-client,hugegraph-loader -am -Dmaven.javadoc.skip=true -DskipTests -ntp
 cd hugegraph-hubble
