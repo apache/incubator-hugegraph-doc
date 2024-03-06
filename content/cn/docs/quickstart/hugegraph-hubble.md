@@ -135,7 +135,7 @@ git clone https://github.com/apache/hugegraph-toolchain.git
 编译`hubble`, 它依赖 loader 和 client, 编译时需提前构建这些依赖 (后续可跳)
 
 ```shell
-cd incubator-hugegraph-toolchain
+cd hugegraph-toolchain
 sudo pip install -r hugegraph-hubble/hubble-dist/assembly/travis/requirements.txt
 mvn install -pl hugegraph-client,hugegraph-loader -am -Dmaven.javadoc.skip=true -DskipTests -ntp
 cd hugegraph-hubble
