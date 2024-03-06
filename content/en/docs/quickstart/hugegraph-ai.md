@@ -22,7 +22,7 @@ python3 ./hugegraph-llm/src/hugegraph_llm/utils/gradio_demo.py
 ```
 - Configure HugeGraph database connection information and LLM information, which can be configured in two ways:
   1. Configure the `./hugegraph-llm/src/config/config.ini` file
-  2. Configure in gradio, as shown in the figure:
+  2. In gradio, after completing the configurations for LLM and HugeGraph, click on `Initialize configs`, the complete and initialized configuration file will be outputted.
   ![gradio-config](/docs/images/gradio-config.png)
 - offline download NLTK stopwords
 ```bash
