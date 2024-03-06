@@ -5,18 +5,19 @@ weight: 6
 ---
 
 ## Reporting New Security Problems with Apache HugeGraph
-The Apache Software Foundation takes a very active stance in eliminating security problems and denial of service attacks against its products.
 
-We strongly encourage folks to report such problems to our private security mailing list first, before disclosing them in a public forum.
+Adhering to the specifications of ASF, the HugeGraph community maintains a highly proactive and open attitude towards addressing security issues in the **remediation** projects.
 
-Please note that the security mailing list should only be used for reporting undisclosed security vulnerabilities and managing the process of fixing such vulnerabilities. We cannot accept regular bug reports or other queries at this address. All mail sent to this address that does not relate to an undisclosed security problem in our source code will be ignored.
+We strongly recommend that users first report such issues to our dedicated security email list, with detailed procedures specified in the [ASF SEC](https://www.apache.org/security/committers.html) code of conduct.
 
+Please note that the security email group is reserved for reporting **undisclosed** security vulnerabilities and following up on the vulnerability resolution process. Regular software `Bug/Error` reports should be directed to `Github Issue/Discussion` or the `HugeGraph-Dev` email group. Emails sent to the security list that are unrelated to security issues will be ignored.
 
-The private security mailing address is: security@hugegraph.apache.org
+The independent security email (group) address is: `security@hugegraph.apache.org`
 
-An overview of the vulnerability handling process is:
+The general process for handling security vulnerabilities is as follows:
 
-- The reporter reports the vulnerability privately to Apache.
-- The appropriate project's security team works privately with the reporter to resolve the vulnerability.
-- The project creates a new release of the package the vulnerabilty affects to deliver its fix.
-- The project publicly announces the vulnerability and describes how to apply the fix.
+- The reporter privately reports the vulnerability to the Apache HugeGraph SEC email group (including as much information as possible, such as reproducible versions, relevant descriptions, reproduction methods, and the scope of impact)
+- The HugeGraph project security team collaborates privately with the reporter to discuss the vulnerability resolution (after preliminary confirmation, a `CVE` number can be requested for registration)
+- The project creates a new version of the software package affected by the vulnerability to provide a fix
+- At an appropriate time, a general description of the vulnerability and how to apply the fix will be publicly disclosed (in compliance with ASF standards, the announcement should not disclose sensitive information such as reproduction details)
+- Official CVE release and related procedures follow the ASF-SEC page
