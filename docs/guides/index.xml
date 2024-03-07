@@ -680,4 +680,17 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;p>&lt;code>Content-Type: application/json&lt;/code> needs to be specified in the request header&lt;/p>
 &lt;/li>
 &lt;/ul>
-&lt;p>Other issues can be searched in the issue area of the corresponding project, such as &lt;a href="https://github.com/apache/hugegraph/issues">Server-Issues&lt;/a> / &lt;a href="https://github.com/apache/hugegraph-loader/issues">Loader Issues&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;p>Other issues can be searched in the issue area of the corresponding project, such as &lt;a href="https://github.com/apache/hugegraph/issues">Server-Issues&lt;/a> / &lt;a href="https://github.com/apache/hugegraph-loader/issues">Loader Issues&lt;/a>&lt;/p></description></item><item><title>Docs: Security Report</title><link>/docs/guides/security/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/guides/security/</guid><description>
+&lt;h2 id="reporting-new-security-problems-with-apache-hugegraph">Reporting New Security Problems with Apache HugeGraph&lt;/h2>
+&lt;p>Adhering to the specifications of ASF, the HugeGraph community maintains a highly proactive and open attitude towards addressing security issues in the &lt;strong>remediation&lt;/strong> projects.&lt;/p>
+&lt;p>We strongly recommend that users first report such issues to our dedicated security email list, with detailed procedures specified in the &lt;a href="https://www.apache.org/security/committers.html">ASF SEC&lt;/a> code of conduct.&lt;/p>
+&lt;p>Please note that the security email group is reserved for reporting &lt;strong>undisclosed&lt;/strong> security vulnerabilities and following up on the vulnerability resolution process. Regular software &lt;code>Bug/Error&lt;/code> reports should be directed to &lt;code>Github Issue/Discussion&lt;/code> or the &lt;code>HugeGraph-Dev&lt;/code> email group. Emails sent to the security list that are unrelated to security issues will be ignored.&lt;/p>
+&lt;p>The independent security email (group) address is: &lt;code>security@hugegraph.apache.org&lt;/code>&lt;/p>
+&lt;p>The general process for handling security vulnerabilities is as follows:&lt;/p>
+&lt;ul>
+&lt;li>The reporter privately reports the vulnerability to the Apache HugeGraph SEC email group (including as much information as possible, such as reproducible versions, relevant descriptions, reproduction methods, and the scope of impact)&lt;/li>
+&lt;li>The HugeGraph project security team collaborates privately with the reporter to discuss the vulnerability resolution (after preliminary confirmation, a &lt;code>CVE&lt;/code> number can be requested for registration)&lt;/li>
+&lt;li>The project creates a new version of the software package affected by the vulnerability to provide a fix&lt;/li>
+&lt;li>At an appropriate time, a general description of the vulnerability and how to apply the fix will be publicly disclosed (in compliance with ASF standards, the announcement should not disclose sensitive information such as reproduction details)&lt;/li>
+&lt;li>Official CVE release and related procedures follow the ASF-SEC page&lt;/li>
+&lt;/ul></description></item></channel></rss>
