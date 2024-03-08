@@ -21,11 +21,12 @@
 # 3. Compile the source package & run server & toolchain
 # 4. Run server & toolchain in binary package
 
-set -e
+# if we don't want to exit after '|', remove "-o pipefail"
+set -euxo pipefail
 
 # release version (input by committer)
 RELEASE_VERSION=$1 # like 1.2.0
-JAVA_VERSION=$2 # like 8
+JAVA_VERSION=$2 # like 11
 USER=$3
 
 # this URL is only valid during the release process
