@@ -50,6 +50,7 @@ The functions of this system include but are not limited to:
 - [HugeGraph-Computer](https://hugegraph.apache.org/docs/quickstart/hugegraph-computer): HugeGraph-Computer is a distributed graph processing system for HugeGraph (OLAP). It is an implementation of [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf). It runs on Kubernetes framework;
 - [HugeGraph-Hubble](https://hugegraph.apache.org/docs/quickstart/hugegraph-hubble): HugeGraph-Hubble is HugeGraph's web visualization management platform, a one-stop visual analysis platform. The platform covers the whole process from data modeling, to rapid data import, to online and offline analysis of data, and unified management of graphs;
 - [HugeGraph-Tools](https://hugegraph.apache.org/docs/quickstart/hugegraph-tools): HugeGraph-Tools is HugeGraph's deployment and management tools, including functions such as managing graphs, backup/restore, Gremlin execution, etc.
+- [HugeGraph-Ai (Beta)](https://hugegraph.apache.org/docs/quickstart/hugegraph-ai): HugeGraph-Ai is a tool that integrates HugeGraph and artificial intelligence (AI), including applications combined with large models, integration with graph machine learning components, etc., to provide comprehensive support for developers to use HugeGraph's AI capabilities in projects.
 
 ### Subscribe the mailing list
 
