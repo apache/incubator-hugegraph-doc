@@ -105,7 +105,7 @@ Then use a web browser to access `ip:8088` and you can see the `Hubble` page. Yo
 
 #### 2.3 Source code compilation
 
-**Note**: The plugin 'frontend-maven-plugin' has been added to 'hugegraph-hubble/hubble-be/pom.xml'. To compile hubble, you do not need to install 'Nodejs V16.x' and 'yarn' environment in your local environment in advance. You can directly execute the following steps.
+**Note**: The plugin `frontend-maven-plugin` has been added to `hugegraph-hubble/hubble-be/pom.xml`. To compile hubble, you do not need to install `Nodejs V16.x` and `yarn` environment in your local environment in advance. You can directly execute the following steps.
 
 Download the toolchain source code.
 
