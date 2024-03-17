@@ -38,8 +38,7 @@ if [[ ! -f "${TOOLCHAIN_TAR}" ]]; then
 fi
 
 echo "start hugegraph-server..."
-cd $(echo "./*hugegraph-incubating*${RELEASE_VERSION}")
-bin/stop-hugegraph.sh
+cd ./*hugegraph-incubating*${RELEASE_VERSION}
 bin/init-store.sh
 sleep 3
 bin/start-hugegraph.sh
@@ -47,5 +46,4 @@ cd ..
 
 echo "start hugegraph-hubble..."
 cd $(echo "./*toolchain*${RELEASE_VERSION}/*hubble*${RELEASE_VERSION}")
-bin/stop-hubble.sh
 bin/start-hubble.sh
