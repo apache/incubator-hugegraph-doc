@@ -45,5 +45,5 @@ bin/start-hugegraph.sh
 cd ..
 
 echo "start hugegraph-hubble..."
-cd $(echo "./*toolchain*${RELEASE_VERSION}/*hubble*${RELEASE_VERSION}")
+cd ./*toolchain*${RELEASE_VERSION}/*hubble*${RELEASE_VERSION}
 bin/start-hubble.sh
