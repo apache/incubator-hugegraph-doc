@@ -14895,12 +14895,12 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;li>比如：在观众、朋友、电影、导演的四层图结构中，根据某个观众的朋友们喜欢的电影，为这个观众推荐电影；或者根据这些电影是谁拍的，为其推荐导演。&lt;/li>
 &lt;/ul></description></item><item><title>Docs: HugeGraph 1.2.0 Release Notes</title><link>/cn/docs/changelog/hugegraph-1.2.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/changelog/hugegraph-1.2.0-release-notes/</guid><description>
 &lt;h3 id="java-version-statement">Java version statement&lt;/h3>
-&lt;p>v1.2.0:&lt;/p>
+&lt;p>Note 1.2.0:&lt;/p>
 &lt;ol>
 &lt;li>hugegraph, hugegraph-toolchain, hugegraph-commons consider use Java 11, also compatible with Java 8 now.&lt;/li>
 &lt;li>hugegraph-computer required to use Java 11, &lt;strong>not compatible with Java 8 now!&lt;/strong>&lt;/li>
 &lt;/ol>
-&lt;p>&lt;strong>v1.2.0 可能是最后一个兼容 Java8 的大版本&lt;/strong>, 到 1.5.0 &lt;a href="https://github.com/apache/incubator-hugegraph/issues/2265">PD/Store&lt;/a> 正式合入 master 后标志着 Java8 兼容的正式终结 (除Client 外所有组件都将以 Java 11 作为基准, 然后迈向 Java17).&lt;/p>
+&lt;p>&lt;strong>v1.2.0 是最后第二个兼容 Java8 的大版本&lt;/strong>, 到 1.5.0 &lt;a href="https://github.com/apache/incubator-hugegraph/issues/2265">PD/Store&lt;/a> 正式合入 master 后标志着 Java8 兼容的正式终结 (除 Client 外所有组件都将以 Java 11 作为基准，然后迈向 Java17).&lt;/p>
 &lt;p>In the future, we will gradually upgrade the java version, &lt;strong>Java 11&lt;/strong> -&amp;gt; &lt;strong>Java 17&lt;/strong> -&amp;gt; &lt;strong>Java 21&lt;/strong>.&lt;/p>
 &lt;h3 id="hugegraph">hugegraph&lt;/h3>
 &lt;h4 id="api-changes">API Changes&lt;/h4>
@@ -14931,15 +14931,15 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;li>fix: transfer add_peer/remove_peer command to leader (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2112">#2112&lt;/a>)&lt;/li>
 &lt;li>fix query dirty edges of a vertex with cache (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2166">#2166&lt;/a>)&lt;/li>
 &lt;li>fix exception of vertex-drop with index (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2181">#2181&lt;/a>)&lt;/li>
-&lt;li>fix: remove dup ‘From’ in filterExpiredResultFromFromBackend (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2207">#2207&lt;/a>)&lt;/li>
+&lt;li>fix: remove dup &amp;lsquo;From&amp;rsquo; in filterExpiredResultFromFromBackend (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2207">#2207&lt;/a>)&lt;/li>
 &lt;li>fix: jdbc ssl mode parameter redundant (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2224">#2224&lt;/a>)&lt;/li>
 &lt;li>fix: error when start gremlin-console with sample script (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2231">#2231&lt;/a>)&lt;/li>
 &lt;li>fix(core): support order by id (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2233">#2233&lt;/a>)&lt;/li>
 &lt;li>fix: update ssl_mode value (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2235">#2235&lt;/a>)&lt;/li>
 &lt;li>fix: optimizing ClassNotFoundException error message for MYSQL (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2246">#2246&lt;/a>)&lt;/li>
-&lt;li>fix：asf invalid notification scheme ‘discussions_status’ (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2247">#2247&lt;/a>)&lt;/li>
-&lt;li>fix: asf invalid notification scheme ‘discussions_comment’ (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2250">#2250&lt;/a>)&lt;/li>
-&lt;li>fix: incorrect use of ‘NO_LIMIT’ variable (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2253">#2253&lt;/a>)&lt;/li>
+&lt;li>fix: asf invalid notification scheme &amp;lsquo;discussions_status&amp;rsquo; (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2247">#2247&lt;/a>)&lt;/li>
+&lt;li>fix: asf invalid notification scheme &amp;lsquo;discussions_comment&amp;rsquo; (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2250">#2250&lt;/a>)&lt;/li>
+&lt;li>fix: incorrect use of &amp;lsquo;NO_LIMIT&amp;rsquo; variable (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2253">#2253&lt;/a>)&lt;/li>
 &lt;li>fix(core): close flat mapper iterator after usage (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2281">#2281&lt;/a>)&lt;/li>
 &lt;li>fix(dist): avoid var PRELOAD cover environmnet vars (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2302">#2302&lt;/a>)&lt;/li>
 &lt;li>fix: base-ref/head-ref missed in dependency-review on master (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2308">#2308&lt;/a>)&lt;/li>
@@ -14969,7 +14969,7 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;li>add github token for license check comment (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2139">#2139&lt;/a>)&lt;/li>
 &lt;li>chore: disable PR up-to-date in branch (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2150">#2150&lt;/a>)&lt;/li>
 &lt;li>refact(core): remove lock of globalMasterInfo to optimize perf (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2151">#2151&lt;/a>)&lt;/li>
-&lt;li>chore: async remove left index shouldn’t effect query (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2199">#2199&lt;/a>)&lt;/li>
+&lt;li>chore: async remove left index shouldn&amp;rsquo;t effect query (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2199">#2199&lt;/a>)&lt;/li>
 &lt;li>refact(rocksdb): clean &amp;amp; reformat some code (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2200">#2200&lt;/a>)&lt;/li>
 &lt;li>refact(core): optimized batch removal of remaining indices consumed by a single consumer (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2203">#2203&lt;/a>)&lt;/li>
 &lt;li>add com.janeluo.ikkanalyzer dependency to core model (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2206">#2206&lt;/a>)&lt;/li>
@@ -15000,7 +15000,7 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;li>feat(core): support load vertex/edge snapshot (&lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/269">#269&lt;/a>)&lt;/li>
 &lt;li>feat(k8s): Add MinIO as internal(default) storage (&lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/272">#272&lt;/a>)&lt;/li>
 &lt;li>feat(algorithm): support random walk in computer (&lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/274">#274&lt;/a>, &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/280">#280&lt;/a>)&lt;/li>
-&lt;li>feat: use ‘foreground’ delete policy to cancel k8s job (&lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/290">#290&lt;/a>)&lt;/li>
+&lt;li>feat: use &amp;lsquo;foreground&amp;rsquo; delete policy to cancel k8s job (&lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/290">#290&lt;/a>)&lt;/li>
 &lt;/ul>
 &lt;h4 id="bug-fix-1">Bug Fix&lt;/h4>
 &lt;ul>
@@ -15023,7 +15023,7 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;li>chore: enhance mailbox settings &amp;amp; enable require ci (&lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/235">#235&lt;/a>)&lt;/li>
 &lt;li>fix: typo errors in start-computer.sh (&lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/238">#238&lt;/a>)&lt;/li>
 &lt;li>[Feature-241] Add PULL_REQUEST_TEMPLATE (&lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/242">#242&lt;/a>, &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/257">#257&lt;/a>)&lt;/li>
-&lt;li>chore：change etcd url only for ci (&lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/245">#245&lt;/a>)&lt;/li>
+&lt;li>chore: change etcd url only for ci (&lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/245">#245&lt;/a>)&lt;/li>
 &lt;li>doc: update readme &amp;amp; add QR code (&lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/249">#249&lt;/a>)&lt;/li>
 &lt;li>doc(k8s): add building note for missing classes (&lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/254">#254&lt;/a>)&lt;/li>
 &lt;li>chore: reduce mail to dev list (&lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/255">#255&lt;/a>)&lt;/li>
@@ -15284,6 +15284,75 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/releases/tag/1.0.0">Toolchain Release Notes&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-computer/releases/tag/1.0.0">Computer Release Notes&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-commons/releases/tag/1.0.0">Commons Release Notes&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: HugeGraph 1.3.0 Release Notes</title><link>/cn/docs/changelog/hugegraph-1.3.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/changelog/hugegraph-1.3.0-release-notes/</guid><description>
+&lt;h3 id="java-version-statement">Java version statement&lt;/h3>
+&lt;p>In 1.3.0:&lt;/p>
+&lt;ol>
+&lt;li>consider using Java 11 in &lt;code>hugegraph/toolchain/commons&lt;/code>, also compatible with Java 8 now.&lt;/li>
+&lt;li>&lt;code>hugegraph-computer&lt;/code> required to use Java 11, &lt;strong>not compatible with Java 8!&lt;/strong>&lt;/li>
+&lt;li>Using Java8 may loss some security ensured, we recommend using Java 11 in &lt;strong>production env&lt;/strong> with AuthSystem enabled.&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>1.3.0&lt;/strong> is the last major version compatible with &lt;strong>Java 8&lt;/strong>, compatibility with Java 8 will end in
+next release(1.5.0) when &lt;a href="https://github.com/apache/incubator-hugegraph/issues/2265">PD/Store&lt;/a> merged into master branch (Except for the &lt;code>java-client&lt;/code>).&lt;/p>
+&lt;p>PS: In the future, we will gradually upgrade the java version, &lt;strong>Java 11&lt;/strong> -&amp;gt; &lt;strong>Java 17&lt;/strong> -&amp;gt; &lt;strong>Java 21&lt;/strong>.&lt;/p>
+&lt;h3 id="hugegraph">hugegraph&lt;/h3>
+&lt;blockquote>
+&lt;p>WIP: this doc is under construction, please wait for the final version (BETA)&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>fix(core): task restore interrupt problem on restart server by @xiaoleizi2016 in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2401">https://github.com/apache/incubator-hugegraph/pull/2401&lt;/a>&lt;/li>
+&lt;li>chore: add license link by @caicancai in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2398">https://github.com/apache/incubator-hugegraph/pull/2398&lt;/a>&lt;/li>
+&lt;li>doc: enhance NOTICE info to keep it clear by @imbajin in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2409">https://github.com/apache/incubator-hugegraph/pull/2409&lt;/a>&lt;/li>
+&lt;li>feat: support docker use the auth when starting by @aroundabout in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2403">https://github.com/apache/incubator-hugegraph/pull/2403&lt;/a>&lt;/li>
+&lt;li>fix(server): reinitialize the progress to set up graph auth friendly by @Z-HUANT in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2411">https://github.com/apache/incubator-hugegraph/pull/2411&lt;/a>&lt;/li>
+&lt;li>fix(chore): remove zgc in dockerfile for ARM env by @aroundabout in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2421">https://github.com/apache/incubator-hugegraph/pull/2421&lt;/a>&lt;/li>
+&lt;li>chore(server): update swagger info for default server profile by @SunnyBoy-WYH in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2423">https://github.com/apache/incubator-hugegraph/pull/2423&lt;/a>&lt;/li>
+&lt;li>fix(server): make CacheManager constructor private to satisfy the singleton pattern by @Pengzna in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2432">https://github.com/apache/incubator-hugegraph/pull/2432&lt;/a>&lt;/li>
+&lt;li>fix(server): unify the license headers by @msgui in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2438">https://github.com/apache/incubator-hugegraph/pull/2438&lt;/a>&lt;/li>
+&lt;li>fix: format and clean code in dist and example modules by @msgui in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2441">https://github.com/apache/incubator-hugegraph/pull/2441&lt;/a>&lt;/li>
+&lt;li>fix: format and clean code in core module by @msgui in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2440">https://github.com/apache/incubator-hugegraph/pull/2440&lt;/a>&lt;/li>
+&lt;li>fix: format and clean code in modules by @msgui in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2439">https://github.com/apache/incubator-hugegraph/pull/2439&lt;/a>&lt;/li>
+&lt;li>fix(server): clean up the code by @msgui in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2456">https://github.com/apache/incubator-hugegraph/pull/2456&lt;/a>&lt;/li>
+&lt;li>fix(server): unify license header for protobuf file by @VGalaxies in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2448">https://github.com/apache/incubator-hugegraph/pull/2448&lt;/a>&lt;/li>
+&lt;li>chore: improve license header checker confs and pre-check header when validating by @VGalaxies in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2445">https://github.com/apache/incubator-hugegraph/pull/2445&lt;/a>&lt;/li>
+&lt;li>chore: unify to call SchemaLabel.getLabelId() by @javeme in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2458">https://github.com/apache/incubator-hugegraph/pull/2458&lt;/a>&lt;/li>
+&lt;li>fix(server): remove extra blank lines by @msgui in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2459">https://github.com/apache/incubator-hugegraph/pull/2459&lt;/a>&lt;/li>
+&lt;li>feat(api): optimize adjacent-edges query by @Z-HUANT in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2408">https://github.com/apache/incubator-hugegraph/pull/2408&lt;/a>&lt;/li>
+&lt;li>chore: refine the hg-style.xml specification by @returnToInnocence in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2457">https://github.com/apache/incubator-hugegraph/pull/2457&lt;/a>&lt;/li>
+&lt;li>chore: Add a newline formatting configuration and a comment for warning by @returnToInnocence in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2464">https://github.com/apache/incubator-hugegraph/pull/2464&lt;/a>&lt;/li>
+&lt;li>fix(server): add tip for gremlin api NPE with empty query by @SunnyBoy-WYH in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2467">https://github.com/apache/incubator-hugegraph/pull/2467&lt;/a>&lt;/li>
+&lt;li>fix(server):fix the metric name when promthus collect hugegraph metric,see issue by @SunnyBoy-WYH in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2462">https://github.com/apache/incubator-hugegraph/pull/2462&lt;/a>&lt;/li>
+&lt;li>fix(server): &lt;code>serverStarted&lt;/code> error when execute gremlin example by @VGalaxies in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2473">https://github.com/apache/incubator-hugegraph/pull/2473&lt;/a>&lt;/li>
+&lt;li>fix(auth): enhance the URL check by @zyxxoo in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2422">https://github.com/apache/incubator-hugegraph/pull/2422&lt;/a>&lt;/li>
+&lt;li>feat: added the OpenTelemetry trace support by @lynnbond in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2477">https://github.com/apache/incubator-hugegraph/pull/2477&lt;/a>&lt;/li>
+&lt;li>chore(server): clear context after req done by @SunnyBoy-WYH in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2470">https://github.com/apache/incubator-hugegraph/pull/2470&lt;/a>&lt;/li>
+&lt;li>refact(server): enhance the storage path in RocksDB &amp;amp; clean code by @imbajin in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2491">https://github.com/apache/incubator-hugegraph/pull/2491&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="api-changes">API Changes&lt;/h4>
+&lt;h4 id="feature-changes">Feature Changes&lt;/h4>
+&lt;h4 id="bug-fix">Bug Fix&lt;/h4>
+&lt;h4 id="option-changes">Option Changes&lt;/h4>
+&lt;h4 id="other-changes">Other Changes&lt;/h4>
+&lt;h4 id="bug-fix-1">Bug Fix&lt;/h4>
+&lt;h4 id="option-changes-1">Option Changes&lt;/h4>
+&lt;h4 id="other-changes-1">Other Changes&lt;/h4>
+&lt;h3 id="hugegraph-toolchain">hugegraph-toolchain&lt;/h3>
+&lt;h4 id="api-changes-1">API Changes&lt;/h4>
+&lt;h4 id="feature-changes-1">Feature Changes&lt;/h4>
+&lt;h4 id="bug-fix-2">Bug Fix&lt;/h4>
+&lt;h4 id="option-changes-2">Option Changes&lt;/h4>
+&lt;h4 id="other-changes-2">Other Changes&lt;/h4>
+&lt;h3 id="hugegraph-commons">hugegraph-commons&lt;/h3>
+&lt;h4 id="feature-changes-2">Feature Changes&lt;/h4>
+&lt;h4 id="bug-fix-3">Bug Fix&lt;/h4>
+&lt;h4 id="other-changes-3">Other Changes&lt;/h4>
+&lt;h3 id="release-details">Release Details&lt;/h3>
+&lt;p>Please check the release details in each repository:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph/releases">Server Release Notes&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/releases">Toolchain Release Notes&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-computer/releases">Computer Release Notes&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-commons/releases">Commons Release Notes&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Docs: Variable API</title><link>/cn/docs/clients/restful-api/variable/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/restful-api/variable/</guid><description>
 &lt;h3 id="51-variables">5.1 Variables&lt;/h3>
 &lt;p>Variables可以用来存储有关整个图的数据，数据按照键值对的方式存取&lt;/p>
@@ -15840,185 +15909,4 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;cancelled&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>此时查询 label 为 man 的顶点数目，一定是小于 10 的。&lt;/p></description></item><item><title>Docs: Gremlin API</title><link>/cn/docs/clients/restful-api/gremlin/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/restful-api/gremlin/</guid><description>
-&lt;h3 id="81-gremlin">8.1 Gremlin&lt;/h3>
-&lt;h4 id="811-向hugegraphserver发送gremlin语句get同步执行">8.1.1 向HugeGraphServer发送gremlin语句（GET），同步执行&lt;/h4>
-&lt;h5 id="params">Params&lt;/h5>
-&lt;ul>
-&lt;li>gremlin: 要发送给&lt;code>HugeGraphServer&lt;/code>执行的&lt;code>gremlin&lt;/code>语句&lt;/li>
-&lt;li>bindings: 用来绑定参数，key是字符串，value是绑定的值（只能是字符串或者数字），功能类似于MySQL的 Prepared Statement，用于加速语句执行&lt;/li>
-&lt;li>language: 发送语句的语言类型，默认为&lt;code>gremlin-groovy&lt;/code>&lt;/li>
-&lt;li>aliases: 为存在于图空间的已有变量添加别名&lt;/li>
-&lt;/ul>
-&lt;p>&lt;strong>查询顶点&lt;/strong>&lt;/p>
-&lt;h5 id="method--url">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://127.0.0.1:8080/gremlin?gremlin=hugegraph.traversal().V(&amp;#39;1:marko&amp;#39;)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body">Response Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;requestId&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;c6ef47a8-b634-4b07-9d38-6b3b69a3a556&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;message&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;code&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;attributes&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">},&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;result&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;data&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;1:marko&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;1:marko&amp;gt;city&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;value&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}],&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;1:marko&amp;gt;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;value&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;marko&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}],&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;1:marko&amp;gt;age&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;value&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">29&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}],&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;meta&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="812-向hugegraphserver发送gremlin语句post同步执行">8.1.2 向HugeGraphServer发送gremlin语句（POST），同步执行&lt;/h4>
-&lt;h5 id="method--url-1">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/gremlin
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>查询顶点&lt;/strong>&lt;/p>
-&lt;h5 id="request-body">Request Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gremlin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph.traversal().V(&amp;#39;1:marko&amp;#39;)&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;bindings&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{},&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;language&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;gremlin-groovy&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;aliases&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-1">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-1">Response Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;requestId&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;c6ef47a8-b634-4b07-9d38-6b3b69a3a556&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;message&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;code&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;attributes&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">},&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;result&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;data&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;1:marko&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;1:marko&amp;gt;city&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;value&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}],&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;1:marko&amp;gt;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;value&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;marko&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}],&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;1:marko&amp;gt;age&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;value&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">29&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}],&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;meta&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注意：&lt;/p>
-&lt;blockquote>
-&lt;p>这里是直接使用图对象（hugegraph），先获取其遍历器（traversal()），再获取顶点。
-不能直接写成&lt;code>graph.traversal().V()&lt;/code>或&lt;code>g.V()&lt;/code>，可以通过&lt;code>&amp;quot;aliases&amp;quot;: {&amp;quot;graph&amp;quot;: &amp;quot;hugegraph&amp;quot;, &amp;quot;g&amp;quot;: &amp;quot;__g_hugegraph&amp;quot;}&lt;/code>
-为图和遍历器添加别名后使用别名操作。其中，&lt;code>hugegraph&lt;/code>是原生存在的变量，&lt;code>__g_hugegraph&lt;/code>是&lt;code>HugeGraphServer&lt;/code>额外添加的变量，
-每个图都会存在一个对应的这样格式（_&lt;em>g&lt;/em>${graph}）的遍历器对象。&lt;/p>
-&lt;/blockquote>
-&lt;blockquote>
-&lt;p>响应体的结构与其他 Vertex 或 Edge 的 RESTful API的结构有区别，用户可能需要自行解析。&lt;/p>
-&lt;/blockquote>
-&lt;p>&lt;strong>查询边&lt;/strong>&lt;/p>
-&lt;h5 id="request-body-1">Request Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gremlin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;g.E(&amp;#39;S1:marko&amp;gt;2&amp;gt;&amp;gt;S2:lop&amp;#39;)&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;bindings&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{},&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;language&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;gremlin-groovy&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;aliases&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;g&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;__g_hugegraph&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-2">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-2">Response Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;requestId&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;3f117cd4-eedc-4e08-a106-ee01d7bb8249&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;status&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;message&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;code&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;attributes&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">},&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;result&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;data&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;S1:marko&amp;gt;2&amp;gt;&amp;gt;S2:lop&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;created&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;edge&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;inVLabel&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;software&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;outVLabel&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;inV&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;2:lop&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;outV&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;1:marko&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;weight&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.4&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;date&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;20171210&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}],&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;meta&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="813-向hugegraphserver发送gremlin语句post异步执行">8.1.3 向HugeGraphServer发送gremlin语句（POST），异步执行&lt;/h4>
-&lt;h5 id="method--url-2">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphs/hugegraph/jobs/gremlin
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>查询顶点&lt;/strong>&lt;/p>
-&lt;h5 id="request-body-2">Request Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gremlin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;g.V(&amp;#39;1:marko&amp;#39;)&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;bindings&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{},&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;language&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;gremlin-groovy&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;aliases&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注意：&lt;/p>
-&lt;blockquote>
-&lt;p>异步执行Gremlin语句暂不支持aliases，可以使用 &lt;code>graph&lt;/code> 代表要操作的图，也可以直接使用图的名字， 例如 &lt;code>hugegraph&lt;/code>;
-另外&lt;code>g&lt;/code>代表 traversal，等价于 &lt;code>graph.traversal()&lt;/code> 或者 &lt;code>hugegraph.traversal()&lt;/code>&lt;/p>
-&lt;/blockquote>
-&lt;h5 id="response-status-3">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">201&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-3">Response Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;task_id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注：&lt;/p>
-&lt;blockquote>
-&lt;p>可以通过&lt;code>GET http://localhost:8080/graphs/hugegraph/tasks/1&lt;/code>（其中&amp;quot;1&amp;quot;是task_id）来查询异步任务的执行状态，更多&lt;a href="../task">异步任务RESTful API&lt;/a>&lt;/p>
-&lt;/blockquote>
-&lt;p>&lt;strong>查询边&lt;/strong>&lt;/p>
-&lt;h5 id="request-body-3">Request Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gremlin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;g.E(&amp;#39;S1:marko&amp;gt;2&amp;gt;&amp;gt;S2:lop&amp;#39;)&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;bindings&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{},&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;language&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;gremlin-groovy&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;aliases&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-4">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">201&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-4">Response Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;task_id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注：&lt;/p>
-&lt;blockquote>
-&lt;p>可以通过&lt;code>GET http://localhost:8080/graphs/hugegraph/tasks/2&lt;/code>（其中&amp;quot;2&amp;quot;是task_id）来查询异步任务的执行状态，更多&lt;a href="../task">异步任务RESTful API&lt;/a>&lt;/p>
-&lt;/blockquote></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>此时查询 label 为 man 的顶点数目，一定是小于 10 的。&lt;/p></description></item></channel></rss>
