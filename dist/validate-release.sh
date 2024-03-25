@@ -22,7 +22,7 @@
 # 4. Run server & toolchain in binary package
 
 # if we don't want to exit after '|', remove "-o pipefail"
-set -euxo pipefail
+set -exo pipefail
 
 # release version (input by committer)
 RELEASE_VERSION=$1 # like 1.2.0
@@ -153,8 +153,8 @@ for i in *src.tar.gz; do
   done
 
   # 4.8: test compile the packages
-  if [[ $JAVA_VERSION == 8 && "$i" =~ "computer" ]]; then
-    echo "skip computer module in java8"
+  if [[ ($JAVA_VERSION == 8 && "$i" =~ "computer") ]] || [[ "$i" =~ 'hugegraph-ai' ]]; then
+    echo "Skip compile computer module in java8 & AI module in all versions"
     popd
     continue
   fi
