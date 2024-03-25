@@ -103,11 +103,8 @@ for i in *.tar.gz; do echo $i; gpg --verify $i.asc $i ; done
 
 #### 4. 检查压缩包内容
 
-这里分源码包 + 二进制包两个方面，源码包更为严格，挑核心的部分说 
+这里检查准备工作下载的压缩包内容。分源码包 + 二进制包两个方面，源码包更为严格，挑核心的部分说 
 (完整的列表可参考官方 [Wiki](https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist), 比较长)
-
-首先我们需要从 apache 官方的 `release-candidate` 地址下载包到本地 (
-地址：[点击跳转](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/))
 
 ##### A. 源码包
 
