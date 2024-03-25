@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph 1.2.0 Release Notes"
 linkTitle: "Release-1.2.0"
-weight: 10
+weight: 3
 ---
 
 ### Java version statement
@@ -44,15 +44,15 @@ In the future, we will gradually upgrade the java version, **Java 11** -> **Java
 - fix: transfer add_peer/remove_peer command to leader ([#2112](https://github.com/apache/incubator-hugegraph/pull/2112))
 - fix query dirty edges of a vertex with cache ([#2166](https://github.com/apache/incubator-hugegraph/pull/2166))
 - fix exception of vertex-drop with index ([#2181](https://github.com/apache/incubator-hugegraph/pull/2181))
-- fix: remove dup ‘From’ in filterExpiredResultFromFromBackend ([#2207](https://github.com/apache/incubator-hugegraph/pull/2207))
+- fix: remove dup 'From' in filterExpiredResultFromFromBackend ([#2207](https://github.com/apache/incubator-hugegraph/pull/2207))
 - fix: jdbc ssl mode parameter redundant ([#2224](https://github.com/apache/incubator-hugegraph/pull/2224))
 - fix: error when start gremlin-console with sample script ([#2231](https://github.com/apache/incubator-hugegraph/pull/2231))
 - fix(core): support order by id ([#2233](https://github.com/apache/incubator-hugegraph/pull/2233))
 - fix: update ssl_mode value ([#2235](https://github.com/apache/incubator-hugegraph/pull/2235))
 - fix: optimizing ClassNotFoundException error message for MYSQL ([#2246](https://github.com/apache/incubator-hugegraph/pull/2246))
-- fix：asf invalid notification scheme ‘discussions_status’ ([#2247](https://github.com/apache/incubator-hugegraph/pull/2247))
-- fix: asf invalid notification scheme ‘discussions_comment’ ([#2250](https://github.com/apache/incubator-hugegraph/pull/2250))
-- fix: incorrect use of ‘NO_LIMIT’ variable ([#2253](https://github.com/apache/incubator-hugegraph/pull/2253))
+- fix: asf invalid notification scheme 'discussions_status' ([#2247](https://github.com/apache/incubator-hugegraph/pull/2247))
+- fix: asf invalid notification scheme 'discussions_comment' ([#2250](https://github.com/apache/incubator-hugegraph/pull/2250))
+- fix: incorrect use of 'NO_LIMIT' variable ([#2253](https://github.com/apache/incubator-hugegraph/pull/2253))
 - fix(core): close flat mapper iterator after usage ([#2281](https://github.com/apache/incubator-hugegraph/pull/2281))
 - fix(dist): avoid var PRELOAD cover environmnet vars ([#2302](https://github.com/apache/incubator-hugegraph/pull/2302))
 - fix: base-ref/head-ref missed in dependency-review on master ([#2308](https://github.com/apache/incubator-hugegraph/pull/2308))
@@ -82,7 +82,7 @@ In the future, we will gradually upgrade the java version, **Java 11** -> **Java
 - add github token for license check comment ([#2139](https://github.com/apache/incubator-hugegraph/pull/2139))
 - chore: disable PR up-to-date in branch ([#2150](https://github.com/apache/incubator-hugegraph/pull/2150))
 - refact(core): remove lock of globalMasterInfo to optimize perf ([#2151](https://github.com/apache/incubator-hugegraph/pull/2151))
-- chore: async remove left index shouldn’t effect query ([#2199](https://github.com/apache/incubator-hugegraph/pull/2199))
+- chore: async remove left index shouldn't effect query ([#2199](https://github.com/apache/incubator-hugegraph/pull/2199))
 - refact(rocksdb): clean & reformat some code ([#2200](https://github.com/apache/incubator-hugegraph/pull/2200))
 - refact(core): optimized batch removal of remaining indices consumed by a single consumer ([#2203](https://github.com/apache/incubator-hugegraph/pull/2203))
 - add com.janeluo.ikkanalyzer dependency to core model ([#2206](https://github.com/apache/incubator-hugegraph/pull/2206))
@@ -113,7 +113,7 @@ In the future, we will gradually upgrade the java version, **Java 11** -> **Java
 * feat(core): support load vertex/edge snapshot ([#269](https://github.com/apache/incubator-hugegraph-computer/pull/269))
 * feat(k8s): Add MinIO as internal(default) storage ([#272](https://github.com/apache/incubator-hugegraph-computer/pull/272))
 * feat(algorithm): support random walk in computer ([#274](https://github.com/apache/incubator-hugegraph-computer/pull/274), [#280](https://github.com/apache/incubator-hugegraph-computer/pull/280))
-* feat: use ‘foreground’ delete policy to cancel k8s job ([#290](https://github.com/apache/incubator-hugegraph-computer/pull/290))
+* feat: use 'foreground' delete policy to cancel k8s job ([#290](https://github.com/apache/incubator-hugegraph-computer/pull/290))
 
 #### Bug Fix
 * fix: superstep not take effect ([#237](https://github.com/apache/incubator-hugegraph-computer/pull/237))
@@ -133,7 +133,7 @@ In the future, we will gradually upgrade the java version, **Java 11** -> **Java
 * chore: enhance mailbox settings & enable require ci ([#235](https://github.com/apache/incubator-hugegraph-computer/pull/235))
 * fix: typo errors in start-computer.sh ([#238](https://github.com/apache/incubator-hugegraph-computer/pull/238))
 * [Feature-241] Add PULL_REQUEST_TEMPLATE ([#242](https://github.com/apache/incubator-hugegraph-computer/pull/242), [#257](https://github.com/apache/incubator-hugegraph-computer/pull/257))
-* chore：change etcd url only for ci ([#245](https://github.com/apache/incubator-hugegraph-computer/pull/245))
+* chore: change etcd url only for ci ([#245](https://github.com/apache/incubator-hugegraph-computer/pull/245))
 * doc: update readme & add QR code ([#249](https://github.com/apache/incubator-hugegraph-computer/pull/249))
 * doc(k8s): add building note for missing classes ([#254](https://github.com/apache/incubator-hugegraph-computer/pull/254))
 * chore: reduce mail to dev list ([#255](https://github.com/apache/incubator-hugegraph-computer/pull/255))

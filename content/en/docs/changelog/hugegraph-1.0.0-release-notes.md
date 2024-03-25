@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph 1.0.0 Release Notes"
 linkTitle: "Release-1.0.0"
-weight: 11
+weight: 2
 ---
 
 ### OLTP API & Client Changes
