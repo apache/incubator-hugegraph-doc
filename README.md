@@ -36,7 +36,7 @@ The functions of this system include but are not limited to:
 - The attributes of edges and vertices can be indexed to support precise query, range query, and full-text search
 - The storage system adopts plug-in mode, supporting RocksDB, Cassandra, ScyllaDB, HBase, MySQL, PostgreSQL, Palo, and InMemory, etc.
 - Integrate with big data systems such as Hadoop and Spark GraphX, and support Bulk Load operations
-- Support high availability HA, multiple copies of data, backup recovery, monitoring, etc.
+- Support high availability(HA), multiple copies of data, backup recovery, monitoring, etc.
 
 ### Modules
 
