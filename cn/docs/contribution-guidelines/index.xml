@@ -442,7 +442,7 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;blockquote>
 &lt;p>Note: 后续将使用 xxx 指代候选人名，一般 &lt;code>xxx&lt;/code> 为一个容易读的名字 (例如 &lt;code>Simon Jay&lt;/code>)&lt;/p>
 &lt;p>&lt;code>ASF-INFRA&lt;/code> 建议&lt;strong>避免&lt;/strong>使用不易读的 &lt;code>ID&lt;/code> 直接作为邮件&lt;strong>人名代指&lt;/strong> (例如&lt;strong>避免&lt;/strong> &lt;code>simon321&lt;/code> 或 &lt;code>wh0isSim0n&lt;/code> 😄)&lt;/p>
-&lt;p>另发送邮件最好选择 &lt;strong>&amp;ldquo;纯文本&amp;rdquo;&lt;/strong> 模式, 否则排版在 ASF Mail UI 中可能会乱&lt;/p>
+&lt;p>另发送邮件最好选择 &lt;strong>&amp;ldquo;纯文本&amp;rdquo;&lt;/strong> 模式，否则排版在 ASF Mail UI 中可能会乱&lt;/p>
 &lt;/blockquote>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>To: private@hugegraph.apache.org
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Subject: [DISCUSS] XXX as a HugeGraph Committer Candidate
@@ -668,7 +668,7 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;ol>
 &lt;li>&lt;strong>Full name&lt;/strong>: 名字在前，姓氏在后&lt;/li>
 &lt;li>&lt;strong>Public name&lt;/strong>: 可以不填，默认和 &lt;code>Full name&lt;/code> 相同&lt;/li>
-&lt;li>勾选 check this box only if you entered names with your family name first&lt;/li>
+&lt;li>勾选 check this box only if you enter names with your family name first&lt;/li>
 &lt;li>&lt;strong>Postal Address&lt;/strong>: 英文地址，从小地方到大地方的顺序来写，需详细到门牌号&lt;/li>
 &lt;li>&lt;strong>Country:&lt;/strong> 所在国家英文&lt;/li>
 &lt;li>&lt;strong>E-mail&lt;/strong>: 邮箱地址，建议与上述邮件中使用的邮箱相同&lt;/li>
