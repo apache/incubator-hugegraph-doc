@@ -5,6 +5,7 @@ weight: 3
 ---
 
 > Note: 这篇文档会持续更新。
+> 建议使用 Java11 验证，新的版本不再支持 Java8
 
 ## 验证阶段
 
@@ -141,7 +142,7 @@ mvn clean package -P stage -Dmaven.test.skip=true -Dcheckstyle.skip=true
 bin/start-hugegraph.sh
 
 # hugegraph-loader
-bin/hugegraph-loader.sh -f path -g graph -s schema
+bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy
 
 # hugegraph-hubble
 bin/start-hubble.sh
