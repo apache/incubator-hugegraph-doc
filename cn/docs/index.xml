@@ -7505,7 +7505,8 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/enable-auth.sh
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>之后参照 &lt;a href="#%E5%9F%BA%E4%BA%8E%E9%89%B4%E6%9D%83%E6%A8%A1%E5%BC%8F%E5%90%AF%E5%8A%A8">基于鉴权模式启动&lt;/a> 即可&lt;/p></description></item><item><title>Docs: 验证 Apache 发版</title><link>/cn/docs/contribution-guidelines/validate-release/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/contribution-guidelines/validate-release/</guid><description>
 &lt;blockquote>
-&lt;p>Note: 这篇文档会持续更新。&lt;/p>
+&lt;p>Note: 这篇文档会持续更新。
+建议使用 Java11 验证测试，从 1.5.0 版本开始(除 client 外) 不再支持 Java8&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="验证阶段">验证阶段&lt;/h2>
 &lt;p>当内部的临时发布和打包工作完成后，其他的社区开发者 (尤其是 PMC)
@@ -7585,10 +7586,8 @@ hash 值一致 (一般是 sha512)&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">for&lt;/span> i in *.tar.gz&lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#204a87;font-weight:bold">do&lt;/span> &lt;span style="color:#204a87">echo&lt;/span> &lt;span style="color:#000">$i&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span> gpg --verify &lt;span style="color:#000">$i&lt;/span>.asc &lt;span style="color:#000">$i&lt;/span> &lt;span style="color:#000;font-weight:bold">;&lt;/span> &lt;span style="color:#204a87;font-weight:bold">done&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>先确认了整体的&amp;quot;完整性 + 一致性&amp;quot;, 然后接下来确认具体的内容 (&lt;strong>关键&lt;/strong>)&lt;/p>
 &lt;h4 id="4-检查压缩包内容">4. 检查压缩包内容&lt;/h4>
-&lt;p>这里分源码包 + 二进制包两个方面，源码包更为严格，挑核心的部分说
+&lt;p>这里检查准备工作下载的压缩包内容。分源码包 + 二进制包两个方面，源码包更为严格，挑核心的部分说
 (完整的列表可参考官方 &lt;a href="https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist">Wiki&lt;/a>, 比较长)&lt;/p>
-&lt;p>首先我们需要从 apache 官方的 &lt;code>release-candidate&lt;/code> 地址下载包到本地 (
-地址：&lt;a href="https://dist.apache.org/repos/dist/dev/incubator/hugegraph/">点击跳转&lt;/a>)&lt;/p>
 &lt;h5 id="a-源码包">A. 源码包&lt;/h5>
 &lt;p>解压 &lt;code>*hugegraph*src.tar.gz&lt;/code>后，进行如下检查：&lt;/p>
 &lt;ol>
@@ -7617,7 +7616,7 @@ hash 值一致 (一般是 sha512)&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># hugegraph-loader&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/hugegraph-loader.sh -f path -g graph -s schema
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># hugegraph-hubble&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/start-hubble.sh
