@@ -5,7 +5,7 @@ weight: 3
 ---
 
 > Note: this doc will be updated continuously.
-> It is recommended to use Java11 verification, the new version no longer supports Java8
+> It is recommended to use Java11 in verification, we will drop Java8 support from version 1.5.0
 
 ## Verification
 
