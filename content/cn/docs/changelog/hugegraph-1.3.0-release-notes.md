@@ -95,6 +95,37 @@ PS: In the future, we will gradually upgrade the java version, **Java 11** -> **
 
 ### Release Details
 
+### hugegraph-ai
+This is the first release version of hugegraph-ai , it  contains a variety of features, including an initialized Python client, knowledge graph construction capabilities through LLM, and the integration of RAG based on HugeGraph. It also adds significant functionalities on python-client such as variable APIs, auth, metric, traverser, and task APIs, as well as interactive and visual demo creation with Gradio.
+In addition to these features, the release addresses several bugs and issues, ensuring a more stable and error-free user experience. Maintenance tasks such as dependency updates, project structure improvements, and the addition of basic CI further enhance the project's robustness and developer workflow.
+This release encapsulates the collaborative efforts of the HugeGraph community, with contributions from various members, ensuring the project's continuous growth and improvement.
+
+#### Feature Changes
+feat: initialize hugegraph python client by @simon824 in https://github.com/apache/incubator-hugegraph-ai/pull/5
+feat(llm): knowledge graph construction by llm by @Zony7 in https://github.com/apache/incubator-hugegraph-ai/pull/7
+feat: initialize rag based on HugeGraph by @Ling-Yuchen in https://github.com/apache/incubator-hugegraph-ai/pull/20
+feat(client): add variables api and test by @liuxiaocs7 in https://github.com/apache/incubator-hugegraph-ai/pull/24
+feat: add llm wenxinyiyan & config util & spo_triple_extract by @simon824 in https://github.com/apache/incubator-hugegraph-ai/pull/27
+feat: add auth&metric&traverser&task api and ut by @simon824 in https://github.com/apache/incubator-hugegraph-ai/pull/28
+feat: refactor construct knowledge graph task by @simon824 in https://github.com/apache/incubator-hugegraph-ai/pull/29
+feat: Introduce gradio for creating interactive and visual demo by @simon824 in https://github.com/apache/incubator-hugegraph-ai/pull/30
+#### Bug Fix
+fix invalid github label by @simon824 in https://github.com/apache/incubator-hugegraph-ai/pull/3
+fix: import error by @Zony7 in https://github.com/apache/incubator-hugegraph-ai/pull/13
+[fix] function getEdgeByPage(): the generated query url does not include the parameter page by @chenlixuan in https://github.com/apache/incubator-hugegraph-ai/pull/15
+fix: issue template by @Radeity in https://github.com/apache/incubator-hugegraph-ai/pull/23
+fix: base-ref/head-ref missed in dependency-check-ci on branch push by @liuxiaocs7 in https://github.com/apache/incubator-hugegraph-ai/pull/25
+
+#### Other Changes
+chore: add asf.yaml and ISSUE_TEMPLATE by @simon824 in https://github.com/apache/incubator-hugegraph-ai/pull/1
+Bump urllib3 from 2.0.3 to 2.0.7 in /hugegraph-python by @dependabot in https://github.com/apache/incubator-hugegraph-ai/pull/8
+chore: create .gitignore file for py by @imbajin in https://github.com/apache/incubator-hugegraph-ai/pull/9
+refact: improve project structure & add some basic CI by @simon824 in https://github.com/apache/incubator-hugegraph-ai/pull/17
+chore: Update LICENSE and NOTICE by @simon824 in https://github.com/apache/incubator-hugegraph-ai/pull/31
+chore: add release scripts by @JackyYangPassion in https://github.com/apache/incubator-hugegraph-ai/pull/33
+chang file chmod 755 by @JackyYangPassion in https://github.com/apache/incubator-hugegraph-ai/pull/34
+
+
 Please check the release details in each repository:
 
 - [Server Release Notes](https://github.com/apache/incubator-hugegraph/releases)
