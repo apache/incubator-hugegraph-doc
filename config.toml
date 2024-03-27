@@ -250,21 +250,21 @@ enable = false
   desc = "Unleash your ideas through file configuration"
 [[params.links.user]]
   name ="WeChat"
-  url = "https://github.com/apache/incubator-hugegraph#contact-us"
+  url = "https://github.com/apache/hugegraph#contact-us"
   icon = "fa fa-comments"
   desc = "Follow us on WeChat to get the latest news"
 [[params.links.developer]]
   name = "GitHub"
-  url = "https://github.com/apache/incubator-hugegraph"
+  url = "https://github.com/apache/hugegraph"
   icon = "fab fa-github"
-  desc = "Development takes place here!"
-#[[params.links.developer]]
-#  name = "Slack"
-#  url = "https://example.org/slack"
-#  icon = "fab fa-slack"
-#  desc = "Chat with other project developers"
+  desc = "Development takes place here~"
+[[params.links.developer]]
+  name = "Security mailing list"
+  url = "mailto:security@hugegraph.apache.org"
+  icon = "fab fa-slack"
+  desc = "Report SEC problems"
 [[params.links.developer]]
   name = "Developer mailing list"
   url = "../docs/contribution-guidelines/subscribe/"
   icon = "fa fa-envelope"
-  desc = "Discuss development issues around the project"
+  desc = "Discuss community issues around the project"

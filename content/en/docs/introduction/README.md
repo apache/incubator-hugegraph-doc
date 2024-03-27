@@ -6,8 +6,8 @@ weight: 1
 
 ### Summary
 
-HugeGraph is an easy-to-use, efficient, general-purpose open source graph database system(Graph Database, [GitHub project address](https://github.com/hugegraph/hugegraph)),
-implemented the [Apache TinkerPop3](https://tinkerpop.apache.org) framework and is fully compatible with the [Gremlin](https://tinkerpop.apache.org/gremlin.html) query language,
+Apache HugeGraph is an easy-to-use, efficient, general-purpose open source graph database system
+(Graph Database, [GitHub project address](https://github.com/hugegraph/hugegraph)), implemented the [Apache TinkerPop3](https://tinkerpop.apache.org) framework and is fully compatible with the [Gremlin](https://tinkerpop.apache.org/gremlin.html) query language,
 With complete toolchain components, it helps users easily build applications and products based on graph databases. HugeGraph supports fast import of more than 10 billion vertices and edges, and provides millisecond-level relational query capability (OLTP). 
 It supports large-scale distributed graph computing (OLAP).
 
@@ -36,21 +36,26 @@ The functions of this system include but are not limited to:
 - Has independent schema metadata information, has powerful graph modeling capabilities, and facilitates third-party system integration
 - Support multi-vertex ID strategy: support primary key ID, support automatic ID generation, support user-defined string ID, support user-defined digital ID
 - The attributes of edges and vertices can be indexed to support precise query, range query, and full-text search
-- The storage system adopts plug-in mode, supporting RocksDB, Cassandra, ScyllaDB, HBase, MySQL, PostgreSQL, Palo, and InMemory, etc.
-- Integrate with big data systems such as Hadoop and Spark GraphX, and support Bulk Load operations
-- Support high availability HA, multiple copies of data, backup recovery, monitoring, etc.
+- The storage system adopts a plug-in method, supporting RocksDB (standalone/cluster), Cassandra, ScyllaDB, HBase, MySQL, PostgreSQL, Palo and Memory, etc.
+- Integrated with big data systems such as HDFS, Spark/Flink, GraphX, etc., supports BulkLoad operation to import massive data.
+- Supports HA(high availability), multiple data replicas, backup and recovery, monitoring, distributed Trace, etc.
 
 ### Modules
 
-- [HugeGraph-Server](/docs/quickstart/hugegraph-server): HugeGraph-Server is the core part of the HugeGraph project, including submodules such as Core, Backend, and API;
-  - Core: Graph engine implementation, connecting the Backend module downward and supporting the API module upward;
-  - Backend: Realize the storage of graph data to the backend. The supported backends include: Memory, Cassandra, ScyllaDB, RocksDB, HBase, MySQL, and PostgreSQL. Users can choose one according to the actual situation;
-  - API: Built-in REST Server, provides RESTful API to users, and is fully compatible with Gremlin query.
-- [HugeGraph-Client](/docs/quickstart/hugegraph-client): HugeGraph-Client provides a RESTful API client for connecting to HugeGraph-Server. Currently, only Java version is implemented. Users of other languages can implement it by themselves;
-- [HugeGraph-Loader](/docs/quickstart/hugegraph-loader): HugeGraph-Loader is a data import tool based on HugeGraph-Client, which converts ordinary text data into graph vertices and edges and inserts them into graph database;
-- [HugeGraph-Computer](/docs/quickstart/hugegraph-computer): HugeGraph-Computer is a distributed graph processing system for HugeGraph (OLAP). It is an implementation of [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf). It runs on the Kubernetes framework;
-- [HugeGraph-Hubble](/docs/quickstart/hugegraph-hubble): HugeGraph-Hubble is HugeGraph's web visualization management platform, a one-stop visual analysis platform. The platform covers the whole process from data modeling, to rapid data import, to online and offline analysis of data, and unified management of graphs;
-- [HugeGraph-Tools](/docs/quickstart/hugegraph-tools): HugeGraph-Tools is HugeGraph's deployment and management tools, including functions such as managing graphs, backup/restore, Gremlin execution, etc.
+- [HugeGraph-Server](/docs/quickstart/hugegraph-server): HugeGraph-Server is the core part of the HugeGraph project, containing Core, Backend, API and other submodules;
+  - Core: Implements the graph engine, connects to the Backend module downwards, and supports the API module upwards;
+  - Backend: Implements the storage of graph data to the backend, supports backends including: Memory, Cassandra, ScyllaDB, RocksDB, HBase, MySQL and PostgreSQL, users can choose one according to the actual situation;
+  - API: Built-in REST Server, provides RESTful API to users, and is fully compatible with Gremlin queries. (Supports distributed storage and computation pushdown)
+- [HugeGraph-Toolchain](https://github.com/apache/hugegraph-toolchain): (Toolchain)
+  - [HugeGraph-Client](/docs/quickstart/hugegraph-client): HugeGraph-Client provides a RESTful API client for connecting to HugeGraph-Server, currently only the Java version is implemented, users of other languages can implement it themselves;
+  - [HugeGraph-Loader](/docs/quickstart/hugegraph-loader): HugeGraph-Loader is a data import tool based on HugeGraph-Client, which transforms ordinary text data into vertices and edges of the graph and inserts them into the graph database;
+  - [HugeGraph-Hubble](/docs/quickstart/hugegraph-hubble): HugeGraph-Hubble is HugeGraph's Web 
+visualization management platform, a one-stop visualization analysis platform, the platform covers the whole process from data modeling, to fast data import, to online and offline analysis of data, and unified management of the graph;
+  - [HugeGraph-Tools](/docs/quickstart/hugegraph-tools): HugeGraph-Tools is HugeGraph's deployment and management tool, including graph management, backup/recovery, Gremlin execution and other functions.
+- [HugeGraph-Computer](/docs/quickstart/hugegraph-computer): HugeGraph-Computer is a distributed graph processing system (OLAP). 
+  It is an implementation of [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf). It can run on clusters such as Kubernetes/Yarn, and supports large-scale graph computing.
+- [HugeGraph-AI(Beta)](/docs/quickstart/hugegraph-ai): HugeGraph-AI is HugeGraph's independent AI 
+  component, providing training and inference functions of graph neural networks, LLM/Graph RAG combination/Python-Client and other related components, continuously updating.
 
 ### Contact Us
 

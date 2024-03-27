@@ -5,7 +5,9 @@ weight: 3
 ---
 
 ### 概述
-HugeGraph 为了方便不同用户场景下的鉴权使用，目前内置了完备的`StandardAuthenticator`权限模式，支持多用户认证、以及细粒度的权限访问控制，采用基于“用户 - 用户组 - 操作 - 资源”的 4 层设计，灵活控制用户角色与权限 (支持多 GraphServer)
+
+HugeGraph 为了方便不同用户场景下的鉴权使用，目前内置了完备的`StandardAuthenticator`权限模式，支持多用户认证、
+以及细粒度的权限访问控制，采用基于“用户 - 用户组 - 操作 - 资源”的 4 层设计，灵活控制用户角色与权限 (支持多 GraphServer)
 
 `StandardAuthenticator` 模式的几个核心设计：
 - 初始化时创建超级管理员 (`admin`) 用户，后续通过超级管理员创建其它用户，新创建的用户被分配足够权限后，可以创建或管理更多的用户
@@ -22,7 +24,10 @@ user(name=xx) -belong-> group(name=xx) -access(read)-> target(graph=graph1, reso
 
 ### 配置用户认证
 
-HugeGraph 默认**不启用**用户认证功能，需通过修改配置文件来启用该功能。内置实现了`StandardAuthenticator`模式，该模式支持多用户认证与细粒度权限控制。此外，开发者可以自定义实现`HugeAuthenticator`接口来对接自身的权限系统。
+HugeGraph 目前默认**未启用**用户认证功能，需通过修改配置文件来启用该功能。(Note: 如果在生产环境/外网使用, 
+请使用 **Java11** 版本 + 开启权限避免安全相关隐患)
+
+目前已内置实现了`StandardAuthenticator`模式，该模式支持多用户认证与细粒度权限控制。此外，开发者可以自定义实现`HugeAuthenticator`接口来对接自身的权限系统。
 
 用户认证方式均采用 [HTTP Basic Authentication](https://zh.wikipedia.org/wiki/HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81) ，简单说就是在发送 HTTP 请求时在 `Authentication` 设置选择 `Basic` 然后输入对应的用户名和密码，对应 HTTP 明文如下所示 :
 

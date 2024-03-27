@@ -6,13 +6,13 @@ weight: 16
 
 ### 10.1 用户认证与权限控制
 
-> 开启权限及相关配置请先参考 [权限配置](/docs/config/config-authentication/) 文档
+> 开启权限及相关配置请先参考 [权限配置](/cn/docs/config/config-authentication/) 文档
 
 ##### 用户认证与权限控制概述：
-HugeGraph支持多用户认证、以及细粒度的权限访问控制，采用基于“用户-用户组-操作-资源”的4层设计，灵活控制用户角色与权限。 
-资源描述了图数据库中的数据，比如符合某一类条件的顶点，每一个资源包括type、label、properties三个要素，共有18种type、
-任意label、任意properties的组合形成的资源，一个资源的内部条件是且关系，多个资源之间的条件是或关系。用户可以属于一个或多个用户组，
-每个用户组可以拥有对任意个资源的操作权限，操作类型包括：读、写、删除、执行等种类。 HugeGraph支持动态创建用户、用户组、资源，
+HugeGraph 支持多用户认证、以及细粒度的权限访问控制，采用基于“用户 - 用户组 - 操作 - 资源”的 4 层设计，灵活控制用户角色与权限。 
+资源描述了图数据库中的数据，比如符合某一类条件的顶点，每一个资源包括 type、label、properties 三个要素，共有 18 种 type、
+任意 label、任意 properties 的组合形成的资源，一个资源的内部条件是且关系，多个资源之间的条件是或关系。用户可以属于一个或多个用户组，
+每个用户组可以拥有对任意个资源的操作权限，操作类型包括：读、写、删除、执行等种类。HugeGraph 支持动态创建用户、用户组、资源，
 支持动态分配或取消权限。初始化数据库时超级管理员用户被创建，后续可通过超级管理员创建各类角色用户，新创建的用户如果被分配足够权限后，可以由其创建或管理更多的用户。
 
 ##### 举例说明：
@@ -21,7 +21,7 @@ city: Beijing})
 描述：用户'boss'拥有对'graph1'图中北京人的读权限。
 
 ##### 接口说明：
-用户认证与权限控制接口包括5类：UserAPI、GroupAPI、TargetAPI、BelongAPI、AccessAPI。
+用户认证与权限控制接口包括 5 类：UserAPI、GroupAPI、TargetAPI、BelongAPI、AccessAPI。
 
 ### 10.2 用户（User）API
 用户接口包括：创建用户，删除用户，修改用户，和查询用户相关信息接口。
@@ -114,7 +114,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/users/-63:test
 ```
 
 ##### Request Body
-修改user_name、user_password和user_phone
+修改 user_name、user_password 和 user_phone
 ```json
 {
     "user_name": "test",
@@ -330,7 +330,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
 ```
 
 ##### Request Body
-修改group_description
+修改 group_description
 ```json
 {
     "group_name": "grant",
@@ -424,8 +424,8 @@ GET http://localhost:8080/graphs/hugegraph/auth/groups/-69:all
 ```
 
 ### 10.4 资源（Target）API
-资源描述了图数据库中的数据，比如符合某一类条件的顶点，每一个资源包括type、label、properties三个要素，共有18种type、
-任意label、任意properties的组合形成的资源，一个资源的内部条件是且关系，多个资源之间的条件是或关系。   
+资源描述了图数据库中的数据，比如符合某一类条件的顶点，每一个资源包括 type、label、properties 三个要素，共有 18 种 type、
+任意 label、任意 properties 的组合形成的资源，一个资源的内部条件是且关系，多个资源之间的条件是或关系。   
 资源接口包括：资源的创建、删除、修改和查询。
 
 #### 10.4.1 创建资源
@@ -434,17 +434,17 @@ GET http://localhost:8080/graphs/hugegraph/auth/groups/-69:all
 - target_name: 资源名称
 - target_graph: 资源图
 - target_url: 资源地址
-- target_resources: 资源定义(列表)
+- target_resources: 资源定义 (列表)
 
-target_resources可以包括多个target_resource，以列表的形式存储。  
-每个target_resource包含：
-- type：可选值 VERTEX, EDGE等, 可填ALL，则表示可以是顶点或边；
+target_resources 可以包括多个 target_resource，以列表的形式存储。  
+每个 target_resource 包含：
+- type：可选值 VERTEX, EDGE 等，可填 ALL，则表示可以是顶点或边；
 - label：可选值，⼀个顶点或边类型的名称，可填*，则表示任意类型；
-- properties：map类型，可包含多个属性的键值对，必须匹配所有属性值，属性值⽀持填条件范围（age:
-  P.gte(18)），properties如果为null表示任意属性均可，如果属性名和属性值均为‘*ʼ也表示任意属性均可。
+- properties：map 类型，可包含多个属性的键值对，必须匹配所有属性值，属性值⽀持填条件范围（age:
+  P.gte(18)），properties 如果为 null 表示任意属性均可，如果属性名和属性值均为‘*ʼ也表示任意属性均可。
 
 如精细资源："target_resources": [{"type":"VERTEX","label":"person","properties":{"city":"Beijing","age":"P.gte(20)"}}]**  
-资源定义含义：类型是'person'的顶点，且城市属性是'Beijing'，年龄属性大于等于20。
+资源定义含义：类型是'person'的顶点，且城市属性是'Beijing'，年龄属性大于等于 20。
 
 ##### Request Body
 
@@ -533,7 +533,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
 ```
 
 ##### Request Body
-修改资源定义中的type
+修改资源定义中的 type
 ```json
 {
     "target_name": "gremlin",
@@ -757,7 +757,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:gran
 ```
 
 ##### Request Body
-修改belong_description
+修改 belong_description
 ```json
 {
     "belong_description": "update test"
@@ -852,10 +852,10 @@ GET http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:all
 ```
 
 ### 10.6 赋权（Access）API
-给用户组赋予资源的权限，主要包含：读操作(READ)、写操作(WRITE)、删除操作(DELETE)、执行操作(EXECUTE)等。  
+给用户组赋予资源的权限，主要包含：读操作 (READ)、写操作 (WRITE)、删除操作 (DELETE)、执行操作 (EXECUTE) 等。  
 赋权接口包括：赋权的创建、删除、修改和查询。
 
-#### 10.6.1 创建赋权(用户组赋予资源的权限)
+#### 10.6.1 创建赋权 (用户组赋予资源的权限)
 
 ##### Params
 
@@ -865,10 +865,10 @@ GET http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:all
 - access_description: 赋权描述
 
 access_permission：
-- READ：读操作，所有的查询，包括查询Schema、查顶点/边，查询顶点和边的数量VERTEX_AGGR/EDGE_AGGR，也包括读图的状态STATUS、变量VAR、任务TASK等；
-- WRITE：写操作，所有的创建、更新操作，包括给Schema增加property key，给顶点增加或更新属性等；
+- READ：读操作，所有的查询，包括查询 Schema、查顶点/边，查询顶点和边的数量 VERTEX_AGGR/EDGE_AGGR，也包括读图的状态 STATUS、变量 VAR、任务 TASK 等；
+- WRITE：写操作，所有的创建、更新操作，包括给 Schema 增加 property key，给顶点增加或更新属性等；
 - DELETE：删除操作，包括删除元数据、删除顶点/边；
-- EXECUTE：执⾏操作，包括执⾏Gremlin语句、执⾏Task、执⾏metadata函数；
+- EXECUTE：执⾏操作，包括执⾏ Gremlin 语句、执⾏ Task、执⾏ metadata 函数；
 
 ##### Request Body
 
@@ -945,7 +945,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>12>S-77:al
 ```
 
 ##### Request Body
-修改access_description
+修改 access_description
 ```json
 {
     "access_description": "test"
