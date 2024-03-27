@@ -73,6 +73,21 @@ PS: In the future, we will gradually upgrade the java version, **Java 11** -> **
 
 ### hugegraph-toolchain
 
+* doc: update copyright date(year) in NOTICE ([#567](https://github.com/apache/incubator-hugegraph-toolchain/pull/567))
+* chore(deps): bump ip from 1.1.5 to 1.1.9 in /hugegraph-hubble/hubble-fe ([#580](https://github.com/apache/incubator-hugegraph-toolchain/pull/580)) 
+* fix: concurrency issue causing file overwrite due to identical filenames ([#572](https://github.com/apache/incubator-hugegraph-toolchain/pull/572))
+* refactor(hubble): enhance maven front plugin ([#568](https://github.com/apache/incubator-hugegraph-toolchain/pull/568))
+* fix(loader): update shade plugin for spark loader ([#566](https://github.com/apache/incubator-hugegraph-toolchain/pull/566))
+* chore(deps): bump es5-ext from 0.10.53 to 0.10.63 in /hugegraph-hubble/hubble-fe ([#582](https://github.com/apache/incubator-hugegraph-toolchain/pull/582))
+* fix(hubble): yarn install timeout in arm64 ([#583](https://github.com/apache/incubator-hugegraph-toolchain/pull/583))
+* feat(client): support user defined OKHTTPClient configs ([#590](https://github.com/apache/incubator-hugegraph-toolchain/pull/590))
+* fix(loader): support file name with prefix for hdfs source ([#571](https://github.com/apache/incubator-hugegraph-toolchain/pull/571))
+* chore(hubble): Enhance code style in hubble ([#592](https://github.com/apache/incubator-hugegraph-toolchain/pull/592))
+* feat(hubble):  warp the exception info in HugeClientUtil ([#589](https://github.com/apache/incubator-hugegraph-toolchain/pull/589))
+* chore: upgrade version to 1.3.0 ([#596](https://github.com/apache/incubator-hugegraph-toolchain/pull/596))
+* chore(ci): update profile commit id for 1.3 ([#597](https://github.com/apache/incubator-hugegraph-toolchain/pull/597))
+
+
 #### API Changes
 
 #### Feature Changes
@@ -86,6 +101,8 @@ PS: In the future, we will gradually upgrade the java version, **Java 11** -> **
 
 
 ### hugegraph-commons
+
+
 
 #### Feature Changes
 
