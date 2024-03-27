@@ -1,15 +1,13 @@
 ---
 title: "HugeGraph 1.3.0 Release Notes"
 linkTitle: "Release-1.3.0"
-weight: 11
+weight: 4
 ---
 
-### Java version statement
+### 运行环境/版本说明
 
-In 1.3.0:
-1. consider using Java 11 in `hugegraph/toolchain/commons`, also compatible with Java 8 now.
-2. `hugegraph-computer` required to use Java 11, **not compatible with Java 8!**
-3. Using Java8 may loss some security ensured, we recommend using Java 11 in **production env** with AuthSystem enabled.
+1. 优先在 `hugegraph/toolchain/commons`软件中使用 Java 11, 此次是这些模块最后一次主版本兼容 Java 8 了。(computer 则仅支持 Java11)
+2. 另外相比 Java11, 使用 Java8 会失去一些**安全性**的保障，我们推荐生产或对外网暴露访问的环境使用 Java11 并开启 [Auth 权限认证]()。
 
 **1.3.0** is the last major version compatible with **Java 8**, compatibility with Java 8 will end in 
 next release(1.5.0) when [PD/Store](https://github.com/apache/incubator-hugegraph/issues/2265) merged into master branch (Except for the `java-client`).
