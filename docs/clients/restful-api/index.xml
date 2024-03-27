@@ -5254,9 +5254,12 @@ which will replace the configuration in the existing graph&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>backend=rocksdb
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=binary
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store=hugegraph_clone
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.data_path=./hg2
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.wal_path=./hg2
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-3">Response Status&lt;/h5>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.data_path=./rks-data-xx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.wal_path=./rks-data-xx
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>Note: the data/wal_path can&amp;rsquo;t be the same as the existing graph (use separate directories)&lt;/p>
+&lt;/blockquote>
+&lt;h5 id="response-status-3">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-2">Response Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
@@ -5271,9 +5274,12 @@ which will replace the configuration in the existing graph&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>backend=rocksdb
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=binary
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store=hugegraph2
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.data_path=./hg2
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.wal_path=./hg2
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-4">Response Status&lt;/h5>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.data_path=./rks-data-xx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.wal_path=./rks-data-xx
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>Note: the data/wal_path can&amp;rsquo;t be the same as the existing graph (use separate directories)&lt;/p>
+&lt;/blockquote>
+&lt;h5 id="response-status-4">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-3">Response Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>

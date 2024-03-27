@@ -5238,9 +5238,12 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>backend=rocksdb
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=binary
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store=hugegraph_clone
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.data_path=./hg2
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.wal_path=./hg2
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-3">Response Status&lt;/h5>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.data_path=./rks-data-xx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.wal_path=./rks-data-xx
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>Note: 存储路径不能与现有图相同（使用不同的目录）&lt;/p>
+&lt;/blockquote>
+&lt;h5 id="response-status-3">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-2">Response Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
@@ -5249,15 +5252,18 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="615-创建一个图该操作需要管理员权限">6.1.5 创建一个图，&lt;strong>该操作需要管理员权限&lt;/strong>&lt;/h4>
 &lt;h5 id="method--url-4">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphs/hugegraph2
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphs/hugegraph-xx
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body">Request Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>backend=rocksdb
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=binary
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store=hugegraph2
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.data_path=./hg2
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.wal_path=./hg2
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-4">Response Status&lt;/h5>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.data_path=./rks-data-xx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.wal_path=./rks-data-xx
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>Note: 存储路径不能与现有图相同（使用不同的目录）&lt;/p>
+&lt;/blockquote>
+&lt;h5 id="response-status-4">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-3">Response Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
@@ -5764,20 +5770,20 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Authentication API</title><link>/cn/docs/clients/restful-api/auth/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/restful-api/auth/</guid><description>
 &lt;h3 id="101-用户认证与权限控制">10.1 用户认证与权限控制&lt;/h3>
 &lt;blockquote>
-&lt;p>开启权限及相关配置请先参考 &lt;a href="/docs/config/config-authentication/">权限配置&lt;/a> 文档&lt;/p>
+&lt;p>开启权限及相关配置请先参考 &lt;a href="/cn/docs/config/config-authentication/">权限配置&lt;/a> 文档&lt;/p>
 &lt;/blockquote>
 &lt;h5 id="用户认证与权限控制概述">用户认证与权限控制概述：&lt;/h5>
-&lt;p>HugeGraph支持多用户认证、以及细粒度的权限访问控制，采用基于“用户-用户组-操作-资源”的4层设计，灵活控制用户角色与权限。
-资源描述了图数据库中的数据，比如符合某一类条件的顶点，每一个资源包括type、label、properties三个要素，共有18种type、
-任意label、任意properties的组合形成的资源，一个资源的内部条件是且关系，多个资源之间的条件是或关系。用户可以属于一个或多个用户组，
-每个用户组可以拥有对任意个资源的操作权限，操作类型包括：读、写、删除、执行等种类。 HugeGraph支持动态创建用户、用户组、资源，
+&lt;p>HugeGraph 支持多用户认证、以及细粒度的权限访问控制，采用基于“用户 - 用户组 - 操作 - 资源”的 4 层设计，灵活控制用户角色与权限。
+资源描述了图数据库中的数据，比如符合某一类条件的顶点，每一个资源包括 type、label、properties 三个要素，共有 18 种 type、
+任意 label、任意 properties 的组合形成的资源，一个资源的内部条件是且关系，多个资源之间的条件是或关系。用户可以属于一个或多个用户组，
+每个用户组可以拥有对任意个资源的操作权限，操作类型包括：读、写、删除、执行等种类。HugeGraph 支持动态创建用户、用户组、资源，
 支持动态分配或取消权限。初始化数据库时超级管理员用户被创建，后续可通过超级管理员创建各类角色用户，新创建的用户如果被分配足够权限后，可以由其创建或管理更多的用户。&lt;/p>
 &lt;h5 id="举例说明">举例说明：&lt;/h5>
 &lt;p>user(name=boss) -belong-&amp;gt; group(name=all) -access(read)-&amp;gt; target(graph=graph1, resource={label: person,
 city: Beijing})&lt;br>
 描述：用户&amp;rsquo;boss&amp;rsquo;拥有对&amp;rsquo;graph1&amp;rsquo;图中北京人的读权限。&lt;/p>
 &lt;h5 id="接口说明">接口说明：&lt;/h5>
-&lt;p>用户认证与权限控制接口包括5类：UserAPI、GroupAPI、TargetAPI、BelongAPI、AccessAPI。&lt;/p>
+&lt;p>用户认证与权限控制接口包括 5 类：UserAPI、GroupAPI、TargetAPI、BelongAPI、AccessAPI。&lt;/p>
 &lt;h3 id="102-用户userapi">10.2 用户（User）API&lt;/h3>
 &lt;p>用户接口包括：创建用户，删除用户，修改用户，和查询用户相关信息接口。&lt;/p>
 &lt;h4 id="1021-创建用户">10.2.1 创建用户&lt;/h4>
@@ -5831,7 +5837,7 @@ city: Beijing})&lt;br>
 &lt;h5 id="method--url-2">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/auth/users/-63:test
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-1">Request Body&lt;/h5>
-&lt;p>修改user_name、user_password和user_phone&lt;/p>
+&lt;p>修改 user_name、user_password 和 user_phone&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user_name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;test&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user_password&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;******&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -5959,7 +5965,7 @@ city: Beijing})&lt;br>
 &lt;h5 id="method--url-8">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-3">Request Body&lt;/h5>
-&lt;p>修改group_description&lt;/p>
+&lt;p>修改 group_description&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;group_name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;grant&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;group_description&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;grant&amp;#34;&lt;/span>
@@ -6017,8 +6023,8 @@ city: Beijing})&lt;br>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;group_description&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;group can do anything&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="104-资源targetapi">10.4 资源（Target）API&lt;/h3>
-&lt;p>资源描述了图数据库中的数据，比如符合某一类条件的顶点，每一个资源包括type、label、properties三个要素，共有18种type、
-任意label、任意properties的组合形成的资源，一个资源的内部条件是且关系，多个资源之间的条件是或关系。&lt;br>
+&lt;p>资源描述了图数据库中的数据，比如符合某一类条件的顶点，每一个资源包括 type、label、properties 三个要素，共有 18 种 type、
+任意 label、任意 properties 的组合形成的资源，一个资源的内部条件是且关系，多个资源之间的条件是或关系。&lt;br>
 资源接口包括：资源的创建、删除、修改和查询。&lt;/p>
 &lt;h4 id="1041-创建资源">10.4.1 创建资源&lt;/h4>
 &lt;h5 id="params-10">Params&lt;/h5>
@@ -6026,18 +6032,18 @@ city: Beijing})&lt;br>
 &lt;li>target_name: 资源名称&lt;/li>
 &lt;li>target_graph: 资源图&lt;/li>
 &lt;li>target_url: 资源地址&lt;/li>
-&lt;li>target_resources: 资源定义(列表)&lt;/li>
+&lt;li>target_resources: 资源定义 (列表)&lt;/li>
 &lt;/ul>
-&lt;p>target_resources可以包括多个target_resource，以列表的形式存储。&lt;br>
-每个target_resource包含：&lt;/p>
+&lt;p>target_resources 可以包括多个 target_resource，以列表的形式存储。&lt;br>
+每个 target_resource 包含：&lt;/p>
 &lt;ul>
-&lt;li>type：可选值 VERTEX, EDGE等, 可填ALL，则表示可以是顶点或边；&lt;/li>
+&lt;li>type：可选值 VERTEX, EDGE 等，可填 ALL，则表示可以是顶点或边；&lt;/li>
 &lt;li>label：可选值，⼀个顶点或边类型的名称，可填*，则表示任意类型；&lt;/li>
-&lt;li>properties：map类型，可包含多个属性的键值对，必须匹配所有属性值，属性值⽀持填条件范围（age:
-P.gte(18)），properties如果为null表示任意属性均可，如果属性名和属性值均为‘*ʼ也表示任意属性均可。&lt;/li>
+&lt;li>properties：map 类型，可包含多个属性的键值对，必须匹配所有属性值，属性值⽀持填条件范围（age:
+P.gte(18)），properties 如果为 null 表示任意属性均可，如果属性名和属性值均为‘*ʼ也表示任意属性均可。&lt;/li>
 &lt;/ul>
 &lt;p>如精细资源：&amp;ldquo;target_resources&amp;rdquo;: [{&amp;ldquo;type&amp;rdquo;:&amp;ldquo;VERTEX&amp;rdquo;,&amp;ldquo;label&amp;rdquo;:&amp;ldquo;person&amp;rdquo;,&amp;ldquo;properties&amp;rdquo;:{&amp;ldquo;city&amp;rdquo;:&amp;ldquo;Beijing&amp;rdquo;,&amp;ldquo;age&amp;rdquo;:&amp;ldquo;P.gte(20)&amp;rdquo;}}]**&lt;br>
-资源定义含义：类型是&amp;rsquo;person&amp;rsquo;的顶点，且城市属性是&amp;rsquo;Beijing&amp;rsquo;，年龄属性大于等于20。&lt;/p>
+资源定义含义：类型是&amp;rsquo;person&amp;rsquo;的顶点，且城市属性是&amp;rsquo;Beijing&amp;rsquo;，年龄属性大于等于 20。&lt;/p>
 &lt;h5 id="request-body-4">Request Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;target_name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;all&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -6089,7 +6095,7 @@ P.gte(18)），properties如果为null表示任意属性均可，如果属性名
 &lt;h5 id="method--url-13">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-5">Request Body&lt;/h5>
-&lt;p>修改资源定义中的type&lt;/p>
+&lt;p>修改资源定义中的 type&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;target_name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;gremlin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;target_graph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -6240,7 +6246,7 @@ P.gte(18)），properties如果为null表示任意属性均可，如果属性名
 &lt;h5 id="method--url-18">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss&amp;gt;-82&amp;gt;&amp;gt;S-69:grant
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-7">Request Body&lt;/h5>
-&lt;p>修改belong_description&lt;/p>
+&lt;p>修改 belong_description&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;belong_description&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;update test&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
@@ -6298,9 +6304,9 @@ P.gte(18)），properties如果为null表示任意属性均可，如果属性名
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;group&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;-69:all&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="106-赋权accessapi">10.6 赋权（Access）API&lt;/h3>
-&lt;p>给用户组赋予资源的权限，主要包含：读操作(READ)、写操作(WRITE)、删除操作(DELETE)、执行操作(EXECUTE)等。&lt;br>
+&lt;p>给用户组赋予资源的权限，主要包含：读操作 (READ)、写操作 (WRITE)、删除操作 (DELETE)、执行操作 (EXECUTE) 等。&lt;br>
 赋权接口包括：赋权的创建、删除、修改和查询。&lt;/p>
-&lt;h4 id="1061-创建赋权用户组赋予资源的权限">10.6.1 创建赋权(用户组赋予资源的权限)&lt;/h4>
+&lt;h4 id="1061-创建赋权-用户组赋予资源的权限">10.6.1 创建赋权 (用户组赋予资源的权限)&lt;/h4>
 &lt;h5 id="params-20">Params&lt;/h5>
 &lt;ul>
 &lt;li>group: 用户组 Id&lt;/li>
@@ -6310,10 +6316,10 @@ P.gte(18)），properties如果为null表示任意属性均可，如果属性名
 &lt;/ul>
 &lt;p>access_permission：&lt;/p>
 &lt;ul>
-&lt;li>READ：读操作，所有的查询，包括查询Schema、查顶点/边，查询顶点和边的数量VERTEX_AGGR/EDGE_AGGR，也包括读图的状态STATUS、变量VAR、任务TASK等；&lt;/li>
-&lt;li>WRITE：写操作，所有的创建、更新操作，包括给Schema增加property key，给顶点增加或更新属性等；&lt;/li>
+&lt;li>READ：读操作，所有的查询，包括查询 Schema、查顶点/边，查询顶点和边的数量 VERTEX_AGGR/EDGE_AGGR，也包括读图的状态 STATUS、变量 VAR、任务 TASK 等；&lt;/li>
+&lt;li>WRITE：写操作，所有的创建、更新操作，包括给 Schema 增加 property key，给顶点增加或更新属性等；&lt;/li>
 &lt;li>DELETE：删除操作，包括删除元数据、删除顶点/边；&lt;/li>
-&lt;li>EXECUTE：执⾏操作，包括执⾏Gremlin语句、执⾏Task、执⾏metadata函数；&lt;/li>
+&lt;li>EXECUTE：执⾏操作，包括执⾏ Gremlin 语句、执⾏ Task、执⾏ metadata 函数；&lt;/li>
 &lt;/ul>
 &lt;h5 id="request-body-8">Request Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
@@ -6355,7 +6361,7 @@ P.gte(18)），properties如果为null表示任意属性均可，如果属性名
 &lt;h5 id="method--url-23">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all&amp;gt;-88&amp;gt;12&amp;gt;S-77:all
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-9">Request Body&lt;/h5>
-&lt;p>修改access_description&lt;/p>
+&lt;p>修改 access_description&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;access_description&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;test&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>

@@ -1081,12 +1081,12 @@
 &lt;/tr>
 &lt;tr>
 &lt;td>rocksdb.data_path&lt;/td>
-&lt;td>rocksdb-data&lt;/td>
+&lt;td>rocksdb-data/data&lt;/td>
 &lt;td>The path for storing data of RocksDB.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>rocksdb.wal_path&lt;/td>
-&lt;td>rocksdb-data&lt;/td>
+&lt;td>rocksdb-data/wal&lt;/td>
 &lt;td>The path for storing WAL of RocksDB.&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -1501,7 +1501,8 @@
 &lt;/ul>
 &lt;/blockquote></description></item><item><title>Docs: HugeGraph 内置用户权限与扩展权限配置及使用</title><link>/cn/docs/config/config-authentication/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/config/config-authentication/</guid><description>
 &lt;h3 id="概述">概述&lt;/h3>
-&lt;p>HugeGraph 为了方便不同用户场景下的鉴权使用，目前内置了完备的&lt;code>StandardAuthenticator&lt;/code>权限模式，支持多用户认证、以及细粒度的权限访问控制，采用基于“用户 - 用户组 - 操作 - 资源”的 4 层设计，灵活控制用户角色与权限 (支持多 GraphServer)&lt;/p>
+&lt;p>HugeGraph 为了方便不同用户场景下的鉴权使用，目前内置了完备的&lt;code>StandardAuthenticator&lt;/code>权限模式，支持多用户认证、
+以及细粒度的权限访问控制，采用基于“用户 - 用户组 - 操作 - 资源”的 4 层设计，灵活控制用户角色与权限 (支持多 GraphServer)&lt;/p>
 &lt;p>&lt;code>StandardAuthenticator&lt;/code> 模式的几个核心设计：&lt;/p>
 &lt;ul>
 &lt;li>初始化时创建超级管理员 (&lt;code>admin&lt;/code>) 用户，后续通过超级管理员创建其它用户，新创建的用户被分配足够权限后，可以创建或管理更多的用户&lt;/li>
@@ -1513,7 +1514,9 @@
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// 场景：某用户只有北京地区的数据读取权限
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">user&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">name&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">xx&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">-&lt;/span>&lt;span style="color:#000">belong&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">-&amp;gt;&lt;/span> &lt;span style="color:#000">group&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">name&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">xx&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">-&lt;/span>&lt;span style="color:#000">access&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">read&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)-&amp;gt;&lt;/span> &lt;span style="color:#000">target&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">graph1&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">resource&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">={&lt;/span>&lt;span style="color:#000">label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000">person&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#000">city&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000">Beijing&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">})&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="配置用户认证">配置用户认证&lt;/h3>
-&lt;p>HugeGraph 默认&lt;strong>不启用&lt;/strong>用户认证功能，需通过修改配置文件来启用该功能。内置实现了&lt;code>StandardAuthenticator&lt;/code>模式，该模式支持多用户认证与细粒度权限控制。此外，开发者可以自定义实现&lt;code>HugeAuthenticator&lt;/code>接口来对接自身的权限系统。&lt;/p>
+&lt;p>HugeGraph 目前默认&lt;strong>未启用&lt;/strong>用户认证功能，需通过修改配置文件来启用该功能。(Note: 如果在生产环境/外网使用,
+请使用 &lt;strong>Java11&lt;/strong> 版本 + 开启权限避免安全相关隐患)&lt;/p>
+&lt;p>目前已内置实现了&lt;code>StandardAuthenticator&lt;/code>模式，该模式支持多用户认证与细粒度权限控制。此外，开发者可以自定义实现&lt;code>HugeAuthenticator&lt;/code>接口来对接自身的权限系统。&lt;/p>
 &lt;p>用户认证方式均采用 &lt;a href="https://zh.wikipedia.org/wiki/HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81">HTTP Basic Authentication&lt;/a> ，简单说就是在发送 HTTP 请求时在 &lt;code>Authentication&lt;/code> 设置选择 &lt;code>Basic&lt;/code> 然后输入对应的用户名和密码，对应 HTTP 明文如下所示 :&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-http" data-lang="http">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">Authorization: Basic admin xxxx
