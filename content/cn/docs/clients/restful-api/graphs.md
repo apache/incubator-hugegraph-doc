@@ -93,9 +93,10 @@ gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 backend=rocksdb
 serializer=binary
 store=hugegraph_clone
-rocksdb.data_path=./hg2
-rocksdb.wal_path=./hg2
+rocksdb.data_path=./rks-data-xx
+rocksdb.wal_path=./rks-data-xx
 ```
+> Note: 存储路径不能与现有图相同（使用不同的目录）
 
 ##### Response Status
 
@@ -117,7 +118,7 @@ rocksdb.wal_path=./hg2
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph2
+POST http://localhost:8080/graphs/hugegraph-xx
 ```
 
 ##### Request Body
@@ -127,9 +128,10 @@ gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 backend=rocksdb
 serializer=binary
 store=hugegraph2
-rocksdb.data_path=./hg2
-rocksdb.wal_path=./hg2
+rocksdb.data_path=./rks-data-xx
+rocksdb.wal_path=./rks-data-xx
 ```
+> Note: 存储路径不能与现有图相同（使用不同的目录）
 
 ##### Response Status
 

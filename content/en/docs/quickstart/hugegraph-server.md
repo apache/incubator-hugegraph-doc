@@ -16,7 +16,7 @@ The Core Module is an implementation of the Tinkerpop interface; The Backend mod
 
 #### 2.1 Install Java 11 (JDK 11)
 
-Consider use Java 11 to run `HugeGraph-Server` (also compatible with Java 8 now), and configure by yourself.
+Consider using Java 11 to run `HugeGraph-Server` (also compatible with Java 8 now), and configure by yourself.
 
 **Be sure to execute the `java -version` command to check the jdk version before reading**
 
@@ -31,7 +31,7 @@ There are four ways to deploy HugeGraph-Server components:
 
 #### 3.1 Use Docker container (Convenient for Test/Dev)
 
-<!-- 3.1 is linked by other place. if change 3.1's title, please check -->
+<!-- 3.1 is linked by another place. if change 3.1's title, please check -->
 You can refer to [Docker deployment guide](https://hub.docker.com/r/hugegraph/hugegraph).
 
 We can use `docker run -itd --name=graph -p 8080:8080 hugegraph/hugegraph` to quickly start an inner `HugeGraph server` with `RocksDB` in background.
@@ -171,7 +171,7 @@ for detailed configuration introduction, please refer to [configuration document
 
 #### 5.1 Use a startup script to startup
 
-The startup is divided into "first startup" and "non-first startup". This distinction is because the back-end database needs to be initialized before the first startup, and then the service is started.
+The startup is divided into "first startup" and "non-first startup." This distinction is because the back-end database needs to be initialized before the first startup, and then the service is started.
 after the service is stopped artificially, or when the service needs to be started again for other reasons, because the backend database is persistent, you can start the service directly.
 
 When HugeGraphServer starts, it will connect to the backend storage and try to check the version number of the backend storage. If the backend is not initialized or the backend has been initialized but the version does not match (old version data), HugeGraphServer will fail to start and give an error message.
@@ -181,7 +181,7 @@ If you need to access HugeGraphServer externally, please modify the `restserver.
 
 Since the configuration (hugegraph.properties) and startup steps required by various backends are slightly different, the following will introduce the configuration and startup of each backend one by one.
 
-If you want to use HugeGraph authentication mode, you should follow the [Server Authentication Configuration](https://hugegraph.apache.org/docs/config/config-authentication/) configuration before you start Server later.
+If you want to use HugeGraph authentication mode, you should follow the [Server Authentication Configuration](https://hugegraph.apache.org/docs/config/config-authentication/) before you start Server later.
 
 ##### 5.1.1 Memory
 
@@ -457,14 +457,14 @@ This indicates the successful creation of the sample graph.
 
 In [3.3 Use Docker container](#33-use-docker-container), we have introduced how to use docker to deploy `hugegraph-server`. `server` can also preload an example graph by setting the parameter.
 
-##### 5.2.1 Use Cassandra as the storage
+##### 5.2.1 Uses Cassandra as storage
 
 <details>
 <summary> Click to expand/collapse Cassandra configuration and startup methods</summary>
 
 When using Docker, we can use Cassandra as the backend storage. We highly recommend using docker-compose directly to manage both the server and Cassandra.
 
-The sample `docker-compose.yml` can be obtained on [github](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/docker/example/docker-compose-cassandra.yml), and you can start it with `docker-compose up -d`. (If using Cassandra 4.0 as the backend storage, it takes approximately two minutes to initialize. Please be patient.)
+The sample `docker-compose.yml` can be obtained on [GitHub](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/docker/example/docker-compose-cassandra.yml), and you can start it with `docker-compose up -d`. (If using Cassandra 4.0 as the backend storage, it takes approximately two minutes to initialize. Please be patient.)
 
 ```yaml
 version: "3"
@@ -558,11 +558,11 @@ And use the RESTful API to request `HugeGraphServer` and get the following resul
 This indicates the successful creation of the sample graph.
 
 
-### 6 Access server
+### 6. Access server
 
 #### 6.1 Service startup status check
 
-Use `jps` to see service process
+Use `jps` to see a service process
 
 ```bash
 jps

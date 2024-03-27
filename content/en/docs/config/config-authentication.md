@@ -24,7 +24,11 @@ user(name=xx) -belong-> group(name=xx) -access(read)-> target(graph=graph1, reso
 
 ### Configure User Authentication
 
-By default, HugeGraph does **not enable** user authentication. You need to modify the configuration file to enable this feature. HugeGraph provides built-in authentication mode: `StandardAuthenticator`. This mode supports multi-user authentication and fine-grained permission control. Additionally, developers can implement their own `HugeAuthenticator` interface to integrate with their existing authentication systems.
+By default, HugeGraph does **not enable** user authentication, and it needs to be enabled by 
+modifying the configuration file (Note: If used in a production environment or over the internet, 
+please use a **Java11** version and enable **auth-system** to avoid security risks.)" 
+
+You need to modify the configuration file to enable this feature. HugeGraph provides built-in authentication mode: `StandardAuthenticator`. This mode supports multi-user authentication and fine-grained permission control. Additionally, developers can implement their own `HugeAuthenticator` interface to integrate with their existing authentication systems.
 
 HugeGraph authentication modes adopt [HTTP Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication). In simple terms, when sending an HTTP request, you need to set the `Authentication` header to `Basic` and provide the corresponding username and password. The corresponding HTTP plaintext format is as follows:
 

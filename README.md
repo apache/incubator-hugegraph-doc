@@ -1,4 +1,4 @@
-## Introduction of HugeGraph
+## Build/Test/Contribute to website
 
 Please visit the [contribution doc](./contribution.md) to get start, include theme/website description & settings~
 

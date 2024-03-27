@@ -20,10 +20,6 @@ The graph management module realizes the unified management of multiple graphs a
 
 The metadata modeling module realizes the construction and management of graph models by creating attribute libraries, vertex types, edge types, and index types. The platform provides two modes, list mode and graph mode, which can display the metadata model in real time, which is more intuitive. At the same time, it also provides a metadata reuse function across graphs, which saves the tedious and repetitive creation process of the same metadata, greatly improves modeling efficiency and enhances ease of use.
 
-##### Data Import
-
-Data import is to convert the user's business data into the vertices and edges of the graph and insert it into the graph database. The platform provides a wizard-style visual import module. By creating import tasks, the management of import tasks and the parallel operation of multiple import tasks are realized. Improve import performance. After entering the import task, you only need to follow the platform step prompts, upload files as needed, and fill in the content to easily implement the import process of graph data. At the same time, it supports breakpoint resuming, error retry mechanism, etc., which reduces import costs and improves efficiency.
-
 ##### Graph Analysis
 
 By inputting the graph traversal language Gremlin, high-performance general analysis of graph data can be realized, and functions such as customized multidimensional path query of vertices can be provided, and three kinds of graph result display methods are provided, including: graph form, table form, Json form, and multidimensional display. The data form meets the needs of various scenarios used by users. It provides functions such as running records and collection of common statements, realizing the traceability of graph operations, and the reuse and sharing of query input, which is fast and efficient. It supports the export of graph data, and the export format is Json format.
@@ -31,6 +27,20 @@ By inputting the graph traversal language Gremlin, high-performance general anal
 ##### Task Management
 
 For Gremlin tasks that need to traverse the whole graph, index creation and reconstruction and other time-consuming asynchronous tasks, the platform provides corresponding task management functions to achieve unified management and result viewing of asynchronous tasks.
+
+##### Data Import
+
+> "Note: The data import function is currently suitable for preliminary use. For formal data import,
+> please use [hugegraph-loader](/docs/quickstart/hugegraph-loader), which has much better performance, stability, and functionality." 
+
+Data import is to convert the user's business data into the vertices and edges of the graph and 
+insert it into the graph database. The platform provides a wizard-style visual import module. 
+By creating import tasks, the management of import tasks and the parallel operation of multiple 
+import tasks are realized. Improve import performance. After entering the import task, you only 
+need to follow the platform step prompts, upload files as needed, and fill in the content to easily
+implement the import process of graph data. At the same time, it supports breakpoint resuming, 
+error retry mechanism, etc., which reduces import costs and improves efficiency.
+
 
 ### 2 Deploy
 
@@ -207,14 +217,14 @@ Left navigation:
 1. Fill in or select the attribute name, data type, and cardinality to complete the creation of the attribute.
 2. Created attributes can be used as attributes of vertex type and edge type.
 
-List mode：
+List mode:
 
 <center>
   <img src="/docs/images/images-hubble/3221属性创建.png" alt="image">
 </center>
 
 
-Graph mode：
+Graph mode:
 
 <center>
   <img src="/docs/images/images-hubble/3221属性创建2.png" alt="image">
@@ -359,7 +369,7 @@ Fill in the settings map:
   </center>
 
 
-Mapping list：
+Mapping list:
 
   <center>
     <img src="/docs/images/images-hubble/334设置映射2.png" alt="image">

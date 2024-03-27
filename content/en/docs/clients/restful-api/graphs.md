@@ -99,9 +99,11 @@ gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 backend=rocksdb
 serializer=binary
 store=hugegraph_clone
-rocksdb.data_path=./hg2
-rocksdb.wal_path=./hg2
+rocksdb.data_path=./rks-data-xx
+rocksdb.wal_path=./rks-data-xx
 ```
+
+> Note: the data/wal_path can't be the same as the existing graph (use separate directories)
 
 ##### Response Status
 
@@ -133,9 +135,11 @@ gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 backend=rocksdb
 serializer=binary
 store=hugegraph2
-rocksdb.data_path=./hg2
-rocksdb.wal_path=./hg2
+rocksdb.data_path=./rks-data-xx
+rocksdb.wal_path=./rks-data-xx
 ```
+
+> Note: the data/wal_path can't be the same as the existing graph (use separate directories)
 
 ##### Response Status
 
