@@ -5,6 +5,7 @@ weight: 3
 ---
 
 > Note: 这篇文档会持续更新。
+> 建议使用 Java11 验证测试，从 1.5.0 版本开始(除 client 外) 不再支持 Java8
 
 ## 验证阶段
 
@@ -103,11 +104,8 @@ for i in *.tar.gz; do echo $i; gpg --verify $i.asc $i ; done
 
 #### 4. 检查压缩包内容
 
-这里分源码包 + 二进制包两个方面，源码包更为严格，挑核心的部分说 
+这里检查准备工作下载的压缩包内容。分源码包 + 二进制包两个方面，源码包更为严格，挑核心的部分说 
 (完整的列表可参考官方 [Wiki](https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist), 比较长)
-
-首先我们需要从 apache 官方的 `release-candidate` 地址下载包到本地 (
-地址：[点击跳转](https://dist.apache.org/repos/dist/dev/incubator/hugegraph/))
 
 ##### A. 源码包
 
@@ -144,7 +142,7 @@ mvn clean package -P stage -Dmaven.test.skip=true -Dcheckstyle.skip=true
 bin/start-hugegraph.sh
 
 # hugegraph-loader
-bin/hugegraph-loader.sh -f path -g graph -s schema
+bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy
 
 # hugegraph-hubble
 bin/start-hubble.sh
