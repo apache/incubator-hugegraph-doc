@@ -96,11 +96,11 @@ PS: In the future, we will gradually upgrade the java version, **Java 11** -> **
 ### Release Details
 
 ### hugegraph-ai
-这是hugegraph-ai的第一个发布版本，包含了多种特性，其中包括初始化的Python客户端、通过LLM构建知识图谱的能力，以及基于HugeGraph的RAG（Retrieval-Augmented Generation）集成。此外，该版本还在python客户端方面增加了重要的功能，如变量API、认证（auth）、度量（metric）、遍历器（traverser）和任务API，以及使用Gradio创建交互式和可视化的演示。
+这是 hugegraph-ai 的第一个发布版本，包含了多种特性，其中包括初始化的 Python 客户端、通过 LLM 构建知识图谱的能力，以及基于 HugeGraph 的 RAG（Retrieval-Augmented Generation）集成。此外，该版本还在 python 客户端方面增加了重要的功能，如变量 API、认证（auth）、度量（metric）、遍历器（traverser）和任务 API，以及使用 Gradio 创建交互式和可视化的演示。
 
 除了这些新功能外，该版本还解决了多个错误和问题，确保了更加稳定和无误的用户体验。维护任务，如依赖更新、项目结构改进以及基本持续集成（CI）的添加，进一步增强了项目的健壮性和开发工作流程。
 
-这个版本的发布凝聚了HugeGraph社区的协作努力，感谢各位贡献者的付出。
+这个版本的发布凝聚了 HugeGraph 社区的协作努力，感谢各位贡献者的付出。
 
 #### Feature Changes
 feat: initialize hugegraph python client by @simon824 in https://github.com/apache/incubator-hugegraph-ai/pull/5
