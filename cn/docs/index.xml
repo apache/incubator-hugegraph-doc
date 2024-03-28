@@ -15317,52 +15317,77 @@ next release(1.5.0) when &lt;a href="https://github.com/apache/incubator-hugegra
 &lt;p>WIP: this doc is under construction, please wait for the final version (BETA)&lt;/p>
 &lt;/blockquote>
 &lt;ul>
-&lt;li>fix(core): task restore interrupt problem on restart server by @xiaoleizi2016 in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2401">https://github.com/apache/incubator-hugegraph/pull/2401&lt;/a>&lt;/li>
-&lt;li>chore: add license link by @caicancai in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2398">https://github.com/apache/incubator-hugegraph/pull/2398&lt;/a>&lt;/li>
-&lt;li>doc: enhance NOTICE info to keep it clear by @imbajin in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2409">https://github.com/apache/incubator-hugegraph/pull/2409&lt;/a>&lt;/li>
-&lt;li>feat: support docker use the auth when starting by @aroundabout in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2403">https://github.com/apache/incubator-hugegraph/pull/2403&lt;/a>&lt;/li>
-&lt;li>fix(server): reinitialize the progress to set up graph auth friendly by @Z-HUANT in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2411">https://github.com/apache/incubator-hugegraph/pull/2411&lt;/a>&lt;/li>
-&lt;li>fix(chore): remove zgc in dockerfile for ARM env by @aroundabout in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2421">https://github.com/apache/incubator-hugegraph/pull/2421&lt;/a>&lt;/li>
-&lt;li>chore(server): update swagger info for default server profile by @SunnyBoy-WYH in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2423">https://github.com/apache/incubator-hugegraph/pull/2423&lt;/a>&lt;/li>
-&lt;li>fix(server): make CacheManager constructor private to satisfy the singleton pattern by @Pengzna in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2432">https://github.com/apache/incubator-hugegraph/pull/2432&lt;/a>&lt;/li>
-&lt;li>fix(server): unify the license headers by @msgui in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2438">https://github.com/apache/incubator-hugegraph/pull/2438&lt;/a>&lt;/li>
-&lt;li>fix: format and clean code in dist and example modules by @msgui in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2441">https://github.com/apache/incubator-hugegraph/pull/2441&lt;/a>&lt;/li>
-&lt;li>fix: format and clean code in core module by @msgui in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2440">https://github.com/apache/incubator-hugegraph/pull/2440&lt;/a>&lt;/li>
-&lt;li>fix: format and clean code in modules by @msgui in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2439">https://github.com/apache/incubator-hugegraph/pull/2439&lt;/a>&lt;/li>
-&lt;li>fix(server): clean up the code by @msgui in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2456">https://github.com/apache/incubator-hugegraph/pull/2456&lt;/a>&lt;/li>
-&lt;li>fix(server): unify license header for protobuf file by @VGalaxies in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2448">https://github.com/apache/incubator-hugegraph/pull/2448&lt;/a>&lt;/li>
-&lt;li>chore: improve license header checker confs and pre-check header when validating by @VGalaxies in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2445">https://github.com/apache/incubator-hugegraph/pull/2445&lt;/a>&lt;/li>
-&lt;li>chore: unify to call SchemaLabel.getLabelId() by @javeme in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2458">https://github.com/apache/incubator-hugegraph/pull/2458&lt;/a>&lt;/li>
-&lt;li>fix(server): remove extra blank lines by @msgui in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2459">https://github.com/apache/incubator-hugegraph/pull/2459&lt;/a>&lt;/li>
-&lt;li>feat(api): optimize adjacent-edges query by @Z-HUANT in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2408">https://github.com/apache/incubator-hugegraph/pull/2408&lt;/a>&lt;/li>
-&lt;li>chore: refine the hg-style.xml specification by @returnToInnocence in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2457">https://github.com/apache/incubator-hugegraph/pull/2457&lt;/a>&lt;/li>
-&lt;li>chore: Add a newline formatting configuration and a comment for warning by @returnToInnocence in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2464">https://github.com/apache/incubator-hugegraph/pull/2464&lt;/a>&lt;/li>
-&lt;li>fix(server): add tip for gremlin api NPE with empty query by @SunnyBoy-WYH in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2467">https://github.com/apache/incubator-hugegraph/pull/2467&lt;/a>&lt;/li>
-&lt;li>fix(server):fix the metric name when promthus collect hugegraph metric,see issue by @SunnyBoy-WYH in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2462">https://github.com/apache/incubator-hugegraph/pull/2462&lt;/a>&lt;/li>
-&lt;li>fix(server): &lt;code>serverStarted&lt;/code> error when execute gremlin example by @VGalaxies in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2473">https://github.com/apache/incubator-hugegraph/pull/2473&lt;/a>&lt;/li>
-&lt;li>fix(auth): enhance the URL check by @zyxxoo in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2422">https://github.com/apache/incubator-hugegraph/pull/2422&lt;/a>&lt;/li>
-&lt;li>feat: added the OpenTelemetry trace support by @lynnbond in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2477">https://github.com/apache/incubator-hugegraph/pull/2477&lt;/a>&lt;/li>
-&lt;li>chore(server): clear context after req done by @SunnyBoy-WYH in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2470">https://github.com/apache/incubator-hugegraph/pull/2470&lt;/a>&lt;/li>
-&lt;li>refact(server): enhance the storage path in RocksDB &amp;amp; clean code by @imbajin in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2491">https://github.com/apache/incubator-hugegraph/pull/2491&lt;/a>&lt;/li>
+&lt;li>fix(core): task restore interrupt problem on restart server (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2401">#2401&lt;/a>)&lt;/li>
+&lt;li>chore: add license link (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2398">#2398&lt;/a>)&lt;/li>
+&lt;li>doc: enhance NOTICE info to keep it clear (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2409">#2409&lt;/a>)&lt;/li>
+&lt;li>feat: support docker use the auth when starting (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2403">#2403&lt;/a>)&lt;/li>
+&lt;li>fix(server): reinitialize the progress to set up graph auth friendly (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2411">#2411&lt;/a>)&lt;/li>
+&lt;li>fix(chore): remove zgc in dockerfile for ARM env (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2421">#2421&lt;/a>)&lt;/li>
+&lt;li>chore(server): update swagger info for default server profile (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2423">#2423&lt;/a>)&lt;/li>
+&lt;li>fix(server): make CacheManager constructor private to satisfy the singleton pattern (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2432">#2432&lt;/a>)&lt;/li>
+&lt;li>fix(server): unify the license headers (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2438">#2438&lt;/a>)&lt;/li>
+&lt;li>fix: format and clean code in dist and example modules (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2441">#2441&lt;/a>)&lt;/li>
+&lt;li>fix: format and clean code in core module (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2440">#2440&lt;/a>)&lt;/li>
+&lt;li>fix: format and clean code in modules (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2439">#2439&lt;/a>)&lt;/li>
+&lt;li>fix(server): clean up the code (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2456">#2456&lt;/a>)&lt;/li>
+&lt;li>fix(server): unify license header for protobuf file (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2448">#2448&lt;/a>)&lt;/li>
+&lt;li>chore: improve license header checker confs and pre-check header when validating (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2445">#2445&lt;/a>)&lt;/li>
+&lt;li>chore: unify to call SchemaLabel.getLabelId() (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2458">#2458&lt;/a>)&lt;/li>
+&lt;li>fix(server): remove extra blank lines (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2459">#2459&lt;/a>)&lt;/li>
+&lt;li>feat(api): optimize adjacent-edges query (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2408">#2408&lt;/a>)&lt;/li>
+&lt;li>chore: refine the hg-style.xml specification (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2457">#2457&lt;/a>)&lt;/li>
+&lt;li>chore: Add a newline formatting configuration and a comment for warning (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2464">#2464&lt;/a>)&lt;/li>
+&lt;li>fix(server): add tip for gremlin api NPE with empty query (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2467">#2467&lt;/a>)&lt;/li>
+&lt;li>fix(server):fix the metric name when promthus collect hugegraph metric,see issue (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2462">#2462&lt;/a>)&lt;/li>
+&lt;li>fix(server): &lt;code>serverStarted&lt;/code> error when execute gremlin example (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2473">#2473&lt;/a>)&lt;/li>
+&lt;li>fix(auth): enhance the URL check (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2422">#2422&lt;/a>)&lt;/li>
+&lt;li>feat: added the OpenTelemetry trace support (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2477">#2477&lt;/a>)&lt;/li>
+&lt;li>chore(server): clear context after req done (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2470">#2470&lt;/a>)&lt;/li>
+&lt;li>refact(server): enhance the storage path in RocksDB &amp;amp; clean code (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2491">#2491&lt;/a>)&lt;/li>
 &lt;/ul>
 &lt;h4 id="api-changes">API Changes&lt;/h4>
 &lt;h4 id="feature-changes">Feature Changes&lt;/h4>
 &lt;h4 id="bug-fix">Bug Fix&lt;/h4>
 &lt;h4 id="option-changes">Option Changes&lt;/h4>
 &lt;h4 id="other-changes">Other Changes&lt;/h4>
-&lt;h4 id="bug-fix-1">Bug Fix&lt;/h4>
-&lt;h4 id="option-changes-1">Option Changes&lt;/h4>
-&lt;h4 id="other-changes-1">Other Changes&lt;/h4>
 &lt;h3 id="hugegraph-toolchain">hugegraph-toolchain&lt;/h3>
 &lt;h4 id="api-changes-1">API Changes&lt;/h4>
 &lt;h4 id="feature-changes-1">Feature Changes&lt;/h4>
-&lt;h4 id="bug-fix-2">Bug Fix&lt;/h4>
-&lt;h4 id="option-changes-2">Option Changes&lt;/h4>
-&lt;h4 id="other-changes-2">Other Changes&lt;/h4>
+&lt;ul>
+&lt;li>fix(loader): update shade plugin for spark loader (&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/566">#566&lt;/a>)&lt;/li>
+&lt;li>fix(hubble): yarn install timeout in arm64 (&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/583">#583&lt;/a>)&lt;/li>
+&lt;li>fix(loader): support file name with prefix for hdfs source (&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/571">#571&lt;/a>)&lt;/li>
+&lt;li>feat(hubble): warp the exception info in HugeClientUtil (&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/589">#589&lt;/a>)&lt;/li>
+&lt;/ul>
+&lt;h4 id="bug-fix-1">Bug Fix&lt;/h4>
+&lt;ul>
+&lt;li>fix: concurrency issue causing file overwrite due to identical filenames (&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/572">#572&lt;/a>)&lt;/li>
+&lt;/ul>
+&lt;h4 id="option-changes-1">Option Changes&lt;/h4>
+&lt;ul>
+&lt;li>feat(client): support user defined OKHTTPClient configs (&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/590">#590&lt;/a>)&lt;/li>
+&lt;li>&lt;/li>
+&lt;/ul>
+&lt;h4 id="other-changes-1">Other Changes&lt;/h4>
+&lt;ul>
+&lt;li>doc: update copyright date(year) in NOTICE (&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/567">#567&lt;/a>)&lt;/li>
+&lt;li>chore(deps): bump ip from 1.1.5 to 1.1.9 in /hugegraph-hubble/hubble-fe (&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/580">#580&lt;/a>)&lt;/li>
+&lt;li>refactor(hubble): enhance maven front plugin (&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/568">#568&lt;/a>)&lt;/li>
+&lt;li>chore(deps): bump es5-ext from 0.10.53 to 0.10.63 in /hugegraph-hubble/hubble-fe (&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/582">#582&lt;/a>)&lt;/li>
+&lt;li>chore(hubble): Enhance code style in hubble (&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/592">#592&lt;/a>)&lt;/li>
+&lt;li>chore: upgrade version to 1.3.0 (&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/596">#596&lt;/a>)&lt;/li>
+&lt;li>chore(ci): update profile commit id for 1.3 (&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/597">#597&lt;/a>)&lt;/li>
+&lt;/ul>
 &lt;h3 id="hugegraph-commons">hugegraph-commons&lt;/h3>
 &lt;h4 id="feature-changes-2">Feature Changes&lt;/h4>
-&lt;h4 id="bug-fix-3">Bug Fix&lt;/h4>
-&lt;h4 id="other-changes-3">Other Changes&lt;/h4>
+&lt;ul>
+&lt;li>feat: support user defined RestClientConfig/HTTPClient params (&lt;a href="https://github.com/apache/incubator-hugegraph-commons/pull/140">#140&lt;/a>)&lt;/li>
+&lt;/ul>
+&lt;h4 id="bug-fix-2">Bug Fix&lt;/h4>
+&lt;h4 id="other-changes-2">Other Changes&lt;/h4>
+&lt;ul>
+&lt;li>chore: disable clean flatten for deploy (&lt;a href="https://github.com/apache/incubator-hugegraph-commons/pull/141">#141&lt;/a>)&lt;/li>
+&lt;/ul>
 &lt;h3 id="release-details">Release Details&lt;/h3>
 &lt;p>Please check the release details in each repository:&lt;/p>
 &lt;ul>
