@@ -1,18 +1,18 @@
 ---
 title: "HugeGraph 1.2.0 Release Notes"
 linkTitle: "Release-1.2.0"
-weight: 10
+weight: 3
 ---
 
 ### Java version statement
 
-Note 1.2.0: 
-1. hugegraph, hugegraph-toolchain, hugegraph-commons consider use Java 11, also compatible with Java 8 now. 
+> In the future, we will gradually upgrade the java version, **Java 11** -> **Java 17** -> **Java 21**.
+
+1. Consider using Java 11 in hugegraph/hugegraph-toolchain/hugegraph-commons, also compatible with Java 8 now. 
 2. hugegraph-computer required to use Java 11, **not compatible with Java 8 now!**
 
-**v1.2.0 是最后第二个兼容 Java8 的大版本**, 到 1.5.0 [PD/Store](https://github.com/apache/incubator-hugegraph/issues/2265) 正式合入 master 后标志着 Java8 兼容的正式终结 (除 Client 外所有组件都将以 Java 11 作为基准，然后迈向 Java17).
-
-In the future, we will gradually upgrade the java version, **Java 11** -> **Java 17** -> **Java 21**.
+**v1.2.0 是倒数第二个兼容 Java8 的大版本**, 到 1.5.0 [PD/Store](https://github.com/apache/incubator-hugegraph/issues/2265) 正式合入 master 
+后标志着 Java8 兼容的正式终结 (除 Client 外所有组件都将以 Java 11 作为基准，然后逐步迈向 Java17/21).
 
 ### hugegraph
 

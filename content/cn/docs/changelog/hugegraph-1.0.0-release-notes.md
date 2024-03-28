@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph 1.0.0 Release Notes"
 linkTitle: "Release-1.0.0"
-weight: 11
+weight: 2
 ---
 
 ### OLTP API & Client 更新
@@ -19,11 +19,11 @@ weight: 11
 #### 功能更新
 
 - 支持 Java 11 版本。
-- 支持 2 个新的 OLTP 算法： adamic-adar 和 resource-allocation。
+- 支持 2 个新的 OLTP 算法：adamic-adar 和 resource-allocation。
 - 支持 HBase 后端使用哈希 RowKey，并且允许预初始化 HBase 表。
 - 支持 Cypher 图查询语言。
 - 支持集群 Master 角色的自动管理与故障转移。
-- 支持 16 个 OLAP 算法, 包括：LPA, Louvain, PageRank, BetweennessCentrality, RingsDetect等。
+- 支持 16 个 OLAP 算法，包括：LPA, Louvain, PageRank, BetweennessCentrality, RingsDetect 等。
 - 根据 Apache 基金会对项目的发版要求进行适配，包括 License 合规性、发版流程、代码风格等，支持 Apache 版本发布。
 
 #### Bug 修复
@@ -149,7 +149,7 @@ weight: 11
 - 解决 Loader 的 Json 反序列化问题。
 - 解决 Loader 的 Jackson 版本冲突与依赖问题。
 - 支持 Hubble 高级算法接口的 UI 界面。
-- 支持 Hubble 中 Gremlin 语句的高亮格式显示.
+- 支持 Hubble 中 Gremlin 语句的高亮格式显示。
 - 支持 Hubble 使用 Docker 镜像部署。
 - 支持  输出构建日志。
 - 解决 Hubble 的端口输入框问题。
