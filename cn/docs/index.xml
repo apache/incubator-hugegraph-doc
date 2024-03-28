@@ -15389,6 +15389,33 @@ next release(1.5.0) when &lt;a href="https://github.com/apache/incubator-hugegra
 &lt;li>chore: disable clean flatten for deploy (&lt;a href="https://github.com/apache/incubator-hugegraph-commons/pull/141">#141&lt;/a>)&lt;/li>
 &lt;/ul>
 &lt;h3 id="release-details">Release Details&lt;/h3>
+&lt;h3 id="hugegraph-ai">hugegraph-ai&lt;/h3>
+&lt;p>这是 hugegraph-ai 的第一个发布版本，包含了多种特性，其中包括初始化的 Python 客户端、通过 LLM 构建知识图谱的能力，以及基于 HugeGraph 的 RAG（Retrieval-Augmented Generation）集成。此外，该版本还在 python 客户端方面增加了重要的功能，如变量 API、认证（auth）、度量（metric）、遍历器（traverser）和任务 API，以及使用 Gradio 创建交互式和可视化的演示。&lt;/p>
+&lt;p>除了这些新功能外，该版本还解决了多个错误和问题，确保了更加稳定和无误的用户体验。维护任务，如依赖更新、项目结构改进以及基本持续集成（CI）的添加，进一步增强了项目的健壮性和开发工作流程。&lt;/p>
+&lt;p>这个版本的发布凝聚了 HugeGraph 社区的协作努力，感谢各位贡献者的付出。&lt;/p>
+&lt;h4 id="feature-changes-3">Feature Changes&lt;/h4>
+&lt;p>feat: initialize hugegraph python client by @simon824 in &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/5">https://github.com/apache/incubator-hugegraph-ai/pull/5&lt;/a>
+feat(llm): knowledge graph construction by llm by @Zony7 in &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/7">https://github.com/apache/incubator-hugegraph-ai/pull/7&lt;/a>
+feat: initialize rag based on HugeGraph by @Ling-Yuchen in &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/20">https://github.com/apache/incubator-hugegraph-ai/pull/20&lt;/a>
+feat(client): add variables api and test by @liuxiaocs7 in &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/24">https://github.com/apache/incubator-hugegraph-ai/pull/24&lt;/a>
+feat: add llm wenxinyiyan &amp;amp; config util &amp;amp; spo_triple_extract by @simon824 in &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/27">https://github.com/apache/incubator-hugegraph-ai/pull/27&lt;/a>
+feat: add auth&amp;amp;metric&amp;amp;traverser&amp;amp;task api and ut by @simon824 in &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/28">https://github.com/apache/incubator-hugegraph-ai/pull/28&lt;/a>
+feat: refactor construct knowledge graph task by @simon824 in &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/29">https://github.com/apache/incubator-hugegraph-ai/pull/29&lt;/a>
+feat: Introduce gradio for creating interactive and visual demo by @simon824 in &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/30">https://github.com/apache/incubator-hugegraph-ai/pull/30&lt;/a>&lt;/p>
+&lt;h4 id="bug-fix-3">Bug Fix&lt;/h4>
+&lt;p>fix invalid github label by @simon824 in &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/3">https://github.com/apache/incubator-hugegraph-ai/pull/3&lt;/a>
+fix: import error by @Zony7 in &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/13">https://github.com/apache/incubator-hugegraph-ai/pull/13&lt;/a>
+[fix] function getEdgeByPage(): the generated query url does not include the parameter page by @chenlixuan in &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/15">https://github.com/apache/incubator-hugegraph-ai/pull/15&lt;/a>
+fix: issue template by @Radeity in &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/23">https://github.com/apache/incubator-hugegraph-ai/pull/23&lt;/a>
+fix: base-ref/head-ref missed in dependency-check-ci on branch push by @liuxiaocs7 in &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/25">https://github.com/apache/incubator-hugegraph-ai/pull/25&lt;/a>&lt;/p>
+&lt;h4 id="other-changes-3">Other Changes&lt;/h4>
+&lt;p>chore: add asf.yaml and ISSUE_TEMPLATE by @simon824 in &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/1">https://github.com/apache/incubator-hugegraph-ai/pull/1&lt;/a>
+Bump urllib3 from 2.0.3 to 2.0.7 in /hugegraph-python by @dependabot in &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/8">https://github.com/apache/incubator-hugegraph-ai/pull/8&lt;/a>
+chore: create .gitignore file for py by @imbajin in &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/9">https://github.com/apache/incubator-hugegraph-ai/pull/9&lt;/a>
+refact: improve project structure &amp;amp; add some basic CI by @simon824 in &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/17">https://github.com/apache/incubator-hugegraph-ai/pull/17&lt;/a>
+chore: Update LICENSE and NOTICE by @simon824 in &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/31">https://github.com/apache/incubator-hugegraph-ai/pull/31&lt;/a>
+chore: add release scripts by @JackyYangPassion in &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/33">https://github.com/apache/incubator-hugegraph-ai/pull/33&lt;/a>
+chang file chmod 755 by @JackyYangPassion in &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/34">https://github.com/apache/incubator-hugegraph-ai/pull/34&lt;/a>&lt;/p>
 &lt;p>Please check the release details in each repository:&lt;/p>
 &lt;ul>
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph/releases">Server Release Notes&lt;/a>&lt;/li>
