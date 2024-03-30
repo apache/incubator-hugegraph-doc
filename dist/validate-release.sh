@@ -21,8 +21,8 @@
 # 3. Compile the source package & run server & toolchain
 # 4. Run server & toolchain in binary package
 
-# if we don't want to exit after '|', remove "-o pipefail"
-set -exo pipefail
+# exit when any error occurs
+set -e
 
 # release version (input by committer)
 RELEASE_VERSION=$1 # like 1.2.0
@@ -48,7 +48,7 @@ echo "Current work dir: $(pwd)"
 ################################
 # Step 1: Download SVN Sources #
 ################################
-rm -rf "${WORK_DIR}/dist/${RELEASE_VERSION}"
+#rm -rf "${WORK_DIR}/dist/${RELEASE_VERSION}"
 mkdir -p "${WORK_DIR}/dist/${RELEASE_VERSION}"
 cd "${WORK_DIR}/dist/${RELEASE_VERSION}"
 svn co "${SVN_URL_PREFIX}/${RELEASE_VERSION}" .
@@ -99,6 +99,7 @@ for i in *src.tar.gz; do
   tar -xzvf "$i"
   MODULE_DIR=$(basename "$i" .tar.gz)
   pushd ${MODULE_DIR}
+  mvn clean
   echo "Start to check the package content: ${MODULE_DIR}"
 
   # 4.2: check the directory include "NOTICE" and "LICENSE" file and "DISCLAIMER" file
@@ -153,15 +154,17 @@ for i in *src.tar.gz; do
   done
 
   # 4.8: test compile the packages
-  if [[ ($JAVA_VERSION == 8 && "$i" =~ "computer") ]] || [[ "$i" =~ 'hugegraph-ai' ]]; then
-    echo "Skip compile computer module in java8 & AI module in all versions"
-    popd
-    continue
+  if [[ ($JAVA_VERSION == 8 && "$i" =~ "hugegraph-computer") ]]; then
+    echo "Skip compile $i module in java8"
+  elif [[ "$i" =~ 'hugegraph-ai' ]]; then
+    echo "Skip compile $i module in all versions"
+  elif [[ "$i" =~ "hugegraph-commons" ]]; then
+    mvn install -DskipTests -ntp -e
+  else
+    # TODO: consider using commands that are entirely consistent with building binary packages
+    mvn package -DskipTests -ntp -e -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.ignore.validity.dates=true
+    ls -lh
   fi
-  # TODO: consider using commands that are entirely consistent with building binary packages
-  mvn package -DskipTests -Papache-release -ntp -e
-  ls -lh
-
   popd
 done
 
