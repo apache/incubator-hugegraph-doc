@@ -96,10 +96,10 @@ for i in *src.tar.gz; do
     echo "The package name $i should include incubating" && exit 1
   fi
 
-  tar -xzvf "$i"
   MODULE_DIR=$(basename "$i" .tar.gz)
+  rm -rf ${MODULE_DIR}
+  tar -xzvf "$i"
   pushd ${MODULE_DIR}
-  mvn clean
   echo "Start to check the package content: ${MODULE_DIR}"
 
   # 4.2: check the directory include "NOTICE" and "LICENSE" file and "DISCLAIMER" file
@@ -243,8 +243,9 @@ for i in *.tar.gz; do
     echo "The package name $i should include incubating" && exit 1
   fi
 
-  tar -xzvf "$i"
   MODULE_DIR=$(basename "$i" .tar.gz)
+  rm -rf ${MODULE_DIR}
+  tar -xzvf "$i"
   pushd ${MODULE_DIR}
   ls -lh
   echo "Start to check the package content: ${MODULE_DIR}"
