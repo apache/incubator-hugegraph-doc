@@ -48,7 +48,7 @@ echo "Current work dir: $(pwd)"
 ################################
 # Step 1: Download SVN Sources #
 ################################
-#rm -rf "${WORK_DIR}/dist/${RELEASE_VERSION}"
+rm -rf "${WORK_DIR}/dist/${RELEASE_VERSION}"
 mkdir -p "${WORK_DIR}/dist/${RELEASE_VERSION}"
 cd "${WORK_DIR}/dist/${RELEASE_VERSION}"
 svn co "${SVN_URL_PREFIX}/${RELEASE_VERSION}" .
@@ -159,10 +159,10 @@ for i in *src.tar.gz; do
   elif [[ "$i" =~ 'hugegraph-ai' ]]; then
     echo "Skip compile $i module in all versions"
   elif [[ "$i" =~ "hugegraph-commons" ]]; then
-    mvn install -DskipTests -ntp -e
+    mvn install -DskipTests -Papache-release -ntp -e
   else
     # TODO: consider using commands that are entirely consistent with building binary packages
-    mvn package -DskipTests -ntp -e -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.ignore.validity.dates=true
+    mvn package -DskipTests -Papache-release -ntp -e
     ls -lh
   fi
   popd
