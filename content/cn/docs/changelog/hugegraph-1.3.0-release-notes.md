@@ -12,7 +12,7 @@ weight: 4
 **1.3.0** is the last major version compatible with **Java 8**, compatibility with Java 8 will end in 
 next release(1.5.0) when [PD/Store](https://github.com/apache/incubator-hugegraph/issues/2265) merged into master branch (Except for the `java-client`).
 
-PS: In the future, we will gradually upgrade the java version, **Java 11** -> **Java 17** -> **Java 21**.
+PS: In the future, we will gradually upgrade the java version from `Java 11 -> Java 17 -> Java 21.`
 
 > WIP: this doc is under construction, please wait for the final version (BETA) 
 

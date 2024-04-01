@@ -10,21 +10,28 @@ weight: 1
 
 The Core Module is an implementation of the Tinkerpop interface; The Backend module is used to save the graph data to the data store, currently supported backends include: Memory, Cassandra, ScyllaDB, RocksDB; The API Module provides HTTP Server, which converts Client's HTTP request into a call to Core Module.
 
-> There will be two spellings HugeGraph-Server and HugeGraphServer in the document, and other modules are similar. There is no big difference in the meaning of these two ways of writing, which can be distinguished as follows: `HugeGraph-Server` represents the code of server-related components, `HugeGraphServer` represents the service process.
+> There will be two spellings HugeGraph-Server and HugeGraphServer in the document, and other 
+> modules are similar. There is no big difference in the meaning of these two ways, 
+> which can be distinguished as follows: `HugeGraph-Server` represents the code of server-related 
+> components, `HugeGraphServer` represents the service process.
 
 ### 2 Dependency for Building/Running
 
 #### 2.1 Install Java 11 (JDK 11)
 
-Consider using Java 11 to run `HugeGraph-Server` (also compatible with Java 8 now), and configure by yourself.
+Consider using Java 11 to run `HugeGraph-Server` (compatible with Java 8 before 1.5.0), 
+and configure by yourself.
 
 **Be sure to execute the `java -version` command to check the jdk version before reading**
+
+> Note: Using Java8 will lose some security guarantees, we recommend using Java11 in production or 
+> environments exposed to the public network and enable [Auth authentication](/docs/config/config-authentication/).
 
 ### 3 Deploy
 
 There are four ways to deploy HugeGraph-Server components:
 
-- Method 1 Use Docker container (Convenient for Test/Dev)
+- Method 1: Use Docker container (Convenient for Test/Dev)
 - Method 2: Download the binary tarball
 - Method 3: Source code compilation
 - Method 4: One-click deployment
@@ -67,7 +74,7 @@ services:
 >
 > 1. The docker image of hugegraph is a convenience release to start hugegraph quickly, but not **official distribution** artifacts. You can find more details from [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub).
 > 
-> 2. Recommand to use `release tag`(like `1.2.0`) for the stable version. Use `latest` tag to experience the newest functions in development.
+> 2. Recommend to use `release tag`(like `1.2.0`) for the stable version. Use `latest` tag to experience the newest functions in development.
 
 #### 3.2 Download the binary tar tarball
 
@@ -106,6 +113,7 @@ Compile and generate tarball
 
 ```bash
 cd *hugegraph
+# (Optional) use "-P stage" param if you build failed with the latest code(during pre-release period)
 mvn package -DskipTests -ntp
 ```
 

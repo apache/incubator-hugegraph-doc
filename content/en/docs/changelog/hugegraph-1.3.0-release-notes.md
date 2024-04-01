@@ -10,10 +10,11 @@ weight: 4
 2. `hugegraph-computer` required to use Java 11, **not compatible with Java 8!**
 3. Using Java8 may loss some security ensured, we recommend using Java 11 in **production env** with [AuthSystem](/docs/config/config-authentication/) enabled.
 
-**1.3.0** is the last major version compatible with **Java 8**, compatibility with Java 8 will end in 
-next release(1.5.0) when [PD/Store](https://github.com/apache/incubator-hugegraph/issues/2265) merged into master branch (Except for the `java-client`).
+**1.3.0** is the **last major** version compatible with **Java 8**, compatibility with Java 8 will end in 
+next release(1.5.0) when [PD/Store](https://github.com/apache/hugegraph/issues/2265) merged into 
+master branch (Except for the `java-client`).
 
-PS: In the future, we will gradually upgrade the java version, **Java 11** -> **Java 17** -> **Java 21**.
+PS: In the future, we will gradually upgrade the java version from `Java 11 -> Java 17 -> Java 21.`
 
 > WIP: this doc is under construction, please wait for the final version (BETA) 
 
