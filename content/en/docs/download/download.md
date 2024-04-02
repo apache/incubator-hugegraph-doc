@@ -13,7 +13,7 @@ The latest HugeGraph: **1.3.0**, released on _2024-04-01_([how to build from sou
 | HugeGraph-Server    | The main program of HugeGraph                                                      | [1.3.0](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz)([alternate](https://dlcdn.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz))                     |
 | HugeGraph-Toolchain | A collection of tools for graph data import/export/backup, web visualization, etc. | [1.3.0](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz)([alternate](https://dlcdn.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz)) |
 
-> Note: The version numbers of all components of HugeGraph have been kept consistent, and the version numbers of Maven repositories such as client/loader/hubble/common are the same. You can refer to these for dependency references[maven example](https://github.com/apache/incubator-hugegraph-computer/blob/master/pom.xml)
+> Note: The version numbers of all components of HugeGraph have been kept consistent, and the version numbers of Maven repositories such as client/loader/hubble/common are the same. You can refer to these for dependency references[maven example](https://github.com/apache/incubator-hugegraph-toolchain#maven-dependencies)
 
 ### Binary Versions mapping
 

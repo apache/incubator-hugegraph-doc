@@ -13,7 +13,7 @@ The latest HugeGraph: **1.3.0**, released on _2024-04-01_([how to build from sou
 | HugeGraph-Server    | HugeGraph 的主程序                               | [1.3.0](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz)([备用](https://dlcdn.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz))                     |
 | HugeGraph-Toolchain | 数据导入/导出/备份, Web 可视化图形界面等工具合集 | [1.3.0](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz)([备用](https://dlcdn.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz)) |
 
-> 注: HugeGraph 所有组件版本号已保持一致, `client/loader/hubble/common` 等 maven 仓库版本号同理, 依赖引用可参考[maven 示例](https://github.com/apache/incubator-hugegraph-computer/blob/master/pom.xml)
+> 注: HugeGraph 所有组件版本号已保持一致, `client/loader/hubble/common` 等 maven 仓库版本号同理, 依赖引用可参考[maven 示例](https://github.com/apache/incubator-hugegraph-toolchain#maven-dependencies)
 
 ### Binary Versions mapping
 
