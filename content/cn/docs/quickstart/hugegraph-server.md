@@ -71,12 +71,12 @@ services:
 > 
 > 1. hugegraph 的 docker 镜像是一个便捷版本，用于快速启动 hugegraph，并不是**官方发布物料包方式**。你可以从 [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub) 中得到更多细节。
 >
-> 2. 推荐使用 `release tag`(如 `1.2.0`) 以获取稳定版。使用 `latest` tag 可以使用开发中的最新功能。
+> 2. 推荐使用 `release tag`(如 `1.3.0`) 以获取稳定版。使用 `latest` tag 可以使用开发中的最新功能。
 
 #### 3.2 下载 tar 包
 
 ```bash
-# use the latest version, here is 1.2.0 for example
+# use the latest version, here is 1.3.0 for example
 wget https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph-incubating-{version}.tar.gz
 tar zxf *hugegraph*.tar.gz
 ```
@@ -102,7 +102,7 @@ mvn package -DskipTests
 
 ```bash
 ......
-[INFO] Reactor Summary for hugegraph 1.2.0:
+[INFO] Reactor Summary for hugegraph 1.3.0:
 [INFO] 
 [INFO] hugegraph .......................................... SUCCESS [  2.405 s]
 [INFO] hugegraph-core ..................................... SUCCESS [ 13.405 s]
@@ -130,8 +130,8 @@ mvn package -DskipTests
 HugeGraph-Tools 提供了一键部署的命令行工具，用户可以使用该工具快速地一键下载、解压、配置并启动 HugeGraph-Server 和 HugeGraph-Hubble，最新的 HugeGraph-Toolchain 中已经包含所有的这些工具，直接下载它解压就有工具包集合了
 
 ```bash
-# download toolchain package, it includes loader + tool + hubble, please check the latest version (here is 1.2.0)
-wget https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-toolchain-incubating-1.2.0.tar.gz
+# download toolchain package, it includes loader + tool + hubble, please check the latest version (here is 1.3.0)
+wget https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz
 tar zxf *hugegraph-*.tar.gz
 # enter the tool's package
 cd *hugegraph*/*tool* 
