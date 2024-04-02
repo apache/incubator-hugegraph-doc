@@ -20,6 +20,9 @@ PS: In the future, we will gradually upgrade the java version from `Java 11 -> J
 
 ### hugegraph
 
+> In this version, we have fixed some SEC-related issues. If used in an online service or exposed to 
+> the public, please upgrade to the latest version and enable authorization authentication
+
 #### API Changes
 
 * feat(api): optimize adjacent-edges query ([#2408](https://github.com/apache/incubator-hugegraph/pull/2408))
