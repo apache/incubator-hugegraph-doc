@@ -43,7 +43,7 @@ Apache versions.
 Note:
 
 1. Please migrate to the latest release version as soon as possible. The community will no longer maintain old versions before `1.0.0` (non ASF versions)
-2. `1.3.0` is the last major version compatible with `Java8`, please migrate the runtime as soon as possible ≥ `Java11`
+2. `1.3.0` is the last major version compatible with `Java8`, please switch to or migrate to `Java11` as soon as possible (lower versions of Java have potentially more SEC risks and performance impacts).
    
 | server                                                                                                    | client                                                                                 | loader                                                                                                           | hubble                                                                                                             | common                                                                                   | tools                                                                                                       |
 |-----------------------------------------------------------------------------------------------------------| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
