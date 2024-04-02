@@ -3,16 +3,24 @@
 &lt;p>&lt;code>HugeGraph-Server&lt;/code> is the core part of the HugeGraph Project, contains submodules such as Core, Backend, API.&lt;/p>
 &lt;p>The Core Module is an implementation of the Tinkerpop interface; The Backend module is used to save the graph data to the data store, currently supported backends include: Memory, Cassandra, ScyllaDB, RocksDB; The API Module provides HTTP Server, which converts Client&amp;rsquo;s HTTP request into a call to Core Module.&lt;/p>
 &lt;blockquote>
-&lt;p>There will be two spellings HugeGraph-Server and HugeGraphServer in the document, and other modules are similar. There is no big difference in the meaning of these two ways of writing, which can be distinguished as follows: &lt;code>HugeGraph-Server&lt;/code> represents the code of server-related components, &lt;code>HugeGraphServer&lt;/code> represents the service process.&lt;/p>
+&lt;p>There will be two spellings HugeGraph-Server and HugeGraphServer in the document, and other
+modules are similar. There is no big difference in the meaning of these two ways,
+which can be distinguished as follows: &lt;code>HugeGraph-Server&lt;/code> represents the code of server-related
+components, &lt;code>HugeGraphServer&lt;/code> represents the service process.&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="2-dependency-for-buildingrunning">2 Dependency for Building/Running&lt;/h3>
 &lt;h4 id="21-install-java-11-jdk-11">2.1 Install Java 11 (JDK 11)&lt;/h4>
-&lt;p>Consider using Java 11 to run &lt;code>HugeGraph-Server&lt;/code> (also compatible with Java 8 now), and configure by yourself.&lt;/p>
+&lt;p>Consider using Java 11 to run &lt;code>HugeGraph-Server&lt;/code> (compatible with Java 8 before 1.5.0),
+and configure by yourself.&lt;/p>
 &lt;p>&lt;strong>Be sure to execute the &lt;code>java -version&lt;/code> command to check the jdk version before reading&lt;/strong>&lt;/p>
+&lt;blockquote>
+&lt;p>Note: Using Java8 will lose some security guarantees, we recommend using Java11 in production or&lt;/p>
+&lt;p>environments exposed to the public network and enable &lt;a href="/docs/config/config-authentication/">Auth authentication&lt;/a>.&lt;/p>
+&lt;/blockquote>
 &lt;h3 id="3-deploy">3 Deploy&lt;/h3>
 &lt;p>There are four ways to deploy HugeGraph-Server components:&lt;/p>
 &lt;ul>
-&lt;li>Method 1 Use Docker container (Convenient for Test/Dev)&lt;/li>
+&lt;li>Method 1: Use Docker container (Convenient for Test/Dev)&lt;/li>
 &lt;li>Method 2: Download the binary tarball&lt;/li>
 &lt;li>Method 3: Source code compilation&lt;/li>
 &lt;li>Method 4: One-click deployment&lt;/li>
@@ -83,6 +91,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph.git
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Compile and generate tarball&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># (Optional) use &amp;#34;-P stage&amp;#34; param if you build failed with the latest code(during pre-release period)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn package -DskipTests -ntp
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The execution log is as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>......
@@ -1634,8 +1643,16 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span>--graph graph-test --num-executors &lt;span style="color:#0000cf;font-weight:bold">6&lt;/span> --executor-cores &lt;span style="color:#0000cf;font-weight:bold">16&lt;/span> --executor-memory 15g
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: HugeGraph-Hubble Quick Start</title><link>/docs/quickstart/hugegraph-hubble/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-hubble/</guid><description>
 &lt;h3 id="1-hugegraph-hubble-overview">1 HugeGraph-Hubble Overview&lt;/h3>
-&lt;p>HugeGraph is an analysis-oriented graph database system that supports batch operations, which fully supports &lt;a href="https://tinkerpop.apache.org">Apache TinkerPop3&lt;/a> framework and &lt;a href="https://tinkerpop.apache.org/gremlin.html">Gremlin&lt;/a> graph query language. It provides a complete tool chain ecology such as export, backup, and recovery, and effectively solve the storage, query and correlation analysis needs of massive graph data. HugeGraph is widely used in the fields of risk control, insurance claims, recommendation search, public security crime crackdown, knowledge graph, network security, IT operation and maintenance of bank securities companies, and is committed to allowing more industries, organizations and users to enjoy a wider range of data comprehensive value.&lt;/p>
-&lt;p>&lt;strong>HugeGraph-Hubble&lt;/strong> is HugeGraph&amp;rsquo;s one-stop visual analysis platform. The platform covers the whole process from data modeling, to efficient data import, to real-time and offline analysis of data, and unified management of graphs, realizing the whole process wizard of graph application. It is designed to improve the user&amp;rsquo;s use fluency, lower the user&amp;rsquo;s use threshold, and provide a more efficient and easy-to-use user experience.&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>Note:&lt;/strong> The current version of Hubble has not yet added Auth/Login related interfaces and
+standalone protection, it will be added in the next Release version (≥ 1.5).
+Please be careful not to expose it in a public network environment or untrusted networks to
+avoid related SEC issues (you can also use IP &amp;amp; port whitelist + HTTPS)&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>HugeGraph-Hubble&lt;/strong> is HugeGraph&amp;rsquo;s one-stop visual analysis platform. The platform covers the whole
+process from data modeling, to efficient data import, to real-time and offline analysis of data, and
+unified management of graphs, realizing the whole process wizard of graph application. It is designed
+to improve the user&amp;rsquo;s use fluency, lower the user&amp;rsquo;s use threshold, and provide a more efficient and easy-to-use user experience.&lt;/p>
 &lt;p>The platform mainly includes the following modules:&lt;/p>
 &lt;h5 id="graph-management">Graph Management&lt;/h5>
 &lt;p>The graph management module realizes the unified management of multiple graphs and graph access, editing, deletion, and query by creating graph and connecting the platform and graph data.&lt;/p>
@@ -1644,7 +1661,9 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;h5 id="graph-analysis">Graph Analysis&lt;/h5>
 &lt;p>By inputting the graph traversal language Gremlin, high-performance general analysis of graph data can be realized, and functions such as customized multidimensional path query of vertices can be provided, and three kinds of graph result display methods are provided, including: graph form, table form, Json form, and multidimensional display. The data form meets the needs of various scenarios used by users. It provides functions such as running records and collection of common statements, realizing the traceability of graph operations, and the reuse and sharing of query input, which is fast and efficient. It supports the export of graph data, and the export format is Json format.&lt;/p>
 &lt;h5 id="task-management">Task Management&lt;/h5>
-&lt;p>For Gremlin tasks that need to traverse the whole graph, index creation and reconstruction and other time-consuming asynchronous tasks, the platform provides corresponding task management functions to achieve unified management and result viewing of asynchronous tasks.&lt;/p>
+&lt;p>For Gremlin tasks that need to traverse the whole graph, index creation and reconstruction,
+and other time-consuming asynchronous tasks, the platform provides corresponding task management
+functions to achieve unified management and result viewing of asynchronous tasks.&lt;/p>
 &lt;h5 id="data-import">Data Import&lt;/h5>
 &lt;blockquote>
 &lt;p>&amp;ldquo;Note: The data import function is currently suitable for preliminary use. For formal data import,
@@ -1658,7 +1677,7 @@ need to follow the platform step prompts, upload files as needed, and fill in th
 implement the import process of graph data. At the same time, it supports breakpoint resuming,
 error retry mechanism, etc., which reduces import costs and improves efficiency.&lt;/p>
 &lt;h3 id="2-deploy">2 Deploy&lt;/h3>
-&lt;p>There are three ways to deplot &lt;code>hugegraph-hubble&lt;/code>&lt;/p>
+&lt;p>There are three ways to deploy &lt;code>hugegraph-hubble&lt;/code>&lt;/p>
 &lt;ul>
 &lt;li>Use Docker (Convenient for Test/Dev)&lt;/li>
 &lt;li>Download the Toolchain binary package&lt;/li>
@@ -2092,9 +2111,11 @@ error retry mechanism, etc., which reduces import costs and improves efficiency.
 &lt;img src="/docs/images/images-hubble/355任务详情.png" alt="image">
 &lt;/center></description></item><item><title>Docs: HugeGraph-Client Quick Start</title><link>/docs/quickstart/hugegraph-client/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-client/</guid><description>
 &lt;h3 id="1-overview-of-hugegraph">1 Overview Of Hugegraph&lt;/h3>
-&lt;p>HugeGraph-Client sends HTTP request to HugeGraph-Server to obtain and parse the execution result of Server. Currently only the HugeGraph-Client for Java is provided. You can use HugeGraph-Client to write Java code to operate HugeGraph, such as adding, deleting, modifying, and querying schema and graph data, or executing gremlin statements.&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/hugegraph-toolchain">HugeGraph-Client&lt;/a> sends HTTP request to HugeGraph-Server to obtain and parse the execution result of Server.
+We support HugeGraph-Client for Java/Go/&lt;a href="https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-python-client">Python&lt;/a> language.
+You can use &lt;a href="/cn/docs/clients/hugegraph-client">Client-API&lt;/a> to write code to operate HugeGraph, such as adding, deleting, modifying, and querying schema and graph data, or executing gremlin statements.&lt;/p>
 &lt;blockquote>
-&lt;p>Now we support &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/blob/master/hugegraph-client-go/README.en.md">HugeGraph client SDK tool based on Go language&lt;/a> (version &amp;gt;=1.2.0)&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/blob/master/hugegraph-client-go/README.en.md">HugeGraph client SDK tool based on Go language&lt;/a> (version &amp;gt;=1.2.0)&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="2-what-you-need">2 What You Need&lt;/h3>
 &lt;ul>
@@ -2121,10 +2142,14 @@ error retry mechanism, etc., which reduces import costs and improves efficiency.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.hugegraph&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/groupId&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;artifactId&amp;gt;&lt;/span>hugegraph-client&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/artifactId&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;version&amp;gt;&lt;/span>${version}&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">&amp;lt;!-- Update to the latest release version --&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;version&amp;gt;&lt;/span>1.3.0&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/version&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;/dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/dependencies&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="43-example">4.3 Example&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>Note: The versions of all graph components remain consistent&lt;/p>
+&lt;/blockquote>
+&lt;h4 id="43-example">4.3 Example&lt;/h4>
 &lt;h5 id="431-singleexample">4.3.1 SingleExample&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">java.io.IOException&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">java.util.Iterator&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">;&lt;/span>
@@ -2411,7 +2436,7 @@ error retry mechanism, etc., which reduces import costs and improves efficiency.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="44-run-the-example">4.4 Run The Example&lt;/h3>
 &lt;p>Before running Example, you need to start the Server. For the startup process, see&lt;a href="/docs/quickstart/hugegraph-server">HugeGraph-Server Quick Start&lt;/a>.&lt;/p>
-&lt;h3 id="45-more-information-about-example">4.5 More Information About Example&lt;/h3>
+&lt;h3 id="45-more-information-about-client-api">4.5 More Information About Client-API&lt;/h3>
 &lt;p>See&lt;a href="/docs/clients/hugegraph-client">Introduce basic API of HugeGraph-Client&lt;/a>.&lt;/p></description></item><item><title>Docs: HugeGraph-Ai Quick Start (Beta)</title><link>/docs/quickstart/hugegraph-ai/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-ai/</guid><description>
 &lt;h3 id="1-hugegraph-ai-overview">1 HugeGraph-Ai Overview&lt;/h3>
 &lt;p>hugegraph-ai aims to explore the integration of HugeGraph and artificial intelligence (AI), including applications combined with large models, integration with graph machine learning components, etc., to provide comprehensive support for developers to use HugeGraph&amp;rsquo;s AI capabilities in projects.&lt;/p>

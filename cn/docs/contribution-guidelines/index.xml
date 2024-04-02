@@ -320,13 +320,15 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;p>注意：下述配置仅供参考，基于&lt;a href="https://github.com/apache/incubator-hugegraph/commit/a946ad1de4e8f922251a5241ffc957c33379677f">这个版本&lt;/a>，在 Linux 和 macOS 平台下进行了测试。&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="背景">背景&lt;/h3>
-&lt;p>在 &lt;a href="/docs/quickstart/hugegraph-server/">Quick Start&lt;/a> 部分已经介绍了使用&lt;strong>脚本&lt;/strong>启停 HugeGraph-Server 的流程。下面以 Linux 平台为例，介绍使用 &lt;strong>IntelliJ IDEA&lt;/strong> 运行与调试 HugeGraph-Server 的流程。&lt;/p>
+&lt;p>在 &lt;a href="/docs/quickstart/hugegraph-server/">Quick Start&lt;/a> 部分已经介绍了使用&lt;strong>脚本&lt;/strong>启停 HugeGraph-Server 的流程。下面以 Linux 平台为例，
+介绍使用 &lt;strong>IntelliJ IDEA&lt;/strong> 运行与调试 HugeGraph-Server 的流程。&lt;/p>
 &lt;p>本地启动的核心与&lt;strong>脚本启动&lt;/strong>是一样的：&lt;/p>
 &lt;ol>
 &lt;li>初始化数据库后端，执行 &lt;code>InitStore&lt;/code> 类初始化图&lt;/li>
 &lt;li>启动 HugeGraph-Server，执行 &lt;code>HugeGraphServer&lt;/code> 类加载初始化的图信息启动&lt;/li>
 &lt;/ol>
-&lt;p>在执行下述流程之前，请确保已经克隆了 HugeGraph 的源代码，并且已经配置了 JDK 11 等开发环境。&lt;/p>
+&lt;p>在执行下述流程之前，请确保已经克隆了 HugeGraph 的源代码，并且已经配置了 Java 11 环境 &amp;amp; 可以参考这个
+&lt;a href="https://github.com/apache/incubator-hugegraph/wiki/The-style-config-for-HugeGraph-in-IDEA">配置文档&lt;/a>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph.git
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="步骤">步骤&lt;/h3>
 &lt;h4 id="1-配置文件拷贝">1. 配置文件拷贝&lt;/h4>
@@ -414,6 +416,7 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;li>&lt;a href="https://gist.github.com/imbajin/1661450f000cd62a67e46d4f1abfe82c">hugegraph-server 本地调试文档 (Win/Unix)&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://youtrack.jetbrains.com/issue/IDEA-180033">&amp;ldquo;package sun.misc does not exist&amp;rdquo; compilation error&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://youtrack.jetbrains.com/issue/IDEA-201168">Cannot compile: java: package sun.misc does not exist&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph/wiki/The-style-config-for-HugeGraph-in-IDEA">The code-style config for HugeGraph in IDEA&lt;/a>&lt;/li>
 &lt;/ol></description></item><item><title>Docs: Apache HugeGraph Committer 指南</title><link>/cn/docs/contribution-guidelines/committer-guidelines/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/contribution-guidelines/committer-guidelines/</guid><description>
 &lt;blockquote>
 &lt;p>本文档概述了 Apache Committer 推选要求以及流程，对应的 ASF 官方文档可见：https://community.apache.org/newcommitter.html&lt;/p>

@@ -2099,14 +2099,18 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;p>HugeGraph-Server 是 HugeGraph 项目的核心部分，包含 Core、Backend、API 等子模块。&lt;/p>
 &lt;p>Core 模块是 Tinkerpop 接口的实现，Backend 模块用于管理数据存储，目前支持的后端包括：Memory、Cassandra、ScyllaDB 以及 RocksDB，API 模块提供 HTTP Server，将 Client 的 HTTP 请求转化为对 Core 的调用。&lt;/p>
 &lt;blockquote>
-&lt;p>文档中会大量出现 &lt;code>HugeGraph-Server&lt;/code> 及 &lt;code>HugeGraphServer&lt;/code> 这两种写法，其他组件也类似。这两种写法含义上并无大的差异，可以这么区分：&lt;code>HugeGraph-Server&lt;/code> 表示服务端相关组件代码，&lt;code>HugeGraphServer&lt;/code> 表示服务进程。&lt;/p>
+&lt;p>文档中会出现 &lt;code>HugeGraph-Server&lt;/code> 及 &lt;code>HugeGraphServer&lt;/code> 这两种写法，其他组件也类似。
+这两种写法含义上并明显差异，可以这么区分：&lt;code>HugeGraph-Server&lt;/code> 表示服务端相关组件代码，&lt;code>HugeGraphServer&lt;/code> 表示服务进程。&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="2-依赖">2 依赖&lt;/h3>
 &lt;h4 id="21-安装-java-11-jdk-11">2.1 安装 Java 11 (JDK 11)&lt;/h4>
-&lt;p>请优先考虑在 Java 11 的环境上启动 &lt;code>HugeGraph-Server&lt;/code>，目前同时保留对 Java 8 的兼容&lt;/p>
-&lt;p>&lt;strong>在往下阅读之前务必执行 &lt;code>java -version&lt;/code> 命令查看 jdk 版本&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>java -version
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-部署">3 部署&lt;/h3>
+&lt;p>请优先考虑在 Java 11 的环境上启动 &lt;code>HugeGraph-Server&lt;/code>(在 1.5.0 版前，会保留对 Java 8 的基本兼容)&lt;/p>
+&lt;p>&lt;strong>在往下阅读之前先执行 &lt;code>java -version&lt;/code> 命令确认 jdk 版本&lt;/strong>&lt;/p>
+&lt;blockquote>
+&lt;p>注：使用 Java 8 启动 HugeGraph-Server 会失去一些&lt;strong>安全性&lt;/strong>的保障，也会降低性能相关指标&lt;/p>
+&lt;p>我们推荐生产或对外网暴露访问的环境使用 Java 11 并考虑开启 &lt;a href="/cn/docs/config/config-authentication/">Auth 权限认证&lt;/a>。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="3-部署">3 部署&lt;/h3>
 &lt;p>有四种方式可以部署 HugeGraph-Server 组件：&lt;/p>
 &lt;ul>
 &lt;li>方式 1：使用 Docker 容器 (便于&lt;strong>测试&lt;/strong>)&lt;/li>
@@ -2115,7 +2119,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;li>方式 4：使用 tools 工具部署 (Outdated)&lt;/li>
 &lt;/ul>
 &lt;h4 id="31-使用-docker-容器-便于测试">3.1 使用 Docker 容器 (便于&lt;strong>测试&lt;/strong>)&lt;/h4>
-&lt;!-- 3.1 is linked by other place. if change 3.1's title, please check -->
+&lt;!-- 3.1 is linked by another place. if change 3.1's title, please check -->
 &lt;p>可参考 &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/README.md">Docker 部署方式&lt;/a>。&lt;/p>
 &lt;p>我们可以使用 &lt;code>docker run -itd --name=server -p 8080:8080 hugegraph/hugegraph&lt;/code> 去快速启动一个内置了 &lt;code>RocksDB&lt;/code> 的 &lt;code>Hugegraph server&lt;/code>.&lt;/p>
 &lt;p>可选项：&lt;/p>
@@ -2155,11 +2159,12 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>/apache-hugegraph-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph*.tar.gz
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="33-源码编译">3.3 源码编译&lt;/h4>
-&lt;p>源码编译前请确保安装了 wget 命令&lt;/p>
+&lt;p>源码编译前请确保本机有安装 &lt;code>wget/curl&lt;/code> 命令&lt;/p>
 &lt;p>下载 HugeGraph 源代码&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph.git
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>编译打包生成 tar 包&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># (Optional) use &amp;#34;-P stage&amp;#34; param if you build failed with the latest code(during pre-release period)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn package -DskipTests
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>执行日志如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>......
@@ -7602,8 +7607,13 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;p>可以通过&lt;code>GET http://localhost:8080/graphs/hugegraph/tasks/1&lt;/code>（其中&amp;quot;1&amp;quot;是task_id）来查询异步任务的执行状态，更多&lt;a href="../task">异步任务RESTful API&lt;/a>&lt;/p>
 &lt;/blockquote></description></item><item><title>Docs: HugeGraph-Hubble Quick Start</title><link>/cn/docs/quickstart/hugegraph-hubble/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-hubble/</guid><description>
 &lt;h3 id="1-hugegraph-hubble-概述">1 HugeGraph-Hubble 概述&lt;/h3>
-&lt;p>HugeGraph 是一款面向分析型，支持批量操作的图数据库系统，它由百度安全团队自主研发，全面支持&lt;a href="https://tinkerpop.apache.org">Apache TinkerPop3&lt;/a>框架和&lt;a href="https://tinkerpop.apache.org/gremlin.html">Gremlin&lt;/a>图查询语言，提供导出、备份、恢复等完善的工具链生态，有效解决海量图数据的存储、查询和关联分析需求。HugeGraph 广泛应用于银行券商的风控打击、保险理赔、推荐搜索、公安犯罪打击、知识图谱构建、网络安全、IT 运维等领域，致力于让更多行业、组织及用户享受到更广泛的数据综合价值。&lt;/p>
-&lt;p>&lt;strong>HugeGraph-Hubble&lt;/strong> 是 HugeGraph 的一站式可视化分析平台，平台涵盖了从数据建模，到数据快速导入，再到数据的在线、离线分析、以及图的统一管理的全过程，实现了图应用的全流程向导式操作，旨在提升用户的使用流畅度，降低用户的使用门槛，提供更为高效易用的使用体验。&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>注:&lt;/strong> 当前版本的 Hubble 还没有添加 Auth/Login 相关界面和接口和单独防护, 在下一个 Release 版 (≥ 1.5) 会加入,
+请留意避免把它暴露在公网环境或不受信任的网络中，以免引起相关 SEC 问题 (另外也可以使用 IP &amp;amp; 端口白名单 + HTTPS)&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>HugeGraph-Hubble&lt;/strong> 是 HugeGraph 的一站式可视化分析平台，平台涵盖了从数据建模，到数据快速导入，
+再到数据的在线、离线分析、以及图的统一管理的全过程，实现了图应用的全流程向导式操作，旨在提升用户的使用流畅度，
+降低用户的使用门槛，提供更为高效易用的使用体验。&lt;/p>
 &lt;p>平台主要包括以下模块：&lt;/p>
 &lt;h5 id="图管理">图管理&lt;/h5>
 &lt;p>图管理模块通过图的创建，连接平台与图数据，实现多图的统一管理，并实现图的访问、编辑、删除、查询操作。&lt;/p>
@@ -8508,15 +8518,17 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;h3 id="运行环境版本说明">运行环境/版本说明&lt;/h3>
 &lt;ol>
 &lt;li>优先在 &lt;code>hugegraph/toolchain/commons&lt;/code>软件中使用 Java 11, 此次是这些模块最后一次主版本兼容 Java 8 了。(computer 则仅支持 Java11)&lt;/li>
-&lt;li>另外相比 Java11, 使用 Java8 会失去一些&lt;strong>安全性&lt;/strong>的保障，我们推荐生产或对外网暴露访问的环境使用 Java11 并开启 &lt;a href="/cn/docs/config/config-authentication/">Auth 权限认证&lt;/a>。&lt;/li>
+&lt;li>另外相比 Java11, 使用 Java8 会失去一些&lt;strong>安全性&lt;/strong>的保障，我们推荐生产或对外网暴露访问的环境使用 Java11 并开启 &lt;a href="/cn/docs/config/config-authentication/">Auth 权限认证&lt;/a>&lt;/li>
 &lt;/ol>
-&lt;p>&lt;strong>1.3.0&lt;/strong> is the last major version compatible with &lt;strong>Java 8&lt;/strong>, compatibility with Java 8 will end in
-next release(1.5.0) when &lt;a href="https://github.com/apache/incubator-hugegraph/issues/2265">PD/Store&lt;/a> merged into master branch (Except for the &lt;code>java-client&lt;/code>).&lt;/p>
-&lt;p>PS: In the future, we will gradually upgrade the java version, &lt;strong>Java 11&lt;/strong> -&amp;gt; &lt;strong>Java 17&lt;/strong> -&amp;gt; &lt;strong>Java 21&lt;/strong>.&lt;/p>
+&lt;p>&lt;strong>1.3.0&lt;/strong> 是最后兼容 &lt;strong>Java 8&lt;/strong> 的版本，在下一个 1.5.0 版本发布 &amp;ndash; &lt;a href="https://github.com/apache/incubator-hugegraph/issues/2265">PD/Store&lt;/a> 合入主分支时就会全面使用 Java 11 (除&lt;code>client&lt;/code>外).&lt;/p>
+&lt;p>PS: 未来 HugeGraph 组件的版本会朝着 &lt;code>Java 11 -&amp;gt; Java 17 -&amp;gt; Java 21&lt;/code> 演进&lt;/p>
 &lt;blockquote>
-&lt;p>WIP: this doc is under construction, please wait for the final version (BETA)&lt;/p>
+&lt;p>WIP: This doc is under construction, please wait for the final version (BETA)&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="hugegraph">hugegraph&lt;/h3>
+&lt;blockquote>
+&lt;p>在此次版本中我们修复了一些 SEC 相关的问题，如果是线上或者对外服务请升级到最新版本 + 开启权限认证&lt;/p>
+&lt;/blockquote>
 &lt;h4 id="api-changes">API Changes&lt;/h4>
 &lt;ul>
 &lt;li>feat(api): optimize adjacent-edges query (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2408">#2408&lt;/a>)&lt;/li>
@@ -8793,9 +8805,12 @@ next release(1.5.0) when &lt;a href="https://github.com/apache/incubator-hugegra
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graph_rag&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">run&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">verbose&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87;font-weight:bold">True&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: HugeGraph-Client Quick Start</title><link>/cn/docs/quickstart/hugegraph-client/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-client/</guid><description>
 &lt;h3 id="1-hugegraph-client-概述">1 HugeGraph-Client 概述&lt;/h3>
-&lt;p>HugeGraph-Client 向 HugeGraph-Server 发出 HTTP 请求，获取并解析 Server 的执行结果。目前仅提供了 Java 版，用户可以使用 HugeGraph-Client 编写 Java 代码操作 HugeGraph，比如元数据和图数据的增删改查，或者执行 gremlin 语句。&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/hugegraph-toolchain">HugeGraph-Client&lt;/a> 向 HugeGraph-Server 发出 HTTP 请求，获取并解析 Server 的执行结果。
+提供了 Java/Go/&lt;a href="https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-python-client">Python&lt;/a> 版，
+用户可以使用 &lt;a href="/cn/docs/clients/hugegraph-client">Client-API&lt;/a> 编写代码操作 HugeGraph，比如元数据和图数据的增删改查，或者执行 gremlin 语句等。
+后文主要是 Java 使用示例 (其他语言 SDK 可参考对应 &lt;code>READEME&lt;/code> 页面)&lt;/p>
 &lt;blockquote>
-&lt;p>现在已经支持&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/blob/master/hugegraph-client-go/README.md">基于 Go 语言的 HugeGraph Client SDK 工具&lt;/a> (version &amp;gt;=1.2.0)&lt;/p>
+&lt;p>现在已经支持基于 Go 语言的 HugeGraph &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/blob/master/hugegraph-client-go/README.md">Client SDK&lt;/a> (version &amp;gt;=1.2.0)&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="2-环境要求">2 环境要求&lt;/h3>
 &lt;ul>
@@ -8824,10 +8839,14 @@ next release(1.5.0) when &lt;a href="https://github.com/apache/incubator-hugegra
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.hugegraph&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/groupId&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;artifactId&amp;gt;&lt;/span>hugegraph-client&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/artifactId&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;version&amp;gt;&lt;/span>${version}&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">&amp;lt;!-- Update to the latest release version --&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;version&amp;gt;&lt;/span>1.3.0&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/version&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;/dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/dependencies&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="43-example">4.3 Example&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>注：Graph 所有组件版本号均保持一致&lt;/p>
+&lt;/blockquote>
+&lt;h4 id="43-example">4.3 Example&lt;/h4>
 &lt;h5 id="431-singleexample">4.3.1 SingleExample&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">java.io.IOException&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">java.util.Iterator&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">;&lt;/span>
@@ -9115,19 +9134,21 @@ next release(1.5.0) when &lt;a href="https://github.com/apache/incubator-hugegra
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="44-运行-example">4.4 运行 Example&lt;/h3>
 &lt;p>运行 Example 之前需要启动 Server,
 启动过程见&lt;a href="/cn/docs/quickstart/hugegraph-server">HugeGraph-Server Quick Start&lt;/a>&lt;/p>
-&lt;h3 id="45-example-示例说明">4.5 Example 示例说明&lt;/h3>
+&lt;h3 id="45-详细-api-说明">4.5 详细 API 说明&lt;/h3>
 &lt;p>示例说明见&lt;a href="/cn/docs/clients/hugegraph-client">HugeGraph-Client 基本 API 介绍&lt;/a>&lt;/p></description></item><item><title>Docs: 在 IDEA 中配置 Server 开发环境</title><link>/cn/docs/contribution-guidelines/hugegraph-server-idea-setup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/contribution-guidelines/hugegraph-server-idea-setup/</guid><description>
 &lt;blockquote>
 &lt;p>注意：下述配置仅供参考，基于&lt;a href="https://github.com/apache/incubator-hugegraph/commit/a946ad1de4e8f922251a5241ffc957c33379677f">这个版本&lt;/a>，在 Linux 和 macOS 平台下进行了测试。&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="背景">背景&lt;/h3>
-&lt;p>在 &lt;a href="/docs/quickstart/hugegraph-server/">Quick Start&lt;/a> 部分已经介绍了使用&lt;strong>脚本&lt;/strong>启停 HugeGraph-Server 的流程。下面以 Linux 平台为例，介绍使用 &lt;strong>IntelliJ IDEA&lt;/strong> 运行与调试 HugeGraph-Server 的流程。&lt;/p>
+&lt;p>在 &lt;a href="/docs/quickstart/hugegraph-server/">Quick Start&lt;/a> 部分已经介绍了使用&lt;strong>脚本&lt;/strong>启停 HugeGraph-Server 的流程。下面以 Linux 平台为例，
+介绍使用 &lt;strong>IntelliJ IDEA&lt;/strong> 运行与调试 HugeGraph-Server 的流程。&lt;/p>
 &lt;p>本地启动的核心与&lt;strong>脚本启动&lt;/strong>是一样的：&lt;/p>
 &lt;ol>
 &lt;li>初始化数据库后端，执行 &lt;code>InitStore&lt;/code> 类初始化图&lt;/li>
 &lt;li>启动 HugeGraph-Server，执行 &lt;code>HugeGraphServer&lt;/code> 类加载初始化的图信息启动&lt;/li>
 &lt;/ol>
-&lt;p>在执行下述流程之前，请确保已经克隆了 HugeGraph 的源代码，并且已经配置了 JDK 11 等开发环境。&lt;/p>
+&lt;p>在执行下述流程之前，请确保已经克隆了 HugeGraph 的源代码，并且已经配置了 Java 11 环境 &amp;amp; 可以参考这个
+&lt;a href="https://github.com/apache/incubator-hugegraph/wiki/The-style-config-for-HugeGraph-in-IDEA">配置文档&lt;/a>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph.git
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="步骤">步骤&lt;/h3>
 &lt;h4 id="1-配置文件拷贝">1. 配置文件拷贝&lt;/h4>
@@ -9215,6 +9236,7 @@ next release(1.5.0) when &lt;a href="https://github.com/apache/incubator-hugegra
 &lt;li>&lt;a href="https://gist.github.com/imbajin/1661450f000cd62a67e46d4f1abfe82c">hugegraph-server 本地调试文档 (Win/Unix)&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://youtrack.jetbrains.com/issue/IDEA-180033">&amp;ldquo;package sun.misc does not exist&amp;rdquo; compilation error&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://youtrack.jetbrains.com/issue/IDEA-201168">Cannot compile: java: package sun.misc does not exist&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph/wiki/The-style-config-for-HugeGraph-in-IDEA">The code-style config for HugeGraph in IDEA&lt;/a>&lt;/li>
 &lt;/ol></description></item><item><title>Docs: Backup Restore</title><link>/cn/docs/guides/backup-restore/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/guides/backup-restore/</guid><description>
 &lt;h2 id="描述">描述&lt;/h2>
 &lt;p>Backup 和 Restore 是备份图和恢复图的功能。备份和恢复的数据包括元数据（schema）和图数据（vertex 和 edge）。&lt;/p>

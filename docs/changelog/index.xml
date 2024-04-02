@@ -401,13 +401,18 @@
 &lt;li>&lt;code>hugegraph-computer&lt;/code> required to use Java 11, &lt;strong>not compatible with Java 8!&lt;/strong>&lt;/li>
 &lt;li>Using Java8 may loss some security ensured, we recommend using Java 11 in &lt;strong>production env&lt;/strong> with &lt;a href="/docs/config/config-authentication/">AuthSystem&lt;/a> enabled.&lt;/li>
 &lt;/ol>
-&lt;p>&lt;strong>1.3.0&lt;/strong> is the last major version compatible with &lt;strong>Java 8&lt;/strong>, compatibility with Java 8 will end in
-next release(1.5.0) when &lt;a href="https://github.com/apache/incubator-hugegraph/issues/2265">PD/Store&lt;/a> merged into master branch (Except for the &lt;code>java-client&lt;/code>).&lt;/p>
-&lt;p>PS: In the future, we will gradually upgrade the java version, &lt;strong>Java 11&lt;/strong> -&amp;gt; &lt;strong>Java 17&lt;/strong> -&amp;gt; &lt;strong>Java 21&lt;/strong>.&lt;/p>
+&lt;p>&lt;strong>1.3.0&lt;/strong> is the &lt;strong>last major&lt;/strong> version compatible with &lt;strong>Java 8&lt;/strong>, compatibility with Java 8 will end in
+next release(1.5.0) when &lt;a href="https://github.com/apache/hugegraph/issues/2265">PD/Store&lt;/a> merged into
+master branch (Except for the &lt;code>java-client&lt;/code>).&lt;/p>
+&lt;p>PS: In the future, we will gradually upgrade the java version from &lt;code>Java 11 -&amp;gt; Java 17 -&amp;gt; Java 21.&lt;/code>&lt;/p>
 &lt;blockquote>
 &lt;p>WIP: this doc is under construction, please wait for the final version (BETA)&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="hugegraph">hugegraph&lt;/h3>
+&lt;blockquote>
+&lt;p>In this version, we have fixed some SEC-related issues. If used in an online service or exposed to
+the public, please upgrade to the latest version and enable authorization authentication&lt;/p>
+&lt;/blockquote>
 &lt;h4 id="api-changes">API Changes&lt;/h4>
 &lt;ul>
 &lt;li>feat(api): optimize adjacent-edges query (&lt;a href="https://github.com/apache/incubator-hugegraph/pull/2408">#2408&lt;/a>)&lt;/li>

@@ -324,7 +324,7 @@ and no circular links, etc.&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">8.&lt;/span> No empty file &lt;span style="color:#a40000">&amp;amp;&lt;/span> directory found
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">9.&lt;/span> Test running XX process OK
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">10.&lt;/span> ....
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Setup Server in IDEA</title><link>/docs/contribution-guidelines/hugegraph-server-idea-setup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/contribution-guidelines/hugegraph-server-idea-setup/</guid><description>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Setup Server in IDEA (Dev)</title><link>/docs/contribution-guidelines/hugegraph-server-idea-setup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/contribution-guidelines/hugegraph-server-idea-setup/</guid><description>
 &lt;blockquote>
 &lt;p>NOTE: The following configuration is for reference purposes only, and has been tested on Linux and macOS platforms based on &lt;a href="https://github.com/apache/incubator-hugegraph/commit/a946ad1de4e8f922251a5241ffc957c33379677f">this version&lt;/a>.&lt;/p>
 &lt;/blockquote>
@@ -335,7 +335,9 @@ and no circular links, etc.&lt;/li>
 &lt;li>Initialize the database backend by executing the &lt;code>InitStore&lt;/code> class to initialize the graph.&lt;/li>
 &lt;li>Start HugeGraph-Server by executing the &lt;code>HugeGraphServer&lt;/code> class to load the initialized graph information and start the server.&lt;/li>
 &lt;/ol>
-&lt;p>Before proceeding with the following process, make sure that you have cloned the source code of HugeGraph and have configured the development environment, such as JDK 11.&lt;/p>
+&lt;p>Before proceeding with the following process, make sure that you have cloned the source code of HugeGraph
+and have configured the development environment, such as &lt;code>Java 11&lt;/code> &amp;amp; you could config your local environment
+with this &lt;a href="https://github.com/apache/incubator-hugegraph/wiki/The-style-config-for-HugeGraph-in-IDEA">config-doc&lt;/a>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph.git
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="steps">Steps&lt;/h3>
 &lt;h4 id="1-copy-configuration-files">1. Copy Configuration Files&lt;/h4>
@@ -423,6 +425,7 @@ and no circular links, etc.&lt;/li>
 &lt;li>&lt;a href="https://gist.github.com/imbajin/1661450f000cd62a67e46d4f1abfe82c">Local Debugging Guide for HugeGraph Server (Win/Unix)&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://youtrack.jetbrains.com/issue/IDEA-180033">&amp;ldquo;package sun.misc does not exist&amp;rdquo; compilation error&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://youtrack.jetbrains.com/issue/IDEA-201168">Cannot compile: java: package sun.misc does not exist&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph/wiki/The-style-config-for-HugeGraph-in-IDEA">The code-style config for HugeGraph in IDEA&lt;/a>&lt;/li>
 &lt;/ol></description></item><item><title>Docs: Apache HugeGraph Committer Guide</title><link>/docs/contribution-guidelines/committer-guidelines/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/contribution-guidelines/committer-guidelines/</guid><description>
 &lt;blockquote>
 &lt;p>This document outlines the requirements and process for becoming an Apache Committer. The corresponding ASF official document can be found at: &lt;a href="https://community.apache.org/newcommitter.html">https://community.apache.org/newcommitter.html&lt;/a>&lt;/p>
