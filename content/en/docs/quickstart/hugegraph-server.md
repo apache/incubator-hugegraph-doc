@@ -25,6 +25,7 @@ and configure by yourself.
 **Be sure to execute the `java -version` command to check the jdk version before reading**
 
 > Note: Using Java8 will lose some security guarantees, we recommend using Java11 in production or 
+>
 > environments exposed to the public network and enable [Auth authentication](/docs/config/config-authentication/).
 
 ### 3 Deploy
