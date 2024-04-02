@@ -6,9 +6,11 @@ weight: 4
 
 ### 1 Overview Of Hugegraph
 
-HugeGraph-Client sends HTTP request to HugeGraph-Server to obtain and parse the execution result of Server. Currently only the HugeGraph-Client for Java is provided. You can use HugeGraph-Client to write Java code to operate HugeGraph, such as adding, deleting, modifying, and querying schema and graph data, or executing gremlin statements.
+[HugeGraph-Client](https://github.com/apache/hugegraph-toolchain) sends HTTP request to HugeGraph-Server to obtain and parse the execution result of Server. 
+We support HugeGraph-Client for Java/Go/[Python](https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-python-client) language.
+You can use [Client-API](/cn/docs/clients/hugegraph-client) to write code to operate HugeGraph, such as adding, deleting, modifying, and querying schema and graph data, or executing gremlin statements.
 
-> Now we support [HugeGraph client SDK tool based on Go language](https://github.com/apache/incubator-hugegraph-toolchain/blob/master/hugegraph-client-go/README.en.md) (version >=1.2.0)
+> [HugeGraph client SDK tool based on Go language](https://github.com/apache/incubator-hugegraph-toolchain/blob/master/hugegraph-client-go/README.en.md) (version >=1.2.0)
 
 ### 2 What You Need
 
@@ -41,10 +43,12 @@ Using IDEA or Eclipse to create the project:
     <dependency>
         <groupId>org.apache.hugegraph</groupId>
         <artifactId>hugegraph-client</artifactId>
-        <version>${version}</version>
+        <!-- Update to the latest release version -->
+        <version>1.3.0</version>
     </dependency>    
 </dependencies>
 ```
+> Note: The versions of all graph components remain consistent
 
 #### 4.3 Example
 
@@ -344,7 +348,7 @@ public class BatchExample {
 
 Before running Example, you need to start the Server. For the startup process, see[HugeGraph-Server Quick Start](/docs/quickstart/hugegraph-server).
 
-### 4.5 More Information About Example
+### 4.5 More Information About Client-API
 
 See[Introduce basic API of HugeGraph-Client](/docs/clients/hugegraph-client).
 
