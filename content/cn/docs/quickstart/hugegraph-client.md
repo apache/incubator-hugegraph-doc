@@ -6,9 +6,12 @@ weight: 4
 
 ### 1 HugeGraph-Client 概述
 
-HugeGraph-Client 向 HugeGraph-Server 发出 HTTP 请求，获取并解析 Server 的执行结果。目前仅提供了 Java 版，用户可以使用 HugeGraph-Client 编写 Java 代码操作 HugeGraph，比如元数据和图数据的增删改查，或者执行 gremlin 语句。
+[HugeGraph-Client](https://github.com/apache/hugegraph-toolchain) 向 HugeGraph-Server 发出 HTTP 请求，获取并解析 Server 的执行结果。
+提供了 Java/Go/[Python](https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-python-client) 版，
+用户可以使用 [Client-API](/cn/docs/clients/hugegraph-client) 编写代码操作 HugeGraph，比如元数据和图数据的增删改查，或者执行 gremlin 语句等。
+后文主要是 Java 使用示例 (其他语言 SDK 可参考对应 `READEME` 页面)
 
-> 现在已经支持[基于 Go 语言的 HugeGraph Client SDK 工具](https://github.com/apache/incubator-hugegraph-toolchain/blob/master/hugegraph-client-go/README.md) (version >=1.2.0)
+> 现在已经支持基于 Go 语言的 HugeGraph [Client SDK](https://github.com/apache/incubator-hugegraph-toolchain/blob/master/hugegraph-client-go/README.md) (version >=1.2.0)
 
 ### 2 环境要求
 
@@ -44,10 +47,12 @@ HugeGraph-Client 向 HugeGraph-Server 发出 HTTP 请求，获取并解析 Serve
     <dependency>
         <groupId>org.apache.hugegraph</groupId>
         <artifactId>hugegraph-client</artifactId>
-        <version>${version}</version>
+        <!-- Update to the latest release version -->
+        <version>1.3.0</version>
     </dependency>
 </dependencies>
 ```
+> 注：Graph 所有组件版本号均保持一致
 
 #### 4.3 Example
 
@@ -348,7 +353,7 @@ public class BatchExample {
 运行 Example 之前需要启动 Server,
 启动过程见[HugeGraph-Server Quick Start](/cn/docs/quickstart/hugegraph-server)
 
-### 4.5 Example 示例说明
+### 4.5 详细 API 说明
 
 示例说明见[HugeGraph-Client 基本 API 介绍](/cn/docs/clients/hugegraph-client)
 

@@ -6,9 +6,15 @@ weight: 3
 
 ### 1 HugeGraph-Hubble Overview
 
-HugeGraph is an analysis-oriented graph database system that supports batch operations, which fully supports [Apache TinkerPop3](https://tinkerpop.apache.org) framework and [Gremlin](https://tinkerpop.apache.org/gremlin.html) graph query language. It provides a complete tool chain ecology such as export, backup, and recovery, and effectively solve the storage, query and correlation analysis needs of massive graph data. HugeGraph is widely used in the fields of risk control, insurance claims, recommendation search, public security crime crackdown, knowledge graph, network security, IT operation and maintenance of bank securities companies, and is committed to allowing more industries, organizations and users to enjoy a wider range of data comprehensive value.
+> **Note:** The current version of Hubble has not yet added Auth/Login related interfaces and 
+> standalone protection, it will be added in the next Release version (≥ 1.5). 
+> Please be careful not to expose it in a public network environment or untrusted networks to 
+> avoid related SEC issues (you can also use IP & port whitelist + HTTPS)
 
-**HugeGraph-Hubble** is HugeGraph's one-stop visual analysis platform. The platform covers the whole process from data modeling, to efficient data import, to real-time and offline analysis of data, and unified management of graphs, realizing the whole process wizard of graph application. It is designed to improve the user's use fluency, lower the user's use threshold, and provide a more efficient and easy-to-use user experience.
+**HugeGraph-Hubble** is HugeGraph's one-stop visual analysis platform. The platform covers the whole 
+process from data modeling, to efficient data import, to real-time and offline analysis of data, and 
+unified management of graphs, realizing the whole process wizard of graph application. It is designed 
+to improve the user's use fluency, lower the user's use threshold, and provide a more efficient and easy-to-use user experience.
 
 The platform mainly includes the following modules:
 
@@ -26,7 +32,9 @@ By inputting the graph traversal language Gremlin, high-performance general anal
 
 ##### Task Management
 
-For Gremlin tasks that need to traverse the whole graph, index creation and reconstruction and other time-consuming asynchronous tasks, the platform provides corresponding task management functions to achieve unified management and result viewing of asynchronous tasks.
+For Gremlin tasks that need to traverse the whole graph, index creation and reconstruction, 
+and other time-consuming asynchronous tasks, the platform provides corresponding task management 
+functions to achieve unified management and result viewing of asynchronous tasks.
 
 ##### Data Import
 
@@ -44,7 +52,7 @@ error retry mechanism, etc., which reduces import costs and improves efficiency.
 
 ### 2 Deploy
 
-There are three ways to deplot `hugegraph-hubble`
+There are three ways to deploy `hugegraph-hubble`
 
 - Use Docker (Convenient for Test/Dev)
 - Download the Toolchain binary package

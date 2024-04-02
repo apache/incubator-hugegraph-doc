@@ -1,5 +1,5 @@
 ---
-title: "Setup Server in IDEA"
+title: "Setup Server in IDEA (Dev)"
 linkTitle: "Setup Server in IDEA"
 weight: 4
 ---
@@ -15,7 +15,9 @@ The core steps for local startup are the same as starting with **scripts**:
 1. Initialize the database backend by executing the `InitStore` class to initialize the graph.
 2. Start HugeGraph-Server by executing the `HugeGraphServer` class to load the initialized graph information and start the server.
 
-Before proceeding with the following process, make sure that you have cloned the source code of HugeGraph and have configured the development environment, such as JDK 11.
+Before proceeding with the following process, make sure that you have cloned the source code of HugeGraph 
+and have configured the development environment, such as `Java 11` & you could config your local environment 
+with this [config-doc](https://github.com/apache/incubator-hugegraph/wiki/The-style-config-for-HugeGraph-in-IDEA) 
 
 ```bash
 git clone https://github.com/apache/hugegraph.git
@@ -156,3 +158,4 @@ This is because Log4j2 uses asynchronous loggers. You can refer to the [official
 2. [Local Debugging Guide for HugeGraph Server (Win/Unix)](https://gist.github.com/imbajin/1661450f000cd62a67e46d4f1abfe82c)
 3. ["package sun.misc does not exist" compilation error](https://youtrack.jetbrains.com/issue/IDEA-180033)
 4. [Cannot compile: java: package sun.misc does not exist](https://youtrack.jetbrains.com/issue/IDEA-201168)
+5. [The code-style config for HugeGraph in IDEA](https://github.com/apache/incubator-hugegraph/wiki/The-style-config-for-HugeGraph-in-IDEA)

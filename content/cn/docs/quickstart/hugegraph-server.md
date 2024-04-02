@@ -10,19 +10,20 @@ HugeGraph-Server 是 HugeGraph 项目的核心部分，包含 Core、Backend、A
 
 Core 模块是 Tinkerpop 接口的实现，Backend 模块用于管理数据存储，目前支持的后端包括：Memory、Cassandra、ScyllaDB 以及 RocksDB，API 模块提供 HTTP Server，将 Client 的 HTTP 请求转化为对 Core 的调用。
 
-> 文档中会大量出现 `HugeGraph-Server` 及 `HugeGraphServer` 这两种写法，其他组件也类似。这两种写法含义上并无大的差异，可以这么区分：`HugeGraph-Server` 表示服务端相关组件代码，`HugeGraphServer` 表示服务进程。
+> 文档中会出现 `HugeGraph-Server` 及 `HugeGraphServer` 这两种写法，其他组件也类似。
+> 这两种写法含义上并明显差异，可以这么区分：`HugeGraph-Server` 表示服务端相关组件代码，`HugeGraphServer` 表示服务进程。
 
 ### 2 依赖
 
 #### 2.1 安装 Java 11 (JDK 11)
 
-请优先考虑在 Java 11 的环境上启动 `HugeGraph-Server`，目前同时保留对 Java 8 的兼容
+请优先考虑在 Java 11 的环境上启动 `HugeGraph-Server`(在 1.5.0 版前，会保留对 Java 8 的基本兼容)
 
-**在往下阅读之前务必执行 `java -version` 命令查看 jdk 版本**
+**在往下阅读之前先执行 `java -version` 命令确认 jdk 版本**
 
-```bash
-java -version
-```
+> 注：使用 Java 8 启动 HugeGraph-Server 会失去一些**安全性**的保障，也会降低性能相关指标
+>
+> 我们推荐生产或对外网暴露访问的环境使用 Java 11 并考虑开启 [Auth 权限认证](/cn/docs/config/config-authentication/)。
 
 ### 3 部署
 
@@ -34,7 +35,7 @@ java -version
 - 方式 4：使用 tools 工具部署 (Outdated)
 
 #### 3.1 使用 Docker 容器 (便于**测试**)
-<!-- 3.1 is linked by other place. if change 3.1's title, please check -->
+<!-- 3.1 is linked by another place. if change 3.1's title, please check -->
 
 可参考 [Docker 部署方式](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/README.md)。
 
@@ -83,7 +84,7 @@ tar zxf *hugegraph*.tar.gz
 
 #### 3.3 源码编译
 
-源码编译前请确保安装了 wget 命令
+源码编译前请确保本机有安装 `wget/curl` 命令
 
 下载 HugeGraph 源代码
 
@@ -95,6 +96,7 @@ git clone https://github.com/apache/hugegraph.git
 
 ```bash
 cd hugegraph
+# (Optional) use "-P stage" param if you build failed with the latest code(during pre-release period)
 mvn package -DskipTests
 ```
 
