@@ -75,13 +75,13 @@ services:
 >
 > 1. The docker image of hugegraph is a convenience release to start hugegraph quickly, but not **official distribution** artifacts. You can find more details from [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub).
 > 
-> 2. Recommend to use `release tag`(like `1.2.0`) for the stable version. Use `latest` tag to experience the newest functions in development.
+> 2. Recommand to use `release tag`(like `1.3.0`) for the stable version. Use `latest` tag to experience the newest functions in development.
 
 #### 3.2 Download the binary tar tarball
 
 You could download the binary tarball from the download page of ASF site like this:
 ```bash
-# use the latest version, here is 1.2.0 for example
+# use the latest version, here is 1.3.0 for example
 wget https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph-incubating-{version}.tar.gz
 tar zxf *hugegraph*.tar.gz
 
@@ -122,7 +122,7 @@ The execution log is as follows:
 
 ```bash
 ......
-[INFO] Reactor Summary for hugegraph 1.2.0:
+[INFO] Reactor Summary for hugegraph 1.3.0:
 [INFO] 
 [INFO] hugegraph .......................................... SUCCESS [  2.405 s]
 [INFO] hugegraph-core ..................................... SUCCESS [ 13.405 s]
@@ -153,8 +153,8 @@ Of course, you should download the tarball of `HugeGraph-Toolchain` first.
 
 ```bash
 # download toolchain binary package, it includes loader + tool + hubble
-# please check the latest version (e.g. here is 1.2.0)
-wget https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-toolchain-incubating-1.2.0.tar.gz
+# please check the latest version (e.g. here is 1.3.0)
+wget https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz
 tar zxf *hugegraph-*.tar.gz
 
 # enter the tool's package
