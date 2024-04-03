@@ -8,16 +8,17 @@ weight: 2
 > Instructions
 > 
 > - 推荐使用最新版本的 HugeGraph 软件包，运行时环境请选择 Java11
-> - 验证下载版本，请使用相应的哈希（sha512）、签名和 [项目签名验证 KEYS](https://downloads.apache.org/incubator/hugegraph/KEYS)。
+> - 验证下载版本，请使用相应的哈希（SHA512）、签名和 [项目签名验证 KEYS](https://downloads.apache.org/incubator/hugegraph/KEYS)
 > - 检查哈希（SHA512）、签名的说明在 [验证说明](/docs/contribution-guidelines/validate-release/) 页面, 也可参考（[ASF官方说明](https://www.apache.org/dyn/closer.cgi#verify)）
 > 
-> 最新版本: **1.3.0**, 2024-04-01 发布 ([从源码构建](/docs/quickstart/hugegraph-server/))。[发布记录](/docs/changelog/hugegraph-1.3.0-release-notes/)
 
 ### 最新版本
 
+最新版本: **1.3.0**, 2024-04-01 发布 ([从源码构建](/docs/quickstart/hugegraph-server/)) [发布记录](/docs/changelog/hugegraph-1.3.0-release-notes/)
+
 | 组件 | 二进制包 | 源码 | 备注 |
 |- | - | - | - |
-| HugeGraph-Server | [1.3.0](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz) [[sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz.asc)][[sha512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz.sha512)]| [Source](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0-src.tar.gz)[[Sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0-src.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0-src.tar.gz.sha512)] | HugeGraph 的主程序 | 
+| HugeGraph-Server | [1.3.0](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz) [[Sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz.asc)][[SHA512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz.sha512)]| [Source](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0-src.tar.gz)[[Sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0-src.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0-src.tar.gz.sha512)] | HugeGraph 的主程序 | 
 | HugeGraph-Toolchain | [1.3.0](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz)[[Sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz.sha512)] | [Source](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0-src.tar.gz)[[Sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0-src.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0-src.tar.gz.sha512)] | 数据导入/导出/备份, Web 可视化图形界面等工具合集 | 
 
 
