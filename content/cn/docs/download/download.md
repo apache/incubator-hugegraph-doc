@@ -50,7 +50,9 @@ Apache 版本.
 
 ---
 
-### 过时版本
+
+<details> <summary>过时版本</summary>
+
 | server                                                                                                    | client                                                                                 | loader                                                                                                           | hubble                                                                                                             | common                                                                                   | tools                                                                                                       |
 |-----------------------------------------------------------------------------------------------------------| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
 | [0.12.0](https://github.com/apache/incubator-hugegraph/releases/download/v0.12.0/hugegraph-0.12.0.tar.gz) | [2.0.1](https://mvnrepository.com/artifact/com.baidu.hugegraph/hugegraph-client/2.0.1) | [0.12.0](https://github.com/hugegraph/hugegraph-loader/releases/download/v0.12.0/hugegraph-loader-0.12.0.tar.gz) | [1.6.0](https://github.com/hugegraph/hugegraph-hubble/releases/download/v1.6.0/hugegraph-hubble-1.6.0.tar.gz)      | [2.0.1](https://mvnrepository.com/artifact/com.baidu.hugegraph/hugegraph-common/2.0.1)   | [1.6.0](https://github.com/hugegraph/hugegraph-tools/releases/download/v1.6.0/hugegraph-tools-1.6.0.tar.gz) |
@@ -79,3 +81,5 @@ Apache 版本.
 - 2017-11-06: Release HugeGraph 0.3.3，see [HugeGraph 0.3.3 Release Notes](/docs/changelog/hugegraph-0.3.3-release-notes)
 - 2017-09-08: Release HugeGraph 0.2.4，see [HugeGraph 0.2.4 Release Notes](/docs/changelog/hugegraph-0.2.4-release-notes)
 - 2017-08-15: Release HugeGraph 0.2，see [HugeGraph 0.2 Release Notes](/docs/changelog/hugegraph-0.2-release-notes)
+
+</details>
