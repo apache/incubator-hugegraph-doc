@@ -7,18 +7,18 @@ weight: 2
 
 > Instructions
 > 
-> - 请从下表中选择HugeGraph版本下载，推荐最新版本。
-> - 验证下载版本，请使用相应的哈希（sha512）、签名和 [项目发布KEYS](https://downloads.apache.org/incubator/hugegraph/KEYS)。
+> - 请从下表中选择HugeGraph版本下载，推荐使用最新版本，运行时选择 Java11。
+> - 验证下载版本，请使用相应的哈希（sha512）、签名和 [项目签名验证 KEYS](https://downloads.apache.org/incubator/hugegraph/KEYS)。
 > - 检查哈希（sha512）、签名的说明显示在 [验证说明](/docs/contribution-guidelines/validate-release/) 页面。（[官方验证](https://www.apache.org/dyn/closer.cgi#verify)）
 > 
-> 最新版本: **1.3.0**, _2024-04-01_发布([怎么从源码构建](/docs/quickstart/hugegraph-server/))。[发布记录](/docs/changelog/hugegraph-1.3.0-release-notes/)
+> 最新版本: **1.3.0**, 2024-04-01 发布([怎么从源码构建](/docs/quickstart/hugegraph-server/))。[发布记录](/docs/changelog/hugegraph-1.3.0-release-notes/)
 
 ### 最新版本
 
 | 组件 | 二进制包 | 源码 | 备注 |
 |- | - | - | - |
-| HugeGraph-Server | [1.3.0](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz)([备用](https://dlcdn.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz)) [[sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz.asc)][[sha512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz.sha512)]| [Source](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0-src.tar.gz)[[Sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0-src.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0-src.tar.gz.sha512)] | HugeGraph 的主程序 | 
-| HugeGraph-Toolchain | [1.3.0](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz)([备用](https://dlcdn.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz))[[Sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz.sha512)] | [Source](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0-src.tar.gz)[[Sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0-src.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0-src.tar.gz.sha512)] | 数据导入/导出/备份, Web 可视化图形界面等工具合集 | 
+| HugeGraph-Server | [1.3.0](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz) [[sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz.asc)][[sha512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz.sha512)]| [Source](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0-src.tar.gz)[[Sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0-src.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0-src.tar.gz.sha512)] | HugeGraph 的主程序 | 
+| HugeGraph-Toolchain | [1.3.0](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz)[[Sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz.sha512)] | [Source](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0-src.tar.gz)[[Sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0-src.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0-src.tar.gz.sha512)] | 数据导入/导出/备份, Web 可视化图形界面等工具合集 | 
 
 
 > 注: HugeGraph 所有组件版本号已保持一致, `client/loader/hubble/common` 等 maven 仓库版本号同理, 依赖引用可参考[maven 示例](https://github.com/apache/incubator-hugegraph-toolchain#maven-dependencies)
