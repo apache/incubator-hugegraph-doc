@@ -2603,54 +2603,44 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;li>Storage Backend: 支持多种内置存储后端 (RocksDB/MySQL/HBase/&amp;hellip;)，也允许用户无需更改现有源码的情况下扩展自定义后端。&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;/ul></description></item><item><title>Docs: Download HugeGraph</title><link>/cn/docs/download/download/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/download/download/</guid><description>
-&lt;h3 id="latest-version">Latest version&lt;/h3>
-&lt;p>The latest HugeGraph: &lt;strong>1.3.0&lt;/strong>, released on &lt;em>2024-04-01&lt;/em>(&lt;a href="/docs/quickstart/hugegraph-server/">how to build from source&lt;/a>).&lt;/p>
+&lt;/ul></description></item><item><title>Docs: 下载 Apache HugeGraph</title><link>/cn/docs/download/download/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/download/download/</guid><description>
+&lt;blockquote>
+&lt;p>Instructions&lt;/p>
+&lt;ul>
+&lt;li>推荐使用最新版本的 HugeGraph 软件包，运行时环境请选择 Java11&lt;/li>
+&lt;li>验证下载版本，请使用相应的哈希（SHA512）、签名和 &lt;a href="https://downloads.apache.org/incubator/hugegraph/KEYS">项目签名验证 KEYS&lt;/a>&lt;/li>
+&lt;li>检查哈希（SHA512）、签名的说明在 &lt;a href="/docs/contribution-guidelines/validate-release/">版本验证&lt;/a> 页面, 也可参考（&lt;a href="https://www.apache.org/dyn/closer.cgi#verify">ASF验证说明&lt;/a>）&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;h3 id="最新版本">最新版本&lt;/h3>
+&lt;p>版本: &lt;strong>1.3.0&lt;/strong>, 2024-04-01 发布 (&lt;a href="/docs/quickstart/hugegraph-server/">从源码构建&lt;/a>) &lt;a href="/docs/changelog/hugegraph-1.3.0-release-notes/">版本说明&lt;/a>&lt;/p>
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th>components&lt;/th>
-&lt;th>description&lt;/th>
-&lt;th>download&lt;/th>
+&lt;th>组件&lt;/th>
+&lt;th>二进制包&lt;/th>
+&lt;th>源码&lt;/th>
+&lt;th>备注&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
 &lt;td>HugeGraph-Server&lt;/td>
+&lt;td>&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz">1.3.0&lt;/a> [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz.asc">Sign&lt;/a>][&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;td>&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0-src.tar.gz">Source&lt;/a>[&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0-src.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0-src.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
 &lt;td>HugeGraph 的主程序&lt;/td>
-&lt;td>&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz">1.3.0&lt;/a>(&lt;a href="https://dlcdn.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz">备用&lt;/a>)&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>HugeGraph-Toolchain&lt;/td>
+&lt;td>&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz">1.3.0&lt;/a>[&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;td>&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0-src.tar.gz">Source&lt;/a>[&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0-src.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0-src.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
 &lt;td>数据导入/导出/备份, Web 可视化图形界面等工具合集&lt;/td>
-&lt;td>&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz">1.3.0&lt;/a>(&lt;a href="https://dlcdn.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz">备用&lt;/a>)&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
 &lt;blockquote>
 &lt;p>注: HugeGraph 所有组件版本号已保持一致, &lt;code>client/loader/hubble/common&lt;/code> 等 maven 仓库版本号同理, 依赖引用可参考&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain#maven-dependencies">maven 示例&lt;/a>&lt;/p>
 &lt;/blockquote>
-&lt;h3 id="binary-versions-mapping">Binary Versions mapping&lt;/h3>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Version&lt;/th>
-&lt;th>Release Date&lt;/th>
-&lt;th>server&lt;/th>
-&lt;th>toolchain&lt;/th>
-&lt;th>Release Notes&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>1.3.0&lt;/td>
-&lt;td>2024-04-01&lt;/td>
-&lt;td>[&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz">Binary&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
-&lt;td>[&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz">Binary&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
-&lt;td>&lt;a href="/docs/changelog/hugegraph-1.3.0-release-notes/">Release-Notes&lt;/a>&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
 &lt;h3 id="source-versions-mapping">Source Versions mapping&lt;/h3>
 &lt;table>
 &lt;thead>
@@ -2677,7 +2667,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/tbody>
 &lt;/table>
 &lt;hr>
-&lt;h3 id="旧版本下载地址-outdated-versions-mapping">旧版本下载地址 (Outdated Versions Mapping)&lt;/h3>
+&lt;h3 id="归档版本下载地址">归档版本下载地址&lt;/h3>
 &lt;p>Apache 版本.&lt;/p>
 &lt;table>
 &lt;thead>
@@ -2706,11 +2696,15 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
+&lt;blockquote>
 &lt;p>注:&lt;/p>
 &lt;ol>
 &lt;li>请大家尽早迁移到最新 release 版本上, 社区将不再维护 &lt;code>1.0.0&lt;/code> 前的旧版本(非 ASF 版本)&lt;/li>
 &lt;li>&lt;code>1.3.0&lt;/code> 是最后一个兼容 Java8 的主版本, 请尽早使用/迁移运行时为 &lt;code>Java11&lt;/code> (低版本 Java 有潜在更多的 SEC 风险和性能影响)&lt;/li>
 &lt;/ol>
+&lt;/blockquote>
+&lt;hr>
+&lt;details> &lt;summary>过时版本&lt;/summary>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -2814,7 +2808,8 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;li>2017-11-06: Release HugeGraph 0.3.3，see &lt;a href="/docs/changelog/hugegraph-0.3.3-release-notes">HugeGraph 0.3.3 Release Notes&lt;/a>&lt;/li>
 &lt;li>2017-09-08: Release HugeGraph 0.2.4，see &lt;a href="/docs/changelog/hugegraph-0.2.4-release-notes">HugeGraph 0.2.4 Release Notes&lt;/a>&lt;/li>
 &lt;li>2017-08-15: Release HugeGraph 0.2，see &lt;a href="/docs/changelog/hugegraph-0.2-release-notes">HugeGraph 0.2 Release Notes&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Docs: HugeGraph Examples</title><link>/cn/docs/language/hugegraph-example/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/language/hugegraph-example/</guid><description>
+&lt;/ul>
+&lt;/details></description></item><item><title>Docs: HugeGraph Examples</title><link>/cn/docs/language/hugegraph-example/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/language/hugegraph-example/</guid><description>
 &lt;h3 id="1-概述">1 概述&lt;/h3>
 &lt;p>本示例将&lt;a href="http://s3.thinkaurelius.com/docs/titan/1.0.0/getting-started.html">TitanDB Getting Started&lt;/a> 为模板来演示HugeGraph的使用方法。通过对比HugeGraph和TitanDB，了解HugeGraph和TitanDB的差异。&lt;/p>
 &lt;h4 id="11-hugegraph与titandb的异同">1.1 HugeGraph与TitanDB的异同&lt;/h4>
