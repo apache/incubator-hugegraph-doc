@@ -7,11 +7,11 @@ weight: 2
 
 > Instructions
 > 
-> - 请从下表中选择HugeGraph版本下载，推荐使用最新版本，运行时选择 Java11。
+> - 推荐使用最新版本的 HugeGraph 软件包，运行时环境请选择 Java11
 > - 验证下载版本，请使用相应的哈希（sha512）、签名和 [项目签名验证 KEYS](https://downloads.apache.org/incubator/hugegraph/KEYS)。
-> - 检查哈希（sha512）、签名的说明显示在 [验证说明](/docs/contribution-guidelines/validate-release/) 页面。（[官方验证](https://www.apache.org/dyn/closer.cgi#verify)）
+> - 检查哈希（SHA512）、签名的说明在 [验证说明](/docs/contribution-guidelines/validate-release/) 页面, 也可参考（[ASF官方说明](https://www.apache.org/dyn/closer.cgi#verify)）
 > 
-> 最新版本: **1.3.0**, 2024-04-01 发布([怎么从源码构建](/docs/quickstart/hugegraph-server/))。[发布记录](/docs/changelog/hugegraph-1.3.0-release-notes/)
+> 最新版本: **1.3.0**, 2024-04-01 发布 ([从源码构建](/docs/quickstart/hugegraph-server/))。[发布记录](/docs/changelog/hugegraph-1.3.0-release-notes/)
 
 ### 最新版本
 
@@ -46,6 +46,8 @@ Apache 版本.
 > 1. 请大家尽早迁移到最新 release 版本上, 社区将不再维护 `1.0.0` 前的旧版本(非 ASF 版本)
 > 2. `1.3.0` 是最后一个兼容 Java8 的主版本, 请尽早使用/迁移运行时为  `Java11` (低版本 Java 有潜在更多的 SEC 风险和性能影响)
 
+
+---
 
 ### 过时版本
 | server                                                                                                    | client                                                                                 | loader                                                                                                           | hubble                                                                                                             | common                                                                                   | tools                                                                                                       |
