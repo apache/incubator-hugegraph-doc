@@ -2120,7 +2120,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/ul>
 &lt;h4 id="31-使用-docker-容器-便于测试">3.1 使用 Docker 容器 (便于&lt;strong>测试&lt;/strong>)&lt;/h4>
 &lt;!-- 3.1 is linked by another place. if change 3.1's title, please check -->
-&lt;p>可参考 &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/README.md">Docker 部署方式&lt;/a>。&lt;/p>
+&lt;p>可参考 &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/docker/README.md">Docker 部署方式&lt;/a>。&lt;/p>
 &lt;p>我们可以使用 &lt;code>docker run -itd --name=server -p 8080:8080 hugegraph/hugegraph&lt;/code> 去快速启动一个内置了 &lt;code>RocksDB&lt;/code> 的 &lt;code>Hugegraph server&lt;/code>.&lt;/p>
 &lt;p>可选项：&lt;/p>
 &lt;ol>
