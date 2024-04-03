@@ -1,25 +1,29 @@
 ---
-title: "Download HugeGraph"
+title: "下载 Apache HugeGraph"
 linkTitle: "Download"
 weight: 2
 ---
 
-### Latest version
 
-The latest HugeGraph: **1.3.0**, released on _2024-04-01_([how to build from source](/docs/quickstart/hugegraph-server/)).
+> Instructions
+> 
+> - 推荐使用最新版本的 HugeGraph 软件包，运行时环境请选择 Java11
+> - 验证下载版本，请使用相应的哈希（SHA512）、签名和 [项目签名验证 KEYS](https://downloads.apache.org/incubator/hugegraph/KEYS)
+> - 检查哈希（SHA512）、签名的说明在 [版本验证](/docs/contribution-guidelines/validate-release/) 页面, 也可参考（[ASF验证说明](https://www.apache.org/dyn/closer.cgi#verify)）
+> 
 
-| components          | description                                      | download                                                                                                                                                                                                                          |
-| ------------------- | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| HugeGraph-Server    | HugeGraph 的主程序                               | [1.3.0](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz)([备用](https://dlcdn.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz))                     |
-| HugeGraph-Toolchain | 数据导入/导出/备份, Web 可视化图形界面等工具合集 | [1.3.0](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz)([备用](https://dlcdn.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz)) |
+### 最新版本
+
+版本: **1.3.0**, 2024-04-01 发布 ([从源码构建](/docs/quickstart/hugegraph-server/)) [版本说明](/docs/changelog/hugegraph-1.3.0-release-notes/)
+
+| 组件 | 二进制包 | 源码 | 备注 |
+|- | - | - | - |
+| HugeGraph-Server | [1.3.0](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz) [[Sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz.asc)][[SHA512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz.sha512)]| [Source](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0-src.tar.gz)[[Sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0-src.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0-src.tar.gz.sha512)] | HugeGraph 的主程序 | 
+| HugeGraph-Toolchain | [1.3.0](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz)[[Sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz.sha512)] | [Source](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0-src.tar.gz)[[Sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0-src.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0-src.tar.gz.sha512)] | 数据导入/导出/备份, Web 可视化图形界面等工具合集 | 
+
 
 > 注: HugeGraph 所有组件版本号已保持一致, `client/loader/hubble/common` 等 maven 仓库版本号同理, 依赖引用可参考[maven 示例](https://github.com/apache/incubator-hugegraph-toolchain#maven-dependencies)
 
-### Binary Versions mapping
-
-| Version | Release Date | server                                                                                                                                                                                                                                                                                                                                       | toolchain                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Release Notes                                                   |
-| ------- | ------------  | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| 1.3.0   | 2024-04-01   | [[Binary](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz)] [[Sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz.sha512)] | [[Binary](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz)] [[Sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz.sha512)] | [Release-Notes](/docs/changelog/hugegraph-1.3.0-release-notes/) |
 
 ### Source Versions mapping
 
@@ -29,7 +33,9 @@ The latest HugeGraph: **1.3.0**, released on _2024-04-01_([how to build from sou
 
 ---
 
-### 旧版本下载地址 (Outdated Versions Mapping)
+
+
+### 归档版本下载地址
 Apache 版本.
 
 | Version | Release Date | server                                                                                                                                                                                                                                                                                                                                       | toolchain                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Release Notes                                                   |
@@ -37,9 +43,15 @@ Apache 版本.
 | 1.2.0   | 2023-12-28   | [[Binary](https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-incubating-1.2.0.tar.gz)] [[Sign](https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-incubating-1.2.0.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-incubating-1.2.0.tar.gz.sha512)] | [[Binary](https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-toolchain-incubating-1.2.0.tar.gz)] [[Sign](https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-toolchain-incubating-1.2.0.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-toolchain-incubating-1.2.0.tar.gz.sha512)] | [Release-Notes](/docs/changelog/hugegraph-1.2.0-release-notes/) |
 | 1.0.0   | 2023-02-22   | [[Binary](https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz)] [[Sign](https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz.sha512)] | [[Binary](https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz)] [[Sign](https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz.sha512)]  | [Release-Notes](/docs/changelog/hugegraph-1.0.0-release-notes/) |
 
-注: 
-1. 请大家尽早迁移到最新 release 版本上, 社区将不再维护 `1.0.0` 前的旧版本(非 ASF 版本)
-2. `1.3.0` 是最后一个兼容 Java8 的主版本, 请尽早使用/迁移运行时为  `Java11` (低版本 Java 有潜在更多的 SEC 风险和性能影响)
+> 注: 
+> 1. 请大家尽早迁移到最新 release 版本上, 社区将不再维护 `1.0.0` 前的旧版本(非 ASF 版本)
+> 2. `1.3.0` 是最后一个兼容 Java8 的主版本, 请尽早使用/迁移运行时为  `Java11` (低版本 Java 有潜在更多的 SEC 风险和性能影响)
+
+
+---
+
+
+<details> <summary>过时版本</summary>
 
 | server                                                                                                    | client                                                                                 | loader                                                                                                           | hubble                                                                                                             | common                                                                                   | tools                                                                                                       |
 |-----------------------------------------------------------------------------------------------------------| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
@@ -69,3 +81,5 @@ Apache 版本.
 - 2017-11-06: Release HugeGraph 0.3.3，see [HugeGraph 0.3.3 Release Notes](/docs/changelog/hugegraph-0.3.3-release-notes)
 - 2017-09-08: Release HugeGraph 0.2.4，see [HugeGraph 0.2.4 Release Notes](/docs/changelog/hugegraph-0.2.4-release-notes)
 - 2017-08-15: Release HugeGraph 0.2，see [HugeGraph 0.2 Release Notes](/docs/changelog/hugegraph-0.2-release-notes)
+
+</details>

@@ -1,27 +1,27 @@
 ---
-title: "Download HugeGraph"
+title: "Download Apache HugeGraph"
 linkTitle: "Download"
 weight: 2
 ---
 
+
+> Instructions
+> 
+> - It is recommended to use the latest version of the HugeGraph software package. Please select Java11 for the runtime environment.
+> - To verify downloads, use the corresponding hash (SHA512), signature, and [Project Signature Verification KEYS](https://downloads.apache.org/incubator/hugegraph/KEYS)
+> - Instructions for checking hash (SHA512) and signatures are on the [Validate Release](/docs/contribution-guidelines/validate-release/) page, and you can also refer to ([ASF official instructions](https://www.apache.org/dyn/closer.cgi#verify))
+> 
+
 ### Latest version
 
-The latest HugeGraph: **1.3.0**, released on _2024-04-01_([how to build from source](/docs/quickstart/hugegraph-server/)).
+Latest version: **1.3.0**, 2024-04-01 Released ([Build from Source](/docs/quickstart/hugegraph-server/)) [Release-Notes](/docs/changelog/hugegraph-1.3.0-release-notes/)
 
-| components          | description                                                                        | download                                                                                                                                                                                                                               |
-| ------------------- | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| HugeGraph-Server    | The main program of HugeGraph                                                      | [1.3.0](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz)([alternate](https://dlcdn.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz))                     |
-| HugeGraph-Toolchain | A collection of tools for graph data import/export/backup, web visualization, etc. | [1.3.0](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz)([alternate](https://dlcdn.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz)) |
+| Components | Binary | Source | Notes |
+| - | - | - | - |
+| HugeGraph-Server | [1.3.0](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz) [[Sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz.asc)][[SHA512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz.sha512)]| [Source](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0-src.tar.gz)[[Sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0-src.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0-src.tar.gz.sha512)] | The main program of HugeGraph | 
+| HugeGraph-Toolchain | [1.3.0](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz)[[Sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz.sha512)] | [Source](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0-src.tar.gz)[[Sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0-src.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0-src.tar.gz.sha512)] | A collection of tools for graph data import/export/backup, web visualization, etc. | 
 
 > Note: The version numbers of all components of HugeGraph have been kept consistent, and the version numbers of Maven repositories such as client/loader/hubble/common are the same. You can refer to these for dependency references[maven example](https://github.com/apache/incubator-hugegraph-toolchain#maven-dependencies)
-
-### Binary Versions mapping
-
-| Version | Release Date | server                                                                                                                                                                                                                                                                                                                                       | toolchain                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Release Notes                                                   |
-| ------- | ------------  | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| 1.3.0   | 2024-04-01   | [[Binary](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz)] [[Sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz.sha512)] | [[Binary](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz)] [[Sign](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz.sha512)] | [Release-Notes](/docs/changelog/hugegraph-1.3.0-release-notes/) |
-
----
 
 ### Source Versions mapping
 
@@ -31,7 +31,7 @@ The latest HugeGraph: **1.3.0**, released on _2024-04-01_([how to build from sou
 
 ---
 
-### Outdated Versions Mapping
+### Archived Versions Mapping
 Apache versions.
 
 | Version | Release Date | server                                                                                                                                                                                                                                                                                                                                       | toolchain                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Release Notes                                                   |
@@ -40,11 +40,12 @@ Apache versions.
 | 1.0.0   | 2023-02-22   | [[Binary](https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz)] [[Sign](https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz.sha512)] | [[Binary](https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz)] [[Sign](https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz.sha512)]  | [Release-Notes](/docs/changelog/hugegraph-1.0.0-release-notes/) |
 
 
-Note:
+> Note:
+> 1. Please migrate to the latest release version as soon as possible. The community will no longer maintain old versions before `1.0.0` (non ASF versions)
+> 2. `1.3.0` is the last major version compatible with `Java8`, please switch to or migrate to `Java11` as soon as possible (lower versions of Java have potentially more SEC risks and performance impacts).
 
-1. Please migrate to the latest release version as soon as possible. The community will no longer maintain old versions before `1.0.0` (non ASF versions)
-2. `1.3.0` is the last major version compatible with `Java8`, please switch to or migrate to `Java11` as soon as possible (lower versions of Java have potentially more SEC risks and performance impacts).
-   
+---
+
 | server                                                                                                    | client                                                                                 | loader                                                                                                           | hubble                                                                                                             | common                                                                                   | tools                                                                                                       |
 |-----------------------------------------------------------------------------------------------------------| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
 | [0.12.0](https://github.com/apache/incubator-hugegraph/releases/download/v0.12.0/hugegraph-0.12.0.tar.gz) | [2.0.1](https://mvnrepository.com/artifact/com.baidu.hugegraph/hugegraph-client/2.0.1) | [0.12.0](https://github.com/hugegraph/hugegraph-loader/releases/download/v0.12.0/hugegraph-loader-0.12.0.tar.gz) | [1.6.0](https://github.com/hugegraph/hugegraph-hubble/releases/download/v1.6.0/hugegraph-hubble-1.6.0.tar.gz)      | [2.0.1](https://mvnrepository.com/artifact/com.baidu.hugegraph/hugegraph-common/2.0.1)   | [1.6.0](https://github.com/hugegraph/hugegraph-tools/releases/download/v1.6.0/hugegraph-tools-1.6.0.tar.gz) |
