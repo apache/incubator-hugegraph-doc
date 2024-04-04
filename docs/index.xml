@@ -3805,7 +3805,7 @@ multiple times to achieve deduplication. It should be noted that the properties 
 &lt;tbody>
 &lt;tr>
 &lt;td>[&lt;a href="http://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz?action=download">Binary&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-incubating-1.3.0.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
-&lt;td>[&lt;a href="http://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz?action=download">Binary&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0-src.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;td>[&lt;a href="http://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz?action=download">Binary&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -3850,7 +3850,7 @@ multiple times to achieve deduplication. It should be noted that the properties 
 &lt;tbody>
 &lt;tr>
 &lt;td>[&lt;a href="http://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.2.0/apache-hugegraph-incubating-1.2.0.tar.gz?action=download">Binary&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-incubating-1.2.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-incubating-1.2.0.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
-&lt;td>[&lt;a href="http://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.2.0/apache-hugegraph-toolchain-incubating-1.2.0.tar.gz?action=download">Binary&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-toolchain-incubating-1.2.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-toolchain-incubating-1.2.0-src.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;td>[&lt;a href="http://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.2.0/apache-hugegraph-toolchain-incubating-1.2.0.tar.gz?action=download">Binary&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-toolchain-incubating-1.2.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.2.0/apache-hugegraph-toolchain-incubating-1.2.0.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -3890,8 +3890,8 @@ multiple times to achieve deduplication. It should be noted that the properties 
 &lt;tbody>
 &lt;tr>
 &lt;td>[&lt;a href="http://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz?action=download">Binary&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
-&lt;td>[&lt;a href="http://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz?action=download">Binary&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0-src.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
-&lt;td>[&lt;a href="http://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0.tar.gz?action=download">Binary&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0-src.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;td>[&lt;a href="http://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz?action=download">Binary&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;td>[&lt;a href="http://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0.tar.gz?action=download">Binary&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
