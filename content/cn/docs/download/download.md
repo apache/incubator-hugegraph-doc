@@ -1,5 +1,5 @@
 ---
-title: "下载 Apache HugeGraph"
+title: "下载 Apache HugeGraph (Incubating)"
 linkTitle: "Download"
 weight: 2
 ---
