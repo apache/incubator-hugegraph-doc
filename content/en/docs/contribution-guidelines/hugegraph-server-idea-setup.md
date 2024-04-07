@@ -146,9 +146,18 @@ The reason may be that cross-compilation is triggered when using Java 11 to comp
 1. In IntelliJ IDEA, go to `Preferences/Settings` and find the `Java Compiler` panel. Then, disable the `--release` option (recommended).
 2. Set the Project SDK to 8 (Deprecated soon).
 
-#### 2. Unable to Print Location Information (%l) in Log4j2
+#### 2. java: package org.apache.hugegraph.backend.store.raft.rpc.RaftRequests does not exist
+
+The reason may be that the build did not correctly generate the rpc files leading to a missing package reference. To fix this right click on the `hugegraph-pd` repo and select `Maven->Generate Sources and Update Folders`. This will rebuild the repo and correctly generate the files which should fix the missing reference error.
+
+#### 3. Unable to Print Location Information (%l) in Log4j2
 
 This is because Log4j2 uses asynchronous loggers. You can refer to the [official documentation](https://logging.apache.org/log4j/2.x/manual/layouts.html#LocationInformation) for configuration details.
+
+#### 4. Unable to Print Location Information (%l) in Log4j2
+
+This is because Log4j2 uses asynchronous loggers. You can refer to the [official documentation](https://logging.apache.org/log4j/2.x/manual/layouts.html#LocationInformation) for configuration details.
+
 
 ---
 
