@@ -146,7 +146,7 @@ The reason may be that cross-compilation is triggered when using Java 11 to comp
 1. In IntelliJ IDEA, go to `Preferences/Settings` and find the `Java Compiler` panel. Then, disable the `--release` option (recommended).
 2. Set the Project SDK to 8 (Deprecated soon).
 
-#### 2. java: package org.apache.hugegraph.backend.store.raft.rpc.RaftRequests does not exist
+#### 2. java: *.store.raft.rpc.RaftRequests does not exist (RPC Generated Files)
 
 The reason is that the source code didn't include the `RPC-generated` files. You could try 2 ways to fix it:
 1. [CMD]`mvn clean compile` in the **root** directory (Recommend)
