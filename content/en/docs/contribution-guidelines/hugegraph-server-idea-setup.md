@@ -148,7 +148,9 @@ The reason may be that cross-compilation is triggered when using Java 11 to comp
 
 #### 2. java: package org.apache.hugegraph.backend.store.raft.rpc.RaftRequests does not exist
 
-The reason may be that the build did not correctly generate the rpc files leading to a missing package reference. To fix this right click on the `hugegraph-pd` repo and select `Maven->Generate Sources and Update Folders`. This will rebuild the repo and correctly generate the files which should fix the missing reference error.
+The reason is that the source code didn't include the `RPC-generated` files. You could try 2 ways to fix it:
+1. [CMD]`mvn clean compile` in the **root** directory (Recommend)
+2. [UI] right click on the `hugegraph` repo and select `Maven->Generate Sources and Update Folders`. This will rebuild the repo and correctly generate the required files.
 
 #### 3. Unable to Print Location Information (%l) in Log4j2
 
