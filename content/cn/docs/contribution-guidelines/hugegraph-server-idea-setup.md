@@ -147,7 +147,14 @@ curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
 1. 在 IntelliJ IDEA 的 `Preferences/Settings` 中找到 `Java Compiler` 面板，然后关闭 `--release` 选项 (推荐)
 2. 或者将项目的 SDK 版本设置为 8 (Deprecated soon)
 
-#### 2. Log4j2 日志无法打印 %l 等位置信息
+#### 2. java: *.store.raft.rpc.RaftRequests does not exist (RPC Generated Files)
+
+原因是源代码没有包含 `RPC-generated` 文件。可以尝试两种方法来解决：
+1. [命令] 在根目录下运行 `mvn clean compile -DskipTests` (**推荐**)
+2. [UI] 在 IDEA 中，右键点击 `hugegraph` 模块，选择 `Manve -> Generate Sources and Update Folders`
+
+
+#### 3. Log4j2 日志无法打印 %l 等位置信息
 
 这是因为 Log4j2 中使用了 asynchronous loggers，可以参考[官方文档](https://logging.apache.org/log4j/2.x/manual/layouts.html#LocationInformation)进行配置
 

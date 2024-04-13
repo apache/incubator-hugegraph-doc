@@ -15,9 +15,9 @@ The core steps for local startup are the same as starting with **scripts**:
 1. Initialize the database backend by executing the `InitStore` class to initialize the graph.
 2. Start HugeGraph-Server by executing the `HugeGraphServer` class to load the initialized graph information and start the server.
 
-Before proceeding with the following process, make sure that you have cloned the source code of HugeGraph 
-and have configured the development environment, such as `Java 11` & you could config your local environment 
-with this [config-doc](https://github.com/apache/incubator-hugegraph/wiki/The-style-config-for-HugeGraph-in-IDEA) 
+Before proceeding with the following process, make sure that you have cloned the source code of HugeGraph
+and have configured the development environment, such as `Java 11` & you could config your local environment
+with this [config-doc](https://github.com/apache/incubator-hugegraph/wiki/The-style-config-for-HugeGraph-in-IDEA)
 
 ```bash
 git clone https://github.com/apache/hugegraph.git
@@ -146,7 +146,13 @@ The reason may be that cross-compilation is triggered when using Java 11 to comp
 1. In IntelliJ IDEA, go to `Preferences/Settings` and find the `Java Compiler` panel. Then, disable the `--release` option (recommended).
 2. Set the Project SDK to 8 (Deprecated soon).
 
-#### 2. Unable to Print Location Information (%l) in Log4j2
+#### 2. java: *.store.raft.rpc.RaftRequests does not exist (RPC Generated Files)
+
+The reason is that the source code didn't include the `RPC-generated` files. You could try 2 ways to fix it:
+1. [CMD]`mvn clean compile` in the **root** directory (Recommend)
+2. [UI] right click on the `hugegraph` repo and select `Maven->Generate Sources and Update Folders`. This will rebuild the repo and correctly generate the required files.
+
+#### 3. Unable to Print Location Information (%l) in Log4j2
 
 This is because Log4j2 uses asynchronous loggers. You can refer to the [official documentation](https://logging.apache.org/log4j/2.x/manual/layouts.html#LocationInformation) for configuration details.
 
