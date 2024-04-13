@@ -9171,7 +9171,13 @@ with this &lt;a href="https://github.com/apache/incubator-hugegraph/wiki/The-sty
 &lt;li>In IntelliJ IDEA, go to &lt;code>Preferences/Settings&lt;/code> and find the &lt;code>Java Compiler&lt;/code> panel. Then, disable the &lt;code>--release&lt;/code> option (recommended).&lt;/li>
 &lt;li>Set the Project SDK to 8 (Deprecated soon).&lt;/li>
 &lt;/ol>
-&lt;h4 id="2-unable-to-print-location-information-l-in-log4j2">2. Unable to Print Location Information (%l) in Log4j2&lt;/h4>
+&lt;h4 id="2-java-storeraftrpcraftrequests-does-not-exist-rpc-generated-files">2. java: *.store.raft.rpc.RaftRequests does not exist (RPC Generated Files)&lt;/h4>
+&lt;p>The reason is that the source code didn&amp;rsquo;t include the &lt;code>RPC-generated&lt;/code> files. You could try 2 ways to fix it:&lt;/p>
+&lt;ol>
+&lt;li>[CMD]&lt;code>mvn clean compile&lt;/code> in the &lt;strong>root&lt;/strong> directory (Recommend)&lt;/li>
+&lt;li>[UI] right click on the &lt;code>hugegraph&lt;/code> repo and select &lt;code>Maven-&amp;gt;Generate Sources and Update Folders&lt;/code>. This will rebuild the repo and correctly generate the required files.&lt;/li>
+&lt;/ol>
+&lt;h4 id="3-unable-to-print-location-information-l-in-log4j2">3. Unable to Print Location Information (%l) in Log4j2&lt;/h4>
 &lt;p>This is because Log4j2 uses asynchronous loggers. You can refer to the &lt;a href="https://logging.apache.org/log4j/2.x/manual/layouts.html#LocationInformation">official documentation&lt;/a> for configuration details.&lt;/p>
 &lt;hr>
 &lt;h3 id="references">References&lt;/h3>
