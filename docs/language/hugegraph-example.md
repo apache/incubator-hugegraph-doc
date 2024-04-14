@@ -27,7 +27,7 @@ HugeGraph相对于TitanDB而言，其主要特点如下：
 
 本示例通过Property Graph Model图数据模型来描述希腊神话中各人物角色的关系（也被成为人物关系图谱），具体关系详见下图。
 
-![graph-of-gods](./img/graph-of-gods.png)
+![graph-of-gods](/img/language/graph-of-gods.png)
 
 
 其中，圆形节点代表实体(Vertex)，箭头代表关系（Edge），方框的内容为属性。
