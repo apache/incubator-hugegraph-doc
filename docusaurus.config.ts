@@ -41,7 +41,22 @@ const config: Config = {
   // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'],
+    locales: ['en','zh'],
+    localeConfigs: {
+      en: {
+        htmlLang: 'en-US',
+        label: 'English',
+        direction: 'ltr',
+        calendar: 'gregory',
+        path: 'en',
+      },
+      // You can omit a locale (e.g. fr) if you don't need to override the defaults
+      zh: {
+        direction: 'ltr',
+        path: 'zh',
+        htmlLang: 'zh-CN',
+      },
+    },
   },
 
   presets: [
@@ -121,6 +136,10 @@ const config: Config = {
           className: 'header-github-link',
           'aria-label': 'GitHub repository',
         },
+        {
+          type:'localeDropdown',
+          position:'right'
+        }
       ],
     },
     footer: {
