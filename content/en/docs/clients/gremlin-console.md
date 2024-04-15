@@ -9,74 +9,20 @@ Gremlin-Console is an interactive client developed by TinkerPop. Users can use t
 - Stand-alone offline mode
 - Client/Server mode
 
+**Note: Gremlin-Console is only for users to quickly get started and experience, it is not recommended for use in production environments.**
+
 ### 1 Stand-alone offline mode
 
-Since the lib directory already contains the HugeCore jar package, and HugeGraph has been registered in the Console as a plug-in, the users can write a groovy script directly to call the code of HugeGraph-Core, and then hand it over to the parsing engine in Gremlin-Console for execution. As a result, the users can operate the graph without starting the Server.
+Since the lib directory already contains the HugeCore jar package, and HugeGraph-Server has been registered in the Console as a plug-in, the users can write a groovy script directly to call the code of HugeGraph-Core, and then hand it over to the parsing engine in Gremlin-Console for execution. As a result, the users can operate the graph **without** starting the Server.
 
-This mode is convenient for users to get started quickly, but it is not suitable for scenarios where a large amount of data is inserted and queried. Here is an example:
+Here is an example, first modify the `hugegraph.properties` configuration to use the Memory backend (using other backends may encounter some initialization issues):
 
-There is a sample script in the script directory `example.groovy`:
-
-```groovy
-import org.apache.hugegraph.HugeFactory
-import org.apache.hugegraph.backend.id.IdGenerator
-import org.apache.hugegraph.dist.RegisterUtil
-import org.apache.hugegraph.type.define.NodeRole
-import org.apache.tinkerpop.gremlin.structure.T
-
-RegisterUtil.registerRocksDB()
-
-conf = "conf/graphs/hugegraph.properties"
-graph = HugeFactory.open(conf)
-graph.serverStarted(IdGenerator.of("server-tinkerpop"), NodeRole.MASTER)
-schema = graph.schema()
-
-schema.propertyKey("name").asText().ifNotExist().create()
-schema.propertyKey("age").asInt().ifNotExist().create()
-schema.propertyKey("city").asText().ifNotExist().create()
-schema.propertyKey("weight").asDouble().ifNotExist().create()
-schema.propertyKey("lang").asText().ifNotExist().create()
-schema.propertyKey("date").asText().ifNotExist().create()
-schema.propertyKey("price").asInt().ifNotExist().create()
-
-schema.vertexLabel("person").properties("name", "age", "city").primaryKeys("name").ifNotExist().create()
-schema.vertexLabel("software").properties("name", "lang", "price").primaryKeys("name").ifNotExist().create()
-schema.indexLabel("personByCity").onV("person").by("city").secondary().ifNotExist().create()
-schema.indexLabel("personByAgeAndCity").onV("person").by("age", "city").secondary().ifNotExist().create()
-schema.indexLabel("softwareByPrice").onV("software").by("price").range().ifNotExist().create()
-schema.edgeLabel("knows").sourceLabel("person").targetLabel("person").properties("date", "weight").ifNotExist().create()
-schema.edgeLabel("created").sourceLabel("person").targetLabel("software").properties("date", "weight").ifNotExist().create()
-schema.indexLabel("createdByDate").onE("created").by("date").secondary().ifNotExist().create()
-schema.indexLabel("createdByWeight").onE("created").by("weight").range().ifNotExist().create()
-schema.indexLabel("knowsByWeight").onE("knows").by("weight").range().ifNotExist().create()
-
-marko = graph.addVertex(T.label, "person", "name", "marko", "age", 29, "city", "Beijing")
-vadas = graph.addVertex(T.label, "person", "name", "vadas", "age", 27, "city", "Hongkong")
-lop = graph.addVertex(T.label, "software", "name", "lop", "lang", "java", "price", 328)
-josh = graph.addVertex(T.label, "person", "name", "josh", "age", 32, "city", "Beijing")
-ripple = graph.addVertex(T.label, "software", "name", "ripple", "lang", "java", "price", 199)
-peter = graph.addVertex(T.label, "person", "name", "peter", "age", 35, "city", "Shanghai")
-
-marko.addEdge("knows", vadas, "date", "20160110", "weight", 0.5)
-marko.addEdge("knows", josh, "date", "20130220", "weight", 1.0)
-marko.addEdge("created", lop, "date", "20171210", "weight", 0.4)
-josh.addEdge("created", lop, "date", "20091111", "weight", 0.4)
-josh.addEdge("created", ripple, "date", "20171210", "weight", 1.0)
-peter.addEdge("created", lop, "date", "20170324", "weight", 0.2)
-
-graph.tx().commit()
-
-g = graph.traversal()
-
-System.out.println(">>>> query all vertices: size=" + g.V().toList().size())
-System.out.println(">>>> query all edges: size=" + g.E().toList().size())
+```properties
+backend=memory
+serializer=text
 ```
 
-In fact, this groovy script is almost Java code, the only difference is that the variable definition can be written without the type declaration, and the semicolon at the end of each line can be removed.
-
-> `g.V()` is to get all the vertices, `g.E()` is to get all the edges, `toList()` is to store the result in a List, refer to [TinkerPop Terminal Steps](http://tinkerpop.apache.org/docs/current/reference/#terminal-steps)。
-
-Enter the gremlin-console below and pass in the script to execute it:
+Then enter the following command:
 
 ```bash
 > ./bin/gremlin-console.sh -- -i scripts/example.groovy
@@ -97,7 +43,9 @@ gremlin>
 
 > The `--` here will be parsed by getopts as the last option, allowing the subsequent options to be passed to Gremlin-Console for processing. `-i` represents `Execute the specified script and leave the console open on completion`. For more options, you can refer to the [source code](https://github.com/apache/tinkerpop/blob/3.5.1/gremlin-console/src/main/groovy/org/apache/tinkerpop/gremlin/console/Console.groovy#L483) of Gremlin-Console.
 
-As you can see, 6 vertices and 6 edges are inserted and queried. After entering the console, you can continue to enter groovy statements to operate on the graph:
+[`example.groovy`](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/src/assembly/static/scripts/example.groovy) is an example script under the `scripts` directory. This script inserts some data and queries the number of vertices and edges in the graph at the end.
+
+You can continue to enter Gremlin statements to operate on the graph:
 
 ```groovy
 gremlin> g.V()
@@ -123,7 +71,7 @@ For more Gremlin statements, please refer to [Tinkerpop Official Website](http:/
 
 Because Gremlin-Console can only connect to HugeGraph-Server through WebSocket, HugeGraph-Server provides HTTP connections by default, so modify the configuration of gremlin-server first.
 
-*NOTE: After changing the connection method to WebSocket, HugeGraph-Client, HugeGraph-Loader, HugeGraph-Hubble and other supporting tools cannot be used.*
+**NOTE: After changing the connection method to WebSocket, HugeGraph-Client, HugeGraph-Loader, HugeGraph-Hubble and other supporting tools cannot be used.**
 
 ```yaml
 # vim conf/gremlin-server.yaml
@@ -136,7 +84,7 @@ channelizer: org.apache.tinkerpop.gremlin.server.channel.HttpChannelizer
 
 Modify `channelizer: org.apache.tinkerpop.gremlin.server.channel.HttpChannelizer` to `channelizer: org.apache.tinkerpop.gremlin.server.channel.WebSocketChannelizer` or comment directly, and then follow the [steps](/docs/quickstart/hugegraph-server/) to start the Server.
 
-Then enter gremlin-console:
+Then enter Gremlin-Console:
 
 ```bash
 > ./bin/gremlin-console.sh
@@ -170,7 +118,7 @@ gremlin> :remote connect tinkerpop.server conf/remote.yaml
 ==>Configured localhost/127.0.0.1:8182
 ```
 
-After a successful connection, if the sample graph `example.groovy` is imported during the startup of HugeGraphServer, you can directly perform queries in the console.
+After a successful connection, if the sample graph `example.groovy` is imported during the startup of HugeGraph-Server, you can directly perform queries in the console.
 
 ```groovy
 gremlin> :> hugegraph.traversal().V()
@@ -202,4 +150,4 @@ gremlin> :> @script
 gremlin> 
 ```
 
-For more information on the use of gremlin-console, please refer to [Tinkerpop Official Website](http://tinkerpop.apache.org/docs/current/reference/)
+For more information on the use of Gremlin-Console, please refer to [Tinkerpop Official Website](http://tinkerpop.apache.org/docs/current/reference/)
