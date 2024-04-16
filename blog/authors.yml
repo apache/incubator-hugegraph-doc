@@ -15,8 +15,15 @@
 # specific language governing permissions and limitations
 # under the License.
 
-tison:
-  name: tison
-  title: Apache Member
-  url: https://github.com/tisonkun
-  image_url: https://github.com/tisonkun.png
+imbajin:
+  name: Imba Jin
+  title: Apache HugeGraph PPMC
+  url: https://github.com/imbajin
+  image_url: https://github.com/imbajin.png
+
+simon:
+  name: simon824
+  title: Apache Committer
+  url: https://github.com/simon824
+  image_url: https://github.com/simon824.png
+

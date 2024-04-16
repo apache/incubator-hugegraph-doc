@@ -52,7 +52,7 @@ Optional:
 
 If you use docker desktop, you can set the option like: 
 
-<img src="/img/quickstart/images-server/31docker-option.jpg" alt="image" />
+<img src="/img/quickstart/31docker-option.jpg" alt="image" />
 
 Also, if we want to manage the other Hugegraph related instances in one file, we can use `docker-compose` to deploy, with the command `docker-compose up -d` (you can config only `server`). Here is an example `docker-compose.yml`:
 
