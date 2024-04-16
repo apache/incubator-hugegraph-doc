@@ -19,7 +19,7 @@ name: Deploy
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
 
 jobs:
@@ -32,7 +32,7 @@ jobs:
           node-version: 18.x
       - uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 9
       - run: pnpm install
       - run: pnpm run build
       - run: cp .asf.yaml build/.asf.yaml

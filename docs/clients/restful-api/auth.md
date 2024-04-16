@@ -1,5 +1,5 @@
 ---
-id: 'authentication'
+id: 'auth'
 title: 'Authentication API'
 sidebar_label: 'Authentication'
 sidebar_position: 16

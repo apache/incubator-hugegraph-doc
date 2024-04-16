@@ -18,9 +18,9 @@
 name: CI
 on:
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
   push:
-    branches: [ main ]
+    branches: [ master ]
 
 # Concurrency strategy:
 #   github.workflow: distinguish this workflow from others

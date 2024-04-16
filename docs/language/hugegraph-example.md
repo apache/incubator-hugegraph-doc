@@ -178,7 +178,7 @@ g.V(pluto).out('brother').as('god').out('lives').as('place').select('god','place
 g.V(pluto).out('brother').as('god').out('lives').as('place').select('god','place').by('name')
 ```
 
-推荐使用[HugeGraph-Studio](/docs/quickstart/hugegraph-studio) 通过可视化的方式来执行上述代码。另外也可以通过HugeGraph-Client、HugeApi、GremlinConsole和GremlinDriver等多种方式执行上述代码。
+推荐使用[HugeGraph-Hubble](../quickstart/hugegraph-hubble) 通过可视化的方式来执行上述代码。另外也可以通过HugeGraph-Client、HugeApi、GremlinConsole和GremlinDriver等多种方式执行上述代码。
 
 #### 3.2 总结
 

@@ -30,7 +30,7 @@ PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/indexlabels/personByCity
 ```
 Note:
 
-> You can get the asynchronous job status by `GET http://localhost:8080/graphs/hugegraph/tasks/${task_id}` (the task_id here should be 1). See More [AsyncJob RESTfull API](../task)
+> You can get the asynchronous job status by `GET http://localhost:8080/graphs/hugegraph/tasks/${task_id}` (the task_id here should be 1). See More [AsyncJob RESTfull API](./task)
 
 #### 1.6.2 Rebulid all Indexs of VertexLabel
 
@@ -56,7 +56,7 @@ PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/vertexlabels/person
 
 Note:
 
-> You can get the asynchronous job status by `GET http://localhost:8080/graphs/hugegraph/tasks/${task_id}` (the task_id here should be 2). See More [AsyncJob RESTfull API](../task)
+> You can get the asynchronous job status by `GET http://localhost:8080/graphs/hugegraph/tasks/${task_id}` (the task_id here should be 2). See More [AsyncJob RESTfull API](./task)
 
 #### 1.6.3 Rebulid all Indexs of EdgeLabel
 
@@ -82,4 +82,4 @@ PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/edgelabels/created
 
 Note:
 
-> You can get the asynchronous job status by `GET http://localhost:8080/graphs/hugegraph/tasks/${task_id}` (the task_id here should be 3). See More [AsyncJob RESTfull API](../task)
+> You can get the asynchronous job status by `GET http://localhost:8080/graphs/hugegraph/tasks/${task_id}` (the task_id here should be 3). See More [AsyncJob RESTfull API](./task)

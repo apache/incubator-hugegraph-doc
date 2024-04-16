@@ -72,7 +72,7 @@ In the `hugegraph{n}.properties` configuration file, configure the `gremlin.grap
 gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 ```
 
-For detailed API calls and explanations regarding permissions, please refer to the [Authentication-API](/docs/clients/restful-api/auth) documentation.
+For detailed API calls and explanations regarding permissions, please refer to the [Authentication-API](../clients/restful-api/auth) documentation.
 
 ### Custom User Authentication System
 

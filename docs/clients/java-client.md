@@ -9,9 +9,9 @@ The code in this document is written in `java`, but its style is very similar to
 You can convert `java` code into `groovy`; in addition, each line of statement can be without a semicolon at the end, `groovy` considers a line to be a statement.
 The `gremlin(groovy)` written by the user in `HugeGraph-Studio` can refer to the `java` code in this document, and some examples will be given below.
 
-### 1 HugeGraph-Client
+### 1 HugeGraph-Java-Client
 
-HugeGraph-Client is the general entry for operating graph. Users must first create a HugeGraph-Client object and establish a connection (pseudo connection) with HugeGraph-Server before they can obtain the operation entry objects of schema, graph and gremlin.
+HugeGraph-Java-Client is the general entry for operating graph. Users must first create a HugeGraph-Client object and establish a connection (pseudo connection) with HugeGraph-Server before they can obtain the operation entry objects of schema, graph and gremlin.
 
 Currently, HugeGraph-Client only allows connections to existing graphs on the server, and cannot create custom graphs. Its creation method is as follows:
 

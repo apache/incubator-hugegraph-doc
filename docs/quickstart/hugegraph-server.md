@@ -674,7 +674,7 @@ response body:
 
 <p id="swaggerui-example"></p>
 
-For detailed API, please refer to [RESTful-API](/docs/clients/restful-api)
+For detailed API, please refer to [RESTful-API](../clients/restful-api)
 
 You can also visit `localhost:8080/swagger-ui/index.html` to check the API.
 
@@ -697,4 +697,4 @@ $bin/stop-hugegraph.sh
 
 ### 8 Debug Server with IntelliJ IDEA
 
-Please refer to [Setup Server in IDEA](./docs/contribution-guidelines/hugegraph-server-idea-setup)
+Please refer to [Setup Server in IDEA](../contribution-guidelines/idea-setup)
