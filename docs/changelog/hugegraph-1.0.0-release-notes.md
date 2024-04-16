@@ -1,5 +1,5 @@
 ---
-id: 'release-1.0.0'
+id: 'hugegraph-1.0.0-release-notes'
 title: 'HugeGraph 1.0.0 Release Notes'
 sidebar_label: 'Release-1.0.0'
 sidebar_position: 1

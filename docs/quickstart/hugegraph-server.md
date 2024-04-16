@@ -48,7 +48,7 @@ We can use `docker run -itd --name=graph -p 8080:8080 hugegraph/hugegraph` to qu
 Optional: 
 1. use `docker exec -it graph bash` to enter the container to do some operations.
 2. use `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph` to start with a **built-in** example graph. We can use `RESTful API` to verify the result. The detailed step can refer to [5.1.7](#517-create-an-example-graph-when-startup)
-3. use `-e PASSWORD=123456` to enable auth mode and set the passoword for admin. You cna find more details from [Config Authentication](/docs/config/config-authentication#Use-docker-to-enble-authentication-mode)
+3. use `-e PASSWORD=123456` to enable auth mode and set the passoword for admin. You cna find more details from [Config Authentication](/docs/config/config-authentication#use-docker-to-enble-authentication-mode)
 
 If you use docker desktop, you can set the option like: 
 
@@ -161,7 +161,7 @@ tar zxf *hugegraph-*.tar.gz
 cd *hugegraph*/*tool* 
 ```
 
-> note: `${version}` is the version, The latest version can refer to [Download Page](/docs/download/download), or click the link to download directly from the Download page
+> note: `${version}` is the version, The latest version can refer to [Download Page](/docs/download), or click the link to download directly from the Download page
 
 The general entry script for HugeGraph-Tools is `bin/hugegraph`, Users can use the `help` command to view its usage, here only the commands for one-click deployment are introduced.
 
@@ -190,7 +190,7 @@ If you need to access HugeGraphServer externally, please modify the `restserver.
 
 Since the configuration (hugegraph.properties) and startup steps required by various backends are slightly different, the following will introduce the configuration and startup of each backend one by one.
 
-If you want to use HugeGraph authentication mode, you should follow the [Server Authentication Configuration](https://hugegraph.apache.org/docs/config/config-authentication/) before you start Server later.
+If you want to use HugeGraph authentication mode, you should follow the [Server Authentication Configuration](/docs/config/config-authentication) before you start Server later.
 
 ##### 5.1.1 Memory
 
@@ -464,7 +464,7 @@ This indicates the successful creation of the sample graph.
 
 #### 5.2 Use Docker to startup
 
-In [3.3 Use Docker container](#33-use-docker-container), we have introduced how to use docker to deploy `hugegraph-server`. `server` can also preload an example graph by setting the parameter.
+In [3.3 Use Docker container](#31-use-docker-container-convenient-for-testdev), we have introduced how to use docker to deploy `hugegraph-server`. `server` can also preload an example graph by setting the parameter.
 
 ##### 5.2.1 Uses Cassandra as storage
 
