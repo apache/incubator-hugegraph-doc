@@ -17,7 +17,7 @@
 
 github:
   description: "Apache Website Template"
-  homepage: https://foo.apache.org/
+  homepage: https://hugegraph.apache.org/
   features:
     issues: true
     projects: false
