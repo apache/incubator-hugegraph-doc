@@ -25,6 +25,8 @@
 }
 
 .featureSvg {
-  height: 200px;
-  width: 200px;
+  height: 60px;
+  width: 60px;
+  fill: var(--ifm-color-primary);
+  margin: 20px 0px;
 }

@@ -18,7 +18,7 @@ Local disk files and HDFS files support resumable uploads.
 
 It will be explained in detail below.
 
-> Note: HugeGraph-Loader requires HugeGraph Server service, please refer to [HugeGraph-Server Quick Start](./docs/quickstart/hugegraph-server) to download and start Server
+> Note: HugeGraph-Loader requires HugeGraph Server service, please refer to [HugeGraph-Server Quick Start](../quickstart/hugegraph-server) to download and start Server
 
 ### 2 Get HugeGraph-Loader
 
@@ -139,7 +139,7 @@ schema.edgeLabel("knows").sourceLabel("person").targetLabel("person").ifNotExist
 schema.edgeLabel("created").sourceLabel("person").targetLabel("software").ifNotExist().create();
 ```
 
-> Please refer to the corresponding section in [hugegraph-client](./docs/clients/hugegraph-client) for the detailed description of the schema.
+> Please refer to the corresponding section in [hugegraph-client](./hugegraph-client) for the detailed description of the schema.
 
 #### 3.2 Prepare data
 

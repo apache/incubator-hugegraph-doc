@@ -311,4 +311,4 @@ DELETE http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
 
 Note:
 
-> You can query the execution status of an asynchronous task by using `GET http://localhost:8080/graphs/hugegraph/tasks/1` (where "1" is the task_id). For more information, refer to the [Asynchronous Task RESTful API](../task).
+> You can query the execution status of an asynchronous task by using `GET http://localhost:8080/graphs/hugegraph/tasks/1` (where "1" is the task_id). For more information, refer to the [Asynchronous Task RESTful API](./task).

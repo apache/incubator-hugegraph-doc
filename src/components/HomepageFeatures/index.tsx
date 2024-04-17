@@ -23,43 +23,62 @@ import styles from './styles.module.css';
 
 type FeatureItem = {
   title: string;
+  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
   description: JSX.Element;
 };
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
+    title: 'Convenient',
+    Svg: require('@site/static/img/banner/convenient.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Not only supports Gremlin graph query language and RESTful
+        API but also provides commonly used graph algorithm APIs. To
+        help users easily implement various queries and analyses,
+        HugeGraph has a full range of accessory tools, such as
+        supporting distributed storage, data replication, scaling
+        horizontally, and supports many built-in backends of storage
+        engines.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: 'Efficient',
+    Svg: require('@site/static/img/banner/efficient.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Has been deeply optimized in graph storage and graph
+        computation. It provides multiple batch import tools that can
+        easily complete the fast-import of tens of billions of data,
+        achieves millisecond-level response for graph retrieval through
+        ameliorated queries, and supports concurrent online and real-
+        time operations for thousands of users.
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: 'Adaptable',
+    Svg: require('@site/static/img/banner/adaptable.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Adapts to the Apache Gremlin standard graph query language
+        and the Property Graph standard modeling method, and both
+        support graph-based OLTP and OLAP schemes. Furthermore,
+        HugeGraph can be integrated with Hadoop and Spark’s big data
+        platforms, and easily extend the back-end storage engine
+        through plug-ins.
       </>
     ),
   },
 ];
 
-function Feature({title, description}: FeatureItem) {
+function Feature({ title, description, Svg }: FeatureItem) {
+  console.log('icon', Svg);
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center padding-horiz--md">
+        <div> {<Svg role="img" className={styles.featureSvg} />} </div>
         <Heading as="h3">{title}</Heading>
         <p>{description}</p>
       </div>

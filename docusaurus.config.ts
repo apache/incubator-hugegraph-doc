@@ -21,13 +21,13 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
-const projectName = "Template";
-const mainRepoName = "apache-website-template";
-const siteRepoName = "apache-website-template";
+const projectName = "HugeGraph";
+const mainRepoName = "incubator-hugegraph";
+const siteRepoName = "incubator-hugegraph-doc";
 
 const config: Config = {
   title: `Apache ${projectName}`,
-  tagline: `Welcome to Apache ${projectName}!`,
+  tagline: `A convenient, efficient, and adaptable graph database compatible with the Apache TinkerPop3 framework and the Gremlin query language.`,
   favicon: 'img/favicon.ico',
 
   url: `https://${projectName.toLowerCase()}.apache.org/`,
@@ -79,6 +79,12 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
+
+  // search plugin: https://github.com/praveenn77/docusaurus-lunr-search
+  plugins: [[ require.resolve('docusaurus-lunr-search'), {
+    languages: ['en'],
+    highlightResult: true,
+  }]],
 
   themeConfig: {
     // TODO: Replace with your project's social card
@@ -144,7 +150,55 @@ const config: Config = {
     },
     footer: {
       style: 'dark',
-      links: [],
+      links: [
+        {
+          title: 'Community',
+          items: [
+            {
+              label: 'Mailing list',
+              href: 'https://lists.apache.org/list.html?dev@hugegraph.apache.org'
+            },
+            {
+              label: 'WeChat',
+              href: 'https://github.com/apache/incubator-hugegraph-doc/blob/master/assets/images/wechat.png?raw=true'
+            }
+          ]
+        },
+        {
+          title: 'Documentation',
+          items: [
+            {
+              label: 'Introduction',
+              to: '/docs/intro'
+            },
+            {
+              label: 'Guide',
+              to: '/docs/guide/architecture-overview'
+            }
+          ]
+        },
+        {
+          title: 'Repositories',
+          items: [
+            {
+              label: 'HugeGraph Server',
+              href: 'https://github.com/apache/hugegraph'
+            },
+            {
+              label: 'HugeGraph ToolChain',
+              href: 'https://github.com/apache/hugegraph-toolchain'
+            },
+            {
+              label: 'HugeGraph Computer',
+              href: 'https://github.com/apache/hugegraph-computer'
+            },
+            {
+              label: 'HugeGraph AI',
+              href: 'https://github.com/apache/incubator-hugegraph-ai'
+            }
+          ]
+        }
+      ],
       logo: {
         width: 200,
         src: "/img/apache-incubator.svg",

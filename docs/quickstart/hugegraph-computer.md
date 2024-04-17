@@ -83,7 +83,7 @@ bin/start-computer.sh -d local -r worker
 
 3.1.5.1 Enable `OLAP` index query for server
 
-If OLAP index is not enabled, it needs to enable, more reference: [modify-graphs-read-mode](/docs/clients/restful-api/graphs/#634-modify-graphs-read-mode-this-operation-requires-administrator-privileges)
+If OLAP index is not enabled, it needs to enable, more reference: [modify-graphs-read-mode](/docs/clients/restful-api/graphs#634-modify-graphs-read-mode-this-operation-requires-administrator-privileges)
 
 ```http
 PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
