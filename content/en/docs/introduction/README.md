@@ -54,13 +54,14 @@ visualization management platform, a one-stop visualization analysis platform, t
   - [HugeGraph-Tools](/docs/quickstart/hugegraph-tools): HugeGraph-Tools is HugeGraph's deployment and management tool, including graph management, backup/recovery, Gremlin execution and other functions.
 - [HugeGraph-Computer](/docs/quickstart/hugegraph-computer): HugeGraph-Computer is a distributed graph processing system (OLAP). 
   It is an implementation of [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf). It can run on clusters such as Kubernetes/Yarn, and supports large-scale graph computing.
-- [HugeGraph-AI(Beta)](/docs/quickstart/hugegraph-ai): HugeGraph-AI is HugeGraph's independent AI 
+- [HugeGraph-AI](/docs/quickstart/hugegraph-ai): HugeGraph-AI is HugeGraph's independent AI 
   component, providing training and inference functions of graph neural networks, LLM/Graph RAG combination/Python-Client and other related components, continuously updating.
 
 ### Contact Us
 
 - [GitHub Issues](https://github.com/apache/incubator-hugegraph/issues): Feedback on usage issues and functional requirements (quick response)
 - Feedback Email: [dev@hugegraph.apache.org](mailto:dev@hugegraph.apache.org) ([subscriber](https://hugegraph.apache.org/docs/contribution-guidelines/subscribe/) only)
+- Security Email: [security@hugegraph.apache.org](mailto:security@hugegraph.apache.org) (Report SEC problems)
 - WeChat public account: Apache HugeGraph, welcome to scan this QR code to follow us.
 
- <img src="https://github.com/apache/incubator-hugegraph-doc/blob/master/assets/images/wechat.png?raw=true" alt="QR png" width="300"/>
+ <img src="https://github.com/apache/hugegraph-doc/blob/master/assets/images/wechat.png?raw=true" alt="QR png" width="300"/>

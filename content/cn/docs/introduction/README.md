@@ -58,13 +58,14 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 - [HugeGraph-Computer](/cn/docs/quickstart/hugegraph-computer)：HugeGraph-Computer 是分布式图处理系统 (OLAP). 
   它是 [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf) 的一个实现。它可以运行在 Kubernetes/Yarn 
   等集群上，支持超大规模图计算。
-- [HugeGraph-AI(Beta)](/cn/docs/quickstart/hugegraph-ai)：HugeGraph-AI 是 HugeGraph 独立的 AI 
+- [HugeGraph-AI](/cn/docs/quickstart/hugegraph-ai)：HugeGraph-AI 是 HugeGraph 独立的 AI 
   组件，提供了图神经网络的训练和推理功能，LLM/Graph RAG 结合/Python-Client 等相关组件，持续更新 ing。
 
 ### Contact Us
 
 - [GitHub Issues](https://github.com/apache/incubator-hugegraph/issues): 使用途中出现问题或提供功能性建议，可通过此反馈 (推荐)
 - 邮件反馈：[dev@hugegraph.apache.org](mailto:dev@hugegraph.apache.org) ([邮箱订阅方式](https://hugegraph.apache.org/docs/contribution-guidelines/subscribe/))
+- SEC 反馈： [security@hugegraph.apache.org](mailto:security@hugegraph.apache.org) (报告安全相关问题)
 - 微信公众号：Apache HugeGraph, 欢迎扫描下方二维码加入我们！
 
- <img src="https://github.com/apache/incubator-hugegraph-doc/blob/master/assets/images/wechat.png?raw=true" alt="QR png" width="300"/>
+ <img src="https://github.com/apache/hugegraph-doc/blob/master/assets/images/wechat.png?raw=true" alt="QR png" width="300"/>

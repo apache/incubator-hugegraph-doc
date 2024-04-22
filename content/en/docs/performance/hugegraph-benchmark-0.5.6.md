@@ -4,6 +4,13 @@ linkTitle: "HugeGraph BenchMark Performance"
 weight: 1
 ---
 
+> **Note:** 
+> 
+> The current performance metrics are based on an earlier version. The **latest version** has significant 
+> improvements in both performance and functionality. We encourage you to refer to the most recent release featuring 
+> **autonomous distributed storage** and **enhanced computational push down capabilities**. Alternatively, 
+> you may wait for the community to update the data with these enhancements.
+
 ### 1 Test environment
 
 #### 1.1 Hardware information
@@ -103,7 +110,7 @@ _Instructions_
 - The data in the table represents the time spent traversing vertices, in seconds.
 - For example, HugeGraph uses the RocksDB backend to traverse all vertices in amazon0601, and search for adjacent edges and another vertex, which takes a total of 45.118 seconds.
 
-##### 2.2.3 FA性能
+##### 2.2.3 FA 性能
 
 | Backend   | email-enron(30w) | amazon0601(300w) | com-youtube.ungraph(300w) | com-lj.ungraph(3000w) |
 |-----------|------------------|------------------|---------------------------|-----------------------|

@@ -4,13 +4,20 @@ linkTitle: "v0.5.6 Cluster(Cassandra)"
 weight: 2
 ---
 
+> **Note:** 
+> 
+> The current performance metrics are based on an earlier version. The **latest version** has significant 
+> improvements in both performance and functionality. We encourage you to refer to the most recent release featuring 
+> **autonomous distributed storage** and **enhanced computational push down capabilities**. Alternatively, 
+> you may wait for the community to update the data with these enhancements.
+
 ### 1 Test environment
 
 Compressed machine information
 
-CPU                                          | Memory | 网卡      | 磁盘
--------------------------------------------- | ------ | --------- | ------------------
-48 Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz | 128G   | 10000Mbps | 750GB SSD,2.7T HDD
+| CPU                                          | Memory | 网卡        | 磁盘                 |
+|----------------------------------------------|--------|-----------|--------------------|
+| 48 Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz | 128G   | 10000Mbps | 750GB SSD,2.7T HDD |
 
 - Starting Pressure Machine Information: Configured the same as the compressed machine.
 - Testing tool: Apache JMeter 2.5.1.

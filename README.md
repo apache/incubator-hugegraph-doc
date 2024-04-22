@@ -4,7 +4,7 @@ Please visit the [contribution doc](./contribution.md) to get start, include the
 
 ### Summary
 
-HugeGraph is an easy-to-use, efficient, general-purpose open source graph database system(Graph Database, [GitHub project address](https://github.com/apache/hugegraph)),
+HugeGraph is an easy-to-use, efficient, general-purpose open source graph database system (Graph Database, [GitHub project address](https://github.com/apache/hugegraph)),
 implemented the [Apache TinkerPop3](https://tinkerpop.apache.org) framework and is fully compatible with the [Gremlin](https://tinkerpop.apache.org/gremlin.html) query language.
 With complete toolchain components, it helps users to easily build applications and products based on graph databases. HugeGraph supports fast import of more than 10 billion vertices and edges, and provides millisecond-level relational query capability (OLTP). 
 It supports large-scale distributed graph processing (OLAP).
@@ -29,55 +29,47 @@ The functions of this system include but are not limited to:
 - Supports batch import of data from multiple data sources (including local files, HDFS files, MySQL databases and other data sources), and supports import of multiple file formats (including TXT, CSV, JSON and other formats)
 - With a visual operation interface, it can be used for operation, analysis and display diagrams, reducing the threshold for users to use
 - Optimized graph interface: shortest path (Shortest Path), K-step connected subgraph (K-neighbor), K-step to reach the adjacent point (K-out), personalized recommendation algorithm PersonalRank, etc.
-- Implemented based on Apache TinkerPop3 framework, supports Gremlin graph query language
+- Implemented based on the Apache-TinkerPop3 framework, supports Gremlin graph query language
 - Support attribute graph, attributes can be added to vertices and edges, and support rich attribute types
 - Has independent schema metadata information, has powerful graph modeling capabilities, and facilitates third-party system integration
 - Support multi-vertex ID strategy: support primary key ID, support automatic ID generation, support user-defined string ID, support user-defined digital ID
 - The attributes of edges and vertices can be indexed to support precise query, range query, and full-text search
 - The storage system adopts plug-in mode, supporting RocksDB, Cassandra, ScyllaDB, HBase, MySQL, PostgreSQL, Palo, and InMemory, etc.
 - Integrate with big data systems such as Hadoop and Spark GraphX, and support Bulk Load operations
-- Support high availability(HA), multiple copies of data, backup recovery, monitoring, etc.
+- Support high availability (HA), multiple copies of data, backup recovery, monitoring, etc.
 
 ### Modules
 
-- [HugeGraph-Server](https://hugegraph.apache.org/docs/quickstart/hugegraph-server): HugeGraph-Server is the core part of the HugeGraph project, including submodules such as Core, Backend, and API;
-  - Core: Graph engine implementation, connecting the Backend module downward and supporting the API module upward;
-  - Backend: Realize the storage of graph data to the backend. The supported backends include: Memory, Cassandra, ScyllaDB, RocksDB, HBase, MySQL and PostgreSQL. Users can choose one according to the actual situation;
-  - API: Built-in REST Server, provides RESTful API to users, and is fully compatible with Gremlin query.
-- [HugeGraph-Client](https://hugegraph.apache.org/docs/quickstart/hugegraph-client): 
-  HugeGraph-Client provides a RESTful API client for connecting to HugeGraph-Server. Currently, only Java version is implemented. Users of other languages can implement it by themselves;
-- [HugeGraph-Loader](https://hugegraph.apache.org/docs/quickstart/hugegraph-loader): HugeGraph-Loader is a data import tool based on HugeGraph-Client, which converts ordinary text data into graph vertices and edges and inserts them into graph database;
-- [HugeGraph-Computer](https://hugegraph.apache.org/docs/quickstart/hugegraph-computer): HugeGraph-Computer is a distributed graph processing system for HugeGraph (OLAP). It is an implementation of [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf). It runs on Kubernetes framework;
-- [HugeGraph-Hubble](https://hugegraph.apache.org/docs/quickstart/hugegraph-hubble): HugeGraph-Hubble is HugeGraph's web visualization management platform, a one-stop visual analysis platform. The platform covers the whole process from data modeling, to rapid data import, to online and offline analysis of data, and unified management of graphs;
-- [HugeGraph-Tools](https://hugegraph.apache.org/docs/quickstart/hugegraph-tools): HugeGraph-Tools is HugeGraph's deployment and management tools, including functions such as managing graphs, backup/restore, Gremlin execution, etc.
-- [HugeGraph-Ai (Beta)](https://hugegraph.apache.org/docs/quickstart/hugegraph-ai): HugeGraph-Ai is a tool that integrates HugeGraph and artificial intelligence (AI), including applications combined with large models, integration with graph machine learning components, etc., to provide comprehensive support for developers to use HugeGraph's AI capabilities in projects.
+- [HugeGraph-Server](/docs/quickstart/hugegraph-server): HugeGraph-Server is the core part of the HugeGraph project, containing Core, Backend, API and other submodules;
+  - Core: Implements the graph engine, connects to the Backend module downwards, and supports the API module upwards;
+  - Backend: Implements the storage of graph data to the backend, supports backends including: Memory, Cassandra, ScyllaDB, RocksDB, HBase, MySQL and PostgreSQL, users can choose one according to the actual situation;
+  - API: Built-in REST Server, provides RESTful API to users, and is fully compatible with Gremlin queries. (Supports distributed storage and computation pushdown)
+- [HugeGraph-Toolchain](https://github.com/apache/hugegraph-toolchain): (Toolchain)
+  - [HugeGraph-Client](/docs/quickstart/hugegraph-client): HugeGraph-Client provides a RESTful API client for connecting to HugeGraph-Server, currently only the Java version is implemented, users of other languages can implement it themselves;
+  - [HugeGraph-Loader](/docs/quickstart/hugegraph-loader): HugeGraph-Loader is a data import tool based on HugeGraph-Client, which transforms ordinary text data into vertices and edges of the graph and inserts them into the graph database;
+  - [HugeGraph-Hubble](/docs/quickstart/hugegraph-hubble): HugeGraph-Hubble is HugeGraph's Web 
+visualization management platform, a one-stop visualization analysis platform, the platform covers the whole process from data modeling, to fast data import, to online and offline analysis of data, and unified management of the graph;
+  - [HugeGraph-Tools](/docs/quickstart/hugegraph-tools): HugeGraph-Tools is HugeGraph's deployment and management tool, including graph management, backup/recovery, Gremlin execution and other functions.
+- [HugeGraph-Computer](/docs/quickstart/hugegraph-computer): HugeGraph-Computer is a distributed graph processing system (OLAP). 
+  It is an implementation of [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf). It can run on clusters such as Kubernetes/Yarn, and supports large-scale graph computing.
+- [HugeGraph-AI](/docs/quickstart/hugegraph-ai): HugeGraph-AI is HugeGraph's independent AI 
+  component, providing training and inference functions of graph neural networks, LLM/Graph RAG combination/Python-Client and other related components, continuously updating.
 
-### Subscribe the mailing list
+## Contributing
 
-HugeGraph offers an email list for development and user discussions.
-- hugegraph-dev: [dev@hugegraph.apache.org](mailto:dev@hugegraph.apache.org) for both development and users discussions.
+- Welcome to contribute to HugeGraph, please see [`How to Contribute`](CONTRIBUTING.md) & [Guidelines](https://hugegraph.apache.org/docs/contribution-guidelines/) for more information.  
+- Note: It's recommended to use [GitHub Desktop](https://desktop.github.com/) to greatly simplify the PR and commit process.  
+- Thank you to all the people who already contributed to HugeGraph!
 
-Subscribe to the mailing list by following steps:
-- Email [dev-subscribe@hugegraph.apache.org](mailto:dev-subscribe@hugegraph.apache.org) through your email account, and then you will receive a confirmation email.
-- Reply to the confirmation email to confirm your subscription. Then, you will receive another confirmation email.
-- Now you are a subscriber of the mailing list. If you have more questions, just email the mailing list and someone will reply to you soon.
-- If you want to unsubscribe from the mailing list, just email [dev-unsubscribe@hugegraph.apache.org](mailto:dev-unsubscribe@hugegraph.apache.org) and follow the steps in the confirmation email.
-
-You can subscribe to the mailing list anytime you want. Additionally, you can check [historical emails / all emails](https://lists.apache.org/list.html?dev@hugegraph.apache.org) easily (even if you are not subscribing to the list).
-
-Some notes:
-- If you don't receive the confirmation email, please send it after 24 hours later.
-- Don't email to **dev** until you subscribe to the mailing list successfully (otherwise the mail will be banned).
-
-More information on mailing subscribe can be found at:
-- http://apache.org/foundation/mailinglists.html#subscribing
+[![contributors graph](https://contrib.rocks/image?repo=apache/hugegraph-doc)](https://github.com/apache/incubator-hugegraph-doc/graphs/contributors)
 
 ### Contact Us
 
 ---
 
- - [GitHub Issues](https://github.com/apache/incubator-hugegraph-doc/issues): Feedback on usage issues and functional requirements (quick response)
- - Feedback Email: [dev@hugegraph.apache.org](mailto:dev@hugegraph.apache.org) ([subscriber](https://hugegraph.apache.org/docs/contribution-guidelines/subscribe/) only)
- - WeChat public account: Apache HugeGraph, welcome to scan this QR code to follow us.
+- [GitHub Issues](https://github.com/apache/incubator-hugegraph-doc/issues): Feedback on usage issues and functional requirements (quick response)
+- Feedback Email: [dev@hugegraph.apache.org](mailto:dev@hugegraph.apache.org) ([subscriber](https://hugegraph.apache.org/docs/contribution-guidelines/subscribe/) only)
+- Security Email: [security@hugegraph.apache.org](mailto:security@hugegraph.apache.org) (Report SEC problems)
+- WeChat public account: Apache HugeGraph, welcome to scan this QR code to follow us.
 
  <img src="./assets/images/wechat.png" alt="QR png" width="350"/>

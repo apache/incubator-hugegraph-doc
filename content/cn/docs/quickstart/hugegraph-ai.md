@@ -1,11 +1,12 @@
 ---
-title: "HugeGraph-Ai Quick Start (Beta)"
-linkTitle: "使用 HugeGraph-Ai (Beta)"
+title: "HugeGraph-AI Quick Start"
+linkTitle: "使用 HugeGraph-AI"
 weight: 4
 ---
 
-### 1 HugeGraph-Ai 概述
-hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与大模型结合的应用，与图机器学习组件的集成等，为开发者在项目中利用 HugeGraph 的 AI 能力提供全面支持。
+### 1 HugeGraph-AI 概述
+hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与大模型结合的应用，与图机器学习组件的集成等，为开发者在项目中利用 HugeGraph
+的 AI 能力提供全面支持。
 
 ### 2 环境要求
 - python 3.8+
@@ -21,8 +22,8 @@ python3 ./hugegraph-llm/src/hugegraph_llm/utils/gradio_demo.py
 ```
 - 配置 HugeGraph 数据库连接信息和 LLM 模型信息，可以通过两种方式配置：
   1. 配置 `./hugegraph-llm/src/config/config.ini` 文件
-  2. 在 gradio 中，分别完成 LLM 和 HugeGraph 的配置后，点击 `Initialize configs`，将返回初始化后的完整配置文件。如图所示:
-  ![gradio配置](/docs/images/gradio-config.png)
+  2. 在 gradio 中，分别完成 LLM 和 HugeGraph 的配置后，点击 `Initialize configs`，将返回初始化后的完整配置文件。如图所示：
+  ![gradio 配置](/docs/images/gradio-config.png)
 - 离线下载 NLTK stopwords 
 ```bash
 python3 ./hugegraph_llm/operators/common_op/nltk_helper.py
@@ -40,7 +41,7 @@ python3 ./hugegraph_llm/operators/common_op/nltk_helper.py
   - Disambiguate word sense：是否进行词义消除歧义。 
   - Commit to hugegraph：是否将构建的知识图谱提交到 HugeGraph 服务器
 
-![gradio配置](/docs/images/gradio-kg.png)
+![gradio 配置](/docs/images/gradio-kg.png)
 
 ##### 4.1.2 通过代码构建知识图谱
 - 完整代码
@@ -60,16 +61,16 @@ builder = KgBuilder(llm)
 )
 ```
 - 时序图
-![gradio配置](/docs/images/kg-uml.png)
+![gradio 配置](/docs/images/kg-uml.png)
 
-
-1. 初始化: 初始化 LLMs 实例，获取 LLM，然后创建图谱构建的任务实例 `KgBuilder`，KgBuilder 中定义了多个 operator，用户可以根据需求自由组合达到目的 。（tip: `print_result()` 可以在控制台打印每一步输出的结果，不影响整体执行逻辑）
+1. 初始化：初始化 LLMs 实例，获取 LLM，然后创建图谱构建的任务实例 `KgBuilder`，KgBuilder 中定义了多个 operator，用户可以根据需求自由组合达到目的。（tip: `print_result()` 可以在控制台打印每一步输出的结果，不影响整体执行逻辑）
 
 ```python
 llm = LLMs().get_llm()
 builder = KgBuilder(llm)
 ```
-2. 导入 Schema：使用 `import_schema` 方法导入, 支持三种模式：
+
+2. 导入 Schema：使用 `import_schema` 方法导入，支持三种模式：
     - 从 HugeGraph 实例导入，指定 HugeGraph 图实例的名称，它将自动提取图的模式。
     - 从用户定义的模式导入，接受用户定义的 JSON 格式模式。
     - 从提取结果导入（即将发布）
@@ -106,9 +107,9 @@ builder.run()
 #### 4.2 基于 HugeGraph 的检索增强生成（RAG）
 ##### 4.1.1 通过 gradio 交互问答
 1. 首先点击 `Initialize HugeGraph test data` 按钮，初始化 HugeGraph 数据。
-  ![gradio配置](/docs/images/gradio-rag-1.png)
+  ![gradio 配置](/docs/images/gradio-rag-1.png)
 2. 然后点击 `Retrieval augmented generation` 按钮，生成问题的答案。
-   ![gradio配置](/docs/images/gradio-rag-2.png)
+   ![gradio 配置](/docs/images/gradio-rag-2.png)
 
 ##### 4.1.2 通过代码构建 Graph RAG
 - 完整代码

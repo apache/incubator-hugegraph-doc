@@ -1,11 +1,12 @@
 ---
-title: "HugeGraph-Ai Quick Start (Beta)"
-linkTitle: "Explore with HugeGraph-Ai (Beta)"
+title: "HugeGraph-AI Quick Start"
+linkTitle: "Explore with HugeGraph-AI"
 weight: 4
 ---
 
-### 1 HugeGraph-Ai Overview
-hugegraph-ai aims to explore the integration of HugeGraph and artificial intelligence (AI), including applications combined with large models, integration with graph machine learning components, etc., to provide comprehensive support for developers to use HugeGraph's AI capabilities in projects.
+### 1 HugeGraph-AI Overview
+hugegraph-ai aims to explore the integration of HugeGraph and artificial intelligence (AI), including applications combined 
+with large models, integration with graph machine learning components, etc., to provide comprehensive support for developers to use HugeGraph's AI capabilities in projects.
 
 ### 2 Environment Requirements
 - python 3.8+
