@@ -2437,9 +2437,10 @@ You can use &lt;a href="/cn/docs/clients/hugegraph-client">Client-API&lt;/a> to 
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="44-run-the-example">4.4 Run The Example&lt;/h3>
 &lt;p>Before running Example, you need to start the Server. For the startup process, see&lt;a href="/docs/quickstart/hugegraph-server">HugeGraph-Server Quick Start&lt;/a>.&lt;/p>
 &lt;h3 id="45-more-information-about-client-api">4.5 More Information About Client-API&lt;/h3>
-&lt;p>See&lt;a href="/docs/clients/hugegraph-client">Introduce basic API of HugeGraph-Client&lt;/a>.&lt;/p></description></item><item><title>Docs: HugeGraph-Ai Quick Start (Beta)</title><link>/docs/quickstart/hugegraph-ai/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-ai/</guid><description>
-&lt;h3 id="1-hugegraph-ai-overview">1 HugeGraph-Ai Overview&lt;/h3>
-&lt;p>hugegraph-ai aims to explore the integration of HugeGraph and artificial intelligence (AI), including applications combined with large models, integration with graph machine learning components, etc., to provide comprehensive support for developers to use HugeGraph&amp;rsquo;s AI capabilities in projects.&lt;/p>
+&lt;p>See&lt;a href="/docs/clients/hugegraph-client">Introduce basic API of HugeGraph-Client&lt;/a>.&lt;/p></description></item><item><title>Docs: HugeGraph-AI Quick Start</title><link>/docs/quickstart/hugegraph-ai/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-ai/</guid><description>
+&lt;h3 id="1-hugegraph-ai-overview">1 HugeGraph-AI Overview&lt;/h3>
+&lt;p>hugegraph-ai aims to explore the integration of HugeGraph and artificial intelligence (AI), including applications combined
+with large models, integration with graph machine learning components, etc., to provide comprehensive support for developers to use HugeGraph&amp;rsquo;s AI capabilities in projects.&lt;/p>
 &lt;h3 id="2-environment-requirements">2 Environment Requirements&lt;/h3>
 &lt;ul>
 &lt;li>python 3.8+&lt;/li>

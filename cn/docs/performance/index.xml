@@ -1,4 +1,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HugeGraph – PERFORMANCE</title><link>/cn/docs/performance/</link><description>Recent content in PERFORMANCE on HugeGraph</description><generator>Hugo -- gohugo.io</generator><atom:link href="/cn/docs/performance/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: HugeGraph BenchMark Performance</title><link>/cn/docs/performance/hugegraph-benchmark-0.5.6/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/performance/hugegraph-benchmark-0.5.6/</guid><description>
+&lt;blockquote>
+&lt;p>&lt;strong>Note:&lt;/strong>&lt;/p>
+&lt;p>当前的性能指标测试基于很早期的版本。&lt;strong>最新版本&lt;/strong>在性能和功能上都有显著的改进。我们鼓励您参考最新的发布版本，
+该版本具有&lt;strong>自主分布式存储&lt;/strong>和&lt;strong>增强的计算推下能力&lt;/strong>。或者，您可以等待社区更新相关测试数据 (也欢迎反馈共建)。&lt;/p>
+&lt;/blockquote>
 &lt;h3 id="1-测试环境">1 测试环境&lt;/h3>
 &lt;h4 id="11-硬件信息">1.1 硬件信息&lt;/h4>
 &lt;table>
@@ -21,7 +26,7 @@
 &lt;/table>
 &lt;h4 id="12-软件信息">1.2 软件信息&lt;/h4>
 &lt;h5 id="121-测试用例">1.2.1 测试用例&lt;/h5>
-&lt;p>测试使用&lt;a href="https://github.com/socialsensor/graphdb-benchmarks">graphdb-benchmark&lt;/a>，一个图数据库测试集。该测试集主要包含4类测试：&lt;/p>
+&lt;p>测试使用&lt;a href="https://github.com/socialsensor/graphdb-benchmarks">graphdb-benchmark&lt;/a>，一个图数据库测试集。该测试集主要包含 4 类测试：&lt;/p>
 &lt;ul>
 &lt;li>
 &lt;p>Massive Insertion，批量插入顶点和边，一定数量的顶点或边一次性提交&lt;/p>
@@ -34,18 +39,18 @@
 &lt;ul>
 &lt;li>Find Neighbors，查询所有顶点的邻居&lt;/li>
 &lt;li>Find Adjacent Nodes，查询所有边的邻接顶点&lt;/li>
-&lt;li>Find Shortest Path，查询第一个顶点到100个随机顶点的最短路径&lt;/li>
+&lt;li>Find Shortest Path，查询第一个顶点到 100 个随机顶点的最短路径&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>
-&lt;p>Clustering，基于Louvain Method的社区发现算法&lt;/p>
+&lt;p>Clustering，基于 Louvain Method 的社区发现算法&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;h5 id="122-测试数据集">1.2.2 测试数据集&lt;/h5>
 &lt;p>测试使用人造数据和真实数据&lt;/p>
 &lt;ul>
 &lt;li>
-&lt;p>MIW、SIW和QW使用SNAP数据集&lt;/p>
+&lt;p>MIW、SIW 和 QW 使用 SNAP 数据集&lt;/p>
 &lt;ul>
 &lt;li>
 &lt;p>&lt;a href="http://snap.stanford.edu/data/email-Enron.html">Enron Dataset&lt;/a>&lt;/p>
@@ -62,7 +67,7 @@
 &lt;/ul>
 &lt;/li>
 &lt;li>
-&lt;p>CW使用&lt;a href="https://sites.google.com/site/andrealancichinetti/files">LFR-Benchmark generator&lt;/a>生成的人造数据&lt;/p>
+&lt;p>CW 使用&lt;a href="https://sites.google.com/site/andrealancichinetti/files">LFR-Benchmark generator&lt;/a>生成的人造数据&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;h6 id="本测试用到的数据集规模">本测试用到的数据集规模&lt;/h6>
@@ -70,8 +75,8 @@
 &lt;thead>
 &lt;tr>
 &lt;th>名称&lt;/th>
-&lt;th>vertex数目&lt;/th>
-&lt;th>edge数目&lt;/th>
+&lt;th>vertex 数目&lt;/th>
+&lt;th>edge 数目&lt;/th>
 &lt;th>文件大小&lt;/th>
 &lt;/tr>
 &lt;/thead>
@@ -105,26 +110,26 @@
 &lt;h4 id="13-服务配置">1.3 服务配置&lt;/h4>
 &lt;ul>
 &lt;li>
-&lt;p>HugeGraph版本：0.5.6，RestServer和Gremlin Server和backends都在同一台服务器上&lt;/p>
+&lt;p>HugeGraph 版本：0.5.6，RestServer 和 Gremlin Server 和 backends 都在同一台服务器上&lt;/p>
 &lt;ul>
-&lt;li>RocksDB版本：rocksdbjni-5.8.6&lt;/li>
+&lt;li>RocksDB 版本：rocksdbjni-5.8.6&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>
-&lt;p>Titan版本：0.5.4, 使用thrift+Cassandra模式&lt;/p>
+&lt;p>Titan 版本：0.5.4, 使用 thrift+Cassandra 模式&lt;/p>
 &lt;ul>
-&lt;li>Cassandra版本：cassandra-3.10，commit-log 和 data 共用SSD&lt;/li>
+&lt;li>Cassandra 版本：cassandra-3.10，commit-log 和 data 共用 SSD&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>
-&lt;p>Neo4j版本：2.0.1&lt;/p>
+&lt;p>Neo4j 版本：2.0.1&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;blockquote>
-&lt;p>graphdb-benchmark适配的Titan版本为0.5.4&lt;/p>
+&lt;p>graphdb-benchmark 适配的 Titan 版本为 0.5.4&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="2-测试结果">2 测试结果&lt;/h3>
-&lt;h4 id="21-batch插入性能">2.1 Batch插入性能&lt;/h4>
+&lt;h4 id="21-batch-插入性能">2.1 Batch 插入性能&lt;/h4>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -162,8 +167,8 @@
 &lt;p>&lt;em>说明&lt;/em>&lt;/p>
 &lt;ul>
 &lt;li>表头&amp;quot;（）&amp;ldquo;中数据是数据规模，以边为单位&lt;/li>
-&lt;li>表中数据是批量插入的时间，单位是s&lt;/li>
-&lt;li>例如，HugeGraph使用RocksDB插入amazon0601数据集的300w条边，花费5.711s&lt;/li>
+&lt;li>表中数据是批量插入的时间，单位是 s&lt;/li>
+&lt;li>例如，HugeGraph 使用 RocksDB 插入 amazon0601 数据集的 300w 条边，花费 5.711s&lt;/li>
 &lt;/ul>
 &lt;h5 id="结论">结论&lt;/h5>
 &lt;ul>
@@ -172,10 +177,10 @@
 &lt;h4 id="22-遍历性能">2.2 遍历性能&lt;/h4>
 &lt;h5 id="221-术语说明">2.2.1 术语说明&lt;/h5>
 &lt;ul>
-&lt;li>FN(Find Neighbor), 遍历所有vertex, 根据vertex查邻接edge, 通过edge和vertex查other vertex&lt;/li>
-&lt;li>FA(Find Adjacent), 遍历所有edge，根据edge获得source vertex和target vertex&lt;/li>
+&lt;li>FN(Find Neighbor), 遍历所有 vertex, 根据 vertex 查邻接 edge, 通过 edge 和 vertex 查 other vertex&lt;/li>
+&lt;li>FA(Find Adjacent), 遍历所有 edge，根据 edge 获得 source vertex 和 target vertex&lt;/li>
 &lt;/ul>
-&lt;h5 id="222-fn性能">2.2.2 FN性能&lt;/h5>
+&lt;h5 id="222-fn-性能">2.2.2 FN 性能&lt;/h5>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -213,10 +218,10 @@
 &lt;p>&lt;em>说明&lt;/em>&lt;/p>
 &lt;ul>
 &lt;li>表头&amp;rdquo;（）&amp;ldquo;中数据是数据规模，以顶点为单位&lt;/li>
-&lt;li>表中数据是遍历顶点花费的时间，单位是s&lt;/li>
-&lt;li>例如，HugeGraph使用RocksDB后端遍历amazon0601的所有顶点，并查找邻接边和另一顶点，总共耗时45.118s&lt;/li>
+&lt;li>表中数据是遍历顶点花费的时间，单位是 s&lt;/li>
+&lt;li>例如，HugeGraph 使用 RocksDB 后端遍历 amazon0601 的所有顶点，并查找邻接边和另一顶点，总共耗时 45.118s&lt;/li>
 &lt;/ul>
-&lt;h5 id="223-fa性能">2.2.3 FA性能&lt;/h5>
+&lt;h5 id="223-fa-性能">2.2.3 FA 性能&lt;/h5>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -254,8 +259,8 @@
 &lt;p>&lt;em>说明&lt;/em>&lt;/p>
 &lt;ul>
 &lt;li>表头&amp;rdquo;（）&amp;ldquo;中数据是数据规模，以边为单位&lt;/li>
-&lt;li>表中数据是遍历边花费的时间，单位是s&lt;/li>
-&lt;li>例如，HugeGraph使用RocksDB后端遍历amazon0601的所有边，并查询每条边的两个顶点，总共耗时10.764s&lt;/li>
+&lt;li>表中数据是遍历边花费的时间，单位是 s&lt;/li>
+&lt;li>例如，HugeGraph 使用 RocksDB 后端遍历 amazon0601 的所有边，并查询每条边的两个顶点，总共耗时 10.764s&lt;/li>
 &lt;/ul>
 &lt;h6 id="结论-1">结论&lt;/h6>
 &lt;ul>
@@ -265,10 +270,10 @@
 &lt;h5 id="术语说明">术语说明&lt;/h5>
 &lt;ul>
 &lt;li>FS(Find Shortest Path), 寻找最短路径&lt;/li>
-&lt;li>K-neighbor，从起始vertex出发，通过K跳边能够到达的所有顶点, 包括1, 2, 3&amp;hellip;(K-1), K跳边可达vertex&lt;/li>
-&lt;li>K-out, 从起始vertex出发，恰好经过K跳out边能够到达的顶点&lt;/li>
+&lt;li>K-neighbor，从起始 vertex 出发，通过 K 跳边能够到达的所有顶点，包括 1, 2, 3&amp;hellip;(K-1), K 跳边可达 vertex&lt;/li>
+&lt;li>K-out, 从起始 vertex 出发，恰好经过 K 跳 out 边能够到达的顶点&lt;/li>
 &lt;/ul>
-&lt;h5 id="fs性能">FS性能&lt;/h5>
+&lt;h5 id="fs-性能">FS 性能&lt;/h5>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -306,15 +311,15 @@
 &lt;p>&lt;em>说明&lt;/em>&lt;/p>
 &lt;ul>
 &lt;li>表头&amp;rdquo;（）&amp;ldquo;中数据是数据规模，以边为单位&lt;/li>
-&lt;li>表中数据是找到&lt;strong>从第一个顶点出发到达随机选择的100个顶点的最短路径&lt;/strong>的时间，单位是s&lt;/li>
-&lt;li>例如，HugeGraph使用RocksDB后端在图amazon0601中查找第一个顶点到100个随机顶点的最短路径，总共耗时0.103s&lt;/li>
+&lt;li>表中数据是找到&lt;strong>从第一个顶点出发到达随机选择的 100 个顶点的最短路径&lt;/strong>的时间，单位是 s&lt;/li>
+&lt;li>例如，HugeGraph 使用 RocksDB 后端在图 amazon0601 中查找第一个顶点到 100 个随机顶点的最短路径，总共耗时 0.103s&lt;/li>
 &lt;/ul>
 &lt;h6 id="结论-2">结论&lt;/h6>
 &lt;ul>
-&lt;li>在数据规模小或者顶点关联关系少的场景下，HugeGraph性能优于Neo4j和Titan&lt;/li>
-&lt;li>随着数据规模增大且顶点的关联度增高，HugeGraph与Neo4j性能趋近，都远高于Titan&lt;/li>
+&lt;li>在数据规模小或者顶点关联关系少的场景下，HugeGraph 性能优于 Neo4j 和 Titan&lt;/li>
+&lt;li>随着数据规模增大且顶点的关联度增高，HugeGraph 与 Neo4j 性能趋近，都远高于 Titan&lt;/li>
 &lt;/ul>
-&lt;h5 id="k-neighbor性能">K-neighbor性能&lt;/h5>
+&lt;h5 id="k-neighbor-性能">K-neighbor 性能&lt;/h5>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -363,9 +368,9 @@
 &lt;/table>
 &lt;p>&lt;em>说明&lt;/em>&lt;/p>
 &lt;ul>
-&lt;li>HugeGraph-Server的JVM内存设置为32GB，数据量过大时会出现OOM&lt;/li>
+&lt;li>HugeGraph-Server 的 JVM 内存设置为 32GB，数据量过大时会出现 OOM&lt;/li>
 &lt;/ul>
-&lt;h5 id="k-out性能">K-out性能&lt;/h5>
+&lt;h5 id="k-out-性能">K-out 性能&lt;/h5>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -444,22 +449,22 @@
 &lt;/table>
 &lt;p>&lt;em>说明&lt;/em>&lt;/p>
 &lt;ul>
-&lt;li>HugeGraph-Server的JVM内存设置为32GB，数据量过大时会出现OOM&lt;/li>
+&lt;li>HugeGraph-Server 的 JVM 内存设置为 32GB，数据量过大时会出现 OOM&lt;/li>
 &lt;/ul>
 &lt;h6 id="结论-3">结论&lt;/h6>
 &lt;ul>
-&lt;li>FS场景，HugeGraph性能优于Neo4j和Titan&lt;/li>
-&lt;li>K-neighbor和K-out场景，HugeGraph能够实现在5度范围内秒级返回结果&lt;/li>
+&lt;li>FS 场景，HugeGraph 性能优于 Neo4j 和 Titan&lt;/li>
+&lt;li>K-neighbor 和 K-out 场景，HugeGraph 能够实现在 5 度范围内秒级返回结果&lt;/li>
 &lt;/ul>
 &lt;h4 id="24-图综合性能测试-cw">2.4 图综合性能测试-CW&lt;/h4>
 &lt;table>
 &lt;thead>
 &lt;tr>
 &lt;th>数据库&lt;/th>
-&lt;th>规模1000&lt;/th>
-&lt;th>规模5000&lt;/th>
-&lt;th>规模10000&lt;/th>
-&lt;th>规模20000&lt;/th>
+&lt;th>规模 1000&lt;/th>
+&lt;th>规模 5000&lt;/th>
+&lt;th>规模 10000&lt;/th>
+&lt;th>规模 20000&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -489,9 +494,9 @@
 &lt;p>&lt;em>说明&lt;/em>&lt;/p>
 &lt;ul>
 &lt;li>&amp;ldquo;规模&amp;quot;以顶点为单位&lt;/li>
-&lt;li>表中数据是社区发现完成需要的时间，单位是s，例如HugeGraph使用RocksDB后端在规模10000的数据集，社区聚合不再变化，需要耗时744.780s&lt;/li>
-&lt;li>CW测试是CRUD的综合评估&lt;/li>
-&lt;li>该测试中HugeGraph跟Titan一样，没有通过client，直接对core操作&lt;/li>
+&lt;li>表中数据是社区发现完成需要的时间，单位是 s，例如 HugeGraph 使用 RocksDB 后端在规模 10000 的数据集，社区聚合不再变化，需要耗时 744.780s&lt;/li>
+&lt;li>CW 测试是 CRUD 的综合评估&lt;/li>
+&lt;li>该测试中 HugeGraph 跟 Titan 一样，没有通过 client，直接对 core 操作&lt;/li>
 &lt;/ul>
 &lt;h5 id="结论-4">结论&lt;/h5>
 &lt;ul>
@@ -511,20 +516,26 @@
 &lt;blockquote>
 &lt;p>即将更新，敬请期待！&lt;/p>
 &lt;/blockquote></description></item><item><title>Docs: HugeGraph-Loader Performance</title><link>/cn/docs/performance/hugegraph-loader-performance/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/performance/hugegraph-loader-performance/</guid><description>
+&lt;blockquote>
+&lt;p>&lt;strong>Note:&lt;/strong>&lt;/p>
+&lt;p>当前的性能指标测试基于很早期的版本。&lt;strong>最新版本&lt;/strong>在性能和功能上都有显著的改进。我们鼓励您参考最新的发布版本，
+该版本具有&lt;strong>自主分布式存储&lt;/strong>和&lt;strong>增强的计算推下能力&lt;/strong>。或者，您可以等待社区更新相关测试数据 (也欢迎反馈共建)。&lt;/p>
+&lt;/blockquote>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
-&lt;p>当要批量插入的图数据（包括顶点和边）条数为billion级别及以下，或者总数据量小于TB时，可以采用&lt;a href="/docs/quickstart/hugegraph-loader">HugeGraph-Loader&lt;/a>工具持续、高速导入图数据&lt;/p>
+&lt;p>当要批量插入的图数据（包括顶点和边）条数为 billion 级别及以下，或者总数据量小于 TB 时，
+可以采用 &lt;a href="/docs/quickstart/hugegraph-loader">HugeGraph-Loader&lt;/a> 工具持续、高速导入图数据&lt;/p>
 &lt;h2 id="性能">性能&lt;/h2>
 &lt;blockquote>
 &lt;p>测试均采用网址数据的边数据&lt;/p>
 &lt;/blockquote>
-&lt;h3 id="rocksdb单机性能">RocksDB单机性能&lt;/h3>
+&lt;h3 id="rocksdb-单机性能">RocksDB 单机性能&lt;/h3>
 &lt;ul>
-&lt;li>关闭label index，22.8w edges/s&lt;/li>
-&lt;li>开启label index，15.3w edges/s&lt;/li>
+&lt;li>关闭 label index，22.8w edges/s&lt;/li>
+&lt;li>开启 label index，15.3w edges/s&lt;/li>
 &lt;/ul>
-&lt;h3 id="cassandra集群性能">Cassandra集群性能&lt;/h3>
+&lt;h3 id="cassandra-集群性能">Cassandra 集群性能&lt;/h3>
 &lt;ul>
-&lt;li>默认开启label index，6.3w edges/s&lt;/li>
+&lt;li>默认开启 label index，6.3w edges/s&lt;/li>
 &lt;/ul></description></item><item><title>Docs:</title><link>/cn/docs/performance/hugegraph-benchmark-0.4.4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/performance/hugegraph-benchmark-0.4.4/</guid><description>
 &lt;h3 id="1-测试环境">1 测试环境&lt;/h3>
 &lt;h4 id="11-硬件信息">1.1 硬件信息&lt;/h4>

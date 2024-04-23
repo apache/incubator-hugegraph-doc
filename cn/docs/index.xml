@@ -466,6 +466,11 @@
 &lt;/tr>
 &lt;/tbody>
 &lt;/table></description></item><item><title>Docs: HugeGraph BenchMark Performance</title><link>/cn/docs/performance/hugegraph-benchmark-0.5.6/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/performance/hugegraph-benchmark-0.5.6/</guid><description>
+&lt;blockquote>
+&lt;p>&lt;strong>Note:&lt;/strong>&lt;/p>
+&lt;p>当前的性能指标测试基于很早期的版本。&lt;strong>最新版本&lt;/strong>在性能和功能上都有显著的改进。我们鼓励您参考最新的发布版本，
+该版本具有&lt;strong>自主分布式存储&lt;/strong>和&lt;strong>增强的计算推下能力&lt;/strong>。或者，您可以等待社区更新相关测试数据 (也欢迎反馈共建)。&lt;/p>
+&lt;/blockquote>
 &lt;h3 id="1-测试环境">1 测试环境&lt;/h3>
 &lt;h4 id="11-硬件信息">1.1 硬件信息&lt;/h4>
 &lt;table>
@@ -488,7 +493,7 @@
 &lt;/table>
 &lt;h4 id="12-软件信息">1.2 软件信息&lt;/h4>
 &lt;h5 id="121-测试用例">1.2.1 测试用例&lt;/h5>
-&lt;p>测试使用&lt;a href="https://github.com/socialsensor/graphdb-benchmarks">graphdb-benchmark&lt;/a>，一个图数据库测试集。该测试集主要包含4类测试：&lt;/p>
+&lt;p>测试使用&lt;a href="https://github.com/socialsensor/graphdb-benchmarks">graphdb-benchmark&lt;/a>，一个图数据库测试集。该测试集主要包含 4 类测试：&lt;/p>
 &lt;ul>
 &lt;li>
 &lt;p>Massive Insertion，批量插入顶点和边，一定数量的顶点或边一次性提交&lt;/p>
@@ -501,18 +506,18 @@
 &lt;ul>
 &lt;li>Find Neighbors，查询所有顶点的邻居&lt;/li>
 &lt;li>Find Adjacent Nodes，查询所有边的邻接顶点&lt;/li>
-&lt;li>Find Shortest Path，查询第一个顶点到100个随机顶点的最短路径&lt;/li>
+&lt;li>Find Shortest Path，查询第一个顶点到 100 个随机顶点的最短路径&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>
-&lt;p>Clustering，基于Louvain Method的社区发现算法&lt;/p>
+&lt;p>Clustering，基于 Louvain Method 的社区发现算法&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;h5 id="122-测试数据集">1.2.2 测试数据集&lt;/h5>
 &lt;p>测试使用人造数据和真实数据&lt;/p>
 &lt;ul>
 &lt;li>
-&lt;p>MIW、SIW和QW使用SNAP数据集&lt;/p>
+&lt;p>MIW、SIW 和 QW 使用 SNAP 数据集&lt;/p>
 &lt;ul>
 &lt;li>
 &lt;p>&lt;a href="http://snap.stanford.edu/data/email-Enron.html">Enron Dataset&lt;/a>&lt;/p>
@@ -529,7 +534,7 @@
 &lt;/ul>
 &lt;/li>
 &lt;li>
-&lt;p>CW使用&lt;a href="https://sites.google.com/site/andrealancichinetti/files">LFR-Benchmark generator&lt;/a>生成的人造数据&lt;/p>
+&lt;p>CW 使用&lt;a href="https://sites.google.com/site/andrealancichinetti/files">LFR-Benchmark generator&lt;/a>生成的人造数据&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;h6 id="本测试用到的数据集规模">本测试用到的数据集规模&lt;/h6>
@@ -537,8 +542,8 @@
 &lt;thead>
 &lt;tr>
 &lt;th>名称&lt;/th>
-&lt;th>vertex数目&lt;/th>
-&lt;th>edge数目&lt;/th>
+&lt;th>vertex 数目&lt;/th>
+&lt;th>edge 数目&lt;/th>
 &lt;th>文件大小&lt;/th>
 &lt;/tr>
 &lt;/thead>
@@ -572,26 +577,26 @@
 &lt;h4 id="13-服务配置">1.3 服务配置&lt;/h4>
 &lt;ul>
 &lt;li>
-&lt;p>HugeGraph版本：0.5.6，RestServer和Gremlin Server和backends都在同一台服务器上&lt;/p>
+&lt;p>HugeGraph 版本：0.5.6，RestServer 和 Gremlin Server 和 backends 都在同一台服务器上&lt;/p>
 &lt;ul>
-&lt;li>RocksDB版本：rocksdbjni-5.8.6&lt;/li>
+&lt;li>RocksDB 版本：rocksdbjni-5.8.6&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>
-&lt;p>Titan版本：0.5.4, 使用thrift+Cassandra模式&lt;/p>
+&lt;p>Titan 版本：0.5.4, 使用 thrift+Cassandra 模式&lt;/p>
 &lt;ul>
-&lt;li>Cassandra版本：cassandra-3.10，commit-log 和 data 共用SSD&lt;/li>
+&lt;li>Cassandra 版本：cassandra-3.10，commit-log 和 data 共用 SSD&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>
-&lt;p>Neo4j版本：2.0.1&lt;/p>
+&lt;p>Neo4j 版本：2.0.1&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;blockquote>
-&lt;p>graphdb-benchmark适配的Titan版本为0.5.4&lt;/p>
+&lt;p>graphdb-benchmark 适配的 Titan 版本为 0.5.4&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="2-测试结果">2 测试结果&lt;/h3>
-&lt;h4 id="21-batch插入性能">2.1 Batch插入性能&lt;/h4>
+&lt;h4 id="21-batch-插入性能">2.1 Batch 插入性能&lt;/h4>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -629,8 +634,8 @@
 &lt;p>&lt;em>说明&lt;/em>&lt;/p>
 &lt;ul>
 &lt;li>表头&amp;quot;（）&amp;ldquo;中数据是数据规模，以边为单位&lt;/li>
-&lt;li>表中数据是批量插入的时间，单位是s&lt;/li>
-&lt;li>例如，HugeGraph使用RocksDB插入amazon0601数据集的300w条边，花费5.711s&lt;/li>
+&lt;li>表中数据是批量插入的时间，单位是 s&lt;/li>
+&lt;li>例如，HugeGraph 使用 RocksDB 插入 amazon0601 数据集的 300w 条边，花费 5.711s&lt;/li>
 &lt;/ul>
 &lt;h5 id="结论">结论&lt;/h5>
 &lt;ul>
@@ -639,10 +644,10 @@
 &lt;h4 id="22-遍历性能">2.2 遍历性能&lt;/h4>
 &lt;h5 id="221-术语说明">2.2.1 术语说明&lt;/h5>
 &lt;ul>
-&lt;li>FN(Find Neighbor), 遍历所有vertex, 根据vertex查邻接edge, 通过edge和vertex查other vertex&lt;/li>
-&lt;li>FA(Find Adjacent), 遍历所有edge，根据edge获得source vertex和target vertex&lt;/li>
+&lt;li>FN(Find Neighbor), 遍历所有 vertex, 根据 vertex 查邻接 edge, 通过 edge 和 vertex 查 other vertex&lt;/li>
+&lt;li>FA(Find Adjacent), 遍历所有 edge，根据 edge 获得 source vertex 和 target vertex&lt;/li>
 &lt;/ul>
-&lt;h5 id="222-fn性能">2.2.2 FN性能&lt;/h5>
+&lt;h5 id="222-fn-性能">2.2.2 FN 性能&lt;/h5>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -680,10 +685,10 @@
 &lt;p>&lt;em>说明&lt;/em>&lt;/p>
 &lt;ul>
 &lt;li>表头&amp;rdquo;（）&amp;ldquo;中数据是数据规模，以顶点为单位&lt;/li>
-&lt;li>表中数据是遍历顶点花费的时间，单位是s&lt;/li>
-&lt;li>例如，HugeGraph使用RocksDB后端遍历amazon0601的所有顶点，并查找邻接边和另一顶点，总共耗时45.118s&lt;/li>
+&lt;li>表中数据是遍历顶点花费的时间，单位是 s&lt;/li>
+&lt;li>例如，HugeGraph 使用 RocksDB 后端遍历 amazon0601 的所有顶点，并查找邻接边和另一顶点，总共耗时 45.118s&lt;/li>
 &lt;/ul>
-&lt;h5 id="223-fa性能">2.2.3 FA性能&lt;/h5>
+&lt;h5 id="223-fa-性能">2.2.3 FA 性能&lt;/h5>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -721,8 +726,8 @@
 &lt;p>&lt;em>说明&lt;/em>&lt;/p>
 &lt;ul>
 &lt;li>表头&amp;rdquo;（）&amp;ldquo;中数据是数据规模，以边为单位&lt;/li>
-&lt;li>表中数据是遍历边花费的时间，单位是s&lt;/li>
-&lt;li>例如，HugeGraph使用RocksDB后端遍历amazon0601的所有边，并查询每条边的两个顶点，总共耗时10.764s&lt;/li>
+&lt;li>表中数据是遍历边花费的时间，单位是 s&lt;/li>
+&lt;li>例如，HugeGraph 使用 RocksDB 后端遍历 amazon0601 的所有边，并查询每条边的两个顶点，总共耗时 10.764s&lt;/li>
 &lt;/ul>
 &lt;h6 id="结论-1">结论&lt;/h6>
 &lt;ul>
@@ -732,10 +737,10 @@
 &lt;h5 id="术语说明">术语说明&lt;/h5>
 &lt;ul>
 &lt;li>FS(Find Shortest Path), 寻找最短路径&lt;/li>
-&lt;li>K-neighbor，从起始vertex出发，通过K跳边能够到达的所有顶点, 包括1, 2, 3&amp;hellip;(K-1), K跳边可达vertex&lt;/li>
-&lt;li>K-out, 从起始vertex出发，恰好经过K跳out边能够到达的顶点&lt;/li>
+&lt;li>K-neighbor，从起始 vertex 出发，通过 K 跳边能够到达的所有顶点，包括 1, 2, 3&amp;hellip;(K-1), K 跳边可达 vertex&lt;/li>
+&lt;li>K-out, 从起始 vertex 出发，恰好经过 K 跳 out 边能够到达的顶点&lt;/li>
 &lt;/ul>
-&lt;h5 id="fs性能">FS性能&lt;/h5>
+&lt;h5 id="fs-性能">FS 性能&lt;/h5>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -773,15 +778,15 @@
 &lt;p>&lt;em>说明&lt;/em>&lt;/p>
 &lt;ul>
 &lt;li>表头&amp;rdquo;（）&amp;ldquo;中数据是数据规模，以边为单位&lt;/li>
-&lt;li>表中数据是找到&lt;strong>从第一个顶点出发到达随机选择的100个顶点的最短路径&lt;/strong>的时间，单位是s&lt;/li>
-&lt;li>例如，HugeGraph使用RocksDB后端在图amazon0601中查找第一个顶点到100个随机顶点的最短路径，总共耗时0.103s&lt;/li>
+&lt;li>表中数据是找到&lt;strong>从第一个顶点出发到达随机选择的 100 个顶点的最短路径&lt;/strong>的时间，单位是 s&lt;/li>
+&lt;li>例如，HugeGraph 使用 RocksDB 后端在图 amazon0601 中查找第一个顶点到 100 个随机顶点的最短路径，总共耗时 0.103s&lt;/li>
 &lt;/ul>
 &lt;h6 id="结论-2">结论&lt;/h6>
 &lt;ul>
-&lt;li>在数据规模小或者顶点关联关系少的场景下，HugeGraph性能优于Neo4j和Titan&lt;/li>
-&lt;li>随着数据规模增大且顶点的关联度增高，HugeGraph与Neo4j性能趋近，都远高于Titan&lt;/li>
+&lt;li>在数据规模小或者顶点关联关系少的场景下，HugeGraph 性能优于 Neo4j 和 Titan&lt;/li>
+&lt;li>随着数据规模增大且顶点的关联度增高，HugeGraph 与 Neo4j 性能趋近，都远高于 Titan&lt;/li>
 &lt;/ul>
-&lt;h5 id="k-neighbor性能">K-neighbor性能&lt;/h5>
+&lt;h5 id="k-neighbor-性能">K-neighbor 性能&lt;/h5>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -830,9 +835,9 @@
 &lt;/table>
 &lt;p>&lt;em>说明&lt;/em>&lt;/p>
 &lt;ul>
-&lt;li>HugeGraph-Server的JVM内存设置为32GB，数据量过大时会出现OOM&lt;/li>
+&lt;li>HugeGraph-Server 的 JVM 内存设置为 32GB，数据量过大时会出现 OOM&lt;/li>
 &lt;/ul>
-&lt;h5 id="k-out性能">K-out性能&lt;/h5>
+&lt;h5 id="k-out-性能">K-out 性能&lt;/h5>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -911,22 +916,22 @@
 &lt;/table>
 &lt;p>&lt;em>说明&lt;/em>&lt;/p>
 &lt;ul>
-&lt;li>HugeGraph-Server的JVM内存设置为32GB，数据量过大时会出现OOM&lt;/li>
+&lt;li>HugeGraph-Server 的 JVM 内存设置为 32GB，数据量过大时会出现 OOM&lt;/li>
 &lt;/ul>
 &lt;h6 id="结论-3">结论&lt;/h6>
 &lt;ul>
-&lt;li>FS场景，HugeGraph性能优于Neo4j和Titan&lt;/li>
-&lt;li>K-neighbor和K-out场景，HugeGraph能够实现在5度范围内秒级返回结果&lt;/li>
+&lt;li>FS 场景，HugeGraph 性能优于 Neo4j 和 Titan&lt;/li>
+&lt;li>K-neighbor 和 K-out 场景，HugeGraph 能够实现在 5 度范围内秒级返回结果&lt;/li>
 &lt;/ul>
 &lt;h4 id="24-图综合性能测试-cw">2.4 图综合性能测试-CW&lt;/h4>
 &lt;table>
 &lt;thead>
 &lt;tr>
 &lt;th>数据库&lt;/th>
-&lt;th>规模1000&lt;/th>
-&lt;th>规模5000&lt;/th>
-&lt;th>规模10000&lt;/th>
-&lt;th>规模20000&lt;/th>
+&lt;th>规模 1000&lt;/th>
+&lt;th>规模 5000&lt;/th>
+&lt;th>规模 10000&lt;/th>
+&lt;th>规模 20000&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
@@ -956,9 +961,9 @@
 &lt;p>&lt;em>说明&lt;/em>&lt;/p>
 &lt;ul>
 &lt;li>&amp;ldquo;规模&amp;quot;以顶点为单位&lt;/li>
-&lt;li>表中数据是社区发现完成需要的时间，单位是s，例如HugeGraph使用RocksDB后端在规模10000的数据集，社区聚合不再变化，需要耗时744.780s&lt;/li>
-&lt;li>CW测试是CRUD的综合评估&lt;/li>
-&lt;li>该测试中HugeGraph跟Titan一样，没有通过client，直接对core操作&lt;/li>
+&lt;li>表中数据是社区发现完成需要的时间，单位是 s，例如 HugeGraph 使用 RocksDB 后端在规模 10000 的数据集，社区聚合不再变化，需要耗时 744.780s&lt;/li>
+&lt;li>CW 测试是 CRUD 的综合评估&lt;/li>
+&lt;li>该测试中 HugeGraph 跟 Titan 一样，没有通过 client，直接对 core 操作&lt;/li>
 &lt;/ul>
 &lt;h5 id="结论-4">结论&lt;/h5>
 &lt;ul>
@@ -1018,16 +1023,17 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;li>&lt;a href="/cn/docs/quickstart/hugegraph-computer">HugeGraph-Computer&lt;/a>：HugeGraph-Computer 是分布式图处理系统 (OLAP).
 它是 &lt;a href="https://kowshik.github.io/JPregel/pregel_paper.pdf">Pregel&lt;/a> 的一个实现。它可以运行在 Kubernetes/Yarn
 等集群上，支持超大规模图计算。&lt;/li>
-&lt;li>&lt;a href="/cn/docs/quickstart/hugegraph-ai">HugeGraph-AI(Beta)&lt;/a>：HugeGraph-AI 是 HugeGraph 独立的 AI
+&lt;li>&lt;a href="/cn/docs/quickstart/hugegraph-ai">HugeGraph-AI&lt;/a>：HugeGraph-AI 是 HugeGraph 独立的 AI
 组件，提供了图神经网络的训练和推理功能，LLM/Graph RAG 结合/Python-Client 等相关组件，持续更新 ing。&lt;/li>
 &lt;/ul>
 &lt;h3 id="contact-us">Contact Us&lt;/h3>
 &lt;ul>
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph/issues">GitHub Issues&lt;/a>: 使用途中出现问题或提供功能性建议，可通过此反馈 (推荐)&lt;/li>
 &lt;li>邮件反馈：&lt;a href="mailto:dev@hugegraph.apache.org">dev@hugegraph.apache.org&lt;/a> (&lt;a href="https://hugegraph.apache.org/docs/contribution-guidelines/subscribe/">邮箱订阅方式&lt;/a>)&lt;/li>
+&lt;li>SEC 反馈： &lt;a href="mailto:security@hugegraph.apache.org">security@hugegraph.apache.org&lt;/a> (报告安全相关问题)&lt;/li>
 &lt;li>微信公众号：Apache HugeGraph, 欢迎扫描下方二维码加入我们！&lt;/li>
 &lt;/ul>
-&lt;img src="https://github.com/apache/incubator-hugegraph-doc/blob/master/assets/images/wechat.png?raw=true" alt="QR png" width="300"/></description></item><item><title>Docs: HugeGraph 0.12 Release Notes</title><link>/cn/docs/changelog/hugegraph-0.12.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/changelog/hugegraph-0.12.0-release-notes/</guid><description>
+&lt;img src="https://github.com/apache/hugegraph-doc/blob/master/assets/images/wechat.png?raw=true" alt="QR png" width="300"/></description></item><item><title>Docs: HugeGraph 0.12 Release Notes</title><link>/cn/docs/changelog/hugegraph-0.12.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/changelog/hugegraph-0.12.0-release-notes/</guid><description>
 &lt;h3 id="api--client">API &amp;amp; Client&lt;/h3>
 &lt;h4 id="接口更新">接口更新&lt;/h4>
 &lt;ul>
@@ -1535,6 +1541,11 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: v0.5.6 Stand-alone(RocksDB)</title><link>/cn/docs/performance/api-preformance/hugegraph-api-0.5.6-rocksdb/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/performance/api-preformance/hugegraph-api-0.5.6-rocksdb/</guid><description>
+&lt;blockquote>
+&lt;p>&lt;strong>Note:&lt;/strong>&lt;/p>
+&lt;p>当前的性能指标测试基于很早期的版本。&lt;strong>最新版本&lt;/strong>在性能和功能上都有显著的改进。我们鼓励您参考最新的发布版本，
+该版本具有&lt;strong>自主分布式存储&lt;/strong>和&lt;strong>增强的计算推下能力&lt;/strong>。或者，您可以等待社区更新相关测试数据 (也欢迎反馈共建)。&lt;/p>
+&lt;/blockquote>
 &lt;h3 id="1-测试环境">1 测试环境&lt;/h3>
 &lt;p>被压机器信息&lt;/p>
 &lt;table>
@@ -1561,12 +1572,12 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/ul>
 &lt;p>注：起压机器和被压机器在同一机房&lt;/p>
 &lt;h3 id="2-测试说明">2 测试说明&lt;/h3>
-&lt;h4 id="21-名词定义时间的单位均为ms">2.1 名词定义（时间的单位均为ms）&lt;/h4>
+&lt;h4 id="21-名词定义时间的单位均为-ms">2.1 名词定义（时间的单位均为 ms）&lt;/h4>
 &lt;ul>
 &lt;li>Samples &amp;ndash; 本次场景中一共完成了多少个线程&lt;/li>
 &lt;li>Average &amp;ndash; 平均响应时间&lt;/li>
 &lt;li>Median &amp;ndash; 统计意义上面的响应时间的中值&lt;/li>
-&lt;li>90% Line &amp;ndash; 所有线程中90%的线程的响应时间都小于xx&lt;/li>
+&lt;li>90% Line &amp;ndash; 所有线程中 90% 的线程的响应时间都小于 xx&lt;/li>
 &lt;li>Min &amp;ndash; 最小响应时间&lt;/li>
 &lt;li>Max &amp;ndash; 最大响应时间&lt;/li>
 &lt;li>Error &amp;ndash; 出错率&lt;/li>
@@ -1574,85 +1585,85 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;li>KB/sec &amp;ndash; 以流量做衡量的吞吐量&lt;/li>
 &lt;/ul>
 &lt;h4 id="22-底层存储">2.2 底层存储&lt;/h4>
-&lt;p>后端存储使用RocksDB，HugeGraph与RocksDB都在同一机器上启动，server相关的配置文件除主机和端口有修改外，其余均保持默认。&lt;/p>
+&lt;p>后端存储使用 RocksDB，HugeGraph 与 RocksDB 都在同一机器上启动，server 相关的配置文件除主机和端口有修改外，其余均保持默认。&lt;/p>
 &lt;h3 id="3-性能结果总结">3 性能结果总结&lt;/h3>
 &lt;ol>
-&lt;li>HugeGraph单条插入顶点和边的速度在每秒1w左右&lt;/li>
+&lt;li>HugeGraph 单条插入顶点和边的速度在每秒 1w 左右&lt;/li>
 &lt;li>顶点和边的批量插入速度远大于单条插入速度&lt;/li>
-&lt;li>按id查询顶点和边的并发度可达到13000以上，且请求的平均延时小于50ms&lt;/li>
+&lt;li>按 id 查询顶点和边的并发度可达到 13000 以上，且请求的平均延时小于 50ms&lt;/li>
 &lt;/ol>
 &lt;h3 id="4-测试结果及分析">4 测试结果及分析&lt;/h3>
-&lt;h4 id="41-batch插入">4.1 batch插入&lt;/h4>
+&lt;h4 id="41-batch-插入">4.1 batch 插入&lt;/h4>
 &lt;h5 id="411-压力上限测试">4.1.1 压力上限测试&lt;/h5>
 &lt;h6 id="测试方法">测试方法&lt;/h6>
-&lt;p>不断提升并发量，测试server仍能正常提供服务的压力上限&lt;/p>
+&lt;p>不断提升并发量，测试 server 仍能正常提供服务的压力上限&lt;/p>
 &lt;h6 id="压力参数">压力参数&lt;/h6>
 &lt;p>持续时间：5min&lt;/p>
 &lt;h6 id="顶点的最大插入速度">顶点的最大插入速度：&lt;/h6>
 &lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/rocksdb/vertex_batch.png" alt="image">
 &lt;/div>
-&lt;p>####### 结论：&lt;/p>
+&lt;h6 id="结论">结论：&lt;/h6>
 &lt;ul>
-&lt;li>并发2200，顶点的吞吐量是2026.8，每秒可处理的数据：2026.8*200=405360/s&lt;/li>
+&lt;li>并发 2200，顶点的吞吐量是 2026.8，每秒可处理的数据：2026.8*200=405360/s&lt;/li>
 &lt;/ul>
 &lt;h6 id="边的最大插入速度">边的最大插入速度&lt;/h6>
 &lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/rocksdb/edge_batch.png" alt="image">
 &lt;/div>
-&lt;p>####### 结论：&lt;/p>
+&lt;h6 id="结论-1">结论：&lt;/h6>
 &lt;ul>
-&lt;li>并发900，边的吞吐量是776.9，每秒可处理的数据：776.9*500=388450/s&lt;/li>
+&lt;li>并发 900，边的吞吐量是 776.9，每秒可处理的数据：776.9*500=388450/s&lt;/li>
 &lt;/ul>
-&lt;h4 id="42-single插入">4.2 single插入&lt;/h4>
+&lt;h4 id="42-single-插入">4.2 single 插入&lt;/h4>
 &lt;h5 id="421-压力上限测试">4.2.1 压力上限测试&lt;/h5>
 &lt;h6 id="测试方法-1">测试方法&lt;/h6>
-&lt;p>不断提升并发量，测试server仍能正常提供服务的压力上限&lt;/p>
+&lt;p>不断提升并发量，测试 server 仍能正常提供服务的压力上限&lt;/p>
 &lt;h6 id="压力参数-1">压力参数&lt;/h6>
 &lt;ul>
 &lt;li>持续时间：5min&lt;/li>
-&lt;li>服务异常标志：错误率大于0.00%&lt;/li>
+&lt;li>服务异常标志：错误率大于 0.00%&lt;/li>
 &lt;/ul>
 &lt;h6 id="顶点的单条插入">顶点的单条插入&lt;/h6>
 &lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/rocksdb/vertex_single.png" alt="image">
 &lt;/div>
-&lt;p>####### 结论：&lt;/p>
+&lt;h6 id="结论-2">结论：&lt;/h6>
 &lt;ul>
-&lt;li>并发11500，吞吐量为10730，顶点的单条插入并发能力为11500&lt;/li>
+&lt;li>并发 11500，吞吐量为 10730，顶点的单条插入并发能力为 11500&lt;/li>
 &lt;/ul>
 &lt;h6 id="边的单条插入">边的单条插入&lt;/h6>
 &lt;center>
 &lt;img src="/docs/images/API-perf/v0.5.6/rocksdb/edge_single.png" alt="image">
 &lt;/center>
-&lt;p>####### 结论：&lt;/p>
+&lt;h6 id="结论-3">结论：&lt;/h6>
 &lt;ul>
-&lt;li>并发9000，吞吐量是8418，边的单条插入并发能力为9000&lt;/li>
+&lt;li>并发 9000，吞吐量是 8418，边的单条插入并发能力为 9000&lt;/li>
 &lt;/ul>
-&lt;h4 id="43-按id查询">4.3 按id查询&lt;/h4>
+&lt;h4 id="43-按-id-查询">4.3 按 id 查询&lt;/h4>
 &lt;h5 id="431-压力上限测试">4.3.1 压力上限测试&lt;/h5>
 &lt;h6 id="测试方法-2">测试方法&lt;/h6>
-&lt;p>不断提升并发量，测试server仍能正常提供服务的压力上限&lt;/p>
+&lt;p>不断提升并发量，测试 server 仍能正常提供服务的压力上限&lt;/p>
 &lt;h6 id="压力参数-2">压力参数&lt;/h6>
 &lt;ul>
 &lt;li>持续时间：5min&lt;/li>
-&lt;li>服务异常标志：错误率大于0.00%&lt;/li>
+&lt;li>服务异常标志：错误率大于 0.00%&lt;/li>
 &lt;/ul>
-&lt;h6 id="顶点的按id查询">顶点的按id查询&lt;/h6>
+&lt;h6 id="顶点的按-id-查询">顶点的按 id 查询&lt;/h6>
 &lt;center>
 &lt;img src="/docs/images/API-perf/v0.5.6/rocksdb/vertex_id_query.png" alt="image">
 &lt;/center>
-&lt;p>####### 结论：&lt;/p>
+&lt;h6 id="结论-4">结论：&lt;/h6>
 &lt;ul>
-&lt;li>并发14000，吞吐量是12663，顶点的按id查询的并发能力为14000，平均延时为44ms&lt;/li>
+&lt;li>并发 14000，吞吐量是 12663，顶点的按 id 查询的并发能力为 14000，平均延时为 44ms&lt;/li>
 &lt;/ul>
-&lt;h6 id="边的按id查询">边的按id查询&lt;/h6>
+&lt;h6 id="边的按-id-查询">边的按 id 查询&lt;/h6>
 &lt;center>
 &lt;img src="/docs/images/API-perf/v0.5.6/rocksdb/edge_id_query.png" alt="image">
 &lt;/center>
-&lt;p>####### 结论：&lt;/p>
+&lt;h6 id="结论-5">结论：&lt;/h6>
 &lt;ul>
-&lt;li>并发13000，吞吐量是12225，边的按id查询的并发能力为13000，平均延时为12ms&lt;/li>
+&lt;li>并发 13000，吞吐量是 12225，边的按 id 查询的并发能力为 13000，平均延时为 12ms&lt;/li>
 &lt;/ul></description></item><item><title>Docs: HugeGraph 配置</title><link>/cn/docs/config/config-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/config/config-guide/</guid><description>
 &lt;h3 id="1-概述">1 概述&lt;/h3>
 &lt;p>配置文件的目录为 hugegraph-release/conf，所有关于服务和图本身的配置都在此目录下。&lt;/p>
@@ -3981,6 +3992,11 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-computer/releases/tag/1.0.0">Computer Release Notes&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-commons/releases/tag/1.0.0">Commons Release Notes&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Docs: v0.5.6 Cluster(Cassandra)</title><link>/cn/docs/performance/api-preformance/hugegraph-api-0.5.6-cassandra/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/performance/api-preformance/hugegraph-api-0.5.6-cassandra/</guid><description>
+&lt;blockquote>
+&lt;p>&lt;strong>Note:&lt;/strong>&lt;/p>
+&lt;p>当前的性能指标测试基于很早期的版本。&lt;strong>最新版本&lt;/strong>在性能和功能上都有显著的改进。我们鼓励您参考最新的发布版本，
+该版本具有&lt;strong>自主分布式存储&lt;/strong>和&lt;strong>增强的计算推下能力&lt;/strong>。或者，您可以等待社区更新相关测试数据 (也欢迎反馈共建)。&lt;/p>
+&lt;/blockquote>
 &lt;h3 id="1-测试环境">1 测试环境&lt;/h3>
 &lt;p>被压机器信息&lt;/p>
 &lt;table>
@@ -4007,12 +4023,12 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/ul>
 &lt;p>注：起压机器和被压机器在同一机房&lt;/p>
 &lt;h3 id="2-测试说明">2 测试说明&lt;/h3>
-&lt;h4 id="21-名词定义时间的单位均为ms">2.1 名词定义（时间的单位均为ms）&lt;/h4>
+&lt;h4 id="21-名词定义时间的单位均为-ms">2.1 名词定义（时间的单位均为 ms）&lt;/h4>
 &lt;ul>
 &lt;li>Samples &amp;ndash; 本次场景中一共完成了多少个线程&lt;/li>
 &lt;li>Average &amp;ndash; 平均响应时间&lt;/li>
 &lt;li>Median &amp;ndash; 统计意义上面的响应时间的中值&lt;/li>
-&lt;li>90% Line &amp;ndash; 所有线程中90%的线程的响应时间都小于xx&lt;/li>
+&lt;li>90% Line &amp;ndash; 所有线程中 90% 的线程的响应时间都小于 xx&lt;/li>
 &lt;li>Min &amp;ndash; 最小响应时间&lt;/li>
 &lt;li>Max &amp;ndash; 最大响应时间&lt;/li>
 &lt;li>Error &amp;ndash; 出错率&lt;/li>
@@ -4020,85 +4036,85 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;li>KB/sec &amp;ndash; 以流量做衡量的吞吐量&lt;/li>
 &lt;/ul>
 &lt;h4 id="22-底层存储">2.2 底层存储&lt;/h4>
-&lt;p>后端存储使用15节点Cassandra集群，HugeGraph与Cassandra集群位于不同的服务器，server相关的配置文件除主机和端口有修改外，其余均保持默认。&lt;/p>
+&lt;p>后端存储使用 15 节点 Cassandra 集群，HugeGraph 与 Cassandra 集群位于不同的服务器，server 相关的配置文件除主机和端口有修改外，其余均保持默认。&lt;/p>
 &lt;h3 id="3-性能结果总结">3 性能结果总结&lt;/h3>
 &lt;ol>
-&lt;li>HugeGraph单条插入顶点和边的速度分别为9000和4500&lt;/li>
+&lt;li>HugeGraph 单条插入顶点和边的速度分别为 9000 和 4500&lt;/li>
 &lt;li>顶点和边的批量插入速度分别为5w/s和15w/s，远大于单条插入速度&lt;/li>
-&lt;li>按id查询顶点和边的并发度可达到12000以上，且请求的平均延时小于70ms&lt;/li>
+&lt;li>按 id 查询顶点和边的并发度可达到 12000 以上，且请求的平均延时小于 70ms&lt;/li>
 &lt;/ol>
 &lt;h3 id="4-测试结果及分析">4 测试结果及分析&lt;/h3>
-&lt;h4 id="41-batch插入">4.1 batch插入&lt;/h4>
+&lt;h4 id="41-batch-插入">4.1 batch 插入&lt;/h4>
 &lt;h5 id="411-压力上限测试">4.1.1 压力上限测试&lt;/h5>
 &lt;h6 id="测试方法">测试方法&lt;/h6>
-&lt;p>不断提升并发量，测试server仍能正常提供服务的压力上限&lt;/p>
+&lt;p>不断提升并发量，测试 server 仍能正常提供服务的压力上限&lt;/p>
 &lt;h6 id="压力参数">压力参数&lt;/h6>
 &lt;p>持续时间：5min&lt;/p>
 &lt;h6 id="顶点的最大插入速度">顶点的最大插入速度：&lt;/h6>
 &lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/cassandra/vertex_batch.png" alt="image">
 &lt;/div>
-&lt;p>####### 结论：&lt;/p>
+&lt;h6 id="结论">结论：&lt;/h6>
 &lt;ul>
-&lt;li>并发3500，顶点的吞吐量是261，每秒可处理的数据：261*200=52200/s&lt;/li>
+&lt;li>并发 3500，顶点的吞吐量是 261，每秒可处理的数据：261*200=52200/s&lt;/li>
 &lt;/ul>
 &lt;h6 id="边的最大插入速度">边的最大插入速度&lt;/h6>
 &lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/cassandra/edge_batch.png" alt="image">
 &lt;/div>
-&lt;p>####### 结论：&lt;/p>
+&lt;h6 id="结论-1">结论：&lt;/h6>
 &lt;ul>
-&lt;li>并发1000，边的吞吐量是323，每秒可处理的数据：323*500=161500/s&lt;/li>
+&lt;li>并发 1000，边的吞吐量是 323，每秒可处理的数据：323*500=161500/s&lt;/li>
 &lt;/ul>
-&lt;h4 id="42-single插入">4.2 single插入&lt;/h4>
+&lt;h4 id="42-single-插入">4.2 single 插入&lt;/h4>
 &lt;h5 id="421-压力上限测试">4.2.1 压力上限测试&lt;/h5>
 &lt;h6 id="测试方法-1">测试方法&lt;/h6>
-&lt;p>不断提升并发量，测试server仍能正常提供服务的压力上限&lt;/p>
+&lt;p>不断提升并发量，测试 server 仍能正常提供服务的压力上限&lt;/p>
 &lt;h6 id="压力参数-1">压力参数&lt;/h6>
 &lt;ul>
 &lt;li>持续时间：5min&lt;/li>
-&lt;li>服务异常标志：错误率大于0.00%&lt;/li>
+&lt;li>服务异常标志：错误率大于 0.00%&lt;/li>
 &lt;/ul>
 &lt;h6 id="顶点的单条插入">顶点的单条插入&lt;/h6>
 &lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/cassandra/vertex_single.png" alt="image">
 &lt;/div>
-&lt;p>####### 结论：&lt;/p>
+&lt;h6 id="结论-2">结论：&lt;/h6>
 &lt;ul>
-&lt;li>并发9000，吞吐量为8400，顶点的单条插入并发能力为9000&lt;/li>
+&lt;li>并发 9000，吞吐量为 8400，顶点的单条插入并发能力为 9000&lt;/li>
 &lt;/ul>
 &lt;h6 id="边的单条插入">边的单条插入&lt;/h6>
 &lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/cassandra/edge_single.png" alt="image">
 &lt;/div>
-&lt;p>####### 结论：&lt;/p>
+&lt;h6 id="结论-3">结论：&lt;/h6>
 &lt;ul>
-&lt;li>并发4500，吞吐量是4160，边的单条插入并发能力为4500&lt;/li>
+&lt;li>并发 4500，吞吐量是 4160，边的单条插入并发能力为 4500&lt;/li>
 &lt;/ul>
-&lt;h4 id="43-按id查询">4.3 按id查询&lt;/h4>
+&lt;h4 id="43-按-id-查询">4.3 按 id 查询&lt;/h4>
 &lt;h5 id="431-压力上限测试">4.3.1 压力上限测试&lt;/h5>
 &lt;h6 id="测试方法-2">测试方法&lt;/h6>
-&lt;p>不断提升并发量，测试server仍能正常提供服务的压力上限&lt;/p>
+&lt;p>不断提升并发量，测试 server 仍能正常提供服务的压力上限&lt;/p>
 &lt;h6 id="压力参数-2">压力参数&lt;/h6>
 &lt;ul>
 &lt;li>持续时间：5min&lt;/li>
-&lt;li>服务异常标志：错误率大于0.00%&lt;/li>
+&lt;li>服务异常标志：错误率大于 0.00%&lt;/li>
 &lt;/ul>
-&lt;h6 id="顶点的按id查询">顶点的按id查询&lt;/h6>
+&lt;h6 id="顶点的按-id-查询">顶点的按 id 查询&lt;/h6>
 &lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/cassandra/vertex_id_query.png" alt="image">
 &lt;/div>
-&lt;p>####### 结论：&lt;/p>
+&lt;h6 id="结论-4">结论：&lt;/h6>
 &lt;ul>
-&lt;li>并发14500，吞吐量是13576，顶点的按id查询的并发能力为14500，平均延时为11ms&lt;/li>
+&lt;li>并发 14500，吞吐量是 13576，顶点的按 id 查询的并发能力为 14500，平均延时为 11ms&lt;/li>
 &lt;/ul>
-&lt;h6 id="边的按id查询">边的按id查询&lt;/h6>
+&lt;h6 id="边的按-id-查询">边的按 id 查询&lt;/h6>
 &lt;div style="text-align: center;">
 &lt;img src="/docs/images/API-perf/v0.5.6/cassandra/edge_id_query.png" alt="image">
 &lt;/div>
-&lt;p>####### 结论：&lt;/p>
+&lt;h6 id="结论-5">结论：&lt;/h6>
 &lt;ul>
-&lt;li>并发12000，吞吐量是10688，边的按id查询的并发能力为12000，平均延时为63ms&lt;/li>
+&lt;li>并发 12000，吞吐量是 10688，边的按 id 查询的并发能力为 12000，平均延时为 63ms&lt;/li>
 &lt;/ul></description></item><item><title>Docs: HugeGraph-Loader Quick Start</title><link>/cn/docs/quickstart/hugegraph-loader/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-loader/</guid><description>
 &lt;h3 id="1-hugegraph-loader-概述">1 HugeGraph-Loader 概述&lt;/h3>
 &lt;p>HugeGraph-Loader 是 HugeGraph 的数据导入组件，能够将多种数据源的数据转化为图的顶点和边并批量导入到图数据库中。&lt;/p>
@@ -7019,20 +7035,26 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;h4 id="5-打-jar-包">5. 打 Jar 包&lt;/h4>
 &lt;p>通过 maven 打包，在项目目录下执行命令&lt;code>mvn package&lt;/code>，在 target 目录下会生成 Jar 包文件。
 使用时将该 Jar 包拷到&lt;code>plugins&lt;/code>目录，重启服务即可生效。&lt;/p></description></item><item><title>Docs: HugeGraph-Loader Performance</title><link>/cn/docs/performance/hugegraph-loader-performance/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/performance/hugegraph-loader-performance/</guid><description>
+&lt;blockquote>
+&lt;p>&lt;strong>Note:&lt;/strong>&lt;/p>
+&lt;p>当前的性能指标测试基于很早期的版本。&lt;strong>最新版本&lt;/strong>在性能和功能上都有显著的改进。我们鼓励您参考最新的发布版本，
+该版本具有&lt;strong>自主分布式存储&lt;/strong>和&lt;strong>增强的计算推下能力&lt;/strong>。或者，您可以等待社区更新相关测试数据 (也欢迎反馈共建)。&lt;/p>
+&lt;/blockquote>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
-&lt;p>当要批量插入的图数据（包括顶点和边）条数为billion级别及以下，或者总数据量小于TB时，可以采用&lt;a href="/docs/quickstart/hugegraph-loader">HugeGraph-Loader&lt;/a>工具持续、高速导入图数据&lt;/p>
+&lt;p>当要批量插入的图数据（包括顶点和边）条数为 billion 级别及以下，或者总数据量小于 TB 时，
+可以采用 &lt;a href="/docs/quickstart/hugegraph-loader">HugeGraph-Loader&lt;/a> 工具持续、高速导入图数据&lt;/p>
 &lt;h2 id="性能">性能&lt;/h2>
 &lt;blockquote>
 &lt;p>测试均采用网址数据的边数据&lt;/p>
 &lt;/blockquote>
-&lt;h3 id="rocksdb单机性能">RocksDB单机性能&lt;/h3>
+&lt;h3 id="rocksdb-单机性能">RocksDB 单机性能&lt;/h3>
 &lt;ul>
-&lt;li>关闭label index，22.8w edges/s&lt;/li>
-&lt;li>开启label index，15.3w edges/s&lt;/li>
+&lt;li>关闭 label index，22.8w edges/s&lt;/li>
+&lt;li>开启 label index，15.3w edges/s&lt;/li>
 &lt;/ul>
-&lt;h3 id="cassandra集群性能">Cassandra集群性能&lt;/h3>
+&lt;h3 id="cassandra-集群性能">Cassandra 集群性能&lt;/h3>
 &lt;ul>
-&lt;li>默认开启label index，6.3w edges/s&lt;/li>
+&lt;li>默认开启 label index，6.3w edges/s&lt;/li>
 &lt;/ul></description></item><item><title>Docs: HugeGraph 1.2.0 Release Notes</title><link>/cn/docs/changelog/hugegraph-1.2.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/changelog/hugegraph-1.2.0-release-notes/</guid><description>
 &lt;h3 id="java-version-statement">Java version statement&lt;/h3>
 &lt;blockquote>
@@ -8533,9 +8555,10 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/releases">Toolchain Release Notes&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-ai/releases">AI Release Notes&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-commons/releases">Commons Release Notes&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Docs: HugeGraph-Ai Quick Start (Beta)</title><link>/cn/docs/quickstart/hugegraph-ai/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-ai/</guid><description>
-&lt;h3 id="1-hugegraph-ai-概述">1 HugeGraph-Ai 概述&lt;/h3>
-&lt;p>hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与大模型结合的应用，与图机器学习组件的集成等，为开发者在项目中利用 HugeGraph 的 AI 能力提供全面支持。&lt;/p>
+&lt;/ul></description></item><item><title>Docs: HugeGraph-AI Quick Start</title><link>/cn/docs/quickstart/hugegraph-ai/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-ai/</guid><description>
+&lt;h3 id="1-hugegraph-ai-概述">1 HugeGraph-AI 概述&lt;/h3>
+&lt;p>hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与大模型结合的应用，与图机器学习组件的集成等，为开发者在项目中利用 HugeGraph
+的 AI 能力提供全面支持。&lt;/p>
 &lt;h3 id="2-环境要求">2 环境要求&lt;/h3>
 &lt;ul>
 &lt;li>python 3.8+&lt;/li>
@@ -8553,8 +8576,8 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;li>配置 HugeGraph 数据库连接信息和 LLM 模型信息，可以通过两种方式配置：
 &lt;ol>
 &lt;li>配置 &lt;code>./hugegraph-llm/src/config/config.ini&lt;/code> 文件&lt;/li>
-&lt;li>在 gradio 中，分别完成 LLM 和 HugeGraph 的配置后，点击 &lt;code>Initialize configs&lt;/code>，将返回初始化后的完整配置文件。如图所示:
-&lt;img src="/docs/images/gradio-config.png" alt="gradio配置">&lt;/li>
+&lt;li>在 gradio 中，分别完成 LLM 和 HugeGraph 的配置后，点击 &lt;code>Initialize configs&lt;/code>，将返回初始化后的完整配置文件。如图所示：
+&lt;img src="/docs/images/gradio-config.png" alt="gradio 配置">&lt;/li>
 &lt;/ol>
 &lt;/li>
 &lt;li>离线下载 NLTK stopwords&lt;/li>
@@ -8578,7 +8601,7 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
-&lt;p>&lt;img src="/docs/images/gradio-kg.png" alt="gradio配置">&lt;/p>
+&lt;p>&lt;img src="/docs/images/gradio-kg.png" alt="gradio 配置">&lt;/p>
 &lt;h5 id="412-通过代码构建知识图谱">4.1.2 通过代码构建知识图谱&lt;/h5>
 &lt;ul>
 &lt;li>完整代码&lt;/li>
@@ -8598,15 +8621,15 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>时序图
-&lt;img src="/docs/images/kg-uml.png" alt="gradio配置">&lt;/li>
+&lt;img src="/docs/images/kg-uml.png" alt="gradio 配置">&lt;/li>
 &lt;/ul>
 &lt;ol>
-&lt;li>初始化: 初始化 LLMs 实例，获取 LLM，然后创建图谱构建的任务实例 &lt;code>KgBuilder&lt;/code>，KgBuilder 中定义了多个 operator，用户可以根据需求自由组合达到目的 。（tip: &lt;code>print_result()&lt;/code> 可以在控制台打印每一步输出的结果，不影响整体执行逻辑）&lt;/li>
+&lt;li>初始化：初始化 LLMs 实例，获取 LLM，然后创建图谱构建的任务实例 &lt;code>KgBuilder&lt;/code>，KgBuilder 中定义了多个 operator，用户可以根据需求自由组合达到目的。（tip: &lt;code>print_result()&lt;/code> 可以在控制台打印每一步输出的结果，不影响整体执行逻辑）&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">llm&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">LLMs&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">get_llm&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">builder&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">KgBuilder&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">llm&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
-&lt;li>导入 Schema：使用 &lt;code>import_schema&lt;/code> 方法导入, 支持三种模式：
+&lt;li>导入 Schema：使用 &lt;code>import_schema&lt;/code> 方法导入，支持三种模式：
 &lt;ul>
 &lt;li>从 HugeGraph 实例导入，指定 HugeGraph 图实例的名称，它将自动提取图的模式。&lt;/li>
 &lt;li>从用户定义的模式导入，接受用户定义的 JSON 格式模式。&lt;/li>
@@ -8641,9 +8664,9 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;h5 id="411-通过-gradio-交互问答">4.1.1 通过 gradio 交互问答&lt;/h5>
 &lt;ol>
 &lt;li>首先点击 &lt;code>Initialize HugeGraph test data&lt;/code> 按钮，初始化 HugeGraph 数据。
-&lt;img src="/docs/images/gradio-rag-1.png" alt="gradio配置">&lt;/li>
+&lt;img src="/docs/images/gradio-rag-1.png" alt="gradio 配置">&lt;/li>
 &lt;li>然后点击 &lt;code>Retrieval augmented generation&lt;/code> 按钮，生成问题的答案。
-&lt;img src="/docs/images/gradio-rag-2.png" alt="gradio配置">&lt;/li>
+&lt;img src="/docs/images/gradio-rag-2.png" alt="gradio 配置">&lt;/li>
 &lt;/ol>
 &lt;h5 id="412-通过代码构建-graph-rag">4.1.2 通过代码构建 Graph RAG&lt;/h5>
 &lt;ul>
@@ -11464,18 +11487,29 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;ul>
 &lt;li>如果computer-k8s模块下面的某些类不存在，你需要运行&lt;code>mvn compile&lt;/code>来提前生成对应的类。&lt;/li>
 &lt;/ul></description></item><item><title>Docs: 报告安全问题</title><link>/cn/docs/guides/security/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/guides/security/</guid><description>
-&lt;h2 id="报告apache-hugegraph的安全问题">报告Apache HugeGraph的安全问题&lt;/h2>
-&lt;p>遵循 ASF 的规范, HugeGraph 社区对&lt;strong>解决修复&lt;/strong>项目中的安全问题保持非常积极和开放的态度。&lt;/p>
+&lt;h2 id="报告-apache-hugegraph-的安全问题">报告 Apache HugeGraph 的安全问题&lt;/h2>
+&lt;p>遵循 ASF 的规范，HugeGraph 社区对&lt;strong>解决修复&lt;/strong>项目中的安全问题保持非常积极和开放的态度。&lt;/p>
 &lt;p>我们强烈建议用户首先向我们的独立安全邮件列表报告此类问题，相关详细的流程规范请参考 &lt;a href="https://www.apache.org/security/committers.html">ASF SEC&lt;/a> 守则。&lt;/p>
-&lt;p>请注意，安全邮件组适用于报告&lt;strong>未公开&lt;/strong>的安全漏洞并跟进漏洞处理的过程。常规的软件 &lt;code>Bug/Error&lt;/code> 报告应该使用 &lt;code>Github Issue/Discussion&lt;/code> 或是 &lt;code>HugeGraph-Dev&lt;/code> 邮箱组。发送到安全邮件组但与安全问题无关的邮件将被忽略。&lt;/p>
-&lt;p>独立的安全邮件(组)地址为: &lt;code>security@hugegraph.apache.org&lt;/code>&lt;/p>
+&lt;p>请注意，安全邮件组适用于报告&lt;strong>未公开&lt;/strong>的安全漏洞并跟进漏洞处理的过程。常规的软件 &lt;code>Bug/Error&lt;/code> 报告应该使用 &lt;code>Github Issue/Discussion&lt;/code>
+或是 &lt;code>HugeGraph-Dev&lt;/code> 邮箱组。发送到安全邮件组但与安全问题无关的邮件将被忽略。&lt;/p>
+&lt;p>独立的安全邮件 (组) 地址为： &lt;code>security@hugegraph.apache.org&lt;/code>&lt;/p>
 &lt;p>安全漏洞处理大体流程如下：&lt;/p>
 &lt;ul>
 &lt;li>报告人私下向 Apache HugeGraph SEC 邮件组报告漏洞 (尽可能包括复现的版本/相关说明/复现方式/影响范围等)&lt;/li>
 &lt;li>HugeGraph 项目安全团队与报告人私下合作/商讨漏洞解决方案 (初步确认后可申请 &lt;code>CVE&lt;/code> 编号予以登记)&lt;/li>
 &lt;li>项目创建一个新版本的受漏洞影响的软件包，以提供修复程序&lt;/li>
-&lt;li>合适的时间可公开漏洞的大体问题 &amp;amp; 描述如何应用修复程序 (遵循 ASF 规范, 公告中不应携带复现细节等敏感信息)&lt;/li>
+&lt;li>合适的时间可公开漏洞的大体问题 &amp;amp; 描述如何应用修复程序 (遵循 ASF 规范，公告中不应携带复现细节等敏感信息)&lt;/li>
 &lt;li>正式的 CVE 发布及相关流程同 ASF-SEC 页面&lt;/li>
+&lt;/ul>
+&lt;h2 id="已发现的安全漏洞-cves">已发现的安全漏洞 (CVEs)&lt;/h2>
+&lt;h3 id="hugegraphhttpsgithubcomapachehugegraph-主仓库-serverpdstore">&lt;a href="https://github.com/apache/hugegraph">HugeGraph&lt;/a> 主仓库 (Server/PD/Store)&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://www.cve.org/CVERecord?id=CVE-2024-27348">CVE-2024-27348&lt;/a>: HugeGraph-Server - Command execution in gremlin&lt;/li>
+&lt;li>&lt;a href="https://www.cve.org/CVERecord?id=CVE-2024-27349">CVE-2024-27349&lt;/a>: HugeGraph-Server - Bypass whitelist in Auth mode&lt;/li>
+&lt;/ul>
+&lt;h3 id="hugegraph-toolchainhttpsgithubcomapachehugegraph-toolchain-仓库-hubbleloaderclienttools">&lt;a href="https://github.com/apache/hugegraph-toolchain">HugeGraph-Toolchain&lt;/a> 仓库 (Hubble/Loader/Client/Tools/..)&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://www.cve.org/CVERecord?id=CVE-2024-27347">CVE-2024-27347&lt;/a>: HugeGraph-Hubble - SSRF in Hubble connection page&lt;/li>
 &lt;/ul></description></item><item><title>Docs: Vertex API</title><link>/cn/docs/clients/restful-api/vertex/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/restful-api/vertex/</guid><description>
 &lt;h3 id="21-vertex">2.1 Vertex&lt;/h3>
 &lt;p>顶点类型中的 &lt;code>Id&lt;/code> 策略决定了顶点的 &lt;code>Id&lt;/code> 类型，其对应的 &lt;code>id&lt;/code> 类型如下：&lt;/p>

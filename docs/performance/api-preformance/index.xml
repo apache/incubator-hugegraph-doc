@@ -1,4 +1,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HugeGraph – HugeGraph-API Performance</title><link>/docs/performance/api-preformance/</link><description>Recent content in HugeGraph-API Performance on HugeGraph</description><generator>Hugo -- gohugo.io</generator><atom:link href="/docs/performance/api-preformance/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: v0.5.6 Stand-alone(RocksDB)</title><link>/docs/performance/api-preformance/hugegraph-api-0.5.6-rocksdb/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/performance/api-preformance/hugegraph-api-0.5.6-rocksdb/</guid><description>
+&lt;blockquote>
+&lt;p>&lt;strong>Note:&lt;/strong>&lt;/p>
+&lt;p>The current performance metrics are based on an earlier version. The &lt;strong>latest version&lt;/strong> has significant
+improvements in both performance and functionality. We encourage you to refer to the most recent release featuring
+&lt;strong>autonomous distributed storage&lt;/strong> and &lt;strong>enhanced computational push down capabilities&lt;/strong>. Alternatively,
+you may wait for the community to update the data with these enhancements.&lt;/p>
+&lt;/blockquote>
 &lt;h3 id="1-test-environment">1 Test environment&lt;/h3>
 &lt;p>Compressed machine information:&lt;/p>
 &lt;table>
@@ -20,7 +27,7 @@
 &lt;/tbody>
 &lt;/table>
 &lt;ul>
-&lt;li>Information about the machine used to generate load: configured the same as the machine that is being tested under load.&lt;/li>
+&lt;li>Information about the machine used to generate loads: configured the same as the machine that is being tested under load.&lt;/li>
 &lt;li>Testing tool: Apache JMeter 2.5.1&lt;/li>
 &lt;/ul>
 &lt;p>Note: The load-generating machine and the machine under test are located in the same local network.&lt;/p>
@@ -56,7 +63,7 @@
 &lt;center>
 &lt;img src="/docs/images/API-perf/v0.5.6/rocksdb/vertex_batch.png" alt="image">
 &lt;/center>
-&lt;p>####### in conclusion:&lt;/p>
+&lt;h6 id="in-conclusion">in conclusion:&lt;/h6>
 &lt;ul>
 &lt;li>With a concurrency of 2200, the throughput for vertices is 2026.8. This means that the system can process data at a rate of 405360 per second (2026.8 * 200).&lt;/li>
 &lt;/ul>
@@ -64,7 +71,7 @@
 &lt;center>
 &lt;img src="/docs/images/API-perf/v0.5.6/rocksdb/edge_batch.png" alt="image">
 &lt;/center>
-&lt;p>####### Conclusion:&lt;/p>
+&lt;h6 id="conclusion">Conclusion:&lt;/h6>
 &lt;ul>
 &lt;li>With a concurrency of 900, the throughput for edges is 776.9. This means that the system can process data at a rate of 388450 per second (776.9 * 500).&lt;/li>
 &lt;/ul>
@@ -81,7 +88,7 @@
 &lt;center>
 &lt;img src="/docs/images/API-perf/v0.5.6/rocksdb/vertex_single.png" alt="image">
 &lt;/center>
-&lt;p>####### Conclusion:&lt;/p>
+&lt;h6 id="conclusion-1">Conclusion:&lt;/h6>
 &lt;ul>
 &lt;li>With a concurrency of 11500, the throughput is 10730. This means that the system can handle a single concurrent insertion of vertices at a concurrency level of 11500.&lt;/li>
 &lt;/ul>
@@ -89,7 +96,7 @@
 &lt;center>
 &lt;img src="/docs/images/API-perf/v0.5.6/rocksdb/edge_single.png" alt="image">
 &lt;/center>
-&lt;p>####### Conclusion:&lt;/p>
+&lt;h6 id="conclusion-2">Conclusion:&lt;/h6>
 &lt;ul>
 &lt;li>With a concurrency of 9000, the throughput is 8418. This means that the system can handle a single concurrent insertion of edges at a concurrency level of 9000.&lt;/li>
 &lt;/ul>
@@ -106,7 +113,7 @@
 &lt;center>
 &lt;img src="/docs/images/API-perf/v0.5.6/rocksdb/vertex_id_query.png" alt="image">
 &lt;/center>
-&lt;p>####### Conclusion：&lt;/p>
+&lt;h6 id="conclusion-3">Conclusion：&lt;/h6>
 &lt;ul>
 &lt;li>Concurrency is 14,000, throughput is 12,663. The concurrency capacity for querying vertices by ID is 14,000, with an average delay of 44ms.&lt;/li>
 &lt;/ul>
@@ -114,10 +121,17 @@
 &lt;center>
 &lt;img src="/docs/images/API-perf/v0.5.6/rocksdb/edge_id_query.png" alt="image">
 &lt;/center>
-&lt;p>####### Conclusion：&lt;/p>
+&lt;h6 id="conclusion-4">Conclusion：&lt;/h6>
 &lt;ul>
 &lt;li>Concurrency is 13,000, throughput is 12,225. The concurrency capacity for querying edges by ID is 13,000, with an average delay of 12ms.&lt;/li>
 &lt;/ul></description></item><item><title>Docs: v0.5.6 Cluster(Cassandra)</title><link>/docs/performance/api-preformance/hugegraph-api-0.5.6-cassandra/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/performance/api-preformance/hugegraph-api-0.5.6-cassandra/</guid><description>
+&lt;blockquote>
+&lt;p>&lt;strong>Note:&lt;/strong>&lt;/p>
+&lt;p>The current performance metrics are based on an earlier version. The &lt;strong>latest version&lt;/strong> has significant
+improvements in both performance and functionality. We encourage you to refer to the most recent release featuring
+&lt;strong>autonomous distributed storage&lt;/strong> and &lt;strong>enhanced computational push down capabilities&lt;/strong>. Alternatively,
+you may wait for the community to update the data with these enhancements.&lt;/p>
+&lt;/blockquote>
 &lt;h3 id="1-test-environment">1 Test environment&lt;/h3>
 &lt;p>Compressed machine information&lt;/p>
 &lt;table>
@@ -139,7 +153,7 @@
 &lt;/tbody>
 &lt;/table>
 &lt;ul>
-&lt;li>Starting Pressure Machine Information: Configured the same as the compressed machine.&lt;/li>
+&lt;li>Starting Pressure Machine Information: Configure the same as the compressed machine.&lt;/li>
 &lt;li>Testing tool: Apache JMeter 2.5.1.&lt;/li>
 &lt;/ul>
 &lt;p>Note: The machine used to initiate the load and the machine being tested are located in the same data center (or server room)&lt;/p>
@@ -160,7 +174,7 @@
 &lt;p>A 15-node Cassandra cluster is used for backend storage. HugeGraph and the Cassandra cluster are located on separate servers. Server-related configuration files are modified only for host and port settings, while the rest remain default.&lt;/p>
 &lt;h3 id="3-summary-of-performance-results">3 Summary of Performance Results&lt;/h3>
 &lt;ol>
-&lt;li>The speed of single vertex and edge insertion in HugeGraph is 9000 and 4500 per second, respectively.&lt;/li>
+&lt;li>The speed of a single vertex and edge insertion in HugeGraph is 9000 and 4500 per second, respectively.&lt;/li>
 &lt;li>The speed of bulk vertex and edge insertion is 50,000 and 150,000 per second, respectively, which is much higher than the single insertion speed.&lt;/li>
 &lt;li>The concurrency for querying vertices and edges by ID can reach more than 12,000, and the average request delay is less than 70ms.&lt;/li>
 &lt;/ol>

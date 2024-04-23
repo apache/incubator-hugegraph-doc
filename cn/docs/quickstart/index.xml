@@ -2065,9 +2065,10 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;/ul>
 &lt;center>
 &lt;img src="/docs/images/images-hubble/355任务详情.png" alt="image">
-&lt;/center></description></item><item><title>Docs: HugeGraph-Ai Quick Start (Beta)</title><link>/cn/docs/quickstart/hugegraph-ai/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-ai/</guid><description>
-&lt;h3 id="1-hugegraph-ai-概述">1 HugeGraph-Ai 概述&lt;/h3>
-&lt;p>hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与大模型结合的应用，与图机器学习组件的集成等，为开发者在项目中利用 HugeGraph 的 AI 能力提供全面支持。&lt;/p>
+&lt;/center></description></item><item><title>Docs: HugeGraph-AI Quick Start</title><link>/cn/docs/quickstart/hugegraph-ai/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-ai/</guid><description>
+&lt;h3 id="1-hugegraph-ai-概述">1 HugeGraph-AI 概述&lt;/h3>
+&lt;p>hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与大模型结合的应用，与图机器学习组件的集成等，为开发者在项目中利用 HugeGraph
+的 AI 能力提供全面支持。&lt;/p>
 &lt;h3 id="2-环境要求">2 环境要求&lt;/h3>
 &lt;ul>
 &lt;li>python 3.8+&lt;/li>
@@ -2085,8 +2086,8 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;li>配置 HugeGraph 数据库连接信息和 LLM 模型信息，可以通过两种方式配置：
 &lt;ol>
 &lt;li>配置 &lt;code>./hugegraph-llm/src/config/config.ini&lt;/code> 文件&lt;/li>
-&lt;li>在 gradio 中，分别完成 LLM 和 HugeGraph 的配置后，点击 &lt;code>Initialize configs&lt;/code>，将返回初始化后的完整配置文件。如图所示:
-&lt;img src="/docs/images/gradio-config.png" alt="gradio配置">&lt;/li>
+&lt;li>在 gradio 中，分别完成 LLM 和 HugeGraph 的配置后，点击 &lt;code>Initialize configs&lt;/code>，将返回初始化后的完整配置文件。如图所示：
+&lt;img src="/docs/images/gradio-config.png" alt="gradio 配置">&lt;/li>
 &lt;/ol>
 &lt;/li>
 &lt;li>离线下载 NLTK stopwords&lt;/li>
@@ -2110,7 +2111,7 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
-&lt;p>&lt;img src="/docs/images/gradio-kg.png" alt="gradio配置">&lt;/p>
+&lt;p>&lt;img src="/docs/images/gradio-kg.png" alt="gradio 配置">&lt;/p>
 &lt;h5 id="412-通过代码构建知识图谱">4.1.2 通过代码构建知识图谱&lt;/h5>
 &lt;ul>
 &lt;li>完整代码&lt;/li>
@@ -2130,15 +2131,15 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>时序图
-&lt;img src="/docs/images/kg-uml.png" alt="gradio配置">&lt;/li>
+&lt;img src="/docs/images/kg-uml.png" alt="gradio 配置">&lt;/li>
 &lt;/ul>
 &lt;ol>
-&lt;li>初始化: 初始化 LLMs 实例，获取 LLM，然后创建图谱构建的任务实例 &lt;code>KgBuilder&lt;/code>，KgBuilder 中定义了多个 operator，用户可以根据需求自由组合达到目的 。（tip: &lt;code>print_result()&lt;/code> 可以在控制台打印每一步输出的结果，不影响整体执行逻辑）&lt;/li>
+&lt;li>初始化：初始化 LLMs 实例，获取 LLM，然后创建图谱构建的任务实例 &lt;code>KgBuilder&lt;/code>，KgBuilder 中定义了多个 operator，用户可以根据需求自由组合达到目的。（tip: &lt;code>print_result()&lt;/code> 可以在控制台打印每一步输出的结果，不影响整体执行逻辑）&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">llm&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">LLMs&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">get_llm&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">builder&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">KgBuilder&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">llm&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
-&lt;li>导入 Schema：使用 &lt;code>import_schema&lt;/code> 方法导入, 支持三种模式：
+&lt;li>导入 Schema：使用 &lt;code>import_schema&lt;/code> 方法导入，支持三种模式：
 &lt;ul>
 &lt;li>从 HugeGraph 实例导入，指定 HugeGraph 图实例的名称，它将自动提取图的模式。&lt;/li>
 &lt;li>从用户定义的模式导入，接受用户定义的 JSON 格式模式。&lt;/li>
@@ -2173,9 +2174,9 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;h5 id="411-通过-gradio-交互问答">4.1.1 通过 gradio 交互问答&lt;/h5>
 &lt;ol>
 &lt;li>首先点击 &lt;code>Initialize HugeGraph test data&lt;/code> 按钮，初始化 HugeGraph 数据。
-&lt;img src="/docs/images/gradio-rag-1.png" alt="gradio配置">&lt;/li>
+&lt;img src="/docs/images/gradio-rag-1.png" alt="gradio 配置">&lt;/li>
 &lt;li>然后点击 &lt;code>Retrieval augmented generation&lt;/code> 按钮，生成问题的答案。
-&lt;img src="/docs/images/gradio-rag-2.png" alt="gradio配置">&lt;/li>
+&lt;img src="/docs/images/gradio-rag-2.png" alt="gradio 配置">&lt;/li>
 &lt;/ol>
 &lt;h5 id="412-通过代码构建-graph-rag">4.1.2 通过代码构建 Graph RAG&lt;/h5>
 &lt;ul>
