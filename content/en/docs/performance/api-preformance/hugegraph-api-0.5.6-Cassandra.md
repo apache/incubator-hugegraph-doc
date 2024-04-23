@@ -19,7 +19,7 @@ Compressed machine information
 |----------------------------------------------|--------|-----------|--------------------|
 | 48 Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz | 128G   | 10000Mbps | 750GB SSD,2.7T HDD |
 
-- Starting Pressure Machine Information: Configured the same as the compressed machine.
+- Starting Pressure Machine Information: Configure the same as the compressed machine.
 - Testing tool: Apache JMeter 2.5.1.
 
 Note: The machine used to initiate the load and the machine being tested are located in the same data center (or server room)
@@ -44,7 +44,7 @@ A 15-node Cassandra cluster is used for backend storage. HugeGraph and the Cassa
 
 ### 3 Summary of Performance Results
 
-1. The speed of single vertex and edge insertion in HugeGraph is 9000 and 4500 per second, respectively.
+1. The speed of a single vertex and edge insertion in HugeGraph is 9000 and 4500 per second, respectively.
 2. The speed of bulk vertex and edge insertion is 50,000 and 150,000 per second, respectively, which is much higher than the single insertion speed.
 3. The concurrency for querying vertices and edges by ID can reach more than 12,000, and the average request delay is less than 70ms.
 

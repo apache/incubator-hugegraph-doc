@@ -19,7 +19,7 @@ Compressed machine information:
 |----------------------------------------------|--------|-----------|--------------------|
 | 48 Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz | 128G   | 10000Mbps | 750GB SSD,2.7T HDD |
 
-- Information about the machine used to generate load: configured the same as the machine that is being tested under load.
+- Information about the machine used to generate loads: configured the same as the machine that is being tested under load.
 - Testing tool: Apache JMeter 2.5.1
 
 Note: The load-generating machine and the machine under test are located in the same local network.
@@ -69,7 +69,7 @@ Duration: 5 minutes
 </center>
 
 
-####### in conclusion:
+###### in conclusion:
 
 - With a concurrency of 2200, the throughput for vertices is 2026.8. This means that the system can process data at a rate of 405360 per second (2026.8 * 200).
 
@@ -81,7 +81,7 @@ Duration: 5 minutes
   <img src="/docs/images/API-perf/v0.5.6/rocksdb/edge_batch.png" alt="image">
 </center>
 
-####### Conclusion:
+###### Conclusion:
 
 - With a concurrency of 900, the throughput for edges is 776.9. This means that the system can process data at a rate of 388450 per second (776.9 * 500).
 
@@ -105,7 +105,7 @@ Stress limit testing is a process of continuously increasing the concurrency lev
 </center>
 
 
-####### Conclusion:
+###### Conclusion:
 
 - With a concurrency of 11500, the throughput is 10730. This means that the system can handle a single concurrent insertion of vertices at a concurrency level of 11500.
 
@@ -116,7 +116,7 @@ Stress limit testing is a process of continuously increasing the concurrency lev
 </center>
 
 
-####### Conclusion:
+###### Conclusion:
 
 - With a concurrency of 9000, the throughput is 8418. This means that the system can handle a single concurrent insertion of edges at a concurrency level of 9000.
 
@@ -139,7 +139,7 @@ Continuously increasing the concurrency level to test the upper limit of the ser
   <img src="/docs/images/API-perf/v0.5.6/rocksdb/vertex_id_query.png" alt="image">
 </center>
 
-####### Conclusion：
+###### Conclusion：
 
 - Concurrency is 14,000, throughput is 12,663. The concurrency capacity for querying vertices by ID is 14,000, with an average delay of 44ms.
 
@@ -150,6 +150,6 @@ Continuously increasing the concurrency level to test the upper limit of the ser
 </center>
 
 
-####### Conclusion：
+###### Conclusion：
 
 - Concurrency is 13,000, throughput is 12,225. The concurrency capacity for querying edges by ID is 13,000, with an average delay of 12ms.

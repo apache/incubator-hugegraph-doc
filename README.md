@@ -42,7 +42,7 @@ The functions of this system include but are not limited to:
 
 - [HugeGraph-Server](/docs/quickstart/hugegraph-server): HugeGraph-Server is the core part of the HugeGraph project, containing Core, Backend, API and other submodules;
   - Core: Implements the graph engine, connects to the Backend module downwards, and supports the API module upwards;
-  - Backend: Implements the storage of graph data to the backend, supports backends including: Memory, Cassandra, ScyllaDB, RocksDB, HBase, MySQL and PostgreSQL, users can choose one according to the actual situation;
+  - Backend: Implements the storage of graph data to the backend, supports backends including Memory, Cassandra, ScyllaDB, RocksDB, HBase, MySQL and PostgreSQL, users can choose one according to the actual situation;
   - API: Built-in REST Server, provides RESTful API to users, and is fully compatible with Gremlin queries. (Supports distributed storage and computation pushdown)
 - [HugeGraph-Toolchain](https://github.com/apache/hugegraph-toolchain): (Toolchain)
   - [HugeGraph-Client](/docs/quickstart/hugegraph-client): HugeGraph-Client provides a RESTful API client for connecting to HugeGraph-Server, currently only the Java version is implemented, users of other languages can implement it themselves;
