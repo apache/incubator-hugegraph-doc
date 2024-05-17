@@ -21,8 +21,8 @@
 # 3. Compile the source package & run server & toolchain
 # 4. Run server & toolchain in binary package
 
-# if we don't want to exit after '|', remove "-o pipefail"
-set -exo pipefail
+# exit when any error occurs
+set -e
 
 # release version (input by committer)
 RELEASE_VERSION=$1 # like 1.2.0
@@ -96,8 +96,9 @@ for i in *src.tar.gz; do
     echo "The package name $i should include incubating" && exit 1
   fi
 
-  tar -xzvf "$i"
   MODULE_DIR=$(basename "$i" .tar.gz)
+  rm -rf ${MODULE_DIR}
+  tar -xzvf "$i"
   pushd ${MODULE_DIR}
   echo "Start to check the package content: ${MODULE_DIR}"
 
@@ -153,15 +154,17 @@ for i in *src.tar.gz; do
   done
 
   # 4.8: test compile the packages
-  if [[ ($JAVA_VERSION == 8 && "$i" =~ "computer") ]] || [[ "$i" =~ 'hugegraph-ai' ]]; then
-    echo "Skip compile computer module in java8 & AI module in all versions"
-    popd
-    continue
+  if [[ ($JAVA_VERSION == 8 && "$i" =~ "hugegraph-computer") ]]; then
+    echo "Skip compile $i module in java8"
+  elif [[ "$i" =~ 'hugegraph-ai' ]]; then
+    echo "Skip compile $i module in all versions"
+  elif [[ "$i" =~ "hugegraph-commons" ]]; then
+    mvn install -DskipTests -Papache-release -ntp -e
+  else
+    # TODO: consider using commands that are entirely consistent with building binary packages
+    mvn package -DskipTests -Papache-release -ntp -e
+    ls -lh
   fi
-  # TODO: consider using commands that are entirely consistent with building binary packages
-  mvn package -DskipTests -Papache-release -ntp -e
-  ls -lh
-
   popd
 done
 
@@ -240,8 +243,9 @@ for i in *.tar.gz; do
     echo "The package name $i should include incubating" && exit 1
   fi
 
-  tar -xzvf "$i"
   MODULE_DIR=$(basename "$i" .tar.gz)
+  rm -rf ${MODULE_DIR}
+  tar -xzvf "$i"
   pushd ${MODULE_DIR}
   ls -lh
   echo "Start to check the package content: ${MODULE_DIR}"
