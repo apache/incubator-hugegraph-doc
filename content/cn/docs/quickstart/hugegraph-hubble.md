@@ -112,26 +112,7 @@ starting HugeGraphHubble ..............timed out with http status 502
 
 #### 2.3 源码编译
 
-**注意：** 编译 hubble 需要用户本地环境有安装 `Nodejs V16.x` 与 `yarn` 环境
-
-```bash
-apt install curl build-essential
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-source ~/.bashrc
-nvm install 16
-```
-
-然后确认安装版本是否为 `16.x` (请注意过高的 Node 版本会产生冲突)
-
-```bash
-node -v
-```
-
-使用下列命令安装 `yarn`
-
-```bash
-npm install -g yarn
-```
+**注意：** 目前已在 `hugegraph-hubble/hubble-be/pom.xml` 中引入插件 `frontend-maven-plugin`，编译 hubble 时不需要用户本地环境提前安装 `Nodejs V16.x` 与 `yarn` 环境，可直接按下述步骤执行
 
 下载 toolchain 源码包
 
@@ -142,7 +123,7 @@ git clone https://github.com/apache/hugegraph-toolchain.git
 编译`hubble`, 它依赖 loader 和 client, 编译时需提前构建这些依赖 (后续可跳)
 
 ```shell
-cd incubator-hugegraph-toolchain
+cd hugegraph-toolchain
 sudo pip install -r hugegraph-hubble/hubble-dist/assembly/travis/requirements.txt
 mvn install -pl hugegraph-client,hugegraph-loader -am -Dmaven.javadoc.skip=true -DskipTests -ntp
 
