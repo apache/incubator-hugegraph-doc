@@ -1702,19 +1702,11 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-08-30 20:38:41 &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>main&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO &lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> o.a.h.HugeGraphHubble &lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> - Started HugeGraphHubble in 7.379 seconds &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>JVM running &lt;span style="color:#204a87;font-weight:bold">for&lt;/span> 8.499&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后使用浏览器访问 &lt;code>ip:8088&lt;/code> 可看到&lt;code>hubble&lt;/code>页面，通过&lt;code>bin/stop-hubble.sh&lt;/code>则可以停止服务&lt;/p>
 &lt;h4 id="23-源码编译">2.3 源码编译&lt;/h4>
-&lt;p>&lt;strong>注意：&lt;/strong> 编译 hubble 需要用户本地环境有安装 &lt;code>Nodejs V16.x&lt;/code> 与 &lt;code>yarn&lt;/code> 环境&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>apt install curl build-essential
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh &lt;span style="color:#000;font-weight:bold">|&lt;/span> bash
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">source&lt;/span> ~/.bashrc
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>nvm install &lt;span style="color:#0000cf;font-weight:bold">16&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后确认安装版本是否为 &lt;code>16.x&lt;/code> (请注意过高的 Node 版本会产生冲突)&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>node -v
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用下列命令安装 &lt;code>yarn&lt;/code>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>npm install -g yarn
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>下载 toolchain 源码包&lt;/p>
+&lt;p>&lt;strong>注意：&lt;/strong> 目前已在 &lt;code>hugegraph-hubble/hubble-be/pom.xml&lt;/code> 中引入插件 &lt;code>frontend-maven-plugin&lt;/code>，编译 hubble 时不需要用户本地环境提前安装 &lt;code>Nodejs V16.x&lt;/code> 与 &lt;code>yarn&lt;/code> 环境，可直接按下述步骤执行&lt;/p>
+&lt;p>下载 toolchain 源码包&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph-toolchain.git
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>编译&lt;code>hubble&lt;/code>, 它依赖 loader 和 client, 编译时需提前构建这些依赖 (后续可跳)&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> incubator-hugegraph-toolchain
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-toolchain
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo pip install -r hugegraph-hubble/hubble-dist/assembly/travis/requirements.txt
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn install -pl hugegraph-client,hugegraph-loader -am -Dmaven.javadoc.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">true&lt;/span> -DskipTests -ntp
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
