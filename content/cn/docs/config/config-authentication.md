@@ -36,7 +36,16 @@ GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 Authorization: Basic admin xxxx
 ```
 
+**警告**：在1.5.0之前版本的HugeGraph在`StandardAuthenticator`模式下存在JWT相关的安全隐患，请使用者更新版本或自行设置JWT token的secreKey。修改的具体方法可以在配置文件`rest-server.properties`中配置`auth.token_secret`信息：
+
+```properties
+auth.token_secret=XXXX   #这里为32位String
+```
+
+
+
 #### StandardAuthenticator 模式
+
 `StandardAuthenticator`模式是通过在数据库后端存储用户信息来支持用户认证和权限控制，该实现基于数据库存储的用户的名称与密码进行认证（密码已被加密），基于用户的角色来细粒度控制用户权限。下面是具体的配置流程（重启服务生效）：
 
 在配置文件`gremlin-server.yaml`中配置`authenticator`及其`rest-server`文件路径：
