@@ -43,6 +43,13 @@ Authorization: Basic admin xxxx
 auth.token_secret=XXXX   # it should be a 32-character String
 ```
 
+It can also be achieved with the following command:
+
+```shell
+RANDOM_STRING=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 32)
+echo "auth.token_secret=${RANDOM_STRING}" >> rest-server.properties
+```
+
 #### StandardAuthenticator Mode
 The `StandardAuthenticator` mode supports user authentication and permission control by storing user information in the database backend. This
 implementation authenticates users based on their names and passwords (encrypted) stored in the database and controls user permissions based on their

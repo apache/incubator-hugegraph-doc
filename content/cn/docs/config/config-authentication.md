@@ -42,6 +42,13 @@ Authorization: Basic admin xxxx
 auth.token_secret=XXXX   #这里为 32 位 String
 ```
 
+也可以通过下面的命令实现：
+
+```shell
+RANDOM_STRING=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 32)
+echo "auth.token_secret=${RANDOM_STRING}" >> rest-server.properties
+```
+
 #### StandardAuthenticator 模式
 `StandardAuthenticator`模式是通过在数据库后端存储用户信息来支持用户认证和权限控制，该实现基于数据库存储的用户的名称与密码进行认证（密码已被加密），基于用户的角色来细粒度控制用户权限。下面是具体的配置流程（重启服务生效）：
 
