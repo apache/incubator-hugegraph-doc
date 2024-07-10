@@ -43,10 +43,7 @@ Authorization: Basic admin xxxx
 auth.token_secret=XXXX   # it should be a 32-character String
 ```
 
-
-
 #### StandardAuthenticator Mode
-
 The `StandardAuthenticator` mode supports user authentication and permission control by storing user information in the database backend. This
 implementation authenticates users based on their names and passwords (encrypted) stored in the database and controls user permissions based on their
 roles. Below is the specific configuration process (requires service restart):

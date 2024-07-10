@@ -10,7 +10,6 @@ HugeGraph 为了方便不同用户场景下的鉴权使用，目前内置了完�
 以及细粒度的权限访问控制，采用基于“用户 - 用户组 - 操作 - 资源”的 4 层设计，灵活控制用户角色与权限 (支持多 GraphServer)
 
 `StandardAuthenticator` 模式的几个核心设计：
-
 - 初始化时创建超级管理员 (`admin`) 用户，后续通过超级管理员创建其它用户，新创建的用户被分配足够权限后，可以创建或管理更多的用户
 - 支持动态创建用户、用户组、资源，支持动态分配或取消权限
 - 用户可以属于一个或多个用户组，每个用户组可以拥有对任意个资源的操作权限，操作类型包括：读、写、删除、执行等种类
@@ -20,20 +19,12 @@ HugeGraph 为了方便不同用户场景下的鉴权使用，目前内置了完�
 
 ```java
 // 场景：某用户只有北京地区的数据读取权限
-user(name=xx) -belong->
-
-group(name=xx) -
-
-access(read)->
-
-target(graph=graph1, resource= {
-    person, city:Beijing
-})
+user(name=xx) -belong-> group(name=xx) -access(read)-> target(graph=graph1, resource={label: person, city: Beijing})
 ```
 
 ### 配置用户认证
 
-HugeGraph 目前默认**未启用**用户认证功能，需通过修改配置文件来启用该功能。(Note: 如果在生产环境/外网使用,
+HugeGraph 目前默认**未启用**用户认证功能，需通过修改配置文件来启用该功能。(Note: 如果在生产环境/外网使用, 
 请使用 **Java11** 版本 + 开启权限避免安全相关隐患)
 
 目前已内置实现了`StandardAuthenticator`模式，该模式支持多用户认证与细粒度权限控制。此外，开发者可以自定义实现`HugeAuthenticator`接口来对接自身的权限系统。
@@ -52,7 +43,6 @@ auth.token_secret=XXXX   #这里为 32 位 String
 ```
 
 #### StandardAuthenticator 模式
-
 `StandardAuthenticator`模式是通过在数据库后端存储用户信息来支持用户认证和权限控制，该实现基于数据库存储的用户的名称与密码进行认证（密码已被加密），基于用户的角色来细粒度控制用户权限。下面是具体的配置流程（重启服务生效）：
 
 在配置文件`gremlin-server.yaml`中配置`authenticator`及其`rest-server`文件路径：
@@ -94,8 +84,8 @@ gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 
 在鉴权配置完成后，需在首次执行 `init-store.sh` 时命令行中输入 `admin` 密码 (非 docker 部署模式下)
 
-如果基于 docker 镜像部署或者已经初始化 HugeGraph 并需要转换为鉴权模式，需要删除相关图数据并重新启动 HugeGraph, 若图已有业务数据，暂时**无法直接转换**鉴权模式 (hugegraph 版本 <= 1.2.0)
-> 对于该功能的改进已经在最新版本发布 (Docker latest 可用)，可参考 [PR 2411](https://github.com/apache/incubator-hugegraph/pull/2411), 此时可无缝切换。
+如果基于 docker 镜像部署或者已经初始化 HugeGraph 并需要转换为鉴权模式，需要删除相关图数据并重新启动 HugeGraph, 若图已有业务数据，暂时**无法直接转换**鉴权模式 (hugegraph 版本 <= 1.2.0) 
+> 对于该功能的改进已经在最新版本发布 (Docker latest 可用)，可参考 [PR 2411](https://github.com/apache/incubator-hugegraph/pull/2411), 此时可无缝切换。 
 
 ```bash
 # stop the hugeGraph firstly
