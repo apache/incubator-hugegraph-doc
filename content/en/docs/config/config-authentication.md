@@ -37,13 +37,14 @@ GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 Authorization: Basic admin xxxx
 ```
 
-**Warning**: Versions of HugeGraph prior to 1.5.0 have a JWT-related security vulnerability in the StandardAuthenticator mode. Users are advised to update to a newer version or manually set the JWT token's secretKey. The specific method for modification can be configured in the `rest-server.properties` file by setting the `auth.token_secret` information:
+**Warning**: Versions of HugeGraph-Server prior to 1.5.0 have a JWT-related security vulnerability in the Auth mode. 
+Users are advised to update to a newer version or manually set the JWT token's secretKey. It can be set in the `rest-server.properties` file by setting the `auth.token_secret` information:
 
 ```properties
-auth.token_secret=XXXX   # it should be a 32-character String, consist of A-Z, a-z and 0-9
+auth.token_secret=XXXX   # should be a 32-chars string, consist of A-Z, a-z and 0-9
 ```
 
-It can also be achieved with the following command:
+You can also generate it with the following command:
 
 ```shell
 RANDOM_STRING=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 32)
