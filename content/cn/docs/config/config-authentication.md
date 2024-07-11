@@ -36,7 +36,9 @@ GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 Authorization: Basic admin xxxx
 ```
 
-**警告**：在 1.5.0 之前版本的 HugeGraph 在`StandardAuthenticator`模式下存在 JWT 相关的安全隐患，请使用者更新版本或自行设置 JWT token 的 secretKey。修改的具体方法可以在配置文件`rest-server.properties`中配置`auth.token_secret`信息：
+**警告**：在 1.5.0 之前版本的 HugeGraph-Server 在鉴权模式下存在 JWT 相关的安全隐患，请务必使用新版本或自行修改 JWT token 的 secretKey。
+
+修改方式为在配置文件`rest-server.properties`中重写`auth.token_secret`信息：(1.5.0 后会默认生成随机值则无需配置)
 
 ```properties
 auth.token_secret=XXXX   #这里为 32 位 String，由 a-z，A-Z 和 0-9 组成
