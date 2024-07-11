@@ -37,6 +37,20 @@ GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 Authorization: Basic admin xxxx
 ```
 
+**Warning**: Versions of HugeGraph-Server prior to 1.5.0 have a JWT-related security vulnerability in the Auth mode. 
+Users are advised to update to a newer version or manually set the JWT token's secretKey. It can be set in the `rest-server.properties` file by setting the `auth.token_secret` information:
+
+```properties
+auth.token_secret=XXXX   # should be a 32-chars string, consist of A-Z, a-z and 0-9
+```
+
+You can also generate it with the following command:
+
+```shell
+RANDOM_STRING=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 32)
+echo "auth.token_secret=${RANDOM_STRING}" >> rest-server.properties
+```
+
 #### StandardAuthenticator Mode
 The `StandardAuthenticator` mode supports user authentication and permission control by storing user information in the database backend. This
 implementation authenticates users based on their names and passwords (encrypted) stored in the database and controls user permissions based on their

@@ -36,6 +36,21 @@ GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 Authorization: Basic admin xxxx
 ```
 
+**警告**：在 1.5.0 之前版本的 HugeGraph-Server 在鉴权模式下存在 JWT 相关的安全隐患，请务必使用新版本或自行修改 JWT token 的 secretKey。
+
+修改方式为在配置文件`rest-server.properties`中重写`auth.token_secret`信息：(1.5.0 后会默认生成随机值则无需配置)
+
+```properties
+auth.token_secret=XXXX   #这里为 32 位 String，由 a-z，A-Z 和 0-9 组成
+```
+
+也可以通过下面的命令实现：
+
+```shell
+RANDOM_STRING=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 32)
+echo "auth.token_secret=${RANDOM_STRING}" >> rest-server.properties
+```
+
 #### StandardAuthenticator 模式
 `StandardAuthenticator`模式是通过在数据库后端存储用户信息来支持用户认证和权限控制，该实现基于数据库存储的用户的名称与密码进行认证（密码已被加密），基于用户的角色来细粒度控制用户权限。下面是具体的配置流程（重启服务生效）：
 
@@ -59,6 +74,7 @@ auth.graph_store=hugegraph
 # 如果是分开部署 GraphServer 和 AuthServer，还需要指定下面的配置，地址填写 AuthServer 的 IP:RPC 端口
 #auth.remote_url=127.0.0.1:8899,127.0.0.1:8898,127.0.0.1:8897
 ```
+
 其中，`graph_store`配置项是指使用哪一个图来存储用户信息，如果存在多个图的话，选取任意一个均可。
 
 在配置文件`hugegraph{n}.properties`中配置`gremlin.graph`信息：
@@ -72,7 +88,6 @@ gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 ### 自定义用户认证系统
 
 如果需要支持更加灵活的用户系统，可自定义 authenticator 进行扩展，自定义 authenticator 实现接口`org.apache.hugegraph.auth.HugeAuthenticator`即可，然后修改配置文件中`authenticator`配置项指向该实现。
-
 
 ### 基于鉴权模式启动
 
