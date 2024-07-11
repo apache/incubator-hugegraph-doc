@@ -40,7 +40,7 @@ Authorization: Basic admin xxxx
 **Warning**: Versions of HugeGraph prior to 1.5.0 have a JWT-related security vulnerability in the StandardAuthenticator mode. Users are advised to update to a newer version or manually set the JWT token's secretKey. The specific method for modification can be configured in the `rest-server.properties` file by setting the `auth.token_secret` information:
 
 ```properties
-auth.token_secret=XXXX   # it should be a 32-character String
+auth.token_secret=XXXX   # it should be a 32-character String, consist of A-Z, a-z and 0-9
 ```
 
 It can also be achieved with the following command:
