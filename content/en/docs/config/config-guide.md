@@ -152,6 +152,7 @@ The default content of the `rest-server.properties` file is as follows:
 
 ```properties
 # bind url
+# could use '0.0.0.0' or specified (real)IP to expose external network access
 restserver.url=http://127.0.0.1:8080
 # gremlin server url, need to be consistent with host and port in gremlin-server.yaml
 #gremlinserver.url=http://127.0.0.1:8182
@@ -168,7 +169,7 @@ server.id=server-1
 server.role=master
 ```
 
-- `restserver.url`: The URL at which the RestServer provides its services. Modify it according to the actual environment.
+- `restserver.url`: The URL at which the RestServer provides its services. Modify it according to the actual environment. If you can't connet to server from other IP address, try to modify it as specific IP; or modify it as `http://0.0.0.0` to listen all network interfaces as a convenient solution, but need to take care of the network area that might access.
 - `graphs`: The RestServer also needs to open graphs when it starts. This option is a map structure where the key is the name of the graph and the value is the configuration file path for that graph.
 
 > Note: Both `gremlin-server.yaml` and `rest-server.properties` contain the `graphs` configuration option, and the `init-store` command initializes based on the graphs specified in the `graphs` section of `gremlin-server.yaml`.
