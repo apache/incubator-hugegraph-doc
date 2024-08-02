@@ -393,7 +393,7 @@ Left navigation:
 </center>
 
 
-##### 4.4.2 Multi-image switching
+##### 4.4.2 Multi-graphs switching
 By switching the entrance on the left, flexibly switch the operation space of multiple graphs
 <center>
   <img src="/docs/images/images-hubble/342多图切换.png" alt="image">
