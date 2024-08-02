@@ -134,6 +134,7 @@
 &lt;h3 id="3-rest-serverproperties">3. rest-server.properties&lt;/h3>
 &lt;p>The default content of the &lt;code>rest-server.properties&lt;/code> file is as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># bind url
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># could use &amp;#39;0.0.0.0&amp;#39; or specified (real)IP to expose external network access
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>restserver.url=http://127.0.0.1:8080
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># gremlin server url, need to be consistent with host and port in gremlin-server.yaml
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#gremlinserver.url=http://127.0.0.1:8182
@@ -149,7 +150,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.id=server-1
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.role=master
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>&lt;code>restserver.url&lt;/code>: The URL at which the RestServer provides its services. Modify it according to the actual environment.&lt;/li>
+&lt;li>&lt;code>restserver.url&lt;/code>: The URL at which the RestServer provides its services. Modify it according to the actual environment. If you can&amp;rsquo;t connet to server from other IP address, try to modify it as specific IP; or modify it as &lt;code>http://0.0.0.0&lt;/code> to listen all network interfaces as a convenient solution, but need to take care of the network area that might access.&lt;/li>
 &lt;li>&lt;code>graphs&lt;/code>: The RestServer also needs to open graphs when it starts. This option is a map structure where the key is the name of the graph and the value is the configuration file path for that graph.&lt;/li>
 &lt;/ul>
 &lt;blockquote>
