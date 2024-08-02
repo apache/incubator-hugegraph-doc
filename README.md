@@ -48,7 +48,7 @@ The functions of this system include but are not limited to:
   - [HugeGraph-Client](/docs/quickstart/hugegraph-client): HugeGraph-Client provides a RESTful API client for connecting to HugeGraph-Server, currently only the Java version is implemented, users of other languages can implement it themselves;
   - [HugeGraph-Loader](/docs/quickstart/hugegraph-loader): HugeGraph-Loader is a data import tool based on HugeGraph-Client, which transforms ordinary text data into vertices and edges of the graph and inserts them into the graph database;
   - [HugeGraph-Hubble](/docs/quickstart/hugegraph-hubble): HugeGraph-Hubble is HugeGraph's Web 
-visualization management platform, a one-stop visualization analysis platform, the platform covers the whole process from data modeling, to fast data import, to online and offline analysis of data, and unified management of the graph;
+  visualization management platform, a one-stop visualization analysis platform, the platform covers the whole process from data modeling, to fast data import, to online and offline analysis of data, and unified management of the graph;
   - [HugeGraph-Tools](/docs/quickstart/hugegraph-tools): HugeGraph-Tools is HugeGraph's deployment and management tool, including graph management, backup/recovery, Gremlin execution and other functions.
 - [HugeGraph-Computer](/docs/quickstart/hugegraph-computer): HugeGraph-Computer is a distributed graph processing system (OLAP). 
   It is an implementation of [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf). It can run on clusters such as Kubernetes/Yarn, and supports large-scale graph computing.
@@ -57,7 +57,7 @@ visualization management platform, a one-stop visualization analysis platform, t
 
 ## Contributing
 
-- Welcome to contribute to HugeGraph, please see [`How to Contribute`](CONTRIBUTING.md) & [Guidelines](https://hugegraph.apache.org/docs/contribution-guidelines/) for more information.  
+- Welcome to contribute to HugeGraph, please see [How to Contribute](https://hugegraph.apache.org/docs/contribution-guidelines/contribute/)  for more information.  
 - Note: It's recommended to use [GitHub Desktop](https://desktop.github.com/) to greatly simplify the PR and commit process.  
 - Thank you to all the people who already contributed to HugeGraph!
 
