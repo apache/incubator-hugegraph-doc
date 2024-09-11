@@ -74,7 +74,7 @@ DELETE http://localhost:8080/graphs/hugegraph/clear?confirm_message=I%27m+sure+t
 204
 ```
 
-#### 6.1.4 克隆一个图，**该操作需要管理员权限**
+#### 6.1.4 克隆一个图 (**管理员权限**)
 
 ##### Params
 
@@ -86,17 +86,22 @@ DELETE http://localhost:8080/graphs/hugegraph/clear?confirm_message=I%27m+sure+t
 POST http://localhost:8080/graphs/hugegraph_clone?clone_graph_name=hugegraph
 ```
 
-##### Request Body【可选】
+##### Request Body (可选)
 
-```
-gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
+克隆 (fork) 一个无权限的新图 (body 类型必须设置为 `Context-Type=text/plain`)
+
+```properties
+gremlin.graph=org.apache.hugegraph.HugeFactory
 backend=rocksdb
 serializer=binary
 store=hugegraph_clone
 rocksdb.data_path=./rks-data-xx
 rocksdb.wal_path=./rks-data-xx
 ```
-> Note: 存储路径不能与现有图相同（使用不同的目录）
+
+> Note:
+> 1. Rocksdb 存储路径不能与现有图相同（需使用不同的目录）
+> 2. 如需开启新图的权限系统，需替换设置 `gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy`
 
 ##### Response Status
 
@@ -123,15 +128,20 @@ POST http://localhost:8080/graphs/hugegraph-xx
 
 ##### Request Body
 
-```
-gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
+新建一个无权限的新图 (body 类型必须设置为 `Context-Type=text/plain`)
+
+```properties
+gremlin.graph=org.apache.hugegraph.HugeFactory
 backend=rocksdb
 serializer=binary
 store=hugegraph2
 rocksdb.data_path=./rks-data-xx
 rocksdb.wal_path=./rks-data-xx
 ```
-> Note: 存储路径不能与现有图相同（使用不同的目录）
+
+> Note:
+> 1. Rocksdb 存储路径不能与现有图相同（需使用不同的目录）
+> 2. 如需开启新图的权限系统，需替换设置 `gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy`
 
 ##### Response Status
 
@@ -158,7 +168,7 @@ rocksdb.wal_path=./rks-data-xx
 
 ##### Method & Url
 
-```
+```javascript
 DELETE http://localhost:8080/graphs/hugegraph_clone?confirm_message=I%27m%20sure%20to%20drop%20the%20graph
 ```
 
@@ -174,7 +184,7 @@ DELETE http://localhost:8080/graphs/hugegraph_clone?confirm_message=I%27m%20sure
 
 ##### Method & Url
 
-```
+```javascript
 GET http://localhost:8080/graphs/hugegraph/conf
 ```
 
