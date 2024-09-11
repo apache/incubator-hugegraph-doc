@@ -78,7 +78,7 @@ DELETE http://localhost:8080/graphs/hugegraph/clear?confirm_message=I%27m+sure+t
 204
 ```
 
-#### 6.1.4 Clone graph,**This operation requires administrator privileges**
+#### 6.1.4 Clone graph,**this operation requires administrator privileges**
 
 ##### Params
 
@@ -94,8 +94,10 @@ POST http://localhost:8080/graphs/hugegraph_clone?clone_graph_name=hugegraph
 
 ##### Request Body [Optional]
 
-```
-gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
+Clone a `non-auth` mode graph: (Must set body `Context-Type=text/plain`)
+
+```properties
+gremlin.graph=org.apache.hugegraph.HugeFactory
 backend=rocksdb
 serializer=binary
 store=hugegraph_clone
@@ -103,7 +105,9 @@ rocksdb.data_path=./rks-data-xx
 rocksdb.wal_path=./rks-data-xx
 ```
 
-> Note: the data/wal_path can't be the same as the existing graph (use separate directories)
+> Note: 
+> 1. The data/wal_path can't be the same as the existing graph (use separate directories)
+> 2. Replace "gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy" to enable auth mode
 
 ##### Response Status
 
@@ -120,7 +124,7 @@ rocksdb.wal_path=./rks-data-xx
 }
 ```
 
-#### 6.1.5 Create graph,**This operation requires administrator privileges**
+#### 6.1.5 Create graph,**this operation requires administrator privileges**
 
 ##### Method & Url
 
@@ -130,8 +134,10 @@ POST http://localhost:8080/graphs/hugegraph2
 
 ##### Request Body
 
-```
-gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
+create a non-auth graph: (Must set body `Context-Type=text/plain`)
+
+```properties
+gremlin.graph=org.apache.hugegraph.HugeFactory
 backend=rocksdb
 serializer=binary
 store=hugegraph2
@@ -139,7 +145,9 @@ rocksdb.data_path=./rks-data-xx
 rocksdb.wal_path=./rks-data-xx
 ```
 
-> Note: the data/wal_path can't be the same as the existing graph (use separate directories)
+> Note: 
+> 1. The data/wal_path can't be the same as the existing graph (use separate directories)
+> 2. Replace "gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy" to enable auth mode
 
 ##### Response Status
 
@@ -184,7 +192,7 @@ DELETE http://localhost:8080/graphs/hugegraph_clone?confirm_message=I%27m%20sure
 
 ##### Method & Url
 
-```
+```javascript
 GET http://localhost:8080/graphs/hugegraph/conf
 ```
 
