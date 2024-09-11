@@ -15524,7 +15524,7 @@ avoid false calls by users:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphs/hugegraph/clear?confirm_message=I%27m+sure+to+delete+all+data
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-2">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">204&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="614-clone-graphthis-operation-requires-administrator-privileges">6.1.4 Clone graph,&lt;strong>This operation requires administrator privileges&lt;/strong>&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="614-clone-graphthis-operation-requires-administrator-privileges">6.1.4 Clone graph,&lt;strong>this operation requires administrator privileges&lt;/strong>&lt;/h4>
 &lt;h5 id="params-1">Params&lt;/h5>
 &lt;ul>
 &lt;li>clone_graph_name: name of an existed graph.
@@ -15534,14 +15534,19 @@ which will replace the configuration in the existing graph&lt;/li>
 &lt;h5 id="method--url-3">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphs/hugegraph_clone?clone_graph_name=hugegraph
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-optional">Request Body [Optional]&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
+&lt;p>Clone a &lt;code>non-auth&lt;/code> mode graph: (Must set body &lt;code>Context-Type=text/plain&lt;/code>)&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>gremlin.graph=org.apache.hugegraph.HugeFactory
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>backend=rocksdb
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=binary
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store=hugegraph_clone
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.data_path=./rks-data-xx
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.wal_path=./rks-data-xx
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>Note: the data/wal_path can&amp;rsquo;t be the same as the existing graph (use separate directories)&lt;/p>
+&lt;p>Note:&lt;/p>
+&lt;ol>
+&lt;li>The data/wal_path can&amp;rsquo;t be the same as the existing graph (use separate directories)&lt;/li>
+&lt;li>Replace &amp;ldquo;gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy&amp;rdquo; to enable auth mode&lt;/li>
+&lt;/ol>
 &lt;/blockquote>
 &lt;h5 id="response-status-3">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
@@ -15550,18 +15555,23 @@ which will replace the configuration in the existing graph&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph_clone&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;backend&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;rocksdb&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="615-create-graphthis-operation-requires-administrator-privileges">6.1.5 Create graph,&lt;strong>This operation requires administrator privileges&lt;/strong>&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="615-create-graphthis-operation-requires-administrator-privileges">6.1.5 Create graph,&lt;strong>this operation requires administrator privileges&lt;/strong>&lt;/h4>
 &lt;h5 id="method--url-4">Method &amp;amp; Url&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphs/hugegraph2
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body">Request Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
+&lt;p>create a non-auth graph: (Must set body &lt;code>Context-Type=text/plain&lt;/code>)&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>gremlin.graph=org.apache.hugegraph.HugeFactory
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>backend=rocksdb
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=binary
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store=hugegraph2
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.data_path=./rks-data-xx
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rocksdb.wal_path=./rks-data-xx
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>Note: the data/wal_path can&amp;rsquo;t be the same as the existing graph (use separate directories)&lt;/p>
+&lt;p>Note:&lt;/p>
+&lt;ol>
+&lt;li>The data/wal_path can&amp;rsquo;t be the same as the existing graph (use separate directories)&lt;/li>
+&lt;li>Replace &amp;ldquo;gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy&amp;rdquo; to enable auth mode&lt;/li>
+&lt;/ol>
 &lt;/blockquote>
 &lt;h5 id="response-status-4">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
@@ -15585,8 +15595,8 @@ avoid false calls by users:&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="62-conf">6.2 Conf&lt;/h3>
 &lt;h4 id="621-get-configuration-for-a-graphthis-operation-requires-administrator-privileges">6.2.1 Get configuration for a graph,&lt;strong>This operation requires administrator privileges&lt;/strong>&lt;/h4>
 &lt;h5 id="method--url-6">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/conf
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-6">Response Status&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GET&lt;/span> &lt;span style="color:#000">http&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span>&lt;span style="color:#8f5902;font-style:italic">//localhost:8080/graphs/hugegraph/conf
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-6">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-4">Response Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># gremlin entrence to create graph
