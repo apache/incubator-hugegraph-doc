@@ -6,7 +6,7 @@ weight: 5
 
 - How to choose the back-end storage? Choose RocksDB, Cassandra, ScyllaDB, Hbase or Mysql?
 
-  The choice of backend storage depends on specific needs. For installations on a single machine (node) with data volumes under 10 billion records, RocksDB is generally recommended. However, if a distributed backend is needed for scaling across multiple nodes, other options should be considered. ScyllaDB, designed as a drop-in replacement for Cassandra, offers protocol compatibility and better hardware utilization, often requiring less infrastructure than Cassandra. HBase, on the other hand, requires a Hadoop ecosystem to function effectively. Finally, while MySQL supports horizontal scaling, managing it in a distributed setup can be challenging.
+  The choice of backend storage depends on specific needs. For installations on a single machine (node) with data volumes under 10 billion records, RocksDB is generally recommended. However, if a distributed backend is needed for scaling across multiple nodes, other options should be considered. ScyllaDB, designed as a drop-in replacement for Cassandra, offers protocol compatibility and better hardware utilization, often requiring less infrastructure. HBase, on the other hand, requires a Hadoop ecosystem to function effectively. Finally, while MySQL supports horizontal scaling, managing it in a distributed setup can be challenging.
 
 - Prompt when starting the service: `xxx (core dumped) xxx`
 
