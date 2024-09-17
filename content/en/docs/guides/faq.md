@@ -18,7 +18,7 @@ weight: 5
   
 - Do all backends need to be executed before use init-store, and can the serialization options be filled in at will?
 
-  Except memorynot required, other backends are required, such as: `cassandra`, `hbaseand`, `rocksdb`, etc. Serialization needs to be one-to-one correspondence and cannot be filled in at will.
+  Before running the `init-store.sh` command to create the databases that will host the graphs defined in the configuration file, the back-end must be properly configured and running. The only exception is when using memory as the back-end. Supported back-ends include `cassandra`, `hbase`, `rocksdb`, `scylladb`, etc. It’s important to note that serialization must maintain a strict one-to-one correspondence and cannot be assigned differntly than the recommended values.
 
 - Execution `init-store` error: ```Exception in thread "main" java.lang.UnsatisfiedLinkError: /tmp/librocksdbjni3226083071221514754.so: /usr/lib64/libstdc++.so.6: version `GLIBCXX_3.4.10' not found (required by /tmp/librocksdbjni3226083071221514754.so)```
 
