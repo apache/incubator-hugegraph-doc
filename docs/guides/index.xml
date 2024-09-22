@@ -590,8 +590,8 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: FAQ</title><link>/docs/guides/faq/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/guides/faq/</guid><description>
 &lt;ul>
 &lt;li>
-&lt;p>How to choose the back-end storage? Choose RocksDB or Cassandra or Hbase or Mysql?&lt;/p>
-&lt;p>Judge according to your specific needs. Generally, if the stand-alone machine or the data volume is &amp;lt; 10 billion, RocksDB is recommended, and other back-end clusters that use distributed storage are recommended.&lt;/p>
+&lt;p>How to choose the back-end storage? Choose RocksDB, Cassandra, ScyllaDB, Hbase or Mysql?&lt;/p>
+&lt;p>The choice of backend storage depends on specific needs. For installations on a single machine (node) with data volumes under 10 billion records, RocksDB is generally recommended. However, if a distributed backend is needed for scaling across multiple nodes, other options should be considered. ScyllaDB, designed as a drop-in replacement for Cassandra, offers protocol compatibility and better hardware utilization, often requiring less infrastructure. HBase, on the other hand, requires a Hadoop ecosystem to function effectively. Finally, while MySQL supports horizontal scaling, managing it in a distributed setup can be challenging.&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Prompt when starting the service: &lt;code>xxx (core dumped) xxx&lt;/code>&lt;/p>
@@ -603,7 +603,7 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;/li>
 &lt;li>
 &lt;p>Do all backends need to be executed before use init-store, and can the serialization options be filled in at will?&lt;/p>
-&lt;p>Except memorynot required, other backends are required, such as: &lt;code>cassandra&lt;/code>, &lt;code>hbaseand&lt;/code>, &lt;code>rocksdb&lt;/code>, etc. Serialization needs to be one-to-one correspondence and cannot be filled in at will.&lt;/p>
+&lt;p>Before running the &lt;code>init-store.sh&lt;/code> command to create the databases that will host the graphs defined in the configuration file, the back-end must be properly configured and running. The only exception is when using memory as the back-end. Supported back-ends include &lt;code>cassandra&lt;/code>, &lt;code>hbase&lt;/code>, &lt;code>rocksdb&lt;/code>, &lt;code>scylladb&lt;/code>, etc. It’s important to note that serialization must maintain a strict one-to-one correspondence and cannot be assigned differntly than the recommended values.&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Execution &lt;code>init-store&lt;/code> error: &lt;code>Exception in thread &amp;quot;main&amp;quot; java.lang.UnsatisfiedLinkError: /tmp/librocksdbjni3226083071221514754.so: /usr/lib64/libstdc++.so.6: version `GLIBCXX_3.4.10' not found (required by /tmp/librocksdbjni3226083071221514754.so)&lt;/code>&lt;/p>
