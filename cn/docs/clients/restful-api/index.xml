@@ -307,8 +307,8 @@
 &lt;p>Params说明：&lt;/p>
 &lt;ul>
 &lt;li>name：属性类型名称，必填&lt;/li>
-&lt;li>data_type：属性类型数据类型，包括：bool、byte、int、long、float、double、string、date、uuid、blob，默认string类型&lt;/li>
-&lt;li>cardinality：属性类型基数，包括：single、list、set，默认single&lt;/li>
+&lt;li>data_type：属性类型数据类型，包括：bool、byte、int、long、float、double、text、date、uuid、blob，默认 &lt;code>text&lt;/code> 类型 (代表 string 字符串类型)&lt;/li>
+&lt;li>cardinality：属性类型基数，包括：single、list、set，默认 &lt;code>single&lt;/code> (代表单属性值)&lt;/li>
 &lt;/ul>
 &lt;p>请求体字段说明：&lt;/p>
 &lt;ul>

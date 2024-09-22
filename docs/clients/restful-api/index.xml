@@ -307,8 +307,8 @@
 &lt;p>Params Description:&lt;/p>
 &lt;ul>
 &lt;li>name: The name of the property type, required.&lt;/li>
-&lt;li>data_type: The data type of the property type, including: bool, byte, int, long, float, double, string, date, uuid, blob. The default data type is string.&lt;/li>
-&lt;li>cardinality: The cardinality of the property type, including: single, list, set. The default cardinality is single.&lt;/li>
+&lt;li>data_type: The data type of the property type, including: bool, byte, int, long, float, double, text, blob, date, uuid. The default data type is &lt;code>text&lt;/code> (Represent a &lt;code>string&lt;/code> type)&lt;/li>
+&lt;li>cardinality: The cardinality of the property type, including: single, list, set. The default cardinality is &lt;code>single&lt;/code>.&lt;/li>
 &lt;/ul>
 &lt;p>Request Body Field Description:&lt;/p>
 &lt;ul>
