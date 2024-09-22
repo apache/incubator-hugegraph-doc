@@ -9,7 +9,7 @@ weight: 2
 Params Description:
 
 - name: The name of the property type, required.
-- data_type: The data type of the property type, including: bool, byte, int, long, float, double, string, date, uuid, blob. The default data type is string.
+- data_type: The data type of the property type, including: bool, byte, int, long, float, double, text, blob, date, uuid. The default data type is text.
 - cardinality: The cardinality of the property type, including: single, list, set. The default cardinality is single.
 
 Request Body Field Description:
