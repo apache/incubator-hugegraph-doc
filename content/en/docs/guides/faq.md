@@ -4,9 +4,9 @@ linkTitle: "FAQ"
 weight: 5
 ---
 
-- How to choose the back-end storage? Choose RocksDB or Cassandra or Hbase or Mysql?
+- How to choose the back-end storage? Choose RocksDB, Cassandra, ScyllaDB, Hbase or Mysql?
 
-  Judge according to your specific needs. Generally, if the stand-alone machine or the data volume is < 10 billion, RocksDB is recommended, and other back-end clusters that use distributed storage are recommended.
+  The choice of backend storage depends on specific needs. For installations on a single machine (node) with data volumes under 10 billion records, RocksDB is generally recommended. However, if a distributed backend is needed for scaling across multiple nodes, other options should be considered. ScyllaDB, designed as a drop-in replacement for Cassandra, offers protocol compatibility and better hardware utilization, often requiring less infrastructure. HBase, on the other hand, requires a Hadoop ecosystem to function effectively. Finally, while MySQL supports horizontal scaling, managing it in a distributed setup can be challenging.
 
 - Prompt when starting the service: `xxx (core dumped) xxx`
 
@@ -18,7 +18,7 @@ weight: 5
   
 - Do all backends need to be executed before use init-store, and can the serialization options be filled in at will?
 
-  Except memorynot required, other backends are required, such as: `cassandra`, `hbaseand`, `rocksdb`, etc. Serialization needs to be one-to-one correspondence and cannot be filled in at will.
+  Before running the `init-store.sh` command to create the databases that will host the graphs defined in the configuration file, the back-end must be properly configured and running. The only exception is when using memory as the back-end. Supported back-ends include `cassandra`, `hbase`, `rocksdb`, `scylladb`, etc. It’s important to note that serialization must maintain a strict one-to-one correspondence and cannot be assigned differntly than the recommended values.
 
 - Execution `init-store` error: ```Exception in thread "main" java.lang.UnsatisfiedLinkError: /tmp/librocksdbjni3226083071221514754.so: /usr/lib64/libstdc++.so.6: version `GLIBCXX_3.4.10' not found (required by /tmp/librocksdbjni3226083071221514754.so)```
 
