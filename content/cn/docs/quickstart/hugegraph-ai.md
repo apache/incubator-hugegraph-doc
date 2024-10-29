@@ -1,148 +1,177 @@
----
 title: "HugeGraph-AI Quick Start"
 linkTitle: "使用 HugeGraph-AI"
 weight: 4
----
 
 ### 1 HugeGraph-AI 概述
 hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与大模型结合的应用，与图机器学习组件的集成等，为开发者在项目中利用 HugeGraph
 的 AI 能力提供全面支持。
 
 ### 2 环境要求
-- python 3.8+
-- hugegraph 1.0.0+ 
+- python 3.9+ 
+- hugegraph-server 1.2+
 
 ### 3 准备工作
-- 启动 HugeGraph 数据库，你可以通过 Docker 来实现。请参考这个[链接](https://hub.docker.com/r/hugegraph/hugegraph)获取指引。
-- 启动 gradio 交互式 demo，你可以通过以下命令启动，启动后打开 [http://127.0.0.1:8001](http://127.0.0.1:8001)
-```bash
-# ${PROJECT_ROOT_DIR} 为 hugegraph-ai 的根目录，需要自行配置
-export PYTHONPATH=${PROJECT_ROOT_DIR}/hugegraph-llm/src:${PROJECT_ROOT_DIR}/hugegraph-python-client/src
-python3 ./hugegraph-llm/src/hugegraph_llm/utils/gradio_demo.py
-```
-- 配置 HugeGraph 数据库连接信息和 LLM 模型信息，可以通过两种方式配置：
-  1. 配置 `./hugegraph-llm/src/config/config.ini` 文件
-  2. 在 gradio 中，分别完成 LLM 和 HugeGraph 的配置后，点击 `Initialize configs`，将返回初始化后的完整配置文件。如图所示：
-  ![gradio 配置](/docs/images/gradio-config.png)
-- 离线下载 NLTK stopwords 
-```bash
-python3 ./hugegraph_llm/operators/common_op/nltk_helper.py
-```
 
+1. 启动HugeGraph数据库，可以通过[Docker](https://hub.docker.com/r/hugegraph/hugegraph) / [Binary Package](https://hugegraph.apache.org/docs/download/download/)运行它。  
+    请参阅详细[文档](https://hugegraph.apache.org/docs/quickstart/hugegraph-server/#31-use-docker-container-convenient-for-testdev)以获取更多指导
 
-### 4 使用说明
-#### 4.1 通过 LLM 在 HugeGraph 中构建知识图谱
-##### 4.1.1 通过 gradio 交互式界面构建知识图谱
-- 参数说明：
-  - Text: 输入的文本。 
-  - Schema：接受以下两种类型的文本： 
-    - 用户定义的 JSON 格式模式。 
-    - 指定 HugeGraph 图实例的名称，它将自动提取图的模式。
-  - Disambiguate word sense：是否进行词义消除歧义。 
-  - Commit to hugegraph：是否将构建的知识图谱提交到 HugeGraph 服务器
+2. 克隆项目
+    ```bash
+    git clone https://github.com/apache/incubator-hugegraph-ai.git
+    ```
+    
+3. 安装 [hugegraph-python-client](../hugegraph-python-client) 和 [hugegraph_llm](src/hugegraph_llm)
+    ```bash
+    cd ./incubator-hugegraph-ai # better to use virtualenv (source venv/bin/activate) 
+    pip install ./hugegraph-python-client
+    pip install -r ./hugegraph-llm/requirements.txt
+    ```
+    
+4. 进入项目目录
+    ```bash
+    cd ./hugegraph-llm/src
+    ```
+
+5. 启动 **Graph RAG** 的 gradio 交互 demo，可以使用以下命令运行，启动后打开 http://127.0.0.1:8001
+    ```bash
+    python3 -m hugegraph_llm.demo.rag_demo.app
+    ```
+    默认主机为 `0.0.0.0` ，端口为 `8001` 。您可以通过传递命令行参数 `--host` 和 `--port` 来更改它们。
+    ```bash
+    python3 -m hugegraph_llm.demo.rag_demo.app --host 127.0.0.1 --port 18001
+    ```
+
+6. 启动 **Text2Gremlin** 的 gradio 交互演示，可以使用以下命令运行，启动后打开 http://127.0.0.1:8002。您还可以按上述方式更改默认主机 `0.0.0.0` 和端口 `8002` 。(🚧ing)
+    ```bash
+    python3 -m hugegraph_llm.demo.gremlin_generate_web_demo
+   ```
+
+7. 在运行演示程序后，配置文件文件将被删除。`.env ` 将自动生成在 `hugegraph-llm/.env` 路径下。此外，还有一个与 prompt 相关的配置文件 `config_prompt.yaml` 。也会在`hugegraph-llm/src/hugegraph_llm/resources/demo/config_prompt.yaml`路径下生成。
+
+    您可以在页面上修改内容，触发相应功能后会自动保存到配置文件中。你也可以直接修改文件而无需重启应用程序；只需刷新页面即可加载最新的更改。
+
+    （可选）要重新生成配置文件，您可以将 `config.generate` 与 `-u` 或 `--update` 一起使用。
+    ```bash
+    python3 -m hugegraph_llm.config.generate --update
+    ```
+
+9. （**可选**）您可以使用 [hugegraph-hubble](https://hugegraph.apache.org/docs/quickstart/hugegraph-hubble/#21-use-docker-convenient-for-testdev) 来访问图形数据，可以通过 [Docker/Docker-Compose](https://hub.docker.com/r/hugegraph/hubble) 运行它以获得指导。 （Hubble 是一个图形分析仪表板，包括数据加载/模式管理/图形遍历/显示）。
+   
+10. (__可选__) 离线下载NLTK停用词
+
+    ```bash
+    python ./hugegraph_llm/operators/common_op/nltk_helper.py
+    ```
+
+## 4 示例 
+### 4.1 通过 LLM 在 HugeGraph 中构建知识图谱
+#### 4.1.1 通过 gradio 交互式界面构建知识图谱
+
+**参数描述:**  
+
+- Docs:
+  - text: 从纯文本建立 rag 索引
+  - file: 上传文件：<u>TXT</u> 或 <u>.docx</u>（可同时选择多个文件）
+- [Schema](https://hugegraph.apache.org/docs/clients/restful-api/schema/):（接受**2种类型**）
+  - 用户定义模式( JSON 格式，遵循[模板](https://github.com/apache/incubator-hugegraph-ai/blob/aff3bbe25fa91c3414947a196131be812c20ef11/hugegraph-llm/src/hugegraph_llm/config/config_data.py#L125)来修改它)
+  - 指定 HugeGraph 图实例的名称，它将自动从中获取模式(如 **“hugegraph”**)
+- Graph extract head: 用户自定义的图提取提示
+- 如果已经存在图数据，你应该点击 "**Rebuild vid Index**" 来更新索引
+
 
 ![gradio 配置](/docs/images/gradio-kg.png)
 
 ##### 4.1.2 通过代码构建知识图谱
-- 完整代码
-```python
-from hugegraph_llm.llms.init_llm import LLMs
-from hugegraph_llm.operators.kg_construction_task import KgBuilder
 
-llm = LLMs().get_llm()
-builder = KgBuilder(llm)
-(
-    builder
-    .import_schema(from_hugegraph="test_graph").print_result()
-    .extract_triples(TEXT).print_result()
-    .disambiguate_word_sense().print_result()
-    .commit_to_hugegraph()
-    .run()
-)
-```
-- 时序图
-![gradio 配置](/docs/images/kg-uml.png)
+运行示例 `python3 ./hugegraph_llm/examples/build_kg_test.py`
 
-1. 初始化：初始化 LLMs 实例，获取 LLM，然后创建图谱构建的任务实例 `KgBuilder`，KgBuilder 中定义了多个 operator，用户可以根据需求自由组合达到目的。（tip: `print_result()` 可以在控制台打印每一步输出的结果，不影响整体执行逻辑）
+`KgBuilder` 类用于构建知识图谱。下面是使用过程：
 
-```python
-llm = LLMs().get_llm()
-builder = KgBuilder(llm)
-```
+1. **初始化**： `KgBuilder` 类使用语言模型的实例进行初始化。这可以从 `LLMs` 类中获得。
 
-2. 导入 Schema：使用 `import_schema` 方法导入，支持三种模式：
-    - 从 HugeGraph 实例导入，指定 HugeGraph 图实例的名称，它将自动提取图的模式。
-    - 从用户定义的模式导入，接受用户定义的 JSON 格式模式。
-    - 从提取结果导入（即将发布）
-```python
-# Import schema from a HugeGraph instance
-builder.import_schema(from_hugegraph="test_graph").print_result()
-# Import schema from user-defined schema
-builder.import_schema(from_user_defined="xxx").print_result()
-# Import schema from an extraction result
-builder.import_schema(from_extraction="xxx").print_result()
-```
-3. 提取三元组：使用 `extract_triples` 方法从文本中提取三元组。
+   初始化 `LLMs`实例，获取 `LLM`，然后创建一个任务实例 `KgBuilder` 用于图的构建。`KgBuilder` 定义了多个运算符，用户可以根据需要自由组合它们。（提示：`print_result()` 可以在控制台中打印出每一步的结果，而不会影响整个执行逻辑）
 
-```python
-TEXT = "Meet Sarah, a 30-year-old attorney, and her roommate, James, whom she's shared a home with since 2010."
-builder.extract_triples(TEXT).print_result()
-```
-4. 消除词义歧义：使用 `disambiguate_word_sense` 方法消除词义歧义。
+   ```python
+    from hugegraph_llm.models.llms.init_llm import LLMs
+    from hugegraph_llm.operators.kg_construction_task import KgBuilder
+    
+    TEXT = ""
+    builder = KgBuilder(LLMs().get_llm())
+    (
+        builder
+        .import_schema(from_hugegraph="talent_graph").print_result()
+        .extract_triples(TEXT).print_result()
+        .disambiguate_word_sense().print_result()
+        .commit_to_hugegraph()
+        .run()
+    )
+   ```
+   
+   ![gradio-config](https://hugegraph.apache.org/docs/images/kg-uml.png)
 
-```python
-builder.disambiguate_word_sense().print_result()
-```
-5. 提交到 HugeGraph：使用 `commit_to_hugegraph` 方法提交构建的知识图谱到 HugeGraph 实例。
+2. **导入架构**： `import_schema` 方法用于从源导入架构。源可以是 HugeGraph 实例、用户定义的模式或提取结果。可以链接 `print_result` 方法来打印结果。
 
-```python
-builder.commit_to_hugegraph().print_result()
-```
+    ```python
+    # Import schema from a HugeGraph instance
+    import_schema(from_hugegraph="xxx").print_result()
+    # Import schema from an extraction result
+    import_schema(from_extraction="xxx").print_result()
+    # Import schema from user-defined schema
+    import_schema(from_user_defined="xxx").print_result()
+    ```
 
-6. 运行：使用 `run` 方法执行上述操作。
-```python
-builder.run()
-```
+3. **Extract Triples** ： `extract_triples` 方法用于从文本中提取三元组。文本应作为字符串参数传递给该方法。
+
+    ```python
+    TEXT = "Meet Sarah, a 30-year-old attorney, and her roommate, James, whom she's shared a home with since 2010."
+    extract_triples(TEXT).print_result()
+    ```
+
+4. **消除词义歧义**： `disambiguate_word_sense` 方法用于消除提取的三元组中词义的歧义。
+
+    ```python
+    disambiguate_word_sense().print_result()
+    ```
+
+5. **Commit to HugeGraph** ： `commit_to_hugegraph` 方法用于将构建的知识图谱提交到 HugeGraph 实例。
+
+    ```python
+    commit_to_hugegraph().print_result()
+    ```
+
+6. **Run** ： `run` 方法用于执行链式操作。
+
+    ```python
+    run()
+    ```
+
+`KgBuilder` 类的方法可以链接在一起以执行一系列操作。
 
 #### 4.2 基于 HugeGraph 的检索增强生成（RAG）
-##### 4.1.1 通过 gradio 交互问答
-1. 首先点击 `Initialize HugeGraph test data` 按钮，初始化 HugeGraph 数据。
-  ![gradio 配置](/docs/images/gradio-rag-1.png)
-2. 然后点击 `Retrieval augmented generation` 按钮，生成问题的答案。
-   ![gradio 配置](/docs/images/gradio-rag-2.png)
 
-##### 4.1.2 通过代码构建 Graph RAG
-- 完整代码
-```python
-graph_rag = GraphRAG()
-result = (
-    graph_rag.extract_keyword(text="Tell me about Al Pacino.").print_result()
-    .query_graph_for_rag(
-        max_deep=2,
-        max_items=30
-    ).print_result()
-    .synthesize_answer().print_result()
-    .run(verbose=True)
-)
-```
-1. extract_keyword: 提取关键词, 并进行近义词扩展
-```python
-graph_rag.extract_keyword(text="Tell me about Al Pacino.").print_result()
-```
-2. query_graph_for_rag: 从 HugeGraph 中检索对应的关键词，及其多度的关联关系
-   - max_deep: hugegraph 检索的最大深度
-   - max_items: hugegraph 最大返回结果数
-```python
-graph_rag.query_graph_for_rag(
-    max_deep=2,
-    max_items=30
-).print_result()
-```
-3. synthesize_answer: 针对提问，汇总结果，组织语言回答问题。
-```python
-graph_rag.synthesize_answer().print_result()
-```
-4. run: 执行上述操作。
-```python
-graph_rag.run(verbose=True)
-```
+运行示例 `python3 ./hugegraph_llm/examples/graph_rag_test.py`
+
+`RAGPipeline` 类用于将 HugeGraph 与大型语言模型集成，以提供检索增强生成功能。下面是使用过程：
+
+1. **提取关键字：**提取关键字并扩展同义词。
+
+    ```python
+    graph_rag.extract_keywords(text="Tell me about Al Pacino.").print_result()
+    ```
+
+2. **Query Graph for Rag**：从 HugeGraph 中检索对应的关键词及其多度关联关系。
+
+     ```python
+     graph_rag.query_graphdb(max_deep=2, max_items=30).print_result()
+     ```
+3. **综合答案**：总结结果并组织语言来回答问题。
+
+    ```python
+    graph_rag.synthesize_answer().print_result()
+    ```
+
+4. **Run**： `run` 方法用于执行上述操作。
+
+    ```python
+    graph_rag.run(verbose=True)
+    ```
