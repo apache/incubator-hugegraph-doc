@@ -57,7 +57,7 @@ hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与
 
 9. （**可选**）您可以使用 [hugegraph-hubble](https://hugegraph.apache.org/docs/quickstart/hugegraph-hubble/#21-use-docker-convenient-for-testdev) 来访问图形数据，可以通过 [Docker/Docker-Compose](https://hub.docker.com/r/hugegraph/hubble) 运行它以获得指导。 （Hubble 是一个图形分析仪表板，包括数据加载/模式管理/图形遍历/显示）。
    
-10. (__可选__) 离线下载NLTK停用词
+10. （__可选__）离线下载NLTK停用词
 
     ```bash
     python ./hugegraph_llm/operators/common_op/nltk_helper.py
