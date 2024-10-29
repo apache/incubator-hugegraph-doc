@@ -85,7 +85,7 @@ with large models, integration with graph machine learning components, etc., to 
 - Graph extract head: The user-defined prompt of graph extracting
 - If already exist the graph data, you should click "**Rebuild vid Index**" to update the index
 
-![gradio-config](/docs/images/gradio-kg.png)
+![gradio-config](https://github.com/apache/incubator-hugegraph-doc/blob/master/content/cn/docs/images/gradio-kg.png?raw=true)
 
 ##### 4.1.2 Build a knowledge graph through code
 Run example like `python3 ./hugegraph_llm/examples/build_kg_test.py`
@@ -149,8 +149,8 @@ This can be obtained from the `LLMs` class.
     ```python
     run()
     ```
-
-The methods of the `KgBuilder` class can be chained together to perform a sequence of operations.  
+    
+    The methods of the `KgBuilder` class can be chained together to perform a sequence of operations.  
 
 
 #### 4.2 Retrieval augmented generation (RAG) based on HugeGraph

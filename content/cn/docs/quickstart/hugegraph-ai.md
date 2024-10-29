@@ -79,7 +79,7 @@ hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与
 - 如果已经存在图数据，你应该点击 "**Rebuild vid Index**" 来更新索引
 
 
-![gradio 配置](/docs/images/gradio-kg.png)
+![gradio 配置](https://github.com/apache/incubator-hugegraph-doc/blob/master/content/cn/docs/images/gradio-kg.png?raw=true)
 
 ##### 4.1.2 通过代码构建知识图谱
 
@@ -145,7 +145,7 @@ hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与
     run()
     ```
 
-`KgBuilder` 类的方法可以链接在一起以执行一系列操作。
+    `KgBuilder` 类的方法可以链接在一起以执行一系列操作。
 
 #### 4.2 基于 HugeGraph 的检索增强生成（RAG）
 
