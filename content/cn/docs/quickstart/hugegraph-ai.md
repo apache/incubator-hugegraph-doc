@@ -7,26 +7,23 @@ hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与
 的 AI 能力提供全面支持。
 
 ### 2 环境要求
-- python 3.9+ 
-- hugegraph-server 1.2+
+- python 3.9+  (better to use `3.10`)  
+- hugegraph-server 1.3+
 
 ### 3 准备工作
 
-1. 启动HugeGraph数据库，可以通过[Docker](https://hub.docker.com/r/hugegraph/hugegraph) / [Binary Package](https://hugegraph.apache.org/docs/download/download/)运行它。  
+1. 启动HugeGraph数据库，可以通过 [Docker](https://hub.docker.com/r/hugegraph/hugegraph)/[Binary Package](https://hugegraph.apache.org/docs/download/download/) 运行它。  
     请参阅详细[文档](https://hugegraph.apache.org/docs/quickstart/hugegraph-server/#31-use-docker-container-convenient-for-testdev)以获取更多指导
-
 2. 克隆项目
     ```bash
     git clone https://github.com/apache/incubator-hugegraph-ai.git
     ```
-    
 3. 安装 [hugegraph-python-client](../hugegraph-python-client) 和 [hugegraph_llm](src/hugegraph_llm)
     ```bash
     cd ./incubator-hugegraph-ai # better to use virtualenv (source venv/bin/activate) 
     pip install ./hugegraph-python-client
     pip install -r ./hugegraph-llm/requirements.txt
     ```
-    
 4. 进入项目目录
     ```bash
     cd ./hugegraph-llm/src
@@ -83,8 +80,6 @@ hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与
 
 ##### 4.1.2 通过代码构建知识图谱
 
-运行示例 `python3 ./hugegraph_llm/examples/build_kg_test.py`
-
 `KgBuilder` 类用于构建知识图谱。下面是使用过程：
 
 1. **初始化**： `KgBuilder` 类使用语言模型的实例进行初始化。这可以从 `LLMs` 类中获得。
@@ -100,8 +95,8 @@ hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与
     (
         builder
         .import_schema(from_hugegraph="talent_graph").print_result()
-        .extract_triples(TEXT).print_result()
-        .disambiguate_word_sense().print_result()
+        .chunk_split(TEXT).print_result()
+        .extract_info(extract_type="property_graph").print_result()
         .commit_to_hugegraph()
         .run()
     )
@@ -113,11 +108,11 @@ hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与
 
     ```python
     # Import schema from a HugeGraph instance
-    import_schema(from_hugegraph="xxx").print_result()
+    builder.import_schema(from_hugegraph="xxx").print_result()
     # Import schema from an extraction result
-    import_schema(from_extraction="xxx").print_result()
+    builder.import_schema(from_extraction="xxx").print_result()
     # Import schema from user-defined schema
-    import_schema(from_user_defined="xxx").print_result()
+    builder.import_schema(from_user_defined="xxx").print_result()
     ```
 
 3. **Extract Triples** ： `extract_triples` 方法用于从文本中提取三元组。文本应作为字符串参数传递给该方法。
