@@ -41,7 +41,7 @@ python3 ./hugegraph_llm/operators/common_op/nltk_helper.py
   - Disambiguate word sense: Whether to disambiguate word sense. 
   - Commit to hugegraph: Whether to submit the constructed knowledge graph to the HugeGraph server
 
-![gradio-config](/docs/images/gradio-kg.png)
+![gradio-config](https://hugegraph.apache.org/docs/images/gradio-kg.png)
 
 ##### 4.1.2 Build a knowledge graph through code
 - Complete code

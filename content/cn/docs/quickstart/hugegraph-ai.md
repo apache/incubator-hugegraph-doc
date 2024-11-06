@@ -41,7 +41,7 @@ python3 ./hugegraph_llm/operators/common_op/nltk_helper.py
   - Disambiguate word sense：是否进行词义消除歧义。 
   - Commit to hugegraph：是否将构建的知识图谱提交到 HugeGraph 服务器
 
-![gradio 配置](/docs/images/gradio-kg.png)
+![gradio-config](https://hugegraph.apache.org/docs/images/gradio-kg.png)
 
 ##### 4.1.2 通过代码构建知识图谱
 - 完整代码
@@ -107,7 +107,7 @@ builder.run()
 #### 4.2 基于 HugeGraph 的检索增强生成（RAG）
 ##### 4.1.1 通过 gradio 交互问答
 1. 首先点击 `Initialize HugeGraph test data` 按钮，初始化 HugeGraph 数据。
-  ![gradio 配置](/docs/images/gradio-rag-1.png)
+    ![gradio 配置](/docs/images/gradio-rag-1.png)
 2. 然后点击 `Retrieval augmented generation` 按钮，生成问题的答案。
    ![gradio 配置](/docs/images/gradio-rag-2.png)
 
