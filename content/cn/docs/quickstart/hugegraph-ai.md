@@ -70,7 +70,7 @@ hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与
 - 如果已经存在图数据，你应该点击 "**Rebuild vid Index**" 来更新索引
 
 
-![gradio 配置](https://github.com/apache/incubator-hugegraph-doc/blob/master/content/cn/docs/images/gradio-kg.png?raw=true)
+![gradio-config](https://hugegraph.apache.org/docs/images/gradio-kg.png)
 
 ##### 4.1.2 通过代码构建知识图谱
 

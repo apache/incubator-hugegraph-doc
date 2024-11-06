@@ -85,7 +85,7 @@ with large models, integration with graph machine learning components, etc., to 
 - Graph extract head: The user-defined prompt of graph extracting
 - If already exist the graph data, you should click "**Rebuild vid Index**" to update the index
 
-![gradio-config](https://github.com/apache/incubator-hugegraph-doc/blob/master/content/cn/docs/images/gradio-kg.png?raw=true)
+![gradio-config](https://hugegraph.apache.org/docs/images/gradio-kg.png)
 
 #### 4.1.2 Build a knowledge graph through code
 
