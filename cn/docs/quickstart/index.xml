@@ -2119,7 +2119,7 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;li>Graph extract head: 用户自定义的图提取提示&lt;/li>
 &lt;li>如果已经存在图数据，你应该点击 &amp;ldquo;&lt;strong>Rebuild vid Index&lt;/strong>&amp;rdquo; 来更新索引&lt;/li>
 &lt;/ul>
-&lt;p>&lt;img src="https://github.com/apache/incubator-hugegraph-doc/blob/master/content/cn/docs/images/gradio-kg.png?raw=true" alt="gradio 配置">&lt;/p>
+&lt;p>&lt;img src="/docs/images/gradio-kg.png" alt="gradio-config">&lt;/p>
 &lt;h5 id="412-通过代码构建知识图谱">4.1.2 通过代码构建知识图谱&lt;/h5>
 &lt;p>&lt;code>KgBuilder&lt;/code> 类用于构建知识图谱。下面是使用过程：&lt;/p>
 &lt;ol>
@@ -2138,7 +2138,7 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">commit_to_hugegraph&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">run&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;img src="https://hugegraph.apache.org/docs/images/kg-uml.png" alt="gradio-config">&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;img src="/docs/images/kg-uml.png" alt="gradio-config">&lt;/li>
 &lt;li>&lt;strong>导入架构&lt;/strong>： &lt;code>import_schema&lt;/code> 方法用于从源导入架构。源可以是 HugeGraph 实例、用户定义的模式或提取结果。可以链接 &lt;code>print_result&lt;/code> 方法来打印结果。
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Import schema from a HugeGraph instance&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">builder&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">import_schema&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">from_hugegraph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;xxx&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">print_result&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span>
