@@ -85,7 +85,7 @@ with large models, integration with graph machine learning components, etc., to 
 - Graph extract head: The user-defined prompt of graph extracting
 - If already exist the graph data, you should click "**Rebuild vid Index**" to update the index
 
-![gradio-config](https://github.com/apache/incubator-hugegraph-doc/blob/master/content/cn/docs/images/gradio-kg.png?raw=true)
+![gradio-config](/docs/images/gradio-kg.png)
 
 #### 4.1.2 Build a knowledge graph through code
 
@@ -109,7 +109,7 @@ This can be obtained from the `LLMs` class.
         .run()
     )
     ```
-    ![gradio-config](https://hugegraph.apache.org/docs/images/kg-uml.png)
+    ![gradio-config](/docs/images/kg-uml.png)
 2. **Import Schema**: The `import_schema` method is used to import a schema from a source. The source can be a HugeGraph instance, a user-defined schema or an extraction result. The method `print_result` can be chained to print the result.
     ```python
     # Import schema from a HugeGraph instance

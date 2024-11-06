@@ -70,7 +70,7 @@ hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与
 - 如果已经存在图数据，你应该点击 "**Rebuild vid Index**" 来更新索引
 
 
-![gradio 配置](https://github.com/apache/incubator-hugegraph-doc/blob/master/content/cn/docs/images/gradio-kg.png?raw=true)
+![gradio-config](/docs/images/gradio-kg.png)
 
 ##### 4.1.2 通过代码构建知识图谱
 
@@ -93,7 +93,7 @@ hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与
         .run()
     )
    ```
-   ![gradio-config](https://hugegraph.apache.org/docs/images/kg-uml.png)
+   ![gradio-config](/docs/images/kg-uml.png)
 2. **导入架构**： `import_schema` 方法用于从源导入架构。源可以是 HugeGraph 实例、用户定义的模式或提取结果。可以链接 `print_result` 方法来打印结果。
     ```python
     # Import schema from a HugeGraph instance
