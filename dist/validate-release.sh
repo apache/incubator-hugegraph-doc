@@ -160,6 +160,9 @@ for i in *src.tar.gz; do
     echo "Skip compile $i module in all versions"
   elif [[ "$i" =~ "hugegraph-commons" ]]; then
     mvn install -DskipTests -Papache-release -ntp -e
+  elif [[ "$i" =~ "hugegraph-computer" ]]; then
+    cd computer
+    mvn install -DskipTests -Papache-release -ntp -e
   else
     # TODO: consider using commands that are entirely consistent with building binary packages
     mvn package -DskipTests -Papache-release -ntp -e
