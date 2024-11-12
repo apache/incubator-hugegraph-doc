@@ -295,7 +295,8 @@ jobs:
         run: |
           cd dist/${{ inputs.release_version }} || exit
 
-          pushd ./*hugegraph-incubating*${{ inputs.release_version }} || exit
+          # TODO: run pd & store
+          pushd ./*hugegraph-incubating*${{ inputs.release_version }}/*hugegraph-server-incubating*${{ inputs.release_version }} || exit
           bin/init-store.sh || exit
           sleep 3
           bin/start-hugegraph.sh || exit

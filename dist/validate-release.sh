@@ -293,7 +293,8 @@ done
 #########################################
 cd "${WORK_DIR}/dist/${RELEASE_VERSION}"
 
-pushd ./*hugegraph-incubating*"${RELEASE_VERSION}"
+# TODO: run pd & store
+pushd ./*hugegraph-incubating*"${RELEASE_VERSION}"/*hugegraph-server-incubating*"${RELEASE_VERSION}"
 bin/init-store.sh
 sleep 3
 bin/start-hugegraph.sh
