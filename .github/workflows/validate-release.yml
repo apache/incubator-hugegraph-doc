@@ -335,7 +335,7 @@ jobs:
 
           popd || exit
           # stop server
-          pushd ./*hugegraph-incubating*${{ inputs.release_version }} || exit
+          pushd ./*hugegraph-incubating*${{ inputs.release_version }}/*hugegraph-server-incubating*${{ inputs.release_version }} || exit
           bin/stop-hugegraph.sh || exit
           popd || exit
 

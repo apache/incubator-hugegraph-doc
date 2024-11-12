@@ -333,7 +333,7 @@ popd
 
 popd
 # stop server
-pushd ./*hugegraph-incubating*"${RELEASE_VERSION}"
+pushd ./*hugegraph-incubating*"${RELEASE_VERSION}"/*hugegraph-server-incubating*"${RELEASE_VERSION}"
 bin/stop-hugegraph.sh
 popd
 
