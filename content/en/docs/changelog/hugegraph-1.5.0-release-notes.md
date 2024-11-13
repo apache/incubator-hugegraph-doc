@@ -11,7 +11,6 @@ Please check the release details/contributor in each repository:
 - [Server Release Notes](https://github.com/apache/incubator-hugegraph/releases)
 - [Toolchain Release Notes](https://github.com/apache/incubator-hugegraph-toolchain/releases)
 - [AI Release Notes](https://github.com/apache/incubator-hugegraph-ai/releases)
-- [Commons Release Notes](https://github.com/apache/incubator-hugegraph-commons/releases)
 
 ### Operating Environment / Version Description
 
