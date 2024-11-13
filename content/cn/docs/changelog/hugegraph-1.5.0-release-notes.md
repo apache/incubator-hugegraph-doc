@@ -10,6 +10,7 @@ Please check the release details/contributor in each repository:
 
 - [Server Release Notes](https://github.com/apache/incubator-hugegraph/releases)
 - [Toolchain Release Notes](https://github.com/apache/incubator-hugegraph-toolchain/releases)
+- [Computer Release Notes](https://github.com/apache/incubator-hugegraph-computer/releases)
 - [AI Release Notes](https://github.com/apache/incubator-hugegraph-ai/releases)
 
 ### 运行环境/版本说明
