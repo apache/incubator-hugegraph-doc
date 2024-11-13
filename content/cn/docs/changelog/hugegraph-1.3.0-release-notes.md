@@ -13,8 +13,6 @@ weight: 4
 
 PS: 未来 HugeGraph 组件的版本会朝着 `Java 11 -> Java 17 -> Java 21` 演进
 
-> WIP: This doc is under construction, please wait for the final version (BETA) 
-
 ### hugegraph
 
 > 在此次版本中我们修复了一些 SEC 相关的问题，如果是线上或者对外服务请升级到最新版本 + 开启权限认证
