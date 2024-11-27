@@ -16,8 +16,6 @@ master branch (Except for the `java-client`).
 
 PS: In the future, we will gradually upgrade the java version from `Java 11 -> Java 17 -> Java 21.`
 
-> WIP: this doc is under construction, please wait for the final version (BETA) 
-
 ### hugegraph
 
 > In this version, we have fixed some SEC-related issues. If used in an online service or exposed to 
