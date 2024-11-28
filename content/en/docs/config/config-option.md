@@ -52,6 +52,8 @@ Corresponding configuration file `rest-server.properties`
 | auth.token_expire                  | 86400                                            | The expiration time in seconds after token created                                                                                                                                                            |
 | auth.token_secret                  | FXQXbJtbCLxODc6tGci732pkH1cyf8Qg                 | Secret key of HS256 algorithm.                                                                                                                                                                                |
 | exception.allow_trace              | false                                            | Whether to allow exception trace stack.                                                                                                                                                                       |
+| memory_monitor.threshold           | 0.85                                             | The threshold of JVM(in-heap) memory usage monitoring , 1 means disabling this function.                                                                                                                      |                                                                                                                                     
+| memory_monitor.period              | 2000                                             | The period in ms of JVM(in-heap) memory usage monitoring.                                                                                                                                                     |
 
 ### Basic Config Options
 
