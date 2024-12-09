@@ -46,7 +46,7 @@ services:
       - 8080:8080
 
   hubble:
-    image: hugegraph/hubble:1.3.0
+    image: hugegraph/hubble:1.2.0
     container_name: hubble
     ports:
       - 8088:8088

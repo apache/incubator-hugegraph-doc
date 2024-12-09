@@ -64,7 +64,7 @@ There are three ways to deploy `hugegraph-hubble`
 >
 >  If `hubble` and `server` is in the same docker network, we **recommend** using the `container_name` (in our example, it is `server`) as the hostname, and `8080` as the port. Or you can use the **host IP** as the hostname, and the port is configured by the host for the server.
 
-We can use `docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble:1.3.0` to quick start [hubble](https://hub.docker.com/r/hugegraph/hubble).
+We can use `docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble:1.2.0` to quick start [hubble](https://hub.docker.com/r/hugegraph/hubble).
 
 Alternatively, you can use Docker Compose to start `hubble`. Additionally, if `hubble` and the graph are in the same Docker network, you can access the graph using the container name of the graph, eliminating the need for the host machine's IP address.
 
@@ -80,7 +80,7 @@ services:
       - 8080:8080
 
   hubble:
-    image: hugegraph/hubble:1.3.0
+    image: hugegraph/hubble:1.2.0
     container_name: hubble
     ports:
       - 8088:8088

@@ -53,7 +53,7 @@ weight: 3
 > 
 > 若 hubble 和 server 在同一 docker 网络下，**推荐**直接使用`container_name` (如下例的 `server`) 作为主机名。或者也可以使用 **宿主机 IP** 作为主机名，此时端口号为宿主机给 server 配置的端口
 
-我们可以使用 `docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble:1.3.0` 快速启动 [hubble](https://hub.docker.com/r/hugegraph/hubble).
+我们可以使用 `docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble:1.2.0` 快速启动 [hubble](https://hub.docker.com/r/hugegraph/hubble).
 
 或者使用 docker-compose 启动 hubble，另外如果 hubble 和 server 在同一个 docker 网络下，可以使用 server 的 contain_name 进行访问，而不需要宿主机的 ip
 
@@ -69,7 +69,7 @@ services:
       - 8080:8080
 
   hubble:
-    image: hugegraph/hubble:1.3.0
+    image: hugegraph/hubble:1.2.0
     container_name: hubble
     ports:
       - 8088:8088
