@@ -26,7 +26,7 @@ user(name=xx) -belong-> group(name=xx) -access(read)-> target(graph=graph1, reso
 
 By default, HugeGraph does **not enable** user authentication, and it needs to be enabled by 
 modifying the configuration file (Note: If used in a production environment or over the internet, 
-please use a **Java11** version and enable **auth-system** to avoid security risks.)" 
+please use a **Java11** version and enable **auth-system** to avoid security risks.)
 
 You need to modify the configuration file to enable this feature. HugeGraph provides built-in authentication mode: `StandardAuthenticator`. This mode supports multi-user authentication and fine-grained permission control. Additionally, developers can implement their own `HugeAuthenticator` interface to integrate with their existing authentication systems.
 
@@ -119,7 +119,7 @@ bin/start-hugegraph.sh
 
 ```
 
-### Use docker to enble authentication mode
+### Use docker to enable authentication mode
 
 For versions of the hugegraph/hugegraph image equal to or greater than 1.2.0, you can enable authentication mode while starting the Docker image. 
 
@@ -130,12 +130,12 @@ The steps are as follows:
 To enable authentication mode, add the environment variable `PASSWORD=123456` (you can freely set the password) in the `docker run` command:
 
 ```bash
-docker run -itd -e PASSWORD=123456 --name=server -p 8080:8080 hugegraph/hugegraph:1.2.0
+docker run -itd -e PASSWORD=123456 --name=server -p 8080:8080 hugegraph/hugegraph:1.3.0
 ```
 
 #### 2. Use docker-compose
 
-Use `docker-compose` and set he environment variable `PASSWORD=123456`:
+Use `docker-compose` and set the environment variable `PASSWORD=123456`:
 
 ```yaml
 version: '3'

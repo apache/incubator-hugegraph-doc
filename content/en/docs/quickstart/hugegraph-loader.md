@@ -29,7 +29,7 @@ There are two ways to get HugeGraph-Loader:
 
 #### 2.1 Use Docker image (Convenient for Test/Dev)
 
-We can deploy the loader service using `docker run -itd --name loader hugegraph/loader`. For the data that needs to be loaded, it can be copied into the loader container either by mounting `-v /path/to/data/file:/loader/file` or by using `docker cp`.
+We can deploy the loader service using `docker run -itd --name loader hugegraph/loader:1.3.0`. For the data that needs to be loaded, it can be copied into the loader container either by mounting `-v /path/to/data/file:/loader/file` or by using `docker cp`.
 
 Alternatively, to start the loader using docker-compose, the command is `docker-compose up -d`. An example of the docker-compose.yml is as follows:
 
@@ -38,13 +38,13 @@ version: '3'
 
 services:
   server:
-    image: hugegraph/hugegraph
+    image: hugegraph/hugegraph:1.3.0
     container_name: server
     ports:
       - 8080:8080
 
   loader:
-    image: hugegraph/loader
+    image: hugegraph/loader:1.3.0
     container_name: loader
     # mount your own data here
     # volumes:

@@ -19,7 +19,7 @@ The Core Module is an implementation of the Tinkerpop interface; The Backend mod
 
 #### 2.1 Install Java 11 (JDK 11)
 
-Consider using Java 11 to run `HugeGraph-Server` (compatible with Java 8 before 1.5.0), 
+You need to use Java 11 to run `HugeGraph-Server` (compatible with Java 8 before 1.5.0, but not recommended to use), 
 and configure by yourself.
 
 **Be sure to execute the `java -version` command to check the jdk version before reading**
@@ -42,12 +42,12 @@ There are four ways to deploy HugeGraph-Server components:
 <!-- 3.1 is linked by another place. if change 3.1's title, please check -->
 You can refer to [Docker deployment guide](https://hub.docker.com/r/hugegraph/hugegraph).
 
-We can use `docker run -itd --name=graph -p 8080:8080 hugegraph/hugegraph` to quickly start an inner `HugeGraph server` with `RocksDB` in background.
+We can use `docker run -itd --name=graph -p 8080:8080 hugegraph/hugegraph:1.3.0` to quickly start an inner `HugeGraph server` with `RocksDB` in background.
 
 Optional: 
 1. use `docker exec -it graph bash` to enter the container to do some operations.
-2. use `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph` to start with a **built-in** example graph. We can use `RESTful API` to verify the result. The detailed step can refer to [5.1.7](#517-create-an-example-graph-when-startup)
-3. use `-e PASSWORD=123456` to enable auth mode and set the passoword for admin. You cna find more details from [Config Authentication](/docs/config/config-authentication#Use-docker-to-enble-authentication-mode)
+2. use `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph:1.3.0` to start with a **built-in** example graph. We can use `RESTful API` to verify the result. The detailed step can refer to [5.1.7](#517-create-an-example-graph-when-startup)
+3. use `-e PASSWORD=123456` to enable auth mode and set the password for admin. You can find more details from [Config Authentication](/docs/config/config-authentication#Use-docker-to-enble-authentication-mode)
 
 If you use docker desktop, you can set the option like: 
 <div style="text-align: center;">
@@ -60,7 +60,7 @@ Also, if we want to manage the other Hugegraph related instances in one file, we
 version: '3'
 services:
   server:
-    image: hugegraph/hugegraph
+    image: hugegraph/hugegraph:1.3.0
     container_name: server
     # environment:
     #  - PRELOAD=true
@@ -75,7 +75,7 @@ services:
 >
 > 1. The docker image of hugegraph is a convenience release to start hugegraph quickly, but not **official distribution** artifacts. You can find more details from [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub).
 > 
-> 2. Recommand to use `release tag`(like `1.3.0`) for the stable version. Use `latest` tag to experience the newest functions in development.
+> 2. Recommend to use `release tag`(like `1.3.0`/`1.5.0`) for the stable version. Use `latest` tag to experience the newest functions in development.
 
 #### 3.2 Download the binary tar tarball
 
@@ -536,7 +536,7 @@ Set the environment variable `PRELOAD=true` when starting Docker in order to loa
 
 1. Use `docker run`
 
-    Use `docker run -itd --name=server -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:latest`
+    Use `docker run -itd --name=server -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:1.3.0`
 
 2. Use `docker-compose`
 
@@ -546,7 +546,7 @@ Set the environment variable `PRELOAD=true` when starting Docker in order to loa
     version: '3'
       services:
         server:
-          image: hugegraph/hugegraph:latest
+          image: hugegraph/hugegraph:1.3.0
           container_name: server
           environment:
             - PRELOAD=true
