@@ -72,7 +72,7 @@ services:
 > 
 > 1. hugegraph 的 docker 镜像是一个便捷版本，用于快速启动 hugegraph，并不是**官方发布物料包方式**。你可以从 [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub) 中得到更多细节。
 >
-> 2. 推荐使用 `release tag`(如 `1.3.0/1.5.0`) 以获取稳定版。使用 `latest` tag 可以使用开发中的最新功能。
+> 2. 推荐使用 `release tag` (如 `1.3.0/1.5.0`) 以获取稳定版。使用 `latest` tag 可以使用开发中的最新功能。
 
 #### 3.2 下载 tar 包
 
