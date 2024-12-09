@@ -156,7 +156,7 @@
 &lt;/ol></description></item><item><title>Docs: Validate Apache Release</title><link>/docs/contribution-guidelines/validate-release/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/contribution-guidelines/validate-release/</guid><description>
 &lt;blockquote>
 &lt;p>Note: this doc will be updated continuously.
-It is recommended to use Java11 in verification, we will drop Java8 support from version 1.5.0&lt;/p>
+You need to use Java11 in runtime verification, we will drop Java8 support from version 1.5.0 (And currently doesn&amp;rsquo;t support Java17)&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="verification">Verification&lt;/h2>
 &lt;p>When the internal temporary release and packaging work is completed, other community developers (
@@ -167,7 +167,7 @@ subsequent &lt;strong>email reply&lt;/strong>.(The following are the core items)
 &lt;h4 id="1-prepare">1. prepare&lt;/h4>
 &lt;p>If there is no svn or gpg or wget environment locally, it is recommended to install it first
 (windows recommend using WSL2 environment, or at least &lt;code>git-bash&lt;/code>), also make sure to install java
-(recommended 11) and maven software&lt;/p>
+(prefer Java 11) and maven software&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 1. install svn&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># ubuntu/debian&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt install subversion -y
