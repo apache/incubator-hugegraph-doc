@@ -31,7 +31,7 @@ HugeGraph-Loader 是 HugeGraph 的数据导入组件，能够将多种数据源�
 
 #### 2.1 使用 Docker 镜像 (便于**测试**)
 
-我们可以使用 `docker run -itd --name loader hugegraph/loader`部署 loader 服务。对于需要加载的数据，则可以通过挂载 `-v /path/to/data/file:/loader/file` 或者`docker cp`的方式将文件复制到 loader 容器内部。
+我们可以使用 `docker run -itd --name loader hugegraph/loader:1.3.0`部署 loader 服务。对于需要加载的数据，则可以通过挂载 `-v /path/to/data/file:/loader/file` 或者`docker cp`的方式将文件复制到 loader 容器内部。
 
 或者使用 docker-compose 启动 loader, 启动命令为 `docker-compose up -d`, 样例的 docker-compose.yml 如下所示：
 
@@ -40,19 +40,19 @@ version: '3'
 
 services:
   server:
-    image: hugegraph/hugegraph
+    image: hugegraph/hugegraph:1.3.0
     container_name: server
     ports:
       - 8080:8080
 
   hubble:
-    image: hugegraph/hubble
+    image: hugegraph/hubble:1.3.0
     container_name: hubble
     ports:
       - 8088:8088
 
   loader:
-    image: hugegraph/loader
+    image: hugegraph/loader:1.3.0
     container_name: loader
     # mount your own data here
     # volumes:

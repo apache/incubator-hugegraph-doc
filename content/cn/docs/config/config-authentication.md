@@ -123,7 +123,7 @@ bin/start-hugegraph.sh
 在 `docker run` 中添加环境变量 `PASSWORD=123456`（密码可以自由设置）即可开启鉴权模式：：
 
 ```bash
-docker run -itd -e PASSWORD=123456 --name=server -p 8080:8080 hugegraph/hugegraph:1.2.0
+docker run -itd -e PASSWORD=123456 --name=server -p 8080:8080 hugegraph/hugegraph:1.3.0
 ```
 
 #### 2. 采用 docker-compose
@@ -134,7 +134,7 @@ docker run -itd -e PASSWORD=123456 --name=server -p 8080:8080 hugegraph/hugegrap
 version: '3'
 services:
   server:
-    image: hugegraph/hugegraph:1.2.0
+    image: hugegraph/hugegraph:1.3.0
     container_name: server
     ports:
       - 8080:8080

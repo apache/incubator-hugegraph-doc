@@ -5,7 +5,7 @@ weight: 3
 ---
 
 > Note: this doc will be updated continuously.
-> It is recommended to use Java11 in verification, we will drop Java8 support from version 1.5.0
+> You need to use Java11 in runtime verification, we will drop Java8 support from version 1.5.0 (And currently doesn't support Java17)
 
 ## Verification
 
@@ -19,7 +19,7 @@ subsequent **email reply**.(The following are the core items)
 
 If there is no svn or gpg or wget environment locally, it is recommended to install it first 
 (windows recommend using WSL2 environment, or at least `git-bash`), also make sure to install java 
-(recommended 11) and maven software
+(prefer Java 11) and maven software
 
 ```bash
 # 1. install svn
