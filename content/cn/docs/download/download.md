@@ -14,7 +14,7 @@ weight: 2
 
 ### 最新版本 1.5.0
 
-> 注意：从版本 `1.5.0` 开始，需要 Java11 运行时环境
+> 注: 从版本 `1.5.0` 开始，需要 Java11 运行时环境
 
 - Release Date: 2024-12-10
 - [Release Notes](/docs/changelog/hugegraph-1.5.0-release-notes/)
