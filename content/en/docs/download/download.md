@@ -15,6 +15,8 @@ weight: 2
 
 ### Latest Version 1.5.0
 
+> Note: Starting from version `1.5.0`, a Java11 runtime environment is required.
+
 - Release Date: 2024-12-10
 - [Release Notes](/docs/changelog/hugegraph-1.5.0-release-notes/)
 
