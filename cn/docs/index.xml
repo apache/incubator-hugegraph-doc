@@ -2671,12 +2671,64 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;blockquote>
 &lt;p>注: HugeGraph 所有组件版本号已保持一致, &lt;code>client/loader/hubble/common&lt;/code> 等 maven 仓库版本号同理, 依赖引用可参考 &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain#maven-dependencies">maven 示例&lt;/a>&lt;/p>
 &lt;/blockquote>
-&lt;h3 id="最新版本-130">最新版本 1.3.0&lt;/h3>
+&lt;h3 id="最新版本-150">最新版本 1.5.0&lt;/h3>
+&lt;blockquote>
+&lt;p>注: 从版本 &lt;code>1.5.0&lt;/code> 开始，需要 Java11 运行时环境&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>Release Date: 2024-12-10&lt;/li>
+&lt;li>&lt;a href="/docs/changelog/hugegraph-1.5.0-release-notes/">Release Notes&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="二进制包">二进制包&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Server&lt;/th>
+&lt;th>Toolchain&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>[&lt;a href="https://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.5.0/apache-hugegraph-incubating-1.5.0.tar.gz?action=download">Binary&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-incubating-1.5.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-incubating-1.5.0.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;td>[&lt;a href="https://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.5.0/apache-hugegraph-toolchain-incubating-1.5.0.tar.gz?action=download">Binary&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-toolchain-incubating-1.5.0.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-toolchain-incubating-1.5.0.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="源码包">源码包&lt;/h4>
+&lt;p>Please refer to &lt;a href="/docs/quickstart/hugegraph-server/">build from source&lt;/a>.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Server&lt;/th>
+&lt;th>Toolchain&lt;/th>
+&lt;th>AI&lt;/th>
+&lt;th>Computer&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>[&lt;a href="https://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.5.0/apache-hugegraph-incubating-1.5.0-src.tar.gz?action=download">Source&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-incubating-1.5.0-src.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-incubating-1.5.0-src.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;td>[&lt;a href="https://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.5.0/apache-hugegraph-toolchain-incubating-1.5.0-src.tar.gz?action=download">Source&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-toolchain-incubating-1.5.0-src.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-toolchain-incubating-1.5.0-src.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;td>[&lt;a href="https://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.5.0/apache-hugegraph-ai-incubating-1.5.0-src.tar.gz?action=download">Source&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-ai-incubating-1.5.0-src.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-ai-incubating-1.5.0-src.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;td>[&lt;a href="https://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.5.0/apache-hugegraph-computer-incubating-1.5.0-src.tar.gz?action=download">Source&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-computer-incubating-1.5.0-src.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-computer-incubating-1.5.0-src.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="归档版本">归档版本&lt;/h3>
+&lt;blockquote>
+&lt;p>注:&lt;/p>
+&lt;ol>
+&lt;li>请大家尽早迁移到最新 Release 版本上, 社区将不再维护 &lt;code>1.0.0&lt;/code> 前的旧版本 (非 ASF 版本)&lt;/li>
+&lt;li>&lt;code>1.3.0&lt;/code> 是最后一个兼容 Java8 的主版本, 请尽早使用/迁移运行时为 Java11 (低版本 Java 有潜在更多的 SEC 风险和性能影响)&lt;/li>
+&lt;/ol>
+&lt;/blockquote>
+&lt;h4 id="130">1.3.0&lt;/h4>
 &lt;ul>
 &lt;li>Release Date: 2024-04-01&lt;/li>
 &lt;li>&lt;a href="/docs/changelog/hugegraph-1.3.0-release-notes/">Release Notes&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h4 id="二进制包">二进制包&lt;/h4>
+&lt;h5 id="二进制包-1">二进制包&lt;/h5>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -2691,7 +2743,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;h4 id="源码包">源码包&lt;/h4>
+&lt;h5 id="源码包-1">源码包&lt;/h5>
 &lt;p>Please refer to &lt;a href="/docs/quickstart/hugegraph-server/">build from source&lt;/a>.&lt;/p>
 &lt;table>
 &lt;thead>
@@ -2711,21 +2763,12 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;hr>
-&lt;h3 id="归档版本">归档版本&lt;/h3>
-&lt;blockquote>
-&lt;p>注:&lt;/p>
-&lt;ol>
-&lt;li>请大家尽早迁移到最新 Release 版本上, 社区将不再维护 &lt;code>1.0.0&lt;/code> 前的旧版本 (非 ASF 版本)&lt;/li>
-&lt;li>&lt;code>1.3.0&lt;/code> 是最后一个兼容 Java8 的主版本, 请尽早使用/迁移运行时为 Java11 (低版本 Java 有潜在更多的 SEC 风险和性能影响)&lt;/li>
-&lt;/ol>
-&lt;/blockquote>
 &lt;h4 id="120">1.2.0&lt;/h4>
 &lt;ul>
 &lt;li>Release Date: 2023-12-28&lt;/li>
 &lt;li>&lt;a href="/docs/changelog/hugegraph-1.2.0-release-notes/">Release Notes&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h5 id="二进制包-1">二进制包&lt;/h5>
+&lt;h5 id="二进制包-2">二进制包&lt;/h5>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -2740,7 +2783,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;h5 id="源码包-1">源码包&lt;/h5>
+&lt;h5 id="源码包-2">源码包&lt;/h5>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -2764,7 +2807,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;li>Release Date: 2023-02-22&lt;/li>
 &lt;li>&lt;a href="/docs/changelog/hugegraph-1.0.0-release-notes/">Release Notes&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h5 id="二进制包-2">二进制包&lt;/h5>
+&lt;h5 id="二进制包-3">二进制包&lt;/h5>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -2781,7 +2824,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;h5 id="源码包-2">源码包&lt;/h5>
+&lt;h5 id="源码包-3">源码包&lt;/h5>
 &lt;table>
 &lt;thead>
 &lt;tr>
