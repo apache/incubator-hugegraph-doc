@@ -4,7 +4,7 @@ linkTitle: "Release-1.3.0"
 weight: 4
 ---
 
-## Operating Environment / Version Description
+### Operating Environment / Version Description
 
 1. consider using Java 11 in `hugegraph/toolchain/commons`, also compatible with Java 8 now.
 2. `hugegraph-computer` required to use Java 11, **not compatible with Java 8!**
@@ -15,8 +15,6 @@ next release(1.5.0) when [PD/Store](https://github.com/apache/hugegraph/issues/2
 master branch (Except for the `java-client`).
 
 PS: In the future, we will gradually upgrade the java version from `Java 11 -> Java 17 -> Java 21.`
-
-## Release Details
 
 ### hugegraph
 
@@ -151,6 +149,8 @@ and the addition of basic CI further enhance the project's robustness and develo
 * chore: Update LICENSE and NOTICE ([#31](https://github.com/apache/incubator-hugegraph-ai/pull/31))
 * chore: add release scripts ([#33](https://github.com/apache/incubator-hugegraph-ai/pull/33))
 * chore: change file chmod 755 ([#34](https://github.com/apache/incubator-hugegraph-ai/pull/34))
+
+### Release Details
 
 Please check the release details/contributor in each repository:
 
