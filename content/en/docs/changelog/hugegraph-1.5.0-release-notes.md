@@ -13,7 +13,7 @@ Please check the release details/contributor in each repository:
 - [Computer Release Notes](https://github.com/apache/incubator-hugegraph-computer/releases)
 - [AI Release Notes](https://github.com/apache/incubator-hugegraph-ai/releases)
 
-### Operating Environment / Version Description
+## Operating Environment / Version Description
 
 1. Compared to **1.3.0**, **1.5.0** of `hugegraph` only supports Java 11
 

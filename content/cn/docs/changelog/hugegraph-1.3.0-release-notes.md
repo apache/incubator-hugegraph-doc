@@ -4,7 +4,7 @@ linkTitle: "Release-1.3.0"
 weight: 4
 ---
 
-### 运行环境/版本说明
+## 运行环境/版本说明
 
 1. 优先在 `hugegraph/toolchain/commons`软件中使用 Java 11, 此次是这些模块最后一次主版本兼容 Java 8 了。(computer 则仅支持 Java11)
 2. 另外相比 Java11, 使用 Java8 会失去一些**安全性**的保障，我们推荐生产或对外网暴露访问的环境使用 Java11 并开启 [Auth 权限认证](/cn/docs/config/config-authentication/)
@@ -12,6 +12,8 @@ weight: 4
 **1.3.0** 是最后兼容 **Java 8** 的版本，在下一个 1.5.0 版本发布 -- [PD/Store](https://github.com/apache/incubator-hugegraph/issues/2265) 合入主分支时就会全面使用 Java 11 (除`client`外).
 
 PS: 未来 HugeGraph 组件的版本会朝着 `Java 11 -> Java 17 -> Java 21` 演进
+
+## 发布细节
 
 ### hugegraph
 
@@ -99,8 +101,6 @@ PS: 未来 HugeGraph 组件的版本会朝着 `Java 11 -> Java 17 -> Java 21` �
 #### Other Changes
 
 * chore: disable clean flatten for deploy ([#141](https://github.com/apache/incubator-hugegraph-commons/pull/141))
-
-### Release Details
 
 ### hugegraph-ai
 

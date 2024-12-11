@@ -13,7 +13,7 @@ Please check the release details/contributor in each repository:
 - [Computer Release Notes](https://github.com/apache/incubator-hugegraph-computer/releases)
 - [AI Release Notes](https://github.com/apache/incubator-hugegraph-ai/releases)
 
-### 运行环境/版本说明
+## 运行环境/版本说明
 
 1. 相较于 **1.3.0**，**1.5.0** 的 `hugegraph` 仅支持 Java 11
 
