@@ -6,12 +6,12 @@ weight: 6
 
 ## 1 HugeGraph-Computer Overview
 
-The [`HugeGraph-Computer`](https://github.com/apache/incubator-hugegraph-computer) is a distributed graph processing system for HugeGraph (OLAP). It is an implementation of [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf). It runs on Kubernetes framework.
+The [`HugeGraph-Computer`](https://github.com/apache/incubator-hugegraph-computer) is a distributed graph processing system for HugeGraph (OLAP). It is an implementation of [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf). It runs on a Kubernetes framework.
 
 ### Features
 
 - Support distributed MPP graph computing, and integrates with HugeGraph as graph input/output storage.
-- Based on BSP(Bulk Synchronous Parallel) model, an algorithm performs computing through multiple parallel iterations, every iteration is a superstep.
+- Based on BSP (Bulk Synchronous Parallel) model, an algorithm performs computing through multiple parallel iterations, every iteration is a superstep.
 - Auto memory management. The framework will never be OOM(Out of Memory) since it will split some data to disk if it doesn't have enough memory to hold all the data.
 - The part of edges or the messages of super node can be in memory, so you will never lose it.
 - You can load the data from HDFS or HugeGraph, or any other system.
@@ -82,7 +82,7 @@ bin/start-computer.sh -d local -r worker
 
 3.1.5.1 Enable `OLAP` index query for server
 
-If OLAP index is not enabled, it needs to enable, more reference: [modify-graphs-read-mode](/docs/clients/restful-api/graphs/#634-modify-graphs-read-mode-this-operation-requires-administrator-privileges)
+If OLAP index is not enabled, it needs to enable. More reference: [modify-graphs-read-mode](/docs/clients/restful-api/graphs/#634-modify-graphs-read-mode-this-operation-requires-administrator-privileges)
 
 ```http
 PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
@@ -98,7 +98,7 @@ curl "http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3" | gunz
 
 ### 3.2 Run PageRank algorithm in Kubernetes
 
-> To run algorithm with HugeGraph-Computer you need to deploy HugeGraph-Server first
+> To run algorithm with HugeGraph-Computer, you need to deploy HugeGraph-Server first
 
 #### 3.2.1 Install HugeGraph-Computer CRD
 

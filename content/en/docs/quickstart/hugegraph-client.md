@@ -6,7 +6,7 @@ weight: 4
 
 ### 1 Overview Of Hugegraph
 
-[HugeGraph-Client](https://github.com/apache/hugegraph-toolchain) sends HTTP request to HugeGraph-Server to obtain and parse the execution result of Server. 
+[HugeGraph-Client](https://github.com/apache/hugegraph-toolchain) sends HTTP request to HugeGraph-Server to get and parse the execution result of Server. 
 We support HugeGraph-Client for Java/Go/[Python](https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-python-client) language.
 You can use [Client-API](/cn/docs/clients/hugegraph-client) to write code to operate HugeGraph, such as adding, deleting, modifying, and querying schema and graph data, or executing gremlin statements.
 
@@ -14,7 +14,7 @@ You can use [Client-API](/cn/docs/clients/hugegraph-client) to write code to ope
 
 ### 2 What You Need
 
-- Java 11 (also support Java 8)
+- Java 11 (also supports Java 8)
 - Maven 3.5+
 
 ### 3 How To Use
@@ -22,7 +22,7 @@ You can use [Client-API](/cn/docs/clients/hugegraph-client) to write code to ope
 The basic steps to use HugeGraph-Client are as follows:
 
 - Build a new Maven project by IDEA or Eclipse
-- Add HugeGraph-Client dependency in pom file;
+- Add HugeGraph-Client dependency in a pom file;
 - Create an object to invoke the interface of HugeGraph-Client
 
 See the complete example in the following section for the detail.
@@ -34,7 +34,7 @@ See the complete example in the following section for the detail.
 Using IDEA or Eclipse to create the project:
 
 - [Build by Eclipse](http://www.vogella.com/tutorials/EclipseMaven/article.html)
-- [Build by Intellij Idea](https://vaadin.com/docs/-/part/framework/getting-started/getting-started-idea.html)
+- [Build by IntelliJ IDEA](https://vaadin.com/docs/-/part/framework/getting-started/getting-started-idea.html)
 
 #### 4.2 Add Hugegraph-Client Dependency In POM
 

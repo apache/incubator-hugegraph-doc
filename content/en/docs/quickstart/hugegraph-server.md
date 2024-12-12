@@ -522,7 +522,7 @@ volumes:
   hugegraph-data:
 ```
 
-In this yaml file, configuration parameters related to Cassandra need to be passed as environment variables in the format of `hugegraph.<parameter_name>`.
+In this YAML file, configuration parameters related to Cassandra need to be passed as environment variables in the format of `hugegraph.<parameter_name>`.
 
 Specifically, in the configuration file `hugegraph.properties` , there are settings like `backend=xxx` and `cassandra.host=xxx`. To configure these settings during the process of passing environment variables, we need to prepend `hugegraph.` to these configurations, like `hugegraph.backend` and `hugegraph.cassandra.host`.
 
@@ -532,7 +532,7 @@ The rest of the configurations can be referenced under [4 config](#4-config)
 
 ##### 5.2.2 Create example graph when starting server
 
-Set the environment variable `PRELOAD=true` when starting Docker in order to load data during the execution of the startup script.
+Set the environment variable `PRELOAD=true` when starting Docker to load data during the execution of the startup script.
 
 1. Use `docker run`
 
