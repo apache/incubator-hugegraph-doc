@@ -28,11 +28,11 @@ and configure by yourself.&lt;/p>
 &lt;h4 id="31-use-docker-container-convenient-for-testdev">3.1 Use Docker container (Convenient for Test/Dev)&lt;/h4>
 &lt;!-- 3.1 is linked by another place. if change 3.1's title, please check -->
 &lt;p>You can refer to &lt;a href="https://hub.docker.com/r/hugegraph/hugegraph">Docker deployment guide&lt;/a>.&lt;/p>
-&lt;p>We can use &lt;code>docker run -itd --name=graph -p 8080:8080 hugegraph/hugegraph:1.3.0&lt;/code> to quickly start an inner &lt;code>HugeGraph server&lt;/code> with &lt;code>RocksDB&lt;/code> in background.&lt;/p>
+&lt;p>We can use &lt;code>docker run -itd --name=graph -p 8080:8080 hugegraph/hugegraph:1.5.0&lt;/code> to quickly start an inner &lt;code>HugeGraph server&lt;/code> with &lt;code>RocksDB&lt;/code> in background.&lt;/p>
 &lt;p>Optional:&lt;/p>
 &lt;ol>
 &lt;li>use &lt;code>docker exec -it graph bash&lt;/code> to enter the container to do some operations.&lt;/li>
-&lt;li>use &lt;code>docker run -itd --name=graph -p 8080:8080 -e PRELOAD=&amp;quot;true&amp;quot; hugegraph/hugegraph:1.3.0&lt;/code> to start with a &lt;strong>built-in&lt;/strong> example graph. We can use &lt;code>RESTful API&lt;/code> to verify the result. The detailed step can refer to &lt;a href="#517-create-an-example-graph-when-startup">5.1.7&lt;/a>&lt;/li>
+&lt;li>use &lt;code>docker run -itd --name=graph -p 8080:8080 -e PRELOAD=&amp;quot;true&amp;quot; hugegraph/hugegraph:1.5.0&lt;/code> to start with a &lt;strong>built-in&lt;/strong> example graph. We can use &lt;code>RESTful API&lt;/code> to verify the result. The detailed step can refer to &lt;a href="#517-create-an-example-graph-when-startup">5.1.7&lt;/a>&lt;/li>
 &lt;li>use &lt;code>-e PASSWORD=123456&lt;/code> to enable auth mode and set the password for admin. You can find more details from &lt;a href="/docs/config/config-authentication#Use-docker-to-enble-authentication-mode">Config Authentication&lt;/a>&lt;/li>
 &lt;/ol>
 &lt;p>If you use docker desktop, you can set the option like:&lt;/p>
@@ -43,7 +43,7 @@ and configure by yourself.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">server&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:1.3.0&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:1.5.0&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">server&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># environment:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - PRELOAD=true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -59,13 +59,13 @@ and configure by yourself.&lt;/p>
 &lt;p>The docker image of hugegraph is a convenience release to start hugegraph quickly, but not &lt;strong>official distribution&lt;/strong> artifacts. You can find more details from &lt;a href="https://infra.apache.org/release-distribution.html#dockerhub">ASF Release Distribution Policy&lt;/a>.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>Recommend to use &lt;code>release tag&lt;/code>(like &lt;code>1.3.0&lt;/code>/&lt;code>1.5.0&lt;/code>) for the stable version. Use &lt;code>latest&lt;/code> tag to experience the newest functions in development.&lt;/p>
+&lt;p>Recommend to use &lt;code>release tag&lt;/code>(like &lt;code>1.5.0&lt;/code>/&lt;code>1.5.0&lt;/code>) for the stable version. Use &lt;code>latest&lt;/code> tag to experience the newest functions in development.&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;/blockquote>
 &lt;h4 id="32-download-the-binary-tar-tarball">3.2 Download the binary tar tarball&lt;/h4>
 &lt;p>You could download the binary tarball from the download page of ASF site like this:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># use the latest version, here is 1.3.0 for example&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># use the latest version, here is 1.5.0 for example&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>/apache-hugegraph-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph*.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -95,7 +95,7 @@ and configure by yourself.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn package -DskipTests -ntp
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The execution log is as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>......
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> Reactor Summary &lt;span style="color:#204a87;font-weight:bold">for&lt;/span> hugegraph 1.3.0:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> Reactor Summary &lt;span style="color:#204a87;font-weight:bold">for&lt;/span> hugegraph 1.5.0:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph .......................................... SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 2.405 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>INFO&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> hugegraph-core ..................................... SUCCESS &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span> 13.405 s&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
@@ -119,8 +119,8 @@ and configure by yourself.&lt;/p>
 &lt;p>&lt;code>HugeGraph-Tools&lt;/code> provides a command-line tool for one-click deployment, users can use this tool to quickly download, decompress, configure and start &lt;code>HugeGraphServer&lt;/code> and &lt;code>HugeGraph-Hubble&lt;/code> with one click.&lt;/p>
 &lt;p>Of course, you should download the tarball of &lt;code>HugeGraph-Toolchain&lt;/code> first.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># download toolchain binary package, it includes loader + tool + hubble&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># please check the latest version (e.g. here is 1.3.0)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># please check the latest version (e.g. here is 1.5.0)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-toolchain-incubating-1.5.0.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph-*.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># enter the tool&amp;#39;s package&lt;/span>
@@ -370,16 +370,16 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">volumes&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hugegraph-data&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In this yaml file, configuration parameters related to Cassandra need to be passed as environment variables in the format of &lt;code>hugegraph.&amp;lt;parameter_name&amp;gt;&lt;/code>.&lt;/p>
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In this YAML file, configuration parameters related to Cassandra need to be passed as environment variables in the format of &lt;code>hugegraph.&amp;lt;parameter_name&amp;gt;&lt;/code>.&lt;/p>
 &lt;p>Specifically, in the configuration file &lt;code>hugegraph.properties&lt;/code> , there are settings like &lt;code>backend=xxx&lt;/code> and &lt;code>cassandra.host=xxx&lt;/code>. To configure these settings during the process of passing environment variables, we need to prepend &lt;code>hugegraph.&lt;/code> to these configurations, like &lt;code>hugegraph.backend&lt;/code> and &lt;code>hugegraph.cassandra.host&lt;/code>.&lt;/p>
 &lt;p>The rest of the configurations can be referenced under &lt;a href="#4-config">4 config&lt;/a>&lt;/p>
 &lt;/details>
 &lt;h5 id="522-create-example-graph-when-starting-server">5.2.2 Create example graph when starting server&lt;/h5>
-&lt;p>Set the environment variable &lt;code>PRELOAD=true&lt;/code> when starting Docker in order to load data during the execution of the startup script.&lt;/p>
+&lt;p>Set the environment variable &lt;code>PRELOAD=true&lt;/code> when starting Docker to load data during the execution of the startup script.&lt;/p>
 &lt;ol>
 &lt;li>
 &lt;p>Use &lt;code>docker run&lt;/code>&lt;/p>
-&lt;p>Use &lt;code>docker run -itd --name=server -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:1.3.0&lt;/code>&lt;/p>
+&lt;p>Use &lt;code>docker run -itd --name=server -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:1.5.0&lt;/code>&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Use &lt;code>docker-compose&lt;/code>&lt;/p>
@@ -387,7 +387,7 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">server&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:1.3.0&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:1.5.0&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">server&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">environment&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#000">PRELOAD=true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -507,7 +507,7 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;p>Currently supported data sources include:&lt;/p>
 &lt;ul>
 &lt;li>Local disk file or directory, supports TEXT, CSV and JSON format files, supports compressed files&lt;/li>
-&lt;li>HDFS file or directory, supports compressed files&lt;/li>
+&lt;li>HDFS file or directory supports compressed files&lt;/li>
 &lt;li>Mainstream relational databases, such as MySQL, PostgreSQL, Oracle, SQL Server&lt;/li>
 &lt;/ul>
 &lt;p>Local disk files and HDFS files support resumable uploads.&lt;/p>
@@ -523,7 +523,7 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;li>Clone source code then compile and install&lt;/li>
 &lt;/ul>
 &lt;h4 id="21-use-docker-image-convenient-for-testdev">2.1 Use Docker image (Convenient for Test/Dev)&lt;/h4>
-&lt;p>We can deploy the loader service using &lt;code>docker run -itd --name loader hugegraph/loader:1.3.0&lt;/code>. For the data that needs to be loaded, it can be copied into the loader container either by mounting &lt;code>-v /path/to/data/file:/loader/file&lt;/code> or by using &lt;code>docker cp&lt;/code>.&lt;/p>
+&lt;p>We can deploy the loader service using &lt;code>docker run -itd --name loader hugegraph/loader:1.5.0&lt;/code>. For the data that needs to be loaded, it can be copied into the loader container either by mounting &lt;code>-v /path/to/data/file:/loader/file&lt;/code> or by using &lt;code>docker cp&lt;/code>.&lt;/p>
 &lt;p>Alternatively, to start the loader using docker-compose, the command is &lt;code>docker-compose up -d&lt;/code>. An example of the docker-compose.yml is as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -548,7 +548,7 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;p>The docker image of hugegraph-loader is a convenience release to start hugegraph-loader quickly, but not &lt;strong>official distribution&lt;/strong> artifacts. You can find more details from &lt;a href="https://infra.apache.org/release-distribution.html#dockerhub">ASF Release Distribution Policy&lt;/a>.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>Recommand to use &lt;code>release tag&lt;/code>(like &lt;code>1.2.0&lt;/code>) for the stable version. Use &lt;code>latest&lt;/code> tag to experience the newest functions in development.&lt;/p>
+&lt;p>Recommend to use &lt;code>release tag&lt;/code>(like &lt;code>1.5.0&lt;/code>) for the stable version. Use &lt;code>latest&lt;/code> tag to experience the newest functions in development.&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;/blockquote>
@@ -621,7 +621,7 @@ Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-d
 &lt;h5 id="321-data-source-structure">3.2.1 Data source structure&lt;/h5>
 &lt;h6 id="3211-local-disk-file-or-directory">3.2.1.1 Local disk file or directory&lt;/h6>
 &lt;p>The user can specify a local disk file as the data source. If the data is scattered in multiple files, a certain directory is also supported as the data source, but multiple directories are not supported as the data source for the time being.&lt;/p>
-&lt;p>For example: my data is scattered in multiple files, part-0, part-1 &amp;hellip; part-n. To perform the import, it must be ensured that they are placed in one directory. Then in the loader&amp;rsquo;s mapping file, specify &lt;code>path&lt;/code> as the directory.&lt;/p>
+&lt;p>For example, my data is scattered in multiple files, part-0, part-1 &amp;hellip; part-n. To perform the import, it must be ensured that they are placed in one directory. Then in the loader&amp;rsquo;s mapping file, specify &lt;code>path&lt;/code> as the directory.&lt;/p>
 &lt;p>Supported file formats include:&lt;/p>
 &lt;ul>
 &lt;li>TEXT&lt;/li>
@@ -643,9 +643,9 @@ Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-d
 &lt;p>Users can also specify HDFS files or directories as data sources, all of the above requirements for &lt;code>local disk files or directories&lt;/code> apply here. In addition, since HDFS usually stores compressed files, loader also provides support for compressed files, and &lt;code>local disk file or directory&lt;/code> also supports compressed files.&lt;/p>
 &lt;p>Currently supported compressed file types include: GZIP, BZ2, XZ, LZMA, SNAPPY_RAW, SNAPPY_FRAMED, Z, DEFLATE, LZ4_BLOCK, LZ4_FRAMED, ORC, and PARQUET.&lt;/p>
 &lt;h6 id="3213-mainstream-relational-database">3.2.1.3 Mainstream relational database&lt;/h6>
-&lt;p>The loader also supports some relational databases as data sources, and currently supports MySQL, PostgreSQL, Oracle and SQL Server.&lt;/p>
+&lt;p>The loader also supports some relational databases as data sources, and currently supports MySQL, PostgreSQL, Oracle, and SQL Server.&lt;/p>
 &lt;p>However, the requirements for the table structure are relatively strict at present. If &lt;strong>association query&lt;/strong> needs to be done during the import process, such a table structure is not allowed. The associated query means: after reading a row of the table, it is found that the value of a certain column cannot be used directly (such as a foreign key), and you need to do another query to determine the true value of the column.&lt;/p>
-&lt;p>For example: Suppose there are three tables, person, software and created&lt;/p>
+&lt;p>For example, Suppose there are three tables, person, software and created&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>// person schema
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>id | name | age | city
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>// software schema
@@ -688,9 +688,9 @@ Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-d
 &lt;h5 id="331-mapping-file-overview">3.3.1 Mapping file overview&lt;/h5>
 &lt;p>The mapping file of the input source is used to describe how to establish the mapping relationship between the input source data and the vertex type/edge type of the graph. It is organized in &lt;code>JSON&lt;/code> format and consists of multiple mapping blocks, each of which is responsible for mapping an input source. Mapped to vertices and edges.&lt;/p>
 &lt;p>Specifically, each mapping block contains &lt;strong>an input source&lt;/strong> and multiple &lt;strong>vertex mapping&lt;/strong> and &lt;strong>edge mapping&lt;/strong> blocks, and the input source block corresponds to the &lt;code>local disk file or directory&lt;/code>, &lt;code> HDFS file or directory&lt;/code> and &lt;code>relational database&lt;/code> are responsible for describing the basic information of the data source, such as where the data is, what format, what is the delimiter, etc. The vertex map/edge map is bound to the input source, which columns of the input source can be selected, which columns are used as ids, which columns are used as attributes, and what attributes are mapped to each column, the values ​​of the columns are mapped to what values ​​of attributes, and so on.&lt;/p>
-&lt;p>In the simplest terms, each mapping block describes: where is the file to be imported, which type of vertices/edges each line of the file is to be used as, which columns of the file need to be imported, and the corresponding vertices/edges of these columns. what properties etc.&lt;/p>
+&lt;p>In the simplest terms, each mapping block describes: where is the file to be imported, which type of vertices/edges each line of the file is to be used as which columns of the file need to be imported, and the corresponding vertices/edges of these columns. what properties, etc.&lt;/p>
 &lt;blockquote>
-&lt;p>Note: The format of the mapping file before version 0.11.0 and the format after 0.11.0 has changed greatly. For the convenience of expression, the mapping file (format) before 0.11.0 is called version 1.0, and the version after 0.11.0 is version 2.0 . And unless otherwise specified, the &amp;ldquo;map file&amp;rdquo; refers to version 2.0.&lt;/p>
+&lt;p>Note: The format of the mapping file before version 0.11.0 and the format after 0.11.0 has changed greatly. For the convenience of expression, the mapping file (format) before 0.11.0 is called version 1.0, and the version after 0.11.0 is version 2.0. And unless otherwise specified, the &amp;ldquo;map file&amp;rdquo; refers to version 2.0.&lt;/p>
 &lt;/blockquote>
 &lt;details>
 &lt;summary>Click to expand/collapse the skeleton of the map file for version 2.0&lt;/summary>
@@ -716,7 +716,7 @@ Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-d
 &lt;br/>
 &lt;p>Two versions of the mapping file are given directly here (the above graph model and data file are described)&lt;/p>
 &lt;details>
-&lt;summary>Click to expand/collapse mapping file for version 2.0&lt;/summary>
+&lt;summary>Click to expand/collapse the mapping file for version 2.0&lt;/summary>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;version&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;2.0&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;structs&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
@@ -919,7 +919,7 @@ Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-d
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/details>
 &lt;br/>
 &lt;details>
-&lt;summary>Click to expand/collapse mapping file for version 1.0&lt;/summary>
+&lt;summary>Click to expand/collapse the mapping file for version 1.0&lt;/summary>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;vertices&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
@@ -974,7 +974,7 @@ Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-d
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/details>
 &lt;br/>
-&lt;p>The 1.0 version of the mapping file is centered on the vertex and edge, and sets the input source; while the 2.0 version is centered on the input source, and sets the vertex and edge mapping. Some input sources (such as a file) can generate both vertices and edges. If you write in the 1.0 format, you need to write an input block in each of the vertex and edge mapping blocks. The two input blocks are exactly the same ; and the 2.0 version only needs to write input once. Therefore, compared with version 1.0, version 2.0 can save some repetitive writing of input.&lt;/p>
+&lt;p>The 1.0 version of the mapping file is centered on the vertex and edge, and sets the input source; while the 2.0 version is centered on the input source, and sets the vertex and edge mapping. Some input sources (such as a file) can generate both vertices and edges. If you write in the 1.0 format, you need to write an input block in each of the vertex and edge mapping blocks. The two input blocks are exactly the same; and the 2.0 version only needs to write input once. Therefore, compared with version 1.0, version 2.0 can save some repetitive writing of input.&lt;/p>
 &lt;p>In the bin directory of hugegraph-loader-{version}, there is a script tool &lt;code>mapping-convert.sh&lt;/code> that can directly convert the mapping file of version 1.0 to version 2.0. The usage is as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/mapping-convert.sh struct.json
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>A struct-v2.json will be generated in the same directory as struct.json.&lt;/p>
@@ -986,7 +986,7 @@ Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-d
 &lt;li>skip: whether to skip the input source, because the JSON file cannot add comments, if you do not want to import an input source during a certain import, but do not want to delete the configuration of the input source, you can set it to true to skip it, the default is false, not required;&lt;/li>
 &lt;li>input: input source map block, composite structure
 &lt;ul>
-&lt;li>type: input source type, file or FILE must be filled;&lt;/li>
+&lt;li>type: an input source type, file or FILE must be filled;&lt;/li>
 &lt;li>path: the path of the local file or directory, the absolute path or the relative path relative to the mapping file, it is recommended to use the absolute path, required;&lt;/li>
 &lt;li>file_filter: filter files with compound conditions from &lt;code>path&lt;/code>, compound structure, currently only supports configuration extensions, represented by child node &lt;code>extensions&lt;/code>, the default is &amp;ldquo;*&amp;rdquo;, which means to keep all files;&lt;/li>
 &lt;li>format: the format of the local file, the optional values ​​are CSV, TEXT and JSON, which must be uppercase and required;&lt;/li>
@@ -1137,7 +1137,7 @@ Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-d
 &lt;li>delimiter: delimiter of the file line, default is comma &amp;ldquo;,&amp;rdquo; as delimiter, JSON files do not need to specify, optional;&lt;/li>
 &lt;li>charset: encoding charset of the file, default is UTF-8, optional;&lt;/li>
 &lt;li>date_format: customized date format, default value is yyyy-MM-dd HH:mm:ss, optional; if the date is presented in the form of timestamp, this item must be written as timestamp (fixed);&lt;/li>
-&lt;li>extra_date_formats: a customized list of other date formats, empty by default, optional; each item in the list is an alternate date format to the date_format specified date format;&lt;/li>
+&lt;li>extra_date_formats: a customized list of another date formats, empty by default, optional; each item in the list is an alternate date format to the date_format specified date format;&lt;/li>
 &lt;li>time_zone: set which time zone the date data is in, default is GMT+8, optional;&lt;/li>
 &lt;li>skipped_line: the line you want to skip, composite structure, currently can only configure the regular expression of the line to be skipped, described by the child node regex, the default is not to skip any line, optional;&lt;/li>
 &lt;li>early_stop: the record pulled from Kafka broker at a certain time is empty, stop the task, default is false, only for debugging, optional;&lt;/li>
@@ -1410,13 +1410,13 @@ Sibling &lt;code>struct-example/load-progress 2019-10-10 12:30:30&lt;/code>.&lt;
 &lt;blockquote>
 &lt;p>Note: The generation of progress files is independent of whether &amp;ndash;incremental-mode is turned on or not, and a progress file is generated at the end of each import.&lt;/p>
 &lt;/blockquote>
-&lt;p>If the data file formats are all legal and the import task is stopped by the user (CTRL + C or kill, kill -9 is not supported), that is to say, if there is no error record, the next import only needs to be set
+&lt;p>If the data file formats are all legal and the import task is stopped by the user (CTRL + C or kill, kill -9 is not supported), that is to say, if there is no error record, the next import only needs to be set to
 Continue for the breakpoint.&lt;/p>
 &lt;p>But if the limit of &amp;ndash;max-parse-errors or &amp;ndash;max-insert-errors is reached because too much data is invalid or network abnormality is reached, Loader will record these original rows that failed to insert into
 In the failed file, after the user modifies the data lines in the failed file, set &amp;ndash;reload-failure to true to import these &amp;ldquo;failed files&amp;rdquo; as input sources (does not affect the normal file import),
 Of course, if there is still a problem with the modified data line, it will be logged again to the failure file (don&amp;rsquo;t worry about duplicate lines).&lt;/p>
 &lt;p>Each vertex map or edge map will generate its own failure file when data insertion fails. The failure file is divided into a parsing failure file (suffix .parse-error) and an insertion failure file (suffix .insert-error).
-They are stored in the &lt;code>${struct}/current&lt;/code> directory. For example, there is a vertex mapping person and an edge mapping knows in the mapping file, each of which has some error lines. When the Loader exits, you will see the following files in the &lt;code>${struct}/current&lt;/code> directory:&lt;/p>
+They are stored in the &lt;code>${struct}/current&lt;/code> directory. For example, there is a vertex mapping person, and an edge mapping knows in the mapping file, each of which has some error lines. When the Loader exits, you will see the following files in the &lt;code>${struct}/current&lt;/code> directory:&lt;/p>
 &lt;ul>
 &lt;li>person-b4cd32ab.parse-error: Vertex map person parses wrong data&lt;/li>
 &lt;li>person-b4cd32ab.insert-error: Vertex map person inserts wrong data&lt;/li>
@@ -1427,7 +1427,7 @@ They are stored in the &lt;code>${struct}/current&lt;/code> directory. For examp
 &lt;p>.parse-error and .insert-error do not always exist together. Only lines with parsing errors will have .parse-error files, and only lines with insertion errors will have .insert-error files.&lt;/p>
 &lt;/blockquote>
 &lt;h5 id="343-logs-directory-file-description">3.4.3 logs directory file description&lt;/h5>
-&lt;p>The log and error data during program execution will be written into hugegraph-loader.log file.&lt;/p>
+&lt;p>The log and error data during program execution will be written into the hugegraph-loader.log file.&lt;/p>
 &lt;h5 id="344-execute-command">3.4.4 Execute command&lt;/h5>
 &lt;p>Run bin/hugegraph-loader and pass in parameters&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/hugegraph-loader -g &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>GRAPH_NAME&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span> -f &lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">INPUT_DESC_FILE&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span> -s &lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">SCHEMA_FILE&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span> -h &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>HOST&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span> -p &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>PORT&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
@@ -1455,7 +1455,7 @@ They are stored in the &lt;code>${struct}/current&lt;/code> directory. For examp
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#204a87;font-weight:bold">&amp;#34;aname&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;peter&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;bname&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;lop&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;date&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;20170324&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;weight&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.2&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="42-write-schema">4.2 Write schema&lt;/h4>
 &lt;details>
-&lt;summary>Click to expand/collapse schema file: example/file/schema.groovy&lt;/summary>
+&lt;summary>Click to expand/collapse the schema file: example/file/schema.groovy&lt;/summary>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asText&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asInt&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asText&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
@@ -1565,7 +1565,7 @@ They are stored in the &lt;code>${struct}/current&lt;/code> directory. For examp
 &lt;h6 id="4511-prepare-data">4.5.1.1 Prepare data&lt;/h6>
 &lt;p>If you just want to try out the loader, you can import the built-in example dataset without needing to prepare additional data yourself.&lt;/p>
 &lt;p>If using custom data, before importing data with the loader, we need to copy the data into the container.&lt;/p>
-&lt;p>First, following the steps in &lt;a href="#41-prepare-data">4.1-4.3&lt;/a>, we can prepare the data and then use &lt;code>docker cp&lt;/code> to copy the prepared data into the loader container.&lt;/p>
+&lt;p>First, following the steps in &lt;a href="#41-prepare-data">4.1–4.3&lt;/a>, we can prepare the data and then use &lt;code>docker cp&lt;/code> to copy the prepared data into the loader container.&lt;/p>
 &lt;p>Suppose we&amp;rsquo;ve prepared the corresponding dataset following the above steps, stored in the &lt;code>hugegraph-dataset&lt;/code> folder with the following file structure:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>tree -f hugegraph-dataset/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -1583,15 +1583,15 @@ They are stored in the &lt;code>${struct}/current&lt;/code> directory. For examp
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>edge_created.json edge_knows.json schema.groovy struct.json vertex_person.csv vertex_software.txt
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="4512-data-loading">4.5.1.2 Data loading&lt;/h6>
 &lt;p>Taking the built-in example dataset as an example, we can use the following command to load the data.&lt;/p>
-&lt;p>If you need to import your custom dataset, you just need to modify the paths for &lt;code>-f&lt;/code> (data script) and &lt;code>-s&lt;/code> (schema) configurations.&lt;/p>
-&lt;p>&amp;ldquo;You can refer to &lt;a href="#341-parameter-description">3.4.1 Parameter description&lt;/a> for the rest of the parameters.&lt;/p>
+&lt;p>If you need to import your custom dataset, you need to modify the paths for &lt;code>-f&lt;/code> (data script) and &lt;code>-s&lt;/code> (schema) configurations.&lt;/p>
+&lt;p>You can refer to &lt;a href="#341-parameter-description">3.4.1-Parameter description&lt;/a> for the rest of the parameters.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker &lt;span style="color:#204a87">exec&lt;/span> -it loader bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy -h server -p &lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If loading a custom dataset, following the previous example, you would use:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker &lt;span style="color:#204a87">exec&lt;/span> -it loader bin/hugegraph-loader.sh -g hugegraph -f /loader/dataset/struct.json -s /loader/dataset/schema.groovy -h server -p &lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
 &lt;p>If &lt;code>loader&lt;/code> and &lt;code>server&lt;/code> are in the same Docker network, you can specify &lt;code>-h {server_container_name}&lt;/code>; otherwise, you need to specify the IP of the &lt;code>server&lt;/code> host (in our example, &lt;code>server_container_name&lt;/code> is &lt;code>server&lt;/code>).&lt;/p>
 &lt;/blockquote>
-&lt;p>Then we can obverse the result:&lt;/p>
+&lt;p>Then we can see the result:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>HugeGraphLoader worked in NORMAL MODE
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vertices/edges loaded this &lt;span style="color:#204a87">time&lt;/span> : 8/6
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>--------------------------------------------------
@@ -1630,7 +1630,7 @@ They are stored in the &lt;code>${struct}/current&lt;/code> directory. For examp
 HugeGraph Toolchain version: toolchain-1.0.0&lt;/p>
 &lt;/blockquote>
 &lt;p>The parameters of &lt;code>spark-loader&lt;/code> are divided into two parts. Note: Because the abbreviations of
-these two parameter names have overlapping parts, please use the full name of the parameter.
+these two-parameter names have overlapping parts, please use the full name of the parameter.
 And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;ul>
 &lt;li>hugegraph parameters (Reference: &lt;a href="https://hugegraph.apache.org/docs/quickstart/hugegraph-loader/#341-parameter-description">hugegraph-loader parameter description&lt;/a> )&lt;/li>
@@ -1659,7 +1659,7 @@ to improve the user&amp;rsquo;s use fluency, lower the user&amp;rsquo;s use thre
 &lt;h5 id="metadata-modeling">Metadata Modeling&lt;/h5>
 &lt;p>The metadata modeling module realizes the construction and management of graph models by creating attribute libraries, vertex types, edge types, and index types. The platform provides two modes, list mode and graph mode, which can display the metadata model in real time, which is more intuitive. At the same time, it also provides a metadata reuse function across graphs, which saves the tedious and repetitive creation process of the same metadata, greatly improves modeling efficiency and enhances ease of use.&lt;/p>
 &lt;h5 id="graph-analysis">Graph Analysis&lt;/h5>
-&lt;p>By inputting the graph traversal language Gremlin, high-performance general analysis of graph data can be realized, and functions such as customized multidimensional path query of vertices can be provided, and three kinds of graph result display methods are provided, including: graph form, table form, Json form, and multidimensional display. The data form meets the needs of various scenarios used by users. It provides functions such as running records and collection of common statements, realizing the traceability of graph operations, and the reuse and sharing of query input, which is fast and efficient. It supports the export of graph data, and the export format is Json format.&lt;/p>
+&lt;p>By inputting the graph traversal language Gremlin, high-performance general analysis of graph data can be realized, and functions such as customized multidimensional path query of vertices can be provided, and three kinds of graph result display methods are provided, including: graph form, table form, Json form, and multidimensional display. The data form meets the needs of various scenarios used by users. It provides functions such as running records and collection of common statements, realizing the traceability of graph operations, and the reuse and sharing of query input, which is fast and efficient. It supports the export of graph data, and the export format is JSON format.&lt;/p>
 &lt;h5 id="task-management">Task Management&lt;/h5>
 &lt;p>For Gremlin tasks that need to traverse the whole graph, index creation and reconstruction,
 and other time-consuming asynchronous tasks, the platform provides corresponding task management
@@ -1688,19 +1688,19 @@ error retry mechanism, etc., which reduces import costs and improves efficiency.
 &lt;p>&lt;strong>Special Note&lt;/strong>: If you are starting &lt;code>hubble&lt;/code> with Docker, and &lt;code>hubble&lt;/code> and the server are on the same host. When configuring the hostname for the graph on the Hubble web page, please do not directly set it to &lt;code>localhost/127.0.0.1&lt;/code>. This will refer to the &lt;code>hubble&lt;/code> container internally rather than the host machine, resulting in a connection failure to the server.&lt;/p>
 &lt;p>If &lt;code>hubble&lt;/code> and &lt;code>server&lt;/code> is in the same docker network, we &lt;strong>recommend&lt;/strong> using the &lt;code>container_name&lt;/code> (in our example, it is &lt;code>server&lt;/code>) as the hostname, and &lt;code>8080&lt;/code> as the port. Or you can use the &lt;strong>host IP&lt;/strong> as the hostname, and the port is configured by the host for the server.&lt;/p>
 &lt;/blockquote>
-&lt;p>We can use &lt;code>docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble:1.2.0&lt;/code> to quick start &lt;a href="https://hub.docker.com/r/hugegraph/hubble">hubble&lt;/a>.&lt;/p>
+&lt;p>We can use &lt;code>docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble:1.5.0&lt;/code> to quick start &lt;a href="https://hub.docker.com/r/hugegraph/hubble">hubble&lt;/a>.&lt;/p>
 &lt;p>Alternatively, you can use Docker Compose to start &lt;code>hubble&lt;/code>. Additionally, if &lt;code>hubble&lt;/code> and the graph are in the same Docker network, you can access the graph using the container name of the graph, eliminating the need for the host machine&amp;rsquo;s IP address.&lt;/p>
 &lt;p>Use &lt;code>docker-compose up -d&lt;/code>，&lt;code>docker-compose.yml&lt;/code> is following:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">server&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:1.3.0&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:1.5.0&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">server&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hubble&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hubble:1.2.0&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hubble:1.5.0&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hubble&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#0000cf;font-weight:bold">8088&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8088&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -1711,7 +1711,7 @@ error retry mechanism, etc., which reduces import costs and improves efficiency.
 &lt;p>The docker image of hugegraph-hubble is a convenience release to start hugegraph-hubble quickly, but not &lt;strong>official distribution&lt;/strong> artifacts. You can find more details from &lt;a href="https://infra.apache.org/release-distribution.html#dockerhub">ASF Release Distribution Policy&lt;/a>.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>Recommand to use &lt;code>release tag&lt;/code>(like &lt;code>1.2.0&lt;/code>) for the stable version. Use &lt;code>latest&lt;/code> tag to experience the newest functions in development.&lt;/p>
+&lt;p>Recommend to use &lt;code>release tag&lt;/code>(like &lt;code>1.5.0&lt;/code>) for the stable version. Use &lt;code>latest&lt;/code> tag to experience the newest functions in development.&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;/blockquote>
@@ -1743,7 +1743,7 @@ error retry mechanism, etc., which reduces import costs and improves efficiency.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> apache-hugegraph-hubble-incubating*
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Run &lt;code>hubble&lt;/code>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-hubble.sh -d
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3platform-workflow">3 Platform Workflow&lt;/h3>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3platform-workflows">3 Platform Workflows&lt;/h3>
 &lt;p>The module usage process of the platform is as follows:&lt;/p>
 &lt;div style="text-align: center;">
 &lt;img src="/docs/images/images-hubble/2平台使用流程.png" alt="image">
@@ -1763,7 +1763,7 @@ error retry mechanism, etc., which reduces import costs and improves efficiency.
 &lt;p>&lt;strong>Special Note&lt;/strong>: If you are starting &lt;code>hubble&lt;/code> with Docker, and &lt;code>hubble&lt;/code> and the server are on the same host. When configuring the hostname for the graph on the Hubble web page, please do not directly set it to &lt;code>localhost/127.0.0.1&lt;/code>. If &lt;code>hubble&lt;/code> and &lt;code>server&lt;/code> is in the same docker network, we &lt;strong>recommend&lt;/strong> using the &lt;code>container_name&lt;/code> (in our example, it is &lt;code>graph&lt;/code>) as the hostname, and &lt;code>8080&lt;/code> as the port. Or you can use the &lt;strong>host IP&lt;/strong> as the hostname, and the port is configured by the host for the server.&lt;/p>
 &lt;/blockquote>
 &lt;h5 id="412graph-access">4.1.2 Graph Access&lt;/h5>
-&lt;p>Realize the information access of the graph space. After entering, you can perform operations such as multidimensional query analysis, metadata management, data import, and algorithm analysis of the graph.&lt;/p>
+&lt;p>Realize the information access to the graph space. After entering, you can perform operations such as multidimensional query analysis, metadata management, data import, and algorithm analysis of the graph.&lt;/p>
 &lt;center>
 &lt;img src="/docs/images/images-hubble/312图访问.png" alt="image">
 &lt;/center>
@@ -1963,7 +1963,7 @@ error retry mechanism, etc., which reduces import costs and improves efficiency.
 &lt;img src="/docs/images/images-hubble/342多图切换.png" alt="image">
 &lt;/center>
 &lt;h5 id="443-graph-analysis-and-processing">4.4.3 Graph Analysis and Processing&lt;/h5>
-&lt;p>HugeGraph supports Gremlin, a graph traversal query language of Apache TinkerPop3. Gremlin is a general graph database query language. By entering Gremlin statements and clicking execute, you can perform query and analysis operations on graph data, and create and delete vertices/edges. , vertex/edge attribute modification, etc.&lt;/p>
+&lt;p>HugeGraph supports Gremlin, a graph traversal query language of Apache TinkerPop3. Gremlin is a general graph database query language. By entering Gremlin statements and clicking execute, you can perform query and analysis operations on graph data, and create and delete vertices/edges. vertex/edge attribute modification, etc.&lt;/p>
 &lt;p>After Gremlin query, below is the graph result display area, which provides 3 kinds of graph result display modes: [Graph Mode], [Table Mode], [Json Mode].&lt;/p>
 &lt;p>Support zoom, center, full screen, export and other operations.&lt;/p>
 &lt;p>【Picture Mode】&lt;/p>
@@ -1979,9 +1979,9 @@ error retry mechanism, etc., which reduces import costs and improves efficiency.
 &lt;img src="/docs/images/images-hubble/343图分析-json.png" alt="image">
 &lt;/center>
 &lt;h5 id="444-data-details">4.4.4 Data Details&lt;/h5>
-&lt;p>Click the vertex/edge entity to view the data details of the vertex/edge, including: vertex/edge type, vertex ID, attribute and corresponding value, expand the information display dimension of the graph, and improve the usability.&lt;/p>
+&lt;p>Click the vertex/edge entity to view the data details of the vertex/edge, including vertex/edge type, vertex ID, attribute and corresponding value, expand the information display dimension of the graph, and improve the usability.&lt;/p>
 &lt;h5 id="445-multidimensional-path-query-of-graph-results">4.4.5 Multidimensional Path Query of Graph Results&lt;/h5>
-&lt;p>In addition to the global query, in-depth customized query and hidden operations can be performed for the vertices in the query result to realize customized mining of graph results.&lt;/p>
+&lt;p>In addition to the global query, an in-depth customized query and hidden operations can be performed for the vertices in the query result to realize customized mining of graph results.&lt;/p>
 &lt;p>Right-click a vertex, and the menu entry of the vertex appears, which can be displayed, inquired, hidden, etc.&lt;/p>
 &lt;ul>
 &lt;li>Expand: Click to display the vertices associated with the selected point.&lt;/li>
@@ -2035,7 +2035,7 @@ error retry mechanism, etc., which reduces import costs and improves efficiency.
 &lt;li>rebuild_index: rebuild the index&lt;/li>
 &lt;/ul>
 &lt;ol start="2">
-&lt;li>The list displays the asynchronous task information of the current graph, including: task ID, task name, task type, creation time, time-consuming, status, operation, and realizes the management of asynchronous tasks.&lt;/li>
+&lt;li>The list displays the asynchronous task information of the current graph, including task ID, task name, task type, creation time, time-consuming, status, operation, and realizes the management of asynchronous tasks.&lt;/li>
 &lt;li>Support filtering by task type and status&lt;/li>
 &lt;li>Support searching for task ID and task name&lt;/li>
 &lt;li>Asynchronous tasks can be deleted or deleted in batches&lt;/li>
@@ -2073,7 +2073,7 @@ error retry mechanism, etc., which reduces import costs and improves efficiency.
 &lt;li>View the results&lt;/li>
 &lt;/ol>
 &lt;ul>
-&lt;li>The results are displayed in the form of json&lt;/li>
+&lt;li>The results are displayed in the form of JSON&lt;/li>
 &lt;/ul>
 &lt;h5 id="454-olap-algorithm-tasks">4.5.4 OLAP algorithm tasks&lt;/h5>
 &lt;p>There is no visual OLAP algorithm execution on Hubble. You can call the RESTful API to perform OLAP algorithm tasks, find the corresponding tasks by ID in the task management, and view the progress and results.&lt;/p>
@@ -2103,7 +2103,7 @@ error retry mechanism, etc., which reduces import costs and improves efficiency.
 &lt;img src="/docs/images/images-hubble/355任务详情.png" alt="image">
 &lt;/center></description></item><item><title>Docs: HugeGraph-Client Quick Start</title><link>/docs/quickstart/hugegraph-client/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-client/</guid><description>
 &lt;h3 id="1-overview-of-hugegraph">1 Overview Of Hugegraph&lt;/h3>
-&lt;p>&lt;a href="https://github.com/apache/hugegraph-toolchain">HugeGraph-Client&lt;/a> sends HTTP request to HugeGraph-Server to obtain and parse the execution result of Server.
+&lt;p>&lt;a href="https://github.com/apache/hugegraph-toolchain">HugeGraph-Client&lt;/a> sends HTTP request to HugeGraph-Server to get and parse the execution result of Server.
 We support HugeGraph-Client for Java/Go/&lt;a href="https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-python-client">Python&lt;/a> language.
 You can use &lt;a href="/cn/docs/clients/hugegraph-client">Client-API&lt;/a> to write code to operate HugeGraph, such as adding, deleting, modifying, and querying schema and graph data, or executing gremlin statements.&lt;/p>
 &lt;blockquote>
@@ -2111,14 +2111,14 @@ You can use &lt;a href="/cn/docs/clients/hugegraph-client">Client-API&lt;/a> to 
 &lt;/blockquote>
 &lt;h3 id="2-what-you-need">2 What You Need&lt;/h3>
 &lt;ul>
-&lt;li>Java 11 (also support Java 8)&lt;/li>
+&lt;li>Java 11 (also supports Java 8)&lt;/li>
 &lt;li>Maven 3.5+&lt;/li>
 &lt;/ul>
 &lt;h3 id="3-how-to-use">3 How To Use&lt;/h3>
 &lt;p>The basic steps to use HugeGraph-Client are as follows:&lt;/p>
 &lt;ul>
 &lt;li>Build a new Maven project by IDEA or Eclipse&lt;/li>
-&lt;li>Add HugeGraph-Client dependency in pom file;&lt;/li>
+&lt;li>Add HugeGraph-Client dependency in a pom file;&lt;/li>
 &lt;li>Create an object to invoke the interface of HugeGraph-Client&lt;/li>
 &lt;/ul>
 &lt;p>See the complete example in the following section for the detail.&lt;/p>
@@ -2127,7 +2127,7 @@ You can use &lt;a href="/cn/docs/clients/hugegraph-client">Client-API&lt;/a> to 
 &lt;p>Using IDEA or Eclipse to create the project:&lt;/p>
 &lt;ul>
 &lt;li>&lt;a href="http://www.vogella.com/tutorials/EclipseMaven/article.html">Build by Eclipse&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://vaadin.com/docs/-/part/framework/getting-started/getting-started-idea.html">Build by Intellij Idea&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://vaadin.com/docs/-/part/framework/getting-started/getting-started-idea.html">Build by IntelliJ IDEA&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h4 id="42-add-hugegraph-client-dependency-in-pom">4.2 Add Hugegraph-Client Dependency In POM&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">&amp;lt;dependencies&amp;gt;&lt;/span>
@@ -2135,7 +2135,7 @@ You can use &lt;a href="/cn/docs/clients/hugegraph-client">Client-API&lt;/a> to 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.hugegraph&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/groupId&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;artifactId&amp;gt;&lt;/span>hugegraph-client&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/artifactId&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">&amp;lt;!-- Update to the latest release version --&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;version&amp;gt;&lt;/span>1.3.0&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;version&amp;gt;&lt;/span>1.5.0&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/version&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;/dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/dependencies&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
@@ -2470,7 +2470,7 @@ Refer to detailed &lt;a href="https://hugegraph.apache.org/docs/quickstart/hugeg
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>After running the web demo, the config file &lt;code>.env&lt;/code> will be automatically generated at the path &lt;code>hugegraph-llm/.env&lt;/code>. Additionally, a prompt-related configuration file &lt;code>config_prompt.yaml&lt;/code> will also be generated at the path &lt;code>hugegraph-llm/src/hugegraph_llm/resources/demo/config_prompt.yaml&lt;/code>.&lt;/p>
-&lt;p>You can modify the content on the web page, and it will be automatically saved to the configuration file after the corresponding feature is triggered. You can also modify the file directly without restarting the web application; simply refresh the page to load your latest changes.&lt;/p>
+&lt;p>You can modify the content on the web page, and it will be automatically saved to the configuration file after the corresponding feature is triggered. You can also modify the file directly without restarting the web application; refresh the page to load your latest changes.&lt;/p>
 &lt;p>(Optional)To regenerate the config file, you can use &lt;code>config.generate&lt;/code> with &lt;code>-u&lt;/code> or &lt;code>--update&lt;/code>.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>python3 -m hugegraph_llm.config.generate --update
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
@@ -2496,7 +2496,7 @@ for guidance. (Hubble is a graph-analysis dashboard include data loading/schema 
 &lt;li>file: Upload file(s) which should be &lt;u>TXT&lt;/u> or &lt;u>.docx&lt;/u> (Multiple files can be selected together)&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>&lt;a href="https://hugegraph.apache.org/docs/clients/restful-api/schema/">Schema&lt;/a>: (Accept &lt;strong>2 types&lt;/strong>)
+&lt;li>&lt;a href="https://hugegraph.apache.org/docs/clients/restful-api/schema/">Schema&lt;/a>: (Except &lt;strong>2 types&lt;/strong>)
 &lt;ul>
 &lt;li>User-defined Schema (JSON format, follow the &lt;a href="https://github.com/apache/incubator-hugegraph-ai/blob/aff3bbe25fa91c3414947a196131be812c20ef11/hugegraph-llm/src/hugegraph_llm/config/config_data.py#L125">template&lt;/a>
 to modify it)&lt;/li>
@@ -2505,7 +2505,7 @@ to modify it)&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>Graph extract head: The user-defined prompt of graph extracting&lt;/li>
-&lt;li>If already exist the graph data, you should click &amp;ldquo;&lt;strong>Rebuild vid Index&lt;/strong>&amp;rdquo; to update the index&lt;/li>
+&lt;li>If it already exists the graph data, you should click &amp;ldquo;&lt;strong>Rebuild vid Index&lt;/strong>&amp;rdquo; to update the index&lt;/li>
 &lt;/ul>
 &lt;p>&lt;img src="/docs/images/gradio-kg.png" alt="gradio-config">&lt;/p>
 &lt;h4 id="412-build-a-knowledge-graph-through-code">4.1.2 Build a knowledge graph through code&lt;/h4>
@@ -3199,11 +3199,11 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph migrate --target-url http://127.0.0.1:8090 --target-graph hugegraph
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: HugeGraph-Computer Quick Start</title><link>/docs/quickstart/hugegraph-computer/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-computer/</guid><description>
 &lt;h2 id="1-hugegraph-computer-overview">1 HugeGraph-Computer Overview&lt;/h2>
-&lt;p>The &lt;a href="https://github.com/apache/incubator-hugegraph-computer">&lt;code>HugeGraph-Computer&lt;/code>&lt;/a> is a distributed graph processing system for HugeGraph (OLAP). It is an implementation of &lt;a href="https://kowshik.github.io/JPregel/pregel_paper.pdf">Pregel&lt;/a>. It runs on Kubernetes framework.&lt;/p>
+&lt;p>The &lt;a href="https://github.com/apache/incubator-hugegraph-computer">&lt;code>HugeGraph-Computer&lt;/code>&lt;/a> is a distributed graph processing system for HugeGraph (OLAP). It is an implementation of &lt;a href="https://kowshik.github.io/JPregel/pregel_paper.pdf">Pregel&lt;/a>. It runs on a Kubernetes framework.&lt;/p>
 &lt;h3 id="features">Features&lt;/h3>
 &lt;ul>
 &lt;li>Support distributed MPP graph computing, and integrates with HugeGraph as graph input/output storage.&lt;/li>
-&lt;li>Based on BSP(Bulk Synchronous Parallel) model, an algorithm performs computing through multiple parallel iterations, every iteration is a superstep.&lt;/li>
+&lt;li>Based on BSP (Bulk Synchronous Parallel) model, an algorithm performs computing through multiple parallel iterations, every iteration is a superstep.&lt;/li>
 &lt;li>Auto memory management. The framework will never be OOM(Out of Memory) since it will split some data to disk if it doesn&amp;rsquo;t have enough memory to hold all the data.&lt;/li>
 &lt;li>The part of edges or the messages of super node can be in memory, so you will never lose it.&lt;/li>
 &lt;li>You can load the data from HDFS or HugeGraph, or any other system.&lt;/li>
@@ -3245,7 +3245,7 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-computer.sh -d &lt;span style="color:#204a87">local&lt;/span> -r worker
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="315-query-algorithm-results">3.1.5 Query algorithm results&lt;/h4>
 &lt;p>3.1.5.1 Enable &lt;code>OLAP&lt;/code> index query for server&lt;/p>
-&lt;p>If OLAP index is not enabled, it needs to enable, more reference: &lt;a href="/docs/clients/restful-api/graphs/#634-modify-graphs-read-mode-this-operation-requires-administrator-privileges">modify-graphs-read-mode&lt;/a>&lt;/p>
+&lt;p>If OLAP index is not enabled, it needs to enable. More reference: &lt;a href="/docs/clients/restful-api/graphs/#634-modify-graphs-read-mode-this-operation-requires-administrator-privileges">modify-graphs-read-mode&lt;/a>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-http" data-lang="http">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&amp;#34;ALL&amp;#34;
@@ -3253,7 +3253,7 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl &lt;span style="color:#4e9a06">&amp;#34;http://localhost:8080/graphs/hugegraph/graph/vertices?page&amp;amp;limit=3&amp;#34;&lt;/span> &lt;span style="color:#000;font-weight:bold">|&lt;/span> gunzip
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="32-run-pagerank-algorithm-in-kubernetes">3.2 Run PageRank algorithm in Kubernetes&lt;/h3>
 &lt;blockquote>
-&lt;p>To run algorithm with HugeGraph-Computer you need to deploy HugeGraph-Server first&lt;/p>
+&lt;p>To run algorithm with HugeGraph-Computer, you need to deploy HugeGraph-Server first&lt;/p>
 &lt;/blockquote>
 &lt;h4 id="321-install-hugegraph-computer-crd">3.2.1 Install HugeGraph-Computer CRD&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Kubernetes version &amp;gt;= v1.16&lt;/span>
