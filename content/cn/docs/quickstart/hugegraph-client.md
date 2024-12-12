@@ -48,7 +48,7 @@ weight: 4
         <groupId>org.apache.hugegraph</groupId>
         <artifactId>hugegraph-client</artifactId>
         <!-- Update to the latest release version -->
-        <version>1.3.0</version>
+        <version>1.5.0</version>
     </dependency>
 </dependencies>
 ```

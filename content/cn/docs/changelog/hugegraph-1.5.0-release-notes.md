@@ -8,7 +8,7 @@ weight: 5
 
 ### 运行环境/版本说明
 
-1. 相较于 **1.3.0**，**1.5.0** 的 `hugegraph` 仅支持 Java 11
+1. 相较于 **1.3.0**，**1.5.0** 及后的 `hugegraph` 仅支持 Java 11
 
 PS: 未来 HugeGraph 组件的版本会朝着 `Java 11 -> Java 17 -> Java 21` 演进
 

@@ -99,9 +99,9 @@ After the authentication configuration completed, enter the **admin password** o
 
 If deployed based on Docker image or if HugeGraph has already been initialized and needs to be converted to authentication mode, 
 relevant graph data needs to be deleted and HugeGraph needs to be restarted. If there is already business data in the diagram, 
-it is temporarily **not possible** to directly convert the authentication mode (version<=1.2.0 )
+it is temporarily **not possible** to directly convert the authentication mode (version<=1.2.0)
 
-> Improvements for this feature have been included in the latest release (available in latest docker image), please refer to  [PR 2411](https://github.com/apache/incubator-hugegraph/pull/2411). Seamless switching is now available.
+> Improvements for this feature have been included in the latest release (available in the latest docker image), please refer to [PR 2411](https://github.com/apache/incubator-hugegraph/pull/2411). Seamless switching is now available.
 
 ```bash
 # stop the hugeGraph firstly
@@ -130,7 +130,7 @@ The steps are as follows:
 To enable authentication mode, add the environment variable `PASSWORD=123456` (you can freely set the password) in the `docker run` command:
 
 ```bash
-docker run -itd -e PASSWORD=123456 --name=server -p 8080:8080 hugegraph/hugegraph:1.3.0
+docker run -itd -e PASSWORD=123456 --name=server -p 8080:8080 hugegraph/hugegraph:1.5.0
 ```
 
 #### 2. Use docker-compose
@@ -141,7 +141,7 @@ Use `docker-compose` and set the environment variable `PASSWORD=123456`:
 version: '3'
 services:
   server:
-    image: hugegraph/hugegraph:1.2.0
+    image: hugegraph/hugegraph:1.5.0
     container_name: server
     ports:
       - 8080:8080

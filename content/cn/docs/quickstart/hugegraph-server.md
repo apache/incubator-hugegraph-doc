@@ -39,12 +39,12 @@ Core 模块是 Tinkerpop 接口的实现，Backend 模块用于管理数据存�
 
 可参考 [Docker 部署方式](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/docker/README.md)。
 
-我们可以使用 `docker run -itd --name=server -p 8080:8080 hugegraph/hugegraph:1.3.0` 去快速启动一个内置了 `RocksDB` 的 `Hugegraph server`.
+我们可以使用 `docker run -itd --name=server -p 8080:8080 hugegraph/hugegraph:1.5.0` 去快速启动一个内置了 `RocksDB` 的 `Hugegraph server`.
 
 可选项：
 
 1. 可以使用 `docker exec -it server bash` 进入容器完成一些操作
-2. 可以使用 `docker run -itd --name=server -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph:1.3.0` 在启动的时候预加载一个**内置的**样例图。可以通过 `RESTful API` 进行验证。具体步骤可以参考 [5.1.1](/cn/docs/quickstart/hugegraph-server/#511-%E5%90%AF%E5%8A%A8-server-%E7%9A%84%E6%97%B6%E5%80%99%E5%88%9B%E5%BB%BA%E7%A4%BA%E4%BE%8B%E5%9B%BE) 
+2. 可以使用 `docker run -itd --name=server -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph:1.5.0` 在启动的时候预加载一个**内置的**样例图。可以通过 `RESTful API` 进行验证。具体步骤可以参考 [5.1.1](/cn/docs/quickstart/hugegraph-server/#511-%E5%90%AF%E5%8A%A8-server-%E7%9A%84%E6%97%B6%E5%80%99%E5%88%9B%E5%BB%BA%E7%A4%BA%E4%BE%8B%E5%9B%BE) 
 3. 可以使用 `-e PASSWORD=123456` 设置是否开启鉴权模式以及 admin 的密码，具体步骤可以参考 [Config Authentication](/cn/docs/config/config-authentication#使用-docker-时开启鉴权模式) 
 
 如果使用 docker desktop，则可以按照如下的方式设置可选项：
@@ -59,7 +59,7 @@ Core 模块是 Tinkerpop 接口的实现，Backend 模块用于管理数据存�
 version: '3'
 services:
   server:
-    image: hugegraph/hugegraph:1.3.0
+    image: hugegraph/hugegraph:1.5.0
     container_name: server
     # environment:
     #  - PRELOAD=true 为可选参数，为 True 时可以在启动的时候预加载一个内置的样例图
@@ -72,12 +72,12 @@ services:
 > 
 > 1. hugegraph 的 docker 镜像是一个便捷版本，用于快速启动 hugegraph，并不是**官方发布物料包方式**。你可以从 [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub) 中得到更多细节。
 >
-> 2. 推荐使用 `release tag` (如 `1.3.0/1.5.0`) 以获取稳定版。使用 `latest` tag 可以使用开发中的最新功能。
+> 2. 推荐使用 `release tag` (如 `1.5.0/1.x.0`) 以获取稳定版。使用 `latest` tag 可以使用开发中的最新功能。
 
 #### 3.2 下载 tar 包
 
 ```bash
-# use the latest version, here is 1.3.0 for example
+# use the latest version, here is 1.5.0 for example
 wget https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph-incubating-{version}.tar.gz
 tar zxf *hugegraph*.tar.gz
 ```
@@ -104,7 +104,7 @@ mvn package -DskipTests
 
 ```bash
 ......
-[INFO] Reactor Summary for hugegraph 1.3.0:
+[INFO] Reactor Summary for hugegraph 1.5.0:
 [INFO] 
 [INFO] hugegraph .......................................... SUCCESS [  2.405 s]
 [INFO] hugegraph-core ..................................... SUCCESS [ 13.405 s]
@@ -132,8 +132,8 @@ mvn package -DskipTests
 HugeGraph-Tools 提供了一键部署的命令行工具，用户可以使用该工具快速地一键下载、解压、配置并启动 HugeGraph-Server 和 HugeGraph-Hubble，最新的 HugeGraph-Toolchain 中已经包含所有的这些工具，直接下载它解压就有工具包集合了
 
 ```bash
-# download toolchain package, it includes loader + tool + hubble, please check the latest version (here is 1.3.0)
-wget https://downloads.apache.org/incubator/hugegraph/1.3.0/apache-hugegraph-toolchain-incubating-1.3.0.tar.gz
+# download toolchain package, it includes loader + tool + hubble, please check the latest version (here is 1.5.0)
+wget https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-toolchain-incubating-1.5.0.tar.gz
 tar zxf *hugegraph-*.tar.gz
 # enter the tool's package
 cd *hugegraph*/*tool* 
@@ -516,7 +516,7 @@ volumes:
 
 1. 使用`docker run`
 
-    使用 `docker run -itd --name=server -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:1.3.0`
+    使用 `docker run -itd --name=server -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:1.5.0`
 
 2. 使用`docker-compose`
 
@@ -526,7 +526,7 @@ volumes:
     version: '3'
       services:
         server:
-          image: hugegraph/hugegraph:1.3.0
+          image: hugegraph/hugegraph:1.5.0
           container_name: server
           environment:
             - PRELOAD=true

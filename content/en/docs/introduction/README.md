@@ -31,7 +31,7 @@ The functions of this system include but are not limited to:
 - Supports batch import of data from multiple data sources (including local files, HDFS files, MySQL databases, and other data sources), and supports import of multiple file formats (including TXT, CSV, JSON, and other formats)
 - With a visual operation interface, it can be used for operation, analysis, and display diagrams, reducing the threshold for users to use
 - Optimized graph interface: shortest path (Shortest Path), K-step connected subgraph (K-neighbor), K-step to reach the adjacent point (K-out), personalized recommendation algorithm PersonalRank, etc.
-- Implemented based on Apache TinkerPop3 framework, supports Gremlin graph query language
+- Implemented based on the Apache TinkerPop3 framework, supports Gremlin graph query language
 - Support attribute graph, attributes can be added to vertices and edges, and support rich attribute types
 - Has independent schema metadata information, has powerful graph modeling capabilities, and facilitates third-party system integration
 - Support multi-vertex ID strategy: support primary key ID, support automatic ID generation, support user-defined string ID, support user-defined digital ID
@@ -44,8 +44,8 @@ The functions of this system include but are not limited to:
 
 - [HugeGraph-Server](/docs/quickstart/hugegraph-server): HugeGraph-Server is the core part of the HugeGraph project, containing Core, Backend, API and other submodules;
   - Core: Implements the graph engine, connects to the Backend module downwards, and supports the API module upwards;
-  - Backend: Implements the storage of graph data to the backend, supports backends including: Memory, Cassandra, ScyllaDB, RocksDB, HBase, MySQL and PostgreSQL, users can choose one according to the actual situation;
-  - API: Built-in REST Server, provides RESTful API to users, and is fully compatible with Gremlin queries. (Supports distributed storage and computation pushdown)
+  - Backend: Implements the storage of graph data to the backend, supports backends including Memory, Cassandra, ScyllaDB, RocksDB, HBase, MySQL and PostgreSQL, users can choose one according to the actual situation;
+  - API: Built-in REST Server provides RESTful API to users and is fully compatible with Gremlin queries. (Supports distributed storage and computation pushdown)
 - [HugeGraph-Toolchain](https://github.com/apache/hugegraph-toolchain): (Toolchain)
   - [HugeGraph-Client](/docs/quickstart/hugegraph-client): HugeGraph-Client provides a RESTful API client for connecting to HugeGraph-Server, currently only the Java version is implemented, users of other languages can implement it themselves;
   - [HugeGraph-Loader](/docs/quickstart/hugegraph-loader): HugeGraph-Loader is a data import tool based on HugeGraph-Client, which transforms ordinary text data into vertices and edges of the graph and inserts them into the graph database;
