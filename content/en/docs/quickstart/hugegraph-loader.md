@@ -10,7 +10,7 @@ HugeGraph-Loader is the data import component of HugeGraph, which can convert da
 
 Currently supported data sources include:
 - Local disk file or directory, supports TEXT, CSV and JSON format files, supports compressed files
-- HDFS file or directory, supports compressed files
+- HDFS file or directory supports compressed files
 - Mainstream relational databases, such as MySQL, PostgreSQL, Oracle, SQL Server
 
 Local disk files and HDFS files support resumable uploads.
@@ -29,7 +29,7 @@ There are two ways to get HugeGraph-Loader:
 
 #### 2.1 Use Docker image (Convenient for Test/Dev)
 
-We can deploy the loader service using `docker run -itd --name loader hugegraph/loader:1.3.0`. For the data that needs to be loaded, it can be copied into the loader container either by mounting `-v /path/to/data/file:/loader/file` or by using `docker cp`.
+We can deploy the loader service using `docker run -itd --name loader hugegraph/loader:1.5.0`. For the data that needs to be loaded, it can be copied into the loader container either by mounting `-v /path/to/data/file:/loader/file` or by using `docker cp`.
 
 Alternatively, to start the loader using docker-compose, the command is `docker-compose up -d`. An example of the docker-compose.yml is as follows:
 
@@ -56,7 +56,7 @@ The specific data loading process can be referenced under [4.5 User Docker to lo
 > Note: 
 > 1. The docker image of hugegraph-loader is a convenience release to start hugegraph-loader quickly, but not **official distribution** artifacts. You can find more details from [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub).
 > 
-> 2. Recommand to use `release tag`(like `1.2.0`) for the stable version. Use `latest` tag to experience the newest functions in development.
+> 2. Recommend to use `release tag`(like `1.5.0`) for the stable version. Use `latest` tag to experience the newest functions in development.
 
 #### 2.2 Download the compiled archive
 
@@ -159,7 +159,7 @@ The data sources currently supported by HugeGraph-Loader include:
 
 The user can specify a local disk file as the data source. If the data is scattered in multiple files, a certain directory is also supported as the data source, but multiple directories are not supported as the data source for the time being.
 
-For example: my data is scattered in multiple files, part-0, part-1 ... part-n. To perform the import, it must be ensured that they are placed in one directory. Then in the loader's mapping file, specify `path` as the directory.
+For example, my data is scattered in multiple files, part-0, part-1 ... part-n. To perform the import, it must be ensured that they are placed in one directory. Then in the loader's mapping file, specify `path` as the directory.
 
 Supported file formats include:
 
@@ -199,11 +199,11 @@ Currently supported compressed file types include: GZIP, BZ2, XZ, LZMA, SNAPPY_R
 
 ###### 3.2.1.3 Mainstream relational database
 
-The loader also supports some relational databases as data sources, and currently supports MySQL, PostgreSQL, Oracle and SQL Server.
+The loader also supports some relational databases as data sources, and currently supports MySQL, PostgreSQL, Oracle, and SQL Server.
 
 However, the requirements for the table structure are relatively strict at present. If **association query** needs to be done during the import process, such a table structure is not allowed. The associated query means: after reading a row of the table, it is found that the value of a certain column cannot be used directly (such as a foreign key), and you need to do another query to determine the true value of the column.
 
-For example: Suppose there are three tables, person, software and created
+For example, Suppose there are three tables, person, software and created
 
 ```
 // person schema
@@ -274,9 +274,9 @@ The mapping file of the input source is used to describe how to establish the ma
 
 Specifically, each mapping block contains **an input source** and multiple **vertex mapping** and **edge mapping** blocks, and the input source block corresponds to the `local disk file or directory`, ` HDFS file or directory` and `relational database` are responsible for describing the basic information of the data source, such as where the data is, what format, what is the delimiter, etc. The vertex map/edge map is bound to the input source, which columns of the input source can be selected, which columns are used as ids, which columns are used as attributes, and what attributes are mapped to each column, the values ​​of the columns are mapped to what values ​​of attributes, and so on.
 
-In the simplest terms, each mapping block describes: where is the file to be imported, which type of vertices/edges each line of the file is to be used as, which columns of the file need to be imported, and the corresponding vertices/edges of these columns. what properties etc.
+In the simplest terms, each mapping block describes: where is the file to be imported, which type of vertices/edges each line of the file is to be used as which columns of the file need to be imported, and the corresponding vertices/edges of these columns. what properties, etc.
 
-> Note: The format of the mapping file before version 0.11.0 and the format after 0.11.0 has changed greatly. For the convenience of expression, the mapping file (format) before 0.11.0 is called version 1.0, and the version after 0.11.0 is version 2.0 . And unless otherwise specified, the "map file" refers to version 2.0.
+> Note: The format of the mapping file before version 0.11.0 and the format after 0.11.0 has changed greatly. For the convenience of expression, the mapping file (format) before 0.11.0 is called version 1.0, and the version after 0.11.0 is version 2.0. And unless otherwise specified, the "map file" refers to version 2.0.
 
 
 
@@ -310,7 +310,7 @@ In the simplest terms, each mapping block describes: where is the file to be imp
 Two versions of the mapping file are given directly here (the above graph model and data file are described)
 
 <details>
-<summary>Click to expand/collapse mapping file for version 2.0</summary>
+<summary>Click to expand/collapse the mapping file for version 2.0</summary>
 
 ```json
 {
@@ -518,7 +518,7 @@ Two versions of the mapping file are given directly here (the above graph model 
 <br/>
 
 <details>
-<summary>Click to expand/collapse mapping file for version 1.0</summary>
+<summary>Click to expand/collapse the mapping file for version 1.0</summary>
 
 ```json
 {
@@ -578,7 +578,7 @@ Two versions of the mapping file are given directly here (the above graph model 
 </details>
 <br/>
 
-The 1.0 version of the mapping file is centered on the vertex and edge, and sets the input source; while the 2.0 version is centered on the input source, and sets the vertex and edge mapping. Some input sources (such as a file) can generate both vertices and edges. If you write in the 1.0 format, you need to write an input block in each of the vertex and edge mapping blocks. The two input blocks are exactly the same ; and the 2.0 version only needs to write input once. Therefore, compared with version 1.0, version 2.0 can save some repetitive writing of input.
+The 1.0 version of the mapping file is centered on the vertex and edge, and sets the input source; while the 2.0 version is centered on the input source, and sets the vertex and edge mapping. Some input sources (such as a file) can generate both vertices and edges. If you write in the 1.0 format, you need to write an input block in each of the vertex and edge mapping blocks. The two input blocks are exactly the same; and the 2.0 version only needs to write input once. Therefore, compared with version 1.0, version 2.0 can save some repetitive writing of input.
 
 In the bin directory of hugegraph-loader-{version}, there is a script tool `mapping-convert.sh` that can directly convert the mapping file of version 1.0 to version 2.0. The usage is as follows:
 
@@ -597,7 +597,7 @@ Input sources are currently divided into four categories: FILE, HDFS, JDBC and K
 - id: The id of the input source. This field is used to support some internal functions. It is not required (it will be automatically generated if it is not filled in). It is strongly recommended to write it, which is very helpful for debugging;
 - skip: whether to skip the input source, because the JSON file cannot add comments, if you do not want to import an input source during a certain import, but do not want to delete the configuration of the input source, you can set it to true to skip it, the default is false, not required;
 - input: input source map block, composite structure
-    - type: input source type, file or FILE must be filled;
+    - type: an input source type, file or FILE must be filled;
     - path: the path of the local file or directory, the absolute path or the relative path relative to the mapping file, it is recommended to use the absolute path, required;
     - file_filter: filter files with compound conditions from `path`, compound structure, currently only supports configuration extensions, represented by child node `extensions`, the default is "*", which means to keep all files;
     - format: the format of the local file, the optional values ​​are CSV, TEXT and JSON, which must be uppercase and required;               
@@ -689,7 +689,7 @@ schema: required
 - delimiter: delimiter of the file line, default is comma "," as delimiter, JSON files do not need to specify, optional;
 - charset: encoding charset of the file, default is UTF-8, optional;
 - date_format: customized date format, default value is yyyy-MM-dd HH:mm:ss, optional; if the date is presented in the form of timestamp, this item must be written as timestamp (fixed);
-- extra_date_formats: a customized list of other date formats, empty by default, optional; each item in the list is an alternate date format to the date_format specified date format;
+- extra_date_formats: a customized list of another date formats, empty by default, optional; each item in the list is an alternate date format to the date_format specified date format;
 - time_zone: set which time zone the date data is in, default is GMT+8, optional;
 - skipped_line: the line you want to skip, composite structure, currently can only configure the regular expression of the line to be skipped, described by the child node regex, the default is not to skip any line, optional;
 - early_stop: the record pulled from Kafka broker at a certain time is empty, stop the task, default is false, only for debugging, optional;
@@ -819,7 +819,7 @@ Sibling `struct-example/load-progress 2019-10-10 12:30:30`.
 
 > Note: The generation of progress files is independent of whether --incremental-mode is turned on or not, and a progress file is generated at the end of each import.
 
-If the data file formats are all legal and the import task is stopped by the user (CTRL + C or kill, kill -9 is not supported), that is to say, if there is no error record, the next import only needs to be set
+If the data file formats are all legal and the import task is stopped by the user (CTRL + C or kill, kill -9 is not supported), that is to say, if there is no error record, the next import only needs to be set to 
 Continue for the breakpoint.
 
 But if the limit of --max-parse-errors or --max-insert-errors is reached because too much data is invalid or network abnormality is reached, Loader will record these original rows that failed to insert into
@@ -827,7 +827,7 @@ In the failed file, after the user modifies the data lines in the failed file, s
 Of course, if there is still a problem with the modified data line, it will be logged again to the failure file (don't worry about duplicate lines).
 
 Each vertex map or edge map will generate its own failure file when data insertion fails. The failure file is divided into a parsing failure file (suffix .parse-error) and an insertion failure file (suffix .insert-error).
-They are stored in the `${struct}/current` directory. For example, there is a vertex mapping person and an edge mapping knows in the mapping file, each of which has some error lines. When the Loader exits, you will see the following files in the `${struct}/current` directory:
+They are stored in the `${struct}/current` directory. For example, there is a vertex mapping person, and an edge mapping knows in the mapping file, each of which has some error lines. When the Loader exits, you will see the following files in the `${struct}/current` directory:
 
 - person-b4cd32ab.parse-error: Vertex map person parses wrong data
 - person-b4cd32ab.insert-error: Vertex map person inserts wrong data
@@ -838,7 +838,7 @@ They are stored in the `${struct}/current` directory. For example, there is a ve
 
 ##### 3.4.3 logs directory file description
 
-The log and error data during program execution will be written into hugegraph-loader.log file.
+The log and error data during program execution will be written into the hugegraph-loader.log file.
 
 ##### 3.4.4 Execute command
 
@@ -892,7 +892,7 @@ Edge file: `example/file/edge_created.json`
 #### 4.2 Write schema
 
 <details>
-<summary>Click to expand/collapse schema file: example/file/schema.groovy</summary>
+<summary>Click to expand/collapse the schema file: example/file/schema.groovy</summary>
 
 ```groovy
 schema.propertyKey("name").asText().ifNotExist().create();
@@ -1026,7 +1026,7 @@ If you just want to try out the loader, you can import the built-in example data
 
 If using custom data, before importing data with the loader, we need to copy the data into the container.
 
-First, following the steps in [4.1-4.3](#41-prepare-data), we can prepare the data and then use `docker cp` to copy the prepared data into the loader container.
+First, following the steps in [4.1–4.3](#41-prepare-data), we can prepare the data and then use `docker cp` to copy the prepared data into the loader container.
 
 Suppose we've prepared the corresponding dataset following the above steps, stored in the `hugegraph-dataset` folder with the following file structure:
 
@@ -1055,9 +1055,9 @@ edge_created.json  edge_knows.json  schema.groovy  struct.json  vertex_person.cs
 
 Taking the built-in example dataset as an example, we can use the following command to load the data.
 
-If you need to import your custom dataset, you just need to modify the paths for `-f` (data script) and `-s` (schema) configurations.
+If you need to import your custom dataset, you need to modify the paths for `-f` (data script) and `-s` (schema) configurations.
 
-"You can refer to [3.4.1 Parameter description](#341-parameter-description) for the rest of the parameters.
+You can refer to [3.4.1-Parameter description](#341-parameter-description) for the rest of the parameters.
 
 ```bash
 docker exec -it loader bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/file/schema.groovy -h server -p 8080
@@ -1071,7 +1071,7 @@ docker exec -it loader bin/hugegraph-loader.sh -g hugegraph -f /loader/dataset/s
 
 > If `loader` and `server` are in the same Docker network, you can specify `-h {server_container_name}`; otherwise, you need to specify the IP of the `server` host (in our example, `server_container_name` is `server`).
 
-Then we can obverse the result:
+Then we can see the result:
 
 ```bash
 HugeGraphLoader worked in NORMAL MODE
@@ -1125,7 +1125,7 @@ The results of the execution will be similar to those shown in [4.5.1](#451-use-
 > HugeGraph Toolchain version: toolchain-1.0.0
 > 
 The parameters of `spark-loader` are divided into two parts. Note: Because the abbreviations of 
-these two parameter names have overlapping parts, please use the full name of the parameter. 
+these two-parameter names have overlapping parts, please use the full name of the parameter. 
 And there is no need to guarantee the order between the two parameters.
 - hugegraph parameters (Reference: [hugegraph-loader parameter description](https://hugegraph.apache.org/docs/quickstart/hugegraph-loader/#341-parameter-description) )
 - Spark task submission parameters (Reference: [Submitting Applications](https://spark.apache.org/docs/3.3.0/submitting-applications.html#content))

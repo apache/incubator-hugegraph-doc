@@ -50,7 +50,7 @@ with large models, integration with graph machine learning components, etc., to 
 
 7. After running the web demo, the config file `.env` will be automatically generated at the path `hugegraph-llm/.env`.    Additionally, a prompt-related configuration file `config_prompt.yaml` will also be generated at the path `hugegraph-llm/src/hugegraph_llm/resources/demo/config_prompt.yaml`.
 
-    You can modify the content on the web page, and it will be automatically saved to the configuration file after the corresponding feature is triggered.  You can also modify the file directly without restarting the web application;  simply refresh the page to load your latest changes.
+    You can modify the content on the web page, and it will be automatically saved to the configuration file after the corresponding feature is triggered.  You can also modify the file directly without restarting the web application; refresh the page to load your latest changes.
 
     (Optional)To regenerate the config file, you can use `config.generate` with `-u` or `--update`.
     ```bash
@@ -77,13 +77,13 @@ with large models, integration with graph machine learning components, etc., to 
 - Docs:
   - text: Build rag index from plain text
   - file: Upload file(s) which should be <u>TXT</u> or <u>.docx</u> (Multiple files can be selected together)
-- [Schema](https://hugegraph.apache.org/docs/clients/restful-api/schema/): (Accept **2 types**)
+- [Schema](https://hugegraph.apache.org/docs/clients/restful-api/schema/): (Except **2 types**)
   - User-defined Schema (JSON format, follow the [template](https://github.com/apache/incubator-hugegraph-ai/blob/aff3bbe25fa91c3414947a196131be812c20ef11/hugegraph-llm/src/hugegraph_llm/config/config_data.py#L125) 
   to modify it)
   - Specify the name of the HugeGraph graph instance, it will automatically get the schema from it (like 
   **"hugegraph"**)
 - Graph extract head: The user-defined prompt of graph extracting
-- If already exist the graph data, you should click "**Rebuild vid Index**" to update the index
+- If it already exists the graph data, you should click "**Rebuild vid Index**" to update the index
 
 ![gradio-config](/docs/images/gradio-kg.png)
 
