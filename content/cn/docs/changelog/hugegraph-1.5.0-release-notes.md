@@ -8,13 +8,13 @@ weight: 5
 
 ### 运行环境/版本说明
 
-1. 相较于 **1.3.0**，**1.5.0** 及后的 `hugegraph` 仅支持 Java 11
+1. **1.5.0**版开始， `hugegraph` 相关组件仅支持 Java 11 编译/运行环境 
 
 PS: 未来 HugeGraph 组件的版本会朝着 `Java 11 -> Java 17 -> Java 21` 演进
 
 ### hugegraph
 
-> 本版本新增了大量功能并进行了多项优化，尤其是针对分布式版本新后端 HStore 的支持
+> 本版本新增了大量功能并进行了多项优化，尤其是针对自控分布式版本新后端 HStore (Raft + RocksDB) 的实现支持，欢迎试用反馈
 
 #### API Changes
 
@@ -75,7 +75,7 @@ PS: 未来 HugeGraph 组件的版本会朝着 `Java 11 -> Java 17 -> Java 21` �
 - Support English interface & add a script/doc for it in Hubble [#631](https://github.com/apache/incubator-hugegraph-toolchain/pull/631)
 
 #### Bug Fixes
-- Serialize source and target label for non-father edge label [#628](https://github.com/apache/incubator-hugegraph-toolchain/pull/628)
+- Serialize source and target label for non-father EdgeLabel [#628](https://github.com/apache/incubator-hugegraph-toolchain/pull/628)
 - Encode/decode Chinese error after building Hubble package [#627](https://github.com/apache/incubator-hugegraph-toolchain/pull/627)
 - Configure IPv4 to fix timeout of `yarn install` in Hubble [#636](https://github.com/apache/incubator-hugegraph-toolchain/pull/636)
 - Remove debugging output to speed up the frontend construction in Hubble [#638](https://github.com/apache/incubator-hugegraph-toolchain/pull/638)
@@ -111,7 +111,7 @@ PS: 未来 HugeGraph 组件的版本会朝着 `Java 11 -> Java 17 -> Java 21` �
 #### Bug Fixes
 
 - Fixed fusiform_similarity test in traverser for server 1.3.0. [#37](https://github.com/apache/incubator-hugegraph-ai/pull/37)
-- Avoided generating config twice and corrected e_cache type. [#56](https://github.com/apache/incubator-hugegraph-ai/pull/56), [#117](https://github.com/apache/incubator-hugegraph-ai/pull/117)
+- Avoid generating config twice and corrected e_cache type. [#56](https://github.com/apache/incubator-hugegraph-ai/pull/56), [#117](https://github.com/apache/incubator-hugegraph-ai/pull/117)
 - Fixed null value detection on vid attributes. [#115](https://github.com/apache/incubator-hugegraph-ai/pull/115)
 - Handled profile regenerate error. [#98](https://github.com/apache/incubator-hugegraph-ai/pull/98)
 
@@ -123,7 +123,7 @@ PS: 未来 HugeGraph 组件的版本会朝着 `Java 11 -> Java 17 -> Java 21` �
 #### Other Changes
 
 - Reformatted documentation and updated README. [#36](https://github.com/apache/incubator-hugegraph-ai/pull/36), [#81](https://github.com/apache/incubator-hugegraph-ai/pull/81)
-- Introduced black for code format in GitHub actions. [#47](https://github.com/apache/incubator-hugegraph-ai/pull/47)
+- Introduced a black for code format in GitHub actions. [#47](https://github.com/apache/incubator-hugegraph-ai/pull/47)
 - Updated dependencies and environment preparations. [#45](https://github.com/apache/incubator-hugegraph-ai/pull/45), [#65](https://github.com/apache/incubator-hugegraph-ai/pull/65)
 - Enhanced user-friendly README. [#82](https://github.com/apache/incubator-hugegraph-ai/pull/82)
 
