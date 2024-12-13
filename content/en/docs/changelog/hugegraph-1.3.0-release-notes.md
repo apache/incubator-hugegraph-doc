@@ -104,8 +104,6 @@ PS: In the future, we will gradually upgrade the java version from `Java 11 -> J
 
 * chore: disable clean flatten for deploy ([#141](https://github.com/apache/incubator-hugegraph-commons/pull/141))
 
-### Release Details
-
 ### hugegraph-ai
 
 
@@ -151,6 +149,8 @@ and the addition of basic CI further enhance the project's robustness and develo
 * chore: Update LICENSE and NOTICE ([#31](https://github.com/apache/incubator-hugegraph-ai/pull/31))
 * chore: add release scripts ([#33](https://github.com/apache/incubator-hugegraph-ai/pull/33))
 * chore: change file chmod 755 ([#34](https://github.com/apache/incubator-hugegraph-ai/pull/34))
+
+### Release Details
 
 Please check the release details/contributor in each repository:
 

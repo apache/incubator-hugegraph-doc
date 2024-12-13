@@ -100,8 +100,6 @@ PS: 未来 HugeGraph 组件的版本会朝着 `Java 11 -> Java 17 -> Java 21` �
 
 * chore: disable clean flatten for deploy ([#141](https://github.com/apache/incubator-hugegraph-commons/pull/141))
 
-### Release Details
-
 ### hugegraph-ai
 
 这是 hugegraph-ai 的第一个发布版本，包含了多种特性，其中包括初始化的 Python 客户端、通过 LLM 构建知识图谱的能力，
@@ -141,6 +139,8 @@ PS: 未来 HugeGraph 组件的版本会朝着 `Java 11 -> Java 17 -> Java 21` �
 * chore: Update LICENSE and NOTICE ([#31](https://github.com/apache/incubator-hugegraph-ai/pull/31))
 * chore: add release scripts ([#33](https://github.com/apache/incubator-hugegraph-ai/pull/33))
 * chore: change file chmod 755 ([#34](https://github.com/apache/incubator-hugegraph-ai/pull/34))
+
+### 发布细节
 
 Please check the release details/contributor in each repository:
 
