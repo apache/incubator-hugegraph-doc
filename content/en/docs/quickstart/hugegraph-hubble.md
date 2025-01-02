@@ -7,9 +7,9 @@ weight: 3
 ### 1 HugeGraph-Hubble Overview
 
 > **Note:** The current version of Hubble has not yet added Auth/Login related interfaces and 
-> standalone protection, it will be added in the next Release version (≥ 1.5). 
+> standalone protection, it will be added in the next Release version (＞ 1.5). 
 > Please be careful not to expose it in a public network environment or untrusted networks to 
-> avoid related SEC issues (you can also use IP & port whitelist + HTTPS)
+> avoid related SEC issues (you can also use IP & port **whitelist** + HTTPS)
 
 **HugeGraph-Hubble** is HugeGraph's one-stop visual analysis platform. The platform covers the whole 
 process from data modeling, to efficient data import, to real-time and offline analysis of data, and 
