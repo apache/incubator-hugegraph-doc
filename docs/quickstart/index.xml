@@ -1645,9 +1645,9 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;h3 id="1-hugegraph-hubble-overview">1 HugeGraph-Hubble Overview&lt;/h3>
 &lt;blockquote>
 &lt;p>&lt;strong>Note:&lt;/strong> The current version of Hubble has not yet added Auth/Login related interfaces and
-standalone protection, it will be added in the next Release version (≥ 1.5).
+standalone protection, it will be added in the next Release version (＞ 1.5).
 Please be careful not to expose it in a public network environment or untrusted networks to
-avoid related SEC issues (you can also use IP &amp;amp; port whitelist + HTTPS)&lt;/p>
+avoid related SEC issues (you can also use IP &amp;amp; port &lt;strong>whitelist&lt;/strong> + HTTPS)&lt;/p>
 &lt;/blockquote>
 &lt;p>&lt;strong>HugeGraph-Hubble&lt;/strong> is HugeGraph&amp;rsquo;s one-stop visual analysis platform. The platform covers the whole
 process from data modeling, to efficient data import, to real-time and offline analysis of data, and

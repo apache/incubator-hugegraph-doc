@@ -7608,8 +7608,8 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/blockquote></description></item><item><title>Docs: HugeGraph-Hubble Quick Start</title><link>/cn/docs/quickstart/hugegraph-hubble/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-hubble/</guid><description>
 &lt;h3 id="1-hugegraph-hubble-概述">1 HugeGraph-Hubble 概述&lt;/h3>
 &lt;blockquote>
-&lt;p>&lt;strong>注:&lt;/strong> 当前版本的 Hubble 还没有添加 Auth/Login 相关界面和接口和单独防护, 在下一个 Release 版 (≥ 1.5) 会加入,
-请留意避免把它暴露在公网环境或不受信任的网络中，以免引起相关 SEC 问题 (另外也可以使用 IP &amp;amp; 端口白名单 + HTTPS)&lt;/p>
+&lt;p>&lt;strong>特别注意:&lt;/strong> 当前版本的 Hubble 还没有添加 Auth/Login 相关界面和接口和单独防护, 在下一个 Release 版 (＞ 1.5) 会加入,
+请留意避免把它暴露在公网环境或不受信任的网络中，以免引起相关 SEC 问题 (另外也可以使用 &lt;strong>IP &amp;amp; 端口&lt;/strong>白名单 + HTTPS)&lt;/p>
 &lt;/blockquote>
 &lt;p>&lt;strong>HugeGraph-Hubble&lt;/strong> 是 HugeGraph 的一站式可视化分析平台，平台涵盖了从数据建模，到数据快速导入，
 再到数据的在线、离线分析、以及图的统一管理的全过程，实现了图应用的全流程向导式操作，旨在提升用户的使用流畅度，
