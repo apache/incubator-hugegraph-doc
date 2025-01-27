@@ -6,6 +6,7 @@ weight: 3
 
 ### 1 HugeGraph-Hubble 概述
 
+
 [//]: # (> **注:** 当前版本的 Hubble 还没有添加 Auth/Login 相关界面和接口和单独防护, 在下一个 Release 版 &#40;≥ 1.5&#41; 会加入, )
 
 [//]: # (>TODO 对文档进行更新)
@@ -59,7 +60,7 @@ weight: 3
 >
 > 若 hubble 和 server 在同一 docker 网络下，**推荐**直接使用`container_name` (如下例的 `server`) 作为主机名。或者也可以使用 **宿主机 IP** 作为主机名，此时端口号为宿主机给 server 配置的端口
 
-我们可以使用 `docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble` 快速启动 [hubble](https://hub.docker.com/r/hugegraph/hubble).
+我们可以使用 `docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble:1.5.0` 快速启动 [hubble](https://hub.docker.com/r/hugegraph/hubble).
 
 或者使用 docker-compose 启动 hubble，另外如果 hubble 和 server 在同一个 docker 网络下，可以使用 server 的 contain_name 进行访问，而不需要宿主机的 ip
 
@@ -69,13 +70,13 @@ weight: 3
 version: '3'
 services:
   server:
-    image: hugegraph/hugegraph
+    image: hugegraph/hugegraph:1.5.0
     container_name: server
     ports:
       - 8080:8080
 
   hubble:
-    image: hugegraph/hubble
+    image: hugegraph/hubble:1.5.0
     container_name: hubble
     ports:
       - 8088:8088
@@ -85,7 +86,7 @@ services:
 >
 > 1. `hugegraph-hubble` 的 docker 镜像是一个便捷发布版本，用于快速测试试用 hubble，并非**ASF 官方发布物料包的方式**。你可以从 [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub) 中得到更多细节。
 >
-> 2. **生产环境**推荐使用 `release tag`(如 `1.2.0`) 稳定版。使用 `latest` tag 默认对应 master 最新代码。
+> 2. **生产环境**推荐使用 `release tag`(如 `1.5.0`) 稳定版。使用 `latest` tag 默认对应 master 最新代码。
 
 #### 2.2 下载 toolchain 二进制包
 
