@@ -1,5 +1,5 @@
 ---
-title: "HugeGraph-Computer Quick Start"
+title: "HugeGraph-Vermeer Quick Start"
 linkTitle: "使用 Vermeer 计算框架"
 weight: 8
 ---
@@ -35,8 +35,9 @@ msater是负责通信、转发、汇总的节点，计算量和占用资源量�
 
 request示例：
 
-```
-POST http://10.81.116.77:8688/tasks/create
+```javascript
+
+POST http://localhost:8688/tasks/create
 {
  "task_type": "load",
  "graph": "testdb",
