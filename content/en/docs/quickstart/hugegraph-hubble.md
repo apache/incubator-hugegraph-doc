@@ -28,7 +28,7 @@ The metadata modeling module realizes the construction and management of graph m
 
 ##### Graph Analysis
 
-By inputting the graph traversal language Gremlin, high-performance general analysis of graph data can be realized, and functions such as customized multidimensional path query of vertices can be provided, and three kinds of graph result display methods are provided, including: graph form, table form, Json form, and multidimensional display. The data form meets the needs of various scenarios used by users. It provides functions such as running records and collection of common statements, realizing the traceability of graph operations, and the reuse and sharing of query input, which is fast and efficient. It supports the export of graph data, and the export format is Json format.
+By inputting the graph traversal language Gremlin, high-performance general analysis of graph data can be realized, and functions such as customized multidimensional path query of vertices can be provided, and three kinds of graph result display methods are provided, including: graph form, table form, Json form, and multidimensional display. The data form meets the needs of various scenarios used by users. It provides functions such as running records and collection of common statements, realizing the traceability of graph operations, and the reuse and sharing of query input, which is fast and efficient. It supports the export of graph data, and the export format is JSON format.
 
 ##### Task Management
 
@@ -66,7 +66,7 @@ There are three ways to deploy `hugegraph-hubble`
 
 We can use `docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble` to quick start [hubble](https://hub.docker.com/r/hugegraph/hubble).
 
-Alternatively, you can use Docker Compose to start `hubble`. Additionally, if `hubble` and the graph are in the same Docker network, you can access the graph using the container name of the graph, eliminating the need for the host machine's IP address.
+Alternatively, you can use Docker Compose to start `hubble`. Additionally, if `hubble` and the graph is in the same Docker network, you can access the graph using the container name of the graph, eliminating the need for the host machine's IP address.
 
 Use `docker-compose up -d`，`docker-compose.yml` is following:
 
@@ -148,7 +148,7 @@ Run `hubble`
 bin/start-hubble.sh -d
 ```
 
-### 3	Platform Workflow
+### 3	Platform Workflows
 
 The module usage process of the platform is as follows:
 
@@ -176,7 +176,7 @@ Create graph by filling in the content as follows:
 > **Special Note**: If you are starting `hubble` with Docker, and `hubble` and the server are on the same host. When configuring the hostname for the graph on the Hubble web page, please do not directly set it to `localhost/127.0.0.1`. If `hubble` and `server` is in the same docker network, we **recommend** using the `container_name` (in our example, it is `graph`) as the hostname, and `8080` as the port. Or you can use the **host IP** as the hostname, and the port is configured by the host for the server.
 
 ##### 4.1.2	Graph Access
-Realize the information access of the graph space. After entering, you can perform operations such as multidimensional query analysis, metadata management, data import, and algorithm analysis of the graph.
+Realize the information access to the graph space. After entering, you can perform operations such as multidimensional query analysis, metadata management, data import, and algorithm analysis of the graph.
 
 <center>
   <img src="/docs/images/images-hubble/312图访问.png" alt="image">
@@ -401,7 +401,7 @@ By switching the entrance on the left, flexibly switch the operation space of mu
 
 
 ##### 4.4.3 Graph Analysis and Processing
-HugeGraph supports Gremlin, a graph traversal query language of Apache TinkerPop3. Gremlin is a general graph database query language. By entering Gremlin statements and clicking execute, you can perform query and analysis operations on graph data, and create and delete vertices/edges. , vertex/edge attribute modification, etc.
+HugeGraph supports Gremlin, a graph traversal query language of Apache TinkerPop3. Gremlin is a general graph database query language. By entering Gremlin statements and clicking execute, you can perform query and analysis operations on graph data, and create and delete vertices/edges. vertex/edge attribute modification, etc.
 
 After Gremlin query, below is the graph result display area, which provides 3 kinds of graph result display modes: [Graph Mode], [Table Mode], [Json Mode].
 
@@ -426,11 +426,11 @@ Support zoom, center, full screen, export and other operations.
 
 
 ##### 4.4.4 Data Details
-Click the vertex/edge entity to view the data details of the vertex/edge, including: vertex/edge type, vertex ID, attribute and corresponding value, expand the information display dimension of the graph, and improve the usability.
+Click the vertex/edge entity to view the data details of the vertex/edge, including vertex/edge type, vertex ID, attribute and corresponding value, expand the information display dimension of the graph, and improve the usability.
 
 
 ##### 4.4.5 Multidimensional Path Query of Graph Results
-In addition to the global query, in-depth customized query and hidden operations can be performed for the vertices in the query result to realize customized mining of graph results.
+In addition to the global query, an in-depth customized query and hidden operations can be performed for the vertices in the query result to realize customized mining of graph results.
 
 Right-click a vertex, and the menu entry of the vertex appears, which can be displayed, inquired, hidden, etc.
 - Expand: Click to display the vertices associated with the selected point.
@@ -493,7 +493,7 @@ Left navigation:
 - algorithm: OLAP algorithm task
 - remove_schema: remove metadata
 - rebuild_index: rebuild the index
-2. The list displays the asynchronous task information of the current graph, including: task ID, task name, task type, creation time, time-consuming, status, operation, and realizes the management of asynchronous tasks.
+2. The list displays the asynchronous task information of the current graph, including task ID, task name, task type, creation time, time-consuming, status, operation, and realizes the management of asynchronous tasks.
 3. Support filtering by task type and status
 4. Support searching for task ID and task name
 5. Asynchronous tasks can be deleted or deleted in batches
@@ -525,7 +525,7 @@ Click to view the entry to jump to the task management list, as follows:
 
 
 4. View the results
-- The results are displayed in the form of json
+- The results are displayed in the form of JSON
 
 
 ##### 4.5.4 OLAP algorithm tasks
