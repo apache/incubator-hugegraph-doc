@@ -1,6 +1,13 @@
 <!doctype html>
 <html lang="{{ .Site.Language.Lang }}" class="no-js">
   <head>
+      <!-- To handle CSP policy -->
+      <meta http-equiv="Content-Security-Policy"
+            content="default-src 'self';
+                    style-src 'self' 'unsafe-inline' https://code.jquery.com https://cdn.jsdelivr.net;
+                    script-src 'self' https://code.jquery.com https://cdn.jsdelivr.net;
+                    font-src 'self' https://cdn.jsdelivr.net;
+                    img-src 'self' data:">
     {{ partial "head.html" . }}
   </head>
   <body class="td-{{ .Kind }}{{ with .Page.Params.body_class }} {{ . }}{{ end }}">
