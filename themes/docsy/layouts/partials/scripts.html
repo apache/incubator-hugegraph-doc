@@ -1,9 +1,9 @@
-<script src="/js/popper.min.js" | relURL ></script>
-<script src="/js/bootstrap.min.js" | relURL ></script>
+<script src='{{ "/js/popper.min.js" | relURL }}'></script>
+<script src='{{ "/js/bootstrap.min.js" | relURL }}'></script>
 
 
 {{ if .Site.Params.mermaid.enable }}
-<script src="/js/mermaid.min.js" | relURL ></script>
+<script src='{{ "/js/mermaid.min.js" | relURL }}'></script>
 {{ end }}
 
 {{ if .Site.Params.markmap.enable }}
