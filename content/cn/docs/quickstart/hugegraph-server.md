@@ -6,7 +6,7 @@ weight: 1
 
 ### 1 HugeGraph-Server 概述
 
-HugeGraph-Server 是 HugeGraph 项目的核心部分，包含 Core、Backend、API 等子模块。
+HugeGraph-Server 是 HugeGraph 项目的核心部分，包含 graph-core、backend、API 等子模块。
 
 Core 模块是 Tinkerpop 接口的实现，Backend 模块用于管理数据存储，目前支持的后端包括：Memory、Cassandra、ScyllaDB 以及 RocksDB，API 模块提供 HTTP Server，将 Client 的 HTTP 请求转化为对 Core 的调用。
 
@@ -22,8 +22,6 @@ Core 模块是 Tinkerpop 接口的实现，Backend 模块用于管理数据存�
 **在往下阅读之前先执行 `java -version` 命令确认 jdk 版本**
 
 > 注：使用 Java 8 启动 HugeGraph-Server 会失去一些**安全性**的保障，也会降低性能相关指标
->
-> 我们推荐生产或对外网暴露访问的环境使用 Java 11 并考虑开启 [Auth 权限认证](/cn/docs/config/config-authentication/)。
 
 ### 3 部署
 
@@ -33,6 +31,8 @@ Core 模块是 Tinkerpop 接口的实现，Backend 模块用于管理数据存�
 - 方式 2：下载 tar 包
 - 方式 3：源码编译
 - 方式 4：使用 tools 工具部署 (Outdated)
+
+**注意** 生产或对外网暴露访问的环境必须使用 Java 11 并开启 [Auth 权限认证](/cn/docs/config/config-authentication/), 否则会有安全隐患。
 
 #### 3.1 使用 Docker 容器 (便于**测试**)
 <!-- 3.1 is linked by another place. if change 3.1's title, please check -->
@@ -127,6 +127,10 @@ mvn package -DskipTests
 
 执行成功后，在 hugegraph 目录下生成 `*hugegraph-*.tar.gz` 文件，就是编译生成的 tar 包。
 
+<details>
+<summary>过时的 tools 工具安装</summary>
+
+```bash
 #### 3.4 使用 tools 工具部署 (Outdated)
 
 HugeGraph-Tools 提供了一键部署的命令行工具，用户可以使用该工具快速地一键下载、解压、配置并启动 HugeGraph-Server 和 HugeGraph-Hubble，最新的 HugeGraph-Toolchain 中已经包含所有的这些工具，直接下载它解压就有工具包集合了
@@ -148,6 +152,7 @@ bin/hugegraph deploy -v {hugegraph-version} -p {install-path} [-u {download-path
 ```
 
 `{hugegraph-version}` 表示要部署的 HugeGraphServer 及 HugeGraphStudio 的版本，用户可查看 `conf/version-mapping.yaml` 文件获取版本信息，`{install-path}` 指定 HugeGraphServer 及 HugeGraphStudio 的安装目录，`{download-path-prefix}` 可选，指定 HugeGraphServer 及 HugeGraphStudio tar 包的下载地址，不提供时使用默认下载地址，比如要启动 0.6 版本的 HugeGraph-Server 及 HugeGraphStudio 将上述命令写为 `bin/hugegraph deploy -v 0.6 -p services` 即可。
+</details>
 
 ### 4 配置
 
@@ -169,7 +174,7 @@ HugeGraphServer 启动时会连接后端存储并尝试检查后端存储版本�
 
 由于各种后端所需的配置（hugegraph.properties）及启动步骤略有不同，下面逐一对各后端的配置及启动做介绍。
 
-如果想要使用 HugeGraph 鉴权模式，在后面正式启动 Server 之前应按照 [Server 鉴权配置](https://hugegraph.apache.org/cn/docs/config/config-authentication/) 进行配置。
+**注:** 如果想要开启 HugeGraph 权限系统，在启动 Server 之前应按照 [Server 鉴权配置](https://hugegraph.apache.org/cn/docs/config/config-authentication/) 进行配置。(尤其是生产环境/外网环境须开启)
 
 ##### 5.1.1 RocksDB
 

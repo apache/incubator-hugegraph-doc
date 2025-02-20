@@ -1,14 +1,14 @@
 ---
 title: "HugeGraph-Vermeer Quick Start"
-linkTitle: "使用 Vermeer 计算框架"
-weight: 8
+linkTitle: "(OLAP) Vermeer 内存图计算框架"
+weight: 7
 ---
 
 ## 一、Vermeer 概述
 
 ### 1.1 运行架构
 
-Vermeer 是一个 Go 编写的高性能内存优先的图计算框架，支持 15+ OLAP 图算法的极速计算，包含 master 和 worker 两种角色。master 目前只有一个，worker 可以有多个。
+Vermeer 是一个 `Go`编写的高性能内存优先的图计算框架 (一次启动，任意执行)，支持 15+ OLAP 图算法的极速计算 (大部分秒~分钟级别完成执行)，包含 master 和 worker 两种角色。master 目前只有一个 (可增加 HA)，worker 可以有多个。
 
 master 是负责通信、转发、汇总的节点，计算量和占用资源量较少。worker 是计算节点，用于存储图数据和运行计算任务，占用大量内存和 cpu。grpc 和 rest 模块分别负责内部通信和外部调用。
 
@@ -36,7 +36,6 @@ master 是负责通信、转发、汇总的节点，计算量和占用资源量�
 request 示例：
 
 ```javascript
-
 POST http://localhost:8688/tasks/create
 {
  "task_type": "load",
@@ -60,7 +59,7 @@ POST http://localhost:8688/tasks/create
 
 request 示例：
 
-```
+```javascript
 POST http://localhost:8688/tasks/create
 {
  "task_type": "compute",
@@ -91,7 +90,7 @@ PageRank 算法适用于网页排序、社交网络重点人物发掘等场景�
 
 request 示例：
 
-```
+```javascript
 POST http://localhost:8688/tasks/create
 {
  "task_type": "compute",
@@ -113,7 +112,7 @@ POST http://localhost:8688/tasks/create
 
 request 示例：
 
-```
+```javascript
 POST http://localhost:8688/tasks/create
 {
  "task_type": "compute",
@@ -135,7 +134,7 @@ POST http://localhost:8688/tasks/create
 
 request 示例：
 
-```
+```javascript
 POST http://localhost:8688/tasks/create
 {
  "task_type": "compute",
@@ -157,7 +156,7 @@ POST http://localhost:8688/tasks/create
 
 request 示例：
 
-```
+```javascript
 POST http://localhost:8688/tasks/create
 {
  "task_type": "compute",
@@ -179,7 +178,7 @@ POST http://localhost:8688/tasks/create
 
 request 示例：
 
-```
+```javascript
 POST http://localhost:8688/tasks/create
 {
  "task_type": "compute",
@@ -201,7 +200,7 @@ POST http://localhost:8688/tasks/create
 
 request 示例：
 
-```
+```javascript
 POST http://localhost:8688/tasks/create
 {
  "task_type": "compute",
@@ -227,7 +226,7 @@ POST http://localhost:8688/tasks/create
 
 request 示例：
 
-```
+```javascript
 POST http://localhost:8688/tasks/create
 {
  "task_type": "compute",
@@ -248,7 +247,7 @@ K-Core 算法，标记所有度数为 K 的顶点，适用于图的剪枝，查�
 
 request 示例：
 
-```
+```javascript
 POST http://localhost:8688/tasks/create
 {
  "task_type": "compute",
@@ -270,7 +269,7 @@ POST http://localhost:8688/tasks/create
 
 request 示例：
 
-```
+```javascript
 POST http://localhost:8688/tasks/create
 {
  "task_type": "compute",
@@ -292,7 +291,7 @@ POST http://localhost:8688/tasks/create
 
 request 示例：
 
-```
+```javascript
 POST http://localhost:8688/tasks/create
 {
  "task_type": "compute",
@@ -317,7 +316,7 @@ Vermeer 上实现的分布式 Louvain 算法受节点顺序、并行计算等因
 
 request 示例：
 
-```
+```javascript
 POST http://localhost:8688/tasks/create
 {
  "task_type": "compute",
@@ -342,7 +341,7 @@ Jaccard index , 又称为 Jaccard 相似系数（Jaccard similarity coefficient�
 
 request 示例：
 
-```
+```javascript
 POST http://localhost:8688/tasks/create
 {
  "task_type": "compute",
@@ -367,7 +366,7 @@ POST http://localhost:8688/tasks/create
 
 request 示例：
 
-```
+```javascript
 POST http://localhost:8688/tasks/create
 {
  "task_type": "compute",
@@ -392,7 +391,7 @@ POST http://localhost:8688/tasks/create
 
 request 示例：
 
-```
+```javascript
 POST http://localhost:8688/tasks/create
 {
  "task_type": "compute",
@@ -415,7 +414,7 @@ POST http://localhost:8688/tasks/create
 
 request 示例：
 
-```
+```javascript
 POST http://localhost:8688/tasks/create
 {
  "task_type": "compute",
@@ -435,7 +434,7 @@ POST http://localhost:8688/tasks/create
 
 在有向图的数学理论中，如果一个图的每一个顶点都可从该图其他任意一点到达，则称该图是强连通的。在任意有向图中能够实现强连通的部分我们称其为强连通分量。它表明各个点之间的连通性，区分不同的连通社区。
 
-```
+```javascript
 POST http://localhost:8688/tasks/create
 {
  "task_type": "compute",
@@ -450,4 +449,6 @@ POST http://localhost:8688/tasks/create
  }
 }
 ```
+
+> 🚧, 后续随时更新完善，欢迎随时提出建议和意见。
 
