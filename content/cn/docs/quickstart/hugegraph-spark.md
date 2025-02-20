@@ -2,7 +2,7 @@
 title: "HugeGraph-Spark Quick Start"
 linkTitle: "(Deprecated) Analysis with HugeGraph-Spark"
 draft: true
-weight: 7
+weight: 100
 ---
 
 > Note: HugeGraph-Spark 已经停止维护, 不再更新, 请转向使用 hugegraph-computer, 感谢理解
