@@ -6,21 +6,21 @@ weight: 1
 
 ### Summary
 
-Apache HugeGraph is an easy-to-use, efficient, general-purpose open source graph database system
-(Graph Database, [GitHub project address](https://github.com/hugegraph/hugegraph)), implemented the [Apache TinkerPop3](https://tinkerpop.apache.org) framework and is fully compatible with the [Gremlin](https://tinkerpop.apache.org/gremlin.html) query language,
+Apache HugeGraph is an easy-to-use, efficient, general-purpose open-source graph database system
+(Graph Database, [GitHub project address](https://github.com/hugegraph/hugegraph)), implementing the [Apache TinkerPop3](https://tinkerpop.apache.org) framework and fully compatible with the [Gremlin](https://tinkerpop.apache.org/gremlin.html) query language,
 With complete toolchain components, it helps users easily build applications and products based on graph databases. HugeGraph supports fast import of more than 10 billion vertices and edges, and provides millisecond-level relational query capability (OLTP). 
-It supports large-scale distributed graph computing (OLAP).
+It also supports large-scale distributed graph computing (OLAP).
 
 Typical application scenarios of HugeGraph include deep relationship exploration, association analysis, path search, feature extraction, data clustering, community detection, knowledge graph, etc., and are applicable to business fields such as network security, telecommunication fraud, financial risk control, advertising recommendation, social network, and intelligence Robots, etc.
 
 ### Features
 
-HugeGraph supports graph operations in online and offline environments, supports batch import of data, supports efficient complex relationship analysis, and can be seamlessly integrated with big data platforms.
-HugeGraph supports multi-user parallel operations. Users can enter Gremlin query statements and get graph query results in time. They can also call HugeGraph API in user programs for graph analysis or query.
+HugeGraph supports graph operations in online and offline environments, batch importing of data and efficient complex relationship analysis. It can seamlessly be integrated with big data platforms.
+HugeGraph supports multi-user parallel operations. Users can enter Gremlin query statements and get graph query results in time. They can also call the HugeGraph API in user programs for graph analysis or queries.
 
 This system has the following features: 
 
-- Ease of use: HugeGraph supports Gremlin graph query language and RESTful API, provides common interfaces for graph retrieval, and has peripheral tools with complete functions to easily implement various graph-based query and analysis operations.
+- Ease of use: HugeGraph supports the Gremlin graph query language and a RESTful API, providing common interfaces for graph retrieval, and peripheral tools with complete functions to easily implement various graph-based query and analysis operations.
 - Efficiency: HugeGraph has been deeply optimized in graph storage and graph computing, and provides a variety of batch import tools, which can easily complete the rapid import of tens of billions of data, and achieve millisecond-level response for graph retrieval through optimized queries. Supports simultaneous online real-time operations of thousands of users.
 - Universal: HugeGraph supports the Apache Gremlin standard graph query language and the Property Graph standard graph modeling method, and supports graph-based OLTP and OLAP schemes. Integrate Apache Hadoop and Apache Spark big data platforms.
 - Scalable: supports distributed storage, multiple copies of data, and horizontal expansion, built-in multiple back-end storage engines, and can easily expand the back-end storage engine through plug-ins.
@@ -42,6 +42,8 @@ The functions of this system include but are not limited to:
 
 ### Modules
 
+- [HugeGraph-Store]: HugeGraph-Store is a distributed storage engine to manage large-scale graph data by integrating storage and computation within a unified system.
+- [HugeGraph-PD]: HugeGraph-PD (Placement Driver) manages metadata and coordinates storage nodes.
 - [HugeGraph-Server](/docs/quickstart/hugegraph-server): HugeGraph-Server is the core part of the HugeGraph project, containing Core, Backend, API and other submodules;
   - Core: Implements the graph engine, connects to the Backend module downwards, and supports the API module upwards;
   - Backend: Implements the storage of graph data to the backend, supports backends including Memory, Cassandra, ScyllaDB, RocksDB, HBase, MySQL and PostgreSQL, users can choose one according to the actual situation;
