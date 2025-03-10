@@ -1974,17 +1974,17 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="8-debug-server-with-intellij-idea">8 Debug Server with IntelliJ IDEA&lt;/h3>
 &lt;p>Please refer to &lt;a href="/docs/contribution-guidelines/hugegraph-server-idea-setup">Setup Server in IDEA&lt;/a>&lt;/p></description></item><item><title>Docs: Introduction with HugeGraph</title><link>/docs/introduction/readme/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/introduction/readme/</guid><description>
 &lt;h3 id="summary">Summary&lt;/h3>
-&lt;p>Apache HugeGraph is an easy-to-use, efficient, general-purpose open source graph database system
-(Graph Database, &lt;a href="https://github.com/hugegraph/hugegraph">GitHub project address&lt;/a>), implemented the &lt;a href="https://tinkerpop.apache.org">Apache TinkerPop3&lt;/a> framework and is fully compatible with the &lt;a href="https://tinkerpop.apache.org/gremlin.html">Gremlin&lt;/a> query language,
+&lt;p>Apache HugeGraph is an easy-to-use, efficient, general-purpose open-source graph database system
+(Graph Database, &lt;a href="https://github.com/hugegraph/hugegraph">GitHub project address&lt;/a>), implementing the &lt;a href="https://tinkerpop.apache.org">Apache TinkerPop3&lt;/a> framework and fully compatible with the &lt;a href="https://tinkerpop.apache.org/gremlin.html">Gremlin&lt;/a> query language,
 With complete toolchain components, it helps users easily build applications and products based on graph databases. HugeGraph supports fast import of more than 10 billion vertices and edges, and provides millisecond-level relational query capability (OLTP).
-It supports large-scale distributed graph computing (OLAP).&lt;/p>
+It also supports large-scale distributed graph computing (OLAP).&lt;/p>
 &lt;p>Typical application scenarios of HugeGraph include deep relationship exploration, association analysis, path search, feature extraction, data clustering, community detection, knowledge graph, etc., and are applicable to business fields such as network security, telecommunication fraud, financial risk control, advertising recommendation, social network, and intelligence Robots, etc.&lt;/p>
 &lt;h3 id="features">Features&lt;/h3>
-&lt;p>HugeGraph supports graph operations in online and offline environments, supports batch import of data, supports efficient complex relationship analysis, and can be seamlessly integrated with big data platforms.
-HugeGraph supports multi-user parallel operations. Users can enter Gremlin query statements and get graph query results in time. They can also call HugeGraph API in user programs for graph analysis or query.&lt;/p>
+&lt;p>HugeGraph supports graph operations in online and offline environments, batch importing of data and efficient complex relationship analysis. It can seamlessly be integrated with big data platforms.
+HugeGraph supports multi-user parallel operations. Users can enter Gremlin query statements and get graph query results in time. They can also call the HugeGraph API in user programs for graph analysis or queries.&lt;/p>
 &lt;p>This system has the following features:&lt;/p>
 &lt;ul>
-&lt;li>Ease of use: HugeGraph supports Gremlin graph query language and RESTful API, provides common interfaces for graph retrieval, and has peripheral tools with complete functions to easily implement various graph-based query and analysis operations.&lt;/li>
+&lt;li>Ease of use: HugeGraph supports the Gremlin graph query language and a RESTful API, providing common interfaces for graph retrieval, and peripheral tools with complete functions to easily implement various graph-based query and analysis operations.&lt;/li>
 &lt;li>Efficiency: HugeGraph has been deeply optimized in graph storage and graph computing, and provides a variety of batch import tools, which can easily complete the rapid import of tens of billions of data, and achieve millisecond-level response for graph retrieval through optimized queries. Supports simultaneous online real-time operations of thousands of users.&lt;/li>
 &lt;li>Universal: HugeGraph supports the Apache Gremlin standard graph query language and the Property Graph standard graph modeling method, and supports graph-based OLTP and OLAP schemes. Integrate Apache Hadoop and Apache Spark big data platforms.&lt;/li>
 &lt;li>Scalable: supports distributed storage, multiple copies of data, and horizontal expansion, built-in multiple back-end storage engines, and can easily expand the back-end storage engine through plug-ins.&lt;/li>
@@ -2006,6 +2006,8 @@ HugeGraph supports multi-user parallel operations. Users can enter Gremlin query
 &lt;/ul>
 &lt;h3 id="modules">Modules&lt;/h3>
 &lt;ul>
+&lt;li>[HugeGraph-Store]: HugeGraph-Store is a distributed storage engine to manage large-scale graph data by integrating storage and computation within a unified system.&lt;/li>
+&lt;li>[HugeGraph-PD]: HugeGraph-PD (Placement Driver) manages metadata and coordinates storage nodes.&lt;/li>
 &lt;li>&lt;a href="/docs/quickstart/hugegraph-server">HugeGraph-Server&lt;/a>: HugeGraph-Server is the core part of the HugeGraph project, containing Core, Backend, API and other submodules;
 &lt;ul>
 &lt;li>Core: Implements the graph engine, connects to the Backend module downwards, and supports the API module upwards;&lt;/li>
