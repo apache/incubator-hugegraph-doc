@@ -66,7 +66,7 @@ There are three ways to deploy `hugegraph-hubble`
 
 We can use `docker run -itd --name=hubble -p 8088:8088 hugegraph/hubble:1.5.0` to quick start [hubble](https://hub.docker.com/r/hugegraph/hubble).
 
-Alternatively, you can use Docker Compose to start `hubble`. Additionally, if `hubble` and the graph are in the same Docker network, you can access the graph using the container name of the graph, eliminating the need for the host machine's IP address.
+Alternatively, you can use Docker Compose to start `hubble`. Additionally, if `hubble` and the graph is in the same Docker network, you can access the graph using the container name of the graph, eliminating the need for the host machine's IP address.
 
 Use `docker-compose up -d`，`docker-compose.yml` is following:
 
