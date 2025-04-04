@@ -70,7 +70,7 @@ POST http://localhost:8080/graphs/hugegraph/graph/vertices
 
 ```json
 {
-    "id": "1:marko",
+    "id": "marko",  // Remove type prefix
     "label": "person",
     "type": "vertex",
     "properties": {
@@ -120,8 +120,8 @@ POST http://localhost:8080/graphs/hugegraph/graph/vertices/batch
 
 ```json
 [
-    "1:marko",
-    "2:ripple"
+    "marko",  // Use primary key directly
+    "ripple"
 ]
 ```
 
@@ -130,7 +130,7 @@ POST http://localhost:8080/graphs/hugegraph/graph/vertices/batch
 ##### Method & Url
 
 ```
-PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=append
+PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"marko"?action=append
 ```
 
 ##### Request Body
@@ -220,7 +220,7 @@ Assuming the original vertex and properties are:
 Add vertices with the following command:
 
 ```shell
-curl -H "Content-Type: application/json" -d '[{"label":"person","properties":{"name":"josh","age":32,"city":"Beijing","weight":0.1,"hobby":["reading","football"]}},{"label":"software","properties":{"name":"lop","lang":"java","price":328}}]' http:///127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
+curl -H "Content-Type: application/json" -d '[{"label":"person","properties":{"name":"josh","age":32,"city":"Beijing","weight":0.1,"hobby":["reading","football"]}},{"label":"software","properties":{"name":"lop","lang":"java","price":328}}]' http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
 ```
 
 ##### Method & Url
@@ -261,7 +261,7 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
         "age": "OVERRIDE",
         "city": "OVERRIDE",
         "weight": "SUM",
-        "hobby": "UNION"
+        "hobby": "APPEND" // List property needs APPEND strategy
     },
     "create_if_not_exist": true
 }
@@ -391,7 +391,7 @@ Property key-value pairs consist of the property name and value in JSON format. 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&properties={"age":29}&limit=1
+GET http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&properties={"age":30}&limit=1
 ```
 
 ##### Response Status
@@ -406,7 +406,7 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&propertie
 {
     "vertices": [
         {
-            "id": "1:marko",
+            "id": "marko",
             "label": "person",
             "type": "vertex",
             "properties": {
@@ -580,7 +580,7 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
+DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/"marko"
 ```
 
 ##### Response Status
