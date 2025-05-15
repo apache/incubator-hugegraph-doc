@@ -691,3 +691,99 @@ $bin/stop-hugegraph.sh
 ### 8 使用 IntelliJ IDEA 调试 Server
 
 请参考[在 IDEA 中配置 Server 开发环境](/docs/contribution-guidelines/hugegraph-server-idea-setup)
+
+##### 5.1.10 分布式存储 (HStore)
+
+<details>
+<summary>点击展开/折叠 分布式存储 配置及启动方法</summary>
+
+> 分布式存储是 HugeGraph 1.5.0 之后推出的新特性，它基于 HugeGraph-PD 和 HugeGraph-Store 组件实现了分布式的数据存储和计算。
+
+要使用分布式存储引擎，需要先部署 HugeGraph-PD 和 HugeGraph-Store，详见 [HugeGraph-PD 快速入门](/cn/docs/quickstart/hugegraph-pd/) 和 [HugeGraph-Store 快速入门](/cn/docs/quickstart/hugegraph-hstore/)。
+
+确保 PD 和 Store 服务均已启动后，修改 HugeGraph-Server 的 `hugegraph.properties` 配置：
+
+```properties
+backend=hstore
+serializer=binary
+task.scheduler_type=distributed
+
+# PD 服务地址，多个 PD 地址用逗号分割，配置 PD 的 RPC 端口
+pd.peers=127.0.0.1:8686,127.0.0.1:8687,127.0.0.1:8688
+```
+
+如果配置多个 HugeGraph-Server 节点，需要为每个节点修改 `rest-server.properties` 配置文件，例如：
+
+节点 1（主节点）：
+```properties
+restserver.url=http://127.0.0.1:8081
+gremlinserver.url=http://127.0.0.1:8181
+
+rpc.server_host=127.0.0.1
+rpc.server_port=8091
+
+server.id=server-1
+server.role=master
+```
+
+节点 2（工作节点）：
+```properties
+restserver.url=http://127.0.0.1:8082
+gremlinserver.url=http://127.0.0.1:8182
+
+rpc.server_host=127.0.0.1
+rpc.server_port=8092
+
+server.id=server-2
+server.role=worker
+```
+
+同时，还需要修改每个节点的 `gremlin-server.yaml` 中的端口配置：
+
+节点 1：
+```yaml
+host: 127.0.0.1
+port: 8181
+```
+
+节点 2：
+```yaml
+host: 127.0.0.1
+port: 8182
+```
+
+初始化数据库：
+
+```bash
+cd *hugegraph-${version}
+bin/init-store.sh
+```
+
+启动 Server：
+
+```bash
+bin/start-hugegraph.sh
+```
+
+使用分布式存储引擎的启动顺序为：
+1. 启动 HugeGraph-PD
+2. 启动 HugeGraph-Store
+3. 初始化数据库（仅首次）
+4. 启动 HugeGraph-Server
+
+验证服务是否正常启动：
+
+```bash
+curl http://localhost:8081/graphs
+# 应返回：{"graphs":["hugegraph"]}
+```
+
+停止服务的顺序应该与启动顺序相反：
+1. 停止 HugeGraph-Server
+2. 停止 HugeGraph-Store
+3. 停止 HugeGraph-PD
+
+```bash
+bin/stop-hugegraph.sh
+```
+</details>

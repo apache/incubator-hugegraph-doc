@@ -707,3 +707,99 @@ $bin/stop-hugegraph.sh
 ### 8 Debug Server with IntelliJ IDEA
 
 Please refer to [Setup Server in IDEA](/docs/contribution-guidelines/hugegraph-server-idea-setup)
+
+##### 5.1.10 Distributed Storage (HStore)
+
+<details>
+<summary>Click to expand/collapse Distributed Storage configuration and startup method</summary>
+
+> Distributed storage is a new feature introduced after HugeGraph 1.5.0, which implements distributed data storage and computation based on HugeGraph-PD and HugeGraph-Store components.
+
+To use the distributed storage engine, you need to deploy HugeGraph-PD and HugeGraph-Store first. See [HugeGraph-PD Quick Start](/docs/quickstart/hugegraph-pd/) and [HugeGraph-Store Quick Start](/docs/quickstart/hugegraph-hstore/) for details.
+
+After ensuring that both PD and Store services are started, modify the `hugegraph.properties` configuration of HugeGraph-Server:
+
+```properties
+backend=hstore
+serializer=binary
+task.scheduler_type=distributed
+
+# PD service address, multiple PD addresses are separated by commas, configure PD's RPC port
+pd.peers=127.0.0.1:8686,127.0.0.1:8687,127.0.0.1:8688
+```
+
+If configuring multiple HugeGraph-Server nodes, you need to modify the `rest-server.properties` configuration file for each node, for example:
+
+Node 1 (Master node):
+```properties
+restserver.url=http://127.0.0.1:8081
+gremlinserver.url=http://127.0.0.1:8181
+
+rpc.server_host=127.0.0.1
+rpc.server_port=8091
+
+server.id=server-1
+server.role=master
+```
+
+Node 2 (Worker node):
+```properties
+restserver.url=http://127.0.0.1:8082
+gremlinserver.url=http://127.0.0.1:8182
+
+rpc.server_host=127.0.0.1
+rpc.server_port=8092
+
+server.id=server-2
+server.role=worker
+```
+
+Also, you need to modify the port configuration in `gremlin-server.yaml` for each node:
+
+Node 1:
+```yaml
+host: 127.0.0.1
+port: 8181
+```
+
+Node 2:
+```yaml
+host: 127.0.0.1
+port: 8182
+```
+
+Initialize the database:
+
+```bash
+cd *hugegraph-${version}
+bin/init-store.sh
+```
+
+Start the Server:
+
+```bash
+bin/start-hugegraph.sh
+```
+
+The startup sequence for using the distributed storage engine is:
+1. Start HugeGraph-PD
+2. Start HugeGraph-Store
+3. Initialize the database (only for the first time)
+4. Start HugeGraph-Server
+
+Verify that the service is started properly:
+
+```bash
+curl http://localhost:8081/graphs
+# Should return: {"graphs":["hugegraph"]}
+```
+
+The sequence to stop the services should be the reverse of the startup sequence:
+1. Stop HugeGraph-Server
+2. Stop HugeGraph-Store
+3. Stop HugeGraph-PD
+
+```bash
+bin/stop-hugegraph.sh
+```
+</details>
