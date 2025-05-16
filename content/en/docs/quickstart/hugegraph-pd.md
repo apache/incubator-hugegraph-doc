@@ -29,9 +29,9 @@ Download the latest version of HugeGraph-PD from the Apache HugeGraph official d
 
 ```bash
 # Replace {version} with the latest version number, e.g., 1.5.0
-wget https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph-pd-incubating-{version}.tar.gz
-tar zxf apache-hugegraph-pd-incubating-{version}.tar.gz
-cd apache-hugegraph-pd-incubating-{version}
+wget https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph-incubating-{version}.tar.gz  
+tar zxf apache-hugegraph-incubating-{version}.tar.gz
+cd apache-hugegraph-incubating-{version}/apache-hugegraph-pd-incubating-{version}
 ```
 
 #### 3.2 Compile from source
@@ -45,8 +45,8 @@ cd hugegraph
 mvn clean install -DskipTests=true
 
 # 3. After successful compilation, the PD module build artifacts will be located at
-#    hugegraph-pd/apache-hugegraph-pd-incubating-{version}
-#    hugegraph-pd/apache-hugegraph-pd-incubating-{version}.tar.gz
+#    apache-hugegraph-incubating-{version}/apache-hugegraph-pd-incubating-{version}
+#    target/apache-hugegraph-incubating-{version}.tar.gz
 ```
 
 ### 4 Configuration

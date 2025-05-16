@@ -176,7 +176,103 @@ HugeGraphServer 启动时会连接后端存储并尝试检查后端存储版本�
 
 **注:** 如果想要开启 HugeGraph 权限系统，在启动 Server 之前应按照 [Server 鉴权配置](https://hugegraph.apache.org/cn/docs/config/config-authentication/) 进行配置。(尤其是生产环境/外网环境须开启)
 
-##### 5.1.1 RocksDB
+##### 5.1.1 分布式存储 (HStore)
+
+<details>
+<summary>点击展开/折叠 分布式存储 配置及启动方法</summary>
+
+> 分布式存储是 HugeGraph 1.5.0 之后推出的新特性，它基于 HugeGraph-PD 和 HugeGraph-Store 组件实现了分布式的数据存储和计算。
+
+要使用分布式存储引擎，需要先部署 HugeGraph-PD 和 HugeGraph-Store，详见 [HugeGraph-PD 快速入门](/cn/docs/quickstart/hugegraph-pd/) 和 [HugeGraph-Store 快速入门](/cn/docs/quickstart/hugegraph-hstore/)。
+
+确保 PD 和 Store 服务均已启动后，修改 HugeGraph-Server 的 `hugegraph.properties` 配置：
+
+```properties
+backend=hstore
+serializer=binary
+task.scheduler_type=distributed
+
+# PD 服务地址，多个 PD 地址用逗号分割，配置 PD 的 RPC 端口
+pd.peers=127.0.0.1:8686,127.0.0.1:8687,127.0.0.1:8688
+```
+
+如果配置多个 HugeGraph-Server 节点，需要为每个节点修改 `rest-server.properties` 配置文件，例如：
+
+节点 1（主节点）：
+```properties
+restserver.url=http://127.0.0.1:8081
+gremlinserver.url=http://127.0.0.1:8181
+
+rpc.server_host=127.0.0.1
+rpc.server_port=8091
+
+server.id=server-1
+server.role=master
+```
+
+节点 2（工作节点）：
+```properties
+restserver.url=http://127.0.0.1:8082
+gremlinserver.url=http://127.0.0.1:8182
+
+rpc.server_host=127.0.0.1
+rpc.server_port=8092
+
+server.id=server-2
+server.role=worker
+```
+
+同时，还需要修改每个节点的 `gremlin-server.yaml` 中的端口配置：
+
+节点 1：
+```yaml
+host: 127.0.0.1
+port: 8181
+```
+
+节点 2：
+```yaml
+host: 127.0.0.1
+port: 8182
+```
+
+初始化数据库：
+
+```bash
+cd *hugegraph-${version}
+bin/init-store.sh
+```
+
+启动 Server：
+
+```bash
+bin/start-hugegraph.sh
+```
+
+使用分布式存储引擎的启动顺序为：
+1. 启动 HugeGraph-PD
+2. 启动 HugeGraph-Store
+3. 初始化数据库（仅首次）
+4. 启动 HugeGraph-Server
+
+验证服务是否正常启动：
+
+```bash
+curl http://localhost:8081/graphs
+# 应返回：{"graphs":["hugegraph"]}
+```
+
+停止服务的顺序应该与启动顺序相反：
+1. 停止 HugeGraph-Server
+2. 停止 HugeGraph-Store
+3. 停止 HugeGraph-PD
+
+```bash
+bin/stop-hugegraph.sh
+```
+</details>
+
+##### 5.1.2 RocksDB
 
 <details>
 <summary>点击展开/折叠 RocksDB 配置及启动方法</summary>
@@ -212,7 +308,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.1.2 HBase
+##### 5.1.3 HBase
 
 <details>
 <summary>点击展开/折叠 HBase 配置及启动方法</summary>
@@ -254,7 +350,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.1.3 MySQL
+##### 5.1.4 MySQL
 
 <details>
 <summary>点击展开/折叠 MySQL 配置及启动方法</summary>
@@ -298,7 +394,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.1.4 Cassandra
+##### 5.1.5 Cassandra
 
 <details>
 <summary>点击展开/折叠 Cassandra 配置及启动方法</summary>
@@ -357,7 +453,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.1.5 Memory
+##### 5.1.6 Memory
 
 <details>
 <summary>点击展开/折叠 Memory 配置及启动方法</summary>
@@ -383,7 +479,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.1.6 ScyllaDB
+##### 5.1.7 ScyllaDB
 
 <details>
 <summary>点击展开/折叠 ScyllaDB 配置及启动方法</summary>
@@ -427,7 +523,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.1.7 启动 server 的时候创建示例图
+##### 5.1.8 启动 server 的时候创建示例图
 
 在脚本启动时候携带 `-p true`参数，表示 preload, 即创建示例图图
 
@@ -691,99 +787,3 @@ $bin/stop-hugegraph.sh
 ### 8 使用 IntelliJ IDEA 调试 Server
 
 请参考[在 IDEA 中配置 Server 开发环境](/docs/contribution-guidelines/hugegraph-server-idea-setup)
-
-##### 5.1.10 分布式存储 (HStore)
-
-<details>
-<summary>点击展开/折叠 分布式存储 配置及启动方法</summary>
-
-> 分布式存储是 HugeGraph 1.5.0 之后推出的新特性，它基于 HugeGraph-PD 和 HugeGraph-Store 组件实现了分布式的数据存储和计算。
-
-要使用分布式存储引擎，需要先部署 HugeGraph-PD 和 HugeGraph-Store，详见 [HugeGraph-PD 快速入门](/cn/docs/quickstart/hugegraph-pd/) 和 [HugeGraph-Store 快速入门](/cn/docs/quickstart/hugegraph-hstore/)。
-
-确保 PD 和 Store 服务均已启动后，修改 HugeGraph-Server 的 `hugegraph.properties` 配置：
-
-```properties
-backend=hstore
-serializer=binary
-task.scheduler_type=distributed
-
-# PD 服务地址，多个 PD 地址用逗号分割，配置 PD 的 RPC 端口
-pd.peers=127.0.0.1:8686,127.0.0.1:8687,127.0.0.1:8688
-```
-
-如果配置多个 HugeGraph-Server 节点，需要为每个节点修改 `rest-server.properties` 配置文件，例如：
-
-节点 1（主节点）：
-```properties
-restserver.url=http://127.0.0.1:8081
-gremlinserver.url=http://127.0.0.1:8181
-
-rpc.server_host=127.0.0.1
-rpc.server_port=8091
-
-server.id=server-1
-server.role=master
-```
-
-节点 2（工作节点）：
-```properties
-restserver.url=http://127.0.0.1:8082
-gremlinserver.url=http://127.0.0.1:8182
-
-rpc.server_host=127.0.0.1
-rpc.server_port=8092
-
-server.id=server-2
-server.role=worker
-```
-
-同时，还需要修改每个节点的 `gremlin-server.yaml` 中的端口配置：
-
-节点 1：
-```yaml
-host: 127.0.0.1
-port: 8181
-```
-
-节点 2：
-```yaml
-host: 127.0.0.1
-port: 8182
-```
-
-初始化数据库：
-
-```bash
-cd *hugegraph-${version}
-bin/init-store.sh
-```
-
-启动 Server：
-
-```bash
-bin/start-hugegraph.sh
-```
-
-使用分布式存储引擎的启动顺序为：
-1. 启动 HugeGraph-PD
-2. 启动 HugeGraph-Store
-3. 初始化数据库（仅首次）
-4. 启动 HugeGraph-Server
-
-验证服务是否正常启动：
-
-```bash
-curl http://localhost:8081/graphs
-# 应返回：{"graphs":["hugegraph"]}
-```
-
-停止服务的顺序应该与启动顺序相反：
-1. 停止 HugeGraph-Server
-2. 停止 HugeGraph-Store
-3. 停止 HugeGraph-PD
-
-```bash
-bin/stop-hugegraph.sh
-```
-</details>

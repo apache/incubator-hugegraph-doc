@@ -30,9 +30,9 @@ HugeGraph-Store 是 HugeGraph 分布式版本的存储节点组件，负责实�
 
 ```bash
 # 用最新版本号替换 {version}，例如 1.5.0
-wget https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph-store-incubating-{version}.tar.gz
-tar zxf apache-hugegraph-store-incubating-{version}.tar.gz
-cd apache-hugegraph-store-incubating-{version}
+wget https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph-incubating-{version}.tar.gz  
+tar zxf apache-hugegraph-incubating-{version}.tar.gz
+cd apache-hugegraph-incubating-{version}/apache-hugegraph-hstore-incubating-{version}
 ```
 
 #### 3.2 源码编译
@@ -46,8 +46,8 @@ cd hugegraph
 mvn clean install -DskipTests=true
 
 # 3. 编译成功后，Store 模块的构建产物将位于
-#    hugegraph-store/apache-hugegraph-store-incubating-{version}
-#    hugegraph-store/apache-hugegraph-store-incubating-{version}.tar.gz
+#    apache-hugegraph-incubating-{version}/apache-hugegraph-hstore-incubating-{version}
+#    target/apache-hugegraph-incubating-{version}.tar.gz
 ```
 
 ### 4 配置

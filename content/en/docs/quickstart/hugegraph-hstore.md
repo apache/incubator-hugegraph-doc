@@ -30,9 +30,9 @@ Download the latest version of HugeGraph-Store from the Apache HugeGraph officia
 
 ```bash
 # Replace {version} with the latest version number, e.g., 1.5.0
-wget https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph-store-incubating-{version}.tar.gz
-tar zxf apache-hugegraph-store-incubating-{version}.tar.gz
-cd apache-hugegraph-store-incubating-{version}
+wget https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph-incubating-{version}.tar.gz  
+tar zxf apache-hugegraph-incubating-{version}.tar.gz
+cd apache-hugegraph-incubating-{version}/apache-hugegraph-hstore-incubating-{version}
 ```
 
 #### 3.2 Compile from source
@@ -46,8 +46,8 @@ cd hugegraph
 mvn clean install -DskipTests=true
 
 # 3. After successful compilation, the Store module build artifacts will be located at
-#    hugegraph-store/apache-hugegraph-store-incubating-{version}
-#    hugegraph-store/apache-hugegraph-store-incubating-{version}.tar.gz
+#    apache-hugegraph-incubating-{version}/apache-hugegraph-hstore-incubating-{version}
+#    target/apache-hugegraph-incubating-{version}.tar.gz
 ```
 
 ### 4 Configuration
