@@ -16,21 +16,52 @@ hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与
 
 1. 启动HugeGraph数据库，可以通过 [Docker](https://hub.docker.com/r/hugegraph/hugegraph)/[Binary Package](https://hugegraph.apache.org/docs/download/download/) 运行它。  
     请参阅详细[文档](https://hugegraph.apache.org/docs/quickstart/hugegraph-server/#31-use-docker-container-convenient-for-testdev)以获取更多指导
-2. 克隆项目
+
+2. **Docker部署**  
+   如果您希望使用Docker来部署HugeGraph-AI，请按照以下步骤操作：
+   - 确保您已安装Docker。
+   - 在项目根目录下，使用以下命令拉取远端Docker容器镜像，我们提供了两种容器镜像：
+     - **镜像1**：[hugegraph/rag](https://hub.docker.com/r/hugegraph/rag/tags)  
+       该镜像用于构建和运行HugeGraph-AI的RAG（检索增强生成）功能，适合需要快速部署和使用的用户。
+     - **镜像2**：[hugegraph/rag-bin](https://hub.docker.com/r/hugegraph/rag-bin/tags)  
+       该镜像提供了二进制版本的HugeGraph-AI，适合需要更稳定和高效性能的用户。
+   - 使用以下命令拉取远端Docker容器镜像：
+     ```bash
+     docker pull hugegraph/rag:latest # 拉取镜像1
+     docker pull hugegraph/rag-bin:latest # 拉取镜像2
+     ```
+   - 使用以下指令启动Docker容器：
+     ```bash
+     docker run -it --name rag -p 8001:8001 hugegraph/rag bash
+     docker run -it --name rag -p 8001:8001 hugegraph/rag-bin bash
+     ```
+   - 启动 **Graph RAG** 的 gradio 交互 demo，可以使用以下命令运行：
+     ```bash
+     python ./src/hugegraph_llm/demo/rag_demo/app.py # 在镜像一创建的容器中启动demo
+     ```
+     ```bash
+     ./app.dist/app.bin # 在镜像二创建的容器中启动demo
+     ```
+   - 启动后，您可以通过访问 http://localhost:8001 来使用HugeGraph-AI的交互式界面。
+
+3. 克隆项目
     ```bash
     git clone https://github.com/apache/incubator-hugegraph-ai.git
     ```
-3. 安装 [hugegraph-python-client](../hugegraph-python-client) 和 [hugegraph_llm](src/hugegraph_llm)
+
+4. 安装 [hugegraph-python-client](../hugegraph-python-client) 和 [hugegraph_llm](src/hugegraph_llm)
     ```bash
     cd ./incubator-hugegraph-ai # better to use virtualenv (source venv/bin/activate) 
     pip install ./hugegraph-python-client
     pip install -r ./hugegraph-llm/requirements.txt
     ```
-4. 进入项目目录
+
+5. 进入项目目录
     ```bash
     cd ./hugegraph-llm/src
     ```
-5. 启动 **Graph RAG** 的 gradio 交互 demo，可以使用以下命令运行，启动后打开 http://127.0.0.1:8001
+
+6. 启动 **Graph RAG** 的 gradio 交互 demo，可以使用以下命令运行，启动后打开 http://127.0.0.1:8001
     ```bash
     python3 -m hugegraph_llm.demo.rag_demo.app
     ```
@@ -38,18 +69,22 @@ hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与
     ```bash
     python3 -m hugegraph_llm.demo.rag_demo.app --host 127.0.0.1 --port 18001
     ```
-6. 启动 **Text2Gremlin** 的 gradio 交互演示，可以使用以下命令运行，启动后打开 http://127.0.0.1:8002 ，您还可以按上述方式更改默认主机 `0.0.0.0` 和端口 `8002` 。(🚧ing)
+
+7. 启动 **Text2Gremlin** 的 gradio 交互演示，可以使用以下命令运行，启动后打开 http://127.0.0.1:8002 ，您还可以按上述方式更改默认主机 `0.0.0.0` 和端口 `8002` 。(🚧ing)
     ```bash
     python3 -m hugegraph_llm.demo.gremlin_generate_web_demo
    ```
-7. 在运行演示程序后，配置文件文件将被删除。`.env ` 将自动生成在 `hugegraph-llm/.env` 路径下。此外，还有一个与 prompt 相关的配置文件 `config_prompt.yaml` 。也会在`hugegraph-llm/src/hugegraph_llm/resources/demo/config_prompt.yaml`路径下生成。
+
+8. 在运行演示程序后，配置文件文件将被删除。`.env ` 将自动生成在 `hugegraph-llm/.env` 路径下。此外，还有一个与 prompt 相关的配置文件 `config_prompt.yaml` 。也会在`hugegraph-llm/src/hugegraph_llm/resources/demo/config_prompt.yaml`路径下生成。
     您可以在页面上修改内容，触发相应功能后会自动保存到配置文件中。你也可以直接修改文件而无需重启应用程序；只需刷新页面即可加载最新的更改。
     （可选）要重新生成配置文件，您可以将 `config.generate` 与 `-u` 或 `--update` 一起使用。
     ```bash
     python3 -m hugegraph_llm.config.generate --update
     ```
-8. （**可选**）您可以使用 [hugegraph-hubble](https://hugegraph.apache.org/docs/quickstart/hugegraph-hubble/#21-use-docker-convenient-for-testdev) 来访问图形数据，可以通过 [Docker/Docker-Compose](https://hub.docker.com/r/hugegraph/hubble) 运行它以获得指导。 （Hubble 是一个图形分析仪表板，包括数据加载/模式管理/图形遍历/显示）。
-9. （__可选__）离线下载 NLTK 停用词
+
+9. （**可选**）您可以使用 [hugegraph-hubble](https://hugegraph.apache.org/docs/quickstart/hugegraph-hubble/#21-use-docker-convenient-for-testdev) 来访问图形数据，可以通过 [Docker/Docker-Compose](https://hub.docker.com/r/hugegraph/hubble) 运行它以获得指导。 （Hubble 是一个图形分析仪表板，包括数据加载/模式管理/图形遍历/显示）。
+
+10. （__可选__）离线下载 NLTK 停用词
     ```bash
     python ./hugegraph_llm/operators/common_op/nltk_helper.py
     ```
@@ -65,7 +100,7 @@ hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与
   - file: 上传文件：<u>TXT</u> 或 <u>.docx</u>（可同时选择多个文件）
 - [Schema](https://hugegraph.apache.org/docs/clients/restful-api/schema/):（接受**2种类型**）
   - 用户定义模式( JSON 格式，遵循[模板](https://github.com/apache/incubator-hugegraph-ai/blob/aff3bbe25fa91c3414947a196131be812c20ef11/hugegraph-llm/src/hugegraph_llm/config/config_data.py#L125)来修改它)
-  - 指定 HugeGraph 图实例的名称，它将自动从中获取模式(如 **“hugegraph”**)
+  - 指定 HugeGraph 图实例的名称，它将自动从中获取模式(如 **"hugegraph"**)
 - Graph extract head: 用户自定义的图提取提示
 - 如果已经存在图数据，你应该点击 "**Rebuild vid Index**" 来更新索引
 
