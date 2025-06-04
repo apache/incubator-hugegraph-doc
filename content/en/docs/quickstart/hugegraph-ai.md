@@ -9,7 +9,7 @@ hugegraph-ai aims to explore the integration of HugeGraph and artificial intelli
 with large models, integration with graph machine learning components, etc., to provide comprehensive support for developers to use HugeGraph's AI capabilities in projects.
 
 ## 2 Environment Requirements
-- python 3.9+ 
+- python 3.10+ 
 - hugegraph-server 1.2+
 
 ## 3 Preparation
