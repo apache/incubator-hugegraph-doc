@@ -8865,7 +8865,7 @@ You can use &lt;a href="/cn/docs/clients/hugegraph-client">Client-API&lt;/a> to 
 with large models, integration with graph machine learning components, etc., to provide comprehensive support for developers to use HugeGraph&amp;rsquo;s AI capabilities in projects.&lt;/p>
 &lt;h2 id="2-environment-requirements">2 Environment Requirements&lt;/h2>
 &lt;ul>
-&lt;li>python 3.9+&lt;/li>
+&lt;li>python 3.10+&lt;/li>
 &lt;li>hugegraph-server 1.2+&lt;/li>
 &lt;/ul>
 &lt;h2 id="3-preparation">3 Preparation&lt;/h2>
