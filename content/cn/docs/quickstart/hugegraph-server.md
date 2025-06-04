@@ -529,16 +529,16 @@ volumes:
 
     ```yaml
     version: '3'
-      services:
-        server:
-          image: hugegraph/hugegraph:1.5.0
-          container_name: server
-          environment:
-            - PRELOAD=true
-          volumes:
-            - /path/to/yourscript:/hugegraph/scripts/example.groovy
-          ports:
-            - 8080:8080
+    services:
+      server:
+        image: hugegraph/hugegraph:1.5.0
+        container_name: server
+        environment:
+          - PRELOAD=true
+        volumes:
+          - /path/to/yourscript:/hugegraph/scripts/example.groovy
+        ports:
+          - 8080:8080
     ```
 
     使用命令 `docker-compose up -d` 启动容器
