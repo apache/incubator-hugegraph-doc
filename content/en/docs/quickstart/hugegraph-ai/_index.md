@@ -1,16 +1,31 @@
 ---
-title: "HugeGraph-AI Quick Start"
+title: "Explore with HugeGraph-AI"
 linkTitle: "Explore with HugeGraph-AI"
 weight: 4
 ---
 
-## 1 HugeGraph-AI Overview
-hugegraph-ai aims to explore the integration of HugeGraph and artificial intelligence (AI), including applications combined 
-with large models, integration with graph machine learning components, etc., to provide comprehensive support for developers to use HugeGraph's AI capabilities in projects.
+> Please refer to the AI repository [README](https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-llm#readme) for the most up-to-date documentation, and the official website **regularly** is updated and synchronized~.
 
-## 2 Environment Requirements
-- python 3.10+ 
-- hugegraph-server 1.2+
+## 1. Summary
+
+The `hugegraph-llm` is a tool for the implementation and research related to large language models.
+This project includes runnable demos, it can also be used as a third-party library.
+
+As we know, graph systems can help large models address challenges like timeliness and hallucination,
+while large models can help graph systems with cost-related issues.
+
+With this project, we aim to reduce the cost of using graph systems and decrease the complexity of 
+building knowledge graphs. This project will offer more applications and integration solutions for 
+graph systems and large language models.
+1.  Construct knowledge graph by LLM + HugeGraph
+2.  Use natural language to operate graph databases (Gremlin/Cypher)
+3.  Knowledge graph supplements answer context (GraphRAG → Graph Agent)
+
+## 2. Environment Requirements
+> [!IMPORTANT]
+> - python 3.10+ (not tested in 3.12)
+> - hugegraph-server 1.3+ (better to use 1.5+)
+> - uv 0.7+
 
 ## 3. Preparation
 
@@ -46,8 +61,12 @@ with large models, integration with graph machine learning components, etc., to 
 
 ### 3.2 Build from Source
 
-1. Start the HugeGraph database, you can run it via [Docker](https://hub.docker.com/r/hugegraph/hugegraph)/[Binary Package](https://hugegraph.apache.org/docs/download/download/).  
-    Refer to detailed [doc](https://hugegraph.apache.org/docs/quickstart/hugegraph-server/#31-use-docker-container-convenient-for-testdev) for more guidance
+1. Start the HugeGraph database, you can run it via [Docker](https://hub.docker.com/r/hugegraph/hugegraph)/[Binary Package](https://hugegraph.apache.org/docs/download/download/).
+    There is a simple method by docker:  
+    ```bash
+   docker run -itd --name=server -p 8080:8080 hugegraph/hugegraph
+    ```  
+   You can refer to the detailed documents [doc](https://hugegraph.apache.org/docs/quickstart/hugegraph-server/#31-use-docker-container-convenient-for-testdev) for more guidance.
 
 2. Configuring the uv environment, Use the official installer to install uv, See the [uv documentation](https://docs.astral.sh/uv/configuration/installer/) for other installation methods   
     ```bash
@@ -55,11 +74,10 @@ with large models, integration with graph machine learning components, etc., to 
     curl -LsSf https://astral.sh/uv/install.sh | sh  - # install the latest version like 0.7.3+
     ```
 
-3. Clone the project
+3. Clone this project
     ```bash
     git clone https://github.com/apache/incubator-hugegraph-ai.git
     ```
-
 4. Configuration dependency environment
     ```bash
     cd incubator-hugegraph-ai/hugegraph-llm
@@ -94,7 +112,6 @@ with large models, integration with graph machine learning components, etc., to 
     ```
 > [!TIP]   
 > You can also refer to our [quick-start](https://github.com/apache/incubator-hugegraph-ai/blob/main/hugegraph-llm/quick_start.md) doc to understand how to use it & the basic query logic 🚧
-
 
 ## 4 Examples
 

@@ -1,16 +1,26 @@
 ---
-title: "HugeGraph-AI Quick Start"
-linkTitle: "使用 HugeGraph-AI"
+title: "探索 HugeGraph-AI"
+linkTitle: "探索 HugeGraph-AI"
 weight: 4
 ---
 
+> 请参考 AI 仓库的 [README](https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-llm#readme) 获取最新文档，官网会**定期**更新和同步~。
+
 ### 1 HugeGraph-AI 概述
-hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与大模型结合的应用，与图机器学习组件的集成等，为开发者在项目中利用 HugeGraph
-的 AI 能力提供全面支持。
+`hugegraph-llm` 是一个用于实现和研究大语言模型相关功能的工具。该项目包含可运行的演示程序，也可以作为第三方库使用。
+
+众所周知，图系统可以帮助大模型解决时效性和幻觉等挑战，而大模型可以帮助图系统解决成本相关的问题。
+
+通过这个项目，我们旨在降低使用图系统的成本，并减少构建知识图谱的复杂性。该项目将为图系统和大语言模型提供更多应用和集成解决方案：
+1. 通过 LLM + HugeGraph 构建知识图谱
+2. 使用自然语言操作图数据库（Gremlin/Cypher）
+3. 知识图谱补充答案上下文（GraphRAG → Graph Agent）
 
 ### 2 环境要求
-- python 3.9+  (better to use `3.10`)  
-- hugegraph-server 1.3+
+> [!IMPORTANT]
+> - python 3.10+（未在 3.12 中测试）
+> - hugegraph-server 1.3+（建议使用 1.5+）
+> - uv 0.7+
 
 ### 3 准备工作
 
@@ -47,6 +57,10 @@ hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与
 #### 3.2 从源码构建
 
 1. 启动HugeGraph数据库，可以通过 [Docker](https://hub.docker.com/r/hugegraph/hugegraph)/[Binary Package](https://hugegraph.apache.org/docs/download/download/) 运行它。  
+    有一个简单的Docker方法：
+    ```bash
+    docker run -itd --name=server -p 8080:8080 hugegraph/hugegraph
+    ```  
     请参阅详细[文档](https://hugegraph.apache.org/docs/quickstart/hugegraph-server/#31-use-docker-container-convenient-for-testdev)以获取更多指导
 
 2. 配置uv环境，使用官方安装程序安装uv，其他安装方法请参见[uv文档](https://docs.astral.sh/uv/configuration/installer/)
@@ -82,11 +96,11 @@ hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与
 
 7. 启动 **Graph RAG** 的 gradio 交互 demo，可以使用以下命令运行，启动后打开 http://127.0.0.1:8001
     ```bash
-    python3 -m hugegraph_llm.demo.rag_demo.app
+    python -m hugegraph_llm.demo.rag_demo.app  # 与 "uv run xxx" 相同
     ```
-    默认主机为 `0.0.0.0` ，端口为 `8001` 。您可以通过传递命令行参数 `--host` 和 `--port` 来更改它们。
+    默认主机为 `0.0.0.0` ，端口为 `8001` 。您可以通过传递命令行参数 `--host` 和 `--port` 来更改它们。  
     ```bash
-    python3 -m hugegraph_llm.demo.rag_demo.app --host 127.0.0.1 --port 18001
+    python -m hugegraph_llm.demo.rag_demo.app --host 127.0.0.1 --port 18001
     ```
 
 8. 启动 **Text2Gremlin** 的 gradio 交互演示，可以使用以下命令运行，启动后打开 http://127.0.0.1:8002 ，您还可以按上述方式更改默认主机 `0.0.0.0` 和端口 `8002` 。(🚧ing)
@@ -94,12 +108,13 @@ hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与
     python3 -m hugegraph_llm.demo.gremlin_generate_web_demo
    ```
 
-9. 在运行演示程序后，配置文件文件将被删除。`.env ` 将自动生成在 `hugegraph-llm/.env` 路径下。此外，还有一个与 prompt 相关的配置文件 `config_prompt.yaml` 。也会在`hugegraph-llm/src/hugegraph_llm/resources/demo/config_prompt.yaml`路径下生成。
+9. 在运行演示程序后，配置文件 `.env` 将自动生成在 `hugegraph-llm/.env` 路径下。此外，还有一个与 prompt 相关的配置文件 `config_prompt.yaml` 也会在 `hugegraph-llm/src/hugegraph_llm/resources/demo/config_prompt.yaml` 路径下生成。
     您可以在页面上修改内容，触发相应功能后会自动保存到配置文件中。你也可以直接修改文件而无需重启应用程序；只需刷新页面即可加载最新的更改。
-    （可选）要重新生成配置文件，您可以将 `config.generate` 与 `-u` 或 `--update` 一起使用。
+    （可选）要重新生成配置文件，您可以将 `config.generate` 与 `-u` 或 `--update` 一起使用。  
     ```bash
-    python3 -m hugegraph_llm.config.generate --update
+    python -m hugegraph_llm.config.generate --update
     ```
+    注意：`Litellm` 支持多 LLM 提供商，参考 [litellm.ai](https://docs.litellm.ai/docs/providers) 进行配置
 
 10. （**可选**）您可以使用 [hugegraph-hubble](https://hugegraph.apache.org/docs/quickstart/hugegraph-hubble/#21-use-docker-convenient-for-testdev) 来访问图形数据，可以通过 [Docker/Docker-Compose](https://hub.docker.com/r/hugegraph/hubble) 运行它以获得指导。 （Hubble 是一个图形分析仪表板，包括数据加载/模式管理/图形遍历/显示）。
 
@@ -107,9 +122,6 @@ hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与
     ```bash
     python ./hugegraph_llm/operators/common_op/nltk_helper.py
     ```
-
-> [!TIP]   
-> 您也可以参考我们的[快速入门](https://github.com/apache/incubator-hugegraph-ai/blob/main/hugegraph-llm/quick_start.md)文档来了解如何使用它以及基本的查询逻辑 🚧
 
 ## 4 示例 
 ### 4.1 通过 LLM 在 HugeGraph 中构建知识图谱
@@ -197,13 +209,13 @@ hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与
     graph_rag = RAGPipeline()
     graph_rag.extract_keywords(text="Tell me about Al Pacino.").print_result()
     ```
-2. **根据关键字匹配 Vid**:：将节点与图中的关键字匹配。
-	```python
+2. **根据关键字匹配 Vid**：将节点与图中的关键字匹配。
+    ```python
     graph_rag.keywords_to_vid().print_result()
-   ```
+    ```
 3. **RAG 的查询图**：从 HugeGraph 中检索对应的关键词及其多度关联关系。
      ```python
-     graph_rag.query_graphdb(max_deep=2, max_items=30).print_result()
+     graph_rag.query_graphdb(max_deep=2, max_graph_items=30).print_result()
      ```
 4. **重新排序搜索结果**：根据问题与结果之间的相似性对搜索结果进行重新排序。
     ```python
