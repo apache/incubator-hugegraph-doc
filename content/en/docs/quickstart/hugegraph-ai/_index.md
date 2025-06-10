@@ -6,6 +6,8 @@ weight: 4
 
 > Please refer to the AI repository [README](https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-llm#readme) for the most up-to-date documentation, and the official website **regularly** is updated and synchronized~.
 
+> AI summarizes the project documentation: [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/apache/incubator-hugegraph-ai)
+
 ## 1. Summary
 
 The `hugegraph-llm` is a tool for the implementation and research related to large language models.

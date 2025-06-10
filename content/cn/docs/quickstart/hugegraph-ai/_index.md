@@ -6,6 +6,8 @@ weight: 4
 
 > 请参考 AI 仓库的 [README](https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-llm#readme) 获取最新文档，官网会**定期**更新和同步~。
 
+> AI总结的项目文档：[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/apache/incubator-hugegraph-ai)
+
 ### 1 HugeGraph-AI 概述
 `hugegraph-llm` 是一个用于实现和研究大语言模型相关功能的工具。该项目包含可运行的演示程序，也可以作为第三方库使用。
 
