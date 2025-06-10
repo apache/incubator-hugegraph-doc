@@ -4,6 +4,8 @@ linkTitle: "使用 HugeGraph-AI"
 weight: 4
 ---
 
+> 最新的文档请参考 AI 仓库 [README](https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-llm#readme) 为准, 官网**定期**更新同步~
+
 ### 1 HugeGraph-AI 概述
 hugegraph-ai 旨在探索 HugeGraph 与人工智能（AI）的融合，包括与大模型结合的应用，与图机器学习组件的集成等，为开发者在项目中利用 HugeGraph
 的 AI 能力提供全面支持。
