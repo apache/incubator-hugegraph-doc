@@ -195,7 +195,103 @@ Since the configuration (hugegraph.properties) and startup steps required by var
 
 Follow the [Server Authentication Configuration](https://hugegraph.apache.org/docs/config/config-authentication/) before you start Server later.
 
-##### 5.1.1 Memory
+##### 5.1.1 Distributed Storage (HStore)
+
+<details>
+<summary>Click to expand/collapse Distributed Storage configuration and startup method</summary>
+
+> Distributed storage is a new feature introduced after HugeGraph 1.5.0, which implements distributed data storage and computation based on HugeGraph-PD and HugeGraph-Store components.
+
+To use the distributed storage engine, you need to deploy HugeGraph-PD and HugeGraph-Store first. See [HugeGraph-PD Quick Start](/docs/quickstart/hugegraph-pd/) and [HugeGraph-Store Quick Start](/docs/quickstart/hugegraph-hstore/) for details.
+
+After ensuring that both PD and Store services are started, modify the `hugegraph.properties` configuration of HugeGraph-Server:
+
+```properties
+backend=hstore
+serializer=binary
+task.scheduler_type=distributed
+
+# PD service address, multiple PD addresses are separated by commas, configure PD's RPC port
+pd.peers=127.0.0.1:8686,127.0.0.1:8687,127.0.0.1:8688
+```
+
+If configuring multiple HugeGraph-Server nodes, you need to modify the `rest-server.properties` configuration file for each node, for example:
+
+Node 1 (Master node):
+```properties
+restserver.url=http://127.0.0.1:8081
+gremlinserver.url=http://127.0.0.1:8181
+
+rpc.server_host=127.0.0.1
+rpc.server_port=8091
+
+server.id=server-1
+server.role=master
+```
+
+Node 2 (Worker node):
+```properties
+restserver.url=http://127.0.0.1:8082
+gremlinserver.url=http://127.0.0.1:8182
+
+rpc.server_host=127.0.0.1
+rpc.server_port=8092
+
+server.id=server-2
+server.role=worker
+```
+
+Also, you need to modify the port configuration in `gremlin-server.yaml` for each node:
+
+Node 1:
+```yaml
+host: 127.0.0.1
+port: 8181
+```
+
+Node 2:
+```yaml
+host: 127.0.0.1
+port: 8182
+```
+
+Initialize the database:
+
+```bash
+cd *hugegraph-${version}
+bin/init-store.sh
+```
+
+Start the Server:
+
+```bash
+bin/start-hugegraph.sh
+```
+
+The startup sequence for using the distributed storage engine is:
+1. Start HugeGraph-PD
+2. Start HugeGraph-Store
+3. Initialize the database (only for the first time)
+4. Start HugeGraph-Server
+
+Verify that the service is started properly:
+
+```bash
+curl http://localhost:8081/graphs
+# Should return: {"graphs":["hugegraph"]}
+```
+
+The sequence to stop the services should be the reverse of the startup sequence:
+1. Stop HugeGraph-Server
+2. Stop HugeGraph-Store
+3. Stop HugeGraph-PD
+
+```bash
+bin/stop-hugegraph.sh
+```
+</details>
+
+##### 5.1.2 Memory
 
 <details>
 <summary>Click to expand/collapse Memory configuration and startup methods</summary>
@@ -221,7 +317,7 @@ The prompted url is the same as the restserver.url configured in rest-server.pro
 
 </details>
 
-##### 5.1.2 RocksDB
+##### 5.1.3 RocksDB
 
 <details>
 <summary>Click to expand/collapse RocksDB configuration and startup methods</summary>
@@ -254,7 +350,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.1.3 Cassandra
+##### 5.1.4 Cassandra
 
 <details>
 <summary>Click to expand/collapse Cassandra configuration and startup methods</summary>
@@ -314,7 +410,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.1.4 ScyllaDB
+##### 5.1.5 ScyllaDB
 
 <details>
 <summary>Click to expand/collapse ScyllaDB configuration and startup methods</summary>
@@ -358,7 +454,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.1.5 HBase
+##### 5.1.6 HBase
 
 <details>
 <summary>Click to expand/collapse HBase configuration and startup methods</summary>
@@ -397,50 +493,6 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 ```
 
 > for more other backend configurations, please refer to[introduction to configuration options](/docs/config/config-option)
-
-</details>
-
-##### 5.1.6 MySQL
-
-<details>
-<summary>Click to expand/collapse MySQL configuration and startup methods</summary>
-
-> Due to MySQL is under GPL license, which is not compatible with Apache License indeed, Users need to install MySQL, [Download Link](https://dev.mysql.com/downloads/mysql/)
-
-Download MySQL's [driver package] (https://repo1.maven.org/maven2/mysql/mysql-connector-java/), such as `mysql-connector-java-8.0.30.jar`, and put it into HugeGraph- Server's `lib` directory.
-
-Modify `hugegraph.properties`, configure the database URL, username and password, `store` is the database name, if not, it will be created automatically.
-
-```properties
-backend=mysql
-serializer=mysql
-
-store=hugegraph
-
-# mysql backend config
-jdbc.driver=com.mysql.cj.jdbc.Driver
-jdbc.url=jdbc:mysql://127.0.0.1:3306
-jdbc.username=
-jdbc.password=
-jdbc.reconnect_max_times=3
-jdbc.reconnect_interval=3
-jdbc.ssl_mode=false
-```
-
-Initialize the database (required on first startup or a new configuration was manually added under 'conf/graphs/')
-
-```bash
-cd *hugegraph-${version}
-bin/init-store.sh
-```
-
-Start server
-
-```bash
-bin/start-hugegraph.sh
-Starting HugeGraphServer...
-Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
-```
 
 </details>
 
