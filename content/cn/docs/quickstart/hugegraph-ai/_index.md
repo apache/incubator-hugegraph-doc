@@ -1,7 +1,7 @@
 ---
 title: "探索 HugeGraph-AI"
 linkTitle: "探索 HugeGraph-AI"
-weight: 4
+weight: 2
 ---
 
 > 请参考 AI 仓库的 [README](https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-llm#readme) 获取最新文档，官网会**定期**更新和同步~。

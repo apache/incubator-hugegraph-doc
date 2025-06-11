@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph-AI 快速入门"
 linkTitle: "HugeGraph-AI 快速入门"
-weight: 4
+weight: 1
 ---
 
 > 请参考[主文档](./_index.md)了解基本 UI 功能及详细信息，欢迎随时更新和改进，谢谢

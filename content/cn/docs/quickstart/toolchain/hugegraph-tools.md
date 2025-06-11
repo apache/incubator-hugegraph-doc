@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph-Tools Quick Start"
 linkTitle: "使用 HugeGraph-Tools 导出/管理图"
-weight: 5
+weight: 3
 ---
 
 ### 1 HugeGraph-Tools概述

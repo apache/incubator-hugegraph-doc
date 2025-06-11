@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph-Server Quick Start"
 linkTitle: "安装/构建 HugeGraph-Server"
-weight: 1
+weight: 3
 ---
 
 ### 1 HugeGraph-Server 概述

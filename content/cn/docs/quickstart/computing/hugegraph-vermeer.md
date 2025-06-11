@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph-Vermeer Quick Start"
 linkTitle: "(OLAP) Vermeer 内存图计算框架"
-weight: 7
+weight: 2
 ---
 
 ## 一、Vermeer 概述
