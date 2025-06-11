@@ -8,7 +8,7 @@ weight: 4
 
 ### Background
 
-The [Quick Start](/docs/quickstart/hugegraph-server/) section provides instructions on how to start and stop HugeGraph-Server using **scripts**. In this guide, we will explain how to run and debug HugeGraph-Server on the Linux platform using **IntelliJ IDEA**.
+The [Quick Start](/docs/quickstart/hugegraph/hugegraph-server/) section provides instructions on how to start and stop HugeGraph-Server using **scripts**. In this guide, we will explain how to run and debug HugeGraph-Server on the Linux platform using **IntelliJ IDEA**.
 
 The core steps for local startup are the same as starting with **scripts**:
 
@@ -160,7 +160,7 @@ This is because Log4j2 uses asynchronous loggers. You can refer to the [official
 
 ### References
 
-1. [HugeGraph-Server Quick Start](/docs/quickstart/hugegraph-server/)
+1. [HugeGraph-Server Quick Start](/docs/quickstart/hugegraph/hugegraph-server/)
 2. [Local Debugging Guide for HugeGraph Server (Win/Unix)](https://gist.github.com/imbajin/1661450f000cd62a67e46d4f1abfe82c)
 3. ["package sun.misc does not exist" compilation error](https://youtrack.jetbrains.com/issue/IDEA-180033)
 4. [Cannot compile: java: package sun.misc does not exist](https://youtrack.jetbrains.com/issue/IDEA-201168)

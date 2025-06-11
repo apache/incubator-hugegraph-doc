@@ -456,4 +456,4 @@ Edge knows1 = marko.addEdge("knows", vadas, "city", "Beijing");
 
 ### 4 简单示例
 
-简单示例见[HugeGraph-Client](/docs/quickstart/hugegraph-client)
+简单示例见[HugeGraph-Client](/cn/docs/quickstart/client/hugegraph-client)

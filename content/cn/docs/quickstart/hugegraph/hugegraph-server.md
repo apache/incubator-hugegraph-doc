@@ -174,7 +174,7 @@ HugeGraphServer 启动时会连接后端存储并尝试检查后端存储版本�
 
 由于各种后端所需的配置（hugegraph.properties）及启动步骤略有不同，下面逐一对各后端的配置及启动做介绍。
 
-**注:** 如果想要开启 HugeGraph 权限系统，在启动 Server 之前应按照 [Server 鉴权配置](https://hugegraph.apache.org/cn/docs/config/config-authentication/) 进行配置。(尤其是生产环境/外网环境须开启)
+**注:** 如果想要开启 HugeGraph 权限系统，在启动 Server 之前应按照 [Server 鉴权配置](/cn/docs/config/config-authentication/) 进行配置。(尤其是生产环境/外网环境须开启)
 
 ##### 5.1.1 分布式存储 (HStore)
 
@@ -183,7 +183,7 @@ HugeGraphServer 启动时会连接后端存储并尝试检查后端存储版本�
 
 > 分布式存储是 HugeGraph 1.5.0 之后推出的新特性，它基于 HugeGraph-PD 和 HugeGraph-Store 组件实现了分布式的数据存储和计算。
 
-要使用分布式存储引擎，需要先部署 HugeGraph-PD 和 HugeGraph-Store，详见 [HugeGraph-PD 快速入门](/cn/docs/quickstart/hugegraph-pd/) 和 [HugeGraph-Store 快速入门](/cn/docs/quickstart/hugegraph-hstore/)。
+要使用分布式存储引擎，需要先部署 HugeGraph-PD 和 HugeGraph-Store，详见 [HugeGraph-PD 快速入门](/cn/docs/quickstart/hugegraph/hugegraph-pd/) 和 [HugeGraph-Store 快速入门](/cn/docs/quickstart/hugegraph/hugegraph-hstore/)。
 
 确保 PD 和 Store 服务均已启动后，修改 HugeGraph-Server 的 `hugegraph.properties` 配置：
 

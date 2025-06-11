@@ -63,7 +63,7 @@ weight: 4
     ```bash
     docker run -itd --name=server -p 8080:8080 hugegraph/hugegraph
     ```  
-    请参阅详细[文档](https://hugegraph.apache.org/docs/quickstart/hugegraph-server/#31-use-docker-container-convenient-for-testdev)以获取更多指导
+    请参阅详细[文档](/cn/docs/quickstart/hugegraph/hugegraph-server/#31-use-docker-container-convenient-for-testdev)以获取更多指导
 
 2. 配置uv环境，使用官方安装程序安装uv，其他安装方法请参见[uv文档](https://docs.astral.sh/uv/configuration/installer/)
     ```bash
@@ -118,7 +118,7 @@ weight: 4
     ```
     注意：`Litellm` 支持多 LLM 提供商，参考 [litellm.ai](https://docs.litellm.ai/docs/providers) 进行配置
 
-10. （**可选**）您可以使用 [hugegraph-hubble](https://hugegraph.apache.org/docs/quickstart/hugegraph-hubble/#21-use-docker-convenient-for-testdev) 来访问图形数据，可以通过 [Docker/Docker-Compose](https://hub.docker.com/r/hugegraph/hubble) 运行它以获得指导。 （Hubble 是一个图形分析仪表板，包括数据加载/模式管理/图形遍历/显示）。
+10. （**可选**）您可以使用 [hugegraph-hubble](/cn/docs/quickstart/toolchain/hugegraph-hubble/#21-use-docker-convenient-for-testdev) 来访问图形数据，可以通过 [Docker/Docker-Compose](https://hub.docker.com/r/hugegraph/hubble) 运行它以获得指导。 （Hubble 是一个图形分析仪表板，包括数据加载/模式管理/图形遍历/显示）。
 
 11. （__可选__）离线下载 NLTK 停用词
     ```bash

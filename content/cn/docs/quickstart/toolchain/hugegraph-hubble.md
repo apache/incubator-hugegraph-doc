@@ -33,7 +33,7 @@ weight: 3
 
 ##### 数据导入 (BETA)
 
-> 注: 数据导入功能目前适合初步试用，正式数据导入请使用 [hugegraph-loader](/cn/docs/quickstart/hugegraph-loader), 性能/稳定性/功能全面许多
+> 注: 数据导入功能目前适合初步试用，正式数据导入请使用 [hugegraph-loader](/cn/docs/quickstart/toolchain/hugegraph-loader), 性能/稳定性/功能全面许多
 
 数据导入是将用户的业务数据转化为图的顶点和边并插入图数据库中，平台提供了向导式的可视化导入模块，通过创建导入任务，
 实现导入任务的管理及多个导入任务的并行运行，提高导入效能。进入导入任务后，只需跟随平台步骤提示，按需上传文件，填写内容，
@@ -297,7 +297,7 @@ bin/start-hubble.sh -d
 
 #### 4.3	数据导入
 
-> **注意**：目前推荐使用 [hugegraph-loader](/cn/docs/quickstart/hugegraph-loader) 进行正式数据导入，hubble 内置的导入用来做**测试**和**简单上手**
+> **注意**：目前推荐使用 [hugegraph-loader](/cn/docs/quickstart/toolchain/hugegraph-loader) 进行正式数据导入，hubble 内置的导入用来做**测试**和**简单上手**
 
 数据导入的使用流程如下：
 

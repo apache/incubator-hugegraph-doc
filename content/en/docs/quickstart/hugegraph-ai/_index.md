@@ -68,7 +68,7 @@ graph systems and large language models.
     ```bash
    docker run -itd --name=server -p 8080:8080 hugegraph/hugegraph
     ```  
-   You can refer to the detailed documents [doc](https://hugegraph.apache.org/docs/quickstart/hugegraph-server/#31-use-docker-container-convenient-for-testdev) for more guidance.
+   You can refer to the detailed documents [doc](/docs/quickstart/hugegraph/hugegraph-server/#31-use-docker-container-convenient-for-testdev) for more guidance.
 
 2. Configuring the uv environment, Use the official installer to install uv, See the [uv documentation](https://docs.astral.sh/uv/configuration/installer/) for other installation methods   
     ```bash
@@ -105,7 +105,7 @@ graph systems and large language models.
     ```
     Note: `Litellm` support multi-LLM provider, refer [litellm.ai](https://docs.litellm.ai/docs/providers) to config it
 7. (__Optional__) You could use 
-    [hugegraph-hubble](https://hugegraph.apache.org/docs/quickstart/hugegraph-hubble/#21-use-docker-convenient-for-testdev) 
+    [hugegraph-hubble](/docs/quickstart/toolchain/hugegraph-hubble/#21-use-docker-convenient-for-testdev) 
     to visit the graph data, could run it via [Docker/Docker-Compose](https://hub.docker.com/r/hugegraph/hubble) 
     for guidance. (Hubble is a graph-analysis dashboard that includes data loading/schema management/graph traverser/display).
 8. (__Optional__) offline download NLTK stopwords  

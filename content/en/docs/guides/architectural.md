@@ -17,12 +17,12 @@ Below is the overall architecture diagram of HugeGraph:
 HugeGraph consists of three layers of functionality: the application layer, the graph engine layer, and the storage layer.
 
 - Application Layer:
-  - [Hubble](/docs/quickstart/hugegraph-hubble/): An all-in-one visual analytics platform that covers the entire process of data modeling, rapid data import, online and offline analysis of data, and unified management of graphs. It provides a guided workflow for operating graph applications.
-  - [Loader](/docs/quickstart/hugegraph-loader/): A data import component that can transform data from various sources into vertices and edges and bulk import them into the graph database.
-  - [Tools](/docs/quickstart/hugegraph-tools/): Command-line tools for deploying, managing, and backing up/restoring data in HugeGraph.
-  - [Computer](/docs/quickstart/hugegraph-computer/): A distributed graph processing system (OLAP) that implements [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf). It can run on Kubernetes.
-  - [Client](/docs/quickstart/hugegraph-client/): HugeGraph client written in Java. Users can use the client to operate HugeGraph using Java code. Support for other languages such as Python, Go, and C++ may be provided in the future.
-- [Graph Engine Layer](/docs/quickstart/hugegraph-server/):
+  - [Hubble](/docs/quickstart/toolchain/hugegraph-hubble): A one-stop visual analysis platform that covers the entire process from data modeling to rapid data import, online and offline analysis, and unified graph management, realizing wizard-style operations for the entire graph application process.
+  - [Loader](/docs/quickstart/toolchain/hugegraph-loader): A data import component that can transform data from multiple data sources into graph vertices and edges and batch import them into the graph database.
+  - [Tools](/docs/quickstart/toolchain/hugegraph-tools): Command-line tools for deploying, managing, and backing up/restoring data in HugeGraph.
+  - [Computer](/docs/quickstart/computing/hugegraph-computer): A distributed graph processing system (OLAP), which is an implementation of [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf) and can run on Kubernetes.
+  - [Client](/docs/quickstart/client/hugegraph-client): A HugeGraph client written in Java. Users can use the Client to write Java code to operate HugeGraph. Python, Go, C++ and other language support will be provided in the future as needed.
+- [Graph Engine Layer](/docs/quickstart/hugegraph/hugegraph-server/):
   - REST Server: Provides a RESTful API for querying graph/schema information, supports the [Gremlin](https://tinkerpop.apache.org/gremlin.html) and [Cypher](https://en.wikipedia.org/wiki/Cypher) query languages, and offers APIs for service monitoring and operations.
   - Graph Engine: Supports both OLTP and OLAP graph computation types, with OLTP implementing the [Apache TinkerPop3](https://tinkerpop.apache.org) framework.
   - Backend Interface: Implements the storage of graph data to the backend.

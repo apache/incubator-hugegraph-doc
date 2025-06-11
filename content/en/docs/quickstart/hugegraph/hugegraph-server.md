@@ -193,7 +193,7 @@ If you need to access HugeGraphServer externally, please modify the `restserver.
 
 Since the configuration (hugegraph.properties) and startup steps required by various backends are slightly different, the following will introduce the configuration and startup of each backend one by one.
 
-Follow the [Server Authentication Configuration](https://hugegraph.apache.org/docs/config/config-authentication/) before you start Server later.
+Follow the [Server Authentication Configuration](/docs/config/config-authentication/) before you start Server later.
 
 ##### 5.1.1 Distributed Storage (HStore)
 
@@ -202,7 +202,7 @@ Follow the [Server Authentication Configuration](https://hugegraph.apache.org/do
 
 > Distributed storage is a new feature introduced after HugeGraph 1.5.0, which implements distributed data storage and computation based on HugeGraph-PD and HugeGraph-Store components.
 
-To use the distributed storage engine, you need to deploy HugeGraph-PD and HugeGraph-Store first. See [HugeGraph-PD Quick Start](/docs/quickstart/hugegraph-pd/) and [HugeGraph-Store Quick Start](/docs/quickstart/hugegraph-hstore/) for details.
+To use the distributed storage engine, you need to deploy HugeGraph-PD and HugeGraph-Store first. See [HugeGraph-PD Quick Start](/docs/quickstart/hugegraph/hugegraph-pd/) and [HugeGraph-Store Quick Start](/docs/quickstart/hugegraph/hugegraph-hstore/).
 
 After ensuring that both PD and Store services are started, modify the `hugegraph.properties` configuration of HugeGraph-Server:
 

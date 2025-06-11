@@ -93,7 +93,7 @@ DELETE http://localhost:8080/graphs/hugegraph/tasks/2
 
 #### 7.1.4 取消某个异步任务，**该异步任务必须具有处理中断的能力**
 
-假设已经通过[Gremlin API](../gremlin)创建了一个异步任务如下：
+假设已经通过[Gremlin API](/cn/docs/clients/restful-api/gremlin)创建了一个异步任务如下：
 
 ```groovy
 "for (int i = 0; i < 10; i++) {" +

@@ -17,7 +17,7 @@ Local disk files and HDFS files support resumable uploads.
 
 It will be explained in detail below.
 
-> Note: HugeGraph-Loader requires HugeGraph Server service, please refer to [HugeGraph-Server Quick Start](/docs/quickstart/hugegraph-server) to download and start Server
+> Note: HugeGraph-Loader requires HugeGraph Server service, please refer to [HugeGraph-Server Quick Start](/docs/quickstart/hugegraph/hugegraph-server) to download and start Server
 
 ### 2 Get HugeGraph-Loader
 
@@ -1127,7 +1127,7 @@ The results of the execution will be similar to those shown in [4.5.1](#451-use-
 The parameters of `spark-loader` are divided into two parts. Note: Because the abbreviations of 
 these two-parameter names have overlapping parts, please use the full name of the parameter. 
 And there is no need to guarantee the order between the two parameters.
-- hugegraph parameters (Reference: [hugegraph-loader parameter description](https://hugegraph.apache.org/docs/quickstart/hugegraph-loader/#341-parameter-description) )
+- hugegraph parameters (Reference: [hugegraph-loader parameter description](https://hugegraph.apache.org/docs/quickstart/toolchain/hugegraph-loader/#341-parameter-description) )
 - Spark task submission parameters (Reference: [Submitting Applications](https://spark.apache.org/docs/3.3.0/submitting-applications.html#content))
 
 Example:
