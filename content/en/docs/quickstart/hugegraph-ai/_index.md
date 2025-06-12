@@ -1,7 +1,7 @@
 ---
 title: "Explore with HugeGraph-AI"
 linkTitle: "Explore with HugeGraph-AI"
-weight: 2
+weight: 3
 ---
 
 > Please refer to the AI repository [README](https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-llm#readme) for the most up-to-date documentation, and the official website **regularly** is updated and synchronized.

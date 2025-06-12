@@ -1,5 +1,5 @@
 ---
-title: "HugeGraph"
-linkTitle: "HugeGraph"
+title: "HugeGraph (OLTP)"
+linkTitle: "HugeGraph (OLTP)"
 weight: 1
 ---

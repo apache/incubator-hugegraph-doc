@@ -1,5 +1,5 @@
 ---
 title: "HugeGraph ToolChain"
 linkTitle: "HugeGraph ToolChain"
-weight: 5
+weight: 2
 ---

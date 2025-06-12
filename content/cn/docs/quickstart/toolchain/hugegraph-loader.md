@@ -1,6 +1,6 @@
 ---
 title: "HugeGraph-Loader Quick Start"
-linkTitle: "使用 Loader/Spark 实时导入数据"
+linkTitle: "使用 Loader 实时/流式导入数据"
 weight: 2
 ---
 

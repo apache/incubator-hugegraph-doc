@@ -1,10 +1,10 @@
 ---
-title: "HugeGraph-AI 快速入门"
-linkTitle: "HugeGraph-AI 快速入门"
+title: "GraphRAG UI 细节"
+linkTitle: "GraphRAG UI 细节"
 weight: 1
 ---
 
-> 请参考[主文档](./_index.md)了解基本 UI 功能及详细信息，欢迎随时更新和改进，谢谢
+> 请参考[主文档](../)了解基本 UI 功能及详细信息，欢迎随时更新和改进，谢谢
 
 # 1. 项目核心逻辑
 
@@ -108,7 +108,7 @@ graph TD;
 - **基础 LLM 答案：** 不使用 RAG 功能
 - **仅向量答案：** 仅使用基于向量的检索（在向量数据库中查询文本块向量）
 - **仅图答案：** 仅使用基于图的检索（在向量数据库中查询图顶点向量和图数据库）
-- **图-向量答案：** 同时使用基于图和基于向量的检索
+- **图 - 向量答案：** 同时使用基于图和基于向量的检索
 
 ![image](https://github.com/user-attachments/assets/26641e09-249f-4b3a-8013-16dc9383d333)
 
@@ -140,7 +140,7 @@ graph TD;
   - **基础 LLM 答案**
   - **仅向量答案**
   - **仅图答案**
-  - **图-向量答案**
+  - **图 - 向量答案**
 
 ![image](https://github.com/user-attachments/assets/7d4496a3-d44c-4491-9463-8e93595dfa45)
 

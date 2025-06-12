@@ -1,5 +1,5 @@
 ---
-title: "HugeGraph Computing"
-linkTitle: "HugeGraph Computing"
-weight: 3
+title: "HugeGraph Computing (OLAP)"
+linkTitle: "HugeGraph Computing (OLAP)"
+weight: 4
 ---

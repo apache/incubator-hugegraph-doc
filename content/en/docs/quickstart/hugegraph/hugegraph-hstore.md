@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph-Store Quick Start"
 linkTitle: "Install/Build HugeGraph-Store"
-weight: 1
+weight: 3
 ---
 
 ### 1 HugeGraph-Store Overview

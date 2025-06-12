@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph-Server Quick Start"
 linkTitle: "安装/构建 HugeGraph-Server"
-weight: 3
+weight: 1
 ---
 
 ### 1 HugeGraph-Server 概述
@@ -21,7 +21,7 @@ Core 模块是 Tinkerpop 接口的实现，Backend 模块用于管理数据存�
 
 **在往下阅读之前先执行 `java -version` 命令确认 jdk 版本**
 
-> 注：使用 Java 8 启动 HugeGraph-Server 会失去一些**安全性**的保障，也会降低性能相关指标
+> 注：使用 Java 8 启动 HugeGraph-Server 会失去一些**安全性**的保障，也会降低性能相关指标 (请尽早升级/迁移)
 
 ### 3 部署
 

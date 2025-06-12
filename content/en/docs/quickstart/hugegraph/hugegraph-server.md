@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph-Server Quick Start"
 linkTitle: "Install/Build HugeGraph-Server"
-weight: 3
+weight: 1
 ---
 
 ### 1 HugeGraph-Server Overview
@@ -73,13 +73,13 @@ services:
 
 > Note: 
 >
-> 1. The docker image of hugegraph is a convenience release to start hugegraph quickly, but not **official distribution** artifacts. You can find more details from [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub).
+> 1. The docker image of the hugegraph is a convenient release to start it quickly, but not **official distribution** artifacts. You can find more details from [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub).
 > 
 > 2. Recommend to use `release tag`(like `1.5.0`/`1.5.0`) for the stable version. Use `latest` tag to experience the newest functions in development.
 
 #### 3.2 Download the binary tar tarball
 
-You could download the binary tarball from the download page of ASF site like this:
+You could download the binary tarball from the download page of the ASF site like this:
 ```bash
 # use the latest version, here is 1.5.0 for example
 wget https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph-incubating-{version}.tar.gz
@@ -93,7 +93,7 @@ curl https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph
 #### 3.3 Source code compilation
 Please ensure that the wget command is installed before compiling the source code
 
-We could get HugeGraph **source code** by 2 ways: (So as the other HugeGraph repos/modules)
+We could get HugeGraph **source code** in 2 ways: (So as the other HugeGraph repos/modules)
 - download the stable/release version from the ASF site
 - clone the unstable/latest version by GitBox(ASF) or GitHub
 
@@ -177,7 +177,7 @@ bin/hugegraph deploy -v {hugegraph-version} -p {install-path} [-u {download-path
 ### 4 Config
 
 If you need to quickly start HugeGraph just for testing, then you only need to modify a few configuration items (see next section).
-for detailed configuration introduction, please refer to [configuration document](/docs/config/config-guide) and [introduction to configuration items](/docs/config/config-option)
+For detailed configuration introduction, please refer to [configuration document](/docs/config/config-guide) and [introduction to configuration items](/docs/config/config-option)
 
 ### 5 Startup
 
@@ -333,7 +333,7 @@ rocksdb.data_path=.
 rocksdb.wal_path=.
 ```
 
-Initialize the database (required on first startup or a new configuration was manually added under 'conf/graphs/')
+Initialize the database (required on the first startup, or a new configuration was manually added under 'conf/graphs/')
 
 ```bash
 cd *hugegraph-${version}
@@ -375,7 +375,7 @@ cassandra.password=
 #cassandra.keyspace.replication=3
 ```
 
-Initialize the database (required on first startup or a new configuration was manually added under 'conf/graphs/')
+Initialize the database (required on the first startup, or a new configuration was manually added under 'conf/graphs/')
 
 
 ```bash
@@ -437,7 +437,7 @@ cassandra.password=
 
 Since the scylladb database itself is an "optimized version" based on cassandra, if the user does not have scylladb installed, they can also use cassandra as the backend storage directly. They only need to change the backend and serializer to scylladb, and the host and post point to the seeds and port of the cassandra cluster. Yes, but it is not recommended to do so, it will not take advantage of scylladb itself.
 
-Initialize the database (required on first startup or a new configuration was manually added under 'conf/graphs/')
+Initialize the database (required on the first startup, or a new configuration was manually added under 'conf/graphs/')
 
 ```bash
 cd *hugegraph-${version}
@@ -477,7 +477,7 @@ hbase.port=2181
 #hbase.edge_partitions=30
 ```
 
-Initialize the database (required on first startup or a new configuration was manually added under 'conf/graphs/')
+Initialize the database (required on the first startup, or a new configuration was manually added under 'conf/graphs/')
 
 ```bash
 cd *hugegraph-${version}
@@ -585,7 +585,7 @@ The rest of the configurations can be referenced under [4 config](#4-config)
 
 </details>
 
-##### 5.2.2 Create example graph when starting server
+##### 5.2.2 Create an example graph when starting a server
 
 Set the environment variable `PRELOAD=true` when starting Docker to load data during the execution of the startup script.
 
@@ -659,7 +659,7 @@ curl http://localhost:8080/graphs/hugegraph/graph/vertices
 
 _explanation_
 
-1. Since there are many vertices and edges in the graph, for list-type requests, such as getting all vertices, getting all edges, etc., the server will compress the data and return it, so when use curl, you get a bunch of garbled characters, you can redirect to gunzip for decompression. It is recommended to use Chrome browser + Restlet plugin to send HTTP requests for testing.
+1. Since there are many vertices and edges in the graph, for list-type requests, such as getting all vertices, getting all edges, etc., the server will compress the data and return it, so when use curl, you get a bunch of garbled characters, you can redirect to gunzip for decompression. It is recommended to use the Chrome browser + Restlet plugin to send HTTP requests for testing.
 
     ```
     curl "http://localhost:8080/graphs/hugegraph/graph/vertices" | gunzip
@@ -729,7 +729,7 @@ response body:
 
 <p id="swaggerui-example"></p>
 
-For detailed API, please refer to [RESTful-API](/docs/clients/restful-api)
+For the detailed API, please refer to [RESTful-API](/docs/clients/restful-api)
 
 You can also visit `localhost:8080/swagger-ui/index.html` to check the API.
 

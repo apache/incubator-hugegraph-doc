@@ -1,10 +1,10 @@
 ---
-title: "HugeGraph-AI Quick Start"
-linkTitle: "HugeGraph-AI Quick Start"
+title: "GraphRAG UI Details"
+linkTitle: "GraphRAG UI Details"
 weight: 4
 ---
 
-> Follow up [main doc](./_index.md) to introduce the basic UI function & details, welcome to update and improve at any time, thanks
+> Follow up [main doc](../) to introduce the basic UI function & details, welcome to update and improve at any time, thanks
 
 # 1. Core Logic of the Project
 
@@ -23,8 +23,6 @@ Construct a knowledge graph, chunk vector, and graph vid vector from the text.
 
 ![image](https://github.com/user-attachments/assets/f3366d46-2e31-4638-94c4-7214951ef77a)
 
-
-
 ```mermaid
 graph TD;
     A[Raw Text] --> B[Text Segmentation]
@@ -38,8 +36,6 @@ graph TD;
     I[Retrieve vertices from Graph Database] --> J[Vectorize vertices and store in Vector Database \nNote: Incremental update]
 
 ```
-
-
 
 ### Four Input Fields:
 

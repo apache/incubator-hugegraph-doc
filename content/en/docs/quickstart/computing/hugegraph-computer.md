@@ -1,22 +1,22 @@
 ---
 title: "HugeGraph-Computer Quick Start"
 linkTitle: "Analysis with HugeGraph-Computer"
-weight: 1
+weight: 2
 ---
 
 ## 1 HugeGraph-Computer Overview
 
-The [`HugeGraph-Computer`](https://github.com/apache/incubator-hugegraph-computer) is a distributed graph processing system for HugeGraph (OLAP). It is an implementation of [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf). It runs on a Kubernetes framework.
+The [`HugeGraph-Computer`](https://github.com/apache/incubator-hugegraph-computer) is a distributed graph processing system for HugeGraph (OLAP). It is an implementation of [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf). It runs on a Kubernetes(K8s) framework.(It focuses on supporting graph data volumes of hundreds of billions to trillions, using disk for sorting and acceleration, which is one of the biggest differences from Vermeer)
 
 ### Features
 
 - Support distributed MPP graph computing, and integrates with HugeGraph as graph input/output storage.
-- Based on BSP (Bulk Synchronous Parallel) model, an algorithm performs computing through multiple parallel iterations, every iteration is a superstep.
+- Based on the BSP (Bulk Synchronous Parallel) model, an algorithm performs computing through multiple parallel iterations; every iteration is a superstep.
 - Auto memory management. The framework will never be OOM(Out of Memory) since it will split some data to disk if it doesn't have enough memory to hold all the data.
 - The part of edges or the messages of super node can be in memory, so you will never lose it.
 - You can load the data from HDFS or HugeGraph, or any other system.
 - You can output the results to HDFS or HugeGraph, or any other system.
-- Easy to develop a new algorithm. You just need to focus on a vertex only processing just like as in a single server, without worrying about message transfer and memory/storage management.
+- Easy to develop a new algorithm. You just need to focus on vertex-only processing just like as in a single server, without worrying about message transfer and memory/storage management.
 
 ## 2 Dependency for Building/Running
 
@@ -30,7 +30,7 @@ The [`HugeGraph-Computer`](https://github.com/apache/incubator-hugegraph-compute
 
 ### 3.1 Run PageRank algorithm locally
 
-> To run algorithm with HugeGraph-Computer, you need to install Java 11 or later versions.
+> To run the algorithm with HugeGraph-Computer, you need to install Java 11 or later versions.
 >
 > You also need to deploy HugeGraph-Server and [Etcd](https://etcd.io/docs/v3.5/quickstart/).
 
@@ -82,7 +82,7 @@ bin/start-computer.sh -d local -r worker
 
 3.1.5.1 Enable `OLAP` index query for server
 
-If OLAP index is not enabled, it needs to enable. More reference: [modify-graphs-read-mode](/docs/clients/restful-api/graphs/#634-modify-graphs-read-mode-this-operation-requires-administrator-privileges)
+If the OLAP index is not enabled, it needs to be enabled. More reference: [modify-graphs-read-mode](/docs/clients/restful-api/graphs/#634-modify-graphs-read-mode-this-operation-requires-administrator-privileges)
 
 ```http
 PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
@@ -98,7 +98,7 @@ curl "http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3" | gunz
 
 ### 3.2 Run PageRank algorithm in Kubernetes
 
-> To run algorithm with HugeGraph-Computer, you need to deploy HugeGraph-Server first
+> To run an algorithm with HugeGraph-Computer, you need to deploy HugeGraph-Server first
 
 #### 3.2.1 Install HugeGraph-Computer CRD
 
@@ -135,7 +135,7 @@ hugegraph-computer-operator-controller-manager-58c5545949-jqvzl   1/1     Runnin
 hugegraph-computer-operator-etcd-28lm67jxk5                       1/1     Running   0          15h
 ```
 
-#### 3.2.5 Submit job
+#### 3.2.5 Submit a job
 
 > More computer crd please see: [Computer CRD](/docs/config/config-computer#hugegraph-computer-crd)
 >
@@ -200,7 +200,7 @@ kubectl get event --field-selector reason=ComputerJobSucceed --field-selector in
 
 If the output to `Hugegraph-Server` is consistent with Locally, if output to `HDFS`, please check the result file in the directory of `/hugegraph-computer/results/{jobId}` directory.
 
-## 4 Built-In algorithms document
+## 4. Built-In algorithms document
 
 ### 4.1 Supported algorithms list:
 

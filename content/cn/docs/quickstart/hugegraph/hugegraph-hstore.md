@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph-Store Quick Start"
 linkTitle: "安装/构建 HugeGraph-Store"
-weight: 1
+weight: 3
 ---
 
 ### 1 HugeGraph-Store 概述
@@ -134,13 +134,13 @@ logging:
 #### 6.1 三节点配置参考
 
 - 3 PD 节点
-  - raft 端口: 8610, 8611, 8612
-  - rpc 端口: 8686, 8687, 8688
-  - rest 端口: 8620, 8621, 8622
+  - raft 端口：8610, 8611, 8612
+  - rpc 端口：8686, 8687, 8688
+  - rest 端口：8620, 8621, 8622
 - 3 Store 节点
-  - raft 端口: 8510, 8511, 8512
-  - rpc 端口: 8500, 8501, 8502
-  - rest 端口: 8520, 8521, 8522
+  - raft 端口：8510, 8511, 8512
+  - rpc 端口：8500, 8501, 8502
+  - rest 端口：8520, 8521, 8522
 
 #### 6.2 Store 节点配置
 
