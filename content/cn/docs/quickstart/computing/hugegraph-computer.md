@@ -204,14 +204,14 @@ kubectl get event --field-selector reason=ComputerJobSucceed --field-selector in
 
 ### 4.1 支持的算法列表：
 
-###### 中心性算法：
+#### 中心性算法：
 
 * PageRank
 * BetweennessCentrality
 * ClosenessCentrality
 * DegreeCentrality
 
-###### 社区算法：
+#### 社区算法：
 
 * ClusteringCoefficient
 * Kcore
@@ -219,7 +219,7 @@ kubectl get event --field-selector reason=ComputerJobSucceed --field-selector in
 * TriangleCount
 * Wcc
 
-###### 路径算法：
+#### 路径算法：
 
 * RingsDetection
 * RingsDetectionWithFilter

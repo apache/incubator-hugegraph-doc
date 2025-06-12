@@ -1,6 +1,6 @@
 ---
-title: "Explore with HugeGraph-AI"
-linkTitle: "Explore with HugeGraph-AI"
+title: "HugeGraph-AI"
+linkTitle: "HugeGraph-AI"
 weight: 3
 ---
 

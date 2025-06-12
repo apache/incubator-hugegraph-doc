@@ -1,7 +1,7 @@
 ---
 title: "GraphRAG UI Details"
 linkTitle: "GraphRAG UI Details"
-weight: 4
+weight: 1
 ---
 
 > Follow up [main doc](../) to introduce the basic UI function & details, welcome to update and improve at any time, thanks
@@ -174,10 +174,7 @@ graph TD;
     
     F[Natural Language Query] --> G[Search for the most similar query \nin the Vector Database \n&#40If no Gremlin pairs exist in the Vector Database, \ndefault files will be automatically vectorized&#41 \nand retrieve the corresponding Gremlin]
     G --> H[Add the matched pair to the prompt \nand use LLM to generate the Gremlin \ncorresponding to the Natural Language Query]
-
 ```
-
-
 
 ### Input Fields for the Second Part:
 
