@@ -43,8 +43,8 @@ weight: 2
   ```
 - 启动Docker容器：
   ```bash
-  docker run -it --name rag -p 8001:8001 hugegraph/rag bash
-  docker run -it --name rag-bin -p 8001:8001 hugegraph/rag-bin bash
+    docker run -it --name rag -v path2project/hugegraph-llm/.env:/home/work/hugegraph-llm/.env -p 8001:8001 hugegraph/rag bash
+    docker run -it --name rag-bin -v path2project/hugegraph-llm/.env:/home/work/hugegraph-llm/.env -p 8001:8001 hugegraph/rag-bin bash
   ```
 - 启动Graph RAG演示：
   ```bash

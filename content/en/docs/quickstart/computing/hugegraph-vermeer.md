@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph-Vermeer Quick Start"
 linkTitle: "(OLAP) Vermeer Memory-First Computing Framework"
-weight: 7
+weight: 2
 ---
 
 ## 1. Overview of Vermeer

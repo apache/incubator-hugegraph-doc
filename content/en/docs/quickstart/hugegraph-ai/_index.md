@@ -1,7 +1,7 @@
 ---
 title: "Explore with HugeGraph-AI"
 linkTitle: "Explore with HugeGraph-AI"
-weight: 4
+weight: 2
 ---
 
 > Please refer to the AI repository [README](https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-llm#readme) for the most up-to-date documentation, and the official website **regularly** is updated and synchronized~.
@@ -48,8 +48,8 @@ graph systems and large language models.
      ```
    - Start the Docker container:
      ```bash
-     docker run -it --name rag -p 8001:8001 hugegraph/rag bash
-     docker run -it --name rag-bin -p 8001:8001 hugegraph/rag-bin bash
+     docker run -it --name rag -v path2project/hugegraph-llm/.env:/home/work/hugegraph-llm/.env -p 8001:8001 hugegraph/rag bash
+     docker run -it --name rag-bin -v path2project/hugegraph-llm/.env:/home/work/hugegraph-llm/.env -p 8001:8001 hugegraph/rag-bin bash
      ```
    - Start the Graph RAG demo:
      ```bash

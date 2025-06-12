@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph-Client Quick Start"
 linkTitle: "Develop with HugeGraph-Client"
-weight: 4
+weight: 1
 ---
 
 ### 1 Overview Of Hugegraph

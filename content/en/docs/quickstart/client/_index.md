@@ -1,5 +1,5 @@
 ---
 title: "HugeGraph Client"
 linkTitle: "HugeGraph Client"
-weight: 3
+weight: 4
 ---
