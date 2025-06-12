@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph Go 客户端快速入门"
 linkTitle: "Go 客户端"
-weight: 2
+weight: 3
 ---
 
 基于 Go 语言的 HugeGraph Client SDK 工具。

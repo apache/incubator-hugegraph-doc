@@ -1,6 +1,6 @@
 ---
-title: "HugeGraph-Client Quick Start"
-linkTitle: "Develop with HugeGraph-Client"
+title: "HugeGraph-Java-Client"
+linkTitle: "Java-Client"
 weight: 1
 ---
 

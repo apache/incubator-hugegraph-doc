@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph Go Client Quick Start"
 linkTitle: "Go Client"
-weight: 2
+weight: 3
 ---
 
 A HugeGraph Client SDK tool based on the Go language.

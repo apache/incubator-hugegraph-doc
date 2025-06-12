@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph Python Client Quick Start"
 linkTitle: "Python Client"
-weight: 3
+weight: 2
 ---
 
 The `hugegraph-python-client` is a Python client/SDK for HugeGraph Database. 

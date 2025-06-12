@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph Python 客户端快速入门"
 linkTitle: "Python 客户端"
-weight: 3
+weight: 2
 ---
 
 `hugegraph-python-client` 是 HugeGraph 图数据库的 Python 客户端/SDK。

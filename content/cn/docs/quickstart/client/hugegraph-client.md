@@ -1,7 +1,7 @@
 ---
-title: "HugeGraph-Client Quick Start"
-linkTitle: "HugeGraph-Client (Java)"
-weight: 4
+title: "HugeGraph-Java-Client"
+linkTitle: "Java 客户端"
+weight: 1
 ---
 
 ### 1 HugeGraph-Client 概述
