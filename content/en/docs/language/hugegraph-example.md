@@ -4,44 +4,44 @@ linkTitle: "HugeGraph Examples"
 weight: 2
 ---
 
-### 1 概述
+### 1 Overview
 
-本示例将[TitanDB Getting Started](http://s3.thinkaurelius.com/docs/titan/1.0.0/getting-started.html) 为模板来演示HugeGraph的使用方法。通过对比HugeGraph和TitanDB，了解HugeGraph和TitanDB的差异。
+This example uses the [TitanDB Getting Started](http://s3.thinkaurelius.com/docs/titan/1.0.0/getting-started.html) guide as a template to demonstrate how to use HugeGraph. By comparing HugeGraph and TitanDB, you can understand the differences between them.
 
-#### 1.1 HugeGraph与TitanDB的异同
+#### 1.1 Similarities and Differences between HugeGraph and TitanDB
 
-HugeGraph和TitanDB都是基于[Apache TinkerPop3](https://tinkerpop.apache.org)框架的图数据库，均支持[Gremlin](https://tinkerpop.apache.org/gremlin.html)图查询语言，在使用方法和接口方面具有很多相似的地方。然而HugeGraph是全新设计开发的，其代码结构清晰，功能较为丰富，接口更为友好等特点。
+Both HugeGraph and TitanDB are graph databases based on the [Apache TinkerPop3](https://tinkerpop.apache.org) framework. They both support the [Gremlin](https://tinkerpop.apache.org/gremlin.html) graph query language and share many similarities in terms of usage and interfaces. However, HugeGraph is a completely new design and development, characterized by its clear code structure, richer features, and more user-friendly interfaces.
 
-HugeGraph相对于TitanDB而言，其主要特点如下：
+Compared to TitanDB, HugeGraph's main features are as follows:
 
-- HugeGraph目前有HugeGraph-API、HugeGraph-Client、HugeGraph-Loader、HugeGraph-Studio、HugeGraph-Spark等完善的工具组件，可以完成系统集成、数据载入、图可视化查询、Spark 连接等功能；
-- HugeGraph具有Server和Client的概念，第三方系统可以通过jar引用、client、api等多种方式接入，而TitanDB仅支持jar引用方式接入。
-- HugeGraph的Schema需要显式定义，所有的插入和查询均需要通过严格的schema校验，目前暂不支持schema的隐式创建。
-- HugeGraph充分利用后端存储系统的特点来实现数据高效存取，而TitanDB以统一的Kv结构无视后端的差异性。
-- HugeGraph的更新操作可以实现按需操作（例如：更新某个属性）性能更好。TitanDB的更新是read and update方式。
-- HugeGraph的VertexId和EdgeId均支持拼接，可实现自动去重，同时查询性能更好。TitanDB的所有Id均是自动生成，查询需要经索引。
+- HugeGraph currently offers a comprehensive suite of tools, including HugeGraph-API, HugeGraph-Client, HugeGraph-Loader, HugeGraph-Studio, and HugeGraph-Spark. These components facilitate system integration, data loading, visual graph querying, Spark connectivity, and other functionalities.
+- HugeGraph incorporates the concepts of Server and Client, allowing third-party systems to connect via multiple methods such as JAR references, clients, and APIs. In contrast, TitanDB only supports connections via JAR references.
+- HugeGraph requires explicit schema definition, and all insertions and queries must pass strict schema validation. Implicit schema creation is not supported at the moment.
+- HugeGraph makes full use of the characteristics of the underlying storage system to achieve efficient data access, whereas TitanDB ignores the differences of the backend with a unified Kv structure.
+- HugeGraph's update operations can be performed on-demand (e.g., updating a specific attribute), offering better performance. TitanDB uses a read-and-update approach for updates.
+- Both VertexId and EdgeId in HugeGraph support concatenation, allowing for automatic deduplication and better query performance. In TitanDB, all IDs are auto-generated and require indexing for queries.
 
-#### 1.2 人物关系图谱
+#### 1.2 Character Relationship Graph
 
-本示例通过Property Graph Model图数据模型来描述希腊神话中各人物角色的关系（也被成为人物关系图谱），具体关系详见下图。
+This example uses the Property Graph Model to describe the relationships between characters in Greek mythology, also known as the character relationship graph. The specific relationships are shown in the diagram below.
 
 <div style="text-align: center;">
   <img src="/docs/images/graph-of-gods.png" alt="image">
 </div>
 
 
-其中，圆形节点代表实体(Vertex)，箭头代表关系（Edge），方框的内容为属性。
+In the diagram, circular nodes represent entities (Vertices), arrows represent relationships (Edges), and the content in the boxes represents attributes.
 
-该关系图谱中有两类顶点，分别是人物（character）和位置（location）如下表：
+There are two types of vertices in this graph: characters and locations, as shown in the table below:
 
-| 名称        | 类型     | 属性            |
+| Name        | Type     | Attributes            |
 |-----------|--------|---------------|
 | character | vertex | name,age,type |
 | location  | vertex | name          |
 
-有六种关系，分别是父子（father）、母子（mother）、兄弟（brother）、战斗（battled）、居住(lives)、拥有宠物（pet） 关于关系图谱的具体信息如下：
+There are six types of relationships: father, mother, brother, battled, lives, and pet. The details of these relationships are as follows:
 
-| 名称      | 类型   | source vertex label | target vertex label | 属性     |
+| Name      | Type   | Source Vertex Label | Target Vertex Label | Attributes     |
 |---------|------|---------------------|---------------------|--------|
 | father  | edge | character           | character           | -      |
 | mother  | edge | character           | character           | -      |
@@ -49,13 +49,13 @@ HugeGraph相对于TitanDB而言，其主要特点如下：
 | pet     | edge | character           | character           | -      |
 | lives   | edge | character           | location            | reason |
 
-在HugeGraph中，每个edge label只能作用于一对source vertex label和target vertex label。也就是说，如果一个图内定义了一种关系father连接character和character，那farther就不能再连接其他的vertex labels。
+In HugeGraph, each edge label can only act on one pair of source and target vertex labels. In other words, if a relationship called "father" is defined in the graph to connect character to character, then "father" cannot be used to connect to other vertex labels.
 
-因此本例子将原TitanDB中的monster, god, human, demigod均使用相同的`vertex label: character`来表示, 同时增加属性type来标识人物的类型。`edge label`与原TitanDB保持一致。当然为了满足`edge label`约束，也可以通过调整`edge label`的`name`来实现。
+Therefore, in this example, the original TitanDB's monster, god, human, and demigod are all represented using the same `vertex label: character` in HugeGraph, with an additional `type` attribute to indicate the type of character. The `edge labels` remain consistent with the original TitanDB. Of course, to satisfy the `edge label` constraints, adjustments can be made to the `name` of the `edge label`.
 
 ### 2 Graph Schema and Data Ingest Examples
 
-HugeGraph需要显示创建Schema，因此需要依次创建PropertyKey、VertexLabel、EdgeLabel，如果有需要索引还需要创建IndexLabel。
+HugeGraph requires explicit schema creation, which involves creating PropertyKeys, VertexLabels, and EdgeLabels in sequence. If indexing is needed, IndexLabels must also be created.
 
 #### 2.1 Graph Schema
 
@@ -118,7 +118,7 @@ cerberus.addEdge("lives", tartarus)
 
 #### 2.3 Indices
 
-HugeGraph默认是自动生成Id，如果用户通过`primaryKeys`指定`VertexLabel`的`primaryKeys`字段列表后，`VertexLabel`的Id策略将会自动切换到`primaryKeys`策略。 启用`primaryKeys`策略后,HugeGraph通过`vertexLabel+primaryKeys`拼接生成`VertexId` ，可实现自动去重，同时无需额外创建索引即可以使用`primaryKeys`中的属性进行快速查询。 例如 "character" 和 "location" 都有`primaryKeys("name")`属性，因此在不额外创建索引的情况下可以通过`g.V().hasLabel('character') .has('name','hercules')`查询vertex 。
+HugeGraph by default automatically generates IDs. However, if a user specifies the `primaryKeys` field list for a `VertexLabel` through `primaryKeys`, the ID strategy for that `VertexLabel` will automatically switch to the `primaryKeys` strategy. Once the `primaryKeys` strategy is enabled, HugeGraph generates `VertexId` by concatenating `vertexLabel+primaryKeys`, which allows for automatic deduplication. Additionally, there is no need to create extra indexes to use the properties in `primaryKeys` for fast querying. For example, both "character" and "location" have the `primaryKeys("name")` attribute, so without creating additional indexes, vertices can be queried using `g.V().hasLabel('character') .has('name','hercules')`.
 
 ### 3 Graph Traversal Examples
 
@@ -130,13 +130,13 @@ HugeGraph默认是自动生成Id，如果用户通过`primaryKeys`指定`VertexL
 g.V().hasLabel('character').has('name','hercules').out('father').out('father')
 ```
 
-也可以通过`repeat`方式：
+It can also be done using the `repeat` method:
 
 ```groovy
 g.V().hasLabel('character').has('name','hercules').repeat(__.out('father')).times(2)
 ```
 
-**2\. Find the name of hercules's father**
+**2\. Find the name of Hercules's father**
 
 ```groovy
 g.V().hasLabel('character').has('name','hercules').out('father').value('name')
@@ -178,8 +178,8 @@ g.V(pluto).out('brother').as('god').out('lives').as('place').select('god','place
 g.V(pluto).out('brother').as('god').out('lives').as('place').select('god','place').by('name')
 ```
 
-推荐使用[HugeGraph-Studio](/docs/quickstart/hugegraph-studio) 通过可视化的方式来执行上述代码。另外也可以通过HugeGraph-Client、HugeApi、GremlinConsole和GremlinDriver等多种方式执行上述代码。
+It is recommended to use [HugeGraph-Hubble](/cn/docs/quickstart/toolchain/hugegraph-hubble) to execute the above code visually. Additionally, the code can be executed through various other methods such as HugeGraph-Client, HugeApi, GremlinConsole, and GremlinDriver.
 
-#### 3.2 总结
+#### 3.2 Summary
 
-HugeGraph 目前支持 `Gremlin` 的语法，用户可以通过 `Gremlin / REST-API` 实现各种查询需求。
+HugeGraph currently supports `Gremlin` syntax, and users can implement various query requirements through `Gremlin / REST-API`.
