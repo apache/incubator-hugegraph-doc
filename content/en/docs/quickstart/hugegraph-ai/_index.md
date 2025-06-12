@@ -4,7 +4,7 @@ linkTitle: "Explore with HugeGraph-AI"
 weight: 2
 ---
 
-> Please refer to the AI repository [README](https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-llm#readme) for the most up-to-date documentation, and the official website **regularly** is updated and synchronized~.
+> Please refer to the AI repository [README](https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-llm#readme) for the most up-to-date documentation, and the official website **regularly** is updated and synchronized.
 
 > AI summarizes the project documentation: [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/apache/incubator-hugegraph-ai)
 
@@ -88,7 +88,7 @@ graph systems and large language models.
     ```  
     If dependency download fails or too slow due to network issues, it is recommended to modify `hugegraph-llm/pyproject.toml`.
 
-5. Start the gradio interactive demo of **Graph RAG**, you can run with the following command and open http://127.0.0.1:8001 after starting
+5. To start the Gradio interactive demo for **Graph RAG**, run the following command, then open http://127.0.0.1:8001 in your browser.
     ```bash
     python -m hugegraph_llm.demo.rag_demo.app  # same as "uv run xxx"
     ```
@@ -115,7 +115,7 @@ graph systems and large language models.
 > [!TIP]   
 > You can also refer to our [quick-start](https://github.com/apache/incubator-hugegraph-ai/blob/main/hugegraph-llm/quick_start.md) doc to understand how to use it & the basic query logic 🚧
 
-## 4 Examples
+## 4. Examples
 
 ### 4.1 Build a knowledge graph in HugeGraph through LLM
 
