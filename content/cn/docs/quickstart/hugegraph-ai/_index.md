@@ -37,9 +37,9 @@ weight: 3
    - 确保您已安装 Docker
    - 我们提供两个容器镜像：
      - **镜像 1**: [hugegraph/rag](https://hub.docker.com/r/hugegraph/rag/tags)  
-       用于构建和运行 RAG 功能，适合快速部署和开发
+       用于构建和运行 RAG 功能，适合快速部署和直接修改源码
      - **镜像 2**: [hugegraph/rag-bin](https://hub.docker.com/r/hugegraph/rag-bin/tags)  
-       使用 Nuitka 编译的二进制版本，在生产环境中性能更稳定、更高效
+       使用 Nuitka 编译的 C 二进制转译版本，性能更好、更高效
    - 拉取 Docker 镜像：
      ```bash
      docker pull hugegraph/rag:latest # 拉取镜像1
