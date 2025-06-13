@@ -5501,7 +5501,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-2">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">204&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="714-取消某个异步任务该异步任务必须具有处理中断的能力">7.1.4 取消某个异步任务，&lt;strong>该异步任务必须具有处理中断的能力&lt;/strong>&lt;/h4>
-&lt;p>假设已经通过&lt;a href="../gremlin">Gremlin API&lt;/a>创建了一个异步任务如下：&lt;/p>
+&lt;p>假设已经通过&lt;a href="/cn/docs/clients/restful-api/gremlin">Gremlin API&lt;/a>创建了一个异步任务如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&amp;#34;for (int i = 0; i &amp;lt; 10; i++) {&amp;#34;&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">+&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph.addVertex(T.label, &amp;#39;man&amp;#39;);&amp;#34;&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">+&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph.tx().commit();&amp;#34;&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">+&lt;/span>

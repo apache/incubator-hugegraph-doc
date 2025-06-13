@@ -9,14 +9,14 @@
 &lt;ul>
 &lt;li>应用程序层：
 &lt;ul>
-&lt;li>&lt;a href="/docs/quickstart/hugegraph-hubble/">Hubble&lt;/a>: 一站式可视化分析平台，平台涵盖了从数据建模，到数据快速导入，再到数据的在线、离线分析、以及图的统一管理的全过程，实现了图应用的全流程向导式操作。&lt;/li>
-&lt;li>&lt;a href="/docs/quickstart/hugegraph-loader/">Loader&lt;/a>: 数据导入组件，能够将多种数据源的数据转化为图的顶点和边并批量导入到图数据库中。&lt;/li>
-&lt;li>&lt;a href="/docs/quickstart/hugegraph-tools/">Tools&lt;/a>: 命令行工具，用于部署、管理和备份/恢复 HugeGraph 中的数据。&lt;/li>
-&lt;li>&lt;a href="/docs/quickstart/hugegraph-computer/">Computer&lt;/a>: 分布式图处理系统 (OLAP)，它是 &lt;a href="https://kowshik.github.io/JPregel/pregel_paper.pdf">Pregel&lt;/a> 的一个实现，可以运行在 Kubernetes 上。&lt;/li>
-&lt;li>&lt;a href="/docs/quickstart/hugegraph-client/">Client&lt;/a>: 使用 Java 编写的 HugeGraph 客户端，用户可以使用 Client 编写 Java 代码操作 HugeGraph，后续可根据需要提供 Python、Go、C++ 等多语言支持。&lt;/li>
+&lt;li>&lt;a href="/cn/docs/quickstart/toolchain/hugegraph-hubble/">Hubble&lt;/a>: 一站式可视化分析平台，平台涵盖了从数据建模，到数据快速导入，再到数据的在线、离线分析、以及图的统一管理的全过程，实现了图应用的全流程向导式操作。&lt;/li>
+&lt;li>&lt;a href="/cn/docs/quickstart/toolchain/hugegraph-loader/">Loader&lt;/a>: 数据导入组件，能够将多种数据源的数据转化为图的顶点和边并批量导入到图数据库中。&lt;/li>
+&lt;li>&lt;a href="/cn/docs/quickstart/toolchain/hugegraph-tools/">Tools&lt;/a>: 命令行工具，用于部署、管理和备份/恢复 HugeGraph 中的数据。&lt;/li>
+&lt;li>&lt;a href="/cn/docs/quickstart/computing/hugegraph-computer/">Computer&lt;/a>: 分布式图处理系统 (OLAP)，它是 &lt;a href="https://kowshik.github.io/JPregel/pregel_paper.pdf">Pregel&lt;/a> 的一个实现，可以运行在 Kubernetes 上。&lt;/li>
+&lt;li>&lt;a href="/cn/docs/quickstart/client/hugegraph-client/">Client&lt;/a>: 使用 Java 编写的 HugeGraph 客户端，用户可以使用 Client 编写 Java 代码操作 HugeGraph，后续可根据需要提供 Python、Go、C++ 等多语言支持。&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>&lt;a href="/docs/quickstart/hugegraph-server/">图引擎层&lt;/a>：
+&lt;li>&lt;a href="/cn/docs/quickstart/hugegraph/hugegraph-server/">图引擎层&lt;/a>：
 &lt;ul>
 &lt;li>REST Server: 提供 RESTful API 用于查询 Graph/Schema 等信息，支持 &lt;a href="https://tinkerpop.apache.org/gremlin.html">Gremlin&lt;/a> 和 &lt;a href="https://en.wikipedia.org/wiki/Cypher">Cypher&lt;/a> 查询语言，提供服务监控和运维的 APIs。&lt;/li>
 &lt;li>Graph Engine: 支持 OLTP 和 OLAP 两种图计算类型，其中 OLTP 实现了 &lt;a href="https://tinkerpop.apache.org">Apache TinkerPop3&lt;/a> 框架。&lt;/li>
@@ -501,7 +501,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;h2 id="使用方法">使用方法&lt;/h2>
-&lt;p>可以使用&lt;a href="/docs/quickstart/hugegraph-tools">hugegraph-tools&lt;/a>进行图的备份和恢复。&lt;/p>
+&lt;p>可以使用&lt;a href="/cn/docs/quickstart/toolchain/hugegraph-tools">hugegraph-tools&lt;/a>进行图的备份和恢复。&lt;/p>
 &lt;h4 id="backup-1">Backup&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/hugegraph backup -t all -d data
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>该命令将 http://127.0.0.1 的 hugegraph 图的全部元数据和图数据备份到data目录下。&lt;/p>
@@ -523,7 +523,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>该命令用于恢复图模式为 NONE。&lt;/p>
 &lt;p>至此，一次完整的图备份和图恢复流程结束。&lt;/p>
 &lt;h4 id="帮助">帮助&lt;/h4>
-&lt;p>备份和恢复命令的详细使用方式可以参考&lt;a href="/docs/quickstart/hugegraph-tools">hugegraph-tools文档&lt;/a>。&lt;/p>
+&lt;p>备份和恢复命令的详细使用方式可以参考&lt;a href="/cn/docs/quickstart/toolchain/hugegraph-tools">hugegraph-tools文档&lt;/a>。&lt;/p>
 &lt;h2 id="backuprestore使用和实现的api说明">Backup/Restore使用和实现的API说明&lt;/h2>
 &lt;h4 id="backup-2">Backup&lt;/h4>
 &lt;p>Backup 使用&lt;code>元数据&lt;/code>和&lt;code>图数据&lt;/code>的相应的 list(GET) API 导出，并未增加新的 API。&lt;/p>

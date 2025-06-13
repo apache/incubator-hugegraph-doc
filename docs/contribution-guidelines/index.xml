@@ -329,7 +329,7 @@ and no circular links, etc.&lt;/li>
 &lt;p>NOTE: The following configuration is for reference purposes only, and has been tested on Linux and macOS platforms based on &lt;a href="https://github.com/apache/incubator-hugegraph/commit/a946ad1de4e8f922251a5241ffc957c33379677f">this version&lt;/a>.&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="background">Background&lt;/h3>
-&lt;p>The &lt;a href="/docs/quickstart/hugegraph-server/">Quick Start&lt;/a> section provides instructions on how to start and stop HugeGraph-Server using &lt;strong>scripts&lt;/strong>. In this guide, we will explain how to run and debug HugeGraph-Server on the Linux platform using &lt;strong>IntelliJ IDEA&lt;/strong>.&lt;/p>
+&lt;p>The &lt;a href="/docs/quickstart/hugegraph/hugegraph-server/">Quick Start&lt;/a> section provides instructions on how to start and stop HugeGraph-Server using &lt;strong>scripts&lt;/strong>. In this guide, we will explain how to run and debug HugeGraph-Server on the Linux platform using &lt;strong>IntelliJ IDEA&lt;/strong>.&lt;/p>
 &lt;p>The core steps for local startup are the same as starting with &lt;strong>scripts&lt;/strong>:&lt;/p>
 &lt;ol>
 &lt;li>Initialize the database backend by executing the &lt;code>InitStore&lt;/code> class to initialize the graph.&lt;/li>
@@ -427,7 +427,7 @@ with this &lt;a href="https://github.com/apache/incubator-hugegraph/wiki/The-sty
 &lt;hr>
 &lt;h3 id="references">References&lt;/h3>
 &lt;ol>
-&lt;li>&lt;a href="/docs/quickstart/hugegraph-server/">HugeGraph-Server Quick Start&lt;/a>&lt;/li>
+&lt;li>&lt;a href="/docs/quickstart/hugegraph/hugegraph-server/">HugeGraph-Server Quick Start&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://gist.github.com/imbajin/1661450f000cd62a67e46d4f1abfe82c">Local Debugging Guide for HugeGraph Server (Win/Unix)&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://youtrack.jetbrains.com/issue/IDEA-180033">&amp;ldquo;package sun.misc does not exist&amp;rdquo; compilation error&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://youtrack.jetbrains.com/issue/IDEA-201168">Cannot compile: java: package sun.misc does not exist&lt;/a>&lt;/li>

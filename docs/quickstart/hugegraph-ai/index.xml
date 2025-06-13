@@ -1,0 +1,214 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HugeGraph – HugeGraph-AI</title><link>/docs/quickstart/hugegraph-ai/</link><description>Recent content in HugeGraph-AI on HugeGraph</description><generator>Hugo -- gohugo.io</generator><atom:link href="/docs/quickstart/hugegraph-ai/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: GraphRAG UI Details</title><link>/docs/quickstart/hugegraph-ai/quick_start/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-ai/quick_start/</guid><description>
+&lt;blockquote>
+&lt;p>Follow up &lt;a href="../">main doc&lt;/a> to introduce the basic UI function &amp;amp; details, welcome to update and improve at any time, thanks&lt;/p>
+&lt;/blockquote>
+&lt;h1 id="1-core-logic-of-the-project">1. Core Logic of the Project&lt;/h1>
+&lt;h2 id="build-rag-index-responsibilities">Build RAG Index Responsibilities:&lt;/h2>
+&lt;ul>
+&lt;li>Split and vectorize text&lt;/li>
+&lt;li>Extract text into a graph (construct a knowledge graph) and vectorize the vertices&lt;/li>
+&lt;/ul>
+&lt;h2 id="graphrag--user-functions-responsibilities">(Graph)RAG &amp;amp; User Functions Responsibilities:&lt;/h2>
+&lt;ul>
+&lt;li>Retrieve relevant content from the constructed knowledge graph and vector database based on the query to supplement the prompt.&lt;/li>
+&lt;/ul>
+&lt;h1 id="2-processing-flow-build-rag-index">2. (Processing Flow) Build RAG Index&lt;/h1>
+&lt;p>Construct a knowledge graph, chunk vector, and graph vid vector from the text.&lt;/p>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/f3366d46-2e31-4638-94c4-7214951ef77a" alt="image">&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>graph TD;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> A[Raw Text] --&amp;gt; B[Text Segmentation]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> B --&amp;gt; C[Vectorization]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> C --&amp;gt; D[Store in Vector Database]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> A --&amp;gt; F[Text Segmentation]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> F --&amp;gt; G[LLM extracts graph based on schema \nand segmented text]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> G --&amp;gt; H[Store graph in Graph Database, \nautomatically vectorize vertices \nand store in Vector Database]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> I[Retrieve vertices from Graph Database] --&amp;gt; J[Vectorize vertices and store in Vector Database \nNote: Incremental update]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="four-input-fields">Four Input Fields:&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Doc(s):&lt;/strong> Input text&lt;/li>
+&lt;li>&lt;strong>Schema:&lt;/strong> The schema of the graph, which can be provided as a JSON-formatted schema or as the graph name (if it exists in the database).&lt;/li>
+&lt;li>&lt;strong>Graph&lt;/strong> &lt;strong>Extract Prompt Header:&lt;/strong> The header of the prompt&lt;/li>
+&lt;li>&lt;strong>Output&lt;/strong>: Display results&lt;/li>
+&lt;/ul>
+&lt;h3 id="buttons">Buttons:&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>Get RAG Info&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>Get Vector Index Info:&lt;/strong> Retrieve vector index information&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Get&lt;/strong> &lt;strong>Graph&lt;/strong> &lt;strong>Index Info:&lt;/strong> Retrieve graph index information&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Clear RAG Data&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Clear Chunks Vector Index:&lt;/strong> Clear chunk vector&lt;/li>
+&lt;li>&lt;strong>Clear Graph Vid Vector Index&lt;/strong>: Clear graph vid vector&lt;/li>
+&lt;li>&lt;strong>Clear Graph Data&lt;/strong>: Clear Graph Data&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Import into&lt;/strong> &lt;strong>Vector&lt;/strong>: Convert the text in Doc(s) into vectors (requires chunking the text first and then converting the chunks into vectors)&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Extract&lt;/strong> &lt;strong>Graph&lt;/strong> &lt;strong>Data (1):&lt;/strong> Extract graph data from Doc(s) based on the Schema, using the Graph Extract Prompt Header and chunked content as the prompt&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Load into GraphDB (2):&lt;/strong> Store the extracted graph data into the database (automatically calls Update Vid Embedding to store vectors in the vector database)&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Update Vid Embedding:&lt;/strong> Convert graph vid into vectors&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="execution-flow">Execution Flow:&lt;/h3>
+&lt;ol>
+&lt;li>Input text into the &lt;strong>Doc(s)&lt;/strong> field.&lt;/li>
+&lt;li>Click the &lt;strong>Import into&lt;/strong> &lt;strong>Vector&lt;/strong> button to split and vectorize the text, storing it in the vector database.&lt;/li>
+&lt;li>Input the graph &lt;strong>Schema&lt;/strong> into the Schema field.&lt;/li>
+&lt;li>Click the &lt;strong>Extract&lt;/strong> &lt;strong>Graph&lt;/strong> &lt;strong>Data (1)&lt;/strong> button to extract the text into a graph.&lt;/li>
+&lt;li>Click the &lt;strong>Load into GraphDB (2)&lt;/strong> button to store the extracted graph into the graph database (this automatically calls &lt;strong>Update Vid Embedding&lt;/strong> to store the vectors in the vector database).&lt;/li>
+&lt;li>Click the &lt;strong>Update&lt;/strong> &lt;strong>Vid&lt;/strong> &lt;strong>Embedding&lt;/strong> button to vectorize the graph vertices and store them in the vector database.&lt;/li>
+&lt;/ol>
+&lt;h1 id="3-processing-flow-graphrag--user-functions">3. (Processing Flow) (Graph)RAG &amp;amp; User Functions&lt;/h1>
+&lt;p>The &lt;strong>Import into&lt;/strong> &lt;strong>Vector&lt;/strong> button in the previous module converts text (chunks) into vectors, and the &lt;strong>Update Vid Embedding&lt;/strong> button converts graph vid into vectors. These vectors are stored separately to supplement the context for queries (answer generation) in this module. In other words, the previous module prepares the data for RAG (vectorization), while this module executes RAG.&lt;/p>
+&lt;p>This module consists of two parts:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>HugeGraph RAG&lt;/strong> &lt;strong>Query&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>(Batch) Back-testing&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;p>The first part handles single queries, while the second part handles multiple queries at once. Below is an explanation of the first part.&lt;/p>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/33698062-e46b-4757-8b5e-93e8f10eae65" alt="image">&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>graph TD;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> A[Question] --&amp;gt; B[Vectorize the question and search \nfor the most similar chunk in the Vector Database &amp;amp;#40chunk&amp;amp;#41]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> A --&amp;gt; F[Extract keywords using LLM]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> F --&amp;gt; G[Match vertices precisely in Graph Database \nusing keywords; perform fuzzy matching in \nVector Database &amp;amp;#40graph vid&amp;amp;#41]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> G --&amp;gt; H[Generate Gremlin query using matched vertices and query with LLM]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> H --&amp;gt; I[Execute Gremlin query; if successful, finish; if failed, fallback to BFS]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> B --&amp;gt; J[Sort results]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> I --&amp;gt; J
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> J --&amp;gt; K[Generate answer]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="input-fields">Input Fields:&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Question:&lt;/strong> Input the query&lt;/li>
+&lt;li>&lt;strong>Query&lt;/strong> &lt;strong>Prompt:&lt;/strong> The prompt template used to ask the final question to the LLM&lt;/li>
+&lt;li>&lt;strong>Keywords Extraction Prompt:&lt;/strong> The prompt template for extracting keywords from the question&lt;/li>
+&lt;li>&lt;strong>Template Num:&lt;/strong> &amp;lt; 0 means disable text2gql; = 0 means no template(zero-shot); &amp;gt; 0 means using the specified number of templates&lt;/li>
+&lt;/ul>
+&lt;h3 id="query-scope-selection">Query Scope Selection:&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Basic&lt;/strong> &lt;strong>LLM&lt;/strong> &lt;strong>Answer:&lt;/strong> Does not use RAG functionality&lt;/li>
+&lt;li>&lt;strong>Vector-only Answer:&lt;/strong> Uses only vector-based retrieval (queries chunk vectors in the vector database)&lt;/li>
+&lt;li>&lt;strong>Graph-only Answer:&lt;/strong> Uses only graph-based retrieval (queries graph vid vectors in the vector database and the graph database)&lt;/li>
+&lt;li>&lt;strong>Graph-Vector Answer:&lt;/strong> Uses both graph-based and vector-based retrieval&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/26641e09-249f-4b3a-8013-16dc9383d333" alt="image">&lt;/p>
+&lt;h3 id="execution-flow-1">Execution Flow:&lt;/h3>
+&lt;h4 id="graph-only-answer">&lt;strong>Graph-only Answer:&lt;/strong>&lt;/h4>
+&lt;ul>
+&lt;li>Extract keywords from the &lt;strong>question&lt;/strong> using the &lt;strong>Keywords Extraction Prompt&lt;/strong>.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/b49e269f-eaec-40b1-8d8f-9e409821d75d" alt="image">&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Use the extracted keywords to:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>First, perform an exact match in the graph database.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>If no match is found, perform a fuzzy match in the vector database (graph vid vector) to retrieve relevant vertices.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>text2gql:&lt;/strong> Call the text2gql-related interface, using the matched vertices as entities to convert the &lt;strong>question&lt;/strong> into a Gremlin query and execute it in the graph database.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>BFS:&lt;/strong> If text2gql fails (LLM-generated queries might be invalid), fall back to executing a graph query using a predefined &lt;strong>Gremlin query template&lt;/strong> (essentially a BFS traversal).&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h4 id="vector-only-answer">&lt;strong>Vector-only Answer:&lt;/strong>&lt;/h4>
+&lt;ul>
+&lt;li>
+&lt;p>Convert the &lt;strong>query&lt;/strong> into a vector.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Search for the most similar content in the &lt;strong>chunk vector&lt;/strong> dataset in the vector database.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h4 id="sorting-and-answer-generation">&lt;strong>Sorting and Answer Generation:&lt;/strong>&lt;/h4>
+&lt;ul>
+&lt;li>
+&lt;p>After executing the retrieval, sort the search (retrieval) results to construct the final &lt;strong>prompt&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Generate answers based on different prompt configurations and display them in different output fields:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Basic&lt;/strong> &lt;strong>LLM&lt;/strong> &lt;strong>Answer&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Vector-only Answer&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Graph-only Answer&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Graph-Vector Answer&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/7d4496a3-d44c-4491-9463-8e93595dfa45" alt="image">&lt;/p>
+&lt;h1 id="4-processing-flow-text2gremlin">4. (Processing Flow) Text2Gremlin&lt;/h1>
+&lt;p>Converts natural language queries into Gremlin queries.&lt;/p>
+&lt;p>This module consists of two parts:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Build&lt;/strong> &lt;strong>Vector&lt;/strong> &lt;strong>Template Index (Optional):&lt;/strong> Vectorizes query/gremlin pairs from sample files and stores them in the vector database for reference when generating Gremlin queries.&lt;/li>
+&lt;li>&lt;strong>Natural Language to Gremlin:&lt;/strong> Converts natural language queries into Gremlin queries.&lt;/li>
+&lt;/ul>
+&lt;p>The first part is straightforward, so the focus is on the second part.&lt;/p>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/fc678369-261d-49ea-a289-1ca6ade5ca55" alt="image">&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>graph TD;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> A[Gremlin Pairs File] --&amp;gt; C[Vectorize query]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> C --&amp;gt; D[Store in Vector Database]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> F[Natural Language Query] --&amp;gt; G[Search for the most similar query \nin the Vector Database \n&amp;amp;#40If no Gremlin pairs exist in the Vector Database, \ndefault files will be automatically vectorized&amp;amp;#41 \nand retrieve the corresponding Gremlin]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> G --&amp;gt; H[Add the matched pair to the prompt \nand use LLM to generate the Gremlin \ncorresponding to the Natural Language Query]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="input-fields-for-the-second-part">Input Fields for the Second Part:&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Natural Language&lt;/strong> &lt;strong>Query&lt;/strong>: Input the natural language text to be converted into Gremlin.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/d2a72f45-488c-4099-968b-a11816655ba0" alt="image">&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Schema:&lt;/strong> Input the graph schema.&lt;/li>
+&lt;/ul>
+&lt;h3 id="execution-flow-2">Execution Flow:&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>Input the &lt;strong>query&lt;/strong> (natural language) into the &lt;strong>Natural Language Query&lt;/strong> field.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Input the &lt;strong>graph&lt;/strong> &lt;strong>schema&lt;/strong> into the &lt;strong>Schema&lt;/strong> field.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Click the &lt;strong>Text2Gremlin&lt;/strong> button, and the following execution logic applies:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Convert the &lt;strong>query&lt;/strong> into a vector.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Construct the &lt;strong>prompt&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Retrieve the &lt;strong>graph schema&lt;/strong>.&lt;/li>
+&lt;li>Query the vector database for example vectors, retrieving query-gremlin pairs similar to the input query (if the vector database lacks examples, it automatically initializes with examples from the &lt;strong>resources&lt;/strong> folder).&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/fd150f87-27f8-48e5-8a55-319ec039b7e0" alt="image">&lt;/p>
+&lt;pre>&lt;code> - Generate the Gremlin query using the constructed prompt.
+&lt;/code>&lt;/pre>
+&lt;h1 id="5-graph-tools">5. Graph Tools&lt;/h1>
+&lt;p>Input Gremlin queries to execute corresponding operations.&lt;/p></description></item></channel></rss>

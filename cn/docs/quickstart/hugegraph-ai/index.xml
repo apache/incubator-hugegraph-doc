@@ -1,0 +1,191 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HugeGraph – HugeGraph-AI</title><link>/cn/docs/quickstart/hugegraph-ai/</link><description>Recent content in HugeGraph-AI on HugeGraph</description><generator>Hugo -- gohugo.io</generator><atom:link href="/cn/docs/quickstart/hugegraph-ai/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: GraphRAG UI Details</title><link>/cn/docs/quickstart/hugegraph-ai/quick_start/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-ai/quick_start/</guid><description>
+&lt;blockquote>
+&lt;p>接续&lt;a href="../">主文档&lt;/a>介绍基础 UI 功能及详情，欢迎随时更新和改进，谢谢&lt;/p>
+&lt;/blockquote>
+&lt;h1 id="1-项目核心逻辑">1. 项目核心逻辑&lt;/h1>
+&lt;h2 id="构建-rag-索引职责">构建 RAG 索引职责：&lt;/h2>
+&lt;ul>
+&lt;li>文本分割和向量化&lt;/li>
+&lt;li>从文本中提取图（构建知识图谱）并对顶点进行向量化&lt;/li>
+&lt;/ul>
+&lt;h2 id="graphrag-和用户功能职责">(Graph)RAG 和用户功能职责：&lt;/h2>
+&lt;ul>
+&lt;li>根据查询从构建的知识图谱和向量数据库中检索相关内容，用于补充提示词。&lt;/li>
+&lt;/ul>
+&lt;h1 id="2-处理流程构建-rag-索引">2. （处理流程）构建 RAG 索引&lt;/h1>
+&lt;p>从文本构建知识图谱、分块向量和图顶点向量。&lt;/p>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/f3366d46-2e31-4638-94c4-7214951ef77a" alt="image">&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>graph TD;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> A[原始文本] --&amp;gt; B[文本分割]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> B --&amp;gt; C[向量化]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> C --&amp;gt; D[存储到向量数据库]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> A --&amp;gt; F[文本分割]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> F --&amp;gt; G[LLM 基于 schema 和分割后的文本提取图]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> G --&amp;gt; H[将图存储到图数据库，\n自动对顶点进行向量化\n并存储到向量数据库]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> I[从图数据库检索顶点] --&amp;gt; J[对顶点进行向量化并存储到向量数据库\n注意：增量更新]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="四个输入字段">四个输入字段：&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>文档：&lt;/strong> 输入文本&lt;/li>
+&lt;li>&lt;strong>Schema：&lt;/strong> 图的 schema，可以以 JSON 格式的 schema 提供，或提供图名称（如果数据库中已存在）。&lt;/li>
+&lt;li>&lt;strong>图提取提示词头部：&lt;/strong> 提示词的头部&lt;/li>
+&lt;li>&lt;strong>输出：&lt;/strong> 显示结果&lt;/li>
+&lt;/ul>
+&lt;h3 id="按钮">按钮：&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>获取 RAG 信息&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>获取向量索引信息：&lt;/strong> 检索向量索引信息&lt;/li>
+&lt;li>&lt;strong>获取图索引信息：&lt;/strong> 检索图索引信息&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>清除 RAG 数据&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>清除分块向量索引：&lt;/strong> 清除分块向量&lt;/li>
+&lt;li>&lt;strong>清除图顶点向量索引：&lt;/strong> 清除图顶点向量&lt;/li>
+&lt;li>&lt;strong>清除图数据：&lt;/strong> 清除图数据&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>导入到向量：&lt;/strong> 将文档中的文本转换为向量（需要先对文本进行分块，然后将分块转换为向量）&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>提取图数据 (1)：&lt;/strong> 基于 Schema，使用图提取提示词头部和分块内容作为提示词，从文档中提取图数据&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>加载到图数据库 (2)：&lt;/strong> 将提取的图数据存储到数据库（自动调用更新顶点嵌入以将向量存储到向量数据库）&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>更新顶点嵌入：&lt;/strong> 将图顶点转换为向量&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="执行流程">执行流程：&lt;/h3>
+&lt;ol>
+&lt;li>在&lt;strong>文档&lt;/strong>字段中输入文本。&lt;/li>
+&lt;li>点击&lt;strong>导入到向量&lt;/strong>按钮，对文本进行分割和向量化，存储到向量数据库。&lt;/li>
+&lt;li>在 Schema 字段中输入图的 &lt;strong>Schema&lt;/strong>。&lt;/li>
+&lt;li>点击&lt;strong>提取图数据 (1)&lt;/strong> 按钮，将文本提取为图。&lt;/li>
+&lt;li>点击&lt;strong>加载到图数据库 (2)&lt;/strong> 按钮，将提取的图存储到图数据库（这会自动调用&lt;strong>更新顶点嵌入&lt;/strong>以将向量存储到向量数据库）。&lt;/li>
+&lt;li>点击&lt;strong>更新顶点嵌入&lt;/strong>按钮，将图顶点向量化并存储到向量数据库。&lt;/li>
+&lt;/ol>
+&lt;h1 id="3-处理流程graphrag-和用户功能">3. （处理流程）(Graph)RAG 和用户功能&lt;/h1>
+&lt;p>前一个模块中的&lt;strong>导入到向量&lt;/strong>按钮将文本（分块）转换为向量，&lt;strong>更新顶点嵌入&lt;/strong>按钮将图顶点转换为向量。这些向量分别存储，用于在本模块中补充查询（答案生成）的上下文。换句话说，前一个模块为 RAG 准备数据（向量化），而本模块执行 RAG。&lt;/p>
+&lt;p>本模块包含两个部分：&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>HugeGraph RAG 查询&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>（批量）回测&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;p>第一部分处理单个查询，第二部分同时处理多个查询。以下是第一部分的说明。&lt;/p>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/33698062-e46b-4757-8b5e-93e8f10eae65" alt="image">&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>graph TD;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> A[问题] --&amp;gt; B[将问题向量化并在向量数据库中搜索最相似的分块]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> A --&amp;gt; F[使用 LLM 提取关键词]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> F --&amp;gt; G[在图数据库中使用关键词精确匹配顶点；\n在向量数据库中执行模糊匹配（图顶点）]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> G --&amp;gt; H[使用匹配的顶点和查询通过 LLM 生成 Gremlin 查询]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> H --&amp;gt; I[执行 Gremlin 查询；如果成功则完成；如果失败则回退到 BFS]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> B --&amp;gt; J[对结果排序]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> I --&amp;gt; J
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> J --&amp;gt; K[生成答案]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="输入字段">输入字段：&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>问题：&lt;/strong> 输入查询&lt;/li>
+&lt;li>&lt;strong>查询提示词：&lt;/strong> 用于向 LLM 提出最终问题的提示词模板&lt;/li>
+&lt;li>&lt;strong>关键词提取提示词：&lt;/strong> 用于从问题中提取关键词的提示词模板&lt;/li>
+&lt;li>&lt;strong>模板数量：&lt;/strong> &amp;lt; 0 表示禁用 text2gql；= 0 表示不使用模板（零样本）；&amp;gt; 0 表示使用指定数量的模板&lt;/li>
+&lt;/ul>
+&lt;h3 id="查询范围选择">查询范围选择：&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>基础 LLM 答案：&lt;/strong> 不使用 RAG 功能&lt;/li>
+&lt;li>&lt;strong>仅向量答案：&lt;/strong> 仅使用基于向量的检索（在向量数据库中查询分块向量）&lt;/li>
+&lt;li>&lt;strong>仅图答案：&lt;/strong> 仅使用基于图的检索（在向量数据库中查询图顶点向量和图数据库）&lt;/li>
+&lt;li>&lt;strong>图-向量答案：&lt;/strong> 同时使用基于图和基于向量的检索&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/26641e09-249f-4b3a-8013-16dc9383d333" alt="image">&lt;/p>
+&lt;h3 id="执行流程-1">执行流程：&lt;/h3>
+&lt;h4 id="仅图答案">&lt;strong>仅图答案：&lt;/strong>&lt;/h4>
+&lt;ul>
+&lt;li>使用&lt;strong>关键词提取提示词&lt;/strong>从&lt;strong>问题&lt;/strong>中提取关键词。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/b49e269f-eaec-40b1-8d8f-9e409821d75d" alt="image">&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>使用提取的关键词：&lt;/p>
+&lt;ul>
+&lt;li>首先，在图数据库中进行精确匹配。&lt;/li>
+&lt;li>如果未找到匹配，在向量数据库（图顶点向量）中进行模糊匹配以检索相关顶点。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>text2gql：&lt;/strong> 调用 text2gql 相关接口，使用匹配的顶点作为实体，将&lt;strong>问题&lt;/strong>转换为 Gremlin 查询并在图数据库中执行。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>BFS：&lt;/strong> 如果 text2gql 失败（LLM 生成的查询可能无效），回退到使用预定义的&lt;strong>Gremlin 查询模板&lt;/strong>执行图查询（本质上是 BFS 遍历）。&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h4 id="仅向量答案">&lt;strong>仅向量答案：&lt;/strong>&lt;/h4>
+&lt;ul>
+&lt;li>将&lt;strong>查询&lt;/strong>转换为向量。&lt;/li>
+&lt;li>在向量数据库的&lt;strong>分块向量&lt;/strong>数据集中搜索最相似的内容。&lt;/li>
+&lt;/ul>
+&lt;h4 id="排序和答案生成">&lt;strong>排序和答案生成：&lt;/strong>&lt;/h4>
+&lt;ul>
+&lt;li>执行检索后，对搜索结果进行排序以构建最终的&lt;strong>提示词&lt;/strong>。&lt;/li>
+&lt;li>基于不同的提示词配置生成答案，并在不同的输出字段中显示：
+&lt;ul>
+&lt;li>&lt;strong>基础 LLM 答案&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>仅向量答案&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>仅图答案&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>图-向量答案&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/7d4496a3-d44c-4491-9463-8e93595dfa45" alt="image">&lt;/p>
+&lt;h1 id="4-处理流程text2gremlin">4. （处理流程）Text2Gremlin&lt;/h1>
+&lt;p>将自然语言查询转换为 Gremlin 查询。&lt;/p>
+&lt;p>本模块包含两个部分：&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>构建向量模板索引（可选）：&lt;/strong> 将示例文件中的查询/gremlin 对进行向量化并存储到向量数据库中，用于生成 Gremlin 查询时参考。&lt;/li>
+&lt;li>&lt;strong>自然语言转 Gremlin：&lt;/strong> 将自然语言查询转换为 Gremlin 查询。&lt;/li>
+&lt;/ul>
+&lt;p>第一部分较为简单，因此重点介绍第二部分。&lt;/p>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/fc678369-261d-49ea-a289-1ca6ade5ca55" alt="image">&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>graph TD;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> A[Gremlin 对文件] --&amp;gt; C[向量化查询]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> C --&amp;gt; D[存储到向量数据库]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> F[自然语言查询] --&amp;gt; G[在向量数据库中搜索最相似的查询\n（如果向量数据库中不存在 Gremlin 对，\n将自动使用默认文件进行向量化）\n并检索对应的 Gremlin]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> G --&amp;gt; H[将匹配的对添加到提示词中\n并使用 LLM 生成与自然语言查询\n对应的 Gremlin]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="第二部分的输入字段">第二部分的输入字段：&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>自然语言查询：&lt;/strong> 输入要转换为 Gremlin 的自然语言文本。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/d2a72f45-488c-4499-968b-a11816655ba0" alt="image">&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Schema：&lt;/strong> 输入图 schema。&lt;/li>
+&lt;/ul>
+&lt;h3 id="执行流程-2">执行流程：&lt;/h3>
+&lt;ol>
+&lt;li>在&lt;strong>自然语言查询&lt;/strong>字段中输入&lt;strong>查询&lt;/strong>（自然语言）。&lt;/li>
+&lt;li>在&lt;strong>Schema&lt;/strong>字段中输入&lt;strong>图 schema&lt;/strong>。&lt;/li>
+&lt;li>点击&lt;strong>Text2Gremlin&lt;/strong>按钮，执行以下逻辑：
+&lt;ol>
+&lt;li>将&lt;strong>查询&lt;/strong>转换为向量。&lt;/li>
+&lt;li>构建&lt;strong>提示词&lt;/strong>：
+&lt;ul>
+&lt;li>检索&lt;strong>图 schema&lt;/strong>。&lt;/li>
+&lt;li>在向量数据库中查询示例向量，检索与输入查询相似的查询-gremlin 对（如果向量数据库中缺少示例，将自动使用&lt;strong>resources&lt;/strong>文件夹中的示例进行初始化）。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://github.com/user-attachments/assets/fd150f87-27f8-48e5-8a55-319ec039b7e0" alt="image">&lt;/p>
+&lt;pre>&lt;code> - 使用构建的提示词生成 Gremlin 查询。
+&lt;/code>&lt;/pre>
+&lt;h1 id="5-图工具">5. 图工具&lt;/h1>
+&lt;p>输入 Gremlin 查询以执行相应操作。&lt;/p></description></item></channel></rss>
