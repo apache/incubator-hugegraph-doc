@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph-Tools Quick Start"
 linkTitle: "Manage with HugeGraph-Tools"
-weight: 5
+weight: 3
 ---
 
 ### 1 HugeGraph-Tools Overview

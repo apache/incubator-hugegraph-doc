@@ -82,7 +82,7 @@ channelizer: org.apache.tinkerpop.gremlin.server.channel.HttpChannelizer
 # ......
 ```
 
-Modify `channelizer: org.apache.tinkerpop.gremlin.server.channel.HttpChannelizer` to `channelizer: org.apache.tinkerpop.gremlin.server.channel.WebSocketChannelizer` or comment directly, and then follow the [steps](/docs/quickstart/hugegraph-server/) to start the Server.
+Modify `channelizer: org.apache.tinkerpop.gremlin.server.channel.HttpChannelizer` to `channelizer: org.apache.tinkerpop.gremlin.server.channel.WebSocketChannelizer` or comment directly, and then follow the [steps](/docs/quickstart/hugegraph/hugegraph-server) to start the Server.
 
 Then enter Gremlin-Console:
 
