@@ -42,8 +42,8 @@ weight: 3
     使用 Nuitka 编译的 C 二进制转译版本，性能更好、更高效
 - 拉取 Docker 镜像：
   ```bash
-  docker pull hugegraph/rag:latest # Pull Image 1
-  docker pull hugegraph/rag-bin:latest # Pull Image 2
+  docker pull hugegraph/rag:latest # 拉取镜像1
+  docker pull hugegraph/rag-bin:latest # 拉取镜像2
   ```
 - 启动 Docker 容器：
   ```bash
