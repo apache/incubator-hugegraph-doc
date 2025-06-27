@@ -77,7 +77,7 @@ weight: 3
 
 3. 克隆本项目
    ```bash
-   git clone [https://github.com/apache/incubator-hugegraph-ai.git](https://github.com/apache/incubator-hugegraph-ai.git)
+   git clone https://github.com/apache/incubator-hugegraph-ai.git
    ```
 4. 配置依赖环境
    ```bash
