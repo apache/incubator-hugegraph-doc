@@ -1,7 +1,7 @@
 ---
 title: "GraphRAG UI Details"
 linkTitle: "GraphRAG UI Details"
-weight: 1
+weight: 4
 ---
 
 > 接续[主文档](../)介绍基础 UI 功能及详情，欢迎随时更新和改进，谢谢
