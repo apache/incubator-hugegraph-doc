@@ -22,7 +22,7 @@ weight: 5
 
 **讨论 (DISCUSS) → 投票 (VOTE) → 邀请 (INVITE) → 公告 (ANNOUNCE)**
 
-## 1. 发起社区邮件讨论 (DISCUSS)
+## 发起社区邮件讨论 (DISCUSS)
 
 任何 HugeGraph 的 (P)PMC 成员都可以发起投票讨论，在发现社区贡献者任何有价值的贡献并取得候选人本人同意后，可以在 private@hugegraph.apache.org 发起讨论。
 讨论邮件里提议者要把候选人的贡献说清楚，并最好给出确认贡献的 URL 等信息，便于大家讨论分析。
@@ -103,7 +103,7 @@ Thanks!
 
 Mailing Lists 的参与则可使用 https://lists.apache.org/list?dev@hugegraph.apache.org:lte=10M:xxx 查询。
 
-## 2. 发起社区邮件投票 (VOTE)
+## 发起社区邮件投票 (VOTE)
 
 如果讨论邮件在规定时间内没有收到分歧信息，投票发起者需要在 private@hugegraph.apache.org 发起对 Committer 的选举投票。
 
@@ -143,7 +143,7 @@ Thanks!
 To: private@hugegraph.apache.org
 Subject: [RESULTS][VOTE] xxx as a HugeGraph Committer
 
-Hi all: The vote for "xxx" as an HugeGraph Committer has PASSED and closed now.
+Hi all: The vote for "xxx" as a HugeGraph Committer has PASSED and closed now.
 
 The result is as follows: X PMC +1 Votes: 
 - A (PMC ID)
