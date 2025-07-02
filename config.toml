@@ -21,6 +21,10 @@ enableGitInfo = true
 # Comment out to enable taxonomies in Docsy
 # disableKinds = ["taxonomy", "taxonomyTerm"]
 
+# TODO: upgrade docsy version to latest one (curretly mermaid.js is not working)
+[params.mermaid]
+enable = true
+
 ###############################################################################
 # Hugo - Top-level navigation (horizontal)
 ###############################################################################

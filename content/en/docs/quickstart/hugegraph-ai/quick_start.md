@@ -1,7 +1,7 @@
 ---
 title: "GraphRAG UI Details"
 linkTitle: "GraphRAG UI Details"
-weight: 1
+weight: 4
 ---
 
 > Follow up [main doc](../) to introduce the basic UI function & details, welcome to update and improve at any time, thanks
