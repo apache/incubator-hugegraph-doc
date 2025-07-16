@@ -345,7 +345,7 @@ vim hugegraph.xml
 <section id="News">
   <title>News</title>
   <ul>
-    <li>2025-07-17 New Committer: xxx</li>
+    <li>YYYY-MM-DD New Committer: xxx</li>
     <li>...</li>
   </ul>
 </section>
