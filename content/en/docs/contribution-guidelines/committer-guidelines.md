@@ -328,6 +328,30 @@ Thanks!
 The Apache HugeGraph PPMC
 ```
 
+## Update clutch status information
+
+PMC members responsible for nominations need to download clutch status information and update it. Once effective, it can be viewed on the [clutch](https://incubator.apache.org/clutch/hugegraph.html) and [projects](https://incubator.apache.org/projects/hugegraph.html) pages. The process is as follows:
+
+```text
+# 1. Download clutch status information
+svn co https://svn.apache.org/repos/asf/incubator/public/trunk/content/projects/
+
+# 2. Modify and edit (note the following is for reference only)
+cd projects
+vim hugegraph.xml
+
+<section id="News">
+  <title>News</title>
+  <ul>
+    <li>2025-07-17 New Committer: xxx</li>
+    <li>...</li>
+  </ul>
+</section>
+
+# 3. Commit
+svn commit -m "update news for hugegraph"
+```
+
 # References
 
 1. https://community.apache.org/newcommitter.html (ASF official documentation)

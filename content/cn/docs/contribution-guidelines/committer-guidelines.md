@@ -330,6 +330,30 @@ Thanks!
 The Apache HugeGraph PPMC
 ```
 
+## 更新 clutch status 信息
+
+负责提名的 PMC 成员需下载 clutch status 信息, 并进行更新, 生效后可在 [clutch](https://incubator.apache.org/clutch/hugegraph.html) 和 [projects](https://incubator.apache.org/projects/hugegraph.html) 页面查询。流程参考如下：
+
+```text
+# 1. 下载 clutch status 信息
+svn co https://svn.apache.org/repos/asf/incubator/public/trunk/content/projects/
+
+# 2. 修改编辑 (注意下面内容仅供参考)
+cd projects
+vim hugegraph.xml
+
+<section id="News">
+  <title>News</title>
+  <ul>
+    <li>2025-07-17 New Committer: xxx</li>
+    <li>...</li>
+  </ul>
+</section>
+
+# 3. 提交
+svn commit -m "update news for hugegraph"
+```
+
 # 参考
 
 1. https://community.apache.org/newcommitter.html (ASF 官方文档)
