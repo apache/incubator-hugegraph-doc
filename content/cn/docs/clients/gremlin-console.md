@@ -82,7 +82,7 @@ channelizer: org.apache.tinkerpop.gremlin.server.channel.HttpChannelizer
 # ......
 ```
 
-将 `channelizer: org.apache.tinkerpop.gremlin.server.channel.HttpChannelizer` 修改成 `channelizer: org.apache.tinkerpop.gremlin.server.channel.WebSocketChannelizer` 或直接注释，然后按照[步骤](/docs/quickstart/hugegraph-server/)启动 HugeGraph-Server。
+将 `channelizer: org.apache.tinkerpop.gremlin.server.channel.HttpChannelizer` 修改成 `channelizer: org.apache.tinkerpop.gremlin.server.channel.WebSocketChannelizer` 或直接注释，然后按照[步骤](/cn/docs/quickstart/hugegraph/hugegraph-server/)启动 HugeGraph-Server。
 
 下面进入 Gremlin-Console：
 

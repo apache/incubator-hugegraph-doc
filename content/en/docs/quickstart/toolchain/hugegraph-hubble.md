@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph-Hubble Quick Start"
 linkTitle: "Visual with HugeGraph-Hubble"
-weight: 3
+weight: 1
 ---
 
 ### 1 HugeGraph-Hubble Overview
@@ -39,7 +39,7 @@ functions to achieve unified management and result viewing of asynchronous tasks
 ##### Data Import
 
 > "Note: The data import function is currently suitable for preliminary use. For formal data import,
-> please use [hugegraph-loader](/docs/quickstart/hugegraph-loader), which has much better performance, stability, and functionality." 
+> please use [hugegraph-loader](/docs/quickstart/toolchain/hugegraph-loader), which has much better performance, stability, and functionality." 
 
 Data import is to convert the user's business data into the vertices and edges of the graph and 
 insert it into the graph database. The platform provides a wizard-style visual import module. 
@@ -304,7 +304,7 @@ Displays vertex and edge indices for vertex types and edge types.
 
 #### 4.3 Data Import
 
-> **Note**：currently, we recommend to use [hugegraph-loader](/en/docs/quickstart/hugegraph-loader) to import data formally. The built-in import of `hubble` is used for **testing** and **getting started**.
+> **Note**：currently, we recommend to use [hugegraph-loader](/docs/quickstart/toolchain/hugegraph-loader) to import data formally. The built-in import of `hubble` is used for **testing** and **getting started**.
 
 The usage process of data import is as follows:
 

@@ -93,7 +93,7 @@ DELETE http://localhost:8080/graphs/hugegraph/tasks/2
 
 #### 7.1.4 Cancel an async task, **the task should be able to be canceled**
 
-If you already created an async task via [Gremlin API](../gremlin) as follows:
+If you already created an async task via [Gremlin API](/docs/clients/restful-api/gremlin) as follows:
 
 ```groovy
 "for (int i = 0; i < 10; i++) {" +

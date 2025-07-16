@@ -45,17 +45,17 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 
 ### Modules
 
-- [HugeGraph-Server](/cn/docs/quickstart/hugegraph-server): HugeGraph-Server 是 HugeGraph 项目的核心部分，包含 Core、Backend、API 等子模块；
+- [HugeGraph-Server](/cn/docs/quickstart/hugegraph/hugegraph-server): HugeGraph-Server 是 HugeGraph 项目的核心部分，包含 Core、Backend、API 等子模块；
   - Core：图引擎实现，向下连接 Backend 模块，向上支持 API 模块；
   - Backend：实现将图数据存储到后端，支持的后端包括：Memory、Cassandra、ScyllaDB、RocksDB、HBase、MySQL 及 PostgreSQL，用户根据实际情况选择一种即可；
   - API：内置 REST Server，向用户提供 RESTful API，同时完全兼容 Gremlin 查询。(支持分布式存储和计算下推)
 - [HugeGraph-Toolchain](https://github.com/apache/hugegraph-toolchain): (工具链)
-  - [HugeGraph-Client](/cn/docs/quickstart/hugegraph-client)：HugeGraph-Client 提供了 RESTful API 的客户端，用于连接 HugeGraph-Server，目前仅实现 Java 版，其他语言用户可自行实现；
-  - [HugeGraph-Loader](/cn/docs/quickstart/hugegraph-loader)：HugeGraph-Loader 是基于 HugeGraph-Client 的数据导入工具，将普通文本数据转化为图形的顶点和边并插入图形数据库中；
-  - [HugeGraph-Hubble](/cn/docs/quickstart/hugegraph-hubble)：HugeGraph-Hubble 是 HugeGraph 的 Web 
+  - [HugeGraph-Client](/cn/docs/quickstart/client/hugegraph-client)：HugeGraph-Client 提供了 RESTful API 的客户端，用于连接 HugeGraph-Server，目前仅实现 Java 版，其他语言用户可自行实现；
+  - [HugeGraph-Loader](/cn/docs/quickstart/toolchain/hugegraph-loader)：HugeGraph-Loader 是基于 HugeGraph-Client 的数据导入工具，将普通文本数据转化为图形的顶点和边并插入图形数据库中；
+  - [HugeGraph-Hubble](/cn/docs/quickstart/toolchain/hugegraph-hubble)：HugeGraph-Hubble 是 HugeGraph 的 Web 
 可视化管理平台，一站式可视化分析平台，平台涵盖了从数据建模，到数据快速导入，再到数据的在线、离线分析、以及图的统一管理的全过程；
-  - [HugeGraph-Tools](/cn/docs/quickstart/hugegraph-tools)：HugeGraph-Tools 是 HugeGraph 的部署和管理工具，包括管理图、备份/恢复、Gremlin 执行等功能。
-- [HugeGraph-Computer](/cn/docs/quickstart/hugegraph-computer)：HugeGraph-Computer 是分布式图处理系统 (OLAP). 
+  - [HugeGraph-Tools](/cn/docs/quickstart/toolchain/hugegraph-tools)：HugeGraph-Tools 是 HugeGraph 的部署和管理工具，包括管理图、备份/恢复、Gremlin 执行等功能。
+- [HugeGraph-Computer](/cn/docs/quickstart/computing/hugegraph-computer)：HugeGraph-Computer 是分布式图处理系统 (OLAP). 
   它是 [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf) 的一个实现。它可以运行在 Kubernetes/Yarn 
   等集群上，支持超大规模图计算。
 - [HugeGraph-AI](/cn/docs/quickstart/hugegraph-ai)：HugeGraph-AI 是 HugeGraph 独立的 AI 

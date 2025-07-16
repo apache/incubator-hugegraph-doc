@@ -6,7 +6,7 @@ weight: 1
 
 HugeGraph-Server provides interfaces for clients to operate on graphs based on the HTTP protocol through the HugeGraph-API. These interfaces primarily include the ability to add, delete, modify, and query metadata and graph data, perform traversal algorithms, handle variables, and perform other graph-related operations. 
 
-Expect the doc below, you can also use `swagger-ui` to visit the `RESTful API` by `localhost:8080/swagger-ui/index.html`. [Here is an example](/docs/quickstart/hugegraph-server#swaggerui-example)
+Expect the doc below, you can also use `swagger-ui` to visit the `RESTful API` by `localhost:8080/swagger-ui/index.html`. [Here is an example](/docs/quickstart/hugegraph/hugegraph-server#swaggerui-example)
 
 [comment]: <> (- Graph Schema)
 

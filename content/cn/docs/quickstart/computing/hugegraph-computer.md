@@ -1,17 +1,17 @@
 ---
 title: "HugeGraph-Computer Quick Start"
 linkTitle: "使用 Computer 进行 OLAP 分析"
-weight: 6
+weight: 2
 ---
 
 ## 1 HugeGraph-Computer 概述
 
-[`HugeGraph-Computer`](https://github.com/apache/incubator-hugegraph-computer) 是分布式图处理系统 (OLAP). 它是 [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf) 的一个实现. 它可以运行在 Kubernetes 上。
+[`HugeGraph-Computer`](https://github.com/apache/incubator-hugegraph-computer) 是分布式图处理系统 (OLAP). 它是 [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf)的一个实现。它可以运行在 Kubernetes(K8s)/Yarn 上。(它侧重可支持百亿~千亿的图数据量下进行图计算, 会使用磁盘进行排序和加速, 这是它和 Vermeer 相对最大的区别之一)
 
 ### 特性
 
-- 支持分布式MPP图计算，集成HugeGraph作为图输入输出存储。
-- 算法基于BSP(Bulk Synchronous Parallel)模型，通过多次并行迭代进行计算，每一次迭代都是一次超步。
+- 支持分布式 MPP 图计算，集成 HugeGraph 作为图输入输出存储。
+- 算法基于 BSP(Bulk Synchronous Parallel) 模型，通过多次并行迭代进行计算，每一次迭代都是一次超步。
 - 自动内存管理。该框架永远不会出现 OOM（内存不足），因为如果它没有足够的内存来容纳所有数据，它会将一些数据拆分到磁盘。
 - 边的部分或超级节点的消息可以在内存中，所以你永远不会丢失它。
 - 您可以从 HDFS 或 HugeGraph 或任何其他系统加载数据。
@@ -56,7 +56,7 @@ tar zxvf apache-hugegraph-computer-incubating-${version}.tar.gz -C hugegraph-com
 $ git clone https://github.com/apache/hugegraph-computer.git
 ```
 
-编译生成tar包:
+编译生成 tar 包：
 
 ```bash
 cd hugegraph-computer
@@ -65,7 +65,7 @@ mvn clean package -DskipTests
 
 #### 3.1.3 启动 master 节点
 
-> 您可以使用 `-c` 参数指定配置文件, 更多computer 配置请看: [Computer Config Options](/docs/config/config-computer#computer-config-options)
+> 您可以使用 `-c` 参数指定配置文件，更多 computer 配置请看：[Computer Config Options](/docs/config/config-computer#computer-config-options)
 
 ```bash
 cd hugegraph-computer
@@ -82,7 +82,7 @@ bin/start-computer.sh -d local -r worker
 
 2.5.1 为 server 启用 `OLAP` 索引查询
 
-如果没有启用OLAP索引，则需要启用, 更多参考: [modify-graphs-read-mode](/docs/clients/restful-api/graphs/#634-modify-graphs-read-mode-this-operation-requires-administrator-privileges)
+如果没有启用 OLAP 索引，则需要启用，更多参考：[modify-graphs-read-mode](/docs/clients/restful-api/graphs/#634-modify-graphs-read-mode-this-operation-requires-administrator-privileges)
 
 ```http
 PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
@@ -90,7 +90,7 @@ PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
 "ALL"
 ```
 
-3.1.5.2 查询 `page_rank` 属性值:
+3.1.5.2 查询 `page_rank` 属性值：
 
 ```bash
 curl "http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3" | gunzip
@@ -137,9 +137,9 @@ hugegraph-computer-operator-etcd-28lm67jxk5                       1/1     Runnin
 
 #### 3.2.5 提交作业
 
-> 更多 computer crd spec 请看: [Computer CRD](/docs/config/config-computer#hugegraph-computer-crd)
+> 更多 computer crd spec 请看：[Computer CRD](/docs/config/config-computer#hugegraph-computer-crd)
 >
-> 更多 Computer 配置请看: [Computer Config Options](/docs/config/config-computer#computer-config-options)
+> 更多 Computer 配置请看：[Computer Config Options](/docs/config/config-computer#computer-config-options)
 
 ```yaml
 cat <<EOF | kubectl apply --filename -
@@ -202,16 +202,16 @@ kubectl get event --field-selector reason=ComputerJobSucceed --field-selector in
 
 ## 4 内置算法文档
 
-### 4.1 支持的算法列表:
+### 4.1 支持的算法列表：
 
-###### 中心性算法:
+#### 中心性算法：
 
 * PageRank
 * BetweennessCentrality
 * ClosenessCentrality
 * DegreeCentrality
 
-###### 社区算法:
+#### 社区算法：
 
 * ClusteringCoefficient
 * Kcore
@@ -219,12 +219,12 @@ kubectl get event --field-selector reason=ComputerJobSucceed --field-selector in
 * TriangleCount
 * Wcc
 
-###### 路径算法:
+#### 路径算法：
 
 * RingsDetection
 * RingsDetectionWithFilter
 
-更多算法请看: [Built-In algorithms](https://github.com/apache/hugegraph-computer/tree/master/computer-algorithm/src/main/java/org/apache/hugegraph/computer/algorithm)
+更多算法请看：[Built-In algorithms](https://github.com/apache/hugegraph-computer/tree/master/computer-algorithm/src/main/java/org/apache/hugegraph/computer/algorithm)
 
 ### 4.2 算法描述
 
@@ -236,4 +236,4 @@ TODO
 
 ## 6 注意事项
 
-- 如果computer-k8s模块下面的某些类不存在，你需要运行`mvn compile`来提前生成对应的类。
+- 如果 computer-k8s 模块下面的某些类不存在，你需要运行`mvn compile`来提前生成对应的类。

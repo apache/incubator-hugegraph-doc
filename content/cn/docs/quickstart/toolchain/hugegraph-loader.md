@@ -1,6 +1,6 @@
 ---
 title: "HugeGraph-Loader Quick Start"
-linkTitle: "使用 Loader/Spark 实时导入数据"
+linkTitle: "使用 Loader 实时/流式导入数据"
 weight: 2
 ---
 
@@ -18,7 +18,7 @@ HugeGraph-Loader 是 HugeGraph 的数据导入组件，能够将多种数据源�
 
 后面会具体说明。
 
-> 注意：使用 HugeGraph-Loader 需要依赖 HugeGraph Server 服务，下载和启动 Server 请参考 [HugeGraph-Server Quick Start](/docs/quickstart/hugegraph-server)
+> 注意：使用 HugeGraph-Loader 需要依赖 HugeGraph Server 服务，下载和启动 Server 请参考 [HugeGraph-Server Quick Start](/cn/docs/quickstart/hugegraph/hugegraph-server)
 
 ### 2 获取 HugeGraph-Loader
 
@@ -1136,7 +1136,7 @@ sh bin/hugegraph-loader.sh -g hugegraph -f example/file/struct.json -s example/f
 > HugeGraph Toolchain 版本：toolchain-1.0.0
 > 
 `spark-loader` 的参数分为两部分，注意：因二者参数名缩写存在重合部分，请使用参数全称。两种参数之间无需保证先后顺序。
-- hugegraph 参数（参考：[hugegraph-loader 参数说明](https://hugegraph.apache.org/cn/docs/quickstart/hugegraph-loader/#341-%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E) ）
+- hugegraph 参数（参考：[hugegraph-loader 参数说明](https://hugegraph.apache.org/cn/docs/quickstart/toolchain/hugegraph-loader/#341-%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E) ）
 - Spark 任务提交参数（参考：[Submitting Applications](https://spark.apache.org/docs/3.3.0/submitting-applications.html#content)）
 
 示例：
