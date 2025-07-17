@@ -11176,7 +11176,7 @@ with this &lt;a href="https://github.com/apache/incubator-hugegraph/wiki/The-sty
 &lt;/ol>
 &lt;h1 id="nomination-process">Nomination Process&lt;/h1>
 &lt;p>&lt;strong>Discussion → Vote → Invitation → Announcement&lt;/strong>&lt;/p>
-&lt;h2 id="1-initiate-community-discussion-discuss">1. Initiate Community Discussion (DISCUSS)&lt;/h2>
+&lt;h2 id="initiate-community-discussion-discuss">Initiate Community Discussion (DISCUSS)&lt;/h2>
 &lt;p>Any (P)PMC member of HugeGraph can initiate a voting discussion. After identifying valuable contributions from a community contributor and obtaining the candidate&amp;rsquo;s consent, a discussion can be initiated via &lt;a href="mailto:private@hugegraph.apache.org">private@hugegraph.apache.org&lt;/a>.
 The initiator of the discussion should clearly state the candidate&amp;rsquo;s contributions in the discussion email and provide URLs or other information for confirming the contributions, facilitating discussion and analysis.&lt;/p>
 &lt;p>Below is a template for HugeGraph emails: (For reference only)&lt;/p>
@@ -11281,7 +11281,7 @@ The initiator of the discussion should clearly state the candidate&amp;rsquo;s c
 &lt;/li>
 &lt;/ul>
 &lt;p>For participation in mailing lists, you can use &lt;a href="https://lists.apache.org/list?dev@hugegraph.apache.org:lte=10M:xxx">https://lists.apache.org/list?dev@hugegraph.apache.org:lte=10M:xxx&lt;/a>.&lt;/p>
-&lt;h2 id="2-initiate-community-voting-email-vote">2. Initiate Community Voting Email (VOTE)&lt;/h2>
+&lt;h2 id="initiate-community-voting-email-vote">Initiate Community Voting Email (VOTE)&lt;/h2>
 &lt;p>If there are no dissenting opinions within the specified time frame of the discussion email, the initiator of the discussion needs to initiate a voting email for the committer election at &lt;a href="mailto:private@hugegraph.apache.org">private@hugegraph.apache.org&lt;/a>.&lt;/p>
 &lt;p>Below is the corresponding email template:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>To: private@hugegraph.apache.org
@@ -11311,7 +11311,7 @@ The initiator of the discussion should clearly state the candidate&amp;rsquo;s c
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>To: private@hugegraph.apache.org
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Subject: [RESULTS][VOTE] xxx as a HugeGraph Committer
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Hi all: The vote for &amp;#34;xxx&amp;#34; as an HugeGraph Committer has PASSED and closed now.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Hi all: The vote for &amp;#34;xxx&amp;#34; as a HugeGraph Committer has PASSED and closed now.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>The result is as follows: X PMC +1 Votes:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>- A (PMC ID)
@@ -11480,6 +11480,25 @@ The initiator of the discussion should clearly state the candidate&amp;rsquo;s c
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Thanks!
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>The Apache HugeGraph PPMC
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="update-clutch-status-information">Update clutch status information&lt;/h2>
+&lt;p>PMC members responsible for nominations need to download clutch status information and update it. Once effective, it can be viewed on the &lt;a href="https://incubator.apache.org/clutch/hugegraph.html">clutch&lt;/a> and &lt;a href="https://incubator.apache.org/projects/hugegraph.html">projects&lt;/a> pages. The process is as follows:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span># 1. Download clutch status information
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>svn co https://svn.apache.org/repos/asf/incubator/public/trunk/content/projects/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 2. Modify and edit (note the following is for reference only)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd projects
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vim hugegraph.xml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;section id=&amp;#34;News&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;title&amp;gt;News&amp;lt;/title&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;ul&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;li&amp;gt;YYYY-MM-DD New Committer: xxx&amp;lt;/li&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;li&amp;gt;...&amp;lt;/li&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/ul&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/section&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 3. Commit
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>svn commit -m &amp;#34;update news for hugegraph&amp;#34;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="references">References&lt;/h1>
 &lt;ol>
 &lt;li>&lt;a href="https://community.apache.org/newcommitter.html">https://community.apache.org/newcommitter.html&lt;/a> (ASF official documentation)&lt;/li>

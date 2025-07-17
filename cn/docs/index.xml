@@ -11329,7 +11329,7 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;/ol>
 &lt;h1 id="推选详细流程">推选详细流程&lt;/h1>
 &lt;p>&lt;strong>讨论 (DISCUSS) → 投票 (VOTE) → 邀请 (INVITE) → 公告 (ANNOUNCE)&lt;/strong>&lt;/p>
-&lt;h2 id="1-发起社区邮件讨论-discuss">1. 发起社区邮件讨论 (DISCUSS)&lt;/h2>
+&lt;h2 id="发起社区邮件讨论-discuss">发起社区邮件讨论 (DISCUSS)&lt;/h2>
 &lt;p>任何 HugeGraph 的 (P)PMC 成员都可以发起投票讨论，在发现社区贡献者任何有价值的贡献并取得候选人本人同意后，可以在 &lt;a href="mailto:private@hugegraph.apache.org">private@hugegraph.apache.org&lt;/a> 发起讨论。
 讨论邮件里提议者要把候选人的贡献说清楚，并最好给出确认贡献的 URL 等信息，便于大家讨论分析。&lt;/p>
 &lt;p>下面是 HugeGraph 对应的邮件模板：(仅供参考)&lt;/p>
@@ -11435,7 +11435,7 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;/li>
 &lt;/ul>
 &lt;p>Mailing Lists 的参与则可使用 &lt;a href="https://lists.apache.org/list?dev@hugegraph.apache.org:lte=10M:xxx">https://lists.apache.org/list?dev@hugegraph.apache.org:lte=10M:xxx&lt;/a> 查询。&lt;/p>
-&lt;h2 id="2-发起社区邮件投票-vote">2. 发起社区邮件投票 (VOTE)&lt;/h2>
+&lt;h2 id="发起社区邮件投票-vote">发起社区邮件投票 (VOTE)&lt;/h2>
 &lt;p>如果讨论邮件在规定时间内没有收到分歧信息，投票发起者需要在 &lt;a href="mailto:private@hugegraph.apache.org">private@hugegraph.apache.org&lt;/a> 发起对 Committer 的选举投票。&lt;/p>
 &lt;p>下面是对应的邮件模板：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>To: private@hugegraph.apache.org
@@ -11465,7 +11465,7 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>To: private@hugegraph.apache.org
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Subject: [RESULTS][VOTE] xxx as a HugeGraph Committer
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Hi all: The vote for &amp;#34;xxx&amp;#34; as an HugeGraph Committer has PASSED and closed now.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Hi all: The vote for &amp;#34;xxx&amp;#34; as a HugeGraph Committer has PASSED and closed now.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>The result is as follows: X PMC +1 Votes:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>- A (PMC ID)
@@ -11634,6 +11634,25 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Thanks!
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>The Apache HugeGraph PPMC
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="更新-clutch-status-信息">更新 clutch status 信息&lt;/h2>
+&lt;p>负责提名的 PMC 成员需下载 clutch status 信息, 并进行更新, 生效后可在 &lt;a href="https://incubator.apache.org/clutch/hugegraph.html">clutch&lt;/a> 和 &lt;a href="https://incubator.apache.org/projects/hugegraph.html">projects&lt;/a> 页面查询。流程参考如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span># 1. 下载 clutch status 信息
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>svn co https://svn.apache.org/repos/asf/incubator/public/trunk/content/projects/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 2. 修改编辑 (注意下面内容仅供参考)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd projects
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vim hugegraph.xml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;section id=&amp;#34;News&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;title&amp;gt;News&amp;lt;/title&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;ul&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;li&amp;gt;YYYY-MM-DD New Committer: xxx&amp;lt;/li&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;li&amp;gt;...&amp;lt;/li&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/ul&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/section&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 3. 提交
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>svn commit -m &amp;#34;update news for hugegraph&amp;#34;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="参考">参考&lt;/h1>
 &lt;ol>
 &lt;li>&lt;a href="https://community.apache.org/newcommitter.html">https://community.apache.org/newcommitter.html&lt;/a> (ASF 官方文档)&lt;/li>
