@@ -21,7 +21,7 @@ weight: 5
 
 **Discussion → Vote → Invitation → Announcement**
 
-## 1. Initiate Community Discussion (DISCUSS)
+## Initiate Community Discussion (DISCUSS)
 
 Any (P)PMC member of HugeGraph can initiate a voting discussion. After identifying valuable contributions from a community contributor and obtaining the candidate's consent, a discussion can be initiated via private@hugegraph.apache.org.
 The initiator of the discussion should clearly state the candidate's contributions in the discussion email and provide URLs or other information for confirming the contributions, facilitating discussion and analysis.
@@ -101,7 +101,7 @@ For contribution links in discussion emails, you can use the statistical feature
 
 For participation in mailing lists, you can use https://lists.apache.org/list?dev@hugegraph.apache.org:lte=10M:xxx.
 
-## 2. Initiate Community Voting Email (VOTE)
+## Initiate Community Voting Email (VOTE)
 
 If there are no dissenting opinions within the specified time frame of the discussion email, the initiator of the discussion needs to initiate a voting email for the committer election at private@hugegraph.apache.org.
 
@@ -141,7 +141,7 @@ After the voting email concludes, the initiator of the vote needs to remind the 
 To: private@hugegraph.apache.org
 Subject: [RESULTS][VOTE] xxx as a HugeGraph Committer
 
-Hi all: The vote for "xxx" as an HugeGraph Committer has PASSED and closed now.
+Hi all: The vote for "xxx" as a HugeGraph Committer has PASSED and closed now.
 
 The result is as follows: X PMC +1 Votes: 
 - A (PMC ID)
@@ -326,6 +326,30 @@ Welcome xxx, and please enjoy your community journey~
 Thanks! 
 
 The Apache HugeGraph PPMC
+```
+
+## Update clutch status information
+
+PMC members responsible for nominations need to download clutch status information and update it. Once effective, it can be viewed on the [clutch](https://incubator.apache.org/clutch/hugegraph.html) and [projects](https://incubator.apache.org/projects/hugegraph.html) pages. The process is as follows:
+
+```text
+# 1. Download clutch status information
+svn co https://svn.apache.org/repos/asf/incubator/public/trunk/content/projects/
+
+# 2. Modify and edit (note the following is for reference only)
+cd projects
+vim hugegraph.xml
+
+<section id="News">
+  <title>News</title>
+  <ul>
+    <li>YYYY-MM-DD New Committer: xxx</li>
+    <li>...</li>
+  </ul>
+</section>
+
+# 3. Commit
+svn commit -m "update news for hugegraph"
 ```
 
 # References
