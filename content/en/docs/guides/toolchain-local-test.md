@@ -274,7 +274,7 @@ networks:
 Generally, the local testing process for each tool is as follows, which will be explained in detail below.
 
 <div style="text-align: center;">
-    <img src="/docs/images/toolchain-test-mermaid-4.png" alt="image">
+    <img src="/docs/images/toolchain-test-mermaid-4.png" alt="HugeGraph Toolchain Testing Process">
 </div>
 
 

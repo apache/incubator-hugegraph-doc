@@ -59,13 +59,15 @@ cd hugegraph-toolchain
 
 这种方式允许您从源代码编译和安装特定版本的 HugeGraph Server，确保测试环境与特定 HugeGraph Server 版本的一致性，这对于复现问题或验证兼容性至关重要。
 
-#### 3.2 变量与参数
+#### 3.1.1 变量与参数
 
 *   **`$COMMIT_ID`**
     *   指定 HugeGraph Server 源代码的 Git Commit ID。当您需要从源代码编译和安装特定版本的 HugeGraph Server 作为测试依赖时，会使用此变量,确保测试环境与特定 HugeGraph Server 版本的一致性，这对于复现问题或验证兼容性至关重要。使用时直接接作为参数传递给 install-hugegraph-from-source.sh 脚本。
 
 *   **`$DB_DATABASE` 与 `$DB_PASS`**
     *   指定 HugeGraph-Loader 进行 JDBC 测试时所连接的 MySQL 数据库的名称和root 用户密码。提供数据库连接信息，使 Loader 能够正确地读写数据。使用时直接接作为参数传递给 使用时直接接作为参数传递给 install-mysql.sh 脚本。
+
+#### 3.1.2 执行流程
 
 **安装并启动 HugeGraph Server**
 
@@ -96,7 +98,7 @@ curl http://localhost:8080/graphs
 ```
 若返回 `{"graphs":["hugegraph"]}`，则表示服务器已准备就绪，可以接收请求。
 
-### 使用 Docker 部署测试环境
+### 3.2 使用 Docker 部署测试环境
 
 通过使用官方发布的 hugegraph-server Docker 镜像，您可以快速启动一个 HugeGraph Server。这种方式简化了测试环境的搭建、确保环境一致性并提高测试的可重复性。**然而，请注意，Docker 镜像可能不会及时更新到 HugeGraph Server 的最新开发版本。这意味着如果您的工具链代码依赖于 HugeGraph Server 的最新接口或功能，使用 Docker 镜像可能会导致兼容性问题。在这种情况下，建议使用脚本方式部署特定 `COMMIT_ID` 的 HugeGraph Server。**
 
@@ -277,7 +279,7 @@ networks:
 通常来说，各个工具的本地测试大致流程如下，下面将进行细致的说明
 
 <div style="text-align: center;">
-    <img src="/docs/images/toolchain-test-mermaid-2.png" alt="image">
+    <img src="/docs/images/toolchain-test-mermaid-2.png" alt="HugeGraph工具链测试流程图">
 </div>
 
 ### 4.1 hugegraph-client 本地测试 (Java 版本)
