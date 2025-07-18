@@ -300,7 +300,7 @@ mvn -e compile -pl hugegraph-client -Dmaven.javadoc.skip=true -ntp
 
 #### 4.1.2 依赖服务安装
 
-按照 [部署测试环境](#部署测试环境) 部署测试环境 中的说明，启动 `hugegraph-server` 。
+按照 [部署测试环境](#3-部署测试环境) 部署测试环境 中的说明，启动 `hugegraph-server` 。
 
 ##### server鉴权设置（docker镜像版本<=1.5.0不支持鉴权测试）
 
