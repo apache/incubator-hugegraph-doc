@@ -10,7 +10,7 @@ weight: 7
 
 ### 1.1 核心依赖说明：HugeGraph Server
 
-在 HugeGraph 工具链的测试中，**HugeGraph Server 是绝大多数集成测试和功能测试的核心依赖**。它提供了图数据库的核心服务，工具链中的许多组件（如 Client、Loader、Hubble、Spark Connector、Tools）都需要与 Server 进行交互才能完成其功能并进行测试。因此，配置好 HugeGraph Server 正常运行是完整进行功能测试的前提，本指南将在下文介绍如何安装/构建Hugegrpah Server。
+在 HugeGraph 工具链的测试中，**HugeGraph Server 是绝大多数集成测试和功能测试的核心依赖**。它提供了图数据库的核心服务，工具链中的许多组件（如 Client、Loader、Hubble、Spark Connector、Tools）都需要与 Server 进行交互才能完成其功能并进行测试。因此，配置好 HugeGraph Server 正常运行是完整进行功能测试的前提，本指南将在下文介绍如何安装/构建HugeGraph Server。
 
 ### 1.2 测试套件类型解释
 
@@ -20,7 +20,7 @@ weight: 7
     *   **目标**：验证程序中最小可测试单元（通常是单个函数、方法或类）的正确性。通常不涉及外部依赖（如数据库、网络服务等）
 
 *   **API 测试 (API Tests / ApiTestSuite)**：
-    *   **目标**：验证程序对外提供API的正确性、稳定性和符合性。它们通常模拟客户端请求，与server进行交互，检查 API 的响应数、处理机制是否符合预期。
+    *   **目标**：验证程序对外提供API的正确性、稳定性和符合性。它们通常模拟客户端请求，与server进行交互，检查 API 的响应数据、处理机制是否符合预期。
     *   **特点**：需要一个正在运行的服务端（如 HugeGraph Server）来响应 API 请求。
 
 
@@ -495,7 +495,7 @@ mvn test -Dtest=FuncTestSuite -pl hugegraph-tools -ntp
     *   **问题描述**：命令执行失败，提示找不到文件、权限不足或参数无效。
     *   **排查方法**：
         *   仔细检查您设置的环境变量（如 `$COMMIT_ID`, `$DB_DATABASE`, `$DB_PASS`）是否正确，并且在执行命令的 shell 会话中已生效。
-        *   确认 Maven 命令参数和 Shell 脚本参数的拼写和用法是否正确，参考 [2. 环境变量与参数解析](#2-环境变量与参数解析) 章节。
+        *   确认 Maven 命令参数和 Shell 脚本参数的拼写和用法是否正确，参考 [3.2 变量与参数](#32-变量与参数) 章节。
         *   如遇脚本权限问题，先执行：`chmod +x hugegraph-*/assembly/travis/*.sh`。
 
 *   **HDFS 测试问题**：

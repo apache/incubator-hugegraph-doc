@@ -11,7 +11,7 @@ This guide aims to help developers efficiently run tests for the HugeGraph toolc
 
 ### 1.1 Core Dependency: HugeGraph Server
 
-In the testing of the HugeGraph toolchain, **HugeGraph Server is the core dependency for the vast majority of integration and functional tests**. It provides the core services of the graph database, and many components in the toolchain (such as Client, Loader, Hubble, Spark Connector, Tools) need to interact with the Server to perform their functions and be tested. Therefore, a properly configured and running HugeGraph Server is a prerequisite for complete functional testing. This guide will explain how to install/build HugeGraph Server below.
+In the testing of the HugeGraph toolchain, **HugeGraph Server is the core dependency for the vast majority of integration and functional tests**. It provides the core services of the graph database, and many components in the toolchain (such as Client, Loader, Hubble, Spark Connector, Tools) need to interact with the Server to perform their functions and be tested. Therefore, a properly configured and running HugeGraph Server is a prerequisite for complete functional testing. This guide will explain how to install/build HugeGraph Server in the sections below.
 
 ### 1.2 Explanation of Test Suite Types
 
@@ -59,7 +59,7 @@ Regarding the test environment, since HugeGraph Server is the core dependency fo
 
 This method allows you to compile and install a specific version of HugeGraph Server from the source code, ensuring consistency between the test environment and a specific HugeGraph Server version, which is crucial for reproducing issues or verifying compatibility.
 
-#### 3.2 Variables and Parameters
+#### 3.1.1 Variables and Parameters
 
 *   **`$COMMIT_ID`**
     *   Specifies the Git Commit ID of the HugeGraph Server source code. This variable is used when you need to compile and install a specific version of HugeGraph Server from the source as a test dependency. It ensures consistency between the test environment and the specific HugeGraph Server version, which is crucial for reproducing issues or verifying compatibility. Pass it directly as a parameter to the `install-hugegraph-from-source.sh` script.
@@ -490,7 +490,7 @@ This section lists some common problems that may be encountered during local tes
     *   **Problem Description**: Command execution fails with a message about a file not found, insufficient permissions, or invalid parameters.
     *   **Troubleshooting**:
         *   Carefully check if the environment variables you set (e.g., `$COMMIT_ID`, `$DB_DATABASE`, `$DB_PASS`) are correct and have taken effect in the shell session where the command is executed.
-        *   Confirm that the spelling and usage of Maven command parameters and Shell script parameters are correct, referring to the [3.2 Variables and Parameters](#32-variables-and-parameters) section.
+        *   Confirm that the spelling and usage of Maven command parameters and Shell script parameters are correct, referring to the [3.2 Variables and Parameters](#3-2-variables-and-parameters) section.
         *   If you encounter script permission issues, first execute: `chmod +x hugegraph-*/assembly/travis/*.sh`.
 
 *   **HDFS Test Issues**:
