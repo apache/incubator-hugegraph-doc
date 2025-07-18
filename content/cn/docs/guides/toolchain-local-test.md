@@ -65,7 +65,7 @@ cd hugegraph-toolchain
     *   指定 HugeGraph Server 源代码的 Git Commit ID。当您需要从源代码编译和安装特定版本的 HugeGraph Server 作为测试依赖时，会使用此变量,确保测试环境与特定 HugeGraph Server 版本的一致性，这对于复现问题或验证兼容性至关重要。使用时直接接作为参数传递给 install-hugegraph-from-source.sh 脚本。
 
 *   **`$DB_DATABASE` 与 `$DB_PASS`**
-    *   指定 HugeGraph-Loader 进行 JDBC 测试时所连接的 MySQL 数据库的名称和root 用户密码。提供数据库连接信息，使 Loader 能够正确地读写数据。使用时直接接作为参数传递给 使用时直接接作为参数传递给 install-mysql.sh 脚本。
+    指定 HugeGraph-Loader 进行 JDBC 测试时所连接的 MySQL 数据库名称与 root 用户密码。请作为参数传递给 `install-mysql.sh` 脚本，供 Loader 正常读写数据。
 
 #### 3.1.2 执行流程
 
@@ -351,7 +351,7 @@ mvn install -pl hugegraph-client,hugegraph-loader -am -Dmaven.javadoc.skip=true 
 按照 [部署测试环境](#部署测试环境) 部署测试环境 中的说明，启动 `hugegraph-server`，`Hadoop (HDFS)` (仅当运行 HDFS 测试时需要)， `MySQL` (仅当运行 JDBC 测试时需要)。
 
 <div style="text-align: center;">
-    <img src="/docs/images/toolchain-test-mermaid-1.png" alt="image">
+    <img src="/docs/images/toolchain-test-mermaid-1.png" alt="HugeGraph Loader 测试流程图">
 </div>
 
 #### 4.2.3 运行测试
@@ -497,7 +497,7 @@ mvn test -Dtest=FuncTestSuite -pl hugegraph-tools -ntp
     *   **问题描述**：命令执行失败，提示找不到文件、权限不足或参数无效。
     *   **排查方法**：
         *   仔细检查您设置的环境变量（如 `$COMMIT_ID`, `$DB_DATABASE`, `$DB_PASS`）是否正确，并且在执行命令的 shell 会话中已生效。
-        *   确认 Maven 命令参数和 Shell 脚本参数的拼写和用法是否正确，参考 [3.2 变量与参数](#32-变量与参数) 章节。
+        *   确认 Maven 命令参数和 Shell 脚本参数的拼写和用法是否正确，参考 参考 [3.1.1 变量与参数](#3-1-1-变量与参数) 章节。 章节。
         *   如遇脚本权限问题，先执行：`chmod +x hugegraph-*/assembly/travis/*.sh`。
 
 *   **HDFS 测试问题**：

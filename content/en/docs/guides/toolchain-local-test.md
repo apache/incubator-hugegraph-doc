@@ -67,6 +67,8 @@ This method allows you to compile and install a specific version of HugeGraph Se
 *   **`$DB_DATABASE` & `$DB_PASS`**
     *   Specify the name of the MySQL database and the root user password for the connection used in HugeGraph-Loader's JDBC tests. Providing this database connection information allows the Loader to read and write data correctly. Pass them directly as parameters to the `install-mysql.sh` script.
 
+#### 3.1.2 Test Processing
+
 **Install and Start HugeGraph Server**
 
 If you choose to install manually, you can use the following script to install HugeGraph Server. The script is located in the `/assembly/travis/` directory of any tool's repository. It is used to pull the HugeGraph Server source code from a specified commit ID, compile it, unzip it, and start the service via both http and https.
@@ -94,7 +96,7 @@ curl http://localhost:8080/graphs
 ```
 If it returns `{"graphs":["hugegraph"]}`, it means the server is ready to receive requests.
 
-### Using Docker to Deploy the Test Environment
+### 3.2 Using Docker to Deploy the Test Environment
 
 By using the officially released `hugegraph-server` Docker image, you can quickly start a HugeGraph Server. This method simplifies the setup of the test environment, ensures environmental consistency, and improves test repeatability. **However, please note that the Docker image may not be updated to the latest development version of HugeGraph Server in a timely manner. This means that if your toolchain code depends on the latest interfaces or features of HugeGraph Server, using the Docker image may lead to compatibility issues. In such cases, it is recommended to use the script method to deploy a specific `COMMIT_ID` of HugeGraph Server.**
 
@@ -296,7 +298,7 @@ mvn -e compile -pl hugegraph-client -Dmaven.javadoc.skip=true -ntp
 
 #### 4.1.2 Dependent Service Installation
 
-Follow the instructions in [Deploying the Test Environment](#deploying-the-test-environment) to start `hugegraph-server`.
+Follow the instructions in [Deploying the Test Environment](#3-deploying-the-test-environment) to start `hugegraph-server`.
 
 ##### Server Authentication Settings (Authentication tests are not supported for Docker image versions <= 1.5.0)
 
@@ -344,10 +346,10 @@ mvn install -pl hugegraph-client,hugegraph-loader -am -Dmaven.javadoc.skip=true 
 
 #### 4.2.2 Dependent Service Installation (Choose based on test type)
 
-Follow the instructions in [Deploying the Test Environment](#deploying-the-test-environment) to start `hugegraph-server`, `Hadoop (HDFS)` (only required when running HDFS tests), and `MySQL` (only required when running JDBC tests).
+Follow the instructions in [Deploying the Test Environment](#3-deploying-the-test-environment) to start `hugegraph-server`, `Hadoop (HDFS)` (only required when running HDFS tests), and `MySQL` (only required when running JDBC tests).
 
 <div style="text-align: center;">
-    <img src="/docs/images/toolchain-test-mermaid-3.png" alt="image">
+    <img src="/docs/images/toolchain-test-mermaid-3.png" alt="HugeGraph Loader Testing Process">
 </div>
 
 #### 4.2.3 Run Tests
@@ -388,7 +390,7 @@ mvn -e compile -Dmaven.javadoc.skip=true -ntp
 
 #### 4.3.2 Dependent Service Installation
 
-Follow the instructions in [Deploying the Test Environment](#deploying-the-test-environment) to start `hugegraph-server`.
+Follow the instructions in [Deploying the Test Environment](#3-deploying-the-test-environment) to start `hugegraph-server`.
 
 **Install Other Hubble Dependencies**
 
@@ -435,7 +437,7 @@ mvn install -pl hugegraph-client,hugegraph-spark-connector -am -Dmaven.javadoc.s
 
 #### 4.4.2 Dependent Service Installation
 
-Follow the instructions in [Deploying the Test Environment](#deploying-the-test-environment) to start `hugegraph-server`.
+Follow the instructions in [Deploying the Test Environment](#3-deploying-the-test-environment) to start `hugegraph-server`.
 
 #### 4.4.3 Run Tests
 
@@ -462,7 +464,7 @@ mvn install -pl hugegraph-client,hugegraph-tools -am -Dmaven.javadoc.skip=true -
 
 #### 4.5.2 Dependent Service Installation (Choose one)
 
-Follow the instructions in [Deploying the Test Environment](#deploying-the-test-environment) to start `hugegraph-server`.
+Follow the instructions in [Deploying the Test Environment](#3-deploying-the-test-environment) to start `hugegraph-server`.
 
 #### 4.5.3 Run Tests
 
@@ -490,7 +492,7 @@ This section lists some common problems that may be encountered during local tes
     *   **Problem Description**: Command execution fails with a message about a file not found, insufficient permissions, or invalid parameters.
     *   **Troubleshooting**:
         *   Carefully check if the environment variables you set (e.g., `$COMMIT_ID`, `$DB_DATABASE`, `$DB_PASS`) are correct and have taken effect in the shell session where the command is executed.
-        *   Confirm that the spelling and usage of Maven command parameters and Shell script parameters are correct, referring to the [3.2 Variables and Parameters](#3-2-variables-and-parameters) section.
+        *   Confirm that the spelling and usage of Maven command parameters and Shell script parameters are correct, referring to the [3.1.1 Variables and Parameters](#3-1-1-variables-and-parameters) section.
         *   If you encounter script permission issues, first execute: `chmod +x hugegraph-*/assembly/travis/*.sh`.
 
 *   **HDFS Test Issues**:
