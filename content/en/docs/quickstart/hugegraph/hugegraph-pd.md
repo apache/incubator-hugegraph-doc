@@ -146,5 +146,39 @@ curl http://localhost:8620/v1/stores
 If the Store is configured successfully, the response of the above interface should contain the status information of the current node. The status "Up" indicates that the node is running normally. Only the response of one node configuration is shown here. If all three nodes are configured successfully and are running, the `storeId` list in the response should contain three IDs, and the `Up`, `numOfService`, and `numOfNormalService` fields in `stateCountMap` should be 3.
 
 ```JSON
-{"message":"OK","data":{"stores":[{"storeId":8319292642220586694,"address":"127.0.0.1:8500","raftAddress":"127.0.0.1:8510","version":"","state":"Up","deployPath":"/Users/{your_user_name}/hugegraph/apache-hugegraph-incubating-1.5.0/apache-hugegraph-store-incubating-1.5.0/lib/hg-store-node-1.5.0.jar","dataPath":"./storage","startTimeStamp":1754027127969,"registedTimeStamp":1754027127969,"lastHeartBeat":1754027909444,"capacity":494384795648,"available":346535829504,"partitionCount":0,"graphSize":0,"keyCount":0,"leaderCount":0,"serviceName":"127.0.0.1:8500-store","serviceVersion":"","serviceCreatedTimeStamp":1754027127000,"partitions":[]}],"stateCountMap":{"Up":1},"numOfService":1,"numOfNormalService":1},"status":0}
+{
+  "message": "OK",
+  "data": {
+    "stores": [
+      {
+        "storeId": 8319292642220586694,
+        "address": "127.0.0.1:8500",
+        "raftAddress": "127.0.0.1:8510",
+        "version": "",
+        "state": "Up",
+        "deployPath": "/Users/{your_user_name}/hugegraph/apache-hugegraph-incubating-1.5.0/apache-hugegraph-store-incubating-1.5.0/lib/hg-store-node-1.5.0.jar",
+        "dataPath": "./storage",
+        "startTimeStamp": 1754027127969,
+        "registedTimeStamp": 1754027127969,
+        "lastHeartBeat": 1754027909444,
+        "capacity": 494384795648,
+        "available": 346535829504,
+        "partitionCount": 0,
+        "graphSize": 0,
+        "keyCount": 0,
+        "leaderCount": 0,
+        "serviceName": "127.0.0.1:8500-store",
+        "serviceVersion": "",
+        "serviceCreatedTimeStamp": 1754027127000,
+        "partitions": []
+      }
+    ],
+    "stateCountMap": {
+      "Up": 1
+    },
+    "numOfService": 1,
+    "numOfNormalService": 1
+  },
+  "status": 0
+}
 ```
