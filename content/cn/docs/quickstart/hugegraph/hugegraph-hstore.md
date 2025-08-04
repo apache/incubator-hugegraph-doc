@@ -216,7 +216,7 @@ curl http://localhost:8620/v1/stores
         "raftAddress": "127.0.0.1:8510",
         "version": "",
         "state": "Up",
-        "deployPath": "/Users/{your_user_name}/hugegraph/   apache-hugegraph-incubating-1.5.0/apache-hugegraph-store-incubating-1.5.0/lib/hg-store-node-1.5.0.jar",
+        "deployPath": "/Users/{your_user_name}/hugegraph/apache-hugegraph-incubating-1.5.0/apache-hugegraph-store-incubating-1.5.0/lib/hg-store-node-1.5.0.jar",
         "dataPath": "./storage",
         "startTimeStamp": 1754027127969,
         "registedTimeStamp": 1754027127969,
