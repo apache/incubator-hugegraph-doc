@@ -205,7 +205,7 @@ curl http://localhost:8620/v1/stores
 ```
 
 如果Store配置成功，上述接口的响应中应该包含当前节点的状态信息，状态为Up表示节点正常运行，这里只展示了一个节点配置成功的响应，如果三个节点都配置成功并正在运行，响应中`storeId`列表应该包含三个id，并且`stateCountMap`中`Up`、`numOfService`、`numOfNormalService`三个字段应该为3。
-```JSON
+```javascript
 {
   "message": "OK",
   "data": {

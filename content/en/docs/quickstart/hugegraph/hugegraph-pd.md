@@ -145,7 +145,7 @@ curl http://localhost:8620/v1/stores
 
 If the Store is configured successfully, the response of the above interface should contain the status information of the current node. The status "Up" indicates that the node is running normally. Only the response of one node configuration is shown here. If all three nodes are configured successfully and are running, the `storeId` list in the response should contain three IDs, and the `Up`, `numOfService`, and `numOfNormalService` fields in `stateCountMap` should be 3.
 
-```JSON
+```javascript
 {
   "message": "OK",
   "data": {
