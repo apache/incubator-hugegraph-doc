@@ -790,9 +790,10 @@ schema: 必填
 | 参数                        | 默认值       | 是否必传 | 描述信息                                                              |
 |---------------------------|-----------|------|-------------------------------------------------------------------|
 | `-f` 或 `--file`           |           | Y    | 配置脚本的路径                                                           |
-| `-g` 或 `--graph`          |           | Y    | 图数据库空间                                                            |
+| `-g` 或 `--graph`          |           | Y    | 图数据库h                                                           |
+| `-gs` 或 `--graphspace`          | DEFAULT          |     | 图空间                                                            |
 | `-s` 或 `--schema`         |           | Y    | schema 文件路径                                                       |        |
-| `-h` 或 `--host`           | localhost |      | HugeGraphServer 的地址                                               |
+| `-h` 或 `--host` 或 `-i`          | localhost |      | HugeGraphServer 的地址                                               |
 | `-p` 或 `--port`           | 8080      |      | HugeGraphServer 的端口号                                              |
 | `--username`              | null      |      | 当 HugeGraphServer 开启了权限认证时，当前图的 username                          |
 | `--token`                 | null      |      | 当 HugeGraphServer 开启了权限认证时，当前图的 token                             |

@@ -18,7 +18,8 @@ HugeGraph-Client 是操作 graph 的总入口，用户必须先创建出 HugeGra
 ```java
 // HugeGraphServer 地址："http://localhost:8080"
 // 图的名称："hugegraph"
-HugeClient hugeClient = HugeClient.builder("http://localhost:8080", "hugegraph")
+HugeClient hugeClient = HugeClient.builder("http://localhost:8080", 
+                                                   "DEFAULT", "hugegraph")
                                   .configTimeout(20) // 默认 20s 超时
                                   .configUser("**", "**") // 默认未开启用户权限
                                   .build();
@@ -455,6 +456,63 @@ Edge knows1 = marko.addEdge("knows", vadas, "city", "Beijing");
 
 **注意：当 frequency 为 multiple 时必须要设置 sortKeys 对应属性类型的值。**
 
-### 4 简单示例
+### 4 图空间（GraphSpace）
+client支持一个物理部署中多个 GraphSpace，每个 GraphSpace 下可以含多个图（graph）。
+- 兼容：不指定 GraphSpace 时，默认使用 "DEFAULT" 空间
+
+#### 4.1 创建GraphSpace
+
+```java
+GraphSpaceManager spaceManager = hugeClient.graphSpace();
+
+// 定义 GraphSpace 配置
+GraphSpace graphSpace = new GraphSpace();
+graphSpace.setName("myGraphSpace");
+graphSpace.setDescription("Business data graph space");
+graphSpace.setMaxGraphNumber(10);  // 最大图数量
+graphSpace.setMaxRoleNumber(100);  // 最大角色数量
+
+// 创建 GraphSpace
+spaceManager.createGraphSpace(graphSpace);
+```
+**GraphSpace 接口汇总**
+
+| category | interface              | description                              |
+|----------|------------------------|------------------------------------------|
+| 查询     | listGraphSpaces()      | 获取所有 GraphSpace 列表                 |
+|          | getGraphSpace(String name)        | 获取指定 GraphSpace                      |
+|      | space.getName()        | 获取 GraphSpace 名称                     |
+|      | space.getDescription() | 获取 GraphSpace 描述信息                 |
+|      | space.getGraphNumber() | 获取 GraphSpace 下图的数量               |
+| 更新     | getGraphSpace(String name)        | 获取指定 GraphSpace                      |
+|      | space.setDescription(String description) | 修改 GraphSpace 描述信息                 |
+|      | space.setMaxGraphNumber(int maxNumbe) | 设置 GraphSpace 最大图数量             |
+|      | updateGraphSpace(String name, GraphSpace space)     | 更新 GraphSpace 配置                     |
+| 删除     | removeGraphSpace(String name)     | 删除指定 GraphSpace                      |
+|      | removeGraphSpace(String name, boolean forc) | 强制删除 GraphSpace（包含所有图数据） |
+
+#### 4.2 GraphSpace 中的图管理
+
+  在 GraphSpace 中，可以管理多个图：
+
+```java
+// 在指定的 GraphSpace 中创建图
+GraphsManager graphsManager = hugeClient.graphs();
+Graph graph = new Graph();
+graph.setName("businessGraph");
+graph.setDescription("Business relationship graph");
+graphsManager.createGraph("myGraphSpace", graph);
+
+// 获取 GraphSpace 中的所有图
+List<Graph> graphs = graphsManager.listGraphs("myGraphSpace");
+
+// 获取指定图
+Graph businessGraph = graphsManager.getGraph("myGraphSpace", "businessGraph");
+
+// 删除图
+graphsManager.removeGraph("myGraphSpace", "businessGraph");
+```
+
+### 5 简单示例
 
 简单示例见[HugeGraph-Client](/cn/docs/quickstart/client/hugegraph-client)
