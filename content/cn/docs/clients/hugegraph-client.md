@@ -475,7 +475,7 @@ graphSpace.setMaxRoleNumber(100);  // 最大角色数量
 // 创建 GraphSpace
 spaceManager.createGraphSpace(graphSpace);
 ```
-**GraphSpace 接口汇总**
+#### 4.2 GraphSpace 接口汇总
 
 | category | interface              | description                              |
 |----------|------------------------|------------------------------------------|
@@ -484,14 +484,14 @@ spaceManager.createGraphSpace(graphSpace);
 |      | space.getName()        | 获取 GraphSpace 名称                     |
 |      | space.getDescription() | 获取 GraphSpace 描述信息                 |
 |      | space.getGraphNumber() | 获取 GraphSpace 下图的数量               |
-| 更新     | getGraphSpace(String name)        | 获取指定 GraphSpace                      |
-|      | space.setDescription(String description) | 修改 GraphSpace 描述信息                 |
-|      | space.setMaxGraphNumber(int maxNumbe) | 设置 GraphSpace 最大图数量             |
+|      | getGraphSpace(String name)        | 获取指定 GraphSpace                      |
+| 更新     | space.setDescription(String description) | 修改 GraphSpace 描述信息                 |
+|      | space.setMaxGraphNumber(int maxNumber) | 设置 GraphSpace 最大图数量             |
 |      | updateGraphSpace(String name, GraphSpace space)     | 更新 GraphSpace 配置                     |
 | 删除     | removeGraphSpace(String name)     | 删除指定 GraphSpace                      |
-|      | removeGraphSpace(String name, boolean forc) | 强制删除 GraphSpace（包含所有图数据） |
+|      | removeGraphSpace(String name, boolean force) | 强制删除 GraphSpace（包含所有图数据） |
 
-#### 4.2 GraphSpace 中的图管理
+#### 4.3 GraphSpace 中的图管理
 
   在 GraphSpace 中，可以管理多个图：
 

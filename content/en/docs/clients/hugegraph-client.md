@@ -464,7 +464,7 @@ graphSpace.setMaxRoleNumber(100);  // Maximum number of roles
 spaceManager.createGraphSpace(graphSpace);
 ```
 
-**GraphSpace Interface Summary**
+#### 4.2 GraphSpace Interface Summary
 
 | Category | Interface | Description |
 |----------|-----------|-------------|
@@ -473,14 +473,14 @@ spaceManager.createGraphSpace(graphSpace);
 | | space.getName() | Get GraphSpace name |
 | | space.getDescription() | Get GraphSpace description |
 | | space.getGraphNumber() | Get the number of graphs under GraphSpace |
-| Update | getGraphSpace(String name) | Get the specified GraphSpace |
-| | space.setDescription(String description) | Modify GraphSpace description |
-| | space.setMaxGraphNumber(int maxNumbe) | Set maximum number of graphs in GraphSpace |
+|  | getGraphSpace(String name) | Get the specified GraphSpace |
+| Update| space.setDescription(String description) | Modify GraphSpace description |
+| | space.setMaxGraphNumber(int maxNumber) | Set maximum number of graphs in GraphSpace |
 | | updateGraphSpace(String name, GraphSpace space) | Update GraphSpace configuration |
 | Delete | removeGraphSpace(String name) | Delete the specified GraphSpace |
-| | removeGraphSpace(String name, boolean forc) | Force delete GraphSpace (including all graph data) |
+| | removeGraphSpace(String name, boolean force) | Force delete GraphSpace (including all graph data) |
 
-#### 4.2 Graph Management in GraphSpace
+#### 4.3 Graph Management in GraphSpace
 
 You can manage multiple graphs in a GraphSpace:
 
