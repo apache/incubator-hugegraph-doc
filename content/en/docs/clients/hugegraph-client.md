@@ -468,39 +468,17 @@ spaceManager.createGraphSpace(graphSpace);
 
 | Category | Interface | Description |
 |----------|-----------|-------------|
-| Query | listGraphSpaces() | Get all GraphSpace lists |
+| Query | listGraphSpace() | Get all GraphSpace lists |
 | | getGraphSpace(String name) | Get the specified GraphSpace |
 | | space.getName() | Get GraphSpace name |
 | | space.getDescription() | Get GraphSpace description |
 | | space.getGraphNumber() | Get the number of graphs under GraphSpace |
-|  | getGraphSpace(String name) | Get the specified GraphSpace |
 | Update| space.setDescription(String description) | Modify GraphSpace description |
 | | space.setMaxGraphNumber(int maxNumber) | Set maximum number of graphs in GraphSpace |
+|      | space.setMaxRoleNumber(int maxRoleNumber) | Set maximum role number in  GraphSpace       |
 | | updateGraphSpace(String name, GraphSpace space) | Update GraphSpace configuration |
 | Delete | removeGraphSpace(String name) | Delete the specified GraphSpace |
 | | removeGraphSpace(String name, boolean force) | Force delete GraphSpace (including all graph data) |
-
-#### 4.3 Graph Management in GraphSpace
-
-You can manage multiple graphs in a GraphSpace:
-
-```java
-// Create a graph in the specified GraphSpace
-GraphsManager graphsManager = hugeClient.graphs();
-Graph graph = new Graph();
-graph.setName("businessGraph");
-graph.setDescription("Business relationship graph");
-graphsManager.createGraph("myGraphSpace", graph);
-
-// Get all graphs in GraphSpace
-List<Graph> graphs = graphsManager.listGraphs("myGraphSpace");
-
-// Get the specified graph
-Graph businessGraph = graphsManager.getGraph("myGraphSpace", "businessGraph");
-
-// Delete graph
-graphsManager.removeGraph("myGraphSpace", "businessGraph");
-```
 
 ### 5 Simple Example
 
