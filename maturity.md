@@ -6,7 +6,7 @@ More details can be found [here](https://community.apache.org/apache-way/apache-
 
 ## Status of this assessment
 
-This assessment is still working in progress.
+Preliminary assessment completed.
 
 ## Maturity model assessment
 
@@ -48,7 +48,7 @@ The following table is filled according to the [Apache Maturity Model](https://c
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
 | **QU10** | The project is open and honest about the quality of its code. Various levels of quality and maturity for various modules are natural and acceptable as long as they are clearly communicated. | **YES** Users are encouraged to [report issues](https://github.com/apache/hugegraph/issues) on GitHub, and all discussions are public. |
 | **QU20** | The project puts a very high priority on producing secure software.                                                                                                                                                                                                            | **YES** All reported security issues are treated with high priority. |
-| **QU30** | The project provides a well-documented, secure and private channel to report security issues, along with a documented way of responding to them. | **YES** The project website has a dedicated [security page](https://hugegraph.apache.org/docs/security/) with instructions for reporting vulnerabilities. |
+| **QU30** | The project provides a well-documented, secure and private channel to report security issues, along with a documented way of responding to them. | **YES** The project website has a dedicated [security page](https://hugegraph.apache.org/docs/guides/security/) with instructions for reporting vulnerabilities. |
 | **QU40** | The project puts a high priority on backwards compatibility and aims to document any incompatible changes and provide tools and documentation to help users transition to new features. | **YES** The project values backward compatibility and documents any breaking changes in release notes. |
 | **QU50** | The project strives to respond to documented bug reports in a timely manner. | **YES** The community is active in addressing issues reported on GitHub and questions on the mailing list. |
 
