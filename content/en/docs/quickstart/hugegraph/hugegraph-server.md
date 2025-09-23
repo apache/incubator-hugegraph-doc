@@ -42,7 +42,7 @@ There are four ways to deploy HugeGraph-Server components:
 <!-- 3.1 is linked by another place. if change 3.1's title, please check -->
 You can refer to [Docker deployment guide](https://hub.docker.com/r/hugegraph/hugegraph).
 
-We can use `docker run -itd --name=graph -p 8080:8080 hugegraph/hugegraph:1.5.0` to quickly start an inner `HugeGraph server` with `RocksDB` in background.
+We can use `docker run -itd --name=graph -e PASSWORD=123456 -p 8080:8080 hugegraph/hugegraph:1.5.0` to quickly start an inner `HugeGraph server` with `RocksDB` in background.
 
 Optional: 
 1. use `docker exec -it graph bash` to enter the container to do some operations.

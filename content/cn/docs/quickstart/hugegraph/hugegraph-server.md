@@ -39,7 +39,7 @@ Core 模块是 Tinkerpop 接口的实现，Backend 模块用于管理数据存�
 
 可参考 [Docker 部署方式](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/docker/README.md)。
 
-我们可以使用 `docker run -itd --name=server -p 8080:8080 hugegraph/hugegraph:1.5.0` 去快速启动一个内置了 `RocksDB` 的 `Hugegraph server`.
+我们可以使用 `docker run -itd --name=server -p 8080:8080 -e PASSWORD=123456 hugegraph/hugegraph:1.5.0` 去快速启动一个内置了 `RocksDB` 的 `Hugegraph server`.
 
 可选项：
 
