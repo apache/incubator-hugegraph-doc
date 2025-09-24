@@ -633,6 +633,7 @@ volumes:
         container_name: server
         environment:
           - PRELOAD=true
+          - PASSWORD=xxx
         volumes:
           - /path/to/yourscript:/hugegraph/scripts/example.groovy
         ports:

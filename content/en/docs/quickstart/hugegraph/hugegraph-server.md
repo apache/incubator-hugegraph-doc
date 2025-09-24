@@ -605,6 +605,7 @@ Set the environment variable `PRELOAD=true` when starting Docker to load data du
           container_name: server
           environment:
             - PRELOAD=true
+            - PASSWORD=xxx
           ports:
             - 8080:8080
     ```
