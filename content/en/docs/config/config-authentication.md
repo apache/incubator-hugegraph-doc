@@ -130,7 +130,7 @@ The steps are as follows:
 To enable authentication mode, add the environment variable `PASSWORD=123456` (you can freely set the password) in the `docker run` command:
 
 ```bash
-docker run -itd -e PASSWORD=123456 --name=server -p 8080:8080 hugegraph/hugegraph:1.5.0
+docker run -itd -e PASSWORD=xxx --name=server -p 8080:8080 hugegraph/hugegraph:1.5.0
 ```
 
 #### 2. Use docker-compose
