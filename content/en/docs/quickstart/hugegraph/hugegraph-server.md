@@ -65,7 +65,7 @@ services:
     # environment:
     #  - PRELOAD=true
     # PRELOAD is a option to preload a build-in sample graph when initializing.
-    # - PASSWORD=123456
+    # - PASSWORD=xxx
     # PASSWORD is an option to enable auth mode with the password you set.
     ports:
       - 8080:8080

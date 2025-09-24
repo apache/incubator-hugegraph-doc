@@ -63,7 +63,7 @@ services:
     container_name: server
     # environment:
     #  - PRELOAD=true 为可选参数，为 True 时可以在启动的时候预加载一个内置的样例图
-    #  - PASSWORD=123456 为可选参数，设置的时候可以开启鉴权模式，并设置密码
+    #  - PASSWORD=xxx 为可选参数，设置的时候可以开启鉴权模式，并设置密码
     ports:
       - 8080:8080
 ```
