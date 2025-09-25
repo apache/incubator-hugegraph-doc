@@ -42,12 +42,12 @@ There are four ways to deploy HugeGraph-Server components:
 <!-- 3.1 is linked by another place. if change 3.1's title, please check -->
 You can refer to [Docker deployment guide](https://hub.docker.com/r/hugegraph/hugegraph).
 
-We can use `docker run -itd --name=graph -p 8080:8080 hugegraph/hugegraph:1.5.0` to quickly start an inner `HugeGraph server` with `RocksDB` in background.
+We can use `docker run -itd --name=graph -e PASSWORD=xxx -p 8080:8080 hugegraph/hugegraph:1.5.0` to quickly start an inner `HugeGraph server` with `RocksDB` in background.
 
 Optional: 
 1. use `docker exec -it graph bash` to enter the container to do some operations.
 2. use `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph:1.5.0` to start with a **built-in** example graph. We can use `RESTful API` to verify the result. The detailed step can refer to [5.1.7](#517-create-an-example-graph-when-startup)
-3. use `-e PASSWORD=123456` to enable auth mode and set the password for admin. You can find more details from [Config Authentication](/docs/config/config-authentication#Use-docker-to-enble-authentication-mode)
+3. use `-e PASSWORD=xxx` to enable auth mode and set the password for admin. You can find more details from [Config Authentication](/docs/config/config-authentication#Use-docker-to-enble-authentication-mode)
 
 If you use docker desktop, you can set the option like: 
 <div style="text-align: center;">
@@ -62,11 +62,11 @@ services:
   server:
     image: hugegraph/hugegraph:1.5.0
     container_name: server
-    # environment:
+    environment:
+     - PASSWORD=xxx
+    # PASSWORD is an option to enable auth mode with the password you set.
     #  - PRELOAD=true
     # PRELOAD is a option to preload a build-in sample graph when initializing.
-    # - PASSWORD=123456
-    # PASSWORD is an option to enable auth mode with the password you set.
     ports:
       - 8080:8080
 ```
@@ -605,6 +605,7 @@ Set the environment variable `PRELOAD=true` when starting Docker to load data du
           container_name: server
           environment:
             - PRELOAD=true
+            - PASSWORD=xxx
           ports:
             - 8080:8080
     ```

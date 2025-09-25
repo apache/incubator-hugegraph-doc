@@ -127,15 +127,15 @@ The steps are as follows:
 
 #### 1. Use docker run
 
-To enable authentication mode, add the environment variable `PASSWORD=123456` (you can freely set the password) in the `docker run` command:
+To enable authentication mode, add the environment variable `PASSWORD=xxx` (you can freely set the password) in the `docker run` command:
 
 ```bash
-docker run -itd -e PASSWORD=123456 --name=server -p 8080:8080 hugegraph/hugegraph:1.5.0
+docker run -itd -e PASSWORD=xxx --name=server -p 8080:8080 hugegraph/hugegraph:1.5.0
 ```
 
 #### 2. Use docker-compose
 
-Use `docker-compose` and set the environment variable `PASSWORD=123456`:
+Use `docker-compose` and set the environment variable `PASSWORD=xxx`:
 
 ```yaml
 version: '3'
@@ -146,7 +146,7 @@ services:
     ports:
       - 8080:8080
     environment:
-      - PASSWORD=123456
+      - PASSWORD=xxx
 ```
 
 #### 3. Enter the container to enable authentication mode
