@@ -76,6 +76,8 @@ services:
   server:
     image: hugegraph/hugegraph:1.5.0
     container_name: server
+    environment:
+      - PASSWORD=xxx
     ports:
       - 8080:8080
 

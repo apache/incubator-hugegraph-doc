@@ -120,15 +120,15 @@ bin/start-hugegraph.sh
 
 #### 1. 采用 docker run
 
-在 `docker run` 中添加环境变量 `PASSWORD=123456`（密码可以自由设置）即可开启鉴权模式：：
+在 `docker run` 中添加环境变量 `PASSWORD=xxx`（密码可以自由设置）即可开启鉴权模式：：
 
 ```bash
-docker run -itd -e PASSWORD=123456 --name=server -p 8080:8080 hugegraph/hugegraph:1.5.0
+docker run -itd -e PASSWORD=xxx --name=server -p 8080:8080 hugegraph/hugegraph:1.5.0
 ```
 
 #### 2. 采用 docker-compose
 
-使用 `docker-compose` 在环境变量中设置 `PASSWORD=123456`即可
+使用 `docker-compose` 在环境变量中设置 `PASSWORD=xxx`即可
 
 ```yaml
 version: '3'
@@ -139,7 +139,7 @@ services:
     ports:
       - 8080:8080
     environment:
-      - PASSWORD=123456
+      - PASSWORD=xxx
 ```
 
 #### 3. 进入容器后重新开启鉴权模式
