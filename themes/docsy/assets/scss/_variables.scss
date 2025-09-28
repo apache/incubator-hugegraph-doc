@@ -13,7 +13,7 @@ $enable-shadows: true !default;
 
 // Theme flags.
 
-$td-enable-google-fonts: true !default;
+$td-enable-google-fonts: false !default;
 
 // Theme colors
 
@@ -66,7 +66,7 @@ $link-hover-decoration: none !default;
 
 $google_font_name: "Open Sans" !default;
 $google_font_family: "Open+Sans:300,300i,400,400i,700,700i" !default;
-$web-font-path: "https://fonts.googleapis.com/css?family=#{$google_font_family}&display=swap";
+// $web-font-path: "https://fonts.googleapis.com/css?family=#{$google_font_family}&display=swap"; // Disabled for self-hosted fonts
 
 $td-fonts-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
