@@ -44,7 +44,7 @@ Using IDEA or Eclipse to create the project:
         <groupId>org.apache.hugegraph</groupId>
         <artifactId>hugegraph-client</artifactId>
         <!-- Update to the latest release version -->
-        <version>1.5.0</version>
+        <version>1.7.0</version>
     </dependency>    
 </dependencies>
 ```
@@ -73,9 +73,10 @@ import org.apache.hugegraph.structure.gremlin.ResultSet;
 public class SingleExample {
 
     public static void main(String[] args) throws IOException {
-        // If connect failed will throw a exception.
-        HugeClient hugeClient = HugeClient.builder("http://localhost:8080",
+        HugeClient hugeClient = HugeClient.builder("http://127.0.0.1:8080",
+                                                   "DEFAULT",
                                                    "hugegraph")
+                                          .configUser("admin", "admin")
                                           .build();
 
         SchemaManager schema = hugeClient.schema();
@@ -218,10 +219,9 @@ import org.apache.hugegraph.structure.graph.Vertex;
 public class BatchExample {
 
     public static void main(String[] args) {
-        // If connect failed will throw a exception.
         HugeClient hugeClient = HugeClient.builder("http://localhost:8080",
-                                                   "hugegraph")
-                                          .build();
+                                                   "DEFAULT",
+                                                   "hugegraph").build();
 
         SchemaManager schema = hugeClient.schema();
 
@@ -344,11 +344,11 @@ public class BatchExample {
 }
 ```
 
-### 4.4 Run The Example
+#### 4.4 Run The Example
 
 Before running Example, you need to start the Server. For the startup process, see[HugeGraph-Server Quick Start](/docs/quickstart/hugegraph/hugegraph-server).
 
-### 4.5 More Information About Client-API
+#### 4.5 More Information About Client-API
 
 See[Introduce basic API of HugeGraph-Client](/docs/clients/hugegraph-client).
 

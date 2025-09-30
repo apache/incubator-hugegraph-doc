@@ -444,6 +444,42 @@ Edge knows1 = marko.addEdge("knows", vadas, "city", "Beijing");
 
 **Note: When frequency is multiple, the value of the property type corresponding to sortKeys must be set.**
 
-### 4 Examples
+### 4 GraphSpace
+The client supports multiple GraphSpaces in one physical deployment, and each GraphSpace can contain multiple graphs.
+- Compatibility: When no GraphSpace is specified, the "DEFAULT" space is used by default.
+
+#### 4.1 Create GraphSpace
+
+```java
+GraphSpaceManager spaceManager = hugeClient.graphSpace();
+
+// Define GraphSpace configuration
+GraphSpace graphSpace = new GraphSpace();
+graphSpace.setName("myGraphSpace");
+graphSpace.setDescription("Business data graph space");
+graphSpace.setMaxGraphNumber(10);  // Maximum number of graphs
+graphSpace.setMaxRoleNumber(100);  // Maximum number of roles
+
+// Create GraphSpace
+spaceManager.createGraphSpace(graphSpace);
+```
+
+#### 4.2 GraphSpace Interface Summary
+
+| Category | Interface | Description |
+|----------|-----------|-------------|
+| Query | listGraphSpace() | Get all GraphSpace lists |
+| | getGraphSpace(String name) | Get the specified GraphSpace |
+| | space.getName() | Get GraphSpace name |
+| | space.getDescription() | Get GraphSpace description |
+| | space.getGraphNumber() | Get the number of graphs under GraphSpace |
+| Update| space.setDescription(String description) | Modify GraphSpace description |
+| | space.setMaxGraphNumber(int maxNumber) | Set maximum number of graphs in GraphSpace |
+|      | space.setMaxRoleNumber(int maxRoleNumber) | Set maximum role number in  GraphSpace       |
+| | updateGraphSpace(String name, GraphSpace space) | Update GraphSpace configuration |
+| Delete | removeGraphSpace(String name) | Delete the specified GraphSpace |
+| | removeGraphSpace(String name, boolean force) | Force delete GraphSpace (including all graph data) |
+
+### 5 Simple Example
 
 Simple examples can reference [HugeGraph-Client](/docs/quickstart/client/hugegraph-client)
