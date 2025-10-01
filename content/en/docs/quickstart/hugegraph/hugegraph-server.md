@@ -350,7 +350,42 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.1.4 Cassandra
+##### 5.1.4 RocksDB Plus
+
+<details>
+<summary>Click to expand/collapse RocksDB Plus configuration and startup methods</summary>
+
+> RocksDB Plus (i.e., [ToplingDB](https://github.com/topling/toplingdb)) is a configurable and observable extension of RocksDB. It supports dynamic tuning via YAML files and enables real-time monitoring through a built-in Web Server.
+
+Update hugegraph.properties
+
+```properties
+backend=rocksdb
+serializer=binary
+rocksdb.data_path=.
+rocksdb.wal_path=.
+rocksdb.option_path=./conf/graphs/rocksdb_plus.yaml # Path to YAML configuration file
+rocksdb.open_http=true # Enable Web Server
+```
+
+Initialize the database (required on the first startup, or a new configuration was manually added under 'conf/graphs/')
+
+```bash
+cd *hugegraph-${version}
+bin/init-store.sh
+```
+
+Start server
+
+```bash
+bin/start-hugegraph.sh
+Starting HugeGraphServer...
+Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
+```
+
+</details>
+
+##### 5.1.5 Cassandra
 
 <details>
 <summary>Click to expand/collapse Cassandra configuration and startup methods</summary>
@@ -410,7 +445,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.1.5 ScyllaDB
+##### 5.1.6 ScyllaDB
 
 <details>
 <summary>Click to expand/collapse ScyllaDB configuration and startup methods</summary>
@@ -454,7 +489,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.1.6 HBase
+##### 5.1.7 HBase
 
 <details>
 <summary>Click to expand/collapse HBase configuration and startup methods</summary>
@@ -496,7 +531,52 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.1.7 Create an example graph when startup
+##### 5.1.8 MySQL
+
+<details>
+<summary>Click to expand/collapse MySQL configuration and startup methods</summary>
+
+> Because MySQL is licensed under the GPL and incompatible with the Apache License, users must install MySQL themselves, [download link](https://dev.mysql.com/downloads/mysql/)
+
+Download the MySQL [driver package](https://repo1.maven.org/maven2/mysql/mysql-connector-java/), such as `mysql-connector-java-8.0.30.jar`, and place it in the `lib` directory of HugeGraph-Server.
+
+Update `hugegraph.properties` to configure the database URL, username, and password.
+`store` is the database name; it will be created automatically if it doesn't exist.
+
+```properties
+backend=mysql
+serializer=mysql
+
+store=hugegraph
+
+# mysql backend config
+jdbc.driver=com.mysql.cj.jdbc.Driver
+jdbc.url=jdbc:mysql://127.0.0.1:3306
+jdbc.username=
+jdbc.password=
+jdbc.reconnect_max_times=3
+jdbc.reconnect_interval=3
+jdbc.ssl_mode=false
+```
+
+Initialize the database (required for first startup or when manually adding new configurations to `conf/graphs/`)
+
+```bash
+cd *hugegraph-${version}
+bin/init-store.sh
+```
+
+Start server
+
+```bash
+bin/start-hugegraph.sh
+Starting HugeGraphServer...
+Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
+```
+
+</details>
+
+##### 5.1.9 Create an example graph when startup
 
 Carry the `-p true` arguments when starting the script, which indicates `preload`, to create a sample graph.
 
