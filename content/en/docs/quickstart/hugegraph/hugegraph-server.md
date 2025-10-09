@@ -350,38 +350,12 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.1.4 RocksDB Plus
+##### 5.1.4 ToplingDB
 
 <details>
-<summary>Click to expand/collapse RocksDB Plus configuration and startup methods</summary>
+<summary>Click to expand/collapse ToplingDB configuration and startup methods</summary>
 
-> RocksDB Plus (i.e., [ToplingDB](https://github.com/topling/toplingdb)) is a configurable and observable extension of RocksDB. It supports dynamic tuning via YAML files and enables real-time monitoring through a built-in Web Server.
-
-Update hugegraph.properties
-
-```properties
-backend=rocksdb
-serializer=binary
-rocksdb.data_path=.
-rocksdb.wal_path=.
-rocksdb.option_path=./conf/graphs/rocksdb_plus.yaml # Path to YAML configuration file
-rocksdb.open_http=true # Enable Web Server
-```
-
-Initialize the database (required on the first startup, or a new configuration was manually added under 'conf/graphs/')
-
-```bash
-cd *hugegraph-${version}
-bin/init-store.sh
-```
-
-Start server
-
-```bash
-bin/start-hugegraph.sh
-Starting HugeGraphServer...
-Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
-```
+Ref: [ToplingDB Quick Start]({{< ref path="/blog/hugegraph/ToplingDB/ToplingDB Quick Start.md" lang="en">}})
 
 </details>
 

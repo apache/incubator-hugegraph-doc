@@ -37,6 +37,7 @@ enable = true
   [[menu.main]]
     name = "Blog Posts"
     weight = -100
+    hidden=false
     pre = "<i class='fas fa-book pr-2'></i>"
     url = "/blog/"
   [[menu.main]]
