@@ -573,7 +573,7 @@ This indicates the successful creation of the sample graph.
 
 #### 5.2 Use Docker to startup
 
-In [3.3 Use Docker container](#33-use-docker-container), we have introduced how to use docker to deploy `hugegraph-server`. `server` can also preload an example graph by setting the parameter.
+In [3.1 Use Docker container](#31-use-docker-container-convenient-for-testdev), we have introduced how to use docker to deploy `hugegraph-server`. `server` can also preload an example graph by setting the parameter.
 
 ##### 5.2.1 Uses Cassandra as storage
 

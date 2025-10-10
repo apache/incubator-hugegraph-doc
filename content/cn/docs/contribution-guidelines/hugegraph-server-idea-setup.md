@@ -35,7 +35,7 @@ cp -r hugegraph-dist/src/assembly/static/scripts hugegraph-dist/src/assembly/sta
 
 将 `path-to-your-directory` 替换为你创建的文件夹的路径。
 
-> 在引入 RocksDB Plus (ToplingDB) 之后，开发者需执行 `preload-topling.sh` 脚本，该脚本会将相关动态库和 Web Server 所需的静态资源自动解压至与 `bin` 同级的 `library` 目录中
+> 在引入 ToplingDB 后，开发者需执行 `preload-topling.sh` 脚本，该脚本会将相关动态库和 Web Server 所需的静态资源自动解压至与 `bin` 同级的 `library` 目录中 (静态资源会同时拷贝到 `/dev/shm/rocksdb_resource` 中)。
 
 #### 2. `InitStore` 类初始化图
 

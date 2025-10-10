@@ -555,7 +555,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)......OK
 
 #### 5.2 使用 Docker
 
-在 [3.3 使用 Docker 容器](#33-使用-docker-容器)中，我们已经介绍了如何使用 `docker` 部署 `hugegraph-server`, 我们还可以使用其他的后端存储或者设置参数在 sever 启动的时候加载样例图
+在 [3.1 使用 Docker 容器](#31-使用-docker-容器-便于测试)中，我们已经介绍了如何使用 `docker` 部署 `hugegraph-server`, 我们还可以使用其他的后端存储或者设置参数在 sever 启动的时候加载样例图
 
 ##### 5.2.1 使用 Cassandra 作为后端
 

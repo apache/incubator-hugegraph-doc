@@ -35,7 +35,7 @@ cp -r hugegraph-dist/src/assembly/static/scripts hugegraph-dist/src/assembly/sta
 
 Replace `path-to-your-directory` with the path to the directory where you want to copy the files.
 
-> After introducing RocksDB Plus (ToplingDB), developers need to execute the `preload-topling.sh` script, which automatically extracts the required dynamic libraries and Web Server static resources into the `library` directory located alongside the `bin` directory.
+> After introducing ToplingDB, developers need to execute the `preload-topling.sh` script, which automatically extracts the required dynamic libraries and Web Server static resources into the `library` directory located alongside the `bin` directory (the static resources will also be copied to `/dev/shm/rocksdb_resource` ).
 
 #### 2. Configure `InitStore` to initialize the graph
 
