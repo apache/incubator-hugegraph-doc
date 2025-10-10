@@ -13,8 +13,10 @@ backend=rocksdb
 serializer=binary
 rocksdb.data_path=.
 rocksdb.wal_path=.
-rocksdb.option_path=./conf/graphs/rocksdb_plus.yaml # Path to YAML configuration file
-rocksdb.open_http=true # Enable Web Server
+# Path to YAML configuration file
+rocksdb.option_path=./conf/graphs/rocksdb_plus.yaml
+# Enable Web Server
+rocksdb.open_http=true
 ```
 
 Initialize the database (required on the first startup, or a new configuration was manually added under 'conf/graphs/')

@@ -165,6 +165,7 @@ DBOptions:
 ```
 
 **Key Highlights**:
+
 - `listening_ports: '2011'` sets the Web Server listening port to 2011  
 - `memtable_as_log_index: true` combined with `convert_to_sst: kFileMmap` enables [omit L0 Flush](https://github.com/topling/toplingdb/wiki/Omit-L0-Flush)  
 - `memtable_factory: "${cspp}"` specifies the use of CSPP MemTable  
@@ -190,6 +191,7 @@ ToplingDB introduces a MemTable type not available in native RocksDB:
 These parameters offer more control over the write path, ideal for high-concurrency scenarios.
 
 For more design details, refer to:
+
 - [cspp-memtable README](https://github.com/topling/cspp-memtable/blob/memtable_as_log_index/README_EN.md)
 - [ToplingDB CSPP MemTable Design Essentials](https://zhuanlan.zhihu.com/p/649435555)
 - [CSPP Trie Design Analysis](https://zhuanlan.zhihu.com/p/499138254)

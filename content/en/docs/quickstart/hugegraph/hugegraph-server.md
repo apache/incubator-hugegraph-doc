@@ -46,8 +46,8 @@ We can use `docker run -itd --name=graph -e PASSWORD=xxx -p 8080:8080 hugegraph/
 
 Optional: 
 1. use `docker exec -it graph bash` to enter the container to do some operations.
-2. use `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph:1.5.0` to start with a **built-in** example graph. We can use `RESTful API` to verify the result. The detailed step can refer to [5.1.7](#517-create-an-example-graph-when-startup)
-3. use `-e PASSWORD=xxx` to enable auth mode and set the password for admin. You can find more details from [Config Authentication](/docs/config/config-authentication#Use-docker-to-enble-authentication-mode)
+2. use `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph:1.5.0` to start with a **built-in** example graph. We can use `RESTful API` to verify the result. The detailed step can refer to [5.1.9](#519-create-an-example-graph-when-startup)
+3. use `-e PASSWORD=xxx` to enable auth mode and set the password for admin. You can find more details from [Config Authentication](/docs/config/config-authentication#use-docker-to-enable-authentication-mode)
 
 If you use docker desktop, you can set the option like: 
 <div style="text-align: center;">

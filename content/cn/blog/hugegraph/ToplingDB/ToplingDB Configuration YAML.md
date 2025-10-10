@@ -11,7 +11,9 @@ RocksDB 提供了丰富的参数配置，但大多数情况下，这些配置需
 本文重点介绍 **ToplingDB 扩展参数** 的部分，帮助读者理解这些配置的意义。
 
 ## 0. HugeGraph 中提供的rocksdb_plus.yaml
+
 下文只包括HugeGraph中所使用的配置参数，ToplingDB支持的完整配置请参考：[SidePlugin Wiki](https://github.com/topling/sideplugin-wiki-en/wiki)
+
 ```yaml
 http: # Web Server 相关配置
   # normally parent path of db path
@@ -149,11 +151,12 @@ DBOptions:
     max_manifest_file_size: 100M
     max_background_jobs: 8
     compaction_readahead_size: 0
-    memtable_as_log_index: true #     memtable_as_log_index: true # 此配置结合 convert_to_sst: kFileMmap 可实现[omit L0 Flush](https://github.com/topling/toplingdb/wiki/Omit-L0-Flush)
+    memtable_as_log_index: true # 此配置结合 convert_to_sst: kFileMmap 可实现[omit L0 Flush](https://github.com/topling/toplingdb/wiki/Omit-L0-Flush)
 
 ```
 
-**关键要点**: 
+**关键要点**:
+
 - `listening_ports: '2011'` 指定Web Server监听端口为2011
 - `memtable_as_log_index: true` 与 `convert_to_sst: kFileMmap` 结合实现[omit L0 Flush](https://github.com/topling/toplingdb/wiki/Omit-L0-Flush)
 - `memtable_factory: "${cspp}"` 指定了内存结构采用`CSPP Memtable`

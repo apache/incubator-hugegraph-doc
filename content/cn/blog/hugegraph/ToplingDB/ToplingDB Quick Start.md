@@ -13,10 +13,11 @@ backend=rocksdb
 serializer=binary
 rocksdb.data_path=.
 rocksdb.wal_path=.
-rocksdb.option_path=./conf/graphs/rocksdb_plus.yaml # 配置文件路径
-rocksdb.open_http=true # 是否开启Web Server
+# 配置文件路径
+rocksdb.option_path=./conf/graphs/rocksdb_plus.yaml
+# 是否开启Web Server
+rocksdb.open_http=true
 ```
-
 
 初始化数据库（第一次启动时或在 `conf/graphs/` 下手动添加了新配置时需要进行初始化）
 
