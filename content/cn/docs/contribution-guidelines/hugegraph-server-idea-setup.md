@@ -35,6 +35,8 @@ cp -r hugegraph-dist/src/assembly/static/scripts hugegraph-dist/src/assembly/sta
 
 将 `path-to-your-directory` 替换为你创建的文件夹的路径。
 
+> 在引入 ToplingDB 后，开发者需执行 `preload-topling.sh` 脚本，该脚本会将相关动态库和 Web Server 所需的静态资源自动解压至与 `bin` 同级的 `library` 目录中 (静态资源会同时拷贝到 `/dev/shm/rocksdb_resource` 中)。
+
 #### 2. `InitStore` 类初始化图
 
 首先，需要在配置文件中配置数据库后端。以 RocksDB 为例，在 `path-to-your-directory/conf/graphs/hugegraph.properties` 文件中进行以下配置：
@@ -51,6 +53,9 @@ rocksdb.wal_path=.
 - 在 `Use classpath of module` 中选择 `hugegraph-dist`
 - 将 `Main class` 设置为 `org.apache.hugegraph.cmd.InitStore`
 - 设置运行参数为 `conf/rest-server.properties`，这里的路径是相对于工作路径的，需要将工作路径设置为 `path-to-your-directory`
+- RocksDB Plus 需要通过 `LD_PRELOAD` 机制预加载动态库，开发者需设置两个环境变量：`LD_LIBRARY_PATH` 指向 `preload-topling.sh` 解压出的 `library` 目录，`LD_PRELOAD` 设置为 `libjemalloc.so:librocksdbjni-linux64.so`，以确保相关库在运行时被正确加载
+  - LD_LIBRARY_PATH=/path/to/your/library:$LD_LIBRARY_PATH
+  - LD_PRELOAD=libjemalloc.so:librocksdbjni-linux64.so
 
 > 若在 **Java 11** 环境下为 HugeGraph-Server 配置了**用户认证** (authenticator)，需要参考二进制包的脚本[配置](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/src/assembly/static/bin/init-store.sh#L52)，添加下述 **VM options**:
 >

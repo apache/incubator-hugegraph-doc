@@ -35,6 +35,8 @@ cp -r hugegraph-dist/src/assembly/static/scripts hugegraph-dist/src/assembly/sta
 
 Replace `path-to-your-directory` with the path to the directory where you want to copy the files.
 
+> After introducing ToplingDB, developers need to execute the `preload-topling.sh` script, which automatically extracts the required dynamic libraries and Web Server static resources into the `library` directory located alongside the `bin` directory (the static resources will also be copied to `/dev/shm/rocksdb_resource` ).
+
 #### 2. Configure `InitStore` to initialize the graph
 
 First, you need to configure the database backend in the configuration files. In this example, we will use RocksDB. Open `path-to-your-directory/conf/graphs/hugegraph.properties` and configure it as follows:
@@ -51,6 +53,9 @@ Next, open the `Run/Debug Configurations` panel in IntelliJ IDEA and create a ne
 - Select `hugegraph-dist` as the `Use classpath of module`.
 - Set the `Main class` to `org.apache.hugegraph.cmd.InitStore`.
 - Set the program arguments to `conf/rest-server.properties`. Note that the path here is relative to the working directory, so make sure to set the working directory to `path-to-your-directory`.
+- RocksDB Plus requires preloading dynamic libraries via the `LD_PRELOAD` mechanism. Developers need to set two environment variables: `LD_LIBRARY_PATH` should point to the `library` directory extracted by `preload-topling.sh`, and `LD_PRELOAD` should be set to `libjemalloc.so:librocksdbjni-linux64.so` to ensure the necessary libraries are correctly loaded at runtime.
+  - LD_LIBRARY_PATH=/path/to/your/library:$LD_LIBRARY_PATH
+  - LD_PRELOAD=libjemalloc.so:librocksdbjni-linux64.so
 
 > If **user authentication** (authenticator) is configured for HugeGraph-Server in the **Java 11** environment, you need to refer to the script [configuration](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/src/assembly/static/bin/init-store.sh#L52) in the binary package and add the following **VM options**:
 >
