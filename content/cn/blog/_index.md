@@ -6,4 +6,12 @@ menu:
     weight: 30
 ---
 
-欢迎阅读 HugeGraph 博客
+欢迎阅读 HugeGraph 博客！
+
+这里汇集了 HugeGraph 生态的技术文章、最佳实践和社区动态：
+
+- **HugeGraph (OLTP)**: 图数据库核心功能、性能优化、存储引擎等
+- **HugeGraph-AI**: AI 与图计算结合的应用案例
+- **HugeGraph Computing (OLAP)**: 大规模图计算和分析实践
+
+探索更多内容，提升您的图数据库使用体验！

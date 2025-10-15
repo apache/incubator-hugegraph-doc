@@ -315,7 +315,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 <details>
 <summary>点击展开/折叠 ToplingDB 配置及启动方法</summary>
 
-参考: [ToplingDB Quick Start]({{< ref path="/blog/hugegraph/ToplingDB/ToplingDB Quick Start.md" lang="cn">}})
+参考: [ToplingDB Quick Start]({{< ref path="/blog/hugegraph/toplingdb/toplingdb-quick-start.md" lang="cn">}})
 </details>
 
 ##### 5.1.4 HBase

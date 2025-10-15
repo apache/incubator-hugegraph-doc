@@ -18,7 +18,7 @@ The following includes only the configuration parameters used in HugeGraph. For 
 http: # Web Server related configuration
   # normally parent path of db path
   document_root: /dev/shm/rocksdb_resource # Static resource directory, extracted by `preload_topling.sh` in HugeGraph
-  listening_ports: '2011' # Web Server listening port for management/monitoring
+  listening_ports: '127.0.0.1:2011' # Web Server listening port for management/monitoring
 
 setenv: # Environment variable settings
   StrSimpleEnvNameNotOverwrite: StringValue
@@ -164,69 +164,107 @@ DBOptions:
     memtable_as_log_index: true # Combined with convert_to_sst: kFileMmap to enable [omit L0 Flush](https://github.com/topling/toplingdb/wiki/Omit-L0-Flush)
 ```
 
-**Key Highlights**:
+**Key points**:
 
-- `listening_ports: '2011'` sets the Web Server listening port to 2011  
-- `memtable_as_log_index: true` combined with `convert_to_sst: kFileMmap` enables [omit L0 Flush](https://github.com/topling/toplingdb/wiki/Omit-L0-Flush)  
-- `memtable_factory: "${cspp}"` specifies the use of CSPP MemTable  
-- `table_factory: dispatch` uses the custom DispatcherTable defined in YAML  
+- `listening_ports: '127.0.0.1:2011'` sets the Web Server listening port to 2011 and restricts access to localhost.
+- `memtable_as_log_index: true` combined with `convert_to_sst: kFileMmap` enables [omit L0 Flush](https://github.com/topling/toplingdb/wiki/Omit-L0-Flush).
+- `memtable_factory: "${cspp}"` specifies the memory structure as `CSPP Memtable`.
+- `table_factory: dispatch` sets the TableFactory to the custom `DispatcherTable` defined in YAML.
 
-## 1. Plugin-Based Configuration and Reference Mechanism
+## 1. Plugin-based configuration and reference mechanism
 
-- **YAML Pluginization**: Configuration is organized as reusable objects.
-- **Reference Syntax**: Use `${lru_cache}`, `${cspp}`, etc., to reuse objects across sections.
-- **DispatcherTable**: Allows selecting different TableFactories per level or scenario. Native RocksDB only supports a single TableFactory.
+- **YAML modularization**: The configuration file is organized as objects; each object can be defined independently and referenced elsewhere.
+- **Reference syntax**: Objects can be reused across sections via `${lru_cache}`, `${cspp}`, etc.
+- **DispatcherTable**: Allows selecting different TableFactories at different levels or scenarios. RocksDB natively supports only a single TableFactory.
 
-This mechanism makes configuration more flexible and composable for complex use cases.
+ToplingDB YAML Reference and Reuse Diagram:
 
-## 2. New MemTable Implementation: CSPP
+<div style="text-align: center;">
+  <img src="/blog/images/images-server/toplingdb-yaml-ref.png" alt="ToplingDB YAML Reference Diagram" width="800">
+</div>
 
-ToplingDB introduces a MemTable type not available in native RocksDB:
+This mechanism makes configuration more flexible and easier to compose in complex scenarios.
 
-- `mem_cap`: Limits maximum memory usage of MemTable.
-- `token_use_idle`: Improves concurrent writes using idle tokens.
-- `convert_to_sst: kFileMmap`: Converts MemTable directly to SST using mmap, skipping flush.
-- `sync_sst_file: false`: Avoids fsync after SST generation.
+## 2. New MemTable implementation: CSPP
 
-These parameters offer more control over the write path, ideal for high-concurrency scenarios.
+ToplingDB provides a MemTable type that RocksDB does not natively have, configured with the following parameters:
 
-For more design details, refer to:
+### mem_cap
 
-- [cspp-memtable README](https://github.com/topling/cspp-memtable/blob/memtable_as_log_index/README_EN.md)
-- [ToplingDB CSPP MemTable Design Essentials](https://zhuanlan.zhihu.com/p/649435555)
-- [CSPP Trie Design Analysis](https://zhuanlan.zhihu.com/p/499138254)
+`mem_cap` is the size of the virtual address space reserved for CSPP. This may be just reserved address space without actual physical allocation.  
+The default value is 2G, and the effective maximum is 16G.
 
-## 3. TableFactory Extensions
+- Small deployments (<16GB RAM): set to 20–30% of system memory
+- Medium deployments (16–64GB RAM): set to 8–16G
+- Large deployments (>64GB RAM): set to 16G
 
-- **CSPPMemTabTable**: TableFactory designed to work with the `cspp` MemTable.
-- **DispatcherTable**: Supports assigning different TableFactories per level:
-  - Default: BlockBasedTable
-  - Specific levels: CSPPMemTabTable
+### use_vm
 
-This flexibility is not available in native RocksDB.
+When allocating memory via `malloc/posix_memalign`, the address space may already be physically allocated (heap space with mapped pages), while CSPP only needs reserved virtual address space.  
+When `use_vm` is `true`, allocation is forced to use `mmap`, ensuring reserved address space without occupying physical pages.  
+The default is `true`. If physical memory is sufficient, it is recommended to disable this option—establishing mappings from `mmap`’s virtual memory to physical pages can trigger many minor page faults and may affect performance.
 
-## 4. Statistics and Observability Control
+### convert_to_sst
 
-- **discard_tickers / discard_histograms**: Allows precise control over which metrics and counters to discard, reducing runtime overhead.
-- **stats_level: kDisableAll**: Disables all statistics collection, useful for performance-sensitive deployments.
+`convert_to_sst` supports three enum values:
 
-Compared to RocksDB’s coarse-grained controls, ToplingDB offers fine-grained observability tuning.
+- `kDontConvert`: Disables the feature (default). Uses the traditional Flush process, offering the best compatibility for stability-focused scenarios.
+- `kDumpMem`: During conversion, dumps the entire MemTable memory to an SST file, reducing CPU consumption but not memory usage.
+- `kFileMmap`: `mmap`s MemTable content into a file—the key feature—reduces both CPU and memory usage. You can also set `DBOptions.memtable_as_log_index = true` to essentially eliminate MemTable Flush.
 
-## 5. New DBOptions Parameters
+These parameters offer more tunable options for the write path, allowing users to choose as needed.
 
-- **memtable_as_log_index: true**: Enables using MemTable as a log index, which accelerates recovery and supports [omit L0 Flush](https://github.com/topling/toplingdb/wiki/Omit-L0-Flush).
+For more design details, see: [cspp-memtable](https://github.com/topling/cspp-memtable/blob/memtable_as_log_index/README_EN.md), [ToplingDB CSPP MemTable Design Essentials](https://zhuanlan.zhihu.com/p/649435555), [CSPP Trie Design Analysis](https://zhuanlan.zhihu.com/p/499138254).
 
-This option works in conjunction with `convert_to_sst: kFileMmap` to bypass traditional flush logic and directly generate SST files from memory.
+## 3. TableFactory extensions
+
+- **CSPPMemTabTable**: The TableFactory paired with the `cspp` MemTable.
+- **DispatcherTable**: Supports specifying different TableFactories per level, for example:
+  - Use BlockBasedTable by default.
+  - Use CSPPMemTabTable for specific levels.
+
+This level of flexibility is not available in native RocksDB configuration.
+
+## 4. Statistics and observability controls
+
+- **discard_tickers / discard_histograms**: Precisely specify which statistics to discard.
+- **stats_level: kDisableAll**: Combined with the above, flexibly control the overhead of statistics.
+
+Compared to RocksDB’s coarse-grained controls, ToplingDB offers finer tuning.
+
+## 5. New DBOptions parameter
+
+- **memtable_as_log_index: true**: Allows using the MemTable as a log index to speed up recovery.
+
+## 6. Security considerations
+
+**Web Server security**:
+
+- The Web Server pages are provided by ToplingDB and do not include authentication.
+- By default, `listening_ports: '127.0.0.1:2011'` restricts access to local requests.
+- In production, configure firewall rules to allow only intranet access.
+- To disable the Web Server, set `rocksdb.open_http=false` in `hugegraph.properties`.
+
+**Shared memory safety**:
+
+- `document_root: /dev/shm/rocksdb_resource` uses a shared memory directory.
+- In multi-user environments, ensure proper file permissions to avoid unauthorized access.
 
 ## 6. Summary
 
-ToplingDB enhances RocksDB with the following capabilities:
+ToplingDB adds the following capabilities on top of RocksDB:
 
-- Plugin-based configuration and object reuse via YAML
-- A new MemTable type (`cspp`) and its matching TableFactory
-- DispatcherTable for multi-factory scheduling across levels
-- Built-in Web Server for real-time monitoring and management
-- Fine-grained statistics and observability controls
-- Specialized DBOptions such as `memtable_as_log_index`
+- Plugin-based configuration and object reuse
+- A new MemTable type (cspp) with a paired TableFactory
+- DispatcherTable for multi-factory scheduling
+- Built-in Web Server
+- More flexible statistics and observability controls
+- Special DBOptions (such as `memtable_as_log_index`)
 
-These extensions provide greater flexibility and tunability, especially suited for high-throughput write workloads and operational observability in production environments.
+These extensions give users more tuning space, particularly suited for scenarios requiring high write performance and flexible operations.
+
+## Related Documentation
+
+- [ToplingDB Quick Start](./ToplingDB%20Quick%20Start.md) – How to enable ToplingDB in HugeGraph  
+- [RocksDB Official Configuration Guide](https://github.com/facebook/rocksdb/wiki/Setup-Options-and-Basic-Tuning) – Learn the basic configuration options  
+- [SidePlugin Wiki](https://github.com/topling/sideplugin-wiki-en/wiki) – Complete configuration reference for ToplingDB

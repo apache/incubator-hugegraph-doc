@@ -10,6 +10,14 @@ RocksDB 提供了丰富的参数配置，但大多数情况下，这些配置需
 
 本文重点介绍 **ToplingDB 扩展参数** 的部分，帮助读者理解这些配置的意义。
 
+## 术语说明
+
+- **MemTable**: LSM-Tree 在内存中的可写数据结构，接收新写入的数据
+- **SST (Sorted String Table)**: Memtable 持久化到磁盘后生成的有序键值对文件
+- **Flush**: 将 MemTable 数据写入磁盘生成 SST 的过程
+- **Compaction**: 合并多个 SST 文件以优化存储和查询性能的过程
+- **L0, L1, ... L6**: LSM-Tree 的不同层级，数字越大层级越深
+
 ## 0. HugeGraph 中提供的rocksdb_plus.yaml
 
 下文只包括HugeGraph中所使用的配置参数，ToplingDB支持的完整配置请参考：[SidePlugin Wiki](https://github.com/topling/sideplugin-wiki-en/wiki)
@@ -18,7 +26,7 @@ RocksDB 提供了丰富的参数配置，但大多数情况下，这些配置需
 http: # Web Server 相关配置
   # normally parent path of db path
   document_root: /dev/shm/rocksdb_resource # 静态资源目录, HugeGraph中通过`preload_topling.sh`进行静态资源提取
-  listening_ports: '2011' # Web Server监听端口，用于管理/监控
+  listening_ports: '127.0.0.1:2011' # Web Server监听端口，用于管理/监控 如端口被占用，请改为其他端口，例如 2012 或 2013
 setenv: # 环境变量设置
   StrSimpleEnvNameNotOverwrite: StringValue
   IntSimpleEnvNameNotOverwrite: 16384
@@ -71,7 +79,7 @@ MemTableRepFactory: # 内存中 memtable 的实现
   cspp: # ToplingDB 独有的高并发内存结构
     class: cspp
     params:
-      mem_cap: 16G # 预分配足够的单块内存地址空间，这些内存可以只是保留地址空间，但并未实际分配。
+      mem_cap: 16G # 预分配足够的单块内存地址空间，这些内存可以只是保留地址空间，但并未实际分配 对物理内存并无要求，只是为CSPP保留虚拟内存空间
       use_vm: false
       token_use_idle: true
       chunk_size: 16K # 内部分配粒度
@@ -149,7 +157,7 @@ DBOptions:
     WAL_size_limit_MB: 0
     statistics: "${stat}"  # 使用上面定义的统计配置
     max_manifest_file_size: 100M
-    max_background_jobs: 8
+    max_background_jobs: 8 # 设置flush和compaction线程总数 建议设置为 (cpu核数 / 2)
     compaction_readahead_size: 0
     memtable_as_log_index: true # 此配置结合 convert_to_sst: kFileMmap 可实现[omit L0 Flush](https://github.com/topling/toplingdb/wiki/Omit-L0-Flush)
 
@@ -157,7 +165,7 @@ DBOptions:
 
 **关键要点**:
 
-- `listening_ports: '2011'` 指定Web Server监听端口为2011
+- `listening_ports: '127.0.0.1:2011'` 指定Web Server监听端口为2011，并且仅允许本地访问
 - `memtable_as_log_index: true` 与 `convert_to_sst: kFileMmap` 结合实现[omit L0 Flush](https://github.com/topling/toplingdb/wiki/Omit-L0-Flush)
 - `memtable_factory: "${cspp}"` 指定了内存结构采用`CSPP Memtable`
 - `table_factory: dispatch` 指定了TableFactory使用YAML中自定义的`DispatcherTable`结构
@@ -168,18 +176,42 @@ DBOptions:
 - **引用语法**：通过 `${lru_cache}`、`${cspp}` 等方式在不同段落复用对象。
 - **DispatcherTable**：允许在不同层级或场景下选择不同的 TableFactory。RocksDB 原生只能指定单一 TableFactory。
 
+ToplingDB YAML 引用与复用图示:
+
+<div style="text-align: center;">
+  <img src="/blog/images/images-server/toplingdb-yaml-ref.png" alt="image" width="800">
+</div>
+
 这种机制使得配置更灵活，便于在复杂场景下组合不同组件。
 
 ## 2. 新的 MemTable 实现：CSPP
 
-ToplingDB 提供了一个 RocksDB 原生没有的 MemTable 类型：
+ToplingDB 提供了一个 RocksDB 原生没有的 MemTable 类型，通过以下参数配置：
 
-- `mem_cap`: 限制 MemTable 的最大内存使用量。
-- `token_use_idle`: 利用空闲 token 提升并发写入效率。
-- `convert_to_sst: kFileMmap`: 在 flush 时直接使用 mmap 文件方式生成 SST。
-- `sync_sst_file: false`: 生成 SST 文件时不强制同步到磁盘。
+### mem_cap
 
-这些参数为写入路径提供了更多可调节空间，适合需要高并发写入的场景。
+`mem_cap` 是指在内存地址空间中，为 CSPP 预留的空间大小，这些内存可以只是**保留地址空间，并未实际分配的**。
+`mem_cap` 默认值为 2G，有效最大值为 16G。
+
+- 小型部署（< 16GB 内存）: 建议设置为系统内存的 20-30%
+- 中型部署（16-64GB 内存）: 建议设置为 8-16G
+- 大型部署（> 64GB 内存）: 建议设置为 16G
+
+### use_vm
+
+在使用 malloc/posix_memalign 分配内存时，地址空间可能是已经实际分配的（位于堆空间中，已有对应的物理页面），而 CSPP 在分配时只需要获得保留的地址空间。
+`use_vm` 选项为 `true` 时会强制使用 `mmap` 分配内存，从而保证分配的一定时是保留地址空间，但并不实际占用物理页面。
+`use_vm` 默认值为 `true`。如果用户物理内存空间充足，建议关闭此选项，`mmap` 分配的虚拟内存空间在建立对物理地址的映射时会触发大量minor page fault，可能会影响性能。
+
+### convert_to_sst
+
+`convert_to_sst` 支持以下三种枚举值:
+
+- `kDontConvert`: 禁用该功能，为默认值。使用传统的 Flush 流程，兼容性最好，适合对稳定性要求高的场景
+- `kDumpMem`: 转化时将 MemTable 的整块内存写入 SST 文件，避免 CPU 消耗，但未降低内存消耗
+- `kFileMmap`: 将 MemTable 内容 mmap 到文件，这是关键功能，同时降低 CPU 和内存消耗，可同时将 DBOptions.memtable_as_log_index 设为 true 从本质上消除 MemTable Flush
+
+这些参数为数据写入路径提供了更多可调节空间，用户可按需选择。
 
 更多设计细节请参考 ToplingDB 作者的撰写的相关博客：[cspp-memtable](https://github.com/topling/cspp-memtable/blob/memtable_as_log_index/README_EN.md), [ToplingDB CSPP MemTable Design Essentials](https://zhuanlan.zhihu.com/p/649435555), [CSPP Trie Design Analysis](https://zhuanlan.zhihu.com/p/499138254)
 
@@ -203,6 +235,20 @@ ToplingDB 提供了一个 RocksDB 原生没有的 MemTable 类型：
 
 - **memtable_as_log_index: true**：允许使用 MemTable 作为日志索引，加快恢复速度。
 
+## 6. 安全注意事项
+
+**Web Server 安全配置**:
+
+- Web Server 页面由ToplingDB提供，不包含权限认证功能
+- 默认设置 `listening_ports: '127.0.0.1:2011'` 仅限本地访问
+- 生产环境建议配置防火墙规则，仅允许内网访问
+- 如需禁用 Web Server，在 `hugegraph.properties` 中设置 `rocksdb.open_http=false`
+
+**共享内存安全**:
+
+- `document_root: /dev/shm/rocksdb_resource` 使用共享内存目录
+- 多用户环境需要注意文件权限设置，避免未授权访问
+
 ## 6. 总结
 
 ToplingDB 在 RocksDB 的基础上增加了以下能力：
@@ -215,3 +261,9 @@ ToplingDB 在 RocksDB 的基础上增加了以下能力：
 - 特殊 DBOptions（如 memtable_as_log_index）
 
 这些扩展为用户提供了更多的可调节空间，尤其适合需要高写入性能和灵活运维的场景。
+
+## 相关文档
+
+- [ToplingDB Quick Start](./ToplingDB%20Quick%20Start.md) – How to enable ToplingDB in HugeGraph  
+- [RocksDB Official Configuration Guide](https://github.com/facebook/rocksdb/wiki/Setup-Options-and-Basic-Tuning) – Learn the basic configuration options  
+- [SidePlugin Wiki](https://github.com/topling/sideplugin-wiki-en/wiki) – Complete configuration reference for ToplingDB

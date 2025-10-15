@@ -355,7 +355,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 <details>
 <summary>Click to expand/collapse ToplingDB configuration and startup methods</summary>
 
-Ref: [ToplingDB Quick Start]({{< ref path="/blog/hugegraph/ToplingDB/ToplingDB Quick Start.md" lang="en">}})
+Ref: [ToplingDB Quick Start]({{< ref path="/blog/hugegraph/toplingdb/toplingdb-quick-start.md" lang="en">}})
 
 </details>
 
