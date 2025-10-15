@@ -148,6 +148,6 @@ Caused by: org.rocksdb.RocksDBException: While lock file: rocksdb-data/data/m/LO
 
 ## 相关文档
 
-- [ToplingDB YAML 配置详解](/blog/2025/09/30/toplingdb-yaml-configuration-file/) - 了解配置文件中各参数的含义
+- [ToplingDB YAML 配置详解](/cn/blog/2025/09/30/toplingdb-yaml-configuration-file/) - 了解配置文件中各参数的含义
 - [HugeGraph 配置说明](/docs/config/config-option/) - HugeGraph 核心配置参考
 - [ToplingDB GitHub 仓库](https://github.com/topling/toplingdb) - 官方文档和最新更新

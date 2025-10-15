@@ -1,7 +1,7 @@
 ---
 date: 2025-10-09
-title: "ToplingDB Quickstart"
-linkTitle: "ToplingDB Quickstart"
+title: "ToplingDB Quick Start"
+linkTitle: "ToplingDB Quick Start"
 ---
 
 > [ToplingDB](https://github.com/topling/toplingdb) is a configurable and observable extension of RocksDB. It supports dynamic tuning via YAML files and enables real-time monitoring through a built-in Web Server.
