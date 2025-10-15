@@ -249,7 +249,7 @@ ToplingDB 提供了一个 RocksDB 原生没有的 MemTable 类型，通过以下
 - `document_root: /dev/shm/rocksdb_resource` 使用共享内存目录
 - 多用户环境需要注意文件权限设置，避免未授权访问
 
-## 6. 总结
+## 7. 总结
 
 ToplingDB 在 RocksDB 的基础上增加了以下能力：
 

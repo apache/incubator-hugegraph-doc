@@ -85,7 +85,7 @@ curl http://localhost:2011 | grep topling
 ### 方式二: 检查日志中的 ToplingDB 初始化信息
 
 ```bash
-tail -f logs/hugegraph-server.lgo | grep -i topling
+tail -f logs/hugegraph-server.log | grep -i topling
 ```
 
 类似输出说明存储引擎启动为ToplingDB:

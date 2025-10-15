@@ -72,7 +72,7 @@ The following output indicates the page is working:
 ### Method 2: Check ToplingDB Initialization Info in Logs
 
 ```bash
-tail -f logs/hugegraph-server.lgo | grep -i topling
+tail -f logs/hugegraph-server.log | grep -i topling
 ```
 
 Similar output indicates ToplingDB is the storage engine:

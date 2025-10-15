@@ -250,7 +250,7 @@ Compared to RocksDB’s coarse-grained controls, ToplingDB offers finer tuning.
 - `document_root: /dev/shm/rocksdb_resource` uses a shared memory directory.
 - In multi-user environments, ensure proper file permissions to avoid unauthorized access.
 
-## 6. Summary
+## 7. Summary
 
 ToplingDB adds the following capabilities on top of RocksDB:
 
