@@ -103,9 +103,6 @@ TableFactory:
       metadata_block_size: 4K
       enable_index_compression: true
       block_cache: "${lru_cache}" # 使用上面定义的 LRU 缓存
-      readers:
-        BlockBasedTable: bb
-        CSPPMemTabTable: cspp_memtab_sst
       block_cache_compressed:
       persistent_cache:
       filter_policy:
@@ -191,6 +188,20 @@ ToplingDB 提供了一个 RocksDB 原生没有的 MemTable 类型，通过以下
 ### mem_cap
 
 `mem_cap` 是指在内存地址空间中，为 CSPP 预留的空间大小，这些内存可以只是**保留地址空间，并未实际分配的**。
+`mem_cap` 真正占用的内存大小约为 `write_buffer_size` 。
+
+#### mem_cap 设计背景
+
+CSPP 的底层算法为了支持高并发写入，采用了预分配内存的策略。
+当预分配的内存被写满时，新的写入操作将无法继续。
+然而，RocksDB 本身缺乏一种机制，使得 memtable 能够主动反馈 '预分配内存已满，需要切换到新的 memtable' 。
+由于其函数调用链路复杂，难以通过重构来实现这一机制，因此 `CSPP` 只能通过参数设计来适配 RocksDB 的行为。
+
+#### mem_cap 核心思路
+
+ToplingDB 将 `mem_cap` 设置为远大于 `write_buffer_size`，从而避免 RocksDB 在向 Memtable 写入时过早触发“内存已满”的错误。
+在 CSPP 初始化（New）时，会再次检查，如果发现 `mem_cap` 设置过小，则会自动调整为 `2 * write_buffer_size`，以确保写入过程的稳定性。
+
 `mem_cap` 默认值为 2G，有效最大值为 16G。
 
 - 小型部署（< 16GB 内存）: 建议设置为系统内存的 20-30%

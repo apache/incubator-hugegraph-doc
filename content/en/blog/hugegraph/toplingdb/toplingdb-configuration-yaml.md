@@ -102,9 +102,6 @@ TableFactory:
       metadata_block_size: 4K
       enable_index_compression: true
       block_cache: "${lru_cache}" # Use the LRU cache defined above
-      readers:
-        BlockBasedTable: bb
-        CSPPMemTabTable: cspp_memtab_sst
       block_cache_compressed:
       persistent_cache:
       filter_policy:
@@ -191,7 +188,25 @@ ToplingDB provides a MemTable type that RocksDB does not natively have, configur
 
 ### mem_cap
 
-`mem_cap` is the size of the virtual address space reserved for CSPP. This may be just reserved address space without actual physical allocation.  
+`mem_cap` is the size of the virtual address space reserved for CSPP. This may be just reserved address space without actual physical allocation.
+The actual memory usage of `mem_cap` is approximately equal to `write_buffer_size`.
+
+#### Background of mem_cap Design
+
+The underlying algorithm of CSPP adopts a pre-allocation strategy to support high-concurrency writes.
+Once the pre-allocated memory is filled, no further writes can proceed.
+However, RocksDB itself lacks a mechanism that allows a memtable to actively report
+"the pre-allocated memory is full, a new memtable is required".
+Due to the complexity of its call chain, it is impractical to refactor RocksDB to add this capability.
+Therefore, CSPP adapts to RocksDB’s behavior through parameter design.
+
+#### Core Idea of mem_cap
+
+ToplingDB sets `mem_cap` to be much larger than `write_buffer_size`,
+so that RocksDB will not prematurely trigger an "out of memory" error when writing to a memtable.
+During CSPP initialization (`New`), the system rechecks the setting.
+If `mem_cap` is found to be too small, it will be automatically adjusted to `2 * write_buffer_size` to ensure stability during the write process.
+
 The default value is 2G, and the effective maximum is 16G.
 
 - Small deployments (<16GB RAM): set to 20–30% of system memory
