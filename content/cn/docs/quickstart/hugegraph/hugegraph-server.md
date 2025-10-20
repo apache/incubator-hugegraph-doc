@@ -274,7 +274,7 @@ bin/stop-hugegraph.sh
 ```
 </details>
 
-##### 5.1.2 RocksDB
+##### 5.1.2 RocksDB / ToplingDB
 
 <details>
 <summary>点击展开/折叠 RocksDB 配置及启动方法</summary>
@@ -308,17 +308,11 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 提示的 url 与 `rest-server.properties` 中配置的 `restserver.url` 一致
 
+**ToplingDB (Beta)**: 作为 RocksDB 的高性能替代方案，配置方式请参考: [ToplingDB Quick Start]({{< ref path="/blog/hugegraph/toplingdb/toplingdb-quick-start.md" lang="cn">}})
+
 </details>
 
-##### 5.1.3 ToplingDB (Beta) 
-
-<details>
-<summary>点击展开/折叠 ToplingDB 配置及启动方法</summary>
-
-参考: [ToplingDB Quick Start]({{< ref path="/blog/hugegraph/toplingdb/toplingdb-quick-start.md" lang="cn">}})
-</details>
-
-##### 5.1.4 HBase
+##### 5.1.3 HBase
 
 <details>
 <summary>点击展开/折叠 HBase 配置及启动方法</summary>
@@ -360,7 +354,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.1.5 MySQL
+##### 5.1.4 MySQL
 
 <details>
 <summary>点击展开/折叠 MySQL 配置及启动方法</summary>
@@ -404,7 +398,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.1.6 Cassandra
+##### 5.1.5 Cassandra
 
 <details>
 <summary>点击展开/折叠 Cassandra 配置及启动方法</summary>
@@ -463,7 +457,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.1.7 Memory
+##### 5.1.6 Memory
 
 <details>
 <summary>点击展开/折叠 Memory 配置及启动方法</summary>
@@ -489,7 +483,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.1.8 ScyllaDB
+##### 5.1.7 ScyllaDB
 
 <details>
 <summary>点击展开/折叠 ScyllaDB 配置及启动方法</summary>
@@ -533,7 +527,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.1.9 启动 server 的时候创建示例图
+##### 5.1.8 启动 server 的时候创建示例图
 
 在脚本启动时候携带 `-p true`参数，表示 preload, 即创建示例图图
 

@@ -317,7 +317,7 @@ The prompted url is the same as the restserver.url configured in rest-server.pro
 
 </details>
 
-##### 5.1.3 RocksDB
+##### 5.1.3 RocksDB / ToplingDB
 
 <details>
 <summary>Click to expand/collapse RocksDB configuration and startup methods</summary>
@@ -348,18 +348,11 @@ Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 ```
 
-</details>
-
-##### 5.1.4 ToplingDB
-
-<details>
-<summary>Click to expand/collapse ToplingDB configuration and startup methods</summary>
-
-Ref: [ToplingDB Quick Start]({{< ref path="/blog/hugegraph/toplingdb/toplingdb-quick-start.md" lang="en">}})
+**ToplingDB (Beta)**: As a high-performance alternative to RocksDB, please refer to the configuration guide: [ToplingDB Quick Start]({{< ref path="/blog/hugegraph/toplingdb/toplingdb-quick-start.md" lang="en">}})
 
 </details>
 
-##### 5.1.5 Cassandra
+##### 5.1.4 Cassandra
 
 <details>
 <summary>Click to expand/collapse Cassandra configuration and startup methods</summary>
@@ -419,7 +412,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.1.6 ScyllaDB
+##### 5.1.5 ScyllaDB
 
 <details>
 <summary>Click to expand/collapse ScyllaDB configuration and startup methods</summary>
@@ -463,7 +456,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.1.7 HBase
+##### 5.1.6 HBase
 
 <details>
 <summary>Click to expand/collapse HBase configuration and startup methods</summary>
@@ -505,7 +498,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.1.8 MySQL
+##### 5.1.7 MySQL
 
 <details>
 <summary>Click to expand/collapse MySQL configuration and startup methods</summary>
@@ -550,7 +543,7 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.1.9 Create an example graph when startup
+##### 5.1.8 Create an example graph when startup
 
 Carry the `-p true` arguments when starting the script, which indicates `preload`, to create a sample graph.
 
