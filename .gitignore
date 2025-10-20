@@ -17,3 +17,14 @@ nohup.out
 .idea/
 
 .DS_Store
+
+# AI Agent Configuration Files
+# Keep AGENTS.md as the source of truth, ignore tool-specific symlinks/configs
+CLAUDE.md
+GEMINI.md
+.cursorrules
+.cursor/
+.github/copilot-instructions.md
+.vscode/settings.json
+.aider*
+.gemini/
