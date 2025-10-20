@@ -46,8 +46,8 @@ We can use `docker run -itd --name=graph -e PASSWORD=xxx -p 8080:8080 hugegraph/
 
 Optional: 
 1. use `docker exec -it graph bash` to enter the container to do some operations.
-2. use `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph:1.5.0` to start with a **built-in** example graph. We can use `RESTful API` to verify the result. The detailed step can refer to [5.1.7](#517-create-an-example-graph-when-startup)
-3. use `-e PASSWORD=xxx` to enable auth mode and set the password for admin. You can find more details from [Config Authentication](/docs/config/config-authentication#Use-docker-to-enble-authentication-mode)
+2. use `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph:1.5.0` to start with a **built-in** example graph. We can use `RESTful API` to verify the result. The detailed step can refer to [5.1.9](#519-create-an-example-graph-when-startup)
+3. use `-e PASSWORD=xxx` to enable auth mode and set the password for admin. You can find more details from [Config Authentication](/docs/config/config-authentication#use-docker-to-enable-authentication-mode)
 
 If you use docker desktop, you can set the option like: 
 <div style="text-align: center;">
@@ -317,7 +317,7 @@ The prompted url is the same as the restserver.url configured in rest-server.pro
 
 </details>
 
-##### 5.1.3 RocksDB
+##### 5.1.3 RocksDB / ToplingDB
 
 <details>
 <summary>Click to expand/collapse RocksDB configuration and startup methods</summary>
@@ -347,6 +347,8 @@ bin/start-hugegraph.sh
 Starting HugeGraphServer...
 Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 ```
+
+**ToplingDB (Beta)**: As a high-performance alternative to RocksDB, please refer to the configuration guide: [ToplingDB Quick Start]({{< ref path="/blog/hugegraph/toplingdb/toplingdb-quick-start.md" lang="en">}})
 
 </details>
 
@@ -496,7 +498,52 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 </details>
 
-##### 5.1.7 Create an example graph when startup
+##### 5.1.7 MySQL
+
+<details>
+<summary>Click to expand/collapse MySQL configuration and startup methods</summary>
+
+> Because MySQL is licensed under the GPL and incompatible with the Apache License, users must install MySQL themselves, [download link](https://dev.mysql.com/downloads/mysql/)
+
+Download the MySQL [driver package](https://repo1.maven.org/maven2/mysql/mysql-connector-java/), such as `mysql-connector-java-8.0.30.jar`, and place it in the `lib` directory of HugeGraph-Server.
+
+Update `hugegraph.properties` to configure the database URL, username, and password.
+`store` is the database name; it will be created automatically if it doesn't exist.
+
+```properties
+backend=mysql
+serializer=mysql
+
+store=hugegraph
+
+# mysql backend config
+jdbc.driver=com.mysql.cj.jdbc.Driver
+jdbc.url=jdbc:mysql://127.0.0.1:3306
+jdbc.username=
+jdbc.password=
+jdbc.reconnect_max_times=3
+jdbc.reconnect_interval=3
+jdbc.ssl_mode=false
+```
+
+Initialize the database (required for first startup or when manually adding new configurations to `conf/graphs/`)
+
+```bash
+cd *hugegraph-${version}
+bin/init-store.sh
+```
+
+Start server
+
+```bash
+bin/start-hugegraph.sh
+Starting HugeGraphServer...
+Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
+```
+
+</details>
+
+##### 5.1.8 Create an example graph when startup
 
 Carry the `-p true` arguments when starting the script, which indicates `preload`, to create a sample graph.
 
@@ -519,7 +566,7 @@ This indicates the successful creation of the sample graph.
 
 #### 5.2 Use Docker to startup
 
-In [3.3 Use Docker container](#33-use-docker-container), we have introduced how to use docker to deploy `hugegraph-server`. `server` can also preload an example graph by setting the parameter.
+In [3.1 Use Docker container](#31-use-docker-container-convenient-for-testdev), we have introduced how to use docker to deploy `hugegraph-server`. `server` can also preload an example graph by setting the parameter.
 
 ##### 5.2.1 Uses Cassandra as storage
 

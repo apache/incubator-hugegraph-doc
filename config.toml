@@ -35,11 +35,11 @@ enable = true
     pre = "<i class='fas fa-book pr-2'></i>"
     url = "/docs/"
   [[menu.main]]
-    name = "Blog"
-    weight = 100
-    hidden = true
-    #pre = "<i class='fas fa-rss pr-2'></i>"
-    #url = "https://blog.kubeflow.org/"
+    name = "Blog Posts"
+    weight = -100
+    hidden = false
+    pre = "<i class='fas fa-book pr-2'></i>"
+    url = "/blog/"
   [[menu.main]]
     name = "GitHub"
     weight = -99
