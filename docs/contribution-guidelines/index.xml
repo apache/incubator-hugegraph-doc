@@ -344,6 +344,9 @@ with this &lt;a href="https://github.com/apache/incubator-hugegraph/wiki/The-sty
 &lt;p>To avoid the impact of configuration file changes on Git tracking, it is recommended to copy the required configuration files to a separate folder. Run the following command to copy the files:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>cp -r hugegraph-dist/src/assembly/static/scripts hugegraph-dist/src/assembly/static/conf path-to-your-directory
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Replace &lt;code>path-to-your-directory&lt;/code> with the path to the directory where you want to copy the files.&lt;/p>
+&lt;blockquote>
+&lt;p>After introducing ToplingDB, developers need to execute the &lt;code>preload-topling.sh&lt;/code> script, which automatically extracts the required dynamic libraries and Web Server static resources into the &lt;code>library&lt;/code> directory located alongside the &lt;code>bin&lt;/code> directory (the static resources will also be copied to &lt;code>/dev/shm/rocksdb_resource&lt;/code> ).&lt;/p>
+&lt;/blockquote>
 &lt;h4 id="2-configure-initstore-to-initialize-the-graph">2. Configure &lt;code>InitStore&lt;/code> to initialize the graph&lt;/h4>
 &lt;p>First, you need to configure the database backend in the configuration files. In this example, we will use RocksDB. Open &lt;code>path-to-your-directory/conf/graphs/hugegraph.properties&lt;/code> and configure it as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=rocksdb
@@ -355,6 +358,12 @@ with this &lt;a href="https://github.com/apache/incubator-hugegraph/wiki/The-sty
 &lt;li>Select &lt;code>hugegraph-dist&lt;/code> as the &lt;code>Use classpath of module&lt;/code>.&lt;/li>
 &lt;li>Set the &lt;code>Main class&lt;/code> to &lt;code>org.apache.hugegraph.cmd.InitStore&lt;/code>.&lt;/li>
 &lt;li>Set the program arguments to &lt;code>conf/rest-server.properties&lt;/code>. Note that the path here is relative to the working directory, so make sure to set the working directory to &lt;code>path-to-your-directory&lt;/code>.&lt;/li>
+&lt;li>ToplingDB requires preloading dynamic libraries via the &lt;code>LD_PRELOAD&lt;/code> mechanism. Developers need to set two environment variables: &lt;code>LD_LIBRARY_PATH&lt;/code> should point to the &lt;code>library&lt;/code> directory extracted by &lt;code>preload-topling.sh&lt;/code>, and &lt;code>LD_PRELOAD&lt;/code> should be set to &lt;code>libjemalloc.so:librocksdbjni-linux64.so&lt;/code> to ensure the necessary libraries are correctly loaded at runtime.
+&lt;ul>
+&lt;li>LD_LIBRARY_PATH=/path/to/your/library:$LD_LIBRARY_PATH&lt;/li>
+&lt;li>LD_PRELOAD=libjemalloc.so:librocksdbjni-linux64.so&lt;/li>
+&lt;/ul>
+&lt;/li>
 &lt;/ul>
 &lt;blockquote>
 &lt;p>If &lt;strong>user authentication&lt;/strong> (authenticator) is configured for HugeGraph-Server in the &lt;strong>Java 11&lt;/strong> environment, you need to refer to the script &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/src/assembly/static/bin/init-store.sh#L52">configuration&lt;/a> in the binary package and add the following &lt;strong>VM options&lt;/strong>:&lt;/p>

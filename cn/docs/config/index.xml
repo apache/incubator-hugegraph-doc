@@ -1145,6 +1145,16 @@
 &lt;td>The path for storing WAL of RocksDB.&lt;/td>
 &lt;/tr>
 &lt;tr>
+&lt;td>rocksdb.option_path&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The YAML file for configuring ToplingDB/RocksDB parameters.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>rocksdb.open_http&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>Whether to start ToplingDB HTTP service. Security: enable only in trusted networks and restrict access (firewall/ACL); the port and document_root are configured in the YAML (http.listening_ports/document_root).&lt;/td>
+&lt;/tr>
+&lt;tr>
 &lt;td>rocksdb.allow_mmap_reads&lt;/td>
 &lt;td>false&lt;/td>
 &lt;td>Allow the OS to mmap file for reading sst tables.&lt;/td>
