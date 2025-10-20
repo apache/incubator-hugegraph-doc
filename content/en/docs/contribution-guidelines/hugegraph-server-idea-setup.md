@@ -53,7 +53,7 @@ Next, open the `Run/Debug Configurations` panel in IntelliJ IDEA and create a ne
 - Select `hugegraph-dist` as the `Use classpath of module`.
 - Set the `Main class` to `org.apache.hugegraph.cmd.InitStore`.
 - Set the program arguments to `conf/rest-server.properties`. Note that the path here is relative to the working directory, so make sure to set the working directory to `path-to-your-directory`.
-- RocksDB Plus requires preloading dynamic libraries via the `LD_PRELOAD` mechanism. Developers need to set two environment variables: `LD_LIBRARY_PATH` should point to the `library` directory extracted by `preload-topling.sh`, and `LD_PRELOAD` should be set to `libjemalloc.so:librocksdbjni-linux64.so` to ensure the necessary libraries are correctly loaded at runtime.
+- ToplingDB requires preloading dynamic libraries via the `LD_PRELOAD` mechanism. Developers need to set two environment variables: `LD_LIBRARY_PATH` should point to the `library` directory extracted by `preload-topling.sh`, and `LD_PRELOAD` should be set to `libjemalloc.so:librocksdbjni-linux64.so` to ensure the necessary libraries are correctly loaded at runtime.
   - LD_LIBRARY_PATH=/path/to/your/library:$LD_LIBRARY_PATH
   - LD_PRELOAD=libjemalloc.so:librocksdbjni-linux64.so
 
