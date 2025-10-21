@@ -482,11 +482,14 @@ spaceManager.createGraphSpace(graphSpace);
 | 查询     | listGraphSpace()      | 获取所有 GraphSpace 列表                 |
 |          | getGraphSpace(String name)        | 获取指定 GraphSpace                      |
 |      | space.getName()        | 获取 GraphSpace 名称                     |
+| | space.getDescription() | 获取 GraphSpace 描述 |
+| | space.getGraphNumber() | 获取 GraphSpace 下图数量 |
 | 更新     | space.setDescription(String description) | 修改 GraphSpace 描述信息                 |
 |      | space.setMaxGraphNumber(int maxNumber) | 设置 GraphSpace 最大图数量             |
-|      | space.setMaxRoleNumber(int maxRoleNumber) | 设置 GraphSpace 最大图数量             |
+|      | space.setMaxRoleNumber(int maxRoleNumber) | 设置 GraphSpace 最大角色数量             |
 |      | updateGraphSpace(String name, GraphSpace space)     | 更新 GraphSpace 配置                     |
 | 删除     | removeGraphSpace(String name)     | 删除指定 GraphSpace                      |
+| | removeGraphSpace(String name, boolean force) | 强制删除 GraphSpace (包括所有图数据) |
 
 
 ### 5 简单示例

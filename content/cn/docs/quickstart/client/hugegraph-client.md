@@ -78,9 +78,10 @@ public class SingleExample {
 
     public static void main(String[] args) throws IOException {
         // If connect failed will throw a exception.
-        HugeClient hugeClient = HugeClient.builder("http://127.0.0.1:8080",
+        HugeClient hugeClient = HugeClient.builder("http://localhost:8080",
                                                    "DEFAULT",
                                                    "hugegraph")
+                                          .configUser("admin", "admin")
                                           .build();
 
         SchemaManager schema = hugeClient.schema();
@@ -357,4 +358,3 @@ public class BatchExample {
 #### 4.5 详细 API 说明
 
 示例说明见[HugeGraph-Client 基本 API 介绍](/cn/docs/clients/hugegraph-client)
-

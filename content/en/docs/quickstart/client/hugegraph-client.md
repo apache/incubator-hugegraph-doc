@@ -73,7 +73,8 @@ import org.apache.hugegraph.structure.gremlin.ResultSet;
 public class SingleExample {
 
     public static void main(String[] args) throws IOException {
-        HugeClient hugeClient = HugeClient.builder("http://127.0.0.1:8080",
+        // If connect failed will throw a exception.
+        HugeClient hugeClient = HugeClient.builder("http://localhost:8080",
                                                    "DEFAULT",
                                                    "hugegraph")
                                           .configUser("admin", "admin")
@@ -351,4 +352,3 @@ Before running Example, you need to start the Server. For the startup process, s
 #### 4.5 More Information About Client-API
 
 See[Introduce basic API of HugeGraph-Client](/docs/clients/hugegraph-client).
-
