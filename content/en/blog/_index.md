@@ -1,13 +1,17 @@
 ---
-title: "Docsy Blog"
+title: "Blog"
 linkTitle: "Blog"
 menu:
   main:
     weight: 30
 ---
 
+Welcome to HugeGraph Blog!
 
-This is the **blog** section. It has two categories: News and Releases.
+Here you will find technical articles, best practices, and community updates from the HugeGraph ecosystem:
 
-Files in these directories will be listed in reverse chronological order.
+- **HugeGraph (OLTP)**: Core graph database features, performance optimization, storage engines, and more  
+- **HugeGraph-AI**: Application cases combining AI with graph computing  
+- **HugeGraph Computing (OLAP)**: Large-scale graph computing and analytical practices  
 
+Explore more content to enhance your graph database experience!
