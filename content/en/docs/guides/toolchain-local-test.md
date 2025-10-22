@@ -348,7 +348,7 @@ pwd  # Should display .../hugegraph-toolchain
 curl -s http://localhost:8080/graphs
 
 # 3. If authentication is used, confirm the configuration is correct
-curl -u admin:pa http://localhost:8080/graphs
+curl -u admin:<your_password> http://localhost:8080/graphs # replace <your_password> by actual password
 ```
 
 ```bash

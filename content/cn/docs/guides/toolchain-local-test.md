@@ -350,7 +350,7 @@ pwd  # 应显示 .../hugegraph-toolchain
 curl -s http://localhost:8080/graphs
 
 # 3. 如果使用鉴权,确认配置正确
-curl -u admin:pa http://localhost:8080/graphs
+curl -u admin:<your_password> http://localhost:8080/graphs # 将 <your_password> 替换为实际密码
 ```
 
 ```bash
