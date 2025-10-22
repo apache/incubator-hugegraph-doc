@@ -15,7 +15,7 @@
 # specific language governing permissions and limitations
 # under the License.
 
-name: "Auto PR Commenter"
+name: "Auto PR AI Review""
 
 on:
   pull_request_target:
