@@ -234,11 +234,11 @@ volumes:
 <configuration>
     <property>
         <name>dfs.namenode.name.dir</name>
-        <value>/hadoop/hdfs/name</value>
+        <value>/hadoop/dfs/name</value>
     </property>
     <property>
         <name>dfs.datanode.data.dir</name>
-        <value>/hadoop/hdfs/data</value>
+        <value>/hadoop/dfs/data</value>
     </property>
     <property>
         <name>dfs.permissions.superusergroup</name>

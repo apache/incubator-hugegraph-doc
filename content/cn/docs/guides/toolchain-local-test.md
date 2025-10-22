@@ -312,7 +312,7 @@ mvn -e compile -pl hugegraph-client -Dmaven.javadoc.skip=true -ntp
 
 #### 4.1.2 依赖服务安装
 
-按照 [部署测试环境](#3-部署测试环境) 部署测试环境 中的说明，启动 `hugegraph-server` 。
+按照 [部署测试环境](#3-部署测试环境) 中的说明，启动 `hugegraph-server` 。
 
 ##### server鉴权设置
 
@@ -378,7 +378,7 @@ mvn install -pl hugegraph-client,hugegraph-loader -am -Dmaven.javadoc.skip=true 
 
 #### 4.2.2 依赖服务安装 (根据测试类型选择)
 
-按照 [部署测试环境](#部署测试环境) 部署测试环境 中的说明，启动 `hugegraph-server`，`Hadoop (HDFS)` (仅当运行 HDFS 测试时需要)， `MySQL` (仅当运行 JDBC 测试时需要)。
+按照 [部署测试环境](#3-部署测试环境) 部署测试环境 中的说明，启动 `hugegraph-server`，`Hadoop (HDFS)` (仅当运行 HDFS 测试时需要)， `MySQL` (仅当运行 JDBC 测试时需要)。
 
 <div style="text-align: center;">
     <img src="./../images/toolchain-test-mermaid-1.png" alt="HugeGraph Loader 测试流程图">
@@ -501,7 +501,7 @@ mvn install -pl hugegraph-client,hugegraph-spark-connector -am -Dmaven.javadoc.s
 
 #### 4.4.2 依赖服务安装
 
-按照 [部署测试环境](#部署测试环境) 部署测试环境 中的说明，启动 `hugegraph-server` 。
+按照 [部署测试环境](#3-部署测试环境) 部署测试环境 中的说明，启动 `hugegraph-server` 。
 
 #### 4.4.3 运行测试
 
@@ -528,7 +528,7 @@ mvn install -pl hugegraph-client,hugegraph-tools -am -Dmaven.javadoc.skip=true -
 
 #### 4.5.2 依赖服务安装
 
-按照 [部署测试环境](#部署测试环境) 部署测试环境 中的说明，启动 `hugegraph-server` 。
+按照 [部署测试环境](#3-部署测试环境) 部署测试环境 中的说明，启动 `hugegraph-server` 。
 
 #### 4.5.3 运行测试
 
