@@ -12,7 +12,7 @@ The `gremlin(groovy)` written by the user in `HugeGraph-Studio` can refer to the
 
 HugeGraph-Client is the general entry for operating graph. Users must first create a HugeGraph-Client object and establish a connection (pseudo connection) with HugeGraph-Server before they can obtain the operation entry objects of schema, graph and gremlin.
 
-Currently, HugeGraph-Client only allows connections to existing graphs on the server, and cannot create custom graphs. Its creation method is as follows:
+Currently, HugeGraph-Client only allows connections to existing graphs on the server, and cannot create custom graphs. Meanwhile, it should be noted that starting from version 1.7.0, building the HugeGraph-Client must specify a GraphSpace (e.g., the default "DEFAULT"). Its creation method is as follows:
 
 ```java
 // HugeGraphServer address: "http://localhost:8080"
@@ -468,17 +468,15 @@ spaceManager.createGraphSpace(graphSpace);
 
 | Category | Interface | Description |
 |----------|-----------|-------------|
-| Query | listGraphSpace() | Get all GraphSpace lists |
-| | getGraphSpace(String name) | Get the specified GraphSpace |
-| | space.getName() | Get GraphSpace name |
-| | space.getDescription() | Get GraphSpace description |
-| | space.getGraphNumber() | Get the number of graphs under GraphSpace |
-| Update| space.setDescription(String description) | Modify GraphSpace description |
-| | space.setMaxGraphNumber(int maxNumber) | Set maximum number of graphs in GraphSpace |
-|      | space.setMaxRoleNumber(int maxRoleNumber) | Set maximum role number in  GraphSpace       |
-| | updateGraphSpace(String name, GraphSpace space) | Update GraphSpace configuration |
-| Delete | removeGraphSpace(String name) | Delete the specified GraphSpace |
-| | removeGraphSpace(String name, boolean force) | Force delete GraphSpace (including all graph data) |
+| Manager - Query | listGraphSpace() | Get the list of all GraphSpaces |
+|           | getGraphSpace(String name) | Get the specified GraphSpace |
+| Manager - Create/Update | createGraphSpace(GraphSpace) | Create a GraphSpace |
+|           | updateGraphSpace(String, GraphSpace) | Update configuration |
+| Manager - Delete | removeGraphSpace(String) | Delete the specified GraphSpace |
+| GraphSpace - Properties | getName() / getDescription() | Get name / description |
+|           | getGraphNumber() | Get the number of graphs |
+| GraphSpace - Configuration | setDescription(String) | Set description |
+|           | setMaxGraphNumber(int) | Set the maximum number of graphs |
 
 ### 5 Simple Example
 

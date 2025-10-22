@@ -81,7 +81,8 @@ public class SingleExample {
         HugeClient hugeClient = HugeClient.builder("http://localhost:8080",
                                                    "DEFAULT",
                                                    "hugegraph")
-                                          .configUser("admin", "admin")
+                                          .configUser("username", "password")
+                                          # 这是示例,生产环境需要使用安全的凭证
                                           .build();
 
         SchemaManager schema = hugeClient.schema();

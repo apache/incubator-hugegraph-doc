@@ -77,7 +77,8 @@ public class SingleExample {
         HugeClient hugeClient = HugeClient.builder("http://localhost:8080",
                                                    "DEFAULT",
                                                    "hugegraph")
-                                          .configUser("admin", "admin")
+                                          .configUser("username", "password")
+                                          # This is an example. In a production environment, secure credentials should be used.
                                           .build();
 
         SchemaManager schema = hugeClient.schema();

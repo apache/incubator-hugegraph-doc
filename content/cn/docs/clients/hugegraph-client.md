@@ -13,13 +13,12 @@ weight: 2
 
 HugeGraph-Client 是操作 graph 的总入口，用户必须先创建出 HugeGraph-Client 对象，与 HugeGraph-Server 建立连接（伪连接）后，才能获取到 schema、graph 以及 gremlin 的操作入口对象。
 
-目前 HugeGraph-Client 只允许连接服务端已存在的图，无法自定义图进行创建。其创建方法如下：
+目前 HugeGraph-Client 只允许连接服务端已存在的图，无法自定义图进行创建。同时，需注意1.7.0后，构建 HugeGraph-Client 必须指定 GraphSpace （如默认 "DEFAULT"）。其创建方法如下：
 
 ```java
 // HugeGraphServer 地址："http://localhost:8080"
 // 图的名称："hugegraph"
-HugeClient hugeClient = HugeClient.builder("http://localhost:8080", 
-                                                   "DEFAULT", "hugegraph")
+HugeClient hugeClient = HugeClient.builder("http://localhost:8080", "DEFAULT", "hugegraph")
                                   .configTimeout(20) // 默认 20s 超时
                                   .configUser("**", "**") // 默认未开启用户权限
                                   .build();
@@ -477,19 +476,17 @@ spaceManager.createGraphSpace(graphSpace);
 ```
 #### 4.2 GraphSpace 接口汇总
 
-| category | interface              | description                              |
-|----------|------------------------|------------------------------------------|
-| 查询     | listGraphSpace()      | 获取所有 GraphSpace 列表                 |
-|          | getGraphSpace(String name)        | 获取指定 GraphSpace                      |
-|      | space.getName()        | 获取 GraphSpace 名称                     |
-| | space.getDescription() | 获取 GraphSpace 描述 |
-| | space.getGraphNumber() | 获取 GraphSpace 下图数量 |
-| 更新     | space.setDescription(String description) | 修改 GraphSpace 描述信息                 |
-|      | space.setMaxGraphNumber(int maxNumber) | 设置 GraphSpace 最大图数量             |
-|      | space.setMaxRoleNumber(int maxRoleNumber) | 设置 GraphSpace 最大角色数量             |
-|      | updateGraphSpace(String name, GraphSpace space)     | 更新 GraphSpace 配置                     |
-| 删除     | removeGraphSpace(String name)     | 删除指定 GraphSpace                      |
-| | removeGraphSpace(String name, boolean force) | 强制删除 GraphSpace (包括所有图数据) |
+| 类别 | 接口 | 描述 |
+|------|------|------|
+| Manager - 查询 | listGraphSpace() | 获取所有 GraphSpace 列表 |
+| | getGraphSpace(String name) | 获取指定 GraphSpace |
+| Manager - 创建/更新 | createGraphSpace(GraphSpace) | 创建 GraphSpace |
+| | updateGraphSpace(String, GraphSpace) | 更新配置 |
+| Manager - 删除 | removeGraphSpace(String) | 删除指定 GraphSpace |
+| GraphSpace - 属性 | getName() / getDescription() | 获取名称/描述 |
+| | getGraphNumber() | 获取图数量 |
+| GraphSpace - 配置 | setDescription(String) | 设置描述 |
+| | setMaxGraphNumber(int) | 设置最大图数量 |
 
 
 ### 5 简单示例
