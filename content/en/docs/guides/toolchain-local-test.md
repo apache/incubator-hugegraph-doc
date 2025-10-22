@@ -178,7 +178,7 @@ services:
   #       - ./config/core-site.xml:/hadoop/etc/hadoop/core-site.xml
   #       - ./config/hdfs-site.xml:/hadoop/etc/hadoop/hdfs-site.xml
   #       - namenode_data:/hadoop/dfs/name
-  #     command: bash -c "hdfs namenode -format && /entrypoint.sh"
+  #     command: bash -c "if [ ! -d /hadoop/dfs/name/current ]; then hdfs namenode -format; fi && /entrypoint.sh"
   #     healthcheck:
   #       test: ["CMD", "hdfs", "dfsadmin", "-report"]
   #       interval: 5s
@@ -234,11 +234,11 @@ volumes:
 <configuration>
     <property>
         <name>dfs.namenode.name.dir</name>
-        <value>/opt/hdfs/name</value>
+        <value>/hadoop/hdfs/name</value>
     </property>
     <property>
         <name>dfs.datanode.data.dir</name>
-        <value>/opt/hdfs/data</value>
+        <value>/hadoop/hdfs/data</value>
     </property>
     <property>
         <name>dfs.permissions.superusergroup</name>
@@ -553,7 +553,7 @@ This section lists some common problems that may be encountered during local tes
     *   **Problem Description**: Command execution fails with a message about a file not found, insufficient permissions, or invalid parameters.
     *   **Troubleshooting**:
         *   Carefully check if the environment variables you set (e.g., `$COMMIT_ID`, `$DB_DATABASE`, `$DB_PASS`) are correct and have taken effect in the shell session where the command is executed.
-        *   Confirm that the spelling and usage of Maven command parameters and Shell script parameters are correct, referring to the [3.1.1 Variables and Parameters](#3-1-1-variables-and-parameters) section.
+        *   Confirm that the spelling and usage of Maven command parameters and Shell script parameters are correct, referring to the [3.1.1 Variables and Parameters](#311-variables-and-parameters) section.
         *   If you encounter script permission issues, first execute: `chmod +x hugegraph-*/assembly/travis/*.sh`.
 
 *   **HDFS Test Issues**:

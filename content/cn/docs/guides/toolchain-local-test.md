@@ -62,7 +62,7 @@ cd hugegraph-toolchain
 #### 3.1.1 变量与参数
 
 *   **`$COMMIT_ID`**
-    *   指定 HugeGraph Server 源代码的 Git Commit ID。当您需要从源代码编译和安装特定版本的 HugeGraph Server 作为测试依赖时，会使用此变量，确保测试环境与特定 HugeGraph Server 版本的一致性，这对于复现问题或验证兼容性至关重要。使用时直接接作为参数传递给 install-hugegraph-from-source.sh 脚本。
+    *   指定 HugeGraph Server 源代码的 Git Commit ID。当您需要从源代码编译和安装特定版本的 HugeGraph Server 作为测试依赖时，会使用此变量，确保测试环境与特定 HugeGraph Server 版本的一致性，这对于复现问题或验证兼容性至关重要。使用时直接作为参数传递给 install-hugegraph-from-source.sh 脚本。
 
 *   **`$DB_DATABASE` 与 `$DB_PASS`**
     指定 HugeGraph-Loader 进行 JDBC 测试时所连接的 MySQL 数据库名称与 root 用户密码。请作为参数传递给 `install-mysql.sh` 脚本，供 Loader 正常读写数据。
@@ -124,6 +124,8 @@ docker run -itd --name=server -p 8080:8080 --network hugegraph-net hugegraph/hug
 以下是一个示例 `docker-compose.yml` 文件，它定义了 HugeGraph Server、MySQL 和 Hadoop (HDFS) 服务。您可以根据实际测试需求进行调整。请使用 Docker Compose V2 。
 
 ```yaml
+version: '3.8'
+
 services:
   hugegraph-server:
     image: hugegraph/hugegraph:latest  # 可以替换为特定版本，或构建自己的镜像
@@ -234,11 +236,11 @@ volumes:
 <configuration>
     <property>
         <name>dfs.namenode.name.dir</name>
-        <value>/opt/hdfs/name</value>
+        <value>/hadoop/hdfs/name</value>
     </property>
     <property>
         <name>dfs.datanode.data.dir</name>
-        <value>/opt/hdfs/data</value>
+        <value>/hadoop/hdfs/data</value>
     </property>
     <property>
         <name>dfs.permissions.superusergroup</name>
@@ -423,7 +425,7 @@ mvn -e compile -Dmaven.javadoc.skip=true -ntp
 
 **1. 启动 HugeGraph Server**
 
-按照 [部署测试环境](https://www.google.com/search?q=%233-%E9%83%A8%E7%BD%B2%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83) 启动 HugeGraph Server。
+按照 [部署测试环境](#3-部署测试环境) 启动 HugeGraph Server。
 
 **2. 安装 Python 依赖**
 
@@ -555,7 +557,7 @@ mvn test -Dtest=FuncTestSuite -pl hugegraph-tools -ntp
     *   **问题描述**：命令执行失败，提示找不到文件、权限不足或参数无效。
     *   **排查方法**：
         *   仔细检查您设置的环境变量（如 `$COMMIT_ID`、`$DB_DATABASE`、`$DB_PASS`）是否正确，并且在执行命令的 shell 会话中已生效。
-        *   确认 Maven 命令参数和 Shell 脚本参数的拼写和用法是否正确，参考 [3.1.1 变量与参数](#3-1-1-变量与参数) 章节。
+        *   确认 Maven 命令参数和 Shell 脚本参数的拼写和用法是否正确，参考 [3.1.1 变量与参数](#311-变量与参数) 章节。
         *   如遇脚本权限问题，先执行：`chmod +x hugegraph-*/assembly/travis/*.sh`。
 
 *   **HDFS 测试问题**：
