@@ -138,7 +138,7 @@ services:
       # - ./hugegraph-data:/opt/hugegraph/data
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:8080/graphs || exit 1"]
-      interval: 5s
+      interval: 10s
       timeout: 3s
       retries: 5
     networks:
@@ -217,6 +217,8 @@ volumes:
 ```
 
 #### Hadoop Configuration Mounts
+The `./config` folder is used for configuration mounting. You can choose whether to set it up as needed.It needs to be in the same folder as `docker-compose.yml`.
+
 📁 `./config/core-site.xml` content:
 
 ```xml
@@ -331,7 +333,8 @@ grep auth.authenticator conf/rest-server.properties
 
 # Step 2: Set Password
 bin/stop-hugegraph.sh
-echo -e "pa" | bin/init-store.sh # This script initializes the HugeGraph store and sets default user credentials, including the password for authentication testing
+echo -e "${PASSWORD}" | bin/init-store.sh 
+# This script initializes the HugeGraph store and sets default user credentials, including the password for authentication testing. The Default password value in test is "pa"
 bin/start-hugegraph.sh
 ```
 
@@ -348,7 +351,8 @@ pwd  # Should display .../hugegraph-toolchain
 curl -s http://localhost:8080/graphs
 
 # 3. If authentication is used, confirm the configuration is correct
-curl -u admin:<your_password> http://localhost:8080/graphs # replace <your_password> by actual password
+curl -u admin:<your_password> http://localhost:8080/graphs 
+# replace <your_password> by actual password. The default test value is "pa".
 ```
 
 ```bash

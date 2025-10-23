@@ -219,6 +219,8 @@ volumes:
 ```
 
 #### Hadoop 配置挂载
+`./config`文件夹用于配置挂载，请自行选择是否设置，需要与 `docker-compose.yml` 位于同一文件夹
+
 📁 ./config/core-site.xml 内容：
 
 ```xml
@@ -333,7 +335,8 @@ grep auth.authenticator conf/rest-server.properties
 
 # 第二步：设置密码
 bin/stop-hugegraph.sh
-echo -e "pa" | bin/init-store.sh # 此脚本初始化 HugeGraph 存储并设置默认用户凭据，包括用于鉴权测试的密码
+echo -e "${PASSWORD}" | bin/init-store.sh 
+# 此脚本初始化 HugeGraph 存储并设置默认用户凭据，包括用于鉴权测试的密码，测试时默认使用 "pa"作为密码
 bin/start-hugegraph.sh
 ```
 
@@ -350,7 +353,8 @@ pwd  # 应显示 .../hugegraph-toolchain
 curl -s http://localhost:8080/graphs
 
 # 3. 如果使用鉴权,确认配置正确
-curl -u admin:<your_password> http://localhost:8080/graphs # 将 <your_password> 替换为实际密码
+curl -u admin:<your_password> http://localhost:8080/graphs 
+# 将 <your_password> 替换为实际密码，默认测试密码是 "pa"
 ```
 
 ```bash
@@ -378,7 +382,7 @@ mvn install -pl hugegraph-client,hugegraph-loader -am -Dmaven.javadoc.skip=true 
 
 #### 4.2.2 依赖服务安装 (根据测试类型选择)
 
-按照 [部署测试环境](#3-部署测试环境) 部署测试环境 中的说明，启动 `hugegraph-server`，`Hadoop (HDFS)` (仅当运行 HDFS 测试时需要)， `MySQL` (仅当运行 JDBC 测试时需要)。
+按照 [部署测试环境](#3-部署测试环境) 中的说明，启动 `hugegraph-server`，`Hadoop (HDFS)` (仅当运行 HDFS 测试时需要)， `MySQL` (仅当运行 JDBC 测试时需要)。
 
 <div style="text-align: center;">
     <img src="./../images/toolchain-test-mermaid-1.png" alt="HugeGraph Loader 测试流程图">
@@ -501,7 +505,7 @@ mvn install -pl hugegraph-client,hugegraph-spark-connector -am -Dmaven.javadoc.s
 
 #### 4.4.2 依赖服务安装
 
-按照 [部署测试环境](#3-部署测试环境) 部署测试环境 中的说明，启动 `hugegraph-server` 。
+按照 [部署测试环境](#3-部署测试环境) 中的说明，启动 `hugegraph-server` 。
 
 #### 4.4.3 运行测试
 
@@ -528,7 +532,7 @@ mvn install -pl hugegraph-client,hugegraph-tools -am -Dmaven.javadoc.skip=true -
 
 #### 4.5.2 依赖服务安装
 
-按照 [部署测试环境](#3-部署测试环境) 部署测试环境 中的说明，启动 `hugegraph-server` 。
+按照 [部署测试环境](#3-部署测试环境) 中的说明，启动 `hugegraph-server` 。
 
 #### 4.5.3 运行测试
 
