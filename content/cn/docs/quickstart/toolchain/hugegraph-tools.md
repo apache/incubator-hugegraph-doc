@@ -8,6 +8,8 @@ weight: 3
 
 HugeGraph-Tools 是 HugeGraph 的自动化部署、管理和备份/还原组件。
 
+> **测试指南**：如需在本地运行 Tools 测试，请参考 [工具链本地测试指南](/cn/docs/guides/toolchain-local-test)
+
 ### 2 获取 HugeGraph-Tools
 
 有两种方式可以获取 HugeGraph-Tools：(它被包含子 Toolchain 中)

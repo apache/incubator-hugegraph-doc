@@ -18,7 +18,9 @@ HugeGraph-Loader 是 HugeGraph 的数据导入组件，能够将多种数据源�
 
 后面会具体说明。
 
-> 注意：使用 HugeGraph-Loader 需要依赖 HugeGraph Server 服务，下载和启动 Server 请参考 [HugeGraph-Server Quick Start](/cn/docs/quickstart/hugegraph/hugegraph-server)
+> **注意**：使用 HugeGraph-Loader 需要依赖 HugeGraph Server 服务，下载和启动 Server 请参考 [HugeGraph-Server Quick Start](/cn/docs/quickstart/hugegraph/hugegraph-server)
+> 
+> **测试指南**：如需在本地运行 Loader 测试，请参考 [工具链本地测试指南](/cn/docs/guides/toolchain-local-test)
 
 ### 2 获取 HugeGraph-Loader
 

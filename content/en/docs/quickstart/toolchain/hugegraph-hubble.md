@@ -11,6 +11,8 @@ weight: 1
 > Please be careful not to expose it in a public network environment or untrusted networks to 
 > avoid related SEC issues (you can also use IP & port **whitelist** + HTTPS)
 
+> **Testing Guide**: For running HugeGraph-Hubble tests locally, please refer to [HugeGraph Toolchain Local Testing Guide](/docs/guides/toolchain-local-test)
+
 **HugeGraph-Hubble** is HugeGraph's one-stop visual analysis platform. The platform covers the whole 
 process from data modeling, to efficient data import, to real-time and offline analysis of data, and 
 unified management of graphs, realizing the whole process wizard of graph application. It is designed 
