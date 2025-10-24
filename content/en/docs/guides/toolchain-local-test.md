@@ -1,5 +1,4 @@
 ---
-
 title: "HugeGraph Toolchain Local Testing Guide"
 linkTitle: "Toolchain Local Testing"
 weight: 4
@@ -194,7 +193,7 @@ volumes:
 ```
 
 #### Hadoop Configuration Mounts
-The `./config` folder is used for configuration mounting. You can choose whether to set it up as needed.It needs to be in the same folder as `docker-compose.yml`.
+Create a `./config` folder in the same directory as `docker-compose.yml` to mount Hadoop configuration files. You can skip this step if HDFS testing is not required.
 
 📁 `./config/core-site.xml` content:
 
@@ -213,11 +212,11 @@ The `./config` folder is used for configuration mounting. You can choose whether
 <configuration>
     <property>
         <name>dfs.namenode.name.dir</name>
-        <value>/hadoop/dfs/name</value>
+        <value>/hadoop/hdfs/name</value>
     </property>
     <property>
         <name>dfs.datanode.data.dir</name>
-        <value>/hadoop/dfs/data</value>
+        <value>/hadoop/hdfs/data</value>
     </property>
     <property>
         <name>dfs.permissions.superusergroup</name>

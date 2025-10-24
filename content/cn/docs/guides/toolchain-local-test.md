@@ -193,7 +193,7 @@ volumes:
 ```
 
 #### Hadoop 配置挂载
-`./config`文件夹用于配置挂载，请自行选择是否设置，需要与 `docker-compose.yml` 位于同一文件夹
+在与 `docker-compose.yml` 相同的目录下创建 `./config` 文件夹用于挂载 Hadoop 配置文件。如果不需要 HDFS 测试，可以跳过此步骤。
 
 📁 ./config/core-site.xml 内容：
 
