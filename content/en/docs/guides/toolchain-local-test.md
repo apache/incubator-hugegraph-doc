@@ -2,124 +2,101 @@
 
 title: "HugeGraph Toolchain Local Testing Guide"
 linkTitle: "Toolchain Local Testing"
-weight: 7
+weight: 4
 ---
 
-This guide aims to help developers efficiently run tests for the HugeGraph toolchain in a local environment, covering the processes of compiling sub-projects, installing dependent services, running tests, and generating coverage reports.
+This guide helps developers run HugeGraph toolchain tests locally.
 
-## 1. Foreword and Core Concepts
+## 1. Core Concepts
 
 ### 1.1 Core Dependency: HugeGraph Server
 
-In the testing of the HugeGraph toolchain, **HugeGraph Server is the core dependency for most integration and functional tests**. It provides the core services of the graph database, and many components in the toolchain (such as Client, Loader, Hubble, Spark Connector, Tools) need to interact with the Server to perform their functions and be tested. Therefore, a properly configured and running HugeGraph Server is a prerequisite for complete functional testing. This guide will explain how to install/build HugeGraph Server in the sections below.
+**Integration and functional tests of the toolchain depend on HugeGraph Server**, including Client, Loader, Hubble, Spark Connector, Tools, and other components.
 
-### 1.2 Explanation of Test Suite Types
+### 1.2 Test Types
 
-In the testing of the HugeGraph toolchain, you may encounter the following common types of test suites:
+- **Unit Tests**: Test individual functions/methods, no external dependencies required
+- **API Tests (ApiTestSuite)**: Test API interfaces, requires running HugeGraph Server
+- **Functional Tests (FuncTestSuite)**: End-to-end tests, require complete system environment
 
-*   **Unit Tests**:
-    *   **Goal**: To verify the correctness of the smallest testable units in the program (usually a single function, method, or class). They typically do not involve external dependencies (like databases, network services, etc.).
+## 2. Environment Setup
 
-*   **API Tests (API Tests / ApiTestSuite)**:
-    *   **Goal**: To verify the correctness, stability, and compliance of the APIs provided by the program. They usually simulate client requests, interact with the server, and check if the API's response data and processing mechanisms meet expectations.
-    *   **Characteristics**: Requires a running server (like HugeGraph Server) to respond to API requests.
+### 2.1 System Requirements
 
-*   **Functional Tests (Functional Tests / FuncTestSuite)**:
-    *   **Goal**: To verify that a specific function of a system or component works as required. They simulate user scenarios or business processes and involve interactions between multiple components, and are end-to-end tests.
-    *   **Characteristics**: They take a relatively long time to execute, require a complete system environment (including all dependent services) to run, and can identify issues at the integration level.
+- **Operating System**: Linux / macOS (Windows use WSL2)
+- **JDK**: >= 11, configure `JAVA_HOME`
+- **Maven**: >= 3.5
+- **Python**: >= 3.11 (only required for Hubble tests)
 
-## 2. Pre-Test Preparation
-
-### 2.1 System and Software Requirements
-
-*   **Operating System**: Linux or macOS is recommended. For Windows, please use WSL2.
-*   **JDK**: >= 11. Ensure your `JAVA_HOME` environment variable is correctly configured.
-*   **Maven**: Version 3.5 or higher is recommended for project building and dependency management.
-*   **Python**: >= 3.11 (only required for HugeGraph-Hubble related tests). It is recommended to use a virtual environment to manage it and avoid version conflicts.
-
-### 2.2 Clone the Code Repository
-
-First, you need to clone the source code repository of the HugeGraph toolchain:
+### 2.2 Clone Code
 
 ```bash
 git clone https://github.com/${GITHUB_USER_NAME}/hugegraph-toolchain.git
 cd hugegraph-toolchain
 ```
 
-## 3. Deploying the Test Environment
+## 3. Deploy Test Environment
 
-Regarding the test environment, since HugeGraph Server is the core dependency for most integration and functional tests, you can refer to the [Community Edition Documentation](https://hugegraph.apache.org/docs/quickstart/hugegraph/hugegraph-server/) for instructions on installing/building HugeGraph-Server. In this testing guide, we will introduce two methods: deployment via script and deployment via Docker.
+### Deployment Options
 
-**Important Notes:**
-* It is recommended to prioritize using a script for local deployment of HugeGraph Server. This method allows you to precisely control the Server version by specifying a Git Commit ID, ensuring high compatibility with your toolchain code version and effectively avoiding test anomalies caused by interface or implementation changes.
+- **Script Deployment (Recommended)**: Precisely control Server version by specifying Commit ID, avoid interface incompatibility
+- **Docker Deployment**: Quick start, but may have version lag causing test failures
 
-* Docker deployment is more suitable for quickly starting a default-configured HugeGraph Server. However, for fine-grained integration testing, especially when your toolchain code depends on features or fixes from a specific HugeGraph Server version, the version lag or default configuration of the Docker image may cause tests to fail. When there are interface/implementation changes between the toolchain code and HugeGraph Server, the convenience of Docker deployment might lead to test failures. In such cases, it is recommended to fall back to the script deployment method.
+> For detailed installation instructions, refer to [Community Documentation](https://hugegraph.apache.org/docs/quickstart/hugegraph/hugegraph-server/)
 
-### 3.1 Quick Deployment of Test Environment Using a Script (Recommended)
+### 3.1 Script Deployment (Recommended)
 
-This method allows you to compile and install a specific version of HugeGraph Server from the source code, ensuring consistency between the test environment and a specific HugeGraph Server version, which is crucial for reproducing issues or verifying compatibility.
+#### Parameter Description
 
-#### 3.1.1 Variables and Parameters
+- **`$COMMIT_ID`**: Specify Server source code Git Commit ID
+- **`$DB_DATABASE` / `$DB_PASS`**: MySQL database name and password for Loader JDBC tests
 
-*   **`$COMMIT_ID`**
-    *   Specifies the Git Commit ID of the HugeGraph Server source code. This variable is used when you need to compile and install a specific version of HugeGraph Server from the source as a test dependency. It ensures consistency between the test environment and the specific HugeGraph Server version, which is crucial for reproducing issues or verifying compatibility. Pass it directly as a parameter to the `install-hugegraph-from-source.sh` script.
+#### Deployment Steps
 
-*   **`$DB_DATABASE` & `$DB_PASS`**
-    *   Specify the name of the MySQL database and the root user password for the connection used in HugeGraph-Loader's JDBC tests. Providing this database connection information allows the Loader to read and write data correctly. Pass them directly as parameters to the `install-mysql.sh` script.
+**1. Install HugeGraph Server**
 
-#### 3.1.2 Execution Process
-
-**Install and Start HugeGraph Server**
-
-If you choose to install manually, you can use the following script to install HugeGraph Server. The script is located in the `/assembly/travis/` directory of any tool's repository. It is used to pull the HugeGraph Server source code from a specified commit ID, compile it, unzip it, and start the service via both http and https.
 ```bash
-# Example: Set the HugeGraph Server version to install
-export COMMIT_ID="master"  # Use the latest code from the master branch
-# or
-export COMMIT_ID="8b90977"  # Use a specific commit hash (please adjust based on compatibility)
-# Then execute the installation
+# Set version
+export COMMIT_ID="master"  # Or specific commit hash, e.g. "8b90977"
+
+# Execute installation (script located in /assembly/travis/ directory)
 hugegraph-client/assembly/travis/install-hugegraph-from-source.sh $COMMIT_ID
 ```
 
-*   `$COMMIT_ID`: Specifies the Git Commit ID of HugeGraph Server.
-*   The default http port is 8080, and the https port is 8443. Please ensure they are not occupied before starting the server.
+- Default ports: http 8080, https 8443
+- Ensure ports are not occupied
 
-**Install and Start Hadoop (HDFS)** (Only required when running HDFS tests for hugegraph-loader):
+**2. Install Optional Dependencies**
+
 ```bash
+# Hadoop (only required for Loader HDFS tests)
 hugegraph-loader/assembly/travis/install-hadoop.sh
-```
 
-**Install and Start MySQL** (Only required when running JDBC tests for hugegraph-loader):
-```bash
+# MySQL (only required for Loader JDBC tests)
 hugegraph-loader/assembly/travis/install-mysql.sh $DB_DATABASE $DB_PASS
 ```
 
-**Health Check**
+**3. Health Check**
 
 ```bash
 curl http://localhost:8080/graphs
+# Returns {"graphs":["hugegraph"]} indicates success
 ```
-If it returns `{"graphs":["hugegraph"]}`, it means the server is ready to receive requests.
 
-### 3.2 Using Docker to Deploy the Test Environment
+### 3.2 Docker Deployment
 
-By using the officially released `hugegraph-server` Docker image, you can quickly start a HugeGraph Server. This method simplifies the setup of the test environment, ensures environmental consistency, and improves test repeatability. **However, please note that the Docker image may not be updated to the latest development version of HugeGraph Server in a timely manner. This means that if your toolchain code depends on the latest interfaces or features of HugeGraph Server, using the Docker image may lead to compatibility issues. In such cases, it is recommended to use the script method to deploy a specific `COMMIT_ID` of HugeGraph Server.**
+> **Note**: Docker images may have version lag, use script deployment if encountering compatibility issues
 
-#### Quick Start with Docker
+#### Quick Start
 
 ```bash
-# 1. First, create the network
 docker network create hugegraph-net
-
-# 2. Start the server and join the network
 docker run -itd --name=server -p 8080:8080 --network hugegraph-net hugegraph/hugegraph:latest
 ```
 
-This quickly starts a HugeGraph server with built-in RocksDB, which meets the requirements for most tests and toolchain components.
+#### docker-compose Configuration (Optional)
 
-#### Example `docker-compose.yml` File
-
-The following is an example `docker-compose.yml` file that defines the HugeGraph Server, MySQL, and Hadoop (HDFS) services. You can adjust it according to your actual testing needs. Please use Docker Compose V2.
+Complete configuration example including Server, MySQL, Hadoop services (requires Docker Compose V2):
 
 ```yaml
 version: '3.8'
@@ -253,331 +230,216 @@ The `./config` folder is used for configuration mounting. You can choose whether
 </configuration>
 ```
 
-**Explanation**:
+#### Docker Operations
 
-*   **`hugegraph-server`**: Uses the `hugegraph/hugegraph:latest` image. You can replace it with a specific version as needed, or if you need to build the Server from source, you can create a custom Dockerfile and reference it here.
-*   **`mysql`**: Uses the official `mysql:5.7` image. `MYSQL_ROOT_PASSWORD` and `MYSQL_DATABASE` can be passed in via environment variables (`DB_PASS`, `DB_DATABASE`) or use default values.
-*   **`namenode` and `datanode`** (commented out): If you need to run HDFS tests for HugeGraph-Loader, you can uncomment and configure the Hadoop services.
+```bash
+# Start services
+docker compose up -d
 
-#### Starting and Stopping the Docker Environment
+# Check status
+docker compose ps
+lsof -i:8080  # Server
+lsof -i:8020  # Hadoop
+lsof -i:3306  # MySQL
 
-1.  **Save `docker-compose.yml`**: Save the above content as a `docker-compose.yml` file, preferably in the root directory of the `hugegraph-toolchain` project or in a separate `docker` directory.
+# Stop services
+docker compose down
+```
 
-2.  **Start Services**: In the directory where the `docker-compose.yml` file is located, run the following command to start all services:
+## 4. Run Tests
 
-    ```bash
-    docker compose up -d
-    ```
-    *   The `-d` parameter means running the containers in the background.
-
-3.  **Check Service Status**: You can use the following commands to check the running status of the containers:
-
-    ```bash
-    docker compose ps
-    lsof -i:8080 # server port
-    lsof -i:8020 # hadoop port
-    lsof -i:3306 # mysql port
-    ```
-
-4.  **Stop Services**: After testing is complete, you can stop and remove all services:
-
-    ```bash
-    docker compose down
-    ```
-
-## 4. Start Testing
-
-Generally, the local testing process for each tool is as follows, which will be explained in detail below.
+Test process for each tool:
 
 <div style="text-align: center;">
-    <img src="./../images/toolchain-test-mermaid-2.png" alt="HugeGraph Toolchain Testing Process">
+    <img src="/docs/images/toolchain-test-mermaid-2.png" alt="HugeGraph Toolchain Testing Process">
 </div>
 
 
-### 4.1 hugegraph-client Local Testing (Java Version)
+### 4.1 hugegraph-client
 
-`hugegraph-client` is the Java client library for HugeGraph, used for interacting with HugeGraph Server. Its tests mainly verify the communication and data operations between the client and the server.
-
-#### 4.1.1 Compile
-
-First, compile the `hugegraph-client` module:
+#### Compile
 
 ```bash
 mvn -e compile -pl hugegraph-client -Dmaven.javadoc.skip=true -ntp
 ```
 
-*   `-pl hugegraph-client`: Specifies to compile only the `hugegraph-client` module.
-*   `-Dmaven.javadoc.skip=true`: Skips Javadoc generation.
-*   `-ntp`: No transfer progress.
+#### Dependent Services
 
-#### 4.1.2 Dependent Service Installation
+Start HugeGraph Server (refer to [Section 3](#3-deploy-test-environment))
 
-Follow the instructions in [Deploying the Test Environment](#3-deploying-the-test-environment) to start `hugegraph-server`.
+##### Server Authentication Configuration
 
-##### Server Authentication Settings
+> **Note**: Docker images <= 1.5.0 don't support authentication tests, need 1.6.0+
 
-> **Warning:** Authentication tests are **not supported** for Docker image versions <= 1.5.0. Please ensure you are using a newer version if you intend to run authentication-related tests.
-Since the client's ApiTest includes authentication tests, you must ensure that the server's password is the same as in the test code; otherwise, data transfer between the client and server will fail. If you use the client's built-in script to install and start the server, you can skip this step.
-However, if you start the server using other methods, you must perform the following authentication settings, as the default server does not have them set. For example, enter the container environment with `docker exec -it server bash` to make modifications.
+ApiTest requires authentication configuration. Skip this if using script installation. Manual configuration needed for Docker:
 
 ```bash
-# Step 1: Modify Authentication Mode
-# 1. Backup the original configuration file
+# 1. Modify authentication mode
 cp conf/rest-server.properties conf/rest-server.properties.backup
-
-# Find the line `auth.authenticator=` and change it to `auth.authenticator=org.apache.hugegraph.auth.StandardAuthenticator`
 sed -i '/^auth.authenticator=/c\auth.authenticator=org.apache.hugegraph.auth.StandardAuthenticator' conf/rest-server.properties
-
-# 3. Confirm the modification was successful
 grep auth.authenticator conf/rest-server.properties
 
-# Step 2: Set Password
+# 2. Set password
+# Note: Test code uses "pa" as default password, must match for tests to work
 bin/stop-hugegraph.sh
-echo -e "${PASSWORD}" | bin/init-store.sh 
-# This script initializes the HugeGraph store and sets default user credentials, including the password for authentication testing. The Default password value in test is "pa"
+export PASSWORD="pa"  # Set to test default password
+echo -e "${PASSWORD}" | bin/init-store.sh
 bin/start-hugegraph.sh
 ```
 
-#### 4.1.3 Run Tests
-
-Go to the `hugegraph-client` module directory and run the tests:
-
-**Pre-condition Check**:
-```bash
-# 1. Confirm that you are in the hugegraph-toolchain root directory
-pwd  # Should display .../hugegraph-toolchain
-
-# 2. Confirm that HugeGraph Server has been started
-curl -s http://localhost:8080/graphs
-
-# 3. If authentication is used, confirm the configuration is correct
-curl -u admin:<your_password> http://localhost:8080/graphs 
-# replace <your_password> by actual password. The default test value is "pa".
-```
+#### Run Tests
 
 ```bash
+# Check environment
+curl http://localhost:8080/graphs  # Should return {"graphs":["hugegraph"]}
+curl -u admin:pa http://localhost:8080/graphs  # Authentication test (pa is test default password)
+
+# Run tests
 cd hugegraph-client
-mvn test -Dtest=UnitTestSuite -ntp
-mvn test -Dtest=ApiTestSuite -ntp
-mvn test -Dtest=FuncTestSuite -ntp
+mvn test -Dtest=UnitTestSuite -ntp      # Unit tests
+mvn test -Dtest=ApiTestSuite -ntp       # API tests (requires Server)
+mvn test -Dtest=FuncTestSuite -ntp      # Functional tests (requires Server)
 ```
 
-*   The unit test mainly depends on the compilation of `hugegraph-client` itself and is used to test the internal logic of the client.
-*   Other test modules require a running HugeGraph-Server service.
-*   Please check server log if tests failed: logs/hugegraph-server.log
+> Check Server log if tests fail: `logs/hugegraph-server.log`
 
-### 4.2 hugegraph-loader Local Testing
+### 4.2 hugegraph-loader
 
-`hugegraph-loader` is HugeGraph's data import tool, which supports importing data from various sources. It supports loading data from multiple sources (such as local files, HDFS, relational databases, etc.) into HugeGraph, involving interactions with services like HugeGraph Server, Hadoop, and MySQL.
-
-#### 4.2.1 Compile
-
-Compile the `hugegraph-client` and `hugegraph-loader` modules:
+#### Compile
 
 ```bash
 mvn install -pl hugegraph-client,hugegraph-loader -am -Dmaven.javadoc.skip=true -DskipTests -ntp
 ```
 
-#### 4.2.2 Dependent Service Installation (Choose based on test type)
+#### Dependent Services
 
-Follow the instructions in [Deploying the Test Environment](#3-deploying-the-test-environment) to start `hugegraph-server`, `Hadoop (HDFS)` (only required when running HDFS tests), and `MySQL` (only required when running JDBC tests).
+- **Required**: HugeGraph Server
+- **Optional**: Hadoop (HDFS tests), MySQL (JDBC tests)
 
-<div style="text-align: center;">
-    <img src="./../images/toolchain-test-mermaid-1.png" alt="HugeGraph Loader Testing Process">
-</div>
-
-#### 4.2.3 Run Tests
-
-Go to the `hugegraph-loader` module directory and run the tests. The tests for `hugegraph-loader` are categorized using Maven Profiles:
+#### Run Tests
 
 ```bash
 cd hugegraph-loader
-mvn test -P unit -ntp
-mvn test -P file -ntp
-mvn test -P hdfs -ntp
-mvn test -P jdbc -ntp
-mvn test -P kafka -ntp
+mvn test -P unit -ntp   # Unit tests
+mvn test -P file -ntp   # File tests (requires Server)
+mvn test -P hdfs -ntp   # HDFS tests (requires Server + Hadoop)
+mvn test -P jdbc -ntp   # JDBC tests (requires Server + MySQL)
+mvn test -P kafka -ntp  # Kafka tests (requires Server)
 ```
 
-*   The unit test mainly depends on the compilation of `hugegraph-loader` itself and is used to test the internal logic of the loader component.
-*   Other test modules require a running HugeGraph-Server service.
-    *   `hdfs` also requires an available Hadoop (HDFS) environment.
-    *   `jdbc` also requires an available MySQL database.
+### 4.3 hugegraph-hubble
 
-**Important Note**: Before running tests for a specific Profile, make sure the corresponding dependent services are started and accessible.
-
-### 4.3 hugegraph-hubble Backend Local Testing
-
-`hugegraph-hubble` is the visual management tool for HugeGraph. Its tests include backend unit tests and API tests.
-
-#### 4.3.1 Compile
-
-First, install `hugegraph-client` and `hugegraph-loader` (Hubble has an indirect dependency), then compile `hugegraph-hubble`:
+#### Compile
 
 ```bash
-# First, install hugegraph-client and hugegraph-loader, as Hubble's operation depends on them
 mvn install -pl hugegraph-client,hugegraph-loader -am -Dmaven.javadoc.skip=true -DskipTests -ntp
-# Then, compile hugegraph-hubble
 cd hugegraph-hubble
 mvn -e compile -Dmaven.javadoc.skip=true -ntp
 ```
 
-#### 4.3.2 Dependent Service Installation
+#### Dependent Services
 
-**1. Start HugeGraph Server**
+**1. Start Server** (refer to [Section 3](#3-deploy-test-environment))
 
-Follow the instructions in [Deploying the Test Environment](#3-deploying-the-test-environment) to start `hugegraph-server`.
-
-**2. Install Python Dependencies**
-
-Hubble's certain features require Python support:
+**2. Python Environment**
 
 ```bash
-# Recommended to use virtual environment
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
-
-# Install dependencies
-cd hugegraph-hubble
 python -m pip install -r hubble-dist/assembly/travis/requirements.txt
 ```
 
-**3. Build Hubble Package**
+**3. Build and Verify**
 
 ```bash
-# In hugegraph-hubble directory
 mvn package -Dmaven.test.skip=true
-
-# Verify build artifacts
-ls apache-hugegraph-hubble-incubating-*/
-```
-
-**4. Verify Hubble Executability (Optional, for confirming environment correctness)**
-
-```bash
-# When version is 1.5.0
-cd apache-hugegraph-hubble-incubating-1.5.0/bin
-./start-hubble.sh -d
-sleep 10
-curl http://localhost:8088/api/health  # Check Hubble health status
+# Optional: Start and verify
+cd apache-hugegraph-hubble-incubating-*/bin
+./start-hubble.sh -d && sleep 10
+curl http://localhost:8088/api/health
 ./stop-hubble.sh
 ```
 
-#### 4.3.3 Run Tests
-
-Go to the `hugegraph-hubble` module directory and run the tests:
+#### Run Tests
 
 ```bash
-mvn test -P unit-test -pl hugegraph-hubble/hubble-be -ntp # Unit Test
+# Unit tests
+mvn test -P unit-test -pl hugegraph-hubble/hubble-be -ntp
 
-# API tests require both HugeGraph Server and Hubble services to be running.
-
-# 1. Confirm Server is running on port 8080
-curl http://localhost:8080/graphs
-
-# 2. Confirm Hubble is running on port 8088
-curl http://localhost:8088/api/health
-
-# 3. Execute API tests
+# API tests (requires Server + Hubble running)
+curl http://localhost:8080/graphs  # Check Server
+curl http://localhost:8088/api/health  # Check Hubble
 cd hugegraph-hubble/hubble-dist
-hubble-dist/assembly/travis/run-api-test.sh #API Test
+./assembly/travis/run-api-test.sh
 ```
 
-*  unit test mainly depends on the compilation of `hubble-be` itself, running Hubble backend (Java part) unit tests.
-*  run-api-test requires a running HugeGraph-Server service, as well as normal operation of client and loader.
+### 4.4 hugegraph-spark-connector
 
-**Important Note**: Before running API tests, be sure to complete client and loader installation, and ensure that both HugeGraph Server and HugeGraph-Hubble services are started and accessible.
-
-### 4.4 hugegraph-spark-connector Local Testing
-
-`hugegraph-spark-connector` provides integration capabilities between HugeGraph and Apache Spark. Its tests mainly verify the data connection and operations between Spark and HugeGraph.
-
-#### 4.4.1 Compile
-
-Compile the `hugegraph-client` and `hugegraph-spark-connector` modules:
+#### Compile
 
 ```bash
 mvn install -pl hugegraph-client,hugegraph-spark-connector -am -Dmaven.javadoc.skip=true -DskipTests -ntp
 ```
 
-#### 4.4.2 Dependent Service Installation
-
-Follow the instructions in [Deploying the Test Environment](#3-deploying-the-test-environment) to start `hugegraph-server`.
-
-#### 4.4.3 Run Tests
-
-Go to the `hugegraph-spark-connector` module directory and run the tests:
+#### Run Tests
 
 ```bash
 cd hugegraph-spark-connector
-mvn test -ntp
+mvn test -ntp  # Requires Server running
 ```
 
-*   Requires a running HugeGraph Server. These tests will connect to HugeGraph Server via Spark.
+### 4.5 hugegraph-tools
 
-### 4.5 hugegraph-tools Local Testing
-
-`hugegraph-tools` provides a command-line toolset for HugeGraph, used for data management, backup and recovery, etc. Its tests mainly verify the functionality of these tools.
-
-#### 4.5.1 Compile
-
-Compile the `hugegraph-client` and `hugegraph-tools` modules:
+#### Compile
 
 ```bash
 mvn install -pl hugegraph-client,hugegraph-tools -am -Dmaven.javadoc.skip=true -DskipTests -ntp
 ```
 
-#### 4.5.2 Dependent Service Installation
-
-Follow the instructions in [Deploying the Test Environment](#3-deploying-the-test-environment) to start `hugegraph-server`.
-
-#### 4.5.3 Run Tests
-
-Go to the `hugegraph-tools` module directory and run the functional tests:
+#### Run Tests
 
 ```bash
 cd hugegraph-tools
-mvn test -Dtest=FuncTestSuite -pl hugegraph-tools -ntp
+mvn test -Dtest=FuncTestSuite -ntp  # Requires Server running
 ```
 
-*   Depends on a running HugeGraph Server and the proper compilation of `hugegraph-client`.
+## 5. Common Issues
 
-## 5. Common Issues and Troubleshooting
+### Service Connection Issues
 
-This section lists some common problems that may be encountered during local testing of the HugeGraph toolchain and their troubleshooting methods.
+**Symptoms**: Cannot connect to Server/MySQL/Hadoop
 
-*   **Service Not Started or Port Conflict**:
-    *   **Problem Description**: Test fails with a message indicating it cannot connect to HugeGraph Server, MySQL, or other dependent services.
-    *   **Troubleshooting**:
-        *   Confirm that all necessary dependent services (HugeGraph Server, MySQL, Hadoop, etc.) have been started correctly, and ensure that the server's http service is running on port 8080.
-        *   Check if the port the service is listening on is consistent with the test configuration and is not occupied by another program. You can use `lsof -i:<port_number>` (Linux/macOS) or `netstat -ano | findstr :<port_number>` (Windows) to check port usage.
-        *   If using Docker, check the output of `docker compose ps` to ensure all containers are in the `Up` state, and check the container logs (`docker compose logs <service_name>`).
+**Troubleshooting**:
+- Confirm services are running (Server must be on port 8080)
+- Check port usage: `lsof -i:8080`
+- Docker check: `docker compose ps` and `docker compose logs`
 
-*   **Environment Variable or Parameter Configuration Error**:
-    *   **Problem Description**: Command execution fails with a message about a file not found, insufficient permissions, or invalid parameters.
-    *   **Troubleshooting**:
-        *   Carefully check if the environment variables you set (e.g., `$COMMIT_ID`, `$DB_DATABASE`, `$DB_PASS`) are correct and have taken effect in the shell session where the command is executed.
-        *   Confirm that the spelling and usage of Maven command parameters and Shell script parameters are correct, referring to the [3.1.1 Variables and Parameters](#311-variables-and-parameters) section.
-        *   If you encounter script permission issues, first execute: `chmod +x hugegraph-*/assembly/travis/*.sh`.
+### Configuration Issues
 
-*   **HDFS Test Issues**:
-    *   **Problem Description**: HDFS tests for HugeGraph-Loader fail.
-    *   **Troubleshooting**:
-        *   Ensure that Hadoop's NameNode and DataNode services are running normally and the HDFS file system is accessible.
-        *   Check Hadoop's logs, especially the DataNode's logs, to ensure that data blocks are being replicated and operated on correctly.
-        *   If using Docker, ensure the Hadoop service is healthy and the test program can correctly connect to the HDFS service.
+**Symptoms**: File not found, parameter errors
 
-*   **JDBC Test Issues**:
-    *   **Problem Description**: JDBC tests for HugeGraph-Loader fail.
-    *   **Troubleshooting**:
-        *   Ensure the MySQL database service is running normally and that the database name, username, and password you provided are correct.
-        *   Check MySQL's logs for any connection or permission issues.
-        *   If using Docker, ensure the MySQL service is healthy and the test program can correctly connect to the MySQL service.
+**Troubleshooting**:
+- Check environment variables: `echo $COMMIT_ID`
+- Script permissions: `chmod +x hugegraph-*/assembly/travis/*.sh`
+
+### HDFS Test Failures
+
+**Troubleshooting**:
+- Confirm NameNode/DataNode running normally
+- Check Hadoop logs
+- Verify HDFS connection: `hdfs dfsadmin -report`
+
+### JDBC Test Failures
+
+**Troubleshooting**:
+- Confirm MySQL running normally
+- Verify database connection: `mysql -u root -p$DB_PASS`
+- Check MySQL logs
 
 ## 6. References
 
 *   **HugeGraph GitHub Repository**: [https://github.com/apache/hugegraph](https://github.com/apache/hugegraph)
 *   **HugeGraph Toolchain GitHub Repository**: [https://github.com/apache/hugegraph-toolchain](https://github.com/apache/hugegraph-toolchain)
-*   **HugeGraph Server Official Documentation**: [https://hugegraph.apache.org/docs/](https://hugegraph.apache.org/docs/)
+*   **HugeGraph Server Official Documentation**: [https://hugegraph.apache.org/docs/quickstart/hugegraph/hugegraph-server/](https://hugegraph.apache.org/docs/quickstart/hugegraph/hugegraph-server/)
 *   **CI Script Path**: `.github/workflows/*-ci.yml` (CI configuration files in the HugeGraph toolchain project, which can be used as a reference)
-*   **Dependent Service Installation Scripts**: `hugegraph-*/assembly/travis/` (Installation scripts used for Travis CI in the HugeGraph toolchain project, which can be used as a reference for manual installation)
+*   **Dependent Service Installation Scripts**: `hugegraph-*/assembly/travis/` (Installation scripts for CI and local testing in the HugeGraph toolchain project, can be used directly or as a reference)

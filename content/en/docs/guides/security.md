@@ -1,7 +1,7 @@
 ---
 title: "Security Report"
 linkTitle: "Security"
-weight: 6
+weight: 7
 ---
 
 ## Reporting New Security Problems with Apache HugeGraph

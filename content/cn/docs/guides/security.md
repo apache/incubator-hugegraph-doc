@@ -1,7 +1,7 @@
 ---
 title: "报告安全问题"
 linkTitle: "安全公告"
-weight: 6
+weight: 7
 ---
 
 ## 报告 Apache HugeGraph 的安全问题

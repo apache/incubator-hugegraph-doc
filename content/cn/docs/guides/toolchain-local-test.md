@@ -1,45 +1,33 @@
 ---
 title: "HugeGraph工具链本地测试指南"
 linkTitle: "Toolchain本地测试"
-weight: 7
+weight: 4
 ---
 
-本指南旨在帮助开发者高效地在本地环境下运行 HugeGraph 工具链相关测试，涵盖各子项目的编译、依赖服务安装、测试与覆盖率报告生成等流程。
+本指南帮助开发者在本地运行 HugeGraph 工具链测试。
 
-## 1. 前言与核心概念
+## 1. 核心概念
 
-### 1.1 核心依赖说明：HugeGraph Server
+### 1.1 核心依赖：HugeGraph Server
 
-在 HugeGraph 工具链的测试中，**HugeGraph Server 是绝大多数集成测试和功能测试的核心依赖**。它提供了图数据库的核心服务，工具链中的许多组件（如 Client、Loader、Hubble、Spark Connector、Tools）都需要与 Server 进行交互才能完成其功能并进行测试。因此，配置好 HugeGraph Server 正常运行是完整进行功能测试的前提，本指南将在下文介绍如何安装/构建 HugeGraph Server。
+**工具链的集成测试和功能测试都依赖 HugeGraph Server**，包括 Client、Loader、Hubble、Spark Connector、Tools 等组件。
 
-### 1.2 测试套件类型解释
+### 1.2 测试类型
 
-在 HugeGraph 工具链的测试中，您可能会遇到以下几种常见的测试套件类型：
+- **单元测试 (Unit Tests)**：测试单个函数/方法，不依赖外部服务
+- **API 测试 (ApiTestSuite)**：测试 API 接口，需要运行中的 HugeGraph Server
+- **功能测试 (FuncTestSuite)**：端到端测试，需要完整的系统环境
 
-*   **单元测试 (Unit Tests)**：
-    *   **目标**：验证程序中最小可测试单元（通常是单个函数、方法或类）的正确性。通常不涉及外部依赖（如数据库、网络服务等）
+## 2. 环境准备
 
-*   **API 测试 (API Tests / ApiTestSuite)**：
-    *   **目标**：验证程序对外提供 API 的正确性、稳定性和符合性。它们通常模拟客户端请求，与 server 进行交互，检查 API 的响应数据、处理机制是否符合预期。
-    *   **特点**：需要一个正在运行的服务端（如 HugeGraph Server）来响应 API 请求。
+### 2.1 系统要求
 
+- **操作系统**：Linux / macOS（Windows 使用 WSL2）
+- **JDK**：>= 11，配置好 `JAVA_HOME`
+- **Maven**：>= 3.5
+- **Python**：>= 3.11（仅 Hubble 测试需要）
 
-*   **功能测试 (Functional Tests / FuncTestSuite)**：
-    *   **目标**：验证系统或组件的特定功能是否按照需求正常工作。用于模拟用户场景或业务流程，涉及多个组件的交互，是端到端的测试。
-    *   **特点**：执行时间相对较长，需要完整的系统环境（包括所有依赖服务）来运行，能够发现集成层面的问题。
-
-## 2. 测试前准备
-
-### 2.1 系统与软件要求
-
-*   **操作系统**：建议 Linux、macOS。Windows 平台请使用 WSL2。
-*   **JDK**：>= 11。确保您的 `JAVA_HOME` 环境变量已正确配置。
-*   **Maven**：建议 3.5 及以上。用于项目构建和依赖管理。
-*   **Python**：>= 3.11（仅 HugeGraph-Hubble 相关测试需用）。建议使用虚拟环境进行管理，以避免版本冲突。 
-
-### 2.2 克隆代码仓库
-
-首先，您需要克隆 HugeGraph 工具链的源代码仓库：
+### 2.2 克隆代码
 
 ```bash
 git clone https://github.com/${GITHUB_USER_NAME}/hugegraph-toolchain.git
@@ -48,80 +36,66 @@ cd hugegraph-toolchain
 
 ## 3. 部署测试环境
 
-关于测试环境，由于 HugeGraph Server 是绝大多数集成测试和功能测试的核心依赖，有关安装/构建 HugeGraph-Server，可参考访问 [社区版文档](https://hugegraph.apache.org/cn/docs/quickstart/hugegraph/hugegraph-server/)。在本测试指南中，我们会介绍通过脚本部署与通过 docker 部署两种方式。
+### 方式选择
 
-重要提示：
-* 推荐优先使用脚本进行本地部署 HugeGraph Server。这种方式允许您通过指定 Git Commit ID 来精确控制 Server 版本，确保与您的工具链代码版本高度匹配，从而有效避免因接口或实现变动导致测试异常的问题。
+- **脚本部署（推荐）**：通过指定 Commit ID 精确控制 Server 版本，避免接口不兼容
+- **Docker 部署**：快速启动，但可能版本滞后导致测试失败
 
-* Docker 部署方式更适合快速启动一个默认配置的 HugeGraph Server，但在进行精细化的集成测试时，特别是当您的工具链代码依赖于特定 HugeGraph Server 版本的功能或修复时，Docker 镜像的版本滞后或默认配置可能导致测试不通过。当工具链代码与 HugeGraph Server 存在接口/实现变动时，Docker 部署的便捷性可能反而导致测试失败，此时推荐回退到脚本部署方式。
+> 详细安装说明参考 [社区文档](https://hugegraph.apache.org/cn/docs/quickstart/hugegraph/hugegraph-server/)
 
-### 3.1 使用脚本快速部署测试环境（推荐）
+### 3.1 脚本部署（推荐）
 
-这种方式允许您从源代码编译和安装特定版本的 HugeGraph Server，确保测试环境与特定 HugeGraph Server 版本的一致性，这对于复现问题或验证兼容性至关重要。
+#### 参数说明
 
-#### 3.1.1 变量与参数
+- **`$COMMIT_ID`**：指定 Server 源码的 Git Commit ID
+- **`$DB_DATABASE` / `$DB_PASS`**：Loader JDBC 测试用的 MySQL 数据库名和密码
 
-*   **`$COMMIT_ID`**
-    *   指定 HugeGraph Server 源代码的 Git Commit ID。当您需要从源代码编译和安装特定版本的 HugeGraph Server 作为测试依赖时，会使用此变量，确保测试环境与特定 HugeGraph Server 版本的一致性，这对于复现问题或验证兼容性至关重要。使用时直接作为参数传递给 install-hugegraph-from-source.sh 脚本。
+#### 部署步骤
 
-*   **`$DB_DATABASE` 与 `$DB_PASS`**
-    指定 HugeGraph-Loader 进行 JDBC 测试时所连接的 MySQL 数据库名称与 root 用户密码。请作为参数传递给 `install-mysql.sh` 脚本，供 Loader 正常读写数据。
+**1. 安装 HugeGraph Server**
 
-#### 3.1.2 执行流程
-
-**安装并启动 HugeGraph Server**
-
-如果您选择手动安装，可以使用以下脚本来安装 HugeGraph Server。该脚本位于任意工具仓库的`/assembly/travis/` 目录下
-用于从指定 commit id 拉取 HugeGraph Server 源码、编译、解压并分别以 http/https 启动服务
 ```bash
-# 示例: 设置要安装的HugeGraph Server版本
-export COMMIT_ID="master"  # 使用master分支最新代码
-# 或
-export COMMIT_ID="8b90977"  # 使用特定的commit hash （以1.5.0版本为例，具体请结合版本兼容自行设置）
-# 然后执行安装
+# 设置版本
+export COMMIT_ID="master"  # 或特定 commit hash，如 "8b90977"
+
+# 执行安装（脚本位于 /assembly/travis/ 目录）
 hugegraph-client/assembly/travis/install-hugegraph-from-source.sh $COMMIT_ID
 ```
 
-*   `$COMMIT_ID`：指定 HugeGraph Server 的 Git Commit ID。
-*   默认http占用端口为8080，https占用端口为8443，请确保其在server启动前未被占用。
-  
-**安装并启动Hadoop (HDFS)** (仅当运行 hugegraph-loader的HDFS 测试时需要)：
-```bash
-hugegraph-loader/assembly/travis/install-hadoop.sh
-```
+- 默认端口：http 8080, https 8443
+- 确保端口未被占用
 
-**安装并启动MySQL** (仅当运行 hugegraph-loader的JDBC 测试时需要)：
+**2. 安装可选依赖**
+
 ```bash
+# Hadoop (仅 Loader HDFS 测试需要)
+hugegraph-loader/assembly/travis/install-hadoop.sh
+
+# MySQL (仅 Loader JDBC 测试需要)
 hugegraph-loader/assembly/travis/install-mysql.sh $DB_DATABASE $DB_PASS
 ```
 
-
-**健康性检查** 
+**3. 健康检查**
 
 ```bash
 curl http://localhost:8080/graphs
+# 返回 {"graphs":["hugegraph"]} 表示成功
 ```
-若返回 `{"graphs":["hugegraph"]}`，则表示服务器已准备就绪，可以接收请求。
 
-### 3.2 使用 Docker 部署测试环境
+### 3.2 Docker 部署
 
-通过使用官方发布的 hugegraph-server Docker 镜像，您可以快速启动一个 HugeGraph Server 容器。这种方式简化了测试环境的搭建、确保环境一致性并提高测试的可重复性。**然而，请注意，Docker 镜像可能不会及时更新到 HugeGraph Server 的最新开发版本。这意味着如果您的工具链代码依赖于 HugeGraph Server 的最新接口或功能，使用 Docker 镜像可能会导致兼容性问题。在这种情况下，建议使用脚本方式部署特定 `COMMIT_ID` 的 HugeGraph Server。**
+> **注意**：Docker 镜像可能版本滞后，如遇兼容性问题请使用脚本部署
 
-#### Docker 快速启动
+#### 快速启动
 
 ```bash
-# 1. 先创建网络
 docker network create hugegraph-net
-
-# 2. 启动 HugeGraph 服务（Service） 并加入 Docker 网络
 docker run -itd --name=server -p 8080:8080 --network hugegraph-net hugegraph/hugegraph:latest
 ```
 
-快速启动一个内置了 RocksDB 的 HugeGraph Server。满足大部分测试与 toolchain 组件运行的要求。
+#### docker-compose 配置（可选）
 
-#### 示例 `docker-compose.yml` 文件
-
-以下是一个示例 `docker-compose.yml` 文件，它定义了 HugeGraph Server、MySQL 和 Hadoop (HDFS) 服务。您可以根据实际测试需求进行调整。请使用 Docker Compose V2 。
+完整配置示例，包含 Server、MySQL、Hadoop 服务（需要 Docker Compose V2）：
 
 ```yaml
 version: '3.8'
@@ -255,333 +229,215 @@ volumes:
 </configuration>
 ```
 
-**说明**：
+#### Docker 操作
 
-*   **`hugegraph-server`**：使用 `hugegraph/hugegraph:latest` 镜像。您可以根据需要替换为特定版本，或者如果您需要从源代码构建 Server，可以创建一个自定义的 Dockerfile 并在此处引用。
-*   **`mysql`**：使用官方 `mysql:5.7` 镜像。`MYSQL_ROOT_PASSWORD` 和 `MYSQL_DATABASE` 可以通过环境变量（`DB_PASS`、`DB_DATABASE`）传入，或者使用默认值。
-*   **`namenode` 和 `datanode`**（注释掉的部分）：如果您需要运行 HugeGraph-Loader 的 HDFS 测试，可以取消注释并配置 Hadoop 服务。
+```bash
+# 启动服务
+docker compose up -d
 
+# 检查状态
+docker compose ps
+lsof -i:8080  # Server
+lsof -i:8020  # Hadoop
+lsof -i:3306  # MySQL
 
-#### 启动和停止 Docker 环境
+# 停止服务
+docker compose down
+```
 
-1.  **保存 `docker-compose.yml`**：将上述内容保存为 `docker-compose.yml` 文件，建议放在 `hugegraph-toolchain` 项目的根目录下或一个独立的 `docker` 目录中。
+## 4. 运行测试
 
-2.  **启动服务**：在 `docker-compose.yml` 文件所在的目录下，运行以下命令启动所有服务：
-
-    ```bash
-    docker compose up -d
-    ```
-    *   `-d` 参数表示在后台运行容器。
-
-3.  **检查服务状态**：您可以使用以下命令检查服务的运行状态：
-
-    ```bash
-    docker compose ps
-    lsof -i:8080 # server端口
-    lsof -i:8020 # hadoop端口
-    lsof -i:3306 # mysql端口
-    ```
-
-4.  **停止服务**：测试完成后，您可以停止并移除所有服务：
-
-    ```bash
-    docker compose down
-    ```
-
-## 4. 开始测试
-
-通常来说，各个工具的本地测试大致流程如下，下面将进行细致的说明
+各工具的测试流程：
 
 <div style="text-align: center;">
-    <img src="./../images/toolchain-test-mermaid-2.png" alt="HugeGraph工具链测试流程图">
+    <img src="/docs/images/toolchain-test-mermaid-2.png" alt="HugeGraph工具链测试流程图">
 </div>
 
-### 4.1 hugegraph-client 本地测试 (Java 版本)
+### 4.1 hugegraph-client
 
-`hugegraph-client` 是 HugeGraph 的 Java 客户端库，用于与 HugeGraph Server 进行交互。其测试主要验证客户端与服务端的通信和数据操作。
-
-#### 4.1.1 编译
-
-首先，编译 `hugegraph-client` 模块：
+#### 编译
 
 ```bash
 mvn -e compile -pl hugegraph-client -Dmaven.javadoc.skip=true -ntp
 ```
 
-*   `-pl hugegraph-client`：指定只编译 `hugegraph-client` 模块。
-*   `-Dmaven.javadoc.skip=true`：跳过 Javadoc 生成。
-*   `-ntp`：不显示传输进度。
+#### 依赖服务
 
-#### 4.1.2 依赖服务安装
+启动 HugeGraph Server（参考 [第3节](#3-部署测试环境)）
 
-按照 [部署测试环境](#3-部署测试环境) 中的说明，启动 `hugegraph-server` 。
+##### Server 鉴权配置
 
-##### server鉴权设置
+> **注意**：Docker 镜像 <= 1.5.0 不支持鉴权测试，需 1.6.0+
 
-> **注意：** Docker 镜像版本 <= 1.5.0 不支持鉴权测试，请确保使用 1.6.0 及以上版本以运行相关测试。
-由于client的ApiTest包含鉴权测试，需确保server的密码与测试代码中相同，否则client与server的数据传递将无法正常进行。若使用client自带的脚本安装并启动server，可跳过此步。
-但若使用其他方式启动，由于默认server并未设置，因此须进行如下鉴权设置。如 `docker exec -it server bash`  进入容器环境进行修改
+ApiTest 需要鉴权配置，使用脚本安装可跳过。使用 Docker 需手动配置：
 
 ```bash
-# 第一步：修改鉴权模式
-# 1. 备份原配置文件
+# 1. 修改鉴权模式
 cp conf/rest-server.properties conf/rest-server.properties.backup
-
-# 找到 `auth.authenticator=` 这一行，并将其修改为 `auth.authenticator=org.apache.hugegraph.auth.StandardAuthenticator`
 sed -i '/^auth.authenticator=/c\auth.authenticator=org.apache.hugegraph.auth.StandardAuthenticator' conf/rest-server.properties
-
-# 3. 确认修改成功
 grep auth.authenticator conf/rest-server.properties
 
-# 第二步：设置密码
+# 2. 设置密码
+# 注：测试代码中默认使用 "pa" 作为密码，设置时需与测试保持一致
 bin/stop-hugegraph.sh
-echo -e "${PASSWORD}" | bin/init-store.sh 
-# 此脚本初始化 HugeGraph 存储并设置默认用户凭据，包括用于鉴权测试的密码，测试时默认使用 "pa"作为密码
+export PASSWORD="pa"  # 设置为测试默认密码
+echo -e "${PASSWORD}" | bin/init-store.sh
 bin/start-hugegraph.sh
 ```
 
-#### 4.1.3 运行测试
-
-进入 `hugegraph-client` 模块目录，并运行测试：
-
-**前置条件检查**:
-```bash
-# 1. 确认在hugegraph-toolchain根目录
-pwd  # 应显示 .../hugegraph-toolchain
-
-# 2. 确认HugeGraph Server已启动
-curl -s http://localhost:8080/graphs
-
-# 3. 如果使用鉴权,确认配置正确
-curl -u admin:<your_password> http://localhost:8080/graphs 
-# 将 <your_password> 替换为实际密码，默认测试密码是 "pa"
-```
+#### 运行测试
 
 ```bash
+# 检查环境
+curl http://localhost:8080/graphs  # 应返回 {"graphs":["hugegraph"]}
+curl -u admin:pa http://localhost:8080/graphs  # 鉴权测试（密码 pa 是测试默认值）
+
+# 运行测试
 cd hugegraph-client
-mvn test -Dtest=UnitTestSuite -ntp
-mvn test -Dtest=ApiTestSuite -ntp
-mvn test -Dtest=FuncTestSuite -ntp
+mvn test -Dtest=UnitTestSuite -ntp      # 单元测试
+mvn test -Dtest=ApiTestSuite -ntp       # API测试（需 Server）
+mvn test -Dtest=FuncTestSuite -ntp      # 功能测试（需 Server）
 ```
 
-*   unit test 主要依赖 `hugegraph-client` 自身的编译，用于测试客户端内部的逻辑。
-*   其他测试模块都需要依赖一个正在运行的 HugeGraph-Server 服务
-*   如果测试失败,检查 server 日志: logs/hugegraph-server.log
+> 测试失败时检查 Server 日志：`logs/hugegraph-server.log`
 
-### 4.2 hugegraph-loader 本地测试
+### 4.2 hugegraph-loader
 
-`hugegraph-loader` 是 HugeGraph 的数据导入工具，支持从多种数据源导入数据。支持从多种数据源（如本地文件、HDFS、关系型数据库等）加载数据到 HugeGraph 中，涉及与 HugeGraph Server、Hadoop、MySQL 等服务的交互。
-
-#### 4.2.1 编译
-
-编译 `hugegraph-client` 和 `hugegraph-loader` 模块：
+#### 编译
 
 ```bash
 mvn install -pl hugegraph-client,hugegraph-loader -am -Dmaven.javadoc.skip=true -DskipTests -ntp
 ```
 
-#### 4.2.2 依赖服务安装 (根据测试类型选择)
+#### 依赖服务
 
-按照 [部署测试环境](#3-部署测试环境) 中的说明，启动 `hugegraph-server`，`Hadoop (HDFS)` (仅当运行 HDFS 测试时需要)， `MySQL` (仅当运行 JDBC 测试时需要)。
+- **必需**：HugeGraph Server
+- **可选**：Hadoop (HDFS 测试)、MySQL (JDBC 测试)
 
-<div style="text-align: center;">
-    <img src="./../images/toolchain-test-mermaid-1.png" alt="HugeGraph Loader 测试流程图">
-</div>
-
-#### 4.2.3 运行测试
-
-进入 `hugegraph-loader` 模块目录，并运行测试。`hugegraph-loader` 的测试通过 Maven Profile 进行分类：
+#### 运行测试
 
 ```bash
 cd hugegraph-loader
-mvn test -P unit -ntp
-mvn test -P file -ntp
-mvn test -P hdfs -ntp
-mvn test -P jdbc -ntp
-mvn test -P kafka -ntp
+mvn test -P unit -ntp   # 单元测试
+mvn test -P file -ntp   # 文件测试（需 Server）
+mvn test -P hdfs -ntp   # HDFS测试（需 Server + Hadoop）
+mvn test -P jdbc -ntp   # JDBC测试（需 Server + MySQL）
+mvn test -P kafka -ntp  # Kafka测试（需 Server）
 ```
 
-*   unit test 主要依赖 `hugegraph-loader` 自身的编译，用于测试 loader 组件内部的逻辑。
-*   其他测试模块都需要依赖一个正在运行的 HugeGraph-Server 服务
-    *   hdfs 还额外依赖一个可用的 Hadoop (HDFS) 环境；
-    *   jdbc 还额外依赖一个可用的 MySQL 数据库。
+### 4.3 hugegraph-hubble
 
-
-**重要提示**：运行特定 Profile 的测试前，请务必确保相应的依赖服务已启动并可访问。
-
-### 4.3 hugegraph-hubble 后端本地测试
-
-`hugegraph-hubble` 是 HugeGraph 的可视化管理工具。其测试包括后端单元测试和 API 测试。
-
-#### 4.3.1 编译
-
-首先，install `hugegraph-client` 和 `hugegraph-loader` (Hubble 间接依赖)，然后编译 `hugegraph-hubble`：
+#### 编译
 
 ```bash
-# 首先，安装 hugegraph-client 和 hugegraph-loader，因为 Hubble 运行依赖它们
 mvn install -pl hugegraph-client,hugegraph-loader -am -Dmaven.javadoc.skip=true -DskipTests -ntp
-# 然后，编译 hugegraph-hubble
 cd hugegraph-hubble
 mvn -e compile -Dmaven.javadoc.skip=true -ntp
 ```
 
-#### 4.3.2 依赖服务安装
+#### 依赖服务
 
-**1. 启动 HugeGraph Server**
+**1. 启动 Server**（参考 [第3节](#3-部署测试环境)）
 
-按照 [部署测试环境](#3-部署测试环境) 启动 HugeGraph Server。
-
-**2. 安装 Python 依赖**
-
-Hubble 的某些功能需要 Python 支持:
+**2. Python 环境**
 
 ```bash
-# 推荐使用虚拟环境
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
-
-# 安装依赖
-cd hugegraph-hubble
 python -m pip install -r hubble-dist/assembly/travis/requirements.txt
 ```
 
-**3. 构建 Hubble 包**
+**3. 构建并验证**
 
 ```bash
-# 在 hugegraph-hubble 目录下
 mvn package -Dmaven.test.skip=true
-
-# 验证构建产物
-ls apache-hugegraph-hubble-incubating-*/
-```
-
-**4. 验证 Hubble 可执行性 (可选,用于确认环境正确)**
-
-```bash
-# 当版本为1.5.0时
-cd apache-hugegraph-hubble-incubating-1.5.0/bin
-./start-hubble.sh -d
-sleep 10
-curl http://localhost:8088/api/health  # 检查 Hubble 健康状态
+# 可选：启动验证
+cd apache-hugegraph-hubble-incubating-*/bin
+./start-hubble.sh -d && sleep 10
+curl http://localhost:8088/api/health
 ./stop-hubble.sh
 ```
 
-#### 4.3.3 运行测试
-
-进入 `hugegraph-hubble` 模块目录，并运行测试：
+#### 运行测试
 
 ```bash
-mvn test -P unit-test -pl hugegraph-hubble/hubble-be -ntp # 单元测试
+# 单元测试
+mvn test -P unit-test -pl hugegraph-hubble/hubble-be -ntp
 
-# API测试需要HugeGraph Server和Hubble服务都在运行。
-
-# 1. 确认Server运行在8080端口
-curl http://localhost:8080/graphs
-
-# 2. 确认Hubble运行在8088端口
-curl http://localhost:8088/api/health
-
-# 3. 执行API测试
+# API测试（需 Server + Hubble 运行）
+curl http://localhost:8080/graphs  # 检查 Server
+curl http://localhost:8088/api/health  # 检查 Hubble
 cd hugegraph-hubble/hubble-dist
-hubble-dist/assembly/travis/run-api-test.sh #API测试
+./assembly/travis/run-api-test.sh
 ```
 
-*  unit test 主要依赖 `hubble-be` 自身的编译, 运行 Hubble 后端（Java 部分）的单元测试。
-*  run-api-test需要依赖一个正在运行的 HugeGraph-Server 服务，以及client与loader的正常运行。
+### 4.4 hugegraph-spark-connector
 
-**重要提示**：运行 API 测试前，请务必完成client与loader的install，并确保 HugeGraph Server 和 HugeGraph-Hubble 服务均已启动并可访问。
-
-### 4.4 hugegraph-spark-connector 本地测试
-
-`hugegraph-spark-connector` 提供了 HugeGraph 与 Apache Spark 的集成能力。其测试主要验证 Spark 与 HugeGraph 的数据连接和操作。
-
-#### 4.4.1 编译
-
-编译 `hugegraph-client` 和 `hugegraph-spark-connector` 模块：
+#### 编译
 
 ```bash
 mvn install -pl hugegraph-client,hugegraph-spark-connector -am -Dmaven.javadoc.skip=true -DskipTests -ntp
 ```
 
-#### 4.4.2 依赖服务安装
-
-按照 [部署测试环境](#3-部署测试环境) 中的说明，启动 `hugegraph-server` 。
-
-#### 4.4.3 运行测试
-
-进入 `hugegraph-spark-connector` 模块目录，并运行测试：
+#### 运行测试
 
 ```bash
 cd hugegraph-spark-connector
-mvn test -ntp
+mvn test -ntp  # 需 Server 运行
 ```
 
-* 一个正在运行的 HugeGraph Server。这些测试会通过 Spark 连接 HugeGraph Server。
+### 4.5 hugegraph-tools
 
-### 4.5 hugegraph-tools 本地测试
-
-`hugegraph-tools` 提供了 HugeGraph 的命令行工具集，用于数据管理、备份恢复等操作。其测试主要验证这些工具的功能。
-
-#### 4.5.1 编译
-
-编译 `hugegraph-client` 和 `hugegraph-tools` 模块：
+#### 编译
 
 ```bash
 mvn install -pl hugegraph-client,hugegraph-tools -am -Dmaven.javadoc.skip=true -DskipTests -ntp
 ```
 
-#### 4.5.2 依赖服务安装
-
-按照 [部署测试环境](#3-部署测试环境) 中的说明，启动 `hugegraph-server` 。
-
-#### 4.5.3 运行测试
-
-进入 `hugegraph-tools` 模块目录，并运行功能测试：
+#### 运行测试
 
 ```bash
 cd hugegraph-tools
-mvn test -Dtest=FuncTestSuite -pl hugegraph-tools -ntp
+mvn test -Dtest=FuncTestSuite -ntp  # 需 Server 运行
 ```
 
-* 依赖一个正在运行的 HugeGraph Server 和 `hugegraph-client` 的正常编译。
+## 5. 常见问题
 
+### 服务连接问题
 
-## 5. 常见问题与故障排除
+**症状**：无法连接 Server/MySQL/Hadoop
 
-本节列举了在 HugeGraph 工具链本地测试过程中可能遇到的一些常见问题及其排查方法。
+**排查**：
+- 确认服务已启动（Server 必须在 8080 端口）
+- 检查端口占用：`lsof -i:8080`
+- Docker 检查：`docker compose ps` 和 `docker compose logs`
 
-*   **服务未启动或端口冲突**：
-    *   **问题描述**：测试失败，提示无法连接到 HugeGraph Server、MySQL 或其他依赖服务。
-    *   **排查方法**：
-        *   确认所有必要的依赖服务（HugeGraph Server、MySQL、Hadoop 等）已正确启动，且必须确保server的http服务运行在8080端口。
-        *   检查服务监听的端口是否与测试配置一致，并且没有被其他程序占用。您可以使用 `lsof -i:<端口号>` (Linux/macOS) 或 `netstat -ano | findstr :<端口号>` (Windows) 来检查端口占用情况。
-        *   如果使用 Docker，请检查 `docker compose ps` 输出，确保所有容器都处于 `Up` 状态，并检查容器日志 (`docker compose logs <service_name>`)。
+### 配置问题
 
-*   **环境变量或参数配置错误**：
-    *   **问题描述**：命令执行失败，提示找不到文件、权限不足或参数无效。
-    *   **排查方法**：
-        *   仔细检查您设置的环境变量（如 `$COMMIT_ID`、`$DB_DATABASE`、`$DB_PASS`）是否正确，并且在执行命令的 shell 会话中已生效。
-        *   确认 Maven 命令参数和 Shell 脚本参数的拼写和用法是否正确，参考 [3.1.1 变量与参数](#311-变量与参数) 章节。
-        *   如遇脚本权限问题，先执行：`chmod +x hugegraph-*/assembly/travis/*.sh`。
+**症状**：找不到文件、参数错误
 
-*   **HDFS 测试问题**：
-    *   **问题描述**：HugeGraph-Loader 的 HDFS 测试失败。
-    *   **排查方法**：
-        *   确保 Hadoop 的 NameNode 和 DataNode 服务正常运行，并且 HDFS 文件系统可访问。
-        *   检查 Hadoop 的日志，特别是 DataNode 的日志，确保数据块正常复制和操作。
-        *   如果使用 Docker，请确保 Hadoop 服务健康运行，并且测试程序能够正确连接到 HDFS 服务。
+**排查**：
+- 检查环境变量：`echo $COMMIT_ID`
+- 脚本权限：`chmod +x hugegraph-*/assembly/travis/*.sh`
 
-*   **JDBC 测试问题**：
-    *   **问题描述**：HugeGraph-Loader 的 JDBC 测试失败。
-    *   **排查方法**：
-        *   确保 MySQL 数据库服务正常运行，并且您提供的数据库名、用户名和密码正确。
-        *   检查 MySQL 的日志，看是否有连接或权限问题。
-        *   如果使用 Docker，请确保 MySQL 服务健康运行，并且测试程序能够正确连接到 MySQL 服务。
+### HDFS 测试失败
+
+**排查**：
+- 确认 NameNode/DataNode 运行正常
+- 检查 Hadoop 日志
+- 验证 HDFS 连接：`hdfs dfsadmin -report`
+
+### JDBC 测试失败
+
+**排查**：
+- 确认 MySQL 运行正常
+- 验证数据库连接：`mysql -u root -p$DB_PASS`
+- 检查 MySQL 日志
 
 ## 6. 参考资料
 
 *   **HugeGraph GitHub 仓库**：[https://github.com/apache/hugegraph](https://github.com/apache/hugegraph)
 *   **HugeGraph 工具链 GitHub 仓库**：[https://github.com/apache/hugegraph-toolchain](https://github.com/apache/hugegraph-toolchain)
-*   **HugeGraph Server 官方文档**：[https://hugegraph.apache.org/docs/](https://hugegraph.apache.org/docs/)
+*   **HugeGraph Server 官方文档**：[https://hugegraph.apache.org/cn/docs/quickstart/hugegraph/hugegraph-server/](https://hugegraph.apache.org/cn/docs/quickstart/hugegraph/hugegraph-server/)
 *   **CI 脚本路径**：`.github/workflows/*-ci.yml`（HugeGraph 工具链项目中的 CI 配置文件，可作为参考）
-*   **依赖服务安装脚本**：`hugegraph-*/assembly/travis/`（HugeGraph 工具链项目中用于 Travis CI 的安装脚本，可作为手动安装的参考）
+*   **依赖服务安装脚本**：`hugegraph-*/assembly/travis/`（HugeGraph 工具链项目中用于 CI 和本地测试的安装脚本，可直接使用或作为参考）
