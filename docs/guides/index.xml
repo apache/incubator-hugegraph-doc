@@ -487,7 +487,335 @@ items defined above inside it. The interface &lt;code>org.apache.hugegraph.plugi
 &lt;/ol>
 &lt;h4 id="5-make-jar-package">5. Make Jar package&lt;/h4>
 &lt;p>Through maven packaging, execute the command in the project directory mvn package, and a Jar package file will be generated in the
-target directory. Copy the Jar package to the &lt;code>plugins&lt;/code> directory when using it, and restart the service to take effect.&lt;/p></description></item><item><title>Docs: Backup and Restore</title><link>/docs/guides/backup-restore/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/guides/backup-restore/</guid><description>
+target directory. Copy the Jar package to the &lt;code>plugins&lt;/code> directory when using it, and restart the service to take effect.&lt;/p></description></item><item><title>Docs: HugeGraph Toolchain Local Testing Guide</title><link>/docs/guides/toolchain-local-test/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/guides/toolchain-local-test/</guid><description>
+&lt;p>This guide helps developers run HugeGraph toolchain tests locally.&lt;/p>
+&lt;h2 id="1-core-concepts">1. Core Concepts&lt;/h2>
+&lt;h3 id="11-core-dependency-hugegraph-server">1.1 Core Dependency: HugeGraph Server&lt;/h3>
+&lt;p>&lt;strong>Integration and functional tests of the toolchain depend on HugeGraph Server&lt;/strong>, including Client, Loader, Hubble, Spark Connector, Tools, and other components.&lt;/p>
+&lt;h3 id="12-test-types">1.2 Test Types&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Unit Tests&lt;/strong>: Test individual functions/methods, no external dependencies required&lt;/li>
+&lt;li>&lt;strong>API Tests (ApiTestSuite)&lt;/strong>: Test API interfaces, requires running HugeGraph Server&lt;/li>
+&lt;li>&lt;strong>Functional Tests (FuncTestSuite)&lt;/strong>: End-to-end tests, require complete system environment&lt;/li>
+&lt;/ul>
+&lt;h2 id="2-environment-setup">2. Environment Setup&lt;/h2>
+&lt;h3 id="21-system-requirements">2.1 System Requirements&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Operating System&lt;/strong>: Linux / macOS (Windows use WSL2)&lt;/li>
+&lt;li>&lt;strong>JDK&lt;/strong>: &amp;gt;= 11, configure &lt;code>JAVA_HOME&lt;/code>&lt;/li>
+&lt;li>&lt;strong>Maven&lt;/strong>: &amp;gt;= 3.5&lt;/li>
+&lt;li>&lt;strong>Python&lt;/strong>: &amp;gt;= 3.11 (only required for Hubble tests)&lt;/li>
+&lt;/ul>
+&lt;h3 id="22-clone-code">2.2 Clone Code&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone https://github.com/&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">GITHUB_USER_NAME&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>/hugegraph-toolchain.git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-toolchain
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="3-deploy-test-environment">3. Deploy Test Environment&lt;/h2>
+&lt;h3 id="deployment-options">Deployment Options&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Script Deployment (Recommended)&lt;/strong>: Precisely control Server version by specifying Commit ID, avoid interface incompatibility&lt;/li>
+&lt;li>&lt;strong>Docker Deployment&lt;/strong>: Quick start, but may have version lag causing test failures&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>For detailed installation instructions, refer to &lt;a href="https://hugegraph.apache.org/docs/quickstart/hugegraph/hugegraph-server/">Community Documentation&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="31-script-deployment-recommended">3.1 Script Deployment (Recommended)&lt;/h3>
+&lt;h4 id="parameter-description">Parameter Description&lt;/h4>
+&lt;ul>
+&lt;li>&lt;strong>&lt;code>$COMMIT_ID&lt;/code>&lt;/strong>: Specify Server source code Git Commit ID&lt;/li>
+&lt;li>&lt;strong>&lt;code>$DB_DATABASE&lt;/code> / &lt;code>$DB_PASS&lt;/code>&lt;/strong>: MySQL database name and password for Loader JDBC tests&lt;/li>
+&lt;/ul>
+&lt;h4 id="deployment-steps">Deployment Steps&lt;/h4>
+&lt;p>&lt;strong>1. Install HugeGraph Server&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Set version&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">export&lt;/span> &lt;span style="color:#000">COMMIT_ID&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;master&amp;#34;&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># Or specific commit hash, e.g. &amp;#34;8b90977&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Execute installation (script located in /assembly/travis/ directory)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugegraph-client/assembly/travis/install-hugegraph-from-source.sh &lt;span style="color:#000">$COMMIT_ID&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>Default ports: http 8080, https 8443&lt;/li>
+&lt;li>Ensure ports are not occupied&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>2. Install Optional Dependencies&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Hadoop (only required for Loader HDFS tests)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugegraph-loader/assembly/travis/install-hadoop.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># MySQL (only required for Loader JDBC tests)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugegraph-loader/assembly/travis/install-mysql.sh &lt;span style="color:#000">$DB_DATABASE&lt;/span> &lt;span style="color:#000">$DB_PASS&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>3. Health Check&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl http://localhost:8080/graphs
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Returns {&amp;#34;graphs&amp;#34;:[&amp;#34;hugegraph&amp;#34;]} indicates success&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="32-docker-deployment">3.2 Docker Deployment&lt;/h3>
+&lt;blockquote>
+&lt;p>&lt;strong>Note&lt;/strong>: Docker images may have version lag, use script deployment if encountering compatibility issues&lt;/p>
+&lt;/blockquote>
+&lt;h4 id="quick-start">Quick Start&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker network create hugegraph-net
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>docker run -itd --name&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>server -p 8080:8080 --network hugegraph-net hugegraph/hugegraph:latest
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="docker-compose-configuration-optional">docker-compose Configuration (Optional)&lt;/h4>
+&lt;p>Complete configuration example including Server, MySQL, Hadoop services (requires Docker Compose V2):&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3.8&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hugegraph-server&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:latest &lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Can be replaced with a specific version, or build your own image&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph-server&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">ports&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#4e9a06">&amp;#34;8080:8080&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># HugeGraph Server HTTP port&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">environment&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Configure HugeGraph Server parameters as needed, e.g., backend storage&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#000">HUGEGRAPH_SERVER_OPTIONS=&amp;#34;-Dstore.backend=rocksdb&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">volumes&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># If you need to persist data or mount configuration files, add volumes here&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - ./hugegraph-data:/opt/hugegraph/data&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">healthcheck&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">test&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;CMD-SHELL&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;curl -f http://localhost:8080/graphs || exit 1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">interval&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">10s&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">timeout&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">3s&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">retries&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">networks&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#000">hugegraph-net&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># If you need JDBC tests for hugegraph-loader, you can add the following service&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># mysql:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># image: mysql:5.7&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># container_name: mysql-db&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># environment:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># MYSQL_ROOT_PASSWORD: ${DB_PASS:-your_mysql_root_password} # Read from environment variable, or use default&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># MYSQL_DATABASE: ${DB_DATABASE:-hugegraph_test_db} # Read from environment variable, or use default&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># ports:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - &amp;#34;3306:3306&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># volumes:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - ./mysql-data:/var/lib/mysql # Data persistence&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># healthcheck:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># test: [&amp;#34;CMD&amp;#34;, &amp;#34;mysqladmin&amp;#34;, &amp;#34;ping&amp;#34;, &amp;#34;-h&amp;#34;, &amp;#34;localhost&amp;#34;, &amp;#34;-p${DB_PASS:-your_mysql_root_password}&amp;#34;]&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># interval: 5s&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># timeout: 3s&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># retries: 5&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># networks:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - hugegraph-net&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># If you need Hadoop/HDFS tests for hugegraph-loader, you can add the following services&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># namenode:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># image: johannestang/hadoop-namenode:2.0.0-hadoop2.8.5-java8&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># container_name: namenode&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># ports:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - &amp;#34;0.0.0.0:9870:9870&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - &amp;#34;0.0.0.0:8020:8020&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># environment:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - CLUSTER_NAME=test-cluster&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - HDFS_NAMENODE_USER=root&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - HADOOP_CONF_DIR=/hadoop/etc/hadoop&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># volumes:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - ./config/core-site.xml:/hadoop/etc/hadoop/core-site.xml&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - ./config/hdfs-site.xml:/hadoop/etc/hadoop/hdfs-site.xml&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - namenode_data:/hadoop/dfs/name&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># command: bash -c &amp;#34;if [ ! -d /hadoop/dfs/name/current ]; then hdfs namenode -format; fi &amp;amp;&amp;amp; /entrypoint.sh&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># healthcheck:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># test: [&amp;#34;CMD&amp;#34;, &amp;#34;hdfs&amp;#34;, &amp;#34;dfsadmin&amp;#34;, &amp;#34;-report&amp;#34;]&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># interval: 5s&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># timeout: 3s&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># retries: 5&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># networks:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - hugegraph-net&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># datanode:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># image: johannestang/hadoop-datanode:2.0.0-hadoop2.8.5-java8&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># container_name: datanode&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># depends_on:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - namenode&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># environment:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - CLUSTER_NAME=test-cluster&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - HDFS_DATANODE_USER=root&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - HADOOP_CONF_DIR=/hadoop/etc/hadoop&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># volumes:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - ./config/core-site.xml:/hadoop/etc/hadoop/core-site.xml&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - ./config/hdfs-site.xml:/hadoop/etc/hadoop/hdfs-site.xml&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - datanode_data:/hadoop/dfs/data&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># healthcheck:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># test: [&amp;#34;CMD&amp;#34;, &amp;#34;hdfs&amp;#34;, &amp;#34;dfsadmin&amp;#34;, &amp;#34;-report&amp;#34;]&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># interval: 5s&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># timeout: 3s&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># retries: 5&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># networks:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># - hugegraph-net&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">networks&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hugegraph-net&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">driver&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">bridge&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">volumes&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">namenode_data&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">datanode_data&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="hadoop-configuration-mounts">Hadoop Configuration Mounts&lt;/h4>
+&lt;p>Create a &lt;code>./config&lt;/code> folder in the same directory as &lt;code>docker-compose.yml&lt;/code> to mount Hadoop configuration files. You can skip this step if HDFS testing is not required.&lt;/p>
+&lt;p>📁 &lt;code>./config/core-site.xml&lt;/code> content:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">&amp;lt;configuration&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;property&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;name&amp;gt;&lt;/span>fs.defaultFS&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/name&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;value&amp;gt;&lt;/span>hdfs://namenode:8020&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/value&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;/property&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/configuration&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>📁 &lt;code>./config/hdfs-site.xml&lt;/code> content:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">&amp;lt;configuration&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;property&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;name&amp;gt;&lt;/span>dfs.namenode.name.dir&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/name&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;value&amp;gt;&lt;/span>/hadoop/hdfs/name&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/value&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;/property&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;property&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;name&amp;gt;&lt;/span>dfs.datanode.data.dir&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/name&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;value&amp;gt;&lt;/span>/hadoop/hdfs/data&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/value&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;/property&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;property&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;name&amp;gt;&lt;/span>dfs.permissions.superusergroup&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/name&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;value&amp;gt;&lt;/span>hadoop&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/value&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;/property&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;property&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;name&amp;gt;&lt;/span>dfs.support.append&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/name&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;value&amp;gt;&lt;/span>true&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/value&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;/property&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/configuration&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="docker-operations">Docker Operations&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Start services&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>docker compose up -d
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Check status&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>docker compose ps
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>lsof -i:8080 &lt;span style="color:#8f5902;font-style:italic"># Server&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>lsof -i:8020 &lt;span style="color:#8f5902;font-style:italic"># Hadoop&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>lsof -i:3306 &lt;span style="color:#8f5902;font-style:italic"># MySQL&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Stop services&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>docker compose down
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="4-run-tests">4. Run Tests&lt;/h2>
+&lt;p>Test process for each tool:&lt;/p>
+&lt;div style="text-align: center;">
+&lt;img src="/docs/images/toolchain-test-mermaid-2.png" alt="HugeGraph Toolchain Testing Process">
+&lt;/div>
+&lt;h3 id="41-hugegraph-client">4.1 hugegraph-client&lt;/h3>
+&lt;h4 id="compile">Compile&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mvn -e compile -pl hugegraph-client -Dmaven.javadoc.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">true&lt;/span> -ntp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="dependent-services">Dependent Services&lt;/h4>
+&lt;p>Start HugeGraph Server (refer to &lt;a href="#3-deploy-test-environment">Section 3&lt;/a>)&lt;/p>
+&lt;h5 id="server-authentication-configuration">Server Authentication Configuration&lt;/h5>
+&lt;blockquote>
+&lt;p>&lt;strong>Note&lt;/strong>: Docker images &amp;lt;= 1.5.0 don&amp;rsquo;t support authentication tests, need 1.6.0+&lt;/p>
+&lt;/blockquote>
+&lt;p>ApiTest requires authentication configuration. Skip this if using script installation. Manual configuration needed for Docker:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 1. Modify authentication mode&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cp conf/rest-server.properties conf/rest-server.properties.backup
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sed -i &lt;span style="color:#4e9a06">&amp;#39;/^auth.authenticator=/c\auth.authenticator=org.apache.hugegraph.auth.StandardAuthenticator&amp;#39;&lt;/span> conf/rest-server.properties
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>grep auth.authenticator conf/rest-server.properties
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 2. Set password&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Note: Test code uses &amp;#34;pa&amp;#34; as default password, must match for tests to work&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/stop-hugegraph.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">export&lt;/span> &lt;span style="color:#000">PASSWORD&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;pa&amp;#34;&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># Set to test default password&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">echo&lt;/span> -e &lt;span style="color:#4e9a06">&amp;#34;&lt;/span>&lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">PASSWORD&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;&lt;/span> &lt;span style="color:#000;font-weight:bold">|&lt;/span> bin/init-store.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/start-hugegraph.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="run-tests">Run Tests&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Check environment&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl http://localhost:8080/graphs &lt;span style="color:#8f5902;font-style:italic"># Should return {&amp;#34;graphs&amp;#34;:[&amp;#34;hugegraph&amp;#34;]}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl -u admin:pa http://localhost:8080/graphs &lt;span style="color:#8f5902;font-style:italic"># Authentication test (pa is test default password)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Run tests&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-client
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn &lt;span style="color:#204a87">test&lt;/span> -Dtest&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>UnitTestSuite -ntp &lt;span style="color:#8f5902;font-style:italic"># Unit tests&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn &lt;span style="color:#204a87">test&lt;/span> -Dtest&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>ApiTestSuite -ntp &lt;span style="color:#8f5902;font-style:italic"># API tests (requires Server)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn &lt;span style="color:#204a87">test&lt;/span> -Dtest&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>FuncTestSuite -ntp &lt;span style="color:#8f5902;font-style:italic"># Functional tests (requires Server)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>Check Server log if tests fail: &lt;code>logs/hugegraph-server.log&lt;/code>&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="42-hugegraph-loader">4.2 hugegraph-loader&lt;/h3>
+&lt;h4 id="compile-1">Compile&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mvn install -pl hugegraph-client,hugegraph-loader -am -Dmaven.javadoc.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">true&lt;/span> -DskipTests -ntp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="dependent-services-1">Dependent Services&lt;/h4>
+&lt;ul>
+&lt;li>&lt;strong>Required&lt;/strong>: HugeGraph Server&lt;/li>
+&lt;li>&lt;strong>Optional&lt;/strong>: Hadoop (HDFS tests), MySQL (JDBC tests)&lt;/li>
+&lt;/ul>
+&lt;h4 id="run-tests-1">Run Tests&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-loader
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn &lt;span style="color:#204a87">test&lt;/span> -P unit -ntp &lt;span style="color:#8f5902;font-style:italic"># Unit tests&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn &lt;span style="color:#204a87">test&lt;/span> -P file -ntp &lt;span style="color:#8f5902;font-style:italic"># File tests (requires Server)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn &lt;span style="color:#204a87">test&lt;/span> -P hdfs -ntp &lt;span style="color:#8f5902;font-style:italic"># HDFS tests (requires Server + Hadoop)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn &lt;span style="color:#204a87">test&lt;/span> -P jdbc -ntp &lt;span style="color:#8f5902;font-style:italic"># JDBC tests (requires Server + MySQL)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn &lt;span style="color:#204a87">test&lt;/span> -P kafka -ntp &lt;span style="color:#8f5902;font-style:italic"># Kafka tests (requires Server)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="43-hugegraph-hubble">4.3 hugegraph-hubble&lt;/h3>
+&lt;h4 id="compile-2">Compile&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mvn install -pl hugegraph-client,hugegraph-loader -am -Dmaven.javadoc.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">true&lt;/span> -DskipTests -ntp
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-hubble
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn -e compile -Dmaven.javadoc.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">true&lt;/span> -ntp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="dependent-services-2">Dependent Services&lt;/h4>
+&lt;p>&lt;strong>1. Start Server&lt;/strong> (refer to &lt;a href="#3-deploy-test-environment">Section 3&lt;/a>)&lt;/p>
+&lt;p>&lt;strong>2. Python Environment&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>python -m venv venv
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">source&lt;/span> venv/bin/activate &lt;span style="color:#8f5902;font-style:italic"># Windows: venv\Scripts\activate&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>python -m pip install -r hubble-dist/assembly/travis/requirements.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>3. Build and Verify&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mvn package -Dmaven.test.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Optional: Start and verify&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> apache-hugegraph-hubble-incubating-*/bin
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./start-hubble.sh -d &lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&amp;amp;&lt;/span> sleep &lt;span style="color:#0000cf;font-weight:bold">10&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl http://localhost:8088/api/health
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./stop-hubble.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="run-tests-2">Run Tests&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Unit tests&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn &lt;span style="color:#204a87">test&lt;/span> -P unit-test -pl hugegraph-hubble/hubble-be -ntp
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># API tests (requires Server + Hubble running)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl http://localhost:8080/graphs &lt;span style="color:#8f5902;font-style:italic"># Check Server&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl http://localhost:8088/api/health &lt;span style="color:#8f5902;font-style:italic"># Check Hubble&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-hubble/hubble-dist
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./assembly/travis/run-api-test.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="44-hugegraph-spark-connector">4.4 hugegraph-spark-connector&lt;/h3>
+&lt;h4 id="compile-3">Compile&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mvn install -pl hugegraph-client,hugegraph-spark-connector -am -Dmaven.javadoc.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">true&lt;/span> -DskipTests -ntp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="run-tests-3">Run Tests&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-spark-connector
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn &lt;span style="color:#204a87">test&lt;/span> -ntp &lt;span style="color:#8f5902;font-style:italic"># Requires Server running&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="45-hugegraph-tools">4.5 hugegraph-tools&lt;/h3>
+&lt;h4 id="compile-4">Compile&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mvn install -pl hugegraph-client,hugegraph-tools -am -Dmaven.javadoc.skip&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">true&lt;/span> -DskipTests -ntp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="run-tests-4">Run Tests&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-tools
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn &lt;span style="color:#204a87">test&lt;/span> -Dtest&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>FuncTestSuite -ntp &lt;span style="color:#8f5902;font-style:italic"># Requires Server running&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="5-common-issues">5. Common Issues&lt;/h2>
+&lt;h3 id="service-connection-issues">Service Connection Issues&lt;/h3>
+&lt;p>&lt;strong>Symptoms&lt;/strong>: Cannot connect to Server/MySQL/Hadoop&lt;/p>
+&lt;p>&lt;strong>Troubleshooting&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Confirm services are running (Server must be on port 8080)&lt;/li>
+&lt;li>Check port usage: &lt;code>lsof -i:8080&lt;/code>&lt;/li>
+&lt;li>Docker check: &lt;code>docker compose ps&lt;/code> and &lt;code>docker compose logs&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h3 id="configuration-issues">Configuration Issues&lt;/h3>
+&lt;p>&lt;strong>Symptoms&lt;/strong>: File not found, parameter errors&lt;/p>
+&lt;p>&lt;strong>Troubleshooting&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Check environment variables: &lt;code>echo $COMMIT_ID&lt;/code>&lt;/li>
+&lt;li>Script permissions: &lt;code>chmod +x hugegraph-*/assembly/travis/*.sh&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h3 id="hdfs-test-failures">HDFS Test Failures&lt;/h3>
+&lt;p>&lt;strong>Troubleshooting&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Confirm NameNode/DataNode running normally&lt;/li>
+&lt;li>Check Hadoop logs&lt;/li>
+&lt;li>Verify HDFS connection: &lt;code>hdfs dfsadmin -report&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h3 id="jdbc-test-failures">JDBC Test Failures&lt;/h3>
+&lt;p>&lt;strong>Troubleshooting&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Confirm MySQL running normally&lt;/li>
+&lt;li>Verify database connection: &lt;code>mysql -u root -p$DB_PASS&lt;/code>&lt;/li>
+&lt;li>Check MySQL logs&lt;/li>
+&lt;/ul>
+&lt;h2 id="6-references">6. References&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>HugeGraph GitHub Repository&lt;/strong>: &lt;a href="https://github.com/apache/hugegraph">https://github.com/apache/hugegraph&lt;/a>&lt;/li>
+&lt;li>&lt;strong>HugeGraph Toolchain GitHub Repository&lt;/strong>: &lt;a href="https://github.com/apache/hugegraph-toolchain">https://github.com/apache/hugegraph-toolchain&lt;/a>&lt;/li>
+&lt;li>&lt;strong>HugeGraph Server Official Documentation&lt;/strong>: &lt;a href="https://hugegraph.apache.org/docs/quickstart/hugegraph/hugegraph-server/">https://hugegraph.apache.org/docs/quickstart/hugegraph/hugegraph-server/&lt;/a>&lt;/li>
+&lt;li>&lt;strong>CI Script Path&lt;/strong>: &lt;code>.github/workflows/*-ci.yml&lt;/code> (CI configuration files in the HugeGraph toolchain project, which can be used as a reference)&lt;/li>
+&lt;li>&lt;strong>Dependent Service Installation Scripts&lt;/strong>: &lt;code>hugegraph-*/assembly/travis/&lt;/code> (Installation scripts for CI and local testing in the HugeGraph toolchain project, can be used directly or as a reference)&lt;/li>
+&lt;/ul></description></item><item><title>Docs: Backup and Restore</title><link>/docs/guides/backup-restore/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/guides/backup-restore/</guid><description>
 &lt;h2 id="description">Description&lt;/h2>
 &lt;p>Backup and Restore are functions of backup map and restore map. The data backed up and restored includes metadata (schema) and graph data (vertex and edge).&lt;/p>
 &lt;h4 id="backup">Backup&lt;/h4>

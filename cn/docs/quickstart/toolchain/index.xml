@@ -3,6 +3,7 @@
 &lt;blockquote>
 &lt;p>&lt;strong>特别注意:&lt;/strong> 当前版本的 Hubble 还没有添加 Auth/Login 相关界面和接口和单独防护, 在下一个 Release 版 (＞ 1.5) 会加入,
 请留意避免把它暴露在公网环境或不受信任的网络中，以免引起相关 SEC 问题 (另外也可以使用 &lt;strong>IP &amp;amp; 端口&lt;/strong>白名单 + HTTPS)&lt;/p>
+&lt;p>&lt;strong>测试指南&lt;/strong>：如需在本地运行 Hubble 测试，请参考 &lt;a href="/cn/docs/guides/toolchain-local-test">工具链本地测试指南&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;p>&lt;strong>HugeGraph-Hubble&lt;/strong> 是 HugeGraph 的一站式可视化分析平台，平台涵盖了从数据建模，到数据快速导入，
 再到数据的在线、离线分析、以及图的统一管理的全过程，实现了图应用的全流程向导式操作，旨在提升用户的使用流畅度，
@@ -447,7 +448,8 @@
 &lt;p>本地磁盘文件和 HDFS 文件支持断点续传。&lt;/p>
 &lt;p>后面会具体说明。&lt;/p>
 &lt;blockquote>
-&lt;p>注意：使用 HugeGraph-Loader 需要依赖 HugeGraph Server 服务，下载和启动 Server 请参考 &lt;a href="/cn/docs/quickstart/hugegraph/hugegraph-server">HugeGraph-Server Quick Start&lt;/a>&lt;/p>
+&lt;p>&lt;strong>注意&lt;/strong>：使用 HugeGraph-Loader 需要依赖 HugeGraph Server 服务，下载和启动 Server 请参考 &lt;a href="/cn/docs/quickstart/hugegraph/hugegraph-server">HugeGraph-Server Quick Start&lt;/a>&lt;/p>
+&lt;p>&lt;strong>测试指南&lt;/strong>：如需在本地运行 Loader 测试，请参考 &lt;a href="/cn/docs/guides/toolchain-local-test">工具链本地测试指南&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="2-获取-hugegraph-loader">2 获取 HugeGraph-Loader&lt;/h3>
 &lt;p>有两种方式可以获取 HugeGraph-Loader：&lt;/p>
@@ -1585,6 +1587,9 @@ HugeGraph Toolchain 版本：toolchain-1.0.0&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: HugeGraph-Tools Quick Start</title><link>/cn/docs/quickstart/toolchain/hugegraph-tools/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/toolchain/hugegraph-tools/</guid><description>
 &lt;h3 id="1-hugegraph-tools概述">1 HugeGraph-Tools概述&lt;/h3>
 &lt;p>HugeGraph-Tools 是 HugeGraph 的自动化部署、管理和备份/还原组件。&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>测试指南&lt;/strong>：如需在本地运行 Tools 测试，请参考 &lt;a href="/cn/docs/guides/toolchain-local-test">工具链本地测试指南&lt;/a>&lt;/p>
+&lt;/blockquote>
 &lt;h3 id="2-获取-hugegraph-tools">2 获取 HugeGraph-Tools&lt;/h3>
 &lt;p>有两种方式可以获取 HugeGraph-Tools：(它被包含子 Toolchain 中)&lt;/p>
 &lt;ul>

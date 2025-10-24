@@ -6,6 +6,9 @@ standalone protection, it will be added in the next Release version (＞ 1.5).
 Please be careful not to expose it in a public network environment or untrusted networks to
 avoid related SEC issues (you can also use IP &amp;amp; port &lt;strong>whitelist&lt;/strong> + HTTPS)&lt;/p>
 &lt;/blockquote>
+&lt;blockquote>
+&lt;p>&lt;strong>Testing Guide&lt;/strong>: For running HugeGraph-Hubble tests locally, please refer to &lt;a href="/docs/guides/toolchain-local-test">HugeGraph Toolchain Local Testing Guide&lt;/a>&lt;/p>
+&lt;/blockquote>
 &lt;p>&lt;strong>HugeGraph-Hubble&lt;/strong> is HugeGraph&amp;rsquo;s one-stop visual analysis platform. The platform covers the whole
 process from data modeling, to efficient data import, to real-time and offline analysis of data, and
 unified management of graphs, realizing the whole process wizard of graph application. It is designed
@@ -473,6 +476,9 @@ error retry mechanism, etc., which reduces import costs and improves efficiency.
 &lt;p>It will be explained in detail below.&lt;/p>
 &lt;blockquote>
 &lt;p>Note: HugeGraph-Loader requires HugeGraph Server service, please refer to &lt;a href="/docs/quickstart/hugegraph/hugegraph-server">HugeGraph-Server Quick Start&lt;/a> to download and start Server&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>&lt;strong>Testing Guide&lt;/strong>: For running HugeGraph-Loader tests locally, please refer to &lt;a href="/docs/guides/toolchain-local-test">HugeGraph Toolchain Local Testing Guide&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="2-get-hugegraph-loader">2 Get HugeGraph-Loader&lt;/h3>
 &lt;p>There are two ways to get HugeGraph-Loader:&lt;/p>
@@ -1603,6 +1609,9 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: HugeGraph-Tools Quick Start</title><link>/docs/quickstart/toolchain/hugegraph-tools/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/toolchain/hugegraph-tools/</guid><description>
 &lt;h3 id="1-hugegraph-tools-overview">1 HugeGraph-Tools Overview&lt;/h3>
 &lt;p>HugeGraph-Tools is an automated deployment, management and backup/restore component of HugeGraph.&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>Testing Guide&lt;/strong>: For running HugeGraph-Tools tests locally, please refer to &lt;a href="/docs/guides/toolchain-local-test">HugeGraph Toolchain Local Testing Guide&lt;/a>&lt;/p>
+&lt;/blockquote>
 &lt;h3 id="2-get-hugegraph-tools">2 Get HugeGraph-Tools&lt;/h3>
 &lt;p>There are two ways to get HugeGraph-Tools:&lt;/p>
 &lt;ul>
