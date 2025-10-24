@@ -1,7 +1,7 @@
 ---
 title: "FAQ"
 linkTitle: "FAQ"
-weight: 5
+weight: 6
 ---
 
 - How to choose the back-end storage? Choose RocksDB, Cassandra, ScyllaDB, Hbase or Mysql?

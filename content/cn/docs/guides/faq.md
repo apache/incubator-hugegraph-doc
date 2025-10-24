@@ -1,7 +1,7 @@
 ---
 title: "FAQ"
 linkTitle: "FAQ"
-weight: 5
+weight: 6
 ---
 
 - 如何选择后端存储? 选 RocksDB 还是 Cassandra 还是 Hbase 还是 Mysql?

@@ -8,6 +8,8 @@ weight: 3
 
 HugeGraph-Tools is an automated deployment, management and backup/restore component of HugeGraph.
 
+> **Testing Guide**: For running HugeGraph-Tools tests locally, please refer to [HugeGraph Toolchain Local Testing Guide](/docs/guides/toolchain-local-test)
+
 ### 2 Get HugeGraph-Tools
 
 There are two ways to get HugeGraph-Tools:
