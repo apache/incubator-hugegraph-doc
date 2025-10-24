@@ -16,6 +16,94 @@ master 是负责通信、转发、汇总的节点，计算量和占用资源量�
 
 ### 1.2 运行方法
 
+1. **方案一：Docker Compose（推荐）**
+
+确保docker-compose.yaml存在于您的项目目录中。如果没有，你需要根据项目的docker-compose.yaml模板创建一个。
+
+修改 docker-compose.yaml 中的 volume，例如将两处 ~/:/go/bin/config 改为 /home/user/config:/go/bin/config（或你自己的配置目录）。
+在项目目录构建镜像并启动（或者先用 docker build 再 docker-compose up）
+
+```shell
+# 构建镜像（在项目根 vermeer 目录）
+docker build -t hugegraph/vermeer .
+
+# 启动（在含 docker-compose.yaml 的目录）
+docker-compose up -d
+# 或使用新版 CLI：
+# docker compose up -d
+```
+
+查看日志 / 停止 / 删除：
+
+```shell
+docker-compose logs -f
+docker-compose down
+```
+
+2. **方案二：通过 docker run 单独启动（手动创建网络并分配静态 IP）**
+
+确保CONFIG_DIR对Docker进程具有适当的读取/执行权限（例如chmod 755 CONFIG_DIR）。
+
+构建镜像：
+
+```shell
+docker build -t hugegraph/vermeer .
+```
+
+创建自定义 bridge 网络（一次性操作）：
+
+```shell
+docker network create --driver bridge \
+  --subnet 172.20.0.0/24 \
+  vermeer_network
+```
+
+运行 master（示例将容器 8080 映射到宿主机 8080；调整 CONFIG_DIR 为你的绝对配置路径）：
+
+```shell
+CONFIG_DIR=/home/user/config
+
+docker run -d \
+  --name vermeer-master \
+  --network vermeer_network --ip 172.20.0.10 \
+  -v ${CONFIG_DIR}:/go/bin/config \
+  -p 8080:8080 \
+  hugegraph/vermeer \
+  --env=master
+```
+
+运行 worker：
+
+```shell
+docker run -d \
+  --name vermeer-worker \
+  --network vermeer_network --ip 172.20.0.11 \
+  -v ${CONFIG_DIR}:/go/bin/config \
+  hugegraph/vermeer \
+  --env=worker
+```
+
+查看日志 / 停止 / 删除：
+
+```shell
+docker logs -f vermeer-master
+docker logs -f vermeer-worker
+
+docker stop vermeer-master vermeer-worker
+docker rm vermeer-master vermeer-worker
+
+# 删除自定义网络（如果需要）
+docker network rm vermeer_network
+```
+
+3. **方案三：从源码构建**
+
+构建
+
+```shell
+go build
+```
+
 在进入文件夹目录后输入 `./vermeer --env=master` 或 `./vermeer --env=worker01`
 
 ## 二、任务创建类 rest api
@@ -33,7 +121,11 @@ master 是负责通信、转发、汇总的节点，计算量和占用资源量�
 
 具体参数参考 Vermeer 参数列表文档。
 
-request 示例：
+vermeer提供三种加载方式：
+
+1. 从本地加载
+
+**request 示例：**
 
 ```javascript
 POST http://localhost:8688/tasks/create
@@ -41,13 +133,64 @@ POST http://localhost:8688/tasks/create
  "task_type": "load",
  "graph": "testdb",
  "params": {
- "load.parallel": "50",
- "load.type": "local",
- "load.vertex_files": "{\"localhost\":\"data/twitter-2010.v_[0,99]\"}",
- "load.edge_files": "{\"localhost\":\"data/twitter-2010.e_[0,99]\"}",
- "load.use_out_degree": "1",
- "load.use_outedge": "1"
+  "load.parallel": "50",
+  "load.type": "local",
+  "load.vertex_files": "{\"localhost\":\"data/twitter-2010.v_[0,99]\"}",
+  "load.edge_files": "{\"localhost\":\"data/twitter-2010.e_[0,99]\"}",
+  "load.use_out_degree": "1",
+  "load.use_outedge": "1"
  }
+}
+```
+
+2. 从hugegraph加载
+
+**request 示例：**
+
+⚠️ 安全警告：切勿在配置文件或代码中存储真实密码。请改用环境变量或安全的凭据管理系统。
+
+```javascript
+POST http://localhost:8688/tasks/create
+{
+  "task_type": "load",
+  "graph": "testdb",
+  "params": {
+    "load.parallel": "50",
+    "load.type": "hugegraph",
+    "load.hg_pd_peers": "[\"10.14.139.69:8686\"]",
+    "load.hugegraph_name": "DEFAULT/hugegraph2/g",
+    "load.hugegraph_username":"admin",
+    "load.hugegraph_password":"xxxxx",
+    "load.use_out_degree": "1",
+    "load.use_outedge": "1"
+  }
+}
+```
+
+3. 从hdfs加载
+
+**request 示例：**
+
+```javascript
+POST http://localhost:8688/tasks/create
+{
+  "task_type": "load",
+  "graph": "testdb",
+  "params": {
+    "load.parallel": "50",
+    "load.type": "hdfs",
+    "load.hdfs_namenode": "name_node",
+    "load.hdfs_conf_path":  "path",
+    "load.krb_realm":"admin",
+    "load.krb_name":"xxxxx",
+    "load.krb_keytab_path":"path",
+    "load.krb_conf_path":"path",
+    "load.hdfs_use_krb":"1",
+    "load.vertex_files":"path",
+    "load.edge_files":"path",
+    "load.use_out_degree": "1",
+    "load.use_outedge": "1"
+  }
 }
 ```
 
