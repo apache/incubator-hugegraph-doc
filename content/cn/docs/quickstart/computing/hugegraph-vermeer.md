@@ -18,16 +18,67 @@ master 是负责通信、转发、汇总的节点，计算量和占用资源量�
 
 1. **方案一：Docker Compose（推荐）**
 
-确保docker-compose.yaml存在于您的项目目录中。如果没有，你需要根据项目的docker-compose.yaml模板创建一个。
+确保docker-compose.yaml存在于您的项目根目录中。如果没有，以下是一个示例：
+```yaml
+#
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 
-修改 docker-compose.yaml 中的 volume，例如将两处 ~/:/go/bin/config 改为 /home/user/config:/go/bin/config（或你自己的配置目录）。
+version: '3.8'
+
+services:
+  vermeer-master:
+    image: hugegraph/vermeer
+    container_name: vermeer-master
+    volumes:
+      - ~/:/go/bin/config # Change here to your actual config path
+    command: --env=master
+    networks:
+      vermeer_network:
+        ipv4_address: 172.20.0.10 # Assign a static IP for the master
+
+  vermeer-worker:
+    image: hugegraph/vermeer
+    container_name: vermeer-worker
+    volumes:
+      - ~/:/go/bin/config # Change here to your actual config path
+    command: --env=worker
+    networks:
+      vermeer_network:
+        ipv4_address: 172.20.0.11 # Assign a static IP for the worker
+
+networks:
+  vermeer_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24 # Define the subnet for your network
+```
+
+修改 docker-compose.yaml
+- **Volume**：例如将两处 ~/:/go/bin/config 改为 /home/user/config:/go/bin/config（或您自己的配置目录）。
+- **Subnet**：根据实际情况修改子网IP。请注意，每个容器需要访问的端口在config文件中指定，具体请参照项目`config`文件夹下内容。
+
 在项目目录构建镜像并启动（或者先用 docker build 再 docker-compose up）
 
 ```shell
 # 构建镜像（在项目根 vermeer 目录）
 docker build -t hugegraph/vermeer .
 
-# 启动（在含 docker-compose.yaml 的目录）
+# 启动（在 vermeer 根目录）
 docker-compose up -d
 # 或使用新版 CLI：
 # docker compose up -d
@@ -42,7 +93,7 @@ docker-compose down
 
 2. **方案二：通过 docker run 单独启动（手动创建网络并分配静态 IP）**
 
-确保CONFIG_DIR对Docker进程具有适当的读取/执行权限（例如chmod 755 CONFIG_DIR）。
+确保CONFIG_DIR对Docker进程具有适当的读取/执行权限。
 
 构建镜像：
 
@@ -58,7 +109,7 @@ docker network create --driver bridge \
   vermeer_network
 ```
 
-运行 master（示例将容器 8080 映射到宿主机 8080；调整 CONFIG_DIR 为你的绝对配置路径）：
+运行 master（调整 CONFIG_DIR 为您的绝对配置路径，可以根据实际情况调整IP）：
 
 ```shell
 CONFIG_DIR=/home/user/config
@@ -67,7 +118,6 @@ docker run -d \
   --name vermeer-master \
   --network vermeer_network --ip 172.20.0.10 \
   -v ${CONFIG_DIR}:/go/bin/config \
-  -p 8080:8080 \
   hugegraph/vermeer \
   --env=master
 ```
@@ -98,7 +148,7 @@ docker network rm vermeer_network
 
 3. **方案三：从源码构建**
 
-构建
+构建。具体请参照[Vermeer Readme](https://github.com/apache/incubator-hugegraph-computer/tree/master/vermeer)。
 
 ```shell
 go build
@@ -157,10 +207,10 @@ POST http://localhost:8688/tasks/create
   "params": {
     "load.parallel": "50",
     "load.type": "hugegraph",
-    "load.hg_pd_peers": "[\"10.14.139.69:8686\"]",
+    "load.hg_pd_peers": "[\"<your-hugegraph-ip>:8686\"]",
     "load.hugegraph_name": "DEFAULT/hugegraph2/g",
-    "load.hugegraph_username":"admin",
-    "load.hugegraph_password":"xxxxx",
+    "load.hugegraph_username": "admin",
+    "load.hugegraph_password": "xxxxx",
     "load.use_out_degree": "1",
     "load.use_outedge": "1"
   }
@@ -179,15 +229,15 @@ POST http://localhost:8688/tasks/create
   "params": {
     "load.parallel": "50",
     "load.type": "hdfs",
-    "load.hdfs_namenode": "name_node",
-    "load.hdfs_conf_path":  "path",
-    "load.krb_realm":"admin",
-    "load.krb_name":"xxxxx",
-    "load.krb_keytab_path":"path",
-    "load.krb_conf_path":"path",
-    "load.hdfs_use_krb":"1",
-    "load.vertex_files":"path",
-    "load.edge_files":"path",
+    "load.hdfs_namenode": "name_node1:9000",
+    "load.hdfs_conf_path": "/path/to/conf",
+    "load.krb_realm": "admin",
+    "load.krb_name": "xxxxx",
+    "load.krb_keytab_path": "path",
+    "load.krb_conf_path": "path",
+    "load.hdfs_use_krb": "1",
+    "load.vertex_files": "/path/to/conf",
+    "load.edge_files": "/path/to/conf",
     "load.use_out_degree": "1",
     "load.use_outedge": "1"
   }
@@ -209,13 +259,13 @@ POST http://localhost:8688/tasks/create
  "graph": "testdb",
  "params": {
  "compute.algorithm": "pagerank",
- "compute.parallel":"10",
- "compute.max_step":"10",
- "output.type":"local",
- "output.parallel":"1",
- "output.file_path":"result/pagerank"
+ "compute.parallel": "10",
+ "compute.max_step": "10",
+ "output.type": "local",
+ "output.parallel": "1",
+ "output.file_path": "result/pagerank"
  	}
- }
+}
 ```
 
 ## 三、支持的算法
