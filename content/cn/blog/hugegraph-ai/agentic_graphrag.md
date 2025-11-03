@@ -53,7 +53,7 @@ class Operator:
 
 Operator在实际运行时接受字典类型的context对象作为输入，返回的对象也是一个字典，可以用来作为下一个Operator的输入，这样的设计有一个很高明的地方——他将不同的Operator之间的依赖关系和Operator本身的具体实现解耦了，每个Operator是一个相对独立的存在，如果Operator A需要依赖Operator B的输出，那么只需要检查context对象中是否存有Operator B的输出即可。这是一种低耦合的设计。好处是我们能很方便地将不同的Operator自由组合。根据不同的用户输入组装（配置）合适Workflow Serving用户请求，那不正是我们在项目背景中提到的Agentic GraphRAG的目的所在吗？
 
-```
+```text
 👉🏼 理论上现有设计已经可以正常过渡到Agentic GraphRAG，但是现有设计存在诸多悬而未决的问题：
     1. 现有调度器仅仅支持链状Workflow，缺失了可能存在的并行空间
     2. 现有调度器无法复用被反复使用到的Workflow
@@ -251,6 +251,10 @@ state = chain.invoke({"topic": "cats"}
 
 我们相信，优秀的技术选型，不仅是功能的匹配，更是对项目未来潜力的认同。（欢迎一同见证它的成长：https://github.com/ChunelFeng/CGraph）
 
+<div style="text-align: center;">
+  <img src="/blog/images/images-server/agentic-frame.png" alt="image" width="800">
+</div>
+
 ## 架构设计
 
 起初，我们的目标很纯粹：基于CGraph，打造一个属于我们自己的调度器。然而深入思考之后，我们发现：一个好的调度器，**源于对调度对象的深刻理解**（是时候拷问自己了🤣）。就像CPU调度器和GPU调度器由于其调度对象以及生态定位的不同也会采取不同调度策略。
@@ -266,6 +270,10 @@ state = chain.invoke({"topic": "cats"}
 1. 新增新的Operator，我们只需要修改对应Node的具体实现即可，不需要修改上层Workflow的逻辑。Operator对Node负责，Node对Workflow负责，很好地实现了职能分离。
 2. 拥有更多的Workflow复用的机会。
 3. 通过引入新的Node抽象，我们在重构的过程中不需要修改底层Operator的实现，减轻了重构过程中的心智负担。
+
+<div style="text-align: center;">
+  <img src="/blog/images/images-server/agentic-abstract.png" alt="image" width="800">
+</div>
 
 既然我们希望跨请求复用同类Workflow，那么我们就需要保证Workflow本身是无状态的，因为如果复用的Workflow还带着上一个请求的状态，用户就可能得到发生意料之外的结果。而Workflow的状态可以分为两种：
 
@@ -285,6 +293,10 @@ state = chain.invoke({"topic": "cats"}
     - **执行后 (Post-execution Hook)**: 自动清理（clear）WorkflowInput上下文，防止其数据泄露到下一次调用。
 
 这样我们可以保证每次Workflow执行时这两种状态中都只包含本次请求的状态。由于WorkflowInput状态在Workflow执行结束就被重置了，我们只能从WorkflowState中有选择性地选择部分数据返回给用户。因此我们得到了一个Flow抽象应该实现的接口。
+
+<div style="text-align: center;">
+  <img src="/blog/images/images-server/agentic-lifeline.svg" alt="image" width="1000">
+</div>
 
 ```python
 class BaseFlow(ABC):
@@ -386,7 +398,7 @@ class BaseNode(GNode):
     2. **创建（Pool Miss）**: 如果池中无可用实例，调度器将动态创建一个新的 Workflow。这个新实例会立即用于服务当前请求。这种策略保证了系统在高负载下依然具备良好的弹性。
 - **自动归还**: 无论是从池中获取的实例还是新创建的实例，在完成请求处理后，都将被**自动归还**到其所属的 Workflow Pool 中，等待下一次调度。
 
-```
+```text
 🤔 当前版本的 Scheduler 实现了其最核心的职责，为整个系统提供了一个稳定且高效的调度基座。其主要特性包括：
     1. 能够根据请求类型，准确地调度对应的 Workflow 实例进行处理。
     2. 内置了基于 Workflow 类型的池化（Pooling）机制，通过复用已有实例，显著降低了高并发场景下的对象创建与销毁开销。
@@ -410,7 +422,7 @@ class BaseNode(GNode):
 ### Agentic GraphRAG: 理想与现实的碰撞
 
 项目之初，我们畅想一个完全“Agentic”的 GraphRAG。你只需告诉它你的问题，一个强大的 LLM 就能像一位资深架构师，从一堆工具（Nodes/Operators）中为你量身定制一套最高效的执行流程（Workflow）。
-但理想与现实之间总有距离。我们深入调研了 chat2graph 等类似项目，并实际动手检验效果。结果发现，让 LLM 凭空“创造”一个完美的、无懈可击的执行计划，比我们想象的要难得多。即使是使用 Gemini 2.5 Flash 这样的模型，它在理解复杂指令并将其精确映射到一系列操作时，也时常力不从心。完全依赖大模型进行零样本工作流规划的时代，或许还未完全到来。
+但理想与现实之间总有距离。我们深入调研了 chat2graph 等类似项目，并实际动手检验效果。结果发现，让 LLM 凭空“创造”一个完美的、无懈可击的执行计划，比我们想象的要难得多。即使是使用 Gemini 2.5 Flash 这样的模型，它在理解复杂指令并将其精确映射到一系列操作时，也时常力不从心。一方面，因为chat2graph的调用链可能会很长，即便大模型推理单步准确率高达95%，但随着调用链路的延长，误差会逐级累积，导致整体任务的成功率急剧下降。另一方面，即使调用链的问题不存在，通过prompt的方式让模型自动规划的准确度目前仍然不能使人满意。完全依赖大模型进行零样本工作流规划的时代，或许还未完全到来。
 “一口吃不成胖子”，于是我们做出了一个关键决策：让大模型从零开始构建工作流存在阻碍，但是如果让大模型基于Workflow模板“实例化”具体的Workflow或许是一种可行的方案。我们构建了一个功能强大、高度模块化的 GraphRAG 工作流，而 LLM 的任务，就是根据观众用户请求的特点，为Workflow选择最优配置。这是我们在Agentic GraphRAG和GraphRAG之间找到的一个平衡点。
 这让我们的核心问题发生了转变，不再是“如何从零构建”，而是：
 
@@ -418,7 +430,7 @@ class BaseNode(GNode):
 > 
 
 举个具体的例子：
-```
+```text
 👉🏼 给定一个用户请求，我们怎么通过用户的请求推断出最优配置呢？
     具体例子：用户的请求是：告诉我“提出水是万物的本源”的哲学家的徒弟提出的本体论观点。那么采用什么图算法进行知识图谱检索会使得结果更精确呢？
 ```

@@ -16,7 +16,7 @@ However, relying solely on semantic similarity matching to retrieve relevant inf
 2. Anaximander was a disciple of Thales.
 3. Anaximander identified the Apeiron, which has no formal definition, as the origin of all things.
 
-If we rely solely on semantic similarity matching, we are likely to only retrieve the first sentence to augment the large language model's answer. However, without information from sentences 2 and 3, and if the large language model lacks philosophy-related knowledge in its training dxata, it will be unable to correctly answer the question and might even "hallucinate."
+If we rely solely on semantic similarity matching, we are likely to only retrieve the first sentence to augment the large language model's answer. However, without information from sentences 2 and 3, and if the large language model lacks philosophy-related knowledge in its training data, it will be unable to correctly answer the question and might even "hallucinate."
 
 Therefore, GraphRAG technology was developed. A typical GraphRAG involves two steps:
 
@@ -53,7 +53,7 @@ class Operator:
 
 During actual runtime, an Operator accepts a dictionary-type context object as input, and the returned object is also a dictionary, which can be used as input for the next Operator. This design has one very clever aspect: it decouples the dependencies between different Operators from the specific implementation of the Operator itself. Each Operator is a relatively independent entity. If Operator A needs to rely on the output of Operator B, it only needs to check if the context object contains the output of Operator B. This is a loosely coupled design. The advantage is that we can easily combine different Operators freely. Assembling (configuring) a suitable Workflow to serve user requests based on different user inputs - isn't that precisely the goal of Agentic GraphRAG mentioned in the project background?
 
-```
+```text
 👉🏼 Theoretically, the existing design can already transition smoothly to Agentic GraphRAG. However, the current design has several outstanding issues:
     1. The existing scheduler only supports chain-like Workflows, missing potential parallelism.
     2. The existing scheduler cannot reuse Workflows that are repeatedly used.
@@ -250,6 +250,10 @@ However, what truly made us decide was the project's "heartbeat". We contacted t
 
 We believe that an excellent technology selection is not only about matching functionality but also about recognizing the project's future potential. (Welcome to witness its growth together: https://github.com/ChunelFeng/CGraph)
 
+<div style="text-align: center;">
+  <img src="/blog/images/images-server/agentic-frame.png" alt="image" width="800">
+</div>
+
 ## Architectural Design
 
 Initially, our goal was very simple: to build our own scheduler based on CGraph. However, after deeper reflection, we realized that a good scheduler stems from **a profound understanding of the scheduling target** (time for some self-reflection 🤣). Just like CPU schedulers and GPU schedulers adopt different scheduling strategies due to the differences in their scheduling targets and ecosystem positioning.
@@ -265,6 +269,10 @@ For example, vector similarity search is a very common RAG process. However, dep
 1. When adding a new Operator, we only need to modify the specific implementation of the corresponding Node, without modifying the logic of the upper-level Workflow. The Operator is responsible for the Node, and the Node is responsible for the Workflow, which achieves a good separation of duties.
 2. We have more opportunities for Workflow reuse.
 3. By introducing a new Node abstraction, we don't need to modify the implementation of the underlying Operator during the refactoring process, which reduces the mental burden during refactoring.
+
+<div style="text-align: center;">
+  <img src="/blog/images/images-server/agentic-abstract.png" alt="image" width="800">
+</div>
 
 Since we want to reuse the same type of Workflow across requests, we need to ensure that the Workflow itself is stateless. Because if the reused Workflow still carries the state of the previous request, users may get unexpected results. The state of the Workflow can be divided into two types:
 
@@ -284,6 +292,10 @@ We use the `GParam` (global parameter) abstraction provided by the CGraph framew
     - **Post-execution Hook**: Automatically clears the WorkflowInput context, preventing its data from leaking to the next call.
 
 This way we can ensure that each time the Workflow is executed, these two states only contain the state of the current request. Since the WorkflowInput state is reset after Workflow execution, we can only selectively choose some data from the WorkflowState to return to the user. Therefore, we get the interface that a Flow abstraction should implement.
+
+<div style="text-align: center;">
+  <img src="/blog/images/images-server/agentic-lifeline.svg" alt="image" width="1000">
+</div>
 
 ```python
 class BaseFlow(ABC):
@@ -387,7 +399,7 @@ We fully leverage the Pool abstraction provided by the underlying CGraph framewo
     2. **Creation (Pool Miss)**: If there are no available instances in the pool, the scheduler dynamically creates a new Workflow. This new instance is immediately used to serve the current request. This strategy ensures that the system maintains good elasticity under high load.
 - **Automatic Return**: Whether it is an instance obtained from the pool or a newly created instance, after completing the request processing, it will be **automatically returned** to its Workflow Pool, waiting for the next schedule.
 
-```
+```text
 🤔 The current version of the Scheduler implements its core responsibility, providing a stable and efficient scheduling base for the entire system. Its main features include:
     1. Ability to accurately schedule corresponding Workflow instances for processing based on request type.
     2. Built-in pooling mechanism based on Workflow type, which significantly reduces the cost of object creation and destruction in high-concurrency scenarios by reusing existing instances.
@@ -412,7 +424,7 @@ Now we can get the overall architecture diagram of the entire project.
 
 At the beginning of the project, we envisioned a fully "Agentic" GraphRAG. You would simply tell it your problem, and a powerful LLM, like a seasoned architect, would tailor the most efficient execution process (Workflow) for you from a collection of tools (Nodes/Operators).
 
-However, there is always a gap between ideal and reality. We conducted in-depth research into similar projects such as chat2graph and verified the results through hands-on testing. The results showed that letting LLMs "create" a perfect and flawless execution plan out of thin air is much more difficult than we imagined. Even when using models like Gemini 2.5 Flash, it often struggles to understand complex instructions and accurately map them to a series of operations. The era of relying entirely on large models for zero-shot workflow planning may not have fully arrived yet.
+However, there is always a gap between ideal and reality. We conducted in-depth research into similar projects such as chat2graph and verified the results through hands-on testing. The results showed that letting LLMs "create" a perfect and flawless execution plan out of thin air is much more difficult than we imagined. Even when using models like Gemini 2.5 Flash, it often struggles to understand complex instructions and accurately map them to a series of operations. On one hand, because the call chain of chat2graph can be very long, even if the single-step inference accuracy of large language models reaches as high as 95%, errors will accumulate progressively as the call chain extends, causing the overall task success rate to drop sharply. On the other hand, even without the call chain issue, the accuracy of having models automatically plan through prompting is still unsatisfactory at present. The era of relying entirely on large models for zero-shot workflow planning may not have fully arrived yet.
 
 "Rome wasn't built in a day." So, we made a crucial decision: letting a large model build a workflow from scratch is challenging, but allowing a large model to "instantiate" a specific Workflow based on a Workflow template might be a feasible solution. We built a powerful, highly modular GraphRAG workflow, and the LLM's task is to select the optimal configuration for the Workflow based on the characteristics of the audience's user requests. This is the balance we found between Agentic GraphRAG and GraphRAG.
 
@@ -421,7 +433,7 @@ This shifts our core problem from "how to build from scratch" to:
 > How can we make the large model understand the optimal configuration of GraphRAG from a few words from the user?
 
 For a concrete example:
-```
+```text
 👉🏼 Given a user request, how do we infer the optimal configuration from the user's request?
     Specific example: The user's request is: Tell me the ontological views of the disciple of the philosopher who proposed "water is the origin of all things." So, what graph algorithm should be used for knowledge graph retrieval to make the results more accurate?
 ```
