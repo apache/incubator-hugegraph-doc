@@ -6,6 +6,8 @@ weight: 10
 
 ### 4.1 rank API 概述
 
+> **重要提示**：在使用以下 API 之前，需要先创建图空间（graphspace）。请参考 [Graphspace API](../graphspace) 创建名为 `gs1` 的图空间。文档中的示例均假设已存在名为 `gs1` 的图空间。
+
 HugeGraphServer 除了上一节提到的遍历（traverser）方法，还提供了一类专门做推荐的方法，我们称为`rank API`，
 可在图中为一个点推荐与其关系密切的其它点。
 
@@ -152,7 +154,7 @@ schema.edgeLabel("rating")
 ###### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/traversers/personalrank
+POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/traversers/personalrank
 ```
 
 ###### Request Body
@@ -307,7 +309,7 @@ public class Loader {
 ###### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/traversers/neighborrank
+POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/traversers/neighborrank
 ```
 
 ###### Request Body

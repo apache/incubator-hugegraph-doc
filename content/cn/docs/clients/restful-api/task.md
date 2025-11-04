@@ -6,6 +6,8 @@ weight: 13
 
 ### 7.1 Task
 
+> **重要提示**：在使用以下 API 之前，需要先创建图空间（graphspace）。请参考 [Graphspace API](../graphspace) 创建名为 `gs1` 的图空间。文档中的示例均假设已存在名为 `gs1` 的图空间。
+
 #### 7.1.1 列出某个图中全部的异步任务
 
 ##### Params
@@ -16,7 +18,7 @@ weight: 13
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/tasks?status=success
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/tasks?status=success
 ```
 
 ##### Response Status
@@ -50,7 +52,7 @@ GET http://localhost:8080/graphs/hugegraph/tasks?status=success
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/tasks/2
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/tasks/2
 ```
 
 ##### Response Status
@@ -82,7 +84,7 @@ GET http://localhost:8080/graphs/hugegraph/tasks/2
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/tasks/2
+DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/tasks/2
 ```
 
 ##### Response Status
@@ -110,7 +112,7 @@ DELETE http://localhost:8080/graphs/hugegraph/tasks/2
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/tasks/2?action=cancel
+PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/tasks/2?action=cancel
 ```
 
 > 请保证在 10 秒内发送该请求，如果超过 10 秒发送，任务可能已经执行完成，无法取消。

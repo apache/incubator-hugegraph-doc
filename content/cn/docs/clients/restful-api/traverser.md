@@ -6,6 +6,8 @@ weight: 9
 
 ### 3.1 traverser API概述
 
+> **重要提示**：在使用以下 API 之前，需要先创建图空间（graphspace）。请参考 [Graphspace API](../graphspace) 创建名为 `gs1` 的图空间。文档中的示例均假设已存在名为 `gs1` 的图空间。
+
 HugeGraphServer为HugeGraph图数据库提供了RESTful API接口。除了顶点和边的CRUD基本操作以外，还提供了一些遍历（traverser）方法，我们称为`traverser API`。这些遍历方法实现了一些复杂的图算法，方便用户对图进行分析和挖掘。
 
 HugeGraph支持的Traverser API包括：
@@ -212,7 +214,7 @@ public class Loader {
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/kout?source="1:marko"&max_depth=2
+GET http://localhost:8080/graphspaces/gs1/graphs/{graph}/traversers/kout?source="1:marko"&max_depth=2
 ```
 
 ###### Response Status
@@ -286,7 +288,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/kout?source="1:marko"&max_de
 ###### Method & Url
 
 ```
-POST http://localhost:8080/graphs/{graph}/traversers/kout
+POST http://localhost:8080/graphspaces/gs1/graphs/{graph}/traversers/kout
 ```
 
 ###### Request Body
@@ -453,7 +455,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/kout
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/kneighbor?source=“1:marko”&max_depth=2
+GET http://localhost:8080/graphspaces/gs1/graphs/{graph}/traversers/kneighbor?source=“1:marko”&max_depth=2
 ```
 
 ###### Response Status
@@ -531,7 +533,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/kneighbor?source=“1:marko�
 ###### Method & Url
 
 ```
-POST http://localhost:8080/graphs/{graph}/traversers/kneighbor
+POST http://localhost:8080/graphspaces/gs1/graphs/{graph}/traversers/kneighbor
 ```
 
 ###### Request Body
@@ -752,7 +754,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/kneighbor
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/sameneighbors?vertex=“1:marko”&other="1:josh"
+GET http://localhost:8080/graphspaces/gs1/graphs/{graph}/traversers/sameneighbors?vertex=“1:marko”&other="1:josh"
 ```
 
 ###### Response Status
@@ -796,7 +798,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/sameneighbors?vertex=“1:ma
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/jaccardsimilarity?vertex="1:marko"&other="1:josh"
+GET http://localhost:8080/graphspaces/gs1/graphs/{graph}/traversers/jaccardsimilarity?vertex="1:marko"&other="1:josh"
 ```
 
 ###### Response Status
@@ -842,7 +844,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/jaccardsimilarity?vertex="1:
 ###### Method & Url
 
 ```
-POST http://localhost:8080/graphs/{graph}/traversers/jaccardsimilarity
+POST http://localhost:8080/graphspaces/gs1/graphs/{graph}/traversers/jaccardsimilarity
 ```
 
 ###### Request Body
@@ -902,7 +904,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/jaccardsimilarity
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/shortestpath?source="1:marko"&target="2:ripple"&max_depth=3
+GET http://localhost:8080/graphspaces/gs1/graphs/{graph}/traversers/shortestpath?source="1:marko"&target="2:ripple"&max_depth=3
 ```
 
 ###### Response Status
@@ -952,7 +954,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/shortestpath?source="1:marko
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/allshortestpaths?source="A"&target="Z"&max_depth=10
+GET http://localhost:8080/graphspaces/gs1/graphs/{graph}/traversers/allshortestpaths?source="A"&target="Z"&max_depth=10
 ```
 
 ###### Response Status
@@ -1016,7 +1018,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/allshortestpaths?source="A"&
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/weightedshortestpath?source="1:marko"&target="2:ripple"&weight="weight"&with_vertex=true
+GET http://localhost:8080/graphspaces/gs1/graphs/{graph}/traversers/weightedshortestpath?source="1:marko"&target="2:ripple"&weight="weight"&with_vertex=true
 ```
 
 ###### Response Status
@@ -1101,7 +1103,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/weightedshortestpath?source=
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/singlesourceshortestpath?source="1:marko"&with_vertex=true
+GET http://localhost:8080/graphspaces/gs1/graphs/{graph}/traversers/singlesourceshortestpath?source="1:marko"&with_vertex=true
 ```
 
 ###### Response Status
@@ -1253,7 +1255,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/singlesourceshortestpath?sou
 ###### Method & Url
 
 ```
-POST http://localhost:8080/graphs/{graph}/traversers/multinodeshortestpath
+POST http://localhost:8080/graphspaces/gs1/graphs/{graph}/traversers/multinodeshortestpath
 ```
 
 ###### Request Body
@@ -1481,7 +1483,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/multinodeshortestpath
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/paths?source="1:marko"&target="1:josh"&max_depth=5
+GET http://localhost:8080/graphspaces/gs1/graphs/{graph}/traversers/paths?source="1:marko"&target="1:josh"&max_depth=5
 ```
 
 ###### Response Status
@@ -1557,7 +1559,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/paths?source="1:marko"&targe
 ###### Method & Url
 
 ```
-POST http://localhost:8080/graphs/{graph}/traversers/paths
+POST http://localhost:8080/graphspaces/gs1/graphs/{graph}/traversers/paths
 ```
 
 ###### Request Body
@@ -1656,7 +1658,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/paths
 ###### Method & Url
 
 ```
-POST http://localhost:8080/graphs/{graph}/traversers/customizedpaths
+POST http://localhost:8080/graphspaces/gs1/graphs/{graph}/traversers/customizedpaths
 ```
 
 ###### Request Body
@@ -1845,7 +1847,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/customizedpaths
 ###### Method & Url
 
 ```
-POST http://localhost:8080/graphs/{graph}/traversers/templatepaths
+POST http://localhost:8080/graphspaces/gs1/graphs/{graph}/traversers/templatepaths
 ```
 
 ###### Request Body
@@ -2009,7 +2011,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/templatepaths
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/crosspoints?source="2:lop"&target="2:ripple"&max_depth=5&direction=IN
+GET http://localhost:8080/graphspaces/gs1/graphs/{graph}/traversers/crosspoints?source="2:lop"&target="2:ripple"&max_depth=5&direction=IN
 ```
 
 ###### Response Status
@@ -2078,7 +2080,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/crosspoints?source="2:lop"&t
 ###### Method & Url
 
 ```
-POST http://localhost:8080/graphs/{graph}/traversers/customizedcrosspoints
+POST http://localhost:8080/graphspaces/gs1/graphs/{graph}/traversers/customizedcrosspoints
 ```
 
 ###### Request Body
@@ -2248,7 +2250,7 @@ POST http://localhost:8080/graphs/{graph}/traversers/customizedcrosspoints
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/rings?source="1:marko"&max_depth=2
+GET http://localhost:8080/graphspaces/gs1/graphs/{graph}/traversers/rings?source="1:marko"&max_depth=2
 ```
 
 ###### Response Status
@@ -2317,7 +2319,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/rings?source="1:marko"&max_d
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph}/traversers/rays?source="1:marko"&max_depth=2&direction=OUT
+GET http://localhost:8080/graphspaces/gs1/graphs/{graph}/traversers/rays?source="1:marko"&max_depth=2&direction=OUT
 ```
 
 ###### Response Status
@@ -2404,7 +2406,7 @@ GET http://localhost:8080/graphs/{graph}/traversers/rays?source="1:marko"&max_de
 ###### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/traversers/fusiformsimilarity
+POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/traversers/fusiformsimilarity
 ```
 
 ###### Request Body
@@ -2511,7 +2513,7 @@ POST http://localhost:8080/graphs/hugegraph/traversers/fusiformsimilarity
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/traversers/vertices?ids="1:marko"&ids="2:lop"
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/traversers/vertices?ids="1:marko"&ids="2:lop"
 ```
 
 ###### Response Status
@@ -2590,7 +2592,7 @@ GET http://localhost:8080/graphs/hugegraph/traversers/vertices?ids="1:marko"&ids
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/traversers/vertices/shards?split_size=67108864
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/traversers/vertices/shards?split_size=67108864
 ```
 
 ###### Response Status
@@ -2643,7 +2645,7 @@ GET http://localhost:8080/graphs/hugegraph/traversers/vertices/shards?split_size
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/traversers/vertices/scan?start=0&end=4294967295
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/traversers/vertices/scan?start=0&end=4294967295
 ```
 
 ###### Response Status
@@ -2827,7 +2829,7 @@ GET http://localhost:8080/graphs/hugegraph/traversers/vertices/scan?start=0&end=
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/traversers/edges?ids="S1:josh>1>>S2:lop"&ids="S1:josh>1>>S2:ripple"
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/traversers/edges?ids="S1:josh>1>>S2:lop"&ids="S1:josh>1>>S2:ripple"
 ```
 
 ###### Response Status
@@ -2882,7 +2884,7 @@ GET http://localhost:8080/graphs/hugegraph/traversers/edges?ids="S1:josh>1>>S2:l
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/traversers/edges/shards?split_size=4294967295
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/traversers/edges/shards?split_size=4294967295
 ```
 
 ###### Response Status
@@ -2939,7 +2941,7 @@ GET http://localhost:8080/graphs/hugegraph/traversers/edges/shards?split_size=42
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/traversers/edges/scan?start=0&end=3221225469
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/traversers/edges/scan?start=0&end=3221225469
 ```
 
 ###### Response Status

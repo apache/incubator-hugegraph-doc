@@ -6,6 +6,8 @@ weight: 14
 
 ### 8.1 Gremlin
 
+> **重要提示**：在使用以下 API 之前，需要先创建图空间（graphspace）。请参考 [Graphspace API](../graphspace) 创建名为 `gs1` 的图空间。文档中的示例均假设已存在名为 `gs1` 的图空间。
+
 #### 8.1.1 向HugeGraphServer发送gremlin语句（GET），同步执行
 
 ##### Params
@@ -191,7 +193,7 @@ POST http://localhost:8080/gremlin
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/jobs/gremlin
+POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/jobs/gremlin
 ```
 
 **查询顶点**
@@ -228,7 +230,7 @@ POST http://localhost:8080/graphs/hugegraph/jobs/gremlin
 
 注：
 
-> 可以通过`GET http://localhost:8080/graphs/hugegraph/tasks/1`（其中"1"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](../task)
+> 可以通过`GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/tasks/1`（其中"1"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](../task)
 
 **查询边**
 
@@ -259,4 +261,4 @@ POST http://localhost:8080/graphs/hugegraph/jobs/gremlin
 
 注：
 
-> 可以通过`GET http://localhost:8080/graphs/hugegraph/tasks/2`（其中"2"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](../task)
+> 可以通过`GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/tasks/2`（其中"2"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](../task)

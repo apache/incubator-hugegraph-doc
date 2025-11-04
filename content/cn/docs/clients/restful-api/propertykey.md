@@ -6,6 +6,8 @@ weight: 2
 
 ### 1.2 PropertyKey
 
+> **重要提示**：在使用以下 API 之前，需要先创建图空间（graphspace）。请参考 [Graphspace API](../graphspace) 创建名为 `gs1` 的图空间。文档中的示例均假设已存在名为 `gs1` 的图空间。
+
 Params说明：
 
 - name：属性类型名称，必填
@@ -24,7 +26,7 @@ Params说明：
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/schema/propertykeys
+POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/propertykeys
 ```
 
 ##### Request Body
@@ -73,7 +75,7 @@ POST http://localhost:8080/graphs/hugegraph/schema/propertykeys
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/schema/propertykeys/age?action=append
+PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/propertykeys/age?action=append
 ```
 
 ##### Request Body
@@ -122,7 +124,7 @@ PUT http://localhost:8080/graphs/hugegraph/schema/propertykeys/age?action=append
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/schema/propertykeys
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/propertykeys
 ```
 
 ##### Response Status
@@ -201,7 +203,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/propertykeys
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/propertykeys/age
 ```
 
 其中，`age`为要获取的 PropertyKey 的名称
@@ -237,7 +239,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
+DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/propertykeys/age
 ```
 
 其中，`age`为要删除的 PropertyKey 的名称

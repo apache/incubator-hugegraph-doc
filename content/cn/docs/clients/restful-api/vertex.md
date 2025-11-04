@@ -6,6 +6,8 @@ weight: 7
 
 ### 2.1 Vertex
 
+> **重要提示**：在使用以下 API 之前，需要先创建图空间（graphspace）。请参考 [Graphspace API](../graphspace) 创建名为 `gs1` 的图空间。文档中的示例均假设已存在名为 `gs1` 的图空间。
+
 顶点类型中的 `Id` 策略决定了顶点的 `Id` 类型，其对应的 `id` 类型如下：
 
 | Id_Strategy      | id type |
@@ -42,10 +44,17 @@ schema.indexLabel("personByAge").onV("person").by("age").range().ifNotExist().cr
 
 #### 2.1.1 创建一个顶点
 
+##### Params
+
+**路径参数说明：**
+
+- graphspace: 图空间名称
+- graph: 图名称
+
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/graph/vertices
+POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices
 ```
 
 ##### Request Body
@@ -82,10 +91,17 @@ POST http://localhost:8080/graphs/hugegraph/graph/vertices
 
 #### 2.1.2 创建多个顶点
 
+##### Params
+
+**路径参数说明：**
+
+- graphspace: 图空间名称
+- graph: 图名称
+
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/graph/vertices/batch
+POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/batch
 ```
 
 ##### Request Body
@@ -127,10 +143,18 @@ POST http://localhost:8080/graphs/hugegraph/graph/vertices/batch
 
 #### 2.1.3 更新顶点属性
 
+##### Params
+
+**路径参数说明：**
+
+- graphspace: 图空间名称
+- graph: 图名称
+- id: 顶点id，需要包含引号，例如"1:marko"
+
 ##### Method & Url
 
 ```
-PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=append
+PUT http://127.0.0.1:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/"1:marko"?action=append
 ```
 
 ##### Request Body
@@ -220,13 +244,20 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=appen
 通过以下命令新增顶点：
 
 ```shell
-curl -H "Content-Type: application/json" -d '[{"label":"person","properties":{"name":"josh","age":32,"city":"Beijing","weight":0.1,"hobby":["reading","football"]}},{"label":"software","properties":{"name":"lop","lang":"java","price":328}}]' http:///127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
+curl -H "Content-Type: application/json" -d '[{"label":"person","properties":{"name":"josh","age":32,"city":"Beijing","weight":0.1,"hobby":["reading","football"]}},{"label":"software","properties":{"name":"lop","lang":"java","price":328}}]' http://127.0.0.1:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/batch
 ```
+
+##### Params
+
+**路径参数说明：**
+
+- graphspace: 图空间名称
+- graph: 图名称
 
 ##### Method & Url
 
 ```
-PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
+PUT http://127.0.0.1:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/batch
 ```
 
 ##### Request Body
@@ -321,10 +352,18 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
 
 #### 2.1.5 删除顶点属性
 
+##### Params
+
+**路径参数说明：**
+
+- graphspace: 图空间名称
+- graph: 图名称
+- id: 顶点id，需要包含引号，例如"1:marko"
+
 ##### Method & Url
 
 ```
-PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=eliminate
+PUT http://127.0.0.1:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/"1:marko"?action=eliminate
 ```
 
 ##### Request Body
@@ -364,6 +403,13 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=elimi
 
 ##### Params
 
+**路径参数说明：**
+
+- graphspace: 图空间名称
+- graph: 图名称
+
+**请求参数说明：**
+
 - label: 顶点的类型
 - properties: 属性键值对（查询属性的前提是该属性已经建立了索引）
 - limit: 查询结果的最大数目
@@ -391,7 +437,7 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=elimi
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&properties={"age":29}&limit=1
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices?label=person&properties={"age":29}&limit=1
 ```
 
 ##### Response Status
@@ -423,13 +469,13 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&propertie
 通过以下命令新增顶点：
 
 ```shell
-curl -H "Content-Type: application/json" -d '[{"label":"person","properties":{"name":"peter","age":29,"city":"Shanghai"}},{"label":"person","properties":{"name":"vadas","age":27,"city":"Hongkong"}}]' http://localhost:8080/graphs/hugegraph/graph/vertices/batch
+curl -H "Content-Type: application/json" -d '[{"label":"person","properties":{"name":"peter","age":29,"city":"Shanghai"}},{"label":"person","properties":{"name":"vadas","age":27,"city":"Hongkong"}}]' http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/batch
 ```
 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices?page&limit=3
 ```
 
 ##### Response Status
@@ -490,7 +536,7 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph/vertices?page=CIYxOnBldGVyAAAAAAAAAAM=&limit=3
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices?page=CIYxOnBldGVyAAAAAAAAAAM=&limit=3
 ```
 
 ##### Response Status
@@ -543,10 +589,18 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?page=CIYxOnBldGVyAAAAA
 
 #### 2.1.7 根据Id获取顶点
 
+##### Params
+
+**路径参数说明：**
+
+- graphspace: 图空间名称
+- graph: 图名称
+- id: 顶点id，需要包含引号，例如"1:marko"
+
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/"1:marko"
 ```
 
 ##### Response Status
@@ -573,6 +627,14 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
 
 ##### Params
 
+**路径参数说明：**
+
+- graphspace: 图空间名称
+- graph: 图名称
+- id: 顶点id，需要包含引号，例如"1:marko"
+
+**请求参数说明：**
+
 - label: 顶点类型，可选参数
 
 **仅根据Id删除顶点**
@@ -580,7 +642,7 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
+DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/"1:marko"
 ```
 
 ##### Response Status
@@ -596,7 +658,7 @@ DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"?label=person
+DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/vertices/"1:marko"?label=person
 ```
 
 ##### Response Status

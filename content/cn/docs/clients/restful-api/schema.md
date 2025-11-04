@@ -6,14 +6,16 @@ weight: 1
 
 ### 1.1 Schema
 
+> **重要提示**：在使用以下 API 之前，需要先创建图空间（graphspace）。请参考 [Graphspace API](../graphspace) 创建名为 `gs1` 的图空间。文档中的示例均假设已存在名为 `gs1` 的图空间。
+
 HugeGraph 提供单一接口获取某个图的全部 Schema 信息，包括：PropertyKey、VertexLabel、EdgeLabel 和 IndexLabel。
 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph_name}/schema
+GET http://localhost:8080/graphspaces/gs1/graphs/{graph_name}/schema
 
-e.g: GET http://localhost:8080/graphs/hugegraph/schema
+e.g: GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema
 ```
 
 ##### Response Status

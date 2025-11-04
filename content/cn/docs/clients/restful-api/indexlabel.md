@@ -6,6 +6,8 @@ weight: 5
 
 ### 1.5 IndexLabel
 
+> **重要提示**：在使用以下 API 之前，需要先创建图空间（graphspace）。请参考 [Graphspace API](../graphspace) 创建名为 `gs1` 的图空间。文档中的示例均假设已存在名为 `gs1` 的图空间。
+
 假设已经创建好了1.1.3中的 PropertyKeys 、1.2.3中的 VertexLabels 以及 1.3.3中的 EdgeLabels
 
 #### 1.5.1 创建一个IndexLabel
@@ -13,7 +15,7 @@ weight: 5
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/schema/indexlabels
+POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/indexlabels
 ```
 
 ##### Request Body
@@ -59,7 +61,7 @@ POST http://localhost:8080/graphs/hugegraph/schema/indexlabels
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/schema/indexlabels
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/indexlabels
 ```
 
 ##### Response Status
@@ -123,7 +125,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/indexlabels
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
+GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/indexlabels/personByCity
 ```
 
 ##### Response Status
@@ -154,7 +156,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
+DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/indexlabels/personByCity
 ```
 
 ##### Response Status
@@ -173,4 +175,4 @@ DELETE http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
 
 注：
 
-> 可以通过`GET http://localhost:8080/graphs/hugegraph/tasks/1`（其中"1"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](../task)
+> 可以通过`GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/tasks/1`（其中"1"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](../task)
