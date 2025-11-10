@@ -24,6 +24,7 @@ enableGitInfo = true
 # TODO: upgrade docsy version to latest one (curretly mermaid.js is not working)
 [params.mermaid]
 enable = true
+theme = "default"
 
 ###############################################################################
 # Hugo - Top-level navigation (horizontal)
