@@ -28,6 +28,7 @@ set -e
 RELEASE_VERSION=$1 # like 1.2.0
 JAVA_VERSION=$2 # like 11
 USER=$3
+LOCAL_DIST_PATH=$4 # local directory path containing release files
 
 # this URL is only valid during the release process
 SVN_URL_PREFIX="https://dist.apache.org/repos/dist/dev/incubator/hugegraph"
@@ -42,16 +43,31 @@ WORK_DIR=$(
   pwd
 )
 
+# Use local directory if provided, otherwise use default dist path
+if [[ -n "${LOCAL_DIST_PATH}" ]]; then
+  DIST_DIR="${LOCAL_DIST_PATH}"
+  echo "Using local directory: ${DIST_DIR}"
+else
+  DIST_DIR="${WORK_DIR}/dist/${RELEASE_VERSION}"
+  echo "Using default directory: ${DIST_DIR}"
+fi
+
+# Validate local directory exists
+if [[ ! -d "${DIST_DIR}" ]]; then
+  echo "Error: Directory ${DIST_DIR} does not exist"
+  exit 1
+fi
+
 cd "${WORK_DIR}"
 echo "Current work dir: $(pwd)"
+echo "Release files directory: ${DIST_DIR}"
 
 ################################
-# Step 1: Download SVN Sources #
+# Step 1: Validate Local Directory #
 ################################
-rm -rf "${WORK_DIR}/dist/${RELEASE_VERSION}"
-mkdir -p "${WORK_DIR}/dist/${RELEASE_VERSION}"
-cd "${WORK_DIR}/dist/${RELEASE_VERSION}"
-svn co "${SVN_URL_PREFIX}/${RELEASE_VERSION}" .
+cd "${DIST_DIR}"
+echo "Contents of ${DIST_DIR}:"
+ls -lh
 
 ##################################################
 # Step 2: Check Environment & Import Public Keys #
@@ -72,7 +88,7 @@ done
 ########################################
 # Step 3: Check SHA512 & GPG Signature #
 ########################################
-cd "${WORK_DIR}/dist/${RELEASE_VERSION}"
+cd "${DIST_DIR}"
 
 for i in *.tar.gz; do
   echo "$i"
@@ -83,7 +99,7 @@ done
 ####################################
 # Step 4: Validate Source Packages #
 ####################################
-cd "${WORK_DIR}/dist/${RELEASE_VERSION}"
+cd "${DIST_DIR}"
 
 CATEGORY_X="\bGPL|\bLGPL|Sleepycat License|BSD-4-Clause|\bBCL\b|JSR-275|Amazon Software License|\bRSAL\b|\bQPL\b|\bSSPL|\bCPOL|\bNPL1|Creative Commons Non-Commercial|JSON\.org"
 CATEGORY_B="\bCDDL1|\bCPL|\bEPL|\bIPL|\bMPL|\bSPL|OSL-3.0|UnRAR License|Erlang Public License|\bOFL\b|Ubuntu Font License Version 1.0|IPA Font License Agreement v1.0|EPL2.0|CC-BY"
@@ -174,7 +190,7 @@ done
 ###########################################
 # Step 5: Run Compiled Packages of Server #
 ###########################################
-cd "${WORK_DIR}/dist/${RELEASE_VERSION}"
+cd "${DIST_DIR}"
 
 ls -lh
 pushd ./*hugegraph-incubating*src/hugegraph-server/*hugegraph*"${RELEASE_VERSION}"
@@ -186,7 +202,7 @@ popd
 #######################################################################
 # Step 6: Run Compiled Packages of ToolChain (Loader & Tool & Hubble) #
 #######################################################################
-cd "${WORK_DIR}/dist/${RELEASE_VERSION}"
+cd "${DIST_DIR}"
 
 pushd ./*toolchain*src
 ls -lh
@@ -231,7 +247,7 @@ popd
 ####################################
 # Step 7: Validate Binary Packages #
 ####################################
-cd "${WORK_DIR}/dist/${RELEASE_VERSION}"
+cd "${DIST_DIR}"
 
 for i in *.tar.gz; do
   if [[ "$i" == *-src.tar.gz ]]; then
@@ -291,7 +307,7 @@ done
 #########################################
 # Step 8: Run Binary Packages of Server #
 #########################################
-cd "${WORK_DIR}/dist/${RELEASE_VERSION}"
+cd "${DIST_DIR}"
 
 # TODO: run pd & store
 pushd ./*hugegraph-incubating*"${RELEASE_VERSION}"/*hugegraph-server-incubating*"${RELEASE_VERSION}"
@@ -303,7 +319,7 @@ popd
 #####################################################################
 # Step 9: Run Binary Packages of ToolChain (Loader & Tool & Hubble) #
 #####################################################################
-cd "${WORK_DIR}/dist/${RELEASE_VERSION}"
+cd "${DIST_DIR}"
 
 pushd ./*toolchain*"${RELEASE_VERSION}"
 ls -lh
