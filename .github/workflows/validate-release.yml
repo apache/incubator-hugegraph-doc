@@ -6,11 +6,11 @@ on:
       release_version:
         required: true
         description: svn release version
-        default: '1.5.0'
+        default: '1.7.0'
       gpg_user:
         required: true
         description: current release manager (gpg username)
-        default: 'vgalaxies'
+        default: 'Junzhi Peng'
 
   push:
     branches:
@@ -66,6 +66,9 @@ jobs:
         run: |
           if [[ ${{ matrix.os }} =~ "macos" ]]; then
             brew install svn
+          fi
+          if [[ ${{ matrix.os }} =~ "ubuntu" ]]; then
+            sudo apt-get install -y subversion
           fi
           rm -rf dist/${{ inputs.release_version }}
           svn co ${URL_PREFIX}/${{ inputs.release_version }} dist/${{ inputs.release_version }}
