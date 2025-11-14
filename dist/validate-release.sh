@@ -87,10 +87,15 @@ declare -a VALIDATION_WARNINGS=()
 TOTAL_CHECKS=0
 PASSED_CHECKS=0
 FAILED_CHECKS=0
+CURRENT_STEP=""
+CURRENT_PACKAGE=""
 
 # Service tracking for cleanup
 SERVER_STARTED=0
 HUBBLE_STARTED=0
+
+# Script execution time tracking
+SCRIPT_START_TIME=0
 
 ################################################################################
 # Helper Functions - Output & Logging
@@ -174,6 +179,7 @@ print_step() {
     local step=$1
     local total=$2
     local description=$3
+    CURRENT_STEP="Step $step: $description"
     echo ""
     echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo -e "${BLUE}Step [$step/$total]: $description${NC}"
@@ -190,25 +196,65 @@ print_progress() {
 
 collect_error() {
     local error_msg="$1"
-    VALIDATION_ERRORS+=("$error_msg")
+    local context=""
+
+    # Build context string
+    if [[ -n "$CURRENT_STEP" ]]; then
+        context="[$CURRENT_STEP]"
+    fi
+
+    if [[ -n "$CURRENT_PACKAGE" ]]; then
+        if [[ -n "$context" ]]; then
+            context="$context [$CURRENT_PACKAGE]"
+        else
+            context="[$CURRENT_PACKAGE]"
+        fi
+    fi
+
+    # Store error with context
+    if [[ -n "$context" ]]; then
+        VALIDATION_ERRORS+=("$context $error_msg")
+    else
+        VALIDATION_ERRORS+=("$error_msg")
+    fi
+
     FAILED_CHECKS=$((FAILED_CHECKS + 1))
     error "$error_msg"
 }
 
 collect_warning() {
     local warning_msg="$1"
-    VALIDATION_WARNINGS+=("$warning_msg")
+    local context=""
+
+    # Build context string
+    if [[ -n "$CURRENT_STEP" ]]; then
+        context="[$CURRENT_STEP]"
+    fi
+
+    if [[ -n "$CURRENT_PACKAGE" ]]; then
+        if [[ -n "$context" ]]; then
+            context="$context [$CURRENT_PACKAGE]"
+        else
+            context="[$CURRENT_PACKAGE]"
+        fi
+    fi
+
+    # Store warning with context
+    if [[ -n "$context" ]]; then
+        VALIDATION_WARNINGS+=("$context $warning_msg")
+    else
+        VALIDATION_WARNINGS+=("$warning_msg")
+    fi
+
     warn "$warning_msg"
 }
 
 mark_check_passed() {
     PASSED_CHECKS=$((PASSED_CHECKS + 1))
-    TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
 }
 
 mark_check_failed() {
     FAILED_CHECKS=$((FAILED_CHECKS + 1))
-    TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
 }
 
 ################################################################################
@@ -402,10 +448,28 @@ check_license_categories() {
 
     # Check Category X (Prohibited)
     TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
-    local cat_x_count=$(grep -r -E "$CATEGORY_X" $files 2>/dev/null | wc -l | tr -d ' ')
+    local cat_x_matches=$(grep -r -E "$CATEGORY_X" $files 2>/dev/null)
+    local cat_x_count=$(echo "$cat_x_matches" | grep -v '^$' | wc -l | tr -d ' ')
+
     if [[ $cat_x_count -ne 0 ]]; then
-        collect_error "Package '$package' contains $cat_x_count prohibited ASF Category X license(s)"
-        grep -r -E "$CATEGORY_X" $files
+        # Build detailed error message with license information
+        local error_details="Package '$package' contains $cat_x_count prohibited ASF Category X license(s):"
+
+        # Extract and format each violation
+        while IFS= read -r match_line; do
+            if [[ -n "$match_line" ]]; then
+                # Parse file:content format
+                local file_name=$(echo "$match_line" | cut -d':' -f1)
+                local license_info=$(echo "$match_line" | cut -d':' -f2-)
+
+                # Try to extract specific license name
+                local license_name=$(echo "$license_info" | grep -oE "$CATEGORY_X" | head -n1)
+
+                error_details="${error_details}\n    - File: ${file_name}\n      License: ${license_name}\n      Context: ${license_info}"
+            fi
+        done <<< "$cat_x_matches"
+
+        collect_error "$error_details"
         has_error=1
     else
         mark_check_passed
@@ -416,7 +480,6 @@ check_license_categories() {
     local cat_b_count=$(grep -r -E "$CATEGORY_B" $files 2>/dev/null | wc -l | tr -d ' ')
     if [[ $cat_b_count -ne 0 ]]; then
         collect_warning "Package '$package' contains $cat_b_count ASF Category B license(s) - please verify documentation"
-        grep -r -E "$CATEGORY_B" $files
     else
         mark_check_passed
     fi
@@ -511,7 +574,7 @@ check_binary_files() {
             undocumented_count=$((undocumented_count + 1))
             has_error=1
         fi
-    done < <(find . -type f -exec perl -lne 'print if -B' {} \; 2>/dev/null)
+    done < <(find . -type f 2>/dev/null | perl -lne 'print if -B $_')
 
     if [[ $binary_count -eq 0 ]]; then
         success "No binary files found"
@@ -587,6 +650,7 @@ check_license_headers() {
     find_cmd="$find_cmd \\) 2>/dev/null"
 
     # Check each source file for ASF license header
+    local documented_count=0
     while IFS= read -r source_file; do
         # Skip if file matches exclude patterns
         local should_exclude=0
@@ -607,12 +671,27 @@ check_license_headers() {
         # Check first 30 lines for Apache license header
         # Looking for the standard ASF license header text
         if ! head -n 30 "$source_file" | grep -q "Licensed to the Apache Software Foundation"; then
-            files_without_license+=("$source_file")
+            # No ASF header found - check if it's documented in LICENSE file as third-party code
+            local file_name=$(basename "$source_file")
+            local file_path_relative=$(echo "$source_file" | sed 's|^\./||')
+
+            # Check if file name or path is mentioned in LICENSE file
+            if [[ -f "LICENSE" ]] && (grep -q "$file_name" LICENSE 2>/dev/null || grep -q "$file_path_relative" LICENSE 2>/dev/null); then
+                # File is documented in LICENSE as third-party code - this is allowed
+                documented_count=$((documented_count + 1))
+            else
+                # Not documented - this is an error
+                files_without_license+=("$source_file")
+            fi
         fi
     done < <(eval "$find_cmd")
 
     # Report results
     info "Checked $total_checked source file(s) for ASF license headers (excluded $excluded_count generated/vendored files)"
+
+    if [[ $documented_count -gt 0 ]]; then
+        info "Found $documented_count source file(s) documented in LICENSE as third-party code (allowed)"
+    fi
 
     if [[ ${#files_without_license[@]} -gt 0 ]]; then
         collect_error "Found ${#files_without_license[@]} source file(s) without ASF license headers:"
@@ -632,11 +711,11 @@ check_license_headers() {
         fi
 
         echo ""
-        collect_error "All source files must include the Apache License header"
+        collect_error "All source files must include the Apache License header or be documented in LICENSE file"
         collect_error "You can use 'mvn apache-rat:check' for detailed license header analysis"
         return 1
     else
-        success "All $total_checked source file(s) have ASF license headers"
+        success "All $total_checked source file(s) have ASF license headers or are documented in LICENSE"
         mark_check_passed
         return 0
     fi
@@ -648,30 +727,45 @@ check_version_consistency() {
 
     TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
 
-    info "Checking version consistency in pom.xml files..."
-
-    # Find inconsistent versions in pom.xml files
-    local inconsistent=()
-    while IFS= read -r pom_file; do
-        # Extract version tags (exclude parent versions and SNAPSHOT)
-        while IFS= read -r version_line; do
-            if [[ ! "$version_line" =~ "<parent>" ]] && \
-               [[ ! "$version_line" =~ "SNAPSHOT" ]] && \
-               [[ ! "$version_line" =~ "$expected_version" ]]; then
-                inconsistent+=("$pom_file: $version_line")
-            fi
-        done < <(grep "<version>" "$pom_file" 2>/dev/null)
-    done < <(find . -name "pom.xml" -type f 2>/dev/null)
-
-    if [[ ${#inconsistent[@]} -gt 0 ]]; then
-        collect_error "Found version inconsistencies in pom.xml files:"
-        printf '    %s\n' "${inconsistent[@]}"
-        return 1
-    else
-        success "Version consistency check passed"
+    # Skip version check for Python projects (hugegraph-ai)
+    if [[ "$package" =~ 'hugegraph-ai' ]]; then
+        info "Skipping version check for Python project: $package"
         mark_check_passed
+        return 0
     fi
 
+    info "Checking version consistency (revision property)..."
+
+    # Find the parent/root pom.xml that defines the revision property
+    local root_pom=""
+    local revision_value=""
+
+    # Look for pom.xml files that define the revision property
+    while IFS= read -r pom_file; do
+        if grep -q "<revision>" "$pom_file" 2>/dev/null; then
+            # Extract the revision value
+            revision_value=$(grep "<revision>" "$pom_file" | head -1 | sed 's/.*<revision>\(.*\)<\/revision>.*/\1/')
+            root_pom="$pom_file"
+            break
+        fi
+    done < <(find . -name "pom.xml" -type f 2>/dev/null)
+
+    if [[ -z "$root_pom" ]]; then
+        collect_warning "No <revision> property found in pom.xml files - skipping version check"
+        mark_check_passed
+        return 0
+    fi
+
+    info "Found revision property in $root_pom: <revision>$revision_value</revision>"
+
+    # Check if revision matches expected version
+    if [[ "$revision_value" != "$expected_version" ]]; then
+        collect_error "Version mismatch: <revision>$revision_value</revision> in $root_pom (expected: $expected_version)"
+        return 1
+    fi
+
+    success "Version consistency check passed: revision=$revision_value"
+    mark_check_passed
     return 0
 }
 
@@ -686,7 +780,7 @@ check_notice_year() {
 
     local current_year=$(date +%Y)
     if ! grep -q "$current_year" NOTICE; then
-        collect_warning "NOTICE file may not contain current year ($current_year). Please verify copyright dates."
+        collect_warning "Package '$package': NOTICE file may not contain current year ($current_year). Please verify copyright dates."
     else
         mark_check_passed
     fi
@@ -700,6 +794,9 @@ validate_source_package() {
     local package_file=$1
     local package_dir=$(basename "$package_file" .tar.gz)
 
+    # Set current package context for error reporting
+    CURRENT_PACKAGE="$package_file"
+
     info "Validating source package: $package_file"
 
     # Extract package
@@ -708,6 +805,7 @@ validate_source_package() {
 
     if [[ ! -d "$package_dir" ]]; then
         collect_error "Failed to extract package: $package_file"
+        CURRENT_PACKAGE=""
         return 1
     fi
 
@@ -750,12 +848,18 @@ validate_source_package() {
 
     popd > /dev/null
 
+    # Clear package context
+    CURRENT_PACKAGE=""
+
     info "Finished validating source package: $package_file"
 }
 
 validate_binary_package() {
     local package_file=$1
     local package_dir=$(basename "$package_file" .tar.gz)
+
+    # Set current package context for error reporting
+    CURRENT_PACKAGE="$package_file"
 
     info "Validating binary package: $package_file"
 
@@ -765,6 +869,7 @@ validate_binary_package() {
 
     if [[ ! -d "$package_dir" ]]; then
         collect_error "Failed to extract package: $package_file"
+        CURRENT_PACKAGE=""
         return 1
     fi
 
@@ -786,6 +891,9 @@ validate_binary_package() {
     check_empty_files_and_dirs "$package_file"
 
     popd > /dev/null
+
+    # Clear package context
+    CURRENT_PACKAGE=""
 
     info "Finished validating binary package: $package_file"
 }
@@ -821,26 +929,44 @@ cleanup() {
     echo "                    VALIDATION SUMMARY                        "
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     echo ""
-    echo "Total Checks:  $TOTAL_CHECKS"
-    echo -e "${GREEN}Passed:        $PASSED_CHECKS${NC}"
-    echo -e "${RED}Failed:        $FAILED_CHECKS${NC}"
-    echo -e "${YELLOW}Warnings:      ${#VALIDATION_WARNINGS[@]}${NC}"
+
+    # Calculate execution time
+    local script_end_time=$(date +%s)
+    local execution_seconds=$((script_end_time - SCRIPT_START_TIME))
+    local execution_minutes=$((execution_seconds / 60))
+    local execution_seconds_remainder=$((execution_seconds % 60))
+
+    echo "Execution Time: ${execution_minutes}m ${execution_seconds_remainder}s"
+    echo "Total Checks:   $TOTAL_CHECKS"
+    echo -e "${GREEN}Passed:         $PASSED_CHECKS${NC}"
+    echo -e "${RED}Failed:         $FAILED_CHECKS${NC}"
+    echo -e "${YELLOW}Warnings:       ${#VALIDATION_WARNINGS[@]}${NC}"
     echo ""
 
     if [[ ${#VALIDATION_ERRORS[@]} -gt 0 ]]; then
-        echo -e "${RED}━━━ ERRORS ━━━${NC}"
-        for err in "${VALIDATION_ERRORS[@]}"; do
-            echo -e "${RED}  ✗ $err${NC}"
-        done
+        echo -e "${RED}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+        echo -e "${RED}                        ERRORS                                ${NC}"
+        echo -e "${RED}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
         echo ""
+        local err_index=1
+        for err in "${VALIDATION_ERRORS[@]}"; do
+            echo -e "${RED}[E${err_index}] $err${NC}"
+            echo ""  # Blank line between errors for readability
+            err_index=$((err_index + 1))
+        done
     fi
 
     if [[ ${#VALIDATION_WARNINGS[@]} -gt 0 ]]; then
-        echo -e "${YELLOW}━━━ WARNINGS ━━━${NC}"
-        for warn in "${VALIDATION_WARNINGS[@]}"; do
-            echo -e "${YELLOW}  ⚠ $warn${NC}"
-        done
+        echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+        echo -e "${YELLOW}                       WARNINGS                              ${NC}"
+        echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
         echo ""
+        local warn_index=1
+        for warn in "${VALIDATION_WARNINGS[@]}"; do
+            echo -e "${YELLOW}[W${warn_index}] $warn${NC}"
+            echo ""  # Blank line between warnings for readability
+            warn_index=$((warn_index + 1))
+        done
     fi
 
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
@@ -871,6 +997,9 @@ trap 'echo -e "${RED}Script interrupted${NC}"; exit 130' INT TERM
 ################################################################################
 
 main() {
+    # Record script start time
+    SCRIPT_START_TIME=$(date +%s)
+
     # Parse command line arguments
     while [[ $# -gt 0 ]]; do
         case $1 in
