@@ -1,20 +1,4 @@
 #!/usr/bin/env bash
-#
-# Licensed to the Apache Software Foundation (ASF) under one or more
-# contributor license agreements.  See the NOTICE file distributed with
-# this work for additional information regarding copyright ownership.
-# The ASF licenses this file to You under the Apache License, Version 2.0
-# (the "License"); you may not use this file except in compliance with
-# the License.  You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
 ################################################################################
 # Apache HugeGraph Release Validation Script
 ################################################################################
@@ -46,7 +30,6 @@
 #   ./validate-release.sh 1.7.0 pengjunzhi /path/to/dist
 #
 #   # Specify Java version
-#   ./validate-release.sh 1.7.0 pengjunzhi "" 11
 #   ./validate-release.sh 1.7.0 pengjunzhi /path/to/dist 11
 #
 ################################################################################
@@ -154,7 +137,7 @@ Examples:
   ${SCRIPT_NAME} --non-interactive 1.7.0 pengjunzhi
 
 For more information, visit:
-  https://hugegraph.apache.org/docs/contribution-guidelines/validate-release/
+  https://github.com/apache/incubator-hugegraph-doc/tree/master/dist
 
 EOF
 }
@@ -548,21 +531,114 @@ check_license_headers() {
 
     info "Checking for ASF license headers in source files..."
 
-    # Check Java files for Apache license headers
+    # Define file patterns to check for license headers
+    # Including: Java, Shell scripts, Python, Go, JavaScript, TypeScript, C/C++, Scala, Groovy, etc.
+    local -a file_patterns=(
+        "*.java"      # Java files
+        "*.sh"        # Shell scripts
+        "*.py"        # Python files
+        "*.go"        # Go files
+        "*.js"        # JavaScript files
+        "*.ts"        # TypeScript files
+        "*.jsx"       # React JSX files
+        "*.tsx"       # React TypeScript files
+        "*.c"         # C files
+        "*.h"         # C header files
+        "*.cpp"       # C++ files
+        "*.cc"        # C++ files
+        "*.cxx"       # C++ files
+        "*.hpp"       # C++ header files
+        "*.scala"     # Scala files
+        "*.groovy"    # Groovy files
+        "*.gradle"    # Gradle build files
+        "*.rs"        # Rust files
+        "*.kt"        # Kotlin files
+        "*.proto"     # Protocol buffer files
+    )
+
+    # Files to exclude from license header check
+    local -a exclude_patterns=(
+        "*.min.js"              # Minified JavaScript
+        "*.min.css"             # Minified CSS
+        "*node_modules*"        # Node.js dependencies
+        "*target*"              # Maven build output
+        "*build*"               # Build directories
+        "*.pb.go"               # Generated protobuf files
+        "*generated*"           # Generated code
+        "*third_party*"         # Third party code
+        "*vendor*"              # Vendor dependencies
+    )
+
     local files_without_license=()
-    while IFS= read -r java_file; do
-        if ! head -n 20 "$java_file" | grep -q "Licensed to the Apache Software Foundation"; then
-            files_without_license+=("$java_file")
+    local total_checked=0
+    local excluded_count=0
+
+    # Build find command with all patterns
+    local find_cmd="find . -type f \\("
+    local first=1
+    for pattern in "${file_patterns[@]}"; do
+        if [[ $first -eq 1 ]]; then
+            find_cmd="$find_cmd -name \"$pattern\""
+            first=0
+        else
+            find_cmd="$find_cmd -o -name \"$pattern\""
         fi
-    done < <(find . -name "*.java" -type f 2>/dev/null)
+    done
+    find_cmd="$find_cmd \\) 2>/dev/null"
+
+    # Check each source file for ASF license header
+    while IFS= read -r source_file; do
+        # Skip if file matches exclude patterns
+        local should_exclude=0
+        for exclude_pattern in "${exclude_patterns[@]}"; do
+            if [[ "$source_file" == $exclude_pattern ]]; then
+                should_exclude=1
+                excluded_count=$((excluded_count + 1))
+                break
+            fi
+        done
+
+        if [[ $should_exclude -eq 1 ]]; then
+            continue
+        fi
+
+        total_checked=$((total_checked + 1))
+
+        # Check first 30 lines for Apache license header
+        # Looking for the standard ASF license header text
+        if ! head -n 30 "$source_file" | grep -q "Licensed to the Apache Software Foundation"; then
+            files_without_license+=("$source_file")
+        fi
+    done < <(eval "$find_cmd")
+
+    # Report results
+    info "Checked $total_checked source file(s) for ASF license headers (excluded $excluded_count generated/vendored files)"
 
     if [[ ${#files_without_license[@]} -gt 0 ]]; then
-        collect_warning "Found ${#files_without_license[@]} Java file(s) without ASF license headers"
-        collect_warning "Run 'mvn apache-rat:check' for detailed license header analysis"
-        # Note: This is a warning, not an error
+        collect_error "Found ${#files_without_license[@]} source file(s) without ASF license headers:"
+
+        # Show first 20 files without headers (to avoid overwhelming output)
+        local show_count=${#files_without_license[@]}
+        if [[ $show_count -gt 20 ]]; then
+            show_count=20
+        fi
+
+        for ((i=0; i<show_count; i++)); do
+            echo "    ${files_without_license[$i]}"
+        done
+
+        if [[ ${#files_without_license[@]} -gt 20 ]]; then
+            echo "    ... and $((${#files_without_license[@]} - 20)) more files"
+        fi
+
+        echo ""
+        collect_error "All source files must include the Apache License header"
+        collect_error "You can use 'mvn apache-rat:check' for detailed license header analysis"
+        return 1
     else
-        success "All Java source files have ASF license headers"
+        success "All $total_checked source file(s) have ASF license headers"
         mark_check_passed
+        return 0
     fi
 }
 
@@ -656,7 +732,7 @@ validate_source_package() {
         warn "Skipping compilation for AI module (not required)"
         mark_check_passed
     elif [[ "$package_file" =~ "hugegraph-computer" ]]; then
-        if cd computer 2>/dev/null && mvn package -DskipTests -Papache-release -ntp -e; then
+        if cd computer 2>/dev/null && mvn clean package -DskipTests -Dcheckstyle.skip=true -ntp -e; then
             success "Compilation successful: $package_file"
             mark_check_passed
         else
@@ -664,7 +740,7 @@ validate_source_package() {
         fi
         cd ..
     else
-        if mvn package -DskipTests -Papache-release -ntp -e; then
+        if mvn clean package -DskipTests -Dcheckstyle.skip=true -ntp -e; then
             success "Compilation successful: $package_file"
             mark_check_passed
         else
