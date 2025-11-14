@@ -1,381 +1,1179 @@
 #!/usr/bin/env bash
 #
-# This script is used to validate the release package, including:
-# 1. Check the release package name & content
-# 2. Check the release package sha512 & gpg signature
-# 3. Compile the source package & run server & toolchain
-# 4. Run server & toolchain in binary package
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+################################################################################
+# Apache HugeGraph Release Validation Script
+################################################################################
+#
+# This script validates Apache HugeGraph (Incubating) release packages:
+#   1. Check package integrity (SHA512, GPG signatures)
+#   2. Validate package names and required files
+#   3. Check license compliance (ASF categories)
+#   4. Validate package contents
+#   5. Compile source packages
+#   6. Run server and toolchain tests
 #
 # Usage:
-#   1. Validate from Apache SVN (default):
-#      ./validate-release.sh <version> <user> [local-path] [java-version]
-#      Example: ./validate-release.sh 1.7.0 pengjunzhi
-#      Example: ./validate-release.sh 1.7.0 pengjunzhi "" 11
+#   validate-release.sh <version> <user> [local-path] [java-version]
+#   validate-release.sh --help
 #
-#   2. Validate from local directory:
-#      ./validate-release.sh <version> <user> <local-path> [java-version]
-#      Example: ./validate-release.sh 1.7.0 pengjunzhi /path/to/dist
-#      Example: ./validate-release.sh 1.7.0 pengjunzhi /path/to/dist 11
+# Arguments:
+#   version       Release version (e.g., 1.7.0)
+#   user          Apache username for GPG key trust
+#   local-path    (Optional) Local directory containing release files
+#                 If omitted, downloads from Apache SVN
+#   java-version  (Optional) Java version to validate (default: 11)
+#
+# Examples:
+#   # Validate from Apache SVN
+#   ./validate-release.sh 1.7.0 pengjunzhi
+#
+#   # Validate from local directory
+#   ./validate-release.sh 1.7.0 pengjunzhi /path/to/dist
+#
+#   # Specify Java version
+#   ./validate-release.sh 1.7.0 pengjunzhi "" 11
+#   ./validate-release.sh 1.7.0 pengjunzhi /path/to/dist 11
+#
+################################################################################
 
-# exit when any error occurs
-set -e
+# Strict mode - but don't exit on error yet (we collect all errors)
+set -o pipefail
+set -o nounset
 
-# Color definitions
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[0;33m'
-NC='\033[0m' # No Color
+################################################################################
+# Configuration Constants
+################################################################################
 
-# release version (input by committer)
-RELEASE_VERSION=$1 # like 1.7.0
-USER=$2
-LOCAL_DIST_PATH=$3 # optional: local directory path containing release files
-JAVA_VERSION=${4:-11} # optional: default to 11
+readonly SCRIPT_VERSION="2.0.0"
+readonly SCRIPT_NAME=$(basename "$0")
 
-# this URL is only valid during the release process
-SVN_URL_PREFIX="https://dist.apache.org/repos/dist/dev/incubator/hugegraph"
+# URLs
+readonly SVN_URL_PREFIX="https://dist.apache.org/repos/dist/dev/incubator/hugegraph"
+readonly KEYS_URL="https://downloads.apache.org/incubator/hugegraph/KEYS"
 
-# git release branch (check it carefully)
-#GIT_BRANCH="release-${RELEASE_VERSION}"
+# Validation Rules
+readonly MAX_FILE_SIZE="800k"
+readonly SERVER_START_DELAY=3
+readonly SERVICE_HEALTH_TIMEOUT=30
 
-RELEASE_VERSION=${RELEASE_VERSION:?"Please input the release version, like 1.7.0"}
-USER=${USER:?"Please input the user name"}
-WORK_DIR=$(
-  cd "$(dirname "$0")"
-  pwd
-)
+# License Patterns (ASF Category X - Prohibited)
+readonly CATEGORY_X="\bGPL|\bLGPL|Sleepycat License|BSD-4-Clause|\bBCL\b|JSR-275|Amazon Software License|\bRSAL\b|\bQPL\b|\bSSPL|\bCPOL|\bNPL1|Creative Commons Non-Commercial|JSON\.org"
 
-cd "${WORK_DIR}"
-echo "Current work dir: $(pwd)"
+# License Patterns (ASF Category B - Must be documented)
+readonly CATEGORY_B="\bCDDL1|\bCPL|\bEPL|\bIPL|\bMPL|\bSPL|OSL-3.0|UnRAR License|Erlang Public License|\bOFL\b|Ubuntu Font License Version 1.0|IPA Font License Agreement v1.0|EPL2.0|CC-BY"
 
-####################################################
-# Step 1: Prepare Release Files (SVN or Local)    #
-####################################################
-if [[ -n "${LOCAL_DIST_PATH}" ]]; then
-  # Use local directory
-  DIST_DIR="${LOCAL_DIST_PATH}"
-  echo "Using local directory: ${DIST_DIR}"
+# Color Definitions
+readonly RED='\033[0;31m'
+readonly GREEN='\033[0;32m'
+readonly YELLOW='\033[0;33m'
+readonly BLUE='\033[0;34m'
+readonly NC='\033[0m' # No Color
 
-  # Validate local directory exists
-  if [[ ! -d "${DIST_DIR}" ]]; then
-    echo -e "${RED}Error: Directory ${DIST_DIR} does not exist${NC}"
-    exit 1
-  fi
+################################################################################
+# Global Variables
+################################################################################
 
-  echo "Contents of ${DIST_DIR}:"
-  ls -lh "${DIST_DIR}"
-else
-  # Download from SVN
-  DIST_DIR="${WORK_DIR}/dist/${RELEASE_VERSION}"
-  echo "Downloading from SVN to: ${DIST_DIR}"
+# Script state
+WORK_DIR=""
+LOG_FILE=""
+DIST_DIR=""
+RELEASE_VERSION=""
+USER=""
+LOCAL_DIST_PATH=""
+JAVA_VERSION=11
+NON_INTERACTIVE=0
 
-  rm -rf "${DIST_DIR}"
-  mkdir -p "${DIST_DIR}"
-  cd "${DIST_DIR}"
-  svn co "${SVN_URL_PREFIX}/${RELEASE_VERSION}" .
-fi
+# Error tracking
+declare -a VALIDATION_ERRORS=()
+declare -a VALIDATION_WARNINGS=()
+TOTAL_CHECKS=0
+PASSED_CHECKS=0
+FAILED_CHECKS=0
 
-cd "${DIST_DIR}"
-echo "Release files directory: ${DIST_DIR}"
+# Service tracking for cleanup
+SERVER_STARTED=0
+HUBBLE_STARTED=0
 
-##################################################
-# Step 2: Check Environment & Import Public Keys #
-##################################################
-shasum --version 1>/dev/null
-gpg --version 1>/dev/null
+################################################################################
+# Helper Functions - Output & Logging
+################################################################################
 
-# Check Java version
-echo "Checking Java version..."
-if ! command -v java &> /dev/null; then
-  echo -e "${RED}Error: Java is not installed or not in PATH${NC}"
-  exit 1
-fi
+show_usage() {
+    cat << EOF
+Apache HugeGraph Release Validation Script v${SCRIPT_VERSION}
 
-CURRENT_JAVA_VERSION=$(java -version 2>&1 | head -n 1 | awk -F '"' '{print $2}' | awk -F '.' '{print $1}')
-echo "Current Java version: $CURRENT_JAVA_VERSION (Required: ${JAVA_VERSION})"
+Usage: ${SCRIPT_NAME} <version> <user> [local-path] [java-version]
+       ${SCRIPT_NAME} --help | -h
+       ${SCRIPT_NAME} --version | -v
 
-if [[ "$CURRENT_JAVA_VERSION" != "$JAVA_VERSION" ]]; then
-  echo -e "${RED}Error: Java version mismatch!${NC}"
-  echo -e "${RED}  Current: Java $CURRENT_JAVA_VERSION${NC}"
-  echo -e "${RED}  Required: Java ${JAVA_VERSION}${NC}"
-  echo -e "${RED}  Please switch to Java ${JAVA_VERSION} before running this script${NC}"
-  exit 1
-fi
+Validates Apache HugeGraph release packages including:
+  - Package integrity (SHA512, GPG signatures)
+  - License compliance (ASF categories)
+  - Package contents and structure
+  - Compilation and runtime testing
 
-echo -e "${GREEN}Java version check passed: Java $CURRENT_JAVA_VERSION${NC}"
+Arguments:
+  version       Release version (e.g., 1.7.0)
+  user          Apache username for GPG key trust
+  local-path    (Optional) Local directory path containing release files
+                If omitted, downloads from Apache SVN
+  java-version  (Optional) Java version to validate (default: 11)
 
-wget https://downloads.apache.org/incubator/hugegraph/KEYS
-echo "Import KEYS:" && gpg --import KEYS
-# TODO: how to trust all public keys in gpg list, currently only trust the first one
-echo -e "5\ny\n" | gpg --batch --command-fd 0 --edit-key $USER trust
+Options:
+  --help, -h            Show this help message
+  --version, -v         Show script version
+  --non-interactive     Run without prompts (for CI/CD)
 
-echo "trust all pk"
-for key in $(gpg --no-tty --list-keys --with-colons | awk -F: '/^pub/ {print $5}'); do
-  echo -e "5\ny\n" | gpg --batch --command-fd 0 --edit-key "$key" trust
-done
+Examples:
+  # Validate from Apache SVN (downloads files)
+  ${SCRIPT_NAME} 1.7.0 pengjunzhi
 
-########################################
-# Step 3: Check SHA512 & GPG Signature #
-########################################
-cd "${DIST_DIR}"
+  # Validate from local directory
+  ${SCRIPT_NAME} 1.7.0 pengjunzhi /path/to/dist
 
-for i in *.tar.gz; do
-  echo "$i"
-  shasum -a 512 --check "$i".sha512
-  eval gpg "${GPG_OPT}" --verify "$i".asc "$i"
-done
+  # Specify Java version
+  ${SCRIPT_NAME} 1.7.0 pengjunzhi "" 11
+  ${SCRIPT_NAME} 1.7.0 pengjunzhi /path/to/dist 11
 
-####################################
-# Step 4: Validate Source Packages #
-####################################
-cd "${DIST_DIR}"
+  # Non-interactive mode for CI
+  ${SCRIPT_NAME} --non-interactive 1.7.0 pengjunzhi
 
-CATEGORY_X="\bGPL|\bLGPL|Sleepycat License|BSD-4-Clause|\bBCL\b|JSR-275|Amazon Software License|\bRSAL\b|\bQPL\b|\bSSPL|\bCPOL|\bNPL1|Creative Commons Non-Commercial|JSON\.org"
-CATEGORY_B="\bCDDL1|\bCPL|\bEPL|\bIPL|\bMPL|\bSPL|OSL-3.0|UnRAR License|Erlang Public License|\bOFL\b|Ubuntu Font License Version 1.0|IPA Font License Agreement v1.0|EPL2.0|CC-BY"
-ls -lh ./*.tar.gz
-for i in *src.tar.gz; do
-  echo "$i"
+For more information, visit:
+  https://hugegraph.apache.org/docs/contribution-guidelines/validate-release/
 
-  # 4.1: check the directory name include "incubating"
-  if [[ ! "$i" =~ "incubating" ]]; then
-    echo -e "${RED}The package name $i should include incubating${NC}" && exit 1
-  fi
+EOF
+}
 
-  MODULE_DIR=$(basename "$i" .tar.gz)
-  rm -rf ${MODULE_DIR}
-  tar -xzvf "$i"
-  pushd ${MODULE_DIR}
-  echo "Start to check the package content: ${MODULE_DIR}"
+log() {
+    local level=$1
+    shift
+    local message="$*"
+    local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+    echo "[${timestamp}] [${level}] ${message}" | tee -a "${LOG_FILE:-/dev/null}"
+}
 
-  # 4.2: check the directory include "NOTICE" and "LICENSE" file and "DISCLAIMER" file
-  if [[ ! -f "LICENSE" ]]; then
-    echo -e "${RED}The package $i should include LICENSE file${NC}" && exit 1
-  fi
-  if [[ ! -f "NOTICE" ]]; then
-    echo -e "${RED}The package $i should include NOTICE file${NC}" && exit 1
-  fi
-  if [[ ! -f "DISCLAIMER" ]]; then
-    echo -e "${RED}The package $i should include DISCLAIMER file${NC}" && exit 1
-  fi
+info() {
+    echo -e "$*"
+    log "INFO" "$*"
+}
 
-  # 4.3: ensure doesn't contains ASF CATEGORY X License dependencies in LICENSE and NOTICE files
-  COUNT=$(grep -E "$CATEGORY_X" LICENSE NOTICE | wc -l)
-  if [[ $COUNT -ne 0 ]]; then
-     grep -E "$CATEGORY_X" LICENSE NOTICE
-     echo -e "${RED}The package $i shouldn't include invalid ASF category X dependencies, but get $COUNT${NC}" && exit 1
-  fi
+success() {
+    echo -e "${GREEN}✓ $*${NC}"
+    log "SUCCESS" "$*"
+}
 
-  # 4.4: ensure doesn't contains ASF CATEGORY B License dependencies in LICENSE and NOTICE files
-  COUNT=$(grep -E "$CATEGORY_B" LICENSE NOTICE | wc -l)
-  if [[ $COUNT -ne 0 ]]; then
-     grep -E "$CATEGORY_B" LICENSE NOTICE
-     echo -e "${RED}The package $i shouldn't include invalid ASF category B dependencies, but get $COUNT${NC}" && exit 1
-  fi
+warn() {
+    echo -e "${YELLOW}⚠ $*${NC}" >&2
+    log "WARN" "$*"
+}
 
-  # 4.5: ensure doesn't contains empty directory or file
-  find . -type d -empty | while read -r EMPTY_DIR; do
-    find . -type d -empty
-    echo -e "${RED}The package $i shouldn't include empty directory: $EMPTY_DIR is empty${NC}" && exit 1
-  done
-  find . -type f -empty | while read -r EMPTY_FILE; do
-    find . -type f -empty
-    echo -e "${RED}The package $i shouldn't include empty file: $EMPTY_FILE is empty${NC}" && exit 1
-  done
+error() {
+    echo -e "${RED}✗ $*${NC}" >&2
+    log "ERROR" "$*"
+}
 
-  # 4.6: ensure any file should less than 800kb
-  find . -type f -size +800k | while read -r FILE; do
-    find . -type f -size +800k
-    echo -e "${RED}The package $i shouldn't include file larger than 800kb: $FILE is larger than 800kb${NC}" && exit 1
-  done
+print_step() {
+    local step=$1
+    local total=$2
+    local description=$3
+    echo ""
+    echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "${BLUE}Step [$step/$total]: $description${NC}"
+    echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    log "STEP" "[$step/$total] $description"
+}
 
-  # 4.7: ensure all binary files are documented in LICENSE
-  find . -type f | perl -lne 'print if -B' | while read -r BINARY_FILE; do
-    FILE_NAME=$(basename "$BINARY_FILE")
-    if grep -q "$FILE_NAME" LICENSE; then
-      echo -e "${YELLOW}Binary file $BINARY_FILE is documented in LICENSE, please check manually${NC}"
-    else
-      echo -e "${RED}Error: Binary file $BINARY_FILE is not documented in LICENSE${NC}" && exit 1
+print_progress() {
+    local current=$1
+    local total=$2
+    local item=$3
+    echo -e "  [${current}/${total}] ${item}"
+}
+
+collect_error() {
+    local error_msg="$1"
+    VALIDATION_ERRORS+=("$error_msg")
+    FAILED_CHECKS=$((FAILED_CHECKS + 1))
+    error "$error_msg"
+}
+
+collect_warning() {
+    local warning_msg="$1"
+    VALIDATION_WARNINGS+=("$warning_msg")
+    warn "$warning_msg"
+}
+
+mark_check_passed() {
+    PASSED_CHECKS=$((PASSED_CHECKS + 1))
+    TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
+}
+
+mark_check_failed() {
+    FAILED_CHECKS=$((FAILED_CHECKS + 1))
+    TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
+}
+
+################################################################################
+# Helper Functions - System & Environment
+################################################################################
+
+setup_logging() {
+    local log_dir="${WORK_DIR}/logs"
+    mkdir -p "$log_dir"
+    LOG_FILE="$log_dir/validate-${RELEASE_VERSION}-$(date +%Y%m%d-%H%M%S).log"
+
+    info "Logging to: ${LOG_FILE}"
+    log "INIT" "Starting validation for HugeGraph ${RELEASE_VERSION}"
+    log "INIT" "User: ${USER}, Java: ${JAVA_VERSION}"
+}
+
+check_dependencies() {
+    local missing_deps=()
+    local required_commands=("svn" "gpg" "shasum" "mvn" "java" "wget" "tar" "curl" "awk" "grep" "find" "perl")
+
+    info "Checking required dependencies..."
+
+    for cmd in "${required_commands[@]}"; do
+        if ! command -v "$cmd" &> /dev/null; then
+            missing_deps+=("$cmd")
+            error "Missing: $cmd"
+        else
+            local version_info
+            case "$cmd" in
+                java)
+                    version_info=$(java -version 2>&1 | head -n1 | cut -d'"' -f2)
+                    ;;
+                mvn)
+                    version_info=$(mvn --version 2>&1 | head -n1 | awk '{print $3}')
+                    ;;
+                *)
+                    version_info=$($cmd --version 2>&1 | head -n1 || echo "installed")
+                    ;;
+            esac
+            success "$cmd: $version_info"
+        fi
+    done
+
+    if [[ ${#missing_deps[@]} -gt 0 ]]; then
+        error "Missing required dependencies: ${missing_deps[*]}"
+        echo ""
+        echo "Please install missing dependencies:"
+        echo "  Ubuntu/Debian: sudo apt-get install ${missing_deps[*]}"
+        echo "  macOS: brew install ${missing_deps[*]}"
+        exit 1
     fi
-  done
 
-  # 4.8: test compile the packages
-  if [[ "$i" =~ 'hugegraph-ai' ]]; then
-    echo "Skip compile $i module in all versions"
-  elif [[ "$i" =~ "hugegraph-computer" ]]; then
-    cd computer
-    mvn package -DskipTests -Papache-release -ntp -e
-  else
-    # TODO: consider using commands that are entirely consistent with building binary packages
-    mvn package -DskipTests -Papache-release -ntp -e
-    ls -lh
-  fi
-  popd
-done
+    success "All dependencies are installed"
+}
 
-###########################################
-# Step 5: Run Compiled Packages of Server #
-###########################################
-cd "${DIST_DIR}"
+check_java_version() {
+    local required_version=$1
 
-ls -lh
-pushd ./*hugegraph-incubating*src/hugegraph-server/*hugegraph*"${RELEASE_VERSION}"
-bin/init-store.sh
-sleep 3
-bin/start-hugegraph.sh
-popd
+    info "Checking Java version..."
 
-#######################################################################
-# Step 6: Run Compiled Packages of ToolChain (Loader & Tool & Hubble) #
-#######################################################################
-cd "${DIST_DIR}"
+    if ! command -v java &> /dev/null; then
+        collect_error "Java is not installed or not in PATH"
+        return 1
+    fi
 
-pushd ./*toolchain*src
-ls -lh
-pushd ./*toolchain*"${RELEASE_VERSION}"
-ls -lh
+    local current_version=$(java -version 2>&1 | head -n 1 | awk -F '"' '{print $2}' | awk -F '.' '{print $1}')
+    info "Current Java version: $current_version (Required: ${required_version})"
 
-# 6.1: load some data first
-echo "test loader"
-pushd ./*loader*"${RELEASE_VERSION}"
-bin/hugegraph-loader.sh -f ./example/file/struct.json -s ./example/file/schema.groovy \
-  -g hugegraph
-popd
+    if [[ "$current_version" != "$required_version" ]]; then
+        collect_error "Java version mismatch! Current: Java $current_version, Required: Java ${required_version}"
+        collect_error "Please switch to Java ${required_version} before running this script"
+        return 1
+    fi
 
-# 6.2: try some gremlin query & api in tool
-echo "test tool"
-pushd ./*tool*"${RELEASE_VERSION}"
-bin/hugegraph gremlin-execute --script 'g.V().count()'
-bin/hugegraph task-list
-bin/hugegraph backup -t all --directory ./backup-test
-popd
+    success "Java version check passed: Java $current_version"
+    mark_check_passed
+    return 0
+}
 
-# 6.3: start hubble and connect to server
-echo "test hubble"
-pushd ./*hubble*"${RELEASE_VERSION}"
-# TODO: add hubble doc & test it
-cat conf/hugegraph-hubble.properties
-bin/start-hubble.sh
-bin/stop-hubble.sh
-popd
+find_package_dir() {
+    local pattern=$1
+    local base_dir=${2:-"${DIST_DIR}"}
 
-popd
-popd
-# stop server
-pushd ./*hugegraph-incubating*src/hugegraph-server/*hugegraph*"${RELEASE_VERSION}"
-bin/stop-hugegraph.sh
-popd
+    local found=$(find "$base_dir" -maxdepth 3 -type d -path "$pattern" 2>/dev/null | head -n1)
 
-# clear source packages
-#rm -rf ./*src*
-#ls -lh
+    if [[ -z "$found" ]]; then
+        collect_error "Could not find directory matching pattern: $pattern"
+        return 1
+    fi
 
-####################################
-# Step 7: Validate Binary Packages #
-####################################
-cd "${DIST_DIR}"
+    echo "$found"
+}
 
-for i in *.tar.gz; do
-  if [[ "$i" == *-src.tar.gz ]]; then
-    # skip source packages
-    continue
-  fi
+################################################################################
+# Helper Functions - GPG & Signatures
+################################################################################
 
-  echo "$i"
+import_and_trust_gpg_keys() {
+    local user=$1
 
-  # 7.1: check the directory name include "incubating"
-  if [[ ! "$i" =~ "incubating" ]]; then
-    echo -e "${RED}The package name $i should include incubating${NC}" && exit 1
-  fi
+    info "Downloading KEYS file from ${KEYS_URL}..."
+    if ! wget -q "${KEYS_URL}" -O KEYS; then
+        collect_error "Failed to download KEYS file from ${KEYS_URL}"
+        return 1
+    fi
+    success "KEYS file downloaded"
 
-  MODULE_DIR=$(basename "$i" .tar.gz)
-  rm -rf ${MODULE_DIR}
-  tar -xzvf "$i"
-  pushd ${MODULE_DIR}
-  ls -lh
-  echo "Start to check the package content: ${MODULE_DIR}"
+    info "Importing GPG keys..."
+    local import_output=$(gpg --import KEYS 2>&1)
+    local imported_count=$(echo "$import_output" | grep -c "imported" || echo "0")
 
-  # 7.2: check root dir include "NOTICE"/"LICENSE"/"DISCLAIMER" files & "licenses" dir
-  if [[ ! -f "LICENSE" ]]; then
-    echo -e "${RED}The package $i should include LICENSE file${NC}" && exit 1
-  fi
-  if [[ ! -f "NOTICE" ]]; then
-    echo -e "${RED}The package $i should include NOTICE file${NC}" && exit 1
-  fi
-  if [[ ! -f "DISCLAIMER" ]]; then
-    echo -e "${RED}The package $i should include DISCLAIMER file${NC}" && exit 1
-  fi
-  if [[ ! -d "licenses" ]]; then
-    echo -e "${RED}The package $i should include licenses dir${NC}" && exit 1
-  fi
+    if [[ "$imported_count" == "0" ]]; then
+        warn "No new keys imported (may already exist in keyring)"
+    else
+        success "Imported GPG keys"
+    fi
 
-  # 7.3: ensure doesn't contains ASF CATEGORY X License dependencies in LICENSE/NOTICE and licenses/* files
-  COUNT=$(grep -r -E "$CATEGORY_X" LICENSE NOTICE licenses | wc -l)
-  if [[ $COUNT -ne 0 ]]; then
-    grep -r -E "$CATEGORY_X" LICENSE NOTICE licenses
-    echo -e "${RED}The package $i shouldn't include invalid ASF category X dependencies, but get $COUNT${NC}" && exit 1
-  fi
+    # Trust specific user key
+    if ! gpg --list-keys "$user" &>/dev/null; then
+        collect_error "User '$user' key not found in imported keys. Please verify the username."
+        return 1
+    fi
 
-  # 7.4: ensure doesn't contains empty directory or file
-  find . -type d -empty | while read -r EMPTY_DIR; do
-    find . -type d -empty
-    echo -e "${RED}The package $i shouldn't include empty directory: $EMPTY_DIR is empty${NC}" && exit 1
-  done
-  find . -type f -empty | while read -r EMPTY_FILE; do
-    find . -type f -empty
-    echo -e "${RED}The package $i shouldn't include empty file: $EMPTY_FILE is empty${NC}" && exit 1
-  done
+    info "Trusting GPG key for user: $user"
+    echo -e "5\ny\n" | gpg --batch --command-fd 0 --edit-key "$user" trust 2>/dev/null
+    success "Trusted key for $user"
 
-  popd
-done
+    # Trust all imported keys
+    info "Trusting all imported public keys..."
+    local trusted=0
+    for key in $(gpg --no-tty --list-keys --with-colons | awk -F: '/^pub/ {print $5}'); do
+        echo -e "5\ny\n" | gpg --batch --command-fd 0 --edit-key "$key" trust 2>/dev/null
+        trusted=$((trusted + 1))
+    done
+    success "Trusted $trusted GPG keys"
 
-# TODO: skip the following steps by comparing the artifacts built from source packages with binary packages
-#########################################
-# Step 8: Run Binary Packages of Server #
-#########################################
-cd "${DIST_DIR}"
+    mark_check_passed
+    return 0
+}
 
-# TODO: run pd & store
-pushd ./*hugegraph-incubating*"${RELEASE_VERSION}"/*hugegraph-server-incubating*"${RELEASE_VERSION}"
-bin/init-store.sh
-sleep 3
-bin/start-hugegraph.sh
-popd
+################################################################################
+# Validation Functions - Package Checks
+################################################################################
 
-#####################################################################
-# Step 9: Run Binary Packages of ToolChain (Loader & Tool & Hubble) #
-#####################################################################
-cd "${DIST_DIR}"
+check_incubating_name() {
+    local package=$1
+    TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
 
-pushd ./*toolchain*"${RELEASE_VERSION}"
-ls -lh
+    if [[ ! "$package" =~ "incubating" ]]; then
+        collect_error "Package name '$package' should include 'incubating'"
+        return 1
+    fi
 
-# 9.1: load some data first
-echo "test loader"
-pushd ./*loader*"${RELEASE_VERSION}"
-bin/hugegraph-loader.sh -f ./example/file/struct.json -s ./example/file/schema.groovy -g hugegraph
-popd
+    mark_check_passed
+    return 0
+}
 
-# 9.2: try some gremlin query & api in tool
-echo "test tool"
-pushd ./*tool*"${RELEASE_VERSION}"
-bin/hugegraph gremlin-execute --script 'g.V().count()'
-bin/hugegraph task-list
-bin/hugegraph backup -t all --directory ./backup-test
-popd
+check_required_files() {
+    local package=$1
+    local require_disclaimer=${2:-true}
+    local has_error=0
 
-# 9.3: start hubble and connect to server
-echo "test hubble"
-pushd ./*hubble*"${RELEASE_VERSION}"
-# TODO: add hubble doc & test it
-cat conf/hugegraph-hubble.properties
-bin/start-hubble.sh
-bin/stop-hubble.sh
-popd
+    if [[ ! -f "LICENSE" ]]; then
+        collect_error "Package '$package' missing LICENSE file"
+        has_error=1
+    else
+        mark_check_passed
+    fi
 
-popd
-# stop server
-pushd ./*hugegraph-incubating*"${RELEASE_VERSION}"/*hugegraph-server-incubating*"${RELEASE_VERSION}"
-bin/stop-hugegraph.sh
-popd
+    if [[ ! -f "NOTICE" ]]; then
+        collect_error "Package '$package' missing NOTICE file"
+        has_error=1
+    else
+        mark_check_passed
+    fi
 
-echo -e "${GREEN}Finish validate, please check all steps manually again!${NC}"
+    if [[ "$require_disclaimer" == "true" ]] && [[ ! -f "DISCLAIMER" ]]; then
+        collect_error "Package '$package' missing DISCLAIMER file"
+        has_error=1
+    else
+        mark_check_passed
+    fi
+
+    return $has_error
+}
+
+check_license_categories() {
+    local package=$1
+    local files=$2
+    local has_error=0
+
+    # Check Category X (Prohibited)
+    TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
+    local cat_x_count=$(grep -r -E "$CATEGORY_X" $files 2>/dev/null | wc -l | tr -d ' ')
+    if [[ $cat_x_count -ne 0 ]]; then
+        collect_error "Package '$package' contains $cat_x_count prohibited ASF Category X license(s)"
+        grep -r -E "$CATEGORY_X" $files
+        has_error=1
+    else
+        mark_check_passed
+    fi
+
+    # Check Category B (Must be documented - warning only)
+    TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
+    local cat_b_count=$(grep -r -E "$CATEGORY_B" $files 2>/dev/null | wc -l | tr -d ' ')
+    if [[ $cat_b_count -ne 0 ]]; then
+        collect_warning "Package '$package' contains $cat_b_count ASF Category B license(s) - please verify documentation"
+        grep -r -E "$CATEGORY_B" $files
+    else
+        mark_check_passed
+    fi
+
+    return $has_error
+}
+
+check_empty_files_and_dirs() {
+    local package=$1
+    local has_error=0
+
+    TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
+
+    # Find empty directories
+    local empty_dirs=()
+    while IFS= read -r empty_dir; do
+        empty_dirs+=("$empty_dir")
+    done < <(find . -type d -empty 2>/dev/null)
+
+    # Find empty files
+    local empty_files=()
+    while IFS= read -r empty_file; do
+        empty_files+=("$empty_file")
+    done < <(find . -type f -empty 2>/dev/null)
+
+    if [[ ${#empty_dirs[@]} -gt 0 ]]; then
+        collect_error "Package '$package' contains ${#empty_dirs[@]} empty director(y/ies):"
+        printf '    %s\n' "${empty_dirs[@]}"
+        has_error=1
+    fi
+
+    if [[ ${#empty_files[@]} -gt 0 ]]; then
+        collect_error "Package '$package' contains ${#empty_files[@]} empty file(s):"
+        printf '    %s\n' "${empty_files[@]}"
+        has_error=1
+    fi
+
+    if [[ $has_error -eq 0 ]]; then
+        mark_check_passed
+    fi
+
+    return $has_error
+}
+
+check_file_sizes() {
+    local package=$1
+    local max_size=$2
+    local has_error=0
+
+    TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
+
+    local large_files=()
+    while IFS= read -r large_file; do
+        large_files+=("$large_file")
+    done < <(find . -type f -size "+${max_size}" 2>/dev/null)
+
+    if [[ ${#large_files[@]} -gt 0 ]]; then
+        collect_error "Package '$package' contains ${#large_files[@]} file(s) larger than ${max_size}:"
+        for file in "${large_files[@]}"; do
+            local size=$(du -h "$file" | awk '{print $1}')
+            echo "    $file ($size)"
+        done
+        has_error=1
+    else
+        mark_check_passed
+    fi
+
+    return $has_error
+}
+
+check_binary_files() {
+    local package=$1
+    local has_error=0
+
+    TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
+
+    info "Checking for undocumented binary files..."
+
+    local binary_count=0
+    local undocumented_count=0
+
+    # Find binary files using perl
+    while IFS= read -r binary_file; do
+        binary_count=$((binary_count + 1))
+        local file_name=$(basename "$binary_file")
+
+        # Check if documented in LICENSE
+        if grep -q "$file_name" LICENSE 2>/dev/null; then
+            success "Binary file '$binary_file' is documented in LICENSE"
+        else
+            collect_error "Undocumented binary file: $binary_file"
+            undocumented_count=$((undocumented_count + 1))
+            has_error=1
+        fi
+    done < <(find . -type f -exec perl -lne 'print if -B' {} \; 2>/dev/null)
+
+    if [[ $binary_count -eq 0 ]]; then
+        success "No binary files found"
+        mark_check_passed
+    elif [[ $undocumented_count -eq 0 ]]; then
+        success "All $binary_count binary file(s) are documented"
+        mark_check_passed
+    fi
+
+    return $has_error
+}
+
+check_license_headers() {
+    local package=$1
+
+    TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
+
+    info "Checking for ASF license headers in source files..."
+
+    # Check Java files for Apache license headers
+    local files_without_license=()
+    while IFS= read -r java_file; do
+        if ! head -n 20 "$java_file" | grep -q "Licensed to the Apache Software Foundation"; then
+            files_without_license+=("$java_file")
+        fi
+    done < <(find . -name "*.java" -type f 2>/dev/null)
+
+    if [[ ${#files_without_license[@]} -gt 0 ]]; then
+        collect_warning "Found ${#files_without_license[@]} Java file(s) without ASF license headers"
+        collect_warning "Run 'mvn apache-rat:check' for detailed license header analysis"
+        # Note: This is a warning, not an error
+    else
+        success "All Java source files have ASF license headers"
+        mark_check_passed
+    fi
+}
+
+check_version_consistency() {
+    local package=$1
+    local expected_version=$2
+
+    TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
+
+    info "Checking version consistency in pom.xml files..."
+
+    # Find inconsistent versions in pom.xml files
+    local inconsistent=()
+    while IFS= read -r pom_file; do
+        # Extract version tags (exclude parent versions and SNAPSHOT)
+        while IFS= read -r version_line; do
+            if [[ ! "$version_line" =~ "<parent>" ]] && \
+               [[ ! "$version_line" =~ "SNAPSHOT" ]] && \
+               [[ ! "$version_line" =~ "$expected_version" ]]; then
+                inconsistent+=("$pom_file: $version_line")
+            fi
+        done < <(grep "<version>" "$pom_file" 2>/dev/null)
+    done < <(find . -name "pom.xml" -type f 2>/dev/null)
+
+    if [[ ${#inconsistent[@]} -gt 0 ]]; then
+        collect_error "Found version inconsistencies in pom.xml files:"
+        printf '    %s\n' "${inconsistent[@]}"
+        return 1
+    else
+        success "Version consistency check passed"
+        mark_check_passed
+    fi
+
+    return 0
+}
+
+check_notice_year() {
+    local package=$1
+
+    TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
+
+    if [[ ! -f "NOTICE" ]]; then
+        return 0  # Already checked in check_required_files
+    fi
+
+    local current_year=$(date +%Y)
+    if ! grep -q "$current_year" NOTICE; then
+        collect_warning "NOTICE file may not contain current year ($current_year). Please verify copyright dates."
+    else
+        mark_check_passed
+    fi
+}
+
+################################################################################
+# Main Validation Functions
+################################################################################
+
+validate_source_package() {
+    local package_file=$1
+    local package_dir=$(basename "$package_file" .tar.gz)
+
+    info "Validating source package: $package_file"
+
+    # Extract package
+    rm -rf "$package_dir"
+    tar -xzf "$package_file"
+
+    if [[ ! -d "$package_dir" ]]; then
+        collect_error "Failed to extract package: $package_file"
+        return 1
+    fi
+
+    pushd "$package_dir" > /dev/null
+
+    # Run all checks
+    check_incubating_name "$package_file"
+    check_required_files "$package_file" true
+    check_license_categories "$package_file" "LICENSE NOTICE"
+    check_empty_files_and_dirs "$package_file"
+    check_file_sizes "$package_file" "$MAX_FILE_SIZE"
+    check_binary_files "$package_file"
+    check_license_headers "$package_file"
+    check_version_consistency "$package_file" "$RELEASE_VERSION"
+    check_notice_year "$package_file"
+
+    # Compile check
+    info "Compiling source package: $package_file"
+    TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
+
+    if [[ "$package_file" =~ 'hugegraph-ai' ]]; then
+        warn "Skipping compilation for AI module (not required)"
+        mark_check_passed
+    elif [[ "$package_file" =~ "hugegraph-computer" ]]; then
+        if cd computer 2>/dev/null && mvn package -DskipTests -Papache-release -ntp -e; then
+            success "Compilation successful: $package_file"
+            mark_check_passed
+        else
+            collect_error "Compilation failed: $package_file"
+        fi
+        cd ..
+    else
+        if mvn package -DskipTests -Papache-release -ntp -e; then
+            success "Compilation successful: $package_file"
+            mark_check_passed
+        else
+            collect_error "Compilation failed: $package_file"
+        fi
+    fi
+
+    popd > /dev/null
+
+    info "Finished validating source package: $package_file"
+}
+
+validate_binary_package() {
+    local package_file=$1
+    local package_dir=$(basename "$package_file" .tar.gz)
+
+    info "Validating binary package: $package_file"
+
+    # Extract package
+    rm -rf "$package_dir"
+    tar -xzf "$package_file"
+
+    if [[ ! -d "$package_dir" ]]; then
+        collect_error "Failed to extract package: $package_file"
+        return 1
+    fi
+
+    pushd "$package_dir" > /dev/null
+
+    # Run checks
+    check_incubating_name "$package_file"
+    check_required_files "$package_file" true
+
+    # Binary packages should have licenses directory
+    TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
+    if [[ ! -d "licenses" ]]; then
+        collect_error "Package '$package_file' missing licenses directory"
+    else
+        mark_check_passed
+    fi
+
+    check_license_categories "$package_file" "LICENSE NOTICE licenses"
+    check_empty_files_and_dirs "$package_file"
+
+    popd > /dev/null
+
+    info "Finished validating binary package: $package_file"
+}
+
+################################################################################
+# Cleanup Function
+################################################################################
+
+cleanup() {
+    local exit_code=$?
+
+    log "CLEANUP" "Starting cleanup (exit code: $exit_code)"
+
+    # Stop running services
+    if [[ $SERVER_STARTED -eq 1 ]]; then
+        info "Stopping HugeGraph server..."
+        local server_dir=$(find_package_dir "*hugegraph-incubating*src/hugegraph-server/*hugegraph*${RELEASE_VERSION}" 2>/dev/null || echo "")
+        if [[ -n "$server_dir" ]] && [[ -d "$server_dir" ]]; then
+            pushd "$server_dir" > /dev/null 2>&1
+            bin/stop-hugegraph.sh || true
+            popd > /dev/null 2>&1
+        fi
+    fi
+
+    if [[ $HUBBLE_STARTED -eq 1 ]]; then
+        info "Stopping Hubble..."
+        # Hubble stop is handled in the test flow
+    fi
+
+    # Show final report
+    echo ""
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "                    VALIDATION SUMMARY                        "
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo ""
+    echo "Total Checks:  $TOTAL_CHECKS"
+    echo -e "${GREEN}Passed:        $PASSED_CHECKS${NC}"
+    echo -e "${RED}Failed:        $FAILED_CHECKS${NC}"
+    echo -e "${YELLOW}Warnings:      ${#VALIDATION_WARNINGS[@]}${NC}"
+    echo ""
+
+    if [[ ${#VALIDATION_ERRORS[@]} -gt 0 ]]; then
+        echo -e "${RED}━━━ ERRORS ━━━${NC}"
+        for err in "${VALIDATION_ERRORS[@]}"; do
+            echo -e "${RED}  ✗ $err${NC}"
+        done
+        echo ""
+    fi
+
+    if [[ ${#VALIDATION_WARNINGS[@]} -gt 0 ]]; then
+        echo -e "${YELLOW}━━━ WARNINGS ━━━${NC}"
+        for warn in "${VALIDATION_WARNINGS[@]}"; do
+            echo -e "${YELLOW}  ⚠ $warn${NC}"
+        done
+        echo ""
+    fi
+
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo ""
+
+    if [[ ${#VALIDATION_ERRORS[@]} -gt 0 ]]; then
+        echo -e "${RED}VALIDATION FAILED${NC}"
+        echo -e "Log file: ${LOG_FILE}"
+        echo ""
+        exit 1
+    else
+        echo -e "${GREEN}✓ VALIDATION PASSED${NC}"
+        echo -e "Log file: ${LOG_FILE}"
+        echo ""
+        echo "Please review the validation results and provide feedback in the"
+        echo "release voting thread on the mailing list."
+        echo ""
+        exit 0
+    fi
+}
+
+# Set trap for cleanup
+trap cleanup EXIT
+trap 'echo -e "${RED}Script interrupted${NC}"; exit 130' INT TERM
+
+################################################################################
+# Main Execution
+################################################################################
+
+main() {
+    # Parse command line arguments
+    while [[ $# -gt 0 ]]; do
+        case $1 in
+            --help|-h)
+                show_usage
+                exit 0
+                ;;
+            --version|-v)
+                echo "Apache HugeGraph Release Validation Script v${SCRIPT_VERSION}"
+                exit 0
+                ;;
+            --non-interactive)
+                NON_INTERACTIVE=1
+                shift
+                ;;
+            *)
+                break
+                ;;
+        esac
+    done
+
+    # Parse positional arguments
+    RELEASE_VERSION=${1:-}
+    USER=${2:-}
+    LOCAL_DIST_PATH=${3:-}
+    JAVA_VERSION=${4:-11}
+
+    # Validate required arguments
+    if [[ -z "$RELEASE_VERSION" ]]; then
+        error "Missing required argument: version"
+        echo ""
+        show_usage
+        exit 1
+    fi
+
+    if [[ -z "$USER" ]]; then
+        error "Missing required argument: user"
+        echo ""
+        show_usage
+        exit 1
+    fi
+
+    # Initialize
+    WORK_DIR=$(cd "$(dirname "$0")" && pwd)
+    cd "${WORK_DIR}"
+
+    setup_logging
+
+    echo ""
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "    Apache HugeGraph Release Validation v${SCRIPT_VERSION}"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo ""
+    echo "  Version:   ${RELEASE_VERSION}"
+    echo "  User:      ${USER}"
+    echo "  Java:      ${JAVA_VERSION}"
+    echo "  Mode:      $([ -n "${LOCAL_DIST_PATH}" ] && echo "Local (${LOCAL_DIST_PATH})" || echo "SVN Download")"
+    echo "  Log:       ${LOG_FILE}"
+    echo ""
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo ""
+
+    ####################################################
+    # Step 1: Check Dependencies
+    ####################################################
+    print_step 1 9 "Check Dependencies"
+    check_dependencies
+    check_java_version "$JAVA_VERSION"
+
+    ####################################################
+    # Step 2: Prepare Release Files
+    ####################################################
+    print_step 2 9 "Prepare Release Files"
+
+    if [[ -n "${LOCAL_DIST_PATH}" ]]; then
+        # Use local directory
+        DIST_DIR="${LOCAL_DIST_PATH}"
+        info "Using local directory: ${DIST_DIR}"
+
+        if [[ ! -d "${DIST_DIR}" ]]; then
+            collect_error "Directory ${DIST_DIR} does not exist"
+            exit 1
+        fi
+
+        info "Contents of ${DIST_DIR}:"
+        ls -lh "${DIST_DIR}"
+    else
+        # Download from SVN
+        DIST_DIR="${WORK_DIR}/dist/${RELEASE_VERSION}"
+        info "Downloading from SVN to: ${DIST_DIR}"
+
+        rm -rf "${DIST_DIR}"
+        mkdir -p "${DIST_DIR}"
+
+        if ! svn co "${SVN_URL_PREFIX}/${RELEASE_VERSION}" "${DIST_DIR}"; then
+            collect_error "Failed to download from SVN: ${SVN_URL_PREFIX}/${RELEASE_VERSION}"
+            exit 1
+        fi
+
+        success "Downloaded release files from SVN"
+    fi
+
+    cd "${DIST_DIR}"
+
+    ####################################################
+    # Step 3: Import GPG Keys
+    ####################################################
+    print_step 3 9 "Import & Trust GPG Keys"
+    import_and_trust_gpg_keys "$USER"
+
+    ####################################################
+    # Step 4: Check SHA512 & GPG Signatures
+    ####################################################
+    print_step 4 9 "Verify SHA512 & GPG Signatures"
+
+    local package_count=0
+    local packages=()
+    for pkg in *.tar.gz; do
+        if [[ -f "$pkg" ]]; then
+            packages+=("$pkg")
+            package_count=$((package_count + 1))
+        fi
+    done
+
+    local current=0
+    for pkg in "${packages[@]}"; do
+        current=$((current + 1))
+        print_progress $current $package_count "$pkg"
+
+        # Check SHA512
+        TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
+        if shasum -a 512 --check "${pkg}.sha512"; then
+            success "SHA512 verified: $pkg"
+            mark_check_passed
+        else
+            collect_error "SHA512 verification failed: $pkg"
+        fi
+
+        # Check GPG signature
+        TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
+        if gpg --verify "${pkg}.asc" "$pkg" 2>&1 | grep -q "Good signature"; then
+            success "GPG signature verified: $pkg"
+            mark_check_passed
+        else
+            collect_error "GPG signature verification failed: $pkg"
+        fi
+    done
+
+    ####################################################
+    # Step 5: Validate Source Packages
+    ####################################################
+    print_step 5 9 "Validate Source Packages"
+
+    local src_packages=()
+    for pkg in *-src.tar.gz; do
+        if [[ -f "$pkg" ]]; then
+            src_packages+=("$pkg")
+        fi
+    done
+
+    info "Found ${#src_packages[@]} source package(s)"
+
+    for src_pkg in "${src_packages[@]}"; do
+        validate_source_package "$src_pkg"
+    done
+
+    ####################################################
+    # Step 6: Run Compiled Packages (Server)
+    ####################################################
+    print_step 6 9 "Test Compiled Server Package"
+
+    local server_dir=$(find_package_dir "*hugegraph-incubating*src/hugegraph-server/*hugegraph*${RELEASE_VERSION}")
+    if [[ -n "$server_dir" ]]; then
+        info "Starting HugeGraph server from: $server_dir"
+        pushd "$server_dir" > /dev/null
+
+        if bin/init-store.sh; then
+            success "Store initialized"
+        else
+            collect_error "Failed to initialize store"
+        fi
+
+        sleep $SERVER_START_DELAY
+
+        if bin/start-hugegraph.sh; then
+            success "Server started"
+            SERVER_STARTED=1
+        else
+            collect_error "Failed to start server"
+        fi
+
+        popd > /dev/null
+    else
+        collect_error "Could not find compiled server directory"
+    fi
+
+    ####################################################
+    # Step 7: Test Toolchain (Loader, Tool, Hubble)
+    ####################################################
+    print_step 7 9 "Test Compiled Toolchain Packages"
+
+    local toolchain_src=$(find_package_dir "*toolchain*src")
+    if [[ -n "$toolchain_src" ]]; then
+        pushd "$toolchain_src" > /dev/null
+
+        local toolchain_dir=$(find . -maxdepth 1 -type d -name "*toolchain*${RELEASE_VERSION}" | head -n1)
+        if [[ -n "$toolchain_dir" ]]; then
+            pushd "$toolchain_dir" > /dev/null
+
+            # Test Loader
+            info "Testing HugeGraph Loader..."
+            local loader_dir=$(find . -maxdepth 1 -type d -name "*loader*${RELEASE_VERSION}" | head -n1)
+            if [[ -n "$loader_dir" ]]; then
+                pushd "$loader_dir" > /dev/null
+                if bin/hugegraph-loader.sh -f ./example/file/struct.json -s ./example/file/schema.groovy -g hugegraph; then
+                    success "Loader test passed"
+                else
+                    collect_error "Loader test failed"
+                fi
+                popd > /dev/null
+            fi
+
+            # Test Tool
+            info "Testing HugeGraph Tool..."
+            local tool_dir=$(find . -maxdepth 1 -type d -name "*tool*${RELEASE_VERSION}" | head -n1)
+            if [[ -n "$tool_dir" ]]; then
+                pushd "$tool_dir" > /dev/null
+                if bin/hugegraph gremlin-execute --script 'g.V().count()' && \
+                   bin/hugegraph task-list && \
+                   bin/hugegraph backup -t all --directory ./backup-test; then
+                    success "Tool test passed"
+                else
+                    collect_error "Tool test failed"
+                fi
+                popd > /dev/null
+            fi
+
+            # Test Hubble
+            info "Testing HugeGraph Hubble..."
+            local hubble_dir=$(find . -maxdepth 1 -type d -name "*hubble*${RELEASE_VERSION}" | head -n1)
+            if [[ -n "$hubble_dir" ]]; then
+                pushd "$hubble_dir" > /dev/null
+                if bin/start-hubble.sh; then
+                    HUBBLE_STARTED=1
+                    success "Hubble started"
+                    sleep 2
+                    bin/stop-hubble.sh
+                    HUBBLE_STARTED=0
+                    success "Hubble stopped"
+                else
+                    collect_error "Hubble test failed"
+                fi
+                popd > /dev/null
+            fi
+
+            popd > /dev/null
+        fi
+
+        popd > /dev/null
+    fi
+
+    # Stop server after toolchain tests
+    if [[ $SERVER_STARTED -eq 1 ]] && [[ -n "$server_dir" ]]; then
+        info "Stopping server..."
+        pushd "$server_dir" > /dev/null
+        bin/stop-hugegraph.sh
+        SERVER_STARTED=0
+        success "Server stopped"
+        popd > /dev/null
+    fi
+
+    ####################################################
+    # Step 8: Validate Binary Packages
+    ####################################################
+    print_step 8 9 "Validate Binary Packages"
+
+    cd "${DIST_DIR}"
+
+    local bin_packages=()
+    for pkg in *.tar.gz; do
+        if [[ "$pkg" != *-src.tar.gz ]]; then
+            bin_packages+=("$pkg")
+        fi
+    done
+
+    info "Found ${#bin_packages[@]} binary package(s)"
+
+    for bin_pkg in "${bin_packages[@]}"; do
+        validate_binary_package "$bin_pkg"
+    done
+
+    ####################################################
+    # Step 9: Test Binary Packages
+    ####################################################
+    print_step 9 9 "Test Binary Server & Toolchain"
+
+    # Test binary server
+    local bin_server_dir=$(find_package_dir "*hugegraph-incubating*${RELEASE_VERSION}/*hugegraph-server-incubating*${RELEASE_VERSION}")
+    if [[ -n "$bin_server_dir" ]]; then
+        info "Testing binary server package..."
+        pushd "$bin_server_dir" > /dev/null
+
+        if bin/init-store.sh && sleep $SERVER_START_DELAY && bin/start-hugegraph.sh; then
+            success "Binary server started"
+            SERVER_STARTED=1
+        else
+            collect_error "Failed to start binary server"
+        fi
+
+        popd > /dev/null
+    fi
+
+    # Test binary toolchain
+    local bin_toolchain=$(find_package_dir "*toolchain*${RELEASE_VERSION}" "${DIST_DIR}")
+    if [[ -n "$bin_toolchain" ]]; then
+        pushd "$bin_toolchain" > /dev/null
+
+        # Test binary loader
+        local bin_loader=$(find . -maxdepth 1 -type d -name "*loader*${RELEASE_VERSION}" | head -n1)
+        if [[ -n "$bin_loader" ]]; then
+            pushd "$bin_loader" > /dev/null
+            if bin/hugegraph-loader.sh -f ./example/file/struct.json -s ./example/file/schema.groovy -g hugegraph; then
+                success "Binary loader test passed"
+            else
+                collect_error "Binary loader test failed"
+            fi
+            popd > /dev/null
+        fi
+
+        # Test binary tool
+        local bin_tool=$(find . -maxdepth 1 -type d -name "*tool*${RELEASE_VERSION}" | head -n1)
+        if [[ -n "$bin_tool" ]]; then
+            pushd "$bin_tool" > /dev/null
+            if bin/hugegraph gremlin-execute --script 'g.V().count()' && \
+               bin/hugegraph task-list && \
+               bin/hugegraph backup -t all --directory ./backup-test; then
+                success "Binary tool test passed"
+            else
+                collect_error "Binary tool test failed"
+            fi
+            popd > /dev/null
+        fi
+
+        # Test binary hubble
+        local bin_hubble=$(find . -maxdepth 1 -type d -name "*hubble*${RELEASE_VERSION}" | head -n1)
+        if [[ -n "$bin_hubble" ]]; then
+            pushd "$bin_hubble" > /dev/null
+            if bin/start-hubble.sh; then
+                HUBBLE_STARTED=1
+                success "Binary hubble started"
+                sleep 2
+                bin/stop-hubble.sh
+                HUBBLE_STARTED=0
+                success "Binary hubble stopped"
+            else
+                collect_error "Binary hubble test failed"
+            fi
+            popd > /dev/null
+        fi
+
+        popd > /dev/null
+    fi
+
+    # Stop binary server
+    if [[ $SERVER_STARTED -eq 1 ]] && [[ -n "$bin_server_dir" ]]; then
+        pushd "$bin_server_dir" > /dev/null
+        bin/stop-hugegraph.sh
+        SERVER_STARTED=0
+        success "Binary server stopped"
+        popd > /dev/null
+    fi
+
+    ####################################################
+    # Validation Complete
+    ####################################################
+    success "All validation steps completed!"
+
+    # Cleanup function will show the final report
+}
+
+# Run main function
+main "$@"
