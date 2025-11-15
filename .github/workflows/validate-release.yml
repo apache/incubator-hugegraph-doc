@@ -10,7 +10,7 @@ on:
       gpg_user:
         required: true
         description: current release manager (gpg username)
-        default: 'Junzhi Peng'
+        default: 'pengjunzhi'
 
   push:
     branches:
