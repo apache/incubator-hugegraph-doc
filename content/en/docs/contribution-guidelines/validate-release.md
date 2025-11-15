@@ -136,8 +136,8 @@ After decompressing `*hugegraph*src.tar.gz`, Do the following checks:
 # prefer to use/switch to `java 11` for the following operations (compiling/running) (Note: `Computer` only supports `java >= 11`)
 # java --version
 
-# try to compile in the Unix env to check if it works well
-mvn clean package -P stage -Dmaven.test.skip=true -Dcheckstyle.skip=true
+# try to compile in the Unix env to check if it works well (-P is optional)
+mvn clean package -P stage -DskipTests -Dcheckstyle.skip=true
 ```
 
 ##### B. binary package
