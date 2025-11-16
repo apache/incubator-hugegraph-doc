@@ -54,7 +54,7 @@ city: Beijing})
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/users
+POST http://localhost:8080/graphspaces/gs1/auth/users
 ```
 
 ##### Response Status
@@ -88,7 +88,7 @@ POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/users
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/users/-63:test
+DELETE http://localhost:8080/graphspaces/gs1/auth/users/-63:test
 ```
 
 ##### Response Status
@@ -112,7 +112,7 @@ DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/users/-63:tes
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/users/-63:test
+PUT http://localhost:8080/graphspaces/gs1/auth/users/-63:test
 ```
 
 ##### Request Body
@@ -190,7 +190,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/users
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/users/-63:admin
+GET http://localhost:8080/graphspaces/gs1/auth/users/-63:admin
 ```
 
 ##### Response Status
@@ -221,7 +221,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/users/-63:admin
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/users/-63:boss/role
+GET http://localhost:8080/graphspaces/gs1/auth/users/-63:boss/role
 ```
 
 ##### Response Status
@@ -272,7 +272,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/users/-63:boss/r
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/groups
+POST http://localhost:8080/graphspaces/gs1/auth/groups
 ```
 
 ##### Response Status
@@ -304,7 +304,7 @@ POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/groups
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/groups/-69:grant
+DELETE http://localhost:8080/graphspaces/gs1/auth/groups/-69:grant
 ```
 
 ##### Response Status
@@ -328,7 +328,7 @@ DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/groups/-69:gr
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/groups/-69:grant
+PUT http://localhost:8080/graphspaces/gs1/auth/groups/-69:grant
 ```
 
 ##### Request Body
@@ -403,7 +403,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/groups
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/groups/-69:all
+GET http://localhost:8080/graphspaces/gs1/auth/groups/-69:all
 ```
 
 ##### Response Status
@@ -466,7 +466,7 @@ target_resources 可以包括多个 target_resource，以列表的形式存储�
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/targets
+POST http://localhost:8080/graphspaces/gs1/auth/targets
 ```
 
 ##### Response Status
@@ -506,7 +506,7 @@ POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/targets
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/targets/-77:gremlin
+DELETE http://localhost:8080/graphspaces/gs1/auth/targets/-77:gremlin
 ```
 
 ##### Response Status
@@ -531,7 +531,7 @@ DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/targets/-77:g
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/targets/-77:gremlin
+PUT http://localhost:8080/graphspaces/gs1/auth/targets/-77:gremlin
 ```
 
 ##### Request Body
