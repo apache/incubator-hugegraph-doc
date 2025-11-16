@@ -888,4 +888,250 @@
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/releases">Toolchain Release Notes&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-computer/releases">Computer Release Notes&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-ai/releases">AI Release Notes&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: HugeGraph 1.7.0 Release Notes</title><link>/cn/docs/changelog/hugegraph-1.7.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/changelog/hugegraph-1.7.0-release-notes/</guid><description>
+&lt;blockquote>
+&lt;p>WIP: This doc is under construction, please wait for the final version (BETA)&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="运行环境版本说明">运行环境/版本说明&lt;/h3>
+&lt;p>&lt;strong>1.7.0&lt;/strong>版 &lt;code>hugegraph&lt;/code> 相关组件仅支持 Java 11 编译/运行环境&lt;/p>
+&lt;h3 id="hugegraph">hugegraph&lt;/h3>
+&lt;h4 id="api-changes">API Changes&lt;/h4>
+&lt;ul>
+&lt;li>&lt;strong>BREAKING CHANGE&lt;/strong>: Disable legacy backends include MySQL/PG/c*(.etc) &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2746">#2746&lt;/a>&lt;/li>
+&lt;li>&lt;strong>BREAKING CHANGE&lt;/strong>: Release version 1.7.0 [server + pd + store] &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2889">#2889&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="feature-changes">Feature Changes&lt;/h4>
+&lt;ul>
+&lt;li>Support MemoryManagement for graph query framework &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2649">#2649&lt;/a>&lt;/li>
+&lt;li>LoginAPI support token_expire field &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2754">#2754&lt;/a>&lt;/li>
+&lt;li>Add option for task role election &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2843">#2843&lt;/a>&lt;/li>
+&lt;li>Optimize perf by avoid boxing long &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2861">#2861&lt;/a>&lt;/li>
+&lt;li>StringId hold bytes to avoid decode/encode &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2862">#2862&lt;/a>&lt;/li>
+&lt;li>Add PerfExample5 and PerfExample6 &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2860">#2860&lt;/a>&lt;/li>
+&lt;li>RocksDBStore remove redundant checkOpened() call &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2863">#2863&lt;/a>&lt;/li>
+&lt;li>Add path filter &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2898">#2898&lt;/a>&lt;/li>
+&lt;li>Init serena memory system &amp;amp; add memories &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2902">#2902&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="bug-fixes">Bug Fixes&lt;/h4>
+&lt;ul>
+&lt;li>Filter dynamice path(PUT/GET/DELETE) with params cause OOM &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2569">#2569&lt;/a>&lt;/li>
+&lt;li>JRaft Histogram Metrics Value NaN &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2631">#2631&lt;/a>&lt;/li>
+&lt;li>Update server image desc &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2702">#2702&lt;/a>&lt;/li>
+&lt;li>Kneigbor-api has unmatched edge type with server &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2699">#2699&lt;/a>&lt;/li>
+&lt;li>Add license for swagger-ui &amp;amp; reset use stage to false in ci yml &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2706">#2706&lt;/a>&lt;/li>
+&lt;li>Fix build pd-store arm image &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2744">#2744&lt;/a>&lt;/li>
+&lt;li>Fix graph server cache notifier mechanism &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2729">#2729&lt;/a>&lt;/li>
+&lt;li>Tx leak when stopping the graph server &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2791">#2791&lt;/a>&lt;/li>
+&lt;li>Ensure backend is initialized in gremlin script &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2824">#2824&lt;/a>&lt;/li>
+&lt;li>Fix some potential lock &amp;amp; type cast issues &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2895">#2895&lt;/a>&lt;/li>
+&lt;li>Fix npe in getVersion &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2897">#2897&lt;/a>&lt;/li>
+&lt;li>Fix the support for graphsapi in rocksdb and add testing for graphsapi &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2900">#2900&lt;/a>&lt;/li>
+&lt;li>Remove graph path in auth api path &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2899">#2899&lt;/a>&lt;/li>
+&lt;li>Migrate to LTS jdk11 in all Dockerfile &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2901">#2901&lt;/a>&lt;/li>
+&lt;li>Remove the judgment for java8 compatibility in the init-store &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2905">#2905&lt;/a>&lt;/li>
+&lt;li>Add missing license and remove binary license.txt &amp;amp; fix tinkerpop ci &amp;amp; remove duplicate module &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2910">#2910&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="option-changes">Option Changes&lt;/h4>
+&lt;ul>
+&lt;li>Remove some outdated configuration &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2678">#2678&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="other-changes">Other Changes&lt;/h4>
+&lt;ul>
+&lt;li>Update outdated docs for release 1.5.0 &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2690">#2690&lt;/a>&lt;/li>
+&lt;li>Fix licenses and remove empty files &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2692">#2692&lt;/a>&lt;/li>
+&lt;li>Update repo artifacts references &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2695">#2695&lt;/a>&lt;/li>
+&lt;li>Adjust release fury version &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2698">#2698&lt;/a>&lt;/li>
+&lt;li>Fix the JSON license issue &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2697">#2697&lt;/a>&lt;/li>
+&lt;li>Add debug info for tp test &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2688">#2688&lt;/a>&lt;/li>
+&lt;li>Enhance words in README &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2734">#2734&lt;/a>&lt;/li>
+&lt;li>Add collaborators in asf config &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2741">#2741&lt;/a>&lt;/li>
+&lt;li>Adjust the related filters of sofa-bolt &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2735">#2735&lt;/a>&lt;/li>
+&lt;li>Reopen discussion in .asf.yml config &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2751">#2751&lt;/a>&lt;/li>
+&lt;li>Fix typo in README &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2806">#2806&lt;/a>&lt;/li>
+&lt;li>Centralize version management in project &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2797">#2797&lt;/a>&lt;/li>
+&lt;li>Update notice year &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2826">#2826&lt;/a>&lt;/li>
+&lt;li>Improve maven Reproducible Builds → upgrade plugins &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2874">#2874&lt;/a>&lt;/li>
+&lt;li>Enhance docker instruction with auth opened graph &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2881">#2881&lt;/a>&lt;/li>
+&lt;li>Remove the package existing in java8 &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2792">#2792&lt;/a>&lt;/li>
+&lt;li>Revise Docker usage instructions in README &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2882">#2882&lt;/a>&lt;/li>
+&lt;li>Add DeepWiki badge to README &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2883">#2883&lt;/a>&lt;/li>
+&lt;li>Update guidance for store module &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2894">#2894&lt;/a>&lt;/li>
+&lt;li>Update test commands and improve documentation clarity &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2893">#2893&lt;/a>&lt;/li>
+&lt;li>Bump rocksdb version from 7.2.2 to 8.10.2 &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2896">#2896&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="hugegraph-toolchain">hugegraph-toolchain&lt;/h3>
+&lt;h4 id="api-changes-1">API Changes&lt;/h4>
+&lt;ul>
+&lt;li>Support graphspace &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/633">#633&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="feature-changes-1">Feature Changes&lt;/h4>
+&lt;ul>
+&lt;li>Support jdbc date type &amp;amp; sync .editorconfig &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/648">#648&lt;/a>&lt;/li>
+&lt;li>Add a useSSL option for mysql &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/650">#650&lt;/a>&lt;/li>
+&lt;li>Patch for father sub edge &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/654">#654&lt;/a>&lt;/li>
+&lt;li>Improve user experience for user script &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/666">#666&lt;/a>&lt;/li>
+&lt;li>Support concurrent readers, short-id &amp;amp; Graphsrc &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/683">#683&lt;/a>&lt;/li>
+&lt;li>Init serena onboarding &amp;amp; project memory files &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/692">#692&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="bug-fixes-1">Bug Fixes&lt;/h4>
+&lt;ul>
+&lt;li>Typo word in display &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/655">#655&lt;/a>&lt;/li>
+&lt;li>Patch up missing classes and methods for hubble &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/657">#657&lt;/a>&lt;/li>
+&lt;li>Adjust Client to 1.7.0 server &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/689">#689&lt;/a>&lt;/li>
+&lt;li>Remove json license for release 1.7.0 &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/698">#698&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="other-changes-1">Other Changes&lt;/h4>
+&lt;ul>
+&lt;li>Update hugegraph source commit id &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/640">#640&lt;/a>&lt;/li>
+&lt;li>Add collaborators in asf config &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/656">#656&lt;/a>&lt;/li>
+&lt;li>Update pom for version-1.7.0 &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/681">#681&lt;/a>&lt;/li>
+&lt;li>Add DeepWiki badge to README &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/684">#684&lt;/a>&lt;/li>
+&lt;li>Adjust APIs to compatible with 1.7.0 server &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/685">#685&lt;/a>&lt;/li>
+&lt;li>Adjust LoadContext to 1.7.0 version &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/687">#687&lt;/a>&lt;/li>
+&lt;li>Migrate to LTS jdk11 in all Dockerfile &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/691">#691&lt;/a>&lt;/li>
+&lt;li>Update copyright year in NOTICE file &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/697">#697&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="hugegraph-computer">hugegraph-computer&lt;/h3>
+&lt;h4 id="feature-changes-2">Feature Changes&lt;/h4>
+&lt;ul>
+&lt;li>Migration Vermeer to hugegraph-computer &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/316">#316&lt;/a>&lt;/li>
+&lt;li>Make startChan&amp;rsquo;s size configurable &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/328">#328&lt;/a>&lt;/li>
+&lt;li>Assign WorkerGroup via worker configuration &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/332">#332&lt;/a>&lt;/li>
+&lt;li>Support task priority based scheduling &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/336">#336&lt;/a>&lt;/li>
+&lt;li>Avoid 800k &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/340">#340&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="bug-fixes-2">Bug Fixes&lt;/h4>
+&lt;ul>
+&lt;li>Fix docker file build &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/341">#341&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="other-changes-2">Other Changes&lt;/h4>
+&lt;ul>
+&lt;li>Update release version to 1.5.0 &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/318">#318&lt;/a>&lt;/li>
+&lt;li>Update go depends module &amp;amp; fix headers &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/321">#321&lt;/a>&lt;/li>
+&lt;li>Update go version to 1.23 &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/322">#322&lt;/a>&lt;/li>
+&lt;li>Add collaborator in .asf.yaml &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/323">#323&lt;/a>&lt;/li>
+&lt;li>Update the Go version in docker image &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/333">#333&lt;/a>&lt;/li>
+&lt;li>Add DeepWiki badge to README &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/337">#337&lt;/a>&lt;/li>
+&lt;li>Bump project version to 1.7.0 (RELEASE) &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/338">#338&lt;/a>&lt;/li>
+&lt;li>Update copyright year in NOTICE file &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/342">#342&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="hugegraph-ai">hugegraph-ai&lt;/h3>
+&lt;h4 id="api-changes-2">API Changes&lt;/h4>
+&lt;ul>
+&lt;li>Support choose template in api &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/135">#135&lt;/a>&lt;/li>
+&lt;li>Add post method for paths-api &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/162">#162&lt;/a>&lt;/li>
+&lt;li>Support switch graph in api &amp;amp; add some query configs &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/184">#184&lt;/a>&lt;/li>
+&lt;li>Text2gremlin api &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/258">#258&lt;/a>&lt;/li>
+&lt;li>Support switching prompt EN/CN &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/269">#269&lt;/a>&lt;/li>
+&lt;li>&lt;strong>BREAKING CHANGE&lt;/strong>: Update keyword extraction method &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/282">#282&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="feature-changes-3">Feature Changes&lt;/h4>
+&lt;ul>
+&lt;li>Added the process of text2gql in graphrag V1.0 &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/105">#105&lt;/a>&lt;/li>
+&lt;li>Use pydantic-settings for config management &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/122">#122&lt;/a>&lt;/li>
+&lt;li>Timely execute vid embedding &amp;amp; enhance some HTTP logic &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/141">#141&lt;/a>&lt;/li>
+&lt;li>Use retry from tenacity &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/143">#143&lt;/a>&lt;/li>
+&lt;li>Modify the summary info and enhance the request logic &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/147">#147&lt;/a>&lt;/li>
+&lt;li>Automatic backup graph data timely &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/151">#151&lt;/a>&lt;/li>
+&lt;li>Add a button to backup data &amp;amp; count together &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/153">#153&lt;/a>&lt;/li>
+&lt;li>Extract topk_per_keyword &amp;amp; topk_return_results to .env &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/154">#154&lt;/a>&lt;/li>
+&lt;li>Modify clear buttons &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/156">#156&lt;/a>&lt;/li>
+&lt;li>Support intent recognition V1 &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/159">#159&lt;/a>&lt;/li>
+&lt;li>Change vid embedding x:yy to yy &amp;amp; use multi-thread &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/158">#158&lt;/a>&lt;/li>
+&lt;li>Support mathjax in rag query block V1 &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/157">#157&lt;/a>&lt;/li>
+&lt;li>Use poetry to manage the dependencies &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/149">#149&lt;/a>&lt;/li>
+&lt;li>Return schema.groovy first when backup graph data &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/161">#161&lt;/a>&lt;/li>
+&lt;li>Merge all logs into one file &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/171">#171&lt;/a>&lt;/li>
+&lt;li>Use uv for the CI action &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/175">#175&lt;/a>&lt;/li>
+&lt;li>Use EN prompt for keywords extraction &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/174">#174&lt;/a>&lt;/li>
+&lt;li>Support litellm LLM provider &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/178">#178&lt;/a>&lt;/li>
+&lt;li>Improve graph extraction default prompt &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/187">#187&lt;/a>&lt;/li>
+&lt;li>Replace vid by full vertexes info &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/189">#189&lt;/a>&lt;/li>
+&lt;li>Support asynchronous streaming generation in rag block by using async_generator and asyncio.wait &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/190">#190&lt;/a>&lt;/li>
+&lt;li>Generalize the regex extraction func &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/194">#194&lt;/a>&lt;/li>
+&lt;li>Create quick_start.md &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/196">#196&lt;/a>&lt;/li>
+&lt;li>Support Docker &amp;amp; K8s deployment way &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/195">#195&lt;/a>&lt;/li>
+&lt;li>Multi-stage building in Dockerfile &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/199">#199&lt;/a>&lt;/li>
+&lt;li>Support graph checking before updating vid embedding &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/205">#205&lt;/a>&lt;/li>
+&lt;li>Disable text2gql by default &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/216">#216&lt;/a>&lt;/li>
+&lt;li>Use 4.1-mini and 0.01 temperature by default &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/214">#214&lt;/a>&lt;/li>
+&lt;li>Enhance the multi configs for LLM &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/212">#212&lt;/a>&lt;/li>
+&lt;li>Textbox to Code &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/223">#217&lt;/a>&lt;/li>
+&lt;li>Replace the IP + Port with URL &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/209">#209&lt;/a>&lt;/li>
+&lt;li>Update gradio&amp;rsquo;s version &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/235">#235&lt;/a>&lt;/li>
+&lt;li>Use asyncio to get embeddings &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/215">#215&lt;/a>&lt;/li>
+&lt;li>Change QPS -&amp;gt; RPM for timer decorator &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/241">#241&lt;/a>&lt;/li>
+&lt;li>Support batch embedding &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/238">#238&lt;/a>&lt;/li>
+&lt;li>Using nuitka to provide a binary/perf way for the service &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/242">#242&lt;/a>&lt;/li>
+&lt;li>Use uv instead poetry &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/226">#226&lt;/a>&lt;/li>
+&lt;li>Basic compatible in text2gremlin generation &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/261">#261&lt;/a>&lt;/li>
+&lt;li>Enhance config path handling and add project root validation &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/262">#262&lt;/a>&lt;/li>
+&lt;li>Add vermeer python client for graph computing &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/263">#263&lt;/a>&lt;/li>
+&lt;li>Use uv in client &amp;amp; ml modules &amp;amp; adapter the CI &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/257">#257&lt;/a>&lt;/li>
+&lt;li>Use uv to manage pkgs &amp;amp; update README &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/272">#272&lt;/a>&lt;/li>
+&lt;li>Limit the deps version to handle critical init problems &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/279">#279&lt;/a>&lt;/li>
+&lt;li>Support semi-automated prompt generation &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/281">#281&lt;/a>&lt;/li>
+&lt;li>Support semi-automated generated graph schema &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/274">#274&lt;/a>&lt;/li>
+&lt;li>Unify all modules with uv &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/287">#287&lt;/a>&lt;/li>
+&lt;li>Add GitHub Actions for auto upstream sync and update SEALData subsample logic &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/289">#289&lt;/a>&lt;/li>
+&lt;li>Add a basic LLM/AI coding instruction file &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/290">#290&lt;/a>&lt;/li>
+&lt;li>Add rules for AI coding guideline - V1.0 &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/293">#293&lt;/a>&lt;/li>
+&lt;li>Replace QianFan by OpenAI-compatible format &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/285">#285&lt;/a>&lt;/li>
+&lt;li>Optimize vector index with asyncio embedding &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/264">#264&lt;/a>&lt;/li>
+&lt;li>Refactor embedding parallelization to preserve order &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/295">#295&lt;/a>&lt;/li>
+&lt;li>Support storing vector data for a graph instance by model type/name &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/265">#265&lt;/a>&lt;/li>
+&lt;li>Add AGENTS.md as new document standard &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/299">#299&lt;/a>&lt;/li>
+&lt;li>Add Fixed Workflow Execution Engine: Flow, Node, and Scheduler Architecture &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/302">#302&lt;/a>&lt;/li>
+&lt;li>Support vector db layer V1.0 &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/304">#304&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="bug-fixes-3">Bug Fixes&lt;/h4>
+&lt;ul>
+&lt;li>Limit the length of log &amp;amp; improve the format &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/121">#121&lt;/a>&lt;/li>
+&lt;li>Pylint in ml &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/125">#125&lt;/a>&lt;/li>
+&lt;li>Critical bug with pylint usage &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/131">#131&lt;/a>&lt;/li>
+&lt;li>Multi vid k-neighbor query only return the data of first vid &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/132">#132&lt;/a>&lt;/li>
+&lt;li>Replace getenv usage to settings &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/133">#133&lt;/a>&lt;/li>
+&lt;li>Correct header writing errors &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/140">#140&lt;/a>&lt;/li>
+&lt;li>Update prompt to fit prefix cache &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/137">#137&lt;/a>&lt;/li>
+&lt;li>Extract_graph_data use wrong method &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/145">#145&lt;/a>&lt;/li>
+&lt;li>Use empty str for llm config &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/155">#155&lt;/a>&lt;/li>
+&lt;li>Update gremlin generate prompt to apply fuzzy match &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/163">#163&lt;/a>&lt;/li>
+&lt;li>Enable fastapi auto reload function &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/164">#164&lt;/a>&lt;/li>
+&lt;li>Fix tiny bugs &amp;amp; optimize reranker layout &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/202">#202&lt;/a>&lt;/li>
+&lt;li>Enable tasks concurrency configs in Gradio &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/188">#188&lt;/a>&lt;/li>
+&lt;li>Align regex extraction of json to json format of prompt &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/211">#211&lt;/a>&lt;/li>
+&lt;li>Fix documentation sample code error &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/219">#219&lt;/a>&lt;/li>
+&lt;li>Failed to remove vectors when updating vid embedding &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/243">#243&lt;/a>&lt;/li>
+&lt;li>Skip empty chunk in LLM steaming mode &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/245">#245&lt;/a>&lt;/li>
+&lt;li>Ollama batch embedding bug &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/250">#250&lt;/a>&lt;/li>
+&lt;li>Fix Dockerfile to add pyproject.toml anchor file &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/266">#266&lt;/a>&lt;/li>
+&lt;li>Add missing &amp;lsquo;properties&amp;rsquo; in gremlin prompt formatting &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/298">#298&lt;/a>&lt;/li>
+&lt;li>Fixed cgraph version &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/305">#305&lt;/a>&lt;/li>
+&lt;li>Ollama embedding API usage and config param &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/306">#306&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="option-changes-1">Option Changes&lt;/h4>
+&lt;ul>
+&lt;li>Remove enable_gql logic in api &amp;amp; rag block &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/148">#148&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="other-changes-3">Other Changes&lt;/h4>
+&lt;ul>
+&lt;li>Update README for python-client/SDK &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/150">#150&lt;/a>&lt;/li>
+&lt;li>Enable pip cache &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/142">#142&lt;/a>&lt;/li>
+&lt;li>Enable discussion &amp;amp; change merge way &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/201">#201&lt;/a>&lt;/li>
+&lt;li>Synchronization with official documentation &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/273">#273&lt;/a>&lt;/li>
+&lt;li>Fix grammar errors &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/275">#275&lt;/a>&lt;/li>
+&lt;li>Improve README clarity and deployment instructions &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/276">#276&lt;/a>&lt;/li>
+&lt;li>Add docker-compose deployment and improve container networking instructions &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/280">#280&lt;/a>&lt;/li>
+&lt;li>Update docker compose command &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/283">#283&lt;/a>&lt;/li>
+&lt;li>Reduce third-party library log output &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/284">#244&lt;/a>&lt;/li>
+&lt;li>Update README with improved setup instructions &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/294">#294&lt;/a>&lt;/li>
+&lt;li>Add collaborators in asf config &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/182">#182&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="发布细节">发布细节&lt;/h3>
+&lt;p>Please check the release details/contributor in each repository:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph/releases">Server Release Notes&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/releases">Toolchain Release Notes&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-computer/releases">Computer Release Notes&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-ai/releases">AI Release Notes&lt;/a>&lt;/li>
 &lt;/ul></description></item></channel></rss>
