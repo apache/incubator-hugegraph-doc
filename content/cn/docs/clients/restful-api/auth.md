@@ -155,7 +155,7 @@ PUT http://localhost:8080/graphspaces/gs1/auth/users/-63:test
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/users
+GET http://localhost:8080/graphspaces/gs1/auth/users
 ```
 
 ##### Response Status
@@ -368,7 +368,7 @@ PUT http://localhost:8080/graphspaces/gs1/auth/groups/-69:grant
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/groups
+GET http://localhost:8080/graphspaces/gs1/auth/groups
 ```
 
 ##### Response Status
@@ -585,7 +585,7 @@ PUT http://localhost:8080/graphspaces/gs1/auth/targets/-77:gremlin
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/targets
+GET http://localhost:8080/graphspaces/gs1/auth/targets
 ```
 
 ##### Response Status
@@ -644,7 +644,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/targets
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/targets/-77:grant
+GET http://localhost:8080/graphspaces/gs1/auth/targets/-77:grant
 ```
 
 ##### Response Status
@@ -699,7 +699,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/targets/-77:gran
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/belongs
+POST http://localhost:8080/graphspaces/gs1/auth/belongs
 ```
 
 ##### Response Status
@@ -730,7 +730,7 @@ POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/belongs
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:grant
+DELETE http://localhost:8080/graphspaces/gs1/auth/belongs/S-63:boss>-82>>S-69:grant
 ```
 
 ##### Response Status
@@ -755,7 +755,7 @@ DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/belongs/S-63:
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:grant
+PUT http://localhost:8080/graphspaces/gs1/auth/belongs/S-63:boss>-82>>S-69:grant
 ```
 
 ##### Request Body
@@ -796,7 +796,7 @@ PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/belongs/S-63:bos
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/belongs
+GET http://localhost:8080/graphspaces/gs1/auth/belongs
 ```
 
 ##### Response Status
@@ -831,7 +831,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/belongs
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:all
+GET http://localhost:8080/graphspaces/gs1/auth/belongs/S-63:boss>-82>>S-69:all
 ```
 
 ##### Response Status
@@ -885,7 +885,7 @@ access_permission：
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/accesses
+POST http://localhost:8080/graphspaces/gs1/auth/accesses
 ```
 
 ##### Response Status
@@ -918,7 +918,7 @@ POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/accesses
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/accesses/S-69:all>-88>12>S-77:all
+DELETE http://localhost:8080/graphspaces/gs1/auth/accesses/S-69:all>-88>12>S-77:all
 ```
 
 ##### Response Status
@@ -943,7 +943,7 @@ DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/accesses/S-69
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/accesses/S-69:all>-88>12>S-77:all
+PUT http://localhost:8080/graphspaces/gs1/auth/accesses/S-69:all>-88>12>S-77:all
 ```
 
 ##### Request Body
@@ -984,7 +984,7 @@ PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/accesses/S-69:al
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/accesses
+GET http://localhost:8080/graphspaces/gs1/auth/accesses
 ```
 
 ##### Response Status
@@ -1020,7 +1020,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/accesses
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/auth/accesses/S-69:all>-88>11>S-77:all
+GET http://localhost:8080/graphspaces/gs1/auth/accesses/S-69:all>-88>11>S-77:all
 ```
 
 ##### Response Status
