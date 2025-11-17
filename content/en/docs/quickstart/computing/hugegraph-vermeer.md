@@ -16,6 +16,144 @@ The framework's runtime configuration can be passed via command-line parameters 
 
 ### 1.2 Running Method
 
+1.  **Option 1: Docker Compose (Recommended)**
+
+Please ensure that `docker-compose.yaml` exists in your project root directory. If it doesn't, here is an example:
+
+```yaml
+#
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+services:
+  vermeer-master:
+    image: hugegraph/vermeer
+    container_name: vermeer-master
+    volumes:
+      - ~/.config:/go/bin/config # Change here to your actual config path
+    command: --env=master
+    networks:
+      vermeer_network:
+        ipv4_address: 172.20.0.10 # Assign a static IP for the master
+
+  vermeer-worker:
+    image: hugegraph/vermeer
+    container_name: vermeer-worker
+    volumes:
+      - ~/:/go/bin/config # Change here to your actual config path
+    command: --env=worker
+    networks:
+      vermeer_network:
+        ipv4_address: 172.20.0.11 # Assign a static IP for the worker
+
+networks:
+  vermeer_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24 # Define the subnet for your network
+```
+
+Modify `docker-compose.yaml`
+
+- **Volume**: For example, change both instances of `~/:/go/bin/config` to `/home/user/config:/go/bin/config` (or your own configuration directory).
+- **Subnet**: Modify the subnet IP based on your actual situation. Note that the ports each container needs to access are specified in the config file. Please refer to the contents of the project's `config` folder for details.
+
+Build the Image and Start in the Project Directory (or `docker build` first, then `docker-compose up`)
+
+```shell
+# Build the image (in the project root vermeer directory)
+docker build -t hugegraph/vermeer .
+
+# Start the services (in the vermeer root directory)
+docker-compose up -d
+# Or use the new CLI:
+# docker compose up -d
+```
+
+View Logs / Stop / Remove
+
+```shell
+docker-compose logs -f
+docker-compose down
+```
+
+2.  **Option 2: Start individually via `docker run` (Manually create network and assign static IP)**
+
+Ensure the CONFIG_DIR has proper read/execute permissions for the Docker process.
+
+Build the image:
+
+```shell
+docker build -t hugegraph/vermeer .
+```
+
+Create a custom bridge network (one-time operation):
+
+```shell
+docker network create --driver bridge \
+  --subnet 172.20.0.0/24 \
+  vermeer_network
+```
+
+Run master (adjust `CONFIG_DIR` to your **absolute** configuration path, and you can adjust the IP as needed based on your actual situation).
+
+```shell
+CONFIG_DIR=/home/user/config
+
+docker run -d \
+  --name vermeer-master \
+  --network vermeer_network --ip 172.20.0.10 \
+  -v ${CONFIG_DIR}:/go/bin/config \
+  hugegraph/vermeer \
+  --env=master
+```
+
+Run worker:
+
+```shell
+docker run -d \
+  --name vermeer-worker \
+  --network vermeer_network --ip 172.20.0.11 \
+  -v ${CONFIG_DIR}:/go/bin/config \
+  hugegraph/vermeer \
+  --env=worker
+```
+
+View logs / Stop / Remove:
+
+```shell
+docker logs -f vermeer-master
+docker logs -f vermeer-worker
+
+docker stop vermeer-master vermeer-worker
+docker rm vermeer-master vermeer-worker
+
+# Remove the custom network (if needed)
+docker network rm vermeer_network
+```
+
+3.  **Option 3: Build from Source**
+
+Build. You can refer[Vermeer Readme](https://github.com/apache/incubator-hugegraph-computer/tree/master/vermeer).
+
+```shell
+go build
+```
+
 Enter the directory and input `./vermeer --env=master` or `./vermeer --env=worker01`.
 
 ## 2. Task Creation REST API
@@ -33,7 +171,11 @@ Available URLs are as follows:
 
 Refer to the Vermeer parameter list document for specific parameters.
 
-Request example:
+Vermeer provides three ways to load data:
+
+1. Load from Local Files
+
+**Request Example:**
 
 ```javascript
 POST http://localhost:8688/tasks/create
@@ -41,13 +183,64 @@ POST http://localhost:8688/tasks/create
  "task_type": "load",
  "graph": "testdb",
  "params": {
- "load.parallel": "50",
- "load.type": "local",
- "load.vertex_files": "{\"localhost\":\"data/twitter-2010.v_[0,99]\"}",
- "load.edge_files": "{\"localhost\":\"data/twitter-2010.e_[0,99]\"}",
- "load.use_out_degree": "1",
- "load.use_outedge": "1"
+  "load.parallel": "50",
+  "load.type": "local",
+  "load.vertex_files": "{\"localhost\":\"data/twitter-2010.v_[0,99]\"}",
+  "load.edge_files": "{\"localhost\":\"data/twitter-2010.e_[0,99]\"}",
+  "load.use_out_degree": "1",
+  "load.use_outedge": "1"
  }
+}
+```
+
+2. Load from HugeGraph
+
+**Request Example:**
+
+⚠️ Security Warning: Never store real passwords in configuration files or code. Use environment variables or a secure credential management system instead.
+
+```javascript
+POST http://localhost:8688/tasks/create
+{
+  "task_type": "load",
+  "graph": "testdb",
+  "params": {
+    "load.parallel": "50",
+    "load.type": "hugegraph",
+    "load.hg_pd_peers": "[\"<your-hugegraph-ip>:8686\"]",
+    "load.hugegraph_name": "DEFAULT/hugegraph2/g",
+    "load.hugegraph_username": "admin",
+    "load.hugegraph_password": "<your-password-here>",
+    "load.use_out_degree": "1",
+    "load.use_outedge": "1"
+  }
+}
+```
+
+3. Load from HDFS
+
+**Request Example:**
+
+```javascript
+POST http://localhost:8688/tasks/create
+{
+  "task_type": "load",
+  "graph": "testdb",
+  "params": {
+    "load.parallel": "50",
+    "load.type": "hdfs",
+    "load.hdfs_namenode": "name_node1:9000",
+    "load.hdfs_conf_path": "/path/to/conf",
+    "load.krb_realm": "EXAMPLE.COM",
+    "load.krb_name": "user@EXAMPLE.COM",
+    "load.krb_keytab_path": "/path/to/keytab",
+    "load.krb_conf_path": "/path/to/krb5.conf",
+    "load.hdfs_use_krb": "1",
+    "load.vertex_files": "/data/graph/vertices",
+    "load.edge_files": "/data/graph/edges",
+    "load.use_out_degree": "1",
+    "load.use_outedge": "1"
+  }
 }
 ```
 
@@ -66,13 +259,13 @@ POST http://localhost:8688/tasks/create
  "graph": "testdb",
  "params": {
  "compute.algorithm": "pagerank",
- "compute.parallel":"10",
- "compute.max_step":"10",
- "output.type":"local",
- "output.parallel":"1",
- "output.file_path":"result/pagerank"
+ "compute.parallel": "10",
+ "compute.max_step": "10",
+ "output.type": "local",
+ "output.parallel": "1",
+ "output.file_path": "result/pagerank"
   }
- }
+}
 ```
 
 ## 3. Supported Algorithms
