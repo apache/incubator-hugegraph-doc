@@ -2414,7 +2414,7 @@ Queries a batch of "fusiform similar vertices" based on specified conditions. Wh
 ###### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/traversers/fusiformsimilarity
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/traversers/fusiformsimilarity
 ```
 
 ###### Request Body
@@ -2521,7 +2521,7 @@ Used to query vertices that have high similarity with a group of vertices. For e
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/traversers/vertices?ids="1:marko"&ids="2:lop"
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/traversers/vertices?ids="1:marko"&ids="2:lop"
 ```
 
 ###### Response Status
@@ -2600,7 +2600,7 @@ Obtain vertex shard information by specifying the shard size `split_size` (can b
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/traversers/vertices/shards?split_size=67108864
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/traversers/vertices/shards?split_size=67108864
 ```
 
 ###### Response Status
@@ -2653,7 +2653,7 @@ Retrieve vertices in batches based on the specified shard information (refer to 
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/traversers/vertices/scan?start=0&end=4294967295
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/traversers/vertices/scan?start=0&end=4294967295
 ```
 
 ###### Response Status
@@ -2837,7 +2837,7 @@ GET http://localhost:8080/graphs/hugegraph/traversers/vertices/scan?start=0&end=
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/traversers/edges?ids="S1:josh>1>>S2:lop"&ids="S1:josh>1>>S2:ripple"
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/traversers/edges?ids="S1:josh>1>>S2:lop"&ids="S1:josh>1>>S2:ripple"
 ```
 
 ###### Response Status
@@ -2892,7 +2892,7 @@ Retrieve shard information for edges by specifying the shard size (`split_size`)
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/traversers/edges/shards?split_size=4294967295
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/traversers/edges/shards?split_size=4294967295
 ```
 
 ###### Response Status
@@ -2949,7 +2949,7 @@ Batch retrieve edges by specifying shard information (refer to section 3.2.22.2 
 ###### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/traversers/edges/scan?start=0&end=3221225469
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/traversers/edges/scan?start=0&end=3221225469
 ```
 
 ###### Response Status

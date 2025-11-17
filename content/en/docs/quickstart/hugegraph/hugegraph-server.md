@@ -40,13 +40,13 @@ There are four ways to deploy HugeGraph-Server components:
 #### 3.1 Use Docker container (Convenient for Test/Dev)
 
 <!-- 3.1 is linked by another place. if change 3.1's title, please check -->
-You can refer to [Docker deployment guide](https://hub.docker.com/r/hugegraph/hugegraph).
+You can refer to the [Docker deployment guide](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/docker/README.md).
 
-We can use `docker run -itd --name=graph -e PASSWORD=xxx -p 8080:8080 hugegraph/hugegraph:1.5.0` to quickly start an inner `HugeGraph server` with `RocksDB` in background.
+We can use `docker run -itd --name=server -p 8080:8080 -e PASSWORD=xxx hugegraph/hugegraph:1.5.0` to quickly start a `HugeGraph Server` with a built-in `RocksDB` backend.
 
 Optional: 
 1. use `docker exec -it graph bash` to enter the container to do some operations.
-2. use `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph:1.5.0` to start with a **built-in** example graph. We can use `RESTful API` to verify the result. The detailed step can refer to [5.1.9](#519-create-an-example-graph-when-startup)
+2. use `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph:1.5.0` to start with a **built-in** example graph. We can use `RESTful API` to verify the result. The detailed step can refer to [5.1.8](#518-create-an-example-graph-when-startup)
 3. use `-e PASSWORD=xxx` to enable auth mode and set the password for admin. You can find more details from [Config Authentication](/docs/config/config-authentication#use-docker-to-enable-authentication-mode)
 
 If you use docker desktop, you can set the option like: 
@@ -74,8 +74,8 @@ services:
 > Note: 
 >
 > 1. The docker image of the hugegraph is a convenient release to start it quickly, but not **official distribution** artifacts. You can find more details from [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub).
-> 
-> 2. Recommend to use `release tag`(like `1.5.0`/`1.5.0`) for the stable version. Use `latest` tag to experience the newest functions in development.
+>
+> 2. Recommend to use `release tag` (like `1.5.0`/`1.x.0`) for the stable version. Use `latest` tag to experience the newest functions in development.
 
 #### 3.2 Download the binary tar tarball
 
@@ -91,9 +91,10 @@ curl https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph
 ```
 
 #### 3.3 Source code compilation
-Please ensure that the wget command is installed before compiling the source code
 
-We could get HugeGraph **source code** in 2 ways: (So as the other HugeGraph repos/modules)
+Please ensure that the wget/curl commands are installed before compiling the source code
+
+Download HugeGraph **source code** in either of the following 2 ways (so as the other HugeGraph repos/modules):
 - download the stable/release version from the ASF site
 - clone the unstable/latest version by GitBox(ASF) or GitHub
 
@@ -193,7 +194,7 @@ If you need to access HugeGraphServer externally, please modify the `restserver.
 
 Since the configuration (hugegraph.properties) and startup steps required by various backends are slightly different, the following will introduce the configuration and startup of each backend one by one.
 
-Follow the [Server Authentication Configuration](/docs/config/config-authentication/) before you start Server later.
+**Note:** Configure [Server Authentication](/docs/config/config-authentication/) before starting HugeGraphServer if you need Auth mode (especially for production or public network environments).
 
 ##### 5.1.1 Distributed Storage (HStore)
 

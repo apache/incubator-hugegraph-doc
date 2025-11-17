@@ -77,7 +77,7 @@ g = graph.traversal()
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/graph/edges
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges
 ```
 
 ##### Request Body
@@ -139,7 +139,7 @@ POST http://localhost:8080/graphs/hugegraph/graph/edges
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/graph/edges/batch
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges/batch
 ```
 
 ##### Request Body
@@ -206,7 +206,7 @@ POST http://localhost:8080/graphs/hugegraph/graph/edges/batch
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop?action=append
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop?action=append
 ```
 
 ##### Request Body
@@ -268,7 +268,7 @@ PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop?action
 ##### Method & Url
 
 ```
-PUT http://127.0.0.1:8080/graphs/hugegraph/graph/edges/batch
+PUT http://127.0.0.1:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges/batch
 ```
 
 ##### Request Body
@@ -369,7 +369,7 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/edges/batch
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop?action=eliminate
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop?action=eliminate
 ```
 
 ##### Request Body
@@ -443,7 +443,7 @@ Key-value pairs of properties consist of the property name and value in JSON for
 ##### Method & Url
 
 ```
-GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?vertex_id="1:marko"&label=knows&properties={"date":"P.within(\"20160111\")"}
+GET http://127.0.0.1:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges?vertex_id="1:marko"&label=knows&properties={"date":"P.within(\"20160111\")"}
 ```
 
 ##### Response Status
@@ -479,7 +479,7 @@ GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?vertex_id="1:marko"&label
 ##### Method & Url
 
 ```
-GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page&limit=2
+GET http://127.0.0.1:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges?page&limit=2
 ```
 
 ##### Response Status
@@ -531,7 +531,7 @@ The returned body contains the page number information for the next page, `"page
 ##### Method & Url
 
 ```
-GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page=EoYxOm1hcmtvgggCAIQyOmxvcAAAAAAAAAAC&limit=2
+GET http://127.0.0.1:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges?page=EoYxOm1hcmtvgggCAIQyOmxvcAAAAAAAAAAC&limit=2
 ```
 
 ##### Response Status
@@ -579,7 +579,7 @@ When `"page": null` is returned, it indicates that there are no more pages avail
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop
 ```
 
 ##### Response Status
@@ -624,7 +624,7 @@ GET http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop
 ```
 
 ##### Response Status
@@ -640,7 +640,7 @@ In general, specifying the Label parameter along with the ID to delete an edge w
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>1>>S1:vadas?label=knows
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges/S1:marko>1>>S1:vadas?label=knows
 ```
 
 ##### Response Status

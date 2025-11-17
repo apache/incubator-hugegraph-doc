@@ -47,7 +47,7 @@ Both user_name and user_password are required.
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/auth/users
+POST http://localhost:8080/graphspaces/DEFAULT/auth/users
 ```
 
 ##### Response Status
@@ -66,7 +66,7 @@ In the response message, the password is encrypted as ciphertext.
     "user_name": "boss",
     "user_creator": "admin",
     "user_phone": "182****9088",
-    "id": "-63:boss",
+    "id": "boss",
     "user_create": "2020-11-17 14:31:07.833"
 }
 ```
@@ -81,7 +81,7 @@ In the response message, the password is encrypted as ciphertext.
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/auth/users/-63:test
+DELETE http://localhost:8080/graphspaces/DEFAULT/auth/users/test
 ```
 
 ##### Response Status
@@ -105,7 +105,7 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/users/-63:test
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/auth/users/-63:test
+PUT http://localhost:8080/graphspaces/DEFAULT/auth/users/test
 ```
 
 ##### Request Body
@@ -134,7 +134,7 @@ The returned result is the entire user object including the modified content.
     "user_name": "test",
     "user_creator": "admin",
     "user_phone": "183****9266",
-    "id": "-63:test",
+    "id": "test",
     "user_create": "2020-11-12 10:27:13.601"
 }
 ```
@@ -149,7 +149,7 @@ The returned result is the entire user object including the modified content.
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/auth/users
+GET http://localhost:8080/graphspaces/DEFAULT/auth/users
 ```
 
 ##### Response Status
@@ -168,7 +168,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/users
             "user_update": "2020-11-11 11:41:12.254",
             "user_name": "admin",
             "user_creator": "system",
-            "id": "-63:admin",
+            "id": "admin",
             "user_create": "2020-11-11 11:41:12.254"
         }
     ]
@@ -184,7 +184,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/users
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/auth/users/-63:admin
+GET http://localhost:8080/graphspaces/DEFAULT/auth/users/admin
 ```
 
 ##### Response Status
@@ -203,7 +203,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/users/-63:admin
             "user_update": "2020-11-11 11:41:12.254",
             "user_name": "admin",
             "user_creator": "system",
-            "id": "-63:admin",
+            "id": "admin",
             "user_create": "2020-11-11 11:41:12.254"
         }
     ]
@@ -215,7 +215,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/users/-63:admin
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/auth/users/-63:boss/role
+GET http://localhost:8080/graphspaces/DEFAULT/auth/users/boss/role
 ```
 
 ##### Response Status
@@ -266,7 +266,7 @@ The group interface includes APIs for creating groups, deleting groups, modifyin
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/auth/groups
+POST http://localhost:8080/graphspaces/DEFAULT/auth/groups
 ```
 
 ##### Response Status
@@ -298,7 +298,7 @@ POST http://localhost:8080/graphs/hugegraph/auth/groups
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
+DELETE http://localhost:8080/graphspaces/DEFAULT/auth/groups/-69:grant
 ```
 
 ##### Response Status
@@ -322,7 +322,7 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
+PUT http://localhost:8080/graphspaces/DEFAULT/auth/groups/-69:grant
 ```
 
 ##### Request Body
@@ -363,7 +363,7 @@ The returned result is the entire group object including the modified content.
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/auth/groups
+GET http://localhost:8080/graphspaces/DEFAULT/auth/groups
 ```
 
 ##### Response Status
@@ -398,7 +398,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/groups
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/auth/groups/-69:all
+GET http://localhost:8080/graphspaces/DEFAULT/auth/groups/-69:all
 ```
 
 ##### Response Status
@@ -459,7 +459,7 @@ The resource definition means: a vertex of type 'person' with the city property 
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/auth/targets
+POST http://localhost:8080/graphspaces/DEFAULT/auth/targets
 ```
 
 ##### Response Status
@@ -498,7 +498,7 @@ POST http://localhost:8080/graphs/hugegraph/auth/targets
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
+DELETE http://localhost:8080/graphspaces/DEFAULT/auth/targets/-77:gremlin
 ```
 
 ##### Response Status
@@ -522,7 +522,7 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
+PUT http://localhost:8080/graphspaces/DEFAULT/auth/targets/-77:gremlin
 ```
 
 ##### Request Body
@@ -577,7 +577,7 @@ The response contains the entire target group object, including the modified con
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/auth/targets
+GET http://localhost:8080/graphspaces/DEFAULT/auth/targets
 ```
 
 ##### Response Status
@@ -636,7 +636,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/targets
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/auth/targets/-77:grant
+GET http://localhost:8080/graphspaces/DEFAULT/auth/targets/-77:grant
 ```
 
 ##### Response Status
@@ -683,7 +683,7 @@ The API for associating roles includes creating, deleting, modifying, and queryi
 
 ```json
 {
-    "user": "-63:boss",
+    "user": "boss",
     "group": "-69:all"
 }
 ```
@@ -692,7 +692,7 @@ The API for associating roles includes creating, deleting, modifying, and queryi
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/auth/belongs
+POST http://localhost:8080/graphspaces/DEFAULT/auth/belongs
 ```
 
 ##### Response Status
@@ -708,8 +708,8 @@ POST http://localhost:8080/graphs/hugegraph/auth/belongs
     "belong_create": "2020-11-11 16:19:35.422",
     "belong_creator": "admin",
     "belong_update": "2020-11-11 16:19:35.422",
-    "id": "S-63:boss>-82>>S-69:all",
-    "user": "-63:boss",
+    "id": "Sboss>-82>>S-69:all",
+    "user": "boss",
     "group": "-69:all"
 }
 ```
@@ -723,7 +723,7 @@ POST http://localhost:8080/graphs/hugegraph/auth/belongs
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:grant
+DELETE http://localhost:8080/graphspaces/DEFAULT/auth/belongs/Sboss>-82>>S-69:grant
 ```
 
 ##### Response Status
@@ -749,7 +749,7 @@ An association of roles can only be modified for its description. The `user` and
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:grant
+PUT http://localhost:8080/graphspaces/DEFAULT/auth/belongs/Sboss>-82>>S-69:grant
 ```
 
 ##### Request Body
@@ -774,8 +774,8 @@ The response includes the modified content as well as the entire association of 
     "belong_create": "2020-11-12 10:40:21.720",
     "belong_creator": "admin",
     "belong_update": "2020-11-12 10:42:47.265",
-    "id": "S-63:boss>-82>>S-69:grant",
-    "user": "-63:boss",
+    "id": "Sboss>-82>>S-69:grant",
+    "user": "boss",
     "group": "-69:grant"
 }
 ```
@@ -790,7 +790,7 @@ The response includes the modified content as well as the entire association of 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/auth/belongs
+GET http://localhost:8080/graphspaces/DEFAULT/auth/belongs
 ```
 
 ##### Response Status
@@ -808,8 +808,8 @@ GET http://localhost:8080/graphs/hugegraph/auth/belongs
             "belong_create": "2020-11-11 16:19:35.422",
             "belong_creator": "admin",
             "belong_update": "2020-11-11 16:19:35.422",
-            "id": "S-63:boss>-82>>S-69:all",
-            "user": "-63:boss",
+            "id": "Sboss>-82>>S-69:all",
+            "user": "boss",
             "group": "-69:all"
         }
     ]
@@ -825,7 +825,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/belongs
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:all
+GET http://localhost:8080/graphspaces/DEFAULT/auth/belongs/Sboss>-82>>S-69:all
 ```
 
 ##### Response Status
@@ -841,8 +841,8 @@ GET http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:all
     "belong_create": "2020-11-11 16:19:35.422",
     "belong_creator": "admin",
     "belong_update": "2020-11-11 16:19:35.422",
-    "id": "S-63:boss>-82>>S-69:all",
-    "user": "-63:boss",
+    "id": "Sboss>-82>>S-69:all",
+    "user": "boss",
     "group": "-69:all"
 }
 ```
@@ -879,7 +879,7 @@ Access permissions:
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/auth/accesses
+POST http://localhost:8080/graphspaces/DEFAULT/auth/accesses
 ```
 
 ##### Response Status
@@ -902,6 +902,164 @@ POST http://localhost:8080/graphs/hugegraph/auth/accesses
 }
 ```
 
+### 10.7 Graphspace Manager (Manager) API
+
+> **Note**: Before using the following APIs, you need to create a graphspace first. For example, create a graphspace named `gs1` via the [Graphspace API](../graphspace). The examples below assume that `gs1` already exists.
+
+1. The graphspace manager API is used to grant/revoke manager roles for users at the graphspace level, and to query the roles of the current user or other users in a graphspace. Supported role types include `SPACE`, `SPACE_MEMBER`, and `ADMIN`.
+
+#### 10.7.1 Check whether the current login user has a specific role
+
+##### Params
+
+- type: Role type to check, optional
+
+##### Method & Url
+
+```
+GET http://localhost:8080/graphspaces/gs1/auth/managers/check?type=WRITE
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+"true"
+```
+
+The API returns the string `true` or `false` indicating whether the current user has the given role.
+
+#### 10.7.2 List graphspace managers
+
+##### Params
+
+- type: Role type, optional, used to filter by role
+
+##### Method & Url
+
+```
+GET http://localhost:8080/graphspaces/gs1/auth/managers?type=SPACE
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+  "managers": [
+    {
+      "user": "admin",
+      "type": "SPACE",
+      "create_time": "2024-01-10 09:30:00"
+    }
+  ]
+}
+```
+
+#### 10.7.3 Grant/create a graphspace manager
+
+- The following example grants user `boss` the `SPACE_MEMBER` role in graphspace `gs1`.
+
+##### Request Body
+
+```json
+{
+  "user": "boss",
+  "type": "SPACE_MEMBER"
+}
+```
+
+##### Method & Url
+
+```
+POST http://localhost:8080/graphspaces/gs1/auth/managers
+```
+
+##### Response Status
+
+```json
+201
+```
+
+##### Response Body
+
+```json
+{
+  "user": "boss",
+  "type": "SPACE_MEMBER",
+  "manager_creator": "admin",
+  "manager_create": "2024-01-10 09:45:12"
+}
+```
+
+#### 10.7.4 Revoke graphspace manager privileges
+
+- The following example revokes the `SPACE_MEMBER` role of user `boss` in graphspace `gs1`.
+
+##### Params
+
+- user: User ID to revoke
+- type: Role type to revoke
+
+##### Method & Url
+
+```
+DELETE http://localhost:8080/graphspaces/gs1/auth/managers?user=boss&type=SPACE_MEMBER
+```
+
+##### Response Status
+
+```json
+204
+```
+
+##### Response Body
+
+```json
+1
+```
+
+#### 10.7.5 Query roles of a specific user in a graphspace
+
+##### Params
+
+- user: User ID
+
+##### Method & Url
+
+```
+GET http://localhost:8080/graphspaces/gs1/auth/managers/role?user=boss
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+  "roles": {
+    "boss": [
+      "READ",
+      "SPACE_MEMBER"
+    ]
+  }
+}
+```
+
 #### 10.6.2 Delete Authorization
 
 ##### Params
@@ -911,7 +1069,7 @@ POST http://localhost:8080/graphs/hugegraph/auth/accesses
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>12>S-77:all
+DELETE http://localhost:8080/graphspaces/DEFAULT/auth/accesses/S-69:all>-88>12>S-77:all
 ```
 
 ##### Response Status
@@ -936,7 +1094,7 @@ Authorization can only be modified for its description. User group, resource, an
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>12>S-77:all
+PUT http://localhost:8080/graphspaces/DEFAULT/auth/accesses/S-69:all>-88>12>S-77:all
 ```
 
 ##### Request Body
@@ -977,7 +1135,7 @@ Modify access_description
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/auth/accesses
+GET http://localhost:8080/graphspaces/DEFAULT/auth/accesses
 ```
 
 ##### Response Status
@@ -1013,7 +1171,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/accesses
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>11>S-77:all
+GET http://localhost:8080/graphspaces/DEFAULT/auth/accesses/S-69:all>-88>11>S-77:all
 ```
 
 ##### Response Status
