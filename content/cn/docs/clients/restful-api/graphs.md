@@ -6,8 +6,6 @@ weight: 12
 
 ### 6.1 Graphs
 
-> **重要提示**：在使用以下 API 之前，需要先创建图空间（graphspace）。请参考 [Graphspace API](../graphspace) 创建名为 `gs1` 的图空间。文档中的示例均假设已存在名为 `gs1` 的图空间。
-
 #### 6.1.1 列出图空间中全部的图
 
 ##### Params
@@ -19,7 +17,7 @@ weight: 12
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs
+GET http://localhost:8080/graphspaces/DEFAULT/graphs
 ```
 
 ##### Response Status
@@ -51,7 +49,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph
 ```
 
 ##### Response Status
@@ -87,7 +85,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/clear?confirm_message=I%27m+sure+to+delete+all+data
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/clear?confirm_message=I%27m+sure+to+delete+all+data
 ```
 
 ##### Response Status
@@ -112,12 +110,10 @@ DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/clear?confirm_mess
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph_clone?clone_graph_name=hugegraph
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph_clone?clone_graph_name=hugegraph
 ```
 
 ##### Request Body (可选)
-
-克隆 (fork) 一个无权限的新图 (body 类型必须设置为 `Context-Type=text/plain`)
 
 ```properties
 gremlin.graph=org.apache.hugegraph.HugeFactory
@@ -159,18 +155,16 @@ rocksdb.wal_path=./rks-data-xx
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph-xx
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph-xx
 ```
 
 ##### Request Body
-
-新建一个无权限的新图 (body 类型必须设置为 `Context-Type=text/plain`)
 
 ```properties
 gremlin.graph=org.apache.hugegraph.HugeFactory
 backend=rocksdb
 serializer=binary
-store=hugegraph2
+store=hugegraph
 rocksdb.data_path=./rks-data-xx
 rocksdb.wal_path=./rks-data-xx
 ```
@@ -212,7 +206,8 @@ rocksdb.wal_path=./rks-data-xx
 ##### Method & Url
 
 ```javascript
-DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph_clone?confirm_message=I%27m%20sure%20to%20drop%20the%20graph
+DELETE
+http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph_clone?confirm_message=I%27m%20sure%20to%20drop%20the%20graph
 ```
 
 ##### Response Status
@@ -228,7 +223,8 @@ DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph_clone?confirm_mess
 ##### Method & Url
 
 ```javascript
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/conf
+GET
+http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/conf
 ```
 
 ##### Response Status
@@ -286,7 +282,7 @@ Restore 时存在两种不同的模式：Restoring 和 Merging
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/mode
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/mode
 ```
 
 ##### Response Status
@@ -310,7 +306,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/mode
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/mode
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/mode
 ```
 
 ##### Request Body
@@ -344,7 +340,7 @@ PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/mode
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph_read_mode
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph_read_mode
 ```
 
 ##### Response Status
@@ -370,7 +366,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph_read_mode
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph_read_mode
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph_read_mode
 ```
 
 ##### Request Body
@@ -406,7 +402,7 @@ PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph_read_mode
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/snapshot_create
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/snapshot_create
 ```
 
 ##### Response Status
@@ -432,7 +428,7 @@ PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/snapshot_create
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/snapshot_resume
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/snapshot_resume
 ```
 
 ##### Response Status
@@ -460,7 +456,7 @@ PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/snapshot_resume
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/compact
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/compact
 ```
 
 ##### Response Status

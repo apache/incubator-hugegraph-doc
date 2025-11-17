@@ -6,29 +6,26 @@ weight: 3
 
 ### 1.3 VertexLabel
 
-> **重要提示**：在使用以下 API 之前，需要先创建图空间（graphspace）。请参考 [Graphspace API](../graphspace) 创建名为 `gs1` 的图空间。文档中的示例均假设已存在名为 `gs1` 的图空间。
+假设已经创建好了 1.1.3 中列出来的 PropertyKeys
 
-假设已经创建好了1.1.3中列出来的 PropertyKeys
+Params 说明
 
-Params说明
-
-- id：顶点类型id值
+- id：顶点类型 id 值
 - name：顶点类型名称，必填
-- id_strategy: 顶点类型的ID策略，主键ID、自动生成、自定义字符串、自定义数字、自定义UUID，默认主键ID
+- id_strategy: 顶点类型的 ID 策略，主键 ID、自动生成、自定义字符串、自定义数字、自定义 UUID，默认主键 ID
 - properties: 顶点类型关联的属性类型
-- primary_keys: 主键属性，当ID策略为PRIMARY_KEY时必须有值，其他ID策略时必须为空；
-- enable_label_index： 是否开启类型索引，默认关闭
-- index_names：顶点类型创建的索引，详情见3.4 
+- primary_keys: 主键属性，当 ID 策略为 PRIMARY_KEY 时必须有值，其他 ID 策略时必须为空；
+- enable_label_index：是否开启类型索引，默认关闭
+- index_names：顶点类型创建的索引，详情见 3.4
 - nullable_keys：可为空的属性
 - user_data：设置顶点类型的通用信息，作用同属性类型
 
-
-#### 1.3.1 创建一个VertexLabel
+#### 1.3.1 创建一个 VertexLabel
 
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/vertexlabels
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/vertexlabels
 ```
 
 ##### Request Body
@@ -118,7 +115,7 @@ POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/vertexlabels
 }
 ```
 
-#### 1.3.2 为已存在的VertexLabel添加properties或userdata，或者移除userdata（目前不支持移除properties）
+#### 1.3.2 为已存在的 VertexLabel 添加 properties 或 userdata，或者移除 userdata（目前不支持移除 properties）
 
 ##### Params
 
@@ -127,7 +124,7 @@ POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/vertexlabels
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/vertexlabels/person?action=append
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/vertexlabels/person?action=append
 ```
 
 ##### Request Body
@@ -178,12 +175,12 @@ PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/vertexlabels/p
 }
 ```
 
-#### 1.3.3 获取所有的VertexLabel
+#### 1.3.3 获取所有的 VertexLabel
 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/vertexlabels
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/vertexlabels
 ```
 
 ##### Response Status
@@ -243,12 +240,12 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/vertexlabels
 }
 ```
 
-#### 1.3.4 根据name获取VertexLabel
+#### 1.3.4 根据 name 获取 VertexLabel
 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/vertexlabels/person
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/vertexlabels/person
 ```
 
 ##### Response Status
@@ -284,14 +281,14 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/vertexlabels/p
 }
 ```
 
-#### 1.3.5 根据name删除VertexLabel
+#### 1.3.5 根据 name 删除 VertexLabel
 
 删除 VertexLabel 会导致删除对应的顶点以及相关的索引数据，会产生一个异步任务
 
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/vertexlabels/person
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/vertexlabels/person
 ```
 
 ##### Response Status
@@ -310,4 +307,4 @@ DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/vertexlabel
 
 注：
 
-> 可以通过`GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/tasks/1`（其中"1"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](../task)
+> 可以通过`GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks/1`（其中"1"是 task_id）来查询异步任务的执行状态，更多[异步任务 RESTful API](../task)

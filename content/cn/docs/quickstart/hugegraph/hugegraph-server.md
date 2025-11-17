@@ -187,7 +187,9 @@ HugeGraphServer 启动时会连接后端存储并尝试检查后端存储版本�
 
 要使用分布式存储引擎，需要先部署 HugeGraph-PD 和 HugeGraph-Store，详见 [HugeGraph-PD 快速入门](/cn/docs/quickstart/hugegraph/hugegraph-pd/) 和 [HugeGraph-Store 快速入门](/cn/docs/quickstart/hugegraph/hugegraph-hstore/)。
 
-确保 PD 和 Store 服务均已启动后，修改 HugeGraph-Server 的 `hugegraph.properties` 配置：
+确保 PD 和 Store 服务均已启动后
+
+1. 修改 HugeGraph-Server 的 `hugegraph.properties` 配置：
 
 ```properties
 backend=hstore
@@ -196,6 +198,12 @@ task.scheduler_type=distributed
 
 # PD 服务地址，多个 PD 地址用逗号分割，配置 PD 的 RPC 端口
 pd.peers=127.0.0.1:8686,127.0.0.1:8687,127.0.0.1:8688
+```
+
+2. 修改 HugeGraph-Server 的 `rest-server.properties` 配置：
+
+```properties
+usePD=true
 ```
 
 如果配置多个 HugeGraph-Server 节点，需要为每个节点修改 `rest-server.properties` 配置文件，例如：

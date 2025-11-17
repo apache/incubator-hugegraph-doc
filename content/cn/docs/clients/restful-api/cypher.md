@@ -6,9 +6,7 @@ weight: 15
 
 ### 9.1 Cypher
 
-> **重要提示**：在使用以下 API 之前，需要先创建图空间（graphspace）。请参考 [Graphspace API](../graphspace) 创建名为 `gs1` 的图空间。文档中的示例均假设已存在名为 `gs1` 的图空间。
-
-#### 9.1.1 向HugeGraphServer发送Cypher语句（GET），同步执行
+#### 9.1.1 向 HugeGraphServer 发送 Cypher 语句（GET），同步执行
 
 ##### Method & Url
 
@@ -25,13 +23,14 @@ GET /graphspaces/{graphspace}/graphs/{graph}/cypher?cypher={cypher}
 
 **请求参数说明：**
 
-- cypher: cypher语句
+- cypher: cypher 语句
 
 
 ##### 使用示例
 
 ```javascript
-GET http://localhost:8080/graphspaces/gs1/graphs/hugecypher1/cypher?cypher=match(n:person) return n.name as name order by n.name limit 1
+GET
+http://localhost:8080/graphspaces/DEFAULT/graphs/hugecypher1/cypher?cypher=match(n:person) return n.name as name order by n.name limit 1
 ```
 
 ##### Response Status
@@ -62,7 +61,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugecypher1/cypher?cypher=match
 }
 ```
 
-#### 9.1.2 向HugeGraphServer发送Cypher语句（POST），同步执行
+#### 9.1.2 向 HugeGraphServer 发送 Cypher 语句（POST），同步执行
 
 
 ##### Method & Url
@@ -80,16 +79,18 @@ POST /graphspaces/{graphspace}/graphs/{graph}/cypher
 
 ##### Body
 {cypher}
-- cypher: cypher语句
+
+- cypher: cypher 语句
 
 注意：
 
-> 不是JSON格式，是纯文本的Cypher语句
+> 不是 JSON 格式，是纯文本的 Cypher 语句
 
 ##### 使用示例
 
 ```javascript
-POST http://localhost:8080/graphspaces/gs1/graphs/hugecypher1/cypher
+POST
+http://localhost:8080/graphspaces/DEFAULT/graphs/hugecypher1/cypher
 ```
 
 ###### Request Body

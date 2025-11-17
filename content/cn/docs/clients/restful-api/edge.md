@@ -6,8 +6,6 @@ weight: 8
 
 ### 2.2 Edge
 
-> **重要提示**：在使用以下 API 之前，需要先创建图空间（graphspace）。请参考 [Graphspace API](../graphspace) 创建名为 `gs1` 的图空间。文档中的示例均假设已存在名为 `gs1` 的图空间。
-
 顶点 id 格式的修改也影响到了边的 id 以及源顶点和目标顶点 id 的格式
 
 EdgeId 是由 `src-vertex-id + direction + label + sort-values + tgt-vertex-id` 拼接而成，但是这里的顶点 id 类型不是通过引号区分的，而是根据前缀区分：
@@ -80,7 +78,7 @@ g = graph.traversal()
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/edges
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges
 ```
 
 ##### Request Body
@@ -143,7 +141,7 @@ POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/edges
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/edges/batch
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges/batch
 ```
 
 ##### Request Body
@@ -211,7 +209,7 @@ POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/edges/batch
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop?action=append
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop?action=append
 ```
 
 ##### Request Body
@@ -274,7 +272,7 @@ PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/edges/S1:marko>
 ##### Method & Url
 
 ```
-PUT http://127.0.0.1:8080/graphspaces/gs1/graphs/hugegraph/graph/edges/batch
+PUT http://127.0.0.1:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges/batch
 ```
 
 ##### Request Body
@@ -376,7 +374,7 @@ PUT http://127.0.0.1:8080/graphspaces/gs1/graphs/hugegraph/graph/edges/batch
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop?action=eliminate
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop?action=eliminate
 ```
 
 ##### Request Body
@@ -451,7 +449,7 @@ PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/edges/S1:marko>
 ##### Method & Url
 
 ```
-GET http://127.0.0.1:8080/graphspaces/gs1/graphs/hugegraph/graph/edges?vertex_id="1:marko"&label=knows&properties={"date":"P.within(\"20160111\")"}
+GET http://127.0.0.1:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges?vertex_id="1:marko"&label=knows&properties={"date":"P.within(\"20160111\")"}
 ```
 
 ##### Response Status
@@ -487,7 +485,7 @@ GET http://127.0.0.1:8080/graphspaces/gs1/graphs/hugegraph/graph/edges?vertex_id
 ##### Method & Url
 
 ```
-GET http://127.0.0.1:8080/graphspaces/gs1/graphs/hugegraph/graph/edges?page&limit=2
+GET http://127.0.0.1:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges?page&limit=2
 ```
 
 ##### Response Status
@@ -539,7 +537,7 @@ GET http://127.0.0.1:8080/graphspaces/gs1/graphs/hugegraph/graph/edges?page&limi
 ##### Method & Url
 
 ```
-GET http://127.0.0.1:8080/graphspaces/gs1/graphs/hugegraph/graph/edges?page=EoYxOm1hcmtvgggCAIQyOmxvcAAAAAAAAAAC&limit=2
+GET http://127.0.0.1:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges?page=EoYxOm1hcmtvgggCAIQyOmxvcAAAAAAAAAAC&limit=2
 ```
 
 ##### Response Status
@@ -588,7 +586,7 @@ GET http://127.0.0.1:8080/graphspaces/gs1/graphs/hugegraph/graph/edges?page=EoYx
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop
 ```
 
 ##### Response Status
@@ -634,7 +632,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/edges/S1:marko>
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop
 ```
 
 ##### Response Status
@@ -650,7 +648,7 @@ DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/edges/S1:mar
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/graph/edges/S1:marko>1>>S1:vadas?label=knows
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges/S1:marko>1>>S1:vadas?label=knows
 ```
 
 ##### Response Status

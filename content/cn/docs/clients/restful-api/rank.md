@@ -6,8 +6,6 @@ weight: 10
 
 ### 4.1 rank API 概述
 
-> **重要提示**：在使用以下 API 之前，需要先创建图空间（graphspace）。请参考 [Graphspace API](../graphspace) 创建名为 `gs1` 的图空间。文档中的示例均假设已存在名为 `gs1` 的图空间。
-
 HugeGraphServer 除了上一节提到的遍历（traverser）方法，还提供了一类专门做推荐的方法，我们称为`rank API`，
 可在图中为一个点推荐与其关系密切的其它点。
 
@@ -15,16 +13,17 @@ HugeGraphServer 除了上一节提到的遍历（traverser）方法，还提供�
 
 #### 4.2.1 Personal Rank API
 
-Personal Rank 算法典型场景是用于推荐应用中, 根据某个点现有的出边, 推荐具有相近 / 相同关系的其他点,
-比如根据某个人的阅读记录 / 习惯, 向它推荐其他可能感兴趣的书, 或潜在的书友, 举例如下:
-1. 假设给定 1个 Person 点 是 tom, 它喜欢 `a,b,c,d,e` 5本书, 我们的想给 tom 推荐一些书友, 以及一些书, 最容易的想法就是看看还有哪些人喜欢过这些书 (共同兴趣)
-2. 那么此时, 需要有其它的 Person 点比如 neo, 他喜欢 `b,d,f` 3本书, 以及 jay, 它喜欢 `c,d,e,g` 4本书, lee 它喜欢 `a,d,e,f` 4本书
-3. 由于 tom 已经看过的书不需要重复推荐, 所以返回结果里应该期望推荐有共同喜好的其他书友看过, 但 tom 没看过的书, 比如推荐 "f"  和 "g" 书, 且优先级 f > g
-4. 此时再计算 tom 的个性化 rank 值, 就会返回排序后 TopN 推荐的 书友 + 书 的结果了 (如果只需要推荐的书, 选择 OTHER_LABEL 即可)
+Personal Rank 算法典型场景是用于推荐应用中，根据某个点现有的出边，推荐具有相近 / 相同关系的其他点，
+比如根据某个人的阅读记录 / 习惯，向它推荐其他可能感兴趣的书，或潜在的书友，举例如下：
+
+1. 假设给定 1 个 Person 点 是 tom, 它喜欢 `a,b,c,d,e` 5 本书，我们的想给 tom 推荐一些书友，以及一些书，最容易的想法就是看看还有哪些人喜欢过这些书 (共同兴趣)
+2. 那么此时，需要有其它的 Person 点比如 neo, 他喜欢 `b,d,f` 3 本书，以及 jay, 它喜欢 `c,d,e,g` 4 本书，lee 它喜欢 `a,d,e,f` 4 本书
+3. 由于 tom 已经看过的书不需要重复推荐，所以返回结果里应该期望推荐有共同喜好的其他书友看过，但 tom 没看过的书，比如推荐 "f"  和 "g" 书，且优先级 f > g
+4. 此时再计算 tom 的个性化 rank 值，就会返回排序后 TopN 推荐的 书友 + 书 的结果了 (如果只需要推荐的书，选择 OTHER_LABEL 即可)
 
 ##### 4.2.1.0 数据准备
 
-上面是一个简单的例子, 这里再提供一个公开的 1MB 测试数据集 [MovieLens](https://grouplens.org/datasets/movielens/) 为例，
+上面是一个简单的例子，这里再提供一个公开的 1MB 测试数据集 [MovieLens](https://grouplens.org/datasets/movielens/) 为例，
 用户需下载该数据集，然后使用 HugeGraph-Loader 导入到 HugeGraph 中，简单起见，数据中顶点 user 
 和 movie 的属性都忽略，仅使用 id 字段即可，边 rating 的具体评分值也忽略。loader 使用的元数据
 文件和输入源映射文件内容如下：
@@ -125,10 +124,10 @@ schema.edgeLabel("rating")
 假设有一个用户和物品的二分图，基于随机游走的 PersonalRank 算法步骤如下：
 
 1. 选定一个起点用户 u，其初始权重为 1.0，从 Vu 开始游走（有 alpha 的概率走到邻居点，1 - alpha 的概率停留）；
-2. 如果决定向外游走, 那么会选取某一个类型的出边, 例如 `rating` 来查找共同的打分人：
+2. 如果决定向外游走，那么会选取某一个类型的出边，例如 `rating` 来查找共同的打分人：
    1. 那就从当前节点的邻居节点中按照均匀分布随机选择一个，并且按照均匀分布划分权重值；
    2. 给源顶点补偿权重 1 - alpha；
-   3. 重复步骤2；
+   3. 重复步骤 2；
 3. 达到一定步数或达到精度后收敛，得到推荐列表。
 
 ###### Params
@@ -141,12 +140,12 @@ schema.edgeLabel("rating")
 - alpha：每轮迭代时从某个点往外走的概率，与 PageRank 算法中的 alpha 类似，取值区间为 (0, 1], 默认值 `0.85` 
 - max_degree: 查询过程中，单个顶点遍历的最大邻接边数目，默认为 `10000`
 - max_depth: 迭代次数，取值区间为 [2, 50], 默认值 `5`
-- with_label：筛选结果中保留哪些结果，可选以下三类, 默认为 `BOTH_LABEL`
+- with_label：筛选结果中保留哪些结果，可选以下三类，默认为 `BOTH_LABEL`
     - SAME_LABEL：仅保留与源顶点相同类别的顶点
     - OTHER_LABEL：仅保留与源顶点不同类别（二分图的另一端）的顶点
     - BOTH_LABEL：同时保留与源顶点相同和相反类别的顶点
 - limit: 返回的顶点的最大数目，默认为 `100`
-- max_diff: 提前收敛的精度差, 默认为 `0.0001` (*后续实现*)  
+- max_diff: 提前收敛的精度差，默认为 `0.0001` (*后续实现*)
 - sorted：返回的结果是否根据 rank 排序，为 true 时降序排列，反之不排序，默认为 `true`
 
 ##### 4.2.1.2 使用方法
@@ -154,7 +153,7 @@ schema.edgeLabel("rating")
 ###### Method & Url
 
 ```
-POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/traversers/personalrank
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/traversers/personalrank
 ```
 
 ###### Request Body
@@ -300,16 +299,16 @@ public class Loader {
 - steps: 表示从起始顶点走过的路径规则，是一组 Step 的列表，每个 Step 对应结果中的一层，必填项。每个 Step 的结构如下：
 	- direction：表示边的方向（OUT, IN, BOTH），默认是 BOTH
 	- labels：边的类型列表，多个边类型取并集
-	- max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注: 0.12版之前 step 内仅支持 degree 作为参数名, 0.12开始统一使用 max_degree, 并向下兼容 degree 写法)
+    - max_degree：查询过程中，单个顶点遍历的最大邻接边数目，默认为 10000 (注：0.12 版之前 step 内仅支持 degree 作为参数名，0.12 开始统一使用 max_degree, 并向下兼容 degree 写法)
 	- top：在结果中每一层只保留权重最高的前 N 个结果，默认为 100，最大值为 1000
-- capacity: 遍历过程中最大的访问的顶点数目，选填项，默认为10000000
+- capacity: 遍历过程中最大的访问的顶点数目，选填项，默认为 10000000
 
 ##### 4.2.2.2 使用方法
 
 ###### Method & Url
 
 ```
-POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/traversers/neighborrank
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/traversers/neighborrank
 ```
 
 ###### Request Body

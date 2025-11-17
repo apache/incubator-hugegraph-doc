@@ -6,16 +6,14 @@ weight: 11
 
 ### 5.1 Variables
 
-> **重要提示**：在使用以下 API 之前，需要先创建图空间（graphspace）。请参考 [Graphspace API](../graphspace) 创建名为 `gs1` 的图空间。文档中的示例均假设已存在名为 `gs1` 的图空间。
-
-Variables可以用来存储有关整个图的数据，数据按照键值对的方式存取
+Variables 可以用来存储有关整个图的数据，数据按照键值对的方式存取
 
 #### 5.1.1 创建或者更新某个键值对
 
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/variables/name
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/variables/name
 ```
 
 ##### Request Body
@@ -45,7 +43,7 @@ PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/variables/name
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/variables
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/variables
 ```
 
 ##### Response Status
@@ -67,7 +65,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/variables
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/variables/name
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/variables/name
 ```
 
 ##### Response Status
@@ -89,7 +87,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/variables/name
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/variables/name
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/variables/name
 ```
 
 ##### Response Status

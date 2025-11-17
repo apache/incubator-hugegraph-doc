@@ -6,28 +6,25 @@ weight: 4
 
 ### 1.4 EdgeLabel
 
-> **重要提示**：在使用以下 API 之前，需要先创建图空间（graphspace）。请参考 [Graphspace API](../graphspace) 创建名为 `gs1` 的图空间。文档中的示例均假设已存在名为 `gs1` 的图空间。
+假设已经创建好了 1.2.3 中的 PropertyKeys 和 1.3.3 中的 VertexLabels
 
-假设已经创建好了1.2.3中的 PropertyKeys 和 1.3.3中的 VertexLabels
-
-Params说明
+Params 说明
 
 - name：顶点类型名称，必填
 - source_label: 源顶点类型的名称，必填
 - target_label: 目标顶点类型的名称，必填
-- frequency：两个点之间是否可以有多条边，可以取值SINGLE和MULTIPLE，非必填，默认值SINGLE
+- frequency：两个点之间是否可以有多条边，可以取值 SINGLE 和 MULTIPLE，非必填，默认值 SINGLE
 - properties: 边类型关联的属性类型，选填
 - sort_keys: 当允许关联多次时，指定区分键属性列表
 - nullable_keys：可为空的属性，选填，默认可为空
-- enable_label_index： 是否开启类型索引，默认关闭
+- enable_label_index：是否开启类型索引，默认关闭
 
-
-#### 1.4.1 创建一个EdgeLabel
+#### 1.4.1 创建一个 EdgeLabel
 
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/edgelabels
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/edgelabels
 ```
 
 ##### Request Body
@@ -127,7 +124,7 @@ POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/edgelabels
 }
 ```
 
-#### 1.4.2 为已存在的EdgeLabel添加properties或userdata，或者移除userdata（目前不支持移除properties）
+#### 1.4.2 为已存在的 EdgeLabel 添加 properties 或 userdata，或者移除 userdata（目前不支持移除 properties）
 
 ##### Params
 
@@ -136,7 +133,7 @@ POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/edgelabels
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/edgelabels/created?action=append
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/edgelabels/created?action=append
 ```
 
 ##### Request Body
@@ -184,12 +181,12 @@ PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/edgelabels/cre
 }
 ```
 
-#### 1.4.3 获取所有的EdgeLabel
+#### 1.4.3 获取所有的 EdgeLabel
 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/edgelabels
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/edgelabels
 ```
 
 ##### Response Status
@@ -246,12 +243,12 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/edgelabels
 }
 ```
 
-#### 1.4.4 根据name获取EdgeLabel
+#### 1.4.4 根据 name 获取 EdgeLabel
 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/edgelabels/created
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/edgelabels/created
 ```
 
 ##### Response Status
@@ -287,14 +284,14 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/edgelabels/cre
 }
 ```
 
-#### 1.4.5 根据name删除EdgeLabel
+#### 1.4.5 根据 name 删除 EdgeLabel
 
 删除 EdgeLabel 会导致删除对应的边以及相关的索引数据，会产生一个异步任务
 
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/edgelabels/created
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/edgelabels/created
 ```
 
 ##### Response Status
@@ -313,4 +310,4 @@ DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/edgelabels/
 
 注：
 
-> 可以通过`GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/tasks/1`（其中"1"是task_id）来查询异步任务的执行状态，更多[异步任务RESTful API](../task)
+> 可以通过`GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks/1`（其中"1"是 task_id）来查询异步任务的执行状态，更多[异步任务 RESTful API](../task)

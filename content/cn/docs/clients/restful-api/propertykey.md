@@ -6,9 +6,7 @@ weight: 2
 
 ### 1.2 PropertyKey
 
-> **重要提示**：在使用以下 API 之前，需要先创建图空间（graphspace）。请参考 [Graphspace API](../graphspace) 创建名为 `gs1` 的图空间。文档中的示例均假设已存在名为 `gs1` 的图空间。
-
-Params说明：
+Params 说明：
 
 - name：属性类型名称，必填
 - data_type：属性类型数据类型，包括：bool、byte、int、long、float、double、text、date、uuid、blob，默认 `text` 类型 (代表 string 字符串类型)
@@ -16,9 +14,9 @@ Params说明：
 
 请求体字段说明：
 
-- id：属性类型id值
+- id：属性类型 id 值
 - properties：属性的属性，对于属性而言，此项为空
-- user_data：设置属性类型的通用信息，比如可设置age属性的取值范围，最小为0，最大为100；目前此项不做任何校验，只为后期拓展提供预留入口
+- user_data：设置属性类型的通用信息，比如可设置 age 属性的取值范围，最小为 0，最大为 100；目前此项不做任何校验，只为后期拓展提供预留入口
 
 
 #### 1.2.1 创建一个 PropertyKey
@@ -26,7 +24,7 @@ Params说明：
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/propertykeys
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertykeys
 ```
 
 ##### Request Body
@@ -75,7 +73,7 @@ POST http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/propertykeys
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/propertykeys/age?action=append
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertykeys/age?action=append
 ```
 
 ##### Request Body
@@ -124,7 +122,7 @@ PUT http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/propertykeys/a
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/propertykeys
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertykeys
 ```
 
 ##### Response Status
@@ -198,12 +196,12 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/propertykeys
 }
 ```
 
-#### 1.2.4 根据name获取PropertyKey
+#### 1.2.4 根据 name 获取 PropertyKey
 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/propertykeys/age
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertykeys/age
 ```
 
 其中，`age`为要获取的 PropertyKey 的名称
@@ -239,7 +237,7 @@ GET http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/propertykeys/a
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphspaces/gs1/graphs/hugegraph/schema/propertykeys/age
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertykeys/age
 ```
 
 其中，`age`为要删除的 PropertyKey 的名称
