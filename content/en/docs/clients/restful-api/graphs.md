@@ -168,6 +168,8 @@ Create a non-auth graph (set `Content-Type: application/json`)
 }
 ```
 
+> Note: For HugeGraph 1.5.0 and earlier versions, the request body of this API should still use `text/plain` format (properties style) instead of JSON.
+
 #### 6.1.6 Delete graph and it's data
 
 ##### Params
@@ -189,6 +191,8 @@ DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph_clone?confirm_
 ```javascript
 204
 ```
+
+> Note: For HugeGraph 1.5.0 and earlier versions, if you need to create or drop a graph, please still use the legacy `text/plain` (properties) style request body instead of JSON.
 
 ### 6.2 Conf
 

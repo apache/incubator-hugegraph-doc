@@ -196,6 +196,8 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph-xx
 }
 ```
 
+> 注意：对于 HugeGraph 1.5.0 及之前版本，此接口的请求体仍需使用 `text/plain`（properties 文本）格式，而不是 JSON。
+
 #### 6.1.6 删除某个图及其全部数据
 
 ##### Params
@@ -223,6 +225,8 @@ http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph_clone?confirm_message
 ```javascript
 204
 ```
+
+> 注意：对于 HugeGraph 1.5.0 及之前版本，如需创建或删除图，请继续使用旧的 `text/plain`（properties）格式请求体，而不是 JSON。
 
 ### 6.2 Conf
 

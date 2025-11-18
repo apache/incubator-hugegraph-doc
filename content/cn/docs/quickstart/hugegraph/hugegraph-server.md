@@ -17,11 +17,11 @@ Core 模块是 Tinkerpop 接口的实现，Backend 模块用于管理数据存�
 
 #### 2.1 安装 Java 11 (JDK 11)
 
-请优先考虑在 Java 11 的环境上启动 `HugeGraph-Server`(在 1.5.0 版前，会保留对 Java 8 的基本兼容)
+请考虑在 Java 11 的环境上启动 `HugeGraph-Server`(在 1.5.0 版前，会保留对 Java 8 的基本兼容)
 
 **在往下阅读之前先执行 `java -version` 命令确认 jdk 版本**
 
-> 注：使用 Java 8 启动 HugeGraph-Server 会失去一些**安全性**的保障，也会降低性能相关指标 (请尽早升级/迁移)
+> 注：使用 Java 8 启动 HugeGraph-Server 会失去一些**安全性**的保障，也会降低性能相关指标 (请尽早升级/迁移，1.7.0 不再支持)
 
 ### 3 部署
 
