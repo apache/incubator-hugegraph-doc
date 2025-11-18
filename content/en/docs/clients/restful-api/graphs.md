@@ -94,15 +94,17 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph_clone?clone_grap
 
 ##### Request Body [Optional]
 
-Clone a `non-auth` mode graph: (Must set body `Context-Type=text/plain`)
+Clone a `non-auth` mode graph (set `Content-Type: application/json`)
 
-```properties
-gremlin.graph=org.apache.hugegraph.HugeFactory
-backend=rocksdb
-serializer=binary
-store=hugegraph_clone
-rocksdb.data_path=./rks-data-xx
-rocksdb.wal_path=./rks-data-xx
+```json
+{
+  "gremlin.graph": "org.apache.hugegraph.HugeFactory",
+  "backend": "rocksdb",
+  "serializer": "binary",
+  "store": "hugegraph",
+  "rocksdb.data_path": "./rks-data-xx",
+  "rocksdb.wal_path": "./rks-data-xx"
+}
 ```
 
 > Note: 
@@ -134,15 +136,17 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph2
 
 ##### Request Body
 
-create a non-auth graph: (Must set body `Context-Type=text/plain`)
+Create a non-auth graph (set `Content-Type: application/json`)
 
-```properties
-gremlin.graph=org.apache.hugegraph.HugeFactory
-backend=rocksdb
-serializer=binary
-store=hugegraph2
-rocksdb.data_path=./rks-data-xx
-rocksdb.wal_path=./rks-data-xx
+```json
+{
+  "gremlin.graph": "org.apache.hugegraph.HugeFactory",
+  "backend": "rocksdb",
+  "serializer": "binary",
+  "store": "hugegraph2",
+  "rocksdb.data_path": "./rks-data-xx",
+  "rocksdb.wal_path": "./rks-data-xx"
+}
 ```
 
 > Note: 

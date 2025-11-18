@@ -115,13 +115,17 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph_clone?clone_grap
 
 ##### Request Body (可选)
 
-```properties
-gremlin.graph=org.apache.hugegraph.HugeFactory
-backend=rocksdb
-serializer=binary
-store=hugegraph_clone
-rocksdb.data_path=./rks-data-xx
-rocksdb.wal_path=./rks-data-xx
+克隆一个非鉴权模式的图（设置 `Content-Type: application/json`）
+
+```json
+{
+  "gremlin.graph": "org.apache.hugegraph.HugeFactory",
+  "backend": "rocksdb",
+  "serializer": "binary",
+  "store": "hugegraph_clone",
+  "rocksdb.data_path": "./rks-data-xx",
+  "rocksdb.wal_path": "./rks-data-xx"
+}
 ```
 
 > Note:
@@ -160,13 +164,17 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph-xx
 
 ##### Request Body
 
-```properties
-gremlin.graph=org.apache.hugegraph.HugeFactory
-backend=rocksdb
-serializer=binary
-store=hugegraph
-rocksdb.data_path=./rks-data-xx
-rocksdb.wal_path=./rks-data-xx
+创建一个非鉴权模式的图（设置 `Content-Type: application/json`）
+
+```json
+{
+  "gremlin.graph": "org.apache.hugegraph.HugeFactory",
+  "backend": "rocksdb",
+  "serializer": "binary",
+  "store": "hugegraph",
+  "rocksdb.data_path": "./rks-data-xx",
+  "rocksdb.wal_path": "./rks-data-xx"
+}
 ```
 
 > Note:

@@ -210,6 +210,7 @@ usePD=true
 
 节点 1（主节点）：
 ```properties
+usePD=true
 restserver.url=http://127.0.0.1:8081
 gremlinserver.url=http://127.0.0.1:8181
 
@@ -222,6 +223,7 @@ server.role=master
 
 节点 2（工作节点）：
 ```properties
+usePD=true
 restserver.url=http://127.0.0.1:8082
 gremlinserver.url=http://127.0.0.1:8182
 

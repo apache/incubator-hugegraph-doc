@@ -216,10 +216,17 @@ task.scheduler_type=distributed
 pd.peers=127.0.0.1:8686,127.0.0.1:8687,127.0.0.1:8688
 ```
 
+Then enable PD discovery in `rest-server.properties` (required for every HugeGraph-Server node):
+
+```properties
+usePD=true
+```
+
 If configuring multiple HugeGraph-Server nodes, you need to modify the `rest-server.properties` configuration file for each node, for example:
 
 Node 1 (Master node):
 ```properties
+usePD=true
 restserver.url=http://127.0.0.1:8081
 gremlinserver.url=http://127.0.0.1:8181
 
@@ -232,6 +239,7 @@ server.role=master
 
 Node 2 (Worker node):
 ```properties
+usePD=true
 restserver.url=http://127.0.0.1:8082
 gremlinserver.url=http://127.0.0.1:8182
 
