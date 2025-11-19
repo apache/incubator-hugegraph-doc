@@ -2297,7 +2297,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>&lt;strong>方案三：从源码构建&lt;/strong>&lt;/li>
 &lt;/ol>
-&lt;p>构建。具体请参照&lt;a href="https://github.com/apache/incubator-hugegraph-computer/tree/master/vermeer">Vermeer Readme&lt;/a>。&lt;/p>
+&lt;p>构建。具体请参照 &lt;a href="https://github.com/apache/incubator-hugegraph-computer/tree/master/vermeer">Vermeer Readme&lt;/a>。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>go build
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在进入文件夹目录后输入 &lt;code>./vermeer --env=master&lt;/code> 或 &lt;code>./vermeer --env=worker01&lt;/code>&lt;/p>
 &lt;h2 id="二任务创建类-rest-api">二、任务创建类 rest api&lt;/h2>

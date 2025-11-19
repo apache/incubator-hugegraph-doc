@@ -3162,7 +3162,7 @@ you may wait for the community to update the data with these enhancements.&lt;/p
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>&lt;strong>Option 3: Build from Source&lt;/strong>&lt;/li>
 &lt;/ol>
-&lt;p>Build. You can refer&lt;a href="https://github.com/apache/incubator-hugegraph-computer/tree/master/vermeer">Vermeer Readme&lt;/a>.&lt;/p>
+&lt;p>Build. You can refer &lt;a href="https://github.com/apache/incubator-hugegraph-computer/tree/master/vermeer">Vermeer Readme&lt;/a>.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>go build
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Enter the directory and input &lt;code>./vermeer --env=master&lt;/code> or &lt;code>./vermeer --env=worker01&lt;/code>.&lt;/p>
 &lt;h2 id="2-task-creation-rest-api">2. Task Creation REST API&lt;/h2>
