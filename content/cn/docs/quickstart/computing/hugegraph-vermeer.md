@@ -19,6 +19,7 @@ master 是负责通信、转发、汇总的节点，计算量和占用资源量�
 1. **方案一：Docker Compose（推荐）**
 
 确保docker-compose.yaml存在于您的项目根目录中。如果没有，以下是一个示例：
+
 ```yaml
 #
 # Licensed to the Apache Software Foundation (ASF) under one or more
@@ -146,7 +147,7 @@ docker network rm vermeer_network
 
 3. **方案三：从源码构建**
 
-构建。具体请参照[Vermeer Readme](https://github.com/apache/incubator-hugegraph-computer/tree/master/vermeer)。
+构建。具体请参照 [Vermeer Readme](https://github.com/apache/incubator-hugegraph-computer/tree/master/vermeer)。
 
 ```shell
 go build
