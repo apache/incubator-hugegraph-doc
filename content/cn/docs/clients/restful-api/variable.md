@@ -6,14 +6,14 @@ weight: 11
 
 ### 5.1 Variables
 
-Variables可以用来存储有关整个图的数据，数据按照键值对的方式存取
+Variables 可以用来存储有关整个图的数据，数据按照键值对的方式存取
 
 #### 5.1.1 创建或者更新某个键值对
 
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/variables/name
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/variables/name
 ```
 
 ##### Request Body
@@ -43,7 +43,7 @@ PUT http://localhost:8080/graphs/hugegraph/variables/name
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/variables
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/variables
 ```
 
 ##### Response Status
@@ -65,7 +65,7 @@ GET http://localhost:8080/graphs/hugegraph/variables
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/variables/name
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/variables/name
 ```
 
 ##### Response Status
@@ -87,7 +87,7 @@ GET http://localhost:8080/graphs/hugegraph/variables/name
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/variables/name
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/variables/name
 ```
 
 ##### Response Status

@@ -4,8 +4,9 @@ linkTitle: "RESTful API"
 weight: 1
 ---
 
-HugeGraph-Server通过HugeGraph-API基于HTTP协议为Client提供操作图的接口，主要包括元数据和
+HugeGraph-Server 通过 HugeGraph-API 基于 HTTP 协议为 Client 提供操作图的接口，主要包括元数据和
 图数据的增删改查，遍历算法，变量，图操作及其他操作。
+1.7.0 版本引入了图空间功能，若版本<1.7.0，api 路径需要去除 /graphspaces/{graphspace}
 
 除了下方的文档，你还可以通过 `localhost:8080/swagger-ui/index.html` 访问 `swagger-ui` 以查看 `RESTful API`。[示例可以参考此处](/cn/docs/quickstart/hugegraph/hugegraph-server#swaggerui-example)
 

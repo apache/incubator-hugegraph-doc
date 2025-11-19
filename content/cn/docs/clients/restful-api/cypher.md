@@ -6,23 +6,31 @@ weight: 15
 
 ### 9.1 Cypher
 
-#### 9.1.1 向HugeGraphServer发送Cypher语句（GET），同步执行
+#### 9.1.1 向 HugeGraphServer 发送 Cypher 语句（GET），同步执行
 
 ##### Method & Url
 
 ```javascript
-GET /graphs/{graph}/cypher?cypher={cypher}
+GET /graphspaces/{graphspace}/graphs/{graph}/cypher?cypher={cypher}
 ```
 
 ##### Params
+
+**路径参数说明：**
+
+- graphspace: 图空间名称
 - graph: 图名称
-- cypher: cypher语句
+
+**请求参数说明：**
+
+- cypher: cypher 语句
 
 
 ##### 使用示例
 
 ```javascript
-GET http://localhost:8080/graphs/hugecypher1/cypher?cypher=match(n:person) return n.name as name order by n.name limit 1
+GET
+http://localhost:8080/graphspaces/DEFAULT/graphs/hugecypher1/cypher?cypher=match(n:person) return n.name as name order by n.name limit 1
 ```
 
 ##### Response Status
@@ -53,30 +61,36 @@ GET http://localhost:8080/graphs/hugecypher1/cypher?cypher=match(n:person) retur
 }
 ```
 
-#### 9.1.2 向HugeGraphServer发送Cypher语句（POST），同步执行
+#### 9.1.2 向 HugeGraphServer 发送 Cypher 语句（POST），同步执行
 
 
 ##### Method & Url
 
 ```javascript
-POST /graphs/{graph}/cypher
+POST /graphspaces/{graphspace}/graphs/{graph}/cypher
 ```
 
 ##### Params
+
+**路径参数说明：**
+
+- graphspace: 图空间名称
 - graph: 图名称
 
 ##### Body
 {cypher}
-- cypher: cypher语句
+
+- cypher: cypher 语句
 
 注意：
 
-> 不是JSON格式，是纯文本的Cypher语句
+> 不是 JSON 格式，是纯文本的 Cypher 语句
 
 ##### 使用示例
 
 ```javascript
-POST http://localhost:8080/graphs/hugecypher1/cypher
+POST
+http://localhost:8080/graphspaces/DEFAULT/graphs/hugecypher1/cypher
 ```
 
 ###### Request Body

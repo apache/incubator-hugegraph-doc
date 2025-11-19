@@ -11,9 +11,9 @@ HugeGraph provides a single interface to get all Schema information of a graph, 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph_name}/schema
+GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph_name}/schema
 
-e.g: GET http://localhost:8080/graphs/hugegraph/schema
+e.g: GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema
 ```
 
 ##### Response Status

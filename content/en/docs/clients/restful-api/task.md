@@ -16,7 +16,7 @@ weight: 13
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/tasks?status=success
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks?status=success
 ```
 
 ##### Response Status
@@ -50,7 +50,7 @@ GET http://localhost:8080/graphs/hugegraph/tasks?status=success
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/tasks/2
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks/2
 ```
 
 ##### Response Status
@@ -82,7 +82,7 @@ GET http://localhost:8080/graphs/hugegraph/tasks/2
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/tasks/2
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks/2
 ```
 
 ##### Response Status
@@ -110,7 +110,7 @@ If you already created an async task via [Gremlin API](/docs/clients/restful-api
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/tasks/2?action=cancel
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks/2?action=cancel
 ```
 > cancel it in 10s. if more than 10s, the task may already be finished, then can't be cancelled.
 

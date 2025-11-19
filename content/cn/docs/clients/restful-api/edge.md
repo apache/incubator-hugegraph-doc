@@ -61,6 +61,7 @@ g = graph.traversal()
 
 **路径参数说明：**
 
+- graphspace: 图空间名称
 - graph：待操作的图
 
 **请求体说明：**
@@ -77,7 +78,7 @@ g = graph.traversal()
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/graph/edges
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges
 ```
 
 ##### Request Body
@@ -126,6 +127,7 @@ POST http://localhost:8080/graphs/hugegraph/graph/edges
 
 **路径参数说明：**
 
+- graphspace: 图空间名称
 - graph：待操作的图
 
 **请求参数说明：**
@@ -139,7 +141,7 @@ POST http://localhost:8080/graphs/hugegraph/graph/edges
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/graph/edges/batch
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges/batch
 ```
 
 ##### Request Body
@@ -192,6 +194,7 @@ POST http://localhost:8080/graphs/hugegraph/graph/edges/batch
 
 **路径参数说明：**
 
+- graphspace: 图空间名称
 - graph：待操作的图
 - id：待操作的边 id
 
@@ -206,7 +209,7 @@ POST http://localhost:8080/graphs/hugegraph/graph/edges/batch
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop?action=append
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop?action=append
 ```
 
 ##### Request Body
@@ -251,6 +254,7 @@ PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop?action
 
 **路径参数说明：**
 
+- graphspace: 图空间名称
 - graph：待操作的图
 
 **请求体说明：**
@@ -268,7 +272,7 @@ PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop?action
 ##### Method & Url
 
 ```
-PUT http://127.0.0.1:8080/graphs/hugegraph/graph/edges/batch
+PUT http://127.0.0.1:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges/batch
 ```
 
 ##### Request Body
@@ -355,6 +359,7 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/edges/batch
 
 **路径参数说明：**
 
+- graphspace: 图空间名称
 - graph：待操作的图
 - id：待操作的边 id
 
@@ -369,7 +374,7 @@ PUT http://127.0.0.1:8080/graphs/hugegraph/graph/edges/batch
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop?action=eliminate
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop?action=eliminate
 ```
 
 ##### Request Body
@@ -408,6 +413,7 @@ PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop?action
 
 **路径参数说明：**
 
+- graphspace: 图空间名称
 - graph：待操作的图
 
 **请求参数说明：**
@@ -443,7 +449,7 @@ PUT http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop?action
 ##### Method & Url
 
 ```
-GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?vertex_id="1:marko"&label=knows&properties={"date":"P.within(\"20160111\")"}
+GET http://127.0.0.1:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges?vertex_id="1:marko"&label=knows&properties={"date":"P.within(\"20160111\")"}
 ```
 
 ##### Response Status
@@ -479,7 +485,7 @@ GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?vertex_id="1:marko"&label
 ##### Method & Url
 
 ```
-GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page&limit=2
+GET http://127.0.0.1:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges?page&limit=2
 ```
 
 ##### Response Status
@@ -531,7 +537,7 @@ GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page&limit=2
 ##### Method & Url
 
 ```
-GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page=EoYxOm1hcmtvgggCAIQyOmxvcAAAAAAAAAAC&limit=2
+GET http://127.0.0.1:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges?page=EoYxOm1hcmtvgggCAIQyOmxvcAAAAAAAAAAC&limit=2
 ```
 
 ##### Response Status
@@ -573,13 +579,14 @@ GET http://127.0.0.1:8080/graphs/hugegraph/graph/edges?page=EoYxOm1hcmtvgggCAIQy
 
 **路径参数说明：**
 
+- graphspace: 图空间名称
 - graph：待操作的图
 - id：待操作的边 id
 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop
 ```
 
 ##### Response Status
@@ -612,6 +619,7 @@ GET http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop
 
 **路径参数说明：**
 
+- graphspace: 图空间名称
 - graph：待操作的图
 - id：待操作的边 id
 
@@ -624,7 +632,7 @@ GET http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop
 ```
 
 ##### Response Status
@@ -640,7 +648,7 @@ DELETE http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>2>>S2:lop
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/graph/edges/S1:marko>1>>S1:vadas?label=knows
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/edges/S1:marko>1>>S1:vadas?label=knows
 ```
 
 ##### Response Status

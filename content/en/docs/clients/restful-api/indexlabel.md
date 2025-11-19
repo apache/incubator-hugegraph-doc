@@ -13,7 +13,7 @@ Assuming PropertyKeys from version 1.1.3, VertexLabels from version 1.2.3, and E
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/schema/indexlabels
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/indexlabels
 ```
 
 ##### Request Body
@@ -59,7 +59,7 @@ POST http://localhost:8080/graphs/hugegraph/schema/indexlabels
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/schema/indexlabels
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/indexlabels
 ```
 
 ##### Response Status
@@ -123,7 +123,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/indexlabels
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/indexlabels/personByCity
 ```
 
 ##### Response Status
@@ -154,7 +154,7 @@ Deleting an IndexLabel will result in the deletion of related index data. This o
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/indexlabels/personByCity
 ```
 
 ##### Response Status
@@ -173,4 +173,4 @@ DELETE http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
 
 Note:
 
-> You can query the execution status of an asynchronous task by using `GET http://localhost:8080/graphs/hugegraph/tasks/1` (where "1" is the task_id). For more information, refer to the [Asynchronous Task RESTful API](../task).
+> You can query the execution status of an asynchronous task by using `GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks/1` (where "1" is the task_id). For more information, refer to the [Asynchronous Task RESTful API](../task).

@@ -13,7 +13,7 @@ Variables can be used to store data about the entire graph. The data is accessed
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/variables/name
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/variables/name
 ```
 
 ##### Request Body
@@ -43,7 +43,7 @@ PUT http://localhost:8080/graphs/hugegraph/variables/name
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/variables
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/variables
 ```
 
 ##### Response Status
@@ -65,7 +65,7 @@ GET http://localhost:8080/graphs/hugegraph/variables
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/variables/name
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/variables/name
 ```
 
 ##### Response Status
@@ -87,7 +87,7 @@ GET http://localhost:8080/graphs/hugegraph/variables/name
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/variables/name
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/variables/name
 ```
 
 ##### Response Status

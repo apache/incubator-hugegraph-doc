@@ -23,7 +23,7 @@ Request Body Field Description:
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/schema/propertykeys
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertykeys
 ```
 
 ##### Request Body
@@ -72,7 +72,7 @@ POST http://localhost:8080/graphs/hugegraph/schema/propertykeys
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/schema/propertykeys/age?action=append
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertykeys/age?action=append
 ```
 
 ##### Request Body
@@ -121,7 +121,7 @@ PUT http://localhost:8080/graphs/hugegraph/schema/propertykeys/age?action=append
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/schema/propertykeys
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertykeys
 ```
 
 ##### Response Status
@@ -200,7 +200,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/propertykeys
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertykeys/age
 ```
 
 Where `age` is the name of the PropertyKey to be retrieved.
@@ -236,7 +236,7 @@ Where `age` is the name of the PropertyKey to be retrieved.
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertykeys/age
 ```
 
 Where `age` is the name of the PropertyKey to be deleted.

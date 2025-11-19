@@ -24,7 +24,7 @@ Params Explanation
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/schema/edgelabels
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/edgelabels
 ```
 
 ##### Request Body
@@ -133,7 +133,7 @@ Additionally, when the edge has a property called "createdTime" and you want to 
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/schema/edgelabels/created?action=append
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/edgelabels/created?action=append
 ```
 
 ##### Request Body
@@ -186,7 +186,7 @@ PUT http://localhost:8080/graphs/hugegraph/schema/edgelabels/created?action=appe
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/schema/edgelabels
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/edgelabels
 ```
 
 ##### Response Status
@@ -248,7 +248,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/edgelabels
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/edgelabels/created
 ```
 
 ##### Response Status
@@ -291,7 +291,7 @@ Deleting an EdgeLabel will result in the deletion of corresponding edges and rel
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/edgelabels/created
 ```
 
 ##### Response Status
@@ -310,4 +310,4 @@ DELETE http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
 
 Note:
 
-> You can query the execution status of an asynchronous task by using `GET http://localhost:8080/graphs/hugegraph/tasks/1` (where "1" is the task_id). For more information, refer to the [Asynchronous Task RESTful API](../task).
+> You can query the execution status of an asynchronous task by using `GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks/1` (where "1" is the task_id). For more information, refer to the [Asynchronous Task RESTful API](../task).

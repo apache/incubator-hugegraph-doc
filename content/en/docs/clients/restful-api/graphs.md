@@ -36,7 +36,7 @@ GET http://localhost:8080/graphs
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph
 ```
 
 ##### Response Status
@@ -69,7 +69,7 @@ avoid false calls by users:
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/clear?confirm_message=I%27m+sure+to+delete+all+data
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/clear?confirm_message=I%27m+sure+to+delete+all+data
 ```
 
 ##### Response Status
@@ -89,20 +89,22 @@ DELETE http://localhost:8080/graphs/hugegraph/clear?confirm_message=I%27m+sure+t
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph_clone?clone_graph_name=hugegraph
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph_clone?clone_graph_name=hugegraph
 ```
 
 ##### Request Body [Optional]
 
-Clone a `non-auth` mode graph: (Must set body `Context-Type=text/plain`)
+Clone a `non-auth` mode graph (set `Content-Type: application/json`)
 
-```properties
-gremlin.graph=org.apache.hugegraph.HugeFactory
-backend=rocksdb
-serializer=binary
-store=hugegraph_clone
-rocksdb.data_path=./rks-data-xx
-rocksdb.wal_path=./rks-data-xx
+```json
+{
+  "gremlin.graph": "org.apache.hugegraph.HugeFactory",
+  "backend": "rocksdb",
+  "serializer": "binary",
+  "store": "hugegraph",
+  "rocksdb.data_path": "./rks-data-xx",
+  "rocksdb.wal_path": "./rks-data-xx"
+}
 ```
 
 > Note: 
@@ -129,20 +131,22 @@ rocksdb.wal_path=./rks-data-xx
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph2
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph2
 ```
 
 ##### Request Body
 
-create a non-auth graph: (Must set body `Context-Type=text/plain`)
+Create a non-auth graph (set `Content-Type: application/json`)
 
-```properties
-gremlin.graph=org.apache.hugegraph.HugeFactory
-backend=rocksdb
-serializer=binary
-store=hugegraph2
-rocksdb.data_path=./rks-data-xx
-rocksdb.wal_path=./rks-data-xx
+```json
+{
+  "gremlin.graph": "org.apache.hugegraph.HugeFactory",
+  "backend": "rocksdb",
+  "serializer": "binary",
+  "store": "hugegraph2",
+  "rocksdb.data_path": "./rks-data-xx",
+  "rocksdb.wal_path": "./rks-data-xx"
+}
 ```
 
 > Note: 
@@ -164,6 +168,8 @@ rocksdb.wal_path=./rks-data-xx
 }
 ```
 
+> Note: For HugeGraph 1.5.0 and earlier versions, the request body of this API should still use `text/plain` format (properties style) instead of JSON.
+
 #### 6.1.6 Delete graph and it's data
 
 ##### Params
@@ -177,7 +183,7 @@ avoid false calls by users:
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph_clone?confirm_message=I%27m%20sure%20to%20drop%20the%20graph
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph_clone?confirm_message=I%27m%20sure%20to%20drop%20the%20graph
 ```
 
 ##### Response Status
@@ -186,6 +192,8 @@ DELETE http://localhost:8080/graphs/hugegraph_clone?confirm_message=I%27m%20sure
 204
 ```
 
+> Note: For HugeGraph 1.5.0 and earlier versions, if you need to create or drop a graph, please still use the legacy `text/plain` (properties) style request body instead of JSON.
+
 ### 6.2 Conf
 
 #### 6.2.1 Get configuration for a graph,**This operation requires administrator privileges**
@@ -193,7 +201,7 @@ DELETE http://localhost:8080/graphs/hugegraph_clone?confirm_message=I%27m%20sure
 ##### Method & Url
 
 ```javascript
-GET http://localhost:8080/graphs/hugegraph/conf
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/conf
 ```
 
 ##### Response Status
@@ -252,7 +260,7 @@ When you complete the restore, change the graph mode to None.
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/mode
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/mode
 ```
 
 ##### Response Status
@@ -276,7 +284,7 @@ GET http://localhost:8080/graphs/hugegraph/mode
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/mode
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/mode
 ```
 
 ##### Request Body
@@ -310,7 +318,7 @@ PUT http://localhost:8080/graphs/hugegraph/mode
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph_read_mode
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph_read_mode
 ```
 
 ##### Response Status
@@ -336,7 +344,7 @@ GET http://localhost:8080/graphs/hugegraph/graph_read_mode
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph_read_mode
 ```
 
 ##### Request Body
@@ -372,7 +380,7 @@ PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/snapshot_create
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/snapshot_create
 ```
 
 ##### Response Status
@@ -398,7 +406,7 @@ PUT http://localhost:8080/graphs/hugegraph/snapshot_create
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/snapshot_resume
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/snapshot_resume
 ```
 
 ##### Response Status
@@ -426,7 +434,7 @@ PUT http://localhost:8080/graphs/hugegraph/snapshot_resume
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/compact
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/compact
 ```
 
 ##### Response Status

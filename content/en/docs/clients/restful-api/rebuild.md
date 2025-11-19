@@ -11,7 +11,7 @@ weight: 6
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/indexlabels/personByCity
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/jobs/rebuild/indexlabels/personByCity
 ```
 
 ##### Response Status
@@ -29,14 +29,14 @@ PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/indexlabels/personByCity
 ```
 Note:
 
-> You can get the asynchronous job status by `GET http://localhost:8080/graphs/hugegraph/tasks/${task_id}` (the task_id here should be 1). See More [AsyncJob RESTfull API](../task)
+> You can get the asynchronous job status by `GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks/${task_id}` (the task_id here should be 1). See More [AsyncJob RESTfull API](../task)
 
 #### 1.6.2 Rebulid all Indexs of VertexLabel
 
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/vertexlabels/person
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/jobs/rebuild/vertexlabels/person
 ```
 
 ##### Response Status
@@ -55,14 +55,14 @@ PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/vertexlabels/person
 
 Note:
 
-> You can get the asynchronous job status by `GET http://localhost:8080/graphs/hugegraph/tasks/${task_id}` (the task_id here should be 2). See More [AsyncJob RESTfull API](../task)
+> You can get the asynchronous job status by `GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks/${task_id}` (the task_id here should be 2). See More [AsyncJob RESTfull API](../task)
 
 #### 1.6.3 Rebulid all Indexs of EdgeLabel
 
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/edgelabels/created
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/jobs/rebuild/edgelabels/created
 ```
 
 ##### Response Status
@@ -81,4 +81,4 @@ PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/edgelabels/created
 
 Note:
 
-> You can get the asynchronous job status by `GET http://localhost:8080/graphs/hugegraph/tasks/${task_id}` (the task_id here should be 3). See More [AsyncJob RESTfull API](../task)
+> You can get the asynchronous job status by `GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks/${task_id}` (the task_id here should be 3). See More [AsyncJob RESTfull API](../task)
