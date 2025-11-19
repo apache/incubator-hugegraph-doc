@@ -21,23 +21,6 @@ master 是负责通信、转发、汇总的节点，计算量和占用资源量�
 确保docker-compose.yaml存在于您的项目根目录中。如果没有，以下是一个示例：
 
 ```yaml
-#
-# Licensed to the Apache Software Foundation (ASF) under one or more
-# contributor license agreements.  See the NOTICE file distributed with
-# this work for additional information regarding copyright ownership.
-# The ASF licenses this file to You under the Apache License, Version 2.0
-# (the "License"); you may not use this file except in compliance with
-# the License.  You may obtain a copy of the License at
-#
-#    http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-
 services:
   vermeer-master:
     image: hugegraph/vermeer
@@ -173,6 +156,8 @@ go build
 vermeer提供三种加载方式：
 
 1. 从本地加载
+
+可以预先获取数据集，例如 twitter-2010 数据集。获取方式：https://snap.stanford.edu/data/twitter-2010.html，第一个 twitter-2010.txt.gz 即可。
 
 **request 示例：**
 
