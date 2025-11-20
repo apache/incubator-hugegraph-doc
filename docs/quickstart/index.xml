@@ -1,9 +1,24 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HugeGraph – Quick Start</title><link>/docs/quickstart/</link><description>Recent content in Quick Start on HugeGraph</description><generator>Hugo -- gohugo.io</generator><atom:link href="/docs/quickstart/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: HugeGraph (OLTP)</title><link>/docs/quickstart/hugegraph/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph/</guid><description/></item><item><title>Docs: HugeGraph ToolChain</title><link>/docs/quickstart/toolchain/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/toolchain/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HugeGraph – Quick Start</title><link>/docs/quickstart/</link><description>Recent content in Quick Start on HugeGraph</description><generator>Hugo -- gohugo.io</generator><atom:link href="/docs/quickstart/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: HugeGraph (OLTP)</title><link>/docs/quickstart/hugegraph/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph/</guid><description>
+&lt;h2 id="-best-practice-prioritize-using-deepwiki-intelligent-documents">🚀 Best practice: Prioritize using DeepWiki intelligent documents&lt;/h2>
+&lt;blockquote>
+&lt;p>To address the issue of outdated static documents, we provide DeepWiki with &lt;strong>real-time updates and more comprehensive content&lt;/strong>. It is equivalent to an expert with the latest knowledge of the project, which is very suitable for &lt;strong>all developers&lt;/strong> to read and consult before starting the project.&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>👉 Strongly recommend visiting and having a conversation with:&lt;/strong> &lt;a href="https://deepwiki.com/apache/incubator-hugegraph">&lt;strong>incubator-hugegraph&lt;/strong>&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph ToolChain</title><link>/docs/quickstart/toolchain/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/toolchain/</guid><description>
 &lt;blockquote>
 &lt;p>&lt;strong>Testing Guide&lt;/strong>: For running toolchain tests locally, please refer to &lt;a href="/docs/guides/toolchain-local-test">HugeGraph Toolchain Local Testing Guide&lt;/a>&lt;/p>
-&lt;/blockquote></description></item><item><title>Docs: HugeGraph-AI</title><link>/docs/quickstart/hugegraph-ai/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-ai/</guid><description>
+&lt;/blockquote>
+&lt;h2 id="-best-practice-prioritize-using-deepwiki-intelligent-documents">🚀 Best practice: Prioritize using DeepWiki intelligent documents&lt;/h2>
+&lt;blockquote>
+&lt;p>To address the issue of outdated static documents, we provide DeepWiki with &lt;strong>real-time updates and more comprehensive content&lt;/strong>. It is equivalent to an expert with the latest knowledge of the project, which is very suitable for &lt;strong>all developers&lt;/strong> to read and consult before starting the project.&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>👉 Strongly recommend visiting and having a conversation with:&lt;/strong> &lt;a href="https://deepwiki.com/apache/incubator-hugegraph-toolchain">&lt;strong>incubator-hugegraph-toolchain&lt;/strong>&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph-AI</title><link>/docs/quickstart/hugegraph-ai/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-ai/</guid><description>
 &lt;p>&lt;a href="https://www.apache.org/licenses/LICENSE-2.0.html">&lt;img src="https://img.shields.io/badge/license-Apache%202-0E78BA.svg" alt="License">&lt;/a>
 &lt;a href="https://deepwiki.com/apache/incubator-hugegraph-ai">&lt;img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki">&lt;/a>&lt;/p>
+&lt;h2 id="-best-practice-prioritize-using-deepwiki-intelligent-documents">🚀 Best practice: Prioritize using DeepWiki intelligent documents&lt;/h2>
+&lt;blockquote>
+&lt;p>To address the issue of outdated static documents, we provide DeepWiki with &lt;strong>real-time updates and more comprehensive content&lt;/strong>. It is equivalent to an expert with the latest knowledge of the project, which is very suitable for &lt;strong>all developers&lt;/strong> to read and consult before starting the project.&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>👉 Strongly recommend visiting and having a conversation with:&lt;/strong> &lt;a href="https://deepwiki.com/apache/incubator-hugegraph-ai">&lt;strong>incubator-hugegraph-ai&lt;/strong>&lt;/a>&lt;/p>
 &lt;p>&lt;code>hugegraph-ai&lt;/code> integrates &lt;a href="https://github.com/apache/hugegraph">HugeGraph&lt;/a> with artificial intelligence capabilities, providing comprehensive support for developers to build AI-powered graph applications.&lt;/p>
 &lt;h2 id="-key-features">✨ Key Features&lt;/h2>
 &lt;ul>
@@ -140,4 +155,9 @@ For a complete deployment guide and detailed examples, please refer to &lt;a hre
 &lt;li>&lt;strong>Email&lt;/strong>: &lt;a href="mailto:dev@hugegraph.apache.org">dev@hugegraph.apache.org&lt;/a> (&lt;a href="https://hugegraph.apache.org/docs/contribution-guidelines/subscribe/">subscription required&lt;/a>)&lt;/li>
 &lt;li>&lt;strong>WeChat&lt;/strong>: Follow &amp;ldquo;Apache HugeGraph&amp;rdquo; official account&lt;/li>
 &lt;/ul>
-&lt;img src="https://raw.githubusercontent.com/apache/hugegraph-doc/master/assets/images/wechat.png" alt="Apache HugeGraph WeChat QR Code" width="200"/></description></item><item><title>Docs: HugeGraph Computing (OLAP)</title><link>/docs/quickstart/computing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/computing/</guid><description/></item><item><title>Docs: HugeGraph Client</title><link>/docs/quickstart/client/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/client/</guid><description/></item></channel></rss>
+&lt;img src="https://raw.githubusercontent.com/apache/hugegraph-doc/master/assets/images/wechat.png" alt="Apache HugeGraph WeChat QR Code" width="200"/></description></item><item><title>Docs: HugeGraph Computing (OLAP)</title><link>/docs/quickstart/computing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/computing/</guid><description>
+&lt;h2 id="-best-practice-prioritize-using-deepwiki-intelligent-documents">🚀 Best practice: Prioritize using DeepWiki intelligent documents&lt;/h2>
+&lt;blockquote>
+&lt;p>To address the issue of outdated static documents, we provide DeepWiki with &lt;strong>real-time updates and more comprehensive content&lt;/strong>. It is equivalent to an expert with the latest knowledge of the project, which is very suitable for &lt;strong>all developers&lt;/strong> to read and consult before starting the project.&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>👉 Strongly recommend visiting and having a conversation with:&lt;/strong> &lt;a href="https://deepwiki.com/apache/incubator-hugegraph-computer">&lt;strong>incubator-hugegraph-computer&lt;/strong>&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph Client</title><link>/docs/quickstart/client/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/client/</guid><description/></item></channel></rss>

@@ -1,9 +1,24 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HugeGraph – Quick Start</title><link>/cn/docs/quickstart/</link><description>Recent content in Quick Start on HugeGraph</description><generator>Hugo -- gohugo.io</generator><atom:link href="/cn/docs/quickstart/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: HugeGraph (OLTP)</title><link>/cn/docs/quickstart/hugegraph/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph/</guid><description/></item><item><title>Docs: HugeGraph ToolChain</title><link>/cn/docs/quickstart/toolchain/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/toolchain/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HugeGraph – Quick Start</title><link>/cn/docs/quickstart/</link><description>Recent content in Quick Start on HugeGraph</description><generator>Hugo -- gohugo.io</generator><atom:link href="/cn/docs/quickstart/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: HugeGraph (OLTP)</title><link>/cn/docs/quickstart/hugegraph/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph/</guid><description>
+&lt;h2 id="-最佳实践优先使用-deepwiki-智能文档">🚀 最佳实践：优先使用 DeepWiki 智能文档&lt;/h2>
+&lt;blockquote>
+&lt;p>为解决静态文档可能过时的问题，我们提供了 &lt;strong>实时更新、内容更全面&lt;/strong> 的 DeepWiki。它相当于一个拥有项目最新知识的专家，非常适合&lt;strong>所有开发者&lt;/strong>在开始项目前阅读和咨询。&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>👉 强烈推荐访问并对话：&lt;/strong>&lt;a href="https://deepwiki.com/apache/incubator-hugegraph">&lt;strong>incubator-hugegraph&lt;/strong>&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph ToolChain</title><link>/cn/docs/quickstart/toolchain/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/toolchain/</guid><description>
 &lt;blockquote>
 &lt;p>&lt;strong>测试指南&lt;/strong>：如需在本地运行工具链测试，请参考 &lt;a href="/cn/docs/guides/toolchain-local-test">HugeGraph 工具链本地测试指南&lt;/a>&lt;/p>
-&lt;/blockquote></description></item><item><title>Docs: HugeGraph-AI</title><link>/cn/docs/quickstart/hugegraph-ai/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-ai/</guid><description>
+&lt;/blockquote>
+&lt;h2 id="-最佳实践优先使用-deepwiki-智能文档">🚀 最佳实践：优先使用 DeepWiki 智能文档&lt;/h2>
+&lt;blockquote>
+&lt;p>为解决静态文档可能过时的问题，我们提供了 &lt;strong>实时更新、内容更全面&lt;/strong> 的 DeepWiki。它相当于一个拥有项目最新知识的专家，非常适合&lt;strong>所有开发者&lt;/strong>在开始项目前阅读和咨询。&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>👉 强烈推荐访问并对话：&lt;/strong>&lt;a href="https://deepwiki.com/apache/incubator-hugegraph-toolchain">&lt;strong>incubator-hugegraph-toolchain&lt;/strong>&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph-AI</title><link>/cn/docs/quickstart/hugegraph-ai/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-ai/</guid><description>
 &lt;p>&lt;a href="https://www.apache.org/licenses/LICENSE-2.0.html">&lt;img src="https://img.shields.io/badge/license-Apache%202-0E78BA.svg" alt="License">&lt;/a>
 &lt;a href="https://deepwiki.com/apache/incubator-hugegraph-ai">&lt;img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki">&lt;/a>&lt;/p>
+&lt;h2 id="-最佳实践优先使用-deepwiki-智能文档">🚀 最佳实践：优先使用 DeepWiki 智能文档&lt;/h2>
+&lt;blockquote>
+&lt;p>为解决静态文档可能过时的问题，我们提供了 &lt;strong>实时更新、内容更全面&lt;/strong> 的 DeepWiki。它相当于一个拥有项目最新知识的专家，非常适合&lt;strong>所有开发者&lt;/strong>在开始项目前阅读和咨询。&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>👉 强烈推荐访问并对话：&lt;/strong>&lt;a href="https://deepwiki.com/apache/incubator-hugegraph-ai">&lt;strong>incubator-hugegraph-ai&lt;/strong>&lt;/a>&lt;/p>
 &lt;p>&lt;code>hugegraph-ai&lt;/code> 整合了 &lt;a href="https://github.com/apache/hugegraph">HugeGraph&lt;/a> 与人工智能功能，为开发者构建 AI 驱动的图应用提供全面支持。&lt;/p>
 &lt;h2 id="-核心功能">✨ 核心功能&lt;/h2>
 &lt;ul>
@@ -140,4 +155,9 @@
 &lt;li>&lt;strong>电子邮件&lt;/strong>：&lt;a href="mailto:dev@hugegraph.apache.org">dev@hugegraph.apache.org&lt;/a>（&lt;a href="https://hugegraph.apache.org/docs/contribution-guidelines/subscribe/">需要订阅&lt;/a>）&lt;/li>
 &lt;li>&lt;strong>微信&lt;/strong>：关注“Apache HugeGraph”官方公众号&lt;/li>
 &lt;/ul>
-&lt;img src="https://raw.githubusercontent.com/apache/hugegraph-doc/master/assets/images/wechat.png" alt="Apache HugeGraph WeChat QR Code" width="200"/></description></item><item><title>Docs: HugeGraph Computing (OLAP)</title><link>/cn/docs/quickstart/computing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/computing/</guid><description/></item><item><title>Docs: HugeGraph Client</title><link>/cn/docs/quickstart/client/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/client/</guid><description/></item></channel></rss>
+&lt;img src="https://raw.githubusercontent.com/apache/hugegraph-doc/master/assets/images/wechat.png" alt="Apache HugeGraph WeChat QR Code" width="200"/></description></item><item><title>Docs: HugeGraph Computing (OLAP)</title><link>/cn/docs/quickstart/computing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/computing/</guid><description>
+&lt;h2 id="-最佳实践优先使用-deepwiki-智能文档">🚀 最佳实践：优先使用 DeepWiki 智能文档&lt;/h2>
+&lt;blockquote>
+&lt;p>为解决静态文档可能过时的问题，我们提供了 &lt;strong>实时更新、内容更全面&lt;/strong> 的 DeepWiki。它相当于一个拥有项目最新知识的专家，非常适合&lt;strong>所有开发者&lt;/strong>在开始项目前阅读和咨询。&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>👉 强烈推荐访问并对话：&lt;/strong>&lt;a href="https://deepwiki.com/apache/incubator-hugegraph-computer">&lt;strong>incubator-hugegraph-computer&lt;/strong>&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph Client</title><link>/cn/docs/quickstart/client/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/client/</guid><description/></item></channel></rss>
