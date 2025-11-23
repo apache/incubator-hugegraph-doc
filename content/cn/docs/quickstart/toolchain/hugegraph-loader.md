@@ -601,7 +601,7 @@ bin/mapping-convert.sh struct.json
 
 ##### 3.3.2 输入源
 
-输入源目前分为四类：FILE、HDFS、JDBC、KAFKA，由`type`节点区分，我们称为本地文件输入源、HDFS 输入源、JDBC 输入源和 KAFKA 输入源，下面分别介绍。
+输入源目前分为五类：FILE、HDFS、JDBC、KAFKA、GRAPH，由`type`节点区分，我们称为本地文件输入源、HDFS 输入源、JDBC 输入源和 KAFKA 输入源，图数据源，下面分别介绍。
 
 ###### 3.3.2.1 本地文件输入源
 
@@ -705,6 +705,22 @@ schema: 必填
 - skipped_line：想跳过的行，复合结构，目前只能配置要跳过的行的正则表达式，用子节点 regex 描述，默认不跳过任何行，选填；
 - early_stop：某次从 Kafka broker 拉取的记录为空，停止任务，默认为 false，仅用于调试，选填；
 
+###### 3.3.2.4 GRAPH 输入源
+
+- type：输入源类型，必须填 `graph` 或 `GRAPH`，必填；
+- graphspace：源图空间名称，默认为 `DEFAULT`；
+- graph： 源图名称，必填；
+- username：HugeGraph 用户名；
+- password：HugeGraph 密码；
+- selected_vertices：要同步的顶点筛选规则；
+- ignored_vertices：要忽略的顶点筛选规则；
+- selected_edges：要同步的边筛选规则；
+- ignored_edges：要忽略的边筛选规则；
+- pd-peers：HugeGraph-PD 节点地址；
+- meta-endpoints：源集群 Meta服务端点；
+- cluster：源集群名称；
+- batch_size：批量读取源图数据的批次大小，默认为500；
+
 ##### 3.3.3 顶点和边映射
 
 顶点和边映射的节点（JSON 文件中的一个 key）有很多相同的部分，下面先介绍相同部分，再分别介绍`顶点映射`和`边映射`的特有节点。
@@ -796,8 +812,16 @@ schema: 必填
 | `-h` 或 `--host` 或 `-i`          | localhost |      | HugeGraphServer 的地址                                               |
 | `-p` 或 `--port`           | 8080      |      | HugeGraphServer 的端口号                                              |
 | `--username`              | null      |      | 当 HugeGraphServer 开启了权限认证时，当前图的 username                          |
+| `--password`              | null      |      | 当 HugeGraphServer 开启了权限认证时，当前图的 password                          |
+| `--create-graph`              | false      |      | 是否在图不存在时自动创建                          |
 | `--token`                 | null      |      | 当 HugeGraphServer 开启了权限认证时，当前图的 token                             |
 | `--protocol`              | http      |      | 向服务端发请求的协议，可选 http 或 https                                        |
+| `--pd-peers`            |             |      | PD 服务节点地址 |
+| `--pd-token` |  | | 访问 PD 服务的 token |
+| `--meta-endpoints` |  | | 元信息存储服务地址 |
+| `--direct` | false | | 是否直连 HugeGraph-Store |
+| `--route-type` | NODE_PORT | | 路由选择方式（可选值：NODE_PORT / DDS / BOTH） |
+| `--cluster` | hg | | 集群名 |
 | `--trust-store-file`      |           |      | 请求协议为 https 时，客户端的证书文件路径                                          |
 | `--trust-store-password`  |           |      | 请求协议为 https 时，客户端证书密码                                             |
 | `--clear-all-data`        | false     |      | 导入数据前是否清除服务端的原有数据                                                 |
