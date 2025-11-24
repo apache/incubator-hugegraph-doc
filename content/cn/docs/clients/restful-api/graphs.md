@@ -178,7 +178,7 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph-xx
 ```
 
 > Note:
-> 1. Rocksdb 存储路径不能与现有图相同（需使用不同的目录）
+> 1. Rocksdb 存储路径**不能与现有图相同** （需使用不同的目录）
 > 2. 如需开启新图的权限系统，需替换设置 `gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy`
 
 ##### Response Status
@@ -191,7 +191,9 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph-xx
 
 ```javascript
 {
-    "name": "hugegraph2",
+    "name"
+:
+    "hugegraph",
     "backend": "rocksdb"
 }
 ```
