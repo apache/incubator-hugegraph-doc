@@ -897,6 +897,145 @@ POST http://localhost:8080/graphspaces/DEFAULT/auth/accesses
     "id": "S-69:all>-88>11>S-77:all",
     "access_update": "2020-11-11 15:54:54.008",
     "access_creator": "admin",
+  "group": "-69:all",
+  "target": "-77:all"
+}
+```
+
+#### 10.6.2 Delete Authorization
+
+##### Params
+
+- id: The ID of the authorization to be deleted
+
+##### Method & Url
+
+```
+DELETE http://localhost:8080/graphspaces/DEFAULT/auth/accesses/S-69:all>-88>12>S-77:all
+```
+
+##### Response Status
+
+```json
+204
+```
+
+##### Response Body
+
+```json
+1
+```
+
+#### 10.6.3 Modify Authorization
+
+Authorization can only be modified for its description. User group, resource, and permission cannot be modified. If you need to modify the authorization relationship, delete the original authorization and create a new one.
+
+##### Params
+
+- id: The ID of the authorization to be modified
+
+##### Method & Url
+
+```
+PUT http://localhost:8080/graphspaces/DEFAULT/auth/accesses/S-69:all>-88>12>S-77:all
+```
+
+##### Request Body
+
+Modify access_description
+
+```json
+{
+  "access_description": "test"
+}
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+The response includes the modified content as well as the entire authorization object.
+
+```json
+{
+  "access_description": "test",
+  "access_permission": "WRITE",
+  "access_create": "2020-11-12 10:12:03.074",
+  "id": "S-69:all>-88>12>S-77:all",
+  "access_update": "2020-11-12 10:16:18.637",
+  "access_creator": "admin",
+  "group": "-69:all",
+  "target": "-77:all"
+}
+```
+
+#### 10.6.4 Query Authorization List
+
+##### Params
+
+- limit: The maximum number of results to return
+
+##### Method & Url
+
+```
+GET http://localhost:8080/graphspaces/DEFAULT/auth/accesses
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+  "accesses": [
+    {
+      "access_permission": "READ",
+      "access_create": "2020-11-11 15:54:54.008",
+      "id": "S-69:all>-88>11>S-77:all",
+      "access_update": "2020-11-11 15:54:54.008",
+      "access_creator": "admin",
+      "group": "-69:all",
+      "target": "-77:all"
+    }
+  ]
+}
+```
+
+#### 10.6.5 Query a Specific Authorization
+
+##### Params
+
+- id: The ID of the authorization to be queried
+
+##### Method & Url
+
+```
+GET http://localhost:8080/graphspaces/DEFAULT/auth/accesses/S-69:all>-88>11>S-77:all
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+  "access_permission": "READ",
+  "access_create": "2020-11-11 15:54:54.008",
+  "id": "S-69:all>-88>11>S-77:all",
+  "access_update": "2020-11-11 15:54:54.008",
+  "access_creator": "admin",
     "group": "-69:all",
     "target": "-77:all"
 }
@@ -1057,139 +1196,5 @@ GET http://localhost:8080/graphspaces/gs1/auth/managers/role?user=boss
       "SPACE_MEMBER"
     ]
   }
-}
-```
-
-#### 10.6.2 Delete Authorization
-
-##### Params
-
-- id: The ID of the authorization to be deleted
-
-##### Method & Url
-
-```
-DELETE http://localhost:8080/graphspaces/DEFAULT/auth/accesses/S-69:all>-88>12>S-77:all
-```
-
-##### Response Status
-
-```json
-204
-```
-
-##### Response Body
-
-```json
-1
-```
-
-#### 10.6.3 Modify Authorization
-Authorization can only be modified for its description. User group, resource, and permission cannot be modified. If you need to modify the relationship of the authorization, you can delete the original authorization relationship and create a new one.
-
-##### Params
-
-- id: The ID of the authorization to be modified
-
-##### Method & Url
-
-```
-PUT http://localhost:8080/graphspaces/DEFAULT/auth/accesses/S-69:all>-88>12>S-77:all
-```
-
-##### Request Body
-Modify access_description
-```json
-{
-    "access_description": "test"
-}
-```
-
-##### Response Status
-
-```json
-200
-```
-
-##### Response Body
-#### Return Result Including Modified Content of the Entire User Group Object
-```json
-{
-    "access_description": "test",
-    "access_permission": "WRITE",
-    "access_create": "2020-11-12 10:12:03.074",
-    "id": "S-69:all>-88>12>S-77:all",
-    "access_update": "2020-11-12 10:16:18.637",
-    "access_creator": "admin",
-    "group": "-69:all",
-    "target": "-77:all"
-}
-```
-
-#### 10.6.4 Query Authorization List
-
-##### Params
-
-- limit: The maximum number of results to return
-
-##### Method & Url
-
-```
-GET http://localhost:8080/graphspaces/DEFAULT/auth/accesses
-```
-
-##### Response Status
-
-```json
-200
-```
-
-##### Response Body
-
-```json
-{
-    "accesses": [
-        {
-            "access_permission": "READ",
-            "access_create": "2020-11-11 15:54:54.008",
-            "id": "S-69:all>-88>11>S-77:all",
-            "access_update": "2020-11-11 15:54:54.008",
-            "access_creator": "admin",
-            "group": "-69:all",
-            "target": "-77:all"
-        }
-    ]
-}
-```
-
-#### 10.6.5 Query a Specific Authorization
-
-##### Params
-
-- id: The ID of the authorization to be queried
-
-##### Method & Url
-
-```
-GET http://localhost:8080/graphspaces/DEFAULT/auth/accesses/S-69:all>-88>11>S-77:all
-```
-
-##### Response Status
-
-```json
-200
-```
-
-##### Response Body
-
-```json
-{
-    "access_permission": "READ",
-    "access_create": "2020-11-11 15:54:54.008",
-    "id": "S-69:all>-88>11>S-77:all",
-    "access_update": "2020-11-11 15:54:54.008",
-    "access_creator": "admin",
-    "group": "-69:all",
-    "target": "-77:all"
 }
 ```

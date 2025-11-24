@@ -71,7 +71,7 @@ POST http://localhost:8080/graphspaces/DEFAULT/auth/users
     "user_name": "boss",
     "user_creator": "admin",
     "user_phone": "182****9088",
-  "id": "boss",
+    "id": "boss",
     "user_create": "2020-11-17 14:31:07.833"
 }
 ```
@@ -138,7 +138,7 @@ PUT http://localhost:8080/graphspaces/DEFAULT/auth/users/test
     "user_name": "test",
     "user_creator": "admin",
     "user_phone": "183****9266",
-  "id": "test",
+    "id": "test",
     "user_create": "2020-11-12 10:27:13.601"
 }
 ```

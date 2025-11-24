@@ -25,6 +25,8 @@ POST http://localhost:8080/graphspaces
 
 ##### Request Body
 
+注意：目前 cpu，内存，以及 k8s 相关功能暂未开放
+
 | 名称                           | 是否必填 | 类型      | 默认值   | 取值范围                              | 说明                                                                    |
 |------------------------------|------|---------|-------|-----------------------------------|-----------------------------------------------------------------------|
 | name                         | 是    | String  |       | 小写字母、数字和下划线组成，首字符必须是小写字母，长度不超过 48 | 图空间的名字                                                                |
@@ -53,7 +55,7 @@ POST http://localhost:8080/graphspaces
   "memory_limit": 8192,
   "storage_limit": 1000000,
   "max_role_number": 10,
-  "auth": false,
+  "auth": true,
   "configs": {}
 }
 ```
@@ -185,7 +187,7 @@ GET http://localhost:8080/graphspaces/gs1
 | cpu_limit                    | 是    | Int    |     | > 0  | OLTP HugeGraphServer 的 CPU 核数                                         |
 | memory_limit                 | 是    | Int    |     | > 0  | OLTP HugeGraphServer 的内存大小，单位 GB                                      |
 | storage_limit                | 是    | Int    |     | > 0  | 图空间的数据占据的磁盘空间上限                                                       |
-| compute_cpu_limit            | 否    | Int    | 0   | >= 0 | 针对图计算的额外资源配置，单位 GB。当该字段不配置或者配置为 0 时，会由 cpu_limit 字段的值进行覆盖             |
+| compute_cpu_limit            | 否    | Int    | 0   | >= 0 | 针对图计算的额外资源配置，单位 cores。当该字段不配置或者配置为 0 时，会由 cpu_limit 字段的值进行覆盖          |
 | compute_memory_limit         | 否    | Int    | 0   | >= 0 | 针对图计算的额外内存配置，单位 GB。当该字段不配置或者配置为 0 时，会由 memory_limit 字段的值进行覆盖          |
 | oltp_namespace               | 是    | String |     |      | OLTP 的 k8s 命名空间                                                       |
 | olap_namespace               | 是    | String |     |      | OLAP 的 k8s 命名空间。当 olap_namespace 和 oltp_namespace 的值相同时，其配置的资源限额会进行合并 |
@@ -234,7 +236,7 @@ PUT http://localhost:8080/graphspaces/gs1
 {
   "name": "gs1",
   "description": "1st graph space",
-  "cpu_limit": 1000,
+  "cpu_limit": 2000,
   "memory_limit": 1024,
   "storage_limit": 1000,
   "oltp_namespace": "hugegraph-server",

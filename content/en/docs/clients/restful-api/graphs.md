@@ -168,8 +168,6 @@ Create a non-auth graph (set `Content-Type: application/json`)
 }
 ```
 
-> Note: For HugeGraph 1.5.0 and earlier versions, the request body of this API should still use `text/plain` format (properties style) instead of JSON.
-
 #### 6.1.6 Delete graph and it's data
 
 ##### Params

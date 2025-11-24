@@ -178,7 +178,7 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph-xx
 ```
 
 > Note:
-> 1. Rocksdb 存储路径**不能与现有图相同** （需使用不同的目录）
+> 1. Rocksdb 存储路径不能与现有图相同（需使用不同的目录）
 > 2. 如需开启新图的权限系统，需替换设置 `gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy`
 
 ##### Response Status
@@ -193,12 +193,10 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph-xx
 {
     "name"
 :
-    "hugegraph",
+    "hugegraph2",
     "backend": "rocksdb"
 }
 ```
-
-> 注意：对于 HugeGraph 1.5.0 及之前版本，此接口的请求体仍需使用 `text/plain`（properties 文本）格式，而不是 JSON。
 
 #### 6.1.6 删除某个图及其全部数据
 
