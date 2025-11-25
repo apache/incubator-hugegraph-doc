@@ -34,7 +34,7 @@ POST http://localhost:8080/graphspaces
 | cpu_limit                    | 是    | Int     |       | > 0                               | CPU 核数                                                                |
 | memory_limit                 | 是    | Int     |       | > 0                               | 内存大小，单位 GB                                                            |
 | storage_limit                | 是    | Int     |       | > 0                               | 图空间的数据占据的磁盘空间上限                                                       |
-| compute_cpu_limit            | 否    | Int     | 0     | >= 0                              | 针对图计算的额外资源配置，单位 GB。当该字段不配置或者配置为 0 时，会由 cpu_limit 字段的值进行覆盖             |
+| compute_cpu_limit            | 否    | Int     | 0     | >= 0                              | 针对图计算的额外资源配置，单位 cores。当该字段不配置或者配置为 0 时，会由 cpu_limit 字段的值进行覆盖          |
 | compute_memory_limit         | 否    | Int     | 0     | >= 0                              | 针对图计算的额外内存配置，单位 GB。当该字段不配置或者配置为 0 时，会由 memory_limit 字段的值进行覆盖          |
 | oltp_namespace               | 是    | String  |       |                                   | OLTP 的 k8s 命名空间                                                       |
 | olap_namespace               | 是    | String  |       |                                   | OLAP 的 k8s 命名空间。当 olap_namespace 和 oltp_namespace 的值相同时，其配置的资源限额会进行合并 |
