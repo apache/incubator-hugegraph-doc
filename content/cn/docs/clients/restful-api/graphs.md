@@ -6,6 +6,8 @@ weight: 12
 
 ### 6.1 Graphs
 
+**重要提醒**：1.7.0 及之后，动态创建图必须开启鉴权模式。非鉴权模式请参考[图配置文件](https://hugegraph.apache.org/cn/docs/config/config-guide/#4-hugegraphproperties)，通过配置文件静态创建图。
+
 #### 6.1.1 列出图空间中全部的图
 
 ##### Params

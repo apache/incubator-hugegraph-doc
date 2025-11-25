@@ -6,6 +6,8 @@ weight: 12
 
 ### 6.1 Graphs
 
+**Important Reminder**: Since HugeGraph 1.7.0, dynamic graph creation must enable authentication mode. For non-authentication mode, please refer to [Graph Configuration File](https://hugegraph.apache.org/docs/config/config-guide/#4-hugegraphproperties) to statically create graphs through configuration files.
+
 #### 6.1.1 List all graphs
 
 ##### Method & Url

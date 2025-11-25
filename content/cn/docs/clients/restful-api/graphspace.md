@@ -13,7 +13,7 @@ weight: 1
 1. 目前图空间功能只支持在 hstore 模式下使用。
 2. 如果非 hstore 模式，则只能使用默认的图空间 `DEFAULT`，且不支持创建、删除和更新图空间的操作。
 3. 注意在 rest-server.properties 中，设置 `usePD=true`，并且 hugegraph.properties 中，设置 `backend=hstore`
-4. 图空间功能开启了强鉴权，默认账密为 admin:pa，请务必修改默认密码，防止未授权访问。
+4. 图空间功能必须开启鉴权模式，默认账密为 admin:pa，请务必修改默认密码，防止未授权访问。
 
 #### 2.0.1 创建一个图空间
 
