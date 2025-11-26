@@ -390,7 +390,426 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl http://127.0.0.1:8080/graphs/hugegraph_rocksdb_backend
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>:&lt;span style="color:#4e9a06">&amp;#34;hugegraph_rocksdb&amp;#34;&lt;/span>,&lt;span style="color:#4e9a06">&amp;#34;backend&amp;#34;&lt;/span>:&lt;span style="color:#4e9a06">&amp;#34;rocksdb&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: HugeGraph Gremlin</title><link>/docs/language/hugegraph-gremlin/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/language/hugegraph-gremlin/</guid><description>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Graphspace API</title><link>/docs/clients/restful-api/graphspace/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/clients/restful-api/graphspace/</guid><description>
+&lt;h3 id="20-graphspace">2.0 Graphspace&lt;/h3>
+&lt;p>HugeGraph implements multi-tenancy through graph spaces, which isolate compute/storage resources per tenant.&lt;/p>
+&lt;p>&lt;strong>Prerequisites&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>Graphspace currently only works in HStore mode.&lt;/li>
+&lt;li>In non-HStore mode you can only use the default graphspace &lt;code>DEFAULT&lt;/code>; creating/deleting/updating other graphspaces is not supported.&lt;/li>
+&lt;li>Set &lt;code>usePD=true&lt;/code> in &lt;code>rest-server.properties&lt;/code> and &lt;code>backend=hstore&lt;/code> in &lt;code>hugegraph.properties&lt;/code>.&lt;/li>
+&lt;li>Graphspace enables strict authentication by default (default credential: &lt;code>admin:pa&lt;/code>). Change the password immediately to avoid unauthorized access.&lt;/li>
+&lt;/ol>
+&lt;h4 id="201-create-a-graphspace">2.0.1 Create a graphspace&lt;/h4>
+&lt;h5 id="method--url">Method &amp;amp; Url&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphspaces
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body">Request Body&lt;/h5>
+&lt;p>Note: CPU/memory and Kubernetes-related capabilities are not publicly available yet.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;th>Required&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Range/Note&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>name&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Lowercase letters, digits, underscore; must start with a letter; max length 48&lt;/td>
+&lt;td>Graphspace name&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>description&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Description&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>cpu_limit&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&amp;gt; 0&lt;/td>
+&lt;td>CPU cores for the graphspace&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>memory_limit&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&amp;gt; 0 (GB)&lt;/td>
+&lt;td>Memory quota in GB&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>storage_limit&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&amp;gt; 0&lt;/td>
+&lt;td>Maximum disk usage&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>compute_cpu_limit&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>0&lt;/td>
+&lt;td>&amp;gt;= 0&lt;/td>
+&lt;td>Extra HugeGraph-Computer CPU cores; falls back to &lt;code>cpu_limit&lt;/code> if unset or 0&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>compute_memory_limit&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>0&lt;/td>
+&lt;td>&amp;gt;= 0&lt;/td>
+&lt;td>Extra HugeGraph-Computer memory in GB; falls back to &lt;code>memory_limit&lt;/code> if unset or 0&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>oltp_namespace&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Kubernetes namespace for OLTP HugeGraph-Server&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>olap_namespace&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Resources are merged when identical to &lt;code>oltp_namespace&lt;/code>&lt;/td>
+&lt;td>Kubernetes namespace for OLAP / HugeGraph-Computer&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>storage_namespace&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Kubernetes namespace for HugeGraph-Store&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>operator_image_path&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>HugeGraph-Computer operator image registry&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>internal_algorithm_image_url&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>HugeGraph-Computer algorithm image registry&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>max_graph_number&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&amp;gt; 0&lt;/td>
+&lt;td>Maximum number of graphs that can be created inside the graphspace&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>max_role_number&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&amp;gt; 0&lt;/td>
+&lt;td>Maximum number of roles that can be created inside the graphspace&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>auth&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>Boolean&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>true / false&lt;/td>
+&lt;td>Whether to enable authentication for the graphspace&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>configs&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>Map&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Additional configuration&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;gs1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;description&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;1st graph space&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_graph_number&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">100&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;cpu_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1000&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;memory_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">8192&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;storage_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1000000&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_role_number&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">10&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;auth&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;configs&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status">Response Status&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">201&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body">Response Body&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;gs1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;description&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;1st graph space&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;cpu_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1000&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;memory_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">8192&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;storage_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1000000&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;compute_cpu_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;compute_memory_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;oltp_namespace&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph-server&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;olap_namespace&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph-server&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;storage_namespace&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph-server&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;operator_image_path&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1/hugegraph-registry/hugegraph-computer-operator:3.1.1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;internal_algorithm_image_url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1/hugegraph-registry/hugegraph-computer-algorithm:3.1.1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_graph_number&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">100&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_role_number&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">10&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;cpu_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;memory_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;storage_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph_number_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;role_number_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;auth&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="202-list-all-graphspaces">2.0.2 List all graphspaces&lt;/h4>
+&lt;h5 id="method--url-1">Method &amp;amp; Url&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphspaces
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-1">Response Status&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-1">Response Body&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graphSpaces&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;gs1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;DEFAULT&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="203-get-graphspace-details">2.0.3 Get graphspace details&lt;/h4>
+&lt;h5 id="params">Params&lt;/h5>
+&lt;p>&lt;strong>Path parameters&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>graphspace: Graphspace name&lt;/li>
+&lt;/ul>
+&lt;h5 id="method--url-2">Method &amp;amp; Url&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphspaces/gs1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-2">Response Status&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-2">Response Body&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;gs1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;description&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;1st graph space&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;cpu_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1000&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;memory_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">8192&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;storage_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1000000&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;oltp_namespace&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph-server&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;olap_namespace&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph-server&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;storage_namespace&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph-server&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;operator_image_path&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1/hugegraph-registry/hugegraph-computer-operator:3.1.1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;internal_algorithm_image_url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1/hugegraph-registry/hugegraph-computer-algorithm:3.1.1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;compute_cpu_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;compute_memory_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_graph_number&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">100&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_role_number&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">10&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;cpu_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;memory_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;storage_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph_number_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;role_number_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;auth&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="204-update-a-graphspace">2.0.4 Update a graphspace&lt;/h4>
+&lt;blockquote>
+&lt;p>&lt;code>auth&lt;/code> cannot be changed once a graphspace is created.&lt;/p>
+&lt;/blockquote>
+&lt;h5 id="params-1">Params&lt;/h5>
+&lt;p>&lt;strong>Path parameter&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>graphspace: Graphspace name&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Request parameters&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>action: Must be &lt;code>&amp;quot;update&amp;quot;&lt;/code>&lt;/li>
+&lt;li>update: Container for the actual fields to update (see table below)&lt;/li>
+&lt;/ul>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;th>Required&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Range/Note&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>name&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Graphspace name&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>description&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Description&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>cpu_limit&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>&amp;gt; 0&lt;/td>
+&lt;td>CPU cores for OLTP HugeGraph-Server&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>memory_limit&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>&amp;gt; 0 (GB)&lt;/td>
+&lt;td>Memory quota (GB) for OLTP HugeGraph-Server&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>storage_limit&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>&amp;gt; 0&lt;/td>
+&lt;td>Maximum disk usage&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>compute_cpu_limit&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>&amp;gt;= 0&lt;/td>
+&lt;td>Extra HugeGraph-Computer CPU cores; falls back to &lt;code>cpu_limit&lt;/code> if unset or 0&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>compute_memory_limit&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>&amp;gt;= 0&lt;/td>
+&lt;td>Extra HugeGraph-Computer memory in GB; falls back to &lt;code>memory_limit&lt;/code> if unset or 0&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>oltp_namespace&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Kubernetes namespace for OLTP HugeGraph-Server&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>olap_namespace&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>Resources are merged when identical to &lt;code>oltp_namespace&lt;/code>&lt;/td>
+&lt;td>Kubernetes namespace for OLAP&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>storage_namespace&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Kubernetes namespace for HugeGraph-Store&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>operator_image_path&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>HugeGraph-Computer operator image registry&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>internal_algorithm_image_url&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>HugeGraph-Computer algorithm image registry&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>max_graph_number&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>&amp;gt; 0&lt;/td>
+&lt;td>Maximum number of graphs&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>max_role_number&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>&amp;gt; 0&lt;/td>
+&lt;td>Maximum number of roles&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h5 id="method--url-3">Method &amp;amp; Url&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphspaces/gs1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-1">Request Body&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;action&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;update&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;update&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;gs1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;description&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;1st graph space&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;cpu_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2000&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;memory_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">40960&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;storage_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2048&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;oltp_namespace&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph-server&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;olap_namespace&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph-server&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;operator_image_path&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1/hugegraph-registry/hugegraph-computer-operator:3.1.1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;internal_algorithm_image_url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1/hugegraph-registry/hugegraph-computer-algorithm:3.1.1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_graph_number&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1000&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_role_number&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">100&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-3">Response Status&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-3">Response Body&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;gs1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;description&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;1st graph space&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;cpu_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2000&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;memory_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">40960&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;storage_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2048&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;oltp_namespace&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph-server&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;olap_namespace&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph-server&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;storage_namespace&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph-server&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;operator_image_path&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1/hugegraph-registry/hugegraph-computer-operator:3.1.1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;internal_algorithm_image_url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1/hugegraph-registry/hugegraph-computer-algorithm:3.1.1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;compute_cpu_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;compute_memory_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_graph_number&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1000&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_role_number&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">100&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;cpu_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;memory_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;storage_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph_number_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;role_number_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;auth&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="205-delete-a-graphspace">2.0.5 Delete a graphspace&lt;/h4>
+&lt;h5 id="params-2">Params&lt;/h5>
+&lt;p>&lt;strong>Path parameter&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>graphspace: Graphspace name&lt;/li>
+&lt;/ul>
+&lt;h5 id="method--url-4">Method &amp;amp; Url&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphspaces/gs1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-4">Response Status&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">204&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>Warning: deleting a graphspace releases all resources that belong to it.&lt;/p>
+&lt;/blockquote></description></item><item><title>Docs: HugeGraph Gremlin</title><link>/docs/language/hugegraph-gremlin/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/language/hugegraph-gremlin/</guid><description>
 &lt;h3 id="overview">Overview&lt;/h3>
 &lt;p>HugeGraph supports &lt;a href="https://tinkerpop.apache.org/gremlin.html">Gremlin&lt;/a>, a graph traversal query language of &lt;a href="https://tinkerpop.apache.org">Apache TinkerPop3&lt;/a>. While SQL is a query language for relational databases, Gremlin is a general-purpose query language for graph databases. Gremlin can be used to create entities (Vertex and Edge) of a graph, modify the properties of entities, delete entities, as well as perform graph queries.&lt;/p>
 &lt;p>Gremlin can be used to create entities (Vertex and Edge) of a graph, modify the properties of entities, and delete entities. More importantly, it can be used to perform graph querying and analysis operations.&lt;/p>
@@ -1688,12 +2107,12 @@ and configure by yourself.&lt;/p>
 &lt;p>&lt;strong>Note:&lt;/strong> If it&amp;rsquo;s exposed to the public network, &lt;strong>must enable&lt;/strong> &lt;a href="/docs/config/config-authentication/">Auth authentication&lt;/a> to ensure safety (so as the legacy version).&lt;/p>
 &lt;h4 id="31-use-docker-container-convenient-for-testdev">3.1 Use Docker container (Convenient for Test/Dev)&lt;/h4>
 &lt;!-- 3.1 is linked by another place. if change 3.1's title, please check -->
-&lt;p>You can refer to &lt;a href="https://hub.docker.com/r/hugegraph/hugegraph">Docker deployment guide&lt;/a>.&lt;/p>
-&lt;p>We can use &lt;code>docker run -itd --name=graph -e PASSWORD=xxx -p 8080:8080 hugegraph/hugegraph:1.5.0&lt;/code> to quickly start an inner &lt;code>HugeGraph server&lt;/code> with &lt;code>RocksDB&lt;/code> in background.&lt;/p>
+&lt;p>You can refer to the &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/docker/README.md">Docker deployment guide&lt;/a>.&lt;/p>
+&lt;p>We can use &lt;code>docker run -itd --name=server -p 8080:8080 -e PASSWORD=xxx hugegraph/hugegraph:1.5.0&lt;/code> to quickly start a &lt;code>HugeGraph Server&lt;/code> with a built-in &lt;code>RocksDB&lt;/code> backend.&lt;/p>
 &lt;p>Optional:&lt;/p>
 &lt;ol>
 &lt;li>use &lt;code>docker exec -it graph bash&lt;/code> to enter the container to do some operations.&lt;/li>
-&lt;li>use &lt;code>docker run -itd --name=graph -p 8080:8080 -e PRELOAD=&amp;quot;true&amp;quot; hugegraph/hugegraph:1.5.0&lt;/code> to start with a &lt;strong>built-in&lt;/strong> example graph. We can use &lt;code>RESTful API&lt;/code> to verify the result. The detailed step can refer to &lt;a href="#519-create-an-example-graph-when-startup">5.1.9&lt;/a>&lt;/li>
+&lt;li>use &lt;code>docker run -itd --name=graph -p 8080:8080 -e PRELOAD=&amp;quot;true&amp;quot; hugegraph/hugegraph:1.5.0&lt;/code> to start with a &lt;strong>built-in&lt;/strong> example graph. We can use &lt;code>RESTful API&lt;/code> to verify the result. The detailed step can refer to &lt;a href="#518-create-an-example-graph-when-startup">5.1.8&lt;/a>&lt;/li>
 &lt;li>use &lt;code>-e PASSWORD=xxx&lt;/code> to enable auth mode and set the password for admin. You can find more details from &lt;a href="/docs/config/config-authentication#use-docker-to-enable-authentication-mode">Config Authentication&lt;/a>&lt;/li>
 &lt;/ol>
 &lt;p>If you use docker desktop, you can set the option like:&lt;/p>
@@ -1720,7 +2139,7 @@ and configure by yourself.&lt;/p>
 &lt;p>The docker image of the hugegraph is a convenient release to start it quickly, but not &lt;strong>official distribution&lt;/strong> artifacts. You can find more details from &lt;a href="https://infra.apache.org/release-distribution.html#dockerhub">ASF Release Distribution Policy&lt;/a>.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>Recommend to use &lt;code>release tag&lt;/code>(like &lt;code>1.5.0&lt;/code>/&lt;code>1.5.0&lt;/code>) for the stable version. Use &lt;code>latest&lt;/code> tag to experience the newest functions in development.&lt;/p>
+&lt;p>Recommend to use &lt;code>release tag&lt;/code> (like &lt;code>1.5.0&lt;/code>/&lt;code>1.x.0&lt;/code>) for the stable version. Use &lt;code>latest&lt;/code> tag to experience the newest functions in development.&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;/blockquote>
@@ -1734,8 +2153,8 @@ and configure by yourself.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>shasum -a &lt;span style="color:#0000cf;font-weight:bold">512&lt;/span> apache-hugegraph-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl https://downloads.apache.org/incubator/hugegraph/&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>/apache-hugegraph-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz.sha512
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="33-source-code-compilation">3.3 Source code compilation&lt;/h4>
-&lt;p>Please ensure that the wget command is installed before compiling the source code&lt;/p>
-&lt;p>We could get HugeGraph &lt;strong>source code&lt;/strong> in 2 ways: (So as the other HugeGraph repos/modules)&lt;/p>
+&lt;p>Please ensure that the wget/curl commands are installed before compiling the source code&lt;/p>
+&lt;p>Download HugeGraph &lt;strong>source code&lt;/strong> in either of the following 2 ways (so as the other HugeGraph repos/modules):&lt;/p>
 &lt;ul>
 &lt;li>download the stable/release version from the ASF site&lt;/li>
 &lt;li>clone the unstable/latest version by GitBox(ASF) or GitHub&lt;/li>
@@ -1806,7 +2225,7 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;p>If you need to access HugeGraphServer externally, please modify the &lt;code>restserver.url&lt;/code> configuration item of &lt;code>rest-server.properties&lt;/code>
 （default is &lt;code>http://127.0.0.1:8080&lt;/code>）, change to machine name or IP address.&lt;/p>
 &lt;p>Since the configuration (hugegraph.properties) and startup steps required by various backends are slightly different, the following will introduce the configuration and startup of each backend one by one.&lt;/p>
-&lt;p>Follow the &lt;a href="/docs/config/config-authentication/">Server Authentication Configuration&lt;/a> before you start Server later.&lt;/p>
+&lt;p>&lt;strong>Note:&lt;/strong> Configure &lt;a href="/docs/config/config-authentication/">Server Authentication&lt;/a> before starting HugeGraphServer if you need Auth mode (especially for production or public network environments).&lt;/p>
 &lt;h5 id="511-distributed-storage-hstore">5.1.1 Distributed Storage (HStore)&lt;/h5>
 &lt;details>
 &lt;summary>Click to expand/collapse Distributed Storage configuration and startup method&lt;/summary>
@@ -1821,9 +2240,12 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># PD service address, multiple PD addresses are separated by commas, configure PD&amp;#39;s RPC port
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pd.peers=127.0.0.1:8686,127.0.0.1:8687,127.0.0.1:8688
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then enable PD discovery in &lt;code>rest-server.properties&lt;/code> (required for every HugeGraph-Server node):&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>usePD=true
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If configuring multiple HugeGraph-Server nodes, you need to modify the &lt;code>rest-server.properties&lt;/code> configuration file for each node, for example:&lt;/p>
 &lt;p>Node 1 (Master node):&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>restserver.url=http://127.0.0.1:8081
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>usePD=true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>restserver.url=http://127.0.0.1:8081
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gremlinserver.url=http://127.0.0.1:8181
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rpc.server_host=127.0.0.1
@@ -1832,7 +2254,8 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.id=server-1
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.role=master
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Node 2 (Worker node):&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>restserver.url=http://127.0.0.1:8082
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>usePD=true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>restserver.url=http://127.0.0.1:8082
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gremlinserver.url=http://127.0.0.1:8182
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rpc.server_host=127.0.0.1
@@ -2627,9 +3050,9 @@ You can use &lt;a href="/docs/clients/hugegraph-client">Client-API&lt;/a> to wri
 &lt;h3 id="11-schema">1.1 Schema&lt;/h3>
 &lt;p>HugeGraph provides a single interface to get all Schema information of a graph, including: PropertyKey, VertexLabel, EdgeLabel and IndexLabel.&lt;/p>
 &lt;h5 id="method--url">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/{graph_name}/schema
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphspaces/{graphspace}/graphs/{graph_name}/schema
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>e.g: GET http://localhost:8080/graphs/hugegraph/schema
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>e.g: GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body">Response Body&lt;/h5>
@@ -7891,7 +8314,7 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;/ul>
 &lt;h4 id="121-create-a-propertykey">1.2.1 Create a PropertyKey&lt;/h4>
 &lt;h5 id="method--url">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphs/hugegraph/schema/propertykeys
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertykeys
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body">Request Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -7923,7 +8346,7 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;li>action: Indicates whether the current action is to add or remove userdata. Possible values are &lt;code>append&lt;/code> (add) and &lt;code>eliminate&lt;/code> (remove).&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-1">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/schema/propertykeys/age?action=append
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertykeys/age?action=append
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-1">Request Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -7955,7 +8378,7 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="123-get-all-propertykeys">1.2.3 Get all PropertyKeys&lt;/h4>
 &lt;h5 id="method--url-2">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/schema/propertykeys
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertykeys
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-2">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-2">Response Body&lt;/h5>
@@ -8021,7 +8444,7 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="124-get-propertykey-according-to-name">1.2.4 Get PropertyKey according to name&lt;/h4>
 &lt;h5 id="method--url-3">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertykeys/age
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Where &lt;code>age&lt;/code> is the name of the PropertyKey to be retrieved.&lt;/p>
 &lt;h5 id="response-status-3">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
@@ -8043,7 +8466,7 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="125-delete-propertykey-according-to-name">1.2.5 Delete PropertyKey according to name&lt;/h4>
 &lt;h5 id="method--url-4">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertykeys/age
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Where &lt;code>age&lt;/code> is the name of the PropertyKey to be deleted.&lt;/p>
 &lt;h5 id="response-status-4">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">202&lt;/span>
@@ -10323,7 +10746,7 @@ and no circular links, etc.&lt;/li>
 &lt;/ul>
 &lt;h4 id="131-create-a-vertexlabel">1.3.1 Create a VertexLabel&lt;/h4>
 &lt;h5 id="method--url">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphs/hugegraph/schema/vertexlabels
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/vertexlabels
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body">Request Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -10397,7 +10820,7 @@ and no circular links, etc.&lt;/li>
 &lt;li>action: Indicates whether the current action is to add or remove. Possible values are &lt;code>append&lt;/code> (add) and &lt;code>eliminate&lt;/code> (remove).&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-1">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person?action=append
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/vertexlabels/person?action=append
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-1">Request Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -10436,7 +10859,7 @@ and no circular links, etc.&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="133-get-all-vertexlabels">1.3.3 Get all VertexLabels&lt;/h4>
 &lt;h5 id="method--url-2">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/vertexlabels
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-2">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-2">Response Body&lt;/h5>
@@ -10488,7 +10911,7 @@ and no circular links, etc.&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="134-get-vertexlabel-by-name">1.3.4 Get VertexLabel by name&lt;/h4>
 &lt;h5 id="method--url-3">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/vertexlabels/person
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-3">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-3">Response Body&lt;/h5>
@@ -10517,7 +10940,7 @@ and no circular links, etc.&lt;/li>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="135-delete-vertexlabel-by-name">1.3.5 Delete VertexLabel by name&lt;/h4>
 &lt;p>Deleting a VertexLabel will result in the removal of corresponding vertices and related index data. This operation will generate an asynchronous task.&lt;/p>
 &lt;h5 id="method--url-4">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/vertexlabels/person
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-4">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">202&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-4">Response Body&lt;/h5>
@@ -10526,7 +10949,7 @@ and no circular links, etc.&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note:&lt;/p>
 &lt;blockquote>
-&lt;p>You can use &lt;code>GET http://localhost:8080/graphs/hugegraph/tasks/1&lt;/code> (where &amp;ldquo;1&amp;rdquo; is the task_id) to query the execution status of the asynchronous task. For more information, refer to the &lt;a href="../task">Asynchronous Task RESTful API&lt;/a>.&lt;/p>
+&lt;p>You can use &lt;code>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks/1&lt;/code> (where &amp;ldquo;1&amp;rdquo; is the task_id) to query the execution status of the asynchronous task. For more information, refer to the &lt;a href="../task">Asynchronous Task RESTful API&lt;/a>.&lt;/p>
 &lt;/blockquote></description></item><item><title>Docs: Configuring HugeGraphServer to Use HTTPS Protocol</title><link>/docs/config/config-https/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/config/config-https/</guid><description>
 &lt;h3 id="overview">Overview&lt;/h3>
 &lt;p>By default, HugeGraphServer uses the HTTP protocol. However, if you have security requirements for your requests, you can configure it to use HTTPS.&lt;/p>
@@ -10611,7 +11034,7 @@ and no circular links, etc.&lt;/li>
 &lt;/ul>
 &lt;h4 id="141-create-an-edgelabel">1.4.1 Create an EdgeLabel&lt;/h4>
 &lt;h5 id="method--url">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphs/hugegraph/schema/edgelabels
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/edgelabels
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body">Request Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;created&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -10695,7 +11118,7 @@ and no circular links, etc.&lt;/li>
 &lt;li>action: Indicates whether the current action is to add or remove, with values &lt;code>append&lt;/code> (add) and &lt;code>eliminate&lt;/code> (remove).&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-1">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/schema/edgelabels/created?action=append
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/edgelabels/created?action=append
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-1">Request Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;created&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -10731,7 +11154,7 @@ and no circular links, etc.&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="143-get-all-edgelabels">1.4.3 Get all EdgeLabels&lt;/h4>
 &lt;h5 id="method--url-2">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/schema/edgelabels
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/edgelabels
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-2">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-2">Response Body&lt;/h5>
@@ -10780,7 +11203,7 @@ and no circular links, etc.&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="144-get-edgelabel-by-name">1.4.4 Get EdgeLabel by name&lt;/h4>
 &lt;h5 id="method--url-3">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/edgelabels/created
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-3">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-3">Response Body&lt;/h5>
@@ -10809,7 +11232,7 @@ and no circular links, etc.&lt;/li>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="145-delete-edgelabel-by-name">1.4.5 Delete EdgeLabel by name&lt;/h4>
 &lt;p>Deleting an EdgeLabel will result in the deletion of corresponding edges and related index data. This operation will generate an asynchronous task.&lt;/p>
 &lt;h5 id="method--url-4">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/edgelabels/created
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-4">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">202&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-4">Response Body&lt;/h5>
@@ -10818,7 +11241,7 @@ and no circular links, etc.&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note:&lt;/p>
 &lt;blockquote>
-&lt;p>You can query the execution status of an asynchronous task by using &lt;code>GET http://localhost:8080/graphs/hugegraph/tasks/1&lt;/code> (where &amp;ldquo;1&amp;rdquo; is the task_id). For more information, refer to the &lt;a href="../task">Asynchronous Task RESTful API&lt;/a>.&lt;/p>
+&lt;p>You can query the execution status of an asynchronous task by using &lt;code>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks/1&lt;/code> (where &amp;ldquo;1&amp;rdquo; is the task_id). For more information, refer to the &lt;a href="../task">Asynchronous Task RESTful API&lt;/a>.&lt;/p>
 &lt;/blockquote></description></item><item><title>Docs: GraphRAG UI Details</title><link>/docs/quickstart/hugegraph-ai/quick_start/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-ai/quick_start/</guid><description>
 &lt;blockquote>
 &lt;p>Follow up &lt;a href="../">main doc&lt;/a> to introduce the basic UI function &amp;amp; details, welcome to update and improve at any time, thanks&lt;/p>
@@ -12901,7 +13324,7 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;p>Assuming PropertyKeys from version 1.1.3, VertexLabels from version 1.2.3, and EdgeLabels from version 1.3.3 have already been created.&lt;/p>
 &lt;h4 id="151-create-an-indexlabel">1.5.1 Create an IndexLabel&lt;/h4>
 &lt;h5 id="method--url">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphs/hugegraph/schema/indexlabels
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/indexlabels
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body">Request Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;personByCity&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -12930,7 +13353,7 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="152-get-all-indexlabels">1.5.2 Get all IndexLabels&lt;/h4>
 &lt;h5 id="method--url-1">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/schema/indexlabels
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/indexlabels
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-1">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-1">Response Body&lt;/h5>
@@ -12981,7 +13404,7 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="153-get-indexlabel-by-name">1.5.3 Get IndexLabel by name&lt;/h4>
 &lt;h5 id="method--url-2">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/indexlabels/personByCity
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-2">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-2">Response Body&lt;/h5>
@@ -12998,7 +13421,7 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="154-delete-indexlabel-by-name">1.5.4 Delete IndexLabel by name&lt;/h4>
 &lt;p>Deleting an IndexLabel will result in the deletion of related index data. This operation will generate an asynchronous task.&lt;/p>
 &lt;h5 id="method--url-3">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/indexlabels/personByCity
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-3">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">202&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-3">Response Body&lt;/h5>
@@ -13007,7 +13430,7 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note:&lt;/p>
 &lt;blockquote>
-&lt;p>You can query the execution status of an asynchronous task by using &lt;code>GET http://localhost:8080/graphs/hugegraph/tasks/1&lt;/code> (where &amp;ldquo;1&amp;rdquo; is the task_id). For more information, refer to the &lt;a href="../task">Asynchronous Task RESTful API&lt;/a>.&lt;/p>
+&lt;p>You can query the execution status of an asynchronous task by using &lt;code>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks/1&lt;/code> (where &amp;ldquo;1&amp;rdquo; is the task_id). For more information, refer to the &lt;a href="../task">Asynchronous Task RESTful API&lt;/a>.&lt;/p>
 &lt;/blockquote></description></item><item><title>Docs: HugeGraph 1.5.0 Release Notes</title><link>/docs/changelog/hugegraph-1.5.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/changelog/hugegraph-1.5.0-release-notes/</guid><description>
 &lt;blockquote>
 &lt;p>WIP: This doc is under construction, please wait for the final version (BETA)&lt;/p>
@@ -13263,7 +13686,7 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;h3 id="16-rebuild">1.6 Rebuild&lt;/h3>
 &lt;h4 id="161-rebuild-indexlabel">1.6.1 Rebuild IndexLabel&lt;/h4>
 &lt;h5 id="method--url">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/indexlabels/personByCity
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/jobs/rebuild/indexlabels/personByCity
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">202&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body">Response Body&lt;/h5>
@@ -13272,11 +13695,11 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note:&lt;/p>
 &lt;blockquote>
-&lt;p>You can get the asynchronous job status by &lt;code>GET http://localhost:8080/graphs/hugegraph/tasks/${task_id}&lt;/code> (the task_id here should be 1). See More &lt;a href="../task">AsyncJob RESTfull API&lt;/a>&lt;/p>
+&lt;p>You can get the asynchronous job status by &lt;code>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks/${task_id}&lt;/code> (the task_id here should be 1). See More &lt;a href="../task">AsyncJob RESTfull API&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;h4 id="162-rebulid-all-indexs-of-vertexlabel">1.6.2 Rebulid all Indexs of VertexLabel&lt;/h4>
 &lt;h5 id="method--url-1">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/vertexlabels/person
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/jobs/rebuild/vertexlabels/person
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-1">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">202&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-1">Response Body&lt;/h5>
@@ -13285,11 +13708,11 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note:&lt;/p>
 &lt;blockquote>
-&lt;p>You can get the asynchronous job status by &lt;code>GET http://localhost:8080/graphs/hugegraph/tasks/${task_id}&lt;/code> (the task_id here should be 2). See More &lt;a href="../task">AsyncJob RESTfull API&lt;/a>&lt;/p>
+&lt;p>You can get the asynchronous job status by &lt;code>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks/${task_id}&lt;/code> (the task_id here should be 2). See More &lt;a href="../task">AsyncJob RESTfull API&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;h4 id="163-rebulid-all-indexs-of-edgelabel">1.6.3 Rebulid all Indexs of EdgeLabel&lt;/h4>
 &lt;h5 id="method--url-2">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/edgelabels/created
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/jobs/rebuild/edgelabels/created
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-2">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">202&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-2">Response Body&lt;/h5>
@@ -13298,251 +13721,5 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note:&lt;/p>
 &lt;blockquote>
-&lt;p>You can get the asynchronous job status by &lt;code>GET http://localhost:8080/graphs/hugegraph/tasks/${task_id}&lt;/code> (the task_id here should be 3). See More &lt;a href="../task">AsyncJob RESTfull API&lt;/a>&lt;/p>
-&lt;/blockquote></description></item><item><title>Docs: HugeGraph 1.7.0 Release Notes</title><link>/docs/changelog/hugegraph-1.7.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/changelog/hugegraph-1.7.0-release-notes/</guid><description>
-&lt;blockquote>
-&lt;p>WIP: This doc is under construction, please wait for the final version (BETA)&lt;/p>
-&lt;/blockquote>
-&lt;h3 id="operating-environment--version-description">Operating Environment / Version Description&lt;/h3>
-&lt;p>For &lt;strong>1.7.0&lt;/strong> version &lt;code>hugegraph&lt;/code>, related components only support Java11.&lt;/p>
-&lt;h3 id="hugegraph">hugegraph&lt;/h3>
-&lt;h4 id="api-changes">API Changes&lt;/h4>
-&lt;ul>
-&lt;li>&lt;strong>BREAKING CHANGE&lt;/strong>: Disable legacy backends include MySQL/PG/c*(.etc) &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2746">#2746&lt;/a>&lt;/li>
-&lt;li>&lt;strong>BREAKING CHANGE&lt;/strong>: Release version 1.7.0 [server + pd + store] &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2889">#2889&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="feature-changes">Feature Changes&lt;/h4>
-&lt;ul>
-&lt;li>Support MemoryManagement for graph query framework &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2649">#2649&lt;/a>&lt;/li>
-&lt;li>LoginAPI support token_expire field &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2754">#2754&lt;/a>&lt;/li>
-&lt;li>Add option for task role election &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2843">#2843&lt;/a>&lt;/li>
-&lt;li>Optimize perf by avoid boxing long &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2861">#2861&lt;/a>&lt;/li>
-&lt;li>StringId hold bytes to avoid decode/encode &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2862">#2862&lt;/a>&lt;/li>
-&lt;li>Add PerfExample5 and PerfExample6 &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2860">#2860&lt;/a>&lt;/li>
-&lt;li>RocksDBStore remove redundant checkOpened() call &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2863">#2863&lt;/a>&lt;/li>
-&lt;li>Add path filter &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2898">#2898&lt;/a>&lt;/li>
-&lt;li>Init serena memory system &amp;amp; add memories &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2902">#2902&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="bug-fixes">Bug Fixes&lt;/h4>
-&lt;ul>
-&lt;li>Filter dynamice path(PUT/GET/DELETE) with params cause OOM &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2569">#2569&lt;/a>&lt;/li>
-&lt;li>JRaft Histogram Metrics Value NaN &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2631">#2631&lt;/a>&lt;/li>
-&lt;li>Update server image desc &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2702">#2702&lt;/a>&lt;/li>
-&lt;li>Kneigbor-api has unmatched edge type with server &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2699">#2699&lt;/a>&lt;/li>
-&lt;li>Add license for swagger-ui &amp;amp; reset use stage to false in ci yml &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2706">#2706&lt;/a>&lt;/li>
-&lt;li>Fix build pd-store arm image &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2744">#2744&lt;/a>&lt;/li>
-&lt;li>Fix graph server cache notifier mechanism &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2729">#2729&lt;/a>&lt;/li>
-&lt;li>Tx leak when stopping the graph server &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2791">#2791&lt;/a>&lt;/li>
-&lt;li>Ensure backend is initialized in gremlin script &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2824">#2824&lt;/a>&lt;/li>
-&lt;li>Fix some potential lock &amp;amp; type cast issues &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2895">#2895&lt;/a>&lt;/li>
-&lt;li>Fix npe in getVersion &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2897">#2897&lt;/a>&lt;/li>
-&lt;li>Fix the support for graphsapi in rocksdb and add testing for graphsapi &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2900">#2900&lt;/a>&lt;/li>
-&lt;li>Remove graph path in auth api path &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2899">#2899&lt;/a>&lt;/li>
-&lt;li>Migrate to LTS jdk11 in all Dockerfile &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2901">#2901&lt;/a>&lt;/li>
-&lt;li>Remove the judgment for java8 compatibility in the init-store &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2905">#2905&lt;/a>&lt;/li>
-&lt;li>Add missing license and remove binary license.txt &amp;amp; fix tinkerpop ci &amp;amp; remove duplicate module &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2910">#2910&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="option-changes">Option Changes&lt;/h4>
-&lt;ul>
-&lt;li>Remove some outdated configuration &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2678">#2678&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="other-changes">Other Changes&lt;/h4>
-&lt;ul>
-&lt;li>Update outdated docs for release 1.5.0 &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2690">#2690&lt;/a>&lt;/li>
-&lt;li>Fix licenses and remove empty files &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2692">#2692&lt;/a>&lt;/li>
-&lt;li>Update repo artifacts references &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2695">#2695&lt;/a>&lt;/li>
-&lt;li>Adjust release fury version &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2698">#2698&lt;/a>&lt;/li>
-&lt;li>Fix the JSON license issue &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2697">#2697&lt;/a>&lt;/li>
-&lt;li>Add debug info for tp test &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2688">#2688&lt;/a>&lt;/li>
-&lt;li>Enhance words in README &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2734">#2734&lt;/a>&lt;/li>
-&lt;li>Add collaborators in asf config &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2741">#2741&lt;/a>&lt;/li>
-&lt;li>Adjust the related filters of sofa-bolt &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2735">#2735&lt;/a>&lt;/li>
-&lt;li>Reopen discussion in .asf.yml config &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2751">#2751&lt;/a>&lt;/li>
-&lt;li>Fix typo in README &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2806">#2806&lt;/a>&lt;/li>
-&lt;li>Centralize version management in project &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2797">#2797&lt;/a>&lt;/li>
-&lt;li>Update notice year &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2826">#2826&lt;/a>&lt;/li>
-&lt;li>Improve maven Reproducible Builds → upgrade plugins &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2874">#2874&lt;/a>&lt;/li>
-&lt;li>Enhance docker instruction with auth opened graph &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2881">#2881&lt;/a>&lt;/li>
-&lt;li>Remove the package existing in java8 &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2792">#2792&lt;/a>&lt;/li>
-&lt;li>Revise Docker usage instructions in README &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2882">#2882&lt;/a>&lt;/li>
-&lt;li>Add DeepWiki badge to README &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2883">#2883&lt;/a>&lt;/li>
-&lt;li>Update guidance for store module &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2894">#2894&lt;/a>&lt;/li>
-&lt;li>Update test commands and improve documentation clarity &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2893">#2893&lt;/a>&lt;/li>
-&lt;li>Bump rocksdb version from 7.2.2 to 8.10.2 &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2896">#2896&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="hugegraph-toolchain">hugegraph-toolchain&lt;/h3>
-&lt;h4 id="api-changes-1">API Changes&lt;/h4>
-&lt;ul>
-&lt;li>Support graphspace &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/633">#633&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="feature-changes-1">Feature Changes&lt;/h4>
-&lt;ul>
-&lt;li>Support jdbc date type &amp;amp; sync .editorconfig &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/648">#648&lt;/a>&lt;/li>
-&lt;li>Add a useSSL option for mysql &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/650">#650&lt;/a>&lt;/li>
-&lt;li>Patch for father sub edge &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/654">#654&lt;/a>&lt;/li>
-&lt;li>Improve user experience for user script &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/666">#666&lt;/a>&lt;/li>
-&lt;li>Support concurrent readers, short-id &amp;amp; Graphsrc &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/683">#683&lt;/a>&lt;/li>
-&lt;li>Init serena onboarding &amp;amp; project memory files &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/692">#692&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="bug-fixes-1">Bug Fixes&lt;/h4>
-&lt;ul>
-&lt;li>Typo word in display &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/655">#655&lt;/a>&lt;/li>
-&lt;li>Patch up missing classes and methods for hubble &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/657">#657&lt;/a>&lt;/li>
-&lt;li>Adjust Client to 1.7.0 server &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/689">#689&lt;/a>&lt;/li>
-&lt;li>Remove json license for release 1.7.0 &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/698">#698&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="other-changes-1">Other Changes&lt;/h4>
-&lt;ul>
-&lt;li>Update hugegraph source commit id &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/640">#640&lt;/a>&lt;/li>
-&lt;li>Add collaborators in asf config &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/656">#656&lt;/a>&lt;/li>
-&lt;li>Update pom for version-1.7.0 &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/681">#681&lt;/a>&lt;/li>
-&lt;li>Add DeepWiki badge to README &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/684">#684&lt;/a>&lt;/li>
-&lt;li>Adjust APIs to compatible with 1.7.0 server &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/685">#685&lt;/a>&lt;/li>
-&lt;li>Adjust LoadContext to 1.7.0 version &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/687">#687&lt;/a>&lt;/li>
-&lt;li>Migrate to LTS jdk11 in all Dockerfile &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/691">#691&lt;/a>&lt;/li>
-&lt;li>Update copyright year in NOTICE file &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/pull/697">#697&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="hugegraph-computer">hugegraph-computer&lt;/h3>
-&lt;h4 id="feature-changes-2">Feature Changes&lt;/h4>
-&lt;ul>
-&lt;li>Migration Vermeer to hugegraph-computer &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/316">#316&lt;/a>&lt;/li>
-&lt;li>Make startChan&amp;rsquo;s size configurable &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/328">#328&lt;/a>&lt;/li>
-&lt;li>Assign WorkerGroup via worker configuration &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/332">#332&lt;/a>&lt;/li>
-&lt;li>Support task priority based scheduling &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/336">#336&lt;/a>&lt;/li>
-&lt;li>Avoid 800k &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/340">#340&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="bug-fixes-2">Bug Fixes&lt;/h4>
-&lt;ul>
-&lt;li>Fix docker file build &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/341">#341&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="other-changes-2">Other Changes&lt;/h4>
-&lt;ul>
-&lt;li>Update release version to 1.5.0 &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/318">#318&lt;/a>&lt;/li>
-&lt;li>Update go depends module &amp;amp; fix headers &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/321">#321&lt;/a>&lt;/li>
-&lt;li>Update go version to 1.23 &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/322">#322&lt;/a>&lt;/li>
-&lt;li>Add collaborator in .asf.yaml &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/323">#323&lt;/a>&lt;/li>
-&lt;li>Update the Go version in docker image &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/333">#333&lt;/a>&lt;/li>
-&lt;li>Add DeepWiki badge to README &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/337">#337&lt;/a>&lt;/li>
-&lt;li>Bump project version to 1.7.0 (RELEASE) &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/338">#338&lt;/a>&lt;/li>
-&lt;li>Update copyright year in NOTICE file &lt;a href="https://github.com/apache/incubator-hugegraph-computer/pull/342">#342&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="hugegraph-ai">hugegraph-ai&lt;/h3>
-&lt;h4 id="api-changes-2">API Changes&lt;/h4>
-&lt;ul>
-&lt;li>Support choose template in api &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/135">#135&lt;/a>&lt;/li>
-&lt;li>Add post method for paths-api &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/162">#162&lt;/a>&lt;/li>
-&lt;li>Support switch graph in api &amp;amp; add some query configs &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/184">#184&lt;/a>&lt;/li>
-&lt;li>Text2gremlin api &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/258">#258&lt;/a>&lt;/li>
-&lt;li>Support switching prompt EN/CN &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/269">#269&lt;/a>&lt;/li>
-&lt;li>&lt;strong>BREAKING CHANGE&lt;/strong>: Update keyword extraction method &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/282">#282&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="feature-changes-3">Feature Changes&lt;/h4>
-&lt;ul>
-&lt;li>Added the process of text2gql in graphrag V1.0 &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/105">#105&lt;/a>&lt;/li>
-&lt;li>Use pydantic-settings for config management &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/122">#122&lt;/a>&lt;/li>
-&lt;li>Timely execute vid embedding &amp;amp; enhance some HTTP logic &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/141">#141&lt;/a>&lt;/li>
-&lt;li>Use retry from tenacity &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/143">#143&lt;/a>&lt;/li>
-&lt;li>Modify the summary info and enhance the request logic &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/147">#147&lt;/a>&lt;/li>
-&lt;li>Automatic backup graph data timely &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/151">#151&lt;/a>&lt;/li>
-&lt;li>Add a button to backup data &amp;amp; count together &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/153">#153&lt;/a>&lt;/li>
-&lt;li>Extract topk_per_keyword &amp;amp; topk_return_results to .env &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/154">#154&lt;/a>&lt;/li>
-&lt;li>Modify clear buttons &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/156">#156&lt;/a>&lt;/li>
-&lt;li>Support intent recognition V1 &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/159">#159&lt;/a>&lt;/li>
-&lt;li>Change vid embedding x:yy to yy &amp;amp; use multi-thread &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/158">#158&lt;/a>&lt;/li>
-&lt;li>Support mathjax in rag query block V1 &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/157">#157&lt;/a>&lt;/li>
-&lt;li>Use poetry to manage the dependencies &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/149">#149&lt;/a>&lt;/li>
-&lt;li>Return schema.groovy first when backup graph data &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/161">#161&lt;/a>&lt;/li>
-&lt;li>Merge all logs into one file &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/171">#171&lt;/a>&lt;/li>
-&lt;li>Use uv for the CI action &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/175">#175&lt;/a>&lt;/li>
-&lt;li>Use EN prompt for keywords extraction &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/174">#174&lt;/a>&lt;/li>
-&lt;li>Support litellm LLM provider &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/178">#178&lt;/a>&lt;/li>
-&lt;li>Improve graph extraction default prompt &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/187">#187&lt;/a>&lt;/li>
-&lt;li>Replace vid by full vertexes info &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/189">#189&lt;/a>&lt;/li>
-&lt;li>Support asynchronous streaming generation in rag block by using async_generator and asyncio.wait &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/190">#190&lt;/a>&lt;/li>
-&lt;li>Generalize the regex extraction func &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/194">#194&lt;/a>&lt;/li>
-&lt;li>Create quick_start.md &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/196">#196&lt;/a>&lt;/li>
-&lt;li>Support Docker &amp;amp; K8s deployment way &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/195">#195&lt;/a>&lt;/li>
-&lt;li>Multi-stage building in Dockerfile &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/199">#199&lt;/a>&lt;/li>
-&lt;li>Support graph checking before updating vid embedding &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/205">#205&lt;/a>&lt;/li>
-&lt;li>Disable text2gql by default &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/216">#216&lt;/a>&lt;/li>
-&lt;li>Use 4.1-mini and 0.01 temperature by default &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/214">#214&lt;/a>&lt;/li>
-&lt;li>Enhance the multi configs for LLM &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/212">#212&lt;/a>&lt;/li>
-&lt;li>Textbox to Code &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/223">#217&lt;/a>&lt;/li>
-&lt;li>Replace the IP + Port with URL &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/209">#209&lt;/a>&lt;/li>
-&lt;li>Update gradio&amp;rsquo;s version &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/235">#235&lt;/a>&lt;/li>
-&lt;li>Use asyncio to get embeddings &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/215">#215&lt;/a>&lt;/li>
-&lt;li>Change QPS -&amp;gt; RPM for timer decorator &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/241">#241&lt;/a>&lt;/li>
-&lt;li>Support batch embedding &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/238">#238&lt;/a>&lt;/li>
-&lt;li>Using nuitka to provide a binary/perf way for the service &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/242">#242&lt;/a>&lt;/li>
-&lt;li>Use uv instead poetry &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/226">#226&lt;/a>&lt;/li>
-&lt;li>Basic compatible in text2gremlin generation &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/261">#261&lt;/a>&lt;/li>
-&lt;li>Enhance config path handling and add project root validation &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/262">#262&lt;/a>&lt;/li>
-&lt;li>Add vermeer python client for graph computing &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/263">#263&lt;/a>&lt;/li>
-&lt;li>Use uv in client &amp;amp; ml modules &amp;amp; adapter the CI &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/257">#257&lt;/a>&lt;/li>
-&lt;li>Use uv to manage pkgs &amp;amp; update README &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/272">#272&lt;/a>&lt;/li>
-&lt;li>Limit the deps version to handle critical init problems &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/279">#279&lt;/a>&lt;/li>
-&lt;li>Support semi-automated prompt generation &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/281">#281&lt;/a>&lt;/li>
-&lt;li>Support semi-automated generated graph schema &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/274">#274&lt;/a>&lt;/li>
-&lt;li>Unify all modules with uv &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/287">#287&lt;/a>&lt;/li>
-&lt;li>Add GitHub Actions for auto upstream sync and update SEALData subsample logic &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/289">#289&lt;/a>&lt;/li>
-&lt;li>Add a basic LLM/AI coding instruction file &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/290">#290&lt;/a>&lt;/li>
-&lt;li>Add rules for AI coding guideline - V1.0 &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/293">#293&lt;/a>&lt;/li>
-&lt;li>Replace QianFan by OpenAI-compatible format &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/285">#285&lt;/a>&lt;/li>
-&lt;li>Optimize vector index with asyncio embedding &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/264">#264&lt;/a>&lt;/li>
-&lt;li>Refactor embedding parallelization to preserve order &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/295">#295&lt;/a>&lt;/li>
-&lt;li>Support storing vector data for a graph instance by model type/name &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/265">#265&lt;/a>&lt;/li>
-&lt;li>Add AGENTS.md as new document standard &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/299">#299&lt;/a>&lt;/li>
-&lt;li>Add Fixed Workflow Execution Engine: Flow, Node, and Scheduler Architecture &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/302">#302&lt;/a>&lt;/li>
-&lt;li>Support vector db layer V1.0 &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/304">#304&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="bug-fixes-3">Bug Fixes&lt;/h4>
-&lt;ul>
-&lt;li>Limit the length of log &amp;amp; improve the format &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/121">#121&lt;/a>&lt;/li>
-&lt;li>Pylint in ml &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/125">#125&lt;/a>&lt;/li>
-&lt;li>Critical bug with pylint usage &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/131">#131&lt;/a>&lt;/li>
-&lt;li>Multi vid k-neighbor query only return the data of first vid &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/132">#132&lt;/a>&lt;/li>
-&lt;li>Replace getenv usage to settings &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/133">#133&lt;/a>&lt;/li>
-&lt;li>Correct header writing errors &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/140">#140&lt;/a>&lt;/li>
-&lt;li>Update prompt to fit prefix cache &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/137">#137&lt;/a>&lt;/li>
-&lt;li>Extract_graph_data use wrong method &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/145">#145&lt;/a>&lt;/li>
-&lt;li>Use empty str for llm config &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/155">#155&lt;/a>&lt;/li>
-&lt;li>Update gremlin generate prompt to apply fuzzy match &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/163">#163&lt;/a>&lt;/li>
-&lt;li>Enable fastapi auto reload function &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/164">#164&lt;/a>&lt;/li>
-&lt;li>Fix tiny bugs &amp;amp; optimize reranker layout &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/202">#202&lt;/a>&lt;/li>
-&lt;li>Enable tasks concurrency configs in Gradio &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/188">#188&lt;/a>&lt;/li>
-&lt;li>Align regex extraction of json to json format of prompt &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/211">#211&lt;/a>&lt;/li>
-&lt;li>Fix documentation sample code error &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/219">#219&lt;/a>&lt;/li>
-&lt;li>Failed to remove vectors when updating vid embedding &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/243">#243&lt;/a>&lt;/li>
-&lt;li>Skip empty chunk in LLM steaming mode &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/245">#245&lt;/a>&lt;/li>
-&lt;li>Ollama batch embedding bug &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/250">#250&lt;/a>&lt;/li>
-&lt;li>Fix Dockerfile to add pyproject.toml anchor file &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/266">#266&lt;/a>&lt;/li>
-&lt;li>Add missing &amp;lsquo;properties&amp;rsquo; in gremlin prompt formatting &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/298">#298&lt;/a>&lt;/li>
-&lt;li>Fixed cgraph version &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/305">#305&lt;/a>&lt;/li>
-&lt;li>Ollama embedding API usage and config param &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/306">#306&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="option-changes-1">Option Changes&lt;/h4>
-&lt;ul>
-&lt;li>Remove enable_gql logic in api &amp;amp; rag block &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/148">#148&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="other-changes-3">Other Changes&lt;/h4>
-&lt;ul>
-&lt;li>Update README for python-client/SDK &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/150">#150&lt;/a>&lt;/li>
-&lt;li>Enable pip cache &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/142">#142&lt;/a>&lt;/li>
-&lt;li>Enable discussion &amp;amp; change merge way &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/201">#201&lt;/a>&lt;/li>
-&lt;li>Synchronization with official documentation &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/273">#273&lt;/a>&lt;/li>
-&lt;li>Fix grammar errors &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/275">#275&lt;/a>&lt;/li>
-&lt;li>Improve README clarity and deployment instructions &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/276">#276&lt;/a>&lt;/li>
-&lt;li>Add docker-compose deployment and improve container networking instructions &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/280">#280&lt;/a>&lt;/li>
-&lt;li>Update docker compose command &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/283">#283&lt;/a>&lt;/li>
-&lt;li>Reduce third-party library log output &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/284">#244&lt;/a>&lt;/li>
-&lt;li>Update README with improved setup instructions &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/294">#294&lt;/a>&lt;/li>
-&lt;li>Add collaborators in asf config &lt;a href="https://github.com/apache/incubator-hugegraph-ai/pull/182">#182&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="release-details">Release Details&lt;/h3>
-&lt;p>Please check the release details/contributor in each repository:&lt;/p>
-&lt;ul>
-&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph/releases">Server Release Notes&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/releases">Toolchain Release Notes&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-computer/releases">Computer Release Notes&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-ai/releases">AI Release Notes&lt;/a>&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;p>You can get the asynchronous job status by &lt;code>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks/${task_id}&lt;/code> (the task_id here should be 3). See More &lt;a href="../task">AsyncJob RESTfull API&lt;/a>&lt;/p>
+&lt;/blockquote></description></item></channel></rss>

@@ -1,6 +1,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HugeGraph – API</title><link>/cn/docs/clients/</link><description>Recent content in API on HugeGraph</description><generator>Hugo -- gohugo.io</generator><atom:link href="/cn/docs/clients/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: HugeGraph RESTful API</title><link>/cn/docs/clients/restful-api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/restful-api/</guid><description>
-&lt;p>HugeGraph-Server通过HugeGraph-API基于HTTP协议为Client提供操作图的接口，主要包括元数据和
-图数据的增删改查，遍历算法，变量，图操作及其他操作。&lt;/p>
+&lt;blockquote>
+&lt;p>⚠️ &lt;strong>版本兼容性说明&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>HugeGraph 1.7.0+ 引入了图空间功能，API 路径格式为：&lt;code>/graphspaces/{graphspace}/graphs/{graph}&lt;/code>&lt;/li>
+&lt;li>HugeGraph 1.5.x 及之前版本使用旧路径：&lt;code>/graphs/{graph}&lt;/code>, 以及创建/克隆图的 api 使用 text/plain 作为 Content-Type, 1.7.0 及之后使用 json&lt;/li>
+&lt;li>默认图空间名称为 &lt;code>DEFAULT&lt;/code>,可直接使用&lt;/li>
+&lt;li>旧版本 doc 参考：&lt;a href="https://github.com/apache/incubator-hugegraph-doc/tree/release-1.5.0">HugeGraph 1.5.x RESTful API&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
 &lt;p>除了下方的文档，你还可以通过 &lt;code>localhost:8080/swagger-ui/index.html&lt;/code> 访问 &lt;code>swagger-ui&lt;/code> 以查看 &lt;code>RESTful API&lt;/code>。&lt;a href="/cn/docs/quickstart/hugegraph/hugegraph-server#swaggerui-example">示例可以参考此处&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph Java Client</title><link>/cn/docs/clients/hugegraph-client/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/hugegraph-client/</guid><description>
 &lt;p>本文的代码都是&lt;code>java&lt;/code>语言写的，但其风格与&lt;code>gremlin(groovy)&lt;/code>是非常类似的。用户只需要把代码中的变量声明替换成&lt;code>def&lt;/code>或直接去掉，
 就能将&lt;code>java&lt;/code>代码转变为&lt;code>groovy&lt;/code>；另外就是每一行语句最后可以不加分号，&lt;code>groovy&lt;/code>认为一行就是一条语句。&lt;/p>

@@ -8,10 +8,10 @@
 &lt;/blockquote>
 &lt;h3 id="2-依赖">2 依赖&lt;/h3>
 &lt;h4 id="21-安装-java-11-jdk-11">2.1 安装 Java 11 (JDK 11)&lt;/h4>
-&lt;p>请优先考虑在 Java 11 的环境上启动 &lt;code>HugeGraph-Server&lt;/code>(在 1.5.0 版前，会保留对 Java 8 的基本兼容)&lt;/p>
+&lt;p>请考虑在 Java 11 的环境上启动 &lt;code>HugeGraph-Server&lt;/code>(在 1.5.0 版前，会保留对 Java 8 的基本兼容)&lt;/p>
 &lt;p>&lt;strong>在往下阅读之前先执行 &lt;code>java -version&lt;/code> 命令确认 jdk 版本&lt;/strong>&lt;/p>
 &lt;blockquote>
-&lt;p>注：使用 Java 8 启动 HugeGraph-Server 会失去一些&lt;strong>安全性&lt;/strong>的保障，也会降低性能相关指标 (请尽早升级/迁移)&lt;/p>
+&lt;p>注：使用 Java 8 启动 HugeGraph-Server 会失去一些&lt;strong>安全性&lt;/strong>的保障，也会降低性能相关指标 (请尽早升级/迁移，1.7.0 不再支持)&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="3-部署">3 部署&lt;/h3>
 &lt;p>有四种方式可以部署 HugeGraph-Server 组件：&lt;/p>
@@ -131,16 +131,24 @@
 &lt;p>分布式存储是 HugeGraph 1.5.0 之后推出的新特性，它基于 HugeGraph-PD 和 HugeGraph-Store 组件实现了分布式的数据存储和计算。&lt;/p>
 &lt;/blockquote>
 &lt;p>要使用分布式存储引擎，需要先部署 HugeGraph-PD 和 HugeGraph-Store，详见 &lt;a href="/cn/docs/quickstart/hugegraph/hugegraph-pd/">HugeGraph-PD 快速入门&lt;/a> 和 &lt;a href="/cn/docs/quickstart/hugegraph/hugegraph-hstore/">HugeGraph-Store 快速入门&lt;/a>。&lt;/p>
-&lt;p>确保 PD 和 Store 服务均已启动后，修改 HugeGraph-Server 的 &lt;code>hugegraph.properties&lt;/code> 配置：&lt;/p>
+&lt;p>确保 PD 和 Store 服务均已启动后&lt;/p>
+&lt;ol>
+&lt;li>修改 HugeGraph-Server 的 &lt;code>hugegraph.properties&lt;/code> 配置：&lt;/li>
+&lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=hstore
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=binary
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>task.scheduler_type=distributed
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># PD 服务地址，多个 PD 地址用逗号分割，配置 PD 的 RPC 端口
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pd.peers=127.0.0.1:8686,127.0.0.1:8687,127.0.0.1:8688
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>修改 HugeGraph-Server 的 &lt;code>rest-server.properties&lt;/code> 配置：&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>usePD=true
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果配置多个 HugeGraph-Server 节点，需要为每个节点修改 &lt;code>rest-server.properties&lt;/code> 配置文件，例如：&lt;/p>
 &lt;p>节点 1（主节点）：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>restserver.url=http://127.0.0.1:8081
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>usePD=true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>restserver.url=http://127.0.0.1:8081
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gremlinserver.url=http://127.0.0.1:8181
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rpc.server_host=127.0.0.1
@@ -149,7 +157,8 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.id=server-1
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.role=master
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>节点 2（工作节点）：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>restserver.url=http://127.0.0.1:8082
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>usePD=true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>restserver.url=http://127.0.0.1:8082
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gremlinserver.url=http://127.0.0.1:8182
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rpc.server_host=127.0.0.1

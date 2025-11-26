@@ -1,4 +1,438 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HugeGraph – Documentation</title><link>/cn/docs/</link><description>Recent content in Documentation on HugeGraph</description><generator>Hugo -- gohugo.io</generator><atom:link href="/cn/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: HugeGraph Gremlin</title><link>/cn/docs/language/hugegraph-gremlin/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/language/hugegraph-gremlin/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HugeGraph – Documentation</title><link>/cn/docs/</link><description>Recent content in Documentation on HugeGraph</description><generator>Hugo -- gohugo.io</generator><atom:link href="/cn/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Graphspace API</title><link>/cn/docs/clients/restful-api/graphspace/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/restful-api/graphspace/</guid><description>
+&lt;h3 id="20-graphspace">2.0 Graphspace&lt;/h3>
+&lt;p>在 HugeGraph 中，多租户是通过图空间（graph space）来实现的，资源的分配和隔离可以通过图空间进行。&lt;/p>
+&lt;p>&lt;strong>重要前置条件&lt;/strong>：&lt;/p>
+&lt;ol>
+&lt;li>目前图空间功能只支持在 hstore 模式下使用。&lt;/li>
+&lt;li>如果非 hstore 模式，则只能使用默认的图空间 &lt;code>DEFAULT&lt;/code>，且不支持创建、删除和更新图空间的操作。&lt;/li>
+&lt;li>注意在 rest-server.properties 中，设置 &lt;code>usePD=true&lt;/code>，并且 hugegraph.properties 中，设置 &lt;code>backend=hstore&lt;/code>&lt;/li>
+&lt;li>图空间功能必须开启鉴权模式，默认账密为 admin:pa，请务必修改默认密码，防止未授权访问。&lt;/li>
+&lt;/ol>
+&lt;h4 id="201-创建一个图空间">2.0.1 创建一个图空间&lt;/h4>
+&lt;h5 id="method--url">Method &amp;amp; Url&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphspaces
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body">Request Body&lt;/h5>
+&lt;p>注意：目前 cpu，内存，以及 k8s 相关功能暂未开放&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>名称&lt;/th>
+&lt;th>是否必填&lt;/th>
+&lt;th>类型&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>取值范围&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>name&lt;/td>
+&lt;td>是&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>小写字母、数字和下划线组成，首字符必须是小写字母，长度不超过 48&lt;/td>
+&lt;td>图空间的名字&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>description&lt;/td>
+&lt;td>是&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>图空间的描述信息&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>cpu_limit&lt;/td>
+&lt;td>是&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&amp;gt; 0&lt;/td>
+&lt;td>CPU 核数&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>memory_limit&lt;/td>
+&lt;td>是&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&amp;gt; 0&lt;/td>
+&lt;td>内存大小，单位 GB&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>storage_limit&lt;/td>
+&lt;td>是&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&amp;gt; 0&lt;/td>
+&lt;td>图空间的数据占据的磁盘空间上限&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>compute_cpu_limit&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>0&lt;/td>
+&lt;td>&amp;gt;= 0&lt;/td>
+&lt;td>针对图计算的额外资源配置，单位 cores。当该字段不配置或者配置为 0 时，会由 cpu_limit 字段的值进行覆盖&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>compute_memory_limit&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>0&lt;/td>
+&lt;td>&amp;gt;= 0&lt;/td>
+&lt;td>针对图计算的额外内存配置，单位 GB。当该字段不配置或者配置为 0 时，会由 memory_limit 字段的值进行覆盖&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>oltp_namespace&lt;/td>
+&lt;td>是&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>OLTP 的 k8s 命名空间&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>olap_namespace&lt;/td>
+&lt;td>是&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>OLAP 的 k8s 命名空间。当 olap_namespace 和 oltp_namespace 的值相同时，其配置的资源限额会进行合并&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>storage_namespace&lt;/td>
+&lt;td>是&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>存储的 k8s 命名空间&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>operator_image_path&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>图计算 operator 的镜像地址：在创建图空间时，允许指定对应的图计算镜像并交由 K8S 进行统一管理&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>internal_algorithm_image_url&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>图计算的算法镜像地址：在创建图空间时，允许指定图计算的算法镜像并交由 K8S 进行统一管理&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>max_graph_number&lt;/td>
+&lt;td>是&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&amp;gt; 0&lt;/td>
+&lt;td>图空间的图数目的上限&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>max_role_number&lt;/td>
+&lt;td>是&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&amp;gt; 0&lt;/td>
+&lt;td>图空间的角色数目的上限&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>auth&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>Boolean&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>true, false&lt;/td>
+&lt;td>图空间是否支持权限认证&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>configs&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>Map&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>其他配置信息&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;gs1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;description&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;1st graph space&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_graph_number&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">100&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;cpu_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1000&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;memory_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">8192&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;storage_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1000000&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_role_number&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">10&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;auth&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;configs&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status">Response Status&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">201&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body">Response Body&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;gs1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;description&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;1st graph space&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;cpu_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1000&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;memory_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">8192&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;storage_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1000000&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;compute_cpu_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;compute_memory_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;oltp_namespace&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph-server&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;olap_namespace&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph-server&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;storage_namespace&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph-server&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;operator_image_path&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1/hugegraph-registry/hugegraph-computer-operator:3.1.1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;internal_algorithm_image_url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1/hugegraph-registry/hugegraph-computer-algorithm:3.1.1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_graph_number&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">100&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_role_number&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">10&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;cpu_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;memory_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;storage_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph_number_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;role_number_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;auth&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="202-列出系统所有图空间">2.0.2 列出系统所有图空间&lt;/h4>
+&lt;h5 id="method--url-1">Method &amp;amp; Url&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphspaces
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-1">Response Status&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-1">Response Body&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graphSpaces&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;gs1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;DEFAULT&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="203-查看某个图空间">2.0.3 查看某个图空间&lt;/h4>
+&lt;h5 id="params">Params&lt;/h5>
+&lt;p>&lt;strong>路径参数说明：&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>graphspace: 图空间名称&lt;/li>
+&lt;/ul>
+&lt;h5 id="method--url-2">Method &amp;amp; Url&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphspaces/gs1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-2">Response Status&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-2">Response Body&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;gs1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;description&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;1st graph space&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;cpu_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1000&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;memory_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">8192&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;storage_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1000000&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;oltp_namespace&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph-server&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;olap_namespace&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph-server&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;storage_namespace&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph-server&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;operator_image_path&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1/hugegraph-registry/hugegraph-computer-operator:3.1.1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;internal_algorithm_image_url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1/hugegraph-registry/hugegraph-computer-algorithm:3.1.1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;compute_cpu_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;compute_memory_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_graph_number&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">100&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_role_number&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">10&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;cpu_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;memory_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;storage_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph_number_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;role_number_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;auth&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="204-更新某个图空间">2.0.4 更新某个图空间&lt;/h4>
+&lt;blockquote>
+&lt;p>注意：auth 鉴权配置，在创建图空间的过程一旦确定下来，不允许更新&lt;/p>
+&lt;/blockquote>
+&lt;h5 id="params-1">Params&lt;/h5>
+&lt;p>&lt;strong>路径参数说明：&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>graphspace: 图空间名称&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>请求体说明：&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>action: 标记本次操作为 Update 动作，取值固定为 &amp;ldquo;update&amp;rdquo;&lt;/li>
+&lt;li>update: 即将更新的值，下述参数都应置于 update 中&lt;/li>
+&lt;/ul>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>名称&lt;/th>
+&lt;th>是否必填&lt;/th>
+&lt;th>类型&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>取值范围&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>name&lt;/td>
+&lt;td>是&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>图空间名称&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>description&lt;/td>
+&lt;td>是&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>图空间的描述信息&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>cpu_limit&lt;/td>
+&lt;td>是&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&amp;gt; 0&lt;/td>
+&lt;td>OLTP HugeGraphServer 的 CPU 核数&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>memory_limit&lt;/td>
+&lt;td>是&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&amp;gt; 0&lt;/td>
+&lt;td>OLTP HugeGraphServer 的内存大小，单位 GB&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>storage_limit&lt;/td>
+&lt;td>是&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&amp;gt; 0&lt;/td>
+&lt;td>图空间的数据占据的磁盘空间上限&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>compute_cpu_limit&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>0&lt;/td>
+&lt;td>&amp;gt;= 0&lt;/td>
+&lt;td>针对图计算的额外资源配置，单位 cores。当该字段不配置或者配置为 0 时，会由 cpu_limit 字段的值进行覆盖&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>compute_memory_limit&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>0&lt;/td>
+&lt;td>&amp;gt;= 0&lt;/td>
+&lt;td>针对图计算的额外内存配置，单位 GB。当该字段不配置或者配置为 0 时，会由 memory_limit 字段的值进行覆盖&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>oltp_namespace&lt;/td>
+&lt;td>是&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>OLTP 的 k8s 命名空间&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>olap_namespace&lt;/td>
+&lt;td>是&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>OLAP 的 k8s 命名空间。当 olap_namespace 和 oltp_namespace 的值相同时，其配置的资源限额会进行合并&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>storage_namespace&lt;/td>
+&lt;td>是&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>存储的 k8s 命名空间&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>operator_image_path&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>图计算 operator 的镜像地址：在更新图空间时，允许指定对应的图计算镜像并交由 K8S 进行统一管理&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>internal_algorithm_image_url&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>String&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>图计算的算法镜像地址：在更新图空间时，允许指定图计算的算法镜像并交由 K8S 进行统一管理&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>max_graph_number&lt;/td>
+&lt;td>是&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&amp;gt; 0&lt;/td>
+&lt;td>图空间的图数目的上限&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>max_role_number&lt;/td>
+&lt;td>是&lt;/td>
+&lt;td>Int&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&amp;gt; 0&lt;/td>
+&lt;td>图空间的角色数目的上限&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h5 id="method--url-3">Method &amp;amp; Url&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphspaces/gs1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-1">Request Body&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;action&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;update&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;update&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;gs1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;description&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;1st graph space&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;cpu_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2000&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;memory_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">40960&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;storage_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2048&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;oltp_namespace&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph-server&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;olap_namespace&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph-server&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;operator_image_path&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1/hugegraph-registry/hugegraph-computer-operator:3.1.1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;internal_algorithm_image_url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1/hugegraph-registry/hugegraph-computer-algorithm:3.1.1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_graph_number&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1000&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_role_number&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">100&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-3">Response Status&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-3">Response Body&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;gs1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;description&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;1st graph space&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;cpu_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2000&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;memory_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">40960&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;storage_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2048&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;oltp_namespace&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph-server&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;olap_namespace&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph-server&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;storage_namespace&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph-server&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;operator_image_path&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1/hugegraph-registry/hugegraph-computer-operator:3.1.1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;internal_algorithm_image_url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1/hugegraph-registry/hugegraph-computer-algorithm:3.1.1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;compute_cpu_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;compute_memory_limit&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_graph_number&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1000&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_role_number&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">100&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;cpu_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;memory_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;storage_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph_number_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;role_number_used&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;auth&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="205-删除某个图空间">2.0.5 删除某个图空间&lt;/h4>
+&lt;h5 id="params-2">Params&lt;/h5>
+&lt;p>&lt;strong>路径参数说明：&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>graphspace: 图空间名称&lt;/li>
+&lt;/ul>
+&lt;h5 id="method--url-4">Method &amp;amp; Url&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphspaces/gs1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-4">Response Status&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">204&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>注意：删除图空间，会导致图空间的全部资源被释放。&lt;/p>
+&lt;/blockquote></description></item><item><title>Docs: HugeGraph Gremlin</title><link>/cn/docs/language/hugegraph-gremlin/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/language/hugegraph-gremlin/</guid><description>
 &lt;h3 id="概述">概述&lt;/h3>
 &lt;p>HugeGraph支持&lt;a href="https://tinkerpop.apache.org">Apache TinkerPop3&lt;/a>的图形遍历查询语言&lt;a href="https://tinkerpop.apache.org/gremlin.html">Gremlin&lt;/a>。 SQL是关系型数据库查询语言，而Gremlin是一种通用的图数据库查询语言，Gremlin可用于创建图的实体（Vertex和Edge）、修改实体内部属性、删除实体，也可执行图的查询操作。&lt;/p>
 &lt;p>Gremlin可用于创建图的实体（Vertex和Edge）、修改实体内部属性、删除实体，更主要的是可用于执行图的查询及分析操作。&lt;/p>
@@ -1764,9 +2198,9 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;h3 id="11-schema">1.1 Schema&lt;/h3>
 &lt;p>HugeGraph 提供单一接口获取某个图的全部 Schema 信息，包括：PropertyKey、VertexLabel、EdgeLabel 和 IndexLabel。&lt;/p>
 &lt;h5 id="method--url">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/{graph_name}/schema
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphspaces/DEFAULT/graphs/{graph_name}/schema
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>e.g: GET http://localhost:8080/graphs/hugegraph/schema
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>e.g: GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body">Response Body&lt;/h5>
@@ -3583,10 +4017,10 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/blockquote>
 &lt;h3 id="2-依赖">2 依赖&lt;/h3>
 &lt;h4 id="21-安装-java-11-jdk-11">2.1 安装 Java 11 (JDK 11)&lt;/h4>
-&lt;p>请优先考虑在 Java 11 的环境上启动 &lt;code>HugeGraph-Server&lt;/code>(在 1.5.0 版前，会保留对 Java 8 的基本兼容)&lt;/p>
+&lt;p>请考虑在 Java 11 的环境上启动 &lt;code>HugeGraph-Server&lt;/code>(在 1.5.0 版前，会保留对 Java 8 的基本兼容)&lt;/p>
 &lt;p>&lt;strong>在往下阅读之前先执行 &lt;code>java -version&lt;/code> 命令确认 jdk 版本&lt;/strong>&lt;/p>
 &lt;blockquote>
-&lt;p>注：使用 Java 8 启动 HugeGraph-Server 会失去一些&lt;strong>安全性&lt;/strong>的保障，也会降低性能相关指标 (请尽早升级/迁移)&lt;/p>
+&lt;p>注：使用 Java 8 启动 HugeGraph-Server 会失去一些&lt;strong>安全性&lt;/strong>的保障，也会降低性能相关指标 (请尽早升级/迁移，1.7.0 不再支持)&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="3-部署">3 部署&lt;/h3>
 &lt;p>有四种方式可以部署 HugeGraph-Server 组件：&lt;/p>
@@ -3706,16 +4140,24 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;p>分布式存储是 HugeGraph 1.5.0 之后推出的新特性，它基于 HugeGraph-PD 和 HugeGraph-Store 组件实现了分布式的数据存储和计算。&lt;/p>
 &lt;/blockquote>
 &lt;p>要使用分布式存储引擎，需要先部署 HugeGraph-PD 和 HugeGraph-Store，详见 &lt;a href="/cn/docs/quickstart/hugegraph/hugegraph-pd/">HugeGraph-PD 快速入门&lt;/a> 和 &lt;a href="/cn/docs/quickstart/hugegraph/hugegraph-hstore/">HugeGraph-Store 快速入门&lt;/a>。&lt;/p>
-&lt;p>确保 PD 和 Store 服务均已启动后，修改 HugeGraph-Server 的 &lt;code>hugegraph.properties&lt;/code> 配置：&lt;/p>
+&lt;p>确保 PD 和 Store 服务均已启动后&lt;/p>
+&lt;ol>
+&lt;li>修改 HugeGraph-Server 的 &lt;code>hugegraph.properties&lt;/code> 配置：&lt;/li>
+&lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>backend=hstore
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>serializer=binary
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>task.scheduler_type=distributed
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># PD 服务地址，多个 PD 地址用逗号分割，配置 PD 的 RPC 端口
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pd.peers=127.0.0.1:8686,127.0.0.1:8687,127.0.0.1:8688
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>修改 HugeGraph-Server 的 &lt;code>rest-server.properties&lt;/code> 配置：&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>usePD=true
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果配置多个 HugeGraph-Server 节点，需要为每个节点修改 &lt;code>rest-server.properties&lt;/code> 配置文件，例如：&lt;/p>
 &lt;p>节点 1（主节点）：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>restserver.url=http://127.0.0.1:8081
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>usePD=true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>restserver.url=http://127.0.0.1:8081
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gremlinserver.url=http://127.0.0.1:8181
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rpc.server_host=127.0.0.1
@@ -3724,7 +4166,8 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.id=server-1
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.role=master
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>节点 2（工作节点）：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>restserver.url=http://127.0.0.1:8082
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>usePD=true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>restserver.url=http://127.0.0.1:8082
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gremlinserver.url=http://127.0.0.1:8182
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rpc.server_host=127.0.0.1
@@ -5239,7 +5682,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;h3 id="4-简单示例">4 简单示例&lt;/h3>
 &lt;p>简单示例见&lt;a href="/cn/docs/quickstart/client/hugegraph-client">HugeGraph-Client&lt;/a>&lt;/p></description></item><item><title>Docs: PropertyKey API</title><link>/cn/docs/clients/restful-api/propertykey/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/restful-api/propertykey/</guid><description>
 &lt;h3 id="12-propertykey">1.2 PropertyKey&lt;/h3>
-&lt;p>Params说明：&lt;/p>
+&lt;p>Params 说明：&lt;/p>
 &lt;ul>
 &lt;li>name：属性类型名称，必填&lt;/li>
 &lt;li>data_type：属性类型数据类型，包括：bool、byte、int、long、float、double、text、date、uuid、blob，默认 &lt;code>text&lt;/code> 类型 (代表 string 字符串类型)&lt;/li>
@@ -5247,14 +5690,14 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/ul>
 &lt;p>请求体字段说明：&lt;/p>
 &lt;ul>
-&lt;li>id：属性类型id值&lt;/li>
+&lt;li>id：属性类型 id 值&lt;/li>
 &lt;li>properties：属性的属性，对于属性而言，此项为空&lt;/li>
-&lt;li>user_data：设置属性类型的通用信息，比如可设置age属性的取值范围，最小为0，最大为100；目前此项不做任何校验，只为后期拓展提供预留入口&lt;/li>
+&lt;li>user_data：设置属性类型的通用信息，比如可设置 age 属性的取值范围，最小为 0，最大为 100；目前此项不做任何校验，只为后期拓展提供预留入口&lt;/li>
 &lt;/ul>
 &lt;h4 id="121-创建一个-propertykey">1.2.1 创建一个 PropertyKey&lt;/h4>
 &lt;h5 id="method--url">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphs/hugegraph/schema/propertykeys
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body">Request Body&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-http" data-lang="http">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertykeys
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body">Request Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;data_type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;INT&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -5285,8 +5728,8 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;li>action: 表示当前行为是添加还是移除，取值为&lt;code>append&lt;/code>（添加）和&lt;code>eliminate&lt;/code>（移除）&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-1">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/schema/propertykeys/age?action=append
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-1">Request Body&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-http" data-lang="http">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertykeys/age?action=append
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-1">Request Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user_data&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
@@ -5317,7 +5760,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="123-获取所有的-propertykey">1.2.3 获取所有的 PropertyKey&lt;/h4>
 &lt;h5 id="method--url-2">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/schema/propertykeys
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertykeys
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-2">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-2">Response Body&lt;/h5>
@@ -5381,10 +5824,10 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="124-根据name获取propertykey">1.2.4 根据name获取PropertyKey&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="124-根据-name-获取-propertykey">1.2.4 根据 name 获取 PropertyKey&lt;/h4>
 &lt;h5 id="method--url-3">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中，&lt;code>age&lt;/code>为要获取的 PropertyKey 的名称&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-http" data-lang="http">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertykeys/age
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中，&lt;code>age&lt;/code>为要获取的 PropertyKey 的名称&lt;/p>
 &lt;h5 id="response-status-3">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-3">Response Body&lt;/h5>
@@ -5405,8 +5848,8 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="125-根据-name-删除-propertykey">1.2.5 根据 name 删除 PropertyKey&lt;/h4>
 &lt;h5 id="method--url-4">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphs/hugegraph/schema/propertykeys/age
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中，&lt;code>age&lt;/code>为要删除的 PropertyKey 的名称&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-http" data-lang="http">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertykeys/age
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中，&lt;code>age&lt;/code>为要删除的 PropertyKey 的名称&lt;/p>
 &lt;h5 id="response-status-4">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">202&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-4">Response Body&lt;/h5>
@@ -9409,22 +9852,22 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-commons/releases">Commons Release Notes&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Docs: VertexLabel API</title><link>/cn/docs/clients/restful-api/vertexlabel/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/restful-api/vertexlabel/</guid><description>
 &lt;h3 id="13-vertexlabel">1.3 VertexLabel&lt;/h3>
-&lt;p>假设已经创建好了1.1.3中列出来的 PropertyKeys&lt;/p>
-&lt;p>Params说明&lt;/p>
+&lt;p>假设已经创建好了 1.1.3 中列出来的 PropertyKeys&lt;/p>
+&lt;p>Params 说明&lt;/p>
 &lt;ul>
-&lt;li>id：顶点类型id值&lt;/li>
+&lt;li>id：顶点类型 id 值&lt;/li>
 &lt;li>name：顶点类型名称，必填&lt;/li>
-&lt;li>id_strategy: 顶点类型的ID策略，主键ID、自动生成、自定义字符串、自定义数字、自定义UUID，默认主键ID&lt;/li>
+&lt;li>id_strategy: 顶点类型的 ID 策略，主键 ID、自动生成、自定义字符串、自定义数字、自定义 UUID，默认主键 ID&lt;/li>
 &lt;li>properties: 顶点类型关联的属性类型&lt;/li>
-&lt;li>primary_keys: 主键属性，当ID策略为PRIMARY_KEY时必须有值，其他ID策略时必须为空；&lt;/li>
-&lt;li>enable_label_index： 是否开启类型索引，默认关闭&lt;/li>
-&lt;li>index_names：顶点类型创建的索引，详情见3.4&lt;/li>
+&lt;li>primary_keys: 主键属性，当 ID 策略为 PRIMARY_KEY 时必须有值，其他 ID 策略时必须为空；&lt;/li>
+&lt;li>enable_label_index：是否开启类型索引，默认关闭&lt;/li>
+&lt;li>index_names：顶点类型创建的索引，详情见 3.4&lt;/li>
 &lt;li>nullable_keys：可为空的属性&lt;/li>
 &lt;li>user_data：设置顶点类型的通用信息，作用同属性类型&lt;/li>
 &lt;/ul>
-&lt;h4 id="131-创建一个vertexlabel">1.3.1 创建一个VertexLabel&lt;/h4>
+&lt;h4 id="131-创建一个-vertexlabel">1.3.1 创建一个 VertexLabel&lt;/h4>
 &lt;h5 id="method--url">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphs/hugegraph/schema/vertexlabels
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/vertexlabels
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body">Request Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -9492,13 +9935,13 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;ttl_start_time&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;createdTime&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;enable_label_index&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="132-为已存在的vertexlabel添加properties或userdata或者移除userdata目前不支持移除properties">1.3.2 为已存在的VertexLabel添加properties或userdata，或者移除userdata（目前不支持移除properties）&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="132-为已存在的-vertexlabel-添加-properties-或-userdata或者移除-userdata目前不支持移除-properties">1.3.2 为已存在的 VertexLabel 添加 properties 或 userdata，或者移除 userdata（目前不支持移除 properties）&lt;/h4>
 &lt;h5 id="params">Params&lt;/h5>
 &lt;ul>
 &lt;li>action: 表示当前行为是添加还是移除，取值为&lt;code>append&lt;/code>（添加）和&lt;code>eliminate&lt;/code>（移除）&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-1">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person?action=append
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/vertexlabels/person?action=append
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-1">Request Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -9535,9 +9978,9 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;super&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;animal&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="133-获取所有的vertexlabel">1.3.3 获取所有的VertexLabel&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="133-获取所有的-vertexlabel">1.3.3 获取所有的 VertexLabel&lt;/h4>
 &lt;h5 id="method--url-2">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/vertexlabels
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-2">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-2">Response Body&lt;/h5>
@@ -9587,9 +10030,9 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="134-根据name获取vertexlabel">1.3.4 根据name获取VertexLabel&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="134-根据-name-获取-vertexlabel">1.3.4 根据 name 获取 VertexLabel&lt;/h4>
 &lt;h5 id="method--url-3">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/vertexlabels/person
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-3">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-3">Response Body&lt;/h5>
@@ -9615,10 +10058,10 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;super&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;animal&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="135-根据name删除vertexlabel">1.3.5 根据name删除VertexLabel&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="135-根据-name-删除-vertexlabel">1.3.5 根据 name 删除 VertexLabel&lt;/h4>
 &lt;p>删除 VertexLabel 会导致删除对应的顶点以及相关的索引数据，会产生一个异步任务&lt;/p>
 &lt;h5 id="method--url-4">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/vertexlabels/person
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-4">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">202&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-4">Response Body&lt;/h5>
@@ -9627,7 +10070,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注：&lt;/p>
 &lt;blockquote>
-&lt;p>可以通过&lt;code>GET http://localhost:8080/graphs/hugegraph/tasks/1&lt;/code>（其中&amp;quot;1&amp;quot;是task_id）来查询异步任务的执行状态，更多&lt;a href="../task">异步任务RESTful API&lt;/a>&lt;/p>
+&lt;p>可以通过&lt;code>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks/1&lt;/code>（其中&amp;quot;1&amp;quot;是 task_id）来查询异步任务的执行状态，更多&lt;a href="../task">异步任务 RESTful API&lt;/a>&lt;/p>
 &lt;/blockquote></description></item><item><title>Docs: HugeGraph-Tools Quick Start</title><link>/cn/docs/quickstart/toolchain/hugegraph-tools/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/toolchain/hugegraph-tools/</guid><description>
 &lt;h3 id="1-hugegraph-tools概述">1 HugeGraph-Tools概述&lt;/h3>
 &lt;p>HugeGraph-Tools 是 HugeGraph 的自动化部署、管理和备份/还原组件。&lt;/p>
@@ -10680,21 +11123,21 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">10.&lt;/span> ....
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: EdgeLabel API</title><link>/cn/docs/clients/restful-api/edgelabel/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/restful-api/edgelabel/</guid><description>
 &lt;h3 id="14-edgelabel">1.4 EdgeLabel&lt;/h3>
-&lt;p>假设已经创建好了1.2.3中的 PropertyKeys 和 1.3.3中的 VertexLabels&lt;/p>
-&lt;p>Params说明&lt;/p>
+&lt;p>假设已经创建好了 1.2.3 中的 PropertyKeys 和 1.3.3 中的 VertexLabels&lt;/p>
+&lt;p>Params 说明&lt;/p>
 &lt;ul>
 &lt;li>name：顶点类型名称，必填&lt;/li>
 &lt;li>source_label: 源顶点类型的名称，必填&lt;/li>
 &lt;li>target_label: 目标顶点类型的名称，必填&lt;/li>
-&lt;li>frequency：两个点之间是否可以有多条边，可以取值SINGLE和MULTIPLE，非必填，默认值SINGLE&lt;/li>
+&lt;li>frequency：两个点之间是否可以有多条边，可以取值 SINGLE 和 MULTIPLE，非必填，默认值 SINGLE&lt;/li>
 &lt;li>properties: 边类型关联的属性类型，选填&lt;/li>
 &lt;li>sort_keys: 当允许关联多次时，指定区分键属性列表&lt;/li>
 &lt;li>nullable_keys：可为空的属性，选填，默认可为空&lt;/li>
-&lt;li>enable_label_index： 是否开启类型索引，默认关闭&lt;/li>
+&lt;li>enable_label_index：是否开启类型索引，默认关闭&lt;/li>
 &lt;/ul>
-&lt;h4 id="141-创建一个edgelabel">1.4.1 创建一个EdgeLabel&lt;/h4>
+&lt;h4 id="141-创建一个-edgelabel">1.4.1 创建一个 EdgeLabel&lt;/h4>
 &lt;h5 id="method--url">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphs/hugegraph/schema/edgelabels
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/edgelabels
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body">Request Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;created&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -10772,13 +11215,13 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;ttl_start_time&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;createdTime&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user_data&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="142-为已存在的edgelabel添加properties或userdata或者移除userdata目前不支持移除properties">1.4.2 为已存在的EdgeLabel添加properties或userdata，或者移除userdata（目前不支持移除properties）&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="142-为已存在的-edgelabel-添加-properties-或-userdata或者移除-userdata目前不支持移除-properties">1.4.2 为已存在的 EdgeLabel 添加 properties 或 userdata，或者移除 userdata（目前不支持移除 properties）&lt;/h4>
 &lt;h5 id="params">Params&lt;/h5>
 &lt;ul>
 &lt;li>action: 表示当前行为是添加还是移除，取值为&lt;code>append&lt;/code>（添加）和&lt;code>eliminate&lt;/code>（移除）&lt;/li>
 &lt;/ul>
 &lt;h5 id="method--url-1">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/schema/edgelabels/created?action=append
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/edgelabels/created?action=append
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body-1">Request Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;created&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -10812,9 +11255,9 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;enable_label_index&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user_data&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="143-获取所有的edgelabel">1.4.3 获取所有的EdgeLabel&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="143-获取所有的-edgelabel">1.4.3 获取所有的 EdgeLabel&lt;/h4>
 &lt;h5 id="method--url-2">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/schema/edgelabels
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/edgelabels
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-2">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-2">Response Body&lt;/h5>
@@ -10861,9 +11304,9 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="144-根据name获取edgelabel">1.4.4 根据name获取EdgeLabel&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="144-根据-name-获取-edgelabel">1.4.4 根据 name 获取 EdgeLabel&lt;/h4>
 &lt;h5 id="method--url-3">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/edgelabels/created
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-3">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-3">Response Body&lt;/h5>
@@ -10889,10 +11332,10 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;enable_label_index&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user_data&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="145-根据name删除edgelabel">1.4.5 根据name删除EdgeLabel&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="145-根据-name-删除-edgelabel">1.4.5 根据 name 删除 EdgeLabel&lt;/h4>
 &lt;p>删除 EdgeLabel 会导致删除对应的边以及相关的索引数据，会产生一个异步任务&lt;/p>
 &lt;h5 id="method--url-4">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphs/hugegraph/schema/edgelabels/created
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/edgelabels/created
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-4">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">202&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-4">Response Body&lt;/h5>
@@ -10901,7 +11344,7 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注：&lt;/p>
 &lt;blockquote>
-&lt;p>可以通过&lt;code>GET http://localhost:8080/graphs/hugegraph/tasks/1&lt;/code>（其中&amp;quot;1&amp;quot;是task_id）来查询异步任务的执行状态，更多&lt;a href="../task">异步任务RESTful API&lt;/a>&lt;/p>
+&lt;p>可以通过&lt;code>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks/1&lt;/code>（其中&amp;quot;1&amp;quot;是 task_id）来查询异步任务的执行状态，更多&lt;a href="../task">异步任务 RESTful API&lt;/a>&lt;/p>
 &lt;/blockquote></description></item><item><title>Docs: GraphRAG UI Details</title><link>/cn/docs/quickstart/hugegraph-ai/quick_start/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-ai/quick_start/</guid><description>
 &lt;blockquote>
 &lt;p>接续&lt;a href="../">主文档&lt;/a>介绍基础 UI 功能及详情，欢迎随时更新和改进，谢谢&lt;/p>
@@ -12098,10 +12541,10 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;li>&lt;a href="https://github.com/apache/hugegraph/issues/1732">https://github.com/apache/hugegraph/issues/1732&lt;/a> (HugeGraph ICLA related issue)&lt;/li>
 &lt;/ol></description></item><item><title>Docs: IndexLabel API</title><link>/cn/docs/clients/restful-api/indexlabel/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/restful-api/indexlabel/</guid><description>
 &lt;h3 id="15-indexlabel">1.5 IndexLabel&lt;/h3>
-&lt;p>假设已经创建好了1.1.3中的 PropertyKeys 、1.2.3中的 VertexLabels 以及 1.3.3中的 EdgeLabels&lt;/p>
-&lt;h4 id="151-创建一个indexlabel">1.5.1 创建一个IndexLabel&lt;/h4>
+&lt;p>假设已经创建好了 1.1.3 中的 PropertyKeys、1.2.3 中的 VertexLabels 以及 1.3.3 中的 EdgeLabels&lt;/p>
+&lt;h4 id="151-创建一个-indexlabel">1.5.1 创建一个 IndexLabel&lt;/h4>
 &lt;h5 id="method--url">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphs/hugegraph/schema/indexlabels
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/indexlabels
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="request-body">Request Body&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;personByCity&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
@@ -12128,9 +12571,9 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">},&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;task_id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="152-获取所有的indexlabel">1.5.2 获取所有的IndexLabel&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="152-获取所有的-indexlabel">1.5.2 获取所有的 IndexLabel&lt;/h4>
 &lt;h5 id="method--url-1">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/schema/indexlabels
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/indexlabels
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-1">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-1">Response Body&lt;/h5>
@@ -12179,9 +12622,9 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="153-根据name获取indexlabel">1.5.3 根据name获取IndexLabel&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="153-根据-name-获取-indexlabel">1.5.3 根据 name 获取 IndexLabel&lt;/h4>
 &lt;h5 id="method--url-2">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/indexlabels/personByCity
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-2">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">200&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-2">Response Body&lt;/h5>
@@ -12195,10 +12638,10 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">],&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;index_type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;SECONDARY&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="154-根据name删除indexlabel">1.5.4 根据name删除IndexLabel&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="154-根据-name-删除-indexlabel">1.5.4 根据 name 删除 IndexLabel&lt;/h4>
 &lt;p>删除 IndexLabel 会导致删除相关的索引数据，会产生一个异步任务&lt;/p>
 &lt;h5 id="method--url-3">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphs/hugegraph/schema/indexlabels/personByCity
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/indexlabels/personByCity
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-3">Response Status&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">202&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-3">Response Body&lt;/h5>
@@ -12207,7 +12650,7 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注：&lt;/p>
 &lt;blockquote>
-&lt;p>可以通过&lt;code>GET http://localhost:8080/graphs/hugegraph/tasks/1&lt;/code>（其中&amp;quot;1&amp;quot;是task_id）来查询异步任务的执行状态，更多&lt;a href="../task">异步任务RESTful API&lt;/a>&lt;/p>
+&lt;p>可以通过&lt;code>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks/1&lt;/code>（其中&amp;quot;1&amp;quot;是 task_id）来查询异步任务的执行状态，更多&lt;a href="../task">异步任务 RESTful API&lt;/a>&lt;/p>
 &lt;/blockquote></description></item><item><title>Docs: HugeGraph 1.5.0 Release Notes</title><link>/cn/docs/changelog/hugegraph-1.5.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/changelog/hugegraph-1.5.0-release-notes/</guid><description>
 &lt;blockquote>
 &lt;p>WIP: This doc is under construction, please wait for the final version (BETA)&lt;/p>
@@ -13380,44 +13823,4 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;p>请求头中需要指定&lt;code>Content-Type:application/json&lt;/code>&lt;/p>
 &lt;/li>
 &lt;/ul>
-&lt;p>其他问题可以在对应项目的 issue 区搜索，例如 &lt;a href="https://github.com/apache/hugegraph/issues">Server-Issues&lt;/a> / &lt;a href="https://github.com/apache/hugegraph-toolchain/issues">Loader Issues&lt;/a>&lt;/p></description></item><item><title>Docs: Rebuild API</title><link>/cn/docs/clients/restful-api/rebuild/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/restful-api/rebuild/</guid><description>
-&lt;h3 id="16-rebuild">1.6 Rebuild&lt;/h3>
-&lt;h4 id="161-重建indexlabel">1.6.1 重建IndexLabel&lt;/h4>
-&lt;h5 id="method--url">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/indexlabels/personByCity
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">202&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body">Response Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;task_id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注：&lt;/p>
-&lt;blockquote>
-&lt;p>可以通过&lt;code>GET http://localhost:8080/graphs/hugegraph/tasks/1&lt;/code>（其中&amp;quot;1&amp;quot;是task_id）来查询异步任务的执行状态，更多&lt;a href="../task">异步任务RESTful API&lt;/a>&lt;/p>
-&lt;/blockquote>
-&lt;h4 id="162-vertexlabel对应的全部索引重建">1.6.2 VertexLabel对应的全部索引重建&lt;/h4>
-&lt;h5 id="method--url-1">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/vertexlabels/person
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-1">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">202&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-1">Response Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;task_id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注：&lt;/p>
-&lt;blockquote>
-&lt;p>可以通过&lt;code>GET http://localhost:8080/graphs/hugegraph/tasks/2&lt;/code>（其中&amp;quot;2&amp;quot;是task_id）来查询异步任务的执行状态，更多&lt;a href="../task">异步任务RESTful API&lt;/a>&lt;/p>
-&lt;/blockquote>
-&lt;h4 id="163-edgelabel对应的全部索引重建">1.6.3 EdgeLabel对应的全部索引重建&lt;/h4>
-&lt;h5 id="method--url-2">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphs/hugegraph/jobs/rebuild/edgelabels/created
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-2">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">202&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-2">Response Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;task_id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注：&lt;/p>
-&lt;blockquote>
-&lt;p>可以通过&lt;code>GET http://localhost:8080/graphs/hugegraph/tasks/3&lt;/code>（其中&amp;quot;3&amp;quot;是task_id）来查询异步任务的执行状态，更多&lt;a href="../task">异步任务RESTful API&lt;/a>&lt;/p>
-&lt;/blockquote></description></item></channel></rss>
+&lt;p>其他问题可以在对应项目的 issue 区搜索，例如 &lt;a href="https://github.com/apache/hugegraph/issues">Server-Issues&lt;/a> / &lt;a href="https://github.com/apache/hugegraph-toolchain/issues">Loader Issues&lt;/a>&lt;/p></description></item></channel></rss>

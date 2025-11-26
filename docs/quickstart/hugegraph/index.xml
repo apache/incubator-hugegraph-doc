@@ -27,12 +27,12 @@ and configure by yourself.&lt;/p>
 &lt;p>&lt;strong>Note:&lt;/strong> If it&amp;rsquo;s exposed to the public network, &lt;strong>must enable&lt;/strong> &lt;a href="/docs/config/config-authentication/">Auth authentication&lt;/a> to ensure safety (so as the legacy version).&lt;/p>
 &lt;h4 id="31-use-docker-container-convenient-for-testdev">3.1 Use Docker container (Convenient for Test/Dev)&lt;/h4>
 &lt;!-- 3.1 is linked by another place. if change 3.1's title, please check -->
-&lt;p>You can refer to &lt;a href="https://hub.docker.com/r/hugegraph/hugegraph">Docker deployment guide&lt;/a>.&lt;/p>
-&lt;p>We can use &lt;code>docker run -itd --name=graph -e PASSWORD=xxx -p 8080:8080 hugegraph/hugegraph:1.5.0&lt;/code> to quickly start an inner &lt;code>HugeGraph server&lt;/code> with &lt;code>RocksDB&lt;/code> in background.&lt;/p>
+&lt;p>You can refer to the &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/docker/README.md">Docker deployment guide&lt;/a>.&lt;/p>
+&lt;p>We can use &lt;code>docker run -itd --name=server -p 8080:8080 -e PASSWORD=xxx hugegraph/hugegraph:1.5.0&lt;/code> to quickly start a &lt;code>HugeGraph Server&lt;/code> with a built-in &lt;code>RocksDB&lt;/code> backend.&lt;/p>
 &lt;p>Optional:&lt;/p>
 &lt;ol>
 &lt;li>use &lt;code>docker exec -it graph bash&lt;/code> to enter the container to do some operations.&lt;/li>
-&lt;li>use &lt;code>docker run -itd --name=graph -p 8080:8080 -e PRELOAD=&amp;quot;true&amp;quot; hugegraph/hugegraph:1.5.0&lt;/code> to start with a &lt;strong>built-in&lt;/strong> example graph. We can use &lt;code>RESTful API&lt;/code> to verify the result. The detailed step can refer to &lt;a href="#519-create-an-example-graph-when-startup">5.1.9&lt;/a>&lt;/li>
+&lt;li>use &lt;code>docker run -itd --name=graph -p 8080:8080 -e PRELOAD=&amp;quot;true&amp;quot; hugegraph/hugegraph:1.5.0&lt;/code> to start with a &lt;strong>built-in&lt;/strong> example graph. We can use &lt;code>RESTful API&lt;/code> to verify the result. The detailed step can refer to &lt;a href="#518-create-an-example-graph-when-startup">5.1.8&lt;/a>&lt;/li>
 &lt;li>use &lt;code>-e PASSWORD=xxx&lt;/code> to enable auth mode and set the password for admin. You can find more details from &lt;a href="/docs/config/config-authentication#use-docker-to-enable-authentication-mode">Config Authentication&lt;/a>&lt;/li>
 &lt;/ol>
 &lt;p>If you use docker desktop, you can set the option like:&lt;/p>
@@ -59,7 +59,7 @@ and configure by yourself.&lt;/p>
 &lt;p>The docker image of the hugegraph is a convenient release to start it quickly, but not &lt;strong>official distribution&lt;/strong> artifacts. You can find more details from &lt;a href="https://infra.apache.org/release-distribution.html#dockerhub">ASF Release Distribution Policy&lt;/a>.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>Recommend to use &lt;code>release tag&lt;/code>(like &lt;code>1.5.0&lt;/code>/&lt;code>1.5.0&lt;/code>) for the stable version. Use &lt;code>latest&lt;/code> tag to experience the newest functions in development.&lt;/p>
+&lt;p>Recommend to use &lt;code>release tag&lt;/code> (like &lt;code>1.5.0&lt;/code>/&lt;code>1.x.0&lt;/code>) for the stable version. Use &lt;code>latest&lt;/code> tag to experience the newest functions in development.&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;/blockquote>
@@ -73,8 +73,8 @@ and configure by yourself.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>shasum -a &lt;span style="color:#0000cf;font-weight:bold">512&lt;/span> apache-hugegraph-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl https://downloads.apache.org/incubator/hugegraph/&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>/apache-hugegraph-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz.sha512
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="33-source-code-compilation">3.3 Source code compilation&lt;/h4>
-&lt;p>Please ensure that the wget command is installed before compiling the source code&lt;/p>
-&lt;p>We could get HugeGraph &lt;strong>source code&lt;/strong> in 2 ways: (So as the other HugeGraph repos/modules)&lt;/p>
+&lt;p>Please ensure that the wget/curl commands are installed before compiling the source code&lt;/p>
+&lt;p>Download HugeGraph &lt;strong>source code&lt;/strong> in either of the following 2 ways (so as the other HugeGraph repos/modules):&lt;/p>
 &lt;ul>
 &lt;li>download the stable/release version from the ASF site&lt;/li>
 &lt;li>clone the unstable/latest version by GitBox(ASF) or GitHub&lt;/li>
@@ -145,7 +145,7 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;p>If you need to access HugeGraphServer externally, please modify the &lt;code>restserver.url&lt;/code> configuration item of &lt;code>rest-server.properties&lt;/code>
 （default is &lt;code>http://127.0.0.1:8080&lt;/code>）, change to machine name or IP address.&lt;/p>
 &lt;p>Since the configuration (hugegraph.properties) and startup steps required by various backends are slightly different, the following will introduce the configuration and startup of each backend one by one.&lt;/p>
-&lt;p>Follow the &lt;a href="/docs/config/config-authentication/">Server Authentication Configuration&lt;/a> before you start Server later.&lt;/p>
+&lt;p>&lt;strong>Note:&lt;/strong> Configure &lt;a href="/docs/config/config-authentication/">Server Authentication&lt;/a> before starting HugeGraphServer if you need Auth mode (especially for production or public network environments).&lt;/p>
 &lt;h5 id="511-distributed-storage-hstore">5.1.1 Distributed Storage (HStore)&lt;/h5>
 &lt;details>
 &lt;summary>Click to expand/collapse Distributed Storage configuration and startup method&lt;/summary>
@@ -160,9 +160,12 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># PD service address, multiple PD addresses are separated by commas, configure PD&amp;#39;s RPC port
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pd.peers=127.0.0.1:8686,127.0.0.1:8687,127.0.0.1:8688
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then enable PD discovery in &lt;code>rest-server.properties&lt;/code> (required for every HugeGraph-Server node):&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>usePD=true
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If configuring multiple HugeGraph-Server nodes, you need to modify the &lt;code>rest-server.properties&lt;/code> configuration file for each node, for example:&lt;/p>
 &lt;p>Node 1 (Master node):&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>restserver.url=http://127.0.0.1:8081
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>usePD=true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>restserver.url=http://127.0.0.1:8081
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gremlinserver.url=http://127.0.0.1:8181
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rpc.server_host=127.0.0.1
@@ -171,7 +174,8 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.id=server-1
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.role=master
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Node 2 (Worker node):&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>restserver.url=http://127.0.0.1:8082
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>usePD=true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>restserver.url=http://127.0.0.1:8082
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gremlinserver.url=http://127.0.0.1:8182
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rpc.server_host=127.0.0.1
