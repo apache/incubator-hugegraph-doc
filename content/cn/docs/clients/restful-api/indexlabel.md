@@ -12,7 +12,7 @@ weight: 5
 
 ##### Method & Url
 
-```
+```bash
 POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/indexlabels
 ```
 

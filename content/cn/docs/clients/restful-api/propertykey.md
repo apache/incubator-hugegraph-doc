@@ -23,7 +23,7 @@ Params 说明：
 
 ##### Method & Url
 
-```
+```http request
 POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertykeys
 ```
 
@@ -72,7 +72,7 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertyk
 
 ##### Method & Url
 
-```
+```http request
 PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertykeys/age?action=append
 ```
 
@@ -200,7 +200,7 @@ GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertyke
 
 ##### Method & Url
 
-```
+```http request
 GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertykeys/age
 ```
 
@@ -236,7 +236,7 @@ GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertyke
 
 ##### Method & Url
 
-```
+```http request
 DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/propertykeys/age
 ```
 

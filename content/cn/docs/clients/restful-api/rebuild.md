@@ -36,7 +36,7 @@ PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/jobs/rebuild/inde
 
 ##### Method & Url
 
-```
+```http request
 PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/jobs/rebuild/vertexlabels/person
 ```
 
@@ -62,7 +62,7 @@ PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/jobs/rebuild/vert
 
 ##### Method & Url
 
-```
+```http request
 PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/jobs/rebuild/edgelabels/created
 ```
 
