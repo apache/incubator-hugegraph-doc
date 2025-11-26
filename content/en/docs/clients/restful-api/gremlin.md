@@ -188,7 +188,7 @@ Note:
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/jobs/gremlin
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/jobs/gremlin
 ```
 
 **Querying vertices**
@@ -224,7 +224,7 @@ Note:
 
 Note:
 
-> You can query the execution status of an asynchronous task by using `GET http://localhost:8080/graphs/hugegraph/tasks/1` (where "1" is the task_id). For more information, refer to the [Asynchronous Task RESTful API](../task).
+> You can query the execution status of an asynchronous task by using `GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks/1` (where "1" is the task_id). For more information, refer to the [Asynchronous Task RESTful API](../task).
 
 **Querying edges**
 
@@ -255,4 +255,4 @@ Note:
 
 Note:
 
-> You can query the execution status of an asynchronous task by using `GET http://localhost:8080/graphs/hugegraph/tasks/2` (where "2" is the task_id). For more information, refer to the [Asynchronous Task RESTful API](../task).
+> You can query the execution status of an asynchronous task by using `GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks/2` (where "2" is the task_id). For more information, refer to the [Asynchronous Task RESTful API](../task).

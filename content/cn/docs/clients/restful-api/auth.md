@@ -22,6 +22,7 @@ city: Beijing})
 
 ##### 接口说明：
 用户认证与权限控制接口包括 5 类：UserAPI、GroupAPI、TargetAPI、BelongAPI、AccessAPI。
+**注意**: 1.5.0 及之前，group/target 等 id 的格式类似 -69:grant，1.7.0 及之后，id 和 name 一致，如 admin [HugeGraph 1.5.x RESTful API](https://github.com/apache/incubator-hugegraph-doc/tree/release-1.5.0)
 
 ### 10.2 用户（User）API
 用户接口包括：创建用户，删除用户，修改用户，和查询用户相关信息接口。
@@ -52,7 +53,7 @@ city: Beijing})
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/auth/users
+POST http://localhost:8080/graphspaces/DEFAULT/auth/users
 ```
 
 ##### Response Status
@@ -71,7 +72,7 @@ POST http://localhost:8080/graphs/hugegraph/auth/users
     "user_name": "boss",
     "user_creator": "admin",
     "user_phone": "182****9088",
-    "id": "-63:boss",
+    "id": "boss",
     "user_create": "2020-11-17 14:31:07.833"
 }
 ```
@@ -86,7 +87,7 @@ POST http://localhost:8080/graphs/hugegraph/auth/users
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/auth/users/-63:test
+DELETE http://localhost:8080/graphspaces/DEFAULT/auth/users/test
 ```
 
 ##### Response Status
@@ -110,7 +111,7 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/users/-63:test
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/auth/users/-63:test
+PUT http://localhost:8080/graphspaces/DEFAULT/auth/users/test
 ```
 
 ##### Request Body
@@ -138,7 +139,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/users/-63:test
     "user_name": "test",
     "user_creator": "admin",
     "user_phone": "183****9266",
-    "id": "-63:test",
+    "id": "test",
     "user_create": "2020-11-12 10:27:13.601"
 }
 ```
@@ -153,7 +154,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/users/-63:test
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/auth/users
+GET http://localhost:8080/graphspaces/DEFAULT/auth/users
 ```
 
 ##### Response Status
@@ -172,7 +173,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/users
             "user_update": "2020-11-11 11:41:12.254",
             "user_name": "admin",
             "user_creator": "system",
-            "id": "-63:admin",
+          "id": "admin",
             "user_create": "2020-11-11 11:41:12.254"
         }
     ]
@@ -188,7 +189,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/users
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/auth/users/-63:admin
+GET http://localhost:8080/graphspaces/DEFAULT/auth/users/admin
 ```
 
 ##### Response Status
@@ -207,7 +208,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/users/-63:admin
             "user_update": "2020-11-11 11:41:12.254",
             "user_name": "admin",
             "user_creator": "system",
-            "id": "-63:admin",
+          "id": "admin",
             "user_create": "2020-11-11 11:41:12.254"
         }
     ]
@@ -219,7 +220,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/users/-63:admin
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/auth/users/-63:boss/role
+GET http://localhost:8080/graphspaces/DEFAULT/auth/users/boss/role
 ```
 
 ##### Response Status
@@ -270,7 +271,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/users/-63:boss/role
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/auth/groups
+POST http://localhost:8080/graphspaces/DEFAULT/auth/groups
 ```
 
 ##### Response Status
@@ -302,7 +303,7 @@ POST http://localhost:8080/graphs/hugegraph/auth/groups
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
+DELETE http://localhost:8080/graphspaces/DEFAULT/auth/groups/-69:grant
 ```
 
 ##### Response Status
@@ -326,7 +327,7 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
+PUT http://localhost:8080/graphspaces/DEFAULT/auth/groups/-69:grant
 ```
 
 ##### Request Body
@@ -366,7 +367,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/groups/-69:grant
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/auth/groups
+GET http://localhost:8080/graphspaces/DEFAULT/auth/groups
 ```
 
 ##### Response Status
@@ -401,7 +402,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/groups
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/auth/groups/-69:all
+GET http://localhost:8080/graphspaces/DEFAULT/auth/groups/-69:all
 ```
 
 ##### Response Status
@@ -464,7 +465,7 @@ target_resources 可以包括多个 target_resource，以列表的形式存储�
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/auth/targets
+POST http://localhost:8080/graphspaces/DEFAULT/auth/targets
 ```
 
 ##### Response Status
@@ -504,7 +505,7 @@ POST http://localhost:8080/graphs/hugegraph/auth/targets
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
+DELETE http://localhost:8080/graphspaces/DEFAULT/auth/targets/-77:gremlin
 ```
 
 ##### Response Status
@@ -529,7 +530,7 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
+PUT http://localhost:8080/graphspaces/DEFAULT/auth/targets/-77:gremlin
 ```
 
 ##### Request Body
@@ -583,7 +584,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/targets/-77:gremlin
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/auth/targets
+GET http://localhost:8080/graphspaces/DEFAULT/auth/targets
 ```
 
 ##### Response Status
@@ -642,7 +643,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/targets
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/auth/targets/-77:grant
+GET http://localhost:8080/graphspaces/DEFAULT/auth/targets/-77:grant
 ```
 
 ##### Response Status
@@ -688,7 +689,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/targets/-77:grant
 
 ```json
 {
-    "user": "-63:boss",
+  "user": "boss",
     "group": "-69:all"
 }
 ```
@@ -697,7 +698,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/targets/-77:grant
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/auth/belongs
+POST http://localhost:8080/graphspaces/DEFAULT/auth/belongs
 ```
 
 ##### Response Status
@@ -713,8 +714,8 @@ POST http://localhost:8080/graphs/hugegraph/auth/belongs
     "belong_create": "2020-11-11 16:19:35.422",
     "belong_creator": "admin",
     "belong_update": "2020-11-11 16:19:35.422",
-    "id": "S-63:boss>-82>>S-69:all",
-    "user": "-63:boss",
+  "id": "Sboss>-82>>S-69:all",
+  "user": "boss",
     "group": "-69:all"
 }
 ```
@@ -728,7 +729,7 @@ POST http://localhost:8080/graphs/hugegraph/auth/belongs
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:grant
+DELETE http://localhost:8080/graphspaces/DEFAULT/auth/belongs/Sboss>-82>>S-69:grant
 ```
 
 ##### Response Status
@@ -753,7 +754,7 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:g
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:grant
+PUT http://localhost:8080/graphspaces/DEFAULT/auth/belongs/Sboss>-82>>S-69:grant
 ```
 
 ##### Request Body
@@ -778,8 +779,8 @@ PUT http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:gran
     "belong_create": "2020-11-12 10:40:21.720",
     "belong_creator": "admin",
     "belong_update": "2020-11-12 10:42:47.265",
-    "id": "S-63:boss>-82>>S-69:grant",
-    "user": "-63:boss",
+  "id": "Sboss>-82>>S-69:grant",
+  "user": "boss",
     "group": "-69:grant"
 }
 ```
@@ -794,7 +795,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:gran
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/auth/belongs
+GET http://localhost:8080/graphspaces/DEFAULT/auth/belongs
 ```
 
 ##### Response Status
@@ -812,8 +813,8 @@ GET http://localhost:8080/graphs/hugegraph/auth/belongs
             "belong_create": "2020-11-11 16:19:35.422",
             "belong_creator": "admin",
             "belong_update": "2020-11-11 16:19:35.422",
-            "id": "S-63:boss>-82>>S-69:all",
-            "user": "-63:boss",
+          "id": "Sboss>-82>>S-69:all",
+          "user": "boss",
             "group": "-69:all"
         }
     ]
@@ -829,7 +830,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/belongs
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:all
+GET http://localhost:8080/graphspaces/DEFAULT/auth/belongs/Sboss>-82>>S-69:all
 ```
 
 ##### Response Status
@@ -845,8 +846,8 @@ GET http://localhost:8080/graphs/hugegraph/auth/belongs/S-63:boss>-82>>S-69:all
     "belong_create": "2020-11-11 16:19:35.422",
     "belong_creator": "admin",
     "belong_update": "2020-11-11 16:19:35.422",
-    "id": "S-63:boss>-82>>S-69:all",
-    "user": "-63:boss",
+  "id": "Sboss>-82>>S-69:all",
+  "user": "boss",
     "group": "-69:all"
 }
 ```
@@ -883,7 +884,7 @@ access_permission：
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/auth/accesses
+POST http://localhost:8080/graphspaces/DEFAULT/auth/accesses
 ```
 
 ##### Response Status
@@ -916,7 +917,7 @@ POST http://localhost:8080/graphs/hugegraph/auth/accesses
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>12>S-77:all
+DELETE http://localhost:8080/graphspaces/DEFAULT/auth/accesses/S-69:all>-88>12>S-77:all
 ```
 
 ##### Response Status
@@ -941,7 +942,7 @@ DELETE http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>12>S-77
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>12>S-77:all
+PUT http://localhost:8080/graphspaces/DEFAULT/auth/accesses/S-69:all>-88>12>S-77:all
 ```
 
 ##### Request Body
@@ -982,7 +983,7 @@ PUT http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>12>S-77:al
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/auth/accesses
+GET http://localhost:8080/graphspaces/DEFAULT/auth/accesses
 ```
 
 ##### Response Status
@@ -1018,7 +1019,7 @@ GET http://localhost:8080/graphs/hugegraph/auth/accesses
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>11>S-77:all
+GET http://localhost:8080/graphspaces/DEFAULT/auth/accesses/S-69:all>-88>11>S-77:all
 ```
 
 ##### Response Status
@@ -1038,5 +1039,163 @@ GET http://localhost:8080/graphs/hugegraph/auth/accesses/S-69:all>-88>11>S-77:al
     "access_creator": "admin",
     "group": "-69:all",
     "target": "-77:all"
+}
+```
+
+### 10.7 图空间管理员（Manager）API
+
+**重要提示**：在使用以下 API 之前，需要先创建图空间（graphspace）。请参考 [Graphspace API](../graphspace) 创建名为 `gs1` 的图空间。文档中的示例均假设已存在名为 `gs1` 的图空间
+
+1. 图空间管理员 API 用于在 graphspace 维度给用户授予/回收管理员角色，并查询当前用户或其他用户在该 graphspace 下的角色信息。角色类型可取 `SPACE`、`SPACE_MEMBER`、`ADMIN` 。
+
+#### 10.7.1 检查当前登录用户是否拥有某个角色
+
+##### Params
+
+- type: 需要校验的角色类型，可选
+
+##### Method & Url
+
+```
+GET http://localhost:8080/graphspaces/gs1/auth/managers/check?type=WRITE
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+"true"
+```
+
+返回 `true/false` 字符串表示是否拥有对应角色。
+
+#### 10.7.2 查询图空间管理员列表
+
+##### Params
+
+- type: 角色类型，可选，按角色过滤
+
+##### Method & Url
+
+```
+GET http://localhost:8080/graphspaces/gs1/auth/managers?type=SPACE
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+  "managers": [
+    {
+      "user": "admin",
+      "type": "SPACE",
+      "create_time": "2024-01-10 09:30:00"
+    }
+  ]
+}
+```
+
+#### 10.7.3 授权/创建图空间管理员
+
+- 下面在 gs1 下，将用户 boss 授权为 SPACE_MEMBER 角色
+
+##### Request Body
+
+```json
+{
+  "user": "boss",
+  "type": "SPACE_MEMBER"
+}
+```
+
+##### Method & Url
+
+```
+POST http://localhost:8080/graphspaces/gs1/auth/managers
+```
+
+##### Response Status
+
+```json
+201
+```
+
+##### Response Body
+
+```json
+{
+  "user": "boss",
+  "type": "SPACE_MEMBER",
+  "manager_creator": "admin",
+  "manager_create": "2024-01-10 09:45:12"
+}
+```
+
+#### 10.7.4 取消图空间管理员权限
+
+- 下面在 gs1 下，将用户 boss 的 SPACE_MEMBER 角色删除
+
+##### Params
+
+- user: 需要删除的用户 Id
+- type: 需要删除的角色类型
+
+##### Method & Url
+
+```
+DELETE http://localhost:8080/graphspaces/gs1/auth/managers?user=boss&type=SPACE_MEMBER
+```
+
+##### Response Status
+
+```json
+204
+```
+
+##### Response Body
+
+```json
+1
+```
+
+#### 10.7.5 查询指定用户在图空间中的角色
+
+##### Params
+
+- user: 用户 Id
+
+##### Method & Url
+
+```
+GET http://localhost:8080/graphspaces/gs1/auth/managers/role?user=boss
+```
+
+##### Response Status
+
+```json
+200
+```
+
+##### Response Body
+
+```json
+{
+  "roles": {
+    "boss": [
+      "READ",
+      "SPACE_MEMBER"
+    ]
+  }
 }
 ```

@@ -6,12 +6,20 @@ weight: 12
 
 ### 6.1 Graphs
 
-#### 6.1.1 列出数据库中全部的图
+**重要提醒**：1.7.0 及之后，动态创建图必须开启鉴权模式。非鉴权模式请参考[图配置文件](https://hugegraph.apache.org/cn/docs/config/config-guide/#4-hugegraphproperties)，通过配置文件静态创建图。
+
+#### 6.1.1 列出图空间中全部的图
+
+##### Params
+
+**路径参数说明：**
+
+- graphspace: 图空间名称
 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs
+GET http://localhost:8080/graphspaces/DEFAULT/graphs
 ```
 
 ##### Response Status
@@ -33,10 +41,17 @@ GET http://localhost:8080/graphs
 
 #### 6.1.2 查看某个图的信息
 
+##### Params
+
+**路径参数说明：**
+
+- graphspace: 图空间名称
+- graph: 图名称
+
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph
 ```
 
 ##### Response Status
@@ -58,6 +73,13 @@ GET http://localhost:8080/graphs/hugegraph
 
 ##### Params
 
+**路径参数说明：**
+
+- graphspace: 图空间名称
+- graph: 图名称
+
+**请求参数说明：**
+
 由于清空图是一个比较危险的操作，为避免用户误调用，我们给 API 添加了用于确认的参数：
 
 - confirm_message: 默认为`I'm sure to delete all data`
@@ -65,7 +87,7 @@ GET http://localhost:8080/graphs/hugegraph
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/clear?confirm_message=I%27m+sure+to+delete+all+data
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/clear?confirm_message=I%27m+sure+to+delete+all+data
 ```
 
 ##### Response Status
@@ -78,25 +100,34 @@ DELETE http://localhost:8080/graphs/hugegraph/clear?confirm_message=I%27m+sure+t
 
 ##### Params
 
+**路径参数说明：**
+
+- graphspace: 图空间名称
+- graph: 要创建的新图名称
+
+**请求参数说明：**
+
 - clone_graph_name: 已有图的名称；从已有的图来克隆，用户可选择传递配置文件，传递时将替换已有图中的配置；
 
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph_clone?clone_graph_name=hugegraph
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph_clone?clone_graph_name=hugegraph
 ```
 
 ##### Request Body (可选)
 
-克隆 (fork) 一个无权限的新图 (body 类型必须设置为 `Context-Type=text/plain`)
+克隆一个非鉴权模式的图（设置 `Content-Type: application/json`）
 
-```properties
-gremlin.graph=org.apache.hugegraph.HugeFactory
-backend=rocksdb
-serializer=binary
-store=hugegraph_clone
-rocksdb.data_path=./rks-data-xx
-rocksdb.wal_path=./rks-data-xx
+```json
+{
+  "gremlin.graph": "org.apache.hugegraph.HugeFactory",
+  "backend": "rocksdb",
+  "serializer": "binary",
+  "store": "hugegraph_clone",
+  "rocksdb.data_path": "./rks-data-xx",
+  "rocksdb.wal_path": "./rks-data-xx"
+}
 ```
 
 > Note:
@@ -120,23 +151,32 @@ rocksdb.wal_path=./rks-data-xx
 
 #### 6.1.5 创建一个图，**该操作需要管理员权限**
 
+##### Params
+
+**路径参数说明：**
+
+- graphspace: 图空间名称
+- graph: 图名称
+
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph-xx
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph-xx
 ```
 
 ##### Request Body
 
-新建一个无权限的新图 (body 类型必须设置为 `Context-Type=text/plain`)
+创建一个非鉴权模式的图（设置 `Content-Type: application/json`）
 
-```properties
-gremlin.graph=org.apache.hugegraph.HugeFactory
-backend=rocksdb
-serializer=binary
-store=hugegraph2
-rocksdb.data_path=./rks-data-xx
-rocksdb.wal_path=./rks-data-xx
+```json
+{
+  "gremlin.graph": "org.apache.hugegraph.HugeFactory",
+  "backend": "rocksdb",
+  "serializer": "binary",
+  "store": "hugegraph",
+  "rocksdb.data_path": "./rks-data-xx",
+  "rocksdb.wal_path": "./rks-data-xx"
+}
 ```
 
 > Note:
@@ -153,7 +193,7 @@ rocksdb.wal_path=./rks-data-xx
 
 ```javascript
 {
-    "name": "hugegraph2",
+    "name":"hugegraph2",
     "backend": "rocksdb"
 }
 ```
@@ -162,6 +202,13 @@ rocksdb.wal_path=./rks-data-xx
 
 ##### Params
 
+**路径参数说明：**
+
+- graphspace: 图空间名称
+- graph: 图名称
+
+**请求参数说明：**
+
 由于删除图是一个比较危险的操作，为避免用户误调用，我们给 API 添加了用于确认的参数：
 
 - confirm_message: 默认为`I'm sure to drop the graph`
@@ -169,7 +216,7 @@ rocksdb.wal_path=./rks-data-xx
 ##### Method & Url
 
 ```javascript
-DELETE http://localhost:8080/graphs/hugegraph_clone?confirm_message=I%27m%20sure%20to%20drop%20the%20graph
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph_clone?confirm_message=I%27m%20sure%20to%20drop%20the%20graph
 ```
 
 ##### Response Status
@@ -178,6 +225,8 @@ DELETE http://localhost:8080/graphs/hugegraph_clone?confirm_message=I%27m%20sure
 204
 ```
 
+> 注意：对于 HugeGraph 1.5.0 及之前版本，如需创建或删除图，请继续使用旧的 `text/plain`（properties）格式请求体，而不是 JSON。
+
 ### 6.2 Conf
 
 #### 6.2.1 查看某个图的配置，**该操作需要管理员权限**
@@ -185,7 +234,8 @@ DELETE http://localhost:8080/graphs/hugegraph_clone?confirm_message=I%27m%20sure
 ##### Method & Url
 
 ```javascript
-GET http://localhost:8080/graphs/hugegraph/conf
+GET
+http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/conf
 ```
 
 ##### Response Status
@@ -243,7 +293,7 @@ Restore 时存在两种不同的模式：Restoring 和 Merging
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/mode
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/mode
 ```
 
 ##### Response Status
@@ -267,7 +317,7 @@ GET http://localhost:8080/graphs/hugegraph/mode
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/mode
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/mode
 ```
 
 ##### Request Body
@@ -301,7 +351,7 @@ PUT http://localhost:8080/graphs/hugegraph/mode
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph_read_mode
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph_read_mode
 ```
 
 ##### Response Status
@@ -327,7 +377,7 @@ GET http://localhost:8080/graphs/hugegraph/graph_read_mode
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph_read_mode
 ```
 
 ##### Request Body
@@ -363,7 +413,7 @@ PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/snapshot_create
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/snapshot_create
 ```
 
 ##### Response Status
@@ -389,7 +439,7 @@ PUT http://localhost:8080/graphs/hugegraph/snapshot_create
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/snapshot_resume
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/snapshot_resume
 ```
 
 ##### Response Status
@@ -417,7 +467,7 @@ PUT http://localhost:8080/graphs/hugegraph/snapshot_resume
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/compact
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/compact
 ```
 
 ##### Response Status

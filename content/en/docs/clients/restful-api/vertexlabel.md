@@ -25,7 +25,7 @@ Params Description:
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/schema/vertexlabels
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/vertexlabels
 ```
 
 ##### Request Body
@@ -124,7 +124,7 @@ Additionally, if the vertex has a property called "createdTime" and you want to 
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person?action=append
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/vertexlabels/person?action=append
 ```
 
 ##### Request Body
@@ -180,7 +180,7 @@ PUT http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person?action=app
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/vertexlabels
 ```
 
 ##### Response Status
@@ -245,7 +245,7 @@ GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/vertexlabels/person
 ```
 
 ##### Response Status
@@ -288,7 +288,7 @@ Deleting a VertexLabel will result in the removal of corresponding vertices and 
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema/vertexlabels/person
 ```
 
 ##### Response Status
@@ -307,4 +307,4 @@ DELETE http://localhost:8080/graphs/hugegraph/schema/vertexlabels/person
 
 Note:
 
-> You can use `GET http://localhost:8080/graphs/hugegraph/tasks/1` (where "1" is the task_id) to query the execution status of the asynchronous task. For more information, refer to the [Asynchronous Task RESTful API](../task).
+> You can use `GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks/1` (where "1" is the task_id) to query the execution status of the asynchronous task. For more information, refer to the [Asynchronous Task RESTful API](../task).
