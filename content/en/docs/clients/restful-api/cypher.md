@@ -11,18 +11,31 @@ weight: 15
 ##### Method & Url
 
 ```javascript
-GET /graphs/{graph}/cypher?cypher={cypher}
+GET / graphspaces / {graphspace}
+/graphs/
+{
+    graph
+}
+/cypher?cypher={cypher}
 ```
 
 ##### Params
+
+**Path parameters**
+
+- graphspace: Graphspace name
 - graph: Graph name
+
+**Query parameters**
+
 - cypher: Cypher statement
 
 
 ##### Example
 
 ```javascript
-GET http://localhost:8080/graphs/hugecypher1/cypher?cypher=match(n:person) return n.name as name order by n.name limit 1
+GET
+http://localhost:8080/graphspaces/DEFAULT/graphs/hugecypher1/cypher?cypher=match(n:person) return n.name as name order by n.name limit 1
 ```
 
 ##### Response Status
@@ -61,10 +74,19 @@ GET http://localhost:8080/graphs/hugecypher1/cypher?cypher=match(n:person) retur
 ##### Method & Url
 
 ```javascript
-POST /graphs/{graph}/cypher
+POST / graphspaces / {graphspace}
+/graphs/
+{
+    graph
+}
+/cypher
 ```
 
 ##### Params
+
+**Path parameters**
+
+- graphspace: Graphspace name
 - graph: Graph name
 
 ##### Body
@@ -78,7 +100,8 @@ Note:
 ##### Example
 
 ```javascript
-POST http://localhost:8080/graphs/hugecypher1/cypher
+POST
+http://localhost:8080/graphspaces/DEFAULT/graphs/hugecypher1/cypher
 ```
 
 ###### Request Body

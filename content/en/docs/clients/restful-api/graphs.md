@@ -8,12 +8,18 @@ weight: 12
 
 **Important Reminder**: Since HugeGraph 1.7.0, dynamic graph creation must enable authentication mode. For non-authentication mode, please refer to [Graph Configuration File](https://hugegraph.apache.org/docs/config/config-guide/#4-hugegraphproperties) to statically create graphs through configuration files.
 
-#### 6.1.1 List all graphs
+#### 6.1.1 List all graphs in the graphspace
+
+##### Params
+
+**Path parameters**
+
+- graphspace: Graphspace name
 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs
+GET http://localhost:8080/graphspaces/DEFAULT/graphs
 ```
 
 ##### Response Status
@@ -34,6 +40,13 @@ GET http://localhost:8080/graphs
 ```
 
 #### 6.1.2 Get details of the graph
+
+##### Params
+
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Graph name
 
 ##### Method & Url
 
@@ -56,15 +69,18 @@ GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph
 }
 ```
 
-#### 6.1.3 Clear all data of a graph, include: schema, vertex, edge and index .etc.,**This operation
-
-requires administrator privileges**
+#### 6.1.3 Clear all data of a graph, include: schema, vertex, edge and index, **This operation requires administrator privileges**
 
 ##### Params
 
-Since emptying the graph is a dangerous operation, we have added parameters for confirmation to the
-API to
-avoid false calls by users:
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Graph name
+
+**Query parameters**
+
+Since emptying the graph is a dangerous operation, we have added parameters for confirmation to the API to avoid false calls by users:
 
 - confirm_message: default by `I'm sure to delete all data`
 
@@ -80,13 +96,18 @@ DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/clear?confirm_
 204
 ```
 
-#### 6.1.4 Clone graph,**this operation requires administrator privileges**
+#### 6.1.4 Clone graph, **this operation requires administrator privileges**
 
 ##### Params
 
-- clone_graph_name: name of an existed graph.
-  To clone from an existing graph, the user can choose to transfer the configuration file,
-  which will replace the configuration in the existing graph
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Name of the new graph to create
+
+**Query parameters**
+
+- clone_graph_name: name of an existed graph. To clone from an existing graph, the user can choose to transfer the configuration file, which will replace the configuration in the existing graph
 
 ##### Method & Url
 
@@ -128,7 +149,14 @@ Clone a `non-auth` mode graph (set `Content-Type: application/json`)
 }
 ```
 
-#### 6.1.5 Create graph,**this operation requires administrator privileges**
+#### 6.1.5 Create graph, **this operation requires administrator privileges**
+
+##### Params
+
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Graph name
 
 ##### Method & Url
 
@@ -170,13 +198,18 @@ Create a non-auth graph (set `Content-Type: application/json`)
 }
 ```
 
-#### 6.1.6 Delete graph and it's data
+#### 6.1.6 Delete graph and its data
 
 ##### Params
 
-Since deleting a graph is a dangerous operation, we have added parameters for confirmation to the
-API to
-avoid false calls by users:
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Graph name
+
+**Query parameters**
+
+Since deleting a graph is a dangerous operation, we have added parameters for confirmation to the API to avoid false calls by users:
 
 - confirm_message: default by `I'm sure to drop the graph`
 
@@ -196,7 +229,14 @@ DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph_clone?confirm_
 
 ### 6.2 Conf
 
-#### 6.2.1 Get configuration for a graph,**This operation requires administrator privileges**
+#### 6.2.1 Get configuration for a graph, **This operation requires administrator privileges**
+
+##### Params
+
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Graph name
 
 ##### Method & Url
 
@@ -255,7 +295,14 @@ Under normal circumstances, the graph mode is None. When you need to restore the
 you need to temporarily modify the graph mode to Restoring or Merging as needed.
 When you complete the restore, change the graph mode to None.
 
-#### 6.3.1 Get graph mode.
+#### 6.3.1 Get graph mode
+
+##### Params
+
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Graph name
 
 ##### Method & Url
 
@@ -280,6 +327,13 @@ GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/mode
 > Allowed graph mode values are: NONE, RESTORING, MERGING
 
 #### 6.3.2 Modify graph mode. **This operation requires administrator privileges**
+
+##### Params
+
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Graph name
 
 ##### Method & Url
 
@@ -309,11 +363,14 @@ PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/mode
 }
 ```
 
-#### 6.3.3 Get graph's read mode.
+#### 6.3.3 Get graph's read mode
 
 ##### Params
 
-- name: name of a graph
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Graph name
 
 ##### Method & Url
 
@@ -339,7 +396,10 @@ GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph_read_mode
 
 ##### Params
 
-- name: name of a graph
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Graph name
 
 ##### Method & Url
 
@@ -375,7 +435,10 @@ PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph_read_mode
 
 ##### Params
 
-- name: name of a graph
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Graph name
 
 ##### Method & Url
 
@@ -401,7 +464,10 @@ PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/snapshot_create
 
 ##### Params
 
-- name: name of a graph
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Graph name
 
 ##### Method & Url
 
@@ -425,11 +491,14 @@ PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/snapshot_resume
 
 ### 6.5 Compact
 
-#### 6.5.1 Manually compact graph,**This operation requires administrator privileges**
+#### 6.5.1 Manually compact graph, **This operation requires administrator privileges**
 
 ##### Params
 
-- name: name of a graph
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Graph name
 
 ##### Method & Url
 

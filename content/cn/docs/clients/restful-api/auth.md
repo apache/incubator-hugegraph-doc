@@ -22,6 +22,7 @@ city: Beijing})
 
 ##### 接口说明：
 用户认证与权限控制接口包括 5 类：UserAPI、GroupAPI、TargetAPI、BelongAPI、AccessAPI。
+**注意**: 1.5.0 及之前，group/target 等 id 的格式类似 -69:grant，1.7.0 及之后，id 和 name 一致，如 admin [HugeGraph 1.5.x RESTful API](https://github.com/apache/incubator-hugegraph-doc/tree/release-1.5.0)
 
 ### 10.2 用户（User）API
 用户接口包括：创建用户，删除用户，修改用户，和查询用户相关信息接口。

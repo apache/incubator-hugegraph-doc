@@ -2,6 +2,7 @@
 title: "Graphspace API"
 linkTitle: "Graphspace"
 weight: 1
+description: "Graphspace（图空间）REST 接口：多租户与资源隔离的创建、查看、更新与删除，以及使用前置条件与限制。"
 ---
 
 ### 2.0 Graphspace
@@ -73,8 +74,8 @@ POST http://localhost:8080/graphspaces
   "name": "gs1",
   "description": "1st graph space",
   "cpu_limit": 1000,
-  "memory_limit": 1024,
-  "storage_limit": 1000,
+  "memory_limit": 8192,
+  "storage_limit": 1000000,
   "compute_cpu_limit": 0,
   "compute_memory_limit": 0,
   "oltp_namespace": "hugegraph-server",
@@ -145,8 +146,8 @@ GET http://localhost:8080/graphspaces/gs1
   "name": "gs1",
   "description": "1st graph space",
   "cpu_limit": 1000,
-  "memory_limit": 1024,
-  "storage_limit": 1000,
+  "memory_limit": 8192,
+  "storage_limit": 1000000,
   "oltp_namespace": "hugegraph-server",
   "olap_namespace": "hugegraph-server",
   "storage_namespace": "hugegraph-server",
@@ -237,8 +238,8 @@ PUT http://localhost:8080/graphspaces/gs1
   "name": "gs1",
   "description": "1st graph space",
   "cpu_limit": 2000,
-  "memory_limit": 1024,
-  "storage_limit": 1000,
+  "memory_limit": 40960,
+  "storage_limit": 2048,
   "oltp_namespace": "hugegraph-server",
   "olap_namespace": "hugegraph-server",
   "storage_namespace": "hugegraph-server",
@@ -246,8 +247,8 @@ PUT http://localhost:8080/graphspaces/gs1
   "internal_algorithm_image_url": "127.0.0.1/hugegraph-registry/hugegraph-computer-algorithm:3.1.1",
   "compute_cpu_limit": 0,
   "compute_memory_limit": 0,
-  "max_graph_number": 100,
-  "max_role_number": 10,
+  "max_graph_number": 1000,
+  "max_role_number": 100,
   "cpu_used": 0,
   "memory_used": 0,
   "storage_used": 0,
