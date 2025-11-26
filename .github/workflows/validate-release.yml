@@ -10,7 +10,7 @@ on:
       gpg_user:
         required: true
         description: current release manager (gpg username)
-        default: 'Junzhi Peng'
+        default: 'pengjunzhi'
 
   push:
     branches:
@@ -244,7 +244,7 @@ jobs:
       - name: 7. Validate Binary Packages
         run: |
           cd dist/${{ inputs.release_version }} || exit
-          CATEGORY_X="\bGPL|\bLGPL|Sleepycat License|BSD-4-Clause|\bBCL\b|JSR-275|Amazon Software License|\bRSAL\b|\bQPL\b|\bSSPL|\bCPOL|\bNPL1|Creative Commons Non-Commercial|JSON"
+          CATEGORY_X="\bGPL|\bLGPL|Sleepycat License|BSD-4-Clause|\bBCL\b|JSR-275|Amazon Software License|\bRSAL\b|\bQPL\b|\bSSPL|\bCPOL|\bNPL1|Creative Commons Non-Commercial|JSON\.org"
           for i in *.tar.gz; do
             if [[ "$i" == *-src.tar.gz ]]; then
               # skip source packages
