@@ -45,7 +45,7 @@ schema.indexLabel("personByAge").onV("person").by("age").range().ifNotExist().cr
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/graph/vertices
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/vertices
 ```
 
 ##### Request Body
@@ -85,7 +85,7 @@ POST http://localhost:8080/graphs/hugegraph/graph/vertices
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph/graph/vertices/batch
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/vertices/batch
 ```
 
 ##### Request Body
@@ -130,7 +130,7 @@ POST http://localhost:8080/graphs/hugegraph/graph/vertices/batch
 ##### Method & Url
 
 ```
-PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=append
+PUT http://127.0.0.1:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/vertices/"1:marko"?action=append
 ```
 
 ##### Request Body
@@ -220,13 +220,13 @@ Assuming the original vertex and properties are:
 Add vertices with the following command:
 
 ```shell
-curl -H "Content-Type: application/json" -d '[{"label":"person","properties":{"name":"josh","age":32,"city":"Beijing","weight":0.1,"hobby":["reading","football"]}},{"label":"software","properties":{"name":"lop","lang":"java","price":328}}]' http:///127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
+curl -H "Content-Type: application/json" -d '[{"label":"person","properties":{"name":"josh","age":32,"city":"Beijing","weight":0.1,"hobby":["reading","football"]}},{"label":"software","properties":{"name":"lop","lang":"java","price":328}}]' http://127.0.0.1:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/vertices/batch
 ```
 
 ##### Method & Url
 
 ```
-PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/batch
+PUT http://127.0.0.1:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/vertices/batch
 ```
 
 ##### Request Body
@@ -324,7 +324,7 @@ The usage of other update strategies can be inferred in a similar manner and wil
 ##### Method & Url
 
 ```
-PUT http://127.0.0.1:8080/graphs/hugegraph/graph/vertices/"1:marko"?action=eliminate
+PUT http://127.0.0.1:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/vertices/"1:marko"?action=eliminate
 ```
 
 ##### Request Body
@@ -391,7 +391,7 @@ Property key-value pairs consist of the property name and value in JSON format. 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&properties={"age":29}&limit=1
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/vertices?label=person&properties={"age":29}&limit=1
 ```
 
 ##### Response Status
@@ -423,13 +423,13 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices?label=person&propertie
 Add vertices with the following command:
 
 ```shell
-curl -H "Content-Type: application/json" -d '[{"label":"person","properties":{"name":"peter","age":29,"city":"Shanghai"}},{"label":"person","properties":{"name":"vadas","age":27,"city":"Hongkong"}}]' http://localhost:8080/graphs/hugegraph/graph/vertices/batch
+curl -H "Content-Type: application/json" -d '[{"label":"person","properties":{"name":"peter","age":29,"city":"Shanghai"}},{"label":"person","properties":{"name":"vadas","age":27,"city":"Hongkong"}}]' http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/vertices/batch
 ```
 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph/vertices?page&limit=3
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/vertices?page&limit=3
 ```
 
 ##### Response Status
@@ -490,7 +490,7 @@ The returned `body` contains information about the page number of the next `page
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph/vertices?page=CIYxOnBldGVyAAAAAAAAAAM=&limit=3
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/vertices?page=CIYxOnBldGVyAAAAAAAAAAM=&limit=3
 ```
 
 ##### Response Status
@@ -546,7 +546,7 @@ At this point, `"page": null` indicates that there are no more pages available. 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/vertices/"1:marko"
 ```
 
 ##### Response Status
@@ -580,7 +580,7 @@ GET http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/vertices/"1:marko"
 ```
 
 ##### Response Status
@@ -596,7 +596,7 @@ When deleting a vertex by specifying both the Label parameter and the ID, it gen
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/graph/vertices/"1:marko"?label=person
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph/vertices/"1:marko"?label=person
 ```
 
 ##### Response Status

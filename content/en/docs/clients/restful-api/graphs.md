@@ -6,12 +6,20 @@ weight: 12
 
 ### 6.1 Graphs
 
-#### 6.1.1 List all graphs
+**Important Reminder**: Since HugeGraph 1.7.0, dynamic graph creation must enable authentication mode. For non-authentication mode, please refer to [Graph Configuration File](https://hugegraph.apache.org/docs/config/config-guide/#4-hugegraphproperties) to statically create graphs through configuration files.
+
+#### 6.1.1 List all graphs in the graphspace
+
+##### Params
+
+**Path parameters**
+
+- graphspace: Graphspace name
 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs
+GET http://localhost:8080/graphspaces/DEFAULT/graphs
 ```
 
 ##### Response Status
@@ -33,10 +41,17 @@ GET http://localhost:8080/graphs
 
 #### 6.1.2 Get details of the graph
 
+##### Params
+
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Graph name
+
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph
 ```
 
 ##### Response Status
@@ -54,22 +69,25 @@ GET http://localhost:8080/graphs/hugegraph
 }
 ```
 
-#### 6.1.3 Clear all data of a graph, include: schema, vertex, edge and index .etc.,**This operation
-
-requires administrator privileges**
+#### 6.1.3 Clear all data of a graph, include: schema, vertex, edge and index, **This operation requires administrator privileges**
 
 ##### Params
 
-Since emptying the graph is a dangerous operation, we have added parameters for confirmation to the
-API to
-avoid false calls by users:
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Graph name
+
+**Query parameters**
+
+Since emptying the graph is a dangerous operation, we have added parameters for confirmation to the API to avoid false calls by users:
 
 - confirm_message: default by `I'm sure to delete all data`
 
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph/clear?confirm_message=I%27m+sure+to+delete+all+data
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/clear?confirm_message=I%27m+sure+to+delete+all+data
 ```
 
 ##### Response Status
@@ -78,31 +96,38 @@ DELETE http://localhost:8080/graphs/hugegraph/clear?confirm_message=I%27m+sure+t
 204
 ```
 
-#### 6.1.4 Clone graph,**this operation requires administrator privileges**
+#### 6.1.4 Clone graph, **this operation requires administrator privileges**
 
 ##### Params
 
-- clone_graph_name: name of an existed graph.
-  To clone from an existing graph, the user can choose to transfer the configuration file,
-  which will replace the configuration in the existing graph
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Name of the new graph to create
+
+**Query parameters**
+
+- clone_graph_name: name of an existed graph. To clone from an existing graph, the user can choose to transfer the configuration file, which will replace the configuration in the existing graph
 
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph_clone?clone_graph_name=hugegraph
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph_clone?clone_graph_name=hugegraph
 ```
 
 ##### Request Body [Optional]
 
-Clone a `non-auth` mode graph: (Must set body `Context-Type=text/plain`)
+Clone a `non-auth` mode graph (set `Content-Type: application/json`)
 
-```properties
-gremlin.graph=org.apache.hugegraph.HugeFactory
-backend=rocksdb
-serializer=binary
-store=hugegraph_clone
-rocksdb.data_path=./rks-data-xx
-rocksdb.wal_path=./rks-data-xx
+```json
+{
+  "gremlin.graph": "org.apache.hugegraph.HugeFactory",
+  "backend": "rocksdb",
+  "serializer": "binary",
+  "store": "hugegraph",
+  "rocksdb.data_path": "./rks-data-xx",
+  "rocksdb.wal_path": "./rks-data-xx"
+}
 ```
 
 > Note: 
@@ -124,25 +149,34 @@ rocksdb.wal_path=./rks-data-xx
 }
 ```
 
-#### 6.1.5 Create graph,**this operation requires administrator privileges**
+#### 6.1.5 Create graph, **this operation requires administrator privileges**
+
+##### Params
+
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Graph name
 
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphs/hugegraph2
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph2
 ```
 
 ##### Request Body
 
-create a non-auth graph: (Must set body `Context-Type=text/plain`)
+Create a non-auth graph (set `Content-Type: application/json`)
 
-```properties
-gremlin.graph=org.apache.hugegraph.HugeFactory
-backend=rocksdb
-serializer=binary
-store=hugegraph2
-rocksdb.data_path=./rks-data-xx
-rocksdb.wal_path=./rks-data-xx
+```json
+{
+  "gremlin.graph": "org.apache.hugegraph.HugeFactory",
+  "backend": "rocksdb",
+  "serializer": "binary",
+  "store": "hugegraph2",
+  "rocksdb.data_path": "./rks-data-xx",
+  "rocksdb.wal_path": "./rks-data-xx"
+}
 ```
 
 > Note: 
@@ -164,20 +198,25 @@ rocksdb.wal_path=./rks-data-xx
 }
 ```
 
-#### 6.1.6 Delete graph and it's data
+#### 6.1.6 Delete graph and its data
 
 ##### Params
 
-Since deleting a graph is a dangerous operation, we have added parameters for confirmation to the
-API to
-avoid false calls by users:
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Graph name
+
+**Query parameters**
+
+Since deleting a graph is a dangerous operation, we have added parameters for confirmation to the API to avoid false calls by users:
 
 - confirm_message: default by `I'm sure to drop the graph`
 
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphs/hugegraph_clone?confirm_message=I%27m%20sure%20to%20drop%20the%20graph
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph_clone?confirm_message=I%27m%20sure%20to%20drop%20the%20graph
 ```
 
 ##### Response Status
@@ -186,14 +225,23 @@ DELETE http://localhost:8080/graphs/hugegraph_clone?confirm_message=I%27m%20sure
 204
 ```
 
+> Note: For HugeGraph 1.5.0 and earlier versions, if you need to create or drop a graph, please still use the legacy `text/plain` (properties) style request body instead of JSON.
+
 ### 6.2 Conf
 
-#### 6.2.1 Get configuration for a graph,**This operation requires administrator privileges**
+#### 6.2.1 Get configuration for a graph, **This operation requires administrator privileges**
+
+##### Params
+
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Graph name
 
 ##### Method & Url
 
 ```javascript
-GET http://localhost:8080/graphs/hugegraph/conf
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/conf
 ```
 
 ##### Response Status
@@ -247,12 +295,19 @@ Under normal circumstances, the graph mode is None. When you need to restore the
 you need to temporarily modify the graph mode to Restoring or Merging as needed.
 When you complete the restore, change the graph mode to None.
 
-#### 6.3.1 Get graph mode.
+#### 6.3.1 Get graph mode
+
+##### Params
+
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Graph name
 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/mode
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/mode
 ```
 
 ##### Response Status
@@ -273,10 +328,17 @@ GET http://localhost:8080/graphs/hugegraph/mode
 
 #### 6.3.2 Modify graph mode. **This operation requires administrator privileges**
 
+##### Params
+
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Graph name
+
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/mode
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/mode
 ```
 
 ##### Request Body
@@ -301,16 +363,19 @@ PUT http://localhost:8080/graphs/hugegraph/mode
 }
 ```
 
-#### 6.3.3 Get graph's read mode.
+#### 6.3.3 Get graph's read mode
 
 ##### Params
 
-- name: name of a graph
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Graph name
 
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/hugegraph/graph_read_mode
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph_read_mode
 ```
 
 ##### Response Status
@@ -331,12 +396,15 @@ GET http://localhost:8080/graphs/hugegraph/graph_read_mode
 
 ##### Params
 
-- name: name of a graph
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Graph name
 
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/graph_read_mode
 ```
 
 ##### Request Body
@@ -367,12 +435,15 @@ PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
 
 ##### Params
 
-- name: name of a graph
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Graph name
 
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/snapshot_create
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/snapshot_create
 ```
 
 ##### Response Status
@@ -393,12 +464,15 @@ PUT http://localhost:8080/graphs/hugegraph/snapshot_create
 
 ##### Params
 
-- name: name of a graph
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Graph name
 
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/snapshot_resume
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/snapshot_resume
 ```
 
 ##### Response Status
@@ -417,16 +491,19 @@ PUT http://localhost:8080/graphs/hugegraph/snapshot_resume
 
 ### 6.5 Compact
 
-#### 6.5.1 Manually compact graph,**This operation requires administrator privileges**
+#### 6.5.1 Manually compact graph, **This operation requires administrator privileges**
 
 ##### Params
 
-- name: name of a graph
+**Path parameters**
+
+- graphspace: Graphspace name
+- graph: Graph name
 
 ##### Method & Url
 
 ```
-PUT http://localhost:8080/graphs/hugegraph/compact
+PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/compact
 ```
 
 ##### Response Status

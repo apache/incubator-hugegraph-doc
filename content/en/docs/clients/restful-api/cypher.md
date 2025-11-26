@@ -10,29 +10,36 @@ weight: 15
 
 ##### Method & Url
 
-```javascript
-GET /graphs/{graph}/cypher?cypher={cypher}
+```http
+GET /graphspaces/{graphspace}/graphs/{graph}/cypher?cypher={cypher}
 ```
 
 ##### Params
+
+**Path parameters**
+
+- graphspace: Graphspace name
 - graph: Graph name
+
+**Query parameters**
+
 - cypher: Cypher statement
 
 
 ##### Example
 
-```javascript
-GET http://localhost:8080/graphs/hugecypher1/cypher?cypher=match(n:person) return n.name as name order by n.name limit 1
+```http
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugecypher1/cypher?cypher=match(n:person) return n.name as name order by n.name limit 1
 ```
 
 ##### Response Status
 
-```javascript
+```json
 200
 ```
 ##### Response Body
 
-```javascript
+```json
 {
     "requestId": "766b9f48-2f10-40d9-951a-3027d0748ab7",
     "status": {
@@ -51,8 +58,6 @@ GET http://localhost:8080/graphs/hugecypher1/cypher?cypher=match(n:person) retur
         }
     }
 }
-
-
 ```
 
 #### 9.1.2 Sending a cypher statement (POST) to HugeGraphServer for synchronous execution
@@ -60,11 +65,15 @@ GET http://localhost:8080/graphs/hugecypher1/cypher?cypher=match(n:person) retur
 
 ##### Method & Url
 
-```javascript
-POST /graphs/{graph}/cypher
+```http
+POST /graphspaces/{graphspace}/graphs/{graph}/cypher
 ```
 
 ##### Params
+
+**Path parameters**
+
+- graphspace: Graphspace name
 - graph: Graph name
 
 ##### Body
@@ -77,8 +86,8 @@ Note:
 
 ##### Example
 
-```javascript
-POST http://localhost:8080/graphs/hugecypher1/cypher
+```http
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugecypher1/cypher
 ```
 
 ###### Request Body
@@ -88,12 +97,12 @@ match(n:person) return n.name as name order by n.name limit 1
 ```
 ##### Response Status
 
-```javascript
+```json
 200
 ```
 ##### Response Body
 
-```javascript
+```json
 {
     "requestId": "f096bee0-e249-498f-b5a3-ea684fc84f57",
     "status": {
@@ -112,6 +121,4 @@ match(n:person) return n.name as name order by n.name limit 1
         }
     }
 }
-
-
 ```

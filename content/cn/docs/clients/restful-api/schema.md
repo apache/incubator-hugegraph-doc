@@ -11,9 +11,9 @@ HugeGraph 提供单一接口获取某个图的全部 Schema 信息，包括：Pr
 ##### Method & Url
 
 ```
-GET http://localhost:8080/graphs/{graph_name}/schema
+GET http://localhost:8080/graphspaces/DEFAULT/graphs/{graph_name}/schema
 
-e.g: GET http://localhost:8080/graphs/hugegraph/schema
+e.g: GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/schema
 ```
 
 ##### Response Status

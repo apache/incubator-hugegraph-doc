@@ -17,11 +17,11 @@ Core 模块是 Tinkerpop 接口的实现，Backend 模块用于管理数据存�
 
 #### 2.1 安装 Java 11 (JDK 11)
 
-请优先考虑在 Java 11 的环境上启动 `HugeGraph-Server`(在 1.5.0 版前，会保留对 Java 8 的基本兼容)
+请考虑在 Java 11 的环境上启动 `HugeGraph-Server`(在 1.5.0 版前，会保留对 Java 8 的基本兼容)
 
 **在往下阅读之前先执行 `java -version` 命令确认 jdk 版本**
 
-> 注：使用 Java 8 启动 HugeGraph-Server 会失去一些**安全性**的保障，也会降低性能相关指标 (请尽早升级/迁移)
+> 注：使用 Java 8 启动 HugeGraph-Server 会失去一些**安全性**的保障，也会降低性能相关指标 (请尽早升级/迁移，1.7.0 不再支持)
 
 ### 3 部署
 
@@ -187,7 +187,9 @@ HugeGraphServer 启动时会连接后端存储并尝试检查后端存储版本�
 
 要使用分布式存储引擎，需要先部署 HugeGraph-PD 和 HugeGraph-Store，详见 [HugeGraph-PD 快速入门](/cn/docs/quickstart/hugegraph/hugegraph-pd/) 和 [HugeGraph-Store 快速入门](/cn/docs/quickstart/hugegraph/hugegraph-hstore/)。
 
-确保 PD 和 Store 服务均已启动后，修改 HugeGraph-Server 的 `hugegraph.properties` 配置：
+确保 PD 和 Store 服务均已启动后
+
+1. 修改 HugeGraph-Server 的 `hugegraph.properties` 配置：
 
 ```properties
 backend=hstore
@@ -198,10 +200,17 @@ task.scheduler_type=distributed
 pd.peers=127.0.0.1:8686,127.0.0.1:8687,127.0.0.1:8688
 ```
 
+2. 修改 HugeGraph-Server 的 `rest-server.properties` 配置：
+
+```properties
+usePD=true
+```
+
 如果配置多个 HugeGraph-Server 节点，需要为每个节点修改 `rest-server.properties` 配置文件，例如：
 
 节点 1（主节点）：
 ```properties
+usePD=true
 restserver.url=http://127.0.0.1:8081
 gremlinserver.url=http://127.0.0.1:8181
 
@@ -214,6 +223,7 @@ server.role=master
 
 节点 2（工作节点）：
 ```properties
+usePD=true
 restserver.url=http://127.0.0.1:8082
 gremlinserver.url=http://127.0.0.1:8182
 
