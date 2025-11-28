@@ -831,7 +831,7 @@ The import process is controlled by commands submitted by the user, and the user
 | `--check-vertex`          | false         |                 | Whether to check if the vertices connected by the edge exist when inserting the edge                                                                                                      |
 | `--print-progress`        | true          |                 | Whether to print the number of imported items in real time on the console                                                                                                                 |
 | `--dry-run`               | false         |                 | Enable this mode to only parse data without importing; usually used for testing                                                                                                           |
-| `--help`                  | false         |                 | Print help information                                                                                                                                                                    |                                                                                                                                                                    |
+| `--help`                  | false         |                 | Print help information                                                                                                      |
 
 ##### 3.4.2 Breakpoint Continuation Mode
 
