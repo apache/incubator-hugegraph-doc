@@ -19,6 +19,7 @@ HugeGraph-Client 是操作 graph 的总入口，用户必须先创建出 HugeGra
 // HugeGraphServer 地址："http://localhost:8080"
 // 图的名称："hugegraph"
 HugeClient hugeClient = HugeClient.builder("http://localhost:8080", "hugegraph")
+                                //.builder("http://localhost:8080", "graphSpaceName", "hugegraph")
                                   .configTimeout(20) // 默认 20s 超时
                                   .configUser("**", "**") // 默认未开启用户权限
                                   .build();
