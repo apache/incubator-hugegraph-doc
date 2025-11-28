@@ -227,11 +227,11 @@ public class BatchExample {
     public static void main(String[] args) {
         // If connect failed will throw a exception.
         HugeClient hugeClient = HugeClient.builder("http://localhost:8080",
-                                                   "DEFAULT",
-                                                   "hugegraph")
-                                                .configUser("username", "password")
-                                                // 这是示例,生产环境需要使用安全的凭证
-                                                .build();
+                                                "DEFAULT",
+                                                "hugegraph")
+                                          .configUser("username", "password")
+                                          // 这是示例,生产环境需要使用安全的凭证
+                                          .build();
 
         SchemaManager schema = hugeClient.schema();
 

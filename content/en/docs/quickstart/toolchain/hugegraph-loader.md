@@ -590,7 +590,7 @@ A struct-v2.json will be generated in the same directory as struct.json.
 
 ##### 3.3.2 Input Source
 
-Input sources are currently divided into four categories: FILE, HDFS, JDBC, KAFKA and GRAPH, which are distinguished by the `type` node. We call them local file input sources, HDFS input sources, JDBC input sources, KAFKA input sources and GRAPH input source, which are described below.
+Input sources are currently divided into five categories: FILE, HDFS, JDBC, KAFKA and GRAPH, which are distinguished by the `type` node. We call them local file input sources, HDFS input sources, JDBC input sources, KAFKA input sources and GRAPH input source, which are described below.
 
 ###### 3.3.2.1 Local file input source
 
@@ -831,7 +831,7 @@ The import process is controlled by commands submitted by the user, and the user
 | `--check-vertex`          | false         |                 | Whether to check if the vertices connected by the edge exist when inserting the edge                                                                                                      |
 | `--print-progress`        | true          |                 | Whether to print the number of imported items in real time on the console                                                                                                                 |
 | `--dry-run`               | false         |                 | Enable this mode to only parse data without importing; usually used for testing                                                                                                           |
-| `--help`                  | false         |                 | Print help information                                                                                                      |
+| `--help`                  | false         |                 | Print help information                                                                                                     |
 
 ##### 3.4.2 Breakpoint Continuation Mode
 

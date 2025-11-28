@@ -601,7 +601,7 @@ bin/mapping-convert.sh struct.json
 
 ##### 3.3.2 输入源
 
-输入源目前分为五类：FILE、HDFS、JDBC、KAFKA、GRAPH，由`type`节点区分，我们称为本地文件输入源、HDFS 输入源、JDBC 输入源和 KAFKA 输入源，图数据源，下面分别介绍。
+输入源目前分为五类：FILE、HDFS、JDBC、KAFKA 和 GRAPH，由`type`节点区分，我们称为本地文件输入源、HDFS 输入源、JDBC 输入源和 KAFKA 输入源，图数据源，下面分别介绍。
 
 ###### 3.3.2.1 本地文件输入源
 
@@ -842,7 +842,7 @@ schema: 必填
 | `--check-vertex`          | false     |      | 插入边时是否检查边所连接的顶点是否存在                                               |
 | `--print-progress`        | true      |      | 是否在控制台实时打印导入条数                                                    |
 | `--dry-run`               | false     |      | 打开该模式，只解析不导入，通常用于测试                                               |
-| `--help`                  | false     |      | 打印帮助信息                                                            |                                                        |
+| `--help`                  | false     |      | 打印帮助信息                                                            |                                                  
 
 ##### 3.4.2 断点续导模式
 
