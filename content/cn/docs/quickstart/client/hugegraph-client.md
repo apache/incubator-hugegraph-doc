@@ -48,7 +48,7 @@ weight: 1
         <groupId>org.apache.hugegraph</groupId>
         <artifactId>hugegraph-client</artifactId>
         <!-- Update to the latest release version -->
-        <version>1.5.0</version>
+        <version>1.7.0</version>
     </dependency>
 </dependencies>
 ```
@@ -79,7 +79,10 @@ public class SingleExample {
     public static void main(String[] args) throws IOException {
         // If connect failed will throw a exception.
         HugeClient hugeClient = HugeClient.builder("http://localhost:8080",
+                                                   "DEFAULT",
                                                    "hugegraph")
+                                          .configUser("username", "password")
+                                          // 这是示例,生产环境需要使用安全的凭证
                                           .build();
 
         SchemaManager schema = hugeClient.schema();
@@ -224,7 +227,10 @@ public class BatchExample {
     public static void main(String[] args) {
         // If connect failed will throw a exception.
         HugeClient hugeClient = HugeClient.builder("http://localhost:8080",
-                                                   "hugegraph")
+                                                "DEFAULT",
+                                                "hugegraph")
+                                          .configUser("username", "password")
+                                          // 这是示例,生产环境需要使用安全的凭证
                                           .build();
 
         SchemaManager schema = hugeClient.schema();
@@ -348,12 +354,11 @@ public class BatchExample {
 }
 ```
 
-### 4.4 运行 Example
+#### 4.4 运行 Example
 
 运行 Example 之前需要启动 Server,
 启动过程见[HugeGraph-Server Quick Start](/cn/docs/quickstart/hugegraph-server)
 
-### 4.5 详细 API 说明
+#### 4.5 详细 API 说明
 
 示例说明见[HugeGraph-Client 基本 API 介绍](/cn/docs/clients/hugegraph-client)
-

@@ -592,7 +592,7 @@ A struct-v2.json will be generated in the same directory as struct.json.
 
 ##### 3.3.2 Input Source
 
-Input sources are currently divided into four categories: FILE, HDFS, JDBC and KAFKA, which are distinguished by the `type` node. We call them local file input sources, HDFS input sources, JDBC input sources, and KAFKA input sources, which are described below.
+Input sources are currently divided into five categories: FILE, HDFS, JDBC, KAFKA and GRAPH, which are distinguished by the `type` node. We call them local file input sources, HDFS input sources, JDBC input sources, KAFKA input sources and GRAPH input source, which are described below.
 
 ###### 3.3.2.1 Local file input source
 
@@ -696,6 +696,22 @@ schema: required
 - skipped_line: the line you want to skip, composite structure, currently can only configure the regular expression of the line to be skipped, described by the child node regex, the default is not to skip any line, optional;
 - early_stop: the record pulled from Kafka broker at a certain time is empty, stop the task, default is false, only for debugging, optional;
 
+###### 3.3.2.5 GRAPH input Source
+
+- type: Data source type; must be filled in as `graph` or `GRAPH` (required);
+- graphspace: Source graphSpace name; default is `DEFAULT`;
+- graph: Source graph name (required);
+- username: HugeGraph username;
+- password: HugeGraph password;
+- selected_vertices: Filtering rules for vertices to be synchronized;
+- ignored_vertices: Filtering rules for vertices to be ignored;
+- selected_edges: Filtering rules for edges to be synchronized;
+- ignored_edges: Filtering rules for edges to be ignored;
+- pd-peers: HugeGraph-PD node addresses;
+- meta-endpoints: Meta service endpoints of the source cluster;
+- cluster: Source cluster name;
+- batch_size: Batch size for reading data from the source graph; default is 500;
+
 ##### 3.3.3 Vertex and Edge Mapping
 
 The nodes of vertex and edge mapping (a key in the JSON file) have a lot of the same parts. The same parts are introduced first, and then the unique nodes of `vertex map` and `edge map` are introduced respectively.
@@ -780,35 +796,44 @@ The import process is controlled by commands submitted by the user, and the user
 
 | Parameter                 | Default value | Required or not | Description                                                                                                                                                                               |
 |---------------------------|---------------|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `-f` or `--file`          |               | Y               | path to configure script                                                                                                                                                                  |
-| `-g` or `--graph`         |               | Y               | graph space name                                                                                                                                                                          |
-| `-s` or `--schema`        |               | Y               | schema file path                                                                                                                                                                          |
-| `-h` or `--host`          | localhost     |                 | address of HugeGraphServer                                                                                                                                                                |
-| `-p` or `--port`          | 8080          |                 | port number of HugeGraphServer                                                                                                                                                            |
+| `-f` or `--file`          |               | Y               | Path to configure script                                                                                                                                                                  |
+| `-g` or `--graph`         |               | Y               | Graph name                                                                                                                                                                                |
+| `-gs` or `--graphspace`   | DEFAULT       |                 | Graph space name                                                                                                                                                                          |
+| `-s` or `--schema`        |               | Y               | Schema file path                                                                                                                                                                          |
+| `-h` or `--host` or `-i`  | localhost     |                 | Address of HugeGraphServer                                                                                                                                                                |
+| `-p` or `--port`          | 8080          |                 | Port number of HugeGraphServer                                                                                                                                                            |
 | `--username`              | null          |                 | When HugeGraphServer enables permission authentication, the username of the current graph                                                                                                 |
+| `--password`              | null          |                 | When HugeGraphServer enables permission authentication, the password of the current graph                                                                                                 |
+| `--create-graph`          | false         |                 | Whether to automatically create the graph if it does not exist                                                                                                                            |
 | `--token`                 | null          |                 | When HugeGraphServer has enabled authorization authentication, the token of the current graph                                                                                             |
 | `--protocol`              | http          |                 | Protocol for sending requests to the server, optional http or https                                                                                                                       |
+| `--pd-peers`              |               |                 | PD service node addresses                                                                                                                                                                 |
+| `--pd-token`              |               |                 | Token for accessing PD service                                                                                                                                                            |
+| `--meta-endpoints`        |               |                 | Meta information storage service addresses                                                                                                                                                |
+| `--direct`                | false         |                 | Whether to directly connect to HugeGraph-Store                                                                                                                                            |
+| `--route-type`            | NODE_PORT     |                 | Route selection method (optional values: NODE_PORT / DDS / BOTH)                                                                                                                          |
+| `--cluster`               | hg            |                 | Cluster name                                                                                                                                                                              |
 | `--trust-store-file`      |               |                 | When the request protocol is https, the client's certificate file path                                                                                                                    |
 | `--trust-store-password`  |               |                 | When the request protocol is https, the client certificate password                                                                                                                       |
 | `--clear-all-data`        | false         |                 | Whether to clear the original data on the server before importing data                                                                                                                    |
 | `--clear-timeout`         | 240           |                 | Timeout for clearing the original data on the server before importing data                                                                                                                |
-| `--incremental-mode`      | false         |                 | Whether to use the breakpoint resume mode, only the input source is FILE and HDFS support this mode, enabling this mode can start the import from the place where the last import stopped |
-| `--failure-mode`          | false         |                 | When the failure mode is true, the data that failed before will be imported. Generally speaking, the failed data file needs to be manually corrected and edited, and then imported again  |
+| `--incremental-mode`      | false         |                 | Whether to use the breakpoint resume mode; only input sources FILE and HDFS support this mode. Enabling this mode allows starting the import from where the last import stopped          |
+| `--failure-mode`          | false         |                 | When failure mode is true, previously failed data will be imported. Generally, the failed data file needs to be manually corrected and edited before re-importing                        |
 | `--batch-insert-threads`  | CPUs          |                 | Batch insert thread pool size (CPUs is the number of **logical cores** available to the current OS)                                                                                       |
 | `--single-insert-threads` | 8             |                 | Size of single insert thread pool                                                                                                                                                         |
-| `--max-conn`              | 4 * CPUs      |                 | The maximum number of HTTP connections between HugeClient and HugeGraphServer, it is recommended to adjust this when **adjusting threads**                                                |
-| `--max-conn-per-route`    | 2 * CPUs      |                 | The maximum number of HTTP connections for each route between HugeClient and HugeGraphServer, it is recommended to adjust this item at the same time when **adjusting the thread**        |
+| `--max-conn`              | 4 * CPUs      |                 | The maximum number of HTTP connections between HugeClient and HugeGraphServer; it is recommended to adjust this when **adjusting threads**                                                |
+| `--max-conn-per-route`    | 2 * CPUs      |                 | The maximum number of HTTP connections for each route between HugeClient and HugeGraphServer; it is recommended to adjust this item when **adjusting threads**                            |
 | `--batch-size`            | 500           |                 | The number of data items in each batch when importing data                                                                                                                                |
-| `--max-parse-errors`      | 1             |                 | The maximum number of lines of data parsing errors allowed, and the program exits when this value is reached                                                                              |
-| `--max-insert-errors`     | 500           |                 | The maximum number of rows of data insertion errors allowed, and the program exits when this value is reached                                                                             |
-| `--timeout`               | 60            |                 | Timeout (seconds) for inserting results to return                                                                                                                                         |
+| `--max-parse-errors`      | 1             |                 | The maximum number of data parsing errors allowed (per line); the program exits when this value is reached                                                                                |
+| `--max-insert-errors`     | 500           |                 | The maximum number of data insertion errors allowed (per row); the program exits when this value is reached                                                                               |
+| `--timeout`               | 60            |                 | Timeout (seconds) for insert result return                                                                                                                                                |
 | `--shutdown-timeout`      | 10            |                 | Waiting time for multithreading to stop (seconds)                                                                                                                                         |
 | `--retry-times`           | 0             |                 | Number of retries when a specific exception occurs                                                                                                                                        |
-| `--retry-interval`        | 10            |                 | interval before retry (seconds)                                                                                                                                                           |
-| `--check-vertex`          | false         |                 | Whether to check whether the vertex connected by the edge exists when inserting the edge                                                                                                  |
-| `--print-progress`        | true          |                 | Whether to print the number of imported items in the console in real time                                                                                                                 |
-| `--dry-run`               | false         |                 | Turn on this mode, only parsing but not importing, usually used for testing                                                                                                               |
-| `--help`                  | false         |                 | print help information                                                                                                                                                                    |
+| `--retry-interval`        | 10            |                 | Interval before retry (seconds)                                                                                                                                                           |
+| `--check-vertex`          | false         |                 | Whether to check if the vertices connected by the edge exist when inserting the edge                                                                                                      |
+| `--print-progress`        | true          |                 | Whether to print the number of imported items in real time on the console                                                                                                                 |
+| `--dry-run`               | false         |                 | Enable this mode to only parse data without importing; usually used for testing                                                                                                           |
+| `--help`                  | false         |                 | Print help information                                                                                                     |
 
 ##### 3.4.2 Breakpoint Continuation Mode
 
