@@ -82,7 +82,7 @@ public class SingleExample {
                                                    "DEFAULT",
                                                    "hugegraph")
                                           .configUser("username", "password")
-                                          # 这是示例,生产环境需要使用安全的凭证
+                                          // 这是示例,生产环境需要使用安全的凭证
                                           .build();
 
         SchemaManager schema = hugeClient.schema();
@@ -228,7 +228,10 @@ public class BatchExample {
         // If connect failed will throw a exception.
         HugeClient hugeClient = HugeClient.builder("http://localhost:8080",
                                                    "DEFAULT",
-                                                   "hugegraph").build();
+                                                   "hugegraph")
+                                                .configUser("username", "password")
+                                                // 这是示例,生产环境需要使用安全的凭证
+                                                .build();
 
         SchemaManager schema = hugeClient.schema();
 

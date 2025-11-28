@@ -78,7 +78,7 @@ public class SingleExample {
                                                    "DEFAULT",
                                                    "hugegraph")
                                           .configUser("username", "password")
-                                          # This is an example. In a production environment, secure credentials should be used.
+                                          // This is an example. In a production environment, secure credentials should be used.
                                           .build();
 
         SchemaManager schema = hugeClient.schema();
@@ -223,7 +223,10 @@ public class BatchExample {
     public static void main(String[] args) {
         HugeClient hugeClient = HugeClient.builder("http://localhost:8080",
                                                    "DEFAULT",
-                                                   "hugegraph").build();
+                                                   "hugegraph")
+                                          .configUser("username", "password")
+                                          // This is an example. In a production environment, secure credentials should be used.
+                                          .build();
 
         SchemaManager schema = hugeClient.schema();
 
