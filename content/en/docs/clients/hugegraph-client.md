@@ -12,7 +12,7 @@ The `gremlin(groovy)` written by the user in `HugeGraph-Studio` can refer to the
 
 HugeGraph-Client is the general entry for operating graph. Users must first create a HugeGraph-Client object and establish a connection (pseudo connection) with HugeGraph-Server before they can obtain the operation entry objects of schema, graph and gremlin.
 
-Currently, HugeGraph-Client only allows connections to existing graphs on the server, and cannot create custom graphs. Meanwhile, it should be noted that starting from version 1.7.0, building the HugeGraph-Client must specify a GraphSpace (e.g., the default "DEFAULT"). Its creation method is as follows:
+Currently, HugeGraph-Client only allows connections to existing graphs on the server, and cannot create custom graphs. After version 1.7.0, client has supported setting graphSpace, the default value for graphSpace is DEFAULT.Its creation method is as follows:
 
 ```java
 // HugeGraphServer address: "http://localhost:8080"

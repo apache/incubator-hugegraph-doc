@@ -13,12 +13,12 @@ weight: 2
 
 HugeGraph-Client 是操作 graph 的总入口，用户必须先创建出 HugeGraph-Client 对象，与 HugeGraph-Server 建立连接（伪连接）后，才能获取到 schema、graph 以及 gremlin 的操作入口对象。
 
-目前 HugeGraph-Client 只允许连接服务端已存在的图，无法自定义图进行创建。同时，需注意 1.7.0 后，构建 HugeGraph-Client 必须指定 GraphSpace（如默认 "DEFAULT"）。其创建方法如下：
+目前 HugeGraph-Client 只允许连接服务端已存在的图，无法自定义图进行创建。1.7.0 版本后，client 支持 graphSpace 设置，默认为DEFAULT。其创建方法如下：
 
 ```java
 // HugeGraphServer 地址："http://localhost:8080"
 // 图的名称："hugegraph"
-HugeClient hugeClient = HugeClient.builder("http://localhost:8080", "DEFAULT", "hugegraph")
+HugeClient hugeClient = HugeClient.builder("http://localhost:8080", "hugegraph")
                                   .configTimeout(20) // 默认 20s 超时
                                   .configUser("**", "**") // 默认未开启用户权限
                                   .build();
