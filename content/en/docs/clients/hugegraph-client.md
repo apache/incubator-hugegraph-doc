@@ -12,12 +12,13 @@ The `gremlin(groovy)` written by the user in `HugeGraph-Studio` can refer to the
 
 HugeGraph-Client is the general entry for operating graph. Users must first create a HugeGraph-Client object and establish a connection (pseudo connection) with HugeGraph-Server before they can obtain the operation entry objects of schema, graph and gremlin.
 
-Currently, HugeGraph-Client only allows connections to existing graphs on the server, and cannot create custom graphs. Its creation method is as follows:
+Currently, HugeGraph-Client only allows connections to existing graphs on the server, and cannot create custom graphs. After version 1.7.0, client has supported setting graphSpace, the default value for graphSpace is DEFAULT. Its creation method is as follows:
 
 ```java
 // HugeGraphServer address: "http://localhost:8080"
 // Graph Name: "hugegraph"
 HugeClient hugeClient = HugeClient.builder("http://localhost:8080", "hugegraph")
+                                //.builder("http://localhost:8080", "graphSpaceName", "hugegraph")
                                   .configTimeout(20) // 20s timeout
                                   .configUser("**", "**") // enable auth 
                                   .build();
@@ -444,6 +445,40 @@ Edge knows1 = marko.addEdge("knows", vadas, "city", "Beijing");
 
 **Note: When frequency is multiple, the value of the property type corresponding to sortKeys must be set.**
 
-### 4 Examples
+### 4 GraphSpace
+The client supports multiple GraphSpaces in one physical deployment, and each GraphSpace can contain multiple graphs.
+- Compatibility: When no GraphSpace is specified, the "DEFAULT" space is used by default.
+
+#### 4.1 Create GraphSpace
+
+```java
+GraphSpaceManager spaceManager = hugeClient.graphSpace();
+
+// Define GraphSpace configuration
+GraphSpace graphSpace = new GraphSpace();
+graphSpace.setName("myGraphSpace");
+graphSpace.setDescription("Business data graph space");
+graphSpace.setMaxGraphNumber(10);  // Maximum number of graphs
+graphSpace.setMaxRoleNumber(100);  // Maximum number of roles
+
+// Create GraphSpace
+spaceManager.createGraphSpace(graphSpace);
+```
+
+#### 4.2 GraphSpace Interface Summary
+
+| Category | Interface | Description |
+|----------|-----------|-------------|
+| Manager - Query | listGraphSpace() | Get the list of all GraphSpaces |
+|           | getGraphSpace(String name) | Get the specified GraphSpace |
+| Manager - Create/Update | createGraphSpace(GraphSpace) | Create a GraphSpace |
+|           | updateGraphSpace(String, GraphSpace) | Update configuration |
+| Manager - Delete | removeGraphSpace(String) | Delete the specified GraphSpace |
+| GraphSpace - Properties | getName() / getDescription() | Get name / description |
+|           | getGraphNumber() | Get the number of graphs |
+| GraphSpace - Configuration | setDescription(String) | Set description |
+|           | setMaxGraphNumber(int) | Set the maximum number of graphs |
+
+### 5 Simple Example
 
 Simple examples can reference [HugeGraph-Client](/docs/quickstart/client/hugegraph-client)
