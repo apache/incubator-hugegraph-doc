@@ -1696,7 +1696,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.hugegraph&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/groupId&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;artifactId&amp;gt;&lt;/span>hugegraph-client&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/artifactId&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">&amp;lt;!-- Update to the latest release version --&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;version&amp;gt;&lt;/span>1.5.0&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;version&amp;gt;&lt;/span>1.7.0&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/version&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;/dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/dependencies&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
@@ -1724,8 +1724,11 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">static&lt;/span> &lt;span style="color:#204a87;font-weight:bold">void&lt;/span> &lt;span style="color:#000">main&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">String&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> &lt;span style="color:#000">args&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#204a87;font-weight:bold">throws&lt;/span> &lt;span style="color:#000">IOException&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// If connect failed will throw a exception.
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000">HugeClient&lt;/span> &lt;span style="color:#000">hugeClient&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">HugeClient&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">builder&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;http://localhost:8080&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;DEFAULT&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">build&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">configUser&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;username&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;password&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// 这是示例,生产环境需要使用安全的凭证
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">build&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">SchemaManager&lt;/span> &lt;span style="color:#000">schema&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">hugeClient&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -1865,8 +1868,11 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">static&lt;/span> &lt;span style="color:#204a87;font-weight:bold">void&lt;/span> &lt;span style="color:#000">main&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">String&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> &lt;span style="color:#000">args&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// If connect failed will throw a exception.
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000">HugeClient&lt;/span> &lt;span style="color:#000">hugeClient&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">HugeClient&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">builder&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;http://localhost:8080&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;DEFAULT&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">build&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">configUser&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;username&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;password&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// 这是示例,生产环境需要使用安全的凭证
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">build&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">SchemaManager&lt;/span> &lt;span style="color:#000">schema&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">hugeClient&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -1987,10 +1993,10 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">hugeClient&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">close&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="44-运行-example">4.4 运行 Example&lt;/h3>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="44-运行-example">4.4 运行 Example&lt;/h4>
 &lt;p>运行 Example 之前需要启动 Server,
 启动过程见&lt;a href="/cn/docs/quickstart/hugegraph-server">HugeGraph-Server Quick Start&lt;/a>&lt;/p>
-&lt;h3 id="45-详细-api-说明">4.5 详细 API 说明&lt;/h3>
+&lt;h4 id="45-详细-api-说明">4.5 详细 API 说明&lt;/h4>
 &lt;p>示例说明见&lt;a href="/cn/docs/clients/hugegraph-client">HugeGraph-Client 基本 API 介绍&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph 0.12 Release Notes</title><link>/cn/docs/changelog/hugegraph-0.12.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/changelog/hugegraph-0.12.0-release-notes/</guid><description>
 &lt;h3 id="api--client">API &amp;amp; Client&lt;/h3>
 &lt;h4 id="接口更新">接口更新&lt;/h4>
@@ -5009,11 +5015,12 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;p>用户在&lt;code>HugeGraph-Hubble&lt;/code>中编写的&lt;code>gremlin(groovy)&lt;/code>可以参考本文的&lt;code>java&lt;/code>代码，下面会举出几个例子。&lt;/p>
 &lt;h3 id="1-hugegraph-client">1 HugeGraph-Client&lt;/h3>
 &lt;p>HugeGraph-Client 是操作 graph 的总入口，用户必须先创建出 HugeGraph-Client 对象，与 HugeGraph-Server 建立连接（伪连接）后，才能获取到 schema、graph 以及 gremlin 的操作入口对象。&lt;/p>
-&lt;p>目前 HugeGraph-Client 只允许连接服务端已存在的图，无法自定义图进行创建。其创建方法如下：&lt;/p>
+&lt;p>目前 HugeGraph-Client 只允许连接服务端已存在的图，无法自定义图进行创建。1.7.0 版本后，client 支持 graphSpace 设置，默认为DEFAULT。其创建方法如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// HugeGraphServer 地址：&amp;#34;http://localhost:8080&amp;#34;
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// 图的名称：&amp;#34;hugegraph&amp;#34;
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">HugeClient&lt;/span> &lt;span style="color:#000">hugeClient&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">HugeClient&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">builder&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;http://localhost:8080&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">configTimeout&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">20&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// 默认 20s 超时
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">//.builder(&amp;#34;http://localhost:8080&amp;#34;, &amp;#34;graphSpaceName&amp;#34;, &amp;#34;hugegraph&amp;#34;)
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">configTimeout&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">20&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// 默认 20s 超时
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">configUser&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;**&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;**&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// 默认未开启用户权限
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">build&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上述创建 HugeClient 的过程如果失败会抛出异常，用户需要 try-catch。如果成功则继续获取 schema、graph 以及 gremlin 的 manager。&lt;/p>
@@ -5719,7 +5726,81 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;li>对于非 nullableKeys 的属性，必须要赋值。&lt;/li>
 &lt;/ul>
 &lt;p>&lt;strong>注意：当 frequency 为 multiple 时必须要设置 sortKeys 对应属性类型的值。&lt;/strong>&lt;/p>
-&lt;h3 id="4-简单示例">4 简单示例&lt;/h3>
+&lt;h3 id="4-图管理">4 图管理&lt;/h3>
+&lt;p>client支持一个物理部署中多个 GraphSpace，每个 GraphSpace 下可以含多个图（graph）。&lt;/p>
+&lt;ul>
+&lt;li>兼容：不指定 GraphSpace 时，默认使用 &amp;ldquo;DEFAULT&amp;rdquo; 空间&lt;/li>
+&lt;/ul>
+&lt;h4 id="41-创建graphspace">4.1 创建GraphSpace&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GraphSpaceManager&lt;/span> &lt;span style="color:#000">spaceManager&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">hugeClient&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">graphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// 定义 GraphSpace 配置
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">GraphSpace&lt;/span> &lt;span style="color:#000">graphSpace&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">new&lt;/span> &lt;span style="color:#000">GraphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">setName&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;myGraphSpace&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">setDescription&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Business data graph space&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">setMaxGraphNumber&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">10&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// 最大图数量
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">graphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">setMaxRoleNumber&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">100&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// 最大角色数量
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// 创建 GraphSpace
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">spaceManager&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">createGraphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">graphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="42-graphspace-接口汇总">4.2 GraphSpace 接口汇总&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>类别&lt;/th>
+&lt;th>接口&lt;/th>
+&lt;th>描述&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Manager - 查询&lt;/td>
+&lt;td>listGraphSpace()&lt;/td>
+&lt;td>获取所有 GraphSpace 列表&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>getGraphSpace(String name)&lt;/td>
+&lt;td>获取指定 GraphSpace&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Manager - 创建/更新&lt;/td>
+&lt;td>createGraphSpace(GraphSpace)&lt;/td>
+&lt;td>创建 GraphSpace&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>updateGraphSpace(String, GraphSpace)&lt;/td>
+&lt;td>更新配置&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Manager - 删除&lt;/td>
+&lt;td>removeGraphSpace(String)&lt;/td>
+&lt;td>删除指定 GraphSpace&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>GraphSpace - 属性&lt;/td>
+&lt;td>getName() / getDescription()&lt;/td>
+&lt;td>获取名称/描述&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>getGraphNumber()&lt;/td>
+&lt;td>获取图数量&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>GraphSpace - 配置&lt;/td>
+&lt;td>setDescription(String)&lt;/td>
+&lt;td>设置描述&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>setMaxGraphNumber(int)&lt;/td>
+&lt;td>设置最大图数量&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="5-简单示例">5 简单示例&lt;/h3>
 &lt;p>简单示例见&lt;a href="/cn/docs/quickstart/client/hugegraph-client">HugeGraph-Client&lt;/a>&lt;/p></description></item><item><title>Docs: PropertyKey API</title><link>/cn/docs/clients/restful-api/propertykey/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/restful-api/propertykey/</guid><description>
 &lt;h3 id="12-propertykey">1.2 PropertyKey&lt;/h3>
 &lt;p>Params 说明：&lt;/p>
@@ -6943,7 +7024,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/mapping-convert.sh struct.json
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>会在 struct.json 的同级目录下生成一个 struct-v2.json。&lt;/p>
 &lt;h5 id="332-输入源">3.3.2 输入源&lt;/h5>
-&lt;p>输入源目前分为四类：FILE、HDFS、JDBC、KAFKA，由&lt;code>type&lt;/code>节点区分，我们称为本地文件输入源、HDFS 输入源、JDBC 输入源和 KAFKA 输入源，下面分别介绍。&lt;/p>
+&lt;p>输入源目前分为五类：FILE、HDFS、JDBC、KAFKA 和 GRAPH，由&lt;code>type&lt;/code>节点区分，我们称为本地文件输入源、HDFS 输入源、JDBC 输入源和 KAFKA 输入源，图数据源，下面分别介绍。&lt;/p>
 &lt;h6 id="3321-本地文件输入源">3.3.2.1 本地文件输入源&lt;/h6>
 &lt;ul>
 &lt;li>id: 输入源的 id，该字段用于支持一些内部功能，非必填（未填时会自动生成），强烈建议写上，对于调试大有裨益；&lt;/li>
@@ -7106,6 +7187,22 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;li>skipped_line：想跳过的行，复合结构，目前只能配置要跳过的行的正则表达式，用子节点 regex 描述，默认不跳过任何行，选填；&lt;/li>
 &lt;li>early_stop：某次从 Kafka broker 拉取的记录为空，停止任务，默认为 false，仅用于调试，选填；&lt;/li>
 &lt;/ul>
+&lt;h6 id="3325-graph-输入源">3.3.2.5 GRAPH 输入源&lt;/h6>
+&lt;ul>
+&lt;li>type：输入源类型，必须填 &lt;code>graph&lt;/code> 或 &lt;code>GRAPH&lt;/code>，必填；&lt;/li>
+&lt;li>graphspace：源图空间名称，默认为 &lt;code>DEFAULT&lt;/code>；&lt;/li>
+&lt;li>graph： 源图名称，必填；&lt;/li>
+&lt;li>username：HugeGraph 用户名；&lt;/li>
+&lt;li>password：HugeGraph 密码；&lt;/li>
+&lt;li>selected_vertices：要同步的顶点筛选规则；&lt;/li>
+&lt;li>ignored_vertices：要忽略的顶点筛选规则；&lt;/li>
+&lt;li>selected_edges：要同步的边筛选规则；&lt;/li>
+&lt;li>ignored_edges：要忽略的边筛选规则；&lt;/li>
+&lt;li>pd-peers：HugeGraph-PD 节点地址；&lt;/li>
+&lt;li>meta-endpoints：源集群 Meta服务端点；&lt;/li>
+&lt;li>cluster：源集群名称；&lt;/li>
+&lt;li>batch_size：批量读取源图数据的批次大小，默认为500；&lt;/li>
+&lt;/ul>
 &lt;h5 id="333-顶点和边映射">3.3.3 顶点和边映射&lt;/h5>
 &lt;p>顶点和边映射的节点（JSON 文件中的一个 key）有很多相同的部分，下面先介绍相同部分，再分别介绍&lt;code>顶点映射&lt;/code>和&lt;code>边映射&lt;/code>的特有节点。&lt;/p>
 &lt;p>&lt;strong>相同部分的节点&lt;/strong>&lt;/p>
@@ -7199,7 +7296,13 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;td>&lt;code>-g&lt;/code> 或 &lt;code>--graph&lt;/code>&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Y&lt;/td>
-&lt;td>图数据库空间&lt;/td>
+&lt;td>图名称&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>-gs&lt;/code> 或 &lt;code>--graphspace&lt;/code>&lt;/td>
+&lt;td>DEFAULT&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>图空间&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&lt;code>-s&lt;/code> 或 &lt;code>--schema&lt;/code>&lt;/td>
@@ -7208,7 +7311,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;td>schema 文件路径&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>-h&lt;/code> 或 &lt;code>--host&lt;/code>&lt;/td>
+&lt;td>&lt;code>-h&lt;/code> 或 &lt;code>--host&lt;/code> 或 &lt;code>-i&lt;/code>&lt;/td>
 &lt;td>localhost&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>HugeGraphServer 的地址&lt;/td>
@@ -7226,6 +7329,18 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;td>当 HugeGraphServer 开启了权限认证时，当前图的 username&lt;/td>
 &lt;/tr>
 &lt;tr>
+&lt;td>&lt;code>--password&lt;/code>&lt;/td>
+&lt;td>null&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>当 HugeGraphServer 开启了权限认证时，当前图的 password&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--create-graph&lt;/code>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>是否在图不存在时自动创建&lt;/td>
+&lt;/tr>
+&lt;tr>
 &lt;td>&lt;code>--token&lt;/code>&lt;/td>
 &lt;td>null&lt;/td>
 &lt;td>&lt;/td>
@@ -7236,6 +7351,42 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;td>http&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>向服务端发请求的协议，可选 http 或 https&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--pd-peers&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>PD 服务节点地址&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--pd-token&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>访问 PD 服务的 token&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--meta-endpoints&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>元信息存储服务地址&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--direct&lt;/code>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>是否直连 HugeGraph-Store&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--route-type&lt;/code>&lt;/td>
+&lt;td>NODE_PORT&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>路由选择方式（可选值：NODE_PORT / DDS / BOTH）&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--cluster&lt;/code>&lt;/td>
+&lt;td>hg&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>集群名&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&lt;code>--trust-store-file&lt;/code>&lt;/td>
@@ -7265,7 +7416,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;td>&lt;code>--incremental-mode&lt;/code>&lt;/td>
 &lt;td>false&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>是否使用断点续导模式，仅输入源为 FILE 和 HDFS 支持该模式，启用该模式能从上一次导入停止的地方开始导&lt;/td>
+&lt;td>是否使用断点续导模式，仅输入源为 FILE 和 HDFS 支持该模式，启用该模式能从上一次导入停止的地方开始导入&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&lt;code>--failure-mode&lt;/code>&lt;/td>
@@ -7277,7 +7428,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;td>&lt;code>--batch-insert-threads&lt;/code>&lt;/td>
 &lt;td>CPUs&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>批量插入线程池大小 (CPUs 是当前 OS 可用可用&lt;strong>逻辑核&lt;/strong>个数)&lt;/td>
+&lt;td>批量插入线程池大小 (CPUs 是当前 OS 可用&lt;strong>逻辑核&lt;/strong>个数)&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&lt;code>--single-insert-threads&lt;/code>&lt;/td>

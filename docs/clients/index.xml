@@ -14,11 +14,12 @@ You can convert &lt;code>java&lt;/code> code into &lt;code>groovy&lt;/code>; in 
 The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph-Studio&lt;/code> can refer to the &lt;code>java&lt;/code> code in this document, and some examples will be given below.&lt;/p>
 &lt;h3 id="1-hugegraph-client">1 HugeGraph-Client&lt;/h3>
 &lt;p>HugeGraph-Client is the general entry for operating graph. Users must first create a HugeGraph-Client object and establish a connection (pseudo connection) with HugeGraph-Server before they can obtain the operation entry objects of schema, graph and gremlin.&lt;/p>
-&lt;p>Currently, HugeGraph-Client only allows connections to existing graphs on the server, and cannot create custom graphs. Its creation method is as follows:&lt;/p>
+&lt;p>Currently, HugeGraph-Client only allows connections to existing graphs on the server, and cannot create custom graphs. After version 1.7.0, client has supported setting graphSpace, the default value for graphSpace is DEFAULT. Its creation method is as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// HugeGraphServer address: &amp;#34;http://localhost:8080&amp;#34;
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// Graph Name: &amp;#34;hugegraph&amp;#34;
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">HugeClient&lt;/span> &lt;span style="color:#000">hugeClient&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">HugeClient&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">builder&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;http://localhost:8080&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">configTimeout&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">20&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// 20s timeout
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">//.builder(&amp;#34;http://localhost:8080&amp;#34;, &amp;#34;graphSpaceName&amp;#34;, &amp;#34;hugegraph&amp;#34;)
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">configTimeout&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">20&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// 20s timeout
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">configUser&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;**&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;**&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// enable auth
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">build&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If the above process of creating HugeClient fails, an exception will be thrown, and the user needs to use try-catch. If successful, continue to get schema, graph and gremlin manager.&lt;/p>
@@ -721,7 +722,81 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;li>For properties that are not nullableKeys, a value must be assigned.&lt;/li>
 &lt;/ul>
 &lt;p>&lt;strong>Note: When frequency is multiple, the value of the property type corresponding to sortKeys must be set.&lt;/strong>&lt;/p>
-&lt;h3 id="4-examples">4 Examples&lt;/h3>
+&lt;h3 id="4-graphspace">4 GraphSpace&lt;/h3>
+&lt;p>The client supports multiple GraphSpaces in one physical deployment, and each GraphSpace can contain multiple graphs.&lt;/p>
+&lt;ul>
+&lt;li>Compatibility: When no GraphSpace is specified, the &amp;ldquo;DEFAULT&amp;rdquo; space is used by default.&lt;/li>
+&lt;/ul>
+&lt;h4 id="41-create-graphspace">4.1 Create GraphSpace&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GraphSpaceManager&lt;/span> &lt;span style="color:#000">spaceManager&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">hugeClient&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">graphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// Define GraphSpace configuration
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">GraphSpace&lt;/span> &lt;span style="color:#000">graphSpace&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">new&lt;/span> &lt;span style="color:#000">GraphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">setName&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;myGraphSpace&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">setDescription&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Business data graph space&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">setMaxGraphNumber&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">10&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// Maximum number of graphs
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">graphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">setMaxRoleNumber&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">100&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// Maximum number of roles
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// Create GraphSpace
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">spaceManager&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">createGraphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">graphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="42-graphspace-interface-summary">4.2 GraphSpace Interface Summary&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Category&lt;/th>
+&lt;th>Interface&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Manager - Query&lt;/td>
+&lt;td>listGraphSpace()&lt;/td>
+&lt;td>Get the list of all GraphSpaces&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>getGraphSpace(String name)&lt;/td>
+&lt;td>Get the specified GraphSpace&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Manager - Create/Update&lt;/td>
+&lt;td>createGraphSpace(GraphSpace)&lt;/td>
+&lt;td>Create a GraphSpace&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>updateGraphSpace(String, GraphSpace)&lt;/td>
+&lt;td>Update configuration&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Manager - Delete&lt;/td>
+&lt;td>removeGraphSpace(String)&lt;/td>
+&lt;td>Delete the specified GraphSpace&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>GraphSpace - Properties&lt;/td>
+&lt;td>getName() / getDescription()&lt;/td>
+&lt;td>Get name / description&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>getGraphNumber()&lt;/td>
+&lt;td>Get the number of graphs&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>GraphSpace - Configuration&lt;/td>
+&lt;td>setDescription(String)&lt;/td>
+&lt;td>Set description&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>setMaxGraphNumber(int)&lt;/td>
+&lt;td>Set the maximum number of graphs&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="5-simple-example">5 Simple Example&lt;/h3>
 &lt;p>Simple examples can reference &lt;a href="/docs/quickstart/client/hugegraph-client">HugeGraph-Client&lt;/a>&lt;/p></description></item><item><title>Docs: Gremlin-Console</title><link>/docs/clients/gremlin-console/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/clients/gremlin-console/</guid><description>
 &lt;p>Gremlin-Console is an interactive client developed by TinkerPop. Users can use this client to perform various operations on Graph. There are two main usage modes:&lt;/p>
 &lt;ul>

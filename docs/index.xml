@@ -2752,7 +2752,7 @@ You can use &lt;a href="/docs/clients/hugegraph-client">Client-API&lt;/a> to wri
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.hugegraph&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/groupId&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;artifactId&amp;gt;&lt;/span>hugegraph-client&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/artifactId&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">&amp;lt;!-- Update to the latest release version --&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;version&amp;gt;&lt;/span>1.5.0&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;version&amp;gt;&lt;/span>1.7.0&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/version&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;/dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/dependencies&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
@@ -2780,8 +2780,11 @@ You can use &lt;a href="/docs/clients/hugegraph-client">Client-API&lt;/a> to wri
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">static&lt;/span> &lt;span style="color:#204a87;font-weight:bold">void&lt;/span> &lt;span style="color:#000">main&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">String&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> &lt;span style="color:#000">args&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#204a87;font-weight:bold">throws&lt;/span> &lt;span style="color:#000">IOException&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// If connect failed will throw a exception.
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000">HugeClient&lt;/span> &lt;span style="color:#000">hugeClient&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">HugeClient&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">builder&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;http://localhost:8080&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;DEFAULT&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">build&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">configUser&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;username&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;password&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// This is an example. In a production environment, secure credentials should be used.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">build&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">SchemaManager&lt;/span> &lt;span style="color:#000">schema&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">hugeClient&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -2919,10 +2922,12 @@ You can use &lt;a href="/docs/clients/hugegraph-client">Client-API&lt;/a> to wri
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">class&lt;/span> &lt;span style="color:#000">BatchExample&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">static&lt;/span> &lt;span style="color:#204a87;font-weight:bold">void&lt;/span> &lt;span style="color:#000">main&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">String&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">[]&lt;/span> &lt;span style="color:#000">args&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// If connect failed will throw a exception.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#000">HugeClient&lt;/span> &lt;span style="color:#000">hugeClient&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">HugeClient&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">builder&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;http://localhost:8080&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">HugeClient&lt;/span> &lt;span style="color:#000">hugeClient&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">HugeClient&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">builder&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;http://localhost:8080&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;DEFAULT&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">build&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">configUser&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;username&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;password&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">// This is an example. In a production environment, secure credentials should be used.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">build&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">SchemaManager&lt;/span> &lt;span style="color:#000">schema&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">hugeClient&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -3043,9 +3048,9 @@ You can use &lt;a href="/docs/clients/hugegraph-client">Client-API&lt;/a> to wri
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">hugeClient&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">close&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="44-run-the-example">4.4 Run The Example&lt;/h3>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="44-run-the-example">4.4 Run The Example&lt;/h4>
 &lt;p>Before running Example, you need to start the Server. For the startup process, see&lt;a href="/docs/quickstart/hugegraph/hugegraph-server">HugeGraph-Server Quick Start&lt;/a>.&lt;/p>
-&lt;h3 id="45-more-information-about-client-api">4.5 More Information About Client-API&lt;/h3>
+&lt;h4 id="45-more-information-about-client-api">4.5 More Information About Client-API&lt;/h4>
 &lt;p>See&lt;a href="/docs/clients/hugegraph-client">Introduce basic API of HugeGraph-Client&lt;/a>.&lt;/p></description></item><item><title>Docs: Schema API</title><link>/docs/clients/restful-api/schema/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/clients/restful-api/schema/</guid><description>
 &lt;h3 id="11-schema">1.1 Schema&lt;/h3>
 &lt;p>HugeGraph provides a single interface to get all Schema information of a graph, including: PropertyKey, VertexLabel, EdgeLabel and IndexLabel.&lt;/p>
@@ -6358,11 +6363,12 @@ You can convert &lt;code>java&lt;/code> code into &lt;code>groovy&lt;/code>; in 
 The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph-Studio&lt;/code> can refer to the &lt;code>java&lt;/code> code in this document, and some examples will be given below.&lt;/p>
 &lt;h3 id="1-hugegraph-client">1 HugeGraph-Client&lt;/h3>
 &lt;p>HugeGraph-Client is the general entry for operating graph. Users must first create a HugeGraph-Client object and establish a connection (pseudo connection) with HugeGraph-Server before they can obtain the operation entry objects of schema, graph and gremlin.&lt;/p>
-&lt;p>Currently, HugeGraph-Client only allows connections to existing graphs on the server, and cannot create custom graphs. Its creation method is as follows:&lt;/p>
+&lt;p>Currently, HugeGraph-Client only allows connections to existing graphs on the server, and cannot create custom graphs. After version 1.7.0, client has supported setting graphSpace, the default value for graphSpace is DEFAULT. Its creation method is as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// HugeGraphServer address: &amp;#34;http://localhost:8080&amp;#34;
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// Graph Name: &amp;#34;hugegraph&amp;#34;
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">HugeClient&lt;/span> &lt;span style="color:#000">hugeClient&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">HugeClient&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">builder&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;http://localhost:8080&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">configTimeout&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">20&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// 20s timeout
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">//.builder(&amp;#34;http://localhost:8080&amp;#34;, &amp;#34;graphSpaceName&amp;#34;, &amp;#34;hugegraph&amp;#34;)
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">configTimeout&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">20&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// 20s timeout
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">configUser&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;**&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;**&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// enable auth
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">build&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If the above process of creating HugeClient fails, an exception will be thrown, and the user needs to use try-catch. If successful, continue to get schema, graph and gremlin manager.&lt;/p>
@@ -7065,7 +7071,81 @@ The &lt;code>gremlin(groovy)&lt;/code> written by the user in &lt;code>HugeGraph
 &lt;li>For properties that are not nullableKeys, a value must be assigned.&lt;/li>
 &lt;/ul>
 &lt;p>&lt;strong>Note: When frequency is multiple, the value of the property type corresponding to sortKeys must be set.&lt;/strong>&lt;/p>
-&lt;h3 id="4-examples">4 Examples&lt;/h3>
+&lt;h3 id="4-graphspace">4 GraphSpace&lt;/h3>
+&lt;p>The client supports multiple GraphSpaces in one physical deployment, and each GraphSpace can contain multiple graphs.&lt;/p>
+&lt;ul>
+&lt;li>Compatibility: When no GraphSpace is specified, the &amp;ldquo;DEFAULT&amp;rdquo; space is used by default.&lt;/li>
+&lt;/ul>
+&lt;h4 id="41-create-graphspace">4.1 Create GraphSpace&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GraphSpaceManager&lt;/span> &lt;span style="color:#000">spaceManager&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">hugeClient&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">graphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// Define GraphSpace configuration
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">GraphSpace&lt;/span> &lt;span style="color:#000">graphSpace&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">new&lt;/span> &lt;span style="color:#000">GraphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">setName&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;myGraphSpace&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">setDescription&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Business data graph space&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">setMaxGraphNumber&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">10&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// Maximum number of graphs
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">graphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">setMaxRoleNumber&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">100&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// Maximum number of roles
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// Create GraphSpace
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">spaceManager&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">createGraphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">graphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="42-graphspace-interface-summary">4.2 GraphSpace Interface Summary&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Category&lt;/th>
+&lt;th>Interface&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Manager - Query&lt;/td>
+&lt;td>listGraphSpace()&lt;/td>
+&lt;td>Get the list of all GraphSpaces&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>getGraphSpace(String name)&lt;/td>
+&lt;td>Get the specified GraphSpace&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Manager - Create/Update&lt;/td>
+&lt;td>createGraphSpace(GraphSpace)&lt;/td>
+&lt;td>Create a GraphSpace&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>updateGraphSpace(String, GraphSpace)&lt;/td>
+&lt;td>Update configuration&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Manager - Delete&lt;/td>
+&lt;td>removeGraphSpace(String)&lt;/td>
+&lt;td>Delete the specified GraphSpace&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>GraphSpace - Properties&lt;/td>
+&lt;td>getName() / getDescription()&lt;/td>
+&lt;td>Get name / description&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>getGraphNumber()&lt;/td>
+&lt;td>Get the number of graphs&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>GraphSpace - Configuration&lt;/td>
+&lt;td>setDescription(String)&lt;/td>
+&lt;td>Set description&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>setMaxGraphNumber(int)&lt;/td>
+&lt;td>Set the maximum number of graphs&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="5-simple-example">5 Simple Example&lt;/h3>
 &lt;p>Simple examples can reference &lt;a href="/docs/quickstart/client/hugegraph-client">HugeGraph-Client&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph-PD Quick Start</title><link>/docs/quickstart/hugegraph/hugegraph-pd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph/hugegraph-pd/</guid><description>
 &lt;h3 id="1-hugegraph-pd-overview">1 HugeGraph-PD Overview&lt;/h3>
 &lt;p>HugeGraph-PD (Placement Driver) is the metadata management component of HugeGraph&amp;rsquo;s distributed version, responsible for managing the distribution of graph data and coordinating storage nodes. It plays a central role in distributed HugeGraph, maintaining cluster status and coordinating HugeGraph-Store storage nodes.&lt;/p>
@@ -7679,7 +7759,7 @@ Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-d
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/mapping-convert.sh struct.json
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>A struct-v2.json will be generated in the same directory as struct.json.&lt;/p>
 &lt;h5 id="332-input-source">3.3.2 Input Source&lt;/h5>
-&lt;p>Input sources are currently divided into four categories: FILE, HDFS, JDBC and KAFKA, which are distinguished by the &lt;code>type&lt;/code> node. We call them local file input sources, HDFS input sources, JDBC input sources, and KAFKA input sources, which are described below.&lt;/p>
+&lt;p>Input sources are currently divided into five categories: FILE, HDFS, JDBC, KAFKA and GRAPH, which are distinguished by the &lt;code>type&lt;/code> node. We call them local file input sources, HDFS input sources, JDBC input sources, KAFKA input sources and GRAPH input source, which are described below.&lt;/p>
 &lt;h6 id="3321-local-file-input-source">3.3.2.1 Local file input source&lt;/h6>
 &lt;ul>
 &lt;li>id: The id of the input source. This field is used to support some internal functions. It is not required (it will be automatically generated if it is not filled in). It is strongly recommended to write it, which is very helpful for debugging;&lt;/li>
@@ -7842,6 +7922,22 @@ Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-d
 &lt;li>skipped_line: the line you want to skip, composite structure, currently can only configure the regular expression of the line to be skipped, described by the child node regex, the default is not to skip any line, optional;&lt;/li>
 &lt;li>early_stop: the record pulled from Kafka broker at a certain time is empty, stop the task, default is false, only for debugging, optional;&lt;/li>
 &lt;/ul>
+&lt;h6 id="3325-graph-input-source">3.3.2.5 GRAPH input Source&lt;/h6>
+&lt;ul>
+&lt;li>type: Data source type; must be filled in as &lt;code>graph&lt;/code> or &lt;code>GRAPH&lt;/code> (required);&lt;/li>
+&lt;li>graphspace: Source graphSpace name; default is &lt;code>DEFAULT&lt;/code>;&lt;/li>
+&lt;li>graph: Source graph name (required);&lt;/li>
+&lt;li>username: HugeGraph username;&lt;/li>
+&lt;li>password: HugeGraph password;&lt;/li>
+&lt;li>selected_vertices: Filtering rules for vertices to be synchronized;&lt;/li>
+&lt;li>ignored_vertices: Filtering rules for vertices to be ignored;&lt;/li>
+&lt;li>selected_edges: Filtering rules for edges to be synchronized;&lt;/li>
+&lt;li>ignored_edges: Filtering rules for edges to be ignored;&lt;/li>
+&lt;li>pd-peers: HugeGraph-PD node addresses;&lt;/li>
+&lt;li>meta-endpoints: Meta service endpoints of the source cluster;&lt;/li>
+&lt;li>cluster: Source cluster name;&lt;/li>
+&lt;li>batch_size: Batch size for reading data from the source graph; default is 500;&lt;/li>
+&lt;/ul>
 &lt;h5 id="333-vertex-and-edge-mapping">3.3.3 Vertex and Edge Mapping&lt;/h5>
 &lt;p>The nodes of vertex and edge mapping (a key in the JSON file) have a lot of the same parts. The same parts are introduced first, and then the unique nodes of &lt;code>vertex map&lt;/code> and &lt;code>edge map&lt;/code> are introduced respectively.&lt;/p>
 &lt;p>&lt;strong>Nodes of the same section&lt;/strong>&lt;/p>
@@ -7929,37 +8025,55 @@ Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-d
 &lt;td>&lt;code>-f&lt;/code> or &lt;code>--file&lt;/code>&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Y&lt;/td>
-&lt;td>path to configure script&lt;/td>
+&lt;td>Path to configure script&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&lt;code>-g&lt;/code> or &lt;code>--graph&lt;/code>&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Y&lt;/td>
-&lt;td>graph space name&lt;/td>
+&lt;td>Graph name&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>-gs&lt;/code> or &lt;code>--graphspace&lt;/code>&lt;/td>
+&lt;td>DEFAULT&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Graph space name&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&lt;code>-s&lt;/code> or &lt;code>--schema&lt;/code>&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Y&lt;/td>
-&lt;td>schema file path&lt;/td>
+&lt;td>Schema file path&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>-h&lt;/code> or &lt;code>--host&lt;/code>&lt;/td>
+&lt;td>&lt;code>-h&lt;/code> or &lt;code>--host&lt;/code> or &lt;code>-i&lt;/code>&lt;/td>
 &lt;td>localhost&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>address of HugeGraphServer&lt;/td>
+&lt;td>Address of HugeGraphServer&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&lt;code>-p&lt;/code> or &lt;code>--port&lt;/code>&lt;/td>
 &lt;td>8080&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>port number of HugeGraphServer&lt;/td>
+&lt;td>Port number of HugeGraphServer&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&lt;code>--username&lt;/code>&lt;/td>
 &lt;td>null&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>When HugeGraphServer enables permission authentication, the username of the current graph&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--password&lt;/code>&lt;/td>
+&lt;td>null&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>When HugeGraphServer enables permission authentication, the password of the current graph&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--create-graph&lt;/code>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Whether to automatically create the graph if it does not exist&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&lt;code>--token&lt;/code>&lt;/td>
@@ -7972,6 +8086,42 @@ Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-d
 &lt;td>http&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Protocol for sending requests to the server, optional http or https&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--pd-peers&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>PD service node addresses&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--pd-token&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Token for accessing PD service&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--meta-endpoints&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Meta information storage service addresses&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--direct&lt;/code>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Whether to directly connect to HugeGraph-Store&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--route-type&lt;/code>&lt;/td>
+&lt;td>NODE_PORT&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Route selection method (optional values: NODE_PORT / DDS / BOTH)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--cluster&lt;/code>&lt;/td>
+&lt;td>hg&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Cluster name&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&lt;code>--trust-store-file&lt;/code>&lt;/td>
@@ -8001,13 +8151,13 @@ Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-d
 &lt;td>&lt;code>--incremental-mode&lt;/code>&lt;/td>
 &lt;td>false&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>Whether to use the breakpoint resume mode, only the input source is FILE and HDFS support this mode, enabling this mode can start the import from the place where the last import stopped&lt;/td>
+&lt;td>Whether to use the breakpoint resume mode; only input sources FILE and HDFS support this mode. Enabling this mode allows starting the import from where the last import stopped&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&lt;code>--failure-mode&lt;/code>&lt;/td>
 &lt;td>false&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>When the failure mode is true, the data that failed before will be imported. Generally speaking, the failed data file needs to be manually corrected and edited, and then imported again&lt;/td>
+&lt;td>When failure mode is true, previously failed data will be imported. Generally, the failed data file needs to be manually corrected and edited before re-importing&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&lt;code>--batch-insert-threads&lt;/code>&lt;/td>
@@ -8025,13 +8175,13 @@ Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-d
 &lt;td>&lt;code>--max-conn&lt;/code>&lt;/td>
 &lt;td>4 * CPUs&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>The maximum number of HTTP connections between HugeClient and HugeGraphServer, it is recommended to adjust this when &lt;strong>adjusting threads&lt;/strong>&lt;/td>
+&lt;td>The maximum number of HTTP connections between HugeClient and HugeGraphServer; it is recommended to adjust this when &lt;strong>adjusting threads&lt;/strong>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&lt;code>--max-conn-per-route&lt;/code>&lt;/td>
 &lt;td>2 * CPUs&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>The maximum number of HTTP connections for each route between HugeClient and HugeGraphServer, it is recommended to adjust this item at the same time when &lt;strong>adjusting the thread&lt;/strong>&lt;/td>
+&lt;td>The maximum number of HTTP connections for each route between HugeClient and HugeGraphServer; it is recommended to adjust this item when &lt;strong>adjusting threads&lt;/strong>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&lt;code>--batch-size&lt;/code>&lt;/td>
@@ -8043,19 +8193,19 @@ Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-d
 &lt;td>&lt;code>--max-parse-errors&lt;/code>&lt;/td>
 &lt;td>1&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>The maximum number of lines of data parsing errors allowed, and the program exits when this value is reached&lt;/td>
+&lt;td>The maximum number of data parsing errors allowed (per line); the program exits when this value is reached&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&lt;code>--max-insert-errors&lt;/code>&lt;/td>
 &lt;td>500&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>The maximum number of rows of data insertion errors allowed, and the program exits when this value is reached&lt;/td>
+&lt;td>The maximum number of data insertion errors allowed (per row); the program exits when this value is reached&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&lt;code>--timeout&lt;/code>&lt;/td>
 &lt;td>60&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>Timeout (seconds) for inserting results to return&lt;/td>
+&lt;td>Timeout (seconds) for insert result return&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&lt;code>--shutdown-timeout&lt;/code>&lt;/td>
@@ -8073,31 +8223,31 @@ Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-d
 &lt;td>&lt;code>--retry-interval&lt;/code>&lt;/td>
 &lt;td>10&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>interval before retry (seconds)&lt;/td>
+&lt;td>Interval before retry (seconds)&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&lt;code>--check-vertex&lt;/code>&lt;/td>
 &lt;td>false&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>Whether to check whether the vertex connected by the edge exists when inserting the edge&lt;/td>
+&lt;td>Whether to check if the vertices connected by the edge exist when inserting the edge&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&lt;code>--print-progress&lt;/code>&lt;/td>
 &lt;td>true&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>Whether to print the number of imported items in the console in real time&lt;/td>
+&lt;td>Whether to print the number of imported items in real time on the console&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&lt;code>--dry-run&lt;/code>&lt;/td>
 &lt;td>false&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>Turn on this mode, only parsing but not importing, usually used for testing&lt;/td>
+&lt;td>Enable this mode to only parse data without importing; usually used for testing&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&lt;code>--help&lt;/code>&lt;/td>
 &lt;td>false&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>print help information&lt;/td>
+&lt;td>Print help information&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>

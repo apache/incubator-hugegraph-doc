@@ -14,11 +14,12 @@
 &lt;p>用户在&lt;code>HugeGraph-Hubble&lt;/code>中编写的&lt;code>gremlin(groovy)&lt;/code>可以参考本文的&lt;code>java&lt;/code>代码，下面会举出几个例子。&lt;/p>
 &lt;h3 id="1-hugegraph-client">1 HugeGraph-Client&lt;/h3>
 &lt;p>HugeGraph-Client 是操作 graph 的总入口，用户必须先创建出 HugeGraph-Client 对象，与 HugeGraph-Server 建立连接（伪连接）后，才能获取到 schema、graph 以及 gremlin 的操作入口对象。&lt;/p>
-&lt;p>目前 HugeGraph-Client 只允许连接服务端已存在的图，无法自定义图进行创建。其创建方法如下：&lt;/p>
+&lt;p>目前 HugeGraph-Client 只允许连接服务端已存在的图，无法自定义图进行创建。1.7.0 版本后，client 支持 graphSpace 设置，默认为DEFAULT。其创建方法如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// HugeGraphServer 地址：&amp;#34;http://localhost:8080&amp;#34;
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// 图的名称：&amp;#34;hugegraph&amp;#34;
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">HugeClient&lt;/span> &lt;span style="color:#000">hugeClient&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">HugeClient&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">builder&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;http://localhost:8080&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">configTimeout&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">20&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// 默认 20s 超时
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#8f5902;font-style:italic">//.builder(&amp;#34;http://localhost:8080&amp;#34;, &amp;#34;graphSpaceName&amp;#34;, &amp;#34;hugegraph&amp;#34;)
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">configTimeout&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">20&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// 默认 20s 超时
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">configUser&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;**&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;**&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// 默认未开启用户权限
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">build&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上述创建 HugeClient 的过程如果失败会抛出异常，用户需要 try-catch。如果成功则继续获取 schema、graph 以及 gremlin 的 manager。&lt;/p>
@@ -724,7 +725,81 @@
 &lt;li>对于非 nullableKeys 的属性，必须要赋值。&lt;/li>
 &lt;/ul>
 &lt;p>&lt;strong>注意：当 frequency 为 multiple 时必须要设置 sortKeys 对应属性类型的值。&lt;/strong>&lt;/p>
-&lt;h3 id="4-简单示例">4 简单示例&lt;/h3>
+&lt;h3 id="4-图管理">4 图管理&lt;/h3>
+&lt;p>client支持一个物理部署中多个 GraphSpace，每个 GraphSpace 下可以含多个图（graph）。&lt;/p>
+&lt;ul>
+&lt;li>兼容：不指定 GraphSpace 时，默认使用 &amp;ldquo;DEFAULT&amp;rdquo; 空间&lt;/li>
+&lt;/ul>
+&lt;h4 id="41-创建graphspace">4.1 创建GraphSpace&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GraphSpaceManager&lt;/span> &lt;span style="color:#000">spaceManager&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">hugeClient&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">graphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// 定义 GraphSpace 配置
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">GraphSpace&lt;/span> &lt;span style="color:#000">graphSpace&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87;font-weight:bold">new&lt;/span> &lt;span style="color:#000">GraphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">setName&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;myGraphSpace&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">setDescription&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Business data graph space&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">setMaxGraphNumber&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">10&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// 最大图数量
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">graphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">setMaxRoleNumber&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">100&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span> &lt;span style="color:#8f5902;font-style:italic">// 最大角色数量
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// 创建 GraphSpace
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#000">spaceManager&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">createGraphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">graphSpace&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="42-graphspace-接口汇总">4.2 GraphSpace 接口汇总&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>类别&lt;/th>
+&lt;th>接口&lt;/th>
+&lt;th>描述&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Manager - 查询&lt;/td>
+&lt;td>listGraphSpace()&lt;/td>
+&lt;td>获取所有 GraphSpace 列表&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>getGraphSpace(String name)&lt;/td>
+&lt;td>获取指定 GraphSpace&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Manager - 创建/更新&lt;/td>
+&lt;td>createGraphSpace(GraphSpace)&lt;/td>
+&lt;td>创建 GraphSpace&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>updateGraphSpace(String, GraphSpace)&lt;/td>
+&lt;td>更新配置&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Manager - 删除&lt;/td>
+&lt;td>removeGraphSpace(String)&lt;/td>
+&lt;td>删除指定 GraphSpace&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>GraphSpace - 属性&lt;/td>
+&lt;td>getName() / getDescription()&lt;/td>
+&lt;td>获取名称/描述&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>getGraphNumber()&lt;/td>
+&lt;td>获取图数量&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>GraphSpace - 配置&lt;/td>
+&lt;td>setDescription(String)&lt;/td>
+&lt;td>设置描述&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>setMaxGraphNumber(int)&lt;/td>
+&lt;td>设置最大图数量&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="5-简单示例">5 简单示例&lt;/h3>
 &lt;p>简单示例见&lt;a href="/cn/docs/quickstart/client/hugegraph-client">HugeGraph-Client&lt;/a>&lt;/p></description></item><item><title>Docs: Gremlin-Console</title><link>/cn/docs/clients/gremlin-console/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/gremlin-console/</guid><description>
 &lt;p>Gremlin-Console 是由 Tinkerpop 自己开发的一个交互式客户端，用户可以使用该客户端对 Graph 做各种操作，主要有两种使用模式：&lt;/p>
 &lt;ul>
