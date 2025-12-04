@@ -9,12 +9,9 @@ weight: 2
 > - 推荐使用最新版本的 HugeGraph 软件包, 运行时环境请选择 Java11
 > - 验证下载版本, 请使用相应的哈希 (SHA512)、签名和 [项目签名验证 KEYS](https://downloads.apache.org/incubator/hugegraph/KEYS)
 > - 检查哈希 (SHA512)、签名的说明在 [版本验证](/docs/contribution-guidelines/validate-release/) 页面, 也可参考 [ASF 验证说明](https://www.apache.org/dyn/closer.cgi#verify)
-
-> 注: HugeGraph 所有组件版本号已保持一致, `client/loader/hubble/common` 等 maven 仓库版本号同理, 依赖引用可参考 [maven 示例](https://github.com/apache/incubator-hugegraph-toolchain#maven-dependencies)
+> - 注: HugeGraph 所有组件版本号已保持一致, `client/loader/hubble/common` 等 maven 仓库版本号同理, 依赖引用可参考 [maven 示例](https://github.com/apache/incubator-hugegraph-toolchain#maven-dependencies)
 
 ### 最新版本 1.7.0
-
-> 注: 从版本 `1.5.0` 开始，需要 Java11 运行时环境
 
 - Release Date: 2025-11-28
 - [Release Notes](/docs/changelog/hugegraph-1.7.0-release-notes/)
@@ -41,6 +38,7 @@ Please refer to [build from source](/docs/quickstart/hugegraph-server/).
 >
 > 1. 请大家尽早迁移到最新 Release 版本上, 社区将不再维护 `1.0.0` 前的旧版本 (非 ASF 版本)
 > 2. `1.3.0` 是最后一个兼容 Java8 的主版本, 请尽早使用/迁移运行时为 Java11 (低版本 Java 有潜在更多的 SEC 风险和性能影响)
+> 3. 从版本 `1.5.0` 开始，需要 Java11 运行时环境
 
 #### 1.5.0
 
@@ -114,9 +112,3 @@ Please refer to [build from source](/docs/quickstart/hugegraph-server/).
 | Server                                                                                                                                                                                                                                                                                                                                                                            | Toolchain                                                                                                                                                                                                                                                                                                                                                                                                       | Computer                                                                                                                                                                                                                                                                                                                                                                                                     | Common                                                                                                                                                                                                                                                                                                                                                                                                    |
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [[Source](https://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0-src.tar.gz?action=download)] [[Sign](https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0-src.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-incubating-1.0.0-src.tar.gz.sha512)] | [[Source](https://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0-src.tar.gz?action=download)] [[Sign](https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0-src.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-toolchain-incubating-1.0.0-src.tar.gz.sha512)] | [[Source](https://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0-src.tar.gz?action=download)] [[Sign](https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0-src.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-computer-incubating-1.0.0-src.tar.gz.sha512)] | [[Source](https://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.0.0/apache-hugegraph-commons-incubating-1.0.0-src.tar.gz?action=download)] [[Sign](https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-commons-incubating-1.0.0-src.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-commons-incubating-1.0.0-src.tar.gz.sha512)] |
-
----
-
-<details> <summary>旧版本 (非 ASF 版本)</summary>
-由于 ASF 规则要求, 不能直接在当前页面存放非 ASF 发行包, 对于 1.0.0 前旧版本 (非 ASF 版本) 的下载说明, 请跳转至 https://github.com/apache/incubator-hugegraph-doc/wiki/Apache-HugeGraph-(Incubating)-Old-Versions-Download
-</details>
