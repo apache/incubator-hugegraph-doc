@@ -153,18 +153,13 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>arthas.disabled_commands=jad
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># authentication configs
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># choose &amp;#39;org.apache.hugegraph.auth.StandardAuthenticator&amp;#39; or
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># &amp;#39;org.apache.hugegraph.auth.ConfigAuthenticator&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># choose &amp;#39;org.apache.hugegraph.auth.StandardAuthenticator&amp;#39; or a custom implementation
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#auth.authenticator=
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># for StandardAuthenticator mode
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#auth.graph_store=hugegraph
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># auth client config
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#auth.remote_url=127.0.0.1:8899,127.0.0.1:8898,127.0.0.1:8897
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># for ConfigAuthenticator mode
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#auth.admin_token=
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#auth.user_tokens=[]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># TODO: Deprecated &amp;amp; removed later (useless from version 1.5.0)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># rpc server configs for multi graph-servers or raft-servers
@@ -508,22 +503,12 @@
 &lt;tr>
 &lt;td>auth.authenticator&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>The class path of authenticator implementation. e.g., org.apache.hugegraph.auth.StandardAuthenticator, or org.apache.hugegraph.auth.ConfigAuthenticator.&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>auth.admin_token&lt;/td>
-&lt;td>162f7848-0b6d-4faf-b557-3a0797869c55&lt;/td>
-&lt;td>Token for administrator operations, only for org.apache.hugegraph.auth.ConfigAuthenticator.&lt;/td>
+&lt;td>The class path of authenticator implementation. e.g., org.apache.hugegraph.auth.StandardAuthenticator, or a custom implementation.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>auth.graph_store&lt;/td>
 &lt;td>hugegraph&lt;/td>
 &lt;td>The name of graph used to store authentication information, like users, only for org.apache.hugegraph.auth.StandardAuthenticator.&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>auth.user_tokens&lt;/td>
-&lt;td>[hugegraph:9fd95c9c-711b-415b-b85f-d4df46ba5c31]&lt;/td>
-&lt;td>The map of user tokens with name and password, only for org.apache.hugegraph.auth.ConfigAuthenticator.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>auth.audit_log_rate&lt;/td>

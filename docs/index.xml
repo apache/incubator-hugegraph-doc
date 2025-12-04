@@ -183,18 +183,13 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>arthas.disabled_commands=jad
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># authentication configs
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># choose &amp;#39;org.apache.hugegraph.auth.StandardAuthenticator&amp;#39; or
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># &amp;#39;org.apache.hugegraph.auth.ConfigAuthenticator&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># choose &amp;#39;org.apache.hugegraph.auth.StandardAuthenticator&amp;#39; or a custom implementation
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#auth.authenticator=
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># for StandardAuthenticator mode
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#auth.graph_store=hugegraph
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># auth client config
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#auth.remote_url=127.0.0.1:8899,127.0.0.1:8898,127.0.0.1:8897
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># for ConfigAuthenticator mode
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#auth.admin_token=
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#auth.user_tokens=[]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># TODO: Deprecated &amp;amp; removed later (useless from version 1.5.0)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># rpc server configs for multi graph-servers or raft-servers
@@ -4711,22 +4706,12 @@ error retry mechanism, etc., which reduces import costs and improves efficiency.
 &lt;tr>
 &lt;td>auth.authenticator&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>The class path of authenticator implementation. e.g., org.apache.hugegraph.auth.StandardAuthenticator, or org.apache.hugegraph.auth.ConfigAuthenticator.&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>auth.admin_token&lt;/td>
-&lt;td>162f7848-0b6d-4faf-b557-3a0797869c55&lt;/td>
-&lt;td>Token for administrator operations, only for org.apache.hugegraph.auth.ConfigAuthenticator.&lt;/td>
+&lt;td>The class path of authenticator implementation. e.g., org.apache.hugegraph.auth.StandardAuthenticator, or a custom implementation.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>auth.graph_store&lt;/td>
 &lt;td>hugegraph&lt;/td>
 &lt;td>The name of graph used to store authentication information, like users, only for org.apache.hugegraph.auth.StandardAuthenticator.&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>auth.user_tokens&lt;/td>
-&lt;td>[hugegraph:9fd95c9c-711b-415b-b85f-d4df46ba5c31]&lt;/td>
-&lt;td>The map of user tokens with name and password, only for org.apache.hugegraph.auth.ConfigAuthenticator.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>auth.audit_log_rate&lt;/td>
@@ -5965,15 +5950,10 @@ multiple times to achieve deduplication. It should be noted that the properties 
 &lt;li>It is recommended to use the latest version of the HugeGraph software package. Please select Java11 for the runtime environment.&lt;/li>
 &lt;li>To verify downloads, use the corresponding hash (SHA512), signature, and &lt;a href="https://downloads.apache.org/incubator/hugegraph/KEYS">Project Signature Verification KEYS&lt;/a>.&lt;/li>
 &lt;li>Instructions for checking hash (SHA512) and signatures are on the &lt;a href="/docs/contribution-guidelines/validate-release/">Validate Release&lt;/a> page, and you can also refer to &lt;a href="https://www.apache.org/dyn/closer.cgi#verify">ASF official instructions&lt;/a>.&lt;/li>
+&lt;li>Note: The version numbers of all components of HugeGraph have been kept consistent, and the version numbers of Maven repositories such as &lt;code>client/loader/hubble/common&lt;/code> are the same. You can refer to these for dependency references &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain#maven-dependencies">maven example&lt;/a>.&lt;/li>
 &lt;/ul>
 &lt;/blockquote>
-&lt;blockquote>
-&lt;p>Note: The version numbers of all components of HugeGraph have been kept consistent, and the version numbers of Maven repositories such as &lt;code>client/loader/hubble/common&lt;/code> are the same. You can refer to these for dependency references &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain#maven-dependencies">maven example&lt;/a>.&lt;/p>
-&lt;/blockquote>
 &lt;h3 id="latest-version-170">Latest Version 1.7.0&lt;/h3>
-&lt;blockquote>
-&lt;p>Note: Starting from version &lt;code>1.5.0&lt;/code>, a Java11 runtime environment is required.&lt;/p>
-&lt;/blockquote>
 &lt;ul>
 &lt;li>Release Date: 2025-11-28&lt;/li>
 &lt;li>&lt;a href="/docs/changelog/hugegraph-1.7.0-release-notes/">Release Notes&lt;/a>&lt;/li>
@@ -6016,7 +5996,7 @@ multiple times to achieve deduplication. It should be noted that the properties 
 &lt;hr>
 &lt;h3 id="archived-versions">Archived Versions&lt;/h3>
 &lt;blockquote>
-&lt;p>Note: &lt;code>1.3.0&lt;/code> is the last major version compatible with Java8, please switch to or migrate to Java11 as soon as possible (lower versions of Java have potentially more SEC risks and performance impacts).&lt;/p>
+&lt;p>Note: &lt;code>1.3.0&lt;/code> is the last major version compatible with Java8, please switch to or migrate to Java11 as soon as possible (lower versions of Java have potentially more SEC risks and performance impacts). Starting from version &lt;code>1.5.0&lt;/code>, a Java11 runtime environment is required.&lt;/p>
 &lt;/blockquote>
 &lt;h4 id="150">1.5.0&lt;/h4>
 &lt;ul>
@@ -6175,11 +6155,7 @@ multiple times to achieve deduplication. It should be noted that the properties 
 &lt;td>[&lt;a href="https://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.0.0/apache-hugegraph-commons-incubating-1.0.0-src.tar.gz?action=download">Source&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-commons-incubating-1.0.0-src.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-commons-incubating-1.0.0-src.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
 &lt;/tr>
 &lt;/tbody>
-&lt;/table>
-&lt;hr>
-&lt;details> &lt;summary>Old Versions (Non-ASF Versions)&lt;/summary>
-Due to ASF rules, non-ASF distribution packages cannot be hosted directly on this page. For download instructions for old versions before 1.0.0 (non-ASF versions), please jump to https://github.com/apache/incubator-hugegraph-doc/wiki/Apache-HugeGraph-(Incubating)-Old-Versions-Download
-&lt;/details></description></item><item><title>Docs: HugeGraph Examples</title><link>/docs/language/hugegraph-example/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/language/hugegraph-example/</guid><description>
+&lt;/table></description></item><item><title>Docs: HugeGraph Examples</title><link>/docs/language/hugegraph-example/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/language/hugegraph-example/</guid><description>
 &lt;h3 id="1-overview">1 Overview&lt;/h3>
 &lt;p>This example uses the &lt;a href="http://s3.thinkaurelius.com/docs/titan/1.0.0/getting-started.html">TitanDB Getting Started&lt;/a> guide as a template to demonstrate how to use HugeGraph. By comparing HugeGraph and TitanDB, you can understand the differences between them.&lt;/p>
 &lt;h4 id="11-similarities-and-differences-between-hugegraph-and-titandb">1.1 Similarities and Differences between HugeGraph and TitanDB&lt;/h4>

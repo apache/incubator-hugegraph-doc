@@ -3684,18 +3684,13 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>arthas.disabled_commands=jad
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># authentication configs
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># choose &amp;#39;org.apache.hugegraph.auth.StandardAuthenticator&amp;#39; or
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># &amp;#39;org.apache.hugegraph.auth.ConfigAuthenticator&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># choose &amp;#39;org.apache.hugegraph.auth.StandardAuthenticator&amp;#39; or a custom implementation
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#auth.authenticator=
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># for StandardAuthenticator mode
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#auth.graph_store=hugegraph
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># auth client config
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#auth.remote_url=127.0.0.1:8899,127.0.0.1:8898,127.0.0.1:8897
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># for ConfigAuthenticator mode
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#auth.admin_token=
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#auth.user_tokens=[]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># TODO: Deprecated &amp;amp; removed later (useless from version 1.5.0)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># rpc server configs for multi graph-servers or raft-servers
@@ -4611,15 +4606,10 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;li>推荐使用最新版本的 HugeGraph 软件包, 运行时环境请选择 Java11&lt;/li>
 &lt;li>验证下载版本, 请使用相应的哈希 (SHA512)、签名和 &lt;a href="https://downloads.apache.org/incubator/hugegraph/KEYS">项目签名验证 KEYS&lt;/a>&lt;/li>
 &lt;li>检查哈希 (SHA512)、签名的说明在 &lt;a href="/docs/contribution-guidelines/validate-release/">版本验证&lt;/a> 页面, 也可参考 &lt;a href="https://www.apache.org/dyn/closer.cgi#verify">ASF 验证说明&lt;/a>&lt;/li>
+&lt;li>注: HugeGraph 所有组件版本号已保持一致, &lt;code>client/loader/hubble/common&lt;/code> 等 maven 仓库版本号同理, 依赖引用可参考 &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain#maven-dependencies">maven 示例&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;/blockquote>
-&lt;blockquote>
-&lt;p>注: HugeGraph 所有组件版本号已保持一致, &lt;code>client/loader/hubble/common&lt;/code> 等 maven 仓库版本号同理, 依赖引用可参考 &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain#maven-dependencies">maven 示例&lt;/a>&lt;/p>
-&lt;/blockquote>
 &lt;h3 id="最新版本-170">最新版本 1.7.0&lt;/h3>
-&lt;blockquote>
-&lt;p>注: 从版本 &lt;code>1.5.0&lt;/code> 开始，需要 Java11 运行时环境&lt;/p>
-&lt;/blockquote>
 &lt;ul>
 &lt;li>Release Date: 2025-11-28&lt;/li>
 &lt;li>&lt;a href="/docs/changelog/hugegraph-1.7.0-release-notes/">Release Notes&lt;/a>&lt;/li>
@@ -4666,6 +4656,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;ol>
 &lt;li>请大家尽早迁移到最新 Release 版本上, 社区将不再维护 &lt;code>1.0.0&lt;/code> 前的旧版本 (非 ASF 版本)&lt;/li>
 &lt;li>&lt;code>1.3.0&lt;/code> 是最后一个兼容 Java8 的主版本, 请尽早使用/迁移运行时为 Java11 (低版本 Java 有潜在更多的 SEC 风险和性能影响)&lt;/li>
+&lt;li>从版本 &lt;code>1.5.0&lt;/code> 开始，需要 Java11 运行时环境&lt;/li>
 &lt;/ol>
 &lt;/blockquote>
 &lt;h4 id="150">1.5.0&lt;/h4>
@@ -4827,11 +4818,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;td>[&lt;a href="https://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.0.0/apache-hugegraph-commons-incubating-1.0.0-src.tar.gz?action=download">Source&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-commons-incubating-1.0.0-src.tar.gz.asc">Sign&lt;/a>] [&lt;a href="https://downloads.apache.org/incubator/hugegraph/1.0.0/apache-hugegraph-commons-incubating-1.0.0-src.tar.gz.sha512">SHA512&lt;/a>]&lt;/td>
 &lt;/tr>
 &lt;/tbody>
-&lt;/table>
-&lt;hr>
-&lt;details> &lt;summary>旧版本 (非 ASF 版本)&lt;/summary>
-由于 ASF 规则要求, 不能直接在当前页面存放非 ASF 发行包, 对于 1.0.0 前旧版本 (非 ASF 版本) 的下载说明, 请跳转至 https://github.com/apache/incubator-hugegraph-doc/wiki/Apache-HugeGraph-(Incubating)-Old-Versions-Download
-&lt;/details></description></item><item><title>Docs: HugeGraph Examples</title><link>/cn/docs/language/hugegraph-example/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/language/hugegraph-example/</guid><description>
+&lt;/table></description></item><item><title>Docs: HugeGraph Examples</title><link>/cn/docs/language/hugegraph-example/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/language/hugegraph-example/</guid><description>
 &lt;h3 id="1-概述">1 概述&lt;/h3>
 &lt;p>本示例将&lt;a href="http://s3.thinkaurelius.com/docs/titan/1.0.0/getting-started.html">TitanDB Getting Started&lt;/a> 为模板来演示 HugeGraph 的使用方法。通过对比 HugeGraph 和 TitanDB，了解 HugeGraph 和 TitanDB 的差异。&lt;/p>
 &lt;h4 id="11-hugegraph-与-titandb-的异同">1.1 HugeGraph 与 TitanDB 的异同&lt;/h4>
@@ -8219,22 +8206,12 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;tr>
 &lt;td>auth.authenticator&lt;/td>
 &lt;td>&lt;/td>
-&lt;td>The class path of authenticator implementation. e.g., org.apache.hugegraph.auth.StandardAuthenticator, or org.apache.hugegraph.auth.ConfigAuthenticator.&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>auth.admin_token&lt;/td>
-&lt;td>162f7848-0b6d-4faf-b557-3a0797869c55&lt;/td>
-&lt;td>Token for administrator operations, only for org.apache.hugegraph.auth.ConfigAuthenticator.&lt;/td>
+&lt;td>The class path of authenticator implementation. e.g., org.apache.hugegraph.auth.StandardAuthenticator, or a custom implementation.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>auth.graph_store&lt;/td>
 &lt;td>hugegraph&lt;/td>
 &lt;td>The name of graph used to store authentication information, like users, only for org.apache.hugegraph.auth.StandardAuthenticator.&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>auth.user_tokens&lt;/td>
-&lt;td>[hugegraph:9fd95c9c-711b-415b-b85f-d4df46ba5c31]&lt;/td>
-&lt;td>The map of user tokens with name and password, only for org.apache.hugegraph.auth.ConfigAuthenticator.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>auth.audit_log_rate&lt;/td>
