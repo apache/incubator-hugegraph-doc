@@ -3,7 +3,6 @@
 {{ end }}
 
 {{ if .Site.Params.mermaid.enable }}
-<script src="{{ "js/mermaid.min.js" | relURL }}"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var codeBlocks = document.querySelectorAll('pre code.language-mermaid, code.language-mermaid, pre code.language-fallback, code.language-fallback');
