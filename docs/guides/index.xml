@@ -1028,6 +1028,8 @@ Regular software &lt;code>Bug/Error&lt;/code> reports should be directed to &lt;
 &lt;ul>
 &lt;li>&lt;a href="https://www.cve.org/CVERecord?id=CVE-2024-27348">CVE-2024-27348&lt;/a>: HugeGraph-Server - Command execution in gremlin&lt;/li>
 &lt;li>&lt;a href="https://www.cve.org/CVERecord?id=CVE-2024-27349">CVE-2024-27349&lt;/a>: HugeGraph-Server - Bypass whitelist in Auth mode&lt;/li>
+&lt;li>&lt;a href="https://www.cve.org/CVERecord?id=CVE-2024-43441">CVE-2024-43441&lt;/a>: HugeGraph-Server - Fixed JWT Token (Secret)&lt;/li>
+&lt;li>&lt;a href="https://www.cve.org/CVERecord?id=CVE-2025-26866">CVE-2025-26866&lt;/a>: HugeGraph-Server - RAFT and deserialization vulnerability&lt;/li>
 &lt;/ul>
 &lt;h3 id="hugegraph-toolchain-project-hubbleloaderclienttools">HugeGraph-Toolchain project (Hubble/Loader/Client/Tools/..)&lt;/h3>
 &lt;ul>

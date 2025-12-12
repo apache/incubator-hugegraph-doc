@@ -1019,6 +1019,8 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;ul>
 &lt;li>&lt;a href="https://www.cve.org/CVERecord?id=CVE-2024-27348">CVE-2024-27348&lt;/a>: HugeGraph-Server - Command execution in gremlin&lt;/li>
 &lt;li>&lt;a href="https://www.cve.org/CVERecord?id=CVE-2024-27349">CVE-2024-27349&lt;/a>: HugeGraph-Server - Bypass whitelist in Auth mode&lt;/li>
+&lt;li>&lt;a href="https://www.cve.org/CVERecord?id=CVE-2024-43441">CVE-2024-43441&lt;/a>: HugeGraph-Server - Fixed JWT Token (Secret)&lt;/li>
+&lt;li>&lt;a href="https://www.cve.org/CVERecord?id=CVE-2025-26866">CVE-2025-26866&lt;/a>: HugeGraph-Server - RAFT and deserialization vulnerability&lt;/li>
 &lt;/ul>
 &lt;h3 id="hugegraph-toolchainhttpsgithubcomapachehugegraph-toolchain-仓库-hubbleloaderclienttools">&lt;a href="https://github.com/apache/hugegraph-toolchain">HugeGraph-Toolchain&lt;/a> 仓库 (Hubble/Loader/Client/Tools/..)&lt;/h3>
 &lt;ul>
