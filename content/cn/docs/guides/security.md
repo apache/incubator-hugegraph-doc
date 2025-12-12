@@ -29,6 +29,8 @@ weight: 7
 
 - [CVE-2024-27348](https://www.cve.org/CVERecord?id=CVE-2024-27348): HugeGraph-Server - Command execution in gremlin
 - [CVE-2024-27349](https://www.cve.org/CVERecord?id=CVE-2024-27349): HugeGraph-Server - Bypass whitelist in Auth mode
+- [CVE-2024-43441](https://www.cve.org/CVERecord?id=CVE-2024-43441): HugeGraph-Server - Fixed JWT Token (Secret)
+- [CVE-2025-26866](https://www.cve.org/CVERecord?id=CVE-2025-26866): HugeGraph-Server - RAFT and deserialization vulnerability
 
 ### [HugeGraph-Toolchain](https://github.com/apache/hugegraph-toolchain) 仓库 (Hubble/Loader/Client/Tools/..)
 
