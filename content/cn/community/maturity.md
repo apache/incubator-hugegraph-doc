@@ -1,3 +1,9 @@
+---
+title: 成熟度评估
+description: Apache HugeGraph 成熟度评估
+weight: 50
+---
+
 # Maturity Assessment for Apache HugeGraph (incubating)
 
 The goals of this maturity model are to describe how Apache projects operate in a concise and high-level way, and to provide a basic framework that projects may choose to use to evaluate themselves.
