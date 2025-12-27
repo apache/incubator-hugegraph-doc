@@ -167,6 +167,6 @@ hugegraph-ai 采用 [Apache 2.0 许可证](https://github.com/apache/incubator-h
 
 - **GitHub Issues**：[报告错误或请求功能](https://github.com/apache/incubator-hugegraph-ai/issues)（响应最快）
 - **电子邮件**：[dev@hugegraph.apache.org](mailto:dev@hugegraph.apache.org)（[需要订阅](https://hugegraph.apache.org/docs/contribution-guidelines/subscribe/)）
-- **微信**：关注“Apache HugeGraph”官方公众号
+- **微信**：关注 "Apache HugeGraph" 微信公众号
 
 <img src="https://raw.githubusercontent.com/apache/hugegraph-doc/master/assets/images/wechat.png" alt="Apache HugeGraph WeChat QR Code" width="200"/>
