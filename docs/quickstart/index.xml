@@ -153,7 +153,7 @@ For a complete deployment guide and detailed examples, please refer to &lt;a hre
 &lt;ul>
 &lt;li>&lt;strong>GitHub Issues&lt;/strong>: &lt;a href="https://github.com/apache/incubator-hugegraph-ai/issues">Report bugs or request features&lt;/a> (fastest response)&lt;/li>
 &lt;li>&lt;strong>Email&lt;/strong>: &lt;a href="mailto:dev@hugegraph.apache.org">dev@hugegraph.apache.org&lt;/a> (&lt;a href="https://hugegraph.apache.org/docs/contribution-guidelines/subscribe/">subscription required&lt;/a>)&lt;/li>
-&lt;li>&lt;strong>WeChat&lt;/strong>: Follow &amp;ldquo;Apache HugeGraph&amp;rdquo; official account&lt;/li>
+&lt;li>&lt;strong>WeChat&lt;/strong>: Follow &amp;ldquo;Apache HugeGraph&amp;rdquo; on WeChat&lt;/li>
 &lt;/ul>
 &lt;img src="https://raw.githubusercontent.com/apache/hugegraph-doc/master/assets/images/wechat.png" alt="Apache HugeGraph WeChat QR Code" width="200"/></description></item><item><title>Docs: HugeGraph Computing (OLAP)</title><link>/docs/quickstart/computing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/computing/</guid><description>
 &lt;h2 id="-best-practice-prioritize-using-deepwiki-intelligent-documents">🚀 Best practice: Prioritize using DeepWiki intelligent documents&lt;/h2>
