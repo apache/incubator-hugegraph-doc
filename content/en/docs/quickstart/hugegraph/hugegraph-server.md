@@ -224,6 +224,7 @@ gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 backend=hstore
 serializer=binary
 store=hugegraph
+task.scheduler_type=distributed
 
 # pd config
 pd.peers=127.0.0.1:8686

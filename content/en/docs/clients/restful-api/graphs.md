@@ -166,9 +166,15 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph2
 
 ##### Request Body
 
-Create a non-auth graph (set `Content-Type: application/json`)
-**Note**! For version 1.7.0 and earlier, if the backend is hstore, you must add "task.scheduler_type": "distributed" in
-the request body
+Create a graph (set `Content-Type: application/json`)
+
+**`gremlin.graph` Configuration:**
+- Non-auth mode: `"gremlin.graph": "org.apache.hugegraph.HugeFactory"`
+- Auth mode: `"gremlin.graph": "org.apache.hugegraph.auth.HugeFactoryAuthProxy"`
+
+**Note**!! For version 1.7.0 and earlier, if the backend is hstore, you must add "task.scheduler_type": "distributed" in the request body. Also ensure HugeGraph-Server is properly configured with PD, see [HStore Configuration](/docs/quickstart/hugegraph/hugegraph-server/#511-distributed-storage-hstore).
+
+**RocksDB Example (non-auth mode):**
 
 ```json
 {
@@ -181,7 +187,20 @@ the request body
 }
 ```
 
-> Note: 
+**HStore Example (for version 1.7.0 and earlier):**
+
+```json
+{
+  "gremlin.graph": "org.apache.hugegraph.HugeFactory",
+  "backend": "hstore",
+  "serializer": "binary",
+  "store": "hugegraph2",
+  "task.scheduler_type": "distributed",
+  "pd.peers": "127.0.0.1:8686"
+}
+```
+
+> Note:
 > 1. The data/wal_path can't be the same as the existing graph (use separate directories)
 > 2. Replace "gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy" to enable auth mode
 

@@ -209,6 +209,9 @@ backend=hstore
 serializer=binary
 store=hugegraph
 
+# 指定任务调度器（1.7.0及之前必须）
+task.scheduler_type=distributed
+
 # pd config
 pd.peers=127.0.0.1:8686
 ```

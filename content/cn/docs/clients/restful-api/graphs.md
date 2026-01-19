@@ -166,8 +166,15 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph-xx
 
 ##### Request Body
 
-创建一个非鉴权模式的图（设置 `Content-Type: application/json`）
-**注意**！！1.7.0 及之前，如果 backend 是 hstore，必须在请求体加上 "task.scheduler_type": "distributed"
+创建一个图（设置 `Content-Type: application/json`）
+
+**`gremlin.graph` 配置说明：**
+- 非鉴权模式：`"gremlin.graph": "org.apache.hugegraph.HugeFactory"`
+- 鉴权模式：`"gremlin.graph": "org.apache.hugegraph.auth.HugeFactoryAuthProxy"`
+
+**注意**！！1.7.0 及之前，如果 backend 是 hstore，必须在请求体加上 "task.scheduler_type": "distributed"。同时请确保 HugeGraph-Server 已正确配置 PD，参见 [HStore 配置](/cn/docs/quickstart/hugegraph/hugegraph-server/#511-分布式存储hstore)。
+
+**RocksDB 示例（非鉴权模式）：**
 
 ```json
 {
@@ -177,6 +184,19 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph-xx
   "store": "hugegraph",
   "rocksdb.data_path": "./rks-data-xx",
   "rocksdb.wal_path": "./rks-data-xx"
+}
+```
+
+**HStore 示例：**
+
+```json
+{
+  "gremlin.graph": "org.apache.hugegraph.HugeFactory",
+  "backend": "hstore",
+  "serializer": "binary",
+  "store": "hugegraph2",
+  "task.scheduler_type": "distributed",
+  "pd.peers": "127.0.0.1:8686"
 }
 ```
 
