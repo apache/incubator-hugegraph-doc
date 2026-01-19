@@ -144,7 +144,7 @@ Clone a `non-auth` mode graph (set `Content-Type: application/json`)
 
 ```json
 {
-    "name": "cloneGraph", 
+    "name": "cloneGraph",
     "backend": "rocksdb"
 }
 ```
