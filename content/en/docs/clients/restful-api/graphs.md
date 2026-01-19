@@ -142,14 +142,10 @@ Clone a `non-auth` mode graph (set `Content-Type: application/json`)
 
 ##### Response Body
 
-```javascript
+```json
 {
-    "name"
-:
-    "cloneGraph",
-        "backend"
-:
-    "rocksdb"
+    "name": "cloneGraph", 
+    "backend": "rocksdb"
 }
 ```
 

@@ -144,9 +144,7 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/cloneGraph?clone_graph_nam
 
 ```javascript
 {
-    "name"
-:
-    "cloneGraph",
+    "name": "cloneGraph",
     "backend": "rocksdb"
 }
 ```
@@ -219,8 +217,7 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph-xx
 ##### Method & Url
 
 ```javascript
-DELETE
-http://localhost:8080/graphspaces/DEFAULT/graphs/graphA?confirm_message=I%27m%20sure%20to%20drop%20the%20graph
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/graphA?confirm_message=I%27m%20sure%20to%20drop%20the%20graph
 ```
 
 ##### Response Status
