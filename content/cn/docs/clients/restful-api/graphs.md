@@ -112,7 +112,7 @@ DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/clear?confirm_
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph_clone?clone_graph_name=hugegraph
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/cloneGraph?clone_graph_name=hugegraph
 ```
 
 ##### Request Body (可选)
@@ -124,7 +124,7 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph_clone?clone_grap
   "gremlin.graph": "org.apache.hugegraph.HugeFactory",
   "backend": "rocksdb",
   "serializer": "binary",
-  "store": "hugegraph_clone",
+  "store": "cloneGraph",
   "rocksdb.data_path": "./rks-data-xx",
   "rocksdb.wal_path": "./rks-data-xx"
 }
@@ -144,7 +144,9 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph_clone?clone_grap
 
 ```javascript
 {
-    "name": "hugegraph_clone",
+    "name"
+:
+    "cloneGraph",
     "backend": "rocksdb"
 }
 ```
@@ -167,6 +169,7 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph-xx
 ##### Request Body
 
 创建一个非鉴权模式的图（设置 `Content-Type: application/json`）
+**注意**！！1.7.0 及之前，如果 backend 是 hstore，必须在请求体加上 "task.scheduler_type": "distributed"
 
 ```json
 {
@@ -216,7 +219,8 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph-xx
 ##### Method & Url
 
 ```javascript
-DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph_clone?confirm_message=I%27m%20sure%20to%20drop%20the%20graph
+DELETE
+http://localhost:8080/graphspaces/DEFAULT/graphs/graphA?confirm_message=I%27m%20sure%20to%20drop%20the%20graph
 ```
 
 ##### Response Status

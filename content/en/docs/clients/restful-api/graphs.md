@@ -112,7 +112,7 @@ DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/clear?confirm_
 ##### Method & Url
 
 ```
-POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph_clone?clone_graph_name=hugegraph
+POST http://localhost:8080/graphspaces/DEFAULT/graphs/cloneGraph?clone_graph_name=hugegraph
 ```
 
 ##### Request Body [Optional]
@@ -124,13 +124,13 @@ Clone a `non-auth` mode graph (set `Content-Type: application/json`)
   "gremlin.graph": "org.apache.hugegraph.HugeFactory",
   "backend": "rocksdb",
   "serializer": "binary",
-  "store": "hugegraph",
+  "store": "cloneGraph",
   "rocksdb.data_path": "./rks-data-xx",
   "rocksdb.wal_path": "./rks-data-xx"
 }
 ```
 
-> Note: 
+> Note:
 > 1. The data/wal_path can't be the same as the existing graph (use separate directories)
 > 2. Replace "gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy" to enable auth mode
 
@@ -144,7 +144,9 @@ Clone a `non-auth` mode graph (set `Content-Type: application/json`)
 
 ```javascript
 {
-  "name": "hugegraph_clone",
+    "name"
+:
+    "cloneGraph",
   "backend": "rocksdb"
 }
 ```
@@ -167,6 +169,8 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph2
 ##### Request Body
 
 Create a non-auth graph (set `Content-Type: application/json`)
+**Note**!! For version 1.7.0 and earlier, if the backend is hstore, you must add "task.scheduler_type": "distributed" in
+the request body
 
 ```json
 {
@@ -216,7 +220,7 @@ Since deleting a graph is a dangerous operation, we have added parameters for co
 ##### Method & Url
 
 ```
-DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph_clone?confirm_message=I%27m%20sure%20to%20drop%20the%20graph
+DELETE http://localhost:8080/graphspaces/DEFAULT/graphs/graphA?confirm_message=I%27m%20sure%20to%20drop%20the%20graph
 ```
 
 ##### Response Status
