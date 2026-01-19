@@ -220,7 +220,7 @@ pd.peers=127.0.0.1:8686,127.0.0.1:8687,127.0.0.1:8688
 # Simple example (with authentication)
 gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 
-# Specify storage hstore
+# Specify storage backend hstore
 backend=hstore
 serializer=binary
 store=hugegraph
