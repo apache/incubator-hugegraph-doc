@@ -167,7 +167,7 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph2
 ##### Request Body
 
 Create a non-auth graph (set `Content-Type: application/json`)
-**Note**!! For version 1.7.0 and earlier, if the backend is hstore, you must add "task.scheduler_type": "distributed" in
+**Note**! For version 1.7.0 and earlier, if the backend is hstore, you must add "task.scheduler_type": "distributed" in
 the request body
 
 ```json
