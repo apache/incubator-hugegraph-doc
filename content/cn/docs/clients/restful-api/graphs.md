@@ -169,16 +169,18 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph-xx
 创建一个图（设置 `Content-Type: application/json`）
 
 **`gremlin.graph` 配置说明：**
+- 鉴权模式：`"gremlin.graph": "org.apache.hugegraph.auth.HugeFactoryAuthProxy"`（推荐）
 - 非鉴权模式：`"gremlin.graph": "org.apache.hugegraph.HugeFactory"`
-- 鉴权模式：`"gremlin.graph": "org.apache.hugegraph.auth.HugeFactoryAuthProxy"`
 
-**注意**！！1.7.0 及之前，如果 backend 是 hstore，必须在请求体加上 "task.scheduler_type": "distributed"。同时请确保 HugeGraph-Server 已正确配置 PD，参见 [HStore 配置](/cn/docs/quickstart/hugegraph/hugegraph-server/#511-分布式存储hstore)。
+**注意**！！
+1. 在 1.7.0 版本中，动态创建图会导致 NPE 错误。该问题已在 [PR#2912](https://github.com/apache/incubator-hugegraph/pull/2912) 中修复。当前 master 版本和 1.7.0 之前的版本不受此问题影响。
+2. 1.7.0 及之前版本，如果 backend 是 hstore，必须在请求体加上 "task.scheduler_type": "distributed"。同时请确保 HugeGraph-Server 已正确配置 PD，参见 [HStore 配置](/cn/docs/quickstart/hugegraph/hugegraph-server/#511-分布式存储hstore)。
 
-**RocksDB 示例（非鉴权模式）：**
+**RocksDB 示例：**
 
 ```json
 {
-  "gremlin.graph": "org.apache.hugegraph.HugeFactory",
+  "gremlin.graph": "org.apache.hugegraph.auth.HugeFactoryAuthProxy",
   "backend": "rocksdb",
   "serializer": "binary",
   "store": "hugegraph",
@@ -187,11 +189,11 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph-xx
 }
 ```
 
-**HStore 示例：**
+**HStore 示例（适用于 1.7.0 及之前版本）：**
 
 ```json
 {
-  "gremlin.graph": "org.apache.hugegraph.HugeFactory",
+  "gremlin.graph": "org.apache.hugegraph.auth.HugeFactoryAuthProxy",
   "backend": "hstore",
   "serializer": "binary",
   "store": "hugegraph2",
@@ -200,9 +202,7 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph-xx
 }
 ```
 
-> Note:
-> 1. Rocksdb 存储路径不能与现有图相同（需使用不同的目录）
-> 2. 如需开启新图的权限系统，需替换设置 `gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy`
+> Note: Rocksdb 存储路径不能与现有图相同（需使用不同的目录）
 
 ##### Response Status
 

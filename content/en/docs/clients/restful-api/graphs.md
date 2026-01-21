@@ -169,16 +169,18 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph2
 Create a graph (set `Content-Type: application/json`)
 
 **`gremlin.graph` Configuration:**
+- Auth mode: `"gremlin.graph": "org.apache.hugegraph.auth.HugeFactoryAuthProxy"` (Recommended)
 - Non-auth mode: `"gremlin.graph": "org.apache.hugegraph.HugeFactory"`
-- Auth mode: `"gremlin.graph": "org.apache.hugegraph.auth.HugeFactoryAuthProxy"`
 
-**Note**!! For version 1.7.0 and earlier, if the backend is hstore, you must add "task.scheduler_type": "distributed" in the request body. Also ensure HugeGraph-Server is properly configured with PD, see [HStore Configuration](/docs/quickstart/hugegraph/hugegraph-server/#511-distributed-storage-hstore).
+**Note**!!
+1. In version 1.7.0, dynamic graph creation would cause a NPE. This issue has been fixed in [PR#2912](https://github.com/apache/incubator-hugegraph/pull/2912). The current master version and version 1.7.0- do not have this problem.
+2. For version 1.7.0 and earlier, if the backend is hstore, you must add "task.scheduler_type": "distributed" in the request body. Also ensure HugeGraph-Server is properly configured with PD, see [HStore Configuration](/docs/quickstart/hugegraph/hugegraph-server/#511-distributed-storage-hstore).
 
-**RocksDB Example (non-auth mode):**
+**RocksDB Example:**
 
 ```json
 {
-  "gremlin.graph": "org.apache.hugegraph.HugeFactory",
+  "gremlin.graph": "org.apache.hugegraph.auth.HugeFactoryAuthProxy",
   "backend": "rocksdb",
   "serializer": "binary",
   "store": "hugegraph2",
@@ -191,7 +193,7 @@ Create a graph (set `Content-Type: application/json`)
 
 ```json
 {
-  "gremlin.graph": "org.apache.hugegraph.HugeFactory",
+  "gremlin.graph": "org.apache.hugegraph.auth.HugeFactoryAuthProxy",
   "backend": "hstore",
   "serializer": "binary",
   "store": "hugegraph2",
@@ -200,9 +202,7 @@ Create a graph (set `Content-Type: application/json`)
 }
 ```
 
-> Note:
-> 1. The data/wal_path can't be the same as the existing graph (use separate directories)
-> 2. Replace "gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy" to enable auth mode
+> Note: The data/wal_path can't be the same as the existing graph (use separate directories)
 
 ##### Response Status
 
