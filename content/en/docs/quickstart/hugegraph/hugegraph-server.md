@@ -224,6 +224,8 @@ gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
 backend=hstore
 serializer=binary
 store=hugegraph
+
+# Specify the task scheduler (for versions 1.7.0 and earlier, hstore storage is required)
 task.scheduler_type=distributed
 
 # pd config

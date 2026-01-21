@@ -119,7 +119,7 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/cloneGraph?clone_graph_nam
 
 克隆一个非鉴权模式的图（设置 `Content-Type: application/json`）
 
-```json
+```javascript
 {
   "gremlin.graph": "org.apache.hugegraph.HugeFactory",
   "backend": "rocksdb",
@@ -178,7 +178,7 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph-xx
 
 **RocksDB 示例：**
 
-```json
+```javascript
 {
   "gremlin.graph": "org.apache.hugegraph.auth.HugeFactoryAuthProxy",
   "backend": "rocksdb",
@@ -191,7 +191,7 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph-xx
 
 **HStore 示例（适用于 1.7.0 及之前版本）：**
 
-```json
+```javascript
 {
   "gremlin.graph": "org.apache.hugegraph.auth.HugeFactoryAuthProxy",
   "backend": "hstore",

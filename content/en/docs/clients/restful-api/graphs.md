@@ -119,7 +119,7 @@ POST http://localhost:8080/graphspaces/DEFAULT/graphs/cloneGraph?clone_graph_nam
 
 Clone a `non-auth` mode graph (set `Content-Type: application/json`)
 
-```json
+```javascript
 {
   "gremlin.graph": "org.apache.hugegraph.HugeFactory",
   "backend": "rocksdb",
@@ -142,7 +142,7 @@ Clone a `non-auth` mode graph (set `Content-Type: application/json`)
 
 ##### Response Body
 
-```json
+```javascript
 {
     "name": "cloneGraph",
     "backend": "rocksdb"
@@ -178,7 +178,7 @@ Create a graph (set `Content-Type: application/json`)
 
 **RocksDB Example:**
 
-```json
+```javascript
 {
   "gremlin.graph": "org.apache.hugegraph.auth.HugeFactoryAuthProxy",
   "backend": "rocksdb",
@@ -191,7 +191,7 @@ Create a graph (set `Content-Type: application/json`)
 
 **HStore Example (for version 1.7.0 and earlier):**
 
-```json
+```javascript
 {
   "gremlin.graph": "org.apache.hugegraph.auth.HugeFactoryAuthProxy",
   "backend": "hstore",
