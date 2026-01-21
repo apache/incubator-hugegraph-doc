@@ -200,10 +200,29 @@ task.scheduler_type=distributed
 pd.peers=127.0.0.1:8686,127.0.0.1:8687,127.0.0.1:8688
 ```
 
+```properties
+# 简单示例（带鉴权）
+gremlin.graph=org.apache.hugegraph.auth.HugeFactoryAuthProxy
+
+# 指定存储 hstore（必须）
+backend=hstore
+serializer=binary
+store=hugegraph
+
+# 指定任务调度器（1.7.0及之前，hstore 存储必须）
+task.scheduler_type=distributed
+
+# pd config
+pd.peers=127.0.0.1:8686
+```
+
 2. 修改 HugeGraph-Server 的 `rest-server.properties` 配置：
 
 ```properties
 usePD=true
+
+# 若需要 auth 
+# auth.authenticator=org.apache.hugegraph.auth.StandardAuthenticator
 ```
 
 如果配置多个 HugeGraph-Server 节点，需要为每个节点修改 `rest-server.properties` 配置文件，例如：
@@ -213,6 +232,7 @@ usePD=true
 usePD=true
 restserver.url=http://127.0.0.1:8081
 gremlinserver.url=http://127.0.0.1:8181
+pd.peers=127.0.0.1:8686
 
 rpc.server_host=127.0.0.1
 rpc.server_port=8091
@@ -226,6 +246,7 @@ server.role=master
 usePD=true
 restserver.url=http://127.0.0.1:8082
 gremlinserver.url=http://127.0.0.1:8182
+pd.peers=127.0.0.1:8686
 
 rpc.server_host=127.0.0.1
 rpc.server_port=8092
