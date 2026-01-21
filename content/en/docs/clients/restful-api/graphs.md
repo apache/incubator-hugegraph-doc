@@ -173,7 +173,7 @@ Create a graph (set `Content-Type: application/json`)
 - Non-auth mode: `"gremlin.graph": "org.apache.hugegraph.HugeFactory"`
 
 **Note**!!
-1. In version 1.7.0, dynamic graph creation would cause a NPE. This issue has been fixed in [PR#2912](https://github.com/apache/incubator-hugegraph/pull/2912). The current master version and version 1.7.0- do not have this problem.
+1. In version 1.7.0, dynamic graph creation would cause a NPE. This issue has been fixed in [PR#2912](https://github.com/apache/incubator-hugegraph/pull/2912). The current master version and versions after 1.7.0 do not have this problem.
 2. For version 1.7.0 and earlier, if the backend is hstore, you must add "task.scheduler_type": "distributed" in the request body. Also ensure HugeGraph-Server is properly configured with PD, see [HStore Configuration](/docs/quickstart/hugegraph/hugegraph-server/#511-distributed-storage-hstore).
 
 **RocksDB Example:**
