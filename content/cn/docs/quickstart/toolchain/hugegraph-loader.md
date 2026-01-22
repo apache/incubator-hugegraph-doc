@@ -847,31 +847,31 @@ schema: 必填
 | `--print-progress`                      | true        |      | 是否在控制台实时打印导入条数                                                    |
 | `--dry-run`                             | false       |      | 打开该模式，只解析不导入，通常用于测试                                               |
 | `--help` 或 `-help`                      | false       |      | 打印帮助信息                                                            |                                                  
-| `--parallel-count` 或 `--parallel-count` | max(2,CPUS) |      | 并行读取数据文件最大线程数                                         |
-| `--start-file`                          | 0           |      | 用于部分（分片）导入的起始文件索引                                 |
-| `--end-file`                            | -1          |      | 用于部分导入的截止文件索引                                         |
-| `--scatter-sources`                     | false       |      | 分散（并行）读取多个数据源以优化 I/O 性能                           |
-| `--cdc-flush-interval`                  | 30000       |      | Flink CDC 的数据刷新间隔                                           |
-| `--cdc-sink-parallelism`                | 1           |      | Flink CDC 写入端（Sink）的并行度                                   |
-| `--max-read-errors`                     | 1           |      | 程序退出前允许的最大读取错误行数                                   |
-| `--max-read-lines`                      | -1L         |      | 最大读取行数限制；一旦达到此行数，导入任务将停止                   |
-| `--test-mode`                           | false       |      | 是否开启测试模式                                                   |
-| `--use-prefilter`                       | false       |      | 是否预先过滤顶点                                                   |
-| `--short-id`                            |             |      | 将自定义 ID 映射为更短的 ID                                        |
-| `--vertex-edge-limit`                   | -1L         |      | 单个顶点的最大边数限制                                             |
-| `--sink-type`                           | true        |      | 数据接收端（Sink）存储类型开关                                     |
-| `--vertex-partitions`                   | 64          |      | HBase 顶点表的预分区数量                                           |
-| `--edge-partitions`                     | 64          |      | HBase 边表的预分区数量                                             |
-| `--vertex-table-name`                   |             |      | HBase 顶点表名称                                                   |
-| `--edge-table-name`                     |             |      | HBase 边表名称                                                     |
-| `--hbase-zk-quorum`                     |             |      | HBase Zookeeper 集群地址                                           |
-| `--hbase-zk-port`                       |             |      | HBase Zookeeper 端口号                                             |
-| `--hbase-zk-parent`                     |             |      | HBase Zookeeper 根路径                                             |
-| `--restore`                             | false       |      | 将图模式设置为恢复模式 (RESTORING)                                 |
-| `--backend`                             | hstore      |      | 自动创建图（如果不存在）时的后端存储类型                           |
-| `--serializer`                          | binary      |      | 自动创建图（如果不存在）时的序列化器类型                           |
-| `--scheduler-type`                      | distributed |      | 自动创建图（如果不存在）时的任务调度器类型                         |
-| `--batch-failure-fallback`              | true        |      | 批量插入失败时是否回退至单条插入模式                               |
+| `--parser-threads` 或 `--parallel-count` | max(2,CPUS) |      | 并行读取数据文件最大线程数                                                     |
+| `--start-file`                          | 0           |      | 用于部分（分片）导入的起始文件索引                                                 |
+| `--end-file`                            | -1          |      | 用于部分导入的截止文件索引                                                     |
+| `--scatter-sources`                     | false       |      | 分散（并行）读取多个数据源以优化 I/O 性能                                           |
+| `--cdc-flush-interval`                  | 30000       |      | Flink CDC 的数据刷新间隔                                                 |
+| `--cdc-sink-parallelism`                | 1           |      | Flink CDC 写入端（Sink）的并行度                                           |
+| `--max-read-errors`                     | 1           |      | 程序退出前允许的最大读取错误行数                                                  |
+| `--max-read-lines`                      | -1L         |      | 最大读取行数限制；一旦达到此行数，导入任务将停止                                          |
+| `--test-mode`                           | false       |      | 是否开启测试模式                                                          |
+| `--use-prefilter`                       | false       |      | 是否预先过滤顶点                                                          |
+| `--short-id`                            | []          |      | 将自定义 ID 映射为更短的 ID                                                 |
+| `--vertex-edge-limit`                   | -1L         |      | 单个顶点的最大边数限制                                                       |
+| `--sink-type`                           | true        |      | 是否输出至不同的存储                                                        |
+| `--vertex-partitions`                   | 64          |      | HBase 顶点表的预分区数量                                                   |
+| `--edge-partitions`                     | 64          |      | HBase 边表的预分区数量                                                    |
+| `--vertex-table-name`                   |             |      | HBase 顶点表名称                                                       |
+| `--edge-table-name`                     |             |      | HBase 边表名称                                                        |
+| `--hbase-zk-quorum`                     |             |      | HBase Zookeeper 集群地址                                              |
+| `--hbase-zk-port`                       |             |      | HBase Zookeeper 端口号                                               |
+| `--hbase-zk-parent`                     |             |      | HBase Zookeeper 根路径                                               |
+| `--restore`                             | false       |      | 将图模式设置为恢复模式 (RESTORING)                                           |
+| `--backend`                             | hstore      |      | 自动创建图（如果不存在）时的后端存储类型                                              |
+| `--serializer`                          | binary      |      | 自动创建图（如果不存在）时的序列化器类型                                              |
+| `--scheduler-type`                      | distributed |      | 自动创建图（如果不存在）时的任务调度器类型                                             |
+| `--batch-failure-fallback`              | true        |      | 批量插入失败时是否回退至单条插入模式                                                |
 ##### 3.4.2 断点续导模式
 
 通常情况下，Loader 任务都需要较长时间执行，如果因为某些原因导致导入中断进程退出，而下次希望能从中断的点继续导，这就是使用断点续导的场景。
