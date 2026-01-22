@@ -1219,7 +1219,7 @@ Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-d
 &lt;td>Graph name&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>-gs&lt;/code> or &lt;code>--graphspace&lt;/code>&lt;/td>
+&lt;td>&lt;code>--graphspace&lt;/code>&lt;/td>
 &lt;td>DEFAULT&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Graph space name&lt;/td>
@@ -1429,10 +1429,160 @@ Visit the &lt;a href="https://www.oracle.com/database/technologies/appdev/jdbc-d
 &lt;td>Enable this mode to only parse data without importing; usually used for testing&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>--help&lt;/code>&lt;/td>
+&lt;td>&lt;code>--help&lt;/code> or &lt;code>-help&lt;/code>&lt;/td>
 &lt;td>false&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Print help information&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--parser-threads&lt;/code> or &lt;code>--parallel-count&lt;/code>&lt;/td>
+&lt;td>max(2,CPUS)&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Parallel read pipelines for data files&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--start-file&lt;/code>&lt;/td>
+&lt;td>0&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Start file index for partial loading&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--end-file&lt;/code>&lt;/td>
+&lt;td>-1&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>End file index for partial loading&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--scatter-sources&lt;/code>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Scatter multiple sources for I/O optimization&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--cdc-flush-interval&lt;/code>&lt;/td>
+&lt;td>30000&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The flush interval for Flink CDC&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--cdc-sink-parallelism&lt;/code>&lt;/td>
+&lt;td>1&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The sink parallelism for Flink CDC&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--max-read-errors&lt;/code>&lt;/td>
+&lt;td>1&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The maximum number of read error lines before exiting&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--max-read-lines&lt;/code>&lt;/td>
+&lt;td>-1L&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The maximum number of read lines, task stops when reached&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--test-mode&lt;/code>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Whether the loader works in test mode&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--use-prefilter&lt;/code>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Whether to filter vertex in advance&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--short-id&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Mapping customized ID to shorter ID&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--vertex-edge-limit&lt;/code>&lt;/td>
+&lt;td>-1L&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The maximum number of vertex&amp;rsquo;s edges&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--sink-type&lt;/code>&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Sink to different storage type switch&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--vertex-partitions&lt;/code>&lt;/td>
+&lt;td>64&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The number of partitions of the HBase vertex table&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--edge-partitions&lt;/code>&lt;/td>
+&lt;td>64&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The number of partitions of the HBase edge table&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--vertex-table-name&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>HBase vertex table name&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--edge-table-name&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>HBase edge table name&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--hbase-zk-quorum&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>HBase ZooKeeper quorum&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--hbase-zk-port&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>HBase ZooKeeper port&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--hbase-zk-parent&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>HBase ZooKeeper parent&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--restore&lt;/code>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Set graph mode to RESTORING&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--backend&lt;/code>&lt;/td>
+&lt;td>hstore&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The backend store type when creating graph if not exists&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--serializer&lt;/code>&lt;/td>
+&lt;td>binary&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The serializer type when creating graph if not exists&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--scheduler-type&lt;/code>&lt;/td>
+&lt;td>distributed&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The task scheduler type when creating graph if not exists&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--batch-failure-fallback&lt;/code>&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Whether to fallback to single insert when batch insert fails&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>

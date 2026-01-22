@@ -7304,7 +7304,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;td>图名称&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>-gs&lt;/code> 或 &lt;code>--graphspace&lt;/code>&lt;/td>
+&lt;td>&lt;code>--graphspace&lt;/code>&lt;/td>
 &lt;td>DEFAULT&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>图空间&lt;/td>
@@ -7514,10 +7514,160 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;td>打开该模式，只解析不导入，通常用于测试&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>&lt;code>--help&lt;/code>&lt;/td>
+&lt;td>&lt;code>--help&lt;/code> 或 &lt;code>-help&lt;/code>&lt;/td>
 &lt;td>false&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>打印帮助信息&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--parser-threads&lt;/code> 或 &lt;code>--parallel-count&lt;/code>&lt;/td>
+&lt;td>max(2,CPUS)&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>并行读取数据文件最大线程数&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--start-file&lt;/code>&lt;/td>
+&lt;td>0&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>用于部分（分片）导入的起始文件索引&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--end-file&lt;/code>&lt;/td>
+&lt;td>-1&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>用于部分导入的截止文件索引&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--scatter-sources&lt;/code>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>分散（并行）读取多个数据源以优化 I/O 性能&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--cdc-flush-interval&lt;/code>&lt;/td>
+&lt;td>30000&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Flink CDC 的数据刷新间隔&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--cdc-sink-parallelism&lt;/code>&lt;/td>
+&lt;td>1&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Flink CDC 写入端（Sink）的并行度&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--max-read-errors&lt;/code>&lt;/td>
+&lt;td>1&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>程序退出前允许的最大读取错误行数&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--max-read-lines&lt;/code>&lt;/td>
+&lt;td>-1L&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>最大读取行数限制；一旦达到此行数，导入任务将停止&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--test-mode&lt;/code>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>是否开启测试模式&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--use-prefilter&lt;/code>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>是否预先过滤顶点&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--short-id&lt;/code>&lt;/td>
+&lt;td>[]&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>将自定义 ID 映射为更短的 ID&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--vertex-edge-limit&lt;/code>&lt;/td>
+&lt;td>-1L&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>单个顶点的最大边数限制&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--sink-type&lt;/code>&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>是否输出至不同的存储&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--vertex-partitions&lt;/code>&lt;/td>
+&lt;td>64&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>HBase 顶点表的预分区数量&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--edge-partitions&lt;/code>&lt;/td>
+&lt;td>64&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>HBase 边表的预分区数量&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--vertex-table-name&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>HBase 顶点表名称&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--edge-table-name&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>HBase 边表名称&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--hbase-zk-quorum&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>HBase Zookeeper 集群地址&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--hbase-zk-port&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>HBase Zookeeper 端口号&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--hbase-zk-parent&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>HBase Zookeeper 根路径&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--restore&lt;/code>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>将图模式设置为恢复模式 (RESTORING)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--backend&lt;/code>&lt;/td>
+&lt;td>hstore&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>自动创建图（如果不存在）时的后端存储类型&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--serializer&lt;/code>&lt;/td>
+&lt;td>binary&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>自动创建图（如果不存在）时的序列化器类型&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--scheduler-type&lt;/code>&lt;/td>
+&lt;td>distributed&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>自动创建图（如果不存在）时的任务调度器类型&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>--batch-failure-fallback&lt;/code>&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>批量插入失败时是否回退至单条插入模式&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
