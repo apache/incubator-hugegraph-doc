@@ -4,6 +4,10 @@ linkTitle: "Authentication"
 weight: 16
 ---
 
+> **版本变更说明**:
+> - 1.7.0+: Auth API 路径使用 GraphSpace 格式，如 `/graphspaces/DEFAULT/auth/users`，且 group/target 等 id 格式与 name 一致（如 `admin`）
+> - 1.5.x 及更早: Auth API 路径包含 graph 名称，group/target 等 id 格式类似 `-69:grant`。参考 [HugeGraph 1.5.x RESTful API](https://github.com/apache/incubator-hugegraph-doc/tree/release-1.5.0)
+
 ### 10.1 用户认证与权限控制
 
 > 开启权限及相关配置请先参考 [权限配置](/cn/docs/config/config-authentication/) 文档

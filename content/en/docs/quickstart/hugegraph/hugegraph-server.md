@@ -8,7 +8,9 @@ weight: 1
 
 `HugeGraph-Server` is the core part of the HugeGraph Project, contains submodules such as graph-core, backend, API.
 
-The Core Module is an implementation of the Tinkerpop interface; The Backend module is used to save the graph data to the data store, currently supported backends include: Memory, Cassandra, ScyllaDB, RocksDB; The API Module provides HTTP Server, which converts Client's HTTP request into a call to Core Module.
+The Core Module is an implementation of the Tinkerpop interface; The Backend module is used to save the graph data to the data store. For version 1.7.0+, supported backends include: RocksDB (standalone default), HStore (distributed), HBase, and Memory. The API Module provides HTTP Server, which converts Client's HTTP request into a call to Core Module.
+
+> ⚠️ **Important Change**: Starting from version 1.7.0, legacy backends such as MySQL, PostgreSQL, Cassandra, and ScyllaDB have been removed. If you need to use these backends, please use version 1.5.x or earlier.
 
 > There will be two spellings HugeGraph-Server and HugeGraphServer in the document, and other 
 > modules are similar. There is no big difference in the meaning of these two ways, 
@@ -42,11 +44,11 @@ There are four ways to deploy HugeGraph-Server components:
 <!-- 3.1 is linked by another place. if change 3.1's title, please check -->
 You can refer to the [Docker deployment guide](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/docker/README.md).
 
-We can use `docker run -itd --name=server -p 8080:8080 -e PASSWORD=xxx hugegraph/hugegraph:1.5.0` to quickly start a `HugeGraph Server` with a built-in `RocksDB` backend.
+We can use `docker run -itd --name=server -p 8080:8080 -e PASSWORD=xxx hugegraph/hugegraph:1.7.0` to quickly start a `HugeGraph Server` with a built-in `RocksDB` backend.
 
-Optional: 
+Optional:
 1. use `docker exec -it graph bash` to enter the container to do some operations.
-2. use `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph:1.5.0` to start with a **built-in** example graph. We can use `RESTful API` to verify the result. The detailed step can refer to [5.1.8](#518-create-an-example-graph-when-startup)
+2. use `docker run -itd --name=graph -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph:1.7.0` to start with a **built-in** example graph. We can use `RESTful API` to verify the result. The detailed step can refer to [5.1.8](#518-create-an-example-graph-when-startup)
 3. use `-e PASSWORD=xxx` to enable auth mode and set the password for admin. You can find more details from [Config Authentication](/docs/config/config-authentication#use-docker-to-enable-authentication-mode)
 
 If you use docker desktop, you can set the option like: 
@@ -60,7 +62,7 @@ Also, if we want to manage the other Hugegraph related instances in one file, we
 version: '3'
 services:
   server:
-    image: hugegraph/hugegraph:1.5.0
+    image: hugegraph/hugegraph:1.7.0
     container_name: server
     environment:
      - PASSWORD=xxx
@@ -75,13 +77,13 @@ services:
 >
 > 1. The docker image of the hugegraph is a convenient release to start it quickly, but not **official distribution** artifacts. You can find more details from [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub).
 >
-> 2. Recommend to use `release tag` (like `1.5.0`/`1.x.0`) for the stable version. Use `latest` tag to experience the newest functions in development.
+> 2. Recommend to use `release tag` (like `1.7.0`/`1.x.0`) for the stable version. Use `latest` tag to experience the newest functions in development.
 
 #### 3.2 Download the binary tar tarball
 
 You could download the binary tarball from the download page of the ASF site like this:
 ```bash
-# use the latest version, here is 1.5.0 for example
+# use the latest version, here is 1.7.0 for example
 wget https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph-incubating-{version}.tar.gz
 tar zxf *hugegraph*.tar.gz
 
@@ -156,8 +158,8 @@ Of course, you should download the tarball of `HugeGraph-Toolchain` first.
 
 ```bash
 # download toolchain binary package, it includes loader + tool + hubble
-# please check the latest version (e.g. here is 1.5.0)
-wget https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-toolchain-incubating-1.5.0.tar.gz
+# please check the latest version (e.g. here is 1.7.0)
+wget https://downloads.apache.org/incubator/hugegraph/1.7.0/apache-hugegraph-toolchain-incubating-1.7.0.tar.gz
 tar zxf *hugegraph-*.tar.gz
 
 # enter the tool's package
@@ -384,6 +386,8 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 ##### 5.1.4 Cassandra
 
+> ⚠️ **Deprecated**: This backend has been removed starting from HugeGraph 1.7.0. If you need to use it, please refer to version 1.5.x documentation.
+
 <details>
 <summary>Click to expand/collapse Cassandra configuration and startup methods</summary>
 
@@ -443,6 +447,8 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 </details>
 
 ##### 5.1.5 ScyllaDB
+
+> ⚠️ **Deprecated**: This backend has been removed starting from HugeGraph 1.7.0. If you need to use it, please refer to version 1.5.x documentation.
 
 <details>
 <summary>Click to expand/collapse ScyllaDB configuration and startup methods</summary>
@@ -530,6 +536,8 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 ##### 5.1.7 MySQL
 
+> ⚠️ **Deprecated**: This backend has been removed starting from HugeGraph 1.7.0. If you need to use it, please refer to version 1.5.x documentation.
+
 <details>
 <summary>Click to expand/collapse MySQL configuration and startup methods</summary>
 
@@ -600,6 +608,8 @@ In [3.1 Use Docker container](#31-use-docker-container-convenient-for-testdev), 
 
 ##### 5.2.1 Uses Cassandra as storage
 
+> ⚠️ **Deprecated**: Cassandra backend has been removed starting from HugeGraph 1.7.0. If you need to use it, please refer to version 1.5.x documentation.
+
 <details>
 <summary> Click to expand/collapse Cassandra configuration and startup methods</summary>
 
@@ -668,7 +678,7 @@ Set the environment variable `PRELOAD=true` when starting Docker to load data du
 
 1. Use `docker run`
 
-    Use `docker run -itd --name=server -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:1.5.0`
+    Use `docker run -itd --name=server -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:1.7.0`
 
 2. Use `docker-compose`
 
@@ -678,7 +688,7 @@ Set the environment variable `PRELOAD=true` when starting Docker to load data du
     version: '3'
       services:
         server:
-          image: hugegraph/hugegraph:1.5.0
+          image: hugegraph/hugegraph:1.7.0
           container_name: server
           environment:
             - PRELOAD=true
