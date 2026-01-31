@@ -551,3 +551,26 @@ Hubble 上暂未提供可视化的 OLAP 算法执行，可调用 RESTful API 进
 <center>
   <img src="/docs/images/images-hubble/355任务详情.png" alt="image">
 </center>
+
+
+### 5 配置说明
+
+HugeGraph-Hubble 可以通过 `conf/hugegraph-hubble.properties` 文件进行配置。
+
+#### 5.1 服务器配置
+
+| 配置项 | 默认值 | 说明 |
+|--------|--------|------|
+| `hubble.host` | `0.0.0.0` | Hubble 服务绑定的地址 |
+| `hubble.port` | `8088` | Hubble 服务监听的端口 |
+
+#### 5.2 Gremlin 查询限制
+
+这些设置控制查询结果限制，防止内存问题：
+
+| 配置项 | 默认值 | 说明 |
+|--------|--------|------|
+| `gremlin.suffix_limit` | `250` | 查询后缀最大长度 |
+| `gremlin.vertex_degree_limit` | `100` | 显示的最大顶点度数 |
+| `gremlin.edges_total_limit` | `500` | 返回的最大边数 |
+| `gremlin.batch_query_ids` | `100` | ID 批量查询大小 |

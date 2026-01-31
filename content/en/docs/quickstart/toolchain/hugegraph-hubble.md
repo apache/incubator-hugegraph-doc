@@ -557,3 +557,26 @@ There is no visual OLAP algorithm execution on Hubble. You can call the RESTful 
   <img src="/docs/images/images-hubble/355任务详情.png" alt="image">
 </center>
 
+
+### 5 Configuration
+
+HugeGraph-Hubble can be configured through the `conf/hugegraph-hubble.properties` file.
+
+#### 5.1 Server Configuration
+
+| Configuration Item | Default Value | Description |
+|-------------------|---------------|-------------|
+| `hubble.host` | `0.0.0.0` | The address that Hubble service binds to |
+| `hubble.port` | `8088` | The port that Hubble service listens on |
+
+#### 5.2 Gremlin Query Limits
+
+These settings control query result limits to prevent memory issues:
+
+| Configuration Item | Default Value | Description |
+|-------------------|---------------|-------------|
+| `gremlin.suffix_limit` | `250` | Maximum query suffix length |
+| `gremlin.vertex_degree_limit` | `100` | Maximum vertex degree to display |
+| `gremlin.edges_total_limit` | `500` | Maximum number of edges returned |
+| `gremlin.batch_query_ids` | `100` | ID batch query size |
+
