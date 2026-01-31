@@ -4,6 +4,10 @@ linkTitle: "Authentication"
 weight: 16
 ---
 
+> **Version Change Notice**:
+> - 1.7.0+: Auth API paths use GraphSpace format, such as `/graphspaces/DEFAULT/auth/users`, and group/target IDs match their names (e.g., `admin`)
+> - 1.5.x and earlier: Auth API paths include graph name, and group/target IDs use format like `-69:grant`. See [HugeGraph 1.5.x RESTful API](https://github.com/apache/incubator-hugegraph-doc/tree/release-1.5.0)
+
 ### 10.1 User Authentication and Access Control
 
 > To enable authentication and related configurations, please refer to the [Authentication Configuration](/docs/config/config-authentication/) documentation.

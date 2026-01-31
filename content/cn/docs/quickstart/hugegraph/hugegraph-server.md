@@ -8,7 +8,9 @@ weight: 1
 
 HugeGraph-Server 是 HugeGraph 项目的核心部分，包含 graph-core、backend、API 等子模块。
 
-Core 模块是 Tinkerpop 接口的实现，Backend 模块用于管理数据存储，目前支持的后端包括：Memory、Cassandra、ScyllaDB 以及 RocksDB，API 模块提供 HTTP Server，将 Client 的 HTTP 请求转化为对 Core 的调用。
+Core 模块是 Tinkerpop 接口的实现，Backend 模块用于管理数据存储，1.7.0+ 版本支持的后端包括：RocksDB（单机默认）、HStore（分布式）、HBase 和 Memory。API 模块提供 HTTP Server，将 Client 的 HTTP 请求转化为对 Core 的调用。
+
+> ⚠️ **重要变更**: 从 1.7.0 版本开始，MySQL、PostgreSQL、Cassandra、ScyllaDB 等遗留后端已被移除。如需使用这些后端，请使用 1.5.x 或更早版本。
 
 > 文档中会出现 `HugeGraph-Server` 及 `HugeGraphServer` 这两种写法，其他组件也类似。
 > 这两种写法含义上并明显差异，可以这么区分：`HugeGraph-Server` 表示服务端相关组件代码，`HugeGraphServer` 表示服务进程。
@@ -39,12 +41,12 @@ Core 模块是 Tinkerpop 接口的实现，Backend 模块用于管理数据存�
 
 可参考 [Docker 部署方式](https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/docker/README.md)。
 
-我们可以使用 `docker run -itd --name=server -p 8080:8080 -e PASSWORD=xxx hugegraph/hugegraph:1.5.0` 去快速启动一个内置了 `RocksDB` 的 `Hugegraph server`.
+我们可以使用 `docker run -itd --name=server -p 8080:8080 -e PASSWORD=xxx hugegraph/hugegraph:1.7.0` 去快速启动一个内置了 `RocksDB` 的 `Hugegraph server`.
 
 可选项：
 
 1. 可以使用 `docker exec -it server bash` 进入容器完成一些操作
-2. 可以使用 `docker run -itd --name=server -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph:1.5.0` 在启动的时候预加载一个**内置的**样例图。可以通过 `RESTful API` 进行验证。具体步骤可以参考 [5.1.9](#519-%E5%90%AF%E5%8A%A8-server-%E7%9A%84%E6%97%B6%E5%80%99%E5%88%9B%E5%BB%BA%E7%A4%BA%E4%BE%8B%E5%9B%BE)
+2. 可以使用 `docker run -itd --name=server -p 8080:8080 -e PRELOAD="true" hugegraph/hugegraph:1.7.0` 在启动的时候预加载一个**内置的**样例图。可以通过 `RESTful API` 进行验证。具体步骤可以参考 [5.1.9](#519-%E5%90%AF%E5%8A%A8-server-%E7%9A%84%E6%97%B6%E5%80%99%E5%88%9B%E5%BB%BA%E7%A4%BA%E4%BE%8B%E5%9B%BE)
 3. 可以使用 `-e PASSWORD=xxx` 设置是否开启鉴权模式以及 admin 的密码，具体步骤可以参考 [Config Authentication](/cn/docs/config/config-authentication#使用-docker-时开启鉴权模式) 
 
 如果使用 docker desktop，则可以按照如下的方式设置可选项：
@@ -59,7 +61,7 @@ Core 模块是 Tinkerpop 接口的实现，Backend 模块用于管理数据存�
 version: '3'
 services:
   server:
-    image: hugegraph/hugegraph:1.5.0
+    image: hugegraph/hugegraph:1.7.0
     container_name: server
     environment:
       - PASSWORD=xxx
@@ -74,12 +76,12 @@ services:
 > 
 > 1. hugegraph 的 docker 镜像是一个便捷版本，用于快速启动 hugegraph，并不是**官方发布物料包方式**。你可以从 [ASF Release Distribution Policy](https://infra.apache.org/release-distribution.html#dockerhub) 中得到更多细节。
 >
-> 2. 推荐使用 `release tag` (如 `1.5.0/1.x.0`) 以获取稳定版。使用 `latest` tag 可以使用开发中的最新功能。
+> 2. 推荐使用 `release tag` (如 `1.7.0/1.x.0`) 以获取稳定版。使用 `latest` tag 可以使用开发中的最新功能。
 
 #### 3.2 下载 tar 包
 
 ```bash
-# use the latest version, here is 1.5.0 for example
+# use the latest version, here is 1.7.0 for example
 wget https://downloads.apache.org/incubator/hugegraph/{version}/apache-hugegraph-incubating-{version}.tar.gz
 tar zxf *hugegraph*.tar.gz
 ```
@@ -138,11 +140,11 @@ mvn package -DskipTests
 HugeGraph-Tools 提供了一键部署的命令行工具，用户可以使用该工具快速地一键下载、解压、配置并启动 HugeGraph-Server 和 HugeGraph-Hubble，最新的 HugeGraph-Toolchain 中已经包含所有的这些工具，直接下载它解压就有工具包集合了
 
 ```bash
-# download toolchain package, it includes loader + tool + hubble, please check the latest version (here is 1.5.0)
-wget https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-toolchain-incubating-1.5.0.tar.gz
+# download toolchain package, it includes loader + tool + hubble, please check the latest version (here is 1.7.0)
+wget https://downloads.apache.org/incubator/hugegraph/1.7.0/apache-hugegraph-toolchain-incubating-1.7.0.tar.gz
 tar zxf *hugegraph-*.tar.gz
 # enter the tool's package
-cd *hugegraph*/*tool* 
+cd *hugegraph*/*tool*
 ```
 
 > 注：`${version}` 为版本号，最新版本号可参考 [Download 页面](/docs/download/download)，或直接从 Download 页面点击链接下载
@@ -387,6 +389,8 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 ##### 5.1.4 MySQL
 
+> ⚠️ **已废弃**: 此后端从 HugeGraph 1.7.0 版本开始已移除。如需使用，请参考 1.5.x 版本文档。
+
 <details>
 <summary>点击展开/折叠 MySQL 配置及启动方法</summary>
 
@@ -430,6 +434,8 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 </details>
 
 ##### 5.1.5 Cassandra
+
+> ⚠️ **已废弃**: 此后端从 HugeGraph 1.7.0 版本开始已移除。如需使用，请参考 1.5.x 版本文档。
 
 <details>
 <summary>点击展开/折叠 Cassandra 配置及启动方法</summary>
@@ -516,6 +522,8 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)....OK
 
 ##### 5.1.7 ScyllaDB
 
+> ⚠️ **已废弃**: 此后端从 HugeGraph 1.7.0 版本开始已移除。如需使用，请参考 1.5.x 版本文档。
+
 <details>
 <summary>点击展开/折叠 ScyllaDB 配置及启动方法</summary>
 
@@ -583,6 +591,8 @@ Connecting to HugeGraphServer (http://127.0.0.1:8080/graphs)......OK
 在 [3.1 使用 Docker 容器](#31-使用-docker-容器-便于测试)中，我们已经介绍了如何使用 `docker` 部署 `hugegraph-server`, 我们还可以使用其他的后端存储或者设置参数在 sever 启动的时候加载样例图
 
 ##### 5.2.1 使用 Cassandra 作为后端
+
+> ⚠️ **已废弃**: Cassandra 后端从 HugeGraph 1.7.0 版本开始已移除。如需使用，请参考 1.5.x 版本文档。
 
 <details>
 <summary>点击展开/折叠 Cassandra 配置及启动方法</summary>
@@ -652,7 +662,7 @@ volumes:
 
 1. 使用`docker run`
 
-    使用 `docker run -itd --name=server -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:1.5.0`
+    使用 `docker run -itd --name=server -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:1.7.0`
 
 2. 使用`docker-compose`
 
@@ -662,7 +672,7 @@ volumes:
     version: '3'
     services:
       server:
-        image: hugegraph/hugegraph:1.5.0
+        image: hugegraph/hugegraph:1.7.0
         container_name: server
         environment:
           - PRELOAD=true
