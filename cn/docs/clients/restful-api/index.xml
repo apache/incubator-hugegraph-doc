@@ -6341,6 +6341,13 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Authentication API</title><link>/cn/docs/clients/restful-api/auth/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/clients/restful-api/auth/</guid><description>
+&lt;blockquote>
+&lt;p>&lt;strong>版本变更说明&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>1.7.0+: Auth API 路径使用 GraphSpace 格式，如 &lt;code>/graphspaces/DEFAULT/auth/users&lt;/code>，且 group/target 等 id 格式与 name 一致（如 &lt;code>admin&lt;/code>）&lt;/li>
+&lt;li>1.5.x 及更早: Auth API 路径包含 graph 名称，group/target 等 id 格式类似 &lt;code>-69:grant&lt;/code>。参考 &lt;a href="https://github.com/apache/incubator-hugegraph-doc/tree/release-1.5.0">HugeGraph 1.5.x RESTful API&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
 &lt;h3 id="101-用户认证与权限控制">10.1 用户认证与权限控制&lt;/h3>
 &lt;blockquote>
 &lt;p>开启权限及相关配置请先参考 &lt;a href="/cn/docs/config/config-authentication/">权限配置&lt;/a> 文档&lt;/p>

@@ -1,7 +1,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HugeGraph – HugeGraph (OLTP)</title><link>/cn/docs/quickstart/hugegraph/</link><description>Recent content in HugeGraph (OLTP) on HugeGraph</description><generator>Hugo -- gohugo.io</generator><atom:link href="/cn/docs/quickstart/hugegraph/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: HugeGraph-Server Quick Start</title><link>/cn/docs/quickstart/hugegraph/hugegraph-server/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph/hugegraph-server/</guid><description>
 &lt;h3 id="1-hugegraph-server-概述">1 HugeGraph-Server 概述&lt;/h3>
 &lt;p>HugeGraph-Server 是 HugeGraph 项目的核心部分，包含 graph-core、backend、API 等子模块。&lt;/p>
-&lt;p>Core 模块是 Tinkerpop 接口的实现，Backend 模块用于管理数据存储，目前支持的后端包括：Memory、Cassandra、ScyllaDB 以及 RocksDB，API 模块提供 HTTP Server，将 Client 的 HTTP 请求转化为对 Core 的调用。&lt;/p>
+&lt;p>Core 模块是 Tinkerpop 接口的实现，Backend 模块用于管理数据存储，1.7.0+ 版本支持的后端包括：RocksDB（单机默认）、HStore（分布式）、HBase 和 Memory。API 模块提供 HTTP Server，将 Client 的 HTTP 请求转化为对 Core 的调用。&lt;/p>
+&lt;blockquote>
+&lt;p>⚠️ &lt;strong>重要变更&lt;/strong>: 从 1.7.0 版本开始，MySQL、PostgreSQL、Cassandra、ScyllaDB 等遗留后端已被移除。如需使用这些后端，请使用 1.5.x 或更早版本。&lt;/p>
+&lt;/blockquote>
 &lt;blockquote>
 &lt;p>文档中会出现 &lt;code>HugeGraph-Server&lt;/code> 及 &lt;code>HugeGraphServer&lt;/code> 这两种写法，其他组件也类似。
 这两种写法含义上并明显差异，可以这么区分：&lt;code>HugeGraph-Server&lt;/code> 表示服务端相关组件代码，&lt;code>HugeGraphServer&lt;/code> 表示服务进程。&lt;/p>
@@ -25,11 +28,11 @@
 &lt;h4 id="31-使用-docker-容器-便于测试">3.1 使用 Docker 容器 (便于&lt;strong>测试&lt;/strong>)&lt;/h4>
 &lt;!-- 3.1 is linked by another place. if change 3.1's title, please check -->
 &lt;p>可参考 &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/docker/README.md">Docker 部署方式&lt;/a>。&lt;/p>
-&lt;p>我们可以使用 &lt;code>docker run -itd --name=server -p 8080:8080 -e PASSWORD=xxx hugegraph/hugegraph:1.5.0&lt;/code> 去快速启动一个内置了 &lt;code>RocksDB&lt;/code> 的 &lt;code>Hugegraph server&lt;/code>.&lt;/p>
+&lt;p>我们可以使用 &lt;code>docker run -itd --name=server -p 8080:8080 -e PASSWORD=xxx hugegraph/hugegraph:1.7.0&lt;/code> 去快速启动一个内置了 &lt;code>RocksDB&lt;/code> 的 &lt;code>Hugegraph server&lt;/code>.&lt;/p>
 &lt;p>可选项：&lt;/p>
 &lt;ol>
 &lt;li>可以使用 &lt;code>docker exec -it server bash&lt;/code> 进入容器完成一些操作&lt;/li>
-&lt;li>可以使用 &lt;code>docker run -itd --name=server -p 8080:8080 -e PRELOAD=&amp;quot;true&amp;quot; hugegraph/hugegraph:1.5.0&lt;/code> 在启动的时候预加载一个&lt;strong>内置的&lt;/strong>样例图。可以通过 &lt;code>RESTful API&lt;/code> 进行验证。具体步骤可以参考 &lt;a href="#519-%E5%90%AF%E5%8A%A8-server-%E7%9A%84%E6%97%B6%E5%80%99%E5%88%9B%E5%BB%BA%E7%A4%BA%E4%BE%8B%E5%9B%BE">5.1.9&lt;/a>&lt;/li>
+&lt;li>可以使用 &lt;code>docker run -itd --name=server -p 8080:8080 -e PRELOAD=&amp;quot;true&amp;quot; hugegraph/hugegraph:1.7.0&lt;/code> 在启动的时候预加载一个&lt;strong>内置的&lt;/strong>样例图。可以通过 &lt;code>RESTful API&lt;/code> 进行验证。具体步骤可以参考 &lt;a href="#519-%E5%90%AF%E5%8A%A8-server-%E7%9A%84%E6%97%B6%E5%80%99%E5%88%9B%E5%BB%BA%E7%A4%BA%E4%BE%8B%E5%9B%BE">5.1.9&lt;/a>&lt;/li>
 &lt;li>可以使用 &lt;code>-e PASSWORD=xxx&lt;/code> 设置是否开启鉴权模式以及 admin 的密码，具体步骤可以参考 &lt;a href="/cn/docs/config/config-authentication#%E4%BD%BF%E7%94%A8-docker-%E6%97%B6%E5%BC%80%E5%90%AF%E9%89%B4%E6%9D%83%E6%A8%A1%E5%BC%8F">Config Authentication&lt;/a>&lt;/li>
 &lt;/ol>
 &lt;p>如果使用 docker desktop，则可以按照如下的方式设置可选项：&lt;/p>
@@ -40,7 +43,7 @@
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">server&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:1.5.0&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:1.7.0&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">server&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">environment&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#000">PASSWORD=xxx&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -56,12 +59,12 @@
 &lt;p>hugegraph 的 docker 镜像是一个便捷版本，用于快速启动 hugegraph，并不是&lt;strong>官方发布物料包方式&lt;/strong>。你可以从 &lt;a href="https://infra.apache.org/release-distribution.html#dockerhub">ASF Release Distribution Policy&lt;/a> 中得到更多细节。&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>推荐使用 &lt;code>release tag&lt;/code> (如 &lt;code>1.5.0/1.x.0&lt;/code>) 以获取稳定版。使用 &lt;code>latest&lt;/code> tag 可以使用开发中的最新功能。&lt;/p>
+&lt;p>推荐使用 &lt;code>release tag&lt;/code> (如 &lt;code>1.7.0/1.x.0&lt;/code>) 以获取稳定版。使用 &lt;code>latest&lt;/code> tag 可以使用开发中的最新功能。&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;/blockquote>
 &lt;h4 id="32-下载-tar-包">3.2 下载 tar 包&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># use the latest version, here is 1.5.0 for example&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># use the latest version, here is 1.7.0 for example&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>/apache-hugegraph-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph*.tar.gz
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="33-源码编译">3.3 源码编译&lt;/h4>
@@ -101,8 +104,8 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>HugeGraph-Tools 提供了一键部署的命令行工具，用户可以使用该工具快速地一键下载、解压、配置并启动 HugeGraph-Server 和 HugeGraph-Hubble，最新的 HugeGraph-Toolchain 中已经包含所有的这些工具，直接下载它解压就有工具包集合了
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">```&lt;/span>bash
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># download toolchain package, it includes loader + tool + hubble, please check the latest version (here is 1.5.0)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-toolchain-incubating-1.5.0.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># download toolchain package, it includes loader + tool + hubble, please check the latest version (here is 1.7.0)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/1.7.0/apache-hugegraph-toolchain-incubating-1.7.0.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph-*.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># enter the tool&amp;#39;s package&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph*/*tool*
@@ -265,6 +268,9 @@
 &lt;/blockquote>
 &lt;/details>
 &lt;h5 id="514-mysql">5.1.4 MySQL&lt;/h5>
+&lt;blockquote>
+&lt;p>⚠️ &lt;strong>已废弃&lt;/strong>: 此后端从 HugeGraph 1.7.0 版本开始已移除。如需使用，请参考 1.5.x 版本文档。&lt;/p>
+&lt;/blockquote>
 &lt;details>
 &lt;summary>点击展开/折叠 MySQL 配置及启动方法&lt;/summary>
 &lt;blockquote>
@@ -294,6 +300,9 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>http://127.0.0.1:8080/graphs&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>....OK
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/details>
 &lt;h5 id="515-cassandra">5.1.5 Cassandra&lt;/h5>
+&lt;blockquote>
+&lt;p>⚠️ &lt;strong>已废弃&lt;/strong>: 此后端从 HugeGraph 1.7.0 版本开始已移除。如需使用，请参考 1.5.x 版本文档。&lt;/p>
+&lt;/blockquote>
 &lt;details>
 &lt;summary>点击展开/折叠 Cassandra 配置及启动方法&lt;/summary>
 &lt;blockquote>
@@ -354,6 +363,9 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>提示的 url 与 rest-server.properties 中配置的 restserver.url 一致&lt;/p>
 &lt;/details>
 &lt;h5 id="517-scylladb">5.1.7 ScyllaDB&lt;/h5>
+&lt;blockquote>
+&lt;p>⚠️ &lt;strong>已废弃&lt;/strong>: 此后端从 HugeGraph 1.7.0 版本开始已移除。如需使用，请参考 1.5.x 版本文档。&lt;/p>
+&lt;/blockquote>
 &lt;details>
 &lt;summary>点击展开/折叠 ScyllaDB 配置及启动方法&lt;/summary>
 &lt;blockquote>
@@ -395,6 +407,9 @@
 &lt;h4 id="52-使用-docker">5.2 使用 Docker&lt;/h4>
 &lt;p>在 &lt;a href="#31-%E4%BD%BF%E7%94%A8-docker-%E5%AE%B9%E5%99%A8-%E4%BE%BF%E4%BA%8E%E6%B5%8B%E8%AF%95">3.1 使用 Docker 容器&lt;/a>中，我们已经介绍了如何使用 &lt;code>docker&lt;/code> 部署 &lt;code>hugegraph-server&lt;/code>, 我们还可以使用其他的后端存储或者设置参数在 sever 启动的时候加载样例图&lt;/p>
 &lt;h5 id="521-使用-cassandra-作为后端">5.2.1 使用 Cassandra 作为后端&lt;/h5>
+&lt;blockquote>
+&lt;p>⚠️ &lt;strong>已废弃&lt;/strong>: Cassandra 后端从 HugeGraph 1.7.0 版本开始已移除。如需使用，请参考 1.5.x 版本文档。&lt;/p>
+&lt;/blockquote>
 &lt;details>
 &lt;summary>点击展开/折叠 Cassandra 配置及启动方法&lt;/summary>
 &lt;p>在使用 Docker 的时候，我们可以使用 Cassandra 作为后端存储。我们更加推荐直接使用 docker-compose 来对于 server 以及 Cassandra 进行统一管理&lt;/p>
@@ -452,7 +467,7 @@
 &lt;ol>
 &lt;li>
 &lt;p>使用&lt;code>docker run&lt;/code>&lt;/p>
-&lt;p>使用 &lt;code>docker run -itd --name=server -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:1.5.0&lt;/code>&lt;/p>
+&lt;p>使用 &lt;code>docker run -itd --name=server -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:1.7.0&lt;/code>&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>使用&lt;code>docker-compose&lt;/code>&lt;/p>
@@ -460,7 +475,7 @@
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">server&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:1.5.0&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:1.7.0&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">server&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">environment&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#000">PRELOAD=true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">

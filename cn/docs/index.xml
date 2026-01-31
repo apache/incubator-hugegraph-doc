@@ -3527,7 +3527,64 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/ul>
 &lt;center>
 &lt;img src="/docs/images/images-hubble/355任务详情.png" alt="image">
-&lt;/center></description></item><item><title>Docs: HugeGraph 配置</title><link>/cn/docs/config/config-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/config/config-guide/</guid><description>
+&lt;/center>
+&lt;h3 id="5-配置说明">5 配置说明&lt;/h3>
+&lt;p>HugeGraph-Hubble 可以通过 &lt;code>conf/hugegraph-hubble.properties&lt;/code> 文件进行配置。&lt;/p>
+&lt;h4 id="51-服务器配置">5.1 服务器配置&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>hubble.host&lt;/code>&lt;/td>
+&lt;td>&lt;code>0.0.0.0&lt;/code>&lt;/td>
+&lt;td>Hubble 服务绑定的地址&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>hubble.port&lt;/code>&lt;/td>
+&lt;td>&lt;code>8088&lt;/code>&lt;/td>
+&lt;td>Hubble 服务监听的端口&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="52-gremlin-查询限制">5.2 Gremlin 查询限制&lt;/h4>
+&lt;p>这些设置控制查询结果限制，防止内存问题：&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>gremlin.suffix_limit&lt;/code>&lt;/td>
+&lt;td>&lt;code>250&lt;/code>&lt;/td>
+&lt;td>查询后缀最大长度&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gremlin.vertex_degree_limit&lt;/code>&lt;/td>
+&lt;td>&lt;code>100&lt;/code>&lt;/td>
+&lt;td>显示的最大顶点度数&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gremlin.edges_total_limit&lt;/code>&lt;/td>
+&lt;td>&lt;code>500&lt;/code>&lt;/td>
+&lt;td>返回的最大边数&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gremlin.batch_query_ids&lt;/code>&lt;/td>
+&lt;td>&lt;code>100&lt;/code>&lt;/td>
+&lt;td>ID 批量查询大小&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>Docs: HugeGraph 配置</title><link>/cn/docs/config/config-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/config/config-guide/</guid><description>
 &lt;h3 id="1-概述">1 概述&lt;/h3>
 &lt;p>配置文件的目录为 hugegraph-release/conf，所有关于服务和图本身的配置都在此目录下。&lt;/p>
 &lt;p>主要的配置文件包括：gremlin-server.yaml、rest-server.properties 和 hugegraph.properties&lt;/p>
@@ -4011,7 +4068,10 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>GitHub will automatically update the Pull Request after we push it, just wait for code review.&lt;/p></description></item><item><title>Docs: HugeGraph-Server Quick Start</title><link>/cn/docs/quickstart/hugegraph/hugegraph-server/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph/hugegraph-server/</guid><description>
 &lt;h3 id="1-hugegraph-server-概述">1 HugeGraph-Server 概述&lt;/h3>
 &lt;p>HugeGraph-Server 是 HugeGraph 项目的核心部分，包含 graph-core、backend、API 等子模块。&lt;/p>
-&lt;p>Core 模块是 Tinkerpop 接口的实现，Backend 模块用于管理数据存储，目前支持的后端包括：Memory、Cassandra、ScyllaDB 以及 RocksDB，API 模块提供 HTTP Server，将 Client 的 HTTP 请求转化为对 Core 的调用。&lt;/p>
+&lt;p>Core 模块是 Tinkerpop 接口的实现，Backend 模块用于管理数据存储，1.7.0+ 版本支持的后端包括：RocksDB（单机默认）、HStore（分布式）、HBase 和 Memory。API 模块提供 HTTP Server，将 Client 的 HTTP 请求转化为对 Core 的调用。&lt;/p>
+&lt;blockquote>
+&lt;p>⚠️ &lt;strong>重要变更&lt;/strong>: 从 1.7.0 版本开始，MySQL、PostgreSQL、Cassandra、ScyllaDB 等遗留后端已被移除。如需使用这些后端，请使用 1.5.x 或更早版本。&lt;/p>
+&lt;/blockquote>
 &lt;blockquote>
 &lt;p>文档中会出现 &lt;code>HugeGraph-Server&lt;/code> 及 &lt;code>HugeGraphServer&lt;/code> 这两种写法，其他组件也类似。
 这两种写法含义上并明显差异，可以这么区分：&lt;code>HugeGraph-Server&lt;/code> 表示服务端相关组件代码，&lt;code>HugeGraphServer&lt;/code> 表示服务进程。&lt;/p>
@@ -4035,11 +4095,11 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;h4 id="31-使用-docker-容器-便于测试">3.1 使用 Docker 容器 (便于&lt;strong>测试&lt;/strong>)&lt;/h4>
 &lt;!-- 3.1 is linked by another place. if change 3.1's title, please check -->
 &lt;p>可参考 &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/docker/README.md">Docker 部署方式&lt;/a>。&lt;/p>
-&lt;p>我们可以使用 &lt;code>docker run -itd --name=server -p 8080:8080 -e PASSWORD=xxx hugegraph/hugegraph:1.5.0&lt;/code> 去快速启动一个内置了 &lt;code>RocksDB&lt;/code> 的 &lt;code>Hugegraph server&lt;/code>.&lt;/p>
+&lt;p>我们可以使用 &lt;code>docker run -itd --name=server -p 8080:8080 -e PASSWORD=xxx hugegraph/hugegraph:1.7.0&lt;/code> 去快速启动一个内置了 &lt;code>RocksDB&lt;/code> 的 &lt;code>Hugegraph server&lt;/code>.&lt;/p>
 &lt;p>可选项：&lt;/p>
 &lt;ol>
 &lt;li>可以使用 &lt;code>docker exec -it server bash&lt;/code> 进入容器完成一些操作&lt;/li>
-&lt;li>可以使用 &lt;code>docker run -itd --name=server -p 8080:8080 -e PRELOAD=&amp;quot;true&amp;quot; hugegraph/hugegraph:1.5.0&lt;/code> 在启动的时候预加载一个&lt;strong>内置的&lt;/strong>样例图。可以通过 &lt;code>RESTful API&lt;/code> 进行验证。具体步骤可以参考 &lt;a href="#519-%E5%90%AF%E5%8A%A8-server-%E7%9A%84%E6%97%B6%E5%80%99%E5%88%9B%E5%BB%BA%E7%A4%BA%E4%BE%8B%E5%9B%BE">5.1.9&lt;/a>&lt;/li>
+&lt;li>可以使用 &lt;code>docker run -itd --name=server -p 8080:8080 -e PRELOAD=&amp;quot;true&amp;quot; hugegraph/hugegraph:1.7.0&lt;/code> 在启动的时候预加载一个&lt;strong>内置的&lt;/strong>样例图。可以通过 &lt;code>RESTful API&lt;/code> 进行验证。具体步骤可以参考 &lt;a href="#519-%E5%90%AF%E5%8A%A8-server-%E7%9A%84%E6%97%B6%E5%80%99%E5%88%9B%E5%BB%BA%E7%A4%BA%E4%BE%8B%E5%9B%BE">5.1.9&lt;/a>&lt;/li>
 &lt;li>可以使用 &lt;code>-e PASSWORD=xxx&lt;/code> 设置是否开启鉴权模式以及 admin 的密码，具体步骤可以参考 &lt;a href="/cn/docs/config/config-authentication#%E4%BD%BF%E7%94%A8-docker-%E6%97%B6%E5%BC%80%E5%90%AF%E9%89%B4%E6%9D%83%E6%A8%A1%E5%BC%8F">Config Authentication&lt;/a>&lt;/li>
 &lt;/ol>
 &lt;p>如果使用 docker desktop，则可以按照如下的方式设置可选项：&lt;/p>
@@ -4050,7 +4110,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">server&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:1.5.0&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:1.7.0&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">server&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">environment&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#000">PASSWORD=xxx&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -4066,12 +4126,12 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;p>hugegraph 的 docker 镜像是一个便捷版本，用于快速启动 hugegraph，并不是&lt;strong>官方发布物料包方式&lt;/strong>。你可以从 &lt;a href="https://infra.apache.org/release-distribution.html#dockerhub">ASF Release Distribution Policy&lt;/a> 中得到更多细节。&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>推荐使用 &lt;code>release tag&lt;/code> (如 &lt;code>1.5.0/1.x.0&lt;/code>) 以获取稳定版。使用 &lt;code>latest&lt;/code> tag 可以使用开发中的最新功能。&lt;/p>
+&lt;p>推荐使用 &lt;code>release tag&lt;/code> (如 &lt;code>1.7.0/1.x.0&lt;/code>) 以获取稳定版。使用 &lt;code>latest&lt;/code> tag 可以使用开发中的最新功能。&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;/blockquote>
 &lt;h4 id="32-下载-tar-包">3.2 下载 tar 包&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># use the latest version, here is 1.5.0 for example&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># use the latest version, here is 1.7.0 for example&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>/apache-hugegraph-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph*.tar.gz
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="33-源码编译">3.3 源码编译&lt;/h4>
@@ -4111,8 +4171,8 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>HugeGraph-Tools 提供了一键部署的命令行工具，用户可以使用该工具快速地一键下载、解压、配置并启动 HugeGraph-Server 和 HugeGraph-Hubble，最新的 HugeGraph-Toolchain 中已经包含所有的这些工具，直接下载它解压就有工具包集合了
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">```&lt;/span>bash
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># download toolchain package, it includes loader + tool + hubble, please check the latest version (here is 1.5.0)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-toolchain-incubating-1.5.0.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># download toolchain package, it includes loader + tool + hubble, please check the latest version (here is 1.7.0)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/1.7.0/apache-hugegraph-toolchain-incubating-1.7.0.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph-*.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># enter the tool&amp;#39;s package&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> *hugegraph*/*tool*
@@ -4275,6 +4335,9 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/blockquote>
 &lt;/details>
 &lt;h5 id="514-mysql">5.1.4 MySQL&lt;/h5>
+&lt;blockquote>
+&lt;p>⚠️ &lt;strong>已废弃&lt;/strong>: 此后端从 HugeGraph 1.7.0 版本开始已移除。如需使用，请参考 1.5.x 版本文档。&lt;/p>
+&lt;/blockquote>
 &lt;details>
 &lt;summary>点击展开/折叠 MySQL 配置及启动方法&lt;/summary>
 &lt;blockquote>
@@ -4304,6 +4367,9 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>http://127.0.0.1:8080/graphs&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>....OK
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/details>
 &lt;h5 id="515-cassandra">5.1.5 Cassandra&lt;/h5>
+&lt;blockquote>
+&lt;p>⚠️ &lt;strong>已废弃&lt;/strong>: 此后端从 HugeGraph 1.7.0 版本开始已移除。如需使用，请参考 1.5.x 版本文档。&lt;/p>
+&lt;/blockquote>
 &lt;details>
 &lt;summary>点击展开/折叠 Cassandra 配置及启动方法&lt;/summary>
 &lt;blockquote>
@@ -4364,6 +4430,9 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>提示的 url 与 rest-server.properties 中配置的 restserver.url 一致&lt;/p>
 &lt;/details>
 &lt;h5 id="517-scylladb">5.1.7 ScyllaDB&lt;/h5>
+&lt;blockquote>
+&lt;p>⚠️ &lt;strong>已废弃&lt;/strong>: 此后端从 HugeGraph 1.7.0 版本开始已移除。如需使用，请参考 1.5.x 版本文档。&lt;/p>
+&lt;/blockquote>
 &lt;details>
 &lt;summary>点击展开/折叠 ScyllaDB 配置及启动方法&lt;/summary>
 &lt;blockquote>
@@ -4405,6 +4474,9 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;h4 id="52-使用-docker">5.2 使用 Docker&lt;/h4>
 &lt;p>在 &lt;a href="#31-%E4%BD%BF%E7%94%A8-docker-%E5%AE%B9%E5%99%A8-%E4%BE%BF%E4%BA%8E%E6%B5%8B%E8%AF%95">3.1 使用 Docker 容器&lt;/a>中，我们已经介绍了如何使用 &lt;code>docker&lt;/code> 部署 &lt;code>hugegraph-server&lt;/code>, 我们还可以使用其他的后端存储或者设置参数在 sever 启动的时候加载样例图&lt;/p>
 &lt;h5 id="521-使用-cassandra-作为后端">5.2.1 使用 Cassandra 作为后端&lt;/h5>
+&lt;blockquote>
+&lt;p>⚠️ &lt;strong>已废弃&lt;/strong>: Cassandra 后端从 HugeGraph 1.7.0 版本开始已移除。如需使用，请参考 1.5.x 版本文档。&lt;/p>
+&lt;/blockquote>
 &lt;details>
 &lt;summary>点击展开/折叠 Cassandra 配置及启动方法&lt;/summary>
 &lt;p>在使用 Docker 的时候，我们可以使用 Cassandra 作为后端存储。我们更加推荐直接使用 docker-compose 来对于 server 以及 Cassandra 进行统一管理&lt;/p>
@@ -4462,7 +4534,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;ol>
 &lt;li>
 &lt;p>使用&lt;code>docker run&lt;/code>&lt;/p>
-&lt;p>使用 &lt;code>docker run -itd --name=server -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:1.5.0&lt;/code>&lt;/p>
+&lt;p>使用 &lt;code>docker run -itd --name=server -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:1.7.0&lt;/code>&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>使用&lt;code>docker-compose&lt;/code>&lt;/p>
@@ -4470,7 +4542,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">server&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:1.5.0&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:1.7.0&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">server&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">environment&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#000">PRELOAD=true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -8353,17 +8425,17 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/tr>
 &lt;tr>
 &lt;td>batch.max_edges_per_batch&lt;/td>
-&lt;td>500&lt;/td>
+&lt;td>2500&lt;/td>
 &lt;td>The maximum number of edges submitted per batch.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>batch.max_vertices_per_batch&lt;/td>
-&lt;td>500&lt;/td>
+&lt;td>2500&lt;/td>
 &lt;td>The maximum number of vertices submitted per batch.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>batch.max_write_ratio&lt;/td>
-&lt;td>50&lt;/td>
+&lt;td>70&lt;/td>
 &lt;td>The maximum thread ratio for batch writing, only take effect if the batch.max_write_threads is 0.&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -8413,7 +8485,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/tr>
 &lt;tr>
 &lt;td>exception.allow_trace&lt;/td>
-&lt;td>false&lt;/td>
+&lt;td>true&lt;/td>
 &lt;td>Whether to allow exception trace stack.&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -8425,6 +8497,90 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;td>memory_monitor.period&lt;/td>
 &lt;td>2000&lt;/td>
 &lt;td>The period in ms of JVM(in-heap) memory usage monitoring.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>log.slow_query_threshold&lt;/td>
+&lt;td>1000&lt;/td>
+&lt;td>Slow query log threshold in milliseconds, 0 means disabled.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="k8s-配置项-可选">K8s 配置项 (可选)&lt;/h3>
+&lt;p>对应配置文件&lt;code>rest-server.properties&lt;/code>&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>server.use_k8s&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>Whether to enable K8s multi-tenancy mode.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.namespace&lt;/td>
+&lt;td>hugegraph-computer-system&lt;/td>
+&lt;td>K8s namespace for compute jobs.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.kubeconfig&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Path to kubeconfig file.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="pdmeta-配置项-分布式模式">PD/Meta 配置项 (分布式模式)&lt;/h3>
+&lt;p>对应配置文件&lt;code>rest-server.properties&lt;/code>&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>pd.peers&lt;/td>
+&lt;td>127.0.0.1:8686&lt;/td>
+&lt;td>PD server addresses (comma separated).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>meta.endpoints&lt;/td>
+&lt;td>http://127.0.0.1:2379&lt;/td>
+&lt;td>Meta service endpoints.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="arthas-诊断配置项-可选">Arthas 诊断配置项 (可选)&lt;/h3>
+&lt;p>对应配置文件&lt;code>rest-server.properties&lt;/code>&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>arthas.telnetPort&lt;/td>
+&lt;td>8562&lt;/td>
+&lt;td>Arthas telnet port.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>arthas.httpPort&lt;/td>
+&lt;td>8561&lt;/td>
+&lt;td>Arthas HTTP port.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>arthas.ip&lt;/td>
+&lt;td>0.0.0.0&lt;/td>
+&lt;td>Arthas bind IP.&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -8447,7 +8603,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;tr>
 &lt;td>backend&lt;/td>
 &lt;td>rocksdb&lt;/td>
-&lt;td>The data store type, available values are [memory, rocksdb, cassandra, scylladb, hbase, mysql].&lt;/td>
+&lt;td>The data store type. For version 1.7.0+: [memory, rocksdb, hstore, hbase]. Note: cassandra, scylladb, mysql, postgresql were removed in 1.7.0 (use &amp;lt;= 1.5.x for legacy backends).&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>serializer&lt;/td>
@@ -10439,10 +10595,11 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;h4 id="31-功能概览">3.1 功能概览&lt;/h4>
 &lt;p>解压后，进入 hugegraph-tools 目录，可以使用&lt;code>bin/hugegraph&lt;/code>或者&lt;code>bin/hugegraph help&lt;/code>来查看 usage 信息。主要分为：&lt;/p>
 &lt;ul>
-&lt;li>图管理类，graph-mode-set、graph-mode-get、graph-list、graph-get 和 graph-clear&lt;/li>
+&lt;li>图管理类，graph-mode-set、graph-mode-get、graph-list、graph-get、graph-clear、graph-create、graph-clone 和 graph-drop&lt;/li>
 &lt;li>异步任务管理类，task-list、task-get、task-delete、task-cancel 和 task-clear&lt;/li>
 &lt;li>Gremlin类，gremlin-execute 和 gremlin-schedule&lt;/li>
 &lt;li>备份/恢复类，backup、restore、migrate、schedule-backup 和 dump&lt;/li>
+&lt;li>认证数据备份/恢复类，auth-backup 和 auth-restore&lt;/li>
 &lt;li>安装部署类，deploy、clear、start-all 和 stop-all&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>Usage: hugegraph &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>options&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>command&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87">command&lt;/span> options&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
@@ -10515,7 +10672,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">#export HUGEGRAPH_TIMEOUT=&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">#export HUGEGRAPH_TRUST_STORE_FILE=&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">#export HUGEGRAPH_TRUST_STORE_PASSWORD=&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="33-图管理类graph-mode-setgraph-mode-getgraph-listgraph-get和graph-clear">3.3 图管理类，graph-mode-set、graph-mode-get、graph-list、graph-get和graph-clear&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="33-图管理类graph-mode-setgraph-mode-getgraph-listgraph-getgraph-cleargraph-creategraph-clone和graph-drop">3.3 图管理类，graph-mode-set、graph-mode-get、graph-list、graph-get、graph-clear、graph-create、graph-clone和graph-drop&lt;/h5>
 &lt;ul>
 &lt;li>graph-mode-set，设置图的 restore mode
 &lt;ul>
@@ -10528,6 +10685,23 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;li>graph-clear，清除某个图的全部 schema 和 data
 &lt;ul>
 &lt;li>&amp;ndash;confirm-message 或者 -c，必填项，删除确认信息，需要手动输入，二次确认防止误删，&amp;ldquo;I&amp;rsquo;m sure to delete all data&amp;rdquo;，包括双引号&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>graph-create，使用配置文件创建新图
+&lt;ul>
+&lt;li>&amp;ndash;name 或者 -n，选填项，新图的名称，默认为 hugegraph&lt;/li>
+&lt;li>&amp;ndash;file 或者 -f，必填项，图配置文件的路径&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>graph-clone，克隆已存在的图
+&lt;ul>
+&lt;li>&amp;ndash;name 或者 -n，选填项，新克隆图的名称，默认为 hugegraph&lt;/li>
+&lt;li>&amp;ndash;clone-graph-name，选填项，要克隆的源图名称，默认为 hugegraph&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>graph-drop，删除图（不同于 graph-clear，这会完全删除图）
+&lt;ul>
+&lt;li>&amp;ndash;confirm-message 或者 -c，必填项，确认消息 &amp;ldquo;I&amp;rsquo;m sure to drop the graph&amp;rdquo;，包括双引号&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
@@ -10602,6 +10776,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;li>&amp;ndash;huge-types 或者 -t，要备份的数据类型，逗号分隔，可选值为 &amp;lsquo;all&amp;rsquo; 或者 一个或多个 [vertex,edge,vertex_label,edge_label,property_key,index_label] 的组合，&amp;lsquo;all&amp;rsquo; 代表全部6种类型，即顶点、边和所有schema&lt;/li>
 &lt;li>&amp;ndash;log 或者 -l，指定日志目录，默认为当前目录&lt;/li>
 &lt;li>&amp;ndash;retry，指定失败重试次数，默认为 3&lt;/li>
+&lt;li>&amp;ndash;thread-num 或者 -T，使用的线程数，默认为 Math.min(10, Math.max(4, CPUs / 2))&lt;/li>
 &lt;li>&amp;ndash;split-size 或者 -s，指定在备份时对顶点或者边分块的大小，默认为 1048576&lt;/li>
 &lt;li>-D，用 -Dkey=value 的模式指定动态参数，用来备份数据到 HDFS 时，指定 HDFS 的配置项，例如：-Dfs.default.name=hdfs://localhost:9000&lt;/li>
 &lt;/ul>
@@ -10613,6 +10788,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;li>&amp;ndash;huge-types 或者 -t，要恢复的数据类型，逗号分隔，可选值为 &amp;lsquo;all&amp;rsquo; 或者 一个或多个 [vertex,edge,vertex_label,edge_label,property_key,index_label] 的组合，&amp;lsquo;all&amp;rsquo; 代表全部6种类型，即顶点、边和所有schema&lt;/li>
 &lt;li>&amp;ndash;log 或者 -l，指定日志目录，默认为当前目录&lt;/li>
 &lt;li>&amp;ndash;retry，指定失败重试次数，默认为 3&lt;/li>
+&lt;li>&amp;ndash;thread-num 或者 -T，使用的线程数，默认为 Math.min(10, Math.max(4, CPUs / 2))&lt;/li>
 &lt;li>-D，用 -Dkey=value 的模式指定动态参数，用来从 HDFS 恢复图时，指定 HDFS 的配置项，例如：-Dfs.default.name=hdfs://localhost:9000&lt;/li>
 &lt;/ul>
 &lt;blockquote>
@@ -10659,7 +10835,32 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
-&lt;h5 id="37-安装部署类">3.7 安装部署类&lt;/h5>
+&lt;h5 id="37-认证数据备份恢复类">3.7 认证数据备份/恢复类&lt;/h5>
+&lt;ul>
+&lt;li>auth-backup，备份认证数据到指定目录
+&lt;ul>
+&lt;li>&amp;ndash;types 或者 -t，要备份的认证数据类型，逗号分隔，可选值为 &amp;lsquo;all&amp;rsquo; 或者一个或多个 [user, group, target, belong, access] 的组合，&amp;lsquo;all&amp;rsquo; 代表全部5种类型&lt;/li>
+&lt;li>&amp;ndash;directory 或者 -d，备份数据存储目录，默认为当前目录&lt;/li>
+&lt;li>&amp;ndash;log 或者 -l，指定日志目录，默认为当前目录&lt;/li>
+&lt;li>&amp;ndash;retry，指定失败重试次数，默认为 3&lt;/li>
+&lt;li>&amp;ndash;thread-num 或者 -T，使用的线程数，默认为 Math.min(10, Math.max(4, CPUs / 2))&lt;/li>
+&lt;li>-D，用 -Dkey=value 的模式指定动态参数，用来备份数据到 HDFS 时，指定 HDFS 的配置项，例如：-Dfs.default.name=hdfs://localhost:9000&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>auth-restore，从指定目录恢复认证数据
+&lt;ul>
+&lt;li>&amp;ndash;types 或者 -t，要恢复的认证数据类型，逗号分隔，可选值为 &amp;lsquo;all&amp;rsquo; 或者一个或多个 [user, group, target, belong, access] 的组合，&amp;lsquo;all&amp;rsquo; 代表全部5种类型&lt;/li>
+&lt;li>&amp;ndash;directory 或者 -d，备份数据存储目录，默认为当前目录&lt;/li>
+&lt;li>&amp;ndash;log 或者 -l，指定日志目录，默认为当前目录&lt;/li>
+&lt;li>&amp;ndash;retry，指定失败重试次数，默认为 3&lt;/li>
+&lt;li>&amp;ndash;thread-num 或者 -T，使用的线程数，默认为 Math.min(10, Math.max(4, CPUs / 2))&lt;/li>
+&lt;li>&amp;ndash;strategy，冲突处理策略，可选值为 [stop, ignore]，默认为 stop。stop 表示遇到冲突时停止恢复，ignore 表示忽略冲突继续恢复&lt;/li>
+&lt;li>&amp;ndash;init-password，恢复用户时设置的初始密码，恢复用户数据时必填&lt;/li>
+&lt;li>-D，用 -Dkey=value 的模式指定动态参数，用来从 HDFS 恢复数据时，指定 HDFS 的配置项，例如：-Dfs.default.name=hdfs://localhost:9000&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h5 id="38-安装部署类">3.8 安装部署类&lt;/h5>
 &lt;ul>
 &lt;li>deploy，一键下载、安装和启动 HugeGraph-Server 和 HugeGraph-Studio
 &lt;ul>
@@ -10684,7 +10885,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;blockquote>
 &lt;p>deploy命令中有可选参数 -u，提供时会使用指定的下载地址替代默认下载地址下载 tar 包，并且将地址写入&lt;code>~/hugegraph-download-url-prefix&lt;/code>文件中；之后如果不指定地址时，会优先从&lt;code>~/hugegraph-download-url-prefix&lt;/code>指定的地址下载 tar 包；如果 -u 和&lt;code>~/hugegraph-download-url-prefix&lt;/code>都没有时，会从默认下载地址进行下载&lt;/p>
 &lt;/blockquote>
-&lt;h5 id="38-具体命令参数">3.8 具体命令参数&lt;/h5>
+&lt;h5 id="39-具体命令参数">3.9 具体命令参数&lt;/h5>
 &lt;p>各子命令的具体参数如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>Usage: hugegraph &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>options&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>command&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87">command&lt;/span> options&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Options:
@@ -10987,7 +11188,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87">help&lt;/span> Print usage
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Usage: &lt;span style="color:#204a87">help&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="39-具体命令示例">3.9 具体命令示例&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="310-具体命令示例">3.10 具体命令示例&lt;/h5>
 &lt;h6 id="1-gremlin语句">1. gremlin语句&lt;/h6>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 同步执行gremlin&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph gremlin-execute --script &lt;span style="color:#4e9a06">&amp;#39;g.V().count()&amp;#39;&lt;/span>
@@ -12335,7 +12536,250 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;li>&lt;strong>HugeGraph Server 官方文档&lt;/strong>：&lt;a href="https://hugegraph.apache.org/cn/docs/quickstart/hugegraph/hugegraph-server/">https://hugegraph.apache.org/cn/docs/quickstart/hugegraph/hugegraph-server/&lt;/a>&lt;/li>
 &lt;li>&lt;strong>CI 脚本路径&lt;/strong>：&lt;code>.github/workflows/*-ci.yml&lt;/code>（HugeGraph 工具链项目中的 CI 配置文件，可作为参考）&lt;/li>
 &lt;li>&lt;strong>依赖服务安装脚本&lt;/strong>：&lt;code>hugegraph-*/assembly/travis/&lt;/code>（HugeGraph 工具链项目中用于 CI 和本地测试的安装脚本，可直接使用或作为参考）&lt;/li>
-&lt;/ul></description></item><item><title>Docs: 在 IDEA 中配置 Server 开发环境</title><link>/cn/docs/contribution-guidelines/hugegraph-server-idea-setup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/contribution-guidelines/hugegraph-server-idea-setup/</guid><description>
+&lt;/ul></description></item><item><title>Docs: HugeGraph-Spark-Connector Quick Start</title><link>/cn/docs/quickstart/toolchain/hugegraph-spark-connector/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/toolchain/hugegraph-spark-connector/</guid><description>
+&lt;h3 id="1-hugegraph-spark-connector-概述">1 HugeGraph-Spark-Connector 概述&lt;/h3>
+&lt;p>HugeGraph-Spark-Connector 是一个用于在 Spark 中以标准格式读写 HugeGraph 数据的连接器应用程序。&lt;/p>
+&lt;h3 id="2-环境要求">2 环境要求&lt;/h3>
+&lt;ul>
+&lt;li>Java 8+&lt;/li>
+&lt;li>Maven 3.6+&lt;/li>
+&lt;li>Spark 3.x&lt;/li>
+&lt;li>Scala 2.12&lt;/li>
+&lt;/ul>
+&lt;h3 id="3-编译">3 编译&lt;/h3>
+&lt;h4 id="31-不执行测试的编译">3.1 不执行测试的编译&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mvn clean package -DskipTests
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="32-执行默认测试的编译">3.2 执行默认测试的编译&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mvn clean package
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4-使用方法">4 使用方法&lt;/h3>
+&lt;p>首先在你的 pom.xml 中添加依赖：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.hugegraph&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;artifactId&amp;gt;&lt;/span>hugegraph-spark-connector&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;version&amp;gt;&lt;/span>${revision}&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="41-schema-定义示例">4.1 Schema 定义示例&lt;/h4>
+&lt;p>假设我们有一个图，其 schema 定义如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asText&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asInt&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asText&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;weight&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asDouble&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;lang&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asText&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;date&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asText&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;price&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asDouble&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">vertexLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">properties&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">useCustomizeStringId&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">nullableKeys&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">vertexLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;software&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">properties&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;lang&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;price&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">primaryKeys&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">edgeLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;knows&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">sourceLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">targetLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">properties&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;date&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;weight&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">edgeLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;created&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">sourceLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">targetLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;software&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">properties&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;date&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;weight&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="42-写入顶点数据scala">4.2 写入顶点数据（Scala）&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-scala" data-lang="scala">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">val&lt;/span> &lt;span style="color:#000">df&lt;/span> &lt;span style="color:#204a87;font-weight:bold">=&lt;/span> &lt;span style="color:#000">sparkSession&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">createDataFrame&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">Seq&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple3&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;marko&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">29&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple3&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vadas&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">27&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;HongKong&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple3&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Josh&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">32&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple3&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;peter&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">35&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;ShangHai&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple3&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;li,nary&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">26&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Wu,han&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple3&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Bob&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">18&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;HangZhou&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">))&lt;/span> &lt;span style="color:#000">toDF&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">df&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">show&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">df&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">write&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">format&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;org.apache.hugegraph.spark.connector.DataSource&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;host&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;port&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;8080&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;graph&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;data-type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;batch-size&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">mode&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">SaveMode&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Overwrite&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">save&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="43-写入边数据scala">4.3 写入边数据（Scala）&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-scala" data-lang="scala">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">val&lt;/span> &lt;span style="color:#000">df&lt;/span> &lt;span style="color:#204a87;font-weight:bold">=&lt;/span> &lt;span style="color:#000">sparkSession&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">createDataFrame&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">Seq&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple4&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;marko&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;vadas&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;20160110&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.5&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple4&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;peter&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Josh&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;20230801&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1.0&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple4&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;peter&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;li,nary&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;20130220&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2.0&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">)).&lt;/span>&lt;span style="color:#000">toDF&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;source&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;target&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;date&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;weight&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">df&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">show&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">df&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">write&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">format&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;org.apache.hugegraph.spark.connector.DataSource&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;host&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;port&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;8080&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;graph&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;data-type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;edge&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;knows&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;source-name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;source&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;target-name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;target&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;batch-size&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">mode&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">SaveMode&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Overwrite&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">save&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="5-配置参数">5 配置参数&lt;/h3>
+&lt;h4 id="51-客户端配置">5.1 客户端配置&lt;/h4>
+&lt;p>客户端配置用于配置 hugegraph-client。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>参数&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>host&lt;/code>&lt;/td>
+&lt;td>&lt;code>localhost&lt;/code>&lt;/td>
+&lt;td>HugeGraphServer 的地址&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>port&lt;/code>&lt;/td>
+&lt;td>&lt;code>8080&lt;/code>&lt;/td>
+&lt;td>HugeGraphServer 的端口&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>graph&lt;/code>&lt;/td>
+&lt;td>&lt;code>hugegraph&lt;/code>&lt;/td>
+&lt;td>图空间名称&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>protocol&lt;/code>&lt;/td>
+&lt;td>&lt;code>http&lt;/code>&lt;/td>
+&lt;td>向服务器发送请求的协议，可选 &lt;code>http&lt;/code> 或 &lt;code>https&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>username&lt;/code>&lt;/td>
+&lt;td>&lt;code>null&lt;/code>&lt;/td>
+&lt;td>当 HugeGraphServer 开启权限认证时，当前图的用户名&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>token&lt;/code>&lt;/td>
+&lt;td>&lt;code>null&lt;/code>&lt;/td>
+&lt;td>当 HugeGraphServer 开启权限认证时，当前图的 token&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>timeout&lt;/code>&lt;/td>
+&lt;td>&lt;code>60&lt;/code>&lt;/td>
+&lt;td>插入结果返回的超时时间（秒）&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>max-conn&lt;/code>&lt;/td>
+&lt;td>&lt;code>CPUS * 4&lt;/code>&lt;/td>
+&lt;td>HugeClient 与 HugeGraphServer 之间的最大 HTTP 连接数&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>max-conn-per-route&lt;/code>&lt;/td>
+&lt;td>&lt;code>CPUS * 2&lt;/code>&lt;/td>
+&lt;td>HugeClient 与 HugeGraphServer 之间每个路由的最大 HTTP 连接数&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>trust-store-file&lt;/code>&lt;/td>
+&lt;td>&lt;code>null&lt;/code>&lt;/td>
+&lt;td>当请求协议为 https 时，客户端的证书文件路径&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>trust-store-token&lt;/code>&lt;/td>
+&lt;td>&lt;code>null&lt;/code>&lt;/td>
+&lt;td>当请求协议为 https 时，客户端的证书密码&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="52-图数据配置">5.2 图数据配置&lt;/h4>
+&lt;p>图数据配置用于设置图空间的配置。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>参数&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>data-type&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>图数据类型，必须是 &lt;code>vertex&lt;/code> 或 &lt;code>edge&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>label&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>要导入的顶点/边数据所属的标签&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>id&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>指定某一列作为顶点的 id 列。当顶点 id 策略为 CUSTOMIZE 时，必填；当 id 策略为 PRIMARY_KEY 时，必须为空&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>source-name&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>选择输入源的某些列作为源顶点的 id 列。当源顶点的 id 策略为 CUSTOMIZE 时，必须指定某一列作为顶点的 id 列；当源顶点的 id 策略为 PRIMARY_KEY 时，必须指定一列或多列用于拼接生成顶点的 id，即无论使用哪种 id 策略，此项都是必填的&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>target-name&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>指定某些列作为目标顶点的 id 列，与 source-name 类似&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>selected-fields&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>选择某些列进行插入，其他未选择的列不插入，不能与 ignored-fields 同时存在&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ignored-fields&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>忽略某些列使其不参与插入，不能与 selected-fields 同时存在&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>batch-size&lt;/code>&lt;/td>
+&lt;td>&lt;code>500&lt;/code>&lt;/td>
+&lt;td>导入数据时每批数据的条目数&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="53-通用配置">5.3 通用配置&lt;/h4>
+&lt;p>通用配置包含一些常用的配置项。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>参数&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>delimiter&lt;/code>&lt;/td>
+&lt;td>&lt;code>,&lt;/code>&lt;/td>
+&lt;td>&lt;code>source-name&lt;/code>、&lt;code>target-name&lt;/code>、&lt;code>selected-fields&lt;/code> 或 &lt;code>ignored-fields&lt;/code> 的分隔符&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="6-许可证">6 许可证&lt;/h3>
+&lt;p>与 HugeGraph 一样，hugegraph-spark-connector 也采用 Apache 2.0 许可证。&lt;/p></description></item><item><title>Docs: 在 IDEA 中配置 Server 开发环境</title><link>/cn/docs/contribution-guidelines/hugegraph-server-idea-setup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/contribution-guidelines/hugegraph-server-idea-setup/</guid><description>
 &lt;blockquote>
 &lt;p>注意：下述配置仅供参考，基于&lt;a href="https://github.com/apache/incubator-hugegraph/commit/a946ad1de4e8f922251a5241ffc957c33379677f">这个版本&lt;/a>，在 Linux 和 macOS 平台下进行了测试。&lt;/p>
 &lt;/blockquote>
@@ -14066,97 +14510,4 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;mode&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;RESTORING&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: FAQ</title><link>/cn/docs/guides/faq/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/guides/faq/</guid><description>
-&lt;ul>
-&lt;li>
-&lt;p>如何选择后端存储? 选 RocksDB 还是 Cassandra 还是 Hbase 还是 Mysql?&lt;/p>
-&lt;p>根据你的具体需要来判断, 一般单机或数据量 &amp;lt; 100 亿推荐 RocksDB, 其他推荐使用分布式存储的后端集群&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>启动服务时提示：&lt;code>xxx (core dumped) xxx&lt;/code>&lt;/p>
-&lt;p>请检查JDK版本是否为 Java11 (至少是Java8)&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>启动服务成功了，但是操作图时有类似于&amp;quot;无法连接到后端或连接未打开&amp;quot;的提示&lt;/p>
-&lt;p>第一次启动服务前，需要先使用&lt;code>init-store&lt;/code>初始化后端，后续版本会将提示得更清晰直接。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>所有的后端在使用前都需要执行&lt;code>init-store&lt;/code>吗，序列化的选择可以随意填写么?&lt;/p>
-&lt;p>除了&lt;code>memory&lt;/code>不需要，其他后端均需要，如：&lt;code>cassandra&lt;/code>、&lt;code>hbase&lt;/code>和&lt;code>rocksdb&lt;/code>等，序列化需一一对应不可随意填写。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>执行&lt;code>init-store&lt;/code>报错：&lt;code>Exception in thread &amp;quot;main&amp;quot; java.lang.UnsatisfiedLinkError: /tmp/librocksdbjni3226083071221514754.so: /usr/lib64/libstdc++.so.6: version `GLIBCXX_3.4.10' not found (required by /tmp/librocksdbjni3226083071221514754.so)&lt;/code>&lt;/p>
-&lt;p>RocksDB需要 gcc 4.3.0 (GLIBCXX_3.4.10) 及以上版本&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>执行&lt;code>init-store.sh&lt;/code>时报错：&lt;code>NoHostAvailableException&lt;/code>&lt;/p>
-&lt;p>&lt;code>NoHostAvailableException&lt;/code> 是指无法连接到&lt;code>Cassandra&lt;/code>服务，如果确定是要使用&lt;code>cassandra&lt;/code>后端，请先安装并启动这个服务。至于这个提示本身可能不够直白，我们会更新到文档进行说明的。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;code>bin&lt;/code>目录下包含&lt;code>start-hugegraph.sh&lt;/code>、&lt;code>start-restserver.sh&lt;/code>和&lt;code>start-gremlinserver.sh&lt;/code>三个似乎与启动有关的脚本，到底该使用哪个&lt;/p>
-&lt;p>自0.3.3版本以来，已经把 GremlinServer 和 RestServer 合并为 HugeGraphServer 了，使用&lt;code>start-hugegraph.sh&lt;/code>启动即可，后两个在后续版本会被删掉。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>配置了两个图，名字是&lt;code>hugegraph&lt;/code>和&lt;code>hugegraph1&lt;/code>，而启动服务的命令是&lt;code>start-hugegraph.sh&lt;/code>，是只打开了&lt;code>hugegraph&lt;/code>这个图吗&lt;/p>
-&lt;p>&lt;code>start-hugegraph.sh&lt;/code>会打开所有&lt;code>gremlin-server.yaml&lt;/code>的&lt;code>graphs&lt;/code>下的图，这二者并无名字上的直接关系&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>服务启动成功后，使用&lt;code>curl&lt;/code>查询所有顶点时返回乱码&lt;/p>
-&lt;p>服务端返回的批量顶点/边是压缩（gzip）过的，可以使用管道重定向至 &lt;code>gunzip&lt;/code> 进行解压（&lt;code>curl http://example | gunzip&lt;/code>），也可以用&lt;code>Firefox&lt;/code>的&lt;code>postman&lt;/code>或者&lt;code>Chrome&lt;/code>浏览器的&lt;code>restlet&lt;/code>插件发请求，会自动解压缩响应数据。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>使用顶点Id通过&lt;code>RESTful API&lt;/code>查询顶点时返回空，但是顶点确实是存在的&lt;/p>
-&lt;p>检查顶点Id的类型，如果是字符串类型，&lt;code>API&lt;/code>的&lt;code>url&lt;/code>中的id部分需要加上双引号，数字类型则不用加。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>已经根据需要给顶点Id加上了双引号，但是通过&lt;code>RESTful API&lt;/code>查询顶点时仍然返回空&lt;/p>
-&lt;p>检查顶点id中是否包含&lt;code>+&lt;/code>、&lt;code>空格&lt;/code>、&lt;code>/&lt;/code>、&lt;code>?&lt;/code>、&lt;code>%&lt;/code>、&lt;code>&amp;amp;&lt;/code>和&lt;code>=&lt;/code>这些URL的保留字符，如果存在则需要进行编码。下表给出了编码值：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>特殊字符 | 编码值
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>--------| ----
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+ | %2B
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>空格 | %20
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/ | %2F
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>? | %3F
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>% | %25
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># | %23
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;amp; | %26
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>= | %3D
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>
-&lt;p>查询某一类别的顶点或边（&lt;code>query by label&lt;/code>）时提示超时&lt;/p>
-&lt;p>由于属于某一label的数据量可能比较多，请加上limit限制。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>通过&lt;code>RESTful API&lt;/code>操作图是可以的，但是发送&lt;code>Gremlin&lt;/code>语句就报错：&lt;code>Request Failed(500)&lt;/code>&lt;/p>
-&lt;p>可能是&lt;code>GremlinServer&lt;/code>的配置有误，检查&lt;code>gremlin-server.yaml&lt;/code>的&lt;code>host&lt;/code>、&lt;code>port&lt;/code>是否与&lt;code>rest-server.properties&lt;/code>的&lt;code>gremlinserver.url&lt;/code>匹配，如不匹配则修改，然后重启服务。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>使用&lt;code>Loader&lt;/code>导数据出现&lt;code>Socket Timeout&lt;/code>异常，然后导致&lt;code>Loader&lt;/code>中断&lt;/p>
-&lt;p>持续地导入数据会使&lt;code>Server&lt;/code>的压力过大，然后导致有些请求超时。可以通过调整&lt;code>Loader&lt;/code>的参数来适当缓解&lt;code>Server&lt;/code>压力（如：重试次数，重试间隔，错误容忍数等），降低该问题出现频率。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>如何删除全部的顶点和边，RESTful API中没有这样的接口，调用&lt;code>gremlin&lt;/code>的&lt;code>g.V().drop()&lt;/code>会报错&lt;code>Vertices in transaction have reached capacity xxx&lt;/code>&lt;/p>
-&lt;p>目前确实没有好办法删除全部的数据，用户如果是自己部署的&lt;code>Server&lt;/code>和后端，可以直接清空数据库，重启&lt;code>Server&lt;/code>。可以使用paging API或scan API先获取所有数据，再逐条删除。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>清空了数据库，并且执行了&lt;code>init-store&lt;/code>，但是添加&lt;code>schema&lt;/code>时提示&amp;quot;xxx has existed&amp;quot;&lt;/p>
-&lt;p>&lt;code>HugeGraphServer&lt;/code>内是有缓存的，清空数据库的同时是需要重启&lt;code>Server&lt;/code>的，否则残留的缓存会产生不一致。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>插入顶点或边的过程中报错：&lt;code>Id max length is 128, but got xxx {yyy}&lt;/code> 或 &lt;code>Big id max length is 32768, but got xxx&lt;/code>&lt;/p>
-&lt;p>为了保证查询性能，目前的后端存储对id列的长度做了限制，顶点id不能超过128字节，边id长度不能超过32768字节，索引id不能超过128字节。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>是否支持嵌套属性，如果不支持，是否有什么替代方案&lt;/p>
-&lt;p>嵌套属性目前暂不支持。替代方案：可以把嵌套属性作为单独的顶点拿出来，然后用边连接起来。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>一个&lt;code>EdgeLabel&lt;/code>是否可以连接多对&lt;code>VertexLabel&lt;/code>，比如&amp;quot;投资&amp;quot;关系，可以是&amp;quot;个人&amp;quot;投资&amp;quot;企业&amp;quot;，也可以是&amp;quot;企业&amp;quot;投资&amp;quot;企业&amp;quot;&lt;/p>
-&lt;p>一个&lt;code>EdgeLabel&lt;/code>不支持连接多对&lt;code>VertexLabel&lt;/code>，需要用户将&lt;code>EdgeLabel&lt;/code>拆分得更细一点，如：&amp;ldquo;个人投资&amp;rdquo;，&amp;ldquo;企业投资&amp;rdquo;。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>通过&lt;code>RestAPI&lt;/code>发送请求时提示&lt;code>HTTP 415 Unsupported Media Type&lt;/code>&lt;/p>
-&lt;p>请求头中需要指定&lt;code>Content-Type:application/json&lt;/code>&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;p>其他问题可以在对应项目的 issue 区搜索，例如 &lt;a href="https://github.com/apache/hugegraph/issues">Server-Issues&lt;/a> / &lt;a href="https://github.com/apache/hugegraph-toolchain/issues">Loader Issues&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

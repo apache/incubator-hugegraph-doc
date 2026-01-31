@@ -484,17 +484,17 @@
 &lt;/tr>
 &lt;tr>
 &lt;td>batch.max_edges_per_batch&lt;/td>
-&lt;td>500&lt;/td>
+&lt;td>2500&lt;/td>
 &lt;td>The maximum number of edges submitted per batch.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>batch.max_vertices_per_batch&lt;/td>
-&lt;td>500&lt;/td>
+&lt;td>2500&lt;/td>
 &lt;td>The maximum number of vertices submitted per batch.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>batch.max_write_ratio&lt;/td>
-&lt;td>50&lt;/td>
+&lt;td>70&lt;/td>
 &lt;td>The maximum thread ratio for batch writing, only take effect if the batch.max_write_threads is 0.&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -544,7 +544,7 @@
 &lt;/tr>
 &lt;tr>
 &lt;td>exception.allow_trace&lt;/td>
-&lt;td>false&lt;/td>
+&lt;td>true&lt;/td>
 &lt;td>Whether to allow exception trace stack.&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -556,6 +556,90 @@
 &lt;td>memory_monitor.period&lt;/td>
 &lt;td>2000&lt;/td>
 &lt;td>The period in ms of JVM(in-heap) memory usage monitoring.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>log.slow_query_threshold&lt;/td>
+&lt;td>1000&lt;/td>
+&lt;td>Slow query log threshold in milliseconds, 0 means disabled.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="k8s-配置项-可选">K8s 配置项 (可选)&lt;/h3>
+&lt;p>对应配置文件&lt;code>rest-server.properties&lt;/code>&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>server.use_k8s&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>Whether to enable K8s multi-tenancy mode.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.namespace&lt;/td>
+&lt;td>hugegraph-computer-system&lt;/td>
+&lt;td>K8s namespace for compute jobs.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.kubeconfig&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Path to kubeconfig file.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="pdmeta-配置项-分布式模式">PD/Meta 配置项 (分布式模式)&lt;/h3>
+&lt;p>对应配置文件&lt;code>rest-server.properties&lt;/code>&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>pd.peers&lt;/td>
+&lt;td>127.0.0.1:8686&lt;/td>
+&lt;td>PD server addresses (comma separated).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>meta.endpoints&lt;/td>
+&lt;td>http://127.0.0.1:2379&lt;/td>
+&lt;td>Meta service endpoints.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="arthas-诊断配置项-可选">Arthas 诊断配置项 (可选)&lt;/h3>
+&lt;p>对应配置文件&lt;code>rest-server.properties&lt;/code>&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>arthas.telnetPort&lt;/td>
+&lt;td>8562&lt;/td>
+&lt;td>Arthas telnet port.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>arthas.httpPort&lt;/td>
+&lt;td>8561&lt;/td>
+&lt;td>Arthas HTTP port.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>arthas.ip&lt;/td>
+&lt;td>0.0.0.0&lt;/td>
+&lt;td>Arthas bind IP.&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -578,7 +662,7 @@
 &lt;tr>
 &lt;td>backend&lt;/td>
 &lt;td>rocksdb&lt;/td>
-&lt;td>The data store type, available values are [memory, rocksdb, cassandra, scylladb, hbase, mysql].&lt;/td>
+&lt;td>The data store type. For version 1.7.0+: [memory, rocksdb, hstore, hbase]. Note: cassandra, scylladb, mysql, postgresql were removed in 1.7.0 (use &amp;lt;= 1.5.x for legacy backends).&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>serializer&lt;/td>

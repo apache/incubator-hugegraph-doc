@@ -463,7 +463,64 @@ error retry mechanism, etc., which reduces import costs and improves efficiency.
 &lt;/ul>
 &lt;center>
 &lt;img src="/docs/images/images-hubble/355任务详情.png" alt="image">
-&lt;/center></description></item><item><title>Docs: HugeGraph-Loader Quick Start</title><link>/docs/quickstart/toolchain/hugegraph-loader/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/toolchain/hugegraph-loader/</guid><description>
+&lt;/center>
+&lt;h3 id="5-configuration">5 Configuration&lt;/h3>
+&lt;p>HugeGraph-Hubble can be configured through the &lt;code>conf/hugegraph-hubble.properties&lt;/code> file.&lt;/p>
+&lt;h4 id="51-server-configuration">5.1 Server Configuration&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Configuration Item&lt;/th>
+&lt;th>Default Value&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>hubble.host&lt;/code>&lt;/td>
+&lt;td>&lt;code>0.0.0.0&lt;/code>&lt;/td>
+&lt;td>The address that Hubble service binds to&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>hubble.port&lt;/code>&lt;/td>
+&lt;td>&lt;code>8088&lt;/code>&lt;/td>
+&lt;td>The port that Hubble service listens on&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="52-gremlin-query-limits">5.2 Gremlin Query Limits&lt;/h4>
+&lt;p>These settings control query result limits to prevent memory issues:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Configuration Item&lt;/th>
+&lt;th>Default Value&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>gremlin.suffix_limit&lt;/code>&lt;/td>
+&lt;td>&lt;code>250&lt;/code>&lt;/td>
+&lt;td>Maximum query suffix length&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gremlin.vertex_degree_limit&lt;/code>&lt;/td>
+&lt;td>&lt;code>100&lt;/code>&lt;/td>
+&lt;td>Maximum vertex degree to display&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gremlin.edges_total_limit&lt;/code>&lt;/td>
+&lt;td>&lt;code>500&lt;/code>&lt;/td>
+&lt;td>Maximum number of edges returned&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gremlin.batch_query_ids&lt;/code>&lt;/td>
+&lt;td>&lt;code>100&lt;/code>&lt;/td>
+&lt;td>ID batch query size&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>Docs: HugeGraph-Loader Quick Start</title><link>/docs/quickstart/toolchain/hugegraph-loader/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/toolchain/hugegraph-loader/</guid><description>
 &lt;h3 id="1-hugegraph-loader-overview">1 HugeGraph-Loader Overview&lt;/h3>
 &lt;p>HugeGraph-Loader is the data import component of HugeGraph, which can convert data from various data sources into graph vertices and edges and import them into the graph database in batches.&lt;/p>
 &lt;p>Currently supported data sources include:&lt;/p>
@@ -1858,11 +1915,12 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;h4 id="31-function-overview">3.1 Function overview&lt;/h4>
 &lt;p>After decompression, enter the hugegraph-tools directory, you can use &lt;code>bin/hugegraph&lt;/code> or &lt;code>bin/hugegraph help&lt;/code> to view the usage information. mainly divided:&lt;/p>
 &lt;ul>
-&lt;li>Graph management Type，graph-mode-set、graph-mode-get、graph-list、graph-get and graph-clear&lt;/li>
-&lt;li>Asynchronous task management Type，task-list、task-get、task-delete、task-cancel and task-clear&lt;/li>
-&lt;li>Gremlin Type，gremlin-execute and gremlin-schedule&lt;/li>
-&lt;li>Backup/Restore Type，backup、restore、migrate、schedule-backup and dump&lt;/li>
-&lt;li>Install the deployment Type，deploy、clear、start-all and stop-all&lt;/li>
+&lt;li>Graph management type, graph-mode-set, graph-mode-get, graph-list, graph-get, graph-clear, graph-create, graph-clone and graph-drop&lt;/li>
+&lt;li>Asynchronous task management type, task-list, task-get, task-delete, task-cancel and task-clear&lt;/li>
+&lt;li>Gremlin type, gremlin-execute and gremlin-schedule&lt;/li>
+&lt;li>Backup/Restore type, backup, restore, migrate, schedule-backup and dump&lt;/li>
+&lt;li>Authentication data backup/restore type, auth-backup and auth-restore&lt;/li>
+&lt;li>Install deployment type, deploy, clear, start-all and stop-all&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>Usage: hugegraph &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>options&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>command&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87">command&lt;/span> options&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="32-options-global-variable">3.2 [options]-Global Variable&lt;/h5>
@@ -1934,19 +1992,36 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">#export HUGEGRAPH_TIMEOUT=&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">#export HUGEGRAPH_TRUST_STORE_FILE=&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">#export HUGEGRAPH_TRUST_STORE_PASSWORD=&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="33-graph-management-typegraph-mode-setgraph-mode-getgraph-listgraph-get-and-graph-clear">3.3 Graph Management Type，graph-mode-set、graph-mode-get、graph-list、graph-get and graph-clear&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="33-graph-management-type-graph-mode-set-graph-mode-get-graph-list-graph-get-graph-clear-graph-create-graph-clone-and-graph-drop">3.3 Graph Management Type, graph-mode-set, graph-mode-get, graph-list, graph-get, graph-clear, graph-create, graph-clone and graph-drop&lt;/h5>
 &lt;ul>
-&lt;li>graph-mode-set，set graph restore mode
+&lt;li>graph-mode-set, set graph restore mode
 &lt;ul>
 &lt;li>&amp;ndash;graph-mode or -m, required, specifies the mode to be set, legal values include [NONE, RESTORING, MERGING, LOADING]&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>graph-mode-get，get graph restore mode&lt;/li>
-&lt;li>graph-list，list all graphs in a HugeGraph-Server&lt;/li>
-&lt;li>graph-get，get a graph and its storage backend type&lt;/li>
-&lt;li>graph-clear，clear all schema and data of a graph
+&lt;li>graph-mode-get, get graph restore mode&lt;/li>
+&lt;li>graph-list, list all graphs in a HugeGraph-Server&lt;/li>
+&lt;li>graph-get, get a graph and its storage backend type&lt;/li>
+&lt;li>graph-clear, clear all schema and data of a graph
 &lt;ul>
-&lt;li>&amp;ndash;confirm-message Or -c, required, delete confirmation information, manual input is required, double confirmation to prevent accidental deletion, &amp;ldquo;I&amp;rsquo;m sure to delete all data&amp;rdquo;, including double quotes&lt;/li>
+&lt;li>&amp;ndash;confirm-message or -c, required, delete confirmation information, manual input is required, double confirmation to prevent accidental deletion, &amp;ldquo;I&amp;rsquo;m sure to delete all data&amp;rdquo;, including double quotes&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>graph-create, create a new graph with configuration file
+&lt;ul>
+&lt;li>&amp;ndash;name or -n, optional, the name of the new graph, default is hugegraph&lt;/li>
+&lt;li>&amp;ndash;file or -f, required, the path to the graph configuration file&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>graph-clone, clone an existing graph
+&lt;ul>
+&lt;li>&amp;ndash;name or -n, optional, the name of the cloned graph, default is hugegraph&lt;/li>
+&lt;li>&amp;ndash;clone-graph-name, optional, the name of the source graph to clone from, default is hugegraph&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>graph-drop, drop a graph (different from graph-clear, this completely removes the graph)
+&lt;ul>
+&lt;li>&amp;ndash;confirm-message or -c, required, confirmation message &amp;ldquo;I&amp;rsquo;m sure to drop the graph&amp;rdquo;, including double quotes&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
@@ -2021,6 +2096,7 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;li>&amp;ndash;huge-types or -t, the data types to be backed up, separated by commas, the optional value is &amp;lsquo;all&amp;rsquo; or a combination of one or more [vertex, edge, vertex_label, edge_label, property_key, index_label], &amp;lsquo;all&amp;rsquo; Represents all 6 types, namely vertices, edges and all schemas&lt;/li>
 &lt;li>&amp;ndash;log or -l, specify the log directory, the default is the current directory&lt;/li>
 &lt;li>&amp;ndash;retry, specify the number of failed retries, the default is 3&lt;/li>
+&lt;li>&amp;ndash;thread-num or -T, the number of threads to use, default is Math.min(10, Math.max(4, CPUs / 2))&lt;/li>
 &lt;li>&amp;ndash;split-size or -s, specifies the size of splitting vertices or edges when backing up, the default is 1048576&lt;/li>
 &lt;li>-D, use the mode of -Dkey=value to specify dynamic parameters, and specify HDFS configuration items when backing up data to HDFS, for example: -Dfs.default.name=hdfs://localhost:9000&lt;/li>
 &lt;/ul>
@@ -2032,6 +2108,7 @@ And there is no need to guarantee the order between the two parameters.&lt;/p>
 &lt;li>&amp;ndash;huge-types or -t, data types to restore, separated by commas, optional value is &amp;lsquo;all&amp;rsquo; or a combination of one or more [vertex, edge, vertex_label, edge_label, property_key, index_label], &amp;lsquo;all&amp;rsquo; Represents all 6 types, namely vertices, edges and all schemas&lt;/li>
 &lt;li>&amp;ndash;log or -l, specify the log directory, the default is the current directory&lt;/li>
 &lt;li>&amp;ndash;retry, specify the number of failed retries, the default is 3&lt;/li>
+&lt;li>&amp;ndash;thread-num or -T, the number of threads to use, default is Math.min(10, Math.max(4, CPUs / 2))&lt;/li>
 &lt;li>-D, use the mode of -Dkey=value to specify dynamic parameters, which are used to specify HDFS configuration items when restoring graphs from HDFS, for example: -Dfs.default.name=hdfs://localhost:9000&lt;/li>
 &lt;/ul>
 &lt;blockquote>
@@ -2078,7 +2155,32 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
-&lt;h5 id="37-install-the-deployment-type">3.7 Install the deployment type&lt;/h5>
+&lt;h5 id="37-authentication-data-backuprestore-type">3.7 Authentication data backup/restore type&lt;/h5>
+&lt;ul>
+&lt;li>auth-backup, backup authentication data to a specified directory
+&lt;ul>
+&lt;li>&amp;ndash;types or -t, types of authentication data to back up, separated by commas, optional value is &amp;lsquo;all&amp;rsquo; or a combination of one or more [user, group, target, belong, access], &amp;lsquo;all&amp;rsquo; represents all 5 types&lt;/li>
+&lt;li>&amp;ndash;directory or -d, directory to store backup data, defaults to current directory&lt;/li>
+&lt;li>&amp;ndash;log or -l, specify the log directory, the default is the current directory&lt;/li>
+&lt;li>&amp;ndash;retry, specify the number of failed retries, the default is 3&lt;/li>
+&lt;li>&amp;ndash;thread-num or -T, the number of threads to use, default is Math.min(10, Math.max(4, CPUs / 2))&lt;/li>
+&lt;li>-D, use the mode of -Dkey=value to specify dynamic parameters, and specify HDFS configuration items when backing up data to HDFS, for example: -Dfs.default.name=hdfs://localhost:9000&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>auth-restore, restore authentication data from a specified directory
+&lt;ul>
+&lt;li>&amp;ndash;types or -t, types of authentication data to restore, separated by commas, optional value is &amp;lsquo;all&amp;rsquo; or a combination of one or more [user, group, target, belong, access], &amp;lsquo;all&amp;rsquo; represents all 5 types&lt;/li>
+&lt;li>&amp;ndash;directory or -d, directory where backup data is stored, defaults to current directory&lt;/li>
+&lt;li>&amp;ndash;log or -l, specify the log directory, the default is the current directory&lt;/li>
+&lt;li>&amp;ndash;retry, specify the number of failed retries, the default is 3&lt;/li>
+&lt;li>&amp;ndash;thread-num or -T, the number of threads to use, default is Math.min(10, Math.max(4, CPUs / 2))&lt;/li>
+&lt;li>&amp;ndash;strategy, conflict handling strategy, optional values are [stop, ignore], default is stop. stop means stop restoring when encountering conflicts, ignore means ignore conflicts and continue restoring&lt;/li>
+&lt;li>&amp;ndash;init-password, initial password to set when restoring users, required when restoring user data&lt;/li>
+&lt;li>-D, use the mode of -Dkey=value to specify dynamic parameters, which are used to specify HDFS configuration items when restoring data from HDFS, for example: -Dfs.default.name=hdfs://localhost:9000&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h5 id="38-install-the-deployment-type">3.8 Install the deployment type&lt;/h5>
 &lt;ul>
 &lt;li>deploy, one-click download, install and start HugeGraph-Server and HugeGraph-Studio
 &lt;ul>
@@ -2103,7 +2205,7 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;blockquote>
 &lt;p>There is an optional parameter -u in the deploy command. When provided, the specified download address will be used instead of the default download address to download the tar package, and the address will be written into the &lt;code>~/hugegraph-download-url-prefix&lt;/code> file; if no address is specified later When -u and &lt;code>~/hugegraph-download-url-prefix&lt;/code> are not specified, the tar package will be downloaded from the address specified by &lt;code>~/hugegraph-download-url-prefix&lt;/code>; if there is neither -u nor &lt;code>~/hugegraph-download-url-prefix&lt;/code>, it will be downloaded from the default download address&lt;/p>
 &lt;/blockquote>
-&lt;h5 id="38-specific-command-parameters">3.8 Specific command parameters&lt;/h5>
+&lt;h5 id="39-specific-command-parameters">3.9 Specific command parameters&lt;/h5>
 &lt;p>The specific parameters of each subcommand are as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>Usage: hugegraph &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>options&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>command&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87">command&lt;/span> options&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Options:
@@ -2406,7 +2508,7 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87">help&lt;/span> Print usage
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Usage: &lt;span style="color:#204a87">help&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="39-specific-command-example">3.9 Specific command example&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="310-specific-command-example">3.10 Specific command example&lt;/h5>
 &lt;h6 id="1-gremlin-statement">1. gremlin statement&lt;/h6>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Execute gremlin synchronously&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph gremlin-execute --script &lt;span style="color:#4e9a06">&amp;#39;g.V().count()&amp;#39;&lt;/span>
@@ -2444,4 +2546,247 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph graph-mode-set -m NONE
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="8-graph-migration">8. Graph Migration&lt;/h6>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph migrate --target-url http://127.0.0.1:8090 --target-graph hugegraph
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: HugeGraph-Spark-Connector Quick Start</title><link>/docs/quickstart/toolchain/hugegraph-spark-connector/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/toolchain/hugegraph-spark-connector/</guid><description>
+&lt;h3 id="1-hugegraph-spark-connector-overview">1 HugeGraph-Spark-Connector Overview&lt;/h3>
+&lt;p>HugeGraph-Spark-Connector is a Spark connector application for reading and writing HugeGraph data in Spark standard format.&lt;/p>
+&lt;h3 id="2-environment-requirements">2 Environment Requirements&lt;/h3>
+&lt;ul>
+&lt;li>Java 8+&lt;/li>
+&lt;li>Maven 3.6+&lt;/li>
+&lt;li>Spark 3.x&lt;/li>
+&lt;li>Scala 2.12&lt;/li>
+&lt;/ul>
+&lt;h3 id="3-building">3 Building&lt;/h3>
+&lt;h4 id="31-build-without-executing-tests">3.1 Build without executing tests&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mvn clean package -DskipTests
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="32-build-with-default-tests">3.2 Build with default tests&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mvn clean package
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4-usage">4 Usage&lt;/h3>
+&lt;p>First add the dependency in your pom.xml:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.hugegraph&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;artifactId&amp;gt;&lt;/span>hugegraph-spark-connector&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;version&amp;gt;&lt;/span>${revision}&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="41-schema-definition-example">4.1 Schema Definition Example&lt;/h4>
+&lt;p>If we have a graph, the schema is defined as follows:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asText&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asInt&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asText&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;weight&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asDouble&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;lang&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asText&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;date&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asText&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;price&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asDouble&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">vertexLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">properties&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">useCustomizeStringId&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">nullableKeys&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">vertexLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;software&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">properties&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;lang&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;price&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">primaryKeys&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">edgeLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;knows&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">sourceLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">targetLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">properties&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;date&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;weight&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">edgeLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;created&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">sourceLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">targetLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;software&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">properties&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;date&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;weight&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="42-vertex-sink-scala">4.2 Vertex Sink (Scala)&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-scala" data-lang="scala">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">val&lt;/span> &lt;span style="color:#000">df&lt;/span> &lt;span style="color:#204a87;font-weight:bold">=&lt;/span> &lt;span style="color:#000">sparkSession&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">createDataFrame&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">Seq&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple3&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;marko&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">29&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple3&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vadas&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">27&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;HongKong&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple3&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Josh&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">32&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple3&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;peter&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">35&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;ShangHai&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple3&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;li,nary&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">26&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Wu,han&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple3&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Bob&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">18&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;HangZhou&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">))&lt;/span> &lt;span style="color:#000">toDF&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">df&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">show&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">df&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">write&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">format&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;org.apache.hugegraph.spark.connector.DataSource&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;host&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;port&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;8080&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;graph&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;data-type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;batch-size&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">mode&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">SaveMode&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Overwrite&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">save&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="43-edge-sink-scala">4.3 Edge Sink (Scala)&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-scala" data-lang="scala">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">val&lt;/span> &lt;span style="color:#000">df&lt;/span> &lt;span style="color:#204a87;font-weight:bold">=&lt;/span> &lt;span style="color:#000">sparkSession&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">createDataFrame&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">Seq&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple4&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;marko&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;vadas&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;20160110&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.5&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple4&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;peter&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Josh&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;20230801&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1.0&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple4&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;peter&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;li,nary&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;20130220&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2.0&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">)).&lt;/span>&lt;span style="color:#000">toDF&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;source&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;target&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;date&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;weight&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">df&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">show&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">df&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">write&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">format&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;org.apache.hugegraph.spark.connector.DataSource&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;host&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;port&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;8080&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;graph&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;data-type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;edge&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;knows&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;source-name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;source&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;target-name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;target&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;batch-size&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">mode&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">SaveMode&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Overwrite&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">save&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="5-configuration-parameters">5 Configuration Parameters&lt;/h3>
+&lt;h4 id="51-client-configs">5.1 Client Configs&lt;/h4>
+&lt;p>Client Configs are used to configure hugegraph-client.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Parameter&lt;/th>
+&lt;th>Default Value&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>host&lt;/code>&lt;/td>
+&lt;td>&lt;code>localhost&lt;/code>&lt;/td>
+&lt;td>Address of HugeGraphServer&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>port&lt;/code>&lt;/td>
+&lt;td>&lt;code>8080&lt;/code>&lt;/td>
+&lt;td>Port of HugeGraphServer&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>graph&lt;/code>&lt;/td>
+&lt;td>&lt;code>hugegraph&lt;/code>&lt;/td>
+&lt;td>Graph space name&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>protocol&lt;/code>&lt;/td>
+&lt;td>&lt;code>http&lt;/code>&lt;/td>
+&lt;td>Protocol for sending requests to the server, optional &lt;code>http&lt;/code> or &lt;code>https&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>username&lt;/code>&lt;/td>
+&lt;td>&lt;code>null&lt;/code>&lt;/td>
+&lt;td>Username of the current graph when HugeGraphServer enables permission authentication&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>token&lt;/code>&lt;/td>
+&lt;td>&lt;code>null&lt;/code>&lt;/td>
+&lt;td>Token of the current graph when HugeGraphServer has enabled authorization authentication&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>timeout&lt;/code>&lt;/td>
+&lt;td>&lt;code>60&lt;/code>&lt;/td>
+&lt;td>Timeout (seconds) for inserting results to return&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>max-conn&lt;/code>&lt;/td>
+&lt;td>&lt;code>CPUS * 4&lt;/code>&lt;/td>
+&lt;td>The maximum number of HTTP connections between HugeClient and HugeGraphServer&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>max-conn-per-route&lt;/code>&lt;/td>
+&lt;td>&lt;code>CPUS * 2&lt;/code>&lt;/td>
+&lt;td>The maximum number of HTTP connections for each route between HugeClient and HugeGraphServer&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>trust-store-file&lt;/code>&lt;/td>
+&lt;td>&lt;code>null&lt;/code>&lt;/td>
+&lt;td>The client&amp;rsquo;s certificate file path when the request protocol is https&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>trust-store-token&lt;/code>&lt;/td>
+&lt;td>&lt;code>null&lt;/code>&lt;/td>
+&lt;td>The client&amp;rsquo;s certificate password when the request protocol is https&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="52-graph-data-configs">5.2 Graph Data Configs&lt;/h4>
+&lt;p>Graph Data Configs are used to set graph space configuration.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Parameter&lt;/th>
+&lt;th>Default Value&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>data-type&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Graph data type, must be &lt;code>vertex&lt;/code> or &lt;code>edge&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>label&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Label to which the vertex/edge data to be imported belongs&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>id&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Specify a column as the id column of the vertex. When the vertex id policy is CUSTOMIZE, it is required; when the id policy is PRIMARY_KEY, it must be empty&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>source-name&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Select certain columns of the input source as the id column of source vertex. When the id policy of the source vertex is CUSTOMIZE, a certain column must be specified as the id column of the vertex; when the id policy of the source vertex is PRIMARY_KEY, one or more columns must be specified for splicing the id of the generated vertex, that is, no matter which id strategy is used, this item is required&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>target-name&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Specify certain columns as the id columns of target vertex, similar to source-name&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>selected-fields&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Select some columns to insert, other unselected ones are not inserted, cannot exist at the same time as ignored-fields&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ignored-fields&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Ignore some columns so that they do not participate in insertion, cannot exist at the same time as selected-fields&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>batch-size&lt;/code>&lt;/td>
+&lt;td>&lt;code>500&lt;/code>&lt;/td>
+&lt;td>The number of data items in each batch when importing data&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="53-common-configs">5.3 Common Configs&lt;/h4>
+&lt;p>Common Configs contains some common configurations.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Parameter&lt;/th>
+&lt;th>Default Value&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>delimiter&lt;/code>&lt;/td>
+&lt;td>&lt;code>,&lt;/code>&lt;/td>
+&lt;td>Separator of &lt;code>source-name&lt;/code>, &lt;code>target-name&lt;/code>, &lt;code>selected-fields&lt;/code> or &lt;code>ignored-fields&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="6-license">6 License&lt;/h3>
+&lt;p>The same as HugeGraph, hugegraph-spark-connector is also licensed under Apache 2.0 License.&lt;/p></description></item></channel></rss>

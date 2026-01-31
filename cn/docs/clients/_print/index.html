@@ -3965,7 +3965,7 @@
 </span></span><span style=display:flex><span>        <span style=color:#000;font-weight:700>}</span>
 </span></span><span style=display:flex><span>    <span style=color:#000;font-weight:700>}</span>
 </span></span><span style=display:flex><span><span style=color:#000;font-weight:700>}</span>
-</span></span></code></pre></div></div><div class=td-content style=page-break-before:always><h1 id=pg-a3b125f257052209fcb98300d5c066a7>1.17 - Authentication API</h1><h3 id=101-用户认证与权限控制>10.1 用户认证与权限控制</h3><blockquote><p>开启权限及相关配置请先参考 <a href=/cn/docs/config/config-authentication/>权限配置</a> 文档</p></blockquote><h5 id=用户认证与权限控制概述>用户认证与权限控制概述：</h5><p>HugeGraph 支持多用户认证、以及细粒度的权限访问控制，采用基于“用户 - 用户组 - 操作 - 资源”的 4 层设计，灵活控制用户角色与权限。
+</span></span></code></pre></div></div><div class=td-content style=page-break-before:always><h1 id=pg-a3b125f257052209fcb98300d5c066a7>1.17 - Authentication API</h1><blockquote><p><strong>版本变更说明</strong>:</p><ul><li>1.7.0+: Auth API 路径使用 GraphSpace 格式，如 <code>/graphspaces/DEFAULT/auth/users</code>，且 group/target 等 id 格式与 name 一致（如 <code>admin</code>）</li><li>1.5.x 及更早: Auth API 路径包含 graph 名称，group/target 等 id 格式类似 <code>-69:grant</code>。参考 <a href=https://github.com/apache/incubator-hugegraph-doc/tree/release-1.5.0>HugeGraph 1.5.x RESTful API</a></li></ul></blockquote><h3 id=101-用户认证与权限控制>10.1 用户认证与权限控制</h3><blockquote><p>开启权限及相关配置请先参考 <a href=/cn/docs/config/config-authentication/>权限配置</a> 文档</p></blockquote><h5 id=用户认证与权限控制概述>用户认证与权限控制概述：</h5><p>HugeGraph 支持多用户认证、以及细粒度的权限访问控制，采用基于“用户 - 用户组 - 操作 - 资源”的 4 层设计，灵活控制用户角色与权限。
 资源描述了图数据库中的数据，比如符合某一类条件的顶点，每一个资源包括 type、label、properties 三个要素，共有 18 种 type、
 任意 label、任意 properties 的组合形成的资源，一个资源的内部条件是且关系，多个资源之间的条件是或关系。用户可以属于一个或多个用户组，
 每个用户组可以拥有对任意个资源的操作权限，操作类型包括：读、写、删除、执行等种类。HugeGraph 支持动态创建用户、用户组、资源，

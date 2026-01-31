@@ -1,7 +1,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HugeGraph – HugeGraph (OLTP)</title><link>/docs/quickstart/hugegraph/</link><description>Recent content in HugeGraph (OLTP) on HugeGraph</description><generator>Hugo -- gohugo.io</generator><atom:link href="/docs/quickstart/hugegraph/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: HugeGraph-Server Quick Start</title><link>/docs/quickstart/hugegraph/hugegraph-server/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph/hugegraph-server/</guid><description>
 &lt;h3 id="1-hugegraph-server-overview">1 HugeGraph-Server Overview&lt;/h3>
 &lt;p>&lt;code>HugeGraph-Server&lt;/code> is the core part of the HugeGraph Project, contains submodules such as graph-core, backend, API.&lt;/p>
-&lt;p>The Core Module is an implementation of the Tinkerpop interface; The Backend module is used to save the graph data to the data store, currently supported backends include: Memory, Cassandra, ScyllaDB, RocksDB; The API Module provides HTTP Server, which converts Client&amp;rsquo;s HTTP request into a call to Core Module.&lt;/p>
+&lt;p>The Core Module is an implementation of the Tinkerpop interface; The Backend module is used to save the graph data to the data store. For version 1.7.0+, supported backends include: RocksDB (standalone default), HStore (distributed), HBase, and Memory. The API Module provides HTTP Server, which converts Client&amp;rsquo;s HTTP request into a call to Core Module.&lt;/p>
+&lt;blockquote>
+&lt;p>⚠️ &lt;strong>Important Change&lt;/strong>: Starting from version 1.7.0, legacy backends such as MySQL, PostgreSQL, Cassandra, and ScyllaDB have been removed. If you need to use these backends, please use version 1.5.x or earlier.&lt;/p>
+&lt;/blockquote>
 &lt;blockquote>
 &lt;p>There will be two spellings HugeGraph-Server and HugeGraphServer in the document, and other
 modules are similar. There is no big difference in the meaning of these two ways,
@@ -28,11 +31,11 @@ and configure by yourself.&lt;/p>
 &lt;h4 id="31-use-docker-container-convenient-for-testdev">3.1 Use Docker container (Convenient for Test/Dev)&lt;/h4>
 &lt;!-- 3.1 is linked by another place. if change 3.1's title, please check -->
 &lt;p>You can refer to the &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/docker/README.md">Docker deployment guide&lt;/a>.&lt;/p>
-&lt;p>We can use &lt;code>docker run -itd --name=server -p 8080:8080 -e PASSWORD=xxx hugegraph/hugegraph:1.5.0&lt;/code> to quickly start a &lt;code>HugeGraph Server&lt;/code> with a built-in &lt;code>RocksDB&lt;/code> backend.&lt;/p>
+&lt;p>We can use &lt;code>docker run -itd --name=server -p 8080:8080 -e PASSWORD=xxx hugegraph/hugegraph:1.7.0&lt;/code> to quickly start a &lt;code>HugeGraph Server&lt;/code> with a built-in &lt;code>RocksDB&lt;/code> backend.&lt;/p>
 &lt;p>Optional:&lt;/p>
 &lt;ol>
 &lt;li>use &lt;code>docker exec -it graph bash&lt;/code> to enter the container to do some operations.&lt;/li>
-&lt;li>use &lt;code>docker run -itd --name=graph -p 8080:8080 -e PRELOAD=&amp;quot;true&amp;quot; hugegraph/hugegraph:1.5.0&lt;/code> to start with a &lt;strong>built-in&lt;/strong> example graph. We can use &lt;code>RESTful API&lt;/code> to verify the result. The detailed step can refer to &lt;a href="#518-create-an-example-graph-when-startup">5.1.8&lt;/a>&lt;/li>
+&lt;li>use &lt;code>docker run -itd --name=graph -p 8080:8080 -e PRELOAD=&amp;quot;true&amp;quot; hugegraph/hugegraph:1.7.0&lt;/code> to start with a &lt;strong>built-in&lt;/strong> example graph. We can use &lt;code>RESTful API&lt;/code> to verify the result. The detailed step can refer to &lt;a href="#518-create-an-example-graph-when-startup">5.1.8&lt;/a>&lt;/li>
 &lt;li>use &lt;code>-e PASSWORD=xxx&lt;/code> to enable auth mode and set the password for admin. You can find more details from &lt;a href="/docs/config/config-authentication#use-docker-to-enable-authentication-mode">Config Authentication&lt;/a>&lt;/li>
 &lt;/ol>
 &lt;p>If you use docker desktop, you can set the option like:&lt;/p>
@@ -43,7 +46,7 @@ and configure by yourself.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">server&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:1.5.0&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:1.7.0&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">server&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">environment&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#000">PASSWORD=xxx&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -59,13 +62,13 @@ and configure by yourself.&lt;/p>
 &lt;p>The docker image of the hugegraph is a convenient release to start it quickly, but not &lt;strong>official distribution&lt;/strong> artifacts. You can find more details from &lt;a href="https://infra.apache.org/release-distribution.html#dockerhub">ASF Release Distribution Policy&lt;/a>.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>Recommend to use &lt;code>release tag&lt;/code> (like &lt;code>1.5.0&lt;/code>/&lt;code>1.x.0&lt;/code>) for the stable version. Use &lt;code>latest&lt;/code> tag to experience the newest functions in development.&lt;/p>
+&lt;p>Recommend to use &lt;code>release tag&lt;/code> (like &lt;code>1.7.0&lt;/code>/&lt;code>1.x.0&lt;/code>) for the stable version. Use &lt;code>latest&lt;/code> tag to experience the newest functions in development.&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;/blockquote>
 &lt;h4 id="32-download-the-binary-tar-tarball">3.2 Download the binary tar tarball&lt;/h4>
 &lt;p>You could download the binary tarball from the download page of the ASF site like this:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># use the latest version, here is 1.5.0 for example&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># use the latest version, here is 1.7.0 for example&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>/apache-hugegraph-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph*.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -121,8 +124,8 @@ and configure by yourself.&lt;/p>
 &lt;p>&lt;code>HugeGraph-Tools&lt;/code> provides a command-line tool for one-click deployment, users can use this tool to quickly download, decompress, configure and start &lt;code>HugeGraphServer&lt;/code> and &lt;code>HugeGraph-Hubble&lt;/code> with one click.&lt;/p>
 &lt;p>Of course, you should download the tarball of &lt;code>HugeGraph-Toolchain&lt;/code> first.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># download toolchain binary package, it includes loader + tool + hubble&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># please check the latest version (e.g. here is 1.5.0)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-toolchain-incubating-1.5.0.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># please check the latest version (e.g. here is 1.7.0)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/1.7.0/apache-hugegraph-toolchain-incubating-1.7.0.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph-*.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># enter the tool&amp;#39;s package&lt;/span>
@@ -267,6 +270,9 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>ToplingDB (Beta)&lt;/strong>: As a high-performance alternative to RocksDB, please refer to the configuration guide: &lt;a href="/blog/2025/10/09/toplingdb-quick-start/">ToplingDB Quick Start&lt;/a>&lt;/p>
 &lt;/details>
 &lt;h5 id="514-cassandra">5.1.4 Cassandra&lt;/h5>
+&lt;blockquote>
+&lt;p>⚠️ &lt;strong>Deprecated&lt;/strong>: This backend has been removed starting from HugeGraph 1.7.0. If you need to use it, please refer to version 1.5.x documentation.&lt;/p>
+&lt;/blockquote>
 &lt;details>
 &lt;summary>Click to expand/collapse Cassandra configuration and startup methods&lt;/summary>
 &lt;blockquote>
@@ -312,6 +318,9 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>http://127.0.0.1:8080/graphs&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>....OK
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/details>
 &lt;h5 id="515-scylladb">5.1.5 ScyllaDB&lt;/h5>
+&lt;blockquote>
+&lt;p>⚠️ &lt;strong>Deprecated&lt;/strong>: This backend has been removed starting from HugeGraph 1.7.0. If you need to use it, please refer to version 1.5.x documentation.&lt;/p>
+&lt;/blockquote>
 &lt;details>
 &lt;summary>Click to expand/collapse ScyllaDB configuration and startup methods&lt;/summary>
 &lt;blockquote>
@@ -370,6 +379,9 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;/blockquote>
 &lt;/details>
 &lt;h5 id="517-mysql">5.1.7 MySQL&lt;/h5>
+&lt;blockquote>
+&lt;p>⚠️ &lt;strong>Deprecated&lt;/strong>: This backend has been removed starting from HugeGraph 1.7.0. If you need to use it, please refer to version 1.5.x documentation.&lt;/p>
+&lt;/blockquote>
 &lt;details>
 &lt;summary>Click to expand/collapse MySQL configuration and startup methods&lt;/summary>
 &lt;blockquote>
@@ -412,6 +424,9 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;h4 id="52-use-docker-to-startup">5.2 Use Docker to startup&lt;/h4>
 &lt;p>In &lt;a href="#31-use-docker-container-convenient-for-testdev">3.1 Use Docker container&lt;/a>, we have introduced how to use docker to deploy &lt;code>hugegraph-server&lt;/code>. &lt;code>server&lt;/code> can also preload an example graph by setting the parameter.&lt;/p>
 &lt;h5 id="521-uses-cassandra-as-storage">5.2.1 Uses Cassandra as storage&lt;/h5>
+&lt;blockquote>
+&lt;p>⚠️ &lt;strong>Deprecated&lt;/strong>: Cassandra backend has been removed starting from HugeGraph 1.7.0. If you need to use it, please refer to version 1.5.x documentation.&lt;/p>
+&lt;/blockquote>
 &lt;details>
 &lt;summary> Click to expand/collapse Cassandra configuration and startup methods&lt;/summary>
 &lt;p>When using Docker, we can use Cassandra as the backend storage. We highly recommend using docker-compose directly to manage both the server and Cassandra.&lt;/p>
@@ -469,7 +484,7 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;ol>
 &lt;li>
 &lt;p>Use &lt;code>docker run&lt;/code>&lt;/p>
-&lt;p>Use &lt;code>docker run -itd --name=server -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:1.5.0&lt;/code>&lt;/p>
+&lt;p>Use &lt;code>docker run -itd --name=server -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:1.7.0&lt;/code>&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Use &lt;code>docker-compose&lt;/code>&lt;/p>
@@ -477,7 +492,7 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">server&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:1.5.0&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:1.7.0&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">server&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">environment&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#000">PRELOAD=true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">

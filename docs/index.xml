@@ -2076,7 +2076,10 @@ Configuration changes are automatically saved when using the web interface. For 
 &lt;p>&lt;strong>License&lt;/strong>: Apache License 2.0 | &lt;strong>Community&lt;/strong>: &lt;a href="https://hugegraph.apache.org/">Apache HugeGraph&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph-Server Quick Start</title><link>/docs/quickstart/hugegraph/hugegraph-server/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph/hugegraph-server/</guid><description>
 &lt;h3 id="1-hugegraph-server-overview">1 HugeGraph-Server Overview&lt;/h3>
 &lt;p>&lt;code>HugeGraph-Server&lt;/code> is the core part of the HugeGraph Project, contains submodules such as graph-core, backend, API.&lt;/p>
-&lt;p>The Core Module is an implementation of the Tinkerpop interface; The Backend module is used to save the graph data to the data store, currently supported backends include: Memory, Cassandra, ScyllaDB, RocksDB; The API Module provides HTTP Server, which converts Client&amp;rsquo;s HTTP request into a call to Core Module.&lt;/p>
+&lt;p>The Core Module is an implementation of the Tinkerpop interface; The Backend module is used to save the graph data to the data store. For version 1.7.0+, supported backends include: RocksDB (standalone default), HStore (distributed), HBase, and Memory. The API Module provides HTTP Server, which converts Client&amp;rsquo;s HTTP request into a call to Core Module.&lt;/p>
+&lt;blockquote>
+&lt;p>⚠️ &lt;strong>Important Change&lt;/strong>: Starting from version 1.7.0, legacy backends such as MySQL, PostgreSQL, Cassandra, and ScyllaDB have been removed. If you need to use these backends, please use version 1.5.x or earlier.&lt;/p>
+&lt;/blockquote>
 &lt;blockquote>
 &lt;p>There will be two spellings HugeGraph-Server and HugeGraphServer in the document, and other
 modules are similar. There is no big difference in the meaning of these two ways,
@@ -2103,11 +2106,11 @@ and configure by yourself.&lt;/p>
 &lt;h4 id="31-use-docker-container-convenient-for-testdev">3.1 Use Docker container (Convenient for Test/Dev)&lt;/h4>
 &lt;!-- 3.1 is linked by another place. if change 3.1's title, please check -->
 &lt;p>You can refer to the &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/docker/README.md">Docker deployment guide&lt;/a>.&lt;/p>
-&lt;p>We can use &lt;code>docker run -itd --name=server -p 8080:8080 -e PASSWORD=xxx hugegraph/hugegraph:1.5.0&lt;/code> to quickly start a &lt;code>HugeGraph Server&lt;/code> with a built-in &lt;code>RocksDB&lt;/code> backend.&lt;/p>
+&lt;p>We can use &lt;code>docker run -itd --name=server -p 8080:8080 -e PASSWORD=xxx hugegraph/hugegraph:1.7.0&lt;/code> to quickly start a &lt;code>HugeGraph Server&lt;/code> with a built-in &lt;code>RocksDB&lt;/code> backend.&lt;/p>
 &lt;p>Optional:&lt;/p>
 &lt;ol>
 &lt;li>use &lt;code>docker exec -it graph bash&lt;/code> to enter the container to do some operations.&lt;/li>
-&lt;li>use &lt;code>docker run -itd --name=graph -p 8080:8080 -e PRELOAD=&amp;quot;true&amp;quot; hugegraph/hugegraph:1.5.0&lt;/code> to start with a &lt;strong>built-in&lt;/strong> example graph. We can use &lt;code>RESTful API&lt;/code> to verify the result. The detailed step can refer to &lt;a href="#518-create-an-example-graph-when-startup">5.1.8&lt;/a>&lt;/li>
+&lt;li>use &lt;code>docker run -itd --name=graph -p 8080:8080 -e PRELOAD=&amp;quot;true&amp;quot; hugegraph/hugegraph:1.7.0&lt;/code> to start with a &lt;strong>built-in&lt;/strong> example graph. We can use &lt;code>RESTful API&lt;/code> to verify the result. The detailed step can refer to &lt;a href="#518-create-an-example-graph-when-startup">5.1.8&lt;/a>&lt;/li>
 &lt;li>use &lt;code>-e PASSWORD=xxx&lt;/code> to enable auth mode and set the password for admin. You can find more details from &lt;a href="/docs/config/config-authentication#use-docker-to-enable-authentication-mode">Config Authentication&lt;/a>&lt;/li>
 &lt;/ol>
 &lt;p>If you use docker desktop, you can set the option like:&lt;/p>
@@ -2118,7 +2121,7 @@ and configure by yourself.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">server&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:1.5.0&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:1.7.0&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">server&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">environment&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#000">PASSWORD=xxx&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -2134,13 +2137,13 @@ and configure by yourself.&lt;/p>
 &lt;p>The docker image of the hugegraph is a convenient release to start it quickly, but not &lt;strong>official distribution&lt;/strong> artifacts. You can find more details from &lt;a href="https://infra.apache.org/release-distribution.html#dockerhub">ASF Release Distribution Policy&lt;/a>.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>Recommend to use &lt;code>release tag&lt;/code> (like &lt;code>1.5.0&lt;/code>/&lt;code>1.x.0&lt;/code>) for the stable version. Use &lt;code>latest&lt;/code> tag to experience the newest functions in development.&lt;/p>
+&lt;p>Recommend to use &lt;code>release tag&lt;/code> (like &lt;code>1.7.0&lt;/code>/&lt;code>1.x.0&lt;/code>) for the stable version. Use &lt;code>latest&lt;/code> tag to experience the newest functions in development.&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;/blockquote>
 &lt;h4 id="32-download-the-binary-tar-tarball">3.2 Download the binary tar tarball&lt;/h4>
 &lt;p>You could download the binary tarball from the download page of the ASF site like this:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># use the latest version, here is 1.5.0 for example&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># use the latest version, here is 1.7.0 for example&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>/apache-hugegraph-incubating-&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>version&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph*.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -2196,8 +2199,8 @@ and configure by yourself.&lt;/p>
 &lt;p>&lt;code>HugeGraph-Tools&lt;/code> provides a command-line tool for one-click deployment, users can use this tool to quickly download, decompress, configure and start &lt;code>HugeGraphServer&lt;/code> and &lt;code>HugeGraph-Hubble&lt;/code> with one click.&lt;/p>
 &lt;p>Of course, you should download the tarball of &lt;code>HugeGraph-Toolchain&lt;/code> first.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># download toolchain binary package, it includes loader + tool + hubble&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># please check the latest version (e.g. here is 1.5.0)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-toolchain-incubating-1.5.0.tar.gz
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># please check the latest version (e.g. here is 1.7.0)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget https://downloads.apache.org/incubator/hugegraph/1.7.0/apache-hugegraph-toolchain-incubating-1.7.0.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tar zxf *hugegraph-*.tar.gz
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># enter the tool&amp;#39;s package&lt;/span>
@@ -2342,6 +2345,9 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>ToplingDB (Beta)&lt;/strong>: As a high-performance alternative to RocksDB, please refer to the configuration guide: &lt;a href="/blog/2025/10/09/toplingdb-quick-start/">ToplingDB Quick Start&lt;/a>&lt;/p>
 &lt;/details>
 &lt;h5 id="514-cassandra">5.1.4 Cassandra&lt;/h5>
+&lt;blockquote>
+&lt;p>⚠️ &lt;strong>Deprecated&lt;/strong>: This backend has been removed starting from HugeGraph 1.7.0. If you need to use it, please refer to version 1.5.x documentation.&lt;/p>
+&lt;/blockquote>
 &lt;details>
 &lt;summary>Click to expand/collapse Cassandra configuration and startup methods&lt;/summary>
 &lt;blockquote>
@@ -2387,6 +2393,9 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connecting to HugeGraphServer &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>http://127.0.0.1:8080/graphs&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>....OK
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/details>
 &lt;h5 id="515-scylladb">5.1.5 ScyllaDB&lt;/h5>
+&lt;blockquote>
+&lt;p>⚠️ &lt;strong>Deprecated&lt;/strong>: This backend has been removed starting from HugeGraph 1.7.0. If you need to use it, please refer to version 1.5.x documentation.&lt;/p>
+&lt;/blockquote>
 &lt;details>
 &lt;summary>Click to expand/collapse ScyllaDB configuration and startup methods&lt;/summary>
 &lt;blockquote>
@@ -2445,6 +2454,9 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;/blockquote>
 &lt;/details>
 &lt;h5 id="517-mysql">5.1.7 MySQL&lt;/h5>
+&lt;blockquote>
+&lt;p>⚠️ &lt;strong>Deprecated&lt;/strong>: This backend has been removed starting from HugeGraph 1.7.0. If you need to use it, please refer to version 1.5.x documentation.&lt;/p>
+&lt;/blockquote>
 &lt;details>
 &lt;summary>Click to expand/collapse MySQL configuration and startup methods&lt;/summary>
 &lt;blockquote>
@@ -2487,6 +2499,9 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;h4 id="52-use-docker-to-startup">5.2 Use Docker to startup&lt;/h4>
 &lt;p>In &lt;a href="#31-use-docker-container-convenient-for-testdev">3.1 Use Docker container&lt;/a>, we have introduced how to use docker to deploy &lt;code>hugegraph-server&lt;/code>. &lt;code>server&lt;/code> can also preload an example graph by setting the parameter.&lt;/p>
 &lt;h5 id="521-uses-cassandra-as-storage">5.2.1 Uses Cassandra as storage&lt;/h5>
+&lt;blockquote>
+&lt;p>⚠️ &lt;strong>Deprecated&lt;/strong>: Cassandra backend has been removed starting from HugeGraph 1.7.0. If you need to use it, please refer to version 1.5.x documentation.&lt;/p>
+&lt;/blockquote>
 &lt;details>
 &lt;summary> Click to expand/collapse Cassandra configuration and startup methods&lt;/summary>
 &lt;p>When using Docker, we can use Cassandra as the backend storage. We highly recommend using docker-compose directly to manage both the server and Cassandra.&lt;/p>
@@ -2544,7 +2559,7 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;ol>
 &lt;li>
 &lt;p>Use &lt;code>docker run&lt;/code>&lt;/p>
-&lt;p>Use &lt;code>docker run -itd --name=server -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:1.5.0&lt;/code>&lt;/p>
+&lt;p>Use &lt;code>docker run -itd --name=server -p 8080:8080 -e PRELOAD=true hugegraph/hugegraph:1.7.0&lt;/code>&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Use &lt;code>docker-compose&lt;/code>&lt;/p>
@@ -2552,7 +2567,7 @@ after the service is stopped artificially, or when the service needs to be start
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#39;3&amp;#39;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">services&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">server&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:1.5.0&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph:1.7.0&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">container_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">server&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">environment&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#000">PRELOAD=true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -4421,7 +4436,64 @@ error retry mechanism, etc., which reduces import costs and improves efficiency.
 &lt;/ul>
 &lt;center>
 &lt;img src="/docs/images/images-hubble/355任务详情.png" alt="image">
-&lt;/center></description></item><item><title>Docs: HugeGraph-Computer Quick Start</title><link>/docs/quickstart/computing/hugegraph-computer/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/computing/hugegraph-computer/</guid><description>
+&lt;/center>
+&lt;h3 id="5-configuration">5 Configuration&lt;/h3>
+&lt;p>HugeGraph-Hubble can be configured through the &lt;code>conf/hugegraph-hubble.properties&lt;/code> file.&lt;/p>
+&lt;h4 id="51-server-configuration">5.1 Server Configuration&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Configuration Item&lt;/th>
+&lt;th>Default Value&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>hubble.host&lt;/code>&lt;/td>
+&lt;td>&lt;code>0.0.0.0&lt;/code>&lt;/td>
+&lt;td>The address that Hubble service binds to&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>hubble.port&lt;/code>&lt;/td>
+&lt;td>&lt;code>8088&lt;/code>&lt;/td>
+&lt;td>The port that Hubble service listens on&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="52-gremlin-query-limits">5.2 Gremlin Query Limits&lt;/h4>
+&lt;p>These settings control query result limits to prevent memory issues:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Configuration Item&lt;/th>
+&lt;th>Default Value&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>gremlin.suffix_limit&lt;/code>&lt;/td>
+&lt;td>&lt;code>250&lt;/code>&lt;/td>
+&lt;td>Maximum query suffix length&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gremlin.vertex_degree_limit&lt;/code>&lt;/td>
+&lt;td>&lt;code>100&lt;/code>&lt;/td>
+&lt;td>Maximum vertex degree to display&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gremlin.edges_total_limit&lt;/code>&lt;/td>
+&lt;td>&lt;code>500&lt;/code>&lt;/td>
+&lt;td>Maximum number of edges returned&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gremlin.batch_query_ids&lt;/code>&lt;/td>
+&lt;td>&lt;code>100&lt;/code>&lt;/td>
+&lt;td>ID batch query size&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>Docs: HugeGraph-Computer Quick Start</title><link>/docs/quickstart/computing/hugegraph-computer/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/computing/hugegraph-computer/</guid><description>
 &lt;h2 id="1-hugegraph-computer-overview">1 HugeGraph-Computer Overview&lt;/h2>
 &lt;p>The &lt;a href="https://github.com/apache/incubator-hugegraph-computer">&lt;code>HugeGraph-Computer&lt;/code>&lt;/a> is a distributed graph processing system for HugeGraph (OLAP). It is an implementation of &lt;a href="https://kowshik.github.io/JPregel/pregel_paper.pdf">Pregel&lt;/a>. It runs on a Kubernetes(K8s) framework.(It focuses on supporting graph data volumes of hundreds of billions to trillions, using disk for sorting and acceleration, which is one of the biggest differences from Vermeer)&lt;/p>
 &lt;h3 id="features">Features&lt;/h3>
@@ -4703,17 +4775,17 @@ error retry mechanism, etc., which reduces import costs and improves efficiency.
 &lt;/tr>
 &lt;tr>
 &lt;td>batch.max_edges_per_batch&lt;/td>
-&lt;td>500&lt;/td>
+&lt;td>2500&lt;/td>
 &lt;td>The maximum number of edges submitted per batch.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>batch.max_vertices_per_batch&lt;/td>
-&lt;td>500&lt;/td>
+&lt;td>2500&lt;/td>
 &lt;td>The maximum number of vertices submitted per batch.&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>batch.max_write_ratio&lt;/td>
-&lt;td>50&lt;/td>
+&lt;td>70&lt;/td>
 &lt;td>The maximum thread ratio for batch writing, only take effect if the batch.max_write_threads is 0.&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -4763,7 +4835,7 @@ error retry mechanism, etc., which reduces import costs and improves efficiency.
 &lt;/tr>
 &lt;tr>
 &lt;td>exception.allow_trace&lt;/td>
-&lt;td>false&lt;/td>
+&lt;td>true&lt;/td>
 &lt;td>Whether to allow exception trace stack.&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -4775,6 +4847,90 @@ error retry mechanism, etc., which reduces import costs and improves efficiency.
 &lt;td>memory_monitor.period&lt;/td>
 &lt;td>2000&lt;/td>
 &lt;td>The period in ms of JVM(in-heap) memory usage monitoring.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>log.slow_query_threshold&lt;/td>
+&lt;td>1000&lt;/td>
+&lt;td>Slow query log threshold in milliseconds, 0 means disabled.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="k8s-config-options-optional">K8s Config Options (Optional)&lt;/h3>
+&lt;p>Corresponding configuration file &lt;code>rest-server.properties&lt;/code>&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>server.use_k8s&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>Whether to enable K8s multi-tenancy mode.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.namespace&lt;/td>
+&lt;td>hugegraph-computer-system&lt;/td>
+&lt;td>K8s namespace for compute jobs.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.kubeconfig&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Path to kubeconfig file.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="pdmeta-config-options-distributed-mode">PD/Meta Config Options (Distributed Mode)&lt;/h3>
+&lt;p>Corresponding configuration file &lt;code>rest-server.properties&lt;/code>&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>pd.peers&lt;/td>
+&lt;td>127.0.0.1:8686&lt;/td>
+&lt;td>PD server addresses (comma separated).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>meta.endpoints&lt;/td>
+&lt;td>http://127.0.0.1:2379&lt;/td>
+&lt;td>Meta service endpoints.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="arthas-diagnostic-config-options-optional">Arthas Diagnostic Config Options (Optional)&lt;/h3>
+&lt;p>Corresponding configuration file &lt;code>rest-server.properties&lt;/code>&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>arthas.telnetPort&lt;/td>
+&lt;td>8562&lt;/td>
+&lt;td>Arthas telnet port.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>arthas.httpPort&lt;/td>
+&lt;td>8561&lt;/td>
+&lt;td>Arthas HTTP port.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>arthas.ip&lt;/td>
+&lt;td>0.0.0.0&lt;/td>
+&lt;td>Arthas bind IP.&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -4797,7 +4953,7 @@ error retry mechanism, etc., which reduces import costs and improves efficiency.
 &lt;tr>
 &lt;td>backend&lt;/td>
 &lt;td>rocksdb&lt;/td>
-&lt;td>The data store type, available values are [memory, rocksdb, cassandra, scylladb, hbase, mysql].&lt;/td>
+&lt;td>The data store type. For version 1.7.0+: [memory, rocksdb, hstore, hbase]. Note: cassandra, scylladb, mysql, postgresql were removed in 1.7.0 (use &amp;lt;= 1.5.x for legacy backends).&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>serializer&lt;/td>
@@ -10079,11 +10235,12 @@ graph data.&lt;/p>
 &lt;h4 id="31-function-overview">3.1 Function overview&lt;/h4>
 &lt;p>After decompression, enter the hugegraph-tools directory, you can use &lt;code>bin/hugegraph&lt;/code> or &lt;code>bin/hugegraph help&lt;/code> to view the usage information. mainly divided:&lt;/p>
 &lt;ul>
-&lt;li>Graph management Type，graph-mode-set、graph-mode-get、graph-list、graph-get and graph-clear&lt;/li>
-&lt;li>Asynchronous task management Type，task-list、task-get、task-delete、task-cancel and task-clear&lt;/li>
-&lt;li>Gremlin Type，gremlin-execute and gremlin-schedule&lt;/li>
-&lt;li>Backup/Restore Type，backup、restore、migrate、schedule-backup and dump&lt;/li>
-&lt;li>Install the deployment Type，deploy、clear、start-all and stop-all&lt;/li>
+&lt;li>Graph management type, graph-mode-set, graph-mode-get, graph-list, graph-get, graph-clear, graph-create, graph-clone and graph-drop&lt;/li>
+&lt;li>Asynchronous task management type, task-list, task-get, task-delete, task-cancel and task-clear&lt;/li>
+&lt;li>Gremlin type, gremlin-execute and gremlin-schedule&lt;/li>
+&lt;li>Backup/Restore type, backup, restore, migrate, schedule-backup and dump&lt;/li>
+&lt;li>Authentication data backup/restore type, auth-backup and auth-restore&lt;/li>
+&lt;li>Install deployment type, deploy, clear, start-all and stop-all&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>Usage: hugegraph &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>options&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>command&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87">command&lt;/span> options&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="32-options-global-variable">3.2 [options]-Global Variable&lt;/h5>
@@ -10155,19 +10312,36 @@ graph data.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">#export HUGEGRAPH_TIMEOUT=&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">#export HUGEGRAPH_TRUST_STORE_FILE=&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">#export HUGEGRAPH_TRUST_STORE_PASSWORD=&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="33-graph-management-typegraph-mode-setgraph-mode-getgraph-listgraph-get-and-graph-clear">3.3 Graph Management Type，graph-mode-set、graph-mode-get、graph-list、graph-get and graph-clear&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="33-graph-management-type-graph-mode-set-graph-mode-get-graph-list-graph-get-graph-clear-graph-create-graph-clone-and-graph-drop">3.3 Graph Management Type, graph-mode-set, graph-mode-get, graph-list, graph-get, graph-clear, graph-create, graph-clone and graph-drop&lt;/h5>
 &lt;ul>
-&lt;li>graph-mode-set，set graph restore mode
+&lt;li>graph-mode-set, set graph restore mode
 &lt;ul>
 &lt;li>&amp;ndash;graph-mode or -m, required, specifies the mode to be set, legal values include [NONE, RESTORING, MERGING, LOADING]&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>graph-mode-get，get graph restore mode&lt;/li>
-&lt;li>graph-list，list all graphs in a HugeGraph-Server&lt;/li>
-&lt;li>graph-get，get a graph and its storage backend type&lt;/li>
-&lt;li>graph-clear，clear all schema and data of a graph
+&lt;li>graph-mode-get, get graph restore mode&lt;/li>
+&lt;li>graph-list, list all graphs in a HugeGraph-Server&lt;/li>
+&lt;li>graph-get, get a graph and its storage backend type&lt;/li>
+&lt;li>graph-clear, clear all schema and data of a graph
 &lt;ul>
-&lt;li>&amp;ndash;confirm-message Or -c, required, delete confirmation information, manual input is required, double confirmation to prevent accidental deletion, &amp;ldquo;I&amp;rsquo;m sure to delete all data&amp;rdquo;, including double quotes&lt;/li>
+&lt;li>&amp;ndash;confirm-message or -c, required, delete confirmation information, manual input is required, double confirmation to prevent accidental deletion, &amp;ldquo;I&amp;rsquo;m sure to delete all data&amp;rdquo;, including double quotes&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>graph-create, create a new graph with configuration file
+&lt;ul>
+&lt;li>&amp;ndash;name or -n, optional, the name of the new graph, default is hugegraph&lt;/li>
+&lt;li>&amp;ndash;file or -f, required, the path to the graph configuration file&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>graph-clone, clone an existing graph
+&lt;ul>
+&lt;li>&amp;ndash;name or -n, optional, the name of the cloned graph, default is hugegraph&lt;/li>
+&lt;li>&amp;ndash;clone-graph-name, optional, the name of the source graph to clone from, default is hugegraph&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>graph-drop, drop a graph (different from graph-clear, this completely removes the graph)
+&lt;ul>
+&lt;li>&amp;ndash;confirm-message or -c, required, confirmation message &amp;ldquo;I&amp;rsquo;m sure to drop the graph&amp;rdquo;, including double quotes&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
@@ -10242,6 +10416,7 @@ graph data.&lt;/p>
 &lt;li>&amp;ndash;huge-types or -t, the data types to be backed up, separated by commas, the optional value is &amp;lsquo;all&amp;rsquo; or a combination of one or more [vertex, edge, vertex_label, edge_label, property_key, index_label], &amp;lsquo;all&amp;rsquo; Represents all 6 types, namely vertices, edges and all schemas&lt;/li>
 &lt;li>&amp;ndash;log or -l, specify the log directory, the default is the current directory&lt;/li>
 &lt;li>&amp;ndash;retry, specify the number of failed retries, the default is 3&lt;/li>
+&lt;li>&amp;ndash;thread-num or -T, the number of threads to use, default is Math.min(10, Math.max(4, CPUs / 2))&lt;/li>
 &lt;li>&amp;ndash;split-size or -s, specifies the size of splitting vertices or edges when backing up, the default is 1048576&lt;/li>
 &lt;li>-D, use the mode of -Dkey=value to specify dynamic parameters, and specify HDFS configuration items when backing up data to HDFS, for example: -Dfs.default.name=hdfs://localhost:9000&lt;/li>
 &lt;/ul>
@@ -10253,6 +10428,7 @@ graph data.&lt;/p>
 &lt;li>&amp;ndash;huge-types or -t, data types to restore, separated by commas, optional value is &amp;lsquo;all&amp;rsquo; or a combination of one or more [vertex, edge, vertex_label, edge_label, property_key, index_label], &amp;lsquo;all&amp;rsquo; Represents all 6 types, namely vertices, edges and all schemas&lt;/li>
 &lt;li>&amp;ndash;log or -l, specify the log directory, the default is the current directory&lt;/li>
 &lt;li>&amp;ndash;retry, specify the number of failed retries, the default is 3&lt;/li>
+&lt;li>&amp;ndash;thread-num or -T, the number of threads to use, default is Math.min(10, Math.max(4, CPUs / 2))&lt;/li>
 &lt;li>-D, use the mode of -Dkey=value to specify dynamic parameters, which are used to specify HDFS configuration items when restoring graphs from HDFS, for example: -Dfs.default.name=hdfs://localhost:9000&lt;/li>
 &lt;/ul>
 &lt;blockquote>
@@ -10299,7 +10475,32 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
-&lt;h5 id="37-install-the-deployment-type">3.7 Install the deployment type&lt;/h5>
+&lt;h5 id="37-authentication-data-backuprestore-type">3.7 Authentication data backup/restore type&lt;/h5>
+&lt;ul>
+&lt;li>auth-backup, backup authentication data to a specified directory
+&lt;ul>
+&lt;li>&amp;ndash;types or -t, types of authentication data to back up, separated by commas, optional value is &amp;lsquo;all&amp;rsquo; or a combination of one or more [user, group, target, belong, access], &amp;lsquo;all&amp;rsquo; represents all 5 types&lt;/li>
+&lt;li>&amp;ndash;directory or -d, directory to store backup data, defaults to current directory&lt;/li>
+&lt;li>&amp;ndash;log or -l, specify the log directory, the default is the current directory&lt;/li>
+&lt;li>&amp;ndash;retry, specify the number of failed retries, the default is 3&lt;/li>
+&lt;li>&amp;ndash;thread-num or -T, the number of threads to use, default is Math.min(10, Math.max(4, CPUs / 2))&lt;/li>
+&lt;li>-D, use the mode of -Dkey=value to specify dynamic parameters, and specify HDFS configuration items when backing up data to HDFS, for example: -Dfs.default.name=hdfs://localhost:9000&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>auth-restore, restore authentication data from a specified directory
+&lt;ul>
+&lt;li>&amp;ndash;types or -t, types of authentication data to restore, separated by commas, optional value is &amp;lsquo;all&amp;rsquo; or a combination of one or more [user, group, target, belong, access], &amp;lsquo;all&amp;rsquo; represents all 5 types&lt;/li>
+&lt;li>&amp;ndash;directory or -d, directory where backup data is stored, defaults to current directory&lt;/li>
+&lt;li>&amp;ndash;log or -l, specify the log directory, the default is the current directory&lt;/li>
+&lt;li>&amp;ndash;retry, specify the number of failed retries, the default is 3&lt;/li>
+&lt;li>&amp;ndash;thread-num or -T, the number of threads to use, default is Math.min(10, Math.max(4, CPUs / 2))&lt;/li>
+&lt;li>&amp;ndash;strategy, conflict handling strategy, optional values are [stop, ignore], default is stop. stop means stop restoring when encountering conflicts, ignore means ignore conflicts and continue restoring&lt;/li>
+&lt;li>&amp;ndash;init-password, initial password to set when restoring users, required when restoring user data&lt;/li>
+&lt;li>-D, use the mode of -Dkey=value to specify dynamic parameters, which are used to specify HDFS configuration items when restoring data from HDFS, for example: -Dfs.default.name=hdfs://localhost:9000&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h5 id="38-install-the-deployment-type">3.8 Install the deployment type&lt;/h5>
 &lt;ul>
 &lt;li>deploy, one-click download, install and start HugeGraph-Server and HugeGraph-Studio
 &lt;ul>
@@ -10324,7 +10525,7 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;blockquote>
 &lt;p>There is an optional parameter -u in the deploy command. When provided, the specified download address will be used instead of the default download address to download the tar package, and the address will be written into the &lt;code>~/hugegraph-download-url-prefix&lt;/code> file; if no address is specified later When -u and &lt;code>~/hugegraph-download-url-prefix&lt;/code> are not specified, the tar package will be downloaded from the address specified by &lt;code>~/hugegraph-download-url-prefix&lt;/code>; if there is neither -u nor &lt;code>~/hugegraph-download-url-prefix&lt;/code>, it will be downloaded from the default download address&lt;/p>
 &lt;/blockquote>
-&lt;h5 id="38-specific-command-parameters">3.8 Specific command parameters&lt;/h5>
+&lt;h5 id="39-specific-command-parameters">3.9 Specific command parameters&lt;/h5>
 &lt;p>The specific parameters of each subcommand are as follows:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>Usage: hugegraph &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>options&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>command&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>&lt;span style="color:#204a87">command&lt;/span> options&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Options:
@@ -10627,7 +10828,7 @@ Implement a class inherited from &lt;code>Formatter&lt;/code> in the directory, 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87">help&lt;/span> Print usage
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Usage: &lt;span style="color:#204a87">help&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="39-specific-command-example">3.9 Specific command example&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="310-specific-command-example">3.10 Specific command example&lt;/h5>
 &lt;h6 id="1-gremlin-statement">1. gremlin statement&lt;/h6>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Execute gremlin synchronously&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./bin/hugegraph --url http://127.0.0.1:8080 --graph hugegraph gremlin-execute --script &lt;span style="color:#4e9a06">&amp;#39;g.V().count()&amp;#39;&lt;/span>
@@ -11792,7 +11993,250 @@ and no circular links, etc.&lt;/li>
 &lt;pre>&lt;code> - Generate the Gremlin query using the constructed prompt.
 &lt;/code>&lt;/pre>
 &lt;h1 id="5-graph-tools">5. Graph Tools&lt;/h1>
-&lt;p>Input Gremlin queries to execute corresponding operations.&lt;/p></description></item><item><title>Docs: HugeGraph 1.3.0 Release Notes</title><link>/docs/changelog/hugegraph-1.3.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/changelog/hugegraph-1.3.0-release-notes/</guid><description>
+&lt;p>Input Gremlin queries to execute corresponding operations.&lt;/p></description></item><item><title>Docs: HugeGraph-Spark-Connector Quick Start</title><link>/docs/quickstart/toolchain/hugegraph-spark-connector/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/toolchain/hugegraph-spark-connector/</guid><description>
+&lt;h3 id="1-hugegraph-spark-connector-overview">1 HugeGraph-Spark-Connector Overview&lt;/h3>
+&lt;p>HugeGraph-Spark-Connector is a Spark connector application for reading and writing HugeGraph data in Spark standard format.&lt;/p>
+&lt;h3 id="2-environment-requirements">2 Environment Requirements&lt;/h3>
+&lt;ul>
+&lt;li>Java 8+&lt;/li>
+&lt;li>Maven 3.6+&lt;/li>
+&lt;li>Spark 3.x&lt;/li>
+&lt;li>Scala 2.12&lt;/li>
+&lt;/ul>
+&lt;h3 id="3-building">3 Building&lt;/h3>
+&lt;h4 id="31-build-without-executing-tests">3.1 Build without executing tests&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mvn clean package -DskipTests
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="32-build-with-default-tests">3.2 Build with default tests&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mvn clean package
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4-usage">4 Usage&lt;/h3>
+&lt;p>First add the dependency in your pom.xml:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.hugegraph&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;artifactId&amp;gt;&lt;/span>hugegraph-spark-connector&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;lt;version&amp;gt;&lt;/span>${revision}&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="41-schema-definition-example">4.1 Schema Definition Example&lt;/h4>
+&lt;p>If we have a graph, the schema is defined as follows:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asText&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asInt&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asText&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;weight&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asDouble&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;lang&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asText&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;date&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asText&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">propertyKey&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;price&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">).&lt;/span>&lt;span style="color:#c4a000">asDouble&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">().&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">vertexLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">properties&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">useCustomizeStringId&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">nullableKeys&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">vertexLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;software&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">properties&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;lang&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;price&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">primaryKeys&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">edgeLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;knows&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">sourceLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">targetLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">properties&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;date&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;weight&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">schema&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">edgeLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;created&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">sourceLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">targetLabel&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;software&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">properties&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;date&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;weight&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">ifNotExist&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">create&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="42-vertex-sink-scala">4.2 Vertex Sink (Scala)&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-scala" data-lang="scala">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">val&lt;/span> &lt;span style="color:#000">df&lt;/span> &lt;span style="color:#204a87;font-weight:bold">=&lt;/span> &lt;span style="color:#000">sparkSession&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">createDataFrame&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">Seq&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple3&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;marko&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">29&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple3&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;vadas&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">27&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;HongKong&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple3&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Josh&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">32&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Beijing&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple3&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;peter&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">35&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;ShangHai&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple3&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;li,nary&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">26&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Wu,han&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple3&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Bob&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">18&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;HangZhou&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">))&lt;/span> &lt;span style="color:#000">toDF&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;age&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;city&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">df&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">show&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">df&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">write&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">format&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;org.apache.hugegraph.spark.connector.DataSource&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;host&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;port&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;8080&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;graph&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;data-type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;vertex&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;batch-size&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">mode&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">SaveMode&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Overwrite&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">save&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="43-edge-sink-scala">4.3 Edge Sink (Scala)&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-scala" data-lang="scala">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">val&lt;/span> &lt;span style="color:#000">df&lt;/span> &lt;span style="color:#204a87;font-weight:bold">=&lt;/span> &lt;span style="color:#000">sparkSession&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">createDataFrame&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">Seq&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple4&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;marko&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;vadas&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;20160110&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.5&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple4&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;peter&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Josh&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;20230801&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1.0&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Tuple4&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;peter&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;li,nary&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;20130220&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2.0&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">)).&lt;/span>&lt;span style="color:#000">toDF&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;source&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;target&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;date&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;weight&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">df&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">show&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">df&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">write&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">format&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;org.apache.hugegraph.spark.connector.DataSource&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;host&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;port&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;8080&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;graph&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;data-type&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;edge&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;knows&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;source-name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;source&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;target-name&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;target&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">option&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;batch-size&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">mode&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">SaveMode&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Overwrite&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">save&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="5-configuration-parameters">5 Configuration Parameters&lt;/h3>
+&lt;h4 id="51-client-configs">5.1 Client Configs&lt;/h4>
+&lt;p>Client Configs are used to configure hugegraph-client.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Parameter&lt;/th>
+&lt;th>Default Value&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>host&lt;/code>&lt;/td>
+&lt;td>&lt;code>localhost&lt;/code>&lt;/td>
+&lt;td>Address of HugeGraphServer&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>port&lt;/code>&lt;/td>
+&lt;td>&lt;code>8080&lt;/code>&lt;/td>
+&lt;td>Port of HugeGraphServer&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>graph&lt;/code>&lt;/td>
+&lt;td>&lt;code>hugegraph&lt;/code>&lt;/td>
+&lt;td>Graph space name&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>protocol&lt;/code>&lt;/td>
+&lt;td>&lt;code>http&lt;/code>&lt;/td>
+&lt;td>Protocol for sending requests to the server, optional &lt;code>http&lt;/code> or &lt;code>https&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>username&lt;/code>&lt;/td>
+&lt;td>&lt;code>null&lt;/code>&lt;/td>
+&lt;td>Username of the current graph when HugeGraphServer enables permission authentication&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>token&lt;/code>&lt;/td>
+&lt;td>&lt;code>null&lt;/code>&lt;/td>
+&lt;td>Token of the current graph when HugeGraphServer has enabled authorization authentication&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>timeout&lt;/code>&lt;/td>
+&lt;td>&lt;code>60&lt;/code>&lt;/td>
+&lt;td>Timeout (seconds) for inserting results to return&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>max-conn&lt;/code>&lt;/td>
+&lt;td>&lt;code>CPUS * 4&lt;/code>&lt;/td>
+&lt;td>The maximum number of HTTP connections between HugeClient and HugeGraphServer&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>max-conn-per-route&lt;/code>&lt;/td>
+&lt;td>&lt;code>CPUS * 2&lt;/code>&lt;/td>
+&lt;td>The maximum number of HTTP connections for each route between HugeClient and HugeGraphServer&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>trust-store-file&lt;/code>&lt;/td>
+&lt;td>&lt;code>null&lt;/code>&lt;/td>
+&lt;td>The client&amp;rsquo;s certificate file path when the request protocol is https&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>trust-store-token&lt;/code>&lt;/td>
+&lt;td>&lt;code>null&lt;/code>&lt;/td>
+&lt;td>The client&amp;rsquo;s certificate password when the request protocol is https&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="52-graph-data-configs">5.2 Graph Data Configs&lt;/h4>
+&lt;p>Graph Data Configs are used to set graph space configuration.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Parameter&lt;/th>
+&lt;th>Default Value&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>data-type&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Graph data type, must be &lt;code>vertex&lt;/code> or &lt;code>edge&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>label&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Label to which the vertex/edge data to be imported belongs&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>id&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Specify a column as the id column of the vertex. When the vertex id policy is CUSTOMIZE, it is required; when the id policy is PRIMARY_KEY, it must be empty&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>source-name&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Select certain columns of the input source as the id column of source vertex. When the id policy of the source vertex is CUSTOMIZE, a certain column must be specified as the id column of the vertex; when the id policy of the source vertex is PRIMARY_KEY, one or more columns must be specified for splicing the id of the generated vertex, that is, no matter which id strategy is used, this item is required&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>target-name&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Specify certain columns as the id columns of target vertex, similar to source-name&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>selected-fields&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Select some columns to insert, other unselected ones are not inserted, cannot exist at the same time as ignored-fields&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ignored-fields&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Ignore some columns so that they do not participate in insertion, cannot exist at the same time as selected-fields&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>batch-size&lt;/code>&lt;/td>
+&lt;td>&lt;code>500&lt;/code>&lt;/td>
+&lt;td>The number of data items in each batch when importing data&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="53-common-configs">5.3 Common Configs&lt;/h4>
+&lt;p>Common Configs contains some common configurations.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Parameter&lt;/th>
+&lt;th>Default Value&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>delimiter&lt;/code>&lt;/td>
+&lt;td>&lt;code>,&lt;/code>&lt;/td>
+&lt;td>Separator of &lt;code>source-name&lt;/code>, &lt;code>target-name&lt;/code>, &lt;code>selected-fields&lt;/code> or &lt;code>ignored-fields&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="6-license">6 License&lt;/h3>
+&lt;p>The same as HugeGraph, hugegraph-spark-connector is also licensed under Apache 2.0 License.&lt;/p></description></item><item><title>Docs: HugeGraph 1.3.0 Release Notes</title><link>/docs/changelog/hugegraph-1.3.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/changelog/hugegraph-1.3.0-release-notes/</guid><description>
 &lt;h3 id="operating-environment--version-description">Operating Environment / Version Description&lt;/h3>
 &lt;ol>
 &lt;li>consider using Java 11 in &lt;code>hugegraph/toolchain/commons&lt;/code>, also compatible with Java 8 now.&lt;/li>
@@ -14019,44 +14463,4 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;p>&lt;code>Content-Type: application/json&lt;/code> needs to be specified in the request header&lt;/p>
 &lt;/li>
 &lt;/ul>
-&lt;p>Other issues can be searched in the issue area of the corresponding project, such as &lt;a href="https://github.com/apache/hugegraph/issues">Server-Issues&lt;/a> / &lt;a href="https://github.com/apache/hugegraph-loader/issues">Loader Issues&lt;/a>&lt;/p></description></item><item><title>Docs: Rebuild API</title><link>/docs/clients/restful-api/rebuild/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/clients/restful-api/rebuild/</guid><description>
-&lt;h3 id="16-rebuild">1.6 Rebuild&lt;/h3>
-&lt;h4 id="161-rebuild-indexlabel">1.6.1 Rebuild IndexLabel&lt;/h4>
-&lt;h5 id="method--url">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/jobs/rebuild/indexlabels/personByCity
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">202&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body">Response Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;task_id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note:&lt;/p>
-&lt;blockquote>
-&lt;p>You can get the asynchronous job status by &lt;code>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks/${task_id}&lt;/code> (the task_id here should be 1). See More &lt;a href="../task">AsyncJob RESTfull API&lt;/a>&lt;/p>
-&lt;/blockquote>
-&lt;h4 id="162-rebulid-all-indexs-of-vertexlabel">1.6.2 Rebulid all Indexs of VertexLabel&lt;/h4>
-&lt;h5 id="method--url-1">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/jobs/rebuild/vertexlabels/person
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-1">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">202&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-1">Response Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;task_id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">2&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note:&lt;/p>
-&lt;blockquote>
-&lt;p>You can get the asynchronous job status by &lt;code>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks/${task_id}&lt;/code> (the task_id here should be 2). See More &lt;a href="../task">AsyncJob RESTfull API&lt;/a>&lt;/p>
-&lt;/blockquote>
-&lt;h4 id="163-rebulid-all-indexs-of-edgelabel">1.6.3 Rebulid all Indexs of EdgeLabel&lt;/h4>
-&lt;h5 id="method--url-2">Method &amp;amp; Url&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>PUT http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/jobs/rebuild/edgelabels/created
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-status-2">Response Status&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">202&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="response-body-2">Response Body&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;task_id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">3&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note:&lt;/p>
-&lt;blockquote>
-&lt;p>You can get the asynchronous job status by &lt;code>GET http://localhost:8080/graphspaces/DEFAULT/graphs/hugegraph/tasks/${task_id}&lt;/code> (the task_id here should be 3). See More &lt;a href="../task">AsyncJob RESTfull API&lt;/a>&lt;/p>
-&lt;/blockquote></description></item></channel></rss>
+&lt;p>Other issues can be searched in the issue area of the corresponding project, such as &lt;a href="https://github.com/apache/hugegraph/issues">Server-Issues&lt;/a> / &lt;a href="https://github.com/apache/hugegraph-loader/issues">Loader Issues&lt;/a>&lt;/p></description></item></channel></rss>

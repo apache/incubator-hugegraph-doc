@@ -6299,6 +6299,13 @@ When you complete the restore, change the graph mode to None.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Authentication API</title><link>/docs/clients/restful-api/auth/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/clients/restful-api/auth/</guid><description>
+&lt;blockquote>
+&lt;p>&lt;strong>Version Change Notice&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>1.7.0+: Auth API paths use GraphSpace format, such as &lt;code>/graphspaces/DEFAULT/auth/users&lt;/code>, and group/target IDs match their names (e.g., &lt;code>admin&lt;/code>)&lt;/li>
+&lt;li>1.5.x and earlier: Auth API paths include graph name, and group/target IDs use format like &lt;code>-69:grant&lt;/code>. See &lt;a href="https://github.com/apache/incubator-hugegraph-doc/tree/release-1.5.0">HugeGraph 1.5.x RESTful API&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
 &lt;h3 id="101-user-authentication-and-access-control">10.1 User Authentication and Access Control&lt;/h3>
 &lt;blockquote>
 &lt;p>To enable authentication and related configurations, please refer to the &lt;a href="/docs/config/config-authentication/">Authentication Configuration&lt;/a> documentation.&lt;/p>
