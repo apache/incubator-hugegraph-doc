@@ -214,7 +214,7 @@ graph TD
 
 ## 🔧 配置
 
-运行演示后，将自动生成配置文件：
+运行演示后,将自动生成配置文件：
 
 - **环境**：`hugegraph-llm/.env`
 - **提示**：`hugegraph-llm/src/hugegraph_llm/resources/demo/config_prompt.yaml`
@@ -222,7 +222,80 @@ graph TD
 > [!NOTE]
 > 使用 Web 界面时，配置更改会自动保存。对于手动更改，刷新页面即可加载更新。
 
-**LLM 提供商支持**：本项目使用 [LiteLLM](https://docs.litellm.ai/docs/providers) 实现多提供商 LLM 支持。
+### LLM 提供商配置
+
+本项目使用 [LiteLLM](https://docs.litellm.ai/docs/providers) 实现多提供商 LLM 支持，可统一访问 OpenAI、Anthropic、Google、Cohere 以及 100 多个其他提供商。
+
+#### 方案一：直接 LLM 连接（OpenAI、Ollama）
+
+```bash
+# .env 配置
+chat_llm_type=openai           # 或 ollama/local
+openai_api_key=sk-xxx
+openai_api_base=https://api.openai.com/v1
+openai_language_model=gpt-4o-mini
+openai_max_tokens=4096
+```
+
+#### 方案二：LiteLLM 多提供商支持
+
+LiteLLM 作为多个 LLM 提供商的统一代理：
+
+```bash
+# .env 配置
+chat_llm_type=litellm
+extract_llm_type=litellm
+text2gql_llm_type=litellm
+
+# LiteLLM 设置
+litellm_api_base=http://localhost:4000  # LiteLLM 代理服务器
+litellm_api_key=sk-1234                  # LiteLLM API 密钥
+
+# 模型选择（提供商/模型格式）
+litellm_language_model=anthropic/claude-3-5-sonnet-20241022
+litellm_max_tokens=4096
+```
+
+**支持的提供商**：OpenAI、Anthropic、Google（Gemini）、Azure、Cohere、Bedrock、Vertex AI、Hugging Face 等。
+
+完整提供商列表和配置详情，请访问 [LiteLLM Providers](https://docs.litellm.ai/docs/providers)。
+
+### Reranker 配置
+
+Reranker 通过重新排序检索结果来提高 RAG 准确性。支持的提供商：
+
+```bash
+# Cohere Reranker
+reranker_type=cohere
+cohere_api_key=your-cohere-key
+cohere_rerank_model=rerank-english-v3.0
+
+# SiliconFlow Reranker
+reranker_type=siliconflow
+siliconflow_api_key=your-siliconflow-key
+siliconflow_rerank_model=BAAI/bge-reranker-v2-m3
+```
+
+### Text2Gremlin 配置
+
+将自然语言转换为 Gremlin 查询：
+
+```python
+from hugegraph_llm.operators.graph_rag_task import Text2GremlinPipeline
+
+# 初始化工作流
+text2gremlin = Text2GremlinPipeline()
+
+# 生成 Gremlin 查询
+result = (
+    text2gremlin
+    .query_to_gremlin(query="查找所有由 Francis Ford Coppola 执导的电影")
+    .execute_gremlin_query()
+    .run()
+)
+```
+
+**REST API 端点**：有关 HTTP 端点详情，请参阅 [REST API 文档](./rest-api.md)。
 
 ## 📚 其他资源
 

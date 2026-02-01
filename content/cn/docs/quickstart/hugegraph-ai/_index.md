@@ -18,10 +18,21 @@ weight: 3
 ## ✨ 核心功能
 
 - **GraphRAG**：利用图增强检索构建智能问答系统
+- **Text2Gremlin**：自然语言到图查询的转换，支持 REST API
 - **知识图谱构建**：使用大语言模型从文本自动构建图谱
-- **图机器学习**：集成 20 多种图学习算法（GCN、GAT、GraphSAGE 等）
+- **图机器学习**：集成 21 种图学习算法（GCN、GAT、GraphSAGE 等）
 - **Python 客户端**：易于使用的 HugeGraph Python 操作接口
 - **AI 智能体**：提供智能图分析与推理能力
+
+### 🎉 v1.5.0 新特性
+
+- **Text2Gremlin REST API**：通过 REST 端点将自然语言查询转换为 Gremlin 命令
+- **多模型向量支持**：每个图实例可以使用独立的嵌入模型
+- **双语提示支持**：支持英文和中文提示词切换（EN/CN）
+- **半自动 Schema 生成**：从文本数据智能推断 Schema
+- **半自动 Prompt 生成**：上下文感知的提示词模板
+- **增强的 Reranker 支持**：集成 Cohere 和 SiliconFlow 重排序器
+- **LiteLLM 多供应商支持**：统一接口支持 OpenAI、Anthropic、Gemini 等
 
 ## 🚀 快速开始
 
@@ -29,9 +40,9 @@ weight: 3
 > 如需完整的部署指南和详细示例，请参阅 [hugegraph-llm/README.md](https://github.com/apache/incubator-hugegraph-ai/blob/main/hugegraph-llm/README.md)。
 
 ### 环境要求
-- Python 3.9+（建议 hugegraph-llm 使用 3.10+）
-- [uv](https://docs.astral.sh/uv/)（推荐的包管理器）
-- HugeGraph Server 1.3+（建议 1.5+）
+- Python 3.10+（hugegraph-llm 必需）
+- [uv](https://docs.astral.sh/uv/) 0.7+（推荐的包管理器）
+- HugeGraph Server 1.5+（必需）
 - Docker（可选，用于容器化部署）
 
 ### 方案一：Docker 部署（推荐）
@@ -123,11 +134,13 @@ from pyhugegraph.client import PyHugeClient
 - **AI 智能体**：智能图分析与推理
 
 ### [hugegraph-ml](https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-ml)
-包含 20+ 算法的图机器学习：
-- **节点分类**：GCN、GAT、GraphSAGE、APPNP 等
-- **图分类**：DiffPool、P-GNN 等
-- **图嵌入**：DeepWalk、Node2Vec、GRACE 等
-- **链接预测**：SEAL、GATNE 等
+包含 21 种算法的图机器学习：
+- **节点分类**：GCN、GAT、GraphSAGE、APPNP、AGNN、ARMA、DAGNN、DeeperGCN、GRAND、JKNet、Cluster-GCN
+- **图分类**：DiffPool、GIN
+- **图嵌入**：DGI、BGRL、GRACE
+- **链接预测**：SEAL、P-GNN、GATNE
+- **欺诈检测**：CARE-GNN、BGNN
+- **后处理**：C&S（Correct & Smooth）
 
 ### [hugegraph-python-client](https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-python-client)
 用于 HugeGraph 操作的 Python 客户端：
