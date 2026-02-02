@@ -101,14 +101,14 @@ If deployed based on Docker image or if HugeGraph has already been initialized a
 relevant graph data needs to be deleted and HugeGraph needs to be restarted. If there is already business data in the diagram, 
 it is temporarily **not possible** to directly convert the authentication mode (version<=1.2.0)
 
-> Improvements for this feature have been included in the latest release (available in the latest docker image), please refer to [PR 2411](https://github.com/apache/incubator-hugegraph/pull/2411). Seamless switching is now available.
+> Improvements for this feature have been included in the latest release (available in the latest docker image), please refer to [PR 2411](https://github.com/apache/hugegraph/pull/2411). Seamless switching is now available.
 
 ```bash
 # stop the hugeGraph firstly
 bin/stop-hugegraph.sh
 
 # delete the store data (here we use the default path for rocksdb)
-# there is no need to delete in the latest version (fixed in https://github.com/apache/incubator-hugegraph/pull/2411)
+# there is no need to delete in the latest version (fixed in https://github.com/apache/hugegraph/pull/2411)
 rm -rf rocksdb-data/
 
 # init store again

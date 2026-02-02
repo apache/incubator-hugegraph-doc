@@ -45,7 +45,7 @@ theme = "default"
     name = "GitHub"
     weight = -99
     pre = "<i class='fab fa-github pr-2'></i>"
-    url = "https://github.com/apache/incubator-hugegraph"
+    url = "https://github.com/apache/hugegraph"
   [[menu.main]]
     name ="Download"
     weight = -98
@@ -159,9 +159,9 @@ version = "1.7"
 url_latest_version = "https://example.com"
 
 # Repository configuration (URLs for in-page links to opening issues and suggesting changes)
-github_repo = "https://github.com/apache/incubator-hugegraph-doc"
+github_repo = "https://github.com/apache/hugegraph-doc"
 # An optional link to a related project repo. For example, the sibling repository where your product code lives.
-github_project_repo = "https://github.com/apache/incubator-hugegraph"
+github_project_repo = "https://github.com/apache/hugegraph"
 
 # Specify a value here if your content directory is not in your repo's root directory
 # github_subdir = ""

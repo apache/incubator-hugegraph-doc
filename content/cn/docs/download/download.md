@@ -1,5 +1,5 @@
 ---
-title: "下载 Apache HugeGraph (Incubating)"
+title: "下载 Apache HugeGraph"
 linkTitle: "Download"
 weight: 2
 ---
@@ -9,7 +9,7 @@ weight: 2
 > - 推荐使用最新版本的 HugeGraph 软件包, 运行时环境请选择 Java11
 > - 验证下载版本, 请使用相应的哈希 (SHA512)、签名和 [项目签名验证 KEYS](https://downloads.apache.org/incubator/hugegraph/KEYS)
 > - 检查哈希 (SHA512)、签名的说明在 [版本验证](/docs/contribution-guidelines/validate-release/) 页面, 也可参考 [ASF 验证说明](https://www.apache.org/dyn/closer.cgi#verify)
-> - 注: HugeGraph 所有组件版本号已保持一致, `client/loader/hubble/common` 等 maven 仓库版本号同理, 依赖引用可参考 [maven 示例](https://github.com/apache/incubator-hugegraph-toolchain#maven-dependencies)
+> - 注: HugeGraph 所有组件版本号已保持一致, `client/loader/hubble/common` 等 maven 仓库版本号同理, 依赖引用可参考 [maven 示例](https://github.com/apache/hugegraph-toolchain#maven-dependencies)
 
 ### 最新版本 1.7.0
 

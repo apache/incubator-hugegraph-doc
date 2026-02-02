@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph 1.3.0 Release Notes"
 linkTitle: "Release-1.3.0"
-weight: 4
+weight: 5
 ---
 
 ### Operating Environment / Version Description

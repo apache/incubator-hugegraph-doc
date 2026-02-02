@@ -7,11 +7,11 @@ weight: 3
 [![License](https://img.shields.io/badge/license-Apache%202-0E78BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/apache/incubator-hugegraph-ai)
 
-## 🚀 Best practice: Prioritize using DeepWiki intelligent documents
+## Recommended: Use DeepWiki Documentation
 
-> To address the issue of outdated static documents, we provide DeepWiki with **real-time updates and more comprehensive content**. It is equivalent to an expert with the latest knowledge of the project, which is very suitable for **all developers** to read and consult before starting the project.
+> DeepWiki provides real-time updated project documentation with more comprehensive and accurate content, suitable for quickly understanding the latest project information.
 
-**👉 Strongly recommend visiting and having a conversation with:** [**incubator-hugegraph-ai**](https://deepwiki.com/apache/incubator-hugegraph-ai)
+**Visit:** [**incubator-hugegraph-ai**](https://deepwiki.com/apache/incubator-hugegraph-ai)
 
 `hugegraph-ai` integrates [HugeGraph](https://github.com/apache/hugegraph) with artificial intelligence capabilities, providing comprehensive support for developers to build AI-powered graph applications.
 

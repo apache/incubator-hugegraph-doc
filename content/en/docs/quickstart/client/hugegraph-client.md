@@ -10,7 +10,7 @@ weight: 1
 We support HugeGraph-Client for Java/Go/[Python](https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-python-client) language.
 You can use [Client-API](/docs/clients/hugegraph-client) to write code to operate HugeGraph, such as adding, deleting, modifying, and querying schema and graph data, or executing gremlin statements.
 
-> [HugeGraph client SDK tool based on Go language](https://github.com/apache/incubator-hugegraph-toolchain/blob/master/hugegraph-client-go/README.en.md) (version >=1.2.0)
+> [HugeGraph client SDK tool based on Go language](https://github.com/apache/hugegraph-toolchain/blob/master/hugegraph-client-go/README.en.md) (version >=1.2.0)
 
 ### 2 What You Need
 
