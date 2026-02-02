@@ -2,6 +2,7 @@
 title: "Graphs API"
 linkTitle: "Graphs"
 weight: 12
+description: "Graphs REST API: Manage graph instance lifecycle including creating, querying, cloning, clearing, and deleting graph databases."
 ---
 
 ### 6.1 Graphs

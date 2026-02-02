@@ -2,6 +2,7 @@
 title: "IndexLabel API"
 linkTitle: "IndexLabel"
 weight: 5
+description: "IndexLabel REST API: Create indexes on vertex and edge properties to accelerate property-based queries and filtering operations."
 ---
 
 ### 1.5 IndexLabel

@@ -2,6 +2,7 @@
 title: "EdgeLabel API"
 linkTitle: "EdgeLabel"
 weight: 4
+description: "EdgeLabel（边标签）REST 接口:定义边类型、源顶点和目标顶点的关系约束,构建图的连接规则。"
 ---
 
 ### 1.4 EdgeLabel

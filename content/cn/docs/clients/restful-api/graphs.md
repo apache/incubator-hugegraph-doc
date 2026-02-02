@@ -2,6 +2,7 @@
 title: "Graphs API"
 linkTitle: "Graphs"
 weight: 12
+description: "Graphs（图管理）REST 接口:管理图实例的生命周期,包括创建、查询、克隆、清空和删除图数据库。"
 ---
 
 ### 6.1 Graphs

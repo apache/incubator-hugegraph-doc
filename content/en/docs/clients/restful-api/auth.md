@@ -2,6 +2,7 @@
 title: "Authentication API"
 linkTitle: "Authentication"
 weight: 16
+description: "Authentication REST API: Manage users, roles, permissions, and access control to implement fine-grained graph data security."
 ---
 
 > **Version Change Notice**:

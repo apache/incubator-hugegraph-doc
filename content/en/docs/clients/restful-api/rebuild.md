@@ -2,6 +2,7 @@
 title: "Rebuild API"
 linkTitle: "Rebuild"
 weight: 6
+description: "Rebuild REST API: Rebuild graph schema indexes to ensure consistency between index data and graph data."
 ---
 
 ### 1.6 Rebuild

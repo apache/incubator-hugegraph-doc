@@ -2,6 +2,7 @@
 title: "Rebuild API"
 linkTitle: "Rebuild"
 weight: 6
+description: "Rebuild（重建索引）REST 接口:重建图模式的索引,确保索引数据与图数据保持一致性。"
 ---
 
 ### 1.6 Rebuild

@@ -2,6 +2,7 @@
 title: "VertexLabel API"
 linkTitle: "VertexLabel"
 weight: 3
+description: "VertexLabel（顶点标签）REST 接口:定义顶点类型、ID策略及关联的属性,决定顶点的结构和约束规则。"
 ---
 
 ### 1.3 VertexLabel

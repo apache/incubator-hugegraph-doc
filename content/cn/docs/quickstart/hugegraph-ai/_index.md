@@ -7,11 +7,9 @@ weight: 3
 [![License](https://img.shields.io/badge/license-Apache%202-0E78BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/apache/incubator-hugegraph-ai)
 
-## 推荐：使用 DeepWiki 文档
-
 > DeepWiki 提供实时更新的项目文档，内容更全面准确，适合快速了解项目最新情况。
-
-**访问链接：**[**incubator-hugegraph-ai**](https://deepwiki.com/apache/incubator-hugegraph-ai)
+>
+> 📖 [https://deepwiki.com/apache/incubator-hugegraph-ai](https://deepwiki.com/apache/incubator-hugegraph-ai)
 
 `hugegraph-ai` 整合了 [HugeGraph](https://github.com/apache/hugegraph) 与人工智能功能，为开发者构建 AI 驱动的图应用提供全面支持。
 

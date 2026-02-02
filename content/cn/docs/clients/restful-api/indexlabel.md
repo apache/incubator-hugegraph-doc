@@ -2,6 +2,7 @@
 title: "IndexLabel API"
 linkTitle: "IndexLabel"
 weight: 5
+description: "IndexLabel（索引标签）REST 接口:为顶点和边的属性创建索引,加速基于属性的查询和过滤操作。"
 ---
 
 ### 1.5 IndexLabel

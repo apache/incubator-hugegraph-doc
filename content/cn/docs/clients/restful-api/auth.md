@@ -2,6 +2,7 @@
 title: "Authentication API"
 linkTitle: "Authentication"
 weight: 16
+description: "Authentication（认证鉴权）REST 接口:管理用户、角色、权限和访问控制,实现细粒度的图数据安全机制。"
 ---
 
 > **版本变更说明**:

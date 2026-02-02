@@ -2,6 +2,7 @@
 title: "VertexLabel API"
 linkTitle: "VertexLabel"
 weight: 3
+description: "VertexLabel REST API: Define vertex types, ID strategies, and associated properties that determine vertex structure and constraints."
 ---
 
 ### 1.3 VertexLabel
