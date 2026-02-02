@@ -1,6 +1,6 @@
 ---
-title: "HugeGraph configuration"
-linkTitle: "Config Guide"
+title: "HugeGraph Configuration Quick Start"
+linkTitle: "Configuration Guide"
 weight: 1
 ---
 

@@ -8,7 +8,7 @@ weight: 6
 
   HugeGraph 支持多种部署模式，根据数据规模和场景选择：
   - **单机模式**：Server + RocksDB，适合开发测试和中小规模数据（< 1TB）
-  - **分布式模式**：HugeGraph-PD + HugeGraph-Store (HStore)，支持水平扩展和高可用（100GB+ 数据规模），适合生产环境和大规模图数据应用
+  - **分布式模式**：HugeGraph-PD + HugeGraph-Store (HStore)，支持水平扩展和高可用（< 1000TB 数据规模），适合生产环境和大规模图数据应用
 
   注：Cassandra、HBase、MySQL 等后端仅在 HugeGraph <= 1.5 版本中可用，官方后续不再单独维护
 

@@ -1,7 +1,7 @@
 ---
-title: "HugeGraph-Computer Config"
-linkTitle: "Config Computer"
-weight: 5
+title: "HugeGraph-Computer Configuration Reference"
+linkTitle: "Computer Config Reference"
+weight: 3
 ---
 
 ### Computer Config Options

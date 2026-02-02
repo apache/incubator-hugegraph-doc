@@ -40,7 +40,7 @@ HugeGraph supports multiple deployment modes to meet different scales and scenar
 **Distributed Mode**
 - HugeGraph-PD: Metadata management and cluster scheduling
 - HugeGraph-Store (HStore): Distributed storage engine
-- Supports horizontal scaling and high availability (100GB+ data scale)
+- Supports horizontal scaling and high availability (< 1000TB data scale)
 - Suitable for production environments and large-scale graph data applications
 
 ### Quick Start Guide

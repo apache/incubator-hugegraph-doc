@@ -8,7 +8,7 @@ weight: 6
 
   HugeGraph supports multiple deployment modes. Choose based on your data scale and scenario:
   - **Standalone Mode**: Server + RocksDB, suitable for development/testing and small to medium-scale data (< 1TB)
-  - **Distributed Mode**: HugeGraph-PD + HugeGraph-Store (HStore), supports horizontal scaling and high availability (100GB+ data scale), suitable for production environments and large-scale graph data applications
+  - **Distributed Mode**: HugeGraph-PD + HugeGraph-Store (HStore), supports horizontal scaling and high availability (< 1000TB data scale), suitable for production environments and large-scale graph data applications
 
   Note: Cassandra, HBase, MySQL and other backends are only available in HugeGraph <= 1.5 versions and are no longer maintained by the official team
 

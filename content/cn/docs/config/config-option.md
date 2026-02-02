@@ -1,6 +1,6 @@
 ---
-title: "HugeGraph 配置项"
-linkTitle: "配置项列表"
+title: "HugeGraph 配置参考手册"
+linkTitle: "配置参考手册"
 weight: 2
 ---
 

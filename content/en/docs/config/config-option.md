@@ -1,6 +1,6 @@
 ---
-title: "HugeGraph Config Options"
-linkTitle: "Config Options"
+title: "HugeGraph Configuration Reference"
+linkTitle: "Configuration Reference"
 weight: 2
 ---
 

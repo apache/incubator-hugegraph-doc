@@ -1,7 +1,7 @@
 ---
-title: "HugeGraph-Computer 配置"
-linkTitle: "图计算 Computer 配置"
-weight: 5
+title: "HugeGraph-Computer 配置参考"
+linkTitle: "Computer 配置参考"
+weight: 3
 ---
 
 ### Computer 配置选项
