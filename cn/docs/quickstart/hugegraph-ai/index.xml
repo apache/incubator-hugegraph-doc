@@ -173,7 +173,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> style E fill:#fce4ec
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> style F fill:#e0f2f1
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="-配置">🔧 配置&lt;/h2>
-&lt;p>运行演示后，将自动生成配置文件：&lt;/p>
+&lt;p>运行演示后,将自动生成配置文件：&lt;/p>
 &lt;ul>
 &lt;li>&lt;strong>环境&lt;/strong>：&lt;code>hugegraph-llm/.env&lt;/code>&lt;/li>
 &lt;li>&lt;strong>提示&lt;/strong>：&lt;code>hugegraph-llm/src/hugegraph_llm/resources/demo/config_prompt.yaml&lt;/code>&lt;/li>
@@ -182,7 +182,57 @@
 &lt;p>[!NOTE]
 使用 Web 界面时，配置更改会自动保存。对于手动更改，刷新页面即可加载更新。&lt;/p>
 &lt;/blockquote>
-&lt;p>&lt;strong>LLM 提供商支持&lt;/strong>：本项目使用 &lt;a href="https://docs.litellm.ai/docs/providers">LiteLLM&lt;/a> 实现多提供商 LLM 支持。&lt;/p>
+&lt;h3 id="llm-提供商配置">LLM 提供商配置&lt;/h3>
+&lt;p>本项目使用 &lt;a href="https://docs.litellm.ai/docs/providers">LiteLLM&lt;/a> 实现多提供商 LLM 支持，可统一访问 OpenAI、Anthropic、Google、Cohere 以及 100 多个其他提供商。&lt;/p>
+&lt;h4 id="方案一直接-llm-连接openaiollama">方案一：直接 LLM 连接（OpenAI、Ollama）&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># .env 配置&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">chat_llm_type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai &lt;span style="color:#8f5902;font-style:italic"># 或 ollama/local&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">openai_api_key&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-xxx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">openai_api_base&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>https://api.openai.com/v1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">openai_language_model&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>gpt-4o-mini
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">openai_max_tokens&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">4096&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="方案二litellm-多提供商支持">方案二：LiteLLM 多提供商支持&lt;/h4>
+&lt;p>LiteLLM 作为多个 LLM 提供商的统一代理：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># .env 配置&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">chat_llm_type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>litellm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">extract_llm_type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>litellm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">text2gql_llm_type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>litellm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># LiteLLM 设置&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">litellm_api_base&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>http://localhost:4000 &lt;span style="color:#8f5902;font-style:italic"># LiteLLM 代理服务器&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">litellm_api_key&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-1234 &lt;span style="color:#8f5902;font-style:italic"># LiteLLM API 密钥&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 模型选择（提供商/模型格式）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">litellm_language_model&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>anthropic/claude-3-5-sonnet-20241022
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">litellm_max_tokens&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">4096&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>支持的提供商&lt;/strong>：OpenAI、Anthropic、Google（Gemini）、Azure、Cohere、Bedrock、Vertex AI、Hugging Face 等。&lt;/p>
+&lt;p>完整提供商列表和配置详情，请访问 &lt;a href="https://docs.litellm.ai/docs/providers">LiteLLM Providers&lt;/a>。&lt;/p>
+&lt;h3 id="reranker-配置">Reranker 配置&lt;/h3>
+&lt;p>Reranker 通过重新排序检索结果来提高 RAG 准确性。支持的提供商：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Cohere Reranker&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">reranker_type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>cohere
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">cohere_api_key&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>your-cohere-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">cohere_rerank_model&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>rerank-english-v3.0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># SiliconFlow Reranker&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">reranker_type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>siliconflow
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">siliconflow_api_key&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>your-siliconflow-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">siliconflow_rerank_model&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>BAAI/bge-reranker-v2-m3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="text2gremlin-配置">Text2Gremlin 配置&lt;/h3>
+&lt;p>将自然语言转换为 Gremlin 查询：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">from&lt;/span> &lt;span style="color:#000">hugegraph_llm.operators.graph_rag_task&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">Text2GremlinPipeline&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 初始化工作流&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">text2gremlin&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">Text2GremlinPipeline&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 生成 Gremlin 查询&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">result&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">text2gremlin&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">query_to_gremlin&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">query&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;查找所有由 Francis Ford Coppola 执导的电影&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">execute_gremlin_query&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">run&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>REST API 端点&lt;/strong>：有关 HTTP 端点详情，请参阅 &lt;a href="./rest-api.md">REST API 文档&lt;/a>。&lt;/p>
 &lt;h2 id="-其他资源">📚 其他资源&lt;/h2>
 &lt;ul>
 &lt;li>&lt;strong>图可视化&lt;/strong>：使用 &lt;a href="https://hub.docker.com/r/hugegraph/hubble">HugeGraph Hubble&lt;/a> 进行数据分析和 Schema 管理&lt;/li>
@@ -190,7 +240,394 @@
 &lt;li>&lt;strong>社区&lt;/strong>：加入我们的讨论并为项目做出贡献&lt;/li>
 &lt;/ul>
 &lt;hr>
-&lt;p>&lt;strong>许可证&lt;/strong>：Apache License 2.0 | &lt;strong>社区&lt;/strong>：&lt;a href="https://hugegraph.apache.org/">Apache HugeGraph&lt;/a>&lt;/p></description></item><item><title>Docs: GraphRAG UI Details</title><link>/cn/docs/quickstart/hugegraph-ai/quick_start/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-ai/quick_start/</guid><description>
+&lt;p>&lt;strong>许可证&lt;/strong>：Apache License 2.0 | &lt;strong>社区&lt;/strong>：&lt;a href="https://hugegraph.apache.org/">Apache HugeGraph&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph-ML</title><link>/cn/docs/quickstart/hugegraph-ai/hugegraph-ml/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-ai/hugegraph-ml/</guid><description>
+&lt;p>HugeGraph-ML 将 HugeGraph 与流行的图学习库集成，支持直接在图数据上进行端到端的机器学习工作流。&lt;/p>
+&lt;h2 id="概述">概述&lt;/h2>
+&lt;p>&lt;code>hugegraph-ml&lt;/code> 提供了统一接口，用于将图神经网络和机器学习算法应用于存储在 HugeGraph 中的数据。它通过无缝转换 HugeGraph 数据到主流 ML 框架兼容格式，消除了复杂的数据导出/导入流程。&lt;/p>
+&lt;h3 id="核心功能">核心功能&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>直接 HugeGraph 集成&lt;/strong>：无需手动导出即可直接从 HugeGraph 查询图数据&lt;/li>
+&lt;li>&lt;strong>21 种算法实现&lt;/strong>：全面覆盖节点分类、图分类、嵌入和链接预测&lt;/li>
+&lt;li>&lt;strong>DGL 后端&lt;/strong>：利用深度图库（DGL）进行高效训练&lt;/li>
+&lt;li>&lt;strong>端到端工作流&lt;/strong>：从数据加载到模型训练和评估&lt;/li>
+&lt;li>&lt;strong>模块化任务&lt;/strong>：可复用的常见 ML 场景任务抽象&lt;/li>
+&lt;/ul>
+&lt;h2 id="环境要求">环境要求&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>Python&lt;/strong>：3.9+（独立模块）&lt;/li>
+&lt;li>&lt;strong>HugeGraph Server&lt;/strong>：1.0+（推荐：1.5+）&lt;/li>
+&lt;li>&lt;strong>UV 包管理器&lt;/strong>：0.7+（用于依赖管理）&lt;/li>
+&lt;/ul>
+&lt;h2 id="安装">安装&lt;/h2>
+&lt;h3 id="1-启动-hugegraph-server">1. 启动 HugeGraph Server&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 方案一：Docker（推荐）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>docker run -itd --name&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>hugegraph -p 8080:8080 hugegraph/hugegraph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 方案二：二进制包&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 参见 https://hugegraph.apache.org/docs/download/download/&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-克隆并设置">2. 克隆并设置&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/incubator-hugegraph-ai.git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> incubator-hugegraph-ai/hugegraph-ml
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-安装依赖">3. 安装依赖&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># uv sync 自动创建 .venv 并安装所有依赖&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uv sync
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 激活虚拟环境&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">source&lt;/span> .venv/bin/activate
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4-导航到源代码目录">4. 导航到源代码目录&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> ./src
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>[!NOTE]
+所有示例均假定您在已激活的虚拟环境中。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="已实现算法">已实现算法&lt;/h2>
+&lt;p>HugeGraph-ML 目前实现了跨多个类别的 &lt;strong>21 种图机器学习算法&lt;/strong>：&lt;/p>
+&lt;h3 id="节点分类11-种算法">节点分类（11 种算法）&lt;/h3>
+&lt;p>基于网络结构和特征预测图节点的标签。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>算法&lt;/th>
+&lt;th>论文&lt;/th>
+&lt;th>描述&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>GCN&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1609.02907">Kipf &amp;amp; Welling, 2017&lt;/a>&lt;/td>
+&lt;td>图卷积网络&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>GAT&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1710.10903">Veličković et al., 2018&lt;/a>&lt;/td>
+&lt;td>图注意力网络&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>GraphSAGE&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1706.02216">Hamilton et al., 2017&lt;/a>&lt;/td>
+&lt;td>归纳式表示学习&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>APPNP&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1810.05997">Klicpera et al., 2019&lt;/a>&lt;/td>
+&lt;td>个性化 PageRank 传播&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>AGNN&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1803.03735">Thekumparampil et al., 2018&lt;/a>&lt;/td>
+&lt;td>基于注意力的 GNN&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>ARMA&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1901.01343">Bianchi et al., 2019&lt;/a>&lt;/td>
+&lt;td>自回归移动平均滤波器&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>DAGNN&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/2007.09296">Liu et al., 2020&lt;/a>&lt;/td>
+&lt;td>深度自适应图神经网络&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>DeeperGCN&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/2006.07739">Li et al., 2020&lt;/a>&lt;/td>
+&lt;td>非常深的 GCN 架构&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>GRAND&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/2005.11079">Feng et al., 2020&lt;/a>&lt;/td>
+&lt;td>图随机神经网络&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>JKNet&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1806.03536">Xu et al., 2018&lt;/a>&lt;/td>
+&lt;td>跳跃知识网络&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Cluster-GCN&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1905.07953">Chiang et al., 2019&lt;/a>&lt;/td>
+&lt;td>通过聚类实现可扩展 GCN 训练&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="图分类2-种算法">图分类（2 种算法）&lt;/h3>
+&lt;p>基于结构和节点特征对整个图进行分类。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>算法&lt;/th>
+&lt;th>论文&lt;/th>
+&lt;th>描述&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>DiffPool&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1806.08804">Ying et al., 2018&lt;/a>&lt;/td>
+&lt;td>可微分图池化&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>GIN&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1810.00826">Xu et al., 2019&lt;/a>&lt;/td>
+&lt;td>图同构网络&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="图嵌入3-种算法">图嵌入（3 种算法）&lt;/h3>
+&lt;p>学习用于下游任务的无监督节点表示。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>算法&lt;/th>
+&lt;th>论文&lt;/th>
+&lt;th>描述&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>DGI&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1809.10341">Veličković et al., 2019&lt;/a>&lt;/td>
+&lt;td>深度图信息最大化（对比学习）&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>BGRL&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/2102.06514">Thakoor et al., 2021&lt;/a>&lt;/td>
+&lt;td>自举图表示学习&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>GRACE&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/2006.04131">Zhu et al., 2020&lt;/a>&lt;/td>
+&lt;td>图对比学习&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="链接预测3-种算法">链接预测（3 种算法）&lt;/h3>
+&lt;p>预测图中缺失或未来的连接。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>算法&lt;/th>
+&lt;th>论文&lt;/th>
+&lt;th>描述&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>SEAL&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1802.09691">Zhang &amp;amp; Chen, 2018&lt;/a>&lt;/td>
+&lt;td>子图提取和标注&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>P-GNN&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="http://proceedings.mlr.press/v97/you19b/you19b.pdf">You et al., 2019&lt;/a>&lt;/td>
+&lt;td>位置感知 GNN&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>GATNE&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1905.01669">Cen et al., 2019&lt;/a>&lt;/td>
+&lt;td>属性多元异构网络嵌入&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="欺诈检测2-种算法">欺诈检测（2 种算法）&lt;/h3>
+&lt;p>检测图中的异常节点（例如欺诈账户）。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>算法&lt;/th>
+&lt;th>论文&lt;/th>
+&lt;th>描述&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>CARE-GNN&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/2008.08692">Dou et al., 2020&lt;/a>&lt;/td>
+&lt;td>抗伪装 GNN&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>BGNN&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/2101.08543">Zheng et al., 2021&lt;/a>&lt;/td>
+&lt;td>二部图神经网络&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="后处理1-种算法">后处理（1 种算法）&lt;/h3>
+&lt;p>通过标签传播改进预测。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>算法&lt;/th>
+&lt;th>论文&lt;/th>
+&lt;th>描述&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>C&amp;amp;S&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/2010.13993">Huang et al., 2020&lt;/a>&lt;/td>
+&lt;td>校正与平滑（预测优化）&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="使用示例">使用示例&lt;/h2>
+&lt;h3 id="示例-1使用-dgi-进行节点嵌入">示例 1：使用 DGI 进行节点嵌入&lt;/h3>
+&lt;p>使用深度图信息最大化（DGI）在 Cora 数据集上进行无监督节点嵌入。&lt;/p>
+&lt;h4 id="步骤-1导入数据集如需">步骤 1：导入数据集（如需）&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">from&lt;/span> &lt;span style="color:#000">hugegraph_ml.utils.dgl2hugegraph_utils&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">import_graph_from_dgl&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 从 DGL 导入 Cora 数据集到 HugeGraph&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">import_graph_from_dgl&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;cora&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="步骤-2转换图数据">步骤 2：转换图数据&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">from&lt;/span> &lt;span style="color:#000">hugegraph_ml.data.hugegraph2dgl&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">HugeGraph2DGL&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 将 HugeGraph 数据转换为 DGL 格式&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">hg2d&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">HugeGraph2DGL&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graph&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">hg2d&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">convert_graph&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">vertex_label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;CORA_vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">edge_label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;CORA_edge&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="步骤-3初始化模型">步骤 3：初始化模型&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">from&lt;/span> &lt;span style="color:#000">hugegraph_ml.models.dgi&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">DGI&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 创建 DGI 模型&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">model&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">DGI&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">n_in_feats&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">ndata&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;feat&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">shape&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">])&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="步骤-4训练并生成嵌入">步骤 4：训练并生成嵌入&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">from&lt;/span> &lt;span style="color:#000">hugegraph_ml.tasks.node_embed&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">NodeEmbed&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 训练模型并生成节点嵌入&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">node_embed_task&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">NodeEmbed&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">model&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">model&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">embedded_graph&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">node_embed_task&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">train_and_embed&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">add_self_loop&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87;font-weight:bold">True&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">n_epochs&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">300&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">patience&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">30&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="步骤-5下游任务节点分类">步骤 5：下游任务（节点分类）&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">from&lt;/span> &lt;span style="color:#000">hugegraph_ml.models.mlp&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">MLPClassifier&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">from&lt;/span> &lt;span style="color:#000">hugegraph_ml.tasks.node_classify&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">NodeClassify&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 使用嵌入进行节点分类&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">model&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">MLPClassifier&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">n_in_feat&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">embedded_graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">ndata&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;feat&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">shape&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">n_out_feat&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">embedded_graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">ndata&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">unique&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">shape&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">node_clf_task&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">NodeClassify&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">embedded_graph&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">model&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">model&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">node_clf_task&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">train&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">lr&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">1e-3&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">n_epochs&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">400&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">patience&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">40&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">print&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">node_clf_task&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">evaluate&lt;/span>&lt;span style="color:#000;font-weight:bold">())&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>预期输出：&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;accuracy&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.82&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;loss&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.5714246034622192&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>完整示例&lt;/strong>：参见 &lt;a href="https://github.com/apache/incubator-hugegraph-ai/blob/main/hugegraph-ml/src/hugegraph_ml/examples/dgi_example.py">dgi_example.py&lt;/a>&lt;/p>
+&lt;h3 id="示例-2使用-grand-进行节点分类">示例 2：使用 GRAND 进行节点分类&lt;/h3>
+&lt;p>使用 GRAND 模型直接对节点进行分类（无需单独的嵌入步骤）。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">from&lt;/span> &lt;span style="color:#000">hugegraph_ml.data.hugegraph2dgl&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">HugeGraph2DGL&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">from&lt;/span> &lt;span style="color:#000">hugegraph_ml.models.grand&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">GRAND&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">from&lt;/span> &lt;span style="color:#000">hugegraph_ml.tasks.node_classify&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">NodeClassify&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 加载图&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">hg2d&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">HugeGraph2DGL&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graph&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">hg2d&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">convert_graph&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">vertex_label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;CORA_vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">edge_label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;CORA_edge&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 初始化 GRAND 模型&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">model&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">GRAND&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">n_in_feats&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">ndata&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;feat&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">shape&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">n_out_feats&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">ndata&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">unique&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">shape&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 训练和评估&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">node_clf_task&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">NodeClassify&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">model&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">model&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">node_clf_task&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">train&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">lr&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">1e-2&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">n_epochs&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">1500&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">patience&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">100&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">print&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">node_clf_task&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">evaluate&lt;/span>&lt;span style="color:#000;font-weight:bold">())&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>完整示例&lt;/strong>：参见 &lt;a href="https://github.com/apache/incubator-hugegraph-ai/blob/main/hugegraph-ml/src/hugegraph_ml/examples/grand_example.py">grand_example.py&lt;/a>&lt;/p>
+&lt;h2 id="核心组件">核心组件&lt;/h2>
+&lt;h3 id="hugegraph2dgl-转换器">HugeGraph2DGL 转换器&lt;/h3>
+&lt;p>无缝将 HugeGraph 数据转换为 DGL 图格式：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">from&lt;/span> &lt;span style="color:#000">hugegraph_ml.data.hugegraph2dgl&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">HugeGraph2DGL&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">hg2d&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">HugeGraph2DGL&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graph&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">hg2d&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">convert_graph&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">vertex_label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># 要提取的顶点标签&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">edge_label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;knows&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># 要提取的边标签&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">directed&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87;font-weight:bold">False&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># 图的方向性&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="任务抽象">任务抽象&lt;/h3>
+&lt;p>用于常见 ML 工作流的可复用任务对象：&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>任务&lt;/th>
+&lt;th>类&lt;/th>
+&lt;th>用途&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>节点嵌入&lt;/td>
+&lt;td>&lt;code>NodeEmbed&lt;/code>&lt;/td>
+&lt;td>生成无监督节点嵌入&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>节点分类&lt;/td>
+&lt;td>&lt;code>NodeClassify&lt;/code>&lt;/td>
+&lt;td>预测节点标签&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>图分类&lt;/td>
+&lt;td>&lt;code>GraphClassify&lt;/code>&lt;/td>
+&lt;td>预测图级标签&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>链接预测&lt;/td>
+&lt;td>&lt;code>LinkPredict&lt;/code>&lt;/td>
+&lt;td>预测缺失边&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="最佳实践">最佳实践&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>从小数据集开始&lt;/strong>：在扩展之前先在小图（例如 Cora、Citeseer）上测试您的流程&lt;/li>
+&lt;li>&lt;strong>使用早停&lt;/strong>：设置 &lt;code>patience&lt;/code> 参数以避免过拟合&lt;/li>
+&lt;li>&lt;strong>调整超参数&lt;/strong>：根据数据集大小调整学习率、隐藏维度和周期数&lt;/li>
+&lt;li>&lt;strong>监控 GPU 内存&lt;/strong>：大图可能需要批量训练（例如 Cluster-GCN）&lt;/li>
+&lt;li>&lt;strong>验证 Schema&lt;/strong>：确保顶点/边标签与您的 HugeGraph schema 匹配&lt;/li>
+&lt;/ol>
+&lt;h2 id="故障排除">故障排除&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>问题&lt;/th>
+&lt;th>解决方案&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>连接 HugeGraph &amp;ldquo;Connection refused&amp;rdquo;&lt;/td>
+&lt;td>验证服务器是否在 8080 端口运行&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>CUDA 内存不足&lt;/td>
+&lt;td>减少批大小或使用仅 CPU 模式&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>模型收敛问题&lt;/td>
+&lt;td>尝试不同的学习率（1e-2、1e-3、1e-4）&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>DGL 的 ImportError&lt;/td>
+&lt;td>运行 &lt;code>uv sync&lt;/code> 重新安装依赖&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="贡献">贡献&lt;/h2>
+&lt;p>添加新算法：&lt;/p>
+&lt;ol>
+&lt;li>在 &lt;code>src/hugegraph_ml/models/your_model.py&lt;/code> 创建模型文件&lt;/li>
+&lt;li>继承基础模型类并实现 &lt;code>forward()&lt;/code> 方法&lt;/li>
+&lt;li>在 &lt;code>src/hugegraph_ml/examples/&lt;/code> 添加示例脚本&lt;/li>
+&lt;li>更新此文档并添加算法详情&lt;/li>
+&lt;/ol>
+&lt;h2 id="另见">另见&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="../_index.md">HugeGraph-AI 概述&lt;/a> - 完整 AI 生态系统&lt;/li>
+&lt;li>&lt;a href="./hugegraph-llm.md">HugeGraph-LLM&lt;/a> - RAG 和知识图谱构建&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-ml">GitHub 仓库&lt;/a> - 源代码和示例&lt;/li>
+&lt;/ul></description></item><item><title>Docs: GraphRAG UI Details</title><link>/cn/docs/quickstart/hugegraph-ai/quick_start/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-ai/quick_start/</guid><description>
 &lt;blockquote>
 &lt;p>接续&lt;a href="../">主文档&lt;/a>介绍基础 UI 功能及详情，欢迎随时更新和改进，谢谢&lt;/p>
 &lt;/blockquote>
@@ -380,4 +817,873 @@
 &lt;pre>&lt;code> - 使用构建的提示词生成 Gremlin 查询。
 &lt;/code>&lt;/pre>
 &lt;h1 id="5-图工具">5. 图工具&lt;/h1>
-&lt;p>输入 Gremlin 查询以执行相应操作。&lt;/p></description></item></channel></rss>
+&lt;p>输入 Gremlin 查询以执行相应操作。&lt;/p>
+&lt;h1 id="6-语言切换-v150">6. 语言切换 (v1.5.0+)&lt;/h1>
+&lt;p>HugeGraph-LLM 支持双语提示词，以提高跨语言的准确性。&lt;/p>
+&lt;h3 id="在英文和中文之间切换">在英文和中文之间切换&lt;/h3>
+&lt;p>系统语言影响：&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>系统提示词&lt;/strong>：LLM 使用的内部提示词&lt;/li>
+&lt;li>&lt;strong>关键词提取&lt;/strong>：特定语言的提取逻辑&lt;/li>
+&lt;li>&lt;strong>答案生成&lt;/strong>：响应格式和风格&lt;/li>
+&lt;/ul>
+&lt;h4 id="配置方法一环境变量">配置方法一：环境变量&lt;/h4>
+&lt;p>编辑您的 &lt;code>.env&lt;/code> 文件：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 英文提示词（默认）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LANGUAGE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>EN
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 中文提示词&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LANGUAGE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>CN
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>更改语言设置后重启服务。&lt;/p>
+&lt;h4 id="配置方法二web-ui动态">配置方法二：Web UI（动态）&lt;/h4>
+&lt;p>如果您的部署中可用，使用 Web UI 中的设置面板切换语言，无需重启：&lt;/p>
+&lt;ol>
+&lt;li>导航到&lt;strong>设置&lt;/strong>或&lt;strong>配置&lt;/strong>选项卡&lt;/li>
+&lt;li>选择&lt;strong>语言&lt;/strong>：&lt;code>EN&lt;/code> 或 &lt;code>CN&lt;/code>&lt;/li>
+&lt;li>点击&lt;strong>保存&lt;/strong> - 更改立即生效&lt;/li>
+&lt;/ol>
+&lt;h4 id="特定语言的行为">特定语言的行为&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>语言&lt;/th>
+&lt;th>关键词提取&lt;/th>
+&lt;th>答案风格&lt;/th>
+&lt;th>使用场景&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>EN&lt;/code>&lt;/td>
+&lt;td>英文 NLP 模型&lt;/td>
+&lt;td>专业、简洁&lt;/td>
+&lt;td>国际用户、英文文档&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>CN&lt;/code>&lt;/td>
+&lt;td>中文 NLP 模型&lt;/td>
+&lt;td>自然的中文表达&lt;/td>
+&lt;td>中文用户、中文文档&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;blockquote>
+&lt;p>[!TIP]
+将 &lt;code>LANGUAGE&lt;/code> 设置与您的主要文档语言匹配，以获得最佳 RAG 准确性。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="rest-api-语言覆盖">REST API 语言覆盖&lt;/h3>
+&lt;p>使用 REST API 时，您可以为每个请求指定自定义提示词，以覆盖默认语言设置：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl -X POST http://localhost:8001/rag &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> -H &lt;span style="color:#4e9a06">&amp;#34;Content-Type: application/json&amp;#34;&lt;/span> &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> -d &lt;span style="color:#4e9a06">&amp;#39;{
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> &amp;#34;query&amp;#34;: &amp;#34;告诉我关于阿尔·帕西诺的信息&amp;#34;,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> &amp;#34;graph_only&amp;#34;: true,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> &amp;#34;keywords_extract_prompt&amp;#34;: &amp;#34;请从以下文本中提取关键实体...&amp;#34;,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> &amp;#34;answer_prompt&amp;#34;: &amp;#34;请根据以下上下文回答问题...&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> }&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>完整参数详情请参阅 &lt;a href="./rest-api.md">REST API 参考&lt;/a>。&lt;/p></description></item><item><title>Docs: 配置参考</title><link>/cn/docs/quickstart/hugegraph-ai/config-reference/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-ai/config-reference/</guid><description>
+&lt;p>本文档提供 HugeGraph-LLM 所有配置选项的完整参考。&lt;/p>
+&lt;h2 id="配置文件">配置文件&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>环境文件&lt;/strong>：&lt;code>.env&lt;/code>（从模板创建或自动生成)&lt;/li>
+&lt;li>&lt;strong>提示词配置&lt;/strong>：&lt;code>src/hugegraph_llm/resources/demo/config_prompt.yaml&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>[!TIP]
+运行 &lt;code>python -m hugegraph_llm.config.generate --update&lt;/code> 可自动生成或更新带有默认值的配置文件。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="环境变量概览">环境变量概览&lt;/h2>
+&lt;h3 id="1-语言和模型类型选择">1. 语言和模型类型选择&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 提示词语言（影响系统提示词和生成文本）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LANGUAGE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>EN &lt;span style="color:#8f5902;font-style:italic"># 选项: EN | CN&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 不同任务的 LLM 类型&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">CHAT_LLM_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai &lt;span style="color:#8f5902;font-style:italic"># 对话/RAG: openai | litellm | ollama/local&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">EXTRACT_LLM_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai &lt;span style="color:#8f5902;font-style:italic"># 实体抽取: openai | litellm | ollama/local&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">TEXT2GQL_LLM_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai &lt;span style="color:#8f5902;font-style:italic"># 文本转 Gremlin: openai | litellm | ollama/local&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 嵌入模型类型&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">EMBEDDING_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai &lt;span style="color:#8f5902;font-style:italic"># 选项: openai | litellm | ollama/local&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Reranker 类型（可选）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">RERANKER_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># 选项: cohere | siliconflow | (留空表示无)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-openai-配置">2. OpenAI 配置&lt;/h3>
+&lt;p>每个 LLM 任务（chat、extract、text2gql）都有独立配置：&lt;/p>
+&lt;h4 id="21-chat-llmrag-答案生成">2.1 Chat LLM（RAG 答案生成）&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_CHAT_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>https://api.openai.com/v1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_CHAT_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-your-api-key-here
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_CHAT_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>gpt-4o-mini
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_CHAT_TOKENS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8192&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># 对话响应的最大 tokens&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="22-extract-llm实体和关系抽取">2.2 Extract LLM（实体和关系抽取）&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_EXTRACT_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>https://api.openai.com/v1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_EXTRACT_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-your-api-key-here
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_EXTRACT_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>gpt-4o-mini
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_EXTRACT_TOKENS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">1024&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># 抽取任务的最大 tokens&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="23-text2gql-llm自然语言转-gremlin">2.3 Text2GQL LLM（自然语言转 Gremlin）&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_TEXT2GQL_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>https://api.openai.com/v1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_TEXT2GQL_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-your-api-key-here
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_TEXT2GQL_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>gpt-4o-mini
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_TEXT2GQL_TOKENS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">4096&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># 查询生成的最大 tokens&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="24-嵌入模型">2.4 嵌入模型&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_EMBEDDING_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>https://api.openai.com/v1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_EMBEDDING_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-your-api-key-here
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_EMBEDDING_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>text-embedding-3-small
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>[!NOTE]
+您可以为每个任务使用不同的 API 密钥/端点，以优化成本或使用专用模型。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="3-litellm-配置多供应商支持">3. LiteLLM 配置（多供应商支持）&lt;/h3>
+&lt;p>LiteLLM 支持统一访问 100 多个 LLM 供应商（OpenAI、Anthropic、Google、Azure 等）。&lt;/p>
+&lt;h4 id="31-chat-llm">3.1 Chat LLM&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_CHAT_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>http://localhost:4000 &lt;span style="color:#8f5902;font-style:italic"># LiteLLM 代理 URL&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_CHAT_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-litellm-key &lt;span style="color:#8f5902;font-style:italic"># LiteLLM API 密钥&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_CHAT_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>anthropic/claude-3-5-sonnet-20241022
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_CHAT_TOKENS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8192&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="32-extract-llm">3.2 Extract LLM&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EXTRACT_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>http://localhost:4000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EXTRACT_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-litellm-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EXTRACT_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai/gpt-4o-mini
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EXTRACT_TOKENS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">256&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="33-text2gql-llm">3.3 Text2GQL LLM&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_TEXT2GQL_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>http://localhost:4000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_TEXT2GQL_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-litellm-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_TEXT2GQL_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai/gpt-4o-mini
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_TEXT2GQL_TOKENS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">4096&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="34-嵌入模型">3.4 嵌入模型&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EMBEDDING_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>http://localhost:4000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EMBEDDING_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-litellm-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EMBEDDING_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai/text-embedding-3-small
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>模型格式&lt;/strong>: &lt;code>供应商/模型名称&lt;/code>&lt;/p>
+&lt;p>示例：&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>openai/gpt-4o-mini&lt;/code>&lt;/li>
+&lt;li>&lt;code>anthropic/claude-3-5-sonnet-20241022&lt;/code>&lt;/li>
+&lt;li>&lt;code>google/gemini-2.0-flash-exp&lt;/code>&lt;/li>
+&lt;li>&lt;code>azure/gpt-4&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>完整列表请参阅 &lt;a href="https://docs.litellm.ai/docs/providers">LiteLLM Providers&lt;/a>。&lt;/p>
+&lt;h3 id="4-ollama-配置本地部署">4. Ollama 配置（本地部署）&lt;/h3>
+&lt;p>使用 Ollama 运行本地 LLM，确保隐私和成本控制。&lt;/p>
+&lt;h4 id="41-chat-llm">4.1 Chat LLM&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_CHAT_HOST&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>127.0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_CHAT_PORT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">11434&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_CHAT_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>llama3.1:8b
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="42-extract-llm">4.2 Extract LLM&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_EXTRACT_HOST&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>127.0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_EXTRACT_PORT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">11434&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_EXTRACT_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>llama3.1:8b
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="43-text2gql-llm">4.3 Text2GQL LLM&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_TEXT2GQL_HOST&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>127.0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_TEXT2GQL_PORT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">11434&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_TEXT2GQL_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>qwen2.5-coder:7b
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="44-嵌入模型">4.4 嵌入模型&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_EMBEDDING_HOST&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>127.0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_EMBEDDING_PORT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">11434&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_EMBEDDING_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>nomic-embed-text
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>[!TIP]
+下载模型：&lt;code>ollama pull llama3.1:8b&lt;/code> 或 &lt;code>ollama pull qwen2.5-coder:7b&lt;/code>&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="5-reranker-配置">5. Reranker 配置&lt;/h3>
+&lt;p>Reranker 通过根据相关性重新排序检索结果来提高 RAG 准确性。&lt;/p>
+&lt;h4 id="51-cohere-reranker">5.1 Cohere Reranker&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">RERANKER_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>cohere
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">COHERE_BASE_URL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>https://api.cohere.com/v1/rerank
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">RERANKER_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>your-cohere-api-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">RERANKER_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>rerank-english-v3.0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>可用模型：&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>rerank-english-v3.0&lt;/code>（英文）&lt;/li>
+&lt;li>&lt;code>rerank-multilingual-v3.0&lt;/code>（100+ 种语言）&lt;/li>
+&lt;/ul>
+&lt;h4 id="52-siliconflow-reranker">5.2 SiliconFlow Reranker&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">RERANKER_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>siliconflow
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">RERANKER_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>your-siliconflow-api-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">RERANKER_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>BAAI/bge-reranker-v2-m3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="6-hugegraph-连接">6. HugeGraph 连接&lt;/h3>
+&lt;p>配置与 HugeGraph 服务器实例的连接。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 服务器连接&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_IP&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>127.0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_PORT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_NAME&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>hugegraph &lt;span style="color:#8f5902;font-style:italic"># 图实例名称&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_USER&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>admin &lt;span style="color:#8f5902;font-style:italic"># 用户名&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_PWD&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>admin-password &lt;span style="color:#8f5902;font-style:italic"># 密码&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_SPACE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># 图空间（可选，用于多租户）&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="7-查询参数">7. 查询参数&lt;/h3>
+&lt;p>控制图遍历行为和结果限制。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 图遍历限制&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">MAX_GRAPH_PATH&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">10&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># 图查询的最大路径深度&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">MAX_GRAPH_ITEMS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">30&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># 从图中检索的最大项数&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">EDGE_LIMIT_PRE_LABEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># 每个标签类型的最大边数&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 属性过滤&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LIMIT_PROPERTY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>False &lt;span style="color:#8f5902;font-style:italic"># 限制结果中的属性（True/False）&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="8-向量搜索配置">8. 向量搜索配置&lt;/h3>
+&lt;p>配置向量相似性搜索参数。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 向量搜索阈值&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">VECTOR_DIS_THRESHOLD&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>0.9 &lt;span style="color:#8f5902;font-style:italic"># 最小余弦相似度（0-1，越高越严格）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">TOPK_PER_KEYWORD&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># 每个提取关键词的 Top-K 结果&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="9-rerank-配置">9. Rerank 配置&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Rerank 结果限制&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">TOPK_RETURN_RESULTS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">20&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># 重排序后的 top 结果数&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="配置优先级">配置优先级&lt;/h2>
+&lt;p>系统按以下顺序加载配置（后面的来源覆盖前面的）：&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>默认值&lt;/strong>（在 &lt;code>*_config.py&lt;/code> 文件中）&lt;/li>
+&lt;li>&lt;strong>环境变量&lt;/strong>（来自 &lt;code>.env&lt;/code> 文件）&lt;/li>
+&lt;li>&lt;strong>运行时更新&lt;/strong>（通过 Web UI 或 API 调用）&lt;/li>
+&lt;/ol>
+&lt;h2 id="配置示例">配置示例&lt;/h2>
+&lt;h3 id="最小配置openai">最小配置（OpenAI）&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 语言&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LANGUAGE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>EN
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># LLM 类型&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">CHAT_LLM_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">EXTRACT_LLM_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">TEXT2GQL_LLM_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">EMBEDDING_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># OpenAI 凭据（所有任务共用一个密钥）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>https://api.openai.com/v1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-your-api-key-here
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>gpt-4o-mini
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_EMBEDDING_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>text-embedding-3-small
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># HugeGraph 连接&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_IP&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>127.0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_PORT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_NAME&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>hugegraph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_USER&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>admin
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_PWD&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>admin
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="生产环境配置litellm--reranker">生产环境配置（LiteLLM + Reranker）&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 双语支持&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LANGUAGE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>EN
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 灵活使用 LiteLLM&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">CHAT_LLM_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>litellm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">EXTRACT_LLM_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>litellm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">TEXT2GQL_LLM_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>litellm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">EMBEDDING_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>litellm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># LiteLLM 代理&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_CHAT_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>http://localhost:4000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_CHAT_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-litellm-master-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_CHAT_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>anthropic/claude-3-5-sonnet-20241022
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_CHAT_TOKENS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8192&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EXTRACT_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>http://localhost:4000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EXTRACT_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-litellm-master-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EXTRACT_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai/gpt-4o-mini
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EXTRACT_TOKENS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">256&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_TEXT2GQL_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>http://localhost:4000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_TEXT2GQL_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-litellm-master-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_TEXT2GQL_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai/gpt-4o-mini
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_TEXT2GQL_TOKENS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">4096&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EMBEDDING_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>http://localhost:4000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EMBEDDING_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-litellm-master-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EMBEDDING_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai/text-embedding-3-small
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Cohere Reranker 提高准确性&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">RERANKER_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>cohere
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">COHERE_BASE_URL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>https://api.cohere.com/v1/rerank
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">RERANKER_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>your-cohere-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">RERANKER_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>rerank-multilingual-v3.0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 带认证的 HugeGraph&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_IP&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>prod-hugegraph.example.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_PORT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_NAME&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>production_graph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_USER&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>rag_user
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_PWD&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>secure-password
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_SPACE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>prod_space
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 优化的查询参数&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">MAX_GRAPH_PATH&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">15&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">MAX_GRAPH_ITEMS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">50&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">VECTOR_DIS_THRESHOLD&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>0.85
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">TOPK_RETURN_RESULTS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">30&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="本地离线配置ollama">本地/离线配置（Ollama）&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 语言&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LANGUAGE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>EN
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 全部通过 Ollama 使用本地模型&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">CHAT_LLM_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>ollama/local
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">EXTRACT_LLM_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>ollama/local
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">TEXT2GQL_LLM_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>ollama/local
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">EMBEDDING_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>ollama/local
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Ollama 端点&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_CHAT_HOST&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>127.0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_CHAT_PORT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">11434&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_CHAT_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>llama3.1:8b
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_EXTRACT_HOST&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>127.0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_EXTRACT_PORT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">11434&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_EXTRACT_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>llama3.1:8b
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_TEXT2GQL_HOST&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>127.0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_TEXT2GQL_PORT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">11434&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_TEXT2GQL_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>qwen2.5-coder:7b
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_EMBEDDING_HOST&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>127.0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_EMBEDDING_PORT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">11434&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_EMBEDDING_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>nomic-embed-text
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 离线环境不使用 reranker&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">RERANKER_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 本地 HugeGraph&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_IP&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>127.0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_PORT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_NAME&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>hugegraph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_USER&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>admin
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_PWD&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>admin
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="配置验证">配置验证&lt;/h2>
+&lt;p>修改 &lt;code>.env&lt;/code> 后，验证配置：&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>通过 Web UI&lt;/strong>：访问 &lt;code>http://localhost:8001&lt;/code> 并检查设置面板&lt;/li>
+&lt;li>&lt;strong>通过 Python&lt;/strong>：&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">from&lt;/span> &lt;span style="color:#000">hugegraph_llm.config&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">settings&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">print&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">settings&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">llm_config&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">print&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">settings&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">hugegraph_config&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>&lt;strong>通过 REST API&lt;/strong>：&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl http://localhost:8001/config
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="故障排除">故障排除&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>问题&lt;/th>
+&lt;th>解决方案&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&amp;ldquo;API key not found&amp;rdquo;&lt;/td>
+&lt;td>检查 &lt;code>.env&lt;/code> 中的 &lt;code>*_API_KEY&lt;/code> 是否正确设置&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&amp;ldquo;Connection refused&amp;rdquo;&lt;/td>
+&lt;td>验证 &lt;code>GRAPH_IP&lt;/code> 和 &lt;code>GRAPH_PORT&lt;/code> 是否正确&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&amp;ldquo;Model not found&amp;rdquo;&lt;/td>
+&lt;td>对于 Ollama：运行 &lt;code>ollama pull &amp;lt;模型名称&amp;gt;&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&amp;ldquo;Rate limit exceeded&amp;rdquo;&lt;/td>
+&lt;td>减少 &lt;code>MAX_GRAPH_ITEMS&lt;/code> 或使用不同的 API 密钥&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&amp;ldquo;Embedding dimension mismatch&amp;rdquo;&lt;/td>
+&lt;td>删除现有向量并使用正确模型重建&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="另见">另见&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="./hugegraph-llm.md">HugeGraph-LLM 概述&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./rest-api.md">REST API 参考&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./quick_start.md">快速入门指南&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: REST API 参考</title><link>/cn/docs/quickstart/hugegraph-ai/rest-api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/hugegraph-ai/rest-api/</guid><description>
+&lt;p>HugeGraph-LLM 提供 REST API 端点，用于将 RAG 和 Text2Gremlin 功能集成到您的应用程序中。&lt;/p>
+&lt;h2 id="基础-url">基础 URL&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>http://localhost:8001
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动服务时更改主机/端口：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>python -m hugegraph_llm.demo.rag_demo.app --host 127.0.0.1 --port &lt;span style="color:#0000cf;font-weight:bold">8001&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="认证">认证&lt;/h2>
+&lt;p>目前 API 支持可选的基于令牌的认证：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 在 .env 中启用认证&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">ENABLE_LOGIN&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">USER_TOKEN&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>your-user-token
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">ADMIN_TOKEN&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>your-admin-token
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在请求头中传递令牌：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>Authorization: Bearer &amp;lt;token&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="rag-端点">RAG 端点&lt;/h2>
+&lt;h3 id="1-完整-rag-查询">1. 完整 RAG 查询&lt;/h3>
+&lt;p>&lt;strong>POST&lt;/strong> &lt;code>/rag&lt;/code>&lt;/p>
+&lt;p>执行完整的 RAG 工作流，包括关键词提取、图检索、向量搜索、重排序和答案生成。&lt;/p>
+&lt;h4 id="请求体">请求体&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;query&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;给我讲讲阿尔·帕西诺的电影&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;raw_answer&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">false&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;vector_only&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">false&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph_only&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph_vector_answer&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">false&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph_ratio&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.5&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;rerank_method&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;cohere&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;near_neighbor_first&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">false&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gremlin_tmpl_num&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_graph_items&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">30&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;topk_return_results&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">20&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;vector_dis_threshold&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.9&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;topk_per_keyword&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;custom_priority_info&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;answer_prompt&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;keywords_extract_prompt&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gremlin_prompt&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;client_config&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1:8080&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;admin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;pwd&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;admin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gs&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>参数说明：&lt;/strong>&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>字段&lt;/th>
+&lt;th>类型&lt;/th>
+&lt;th>必需&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>描述&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>query&lt;/code>&lt;/td>
+&lt;td>string&lt;/td>
+&lt;td>是&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>用户的自然语言问题&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>raw_answer&lt;/code>&lt;/td>
+&lt;td>boolean&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>返回 LLM 答案而不检索&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>vector_only&lt;/code>&lt;/td>
+&lt;td>boolean&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>仅使用向量搜索（无图）&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>graph_only&lt;/code>&lt;/td>
+&lt;td>boolean&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>仅使用图检索（无向量）&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>graph_vector_answer&lt;/code>&lt;/td>
+&lt;td>boolean&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>结合图和向量结果&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>graph_ratio&lt;/code>&lt;/td>
+&lt;td>float&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>0.5&lt;/td>
+&lt;td>图与向量结果的比例（0-1）&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>rerank_method&lt;/code>&lt;/td>
+&lt;td>string&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>&amp;quot;&amp;quot;&lt;/td>
+&lt;td>重排序器：&amp;ldquo;cohere&amp;rdquo;、&amp;ldquo;siliconflow&amp;rdquo;、&amp;quot;&amp;quot;&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>near_neighbor_first&lt;/code>&lt;/td>
+&lt;td>boolean&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>优先选择直接邻居&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gremlin_tmpl_num&lt;/code>&lt;/td>
+&lt;td>integer&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>5&lt;/td>
+&lt;td>尝试的 Gremlin 模板数量&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>max_graph_items&lt;/code>&lt;/td>
+&lt;td>integer&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>30&lt;/td>
+&lt;td>图检索的最大项数&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>topk_return_results&lt;/code>&lt;/td>
+&lt;td>integer&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>20&lt;/td>
+&lt;td>重排序后的 Top-K&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>vector_dis_threshold&lt;/code>&lt;/td>
+&lt;td>float&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>0.9&lt;/td>
+&lt;td>向量相似度阈值（0-1）&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>topk_per_keyword&lt;/code>&lt;/td>
+&lt;td>integer&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>1&lt;/td>
+&lt;td>每个关键词的 Top-K 向量&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>custom_priority_info&lt;/code>&lt;/td>
+&lt;td>string&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>&amp;quot;&amp;quot;&lt;/td>
+&lt;td>要优先考虑的自定义上下文&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>answer_prompt&lt;/code>&lt;/td>
+&lt;td>string&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>&amp;quot;&amp;quot;&lt;/td>
+&lt;td>自定义答案生成提示词&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>keywords_extract_prompt&lt;/code>&lt;/td>
+&lt;td>string&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>&amp;quot;&amp;quot;&lt;/td>
+&lt;td>自定义关键词提取提示词&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gremlin_prompt&lt;/code>&lt;/td>
+&lt;td>string&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>&amp;quot;&amp;quot;&lt;/td>
+&lt;td>自定义 Gremlin 生成提示词&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>client_config&lt;/code>&lt;/td>
+&lt;td>object&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>null&lt;/td>
+&lt;td>覆盖图连接设置&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="响应">响应&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;query&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;给我讲讲阿尔·帕西诺的电影&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph_only&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;answer&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;阿尔·帕西诺主演了《教父》（1972 年），由弗朗西斯·福特·科波拉执导...&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;context&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;《教父》是 1972 年的犯罪电影...&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;...&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph_paths&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;...&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;keywords&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;阿尔·帕西诺&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;电影&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="示例curl">示例（curl）&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl -X POST http://localhost:8001/rag &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> -H &lt;span style="color:#4e9a06">&amp;#34;Content-Type: application/json&amp;#34;&lt;/span> &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> -d &lt;span style="color:#4e9a06">&amp;#39;{
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> &amp;#34;query&amp;#34;: &amp;#34;给我讲讲阿尔·帕西诺&amp;#34;,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> &amp;#34;graph_only&amp;#34;: true,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> &amp;#34;max_graph_items&amp;#34;: 30
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> }&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-仅图检索">2. 仅图检索&lt;/h3>
+&lt;p>&lt;strong>POST&lt;/strong> &lt;code>/rag/graph&lt;/code>&lt;/p>
+&lt;p>检索图上下文而不生成答案。用于调试或自定义处理。&lt;/p>
+&lt;h4 id="请求体-1">请求体&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;query&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;阿尔·帕西诺的电影&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_graph_items&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">30&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;topk_return_results&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">20&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;vector_dis_threshold&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.9&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;topk_per_keyword&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gremlin_tmpl_num&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;rerank_method&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;cohere&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;near_neighbor_first&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">false&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;custom_priority_info&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gremlin_prompt&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;get_vertex_only&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">false&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;client_config&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1:8080&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;admin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;pwd&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;admin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gs&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>额外参数：&lt;/strong>&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>字段&lt;/th>
+&lt;th>类型&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>描述&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>get_vertex_only&lt;/code>&lt;/td>
+&lt;td>boolean&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>仅返回顶点 ID，不返回完整详情&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="响应-1">响应&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph_recall&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;query&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;阿尔·帕西诺的电影&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;keywords&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;阿尔·帕西诺&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;电影&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;match_vids&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:阿尔·帕西诺&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;2:教父&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph_result_flag&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gremlin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;g.V(&amp;#39;1:阿尔·帕西诺&amp;#39;).outE().inV().limit(30)&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph_result&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#204a87;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;1:阿尔·帕西诺&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;阿尔·帕西诺&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#204a87;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;2:教父&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;movie&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#204a87;font-weight:bold">&amp;#34;title&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;教父&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;vertex_degree_list&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">12&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="示例curl-1">示例（curl）&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl -X POST http://localhost:8001/rag/graph &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> -H &lt;span style="color:#4e9a06">&amp;#34;Content-Type: application/json&amp;#34;&lt;/span> &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> -d &lt;span style="color:#4e9a06">&amp;#39;{
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> &amp;#34;query&amp;#34;: &amp;#34;阿尔·帕西诺&amp;#34;,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> &amp;#34;max_graph_items&amp;#34;: 30,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> &amp;#34;get_vertex_only&amp;#34;: false
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> }&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="text2gremlin-端点">Text2Gremlin 端点&lt;/h2>
+&lt;h3 id="3-自然语言转-gremlin">3. 自然语言转 Gremlin&lt;/h3>
+&lt;p>&lt;strong>POST&lt;/strong> &lt;code>/text2gremlin&lt;/code>&lt;/p>
+&lt;p>将自然语言查询转换为可执行的 Gremlin 命令。&lt;/p>
+&lt;h4 id="请求体-2">请求体&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;query&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;查找所有由弗朗西斯·福特·科波拉执导的电影&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;example_num&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gremlin_prompt&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;output_types&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;GREMLIN&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;RESULT&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;client_config&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1:8080&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;admin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;pwd&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;admin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gs&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>参数说明：&lt;/strong>&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>字段&lt;/th>
+&lt;th>类型&lt;/th>
+&lt;th>必需&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>描述&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>query&lt;/code>&lt;/td>
+&lt;td>string&lt;/td>
+&lt;td>是&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>自然语言查询&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>example_num&lt;/code>&lt;/td>
+&lt;td>integer&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>5&lt;/td>
+&lt;td>使用的示例模板数量&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gremlin_prompt&lt;/code>&lt;/td>
+&lt;td>string&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>&amp;quot;&amp;quot;&lt;/td>
+&lt;td>Gremlin 生成的自定义提示词&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>output_types&lt;/code>&lt;/td>
+&lt;td>array&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>null&lt;/td>
+&lt;td>输出类型：[&amp;ldquo;GREMLIN&amp;rdquo;, &amp;ldquo;RESULT&amp;rdquo;, &amp;ldquo;CYPHER&amp;rdquo;]&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>client_config&lt;/code>&lt;/td>
+&lt;td>object&lt;/td>
+&lt;td>否&lt;/td>
+&lt;td>null&lt;/td>
+&lt;td>图连接覆盖&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;strong>输出类型：&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>GREMLIN&lt;/code>：生成的 Gremlin 查询&lt;/li>
+&lt;li>&lt;code>RESULT&lt;/code>：图的执行结果&lt;/li>
+&lt;li>&lt;code>CYPHER&lt;/code>：Cypher 查询（如果请求）&lt;/li>
+&lt;/ul>
+&lt;h4 id="响应-2">响应&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gremlin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;g.V().has(&amp;#39;person&amp;#39;,&amp;#39;name&amp;#39;,&amp;#39;弗朗西斯·福特·科波拉&amp;#39;).out(&amp;#39;directed&amp;#39;).hasLabel(&amp;#39;movie&amp;#39;).values(&amp;#39;title&amp;#39;)&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;result&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;教父&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;教父 2&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;现代启示录&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="示例curl-2">示例（curl）&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl -X POST http://localhost:8001/text2gremlin &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> -H &lt;span style="color:#4e9a06">&amp;#34;Content-Type: application/json&amp;#34;&lt;/span> &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> -d &lt;span style="color:#4e9a06">&amp;#39;{
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> &amp;#34;query&amp;#34;: &amp;#34;查找所有由弗朗西斯·福特·科波拉执导的电影&amp;#34;,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> &amp;#34;output_types&amp;#34;: [&amp;#34;GREMLIN&amp;#34;, &amp;#34;RESULT&amp;#34;]
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> }&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="配置端点">配置端点&lt;/h2>
+&lt;h3 id="4-更新图连接">4. 更新图连接&lt;/h3>
+&lt;p>&lt;strong>POST&lt;/strong> &lt;code>/config/graph&lt;/code>&lt;/p>
+&lt;p>动态更新 HugeGraph 连接设置。&lt;/p>
+&lt;h4 id="请求体-3">请求体&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1:8080&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;admin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;pwd&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;admin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gs&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="响应-3">响应&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;status_code&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">201&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;message&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;图配置更新成功&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="5-更新-llm-配置">5. 更新 LLM 配置&lt;/h3>
+&lt;p>&lt;strong>POST&lt;/strong> &lt;code>/config/llm&lt;/code>&lt;/p>
+&lt;p>运行时更新聊天/提取 LLM 设置。&lt;/p>
+&lt;h4 id="请求体openai">请求体（OpenAI）&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;llm_type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;openai&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;api_key&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;sk-your-api-key&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;api_base&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;https://api.openai.com/v1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;language_model&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;gpt-4o-mini&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_tokens&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">4096&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="请求体ollama">请求体（Ollama）&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;llm_type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;ollama/local&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;host&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;port&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">11434&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;language_model&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;llama3.1:8b&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="6-更新嵌入配置">6. 更新嵌入配置&lt;/h3>
+&lt;p>&lt;strong>POST&lt;/strong> &lt;code>/config/embedding&lt;/code>&lt;/p>
+&lt;p>更新嵌入模型设置。&lt;/p>
+&lt;h4 id="请求体-4">请求体&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;llm_type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;openai&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;api_key&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;sk-your-api-key&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;api_base&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;https://api.openai.com/v1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;language_model&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;text-embedding-3-small&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="7-更新-reranker-配置">7. 更新 Reranker 配置&lt;/h3>
+&lt;p>&lt;strong>POST&lt;/strong> &lt;code>/config/rerank&lt;/code>&lt;/p>
+&lt;p>配置重排序器设置。&lt;/p>
+&lt;h4 id="请求体cohere">请求体（Cohere）&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;reranker_type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;cohere&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;api_key&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;your-cohere-key&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;reranker_model&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;rerank-multilingual-v3.0&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;cohere_base_url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;https://api.cohere.com/v1/rerank&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="请求体siliconflow">请求体（SiliconFlow）&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;reranker_type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;siliconflow&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;api_key&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;your-siliconflow-key&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;reranker_model&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;BAAI/bge-reranker-v2-m3&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="错误响应">错误响应&lt;/h2>
+&lt;p>所有端点返回标准 HTTP 状态码：&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>代码&lt;/th>
+&lt;th>含义&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>200&lt;/td>
+&lt;td>成功&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>201&lt;/td>
+&lt;td>已创建（配置已更新）&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>400&lt;/td>
+&lt;td>错误请求（无效参数）&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>500&lt;/td>
+&lt;td>内部服务器错误&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>501&lt;/td>
+&lt;td>未实现&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>错误响应格式：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;detail&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;描述错误的消息&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="python-客户端示例">Python 客户端示例&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">requests&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">BASE_URL&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;http://localhost:8001&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 1. 配置图连接&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graph_config&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1:8080&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;user&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;admin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;pwd&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;admin&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">requests&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">post&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">f&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;&lt;/span>&lt;span style="color:#4e9a06">{&lt;/span>&lt;span style="color:#000">BASE_URL&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>&lt;span style="color:#4e9a06">/config/graph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">json&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">graph_config&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 2. 执行 RAG 查询&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">rag_request&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;query&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;给我讲讲阿尔·帕西诺&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;graph_only&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">True&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;max_graph_items&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">30&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">response&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">requests&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">post&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">f&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;&lt;/span>&lt;span style="color:#4e9a06">{&lt;/span>&lt;span style="color:#000">BASE_URL&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>&lt;span style="color:#4e9a06">/rag&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">json&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">rag_request&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">print&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">response&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">json&lt;/span>&lt;span style="color:#000;font-weight:bold">())&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 3. 从自然语言生成 Gremlin&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">text2gql_request&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;query&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;查找所有与阿尔·帕西诺合作的导演&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;output_types&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;GREMLIN&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;RESULT&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">response&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">requests&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">post&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">f&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;&lt;/span>&lt;span style="color:#4e9a06">{&lt;/span>&lt;span style="color:#000">BASE_URL&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>&lt;span style="color:#4e9a06">/text2gremlin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">json&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">text2gql_request&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">print&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">response&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">json&lt;/span>&lt;span style="color:#000;font-weight:bold">())&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="另见">另见&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="./config-reference.md">配置参考&lt;/a> - 完整的 .env 配置指南&lt;/li>
+&lt;li>&lt;a href="./hugegraph-llm.md">HugeGraph-LLM 概述&lt;/a> - 架构和功能&lt;/li>
+&lt;li>&lt;a href="./quick_start.md">快速入门指南&lt;/a> - Web UI 入门&lt;/li>
+&lt;/ul></description></item></channel></rss>

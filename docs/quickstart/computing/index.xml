@@ -90,7 +90,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>&lt;strong>Option 3: Build from Source&lt;/strong>&lt;/li>
 &lt;/ol>
-&lt;p>Build. You can refer &lt;a href="https://github.com/apache/incubator-hugegraph-computer/tree/master/vermeer">Vermeer Readme&lt;/a>.&lt;/p>
+&lt;p>Build. You can refer &lt;a href="https://github.com/apache/hugegraph-computer/tree/master/vermeer">Vermeer Readme&lt;/a>.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>go build
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Enter the directory and input &lt;code>./vermeer --env=master&lt;/code> or &lt;code>./vermeer --env=worker01&lt;/code>.&lt;/p>
 &lt;h2 id="2-task-creation-rest-api">2. Task Creation REST API&lt;/h2>
@@ -462,7 +462,7 @@
 &lt;/blockquote>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: HugeGraph-Computer Quick Start</title><link>/docs/quickstart/computing/hugegraph-computer/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/computing/hugegraph-computer/</guid><description>
 &lt;h2 id="1-hugegraph-computer-overview">1 HugeGraph-Computer Overview&lt;/h2>
-&lt;p>The &lt;a href="https://github.com/apache/incubator-hugegraph-computer">&lt;code>HugeGraph-Computer&lt;/code>&lt;/a> is a distributed graph processing system for HugeGraph (OLAP). It is an implementation of &lt;a href="https://kowshik.github.io/JPregel/pregel_paper.pdf">Pregel&lt;/a>. It runs on a Kubernetes(K8s) framework.(It focuses on supporting graph data volumes of hundreds of billions to trillions, using disk for sorting and acceleration, which is one of the biggest differences from Vermeer)&lt;/p>
+&lt;p>The &lt;a href="https://github.com/apache/hugegraph-computer">&lt;code>HugeGraph-Computer&lt;/code>&lt;/a> is a distributed graph processing system for HugeGraph (OLAP). It is an implementation of &lt;a href="https://kowshik.github.io/JPregel/pregel_paper.pdf">Pregel&lt;/a>. It runs on a Kubernetes(K8s) framework.(It focuses on supporting graph data volumes of hundreds of billions to trillions, using disk for sorting and acceleration, which is one of the biggest differences from Vermeer)&lt;/p>
 &lt;h3 id="features">Features&lt;/h3>
 &lt;ul>
 &lt;li>Support distributed MPP graph computing, and integrates with HugeGraph as graph input/output storage.&lt;/li>
@@ -498,23 +498,51 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Compile and generate tar package:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-computer
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn clean package -DskipTests
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="313-start-master-node">3.1.3 Start master node&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="313-configure-computerproperties">3.1.3 Configure computer.properties&lt;/h4>
+&lt;p>Edit &lt;code>conf/computer.properties&lt;/code> to configure the connection to HugeGraph-Server and etcd:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># Job configuration
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>job.id=local_pagerank_001
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>job.partitions_count=4
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># HugeGraph connection (✅ Correct configuration keys)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugegraph.url=http://localhost:8080
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugegraph.name=hugegraph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># If authentication is enabled on HugeGraph-Server
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugegraph.username=
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugegraph.password=
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># BSP coordination (✅ Correct key: bsp.etcd_endpoints)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bsp.etcd_endpoints=http://localhost:2379
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bsp.max_super_step=10
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Algorithm parameters (⚠️ Required)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>algorithm.params_class=org.apache.hugegraph.computer.algorithm.centrality.pagerank.PageRankParams
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>&lt;strong>Important Configuration Notes:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Use &lt;code>bsp.etcd_endpoints&lt;/code> (NOT &lt;code>bsp.etcd.url&lt;/code>) for etcd connection&lt;/li>
+&lt;li>&lt;code>algorithm.params_class&lt;/code> is required for all algorithms&lt;/li>
+&lt;li>For multiple etcd endpoints, use comma-separated list: &lt;code>http://host1:2379,http://host2:2379&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;h4 id="314-start-master-node">3.1.4 Start master node&lt;/h4>
 &lt;blockquote>
 &lt;p>You can use &lt;code>-c&lt;/code> parameter specify the configuration file, more computer config please see:&lt;a href="/docs/config/config-computer#computer-config-options">Computer Config Options&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-computer
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/start-computer.sh -d &lt;span style="color:#204a87">local&lt;/span> -r master
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="314-start-worker-node">3.1.4 Start worker node&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="315-start-worker-node">3.1.5 Start worker node&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/start-computer.sh -d &lt;span style="color:#204a87">local&lt;/span> -r worker
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="315-query-algorithm-results">3.1.5 Query algorithm results&lt;/h4>
-&lt;p>3.1.5.1 Enable &lt;code>OLAP&lt;/code> index query for server&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="316-query-algorithm-results">3.1.6 Query algorithm results&lt;/h4>
+&lt;p>3.1.6.1 Enable &lt;code>OLAP&lt;/code> index query for server&lt;/p>
 &lt;p>If the OLAP index is not enabled, it needs to be enabled. More reference: &lt;a href="/docs/clients/restful-api/graphs/#634-modify-graphs-read-mode-this-operation-requires-administrator-privileges">modify-graphs-read-mode&lt;/a>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-http" data-lang="http">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">PUT http://localhost:8080/graphs/hugegraph/graph_read_mode
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a40000">&amp;#34;ALL&amp;#34;
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>3.1.5.2 Query &lt;code>page_rank&lt;/code> property value:&lt;/p>
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>3.1.6.2 Query &lt;code>page_rank&lt;/code> property value:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl &lt;span style="color:#4e9a06">&amp;#34;http://localhost:8080/graphs/hugegraph/graph/vertices?page&amp;amp;limit=3&amp;#34;&lt;/span> &lt;span style="color:#000;font-weight:bold">|&lt;/span> gunzip
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="32-run-pagerank-algorithm-in-kubernetes">3.2 Run PageRank algorithm in Kubernetes&lt;/h3>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h3 id="32-run-pagerank-algorithm-in-kubernetes">3.2 Run PageRank algorithm in Kubernetes&lt;/h3>
 &lt;blockquote>
 &lt;p>To run an algorithm with HugeGraph-Computer, you need to deploy HugeGraph-Server first&lt;/p>
 &lt;/blockquote>
@@ -542,6 +570,7 @@
 &lt;p>More computer crd please see: &lt;a href="/docs/config/config-computer#hugegraph-computer-crd">Computer CRD&lt;/a>&lt;/p>
 &lt;p>More computer config please see: &lt;a href="/docs/config/config-computer#computer-config-options">Computer Config Options&lt;/a>&lt;/p>
 &lt;/blockquote>
+&lt;p>&lt;strong>Basic Example:&lt;/strong>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">cat &amp;lt;&amp;lt;EOF | kubectl apply --filename -&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">apiVersion&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph.apache.org/v1&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">kind&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">HugeGraphComputerJob&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -550,9 +579,9 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic">&amp;amp;jobName&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">pagerank-sample&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">spec&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">jobId&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic">*jobName&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">algorithmName&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">page_rank&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph-computer:latest&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># algorithm image url&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">jarFile&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">/hugegraph/hugegraph-computer/algorithm/builtin-algorithm.jar&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># algorithm jar path&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">algorithmName: page_rank # ✅ Correct&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">use underscore format (matches algorithm implementation)&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph-computer:latest&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">jarFile&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">/hugegraph/hugegraph-computer/algorithm/builtin-algorithm.jar&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">pullPolicy&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">Always&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">workerCpu&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;4&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">workerMemory&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;4Gi&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -560,10 +589,106 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">computerConf&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">job.partitions_count&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;20&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">algorithm.params_class&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.computer.algorithm.centrality.pagerank.PageRankParams&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hugegraph.url&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">http://${hugegraph-server-host}:${hugegraph-server-port}&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># hugegraph server url&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hugegraph.name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># hugegraph graph name&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hugegraph.url&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">http://${hugegraph-server-host}:${hugegraph-server-port}&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hugegraph.name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#000">EOF&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="326-show-job">3.2.6 Show job&lt;/h4>
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Complete Example with Advanced Features:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">cat &amp;lt;&amp;lt;EOF | kubectl apply --filename -&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">apiVersion&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph.apache.org/v1&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">kind&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">HugeGraphComputerJob&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">metadata&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">namespace&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph-computer-operator-system&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic">&amp;amp;jobName&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">pagerank-advanced&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">spec&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">jobId&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic">*jobName&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">algorithmName: page_rank # ✅ Correct&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">underscore format&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">image&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph/hugegraph-computer:latest&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">jarFile&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">/hugegraph/hugegraph-computer/algorithm/builtin-algorithm.jar&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">pullPolicy&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">Always&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Resource limits&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">masterCpu&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;2&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">masterMemory&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;2Gi&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">workerCpu&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;4&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">workerMemory&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;4Gi&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">workerInstances&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># JVM options&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">jvmOptions&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;-Xmx3g -Xms3g -XX:+UseG1GC&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Environment variables (optional)&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">envVars&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">REMOTE_JAR_URI&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">value&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;http://example.com/custom-algorithm.jar&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Download custom algorithm JAR&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">LOG_LEVEL&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">value&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;INFO&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Computer configuration&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">computerConf&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Job settings&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">job.partitions_count&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;20&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Algorithm parameters (⚠️ Required)&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">algorithm.params_class&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.computer.algorithm.centrality.pagerank.PageRankParams&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">page_rank.alpha&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;0.85&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># PageRank damping factor&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># HugeGraph connection&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hugegraph.url&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">http://hugegraph-server:8080&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hugegraph.name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hugegraph.username&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Fill if authentication is enabled&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">hugegraph.password&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># BSP configuration (⚠️ System-managed in K8s, do not override)&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># bsp.etcd_endpoints is automatically set by operator&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">bsp.max_super_step&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;20&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">bsp.log_interval&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;30000&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Snapshot configuration (optional)&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">snapshot.write&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;true&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Enable snapshot writing&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">snapshot.load&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;false&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Do not load from snapshot this time&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">snapshot.name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;pagerank-snapshot-v1&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">snapshot.minio_endpoint&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;http://minio:9000&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">snapshot.minio_access_key&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;minioadmin&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">snapshot.minio_secret_key&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;minioadmin&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">snapshot.minio_bucket_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;hugegraph-snapshots&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Output configuration&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">output.result_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;page_rank&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">output.batch_size&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;500&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">output.with_adjacent_edges&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;false&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#000">EOF&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Configuration Notes:&lt;/strong>&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Configuration Key&lt;/th>
+&lt;th>⚠️ Important Notes&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>algorithmName&lt;/code>&lt;/td>
+&lt;td>Must use &lt;code>page_rank&lt;/code> (underscore format), matches the algorithm&amp;rsquo;s &lt;code>name()&lt;/code> method return value&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>bsp.etcd_endpoints&lt;/code>&lt;/td>
+&lt;td>&lt;strong>System-managed in K8s&lt;/strong> - automatically set by operator, do not override in &lt;code>computerConf&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>algorithm.params_class&lt;/code>&lt;/td>
+&lt;td>&lt;strong>Required&lt;/strong> - must specify for all algorithms&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>REMOTE_JAR_URI&lt;/code>&lt;/td>
+&lt;td>Optional environment variable to download custom algorithm JAR from remote URL&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>snapshot.*&lt;/code>&lt;/td>
+&lt;td>Optional - enable snapshots for checkpoint recovery or repeated computations&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="326-show-job">3.2.6 Show job&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get hcjob/pagerank-sample -n hugegraph-computer-operator-system
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>NAME JOBID JOBSTATUS
@@ -585,6 +710,167 @@
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get event --field-selector &lt;span style="color:#000">reason&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>ComputerJobSucceed --field-selector involvedObject.name&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>pagerank-sample -n hugegraph-computer-operator-system
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="329-query-algorithm-results">3.2.9 Query algorithm results&lt;/h4>
 &lt;p>If the output to &lt;code>Hugegraph-Server&lt;/code> is consistent with Locally, if output to &lt;code>HDFS&lt;/code>, please check the result file in the directory of &lt;code>/hugegraph-computer/results/{jobId}&lt;/code> directory.&lt;/p>
+&lt;hr>
+&lt;h2 id="33-local-mode-vs-kubernetes-mode">3.3 Local Mode vs Kubernetes Mode&lt;/h2>
+&lt;p>Understanding the differences helps you choose the right deployment mode for your use case.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Feature&lt;/th>
+&lt;th>Local Mode&lt;/th>
+&lt;th>Kubernetes Mode&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>Configuration&lt;/strong>&lt;/td>
+&lt;td>&lt;code>conf/computer.properties&lt;/code> file&lt;/td>
+&lt;td>CRD YAML &lt;code>computerConf&lt;/code> field&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Etcd Management&lt;/strong>&lt;/td>
+&lt;td>Manual deployment of external etcd&lt;/td>
+&lt;td>Operator auto-deploys etcd StatefulSet&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Worker Scaling&lt;/strong>&lt;/td>
+&lt;td>Manual start of multiple processes&lt;/td>
+&lt;td>CRD &lt;code>workerInstances&lt;/code> field auto-scales&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Resource Isolation&lt;/strong>&lt;/td>
+&lt;td>Shared host resources&lt;/td>
+&lt;td>Pod-level CPU/Memory limits&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Remote JAR&lt;/strong>&lt;/td>
+&lt;td>&lt;code>JAR_FILE_PATH&lt;/code> environment variable&lt;/td>
+&lt;td>CRD &lt;code>remoteJarUri&lt;/code> or &lt;code>envVars.REMOTE_JAR_URI&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Log Viewing&lt;/strong>&lt;/td>
+&lt;td>Local &lt;code>logs/&lt;/code> directory&lt;/td>
+&lt;td>&lt;code>kubectl logs&lt;/code> command&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Fault Recovery&lt;/strong>&lt;/td>
+&lt;td>Manual process restart&lt;/td>
+&lt;td>K8s auto-restarts failed pods&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Use Cases&lt;/strong>&lt;/td>
+&lt;td>Development, testing, small datasets&lt;/td>
+&lt;td>Production, large-scale data&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;strong>Local Mode Prerequisites:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Java 11+&lt;/li>
+&lt;li>HugeGraph-Server running on localhost:8080&lt;/li>
+&lt;li>Etcd running on localhost:2379&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>K8s Mode Prerequisites:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Kubernetes cluster (version 1.16+)&lt;/li>
+&lt;li>HugeGraph-Server accessible from cluster&lt;/li>
+&lt;li>HugeGraph-Computer Operator installed&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Configuration Key Differences:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># Local Mode (computer.properties)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bsp.etcd_endpoints=http://localhost:2379 # ✅ User-configured
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>job.workers_count=4 # User-configured
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># K8s Mode (CRD)&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">spec&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">workerInstances&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Overrides job.workers_count&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">computerConf&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># bsp.etcd_endpoints is auto-set by operator, do NOT configure&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">job.partitions_count&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;20&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="34-common-troubleshooting">3.4 Common Troubleshooting&lt;/h2>
+&lt;h3 id="341-configuration-errors">3.4.1 Configuration Errors&lt;/h3>
+&lt;p>&lt;strong>Error: &amp;ldquo;Failed to connect to etcd&amp;rdquo;&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>Symptoms:&lt;/strong> Master or Worker cannot connect to etcd&lt;/p>
+&lt;p>&lt;strong>Local Mode Solutions:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Check configuration key name (common mistake)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>grep &lt;span style="color:#4e9a06">&amp;#34;bsp.etcd_endpoints&amp;#34;&lt;/span> conf/computer.properties
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Should output: bsp.etcd_endpoints=http://localhost:2379&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># ❌ WRONG: bsp.etcd.url (old/incorrect key)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># ✅ CORRECT: bsp.etcd_endpoints&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Test etcd connectivity&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl http://localhost:2379/version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>K8s Mode Solutions:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Check Operator etcd service&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl get svc hugegraph-computer-operator-etcd -n hugegraph-computer-operator-system
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Verify etcd pod is running&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl get pods -n hugegraph-computer-operator-system -l &lt;span style="color:#000">app&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>hugegraph-computer-operator-etcd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Should show: Running status&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Test connectivity from worker pod&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl &lt;span style="color:#204a87">exec&lt;/span> -it pagerank-sample-worker-0 -n hugegraph-computer-operator-system -- &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> curl http://hugegraph-computer-operator-etcd:2379/version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Error: &amp;ldquo;Algorithm class not found&amp;rdquo;&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>Symptoms:&lt;/strong> Cannot find algorithm implementation class&lt;/p>
+&lt;p>&lt;strong>Cause:&lt;/strong> Incorrect &lt;code>algorithmName&lt;/code> format&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># ❌ WRONG formats:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">algorithmName&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">pageRank &lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Camel case&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">algorithmName&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">PageRank &lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Title case&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic"># ✅ CORRECT format (matches PageRank.name() return value):&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">algorithmName&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">page_rank &lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Underscore lowercase&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Verification:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Check algorithm implementation in source code&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># File: computer-algorithm/.../PageRank.java&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Method: public String name() { return &amp;#34;page_rank&amp;#34;; }&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Error: &amp;ldquo;Required option &amp;lsquo;algorithm.params_class&amp;rsquo; is missing&amp;rdquo;&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>Solution:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">computerConf&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">algorithm.params_class&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">org.apache.hugegraph.computer.algorithm.centrality.pagerank.PageRankParams &lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># ⚠️ Required&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="342-k8s-deployment-issues">3.4.2 K8s Deployment Issues&lt;/h3>
+&lt;p>&lt;strong>Issue: REMOTE_JAR_URI not working&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>Solution:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">spec&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">envVars&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">REMOTE_JAR_URI&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">value&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;http://example.com/my-algorithm.jar&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Issue: Etcd connection timeout in K8s&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>Check Operator etcd:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Verify etcd is running&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl get pods -n hugegraph-computer-operator-system -l &lt;span style="color:#000">app&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>hugegraph-computer-operator-etcd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Should show: Running&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># From worker pod, test etcd connectivity&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl &lt;span style="color:#204a87">exec&lt;/span> -it pagerank-sample-worker-0 -n hugegraph-computer-operator-system -- &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> curl http://hugegraph-computer-operator-etcd:2379/version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Issue: Snapshot/MinIO configuration problems&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>Verify MinIO service:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Test MinIO reachability&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl run -it --rm debug --image&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>alpine --restart&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>Never -- sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wget -O- http://minio:9000/minio/health/live
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Test bucket permissions (requires MinIO client)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mc config host add myminio http://minio:9000 minioadmin minioadmin
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mc ls myminio/hugegraph-snapshots
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="343-job-status-checks">3.4.3 Job Status Checks&lt;/h3>
+&lt;p>&lt;strong>Check job overall status:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get hcjob pagerank-sample -n hugegraph-computer-operator-system
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Output example:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># NAME JOBSTATUS SUPERSTEP MAXSUPERSTEP SUPERSTEPSTAT&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># pagerank-sample Running 5 20 COMPUTING&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Check detailed events:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl describe hcjob pagerank-sample -n hugegraph-computer-operator-system
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Check failure reasons:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get events --field-selector &lt;span style="color:#000">reason&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>ComputerJobFailed &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> --field-selector involvedObject.name&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>pagerank-sample &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> -n hugegraph-computer-operator-system
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Real-time master logs:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl logs -f -l &lt;span style="color:#000">component&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>pagerank-sample-master -n hugegraph-computer-operator-system
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>All worker logs:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl logs -l &lt;span style="color:#000">component&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>pagerank-sample-worker -n hugegraph-computer-operator-system --all-containers&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
 &lt;h2 id="4-built-in-algorithms-document">4. Built-In algorithms document&lt;/h2>
 &lt;h3 id="41-supported-algorithms-list">4.1 Supported algorithms list:&lt;/h3>
 &lt;h6 id="centrality-algorithm">Centrality Algorithm:&lt;/h6>
@@ -615,4 +901,1352 @@
 &lt;h2 id="6-note">6 Note&lt;/h2>
 &lt;ul>
 &lt;li>If some classes under computer-k8s cannot be found, you need to execute &lt;code>mvn compile&lt;/code> in advance to generate corresponding classes.&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;/ul></description></item><item><title>Docs: HugeGraph-Computer Configuration Reference</title><link>/docs/quickstart/computing/hugegraph-computer-config/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/computing/hugegraph-computer-config/</guid><description>
+&lt;h3 id="computer-config-options">Computer Config Options&lt;/h3>
+&lt;blockquote>
+&lt;p>&lt;strong>Default Value Notes:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Configuration items listed below show the &lt;strong>code default values&lt;/strong> (defined in &lt;code>ComputerOptions.java&lt;/code>)&lt;/li>
+&lt;li>When the &lt;strong>packaged configuration file&lt;/strong> (&lt;code>conf/computer.properties&lt;/code> in the distribution) specifies a different value, it&amp;rsquo;s noted as: &lt;code>value (packaged: value)&lt;/code>&lt;/li>
+&lt;li>Example: &lt;code>300000 (packaged: 100000)&lt;/code> means the code default is 300000, but the distributed package defaults to 100000&lt;/li>
+&lt;li>For production deployments, the packaged defaults take precedence unless you explicitly override them&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;hr>
+&lt;h3 id="1-basic-configuration">1. Basic Configuration&lt;/h3>
+&lt;p>Core job settings for HugeGraph-Computer.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>hugegraph.url&lt;/td>
+&lt;td>http://127.0.0.1:8080&lt;/td>
+&lt;td>The HugeGraph server URL to load data and write results back.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>hugegraph.name&lt;/td>
+&lt;td>hugegraph&lt;/td>
+&lt;td>The graph name to load data and write results back.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>hugegraph.username&lt;/td>
+&lt;td>&amp;quot;&amp;quot; (empty)&lt;/td>
+&lt;td>The username for HugeGraph authentication (leave empty if authentication is disabled).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>hugegraph.password&lt;/td>
+&lt;td>&amp;quot;&amp;quot; (empty)&lt;/td>
+&lt;td>The password for HugeGraph authentication (leave empty if authentication is disabled).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>job.id&lt;/td>
+&lt;td>local_0001 (packaged: local_001)&lt;/td>
+&lt;td>The job identifier on YARN cluster or K8s cluster.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>job.namespace&lt;/td>
+&lt;td>&amp;quot;&amp;quot; (empty)&lt;/td>
+&lt;td>The job namespace that can separate different data sources. 🔒 &lt;strong>Managed by system - do not modify manually&lt;/strong>.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>job.workers_count&lt;/td>
+&lt;td>1&lt;/td>
+&lt;td>The number of workers for computing one graph algorithm job. 🔒 &lt;strong>Managed by system - do not modify manually in K8s&lt;/strong>.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>job.partitions_count&lt;/td>
+&lt;td>1&lt;/td>
+&lt;td>The number of partitions for computing one graph algorithm job.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>job.partitions_thread_nums&lt;/td>
+&lt;td>4&lt;/td>
+&lt;td>The number of threads for partition parallel compute.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="2-algorithm-configuration">2. Algorithm Configuration&lt;/h3>
+&lt;p>Algorithm-specific configuration for computation logic.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>algorithm.params_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.config.Null&lt;/td>
+&lt;td>⚠️ &lt;strong>REQUIRED&lt;/strong> The class used to transfer algorithm parameters before the algorithm is run.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>algorithm.result_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.config.Null&lt;/td>
+&lt;td>The class of vertex&amp;rsquo;s value, used to store the computation result for the vertex.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>algorithm.message_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.config.Null&lt;/td>
+&lt;td>The class of message passed when computing a vertex.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="3-input-configuration">3. Input Configuration&lt;/h3>
+&lt;p>Configuration for loading input data from HugeGraph or other sources.&lt;/p>
+&lt;h4 id="31-input-source">3.1 Input Source&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>input.source_type&lt;/td>
+&lt;td>hugegraph-server&lt;/td>
+&lt;td>The source type to load input data, allowed values: [&amp;lsquo;hugegraph-server&amp;rsquo;, &amp;lsquo;hugegraph-loader&amp;rsquo;]. The &amp;lsquo;hugegraph-loader&amp;rsquo; means use hugegraph-loader to load data from HDFS or file. If using &amp;lsquo;hugegraph-loader&amp;rsquo;, please configure &amp;lsquo;input.loader_struct_path&amp;rsquo; and &amp;lsquo;input.loader_schema_path&amp;rsquo;.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.loader_struct_path&lt;/td>
+&lt;td>&amp;quot;&amp;quot; (empty)&lt;/td>
+&lt;td>The struct path of loader input, only takes effect when input.source_type=loader is enabled.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.loader_schema_path&lt;/td>
+&lt;td>&amp;quot;&amp;quot; (empty)&lt;/td>
+&lt;td>The schema path of loader input, only takes effect when input.source_type=loader is enabled.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="32-input-splits">3.2 Input Splits&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>input.split_size&lt;/td>
+&lt;td>1048576 (1 MB)&lt;/td>
+&lt;td>The input split size in bytes.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.split_max_splits&lt;/td>
+&lt;td>10000000&lt;/td>
+&lt;td>The maximum number of input splits.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.split_page_size&lt;/td>
+&lt;td>500&lt;/td>
+&lt;td>The page size for streamed load input split data.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.split_fetch_timeout&lt;/td>
+&lt;td>300&lt;/td>
+&lt;td>The timeout in seconds to fetch input splits.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="33-input-processing">3.3 Input Processing&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>input.filter_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.input.filter.DefaultInputFilter&lt;/td>
+&lt;td>The class to create input-filter object. Input-filter is used to filter vertex edges according to user needs.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.edge_direction&lt;/td>
+&lt;td>OUT&lt;/td>
+&lt;td>The direction of edges to load, allowed values: [OUT, IN, BOTH]. When the value is BOTH, edges in both OUT and IN directions will be loaded.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.edge_freq&lt;/td>
+&lt;td>MULTIPLE&lt;/td>
+&lt;td>The frequency of edges that can exist between a pair of vertices, allowed values: [SINGLE, SINGLE_PER_LABEL, MULTIPLE]. SINGLE means only one edge can exist between a pair of vertices (identified by sourceId + targetId); SINGLE_PER_LABEL means each edge label can have one edge between a pair of vertices (identified by sourceId + edgeLabel + targetId); MULTIPLE means many edges can exist between a pair of vertices (identified by sourceId + edgeLabel + sortValues + targetId).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.max_edges_in_one_vertex&lt;/td>
+&lt;td>200&lt;/td>
+&lt;td>The maximum number of adjacent edges allowed to be attached to a vertex. The adjacent edges will be stored and transferred together as a batch unit.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="34-input-performance">3.4 Input Performance&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>input.send_thread_nums&lt;/td>
+&lt;td>4&lt;/td>
+&lt;td>The number of threads for parallel sending of vertices or edges.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="4-snapshot--storage-configuration">4. Snapshot &amp;amp; Storage Configuration&lt;/h3>
+&lt;p>HugeGraph-Computer supports snapshot functionality to save vertex/edge partitions to local storage or MinIO object storage, enabling checkpoint recovery or accelerating repeated computations.&lt;/p>
+&lt;h4 id="41-basic-snapshot-configuration">4.1 Basic Snapshot Configuration&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>snapshot.write&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>Whether to write snapshots of input vertex/edge partitions.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>snapshot.load&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>Whether to load from snapshots of vertex/edge partitions.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>snapshot.name&lt;/td>
+&lt;td>&amp;quot;&amp;quot; (empty)&lt;/td>
+&lt;td>User-defined snapshot name to distinguish different snapshots.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="42-minio-integration-optional">4.2 MinIO Integration (Optional)&lt;/h4>
+&lt;p>MinIO can be used as a distributed object storage backend for snapshots in K8s deployments.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>snapshot.minio_endpoint&lt;/td>
+&lt;td>&amp;quot;&amp;quot; (empty)&lt;/td>
+&lt;td>MinIO service endpoint (e.g., &lt;code>http://minio:9000&lt;/code>). Required when using MinIO.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>snapshot.minio_access_key&lt;/td>
+&lt;td>minioadmin&lt;/td>
+&lt;td>MinIO access key for authentication.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>snapshot.minio_secret_key&lt;/td>
+&lt;td>minioadmin&lt;/td>
+&lt;td>MinIO secret key for authentication.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>snapshot.minio_bucket_name&lt;/td>
+&lt;td>&amp;quot;&amp;quot; (empty)&lt;/td>
+&lt;td>MinIO bucket name for storing snapshot data.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;strong>Usage Scenarios:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Checkpoint Recovery&lt;/strong>: Resume from snapshots after job failures, avoiding data reloading&lt;/li>
+&lt;li>&lt;strong>Repeated Computations&lt;/strong>: Load data from snapshots when running the same algorithm multiple times&lt;/li>
+&lt;li>&lt;strong>A/B Testing&lt;/strong>: Save multiple snapshot versions of the same dataset to test different algorithm parameters&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Example: Local Snapshot&lt;/strong> (in &lt;code>computer.properties&lt;/code>):&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>snapshot.write=true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>snapshot.name=pagerank-snapshot-20260201
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Example: MinIO Snapshot&lt;/strong> (in K8s CRD &lt;code>computerConf&lt;/code>):&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">computerConf&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">snapshot.write&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;true&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">snapshot.name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;pagerank-snapshot-v1&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">snapshot.minio_endpoint&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;http://minio:9000&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">snapshot.minio_access_key&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;my-access-key&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">snapshot.minio_secret_key&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;my-secret-key&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">snapshot.minio_bucket_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;hugegraph-snapshots&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h3 id="5-worker--master-configuration">5. Worker &amp;amp; Master Configuration&lt;/h3>
+&lt;p>Configuration for worker and master computation logic.&lt;/p>
+&lt;h4 id="51-master-configuration">5.1 Master Configuration&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>master.computation_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.master.DefaultMasterComputation&lt;/td>
+&lt;td>Master-computation is computation that can determine whether to continue to the next superstep. It runs at the end of each superstep on the master.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="52-worker-computation">5.2 Worker Computation&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>worker.computation_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.config.Null&lt;/td>
+&lt;td>The class to create worker-computation object. Worker-computation is used to compute each vertex in each superstep.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>worker.combiner_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.config.Null&lt;/td>
+&lt;td>Combiner can combine messages into one value for a vertex. For example, PageRank algorithm can combine messages of a vertex to a sum value.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>worker.partitioner&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.graph.partition.HashPartitioner&lt;/td>
+&lt;td>The partitioner that decides which partition a vertex should be in, and which worker a partition should be in.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="53-worker-combiners">5.3 Worker Combiners&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>worker.vertex_properties_combiner_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.combiner.OverwritePropertiesCombiner&lt;/td>
+&lt;td>The combiner can combine several properties of the same vertex into one properties at input step.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>worker.edge_properties_combiner_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.combiner.OverwritePropertiesCombiner&lt;/td>
+&lt;td>The combiner can combine several properties of the same edge into one properties at input step.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="54-worker-buffers">5.4 Worker Buffers&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>worker.received_buffers_bytes_limit&lt;/td>
+&lt;td>104857600 (100 MB)&lt;/td>
+&lt;td>The limit bytes of buffers of received data. The total size of all buffers can&amp;rsquo;t exceed this limit. If received buffers reach this limit, they will be merged into a file (spill to disk).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>worker.write_buffer_capacity&lt;/td>
+&lt;td>52428800 (50 MB)&lt;/td>
+&lt;td>The initial size of write buffer that used to store vertex or message.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>worker.write_buffer_threshold&lt;/td>
+&lt;td>52428800 (50 MB)&lt;/td>
+&lt;td>The threshold of write buffer. Exceeding it will trigger sorting. The write buffer is used to store vertex or message.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="55-worker-data--timeouts">5.5 Worker Data &amp;amp; Timeouts&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>worker.data_dirs&lt;/td>
+&lt;td>[jobs]&lt;/td>
+&lt;td>The directories separated by &amp;lsquo;,&amp;rsquo; that received vertices and messages can persist into.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>worker.wait_sort_timeout&lt;/td>
+&lt;td>600000 (10 minutes)&lt;/td>
+&lt;td>The max timeout (in ms) for message-handler to wait for sort-thread to sort one batch of buffers.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>worker.wait_finish_messages_timeout&lt;/td>
+&lt;td>86400000 (24 hours)&lt;/td>
+&lt;td>The max timeout (in ms) for message-handler to wait for finish-message of all workers.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="6-io--output-configuration">6. I/O &amp;amp; Output Configuration&lt;/h3>
+&lt;p>Configuration for output computation results.&lt;/p>
+&lt;h4 id="61-output-class--result">6.1 Output Class &amp;amp; Result&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>output.output_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.output.LogOutput&lt;/td>
+&lt;td>The class to output the computation result of each vertex. Called after iteration computation.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.result_name&lt;/td>
+&lt;td>value&lt;/td>
+&lt;td>The value is assigned dynamically by #name() of instance created by WORKER_COMPUTATION_CLASS.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.result_write_type&lt;/td>
+&lt;td>OLAP_COMMON&lt;/td>
+&lt;td>The result write-type to output to HugeGraph, allowed values: [OLAP_COMMON, OLAP_SECONDARY, OLAP_RANGE].&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="62-output-behavior">6.2 Output Behavior&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>output.with_adjacent_edges&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>Whether to output the adjacent edges of the vertex.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.with_vertex_properties&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>Whether to output the properties of the vertex.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.with_edge_properties&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>Whether to output the properties of the edge.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="63-batch-output">6.3 Batch Output&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>output.batch_size&lt;/td>
+&lt;td>500&lt;/td>
+&lt;td>The batch size of output.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.batch_threads&lt;/td>
+&lt;td>1&lt;/td>
+&lt;td>The number of threads used for batch output.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.single_threads&lt;/td>
+&lt;td>1&lt;/td>
+&lt;td>The number of threads used for single output.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="64-hdfs-output">6.4 HDFS Output&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>output.hdfs_url&lt;/td>
+&lt;td>hdfs://127.0.0.1:9000&lt;/td>
+&lt;td>The HDFS URL for output.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_user&lt;/td>
+&lt;td>hadoop&lt;/td>
+&lt;td>The HDFS user for output.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_path_prefix&lt;/td>
+&lt;td>/hugegraph-computer/results&lt;/td>
+&lt;td>The directory of HDFS output results.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_delimiter&lt;/td>
+&lt;td>, (comma)&lt;/td>
+&lt;td>The delimiter of HDFS output.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_merge_partitions&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>Whether to merge output files of multiple partitions.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_replication&lt;/td>
+&lt;td>3&lt;/td>
+&lt;td>The replication number of HDFS.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_core_site_path&lt;/td>
+&lt;td>&amp;quot;&amp;quot; (empty)&lt;/td>
+&lt;td>The HDFS core site path.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_site_path&lt;/td>
+&lt;td>&amp;quot;&amp;quot; (empty)&lt;/td>
+&lt;td>The HDFS site path.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_kerberos_enable&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>Whether Kerberos authentication is enabled for HDFS.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_kerberos_principal&lt;/td>
+&lt;td>&amp;quot;&amp;quot; (empty)&lt;/td>
+&lt;td>The HDFS principal for Kerberos authentication.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_kerberos_keytab&lt;/td>
+&lt;td>&amp;quot;&amp;quot; (empty)&lt;/td>
+&lt;td>The HDFS keytab file for Kerberos authentication.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_krb5_conf&lt;/td>
+&lt;td>/etc/krb5.conf&lt;/td>
+&lt;td>Kerberos configuration file path.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="65-retry--timeout">6.5 Retry &amp;amp; Timeout&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>output.retry_times&lt;/td>
+&lt;td>3&lt;/td>
+&lt;td>The retry times when output fails.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.retry_interval&lt;/td>
+&lt;td>10&lt;/td>
+&lt;td>The retry interval (in seconds) when output fails.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.thread_pool_shutdown_timeout&lt;/td>
+&lt;td>60&lt;/td>
+&lt;td>The timeout (in seconds) of output thread pool shutdown.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="7-network--transport-configuration">7. Network &amp;amp; Transport Configuration&lt;/h3>
+&lt;p>Configuration for network communication between workers and master.&lt;/p>
+&lt;h4 id="71-server-configuration">7.1 Server Configuration&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>transport.server_host&lt;/td>
+&lt;td>127.0.0.1&lt;/td>
+&lt;td>🔒 &lt;strong>Managed by system&lt;/strong> The server hostname or IP to listen on to transfer data. Do not modify manually.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.server_port&lt;/td>
+&lt;td>0&lt;/td>
+&lt;td>🔒 &lt;strong>Managed by system&lt;/strong> The server port to listen on to transfer data. The system will assign a random port if set to 0. Do not modify manually.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.server_threads&lt;/td>
+&lt;td>4&lt;/td>
+&lt;td>The number of transport threads for server.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="72-client-configuration">7.2 Client Configuration&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>transport.client_threads&lt;/td>
+&lt;td>4&lt;/td>
+&lt;td>The number of transport threads for client.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.client_connect_timeout&lt;/td>
+&lt;td>3000&lt;/td>
+&lt;td>The timeout (in ms) of client connect to server.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="73-protocol-configuration">7.3 Protocol Configuration&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>transport.provider_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.network.netty.NettyTransportProvider&lt;/td>
+&lt;td>The transport provider, currently only supports Netty.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.io_mode&lt;/td>
+&lt;td>AUTO&lt;/td>
+&lt;td>The network IO mode, allowed values: [NIO, EPOLL, AUTO]. AUTO means selecting the appropriate mode automatically.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.tcp_keep_alive&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>Whether to enable TCP keep-alive.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.transport_epoll_lt&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>Whether to enable EPOLL level-trigger (only effective when io_mode=EPOLL).&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="74-buffer-configuration">7.4 Buffer Configuration&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>transport.send_buffer_size&lt;/td>
+&lt;td>0&lt;/td>
+&lt;td>The size of socket send-buffer in bytes. 0 means using system default value.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.receive_buffer_size&lt;/td>
+&lt;td>0&lt;/td>
+&lt;td>The size of socket receive-buffer in bytes. 0 means using system default value.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.write_buffer_high_mark&lt;/td>
+&lt;td>67108864 (64 MB)&lt;/td>
+&lt;td>The high water mark for write buffer in bytes. It will trigger sending unavailable if the number of queued bytes &amp;gt; write_buffer_high_mark.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.write_buffer_low_mark&lt;/td>
+&lt;td>33554432 (32 MB)&lt;/td>
+&lt;td>The low water mark for write buffer in bytes. It will trigger sending available if the number of queued bytes &amp;lt; write_buffer_low_mark.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="75-flow-control">7.5 Flow Control&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>transport.max_pending_requests&lt;/td>
+&lt;td>8&lt;/td>
+&lt;td>The max number of client unreceived ACKs. It will trigger sending unavailable if the number of unreceived ACKs &amp;gt;= max_pending_requests.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.min_pending_requests&lt;/td>
+&lt;td>6&lt;/td>
+&lt;td>The minimum number of client unreceived ACKs. It will trigger sending available if the number of unreceived ACKs &amp;lt; min_pending_requests.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.min_ack_interval&lt;/td>
+&lt;td>200&lt;/td>
+&lt;td>The minimum interval (in ms) of server reply ACK.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="76-timeouts">7.6 Timeouts&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>transport.close_timeout&lt;/td>
+&lt;td>10000&lt;/td>
+&lt;td>The timeout (in ms) of close server or close client.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.sync_request_timeout&lt;/td>
+&lt;td>10000&lt;/td>
+&lt;td>The timeout (in ms) to wait for response after sending sync-request.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.finish_session_timeout&lt;/td>
+&lt;td>0&lt;/td>
+&lt;td>The timeout (in ms) to finish session. 0 means using (transport.sync_request_timeout × transport.max_pending_requests).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.write_socket_timeout&lt;/td>
+&lt;td>3000&lt;/td>
+&lt;td>The timeout (in ms) to write data to socket buffer.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.server_idle_timeout&lt;/td>
+&lt;td>360000 (6 minutes)&lt;/td>
+&lt;td>The max timeout (in ms) of server idle.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="77-heartbeat">7.7 Heartbeat&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>transport.heartbeat_interval&lt;/td>
+&lt;td>20000 (20 seconds)&lt;/td>
+&lt;td>The minimum interval (in ms) between heartbeats on client side.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.max_timeout_heartbeat_count&lt;/td>
+&lt;td>120&lt;/td>
+&lt;td>The maximum times of timeout heartbeat on client side. If the number of timeouts waiting for heartbeat response continuously &amp;gt; max_timeout_heartbeat_count, the channel will be closed from client side.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="78-advanced-network-settings">7.8 Advanced Network Settings&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>transport.max_syn_backlog&lt;/td>
+&lt;td>511&lt;/td>
+&lt;td>The capacity of SYN queue on server side. 0 means using system default value.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.recv_file_mode&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>Whether to enable receive buffer-file mode. It will receive buffer and write to file from socket using zero-copy if enabled. &lt;strong>Note&lt;/strong>: Requires OS support for zero-copy (e.g., Linux sendfile/splice).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.network_retries&lt;/td>
+&lt;td>3&lt;/td>
+&lt;td>The number of retry attempts for network communication if network is unstable.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="8-storage--persistence-configuration">8. Storage &amp;amp; Persistence Configuration&lt;/h3>
+&lt;p>Configuration for HGKV (HugeGraph Key-Value) storage engine and value files.&lt;/p>
+&lt;h4 id="81-hgkv-configuration">8.1 HGKV Configuration&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>hgkv.max_file_size&lt;/td>
+&lt;td>2147483648 (2 GB)&lt;/td>
+&lt;td>The max number of bytes in each HGKV file.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>hgkv.max_data_block_size&lt;/td>
+&lt;td>65536 (64 KB)&lt;/td>
+&lt;td>The max byte size of HGKV file data block.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>hgkv.max_merge_files&lt;/td>
+&lt;td>10&lt;/td>
+&lt;td>The max number of files to merge at one time.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>hgkv.temp_file_dir&lt;/td>
+&lt;td>/tmp/hgkv&lt;/td>
+&lt;td>This folder is used to store temporary files during the file merging process.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="82-value-file-configuration">8.2 Value File Configuration&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>valuefile.max_segment_size&lt;/td>
+&lt;td>1073741824 (1 GB)&lt;/td>
+&lt;td>The max number of bytes in each segment of value-file.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="9-bsp--coordination-configuration">9. BSP &amp;amp; Coordination Configuration&lt;/h3>
+&lt;p>Configuration for Bulk Synchronous Parallel (BSP) protocol and etcd coordination.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>bsp.etcd_endpoints&lt;/td>
+&lt;td>http://localhost:2379&lt;/td>
+&lt;td>🔒 &lt;strong>Managed by system in K8s&lt;/strong> The endpoints to access etcd. For multiple endpoints, use comma-separated list: &lt;code>http://host1:port1,http://host2:port2&lt;/code>. Do not modify manually in K8s deployments.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>bsp.max_super_step&lt;/td>
+&lt;td>10 (packaged: 2)&lt;/td>
+&lt;td>The max super step of the algorithm.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>bsp.register_timeout&lt;/td>
+&lt;td>300000 (packaged: 100000)&lt;/td>
+&lt;td>The max timeout (in ms) to wait for master and workers to register.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>bsp.wait_workers_timeout&lt;/td>
+&lt;td>86400000 (24 hours)&lt;/td>
+&lt;td>The max timeout (in ms) to wait for workers BSP event.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>bsp.wait_master_timeout&lt;/td>
+&lt;td>86400000 (24 hours)&lt;/td>
+&lt;td>The max timeout (in ms) to wait for master BSP event.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>bsp.log_interval&lt;/td>
+&lt;td>30000 (30 seconds)&lt;/td>
+&lt;td>The log interval (in ms) to print the log while waiting for BSP event.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="10-performance-tuning-configuration">10. Performance Tuning Configuration&lt;/h3>
+&lt;p>Configuration for performance optimization.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>allocator.max_vertices_per_thread&lt;/td>
+&lt;td>10000&lt;/td>
+&lt;td>Maximum number of vertices per thread processed in each memory allocator.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>sort.thread_nums&lt;/td>
+&lt;td>4&lt;/td>
+&lt;td>The number of threads performing internal sorting.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="11-system-administration-configuration">11. System Administration Configuration&lt;/h3>
+&lt;p>⚠️ &lt;strong>Configuration items managed by the system - users are prohibited from modifying these manually.&lt;/strong>&lt;/p>
+&lt;p>The following configuration items are automatically managed by the K8s Operator, Driver, or runtime system. Manual modification will cause cluster communication failures or job scheduling errors.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>managed by&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>bsp.etcd_endpoints&lt;/td>
+&lt;td>K8s Operator&lt;/td>
+&lt;td>Automatically set to operator&amp;rsquo;s etcd service address&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.server_host&lt;/td>
+&lt;td>Runtime&lt;/td>
+&lt;td>Automatically set to pod/container hostname&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.server_port&lt;/td>
+&lt;td>Runtime&lt;/td>
+&lt;td>Automatically assigned random port&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>job.namespace&lt;/td>
+&lt;td>K8s Operator&lt;/td>
+&lt;td>Automatically set to job namespace&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>job.id&lt;/td>
+&lt;td>K8s Operator&lt;/td>
+&lt;td>Automatically set to job ID from CRD&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>job.workers_count&lt;/td>
+&lt;td>K8s Operator&lt;/td>
+&lt;td>Automatically set from CRD &lt;code>workerInstances&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>rpc.server_host&lt;/td>
+&lt;td>Runtime&lt;/td>
+&lt;td>RPC server hostname (system-managed)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>rpc.server_port&lt;/td>
+&lt;td>Runtime&lt;/td>
+&lt;td>RPC server port (system-managed)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>rpc.remote_url&lt;/td>
+&lt;td>Runtime&lt;/td>
+&lt;td>RPC remote URL (system-managed)&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;strong>Why These Are Forbidden:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>BSP/RPC Configuration&lt;/strong>: Must match the actual deployed etcd/RPC services. Manual overrides break coordination.&lt;/li>
+&lt;li>&lt;strong>Job Configuration&lt;/strong>: Must match K8s CRD specifications. Mismatches cause worker count errors.&lt;/li>
+&lt;li>&lt;strong>Transport Configuration&lt;/strong>: Must use actual pod hostnames/ports. Manual values prevent inter-worker communication.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="k8s-operator-config-options">K8s Operator Config Options&lt;/h3>
+&lt;blockquote>
+&lt;p>NOTE: Option needs to be converted through environment variable settings, e.g. k8s.internal_etcd_url =&amp;gt; INTERNAL_ETCD_URL&lt;/p>
+&lt;/blockquote>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>k8s.auto_destroy_pod&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>Whether to automatically destroy all pods when the job is completed or failed.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.close_reconciler_timeout&lt;/td>
+&lt;td>120&lt;/td>
+&lt;td>The max timeout (in ms) to close reconciler.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.internal_etcd_url&lt;/td>
+&lt;td>http://127.0.0.1:2379&lt;/td>
+&lt;td>The internal etcd URL for operator system.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.max_reconcile_retry&lt;/td>
+&lt;td>3&lt;/td>
+&lt;td>The max retry times of reconcile.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.probe_backlog&lt;/td>
+&lt;td>50&lt;/td>
+&lt;td>The maximum backlog for serving health probes.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.probe_port&lt;/td>
+&lt;td>9892&lt;/td>
+&lt;td>The port that the controller binds to for serving health probes.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.ready_check_internal&lt;/td>
+&lt;td>1000&lt;/td>
+&lt;td>The time interval (ms) of check ready.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.ready_timeout&lt;/td>
+&lt;td>30000&lt;/td>
+&lt;td>The max timeout (in ms) of check ready.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.reconciler_count&lt;/td>
+&lt;td>10&lt;/td>
+&lt;td>The max number of reconciler threads.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.resync_period&lt;/td>
+&lt;td>600000&lt;/td>
+&lt;td>The minimum frequency at which watched resources are reconciled.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.timezone&lt;/td>
+&lt;td>Asia/Shanghai&lt;/td>
+&lt;td>The timezone of computer job and operator.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.watch_namespace&lt;/td>
+&lt;td>hugegraph-computer-system&lt;/td>
+&lt;td>The namespace to watch custom resources in. Use &amp;lsquo;*&amp;rsquo; to watch all namespaces.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="hugegraph-computer-crd">HugeGraph-Computer CRD&lt;/h3>
+&lt;blockquote>
+&lt;p>CRD: &lt;a href="https://github.com/apache/hugegraph-computer/blob/master/computer-k8s-operator/manifest/hugegraph-computer-crd.v1.yaml">https://github.com/apache/hugegraph-computer/blob/master/computer-k8s-operator/manifest/hugegraph-computer-crd.v1.yaml&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>spec&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;th>required&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>algorithmName&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The name of algorithm.&lt;/td>
+&lt;td>true&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>jobId&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The job id.&lt;/td>
+&lt;td>true&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>image&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The image of algorithm.&lt;/td>
+&lt;td>true&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>computerConf&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The map of computer config options.&lt;/td>
+&lt;td>true&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>workerInstances&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The number of worker instances, it will override the &amp;lsquo;job.workers_count&amp;rsquo; option.&lt;/td>
+&lt;td>true&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>pullPolicy&lt;/td>
+&lt;td>Always&lt;/td>
+&lt;td>The pull-policy of image, detail please refer to: &lt;a href="https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy">https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>pullSecrets&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The pull-secrets of Image, detail please refer to: &lt;a href="https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod">https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>masterCpu&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The cpu limit of master, the unit can be &amp;rsquo;m&amp;rsquo; or without unit detail please refer to: &lt;a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu">https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>workerCpu&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The cpu limit of worker, the unit can be &amp;rsquo;m&amp;rsquo; or without unit detail please refer to: &lt;a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu">https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>masterMemory&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The memory limit of master, the unit can be one of Ei、Pi、Ti、Gi、Mi、Ki detail please refer to: &lt;a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory">https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>workerMemory&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The memory limit of worker, the unit can be one of Ei、Pi、Ti、Gi、Mi、Ki detail please refer to: &lt;a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory">https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>log4jXml&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The content of log4j.xml for computer job.&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>jarFile&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The jar path of computer algorithm.&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>remoteJarUri&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The remote jar uri of computer algorithm, it will overlay algorithm image.&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>jvmOptions&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The java startup parameters of computer job.&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>envVars&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>please refer to: &lt;a href="https://kubernetes.io/docs/tasks/inject-data-application/define-interdependent-environment-variables/">https://kubernetes.io/docs/tasks/inject-data-application/define-interdependent-environment-variables/&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>envFrom&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>please refer to: &lt;a href="https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/">https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>masterCommand&lt;/td>
+&lt;td>bin/start-computer.sh&lt;/td>
+&lt;td>The run command of master, equivalent to &amp;lsquo;Entrypoint&amp;rsquo; field of Docker.&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>masterArgs&lt;/td>
+&lt;td>[&amp;quot;-r master&amp;quot;, &amp;ldquo;-d k8s&amp;rdquo;]&lt;/td>
+&lt;td>The run args of master, equivalent to &amp;lsquo;Cmd&amp;rsquo; field of Docker.&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>workerCommand&lt;/td>
+&lt;td>bin/start-computer.sh&lt;/td>
+&lt;td>The run command of worker, equivalent to &amp;lsquo;Entrypoint&amp;rsquo; field of Docker.&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>workerArgs&lt;/td>
+&lt;td>[&amp;quot;-r worker&amp;quot;, &amp;ldquo;-d k8s&amp;rdquo;]&lt;/td>
+&lt;td>The run args of worker, equivalent to &amp;lsquo;Cmd&amp;rsquo; field of Docker.&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>volumes&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Please refer to: &lt;a href="https://kubernetes.io/docs/concepts/storage/volumes/">https://kubernetes.io/docs/concepts/storage/volumes/&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>volumeMounts&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Please refer to: &lt;a href="https://kubernetes.io/docs/concepts/storage/volumes/">https://kubernetes.io/docs/concepts/storage/volumes/&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>secretPaths&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The map of k8s-secret name and mount path.&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>configMapPaths&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The map of k8s-configmap name and mount path.&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>podTemplateSpec&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Please refer to: &lt;a href="https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-template-v1/#PodTemplateSpec">https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-template-v1/#PodTemplateSpec&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>securityContext&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Please refer to: &lt;a href="https://kubernetes.io/docs/tasks/configure-pod-container/security-context/">https://kubernetes.io/docs/tasks/configure-pod-container/security-context/&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="kubedriver-config-options">KubeDriver Config Options&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>config option&lt;/th>
+&lt;th>default value&lt;/th>
+&lt;th>description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>k8s.build_image_bash_path&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The path of command used to build image.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.enable_internal_algorithm&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>Whether enable internal algorithm.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.framework_image_url&lt;/td>
+&lt;td>hugegraph/hugegraph-computer:latest&lt;/td>
+&lt;td>The image url of computer framework.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.image_repository_password&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The password for login image repository.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.image_repository_registry&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The address for login image repository.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.image_repository_url&lt;/td>
+&lt;td>hugegraph/hugegraph-computer&lt;/td>
+&lt;td>The url of image repository.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.image_repository_username&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The username for login image repository.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.internal_algorithm&lt;/td>
+&lt;td>[pageRank]&lt;/td>
+&lt;td>The name list of all internal algorithm. &lt;strong>Note&lt;/strong>: Algorithm names use camelCase here (e.g., &lt;code>pageRank&lt;/code>), but algorithm implementations return underscore_case (e.g., &lt;code>page_rank&lt;/code>).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.internal_algorithm_image_url&lt;/td>
+&lt;td>hugegraph/hugegraph-computer:latest&lt;/td>
+&lt;td>The image url of internal algorithm.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.jar_file_dir&lt;/td>
+&lt;td>/cache/jars/&lt;/td>
+&lt;td>The directory where the algorithm jar will be uploaded.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.kube_config&lt;/td>
+&lt;td>~/.kube/config&lt;/td>
+&lt;td>The path of k8s config file.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.log4j_xml_path&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>The log4j.xml path for computer job.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.namespace&lt;/td>
+&lt;td>hugegraph-computer-system&lt;/td>
+&lt;td>The namespace of hugegraph-computer system.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.pull_secret_names&lt;/td>
+&lt;td>[]&lt;/td>
+&lt;td>The names of pull-secret for pulling image.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item></channel></rss>

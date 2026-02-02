@@ -183,7 +183,57 @@ Check our &lt;a href="https://github.com/apache/incubator-hugegraph-ai/blob/main
 &lt;p>[!NOTE]
 Configuration changes are automatically saved when using the web interface. For manual changes, simply refresh the page to load updates.&lt;/p>
 &lt;/blockquote>
-&lt;p>&lt;strong>LLM Provider Support&lt;/strong>: This project uses &lt;a href="https://docs.litellm.ai/docs/providers">LiteLLM&lt;/a> for multi-provider LLM support.&lt;/p>
+&lt;h3 id="llm-provider-configuration">LLM Provider Configuration&lt;/h3>
+&lt;p>This project uses &lt;a href="https://docs.litellm.ai/docs/providers">LiteLLM&lt;/a> for multi-provider LLM support, enabling unified access to OpenAI, Anthropic, Google, Cohere, and 100+ other providers.&lt;/p>
+&lt;h4 id="option-1-direct-llm-connection-openai-ollama">Option 1: Direct LLM Connection (OpenAI, Ollama)&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># .env configuration&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">chat_llm_type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai &lt;span style="color:#8f5902;font-style:italic"># or ollama/local&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">openai_api_key&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-xxx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">openai_api_base&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>https://api.openai.com/v1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">openai_language_model&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>gpt-4o-mini
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">openai_max_tokens&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">4096&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="option-2-litellm-multi-provider-support">Option 2: LiteLLM Multi-Provider Support&lt;/h4>
+&lt;p>LiteLLM acts as a unified proxy for multiple LLM providers:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># .env configuration&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">chat_llm_type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>litellm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">extract_llm_type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>litellm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">text2gql_llm_type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>litellm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># LiteLLM settings&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">litellm_api_base&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>http://localhost:4000 &lt;span style="color:#8f5902;font-style:italic"># LiteLLM proxy server&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">litellm_api_key&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-1234 &lt;span style="color:#8f5902;font-style:italic"># LiteLLM API key&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Model selection (provider/model format)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">litellm_language_model&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>anthropic/claude-3-5-sonnet-20241022
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">litellm_max_tokens&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">4096&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Supported Providers&lt;/strong>: OpenAI, Anthropic, Google (Gemini), Azure, Cohere, Bedrock, Vertex AI, Hugging Face, and more.&lt;/p>
+&lt;p>For full provider list and configuration details, visit &lt;a href="https://docs.litellm.ai/docs/providers">LiteLLM Providers&lt;/a>.&lt;/p>
+&lt;h3 id="reranker-configuration">Reranker Configuration&lt;/h3>
+&lt;p>Rerankers improve RAG accuracy by reordering retrieved results. Supported providers:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Cohere Reranker&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">reranker_type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>cohere
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">cohere_api_key&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>your-cohere-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">cohere_rerank_model&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>rerank-english-v3.0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># SiliconFlow Reranker&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">reranker_type&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>siliconflow
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">siliconflow_api_key&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>your-siliconflow-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">siliconflow_rerank_model&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>BAAI/bge-reranker-v2-m3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="text2gremlin-configuration">Text2Gremlin Configuration&lt;/h3>
+&lt;p>Convert natural language to Gremlin queries:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">from&lt;/span> &lt;span style="color:#000">hugegraph_llm.operators.graph_rag_task&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">Text2GremlinPipeline&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Initialize pipeline&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">text2gremlin&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">Text2GremlinPipeline&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Generate Gremlin query&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">result&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">text2gremlin&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">query_to_gremlin&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">query&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Find all movies directed by Francis Ford Coppola&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">execute_gremlin_query&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">run&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>REST API Endpoint&lt;/strong>: See the &lt;a href="./rest-api.md">REST API documentation&lt;/a> for HTTP endpoint details.&lt;/p>
 &lt;h2 id="-additional-resources">📚 Additional Resources&lt;/h2>
 &lt;ul>
 &lt;li>&lt;strong>Graph Visualization&lt;/strong>: Use &lt;a href="https://hub.docker.com/r/hugegraph/hubble">HugeGraph Hubble&lt;/a> for data analysis and schema management&lt;/li>
@@ -191,7 +241,703 @@ Configuration changes are automatically saved when using the web interface. For 
 &lt;li>&lt;strong>Community&lt;/strong>: Join our discussions and contribute to the project&lt;/li>
 &lt;/ul>
 &lt;hr>
-&lt;p>&lt;strong>License&lt;/strong>: Apache License 2.0 | &lt;strong>Community&lt;/strong>: &lt;a href="https://hugegraph.apache.org/">Apache HugeGraph&lt;/a>&lt;/p></description></item><item><title>Docs: GraphRAG UI Details</title><link>/docs/quickstart/hugegraph-ai/quick_start/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-ai/quick_start/</guid><description>
+&lt;p>&lt;strong>License&lt;/strong>: Apache License 2.0 | &lt;strong>Community&lt;/strong>: &lt;a href="https://hugegraph.apache.org/">Apache HugeGraph&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph-ML</title><link>/docs/quickstart/hugegraph-ai/hugegraph-ml/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-ai/hugegraph-ml/</guid><description>
+&lt;p>HugeGraph-ML integrates HugeGraph with popular graph learning libraries, enabling end-to-end machine learning workflows directly on graph data.&lt;/p>
+&lt;h2 id="overview">Overview&lt;/h2>
+&lt;p>&lt;code>hugegraph-ml&lt;/code> provides a unified interface for applying graph neural networks and machine learning algorithms to data stored in HugeGraph. It eliminates the need for complex data export/import pipelines by seamlessly converting HugeGraph data to formats compatible with leading ML frameworks.&lt;/p>
+&lt;h3 id="key-features">Key Features&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Direct HugeGraph Integration&lt;/strong>: Query graph data directly from HugeGraph without manual exports&lt;/li>
+&lt;li>&lt;strong>21 Implemented Algorithms&lt;/strong>: Comprehensive coverage of node classification, graph classification, embedding, and link prediction&lt;/li>
+&lt;li>&lt;strong>DGL Backend&lt;/strong>: Leverages Deep Graph Library (DGL) for efficient training&lt;/li>
+&lt;li>&lt;strong>End-to-End Workflows&lt;/strong>: From data loading to model training and evaluation&lt;/li>
+&lt;li>&lt;strong>Modular Tasks&lt;/strong>: Reusable task abstractions for common ML scenarios&lt;/li>
+&lt;/ul>
+&lt;h2 id="prerequisites">Prerequisites&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>Python&lt;/strong>: 3.9+ (standalone module)&lt;/li>
+&lt;li>&lt;strong>HugeGraph Server&lt;/strong>: 1.0+ (recommended: 1.5+)&lt;/li>
+&lt;li>&lt;strong>UV Package Manager&lt;/strong>: 0.7+ (for dependency management)&lt;/li>
+&lt;/ul>
+&lt;h2 id="installation">Installation&lt;/h2>
+&lt;h3 id="1-start-hugegraph-server">1. Start HugeGraph Server&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Option 1: Docker (recommended)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>docker run -itd --name&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>hugegraph -p 8080:8080 hugegraph/hugegraph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Option 2: Binary packages&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># See https://hugegraph.apache.org/docs/download/download/&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-clone-and-setup">2. Clone and Setup&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/incubator-hugegraph-ai.git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> incubator-hugegraph-ai/hugegraph-ml
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3-install-dependencies">3. Install Dependencies&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># uv sync automatically creates .venv and installs all dependencies&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uv sync
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Activate virtual environment&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">source&lt;/span> .venv/bin/activate
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4-navigate-to-source-directory">4. Navigate to Source Directory&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> ./src
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>[!NOTE]
+All examples assume you&amp;rsquo;re in the activated virtual environment.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="implemented-algorithms">Implemented Algorithms&lt;/h2>
+&lt;p>HugeGraph-ML currently implements &lt;strong>21 graph machine learning algorithms&lt;/strong> across multiple categories:&lt;/p>
+&lt;h3 id="node-classification-11-algorithms">Node Classification (11 algorithms)&lt;/h3>
+&lt;p>Predict labels for graph nodes based on network structure and features.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Algorithm&lt;/th>
+&lt;th>Paper&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>GCN&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1609.02907">Kipf &amp;amp; Welling, 2017&lt;/a>&lt;/td>
+&lt;td>Graph Convolutional Networks&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>GAT&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1710.10903">Veličković et al., 2018&lt;/a>&lt;/td>
+&lt;td>Graph Attention Networks&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>GraphSAGE&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1706.02216">Hamilton et al., 2017&lt;/a>&lt;/td>
+&lt;td>Inductive representation learning&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>APPNP&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1810.05997">Klicpera et al., 2019&lt;/a>&lt;/td>
+&lt;td>Personalized PageRank propagation&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>AGNN&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1803.03735">Thekumparampil et al., 2018&lt;/a>&lt;/td>
+&lt;td>Attention-based GNN&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>ARMA&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1901.01343">Bianchi et al., 2019&lt;/a>&lt;/td>
+&lt;td>Autoregressive moving average filters&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>DAGNN&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/2007.09296">Liu et al., 2020&lt;/a>&lt;/td>
+&lt;td>Deep adaptive graph neural networks&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>DeeperGCN&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/2006.07739">Li et al., 2020&lt;/a>&lt;/td>
+&lt;td>Very deep GCN architectures&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>GRAND&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/2005.11079">Feng et al., 2020&lt;/a>&lt;/td>
+&lt;td>Graph random neural networks&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>JKNet&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1806.03536">Xu et al., 2018&lt;/a>&lt;/td>
+&lt;td>Jumping knowledge networks&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>Cluster-GCN&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1905.07953">Chiang et al., 2019&lt;/a>&lt;/td>
+&lt;td>Scalable GCN training via clustering&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="graph-classification-2-algorithms">Graph Classification (2 algorithms)&lt;/h3>
+&lt;p>Classify entire graphs based on their structure and node features.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Algorithm&lt;/th>
+&lt;th>Paper&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>DiffPool&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1806.08804">Ying et al., 2018&lt;/a>&lt;/td>
+&lt;td>Differentiable graph pooling&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>GIN&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1810.00826">Xu et al., 2019&lt;/a>&lt;/td>
+&lt;td>Graph isomorphism networks&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="graph-embedding-3-algorithms">Graph Embedding (3 algorithms)&lt;/h3>
+&lt;p>Learn unsupervised node representations for downstream tasks.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Algorithm&lt;/th>
+&lt;th>Paper&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>DGI&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1809.10341">Veličković et al., 2019&lt;/a>&lt;/td>
+&lt;td>Deep graph infomax (contrastive learning)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>BGRL&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/2102.06514">Thakoor et al., 2021&lt;/a>&lt;/td>
+&lt;td>Bootstrapped graph representation learning&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>GRACE&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/2006.04131">Zhu et al., 2020&lt;/a>&lt;/td>
+&lt;td>Graph contrastive learning&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="link-prediction-3-algorithms">Link Prediction (3 algorithms)&lt;/h3>
+&lt;p>Predict missing or future connections in graphs.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Algorithm&lt;/th>
+&lt;th>Paper&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>SEAL&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1802.09691">Zhang &amp;amp; Chen, 2018&lt;/a>&lt;/td>
+&lt;td>Subgraph extraction and labeling&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>P-GNN&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="http://proceedings.mlr.press/v97/you19b/you19b.pdf">You et al., 2019&lt;/a>&lt;/td>
+&lt;td>Position-aware GNN&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>GATNE&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/1905.01669">Cen et al., 2019&lt;/a>&lt;/td>
+&lt;td>Attributed multiplex heterogeneous network embedding&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="fraud-detection-2-algorithms">Fraud Detection (2 algorithms)&lt;/h3>
+&lt;p>Detect anomalous nodes in graphs (e.g., fraudulent accounts).&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Algorithm&lt;/th>
+&lt;th>Paper&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>CARE-GNN&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/2008.08692">Dou et al., 2020&lt;/a>&lt;/td>
+&lt;td>Camouflage-resistant GNN&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>BGNN&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/2101.08543">Zheng et al., 2021&lt;/a>&lt;/td>
+&lt;td>Bipartite graph neural network&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="post-processing-1-algorithm">Post-Processing (1 algorithm)&lt;/h3>
+&lt;p>Improve predictions via label propagation.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Algorithm&lt;/th>
+&lt;th>Paper&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>C&amp;amp;S&lt;/strong>&lt;/td>
+&lt;td>&lt;a href="https://arxiv.org/abs/2010.13993">Huang et al., 2020&lt;/a>&lt;/td>
+&lt;td>Correct &amp;amp; Smooth (prediction refinement)&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="usage-examples">Usage Examples&lt;/h2>
+&lt;h3 id="example-1-node-embedding-with-dgi">Example 1: Node Embedding with DGI&lt;/h3>
+&lt;p>Perform unsupervised node embedding on the Cora dataset using Deep Graph Infomax (DGI).&lt;/p>
+&lt;h4 id="step-1-import-dataset-if-needed">Step 1: Import Dataset (if needed)&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">from&lt;/span> &lt;span style="color:#000">hugegraph_ml.utils.dgl2hugegraph_utils&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">import_graph_from_dgl&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Import Cora dataset from DGL to HugeGraph&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">import_graph_from_dgl&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;cora&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="step-2-convert-graph-data">Step 2: Convert Graph Data&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">from&lt;/span> &lt;span style="color:#000">hugegraph_ml.data.hugegraph2dgl&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">HugeGraph2DGL&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Convert HugeGraph data to DGL format&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">hg2d&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">HugeGraph2DGL&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graph&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">hg2d&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">convert_graph&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">vertex_label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;CORA_vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">edge_label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;CORA_edge&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="step-3-initialize-model">Step 3: Initialize Model&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">from&lt;/span> &lt;span style="color:#000">hugegraph_ml.models.dgi&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">DGI&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Create DGI model&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">model&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">DGI&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">n_in_feats&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">ndata&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;feat&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">shape&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">])&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="step-4-train-and-generate-embeddings">Step 4: Train and Generate Embeddings&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">from&lt;/span> &lt;span style="color:#000">hugegraph_ml.tasks.node_embed&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">NodeEmbed&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Train model and generate node embeddings&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">node_embed_task&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">NodeEmbed&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">model&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">model&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">embedded_graph&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">node_embed_task&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">train_and_embed&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">add_self_loop&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87;font-weight:bold">True&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">n_epochs&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">300&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">patience&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">30&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="step-5-downstream-task-node-classification">Step 5: Downstream Task (Node Classification)&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">from&lt;/span> &lt;span style="color:#000">hugegraph_ml.models.mlp&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">MLPClassifier&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">from&lt;/span> &lt;span style="color:#000">hugegraph_ml.tasks.node_classify&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">NodeClassify&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Use embeddings for node classification&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">model&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">MLPClassifier&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">n_in_feat&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">embedded_graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">ndata&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;feat&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">shape&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">n_out_feat&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">embedded_graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">ndata&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">unique&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">shape&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">node_clf_task&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">NodeClassify&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">embedded_graph&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">model&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">model&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">node_clf_task&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">train&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">lr&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">1e-3&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">n_epochs&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">400&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">patience&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">40&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">print&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">node_clf_task&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">evaluate&lt;/span>&lt;span style="color:#000;font-weight:bold">())&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Expected Output:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#39;accuracy&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.82&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;loss&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.5714246034622192&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Full Example&lt;/strong>: See &lt;a href="https://github.com/apache/incubator-hugegraph-ai/blob/main/hugegraph-ml/src/hugegraph_ml/examples/dgi_example.py">dgi_example.py&lt;/a>&lt;/p>
+&lt;h3 id="example-2-node-classification-with-grand">Example 2: Node Classification with GRAND&lt;/h3>
+&lt;p>Directly classify nodes using the GRAND model (no separate embedding step needed).&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">from&lt;/span> &lt;span style="color:#000">hugegraph_ml.data.hugegraph2dgl&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">HugeGraph2DGL&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">from&lt;/span> &lt;span style="color:#000">hugegraph_ml.models.grand&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">GRAND&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">from&lt;/span> &lt;span style="color:#000">hugegraph_ml.tasks.node_classify&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">NodeClassify&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Load graph&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">hg2d&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">HugeGraph2DGL&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graph&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">hg2d&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">convert_graph&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">vertex_label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;CORA_vertex&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">edge_label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;CORA_edge&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Initialize GRAND model&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">model&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">GRAND&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">n_in_feats&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">ndata&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;feat&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">shape&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">n_out_feats&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">ndata&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">unique&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">shape&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Train and evaluate&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">node_clf_task&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">NodeClassify&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">graph&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">model&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">model&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">node_clf_task&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">train&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">lr&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">1e-2&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">n_epochs&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">1500&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">patience&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">100&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">print&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">node_clf_task&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">evaluate&lt;/span>&lt;span style="color:#000;font-weight:bold">())&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Full Example&lt;/strong>: See &lt;a href="https://github.com/apache/incubator-hugegraph-ai/blob/main/hugegraph-ml/src/hugegraph_ml/examples/grand_example.py">grand_example.py&lt;/a>&lt;/p>
+&lt;h2 id="core-components">Core Components&lt;/h2>
+&lt;h3 id="hugegraph2dgl-converter">HugeGraph2DGL Converter&lt;/h3>
+&lt;p>Seamlessly converts HugeGraph data to DGL graph format:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">from&lt;/span> &lt;span style="color:#000">hugegraph_ml.data.hugegraph2dgl&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">HugeGraph2DGL&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">hg2d&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">HugeGraph2DGL&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graph&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">hg2d&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">convert_graph&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">vertex_label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># Vertex label to extract&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">edge_label&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;knows&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># Edge label to extract&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">directed&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87;font-weight:bold">False&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># Graph directionality&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="task-abstractions">Task Abstractions&lt;/h3>
+&lt;p>Reusable task objects for common ML workflows:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Task&lt;/th>
+&lt;th>Class&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Node Embedding&lt;/td>
+&lt;td>&lt;code>NodeEmbed&lt;/code>&lt;/td>
+&lt;td>Generate unsupervised node embeddings&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Node Classification&lt;/td>
+&lt;td>&lt;code>NodeClassify&lt;/code>&lt;/td>
+&lt;td>Predict node labels&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Graph Classification&lt;/td>
+&lt;td>&lt;code>GraphClassify&lt;/code>&lt;/td>
+&lt;td>Predict graph-level labels&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Link Prediction&lt;/td>
+&lt;td>&lt;code>LinkPredict&lt;/code>&lt;/td>
+&lt;td>Predict missing edges&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="best-practices">Best Practices&lt;/h2>
+&lt;ol>
+&lt;li>&lt;strong>Start with Small Datasets&lt;/strong>: Test your pipeline on small graphs (e.g., Cora, Citeseer) before scaling&lt;/li>
+&lt;li>&lt;strong>Use Early Stopping&lt;/strong>: Set &lt;code>patience&lt;/code> parameter to avoid overfitting&lt;/li>
+&lt;li>&lt;strong>Tune Hyperparameters&lt;/strong>: Adjust learning rate, hidden dimensions, and epochs based on dataset size&lt;/li>
+&lt;li>&lt;strong>Monitor GPU Memory&lt;/strong>: Large graphs may require batch training (e.g., Cluster-GCN)&lt;/li>
+&lt;li>&lt;strong>Validate Schema&lt;/strong>: Ensure vertex/edge labels match your HugeGraph schema&lt;/li>
+&lt;/ol>
+&lt;h2 id="troubleshooting">Troubleshooting&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Issue&lt;/th>
+&lt;th>Solution&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&amp;ldquo;Connection refused&amp;rdquo; to HugeGraph&lt;/td>
+&lt;td>Verify server is running on port 8080&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>CUDA out of memory&lt;/td>
+&lt;td>Reduce batch size or use CPU-only mode&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Model convergence issues&lt;/td>
+&lt;td>Try different learning rates (1e-2, 1e-3, 1e-4)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ImportError for DGL&lt;/td>
+&lt;td>Run &lt;code>uv sync&lt;/code> to reinstall dependencies&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="contributing">Contributing&lt;/h2>
+&lt;p>To add a new algorithm:&lt;/p>
+&lt;ol>
+&lt;li>Create model file in &lt;code>src/hugegraph_ml/models/your_model.py&lt;/code>&lt;/li>
+&lt;li>Inherit from base model class and implement &lt;code>forward()&lt;/code> method&lt;/li>
+&lt;li>Add example script in &lt;code>src/hugegraph_ml/examples/&lt;/code>&lt;/li>
+&lt;li>Update this documentation with algorithm details&lt;/li>
+&lt;/ol>
+&lt;h2 id="see-also">See Also&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="../_index.md">HugeGraph-AI Overview&lt;/a> - Full AI ecosystem&lt;/li>
+&lt;li>&lt;a href="./hugegraph-llm.md">HugeGraph-LLM&lt;/a> - RAG and knowledge graph construction&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-ml">GitHub Repository&lt;/a> - Source code and examples&lt;/li>
+&lt;/ul></description></item><item><title>Docs: Configuration Reference</title><link>/docs/quickstart/hugegraph-ai/config-reference/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-ai/config-reference/</guid><description>
+&lt;p>This document provides a comprehensive reference for all configuration options in HugeGraph-LLM.&lt;/p>
+&lt;h2 id="configuration-files">Configuration Files&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>Environment File&lt;/strong>: &lt;code>.env&lt;/code> (created from template or auto-generated)&lt;/li>
+&lt;li>&lt;strong>Prompt Configuration&lt;/strong>: &lt;code>src/hugegraph_llm/resources/demo/config_prompt.yaml&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>[!TIP]
+Run &lt;code>python -m hugegraph_llm.config.generate --update&lt;/code> to auto-generate or update configuration files with defaults.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="environment-variables-overview">Environment Variables Overview&lt;/h2>
+&lt;h3 id="1-language-and-model-type-selection">1. Language and Model Type Selection&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Prompt language (affects system prompts and generated text)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LANGUAGE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>EN &lt;span style="color:#8f5902;font-style:italic"># Options: EN | CN&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># LLM Type for different tasks&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">CHAT_LLM_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai &lt;span style="color:#8f5902;font-style:italic"># Chat/RAG: openai | litellm | ollama/local&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">EXTRACT_LLM_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai &lt;span style="color:#8f5902;font-style:italic"># Entity extraction: openai | litellm | ollama/local&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">TEXT2GQL_LLM_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai &lt;span style="color:#8f5902;font-style:italic"># Text2Gremlin: openai | litellm | ollama/local&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Embedding type&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">EMBEDDING_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai &lt;span style="color:#8f5902;font-style:italic"># Options: openai | litellm | ollama/local&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Reranker type (optional)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">RERANKER_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># Options: cohere | siliconflow | (empty for none)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-openai-configuration">2. OpenAI Configuration&lt;/h3>
+&lt;p>Each LLM task (chat, extract, text2gql) has independent configuration:&lt;/p>
+&lt;h4 id="21-chat-llm-rag-answer-generation">2.1 Chat LLM (RAG Answer Generation)&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_CHAT_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>https://api.openai.com/v1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_CHAT_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-your-api-key-here
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_CHAT_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>gpt-4o-mini
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_CHAT_TOKENS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8192&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># Max tokens for chat responses&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="22-extract-llm-entity--relation-extraction">2.2 Extract LLM (Entity &amp;amp; Relation Extraction)&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_EXTRACT_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>https://api.openai.com/v1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_EXTRACT_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-your-api-key-here
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_EXTRACT_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>gpt-4o-mini
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_EXTRACT_TOKENS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">1024&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># Max tokens for extraction&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="23-text2gql-llm-natural-language-to-gremlin">2.3 Text2GQL LLM (Natural Language to Gremlin)&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_TEXT2GQL_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>https://api.openai.com/v1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_TEXT2GQL_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-your-api-key-here
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_TEXT2GQL_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>gpt-4o-mini
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_TEXT2GQL_TOKENS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">4096&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># Max tokens for query generation&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="24-embedding-model">2.4 Embedding Model&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_EMBEDDING_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>https://api.openai.com/v1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_EMBEDDING_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-your-api-key-here
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_EMBEDDING_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>text-embedding-3-small
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>[!NOTE]
+You can use different API keys/endpoints for each task to optimize costs or use specialized models.&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="3-litellm-configuration-multi-provider-support">3. LiteLLM Configuration (Multi-Provider Support)&lt;/h3>
+&lt;p>LiteLLM enables unified access to 100+ LLM providers (OpenAI, Anthropic, Google, Azure, etc.).&lt;/p>
+&lt;h4 id="31-chat-llm">3.1 Chat LLM&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_CHAT_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>http://localhost:4000 &lt;span style="color:#8f5902;font-style:italic"># LiteLLM proxy URL&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_CHAT_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-litellm-key &lt;span style="color:#8f5902;font-style:italic"># LiteLLM API key&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_CHAT_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>anthropic/claude-3-5-sonnet-20241022
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_CHAT_TOKENS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8192&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="32-extract-llm">3.2 Extract LLM&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EXTRACT_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>http://localhost:4000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EXTRACT_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-litellm-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EXTRACT_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai/gpt-4o-mini
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EXTRACT_TOKENS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">256&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="33-text2gql-llm">3.3 Text2GQL LLM&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_TEXT2GQL_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>http://localhost:4000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_TEXT2GQL_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-litellm-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_TEXT2GQL_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai/gpt-4o-mini
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_TEXT2GQL_TOKENS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">4096&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="34-embedding">3.4 Embedding&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EMBEDDING_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>http://localhost:4000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EMBEDDING_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-litellm-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EMBEDDING_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai/text-embedding-3-small
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Model Format&lt;/strong>: &lt;code>provider/model-name&lt;/code>&lt;/p>
+&lt;p>Examples:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>openai/gpt-4o-mini&lt;/code>&lt;/li>
+&lt;li>&lt;code>anthropic/claude-3-5-sonnet-20241022&lt;/code>&lt;/li>
+&lt;li>&lt;code>google/gemini-2.0-flash-exp&lt;/code>&lt;/li>
+&lt;li>&lt;code>azure/gpt-4&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>See &lt;a href="https://docs.litellm.ai/docs/providers">LiteLLM Providers&lt;/a> for the complete list.&lt;/p>
+&lt;h3 id="4-ollama-configuration-local-deployment">4. Ollama Configuration (Local Deployment)&lt;/h3>
+&lt;p>Run local LLMs with Ollama for privacy and cost control.&lt;/p>
+&lt;h4 id="41-chat-llm">4.1 Chat LLM&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_CHAT_HOST&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>127.0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_CHAT_PORT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">11434&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_CHAT_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>llama3.1:8b
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="42-extract-llm">4.2 Extract LLM&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_EXTRACT_HOST&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>127.0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_EXTRACT_PORT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">11434&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_EXTRACT_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>llama3.1:8b
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="43-text2gql-llm">4.3 Text2GQL LLM&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_TEXT2GQL_HOST&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>127.0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_TEXT2GQL_PORT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">11434&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_TEXT2GQL_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>qwen2.5-coder:7b
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="44-embedding">4.4 Embedding&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_EMBEDDING_HOST&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>127.0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_EMBEDDING_PORT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">11434&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_EMBEDDING_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>nomic-embed-text
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>[!TIP]
+Download models: &lt;code>ollama pull llama3.1:8b&lt;/code> or &lt;code>ollama pull qwen2.5-coder:7b&lt;/code>&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="5-reranker-configuration">5. Reranker Configuration&lt;/h3>
+&lt;p>Rerankers improve RAG accuracy by reordering retrieved results based on relevance.&lt;/p>
+&lt;h4 id="51-cohere-reranker">5.1 Cohere Reranker&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">RERANKER_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>cohere
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">COHERE_BASE_URL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>https://api.cohere.com/v1/rerank
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">RERANKER_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>your-cohere-api-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">RERANKER_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>rerank-english-v3.0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Available models:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>rerank-english-v3.0&lt;/code> (English)&lt;/li>
+&lt;li>&lt;code>rerank-multilingual-v3.0&lt;/code> (100+ languages)&lt;/li>
+&lt;/ul>
+&lt;h4 id="52-siliconflow-reranker">5.2 SiliconFlow Reranker&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">RERANKER_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>siliconflow
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">RERANKER_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>your-siliconflow-api-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">RERANKER_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>BAAI/bge-reranker-v2-m3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="6-hugegraph-connection">6. HugeGraph Connection&lt;/h3>
+&lt;p>Configure connection to your HugeGraph server instance.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Server connection&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_IP&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>127.0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_PORT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_NAME&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>hugegraph &lt;span style="color:#8f5902;font-style:italic"># Graph instance name&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_USER&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>admin &lt;span style="color:#8f5902;font-style:italic"># Username&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_PWD&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>admin-password &lt;span style="color:#8f5902;font-style:italic"># Password&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_SPACE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># Graph space (optional, for multi-tenancy)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="7-query-parameters">7. Query Parameters&lt;/h3>
+&lt;p>Control graph traversal behavior and result limits.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Graph traversal limits&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">MAX_GRAPH_PATH&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">10&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># Max path depth for graph queries&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">MAX_GRAPH_ITEMS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">30&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># Max items to retrieve from graph&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">EDGE_LIMIT_PRE_LABEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># Max edges per label type&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Property filtering&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LIMIT_PROPERTY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>False &lt;span style="color:#8f5902;font-style:italic"># Limit properties in results (True/False)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="8-vector-search-configuration">8. Vector Search Configuration&lt;/h3>
+&lt;p>Configure vector similarity search parameters.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Vector search thresholds&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">VECTOR_DIS_THRESHOLD&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>0.9 &lt;span style="color:#8f5902;font-style:italic"># Min cosine similarity (0-1, higher = stricter)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">TOPK_PER_KEYWORD&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># Top-K results per extracted keyword&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="9-rerank-configuration">9. Rerank Configuration&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Rerank result limits&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">TOPK_RETURN_RESULTS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">20&lt;/span> &lt;span style="color:#8f5902;font-style:italic"># Number of top results after reranking&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configuration-priority">Configuration Priority&lt;/h2>
+&lt;p>The system loads configuration in the following order (later sources override earlier ones):&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Default Values&lt;/strong> (in &lt;code>*_config.py&lt;/code> files)&lt;/li>
+&lt;li>&lt;strong>Environment Variables&lt;/strong> (from &lt;code>.env&lt;/code> file)&lt;/li>
+&lt;li>&lt;strong>Runtime Updates&lt;/strong> (via Web UI or API calls)&lt;/li>
+&lt;/ol>
+&lt;h2 id="example-configurations">Example Configurations&lt;/h2>
+&lt;h3 id="minimal-setup-openai">Minimal Setup (OpenAI)&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Language&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LANGUAGE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>EN
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># LLM Types&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">CHAT_LLM_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">EXTRACT_LLM_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">TEXT2GQL_LLM_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">EMBEDDING_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># OpenAI Credentials (single key for all tasks)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>https://api.openai.com/v1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-your-api-key-here
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>gpt-4o-mini
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OPENAI_EMBEDDING_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>text-embedding-3-small
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># HugeGraph Connection&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_IP&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>127.0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_PORT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_NAME&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>hugegraph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_USER&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>admin
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_PWD&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>admin
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="production-setup-litellm--reranker">Production Setup (LiteLLM + Reranker)&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Bilingual support&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LANGUAGE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>EN
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># LiteLLM for flexibility&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">CHAT_LLM_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>litellm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">EXTRACT_LLM_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>litellm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">TEXT2GQL_LLM_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>litellm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">EMBEDDING_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>litellm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># LiteLLM Proxy&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_CHAT_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>http://localhost:4000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_CHAT_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-litellm-master-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_CHAT_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>anthropic/claude-3-5-sonnet-20241022
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_CHAT_TOKENS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8192&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EXTRACT_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>http://localhost:4000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EXTRACT_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-litellm-master-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EXTRACT_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai/gpt-4o-mini
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EXTRACT_TOKENS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">256&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_TEXT2GQL_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>http://localhost:4000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_TEXT2GQL_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-litellm-master-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_TEXT2GQL_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai/gpt-4o-mini
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_TEXT2GQL_TOKENS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">4096&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EMBEDDING_API_BASE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>http://localhost:4000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EMBEDDING_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>sk-litellm-master-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LITELLM_EMBEDDING_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>openai/text-embedding-3-small
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Cohere Reranker for better accuracy&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">RERANKER_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>cohere
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">COHERE_BASE_URL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>https://api.cohere.com/v1/rerank
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">RERANKER_API_KEY&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>your-cohere-key
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">RERANKER_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>rerank-multilingual-v3.0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># HugeGraph with authentication&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_IP&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>prod-hugegraph.example.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_PORT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_NAME&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>production_graph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_USER&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>rag_user
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_PWD&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>secure-password
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_SPACE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>prod_space
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Optimized query parameters&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">MAX_GRAPH_PATH&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">15&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">MAX_GRAPH_ITEMS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">50&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">VECTOR_DIS_THRESHOLD&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>0.85
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">TOPK_RETURN_RESULTS&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">30&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="localoffline-setup-ollama">Local/Offline Setup (Ollama)&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Language&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LANGUAGE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>EN
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># All local models via Ollama&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">CHAT_LLM_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>ollama/local
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">EXTRACT_LLM_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>ollama/local
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">TEXT2GQL_LLM_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>ollama/local
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">EMBEDDING_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>ollama/local
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Ollama endpoints&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_CHAT_HOST&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>127.0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_CHAT_PORT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">11434&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_CHAT_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>llama3.1:8b
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_EXTRACT_HOST&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>127.0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_EXTRACT_PORT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">11434&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_EXTRACT_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>llama3.1:8b
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_TEXT2GQL_HOST&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>127.0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_TEXT2GQL_PORT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">11434&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_TEXT2GQL_LANGUAGE_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>qwen2.5-coder:7b
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_EMBEDDING_HOST&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>127.0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_EMBEDDING_PORT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">11434&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">OLLAMA_EMBEDDING_MODEL&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>nomic-embed-text
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># No reranker for offline setup&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">RERANKER_TYPE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Local HugeGraph&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_IP&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>127.0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_PORT&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">8080&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_NAME&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>hugegraph
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_USER&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>admin
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">GRAPH_PWD&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>admin
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configuration-validation">Configuration Validation&lt;/h2>
+&lt;p>After modifying &lt;code>.env&lt;/code>, verify your configuration:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Via Web UI&lt;/strong>: Visit &lt;code>http://localhost:8001&lt;/code> and check the settings panel&lt;/li>
+&lt;li>&lt;strong>Via Python&lt;/strong>:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">from&lt;/span> &lt;span style="color:#000">hugegraph_llm.config&lt;/span> &lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">settings&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">print&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">settings&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">llm_config&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">print&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">settings&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">hugegraph_config&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>&lt;strong>Via REST API&lt;/strong>:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl http://localhost:8001/config
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="troubleshooting">Troubleshooting&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Issue&lt;/th>
+&lt;th>Solution&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&amp;ldquo;API key not found&amp;rdquo;&lt;/td>
+&lt;td>Check &lt;code>*_API_KEY&lt;/code> is set correctly in &lt;code>.env&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&amp;ldquo;Connection refused&amp;rdquo;&lt;/td>
+&lt;td>Verify &lt;code>GRAPH_IP&lt;/code> and &lt;code>GRAPH_PORT&lt;/code> are correct&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&amp;ldquo;Model not found&amp;rdquo;&lt;/td>
+&lt;td>For Ollama: run &lt;code>ollama pull &amp;lt;model-name&amp;gt;&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&amp;ldquo;Rate limit exceeded&amp;rdquo;&lt;/td>
+&lt;td>Reduce &lt;code>MAX_GRAPH_ITEMS&lt;/code> or use different API keys&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&amp;ldquo;Embedding dimension mismatch&amp;rdquo;&lt;/td>
+&lt;td>Delete existing vectors and rebuild with correct model&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="see-also">See Also&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="./hugegraph-llm.md">HugeGraph-LLM Overview&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./rest-api.md">REST API Reference&lt;/a>&lt;/li>
+&lt;li>&lt;a href="./quick_start.md">Quick Start Guide&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: GraphRAG UI Details</title><link>/docs/quickstart/hugegraph-ai/quick_start/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-ai/quick_start/</guid><description>
 &lt;blockquote>
 &lt;p>Follow up &lt;a href="../">main doc&lt;/a> to introduce the basic UI function &amp;amp; details, welcome to update and improve at any time, thanks&lt;/p>
 &lt;/blockquote>
@@ -404,4 +1150,564 @@ Configuration changes are automatically saved when using the web interface. For 
 &lt;pre>&lt;code> - Generate the Gremlin query using the constructed prompt.
 &lt;/code>&lt;/pre>
 &lt;h1 id="5-graph-tools">5. Graph Tools&lt;/h1>
-&lt;p>Input Gremlin queries to execute corresponding operations.&lt;/p></description></item></channel></rss>
+&lt;p>Input Gremlin queries to execute corresponding operations.&lt;/p>
+&lt;h1 id="6-language-switching-v150">6. Language Switching (v1.5.0+)&lt;/h1>
+&lt;p>HugeGraph-LLM supports bilingual prompts for improved accuracy across languages.&lt;/p>
+&lt;h3 id="switching-between-english-and-chinese">Switching Between English and Chinese&lt;/h3>
+&lt;p>The system language affects:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>System prompts&lt;/strong>: Internal prompts used by the LLM&lt;/li>
+&lt;li>&lt;strong>Keyword extraction&lt;/strong>: Language-specific extraction logic&lt;/li>
+&lt;li>&lt;strong>Answer generation&lt;/strong>: Response formatting and style&lt;/li>
+&lt;/ul>
+&lt;h4 id="configuration-method-1-environment-variable">Configuration Method 1: Environment Variable&lt;/h4>
+&lt;p>Edit your &lt;code>.env&lt;/code> file:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># English prompts (default)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LANGUAGE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>EN
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Chinese prompts&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">LANGUAGE&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>CN
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Restart the service after changing the language setting.&lt;/p>
+&lt;h4 id="configuration-method-2-web-ui-dynamic">Configuration Method 2: Web UI (Dynamic)&lt;/h4>
+&lt;p>If available in your deployment, use the settings panel in the Web UI to switch languages without restarting:&lt;/p>
+&lt;ol>
+&lt;li>Navigate to the &lt;strong>Settings&lt;/strong> or &lt;strong>Configuration&lt;/strong> tab&lt;/li>
+&lt;li>Select &lt;strong>Language&lt;/strong>: &lt;code>EN&lt;/code> or &lt;code>CN&lt;/code>&lt;/li>
+&lt;li>Click &lt;strong>Save&lt;/strong> - changes apply immediately&lt;/li>
+&lt;/ol>
+&lt;h4 id="language-specific-behavior">Language-Specific Behavior&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Language&lt;/th>
+&lt;th>Keyword Extraction&lt;/th>
+&lt;th>Answer Style&lt;/th>
+&lt;th>Use Case&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>EN&lt;/code>&lt;/td>
+&lt;td>English NLP models&lt;/td>
+&lt;td>Professional, concise&lt;/td>
+&lt;td>International users, English documents&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>CN&lt;/code>&lt;/td>
+&lt;td>Chinese NLP models&lt;/td>
+&lt;td>Natural Chinese phrasing&lt;/td>
+&lt;td>Chinese users, Chinese documents&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;blockquote>
+&lt;p>[!TIP]
+Match the &lt;code>LANGUAGE&lt;/code> setting to your primary document language for best RAG accuracy.&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="rest-api-language-override">REST API Language Override&lt;/h3>
+&lt;p>When using the REST API, you can specify custom prompts per request to override the default language setting:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl -X POST http://localhost:8001/rag &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> -H &lt;span style="color:#4e9a06">&amp;#34;Content-Type: application/json&amp;#34;&lt;/span> &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> -d &lt;span style="color:#4e9a06">&amp;#39;{
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> &amp;#34;query&amp;#34;: &amp;#34;告诉我关于阿尔·帕西诺的信息&amp;#34;,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> &amp;#34;graph_only&amp;#34;: true,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> &amp;#34;keywords_extract_prompt&amp;#34;: &amp;#34;请从以下文本中提取关键实体...&amp;#34;,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> &amp;#34;answer_prompt&amp;#34;: &amp;#34;请根据以下上下文回答问题...&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> }&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>See the &lt;a href="./rest-api.md">REST API Reference&lt;/a> for complete parameter details.&lt;/p></description></item><item><title>Docs: REST API Reference</title><link>/docs/quickstart/hugegraph-ai/rest-api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-ai/rest-api/</guid><description>
+&lt;p>HugeGraph-LLM provides REST API endpoints for integrating RAG and Text2Gremlin capabilities into your applications.&lt;/p>
+&lt;h2 id="base-url">Base URL&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>http://localhost:8001
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Change host/port as configured when starting the service:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>python -m hugegraph_llm.demo.rag_demo.app --host 127.0.0.1 --port &lt;span style="color:#0000cf;font-weight:bold">8001&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="authentication">Authentication&lt;/h2>
+&lt;p>Currently, the API supports optional token-based authentication:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Enable authentication in .env&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">ENABLE_LOGIN&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">USER_TOKEN&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>your-user-token
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">ADMIN_TOKEN&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>your-admin-token
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Pass tokens in request headers:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>Authorization: Bearer &amp;lt;token&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="rag-endpoints">RAG Endpoints&lt;/h2>
+&lt;h3 id="1-complete-rag-query">1. Complete RAG Query&lt;/h3>
+&lt;p>&lt;strong>POST&lt;/strong> &lt;code>/rag&lt;/code>&lt;/p>
+&lt;p>Execute a full RAG pipeline including keyword extraction, graph retrieval, vector search, reranking, and answer generation.&lt;/p>
+&lt;h4 id="request-body">Request Body&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;query&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Tell me about Al Pacino&amp;#39;s movies&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;raw_answer&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">false&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;vector_only&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">false&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph_only&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph_vector_answer&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">false&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph_ratio&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.5&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;rerank_method&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;cohere&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;near_neighbor_first&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">false&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gremlin_tmpl_num&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_graph_items&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">30&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;topk_return_results&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">20&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;vector_dis_threshold&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.9&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;topk_per_keyword&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;custom_priority_info&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;answer_prompt&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;keywords_extract_prompt&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gremlin_prompt&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;client_config&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1:8080&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;admin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;pwd&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;admin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gs&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Parameters:&lt;/strong>&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Required&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>query&lt;/code>&lt;/td>
+&lt;td>string&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>User&amp;rsquo;s natural language question&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>raw_answer&lt;/code>&lt;/td>
+&lt;td>boolean&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>Return LLM answer without retrieval&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>vector_only&lt;/code>&lt;/td>
+&lt;td>boolean&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>Use only vector search (no graph)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>graph_only&lt;/code>&lt;/td>
+&lt;td>boolean&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>Use only graph retrieval (no vector)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>graph_vector_answer&lt;/code>&lt;/td>
+&lt;td>boolean&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>Combine graph and vector results&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>graph_ratio&lt;/code>&lt;/td>
+&lt;td>float&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>0.5&lt;/td>
+&lt;td>Ratio of graph vs vector results (0-1)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>rerank_method&lt;/code>&lt;/td>
+&lt;td>string&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>&amp;quot;&amp;quot;&lt;/td>
+&lt;td>Reranker: &amp;ldquo;cohere&amp;rdquo;, &amp;ldquo;siliconflow&amp;rdquo;, &amp;quot;&amp;quot;&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>near_neighbor_first&lt;/code>&lt;/td>
+&lt;td>boolean&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>Prioritize direct neighbors&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gremlin_tmpl_num&lt;/code>&lt;/td>
+&lt;td>integer&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>5&lt;/td>
+&lt;td>Number of Gremlin templates to try&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>max_graph_items&lt;/code>&lt;/td>
+&lt;td>integer&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>30&lt;/td>
+&lt;td>Max items from graph retrieval&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>topk_return_results&lt;/code>&lt;/td>
+&lt;td>integer&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>20&lt;/td>
+&lt;td>Top-K after reranking&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>vector_dis_threshold&lt;/code>&lt;/td>
+&lt;td>float&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>0.9&lt;/td>
+&lt;td>Vector similarity threshold (0-1)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>topk_per_keyword&lt;/code>&lt;/td>
+&lt;td>integer&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>1&lt;/td>
+&lt;td>Top-K vectors per keyword&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>custom_priority_info&lt;/code>&lt;/td>
+&lt;td>string&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>&amp;quot;&amp;quot;&lt;/td>
+&lt;td>Custom context to prioritize&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>answer_prompt&lt;/code>&lt;/td>
+&lt;td>string&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>&amp;quot;&amp;quot;&lt;/td>
+&lt;td>Custom answer generation prompt&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>keywords_extract_prompt&lt;/code>&lt;/td>
+&lt;td>string&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>&amp;quot;&amp;quot;&lt;/td>
+&lt;td>Custom keyword extraction prompt&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gremlin_prompt&lt;/code>&lt;/td>
+&lt;td>string&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>&amp;quot;&amp;quot;&lt;/td>
+&lt;td>Custom Gremlin generation prompt&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>client_config&lt;/code>&lt;/td>
+&lt;td>object&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>null&lt;/td>
+&lt;td>Override graph connection settings&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="response">Response&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;query&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Tell me about Al Pacino&amp;#39;s movies&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph_only&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;answer&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Al Pacino starred in The Godfather (1972), directed by Francis Ford Coppola...&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;context&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;The Godfather is a 1972 crime film...&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;...&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph_paths&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;...&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;keywords&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Al Pacino&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;movies&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="example-curl">Example (curl)&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl -X POST http://localhost:8001/rag &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> -H &lt;span style="color:#4e9a06">&amp;#34;Content-Type: application/json&amp;#34;&lt;/span> &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> -d &lt;span style="color:#4e9a06">&amp;#39;{
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> &amp;#34;query&amp;#34;: &amp;#34;Tell me about Al Pacino&amp;#34;,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> &amp;#34;graph_only&amp;#34;: true,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> &amp;#34;max_graph_items&amp;#34;: 30
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> }&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-graph-retrieval-only">2. Graph Retrieval Only&lt;/h3>
+&lt;p>&lt;strong>POST&lt;/strong> &lt;code>/rag/graph&lt;/code>&lt;/p>
+&lt;p>Retrieve graph context without generating an answer. Useful for debugging or custom processing.&lt;/p>
+&lt;h4 id="request-body-1">Request Body&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;query&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Al Pacino movies&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_graph_items&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">30&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;topk_return_results&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">20&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;vector_dis_threshold&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0.9&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;topk_per_keyword&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gremlin_tmpl_num&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;rerank_method&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;cohere&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;near_neighbor_first&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">false&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;custom_priority_info&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gremlin_prompt&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;get_vertex_only&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">false&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;client_config&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1:8080&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;admin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;pwd&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;admin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gs&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Additional Parameter:&lt;/strong>&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>get_vertex_only&lt;/code>&lt;/td>
+&lt;td>boolean&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>Return only vertex IDs without full details&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="response-1">Response&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph_recall&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;query&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Al Pacino movies&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;keywords&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;Al Pacino&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;movies&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;match_vids&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1:Al Pacino&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;2:The Godfather&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph_result_flag&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gremlin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;g.V(&amp;#39;1:Al Pacino&amp;#39;).outE().inV().limit(30)&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph_result&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#204a87;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;1:Al Pacino&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;person&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Al Pacino&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}},&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#204a87;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;2:The Godfather&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;label&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;movie&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;properties&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#204a87;font-weight:bold">&amp;#34;title&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;The Godfather&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">}}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;vertex_degree_list&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">12&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="example-curl-1">Example (curl)&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl -X POST http://localhost:8001/rag/graph &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> -H &lt;span style="color:#4e9a06">&amp;#34;Content-Type: application/json&amp;#34;&lt;/span> &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> -d &lt;span style="color:#4e9a06">&amp;#39;{
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> &amp;#34;query&amp;#34;: &amp;#34;Al Pacino&amp;#34;,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> &amp;#34;max_graph_items&amp;#34;: 30,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> &amp;#34;get_vertex_only&amp;#34;: false
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> }&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="text2gremlin-endpoint">Text2Gremlin Endpoint&lt;/h2>
+&lt;h3 id="3-natural-language-to-gremlin">3. Natural Language to Gremlin&lt;/h3>
+&lt;p>&lt;strong>POST&lt;/strong> &lt;code>/text2gremlin&lt;/code>&lt;/p>
+&lt;p>Convert natural language queries to executable Gremlin commands.&lt;/p>
+&lt;h4 id="request-body-2">Request Body&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;query&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Find all movies directed by Francis Ford Coppola&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;example_num&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">5&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gremlin_prompt&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;output_types&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;GREMLIN&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;RESULT&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;client_config&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1:8080&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;graph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;admin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;pwd&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;admin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gs&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Parameters:&lt;/strong>&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Field&lt;/th>
+&lt;th>Type&lt;/th>
+&lt;th>Required&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>query&lt;/code>&lt;/td>
+&lt;td>string&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>-&lt;/td>
+&lt;td>Natural language query&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>example_num&lt;/code>&lt;/td>
+&lt;td>integer&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>5&lt;/td>
+&lt;td>Number of example templates to use&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gremlin_prompt&lt;/code>&lt;/td>
+&lt;td>string&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>&amp;quot;&amp;quot;&lt;/td>
+&lt;td>Custom prompt for Gremlin generation&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>output_types&lt;/code>&lt;/td>
+&lt;td>array&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>null&lt;/td>
+&lt;td>Output types: [&amp;ldquo;GREMLIN&amp;rdquo;, &amp;ldquo;RESULT&amp;rdquo;, &amp;ldquo;CYPHER&amp;rdquo;]&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>client_config&lt;/code>&lt;/td>
+&lt;td>object&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>null&lt;/td>
+&lt;td>Graph connection override&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;strong>Output Types:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>GREMLIN&lt;/code>: Generated Gremlin query&lt;/li>
+&lt;li>&lt;code>RESULT&lt;/code>: Execution result from graph&lt;/li>
+&lt;li>&lt;code>CYPHER&lt;/code>: Cypher query (if requested)&lt;/li>
+&lt;/ul>
+&lt;h4 id="response-2">Response&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gremlin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;g.V().has(&amp;#39;person&amp;#39;,&amp;#39;name&amp;#39;,&amp;#39;Francis Ford Coppola&amp;#39;).out(&amp;#39;directed&amp;#39;).hasLabel(&amp;#39;movie&amp;#39;).values(&amp;#39;title&amp;#39;)&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;result&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;The Godfather&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;The Godfather Part II&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;Apocalypse Now&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="example-curl-2">Example (curl)&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl -X POST http://localhost:8001/text2gremlin &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> -H &lt;span style="color:#4e9a06">&amp;#34;Content-Type: application/json&amp;#34;&lt;/span> &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> -d &lt;span style="color:#4e9a06">&amp;#39;{
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> &amp;#34;query&amp;#34;: &amp;#34;Find all movies directed by Francis Ford Coppola&amp;#34;,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> &amp;#34;output_types&amp;#34;: [&amp;#34;GREMLIN&amp;#34;, &amp;#34;RESULT&amp;#34;]
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> }&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="configuration-endpoints">Configuration Endpoints&lt;/h2>
+&lt;h3 id="4-update-graph-connection">4. Update Graph Connection&lt;/h3>
+&lt;p>&lt;strong>POST&lt;/strong> &lt;code>/config/graph&lt;/code>&lt;/p>
+&lt;p>Dynamically update HugeGraph connection settings.&lt;/p>
+&lt;h4 id="request-body-3">Request Body&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1:8080&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;user&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;admin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;pwd&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;admin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;gs&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="response-3">Response&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;status_code&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">201&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;message&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Graph configuration updated successfully&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="5-update-llm-configuration">5. Update LLM Configuration&lt;/h3>
+&lt;p>&lt;strong>POST&lt;/strong> &lt;code>/config/llm&lt;/code>&lt;/p>
+&lt;p>Update chat/extract LLM settings at runtime.&lt;/p>
+&lt;h4 id="request-body-openai">Request Body (OpenAI)&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;llm_type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;openai&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;api_key&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;sk-your-api-key&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;api_base&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;https://api.openai.com/v1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;language_model&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;gpt-4o-mini&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;max_tokens&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">4096&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="request-body-ollama">Request Body (Ollama)&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;llm_type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;ollama/local&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;host&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;port&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">11434&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;language_model&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;llama3.1:8b&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="6-update-embedding-configuration">6. Update Embedding Configuration&lt;/h3>
+&lt;p>&lt;strong>POST&lt;/strong> &lt;code>/config/embedding&lt;/code>&lt;/p>
+&lt;p>Update embedding model settings.&lt;/p>
+&lt;h4 id="request-body-4">Request Body&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;llm_type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;openai&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;api_key&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;sk-your-api-key&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;api_base&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;https://api.openai.com/v1&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;language_model&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;text-embedding-3-small&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="7-update-reranker-configuration">7. Update Reranker Configuration&lt;/h3>
+&lt;p>&lt;strong>POST&lt;/strong> &lt;code>/config/rerank&lt;/code>&lt;/p>
+&lt;p>Configure reranker settings.&lt;/p>
+&lt;h4 id="request-body-cohere">Request Body (Cohere)&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;reranker_type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;cohere&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;api_key&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;your-cohere-key&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;reranker_model&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;rerank-multilingual-v3.0&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;cohere_base_url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;https://api.cohere.com/v1/rerank&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="request-body-siliconflow">Request Body (SiliconFlow)&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;reranker_type&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;siliconflow&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;api_key&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;your-siliconflow-key&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;reranker_model&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;BAAI/bge-reranker-v2-m3&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="error-responses">Error Responses&lt;/h2>
+&lt;p>All endpoints return standard HTTP status codes:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Code&lt;/th>
+&lt;th>Meaning&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>200&lt;/td>
+&lt;td>Success&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>201&lt;/td>
+&lt;td>Created (config updated)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>400&lt;/td>
+&lt;td>Bad Request (invalid parameters)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>500&lt;/td>
+&lt;td>Internal Server Error&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>501&lt;/td>
+&lt;td>Not Implemented&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Error response format:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">&amp;#34;detail&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Error message describing what went wrong&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="python-client-example">Python Client Example&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">import&lt;/span> &lt;span style="color:#000">requests&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">BASE_URL&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;http://localhost:8001&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 1. Configure graph connection&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">graph_config&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;url&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;127.0.0.1:8080&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;hugegraph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;user&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;admin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;pwd&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;admin&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">requests&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">post&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">f&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;&lt;/span>&lt;span style="color:#4e9a06">{&lt;/span>&lt;span style="color:#000">BASE_URL&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>&lt;span style="color:#4e9a06">/config/graph&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">json&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">graph_config&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 2. Execute RAG query&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">rag_request&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;query&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Tell me about Al Pacino&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;graph_only&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#204a87;font-weight:bold">True&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;max_graph_items&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">30&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">response&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">requests&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">post&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">f&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;&lt;/span>&lt;span style="color:#4e9a06">{&lt;/span>&lt;span style="color:#000">BASE_URL&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>&lt;span style="color:#4e9a06">/rag&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">json&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">rag_request&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">print&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">response&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">json&lt;/span>&lt;span style="color:#000;font-weight:bold">())&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># 3. Generate Gremlin from natural language&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">text2gql_request&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;query&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Find all directors who worked with Al Pacino&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;output_types&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;GREMLIN&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;RESULT&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">response&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">requests&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">post&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">f&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;&lt;/span>&lt;span style="color:#4e9a06">{&lt;/span>&lt;span style="color:#000">BASE_URL&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span>&lt;span style="color:#4e9a06">/text2gremlin&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">json&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#000">text2gql_request&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">print&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">response&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#000">json&lt;/span>&lt;span style="color:#000;font-weight:bold">())&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h2 id="see-also">See Also&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="./config-reference.md">Configuration Reference&lt;/a> - Complete .env configuration guide&lt;/li>
+&lt;li>&lt;a href="./hugegraph-llm.md">HugeGraph-LLM Overview&lt;/a> - Architecture and features&lt;/li>
+&lt;li>&lt;a href="./quick_start.md">Quick Start Guide&lt;/a> - Getting started with the Web UI&lt;/li>
+&lt;/ul></description></item></channel></rss>

@@ -4,7 +4,7 @@
 We support HugeGraph-Client for Java/Go/&lt;a href="https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-python-client">Python&lt;/a> language.
 You can use &lt;a href="/docs/clients/hugegraph-client">Client-API&lt;/a> to write code to operate HugeGraph, such as adding, deleting, modifying, and querying schema and graph data, or executing gremlin statements.&lt;/p>
 &lt;blockquote>
-&lt;p>&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/blob/master/hugegraph-client-go/README.en.md">HugeGraph client SDK tool based on Go language&lt;/a> (version &amp;gt;=1.2.0)&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/hugegraph-toolchain/blob/master/hugegraph-client-go/README.en.md">HugeGraph client SDK tool based on Go language&lt;/a> (version &amp;gt;=1.2.0)&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="2-what-you-need">2 What You Need&lt;/h3>
 &lt;ul>
@@ -457,7 +457,7 @@ You can use &lt;a href="/docs/clients/hugegraph-client">Client-API&lt;/a> to wri
 &lt;h2 id="software-architecture">Software Architecture&lt;/h2>
 &lt;p>(Software architecture description)&lt;/p>
 &lt;h2 id="installation-tutorial">Installation Tutorial&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>go get github.com/apache/incubator-hugegraph-toolchain/hugegraph-client-go
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>go get github.com/apache/hugegraph-toolchain/hugegraph-client-go
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="implemented-apis">Implemented APIs&lt;/h2>
 &lt;table>
 &lt;thead>
@@ -485,8 +485,8 @@ You can use &lt;a href="/docs/clients/hugegraph-client">Client-API&lt;/a> to wri
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;log&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;os&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;github.com/apache/incubator-hugegraph-toolchain/hugegraph-client-go&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;github.com/apache/incubator-hugegraph-toolchain/hugegraph-client-go/hgtransport&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;github.com/apache/hugegraph-toolchain/hugegraph-client-go&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;github.com/apache/hugegraph-toolchain/hugegraph-client-go/hgtransport&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">func&lt;/span> &lt;span style="color:#000">main&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
@@ -519,8 +519,8 @@ You can use &lt;a href="/docs/clients/hugegraph-client">Client-API&lt;/a> to wri
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;log&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;os&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;github.com/apache/incubator-hugegraph-toolchain/hugegraph-client-go&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;github.com/apache/incubator-hugegraph-toolchain/hugegraph-client-go/hgtransport&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;github.com/apache/hugegraph-toolchain/hugegraph-client-go&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;github.com/apache/hugegraph-toolchain/hugegraph-client-go/hgtransport&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// initClient initializes and returns a HugeGraph client instance

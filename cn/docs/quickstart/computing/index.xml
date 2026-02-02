@@ -90,7 +90,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>&lt;strong>方案三：从源码构建&lt;/strong>&lt;/li>
 &lt;/ol>
-&lt;p>构建。具体请参照 &lt;a href="https://github.com/apache/incubator-hugegraph-computer/tree/master/vermeer">Vermeer Readme&lt;/a>。&lt;/p>
+&lt;p>构建。具体请参照 &lt;a href="https://github.com/apache/hugegraph-computer/tree/master/vermeer">Vermeer Readme&lt;/a>。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>go build
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在进入文件夹目录后输入 &lt;code>./vermeer --env=master&lt;/code> 或 &lt;code>./vermeer --env=worker01&lt;/code>&lt;/p>
 &lt;h2 id="二任务创建类-rest-api">二、任务创建类 rest api&lt;/h2>
@@ -461,7 +461,7 @@
 &lt;p>🚧, 后续随时更新完善，欢迎随时提出建议和意见。&lt;/p>
 &lt;/blockquote></description></item><item><title>Docs: HugeGraph-Computer Quick Start</title><link>/cn/docs/quickstart/computing/hugegraph-computer/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/computing/hugegraph-computer/</guid><description>
 &lt;h2 id="1-hugegraph-computer-概述">1 HugeGraph-Computer 概述&lt;/h2>
-&lt;p>&lt;a href="https://github.com/apache/incubator-hugegraph-computer">&lt;code>HugeGraph-Computer&lt;/code>&lt;/a> 是分布式图处理系统 (OLAP). 它是 &lt;a href="https://kowshik.github.io/JPregel/pregel_paper.pdf">Pregel&lt;/a>的一个实现。它可以运行在 Kubernetes(K8s)/Yarn 上。(它侧重可支持百亿~千亿的图数据量下进行图计算, 会使用磁盘进行排序和加速, 这是它和 Vermeer 相对最大的区别之一)&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/hugegraph-computer">&lt;code>HugeGraph-Computer&lt;/code>&lt;/a> 是分布式图处理系统 (OLAP). 它是 &lt;a href="https://kowshik.github.io/JPregel/pregel_paper.pdf">Pregel&lt;/a>的一个实现。它可以运行在 Kubernetes(K8s)/Yarn 上。(它侧重可支持百亿~千亿的图数据量下进行图计算, 会使用磁盘进行排序和加速, 这是它和 Vermeer 相对最大的区别之一)&lt;/p>
 &lt;h3 id="特性">特性&lt;/h3>
 &lt;ul>
 &lt;li>支持分布式 MPP 图计算，集成 HugeGraph 作为图输入输出存储。&lt;/li>
@@ -614,4 +614,1352 @@
 &lt;h2 id="6-注意事项">6 注意事项&lt;/h2>
 &lt;ul>
 &lt;li>如果 computer-k8s 模块下面的某些类不存在，你需要运行&lt;code>mvn compile&lt;/code>来提前生成对应的类。&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;/ul></description></item><item><title>Docs: HugeGraph-Computer 配置参考</title><link>/cn/docs/quickstart/computing/hugegraph-computer-config/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/computing/hugegraph-computer-config/</guid><description>
+&lt;h3 id="computer-配置选项">Computer 配置选项&lt;/h3>
+&lt;blockquote>
+&lt;p>&lt;strong>默认值说明:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>以下配置项显示的是&lt;strong>代码默认值&lt;/strong>(定义在 &lt;code>ComputerOptions.java&lt;/code> 中)&lt;/li>
+&lt;li>当&lt;strong>打包配置文件&lt;/strong>(&lt;code>conf/computer.properties&lt;/code> 分发包中)指定了不同的值时,会以 &lt;code>值 (打包: 值)&lt;/code> 的形式标注&lt;/li>
+&lt;li>示例:&lt;code>300000 (打包: 100000)&lt;/code> 表示代码默认值为 300000,但分发包默认值为 100000&lt;/li>
+&lt;li>对于生产环境部署,除非明确覆盖,否则打包默认值优先生效&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;hr>
+&lt;h3 id="1-基础配置">1. 基础配置&lt;/h3>
+&lt;p>HugeGraph-Computer 核心作业设置。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>hugegraph.url&lt;/td>
+&lt;td>http://127.0.0.1:8080&lt;/td>
+&lt;td>HugeGraph 服务器 URL,用于加载数据和写回结果。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>hugegraph.name&lt;/td>
+&lt;td>hugegraph&lt;/td>
+&lt;td>图名称,用于加载数据和写回结果。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>hugegraph.username&lt;/td>
+&lt;td>&amp;quot;&amp;quot; (空)&lt;/td>
+&lt;td>HugeGraph 认证用户名(如果未启用认证则留空)。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>hugegraph.password&lt;/td>
+&lt;td>&amp;quot;&amp;quot; (空)&lt;/td>
+&lt;td>HugeGraph 认证密码(如果未启用认证则留空)。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>job.id&lt;/td>
+&lt;td>local_0001 (打包: local_001)&lt;/td>
+&lt;td>YARN 集群或 K8s 集群上的作业标识符。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>job.namespace&lt;/td>
+&lt;td>&amp;quot;&amp;quot; (空)&lt;/td>
+&lt;td>作业命名空间,可以分隔不同的数据源。🔒 &lt;strong>由系统管理 - 不要手动修改&lt;/strong>。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>job.workers_count&lt;/td>
+&lt;td>1&lt;/td>
+&lt;td>执行一个图算法作业的 Worker 数量。🔒 &lt;strong>在 K8s 中由系统管理 - 不要手动修改&lt;/strong>。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>job.partitions_count&lt;/td>
+&lt;td>1&lt;/td>
+&lt;td>执行一个图算法作业的分区数量。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>job.partitions_thread_nums&lt;/td>
+&lt;td>4&lt;/td>
+&lt;td>分区并行计算的线程数量。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="2-算法配置">2. 算法配置&lt;/h3>
+&lt;p>计算逻辑的算法特定配置。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>algorithm.params_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.config.Null&lt;/td>
+&lt;td>⚠️ &lt;strong>必填&lt;/strong> 在算法运行前用于传递算法参数的类。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>algorithm.result_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.config.Null&lt;/td>
+&lt;td>顶点值的类,用于存储顶点的计算结果。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>algorithm.message_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.config.Null&lt;/td>
+&lt;td>计算顶点时传递的消息类。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="3-输入配置">3. 输入配置&lt;/h3>
+&lt;p>从 HugeGraph 或其他数据源加载输入数据的配置。&lt;/p>
+&lt;h4 id="31-输入源">3.1 输入源&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>input.source_type&lt;/td>
+&lt;td>hugegraph-server&lt;/td>
+&lt;td>加载输入数据的源类型,允许值:[&amp;lsquo;hugegraph-server&amp;rsquo;, &amp;lsquo;hugegraph-loader&amp;rsquo;]。&amp;lsquo;hugegraph-loader&amp;rsquo; 表示使用 hugegraph-loader 从 HDFS 或文件加载数据。如果使用 &amp;lsquo;hugegraph-loader&amp;rsquo;,请配置 &amp;lsquo;input.loader_struct_path&amp;rsquo; 和 &amp;lsquo;input.loader_schema_path&amp;rsquo;。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.loader_struct_path&lt;/td>
+&lt;td>&amp;quot;&amp;quot; (空)&lt;/td>
+&lt;td>Loader 输入的结构路径,仅在 input.source_type=loader 启用时生效。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.loader_schema_path&lt;/td>
+&lt;td>&amp;quot;&amp;quot; (空)&lt;/td>
+&lt;td>Loader 输入的 schema 路径,仅在 input.source_type=loader 启用时生效。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="32-输入分片">3.2 输入分片&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>input.split_size&lt;/td>
+&lt;td>1048576 (1 MB)&lt;/td>
+&lt;td>输入分片大小(字节)。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.split_max_splits&lt;/td>
+&lt;td>10000000&lt;/td>
+&lt;td>最大输入分片数量。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.split_page_size&lt;/td>
+&lt;td>500&lt;/td>
+&lt;td>流式加载输入分片数据的页面大小。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.split_fetch_timeout&lt;/td>
+&lt;td>300&lt;/td>
+&lt;td>获取输入分片的超时时间(秒)。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="33-输入处理">3.3 输入处理&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>input.filter_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.input.filter.DefaultInputFilter&lt;/td>
+&lt;td>创建输入过滤器对象的类。输入过滤器用于根据用户需求过滤顶点边。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.edge_direction&lt;/td>
+&lt;td>OUT&lt;/td>
+&lt;td>要加载的边的方向,允许值:[OUT, IN, BOTH]。当值为 BOTH 时,将加载 OUT 和 IN 两个方向的边。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.edge_freq&lt;/td>
+&lt;td>MULTIPLE&lt;/td>
+&lt;td>一对顶点之间可以存在的边的频率,允许值:[SINGLE, SINGLE_PER_LABEL, MULTIPLE]。SINGLE 表示一对顶点之间只能存在一条边(通过 sourceId + targetId 标识);SINGLE_PER_LABEL 表示每个边标签在一对顶点之间可以有一条边(通过 sourceId + edgeLabel + targetId 标识);MULTIPLE 表示一对顶点之间可以存在多条边(通过 sourceId + edgeLabel + sortValues + targetId 标识)。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>input.max_edges_in_one_vertex&lt;/td>
+&lt;td>200&lt;/td>
+&lt;td>允许附加到一个顶点的最大邻接边数量。邻接边将作为一个批处理单元一起存储和传输。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="34-输入性能">3.4 输入性能&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>input.send_thread_nums&lt;/td>
+&lt;td>4&lt;/td>
+&lt;td>并行发送顶点或边的线程数量。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="4-快照与存储配置">4. 快照与存储配置&lt;/h3>
+&lt;p>HugeGraph-Computer 支持快照功能,可将顶点/边分区保存到本地存储或 MinIO 对象存储,用于断点恢复或加速重复计算。&lt;/p>
+&lt;h4 id="41-基础快照配置">4.1 基础快照配置&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>snapshot.write&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>是否写入输入顶点/边分区的快照。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>snapshot.load&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>是否从顶点/边分区的快照加载。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>snapshot.name&lt;/td>
+&lt;td>&amp;quot;&amp;quot; (空)&lt;/td>
+&lt;td>用户自定义的快照名称,用于区分不同的快照。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="42-minio-集成可选">4.2 MinIO 集成(可选)&lt;/h4>
+&lt;p>MinIO 可用作 K8s 部署中快照的分布式对象存储后端。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>snapshot.minio_endpoint&lt;/td>
+&lt;td>&amp;quot;&amp;quot; (空)&lt;/td>
+&lt;td>MinIO 服务端点(例如 &lt;code>http://minio:9000&lt;/code>)。使用 MinIO 时必填。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>snapshot.minio_access_key&lt;/td>
+&lt;td>minioadmin&lt;/td>
+&lt;td>MinIO 认证访问密钥。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>snapshot.minio_secret_key&lt;/td>
+&lt;td>minioadmin&lt;/td>
+&lt;td>MinIO 认证密钥。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>snapshot.minio_bucket_name&lt;/td>
+&lt;td>&amp;quot;&amp;quot; (空)&lt;/td>
+&lt;td>用于存储快照数据的 MinIO 存储桶名称。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;strong>使用场景:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>断点恢复&lt;/strong>:作业失败后从快照恢复,避免重新加载数据&lt;/li>
+&lt;li>&lt;strong>重复计算&lt;/strong>:多次运行同一算法时从快照加载数据以加速启动&lt;/li>
+&lt;li>&lt;strong>A/B 测试&lt;/strong>:保存同一数据集的多个快照版本,测试不同的算法参数&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>示例:本地快照&lt;/strong>(在 &lt;code>computer.properties&lt;/code> 中):&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>snapshot.write=true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>snapshot.name=pagerank-snapshot-20260201
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>示例:MinIO 快照&lt;/strong>(在 K8s CRD &lt;code>computerConf&lt;/code> 中):&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">computerConf&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">snapshot.write&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;true&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">snapshot.name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;pagerank-snapshot-v1&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">snapshot.minio_endpoint&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;http://minio:9000&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">snapshot.minio_access_key&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;my-access-key&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">snapshot.minio_secret_key&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;my-secret-key&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">snapshot.minio_bucket_name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;hugegraph-snapshots&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;hr>
+&lt;h3 id="5-worker-与-master-配置">5. Worker 与 Master 配置&lt;/h3>
+&lt;p>Worker 和 Master 计算逻辑的配置。&lt;/p>
+&lt;h4 id="51-master-配置">5.1 Master 配置&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>master.computation_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.master.DefaultMasterComputation&lt;/td>
+&lt;td>Master 计算是可以决定是否继续下一个超步的计算。它在每个超步结束时在 master 上运行。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="52-worker-计算">5.2 Worker 计算&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>worker.computation_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.config.Null&lt;/td>
+&lt;td>创建 worker 计算对象的类。Worker 计算用于在每个超步中计算每个顶点。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>worker.combiner_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.config.Null&lt;/td>
+&lt;td>Combiner 可以将消息组合为一个顶点的一个值。例如,PageRank 算法可以将一个顶点的消息组合为一个求和值。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>worker.partitioner&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.graph.partition.HashPartitioner&lt;/td>
+&lt;td>分区器,决定顶点应该在哪个分区中,以及分区应该在哪个 worker 中。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="53-worker-组合器">5.3 Worker 组合器&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>worker.vertex_properties_combiner_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.combiner.OverwritePropertiesCombiner&lt;/td>
+&lt;td>组合器可以在输入步骤将同一顶点的多个属性组合为一个属性。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>worker.edge_properties_combiner_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.combiner.OverwritePropertiesCombiner&lt;/td>
+&lt;td>组合器可以在输入步骤将同一边的多个属性组合为一个属性。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="54-worker-缓冲区">5.4 Worker 缓冲区&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>worker.received_buffers_bytes_limit&lt;/td>
+&lt;td>104857600 (100 MB)&lt;/td>
+&lt;td>接收数据缓冲区的限制字节数。所有缓冲区的总大小不能超过此限制。如果接收缓冲区达到此限制,它们将被合并到文件中(溢出到磁盘)。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>worker.write_buffer_capacity&lt;/td>
+&lt;td>52428800 (50 MB)&lt;/td>
+&lt;td>用于存储顶点或消息的写缓冲区的初始大小。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>worker.write_buffer_threshold&lt;/td>
+&lt;td>52428800 (50 MB)&lt;/td>
+&lt;td>写缓冲区的阈值。超过它将触发排序。写缓冲区用于存储顶点或消息。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="55-worker-数据与超时">5.5 Worker 数据与超时&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>worker.data_dirs&lt;/td>
+&lt;td>[jobs]&lt;/td>
+&lt;td>用逗号分隔的目录,接收的顶点和消息可以持久化到其中。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>worker.wait_sort_timeout&lt;/td>
+&lt;td>600000 (10 分钟)&lt;/td>
+&lt;td>消息处理程序等待排序线程对一批缓冲区进行排序的最大超时时间(毫秒)。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>worker.wait_finish_messages_timeout&lt;/td>
+&lt;td>86400000 (24 小时)&lt;/td>
+&lt;td>消息处理程序等待所有 worker 完成消息的最大超时时间(毫秒)。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="6-io-与输出配置">6. I/O 与输出配置&lt;/h3>
+&lt;p>输出计算结果的配置。&lt;/p>
+&lt;h4 id="61-输出类与结果">6.1 输出类与结果&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>output.output_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.output.LogOutput&lt;/td>
+&lt;td>输出每个顶点计算结果的类。在迭代计算后调用。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.result_name&lt;/td>
+&lt;td>value&lt;/td>
+&lt;td>该值由 WORKER_COMPUTATION_CLASS 创建的实例的 #name() 动态分配。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.result_write_type&lt;/td>
+&lt;td>OLAP_COMMON&lt;/td>
+&lt;td>输出到 HugeGraph 的结果写入类型,允许值:[OLAP_COMMON, OLAP_SECONDARY, OLAP_RANGE]。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="62-输出行为">6.2 输出行为&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>output.with_adjacent_edges&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>是否输出顶点的邻接边。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.with_vertex_properties&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>是否输出顶点的属性。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.with_edge_properties&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>是否输出边的属性。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="63-批量输出">6.3 批量输出&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>output.batch_size&lt;/td>
+&lt;td>500&lt;/td>
+&lt;td>输出的批处理大小。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.batch_threads&lt;/td>
+&lt;td>1&lt;/td>
+&lt;td>用于批量输出的线程数量。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.single_threads&lt;/td>
+&lt;td>1&lt;/td>
+&lt;td>用于单个输出的线程数量。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="64-hdfs-输出">6.4 HDFS 输出&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>output.hdfs_url&lt;/td>
+&lt;td>hdfs://127.0.0.1:9000&lt;/td>
+&lt;td>输出的 HDFS URL。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_user&lt;/td>
+&lt;td>hadoop&lt;/td>
+&lt;td>输出的 HDFS 用户。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_path_prefix&lt;/td>
+&lt;td>/hugegraph-computer/results&lt;/td>
+&lt;td>HDFS 输出结果的目录。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_delimiter&lt;/td>
+&lt;td>, (逗号)&lt;/td>
+&lt;td>HDFS 输出的分隔符。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_merge_partitions&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>是否合并多个分区的输出文件。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_replication&lt;/td>
+&lt;td>3&lt;/td>
+&lt;td>HDFS 的副本数。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_core_site_path&lt;/td>
+&lt;td>&amp;quot;&amp;quot; (空)&lt;/td>
+&lt;td>HDFS core site 路径。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_site_path&lt;/td>
+&lt;td>&amp;quot;&amp;quot; (空)&lt;/td>
+&lt;td>HDFS site 路径。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_kerberos_enable&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>是否为 HDFS 启用 Kerberos 认证。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_kerberos_principal&lt;/td>
+&lt;td>&amp;quot;&amp;quot; (空)&lt;/td>
+&lt;td>HDFS 的 Kerberos 认证 principal。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_kerberos_keytab&lt;/td>
+&lt;td>&amp;quot;&amp;quot; (空)&lt;/td>
+&lt;td>HDFS 的 Kerberos 认证 keytab 文件。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.hdfs_krb5_conf&lt;/td>
+&lt;td>/etc/krb5.conf&lt;/td>
+&lt;td>Kerberos 配置文件路径。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="65-重试与超时">6.5 重试与超时&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>output.retry_times&lt;/td>
+&lt;td>3&lt;/td>
+&lt;td>输出失败时的重试次数。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.retry_interval&lt;/td>
+&lt;td>10&lt;/td>
+&lt;td>输出失败时的重试间隔(秒)。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>output.thread_pool_shutdown_timeout&lt;/td>
+&lt;td>60&lt;/td>
+&lt;td>输出线程池关闭的超时时间(秒)。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="7-网络与传输配置">7. 网络与传输配置&lt;/h3>
+&lt;p>Worker 和 Master 之间网络通信的配置。&lt;/p>
+&lt;h4 id="71-服务器配置">7.1 服务器配置&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>transport.server_host&lt;/td>
+&lt;td>127.0.0.1&lt;/td>
+&lt;td>🔒 &lt;strong>由系统管理&lt;/strong> 监听传输数据的服务器主机名或 IP。不要手动修改。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.server_port&lt;/td>
+&lt;td>0&lt;/td>
+&lt;td>🔒 &lt;strong>由系统管理&lt;/strong> 监听传输数据的服务器端口。如果设置为 0,系统将分配一个随机端口。不要手动修改。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.server_threads&lt;/td>
+&lt;td>4&lt;/td>
+&lt;td>服务器传输线程的数量。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="72-客户端配置">7.2 客户端配置&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>transport.client_threads&lt;/td>
+&lt;td>4&lt;/td>
+&lt;td>客户端传输线程的数量。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.client_connect_timeout&lt;/td>
+&lt;td>3000&lt;/td>
+&lt;td>客户端连接到服务器的超时时间(毫秒)。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="73-协议配置">7.3 协议配置&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>transport.provider_class&lt;/td>
+&lt;td>org.apache.hugegraph.computer.core.network.netty.NettyTransportProvider&lt;/td>
+&lt;td>传输提供程序,目前仅支持 Netty。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.io_mode&lt;/td>
+&lt;td>AUTO&lt;/td>
+&lt;td>网络 IO 模式,允许值:[NIO, EPOLL, AUTO]。AUTO 表示自动选择适当的模式。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.tcp_keep_alive&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>是否启用 TCP keep-alive。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.transport_epoll_lt&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>是否启用 EPOLL 水平触发(仅在 io_mode=EPOLL 时有效)。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="74-缓冲区配置">7.4 缓冲区配置&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>transport.send_buffer_size&lt;/td>
+&lt;td>0&lt;/td>
+&lt;td>Socket 发送缓冲区大小(字节)。0 表示使用系统默认值。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.receive_buffer_size&lt;/td>
+&lt;td>0&lt;/td>
+&lt;td>Socket 接收缓冲区大小(字节)。0 表示使用系统默认值。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.write_buffer_high_mark&lt;/td>
+&lt;td>67108864 (64 MB)&lt;/td>
+&lt;td>写缓冲区的高水位标记(字节)。如果排队字节数 &amp;gt; write_buffer_high_mark,将触发发送不可用。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.write_buffer_low_mark&lt;/td>
+&lt;td>33554432 (32 MB)&lt;/td>
+&lt;td>写缓冲区的低水位标记(字节)。如果排队字节数 &amp;lt; write_buffer_low_mark,将触发发送可用。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="75-流量控制">7.5 流量控制&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>transport.max_pending_requests&lt;/td>
+&lt;td>8&lt;/td>
+&lt;td>客户端未接收 ACK 的最大数量。如果未接收 ACK 的数量 &amp;gt;= max_pending_requests,将触发发送不可用。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.min_pending_requests&lt;/td>
+&lt;td>6&lt;/td>
+&lt;td>客户端未接收 ACK 的最小数量。如果未接收 ACK 的数量 &amp;lt; min_pending_requests,将触发发送可用。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.min_ack_interval&lt;/td>
+&lt;td>200&lt;/td>
+&lt;td>服务器回复 ACK 的最小间隔(毫秒)。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="76-超时配置">7.6 超时配置&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>transport.close_timeout&lt;/td>
+&lt;td>10000&lt;/td>
+&lt;td>关闭服务器或关闭客户端的超时时间(毫秒)。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.sync_request_timeout&lt;/td>
+&lt;td>10000&lt;/td>
+&lt;td>发送同步请求后等待响应的超时时间(毫秒)。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.finish_session_timeout&lt;/td>
+&lt;td>0&lt;/td>
+&lt;td>完成会话的超时时间(毫秒)。0 表示使用 (transport.sync_request_timeout × transport.max_pending_requests)。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.write_socket_timeout&lt;/td>
+&lt;td>3000&lt;/td>
+&lt;td>将数据写入 socket 缓冲区的超时时间(毫秒)。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.server_idle_timeout&lt;/td>
+&lt;td>360000 (6 分钟)&lt;/td>
+&lt;td>服务器空闲的最大超时时间(毫秒)。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="77-心跳配置">7.7 心跳配置&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>transport.heartbeat_interval&lt;/td>
+&lt;td>20000 (20 秒)&lt;/td>
+&lt;td>客户端心跳之间的最小间隔(毫秒)。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.max_timeout_heartbeat_count&lt;/td>
+&lt;td>120&lt;/td>
+&lt;td>客户端超时心跳的最大次数。如果连续等待心跳响应超时的次数 &amp;gt; max_timeout_heartbeat_count,通道将从客户端关闭。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="78-高级网络设置">7.8 高级网络设置&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>transport.max_syn_backlog&lt;/td>
+&lt;td>511&lt;/td>
+&lt;td>服务器端 SYN 队列的容量。0 表示使用系统默认值。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.recv_file_mode&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>是否启用接收缓冲文件模式。如果启用,将使用零拷贝从 socket 接收缓冲区并写入文件。&lt;strong>注意&lt;/strong>:需要操作系统支持零拷贝(例如 Linux sendfile/splice)。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.network_retries&lt;/td>
+&lt;td>3&lt;/td>
+&lt;td>网络通信不稳定时的重试次数。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="8-存储与持久化配置">8. 存储与持久化配置&lt;/h3>
+&lt;p>HGKV(HugeGraph Key-Value)存储引擎和值文件的配置。&lt;/p>
+&lt;h4 id="81-hgkv-配置">8.1 HGKV 配置&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>hgkv.max_file_size&lt;/td>
+&lt;td>2147483648 (2 GB)&lt;/td>
+&lt;td>每个 HGKV 文件的最大字节数。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>hgkv.max_data_block_size&lt;/td>
+&lt;td>65536 (64 KB)&lt;/td>
+&lt;td>HGKV 文件数据块的最大字节大小。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>hgkv.max_merge_files&lt;/td>
+&lt;td>10&lt;/td>
+&lt;td>一次合并的最大文件数。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>hgkv.temp_file_dir&lt;/td>
+&lt;td>/tmp/hgkv&lt;/td>
+&lt;td>此文件夹用于在文件合并过程中存储临时文件。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h4 id="82-值文件配置">8.2 值文件配置&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>valuefile.max_segment_size&lt;/td>
+&lt;td>1073741824 (1 GB)&lt;/td>
+&lt;td>值文件每个段的最大字节数。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="9-bsp-与协调配置">9. BSP 与协调配置&lt;/h3>
+&lt;p>批量同步并行(BSP)协议和 etcd 协调的配置。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>bsp.etcd_endpoints&lt;/td>
+&lt;td>http://localhost:2379&lt;/td>
+&lt;td>🔒 &lt;strong>在 K8s 中由系统管理&lt;/strong> 访问 etcd 的端点。对于多个端点,使用逗号分隔列表:&lt;code>http://host1:port1,http://host2:port2&lt;/code>。不要在 K8s 部署中手动修改。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>bsp.max_super_step&lt;/td>
+&lt;td>10 (打包: 2)&lt;/td>
+&lt;td>算法的最大超步数。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>bsp.register_timeout&lt;/td>
+&lt;td>300000 (打包: 100000)&lt;/td>
+&lt;td>等待 master 和 worker 注册的最大超时时间(毫秒)。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>bsp.wait_workers_timeout&lt;/td>
+&lt;td>86400000 (24 小时)&lt;/td>
+&lt;td>等待 worker BSP 事件的最大超时时间(毫秒)。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>bsp.wait_master_timeout&lt;/td>
+&lt;td>86400000 (24 小时)&lt;/td>
+&lt;td>等待 master BSP 事件的最大超时时间(毫秒)。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>bsp.log_interval&lt;/td>
+&lt;td>30000 (30 秒)&lt;/td>
+&lt;td>等待 BSP 事件时打印日志的日志间隔(毫秒)。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="10-性能调优配置">10. 性能调优配置&lt;/h3>
+&lt;p>性能优化的配置。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>allocator.max_vertices_per_thread&lt;/td>
+&lt;td>10000&lt;/td>
+&lt;td>每个内存分配器中每个线程处理的最大顶点数。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>sort.thread_nums&lt;/td>
+&lt;td>4&lt;/td>
+&lt;td>执行内部排序的线程数量。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="11-系统管理配置">11. 系统管理配置&lt;/h3>
+&lt;p>⚠️ &lt;strong>由系统管理的配置项 - 禁止用户手动修改。&lt;/strong>&lt;/p>
+&lt;p>以下配置项由 K8s Operator、Driver 或运行时系统自动管理。手动修改将导致集群通信失败或作业调度错误。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>管理者&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>bsp.etcd_endpoints&lt;/td>
+&lt;td>K8s Operator&lt;/td>
+&lt;td>自动设置为 operator 的 etcd 服务地址&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.server_host&lt;/td>
+&lt;td>运行时&lt;/td>
+&lt;td>自动设置为 pod/容器主机名&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>transport.server_port&lt;/td>
+&lt;td>运行时&lt;/td>
+&lt;td>自动分配随机端口&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>job.namespace&lt;/td>
+&lt;td>K8s Operator&lt;/td>
+&lt;td>自动设置为作业命名空间&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>job.id&lt;/td>
+&lt;td>K8s Operator&lt;/td>
+&lt;td>自动从 CRD 设置为作业 ID&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>job.workers_count&lt;/td>
+&lt;td>K8s Operator&lt;/td>
+&lt;td>自动从 CRD &lt;code>workerInstances&lt;/code> 设置&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>rpc.server_host&lt;/td>
+&lt;td>运行时&lt;/td>
+&lt;td>RPC 服务器主机名(系统管理)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>rpc.server_port&lt;/td>
+&lt;td>运行时&lt;/td>
+&lt;td>RPC 服务器端口(系统管理)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>rpc.remote_url&lt;/td>
+&lt;td>运行时&lt;/td>
+&lt;td>RPC 远程 URL(系统管理)&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;strong>为什么禁止修改:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>BSP/RPC 配置&lt;/strong>:必须与实际部署的 etcd/RPC 服务匹配。手动覆盖会破坏协调。&lt;/li>
+&lt;li>&lt;strong>作业配置&lt;/strong>:必须与 K8s CRD 规范匹配。不匹配会导致 worker 数量错误。&lt;/li>
+&lt;li>&lt;strong>传输配置&lt;/strong>:必须使用实际的 pod 主机名/端口。手动值会阻止 worker 间通信。&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="k8s-operator-配置选项">K8s Operator 配置选项&lt;/h3>
+&lt;blockquote>
+&lt;p>注意:选项需要通过环境变量设置进行转换,例如 k8s.internal_etcd_url =&amp;gt; INTERNAL_ETCD_URL&lt;/p>
+&lt;/blockquote>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>k8s.auto_destroy_pod&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>作业完成或失败时是否自动销毁所有 pod。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.close_reconciler_timeout&lt;/td>
+&lt;td>120&lt;/td>
+&lt;td>关闭 reconciler 的最大超时时间(毫秒)。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.internal_etcd_url&lt;/td>
+&lt;td>http://127.0.0.1:2379&lt;/td>
+&lt;td>operator 系统的内部 etcd URL。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.max_reconcile_retry&lt;/td>
+&lt;td>3&lt;/td>
+&lt;td>reconcile 的最大重试次数。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.probe_backlog&lt;/td>
+&lt;td>50&lt;/td>
+&lt;td>服务健康探针的最大积压。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.probe_port&lt;/td>
+&lt;td>9892&lt;/td>
+&lt;td>controller 绑定的用于服务健康探针的端口。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.ready_check_internal&lt;/td>
+&lt;td>1000&lt;/td>
+&lt;td>检查就绪的时间间隔(毫秒)。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.ready_timeout&lt;/td>
+&lt;td>30000&lt;/td>
+&lt;td>检查就绪的最大超时时间(毫秒)。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.reconciler_count&lt;/td>
+&lt;td>10&lt;/td>
+&lt;td>reconciler 线程的最大数量。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.resync_period&lt;/td>
+&lt;td>600000&lt;/td>
+&lt;td>被监视资源进行 reconcile 的最小频率。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.timezone&lt;/td>
+&lt;td>Asia/Shanghai&lt;/td>
+&lt;td>computer 作业和 operator 的时区。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.watch_namespace&lt;/td>
+&lt;td>hugegraph-computer-system&lt;/td>
+&lt;td>监视自定义资源的命名空间。使用 &amp;lsquo;*&amp;rsquo; 监视所有命名空间。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="hugegraph-computer-crd">HugeGraph-Computer CRD&lt;/h3>
+&lt;blockquote>
+&lt;p>CRD: &lt;a href="https://github.com/apache/hugegraph-computer/blob/master/computer-k8s-operator/manifest/hugegraph-computer-crd.v1.yaml">https://github.com/apache/hugegraph-computer/blob/master/computer-k8s-operator/manifest/hugegraph-computer-crd.v1.yaml&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>字段&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;th>必填&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>algorithmName&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>算法名称。&lt;/td>
+&lt;td>true&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>jobId&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>作业 ID。&lt;/td>
+&lt;td>true&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>image&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>算法镜像。&lt;/td>
+&lt;td>true&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>computerConf&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>computer 配置选项的映射。&lt;/td>
+&lt;td>true&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>workerInstances&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>worker 实例数量,将覆盖 &amp;lsquo;job.workers_count&amp;rsquo; 选项。&lt;/td>
+&lt;td>true&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>pullPolicy&lt;/td>
+&lt;td>Always&lt;/td>
+&lt;td>镜像拉取策略,详情请参考:https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>pullSecrets&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>镜像拉取密钥,详情请参考:https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>masterCpu&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>master 的 CPU 限制,单位可以是 &amp;rsquo;m&amp;rsquo; 或无单位,详情请参考:&lt;a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu">https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>workerCpu&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>worker 的 CPU 限制,单位可以是 &amp;rsquo;m&amp;rsquo; 或无单位,详情请参考:&lt;a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu">https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>masterMemory&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>master 的内存限制,单位可以是 Ei、Pi、Ti、Gi、Mi、Ki 之一,详情请参考:&lt;a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory">https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>workerMemory&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>worker 的内存限制,单位可以是 Ei、Pi、Ti、Gi、Mi、Ki 之一,详情请参考:&lt;a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory">https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory&lt;/a>&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>log4jXml&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>computer 作业的 log4j.xml 内容。&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>jarFile&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>computer 算法的 jar 路径。&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>remoteJarUri&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>computer 算法的远程 jar URI,将覆盖算法镜像。&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>jvmOptions&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>computer 作业的 Java 启动参数。&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>envVars&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>请参考:https://kubernetes.io/docs/tasks/inject-data-application/define-interdependent-environment-variables/&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>envFrom&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>请参考:https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>masterCommand&lt;/td>
+&lt;td>bin/start-computer.sh&lt;/td>
+&lt;td>master 的运行命令,等同于 Docker 的 &amp;lsquo;Entrypoint&amp;rsquo; 字段。&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>masterArgs&lt;/td>
+&lt;td>[&amp;quot;-r master&amp;quot;, &amp;ldquo;-d k8s&amp;rdquo;]&lt;/td>
+&lt;td>master 的运行参数,等同于 Docker 的 &amp;lsquo;Cmd&amp;rsquo; 字段。&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>workerCommand&lt;/td>
+&lt;td>bin/start-computer.sh&lt;/td>
+&lt;td>worker 的运行命令,等同于 Docker 的 &amp;lsquo;Entrypoint&amp;rsquo; 字段。&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>workerArgs&lt;/td>
+&lt;td>[&amp;quot;-r worker&amp;quot;, &amp;ldquo;-d k8s&amp;rdquo;]&lt;/td>
+&lt;td>worker 的运行参数,等同于 Docker 的 &amp;lsquo;Cmd&amp;rsquo; 字段。&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>volumes&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>请参考:https://kubernetes.io/docs/concepts/storage/volumes/&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>volumeMounts&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>请参考:https://kubernetes.io/docs/concepts/storage/volumes/&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>secretPaths&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>k8s-secret 名称和挂载路径的映射。&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>configMapPaths&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>k8s-configmap 名称和挂载路径的映射。&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>podTemplateSpec&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>请参考:https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-template-v1/#PodTemplateSpec&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>securityContext&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>请参考:https://kubernetes.io/docs/tasks/configure-pod-container/security-context/&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;hr>
+&lt;h3 id="kubedriver-配置选项">KubeDriver 配置选项&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配置项&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>k8s.build_image_bash_path&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>用于构建镜像的命令路径。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.enable_internal_algorithm&lt;/td>
+&lt;td>true&lt;/td>
+&lt;td>是否启用内部算法。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.framework_image_url&lt;/td>
+&lt;td>hugegraph/hugegraph-computer:latest&lt;/td>
+&lt;td>computer 框架的镜像 URL。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.image_repository_password&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>登录镜像仓库的密码。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.image_repository_registry&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>登录镜像仓库的地址。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.image_repository_url&lt;/td>
+&lt;td>hugegraph/hugegraph-computer&lt;/td>
+&lt;td>镜像仓库的 URL。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.image_repository_username&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>登录镜像仓库的用户名。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.internal_algorithm&lt;/td>
+&lt;td>[pageRank]&lt;/td>
+&lt;td>所有内部算法的名称列表。&lt;strong>注意&lt;/strong>:算法名称在这里使用驼峰命名法(例如 &lt;code>pageRank&lt;/code>),但算法实现返回下划线命名法(例如 &lt;code>page_rank&lt;/code>)。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.internal_algorithm_image_url&lt;/td>
+&lt;td>hugegraph/hugegraph-computer:latest&lt;/td>
+&lt;td>内部算法的镜像 URL。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.jar_file_dir&lt;/td>
+&lt;td>/cache/jars/&lt;/td>
+&lt;td>算法 jar 将上传到的目录。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.kube_config&lt;/td>
+&lt;td>~/.kube/config&lt;/td>
+&lt;td>k8s 配置文件的路径。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.log4j_xml_path&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>computer 作业的 log4j.xml 路径。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.namespace&lt;/td>
+&lt;td>hugegraph-computer-system&lt;/td>
+&lt;td>hugegraph-computer 系统的命名空间。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>k8s.pull_secret_names&lt;/td>
+&lt;td>[]&lt;/td>
+&lt;td>拉取镜像的 pull-secret 名称。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item></channel></rss>

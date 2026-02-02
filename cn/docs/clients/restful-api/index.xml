@@ -5793,7 +5793,7 @@
 &lt;/ul>
 &lt;p>&lt;strong>注意&lt;/strong>！！&lt;/p>
 &lt;ol>
-&lt;li>在 1.7.0 版本中，动态创建图会导致 NPE 错误。该问题已在 &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2912">PR#2912&lt;/a> 中修复。当前 master 版本和 1.7.0 之前的版本不受此问题影响。&lt;/li>
+&lt;li>在 1.7.0 版本中，动态创建图会导致 NPE 错误。该问题已在 &lt;a href="https://github.com/apache/hugegraph/pull/2912">PR#2912&lt;/a> 中修复。当前 master 版本和 1.7.0 之前的版本不受此问题影响。&lt;/li>
 &lt;li>1.7.0 及之前版本，如果 backend 是 hstore，必须在请求体加上 &amp;ldquo;task.scheduler_type&amp;rdquo;: &amp;ldquo;distributed&amp;rdquo;。同时请确保 HugeGraph-Server 已正确配置 PD，参见 &lt;a href="/cn/docs/quickstart/hugegraph/hugegraph-server/#511-%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8hstore">HStore 配置&lt;/a>。&lt;/li>
 &lt;/ol>
 &lt;p>&lt;strong>RocksDB 示例：&lt;/strong>&lt;/p>
@@ -6345,7 +6345,7 @@
 &lt;p>&lt;strong>版本变更说明&lt;/strong>:&lt;/p>
 &lt;ul>
 &lt;li>1.7.0+: Auth API 路径使用 GraphSpace 格式，如 &lt;code>/graphspaces/DEFAULT/auth/users&lt;/code>，且 group/target 等 id 格式与 name 一致（如 &lt;code>admin&lt;/code>）&lt;/li>
-&lt;li>1.5.x 及更早: Auth API 路径包含 graph 名称，group/target 等 id 格式类似 &lt;code>-69:grant&lt;/code>。参考 &lt;a href="https://github.com/apache/incubator-hugegraph-doc/tree/release-1.5.0">HugeGraph 1.5.x RESTful API&lt;/a>&lt;/li>
+&lt;li>1.5.x 及更早: Auth API 路径包含 graph 名称，group/target 等 id 格式类似 &lt;code>-69:grant&lt;/code>。参考 &lt;a href="https://github.com/apache/hugegraph-doc/tree/release-1.5.0">HugeGraph 1.5.x RESTful API&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;/blockquote>
 &lt;h3 id="101-用户认证与权限控制">10.1 用户认证与权限控制&lt;/h3>
@@ -6364,7 +6364,7 @@ city: Beijing})&lt;br>
 描述：用户&amp;rsquo;boss&amp;rsquo;拥有对&amp;rsquo;graph1&amp;rsquo;图中北京人的读权限。&lt;/p>
 &lt;h5 id="接口说明">接口说明：&lt;/h5>
 &lt;p>用户认证与权限控制接口包括 5 类：UserAPI、GroupAPI、TargetAPI、BelongAPI、AccessAPI。
-&lt;strong>注意&lt;/strong>: 1.5.0 及之前，group/target 等 id 的格式类似 -69:grant，1.7.0 及之后，id 和 name 一致，如 admin &lt;a href="https://github.com/apache/incubator-hugegraph-doc/tree/release-1.5.0">HugeGraph 1.5.x RESTful API&lt;/a>&lt;/p>
+&lt;strong>注意&lt;/strong>: 1.5.0 及之前，group/target 等 id 的格式类似 -69:grant，1.7.0 及之后，id 和 name 一致，如 admin &lt;a href="https://github.com/apache/hugegraph-doc/tree/release-1.5.0">HugeGraph 1.5.x RESTful API&lt;/a>&lt;/p>
 &lt;h3 id="102-用户userapi">10.2 用户（User）API&lt;/h3>
 &lt;p>用户接口包括：创建用户，删除用户，修改用户，和查询用户相关信息接口。&lt;/p>
 &lt;h4 id="1021-创建用户">10.2.1 创建用户&lt;/h4>

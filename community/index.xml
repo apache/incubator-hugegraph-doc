@@ -113,7 +113,7 @@
 &lt;tr>
 &lt;td>&lt;strong>RE50&lt;/strong>&lt;/td>
 &lt;td>The project documents a repeatable release process so that someone new to the project can independently generate the complete set of artifacts required for a release.&lt;/td>
-&lt;td>&lt;strong>YES&lt;/strong> The project documents its release process in the &lt;a href="https://github.com/apache/incubator-hugegraph/wiki/ASF-Release-Guidance-V2.0">How to Release&lt;/a> guide.&lt;/td>
+&lt;td>&lt;strong>YES&lt;/strong> The project documents its release process in the &lt;a href="https://github.com/apache/hugegraph/wiki/ASF-Release-Guidance-V2.0">How to Release&lt;/a> guide.&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>

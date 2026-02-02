@@ -5729,7 +5729,7 @@ A random walk based PersonalRank algorithm should be likes this:&lt;/p>
 &lt;/ul>
 &lt;p>&lt;strong>Note&lt;/strong>!!&lt;/p>
 &lt;ol>
-&lt;li>In version 1.7.0, dynamic graph creation would cause a NPE. This issue has been fixed in &lt;a href="https://github.com/apache/incubator-hugegraph/pull/2912">PR#2912&lt;/a>. The current master version and versions after 1.7.0 do not have this problem.&lt;/li>
+&lt;li>In version 1.7.0, dynamic graph creation would cause a NPE. This issue has been fixed in &lt;a href="https://github.com/apache/hugegraph/pull/2912">PR#2912&lt;/a>. The current master version and versions after 1.7.0 do not have this problem.&lt;/li>
 &lt;li>For version 1.7.0 and earlier, if the backend is hstore, you must add &amp;ldquo;task.scheduler_type&amp;rdquo;: &amp;ldquo;distributed&amp;rdquo; in the request body. Also ensure HugeGraph-Server is properly configured with PD, see &lt;a href="/docs/quickstart/hugegraph/hugegraph-server/#511-distributed-storage-hstore">HStore Configuration&lt;/a>.&lt;/li>
 &lt;/ol>
 &lt;p>&lt;strong>RocksDB Example:&lt;/strong>&lt;/p>
@@ -6303,7 +6303,7 @@ When you complete the restore, change the graph mode to None.&lt;/p>
 &lt;p>&lt;strong>Version Change Notice&lt;/strong>:&lt;/p>
 &lt;ul>
 &lt;li>1.7.0+: Auth API paths use GraphSpace format, such as &lt;code>/graphspaces/DEFAULT/auth/users&lt;/code>, and group/target IDs match their names (e.g., &lt;code>admin&lt;/code>)&lt;/li>
-&lt;li>1.5.x and earlier: Auth API paths include graph name, and group/target IDs use format like &lt;code>-69:grant&lt;/code>. See &lt;a href="https://github.com/apache/incubator-hugegraph-doc/tree/release-1.5.0">HugeGraph 1.5.x RESTful API&lt;/a>&lt;/li>
+&lt;li>1.5.x and earlier: Auth API paths include graph name, and group/target IDs use format like &lt;code>-69:grant&lt;/code>. See &lt;a href="https://github.com/apache/hugegraph-doc/tree/release-1.5.0">HugeGraph 1.5.x RESTful API&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;/blockquote>
 &lt;h3 id="101-user-authentication-and-access-control">10.1 User Authentication and Access Control&lt;/h3>
@@ -6317,7 +6317,7 @@ When you complete the restore, change the graph mode to None.&lt;/p>
 Description: User &amp;lsquo;boss&amp;rsquo; has read permission for people in the &amp;lsquo;graph1&amp;rsquo; graph from Beijing.&lt;/p>
 &lt;h5 id="interface-description">Interface Description:&lt;/h5>
 &lt;p>The user authentication and access control interface includes 5 categories: UserAPI, GroupAPI, TargetAPI, BelongAPI, AccessAPI.
-&lt;strong>Note&lt;/strong> Before 1.5.0, the format of ids such as group/target was similar to -69:grant. After 1.7.0, the id and name were consistent. Such as admin &lt;a href="https://github.com/apache/incubator-hugegraph-doc/tree/release-1.5.0">HugeGraph 1.5 x RESTful API&lt;/a>&lt;/p>
+&lt;strong>Note&lt;/strong> Before 1.5.0, the format of ids such as group/target was similar to -69:grant. After 1.7.0, the id and name were consistent. Such as admin &lt;a href="https://github.com/apache/hugegraph-doc/tree/release-1.5.0">HugeGraph 1.5 x RESTful API&lt;/a>&lt;/p>
 &lt;h3 id="102-user-user-api">10.2 User (User) API&lt;/h3>
 &lt;p>The user interface includes APIs for creating users, deleting users, modifying users, and querying user-related information.&lt;/p>
 &lt;h4 id="1021-create-user">10.2.1 Create User&lt;/h4>

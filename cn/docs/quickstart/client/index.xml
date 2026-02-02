@@ -5,7 +5,7 @@
 用户可以使用 &lt;a href="/cn/docs/clients/hugegraph-client">Client-API&lt;/a> 编写代码操作 HugeGraph，比如元数据和图数据的增删改查，或者执行 gremlin 语句等。
 后文主要是 Java 使用示例 (其他语言 SDK 可参考对应 &lt;code>READEME&lt;/code> 页面)&lt;/p>
 &lt;blockquote>
-&lt;p>现在已经支持基于 Go/Python 语言的 HugeGraph &lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/blob/master/hugegraph-client-go/README.md">Client SDK&lt;/a> (version &amp;gt;=1.2.0)&lt;/p>
+&lt;p>现在已经支持基于 Go/Python 语言的 HugeGraph &lt;a href="https://github.com/apache/hugegraph-toolchain/blob/master/hugegraph-client-go/README.md">Client SDK&lt;/a> (version &amp;gt;=1.2.0)&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="2-环境要求">2 环境要求&lt;/h3>
 &lt;ul>
@@ -460,7 +460,7 @@
 &lt;h2 id="软件架构">软件架构&lt;/h2>
 &lt;p>(软件架构说明)&lt;/p>
 &lt;h2 id="安装教程">安装教程&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>go get github.com/apache/incubator-hugegraph-toolchain/hugegraph-client-go
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>go get github.com/apache/hugegraph-toolchain/hugegraph-client-go
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="已实现-api">已实现 API&lt;/h2>
 &lt;table>
 &lt;thead>
@@ -488,8 +488,8 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;log&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;os&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;github.com/apache/incubator-hugegraph-toolchain/hugegraph-client-go&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;github.com/apache/incubator-hugegraph-toolchain/hugegraph-client-go/hgtransport&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;github.com/apache/hugegraph-toolchain/hugegraph-client-go&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;github.com/apache/hugegraph-toolchain/hugegraph-client-go/hgtransport&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">func&lt;/span> &lt;span style="color:#000">main&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
@@ -522,8 +522,8 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;log&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;os&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;github.com/apache/incubator-hugegraph-toolchain/hugegraph-client-go&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;github.com/apache/incubator-hugegraph-toolchain/hugegraph-client-go/hgtransport&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;github.com/apache/hugegraph-toolchain/hugegraph-client-go&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">&amp;#34;github.com/apache/hugegraph-toolchain/hugegraph-client-go/hgtransport&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">// initClient 初始化并返回一个 HugeGraph 客户端实例

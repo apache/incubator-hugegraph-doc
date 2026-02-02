@@ -14,7 +14,7 @@
 &lt;p>Sign up or login to GitHub: &lt;a href="https://github.com">https://github.com&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>Fork HugeGraph repo from GitHub: &lt;a href="https://github.com/apache/hugegraph/fork">https://github.com/apache/incubator-hugegraph/fork&lt;/a>&lt;/p>
+&lt;p>Fork HugeGraph repo from GitHub: &lt;a href="https://github.com/apache/hugegraph/fork">https://github.com/apache/hugegraph/fork&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Clone code from fork repo to local: &lt;a href="https://github.com/$%7BGITHUB_USER_NAME%7D/hugegraph">https://github.com/${GITHUB_USER_NAME}/hugegraph&lt;/a>&lt;/p>
@@ -34,7 +34,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ol>
 &lt;h2 id="2-create-an-issue-on-github">2. Create an Issue on GitHub&lt;/h2>
-&lt;p>If you encounter bugs or have any questions, please go to &lt;a href="https://github.com/apache/incubator-hugegraph/issues">GitHub Issues&lt;/a> to report them and feel free to &lt;a href="https://github.com/apache/hugegraph/issues/new">create an issue&lt;/a>.&lt;/p>
+&lt;p>If you encounter bugs or have any questions, please go to &lt;a href="https://github.com/apache/hugegraph/issues">GitHub Issues&lt;/a> to report them and feel free to &lt;a href="https://github.com/apache/hugegraph/issues/new">create an issue&lt;/a>.&lt;/p>
 &lt;h2 id="3-make-changes-of-code-locally">3. Make changes of code locally&lt;/h2>
 &lt;h4 id="31-create-a-new-branch">3.1 Create a new branch&lt;/h4>
 &lt;p>Please don&amp;rsquo;t use master branch for development. We should create a new branch instead:&lt;/p>
@@ -55,10 +55,10 @@
 &lt;h5 id="321-添加第三方依赖">3.2.1 添加第三方依赖&lt;/h5>
 &lt;p>如果我们要在 &lt;code>HugeGraph&lt;/code> 项目中添加新的第三方依赖, 我们需要做下面的几件事情：&lt;/p>
 &lt;ol>
-&lt;li>找到第三方依赖的仓库，将依赖的 &lt;code>license&lt;/code> 文件放到 &lt;a href="https://github.com/apache/incubator-hugegraph/tree/master/hugegraph-server/hugegraph-dist/release-docs/licenses">./hugegraph-dist/release-docs/licenses/&lt;/a> 路径下。&lt;/li>
-&lt;li>在&lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/release-docs/LICENSE">./hugegraph-dist/release-docs/LICENSE&lt;/a> 中声明该依赖的 &lt;code>LICENSE&lt;/code> 信息。&lt;/li>
-&lt;li>找到仓库里的 NOTICE 文件，将其追加到 &lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/release-docs/NOTICE">./hugegraph-dist/release-docs/NOTICE&lt;/a> 文件后面（如果没有NOTICE文件则跳过这一步）。&lt;/li>
-&lt;li>本地执行&lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh">./hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh&lt;/a> 脚本来更新依赖列表&lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/scripts/dependency/known-dependencies.txt">known-dependencies.txt&lt;/a> (或者手动更新)。&lt;/li>
+&lt;li>找到第三方依赖的仓库，将依赖的 &lt;code>license&lt;/code> 文件放到 &lt;a href="https://github.com/apache/hugegraph/tree/master/hugegraph-server/hugegraph-dist/release-docs/licenses">./hugegraph-dist/release-docs/licenses/&lt;/a> 路径下。&lt;/li>
+&lt;li>在&lt;a href="https://github.com/apache/hugegraph/blob/master/hugegraph-server/hugegraph-dist/release-docs/LICENSE">./hugegraph-dist/release-docs/LICENSE&lt;/a> 中声明该依赖的 &lt;code>LICENSE&lt;/code> 信息。&lt;/li>
+&lt;li>找到仓库里的 NOTICE 文件，将其追加到 &lt;a href="https://github.com/apache/hugegraph/blob/master/hugegraph-server/hugegraph-dist/release-docs/NOTICE">./hugegraph-dist/release-docs/NOTICE&lt;/a> 文件后面（如果没有NOTICE文件则跳过这一步）。&lt;/li>
+&lt;li>本地执行&lt;a href="https://github.com/apache/hugegraph/blob/master/hugegraph-server/hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh">./hugegraph-dist/scripts/dependency/regenerate_known_dependencies.sh&lt;/a> 脚本来更新依赖列表&lt;a href="https://github.com/apache/hugegraph/blob/master/hugegraph-server/hugegraph-dist/scripts/dependency/known-dependencies.txt">known-dependencies.txt&lt;/a> (或者手动更新)。&lt;/li>
 &lt;/ol>
 &lt;p>&lt;strong>例如&lt;/strong>：在项目中引入了第三方新依赖 -&amp;gt; &lt;code>ant-1.9.1.jar&lt;/code>&lt;/p>
 &lt;ul>
@@ -317,7 +317,7 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">10.&lt;/span> ....
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: 在 IDEA 中配置 Server 开发环境</title><link>/cn/docs/contribution-guidelines/hugegraph-server-idea-setup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/contribution-guidelines/hugegraph-server-idea-setup/</guid><description>
 &lt;blockquote>
-&lt;p>注意：下述配置仅供参考，基于&lt;a href="https://github.com/apache/incubator-hugegraph/commit/a946ad1de4e8f922251a5241ffc957c33379677f">这个版本&lt;/a>，在 Linux 和 macOS 平台下进行了测试。&lt;/p>
+&lt;p>注意：下述配置仅供参考，基于&lt;a href="https://github.com/apache/hugegraph/commit/a946ad1de4e8f922251a5241ffc957c33379677f">这个版本&lt;/a>，在 Linux 和 macOS 平台下进行了测试。&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="背景">背景&lt;/h3>
 &lt;p>在 &lt;a href="/docs/quickstart/hugegraph-server/">Quick Start&lt;/a> 部分已经介绍了使用&lt;strong>脚本&lt;/strong>启停 HugeGraph-Server 的流程。下面以 Linux 平台为例，
@@ -328,7 +328,7 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;li>启动 HugeGraph-Server，执行 &lt;code>HugeGraphServer&lt;/code> 类加载初始化的图信息启动&lt;/li>
 &lt;/ol>
 &lt;p>在执行下述流程之前，请确保已经克隆了 HugeGraph 的源代码，并且已经配置了 Java 11 环境 &amp;amp; 可以参考这个
-&lt;a href="https://github.com/apache/incubator-hugegraph/wiki/The-style-config-for-HugeGraph-in-IDEA">配置文档&lt;/a>&lt;/p>
+&lt;a href="https://github.com/apache/hugegraph/wiki/The-style-config-for-HugeGraph-in-IDEA">配置文档&lt;/a>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/hugegraph.git
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="步骤">步骤&lt;/h3>
 &lt;h4 id="1-配置文件拷贝">1. 配置文件拷贝&lt;/h4>
@@ -357,7 +357,7 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;/li>
 &lt;/ul>
 &lt;blockquote>
-&lt;p>若在 &lt;strong>Java 11&lt;/strong> 环境下为 HugeGraph-Server 配置了&lt;strong>用户认证&lt;/strong> (authenticator)，需要参考二进制包的脚本&lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/src/assembly/static/bin/init-store.sh#L52">配置&lt;/a>，添加下述 &lt;strong>VM options&lt;/strong>:&lt;/p>
+&lt;p>若在 &lt;strong>Java 11&lt;/strong> 环境下为 HugeGraph-Server 配置了&lt;strong>用户认证&lt;/strong> (authenticator)，需要参考二进制包的脚本&lt;a href="https://github.com/apache/hugegraph/blob/master/hugegraph-server/hugegraph-dist/src/assembly/static/bin/init-store.sh#L52">配置&lt;/a>，添加下述 &lt;strong>VM options&lt;/strong>:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>--add-exports&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>java.base/jdk.internal.reflect&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>ALL-UNNAMED
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>否则会报错：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">java&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">lang&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">reflect&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">InaccessibleObjectException&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000">Unable&lt;/span> &lt;span style="color:#000">to&lt;/span> &lt;span style="color:#000">make&lt;/span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">static&lt;/span> &lt;span style="color:#204a87;font-weight:bold">synchronized&lt;/span> &lt;span style="color:#204a87;font-weight:bold">void&lt;/span> &lt;span style="color:#000">jdk&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">internal&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">reflect&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">Reflection&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">registerFieldsToFilter&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">java&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">lang&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">Class&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>&lt;span style="color:#000">java&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">lang&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">String&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">[])&lt;/span> &lt;span style="color:#000">accessible&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000">module&lt;/span> &lt;span style="color:#000">java&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">base&lt;/span> &lt;span style="color:#000">does&lt;/span> &lt;span style="color:#000">not&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;exports jdk.internal.reflect&amp;#34;&lt;/span> &lt;span style="color:#000">to&lt;/span> &lt;span style="color:#000">unnamed&lt;/span> &lt;span style="color:#000">module&lt;/span> &lt;span style="color:#5c35cc;font-weight:bold">@xxx&lt;/span>
@@ -382,7 +382,7 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;li>设置运行参数为 &lt;code>conf/gremlin-server.yaml conf/rest-server.properties&lt;/code>，同样地，这里的路径是相对于工作路径的，需要将工作路径设置为 &lt;code>path-to-your-directory&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;blockquote>
-&lt;p>类似的，若在 &lt;strong>Java 11&lt;/strong> 环境下为 HugeGraph-Server 配置了&lt;strong>用户认证&lt;/strong> (authenticator)，同样需要参考二进制包的脚本&lt;a href="https://github.com/apache/incubator-hugegraph/blob/master/hugegraph-server/hugegraph-dist/src/assembly/static/bin/hugegraph-server.sh#L124">配置&lt;/a>，添加下述 &lt;strong>VM options&lt;/strong>:&lt;/p>
+&lt;p>类似的，若在 &lt;strong>Java 11&lt;/strong> 环境下为 HugeGraph-Server 配置了&lt;strong>用户认证&lt;/strong> (authenticator)，同样需要参考二进制包的脚本&lt;a href="https://github.com/apache/hugegraph/blob/master/hugegraph-server/hugegraph-dist/src/assembly/static/bin/hugegraph-server.sh#L124">配置&lt;/a>，添加下述 &lt;strong>VM options&lt;/strong>:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>--add-exports&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>java.base/jdk.internal.reflect&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>ALL-UNNAMED --add-modules&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>jdk.unsupported --add-exports&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>java.base/sun.nio.ch&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>ALL-UNNAMED
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>否则会报错：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">java&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">lang&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">reflect&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">InaccessibleObjectException&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000">Unable&lt;/span> &lt;span style="color:#000">to&lt;/span> &lt;span style="color:#000">make&lt;/span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">static&lt;/span> &lt;span style="color:#204a87;font-weight:bold">synchronized&lt;/span> &lt;span style="color:#204a87;font-weight:bold">void&lt;/span> &lt;span style="color:#000">jdk&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">internal&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">reflect&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">Reflection&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">registerFieldsToFilter&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span>&lt;span style="color:#000">java&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">lang&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">Class&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">,&lt;/span>&lt;span style="color:#000">java&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">lang&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">String&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">[])&lt;/span> &lt;span style="color:#000">accessible&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">:&lt;/span> &lt;span style="color:#000">module&lt;/span> &lt;span style="color:#000">java&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">.&lt;/span>&lt;span style="color:#c4a000">base&lt;/span> &lt;span style="color:#000">does&lt;/span> &lt;span style="color:#000">not&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;exports jdk.internal.reflect&amp;#34;&lt;/span> &lt;span style="color:#000">to&lt;/span> &lt;span style="color:#000">unnamed&lt;/span> &lt;span style="color:#000">module&lt;/span> &lt;span style="color:#5c35cc;font-weight:bold">@xxx&lt;/span>
@@ -431,7 +431,7 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;li>&lt;a href="https://gist.github.com/imbajin/1661450f000cd62a67e46d4f1abfe82c">hugegraph-server 本地调试文档 (Win/Unix)&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://youtrack.jetbrains.com/issue/IDEA-180033">&amp;ldquo;package sun.misc does not exist&amp;rdquo; compilation error&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://youtrack.jetbrains.com/issue/IDEA-201168">Cannot compile: java: package sun.misc does not exist&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph/wiki/The-style-config-for-HugeGraph-in-IDEA">The code-style config for HugeGraph in IDEA&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/hugegraph/wiki/The-style-config-for-HugeGraph-in-IDEA">The code-style config for HugeGraph in IDEA&lt;/a>&lt;/li>
 &lt;/ol></description></item><item><title>Docs: Apache HugeGraph Committer 指南</title><link>/cn/docs/contribution-guidelines/committer-guidelines/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/contribution-guidelines/committer-guidelines/</guid><description>
 &lt;blockquote>
 &lt;p>本文档概述了 Apache Committer 推选要求以及流程，对应的 ASF 官方文档可见：https://community.apache.org/newcommitter.html&lt;/p>
@@ -439,7 +439,7 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;h1 id="候选人要求">候选人要求&lt;/h1>
 &lt;ol>
 &lt;li>候选人应遵守 &lt;a href="https://www.apache.org/foundation/policies/conduct.html">Apache Code of Conduct&lt;/a>&lt;/li>
-&lt;li>PMC 成员将通过搜索&lt;a href="https://lists.apache.org/list?dev@hugegraph.apache.org">邮件列表&lt;/a>、&lt;a href="https://github.com/apache/hugegraph/issues">issues&lt;/a>、&lt;a href="https://github.com/apache/incubator-hugegraph/pulls">PRs&lt;/a>、&lt;a href="https://hugegraph.apache.org/docs">官网文档&lt;/a>等方式，了解候选人如何与他人互动，以及他们所做的贡献&lt;/li>
+&lt;li>PMC 成员将通过搜索&lt;a href="https://lists.apache.org/list?dev@hugegraph.apache.org">邮件列表&lt;/a>、&lt;a href="https://github.com/apache/hugegraph/issues">issues&lt;/a>、&lt;a href="https://github.com/apache/hugegraph/pulls">PRs&lt;/a>、&lt;a href="https://hugegraph.apache.org/docs">官网文档&lt;/a>等方式，了解候选人如何与他人互动，以及他们所做的贡献&lt;/li>
 &lt;li>以下是在评估候选人是否适合成为 Committer 时需要考虑的一些要点：
 &lt;ol>
 &lt;li>与社区成员合作的能力&lt;/li>
@@ -496,44 +496,44 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Welcome everyone to share opinions~
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Thanks!
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>对于讨论邮件中贡献链接，可以使用 &lt;a href="https://github.com/search">GitHub Search&lt;/a> 的统计功能，按需输入如下对应关键词查询即可，可以在此基础上添加新的 repo 如 &lt;code>repo:apache/incubator-hugegraph-computer&lt;/code>，特别注意调整&lt;strong>时间范围&lt;/strong> (下面是一个模板参考，请自行调整参数):&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>对于讨论邮件中贡献链接，可以使用 &lt;a href="https://github.com/search">GitHub Search&lt;/a> 的统计功能，按需输入如下对应关键词查询即可，可以在此基础上添加新的 repo 如 &lt;code>repo:apache/hugegraph-computer&lt;/code>，特别注意调整&lt;strong>时间范围&lt;/strong> (下面是一个模板参考，请自行调整参数):&lt;/p>
 &lt;ul>
 &lt;li>PR 提交次数
 &lt;ul>
-&lt;li>&lt;code>is:pr author:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:&amp;gt;2023-06-01 updated:&amp;lt;2023-12-25&lt;/code>&lt;/li>
+&lt;li>&lt;code>is:pr author:xxx repo:apache/hugegraph repo:apache/hugegraph-doc created:&amp;gt;2023-06-01 updated:&amp;lt;2023-12-25&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>代码提交/修改行数
 &lt;ul>
-&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph/graphs/contributors?from=2023-06-01&amp;amp;to=2023-12-25&amp;amp;type=c">https://github.com/apache/incubator-hugegraph/graphs/contributors?from=2023-06-01&amp;amp;to=2023-12-25&amp;amp;type=c&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-doc/graphs/contributors?from=2023-06-01&amp;amp;to=2023-12-25&amp;amp;type=c">https://github.com/apache/incubator-hugegraph-doc/graphs/contributors?from=2023-06-01&amp;amp;to=2023-12-25&amp;amp;type=c&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/hugegraph/graphs/contributors?from=2023-06-01&amp;amp;to=2023-12-25&amp;amp;type=c">https://github.com/apache/hugegraph/graphs/contributors?from=2023-06-01&amp;amp;to=2023-12-25&amp;amp;type=c&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/hugegraph-doc/graphs/contributors?from=2023-06-01&amp;amp;to=2023-12-25&amp;amp;type=c">https://github.com/apache/hugegraph-doc/graphs/contributors?from=2023-06-01&amp;amp;to=2023-12-25&amp;amp;type=c&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>PR 提交关联 Issue 次数
 &lt;ul>
-&lt;li>&lt;code>linked:issue involves:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:&amp;gt;2023-06-01 updated:&amp;lt;2023-12-25&lt;/code>&lt;/li>
+&lt;li>&lt;code>linked:issue involves:xxx repo:apache/hugegraph repo:apache/hugegraph-doc created:&amp;gt;2023-06-01 updated:&amp;lt;2023-12-25&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>PR Review 个数
 &lt;ul>
-&lt;li>&lt;code>type:pr reviewed-by:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:&amp;gt;2023-06-01 updated:&amp;lt;2023-12-25&lt;/code>&lt;/li>
+&lt;li>&lt;code>type:pr reviewed-by:xxx repo:apache/hugegraph repo:apache/hugegraph-doc created:&amp;gt;2023-06-01 updated:&amp;lt;2023-12-25&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>PR Review 行数&lt;/li>
 &lt;li>合并次数
 &lt;ul>
-&lt;li>&lt;code>type:pr author:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:&amp;gt;2023-06-01 updated:&amp;lt;2023-12-25&lt;/code>&lt;/li>
+&lt;li>&lt;code>type:pr author:xxx repo:apache/hugegraph repo:apache/hugegraph-doc created:&amp;gt;2023-06-01 updated:&amp;lt;2023-12-25&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>有效合并行数
 &lt;ul>
-&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph/graphs/contributors?from=2023-06-01&amp;amp;to=2023-12-25&amp;amp;type=c">https://github.com/apache/incubator-hugegraph/graphs/contributors?from=2023-06-01&amp;amp;to=2023-12-25&amp;amp;type=c&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/apache/incubator-hugegraph-doc/graphs/contributors?from=2023-06-01&amp;amp;to=2023-12-25&amp;amp;type=c">https://github.com/apache/incubator-hugegraph-doc/graphs/contributors?from=2023-06-01&amp;amp;to=2023-12-25&amp;amp;type=c&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/hugegraph/graphs/contributors?from=2023-06-01&amp;amp;to=2023-12-25&amp;amp;type=c">https://github.com/apache/hugegraph/graphs/contributors?from=2023-06-01&amp;amp;to=2023-12-25&amp;amp;type=c&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/apache/hugegraph-doc/graphs/contributors?from=2023-06-01&amp;amp;to=2023-12-25&amp;amp;type=c">https://github.com/apache/hugegraph-doc/graphs/contributors?from=2023-06-01&amp;amp;to=2023-12-25&amp;amp;type=c&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>Issue 提交数
 &lt;ul>
-&lt;li>&lt;code>type:issue author:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:&amp;gt;2023-06-01 updated:&amp;lt;2023-12-25&lt;/code>&lt;/li>
+&lt;li>&lt;code>type:issue author:xxx repo:apache/hugegraph repo:apache/hugegraph-doc created:&amp;gt;2023-06-01 updated:&amp;lt;2023-12-25&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>Issue 修复数
@@ -543,17 +543,17 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;/li>
 &lt;li>Issue 参与数
 &lt;ul>
-&lt;li>&lt;code>type:issue involves:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:&amp;gt;2023-06-01 updated:&amp;lt;2023-12-25&lt;/code>&lt;/li>
+&lt;li>&lt;code>type:issue involves:xxx repo:apache/hugegraph repo:apache/hugegraph-doc created:&amp;gt;2023-06-01 updated:&amp;lt;2023-12-25&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>评论 Issue 数
 &lt;ul>
-&lt;li>&lt;code>type:issue commenter:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:&amp;gt;2023-06-01 updated:&amp;lt;2023-12-25&lt;/code>&lt;/li>
+&lt;li>&lt;code>type:issue commenter:xxx repo:apache/hugegraph repo:apache/hugegraph-doc created:&amp;gt;2023-06-01 updated:&amp;lt;2023-12-25&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>评论 PR 数
 &lt;ul>
-&lt;li>&lt;code>type:pr commenter:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:&amp;gt;2023-06-01 updated:&amp;lt;2023-12-25&lt;/code>&lt;/li>
+&lt;li>&lt;code>type:pr commenter:xxx repo:apache/hugegraph repo:apache/hugegraph-doc created:&amp;gt;2023-06-01 updated:&amp;lt;2023-12-25&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>

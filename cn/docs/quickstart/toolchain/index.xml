@@ -1654,7 +1654,7 @@
 &lt;p>运行 bin/hugegraph-loader 并传入参数&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>bin/hugegraph-loader -g &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>GRAPH_NAME&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span> -f &lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">INPUT_DESC_FILE&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span> -s &lt;span style="color:#4e9a06">${&lt;/span>&lt;span style="color:#000">SCHEMA_FILE&lt;/span>&lt;span style="color:#4e9a06">}&lt;/span> -h &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>HOST&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span> -p &lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>PORT&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4-完整示例">4 完整示例&lt;/h3>
-&lt;p>下面给出的是 hugegraph-loader 包中 example 目录下的例子。(&lt;a href="https://github.com/apache/incubator-hugegraph-toolchain/tree/master/hugegraph-loader/assembly/static/example/file">GitHub 地址&lt;/a>)&lt;/p>
+&lt;p>下面给出的是 hugegraph-loader 包中 example 目录下的例子。(&lt;a href="https://github.com/apache/hugegraph-toolchain/tree/master/hugegraph-loader/assembly/static/example/file">GitHub 地址&lt;/a>)&lt;/p>
 &lt;h4 id="41-准备数据">4.1 准备数据&lt;/h4>
 &lt;p>顶点文件：&lt;code>example/file/vertex_person.csv&lt;/code>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>marko,29,Beijing

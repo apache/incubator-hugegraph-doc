@@ -1,32 +1,42 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HugeGraph – Quick Start</title><link>/docs/quickstart/</link><description>Recent content in Quick Start on HugeGraph</description><generator>Hugo -- gohugo.io</generator><atom:link href="/docs/quickstart/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: HugeGraph (OLTP)</title><link>/docs/quickstart/hugegraph/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph/</guid><description>
-&lt;h2 id="-best-practice-prioritize-using-deepwiki-intelligent-documents">🚀 Best practice: Prioritize using DeepWiki intelligent documents&lt;/h2>
 &lt;blockquote>
-&lt;p>To address the issue of outdated static documents, we provide DeepWiki with &lt;strong>real-time updates and more comprehensive content&lt;/strong>. It is equivalent to an expert with the latest knowledge of the project, which is very suitable for &lt;strong>all developers&lt;/strong> to read and consult before starting the project.&lt;/p>
+&lt;p>DeepWiki provides real-time updated project documentation with more comprehensive and accurate content, suitable for quickly understanding the latest project information.&lt;/p>
+&lt;p>📖 &lt;a href="https://deepwiki.com/apache/hugegraph">https://deepwiki.com/apache/hugegraph&lt;/a>&lt;/p>
 &lt;/blockquote>
-&lt;p>&lt;strong>👉 Strongly recommend visiting and having a conversation with:&lt;/strong> &lt;a href="https://deepwiki.com/apache/incubator-hugegraph">&lt;strong>incubator-hugegraph&lt;/strong>&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph ToolChain</title><link>/docs/quickstart/toolchain/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/toolchain/</guid><description>
+&lt;p>&lt;strong>GitHub Access:&lt;/strong> &lt;i class="fab fa-github">&lt;/i> &lt;a href="https://github.com/apache/hugegraph">https://github.com/apache/hugegraph&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph ToolChain</title><link>/docs/quickstart/toolchain/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/toolchain/</guid><description>
 &lt;blockquote>
 &lt;p>&lt;strong>Testing Guide&lt;/strong>: For running toolchain tests locally, please refer to &lt;a href="/docs/guides/toolchain-local-test">HugeGraph Toolchain Local Testing Guide&lt;/a>&lt;/p>
 &lt;/blockquote>
-&lt;h2 id="-best-practice-prioritize-using-deepwiki-intelligent-documents">🚀 Best practice: Prioritize using DeepWiki intelligent documents&lt;/h2>
 &lt;blockquote>
-&lt;p>To address the issue of outdated static documents, we provide DeepWiki with &lt;strong>real-time updates and more comprehensive content&lt;/strong>. It is equivalent to an expert with the latest knowledge of the project, which is very suitable for &lt;strong>all developers&lt;/strong> to read and consult before starting the project.&lt;/p>
+&lt;p>DeepWiki provides real-time updated project documentation with more comprehensive and accurate content, suitable for quickly understanding the latest project information.&lt;/p>
+&lt;p>📖 &lt;a href="https://deepwiki.com/apache/hugegraph-toolchain">https://deepwiki.com/apache/hugegraph-toolchain&lt;/a>&lt;/p>
 &lt;/blockquote>
-&lt;p>&lt;strong>👉 Strongly recommend visiting and having a conversation with:&lt;/strong> &lt;a href="https://deepwiki.com/apache/incubator-hugegraph-toolchain">&lt;strong>incubator-hugegraph-toolchain&lt;/strong>&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph-AI</title><link>/docs/quickstart/hugegraph-ai/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-ai/</guid><description>
+&lt;p>&lt;strong>GitHub Access:&lt;/strong> &lt;i class="fab fa-github">&lt;/i> &lt;a href="https://github.com/apache/hugegraph-toolchain">https://github.com/apache/hugegraph-toolchain&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph-AI</title><link>/docs/quickstart/hugegraph-ai/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/hugegraph-ai/</guid><description>
 &lt;p>&lt;a href="https://www.apache.org/licenses/LICENSE-2.0.html">&lt;img src="https://img.shields.io/badge/license-Apache%202-0E78BA.svg" alt="License">&lt;/a>
 &lt;a href="https://deepwiki.com/apache/incubator-hugegraph-ai">&lt;img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki">&lt;/a>&lt;/p>
-&lt;h2 id="-best-practice-prioritize-using-deepwiki-intelligent-documents">🚀 Best practice: Prioritize using DeepWiki intelligent documents&lt;/h2>
 &lt;blockquote>
-&lt;p>To address the issue of outdated static documents, we provide DeepWiki with &lt;strong>real-time updates and more comprehensive content&lt;/strong>. It is equivalent to an expert with the latest knowledge of the project, which is very suitable for &lt;strong>all developers&lt;/strong> to read and consult before starting the project.&lt;/p>
+&lt;p>DeepWiki provides real-time updated project documentation with more comprehensive and accurate content, suitable for quickly understanding the latest project information.&lt;/p>
+&lt;p>📖 &lt;a href="https://deepwiki.com/apache/incubator-hugegraph-ai">https://deepwiki.com/apache/incubator-hugegraph-ai&lt;/a>&lt;/p>
 &lt;/blockquote>
-&lt;p>&lt;strong>👉 Strongly recommend visiting and having a conversation with:&lt;/strong> &lt;a href="https://deepwiki.com/apache/incubator-hugegraph-ai">&lt;strong>incubator-hugegraph-ai&lt;/strong>&lt;/a>&lt;/p>
 &lt;p>&lt;code>hugegraph-ai&lt;/code> integrates &lt;a href="https://github.com/apache/hugegraph">HugeGraph&lt;/a> with artificial intelligence capabilities, providing comprehensive support for developers to build AI-powered graph applications.&lt;/p>
 &lt;h2 id="-key-features">✨ Key Features&lt;/h2>
 &lt;ul>
 &lt;li>&lt;strong>GraphRAG&lt;/strong>: Build intelligent question-answering systems with graph-enhanced retrieval&lt;/li>
+&lt;li>&lt;strong>Text2Gremlin&lt;/strong>: Natural language to graph query conversion with REST API&lt;/li>
 &lt;li>&lt;strong>Knowledge Graph Construction&lt;/strong>: Automated graph building from text using LLMs&lt;/li>
-&lt;li>&lt;strong>Graph ML&lt;/strong>: Integration with 20+ graph learning algorithms (GCN, GAT, GraphSAGE, etc.)&lt;/li>
+&lt;li>&lt;strong>Graph ML&lt;/strong>: Integration with 21 graph learning algorithms (GCN, GAT, GraphSAGE, etc.)&lt;/li>
 &lt;li>&lt;strong>Python Client&lt;/strong>: Easy-to-use Python interface for HugeGraph operations&lt;/li>
 &lt;li>&lt;strong>AI Agents&lt;/strong>: Intelligent graph analysis and reasoning capabilities&lt;/li>
+&lt;/ul>
+&lt;h3 id="-whats-new-in-v150">🎉 What&amp;rsquo;s New in v1.5.0&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Text2Gremlin REST API&lt;/strong>: Convert natural language queries to Gremlin commands via REST endpoints&lt;/li>
+&lt;li>&lt;strong>Multi-Model Vector Support&lt;/strong>: Each graph instance can use independent embedding models&lt;/li>
+&lt;li>&lt;strong>Bilingual Prompt Support&lt;/strong>: Switch between English and Chinese prompts (EN/CN)&lt;/li>
+&lt;li>&lt;strong>Semi-Automatic Schema Generation&lt;/strong>: Intelligent schema inference from text data&lt;/li>
+&lt;li>&lt;strong>Semi-Automatic Prompt Generation&lt;/strong>: Context-aware prompt templates&lt;/li>
+&lt;li>&lt;strong>Enhanced Reranker Support&lt;/strong>: Integration with Cohere and SiliconFlow rerankers&lt;/li>
+&lt;li>&lt;strong>LiteLLM Multi-Provider Support&lt;/strong>: Unified interface for OpenAI, Anthropic, Gemini, and more&lt;/li>
 &lt;/ul>
 &lt;h2 id="-quick-start">🚀 Quick Start&lt;/h2>
 &lt;blockquote>
@@ -35,9 +45,9 @@ For a complete deployment guide and detailed examples, please refer to &lt;a hre
 &lt;/blockquote>
 &lt;h3 id="prerequisites">Prerequisites&lt;/h3>
 &lt;ul>
-&lt;li>Python 3.9+ (3.10+ recommended for hugegraph-llm)&lt;/li>
-&lt;li>&lt;a href="https://docs.astral.sh/uv/">uv&lt;/a> (recommended package manager)&lt;/li>
-&lt;li>HugeGraph Server 1.3+ (1.5+ recommended)&lt;/li>
+&lt;li>Python 3.10+ (required for hugegraph-llm)&lt;/li>
+&lt;li>&lt;a href="https://docs.astral.sh/uv/">uv&lt;/a> 0.7+ (recommended package manager)&lt;/li>
+&lt;li>HugeGraph Server 1.5+ (required)&lt;/li>
 &lt;li>Docker (optional, for containerized deployment)&lt;/li>
 &lt;/ul>
 &lt;h3 id="option-1-docker-deployment-recommended">Option 1: Docker Deployment (Recommended)&lt;/h3>
@@ -111,12 +121,14 @@ For a complete deployment guide and detailed examples, please refer to &lt;a hre
 &lt;li>&lt;strong>AI Agents&lt;/strong>: Intelligent graph analysis and reasoning&lt;/li>
 &lt;/ul>
 &lt;h3 id="hugegraph-mlhttpsgithubcomapacheincubator-hugegraph-aitreemainhugegraph-ml">&lt;a href="https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-ml">hugegraph-ml&lt;/a>&lt;/h3>
-&lt;p>Graph machine learning with 20+ implemented algorithms:&lt;/p>
+&lt;p>Graph machine learning with 21 implemented algorithms:&lt;/p>
 &lt;ul>
-&lt;li>&lt;strong>Node Classification&lt;/strong>: GCN, GAT, GraphSAGE, APPNP, etc.&lt;/li>
-&lt;li>&lt;strong>Graph Classification&lt;/strong>: DiffPool, P-GNN, etc.&lt;/li>
-&lt;li>&lt;strong>Graph Embedding&lt;/strong>: DeepWalk, Node2Vec, GRACE, etc.&lt;/li>
-&lt;li>&lt;strong>Link Prediction&lt;/strong>: SEAL, GATNE, etc.&lt;/li>
+&lt;li>&lt;strong>Node Classification&lt;/strong>: GCN, GAT, GraphSAGE, APPNP, AGNN, ARMA, DAGNN, DeeperGCN, GRAND, JKNet, Cluster-GCN&lt;/li>
+&lt;li>&lt;strong>Graph Classification&lt;/strong>: DiffPool, GIN&lt;/li>
+&lt;li>&lt;strong>Graph Embedding&lt;/strong>: DGI, BGRL, GRACE&lt;/li>
+&lt;li>&lt;strong>Link Prediction&lt;/strong>: SEAL, P-GNN, GATNE&lt;/li>
+&lt;li>&lt;strong>Fraud Detection&lt;/strong>: CARE-GNN, BGNN&lt;/li>
+&lt;li>&lt;strong>Post-Processing&lt;/strong>: C&amp;amp;S (Correct &amp;amp; Smooth)&lt;/li>
 &lt;/ul>
 &lt;h3 id="hugegraph-python-clienthttpsgithubcomapacheincubator-hugegraph-aitreemainhugegraph-python-client">&lt;a href="https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-python-client">hugegraph-python-client&lt;/a>&lt;/h3>
 &lt;p>Python client for HugeGraph operations:&lt;/p>
@@ -156,8 +168,8 @@ For a complete deployment guide and detailed examples, please refer to &lt;a hre
 &lt;li>&lt;strong>WeChat&lt;/strong>: Follow &amp;ldquo;Apache HugeGraph&amp;rdquo; on WeChat&lt;/li>
 &lt;/ul>
 &lt;img src="https://raw.githubusercontent.com/apache/hugegraph-doc/master/assets/images/wechat.png" alt="Apache HugeGraph WeChat QR Code" width="200"/></description></item><item><title>Docs: HugeGraph Computing (OLAP)</title><link>/docs/quickstart/computing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/computing/</guid><description>
-&lt;h2 id="-best-practice-prioritize-using-deepwiki-intelligent-documents">🚀 Best practice: Prioritize using DeepWiki intelligent documents&lt;/h2>
 &lt;blockquote>
-&lt;p>To address the issue of outdated static documents, we provide DeepWiki with &lt;strong>real-time updates and more comprehensive content&lt;/strong>. It is equivalent to an expert with the latest knowledge of the project, which is very suitable for &lt;strong>all developers&lt;/strong> to read and consult before starting the project.&lt;/p>
+&lt;p>DeepWiki provides real-time updated project documentation with more comprehensive and accurate content, suitable for quickly understanding the latest project information.&lt;/p>
+&lt;p>📖 &lt;a href="https://deepwiki.com/apache/hugegraph-computer">https://deepwiki.com/apache/hugegraph-computer&lt;/a>&lt;/p>
 &lt;/blockquote>
-&lt;p>&lt;strong>👉 Strongly recommend visiting and having a conversation with:&lt;/strong> &lt;a href="https://deepwiki.com/apache/incubator-hugegraph-computer">&lt;strong>incubator-hugegraph-computer&lt;/strong>&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph Client</title><link>/docs/quickstart/client/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/client/</guid><description/></item></channel></rss>
+&lt;p>&lt;strong>GitHub Access:&lt;/strong> &lt;i class="fab fa-github">&lt;/i> &lt;a href="https://github.com/apache/hugegraph-computer">https://github.com/apache/hugegraph-computer&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph Client</title><link>/docs/quickstart/client/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/quickstart/client/</guid><description/></item></channel></rss>
