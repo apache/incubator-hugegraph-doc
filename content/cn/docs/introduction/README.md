@@ -8,6 +8,7 @@ weight: 1
 
 Apache HugeGraph 是一款易用、高效、通用的开源图数据库系统（Graph Database，[GitHub 项目地址](https://github.com/apache/hugegraph)），
 实现了[Apache TinkerPop3](https://tinkerpop.apache.org)框架及完全兼容[Gremlin](https://tinkerpop.apache.org/gremlin.html)查询语言，
+同时支持 [Cypher](https://opencypher.org/) 查询语言（OpenCypher 标准），
 具备完善的工具链组件，助力用户轻松构建基于图数据库之上的应用和产品。HugeGraph 支持百亿以上的顶点和边快速导入，并提供毫秒级的关联关系查询能力（OLTP），
 并支持大规模分布式图分析（OLAP）。
 
@@ -19,17 +20,43 @@ HugeGraph 典型应用场景包括深度关系探索、关联分析、路径搜�
 ### Features
 
 HugeGraph 支持在线及离线环境下的图操作，支持批量导入数据，支持高效的复杂关联关系分析，并且能够与大数据平台无缝集成。
-HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，并及时得到图查询结果，也可在用户程序中调用 HugeGraph API 进行图分析或查询。
+HugeGraph 支持多用户并行操作，用户可输入 Gremlin/Cypher 查询语句，并及时得到图查询结果，也可在用户程序中调用 HugeGraph API 进行图分析或查询。
 
-本系统具备如下特点：  
+本系统具备如下特点：
 
-- 易用：HugeGraph 支持 Gremlin 图查询语言与 RESTful API，同时提供图检索常用接口，具备功能齐全的周边工具，轻松实现基于图的各种查询分析运算。
+- 易用：HugeGraph 支持 Gremlin/Cypher 图查询语言与 RESTful API，同时提供图检索常用接口，具备功能齐全的周边工具，轻松实现基于图的各种查询分析运算。
 - 高效：HugeGraph 在图存储和图计算方面做了深度优化，提供多种批量导入工具，轻松完成百亿级数据快速导入，通过优化过的查询达到图检索的毫秒级响应。支持数千用户并发的在线实时操作。
 - 通用：HugeGraph 支持 Apache Gremlin 标准图查询语言和 Property Graph 标准图建模方法，支持基于图的 OLTP 和 OLAP 方案。集成 Apache Hadoop 及 Apache Spark 大数据平台。
 - 可扩展：支持分布式存储、数据多副本及横向扩容，内置多种后端存储引擎，也可插件式轻松扩展后端存储引擎。
 - 开放：HugeGraph 代码开源（Apache 2 License），客户可自主修改定制，选择性回馈开源社区。
 
-本系统的功能包括但不限于：
+### 部署模式
+
+HugeGraph 支持多种部署模式，满足不同规模和场景的需求：
+
+**单机模式 (Standalone)**
+- Server + RocksDB 后端存储
+- 适合开发测试和中小规模数据（< 1TB）
+- Docker 快速启动: `docker run hugegraph/hugegraph`
+- 详见 [Server 快速开始](/cn/docs/quickstart/hugegraph-server/hugegraph-server)
+
+**分布式模式 (Distributed)**
+- HugeGraph-PD: 元数据管理和集群调度
+- HugeGraph-Store (HStore): 分布式存储引擎
+- 支持水平扩展和高可用（< 1000TB 数据规模）
+- 适合生产环境和大规模图数据应用
+
+### 快速入门指南
+
+| 使用场景 | 推荐路径 |
+|---------|---------|
+| 快速体验 | [Docker 部署](/cn/docs/quickstart/hugegraph-server/hugegraph-server#docker) |
+| 构建 OLTP 应用 | Server → REST API / Gremlin / Cypher |
+| 图分析 (OLAP) | [Vermeer](/cn/docs/quickstart/computing/hugegraph-computer) (推荐) 或 Computer |
+| 构建 AI 应用 | [HugeGraph-AI](/cn/docs/quickstart/hugegraph-ai) (GraphRAG/知识图谱) |
+| 批量导入数据 | [Loader](/cn/docs/quickstart/toolchain/hugegraph-loader) + [Hubble](/cn/docs/quickstart/toolchain/hugegraph-hubble) |
+
+### 功能特性
 
 - 支持从多数据源批量导入数据 (包括本地文件、HDFS 文件、MySQL 数据库等数据源)，支持多种文件格式导入 (包括 TXT、CSV、JSON 等格式)
 - 具备可视化操作界面，可用于操作、分析及展示图，降低用户使用门槛
@@ -50,20 +77,20 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin 查询语句，�
   - Backend：实现将图数据存储到后端，支持的后端包括：Memory、Cassandra、ScyllaDB、RocksDB、HBase、MySQL 及 PostgreSQL，用户根据实际情况选择一种即可；
   - API：内置 REST Server，向用户提供 RESTful API，同时完全兼容 Gremlin 查询。(支持分布式存储和计算下推)
 - [HugeGraph-Toolchain](https://github.com/apache/hugegraph-toolchain): (工具链)
-  - [HugeGraph-Client](/cn/docs/quickstart/client/hugegraph-client)：HugeGraph-Client 提供了 RESTful API 的客户端，用于连接 HugeGraph-Server，目前仅实现 Java 版，其他语言用户可自行实现；
+  - [HugeGraph-Client](/cn/docs/quickstart/client/hugegraph-client)：HugeGraph-Client 提供了 RESTful API 的客户端，用于连接 HugeGraph-Server，支持 Java/Python/Go 多语言版本；
   - [HugeGraph-Loader](/cn/docs/quickstart/toolchain/hugegraph-loader)：HugeGraph-Loader 是基于 HugeGraph-Client 的数据导入工具，将普通文本数据转化为图形的顶点和边并插入图形数据库中；
-  - [HugeGraph-Hubble](/cn/docs/quickstart/toolchain/hugegraph-hubble)：HugeGraph-Hubble 是 HugeGraph 的 Web 
+  - [HugeGraph-Hubble](/cn/docs/quickstart/toolchain/hugegraph-hubble)：HugeGraph-Hubble 是 HugeGraph 的 Web
 可视化管理平台，一站式可视化分析平台，平台涵盖了从数据建模，到数据快速导入，再到数据的在线、离线分析、以及图的统一管理的全过程；
   - [HugeGraph-Tools](/cn/docs/quickstart/toolchain/hugegraph-tools)：HugeGraph-Tools 是 HugeGraph 的部署和管理工具，包括管理图、备份/恢复、Gremlin 执行等功能。
-- [HugeGraph-Computer](/cn/docs/quickstart/computing/hugegraph-computer)：HugeGraph-Computer 是分布式图处理系统 (OLAP). 
-  它是 [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf) 的一个实现。它可以运行在 Kubernetes/Yarn 
-  等集群上，支持超大规模图计算。
-- [HugeGraph-AI](/cn/docs/quickstart/hugegraph-ai)：HugeGraph-AI 是 HugeGraph 独立的 AI 
-  组件，提供了图神经网络的训练和推理功能，LLM/Graph RAG 结合/Python-Client 等相关组件，持续更新 ing。
+- [HugeGraph-Computer](/cn/docs/quickstart/computing/hugegraph-computer)：HugeGraph-Computer 是分布式图处理系统 (OLAP)。
+  它是 [Pregel](https://kowshik.github.io/JPregel/pregel_paper.pdf) 的一个实现。它可以运行在 Kubernetes/Yarn
+  等集群上，支持超大规模图计算。同时提供 Vermeer 轻量级图计算引擎，适合快速开始和中小规模图分析。
+- [HugeGraph-AI](/cn/docs/quickstart/hugegraph-ai)：HugeGraph-AI 是 HugeGraph 独立的 AI
+  组件，提供 LLM/GraphRAG 智能问答、自动化知识图谱构建、图神经网络训练/推理、Python-Client 等功能，内置 20+ 图机器学习算法，持续更新中。
 
 ### Contact Us
 
-- [GitHub Issues](https://github.com/apache/incubator-hugegraph/issues): 使用途中出现问题或提供功能性建议，可通过此反馈 (推荐)
+- [GitHub Issues](https://github.com/apache/hugegraph/issues): 使用途中出现问题或提供功能性建议，可通过此反馈 (推荐)
 - 邮件反馈：[dev@hugegraph.apache.org](mailto:dev@hugegraph.apache.org) ([邮箱订阅方式](https://hugegraph.apache.org/docs/contribution-guidelines/subscribe/))
 - SEC 反馈： [security@hugegraph.apache.org](mailto:security@hugegraph.apache.org) (报告安全相关问题)
 - 微信公众号：Apache HugeGraph, 欢迎扫描下方二维码加入我们！

@@ -2,6 +2,7 @@
 title: "Gremlin API"
 linkTitle: "Gremlin"
 weight: 14
+description: "Gremlin REST API: Execute Gremlin graph traversal language scripts via HTTP interface."
 ---
 
 ### 8.1 Gremlin

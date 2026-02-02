@@ -1,7 +1,7 @@
 ---
 title: "HugeGraph 1.7.0 Release Notes"
 linkTitle: "Release-1.7.0"
-weight: 7
+weight: 1
 ---
 
 > WIP: This doc is under construction, please wait for the final version (BETA)

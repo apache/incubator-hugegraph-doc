@@ -2,6 +2,7 @@
 title: "EdgeLabel API"
 linkTitle: "EdgeLabel"
 weight: 4
+description: "EdgeLabel REST API: Define edge types and relationship constraints between source and target vertices to construct graph connection rules."
 ---
 
 ### 1.4 EdgeLabel

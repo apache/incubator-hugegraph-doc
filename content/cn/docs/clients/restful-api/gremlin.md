@@ -2,6 +2,7 @@
 title: "Gremlin API"
 linkTitle: "Gremlin"
 weight: 14
+description: "Gremlin（图查询语言）REST 接口:通过 HTTP 接口执行 Gremlin 图遍历查询语言脚本。"
 ---
 
 ### 8.1 Gremlin

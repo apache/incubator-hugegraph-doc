@@ -9,7 +9,7 @@ weight: 5
 # 候选人要求
 
 1. 候选人应遵守 [Apache Code of Conduct](https://www.apache.org/foundation/policies/conduct.html)
-2. PMC 成员将通过搜索[邮件列表](https://lists.apache.org/list?dev@hugegraph.apache.org)、[issues](https://github.com/apache/hugegraph/issues)、[PRs](https://github.com/apache/incubator-hugegraph/pulls)、[官网文档](https://hugegraph.apache.org/docs)等方式，了解候选人如何与他人互动，以及他们所做的贡献
+2. PMC 成员将通过搜索[邮件列表](https://lists.apache.org/list?dev@hugegraph.apache.org)、[issues](https://github.com/apache/hugegraph/issues)、[PRs](https://github.com/apache/hugegraph/pulls)、[官网文档](https://hugegraph.apache.org/docs)等方式，了解候选人如何与他人互动，以及他们所做的贡献
 3. 以下是在评估候选人是否适合成为 Committer 时需要考虑的一些要点：
    1. 与社区成员合作的能力
    2. 担任导师的能力
@@ -73,33 +73,33 @@ Welcome everyone to share opinions~
 Thanks!
 ```
 
-对于讨论邮件中贡献链接，可以使用 [GitHub Search](https://github.com/search) 的统计功能，按需输入如下对应关键词查询即可，可以在此基础上添加新的 repo 如 `repo:apache/incubator-hugegraph-computer`，特别注意调整**时间范围** (下面是一个模板参考，请自行调整参数):
+对于讨论邮件中贡献链接，可以使用 [GitHub Search](https://github.com/search) 的统计功能，按需输入如下对应关键词查询即可，可以在此基础上添加新的 repo 如 `repo:apache/hugegraph-computer`，特别注意调整**时间范围** (下面是一个模板参考，请自行调整参数):
 
 - PR 提交次数
-  - `is:pr author:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
+  - `is:pr author:xxx repo:apache/hugegraph repo:apache/hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
 - 代码提交/修改行数
-  - https://github.com/apache/incubator-hugegraph/graphs/contributors?from=2023-06-01&to=2023-12-25&type=c
-  - https://github.com/apache/incubator-hugegraph-doc/graphs/contributors?from=2023-06-01&to=2023-12-25&type=c
+  - https://github.com/apache/hugegraph/graphs/contributors?from=2023-06-01&to=2023-12-25&type=c
+  - https://github.com/apache/hugegraph-doc/graphs/contributors?from=2023-06-01&to=2023-12-25&type=c
 - PR 提交关联 Issue 次数
-  - `linked:issue involves:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
+  - `linked:issue involves:xxx repo:apache/hugegraph repo:apache/hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
 - PR Review 个数
-  - `type:pr reviewed-by:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
+  - `type:pr reviewed-by:xxx repo:apache/hugegraph repo:apache/hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
 - PR Review 行数
 - 合并次数
-  - `type:pr author:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
+  - `type:pr author:xxx repo:apache/hugegraph repo:apache/hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
 - 有效合并行数
-  - https://github.com/apache/incubator-hugegraph/graphs/contributors?from=2023-06-01&to=2023-12-25&type=c
-  - https://github.com/apache/incubator-hugegraph-doc/graphs/contributors?from=2023-06-01&to=2023-12-25&type=c
+  - https://github.com/apache/hugegraph/graphs/contributors?from=2023-06-01&to=2023-12-25&type=c
+  - https://github.com/apache/hugegraph-doc/graphs/contributors?from=2023-06-01&to=2023-12-25&type=c
 - Issue 提交数
-  - `type:issue author:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
+  - `type:issue author:xxx repo:apache/hugegraph repo:apache/hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
 - Issue 修复数
   - 在 Issue 提交数的基础上选取状态为 closed 的 Issues
 - Issue 参与数
-  - `type:issue involves:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
+  - `type:issue involves:xxx repo:apache/hugegraph repo:apache/hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
 - 评论 Issue 数
-  - `type:issue commenter:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
+  - `type:issue commenter:xxx repo:apache/hugegraph repo:apache/hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
 - 评论 PR 数
-  - `type:pr commenter:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
+  - `type:pr commenter:xxx repo:apache/hugegraph repo:apache/hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
 
 Mailing Lists 的参与则可使用 https://lists.apache.org/list?dev@hugegraph.apache.org:lte=10M:xxx 查询。
 

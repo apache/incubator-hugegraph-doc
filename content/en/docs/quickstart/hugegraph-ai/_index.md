@@ -7,21 +7,30 @@ weight: 3
 [![License](https://img.shields.io/badge/license-Apache%202-0E78BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/apache/incubator-hugegraph-ai)
 
-## 🚀 Best practice: Prioritize using DeepWiki intelligent documents
-
-> To address the issue of outdated static documents, we provide DeepWiki with **real-time updates and more comprehensive content**. It is equivalent to an expert with the latest knowledge of the project, which is very suitable for **all developers** to read and consult before starting the project.
-
-**👉 Strongly recommend visiting and having a conversation with:** [**incubator-hugegraph-ai**](https://deepwiki.com/apache/incubator-hugegraph-ai)
+> DeepWiki provides real-time updated project documentation with more comprehensive and accurate content, suitable for quickly understanding the latest project information.
+>
+> 📖 [https://deepwiki.com/apache/incubator-hugegraph-ai](https://deepwiki.com/apache/incubator-hugegraph-ai)
 
 `hugegraph-ai` integrates [HugeGraph](https://github.com/apache/hugegraph) with artificial intelligence capabilities, providing comprehensive support for developers to build AI-powered graph applications.
 
 ## ✨ Key Features
 
 - **GraphRAG**: Build intelligent question-answering systems with graph-enhanced retrieval
+- **Text2Gremlin**: Natural language to graph query conversion with REST API
 - **Knowledge Graph Construction**: Automated graph building from text using LLMs
-- **Graph ML**: Integration with 20+ graph learning algorithms (GCN, GAT, GraphSAGE, etc.)
+- **Graph ML**: Integration with 21 graph learning algorithms (GCN, GAT, GraphSAGE, etc.)
 - **Python Client**: Easy-to-use Python interface for HugeGraph operations
 - **AI Agents**: Intelligent graph analysis and reasoning capabilities
+
+### 🎉 What's New in v1.5.0
+
+- **Text2Gremlin REST API**: Convert natural language queries to Gremlin commands via REST endpoints
+- **Multi-Model Vector Support**: Each graph instance can use independent embedding models
+- **Bilingual Prompt Support**: Switch between English and Chinese prompts (EN/CN)
+- **Semi-Automatic Schema Generation**: Intelligent schema inference from text data
+- **Semi-Automatic Prompt Generation**: Context-aware prompt templates
+- **Enhanced Reranker Support**: Integration with Cohere and SiliconFlow rerankers
+- **LiteLLM Multi-Provider Support**: Unified interface for OpenAI, Anthropic, Gemini, and more
 
 ## 🚀 Quick Start
 
@@ -29,9 +38,9 @@ weight: 3
 > For a complete deployment guide and detailed examples, please refer to [hugegraph-llm/README.md](https://github.com/apache/incubator-hugegraph-ai/blob/main/hugegraph-llm/README.md)
 
 ### Prerequisites
-- Python 3.9+ (3.10+ recommended for hugegraph-llm)
-- [uv](https://docs.astral.sh/uv/) (recommended package manager)
-- HugeGraph Server 1.3+ (1.5+ recommended)
+- Python 3.10+ (required for hugegraph-llm)
+- [uv](https://docs.astral.sh/uv/) 0.7+ (recommended package manager)
+- HugeGraph Server 1.5+ (required)
 - Docker (optional, for containerized deployment)
 
 ### Option 1: Docker Deployment (Recommended)
@@ -123,11 +132,13 @@ Large language model integration for graph applications:
 - **AI Agents**: Intelligent graph analysis and reasoning
 
 ### [hugegraph-ml](https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-ml)
-Graph machine learning with 20+ implemented algorithms:
-- **Node Classification**: GCN, GAT, GraphSAGE, APPNP, etc.
-- **Graph Classification**: DiffPool, P-GNN, etc.
-- **Graph Embedding**: DeepWalk, Node2Vec, GRACE, etc.
-- **Link Prediction**: SEAL, GATNE, etc.
+Graph machine learning with 21 implemented algorithms:
+- **Node Classification**: GCN, GAT, GraphSAGE, APPNP, AGNN, ARMA, DAGNN, DeeperGCN, GRAND, JKNet, Cluster-GCN
+- **Graph Classification**: DiffPool, GIN
+- **Graph Embedding**: DGI, BGRL, GRACE
+- **Link Prediction**: SEAL, P-GNN, GATNE
+- **Fraud Detection**: CARE-GNN, BGNN
+- **Post-Processing**: C&S (Correct & Smooth)
 
 ### [hugegraph-python-client](https://github.com/apache/incubator-hugegraph-ai/tree/main/hugegraph-python-client)
 Python client for HugeGraph operations:

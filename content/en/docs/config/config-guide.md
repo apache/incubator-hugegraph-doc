@@ -1,6 +1,6 @@
 ---
-title: "HugeGraph configuration"
-linkTitle: "Config Guide"
+title: "Server Startup Guide"
+linkTitle: "Server Startup Guide"
 weight: 1
 ---
 

@@ -9,7 +9,7 @@ weight: 5
 # Candidate Requirements
 
 1. Candidates must adhere to the [Apache Code of Conduct](https://www.apache.org/foundation/policies/conduct.html).
-2. PMC members will assess candidates' interactions with others and contributions through [mailing lists](https://lists.apache.org/list?dev@hugegraph.apache.org), [issues](https://github.com/apache/hugegraph/issues), [pull requests](https://github.com/apache/incubator-hugegraph/pulls), and [official documentation](https://hugegraph.apache.org/docs).
+2. PMC members will assess candidates' interactions with others and contributions through [mailing lists](https://lists.apache.org/list?dev@hugegraph.apache.org), [issues](https://github.com/apache/hugegraph/issues), [pull requests](https://github.com/apache/hugegraph/pulls), and [official documentation](https://hugegraph.apache.org/docs).
 3. Considerations for evaluating candidates as potential Committers include:
    1. Ability to collaborate with community members
    2. Mentorship capabilities
@@ -72,32 +72,32 @@ Welcome everyone to share opinions~
 Thanks!
 ```
 
-For contribution links in discussion emails, you can use the statistical feature of [GitHub Search](https://github.com/search) by entering corresponding keywords as needed. You can also adjust parameters and add new repositories such as `repo:apache/incubator-hugegraph-computer`. Pay special attention to adjusting the **time range** (below is a template reference, please adjust the parameters accordingly):
+For contribution links in discussion emails, you can use the statistical feature of [GitHub Search](https://github.com/search) by entering corresponding keywords as needed. You can also adjust parameters and add new repositories such as `repo:apache/hugegraph-computer`. Pay special attention to adjusting the **time range** (below is a template reference, please adjust the parameters accordingly):
 
 - Number of PR submissions
-  - `is:pr author:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
+  - `is:pr author:xxx repo:apache/hugegraph repo:apache/hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
 - Lines of code submissions/changes
-  - https://github.com/apache/incubator-hugegraph/graphs/contributors?from=2023-06-01&to=2023-12-25&type=c
-  - https://github.com/apache/incubator-hugegraph-doc/graphs/contributors?from=2023-06-01&to=2023-12-25&type=c
+  - https://github.com/apache/hugegraph/graphs/contributors?from=2023-06-01&to=2023-12-25&type=c
+  - https://github.com/apache/hugegraph-doc/graphs/contributors?from=2023-06-01&to=2023-12-25&type=c
 - Number of PR submissions associated with issues
-  - `linked:issue involves:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
+  - `linked:issue involves:xxx repo:apache/hugegraph repo:apache/hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
 - Number of PR reviews
-  - `type:pr reviewed-by:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
+  - `type:pr reviewed-by:xxx repo:apache/hugegraph repo:apache/hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
 - Number of merge commits
-  - `type:pr author:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
+  - `type:pr author:xxx repo:apache/hugegraph repo:apache/hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
 - Effective lines merged
-  - https://github.com/apache/incubator-hugegraph/graphs/contributors?from=2023-06-01&to=2023-12-25&type=c
-  - https://github.com/apache/incubator-hugegraph-doc/graphs/contributors?from=2023-06-01&to=2023-12-25&type=c
+  - https://github.com/apache/hugegraph/graphs/contributors?from=2023-06-01&to=2023-12-25&type=c
+  - https://github.com/apache/hugegraph-doc/graphs/contributors?from=2023-06-01&to=2023-12-25&type=c
 - Number of issue submissions
-  - `type:issue author:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
+  - `type:issue author:xxx repo:apache/hugegraph repo:apache/hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
 - Number of issue fixes
   - Based on the number of issue submissions, select those with a closed status.
 - Number of issue participations
-  - `type:issue involves:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
+  - `type:issue involves:xxx repo:apache/hugegraph repo:apache/hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
 - Number of issue comments
-  - `type:issue commenter:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
+  - `type:issue commenter:xxx repo:apache/hugegraph repo:apache/hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
 - Number of PR comments
-  - `type:pr commenter:xxx repo:apache/incubator-hugegraph repo:apache/incubator-hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
+  - `type:pr commenter:xxx repo:apache/hugegraph repo:apache/hugegraph-doc created:>2023-06-01 updated:<2023-12-25`
 
 For participation in mailing lists, you can use https://lists.apache.org/list?dev@hugegraph.apache.org:lte=10M:xxx.
 

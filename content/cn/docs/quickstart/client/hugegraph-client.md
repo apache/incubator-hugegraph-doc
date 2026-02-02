@@ -11,7 +11,7 @@ weight: 1
 用户可以使用 [Client-API](/cn/docs/clients/hugegraph-client) 编写代码操作 HugeGraph，比如元数据和图数据的增删改查，或者执行 gremlin 语句等。
 后文主要是 Java 使用示例 (其他语言 SDK 可参考对应 `READEME` 页面)
 
-> 现在已经支持基于 Go/Python 语言的 HugeGraph [Client SDK](https://github.com/apache/incubator-hugegraph-toolchain/blob/master/hugegraph-client-go/README.md) (version >=1.2.0)
+> 现在已经支持基于 Go/Python 语言的 HugeGraph [Client SDK](https://github.com/apache/hugegraph-toolchain/blob/master/hugegraph-client-go/README.md) (version >=1.2.0)
 
 ### 2 环境要求
 
