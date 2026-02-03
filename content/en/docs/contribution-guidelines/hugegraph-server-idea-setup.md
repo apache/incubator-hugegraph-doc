@@ -165,7 +165,7 @@ This is because Log4j2 uses asynchronous loggers. You can refer to the [official
 
 ### References
 
-1. [HugeGraph-Server Quick Start](/docs/quickstart/hugegraph/hugegraph-server/)
+1. [HugeGraph-Server Quick Start](/docs/quickstart/hugegraph/hugegraph-server): Instructions for setting up HugeGraph-Server.
 2. [Local Debugging Guide for HugeGraph Server (Win/Unix)](https://gist.github.com/imbajin/1661450f000cd62a67e46d4f1abfe82c)
 3. ["package sun.misc does not exist" compilation error](https://youtrack.jetbrains.com/issue/IDEA-180033)
 4. [Cannot compile: java: package sun.misc does not exist](https://youtrack.jetbrains.com/issue/IDEA-201168)

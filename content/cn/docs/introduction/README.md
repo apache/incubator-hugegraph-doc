@@ -38,7 +38,7 @@ HugeGraph 支持多种部署模式，满足不同规模和场景的需求：
 - Server + RocksDB 后端存储
 - 适合开发测试和中小规模数据（< 4TB）
 - Docker 快速启动: `docker run hugegraph/hugegraph`
-- 详见 [Server 快速开始](/cn/docs/quickstart/hugegraph-server/hugegraph-server)
+- 详见 [Server 快速开始](/cn/docs/quickstart/hugegraph/hugegraph-server)
 
 **分布式模式 (Distributed)**
 - HugeGraph-PD: 元数据管理和集群调度

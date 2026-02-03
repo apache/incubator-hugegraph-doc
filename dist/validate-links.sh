@@ -20,6 +20,7 @@ while read -r FILE; do
         
         # Remove anchor and query parameters
         CLEAN_LINK=$(echo "$LINK" | cut -d'#' -f1 | cut -d'?' -f1)
+        CLEAN_LINK=${CLEAN_LINK%/}
         
         # Determine target file path based on language prefix
         if [[ "$CLEAN_LINK" == /docs/* ]]; then

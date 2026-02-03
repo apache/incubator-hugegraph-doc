@@ -47,7 +47,7 @@ HugeGraph supports multiple deployment modes to meet different scales and scenar
 
 | Use Case | Recommended Path |
 |---------|---------|
-| Quick experience | [Docker deployment](/docs/quickstart/hugegraph-server/hugegraph-server#docker) |
+| Quick experience | [Docker deployment](/docs/quickstart/hugegraph/hugegraph-server#docker) |
 | Build OLTP applications | Server → REST API / Gremlin / Cypher |
 | Graph analysis (OLAP) | [Vermeer](/docs/quickstart/computing/hugegraph-computer) (recommended) or Computer |
 | Build AI applications | [HugeGraph-AI](/docs/quickstart/hugegraph-ai) (GraphRAG/Knowledge Graph) |
@@ -71,7 +71,7 @@ HugeGraph supports multiple deployment modes to meet different scales and scenar
 
 - [HugeGraph-Store]: HugeGraph-Store is a distributed storage engine to manage large-scale graph data by integrating storage and computation within a unified system.
 - [HugeGraph-PD]: HugeGraph-PD (Placement Driver) manages metadata and coordinates storage nodes.
-- [HugeGraph-Server](/docs/quickstart/hugegraph-server): HugeGraph-Server is the core part of the HugeGraph project, containing Core, Backend, API and other submodules;
+- [HugeGraph-Server](/docs/quickstart/hugegraph/hugegraph-server): HugeGraph-Server is the core part of the HugeGraph project, containing Core, Backend, API and other submodules;
   - Core: Implements the graph engine, connects to the Backend module downwards, and supports the API module upwards;
   - Backend: Implements the storage of graph data to the backend, supports backends including Memory, Cassandra, ScyllaDB, RocksDB, HBase, MySQL and PostgreSQL, users can choose one according to the actual situation;
   - API: Built-in REST Server provides RESTful API to users and is fully compatible with Gremlin queries. (Supports distributed storage and computation pushdown)
