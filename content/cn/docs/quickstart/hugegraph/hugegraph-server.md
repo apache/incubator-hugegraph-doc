@@ -174,7 +174,7 @@ bin/hugegraph deploy -v {hugegraph-version} -p {install-path} [-u {download-path
 
 HugeGraphServer 启动时会连接后端存储并尝试检查后端存储版本号，如果未初始化后端或者后端已初始化但版本不匹配时（旧版本数据），HugeGraphServer 会启动失败，并给出错误信息。
 
-如果需要外部访问 HugeGraphServer，请修改 `rest-server.properties` 的 `restserver.url` 配置项（默认为 `http://127.0.0.1:8080`），修改成机器名或 IP 地址。
+如果需要外部访问 HugeGraphServer，请修改 `rest-server.properties` 的 `restserver.url` 配置项（默认为 `127.0.0.1:8080`），修改成机器名或 IP 地址。
 
 由于各种后端所需的配置（hugegraph.properties）及启动步骤略有不同，下面逐一对各后端的配置及启动做介绍。
 
@@ -232,8 +232,8 @@ usePD=true
 节点 1（主节点）：
 ```properties
 usePD=true
-restserver.url=http://127.0.0.1:8081
-gremlinserver.url=http://127.0.0.1:8181
+restserver.url=127.0.0.1:8081
+gremlinserver.url=127.0.0.1:8181
 pd.peers=127.0.0.1:8686
 
 rpc.server_host=127.0.0.1
@@ -246,8 +246,8 @@ server.role=master
 节点 2（工作节点）：
 ```properties
 usePD=true
-restserver.url=http://127.0.0.1:8082
-gremlinserver.url=http://127.0.0.1:8182
+restserver.url=127.0.0.1:8082
+gremlinserver.url=127.0.0.1:8182
 pd.peers=127.0.0.1:8686
 
 rpc.server_host=127.0.0.1
@@ -744,7 +744,7 @@ _说明_
     ```
     vim conf/rest-server.properties
     
-    restserver.url=http://0.0.0.0:8080
+    restserver.url=0.0.0.0:8080
     ```
 
 响应体如下：
