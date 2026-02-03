@@ -36,9 +36,9 @@ HugeGraph 支持多种部署模式，满足不同规模和场景的需求：
 
 **单机模式 (Standalone)**
 - Server + RocksDB 后端存储
-- 适合开发测试和中小规模数据（< 1TB）
+- 适合开发测试和中小规模数据（< 4TB）
 - Docker 快速启动: `docker run hugegraph/hugegraph`
-- 详见 [Server 快速开始](/cn/docs/quickstart/hugegraph-server/hugegraph-server)
+- 详见 [Server 快速开始](/cn/docs/quickstart/hugegraph/hugegraph-server)
 
 **分布式模式 (Distributed)**
 - HugeGraph-PD: 元数据管理和集群调度
@@ -50,7 +50,7 @@ HugeGraph 支持多种部署模式，满足不同规模和场景的需求：
 
 | 使用场景 | 推荐路径 |
 |---------|---------|
-| 快速体验 | [Docker 部署](/cn/docs/quickstart/hugegraph-server/hugegraph-server#docker) |
+| 快速体验 | [Docker 部署](/cn/docs/quickstart/hugegraph/hugegraph-server#docker) |
 | 构建 OLTP 应用 | Server → REST API / Gremlin / Cypher |
 | 图分析 (OLAP) | [Vermeer](/cn/docs/quickstart/computing/hugegraph-computer) (推荐) 或 Computer |
 | 构建 AI 应用 | [HugeGraph-AI](/cn/docs/quickstart/hugegraph-ai) (GraphRAG/知识图谱) |

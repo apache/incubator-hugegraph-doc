@@ -9,13 +9,13 @@ weight: 2
 > 
 > - It is recommended to use the latest version of the HugeGraph software package. Please select Java11 for the runtime environment.
 > - To verify downloads, use the corresponding hash (SHA512), signature, and [Project Signature Verification KEYS](https://downloads.apache.org/incubator/hugegraph/KEYS).
-> - Instructions for checking hash (SHA512) and signatures are on the [Validate Release](/docs/contribution-guidelines/validate-release/) page, and you can also refer to [ASF official instructions](https://www.apache.org/dyn/closer.cgi#verify).
+> - Instructions for checking hash (SHA512) and signatures are on the [Validate Release](/docs/contribution-guidelines/validate-release) page, and you can also refer to [ASF official instructions](https://www.apache.org/dyn/closer.cgi#verify).
 > - Note: The version numbers of all components of HugeGraph have been kept consistent, and the version numbers of Maven repositories such as `client/loader/hubble/common` are the same. You can refer to these for dependency references [maven example](https://github.com/apache/hugegraph-toolchain#maven-dependencies).
 
 ### Latest Version 1.7.0
 
 - Release Date: 2025-11-28
-- [Release Notes](/docs/changelog/hugegraph-1.7.0-release-notes/)
+- [Release Notes](/docs/changelog/hugegraph-1.7.0-release-notes)
 
 #### Binary Packages
 
@@ -25,7 +25,7 @@ weight: 2
 
 #### Source Packages
 
-Please refer to [build from source](/docs/quickstart/hugegraph-server/).
+Please refer to [build from source](/docs/quickstart/hugegraph/hugegraph-server).
 
 | Server                                                                                                                                                                                                                                                                                                                                                                            | Toolchain                                                                                                                                                                                                                                                                                                                                                                                                       | AI                                                                                                                                                                                                                                                                                                                                                                                         | Computer                                                                                                                                                                                                                                                                                                                                                                                                    |
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -40,7 +40,7 @@ Please refer to [build from source](/docs/quickstart/hugegraph-server/).
 #### 1.5.0
 
 - Release Date: 2024-12-10
-- [Release Notes](/docs/changelog/hugegraph-1.5.0-release-notes/)
+- [Release Notes](/docs/changelog/hugegraph-1.5.0-release-notes)
 
 ##### Binary Packages
 
@@ -51,13 +51,13 @@ Please refer to [build from source](/docs/quickstart/hugegraph-server/).
 ##### Source Packages
 
 | Server                                                                                                                                                                                                                                                                                                                                                                            | Toolchain                                                                                                                                                                                                                                                                                                                                                                                                       | AI                                                                                                                                                                                                                                                                                                                                                                                         | Computer                                                                                                                                                                                                                                                                                                                                                                                                    |
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [[Source](https://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.5.0/apache-hugegraph-incubating-1.5.0-src.tar.gz?action=download)] [[Sign](https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-incubating-1.5.0-src.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-incubating-1.5.0-src.tar.gz.sha512)] | [[Source](https://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.5.0/apache-hugegraph-toolchain-incubating-1.5.0-src.tar.gz?action=download)] [[Sign](https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-toolchain-incubating-1.5.0-src.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-toolchain-incubating-1.5.0-src.tar.gz.sha512)] | [[Source](https://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.5.0/apache-hugegraph-ai-incubating-1.5.0-src.tar.gz?action=download)] [[Sign](https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-ai-incubating-1.5.0-src.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-ai-incubating-1.5.0-src.tar.gz.sha512)] | [[Source](https://www.apache.org/dyn/closer.lua/incubator/hugegraph/1.5.0/apache-hugegraph-computer-incubating-1.5.0-src.tar.gz?action=download)] [[Sign](https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-computer-incubating-1.5.0-src.tar.gz.asc)] [[SHA512](https://downloads.apache.org/incubator/hugegraph/1.5.0/apache-hugegraph-computer-incubating-1.5.0-src.tar.gz.sha512)] |
 
 #### 1.3.0
 
 - Release Date: 2024-04-01
-- [Release Notes](/docs/changelog/hugegraph-1.3.0-release-notes/)
+- [Release Notes](/docs/changelog/hugegraph-1.3.0-release-notes)
 
 ##### Binary Packages
 
@@ -74,7 +74,7 @@ Please refer to [build from source](/docs/quickstart/hugegraph-server/).
 #### 1.2.0
 
 - Release Date: 2023-12-28
-- [Release Notes](/docs/changelog/hugegraph-1.2.0-release-notes/)
+- [Release Notes](/docs/changelog/hugegraph-1.2.0-release-notes)
 
 ##### Binary Packages
 
@@ -91,7 +91,7 @@ Please refer to [build from source](/docs/quickstart/hugegraph-server/).
 #### 1.0.0
 
 - Release Date: 2023-02-22
-- [Release Notes](/docs/changelog/hugegraph-1.0.0-release-notes/)
+- [Release Notes](/docs/changelog/hugegraph-1.0.0-release-notes)
 
 ##### Binary Packages
 

@@ -1,6 +1,6 @@
 # Apache HugeGraph 发版验证脚本
 
-Apache HugeGraph (Incubating) 发布包的自动化验证脚本。
+Apache HugeGraph 发布包的自动化验证脚本。
 
 ## 概述
 

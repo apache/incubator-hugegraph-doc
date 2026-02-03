@@ -17,7 +17,7 @@ HugeGraph-Studio是HugeGraph的前端展示工具，是基于Web的图形化IDE�
 - 图数据的展示
 - 图数据的分析
 
-> 注意：HugeGraph-Studio需要依赖HugeGraph-Server，在安装和使用HugeGraph-Studio之前，请通过jps命令检查HugeGraphServer服务是否已经启动，如果没有启动，请参考[HugeGraph-Server安装配置](/docs/quickstart/hugegraph-server)启动HugeGraphServer。
+> 注意：HugeGraph-Studio需要依赖HugeGraph-Server，在安装和使用HugeGraph-Studio之前，请通过jps命令检查HugeGraphServer服务是否已经启动，如果没有启动，请参考[HugeGraph-Server安装配置](/docs/quickstart/hugegraph/hugegraph-server)启动HugeGraphServer。
 
 ### 2 安装和运行HugeGraph-Studio
 

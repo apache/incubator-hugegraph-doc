@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# TODO: Update for TLP graduation after ASF infra migration is complete.
 ################################################################################
 # Apache HugeGraph Release Validation Script
 ################################################################################
