@@ -35,7 +35,7 @@ HugeGraph supports multiple deployment modes to meet different scales and scenar
 - Server + RocksDB backend storage
 - Suitable for development, testing, and small-to-medium scale data (< 4TB)
 - Docker quick start: `docker run hugegraph/hugegraph`
-- See [Server Quickstart](/docs/quickstart/hugegraph-server/hugegraph-server)
+- See [Server Quickstart](/docs/quickstart/hugegraph/hugegraph-server)
 
 **Distributed Mode**
 - HugeGraph-PD: Metadata management and cluster scheduling

@@ -50,7 +50,7 @@ HugeGraph 支持多种部署模式，满足不同规模和场景的需求：
 
 | 使用场景 | 推荐路径 |
 |---------|---------|
-| 快速体验 | [Docker 部署](/cn/docs/quickstart/hugegraph-server/hugegraph-server#docker) |
+| 快速体验 | [Docker 部署](/cn/docs/quickstart/hugegraph/hugegraph-server#docker) |
 | 构建 OLTP 应用 | Server → REST API / Gremlin / Cypher |
 | 图分析 (OLAP) | [Vermeer](/cn/docs/quickstart/computing/hugegraph-computer) (推荐) 或 Computer |
 | 构建 AI 应用 | [HugeGraph-AI](/cn/docs/quickstart/hugegraph-ai) (GraphRAG/知识图谱) |
