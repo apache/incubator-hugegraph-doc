@@ -320,7 +320,7 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;p>注意：下述配置仅供参考，基于&lt;a href="https://github.com/apache/hugegraph/commit/a946ad1de4e8f922251a5241ffc957c33379677f">这个版本&lt;/a>，在 Linux 和 macOS 平台下进行了测试。&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="背景">背景&lt;/h3>
-&lt;p>在 &lt;a href="/docs/quickstart/hugegraph-server/">Quick Start&lt;/a> 部分已经介绍了使用&lt;strong>脚本&lt;/strong>启停 HugeGraph-Server 的流程。下面以 Linux 平台为例，
+&lt;p>在 &lt;a href="/docs/quickstart/hugegraph/hugegraph-server/">Quick Start&lt;/a> 部分已经介绍了使用&lt;strong>脚本&lt;/strong>启停 HugeGraph-Server 的流程。下面以 Linux 平台为例，
 介绍使用 &lt;strong>IntelliJ IDEA&lt;/strong> 运行与调试 HugeGraph-Server 的流程。&lt;/p>
 &lt;p>本地启动的核心与&lt;strong>脚本启动&lt;/strong>是一样的：&lt;/p>
 &lt;ol>
@@ -427,7 +427,7 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;hr>
 &lt;h5 id="参考">参考&lt;/h5>
 &lt;ol>
-&lt;li>&lt;a href="/docs/quickstart/hugegraph-server/">HugeGraph-Server Quick Start&lt;/a>&lt;/li>
+&lt;li>&lt;a href="/docs/quickstart/hugegraph/hugegraph-server/">HugeGraph-Server Quick Start&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://gist.github.com/imbajin/1661450f000cd62a67e46d4f1abfe82c">hugegraph-server 本地调试文档 (Win/Unix)&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://youtrack.jetbrains.com/issue/IDEA-180033">&amp;ldquo;package sun.misc does not exist&amp;rdquo; compilation error&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://youtrack.jetbrains.com/issue/IDEA-201168">Cannot compile: java: package sun.misc does not exist&lt;/a>&lt;/li>

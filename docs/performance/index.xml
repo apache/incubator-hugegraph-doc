@@ -488,7 +488,7 @@ you may wait for the community to update the data with these enhancements.&lt;/p
 &lt;h5 id="conclusion-4">Conclusion&lt;/h5>
 &lt;ul>
 &lt;li>Performance of community detection algorithm: Neo4j &amp;gt; HugeGraph &amp;gt; Titan&lt;/li>
-&lt;/ul></description></item><item><title>Docs: HugeGraph-API Performance</title><link>/docs/performance/api-preformance/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/performance/api-preformance/</guid><description>
+&lt;/ul></description></item><item><title>Docs: HugeGraph-API Performance</title><link>/docs/performance/api-performance/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/docs/performance/api-performance/</guid><description>
 &lt;p>The HugeGraph API performance test mainly tests HugeGraph-Server&amp;rsquo;s ability to concurrently process RESTful API requests, including:&lt;/p>
 &lt;ul>
 &lt;li>Single insertion of vertices/edges&lt;/li>
@@ -497,8 +497,8 @@ you may wait for the community to update the data with these enhancements.&lt;/p
 &lt;/ul>
 &lt;p>For the performance test of the RESTful API of each release version of HugeGraph, please refer to:&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/docs/performance/api-preformance/hugegraph-api-0.5.6-rocksdb/">v0.5.6 stand-alone&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/docs/performance/api-preformance/hugegraph-api-0.5.6-cassandra/">v0.5.6 cluster&lt;/a>&lt;/li>
+&lt;li>&lt;a href="/docs/performance/api-performance/hugegraph-api-0.5.6-rocksdb">HugeGraph API-0.5.6-RocksDB&lt;/a>&lt;/li>
+&lt;li>&lt;a href="/docs/performance/api-performance/hugegraph-api-0.5.6-cassandra">HugeGraph API-0.5.6-Cassandra&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;blockquote>
 &lt;p>Updates coming soon, stay tuned!&lt;/p>
@@ -512,7 +512,7 @@ you may wait for the community to update the data with these enhancements.&lt;/p
 &lt;/blockquote>
 &lt;h2 id="use-cases">Use Cases&lt;/h2>
 &lt;p>When the number of graph data to be batch inserted (including vertices and edges) is at the billion level or below,
-or the total data size is less than TB, the &lt;a href="/docs/quickstart/hugegraph-loader">HugeGraph-Loader&lt;/a> tool can be used to continuously and quickly import
+or the total data size is less than TB, the &lt;a href="/docs/quickstart/toolchain/hugegraph-loader">HugeGraph-Loader&lt;/a> tool can be used to continuously and quickly import
 graph data.&lt;/p>
 &lt;h2 id="performance">Performance&lt;/h2>
 &lt;blockquote>

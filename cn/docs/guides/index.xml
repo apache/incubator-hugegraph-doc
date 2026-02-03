@@ -912,7 +912,7 @@ HugeGraph目前采用EdgeCut的分区方案。&lt;/p>
 &lt;p>如何选择后端存储? 选 RocksDB 还是分布式存储?&lt;/p>
 &lt;p>HugeGraph 支持多种部署模式，根据数据规模和场景选择：&lt;/p>
 &lt;ul>
-&lt;li>&lt;strong>单机模式&lt;/strong>：Server + RocksDB，适合开发测试和中小规模数据（&amp;lt; 1TB）&lt;/li>
+&lt;li>&lt;strong>单机模式&lt;/strong>：Server + RocksDB，适合开发测试和中小规模数据（&amp;lt; 4TB）&lt;/li>
 &lt;li>&lt;strong>分布式模式&lt;/strong>：HugeGraph-PD + HugeGraph-Store (HStore)，支持水平扩展和高可用（&amp;lt; 1000TB 数据规模），适合生产环境和大规模图数据应用&lt;/li>
 &lt;/ul>
 &lt;p>注：Cassandra、HBase、MySQL 等后端仅在 HugeGraph &amp;lt;= 1.5 版本中可用，官方后续不再单独维护&lt;/p>

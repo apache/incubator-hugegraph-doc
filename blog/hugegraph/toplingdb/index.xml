@@ -79,7 +79,7 @@
 &lt;h2 id="related-documentation">Related Documentation&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a href="/blog/2025/09/30/toplingdb-yaml-configuration-file/">ToplingDB YAML Configuration Explained&lt;/a> – Understand each parameter in the config file&lt;/li>
-&lt;li>&lt;a href="/docs/config/config-option/">HugeGraph Configuration Guide&lt;/a> – Reference for core HugeGraph settings&lt;/li>
+&lt;li>&lt;a href="/docs/config/config-option">HugeGraph Configuration Guide&lt;/a> – Reference for core HugeGraph settings&lt;/li>
 &lt;li>&lt;a href="https://github.com/topling/toplingdb">ToplingDB GitHub Repository&lt;/a> – Official docs and latest updates&lt;/li>
 &lt;/ul></description></item><item><title>Blog: ToplingDB YAML configuration file</title><link>/blog/2025/09/30/toplingdb-yaml-configuration-file/</link><pubDate>Tue, 30 Sep 2025 00:00:00 +0000</pubDate><guid>/blog/2025/09/30/toplingdb-yaml-configuration-file/</guid><description>
 &lt;p>RocksDB provides a rich set of configuration parameters, but most of them typically require hardcoded setup.&lt;/p>

@@ -501,7 +501,7 @@
 &lt;h5 id="结论-4">结论&lt;/h5>
 &lt;ul>
 &lt;li>社区聚类算法性能 Neo4j &amp;gt; HugeGraph &amp;gt; Titan&lt;/li>
-&lt;/ul></description></item><item><title>Docs: HugeGraph-API Performance</title><link>/cn/docs/performance/api-preformance/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/performance/api-preformance/</guid><description>
+&lt;/ul></description></item><item><title>Docs: HugeGraph-API Performance</title><link>/cn/docs/performance/api-performance/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/performance/api-performance/</guid><description>
 &lt;p>HugeGraph API性能测试主要测试HugeGraph-Server对RESTful API请求的并发处理能力，包括：&lt;/p>
 &lt;ul>
 &lt;li>顶点/边的单条插入&lt;/li>
@@ -510,8 +510,8 @@
 &lt;/ul>
 &lt;p>HugeGraph的每个发布版本的RESTful API的性能测试情况可以参考：&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="/docs/performance/api-preformance/hugegraph-api-0.5.6-rocksdb/">v0.5.6 stand-alone&lt;/a>&lt;/li>
-&lt;li>&lt;a href="/docs/performance/api-preformance/hugegraph-api-0.5.6-cassandra/">v0.5.6 cluster&lt;/a>&lt;/li>
+&lt;li>&lt;a href="/docs/performance/api-performance/hugegraph-api-0.5.6-rocksdb/">v0.5.6 stand-alone&lt;/a>&lt;/li>
+&lt;li>&lt;a href="/docs/performance/api-performance/hugegraph-api-0.5.6-cassandra/">v0.5.6 cluster&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;blockquote>
 &lt;p>即将更新，敬请期待！&lt;/p>

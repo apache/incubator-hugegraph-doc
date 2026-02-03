@@ -334,7 +334,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="44-运行-example">4.4 运行 Example&lt;/h4>
 &lt;p>运行 Example 之前需要启动 Server,
-启动过程见&lt;a href="/cn/docs/quickstart/hugegraph-server">HugeGraph-Server Quick Start&lt;/a>&lt;/p>
+启动过程见&lt;a href="/cn/docs/quickstart/hugegraph/hugegraph-server">HugeGraph-Server Quick Start&lt;/a>&lt;/p>
 &lt;h4 id="45-详细-api-说明">4.5 详细 API 说明&lt;/h4>
 &lt;p>示例说明见&lt;a href="/cn/docs/clients/hugegraph-client">HugeGraph-Client 基本 API 介绍&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph Python 客户端快速入门</title><link>/cn/docs/quickstart/client/hugegraph-client-python/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/quickstart/client/hugegraph-client-python/</guid><description>
 &lt;p>&lt;code>hugegraph-python-client&lt;/code> 是 HugeGraph 图数据库的 Python 客户端/SDK。&lt;/p>

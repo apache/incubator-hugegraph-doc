@@ -436,7 +436,7 @@ with this &lt;a href="https://github.com/apache/hugegraph/wiki/The-style-config-
 &lt;hr>
 &lt;h3 id="references">References&lt;/h3>
 &lt;ol>
-&lt;li>&lt;a href="/docs/quickstart/hugegraph/hugegraph-server/">HugeGraph-Server Quick Start&lt;/a>&lt;/li>
+&lt;li>&lt;a href="/docs/quickstart/hugegraph/hugegraph-server">HugeGraph-Server Quick Start&lt;/a>: Instructions for setting up HugeGraph-Server.&lt;/li>
 &lt;li>&lt;a href="https://gist.github.com/imbajin/1661450f000cd62a67e46d4f1abfe82c">Local Debugging Guide for HugeGraph Server (Win/Unix)&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://youtrack.jetbrains.com/issue/IDEA-180033">&amp;ldquo;package sun.misc does not exist&amp;rdquo; compilation error&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://youtrack.jetbrains.com/issue/IDEA-201168">Cannot compile: java: package sun.misc does not exist&lt;/a>&lt;/li>

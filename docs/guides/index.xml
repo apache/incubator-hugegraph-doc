@@ -16,7 +16,7 @@
 &lt;li>&lt;a href="/docs/quickstart/client/hugegraph-client">Client&lt;/a>: A HugeGraph client written in Java. Users can use the Client to write Java code to operate HugeGraph. Python, Go, C++ and other language support will be provided in the future as needed.&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>&lt;a href="/docs/quickstart/hugegraph/hugegraph-server/">Graph Engine Layer&lt;/a>:
+&lt;li>&lt;a href="/docs/quickstart/hugegraph/hugegraph-server">Graph Engine Layer&lt;/a>:
 &lt;ul>
 &lt;li>REST Server: Provides a RESTful API for querying graph/schema information, supports the &lt;a href="https://tinkerpop.apache.org/gremlin.html">Gremlin&lt;/a> and &lt;a href="https://en.wikipedia.org/wiki/Cypher">Cypher&lt;/a> query languages, and offers APIs for service monitoring and operations.&lt;/li>
 &lt;li>Graph Engine: Supports both OLTP and OLAP graph computation types, with OLTP implementing the &lt;a href="https://tinkerpop.apache.org">Apache TinkerPop3&lt;/a> framework.&lt;/li>
@@ -921,7 +921,7 @@ Merging mode as needed, and when the Restore is completed, restore the graph mod
 &lt;p>How to choose the back-end storage? RocksDB or distributed storage?&lt;/p>
 &lt;p>HugeGraph supports multiple deployment modes. Choose based on your data scale and scenario:&lt;/p>
 &lt;ul>
-&lt;li>&lt;strong>Standalone Mode&lt;/strong>: Server + RocksDB, suitable for development/testing and small to medium-scale data (&amp;lt; 1TB)&lt;/li>
+&lt;li>&lt;strong>Standalone Mode&lt;/strong>: Server + RocksDB, suitable for development/testing and small to medium-scale data (&amp;lt; 4TB)&lt;/li>
 &lt;li>&lt;strong>Distributed Mode&lt;/strong>: HugeGraph-PD + HugeGraph-Store (HStore), supports horizontal scaling and high availability (&amp;lt; 1000TB data scale), suitable for production environments and large-scale graph data applications&lt;/li>
 &lt;/ul>
 &lt;p>Note: Cassandra, HBase, MySQL and other backends are only available in HugeGraph &amp;lt;= 1.5 versions and are no longer maintained by the official team&lt;/p>

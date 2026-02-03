@@ -1670,9 +1670,9 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin/Cypher 查询语
 &lt;p>&lt;strong>单机模式 (Standalone)&lt;/strong>&lt;/p>
 &lt;ul>
 &lt;li>Server + RocksDB 后端存储&lt;/li>
-&lt;li>适合开发测试和中小规模数据（&amp;lt; 1TB）&lt;/li>
+&lt;li>适合开发测试和中小规模数据（&amp;lt; 4TB）&lt;/li>
 &lt;li>Docker 快速启动: &lt;code>docker run hugegraph/hugegraph&lt;/code>&lt;/li>
-&lt;li>详见 &lt;a href="/cn/docs/quickstart/hugegraph-server/hugegraph-server">Server 快速开始&lt;/a>&lt;/li>
+&lt;li>详见 &lt;a href="/cn/docs/quickstart/hugegraph/hugegraph-server">Server 快速开始&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>&lt;strong>分布式模式 (Distributed)&lt;/strong>&lt;/p>
 &lt;ul>
@@ -1692,7 +1692,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin/Cypher 查询语
 &lt;tbody>
 &lt;tr>
 &lt;td>快速体验&lt;/td>
-&lt;td>&lt;a href="/cn/docs/quickstart/hugegraph-server/hugegraph-server#docker">Docker 部署&lt;/a>&lt;/td>
+&lt;td>&lt;a href="/cn/docs/quickstart/hugegraph/hugegraph-server#docker">Docker 部署&lt;/a>&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>构建 OLTP 应用&lt;/td>
@@ -2093,7 +2093,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin/Cypher 查询语
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="44-运行-example">4.4 运行 Example&lt;/h4>
 &lt;p>运行 Example 之前需要启动 Server,
-启动过程见&lt;a href="/cn/docs/quickstart/hugegraph-server">HugeGraph-Server Quick Start&lt;/a>&lt;/p>
+启动过程见&lt;a href="/cn/docs/quickstart/hugegraph/hugegraph-server">HugeGraph-Server Quick Start&lt;/a>&lt;/p>
 &lt;h4 id="45-详细-api-说明">4.5 详细 API 说明&lt;/h4>
 &lt;p>示例说明见&lt;a href="/cn/docs/clients/hugegraph-client">HugeGraph-Client 基本 API 介绍&lt;/a>&lt;/p></description></item><item><title>Docs: HugeGraph 1.7.0 Release Notes</title><link>/cn/docs/changelog/hugegraph-1.7.0-release-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/changelog/hugegraph-1.7.0-release-notes/</guid><description>
 &lt;blockquote>
@@ -3004,7 +3004,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin/Cypher 查询语
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl http://127.0.0.1:8080/graphs/hugegraph_rocksdb_backend
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">{&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;name&amp;#34;&lt;/span>:&lt;span style="color:#4e9a06">&amp;#34;hugegraph_rocksdb&amp;#34;&lt;/span>,&lt;span style="color:#4e9a06">&amp;#34;backend&amp;#34;&lt;/span>:&lt;span style="color:#4e9a06">&amp;#34;rocksdb&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: v0.5.6 Stand-alone(RocksDB)</title><link>/cn/docs/performance/api-preformance/hugegraph-api-0.5.6-rocksdb/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/performance/api-preformance/hugegraph-api-0.5.6-rocksdb/</guid><description>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: v0.5.6 Stand-alone(RocksDB)</title><link>/cn/docs/performance/api-performance/hugegraph-api-0.5.6-rocksdb/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/performance/api-performance/hugegraph-api-0.5.6-rocksdb/</guid><description>
 &lt;blockquote>
 &lt;p>&lt;strong>Note:&lt;/strong>&lt;/p>
 &lt;p>当前的性能指标测试基于很早期的版本。&lt;strong>最新版本&lt;/strong>在性能和功能上都有显著的改进。我们鼓励您参考最新的发布版本，
@@ -4861,7 +4861,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin/Cypher 查询语
 &lt;/tbody>
 &lt;/table>
 &lt;h4 id="源码包">源码包&lt;/h4>
-&lt;p>Please refer to &lt;a href="/docs/quickstart/hugegraph-server/">build from source&lt;/a>.&lt;/p>
+&lt;p>Please refer to &lt;a href="/docs/quickstart/hugegraph/hugegraph-server/">build from source&lt;/a>.&lt;/p>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -4911,7 +4911,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin/Cypher 查询语
 &lt;/tbody>
 &lt;/table>
 &lt;h5 id="源码包-1">源码包&lt;/h5>
-&lt;p>Please refer to &lt;a href="/docs/quickstart/hugegraph-server/">build from source&lt;/a>.&lt;/p>
+&lt;p>Please refer to &lt;a href="/docs/quickstart/hugegraph/hugegraph-server/">build from source&lt;/a>.&lt;/p>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -4951,7 +4951,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin/Cypher 查询语
 &lt;/tbody>
 &lt;/table>
 &lt;h5 id="源码包-2">源码包&lt;/h5>
-&lt;p>Please refer to &lt;a href="/docs/quickstart/hugegraph-server/">build from source&lt;/a>.&lt;/p>
+&lt;p>Please refer to &lt;a href="/docs/quickstart/hugegraph/hugegraph-server/">build from source&lt;/a>.&lt;/p>
 &lt;table>
 &lt;thead>
 &lt;tr>
@@ -7996,7 +7996,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin/Cypher 查询语
 &lt;li>&lt;code>jdbc.url=jdbc:postgresql://localhost:5432/&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;/blockquote>
-&lt;/details></description></item><item><title>Docs: v0.5.6 Cluster(Cassandra)</title><link>/cn/docs/performance/api-preformance/hugegraph-api-0.5.6-cassandra/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/performance/api-preformance/hugegraph-api-0.5.6-cassandra/</guid><description>
+&lt;/details></description></item><item><title>Docs: v0.5.6 Cluster(Cassandra)</title><link>/cn/docs/performance/api-performance/hugegraph-api-0.5.6-cassandra/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/cn/docs/performance/api-performance/hugegraph-api-0.5.6-cassandra/</guid><description>
 &lt;blockquote>
 &lt;p>&lt;strong>Note:&lt;/strong>&lt;/p>
 &lt;p>当前的性能指标测试基于很早期的版本。&lt;strong>最新版本&lt;/strong>在性能和功能上都有显著的改进。我们鼓励您参考最新的发布版本，
@@ -8160,7 +8160,7 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin/Cypher 查询语
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn clean package -DskipTests
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="313-启动-master-节点">3.1.3 启动 master 节点&lt;/h4>
 &lt;blockquote>
-&lt;p>您可以使用 &lt;code>-c&lt;/code> 参数指定配置文件，更多 computer 配置请看：&lt;a href="/docs/config/config-computer#computer-config-options">Computer Config Options&lt;/a>&lt;/p>
+&lt;p>您可以使用 &lt;code>-c&lt;/code> 参数指定配置文件，更多 computer 配置请看：&lt;a href="/docs/quickstart/computing/hugegraph-computer-config#computer-config-options">Computer Config Options&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-computer
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/start-computer.sh -d &lt;span style="color:#204a87">local&lt;/span> -r master
@@ -8199,8 +8199,8 @@ HugeGraph 支持多用户并行操作，用户可输入 Gremlin/Cypher 查询语
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugegraph-computer-operator-etcd-28lm67jxk5 1/1 Running &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 15h
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="325-提交作业">3.2.5 提交作业&lt;/h4>
 &lt;blockquote>
-&lt;p>更多 computer crd spec 请看：&lt;a href="/docs/config/config-computer#hugegraph-computer-crd">Computer CRD&lt;/a>&lt;/p>
-&lt;p>更多 Computer 配置请看：&lt;a href="/docs/config/config-computer#computer-config-options">Computer Config Options&lt;/a>&lt;/p>
+&lt;p>更多 computer crd spec 请看：&lt;a href="/docs/quickstart/computing/hugegraph-computer-config#hugegraph-computer-crd">Computer CRD&lt;/a>&lt;/p>
+&lt;p>更多 Computer 配置请看：&lt;a href="/docs/quickstart/computing/hugegraph-computer-config#computer-config-options">Computer Config Options&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">cat &amp;lt;&amp;lt;EOF | kubectl apply --filename -&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">apiVersion&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph.apache.org/v1&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
@@ -14372,7 +14372,7 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;p>注意：下述配置仅供参考，基于&lt;a href="https://github.com/apache/hugegraph/commit/a946ad1de4e8f922251a5241ffc957c33379677f">这个版本&lt;/a>，在 Linux 和 macOS 平台下进行了测试。&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="背景">背景&lt;/h3>
-&lt;p>在 &lt;a href="/docs/quickstart/hugegraph-server/">Quick Start&lt;/a> 部分已经介绍了使用&lt;strong>脚本&lt;/strong>启停 HugeGraph-Server 的流程。下面以 Linux 平台为例，
+&lt;p>在 &lt;a href="/docs/quickstart/hugegraph/hugegraph-server/">Quick Start&lt;/a> 部分已经介绍了使用&lt;strong>脚本&lt;/strong>启停 HugeGraph-Server 的流程。下面以 Linux 平台为例，
 介绍使用 &lt;strong>IntelliJ IDEA&lt;/strong> 运行与调试 HugeGraph-Server 的流程。&lt;/p>
 &lt;p>本地启动的核心与&lt;strong>脚本启动&lt;/strong>是一样的：&lt;/p>
 &lt;ol>
@@ -14479,7 +14479,7 @@ LICENSE 是 Apache 2.0, 且对应的项目中包含了 NOTICE, 则还需要更�
 &lt;hr>
 &lt;h5 id="参考">参考&lt;/h5>
 &lt;ol>
-&lt;li>&lt;a href="/docs/quickstart/hugegraph-server/">HugeGraph-Server Quick Start&lt;/a>&lt;/li>
+&lt;li>&lt;a href="/docs/quickstart/hugegraph/hugegraph-server/">HugeGraph-Server Quick Start&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://gist.github.com/imbajin/1661450f000cd62a67e46d4f1abfe82c">hugegraph-server 本地调试文档 (Win/Unix)&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://youtrack.jetbrains.com/issue/IDEA-180033">&amp;ldquo;package sun.misc does not exist&amp;rdquo; compilation error&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://youtrack.jetbrains.com/issue/IDEA-201168">Cannot compile: java: package sun.misc does not exist&lt;/a>&lt;/li>

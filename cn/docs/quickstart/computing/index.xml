@@ -499,7 +499,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn clean package -DskipTests
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="313-启动-master-节点">3.1.3 启动 master 节点&lt;/h4>
 &lt;blockquote>
-&lt;p>您可以使用 &lt;code>-c&lt;/code> 参数指定配置文件，更多 computer 配置请看：&lt;a href="/docs/config/config-computer#computer-config-options">Computer Config Options&lt;/a>&lt;/p>
+&lt;p>您可以使用 &lt;code>-c&lt;/code> 参数指定配置文件，更多 computer 配置请看：&lt;a href="/docs/quickstart/computing/hugegraph-computer-config#computer-config-options">Computer Config Options&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-computer
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/start-computer.sh -d &lt;span style="color:#204a87">local&lt;/span> -r master
@@ -538,8 +538,8 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugegraph-computer-operator-etcd-28lm67jxk5 1/1 Running &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 15h
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="325-提交作业">3.2.5 提交作业&lt;/h4>
 &lt;blockquote>
-&lt;p>更多 computer crd spec 请看：&lt;a href="/docs/config/config-computer#hugegraph-computer-crd">Computer CRD&lt;/a>&lt;/p>
-&lt;p>更多 Computer 配置请看：&lt;a href="/docs/config/config-computer#computer-config-options">Computer Config Options&lt;/a>&lt;/p>
+&lt;p>更多 computer crd spec 请看：&lt;a href="/docs/quickstart/computing/hugegraph-computer-config#hugegraph-computer-crd">Computer CRD&lt;/a>&lt;/p>
+&lt;p>更多 Computer 配置请看：&lt;a href="/docs/quickstart/computing/hugegraph-computer-config#computer-config-options">Computer Config Options&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">cat &amp;lt;&amp;lt;EOF | kubectl apply --filename -&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">apiVersion&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">hugegraph.apache.org/v1&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">

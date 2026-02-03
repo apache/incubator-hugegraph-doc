@@ -527,7 +527,7 @@
 &lt;/blockquote>
 &lt;h4 id="314-start-master-node">3.1.4 Start master node&lt;/h4>
 &lt;blockquote>
-&lt;p>You can use &lt;code>-c&lt;/code> parameter specify the configuration file, more computer config please see:&lt;a href="/docs/config/config-computer#computer-config-options">Computer Config Options&lt;/a>&lt;/p>
+&lt;p>You can use &lt;code>-c&lt;/code> parameter specify the configuration file, more computer config please see:&lt;a href="/docs/quickstart/computing/hugegraph-computer-config#computer-config-options">Computer Config Options&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87">cd&lt;/span> hugegraph-computer
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bin/start-computer.sh -d &lt;span style="color:#204a87">local&lt;/span> -r master
@@ -567,8 +567,8 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugegraph-computer-operator-etcd-28lm67jxk5 1/1 Running &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span> 15h
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="325-submit-a-job">3.2.5 Submit a job&lt;/h4>
 &lt;blockquote>
-&lt;p>More computer crd please see: &lt;a href="/docs/config/config-computer#hugegraph-computer-crd">Computer CRD&lt;/a>&lt;/p>
-&lt;p>More computer config please see: &lt;a href="/docs/config/config-computer#computer-config-options">Computer Config Options&lt;/a>&lt;/p>
+&lt;p>More computer crd please see: &lt;a href="/docs/quickstart/computing/hugegraph-computer-config#hugegraph-computer-crd">Computer CRD&lt;/a>&lt;/p>
+&lt;p>More computer config please see: &lt;a href="/docs/quickstart/computing/hugegraph-computer-config#computer-config-options">Computer Config Options&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;p>&lt;strong>Basic Example:&lt;/strong>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">cat &amp;lt;&amp;lt;EOF | kubectl apply --filename -&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
