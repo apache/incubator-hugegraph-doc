@@ -125,9 +125,9 @@ GET http://localhost:8080/graphspaces/DEFAULT/graphs/{graph}/mode
 }
 ```
 
-> Legal graph modes include: NONE, RESTORING, MERGING
+> Legal graph modes include: NONE, RESTORING, MERGING, LOADING
 
-##### Set the mode of a graph. ""This operation requires administrator privileges**
+##### Set the mode of a graph. **This operation requires administrator privileges**
 
 ###### Method & Url
 
@@ -141,7 +141,7 @@ PUT http://localhost:8080/graphspaces/DEFAULT/graphs/{graph}/mode
 "RESTORING"
 ```
 
-> Legal graph modes include: NONE, RESTORING, MERGING
+> Legal graph modes include: NONE, RESTORING, MERGING, LOADING
 
 ###### Response Status
 

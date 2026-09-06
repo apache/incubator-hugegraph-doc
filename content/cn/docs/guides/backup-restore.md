@@ -122,7 +122,7 @@ GET http://localhost:8080/graphspaces/DEFAULT/graphs/{graph}/mode
 }
 ```
 
-> 合法的图模式包括：NONE，RESTORING，MERGING
+> 合法的图模式包括：NONE，RESTORING，MERGING，LOADING
 
 ##### 设置某个图的模式. **该操作需要管理员权限**
 
@@ -138,7 +138,7 @@ PUT http://localhost:8080/graphspaces/DEFAULT/graphs/{graph}/mode
 "RESTORING"
 ```
 
-> 合法的图模式包括：NONE，RESTORING，MERGING
+> 合法的图模式包括：NONE，RESTORING，MERGING，LOADING
 
 ###### Response Status
 
