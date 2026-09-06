@@ -76,4 +76,4 @@ Section pages:
 - [Cypher API](/docs/clients/restful-api/cypher/): Cypher REST API: Execute OpenCypher declarative graph query language via HTTP interface.
 - [Authentication API](/docs/clients/restful-api/auth/): Authentication REST API: Manage users, roles, permissions, and access control to implement fine-grained graph data security.
 - [Metrics API](/docs/clients/restful-api/metrics/): Metrics REST API: Retrieve runtime performance metrics, statistics, and health status data of the system.
-- [Other API](/docs/clients/restful-api/other/): Other REST API: Provide auxiliary functions such as system version query and API version information.
+- [Other API](/docs/clients/restful-api/other/): Other REST API: Provide auxiliary functions such as version query, API listing, exception trace switch, IP allowlist and the Arthas agent.

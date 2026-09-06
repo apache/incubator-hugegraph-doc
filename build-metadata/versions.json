@@ -15,7 +15,7 @@
       "id": "latest",
       "migration": {
         "changed": 1,
-        "files": 234,
+        "files": 242,
         "findings": 0,
         "knownFixes": 0,
         "residual": 0
@@ -23,7 +23,7 @@
       "name": "latest",
       "publishPath": "",
       "ref": "master",
-      "sha": "d88167dd797efafea50cec59909d57849703fde5",
+      "sha": "f001c1d7f18bda1d91ff16e757bedbae39d3a018",
       "urlScoping": {
         "files": 0,
         "historicalHomeRedirects": 0,

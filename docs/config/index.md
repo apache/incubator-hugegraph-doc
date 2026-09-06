@@ -19,3 +19,6 @@ Section pages:
 - [Server Complete Configuration Manual](/docs/config/config-option/)
 - [Built-in User Authentication and Authorization Configuration and Usage in HugeGraph](/docs/config/config-authentication/)
 - [Configuring HugeGraphServer to Use HTTPS Protocol](/docs/config/config-https/)
+- [Configuring the RocksDB Backend](/docs/config/config-backend-rocksdb/)
+- [Configuring the HStore Distributed Backend](/docs/config/config-backend-hstore/)
+- [Configuring the HBase Backend](/docs/config/config-backend-hbase/)

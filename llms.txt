@@ -33,11 +33,15 @@
   - [Configuration Reference](https://hugegraph.apache.org/docs/quickstart/hugegraph-ai/config-reference/index.md)
   - [Read/Write Graph Data with Spark Connector](https://hugegraph.apache.org/docs/quickstart/toolchain/hugegraph-spark-connector/index.md)
   - [REST API](https://hugegraph.apache.org/docs/quickstart/hugegraph-ai/rest-api/index.md)
+  - [Vermeer Client](https://hugegraph.apache.org/docs/quickstart/hugegraph-ai/vermeer-python-client/index.md)
 - [Server Config](https://hugegraph.apache.org/docs/config/index.md)
   - [Server Startup Guide](https://hugegraph.apache.org/docs/config/config-guide/index.md)
   - [Server Complete Configuration Manual](https://hugegraph.apache.org/docs/config/config-option/index.md)
   - [Config Authentication](https://hugegraph.apache.org/docs/config/config-authentication/index.md)
   - [Config HTTPS](https://hugegraph.apache.org/docs/config/config-https/index.md)
+  - [Config RocksDB Backend](https://hugegraph.apache.org/docs/config/config-backend-rocksdb/index.md)
+  - [Config HStore Backend](https://hugegraph.apache.org/docs/config/config-backend-hstore/index.md)
+  - [Config HBase Backend](https://hugegraph.apache.org/docs/config/config-backend-hbase/index.md)
 - [Clients and APIs](https://hugegraph.apache.org/docs/clients/index.md)
   - [Graphspace](https://hugegraph.apache.org/docs/clients/restful-api/graphspace/index.md): Graphspace REST API: Multi-tenancy and resource isolation for creating, viewing, updating, and deleting graph spaces with prerequisites and constraints.
   - [Schema](https://hugegraph.apache.org/docs/clients/restful-api/schema/index.md): Schema REST API: Query the complete schema definition of a graph, including property keys, vertex labels, edge labels, and index labels.
@@ -59,7 +63,7 @@
   - [Cypher](https://hugegraph.apache.org/docs/clients/restful-api/cypher/index.md): Cypher REST API: Execute OpenCypher declarative graph query language via HTTP interface.
   - [Authentication](https://hugegraph.apache.org/docs/clients/restful-api/auth/index.md): Authentication REST API: Manage users, roles, permissions, and access control to implement fine-grained graph data security.
   - [Metrics](https://hugegraph.apache.org/docs/clients/restful-api/metrics/index.md): Metrics REST API: Retrieve runtime performance metrics, statistics, and health status data of the system.
-  - [Other](https://hugegraph.apache.org/docs/clients/restful-api/other/index.md): Other REST API: Provide auxiliary functions such as system version query and API version information.
+  - [Other](https://hugegraph.apache.org/docs/clients/restful-api/other/index.md): Other REST API: Provide auxiliary functions such as version query, API listing, exception trace switch, IP allowlist and the Arthas agent.
 - [GUIDES](https://hugegraph.apache.org/docs/guides/index.md)
   - [Architecture Overview](https://hugegraph.apache.org/docs/guides/architectural/index.md)
   - [Design Concepts](https://hugegraph.apache.org/docs/guides/desgin-concept/index.md)
